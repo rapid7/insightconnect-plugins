@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Fetch Forensics allows to pull detailed forensic evidences about individual threats or campaigns"
+    DESCRIPTION = "Fetch Forensics allows users to pull detailed forensic evidence about individual threats or campaigns"
 
 
 class Input:
@@ -134,8 +134,8 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
             },
             "cnames": {
               "type": "array",
-              "title": "Cnames",
-              "description": "Optional, an array of cnames which were associated with the hostname",
+              "title": "Canonical Names",
+              "description": "Optional, an array of CNAMEs which were associated with the hostname",
               "items": {
                 "type": "string"
               },
@@ -161,13 +161,13 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
             },
             "ip": {
               "type": "string",
-              "title": "IP",
+              "title": "Remote IP Address",
               "description": "The remote IP address being contacted",
               "order": 20
             },
             "ips": {
               "type": "array",
-              "title": "IPs",
+              "title": "Resolved IP Addresses",
               "description": "Optional, an array of IP addresses which were resolved to the hostname",
               "items": {
                 "type": "string"
@@ -316,8 +316,8 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
         },
         "cnames": {
           "type": "array",
-          "title": "Cnames",
-          "description": "Optional, an array of cnames which were associated with the hostname",
+          "title": "Canonical Names",
+          "description": "Optional, an array of CNAMEs which were associated with the hostname",
           "items": {
             "type": "string"
           },
@@ -343,13 +343,13 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
         },
         "ip": {
           "type": "string",
-          "title": "IP",
+          "title": "Remote IP Address",
           "description": "The remote IP address being contacted",
           "order": 20
         },
         "ips": {
           "type": "array",
-          "title": "IPs",
+          "title": "Resolved IP Addresses",
           "description": "Optional, an array of IP addresses which were resolved to the hostname",
           "items": {
             "type": "string"
@@ -574,8 +574,8 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
                 },
                 "cnames": {
                   "type": "array",
-                  "title": "Cnames",
-                  "description": "Optional, an array of cnames which were associated with the hostname",
+                  "title": "Canonical Names",
+                  "description": "Optional, an array of CNAMEs which were associated with the hostname",
                   "items": {
                     "type": "string"
                   },
@@ -601,13 +601,13 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
                 },
                 "ip": {
                   "type": "string",
-                  "title": "IP",
+                  "title": "Remote IP Address",
                   "description": "The remote IP address being contacted",
                   "order": 20
                 },
                 "ips": {
                   "type": "array",
-                  "title": "IPs",
+                  "title": "Resolved IP Addresses",
                   "description": "Optional, an array of IP addresses which were resolved to the hostname",
                   "items": {
                     "type": "string"
@@ -756,8 +756,8 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
             },
             "cnames": {
               "type": "array",
-              "title": "Cnames",
-              "description": "Optional, an array of cnames which were associated with the hostname",
+              "title": "Canonical Names",
+              "description": "Optional, an array of CNAMEs which were associated with the hostname",
               "items": {
                 "type": "string"
               },
@@ -783,13 +783,13 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
             },
             "ip": {
               "type": "string",
-              "title": "IP",
+              "title": "Remote IP Address",
               "description": "The remote IP address being contacted",
               "order": 20
             },
             "ips": {
               "type": "array",
-              "title": "IPs",
+              "title": "Resolved IP Addresses",
               "description": "Optional, an array of IP addresses which were resolved to the hostname",
               "items": {
                 "type": "string"

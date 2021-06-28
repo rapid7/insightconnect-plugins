@@ -1,11 +1,11 @@
 {
-	"spec": "b05f3e7703a8c7e0d7c54a581080e027",
+	"spec": "ce1c324ea6a5fefd0c6311d9f87fe351",
 	"manifest": "ca4a0e973414a0e8d83a4929a74d36de",
 	"setup": "dfa84c81af08ed21421be32b25f2e865",
 	"schemas": [
 		{
 			"identifier": "fetch_forensics/schema.py",
-			"hash": "520ad813cbee6230aecb1d2159ab87b3"
+			"hash": "42ca9e8cddc08b4cda758143422ef5be"
 		},
 		{
 			"identifier": "get_all_threats/schema.py",
