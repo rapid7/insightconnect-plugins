@@ -30,7 +30,7 @@ _This plugin does not contain a connection._
 
 #### Date Extractor
 
-This action extracts all Dates from a string or file.
+This action extracts all dates from a string or file.
 
 ##### Input
 
@@ -140,7 +140,7 @@ Example output:
 
 #### File Path Extractor
 
-This action extracts all File paths from a string or file.
+This action extracts all file paths from a string or file.
 
 ##### Input
 
@@ -432,7 +432,7 @@ Example output:
 
 #### URL Extractor
 
-This action is used to extract URL's from a string or file.
+This action is used to extract URLs from a string or file.
 
 ##### Input
 

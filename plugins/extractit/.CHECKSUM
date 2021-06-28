@@ -1,7 +1,7 @@
 {
-	"spec": "88de8f7ae4e70cd0622fc9cab3e3eef9",
-	"manifest": "6018883767c0d302ab35329a42aac9cb",
-	"setup": "3cdde194c1e21e768d497d3824a70730",
+	"spec": "68097006ea69616118783fa5e799325a",
+	"manifest": "b74f8a7a9eda73e00b6dc95e8a7001c1",
+	"setup": "7908649f3ce63b993bc37610f81502bf",
 	"schemas": [
 		{
 			"identifier": "date_extractor/schema.py",
