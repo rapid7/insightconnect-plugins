@@ -4,7 +4,7 @@ products: [insightconnect]
 name: proofpoint_tap
 title: Proofpoint TAP
 description: Parse Proofpoint Targeted Attack Protection (TAP) alerts
-version: 2.0.1
+version: 3.0.1
 vendor: rapid7
 support: community
 status: []
@@ -682,13 +682,15 @@ actions:
         example: https://example.com
       threat_status:
         title: Threat Status
-        description: The threat statuses which will be returned in the data. If no value is specified, active and cleared threats are returned
+        description: The threat statuses which will be returned in the data
         type: string
         enum:
           - active
           - cleared
           - falsePositive
-        required: false
+          - all
+        required: true
+        default: all
         example: active
     output:
       results:
@@ -720,13 +722,15 @@ actions:
         example: https://example.com
       threat_status:
         title: Threat Status
-        description: The threat statuses which will be returned in the data. If no value is specified, active and cleared threats are returned
+        description: The threat statuses which will be returned in the data
         type: string
         enum:
           - active
           - cleared
           - falsePositive
-        required: false
+          - all
+        required: true
+        default: all
         example: active
     output:
       results:
@@ -758,23 +762,27 @@ actions:
         example: A phishy email
       threat_type:
         title: Threat Type
-        description: The threat type which will be returned in the data. If no value is specified, all threat types are returned
+        description: The threat type which will be returned in the data
         type: string
         enum:
           - url
           - attachment
           - messageText
-        required: false
+          - all
+        required: true
+        default: all
         example: url
       threat_status:
         title: Threat Status
-        description: The threat statuses which will be returned in the data. If no value is specified, active and cleared threats are returned
+        description: The threat statuses which will be returned in the data
         type: string
         enum:
           - active
           - cleared
           - falsePositive
-        required: false
+          - all
+        required: true
+        default: all
         example: active
     output:
       results:
@@ -806,23 +814,27 @@ actions:
         example: A phishy email
       threat_type:
         title: Threat Type
-        description: The threat type which will be returned in the data. If no value is specified, all threat types are returned
+        description: The threat type which will be returned in the data
         type: string
         enum:
           - url
           - attachment
           - messageText
-        required: false
+          - all
+        required: true
+        default: all
         example: url
       threat_status:
         title: Threat Status
-        description: The threat statuses which will be returned in the data. If no value is specified, active and cleared threats are returned
+        description: The threat statuses which will be returned in the data
         type: string
         enum:
           - active
           - cleared
           - falsePositive
-        required: false
+          - all
+        required: true
+        default: all
         example: active
     output:
       results:
@@ -848,23 +860,27 @@ actions:
         example: 2021-04-20T22:00:00Z
       threat_type:
         title: Threat Type
-        description: The threat type which will be returned in the data. If no value is specified, all threat types are returned
+        description: The threat type which will be returned in the data
         type: string
         enum:
           - url
           - attachment
           - messageText
-        required: false
+          - all
+        required: true
+        default: all
         example: url
       threat_status:
         title: Threat Status
-        description: The threat statuses which will be returned in the data. If no value is specified, active and cleared threats are returned
+        description: The threat statuses which will be returned in the data
         type: string
         enum:
           - active
           - cleared
           - falsePositive
-        required: false
+          - all
+        required: true
+        default: all
         example: active
     output:
       results:
