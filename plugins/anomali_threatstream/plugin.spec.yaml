@@ -384,7 +384,7 @@ actions:
         title: File
         description: File of data to be imported into Anomali ThreatStream
         type: file
-        example: example.exe
+        example: setup.exe
         required: true
       observable_settings:
         title: Observable Settings
