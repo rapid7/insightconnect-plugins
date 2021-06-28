@@ -318,7 +318,7 @@ connection:
     title: API Key
     description: Anomali ThreatStream API key
     type: credential_secret_key
-    example: ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
     required: true
   ssl_verify:
     type: boolean
@@ -368,7 +368,7 @@ actions:
         title: Hash
         description: Hash
         type: string
-        example: 9123dcbb0b42652b0e105956c68d3ca2ff34584f324fa41a29aedd32b883e131
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
         required: false
     output:
       results:
@@ -384,7 +384,7 @@ actions:
         title: File
         description: File of data to be imported into Anomali ThreatStream
         type: file
-        example: example.exe
+        example: setup.exe
         required: true
       observable_settings:
         title: Observable Settings
@@ -406,7 +406,7 @@ actions:
         title: Value
         description: Value
         type: string
-        example: Name of observable
+        example: Example observable
         required: false
     output:
       results:
@@ -459,7 +459,7 @@ actions:
         title: File
         required: true
         description: File to detonate
-        example: example.exe
+        example: setup.exe
       detail:
         title: Detail
         description: A comma-separated list that provides additional details for the indicator. This information is displayed in the Tag column of the ThreatStream UI
@@ -522,7 +522,7 @@ actions:
         title: URL
         required: true
         description: URL to detonate
-        example: "https://test.example.com/test/example.exe"
+        example: "https://example.com/setup.exe"
       detail:
         title: Detail
         description: A comma-separated list that provides additional details for the indicator. This information is displayed in the tag column of the ThreatStream UI
