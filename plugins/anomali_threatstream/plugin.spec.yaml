@@ -306,7 +306,7 @@ connection:
     title: Username
     description: Anomali ThreatStream username
     type: string
-    example: bob_smith
+    example: user1
     required: true
   url:
     title: URL
