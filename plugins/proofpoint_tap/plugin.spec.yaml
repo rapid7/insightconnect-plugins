@@ -1110,7 +1110,7 @@ actions:
         required: true
   fetch_forensics:
     title: Fetch Forensics
-    description: Fetch Forensics allows to pull detailed forensic evidences about individual threats or campaigns
+    description: Fetch Forensics allows users to pull detailed forensic evidence about individual threats or campaigns
     input:
       threat_id:
         title: Threat ID
