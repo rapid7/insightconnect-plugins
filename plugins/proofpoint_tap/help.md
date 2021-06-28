@@ -38,7 +38,7 @@ Example input:
 
 #### Fetch Forensics
 
-This action is used to fetch Forensics allows to pull detailed forensic evidences about individual threats or campaigns.
+This action is used to fetch forensic evidence about individual threats or campaigns.
 
 ##### Input
 
