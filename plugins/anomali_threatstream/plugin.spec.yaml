@@ -459,7 +459,7 @@ actions:
         title: File
         required: true
         description: File to detonate
-        example: example.exe
+        example: setup.exe
       detail:
         title: Detail
         description: A comma-separated list that provides additional details for the indicator. This information is displayed in the Tag column of the ThreatStream UI
