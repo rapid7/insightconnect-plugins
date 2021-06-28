@@ -352,7 +352,7 @@ actions:
         title: URL
         description: URL
         type: string
-        example: test.example.com
+        example: https://example.com
         required: false
     output:
       results:

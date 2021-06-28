@@ -24,19 +24,19 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|Anomali ThreatStream API key|None|ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890|
+|api_key|credential_secret_key|None|True|Anomali ThreatStream API key|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |ssl_verify|boolean|True|True|Verify the server's SSL/TLS certificate|None|True|
-|url|string|None|True|URL for the ThreatStream instance|None|https://ts.example.com|
-|username|string|None|True|Anomali ThreatStream username|None|bob_smith|
+|url|string|None|True|URL for the ThreatStream instance|None|https://example.com|
+|username|string|None|True|Anomali ThreatStream username|None|user1|
 
 Example input:
 
 ```
 {
-  "api_key": "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
+  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
   "ssl_verify": true,
   "url": "https://ts.example.com",
-  "username": "bob_smith"
+  "username": "user1"
 }
 ```
 
@@ -184,13 +184,13 @@ This action is used to lookup a URL in Anomali.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|url|string|None|False|URL|None|test.example.com|
+|url|string|None|False|URL|None|https://example.com|
 
 Example input:
 
 ```
 {
-  "url": "test.example.com"
+  "url": "https://example.com"
 }
 ```
 
@@ -239,13 +239,13 @@ This action is used to lookup a file hash in Anomali.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|hash|string|None|False|Hash|None|9123dcbb0b42652b0e105956c68d3ca2ff34584f324fa41a29aedd32b883e131|
+|hash|string|None|False|Hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
 
 Example input:
 
 ```
 {
-  "hash": "9123dcbb0b42652b0e105956c68d3ca2ff34584f324fa41a29aedd32b883e131"
+  "hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
 }
 ```
 
@@ -271,13 +271,13 @@ This action is used to get observables.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|value|string|None|False|Value|None|Name of observable|
+|value|string|None|False|Value|None|Example observable|
 
 Example input:
 
 ```
 {
-  "value": "Name of observable"
+  "value": "Example observable"
 }
 ```
 
@@ -328,14 +328,14 @@ Observable Settings
   
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file|file|None|True|File of data to be imported into Anomali ThreatStream|None|example.exe|
+|file|file|None|True|File of data to be imported into Anomali ThreatStream|None|setup.exe|
 |observable_settings|observable_settings|None|False|Settings needed for importing an observable that needs approval|None|none|
 
 Example input:
 
 ```
 {
-  "file": "example.exe",
+  "file": "setup.exe",
   "observable_settings": "none"
 }
 ```
@@ -368,7 +368,7 @@ This action is used to submit a file to a ThreatStream sandbox.
 |----|----|-------|--------|-----------|----|-------|
 |classification|string|private|False|Classification of the Sandbox submission, either public or private|['private', 'public']|private|
 |detail|string|None|False|A comma-separated list that provides additional details for the indicator. This information is displayed in the Tag column of the ThreatStream UI|None|Credential-Exposure,compromised_email|
-|file|file|None|True|File to detonate|None|example.exe|
+|file|file|None|True|File to detonate|None|setup.exe|
 |platform|string|None|True|Platform on which the submitted URL or file will be run|['ALL', 'ANDROID4.4', 'ANDROID5.1', 'ANDROID6.0', 'MACOSX', 'WINDOWSXP', 'WINDOWSXPNATIVE', 'WINDOWS7', 'WINDOWS7NATIVE', 'WINDOWS7OFFICE2010', 'WINDOWS7OFFICE2013', 'WINDOWS10', 'WINDOWS10x64']|WINDOWS7|
 |use_premium_sandbox|boolean|None|True|Specify whether the premium sandbox should be used for detonation|None|True|
 
@@ -378,7 +378,7 @@ Example input:
 {
   "classification": "private",
   "detail": "Credential-Exposure,compromised_email",
-  "file": "example.exe",
+  "file": "setup.exe",
   "platform": "WINDOWS7",
   "use_premium_sandbox": true
 }
@@ -424,7 +424,7 @@ This action is used to submit a URL to a ThreatStream sandbox.
 |classification|string|private|False|Classification of the sandbox submission, either public or private|['private', 'public']|private|
 |detail|string|None|False|A comma-separated list that provides additional details for the indicator. This information is displayed in the tag column of the ThreatStream UI|None|Credential-Exposure,compromised_email|
 |platform|string|None|True|Platform on which the submitted URL or file will be run|['ALL', 'ANDROID4.4', 'ANDROID5.1', 'ANDROID6.0', 'MACOSX', 'WINDOWSXP', 'WINDOWSXPNATIVE', 'WINDOWS7', 'WINDOWS7NATIVE', 'WINDOWS7OFFICE2010', 'WINDOWS7OFFICE2013', 'WINDOWS10', 'WINDOWS10x64']|WINDOWS7|
-|url|string|None|True|URL to detonate|None|https://test.example.com/test/example.exe|
+|url|string|None|True|URL to detonate|None|https://example.com/setup.exe|
 |use_premium_sandbox|boolean|None|True|Specify whether the premium sandbox should be used for detonation|None|True|
 
 Example input:
@@ -434,7 +434,7 @@ Example input:
   "classification": "private",
   "detail": "Credential-Exposure,compromised_email",
   "platform": "WINDOWS7",
-  "url": "https://test.example.com/test/example.exe",
+  "url": "https://example.com/setup.exe",
   "use_premium_sandbox": true
 }
 ```
