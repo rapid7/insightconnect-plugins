@@ -318,7 +318,7 @@ connection:
     title: API Key
     description: Anomali ThreatStream API key
     type: credential_secret_key
-    example: ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
     required: true
   ssl_verify:
     type: boolean
