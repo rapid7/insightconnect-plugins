@@ -51,7 +51,7 @@ class Connection(komand.Connection):
                 cause=f"The following exception was raised: {self.hide_api_key(str(e))}",
                 assistance="Please verify your ThreatStream server status and try again. "
                 "If the issue persists please contact support.",
-            ) from ConnectionError  # Suppresses the exception context from the original error that exposes API key
+            ) from None  # Suppresses the exception context from the original error that exposes API key
 
     @staticmethod
     def hide_api_key(string):
