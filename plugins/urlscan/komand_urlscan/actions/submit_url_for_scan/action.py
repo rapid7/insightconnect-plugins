@@ -40,6 +40,8 @@ class SubmitUrlForScan(komand.Action):
             if out["status"] == 401:
                 # {'message': "No API key supplied. Send the key using the 'API-Key' header", 'status': 401}
                 raise PluginException(preset=PluginException.Preset.API_KEY)
+            elif out["status"] == 429:
+                raise PluginException(cause="API limit error.", assistance=out.get("message", ""))
 
         # {
         #  "message": "Missing URL properties",
@@ -48,8 +50,9 @@ class SubmitUrlForScan(komand.Action):
         # }
 
         if (
-            "The submitted domain is on our blacklist. For your own safety we did not perform this scan..."
-            in out["description"]
+            out
+            and "The submitted domain is on our blacklist. For your own safety we did not perform this scan..."
+            in out.get("description", "")
         ):
             self.logger.error(out["description"])
             return {Output.WAS_SCAN_SKIPPED: True, Output.SCAN_ID: ""}
