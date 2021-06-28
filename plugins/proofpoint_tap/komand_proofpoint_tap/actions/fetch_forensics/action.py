@@ -26,7 +26,7 @@ class FetchForensics(insightconnect_plugin_runtime.Action):
 
         if threat_id and campaign_id:
             raise PluginException(
-                cause="Required only one parameter.",
+                cause="Both Campaign ID and Threat ID were provided.",
                 assistance="One of the following two parameters are required: Campaign ID or Threat ID.",
             )
         elif not threat_id and not campaign_id:
