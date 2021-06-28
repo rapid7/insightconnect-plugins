@@ -406,7 +406,7 @@ actions:
         title: Value
         description: Value
         type: string
-        example: Name of observable
+        example: Example observable
         required: false
     output:
       results:
