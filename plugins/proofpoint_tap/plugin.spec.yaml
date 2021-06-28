@@ -740,7 +740,7 @@ types:
       type: integer
       required: false
     ip:
-      title: IP
+      title: Remote IP Address
       description: The remote IP address being contacted
       type: string
       required: false
