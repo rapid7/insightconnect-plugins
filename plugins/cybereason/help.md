@@ -53,7 +53,7 @@ For more information about how to generate `actions_by_machine` object, refer to
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|actions_by_machine|object|None|True|Actions by machine|None|{"126811122.2298225282553311122": [{"targetId": "531122333.-3391199199911692223","actionType": "KILL_PROCESS"}]}|
+|actions_by_machine|remediate_items|None|True|Actions by machine|None|{"126811122.2298225282553311122": [{"targetId": "531122333.-3391199199911692223","actionType": "KILL_PROCESS"}]}|
 |initiator_user_name|string|None|True|Initiator user name|None|user@example.com|
 |malop_id|string|None|False|Malop ID to associate with the remediation actions|None|22.2787422324806222966|
 
@@ -310,7 +310,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.3.0 - Update action Isolate Machine | New action Remediate Items
+* 2.0.0 - Update action Isolate Machine | New action Remediate Items
 * 1.2.0 - Add new action Quarantine File
 * 1.1.0 - Add new action Isolate Machine
 * 1.0.0 - Initial plugin
