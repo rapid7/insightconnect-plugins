@@ -700,7 +700,7 @@ types:
       type: string
       required: false
     cnames:
-      title: Cnames
+      title: Canonical Names
       description: Optional, an array of cnames which were associated with the hostname
       type: "[]string"
       required: false
