@@ -20,14 +20,14 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|secret|credential_secret_key|None|False|The TAP secret for basic authentication API interaction|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
+|secret|credential_secret_key|None|False|The TAP secret for basic authentication API interaction|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
 |service_principal|credential_secret_key|None|False|The TAP service principal for basic authentication API interaction|None|44d88612-fea8-a8f3-6de8-2e1278abb02f|
 
 Example input:
 
 ```
 {
-  "secret": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+  "secret": "30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
   "service_principal": "44d88612-fea8-a8f3-6de8-2e1278abb02f"
 }
 ```
@@ -35,6 +35,71 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Fetch Forensics
+
+This action is used to fetch forensic evidence about individual threats or campaigns.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|campaign_id|string|None|False|Campaign identifier|None|42ec8b47-eb2d-75ed-bd01-32d63f8e8d4c|
+|include_campaign_forensics|boolean|None|False|Include campaign forensics in threats. This parameter works only with Threat ID|None|False|
+|threat_id|string|None|False|Threat identifier|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
+
+Example input:
+
+```
+{
+  "campaign_id": "42ec8b47-eb2d-75ed-bd01-32d63f8e8d4c",
+  "include_campaign_forensics": false,
+  "threat_id": "30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|generated|string|True|Generated threats|
+|reports|[]report|True|Reported threats|
+
+Example output:
+
+```
+{
+  "generated": "2021-06-27T19:58:04.283Z",
+  "reports": [
+    {
+      "scope": "CAMPAIGN",
+      "id": "11111111-aaaa-2222-3333-bbbbbbbbbbbb",
+      "name": "Emotet",
+      "forensics": [
+        {
+          "type": "behavior",
+          "display": "Test",
+          "engine": "iee",
+          "malicious": false,
+          "note": "Test2",
+          "time": 0,
+          "what": {
+            "rule": "behavior_123456789"
+          },
+          "platforms": [
+            {
+              "name": "Win10",
+              "os": "win",
+              "version": "win10"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+```
 
 #### URL Decode
 
@@ -162,8 +227,8 @@ This action is used to fetch events for clicks to malicious URLs permitted in th
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |threat_status|string|all|True|The threat statuses which will be returned in the data|['active', 'cleared', 'falsePositive', 'all']|active|
-|time_end|string|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 22:00:00|
-|time_start|string|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 21:00:00|
+|time_end|string|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 22:00:00+00:00|
+|time_start|string|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 21:00:00+00:00|
 |url|string|None|False|The URL for which the results will be returned. Returns all results if left empty|None|https://example.com|
 
 Example input:
@@ -223,8 +288,8 @@ This action is used to fetch events for messages delivered in the specified time
 |subject|string|None|False|The subject of the email for which the results will be returned. Returns all results if left empty|None|A phishy email|
 |threat_status|string|all|True|The threat statuses which will be returned in the data|['active', 'cleared', 'falsePositive', 'all']|active|
 |threat_type|string|all|True|The threat type which will be returned in the data|['url', 'attachment', 'messageText', 'all']|url|
-|time_end|string|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 22:00:00|
-|time_start|string|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 21:00:00|
+|time_end|string|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 22:00:00+00:00|
+|time_start|string|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 21:00:00+00:00|
 
 Example input:
 
@@ -349,8 +414,8 @@ This action is used to fetch events for messages blocked in the specified time p
 |subject|string|None|False|The subject of the email for which the results will be returned. Returns all results if left empty|None|A phishy email|
 |threat_status|string|all|True|The threat statuses which will be returned in the data|['active', 'cleared', 'falsePositive', 'all']|active|
 |threat_type|string|all|True|The threat type which will be returned in the data|['url', 'attachment', 'messageText', 'all']|url|
-|time_end|string|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 22:00:00|
-|time_start|string|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 21:00:00|
+|time_end|string|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 22:00:00+00:00|
+|time_start|string|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 21:00:00+00:00|
 
 Example input:
 
@@ -475,8 +540,8 @@ This action is used to fetch events for all clicks and messages relating to know
 |----|----|-------|--------|-----------|----|-------|
 |threat_status|string|all|True|The threat statuses which will be returned in the data|['active', 'cleared', 'falsePositive', 'all']|active|
 |threat_type|string|all|True|The threat type which will be returned in the data|['url', 'attachment', 'messageText', 'all']|url|
-|time_end|string|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 22:00:00|
-|time_start|string|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 21:00:00|
+|time_end|string|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 22:00:00+00:00|
+|time_start|string|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 21:00:00+00:00|
 
 Example input:
 
@@ -592,8 +657,8 @@ This action is used to fetch events for clicks to malicious URLs blocked in the 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |threat_status|string|all|True|The threat statuses which will be returned in the data|['active', 'cleared', 'falsePositive', 'all']|active|
-|time_end|string|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 22:00:00|
-|time_start|string|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 21:00:00|
+|time_end|string|None|False|The end of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T22:00:00Z. If left empty, it will be calculated from the 'time_start' parameter. If the 'time_start' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 22:00:00+00:00|
+|time_start|string|None|False|The start of the data retrieval period as ISO8601-formatted date e.g 2021-04-20T21:00:00Z. If left empty, it will be calculated from the 'time_end' parameter. If the 'time_end' parameter is empty, data from one hour before the current API server time will be returned. The minimum time range is thirty seconds. The maximum time range is one hour|None|2021-04-20 21:00:00+00:00|
 |url|string|None|False|The URL for which the results will be returned. Returns all results if left empty|None|https://example.com|
 
 Example input:
@@ -910,6 +975,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.1.0 - Add new action Fetch Forensics
 * 3.0.0 - Add `all` value to Threat Type and Threat Status inputs in Get Blocked Clicks, Get Permitted Clicks, Get Blocked Messages, Get Delivered Threats, Get All Threats actions
 * 2.0.0 - Add new actions Get Blocked Clicks, Get Permitted Clicks, Get Blocked Messages, Get Delivered Threats, Get All Threats, Get Top Clickers, URL Decode
 * 1.0.8 - Fix finding e-mail in `header_from` for e-mails addresses with `[.]`
