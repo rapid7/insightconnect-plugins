@@ -24,7 +24,7 @@ class RemediateItemsInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "actions_by_machine": {
-      "$ref": "#/definitions/remediate_items",
+      "type": "object",
       "title": "Actions by Machine",
       "description": "Actions by machine",
       "order": 2
@@ -45,6 +45,29 @@ class RemediateItemsInput(insightconnect_plugin_runtime.Input):
   "required": [
     "actions_by_machine",
     "initiator_user_name"
+  ]
+}
+    """)
+
+    def __init__(self):
+        super(self.__class__, self).__init__(self.schema)
+
+
+class RemediateItemsOutput(insightconnect_plugin_runtime.Output):
+    schema = json.loads("""
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "response": {
+      "$ref": "#/definitions/remediate_items",
+      "title": "Malop Response",
+      "description": "Malop response",
+      "order": 1
+    }
+  },
+  "required": [
+    "response"
   ],
   "definitions": {
     "error": {
@@ -212,29 +235,6 @@ class RemediateItemsInput(insightconnect_plugin_runtime.Input):
       }
     }
   }
-}
-    """)
-
-    def __init__(self):
-        super(self.__class__, self).__init__(self.schema)
-
-
-class RemediateItemsOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
-   {
-  "type": "object",
-  "title": "Variables",
-  "properties": {
-    "response": {
-      "type": "object",
-      "title": "Malop Response",
-      "description": "Malop response",
-      "order": 1
-    }
-  },
-  "required": [
-    "response"
-  ]
 }
     """)
 

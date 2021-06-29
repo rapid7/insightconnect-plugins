@@ -575,7 +575,7 @@ actions:
       actions_by_machine:
         title: Actions by Machine
         description: Actions by machine
-        type: remediate_items
+        type: object
         required: true
         example: '{"126811122.2298225282553311122": [{"targetId": "531122333.-3391199199911692223","actionType": "KILL_PROCESS"}]}'
       malop_id:
@@ -588,5 +588,5 @@ actions:
       response:
         title: Malop Response
         description: Malop response
-        type: object
+        type: remediate_items
         required: true
