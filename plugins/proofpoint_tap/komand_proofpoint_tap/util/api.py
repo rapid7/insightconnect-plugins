@@ -76,6 +76,9 @@ class ProofpointTapApi:
     def get_decoded_url(self, payload: dict):
         return self._call_api("POST", "url/decode", json_data=payload)
 
+    def get_forensics(self, payload: dict):
+        return self._call_api("GET", "forensics", params=payload)
+
 
 class Endpoint:
     @staticmethod
