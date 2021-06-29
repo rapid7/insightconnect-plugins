@@ -17,7 +17,7 @@ tags:
 - feed
 hub_tags:
   use_cases: [data_utility, threat_detection_and_response, alerting_and_notifications]
-  keywords: [rss, atom, feed]
+  keywords: [rss, atom, feeds]
   features: []
 enable_cache: true
 language: python
