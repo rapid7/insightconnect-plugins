@@ -62,10 +62,10 @@ class TestStringToObject(TestCase):
 
         # Blank input
         with self.assertRaises(PluginException):
-            working_params = {"input": ''}
+            working_params = {"input": ""}
             test_action.run(working_params)
 
         # Single Space
         with self.assertRaises(PluginException):
-            working_params = {"input": ' '}
+            working_params = {"input": " "}
             test_action.run(working_params)

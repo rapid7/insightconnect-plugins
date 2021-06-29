@@ -54,9 +54,11 @@ class TestStringToFloat(TestCase):
         log = logging.getLogger("Test")
         test_action = StringToFloat()
         test_action.logger = log
-        working_params = {"input": "12345678912345678912345689123456789123456789123456891234567891234567891234568912345678912345678912345689"}
+        working_params = {
+            "input": "12345678912345678912345689123456789123456789123456891234567891234567891234568912345678912345678912345689"
+        }
         results = test_action.run(working_params)
-        expected = {'output': 1.234567891234568e+103}
+        expected = {"output": 1.234567891234568e103}
         self.assertEqual(expected, results)
 
     def test_string_to_float_negatives(self):
