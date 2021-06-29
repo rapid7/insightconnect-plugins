@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: type_converter
 title: Type Converter
 description: Type Converter is a utility plugin for converting data types within a Rapid7 InsightConnect workflow
-version: 1.8.0
+version: 1.8.1
 vendor: rapid7
 support: rapid7
 status: []
@@ -94,7 +94,7 @@ actions:
         required: true
         title: Input
         description: Input variable
-        example: true
+        example: 'true'
     output:
       output:
         type: boolean
@@ -110,7 +110,7 @@ actions:
         required: true
         title: Input
         description: Input variable
-        example: 123
+        example: '123'
       strip:
         type: boolean
         required: false
@@ -132,7 +132,7 @@ actions:
         required: true
         title: Input
         description: Input variable
-        example: '{"object":["rapid","7"],"rapid7":"value"}'
+        example: "{'object':['rapid','7'],'rapid7':'value'}"
     output:
       output:
         type: object
@@ -148,7 +148,7 @@ actions:
         required: true
         title: Input
         description: Input variable
-        example: '{"object":["rapid","7"],"rapid7":"value"}'
+        example: "{'object':['rapid','7'],'rapid7':'value'}"
     output:
       output:
         type: string
@@ -196,7 +196,7 @@ actions:
         description: Type converted input
         type: string
         required: true
-        example: Rapid7 Insightconnect
+        example: 'Rapid7 InsightConnect'
       delimiter:
         title: Delimiter
         description: Character used to split the string into slices for the list.
@@ -219,7 +219,7 @@ actions:
         description: Type converted input
         type: string
         required: true
-        example: 123.456
+        example: '123.456'
     output:
       output:
         type: float
