@@ -59,3 +59,13 @@ class TestStringToObject(TestCase):
         with self.assertRaises(PluginException):
             working_params = {"input": '"object": ["rapid", "7"],"rapid7": "value"'}
             test_action.run(working_params)
+
+        # Blank input
+        with self.assertRaises(PluginException):
+            working_params = {"input": ''}
+            test_action.run(working_params)
+
+        # Single Space
+        with self.assertRaises(PluginException):
+            working_params = {"input": ' '}
+            test_action.run(working_params)
