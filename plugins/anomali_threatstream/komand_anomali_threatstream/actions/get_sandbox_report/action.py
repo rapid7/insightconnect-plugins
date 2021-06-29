@@ -24,7 +24,7 @@ class GetSandboxReport(komand.Action):
             "GET",
         )
         self.logger.info(f"Submitting URL to {self.request.url}")
-        response = self.connection.send()
+        response = self.connection.send(self.request)
 
         if response.status_code not in range(200, 299):
             raise PluginException(

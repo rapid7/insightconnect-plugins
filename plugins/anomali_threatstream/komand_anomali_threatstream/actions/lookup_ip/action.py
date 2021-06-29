@@ -28,7 +28,7 @@ class LookupIp(komand.Action):
         self.request.params.update({"ip": params.get("ip_address"), "limit": 1000, "offset": 0})
 
         while self.continue_paging:
-            response = self.connection.send()
+            response = self.connection.send(self.request)
 
             if response.status_code not in range(200, 299):
                 raise PluginException(

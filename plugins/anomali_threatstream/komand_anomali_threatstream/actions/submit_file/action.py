@@ -38,7 +38,7 @@ class SubmitFile(komand.Action):
         self.request.files = {"file": (f["filename"], file_bytes)}
         self.request.data = data
         self.logger.info(f"Submitting file to {self.request.url}")
-        response = self.connection.send()
+        response = self.connection.send(self.request)
 
         if response.status_code not in range(200, 299):
             raise PluginException(

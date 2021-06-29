@@ -43,9 +43,9 @@ class Connection(komand.Connection):
 
         return {"connection": "successful"}
 
-    def send(self):
+    def send(self, request):
         try:
-            return self.session.send(self.request.prepare(), verify=self.request.verify)
+            return self.session.send(request.prepare(), verify=request.verify)
         except Exception as e:
             raise PluginException(
                 cause=f"The following exception was raised: {self.hide_api_key(str(e))}",
