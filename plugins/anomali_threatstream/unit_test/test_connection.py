@@ -1,8 +1,3 @@
-import sys
-import os
-
-sys.path.append(os.path.abspath("../"))
-
 from unittest import TestCase
 from komand_anomali_threatstream.connection.connection import Connection
 from komand.exceptions import PluginException
@@ -20,6 +15,7 @@ class TestConnection(TestCase):
         conn.request.url, conn.request.method = conn.request.url + "/api_key=MYSECRETKEY&key=value", "GET"
         conn.request.verify = False
 
-        with self.assertRaisesRegex(PluginException,
-                                    "Max retries exceeded with url: /api_key=\*\*\*\*\*\*\*\*&key=value"):
+        with self.assertRaisesRegex(
+            PluginException, "Max retries exceeded with url: /api_key=\*\*\*\*\*\*\*\*&key=value"
+        ):
             conn.send(conn.request)
