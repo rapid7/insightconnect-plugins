@@ -17,7 +17,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test(self):
         try:
-            self.client.search_ticket("submit_date_ut:today")
+            self.client.search_tickets("submit_date_ut:today")
         except PluginException:
             raise ConnectionTestException(
                 cause="Connection error.",

@@ -1,0 +1,14 @@
+{"data": [
+    {
+      "ipAddress": "198.51.100.100",
+      "abuseConfidenceScore": 100
+    },
+    {
+      "ipAddress": "198.51.100.101",
+      "abuseConfidenceScore": 100
+    },
+    {
+      "ipAddress": "198.51.100.102",
+      "abuseConfidenceScore": 100
+    }]
+}

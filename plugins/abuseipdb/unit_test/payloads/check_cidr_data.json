@@ -1,0 +1,17 @@
+{"data": {
+          "networkAddress": "198.51.100.100",
+          "netmask": "255.255.255.0",
+          "minAddress": "198.51.100.1",
+          "maxAddress": "198.51.100.254",
+          "numPossibleHosts": 254,
+          "addressSpaceDesc": "Internet",
+          "reportedAddress": [
+            {
+              "ipAddress": "198.51.100.100",
+              "numReports": 3,
+              "mostRecentReport": "2019-08-28T21:08:34+01:00",
+              "abuseConfidenceScore": 11,
+              "countryCode": "CN"
+            }
+          ]
+        }}
