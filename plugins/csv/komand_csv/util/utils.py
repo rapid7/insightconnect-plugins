@@ -1,6 +1,7 @@
 import csv
 import json
 import re
+from io import StringIO
 
 
 def csv_syntax_good(csv_string):
@@ -147,3 +148,18 @@ def csv_to_dict(s, action):
         ret_list.append(json.loads(json.dumps(row)))
 
     return ret_list
+
+
+def json_to_csv(input_json: dict) -> str:
+    output = StringIO()
+    csv_writer = csv.writer(output)
+
+    count = 0
+    for entry in input_json:
+        if count == 0:
+            header = entry.keys()
+            csv_writer.writerow(header)
+            count += 1
+        csv_writer.writerow(entry.values())
+
+    return output.getvalue()
