@@ -18,16 +18,15 @@ class GetBlockedClicks(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         self.connection.client.check_authorization()
 
+        query_params = {"format": "JSON"}
+        threat_status = params.get(Input.THREAT_STATUS)
+
+        if threat_status != "all":
+            query_params["threatStatus"] = threat_status
+
         response = self.connection.client.siem_action(
             Endpoint.get_blocked_clicks(),
-            SiemUtils.prepare_time_range(
-                params.get(Input.TIME_START),
-                params.get(Input.TIME_END),
-                {
-                    "format": "JSON",
-                    "threatStatus": params.get(Input.THREAT_STATUS),
-                },
-            ),
+            SiemUtils.prepare_time_range(params.get(Input.TIME_START), params.get(Input.TIME_END), query_params),
         )
         blocked_clicks = response.get("clicksBlocked", [])
         if params.get(Input.URL) and blocked_clicks:
