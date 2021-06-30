@@ -57,7 +57,9 @@ class AdvancedQueryOnLogSet(komand.Action):
                 for label in labels:
                     log_id = label.get("id")
                     if log_id:
-                        response = self.connection.session.get(f"{self.connection.url}log_search/management/labels/{log_id}")
+                        response = self.connection.session.get(
+                            f"{self.connection.url}log_search/management/labels/{log_id}"
+                        )
                         try:
                             response.raise_for_status()
                             new_labels.append(response.json().get("label", {}).get("name"))

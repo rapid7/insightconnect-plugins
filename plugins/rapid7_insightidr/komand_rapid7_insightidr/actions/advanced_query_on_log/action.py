@@ -56,7 +56,9 @@ class AdvancedQueryOnLog(komand.Action):
                 for label in labels:
                     log_id = label.get("id")
                     if log_id:
-                        response = self.connection.session.get(f"{self.connection.url}log_search/management/labels/{log_id}")
+                        response = self.connection.session.get(
+                            f"{self.connection.url}log_search/management/labels/{log_id}"
+                        )
                         try:
                             response.raise_for_status()
                             new_labels.append(response.json().get("label", {}).get("name"))
@@ -64,7 +66,6 @@ class AdvancedQueryOnLog(komand.Action):
                             continue
 
                 log_entry["labels"] = new_labels
-
 
         self.logger.info(f"Sending results to orchestrator.")
         return {Output.RESULTS: log_entries, Output.COUNT: len(log_entries)}
