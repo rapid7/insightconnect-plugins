@@ -23,13 +23,13 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|url|string|None|True|Feed URL|None|https://example.com|
+|url|string|None|True|Feed URL|None|https://example.com/rss/current|
 
 Example input:
 
 ```
 {
-  "url": "https://example.com"
+  "url": "https://example.com/rss/current"
 }
 ```
 
