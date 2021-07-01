@@ -7,7 +7,7 @@ from jira.exceptions import JIRAError
 import logging
 
 
-class MockIssue():
+class MockIssue:
     def __init__(self, id):
         fields_dict = {
             "resolution": namedtuple("AnObject", ["name"])(["new years"]),
@@ -19,7 +19,7 @@ class MockIssue():
             "status": namedtuple("AnObject", ["name"])(["In Progress"]),
             "created": "Yesterday",
             "updated": "Yesterday",
-            "labels": ["blocked"]
+            "labels": ["blocked"],
         }
 
         self.raw = {"fields": "something"}
@@ -28,9 +28,10 @@ class MockIssue():
         self.fields = namedtuple("ObjectName", fields_dict.keys())(*fields_dict.values())
 
     def permalink(self):
-        return 'https://example-demo.atlassian.net/browse/ISSUE-ID-1234'
+        return "https://example-demo.atlassian.net/browse/ISSUE-ID-1234"
 
-class MockClient():
+
+class MockClient:
     def __init__(self):
         self.client = "some fake thing"
 
@@ -45,6 +46,7 @@ class MockClient():
             return "Success"
         raise JIRAError("Key error")
 
+
 class TestTransitionIssue(TestCase):
     def setUp(self):
         self.test_conn = Connection()
@@ -54,13 +56,12 @@ class TestTransitionIssue(TestCase):
         self.test_conn.logger = test_logger
         self.test_action.logger = test_logger
 
-
     def test_transition_issue(self):
         action_params = {
             "id": "12345",
             "transition": "something",
             "comment": "this is a comment",
-            "fields": ["some","fields"]
+            "fields": ["some", "fields"],
         }
 
         self.test_conn.client = MockClient()
@@ -86,7 +87,7 @@ class TestTransitionIssue(TestCase):
             "id": "10000",
             "transition": "something",
             "comment": "this is a comment",
-            "fields": ["some", "fields"]
+            "fields": ["some", "fields"],
         }
 
         self.test_conn.client = MockClient()
@@ -96,8 +97,3 @@ class TestTransitionIssue(TestCase):
             self.test_action.run(action_params)
 
         self.assertIn("Invalid input.", e.exception.cause)
-
-
-
-
-

@@ -3,18 +3,19 @@ import logging
 from unittest import TestCase
 from komand_jira.util.util import look_up_project
 
-class MockClient():
+
+class MockClient:
     def __init__(self):
         project = {
-            'raw': {},
-            'expand': 'description,lead,issueTypes,url,projectKeys,permissions,insight',
-            'self': 'https://example.atlassian.net/rest/api/2/project/12345',
-            'id': '12345',
-            'key': 'keyDB',
-            'name': 'nameDB',
-            'avatarUrls': {},
-            'entityId': '12345-12345-12345-12345',
-            'uuid': '12345-12345-12345-12345'
+            "raw": {},
+            "expand": "description,lead,issueTypes,url,projectKeys,permissions,insight",
+            "self": "https://example.atlassian.net/rest/api/2/project/12345",
+            "id": "12345",
+            "key": "keyDB",
+            "name": "nameDB",
+            "avatarUrls": {},
+            "entityId": "12345-12345-12345-12345",
+            "uuid": "12345-12345-12345-12345",
         }
 
         # Need to convert this to an object to simulate the JiraObject return
@@ -24,6 +25,7 @@ class MockClient():
 
     def projects(self):
         return self.test_project_list
+
 
 class TestUtil(TestCase):
     def test_lookup_project(self):
@@ -37,4 +39,3 @@ class TestUtil(TestCase):
 
         result = look_up_project("Dont Find This", mock_client, logger)
         self.assertFalse(result)
-

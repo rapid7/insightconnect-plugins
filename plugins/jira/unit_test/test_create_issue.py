@@ -25,9 +25,7 @@ That code can be used to quickly convert a dict to a fake object.
 """
 
 
-class MockIssue():
-
-
+class MockIssue:
     def __init__(self):
         fields_dict = {
             "resolution": namedtuple("AnObject", ["name"])(["new years"]),
@@ -39,7 +37,7 @@ class MockIssue():
             "status": namedtuple("AnObject", ["name"])(["In Progress"]),
             "created": "Yesterday",
             "updated": "Yesterday",
-            "labels": ["blocked"]
+            "labels": ["blocked"],
         }
 
         self.raw = {"fields": "something"}
@@ -48,24 +46,24 @@ class MockIssue():
         self.fields = namedtuple("ObjectName", fields_dict.keys())(*fields_dict.values())
 
     def permalink(self):
-        return 'https://example-demo.atlassian.net/browse/ISSUE-ID-1234'
+        return "https://example-demo.atlassian.net/browse/ISSUE-ID-1234"
 
 
-class MockClient():
+class MockClient:
     def __init__(self):
         self.client = "some fake thing"
 
     def projects(self):
         project = {
-            'raw': {},
-            'expand': 'description,lead,issueTypes,url,projectKeys,permissions,insight',
-            'self': 'https://example.atlassian.net/rest/api/2/project/12345',
-            'id': '12345',
-            'key': 'projectKey',
-            'name': 'projectName',
-            'avatarUrls': {},
-            'entityId': '12345-12345-12345-12345',
-            'uuid': '12345-12345-12345-12345'
+            "raw": {},
+            "expand": "description,lead,issueTypes,url,projectKeys,permissions,insight",
+            "self": "https://example.atlassian.net/rest/api/2/project/12345",
+            "id": "12345",
+            "key": "projectKey",
+            "name": "projectName",
+            "avatarUrls": {},
+            "entityId": "12345-12345-12345-12345",
+            "uuid": "12345-12345-12345-12345",
         }
 
         # Need to convert this to an object to simulate the JiraObject return
@@ -83,9 +81,7 @@ class MockClient():
         return client_fields
 
 
-class MockConnection():
-
-
+class MockConnection:
     def __init__(self):
         self.client = MockClient()
 
@@ -94,9 +90,8 @@ class MockConnection():
 # Tests
 ######################
 
+
 class TestCreateIssue(TestCase):
-
-
     def setUp(self):
         self.test_conn = Connection()
         self.test_action = CreateIssue()
@@ -113,19 +108,32 @@ class TestCreateIssue(TestCase):
             "fields": {},
             "project": "projectName",
             "summary": "test Summary",
-            "type": "Task"
+            "type": "Task",
         }
 
         self.test_action.connection = MockConnection()
         result = self.test_action.run(action_params)
 
         self.assertIsNotNone(result)
-        expected = {'issue': {'attachments': [], 'id': '12345', 'key': '12345',
-                              'url': 'https://example-demo.atlassian.net/browse/ISSUE-ID-1234', 'summary': 'A summary',
-                              'description': 'A description', 'status': ['In Progress'], 'resolution': ['new years'],
-                              'reporter': ['Bob Smith'], 'assignee': ['Bob Smith'], 'created_at': 'Yesterday',
-                              'updated_at': 'Yesterday', 'resolved_at': 'No idea what this is', 'labels': ['blocked'],
-                              'fields': {}}}
+        expected = {
+            "issue": {
+                "attachments": [],
+                "id": "12345",
+                "key": "12345",
+                "url": "https://example-demo.atlassian.net/browse/ISSUE-ID-1234",
+                "summary": "A summary",
+                "description": "A description",
+                "status": ["In Progress"],
+                "resolution": ["new years"],
+                "reporter": ["Bob Smith"],
+                "assignee": ["Bob Smith"],
+                "created_at": "Yesterday",
+                "updated_at": "Yesterday",
+                "resolved_at": "No idea what this is",
+                "labels": ["blocked"],
+                "fields": {},
+            }
+        }
 
         self.assertEqual(result, expected)
 
