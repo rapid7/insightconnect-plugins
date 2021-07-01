@@ -1,6 +1,3 @@
-issue = {}
-
-
 client_fields = [
 {'id': 'statuscategorychangedate', 'key': 'statuscategorychangedate', 'name': 'Status Category Changed',
  'custom': False, 'orderable': False, 'navigable': True, 'searchable': True,
