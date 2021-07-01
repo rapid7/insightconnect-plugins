@@ -4,18 +4,18 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Isolate a machine associated with the root cause of a Malop, or to remediate a process not involved in a Malop"
+    DESCRIPTION = "Isolate or un-isolate a machine"
 
 
 class Input:
-    ACTIONS_BY_MACHINE = "actions_by_machine"
-    INITIATOR_USER_NAME = "initiator_user_name"
     MALOP_ID = "malop_id"
-    PYLUM_IDS = "pylum_ids"
+    QUARANTINE_STATE = "quarantine_state"
+    SENSOR = "sensor"
     
 
 class Output:
-    RESPONSE = "response"
+    MACHINE_ID = "machine_id"
+    SUCCESS = "success"
     
 
 class IsolateMachineInput(insightconnect_plugin_runtime.Input):
@@ -24,34 +24,30 @@ class IsolateMachineInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "actions_by_machine": {
-      "type": "object",
-      "title": "Actions by Machine",
-      "description": "Actions by machine",
-      "order": 4
-    },
-    "initiator_user_name": {
-      "type": "string",
-      "title": "Initiator User Name",
-      "description": "Initiator user name",
-      "order": 3
-    },
     "malop_id": {
       "type": "string",
       "title": "Malop ID",
-      "description": "Malop ID to isolate a machine or empty to remediate process not involved in a Malop",
-      "order": 1
+      "description": "Malop ID to associate with the quarantine action",
+      "order": 3
     },
-    "pylum_ids": {
-      "type": "array",
-      "title": "Pylum IDS",
-      "description": "The unique sensor ID the Cybereason platform uses for the machines to isolate",
-      "items": {
-        "type": "string"
-      },
+    "quarantine_state": {
+      "type": "boolean",
+      "title": "Quarantine State",
+      "description": "True to isolate the sensor, false to un-isolate it",
+      "default": true,
       "order": 2
+    },
+    "sensor": {
+      "type": "string",
+      "title": "Sensor",
+      "description": "Sensor ID, hostname or IP address of the sensor to perform the action on",
+      "order": 1
     }
-  }
+  },
+  "required": [
+    "quarantine_state",
+    "sensor"
+  ]
 }
     """)
 
@@ -65,15 +61,22 @@ class IsolateMachineOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "response": {
-      "type": "object",
-      "title": "Malop Response",
-      "description": "Malop response",
+    "machine_id": {
+      "type": "string",
+      "title": "Machine Pylum ID",
+      "description": "Machine Pylum ID",
       "order": 1
+    },
+    "success": {
+      "type": "boolean",
+      "title": "Success",
+      "description": "Success",
+      "order": 2
     }
   },
   "required": [
-    "response"
+    "machine_id",
+    "success"
   ]
 }
     """)
