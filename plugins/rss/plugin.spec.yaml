@@ -27,7 +27,7 @@ connection:
     type: string
     description: Feed URL
     required: true
-    example: https://example.com
+    example: https://example.com/rss/current
 triggers:
   poll:
     title: Poll Feed
