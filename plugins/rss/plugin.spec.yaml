@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rss
 title: RSS
 description: The RSS plugin allows you to monitor an RSS feed
-version: 1.0.3
+version: 1.0.4
 vendor: rapid7
 support: community
 status: []
@@ -17,7 +17,7 @@ tags:
 - feed
 hub_tags:
   use_cases: [data_utility, threat_detection_and_response, alerting_and_notifications]
-  keywords: [rss, atom, feed]
+  keywords: [rss, atom, feeds]
   features: []
 enable_cache: true
 language: python
@@ -27,6 +27,7 @@ connection:
     type: string
     description: Feed URL
     required: true
+    example: https://example.com/rss/current
 triggers:
   poll:
     title: Poll Feed
@@ -35,9 +36,10 @@ triggers:
       frequency:
         title: Frequency
         type: integer
-        description: How frequently to poll for new events
+        description: How frequently (in seconds) to poll for new entries
         default: 15
         required: true
+        example: 15
     output:
       results:
         type: object
