@@ -55,7 +55,7 @@ For more information about how to generate an `actions_by_machine` object, refer
 |----|----|-------|--------|-----------|----|-------|
 |actions_by_machine|object|None|True|Actions by machine|None|{"126811122.2298225282553311122": [{"targetId": "531122333.-3391199199911692223","actionType": "KILL_PROCESS"}]}|
 |initiator_user_name|string|None|True|Initiator user name|None|user@example.com|
-|malop_id|string|None|False|Malop ID to associate with the remediation actions|None|"22.2787422324806222966"|
+|malop_id|string|None|False|Malop ID to associate with the remediation actions|None|22.2787422324806222966|
 
 Example input:
 
@@ -100,7 +100,7 @@ This action is used to quarantine a detected malicious file in a secure location
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|malop_id|string|None|True|Malop ID related to the file you wish to quarantine or unquarantine|None|"22.2787422324806222966"|
+|malop_id|string|None|True|Malop ID related to the file you wish to quarantine or unquarantine|None|22.2787422324806222966|
 |quarantine|boolean|None|True|True to quarantine a file, False to remove file quarantine|None|True|
 |sensor|string|None|True|The unique identifier of the machine you wish to perform the quarantine/unquarantine operation on, this can be an internal IPv4 address, hostname or sensor GUID|None|-1632138521.1198775089551518743|
 
@@ -150,7 +150,7 @@ This action is used to isolate a machine associated with the root cause of a Mal
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|malop_id|string|None|False|Malop ID to associate with the quarantine action|None|"22.2787422324806222966"|
+|malop_id|string|None|False|Malop ID to associate with the quarantine action|None|22.2787422324806222966|
 |quarantine_state|boolean|True|True|True to isolate the sensor, false to un-isolate it|None|True|
 |sensor|string|None|True|Sensor ID, hostname or IP address of the sensor to perform the action on|None|198.51.100.100|
 
