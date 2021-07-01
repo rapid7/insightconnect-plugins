@@ -156,7 +156,7 @@ class TestCreateIssue(TestCase):
     #         "api_key": {
     #             "secretKey": "SecretKey"
     #         },
-    #         "url": "https://komand-demo.atlassian.net/",
+    #         "url": "https://example.atlassian.net/",
     #         "user": "username@example.com"
     #     }
     #
