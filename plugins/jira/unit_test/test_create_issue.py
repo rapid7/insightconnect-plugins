@@ -52,8 +52,6 @@ class MockIssue():
 
 
 class MockClient():
-
-
     def __init__(self):
         self.client = "some fake thing"
 
