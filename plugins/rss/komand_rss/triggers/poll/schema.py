@@ -26,7 +26,7 @@ class PollInput(komand.Input):
     "frequency": {
       "type": "integer",
       "title": "Frequency",
-      "description": "How frequently to poll for new events",
+      "description": "How frequently (in seconds) to poll for new entries",
       "default": 15,
       "order": 1
     }
