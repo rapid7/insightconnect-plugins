@@ -1,7 +1,7 @@
 {
-	"spec": "77ed32fc9d0dc7e353b9ae9c9950e5a8",
-	"manifest": "0a8e74a33d7ba3c9ff343974c3708dcd",
-	"setup": "9479bf39eee7dfe7994ddf810708c9b9",
+	"spec": "6a02b43a6c32760d111f392b75b2b145",
+	"manifest": "c46efdc870904abf5bb4a787845e01e6",
+	"setup": "e7e6fc4f1243dce430baa12bdc4bd83d",
 	"schemas": [
 		{
 			"identifier": "connection/schema.py",
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "poll/schema.py",
-			"hash": "3b8908d6186cb19cde91b1c8f6e84f8c"
+			"hash": "36931386bb15de582fcf28b625fd85bb"
 		}
 	]
 }
