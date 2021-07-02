@@ -4,6 +4,7 @@ from komand_jira.connection import Connection
 from komand_jira.actions.create_issue import CreateIssue
 from collections import namedtuple
 from unit_test.payloads.client_fields import client_fields
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 ######################
 # MOCKS
@@ -24,6 +25,9 @@ AnObject.name
 That code can be used to quickly convert a dict to a fake object. 
 """
 
+class MockRestClient():
+    def add_attachment(self, key, filename, bytes):
+        pass
 
 class MockIssue:
     def __init__(self):
@@ -75,7 +79,10 @@ class MockClient:
         return MockIssue()
 
     def issue_type_by_name(self, issue_type):
-        pass
+        if issue_type:
+            pass
+        else:
+            raise KeyError("Issue type was not provided")
 
     def fields(self):
         return client_fields
@@ -84,6 +91,7 @@ class MockClient:
 class MockConnection:
     def __init__(self):
         self.client = MockClient()
+        self.rest_client = MockRestClient()
 
 
 ######################
@@ -136,6 +144,121 @@ class TestCreateIssue(TestCase):
         }
 
         self.assertEqual(result, expected)
+
+
+    def test_create_issue_no_type_raise_exception(self):
+        action_params = {
+            "attachment_bytes": "",
+            "attachment_filename": "",
+            "description": "A test description",
+            "fields": {},
+            "project": "projectName",
+            "summary": "test Summary",
+            "type": None,
+        }
+
+        self.test_action.connection = MockConnection()
+        with self.assertRaises(PluginException):
+            self.test_action.run(action_params)
+
+    def test_create_issue_no_description(self):
+        action_params = {
+            "attachment_bytes": "",
+            "attachment_filename": "",
+            "description": "",
+            "fields": {},
+            "project": "projectName",
+            "summary": "test Summary",
+            "type": "Task",
+        }
+
+        self.test_action.connection = MockConnection()
+        result = self.test_action.run(action_params)
+
+        # Just verifying no exceptions are raised
+        self.assertIsNotNone(result)
+
+    def test_create_issue_description_is_none(self):
+        action_params = {
+            "attachment_bytes": "",
+            "attachment_filename": "",
+            "description": None,
+            "fields": {},
+            "project": "projectName",
+            "summary": "test Summary",
+            "type": "Task",
+        }
+
+        self.test_action.connection = MockConnection()
+        result = self.test_action.run(action_params)
+
+        # Just verifying no exceptions are raised
+        self.assertIsNotNone(result)
+
+    def test_create_issue_with_unicode(self):
+        action_params = {
+            "attachment_bytes": "",
+            "attachment_filename": "",
+            "description": "ΣΣΣΣ",
+            "fields": {},
+            "project": "projectName",
+            "summary": "ΣΣΣ",
+            "type": "Task",
+        }
+
+        self.test_action.connection = MockConnection()
+        result = self.test_action.run(action_params)
+
+        # Just verifying no exceptions are raised
+        self.assertIsNotNone(result)
+
+    def test_create_issue_with_attachment(self):
+        action_params = {
+            "attachment_bytes": "VGhpcyBpcyBhIHRlc3QK",
+            "attachment_filename": "test.txt",
+            "description": "A test with an attachment",
+            "fields": {},
+            "project": "projectName",
+            "summary": "An attachment",
+            "type": "Task",
+        }
+
+        self.test_action.connection = MockConnection()
+        result = self.test_action.run(action_params)
+
+        self.assertIsNotNone(result)
+
+    def test_create_issue_with_attachment_no_filename(self):
+        action_params = {
+            "attachment_bytes": "VGhpcyBpcyBhIHRlc3QK",
+            "attachment_filename": "",
+            "description": "A test with an attachment",
+            "fields": {},
+            "project": "projectName",
+            "summary": "An attachment",
+            "type": "Task",
+        }
+
+        self.test_action.connection = MockConnection()
+        with self.assertRaises(PluginException):
+            self.test_action.run(action_params)
+
+    def test_create_issue_with_attachment_no_bytes(self):
+        action_params = {
+            "attachment_bytes": "",
+            "attachment_filename": "test.txt",
+            "description": "A test with an attachment",
+            "fields": {},
+            "project": "projectName",
+            "summary": "An attachment",
+            "type": "Task",
+        }
+
+        self.test_action.connection = MockConnection()
+        with self.assertRaises(PluginException):
+            self.test_action.run(action_params)
+
+
 
     # Leave this here, it comes in handy for debugging.
 
