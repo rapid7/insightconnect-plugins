@@ -25,9 +25,11 @@ AnObject.name
 That code can be used to quickly convert a dict to a fake object. 
 """
 
-class MockRestClient():
+
+class MockRestClient:
     def add_attachment(self, key, filename, bytes):
         pass
+
 
 class MockIssue:
     def __init__(self):
@@ -145,7 +147,6 @@ class TestCreateIssue(TestCase):
 
         self.assertEqual(result, expected)
 
-
     def test_create_issue_no_type_raise_exception(self):
         action_params = {
             "attachment_bytes": "",
@@ -257,8 +258,6 @@ class TestCreateIssue(TestCase):
         self.test_action.connection = MockConnection()
         with self.assertRaises(PluginException):
             self.test_action.run(action_params)
-
-
 
     # Leave this here, it comes in handy for debugging.
 
