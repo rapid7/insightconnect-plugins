@@ -3,15 +3,14 @@ import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 from logging import Logger
-from urllib.parse import urljoin
-from datetime import datetime
+from urllib.parse import urlsplit
 import dateparser
 
 
 class AbnormalSecurityAPI:
     def __init__(self, url: str, api_key: str, logger: Logger):
         self.api_version = "v1"
-        self.base_url = f"https://{url}/{self.api_version}"
+        self.base_url = f"{self.split_url(url)}/{self.api_version}"
         self.headers = {"authorization": f"Bearer {api_key}"}
         self.logger = logger
 
@@ -36,7 +35,7 @@ class AbnormalSecurityAPI:
         try:
             response = requests.request(
                 method.upper(),
-                urljoin(self.base_url, path),
+                self.base_url + path,
                 params=params,
                 json=payload,
                 headers=self.headers,
@@ -85,9 +84,17 @@ class AbnormalSecurityAPI:
     @staticmethod
     def parse_date(date: str) -> str:
         try:
-            return dateparser.parse(date).isoformat()
+            parsed_date = dateparser.parse(date)
+            if not parsed_date.tzinfo:
+                return parsed_date.isoformat() + "Z"
+            return parsed_date.isoformat()
         except Exception:
             raise PluginException(
                 cause=f"Date '{date}' is not a valid date.",
                 assistance="Please verify the date and try again.",
             )
+
+    @staticmethod
+    def split_url(url: str) -> str:
+        scheme, netloc, paths, queries, fragments = urlsplit(url.strip())
+        return f"{scheme}://{netloc}"
