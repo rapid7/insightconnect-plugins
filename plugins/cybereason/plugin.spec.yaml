@@ -4,14 +4,14 @@ products: [insightconnect]
 name: cybereason
 title: Cybereason
 description: The Cybereason platform provides military-grade cyber security with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin
-version: 1.2.0
+version: 2.0.0
 vendor: rapid7
 support: rapid7
 status: []
 tags: [investigate, malware, threat tntel]
 hub_tags:
   use_cases: [threat_detection_and_response, vulnerability_management]
-  keywords: [investigate, malware, threat tntel]
+  keywords: [investigate]
   features: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cybereason
@@ -502,37 +502,37 @@ actions:
         required: true
   isolate_machine:
     title: Isolate Machine
-    description: Isolate a machine associated with the root cause of a Malop, or to remediate a process not involved in a Malop
+    description: Isolate or un-isolate a machine
     input:
+      sensor:
+        title: Sensor
+        description: Sensor ID, hostname or IP address of the sensor to perform the action on
+        type: string
+        required: true
+        example: 198.51.100.100
+      quarantine_state:
+        title: Quarantine State
+        description: True to isolate the sensor, false to un-isolate it
+        type: boolean
+        required: true
+        default: true
+        example: true
       malop_id:
         title: Malop ID
-        description: Malop ID to isolate a machine or empty to remediate process not involved in a Malop
+        description: Malop ID to associate with the quarantine action
         type: string
         required: false
         example: "22.2787422324806222966"
-      pylum_ids:
-        title: Pylum IDS
-        description: The unique sensor ID the Cybereason platform uses for the machines to isolate
-        type: "[]string"
-        required: false
-        example: ["PYLUMCLIENT_INTEGRATION_GDDA11-11_2222170222FC"]
-      initiator_user_name:
-        title: Initiator User Name
-        description: Initiator user name
-        type: string
-        required: false
-        example: user@example.com
-      actions_by_machine:
-        title: Actions by Machine
-        description: Actions by machine
-        type: object
-        required: false
-        example: '{"126811122.2298225282553311122": [{"targetId": "531122333.-3391199199911692223","actionType": "KILL_PROCESS"}]}'
     output:
-      response:
-        title: Malop Response
-        description: Malop response
-        type: object
+      machine_id:
+        title: Machine Pylum ID
+        description: Machine Pylum ID
+        type: string
+        required: true
+      success:
+        title: Success
+        description: Success
+        type: boolean
         required: true
   quarantine_file:
     title: Quarantine File
@@ -560,5 +560,33 @@ actions:
       remediate_items_response:
         title: Remediate Items Response
         description: Remediate items response
+        type: remediate_items
+        required: true
+  remediate_items:
+    title: Remediate Items
+    description: Remediate a specific process, file or registry key if remediation is possible
+    input:
+      initiator_user_name:
+        title: Initiator User Name
+        description: Initiator user name
+        type: string
+        required: true
+        example: user@example.com
+      actions_by_machine:
+        title: Actions by Machine
+        description: Actions by machine
+        type: object
+        required: true
+        example: '{"126811122.2298225282553311122": [{"targetId": "531122333.-3391199199911692223","actionType": "KILL_PROCESS"}]}'
+      malop_id:
+        title: Malop ID
+        description: Malop ID to associate with the remediation actions
+        type: string
+        required: false
+        example: "22.2787422324806222966"
+    output:
+      response:
+        title: Malop Response
+        description: Malop response
         type: remediate_items
         required: true

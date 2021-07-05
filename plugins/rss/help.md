@@ -21,9 +21,17 @@ This plugin requires a RSS feed URL.
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|None|True|Feed URL|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|url|string|None|True|Feed URL|None|https://example.com/rss/current|
+
+Example input:
+
+```
+{
+  "url": "https://example.com/rss/current"
+}
+```
 
 ## Technical Details
 
@@ -39,9 +47,17 @@ This trigger monitors an RSS feed for the latest event.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|frequency|integer|15|True|How frequently to poll for new events|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|frequency|integer|15|True|How frequently (in seconds) to poll for new entries|None|15|
+
+Example input:
+
+```
+{
+  "frequency": 15
+}
+```
 
 ##### Output
 
@@ -172,6 +188,7 @@ Between workflow runs, new items will *not* be reported on.
 
 # Version History
 
+* 1.0.4 - Change Frequency input description in Poll Feed trigger | Add example inputs
 * 1.0.3 - New spec and help.md format for the Extension Library
 * 1.0.2 - Fixed issue where Poll Feed was logging unnecessary information
 * 1.0.1 - Support web server mode
