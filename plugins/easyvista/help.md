@@ -479,6 +479,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.1 - Fix issue where connection test was failing
 * 1.0.0 - Initial plugin
 
 # Links

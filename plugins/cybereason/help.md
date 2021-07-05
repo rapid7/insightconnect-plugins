@@ -41,6 +41,57 @@ Example input:
 
 ### Actions
 
+#### Remediate Items
+
+This action is used to remediate a specific process, file or registry key if remediation is possible.
+
+This action supports the following action types: KILL_PROCESS, DELETE_REGISTRY_KEY, QUARANTINE_FILE, UNQUARANTINE_FILE, BLOCK_FILE, KILL_PREVENT_UNSUSPEND, ISOLATE_MACHINE.
+
+For more information about how to generate an `actions_by_machine` object, refer to [Cybereason documentation](https://nest.cybereason.com/documentation/api-documentation/all-versions/remediate-items#remediatemalops).
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|actions_by_machine|object|None|True|Actions by machine|None|{"126811122.2298225282553311122": [{"targetId": "531122333.-3391199199911692223","actionType": "KILL_PROCESS"}]}|
+|initiator_user_name|string|None|True|Initiator user name|None|user@example.com|
+|malop_id|string|None|False|Malop ID to associate with the remediation actions|None|22.2787422324806222966|
+
+Example input:
+
+```
+{
+  "actions_by_machine": {
+    "126811122.2298225282553311122": [
+      {
+        "targetId": "531122333.-3391199199911692223",
+        "actionType": "KILL_PROCESS"
+      }
+    ]
+  },
+  "initiator_user_name": "user@example.com",
+  "malop_id": "22.2787422324806222966"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|response|remediate_items|True|Malop response|
+
+Example output:
+
+```
+{
+  "malopId": "11.2189746432167327222",
+  "remediationId": "5144cf82-94c4-49f8-82cd-9ce1fcbd6a23",
+  "start": 1624819406074,
+  "initiatingUser": "user@example.com",
+  "statusLog": []
+}
+```
+
 #### Quarantine File
 
 This action is used to quarantine a detected malicious file in a secure location or unquarantine a file.
@@ -99,26 +150,17 @@ This action is used to isolate a machine associated with the root cause of a Mal
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|actions_by_machine|object|None|False|Actions by machine|None|{"126811122.2298225282553311122": [{"targetId": "531122333.-3391199199911692223","actionType": "KILL_PROCESS"}]}|
-|initiator_user_name|string|None|False|Initiator user name|None|user@example.com|
-|malop_id|string|None|False|Malop ID to isolate a machine or empty to remediate process not involved in a Malop|None|22.2787422324806222966|
-|pylum_ids|[]string|None|False|The unique sensor ID the Cybereason platform uses for the machines to isolate|None|["PYLUMCLIENT_INTEGRATION_GDDA11-11_2222170222FC"]|
+|malop_id|string|None|False|Malop ID to associate with the quarantine action|None|22.2787422324806222966|
+|quarantine_state|boolean|True|True|True to isolate the sensor, false to un-isolate it|None|True|
+|sensor|string|None|True|Sensor ID, hostname or IP address of the sensor to perform the action on|None|198.51.100.100|
 
 Example input:
 
 ```
 {
-  "actions_by_machine": {
-    "126811122.2298225282553311122": [{
-      "targetId": "531122333.-3391199199911692223",
-      "actionType": "KILL_PROCESS"
-    }]
-  },
-  "initiator_user_name": "user@example.com",
   "malop_id": "22.2787422324806222966",
-  "pylum_ids": [
-    "PYLUMCLIENT_INTEGRATION_GDDA11-11_2222170222FC"
-  ]
+  "quarantine_state": true,
+  "sensor": "198.51.100.100"
 }
 ```
 
@@ -126,15 +168,15 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|response|object|True|Malop response|
+|machine_id|string|True|Machine Pylum ID|
+|success|boolean|True|Success|
 
 Example output:
 
 ```
 {
-  "response": {
-    "PYLUMCLIENT_INTEGRATION_GDDA11-11_2222170222FC": "Succeeded"
-  }
+  "machine_id": "PYLUMCLIENT_EXAMPLE_EXAMPLE_HOSTNAME-WINS_000C29D6CBF7",
+  "success": true
 }
 ```
 
@@ -268,6 +310,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.0 - Update action Isolate Machine | New action Remediate Items
 * 1.2.0 - Add new action Quarantine File
 * 1.1.0 - Add new action Isolate Machine
 * 1.0.0 - Initial plugin
