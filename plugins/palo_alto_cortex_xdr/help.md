@@ -273,13 +273,13 @@ This trigger is used to get Alerts.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|interval|integer|None|True|Interval|None|5|
+|frequency|integer|5|False|Poll frequency in seconds|None|5|
 
 Example input:
 
 ```
 {
-  "interval": 5
+  "frequency": 5
 }
 ```
 
@@ -451,13 +451,13 @@ This trigger is used to get Incidents.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|interval|integer|None|True|Interval|None|5|
+|frequency|integer|5|False|Poll frequency in seconds|None|5|
 
 Example input:
 
 ```
 {
-  "interval": 5
+  "frequency": 5
 }
 ```
 

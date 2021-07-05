@@ -1107,12 +1107,12 @@ triggers:
     title: Get Incidents
     description: Get incidents
     input:
-      interval:
-        title: Interval
-        description: Interval
+      frequency:
         type: integer
-        required: true
+        description: Poll frequency in seconds
+        default: 5
         example: 5
+        required: false
     output:
       incident:
         title: Incident
@@ -1123,12 +1123,12 @@ triggers:
     title: Get Alerts
     description: Get alerts
     input:
-      interval:
-        title: Interval
-        description: Interval
+      frequency:
         type: integer
-        required: true
+        description: Poll frequency in seconds
+        default: 5
         example: 5
+        required: false
     output:
       alert:
         title: Alert
