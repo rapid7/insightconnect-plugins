@@ -771,7 +771,7 @@ actions:
         required: true
   delete_app_from_policy:
     title: Delete Application from Policy
-    description: Deletes application from the given policy
+    description: Delete an application from a given policy
     input:
       application_name:
         title: Application
