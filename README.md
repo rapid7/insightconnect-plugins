@@ -7,7 +7,8 @@ We made a large number of our plugins open-source in order to benefit our custom
 The integrations here include some new, some old, and many that are community supported. These are automatically released to the product marketplace from this repository for convenient orchestration.
 The full list of integrations is available on our [Marketplace](https://www.rapid7.com/marketplace/).
 
-For general questions, assistance with building or enhancing plugins, or any other discussions, check out our [Rapid7 Discussion Community](https://discuss.rapid7.com/). The team is active on Discuss along with other members of the community that are able to provide assistance. If you have a direct inquiry for the team maintaining InsightConnect plugins, we can also be reached at `IntegrationAlliance@rapid7.com`.
+For general questions, issues with plugins, assistance with building or enhancing plugins, or any other discussions, check out our [Rapid7 Discussion Community](https://discuss.rapid7.com/). The team is active on Discuss along with other members of the community that are able to provide assistance. If you have a direct inquiry for the team maintaining InsightConnect plugins, we can also be reached at `IntegrationAlliance@rapid7.com`.
+Please note that GitHub Issues are unmonitored by Rapid7 developers and are disabled for this repository.
 
 ### Table of Contents
 
