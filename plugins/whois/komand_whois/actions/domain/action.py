@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import DomainInput, DomainOutput, Input
 
 # Custom imports below
-import whois
+from komand_whois.util import whois
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
