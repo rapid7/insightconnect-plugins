@@ -4,7 +4,7 @@ products: [insightconnect]
 name: proofpoint_tap
 title: Proofpoint TAP
 description: Parse Proofpoint Targeted Attack Protection (TAP) alerts
-version: 2.0.0
+version: 3.1.0
 vendor: rapid7
 support: community
 status: []
@@ -19,7 +19,7 @@ tags:
 - parser
 hub_tags:
   use_cases: [alerting_and_notifications, threat_detection_and_response]
-  keywords: [Proofpoint, TAP, parser, cloud_enabled]
+  keywords: [proofpoint, tap, parser, cloud_enabled]
   features: []
 types:
   threat:
@@ -627,6 +627,190 @@ types:
       type: "[]urls"
       description: "Urls"
       required: false
+  platform:
+    name:
+      title: Name
+      description: Name of platform
+      type: string
+      required: false
+    os:
+      title: OS
+      description: Operating system
+      type: string
+      required: false
+    version:
+      title: Version
+      description: Version of operating system
+      type: string
+      required: false
+  evidence_type:
+    sha256:
+      title: SHA256
+      description: The SHA256 hash of the attachment's contents
+      type: string
+      required: false
+    blacklisted:
+      title: Blacklisted
+      description: Optional, whether the file was blocklisted
+      type: integer
+      required: false
+    md5:
+      title: MD5
+      description: Optional, the MD5 sum of the attachment's contents
+      type: string
+      required: false
+    offset:
+      title: Offset
+      description: Optional, the offset in bytes where the malicious content was found
+      type: integer
+      required: false
+    rule:
+      title: Rule
+      description: Optional, the name of the static rule inside the sandbox which located the malicious content
+      type: string
+      required: false
+    size:
+      title: Size
+      description: Optional, the size in bytes of the attachment's contents
+      type: integer
+      required: false
+    action:
+      title: Action
+      description: Whether the cookie was set or deleted
+      type: string
+      required: false
+    domain:
+      title: Domain
+      description: Which domain set the cookie
+      type: string
+      required: false
+    key:
+      title: Key
+      description: The name of the cookie being set or deleted
+      type: string
+      required: false
+    value:
+      title: Value
+      description: Optional, content of the cookie being set
+      type: string
+      required: false
+    host:
+      title: Host
+      description: The hostname being resolved
+      type: string
+      required: false
+    cnames:
+      title: Canonical Names
+      description: Optional, an array of CNAMEs which were associated with the hostname
+      type: "[]string"
+      required: false
+    ips:
+      title: Resolved IP Addresses
+      description: Optional, an array of IP addresses which were resolved to the hostname
+      type: "[]string"
+      required: false
+    nameservers:
+      title: Nameservers
+      description: Optional, the nameservers responsible for the hostname's domain
+      type: "[]string"
+      required: false
+    nameserversList:
+      title: Nameservers List
+      description: Optional, the nameservers responsible for the hostname's domain
+      type: "[]string"
+      required: false
+    path:
+      title: Path
+      description: The location of the dropper file
+      type: string
+      required: false
+    url:
+      title: URL
+      description: Optional, the URL the dropper contacted
+      type: string
+      required: false
+    name:
+      title: Name
+      description: The friendly name of the IDs rule which observed the malicious traffic
+      type: string
+      required: false
+    signatureId:
+      title: Signature ID
+      description: The identifier of the IDs rule which observed the malicious traffic
+      type: integer
+      required: false
+    ip:
+      title: Remote IP Address
+      description: The remote IP address being contacted
+      type: string
+      required: false
+    port:
+      title: Port
+      description: The remote IP port being contacted
+      type: integer
+      required: false
+    type:
+      title: Type
+      description: The protocol being used TCP or UDP
+      type: string
+      required: false
+    httpStatus:
+      title: HTTP Status
+      description: Optional, the HTTP status code which was produced when our sandbox visited the URL
+      type: integer
+      required: false
+  evidence:
+    type:
+      title: Type
+      description: The evidence type
+      type: string
+      required: false
+    display:
+      title: Display
+      description: Friendly display string
+      type: string
+      required: false
+    malicious:
+      title: Malicious
+      description: Whether the evidence was used to reach a malicious verdict
+      type: boolean
+      required: false
+    what:
+      title: What
+      description: Map of values associated with the specific evidence type
+      type: evidence_type
+      required: false
+    platforms:
+      title: Platforms
+      description: Array of Platform objects
+      type: "[]platform"
+      required: false
+  report:
+    name:
+      title: Name
+      description: The malicious URL, SHA256 hash of the malicious attachment, or campaign name
+      type: string
+      required: false
+    scope:
+      title: Scope
+      description: Whether the report scope covers a campaign or an individual threat
+      type: string
+      required: false
+    type:
+      title: Type
+      description: The threat type
+      type: string
+      required: false
+    id:
+      title: ID
+      description: The identifier associated with the campaign or individual threat
+      type: string
+      required: false
+    forensics:
+      title: Forensics
+      description: Array of Evidence objects
+      type: "[]evidence"
+      required: false
 
 connection:
   service_principal:
@@ -640,7 +824,7 @@ connection:
     description: The TAP secret for basic authentication API interaction
     type: credential_secret_key
     required: false
-    example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+    example: 30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050
 actions:
   parse_tap_alert:
     title: Parse Alert
@@ -682,13 +866,15 @@ actions:
         example: https://example.com
       threat_status:
         title: Threat Status
-        description: The threat statuses which will be returned in the data. If no value is specified, active and cleared threats are returned
+        description: The threat statuses which will be returned in the data
         type: string
         enum:
           - active
           - cleared
           - falsePositive
-        required: false
+          - all
+        required: true
+        default: all
         example: active
     output:
       results:
@@ -720,13 +906,15 @@ actions:
         example: https://example.com
       threat_status:
         title: Threat Status
-        description: The threat statuses which will be returned in the data. If no value is specified, active and cleared threats are returned
+        description: The threat statuses which will be returned in the data
         type: string
         enum:
           - active
           - cleared
           - falsePositive
-        required: false
+          - all
+        required: true
+        default: all
         example: active
     output:
       results:
@@ -758,23 +946,27 @@ actions:
         example: A phishy email
       threat_type:
         title: Threat Type
-        description: The threat type which will be returned in the data. If no value is specified, all threat types are returned
+        description: The threat type which will be returned in the data
         type: string
         enum:
           - url
           - attachment
           - messageText
-        required: false
+          - all
+        required: true
+        default: all
         example: url
       threat_status:
         title: Threat Status
-        description: The threat statuses which will be returned in the data. If no value is specified, active and cleared threats are returned
+        description: The threat statuses which will be returned in the data
         type: string
         enum:
           - active
           - cleared
           - falsePositive
-        required: false
+          - all
+        required: true
+        default: all
         example: active
     output:
       results:
@@ -806,23 +998,27 @@ actions:
         example: A phishy email
       threat_type:
         title: Threat Type
-        description: The threat type which will be returned in the data. If no value is specified, all threat types are returned
+        description: The threat type which will be returned in the data
         type: string
         enum:
           - url
           - attachment
           - messageText
-        required: false
+          - all
+        required: true
+        default: all
         example: url
       threat_status:
         title: Threat Status
-        description: The threat statuses which will be returned in the data. If no value is specified, active and cleared threats are returned
+        description: The threat statuses which will be returned in the data
         type: string
         enum:
           - active
           - cleared
           - falsePositive
-        required: false
+          - all
+        required: true
+        default: all
         example: active
     output:
       results:
@@ -848,23 +1044,27 @@ actions:
         example: 2021-04-20T22:00:00Z
       threat_type:
         title: Threat Type
-        description: The threat type which will be returned in the data. If no value is specified, all threat types are returned
+        description: The threat type which will be returned in the data
         type: string
         enum:
           - url
           - attachment
           - messageText
-        required: false
+          - all
+        required: true
+        default: all
         example: url
       threat_status:
         title: Threat Status
-        description: The threat statuses which will be returned in the data. If no value is specified, active and cleared threats are returned
+        description: The threat statuses which will be returned in the data
         type: string
         enum:
           - active
           - cleared
           - falsePositive
-        required: false
+          - all
+        required: true
+        default: all
         example: active
     output:
       results:
@@ -907,4 +1107,37 @@ actions:
         title: Results
         description: Decoded URLs
         type: decoded_urls
+        required: true
+  fetch_forensics:
+    title: Fetch Forensics
+    description: Fetch Forensics allows users to pull detailed forensic evidence about individual threats or campaigns
+    input:
+      threat_id:
+        title: Threat ID
+        description: Threat identifier
+        type: string
+        required: false
+        example: 30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050
+      campaign_id:
+        title: Campaign ID
+        description: Campaign identifier
+        type: string
+        required: false
+        example: 42ec8b47-eb2d-75ed-bd01-32d63f8e8d4c
+      include_campaign_forensics:
+        title: Include Campaign Forensics
+        description: Include campaign forensics in threats. This parameter works only with Threat ID
+        type: boolean
+        required: false
+        example: false
+    output:
+      generated:
+        title: Generated
+        description: Generated threats
+        type: string
+        required: true
+      reports:
+        title: Reports
+        description: Reported threats
+        type: "[]report"
         required: true

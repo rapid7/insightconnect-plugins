@@ -1,0 +1,4 @@
+{
+  "message": "No API key supplied. Send the key using the 'API-Key' header",
+  "status": 401
+}

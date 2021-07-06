@@ -1,7 +1,7 @@
 {
-	"spec": "d1949f263d1194563a420dcaafe21a18",
-	"manifest": "efa7b9c5d5d20fbddb587ca5d9ec146e",
-	"setup": "28c467e75535a3857be41796c43332b2",
+	"spec": "e092ec6911b99164a93a254283fd8eaa",
+	"manifest": "c97d428ea39616ea1e9118f767a8c7e2",
+	"setup": "6dd44f319c3dc32f098d3d4290810ca4",
 	"schemas": [
 		{
 			"identifier": "close_ticket/schema.py",
