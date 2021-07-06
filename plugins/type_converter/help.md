@@ -396,7 +396,7 @@ Example output:
 
 ```
 {
-  "input": 123
+  "output": 123
 }
 ```
 
@@ -408,7 +408,7 @@ This action encodes an object to a string.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|input|object|None|True|Input variable|None|{"object":["rapid","7"],"rapid7":"value"}|
+|input|object|None|True|Input variable|None|{'object':['rapid','7'],'rapid7':'value'}|
 
 Example input:
 
@@ -431,7 +431,7 @@ Example output:
 
 ```
 {
-  "output": "{\"object\": [\"rapid\", \"7\"], \"rapid7\": \"value\"}"
+  "output": "{'object': ['rapid', '7'], 'rapid7': 'value'}"
 }
 ```
 
@@ -443,13 +443,13 @@ This action converts a string to a boolean. Case-insensitive true -> True, else 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|input|string|None|True|Input variable|None|True|
+|input|string|None|True|Input variable|None|true|
 
 Example input:
 
 ```
 {
-  "input": true
+  "input": "true"
 }
 ```
 
@@ -481,7 +481,7 @@ Example input:
 
 ```
 {
-  "input": 123.456
+  "input": "123.456"
 }
 ```
 
@@ -514,7 +514,7 @@ Example input:
 
 ```
 {
-  "input": 123,
+  "input": "123",
   "strip": true
 }
 ```
@@ -578,16 +578,13 @@ This action converts a string to an object.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|input|string|None|True|Input variable|None|{"object":["rapid","7"],"rapid7":"value"}|
+|input|string|None|True|Input variable|None|{'object':['rapid','7'],'rapid7':'value'}|
 
 Example input:
 
 ```
 {
-  "input": {
-    "object": ["rapid", "7"],
-    "rapid7": "value"
-  }
+  "input": "{'object':['rapid','7'], 'rapid7':'value'}"
 }
 ```
 
@@ -625,6 +622,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.8.1 - Help.md input examples updated
 * 1.8.0 - New action Array Match
 * 1.7.0 - New action Array Diff
 * 1.6.1 - Add Cloud Enabled tag
