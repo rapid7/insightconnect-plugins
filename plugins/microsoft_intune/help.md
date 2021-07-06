@@ -392,7 +392,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.4.0 - Add new actions Add Application to a Policy and Delete Application from from Policy
+* 1.4.0 - New actions Add Application to a Policy and Delete Application from Policy
 * 1.3.0 - Add new action Get Managed Apps
 * 1.2.2 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://docs.rapid7.com/insightconnect/microsoft-intune/)
 * 1.2.1 - Improve e-mail search in Search Devices action by performing an extended all device search for  `emailAddress` and `userPrincipalName` when email is not found
