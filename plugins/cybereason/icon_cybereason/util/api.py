@@ -31,10 +31,17 @@ class CybereasonAPI:
                 data="There is a problem connecting to Cybereason. Please check your credentials and permissions.",
             )
 
-    def isolate_machines(self, malop_id: str, pylum_ids: [str]) -> dict:
+    def isolate_machines(self, pylum_ids: [str], malop_id: str = None) -> dict:
         return self.send_request(
             "POST",
             "/rest/monitor/global/commands/isolate",
+            payload={"malopId": malop_id, "pylumIds": pylum_ids},
+        )
+
+    def un_isolate_machines(self, pylum_ids: [str], malop_id: str = None) -> dict:
+        return self.send_request(
+            "POST",
+            "/rest/monitor/global/commands/un-isolate",
             payload={"malopId": malop_id, "pylumIds": pylum_ids},
         )
 
@@ -63,9 +70,6 @@ class CybereasonAPI:
         )
 
     def get_sensor_details(self, identifier: str) -> dict:
-        if re.match("^(-?\d{10}\.-?\d{19})$", identifier):
-            return identifier
-
         sensors = self.send_request("POST", "/rest/sensors/query", payload=self.generate_sensor_filter(identifier))
 
         if sensors.get("totalResults") == 0:
@@ -185,6 +189,8 @@ class CybereasonAPI:
 
         if validators.ipv4(identifier):
             sensor_filter["filters"][0]["fieldName"] = "internalIpAddress"
+        elif re.match(r"^(-?\d{9,10}\.-?\d{19})$", identifier):
+            sensor_filter["filters"][0]["fieldName"] = "guid"
         else:
             sensor_filter["filters"][0]["fieldName"] = "machineName"
 
