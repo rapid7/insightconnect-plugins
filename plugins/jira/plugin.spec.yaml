@@ -8,7 +8,7 @@ support: rapid7
 cloud_ready: true
 status: []
 description: Automate the creation, search and management of issues, users, and alerting for Jira Software, Jira Server, and Jira ServiceDesk
-version: 6.0.7
+version: 6.0.8
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/jira
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -139,7 +139,7 @@ connection:
   api_key:
     title: API Key
     type: credential_secret_key
-    description: Jira API key when connecting to Jira Cloud or Jira user password when connecting to on-prem Jira server 
+    description: Jira API key when connecting to Jira Cloud or Jira user password when connecting to on-prem Jira server
     required: true
     example: 9de5069c5afe602b2ea0a04b66beb2c0
 actions:
