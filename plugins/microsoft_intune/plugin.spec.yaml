@@ -740,7 +740,7 @@ actions:
         required: false
   add_app_to_policy:
     title: Add Application to a Policy
-    description: Adds application to the given policy
+    description: Add an application to a given policy
     input:
       application_name:
         title: Application
