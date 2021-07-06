@@ -823,6 +823,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.0.1 - Add unit test for Submit URL for Scan action | Add error handling for HTTP 429 status code in Submit URL for Scan action
 * 3.0.0 - Major version bump to ensure awareness of a breaking change related to the addition of the `was_scan_skipped` output in Submit URL for Scan action in the previous version
 * 2.3.0 - Add logger when submitted domain is in blacklist for Submit URL for Scan action
 * 2.2.0 - Add new input Input Type in Search action

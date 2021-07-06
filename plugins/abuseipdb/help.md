@@ -337,6 +337,7 @@ There's a rate limit on the free API service. The following error messages `429 
 
 # Version History
 
+* 5.0.7 - Fix error message in IPv4 search
 * 5.0.6 - Fix none type error in Check CIDR action
 * 5.0.5 - Correct spelling in help.md
 * 5.0.4 - Update to v4 Python plugin runtime
