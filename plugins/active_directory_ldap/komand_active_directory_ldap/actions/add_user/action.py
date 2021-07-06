@@ -56,7 +56,8 @@ class AddUser(komand.Action):
             "userPrincipalName": user_principal_name,
         }
 
-        parameters.update(additional_parameters)
+        if additional_parameters:
+            parameters.update(additional_parameters)
         log_parameters = parameters
         log_parameters.pop("userPassword")
         self.logger.info(log_parameters)
