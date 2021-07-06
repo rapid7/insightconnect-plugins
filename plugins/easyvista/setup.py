@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="easyvista-rapid7-plugin",
-      version="1.0.0",
+      version="1.0.1",
       description="EasyVista Service Manager platform supports even the most complex requirements, while bringing a new level of simplicity, agility, and mobility required to make cloud based IT Service Management (ITSM) software easy to use and easy to deliver. Using the EasyVista plugin for Rapid7 InsightConnect, users can manage the creation, update, search and closure of incident, service request, problem or event tickets",
       author="rapid7",
       author_email="",
