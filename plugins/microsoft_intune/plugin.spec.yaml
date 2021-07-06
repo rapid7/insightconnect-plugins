@@ -797,6 +797,6 @@ actions:
     output:
       success:
         title: Success
-        description: Return true if action was successfully performed on policy
+        description: True if action was successfully performed on policy
         type: boolean
         required: true
