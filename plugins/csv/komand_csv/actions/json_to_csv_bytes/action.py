@@ -16,5 +16,6 @@ class JsonToCsvBytes(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        encoded = base64.encodebytes(json_to_csv(params.get(Input.JSON)).encode())
-        return {Output.CSV_BYTES: encoded.decode()}
+        encoded_string = json_to_csv(params.get(Input.JSON)).encode()
+        encoded_bytes = base64.encodebytes(encoded_string)
+        return {Output.CSV_BYTES: encoded_bytes.decode()}

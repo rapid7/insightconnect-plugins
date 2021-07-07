@@ -153,13 +153,20 @@ def csv_to_dict(s, action):
 def json_to_csv(input_json: dict) -> str:
     output = StringIO()
     csv_writer = csv.writer(output)
+    keys = []
 
-    count = 0
+    # get all keys from json
     for entry in input_json:
-        if count == 0:
-            header = entry.keys()
-            csv_writer.writerow(header)
-            count += 1
-        csv_writer.writerow(entry.values())
+        keys.extend(list(entry.keys()))
+
+    # remove duplicated keys
+    keys = list(dict.fromkeys(keys))
+
+    if keys:
+        csv_writer.writerow(keys)
+        for entry in input_json:
+            for i in range(len(keys)):
+                entry[keys[i]] = entry.get(keys[i], "")
+            csv_writer.writerow(entry.values())
 
     return output.getvalue()
