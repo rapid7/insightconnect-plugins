@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Deletes application from the given policy"
+    DESCRIPTION = "Delete an application from a given policy"
 
 
 class Input:
@@ -67,7 +67,7 @@ class DeleteAppFromPolicyOutput(insightconnect_plugin_runtime.Output):
     "success": {
       "type": "boolean",
       "title": "Success",
-      "description": "Return true if action was successfully performed on policy",
+      "description": "True if action was successfully performed on policy",
       "order": 1
     }
   },
