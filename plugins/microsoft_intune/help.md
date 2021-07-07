@@ -58,7 +58,7 @@ Example input:
 
 #### Delete Application from Policy
 
-This action deletes application from the given policy.
+This action delete an application from a given policy.
 
 ##### Input
 
@@ -82,7 +82,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|boolean|True|Return true if action was successfully performed on policy|
+|success|boolean|True|True if action was successfully performed on policy|
 
 Example output:
 
@@ -94,7 +94,7 @@ Example output:
 
 #### Add Application to a Policy
 
-This action is used to add application to a policy.
+This action is used to add an application to a given policy.
 
 ##### Input
 

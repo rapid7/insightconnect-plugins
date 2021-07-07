@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Adds application to the given policy"
+    DESCRIPTION = "Add an application to a given policy"
 
 
 class Input:

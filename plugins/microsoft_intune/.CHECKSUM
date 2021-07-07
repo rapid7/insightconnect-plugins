@@ -1,11 +1,11 @@
 {
-	"spec": "94da196d47c22fc20c0f2b581eaf6778",
+	"spec": "364179c9750944796d44f7a06204ebfc",
 	"manifest": "fd1ef9271ccb382a8dbb58541346e434",
 	"setup": "99f3f88951bd1b7d4df8a47b5a5c47e7",
 	"schemas": [
 		{
 			"identifier": "add_app_to_policy/schema.py",
-			"hash": "41c3504c249571d50f374f5034383403"
+			"hash": "74fb2bb8b32acef53811fb6415dc78c1"
 		},
 		{
 			"identifier": "antivirus_scan/schema.py",
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "delete_app_from_policy/schema.py",
-			"hash": "2195421a77d67a23568fdcb8cbdc98ae"
+			"hash": "54337b96b9815f0559de50609ba92a17"
 		},
 		{
 			"identifier": "get_managed_apps/schema.py",
