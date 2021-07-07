@@ -54,6 +54,7 @@ demo-*.tar.gz
 # Ignore .json files
 *.json
 **/*.json
+!/plugins/*/unit_test/payloads/*.json
 
 # Ignore archives
 **/*.rar
