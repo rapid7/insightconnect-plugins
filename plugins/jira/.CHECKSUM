@@ -1,7 +1,7 @@
 {
-	"spec": "238f9727493554b78c907152565a99c3",
-	"manifest": "e2f8c84f562c14c6604d2f9bd56610da",
-	"setup": "42b6443e3b4ecfb4af1e797e1687dcee",
+	"spec": "3bcd6938a4b3a8f70629e216104fd843",
+	"manifest": "9c2c661ed7090f582064dde0d7028477",
+	"setup": "ff5051f6ab4663e2ee160dfc5897d3c9",
 	"schemas": [
 		{
 			"identifier": "assign_issue/schema.py",

@@ -298,8 +298,8 @@ Example input:
   "subject": "A phishy email",
   "threat_status": "active",
   "threat_type": "url",
-  "time_end": "2021-04-21T18:00:00Z",
-  "time_start": "2021-04-21T17:00:00Z"
+  "time_end": "2021-04-20T22:00:00Z",
+  "time_start": "2021-04-20T21:00:00Z"
 }
 ```
 
@@ -424,8 +424,8 @@ Example input:
   "subject": "A phishy email",
   "threat_status": "active",
   "threat_type": "url",
-  "time_end": "2021-04-21T13:00:00Z",
-  "time_start": "2021-04-21T12:00:00Z"
+  "time_end": "2021-04-20T22:00:00Z",
+  "time_start": "2021-04-20T21:00:00Z"
 }
 ```
 
@@ -549,8 +549,8 @@ Example input:
 {
   "threat_status": "active",
   "threat_type": "url",
-  "time_end": "2021-04-21T12:00:00Z",
-  "time_start": "2021-04-21T11:00:00Z"
+  "time_end": "2021-04-20T22:00:00Z",
+  "time_start": "2021-04-20T21:00:00Z"
 }
 ```
 
@@ -666,8 +666,8 @@ Example input:
 ```
 {
   "threat_status": "active",
-  "time_end": "2021-04-21T13:00:00Z",
-  "time_start": "2021-04-21T12:00:00Z",
+  "time_end": "2021-04-20T22:00:00Z",
+  "time_start": "2021-04-20T21:00:00Z",
   "url": "https://example.com"
 }
 ```
@@ -975,6 +975,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.1.1 - Fix decoding URLs with quotable encoding in URL Decode action
 * 3.1.0 - Add new action Fetch Forensics
 * 3.0.0 - Add `all` value to Threat Type and Threat Status inputs in Get Blocked Clicks, Get Permitted Clicks, Get Blocked Messages, Get Delivered Threats, Get All Threats actions
 * 2.0.0 - Add new actions Get Blocked Clicks, Get Permitted Clicks, Get Blocked Messages, Get Delivered Threats, Get All Threats, Get Top Clickers, URL Decode
