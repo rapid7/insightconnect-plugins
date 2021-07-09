@@ -9,7 +9,7 @@ status: []
 description: Generate Common Hashes from a File or String
 version: 2.0.4
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/hashit
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/hashit
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
 - hashes
