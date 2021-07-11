@@ -1753,7 +1753,7 @@ connection:
     description: Username and password
     type: credential_username_password
     required: true
-    example: "{'username': 'user1', 'password': 'mypassword'}"
+    example: '{"username": "user1", "password": "mypassword"}'
 actions:
   scan:
     title: Scan
@@ -2028,7 +2028,7 @@ actions:
         title: Search Criteria
         description: Tag search Criteria - options documentation https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria
         type: object
-        example: '{"field": "risk-score","operator": "is","value": "9"}'
+        example: '{"filters": [{"field": "risk-score","operator": "is-not","value": "1"}],"match": "any"}'
         required: false
     output:
       id:
@@ -2313,7 +2313,7 @@ actions:
         title: Search Criteria
         description: Tag search criteria - options documentation - https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria
         type: object
-        example: '{"field": "risk-score","operator": "is","value": "9"}'
+        example: '{"filters": [{"field": "risk-score","operator": "is-not","value": "1"}],"match": "any"}'
         required: true
     output:
       links:
@@ -2329,7 +2329,7 @@ actions:
         title: Search Criteria
         description: Tag search criteria - options documentation - https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria
         type: object
-        example: '{"field": "risk-score","operator": "is","value": "9"}'
+        example: '{"filters": [{"field": "risk-score","operator": "is-not","value": "1"}],"match": "any"}'
         required: true
       size:
         title: Size
@@ -2772,7 +2772,7 @@ actions:
         title: Search Criteria
         description: Asset group search criteria - options documentation - https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria
         type: object
-        example: '{"field": "risk-score","operator": "is","value": "9"}'
+        example: '{"filters": [{"field": "risk-score","operator": "is-not","value": "1"}],"match": "any"}'
         required: false
       type:
         title: Type
@@ -2819,7 +2819,7 @@ actions:
         title: Search Criteria
         description: Asset group search criteria - options documentation - https://help.rapid7.com/insightvm/en-us/api/#section/Responses/SearchCriteria
         type: object
-        example: '{"field": "risk-score","operator": "is","value": "9"}'
+        example: '{"filters": [{"field": "risk-score","operator": "is-not","value": "1"}],"match": "any"}'
         required: true
     output:
       links:
