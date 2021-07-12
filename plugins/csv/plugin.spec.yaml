@@ -3,9 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: csv
 title: CSV
-description: "CSV (Comma Separated Values) is a simple data format for storing data. This plugin allows one to
-  extract fields from CSV strings and files"
-version: 1.1.6
+description: CSV (Comma Separated Values) is a simple data format for storing data. This plugin allows one to extract fields from CSV strings and files
+version: 2.0.0
 vendor: rapid7
 support: community
 status: []
@@ -18,7 +17,7 @@ tags:
 - utilities
 hub_tags:
   use_cases: [data_utility]
-  keywords: [csv, utilities, cloud_enabled]
+  keywords: [csv, cloud_enabled]
   features: []
 actions:
   filter_string:
@@ -82,19 +81,35 @@ actions:
         type: '[]object'
         description: List of objects
         required: true
-  json_to_csv:
-    title: JSON to CSV
-    description: Convert a JSON array to CSV
+  json_to_csv_bytes:
+    title: JSON to CSV Bytes
+    description: Convert a JSON array to CSV bytes
     input:
       json:
         title: JSON
         type: '[]object'
-        description: JSON array to convert to CSV
+        description: JSON array to convert to CSV bytes
         required: true
-        example: "[{\"column1\": \"value1\", \" column2\": \" value2\"}]"
+        example: "[{\"column1\": \"value1\",\"column2\": \"value2\",\"column3\": \"value3\"},{\"column1\": \"value4\",\"column2\": \"value5\",\"column3\": \"value6\"}]"
     output:
-      csv:
-        title: CSV
+      csv_bytes:
+        title: CSV Bytes
         type: bytes
         required: true
         description: Resulting CSV file from the conversion
+  json_to_csv_string:
+    title: JSON to CSV String
+    description: Convert a JSON array to CSV string
+    input:
+      json:
+        title: JSON
+        type: '[]object'
+        description: JSON array to convert to CSV string
+        required: true
+        example: "[{\"column1\": \"value1\",\"column2\": \"value2\",\"column3\": \"value3\"},{\"column1\": \"value4\",\"column2\": \"value5\",\"column3\": \"value6\"}]"
+    output:
+      csv_string:
+        title: CSV String
+        type: string
+        required: true
+        description: Resulting CSV string from the conversion
