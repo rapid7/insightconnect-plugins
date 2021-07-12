@@ -14,7 +14,7 @@ hub_tags:
   keywords: [cylance, protect, edr, blacklist]
   features: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/cylanceprotect
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/cylanceprotect
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.cylance.com
 types:
