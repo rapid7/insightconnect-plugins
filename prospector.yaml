@@ -1,2 +1,27 @@
 ignore-patterns:
   - (schema\.py|setup\.py|__init__\.py|ec2_investigations)
+pylint:
+  disable:
+    - import-error
+    - dangerous-default-value
+    - undefined-variable
+    - too-many-locals
+    - too-many-branches
+    - unused-import
+    - line-too-long
+    - too-many-nested-blocks
+    - multiple-imports
+    - import-outside-toplevel
+    - unused-variable
+    - unused-argument
+    - bad-super-call
+    - duplicate-string-formatting-argument
+    - too-many-statements
+    - useless-return
+    - consider-using-in
+    - consider-using-enumerate
+    - unnecessary-lambda
+    - implicit-str-concat
+    - useless-object-inheritance
+    - simplifiable-if-expression
+    - no-else-return

@@ -19,4 +19,4 @@ jobs:
 
       - name: Prospector
         run: |
-          prospector --profile prospector.yaml --tool bandit --tool mccabe
+          prospector --profile prospector.yaml --tool bandit --tool mccabe --tool pylint --tool pyflakes
