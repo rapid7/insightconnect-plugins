@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Convert a JSON array to CSV"
+    DESCRIPTION = "Convert a JSON array to CSV bytes"
 
 
 class Input:
@@ -12,10 +12,10 @@ class Input:
     
 
 class Output:
-    CSV = "csv"
+    CSV_BYTES = "csv_bytes"
     
 
-class JsonToCsvInput(insightconnect_plugin_runtime.Input):
+class JsonToCsvBytesInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
@@ -24,7 +24,7 @@ class JsonToCsvInput(insightconnect_plugin_runtime.Input):
     "json": {
       "type": "array",
       "title": "JSON",
-      "description": "JSON array to convert to CSV",
+      "description": "JSON array to convert to CSV bytes",
       "items": {
         "type": "object"
       },
@@ -41,15 +41,15 @@ class JsonToCsvInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class JsonToCsvOutput(insightconnect_plugin_runtime.Output):
+class JsonToCsvBytesOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "csv": {
+    "csv_bytes": {
       "type": "string",
-      "title": "CSV",
+      "title": "CSV Bytes",
       "displayType": "bytes",
       "description": "Resulting CSV file from the conversion",
       "format": "bytes",
@@ -57,7 +57,7 @@ class JsonToCsvOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "csv"
+    "csv_bytes"
   ]
 }
     """)
