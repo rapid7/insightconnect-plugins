@@ -41,8 +41,8 @@ class Search(komand.Action):
         search_after = None
         results = []
         size = 10000
-        has_more = False
-        for i in range(1, 9999):
+        has_more = True
+        while has_more:
             query_params = [
                 f"q={search_query}",
                 f"size={size}",
