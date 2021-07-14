@@ -24,7 +24,7 @@ jobs:
           CHANGED_FILES=()
           for OUTPUT in $(git diff --no-commit-id --name-only -r HEAD..origin/master)
           do
-            if ! [[ -d ${OUTPUT} ]] && [[ ${OUTPUT} == *.py ]] && ! [[ ${OUTPUT} == __init__.py ]]
+            if ! [[ -d ${OUTPUT} ]] && [[ ${OUTPUT} == *.py ]]
             then
               CHANGED_FILES+=( ${OUTPUT} )
             fi
