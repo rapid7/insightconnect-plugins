@@ -9,7 +9,7 @@ vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/checkpoint_ngfw
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/checkpoint_ngfw
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   docs_url: https://docs.rapid7.com/insightconnect/checkpoint-ngfw
 tags:

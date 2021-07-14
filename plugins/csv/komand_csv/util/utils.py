@@ -1,6 +1,7 @@
 import csv
 import json
 import re
+from io import StringIO
 
 
 def csv_syntax_good(csv_string):
@@ -147,3 +148,25 @@ def csv_to_dict(s, action):
         ret_list.append(json.loads(json.dumps(row)))
 
     return ret_list
+
+
+def json_to_csv(input_json: dict) -> str:
+    output = StringIO()
+    csv_writer = csv.writer(output)
+    keys = []
+
+    # get all keys from json
+    for entry in input_json:
+        keys.extend(list(entry.keys()))
+
+    # remove duplicated keys
+    keys = list(dict.fromkeys(keys))
+
+    if keys:
+        csv_writer.writerow(keys)
+        for entry in input_json:
+            for i in range(len(keys)):
+                entry[keys[i]] = entry.get(keys[i], "")
+            csv_writer.writerow(entry.values())
+
+    return output.getvalue()
