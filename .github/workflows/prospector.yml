@@ -29,4 +29,7 @@ jobs:
               CHANGED_FILES+=( ${OUTPUT} )
             fi
           done
-          prospector ${CHANGED_FILES[*]} --profile prospector.yaml --tool bandit --tool mccabe --tool pylint --tool pyflakes
+          if ! [[ ${#arr[@]} == 0 ]]
+          then
+            prospector ${CHANGED_FILES[*]} --profile prospector.yaml --tool bandit --tool mccabe --tool pylint --tool pyflakes
+          fi
