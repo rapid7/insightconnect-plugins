@@ -1,2 +1,4 @@
 ignore-patterns:
   - (schema\.py|setup\.py|__init__\.py|ec2_investigations)
+ignore:
+  - (^|/)\.
