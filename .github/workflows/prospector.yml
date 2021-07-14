@@ -6,7 +6,9 @@ jobs:
   prospector:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Set up Python 3.7
         uses: actions/setup-python@v2
@@ -17,6 +19,7 @@ jobs:
         run: |
           pip install prospector[with_bandit]
 
+      - run: echo "CHANGED_FILES=$(git diff --name-only ${{ github.event.before }}..${{ github.event.after }})" >> $GITHUB_ENV
       - name: Prospector
         run: |
-          prospector --profile prospector.yaml --tool bandit --tool mccabe --tool pylint --tool pyflakes
+          prospector CHANGED_FILES --profile prospector.yaml --tool bandit --tool mccabe --tool pylint --tool pyflakes
