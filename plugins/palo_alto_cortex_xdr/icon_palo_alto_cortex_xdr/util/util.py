@@ -1,6 +1,6 @@
 import time
 
-from typing import List, Dict, Iterable
+from typing import List, Dict
 from insightconnect_plugin_runtime import Trigger
 
 
@@ -17,7 +17,7 @@ class Util:
         output_type: str,
         last_event_processed_time_ms: int,
         time_field: str = "creation_time",
-    ) -> Iterable[int]:
+    ) -> [int]:
         for item in items:
             item_time = item.get(time_field, -1)
             # Check incident time to ensure we don't send dupes on to the platform
