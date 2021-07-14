@@ -24,4 +24,7 @@ jobs:
           for OUTPUT in $(git diff --no-commit-id --name-only -r HEAD..origin/master)
           do
             if ! [[ -d ${OUTPUT} ]]
+            then
               prospector ${OUTPUT} --profile prospector.yaml --tool bandit --tool mccabe --tool pylint --tool pyflakes
+            fi
+          done
