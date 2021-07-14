@@ -19,7 +19,6 @@ jobs:
         run: |
           pip install prospector[with_bandit]
 
-      - run: echo "CHANGED_FILES=$(git diff-tree --no-commit-id --name-only -r HEAD..origin/master)"
       - name: Prospector
         run: |
-          prospector CHANGED_FILES --profile prospector.yaml --tool bandit --tool mccabe --tool pylint --tool pyflakes
+          prospector $(git diff-tree --no-commit-id --name-only -r HEAD..origin/master) --profile prospector.yaml --tool bandit --tool mccabe --tool pylint --tool pyflakes
