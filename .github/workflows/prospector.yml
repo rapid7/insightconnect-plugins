@@ -26,7 +26,7 @@ jobs:
           do
             if ! [[ -d ${OUTPUT} ]] && [[ ${OUTPUT} == *.py ]] && ! [[ ${OUTPUT} == __init__.py ]]
             then
-              CHANGED_FILES+= ( ${OUTPUT} )
+              CHANGED_FILES+=( ${OUTPUT} )
             fi
           done
           prospector CHANGED_FILES --profile prospector.yaml --tool bandit --tool mccabe --tool pylint --tool pyflakes
