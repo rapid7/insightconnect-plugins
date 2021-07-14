@@ -9,7 +9,7 @@ status: []
 description: Manage Box users and files
 version: 2.2.2
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/box
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/box
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.box.com
 tags:

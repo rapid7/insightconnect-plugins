@@ -25,6 +25,92 @@ _This plugin does not contain a connection._
 
 ### Actions
 
+#### JSON to CSV String
+
+This action is used to convert a JSON array to CSV string.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|json|[]object|None|True|JSON array to convert to CSV string|None|[{"column1": "value1","column2": "value2","column3": "value3"},{"column1": "value4","column2": "value5","column3": "value6"}]|
+
+Example input:
+
+```
+{
+  "json": [
+    {
+      "column1": "value1",
+      "column2": "value2",
+      "column3": "value3"
+    },
+    {
+      "column1": "value4",
+      "column2": "value5",
+      "column3": "value6"
+    }
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|csv_string|string|True|Resulting CSV string from the conversion|
+
+Example output:
+
+```
+{
+  "csv": "column1,column2,column3\r\nvalue1,value2,value3\r\nvalue4,value5,value6\r\n"
+}
+```
+
+#### JSON to CSV Bytes
+
+This action is used to convert a JSON array to CSV bytes.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|json|[]object|None|True|JSON array to convert to CSV bytes|None|[{"column1": "value1","column2": "value2","column3": "value3"},{"column1": "value4","column2": "value5","column3": "value6"}]|
+
+Example input:
+
+```
+{
+  "json": [
+    {
+      "column1": "value1",
+      "column2": "value2",
+      "column3": "value3"
+    },
+    {
+      "column1": "value4",
+      "column2": "value5",
+      "column3": "value6"
+    }
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|csv_bytes|bytes|True|Resulting CSV file from the conversion|
+
+Example output:
+
+```
+{
+  "csv": "Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMNCnZhbHVlMSx2YWx1ZTIsdmFsdWUzDQp2YWx1ZTQsdmFs\ndWU1LHZhbHVlNg0K\n"
+}
+```
+
 #### Filter Bytes
 
 This action is used to extract fields from a user supplied CSV file expressed a base64 encoded data (bytes) and return a new CSV file
@@ -149,40 +235,6 @@ Example output:
 
 ```
 
-#### JSON to CSV
-
-This action is used to convert a JSON array to CSV.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|json|[]object|None|True|JSON array to convert to CSV|None|[{"column1": "value1", " column2": " value2"}]|
-
-Example input:
-
-```
-{
-  "json": "[{\"column1\": \"value1\", \" column2\": \" value2\"}]"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|csv|bytes|True|Resulting CSV file from the conversion|
-
-Example output:
-
-```
-
-{
-  "csv": "QXNzZXQgT1MgRmFtaWx5LEFzc2V0IE9TIE5hbWUsQXNzZXQgSVAgQWRkcmVzcyxBc3NldCBOYW1lcyxBc3NldCBPUyBWZXJzaW9uDQpNaWNyb3NvZnQgV2luZG93cyxNaWNyb3NvZnQgV2luZG93cyBTZXJ2ZXIgMjAxMiBTdGFuZGFyZCBFZGl0aW9uLDEwLjQuMjMuNDYsIkJJR0ZJWC1DTFQtVzEyLGJpZ2ZpeC1jbHQtdzEyLnZ1bG4ubGF4LnJhcGlkNy5jb20iLA0KTWljcm9zb2Z0IFdpbmRvd3MsTWljcm9zb2Z0IFdpbmRvd3MgU2VydmVyIDIwMTIgU3RhbmRhcmQgRWRpdGlvbiwxMC40LjIzLjY5LCJCSUdGSVgtU1JWLGJpZ2ZpeC1zcnYudnVsbi5sYXgucmFwaWQ3LmNvbSIsDQpNaWNyb3NvZnQgV2luZG93cyxNaWNyb3NvZnQgV2luZG93cyBTZXJ2ZXIgMjAxMiBTdGFuZGFyZCBFZGl0aW9uLDEwLjQuMjMuNjksIkJJR0ZJWC1TUlYsYmlnZml4LXNydi52dWxuLmxheC5yYXBpZDcuY29tIiwNCk1pY3Jvc29mdCBXaW5kb3dzLE1pY3Jvc29mdCBXaW5kb3dzIDcgRW50ZXJwcmlzZSBFZGl0aW9uLDEwLjQuMjMuNTUsIkJJR0ZJWC1DTFQtVzcsYmlnZml4LWNsdC13Ny52dWxuLmxheC5yYXBpZDcuY29tIixTUDENCg == "
-}
-
-```
-
 ### Triggers
 
 _This plugin does not contain any triggers._
@@ -198,6 +250,7 @@ CSV files must not have non-CSV data such as comments.
 
 # Version History
 
+* 2.0.0 - Add JSON to CSV String action | Rename JSON to CSV action to JSON to CSV Bytes
 * 1.1.6 - Update to v4 Python plugin runtime
 * 1.1.5 - Use input and output constants | Change docker image from `komand/python-2-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Changed `Exception` to `PluginException`
 * 1.1.4 - New spec and help.md format for the Extension Library | Add missing title values for actions in plugin.spec.yaml
