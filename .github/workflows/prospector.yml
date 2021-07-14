@@ -21,4 +21,4 @@ jobs:
 
       - name: Prospector
         run: |
-          prospector $(git diff-tree --no-commit-id --name-only -r HEAD..origin/master) --profile prospector.yaml --tool bandit --tool mccabe --tool pylint --tool pyflakes
+          prospector $(git diff --no-commit-id --name-only -r HEAD..origin/master) --profile prospector.yaml --tool bandit --tool mccabe --tool pylint --tool pyflakes
