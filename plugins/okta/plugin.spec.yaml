@@ -9,7 +9,7 @@ status: []
 description: Secure identity management and single sign-on to any application
 version: 3.6.3
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/okta
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/okta
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://okta.com
 tags:
