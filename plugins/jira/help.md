@@ -1143,6 +1143,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 6.0.8 - Fix issue where exception type was wrong in Create Issue
 * 6.0.7 - Fix issue in Create Issue and Attach Issue actions where adding attachments failed
 * 6.0.6 - Fix build issue
 * 6.0.5 - Add more documentation on authentication
