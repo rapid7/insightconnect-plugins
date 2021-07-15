@@ -4,7 +4,7 @@ products: [insightconnect]
 name: cisco_asa
 title: Cisco Adaptive Security Appliance
 description: The Cisco ASA plugin allows you to automate the management of network objects
-version: 1.4.1
+version: 1.4.2
 vendor: rapid7
 support: community
 status: []
@@ -12,12 +12,13 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/cisco_asa
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.cisco.com
+  docs_url: https://docs.rapid7.com/insightconnect/cisco-asa/
 tags:
 - asa
 - firewall
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [cisco, asa, firewall]
+  keywords: [cisco, firewall]
   features: []
 
 types:
