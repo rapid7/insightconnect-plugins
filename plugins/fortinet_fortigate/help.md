@@ -651,6 +651,7 @@ Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51
 
 # Version History
 
+* 5.1.1 - Add `docs_url` in plugin spec | Update `source_url` in plugin spec
 * 5.1.0 - Support for IPV6 in all actions
 * 5.0.0 - Improve input handling to allow IPs, CIDRs, and subnet masks in actions | Fix output of Get Address Objects action to return usable data | Update Get Address Objects action to allow for additional search parameters
 * 4.0.4 - Improve error messaging around HTTP 401 status codes to indicate that the InsightConnect orchestrator IP address not being in the trusted host list may be the cause
