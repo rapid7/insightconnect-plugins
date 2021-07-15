@@ -18,6 +18,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install prospector[with_bandit]
+          pip install requirements.txt
 
       - name: Prospector
         run: |
