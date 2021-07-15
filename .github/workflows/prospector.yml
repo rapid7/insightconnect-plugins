@@ -34,5 +34,5 @@ jobs:
             prospector --profile prospector.yaml ${CHANGED_FILES[*]} --tool bandit --tool mccabe --tool pylint --tool pyflakes
             echo "Prospector ran on: "${CHANGED_FILES[*]}
           else
-            echo "No python files changed, so prospector was not run. Dif received: "${OUTPUT[*]}
+            echo "No python files changed, so prospector was not run. Differences from Master branch found in: "${OUTPUT[*]}
           fi
