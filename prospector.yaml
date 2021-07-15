@@ -6,3 +6,6 @@ pylint:
     - import-error
     - bad-super-call
     - line-too-long
+pyflakes:
+  disable:
+    - F401
