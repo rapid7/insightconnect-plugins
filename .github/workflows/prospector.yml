@@ -29,10 +29,10 @@ jobs:
               CHANGED_FILES+=( ${OUTPUT} )
             fi
           done
-          if ! [[ ${#arr[@]} == 0 ]]
+          if ! [[ ${CHANGED_FILES[*]} == 0 ]]
           then
             prospector ${CHANGED_FILES[*]} --profile prospector.yaml --tool bandit --tool mccabe --tool pylint --tool pyflakes
             echo "Prospector ran on: "${CHANGED_FILES[*]}
           else
-            echo "No python files changed, so prospector was not run."
+            echo "No python files changed, so prospector was not run. Dif received: "${OUTPUT[*]}
           fi
