@@ -1,7 +1,8 @@
 ignore-patterns:
   - (schema\.py|setup\.py|__init__\.py|ec2_investigations)
 pylint:
-  diasble:
+  disable:
     - unused-import
     - import-error
     - bad-super-call
+    - line-too-long
