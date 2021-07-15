@@ -32,4 +32,7 @@ jobs:
           if ! [[ ${#arr[@]} == 0 ]]
           then
             prospector ${CHANGED_FILES[*]} --profile prospector.yaml --tool bandit --tool mccabe --tool pylint --tool pyflakes
+            echo "Prospector ran on: "${CHANGED_FILES[*]}
+          else
+            echo "No python files changed, so prospector was not run."
           fi
