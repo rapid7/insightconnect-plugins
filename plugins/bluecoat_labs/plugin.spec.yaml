@@ -9,7 +9,7 @@ status: []
 description: The Bluecoat Labs plugins enables submissions of suspicous URLs to be reviewed by Bluecoat Labs
 version: 2.0.1
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/bluecoat_labs
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/bluecoat_labs
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.symantec.com
 tags:

@@ -32,7 +32,13 @@ class Query(komand.Action):
         if not attributes:
             attributes = [ldap3.ALL_ATTRIBUTES, ldap3.ALL_OPERATIONAL_ATTRIBUTES]
 
-        conn.search(search_base=params.get(Input.SEARCH_BASE), search_filter=escaped_query, attributes=attributes)
+        conn.extend.standard.paged_search(
+            search_base=params.get(Input.SEARCH_BASE),
+            search_filter=escaped_query,
+            attributes=attributes,
+            paged_size=100,
+            generator=False,
+        )
 
         result_list_json = conn.response_to_json()
         result_list_object = json.loads(result_list_json)
