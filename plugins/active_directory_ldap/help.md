@@ -640,6 +640,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 5.2.2 - Add automatic pagination in Query Group Membership and Query actions
 * 5.2.1 - Add default prefix `ldap://` and `ldaps://` to provided host
 * 5.2.0 - New action Query Group Membership
 * 5.1.0 - Update error handling in Add User, Force Password Reset, Reset Password actions | Update connection.py to raise PluginException rather than ConnectionTestException
