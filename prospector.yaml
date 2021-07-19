@@ -6,6 +6,8 @@ pylint:
     - import-error
     - bad-super-call
     - line-too-long
+    - dangerous-default-value
+    - too-many-locals
 pyflakes:
   disable:
     - F401
