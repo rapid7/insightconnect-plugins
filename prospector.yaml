@@ -1,6 +1,6 @@
 ignore-patterns:
-  - (schema\.py|setup\.py|__init__\.py|ec2_investigations)
-  - unit_test\/
+  - unit_test
+  - (schema\.py|setup\.py|__init__\.py|ec2_investigations)  
   
 pylint:
   disable:
