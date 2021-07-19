@@ -1,5 +1,7 @@
+ignore-paths:
+  - unit_test
+
 ignore-patterns:
-  - (^|/)unit_test(/|$)
   - (schema\.py|setup\.py|__init__\.py|ec2_investigations)  
   
 pylint:
