@@ -1,7 +1,7 @@
 {
-	"spec": "61ae23348a3fe706008604f65cbfdbfc",
-	"manifest": "88767afca5c159ab61a87bafcce410bd",
-	"setup": "d8722f5462e02f587e09f88a12cd40f5",
+	"spec": "592ddb8566ffc0ca8cc6cf2aa8f1a8e5",
+	"manifest": "ccdff41074087d57cf1ff2bb5a9254f3",
+	"setup": "969ddf9eea15226b7d7442c2281ace6f",
 	"schemas": [
 		{
 			"identifier": "filter_bytes/schema.py",
@@ -12,8 +12,12 @@
 			"hash": "f2f8e695a19ff66194fc8ea905b4104b"
 		},
 		{
-			"identifier": "json_to_csv/schema.py",
-			"hash": "ee4124ebc9bbbf2a7c0bf390dbc41b6a"
+			"identifier": "json_to_csv_bytes/schema.py",
+			"hash": "73bdc2f88543f4191dee3fa87951e658"
+		},
+		{
+			"identifier": "json_to_csv_string/schema.py",
+			"hash": "db1845d963b171e838abe191ab883d9a"
 		},
 		{
 			"identifier": "to_json/schema.py",

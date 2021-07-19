@@ -10,7 +10,7 @@ support: rapid7
 status: []
 enable_cache: false
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/trendmicro_apex
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/trendmicro_apex
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.trendmicro.com/en_ca/business/products/user-protection/sps/endpoint.html
 tags:
