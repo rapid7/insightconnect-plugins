@@ -4,7 +4,7 @@ products: [insightconnect]
 name: palo_alto_pan_os
 title: Palo Alto Firewall
 description: Manage Palo Alto Networks firewall devices
-version: 6.1.1
+version: 6.1.2
 vendor: rapid7
 support: rapid7
 status: []
@@ -12,13 +12,14 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/palo_alto_pan_os
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.paloaltonetworks.com/
+  docs_url: https://docs.rapid7.com/insightconnect/palo-alto-firewall/
 tags:
 - pan os
 - firewall
 - palo alto
 hub_tags:
   use_cases: [asset_inventory, threat_detection_and_response]
-  keywords: [pan os, firewall, palo alto]
+  keywords: [pan_os, firewall, palo_alto]
   features: []
 types:
   config:
