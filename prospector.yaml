@@ -1,14 +1,16 @@
-ignore-patterns:
-  - (schema\.py|setup\.py|__init__\.py|ec2_investigations|unit_test)
 pylint:
   disable:
-    - blacklisted-name
     - unused-import
     - import-error
     - bad-super-call
     - line-too-long
     - dangerous-default-value
     - too-many-locals
+  ignore-patterns:
+    - (schema\.py|setup\.py|__init__\.py|ec2_investigations|unit_test)
+
 pyflakes:
+  ignore-patterns:
+    - (schema\.py|setup\.py|__init__\.py|ec2_investigations|unit_test)
   disable:
     - F401
