@@ -68,7 +68,7 @@ class Connection(komand.Connection):
         with SQLConnection(self.conn_str) as conn:
             try:
                 conn.session.execute("select 1")
-                return True
+                return {"status": "Success"}
             except Exception as e:
                 raise ConnectionTestException(
                     cause="Unable to connect to the server.", assistance="Check connection credentials.", data=e

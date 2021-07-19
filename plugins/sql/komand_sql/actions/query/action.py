@@ -3,6 +3,7 @@ from .schema import QueryInput, QueryOutput, Input, Output
 
 # Custom imports below
 from komand_sql.util.util import generate_results
+from komand_sql.connection import connection
 
 
 class Query(komand.Action):
@@ -12,7 +13,7 @@ class Query(komand.Action):
         )
 
     def run(self, params={}):
-        with self.connection.SQLConnection(self.connection.conn_str) as s:
+        with connection.SQLConnection(self.connection.conn_str) as s:
             try:
                 results = generate_results(
                     self.connection.type,
