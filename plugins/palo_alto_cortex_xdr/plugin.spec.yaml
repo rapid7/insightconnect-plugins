@@ -969,7 +969,7 @@ actions:
         type: string
         description: Endpoint ID
         required: true
-        example: SOMEENDPOINT
+        example: example_ID
       file_hash:
         title: File Hash
         type: string
@@ -997,7 +997,7 @@ actions:
         description: The endpoint to get information about. This can be an IPv4 address, hostname, or endpoint ID
         type: string
         required: true
-        example: 0123456abcdef12345abcde12345abcd
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
     output:
       total_count:
         title: Total Count
@@ -1018,7 +1018,7 @@ actions:
         description: Endpoint to isolate or unisolate. This can be an IPv4 address, hostname, or endpoint ID
         type: string
         required: true
-        example: 0123456abcdef12345abcde12345abcd
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
       isolation_state:
         title: Isolation State
         description: Isolation state to set
