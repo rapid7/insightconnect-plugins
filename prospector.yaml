@@ -1,6 +1,5 @@
 ignore-patterns:
-  - test_encode.py
-  - (schema\.py|setup\.py|__init__\.py|ec2_investigations)
+  - (schema\.py|setup\.py|__init__\.py|ec2_investigations|unit_test)
 pylint:
   disable:
     - unused-import
