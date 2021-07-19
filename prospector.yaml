@@ -1,5 +1,5 @@
 ignore-patterns:
-  - /unit_test/g
+  - test_encode.py
   - (schema\.py|setup\.py|__init__\.py|ec2_investigations)
 pylint:
   disable:
