@@ -60,7 +60,7 @@ This action is used to get File Quarantine Status.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|endpoint_id|string|None|True|Endpoint ID|None|SOMEENDPOINT|
+|endpoint_id|string|None|True|Endpoint ID|None|example-host|
 |file_hash|string|None|True|File Hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
 |file_path|string|None|True|File path|None|powershell.exe|
 
@@ -68,7 +68,7 @@ Example input:
 
 ```
 {
-  "endpoint_id": "SOMEENDPOINT",
+  "endpoint_id": "example-host",
   "file_hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
   "file_path": "powershell.exe"
 }
@@ -318,7 +318,7 @@ Example output:
     ],
     "agent_version": "7.3.2.26319",
     "agent_device_domain": "DOMAIN",
-    "agent_fqdn": "SOMEENDPOINT.DOMAIN",
+    "agent_fqdn": "example-host.example.com",
     "agent_os_type": "Windows",
     "agent_os_sub_type": "10.0.1234",
     "agent_data_collection_status": false,
@@ -432,7 +432,7 @@ Example output:
     "host_ip": [
       "10.0.20.10"
     ],
-    "host_name": "SOMEENDPOINT",
+    "host_name": "example-host",
     "mac_addresses": [
       "ab:cd:ef:12:34:56"
     ],

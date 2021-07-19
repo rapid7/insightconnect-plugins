@@ -969,7 +969,11 @@ actions:
         type: string
         description: Endpoint ID
         required: true
+<<<<<<< HEAD
         example: example_ID
+=======
+        example: example-host
+>>>>>>> dc1664347a1253830f22d8687e128df7c19dab1c
       file_hash:
         title: File Hash
         type: string
