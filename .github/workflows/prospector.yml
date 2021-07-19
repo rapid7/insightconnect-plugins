@@ -32,7 +32,7 @@ jobs:
 
           echo "All changed files:"
           echo ${CHANGED_FILES[@]}
-          FILTER="(schema\.py|setup\.py|__init__\.py|ec2_investigations|test_.)" 
+          FILTER="(schema\.py|setup\.py|__init__\.py|ec2_investigations|unit_test\/)" 
           for index in "${!CHANGED_FILES[@]}" ; do [[ ${CHANGED_FILES[$index]} =~ $FILTER ]] && unset -v 'CHANGED_FILES[$index]' ; done
           echo "Files after filtering:"
           echo ${CHANGED_FILES[@]}
