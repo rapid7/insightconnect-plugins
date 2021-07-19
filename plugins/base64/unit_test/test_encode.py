@@ -13,6 +13,3 @@ class TestEncode(TestCase):
 
         results = test_encoder.run(input_params)
         self.assertEqual("UmFwaWQ3", results.get("data"))
-    
-    def make_sure_linter_doesnt_catch_this():
-        a_value = a_value_that_doesnt_exist

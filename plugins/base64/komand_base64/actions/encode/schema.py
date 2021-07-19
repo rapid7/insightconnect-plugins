@@ -16,7 +16,6 @@ class Output:
     
 
 class EncodeInput(insightconnect_plugin_runtime.Input):
-    foo = bar
     schema = json.loads("""
    {
   "type": "object",
