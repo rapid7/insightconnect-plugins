@@ -60,7 +60,7 @@ This action is used to get File Quarantine Status.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|endpoint_id|string|None|True|Endpoint ID|None|example-host|
+|endpoint_id|string|None|True|Endpoint ID|None|example_ID|
 |file_hash|string|None|True|File Hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
 |file_path|string|None|True|File path|None|powershell.exe|
 
@@ -68,7 +68,7 @@ Example input:
 
 ```
 {
-  "endpoint_id": "example-host",
+  "endpoint_id": "example_ID",
   "file_hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
   "file_path": "powershell.exe"
 }
@@ -168,7 +168,7 @@ This action is used to isolate an endpoint.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|endpoint|string|None|True|Endpoint to isolate or unisolate. This can be an IPv4 address, hostname, or endpoint ID|None|0123456abcdef12345abcde12345abcd|
+|endpoint|string|None|True|Endpoint to isolate or unisolate. This can be an IPv4 address, hostname, or endpoint ID|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |isolation_state|string|Isolate|True|Isolation state to set|['Isolate', 'Unisolate']|Unisolate|
 |whitelist|[]string|[]|False|This list contains a set of devices that should not be blocked. This can be a combination of IPv4 addresses, hostnames, or endpoint IDs|None|["198.51.100.100", "hostname123", "225494730938493804"]|
 
@@ -176,7 +176,7 @@ Example input:
 
 ```
 {
-  "endpoint": "0123456abcdef12345abcde12345abcd",
+  "endpoint": "9de5069c5afe602b2ea0a04b66beb2c0",
   "isolation_state": "Unisolate",
   "whitelist": [
     "198.51.100.100",
@@ -211,13 +211,13 @@ This action is used to get information about an endpoint.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|endpoint|string|None|True|The endpoint to get information about. This can be an IPv4 address, hostname, or endpoint ID|None|0123456abcdef12345abcde12345abcd|
+|endpoint|string|None|True|The endpoint to get information about. This can be an IPv4 address, hostname, or endpoint ID|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
 ```
 {
-  "endpoint": "0123456abcdef12345abcde12345abcd"
+  "endpoint": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 

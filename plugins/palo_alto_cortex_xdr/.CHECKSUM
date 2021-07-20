@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
 	"spec": "1d4cf68119f546bb94a93e9fdec2a7f6",
-=======
-	"spec": "91be427dd0a70cd6db2d74d778594587",
->>>>>>> dc1664347a1253830f22d8687e128df7c19dab1c
 	"manifest": "0f25192f992b7b0f9901428df71876a0",
 	"setup": "12c2315d4e8d373552eb46ccbb005879",
 	"schemas": [
