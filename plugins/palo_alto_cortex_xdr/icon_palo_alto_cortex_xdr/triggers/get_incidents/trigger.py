@@ -25,12 +25,10 @@ class GetIncidents(insightconnect_plugin_runtime.Trigger):
         start_time = end_time - 1
         last_event_processed_time_ms = start_time
 
-        self.logger.info(f"Initializing Get Incidents trigger for the Palo Alto Cortex XDR plugin.")
+        self.logger.info("Initializing Get Incidents trigger for the Palo Alto Cortex XDR plugin.")
 
         while True:
-            incidents = self.connection.xdr_api.get_incidents(
-                from_time=start_time, to_time=end_time, time_field=time_field
-            )
+            incidents = self.connection.xdr_api.get_incidents(from_time=start_time, to_time=end_time)
 
             # Process incidents from oldest to newest
             for incident_time in Util.send_items_to_platform_for_trigger(

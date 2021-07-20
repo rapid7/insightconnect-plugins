@@ -7,7 +7,7 @@ vendor: rapid7
 support: community
 status: []
 description: Analyze URLs for malicious indicators using the URLScan website scanner
-version: 3.0.1
+version: 4.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/urlscan
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -316,20 +316,6 @@ actions:
         required: true
         example: example.com
         default: example.com
-      size:
-        title: Size
-        description: Number of results returned
-        type: integer
-        default: 100
-        required: true
-        example: 45
-      offset:
-        title: Offset
-        description: Offset of first result (for paginating)
-        type: integer
-        default: 0
-        required: true
-        example: 1
       sort:
         title: Sort
         description: Sorting, specificied via $sort_field:$sort_order
