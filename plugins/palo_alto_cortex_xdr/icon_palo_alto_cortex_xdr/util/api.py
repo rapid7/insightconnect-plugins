@@ -265,7 +265,7 @@ class CortexXdrAPI:
     def _post_to_api(self, endpoint, post_body):
         # Disable all the inconsistent-return-statements violations in this function. Either return or raise an
         # exception.
-        # pylint: inconsistent-return-statements
+        # pylint: disable=inconsistent-return-statements
         url = urllib.parse.urljoin(self.fully_qualified_domain_name, endpoint)
         try:
             response = requests.post(url=url, json=post_body, headers=self.headers)
