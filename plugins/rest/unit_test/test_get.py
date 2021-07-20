@@ -5,6 +5,7 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_rest.connection.connection import Connection
+from komand_rest.util.mockconnection import MockConnection
 from komand_rest.actions.get import Get
 import json
 import logging
@@ -38,3 +39,22 @@ class TestGet(TestCase):
         results = test_action.run(action_params)
 
         self.assertIsNotNone(results)
+
+    # this name needs work- ideas?
+    def test_get_google_success_unit_test(self):
+        pass
+        # log = logging.getLogger("Test")
+        # test_conn = Connection()
+        # test_action = Get()
+        #
+        # test_conn.logger = log
+        # test_action.logger = log
+        #
+        #
+        #
+        # test_conn.connect(connection_params)
+        # test_action.connection = test_conn
+        # results = test_action.run(action_params)
+        #
+        # self.assertIsNotNone(results)
+
