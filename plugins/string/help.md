@@ -24,6 +24,39 @@ _This plugin does not contain a connection._
 
 ### Actions
 
+#### Replace
+
+This action is used to replace parts of a string.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|in_string|string|None|True|The string to replace parts of|None|this is a string|
+|replacement_value|string|None|False|The string that will replace the parts that are found. If left blank the characters to find will be deleted|None|replacement|
+|string_part_to_find|string|None|True|The string part to look for. All instances of this string will be replaced|None|string|
+
+Example input:
+
+```
+{
+  "in_string": "this is a string",
+  "replacement_value": "replacement",
+  "string_part_to_find": "string"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|result_string|string|False|The string after replacement|
+
+Example output:
+
+```
+```
+
 #### Length
 
 This action is used to return the length of a string.
@@ -310,6 +343,7 @@ If this is the case, consider using the Python 3 Script plugin instead.
 
 # Version History
 
+* 1.4.0 - New action Replace
 * 1.3.1 - Update to v4 Python plugin runtime
 * 1.3.0 - New action Length | Add example inputs
 * 1.2.1 - New spec and help.md format for the Extension Library
