@@ -17,7 +17,6 @@ class GetAlerts(insightconnect_plugin_runtime.Trigger):
     def run(self, params={}):
         # For the Alerts API, you filter alerts by `creation_time` when requesting data, however the timestamp field in
         # the returned Alerts is `detection_time`
-        time_field = "creation_time"
         alert_timestamp_field = "detection_timestamp"
 
         end_time = Util.now_ms()
@@ -25,10 +24,10 @@ class GetAlerts(insightconnect_plugin_runtime.Trigger):
         start_time = end_time - 1
         last_event_processed_time_ms = start_time
 
-        self.logger.info(f"Initializing Get Alerts trigger for the Palo Alto Cortex XDR plugin.")
+        self.logger.info("Initializing Get Alerts trigger for the Palo Alto Cortex XDR plugin.")
 
         while True:
-            alerts = self.connection.xdr_api.get_alerts(from_time=start_time, to_time=end_time, time_field=time_field)
+            alerts = self.connection.xdr_api.get_alerts(from_time=start_time, to_time=end_time)
 
             for alert_time in Util.send_items_to_platform_for_trigger(
                 self, alerts, Output.ALERT, last_event_processed_time_ms, alert_timestamp_field

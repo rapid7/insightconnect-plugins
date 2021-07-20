@@ -19,6 +19,8 @@ class CortexXdrAPI:
     ENDPOINT_HOSTNAME_TYPE = "hostname"
 
     def __init__(self, api_key_id, api_key, fully_qualified_domain_name, security_level, logger):
+        # Disable all the too-many-arguments violations in this function.
+        # pylint: disable=too-many-arguments
         self.api_key_id = api_key_id
         self.api_key = api_key
         self.fully_qualified_domain_name = fully_qualified_domain_name
@@ -46,8 +48,8 @@ class CortexXdrAPI:
         file_quarantine_statuses = resp_json.get("reply", [])
         if len(file_quarantine_statuses) < 1:
             return {}
-        else:
-            return file_quarantine_statuses[0]
+
+        return file_quarantine_statuses[0]
 
     def get_endpoint_information(self, endpoint):
         endpoint_type = self._get_endpoint_type(endpoint)
@@ -89,21 +91,21 @@ class CortexXdrAPI:
         self.logger.info(f"Number of endpoints found: {num_endpoints}")
 
         if num_endpoints > 1:
-            self.logger.info(f"Taking isolation action on multiple endpoints.")
+            self.logger.info("Taking isolation action on multiple endpoints.")
             return self._isolate_multiple_endpoints(endpoints, isolation_state)
-        else:
-            self.logger.info(f"Taking isolation action on a single endpoint.")
-            return self._isolate_endpoint(endpoints, isolation_state)
 
-    def get_alerts(self, from_time: int, to_time: int, time_field="creation_time") -> List[Dict]:
+        self.logger.info("Taking isolation action on a single endpoint.")
+        return self._isolate_endpoint(endpoints, isolation_state)
+
+    def get_alerts(self, from_time: int, to_time: int) -> List[Dict]:
         endpoint = "/public_api/v1/alerts/get_alerts_multi_events/"
         response_alerts_field = "alerts"
-        return self._get_items_from_endpoint(endpoint, from_time, to_time, response_alerts_field, time_field)
+        return self._get_items_from_endpoint(endpoint, from_time, to_time, response_alerts_field)
 
-    def get_incidents(self, from_time: int, to_time: int, time_field="creation_time") -> List[Dict]:
+    def get_incidents(self, from_time: int, to_time: int) -> List[Dict]:
         endpoint = "/public_api/v1/incidents/get_incidents/"
         response_incidents_field = "incidents"
-        return self._get_items_from_endpoint(endpoint, from_time, to_time, response_incidents_field, time_field)
+        return self._get_items_from_endpoint(endpoint, from_time, to_time, response_incidents_field)
 
     def allow_or_block_file(
         self, file_hash: str, comment: str, incident_id: str = None, block_file: bool = True
@@ -141,7 +143,7 @@ class CortexXdrAPI:
     # Private Methods
     ###########################
     def _get_items_from_endpoint(
-        self, endpoint: str, from_time: int, to_time: int, response_item_field: str, time_field="creation_time"
+        self, endpoint: str, from_time: int, to_time: int, response_item_field: str
     ) -> List[Dict]:
         batch_size = 100
         search_from = 0
@@ -152,15 +154,15 @@ class CortexXdrAPI:
             "request_data": {
                 "search_from": search_from,
                 "search_to": search_to,
-                "sort": {"field": time_field, "keyword": "asc"},
+                "sort": {"field": "creation_time", "keyword": "asc"},
             }
         }
 
         # If time constraints have been provided for the request, add them to the post body
         if from_time is not None and to_time is not None:
             post_body["request_data"]["filters"] = [
-                {"field": time_field, "operator": "gte", "value": from_time},
-                {"field": time_field, "operator": "lte", "value": to_time},
+                {"field": "creation_time", "operator": "gte", "value": from_time},
+                {"field": "creation_time", "operator": "lte", "value": to_time},
             ]
 
         done = False
@@ -225,7 +227,7 @@ class CortexXdrAPI:
         result = self._post_to_api(api_endpoint, post_body)
         return result.get("reply")
 
-    def _standard_authentication(self, api_key_id, api_key):
+    def _standard_authentication(self, api_key_id: int, api_key: str) -> dict:
         return {"x-xdr-auth-id": str(api_key_id), "Authorization": api_key}
 
     def _advanced_authentication(self, api_key_id: int, api_key: str) -> dict:
@@ -253,7 +255,7 @@ class CortexXdrAPI:
         # Calculate sha256:
         api_key_hash = hashlib.sha256(auth_key).hexdigest()
         # Generate HTTP call headers
-        self.headers = {
+        return {
             "x-xdr-timestamp": str(timestamp),
             "x-xdr-nonce": nonce,
             "x-xdr-auth-id": str(api_key_id),
@@ -261,6 +263,9 @@ class CortexXdrAPI:
         }
 
     def _post_to_api(self, endpoint, post_body):
+        # Disable all the inconsistent-return-statements violations in this function. Either return or raise an
+        # exception.
+        # pylint: inconsistent-return-statements
         url = urllib.parse.urljoin(self.fully_qualified_domain_name, endpoint)
         try:
             response = requests.post(url=url, json=post_body, headers=self.headers)
