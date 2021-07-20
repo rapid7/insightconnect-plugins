@@ -34,7 +34,7 @@ Example input:
     "username":"user1",
     "password":"mypassword"
     },
-  "url": "htpps://example.com:9243",
+  "url": "https://www.example.com:9243",
   "use_authentication": true
 }
 ```
