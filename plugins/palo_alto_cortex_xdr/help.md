@@ -317,7 +317,7 @@ Example output:
       "TA0002 - Execution"
     ],
     "agent_version": "7.3.2.26319",
-    "agent_device_domain": "DOMAIN",
+    "agent_device_domain": "example.com",
     "agent_fqdn": "example-host.example.com",
     "agent_os_type": "Windows",
     "agent_os_sub_type": "10.0.1234",
