@@ -27,9 +27,7 @@ class ElasticSearchAPI:
     def update(self, index: str, _id: str, params: dict = None, script: dict = None):
         return self._call_api("POST", f"{index}/_update/{_id}", params, {"script": script})
 
-    def search_documents(self, index: str, json_data: dict = None, params: dict = None):
-        if not json_data:
-            json_data = {}
+    def search_documents(self, index: str, json_data: dict = {}, params: dict = None):
 
         json_data["version"] = True
 
