@@ -1,5 +1,5 @@
 import komand
-from .schema import SearchInput, SearchOutput, Input, Component
+from .schema import SearchInput, SearchOutput, Input, Component, Output
 
 # Custom imports below
 from komand.exceptions import PluginException
@@ -20,6 +20,7 @@ class Search(komand.Action):
     def run(self, params={}):
         input_type = params.get(Input.INPUT_TYPE, "Custom")
         query = params.get(Input.Q)
+        sort = params.get(Input.SORT, "_score")
         if input_type == "Custom":
             search_query = query
         elif input_type == "URL":
@@ -37,27 +38,48 @@ class Search(komand.Action):
                 )
             search_query = f'page.domain:"{query}"'
 
-        query_params = [
-            f"q={search_query}",
-            f"size={str(params.get(Input.SIZE, 100))}",
-            f"offset={str(params.get(Input.OFFSET, 0))}",
-            f'sort={params.get(Input.SORT, "_score")}',
-        ]
+        search_after = None
+        results = []
+        size = 10000
+        has_more = True
+        while has_more:
+            query_params = [
+                f"q={search_query}",
+                f"size={size}",
+                f"sort={sort}",
+            ]
+            if search_after:
+                query_params.append(f"search_after={search_after}")
 
-        url = f'{self.connection.server}/search/?{"&".join(query_params)}'
-        self.logger.info(url)
+            url = f'{self.connection.server}/search/?{"&".join(query_params)}'
+            self.logger.info(url)
 
-        try:
-            response = requests.get(url, headers=self.connection.headers)
-        except Exception as e:
-            raise PluginException(cause="Something went wrong during the request. ", assistance=e)
+            try:
+                response = requests.get(url, headers=self.connection.headers)
+            except Exception as e:
+                raise PluginException(cause="Something went wrong during the request.", assistance=e)
 
-        try:
-            output = response.json()
-        except json.decoder.JSONDecodeError:
-            raise PluginException(
-                cause="Received an unexpected response from the Urlscan API. ",
-                assistance=f"(non-JSON or no response was received). Response was: {response.text}",
-            )
+            try:
+                responses = response.json()
+                response_results = responses.get("results", [])
+                if not response_results or not isinstance(response_results, list):
+                    break
 
-        return output
+                results.extend(response_results)
+                has_more = responses.get("has_more", False)
+                if not has_more:
+                    break
+
+                if "sort" in response_results[-1] and len(response_results[-1]["sort"]) == 2:
+                    returned_sort = response_results[-1]["sort"]
+                    search_after = f"{returned_sort[0]},{returned_sort[1]}"
+                else:
+                    break
+
+            except json.decoder.JSONDecodeError:
+                raise PluginException(
+                    cause="Received an unexpected response from the Urlscan API. ",
+                    assistance=f"(non-JSON or no response was received). Response was: {response.text}",
+                )
+
+        return {Output.RESULTS: results, Output.TOTAL: len(results), Output.HAS_MORE: has_more}
