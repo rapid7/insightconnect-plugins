@@ -54,7 +54,7 @@ Example input:
 
 #### Get File Quarantine Status
 
-This action is used to get File Quarantine Status.
+This action is used to get quarantine status for a file.
 
 ##### Input
 
