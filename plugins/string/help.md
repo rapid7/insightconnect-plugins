@@ -41,9 +41,9 @@ Example input:
 
 ```
 {
-  "in_string": "this is a string",
-  "replacement_value": "replacement",
-  "string_part_to_find": "string"
+  "in_string": "the cow jumped over the moon",
+  "replacement_value": "cat",
+  "string_part_to_find": "cow"
 }
 ```
 
@@ -56,6 +56,9 @@ Example input:
 Example output:
 
 ```
+{
+  "result_string": "the cat jumped over the moon"
+}
 ```
 
 #### Length
