@@ -27,7 +27,7 @@ connection:
     type: string
     description: Elasticsearch URL
     required: true
-    example: htpps://example.com:9243
+    example: https://www.example.com:9243
   credentials:
     type: credential_username_password
     title: Basic Auth Username and Password
