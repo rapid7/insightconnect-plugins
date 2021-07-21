@@ -1,14 +1,14 @@
 import sys
 import os
 from komand_rest.util.mockconnection import MockConnection
-
-sys.path.append(os.path.abspath("../"))
-
-from unittest import TestCase
-from komand_rest.connection.connection import Connection
-from komand_rest.actions.patch import Patch
 import json
 import logging
+from unittest import TestCase
+
+sys.path.append(os.path.abspath("../"))
+from komand_rest.connection.connection import Connection
+from komand_rest.actions.patch import Patch
+
 
 
 class TestPatch(TestCase):
@@ -24,7 +24,7 @@ class TestPatch(TestCase):
 
         icon-plugin generate samples
 
-        """
+
 
         log = logging.getLogger("Test")
         test_conn = Connection()
@@ -39,12 +39,12 @@ class TestPatch(TestCase):
                 connection_params = test_json.get("connection")
                 action_params = test_json.get("input")
         except Exception as e:
-            message = """
+            message =
             Could not find or read sample tests from /tests directory
             
             An exception here likely means you didn't fill out your samples correctly in the /tests directory 
             Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
+
             self.fail(message)
 
         test_conn.connect(connection_params)
@@ -57,6 +57,7 @@ class TestPatch(TestCase):
         # TODO: The following assert should be updated to look for data from your action
         # For example: self.assertEquals({"success": True}, results)
         self.assertEquals({}, results)
+        """
 
     def test_patch_unit(self):
         test_conn = MockConnection()

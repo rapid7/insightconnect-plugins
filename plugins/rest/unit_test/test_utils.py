@@ -114,7 +114,7 @@ class TestUtil(TestCase):
     Tests the with_credentials function
     '''
 
-    def test_cred_reqs(self):
+    def test_credentials_required(self):
         log = logging.getLogger("Test")
         api = RestAPI("www.google.com", log, True, {})
 
