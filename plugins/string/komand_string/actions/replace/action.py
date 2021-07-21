@@ -1,17 +1,15 @@
 import insightconnect_plugin_runtime
 from .schema import ReplaceInput, ReplaceOutput, Input, Output, Component
+
 # Custom imports below
 import string
 
 
 class Replace(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='replace',
-                description=Component.DESCRIPTION,
-                input=ReplaceInput(),
-                output=ReplaceOutput())
+            name="replace", description=Component.DESCRIPTION, input=ReplaceInput(), output=ReplaceOutput()
+        )
 
     def run(self, params={}):
         in_string = params.get(Input.IN_STRING)
