@@ -4,11 +4,12 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get Incidents"
+    DESCRIPTION = "Get incidents"
 
 
 class Input:
-    pass
+    
+    FREQUENCY = "frequency"
     
 
 class Output:
@@ -18,7 +19,19 @@ class Output:
 
 class GetIncidentsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "frequency": {
+      "type": "integer",
+      "title": "Frequency",
+      "description": "Poll frequency in seconds",
+      "default": 5,
+      "order": 1
+    }
+  }
+}
     """)
 
     def __init__(self):
@@ -32,10 +45,189 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "incident": {
-      "type": "object",
+      "$ref": "#/definitions/incident",
       "title": "Incident",
       "description": "Incident",
       "order": 1
+    }
+  },
+  "definitions": {
+    "incident": {
+      "type": "object",
+      "title": "incident",
+      "properties": {
+        "alert_count": {
+          "type": "integer",
+          "title": "Alert Count",
+          "description": "Alert count",
+          "order": 1
+        },
+        "assigned_user_mail": {
+          "type": "string",
+          "title": "Assigned User Mail",
+          "description": "Assigned user mail",
+          "order": 2
+        },
+        "assigned_user_pretty_name": {
+          "type": "string",
+          "title": "Assigned User Pretty Name",
+          "description": "Assigned user pretty name",
+          "order": 3
+        },
+        "creation_time": {
+          "type": "integer",
+          "title": "Creation Time",
+          "description": "Creation time",
+          "order": 4
+        },
+        "description": {
+          "type": "string",
+          "title": "Description",
+          "description": "Description",
+          "order": 5
+        },
+        "detection_time": {
+          "type": "string",
+          "title": "Detection Time",
+          "description": "Detection time",
+          "order": 6
+        },
+        "high_severity_alert_count": {
+          "type": "integer",
+          "title": "High Severity Alert Count",
+          "description": "High severity alert count",
+          "order": 7
+        },
+        "host_count": {
+          "type": "integer",
+          "title": "Host Count",
+          "description": "Host count",
+          "order": 8
+        },
+        "hosts": {
+          "type": "array",
+          "title": "Hosts",
+          "description": "Hosts",
+          "items": {
+            "type": "string"
+          },
+          "order": 9
+        },
+        "incident_id": {
+          "type": "string",
+          "title": "Incident ID",
+          "description": "Incident ID",
+          "order": 10
+        },
+        "incident_name": {
+          "type": "string",
+          "title": "Incident Name",
+          "description": "Incident name",
+          "order": 11
+        },
+        "incident_sources": {
+          "type": "array",
+          "title": "Incident Sources",
+          "description": "Incident sources",
+          "items": {
+            "type": "string"
+          },
+          "order": 12
+        },
+        "low_severity_alert_count": {
+          "type": "integer",
+          "title": "Low Severity Alert Count",
+          "description": "Low severity alert count",
+          "order": 13
+        },
+        "manual_description": {
+          "type": "string",
+          "title": "Manual Description",
+          "description": "Manual description",
+          "order": 14
+        },
+        "manual_score": {
+          "type": "string",
+          "title": "Manual Score",
+          "description": "Manual score",
+          "order": 15
+        },
+        "manual_severity": {
+          "type": "string",
+          "title": "Manual Severity",
+          "description": "Manual severity",
+          "order": 16
+        },
+        "med_severity_alert_count": {
+          "type": "integer",
+          "title": "Med Severity Alert Count",
+          "description": "Med severity alert count",
+          "order": 17
+        },
+        "modification_time": {
+          "type": "integer",
+          "title": "Modification Time",
+          "description": "Modification time",
+          "order": 18
+        },
+        "notes": {
+          "type": "string",
+          "title": "Notes",
+          "description": "Notes",
+          "order": 19
+        },
+        "resolve_comment": {
+          "type": "string",
+          "title": "Resolve Comment",
+          "description": "Resolve comment",
+          "order": 20
+        },
+        "rule_based_score": {
+          "type": "string",
+          "title": "Rule Based Score",
+          "description": "Rule based score",
+          "order": 21
+        },
+        "severity": {
+          "type": "string",
+          "title": "Severity",
+          "description": "Severity",
+          "order": 22
+        },
+        "starred": {
+          "type": "boolean",
+          "title": "Starred",
+          "description": "Starred",
+          "order": 23
+        },
+        "status": {
+          "type": "string",
+          "title": "Status",
+          "description": "Status",
+          "order": 24
+        },
+        "user_count": {
+          "type": "integer",
+          "title": "User Count",
+          "description": "User count",
+          "order": 25
+        },
+        "users": {
+          "type": "array",
+          "title": "Users",
+          "description": "Users",
+          "items": {
+            "type": "string"
+          },
+          "order": 26
+        },
+        "xdr_url": {
+          "type": "string",
+          "title": "XDR URL",
+          "description": "XDR URL",
+          "order": 27
+        }
+      }
     }
   }
 }
