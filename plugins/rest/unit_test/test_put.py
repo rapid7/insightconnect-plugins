@@ -1,5 +1,6 @@
 import sys
 import os
+from komand_rest.util.mockconnection import MockConnection
 
 sys.path.append(os.path.abspath("../"))
 
@@ -57,16 +58,17 @@ class TestPut(TestCase):
         # For example: self.assertEquals({"success": True}, results)
         self.assertEquals({}, results)
 
-    def test_put(self):
-        """
-        TODO: Implement test cases here
+    def test_put_unit(self):
+        test_conn = MockConnection()
+        test_action = Put()
 
-        Here you can mock the connection with data returned from the above integration test.
-        For information on mocking and unit testing please go here:
+        test_action.connection = test_conn
+        action_params = {"route": "https://www.google.com", "headers": {}}
+        results = test_action.run(action_params)
 
-        https://docs.google.com/document/d/1PifePDG1-mBcmNYE8dULwGxJimiRBrax5BIDG_0TFQI/edit?usp=sharing
-
-        You can either create a formal Mock for this, or you can create a fake connection class to pass to your
-        action for testing.
-        """
-        self.fail("Unimplemented Test Case")
+        # only new things to test is that it correctly routes output of results
+        self.assertEqual(results['status'], 200)
+        # more tests?
+        self.assertEqual(results['body_object'], {'SampleSuccessBody': 'SampleVal'})
+        self.assertEqual(results['body_string'], 'SAMPLETEXT for method PUT')
+        self.assertEqual(results['headers'], {'SampleHeader': 'SampleVal'})

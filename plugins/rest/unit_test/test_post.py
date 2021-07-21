@@ -1,5 +1,6 @@
 import sys
 import os
+from komand_rest.util.mockconnection import MockConnection
 
 sys.path.append(os.path.abspath("../"))
 
@@ -41,3 +42,18 @@ class TestPost(TestCase):
         self.assertTrue("status" in results.keys())
         self.assertTrue("headers" in results.keys())
         self.assertTrue("body_string" in results.keys())
+
+    def test_post_unit(self):
+        test_conn = MockConnection()
+        test_action = Post()
+
+        test_action.connection = test_conn
+        action_params = {"route": "https://www.google.com", "headers": {}}
+        results = test_action.run(action_params)
+
+        # only new things to test is that it correctly routes output of results
+        self.assertEqual(results['status'], 200)
+        # more tests?
+        self.assertEqual(results['body_object'], {'SampleSuccessBody': 'SampleVal'})
+        self.assertEqual(results['body_string'], 'SAMPLETEXT for method POST')
+        self.assertEqual(results['headers'], {'SampleHeader': 'SampleVal'})

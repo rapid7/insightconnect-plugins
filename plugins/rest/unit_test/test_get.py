@@ -3,12 +3,13 @@ import os
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
+from unittest import TestCase, mock
 from komand_rest.connection.connection import Connection
 from komand_rest.util.mockconnection import MockConnection
 from komand_rest.actions.get import Get
 import json
 import logging
+from requests import Response
 
 
 class TestGet(TestCase):
@@ -40,21 +41,18 @@ class TestGet(TestCase):
 
         self.assertIsNotNone(results)
 
-    # this name needs work- ideas?
-    def test_get_google_success_unit_test(self):
-        pass
-        # log = logging.getLogger("Test")
-        # test_conn = Connection()
-        # test_action = Get()
-        #
-        # test_conn.logger = log
-        # test_action.logger = log
-        #
-        #
-        #
-        # test_conn.connect(connection_params)
-        # test_action.connection = test_conn
-        # results = test_action.run(action_params)
-        #
-        # self.assertIsNotNone(results)
+    def test_get_unit(self):
+        test_conn = MockConnection()
+        test_action = Get()
+
+        test_action.connection = test_conn
+        action_params = {"route": "https://www.google.com", "headers": {}}
+        results = test_action.run(action_params)
+
+        # only new things to test is that it correctly routes output of results
+        self.assertEqual(results['status'], 200)
+        # more tests?
+        self.assertEqual(results['body_object'], {'SampleSuccessBody': 'SampleVal'})
+        self.assertEqual(results['body_string'], 'SAMPLETEXT for method GET')
+        self.assertEqual(results['headers'], {'SampleHeader': 'SampleVal'})
 

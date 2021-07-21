@@ -81,11 +81,11 @@ class TestUtil(TestCase):
         self.assertEqual(merged_dict["key1"], "value1")
 
     def test_merge_dicts_deep(self):
-        first = {"key1": {"inner_key": "inner_val"}}
-        second = {"key2": {"inner_key": "inner_val"}}
-        merged_dict = Common.merge_dicts(first, second)
+        first_dict = {"key1": {"inner_key": "inner_val"}}
+        second_dict = {"key2": {"inner_key": "inner_val"}}
+        merged_dict = Common.merge_dicts(first_dict, second_dict)
         self.assertEqual(merged_dict["key1"], {"inner_key": "inner_val"})
-        first["key1"]["inner_key"] = "changed"
+        first_dict["key1"]["inner_key"] = "changed"
         # demonstrates 2 levels deep copies ARE effected
         self.assertEqual(merged_dict["key1"], {"inner_key": "changed"})
 
@@ -97,7 +97,7 @@ class TestUtil(TestCase):
         log = logging.getLogger("Test")
         api = RestAPI("www.401.com", log, False, {})
         with self.assertRaises(PluginException) as e:
-            actual = api.call_api("get", "/", None, None, None)
+            api.call_api("get", "/", None, None, None)
 
         self.assertEqual(e.exception.cause, "Invalid username or password provided.")
 
@@ -106,7 +106,7 @@ class TestUtil(TestCase):
         log = logging.getLogger("Test")
         api = RestAPI("www.418.com", log, False, {})
         with self.assertRaises(PluginException) as e:
-            actual = api.call_api("get", "/", None, None, None)
+            api.call_api("get", "/", None, None, None)
 
         self.assertIn("I am a teapot", e.exception.data.msg)
 
@@ -153,7 +153,5 @@ class TestUtil(TestCase):
         log = logging.getLogger("Test")
         api = RestAPI("www.google.com", log, True, {"TEST": "CUSTOM_SECRET_INPUT"})
 
-        with self.assertRaises(PluginException) as e:
+        with self.assertRaises(PluginException):
             api.with_credentials("Custom")
-
-
