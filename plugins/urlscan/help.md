@@ -47,9 +47,7 @@ This action is used to search urlscan.io.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |input_type|string|Custom|True|Type of provided query. Set 'custom' to provide custom query, set 'url' to search information about provided URL, set 'domain' to search information about provided domain|['URL', 'Domain', 'Custom']|Domain|
-|offset|integer|0|True|Offset of first result (for paginating)|None|1|
 |q|string|example.com|True|The query term (ElasticSearch simple query string), default is *. If 'Input Type' input is set to URL or domain, provide only the URL or domain|None|example.com|
-|size|integer|100|True|Number of results returned|None|45|
 |sort|string|_score|True|Sorting, specificied via $sort_field:$sort_order|None|_score|
 
 Example input:
@@ -57,9 +55,7 @@ Example input:
 ```
 {
   "input_type": "Domain",
-  "offset": 1,
   "q": "example.com",
-  "size": 45,
   "sort": "_score"
 }
 ```
@@ -823,6 +819,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.0.0 - Improve pagination in Search action
 * 3.0.1 - Add unit test for Submit URL for Scan action | Add error handling for HTTP 429 status code in Submit URL for Scan action
 * 3.0.0 - Major version bump to ensure awareness of a breaking change related to the addition of the `was_scan_skipped` output in Submit URL for Scan action in the previous version
 * 2.3.0 - Add logger when submitted domain is in blacklist for Submit URL for Scan action
