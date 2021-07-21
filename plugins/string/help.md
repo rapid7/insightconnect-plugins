@@ -148,7 +148,7 @@ It allows users the ability to use the green selector and choose a specific vari
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|block_delimiter|string|None|False|The character delimiter for the initial string split, applied before the string delimiter input. This parameter is optional but allows for more complex handling|None|None|
+|block_delimiter|string|None|False|The character delimiter for the initial string split, applied before the string delimiter input. This parameter is optional but allows for more complex handling|None|[|
 |string|string|None|True|String to convert e.g. USER=Bob|None|User=Bob|
 |string_delimiter|string|None|False|The character used to split the string into slices for the list. The default is a space, if not provided by the user|None|=|
 
