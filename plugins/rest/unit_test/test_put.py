@@ -1,14 +1,11 @@
 import sys
 import os
-from komand_rest.util.mockconnection import MockConnection
+from unit_test.mockconnection import MockConnection
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from komand_rest.connection.connection import Connection
 from komand_rest.actions.put import Put
-import json
-import logging
 
 
 class TestPut(TestCase):
@@ -63,8 +60,8 @@ class TestPut(TestCase):
         results = test_action.run(action_params)
 
         # only new things to test is that it correctly routes output of results
-        self.assertEqual(results['status'], 200)
+        self.assertEqual(results["status"], 200)
         # more tests?
-        self.assertEqual(results['body_object'], {'SampleSuccessBody': 'SampleVal'})
-        self.assertEqual(results['body_string'], 'SAMPLETEXT for method PUT')
-        self.assertEqual(results['headers'], {'SampleHeader': 'SampleVal'})
+        self.assertEqual(results["body_object"], {"SampleSuccessBody": "SampleVal"})
+        self.assertEqual(results["body_string"], "SAMPLETEXT for method PUT")
+        self.assertEqual(results["headers"], {"SampleHeader": "SampleVal"})

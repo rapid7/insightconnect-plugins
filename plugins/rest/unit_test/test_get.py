@@ -3,13 +3,9 @@ import os
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase, mock
-from komand_rest.connection.connection import Connection
-from komand_rest.util.mockconnection import MockConnection
+from unittest import TestCase
+from unit_test.mockconnection import MockConnection
 from komand_rest.actions.get import Get
-import json
-import logging
-from requests import Response
 
 
 class TestGet(TestCase):
@@ -30,8 +26,8 @@ class TestGet(TestCase):
         except Exception as e:
             message =
             Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
+
+            An exception here likely means you didn't fill out your samples correctly in the /tests directory
             Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
 
             self.fail(message)
@@ -52,9 +48,8 @@ class TestGet(TestCase):
         results = test_action.run(action_params)
 
         # only new things to test is that it correctly routes output of results
-        self.assertEqual(results['status'], 200)
+        self.assertEqual(results["status"], 200)
         # more tests?
-        self.assertEqual(results['body_object'], {'SampleSuccessBody': 'SampleVal'})
-        self.assertEqual(results['body_string'], 'SAMPLETEXT for method GET')
-        self.assertEqual(results['headers'], {'SampleHeader': 'SampleVal'})
-
+        self.assertEqual(results["body_object"], {"SampleSuccessBody": "SampleVal"})
+        self.assertEqual(results["body_string"], "SAMPLETEXT for method GET")
+        self.assertEqual(results["headers"], {"SampleHeader": "SampleVal"})

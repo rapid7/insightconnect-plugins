@@ -89,9 +89,10 @@ class TestUtil(TestCase):
         # demonstrates 2 levels deep copies ARE effected
         self.assertEqual(merged_dict["key1"], {"inner_key": "changed"})
 
-    '''
+    """
     Tests the call_api function
-    '''
+    """
+
     @mock.patch("requests.request", side_effect=mocked_requests_get)
     def test_get_401(self, mock_get):
         log = logging.getLogger("Test")
@@ -110,9 +111,9 @@ class TestUtil(TestCase):
 
         self.assertIn("I am a teapot", e.exception.data.msg)
 
-    '''
+    """
     Tests the with_credentials function
-    '''
+    """
 
     def test_credentials_required(self):
         log = logging.getLogger("Test")
@@ -126,9 +127,7 @@ class TestUtil(TestCase):
 
         with self.assertRaises(PluginException) as e:
             api.with_credentials("Pendo")
-        self.assertEqual(
-            e.exception.cause, "An authentication type was selected that requires a secret key."
-        )
+        self.assertEqual(e.exception.cause, "An authentication type was selected that requires a secret key.")
 
     def test_basic_auth(self):
         log = logging.getLogger("Test")
