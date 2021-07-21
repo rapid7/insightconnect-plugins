@@ -18,7 +18,7 @@ tags:
 - split
 hub_tags:
   use_cases: [data_utility]
-  keywords: [utilities, string, split, cloud_enabled]
+  keywords: [string, cloud_enabled]
   features: []
 actions:
   set_encoding:
@@ -101,6 +101,7 @@ actions:
           for more complex handling
         type: string
         required: false
+        example: "["
     output:
       object:
         type: object
