@@ -1,7 +1,7 @@
 {
-	"spec": "584b9f31016b6aa020e70f36de416934",
-	"manifest": "78ba7d731e1e20cd6006eb213f030fe6",
-	"setup": "6dfe6819fce3f0f92290b26b015e7caf",
+	"spec": "1d4cf68119f546bb94a93e9fdec2a7f6",
+	"manifest": "0f25192f992b7b0f9901428df71876a0",
+	"setup": "12c2315d4e8d373552eb46ccbb005879",
 	"schemas": [
 		{
 			"identifier": "allow_file/schema.py",
@@ -16,6 +16,10 @@
 			"hash": "6080b251cd22cce262056ebb5e29d2db"
 		},
 		{
+			"identifier": "get_file_quarantine_status/schema.py",
+			"hash": "d6e68dfff8a6e78936c598df71ab2928"
+		},
+		{
 			"identifier": "isolate_endpoint/schema.py",
 			"hash": "870df9ecb135d233df390785589f3c73"
 		},
@@ -24,8 +28,12 @@
 			"hash": "10fafed02c55fa791e02111172cc9fc2"
 		},
 		{
+			"identifier": "get_alerts/schema.py",
+			"hash": "f547d7212bc25811d519a08da6a3c8b4"
+		},
+		{
 			"identifier": "get_incidents/schema.py",
-			"hash": "ec91a5f77e262f9294f124afe4a5248e"
+			"hash": "38f5d9b30888f3917d3c0ae6768753fc"
 		}
 	]
 }
