@@ -7,6 +7,7 @@ pylint:
     - dangerous-default-value
     - too-many-locals
     - useless-object-inheritance
+    - too-many-arguments
 
 pyflakes:
   disable:
