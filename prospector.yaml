@@ -6,6 +6,7 @@ pylint:
     - line-too-long
     - dangerous-default-value
     - too-many-locals
+    - too-many-arguments
 
 pyflakes:
   disable:
