@@ -4,7 +4,7 @@ products: [insightconnect]
 name: sql
 title: SQL
 description: The SQL plugin allows you to run SQL queries
-version: 3.0.0
+version: 3.0.1
 vendor: rapid7
 support: community
 status: []
@@ -18,7 +18,7 @@ tags:
 - mssql
 hub_tags:
   use_cases: [data_utility]
-  keywords: [sql, postgres, mssql]
+  keywords: [sql, postgresql, ms_sql]
   features: []
 connection:
   type:
