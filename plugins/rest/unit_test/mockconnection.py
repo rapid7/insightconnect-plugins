@@ -32,7 +32,7 @@ class MockConnectionApi:
 
     def fill_response_obj_test(
         self, method: str, path: str, data: str = None, json_data: dict = None, headers: dict = None
-    ) -> Response:
+    ) -> MockResponse:
 
         # when we want a succesful request, use google.com in the test
 
