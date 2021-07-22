@@ -51,7 +51,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|result_string|string|False|The string after replacement|
+|result_string|string|True|The string after replacement|
 
 Example output:
 
