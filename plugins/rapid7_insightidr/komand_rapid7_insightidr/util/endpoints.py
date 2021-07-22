@@ -66,7 +66,7 @@ class QueryLogs:
     @staticmethod
     def get_query_logs(console_url: str, log_id: str):
         """
-        URI for adding get_query_logs
+        URI for adding get_query_logsœ
         :param console_url: URL to the InsightIDR console
         :param log_id: The ID of a log for which the indicators are going to be added
         :return: pre-populated /query/logs/{log_id}
@@ -85,7 +85,7 @@ class Logs:
         :return: pre-populated /management/logs/{logId}
         """
 
-        return f"{console_url}management/logs/{log_id}"
+        return f"{console_url}log_search/management/logs/{log_id}"
 
     @staticmethod
     def get_all_logs(console_url: str):
@@ -95,4 +95,4 @@ class Logs:
         :return: pre-populated /management/logs
         """
 
-        return f"{console_url}management/logs"
+        return f"{console_url}log_search/management/logs"
