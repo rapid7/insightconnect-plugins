@@ -65,7 +65,10 @@ class ReplaceOutput(insightconnect_plugin_runtime.Output):
       "description": "The string after replacement",
       "order": 1
     }
-  }
+  },
+  "required": [
+    "result_string"
+  ]
 }
     """)
 

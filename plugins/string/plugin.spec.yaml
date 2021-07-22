@@ -199,4 +199,4 @@ actions:
         title: Result String
         description: The string after replacement
         type: string
-        required: false
+        required: true
