@@ -409,9 +409,6 @@ This action is used to get a specific log from an account.
 Example input:
 
 ```
-{
-  "id": "174e4f99-2ac7-4481-9301-4d24c34baf06"
-}
 ```
 
 ##### Output
@@ -474,8 +471,8 @@ This action is used to close all investigations that fall within a date range.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |alert_type|string|None|False|The category of alerts that should be closed|None|Account Created|
-|datetime_from|date|None|False|An ISO formatted timestamp, default last week|None|2018-07-01 00:00:00|
-|datetime_to|date|None|False|An ISO formatted timestamp of the ending date range, current time if left blank|None|2018-07-01 00:00:00|
+|datetime_from|date|None|False|An ISO formatted timestamp, default last week|None|2018-07-01 00:00:00+00:00|
+|datetime_to|date|None|False|An ISO formatted timestamp of the ending date range, current time if left blank|None|2018-07-01 00:00:00+00:00|
 |max_investigations_to_close|integer|None|False|An optional maximum number of alerts to close with this request. If this parameter is not specified then there is no maximum. If this limit is exceeded, then an error is returned|None|10|
 |source|string|MANUAL|False|The name of an investigation source|['ALERT', 'MANUAL', 'HUNT']|MANUAL|
 
@@ -484,8 +481,8 @@ Example input:
 ```
 {
   "alert_type": "Account Created",
-  "datetime_from": "2018-07-01T00:00:00Z",
-  "datetime_to": "2018-07-01T00:00:00Z",
+  "datetime_from": "2018-07-01 00:00:00+00:00",
+  "datetime_to": "2018-07-01 00:00:00+00:00",
   "max_investigations_to_close": 10,
   "source": "MANUAL"
 }
