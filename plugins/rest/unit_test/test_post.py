@@ -1,17 +1,16 @@
 import sys
 import os
+from unit_test.mockconnection import MockConnection
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from komand_rest.connection.connection import Connection
 from komand_rest.actions.post import Post
-import json
-import logging
 
 
 class TestPost(TestCase):
     def test_integration_post(self):
+        """
         log = logging.getLogger("Test")
         test_conn = Connection()
         test_action = Post()
@@ -25,12 +24,12 @@ class TestPost(TestCase):
                 connection_params = test_json.get("connection")
                 action_params = test_json.get("input")
         except Exception as e:
-            message = """
+            message =
             Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
+
+            An exception here likely means you didn't fill out your samples correctly in the /tests directory
             Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
+
             self.fail(message)
 
         test_conn.connect(connection_params)
@@ -41,3 +40,19 @@ class TestPost(TestCase):
         self.assertTrue("status" in results.keys())
         self.assertTrue("headers" in results.keys())
         self.assertTrue("body_string" in results.keys())
+        """
+
+    def test_post_unit(self):
+        test_conn = MockConnection()
+        test_action = Post()
+
+        test_action.connection = test_conn
+        action_params = {"route": "https://www.google.com", "headers": {}}
+        results = test_action.run(action_params)
+
+        # only new things to test is that it correctly routes output of results
+        self.assertEqual(results["status"], 200)
+        # more tests?
+        self.assertEqual(results["body_object"], {"SampleSuccessBody": "SampleVal"})
+        self.assertEqual(results["body_string"], "SAMPLETEXT for method POST")
+        self.assertEqual(results["headers"], {"SampleHeader": "SampleVal"})
