@@ -66,7 +66,7 @@ class QueryLogs:
     @staticmethod
     def get_query_logs(console_url: str, log_id: str):
         """
-        URI for adding get_query_logsœ
+        URI for adding get_query_logs
         :param console_url: URL to the InsightIDR console
         :param log_id: The ID of a log for which the indicators are going to be added
         :return: pre-populated /query/logs/{log_id}
