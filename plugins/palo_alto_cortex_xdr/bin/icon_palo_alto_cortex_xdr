@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Palo Alto Cortex XDR"
 Vendor = "rapid7"
-Version = "1.0.0"
+Version = "2.0.0"
 Description = "Stop modern attacks with the industry's first extended detection and response platform that spans your endpoints, network and cloud data"
 
 
@@ -34,6 +34,8 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
+            self.add_trigger(triggers.GetAlerts())
+
             self.add_trigger(triggers.GetIncidents())
 
             self.add_action(actions.AllowFile())
@@ -41,6 +43,8 @@ def main():
             self.add_action(actions.BlockFile())
 
             self.add_action(actions.GetEndpointDetails())
+
+            self.add_action(actions.GetFileQuarantineStatus())
 
             self.add_action(actions.IsolateEndpoint())
 
