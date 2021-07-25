@@ -3,6 +3,7 @@ from .schema import UpdateDocumentInput, UpdateDocumentOutput, Input, Output, Co
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime import helper
 
 
 class UpdateDocument(insightconnect_plugin_runtime.Action):
@@ -15,37 +16,34 @@ class UpdateDocument(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        index = params.get(Input.INDEX)
-        id_ = params.get(Input.ID)
-        retry_on_conflict = params.get(Input.RETRY_ON_CONFLICT)
-        wait_for_active_shards = params.get(Input.WAIT_FOR_ACTIVE_SHARDS)
-        refresh = params.get(Input.REFRESH)
-        source = params.get(Input.SOURCE)
-        version = params.get(Input.VERSION)
-        routing = params.get(Input.ROUTING)
-        parent = params.get(Input.PARENT)
-        timeout = params.get(Input.TIMEOUT)
-        script = params.get(Input.SCRIPT)
+        clean_params = helper.clean(params)
+        index = clean_params.get(Input.INDEX)
+        id_ = clean_params.get(Input.ID)
+        retry_on_conflict = clean_params.get(Input.RETRY_ON_CONFLICT)
+        wait_for_active_shards = clean_params.get(Input.WAIT_FOR_ACTIVE_SHARDS)
+        version = clean_params.get(Input.VERSION)
 
-        params = {}
+        query_params = {
+            "refresh": clean_params.get(Input.REFRESH),
+            "source": clean_params.get(Input.SOURCE),
+            "routing": clean_params.get(Input.ROUTING),
+            "parent": clean_params.get(Input.PARENT),
+            "timeout": clean_params.get(Input.TIMEOUT),
+        }
         if retry_on_conflict:
-            params["retry_on_conflict"] = str(retry_on_conflict)
+            query_params["retry_on_conflict"] = str(retry_on_conflict)
         if wait_for_active_shards:
-            params["wait_for_active_shards"] = str(wait_for_active_shards)
-        if refresh:
-            params["refresh"] = refresh
-        if source:
-            params["source"] = source
+            query_params["wait_for_active_shards"] = str(wait_for_active_shards)
         if version:
-            params["version"] = str(version)
-        if routing:
-            params["routing"] = routing
-        if parent:
-            params["parent"] = parent
-        if timeout:
-            params["timeout"] = timeout
+            query_params["version"] = str(version)
 
-        results = self.connection.client.update(index, id_, params, script)
+        results = self.connection.client.update(
+            index=index,
+            _id=id_,
+            _type=clean_params.get(Input.TYPE),
+            params=query_params,
+            script=clean_params.get(Input.SCRIPT),
+        )
 
         if not results:
             raise PluginException(

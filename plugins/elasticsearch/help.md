@@ -23,7 +23,8 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Basic Auth username and password|None|{"username":"user1", "password":"mypassword"}|
-|url|string|None|True|Elasticsearch URL|None|htpps://example.com:9243|
+|ssl_verify|boolean|True|False|The server's TLS/SSL certificate will be verified before a connection can be established|None|True|
+|url|string|None|True|Elasticsearch URL|None|https://example.com|
 |use_authentication|boolean|True|True|If the Elasticsearch host does not use authentication set this value to false|None|True|
 
 Example input:
@@ -34,6 +35,7 @@ Example input:
     "username":"user1",
     "password":"mypassword"
     },
+  "ssl_verify": true,
   "url": "https://www.example.com:9243",
   "use_authentication": true
 }
@@ -99,6 +101,7 @@ This action is used to update a document.
 |script|object|None|True|JSON Script to Modify a Document|None|{"lang": "painless"}|
 |source|string|None|False|Control If and How Source is Returned|None|meta.*|
 |timeout|string|1m|False|Custom Timeout Window|None|1m|
+|type|string|None|False|Type of Document to Index|None|_doc|
 |version|integer|None|False|Optional Version Specification|None|1|
 |wait_for_active_shards|integer|None|False|Number of Shard Copies required Before Update|None|2|
 
@@ -117,6 +120,7 @@ Example input:
   },
   "source": "meta.*",
   "timeout": "1m",
+  "type": "_doc",
   "version": 1,
   "wait_for_active_shards": 2
 }
@@ -158,6 +162,7 @@ This action is used to search for documents.
 |index|string|None|True|Document Index|None|shakespeare|
 |query|object|None|False|JSON Query DSL|None|{"query": {"match": {"line_number": {"query": "1.1.1"}}}}|
 |routing|string|None|False|Optional Shards to Search|None|user1|
+|type|string|None|False|Document Type|None|doc|
 
 Example input:
 
@@ -176,7 +181,8 @@ Example input:
           }
       }
     },
-  "routing": "user1"
+  "routing": "user1",
+  "type": "doc"
 }
 ```
 
@@ -243,6 +249,7 @@ This action is used to create or replace a document by index.
 |parent|string|None|False|Optional Parent|None|001|
 |routing|string|None|False|Optional Shard Placement|None|user1|
 |timeout|string|1m|False|Custom Timeout Window|None|1m|
+|type|string|None|False|Type of Document to Index|None|_doc|
 |version|integer|None|False|Optional Version Specification|None|1|
 |version_type|string|internal|False|Optional Version Type|['internal', 'external', 'external_gt', 'external_gte']|internal|
 
@@ -261,6 +268,7 @@ Example input:
   "parent": "001",
   "routing": "user1",
   "timeout": "1m",
+  "type": "_doc",
   "version": 1,
   "version_type": "internal"
 }
@@ -305,6 +313,7 @@ This trigger is used to poll for new documents given a query.
 |index|string|None|True|Document Index|None|bank|
 |query|object|None|False|JSON Query DSL|None|{"query": {"match": {"line_number": {"query": "1.1.1"}}}}|
 |routing|string|None|False|Optional Shards to Search|None|account|
+|type|string|None|False|Document Type|None|doc|
 
 Example input:
 
@@ -324,7 +333,8 @@ Example input:
           }
       }
     },
-  "routing": "account"
+  "routing": "account",
+  "type": "doc"
 }
 ```
 
@@ -369,7 +379,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.0.0 - Update to use the `insightconnect-python-3-38-plugin:4` Docker image | Improve error handling | Add `Plugin Exception` | Add `Connection Test` | Add `timeout-decorator` in requirements | Code refactor | Remove input Type from Index Document, Update Document, Search Documents actions and Search Documents trigger | Change inputs name in actions and trigger to not start with `_` | Add `USER nobody` in Dockerfile
+* 3.0.0 - Update to use the `insightconnect-python-3-38-plugin:4` Docker image | Improve error handling | Add `Plugin Exception` | Add `Connection Test` | Add `timeout-decorator` in requirements | Code refactor | Remove input Type from Index Document, Update Document, Search Documents actions and Search Documents trigger | Change inputs name in actions and trigger to not start with `_` | Add `USER nobody` in Dockerfile | Add `api6.py` file for other Elasticsearch version | Add pagination | Add SSL verify
 * 2.0.5 - Updated example inputs and outputs for all the actions
 * 2.0.4 - Correct spelling in help.md
 * 2.0.3 - Updated Search Documents action output schema

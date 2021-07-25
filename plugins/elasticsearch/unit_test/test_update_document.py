@@ -12,7 +12,8 @@ sys.path.append(os.path.abspath("../"))
 
 class TestUpdateDocument(TestCase):
     @classmethod
-    def setUpClass(cls) -> None:
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
+    def setUpClass(cls, mock_request) -> None:
         cls.action = Util.default_connector(UpdateDocument())
 
     @patch("requests.request", side_effect=Util.mocked_requests_get)

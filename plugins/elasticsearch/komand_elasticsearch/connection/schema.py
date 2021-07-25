@@ -5,6 +5,7 @@ import json
 
 class Input:
     CREDENTIALS = "credentials"
+    SSL_VERIFY = "ssl_verify"
     URL = "url"
     USE_AUTHENTICATION = "use_authentication"
     
@@ -20,6 +21,13 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "Basic Auth Username and Password",
       "description": "Basic Auth username and password",
       "order": 2
+    },
+    "ssl_verify": {
+      "type": "boolean",
+      "title": "TLS/SSL Verify",
+      "description": "The server's TLS/SSL certificate will be verified before a connection can be established",
+      "default": true,
+      "order": 4
     },
     "url": {
       "type": "string",

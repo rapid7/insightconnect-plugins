@@ -50,7 +50,11 @@ class Util:
                     )
                 )
 
-        if "test-index/_doc" in args[1]:
+        if args[1] == "https://rapid7.com/":
+            return MockResponse("main_page", 200)
+        elif "wrong_object/_search" in args[1]:
+            return MockResponse("search_document_wrong_object", 200)
+        elif "test-index/_doc" in args[1]:
             return MockResponse("index_without_id", 201)
         elif "test-index2/_doc" in args[1]:
             return MockResponse("index_with_id", 200)

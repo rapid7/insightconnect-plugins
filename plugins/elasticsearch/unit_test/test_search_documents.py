@@ -16,7 +16,7 @@ class TestSearchDocuments(TestCase):
         Output.TIMED_OUT: False,
         Output.SHARDS: {"total": 1, "successful": 1, "skipped": 0, "failed": 0},
         Output.HITS: {
-            "total": {"value": 2, "relation": "eq"},
+            "total": {"value": 2},
             "max_score": 1.0,
             "hits": [
                 {
@@ -38,7 +38,8 @@ class TestSearchDocuments(TestCase):
     }
 
     @classmethod
-    def setUpClass(cls) -> None:
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
+    def setUpClass(cls, mock_request) -> None:
         cls.action = Util.default_connector(SearchDocuments())
 
     @patch("requests.request", side_effect=Util.mocked_requests_get)
@@ -57,8 +58,34 @@ class TestSearchDocuments(TestCase):
 
     @patch("requests.request", side_effect=Util.mocked_requests_get)
     def test_search_documents_empty(self, mock_request):
-        with self.assertRaises(PluginException) as error:
-            self.action.run({Input.INDEX: "empty", Input.QUERY: {"query": {"match_all": {}}}, Input.ROUTING: None})
+        actual = self.action.run({Input.INDEX: "empty", Input.QUERY: {"query": {"match_all": {}}}, Input.ROUTING: None})
 
-        self.assertEqual(error.exception.cause, "Document search not run. ")
-        self.assertEqual(error.exception.assistance, "Please check provided data and try again.")
+        self.assertEqual(
+            actual,
+            {
+                "hits": {"hits": [], "max_score": 0, "total": {"value": 0}},
+                "shards": {},
+                "timed_out": "false",
+                "took": 0,
+            },
+        )
+
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
+    def test_search_documents_wrong_object(self, mock_request):
+        actual = self.action.run(
+            {Input.INDEX: "wrong_object", Input.QUERY: {"query": {"match_all": {}}}, Input.ROUTING: None}
+        )
+
+        self.assertEqual(
+            {
+                "hits": {
+                    "hits": [{"_score": 0}, {".name": 1.0, "_score": 0, "name": 1}],
+                    "max_score": 0,
+                    "total": {"value": 0},
+                },
+                "shards": {},
+                "timed_out": "false",
+                "took": 0,
+            },
+            actual,
+        )

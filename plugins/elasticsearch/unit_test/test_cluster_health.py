@@ -10,7 +10,8 @@ sys.path.append(os.path.abspath("../"))
 
 class TestClusterHealth(TestCase):
     @classmethod
-    def setUpClass(cls) -> None:
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
+    def setUpClass(cls, mock_request) -> None:
         cls.action = Util.default_connector(ClusterHealth())
 
     @patch("requests.request", side_effect=Util.mocked_requests_get)

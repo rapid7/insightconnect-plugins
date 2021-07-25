@@ -2,7 +2,6 @@ import insightconnect_plugin_runtime
 from .schema import SearchDocumentsInput, SearchDocumentsOutput, Input, Output, Component
 
 # Custom imports below
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class SearchDocuments(insightconnect_plugin_runtime.Action):
@@ -16,32 +15,23 @@ class SearchDocuments(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         index = params.get(Input.INDEX)
-        routing = params.get(Input.ROUTING)
         query = params.get(Input.QUERY)
 
-        params = {}
-        if routing:
-            params["routing"] = routing
+        results = self.connection.client.search_documents(index, query, params.get(Input.ROUTING))
 
-        results = self.connection.client.search_documents(index, query, params)
-        if not results:
-            raise PluginException(
-                cause="Document search not run. ", assistance="Please check provided data and try again."
-            )
+        hits = results.get("hits", {})
+        hhits = hits.get("hits")
 
-        if not results["hits"]["max_score"]:
-            results["hits"]["max_score"] = 0
-
-        for hit in results["hits"]["hits"]:
+        for hit in hhits:
             if "_score" not in hit or hit["_score"] is None:
                 hit["_score"] = 0
                 self.logger.info("One or most results lack a relevance score, assuming 0")
 
         return insightconnect_plugin_runtime.helper.clean(
             {
-                Output.SHARDS: results["_shards"],
-                Output.HITS: results["hits"],
-                Output.TOOK: results["took"],
-                Output.TIMED_OUT: results["timed_out"],
+                Output.SHARDS: results.get("_shards"),
+                Output.HITS: {"total": hits.get("total"), "max_score": hits.get("max_score", 0), "hits": hhits},
+                Output.TOOK: results.get("took"),
+                Output.TIMED_OUT: results.get("timed_out"),
             }
         )

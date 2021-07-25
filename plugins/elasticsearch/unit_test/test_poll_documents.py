@@ -3,7 +3,6 @@ import os
 import timeout_decorator
 from komand_elasticsearch.triggers import PollDocuments
 from komand_elasticsearch.actions.index_document.schema import Input
-from insightconnect_plugin_runtime.exceptions import PluginException
 from unit_test.util import Util
 from unittest import TestCase
 from unittest.mock import patch
@@ -65,7 +64,8 @@ def check_error():
 
 class TestPollDocuments(TestCase):
     @classmethod
-    def setUpClass(cls) -> None:
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
+    def setUpClass(cls, mock_request) -> None:
         cls.action = Util.default_connector(PollDocuments())
 
     @timeout_pass(error_callback=check_error)

@@ -14,6 +14,7 @@ class Input:
     PARENT = "parent"
     ROUTING = "routing"
     TIMEOUT = "timeout"
+    TYPE = "type"
     VERSION = "version"
     VERSION_TYPE = "version_type"
     
@@ -32,13 +33,13 @@ class IndexDocumentInput(insightconnect_plugin_runtime.Input):
       "type": "object",
       "title": "Document",
       "description": "JSON Document to Index",
-      "order": 5
+      "order": 6
     },
     "id": {
       "type": "string",
       "title": "ID",
       "description": "Optional ID of Indexed Document",
-      "order": 2
+      "order": 3
     },
     "index": {
       "type": "string",
@@ -50,26 +51,32 @@ class IndexDocumentInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Parent",
       "description": "Optional Parent",
-      "order": 7
+      "order": 8
     },
     "routing": {
       "type": "string",
       "title": "Routing",
       "description": "Optional Shard Placement",
-      "order": 6
+      "order": 7
     },
     "timeout": {
       "type": "string",
       "title": "Timeout",
       "description": "Custom Timeout Window",
       "default": "1m",
-      "order": 8
+      "order": 9
+    },
+    "type": {
+      "type": "string",
+      "title": "Type",
+      "description": "Type of Document to Index",
+      "order": 2
     },
     "version": {
       "type": "integer",
       "title": "Version",
       "description": "Optional Version Specification",
-      "order": 4
+      "order": 5
     },
     "version_type": {
       "type": "string",
@@ -82,7 +89,7 @@ class IndexDocumentInput(insightconnect_plugin_runtime.Input):
         "external_gt",
         "external_gte"
       ],
-      "order": 3
+      "order": 4
     }
   },
   "required": [

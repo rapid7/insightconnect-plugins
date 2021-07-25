@@ -3,6 +3,7 @@ from .schema import IndexDocumentInput, IndexDocumentOutput, Output, Input, Comp
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime import helper
 
 
 class IndexDocument(insightconnect_plugin_runtime.Action):
@@ -15,28 +16,26 @@ class IndexDocument(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        index = params.get(Input.INDEX)
-        id_ = params.get(Input.ID)
-        version_type = params.get(Input.VERSION_TYPE)
-        version = params.get(Input.VERSION)
-        document = params.get(Input.DOCUMENT)
-        routing = params.get(Input.ROUTING)
-        parent = params.get(Input.PARENT)
-        timeout = params.get(Input.TIMEOUT)
+        clean_params = helper.clean(params)
+        index = clean_params.get(Input.INDEX)
+        id_ = clean_params.get(Input.ID)
+        version = clean_params.get(Input.VERSION)
+        document = clean_params.get(Input.DOCUMENT)
+        parent = clean_params.get(Input.PARENT)
 
-        params = {}
-        if version_type:
-            params["version_type"] = version_type
+        query_params = {
+            "version_type": clean_params.get(Input.VERSION_TYPE),
+            "routing": clean_params.get(Input.ROUTING),
+            "timeout": clean_params.get(Input.TIMEOUT),
+        }
         if version:
-            params["version"] = str(version)
-        if routing:
-            params["routing"] = routing
+            query_params["version"] = str(version)
         if parent:
-            params["parent"] = str(parent)
-        if timeout:
-            params["timeout"] = timeout
+            query_params["parent"] = str(parent)
 
-        results = self.connection.client.index(index, id_, params, document)
+        results = self.connection.client.index(
+            index=index, _id=id_, _type=clean_params.get(Input.TYPE), params=query_params, document=document
+        )
         if results:
             return {Output.INDEX_RESPONSE: insightconnect_plugin_runtime.helper.clean(results)}
 
