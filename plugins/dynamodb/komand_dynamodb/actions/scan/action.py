@@ -1,5 +1,5 @@
 import komand
-from .schema import ScanInput, ScanOutput
+from .schema import ScanInput, ScanOutput, Output
 
 # Custom imports below
 from boto3.dynamodb.conditions import Attr
@@ -39,11 +39,4 @@ class Scan(komand.Action):
             kwargs["IndexName"] = index
 
         results = t.scan(**kwargs)
-        return {
-            "records": results["Items"],
-            "count": results["Count"],
-        }
-
-    def test(self):
-        """TODO: Test action"""
-        return {}
+        return {Output.RESPONSE: results}
