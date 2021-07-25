@@ -63,8 +63,12 @@ Example input:
 
 ```
 {
-  "condition_expression": "keytable\u003c\u003euser",
-  "data": "{\"keytable\": \"login\", \"e-mail\": \"user@example.com\", \"user\": \"Username\"}",
+  "condition_expression": "keytable<>user",
+  "data": {
+    "keytable": "login",
+    "e-mail": "user@example.com",
+    "user": "Username"
+    },
   "table": "Table-name"
 }
 ```
@@ -102,9 +106,14 @@ Example input:
 
 ```
 {
-  "condition_expression": "keytable\u003c\u003euser",
-  "data": "{\"e-mail\": \"user2@example.com\", \"user\": \"Username2\"}",
-  "key": "{\"keytable\": \"login\"}",
+  "condition_expression": "keytable<>user",
+  "data": {
+    "e-mail": "user2@example.com",
+    "user": "Username2"
+    },
+  "key": {
+  "keytable": "login"
+  },
   "table": "Table-name"
 }
 ```
