@@ -3,6 +3,8 @@ import time
 import secrets
 import string
 import hashlib
+from typing import List, Dict
+
 import requests
 import urllib
 
@@ -17,6 +19,8 @@ class CortexXdrAPI:
     ENDPOINT_HOSTNAME_TYPE = "hostname"
 
     def __init__(self, api_key_id, api_key, fully_qualified_domain_name, security_level, logger):
+        # Disable all the too-many-arguments violations in this function.
+        # pylint: disable=too-many-arguments
         self.api_key_id = api_key_id
         self.api_key = api_key
         self.fully_qualified_domain_name = fully_qualified_domain_name
@@ -36,6 +40,16 @@ class CortexXdrAPI:
                 assistance="Please check your connection settings and try again.",
                 data=e,
             )
+
+    def get_file_quarantine_status(self, file: dict) -> Dict:
+        quarantine_status_endpoint = "/public_api/v1/quarantine/status/"
+        post_body = {"request_data": {"files": [file]}}
+        resp_json = self._post_to_api(quarantine_status_endpoint, post_body)
+        file_quarantine_statuses = resp_json.get("reply", [])
+        if len(file_quarantine_statuses) < 1:
+            return {}
+
+        return file_quarantine_statuses[0]
 
     def get_endpoint_information(self, endpoint):
         endpoint_type = self._get_endpoint_type(endpoint)
@@ -77,66 +91,25 @@ class CortexXdrAPI:
         self.logger.info(f"Number of endpoints found: {num_endpoints}")
 
         if num_endpoints > 1:
-            self.logger.info(f"Taking isolation action on multiple endpoints.")
+            self.logger.info("Taking isolation action on multiple endpoints.")
             return self._isolate_multiple_endpoints(endpoints, isolation_state)
-        else:
-            self.logger.info(f"Taking isolation action on a single endpoint.")
-            return self._isolate_endpoint(endpoints, isolation_state)
 
-    def get_incidents(self, from_time, to_time, time_field="creation_time"):
+        self.logger.info("Taking isolation action on a single endpoint.")
+        return self._isolate_endpoint(endpoints, isolation_state)
+
+    def get_alerts(self, from_time: int, to_time: int) -> List[Dict]:
+        endpoint = "/public_api/v1/alerts/get_alerts_multi_events/"
+        response_alerts_field = "alerts"
+        return self._get_items_from_endpoint(endpoint, from_time, to_time, response_alerts_field)
+
+    def get_incidents(self, from_time: int, to_time: int) -> List[Dict]:
         endpoint = "/public_api/v1/incidents/get_incidents/"
+        response_incidents_field = "incidents"
+        return self._get_items_from_endpoint(endpoint, from_time, to_time, response_incidents_field)
 
-        batch_size = 100
-        search_from = 0
-        search_to = search_from + batch_size
-
-        # Request incidents in ascending order so that we get the oldest events first.
-        post_body = {
-            "request_data": {
-                "search_from": search_from,
-                "search_to": search_to,
-                "sort": {"field": time_field, "keyword": "asc"},
-            }
-        }
-
-        # If time constraints have been provided for the request, add them to the post body
-        if from_time is not None and to_time is not None:
-            post_body["request_data"]["filters"] = [
-                {"field": time_field, "operator": "gte", "value": from_time},
-                {"field": time_field, "operator": "lte", "value": to_time},
-            ]
-
-        done = False
-        all_incidents = []
-
-        # Keep paging through and requesting incidents until we have requested all incidents which match our query
-        while not done:
-            resp_json = self._post_to_api(endpoint, post_body)
-            if resp_json is not None:
-                total_count = resp_json.get("reply", {}).get("total_count", -1)
-                all_incidents.extend(resp_json.get("reply", {}).get("incidents", []))
-                # If the number of incidents we have received so far is greater than or equal to the total number of
-                # incidents which match the query, then we can stop paging.
-                if len(all_incidents) >= total_count or total_count < 0:
-                    done = True
-
-                # Update the indices of search_from and search_to to we can request the next page
-                search_from = search_from + batch_size
-                new_to = search_to + batch_size
-                search_to = new_to if new_to < total_count else total_count
-
-                # Add the updated page indices to the request body for when we request the next page
-                post_body["request_data"]["search_from"] = search_from
-                post_body["request_data"]["search_to"] = search_to
-            else:
-                done = True
-
-            # Back-off between making requests to the API.
-            time.sleep(1)
-
-        return all_incidents
-
-    def allow_or_block_file(self, file_hash, comment, incident_id=None, block_file=True):
+    def allow_or_block_file(
+        self, file_hash: str, comment: str, incident_id: str = None, block_file: bool = True
+    ) -> bool:
         if block_file:
             endpoint = "/public_api/v1/hash_exceptions/blocklist/"
         else:
@@ -169,6 +142,59 @@ class CortexXdrAPI:
     ###########################
     # Private Methods
     ###########################
+    def _get_items_from_endpoint(
+        self, endpoint: str, from_time: int, to_time: int, response_item_field: str
+    ) -> List[Dict]:
+        batch_size = 100
+        search_from = 0
+        search_to = search_from + batch_size
+
+        # Request items in ascending order so that we get the oldest items first.
+        post_body = {
+            "request_data": {
+                "search_from": search_from,
+                "search_to": search_to,
+                "sort": {"field": "creation_time", "keyword": "asc"},
+            }
+        }
+
+        # If time constraints have been provided for the request, add them to the post body
+        if from_time is not None and to_time is not None:
+            post_body["request_data"]["filters"] = [
+                {"field": "creation_time", "operator": "gte", "value": from_time},
+                {"field": "creation_time", "operator": "lte", "value": to_time},
+            ]
+
+        done = False
+        all_items = []
+
+        while not done:
+            resp_json = self._post_to_api(endpoint, post_body)
+            if resp_json is not None:
+                total_count = resp_json.get("reply", {}).get("total_count", -1)
+                all_items.extend(resp_json.get("reply", {}).get(response_item_field, []))
+
+                # If the number of items we have received so far is greater than or equal to the total number of
+                # items which match the query, then we can stop paging.
+                if len(all_items) >= total_count or total_count < 0:
+                    done = True
+
+                # Update the indices of search_from and search_to to we can request the next page
+                search_from = search_from + batch_size
+                new_to = search_to + batch_size
+                search_to = new_to if new_to < total_count else total_count
+
+                # Add the updated page indices to the request body for when we request the next page
+                post_body["request_data"]["search_from"] = search_from
+                post_body["request_data"]["search_to"] = search_to
+            else:
+                done = True
+
+            # Back-off between making requests to the API.
+            time.sleep(1)
+
+        return all_items
+
     def _isolate_multiple_endpoints(self, endpoints, isolation_state):
         if isolation_state:
             api_endpoint = "/public_api/v1/endpoints/isolate/"
@@ -201,7 +227,7 @@ class CortexXdrAPI:
         result = self._post_to_api(api_endpoint, post_body)
         return result.get("reply")
 
-    def _standard_authentication(self, api_key_id, api_key):
+    def _standard_authentication(self, api_key_id: int, api_key: str) -> dict:
         return {"x-xdr-auth-id": str(api_key_id), "Authorization": api_key}
 
     def _advanced_authentication(self, api_key_id: int, api_key: str) -> dict:
@@ -229,13 +255,16 @@ class CortexXdrAPI:
         # Calculate sha256:
         api_key_hash = hashlib.sha256(auth_key).hexdigest()
         # Generate HTTP call headers
-        self.headers = {
+        return {
             "x-xdr-timestamp": str(timestamp),
             "x-xdr-nonce": nonce,
             "x-xdr-auth-id": str(api_key_id),
             "Authorization": api_key_hash,
         }
 
+    # Disable all the inconsistent-return-statements violations in this function. Either return or raise an
+    # exception. The implicit return of this function is unreachable.
+    # pylint: disable=inconsistent-return-statements
     def _post_to_api(self, endpoint, post_body):
         url = urllib.parse.urljoin(self.fully_qualified_domain_name, endpoint)
         try:

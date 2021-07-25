@@ -113,6 +113,7 @@ For the SQL query action, be sure that your query is valid SQL.
 
 # Version History
 
+* 3.0.1 - Close database connection after use
 * 3.0.0 - Add example input and title in connection and Query action | Update python version to `python-3-37-plugin:3` | Add `USER` in Dockerfile | Update `psycopg2` and `mysqlclient` version | Code refactor in connection.py, util.py and Query action.py
 * 2.0.7 - Add supported databases as a drop-down list | Add example inputs
 * 2.0.6 - Fix issue where connection test always success
