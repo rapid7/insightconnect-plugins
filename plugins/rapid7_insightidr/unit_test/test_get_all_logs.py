@@ -12,7 +12,7 @@ import logging
 
 
 class TestGetAllLogs(TestCase):
-    def setUp(self):
+    def setup(self):
         log = logging.getLogger("Test")
         test_conn = Connection()
         test_action = GetAllLogs()
