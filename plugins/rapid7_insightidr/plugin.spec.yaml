@@ -750,13 +750,13 @@ actions:
         title: Datetime From
         description: An ISO formatted timestamp, default last week
         type: date
-        example: 2018-07-01 00:00:00+00:00
+        example: 2018-07-01 00:00:00 00:00
         required: false
       datetime_to:
         title: Datetime To
         description: An ISO formatted timestamp of the ending date range, current time if left blank
         type: date
-        example: 2018-07-01 00:00:00+00:00
+        example: 2018-07-01 00:00:00 00:00
         required: false
       max_investigations_to_close:
         title: Max Investigations to Close
