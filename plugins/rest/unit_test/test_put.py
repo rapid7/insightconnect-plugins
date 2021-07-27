@@ -1,13 +1,11 @@
 import sys
 import os
+from unit_test.mockconnection import MockConnection
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from komand_rest.connection.connection import Connection
 from komand_rest.actions.put import Put
-import json
-import logging
 
 
 class TestPut(TestCase):
@@ -23,7 +21,7 @@ class TestPut(TestCase):
 
         icon-plugin generate samples
 
-        """
+
 
         log = logging.getLogger("Test")
         test_conn = Connection()
@@ -38,12 +36,6 @@ class TestPut(TestCase):
                 connection_params = test_json.get("connection")
                 action_params = test_json.get("input")
         except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
             self.fail(message)
 
         test_conn.connect(connection_params)
@@ -56,17 +48,20 @@ class TestPut(TestCase):
         # TODO: The following assert should be updated to look for data from your action
         # For example: self.assertEquals({"success": True}, results)
         self.assertEquals({}, results)
-
-    def test_put(self):
         """
-        TODO: Implement test cases here
+        pass
 
-        Here you can mock the connection with data returned from the above integration test.
-        For information on mocking and unit testing please go here:
+    def test_put_unit(self):
+        test_conn = MockConnection()
+        test_action = Put()
 
-        https://docs.google.com/document/d/1PifePDG1-mBcmNYE8dULwGxJimiRBrax5BIDG_0TFQI/edit?usp=sharing
+        test_action.connection = test_conn
+        action_params = {"route": "https://www.google.com", "headers": {}}
+        results = test_action.run(action_params)
 
-        You can either create a formal Mock for this, or you can create a fake connection class to pass to your
-        action for testing.
-        """
-        self.fail("Unimplemented Test Case")
+        # only new things to test is that it correctly routes output of results
+        self.assertEqual(results["status"], 200)
+        # more tests?
+        self.assertEqual(results["body_object"], {"SampleSuccessBody": "SampleVal"})
+        self.assertEqual(results["body_string"], "SAMPLETEXT for method PUT")
+        self.assertEqual(results["headers"], {"SampleHeader": "SampleVal"})

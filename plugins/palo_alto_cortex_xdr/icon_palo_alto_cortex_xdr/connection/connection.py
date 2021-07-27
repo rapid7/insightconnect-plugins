@@ -38,5 +38,5 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return fqdn
 
     def test(self):
-        api = CortexXdrAPI()
-        api.test_connection()
+        self.xdr_api.test_connection()
+        return {"status": "pass"}
