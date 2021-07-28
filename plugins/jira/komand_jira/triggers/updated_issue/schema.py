@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Trigger which indicates that a new issue has been created"
+    DESCRIPTION = "Trigger which indicates that an issue has been updated or a new one has been created"
 
 
 class Input:
@@ -12,7 +12,7 @@ class Input:
     GET_ATTACHMENTS = "get_attachments"
     JQL = "jql"
     POLL_TIMEOUT = "poll_timeout"
-    PROJECT = "project"
+    PROJECTS = "projects"
     
 
 class Output:
@@ -20,7 +20,7 @@ class Output:
     ISSUE = "issue"
     
 
-class NewIssueInput(insightconnect_plugin_runtime.Input):
+class UpdatedIssueInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
@@ -46,10 +46,13 @@ class NewIssueInput(insightconnect_plugin_runtime.Input):
       "default": 60,
       "order": 4
     },
-    "project": {
-      "type": "string",
-      "title": "Project",
-      "description": "Project ID or name",
+    "projects": {
+      "type": "array",
+      "title": "Projects",
+      "description": "List of Project IDs or names",
+      "items": {
+        "type": "string"
+      },
       "order": 1
     }
   }
@@ -60,7 +63,7 @@ class NewIssueInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class NewIssueOutput(insightconnect_plugin_runtime.Output):
+class UpdatedIssueOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
@@ -69,7 +72,7 @@ class NewIssueOutput(insightconnect_plugin_runtime.Output):
     "issue": {
       "$ref": "#/definitions/issue",
       "title": "Issue",
-      "description": "New issue",
+      "description": "New or updated issue",
       "order": 1
     }
   },

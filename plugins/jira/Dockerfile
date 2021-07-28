@@ -9,8 +9,6 @@ ENV REQUESTS_CA_BUNDLE  /etc/ssl/certs/ca-certificates.crt
 
 ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 
-RUN apk add --no-cache gcc libc-dev libffi-dev openssl-dev
-
 ADD ./plugin.spec.yaml /plugin.spec.yaml
 ADD . /python/src
 
@@ -20,5 +18,7 @@ WORKDIR /python/src
 # End package dependencies
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 RUN python setup.py build && python setup.py install
+
+USER nobody
 
 ENTRYPOINT ["/usr/local/bin/komand_jira"]
