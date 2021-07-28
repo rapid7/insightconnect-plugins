@@ -28,7 +28,7 @@ class UpdatedIssue(insightconnect_plugin_runtime.Trigger):
                 self.send({Output.ISSUE: output})
 
     def validate_projects(self, projects):
-        for i, project in enumerate(projects):
+        for project in projects:
             valid_project = look_up_project(project, self.connection.client)
             if not valid_project:
                 raise PluginException(
