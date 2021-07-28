@@ -28,11 +28,11 @@ class UpdatedIssue(insightconnect_plugin_runtime.Trigger):
                 self.send({Output.ISSUE: output})
 
     def validate_projects(self, projects):
-        for i in range(len(projects)):
-            valid_project = look_up_project(projects[i], self.connection.client)
+        for i, project in enumerate(projects):
+            valid_project = look_up_project(project, self.connection.client)
             if not valid_project:
                 raise PluginException(
-                    cause=f"Project '{projects[i]}' does not exist or the user does not have permission to access the "
+                    cause=f"Project '{project}' does not exist or the user does not have permission to access the "
                     "project.",
                     assistance="Please provide a valid project ID/name or make sure the project is accessible to the "
                     "user.",
@@ -47,10 +47,14 @@ class UpdatedIssue(insightconnect_plugin_runtime.Trigger):
         jql = "(created>=-10m or updated>=-10m)"
         if self.projects:
             self.validate_projects(self.projects)
-            project_list = f"project='{self.projects[0]}'"
-            for i in range(1, len(self.projects)):
-                project_list += f" or project='{self.projects[i]}'"
+            project_list = ""
+            for i, project in enumerate(self.projects):
+                if i == 0:
+                    project_list = f"project='{project}'"
+                else:
+                    project_list += f" or project='{project}'"
             jql += f" and ({project_list})"
+
         if self.jql:
             jql += f" and ({self.jql})"
         self.jql = jql
