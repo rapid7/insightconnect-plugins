@@ -52,6 +52,42 @@ Example input:
 
 ### Actions
 
+#### Get File Quarantine Status
+
+This action is used to get quarantine status for a file.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|endpoint_id|string|None|True|Endpoint ID|None|example_ID|
+|file_hash|string|None|True|File Hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
+|file_path|string|None|True|File path|None|powershell.exe|
+
+Example input:
+
+```
+{
+  "endpoint_id": "example_ID",
+  "file_hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+  "file_path": "powershell.exe"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|file_is_quarantined|boolean|True|Check if the provided file is quarantined|
+
+Example output:
+
+```
+{
+  "file_is_quarantined": true
+}
+```
+
 #### Block File
 
 This action is used to add a file to the block list.
@@ -132,7 +168,7 @@ This action is used to isolate an endpoint.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|endpoint|string|None|True|Endpoint to isolate or unisolate. This can be an IPv4 address, hostname, or endpoint ID|None|0123456abcdef12345abcde12345abcd|
+|endpoint|string|None|True|Endpoint to isolate or unisolate. This can be an IPv4 address, hostname, or endpoint ID|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |isolation_state|string|Isolate|True|Isolation state to set|['Isolate', 'Unisolate']|Unisolate|
 |whitelist|[]string|[]|False|This list contains a set of devices that should not be blocked. This can be a combination of IPv4 addresses, hostnames, or endpoint IDs|None|["198.51.100.100", "hostname123", "225494730938493804"]|
 
@@ -140,7 +176,7 @@ Example input:
 
 ```
 {
-  "endpoint": "0123456abcdef12345abcde12345abcd",
+  "endpoint": "9de5069c5afe602b2ea0a04b66beb2c0",
   "isolation_state": "Unisolate",
   "whitelist": [
     "198.51.100.100",
@@ -175,13 +211,13 @@ This action is used to get information about an endpoint.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|endpoint|string|None|True|The endpoint to get information about. This can be an IPv4 address, hostname, or endpoint ID|None|0123456abcdef12345abcde12345abcd|
+|endpoint|string|None|True|The endpoint to get information about. This can be an IPv4 address, hostname, or endpoint ID|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
 ```
 {
-  "endpoint": "0123456abcdef12345abcde12345abcd"
+  "endpoint": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 
@@ -229,19 +265,207 @@ Example output:
 
 ### Triggers
 
+#### Get Alerts
+
+This trigger is used to get Alerts.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|frequency|integer|5|False|Poll frequency in seconds|None|5|
+
+Example input:
+
+```
+{
+  "frequency": 5
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|alert|alert|False|Alert|
+
+Example output:
+
+```
+{
+  "alert": {
+    "external_id": "abcdefghijlkmnopqrstuv123456789",
+    "severity": "high",
+    "matching_status": "UNMATCHABLE",
+    "end_match_attempt_ts": null,
+    "local_insert_ts": 1621448835056,
+    "bioc_indicator": null,
+    "matching_service_rule_id": null,
+    "attempt_counter": null,
+    "bioc_category_enum_key": null,
+    "is_whitelisted": false,
+    "starred": false,
+    "deduplicate_tokens": null,
+    "filter_rule_id": null,
+    "mitre_technique_id_and_name": [
+      "T1140 - Deobfuscate/Decode Files or Information",
+      "T1059.001 - Command and Scripting Interpreter: PowerShell",
+      "T1059 - Command and Scripting Interpreter"
+    ],
+    "mitre_tactic_id_and_name": [
+      "TA0005 - Defense Evasion",
+      "TA0002 - Execution"
+    ],
+    "agent_version": "7.3.2.26319",
+    "agent_device_domain": "example.com",
+    "agent_fqdn": "example-host.example.com",
+    "agent_os_type": "Windows",
+    "agent_os_sub_type": "10.0.1234",
+    "agent_data_collection_status": false,
+    "mac": "ab:cd:ef:12:34:56",
+    "events": [
+      {
+        "agent_install_type": "STANDARD",
+        "agent_host_boot_time": null,
+        "event_sub_type": null,
+        "module_id": "Behavioral Threat Protection",
+        "association_strength": null,
+        "dst_association_strength": null,
+        "story_id": null,
+        "event_id": null,
+        "event_type": "Process Execution",
+        "event_timestamp": 1621448822758,
+        "actor_process_instance_id": "<some id>",
+        "actor_process_image_path": "C:\\Windows\\System32\\executable.exe",
+        "actor_process_image_name": "cmd.exe",
+        "actor_process_command_line": "C:\\Windows\\system32\\executable.exe /c \"\"C:\\detection_test.bat\" \"",
+        "actor_process_signature_status": "N/A",
+        "actor_process_signature_vendor": "Microsoft WindowsMicrosoft Corporation",
+        "actor_process_image_sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+        "actor_process_image_md5": null,
+        "actor_process_causality_id": null,
+        "actor_causality_id": null,
+        "actor_process_os_pid": 2964,
+        "actor_thread_thread_id": null,
+        "causality_actor_process_image_name": null,
+        "causality_actor_process_command_line": null,
+        "causality_actor_process_image_path": null,
+        "causality_actor_process_signature_vendor": null,
+        "causality_actor_process_signature_status": "N/A",
+        "causality_actor_causality_id": null,
+        "causality_actor_process_execution_time": null,
+        "causality_actor_process_image_md5": null,
+        "causality_actor_process_image_sha256": null,
+        "action_file_path": null,
+        "action_file_name": null,
+        "action_file_md5": null,
+        "action_file_sha256": null,
+        "action_file_macro_sha256": null,
+        "action_registry_data": null,
+        "action_registry_key_name": null,
+        "action_registry_value_name": null,
+        "action_registry_full_key": null,
+        "action_local_ip": null,
+        "action_local_port": null,
+        "action_remote_ip": null,
+        "action_remote_port": null,
+        "action_external_hostname": null,
+        "action_country": "UNKNOWN",
+        "action_process_instance_id": null,
+        "action_process_causality_id": null,
+        "action_process_image_name": null,
+        "action_process_image_sha256": null,
+        "action_process_image_command_line": null,
+        "action_process_signature_status": "N/A",
+        "action_process_signature_vendor": null,
+        "os_actor_effective_username": null,
+        "os_actor_process_instance_id": null,
+        "os_actor_process_image_path": null,
+        "os_actor_process_image_name": null,
+        "os_actor_process_command_line": null,
+        "os_actor_process_signature_status": "N/A",
+        "os_actor_process_signature_vendor": null,
+        "os_actor_process_image_sha256": null,
+        "os_actor_process_causality_id": null,
+        "os_actor_causality_id": null,
+        "os_actor_process_os_pid": null,
+        "os_actor_thread_thread_id": null,
+        "fw_app_id": null,
+        "fw_interface_from": null,
+        "fw_interface_to": null,
+        "fw_rule": null,
+        "fw_rule_id": null,
+        "fw_device_name": null,
+        "fw_serial_number": null,
+        "fw_url_domain": null,
+        "fw_email_subject": null,
+        "fw_email_sender": null,
+        "fw_email_recipient": null,
+        "fw_app_subcategory": null,
+        "fw_app_category": null,
+        "fw_app_technology": null,
+        "fw_vsys": null,
+        "fw_xff": null,
+        "fw_misc": null,
+        "fw_is_phishing": "N/A",
+        "dst_agent_id": null,
+        "dst_causality_actor_process_execution_time": null,
+        "dns_query_name": null,
+        "dst_action_external_hostname": null,
+        "dst_action_country": null,
+        "dst_action_external_port": null,
+        "contains_featured_host": "NO",
+        "contains_featured_user": "NO",
+        "contains_featured_ip": "NO",
+        "image_name": null,
+        "container_id": null,
+        "cluster_name": null,
+        "user_name": "example"
+      }
+    ],
+    "alert_id": "1",
+    "detection_timestamp": 1621448822758,
+    "name": "Behavioral Threat",
+    "category": "Malware",
+    "endpoint_id": "abcdefghijlkmnop123654",
+    "description": "Behavioral threat detected (rule: heuristic.b.205)",
+    "host_ip": [
+      "10.0.20.10"
+    ],
+    "host_name": "example-host",
+    "mac_addresses": [
+      "ab:cd:ef:12:34:56"
+    ],
+    "source": "XDR Agent",
+    "action": "BLOCKED",
+    "action_pretty": "Prevented (Blocked)"
+  }
+}
+```
+
 #### Get Incidents
 
 This trigger is used to get Incidents.
 
 ##### Input
 
-_This trigger does not contain any inputs._
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|frequency|integer|5|False|Poll frequency in seconds|None|5|
+
+Example input:
+
+```
+{
+  "frequency": 5
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|incident|object|False|Incident|
+|incident|incident|False|Incident|
 
 Example output:
 
@@ -326,6 +550,7 @@ Example output:
 
 # Version History
 
+* 2.0.0 - New action Get File Quarantine Status | New trigger Get Alerts
 * 1.0.0 - Initial plugin
 
 # Links
