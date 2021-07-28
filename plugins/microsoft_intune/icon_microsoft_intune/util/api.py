@@ -309,8 +309,10 @@ class MicrosoftIntuneAPI:
         for item in managed_app_policies["value"]:
             if item["displayName"] == policy_name:
                 return item["id"]
+        return None
 
     def _filter_app_package_id(self, managed_app_list, application_name):
         for item in managed_app_list["content"]["appList"]:
             if item["displayName"] == application_name and "packageId" in item["appIdentifier"]:
                 return item["appIdentifier"]["packageId"]
+        return None
