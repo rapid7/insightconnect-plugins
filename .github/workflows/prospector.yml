@@ -6,7 +6,9 @@ jobs:
   prospector:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Set up Python 3.7
         uses: actions/setup-python@v2
@@ -19,4 +21,26 @@ jobs:
 
       - name: Prospector
         run: |
-          prospector --profile prospector.yaml --tool bandit --tool mccabe
+          CHANGED_FILES=()
+          for OUTPUT in $(git diff --no-commit-id --name-only -r HEAD..origin/master)
+          do
+            if ! [[ -d ${OUTPUT} ]] && [[ ${OUTPUT} == *.py ]]
+            then
+              CHANGED_FILES+=( ${OUTPUT} )
+            fi
+          done
+
+          echo "All changed files:"
+          echo ${CHANGED_FILES[@]}
+          FILTER="(schema\.py|setup\.py|__init__\.py|ec2_investigations|unit_test\/)" 
+          for index in "${!CHANGED_FILES[@]}" ; do [[ ${CHANGED_FILES[$index]} =~ $FILTER ]] && unset -v 'CHANGED_FILES[$index]' ; done
+          echo "Files after filtering:"
+          echo ${CHANGED_FILES[@]}
+
+          if ! [[ ${#CHANGED_FILES[*]} == 0 ]]
+          then
+            echo "Running Prospector on: "${CHANGED_FILES[*]}
+            prospector --profile prospector.yaml ${CHANGED_FILES[*]} --tool bandit --tool mccabe --tool pylint --tool pyflakes
+          else
+            echo "No python files changed, so prospector was not run. Differences from Master branch found in: "${OUTPUT[*]}
+          fi

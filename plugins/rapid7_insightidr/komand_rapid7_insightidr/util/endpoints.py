@@ -85,7 +85,7 @@ class Logs:
         :return: pre-populated /management/logs/{logId}
         """
 
-        return f"{console_url}management/logs/{log_id}"
+        return f"{console_url}log_search/management/logs/{log_id}"
 
     @staticmethod
     def get_all_logs(console_url: str):
@@ -95,4 +95,4 @@ class Logs:
         :return: pre-populated /management/logs
         """
 
-        return f"{console_url}management/logs"
+        return f"{console_url}log_search/management/logs"

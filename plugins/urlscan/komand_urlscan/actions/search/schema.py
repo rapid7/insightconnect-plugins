@@ -9,9 +9,7 @@ class Component:
 
 class Input:
     INPUT_TYPE = "input_type"
-    OFFSET = "offset"
     Q = "q"
-    SIZE = "size"
     SORT = "sort"
     
 
@@ -39,13 +37,6 @@ class SearchInput(komand.Input):
       ],
       "order": 1
     },
-    "offset": {
-      "type": "integer",
-      "title": "Offset",
-      "description": "Offset of first result (for paginating)",
-      "default": 0,
-      "order": 4
-    },
     "q": {
       "type": "string",
       "title": "Query",
@@ -53,26 +44,17 @@ class SearchInput(komand.Input):
       "default": "example.com",
       "order": 2
     },
-    "size": {
-      "type": "integer",
-      "title": "Size",
-      "description": "Number of results returned",
-      "default": 100,
-      "order": 3
-    },
     "sort": {
       "type": "string",
       "title": "Sort",
       "description": "Sorting, specificied via $sort_field:$sort_order",
       "default": "_score",
-      "order": 5
+      "order": 3
     }
   },
   "required": [
     "input_type",
-    "offset",
     "q",
-    "size",
     "sort"
   ]
 }

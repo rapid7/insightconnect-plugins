@@ -11,7 +11,7 @@ vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/datadog
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/datadog
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.datadoghq.com/
 tags:
