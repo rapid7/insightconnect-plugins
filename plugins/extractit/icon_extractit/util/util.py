@@ -45,28 +45,28 @@ class Extractor:
 
     @staticmethod
     def strip_subdomains(matches: list) -> list:
-        for i in range(len(matches)):
+        for i in enumerate(matches):
             stripped_domain = tldextract.extract(matches[i])
             matches[i] = ".".join(stripped_domain[1:3])
         return list(dict.fromkeys(matches))
 
     @staticmethod
     def clear_domains(matches: list) -> list:
-        for i in range(len(matches)):
+        for i in enumerate(matches):
             matches[i] = matches[i].split("/")[0]
         return matches
 
     @staticmethod
     def clear_urls(matches: list) -> list:
         new_matches = []
-        for i in range(len(matches)):
+        for i in enumerate(matches):
             if not validators.ip_address.ipv4(matches[i]) and not validators.email(matches[i]):
                 new_matches.append(matches[i])
         return new_matches
 
     @staticmethod
     def parse_time(dates: list) -> list:
-        for i in range(len(dates)):
+        for i in enumerate(dates):
             date_time_obj = datetime.strptime(dates[i], "%d/%m/%Y")
             dates[i] = date_time_obj.strftime("%Y-%m-%dT%H:%M:%SZ")
         return dates
