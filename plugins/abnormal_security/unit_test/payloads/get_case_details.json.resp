@@ -1,0 +1,6 @@
+{
+  "affectedEmployee": "FirstName LastName",
+  "caseId": "19377",
+  "firstObserved": "2020-06-09T17:42:59Z",
+  "severity": "Potential Account Takeover"
+}
