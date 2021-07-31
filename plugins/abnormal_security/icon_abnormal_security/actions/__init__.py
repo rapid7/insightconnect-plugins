@@ -3,3 +3,5 @@ from .get_case_details.action import GetCaseDetails
 from .get_cases.action import GetCases
 from .get_threat_details.action import GetThreatDetails
 from .get_threats.action import GetThreats
+from .manage_case.action import ManageCase
+from .manage_threat.action import ManageThreat

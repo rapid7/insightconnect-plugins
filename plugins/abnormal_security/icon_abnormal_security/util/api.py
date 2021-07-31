@@ -31,11 +31,23 @@ class AbnormalSecurityAPI:
     def get_case_details(self, case_guid: str) -> dict:
         return self.send_request("GET", f"/cases/{case_guid}")
 
+    def manage_threat(self, threat_id: str, action: str) -> dict:
+        return self.send_request("POST", f"/threats/{threat_id}", payload={"action": action})
+
+    def manage_case(self, case_id: str, action: str) -> dict:
+        results = self.send_request("POST", f"/cases/{case_id}", payload={"action": action})
+        if isinstance(results.get("statusUrl"), dict):
+            if results.get("statusUrl"):
+                results["statusUrl"] = str(results.get("statusUrl"))
+            else:
+                results["statusUrl"] = ""
+        return results
+
     def send_request(self, method: str, path: str, params: dict = None, payload: dict = None) -> dict:
         try:
             response = requests.request(
                 method.upper(),
-                self.base_url + path,
+                f"{self.base_url}{path}",
                 params=params,
                 json=payload,
                 headers=self.headers,
@@ -63,7 +75,7 @@ class AbnormalSecurityAPI:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
             if 200 <= response.status_code < 300:
-                return clean(json.loads(response.content))
+                return clean(response.json())
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except json.decoder.JSONDecodeError as e:
