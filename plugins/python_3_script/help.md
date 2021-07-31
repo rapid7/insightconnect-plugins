@@ -23,7 +23,7 @@ _This plugin does not contain any requirements._
 
 ## Setup
 
-Check out the [plugin guide](https://insightconnect.help.rapid7.com/docs/python-2-or-3-script) for more details on how to configure this plugin.
+Check out the [plugin guide](https://docs.rapid7.com/insightconnect/python-2-or-3-script/) for more details on how to configure this plugin.
 
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
@@ -98,6 +98,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.3 - Update `docs_url` in plugin spec with a new link to [plugin setup guide](https://docs.rapid7.com/insightconnect/python-2-or-3-script/)
 * 2.0.2 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/python-2-or-3-script)
 * 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Add the ability to download and install third-party libraries for use while configuring the plugin Connection
@@ -114,4 +115,4 @@ This plugin does not contain any troubleshooting information.
 ## References
 
 * [Python 3 Language Reference](https://docs.python.org/3/reference/index.html)
-* [InsightConnect Python Plugin Guide](https://insightconnect.help.rapid7.com/docs/python-2-or-3-script)
+* [InsightConnect Python Plugin Guide](https://docs.rapid7.com/insightconnect/python-2-or-3-script/)
