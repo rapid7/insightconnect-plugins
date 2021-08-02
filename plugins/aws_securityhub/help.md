@@ -194,6 +194,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.3 - Update `docs_url` in plugin spec with a new link to [plugin setup guide](https://docs.rapid7.com/insightconnect/aws-security-hub/)
 * 2.0.2 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/aws-security-hub)
 * 2.0.1 - Removed unused variables
 * 2.0.0 - New spec and help.md format for the Extension Library | Variable names updated as acronyms
@@ -206,5 +207,4 @@ This plugin does not contain any troubleshooting information.
 * [AWS Security Hub](https://aws.amazon.com/security-hub/)
 * [AWS Security Hub API](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Operations.html)
 * [Boto3](https://github.com/boto/boto3)
-* [InsightConnect Plugin Guide](https://insightconnect.help.rapid7.com/docs/aws-security-hub)
-
+* [InsightConnect Plugin Guide](https://docs.rapid7.com/insightconnect/aws-security-hub/)
