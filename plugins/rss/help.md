@@ -3,7 +3,7 @@
 The RSS plugin can monitor any generic [RSS](https://en.wikipedia.org/wiki/RSS) feed.
 
 This plugin returns a generic `object` since each RSS feed can have its own data structure.
-Use [input templating](https://insightconnect.help.rapid7.com/docs/format-strings-with-templates), [Python Script plugin](https://insightconnect.help.rapid7.com/docs/python-2-or-3-script), or the [JQ plugin](https://market.komand.com/plugins/komand/jq/0.1.3) to retrieve specific outputs.
+Use [input templating](https://docs.rapid7.com/insightconnect/format-strings-with-templates/), [Python Script plugin](https://docs.rapid7.com/insightconnect/python-2-or-3-script/), or the [JQ plugin](https://market.komand.com/plugins/komand/jq/0.1.3) to retrieve specific outputs.
 
 # Key Features
 
@@ -188,6 +188,7 @@ Between workflow runs, new items will *not* be reported on.
 
 # Version History
 
+* 1.0.5 - Update links to Rapid7 documentation in `help.md` to use new [Rapid7 documentation URL](https://docs.rapid7.com/insightconnect/)
 * 1.0.4 - Change Frequency input description in Poll Feed trigger | Add example inputs
 * 1.0.3 - New spec and help.md format for the Extension Library
 * 1.0.2 - Fixed issue where Poll Feed was logging unnecessary information
@@ -200,6 +201,6 @@ Between workflow runs, new items will *not* be reported on.
 
 ## References
 
-* [feedparser](https://github.com/kurtmckee/feedparser)
-* [input templating](https://insightconnect.help.rapid7.com/docs/format-strings-with-templates)
-* [Python Script plugin](https://insightconnect.help.rapid7.com/docs/python-2-or-3-script)
+* [Feedparser](https://github.com/kurtmckee/feedparser)
+* [Input Templating](https://docs.rapid7.com/insightconnect/format-strings-with-templates/)
+* [Python Script plugin](https://docs.rapid7.com/insightconnect/python-2-or-3-script/)
