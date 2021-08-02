@@ -43,6 +43,7 @@ class AbnormalSecurityAPI:
                 results["statusUrl"] = ""
         return results
 
+    # pylint: disable=inconsistent-return-statements
     def send_request(self, method: str, path: str, params: dict = None, payload: dict = None) -> dict:
         try:
             response = requests.request(
@@ -108,5 +109,5 @@ class AbnormalSecurityAPI:
 
     @staticmethod
     def split_url(url: str) -> str:
-        scheme, netloc, paths, queries, fragments = urlsplit(url.strip())
+        scheme, netloc, paths, queries, fragments = urlsplit(url.strip())  # pylint: disable=unused-variable
         return f"{scheme}://{netloc}"
