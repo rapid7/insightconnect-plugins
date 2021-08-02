@@ -2,7 +2,8 @@ import insightconnect_plugin_runtime
 from .schema import DateExtractorInput, DateExtractorOutput, Input, Output, Component
 
 # Custom imports below
-from icon_extractit.util.util import Regex, Extractor
+from icon_extractit.util.util import Regex
+from icon_extractit.util.extractor import extract, parse_time
 
 
 class DateExtractor(insightconnect_plugin_runtime.Action):
@@ -15,8 +16,4 @@ class DateExtractor(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {
-            Output.DATES: Extractor.parse_time(
-                Extractor.extract(Regex.Date, params.get(Input.STR), params.get(Input.FILE))
-            )
-        }
+        return {Output.DATES: parse_time(extract(Regex.Date, params.get(Input.STR), params.get(Input.FILE)))}

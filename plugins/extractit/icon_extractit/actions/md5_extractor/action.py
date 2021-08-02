@@ -2,7 +2,8 @@ import insightconnect_plugin_runtime
 from .schema import Md5ExtractorInput, Md5ExtractorOutput, Input, Output, Component
 
 # Custom imports below
-from icon_extractit.util.util import Regex, Extractor
+from icon_extractit.util.util import Regex
+from icon_extractit.util.extractor import extract
 
 
 class Md5Extractor(insightconnect_plugin_runtime.Action):
@@ -15,4 +16,4 @@ class Md5Extractor(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {Output.MD5: Extractor.extract(Regex.MD5, params.get(Input.STR), params.get(Input.FILE))}
+        return {Output.MD5: extract(Regex.MD5, params.get(Input.STR), params.get(Input.FILE))}

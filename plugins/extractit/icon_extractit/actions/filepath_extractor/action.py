@@ -2,7 +2,8 @@ import insightconnect_plugin_runtime
 from .schema import FilepathExtractorInput, FilepathExtractorOutput, Input, Output, Component
 
 # Custom imports below
-from icon_extractit.util.util import Regex, Extractor
+from icon_extractit.util.util import Regex
+from icon_extractit.util.extractor import extract_filepath
 
 
 class FilepathExtractor(insightconnect_plugin_runtime.Action):
@@ -15,6 +16,4 @@ class FilepathExtractor(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {
-            Output.FILEPATHS: Extractor.extract_filepath(Regex.FilePath, params.get(Input.STR), params.get(Input.FILE))
-        }
+        return {Output.FILEPATHS: extract_filepath(Regex.FilePath, params.get(Input.STR), params.get(Input.FILE))}

@@ -2,7 +2,8 @@ import insightconnect_plugin_runtime
 from .schema import UrlExtractorInput, UrlExtractorOutput, Input, Output, Component
 
 # Custom imports below
-from icon_extractit.util.util import Regex, Extractor
+from icon_extractit.util.util import Regex
+from icon_extractit.util.extractor import extract, clear_urls
 
 
 class UrlExtractor(insightconnect_plugin_runtime.Action):
@@ -15,8 +16,4 @@ class UrlExtractor(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {
-            Output.URLS: Extractor.clear_urls(
-                Extractor.extract(Regex.URL, params.get(Input.STR), params.get(Input.FILE))
-            )
-        }
+        return {Output.URLS: clear_urls(extract(Regex.URL, params.get(Input.STR), params.get(Input.FILE)))}

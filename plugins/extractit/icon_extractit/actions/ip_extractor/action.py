@@ -2,7 +2,8 @@ import insightconnect_plugin_runtime
 from .schema import IpExtractorInput, IpExtractorOutput, Input, Output, Component
 
 # Custom imports below
-from icon_extractit.util.util import Regex, Extractor
+from icon_extractit.util.util import Regex
+from icon_extractit.util.extractor import extract
 
 
 class IpExtractor(insightconnect_plugin_runtime.Action):
@@ -13,6 +14,6 @@ class IpExtractor(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         matches = []
-        matches.extend(Extractor.extract(Regex.IPv4, params.get(Input.STR), params.get(Input.FILE)))
-        matches.extend(Extractor.extract(Regex.IPv6, params.get(Input.STR), params.get(Input.FILE)))
+        matches.extend(extract(Regex.IPv4, params.get(Input.STR), params.get(Input.FILE)))
+        matches.extend(extract(Regex.IPv6, params.get(Input.STR), params.get(Input.FILE)))
         return {Output.IP_ADDRS: matches}

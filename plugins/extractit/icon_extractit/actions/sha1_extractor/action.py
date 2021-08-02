@@ -2,7 +2,8 @@ import insightconnect_plugin_runtime
 from .schema import Sha1ExtractorInput, Sha1ExtractorOutput, Input, Output, Component
 
 # Custom imports below
-from icon_extractit.util.util import Regex, Extractor
+from icon_extractit.util.util import Regex
+from icon_extractit.util.extractor import extract
 
 
 class Sha1Extractor(insightconnect_plugin_runtime.Action):
@@ -15,4 +16,4 @@ class Sha1Extractor(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {Output.SHA1: Extractor.extract(Regex.SHA1, params.get(Input.STR), params.get(Input.FILE))}
+        return {Output.SHA1: extract(Regex.SHA1, params.get(Input.STR), params.get(Input.FILE))}

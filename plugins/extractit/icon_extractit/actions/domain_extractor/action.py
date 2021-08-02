@@ -2,7 +2,8 @@ import insightconnect_plugin_runtime
 from .schema import DomainExtractorInput, DomainExtractorOutput, Input, Output, Component
 
 # Custom imports below
-from icon_extractit.util.util import Regex, Extractor
+from icon_extractit.util.util import Regex
+from icon_extractit.util.extractor import extract, clear_domains, strip_subdomains
 
 
 class DomainExtractor(insightconnect_plugin_runtime.Action):
@@ -15,9 +16,7 @@ class DomainExtractor(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        matches = Extractor.clear_domains(
-            Extractor.extract(Regex.Domain, params.get(Input.STR), params.get(Input.FILE))
-        )
+        matches = clear_domains(extract(Regex.Domain, params.get(Input.STR), params.get(Input.FILE)))
         if not params.get(Input.SUBDOMAIN):
-            matches = Extractor.strip_subdomains(matches)
+            matches = strip_subdomains(matches)
         return {Output.DOMAINS: matches}
