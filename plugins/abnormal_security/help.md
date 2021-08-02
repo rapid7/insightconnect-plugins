@@ -35,6 +35,80 @@ Example input:
 
 ### Actions
 
+#### Manage Threat
+
+This action is used to manage a Threat identified by Abnormal Security.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|action|string|None|True|Remediate or unremediate a threat|['remediate', 'unremediate']|remediate|
+|threat_id|string|None|True|A UUID representing the threat|None|184712ab-6d8b-47b3-89d3-a314efef79e2|
+
+Example input:
+
+```
+{
+  "action": "remediate",
+  "threat_id": "184712ab-6d8b-47b3-89d3-a314efef79e2"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|response|manage_threat_response|True|Response containing the action ID and status URL|
+
+Example output:
+
+```
+{
+  "response": {
+    "actionId": "a33a212a-89ff-461f-be34-ea52aff44a73",
+    "statusUrl": "https://api.abnormalplatform.com/v1/threats/184712..."
+  }
+}
+```
+
+#### Manage Case
+
+This action is used to manage an Abnormal Case.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|action|string|None|True|Acknowledge or take another remediation action on a case|['Action Required', 'Acknowledge in Progress', 'Acknowledge Resolved', 'Acknowledge not an Attack']|Action Required|
+|case_id|string|None|True|An ID representing the case|None|12345|
+
+Example input:
+
+```
+{
+  "action": "Action Required",
+  "case_id": 12345
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|response|manage_case_response|True|Response containing the action ID and status URL|
+
+Example output:
+
+```
+{
+  "response": {
+    "actionId": "61e76395-40d3-4d78-b6a8-8b17634d0f5b",
+    "statusUrl": "https://api.abnormalplatform.com/v1/cases/19377..."
+  }
+}
+```
+
 #### Get Cases
 
 This action is used to get a list of up to 100 cases identified by Abnormal Security, if no input filter dates are provided, it will return up to 100 latest results.
@@ -286,10 +360,79 @@ _This plugin does not contain any triggers._
 
 ### Custom Output Types
 
+#### case
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Case ID|string|False|Case ID|
+|Severity|string|False|Severity|
+
+#### case_details
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Affected Employee|string|False|Affected employee|
+|Case ID|string|False|Case ID|
+|First Observed|string|False|First observed|
+|Severity|string|False|Severity|
+
+#### manage_case_response
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Action ID|string|False|Action ID|
+|Status URL|string|False|Status URL|
+
+#### manage_threat_response
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Action ID|string|False|Action ID|
+|Status URL|string|False|Status URL|
+
+#### message
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ABX Message ID|integer|False|ABX Message ID|
+|ABX Portal URL ID|string|False|ABX portal URL ID|
+|Attachment Names|[]string|False|Attachment names|
+|Attack Strategy|string|False|Attack strategy|
+|Attack Type|string|False|Attack type|
+|Attack Vector|string|False|Attack vector|
+|Attacked Party|string|False|Attacked party|
+|Auto Remediated|boolean|False|Auto remediated|
+|CC Emails|[]string|False|CC emails|
+|From Address|string|False|From address|
+|From Name|string|False|From name|
+|Impersonated Party|string|False|Impersonated party|
+|Internet Message ID|string|False|Internet message ID|
+|Is Read|boolean|False|Is Read|
+|Post Remediated|boolean|False|Post remediated|
+|Received Time|string|False|Received time|
+|Recipient Address|string|False|Recipient address|
+|Remediation Timestamp|string|False|Remediation timestamp|
+|Reply to Emails|[]string|False|Reply to emails|
+|Return Path|string|False|Return path|
+|Sender IP Address|string|False|Sender IP address|
+|Sent Time|string|False|Sent time|
+|Subject|string|False|Subject|
+|Summary Insights|[]string|False|Summary insights|
+|Threat ID|string|False|Threat ID|
+|To Address|string|False|To address|
+|URLs|[]string|False|URLs|
+
 #### threat
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|Threat ID|string|False|Threat ID|
+
+#### threat_details
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Messages|[]message|False|List of messages|
 |Threat ID|string|False|Threat ID|
 
 
@@ -299,6 +442,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.0 - New actions Manage Case and Manage Threat
 * 1.1.0 - New actions Get Cases and Get Case Details
 * 1.0.0 - Initial plugin
 

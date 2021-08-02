@@ -4,14 +4,14 @@ products: [insightconnect]
 name: abnormal_security
 title: Abnormal Security
 description: Protect your Microsoft Office 365 and G-Suite environments with next-generation email security that uses the most advanced AI detection techniques to stop targeted phishing attacks
-version: 1.1.0
+version: 1.2.0
 vendor: rapid7
 support: rapid7
 status: []
 tags: [investigate, malware, threat intel]
 hub_tags:
   use_cases: [threat_detection_and_response, vulnerability_management]
-  keywords: [investigate]
+  keywords: [investigate, malware_analysis, threat_intelligence]
   features: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/abnormal_security
@@ -204,6 +204,28 @@ types:
       description: First observed
       type: string
       required: false
+  manage_threat_response:
+    actionId:
+      title: Action ID
+      description: Action ID
+      type: string
+      required: false
+    statusUrl:
+      title: Status URL
+      description: Status URL
+      type: string
+      required: false
+  manage_case_response:
+    actionId:
+      title: Action ID
+      description: Action ID
+      type: string
+      required: false
+    statusUrl:
+      title: Status URL
+      description: Status URL
+      type: string
+      required: false
 connection:
   URL:
     title: URL
@@ -294,4 +316,56 @@ actions:
         title: Case Details
         description: Details of the requested case identified by Abnormal Security
         type: case_details
+        required: true
+  manage_threat:
+    title: Manage Threat
+    description: Manage a Threat identified by Abnormal Security
+    input:
+      threat_id:
+        title: Threat ID
+        description: A UUID representing the threat
+        type: string
+        required: true
+        example: 184712ab-6d8b-47b3-89d3-a314efef79e2
+      action:
+        title: Action
+        description: Remediate or unremediate a threat
+        type: string
+        enum:
+          - remediate
+          - unremediate
+        required: true
+        example: remediate
+    output:
+      response:
+        title: Response
+        description: Response containing the action ID and status URL
+        type: manage_threat_response
+        required: true
+  manage_case:
+    title: Manage Case
+    description: Manage an Abnormal Case
+    input:
+      case_id:
+        title: Case ID
+        description: An ID representing the case
+        type: string
+        required: true
+        example: 12345
+      action:
+        title: Action
+        description: Acknowledge or take another remediation action on a case
+        type: string
+        enum:
+          - Action Required
+          - Acknowledge in Progress
+          - Acknowledge Resolved
+          - Acknowledge not an Attack
+        required: true
+        example: Action Required
+    output:
+      response:
+        title: Response
+        description: Response containing the action ID and status URL
+        type: manage_case_response
         required: true
