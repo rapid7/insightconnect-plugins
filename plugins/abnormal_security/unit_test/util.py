@@ -1,7 +1,6 @@
 import json
 import logging
 import os
-from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_abnormal_security.connection.connection import Connection
 from icon_abnormal_security.connection.schema import Input
 
@@ -34,20 +33,14 @@ class Util:
             def __init__(self, filename, status_code):
                 self.filename = filename
                 self.status_code = status_code
-                self.content = None
-                self.text = "This is some error text"
-
-                if self.filename not in ["error", "empty"]:
-                    self.content = Util.read_file_to_string(
-                        os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{self.filename}.json.resp")
-                    )
+                if self.filename == "manage_threat_invalid_id":
+                    self.text = 'Response was: {"message": "Threat action does not exist"}'
+                elif self.filename == "manage_case_invalid_id":
+                    self.text = 'Response was: {"message": "Case action does not exist"}'
+                else:
+                    self.text = "Error message"
 
             def json(self):
-                if self.filename == "error":
-                    raise PluginException(preset=PluginException.Preset.SERVER_ERROR)
-                if self.filename == "empty":
-                    return {}
-
                 return json.loads(
                     Util.read_file_to_string(
                         os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{self.filename}.json.resp")
@@ -62,5 +55,21 @@ class Util:
             return MockResponse("get_cases", 200)
         elif args[1] == "https://rapid7.com/v1/threats":
             return MockResponse("get_threats", 200)
+        elif args[1] == "https://rapid7.com/v1/threats/a456b27b-6d7c-362a-efef-b22489d379e2":
+            return MockResponse("manage_threat_remediate", 202)
+        elif args[1] == "https://rapid7.com/v1/threats/763ab210-6d8b-220c-89d3-10aa87524bba":
+            return MockResponse("manage_threat_unremediate", 202)
+        elif args[1] == "https://rapid7.com/v1/threats/53ca2899-d987-22aa-30a7-22aa987c4319":
+            return MockResponse("manage_threat_invalid_id", 404)
+        elif args[1] == "https://rapid7.com/v1/cases/12345":
+            return MockResponse("manage_case_not_an_attack", 202)
+        elif args[1] == "https://rapid7.com/v1/cases/34567":
+            return MockResponse("manage_case_action_required", 202)
+        elif args[1] == "https://rapid7.com/v1/cases/23456":
+            return MockResponse("manage_case_in_progress", 202)
+        elif args[1] == "https://rapid7.com/v1/cases/45678":
+            return MockResponse("manage_case_resolved", 202)
+        elif args[1] == "https://rapid7.com/v1/cases/56789":
+            return MockResponse("manage_case_invalid_id", 404)
 
         raise Exception("Not implemented")
