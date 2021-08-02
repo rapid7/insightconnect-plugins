@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "RSS"
 Vendor = "rapid7"
-Version = "1.0.4"
+Version = "1.0.5"
 Description = "The RSS plugin allows you to monitor an RSS feed"
 
 
