@@ -22,7 +22,7 @@ class IocExtractor(insightconnect_plugin_runtime.Action):
         matches.extend(extractor.clear_domains(extractor.extract(Regex.Domain, provided_string, provided_file)))
         matches.extend(extractor.parse_time(extractor.extract(Regex.Date, provided_string, provided_file)))
         matches.extend(extractor.extract_filepath(Regex.FilePath, provided_string, provided_file))
-        matches.extend(extractor.extract(Regex.Email, provided_string, provided_file))
+        matches.extend(extractor.clear_emails(extractor.extract(Regex.Email, provided_string, provided_file)))
         matches.extend(extractor.extract(Regex.MACAddress, provided_string, provided_file))
         matches.extend(extractor.extract(Regex.IPv4, provided_string, provided_file))
         matches.extend(extractor.extract(Regex.IPv6, provided_string, provided_file))
