@@ -4,14 +4,14 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Trigger which indicates that an issue has been updated or a new one has been created"
+    DESCRIPTION = "Watches for newly-created or updated issues"
 
 
 class Input:
     
     GET_ATTACHMENTS = "get_attachments"
+    INTERVAL = "interval"
     JQL = "jql"
-    POLL_TIMEOUT = "poll_timeout"
     PROJECTS = "projects"
     
 
@@ -20,7 +20,7 @@ class Output:
     ISSUE = "issue"
     
 
-class UpdatedIssueInput(insightconnect_plugin_runtime.Input):
+class MonitorIssuesInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
@@ -33,18 +33,18 @@ class UpdatedIssueInput(insightconnect_plugin_runtime.Input):
       "default": false,
       "order": 3
     },
+    "interval": {
+      "type": "integer",
+      "title": "Interval",
+      "description": "Interval between next poll in seconds, default is 60 seconds",
+      "default": 60,
+      "order": 4
+    },
     "jql": {
       "type": "string",
       "title": "JQL",
       "description": "JQL search string to use",
       "order": 2
-    },
-    "poll_timeout": {
-      "type": "integer",
-      "title": "Poll Timeout",
-      "description": "Timeout between next poll, default 60",
-      "default": 60,
-      "order": 4
     },
     "projects": {
       "type": "array",
@@ -63,7 +63,7 @@ class UpdatedIssueInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class UpdatedIssueOutput(insightconnect_plugin_runtime.Output):
+class MonitorIssuesOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",

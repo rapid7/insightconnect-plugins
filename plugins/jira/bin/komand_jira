@@ -34,9 +34,9 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
-            self.add_trigger(triggers.NewIssue())
+            self.add_trigger(triggers.MonitorIssues())
 
-            self.add_trigger(triggers.UpdatedIssue())
+            self.add_trigger(triggers.NewIssue())
 
             self.add_action(actions.AssignIssue())
 

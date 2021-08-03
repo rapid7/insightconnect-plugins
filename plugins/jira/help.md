@@ -886,17 +886,17 @@ Example output:
 
 ### Triggers
 
-#### Updated Issue
+#### Monitor Issues
 
-This trigger is used to trigger which indicates that an issue has been updated or a new one has been created.
+This trigger watches for newly-created or updated issues.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |get_attachments|boolean|False|False|Get attachments from issue|None|True|
+|interval|integer|60|False|Interval between next poll in seconds, default is 60 seconds|None|60|
 |jql|string|None|False|JQL search string to use|None|reporter='Example User'|
-|poll_timeout|integer|60|False|Timeout between next poll, default 60|None|60|
 |projects|[]string|None|False|List of Project IDs or names|None|TEST|
 
 Example input:
@@ -904,8 +904,8 @@ Example input:
 ```
 {
   "get_attachments": true,
+  "interval": 60,
   "jql": "reporter='Example User'",
-  "poll_timeout": 60,
   "projects": "TEST"
 }
 ```
@@ -1200,7 +1200,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 6.1.0 - Add Updated Issue trigger | Update New Issue trigger to only trigger in case of recently created tickets | Change `required` property to false for `project` input in New Issue trigger | Fix issue in New Issue trigger to include all results that match JQL | Fix issue in New Issue trigger with retrieving attachments
+* 6.1.0 - Add Monitor Issues trigger | Update New Issue trigger to only trigger in case of recently created tickets | Change `required` property to false for `project` input in New Issue trigger | Fix issue in New Issue trigger to include all results that match JQL | Fix issue in New Issue trigger with retrieving attachments
 * 6.0.8 - Fix issue where exception type was wrong in Create Issue
 * 6.0.7 - Fix issue in Create Issue and Attach Issue actions where adding attachments failed
 * 6.0.6 - Fix build issue

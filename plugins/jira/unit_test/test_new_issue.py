@@ -6,12 +6,13 @@ from unittest.mock import patch
 from komand_jira.triggers.new_issue import NewIssue
 from insightconnect_plugin_runtime.exceptions import PluginException
 from unit_test import util
+from typing import Callable, Optional
 
 
 sys.path.append(os.path.abspath("../"))
 
 
-def timeout_pass(error_callback=None):
+def timeout_pass(error_callback: Optional[Callable] = None):
     def func_timeout(func):
         def func_wrapper(*args, **kwargs):
             try:

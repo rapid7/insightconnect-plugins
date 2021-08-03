@@ -574,9 +574,9 @@ triggers:
         type: issue
         description: New issue
         required: false
-  updated_issue:
-    title: Updated Issue
-    description: Trigger which indicates that an issue has been updated or a new one has been created
+  monitor_issues:
+    title: Monitor Issues
+    description: Watches for newly-created or updated issues
     input:
       projects:
         title: Projects
@@ -597,9 +597,9 @@ triggers:
         type: boolean
         default: false
         example: true
-      poll_timeout:
-        title: Poll Timeout
-        description: Timeout between next poll, default 60
+      interval:
+        title: Interval
+        description: Interval between next poll in seconds, default is 60 seconds
         required: false
         type: integer
         default: 60

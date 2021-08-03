@@ -3,15 +3,16 @@ import os
 import timeout_decorator
 from unittest import TestCase
 from unittest.mock import patch
-from komand_jira.triggers.updated_issue import UpdatedIssue
+from komand_jira.triggers.monitor_issues import MonitorIssues
 from insightconnect_plugin_runtime.exceptions import PluginException
 from unit_test import util
+from typing import Callable, Optional
 
 
 sys.path.append(os.path.abspath("../"))
 
 
-def timeout_pass(error_callback=None):
+def timeout_pass(error_callback: Optional[Callable] = None):
     def func_timeout(func):
         def func_wrapper(*args, **kwargs):
             try:
@@ -28,19 +29,19 @@ def timeout_pass(error_callback=None):
 
 
 # Test class
-class TestUpdatedIssue(TestCase):
+class TestMonitorIssues(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.action = util.Util.default_connector(UpdatedIssue())
+        cls.action = util.Util.default_connector(MonitorIssues())
 
     @timeout_pass(error_callback=util.Util.check_error)
     @timeout_decorator.timeout(2)
     @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=util.MockTrigger.send)
-    def test_updated_issue(self, mock_send):
+    def test_monitor_issues(self, mock_send):
         action_params = {
             "get_attachments": False,
             "jql": "reporter='Bob Smith'",
-            "poll_timeout": 60,
+            "interval": 60,
             "projects": ["projectName", "projectName"],
         }
         self.action.run(action_params)
@@ -48,7 +49,7 @@ class TestUpdatedIssue(TestCase):
     @timeout_pass(error_callback=util.Util.check_error)
     @timeout_decorator.timeout(2)
     @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=util.MockTrigger.send)
-    def test_updated_issue_invalid_project(self, mock_send):
+    def test_monitor_issues_invalid_project(self, mock_send):
         action_params = {"get_attachments": False, "jql": "", "poll_timeout": 60, "projects": ["projectName2"]}
         with self.assertRaises(PluginException) as e:
             self.action.run(action_params)
@@ -64,11 +65,11 @@ class TestUpdatedIssue(TestCase):
     @timeout_pass(error_callback=util.Util.check_error)
     @timeout_decorator.timeout(2)
     @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=util.MockTrigger.send)
-    def test_updated_issue_only_project(self, mock_send):
+    def test_monitor_issues_only_project(self, mock_send):
         action_params = {
             "get_attachments": False,
             "jql": "",
-            "poll_timeout": 60,
+            "interval": 60,
             "projects": ["projectName"],
         }
         self.action.run(action_params)
@@ -76,11 +77,11 @@ class TestUpdatedIssue(TestCase):
     @timeout_pass(error_callback=util.Util.check_error)
     @timeout_decorator.timeout(2)
     @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=util.MockTrigger.send)
-    def test_updated_issue_only_jql(self, mock_send):
+    def test_monitor_issues_only_jql(self, mock_send):
         action_params = {
             "get_attachments": False,
             "jql": "reporter='Bob Smith'",
-            "poll_timeout": 60,
+            "interval": 60,
             "projects": "",
         }
         self.action.run(action_params)
@@ -88,11 +89,11 @@ class TestUpdatedIssue(TestCase):
     @timeout_pass(error_callback=util.Util.check_error)
     @timeout_decorator.timeout(2)
     @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=util.MockTrigger.send)
-    def test_updated_issue_without_jql_and_project(self, mock_send):
+    def test_monitor_issues_without_jql_and_project(self, mock_send):
         action_params = {
             "get_attachments": False,
             "jql": "",
-            "poll_timeout": 60,
+            "interval": 60,
             "projects": "",
         }
         self.action.run(action_params)
