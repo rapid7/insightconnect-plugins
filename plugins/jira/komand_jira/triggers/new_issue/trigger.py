@@ -23,42 +23,37 @@ class NewIssue(insightconnect_plugin_runtime.Trigger):
         self.max = 10
         self.found = {}
 
-    def initialize(self):
-        new_issues = self.connection.client.search_issues(self.jql, startAt=0)
-        for issue in new_issues:
-            self.found[issue.id] = True
-
     def poll(self):
-        new_issues = self.connection.client.search_issues(self.jql, startAt=0)
+        new_issues = self.connection.client.search_issues(self.jql, startAt=0, maxResults=False, fields="*all")
         for issue in new_issues:
             if issue.id not in self.found:
                 output = normalize_issue(issue, get_attachments=self.get_attachments, logger=self.logger)
                 self.found[issue.id] = True
-                self.logger.debug("found: %s", output)
+                self.logger.debug(f"Found: {output}")
                 self.send({Output.ISSUE: output})
 
     def run(self, params={}):
         """Run the trigger"""
-        self.jql = params.get(Input.JQL) or ""
+        self.jql = params.get(Input.JQL)
         self.get_attachments = params.get(Input.GET_ATTACHMENTS, False)
         self.project = params.get(Input.PROJECT)
 
         valid_project = look_up_project(self.project, self.connection.client)
-        if not valid_project:
+        if not valid_project and self.project:
             raise PluginException(
-                cause=f"Project {self.project} does not exist or the user does not have permission to access the project.",
+                cause=f"Project '{self.project}' does not exist or the user does not have permission to access the "
+                f"project.",
                 assistance="Please provide a valid project ID/name or make sure the project is accessible to the user.",
             )
 
+        jql = "created>=-20m"
         if self.project:
-            if self.jql:
-                self.jql = "project=" + self.project + " and " + self.jql
-            else:
-                self.jql = "project=" + self.project
+            jql += f" and project='{self.project}'"
+        if self.jql:
+            jql += f" and ({self.jql})"
+        self.jql = jql
 
-        self.logger.info("Querying %s", self.jql)
-
-        self.initialize()
+        self.logger.info(f"Querying {self.jql}")
 
         while True:
             self.poll()
