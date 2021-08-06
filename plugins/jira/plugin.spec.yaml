@@ -5,7 +5,6 @@ name: jira
 title: Jira
 vendor: rapid7
 support: rapid7
-cloud_ready: true
 status: []
 description: Automate the creation, search and management of issues, users, and alerting for Jira Software, Jira Server, and Jira ServiceDesk
 version: 6.1.0
