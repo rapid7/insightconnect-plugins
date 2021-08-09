@@ -4,15 +4,15 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Trigger which indicates that a new issue has been created"
+    DESCRIPTION = "Watches for newly-created or updated issues"
 
 
 class Input:
     
     GET_ATTACHMENTS = "get_attachments"
+    INTERVAL = "interval"
     JQL = "jql"
-    POLL_TIMEOUT = "poll_timeout"
-    PROJECT = "project"
+    PROJECTS = "projects"
     
 
 class Output:
@@ -20,7 +20,7 @@ class Output:
     ISSUE = "issue"
     
 
-class NewIssueInput(insightconnect_plugin_runtime.Input):
+class MonitorIssuesInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
@@ -33,23 +33,26 @@ class NewIssueInput(insightconnect_plugin_runtime.Input):
       "default": false,
       "order": 3
     },
+    "interval": {
+      "type": "integer",
+      "title": "Interval",
+      "description": "Interval between next poll in seconds, default is 60 seconds",
+      "default": 60,
+      "order": 4
+    },
     "jql": {
       "type": "string",
       "title": "JQL",
       "description": "JQL search string to use",
       "order": 2
     },
-    "poll_timeout": {
-      "type": "integer",
-      "title": "Poll Timeout",
-      "description": "Timeout between next poll, default 60",
-      "default": 60,
-      "order": 4
-    },
-    "project": {
-      "type": "string",
-      "title": "Project",
-      "description": "Project ID or name",
+    "projects": {
+      "type": "array",
+      "title": "Projects",
+      "description": "List of Project IDs or names",
+      "items": {
+        "type": "string"
+      },
       "order": 1
     }
   }
@@ -60,7 +63,7 @@ class NewIssueInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class NewIssueOutput(insightconnect_plugin_runtime.Output):
+class MonitorIssuesOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
@@ -69,7 +72,7 @@ class NewIssueOutput(insightconnect_plugin_runtime.Output):
     "issue": {
       "$ref": "#/definitions/issue",
       "title": "Issue",
-      "description": "New issue",
+      "description": "New or updated issue",
       "order": 1
     }
   },
