@@ -82,27 +82,6 @@ types:
       type: integer
       description: Retry attempts
       required: false
-  response:
-    Count:
-      title: Count
-      type: integer
-      description: Count
-      required: false
-    Items:
-      title: Items
-      type: "[]object"
-      description: Items
-      required: false
-    ResponseMetadata:
-      title: Response Metadata
-      type: ResponseMetadata
-      description: Response metadata
-      required: false
-    ScannedCount:
-      title: Scanned Count
-      type: integer
-      description: Scanned count
-      required: false
 
 connection:
   access_key:
@@ -141,12 +120,27 @@ actions:
         description: The params to query with, as key/value pairs
         type: object
         required: false
-        example:
+        example: '{"email": "user@example.com"}'
     output:
-      response:
-        title: Response
-        description: Response from Dynamo
-        type: response
+      Count:
+        title: Count
+        type: integer
+        description: Items count
+        required: true
+      Items:
+        title: Items
+        type: "[]object"
+        description: Database items
+        required: true
+      ResponseMetadata:
+        title: Response Metadata
+        type: ResponseMetadata
+        description: Response metadata
+        required: false
+      ScannedCount:
+        title: Scanned Count
+        type: integer
+        description: Scanned count
         required: false
   insert:
     title: Insert

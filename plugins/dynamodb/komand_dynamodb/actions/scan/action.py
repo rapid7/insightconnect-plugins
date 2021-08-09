@@ -39,4 +39,9 @@ class Scan(komand.Action):
             kwargs["IndexName"] = index
 
         results = t.scan(**kwargs)
-        return {Output.RESPONSE: results}
+        return {
+            Output.COUNT: results.get("Count", 0),
+            Output.ITEMS: results.get("Items", []),
+            Output.RESPONSEMETADATA: results.get("ResponseMetadata"),
+            Output.SCANNEDCOUNT: results.get("ScannedCount"),
+        }

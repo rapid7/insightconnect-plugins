@@ -143,7 +143,7 @@ It will return the list of objects found, and a count of the records.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |index|string|None|False|The index to use. If empty, defaults to a full Scan of the table|None|index-name|
-|params|object|None|False|The params to query with, as key/value pairs|None|None|
+|params|object|None|False|The params to query with, as key/value pairs|None|{"email": "user@example.com"}|
 |table|string|None|True|The table name to search|None|Table-name|
 
 Example input:
@@ -151,6 +151,9 @@ Example input:
 ```
 {
   "index": "index-name",
+  "params": {
+    "email": "user@example.com"
+    },
   "table": "Table-name"
 }
 ```
@@ -159,7 +162,10 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|response|response|False|Response from Dynamo|
+|Count|integer|True|Items count|
+|Items|[]object|True|Database items|
+|ResponseMetadata|ResponseMetadata|False|Response metadata|
+|ScannedCount|integer|False|Scanned count|
 
 Example output:
 
