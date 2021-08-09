@@ -70,7 +70,7 @@ types:
     HTTPStatusCode:
       title: HTTP Status Code
       type: integer
-      description: HTTPS status code
+      description: HTTP status code
       required: false
     RequestId:
       title: Request ID
