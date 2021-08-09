@@ -68,7 +68,7 @@ Example input:
     "keytable": "login",
     "e-mail": "user@example.com",
     "user": "Username"
-    },
+  },
   "table": "Table-name"
 }
 ```
