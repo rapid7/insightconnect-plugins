@@ -1,60 +1,44 @@
-import komand
-from .schema import IndexDocumentInput, IndexDocumentOutput
+import insightconnect_plugin_runtime
+from .schema import IndexDocumentInput, IndexDocumentOutput, Output, Input, Component
 
 # Custom imports below
-from komand_elasticsearch.util import helpers
+from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime import helper
 
 
-class IndexDocument(komand.Action):
+class IndexDocument(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="index_document",
-            description="Create or replace a document by index",
+            description=Component.DESCRIPTION,
             input=IndexDocumentInput(),
             output=IndexDocumentOutput(),
         )
 
     def run(self, params={}):
-        host = self.connection.elastic_host
-        username = self.connection.username
-        password = self.connection.password
-        index = params.get("_index")
-        type_ = params.get("_type")
-        id_ = params.get("_id")
-        version_type = params.get("version_type")
-        version = params.get("_version")
-        document = params.get("document")
-        routing = params.get("routing")
-        parent = params.get("parent")
-        timeout = params.get("timeout")
+        clean_params = helper.clean(params)
+        index = clean_params.get(Input.INDEX)
+        id_ = clean_params.get(Input.ID)
+        version = clean_params.get(Input.VERSION)
+        document = clean_params.get(Input.DOCUMENT)
+        parent = clean_params.get(Input.PARENT)
 
-        params = {}
-        if version_type:
-            params["version_type"] = version_type
+        query_params = {
+            "version_type": clean_params.get(Input.VERSION_TYPE),
+            "routing": clean_params.get(Input.ROUTING),
+            "timeout": clean_params.get(Input.TIMEOUT),
+        }
         if version:
-            params["version"] = str(version)
-        if routing:
-            params["routing"] = routing
+            query_params["version"] = str(version)
         if parent:
-            params["parent"] = str(parent)
-        if timeout:
-            params["timeout"] = timeout
+            query_params["parent"] = str(parent)
 
-        if not id_:
-            results = helpers.post_index(self.logger, host, index, type_, document, username, password, params)
-        else:
-            results = helpers.put_index(self.logger, host, index, type_, id_, document, username, password, params)
+        results = self.connection.client.index(
+            index=index, _id=id_, _type=clean_params.get(Input.TYPE), params=query_params, document=document
+        )
+        if results:
+            return {Output.INDEX_RESPONSE: insightconnect_plugin_runtime.helper.clean(results)}
 
-        if not results:
-            raise Exception("Run: Document was not indexed")
-        else:
-            return komand.helper.clean(results)
-
-    def test(self):
-        host = self.connection.elastic_host
-        username = self.connection.username
-        password = self.connection.password
-        r = helpers.test_auth(self.logger, host, username, password)
-        if not r:
-            raise Exception("Test: Failed authentication")
-        return {}
+        raise PluginException(
+            cause="Document was not indexed. ", assistance="Please check provided data and try again."
+        )
