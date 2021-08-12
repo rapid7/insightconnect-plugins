@@ -9,7 +9,7 @@ status: []
 description: Setup and manage code reviews
 version: 1.0.1
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/phabricator
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/phabricator
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://secure.phabricator.com/
 tags:

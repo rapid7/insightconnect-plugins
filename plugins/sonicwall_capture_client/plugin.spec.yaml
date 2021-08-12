@@ -16,7 +16,7 @@ hub_tags:
   keywords: [sonicwall, capture client]
   features: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/sonicwall_capture_client
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/sonicwall_capture_client
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.sonicwall.com/
 enable_cache: false

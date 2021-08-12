@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Jira"
 Vendor = "rapid7"
-Version = "6.0.8"
+Version = "6.1.0"
 Description = "Automate the creation, search and management of issues, users, and alerting for Jira Software, Jira Server, and Jira ServiceDesk"
 
 
@@ -34,6 +34,8 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
+            self.add_trigger(triggers.MonitorIssues())
+
             self.add_trigger(triggers.NewIssue())
 
             self.add_action(actions.AssignIssue())
