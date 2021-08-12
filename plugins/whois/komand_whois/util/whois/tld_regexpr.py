@@ -1,3860 +1,3793 @@
 com = {
-    'extend': None,
-
-    'domain_name': r'Domain Name:\s?(.+)',
-    'registrar': r'Registrar:\s?(.+)',
-    'registrant': r'Registrant:?\s{0,}(?:[^\n][\n]?){0,}?\s{0,}Name(?:[^:]{0,}):\s?(.+)',
-    'registrant_cc': r'Registrant:?\s{0,}(?:[^\n][\n]?){0,}?\s{0,}Country(?:[^:]{0,}):\s?(.+)',
-
-    'creation_date': r'Creation Date:\s?(.+)',
-    'expiration_date': r'Expiration Date:\n|Expiration Date:\s?(.+)',
-    'updated_date': r'Updated Date:\s?(.+)',
-
-    'name_servers': r'Name Server:\s*(.+)\s*',
-    'status': r'Status:\s?(.+)',
-    'emails': r'[\w.-]+@[\w.-]+\.[\w]{2,4}',
-
+    "extend": None,
+    "domain_name": r"Domain Name:\s?(.+)",
+    "registrar": r"Registrar:\s?(.+)",
+    "registrant": r"Registrant:?\s{0,}(?:[^\n][\n]?){0,}?\s{0,}Name(?:[^:]{0,}):\s?(.+)",
+    "registrant_cc": r"Registrant:?\s{0,}(?:[^\n][\n]?){0,}?\s{0,}Country(?:[^:]{0,}):\s?(.+)",
+    "creation_date": r"Creation Date:\s?(.+)",
+    "expiration_date": r"Expiration Date:\n|Expiration Date:\s?(.+)",
+    "updated_date": r"Updated Date:\s?(.+)",
+    "name_servers": r"Name Server:\s*(.+)\s*",
+    "status": r"Status:\s?(.+)",
+    "emails": r"[\w.-]+@[\w.-]+\.[\w]{2,4}",
     # Komand additions
-    'registry_domain_id': r'Registry Domain ID:\s?(.+)',
-    'registrar_whois_server': r'Registrar WHOIS Server:\s?(.+)',
-    'registrar_url': r'Registrar URL:\s?(.+)',
-    'registrar_iana_id': r'Registrar IANA ID:\s(.+)',
-    'registrar_abuse_contact_email': r'Registrar Abuse Contact Email:\s(.+)',
-    'registrar_abuse_contact_phone': r'Registrar Abuse Contact Phone:\s(.+)',
-    'domain_status': r'Domain Status:\s(.+)',
-    'dnssec': r'DNSSEC:\s(.+)'
+    "registry_domain_id": r"Registry Domain ID:\s?(.+)",
+    "registrar_whois_server": r"Registrar WHOIS Server:\s?(.+)",
+    "registrar_url": r"Registrar URL:\s?(.+)",
+    "registrar_iana_id": r"Registrar IANA ID:\s(.+)",
+    "registrar_abuse_contact_email": r"Registrar Abuse Contact Email:\s(.+)",
+    "registrar_abuse_contact_phone": r"Registrar Abuse Contact Phone:\s(.+)",
+    "domain_status": r"Domain Status:\s(.+)",
+    "dnssec": r"DNSSEC:\s(.+)",
 }
 
 net = {
-    'extend': 'com',
+    "extend": "com",
 }
 
 org = {
-    'extend': 'com',
-
-    'creation_date': r'Creat(?:ed On|ion Date):\s?(.+)',
-    'expiration_date': r'(?:Registry\s)?Expir(?:y|ation) Date:\s?(.+)',
-    'updated_date': r'(?:Last\s)?Updated (?:On|Date):\s?(.+)',
-
-    'registrar': r'(?:Registrar|Sponsoring Registrar):\s?(.+)',
-    'registrant': r'Registrant Organization:\s?(.+)',
-
-    'status': r'Status:\s?(.+)',
+    "extend": "com",
+    "creation_date": r"Creat(?:ed On|ion Date):\s?(.+)",
+    "expiration_date": r"(?:Registry\s)?Expir(?:y|ation) Date:\s?(.+)",
+    "updated_date": r"(?:Last\s)?Updated (?:On|Date):\s?(.+)",
+    "registrar": r"(?:Registrar|Sponsoring Registrar):\s?(.+)",
+    "registrant": r"Registrant Organization:\s?(.+)",
+    "status": r"Status:\s?(.+)",
 }
 
 uk = {
-    'extend': 'com',
-
-    'registrant': r'Registrant:\n\s*(.+)',
-    'registrant_cc': r'Registrant\'s address:\s+(?:[^\n][\n]?)+\n(.+)\n\n',
-
-    'creation_date': r'Registered on:\s?(.+)',
-    'expiration_date': r'Expiry date: \s?(.+)',
-    'updated_date': r'Last updated:\s*(.+)',
-
-    'name_servers': r'Name servers:\n?(.+)\n?(.+)\n?(.+)\n?(.+)',
-    'status': r'Registration status:\n\s*(.+)',
+    "extend": "com",
+    "registrant": r"Registrant:\n\s*(.+)",
+    "registrant_cc": r"Registrant\'s address:\s+(?:[^\n][\n]?)+\n(.+)\n\n",
+    "creation_date": r"Registered on:\s?(.+)",
+    "expiration_date": r"Expiry date: \s?(.+)",
+    "updated_date": r"Last updated:\s*(.+)",
+    "name_servers": r"Name servers:\n?(.+)\n?(.+)\n?(.+)\n?(.+)",
+    "status": r"Registration status:\n\s*(.+)",
 }
 
 pl = {
-    'extend': 'uk',
-
-    'registrant_cc' : r'location:\s?(.+)',
-    'creation_date': r'\ncreated:\s*(.+)\n',
-    'updated_date': r'\nlast modified:\s*(.+)\n',
-    'expiration_date': r'\noption expiration date:\s*(.+)\n',
-
-    'name_servers': r'\nnameservers:\s*(.+)\n\s*(.+)\n',
-    'status': r'\nStatus:\n\s*(.+)',
+    "extend": "uk",
+    "registrant_cc": r"location:\s?(.+)",
+    "creation_date": r"\ncreated:\s*(.+)\n",
+    "updated_date": r"\nlast modified:\s*(.+)\n",
+    "expiration_date": r"\noption expiration date:\s*(.+)\n",
+    "name_servers": r"\nnameservers:\s*(.+)\n\s*(.+)\n",
+    "status": r"\nStatus:\n\s*(.+)",
 }
 
 ru = {
-    'extend': 'com',
-
-    'domain_name': r'domain:\s*(.+)',
-
-    'creation_date': r'\ncreated:\s*(.+)',
-    'expiration_date': r'\npaid-till:\s*(.+)',
-
-    'name_servers': r'\nnserver:\s*(.+)',
-    'status': r'\nstate:\s*(.+)',
+    "extend": "com",
+    "domain_name": r"domain:\s*(.+)",
+    "creation_date": r"\ncreated:\s*(.+)",
+    "expiration_date": r"\npaid-till:\s*(.+)",
+    "name_servers": r"\nnserver:\s*(.+)",
+    "status": r"\nstate:\s*(.+)",
 }
 
 su = {
-    'extend': 'ru',
+    "extend": "ru",
 }
 
 ru_rf = {
-    'extend': 'ru',
+    "extend": "ru",
 }
 
 lv = {
-    'extend': 'ru',
-
-    'registrar': r'\[Registrar\]?\s{0,}(?:[^\n][\n]?){0,}?\s{0,}Name(?:[^:]{0,}):\s?(.+)',
-    'creation_date': r'Registered:\s*(.+)\n',
-    'updated_date': r'Updated:\s*(.+)\n',
-
-    'status': r'Status:\s?(.+)',
+    "extend": "ru",
+    "registrar": r"\[Registrar\]?\s{0,}(?:[^\n][\n]?){0,}?\s{0,}Name(?:[^:]{0,}):\s?(.+)",
+    "creation_date": r"Registered:\s*(.+)\n",
+    "updated_date": r"Updated:\s*(.+)\n",
+    "status": r"Status:\s?(.+)",
 }
 
 jp = {
-    'domain_name': r'\[Domain Name\]\s?(.+)',
-    'registrar': None,
-    'registrant': r'\[Registrant\]\s?(.+)',
-    'registrant_cc' : None,
-
-    'creation_date': r'\[Created on\]\s?(.+)',
-    'expiration_date': r'\[Expires on\]\s?(.+)',
-    'updated_date': r'\[Last Updated\]\s?(.+)',
-
-    'name_servers': r'\[Name Server\]\s*(.+)',
-    'status': r'\[Status\]\s?(.+)',
-    'emails': r'[\w.-]+@[\w.-]+\.[\w]{2,4}',
+    "domain_name": r"\[Domain Name\]\s?(.+)",
+    "registrar": None,
+    "registrant": r"\[Registrant\]\s?(.+)",
+    "registrant_cc": None,
+    "creation_date": r"\[Created on\]\s?(.+)",
+    "expiration_date": r"\[Expires on\]\s?(.+)",
+    "updated_date": r"\[Last Updated\]\s?(.+)",
+    "name_servers": r"\[Name Server\]\s*(.+)",
+    "status": r"\[Status\]\s?(.+)",
+    "emails": r"[\w.-]+@[\w.-]+\.[\w]{2,4}",
 }
 
 co_jp = {
-    'extend': 'jp',
-
-    'creation_date': r'\[Registered Date\]\s?(.+)',
-    'expiration_date': r'\[State\].+\((.+)\)',
-    'updated_date': r'\[Last Update\]\s?(.+)',
+    "extend": "jp",
+    "creation_date": r"\[Registered Date\]\s?(.+)",
+    "expiration_date": r"\[State\].+\((.+)\)",
+    "updated_date": r"\[Last Update\]\s?(.+)",
 }
 
 de = {
-    'extend': 'com',
-    'domain_name': r'\ndomain:\s*(.+)',
-    'registrant_cc': r'CountryCode:\s?(.+)',
-    'updated_date': r'\nChanged:\s?(.+)',
-    'name_servers': r'Nserver:\s*(.+)',
+    "extend": "com",
+    "domain_name": r"\ndomain:\s*(.+)",
+    "registrant_cc": r"CountryCode:\s?(.+)",
+    "updated_date": r"\nChanged:\s?(.+)",
+    "name_servers": r"Nserver:\s*(.+)",
 }
 
 at = {
-    'extend': 'com',
-    'domain_name': r'domain:\s?(.+)',
-    'updated_date': r'changed:\s?(.+)',
-    'name_servers': r'nserver:\s*(.+)',
+    "extend": "com",
+    "domain_name": r"domain:\s?(.+)",
+    "updated_date": r"changed:\s?(.+)",
+    "name_servers": r"nserver:\s*(.+)",
 }
 
 eu = {
-    'extend': 'com',
-
-    'domain_name': r'Domai(?:n|n Name):\s?(.+)',
-    'registrar': r'Name:\s?(.+)',
-    'name_servers': r'Name(?: servers| Server):\s(?:\s(.+)\s(.+)\s(.+)\s(.+)|(.+))',
+    "extend": "com",
+    "domain_name": r"Domai(?:n|n Name):\s?(.+)",
+    "registrar": r"Name:\s?(.+)",
+    "name_servers": r"Name(?: servers| Server):\s(?:\s(.+)\s(.+)\s(.+)\s(.+)|(.+))",
 }
 
 cc = {
-    'extend': 'com',
+    "extend": "com",
 }
 
 biz = {
-    'extend': 'org',
-
-    'creation_date': r'Domain Registration Date:\s?(.+)',
-    'expiration_date': r'Domain Expiration Date:\s?(.+)',
-    'updated_date': r'Domain Last Updated Date:\s?(.+)',
-
-    'status': None,
+    "extend": "org",
+    "creation_date": r"Domain Registration Date:\s?(.+)",
+    "expiration_date": r"Domain Expiration Date:\s?(.+)",
+    "updated_date": r"Domain Last Updated Date:\s?(.+)",
+    "status": None,
 }
 
-info = {
-    'extend': 'org'
-}
+info = {"extend": "org"}
 
-online = {
-    'extend': 'org',
-
-    'status': r'Domain Status:\s?(.+)'
-}
+online = {"extend": "org", "status": r"Domain Status:\s?(.+)"}
 
 name = {
-    'extend': 'com',
-
-    'status': r'Domain Status:\s?(.+)',
+    "extend": "com",
+    "status": r"Domain Status:\s?(.+)",
 }
 
 us = {
-    'extend': 'biz',
+    "extend": "biz",
 }
 
 me = {
-    'extend': 'org',
+    "extend": "org",
 }
 
 co = {
-    'extend': 'biz',
-
-    'status': r'Status:\s?(.+)',
+    "extend": "biz",
+    "status": r"Status:\s?(.+)",
 }
 
 be = {
-    'extend': 'pl',
-
-    'domain_name': r'\nDomain:\s*(.+)',
-    'registrar': r'(?:Company\s)?Name:\n?(.+)',
-
-    'creation_date': r'Registered:\s*(.+)\n',
-
-    'status': r'Status:\s?(.+)',
+    "extend": "pl",
+    "domain_name": r"\nDomain:\s*(.+)",
+    "registrar": r"(?:Company\s)?Name:\n?(.+)",
+    "creation_date": r"Registered:\s*(.+)\n",
+    "status": r"Status:\s?(.+)",
 }
 
 nz = {
-    'extend': None,
-
-    'domain_name': r'domain_name:\s?(.+)',
-    'registrar': r'registrar_name:\s?(.+)',
-    'registrant': r'registrant_contact_name:\s?(.+)',
-    'registrant_cc': r'registrant_contact_country:\s?([^\(]+).+',
-
-    'creation_date': r'domain_dateregistered:\s?(.+)',
-    'expiration_date': r'domain_datebilleduntil:\s?(.+)',
-    'updated_date': r'domain_datelastmodified:\s?(.+)',
-
-    'name_servers': r'ns_name_[0-9]{2}:\s?(.+)',
-    'status': r'query_status:\s?(.+)',
-    'emails': r'[\w.-]+@[\w.-]+\.[\w]{2,4}',
+    "extend": None,
+    "domain_name": r"domain_name:\s?(.+)",
+    "registrar": r"registrar_name:\s?(.+)",
+    "registrant": r"registrant_contact_name:\s?(.+)",
+    "registrant_cc": r"registrant_contact_country:\s?([^\(]+).+",
+    "creation_date": r"domain_dateregistered:\s?(.+)",
+    "expiration_date": r"domain_datebilleduntil:\s?(.+)",
+    "updated_date": r"domain_datelastmodified:\s?(.+)",
+    "name_servers": r"ns_name_[0-9]{2}:\s?(.+)",
+    "status": r"query_status:\s?(.+)",
+    "emails": r"[\w.-]+@[\w.-]+\.[\w]{2,4}",
 }
 
 cz = {
-    'extend': 'com',
-
-    'domain_name': r'Domain:\s?(.+)',
-    'registrar': r'registrar:\s?(.+)',
-    'registrant': r'registrant:\s?(.+)',
-
-    'creation_date': r'registered:\s?(.+)',
-    'expiration_date': r'expire:\s?(.+)',
-    'updated_date': r'changed:\s?(.+)',
-
-    'name_servers': r'nserver:\s*(.+) ',
+    "extend": "com",
+    "domain_name": r"Domain:\s?(.+)",
+    "registrar": r"registrar:\s?(.+)",
+    "registrant": r"registrant:\s?(.+)",
+    "creation_date": r"registered:\s?(.+)",
+    "expiration_date": r"expire:\s?(.+)",
+    "updated_date": r"changed:\s?(.+)",
+    "name_servers": r"nserver:\s*(.+) ",
 }
 
 it = {
-    'extend': 'com',
-
-    'domain_name': r'Domain:\s?(.+)',
-    'registrar': r'Registrar\s*Organization:\s*(.+)',
-    'registrant_cc': None,
-
-    'creation_date': r'Created:\s?(.+)',
-    'expiration_date': r'Expire Date:\s?(.+)',
-    'updated_date': r'Last Update:\s?(.+)',
-
-    'name_servers': r'Nameservers\s?(.+)\s?(.+)\s?(.+)\s?(.+)',
-    'emails': None,
-    'status': r'Status:\s?(.+)',
+    "extend": "com",
+    "domain_name": r"Domain:\s?(.+)",
+    "registrar": r"Registrar\s*Organization:\s*(.+)",
+    "registrant_cc": None,
+    "creation_date": r"Created:\s?(.+)",
+    "expiration_date": r"Expire Date:\s?(.+)",
+    "updated_date": r"Last Update:\s?(.+)",
+    "name_servers": r"Nameservers\s?(.+)\s?(.+)\s?(.+)\s?(.+)",
+    "emails": None,
+    "status": r"Status:\s?(.+)",
 }
 
 fr = {
-    'extend': 'com',
-
-    'domain_name': r'domain:\s?(.+)',
-    'registrar': r'registrar:\s*(.+)',
-    'registrant': r'contact:\s?(.+)',
-    'registrant_cc': r'country:\s?(.+)',
-
-    'creation_date': r'created:\s?(.+)',
-    'expiration_date': r'Expiry Date:\s?(.+)',
-    'updated_date': r'last-update:\s?(.+)',
-
-    'name_servers': r'nserver:\s*(.+)',
-    'status': r'status:\s?(.+)',
+    "extend": "com",
+    "domain_name": r"domain:\s?(.+)",
+    "registrar": r"registrar:\s*(.+)",
+    "registrant": r"contact:\s?(.+)",
+    "registrant_cc": r"country:\s?(.+)",
+    "creation_date": r"created:\s?(.+)",
+    "expiration_date": r"Expiry Date:\s?(.+)",
+    "updated_date": r"last-update:\s?(.+)",
+    "name_servers": r"nserver:\s*(.+)",
+    "status": r"status:\s?(.+)",
 }
 
 kg = {
-    'extend': 'com',
-
-    'domain_name': r'Domain \s?(.+)',
-    'creation_date': r'Record created:\s?(.+)',
-    'expiration_date': r'Record expires on \s?(.+)',
+    "extend": "com",
+    "domain_name": r"Domain \s?(.+)",
+    "creation_date": r"Record created:\s?(.+)",
+    "expiration_date": r"Record expires on \s?(.+)",
 }
 
 vc = {
-    'extend': 'com',
+    "extend": "com",
 }
 
 fm = {
-    'extend': 'com',
-
-    'domain_name': r'Query: \s?(.+)',
-    'creation_date': r'Created: \s?(.+)',
-    'expiration_date': r'Expires: \s?(.+)'
+    "extend": "com",
+    "domain_name": r"Query: \s?(.+)",
+    "creation_date": r"Created: \s?(.+)",
+    "expiration_date": r"Expires: \s?(.+)",
 }
 
 tv = {
-    'extend': 'com',
-    'domain_name': r'Domain Name: \s?(.+)',
-
-    'creation_date': r'Creation Date: \s?(.+)',
-    'expiration_date': r'Registry Expiry Date: \s?(.+)'
+    "extend": "com",
+    "domain_name": r"Domain Name: \s?(.+)",
+    "creation_date": r"Creation Date: \s?(.+)",
+    "expiration_date": r"Registry Expiry Date: \s?(.+)",
 }
 
 edu = {
-    'extend': 'com',
-    'domain_name': r'Domain Name: \s?(.+)',
-
-    'creation_date': r'Domain record activated: \s?(.+)',
-    'expiration_date': r'Domain expires: \s?(.+)',
-    'updated_date': r'Domain record last updated: \s?(.+)',
+    "extend": "com",
+    "domain_name": r"Domain Name: \s?(.+)",
+    "creation_date": r"Domain record activated: \s?(.+)",
+    "expiration_date": r"Domain expires: \s?(.+)",
+    "updated_date": r"Domain record last updated: \s?(.+)",
 }
 
 ca = {
-    'extend': 'com',
-
-    'domain_name': r'Domain name: \s?(.+)',
-    'creation_date': r'Creation date: \s?(.+)',
-    'expiration_date': r'Expiry date: \s?(.+)',
-    'updated_date': r'Updated date: \s?(.+)',
+    "extend": "com",
+    "domain_name": r"Domain name: \s?(.+)",
+    "creation_date": r"Creation date: \s?(.+)",
+    "expiration_date": r"Expiry date: \s?(.+)",
+    "updated_date": r"Updated date: \s?(.+)",
 }
 
 cn = {
-    'extend': 'com',
-
-    'registrant': r'Registrant:\s?(.+)',
-    'registrant_cc': None,
-
-    'creation_date': r'Registration Date:\s?(.+)',
-    'updated_date': None,
-
-    'emails': r'[\w.-]+@[\w.-]+\.[\w]{2,4}',
+    "extend": "com",
+    "registrant": r"Registrant:\s?(.+)",
+    "registrant_cc": None,
+    "creation_date": r"Registration Date:\s?(.+)",
+    "updated_date": None,
+    "emails": r"[\w.-]+@[\w.-]+\.[\w]{2,4}",
 }
 
 hk = {
-    'extend': None,
-
-    'domain_name': r'Domain Name:\s?(.+)',
-    'registrar': r'Registrar Name:\s?(.+)',
-    'registrant': r'Company English Name\(?.+\)?:\s?(.+)',
-    'registrant_cc': r'Country:\s?(.+)',
-
-    'creation_date': r'Domain Name Commencement Date:\s?(.+)',
-    'expiration_date': r'Expiry Date:\s?(.+)',
-    'updated_date': None,
-
-    'name_servers': r'Name Servers Information:\s*(.+)\s*',
-    'status': r'Domain Status:\s?(.+)',
-    'emails': r'[\w.-]+@[\w.-]+\.[\w]{2,4}',
+    "extend": None,
+    "domain_name": r"Domain Name:\s?(.+)",
+    "registrar": r"Registrar Name:\s?(.+)",
+    "registrant": r"Company English Name\(?.+\)?:\s?(.+)",
+    "registrant_cc": r"Country:\s?(.+)",
+    "creation_date": r"Domain Name Commencement Date:\s?(.+)",
+    "expiration_date": r"Expiry Date:\s?(.+)",
+    "updated_date": None,
+    "name_servers": r"Name Servers Information:\s*(.+)\s*",
+    "status": r"Domain Status:\s?(.+)",
+    "emails": r"[\w.-]+@[\w.-]+\.[\w]{2,4}",
 }
 
 kr = {
-    'extend': None,
-
-    'domain_name': r'Domain Name\s+:\s?(.+)',
-    'registrar': None,
-    'registrant': r'Registrant\s+:\s?(.+)',
-    'registrant_cc': None,
-
-    'creation_date': r'Registered Date\s+:\s?(.+)',
-    'expiration_date': r'Expiration Date\s+:\s?(.+)',
-    'updated_date': r'Last Updated Date\s+:\s?(.+)',
-
-    'name_servers': r'Host Name\s+:\s?(.+)',
-    'emails': r'[\w.-]+@[\w.-]+\.[\w]{2,4}',
+    "extend": None,
+    "domain_name": r"Domain Name\s+:\s?(.+)",
+    "registrar": None,
+    "registrant": r"Registrant\s+:\s?(.+)",
+    "registrant_cc": None,
+    "creation_date": r"Registered Date\s+:\s?(.+)",
+    "expiration_date": r"Expiration Date\s+:\s?(.+)",
+    "updated_date": r"Last Updated Date\s+:\s?(.+)",
+    "name_servers": r"Host Name\s+:\s?(.+)",
+    "emails": r"[\w.-]+@[\w.-]+\.[\w]{2,4}",
 }
 
 bo = {
-    'extend': None,
-
-    'domain_name': r'Dominio:\s?(.+)',
-    'registrar': None,
-    'registrant': r'TITULAR:?\s{0,}(?:[^\n][\n]?){0,}?\s{0,}Organizacion(?:[^:]{0,}):\s?(.+)',
-    'registrant_cc': r'TITULAR:?\s{0,}(?:[^\n][\n]?){0,}?\s{0,}Pais(?:[^:]{0,}):\s?(.+)',
-
-    'creation_date': r'Fecha de registro:\s?(.+)',
-    'expiration_date': r'Fecha de vencimiento:\s?(.+)',
-    'updated_date': None,
-
-    'name_servers': None,
-    'status': None,
-    'emails': r's/([\w.-]+)(\sen\s)([\w.-]+\.[\w]{2,4})/\1@\3/',
+    "extend": None,
+    "domain_name": r"Dominio:\s?(.+)",
+    "registrar": None,
+    "registrant": r"TITULAR:?\s{0,}(?:[^\n][\n]?){0,}?\s{0,}Organizacion(?:[^:]{0,}):\s?(.+)",
+    "registrant_cc": r"TITULAR:?\s{0,}(?:[^\n][\n]?){0,}?\s{0,}Pais(?:[^:]{0,}):\s?(.+)",
+    "creation_date": r"Fecha de registro:\s?(.+)",
+    "expiration_date": r"Fecha de vencimiento:\s?(.+)",
+    "updated_date": None,
+    "name_servers": None,
+    "status": None,
+    "emails": r"s/([\w.-]+)(\sen\s)([\w.-]+\.[\w]{2,4})/\1@\3/",
 }
 
 md = {
-    'extend': None,
-
-    'domain_name': r'Domain name:\s?(.+)',
-    'registrar': None,
-    'registrant': r'Registrant:\s?(.+)',
-    'registrant_cc': None,
-
-    'creation_date': r'Created:\s?(.+)',
-    'expiration_date': r'Expiration date:\s?(.+)',
-    'updated_date': None,
-
-    'name_servers': r'Name server:\s?(.+)',
+    "extend": None,
+    "domain_name": r"Domain name:\s?(.+)",
+    "registrar": None,
+    "registrant": r"Registrant:\s?(.+)",
+    "registrant_cc": None,
+    "creation_date": r"Created:\s?(.+)",
+    "expiration_date": r"Expiration date:\s?(.+)",
+    "updated_date": None,
+    "name_servers": r"Name server:\s?(.+)",
 }
 
 st = {
-    'extend': 'com',
-
-    'status': r'Status:\s?(.+)',
-    'creation_date': r'Creation Date:\s?(.+)',
-    'expiration_date': r'Expiration Date:\s?(.+)',
-    'updated_date': r'Updated Date:\s?(.+)',
+    "extend": "com",
+    "status": r"Status:\s?(.+)",
+    "creation_date": r"Creation Date:\s?(.+)",
+    "expiration_date": r"Expiration Date:\s?(.+)",
+    "updated_date": r"Updated Date:\s?(.+)",
 }
 aarp = {
-  'extend': 'com',
+    "extend": "com",
 }
 abarth = {
-  'extend': 'com',
+    "extend": "com",
 }
 abbott = {
-  'extend': 'com',
+    "extend": "com",
 }
 abbvie = {
-  'extend': 'com',
+    "extend": "com",
 }
 abc = {
-  'extend': 'com',
+    "extend": "com",
 }
 abogado = {
-  'extend': 'com',
+    "extend": "com",
 }
 abudhabi = {
-  'extend': 'com',
+    "extend": "com",
 }
 academy = {
-  'extend': 'com',
+    "extend": "com",
 }
 accountant = {
-  'extend': 'com',
+    "extend": "com",
 }
 accountants = {
-  'extend': 'com',
+    "extend": "com",
 }
 ac = {
-  'extend': 'com',
+    "extend": "com",
 }
 aco = {
-  'extend': 'com',
+    "extend": "com",
 }
 active = {
-  'extend': 'com',
+    "extend": "com",
 }
 actor = {
-  'extend': 'com',
+    "extend": "com",
 }
 adac = {
-  'extend': 'com',
+    "extend": "com",
 }
 ads = {
-  'extend': 'com',
+    "extend": "com",
 }
 adult = {
-  'extend': 'com',
+    "extend": "com",
 }
 aeg = {
-  'extend': 'com',
+    "extend": "com",
 }
 ae = {
-  'extend': 'com',
+    "extend": "com",
 }
 aero = {
-  'extend': 'com',
+    "extend": "com",
 }
 afamilycompany = {
-  'extend': 'com',
+    "extend": "com",
 }
 af = {
-  'extend': 'com',
+    "extend": "com",
 }
 afl = {
-  'extend': 'com',
+    "extend": "com",
 }
 africa = {
-  'extend': 'com',
+    "extend": "com",
 }
 agakhan = {
-  'extend': 'com',
+    "extend": "com",
 }
 agency = {
-  'extend': 'com',
+    "extend": "com",
 }
 ag = {
-  'extend': 'com',
+    "extend": "com",
 }
 aigo = {
-  'extend': 'com',
+    "extend": "com",
 }
 ai = {
-  'extend': 'com',
+    "extend": "com",
 }
 airbus = {
-  'extend': 'com',
+    "extend": "com",
 }
 airforce = {
-  'extend': 'com',
+    "extend": "com",
 }
 airtel = {
-  'extend': 'com',
+    "extend": "com",
 }
 akdn = {
-  'extend': 'com',
+    "extend": "com",
 }
 alfaromeo = {
-  'extend': 'com',
+    "extend": "com",
 }
 alibaba = {
-  'extend': 'com',
+    "extend": "com",
 }
 alipay = {
-  'extend': 'com',
+    "extend": "com",
 }
 allfinanz = {
-  'extend': 'com',
+    "extend": "com",
 }
 allstate = {
-  'extend': 'com',
+    "extend": "com",
 }
 ally = {
-  'extend': 'com',
+    "extend": "com",
 }
 alsace = {
-  'extend': 'com',
+    "extend": "com",
 }
 alstom = {
-  'extend': 'com',
+    "extend": "com",
 }
 americanfamily = {
-  'extend': 'com',
+    "extend": "com",
 }
 amfam = {
-  'extend': 'com',
+    "extend": "com",
 }
 android = {
-  'extend': 'com',
+    "extend": "com",
 }
 anquan = {
-  'extend': 'com',
+    "extend": "com",
 }
 anz = {
-  'extend': 'com',
+    "extend": "com",
 }
 aol = {
-  'extend': 'com',
+    "extend": "com",
 }
 apartments = {
-  'extend': 'com',
+    "extend": "com",
 }
 app = {
-  'extend': 'com',
+    "extend": "com",
 }
 apple = {
-  'extend': 'com',
+    "extend": "com",
 }
 aquarelle = {
-  'extend': 'com',
+    "extend": "com",
 }
 archi = {
-  'extend': 'com',
+    "extend": "com",
 }
 ar = {
-  'extend': 'com',
+    "extend": "com",
 }
 army = {
-  'extend': 'com',
+    "extend": "com",
 }
 arpa = {
-  'extend': 'com',
+    "extend": "com",
 }
 arte = {
-  'extend': 'com',
+    "extend": "com",
 }
 art = {
-  'extend': 'com',
+    "extend": "com",
 }
 # as is Python keyword
-#as = {
+# as = {
 #  'extend': 'com',
-#}
+# }
 asda = {
-  'extend': 'com',
+    "extend": "com",
 }
 asia = {
-  'extend': 'com',
+    "extend": "com",
 }
 associates = {
-  'extend': 'com',
+    "extend": "com",
 }
 attorney = {
-  'extend': 'com',
+    "extend": "com",
 }
 auction = {
-  'extend': 'com',
+    "extend": "com",
 }
 audi = {
-  'extend': 'com',
+    "extend": "com",
 }
 audio = {
-  'extend': 'com',
+    "extend": "com",
 }
 au = {
-  'extend': 'com',
+    "extend": "com",
 }
 auspost = {
-  'extend': 'com',
+    "extend": "com",
 }
 auto = {
-  'extend': 'com',
+    "extend": "com",
 }
 autos = {
-  'extend': 'com',
+    "extend": "com",
 }
 avianca = {
-  'extend': 'com',
+    "extend": "com",
 }
 aw = {
-  'extend': 'com',
+    "extend": "com",
 }
 ax = {
-  'extend': 'com',
+    "extend": "com",
 }
 baidu = {
-  'extend': 'com',
+    "extend": "com",
 }
 band = {
-  'extend': 'com',
+    "extend": "com",
 }
 bank = {
-  'extend': 'com',
+    "extend": "com",
 }
 barcelona = {
-  'extend': 'com',
+    "extend": "com",
 }
 barclaycard = {
-  'extend': 'com',
+    "extend": "com",
 }
 barclays = {
-  'extend': 'com',
+    "extend": "com",
 }
 barefoot = {
-  'extend': 'com',
+    "extend": "com",
 }
 bargains = {
-  'extend': 'com',
+    "extend": "com",
 }
 bar = {
-  'extend': 'com',
+    "extend": "com",
 }
 basketball = {
-  'extend': 'com',
+    "extend": "com",
 }
 bauhaus = {
-  'extend': 'com',
+    "extend": "com",
 }
 bayern = {
-  'extend': 'com',
+    "extend": "com",
 }
 bbc = {
-  'extend': 'com',
+    "extend": "com",
 }
 bbt = {
-  'extend': 'com',
+    "extend": "com",
 }
 bbva = {
-  'extend': 'com',
+    "extend": "com",
 }
 bcg = {
-  'extend': 'com',
+    "extend": "com",
 }
 bcn = {
-  'extend': 'com',
+    "extend": "com",
 }
 beats = {
-  'extend': 'com',
+    "extend": "com",
 }
 beauty = {
-  'extend': 'com',
+    "extend": "com",
 }
 beer = {
-  'extend': 'com',
+    "extend": "com",
 }
 bentley = {
-  'extend': 'com',
+    "extend": "com",
 }
 berlin = {
-  'extend': 'com',
+    "extend": "com",
 }
 bestbuy = {
-  'extend': 'com',
+    "extend": "com",
 }
 best = {
-  'extend': 'com',
+    "extend": "com",
 }
 bet = {
-  'extend': 'com',
+    "extend": "com",
 }
 bg = {
-  'extend': 'com',
+    "extend": "com",
 }
 bid = {
-  'extend': 'com',
+    "extend": "com",
 }
 bike = {
-  'extend': 'com',
+    "extend": "com",
 }
 bingo = {
-  'extend': 'com',
+    "extend": "com",
 }
 bio = {
-  'extend': 'com',
+    "extend": "com",
 }
 bj = {
-  'extend': 'com',
+    "extend": "com",
 }
 blackfriday = {
-  'extend': 'com',
+    "extend": "com",
 }
 black = {
-  'extend': 'com',
+    "extend": "com",
 }
 blanco = {
-  'extend': 'com',
+    "extend": "com",
 }
 blockbuster = {
-  'extend': 'com',
+    "extend": "com",
 }
 blog = {
-  'extend': 'com',
+    "extend": "com",
 }
 blue = {
-  'extend': 'com',
+    "extend": "com",
 }
 bms = {
-  'extend': 'com',
+    "extend": "com",
 }
 bmw = {
-  'extend': 'com',
+    "extend": "com",
 }
 bn = {
-  'extend': 'com',
+    "extend": "com",
 }
 bnl = {
-  'extend': 'com',
+    "extend": "com",
 }
 bnpparibas = {
-  'extend': 'com',
+    "extend": "com",
 }
 boats = {
-  'extend': 'com',
+    "extend": "com",
 }
 boehringer = {
-  'extend': 'com',
+    "extend": "com",
 }
 bofa = {
-  'extend': 'com',
+    "extend": "com",
 }
 bom = {
-  'extend': 'com',
+    "extend": "com",
 }
 bond = {
-  'extend': 'com',
+    "extend": "com",
 }
 boo = {
-  'extend': 'com',
+    "extend": "com",
 }
 boots = {
-  'extend': 'com',
+    "extend": "com",
 }
 bosch = {
-  'extend': 'com',
+    "extend": "com",
 }
 bostik = {
-  'extend': 'com',
+    "extend": "com",
 }
 boston = {
-  'extend': 'com',
+    "extend": "com",
 }
 boutique = {
-  'extend': 'com',
+    "extend": "com",
 }
 box = {
-  'extend': 'com',
+    "extend": "com",
 }
 bradesco = {
-  'extend': 'com',
+    "extend": "com",
 }
 br = {
-    'extend': 'com',
-    'domain_name':              r'domain:\s?(.+)',
-    'registrar':                'nic.br',
-    'registrant':               None,
-    'owner':                    r'owner:\s?(.+)',
-    'creation_date':            r'created:\s?(.+)',
-    'expiration_date':          r'expires:\s?(.+)',
-    'updated_date':             r'changed:\s?(.+)',
-    'name_servers':             r'nserver:\s*(.+)',
-    'status':                   r'status:\s?(.+)',
+    "extend": "com",
+    "domain_name": r"domain:\s?(.+)",
+    "registrar": "nic.br",
+    "registrant": None,
+    "owner": r"owner:\s?(.+)",
+    "creation_date": r"created:\s?(.+)",
+    "expiration_date": r"expires:\s?(.+)",
+    "updated_date": r"changed:\s?(.+)",
+    "name_servers": r"nserver:\s*(.+)",
+    "status": r"status:\s?(.+)",
 }
 bridgestone = {
-  'extend': 'com',
+    "extend": "com",
 }
 broadway = {
-  'extend': 'com',
+    "extend": "com",
 }
 broker = {
-  'extend': 'com',
+    "extend": "com",
 }
 brother = {
-  'extend': 'com',
+    "extend": "com",
 }
 brussels = {
-  'extend': 'com',
+    "extend": "com",
 }
 budapest = {
-  'extend': 'com',
+    "extend": "com",
 }
 bugatti = {
-  'extend': 'com',
+    "extend": "com",
 }
 builders = {
-  'extend': 'com',
+    "extend": "com",
 }
 build = {
-  'extend': 'com',
+    "extend": "com",
 }
 business = {
-  'extend': 'com',
+    "extend": "com",
 }
 buy = {
-  'extend': 'com',
+    "extend": "com",
 }
 bw = {
-  'extend': 'com',
+    "extend": "com",
 }
 by = {
-  'extend': 'com',
+    "extend": "com",
 }
 bzh = {
-  'extend': 'com',
+    "extend": "com",
 }
 cab = {
-  'extend': 'com',
+    "extend": "com",
 }
 cafe = {
-  'extend': 'com',
+    "extend": "com",
 }
 cal = {
-  'extend': 'com',
+    "extend": "com",
 }
 camera = {
-  'extend': 'com',
+    "extend": "com",
 }
 cam = {
-  'extend': 'com',
+    "extend": "com",
 }
 camp = {
-  'extend': 'com',
+    "extend": "com",
 }
 cancerresearch = {
-  'extend': 'com',
+    "extend": "com",
 }
 canon = {
-  'extend': 'com',
+    "extend": "com",
 }
 capetown = {
-  'extend': 'com',
+    "extend": "com",
 }
 capital = {
-  'extend': 'com',
+    "extend": "com",
 }
 capitalone = {
-  'extend': 'com',
+    "extend": "com",
 }
 cards = {
-  'extend': 'com',
+    "extend": "com",
 }
 career = {
-  'extend': 'com',
+    "extend": "com",
 }
 careers = {
-  'extend': 'com',
+    "extend": "com",
 }
 care = {
-  'extend': 'com',
+    "extend": "com",
 }
 car = {
-  'extend': 'com',
+    "extend": "com",
 }
 cars = {
-  'extend': 'com',
+    "extend": "com",
 }
 casa = {
-  'extend': 'com',
+    "extend": "com",
 }
 case = {
-  'extend': 'com',
+    "extend": "com",
 }
 caseih = {
-  'extend': 'com',
+    "extend": "com",
 }
 cash = {
-  'extend': 'com',
+    "extend": "com",
 }
 casino = {
-  'extend': 'com',
+    "extend": "com",
 }
 catering = {
-  'extend': 'com',
+    "extend": "com",
 }
 catholic = {
-  'extend': 'com',
+    "extend": "com",
 }
 cat = {
-  'extend': 'com',
+    "extend": "com",
 }
 cba = {
-  'extend': 'com',
+    "extend": "com",
 }
 cbs = {
-  'extend': 'com',
+    "extend": "com",
 }
 ceb = {
-  'extend': 'com',
+    "extend": "com",
 }
 center = {
-  'extend': 'com',
+    "extend": "com",
 }
 ceo = {
-  'extend': 'com',
+    "extend": "com",
 }
 cern = {
-  'extend': 'com',
+    "extend": "com",
 }
 cfa = {
-  'extend': 'com',
+    "extend": "com",
 }
 cfd = {
-  'extend': 'com',
+    "extend": "com",
 }
 cf = {
-  'extend': 'com',
+    "extend": "com",
 }
 chanel = {
-  'extend': 'com',
+    "extend": "com",
 }
 channel = {
-  'extend': 'com',
+    "extend": "com",
 }
 chat = {
-  'extend': 'com',
+    "extend": "com",
 }
 cheap = {
-  'extend': 'com',
+    "extend": "com",
 }
 ch = {
-  'extend': 'com',
+    "extend": "com",
 }
 chintai = {
-  'extend': 'com',
+    "extend": "com",
 }
 christmas = {
-  'extend': 'com',
+    "extend": "com",
 }
 chrome = {
-  'extend': 'com',
+    "extend": "com",
 }
 chrysler = {
-  'extend': 'com',
+    "extend": "com",
 }
 church = {
-  'extend': 'com',
+    "extend": "com",
 }
 ci = {
-  'extend': 'com',
+    "extend": "com",
 }
 cipriani = {
-  'extend': 'com',
+    "extend": "com",
 }
 cityeats = {
-  'extend': 'com',
+    "extend": "com",
 }
 city = {
-  'extend': 'com',
+    "extend": "com",
 }
 claims = {
-  'extend': 'com',
+    "extend": "com",
 }
 cleaning = {
-  'extend': 'com',
+    "extend": "com",
 }
 cl = {
-  'extend': 'com',
+    "extend": "com",
 }
 click = {
-  'extend': 'com',
+    "extend": "com",
 }
 clinic = {
-  'extend': 'com',
+    "extend": "com",
 }
 clinique = {
-  'extend': 'com',
+    "extend": "com",
 }
 clothing = {
-  'extend': 'com',
+    "extend": "com",
 }
 cloud = {
-  'extend': 'com',
+    "extend": "com",
 }
 club = {
-  'extend': 'com',
+    "extend": "com",
 }
 clubmed = {
-  'extend': 'com',
+    "extend": "com",
 }
 coach = {
-  'extend': 'com',
+    "extend": "com",
 }
 codes = {
-  'extend': 'com',
+    "extend": "com",
 }
 coffee = {
-  'extend': 'com',
+    "extend": "com",
 }
 college = {
-  'extend': 'com',
+    "extend": "com",
 }
 cologne = {
-  'extend': 'com',
+    "extend": "com",
 }
 comcast = {
-  'extend': 'com',
+    "extend": "com",
 }
 commbank = {
-  'extend': 'com',
+    "extend": "com",
 }
 community = {
-  'extend': 'com',
+    "extend": "com",
 }
 company = {
-  'extend': 'com',
+    "extend": "com",
 }
 compare = {
-  'extend': 'com',
+    "extend": "com",
 }
 computer = {
-  'extend': 'com',
+    "extend": "com",
 }
 comsec = {
-  'extend': 'com',
+    "extend": "com",
 }
 condos = {
-  'extend': 'com',
+    "extend": "com",
 }
 construction = {
-  'extend': 'com',
+    "extend": "com",
 }
 consulting = {
-  'extend': 'com',
+    "extend": "com",
 }
 contact = {
-  'extend': 'com',
+    "extend": "com",
 }
 contractors = {
-  'extend': 'com',
+    "extend": "com",
 }
 cookingchannel = {
-  'extend': 'com',
+    "extend": "com",
 }
 cooking = {
-  'extend': 'com',
+    "extend": "com",
 }
 cool = {
-  'extend': 'com',
+    "extend": "com",
 }
 coop = {
-  'extend': 'com',
+    "extend": "com",
 }
 corsica = {
-  'extend': 'com',
+    "extend": "com",
 }
 country = {
-  'extend': 'com',
+    "extend": "com",
 }
 coupons = {
-  'extend': 'com',
+    "extend": "com",
 }
 courses = {
-  'extend': 'com',
+    "extend": "com",
 }
 creditcard = {
-  'extend': 'com',
+    "extend": "com",
 }
 credit = {
-  'extend': 'com',
+    "extend": "com",
 }
 creditunion = {
-  'extend': 'com',
+    "extend": "com",
 }
 cr = {
-  'extend': 'com',
+    "extend": "com",
 }
 cricket = {
-  'extend': 'com',
+    "extend": "com",
 }
 cruise = {
-  'extend': 'com',
+    "extend": "com",
 }
 cruises = {
-  'extend': 'com',
+    "extend": "com",
 }
 csc = {
-  'extend': 'com',
+    "extend": "com",
 }
 cuisinella = {
-  'extend': 'com',
+    "extend": "com",
 }
 cx = {
-  'extend': 'com',
+    "extend": "com",
 }
 cymru = {
-  'extend': 'com',
+    "extend": "com",
 }
 cyou = {
-  'extend': 'com',
+    "extend": "com",
 }
 dabur = {
-  'extend': 'com',
+    "extend": "com",
 }
 dad = {
-  'extend': 'com',
+    "extend": "com",
 }
 dance = {
-  'extend': 'com',
+    "extend": "com",
 }
 data = {
-  'extend': 'com',
+    "extend": "com",
 }
 date = {
-  'extend': 'com',
+    "extend": "com",
 }
 dating = {
-  'extend': 'com',
+    "extend": "com",
 }
 datsun = {
-  'extend': 'com',
+    "extend": "com",
 }
 day = {
-  'extend': 'com',
+    "extend": "com",
 }
 dclk = {
-  'extend': 'com',
+    "extend": "com",
 }
 dds = {
-  'extend': 'com',
+    "extend": "com",
 }
 deals = {
-  'extend': 'com',
+    "extend": "com",
 }
 degree = {
-  'extend': 'com',
+    "extend": "com",
 }
 delivery = {
-  'extend': 'com',
+    "extend": "com",
 }
 deloitte = {
-  'extend': 'com',
+    "extend": "com",
 }
 delta = {
-  'extend': 'com',
+    "extend": "com",
 }
 democrat = {
-  'extend': 'com',
+    "extend": "com",
 }
 dental = {
-  'extend': 'com',
+    "extend": "com",
 }
 dentist = {
-  'extend': 'com',
+    "extend": "com",
 }
 design = {
-  'extend': 'com',
+    "extend": "com",
 }
 desi = {
-  'extend': 'com',
+    "extend": "com",
 }
 dev = {
-  'extend': 'com',
+    "extend": "com",
 }
 diamonds = {
-  'extend': 'com',
+    "extend": "com",
 }
 diet = {
-  'extend': 'com',
+    "extend": "com",
 }
 digital = {
-  'extend': 'com',
+    "extend": "com",
 }
 direct = {
-  'extend': 'com',
+    "extend": "com",
 }
 directory = {
-  'extend': 'com',
+    "extend": "com",
 }
 discount = {
-  'extend': 'com',
+    "extend": "com",
 }
 dish = {
-  'extend': 'com',
+    "extend": "com",
 }
 diy = {
-  'extend': 'com',
+    "extend": "com",
 }
 dk = {
-  'extend': 'com',
+    "extend": "com",
 }
 dm = {
-  'extend': 'com',
+    "extend": "com",
 }
 docs = {
-  'extend': 'com',
+    "extend": "com",
 }
 doctor = {
-  'extend': 'com',
+    "extend": "com",
 }
 dodge = {
-  'extend': 'com',
+    "extend": "com",
 }
 dog = {
-  'extend': 'com',
+    "extend": "com",
 }
 doha = {
-  'extend': 'com',
+    "extend": "com",
 }
 domains = {
-  'extend': 'com',
+    "extend": "com",
 }
 doosan = {
-  'extend': 'com',
+    "extend": "com",
 }
 dot = {
-  'extend': 'com',
+    "extend": "com",
 }
 download = {
-  'extend': 'com',
+    "extend": "com",
 }
 drive = {
-  'extend': 'com',
+    "extend": "com",
 }
 dtv = {
-  'extend': 'com',
+    "extend": "com",
 }
 dubai = {
-  'extend': 'com',
+    "extend": "com",
 }
 duck = {
-  'extend': 'com',
+    "extend": "com",
 }
 dunlop = {
-  'extend': 'com',
+    "extend": "com",
 }
 durban = {
-  'extend': 'com',
+    "extend": "com",
 }
 dvag = {
-  'extend': 'com',
+    "extend": "com",
 }
 dvr = {
-  'extend': 'com',
+    "extend": "com",
 }
 dz = {
-  'extend': 'com',
+    "extend": "com",
 }
 eat = {
-  'extend': 'com',
+    "extend": "com",
 }
 ec = {
-  'extend': 'com',
+    "extend": "com",
 }
 eco = {
-  'extend': 'com',
+    "extend": "com",
 }
 edeka = {
-  'extend': 'com',
+    "extend": "com",
 }
 education = {
-  'extend': 'com',
+    "extend": "com",
 }
 ee = {
-  'extend': 'com',
+    "extend": "com",
 }
 email = {
-  'extend': 'com',
+    "extend": "com",
 }
 emerck = {
-  'extend': 'com',
+    "extend": "com",
 }
 energy = {
-  'extend': 'com',
+    "extend": "com",
 }
 engineer = {
-  'extend': 'com',
+    "extend": "com",
 }
 engineering = {
-  'extend': 'com',
+    "extend": "com",
 }
 enterprises = {
-  'extend': 'com',
+    "extend": "com",
 }
 epson = {
-  'extend': 'com',
+    "extend": "com",
 }
 equipment = {
-  'extend': 'com',
+    "extend": "com",
 }
 ericsson = {
-  'extend': 'com',
+    "extend": "com",
 }
 erni = {
-  'extend': 'com',
+    "extend": "com",
 }
 es = {
-  'extend': 'com',
+    "extend": "com",
 }
 esq = {
-  'extend': 'com',
+    "extend": "com",
 }
 estate = {
-  'extend': 'com',
+    "extend": "com",
 }
 esurance = {
-  'extend': 'com',
+    "extend": "com",
 }
 eurovision = {
-  'extend': 'com',
+    "extend": "com",
 }
 eus = {
-  'extend': 'com',
+    "extend": "com",
 }
 events = {
-  'extend': 'com',
+    "extend": "com",
 }
 exchange = {
-  'extend': 'com',
+    "extend": "com",
 }
 expert = {
-  'extend': 'com',
+    "extend": "com",
 }
 exposed = {
-  'extend': 'com',
+    "extend": "com",
 }
 express = {
-  'extend': 'com',
+    "extend": "com",
 }
 extraspace = {
-  'extend': 'com',
+    "extend": "com",
 }
 fage = {
-  'extend': 'com',
+    "extend": "com",
 }
 fail = {
-  'extend': 'com',
+    "extend": "com",
 }
 fairwinds = {
-  'extend': 'com',
+    "extend": "com",
 }
 faith = {
-  'extend': 'com',
+    "extend": "com",
 }
 family = {
-  'extend': 'com',
+    "extend": "com",
 }
 fan = {
-  'extend': 'com',
+    "extend": "com",
 }
 fans = {
-  'extend': 'com',
+    "extend": "com",
 }
 farm = {
-  'extend': 'com',
+    "extend": "com",
 }
 fashion = {
-  'extend': 'com',
+    "extend": "com",
 }
 fedex = {
-  'extend': 'com',
+    "extend": "com",
 }
 feedback = {
-  'extend': 'com',
+    "extend": "com",
 }
 ferrari = {
-  'extend': 'com',
+    "extend": "com",
 }
 fiat = {
-  'extend': 'com',
+    "extend": "com",
 }
 fidelity = {
-  'extend': 'com',
+    "extend": "com",
 }
 fido = {
-  'extend': 'com',
+    "extend": "com",
 }
 fi = {
-  'extend': 'com',
+    "extend": "com",
 }
 film = {
-  'extend': 'com',
+    "extend": "com",
 }
 final = {
-  'extend': 'com',
+    "extend": "com",
 }
 finance = {
-  'extend': 'com',
+    "extend": "com",
 }
 financial = {
-  'extend': 'com',
+    "extend": "com",
 }
 firestone = {
-  'extend': 'com',
+    "extend": "com",
 }
 firmdale = {
-  'extend': 'com',
+    "extend": "com",
 }
 fish = {
-  'extend': 'com',
+    "extend": "com",
 }
 fishing = {
-  'extend': 'com',
+    "extend": "com",
 }
 fit = {
-  'extend': 'com',
+    "extend": "com",
 }
 fitness = {
-  'extend': 'com',
+    "extend": "com",
 }
 flights = {
-  'extend': 'com',
+    "extend": "com",
 }
 florist = {
-  'extend': 'com',
+    "extend": "com",
 }
 flowers = {
-  'extend': 'com',
+    "extend": "com",
 }
 flsmidth = {
-  'extend': 'com',
+    "extend": "com",
 }
 fly = {
-  'extend': 'com',
+    "extend": "com",
 }
 foodnetwork = {
-  'extend': 'com',
+    "extend": "com",
 }
 foo = {
-  'extend': 'com',
+    "extend": "com",
 }
 football = {
-  'extend': 'com',
+    "extend": "com",
 }
 forex = {
-  'extend': 'com',
+    "extend": "com",
 }
 forsale = {
-  'extend': 'com',
+    "extend": "com",
 }
 forum = {
-  'extend': 'com',
+    "extend": "com",
 }
 foundation = {
-  'extend': 'com',
+    "extend": "com",
 }
 fresenius = {
-  'extend': 'com',
+    "extend": "com",
 }
 frl = {
-  'extend': 'com',
+    "extend": "com",
 }
 frogans = {
-  'extend': 'com',
+    "extend": "com",
 }
 frontdoor = {
-  'extend': 'com',
+    "extend": "com",
 }
 fujitsu = {
-  'extend': 'com',
+    "extend": "com",
 }
 fujixerox = {
-  'extend': 'com',
+    "extend": "com",
 }
 fund = {
-  'extend': 'com',
+    "extend": "com",
 }
 fun = {
-  'extend': 'com',
+    "extend": "com",
 }
 furniture = {
-  'extend': 'com',
+    "extend": "com",
 }
 futbol = {
-  'extend': 'com',
+    "extend": "com",
 }
 fyi = {
-  'extend': 'com',
+    "extend": "com",
 }
 gal = {
-  'extend': 'com',
+    "extend": "com",
 }
 gallery = {
-  'extend': 'com',
+    "extend": "com",
 }
 gallo = {
-  'extend': 'com',
+    "extend": "com",
 }
 gallup = {
-  'extend': 'com',
+    "extend": "com",
 }
 game = {
-  'extend': 'com',
+    "extend": "com",
 }
 games = {
-  'extend': 'com',
+    "extend": "com",
 }
 garden = {
-  'extend': 'com',
+    "extend": "com",
 }
 gbiz = {
-  'extend': 'com',
+    "extend": "com",
 }
 gd = {
-  'extend': 'com',
+    "extend": "com",
 }
 gdn = {
-  'extend': 'com',
+    "extend": "com",
 }
 gea = {
-  'extend': 'com',
+    "extend": "com",
 }
 gent = {
-  'extend': 'com',
+    "extend": "com",
 }
 genting = {
-  'extend': 'com',
+    "extend": "com",
 }
 george = {
-  'extend': 'com',
+    "extend": "com",
 }
 gf = {
-  'extend': 'com',
+    "extend": "com",
 }
 ggee = {
-  'extend': 'com',
+    "extend": "com",
 }
 gg = {
-  'extend': 'com',
+    "extend": "com",
 }
 gift = {
-  'extend': 'com',
+    "extend": "com",
 }
 gifts = {
-  'extend': 'com',
+    "extend": "com",
 }
 gi = {
-  'extend': 'com',
+    "extend": "com",
 }
 gives = {
-  'extend': 'com',
+    "extend": "com",
 }
 giving = {
-  'extend': 'com',
+    "extend": "com",
 }
 glade = {
-  'extend': 'com',
+    "extend": "com",
 }
 glass = {
-  'extend': 'com',
+    "extend": "com",
 }
 gle = {
-  'extend': 'com',
+    "extend": "com",
 }
 gl = {
-  'extend': 'com',
+    "extend": "com",
 }
 
 # global is python keyword
-#global = {
+# global = {
 #  'extend': 'com',
-#}
+# }
 globo = {
-  'extend': 'com',
+    "extend": "com",
 }
 gmail = {
-  'extend': 'com',
+    "extend": "com",
 }
 gmbh = {
-  'extend': 'com',
+    "extend": "com",
 }
 gmx = {
-  'extend': 'com',
+    "extend": "com",
 }
 godaddy = {
-  'extend': 'com',
+    "extend": "com",
 }
 gold = {
-  'extend': 'com',
+    "extend": "com",
 }
 goldpoint = {
-  'extend': 'com',
+    "extend": "com",
 }
 golf = {
-  'extend': 'com',
+    "extend": "com",
 }
 goodhands = {
-  'extend': 'com',
+    "extend": "com",
 }
 goodyear = {
-  'extend': 'com',
+    "extend": "com",
 }
 goog = {
-  'extend': 'com',
+    "extend": "com",
 }
 google = {
-  'extend': 'com',
+    "extend": "com",
 }
 goo = {
-  'extend': 'com',
+    "extend": "com",
 }
 gop = {
-  'extend': 'com',
+    "extend": "com",
 }
 gov = {
-  'extend': 'com',
+    "extend": "com",
 }
 gq = {
-  'extend': 'com',
+    "extend": "com",
 }
 graphics = {
-  'extend': 'com',
+    "extend": "com",
 }
 gratis = {
-  'extend': 'com',
+    "extend": "com",
 }
 green = {
-  'extend': 'com',
+    "extend": "com",
 }
 gripe = {
-  'extend': 'com',
+    "extend": "com",
 }
 group = {
-  'extend': 'com',
+    "extend": "com",
 }
 gs = {
-  'extend': 'com',
+    "extend": "com",
 }
 guge = {
-  'extend': 'com',
+    "extend": "com",
 }
 guide = {
-  'extend': 'com',
+    "extend": "com",
 }
 guitars = {
-  'extend': 'com',
+    "extend": "com",
 }
 guru = {
-  'extend': 'com',
+    "extend": "com",
 }
 gy = {
-  'extend': 'com',
+    "extend": "com",
 }
 hamburg = {
-  'extend': 'com',
+    "extend": "com",
 }
 hangout = {
-  'extend': 'com',
+    "extend": "com",
 }
 haus = {
-  'extend': 'com',
+    "extend": "com",
 }
 hdfcbank = {
-  'extend': 'com',
+    "extend": "com",
 }
 hdfc = {
-  'extend': 'com',
+    "extend": "com",
 }
 healthcare = {
-  'extend': 'com',
+    "extend": "com",
 }
 help = {
-  'extend': 'com',
+    "extend": "com",
 }
 helsinki = {
-  'extend': 'com',
+    "extend": "com",
 }
 here = {
-  'extend': 'com',
+    "extend": "com",
 }
 hermes = {
-  'extend': 'com',
+    "extend": "com",
 }
 hgtv = {
-  'extend': 'com',
+    "extend": "com",
 }
 hiphop = {
-  'extend': 'com',
+    "extend": "com",
 }
 hisamitsu = {
-  'extend': 'com',
+    "extend": "com",
 }
 hitachi = {
-  'extend': 'com',
+    "extend": "com",
 }
 hiv = {
-  'extend': 'com',
+    "extend": "com",
 }
 hkt = {
-  'extend': 'com',
+    "extend": "com",
 }
 hm = {
-  'extend': 'com',
+    "extend": "com",
 }
 hn = {
-  'extend': 'com',
+    "extend": "com",
 }
 hockey = {
-  'extend': 'com',
+    "extend": "com",
 }
 holdings = {
-  'extend': 'com',
+    "extend": "com",
 }
 holiday = {
-  'extend': 'com',
+    "extend": "com",
 }
 homedepot = {
-  'extend': 'com',
+    "extend": "com",
 }
 homes = {
-  'extend': 'com',
+    "extend": "com",
 }
 honda = {
-  'extend': 'com',
+    "extend": "com",
 }
 horse = {
-  'extend': 'com',
+    "extend": "com",
 }
 hospital = {
-  'extend': 'com',
+    "extend": "com",
 }
 host = {
-  'extend': 'com',
+    "extend": "com",
 }
 hosting = {
-  'extend': 'com',
+    "extend": "com",
 }
 house = {
-  'extend': 'com',
+    "extend": "com",
 }
 how = {
-  'extend': 'com',
+    "extend": "com",
 }
 hr = {
-  'extend': 'com',
+    "extend": "com",
 }
 ht = {
-  'extend': 'com',
+    "extend": "com",
 }
 hughes = {
-  'extend': 'com',
+    "extend": "com",
 }
 hu = {
-  'extend': 'com',
+    "extend": "com",
 }
 hyundai = {
-  'extend': 'com',
+    "extend": "com",
 }
 ibm = {
-  'extend': 'com',
+    "extend": "com",
 }
 icbc = {
-  'extend': 'com',
+    "extend": "com",
 }
 ice = {
-  'extend': 'com',
+    "extend": "com",
 }
 icu = {
-  'extend': 'com',
+    "extend": "com",
 }
 id = {
-  'extend': 'com',
+    "extend": "com",
 }
 ie = {
-  'extend': 'com',
+    "extend": "com",
 }
 ifm = {
-  'extend': 'com',
+    "extend": "com",
 }
 iinet = {
-  'extend': 'com',
+    "extend": "com",
 }
 ikano = {
-  'extend': 'com',
+    "extend": "com",
 }
 il = {
-  'extend': 'com',
+    "extend": "com",
 }
 imamat = {
-  'extend': 'com',
+    "extend": "com",
 }
 im = {
-  'extend': 'com',
+    "extend": "com",
 }
 immobilien = {
-  'extend': 'com',
+    "extend": "com",
 }
 immo = {
-  'extend': 'com',
+    "extend": "com",
 }
-#Using "IN" as "in" is a keyword in python
+# Using "IN" as "in" is a keyword in python
 IN = {
-    'extend': 'com',
+    "extend": "com",
 }
 industries = {
-  'extend': 'com',
+    "extend": "com",
 }
 infiniti = {
-  'extend': 'com',
+    "extend": "com",
 }
 ing = {
-  'extend': 'com',
+    "extend": "com",
 }
 ink = {
-  'extend': 'com',
+    "extend": "com",
 }
 institute = {
-  'extend': 'com',
+    "extend": "com",
 }
 insurance = {
-  'extend': 'com',
+    "extend": "com",
 }
 insure = {
-  'extend': 'com',
+    "extend": "com",
 }
 international = {
-  'extend': 'com',
+    "extend": "com",
 }
 int = {
-  'extend': 'com',
+    "extend": "com",
 }
 investments = {
-  'extend': 'com',
+    "extend": "com",
 }
 io = {
-  'extend': 'com',
+    "extend": "com",
 }
 iq = {
-  'extend': 'com',
+    "extend": "com",
 }
 ir = {
-  'extend': 'com',
+    "extend": "com",
 }
 irish = {
-  'extend': 'com',
+    "extend": "com",
 }
 iselect = {
-  'extend': 'com',
+    "extend": "com",
 }
 # is is a Python keyword
-#is = {
+# is = {
 #  'extend': 'com',
-#}
+# }
 ismaili = {
-  'extend': 'com',
+    "extend": "com",
 }
 istanbul = {
-  'extend': 'com',
+    "extend": "com",
 }
 ist = {
-  'extend': 'com',
+    "extend": "com",
 }
 itv = {
-  'extend': 'com',
+    "extend": "com",
 }
 iveco = {
-  'extend': 'com',
+    "extend": "com",
 }
 jaguar = {
-  'extend': 'com',
+    "extend": "com",
 }
 java = {
-  'extend': 'com',
+    "extend": "com",
 }
 jcb = {
-  'extend': 'com',
+    "extend": "com",
 }
 jcp = {
-  'extend': 'com',
+    "extend": "com",
 }
 jeep = {
-  'extend': 'com',
+    "extend": "com",
 }
 je = {
-  'extend': 'com',
+    "extend": "com",
 }
 jewelry = {
-  'extend': 'com',
+    "extend": "com",
 }
 jio = {
-  'extend': 'com',
+    "extend": "com",
 }
 jll = {
-  'extend': 'com',
+    "extend": "com",
 }
 jobs = {
-  'extend': 'com',
+    "extend": "com",
 }
 joburg = {
-  'extend': 'com',
+    "extend": "com",
 }
 juegos = {
-  'extend': 'com',
+    "extend": "com",
 }
 juniper = {
-  'extend': 'com',
+    "extend": "com",
 }
 kaufen = {
-  'extend': 'com',
+    "extend": "com",
 }
 kddi = {
-  'extend': 'com',
+    "extend": "com",
 }
 ke = {
-  'extend': 'com',
+    "extend": "com",
 }
 kerryhotels = {
-  'extend': 'com',
+    "extend": "com",
 }
 kerrylogistics = {
-  'extend': 'com',
+    "extend": "com",
 }
 kerryproperties = {
-  'extend': 'com',
+    "extend": "com",
 }
 kfh = {
-  'extend': 'com',
+    "extend": "com",
 }
 kia = {
-  'extend': 'com',
+    "extend": "com",
 }
 ki = {
-  'extend': 'com',
+    "extend": "com",
 }
 kim = {
-  'extend': 'com',
+    "extend": "com",
 }
 kitchen = {
-  'extend': 'com',
+    "extend": "com",
 }
 kiwi = {
-  'extend': 'com',
+    "extend": "com",
 }
 kn = {
-  'extend': 'com',
+    "extend": "com",
 }
 koeln = {
-  'extend': 'com',
+    "extend": "com",
 }
 komatsu = {
-  'extend': 'com',
+    "extend": "com",
 }
 kosher = {
-  'extend': 'com',
+    "extend": "com",
 }
 krd = {
-  'extend': 'com',
+    "extend": "com",
 }
 kred = {
-  'extend': 'com',
+    "extend": "com",
 }
 kuokgroup = {
-  'extend': 'com',
+    "extend": "com",
 }
 ky = {
-  'extend': 'com',
+    "extend": "com",
 }
 kyoto = {
-  'extend': 'com',
+    "extend": "com",
 }
 kz = {
-  'extend': 'com',
+    "extend": "com",
 }
 lacaixa = {
-  'extend': 'com',
+    "extend": "com",
 }
 ladbrokes = {
-  'extend': 'com',
+    "extend": "com",
 }
 la = {
-  'extend': 'com',
+    "extend": "com",
 }
 lamborghini = {
-  'extend': 'com',
+    "extend": "com",
 }
 lamer = {
-  'extend': 'com',
+    "extend": "com",
 }
 lancaster = {
-  'extend': 'com',
+    "extend": "com",
 }
 lancia = {
-  'extend': 'com',
+    "extend": "com",
 }
 lancome = {
-  'extend': 'com',
+    "extend": "com",
 }
 land = {
-  'extend': 'com',
+    "extend": "com",
 }
 landrover = {
-  'extend': 'com',
+    "extend": "com",
 }
 lasalle = {
-  'extend': 'com',
+    "extend": "com",
 }
 lat = {
-  'extend': 'com',
+    "extend": "com",
 }
 latino = {
-  'extend': 'com',
+    "extend": "com",
 }
 latrobe = {
-  'extend': 'com',
+    "extend": "com",
 }
 law = {
-  'extend': 'com',
+    "extend": "com",
 }
 lawyer = {
-  'extend': 'com',
+    "extend": "com",
 }
 lds = {
-  'extend': 'com',
+    "extend": "com",
 }
 lease = {
-  'extend': 'com',
+    "extend": "com",
 }
 leclerc = {
-  'extend': 'com',
+    "extend": "com",
 }
 lefrak = {
-  'extend': 'com',
+    "extend": "com",
 }
 legal = {
-  'extend': 'com',
+    "extend": "com",
 }
 lego = {
-  'extend': 'com',
+    "extend": "com",
 }
 lexus = {
-  'extend': 'com',
+    "extend": "com",
 }
 lgbt = {
-  'extend': 'com',
+    "extend": "com",
 }
 liaison = {
-  'extend': 'com',
+    "extend": "com",
 }
 lidl = {
-  'extend': 'com',
+    "extend": "com",
 }
 life = {
-  'extend': 'com',
+    "extend": "com",
 }
 lifestyle = {
-  'extend': 'com',
+    "extend": "com",
 }
 lighting = {
-  'extend': 'com',
+    "extend": "com",
 }
 limited = {
-  'extend': 'com',
+    "extend": "com",
 }
 limo = {
-  'extend': 'com',
+    "extend": "com",
 }
 linde = {
-  'extend': 'com',
+    "extend": "com",
 }
 link = {
-  'extend': 'com',
+    "extend": "com",
 }
 lipsy = {
-  'extend': 'com',
+    "extend": "com",
 }
 live = {
-  'extend': 'com',
+    "extend": "com",
 }
 lixil = {
-  'extend': 'com',
+    "extend": "com",
 }
 loan = {
-  'extend': 'com',
+    "extend": "com",
 }
 loans = {
-  'extend': 'com',
+    "extend": "com",
 }
 locker = {
-  'extend': 'com',
+    "extend": "com",
 }
 locus = {
-  'extend': 'com',
+    "extend": "com",
 }
 lol = {
-  'extend': 'com',
+    "extend": "com",
 }
 london = {
-  'extend': 'com',
+    "extend": "com",
 }
 lotte = {
-  'extend': 'com',
+    "extend": "com",
 }
 lotto = {
-  'extend': 'com',
+    "extend": "com",
 }
 love = {
-  'extend': 'com',
+    "extend": "com",
 }
 lplfinancial = {
-  'extend': 'com',
+    "extend": "com",
 }
 lpl = {
-  'extend': 'com',
+    "extend": "com",
 }
 ltda = {
-  'extend': 'com',
+    "extend": "com",
 }
 ltd = {
-  'extend': 'com',
+    "extend": "com",
 }
 lt = {
-  'extend': 'com',
+    "extend": "com",
 }
 lu = {
-  'extend': 'com',
+    "extend": "com",
 }
 lundbeck = {
-  'extend': 'com',
+    "extend": "com",
 }
 luxe = {
-  'extend': 'com',
+    "extend": "com",
 }
 luxury = {
-  'extend': 'com',
+    "extend": "com",
 }
 ly = {
-  'extend': 'com',
+    "extend": "com",
 }
 macys = {
-  'extend': 'com',
+    "extend": "com",
 }
 madrid = {
-  'extend': 'com',
+    "extend": "com",
 }
 ma = {
-  'extend': 'com',
+    "extend": "com",
 }
 maison = {
-  'extend': 'com',
+    "extend": "com",
 }
 makeup = {
-  'extend': 'com',
+    "extend": "com",
 }
 management = {
-  'extend': 'com',
+    "extend": "com",
 }
 mango = {
-  'extend': 'com',
+    "extend": "com",
 }
 man = {
-  'extend': 'com',
+    "extend": "com",
 }
 market = {
-  'extend': 'com',
+    "extend": "com",
 }
 marketing = {
-  'extend': 'com',
+    "extend": "com",
 }
 markets = {
-  'extend': 'com',
+    "extend": "com",
 }
 marriott = {
-  'extend': 'com',
+    "extend": "com",
 }
 maserati = {
-  'extend': 'com',
+    "extend": "com",
 }
 mba = {
-  'extend': 'com',
+    "extend": "com",
 }
 mckinsey = {
-  'extend': 'com',
+    "extend": "com",
 }
 med = {
-  'extend': 'com',
+    "extend": "com",
 }
 media = {
-  'extend': 'com',
+    "extend": "com",
 }
 meet = {
-  'extend': 'com',
+    "extend": "com",
 }
 melbourne = {
-  'extend': 'com',
+    "extend": "com",
 }
 meme = {
-  'extend': 'com',
+    "extend": "com",
 }
 memorial = {
-  'extend': 'com',
+    "extend": "com",
 }
 men = {
-  'extend': 'com',
+    "extend": "com",
 }
 menu = {
-  'extend': 'com',
+    "extend": "com",
 }
 metlife = {
-  'extend': 'com',
+    "extend": "com",
 }
 mg = {
-  'extend': 'com',
+    "extend": "com",
 }
 miami = {
-  'extend': 'com',
+    "extend": "com",
 }
 mini = {
-  'extend': 'com',
+    "extend": "com",
 }
 mit = {
-  'extend': 'com',
+    "extend": "com",
 }
 mitsubishi = {
-  'extend': 'com',
+    "extend": "com",
 }
 mk = {
-  'extend': 'com',
+    "extend": "com",
 }
 ml = {
-  'extend': 'com',
+    "extend": "com",
 }
 mls = {
-  'extend': 'com',
+    "extend": "com",
 }
 mma = {
-  'extend': 'com',
+    "extend": "com",
 }
 mn = {
-  'extend': 'com',
+    "extend": "com",
 }
 mobi = {
-  'extend': 'com',
+    "extend": "com",
 }
 mobile = {
-  'extend': 'com',
+    "extend": "com",
 }
 moda = {
-  'extend': 'com',
+    "extend": "com",
 }
 moe = {
-  'extend': 'com',
+    "extend": "com",
 }
 mo = {
-  'extend': 'com',
+    "extend": "com",
 }
 mom = {
-  'extend': 'com',
+    "extend": "com",
 }
 monash = {
-  'extend': 'com',
+    "extend": "com",
 }
 money = {
-  'extend': 'com',
+    "extend": "com",
 }
 monster = {
-  'extend': 'com',
+    "extend": "com",
 }
 mopar = {
-  'extend': 'com',
+    "extend": "com",
 }
 mormon = {
-  'extend': 'com',
+    "extend": "com",
 }
 mortgage = {
-  'extend': 'com',
+    "extend": "com",
 }
 moscow = {
-  'extend': 'com',
+    "extend": "com",
 }
 motorcycles = {
-  'extend': 'com',
+    "extend": "com",
 }
 mov = {
-  'extend': 'com',
+    "extend": "com",
 }
 movie = {
-  'extend': 'com',
+    "extend": "com",
 }
 movistar = {
-  'extend': 'com',
+    "extend": "com",
 }
 mp = {
-  'extend': 'com',
+    "extend": "com",
 }
 mq = {
-  'extend': 'com',
+    "extend": "com",
 }
 ms = {
-  'extend': 'com',
+    "extend": "com",
 }
 mtn = {
-  'extend': 'com',
+    "extend": "com",
 }
 mtpc = {
-  'extend': 'com',
+    "extend": "com",
 }
 mtr = {
-  'extend': 'com',
+    "extend": "com",
 }
 mu = {
-  'extend': 'com',
+    "extend": "com",
 }
 museum = {
-  'extend': 'com',
+    "extend": "com",
 }
 mutuelle = {
-  'extend': 'com',
+    "extend": "com",
 }
 mx = {
-  'extend': 'com',
+    "extend": "com",
 }
 my = {
-  'extend': 'com',
+    "extend": "com",
 }
 mz = {
-  'extend': 'com',
+    "extend": "com",
 }
 nab = {
-  'extend': 'com',
+    "extend": "com",
 }
 nadex = {
-  'extend': 'com',
+    "extend": "com",
 }
 nagoya = {
-  'extend': 'com',
+    "extend": "com",
 }
 nationwide = {
-  'extend': 'com',
+    "extend": "com",
 }
 natura = {
-  'extend': 'com',
+    "extend": "com",
 }
 navy = {
-  'extend': 'com',
+    "extend": "com",
 }
 nc = {
-  'extend': 'com',
+    "extend": "com",
 }
 nec = {
-  'extend': 'com',
+    "extend": "com",
 }
 netbank = {
-  'extend': 'com',
+    "extend": "com",
 }
 network = {
-  'extend': 'com',
+    "extend": "com",
 }
 newholland = {
-  'extend': 'com',
+    "extend": "com",
 }
 new = {
-  'extend': 'com',
+    "extend": "com",
 }
 news = {
-  'extend': 'com',
+    "extend": "com",
 }
 nextdirect = {
-  'extend': 'com',
+    "extend": "com",
 }
 next = {
-  'extend': 'com',
+    "extend": "com",
 }
 nexus = {
-  'extend': 'com',
+    "extend": "com",
 }
 ng = {
-  'extend': 'com',
+    "extend": "com",
 }
 ngo = {
-  'extend': 'com',
+    "extend": "com",
 }
 nico = {
-  'extend': 'com',
+    "extend": "com",
 }
 nikon = {
-  'extend': 'com',
+    "extend": "com",
 }
 ninja = {
-  'extend': 'com',
+    "extend": "com",
 }
 nissan = {
-  'extend': 'com',
+    "extend": "com",
 }
 nissay = {
-  'extend': 'com',
+    "extend": "com",
 }
 no = {
-  'extend': 'com',
+    "extend": "com",
 }
 nokia = {
-  'extend': 'com',
+    "extend": "com",
 }
 norton = {
-  'extend': 'com',
+    "extend": "com",
 }
 nowruz = {
-  'extend': 'com',
+    "extend": "com",
 }
 nowtv = {
-  'extend': 'com',
+    "extend": "com",
 }
 nra = {
-  'extend': 'com',
+    "extend": "com",
 }
 nrw = {
-  'extend': 'com',
+    "extend": "com",
 }
 nu = {
-  'extend': 'com',
+    "extend": "com",
 }
 nyc = {
-  'extend': 'com',
+    "extend": "com",
 }
 obi = {
-  'extend': 'com',
+    "extend": "com",
 }
 observer = {
-  'extend': 'com',
+    "extend": "com",
 }
 off = {
-  'extend': 'com',
+    "extend": "com",
 }
 okinawa = {
-  'extend': 'com',
+    "extend": "com",
 }
 olayangroup = {
-  'extend': 'com',
+    "extend": "com",
 }
 olayan = {
-  'extend': 'com',
+    "extend": "com",
 }
 ollo = {
-  'extend': 'com',
+    "extend": "com",
 }
 omega = {
-  'extend': 'com',
+    "extend": "com",
 }
 one = {
-  'extend': 'com',
+    "extend": "com",
 }
 ong = {
-  'extend': 'com',
+    "extend": "com",
 }
 onyourside = {
-  'extend': 'com',
+    "extend": "com",
 }
 ooo = {
-  'extend': 'com',
+    "extend": "com",
 }
 oracle = {
-  'extend': 'com',
+    "extend": "com",
 }
 orange = {
-  'extend': 'com',
+    "extend": "com",
 }
 organic = {
-  'extend': 'com',
+    "extend": "com",
 }
 orientexpress = {
-  'extend': 'com',
+    "extend": "com",
 }
 origins = {
-  'extend': 'com',
+    "extend": "com",
 }
 osaka = {
-  'extend': 'com',
+    "extend": "com",
 }
 ott = {
-  'extend': 'com',
+    "extend": "com",
 }
 ovh = {
-  'extend': 'com',
+    "extend": "com",
 }
 page = {
-  'extend': 'com',
+    "extend": "com",
 }
 panasonic = {
-  'extend': 'com',
+    "extend": "com",
 }
 paris = {
-  'extend': 'com',
+    "extend": "com",
 }
 pars = {
-  'extend': 'com',
+    "extend": "com",
 }
 partners = {
-  'extend': 'com',
+    "extend": "com",
 }
 parts = {
-  'extend': 'com',
+    "extend": "com",
 }
 party = {
-  'extend': 'com',
+    "extend": "com",
 }
 pccw = {
-  'extend': 'com',
+    "extend": "com",
 }
 pe = {
-  'extend': 'com',
+    "extend": "com",
 }
 pet = {
-  'extend': 'com',
+    "extend": "com",
 }
 pf = {
-  'extend': 'com',
+    "extend": "com",
 }
 philips = {
-  'extend': 'com',
+    "extend": "com",
 }
 phone = {
-  'extend': 'com',
+    "extend": "com",
 }
 photography = {
-  'extend': 'com',
+    "extend": "com",
 }
 photo = {
-  'extend': 'com',
+    "extend": "com",
 }
 photos = {
-  'extend': 'com',
+    "extend": "com",
 }
 physio = {
-  'extend': 'com',
+    "extend": "com",
 }
 pics = {
-  'extend': 'com',
+    "extend": "com",
 }
 pictures = {
-  'extend': 'com',
+    "extend": "com",
 }
 pid = {
-  'extend': 'com',
+    "extend": "com",
 }
 pink = {
-  'extend': 'com',
+    "extend": "com",
 }
 pioneer = {
-  'extend': 'com',
+    "extend": "com",
 }
 pizza = {
-  'extend': 'com',
+    "extend": "com",
 }
 place = {
-  'extend': 'com',
+    "extend": "com",
 }
 play = {
-  'extend': 'com',
+    "extend": "com",
 }
 playstation = {
-  'extend': 'com',
+    "extend": "com",
 }
 plumbing = {
-  'extend': 'com',
+    "extend": "com",
 }
 plus = {
-  'extend': 'com',
+    "extend": "com",
 }
 pm = {
-  'extend': 'com',
+    "extend": "com",
 }
 pnc = {
-  'extend': 'com',
+    "extend": "com",
 }
 pohl = {
-  'extend': 'com',
+    "extend": "com",
 }
 poker = {
-  'extend': 'com',
+    "extend": "com",
 }
 politie = {
-  'extend': 'com',
+    "extend": "com",
 }
 porn = {
-  'extend': 'com',
+    "extend": "com",
 }
 post = {
-  'extend': 'com',
+    "extend": "com",
 }
 press = {
-  'extend': 'com',
+    "extend": "com",
 }
 pr = {
-  'extend': 'com',
+    "extend": "com",
 }
 prod = {
-  'extend': 'com',
+    "extend": "com",
 }
 productions = {
-  'extend': 'com',
+    "extend": "com",
 }
 prof = {
-  'extend': 'com',
+    "extend": "com",
 }
 progressive = {
-  'extend': 'com',
+    "extend": "com",
 }
 pro = {
-  'extend': 'com',
+    "extend": "com",
 }
 promo = {
-  'extend': 'com',
+    "extend": "com",
 }
 properties = {
-  'extend': 'com',
+    "extend": "com",
 }
 property = {
-  'extend': 'com',
+    "extend": "com",
 }
 protection = {
-  'extend': 'com',
+    "extend": "com",
 }
 pt = {
-  'extend': 'com',
+    "extend": "com",
 }
 pub = {
-  'extend': 'com',
+    "extend": "com",
 }
 pwc = {
-  'extend': 'com',
+    "extend": "com",
 }
 pw = {
-  'extend': 'com',
+    "extend": "com",
 }
 qa = {
-  'extend': 'com',
+    "extend": "com",
 }
 qpon = {
-  'extend': 'com',
+    "extend": "com",
 }
 quebec = {
-  'extend': 'com',
+    "extend": "com",
 }
 quest = {
-  'extend': 'com',
+    "extend": "com",
 }
 racing = {
-  'extend': 'com',
+    "extend": "com",
 }
 radio = {
-  'extend': 'com',
+    "extend": "com",
 }
 raid = {
-  'extend': 'com',
+    "extend": "com",
 }
 realestate = {
-  'extend': 'com',
+    "extend": "com",
 }
 realty = {
-  'extend': 'com',
+    "extend": "com",
 }
 recipes = {
-  'extend': 'com',
+    "extend": "com",
 }
 red = {
-  'extend': 'com',
+    "extend": "com",
 }
 redstone = {
-  'extend': 'com',
+    "extend": "com",
 }
 redumbrella = {
-  'extend': 'com',
+    "extend": "com",
 }
 rehab = {
-  'extend': 'com',
+    "extend": "com",
 }
 re = {
-  'extend': 'com',
+    "extend": "com",
 }
 reise = {
-  'extend': 'com',
+    "extend": "com",
 }
 reisen = {
-  'extend': 'com',
+    "extend": "com",
 }
 reit = {
-  'extend': 'com',
+    "extend": "com",
 }
 reliance = {
-  'extend': 'com',
+    "extend": "com",
 }
 rentals = {
-  'extend': 'com',
+    "extend": "com",
 }
 rent = {
-  'extend': 'com',
+    "extend": "com",
 }
 repair = {
-  'extend': 'com',
+    "extend": "com",
 }
 report = {
-  'extend': 'com',
+    "extend": "com",
 }
 republican = {
-  'extend': 'com',
+    "extend": "com",
 }
 restaurant = {
-  'extend': 'com',
+    "extend": "com",
 }
 rest = {
-  'extend': 'com',
+    "extend": "com",
 }
 review = {
-  'extend': 'com',
+    "extend": "com",
 }
 reviews = {
-  'extend': 'com',
+    "extend": "com",
 }
 rexroth = {
-  'extend': 'com',
+    "extend": "com",
 }
 richardli = {
-  'extend': 'com',
+    "extend": "com",
 }
 rich = {
-  'extend': 'com',
+    "extend": "com",
 }
 ricoh = {
-  'extend': 'com',
+    "extend": "com",
 }
 rightathome = {
-  'extend': 'com',
+    "extend": "com",
 }
 ril = {
-  'extend': 'com',
+    "extend": "com",
 }
 rio = {
-  'extend': 'com',
+    "extend": "com",
 }
 rip = {
-  'extend': 'com',
+    "extend": "com",
 }
 rmit = {
-  'extend': 'com',
+    "extend": "com",
 }
 rocks = {
-  'extend': 'com',
+    "extend": "com",
 }
 rodeo = {
-  'extend': 'com',
+    "extend": "com",
 }
 rogers = {
-  'extend': 'com',
+    "extend": "com",
 }
 ro = {
-  'extend': 'com',
+    "extend": "com",
 }
 rs = {
-  'extend': 'com',
+    "extend": "com",
 }
 rsvp = {
-  'extend': 'com',
+    "extend": "com",
 }
 ruhr = {
-  'extend': 'com',
+    "extend": "com",
 }
 run = {
-  'extend': 'com',
+    "extend": "com",
 }
 rwe = {
-  'extend': 'com',
+    "extend": "com",
 }
 saarland = {
-  'extend': 'com',
+    "extend": "com",
 }
 sa = {
-  'extend': 'com',
+    "extend": "com",
 }
 sale = {
-  'extend': 'com',
+    "extend": "com",
 }
 salon = {
-  'extend': 'com',
+    "extend": "com",
 }
 samsclub = {
-  'extend': 'com',
+    "extend": "com",
 }
 samsung = {
-  'extend': 'com',
+    "extend": "com",
 }
 sandvikcoromant = {
-  'extend': 'com',
+    "extend": "com",
 }
 sandvik = {
-  'extend': 'com',
+    "extend": "com",
 }
 sanofi = {
-  'extend': 'com',
+    "extend": "com",
 }
 sap = {
-  'extend': 'com',
+    "extend": "com",
 }
 sarl = {
-  'extend': 'com',
+    "extend": "com",
 }
 saxo = {
-  'extend': 'com',
+    "extend": "com",
 }
 sb = {
-  'extend': 'com',
+    "extend": "com",
 }
 sbi = {
-  'extend': 'com',
+    "extend": "com",
 }
 sbs = {
-  'extend': 'com',
+    "extend": "com",
 }
 sca = {
-  'extend': 'com',
+    "extend": "com",
 }
 scb = {
-  'extend': 'com',
+    "extend": "com",
 }
 schaeffler = {
-  'extend': 'com',
+    "extend": "com",
 }
 schmidt = {
-  'extend': 'com',
+    "extend": "com",
 }
 scholarships = {
-  'extend': 'com',
+    "extend": "com",
 }
 school = {
-  'extend': 'com',
+    "extend": "com",
 }
 sc = {
-  'extend': 'com',
+    "extend": "com",
 }
 schule = {
-  'extend': 'com',
+    "extend": "com",
 }
 schwarz = {
-  'extend': 'com',
+    "extend": "com",
 }
 science = {
-  'extend': 'com',
+    "extend": "com",
 }
 scjohnson = {
-  'extend': 'com',
+    "extend": "com",
 }
 scor = {
-  'extend': 'com',
+    "extend": "com",
 }
 scot = {
-  'extend': 'com',
+    "extend": "com",
 }
 seat = {
-  'extend': 'com',
+    "extend": "com",
 }
 security = {
-  'extend': 'com',
+    "extend": "com",
 }
 seek = {
-  'extend': 'com',
+    "extend": "com",
 }
 se = {
-  'extend': 'com',
+    "extend": "com",
 }
 select = {
-  'extend': 'com',
+    "extend": "com",
 }
 services = {
-  'extend': 'com',
+    "extend": "com",
 }
 ses = {
-  'extend': 'com',
+    "extend": "com",
 }
 seven = {
-  'extend': 'com',
+    "extend": "com",
 }
 sew = {
-  'extend': 'com',
+    "extend": "com",
 }
 sex = {
-  'extend': 'com',
+    "extend": "com",
 }
 sexy = {
-  'extend': 'com',
+    "extend": "com",
 }
 sfr = {
-  'extend': 'com',
+    "extend": "com",
 }
 sg = {
-  'extend': 'com',
+    "extend": "com",
 }
 shangrila = {
-  'extend': 'com',
+    "extend": "com",
 }
 sharp = {
-  'extend': 'com',
+    "extend": "com",
 }
 shaw = {
-  'extend': 'com',
+    "extend": "com",
 }
 shell = {
-  'extend': 'com',
+    "extend": "com",
 }
 sh = {
-  'extend': 'com',
+    "extend": "com",
 }
 shia = {
-  'extend': 'com',
+    "extend": "com",
 }
 shiksha = {
-  'extend': 'com',
+    "extend": "com",
 }
 shoes = {
-  'extend': 'com',
+    "extend": "com",
 }
 shopping = {
-  'extend': 'com',
+    "extend": "com",
 }
 shouji = {
-  'extend': 'com',
+    "extend": "com",
 }
 show = {
-  'extend': 'com',
+    "extend": "com",
 }
 showtime = {
-  'extend': 'com',
+    "extend": "com",
 }
 shriram = {
-  'extend': 'com',
+    "extend": "com",
 }
 si = {
-  'extend': 'com',
+    "extend": "com",
 }
 sina = {
-  'extend': 'com',
+    "extend": "com",
 }
 singles = {
-  'extend': 'com',
+    "extend": "com",
 }
 site = {
-  'extend': 'com',
+    "extend": "com",
 }
 sk = {
-  'extend': 'com',
+    "extend": "com",
 }
 ski = {
-  'extend': 'com',
+    "extend": "com",
 }
 skin = {
-  'extend': 'com',
+    "extend": "com",
 }
 sky = {
-  'extend': 'com',
+    "extend": "com",
 }
 sling = {
-  'extend': 'com',
+    "extend": "com",
 }
 smart = {
-  'extend': 'com',
+    "extend": "com",
 }
 sm = {
-  'extend': 'com',
+    "extend": "com",
 }
 sncf = {
-  'extend': 'com',
+    "extend": "com",
 }
 sn = {
-  'extend': 'com',
+    "extend": "com",
 }
 soccer = {
-  'extend': 'com',
+    "extend": "com",
 }
 social = {
-  'extend': 'com',
+    "extend": "com",
 }
 softbank = {
-  'extend': 'com',
+    "extend": "com",
 }
 software = {
-  'extend': 'com',
+    "extend": "com",
 }
 sohu = {
-  'extend': 'com',
+    "extend": "com",
 }
 so = {
-  'extend': 'com',
+    "extend": "com",
 }
 solar = {
-  'extend': 'com',
+    "extend": "com",
 }
 solutions = {
-  'extend': 'com',
+    "extend": "com",
 }
 sony = {
-  'extend': 'com',
+    "extend": "com",
 }
 soy = {
-  'extend': 'com',
+    "extend": "com",
 }
 space = {
-  'extend': 'com',
+    "extend": "com",
 }
 spiegel = {
-  'extend': 'com',
+    "extend": "com",
 }
 spreadbetting = {
-  'extend': 'com',
+    "extend": "com",
 }
 srl = {
-  'extend': 'com',
+    "extend": "com",
 }
 srt = {
-  'extend': 'com',
+    "extend": "com",
 }
 stada = {
-  'extend': 'com',
+    "extend": "com",
 }
 star = {
-  'extend': 'com',
+    "extend": "com",
 }
 starhub = {
-  'extend': 'com',
+    "extend": "com",
 }
 statebank = {
-  'extend': 'com',
+    "extend": "com",
 }
 statoil = {
-  'extend': 'com',
+    "extend": "com",
 }
 stcgroup = {
-  'extend': 'com',
+    "extend": "com",
 }
 stc = {
-  'extend': 'com',
+    "extend": "com",
 }
 stockholm = {
-  'extend': 'com',
+    "extend": "com",
 }
 storage = {
-  'extend': 'com',
+    "extend": "com",
 }
 store = {
-  'extend': 'com',
+    "extend": "com",
 }
 studio = {
-  'extend': 'com',
+    "extend": "com",
 }
 study = {
-  'extend': 'com',
+    "extend": "com",
 }
 style = {
-  'extend': 'com',
+    "extend": "com",
 }
 sucks = {
-  'extend': 'com',
+    "extend": "com",
 }
 supplies = {
-  'extend': 'com',
+    "extend": "com",
 }
 supply = {
-  'extend': 'com',
+    "extend": "com",
 }
 support = {
-  'extend': 'com',
+    "extend": "com",
 }
 surf = {
-  'extend': 'com',
+    "extend": "com",
 }
 surgery = {
-  'extend': 'com',
+    "extend": "com",
 }
 swatch = {
-  'extend': 'com',
+    "extend": "com",
 }
 swiss = {
-  'extend': 'com',
+    "extend": "com",
 }
 sx = {
-  'extend': 'com',
+    "extend": "com",
 }
 sydney = {
-  'extend': 'com',
+    "extend": "com",
 }
 sy = {
-  'extend': 'com',
+    "extend": "com",
 }
 symantec = {
-  'extend': 'com',
+    "extend": "com",
 }
 systems = {
-  'extend': 'com',
+    "extend": "com",
 }
 tab = {
-  'extend': 'com',
+    "extend": "com",
 }
 taipei = {
-  'extend': 'com',
+    "extend": "com",
 }
 tatamotors = {
-  'extend': 'com',
+    "extend": "com",
 }
 tatar = {
-  'extend': 'com',
+    "extend": "com",
 }
 tattoo = {
-  'extend': 'com',
+    "extend": "com",
 }
 tax = {
-  'extend': 'com',
+    "extend": "com",
 }
 taxi = {
-  'extend': 'com',
+    "extend": "com",
 }
 tc = {
-  'extend': 'com',
+    "extend": "com",
 }
 tci = {
-  'extend': 'com',
+    "extend": "com",
 }
 tdk = {
-  'extend': 'com',
+    "extend": "com",
 }
 team = {
-  'extend': 'com',
+    "extend": "com",
 }
 tech = {
-  'extend': 'com',
+    "extend": "com",
 }
 technology = {
-  'extend': 'com',
+    "extend": "com",
 }
 telecity = {
-  'extend': 'com',
+    "extend": "com",
 }
 telefonica = {
-  'extend': 'com',
+    "extend": "com",
 }
 tel = {
-  'extend': 'com',
+    "extend": "com",
 }
 temasek = {
-  'extend': 'com',
+    "extend": "com",
 }
 tennis = {
-  'extend': 'com',
+    "extend": "com",
 }
 teva = {
-  'extend': 'com',
+    "extend": "com",
 }
 tf = {
-  'extend': 'com',
+    "extend": "com",
 }
 tg = {
-  'extend': 'com',
+    "extend": "com",
 }
 thd = {
-  'extend': 'com',
+    "extend": "com",
 }
 theater = {
-  'extend': 'com',
+    "extend": "com",
 }
 theatre = {
-  'extend': 'com',
+    "extend": "com",
 }
 th = {
-  'extend': 'com',
+    "extend": "com",
 }
 tiaa = {
-  'extend': 'com',
+    "extend": "com",
 }
 tickets = {
-  'extend': 'com',
+    "extend": "com",
 }
 tienda = {
-  'extend': 'com',
+    "extend": "com",
 }
 tiffany = {
-  'extend': 'com',
+    "extend": "com",
 }
 tips = {
-  'extend': 'com',
+    "extend": "com",
 }
 tires = {
-  'extend': 'com',
+    "extend": "com",
 }
 tirol = {
-  'extend': 'com',
+    "extend": "com",
 }
 tk = {
-  'extend': 'com',
+    "extend": "com",
 }
 tl = {
-  'extend': 'com',
+    "extend": "com",
 }
 tm = {
-  'extend': 'com',
+    "extend": "com",
 }
 tn = {
-  'extend': 'com',
+    "extend": "com",
 }
 today = {
-  'extend': 'com',
+    "extend": "com",
 }
 to = {
-  'extend': 'com',
+    "extend": "com",
 }
 tokyo = {
-  'extend': 'com',
+    "extend": "com",
 }
 tools = {
-  'extend': 'com',
+    "extend": "com",
 }
 top = {
-  'extend': 'com',
+    "extend": "com",
 }
 toray = {
-  'extend': 'com',
+    "extend": "com",
 }
 toshiba = {
-  'extend': 'com',
+    "extend": "com",
 }
 total = {
-  'extend': 'com',
+    "extend": "com",
 }
 tours = {
-  'extend': 'com',
+    "extend": "com",
 }
 town = {
-  'extend': 'com',
+    "extend": "com",
 }
 toyota = {
-  'extend': 'com',
+    "extend": "com",
 }
 toys = {
-  'extend': 'com',
+    "extend": "com",
 }
 trade = {
-  'extend': 'com',
+    "extend": "com",
 }
 trading = {
-  'extend': 'com',
+    "extend": "com",
 }
 training = {
-  'extend': 'com',
+    "extend": "com",
 }
 travelchannel = {
-  'extend': 'com',
+    "extend": "com",
 }
 travelers = {
-  'extend': 'com',
+    "extend": "com",
 }
 travelersinsurance = {
-  'extend': 'com',
+    "extend": "com",
 }
 travel = {
-  'extend': 'com',
+    "extend": "com",
 }
 tr = {
-  'extend': 'com',
+    "extend": "com",
 }
 trust = {
-  'extend': 'com',
+    "extend": "com",
 }
 trv = {
-  'extend': 'com',
+    "extend": "com",
 }
 tui = {
-  'extend': 'com',
+    "extend": "com",
 }
 tvs = {
-  'extend': 'com',
+    "extend": "com",
 }
 tw = {
-  'extend': 'com',
+    "extend": "com",
 }
 tz = {
-  'extend': 'com',
+    "extend": "com",
 }
 ua = {
-  'extend': 'com',
+    "extend": "com",
 }
 ubank = {
-  'extend': 'com',
+    "extend": "com",
 }
 ubs = {
-  'extend': 'com',
+    "extend": "com",
 }
 uconnect = {
-  'extend': 'com',
+    "extend": "com",
 }
 ug = {
-  'extend': 'com',
+    "extend": "com",
 }
 university = {
-  'extend': 'com',
+    "extend": "com",
 }
 uol = {
-  'extend': 'com',
+    "extend": "com",
 }
 ups = {
-  'extend': 'com',
+    "extend": "com",
 }
 uy = {
-  'extend': 'com',
+    "extend": "com",
 }
 uz = {
-  'extend': 'com',
+    "extend": "com",
 }
 vacations = {
-  'extend': 'com',
+    "extend": "com",
 }
 vana = {
-  'extend': 'com',
+    "extend": "com",
 }
 vanguard = {
-  'extend': 'com',
+    "extend": "com",
 }
 vegas = {
-  'extend': 'com',
+    "extend": "com",
 }
 ve = {
-  'extend': 'com',
+    "extend": "com",
 }
 ventures = {
-  'extend': 'com',
+    "extend": "com",
 }
 verisign = {
-  'extend': 'com',
+    "extend": "com",
 }
 versicherung = {
-  'extend': 'com',
+    "extend": "com",
 }
 vet = {
-  'extend': 'com',
+    "extend": "com",
 }
 vg = {
-  'extend': 'com',
+    "extend": "com",
 }
 viajes = {
-  'extend': 'com',
+    "extend": "com",
 }
 video = {
-  'extend': 'com',
+    "extend": "com",
 }
 vig = {
-  'extend': 'com',
+    "extend": "com",
 }
 viking = {
-  'extend': 'com',
+    "extend": "com",
 }
 villas = {
-  'extend': 'com',
+    "extend": "com",
 }
 vin = {
-  'extend': 'com',
+    "extend": "com",
 }
 vip = {
-  'extend': 'com',
+    "extend": "com",
 }
 virgin = {
-  'extend': 'com',
+    "extend": "com",
 }
 visa = {
-  'extend': 'com',
+    "extend": "com",
 }
 vision = {
-  'extend': 'com',
+    "extend": "com",
 }
 vista = {
-  'extend': 'com',
+    "extend": "com",
 }
 vistaprint = {
-  'extend': 'com',
+    "extend": "com",
 }
 viva = {
-  'extend': 'com',
+    "extend": "com",
 }
 vlaanderen = {
-  'extend': 'com',
+    "extend": "com",
 }
 vodka = {
-  'extend': 'com',
+    "extend": "com",
 }
 volkswagen = {
-  'extend': 'com',
+    "extend": "com",
 }
 volvo = {
-  'extend': 'com',
+    "extend": "com",
 }
 vote = {
-  'extend': 'com',
+    "extend": "com",
 }
 voting = {
-  'extend': 'com',
+    "extend": "com",
 }
 voto = {
-  'extend': 'com',
+    "extend": "com",
 }
 voyage = {
-  'extend': 'com',
+    "extend": "com",
 }
 vu = {
-  'extend': 'com',
+    "extend": "com",
 }
 wales = {
-  'extend': 'com',
+    "extend": "com",
 }
 walmart = {
-  'extend': 'com',
+    "extend": "com",
 }
 walter = {
-  'extend': 'com',
+    "extend": "com",
 }
 wang = {
-  'extend': 'com',
+    "extend": "com",
 }
 warman = {
-  'extend': 'com',
+    "extend": "com",
 }
 watch = {
-  'extend': 'com',
+    "extend": "com",
 }
 webcam = {
-  'extend': 'com',
+    "extend": "com",
 }
 weber = {
-  'extend': 'com',
+    "extend": "com",
 }
 website = {
-  'extend': 'com',
+    "extend": "com",
 }
 wedding = {
-  'extend': 'com',
+    "extend": "com",
 }
 wed = {
-  'extend': 'com',
+    "extend": "com",
 }
 weibo = {
-  'extend': 'com',
+    "extend": "com",
 }
 wf = {
-  'extend': 'com',
+    "extend": "com",
 }
 whoswho = {
-  'extend': 'com',
+    "extend": "com",
 }
 wien = {
-  'extend': 'com',
+    "extend": "com",
 }
 wiki = {
-  'extend': 'com',
+    "extend": "com",
 }
 wine = {
-  'extend': 'com',
+    "extend": "com",
 }
 win = {
-  'extend': 'com',
+    "extend": "com",
 }
 wme = {
-  'extend': 'com',
+    "extend": "com",
 }
 wolterskluwer = {
-  'extend': 'com',
+    "extend": "com",
 }
 woodside = {
-  'extend': 'com',
+    "extend": "com",
 }
 work = {
-  'extend': 'com',
+    "extend": "com",
 }
 works = {
-  'extend': 'com',
+    "extend": "com",
 }
 world = {
-  'extend': 'com',
+    "extend": "com",
 }
 ws = {
-  'extend': 'com',
+    "extend": "com",
 }
 wtc = {
-  'extend': 'com',
+    "extend": "com",
 }
 wtf = {
-  'extend': 'com',
+    "extend": "com",
 }
 xerox = {
-  'extend': 'com',
+    "extend": "com",
 }
 xfinity = {
-  'extend': 'com',
+    "extend": "com",
 }
 xihuan = {
-  'extend': 'com',
+    "extend": "com",
 }
 xin = {
-  'extend': 'com',
+    "extend": "com",
 }
 # Invalid dict name
-#xn--11b4c3d = {
+# xn--11b4c3d = {
 #  'extend': 'com',
-#}
-#xn--1qqw23a = {
+# }
+# xn--1qqw23a = {
 #  'extend': 'com',
-#}
-#xn--30rr7y = {
+# }
+# xn--30rr7y = {
 #  'extend': 'com',
-#}
-#xn--3bst00m = {
+# }
+# xn--3bst00m = {
 #  'extend': 'com',
-#}
-#xn--3ds443g = {
+# }
+# xn--3ds443g = {
 #  'extend': 'com',
-#}
-#xn--3e0b707e = {
+# }
+# xn--3e0b707e = {
 #  'extend': 'com',
-#}
-#xn--3oq18vl8pn36a = {
+# }
+# xn--3oq18vl8pn36a = {
 #  'extend': 'com',
-#}
-#xn--3pxu8k = {
+# }
+# xn--3pxu8k = {
 #  'extend': 'com',
-#}
-#xn--42c2d9a = {
+# }
+# xn--42c2d9a = {
 #  'extend': 'com',
-#}
-#xn--45q11c = {
+# }
+# xn--45q11c = {
 #  'extend': 'com',
-#}
-#xn--4gbrim = {
+# }
+# xn--4gbrim = {
 #  'extend': 'com',
-#}
-#xn--55qw42g = {
+# }
+# xn--55qw42g = {
 #  'extend': 'com',
-#}
-#xn--55qx5d = {
+# }
+# xn--55qx5d = {
 #  'extend': 'com',
-#}
-#xn--5su34j936bgsg = {
+# }
+# xn--5su34j936bgsg = {
 #  'extend': 'com',
-#}
-#xn--5tzm5g = {
+# }
+# xn--5tzm5g = {
 #  'extend': 'com',
-#}
-#xn--6frz82g = {
+# }
+# xn--6frz82g = {
 #  'extend': 'com',
-#}
-#xn--6qq986b3xl = {
+# }
+# xn--6qq986b3xl = {
 #  'extend': 'com',
-#}
-#xn--80adxhks = {
+# }
+# xn--80adxhks = {
 #  'extend': 'com',
-#}
-#xn--80ao21a = {
+# }
+# xn--80ao21a = {
 #  'extend': 'com',
-#}
-#xn--80aqecdr1a = {
+# }
+# xn--80aqecdr1a = {
 #  'extend': 'com',
-#}
-#xn--80asehdb = {
+# }
+# xn--80asehdb = {
 #  'extend': 'com',
-#}
-#xn--80aswg = {
+# }
+# xn--80aswg = {
 #  'extend': 'com',
-#}
-#xn--90a3ac = {
+# }
+# xn--90a3ac = {
 #  'extend': 'com',
-#}
-#xn--90ae = {
+# }
+# xn--90ae = {
 #  'extend': 'com',
-#}
-#xn--90ais = {
+# }
+# xn--90ais = {
 #  'extend': 'com',
-#}
-#xn--9dbq2a = {
+# }
+# xn--9dbq2a = {
 #  'extend': 'com',
-#}
-#xn--9et52u = {
+# }
+# xn--9et52u = {
 #  'extend': 'com',
-#}
-#xn--9krt00a = {
+# }
+# xn--9krt00a = {
 #  'extend': 'com',
-#}
-#xn--b4w605ferd = {
+# }
+# xn--b4w605ferd = {
 #  'extend': 'com',
-#}
-#xn--c1avg = {
+# }
+# xn--c1avg = {
 #  'extend': 'com',
-#}
-#xn--c2br7g = {
+# }
+# xn--c2br7g = {
 #  'extend': 'com',
-#}
-#xn--cg4bki = {
+# }
+# xn--cg4bki = {
 #  'extend': 'com',
-#}
-#xn--clchc0ea0b2g2a9gcd = {
+# }
+# xn--clchc0ea0b2g2a9gcd = {
 #  'extend': 'com',
-#}
-#xn--czrs0t = {
+# }
+# xn--czrs0t = {
 #  'extend': 'com',
-#}
-#xn--czru2d = {
+# }
+# xn--czru2d = {
 #  'extend': 'com',
-#}
-#xn--d1acj3b = {
+# }
+# xn--d1acj3b = {
 #  'extend': 'com',
-#}
-#xn--d1alf = {
+# }
+# xn--d1alf = {
 #  'extend': 'com',
-#}
-#xn--e1a4c = {
+# }
+# xn--e1a4c = {
 #  'extend': 'com',
-#}
-#xn--efvy88h = {
+# }
+# xn--efvy88h = {
 #  'extend': 'com',
-#}
-#xn--estv75g = {
+# }
+# xn--estv75g = {
 #  'extend': 'com',
-#}
-#xn--fhbei = {
+# }
+# xn--fhbei = {
 #  'extend': 'com',
-#}
-#xn--fiq228c5hs = {
+# }
+# xn--fiq228c5hs = {
 #  'extend': 'com',
-#}
-#xn--fiq64b = {
+# }
+# xn--fiq64b = {
 #  'extend': 'com',
-#}
-#xn--fiqs8s = {
+# }
+# xn--fiqs8s = {
 #  'extend': 'com',
-#}
-#xn--fiqz9s = {
+# }
+# xn--fiqz9s = {
 #  'extend': 'com',
-#}
-#xn--fjq720a = {
+# }
+# xn--fjq720a = {
 #  'extend': 'com',
-#}
-#xn--flw351e = {
+# }
+# xn--flw351e = {
 #  'extend': 'com',
-#}
-#xn--fzys8d69uvgm = {
+# }
+# xn--fzys8d69uvgm = {
 #  'extend': 'com',
-#}
-#xn--hxt814e = {
+# }
+# xn--hxt814e = {
 #  'extend': 'com',
-#}
-#xn--i1b6b1a6a2e = {
+# }
+# xn--i1b6b1a6a2e = {
 #  'extend': 'com',
-#}
-#xn--io0a7i = {
+# }
+# xn--io0a7i = {
 #  'extend': 'com',
-#}
-#xn--j1aef = {
+# }
+# xn--j1aef = {
 #  'extend': 'com',
-#}
-#xn--j1amh = {
+# }
+# xn--j1amh = {
 #  'extend': 'com',
-#}
-#xn--j6w193g = {
+# }
+# xn--j6w193g = {
 #  'extend': 'com',
-#}
-#xn--jlq61u9w7b = {
+# }
+# xn--jlq61u9w7b = {
 #  'extend': 'com',
-#}
-#xn--kcrx77d1x4a = {
+# }
+# xn--kcrx77d1x4a = {
 #  'extend': 'com',
-#}
-#xn--kprw13d = {
+# }
+# xn--kprw13d = {
 #  'extend': 'com',
-#}
-#xn--kpry57d = {
+# }
+# xn--kpry57d = {
 #  'extend': 'com',
-#}
-#xn--kput3i = {
+# }
+# xn--kput3i = {
 #  'extend': 'com',
-#}
-#xn--lgbbat1ad8j = {
+# }
+# xn--lgbbat1ad8j = {
 #  'extend': 'com',
-#}
-#xn--mgb9awbf = {
+# }
+# xn--mgb9awbf = {
 #  'extend': 'com',
-#}
-#xn--mgba3a4f16a = {
+# }
+# xn--mgba3a4f16a = {
 #  'extend': 'com',
-#}
-#xn--mgba7c0bbn0a = {
+# }
+# xn--mgba7c0bbn0a = {
 #  'extend': 'com',
-#}
-#xn--mgbaam7a8h = {
+# }
+# xn--mgbaam7a8h = {
 #  'extend': 'com',
-#}
-#xn--mgbab2bd = {
+# }
+# xn--mgbab2bd = {
 #  'extend': 'com',
-#}
-#xn--mgbca7dzdo = {
+# }
+# xn--mgbca7dzdo = {
 #  'extend': 'com',
-#}
-#xn--mgberp4a5d4ar = {
+# }
+# xn--mgberp4a5d4ar = {
 #  'extend': 'com',
-#}
-#xn--mgbi4ecexp = {
+# }
+# xn--mgbi4ecexp = {
 #  'extend': 'com',
-#}
-#xn--mgbt3dhd = {
+# }
+# xn--mgbt3dhd = {
 #  'extend': 'com',
-#}
-#xn--mgbtx2b = {
+# }
+# xn--mgbtx2b = {
 #  'extend': 'com',
-#}
-#xn--mgbx4cd0ab = {
+# }
+# xn--mgbx4cd0ab = {
 #  'extend': 'com',
-#}
-#xn--mix891f = {
+# }
+# xn--mix891f = {
 #  'extend': 'com',
-#}
-#xn--mk1bu44c = {
+# }
+# xn--mk1bu44c = {
 #  'extend': 'com',
-#}
-#xn--mxtq1m = {
+# }
+# xn--mxtq1m = {
 #  'extend': 'com',
-#}
-#xn--ngbc5azd = {
+# }
+# xn--ngbc5azd = {
 #  'extend': 'com',
-#}
-#xn--ngbe9e0a = {
+# }
+# xn--ngbe9e0a = {
 #  'extend': 'com',
-#}
-#xn--node = {
+# }
+# xn--node = {
 #  'extend': 'com',
-#}
-#xn--nqv7f = {
+# }
+# xn--nqv7f = {
 #  'extend': 'com',
-#}
-#xn--nqv7fs00ema = {
+# }
+# xn--nqv7fs00ema = {
 #  'extend': 'com',
-#}
-#xn--o3cw4h = {
+# }
+# xn--o3cw4h = {
 #  'extend': 'com',
-#}
-#xn--ogbpf8fl = {
+# }
+# xn--ogbpf8fl = {
 #  'extend': 'com',
-#}
-#xn--p1acf = {
+# }
+# xn--p1acf = {
 #  'extend': 'com',
-#}
-#xn--p1ai = {
+# }
+# xn--p1ai = {
 #  'extend': 'com',
-#}
-#xn--pssy2u = {
+# }
+# xn--pssy2u = {
 #  'extend': 'com',
-#}
-#xn--q9jyb4c = {
+# }
+# xn--q9jyb4c = {
 #  'extend': 'com',
-#}
-#xn--qcka1pmc = {
+# }
+# xn--qcka1pmc = {
 #  'extend': 'com',
-#}
-#xn--rhqv96g = {
+# }
+# xn--rhqv96g = {
 #  'extend': 'com',
-#}
-#xn--ses554g = {
+# }
+# xn--ses554g = {
 #  'extend': 'com',
-#}
-#xn--t60b56a = {
+# }
+# xn--t60b56a = {
 #  'extend': 'com',
-#}
-#xn--tckwe = {
+# }
+# xn--tckwe = {
 #  'extend': 'com',
-#}
-#xn--tiq49xqyj = {
+# }
+# xn--tiq49xqyj = {
 #  'extend': 'com',
-#}
-#xn--unup4y = {
+# }
+# xn--unup4y = {
 #  'extend': 'com',
-#}
-#xn--vermgensberater-ctb = {
+# }
+# xn--vermgensberater-ctb = {
 #  'extend': 'com',
-#}
-#xn--vermgensberatung-pwb = {
+# }
+# xn--vermgensberatung-pwb = {
 #  'extend': 'com',
-#}
-#xn--vhquv = {
+# }
+# xn--vhquv = {
 #  'extend': 'com',
-#}
-#xn--vuq861b = {
+# }
+# xn--vuq861b = {
 #  'extend': 'com',
-#}
-#xn--w4r85el8fhu5dnra = {
+# }
+# xn--w4r85el8fhu5dnra = {
 #  'extend': 'com',
-#}
-#xn--w4rs40l = {
+# }
+# xn--w4rs40l = {
 #  'extend': 'com',
-#}
-#xn--wgbl6a = {
+# }
+# xn--wgbl6a = {
 #  'extend': 'com',
-#}
-#xn--xhq521b = {
+# }
+# xn--xhq521b = {
 #  'extend': 'com',
-#}
-#xn--y9a3aq = {
+# }
+# xn--y9a3aq = {
 #  'extend': 'com',
-#}
-#xn--yfro4i67o = {
+# }
+# xn--yfro4i67o = {
 #  'extend': 'com',
-#}
-#xn--ygbi2ammx = {
+# }
+# xn--ygbi2ammx = {
 #  'extend': 'com',
-#}
-#xn--zfr164b = {
+# }
+# xn--zfr164b = {
 #  'extend': 'com',
-#}
+# }
 xperia = {
-  'extend': 'com',
+    "extend": "com",
 }
 xxx = {
-  'extend': 'com',
+    "extend": "com",
 }
 xyz = {
-  'extend': 'com',
+    "extend": "com",
 }
 yachts = {
-  'extend': 'com',
+    "extend": "com",
 }
 yodobashi = {
-  'extend': 'com',
+    "extend": "com",
 }
 yoga = {
-  'extend': 'com',
+    "extend": "com",
 }
 youtube = {
-  'extend': 'com',
+    "extend": "com",
 }
 yt = {
-  'extend': 'com',
+    "extend": "com",
 }
 yun = {
-  'extend': 'com',
+    "extend": "com",
 }
 zara = {
-  'extend': 'com',
+    "extend": "com",
 }
 zip = {
-  'extend': 'com',
+    "extend": "com",
 }
 zm = {
-  'extend': 'com',
+    "extend": "com",
 }
 zone = {
-  'extend': 'com',
+    "extend": "com",
 }
 zuerich = {
-  'extend': 'com',
+    "extend": "com",
 }

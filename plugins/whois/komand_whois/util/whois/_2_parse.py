@@ -9,9 +9,10 @@ TLD_RE = {}
 
 def get_tld_re(tld):
 
-    if tld in TLD_RE: return TLD_RE[tld]
+    if tld in TLD_RE:
+        return TLD_RE[tld]
     v = getattr(tld_regexpr, tld)
-    extend = v.get('extend')
+    extend = v.get("extend")
 
     if extend:
         e = get_tld_re(extend)
@@ -21,12 +22,13 @@ def get_tld_re(tld):
     else:
         tmp = v
 
-    if 'extend' in tmp: del tmp['extend']
+    if "extend" in tmp:
+        del tmp["extend"]
     TLD_RE[tld] = dict((k, re.compile(v, re.IGNORECASE) if isinstance(v, str) else v) for k, v in tmp.items())
     return TLD_RE[tld]
 
 
-[get_tld_re(tld) for tld in dir(tld_regexpr) if tld[0] != '_']
+[get_tld_re(tld) for tld in dir(tld_regexpr) if tld[0] != "_"]
 
 
 def check_data(whois_str):
@@ -36,31 +38,34 @@ def check_data(whois_str):
     g = ""
 
     for line in whois_str.splitlines(True):
-        if not line.startswith('%'):
+        if not line.startswith("%"):
             g += line
 
     return g
+
 
 def do_parse(whois_str, tld):
     r = {}
 
     whois_str = check_data(whois_str)
 
-    if whois_str.count('\n') < 5:
+    if whois_str.count("\n") < 5:
         s = whois_str.strip().lower()
-        if s == 'not found': return
-        if s.count('error'): return
+        if s == "not found":
+            return
+        if s.count("error"):
+            return
         raise Exception(whois_str)
 
-    sn = re.findall(r'Server Name:\s?(.+)', whois_str, re.IGNORECASE)
+    sn = re.findall(r"Server Name:\s?(.+)", whois_str, re.IGNORECASE)
     if sn:
-        whois_str = whois_str[whois_str.find('Domain Name:'):]
+        whois_str = whois_str[whois_str.find("Domain Name:") :]
 
-    for k, v in TLD_RE.get(tld, TLD_RE['com']).items():
+    for k, v in TLD_RE.get(tld, TLD_RE["com"]).items():
         if v is None:
-            r[k] = ['']
+            r[k] = [""]
 
         else:
-            r[k] = v.findall(whois_str) or ['']
+            r[k] = v.findall(whois_str) or [""]
 
     return r

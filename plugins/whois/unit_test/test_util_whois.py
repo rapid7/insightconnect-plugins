@@ -1,6 +1,7 @@
 from unittest import TestCase
 from komand_whois.util import whois
 
+
 class TestQuery(TestCase):
     def test_query(self):
         result = whois.query("stuff.com.br", ignore_returncode=1)
