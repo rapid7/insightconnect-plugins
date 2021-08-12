@@ -29,16 +29,16 @@ class RequestHelper(object):
             raise
 
         if response.status_code in range(200, 299):
-            try:
-                if response.status_code == 204:
-                    resource = None
-                else:
-                    if response.headers['Content-Type'] == "application/json":
+            if response.status_code == 204:
+                resource = None
+            else:
+                if response.headers['Content-Type'] == "application/json":
+                    try:
                         resource = response.json()
-                    else:
-                        resource = response.content
-            except json.decoder.JSONDecodeError:
-                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+                    except json.decoder.JSONDecodeError:
+                        raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+                else:
+                    resource = response.content
 
             return {"resource": resource, "status": response.status_code}
         else:
