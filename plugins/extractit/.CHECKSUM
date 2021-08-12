@@ -1,0 +1,59 @@
+{
+	"spec": "68097006ea69616118783fa5e799325a",
+	"manifest": "b74f8a7a9eda73e00b6dc95e8a7001c1",
+	"setup": "7908649f3ce63b993bc37610f81502bf",
+	"schemas": [
+		{
+			"identifier": "date_extractor/schema.py",
+			"hash": "65c9838e21f5530f106a55fd103d8feb"
+		},
+		{
+			"identifier": "domain_extractor/schema.py",
+			"hash": "ca612b40610408a5dd2fc364bdd8c3e1"
+		},
+		{
+			"identifier": "email_extractor/schema.py",
+			"hash": "c0949929470e6e419eb230329acea225"
+		},
+		{
+			"identifier": "filepath_extractor/schema.py",
+			"hash": "44a464cf847fe80b5ff0a00ce4d5c3e3"
+		},
+		{
+			"identifier": "ioc_extractor/schema.py",
+			"hash": "87a0e539779fc75e498733f143a259cc"
+		},
+		{
+			"identifier": "ip_extractor/schema.py",
+			"hash": "78819a4513fd215c747421c3beb3fca2"
+		},
+		{
+			"identifier": "mac_extractor/schema.py",
+			"hash": "38393bf69d82a1ee698e0a6a9ca2fdda"
+		},
+		{
+			"identifier": "md5_extractor/schema.py",
+			"hash": "fb5e5afbe90ac56ac6d261cfd79eb354"
+		},
+		{
+			"identifier": "sha1_extractor/schema.py",
+			"hash": "a15e05288eaf9c888d8452b27b37075c"
+		},
+		{
+			"identifier": "sha256_extractor/schema.py",
+			"hash": "f66f250145a89028925ae6cb38d2f480"
+		},
+		{
+			"identifier": "sha512_extractor/schema.py",
+			"hash": "da4aa844382e329cb17c472302d57024"
+		},
+		{
+			"identifier": "url_extractor/schema.py",
+			"hash": "7173ec92f5b8c678fe7f98c1e9c0acd5"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "da5382221ca2a33a2f854e17b068d502"
+		}
+	]
+}
