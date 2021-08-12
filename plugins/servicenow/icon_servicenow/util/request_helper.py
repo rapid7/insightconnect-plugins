@@ -33,7 +33,10 @@ class RequestHelper(object):
                 if response.status_code == 204:
                     resource = None
                 else:
-                    resource = response.json()
+                    if response.headers['Content-Type'] == "application/json":
+                        resource = response.json()
+                    else:
+                        resource = response.content
             except json.decoder.JSONDecodeError:
                 raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
