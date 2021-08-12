@@ -8,7 +8,7 @@ support: community
 status: []
 description: "Dynamo DB is a key/value store powered by Amazon available for members of AWS. Users can manage their data
 using the DynamoDB plugin for Rapid7 InsightConnect"
-version: 1.0.3
+version: 2.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/dynamodb
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -23,21 +23,84 @@ hub_tags:
   keywords: [dynamodb, aws, amazon, database]
   features: []
 enable_cache: true
+
+types:
+  HTTPHeaders:
+    connection:
+      title: Connection
+      type: string
+      description: Connection
+      required: false
+    content-length:
+      title: Content-Length
+      type: string
+      description: Content-length
+      required: false
+    content-type:
+      title: Content-Type
+      type: string
+      description: Content-type
+      required: false
+    date:
+      title: Date
+      type: string
+      description: Date
+      required: false
+    server:
+      title: Server
+      type: string
+      description: Server
+      required: false
+    x-amz-crc32:
+      title: X-Amz-Crc32
+      type: string
+      description: X-amz-crc32
+      required: false
+    x-amzn-requestid:
+      title: X-Amzn-RequestID
+      type: string
+      description: X-amzn-requestID
+      required: false
+  ResponseMetadata:
+    HTTPHeaders:
+      title: HTTP Headers
+      type: HTTPHeaders
+      description: HTTP headers
+      required: false
+    HTTPStatusCode:
+      title: HTTP Status Code
+      type: integer
+      description: HTTP status code
+      required: false
+    RequestId:
+      title: Request ID
+      type: string
+      description: Request ID
+      required: false
+    RetryAttempts:
+      title: Retry Attempts
+      type: integer
+      description: Retry attempts
+      required: false
+
 connection:
   access_key:
     title: Access Key
     description: Access key ID
     type: credential_secret_key
     required: true
+    example: 602B2EA0A04B66BEB2C0
   secret_key:
     title: Secret Key
     description: Secret access key
     type: credential_secret_key
     required: true
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
   region:
     description: Region
     type: string
     required: false
+    example: us-east-2
 actions:
   scan:
     title: Scan
@@ -47,24 +110,37 @@ actions:
         description: The table name to search
         type: string
         required: true
+        example: Table-name
       index:
         description: The index to use. If empty, defaults to a full Scan of the table
         type: string
         required: false
+        example: index-name
       params:
         description: The params to query with, as key/value pairs
         type: object
         required: false
+        example: '{"email": "user@example.com"}'
     output:
-      count:
+      Count:
         title: Count
-        description: Count
-        type: int
+        type: integer
+        description: Items count
+        required: true
+      Items:
+        title: Items
+        type: "[]object"
+        description: Database items
+        required: true
+      ResponseMetadata:
+        title: Response Metadata
+        type: ResponseMetadata
+        description: Response metadata
         required: false
-      records:
-        title: Records
-        description: Records
-        type: array
+      ScannedCount:
+        title: Scanned Count
+        type: integer
+        description: Scanned count
         required: false
   insert:
     title: Insert
@@ -74,15 +150,17 @@ actions:
         description: The table name to store into
         type: string
         required: true
+        example: Table-name
       data:
         description: The object data to store
         type: object
         required: true
+        example: '{"keytable": "login", "e-mail": "user@example.com", "user": "Username"}'
       condition_expression:
-        description: An optional expression that can be used to reject inserts based
-          on evaluating existing data
+        description: An optional expression that can be used to reject inserts based on evaluating existing data
         type: string
         required: false
+        example: keytable<>user
     output:
       success:
         title: Success
@@ -97,20 +175,22 @@ actions:
         description: The table name to store into
         type: string
         required: true
+        example: Table-name
       key:
-        description: The primary key and optionally the sort key of the object to
-          update. Provided as a pair of key/values
+        description: The primary key and optionally the sort key of the object to update. Provided as a pair of key/values
         type: object
         required: true
+        example: '{"keytable": "login"}'
       condition_expression:
-        description: An optional expression that can be used to reject updates based
-          on evaluating existing data
+        description: An optional expression that can be used to reject updates based on evaluating existing data
         type: string
         required: false
+        example: keytable<>user
       data:
         description: The object data to update, as key/value pairs
         type: object
         required: true
+        example: '{"e-mail": "user2@example.com", "user": "Username2"}'
     output:
       success:
         title: Success
