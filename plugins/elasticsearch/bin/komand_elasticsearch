@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Elasticsearch"
 Vendor = "rapid7"
-Version = "2.0.5"
+Version = "3.0.0"
 Description = "Distributed Real-Time Search and Analytics Engine"
 
 
@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
+    import insightconnect_plugin_runtime
     from komand_elasticsearch import connection, actions, triggers
 
-    class ICONElasticsearch(komand.Plugin):
+    class ICONElasticsearch(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -46,7 +46,7 @@ def main():
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONElasticsearch())
+    cli = insightconnect_plugin_runtime.CLI(ICONElasticsearch())
     cli.run()
 
 
