@@ -30,7 +30,10 @@ class RequestHelper(object):
 
         if response.status_code in range(200, 299):
             try:
-                resource = None if response.status_code == 204 else response.json()
+                if response.status_code == 204:
+                    resource = None
+                else:
+                    resource = response.json()
             except json.decoder.JSONDecodeError:
                 raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
