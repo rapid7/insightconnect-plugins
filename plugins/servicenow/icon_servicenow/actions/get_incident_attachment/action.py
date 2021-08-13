@@ -8,6 +8,7 @@ from .schema import (
 )
 
 # Custom imports below
+import base64
 
 
 class GetIncidentAttachment(insightconnect_plugin_runtime.Action):
@@ -25,4 +26,4 @@ class GetIncidentAttachment(insightconnect_plugin_runtime.Action):
 
         response = self.connection.request.make_request(url, method)
 
-        return {Output.ATTACHMENT_CONTENTS: response.get("resource")}
+        return {Output.ATTACHMENT_CONTENTS: str(base64.b64encode(response.get("resource")), "utf-8")}

@@ -29,10 +29,12 @@ class RequestHelper(object):
             raise
 
         if response.status_code in range(200, 299):
+            content_type = response.headers['Content-Type']
+
             if response.status_code == 204:
                 resource = None
             else:
-                if response.headers['Content-Type'] == "application/json":
+                if content_type == "application/json":
                     try:
                         resource = response.json()
                     except json.decoder.JSONDecodeError:
@@ -40,7 +42,7 @@ class RequestHelper(object):
                 else:
                     resource = response.content
 
-            return {"resource": resource, "status": response.status_code}
+            return {"resource": resource, "status": response.status_code, "content-type": content_type}
         else:
             try:
                 error = response.json()
