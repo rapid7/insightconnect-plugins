@@ -28,6 +28,7 @@ class RequestHelper(object):
             self.logger.error(e)
             raise
 
+        # pylint: disable=no-else-return
         if response.status_code in range(200, 299):
             content_type = response.headers['Content-Type']
 
@@ -50,6 +51,6 @@ class RequestHelper(object):
                 raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
             raise PluginException(
-                cause=f"Error in API request to ServiceNow. ",
+                cause="Error in API request to ServiceNow. ",
                 assistance=f"Status code: {response.status_code}, Error: {error}",
             )
