@@ -30,7 +30,7 @@ class RequestHelper(object):
 
         # pylint: disable=no-else-return
         if response.status_code in range(200, 299):
-            content_type = response.headers["Content-Type"]
+            content_type = response.headers["Content-Type"] if "Content-Type" in response.headers else ""
 
             if response.status_code == 204:
                 resource = None
