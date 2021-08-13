@@ -35,7 +35,7 @@ class RequestHelper(object):
             if response.status_code == 204:
                 resource = None
             else:
-                if content_type.contains("application/json"):
+                if "application/json" in content_type:
                     try:
                         resource = response.json()
                     except json.decoder.JSONDecodeError:
