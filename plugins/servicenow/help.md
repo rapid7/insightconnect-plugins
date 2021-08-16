@@ -289,7 +289,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|attachment_contents|string|True|The Base64-encoded contents of the downloaded attachment|
+|attachment_contents|bytes|True|The Base64-encoded contents of the downloaded attachment|
 
 Example output:
 

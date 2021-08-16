@@ -428,7 +428,7 @@ actions:
       attachment_contents:
         title: Attachment Contents
         description: The Base64-encoded contents of the downloaded attachment
-        type: string
+        type: bytes
         required: true
   delete_incident_attachment:
     title: Delete Incident Attachment
