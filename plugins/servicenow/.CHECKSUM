@@ -1,7 +1,7 @@
 {
-	"spec": "2b48e07b27612bbaef51fa855f52886e",
-	"manifest": "29bec59f83a73c20955fb53e75562ebe",
-	"setup": "1c6b5e6c291acead7b01f496a98dc987",
+	"spec": "d11249019776d28f7ac19ceb595ab700",
+	"manifest": "6c3b265433250bb5e1fe41f963bef414",
+	"setup": "b387b9bde71ac3cf896378493777e1f0",
 	"schemas": [
 		{
 			"identifier": "create_ci/schema.py",
