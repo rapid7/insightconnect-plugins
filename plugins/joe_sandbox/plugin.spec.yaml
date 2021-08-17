@@ -244,7 +244,7 @@ actions:
         description: Used to give Joe Sandbox a hint at what file type we are uploading. Extension (ex .txt) required
         type: string
         required: false
-        example: img.jpg
+        example: example.jpg
       cookbook:
         title: Cookbook
         description: Cookbook to be uploaded together with the sample
