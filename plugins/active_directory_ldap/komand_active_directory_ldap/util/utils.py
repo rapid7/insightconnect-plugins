@@ -180,7 +180,7 @@ class ADUtils:
         if not ADUtils.check_user_dn_is_valid(conn, dn, search_base):
             logger.error(f"The DN {dn} was not found")
             raise PluginException(
-                cause=f"The DN {dn} was not found.", assistance=f"Please provide a valid DN and try again."
+                cause=f"The DN {dn} was not found.", assistance="Please provide a valid DN and try again."
             )
         user_list = [d["attributes"] for d in conn.response if "attributes" in d]
         user_control = user_list[0]
@@ -222,7 +222,7 @@ class ADUtils:
         if not ADUtils.check_user_dn_is_valid(conn, dn, search_base):
             logger.error(f"The DN {dn} was not found")
             raise PluginException(
-                cause=f"The DN {dn} was not found.", assistance=f"Please provide a valid DN and try again."
+                cause=f"The DN {dn} was not found.", assistance="Please provide a valid DN and try again."
             )
         user_list = [d["attributes"] for d in conn.response if "attributes" in d]
         user_control = user_list[0]
