@@ -29,19 +29,27 @@ class RequestHelper(object):
             raise
 
         if response.status_code in range(200, 299):
-            try:
-                resource = None if response.status_code == 204 else response.json()
-            except json.decoder.JSONDecodeError:
-                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+            content_type = response.headers.get("Content-Type", "")
 
-            return {"resource": resource, "status": response.status_code}
-        else:
-            try:
-                error = response.json()
-            except json.decoder.JSONDecodeError:
-                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+            if response.status_code == 204:
+                resource = None
+            else:
+                if "application/json" in content_type:
+                    try:
+                        resource = response.json()
+                    except json.decoder.JSONDecodeError:
+                        raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+                else:
+                    resource = response.content
 
-            raise PluginException(
-                cause=f"Error in API request to ServiceNow. ",
-                assistance=f"Status code: {response.status_code}, Error: {error}",
-            )
+            return {"resource": resource, "status": response.status_code, "content-type": content_type}
+
+        try:
+            error = response.json()
+        except json.decoder.JSONDecodeError:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
+
+        raise PluginException(
+            cause="Error in API request to ServiceNow. ",
+            assistance=f"Status code: {response.status_code}, Error: {error}",
+        )
