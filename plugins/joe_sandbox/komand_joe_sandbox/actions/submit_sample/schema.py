@@ -42,7 +42,7 @@ class SubmitSampleInput(komand.Input):
     "filename": {
       "type": "string",
       "title": "Filename",
-      "description": "Used to give Joe Sandbox a hint at what file type we are uploading. Extension (ex .txt) required",
+      "description": "Used to give Joe Sandbox a hint at what file type is being uploaded. File extension (eg .txt, .zip) required",
       "order": 2
     },
     "parameters": {
