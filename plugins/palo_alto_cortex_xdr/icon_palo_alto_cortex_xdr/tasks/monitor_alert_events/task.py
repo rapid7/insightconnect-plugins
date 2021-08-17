@@ -3,12 +3,10 @@ from .schema import (
     MonitorAlertEventsInput,
     MonitorAlertEventsOutput,
     MonitorAlertEventsState,
-    Input,
     Output,
     Component,
     State,
 )
-
 # Custom imports below
 
 from ...util.util import Util
