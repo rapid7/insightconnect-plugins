@@ -4,7 +4,7 @@ products: [insightconnect]
 name: palo_alto_cortex_xdr
 title: Palo Alto Cortex XDR
 description: Stop modern attacks with the industry's first extended detection and response platform that spans your endpoints, network and cloud data
-version: 2.0.0
+version: 3.0.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -1136,3 +1136,25 @@ triggers:
         type: alert
         required: false
 
+tasks:
+  monitor_alert_events:
+    title: Monitor Alert Events
+    description: Monitor alert events
+    output:
+      events:
+        title: Alert Events
+        description: Alert events
+        type: "[]alert"
+        required: false
+    schedule:
+      title: Schedule for Retrieving Events
+      type: string
+      enum:
+        - "cron"
+        - "minutes"
+      default: minutes
+    state:
+      last_event_time:
+        title: Last Event Time
+        description: The datetime of the last retrieved alert event
+        type: string
