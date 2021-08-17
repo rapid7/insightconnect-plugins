@@ -250,6 +250,7 @@ class ADUtils:
 
 
 class UserAccountFlags:
+    # Enum-Like Reference for different account flags in AD/LDAP
     SCRIPT = 1
     ACCOUNTDISABLE = 2
     HOMEDIR_REQUIRED = 8
