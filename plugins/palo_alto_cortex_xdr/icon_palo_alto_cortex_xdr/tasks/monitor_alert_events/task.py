@@ -1,5 +1,14 @@
 import insightconnect_plugin_runtime
-from .schema import MonitorAlertEventsInput, MonitorAlertEventsOutput, MonitorAlertEventsState, Input, Output, Component, State
+from .schema import (
+    MonitorAlertEventsInput,
+    MonitorAlertEventsOutput,
+    MonitorAlertEventsState,
+    Input,
+    Output,
+    Component,
+    State,
+)
+
 # Custom imports below
 
 from ...util.util import Util
@@ -9,14 +18,14 @@ INCIDENT_TIME_FIELD = "creation_time"
 
 
 class MonitorAlertEvents(insightconnect_plugin_runtime.Task):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='monitor_alert_events',
-                description=Component.DESCRIPTION,
-                input=MonitorAlertEventsInput(),
-                output=MonitorAlertEventsOutput(),
-                state=MonitorAlertEventsState())
+            name="monitor_alert_events",
+            description=Component.DESCRIPTION,
+            input=MonitorAlertEventsInput(),
+            output=MonitorAlertEventsOutput(),
+            state=MonitorAlertEventsState(),
+        )
 
     def run(self, params={}, state={}):
         now = Util.now_ms()
