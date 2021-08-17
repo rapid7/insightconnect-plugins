@@ -1,7 +1,7 @@
 {
-	"spec": "639e073d3f3339bbf366667899cd0f9d",
-	"manifest": "e66dbc976ac414347572ec68e322e755",
-	"setup": "ad7c898fbff860f6125cc252c11576d2",
+	"spec": "6604a967b6e2eb225363d82b227aebfe",
+	"manifest": "4df2346dcd5bc6048cf0e9c2de6a1822",
+	"setup": "d80f5afea6ca341a13062c6a70afaab1",
 	"schemas": [
 		{
 			"identifier": "check_server_status/schema.py",

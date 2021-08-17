@@ -24,7 +24,9 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|API key generated for Joe Sandbox user|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
-|url|string|https://example.com|False|API URL of the Joe Sandbox instance. Default is for Joe Sandbox Cloud. On-premise installations use the following URL format http://example.com/joesandbox/index.php/api|None|https://example.com|
+|url|string|https://jbxcloud.joesecurity.org/api|False|API URL of the Joe Sandbox instance. Default is for Joe Sandbox Cloud. On-premise installations use the following URL format http://example.com/joesandbox/index.php/api|None|http://example.com/joesandbox/index.php/api|
+
+The default setting is to use Joe Sandbox Cloud URL at `https://jbxcloud.joesecurity.org/api`. If you have a Sandbox at a different location such as hosting an on-premise instance, set the `url` field to your instance with the following URL format of `http://example.com/joesandbox/index.php/api`.
 
 Example input:
 
@@ -87,6 +89,9 @@ This action is used to list the web IDs of the analyses that match the given que
 Example input:
 
 ```
+{
+  "query": "44d88612fea8a8f36de82e1278abb02f"
+}
 ```
 
 ##### Output
@@ -170,6 +175,19 @@ More details are available in the Joe Sandbox documentation at https://jbxcloud.
 Example input:
 
 ```
+{
+  "additional_parameters": {
+      "accept-tac": 1,
+      "url-reputation": 0,
+      "export-to-jbxview": 1,
+      "delete-after-days": 30
+  },
+  "cookbook": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA...",
+  "parameters": { 
+    "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 
+  },
+  "sample_url": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
+}
 ```
 
 ##### Output
@@ -275,9 +293,7 @@ Example input:
 
 ```
 {
-  "additional_parameters": "{ \"accept-tac\": 1, \"url-reputation\": 0, \"export-to-jbxview\": 1, \"delete-after-days\": 30 }",
-  "parameters": "{ \"comments\": \"Enabled hybrid code analysis for sample\", \"hybrid-code-analysis\": 1 }",
-  "url": "https://example.com"
+  "url": "https://example.com",
 }
 ```
 
@@ -354,9 +370,14 @@ Example input:
 
 ```
 {
-  "additional_parameters": "{ \"accept-tac\": 1, \"url-reputation\": 0, \"export-to-jbxview\": 1, \"delete-after-days\": 30 }",
+  "additional_parameters": { 
+      "accept-tac": 1, 
+      "url-reputation": 0, 
+      "export-to-jbxview": 1, 
+      "delete-after-days": 30 
+  },
   "cookbook": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA...",
-  "filename": "img.jpg",
+  "filename": "example.jpg",
   "parameters": "{ \"comments\": \"Enabled hybrid code analysis for sample\", \"hybrid-code-analysis\": 1 }",
   "sample": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
 }
@@ -470,6 +491,9 @@ More details are available in the Joe Sandbox documentation at https://jbxcloud.
 Example input:
 
 ```
+{
+  "cookbook": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
+}
 ```
 
 ##### Output
@@ -502,7 +526,7 @@ Example input:
 
 ```
 {
-  "webid": 10001
+  "webid": "10001"
 }
 ```
 
@@ -550,7 +574,7 @@ Example input:
 
 ```
 {
-  "webid": 10001
+  "webid": "10001"
 }
 ```
 

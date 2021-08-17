@@ -23,6 +23,9 @@ class SubmitSample(komand.Action):
         filename = params.get(Input.FILENAME, "")
 
         additional_parameters.update({"accept-tac": 1})
+        # The default seemed to have changed in the API...this matched the online documentation (default of false, 0)
+        if "hybrid-decompilation" not in additional_parameters:
+            additional_parameters.update({"hybrid-decompilation": 0})
         try:
             sample_bytes = b64decode(sample)
         except binascii.Error:
