@@ -32,7 +32,7 @@ Example input:
 
 ```
 {
-  "api_key": "8e8786182c66e8bc2abdab9198f1385691987bfe2a4917be1268e915e457dbc5",
+  "api_key": "30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
   "url": "http://example.com/joesandbox/index.php/api"
 }
 ```
