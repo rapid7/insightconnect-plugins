@@ -210,7 +210,7 @@ class ADUtils:
     def change_useraccountcontrol_property(
         conn,
         dn: str,
-        switch: bool,
+        clear_flag_switch: bool,
         flags: int,
         logger: Logger,
     ) -> bool:
@@ -235,7 +235,7 @@ class ADUtils:
                 assistance="Please provide a valid user object and try again.",
             ) from ex
 
-        if switch:
+        if clear_flag_switch:
             account_status = account_status & ~flags
         else:
             account_status = account_status | flags
