@@ -23,18 +23,14 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|API key generated for Joe Sandbox user|None|8e8786182c66e8bc2abdab9198f1385691987bfe2a4917be1268e915e457dbc5|
-|url|string|https://jbxcloud.joesecurity.org/api|False|API URL of the Joe Sandbox instance. Default is for Joe Sandbox Cloud. On-premise installations use the following URL format http://example.com/joesandbox/index.php/api|None|http://example.com/joesandbox/index.php/api|
-
-The default setting is to use Joe Sandbox Cloud URL at `https://jbxcloud.joesecurity.org/api`. If you have a Sandbox at a different location such as hosting an on-premise instance, set the `url` field to your instance with the following URL format of `http://example.com/joesandbox/index.php/api`.
+|api_key|credential_secret_key|None|True|API key generated for Joe Sandbox user|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
+|url|string|https://example.com|False|API URL of the Joe Sandbox instance. Default is for Joe Sandbox Cloud. On-premise installations use the following URL format http://example.com/joesandbox/index.php/api|None|https://example.com|
 
 Example input:
 
 ```
 {
-  "api_key": {
-      "secretKey": "8e8786182c66e8bc2abdab9198f1385691987bfe2a4917be1268e915e457dbc5"
-  },
+  "api_key": "8e8786182c66e8bc2abdab9198f1385691987bfe2a4917be1268e915e457dbc5",
   "url": "http://example.com/joesandbox/index.php/api"
 }
 ```
@@ -86,14 +82,11 @@ This action is used to list the web IDs of the analyses that match the given que
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|query|string|None|True|String to search for|None|44d88612fea8a8f36de82e1278abb02f|
+|query|string|None|True|String to search for|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
 ```
-{
-  "query": "44d88612fea8a8f36de82e1278abb02f"
-}
 ```
 
 ##### Output
@@ -177,9 +170,6 @@ More details are available in the Joe Sandbox documentation at https://jbxcloud.
 Example input:
 
 ```
-{
-  "sample_url": "https://example.com",
-}
 ```
 
 ##### Output
@@ -285,7 +275,9 @@ Example input:
 
 ```
 {
-  "url": "https://example.com",
+  "additional_parameters": "{ \"accept-tac\": 1, \"url-reputation\": 0, \"export-to-jbxview\": 1, \"delete-after-days\": 30 }",
+  "parameters": "{ \"comments\": \"Enabled hybrid code analysis for sample\", \"hybrid-code-analysis\": 1 }",
+  "url": "https://example.com"
 }
 ```
 
@@ -321,8 +313,9 @@ Example input:
 
 ```
 {
-  "type:" "pdf"
-  "webid": "10001"
+  "run": 1,
+  "type": "pdf",
+  "webid": 10001
 }
 ```
 
@@ -353,6 +346,7 @@ More details are available in the Joe Sandbox documentation at https://jbxcloud.
 |----|----|-------|--------|-----------|----|-------|
 |additional_parameters|object|None|False|Additional parameters for Joe Sandbox Cloud, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. Parameter `accept-tac` will always be set to 1|None|{ "accept-tac": 1, "url-reputation": 0, "export-to-jbxview": 1, "delete-after-days": 30 }|
 |cookbook|bytes|None|False|Cookbook to be uploaded together with the sample|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAA...|
+|filename|string|None|False|Used to give Joe Sandbox a hint at what file type we are uploading. Extension (ex .txt) required|None|https://example.com|
 |parameters|object|None|False|Custom sandbox parameters, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. In case the `cookbook` option is used, most other options are silently ignored since they can be specified inside the cookbook|None|{ "comments": "Enabled hybrid code analysis for sample", "hybrid-code-analysis": 1 }|
 |sample|bytes|None|True|The sample to submit|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAA...|
 
@@ -360,6 +354,10 @@ Example input:
 
 ```
 {
+  "additional_parameters": "{ \"accept-tac\": 1, \"url-reputation\": 0, \"export-to-jbxview\": 1, \"delete-after-days\": 30 }",
+  "cookbook": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA...",
+  "filename": "img.jpg",
+  "parameters": "{ \"comments\": \"Enabled hybrid code analysis for sample\", \"hybrid-code-analysis\": 1 }",
   "sample": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
 }
 ```
@@ -472,9 +470,6 @@ More details are available in the Joe Sandbox documentation at https://jbxcloud.
 Example input:
 
 ```
-{
-  "cookbook": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
-}
 ```
 
 ##### Output
@@ -507,7 +502,7 @@ Example input:
 
 ```
 {
-  "webid": "10001"
+  "webid": 10001
 }
 ```
 
@@ -555,7 +550,7 @@ Example input:
 
 ```
 {
-  "webid": "10001"
+  "webid": 10001
 }
 ```
 
@@ -587,6 +582,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.4 - Add extra optional input for Submit Sample action
 * 1.0.3 - Add example inputs
 * 1.0.2 - Fix misspelling in error message | Remove generic "automation" keyword
 * 1.0.1 - New spec and help.md format for the Extension Library
