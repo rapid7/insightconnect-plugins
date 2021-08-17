@@ -11,7 +11,6 @@ import json
 
 
 class TestActionUnlockUser(TestCase):
-
     @mock.patch("ldap3.Server", mock.MagicMock(return_value=MockServer))
     @mock.patch("ldap3.Connection", mock.MagicMock(return_value=MockConnection()))
     @default_connector(action=UnlockUser())
@@ -69,7 +68,7 @@ class TestActionUnlockUser(TestCase):
         test_conn.logger = log
         test_action.logger = log
         # Uncomment when you have a valid JSON file. Allows for debugging of the plugin and won't fail tests otherwise
-        '''
+        """
         try:
             with open("../tests/unlock_user.json") as file:
                 test_json = json.loads(file.read()).get("body")
@@ -84,4 +83,4 @@ class TestActionUnlockUser(TestCase):
         results = test_action.run(action_params)
         
         # self.assertEquals(True, results.get("success"))
-        '''
+        """

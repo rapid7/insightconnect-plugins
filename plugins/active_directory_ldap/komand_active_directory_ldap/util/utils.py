@@ -207,7 +207,13 @@ class ADUtils:
         return False
 
     @staticmethod
-    def change_useraccountcontrol_property(conn, dn: str, switch: bool, flags: int, logger: Logger, ) -> bool:
+    def change_useraccountcontrol_property(
+        conn,
+        dn: str,
+        switch: bool,
+        flags: int,
+        logger: Logger,
+    ) -> bool:
         # https://docs.microsoft.com/en-us/troubleshoot/windows-server/identity/useraccountcontrol-manipulate-account-properties
         # for list of flags
         dn, search_base = ADUtils.format_dn(dn)
@@ -249,7 +255,7 @@ class UserAccountFlags:
     HOMEDIR_REQUIRED = 8
     LOCKOUT = 16
     PASSWD_NOTREQD = 32
-    PASSWD_CANT_CHANGE = 64 # can't be set as easy as the others
+    PASSWD_CANT_CHANGE = 64  # can't be set as easy as the others
     ENCRYPTED_TEXT_PWD_ALLOWED = 128
     TEMP_DUPLICATE_ACCOUNT = 256
     NORMAL_ACCOUNT = 512
@@ -259,5 +265,3 @@ class UserAccountFlags:
     DONT_EXPIRE_PASSWORD = 65536
     MSN_LOGON_ACCOUNT = 131072
     PASSWORD_EXPIRED = 8388608
-
-
