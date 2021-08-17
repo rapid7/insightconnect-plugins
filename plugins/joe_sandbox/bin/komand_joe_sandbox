@@ -5,8 +5,8 @@ import json
 from sys import argv
 
 Name = "Joe Sandbox"
-Vendor = "pj-test"
-Version = "1.0.3"
+Vendor = "rapid7"
+Version = "1.0.4"
 Description = "Joe Sandbox Cloud executes files and URLs fully automated in a controlled environment and monitors the behavior of applications and the operating system for suspicious activities"
 
 
