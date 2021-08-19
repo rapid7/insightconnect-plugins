@@ -225,13 +225,22 @@ class ADUtils:
                 cause=f"The DN {dn} was not found.", assistance="Please provide a valid DN and try again."
             )
         user_list = [d["attributes"] for d in conn.response if "attributes" in d]
-        user_control = user_list[0]
+
+        if len(user_list) > 0:
+            user_control = user_list[0]
+        else:
+            logger.error(f"The DN '{dn}' has no attributes")
+            raise PluginException(
+                cause=f"The DN '{dn}' is likely not a user object therefore it cannot be unlocked.",
+                assistance="Please provide a valid user object and try again.",
+            )
+
         try:
             account_status = user_control["userAccountControl"]
         except Exception as ex:
             logger.error(f"The DN '{dn}' is not a user")
             raise PluginException(
-                cause=f"The DN '{dn}' is not a user object therefore it cannot be enabled or disabled.",
+                cause=f"The DN '{dn}' is not a user object therefore the account status cannot be changed.",
                 assistance="Please provide a valid user object and try again.",
             ) from ex
 
