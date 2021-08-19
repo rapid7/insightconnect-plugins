@@ -367,7 +367,6 @@ actions:
   list_analyses:
     title: List Analyses
     description: Fetch a list of all analyses
-    input:
     output:
       analyses:
         title: Analyses
