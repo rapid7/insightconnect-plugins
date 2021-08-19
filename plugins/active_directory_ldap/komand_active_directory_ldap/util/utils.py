@@ -229,9 +229,9 @@ class ADUtils:
         try:
             account_status = user_control["userAccountControl"]
         except Exception as ex:
-            logger.error("The DN " + dn + " is not a user")
+            logger.error(f"The DN '{dn}' is not a user")
             raise PluginException(
-                cause=f"The DN {dn} is not a user object therefore it cannot be enabled or disabled.",
+                cause=f"The DN '{dn}' is not a user object therefore it cannot be enabled or disabled.",
                 assistance="Please provide a valid user object and try again.",
             ) from ex
 
