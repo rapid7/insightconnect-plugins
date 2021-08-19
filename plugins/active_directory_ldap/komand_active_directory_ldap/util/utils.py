@@ -180,7 +180,7 @@ class ADUtils:
         if not ADUtils.check_user_dn_is_valid(conn, dn, search_base):
             logger.error(f"The DN {dn} was not found")
             raise PluginException(
-                cause=f"The DN {dn} was not found.", assistance=f"Please provide a valid DN and try again."
+                cause=f"The DN {dn} was not found.", assistance="Please provide a valid DN and try again."
             )
         user_list = [d["attributes"] for d in conn.response if "attributes" in d]
         user_control = user_list[0]
@@ -205,3 +205,73 @@ class ADUtils:
         output = conn.result["description"]
         logger.error(f"failed: error message {output}")
         return False
+
+    @staticmethod
+    def change_useraccountcontrol_property(
+        conn,
+        dn: str,
+        clear_flag_switch: bool,
+        flags: int,
+        logger: Logger,
+    ) -> bool:
+        # https://docs.microsoft.com/en-us/troubleshoot/windows-server/identity/useraccountcontrol-manipulate-account-properties
+        # for list of flags
+        dn, search_base = ADUtils.format_dn(dn)
+        logger.info(f"Escaped DN {dn}")
+
+        if not ADUtils.check_user_dn_is_valid(conn, dn, search_base):
+            logger.error(f"The DN {dn} was not found")
+            raise PluginException(
+                cause=f"The DN {dn} was not found.", assistance="Please provide a valid DN and try again."
+            )
+        user_list = [d["attributes"] for d in conn.response if "attributes" in d]
+
+        if len(user_list) > 0:
+            user_control = user_list[0]
+        else:
+            logger.error(f"The DN '{dn}' has no attributes")
+            raise PluginException(
+                cause=f"The DN '{dn}' is likely not a user object therefore it cannot be unlocked.",
+                assistance="Please provide a valid user object and try again.",
+            )
+
+        try:
+            account_status = user_control["userAccountControl"]
+        except Exception as ex:
+            logger.error(f"The DN '{dn}' is not a user")
+            raise PluginException(
+                cause=f"The DN '{dn}' is not a user object therefore the account status cannot be changed.",
+                assistance="Please provide a valid user object and try again.",
+            ) from ex
+
+        if clear_flag_switch:
+            account_status = account_status & ~flags
+        else:
+            account_status = account_status | flags
+
+        conn.modify(dn, {"userAccountControl": [(MODIFY_REPLACE, [account_status])]})
+        if conn.result["result"] == 0:
+            return True
+
+        output = conn.result["description"]
+        logger.error(f"failed: error message {output}")
+        return False
+
+
+class UserAccountFlags:
+    # Enum-Like Reference for different account flags in AD/LDAP
+    SCRIPT = 1
+    ACCOUNTDISABLE = 2
+    HOMEDIR_REQUIRED = 8
+    LOCKOUT = 16
+    PASSWD_NOTREQD = 32
+    PASSWD_CANT_CHANGE = 64  # can't be set as easy as the others
+    ENCRYPTED_TEXT_PWD_ALLOWED = 128
+    TEMP_DUPLICATE_ACCOUNT = 256
+    NORMAL_ACCOUNT = 512
+    INTERDOMAIN_TRUST_ACCOUNT = 2048
+    WORKSTATION_TRUST_ACCOUNT = 4096
+    SERVER_TRUST_ACCOUNT = 8192
+    DONT_EXPIRE_PASSWORD = 65536
+    MSN_LOGON_ACCOUNT = 131072
+    PASSWORD_EXPIRED = 8388608
