@@ -50,6 +50,38 @@ Example input:
 
 ### Actions
 
+#### Unlock User
+
+This action is used to unlock an account.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|distinguished_name|string|None|True|The distinguished name of the user to unlock|None|CN=user,OU=domain_users,DC=example,DC=com|
+
+Example input:
+
+```
+{
+  "distinguished_name": "CN=user,OU=domain_users,DC=example,DC=com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Operation status|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 #### Query Group Membership
 
 This action is used to query group membership.
@@ -640,6 +672,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 5.3.0 - Add Unlock User action
 * 5.2.2 - Add automatic pagination in Query Group Membership and Query actions
 * 5.2.1 - Add default prefix `ldap://` and `ldaps://` to provided host
 * 5.2.0 - New action Query Group Membership
