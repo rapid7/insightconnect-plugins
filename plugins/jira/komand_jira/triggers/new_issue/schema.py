@@ -52,10 +52,7 @@ class NewIssueInput(insightconnect_plugin_runtime.Input):
       "description": "Project ID or name",
       "order": 1
     }
-  },
-  "required": [
-    "project"
-  ]
+  }
 }
     """)
 

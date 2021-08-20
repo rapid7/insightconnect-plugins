@@ -1,31 +1,19 @@
-import komand
-from .schema import ClusterHealthInput, ClusterHealthOutput
+import insightconnect_plugin_runtime
+from .schema import ClusterHealthInput, ClusterHealthOutput, Output, Component
 
 # Custom imports below
-from komand_elasticsearch.util import helpers
 
 
-class ClusterHealth(komand.Action):
+class ClusterHealth(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="cluster_health",
-            description="Check cluster health",
+            description=Component.DESCRIPTION,
             input=ClusterHealthInput(),
             output=ClusterHealthOutput(),
         )
 
     def run(self, params={}):
-        host = self.connection.elastic_host
-        username = self.connection.username
-        password = self.connection.password
-        results = helpers.get_health(self.logger, host, username, password)
-        return {"cluster_health": komand.helper.clean(results)}
-
-    def test(self):
-        host = self.connection.elastic_host
-        username = self.connection.username
-        password = self.connection.password
-        r = helpers.test_auth(self.logger, host, username, password)
-        if not r:
-            raise Exception("Test: Failed authentication")
-        return {}
+        return {
+            Output.CLUSTER_HEALTH: insightconnect_plugin_runtime.helper.clean(self.connection.client.cluster_health())
+        }
