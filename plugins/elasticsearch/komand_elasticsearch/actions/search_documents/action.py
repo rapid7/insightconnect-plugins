@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import SearchDocumentsInput, SearchDocumentsOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 
@@ -16,6 +17,13 @@ class SearchDocuments(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         index = params.get(Input.INDEX)
         query = params.get(Input.QUERY)
+
+        if query.get("query"):
+            raise PluginException(
+                cause='Wrong input "query".',
+                assistance='Old query input detected. Input shouldn\'t contain {"query": {"query": {}}}. '
+                "Please refer help for more details.",
+            )
 
         results = self.connection.client.search_documents(index, query, params.get(Input.ROUTING))
 

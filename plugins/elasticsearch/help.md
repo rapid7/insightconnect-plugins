@@ -169,18 +169,24 @@ Example input:
 ```
 {
   "index": "shakespeare",
-  "query": {
-    "query":
-      {
-        "match":
-          {
-            "line_number":
-              {
-                "query": "1.1.1"
-              }
-          }
+  "query": "{
+    "match": {
+      "line_number": {
+        "query": "1.1.1"
       }
-    },
+    }
+  }",
+  "routing": "user1",
+  "type": "doc"
+}
+```
+
+```
+{
+  "index": "shakespeare",
+  "query": {
+    "match_all": {}
+  },
   "routing": "user1",
   "type": "doc"
 }
@@ -322,17 +328,12 @@ Example input:
   "frequency": 60,
   "index": "bank",
   "query": {
-    "query":
-      {
-        "match":
-          {
-            "line_number":
-              {
-                "query": "1.1.1"
-              }
-          }
+    "match": {
+      "line_number": {
+        "query": "1.1.1"
       }
-    },
+    }
+  },
   "routing": "account",
   "type": "doc"
 }
@@ -379,6 +380,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.0.1 - Fix search example input in help.md | Add exception message in search action
 * 3.0.0 - Update to use the `insightconnect-python-3-38-plugin:4` Docker image | Improve error handling | Add `Plugin Exception` | Add `Connection Test` | Add `timeout-decorator` in requirements | Code refactor | Remove input Type from Index Document, Update Document, Search Documents actions and Search Documents trigger | Change inputs name in actions and trigger to not start with `_` | Add `USER nobody` in Dockerfile | Add `api6.py` file for other Elasticsearch version | Add pagination | Add SSL verify
 * 2.0.5 - Updated example inputs and outputs for all the actions
 * 2.0.4 - Correct spelling in help.md
