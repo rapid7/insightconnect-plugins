@@ -724,7 +724,7 @@ Example output:
 
 # Version History
 
-* 3.0.0 - New task Monitor Alert Events
+* 2.1.0 - New task Monitor Alert Events
 * 2.0.0 - New action Get File Quarantine Status | New trigger Get Alerts
 * 1.0.0 - Initial plugin
 
