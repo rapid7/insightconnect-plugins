@@ -10,6 +10,7 @@ class Component:
 class Input:
     ADDITIONAL_PARAMETERS = "additional_parameters"
     COOKBOOK = "cookbook"
+    FILENAME = "filename"
     PARAMETERS = "parameters"
     SAMPLE = "sample"
     
@@ -28,7 +29,7 @@ class SubmitSampleInput(komand.Input):
       "type": "object",
       "title": "Additional Parameters",
       "description": "Additional parameters for Joe Sandbox Cloud, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. Parameter `accept-tac` will always be set to 1",
-      "order": 4
+      "order": 5
     },
     "cookbook": {
       "type": "string",
@@ -36,13 +37,19 @@ class SubmitSampleInput(komand.Input):
       "displayType": "bytes",
       "description": "Cookbook to be uploaded together with the sample",
       "format": "bytes",
+      "order": 3
+    },
+    "filename": {
+      "type": "string",
+      "title": "Filename",
+      "description": "Used to give Joe Sandbox a hint at what file type is being uploaded. File extension (eg .txt, .zip) required",
       "order": 2
     },
     "parameters": {
       "type": "object",
       "title": "Parameters",
       "description": "Custom sandbox parameters, described in more detail in the API documentation. All boolean parameters should be set to 1 or 0. In case the `cookbook` option is used, most other options are silently ignored since they can be specified inside the cookbook",
-      "order": 3
+      "order": 4
     },
     "sample": {
       "type": "string",
