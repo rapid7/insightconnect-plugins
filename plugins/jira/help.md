@@ -14,6 +14,10 @@
 * Jira user email address and API key when using Jira Cloud
 * Jira username and password credentials when using on-prem Jira server
 
+# Supported Product Versions
+
+_There are no supported product versions listed._
+
 # Documentation
 
 ## Setup
@@ -1200,6 +1204,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 6.1.1 - Fix issue where attachments added in tickets was empty
 * 6.1.0 - Add Monitor Issues trigger | Update New Issue trigger to only trigger in case of recently created tickets | Change `required` property to false for `project` input in New Issue trigger | Fix issue in New Issue trigger to include all results that match JQL | Fix issue in New Issue trigger with retrieving attachments
 * 6.0.8 - Fix issue where exception type was wrong in Create Issue
 * 6.0.7 - Fix issue in Create Issue and Attach Issue actions where adding attachments failed

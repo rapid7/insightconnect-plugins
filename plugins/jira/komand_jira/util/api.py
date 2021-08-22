@@ -35,13 +35,10 @@ class JiraApi:
                 assistance=f"Please provide a valid attachment bytes. Error: {str(e)}",
             )
 
-        attachment = BytesIO()
-        attachment.write(data)
-
         return self.call_api(
             "POST",
             f"/rest/api/latest/issue/{issue}/attachments",
-            files={"file": (filename, attachment, "application/octet-stream")},
+            files={"file": (filename, data, "application/octet-stream")},
             headers={"content-type": None, "X-Atlassian-Token": "nocheck"},
         )[0].get("id")
 
