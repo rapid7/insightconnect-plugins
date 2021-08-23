@@ -1,7 +1,7 @@
 {
-	"spec": "601276b86d93ded39d12b2fd9e32b36e",
-	"manifest": "942ed09f59654df5720444ba65bd5cab",
-	"setup": "ad7c898fbff860f6125cc252c11576d2",
+	"spec": "3bf27b3c91f2b7e5b4243fa98b289b6e",
+	"manifest": "f3574f557aeb35acaa3398fa396658c5",
+	"setup": "77342b9b266bb5060a4b30d42edb0f8c",
 	"schemas": [
 		{
 			"identifier": "check_server_status/schema.py",
@@ -53,7 +53,7 @@
 		},
 		{
 			"identifier": "submit_sample/schema.py",
-			"hash": "0d2d929d40d37981da7b59f06de0a6dd"
+			"hash": "bc2272e9be585efcf8e283cade9ded2c"
 		},
 		{
 			"identifier": "submit_sample_url/schema.py",
