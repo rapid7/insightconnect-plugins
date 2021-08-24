@@ -160,7 +160,7 @@ This action is used to search for documents.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |index|string|None|True|Document Index|None|shakespeare|
-|query|object|None|False|JSON Query DSL|None|{"query": {"match": {"line_number": {"query": "1.1.1"}}}}|
+|query|object|None|False|JSON Query DSL|None|{"match": {"line_number": {"query": "1.1.1"}}}|
 |routing|string|None|False|Optional Shards to Search|None|user1|
 |type|string|None|False|Document Type|None|doc|
 
@@ -317,7 +317,7 @@ This trigger is used to poll for new documents given a query.
 |----|----|-------|--------|-----------|----|-------|
 |frequency|integer|60|False|Poll frequency in seconds|None|60|
 |index|string|None|True|Document Index|None|bank|
-|query|object|None|False|JSON Query DSL|None|{"query": {"match": {"line_number": {"query": "1.1.1"}}}}|
+|query|object|None|False|JSON Query DSL|None|{"match": {"line_number": {"query": "1.1.1"}}}|
 |routing|string|None|False|Optional Shards to Search|None|account|
 |type|string|None|False|Document Type|None|doc|
 

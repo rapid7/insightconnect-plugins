@@ -16,13 +16,14 @@ class SearchDocuments(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         index = params.get(Input.INDEX)
-        query = params.get(Input.QUERY)
+        query = params.get(Input.QUERY, {})
 
-        if query.get("query"):
+        if isinstance(query, dict) and query.get("query"):
             raise PluginException(
-                cause='Wrong input "query".',
-                assistance='Old query input detected. Input shouldn\'t contain {"query": {"query": {}}}. '
-                "Please refer help for more details.",
+                cause="Wrong input 'query'.",
+                assistance="Old query input detected. Input shouldn\'t contain {'query': {'query': {}}}. "
+                "Please refer help for more details or elasticsearch API documentation "
+                "https://www.elastic.co/guide/en/elasticsearch/reference/current/query-filter-context.html#query-filter-context-ex"
             )
 
         results = self.connection.client.search_documents(index, query, params.get(Input.ROUTING))
