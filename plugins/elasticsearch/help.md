@@ -95,7 +95,7 @@ This action is used to update a document.
 |id|string|None|True|Optional ID of Indexed Document|None|001|
 |index|string|None|True|Index to Insert Document Into|None|index001|
 |parent|string|None|False|Optional Parent|None|001|
-|refresh|string|False|False|Control when Changes Become Visible|['true', 'wait_for', 'false']|False|
+|refresh|string|false|False|Control when Changes Become Visible|['true', 'wait_for', 'false']|false|
 |retry_on_conflict|integer|None|False|Optional Number of Times to Retry on Update Conflict|None|5|
 |routing|string|None|False|Optional Shard Placement|None|user1|
 |script|object|None|True|JSON Script to Modify a Document|None|{"lang": "painless"}|
@@ -168,8 +168,10 @@ Example input:
 {
   "index": "shakespeare",
   "query": {
-    "query": {
-      "match_all": {}
+    "match": {
+      "line_number": {
+        "query": "1.1.1"
+      }
     }
   },
   "routing": "user1",
@@ -308,8 +310,10 @@ Example input:
   "frequency": 60,
   "index": "bank",
   "query": {
-    "query": {
-      "match_all": {}
+    "match": {
+      "line_number": {
+        "query": "1.1.1"
+      }
     }
   },
   "routing": "account",
