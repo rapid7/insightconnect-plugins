@@ -13,6 +13,7 @@ from ..util.message_details import MessageType
 from ..util.utils import first
 
 
+
 class Connection(komand.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
@@ -30,7 +31,7 @@ class Connection(komand.Connection):
         self.logger.info("Connect: Connecting..")
         self.__generate_certificate()
         sockt = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        ctx = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
+        ctx = ssl.SSLContext(ssl.PROTOCOL_TLS)
         ctx.load_cert_chain(self.__cert_file)
         self.__connection = ctx.wrap_socket(sockt)
         self.__connection.connect((self.__host, self.__port))
