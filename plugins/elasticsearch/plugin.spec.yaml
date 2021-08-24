@@ -390,7 +390,7 @@ actions:
         type: object
         description: JSON Query DSL
         required: false
-        example: '{"query": {"match": {"line_number": {"query": "1.1.1"}}}}'
+        example: '{"query": {"match_all": {}}}'
     output:
       took:
         title: Took
@@ -447,7 +447,7 @@ triggers:
         type: object
         description: JSON Query DSL
         required: false
-        example: '{"query": {"match": {"line_number": {"query": "1.1.1"}}}}'
+        example: '{"query": {"match_all": {}}}'
     output:
       hits:
         title: Hits

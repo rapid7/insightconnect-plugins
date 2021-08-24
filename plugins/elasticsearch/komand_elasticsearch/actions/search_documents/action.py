@@ -21,8 +21,9 @@ class SearchDocuments(insightconnect_plugin_runtime.Action):
         if query.get("query"):
             raise PluginException(
                 cause='Wrong input "query".',
-                assistance='Old query input detected. Input shouldn\'t contain {"query": {"query": {}}}. '
-                "Please refer help for more details.",
+                assistance='Old query style detected during input. Input shouldn\'t contain {"query": {"query": {}}}. '
+                "Please refer help for more details or elasticsearch API documentation ",
+                "https://www.elastic.co/guide/en/elasticsearch/reference/current/query-filter-context.html#query-filter-context-ex"
             )
 
         results = self.connection.client.search_documents(index, query, params.get(Input.ROUTING))
