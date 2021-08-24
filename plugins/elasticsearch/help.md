@@ -24,7 +24,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Basic Auth username and password|None|{"username":"user1", "password":"mypassword"}|
 |ssl_verify|boolean|True|False|The server's TLS/SSL certificate will be verified before a connection can be established|None|True|
-|url|string|None|True|Elasticsearch URL|None|https://example.com|
+|url|string|None|True|Elasticsearch URL|None|https://www.example.com:9243|
 |use_authentication|boolean|True|True|If the Elasticsearch host does not use authentication set this value to false|None|True|
 
 Example input:
@@ -32,9 +32,9 @@ Example input:
 ```
 {
   "credentials": {
-    "username":"user1",
-    "password":"mypassword"
-    },
+      "username": "user1",
+      "password": "mypassword"
+   },
   "ssl_verify": true,
   "url": "https://www.example.com:9243",
   "use_authentication": true
@@ -95,7 +95,7 @@ This action is used to update a document.
 |id|string|None|True|Optional ID of Indexed Document|None|001|
 |index|string|None|True|Index to Insert Document Into|None|index001|
 |parent|string|None|False|Optional Parent|None|001|
-|refresh|string|false|False|Control when Changes Become Visible|['true', 'wait_for', 'false']|false|
+|refresh|string|False|False|Control when Changes Become Visible|['true', 'wait_for', 'false']|False|
 |retry_on_conflict|integer|None|False|Optional Number of Times to Retry on Update Conflict|None|5|
 |routing|string|None|False|Optional Shard Placement|None|user1|
 |script|object|None|True|JSON Script to Modify a Document|None|{"lang": "painless"}|
@@ -115,9 +115,7 @@ Example input:
   "refresh": "false",
   "retry_on_conflict": 5,
   "routing": "user1",
-  "script": {
-    "lang": "painless"
-  },
+  "script": "{\"lang\": \"painless\"}",
   "source": "meta.*",
   "timeout": "1m",
   "type": "_doc",
@@ -169,23 +167,10 @@ Example input:
 ```
 {
   "index": "shakespeare",
-  "query": "{
-    "match": {
-      "line_number": {
-        "query": "1.1.1"
-      }
-    }
-  }",
-  "routing": "user1",
-  "type": "doc"
-}
-```
-
-```
-{
-  "index": "shakespeare",
   "query": {
-    "match_all": {}
+    "query": {
+      "match_all": {}
+    }
   },
   "routing": "user1",
   "type": "doc"
@@ -263,12 +248,7 @@ Example input:
 
 ```
 {
-  "document": {
-    "firstname": "Jon",
-    "lastname": "Doe",
-    "gender": "M",
-    "city": "Dante"
-  },
+  "document": "{\"firstname\": \"Jon\", \"lastname\": \"Doe\", \"gender\": \"M\", \"city\": \"Dante\"}",
   "id": "001",
   "index": "index001",
   "parent": "001",
@@ -328,10 +308,8 @@ Example input:
   "frequency": 60,
   "index": "bank",
   "query": {
-    "match": {
-      "line_number": {
-        "query": "1.1.1"
-      }
+    "query": {
+      "match_all": {}
     }
   },
   "routing": "account",
