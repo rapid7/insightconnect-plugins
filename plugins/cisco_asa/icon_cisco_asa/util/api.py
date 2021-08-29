@@ -74,6 +74,36 @@ class CiscoAsaAPI:
             json_data={"name": name, "host": {"kind": object_type, "value": address}},
         )
 
+    def cli(self, commands: list) -> dict:
+        return self._call_api("POST", "cli", json_data={"commands": commands})
+
+    def get_blocked_hosts(self) -> list:
+        response = self.cli(["show shun"]).get("response", [])
+        blocked_hosts = []
+        if response and isinstance(response, list):
+            hosts = response[0].split("\n")
+            for host in hosts:
+                if host != "":
+                    split_host = host.split(" ")
+                    if (
+                        len(split_host) == 7
+                        and split_host[2]
+                        and split_host[3]
+                        and split_host[4]
+                        and split_host[5]
+                        and split_host[6]
+                    ):
+                        blocked_hosts.append(
+                            {
+                                "source_ip": split_host[2],
+                                "dest_ip": split_host[3],
+                                "source_port": split_host[4],
+                                "dest_port": split_host[5],
+                                "protocol": split_host[6],
+                            }
+                        )
+        return blocked_hosts
+
     def _call_api(self, method: str, path: str, json_data: dict = None, params: dict = None):
         response = {"text": ""}
         headers = OrderedDict([("Content-Type", "application/json"), ("User-Agent", self.user_agent)])

@@ -3,4 +3,5 @@ from .add_address_to_group.action import AddAddressToGroup
 from .check_if_address_object_in_group.action import CheckIfAddressObjectInGroup
 from .create_address_object.action import CreateAddressObject
 from .delete_address_object.action import DeleteAddressObject
+from .get_blocked_hosts.action import GetBlockedHosts
 from .remove_address_from_group.action import RemoveAddressFromGroup

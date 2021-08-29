@@ -4,7 +4,7 @@ products: [insightconnect]
 name: cisco_asa
 title: Cisco Adaptive Security Appliance
 description: The Cisco ASA plugin allows you to automate the management of network objects
-version: 1.4.2
+version: 1.5.0
 vendor: rapid7
 support: community
 status: []
@@ -58,6 +58,32 @@ types:
       title: Self Link
       type: string
       description: Self link
+      required: false
+  hosts:
+    source_ip:
+      title: Source IP
+      description: Source IP address
+      type: string
+      required: false
+    dest_ip:
+      title: Destination IP
+      description: Destination IP address
+      type: string
+      required: false
+    source_port:
+      title: Source Port
+      description: Source port
+      type: string
+      required: false
+    dest_port:
+      title: Destination Port
+      description: Destination port
+      type: string
+      required: false
+    protocol:
+      title: Protocol
+      description: Protocol
+      type: string
       required: false
 
 connection:
@@ -224,3 +250,12 @@ actions:
         description: Returns true if object was created
         type: boolean
         required: true
+  get_blocked_hosts:
+    title: Get Blocked Hosts
+    description: Get hosts blocked with shun command
+    output:
+      hosts:
+        title: Hosts
+        description: List of hosts blocked with shun command
+        type: "[]hosts"
+        required: false 

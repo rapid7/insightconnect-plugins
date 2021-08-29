@@ -52,6 +52,36 @@ Example input:
 
 ### Actions
 
+#### Get Blocked Hosts
+
+This action is used to get blocked hosts.
+
+##### Input
+
+_This action does not contain any inputs._
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|hosts|[]hosts|False|List of hosts blocked with shun command|
+
+Example output:
+
+```
+{
+  "hosts": [
+    {
+      "source_ip": "10.1.1.27",
+      "dest_ip": "10.2.2.89",
+      "source_port": "444",
+      "dest_port": "555",
+      "protocol": "6"
+    }
+  ]
+}
+```
+
 #### Create Address Object
 
 This action is used to create Address Object by the Object IP address.
@@ -254,7 +284,7 @@ _This plugin does not contain any triggers._
 |----|----|--------|-----------|
 |Host|host|False|Host|
 |Kind|string|False|Kind|
-|Name|string|False|Name|
+|Object Name|string|False|The name of the object|
 |Object ID|string|False|Object ID|
 |Self Link|string|False|Self link|
 
@@ -262,8 +292,18 @@ _This plugin does not contain any triggers._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Kind|string|False|Kind|
-|Value|string|False|Value|
+|Kind|string|False|Kind is the type of object e.g. IPv4Address, IPv4FQDN, etc.|
+|Value|string|False|The value of the object. This will be the actual IPv4, IPv6, FQDN, etc. address the object refers to.|
+
+#### hosts
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Destination IP|string|False|Destination IP address|
+|Destination Port|string|False|Destination port|
+|Protocol|string|False|Protocol|
+|Source IP|string|False|Source IP address|
+|Source Port|string|False|Source port|
 
 ## Troubleshooting
 
@@ -271,6 +311,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.5.0 - Add new action Get Blocked Hosts
 * 1.4.2 - Add `docs_url` in plugin spec | Update `source_url` in plugin spec
 * 1.4.1 - Fix None check in actions Add Address to Group and Create Address Object
 * 1.4.0 - Add new action Create Address Object
