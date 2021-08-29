@@ -1,8 +1,16 @@
 {
-	"spec": "4b150928e45c19c75f21bab442b0e61c",
-	"manifest": "38cf14ee5eec204cfe5f6cc60151e2b6",
-	"setup": "f21ad99acbe1f8d760cea11d8ef9584a",
+	"spec": "55e35dfe650cf911fe7cdb67b43a1452",
+	"manifest": "0104a135ccc9cc5a9a5bffaa46d6e9fd",
+	"setup": "368febf28641f368ec96d71b18dc6186",
 	"schemas": [
+		{
+			"identifier": "create_file_in_folder/schema.py",
+			"hash": "d70e52bd2f70316f07a082e283eb5180"
+		},
+		{
+			"identifier": "create_folder/schema.py",
+			"hash": "1e9927598ab15c0e4654dec849a6ed3f"
+		},
 		{
 			"identifier": "find_file_by_name/schema.py",
 			"hash": "0906ae513f0f2c0d3659df01159a450a"
@@ -10,6 +18,10 @@
 		{
 			"identifier": "get_file_contents/schema.py",
 			"hash": "7dd11275c588d7d2b87fa4abc46b7563"
+		},
+		{
+			"identifier": "move_file/schema.py",
+			"hash": "a4fea826c18386e461ef4ff2ced65427"
 		},
 		{
 			"identifier": "overwrite_file/schema.py",
