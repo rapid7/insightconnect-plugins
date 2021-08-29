@@ -28,9 +28,9 @@ class MockClient:
     def execute(self):
         if self.body.get("name") == "New Folder":
             return {"id": "0BwwA4oUTeiV1TGRPeTVjaWRDY1E"}
-        if self.body.get("name") == "New Folder 2":
+        elif self.body.get("name") == "New Folder 2":
             return {"id": "0aWwC6yCVab22oS9iaa2WajYdR9o"}
-        if self.body.get("name") == "Folder Not Found":
+        elif self.body.get("name") == "Folder Not Found":
             raise HttpError("Not Found")
         elif self.body.get("name") == "test.csv":
             return {"id": "1jizwcfNK7JqHtn9kszitKSCWVOborMV8"}

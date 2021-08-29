@@ -24,6 +24,4 @@ class TestMoveFile(TestCase):
 
     def test_move_file_not_found(self):
         with self.assertRaises(Exception):
-            self.action.run(
-                {Input.FOLDER_ID: "0BwwA4oUTeiV1TGRPeTVjaWRDY1E", Input.FILE_ID: "File Not Found"}
-            )
+            self.action.run({Input.FOLDER_ID: "0BwwA4oUTeiV1TGRPeTVjaWRDY1E", Input.FILE_ID: "File Not Found"})
