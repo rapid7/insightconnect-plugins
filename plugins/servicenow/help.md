@@ -17,7 +17,7 @@ Note: This plugin affects only the underlying tables in a ServiceNow instance, n
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* 2020-03-11 Orlando
 
 # Documentation
 
