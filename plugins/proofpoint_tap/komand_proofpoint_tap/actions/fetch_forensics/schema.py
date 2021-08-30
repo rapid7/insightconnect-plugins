@@ -127,9 +127,9 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
               "order": 7
             },
             "blacklisted": {
-              "type": "integer",
+              "type": "boolean",
               "title": "Blacklisted",
-              "description": "Optional, whether the file was blocklisted",
+              "description": "Optional, whether the file was blacklisted",
               "order": 2
             },
             "cnames": {
@@ -309,9 +309,9 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
           "order": 7
         },
         "blacklisted": {
-          "type": "integer",
+          "type": "boolean",
           "title": "Blacklisted",
-          "description": "Optional, whether the file was blocklisted",
+          "description": "Optional, whether the file was blacklisted",
           "order": 2
         },
         "cnames": {
@@ -567,9 +567,9 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
                   "order": 7
                 },
                 "blacklisted": {
-                  "type": "integer",
+                  "type": "boolean",
                   "title": "Blacklisted",
-                  "description": "Optional, whether the file was blocklisted",
+                  "description": "Optional, whether the file was blacklisted",
                   "order": 2
                 },
                 "cnames": {
@@ -749,9 +749,9 @@ class FetchForensicsOutput(insightconnect_plugin_runtime.Output):
               "order": 7
             },
             "blacklisted": {
-              "type": "integer",
+              "type": "boolean",
               "title": "Blacklisted",
-              "description": "Optional, whether the file was blocklisted",
+              "description": "Optional, whether the file was blacklisted",
               "order": 2
             },
             "cnames": {

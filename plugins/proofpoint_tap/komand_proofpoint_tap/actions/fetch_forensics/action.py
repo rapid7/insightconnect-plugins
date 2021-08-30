@@ -48,4 +48,10 @@ class FetchForensics(insightconnect_plugin_runtime.Action):
             )
         )
 
+        for i, report in enumerate(result.get("reports", [])):
+            for j, forensic in enumerate(report.get("forensics", [])):
+                blacklisted = forensic.get("what", {}).get("blacklisted")
+                if blacklisted:
+                    result["reports"][i]["forensics"][j]["what"]["blacklisted"] = bool(blacklisted)
+
         return {Output.GENERATED: result.get("generated"), Output.REPORTS: result.get("reports")}

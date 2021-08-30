@@ -828,12 +828,56 @@ _This plugin does not contain any triggers._
 |URL|string|False|The malicious URL which was clicked|
 |User Agent|string|False|The User-Agent header from the clicker's HTTP request|
 
+#### decoded_urls
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Urls|[]urls|False|Urls|
+
 #### delivered_threats
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |Messages Delivered|[]messages|False|An array containing all messages with threats which were delivered by PPS|
 |Query End Time|string|False|The time at which the period queried for data ended|
+
+#### evidence
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Display|string|False|Friendly display string|
+|Malicious|boolean|False|Whether the evidence was used to reach a malicious verdict|
+|Platforms|[]platform|False|Array of Platform objects|
+|Type|string|False|The evidence type|
+|What|evidence_type|False|Map of values associated with the specific evidence type|
+
+#### evidence_type
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Action|string|False|Whether the cookie was set or deleted|
+|Blacklisted|boolean|False|Optional, whether the file was blacklisted|
+|Canonical Names|[]string|False|Optional, an array of CNAMEs which were associated with the hostname|
+|Domain|string|False|Which domain set the cookie|
+|Host|string|False|The hostname being resolved|
+|HTTP Status|integer|False|Optional, the HTTP status code which was produced when our sandbox visited the URL|
+|Remote IP Address|string|False|The remote IP address being contacted|
+|Resolved IP Addresses|[]string|False|Optional, an array of IP addresses which were resolved to the hostname|
+|Key|string|False|The name of the cookie being set or deleted|
+|MD5|string|False|Optional, the MD5 sum of the attachment's contents|
+|Name|string|False|The friendly name of the IDs rule which observed the malicious traffic|
+|Nameservers|[]string|False|Optional, the nameservers responsible for the hostname's domain|
+|Nameservers List|[]string|False|Optional, the nameservers responsible for the hostname's domain|
+|Offset|integer|False|Optional, the offset in bytes where the malicious content was found|
+|Path|string|False|The location of the dropper file|
+|Port|integer|False|The remote IP port being contacted|
+|Rule|string|False|Optional, the name of the static rule inside the sandbox which located the malicious content|
+|SHA256|string|False|The SHA256 hash of the attachment's contents|
+|Signature ID|integer|False|The identifier of the IDs rule which observed the malicious traffic|
+|Size|integer|False|Optional, the size in bytes of the attachment's contents|
+|Type|string|False|The protocol being used TCP or UDP|
+|URL|string|False|Optional, the URL the dropper contacted|
+|Value|string|False|Optional, content of the cookie being set|
 
 #### families
 
@@ -923,6 +967,24 @@ _This plugin does not contain any triggers._
 |Clicks Permitted|[]clicks|False|An array containing all clicks to URL threats which were permitted|
 |Query End Time|string|False|The time at which the period queried for data ended|
 
+#### platform
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Name|string|False|Name of platform|
+|OS|string|False|Operating system|
+|Version|string|False|Version of operating system|
+
+#### report
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Forensics|[]evidence|False|Array of Evidence objects|
+|ID|string|False|The identifier associated with the campaign or individual threat|
+|Name|string|False|The malicious URL, SHA256 hash of the malicious attachment, or campaign name|
+|Scope|string|False|Whether the report scope covers a campaign or an individual threat|
+|Type|string|False|The threat type|
+
 #### tap_results
 
 |Name|Type|Required|Description|
@@ -962,6 +1024,17 @@ _This plugin does not contain any triggers._
 |Total Top Clickers|integer|False|An integer describing the total number of top clickers in the time interval|
 |Users|[]user|False|An array of user objects that contain information about the user's identity and statistics of the clicking behavior|
 
+#### urls
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Cluster Name|string|False|Cluster Name|
+|Decoded URL|string|False|Decoded URL|
+|Encoded URL|string|False|Encoded URL|
+|Message GUID|string|False|Message GUID|
+|Recipient Email|string|False|Recipient Email|
+|Success|boolean|False|Success|
+
 #### user
 
 |Name|Type|Required|Description|
@@ -975,6 +1048,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.1.2 - Fix invalid type for `blacklisted` in `evidence_type` custom output | Add a conversion to a boolean for `blacklisted` returned as an integer in Fetch Forensics action
 * 3.1.1 - Fix decoding URLs with quotable encoding in URL Decode action
 * 3.1.0 - Add new action Fetch Forensics
 * 3.0.0 - Add `all` value to Threat Type and Threat Status inputs in Get Blocked Clicks, Get Permitted Clicks, Get Blocked Messages, Get Delivered Threats, Get All Threats actions

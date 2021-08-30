@@ -4,7 +4,7 @@ products: [insightconnect]
 name: proofpoint_tap
 title: Proofpoint TAP
 description: Parse Proofpoint Targeted Attack Protection (TAP) alerts
-version: 3.1.1
+version: 3.1.2
 vendor: rapid7
 support: community
 status: []
@@ -651,8 +651,8 @@ types:
       required: false
     blacklisted:
       title: Blacklisted
-      description: Optional, whether the file was blocklisted
-      type: integer
+      description: Optional, whether the file was blacklisted
+      type: boolean
       required: false
     md5:
       title: MD5
