@@ -168,11 +168,8 @@ class TestUrlExtractor(TestCase):
         action = UrlExtractor()
         actual = action.run(
             {
-                Input.STR: "<html><head>\r\nhttps://www.example.com/phishing\" style=\"box-sizing:border-box; line-height:inherit; margin:0px\"><a href=\"https://www.example.com/extractit\">https://www.example.com/extractit</a></p><p style=\"box-sizing:border-box; line-height:inherit; margin:0px\">Normal text inlaid with my link</p></div></div></td></tr></tbody></table></th></tr></tbody></table></div></body></html>"
+                Input.STR: '<html><head>\r\nhttps://www.example.com/phishing" style="box-sizing:border-box; line-height:inherit; margin:0px"><a href="https://www.example.com/extractit">https://www.example.com/extractit</a></p><p style="box-sizing:border-box; line-height:inherit; margin:0px">Normal text inlaid with my link</p></div></div></td></tr></tbody></table></th></tr></tbody></table></div></body></html>'
             }
         )
-        expected = {Output.URLS: [
-            "https://www.example.com/phishing",
-            "https://www.example.com/extractit"
-        ]}
+        expected = {Output.URLS: ["https://www.example.com/phishing", "https://www.example.com/extractit"]}
         self.assertEqual(actual, expected)
