@@ -74,7 +74,6 @@ class SentineloneAPI:
                     if search == "uuid":
                         agents = [agent_details.lower()]
 
-                logging.getLogger("test").info(agents)
                 for agent in agents:
                     endpoint = f"{self.url}web/api/v{api_version}/agents?{search}={agent}"
                     output = requests.get(endpoint, headers=self.token_header)
