@@ -2,7 +2,6 @@ from json import dumps, loads
 from re import match
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean_list, clean_dict
-import logging
 
 import requests
 
