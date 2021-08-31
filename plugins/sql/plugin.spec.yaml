@@ -4,7 +4,7 @@ products: [insightconnect]
 name: sql
 title: SQL
 description: The SQL plugin allows you to run SQL queries
-version: 3.0.1
+version: 3.0.2
 vendor: rapid7
 support: community
 status: []
