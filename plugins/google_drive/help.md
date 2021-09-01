@@ -14,6 +14,10 @@ This plugin utilizes the [Google Drive API](https://developers.google.com/drive/
 * A JWT With Google Drive Permissions
 * The Google Drive API must be enabled
 
+# Supported Product Versions
+
+_There are no supported product versions listed._
+
 # Documentation
 
 ## Setup
