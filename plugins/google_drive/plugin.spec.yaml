@@ -281,7 +281,7 @@ actions:
         required: true
   move_file:
     title: Move File
-    description: Move the file between folders
+    description: Move the file to a different folder
     input:
       folder_id:
         title: Folder ID
