@@ -39,12 +39,14 @@ class Connection(komand.Connection):
 
     def mssql_conn_string(self, params):
         self.logger.info("Using MSSQL connection string...")
+        params[Input.PORT] = params.get(Input.PORT) or 1433
         return (
             f"mssql+pymssql://{self.user}:{self.password}@{params[Input.HOST]}:{params[Input.PORT]}/{params[Input.DB]}"
         )
 
     def default_conn_string(self, params):
         self.logger.info("Using MySQL connection string...")
+        params[Input.PORT] = params.get(Input.PORT) or 3306
         return (
             f"mysql+mysqldb://{self.user}:{self.password}@{params[Input.HOST]}:{params[Input.PORT]}/{params[Input.DB]}"
         )
