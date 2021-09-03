@@ -39,6 +39,9 @@ class GetBlockedHostsOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
+  "required": [
+    "hosts"
+  ],
   "definitions": {
     "hosts": {
       "type": "object",

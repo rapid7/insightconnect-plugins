@@ -12,6 +12,10 @@
 * Username and Password for an ASA account with the appropriate privilege level for the action
 * Cisco ASA server with the [REST API server enabled](https://www.cisco.com/c/en/us/td/docs/security/asa/api/qsg-asa-api.html)
 
+# Supported Product Versions
+
+* 9.13(1)
+
 # Documentation
 
 ## Setup
@@ -64,7 +68,7 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|hosts|[]hosts|False|List of hosts blocked with shun command|
+|hosts|[]hosts|True|List of hosts blocked with shun command|
 
 Example output:
 
