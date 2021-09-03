@@ -24,10 +24,10 @@ class CreateFileInFolder(komand.Action):
         file_metadata = {"name": filename, "parents": [params.get(Input.FOLDER_ID)]}
 
         mime_type = guess_type(filename)
-        if mime_type:
-            mime_type = guess_type(filename)[0]
-            if not mime_type:
-                mime_type = "text/plain"
+        if mime_type and isinstance(mime_type, tuple):
+            mime_type = mime_type[0]
+        if not mime_type:
+            mime_type = "text/plain"
 
         file_bytes = BytesIO(b64decode(file_bytes))
         media = MediaIoBaseUpload(file_bytes, mime_type, resumable=True)

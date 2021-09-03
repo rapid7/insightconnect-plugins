@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Move the file between folders"
+    DESCRIPTION = "Move the file to a different folder"
 
 
 class Input:

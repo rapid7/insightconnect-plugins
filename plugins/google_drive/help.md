@@ -63,7 +63,7 @@ Example input:
 
 #### Move File
 
-This action is used to move the file between folders.
+This action is used to move the file to a different folder.
 
 ##### Input
 
