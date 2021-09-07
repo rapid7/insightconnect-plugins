@@ -1199,7 +1199,7 @@ _This plugin does not contain any custom output types._
 _This plugin does not contain any troubleshooting information._
 
 # Version History
-
+* 6.2.0 - Fix issue in Get Comments actions where normalize_user is missing the is_cloud argument from client connection
 * 6.1.0 - Add Monitor Issues trigger | Update New Issue trigger to only trigger in case of recently created tickets | Change `required` property to false for `project` input in New Issue trigger | Fix issue in New Issue trigger to include all results that match JQL | Fix issue in New Issue trigger with retrieving attachments
 * 6.0.8 - Fix issue where exception type was wrong in Create Issue
 * 6.0.7 - Fix issue in Create Issue and Attach Issue actions where adding attachments failed
