@@ -9,7 +9,7 @@ status: []
 description: Lookup the public IP address of an Insight Orchestrator
 version: 1.0.1
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/ipify
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/ipify
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://ipify.org
 tags:

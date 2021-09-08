@@ -4,12 +4,12 @@ products: [insightconnect]
 name: sql
 title: SQL
 description: The SQL plugin allows you to run SQL queries
-version: 3.0.0
+version: 3.0.2
 vendor: rapid7
 support: community
 status: []
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/sql
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/sql
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.sqlalchemy.org/
 tags:
@@ -18,7 +18,7 @@ tags:
 - mssql
 hub_tags:
   use_cases: [data_utility]
-  keywords: [sql, postgres, mssql]
+  keywords: [sql, postgresql, ms_sql]
   features: []
 connection:
   type:

@@ -39,12 +39,14 @@ class Connection(komand.Connection):
 
     def mssql_conn_string(self, params):
         self.logger.info("Using MSSQL connection string...")
+        params[Input.PORT] = params.get(Input.PORT) or 1433
         return (
             f"mssql+pymssql://{self.user}:{self.password}@{params[Input.HOST]}:{params[Input.PORT]}/{params[Input.DB]}"
         )
 
     def default_conn_string(self, params):
         self.logger.info("Using MySQL connection string...")
+        params[Input.PORT] = params.get(Input.PORT) or 3306
         return (
             f"mysql+mysqldb://{self.user}:{self.password}@{params[Input.HOST]}:{params[Input.PORT]}/{params[Input.DB]}"
         )
@@ -63,15 +65,15 @@ class Connection(komand.Connection):
         }
 
         self.conn_str = type_connection_string.get(params[Input.TYPE])(self, params)
-        self.connection = SQLConnection(self.conn_str)
-        self.connection.__enter__()
-        self.logger.info("Connect: Connecting...")
 
     def test(self):
-        try:
-            self.connection.session.execute("select 1")
-            return True
-        except Exception as e:
-            raise ConnectionTestException(
-                cause="Unable to connect to the server.", assistance="Check connection credentials.", data=e
-            )
+        with SQLConnection(self.conn_str) as conn:
+            try:
+                conn.session.execute("select 1")
+                return {"status": "Success"}
+            except Exception as e:
+                raise ConnectionTestException(
+                    cause="Unable to connect to the server.", assistance="Check connection credentials.", data=e
+                )
+            finally:
+                conn.session.close()

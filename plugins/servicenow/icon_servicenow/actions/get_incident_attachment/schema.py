@@ -47,7 +47,9 @@ class GetIncidentAttachmentOutput(insightconnect_plugin_runtime.Output):
     "attachment_contents": {
       "type": "string",
       "title": "Attachment Contents",
+      "displayType": "bytes",
       "description": "The Base64-encoded contents of the downloaded attachment",
+      "format": "bytes",
       "order": 1
     }
   },

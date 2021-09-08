@@ -1,0 +1,39 @@
+{
+  "took": 2,
+  "timed_out": false,
+  "_shards": {
+    "total": 1,
+    "successful": 1,
+    "skipped": 0,
+    "failed": 0
+  },
+  "hits": {
+    "total": {
+      "value": 2,
+      "relation": "eq"
+    },
+    "max_score": 1.0,
+    "hits": [
+      {
+        "_index": "test-index",
+        "_type": "_doc",
+        "_id": "VWx5O3oBrBTgS4Hhf6Hp",
+        "_score": 1.0,
+        "_source": {
+          "id": 1,
+          "message": "Some message"
+        }
+      },
+      {
+        "_index": "test-index",
+        "_type": "_doc",
+        "_id": "Vmx6O3oBrBTgS4HhWKFJ",
+        "_score": 1.0,
+        "_source": {
+          "id": 1,
+          "message": "Some message"
+        }
+      }
+    ]
+  }
+}

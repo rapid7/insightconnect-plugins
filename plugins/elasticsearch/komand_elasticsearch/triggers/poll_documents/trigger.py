@@ -1,29 +1,24 @@
-import komand
+import insightconnect_plugin_runtime
 import time
-from .schema import PollDocumentsInput, PollDocumentsOutput
+from .schema import PollDocumentsInput, PollDocumentsOutput, Input, Component
 
 # Custom imports below
-from komand_elasticsearch.util import helpers
 
 
-class PollDocuments(komand.Trigger):
+class PollDocuments(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="poll_documents",
-            description="Poll for new documents given a query",
+            description=Component.DESCRIPTION,
             input=PollDocumentsInput(),
             output=PollDocumentsOutput(),
         )
 
     def run(self, params={}):
-        host = self.connection.elastic_host
-        username = self.connection.username
-        password = self.connection.password
-        frequency = params.get("frequency", 60)
-        index = params.get("_index")
-        type_ = params.get("_type")
-        routing = params.get("routing")
-        query = params.get("query")
+        frequency = params.get(Input.FREQUENCY, 60)
+        index = params.get(Input.INDEX)
+        routing = params.get(Input.ROUTING)
+        query = params.get(Input.QUERY)
 
         old_d = {}
         params = {}
@@ -32,14 +27,14 @@ class PollDocuments(komand.Trigger):
 
         while True:
             try:
-                results = helpers.get_search(self.logger, host, index, type_, query, username, password, params)
+                results = self.connection.client.search_documents(index, query, params)
             except:
-                self.logger.error("Poll Documents: poll failed... trying again in %i seconds" % frequency)
+                self.logger.error(f"Poll Documents: poll failed... trying again in {frequency} seconds.")
                 time.sleep(frequency)
                 continue
 
             if not results or "hits" not in results:
-                self.logger.error("Poll Documents: poll failed... trying again in %i seconds" % frequency)
+                self.logger.error(f"Poll Documents: poll failed... trying again in {frequency} seconds.")
                 time.sleep(frequency)
                 continue
 
@@ -48,13 +43,13 @@ class PollDocuments(komand.Trigger):
                 if hit["_score"] is None or "_score" not in hit:
                     hit["_score"] = 0
                     self.logger.info("One or most results lack a relevance score, assuming 0")
-                if hit["_id"] not in old_d:
-                    hits.append(hit)
-                    old_d[hit["_id"]] = [hit["_version"]]
-                else:
-                    if hit["_version"] not in old_d[hit["_id"]]:
-                        hits.append(hit)
-                        old_d[hit["_id"]].append(hit["_version"])
+                hits.append(hit)
+                if hit.get("_version"):
+                    if hit["_id"] not in old_d:
+                        old_d[hit["_id"]] = [hit["_version"]]
+                    else:
+                        if hit["_version"] not in old_d[hit["_id"]]:
+                            old_d[hit["_id"]].append(hit["_version"])
 
             if not hits:
                 time.sleep(frequency)
@@ -62,12 +57,3 @@ class PollDocuments(komand.Trigger):
 
             self.send({"hits": hits})
             time.sleep(frequency)
-
-    def test(self):
-        host = self.connection.elastic_host
-        username = self.connection.username
-        password = self.connection.password
-        r = helpers.test_auth(self.logger, host, username, password)
-        if not r:
-            raise Exception("Test: Failed authentication")
-        return {}

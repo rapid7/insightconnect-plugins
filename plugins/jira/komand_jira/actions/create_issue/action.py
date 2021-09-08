@@ -48,7 +48,7 @@ class CreateIssue(insightconnect_plugin_runtime.Action):
             # However, this call doesn't return JSON :'( it returns this stupid thing:
             # [<JIRA IssueType: name='Bug', id='10004'>, <JIRA IssueType: name='Epic', scope={'type': 'PROJECT', 'project': {'id': '10008'} ]
         except KeyError:
-            raise ConnectionTestException(
+            raise PluginException(
                 cause="Issue type not known or user doesn't have permissions.",
                 assistance="Talk to your Jira administrator to add the type or delegate necessary permissions, "
                 "or choose an available type.",

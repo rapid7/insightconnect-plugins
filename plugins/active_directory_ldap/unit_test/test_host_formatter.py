@@ -1,20 +1,9 @@
 from unittest import TestCase, mock
 from komand_active_directory_ldap import connection
+from komand_active_directory_ldap.connection.schema import Input
 import logging
-
-
-class MockServer:
-    def __init__(self, host, port, use_ssl, get_info):
-        self.host = host
-        self.port = port
-        self.use_ssl = use_ssl
-        self.get_info = get_info
-
-
-class MockConnection:
-    def __init__(self, server, user, password, auto_encode, auto_escape, auto_bind, auto_referrals, authentication):
-        self.server = server
-        self.user = user
+from unit_test.common import MockServer
+from unit_test.common import MockConnection
 
 
 class TestHostFormatter(TestCase):
@@ -22,33 +11,39 @@ class TestHostFormatter(TestCase):
     @mock.patch("ldap3.Connection", mock.MagicMock(return_value=MockConnection))
     def test_connection(self):
         params = {
-            "host": "ldaps://12.12.12.12",
-            "port": 345,
-            "use_ssl": False,
-            "username_and_password": {"username": "bob", "password": "foobar"},
+            Input.HOST: "ldaps://12.12.12.12",
+            Input.PORT: 345,
+            Input.USE_SSL: False,
+            Input.USERNAME_PASSWORD: {"username": "bob", "password": "foobar"},
         }
-        logger = logging.getLogger("logger")
         conn = connection.Connection()
-        conn.logger = logger
+        conn.logger = logging.getLogger("test_connection")
         conn.connect(params)
 
     def test_host_formatter(self):
         host_types = [
             "10.10.10.10",
             "11.11.11.11:345",
-            "ldaps://12.12.12.12",
-            "ldaps://14.14.14.14:345",
+            "ldap://12.12.12.12",
+            "ldaps://13.13.13.13",
+            "ldap://14.14.14.14:345",
+            "ldaps://15.15.15.15:345",
             "mydomain.com",
             "mydomain.com:345",
+            "ldap://mydomain.com",
             "ldaps://mydomain.com",
+            "ldap://mydomain.com:345",
             "ldaps://mydomain.com:345",
             "mydomain.com/stuff",
             "mydomain.com/stuff:345",
+            "ldap://mydomain.com/stuff",
             "ldaps://mydomain.com/stuff",
+            "ldap://mydomain.com/stuff:345",
             "ldaps://mydomain.com/stuff:345",
         ]
         output = list()
         conn = connection.Connection()
+        conn.logger = logging.getLogger("test_host_formatter")
         for item in host_types:
             output.append(conn.host_formatter(item))
         self.assertEqual(
@@ -57,7 +52,13 @@ class TestHostFormatter(TestCase):
                 "10.10.10.10",
                 "11.11.11.11",
                 "12.12.12.12",
+                "13.13.13.13",
                 "14.14.14.14",
+                "15.15.15.15",
+                "mydomain.com",
+                "mydomain.com",
+                "mydomain.com",
+                "mydomain.com",
                 "mydomain.com",
                 "mydomain.com",
                 "mydomain.com",

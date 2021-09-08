@@ -4,13 +4,13 @@ products: [insightconnect]
 name: proofpoint_tap
 title: Proofpoint TAP
 description: Parse Proofpoint Targeted Attack Protection (TAP) alerts
-version: 3.1.0
+version: 3.1.1
 vendor: rapid7
 support: community
 status: []
 cloud_ready: true
 resources:
-  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/proofpoint_tap
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/proofpoint_tap
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.proofpoint.com/
 tags:
