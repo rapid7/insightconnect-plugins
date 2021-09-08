@@ -6,7 +6,7 @@ title: Joe Sandbox
 description: Joe Sandbox Cloud executes files and URLs fully automated in a controlled
   environment and monitors the behavior of applications and the operating system for
   suspicious activities
-version: 1.0.3
+version: 1.0.4
 vendor: rapid7
 support: community
 status: []
@@ -166,7 +166,6 @@ actions:
   check_server_status:
     title: Check Server Status
     description: Check if Joe Sandbox is online or in maintenance mode
-    input:
     output:
       online:
         title: Online
@@ -176,7 +175,6 @@ actions:
   get_server_info:
     title: Get Server Info
     description: Query information about the server
-    input:
     output:
       queuesize:
         title: Queue Size
@@ -186,7 +184,6 @@ actions:
   list_systems:
     title: List Systems
     description: Retrieve a list of systems on the server
-    input:
     output:
       systems:
         title: Systems
@@ -196,7 +193,6 @@ actions:
   list_countries:
     title: List Countries
     description: Retrieve a list of localized internet anonymization countries
-    input:
     output:
       countries:
         title: Countries
@@ -206,7 +202,6 @@ actions:
   list_keyboard_layouts:
     title: List Keyboard Layouts
     description: Retrieve a list of available keyboard layouts for Windows analyzers
-    input:
     output:
       keyboard_layouts:
         title: Keyboard Layouts
@@ -216,7 +211,6 @@ actions:
   get_account_info:
     title: Get Account Info
     description: Query information about Joe Sandbox user account
-    input:
     output:
       type:
         title: Type
@@ -239,6 +233,12 @@ actions:
         type: bytes
         required: true
         example: "TVqQAAMAAAAEAAAA//8AALgAAAAAAA..."
+      filename:
+        title: Filename
+        description: Used to give Joe Sandbox a hint at what file type is being uploaded. File extension (eg .txt, .zip) required
+        type: string
+        required: false
+        example: example.jpg
       cookbook:
         title: Cookbook
         description: Cookbook to be uploaded together with the sample
@@ -367,7 +367,6 @@ actions:
   list_analyses:
     title: List Analyses
     description: Fetch a list of all analyses
-    input:
     output:
       analyses:
         title: Analyses

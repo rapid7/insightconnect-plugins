@@ -289,7 +289,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|attachment_contents|string|True|The Base64-encoded contents of the downloaded attachment|
+|attachment_contents|bytes|True|The Base64-encoded contents of the downloaded attachment|
 
 Example output:
 
@@ -758,6 +758,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 5.1.1 - Fix output parsing bug in Get Incident Attachment action
 * 5.1.0 - Add new Incident URL output for Create Incident action
 * 5.0.1 - Add new Additional Fields input for Create Incident and Update Incident actions
 * 5.0.0 - Add input fields to Create Incident and Update Incident action instead of JSON object

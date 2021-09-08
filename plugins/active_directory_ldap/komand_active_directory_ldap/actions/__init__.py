@@ -10,3 +10,4 @@ from .move_object.action import MoveObject
 from .query.action import Query
 from .query_group_membership.action import QueryGroupMembership
 from .reset_password.action import ResetPassword
+from .unlock_user.action import UnlockUser
