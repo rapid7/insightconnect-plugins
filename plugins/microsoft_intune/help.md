@@ -4,7 +4,7 @@
 
 # Key Features
 
-* Initiate a Windows Defender Antivirus scan on a machine.
+* Initiate a Windows Defender Antivirus scan on a machine. 
 
 # Requirements
 
