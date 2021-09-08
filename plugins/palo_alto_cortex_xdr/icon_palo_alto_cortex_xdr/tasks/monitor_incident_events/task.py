@@ -95,6 +95,4 @@ class MonitorIncidentEvents(insightconnect_plugin_runtime.Task):
         )
 
         self.logger.info(f"Finished retrieving {len(sorted_events)} new incident events this iteration.")
-        # XDRs API only allows greater-than-equals and not greater-than. Therefore, add 1 ms to 'now' so we don't ask
-        # for 'now' again on the next run.
-        return {Output.EVENTS: sorted_events}, {State.LAST_EVENT_TIME: str(now + 1)}
+        return {Output.EVENTS: sorted_events}, {State.LAST_EVENT_TIME: str(now)}
