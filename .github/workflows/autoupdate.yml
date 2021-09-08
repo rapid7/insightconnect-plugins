@@ -13,7 +13,7 @@ jobs:
           PR_FILTER: "labelled"
           PR_LABELS: "Autoupdate"
           EXCLUDED_LABELS: "Work in Progress"
-          MERGE_MSG: "Branch was auto-updated."
+          MERGE_MSG: "Branch was auto-updated from base branch"
           RETRY_COUNT: "5"
           RETRY_SLEEP: "300"
           MERGE_CONFLICT_ACTION: "fail"
