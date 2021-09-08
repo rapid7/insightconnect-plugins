@@ -1137,14 +1137,66 @@ triggers:
         required: false
 
 tasks:
-  monitor_alert_events:
-    title: Monitor Alert Events
-    description: Monitor alert events
+  monitor_incident_events:
+    title: Monitor Incident Events
+    description: Monitor incident events
+    input:
+      status:
+        title: Status
+        description: Status
+        type: string
+        enum:
+          - "any"
+          - "new"
+          - "under_investigation"
+          - "resolved_threat_handled"
+          - "resolved_known_issue"
+          - "resolved_false_positive"
+          - "resolved_other"
+          - "resolved_auto"
+        example: new
+        required: false
+      alert_source:
+        title: Alert Source
+        description: Alert source
+        type: string
+        enum:
+          - "any"
+          - "BIOC"
+          - "Analytics BIOC"
+          - "Correlation"
+          - "IOC"
+          - "XDR Agent"
+          - "Firewall"
+          - "Analytics"
+        example: XDR Agent
+        required: false
+      incident_id_list:
+        title: Incident ID List
+        description: Incident ID list
+        type: "[]string"
+        example: "[\"5\"]"
+        required: false
+      descriptions:
+        title: Descriptions
+        description: Descriptions
+        type: "[]string"
+        example: "[\"Behavioral threat detected (rule: heuristic.b.205)\"]"
+        required: false
+      time_sorting_field:
+        title: Time Sorting Field
+        description: Field to use to sort Incident events
+        type: string
+        enum:
+          - "modification_time"
+          - "creation_time"
+        example: modification_time
+        required: false
     output:
       events:
-        title: Alert Events
-        description: Alert events
-        type: "[]alert"
+        title: Incident Events
+        description: Incident events
+        type: "[]incident"
         required: false
     schedule:
       title: Schedule for Retrieving Events
@@ -1156,5 +1208,5 @@ tasks:
     state:
       last_event_time:
         title: Last Event Time
-        description: The datetime of the last retrieved alert event
+        description: The datetime of the last retrieved incident event
         type: string

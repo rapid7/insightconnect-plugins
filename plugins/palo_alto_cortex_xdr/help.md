@@ -511,9 +511,9 @@ Example output:
 
 ### Tasks
 
-#### Monitor Alert Events
+#### Monitor Incident Events
 
-This task is used to monitor alert events.
+This task is used to monitor incident events.
 
 Supported schedule types for this task include:
   - cron
@@ -521,165 +521,71 @@ Supported schedule types for this task include:
 
 ##### Input
 
-_This task does not contain any inputs._
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|alert_source|string|None|False|Alert source|['any', 'BIOC', 'Analytics BIOC', 'Correlation', 'IOC', 'XDR Agent', 'Firewall', 'Analytics']|XDR Agent|
+|descriptions|[]string|None|False|Descriptions|None|["Behavioral threat detected (rule: heuristic.b.205)"]|
+|incident_id_list|[]string|None|False|Incident ID list|None|["5"]|
+|status|string|None|False|Status|['any', 'new', 'under_investigation', 'resolved_threat_handled', 'resolved_known_issue', 'resolved_false_positive', 'resolved_other', 'resolved_auto']|new|
+|time_sorting_field|string|None|False|Field to use to sort Incident events|['modification_time', 'creation_time']|modification_time|
+
+Example input:
+
+```
+{
+  "alert_source": "XDR Agent",
+  "descriptions": "[\"Behavioral threat detected (rule: heuristic.b.205)\"]",
+  "incident_id_list": "[\"5\"]",
+  "status": "new",
+  "time_sorting_field": "modification_time"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|events|[]alert|False|Alert events|
+|events|[]incident|False|Incident events|
 
 Example output:
 
 ```
 {
-  "alert": {
-    "external_id": "abcdefghijlkmnopqrstuv123456789",
-    "severity": "high",
-    "matching_status": "UNMATCHABLE",
-    "end_match_attempt_ts": null,
-    "local_insert_ts": 1621448835056,
-    "bioc_indicator": null,
-    "matching_service_rule_id": null,
-    "attempt_counter": null,
-    "bioc_category_enum_key": null,
-    "is_whitelisted": false,
-    "starred": false,
-    "deduplicate_tokens": null,
-    "filter_rule_id": null,
-    "mitre_technique_id_and_name": [
-      "T1140 - Deobfuscate/Decode Files or Information",
-      "T1059.001 - Command and Scripting Interpreter: PowerShell",
-      "T1059 - Command and Scripting Interpreter"
-    ],
-    "mitre_tactic_id_and_name": [
-      "TA0005 - Defense Evasion",
-      "TA0002 - Execution"
-    ],
-    "agent_version": "7.3.2.26319",
-    "agent_device_domain": "example.com",
-    "agent_fqdn": "example-host.example.com",
-    "agent_os_type": "Windows",
-    "agent_os_sub_type": "10.0.1234",
-    "agent_data_collection_status": false,
-    "mac": "ab:cd:ef:12:34:56",
-    "events": [
-      {
-        "agent_install_type": "STANDARD",
-        "agent_host_boot_time": null,
-        "event_sub_type": null,
-        "module_id": "Behavioral Threat Protection",
-        "association_strength": null,
-        "dst_association_strength": null,
-        "story_id": null,
-        "event_id": null,
-        "event_type": "Process Execution",
-        "event_timestamp": 1621448822758,
-        "actor_process_instance_id": "<some id>",
-        "actor_process_image_path": "C:\\Windows\\System32\\executable.exe",
-        "actor_process_image_name": "cmd.exe",
-        "actor_process_command_line": "C:\\Windows\\system32\\executable.exe /c \"\"C:\\detection_test.bat\" \"",
-        "actor_process_signature_status": "N/A",
-        "actor_process_signature_vendor": "Microsoft WindowsMicrosoft Corporation",
-        "actor_process_image_sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
-        "actor_process_image_md5": null,
-        "actor_process_causality_id": null,
-        "actor_causality_id": null,
-        "actor_process_os_pid": 2964,
-        "actor_thread_thread_id": null,
-        "causality_actor_process_image_name": null,
-        "causality_actor_process_command_line": null,
-        "causality_actor_process_image_path": null,
-        "causality_actor_process_signature_vendor": null,
-        "causality_actor_process_signature_status": "N/A",
-        "causality_actor_causality_id": null,
-        "causality_actor_process_execution_time": null,
-        "causality_actor_process_image_md5": null,
-        "causality_actor_process_image_sha256": null,
-        "action_file_path": null,
-        "action_file_name": null,
-        "action_file_md5": null,
-        "action_file_sha256": null,
-        "action_file_macro_sha256": null,
-        "action_registry_data": null,
-        "action_registry_key_name": null,
-        "action_registry_value_name": null,
-        "action_registry_full_key": null,
-        "action_local_ip": null,
-        "action_local_port": null,
-        "action_remote_ip": null,
-        "action_remote_port": null,
-        "action_external_hostname": null,
-        "action_country": "UNKNOWN",
-        "action_process_instance_id": null,
-        "action_process_causality_id": null,
-        "action_process_image_name": null,
-        "action_process_image_sha256": null,
-        "action_process_image_command_line": null,
-        "action_process_signature_status": "N/A",
-        "action_process_signature_vendor": null,
-        "os_actor_effective_username": null,
-        "os_actor_process_instance_id": null,
-        "os_actor_process_image_path": null,
-        "os_actor_process_image_name": null,
-        "os_actor_process_command_line": null,
-        "os_actor_process_signature_status": "N/A",
-        "os_actor_process_signature_vendor": null,
-        "os_actor_process_image_sha256": null,
-        "os_actor_process_causality_id": null,
-        "os_actor_causality_id": null,
-        "os_actor_process_os_pid": null,
-        "os_actor_thread_thread_id": null,
-        "fw_app_id": null,
-        "fw_interface_from": null,
-        "fw_interface_to": null,
-        "fw_rule": null,
-        "fw_rule_id": null,
-        "fw_device_name": null,
-        "fw_serial_number": null,
-        "fw_url_domain": null,
-        "fw_email_subject": null,
-        "fw_email_sender": null,
-        "fw_email_recipient": null,
-        "fw_app_subcategory": null,
-        "fw_app_category": null,
-        "fw_app_technology": null,
-        "fw_vsys": null,
-        "fw_xff": null,
-        "fw_misc": null,
-        "fw_is_phishing": "N/A",
-        "dst_agent_id": null,
-        "dst_causality_actor_process_execution_time": null,
-        "dns_query_name": null,
-        "dst_action_external_hostname": null,
-        "dst_action_country": null,
-        "dst_action_external_port": null,
-        "contains_featured_host": "NO",
-        "contains_featured_user": "NO",
-        "contains_featured_ip": "NO",
-        "image_name": null,
-        "container_id": null,
-        "cluster_name": null,
-        "user_name": "example"
-      }
-    ],
-    "alert_id": "1",
-    "detection_timestamp": 1621448822758,
-    "name": "Behavioral Threat",
-    "category": "Malware",
-    "endpoint_id": "abcdefghijlkmnop123654",
-    "description": "Behavioral threat detected (rule: heuristic.b.205)",
-    "host_ip": [
-      "10.0.20.10"
-    ],
-    "host_name": "example-host",
-    "mac_addresses": [
-      "ab:cd:ef:12:34:56"
-    ],
-    "source": "XDR Agent",
-    "action": "BLOCKED",
-    "action_pretty": "Prevented (Blocked)"
-  }
+   "incident":{
+      "incident_id":"1",
+      "incident_name":null,
+      "creation_time":1621448873194,
+      "modification_time":1621448873194,
+      "detection_time":null,
+      "status":"new",
+      "severity":"high",
+      "description":"'Behavioral Threat' generated by XDR Agent detected on host msedgewin10 involving user ieuser",
+      "assigned_user_mail":null,
+      "assigned_user_pretty_name":null,
+      "alert_count":1,
+      "low_severity_alert_count":0,
+      "med_severity_alert_count":0,
+      "high_severity_alert_count":1,
+      "user_count":1,
+      "host_count":1,
+      "notes":null,
+      "resolve_comment":null,
+      "manual_severity":null,
+      "manual_description":null,
+      "xdr_url":"https://example.xdr.us.paloaltonetworks.com/incident-view/1",
+      "starred":false,
+      "hosts":[
+         "examplehost:0123456abcdef12345abcde12345abcd"
+      ],
+      "users":[
+         "exampleuser"
+      ],
+      "incident_sources":[
+         "XDR Agent"
+      ],
+      "rule_based_score":null,
+      "manual_score":null
+   }
 }
 ```
 
@@ -724,7 +630,7 @@ Example output:
 
 # Version History
 
-* 2.1.0 - New task Monitor Alert Events
+* 2.1.0 - New task Monitor Incident Events
 * 2.0.0 - New action Get File Quarantine Status | New trigger Get Alerts
 * 1.0.0 - Initial plugin
 

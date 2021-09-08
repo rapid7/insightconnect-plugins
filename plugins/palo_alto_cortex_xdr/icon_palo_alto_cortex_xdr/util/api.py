@@ -97,15 +97,23 @@ class CortexXdrAPI:
         self.logger.info("Taking isolation action on a single endpoint.")
         return self._isolate_endpoint(endpoints, isolation_state)
 
-    def get_alerts(self, from_time: int, to_time: int) -> List[Dict]:
+    def get_alerts(
+        self, from_time: int, to_time: int, time_sort_field: str = "creation_time", filters: List = None
+    ) -> List[Dict]:
         endpoint = "/public_api/v1/alerts/get_alerts_multi_events/"
         response_alerts_field = "alerts"
-        return self._get_items_from_endpoint(endpoint, from_time, to_time, response_alerts_field)
+        return self._get_items_from_endpoint(
+            endpoint, from_time, to_time, response_alerts_field, time_sort_field, filters
+        )
 
-    def get_incidents(self, from_time: int, to_time: int) -> List[Dict]:
+    def get_incidents(
+        self, from_time: int, to_time: int, time_sort_field: str = "creation_time", filters: List = None
+    ) -> List[Dict]:
         endpoint = "/public_api/v1/incidents/get_incidents/"
         response_incidents_field = "incidents"
-        return self._get_items_from_endpoint(endpoint, from_time, to_time, response_incidents_field)
+        return self._get_items_from_endpoint(
+            endpoint, from_time, to_time, response_incidents_field, time_sort_field, filters
+        )
 
     def allow_or_block_file(
         self, file_hash: str, comment: str, incident_id: str = None, block_file: bool = True
@@ -143,27 +151,33 @@ class CortexXdrAPI:
     # Private Methods
     ###########################
     def _get_items_from_endpoint(
-        self, endpoint: str, from_time: int, to_time: int, response_item_field: str
+        self,
+        endpoint: str,
+        from_time: int,
+        to_time: int,
+        response_item_field: str,
+        time_sort_field: str = "creation_time",
+        filters: List = None,
     ) -> List[Dict]:
         batch_size = 100
         search_from = 0
         search_to = search_from + batch_size
+
+        filters = filters or []
+        # If time constraints have been provided for the request, add them to the post body
+        if from_time is not None and to_time is not None:
+            filters.append({"field": time_sort_field, "operator": "gte", "value": from_time})
+            filters.append({"field": time_sort_field, "operator": "lte", "value": to_time})
 
         # Request items in ascending order so that we get the oldest items first.
         post_body = {
             "request_data": {
                 "search_from": search_from,
                 "search_to": search_to,
-                "sort": {"field": "creation_time", "keyword": "asc"},
+                "sort": {"field": time_sort_field, "keyword": "asc"},
+                "filters": filters,
             }
         }
-
-        # If time constraints have been provided for the request, add them to the post body
-        if from_time is not None and to_time is not None:
-            post_body["request_data"]["filters"] = [
-                {"field": "creation_time", "operator": "gte", "value": from_time},
-                {"field": "creation_time", "operator": "lte", "value": to_time},
-            ]
 
         done = False
         all_items = []
