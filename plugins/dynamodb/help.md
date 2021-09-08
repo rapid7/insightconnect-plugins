@@ -22,11 +22,21 @@ Rapid7 InsightConnect.
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|access_key|credential_secret_key|None|True|Access key ID|None|
-|secret_key|credential_secret_key|None|True|Secret access key|None|
-|region|string|None|False|Region|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|access_key|credential_secret_key|None|True|Access key ID|None|602B2EA0A04B66BEB2C0|
+|region|string|None|False|Region|None|us-east-2|
+|secret_key|credential_secret_key|None|True|Secret access key|None|9de5069c5afe602b2ea0a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "access_key": "602B2EA0A04B66BEB2C0",
+  "region": "us-east-2",
+  "secret_key": "9de5069c5afe602b2ea0a04b66beb2c0"
+}
+```
 
 ## Technical Details
 
@@ -43,17 +53,39 @@ overwrite the existing record.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|condition_expression|string|None|False|An optional expression that can be used to reject inserts based on evaluating existing data|None|
-|table|string|None|True|The table name to store into|None|
-|data|object|None|True|The object data to store|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|condition_expression|string|None|False|An optional expression that can be used to reject inserts based on evaluating existing data|None|keytable<>user|
+|data|object|None|True|The object data to store|None|{"keytable": "login", "e-mail": "user@example.com", "user": "Username"}|
+|table|string|None|True|The table name to store into|None|Table-name|
+
+Example input:
+
+```
+{
+  "condition_expression": "keytable<>user",
+  "data": {
+    "keytable": "login",
+    "e-mail": "user@example.com",
+    "user": "Username"
+  },
+  "table": "Table-name"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |success|boolean|False|Success|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### Update
 
@@ -63,18 +95,42 @@ are met.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|condition_expression|string|None|False|An optional expression that can be used to reject updates based on evaluating existing data|None|
-|data|object|None|True|The object data to update, as key/value pairs|None|
-|key|object|None|True|The primary key and optionally the sort key of the object to update. Provided as a pair of key/values|None|
-|table|string|None|True|The table name to store into|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|condition_expression|string|None|False|An optional expression that can be used to reject updates based on evaluating existing data|None|keytable<>user|
+|data|object|None|True|The object data to update, as key/value pairs|None|{"e-mail": "user2@example.com", "user": "Username2"}|
+|key|object|None|True|The primary key and optionally the sort key of the object to update. Provided as a pair of key/values|None|{"keytable": "login"}|
+|table|string|None|True|The table name to store into|None|Table-name|
+
+Example input:
+
+```
+{
+  "condition_expression": "keytable<>user",
+  "data": {
+    "e-mail": "user2@example.com",
+    "user": "Username2"
+    },
+  "key": {
+  "keytable": "login"
+  },
+  "table": "Table-name"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |success|boolean|False|Success|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### Scan
 
@@ -84,18 +140,65 @@ It will return the list of objects found, and a count of the records.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|table|string|None|True|The table name to search|None|
-|params|object|None|False|The params to query with, as key/value pairs|None|
-|index|string|None|False|The index to use. If empty, defaults to a full Scan of the table|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|index|string|None|False|The index to use. If empty, defaults to a full Scan of the table|None|index-name|
+|params|object|None|False|The params to query with, as key/value pairs|None|{"email": "user@example.com"}|
+|table|string|None|True|The table name to search|None|Table-name|
+
+Example input:
+
+```
+{
+  "index": "index-name",
+  "params": {
+    "email": "user@example.com"
+    },
+  "table": "Table-name"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|count|int|False|Count|
-|records|array|False|Records|
+|Count|integer|True|Items count|
+|Items|[]object|True|Database items|
+|ResponseMetadata|ResponseMetadata|False|Response metadata|
+|ScannedCount|integer|False|Scanned count|
+
+Example output:
+
+```
+{
+  "response": {
+    "Items": [
+      {
+        "e-mail": "user@example.com",
+        "user": "Username",
+        "keytable": "login"
+      }
+    ],
+    "Count": 1,
+    "ScannedCount": 2,
+    "ResponseMetadata": {
+      "RequestId": "b42ec8b47deb2dc75edebd01132d63f8e8d4cd08e5d26d8bd366",
+      "HTTPStatusCode": 200,
+      "HTTPHeaders": {
+        "server": "Server",
+        "date": "Sun, 25 Jul 2021 20:46:19 GMT",
+        "content-type": "application/x-amz-json-1.0",
+        "content-length": "130",
+        "connection": "keep-alive",
+        "x-amzn-requestid": "b42ec8b47deb2dc75edebd01132d63f8e8d4cd08e5d26d8bd366",
+        "x-amz-crc32": "1592874513"
+      },
+      "RetryAttempts": 0
+    }
+  }
+}
+
+```
 
 ### Triggers
 
@@ -111,6 +214,7 @@ Any situation in which you provide a ConditionExpression and it causes the job t
 
 # Version History
 
+* 2.0.0 - Create custom output type for Scan action | Add example inputs and outputs
 * 1.0.3 - Correct spelling in help.md
 * 1.0.2 - New spec and help.md format for the Extension Library | Add missing title values for actions in plugin.spec.yaml
 * 1.0.1 - Set `params` input in Scan action to not required

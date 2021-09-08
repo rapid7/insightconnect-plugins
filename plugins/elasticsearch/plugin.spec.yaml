@@ -4,7 +4,7 @@ products: [insightconnect]
 name: elasticsearch
 title: Elasticsearch
 description: Distributed Real-Time Search and Analytics Engine
-version: 2.0.5
+version: 3.0.0
 vendor: rapid7
 support: community
 status: []
@@ -19,15 +19,15 @@ tags:
 - elastic
 hub_tags:
   use_cases: [data_utility, threat_detection_and_response]
-  keywords: [elasticsearch, es, search, elastic]
+  keywords: [elasticsearch, search, elastic]
   features: []
 connection:
   url:
     title: URL
     type: string
-    description: Host URL E.g. http://10.0.2.2:9200
+    description: Elasticsearch URL
     required: true
-    example: http://10.0.2.2:9200
+    example: https://www.example.com:9243
   credentials:
     type: credential_username_password
     title: Basic Auth Username and Password
@@ -37,11 +37,17 @@ connection:
   use_authentication:
     type: boolean
     title: Use Authentication
-    description: If the Elasticsearch host does not use authentication set this value
-      to false
+    description: If the Elasticsearch host does not use authentication set this value to false
     required: true
     default: true
     example: true
+  ssl_verify:
+    title: TLS/SSL Verify
+    description: The server's TLS/SSL certificate will be verified before a connection can be established
+    type: boolean
+    required: false
+    default: true
+    example: True
 types:
   _shards:
     total:
@@ -143,7 +149,7 @@ types:
       title: Hits
       description: Array of Hits
   health:
-    cluster_name:
+    name:
       type: string
       title: Cluster Name
     status:
@@ -202,19 +208,19 @@ actions:
     title: Index Document
     description: Create or replace a document by index
     input:
-      _index:
+      index:
         title: Index
         type: string
         description: Index to Insert Document Into
         required: true
         example: index001
-      _type:
+      type:
         title: Type
         type: string
         description: Type of Document to Index
         required: false
         example: _doc
-      _id:
+      id:
         title: ID
         type: string
         description: Optional ID of Indexed Document
@@ -232,7 +238,7 @@ actions:
         default: internal
         required: false
         example: internal
-      _version:
+      version:
         title: Version
         type: integer
         description: Optional Version Specification
@@ -273,19 +279,19 @@ actions:
     title: Update Document
     description: Update a document
     input:
-      _index:
+      index:
         title: Index
         type: string
         description: Index to Insert Document Into
         required: true
         example: index001
-      _type:
+      type:
         title: Type
         type: string
         description: Type of Document to Index
         required: false
         example: _doc
-      _id:
+      id:
         title: ID
         type: string
         description: Optional ID of Indexed Document
@@ -333,13 +339,13 @@ actions:
         default: 'false'
         required: false
         example: 'false'
-      _source:
+      source:
         title: Source
         type: string
         description: Control If and How Source is Returned
         required: false
         example: meta.*
-      _version:
+      version:
         title: Version
         type: integer
         description: Optional Version Specification
@@ -361,13 +367,13 @@ actions:
     title: Search Documents
     description: Execute a search query and get back search hits that match the query
     input:
-      _index:
+      index:
         title: Index
         type: string
         description: Document Index
         required: true
         example: shakespeare
-      _type:
+      type:
         title: Type
         type: string
         description: Document Type
@@ -396,7 +402,7 @@ actions:
         type: boolean
         description: Timed Out Flag
         required: false
-      _shards:
+      shards:
         title: Shards
         type: _shards
         description: Information About Replication Process
@@ -418,13 +424,13 @@ triggers:
         required: false
         default: 60
         example: 60
-      _index:
+      index:
         title: Index
         type: string
         description: Document Index
         required: true
         example: bank
-      _type:
+      type:
         title: Type
         type: string
         description: Document Type

@@ -14,8 +14,10 @@ class Input:
     
 
 class Output:
-    COUNT = "count"
-    RECORDS = "records"
+    COUNT = "Count"
+    ITEMS = "Items"
+    RESPONSEMETADATA = "ResponseMetadata"
+    SCANNEDCOUNT = "ScannedCount"
     
 
 class ScanInput(komand.Input):
@@ -59,17 +61,166 @@ class ScanOutput(komand.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "count": {
+    "Count": {
       "type": "integer",
       "title": "Count",
-      "description": "Count",
+      "description": "Items count",
       "order": 1
     },
-    "records": {
+    "Items": {
       "type": "array",
-      "title": "Records",
-      "description": "Records",
+      "title": "Items",
+      "description": "Database items",
+      "items": {
+        "type": "object"
+      },
       "order": 2
+    },
+    "ResponseMetadata": {
+      "$ref": "#/definitions/ResponseMetadata",
+      "title": "Response Metadata",
+      "description": "Response metadata",
+      "order": 3
+    },
+    "ScannedCount": {
+      "type": "integer",
+      "title": "Scanned Count",
+      "description": "Scanned count",
+      "order": 4
+    }
+  },
+  "required": [
+    "Count",
+    "Items"
+  ],
+  "definitions": {
+    "HTTPHeaders": {
+      "type": "object",
+      "title": "HTTPHeaders",
+      "properties": {
+        "connection": {
+          "type": "string",
+          "title": "Connection",
+          "description": "Connection",
+          "order": 1
+        },
+        "content-length": {
+          "type": "string",
+          "title": "Content-Length",
+          "description": "Content-length",
+          "order": 2
+        },
+        "content-type": {
+          "type": "string",
+          "title": "Content-Type",
+          "description": "Content-type",
+          "order": 3
+        },
+        "date": {
+          "type": "string",
+          "title": "Date",
+          "description": "Date",
+          "order": 4
+        },
+        "server": {
+          "type": "string",
+          "title": "Server",
+          "description": "Server",
+          "order": 5
+        },
+        "x-amz-crc32": {
+          "type": "string",
+          "title": "X-Amz-Crc32",
+          "description": "X-amz-crc32",
+          "order": 6
+        },
+        "x-amzn-requestid": {
+          "type": "string",
+          "title": "X-Amzn-RequestID",
+          "description": "X-amzn-requestID",
+          "order": 7
+        }
+      }
+    },
+    "ResponseMetadata": {
+      "type": "object",
+      "title": "ResponseMetadata",
+      "properties": {
+        "HTTPHeaders": {
+          "$ref": "#/definitions/HTTPHeaders",
+          "title": "HTTP Headers",
+          "description": "HTTP headers",
+          "order": 1
+        },
+        "HTTPStatusCode": {
+          "type": "integer",
+          "title": "HTTP Status Code",
+          "description": "HTTP status code",
+          "order": 2
+        },
+        "RequestId": {
+          "type": "string",
+          "title": "Request ID",
+          "description": "Request ID",
+          "order": 3
+        },
+        "RetryAttempts": {
+          "type": "integer",
+          "title": "Retry Attempts",
+          "description": "Retry attempts",
+          "order": 4
+        }
+      },
+      "definitions": {
+        "HTTPHeaders": {
+          "type": "object",
+          "title": "HTTPHeaders",
+          "properties": {
+            "connection": {
+              "type": "string",
+              "title": "Connection",
+              "description": "Connection",
+              "order": 1
+            },
+            "content-length": {
+              "type": "string",
+              "title": "Content-Length",
+              "description": "Content-length",
+              "order": 2
+            },
+            "content-type": {
+              "type": "string",
+              "title": "Content-Type",
+              "description": "Content-type",
+              "order": 3
+            },
+            "date": {
+              "type": "string",
+              "title": "Date",
+              "description": "Date",
+              "order": 4
+            },
+            "server": {
+              "type": "string",
+              "title": "Server",
+              "description": "Server",
+              "order": 5
+            },
+            "x-amz-crc32": {
+              "type": "string",
+              "title": "X-Amz-Crc32",
+              "description": "X-amz-crc32",
+              "order": 6
+            },
+            "x-amzn-requestid": {
+              "type": "string",
+              "title": "X-Amzn-RequestID",
+              "description": "X-amzn-requestID",
+              "order": 7
+            }
+          }
+        }
+      }
     }
   }
 }

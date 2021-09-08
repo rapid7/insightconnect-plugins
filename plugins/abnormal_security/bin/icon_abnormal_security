@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Abnormal Security"
 Vendor = "rapid7"
-Version = "1.0.0"
+Version = "1.2.0"
 Description = "Protect your Microsoft Office 365 and G-Suite environments with next-generation email security that uses the most advanced AI detection techniques to stop targeted phishing attacks"
 
 
@@ -34,9 +34,17 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
+            self.add_action(actions.GetCaseDetails())
+
+            self.add_action(actions.GetCases())
+
             self.add_action(actions.GetThreatDetails())
 
             self.add_action(actions.GetThreats())
+
+            self.add_action(actions.ManageCase())
+
+            self.add_action(actions.ManageThreat())
 
 
     """Run plugin"""

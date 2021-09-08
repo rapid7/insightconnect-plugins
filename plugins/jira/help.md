@@ -886,6 +886,63 @@ Example output:
 
 ### Triggers
 
+#### Monitor Issues
+
+This trigger watches for newly-created or updated issues.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|get_attachments|boolean|False|False|Get attachments from issue|None|True|
+|interval|integer|60|False|Interval between next poll in seconds, default is 60 seconds|None|60|
+|jql|string|None|False|JQL search string to use|None|reporter='Example User'|
+|projects|[]string|None|False|List of Project IDs or names|None|TEST|
+
+Example input:
+
+```
+{
+  "get_attachments": true,
+  "interval": 60,
+  "jql": "reporter='Example User'",
+  "projects": "TEST"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|issue|issue|False|New or updated issue|
+
+Example output:
+
+```
+{
+  'attachments': [
+    {
+      'filename': 'test',
+      'content': 'VGVzdA=='
+    }
+  ],
+  'id': '15466',
+  'key': 'TEST-1',
+  'url': 'https://example.atlassian.net/browse/TEST-1',
+  'summary': 'Test',
+  'description': 'Test',
+  'status': 'To Do',
+  'resolution': '',
+  'reporter': 'Example User',
+  'assignee': '',
+  'created_at': '2021-07-06T12:37:54.250-0400',
+  'updated_at': '2021-07-23T04:38:23.281-0400',
+  'resolved_at': '',
+  'labels': ["example_label"],
+  'fields': {}
+}
+```
+
 #### New Issue
 
 This trigger is used to trigger which indicates that a new issue has been created.
@@ -895,16 +952,16 @@ This trigger is used to trigger which indicates that a new issue has been create
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |get_attachments|boolean|False|False|Get attachments from issue|None|True|
-|jql|string|None|False|JQL search string to use|None|project = "TEST"|
+|jql|string|None|False|JQL search string to use|None|project = 'TEST'|
 |poll_timeout|integer|60|False|Timeout between next poll, default 60|None|60|
-|project|string|None|True|Project ID or name|None|TEST|
+|project|string|None|False|Project ID or name|None|TEST|
 
 Example input:
 
 ```
 {
   "get_attachments": true,
-  "jql": "project = \"TEST\"",
+  "jql": "project = 'TEST'",
   "poll_timeout": 60,
   "project": "TEST"
 }
@@ -1143,6 +1200,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 6.1.0 - Add Monitor Issues trigger | Update New Issue trigger to only trigger in case of recently created tickets | Change `required` property to false for `project` input in New Issue trigger | Fix issue in New Issue trigger to include all results that match JQL | Fix issue in New Issue trigger with retrieving attachments
 * 6.0.8 - Fix issue where exception type was wrong in Create Issue
 * 6.0.7 - Fix issue in Create Issue and Attach Issue actions where adding attachments failed
 * 6.0.6 - Fix build issue
