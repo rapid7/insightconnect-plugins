@@ -19,8 +19,8 @@ class CreateFileInFolder(komand.Action):
         )
 
     def run(self, params={}):
-        filename = params.get("file").get("filename")
-        file_bytes = params.get("file").get("content")
+        filename = params.get(Input.FILE).get("filename")
+        file_bytes = params.get(Input.FILE).get("content")
         file_metadata = {"name": filename, "parents": [params.get(Input.FOLDER_ID)]}
 
         mime_type = guess_type(filename)

@@ -25,7 +25,7 @@ class ConnectionSchema(komand.Input):
     "admin_user": {
       "type": "string",
       "title": "Admin User",
-      "description": "Admin user to impersonate, e.g. admin@domain.com",
+      "description": "Admin user to impersonate, e.g. user@example.com",
       "order": 1
     },
     "auth_provider_x509_cert_url": {

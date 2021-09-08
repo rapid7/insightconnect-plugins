@@ -26,30 +26,28 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|admin_user|string|None|True|Admin user to impersonate, e.g. admin@domain.com|None|admin@domain.com|
-|auth_provider_x509_cert_url|string|https://example.com|True|OAUTH2 Auth Provider x509 Cert URL|None|https://www.googleapis.com/oauth2/v1/certs|
-|auth_uri|string|https://example.com|True|OAUTH2 Auth URI|None|https://accounts.google.com/o/oauth2/auth|
-|client_email|string|None|True|Client email from service credentials|None|example@example-12345.iam.gserviceaccount.com|
+|admin_user|string|None|True|Admin user to impersonate, e.g. user@example.com|None|user@example.com|
+|auth_provider_x509_cert_url|string|https://www.googleapis.com/oauth2/v1/certs|True|OAUTH2 Auth Provider x509 Cert URL|None|https://www.googleapis.com/oauth2/v1/certs|
+|auth_uri|string|https://accounts.google.com/o/oauth2/auth|True|OAUTH2 Auth URI|None|https://accounts.google.com/o/oauth2/auth|
+|client_email|string|None|True|Client email from service credentials|None|user@example.com|
 |client_id|string|None|True|Client ID|None|102790495738030000000|
-|client_x509_cert_url|string|None|True|X509 cert URL from service credentials|None|https://www.googleapis.com/robot/v1/metadata/x509/user%40example-125985.iam.gserviceaccount.com|
-|private_key|credential_asymmetric_key|None|True|Private Key from service credentials|None|-----BEGIN RSA PRIVATE KEY-----
-MIIEpQIBAAKCAQEAjGnoUtfPHqvX3PIU6N9FKmwQ3Zl+NoaWb4yMLhudkdEBJ3Au...8/dqUH5yjRKs2qxkBWG4HmT3Nx6A8sYIrUYxyqVLBpG8yKngbnaYPV4=
------END RSA PRIVATE KEY-----|
+|client_x509_cert_url|string|None|True|X509 cert URL from service credentials|None|https://www.googleapis.com/robot/v1/metadata/x509/user@example.com|
+|private_key|credential_asymmetric_key|None|True|Private Key from service credentials|None|-----BEGIN RSA PRIVATE KEY-----MIIEpQIBAAKCAQEAjGnoUtfPHqvX3PIU6N9FKmwQ3Zl+NoaWb4yMLhudkdEBJ3Au...8/dqUH5yjRKs2qxkBWG4HmT3Nx6A8sYIrUYxyqVLBpG8yKngbnaYPV4=-----END RSA PRIVATE KEY-----|
 |private_key_id|string|None|True|Private Key ID from service credentials|None|02699626f388ed830012e5b787640e71c56d42d8|
 |project_id|string|None|True|Project ID from service credentials|None|example-12345|
-|token_uri|string|https://example.com|True|OAUTH2 Token URI|None|https://accounts.google.com/o/oauth2/token|
+|token_uri|string|https://accounts.google.com/o/oauth2/token|True|OAUTH2 Token URI|None|https://accounts.google.com/o/oauth2/token|
 
 
 Example input:
 
 ```
 {
-  "admin_user": "admin@domain.com",
+  "admin_user": "user@example.com",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "client_email": "example@example-12345.iam.gserviceaccount.com",
+  "client_email": "user@example.com",
   "client_id": 102790495738030000000,
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/user%40example-125985.iam.gserviceaccount.com",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/user@example.com",
   "private_key": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpQIBAAKCAQEAjGnoUtfPHqvX3PIU6N9FKmwQ3Zl+NoaWb4yMLhudkdEBJ3Au...8/dqUH5yjRKs2qxkBWG4HmT3Nx6A8sYIrUYxyqVLBpG8yKngbnaYPV4=\n-----END RSA PRIVATE KEY-----",
   "private_key_id": "02699626f388ed830012e5b787640e71c56d42d8",
   "project_id": "example-12345",
@@ -63,7 +61,7 @@ Example input:
 
 #### Move File
 
-This action is used to move the file to a different folder.
+This action is used to move a file to a different folder.
 
 ##### Input
 

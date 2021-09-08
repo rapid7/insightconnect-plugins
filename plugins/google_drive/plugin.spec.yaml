@@ -40,10 +40,10 @@ types:
 connection:
   admin_user:
     title: Admin User
-    description: Admin user to impersonate, e.g. admin@domain.com
+    description: Admin user to impersonate, e.g. user@example.com
     type: string
     required: true
-    example: admin@domain.com
+    example: user@example.com
   project_id:
     title: Project ID
     description: Project ID from service credentials
@@ -71,7 +71,7 @@ connection:
     description: Client email from service credentials
     type: string
     required: true
-    example: example@example-12345.iam.gserviceaccount.com
+    example: user@example.com
   client_id:
     title: Client ID
     description: Client ID
@@ -83,7 +83,7 @@ connection:
     description: X509 cert URL from service credentials
     type: string
     required: true
-    example: https://www.googleapis.com/robot/v1/metadata/x509/user%40example-125985.iam.gserviceaccount.com
+    example: https://www.googleapis.com/robot/v1/metadata/x509/user@example.com
   auth_uri:
     title: Auth URI
     description: OAUTH2 Auth URI
@@ -281,7 +281,7 @@ actions:
         required: true
   move_file:
     title: Move File
-    description: Move the file to a different folder
+    description: Move a file to a different folder
     input:
       folder_id:
         title: Folder ID
