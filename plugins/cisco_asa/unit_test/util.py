@@ -11,7 +11,7 @@ class Util:
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
         params = {
-            Input.URL: "https://rapid7.com",
+            Input.URL: "https://example.com",
             Input.CREDENTIALS: {"password": "password", "username": "user"},
             Input.PORT: 443,
             Input.SSL_VERIFY: True,
