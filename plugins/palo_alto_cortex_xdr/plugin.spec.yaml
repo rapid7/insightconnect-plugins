@@ -4,7 +4,7 @@ products: [insightconnect]
 name: palo_alto_cortex_xdr
 title: Palo Alto Cortex XDR
 description: Stop modern attacks with the industry's first extended detection and response platform that spans your endpoints, network and cloud data
-version: 2.0.0
+version: 2.1.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -1136,3 +1136,62 @@ triggers:
         type: alert
         required: false
 
+tasks:
+  monitor_incident_events:
+    title: Monitor Incident Events
+    description: Monitor incident events
+    input:
+      status:
+        title: Status
+        description: Status
+        type: string
+        enum:
+          - "any"
+          - "new"
+          - "under_investigation"
+          - "resolved_threat_handled"
+          - "resolved_known_issue"
+          - "resolved_false_positive"
+          - "resolved_other"
+          - "resolved_auto"
+        example: new
+        required: false
+      incident_id_list:
+        title: Incident ID List
+        description: Incident ID list
+        type: "[]string"
+        example: ["5"]
+        required: false
+      descriptions:
+        title: Descriptions
+        description: Descriptions
+        type: "[]string"
+        example: ["Behavioral threat detected (rule: heuristic.b.205)"]
+        required: false
+      time_sorting_field:
+        title: Time Sorting Field
+        description: Field to use to sort Incident events
+        type: string
+        enum:
+          - "modification_time"
+          - "creation_time"
+        example: modification_time
+        required: false
+    output:
+      events:
+        title: Incident Events
+        description: Incident events
+        type: "[]incident"
+        required: false
+    schedule:
+      title: Schedule for Retrieving Events
+      type: string
+      enum:
+        - "cron"
+        - "minutes"
+      default: minutes
+    state:
+      last_event_time:
+        title: Last Event Time
+        description: The datetime of the last retrieved incident event
+        type: string
