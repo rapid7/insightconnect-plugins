@@ -1156,21 +1156,6 @@ tasks:
           - "resolved_auto"
         example: new
         required: false
-      alert_source:
-        title: Alert Source
-        description: Alert source
-        type: string
-        enum:
-          - "any"
-          - "BIOC"
-          - "Analytics BIOC"
-          - "Correlation"
-          - "IOC"
-          - "XDR Agent"
-          - "Firewall"
-          - "Analytics"
-        example: XDR Agent
-        required: false
       incident_id_list:
         title: Incident ID List
         description: Incident ID list

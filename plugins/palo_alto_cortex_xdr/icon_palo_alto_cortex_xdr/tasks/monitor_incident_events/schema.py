@@ -8,7 +8,6 @@ class Component:
 
 
 class Input:
-    ALERT_SOURCE = "alert_source"
     DESCRIPTIONS = "descriptions"
     INCIDENT_ID_LIST = "incident_id_list"
     STATUS = "status"
@@ -29,22 +28,6 @@ class MonitorIncidentEventsInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "alert_source": {
-      "type": "string",
-      "title": "Alert Source",
-      "description": "Alert source",
-      "enum": [
-        "any",
-        "BIOC",
-        "Analytics BIOC",
-        "Correlation",
-        "IOC",
-        "XDR Agent",
-        "Firewall",
-        "Analytics"
-      ],
-      "order": 2
-    },
     "descriptions": {
       "type": "array",
       "title": "Descriptions",
@@ -52,7 +35,7 @@ class MonitorIncidentEventsInput(insightconnect_plugin_runtime.Input):
       "items": {
         "type": "string"
       },
-      "order": 4
+      "order": 3
     },
     "incident_id_list": {
       "type": "array",
@@ -61,7 +44,7 @@ class MonitorIncidentEventsInput(insightconnect_plugin_runtime.Input):
       "items": {
         "type": "string"
       },
-      "order": 3
+      "order": 2
     },
     "status": {
       "type": "string",
@@ -87,7 +70,7 @@ class MonitorIncidentEventsInput(insightconnect_plugin_runtime.Input):
         "modification_time",
         "creation_time"
       ],
-      "order": 5
+      "order": 4
     }
   }
 }

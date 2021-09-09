@@ -523,7 +523,6 @@ Supported schedule types for this task include:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|alert_source|string|None|False|Alert source|['any', 'BIOC', 'Analytics BIOC', 'Correlation', 'IOC', 'XDR Agent', 'Firewall', 'Analytics']|XDR Agent|
 |descriptions|[]string|None|False|Descriptions|None|["Behavioral threat detected (rule: heuristic.b.205)"]|
 |incident_id_list|[]string|None|False|Incident ID list|None|["5"]|
 |status|string|None|False|Status|['any', 'new', 'under_investigation', 'resolved_threat_handled', 'resolved_known_issue', 'resolved_false_positive', 'resolved_other', 'resolved_auto']|new|
@@ -533,7 +532,6 @@ Example input:
 
 ```
 {
-  "alert_source": "XDR Agent",
   "descriptions": "[\"Behavioral threat detected (rule: heuristic.b.205)\"]",
   "incident_id_list": "[\"5\"]",
   "status": "new",
