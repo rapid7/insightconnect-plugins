@@ -21,11 +21,16 @@ class QueryGroupMembership(komand.Action):
         include_groups = params.get(Input.INCLUDE_GROUPS)
         expand_nested_groups = params.get(Input.EXPAND_NESTED_GROUPS)
         try:
-            group_dn = (
-                self.search_data(base=base, filter_query=f"(sAMAccountName={params.get(Input.GROUP_NAME)})")
-                .get("entries")[0]
-                .get("dn")
+            group = self.search_data(base=base, filter_query=f"(sAMAccountName={params.get(Input.GROUP_NAME)})").get(
+                "entries"
             )
+            if group and isinstance(group, list):
+                group_dn = group[0].get("dn")
+            else:
+                raise PluginException(
+                    cause="The specified group was not found.",
+                    assistance="Please check that the provided group name and search base are correct and try again.",
+                )
             if include_groups and expand_nested_groups:
                 query = f"(memberOf:1.2.840.113556.1.4.1941:={group_dn})"
             elif include_groups:
