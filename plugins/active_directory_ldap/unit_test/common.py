@@ -16,6 +16,7 @@ from ldap3.core.connection import SyncStrategy
 class MockConnection:
     RESULT = "result"
     DESCRIPTION = "description"
+    SEARCH_RESULT = ""
 
     def __init__(self):
         self.result = {self.RESULT: RESULT_SUCCESS, self.DESCRIPTION: None}
@@ -53,7 +54,14 @@ class MockConnection:
     def response_to_json(self):
         if self.result[self.DESCRIPTION] == "empty_search":
             return json.dumps({"entries": []})
+        if MockConnection.SEARCH_RESULT == "empty_search":
+            return json.dumps({"entries": []})
+        if MockConnection.SEARCH_RESULT == "bad_response":
+            return json.dumps({"entries": "bad response"})
+        if MockConnection.SEARCH_RESULT == "no_response":
+            return json.dumps({"entries": None})
 
+        MockConnection.SEARCH_RESULT = ""
         return json.dumps({"entries": [{"dn": "DN=user"}]})
 
     def search(
@@ -81,6 +89,22 @@ class MockConnection:
         self.result[self.RESULT] = RESULT_SUCCESS
         self.result[self.DESCRIPTION] = "success"
         self.response = [{"dn": search_base, "attributes": {"userAccountControl": False}}]
+
+    class extend:
+        class standard:
+            @staticmethod
+            def paged_search(search_base, search_filter, attributes, paged_size, generator):
+                if "CN=empty_search,DC=example,DC=com" in search_base:
+                    MockConnection.SEARCH_RESULT = "empty_search"
+                    return
+                if "CN=bad_response,DC=example,DC=com" in search_base:
+                    MockConnection.SEARCH_RESULT = "bad_response"
+                    return
+                if "CN=no_response,DC=example,DC=com" in search_base:
+                    MockConnection.SEARCH_RESULT = "no_response"
+                    return
+
+                MockConnection.SEARCH_RESULT = RESULT_SUCCESS
 
 
 class MockServer:
