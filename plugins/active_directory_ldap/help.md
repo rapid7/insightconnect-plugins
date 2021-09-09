@@ -672,6 +672,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 5.3.1 - Improved error messaging in case the specified group was not found in the Query Group Membership action
 * 5.3.0 - Add Unlock User action
 * 5.2.2 - Add automatic pagination in Query Group Membership and Query actions
 * 5.2.1 - Add default prefix `ldap://` and `ldaps://` to provided host
