@@ -532,8 +532,12 @@ Example input:
 
 ```
 {
-  "descriptions": "[\"Behavioral threat detected (rule: heuristic.b.205)\"]",
-  "incident_id_list": "[\"5\"]",
+  "descriptions": [
+    "Behavioral threat detected (rule: heuristic.b.205)"
+  ],
+  "incident_id_list": [
+    "5"
+  ],
   "status": "new",
   "time_sorting_field": "modification_time"
 }

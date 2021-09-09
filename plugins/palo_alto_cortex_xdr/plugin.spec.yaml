@@ -1160,13 +1160,13 @@ tasks:
         title: Incident ID List
         description: Incident ID list
         type: "[]string"
-        example: "[\"5\"]"
+        example: ["5"]
         required: false
       descriptions:
         title: Descriptions
         description: Descriptions
         type: "[]string"
-        example: "[\"Behavioral threat detected (rule: heuristic.b.205)\"]"
+        example: ["Behavioral threat detected (rule: heuristic.b.205)"]
         required: false
       time_sorting_field:
         title: Time Sorting Field

@@ -33,13 +33,13 @@ class MonitorIncidentEvents(insightconnect_plugin_runtime.Task):
     @staticmethod
     def get_request_filters(status: str, descriptions: List[str], incident_ids: List[str]) -> List[Dict]:
         filters = []
-        if status is not None and len(status) > 0:
+        if status:
             filters.append({"field": "status", "operator": "eq", "value": status})
 
-        if descriptions is not None and len(descriptions) > 0:
+        if descriptions:
             filters.append({"field": "description", "operator": "in", "value": descriptions})
 
-        if incident_ids is not None and len(incident_ids) > 0:
+        if incident_ids:
             filters.append({"field": "incident_id_list", "operator": "in", "value": incident_ids})
 
         return filters
@@ -55,9 +55,9 @@ class MonitorIncidentEvents(insightconnect_plugin_runtime.Task):
 
     def run(self, params={}, state={}):
         # Get all input variables
-        status_filter_value = params.get(Input.STATUS, None)
-        descriptions_filter_value = params.get(Input.DESCRIPTIONS, None)
-        incident_id_list_filter_value = params.get(Input.INCIDENT_ID_LIST, None)
+        status_filter_value = params.get(Input.STATUS)
+        descriptions_filter_value = params.get(Input.DESCRIPTIONS)
+        incident_id_list_filter_value = params.get(Input.INCIDENT_ID_LIST)
         time_sorting_field = params.get(Input.TIME_SORTING_FIELD, DEFAULT_TIME_SORTING_FIELD)
 
         # Use the input provided to create the filters for our request
@@ -71,7 +71,7 @@ class MonitorIncidentEvents(insightconnect_plugin_runtime.Task):
 
         # Figure out the upper and lower time parameters
         now = Util.now_ms()
-        last_event_time = state.get(State.LAST_EVENT_TIME, None)
+        last_event_time = state.get(State.LAST_EVENT_TIME)
         if last_event_time is None:
             last_event_time = now - INITIAL_HISTORICAL_LOOK_BACK_MS
         last_event_time = int(last_event_time)
