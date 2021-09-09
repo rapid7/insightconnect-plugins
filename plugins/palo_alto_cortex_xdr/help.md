@@ -1,6 +1,6 @@
 # Description
 
-Stop modern attacks with the industry’s first extended detection and response platform that spans your endpoint, network and cloud data.
+Stop modern attacks with the industry’s first extended detection and response platform that spans your endpoint, network and cloud data. 
 
 # Key Features
 
