@@ -78,7 +78,9 @@ class SentineloneAPI:
                     output = requests.get(endpoint, headers=self.token_header)
 
                     if output.status_code == 200 and output.json().get("pagination", {}).get("totalItems", 0) >= 1:
-                        results.append(output.json().get("data", [])[0])
+                        agents_data = output.json().get("data", [])
+                        if agents_data:
+                            results.append(agents_data[0])
 
                 if results_length:
                     if len(results) >= results_length:
