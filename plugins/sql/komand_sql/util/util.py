@@ -32,7 +32,7 @@ def generate_results(conn_type, connection, query, parameters, logger):
 
     if rows.is_insert or operation == "Insert":
         connection.session.commit()
-        return {"status": "successfully inserted %d rows" % int(rows_affected)}
+        return {"status": f"successfully inserted {rows_affected} rows."}
 
     if not rows.returns_rows:
         connection.session.commit()
