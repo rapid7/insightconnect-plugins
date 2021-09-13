@@ -12,6 +12,10 @@ threats before they reach your inbox. This plugin enables users to parse TAP ale
 
 * Proofpoint TAP [service principal and secret](https://ptr-docs.proofpoint.com/ptr-guides/integrations-files/ptr-tap/#generate-tap-service-credentials) is required for all actions except Parse Alert
 
+# Supported Product Versions
+
+* v2
+
 # Documentation
 
 ## Setup
