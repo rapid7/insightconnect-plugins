@@ -16,7 +16,9 @@
 
 # Supported Product Versions
 
-* 6.0
+* Jira Server 6.0
+* Jira (Cloud)
+* Jira ServiceDesk (Cloud)
 
 # Documentation
 
