@@ -16,7 +16,7 @@
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* 6.0
 
 # Documentation
 
