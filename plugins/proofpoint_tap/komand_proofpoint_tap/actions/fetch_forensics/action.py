@@ -29,7 +29,7 @@ class FetchForensics(insightconnect_plugin_runtime.Action):
                 cause="Both Campaign ID and Threat ID were provided.",
                 assistance="Only one of the following two parameters can be used: Campaign ID or Threat ID.",
             )
-        elif not threat_id and not campaign_id:
+        if not threat_id and not campaign_id:
             raise PluginException(
                 cause="One of the following inputs must be provided.",
                 assistance="Please enter either Threat ID or Campaign ID.",
