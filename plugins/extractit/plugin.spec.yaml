@@ -4,10 +4,11 @@ products: ["insightconnect"]
 name: extractit
 title: ExtractIt
 description: The ExtractIt plugin has a collection of actions used to extract various information from text. These include URLs, domains, emails, IPs, and more
-version: 2.1.2
+version: 2.2.0
 vendor: rapid7
 support: rapid7
 status: []
+cloud_ready: true
 resources:
   vendor_url: https://www.rapid7.com
 tags:
@@ -17,8 +18,92 @@ tags:
 - SHA
 hub_tags:
   use_cases: [threat_detection_and_response, data_utility]
-  keywords: [extraction, domains, email, url, ip_address, ioc]
+  keywords: [extraction, domains, email, url, ip_address, ioc, cloud_enabled]
   features: []
+types:
+  hashes:
+    md5_hashes:
+      title: MD5 Hashes
+      description: Extracted MD5 Hashes from message
+      type: "[]string"
+      required: false
+    sha1_hashes:
+      title: SHA1 Hashes
+      description: Extracted SHA1 hashes from message
+      type: "[]string"
+      required: false
+    sha256_hashes:
+      title: SHA256 Hashes
+      description: Extracted SHA256 hashes from message
+      type: "[]string"
+      required: false
+    sha512_hashes:
+      title: SHA512 Hashes
+      description: Extracted SHA512 hashes from message
+      type: "[]string"
+      required: false
+  ip_addresses:
+    ipv4_addresses:
+      title: IPv4 Addressses
+      description: Extracted IPv4 addressses from message
+      type: "[]string"
+      required: false
+    ipv6_addresses:
+      title: IPv6 Addressses
+      description: Extracted IPv6 addresses from message
+      type: "[]string"
+      required: false
+  indicators:
+    domains:
+      title: Domains
+      description: Extracted domains from message
+      type: "[]string"
+      required: false
+    dates:
+      title: Dates
+      description: Extracted dates from message
+      type: "[]string"
+      required: false
+    filepaths:
+      title: Filepaths
+      description: Extracted filepaths from message
+      type: "[]string"
+      required: false
+    urls:
+      title: URLs
+      description: Extracted URLs from message
+      type: "[]string"
+      required: false
+    email_addresses:
+      title: Email Addresses
+      description: Extracted email addresses from message
+      type: "[]string"
+      required: false
+    hashes:
+      title: Hashes
+      description: Extracted hashes from message
+      type: hashes
+      required: false
+    ip_addresses:
+      title: IP Addressses
+      description: Extracted IP addresses from message
+      type: ip_addresses
+      required: false
+    mac_addresses:
+      title: MAC Addresses
+      description: Extracted MAC addresses from message
+      type: "[]string"
+      required: false
+    cves:
+      title: CVEs
+      description: Extracted CVEs from message
+      type: "[]string"
+      required: false
+    uuids:
+      title: UUIDs
+      description: Extracted UUIDs from message
+      type: "[]string"
+      required: false
 actions:
   url_extractor:
     title: URL Extractor
@@ -289,4 +374,70 @@ actions:
         title: SHA512 Hash
         description: List of extracted SHA512 Hashes
         type: '[]string'
+        required: false
+  cve_extractor:
+    title: CVE Extractor
+    description: Extracts all CVEs from a string or file
+    input:
+      str:
+        title: String
+        description: Input string
+        type: string
+        required: false
+        example: Test string of extract CVE-1234-1234567 2012/12/12
+      file:
+        title: File
+        description: Input file as bytes
+        type: bytes
+        required: false
+        example: dGVzdCBzdHJpbmcgb2YgZXh0cmFjdCBDVkUtMTIzNC0xMjM0NTY3IDIwMTIvMTIvMTI=
+    output:
+      cves:
+        title: CVEs
+        description: List of extracted CVEs
+        type: '[]string'
+        required: false
+  uuid_extractor:
+    title: UUID Extractor
+    description: Extracts all UUIDs from a string or file
+    input:
+      str:
+        title: String
+        description: Input string
+        type: string
+        required: false
+        example: Test string of extract 123e4567-e12b-34c3-a456-426789124000
+      file:
+        title: File
+        description: Input file as bytes
+        type: bytes
+        required: false
+        example: VGVzdCBzdHJpbmcgb2YgZXh0cmFjdCAxMjNlNDU2Ny1lMTJiLTM0YzMtYTQ1Ni00MjY3ODkxMjQwMDA=
+    output:
+      uuids:
+        title: UUIDs
+        description: List of extracted UUIDs
+        type: '[]string'
+        required: false
+  extract_all:
+    title: Extract All
+    description: Extracts all UUIDs, CVEs, dates, domains, emails, filepaths, IOCs, IPs, MACs, MD5 hashes, SHA1 hashes, SHA256 hashes, SHA 512 hashes and URLs from a string or file
+    input:
+      str:
+        title: String
+        description: Input string
+        type: string
+        required: false
+        example: test string of extract CVE-1234-1234567 12/12/2312 123e4567-e12b-34c3-a456-426789124000 user@example.com 3395856ce81f2b7382dee72602f798b642f14140 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f 198.51.100.0/24 1.1.1.1
+      file:
+        title: File
+        description: Input file as bytes
+        type: bytes
+        required: false
+        example: dGVzdCBzdHJpbmcgb2YgZXh0cmFjdCBDVkUtMTIzNC0xMjM0NTY3IDEyLzEyLzIzMTIgMTIzZTQ1NjctZTEyYi0zNGMzLWE0NTYtNDI2Nzg5MTI0MDAwIHVzZXJAZXhhbXBsZS5jb20gMzM5NTg1NmNlODFmMmI3MzgyZGVlNzI2MDJmNzk4YjY0MmYxNDE0MCAyNzVhMDIxYmJmYjY0ODllNTRkNDcxODk5ZjdkYjlkMTY2M2ZjNjk1ZWMyZmUyYTJjNDUzOGFhYmY2NTFmZDBmIDE5OC41MS4xMDAuMC8yNCAxLjEuMS4x
+    output:
+      indicators:
+        title: Indicators
+        description: List of extracted indicators
+        type: indicators
         required: false
