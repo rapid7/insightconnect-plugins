@@ -119,7 +119,10 @@ Example input:
 
 ```
 {
-  "urls": ["https://example.com", "https://example2.com"]
+  "urls": [
+    "https://example.com", 
+    "https://example2.com"
+  ]
 }
 ```
 
