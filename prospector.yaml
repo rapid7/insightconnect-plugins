@@ -9,6 +9,7 @@ pylint:
     - useless-object-inheritance
     - too-many-arguments
     - raise-missing-from
+    - no-else-return
 
 pyflakes:
   disable:
