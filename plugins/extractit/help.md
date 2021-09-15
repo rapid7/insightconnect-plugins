@@ -13,10 +13,17 @@ The ExtractIt plugin is a collection of data extraction actions. This plugin all
 * Extract IP addresses from a string or file for use in subsequent workflow actions
 * Extract MAC addresses from a string or file for use in subsequent workflow actions
 * Extract MD5, SHA1, SHA256, and SHA512 hashes from a string or file for use in subsequent workflow actions
+* Extract UUIDs from a string or file for use in subsequent workflow actions
+* Extract CVEs from a string or file for use in subsequent workflow actions
+* Extract all indicators from a string or file for use in subsequent workflow actions
 
 # Requirements
 
 _This plugin does not contain any requirements._
+
+# Supported Product Versions
+
+_There are no supported product versions listed._
 
 # Documentation
 
@@ -27,6 +34,150 @@ _This plugin does not contain a connection._
 ## Technical Details
 
 ### Actions
+
+#### Extract All
+
+This action extracts all UUIDs, CVEs, dates, domains, emails, filepaths, IOCs, IPs, MACs, MD5 hashes, SHA1 hashes, SHA256 hashes, SHA 512 hashes and URLs from a string or file.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|file|bytes|None|False|Input file as bytes|None|dGVzdCBzdHJpbmcgb2YgZXh0cmFjdCBDVkUtMTIzNC0xMjM0NTY3IDEyLzEyLzIzMTIgMTIzZTQ1NjctZTEyYi0zNGMzLWE0NTYtNDI2Nzg5MTI0MDAwIHVzZXJAZXhhbXBsZS5jb20gMzM5NTg1NmNlODFmMmI3MzgyZGVlNzI2MDJmNzk4YjY0MmYxNDE0MCAyNzVhMDIxYmJmYjY0ODllNTRkNDcxODk5ZjdkYjlkMTY2M2ZjNjk1ZWMyZmUyYTJjNDUzOGFhYmY2NTFmZDBmIDE5OC41MS4xMDAuMC8yNCAxLjEuMS4x|
+|str|string|None|False|Input string|None|test string of extract CVE-1234-1234567 12/12/2312 123e4567-e12b-34c3-a456-426789124000 user@example.com 3395856ce81f2b7382dee72602f798b642f14140 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f 198.51.100.0/24 1.1.1.1|
+
+Example input:
+
+```
+{
+  "file": "dGVzdCBzdHJpbmcgb2YgZXh0cmFjdCBDVkUtMTIzNC0xMjM0NTY3IDEyLzEyLzIzMTIgMTIzZTQ1NjctZTEyYi0zNGMzLWE0NTYtNDI2Nzg5MTI0MDAwIHVzZXJAZXhhbXBsZS5jb20gMzM5NTg1NmNlODFmMmI3MzgyZGVlNzI2MDJmNzk4YjY0MmYxNDE0MCAyNzVhMDIxYmJmYjY0ODllNTRkNDcxODk5ZjdkYjlkMTY2M2ZjNjk1ZWMyZmUyYTJjNDUzOGFhYmY2NTFmZDBmIDE5OC41MS4xMDAuMC8yNCAxLjEuMS4x",
+  "str": "test string of extract CVE-1234-1234567 12/12/2312 123e4567-e12b-34c3-a456-426789124000 user@example.com 3395856ce81f2b7382dee72602f798b642f14140 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f 198.51.100.0/24 1.1.1.1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|indicators|indicators|False|List of extracted indicators|
+
+Example output:
+
+```
+{
+  "indicators": {
+    "cves": [
+      "CVE-1234-1234567"
+    ],
+    "dates": [
+      "2312-12-12T00:00:00Z"
+    ],
+    "email_addresses": [
+      "user@example.com"
+    ],
+    "filepaths": [
+      "/24"
+    ],
+    "mac_addresses": [],
+    "hashes": {
+      "md5_hashes": [],
+      "sha1_hashes": [
+        "3395856ce81f2b7382dee72602f798b642f14140"
+      ],
+      "sha256_hashes": [
+        "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+      ],
+      "sha512_hashes": []
+    },
+    "ip_addresses": {
+      "ipv4_addresses": [
+        "198.51.100.0",
+        "1.1.1.1"
+      ],
+      "ipv6_addresses": []
+    },
+    "urls": [],
+    "uuids": [
+      "123e4567-e12b-34c3-a456-426789124000"
+    ],
+    "domains": [
+      "example.com"
+    ]
+  }
+}
+```
+
+#### UUID Extractor
+
+This action extracts all UUIDs from a string or file.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|file|bytes|None|False|Input file as bytes|None|VGVzdCBzdHJpbmcgb2YgZXh0cmFjdCAxMjNlNDU2Ny1lMTJiLTM0YzMtYTQ1Ni00MjY3ODkxMjQwMDA=|
+|str|string|None|False|Input string|None|Test string of extract 123e4567-e12b-34c3-a456-426789124000|
+
+Example input:
+
+```
+{
+  "file": "VGVzdCBzdHJpbmcgb2YgZXh0cmFjdCAxMjNlNDU2Ny1lMTJiLTM0YzMtYTQ1Ni00MjY3ODkxMjQwMDA=",
+  "str": "Test string of extract 123e4567-e12b-34c3-a456-426789124000"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|uuids|[]string|False|List of extracted UUIDs|
+
+Example output:
+
+```
+{
+  "uuids": [
+    "123e4567-e12b-34c3-a456-426789124000"
+  ]
+}
+```
+
+#### CVE Extractor
+
+This action extracts all CVEs from a string or file.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|file|bytes|None|False|Input file as bytes|None|dGVzdCBzdHJpbmcgb2YgZXh0cmFjdCBDVkUtMTIzNC0xMjM0NTY3IDIwMTIvMTIvMTI=|
+|str|string|None|False|Input string|None|Test string of extract CVE-1234-1234567 2012/12/12|
+
+Example input:
+
+```
+{
+  "file": "dGVzdCBzdHJpbmcgb2YgZXh0cmFjdCBDVkUtMTIzNC0xMjM0NTY3IDIwMTIvMTIvMTI=",
+  "str": "Test string of extract CVE-1234-1234567 2012/12/12"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|cves|[]string|False|List of extracted CVEs|
+
+Example output:
+
+```
+{
+  "cves": [
+    "CVE-1234-1234567"
+  ]
+}
+```
 
 #### Date Extractor
 
@@ -480,6 +631,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.0 - Add Extract All, UUID Extractor and CVE Extractor actions | Cloud enabled
 * 2.1.2 - Rollback URL matching regex used in HTML email extraction.
 * 2.1.1 - Rewrite plugin to use the Python SDK | Add input and output examples in plugin.spec and held.md | Fix issue in domain extractor where multiple domains were extracted from a single URL | Fix issue where the URL extractor does not extract URLs containing an email address | Fix issue where hash extractors would return part of SHA256 or SHA512 hashes as SHA1 hash and part of SHA512 hash as SHA256 hash | Update the MD5 regex to exclude spaces or other extra characters in the results | Fix issue where the file path extractor was extracting part of a URL or date as a file path | Add unit tests
 * 2.1.0 - Fix issue in domain extractor where a colon could crash the plugin | Update to support unicode domains in extract domain | Fix issue where extract domain output could have invalid characters. e.g. email address and email headers
