@@ -14,12 +14,13 @@ from tempfile import TemporaryFile
 from unittest.mock import MagicMock
 from unittest.mock import mock_open, patch
 
+
 class TestNewModules(TestCase):
     def test_integration_new_modules(self):
         log = logging.getLogger("Test")
         test_conn = Connection()
         test_trigger = NewModules()
-        data = 'linux/misc/saltstack_salt_unauth_rce'
+        data = "linux/misc/saltstack_salt_unauth_rce"
         m_open = mock_open(read_data=data)
         try:
             with open("../tests/new_modules.json") as file:
@@ -29,7 +30,7 @@ class TestNewModules(TestCase):
             message = "Missing json file"
             self.fail(message)
 
-        with patch('insightconnect_plugin_runtime.helper.open_cachefile', m_open):
+        with patch("insightconnect_plugin_runtime.helper.open_cachefile", m_open):
             test_conn.logger = log
             test_trigger.logger = log
             test_conn.connect(connection_params)

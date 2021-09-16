@@ -23,11 +23,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Connect: Connecting...")
         self.logger.info(params)
         password = params.get(Input.CREDENTIALS)["password"]
-        self.client = MsfRpcClient(password, username=params.get(Input.CREDENTIALS).get('username', 'msf'), **params)
+        self.client = MsfRpcClient(password, username=params.get(Input.CREDENTIALS).get("username", "msf"), **params)
         self.password = password
         self.params = params
         self.logger.info("Client connection established")
 
     def reconnect(self):
-        self.client = MsfRpcClient(self.password, username=self.params.get(Input.CREDENTIALS).
-                                   get('username', 'msf'), **self.params)
+        self.client = MsfRpcClient(
+            self.password, username=self.params.get(Input.CREDENTIALS).get("username", "msf"), **self.params
+        )
