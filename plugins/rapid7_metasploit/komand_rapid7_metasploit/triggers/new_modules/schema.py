@@ -134,7 +134,7 @@ class NewModulesOutput(insightconnect_plugin_runtime.Output):
           "order": 8
         },
         "rport": {
-          "type": "string",
+          "type": "integer",
           "title": "Remote Port",
           "description": "Remote Port",
           "order": 12

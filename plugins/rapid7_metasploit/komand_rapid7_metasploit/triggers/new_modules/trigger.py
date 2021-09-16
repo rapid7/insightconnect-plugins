@@ -41,8 +41,8 @@ class NewModules(insightconnect_plugin_runtime.Trigger):
                 with insightconnect_plugin_runtime.helper.open_cachefile(self.CACHE_FILE_NAME) as cache_file:
                     contents = cache_file.readlines()
                     contents = [x.strip() for x in contents]
-                    if module["full_name"] not in contents:
-                        cache_file.write(module["full_name"] + "\n")
+                    if module["fullname"] not in contents:
+                        cache_file.write(module["fullname"] + "\n")
                         self.send({"module": insightconnect_plugin_runtime.helper.clean(module)})
             time.sleep(params.get("interval", 60))
 
@@ -65,6 +65,6 @@ class NewModules(insightconnect_plugin_runtime.Trigger):
             with insightconnect_plugin_runtime.helper.open_cachefile(self.CACHE_FILE_NAME) as cache_file:
                 contents = cache_file.readlines()
                 contents = [x.strip() for x in contents]
-                if module["full_name"] not in contents:
-                    cache_file.write(module["full_name"] + "\n")
+                if module["fullname"] not in contents:
+                    cache_file.write(module["fullname"] + "\n")
         return {"success": "true"}

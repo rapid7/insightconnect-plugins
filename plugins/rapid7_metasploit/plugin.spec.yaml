@@ -168,7 +168,7 @@ types:
     rport:
       title: Remote Port
       description: Remote Port
-      type: string
+      type: integer
     path:
       title: Path
       description: Location of the Metasploit module

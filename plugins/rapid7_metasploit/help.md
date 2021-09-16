@@ -20,14 +20,18 @@ This plugin utilizes the Metasploit [RPC API](https://metasploit.help.rapid7.com
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|msf|False|Username|None|
-|ssl|boolean|True|False|Use SSL|None|
-|port|integer|55553|False|Port|None|
-|password|password|None|True|Password|None|
-|uri|string|/api/|False|The msfrpcd URI|None|
-|server|string|None|False|Remote Server IP|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|credentials|credential_username_password|None|True|Username and password|None|None|
+|port|integer|55553|False|Port|None|None|
+|server|string|None|False|Remote server IP|None|None|
+|ssl|boolean|True|False|Use SSL|None|None|
+|uri|string|/api/|False|The msfrpcd URI|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -39,15 +43,20 @@ This action is used to search for an exploit within Metasploit over an RPC sessi
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|search_term|string|None|True|Search term, e.g. 'vsftp'|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|search_term|string|None|True|Search term, e.g. 'vsftp'|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|exploits|[]string|False|A list of exploits found searching Metasploit|
+|search_results|search_results|False|Search results from Metasploit|
 
 Example output:
 
@@ -73,17 +82,22 @@ This action is used to run a selected Metasploit exploit.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|options|object|None|False|Metasploit module options|None|
-|module|string|None|False|A Metasploit module|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|module|string|None|True|A Metasploit module e.g exploit/multi/misc/java_rmi_server|None|None|
+|options|object|None|False|Metasploit module options e.g {"RHOST":"10.0.2.5", "RPORT":"1099", "LHOST":"10.0.2.15", "payload":"java/meterpreter/reverse_tcp"}|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|session_information|[]session_info|False|Session information provided when a module is executed|
 |console_output|[]string|False|Information from the console when a module is executed|
+|session_information|session_info|False|Session information provided when a module is executed|
 
 Example output:
 
@@ -133,7 +147,7 @@ This trigger is used to check for new Metasploit modules.
 
 ##### Input
 
-_This action does not contain any inputs._
+_This trigger does not contain any inputs._
 
 ##### Output
 
