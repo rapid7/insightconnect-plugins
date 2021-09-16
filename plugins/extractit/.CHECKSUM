@@ -1,8 +1,12 @@
 {
-	"spec": "900c1f082cf48352ca3286a53ffa3b15",
-	"manifest": "c01542403235092eaaeb7cb964bbc746",
-	"setup": "abcb7ebc3175a7c8ede1586b2f804af3",
+	"spec": "9fc236bb1c0949a4a155df3564145e3d",
+	"manifest": "fb043327f1499b061cff1999f12fa045",
+	"setup": "04c709f1a695d2728a41831f09feec51",
 	"schemas": [
+		{
+			"identifier": "cve_extractor/schema.py",
+			"hash": "7d4c1c9fd7565199c29a61e24705dcb9"
+		},
 		{
 			"identifier": "date_extractor/schema.py",
 			"hash": "65c9838e21f5530f106a55fd103d8feb"
@@ -14,6 +18,10 @@
 		{
 			"identifier": "email_extractor/schema.py",
 			"hash": "c0949929470e6e419eb230329acea225"
+		},
+		{
+			"identifier": "extract_all/schema.py",
+			"hash": "d8e44ad87d63863b903e88e5a0603a4c"
 		},
 		{
 			"identifier": "filepath_extractor/schema.py",
@@ -50,6 +58,10 @@
 		{
 			"identifier": "url_extractor/schema.py",
 			"hash": "7173ec92f5b8c678fe7f98c1e9c0acd5"
+		},
+		{
+			"identifier": "uuid_extractor/schema.py",
+			"hash": "b3250e6b98aed28a37067b6b68a4d31e"
 		},
 		{
 			"identifier": "connection/schema.py",
