@@ -1,7 +1,7 @@
 {
-	"spec": "d11249019776d28f7ac19ceb595ab700",
-	"manifest": "6c3b265433250bb5e1fe41f963bef414",
-	"setup": "b387b9bde71ac3cf896378493777e1f0",
+	"spec": "94a012dce3dbe3d18e71a3e6f59bfcce",
+	"manifest": "a5b5f251a2c5b6cbc83db3db2022d8b5",
+	"setup": "c876bdc35376c6287e582200ea7e2761",
 	"schemas": [
 		{
 			"identifier": "create_ci/schema.py",
@@ -18,6 +18,10 @@
 		{
 			"identifier": "delete_incident_attachment/schema.py",
 			"hash": "614ae35829ea144f03eba4fb11db2f80"
+		},
+		{
+			"identifier": "get_attachments_for_an_incident/schema.py",
+			"hash": "b7931b68a7bf9c09e61c2904b8add4e1"
 		},
 		{
 			"identifier": "get_ci/schema.py",

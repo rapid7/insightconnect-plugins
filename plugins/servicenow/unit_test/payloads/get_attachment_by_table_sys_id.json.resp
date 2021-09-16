@@ -1,0 +1,27 @@
+{
+  "result": [
+    {
+      "size_bytes": "38",
+      "file_name": "testtattatxt",
+      "sys_mod_count": "1",
+      "average_image_color": "",
+      "image_width": "",
+      "sys_updated_on": "2021-08-20 18:12:02",
+      "sys_tags": "",
+      "table_name": "incident",
+      "sys_id": "b259f4062d9f78f9ffdd6efd05c492c7",
+      "image_height": "",
+      "sys_updated_by": "system",
+      "download_link": "https://ven01226.service-now.com/api/now/attachment/b259f4062d9f78f9ffdd6efd05c492c7/file",
+      "content_type": "text/plain (.txt)",
+      "sys_created_on": "2021-08-20 18:12:00",
+      "size_compressed": "58",
+      "compressed": "true",
+      "state": "available",
+      "table_sys_id": "3072d01d07a552f6d0ea83ef29c936be",
+      "chunk_size_bytes": "700000",
+      "hash": "dae69319108237466d4f37e1f5211a0f3de270d55e1b8dbc9cafe29a17f23894",
+      "sys_created_by": "integrations"
+    }
+  ]
+}
