@@ -1,8 +1,5 @@
 import sys
 import os
-
-sys.path.append(os.path.abspath("../"))
-
 from unittest.mock import patch
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_proofpoint_tap.actions.fetch_forensics import FetchForensics
@@ -10,8 +7,10 @@ from komand_proofpoint_tap.actions.fetch_forensics.schema import Input, Output
 from unit_test.test_util import Util
 from unittest import TestCase
 
+sys.path.append(os.path.abspath("../"))
 
-class TestFetchForensinc(TestCase):
+
+class TestFetchForensics(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.action = Util.default_connector(FetchForensics())
@@ -125,3 +124,137 @@ class TestFetchForensinc(TestCase):
 
         self.assertEqual(error.exception.cause, "One of the following inputs must be provided.")
         self.assertEqual(error.exception.assistance, "Please enter either Threat ID or Campaign ID.")
+
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
+    def test_fetch_forensics_blacklisted_as_boolean(self, mock_request):
+        actual = self.action.run({Input.THREAT_ID: "blacklisted_as_boolean", Input.INCLUDE_CAMPAIGN_FORENSICS: False})
+
+        expected = {
+            "generated": "2021-06-27T19:58:04.283Z",
+            "reports": [
+                {
+                    "scope": "THREAT",
+                    "id": "blacklisted_as_boolean",
+                    "name": "www.testcase.com",
+                    "threatStatus": "active",
+                    "forensics": [
+                        {
+                            "display": "Attachment with SHA-256: 30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
+                            "engine": "av",
+                            "malicious": True,
+                            "note": "Attachment with SHA-256: 30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
+                            "platforms": [
+                                {
+                                    "name": "pps",
+                                    "os": "pps",
+                                }
+                            ],
+                            "type": "attachment",
+                            "what": {
+                                "blacklisted": True,
+                                "rule": "Av",
+                                "sha256": "30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
+                            },
+                        }
+                    ],
+                }
+            ],
+        }
+
+        self.assertEqual(actual, expected)
+
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
+    def test_fetch_forensics_blacklisted_as_integer(self, mock_request):
+        actual = self.action.run({Input.THREAT_ID: "blacklisted_as_integer", Input.INCLUDE_CAMPAIGN_FORENSICS: False})
+
+        expected = {
+            "generated": "2021-06-27T19:58:04.283Z",
+            "reports": [
+                {
+                    "scope": "THREAT",
+                    "id": "blacklisted_as_integer",
+                    "name": "www.testcase.com",
+                    "threatStatus": "active",
+                    "forensics": [
+                        {
+                            "display": "Attachment with SHA-256: 30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
+                            "engine": "av",
+                            "malicious": True,
+                            "note": "Attachment with SHA-256: 30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
+                            "platforms": [
+                                {
+                                    "name": "pps",
+                                    "os": "pps",
+                                }
+                            ],
+                            "type": "attachment",
+                            "what": {
+                                "blacklisted": True,
+                                "rule": "Av",
+                                "sha256": "30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
+                            },
+                        }
+                    ],
+                }
+            ],
+        }
+
+        self.assertEqual(actual, expected)
+
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
+    def test_fetch_forensics_blacklisted_as_boolean_and_integer(self, mock_request):
+        actual = self.action.run(
+            {Input.THREAT_ID: "blacklisted_as_boolean_and_integer", Input.INCLUDE_CAMPAIGN_FORENSICS: False}
+        )
+
+        expected = {
+            "generated": "2021-06-27T19:58:04.283Z",
+            "reports": [
+                {
+                    "scope": "THREAT",
+                    "id": "blacklisted_as_boolean_and_integer",
+                    "name": "www.testcase.com",
+                    "threatStatus": "active",
+                    "forensics": [
+                        {
+                            "display": "Attachment with SHA-256: 30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
+                            "engine": "av",
+                            "malicious": True,
+                            "note": "Attachment with SHA-256: 30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
+                            "platforms": [
+                                {
+                                    "name": "pps",
+                                    "os": "pps",
+                                }
+                            ],
+                            "type": "attachment",
+                            "what": {
+                                "blacklisted": True,
+                                "rule": "Av",
+                                "sha256": "30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
+                            },
+                        },
+                        {
+                            "display": "Attachment with SHA-256: 30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
+                            "engine": "av",
+                            "malicious": True,
+                            "note": "Attachment with SHA-256: 30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
+                            "platforms": [
+                                {
+                                    "name": "pps",
+                                    "os": "pps",
+                                }
+                            ],
+                            "type": "attachment",
+                            "what": {
+                                "blacklisted": True,
+                                "rule": "Av",
+                                "sha256": "30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
+                            },
+                        },
+                    ],
+                }
+            ],
+        }
+
+        self.assertEqual(actual, expected)

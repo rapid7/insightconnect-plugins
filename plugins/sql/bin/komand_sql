@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "SQL"
 Vendor = "rapid7"
-Version = "3.0.1"
+Version = "3.0.2"
 Description = "The SQL plugin allows you to run SQL queries"
 
 

@@ -3,6 +3,7 @@ from .create_ci.action import CreateCi
 from .create_incident.action import CreateIncident
 from .delete_incident.action import DeleteIncident
 from .delete_incident_attachment.action import DeleteIncidentAttachment
+from .get_attachments_for_an_incident.action import GetAttachmentsForAnIncident
 from .get_ci.action import GetCi
 from .get_incident_attachment.action import GetIncidentAttachment
 from .get_incident_comments_worknotes.action import GetIncidentCommentsWorknotes
