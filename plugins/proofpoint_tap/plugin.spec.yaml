@@ -5,7 +5,7 @@ name: proofpoint_tap
 title: Proofpoint TAP
 description: Parse Proofpoint Targeted Attack Protection (TAP) alerts
 version: 3.1.2
-supported_versions: ["Proofpoint TAP API v2", "Tested on 2021-8-30"]
+supported_versions: ["Proofpoint TAP API v2", "Tested on 2021-08-30"]
 vendor: rapid7
 support: community
 status: []

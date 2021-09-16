@@ -14,7 +14,8 @@ threats before they reach your inbox. This plugin enables users to parse TAP ale
 
 # Supported Product Versions
 
-* v2
+* Proofpoint TAP API v2
+* Tested on 2021-08-30
 
 # Documentation
 
