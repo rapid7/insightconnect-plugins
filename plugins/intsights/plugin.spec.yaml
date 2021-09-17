@@ -1,0 +1,131 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: intsights
+title: IntSights
+description: IntSights is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
+version: 1.0.0
+vendor: rapid7
+support: community
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/intsights
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://intsights.com/
+tags:
+- intsights
+- darkweb
+- threatintelligence
+hub_tags:
+  use_cases: [data_utility, threat_detection_and_response]
+  keywords: [elasticsearch, search, elastic]
+  features: []
+types:
+  source:
+    Name:
+      title: Name
+      type: string
+      required: true
+    ConfidenceLevel:
+      title: Confidence Level
+      type: integer
+      required: true
+connection:
+  account_id:
+    title: Account ID
+    description: Account id
+    type: credential_secret_key
+    required: true
+    example: '{"secret_key": "account_id"}'
+  api_key:
+    title: API Key
+    description: API key
+    type: credential_secret_key
+    required: true
+    example: '{"secret_key": "api_key"}'
+actions:
+  get_indicator_by_value:
+    title: Get Indicator by Value
+    description: This action will search indicators in Intsights TIP
+    input:
+      indicator_value:
+        title: Indicator Value
+        description: Indicator Value
+        type: string
+        required: true
+    output:
+      value:
+        title: Value
+        description: Value
+        type: string
+        required: true
+      type:
+        title: Type
+        description: Type
+        type: string
+        required: true
+      severity:
+        title: Severity
+        description: Severity
+        type: string
+        required: true
+      score:
+        title: Score
+        description: Score
+        type: integer
+        required: true
+      whitelist:
+        title: Whitelist
+        description: Whitelist
+        type: string
+        required: true
+      first_seen:
+        title: First Seen
+        description: First Seen
+        type: string
+        required: true
+      last_seen:
+        title: Last Seen
+        description: Last Seen
+        type: string
+        required: true
+      last_update:
+        title: Last Update
+        description: Last Update
+        type: string
+        required: true
+      geo_location:
+        title: GEO Location
+        description: GEO Location
+        type: string
+        required: true
+      sources:
+        title: Sources
+        description: Sources
+        type: '[]source'
+        required: true
+      tags:
+        title: Tags
+        description: Tags
+        type: '[]string'
+        required: true
+      system_tags:
+        title: System Tags
+        description: System Tags
+        type: '[]string'
+        required: true
+      related_malware:
+        title: Related Malware
+        description: Related Malware
+        type: '[]string'
+        required: true
+      related_campaigns:
+        title: Related Campaigns
+        description: Related Campaigns
+        type: '[]string'
+        required: true
+      related_threat_actors:
+        title: Related Threat Actors
+        description: Related Threat Actors
+        type: '[]string'
+        required: true
