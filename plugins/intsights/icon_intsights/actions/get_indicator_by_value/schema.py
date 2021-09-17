@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This action will search indicators in Intsights TIP"
+    DESCRIPTION = "Search indicators in IntSights TIP"
 
 
 class Input:
@@ -38,7 +38,7 @@ class GetIndicatorByValueInput(insightconnect_plugin_runtime.Input):
     "indicator_value": {
       "type": "string",
       "title": "Indicator Value",
-      "description": "Indicator Value",
+      "description": "Value of the indicator",
       "order": 1
     }
   },
@@ -192,6 +192,7 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
         "ConfidenceLevel": {
           "type": "integer",
           "title": "Confidence Level",
+          "description": "Level of confidence",
           "order": 2
         },
         "Name": {

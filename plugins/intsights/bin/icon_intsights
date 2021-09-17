@@ -34,7 +34,21 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
+            self.add_trigger(triggers.NewAlert())
+
+            self.add_action(actions.EnrichIndicator())
+
+            self.add_action(actions.GetAlerts())
+
+            self.add_action(actions.GetCompleteAlertById())
+
             self.add_action(actions.GetIndicatorByValue())
+
+            self.add_action(actions.GetIndicatorScanStatus())
+
+            self.add_action(actions.RescanIndicator())
+
+            self.add_action(actions.TakedownRequest())
 
 
     """Run plugin"""

@@ -5,8 +5,9 @@ name: intsights
 title: IntSights
 description: IntSights is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
 version: 1.0.0
+supported_versions: []
 vendor: rapid7
-support: community
+support: rapid7
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/intsights
@@ -18,41 +19,44 @@ tags:
 - threatintelligence
 hub_tags:
   use_cases: [data_utility, threat_detection_and_response]
-  keywords: [elasticsearch, search, elastic]
+  keywords: [threat_intelligence, phishing, remediation, block, malware_analysis]
   features: []
 types:
   source:
     Name:
       title: Name
+      descirption: Name
       type: string
       required: true
     ConfidenceLevel:
       title: Confidence Level
+      description: Level of confidence
       type: integer
       required: true
 connection:
   account_id:
     title: Account ID
-    description: Account id
+    description: Account ID for IntSights
     type: credential_secret_key
     required: true
-    example: '{"secret_key": "account_id"}'
+    example: 9de5069c5afe602b2ea0a04b
   api_key:
     title: API Key
-    description: API key
+    description: API key for IntSights
     type: credential_secret_key
     required: true
-    example: '{"secret_key": "api_key"}'
+    example: cc805d5fab1fd71a4ab352a9c533e65fb2d5b885518f4e565e68847223b8e6b85cb48f3afad842726d99239c9e36505c64b0dc9a061d9e507d833277ada336ab
 actions:
   get_indicator_by_value:
     title: Get Indicator by Value
-    description: This action will search indicators in Intsights TIP
+    description: Search indicators in IntSights TIP
     input:
       indicator_value:
         title: Indicator Value
-        description: Indicator Value
+        description: Value of the indicator
         type: string
         required: true
+        example: example.com
     output:
       value:
         title: Value
@@ -128,4 +132,331 @@ actions:
         title: Related Threat Actors
         description: Related Threat Actors
         type: '[]string'
+        required: true
+  enrich_indicator:
+    title: Enrich Indicator
+    description: Submit an indicator to IntSights for investigation and return the results
+    input:
+      indicator_value:
+        title: Indicator Value
+        description: Value of the indicator
+        type: string
+        required: true
+        example: example.com
+    output:
+      original_value:
+        title: Original Value
+        description: Original value
+        type: string
+        required: true
+      status:
+        title: Status
+        description: Status
+        type: string
+        required: true
+      data:
+        title: Data
+        description: Data
+        type: object
+        required: true
+  rescan_indicator:
+    title: Rescan Indicator
+    description: Force an indicator scan in Intsights TIP system
+    input:
+      indicator_value:
+        title: Indicator Value
+        description: IOC value in type file hash
+        type: string
+        required: true
+    output:
+      task_id:
+        title: Task ID
+        description: Task ID
+        type: string
+        required: true
+      status:
+        title: Status
+        description: Status
+        type: string
+        required: true
+  get_indicator_scan_status:
+    title: Get Indicator Scan Status
+    description: Get the scan status of an indicator in Insights TIP system
+    input:
+      task_id:
+        title: Task ID
+        description: A string representing the request ID
+        type: string
+        required: true
+    output:
+      task_id:
+        title: Task ID
+        description: Task ID
+        type: string
+        required: true
+      status:
+        title: Status
+        description: Status
+        type: string
+        required: true
+  get_alerts:
+    title: Get Alerts
+    description: Search Alerts based on criteria
+    input:
+      alert_type:
+        title: Alert Type
+        description: Comma separated list of alert types. Allowed values - AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip
+        type: string
+        required: false
+      severity:
+        title: Severity
+        description: Comma separated list of alerts severity. Allowed values - High, Medium, Low
+        type: string
+        required: false
+      source_type:
+        title: Source Type
+        description: Comma separated list of alerts source type. Allowed values - ApplicationStores, BlackMarkets, HackingForums, SocialMedia, PasteSites, Others
+        type: string
+        required: false
+      network_type:
+        title: Network Type
+        description: Comma separated list of network type. Allowed values - ClearWeb, DarkWeb
+        type: string
+        required: false
+      matched_asset_value:
+        title: Matched Asset Value
+        description: Comma separated list
+        type: string
+        required: false
+      remediation_status:
+        title: Remediation Status
+        description: Comma separated list of remediation status. Allowed values - InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed
+        type: string
+        required: false
+      source_date_from:
+        title: Source Date From
+        description: Start date to fetch from in Unix Millisecond Timestamp
+        type: number
+        required: false
+      source_date_to:
+        title: Source Date To
+        description: End date to fetch to in Unix Millisecond Timestamp
+        type: number
+        required: false
+      found_date_from:
+        title: Found Date From
+        description: Start date to fetch from in Unix Millisecond Timestamp
+        type: number
+        required: false
+        example: 0
+      found_date_to:
+        title: Found Date To
+        description: End date to fetch to in Unix Millisecond Timestamp
+        type: number
+        required: false
+      assigned:
+        title: Assigned
+        description: Show assigned/unAssigned alerts
+        type: boolean
+        required: false
+        example: true
+      is_flagged:
+        title: Is Flagged
+        description: Show flagged/unflagged alerts
+        type: boolean
+        required: false
+        example: true
+      is_closed:
+        title: Is Closed
+        description: Is closed/open alerts
+        type: boolean
+        required: false
+        example: false
+      has_indicators:
+        title: Has Indicators
+        description: Show alerts with IOCs results
+        type: boolean
+        required: false
+        example: false
+    output:
+      alert_ids:
+        title: Alert IDs
+        description: List of alert IDs
+        type: "[]string"
+        required: true
+  get_complete_alert_by_id:
+    title: Get Complete Alert by ID
+    description: Get an alert's complete details for a given alert ID
+    input:
+      alert_id:
+        title: Alert ID
+        description: Alert's unique ID
+        type: string
+        required: true
+    output:
+      id:
+        title: ID
+        description: Alert ID
+        type: string
+        required: true
+      assets:
+        title: Assets
+        description: List of assets
+        type: "[]string"
+        required: true
+      assignees:
+        title: Assignees
+        description: List of assignees
+        type: "[]string"
+        required: true
+      details:
+        title: Details
+        description: Alert Details
+        type: object
+        required: true
+      found_date:
+        title: Found Date
+        description: Alert found date
+        type: date
+        required: true
+      update_date:
+        title: Found Date
+        description: Alert update date
+        type: date
+        required: true
+      takedown_status:
+        title: Takedown Status
+        description: Alert remediation status
+        type: string
+        required: true
+      is_closed:
+        title: Is Closed
+        description: Is alert closed
+        type: boolean
+        required: true
+      is_flagged:
+        title: Is Flagged
+        description: Is alert flagged
+        type: boolean
+        required: true
+      leak_name:
+        title: Leak Name
+        description: Name of the leak DBs in data leakage alerts
+        type: string
+        required: false
+  takedown_request:
+    title: Takedown Request
+    description: Request a takedown for a given alert in Intsights
+    input:
+      alert_id:
+        title: Alert ID
+        description: Alert's unique ID
+        type: string
+        required: true
+      target:
+        title: Target
+        description: Target
+        type: string
+        required: true
+        enum:
+          - Website
+          - Domain
+        default: Domain
+        example: Domain
+    output:
+      response:
+        title: Response
+        description: Response from IntSights
+        type: object
+        required: true
+
+triggers:
+  new_alert:
+    title: New Alert
+    description: Run when a new alert that matches the given criteria is created in IntSights
+    inputs:
+      alert_type:
+        title: Alert Type
+        description: Coma separated list of alerts type. Allowed values - AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip
+        type: string
+        required: false
+        example: AttackIndication, DataLeakage
+      severity:
+        title: Severity
+        description: Coma separated list of severity. Allowed values - High, Medium, Low
+        type: string
+        required: false
+        example: High
+      source_type:
+        title: Source Type
+        description: Coma separated list of source type. Allowed values - ApplicationStores, BlackMarkets, HackingForums, SocialMedia, PasteSites, Others
+        type: string
+        required: false
+        example: ApplicationStores, BlackMarkets
+      network_type:
+        title: Network Type
+        description: Coma separated list of network type. Allowed values - ClearWeb, DarkWeb
+        type: string
+        required: false
+        example: ClearWeb
+      matched_asset_value:
+        title: Matched Asset Value
+        description: Coma separated list of network matched asset value
+        type: string
+        required: false
+      remediation_status:
+        title: Remediation Status
+        description: Coma separated list of alert's remediation status. Allowed values - InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed
+        type: string
+        required: false
+      source_date_from:
+        title: Source Date From
+        description: Start date to fetch from in Unix Millisecond Timestamp
+        type: number
+        required: false
+      end_date_to:
+        title: End Date To
+        description: End date to fetch to in Unix Millisecond Timestam
+        type: number
+        required: false
+      found_date_from:
+        title: Found Date From
+        description: Start date to fetch from in Unix Millisecond Timestamp
+        type: number
+        required: false
+        example: 0
+      found_date_to:
+        title: Found Date To
+        description: End date to fetch to in Unix Millisecond Timestamp
+        type: number
+        required: false
+      assigned:
+        title: Assigned
+        description: Show assigned/unAssigned alerts
+        type: boolean
+        required: false
+        example: true
+      is_flagged:
+        title: Is Flagged
+        description: Show flagged/unflagged alerts
+        type: boolean
+        required: false
+        example: true
+      is_closed:
+        title: Is Closed
+        description: Is closed/open alerts
+        type: boolean
+        required: false
+        example: false
+      has_indicators:
+        title: Has Indicators
+        description: Show alerts with IOCs results
+        type: boolean
+        required: false
+        example: false
+    output:
+      response:
+        title: Response
+        description: Response
+        type: "[]string"
         required: true
