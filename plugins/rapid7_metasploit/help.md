@@ -102,8 +102,7 @@ This action is used to run a selected Metasploit exploit.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |module|string|None|True|A Metasploit module|None|exploit/multi/misc/java_rmi_server|
-|options|object|None|False|Metasploit module options|None|{"RHOST":"https://example.com", "RPORT":"1099", "LHOST":"https://example.com", "payload":"java/meterpreter/reverse_tcp"}|
-
+|options|object|None|False|Metasploit module options|None|{"RHOST":"10.0.2.5", "RPORT":"1099", "LHOST":"10.0.2.15", "payload":"java/meterpreter/reverse_tcp"}|
 Example input:
 
 ```
