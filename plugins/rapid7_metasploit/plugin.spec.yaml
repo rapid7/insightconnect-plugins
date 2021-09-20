@@ -192,6 +192,7 @@ connection:
     title: Username and Password
     description: Username and password
     required: true
+    example: '{"username": example, "password": example}'
   uri:
     type: string
     title: URI

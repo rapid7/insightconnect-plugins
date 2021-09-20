@@ -26,7 +26,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Username and password|None|None|
+|credentials|credential_username_password|None|True|Username and password|None|{"username": example, "password": example}|
 |port|integer|55553|False|Port|None|55553|
 |server|string|None|False|Remote server IP|None|https://example.com|
 |ssl|boolean|True|False|Use SSL|None|True|
@@ -36,6 +36,10 @@ Example input:
 
 ```
 {
+  "credentials": {
+    "username": example, 
+    "password": example
+  }",
   "port": 55553,
   "server": "example.com",
   "ssl": true,
@@ -186,8 +190,8 @@ Example output:
     "mod_time": "2018-04-03 15:16:13 +0000",
     "is_client": false,
     "description": "This module exploits the trusted $PATH environment variable of the SUID binary \"ibstat\".",
-    "author": ["Kristian Erik Hermansen", "Sagi Shahar <blah@example.com>",
-    "Kostas Lintovois <kostas.lintovois@mwrinfosecurity.com>"],
+    "author": ["Example Name", "John Doe <user@example.com>",
+    "Example User <user@example.com>"],
     "arch": "cmd",
     "rank": 600,
     "is_server": true, "disclosure_date": "2013-09-24",
