@@ -1,11 +1,11 @@
 {
-	"spec": "2fd21f7719f13d37547cbc63d3a12b34",
+	"spec": "0eeca8583910fb955495b2313f8b1b85",
 	"manifest": "064b1676823d3f2c93bebfb9376bf4fe",
 	"setup": "2a49c5ed018226f6c14f2c48d2571800",
 	"schemas": [
 		{
 			"identifier": "execute_exploit/schema.py",
-			"hash": "14ab6a7367767e2c047538d9fe9abd25"
+			"hash": "14e847704d6ca76a1701fc33d2cb13f1"
 		},
 		{
 			"identifier": "search_for_exploit/schema.py",

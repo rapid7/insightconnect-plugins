@@ -25,7 +25,6 @@ ADD . /python/src
 # Install pip dependencies
 RUN pip install --upgrade pip
 RUN pip install -U setuptools
-RUN pip install pendulum==2.1.2
 RUN pip install -r requirements.txt
 
 # Install plugin

@@ -30,6 +30,7 @@ class TestNewModules(TestCase):
             message = "Missing json file"
             self.fail(message)
 
+        # This is not a common test- but due to needing the cache file this is the workaround currently used
         with patch("insightconnect_plugin_runtime.helper.open_cachefile", m_open):
             test_conn.logger = log
             test_trigger.logger = log

