@@ -1,5 +1,5 @@
 {
-	"spec": "0eeca8583910fb955495b2313f8b1b85",
+	"spec": "017e745a32254c2b49e6ec049e8744c3",
 	"manifest": "064b1676823d3f2c93bebfb9376bf4fe",
 	"setup": "2a49c5ed018226f6c14f2c48d2571800",
 	"schemas": [
@@ -22,10 +22,6 @@
 		{
 			"identifier": "insightconnect_plugin_runtime/schema.py",
 			"hash": "98e2cf8bf394d0b6f97cdfeb657ea71b"
-		},
-		{
-			"identifier": "marshmallow/schema.py",
-			"hash": "7c9fc22caa77ab8be9957e79867f426a"
 		}
 	]
 }
