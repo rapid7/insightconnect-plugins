@@ -23,7 +23,7 @@ class NewModules(insightconnect_plugin_runtime.Trigger):
         """Run the trigger"""
         # Open and auto-close the file to create the cache file on very first start up
         with insightconnect_plugin_runtime.helper.open_cachefile(self.CACHE_FILE_NAME) as cache_file:
-            self.logger.debug("Run: Got or created cache file: {file}".format(file=cache_file))
+            self.logger.debug(f"Run: Got or created cache file: {cache_file}")
 
         while True:
             metasploit_data = []
@@ -49,7 +49,7 @@ class NewModules(insightconnect_plugin_runtime.Trigger):
     def test(self):
         # Test and build cache file
         with insightconnect_plugin_runtime.helper.open_cachefile(self.CACHE_FILE_NAME) as cache_file:
-            self.logger.debug("Run: Got or created cache file: {file}".format(file=cache_file))
+            self.logger.debug(f"Run: Got or created cache file: {cache_file}")
         metasploit_data = []
         # Create update Metasploit JSON
         try:

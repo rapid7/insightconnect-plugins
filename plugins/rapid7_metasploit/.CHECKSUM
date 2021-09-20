@@ -1,7 +1,7 @@
 {
-	"spec": "d6e9bc06f49ba301ab521db618311936",
-	"manifest": "074cdf43561670fa348fc1221efc7470",
-	"setup": "d42b3ef826035ce8c27baeeb1f1d4966",
+	"spec": "2fd21f7719f13d37547cbc63d3a12b34",
+	"manifest": "064b1676823d3f2c93bebfb9376bf4fe",
+	"setup": "2a49c5ed018226f6c14f2c48d2571800",
 	"schemas": [
 		{
 			"identifier": "execute_exploit/schema.py",

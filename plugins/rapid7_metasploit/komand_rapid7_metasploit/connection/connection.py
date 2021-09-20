@@ -14,12 +14,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.params = None
 
     def connect(self, params):
-        try:
-            _create_unverified_https_context = ssl._create_unverified_context
-        except AttributeError as e:
-            self.logger.debug(e)
-        else:
-            ssl._create_default_https_context = _create_unverified_https_context
         self.logger.info("Connect: Connecting...")
         self.logger.info(params)
         password = params.get(Input.CREDENTIALS)["password"]
