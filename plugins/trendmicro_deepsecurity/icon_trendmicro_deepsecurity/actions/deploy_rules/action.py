@@ -41,8 +41,9 @@ class DeployRules(komand.Action):
         data = {"ruleIDs": self.rules}
 
         # Set rules
-        response = requests.post(url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl,
-                                 headers=self.connection.headers)
+        response = requests.post(
+            url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl, headers=self.connection.headers
+        )
 
         self.logger.info(f"url: {response.url}")
         self.logger.info(f"status: {response.status_code}")
