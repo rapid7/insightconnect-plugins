@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import GetIndicatorByValueInput, GetIndicatorByValueOutput, Input, Output, Component
 # Custom imports below
+from insightconnect_plugin_runtime.helper import clean
 
 
 class GetIndicatorByValue(insightconnect_plugin_runtime.Action):
@@ -14,12 +15,12 @@ class GetIndicatorByValue(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         response = self.connection.client.get_indicator_by_value(params.get(Input.INDICATOR_VALUE))
-        return {
+        return clean({
             Output.VALUE: response.get('Value'),
             Output.TYPE: response.get('Type'),
             Output.SEVERITY: response.get('Severity'),
             Output.SCORE: response.get('Score', 0),
-            Output.WHITELIST: response.get('Whitelist'),
+            Output.WHITELIST: response.get('Whitelist', False),
             Output.FIRST_SEEN: response.get('FirstSeen'),
             Output.LAST_SEEN: response.get('LastSeen'),
             Output.LAST_UPDATE: response.get('LastUpdate'),
@@ -30,4 +31,4 @@ class GetIndicatorByValue(insightconnect_plugin_runtime.Action):
             Output.RELATED_MALWARE: response.get('RelatedMalware', []),
             Output.RELATED_CAMPAIGNS: response.get('RelatedCampaigns', []),
             Output.RELATED_THREAT_ACTORS: response.get('RelatedThreatActors', []),
-        }
+        })

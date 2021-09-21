@@ -13,5 +13,9 @@ class EnrichIndicator(insightconnect_plugin_runtime.Action):
                 output=EnrichIndicatorOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+        response = self.connection.client.enrich_indicator(params.get(Input.INDICATOR_VALUE))
+        return {
+            Output.ORIGINAL_VALUE: response.get('OriginalValue'),
+            Output.STATUS: response.get('Status'),
+            Output.DATA: response.get('Data', {})
+        }

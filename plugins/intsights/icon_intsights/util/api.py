@@ -1,4 +1,6 @@
 import json
+import time
+
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 from requests.auth import HTTPBasicAuth
@@ -8,7 +10,7 @@ class IntSightAPI:
     def __init__(self, account_id, api_key):
         self.account_id = account_id
         self.api_key = api_key
-        self.url = 'https://api.intsights.com/public/v1'
+        self.url = 'https://api.intsights.com'
 
     def get_indicator_by_value(self, ioc_value: str) -> dict:
         response = self.make_request('GET', f'public/v2/iocs/ioc-by-value?iocValue={ioc_value}')
@@ -17,8 +19,17 @@ class IntSightAPI:
 
         return response.json()
 
+    def enrich_indicator(self, ioc_value: str) -> dict:
+        while True:
+            response = self.make_request('GET', f'public/v1/iocs/enrich/{ioc_value}').json()
+            if response.get('Status', 'InProgress') in ['Done', 'Failed']:
+                break
+            time.sleep(5)
+
+        return response
+
     def test_credentials(self) -> bool:
-        return self.make_request('HEAD', 'test-credentials').status_code == 200
+        return self.make_request('HEAD', 'public/v1/test-credentials').status_code == 200
 
     def make_request(self, method: str, path: str) -> requests.Response:
         try:

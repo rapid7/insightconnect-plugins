@@ -62,17 +62,17 @@ actions:
         title: Value
         description: Value
         type: string
-        required: true
+        required: false
       type:
         title: Type
         description: Type
         type: string
-        required: true
+        required: false
       severity:
         title: Severity
         description: Severity
         type: string
-        required: true
+        required: false
       score:
         title: Score
         description: Score
@@ -81,28 +81,28 @@ actions:
       whitelist:
         title: Whitelist
         description: Whitelist
-        type: string
+        type: boolean
         required: true
       first_seen:
         title: First Seen
         description: First Seen
         type: string
-        required: true
+        required: false
       last_seen:
         title: Last Seen
         description: Last Seen
         type: string
-        required: true
+        required: false
       last_update:
         title: Last Update
         description: Last Update
         type: string
-        required: true
+        required: false
       geo_location:
         title: GEO Location
         description: GEO Location
         type: string
-        required: true
+        required: false
       sources:
         title: Sources
         description: Sources

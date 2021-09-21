@@ -161,27 +161,20 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     },
     "whitelist": {
-      "type": "string",
+      "type": "boolean",
       "title": "Whitelist",
       "description": "Whitelist",
       "order": 5
     }
   },
   "required": [
-    "first_seen",
-    "geo_location",
-    "last_seen",
-    "last_update",
     "related_campaigns",
     "related_malware",
     "related_threat_actors",
     "score",
-    "severity",
     "sources",
     "system_tags",
     "tags",
-    "type",
-    "value",
     "whitelist"
   ],
   "definitions": {

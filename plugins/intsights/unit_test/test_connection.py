@@ -23,7 +23,7 @@ class TestConnection(TestCase):
             Input.ACCOUNT_ID: {'secretKey': 'account_id'}
         })
 
-        self.assertEqual("https://api.intsights.com/public/v1", action.connection.client.url)
+        self.assertEqual("https://api.intsights.com", action.connection.client.url)
         self.assertEqual("api_key", action.connection.client.api_key)
         self.assertEqual("account_id", action.connection.client.account_id)
 

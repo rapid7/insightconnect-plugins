@@ -42,20 +42,13 @@ class TestGetIndicatorByValue(TestCase):
     def test_get_indicator_by_value_should_success_when_empty(self, make_request):
         actual = self.action.run({Input.INDICATOR_VALUE: 'empty'})
         expected = {
-            'first_seen': None,
-            'geo_location': None,
-            'last_seen': None,
-            'last_update': None,
             'related_campaigns': [],
             'related_malware': [],
             'related_threat_actors': [],
             'score': 0,
-            'severity': None,
             'sources': [],
             'system_tags': [],
             'tags': [],
-            'type': None,
-            'value': None,
-            'whitelist': None
+            'whitelist': False
         }
         self.assertEqual(expected, actual)

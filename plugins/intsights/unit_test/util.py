@@ -6,6 +6,8 @@ from icon_intsights.connection.schema import Input
 
 
 class Util:
+    request_count = 0
+
     @staticmethod
     def default_connector(action, connect_params: object = None):
         default_connection = Connection()
@@ -43,10 +45,15 @@ class Util:
             return MockResponse(401)
         elif kwargs.get('url') == 'https://api.intsights.com/public/v1/test-credentials':
             return MockResponse(200)
-        elif kwargs.get(
-                'url') == 'https://api.intsights.com/public/v1/public/v2/iocs/ioc-by-value?iocValue=example.com':
+        elif kwargs.get('url') == 'https://api.intsights.com/public/v2/iocs/ioc-by-value?iocValue=example.com':
             return MockResponse(200, 'iocs_ioc-by-value')
-        elif kwargs.get('url') == 'https://api.intsights.com/public/v1/public/v2/iocs/ioc-by-value?iocValue=empty':
+        elif kwargs.get('url') == 'https://api.intsights.com/public/v1/iocs/enrich/example.com' \
+                and Util.request_count == 0:
+            Util.request_count = Util.request_count + 1
+            return MockResponse(200, 'enrich_indicator-in_progress')
+        elif kwargs.get('url') == 'https://api.intsights.com/public/v1/iocs/enrich/example.com':
+            return MockResponse(200, 'enrich_indicator')
+        elif kwargs.get('url') == 'https://api.intsights.com/public/v2/iocs/ioc-by-value?iocValue=empty':
             return MockResponse(204)
         else:
             raise NotImplementedError('Not implemented')
