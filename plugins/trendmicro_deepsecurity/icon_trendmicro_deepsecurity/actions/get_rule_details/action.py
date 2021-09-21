@@ -31,7 +31,6 @@ class GetRuleDetails(komand.Action):
         url = f"{self.connection.dsm_url}/api/intrusionpreventionrules/{self.id}"
 
         # Send request
-        response = self.connection.session.get(url, verify=self.connection.dsm_verify_ssl)
         response = requests.post(url, verify=self.connection.dsm_verify_ssl, headers=self.connection.headers)
 
         self.logger.info(f"url: {response.url}")

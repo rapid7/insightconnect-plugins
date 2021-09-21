@@ -4,6 +4,7 @@ from .schema import ConnectionSchema, Input
 # Custom imports below
 
 import requests
+import requests
 from icon_trendmicro_deepsecurity.util.shared import tryJSON
 from icon_trendmicro_deepsecurity.util.shared import checkResponse
 
@@ -20,13 +21,11 @@ class Connection(komand.Connection):
         self.dsm_api_key = params.get(Input.DSM_API_KEY).get("secretKey")
         self.dsm_verify_ssl = params.get(Input.DSM_VERIFY_SSL)
 
-        self.session = requests.session()
         self.headers = {
             "Content-type": "application/json",
             "api-secret-key": self.dsm_api_key,
             "api-version": "v1",
         }
-        self.session.headers.update(self.headers)
 
     def test(self):
         """
@@ -37,7 +36,7 @@ class Connection(komand.Connection):
         url = f"{self.dsm_url}/api/policies"
 
         # Get list of policies
-        response = self.session.get(url, verify=self.dsm_verify_ssl)
+        response = requests.get(url, verify=self.dsm_verify_ssl, headers=self.headers)
 
         # Try to convert the response data to JSON
         response_data = tryJSON(response)

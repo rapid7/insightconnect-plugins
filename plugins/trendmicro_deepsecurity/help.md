@@ -14,6 +14,9 @@
 
 ## Setup
 
+* [Create an API key for Deep Security](https://help.deepsecurity.trendmicro.com/api-key.html)
+* Create a new connection and enter the Deep Security Manager URL and API key
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
