@@ -21,13 +21,12 @@ class Connection(komand.Connection):
         self.dsm_verify_ssl = params.get(Input.DSM_VERIFY_SSL)
 
         self.session = requests.session()
-        self.session.headers.update(
-            {
-                "Content-type": "application/json",
-                "api-secret-key": self.dsm_api_key,
-                "api-version": "v1",
-            }
-        )
+        self.headers = {
+            "Content-type": "application/json",
+            "api-secret-key": self.dsm_api_key,
+            "api-version": "v1",
+        }
+        self.session.headers.update(self.headers)
 
     def test(self):
         """

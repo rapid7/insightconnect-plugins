@@ -5,6 +5,7 @@ from .schema import GetRuleDetailsInput, GetRuleDetailsOutput, Input, Output, Co
 
 from icon_trendmicro_deepsecurity.util.shared import tryJSON
 from icon_trendmicro_deepsecurity.util.shared import checkResponse
+import requests
 
 
 class GetRuleDetails(komand.Action):
@@ -31,6 +32,7 @@ class GetRuleDetails(komand.Action):
 
         # Send request
         response = self.connection.session.get(url, verify=self.connection.dsm_verify_ssl)
+        response = requests.post(url, verify=self.connection.dsm_verify_ssl, headers=self.connection.headers)
 
         self.logger.info(f"url: {response.url}")
         self.logger.info(f"status: {response.status_code}")

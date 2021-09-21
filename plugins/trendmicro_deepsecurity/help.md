@@ -14,15 +14,12 @@
 
 ## Setup
 
-* [Create an API key for Deep Security](https://help.deepsecurity.trendmicro.com/api-key.html)
-* Create a new connection and enter the Deep Security Manager URL and API key
-
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|dsm_api_key|credential_secret_key|None|True|API key of the Deep Security Manager|None|12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:12345678901234567890123456789012345678901234|
-|dsm_url|string|https://app.deepsecurity.trendmicro.com|True|URL of the Deep Security Manager|None|https://192.51.100.100:4119|
+|dsm_api_key|credential_secret_key|None|True|API key of the Deep Security Manager|None|12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:02699626f388ed830012e5b787640e71c56d42d81234|
+|dsm_url|string|https://app.deepsecurity.trendmicro.com|True|URL of the Deep Security Manager|None|https://example.com|
 |dsm_verify_ssl|boolean|True|True|Check the certificate of the Deep Security Manager|None|True|
 
 Example input:
@@ -349,6 +346,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.2 - Fixed memory leak that would use all orchestrator memory over time
 * 2.2.1 - Improve the search for IPS rules
 * 2.2.0 - Add new action Search Computers to receive a list and details of computers matching the search criteria
 * 2.1.0 - Add new actions Get Details and List to receive assigned IPS rules from computers and policies
