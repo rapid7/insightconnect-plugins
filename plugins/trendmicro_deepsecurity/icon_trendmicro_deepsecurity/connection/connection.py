@@ -4,7 +4,6 @@ from .schema import ConnectionSchema, Input
 # Custom imports below
 
 import requests
-import requests
 from icon_trendmicro_deepsecurity.util.shared import tryJSON
 from icon_trendmicro_deepsecurity.util.shared import checkResponse
 

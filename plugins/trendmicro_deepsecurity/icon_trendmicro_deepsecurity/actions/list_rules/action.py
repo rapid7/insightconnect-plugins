@@ -62,7 +62,7 @@ class ListRules(komand.Action):
                 else:
                     self.logger.info(f"{rule['ID']}:\t{rule['name']}")
         else:
-            self.logger.info(f"No rules found!")
+            self.logger.info("No rules found!")
 
         hits = len(response_data["intrusionPreventionRules"])
         self.logger.info(f"Found {hits} rules covering the following CVEs: \n" + ", ".join(covered_cves))

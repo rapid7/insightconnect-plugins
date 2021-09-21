@@ -94,7 +94,7 @@ class SearchComputers(komand.Action):
                 self.logger.info(f"{computer['ID']} - {computer['hostName']}")
                 computer_ids.add(computer["ID"])
         else:
-            self.logger.info(f"No computer found!")
+            self.logger.info("No computer found!")
 
         # Return matched rules
         return {Output.COMPUTER_IDS: list(computer_ids), Output.RESPONSE_JSON: response_data}
