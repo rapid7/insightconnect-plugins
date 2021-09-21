@@ -38,7 +38,8 @@ class SearchRules(komand.Action):
         url = f"{self.connection.dsm_url}/api/intrusionpreventionrules/search"
 
         # Search for IPS rules
-        response = self.connection.session.post(url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl)
+        response = requests.post(url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl,
+                                 headers=self.connection.headers)
 
         # Check response errors
         checkResponse(response)
