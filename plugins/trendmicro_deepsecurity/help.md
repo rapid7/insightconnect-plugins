@@ -50,7 +50,7 @@ This action is used to search computers.
 |field_name|string|hostName|False|Name of the field to be tested|None|hostName|
 |information|string|none|True|Determines the computer information to include in the response|['none', 'all', 'computerStatus', 'tasks', 'securityUpdates', 'computerSettings', 'allSecurityModules', 'antiMalware', 'webReputation', 'activityMonitoring', 'firewall', 'intrusionPrevention', 'integrityMonitoring', 'logInspection', 'applicationControl', 'SAP', 'interfaces', 'ESXSummary', 'allVirtualMachineSummaries', 'azureARMVirtualMachineSummary', 'azureVMVirtualMachineSummary', 'ec2VirtualMachineSummary', 'noConnectorVirtualMachineSummary', 'vmwareVMVirtualMachineSummary', 'vcloudVMVirtualMachineSummary', 'workspaceVirtualMachineSummary', 'gcpVirtualMachineSummary']|none|
 |max_items|integer|5000|True|Limits the number of objects returned|None|5000|
-|number_value|integer||False|Number to search for|None|42|
+|number_value|integer|0|False|Number to search for|None|42|
 |search_type|string|string|False|Select the search type|['string', 'integer']|string|
 |string_value|string||False|String to search for|None|MS-AD-SRV-%|
 

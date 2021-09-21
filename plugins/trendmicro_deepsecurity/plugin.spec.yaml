@@ -266,8 +266,8 @@ actions:
         description: Number to search for
         type: integer
         required: false
-        default: ""
-        example: "42"
+        default: 0
+        example: 42
     output:
       computer_ids:
         title: Computer IDs
