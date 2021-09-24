@@ -18,10 +18,6 @@
 		{
 			"identifier": "new_modules/schema.py",
 			"hash": "d94e45c87a094d2c07d1b6622176c6ae"
-		},
-		{
-			"identifier": "insightconnect_plugin_runtime/schema.py",
-			"hash": "98e2cf8bf394d0b6f97cdfeb657ea71b"
 		}
 	]
 }
