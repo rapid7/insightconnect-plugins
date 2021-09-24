@@ -50,7 +50,6 @@ class SearchRules(komand.Action):
 
         # Check if matching IPS rules were found
         if response_data["intrusionPreventionRules"]:
-            # hits = len(response_data["intrusionPreventionRules"])
             for rule in response_data["intrusionPreventionRules"]:
                 self.logger.info(f"{cve} -> {rule['ID']}: {rule['name']}")
                 ips_rules.add(rule["ID"])
@@ -92,7 +91,6 @@ class SearchRules(komand.Action):
 
             # Check if there are results
             if response_data["intrusionPreventionRules"]:
-                # hits = len(response_data["intrusionPreventionRules"])
                 ips_id = response_data["intrusionPreventionRules"][-1]["ID"]
             else:
                 break
