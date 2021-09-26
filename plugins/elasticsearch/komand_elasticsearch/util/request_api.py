@@ -3,6 +3,7 @@ import requests
 from logging import Logger
 from insightconnect_plugin_runtime.exceptions import PluginException
 from requests.auth import HTTPBasicAuth
+from insightconnect_plugin_runtime import helper
 
 
 class RequestAPI:
@@ -38,7 +39,10 @@ class RequestAPI:
             query = {"query": json_data, "version": "true"}
 
         return self._call_api(
-            method="GET", path=path, params={"routing": routing, "size": 5, "scroll": scroll_time}, json_data=query
+            method="GET",
+            path=path,
+            params=helper.clean({"routing": routing, "size": 5, "scroll": scroll_time}),
+            json_data=query,
         )
 
     def _get_scroll_page(self, scroll_id: str, scroll_time: str):
