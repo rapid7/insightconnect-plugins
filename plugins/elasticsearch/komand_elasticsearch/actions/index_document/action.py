@@ -37,7 +37,7 @@ class IndexDocument(insightconnect_plugin_runtime.Action):
             params=helper.clean(query_params),
             document=params.get(Input.DOCUMENT),
         )
-        
+
         if results:
             return {Output.INDEX_RESPONSE: helper.clean(results)}
 
