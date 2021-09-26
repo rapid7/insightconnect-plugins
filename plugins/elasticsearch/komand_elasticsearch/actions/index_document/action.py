@@ -16,10 +16,7 @@ class IndexDocument(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        index = params.get(Input.INDEX)
-        id_ = params.get(Input.ID)
         version = params.get(Input.VERSION)
-        document = params.get(Input.DOCUMENT)
         parent = params.get(Input.PARENT)
 
         query_params = {
@@ -34,8 +31,13 @@ class IndexDocument(insightconnect_plugin_runtime.Action):
             query_params["parent"] = str(parent)
 
         results = self.connection.client.index(
-            index=index, _id=id_, _type=params.get(Input.TYPE), params=helper.clean(query_params), document=document
+            index=params.get(Input.INDEX),
+            _id=params.get(Input.ID),
+            _type=params.get(Input.TYPE),
+            params=helper.clean(query_params),
+            document=params.get(Input.DOCUMENT),
         )
+        
         if results:
             return {Output.INDEX_RESPONSE: helper.clean(results)}
 
