@@ -14,6 +14,11 @@ This plugin utilizes the [Elasticsearch API](https://www.elastic.co/guide/en/ela
 * An Elasticsearch server
 * Elasticsearch credentials
 
+# Supported Product Versions
+
+* 7.8.1
+* 6.0.0
+
 # Documentation
 
 ## Setup
