@@ -1,6 +1,5 @@
 import base64
 import json
-from io import BytesIO
 from insightconnect_plugin_runtime.exceptions import PluginException
 from jira.resources import User
 
@@ -13,9 +12,9 @@ class JiraApi:
         self.session = jira_client._session
         self.base_url = jira_client._options["server"]
 
-    def delete_user(self, accountId):
-        url = self.jira_client._options["server"] + "/rest/api/latest/user/?accountId=%s" % accountId
-        r = self.jira_client._session.delete(url)
+    def delete_user(self, account_id):
+        url = f"{self.base_url}/rest/api/latest/user/?accountId={account_id}"
+        r = self.session.delete(url)
 
         if 200 <= r.status_code <= 299:
             return True
