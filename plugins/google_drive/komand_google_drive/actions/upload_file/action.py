@@ -1,26 +1,28 @@
-import komand
-from .schema import UploadFileInput, UploadFileOutput
+import insightconnect_plugin_runtime
+from .schema import UploadFileInput, UploadFileOutput, Input, Output, Component
 
 # Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
+from googleapiclient.errors import HttpError
 from io import BytesIO
 from base64 import b64decode
 from googleapiclient.http import MediaIoBaseUpload
 
 
-class UploadFile(komand.Action):
+class UploadFile(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="upload_file",
-            description="Upload a file to Google Drive",
+            description=Component.DESCRIPTION,
             input=UploadFileInput(),
             output=UploadFileOutput(),
         )
 
     def run(self, params={}):
-        filename = params.get("file").get("filename")
-        file_bytes = params.get("file").get("content")
-        file_type = params.get("google_file_type")
-        folder_id = params.get("folder_id")
+        filename = params.get(Input.FILE).get("filename")
+        file_bytes = params.get(Input.FILE).get("content")
+        file_type = params.get(Input.GOOGLE_FILE_TYPE)
+        folder_id = params.get(Input.FOLDER_ID)
 
         # Apply mime_type. Set mime_type to unknown by default. will allow for additions to this action later
         mime_type = "application/vnd.google-apps.unknown"
@@ -39,28 +41,27 @@ class UploadFile(komand.Action):
         else:
             file_metadata = {"name": filename, "mimeType": mime_type}
 
-        newfile = (
-            self.connection.service.files()
-            .create(
-                body=file_metadata,
-                media_body=media,
-                supportsTeamDrives=True,
-                fields="id",
+        try:
+            new_file = (
+                self.connection.service.files()
+                .create(
+                    body=file_metadata,
+                    media_body=media,
+                    supportsTeamDrives=True,
+                    fields="id",
+                )
+                .execute()
+                .get("id")
             )
-            .execute()
-            .get("id")
-        )
+        except HttpError as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=str(error))
 
         url = "https://docs.google.com"
         if file_type == "Docs":
-            url = url + "/document/d/" + newfile
+            url = f"{url}/document/d/{new_file}"
         if file_type == "Sheets":
-            url = url + "/spreadsheets/d/" + newfile
+            url = f"{url}/spreadsheets/d/{new_file}"
         if file_type == "Slides":
-            url = url + "/presentation/d/" + newfile
+            url = f"{url}/presentation/d/{new_file}"
 
-        return {"file_id": newfile, "file_link": url}
-
-    def test(self):
-        # TODO: Implement test function
-        return {}
+        return {Output.FILE_ID: new_file, Output.FILE_LINK: url}

@@ -1,15 +1,16 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CreateFileInFolderInput, CreateFileInFolderOutput, Input, Output, Component
 
 # Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
 from googleapiclient.http import MediaIoBaseUpload
 from mimetypes import guess_type
 from io import BytesIO
 from base64 import b64decode
-from googleapiclient import errors
+from googleapiclient.errors import HttpError
 
 
-class CreateFileInFolder(komand.Action):
+class CreateFileInFolder(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_file_in_folder",
@@ -35,5 +36,5 @@ class CreateFileInFolder(komand.Action):
         try:
             result = self.connection.service.files().create(body=file_metadata, media_body=media, fields="id").execute()
             return {Output.FILE_ID: result.get("id")}
-        except errors.HttpError as error:
-            raise Exception("An error occurred: %s" % error)
+        except HttpError as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=str(error))
