@@ -23,6 +23,7 @@ class JiraApi:
             return False
 
     def find_users(self, query, max_results=10):
+        # pylint: disable=protected-access
         return self.jira_client._fetch_pages(User, None, "user/search", 0, max_results, {"query": query})
 
     def add_attachment(self, issue, filename, file_bytes):
