@@ -5,6 +5,7 @@ from .schema import ListRulesInput, ListRulesOutput, Input, Output, Component
 
 from icon_trendmicro_deepsecurity.util.shared import tryJSON
 from icon_trendmicro_deepsecurity.util.shared import checkResponse
+import requests
 
 
 class ListRules(komand.Action):
@@ -39,7 +40,7 @@ class ListRules(komand.Action):
             url = f"{self.connection.dsm_url}/api/policies/{self.id}/intrusionprevention/rules"
 
         # Send request
-        response = self.connection.session.get(url, verify=self.connection.dsm_verify_ssl)
+        response = requests.get(url, verify=self.connection.dsm_verify_ssl, headers=self.connection.headers)
 
         self.logger.info(f"url: {response.url}")
         self.logger.info(f"status: {response.status_code}")
@@ -61,7 +62,7 @@ class ListRules(komand.Action):
                 else:
                     self.logger.info(f"{rule['ID']}:\t{rule['name']}")
         else:
-            self.logger.info(f"No rules found!")
+            self.logger.info("No rules found!")
 
         hits = len(response_data["intrusionPreventionRules"])
         self.logger.info(f"Found {hits} rules covering the following CVEs: \n" + ", ".join(covered_cves))

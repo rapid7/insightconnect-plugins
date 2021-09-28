@@ -4,6 +4,7 @@ from .schema import SearchComputersInput, SearchComputersOutput, Input, Output, 
 # Custom imports below
 
 import json
+import requests
 from komand.exceptions import PluginException
 from icon_trendmicro_deepsecurity.util.shared import tryJSON
 from icon_trendmicro_deepsecurity.util.shared import checkResponse
@@ -71,7 +72,9 @@ class SearchComputers(komand.Action):
             data = {"maxItems": self.max_items}
 
         # Send request
-        response = self.connection.session.post(url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl)
+        response = requests.post(
+            url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl, headers=self.connection.headers
+        )
 
         self.logger.info(f"url: {response.url}")
         self.logger.info(f"status: {response.status_code}")
@@ -91,7 +94,7 @@ class SearchComputers(komand.Action):
                 self.logger.info(f"{computer['ID']} - {computer['hostName']}")
                 computer_ids.add(computer["ID"])
         else:
-            self.logger.info(f"No computer found!")
+            self.logger.info("No computer found!")
 
         # Return matched rules
         return {Output.COMPUTER_IDS: list(computer_ids), Output.RESPONSE_JSON: response_data}
