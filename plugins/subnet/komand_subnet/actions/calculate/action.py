@@ -51,13 +51,11 @@ class Calculate(insightconnect_plugin_runtime.Action):
         # Error if an invalid mask is provided for the network class
         if int(subnet.subnet()) < bits:
             raise PluginException(
-                cause=f"Invalid mask for network class.",
+                cause="Invalid mask for network class.",
                 assistance="Please provide a valid mask for the network class.",
             )
 
-        hosts = int(subnet.size() - 2)
-        if hosts <= 0:
-            hosts = 0
+        hosts = max(int(subnet.size() - 2), 0)
         host_range = "" if not hosts else f"{str(subnet.host_first())} - {str(subnet.host_last())}"
         netmask = str(subnet.netmask())
         netmask_split = netmask.split(".", 4)
