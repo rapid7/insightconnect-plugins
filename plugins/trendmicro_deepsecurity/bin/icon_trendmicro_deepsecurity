@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Trend Micro Deep Security"
 Vendor = "rapid7"
-Version = "2.2.1"
+Version = "2.2.2"
 Description = "Utilize the Deep Security IPS engine to protect against vulnerabilities without installing a patch (virtual patching)"
 
 
