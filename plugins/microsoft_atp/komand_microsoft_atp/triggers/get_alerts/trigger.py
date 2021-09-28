@@ -23,7 +23,7 @@ class GetAlerts(insightconnect_plugin_runtime.Trigger):
         initial_results = self.connection.client.get_all_alerts(
             query_parameters="?$orderby=alertCreationTime+desc&$top=1"
         )
-        all_results = initial_results.json()
+        all_results = initial_results
 
         if len(all_results.get("value")):
             most_recent_result = all_results.get("value")[0]
