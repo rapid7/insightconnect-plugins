@@ -2,6 +2,7 @@ import json
 import requests
 from collections import OrderedDict
 from insightconnect_plugin_runtime.exceptions import PluginException
+from typing import Optional
 
 
 class CiscoAsaAPI:
@@ -77,32 +78,63 @@ class CiscoAsaAPI:
     def cli(self, commands: list) -> dict:
         return self._call_api("POST", "cli", json_data={"commands": commands})
 
+    def block_host(
+        self,
+        shun: str,
+        source_ip: str,
+        destination_ip: Optional[str],
+        source_port: Optional[int],
+        destination_port: Optional[int],
+        protocol: Optional[str],
+    ) -> bool:
+        if shun:
+            if not destination_ip:
+                destination_ip = "0.0.0.0"
+            if not source_port:
+                source_port = 0
+            if not destination_port:
+                destination_port = 0
+            if not protocol:
+                protocol = "0"
+            self.cli([f"shun {source_ip} {destination_ip} {source_port} {destination_port} {protocol}"])
+        else:
+            self.cli([f"no shun {source_ip}"])
+        return True
+
     def get_blocked_hosts(self) -> list:
         response = self.cli(["show shun"]).get("response", [])
         blocked_hosts = []
-        if response and isinstance(response, list):
-            hosts = response[0].split("\n")
-            for host in hosts:
-                if host != "":
-                    split_host = host.split(" ")
-                    if (
-                        len(split_host) == 7
-                        and split_host[2]
-                        and split_host[3]
-                        and split_host[4]
-                        and split_host[5]
-                        and split_host[6]
-                    ):
-                        blocked_hosts.append(
-                            {
-                                "source_ip": split_host[2],
-                                "dest_ip": split_host[3],
-                                "source_port": split_host[4],
-                                "dest_port": split_host[5],
-                                "protocol": split_host[6],
-                            }
-                        )
+
+        if not response or not isinstance(response, list):
+            return blocked_hosts
+
+        hosts = response[0].split("\n")
+        for host in hosts:
+            split_host = host.split(" ") if host != "" else []
+            if self._has_data_in_hosts(split_host):
+                blocked_hosts.append(
+                    {
+                        "source_ip": split_host[2],
+                        "dest_ip": split_host[3],
+                        "source_port": split_host[4],
+                        "dest_port": split_host[5],
+                        "protocol": split_host[6],
+                    }
+                )
         return blocked_hosts
+
+    @staticmethod
+    def _has_data_in_hosts(split_host: list) -> bool:
+        if (
+            len(split_host) == 7
+            and split_host[2]
+            and split_host[3]
+            and split_host[4]
+            and split_host[5]
+            and split_host[6]
+        ):
+            return True
+        return False
 
     def _call_api(self, method: str, path: str, json_data: dict = None, params: dict = None):
         response = {"text": ""}

@@ -259,4 +259,51 @@ actions:
         title: Hosts
         description: List of hosts blocked with shun command
         type: "[]hosts"
-        required: true 
+        required: true
+  block_host:
+    title: Block Host
+    description: Block hosts by IP address(IPv4) using the shun command
+    input:
+      shun:
+        title: Shun
+        description: True to block a host or false to unblock a host using the shun command
+        type: boolean
+        required: true
+        default: true
+        example: true
+      source_ip:
+        title: Source IP
+        description: Source IP address you want to block or unblock
+        type: string
+        required: true
+        example: 198.51.100.100
+      destination_ip:
+        title: Destination IP
+        description: Destination IP address
+        type: string
+        required: false
+        example: 198.51.100.100
+      source_port:
+        title: Source Port
+        description: Source port
+        type: integer
+        required: false
+        example: 443
+      destination_port:
+        title: Destination Port
+        description: Destination port
+        type: integer
+        required: false
+        example: 443
+      protocol:
+        title: Protocol
+        description: IP protocol, for example TCP or UDP
+        type: string
+        required: false
+        example: TCP
+    output:
+      success:
+        title: Success
+        description: Whether the block or unblock action was successful
+        type: boolean
+        required: true

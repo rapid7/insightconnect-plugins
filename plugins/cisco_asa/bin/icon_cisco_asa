@@ -36,6 +36,8 @@ def main():
             )
             self.add_action(actions.AddAddressToGroup())
 
+            self.add_action(actions.BlockHost())
+
             self.add_action(actions.CheckIfAddressObjectInGroup())
 
             self.add_action(actions.CreateAddressObject())

@@ -33,6 +33,10 @@ class Util:
             def __init__(self, filename, status_code):
                 self.filename = filename
                 self.status_code = status_code
+                if self.filename == "invalid_hostname":
+                    self.text = 'Response was: {"response": "Error: Invalid Hostname"}'
+                else:
+                    self.text = "Error message"
 
             def json(self):
                 return json.loads(
@@ -43,5 +47,23 @@ class Util:
 
         if kwargs.get("json") == {"commands": ["show shun"]}:
             return MockResponse("blocked_hosts", 200)
+        if kwargs.get("json") == {"commands": ["shun 1.1.1.1 0.0.0.0 0 0 0"]}:
+            return MockResponse("block_host", 200)
+        if kwargs.get("json") == {"commands": ["shun 2.2.2.2 3.3.3.3 333 444 tcp"]}:
+            return MockResponse("block_host2", 200)
+        if kwargs.get("json") == {"commands": ["shun 2.2.2.2 3.3.3.3 0 0 tcp"]}:
+            return MockResponse("block_host2", 200)
+        if kwargs.get("json") == {"commands": ["shun 2.2.2.2 0.0.0.0 333 444 tcp"]}:
+            return MockResponse("block_host2", 200)
+        if kwargs.get("json") == {"commands": ["shun 2.2.2.2 3.3.3.3 333 444 0"]}:
+            return MockResponse("block_host2", 200)
+        if kwargs.get("json") == {"commands": ["shun 1.1.1.1 999.999.999.999 333 444 tcp"]}:
+            return MockResponse("invalid_hostname", 400)
+        if kwargs.get("json") == {"commands": ["shun 999.999.999.999 2.2.2.2 333 444 tcp"]}:
+            return MockResponse("invalid_hostname", 400)
+        if kwargs.get("json") == {"commands": ["no shun 1.1.1.1"]}:
+            return MockResponse("unblock_host", 200)
+        if kwargs.get("json") == {"commands": ["no shun 999.999.999.999"]}:
+            return MockResponse("invalid_hostname", 400)
 
         raise Exception("Not implemented")

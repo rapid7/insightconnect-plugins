@@ -6,6 +6,8 @@
 
 * Determine if a host is blocked by checking if it's found in an address group applied to a firewall rule
 * Block and unblock hosts from the firewall through object management
+* Block and unblock hosts with the shun command
+* Check which hosts are blocked with the shun command
 
 # Requirements
 
@@ -55,6 +57,48 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Block Host
+
+This action is used to block hosts by IP address using the shun command.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|destination_ip|string|None|False|Destination IP address|None|198.51.100.100|
+|destination_port|integer|None|False|Destination port|None|443|
+|protocol|string|None|False|IP protocol, for example TCP or UDP|None|TCP|
+|shun|boolean|True|True|True to block a host or false to unblock a host using the shun command|None|True|
+|source_ip|string|None|True|Source IP address you want to block or unblock|None|198.51.100.100|
+|source_port|integer|None|False|Source port|None|443|
+
+Example input:
+
+```
+{
+  "destination_ip": "198.51.100.100",
+  "destination_port": 443,
+  "protocol": "TCP",
+  "shun": true,
+  "source_ip": "198.51.100.100",
+  "source_port": 443
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Whether the block or unblock action was successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### Get Blocked Hosts
 
@@ -315,7 +359,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.5.0 - Add new action Get Blocked Hosts
+* 1.5.0 - Add new actions Get Blocked Hosts and Block Host
 * 1.4.2 - Add `docs_url` in plugin spec | Update `source_url` in plugin spec
 * 1.4.1 - Fix None check in actions Add Address to Group and Create Address Object
 * 1.4.0 - Add new action Create Address Object
