@@ -1,7 +1,7 @@
 import requests
 import json
 from insightconnect_plugin_runtime.exceptions import PluginException
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+import base64
 
 
 class RequestHelper(object):
@@ -53,3 +53,22 @@ class RequestHelper(object):
             cause="Error in API request to ServiceNow. ",
             assistance=f"Status code: {response.status_code}, Error: {error}",
         )
+
+    @staticmethod
+    def get_attachment(connection, sys_id):
+        response = connection.request.make_request(f"{connection.attachment_url}/{sys_id}/file", "get")
+
+        resource = response.get("resource")
+        result = b""
+        if resource is not None:
+            if isinstance(resource, bytes):
+                result = resource
+            elif isinstance(resource, dict):
+                try:
+                    result = json.dumps(resource).encode("utf-8")
+                except TypeError:
+                    raise PluginException(PluginException.Preset.INVALID_JSON, data=resource)
+            else:
+                raise PluginException(PluginException.Preset.UNKNOWN, data=resource)
+
+        return str(base64.b64encode(result), "utf-8")
