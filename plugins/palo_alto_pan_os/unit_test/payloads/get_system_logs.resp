@@ -1,0 +1,49 @@
+<response status="success"><result>
+  <job>
+    <tenq>05:45:27</tenq>
+    <tdeq>05:45:27</tdeq>
+    <tlast>05:45:27</tlast>
+    <status>FIN</status>
+    <id>2</id>
+  </job>
+  <log>
+    <logs count="1" progress="100">
+      <entry logid="7044309865149247490">
+        <domain>1</domain>
+        <receive_time>2021/12/22 08:00:12</receive_time>
+        <serial>000000000000002</serial>
+        <seqno>8144908</seqno>
+        <actionflags>0x0</actionflags>
+        <is-logging-service>no</is-logging-service>
+        <type>SYSTEM</type>
+        <subtype>syslog</subtype>
+        <config_ver>0</config_ver>
+        <time_generated>2021/12/22 08:00:12</time_generated>
+        <dg_hier_level_1>0</dg_hier_level_1>
+        <dg_hier_level_2>0</dg_hier_level_2>
+        <dg_hier_level_3>0</dg_hier_level_3>
+        <dg_hier_level_4>0</dg_hier_level_4>
+        <device_name>TEST</device_name>
+        <vsys_id>0</vsys_id>
+        <eventid>syslog-conn-status</eventid>
+        <fmt>0</fmt>
+        <id>0</id>
+        <module>mgmt</module>
+        <severity>high</severity>
+        <opaque>Syslog connection failed to server['TEST']</opaque>
+      </entry>
+    </logs>
+  </log>
+  <meta>
+    <devices>
+      <entry name="localhost.localdomain">
+        <hostname>localhost.localdomain</hostname>
+        <vsys>
+          <entry name="vsys1">
+            <display-name>vsys1</display-name>
+          </entry>
+        </vsys>
+      </entry>
+    </devices>
+  </meta>
+</result></response>

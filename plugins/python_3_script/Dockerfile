@@ -13,7 +13,7 @@ ADD . /python/src
 WORKDIR /python/src
 # Add any package dependencies here
 RUN apt-get update && \
-	apt-get install --no-install-recommends --no-install-suggests -y libxslt-dev libxml2-dev gcc && \
+	apt-get install --no-install-recommends --no-install-suggests -y libxslt-dev libxml2-dev gcc g++ && \
 	apt-get clean -y
 
 ENV PYTHONUSERBASE=/var/cache/python_dependencies \

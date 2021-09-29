@@ -19,7 +19,15 @@ class TestGetAttachmentsForAnIncident(TestCase):
     def test_get_attachments_for_an_incident(self, mock_post):
         actual = self.action.run({Input.INCIDENT_ID: "3072d01d07a552f6d0ea83ef29c936be"})
 
-        expected = {"incident_attachments": ["ImNtRndhV1EzWVhSMFlXTm9iV1Z1ZEhSbGN6ZzNOalF6TWpKMCI="]}
+        expected = {
+            "incident_attachments": [
+                {
+                    "file_name": "testtattatxt",
+                    "content": "ImNtRndhV1EzWVhSMFlXTm9iV1Z1ZEhSbGN6ZzNOalF6TWpKMCI=",
+                    "content_type": "text/plain (.txt)",
+                }
+            ]
+        }
         self.assertEqual(actual, expected)
 
     @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
@@ -28,8 +36,16 @@ class TestGetAttachmentsForAnIncident(TestCase):
 
         expected = {
             "incident_attachments": [
-                "ImNtRndhV1EzWVhSMFlXTm9iV1Z1ZEhSbGN6ZzNOalF6TWpKMCI=",
-                "ImNtRndhV1EzWVhSMFlXTm9iV1Z1ZEhSbGN6ZzNOalF6TWpKMCI=",
+                {
+                    "file_name": "testtattatxt",
+                    "content": "ImNtRndhV1EzWVhSMFlXTm9iV1Z1ZEhSbGN6ZzNOalF6TWpKMCI=",
+                    "content_type": "text/plain (.txt)",
+                },
+                {
+                    "file_name": "testtattatxt",
+                    "content": "ImNtRndhV1EzWVhSMFlXTm9iV1Z1ZEhSbGN6ZzNOalF6TWpKMCI=",
+                    "content_type": "text/plain (.txt)",
+                },
             ]
         }
         self.assertEqual(actual, expected)

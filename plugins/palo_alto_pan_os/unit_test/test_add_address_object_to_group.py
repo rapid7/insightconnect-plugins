@@ -1,41 +1,97 @@
 import sys
 import os
+from unittest import TestCase
+from komand_palo_alto_pan_os.actions.add_address_object_to_group import AddAddressObjectToGroup
+from komand_palo_alto_pan_os.actions.add_address_object_to_group.schema import Input, Output
+from unit_test.util import Util
+from unittest.mock import patch
+from parameterized import parameterized
+from komand.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-from komand_palo_alto_pan_os.connection.connection import Connection
-from komand_palo_alto_pan_os.actions.add_address_object_to_group import AddAddressObjectToGroup
-import json
-import logging
 
-
+@patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
+@patch("requests.sessions.Session.post", side_effect=Util.mocked_requests)
 class TestAddAddressObjectToGroup(TestCase):
-    def test_integration_add_address_object_to_group(self):
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = AddAddressObjectToGroup()
+    @parameterized.expand(
+        [
+            [
+                "single_object",
+                ["example.com"],
+                "Test Group",
+                "localhost.localdomain",
+                "vsys1",
+                {"success": True, "address_objects": ["1.1.1.1", "test.com", "IPv6", "example.com"]},
+            ],
+            [
+                "several_objects",
+                ["example.com", "2.2.2.2", "New IPv6 Address"],
+                "Test Group",
+                "localhost.localdomain",
+                "vsys1",
+                {
+                    "success": True,
+                    "address_objects": ["1.1.1.1", "test.com", "IPv6", "example.com", "2.2.2.2", "New IPv6 Address"],
+                },
+            ],
+            [
+                "empty_list",
+                [],
+                "Test Group",
+                "localhost.localdomain",
+                "vsys1",
+                {"success": True, "address_objects": ["1.1.1.1", "test.com", "IPv6"]},
+            ],
+            [
+                "already_added",
+                ["test.com"],
+                "Test Group",
+                "localhost.localdomain",
+                "vsys1",
+                {"success": True, "address_objects": ["1.1.1.1", "test.com", "IPv6"]},
+            ],
+        ]
+    )
+    def test_add_address_object_to_group(
+        self, mock_get, mock_post, name, address_object, group, device_name, virtual_system, expected
+    ):
+        action = Util.default_connector(AddAddressObjectToGroup())
+        actual = action.run(
+            {
+                Input.ADDRESS_OBJECT: address_object,
+                Input.GROUP: group,
+                Input.DEVICE_NAME: device_name,
+                Input.VIRTUAL_SYSTEM: virtual_system,
+            }
+        )
+        self.assertEqual(actual, expected)
 
-        test_conn.logger = log
-        test_action.logger = log
-
-        try:
-            with open("../tests/add_address_object_to_group.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        self.assertTrue(results.get("success"))
-        self.assertTrue(len(results.get("address_objects")) > 0)
+    @parameterized.expand(
+        [
+            [
+                "invalid_group",
+                ["example.com"],
+                "Invalid Group",
+                "localhost.localdomain",
+                "vsys1",
+                "PAN OS returned an unexpected response.",
+                "Could not find group 'Invalid Group', or group was empty. Check the name, virtual system name, and device name.\nDevice name: localhost.localdomain\nVirtual system: vsys1\n",
+            ],
+        ]
+    )
+    def test_add_address_object_to_group_bad(
+        self, mock_get, mock_post, name, address_object, group, device_name, virtual_system, cause, assistance
+    ):
+        action = Util.default_connector(AddAddressObjectToGroup())
+        with self.assertRaises(PluginException) as e:
+            action.run(
+                {
+                    Input.ADDRESS_OBJECT: address_object,
+                    Input.GROUP: group,
+                    Input.DEVICE_NAME: device_name,
+                    Input.VIRTUAL_SYSTEM: virtual_system,
+                }
+            )
+        self.assertEqual(e.exception.cause, cause)
+        self.assertEqual(e.exception.assistance, assistance)

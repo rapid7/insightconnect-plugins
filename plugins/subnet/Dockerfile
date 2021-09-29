@@ -1,4 +1,4 @@
-FROM komand/python-pypy3-plugin:2
+FROM rapid7/insightconnect-python-3-38-slim-plugin:4
 LABEL organization=komand
 LABEL sdk=python
 LABEL type=plugin
@@ -16,5 +16,7 @@ WORKDIR /python/src
 # End package dependencies
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 RUN python setup.py build && python setup.py install
+
+USER nobody
 
 ENTRYPOINT ["/usr/local/bin/komand_subnet"]

@@ -11,6 +11,10 @@
 
 * API Key from the product
 
+# Supported Product Versions
+
+* 2021-11-30T18:50:40Z
+
 # Documentation
 
 ## Setup
@@ -25,7 +29,7 @@ Example input:
 
 ```
 {
-  "api_key": {
+  "cred_token": {
     "secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"
   }
 }
@@ -46,13 +50,13 @@ It accepts a user to query and host (IP or domain) to perform the query.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|host|string|None|True|Host to Lookup|None|rapid7.com|
+|host|string|None|True|Host to Lookup|None|example.com|
 
 Example input:
 
 ```
 {
-  "host": "rapid7.com"
+  "host": "example.com"
 }
 ```
 
@@ -66,11 +70,10 @@ Example input:
 |country_name|string|False|Country name|
 |latitude|string|False|Latitude|
 |longitude|string|False|Longitude|
-|metro_code|integer|False|Metro code|
 |region_code|string|False|Region code|
 |region_name|string|False|Region name|
-|time_zone|string|False|Time zone|
-|zip_code|string|False|ZIP code|
+|time_zone|time_zone|False|Time zone information at IP location|
+|zip_code|string|False|ZIP code for current IP lookup|
 
 Example output:
 
@@ -106,6 +109,7 @@ A valid domain or IP address must be provided.
 
 # Version History
 
+* 3.0.0 - Updated time_zone field type to match current API version
 * 2.0.0 - Add example inputs | Updated Docker version | Connection input updated to secretKey
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Support web server mode

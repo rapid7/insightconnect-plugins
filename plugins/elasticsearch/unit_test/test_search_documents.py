@@ -37,6 +37,26 @@ class TestSearchDocuments(TestCase):
         },
     }
 
+    expected_with_route = {
+        Output.TOOK: 2,
+        Output.TIMED_OUT: False,
+        Output.SHARDS: {"total": 1, "successful": 1, "skipped": 0, "failed": 0},
+        Output.HITS: {
+            "total": {"value": 2},
+            "max_score": 1.0,
+            "hits": [
+                {
+                    "_index": "test-index",
+                    "_type": "_doc",
+                    "_id": "VWx5O3oBrBTgS4Hhf6Hp",
+                    "_score": 1.0,
+                    "_routing": "test-route",
+                    "_source": {"id": 1, "message": "Some message"},
+                },
+            ],
+        },
+    }
+
     @classmethod
     @patch("requests.request", side_effect=Util.mocked_requests_get)
     def setUpClass(cls, mock_request) -> None:
@@ -44,21 +64,31 @@ class TestSearchDocuments(TestCase):
 
     @patch("requests.request", side_effect=Util.mocked_requests_get)
     def test_search_documents(self, mock_request):
-        actual = self.action.run(
-            {Input.INDEX: "search", Input.QUERY: {"query": {"match_all": {}}}, Input.ROUTING: None}
-        )
+        actual = self.action.run({Input.INDEX: "search", Input.QUERY: {"match_all": {}}, Input.ROUTING: None})
         self.assertEqual(actual, self.expected)
 
     @patch("requests.request", side_effect=Util.mocked_requests_get)
-    def test_search_documents_without_route(self, mock_request):
+    def test_search_documents_with_route(self, mock_request):
         actual = self.action.run(
-            {Input.INDEX: "search-without-route", Input.QUERY: {"query": {"match_all": {}}}, Input.ROUTING: None}
+            {Input.INDEX: "search-with-route", Input.QUERY: {"match_all": {}}, Input.ROUTING: "test-route"}
+        )
+        self.assertEqual(actual, self.expected_with_route)
+
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
+    def test_search_documents_without_route(self, mock_request):
+        actual = self.action.run({Input.INDEX: "search-without-route", Input.QUERY: {"match_all": {}}})
+        self.assertEqual(actual, self.expected)
+
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
+    def test_search_documents_with_route_none(self, mock_request):
+        actual = self.action.run(
+            {Input.INDEX: "search-without-route", Input.QUERY: {"match_all": {}}, Input.ROUTING: None}
         )
         self.assertEqual(actual, self.expected)
 
     @patch("requests.request", side_effect=Util.mocked_requests_get)
     def test_search_documents_empty(self, mock_request):
-        actual = self.action.run({Input.INDEX: "empty", Input.QUERY: {"query": {"match_all": {}}}, Input.ROUTING: None})
+        actual = self.action.run({Input.INDEX: "empty", Input.QUERY: {"match_all": {}}, Input.ROUTING: None})
 
         self.assertEqual(
             actual,
@@ -72,9 +102,7 @@ class TestSearchDocuments(TestCase):
 
     @patch("requests.request", side_effect=Util.mocked_requests_get)
     def test_search_documents_wrong_object(self, mock_request):
-        actual = self.action.run(
-            {Input.INDEX: "wrong_object", Input.QUERY: {"query": {"match_all": {}}}, Input.ROUTING: None}
-        )
+        actual = self.action.run({Input.INDEX: "wrong_object", Input.QUERY: {"match_all": {}}, Input.ROUTING: None})
 
         self.assertEqual(
             {
@@ -88,4 +116,19 @@ class TestSearchDocuments(TestCase):
                 "took": 0,
             },
             actual,
+        )
+
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
+    def test_index_document_with_empty_response(self, mock_request):
+        with self.assertRaises(PluginException) as error:
+            self.action.run(
+                {Input.INDEX: "wrong_object", Input.QUERY: {"query": {"match_all": {}}}, Input.ROUTING: None}
+            )
+
+        self.assertEqual(error.exception.cause, "Wrong input query format")
+        self.assertEqual(
+            error.exception.assistance,
+            "Old query style detected during input. The input shouldn't contain {'query': {'query': ...}}. "
+            "Please refer to the help.md for more details or to the Elasticsearch API documentation: "
+            "https://www.elastic.co/guide/en/elasticsearch/reference/current/query-filter-context.html#query-filter-context-ex",
         )

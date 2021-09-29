@@ -1,41 +1,37 @@
-import komand
-from .schema import ExtractTextInput, ExtractTextOutput
+import insightconnect_plugin_runtime
+from .schema import ExtractTextInput, ExtractTextOutput, Input, Output, Component
 
 # Custom imports below
-import PyPDF2
+from insightconnect_plugin_runtime.exceptions import PluginException
+import pdfplumber
+from pdfminer.pdfparser import PDFSyntaxError
 import base64
+import io
 
 
-class ExtractText(komand.Action):
+class ExtractText(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="extract_text",
-            description="Extract text from PDF file",
+            description=Component.DESCRIPTION,
             input=ExtractTextInput(),
             output=ExtractTextOutput(),
         )
 
     def run(self, params={}):
+        pdf_text = ""
         try:
-            if params.get("contents"):
-                pdfFile = base64.b64decode(params.get("contents"))
-            else:
-                raise Exception("File contents missing!")
-        except Exception as e:
-            self.logger.error("File contents missing: ", e)
-            raise
-        try:
-            with open("temp.pdf", "wb") as temp_pdf:
-                temp_pdf.write(pdfFile)
-                pdfReader = PyPDF2.PdfFileReader(open("temp.pdf", "rb"))
-                pdftext = ""
-                for page in range(pdfReader.numPages):
-                    pageObj = pdfReader.getPage(page)
-                    pdftext += pageObj.extractText().replace("\n", "")
-        except Exception as e:
-            self.logger.info("An error occurred while extracting text: ", e)
-            raise
-        return {"output": pdftext}
-
-    def test(self):
-        return {"output": "successful"}
+            with io.BytesIO(base64.b64decode(params.get(Input.CONTENTS))) as f:
+                pdf_file = pdfplumber.open(f)
+                try:
+                    pages = pdf_file.pages
+                    for page in enumerate(pages):
+                        pdf_text += page[1].extract_text().replace("\n", " ")
+                finally:
+                    pdf_file.close()
+        except PDFSyntaxError:
+            raise PluginException(
+                cause="The provided content is not in PDF file format.",
+                assistance="Please check that the input is correct and try again.",
+            )
+        return {Output.OUTPUT: pdf_text}

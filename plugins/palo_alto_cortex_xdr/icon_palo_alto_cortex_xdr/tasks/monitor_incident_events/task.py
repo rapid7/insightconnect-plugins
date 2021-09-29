@@ -49,9 +49,13 @@ class MonitorIncidentEvents(insightconnect_plugin_runtime.Task):
         incident_events: List[Dict], epoch_cutoff: int, time_sorting_field: str
     ) -> List[Dict]:
         # Discard events < epoch cutoff. This avoid dupes since the XDR API only accepts `>=` and not simply `>`
-        events_after_cutoff = [x for x in incident_events if x.get(time_sorting_field, -1) > epoch_cutoff]
-        events_after_cutoff.sort(key=lambda x: x.get(time_sorting_field, -1))
-        return events_after_cutoff
+        cleaned_events_after_cutoff = [
+            insightconnect_plugin_runtime.helper.clean_dict(x)
+            for x in incident_events
+            if x.get(time_sorting_field, -1) > epoch_cutoff
+        ]
+        cleaned_events_after_cutoff.sort(key=lambda x: x.get(time_sorting_field, -1))
+        return cleaned_events_after_cutoff
 
     def run(self, params={}, state={}):
         # Get all input variables

@@ -1,0 +1,95 @@
+{
+	"spec": "2134da30e0e335bffb8a02f764e54d5d",
+	"manifest": "cb317bddbf81757e6cefd84ee43e28bd",
+	"setup": "99ad065fc340bac4d8c394f98c761bfe",
+	"schemas": [
+		{
+			"identifier": "action_on_vulnerability_sync_batch/schema.py",
+			"hash": "4b3f998313fe5fcb484c5c4fff7fa004"
+		},
+		{
+			"identifier": "action_on_vulnerability_sync_task/schema.py",
+			"hash": "52c436eab10c0aeaa9a45b9c9401a4d3"
+		},
+		{
+			"identifier": "create_group/schema.py",
+			"hash": "4a2526ea0e909e915b6a75cdb7067b16"
+		},
+		{
+			"identifier": "delete_device/schema.py",
+			"hash": "7252543ff89a21c3b0d08c9332072216"
+		},
+		{
+			"identifier": "delete_group/schema.py",
+			"hash": "66b18c900b75652494434b68687062c3"
+		},
+		{
+			"identifier": "get_device_by_hostname/schema.py",
+			"hash": "ff0e51a8b826bc90dbb25b9032d7bae1"
+		},
+		{
+			"identifier": "get_device_by_ip/schema.py",
+			"hash": "22d9f6e135b6b4028d6807cc3629cf9e"
+		},
+		{
+			"identifier": "get_device_software/schema.py",
+			"hash": "42d9b8777f46e6709a38cf4faf40633c"
+		},
+		{
+			"identifier": "get_vulnerability_sync_batch/schema.py",
+			"hash": "5765f142f96aa185edc42e9b11f175c4"
+		},
+		{
+			"identifier": "list_devices/schema.py",
+			"hash": "30c56c0c7d76dfae3c58d65dfa5fc7f9"
+		},
+		{
+			"identifier": "list_groups/schema.py",
+			"hash": "6ac01c94ddaf20449508d017f1a04782"
+		},
+		{
+			"identifier": "list_organization_users/schema.py",
+			"hash": "29e203b2b3ee3b830270c31f18bba337"
+		},
+		{
+			"identifier": "list_organizations/schema.py",
+			"hash": "083009db9c1309a7857d1e32f17b1db2"
+		},
+		{
+			"identifier": "list_policies/schema.py",
+			"hash": "b8d3145226dcf46c7cf14ef0d71e78cd"
+		},
+		{
+			"identifier": "list_vulnerability_sync_batches/schema.py",
+			"hash": "90bff67fac53fab74fab99f576f6c789"
+		},
+		{
+			"identifier": "list_vulnerability_sync_tasks/schema.py",
+			"hash": "1ae547513f254ac840a5e5a1542e07b6"
+		},
+		{
+			"identifier": "run_command/schema.py",
+			"hash": "d206c7a21b9a5fbac52bff25aa27f0cd"
+		},
+		{
+			"identifier": "update_device/schema.py",
+			"hash": "d15b753b7c482fc343b7e83dcb57b141"
+		},
+		{
+			"identifier": "update_group/schema.py",
+			"hash": "756eeadbf6f4e9f3fdade1a2c509c32b"
+		},
+		{
+			"identifier": "upload_vulnerability_sync_file/schema.py",
+			"hash": "864896cb4256dcf8091f4db38e9782c9"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "157c1e850bcde539eb34b4a19d79f79e"
+		},
+		{
+			"identifier": "get_events/schema.py",
+			"hash": "cdb877b9a9c4db1c9a42bc9296aa2b34"
+		}
+	]
+}
