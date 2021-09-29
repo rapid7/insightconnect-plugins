@@ -3,3 +3,4 @@
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 ipcalc==1.99.0
 validators==0.18.2
+parameterized==0.8.1 
