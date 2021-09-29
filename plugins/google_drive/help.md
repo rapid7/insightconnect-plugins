@@ -362,7 +362,7 @@ _This plugin does not contain any triggers._
 
 # Version History
 
-* 2.2.0 - Add Create Folder, Create File in Folder and Move File actions | Add missing input and output examples | Update python version to python-3-38-slim-plugin:4 |  Add `USER` in Dockerfile | Code refactoring in connection.py and action.py files for Find File by Name, Get File Contents, Overwrite File and Upload File actions | Update dependencies in requirements.txt
+* 2.2.0 - Add Create Folder, Create File in Folder and Move File actions | Add missing input and output examples | Code refactor
 * 2.1.3 - Correct spelling in help.md
 * 2.1.2 - New spec and help.md format for the Extension Library
 * 2.1.1 - Fix typo in plugin spec
