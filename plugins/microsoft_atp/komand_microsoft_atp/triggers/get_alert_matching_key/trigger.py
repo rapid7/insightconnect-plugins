@@ -24,7 +24,7 @@ class GetAlertMatchingKey(insightconnect_plugin_runtime.Trigger):
         initial_results = self.connection.client.get_all_alerts(
             query_parameters="?$orderby=alertCreationTime+desc&$top=1"
         )
-        all_results = initial_results.json()
+        all_results = initial_results
 
         if len(all_results.get("value", [])):
             most_recent_result = all_results.get("value")[0]
@@ -40,7 +40,7 @@ class GetAlertMatchingKey(insightconnect_plugin_runtime.Trigger):
             self.logger.info("Looking for new alerts.")
             self.logger.info(f"Query params:{query_params}")
             current_results_result = self.connection.client.get_all_alerts(query_parameters=query_params)
-            current_results = current_results_result.json()
+            current_results = current_results_result
 
             # If new results available, return each of them, update the time we saw the latest result
             current_results_list = current_results.get("value", [])
