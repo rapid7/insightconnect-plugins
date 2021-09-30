@@ -65,7 +65,7 @@ class GetTeamsOutput(komand.Output):
         "displayName": {
           "type": "string",
           "title": "Display Name",
-          "description": "Display name",
+          "description": "Display name -  If this name is the same as another team name in your organization, the oldest name between the two will be used.",
           "order": 1
         },
         "id": {
