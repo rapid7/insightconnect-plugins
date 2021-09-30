@@ -13,5 +13,8 @@ class GetIndicatorScanStatus(insightconnect_plugin_runtime.Action):
                 output=GetIndicatorScanStatusOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+        response = self.connection.client.get_scan_status(params.get(Input.TASK_ID))
+        return {
+            Output.TASK_ID: response.get('TaskId'),
+            Output.STATUS: response.get('Status')
+        }

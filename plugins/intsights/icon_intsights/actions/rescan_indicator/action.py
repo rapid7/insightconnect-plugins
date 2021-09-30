@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import RescanIndicatorInput, RescanIndicatorOutput, Input, Output, Component
 # Custom imports below
+from insightconnect_plugin_runtime.helper import clean
 
 
 class RescanIndicator(insightconnect_plugin_runtime.Action):
@@ -13,5 +14,8 @@ class RescanIndicator(insightconnect_plugin_runtime.Action):
                 output=RescanIndicatorOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+        response = self.connection.client.rescan_indicator(params.get(Input.INDICATOR_FILE_HASH))
+        return clean({
+            Output.TASK_ID: response.get('TaskId'),
+            Output.STATUS: response.get('Status')
+        })

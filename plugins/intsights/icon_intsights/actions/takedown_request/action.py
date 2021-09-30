@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import TakedownRequestInput, TakedownRequestOutput, Input, Output, Component
 # Custom imports below
+from insightconnect_plugin_runtime.helper import clean
 
 
 class TakedownRequest(insightconnect_plugin_runtime.Action):
@@ -13,5 +14,10 @@ class TakedownRequest(insightconnect_plugin_runtime.Action):
                 output=TakedownRequestOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+        self.connection.client.takedown_request(
+            params.get(Input.ALERT_ID),
+            params.get(Input.TARGET)
+        )
+        return clean({
+            Output.STATUS: True
+        })

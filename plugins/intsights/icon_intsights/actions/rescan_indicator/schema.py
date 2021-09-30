@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    INDICATOR_VALUE = "indicator_value"
+    INDICATOR_FILE_HASH = "indicator_file_hash"
     
 
 class Output:
@@ -22,15 +22,15 @@ class RescanIndicatorInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "indicator_value": {
+    "indicator_file_hash": {
       "type": "string",
-      "title": "Indicator Value",
+      "title": "Indicator File Hash",
       "description": "IOC value in type file hash",
       "order": 1
     }
   },
   "required": [
-    "indicator_value"
+    "indicator_file_hash"
   ]
 }
     """)

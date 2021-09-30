@@ -39,6 +39,43 @@ Example input:
 
 ### Actions
 
+#### Add Manual Alert
+
+This action this action will create a manual alert with the provided parameters.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|description|string|None|True|Alert description|None|None|
+|found_date|string|None|False|Alert found date|None|None|
+|images|[]image|None|False|Alert images|None|None|
+|severity|string|None|True|Alert severity|['High', 'Medium', 'Low']|None|
+|source_date|string|None|False|Alert source date|None|None|
+|source_network_type|string|None|True|Source network type|['ClearWeb', 'DarkWeb']|None|
+|source_type|string|None|True|Source type|['Application Store', 'Cyber Security Blog', 'Hacking News', 'Cyber Crime Forum', 'Hacktivism Forum', 'Social Media', 'Facebook', 'Twitter', 'LinkedIn', 'Google Plus', 'VK', 'Vimeo', 'YouTube', 'IRC Channel', 'IOC Block List', 'Credit Card Black Market', 'Paste Site', 'Data Leakage Website', 'Leaked Database', 'File Sharing Website', 'Gray Hat Website', 'Black Market', 'WHOIS servers', 'Company Website', 'Wikileaks', 'Pinterest', 'Tumblr', 'Instagram', 'Telegram', 'Webmail', 'Malware Analysis', 'Firehol', 'VRA', 'Other']|None|
+|source_url|string|None|True|Source URL|None|None|
+|sub_type|string|None|True|Alert sub type, needs to correlate with the selected "Type"|None|None|
+|title|string|None|True|Alert title|None|None|
+|type|string|None|True|Alert type|['AttackIndication', 'DataLeakage', 'Phishing', 'BrandSecurity', 'ExploitableData', 'vip']|None|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|alert_id|string|True|New created alert ID|
+
+Example output:
+
+```
+
+```
+
 #### Takedown Request
 
 This action is used to request a takedown for a given alert in Intsights.
@@ -112,7 +149,7 @@ This action is used to force an indicator scan in Intsights TIP system.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|indicator_value|string|None|True|IOC value in type file hash|None|None|
+|indicator_file_hash|string|None|True|IOC value in type file hash|None|None|
 
 Example input:
 
@@ -129,6 +166,7 @@ Example input:
 Example output:
 
 ```
+
 ```
 
 #### Get Indicator Scan Status

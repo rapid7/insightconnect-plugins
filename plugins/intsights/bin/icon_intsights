@@ -36,6 +36,8 @@ def main():
             )
             self.add_trigger(triggers.NewAlert())
 
+            self.add_action(actions.AddManualAlert())
+
             self.add_action(actions.EnrichIndicator())
 
             self.add_action(actions.GetAlerts())

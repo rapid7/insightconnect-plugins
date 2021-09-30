@@ -18,7 +18,7 @@ class TestGetIndicatorByValue(TestCase):
 
     @patch("requests.request", side_effect=Util.mock_request)
     def test_get_indicator_by_value_should_success(self, make_request):
-        actual = self.action.run({Input.INDICATOR_VALUE: 'example.com'})
+        actual = self.action.run({Input.INDICATOR_VALUE: 'rapid7.com'})
         expected = {
             'first_seen': '2020-01-01T20:01:27.344Z',
             'geo_location': 'US',
@@ -33,7 +33,7 @@ class TestGetIndicatorByValue(TestCase):
             'system_tags': ['Phishing'],
             'tags': ['MyTag_1'],
             'type': 'Domains',
-            'value': 'example.com',
+            'value': 'rapid7.com',
             'whitelist': 'false'
         }
         self.assertEqual(expected, actual)

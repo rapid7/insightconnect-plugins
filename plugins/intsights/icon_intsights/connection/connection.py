@@ -15,7 +15,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params={}):
         self.client = IntSightAPI(
             params.get(Input.ACCOUNT_ID, {}).get('secretKey'),
-            params.get(Input.API_KEY, {}).get('secretKey')
+            params.get(Input.API_KEY, {}).get('secretKey'),
+            self.logger
         )
         self.logger.info("Connect: Connecting...")
 
