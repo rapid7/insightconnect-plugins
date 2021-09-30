@@ -61,7 +61,7 @@ class GetAlertMatchingKey(insightconnect_plugin_runtime.Trigger):
                             f"Actual Value: {current_value}\n"
                             f"Skipping this alert.\n"
                         )
-                self.logger.info(f"\nUpdating time from.\n")
+                self.logger.info("\nUpdating time from.\n")
                 most_recent_time_string = current_results.get("value")[0].get("alertCreationTime")
             else:
                 self.logger.info(f"No new results were found. Sleeping for {frequency} seconds\n")

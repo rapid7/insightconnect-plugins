@@ -47,7 +47,7 @@ class GetAlerts(insightconnect_plugin_runtime.Trigger):
                 self.logger.info(f"New results found, returning {len(current_results_list)} results.")
                 for alert in current_results_list:
                     self.send({Output.ALERT: insightconnect_plugin_runtime.helper.clean(alert)})
-                self.logger.info(f"\nUpdating time from.\n")
+                self.logger.info("\nUpdating time from.\n")
                 most_recent_time_string = current_results.get("value")[0].get("alertCreationTime")
             else:
                 self.logger.info(f"No new results were found. Sleeping for {frequency} seconds\n")
