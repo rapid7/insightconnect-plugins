@@ -191,6 +191,7 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
         "Name": {
           "type": "string",
           "title": "Name",
+          "description": "Name",
           "order": 1
         }
       },

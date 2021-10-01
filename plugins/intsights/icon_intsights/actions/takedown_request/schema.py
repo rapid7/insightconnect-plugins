@@ -13,7 +13,7 @@ class Input:
     
 
 class Output:
-    RESPONSE = "response"
+    STATUS = "status"
     
 
 class TakedownRequestInput(insightconnect_plugin_runtime.Input):
@@ -57,15 +57,15 @@ class TakedownRequestOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "response": {
-      "type": "object",
-      "title": "Response",
-      "description": "Response from IntSights",
+    "status": {
+      "type": "boolean",
+      "title": "Status",
+      "description": "Status from IntSights",
       "order": 1
     }
   },
   "required": [
-    "response"
+    "status"
   ]
 }
     """)

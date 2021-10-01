@@ -4,16 +4,23 @@
 
 # Key Features
 
-Identify key features of plugin.
+* Get Indicator by Value
+* Enrich Indicator
+* Rescan Indicator
+* Get Indicator Scan Status
+* Get Alerts
+* Get Complete Alert by ID
+* Takedown Request
+* Add Manual Alert
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product's user interface
+* Requires an Account ID for IntSights
+* Requires API key for IntSights
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* 2.4.0
 
 # Documentation
 
@@ -41,27 +48,45 @@ Example input:
 
 #### Add Manual Alert
 
-This action this action will create a manual alert with the provided parameters.
+This action will create a manual alert with the provided parameters.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|description|string|None|True|Alert description|None|None|
-|found_date|string|None|False|Alert found date|None|None|
-|images|[]image|None|False|Alert images|None|None|
-|severity|string|None|True|Alert severity|['High', 'Medium', 'Low']|None|
-|source_date|string|None|False|Alert source date|None|None|
-|source_network_type|string|None|True|Source network type|['ClearWeb', 'DarkWeb']|None|
-|source_type|string|None|True|Source type|['Application Store', 'Cyber Security Blog', 'Hacking News', 'Cyber Crime Forum', 'Hacktivism Forum', 'Social Media', 'Facebook', 'Twitter', 'LinkedIn', 'Google Plus', 'VK', 'Vimeo', 'YouTube', 'IRC Channel', 'IOC Block List', 'Credit Card Black Market', 'Paste Site', 'Data Leakage Website', 'Leaked Database', 'File Sharing Website', 'Gray Hat Website', 'Black Market', 'WHOIS servers', 'Company Website', 'Wikileaks', 'Pinterest', 'Tumblr', 'Instagram', 'Telegram', 'Webmail', 'Malware Analysis', 'Firehol', 'VRA', 'Other']|None|
-|source_url|string|None|True|Source URL|None|None|
-|sub_type|string|None|True|Alert sub type, needs to correlate with the selected "Type"|None|None|
-|title|string|None|True|Alert title|None|None|
-|type|string|None|True|Alert type|['AttackIndication', 'DataLeakage', 'Phishing', 'BrandSecurity', 'ExploitableData', 'vip']|None|
+|description|string|None|True|Alert description|None|Suspicious addresses|
+|found_date|string|None|False|Alert found date|None|2020-01-01|
+|images|[]image|None|False|Alert images|None|[{"Type": "jpeg","Data": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}]|
+|severity|string|None|True|Alert severity|['High', 'Medium', 'Low']|Medium|
+|source_date|string|None|False|Alert source date|None|2020-02-01|
+|source_network_type|string|None|True|Source network type|['ClearWeb', 'DarkWeb']|DarkWeb|
+|source_type|string|None|True|Source type|['Application Store', 'Cyber Security Blog', 'Hacking News', 'Cyber Crime Forum', 'Hacktivism Forum', 'Social Media', 'Facebook', 'Twitter', 'LinkedIn', 'Google Plus', 'VK', 'Vimeo', 'YouTube', 'IRC Channel', 'IOC Block List', 'Credit Card Black Market', 'Paste Site', 'Data Leakage Website', 'Leaked Database', 'File Sharing Website', 'Gray Hat Website', 'Black Market', 'WHOIS servers', 'Company Website', 'Wikileaks', 'Pinterest', 'Tumblr', 'Instagram', 'Telegram', 'Webmail', 'Malware Analysis', 'Firehol', 'VRA']|Webmail|
+|source_url|string|None|True|Source URL|None|https://example.com"|
+|sub_type|string|None|True|Alert sub type, needs to correlate with the selected "Type"|None|SuspiciousEmailAddress|
+|title|string|None|True|Alert title|None|New Alert|
+|type|string|None|True|Alert type|['AttackIndication', 'DataLeakage', 'Phishing', 'BrandSecurity', 'ExploitableData', 'vip']|Phishing|
 
 Example input:
 
 ```
+{
+  "description": "Suspicious addresses",
+  "found_date": "2020-01-01",
+  "images": [
+    {
+      "Type": "jpeg",
+      "Data": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
+    }
+  ],
+  "severity": "Medium",
+  "source_date": "2020-02-01",
+  "source_network_type": "DarkWeb",
+  "source_type": "Webmail",
+  "source_url": "https://example.com",
+  "sub_type": "SuspiciousEmailAddress",
+  "title": "New Alert",
+  "type": "Phishing"
+}
 ```
 
 ##### Output
@@ -73,7 +98,9 @@ Example input:
 Example output:
 
 ```
-
+{
+  "alert_id": "6156586e8eadf90008176450"
+}
 ```
 
 #### Takedown Request
@@ -84,13 +111,14 @@ This action is used to request a takedown for a given alert in Intsights.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|alert_id|string|None|True|Alert's unique ID|None|None|
+|alert_id|string|None|True|Alert's unique ID|None|44d88612fea8a8f36de82e12|
 |target|string|Domain|True|Target|['Website', 'Domain']|Domain|
 
 Example input:
 
 ```
 {
+  "alert_id": "44d88612fea8a8f36de82e12",
   "target": "Domain"
 }
 ```
@@ -99,11 +127,12 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|response|object|True|Response from IntSights|
+|status|boolean|True|Status from IntSights|
 
 Example output:
 
 ```
+
 ```
 
 #### Get Complete Alert by ID
@@ -114,11 +143,14 @@ This action is used to get an alert's complete details for a given alert ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|alert_id|string|None|True|Alert's unique ID|None|None|
+|alert_id|string|None|True|Alert's unique ID|None|44d88612fea8a8f36de82e12|
 
 Example input:
 
 ```
+{
+  "alert_id": "44d88612fea8a8f36de82e12"
+}
 ```
 
 ##### Output
@@ -139,6 +171,30 @@ Example input:
 Example output:
 
 ```
+{
+  "assets": [],
+  "assignees": [],
+  "details": {
+    "Description": "APIDescription",
+    "Images": [],
+    "Severity": "High",
+    "Source": {
+      "NetworkType": "ClearWeb",
+      "Type": "Application Store",
+      "URL": "https://example.com"
+    },
+    "SubType": "SuspiciousEmailAddress",
+    "Tags": [],
+    "Title": "Alerttest3",
+    "Type": "Phishing"
+  },
+  "found_date": "https://example.com",
+  "id": "6156118e186a05000774ee46",
+  "is_closed": false,
+  "is_flagged": false,
+  "takedown_status": "NotSent",
+  "update_date": "https://example.com"
+}
 ```
 
 #### Rescan Indicator
@@ -149,11 +205,14 @@ This action is used to force an indicator scan in Intsights TIP system.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|indicator_file_hash|string|None|True|IOC value in type file hash|None|None|
+|indicator_file_hash|string|None|True|IOC value in type file hash|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
 
 Example input:
 
 ```
+{
+  "indicator_file_hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+}
 ```
 
 ##### Output
@@ -166,7 +225,10 @@ Example input:
 Example output:
 
 ```
-
+{
+  "status": "Queued",
+  "task_id": "615658811baf672bdaeb8e5c"
+}
 ```
 
 #### Get Indicator Scan Status
@@ -177,11 +239,14 @@ This action is used to get the scan status of an indicator in Insights TIP syste
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|task_id|string|None|True|A string representing the request ID|None|None|
+|task_id|string|None|True|A string representing the request ID|None|123|
 
 Example input:
 
 ```
+{
+  "task_id": 123
+}
 ```
 
 ##### Output
@@ -194,6 +259,10 @@ Example input:
 Example output:
 
 ```
+{
+  "status": "Done",
+  "task_id": "61563eb2118b97e8e388e9db"
+}
 ```
 
 #### Get Alerts
@@ -204,30 +273,39 @@ This action is used to search Alerts based on criteria.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|alert_type|string|None|False|Comma separated list of alert types. Allowed values - AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip|None|None|
+|alert_type|string|None|False|Comma separated list of alert types. Allowed values - AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip|['AttackIndication', 'DataLeakage', 'Phishing', 'BrandSecurity', 'ExploitableData', 'vip']|Phishing|
 |assigned|boolean|None|False|Show assigned/unAssigned alerts|None|True|
 |found_date_from|number|None|False|Start date to fetch from in Unix Millisecond Timestamp|None|0|
-|found_date_to|number|None|False|End date to fetch to in Unix Millisecond Timestamp|None|None|
+|found_date_to|number|None|False|End date to fetch to in Unix Millisecond Timestamp|None|1633047102456|
 |has_indicators|boolean|None|False|Show alerts with IOCs results|None|False|
 |is_closed|boolean|None|False|Is closed/open alerts|None|False|
 |is_flagged|boolean|None|False|Show flagged/unflagged alerts|None|True|
-|matched_asset_value|string|None|False|Comma separated list|None|None|
-|network_type|string|None|False|Comma separated list of network type. Allowed values - ClearWeb, DarkWeb|None|None|
-|remediation_status|string|None|False|Comma separated list of remediation status. Allowed values - InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed|None|None|
-|severity|string|None|False|Comma separated list of alerts severity. Allowed values - High, Medium, Low|None|None|
-|source_date_from|number|None|False|Start date to fetch from in Unix Millisecond Timestamp|None|None|
-|source_date_to|number|None|False|End date to fetch to in Unix Millisecond Timestamp|None|None|
-|source_type|string|None|False|Comma separated list of alerts source type. Allowed values - ApplicationStores, BlackMarkets, HackingForums, SocialMedia, PasteSites, Others|None|None|
+|matched_asset_value|string|None|False|Comma separated list|None|https://example.com|
+|network_type|string|None|False|Comma separated list of network type. Allowed values - ClearWeb, DarkWeb|['ClearWeb', 'DarkWeb']|DarkWeb|
+|remediation_status|string|None|False|Comma separated list of remediation status. Allowed values - InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed|None|InProggres, Pending|
+|severity|string|None|False|Comma separated list of alerts severity. Allowed values - High, Medium, Low|['High', 'Medium', 'Low']|Low|
+|source_date_from|number|None|False|Start date to fetch from in Unix Millisecond Timestamp|None|1633047083142|
+|source_date_to|number|None|False|End date to fetch to in Unix Millisecond Timestamp|None|1633047102456|
+|source_type|string|None|False|Comma separated list of alerts source type. Allowed values - ApplicationStores, BlackMarkets, HackingForums, SocialMedia, PasteSites, Others|['Application Store', 'Cyber Security Blog', 'Hacking News', 'Cyber Crime Forum', 'Hacktivism Forum', 'Social Media', 'Facebook', 'Twitter', 'LinkedIn', 'Google Plus', 'VK', 'Vimeo', 'YouTube', 'IRC Channel', 'IOC Block List', 'Credit Card Black Market', 'Paste Site', 'Data Leakage Website', 'Leaked Database', 'File Sharing Website', 'Gray Hat Website', 'Black Market', 'WHOIS servers', 'Company Website', 'Wikileaks', 'Pinterest', 'Tumblr', 'Instagram', 'Telegram', 'Webmail', 'Malware Analysis', 'Firehol', 'VRA', 'Other']|Application Store|
 
 Example input:
 
 ```
 {
+  "alert_type": "Phishing",
   "assigned": true,
   "found_date_from": 0,
+  "found_date_to": 1633047102456,
   "has_indicators": false,
   "is_closed": false,
-  "is_flagged": true
+  "is_flagged": true,
+  "matched_asset_value": "example.com",
+  "network_type": "DarkWeb",
+  "remediation_status": "InProggres, Pending",
+  "severity": "Low",
+  "source_date_from": 1633047083142,
+  "source_date_to": 1633047102456,
+  "source_type": "Application Store"
 }
 ```
 
@@ -240,6 +318,12 @@ Example input:
 Example output:
 
 ```
+{
+  "alert_ids": [
+    "6155f7b7c6e9d40008b4bb0d",
+    "6155f801186a050007745d29"
+  ]
+}
 ```
 
 #### Enrich Indicator
@@ -473,7 +557,7 @@ Example output:
 
 #### Get Indicator by Value
 
-This action this action will search indicators in Intsights TIP.
+This action will search indicators in IntSights TIP.
 
 ##### Input
 
@@ -512,32 +596,48 @@ Example input:
 Example output:
 
 ```
+{
+  "first_seen": "https://example.com",
+  "last_seen": "https://example.com",
+  "last_update": "https://example.com",
+  "related_campaigns": [],
+  "related_malware": [],
+  "related_threat_actors": [],
+  "score": 10,
+  "severity": "Low",
+  "sources": [
+    {
+      "ConfidenceLevel": 2,
+      "Name": "Cyber Threat Alliance"
+    }
+  ],
+  "system_tags": [],
+  "tags": [],
+  "type": "Domains",
+  "value": "https://example.com",
+  "whitelist": true
+}
 ```
 
 ### Triggers
 
-#### New Alert
-
-This trigger is used to run when a new alert that matches the given criteria is created in IntSights.
-
-##### Input
-
-_This trigger does not contain any inputs._
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|[]string|True|Response|
-
-Example output:
-
-```
-```
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-_This plugin does not contain any custom output types._
+#### image
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Data|string|True|Data|
+|Type|string|True|Type|
+
+#### source
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Confidence Level|integer|True|Level of confidence|
+|Name|string|True|Name|
 
 ## Troubleshooting
 
@@ -552,4 +652,3 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [IntSights](https://intsights.com/)
-

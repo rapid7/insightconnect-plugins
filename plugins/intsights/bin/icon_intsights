@@ -34,8 +34,6 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
-            self.add_trigger(triggers.NewAlert())
-
             self.add_action(actions.AddManualAlert())
 
             self.add_action(actions.EnrichIndicator())

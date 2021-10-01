@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This action will create a manual alert with the provided parameters"
+    DESCRIPTION = "Create a manual alert with the provided parameters"
 
 
 class Input:
@@ -116,8 +116,7 @@ class AddManualAlertInput(insightconnect_plugin_runtime.Input):
         "Webmail",
         "Malware Analysis",
         "Firehol",
-        "VRA",
-        "Other"
+        "VRA"
       ],
       "order": 6
     },

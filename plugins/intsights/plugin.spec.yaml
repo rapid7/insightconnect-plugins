@@ -5,7 +5,7 @@ name: intsights
 title: IntSights
 description: IntSights is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
 version: 1.0.0
-supported_versions: []
+supported_versions: ["2.4.0"]
 vendor: rapid7
 support: rapid7
 status: []
@@ -25,7 +25,7 @@ types:
   source:
     Name:
       title: Name
-      descirption: Name
+      description: Name
       type: string
       required: true
     ConfidenceLevel:
@@ -179,6 +179,7 @@ actions:
         description: IOC value in type file hash
         type: string
         required: true
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
     output:
       task_id:
         title: Task ID
@@ -199,6 +200,7 @@ actions:
         description: A string representing the request ID
         type: string
         required: true
+        example: 123
     output:
       task_id:
         title: Task ID
@@ -226,6 +228,7 @@ actions:
           - BrandSecurity
           - ExploitableData
           - vip
+        example: Phishing
       severity:
         title: Severity
         description: Comma separated list of alerts severity. Allowed values - High, Medium, Low
@@ -235,6 +238,7 @@ actions:
           - High
           - Medium
           - Low
+        example: Low
       source_type:
         title: Source Type
         description: Comma separated list of alerts source type. Allowed values - ApplicationStores, BlackMarkets, HackingForums, SocialMedia, PasteSites, Others
@@ -275,6 +279,7 @@ actions:
           - Firehol
           - VRA
           - Other
+        example: Application Store
       network_type:
         title: Network Type
         description: Comma separated list of network type. Allowed values - ClearWeb, DarkWeb
@@ -283,26 +288,31 @@ actions:
         enum:
           - ClearWeb
           - DarkWeb
+        example: DarkWeb
       matched_asset_value:
         title: Matched Asset Value
         description: Comma separated list
         type: string
         required: false
+        example: example.com
       remediation_status:
         title: Remediation Status
         description: Comma separated list of remediation status. Allowed values - InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed
         type: string
         required: false
+        example: InProggres, Pending
       source_date_from:
         title: Source Date From
         description: Start date to fetch from in Unix Millisecond Timestamp
         type: number
         required: false
+        example: 1633047083142
       source_date_to:
         title: Source Date To
         description: End date to fetch to in Unix Millisecond Timestamp
         type: number
         required: false
+        example: 1633047102456
       found_date_from:
         title: Found Date From
         description: Start date to fetch from in Unix Millisecond Timestamp
@@ -314,6 +324,7 @@ actions:
         description: End date to fetch to in Unix Millisecond Timestamp
         type: number
         required: false
+        example: 1633047102456
       assigned:
         title: Assigned
         description: Show assigned/unAssigned alerts
@@ -353,6 +364,7 @@ actions:
         description: Alert's unique ID
         type: string
         required: true
+        example: 44d88612fea8a8f36de82e12
     output:
       id:
         title: ID
@@ -413,6 +425,7 @@ actions:
         description: Alert's unique ID
         type: string
         required: true
+        example: 44d88612fea8a8f36de82e12
       target:
         title: Target
         description: Target
@@ -431,18 +444,20 @@ actions:
         required: true
   add_manual_alert:
     title: Add Manual Alert
-    description: This action will create a manual alert with the provided parameters
+    description: Create a manual alert with the provided parameters
     input:
       title:
         title: Title
         description: Alert title
         type: string
         required: true
+        example: New Alert
       description:
         title: Description
         description: Alert description
         type: string
         required: true
+        example: Suspicious addresses
       type:
         title: Type
         description: Alert type
@@ -455,11 +470,13 @@ actions:
           - BrandSecurity
           - ExploitableData
           - vip
+        example: Phishing
       sub_type:
         title: Sub Type
         description: Alert sub type, needs to correlate with the selected "Type"
         type: string
         required: true
+        example: SuspiciousEmailAddress
       severity:
         title: Severity
         description: Alert severity
@@ -469,6 +486,7 @@ actions:
           - High
           - Medium
           - Low
+        example: Medium
       source_type:
         title: Source Type
         description: Source type
@@ -508,7 +526,7 @@ actions:
             - Malware Analysis
             - Firehol
             - VRA
-            - Other
+        example: Webmail
       source_network_type:
         title: Source Network Type
         description: Source network type
@@ -517,120 +535,34 @@ actions:
         enum:
           - ClearWeb
           - DarkWeb
+        example: DarkWeb
       source_url:
         title: Source URL
         description: Source URL
         type: string
         required: true
+        example: https://example.com"
       found_date:
         title: Found Date
         description: Alert found date
         type: string
         required: false
+        example: 2020-01-01
       source_date:
         title: Source Date
         description: Alert source date
         type: string
         required: false
+        example: 2020-02-01
       images:
         title: Images
         description: Alert images
         type: "[]image"
         required: false
+        example: '[{"Type": "jpeg","Data": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}]'
     output:
       alert_id:
         title: Alert ID
         description: New created alert ID
         type: string
-        required: true
-
-triggers:
-  new_alert:
-    title: New Alert
-    description: Run when a new alert that matches the given criteria is created in IntSights
-    inputs:
-      alert_type:
-        title: Alert Type
-        description: Coma separated list of alerts type. Allowed values - AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip
-        type: string
-        required: false
-        example: AttackIndication, DataLeakage
-      severity:
-        title: Severity
-        description: Coma separated list of severity. Allowed values - High, Medium, Low
-        type: string
-        required: false
-        example: High
-      source_type:
-        title: Source Type
-        description: Coma separated list of source type. Allowed values - ApplicationStores, BlackMarkets, HackingForums, SocialMedia, PasteSites, Others
-        type: string
-        required: false
-        example: ApplicationStores, BlackMarkets
-      network_type:
-        title: Network Type
-        description: Coma separated list of network type. Allowed values - ClearWeb, DarkWeb
-        type: string
-        required: false
-        example: ClearWeb
-      matched_asset_value:
-        title: Matched Asset Value
-        description: Coma separated list of network matched asset value
-        type: string
-        required: false
-      remediation_status:
-        title: Remediation Status
-        description: Coma separated list of alert's remediation status. Allowed values - InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed
-        type: string
-        required: false
-      source_date_from:
-        title: Source Date From
-        description: Start date to fetch from in Unix Millisecond Timestamp
-        type: number
-        required: false
-      end_date_to:
-        title: End Date To
-        description: End date to fetch to in Unix Millisecond Timestam
-        type: number
-        required: false
-      found_date_from:
-        title: Found Date From
-        description: Start date to fetch from in Unix Millisecond Timestamp
-        type: number
-        required: false
-        example: 0
-      found_date_to:
-        title: Found Date To
-        description: End date to fetch to in Unix Millisecond Timestamp
-        type: number
-        required: false
-      assigned:
-        title: Assigned
-        description: Show assigned/unAssigned alerts
-        type: boolean
-        required: false
-        example: true
-      is_flagged:
-        title: Is Flagged
-        description: Show flagged/unflagged alerts
-        type: boolean
-        required: false
-        example: true
-      is_closed:
-        title: Is Closed
-        description: Is closed/open alerts
-        type: boolean
-        required: false
-        example: false
-      has_indicators:
-        title: Has Indicators
-        description: Show alerts with IOCs results
-        type: boolean
-        required: false
-        example: false
-    output:
-      response:
-        title: Response
-        description: Response
-        type: "[]string"
         required: true

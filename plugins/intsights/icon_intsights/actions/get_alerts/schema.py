@@ -38,6 +38,14 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Alert Type",
       "description": "Comma separated list of alert types. Allowed values - AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip",
+      "enum": [
+        "AttackIndication",
+        "DataLeakage",
+        "Phishing",
+        "BrandSecurity",
+        "ExploitableData",
+        "vip"
+      ],
       "order": 1
     },
     "assigned": {
@@ -86,6 +94,10 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Network Type",
       "description": "Comma separated list of network type. Allowed values - ClearWeb, DarkWeb",
+      "enum": [
+        "ClearWeb",
+        "DarkWeb"
+      ],
       "order": 4
     },
     "remediation_status": {
@@ -98,6 +110,11 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Severity",
       "description": "Comma separated list of alerts severity. Allowed values - High, Medium, Low",
+      "enum": [
+        "High",
+        "Medium",
+        "Low"
+      ],
       "order": 2
     },
     "source_date_from": {
@@ -116,6 +133,42 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Source Type",
       "description": "Comma separated list of alerts source type. Allowed values - ApplicationStores, BlackMarkets, HackingForums, SocialMedia, PasteSites, Others",
+      "enum": [
+        "Application Store",
+        "Cyber Security Blog",
+        "Hacking News",
+        "Cyber Crime Forum",
+        "Hacktivism Forum",
+        "Social Media",
+        "Facebook",
+        "Twitter",
+        "LinkedIn",
+        "Google Plus",
+        "VK",
+        "Vimeo",
+        "YouTube",
+        "IRC Channel",
+        "IOC Block List",
+        "Credit Card Black Market",
+        "Paste Site",
+        "Data Leakage Website",
+        "Leaked Database",
+        "File Sharing Website",
+        "Gray Hat Website",
+        "Black Market",
+        "WHOIS servers",
+        "Company Website",
+        "Wikileaks",
+        "Pinterest",
+        "Tumblr",
+        "Instagram",
+        "Telegram",
+        "Webmail",
+        "Malware Analysis",
+        "Firehol",
+        "VRA",
+        "Other"
+      ],
       "order": 3
     }
   }
