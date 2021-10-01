@@ -1,17 +1,15 @@
 import insightconnect_plugin_runtime
 from .schema import GetAlertsInput, GetAlertsOutput, Input, Output, Component
+
 # Custom imports below
 from icon_intsights.util.api import AlertParams
 
 
 class GetAlerts(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_alerts',
-                description=Component.DESCRIPTION,
-                input=GetAlertsInput(),
-                output=GetAlertsOutput())
+            name="get_alerts", description=Component.DESCRIPTION, input=GetAlertsInput(), output=GetAlertsOutput()
+        )
 
     def run(self, params={}):
         alert_params = AlertParams(
@@ -31,6 +29,4 @@ class GetAlerts(insightconnect_plugin_runtime.Action):
             has_ioc=params.get(Input.HAS_INDICATORS),
         )
         response = self.connection.client.get_alerts(alert_params)
-        return {
-            Output.ALERT_IDS: response
-        }
+        return {Output.ALERT_IDS: response}

@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
@@ -14,14 +15,14 @@ class TestConnection(TestCase):
     @patch("requests.request", side_effect=Util.mock_request)
     def test_connection_should_success_when_good_credentials(self, mock_request) -> None:
         action = Util.default_connector(GetIndicatorByValue())
-        self.assertEqual(action.connection.test(), {'success': True})
+        self.assertEqual(action.connection.test(), {"success": True})
 
     @patch("requests.request", side_effect=Util.mock_request)
     def test_connection_should_success_when_credentials(self, mock_request) -> None:
-        action = Util.default_connector(GetIndicatorByValue(), {
-            Input.API_KEY: {'secretKey': 'api_key'},
-            Input.ACCOUNT_ID: {'secretKey': 'account_id'}
-        })
+        action = Util.default_connector(
+            GetIndicatorByValue(),
+            {Input.API_KEY: {"secretKey": "api_key"}, Input.ACCOUNT_ID: {"secretKey": "account_id"}},
+        )
 
         self.assertEqual("https://api.intsights.com", action.connection.client.url)
         self.assertEqual("api_key", action.connection.client.api_key)
@@ -29,10 +30,9 @@ class TestConnection(TestCase):
 
     @patch("requests.request", side_effect=Util.mock_request)
     def test_connection_should_fail_when_wrong_credentials(self, mock_request) -> None:
-        action = Util.default_connector(GetIndicatorByValue(), {
-            Input.API_KEY: {'secretKey': 'wrong'},
-            Input.ACCOUNT_ID: {'secretKey': 'wrong'}
-        })
+        action = Util.default_connector(
+            GetIndicatorByValue(), {Input.API_KEY: {"secretKey": "wrong"}, Input.ACCOUNT_ID: {"secretKey": "wrong"}}
+        )
         with self.assertRaises(ConnectionTestException) as error:
             action.connection.test()
 

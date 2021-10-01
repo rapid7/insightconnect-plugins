@@ -1,7 +1,7 @@
 import sys
 import os
 
-sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
@@ -20,34 +20,30 @@ class TestAddManualAlert(TestCase):
     def test_get_alerts_success_with_empty_params(self, make_request):
         actual = self.action.run({})
         expected = {
-            'alert_ids': [
-                '7cafac7ec5adaebf62257a4c',
-                '7cafac7ec5adaebf62257a4d',
-                '7cafac7ec5adaebf62257a4e',
-                '7cafac7ec5adaebf62257a4f'
+            "alert_ids": [
+                "7cafac7ec5adaebf62257a4c",
+                "7cafac7ec5adaebf62257a4d",
+                "7cafac7ec5adaebf62257a4e",
+                "7cafac7ec5adaebf62257a4f",
             ]
         }
         self.assertEqual(expected, actual)
 
     @patch("requests.request", side_effect=Util.mock_request)
     def test_get_alerts_success_with_params(self, make_request):
-        actual = self.action.run({
-            Input.SEVERITY: "High"
-        })
+        actual = self.action.run({Input.SEVERITY: "High"})
         expected = {
-            'alert_ids': [
-                '7cafac7ec5adaebf62257a4c',
-                '7cafac7ec5adaebf62257a4d',
-                '7cafac7ec5adaebf62257a4e',
-                '7cafac7ec5adaebf62257a4f'
+            "alert_ids": [
+                "7cafac7ec5adaebf62257a4c",
+                "7cafac7ec5adaebf62257a4d",
+                "7cafac7ec5adaebf62257a4e",
+                "7cafac7ec5adaebf62257a4f",
             ]
         }
         self.assertEqual(expected, actual)
 
     @patch("requests.request", side_effect=Util.mock_request)
     def test_get_alerts_success_with_empty_response_list(self, make_request):
-        actual = self.action.run({
-            Input.ALERT_TYPE: "Phishing"
-        })
-        expected = {'alert_ids': []}
+        actual = self.action.run({Input.ALERT_TYPE: "Phishing"})
+        expected = {"alert_ids": []}
         self.assertEqual(expected, actual)

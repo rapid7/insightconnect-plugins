@@ -1,7 +1,7 @@
 import sys
 import os
 
-sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
@@ -19,21 +19,14 @@ class TestRescanIndicator(TestCase):
 
     @patch("requests.request", side_effect=Util.mock_request)
     def test_rescan_indicator_should_success(self, make_request):
-        actual = self.action.run({
-            Input.TASK_ID: "abcdefg123456"
-        })
-        expected = {
-            'status': 'InProgress',
-            'task_id': 'abcdefg123456'
-        }
+        actual = self.action.run({Input.TASK_ID: "abcdefg123456"})
+        expected = {"status": "InProgress", "task_id": "abcdefg123456"}
         self.assertEqual(expected, actual)
 
     @patch("requests.request", side_effect=Util.mock_request)
     def test_rescan_indicator_should_failed(self, make_request):
         with self.assertRaises(PluginException) as error:
-            self.action.run({
-                Input.TASK_ID: "bad"
-            })
+            self.action.run({Input.TASK_ID: "bad"})
 
         self.assertEqual("There is an error in response.", error.exception.cause)
         self.assertEqual("Invalid task id.", error.exception.assistance)

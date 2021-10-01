@@ -15,13 +15,14 @@ This plugin utilizes the [Microsoft ATP API](https://docs.microsoft.com/en-us/wi
 
 * Windows Defender Advanced Threat Protection application credentials
 
-# Supported Product Versions
-
-_There are no supported product versions listed._
-
 # Documentation
 
 ## Setup
+
+This plugin uses the Windows Defender ATP API. It will use an Azure application to connect to the API and run actions from InsightConnect.
+
+For information on how to setup your application and assign permissions go here:
+https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/exposed-apis-create-app-webapp
 
 The connection configuration accepts the following parameters:
 
@@ -54,7 +55,7 @@ This action collects investigation package from a machine.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|Investigation package collected via InsightConnect|False|Comment to associate with the action|None|Investigation package collected via InsightConnect|
-|machine|string|None|True|Machine IP address, hostname, or machine ID|None|02699626f388ed830012e5b787640e71c56d42d8|
+|machine|string|None|True|Machine IP address, hostname, or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
 
 Example input:
 
@@ -101,7 +102,7 @@ This action is used to get machines related to an file hash(SHA1), domain or use
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|indicator|string|None|True|File hash(SHA1), domain or username indicator|None|https://example.com|
+|indicator|string|None|True|File hash(SHA1), domain or username indicator|None|example.com|
 
 Example input:
 
@@ -157,7 +158,7 @@ This action is used to add or remove machine tags.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|machine|string|None|True|Machine IP address, hostname, or machine ID|None|02699626f388ed830012e5b787640e71c56d42d8|
+|machine|string|None|True|Machine IP address, hostname, or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
 |tag|string|None|True|The tag value|None|example tag|
 |type|boolean|True|True|True to add tag, false to remove it|None|True|
 
@@ -213,7 +214,7 @@ This action retrieves a collection of installed software related to a given mach
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|machine|string|None|True|Machine IP address, hostname, or machine ID|None|02699626f388ed830012e5b787640e71c56d42d8|
+|machine|string|None|True|Machine IP address, hostname, or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
 
 Example input:
 
@@ -266,7 +267,7 @@ This action is used to retrieve a list of software updates.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|machine|string|None|True|Machine IP address, hostname or machine ID|None|02699626f388ed830012e5b787640e71c56d42d8|
+|machine|string|None|True|Machine IP address, hostname or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
 
 Example input:
 
@@ -311,7 +312,7 @@ This action is used to retrieve a list of security recommendations.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|machine|string|None|True|Machine IP address, hostname or machine ID|None|02699626f388ed830012e5b787640e71c56d42d8|
+|machine|string|None|True|Machine IP address, hostname or machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
 
 Example input:
 
@@ -368,7 +369,7 @@ This action is used to submit or update new indicator.
 |application|string|None|False|The application associated with the indicator|None|demo-test|
 |description|string|Indicator Blacklisted from InsightConnect|False|Description of the indicator|None|Indicator Blacklisted from InsightConnect|
 |expiration_time|string|None|False|The expiration time of the indicator, default value is one year from now|None|2020-12-12T00:00:00Z|
-|indicator|string|None|True|A supported indicator to blacklist or unblacklist. Supported indicators are IP addresses, URLs, domains, and SHA1 and SHA256 hashes|None|02699626f388ed830012e5b787640e71c56d42d8|
+|indicator|string|None|True|A supported indicator to blacklist or unblacklist. Supported indicators are IP addresses, URLs, domains, and SHA1 and SHA256 hashes|None|220e7d15b011d7fac48f2bd61114db1022197f7f|
 |indicator_state|boolean|False|False|True to add indicator, false to remove it from the list|None|True|
 |rbac_group_names|[]string|None|False|List of RBAC group names the indicator would be applied to|None|["group1","group2"]|
 |recommended_actions|string|None|False|TI indicator alert recommended actions|None|nothing|
@@ -385,7 +386,10 @@ Example input:
   "expiration_time": "2020-12-12T00:00:00Z",
   "indicator": "220e7d15b011d7fac48f2bd61114db1022197f7f",
   "indicator_state": true,
-  "rbac_group_names": "[\"group1\",\"group2\"]",
+  "rbac_group_names": [
+    "group1",
+    "group2"
+  ],
   "recommended_actions": "nothing",
   "severity": "High",
   "title": "test"
@@ -440,7 +444,7 @@ This action retrieves a collection of discovered vulnerabilities related to a gi
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|machine|string|None|True|Machine IP address, hostname or machine ID|None|02699626f388ed830012e5b787640e71c56d42d8|
+|machine|string|None|True|Machine IP address, hostname or machine ID|None|9de5069c5afe602b2ea0a04b66beb2c0cef77fdf|
 
 Example input:
 
@@ -528,7 +532,7 @@ This action is used to get details about a machine from its ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|machine|string|None|True|Machine IP address, hostname and machine ID|None|02699626f388ed830012e5b787640e71c56d42d8|
+|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
 
 Example input:
 
@@ -627,7 +631,7 @@ This action is used to isolate a machine from the network, but keep the connecti
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|None|True|Comment to associate with the isolation action|None|Isolated by InsightConnect|
 |isolation_type|string|None|True|Type of isolation to perform on target machine|['Full', 'Selective']|Full|
-|machine|string|None|True|Machine IP address, hostname and machine ID|None|02699626f388ed830012e5b787640e71c56d42d8|
+|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
 
 Example input:
 
@@ -671,7 +675,7 @@ This action is used to restore network connectivity to a machine.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|None|True|Comment to associate with the unisolate action|None|Unisolated by InsightConnect|
-|machine|string|None|True|Machine IP address, hostname and machine ID|None|02699626f388ed830012e5b787640e71c56d42d8|
+|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
 
 Example input:
 
@@ -714,8 +718,8 @@ This action is used to stop the execution of a file on a machine and delete it.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|None|True|Comment to associate with the stop and quarantine action|None|InsightConnect has stopped a file.|
-|machine|string|None|True|Machine IP address, hostname and machine ID|None|02699626f388ed830012e5b787640e71c56d42d8|
-|sha1|string|None|True|SHA1 hash of the file to stop and quarantine on the machine|None|02699626f388ed830012e5b787640e71c56d42d8|
+|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
+|sha1|string|None|True|SHA1 hash of the file to stop and quarantine on the machine|None|ad0c0f2fa80411788e81a4567d1d8758b83cd76e|
 
 Example input:
 
@@ -762,7 +766,7 @@ This action is used to initiate a Windows Defender antivirus scan on a machine.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|None|True|Comment to associate with the antivirus scan action|None|InsightConnect has started an antivirus scan.|
-|machine|string|None|True|Machine IP address, hostname and machine ID|None|02699626f388ed830012e5b787640e71c56d42d8|
+|machine|string|None|True|Machine IP address, hostname and machine ID|None|2df36d707c1ee5084cef77f3dbfc95db65bc4a73|
 |scan_type|string|None|True|The type of antivirus scan to run|['Full', 'Quick']|Full|
 
 Example input:
@@ -854,7 +858,7 @@ looking for a match.
 |----|----|-------|--------|-----------|----|-------|
 |frequency|integer|10|False|Poll frequency in seconds|None|10|
 |key|string|None|True|The key to look for in the alert. This key must match the case shown in the example output section in help|None|assignedTo|
-|value|string|None|True|The value to look for in the alert. The value must match the case of the value returned|None|https://example.com|
+|value|string|None|True|The value to look for in the alert. The value must match the case of the value returned|None|user@example.com|
 
 Example input:
 
