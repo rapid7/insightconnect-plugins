@@ -1,7 +1,7 @@
 {
-	"spec": "293061a01de0ef9c9c2ae16b2273cd9e",
-	"manifest": "923a07e79090559ef6604c5f80d815f0",
-	"setup": "ce61d009e68a52b3222dd5dfe2929b38",
+	"spec": "711fc54a949eb98f1fe0aa9c781007d5",
+	"manifest": "42ddf8d159a037e4564b4554f53bcd6c",
+	"setup": "dfcacbb0a2f0185c2cee397b2f089cf0",
 	"schemas": [
 		{
 			"identifier": "get_malware_test_file/schema.py",

@@ -13,6 +13,10 @@
 * Palo Alto Wildfire host IP address or URL
 * Palo Alto Wildefire API key
 
+# Supported Product Versions
+
+_There are no supported product versions listed._
+
 # Documentation
 
 ## Setup
