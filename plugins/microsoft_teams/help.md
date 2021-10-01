@@ -51,7 +51,7 @@ This action is used to add a conversation member to a channel. This operation is
 |----|----|-------|--------|-----------|----|-------|
 |channel_name|string|None|True|Name of the channel to which the member is to be added|None|InsightConnect Channel|
 |group_name|string|None|True|Name of the group in which the channel is located|None|InsightConnect Team|
-|member_login|string|None|True|The login of the group member to be added to a channel|None|https://example.com|
+|member_login|string|None|True|The login of the group member to be added to a channel|None|user@example.com|
 
 Example input:
 
@@ -86,7 +86,7 @@ This action is used to add a user to a group's list of owners. The owners are a 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |group_name|string|None|True|Name of the group or team to which the member is to be added as the owner|None|InsightConnect Team|
-|member_login|string|None|True|The login of the group member to be added as the owner|None|https://example.com|
+|member_login|string|None|True|The login of the group member to be added as the owner|None|user@example.com|
 
 Example input:
 
@@ -433,7 +433,7 @@ This action is used to add a member to a team.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|member_login|string|None|True|Member login e.g. user@example.com|None|https://example.com|
+|member_login|string|None|True|Member login e.g. user@example.com|None|user@example.com|
 |team_name|string|None|True|Team name|None|InsightConnect Team|
 
 Example input:
@@ -537,7 +537,7 @@ This action is used to remove a member from a team.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|member_login|string|None|True|Member Login e.g. user@example.com|None|https://example.com|
+|member_login|string|None|True|Member Login e.g. user@example.com|None|user@example.com|
 |team_name|string|None|True|Team name|None|InsightConnect Team|
 
 Example input:
@@ -575,8 +575,8 @@ This action is used to create a group in Azure and enable it for Microsoft Teams
 |group_name|string|None|True|Team name|None|test_group|
 |mail_enabled|boolean|None|True|Should e-mail should be enabled for this group|None|True|
 |mail_nickname|string|None|True|The nickname for the email address of this group in Outlook|None|TestGroup|
-|members|string[]|None|False|A list of usernames to set as members|None|[https://example.com]|
-|owners|string[]|None|False|A list of usernames to set as owners|None|[https://example.com]|
+|members|string[]|None|False|A list of usernames to set as members|None|["user@example.com"]|
+[|owners|string[]|None|False|A list of usernames to set as owners|None|["user@example.com"]|
 
 Example input:
 
