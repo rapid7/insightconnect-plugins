@@ -161,7 +161,7 @@ actions:
     description: Query for an XML or PDF report for a particular sample
     input:
       hash:
-        description: The MD5 or SHA‐256 hash value of the sample
+        description: The MD5 or SHA-256 hash value of the sample
         title: Hash
         type: string
         required: true
@@ -186,7 +186,7 @@ actions:
     description: Query for a sample file
     input:
       hash:
-        description: The MD5 or SHA‐256 hash value of the sample
+        description: The MD5 or SHA-256 hash value of the sample
         title: Hash
         type: string
         required: true
@@ -202,7 +202,7 @@ actions:
     description: Query for a PCAP
     input:
       hash:
-        description: The MD5 or SHA‐256 hash value of the sample
+        description: The MD5 or SHA-256 hash value of the sample
         title: Hash
         required: true
         type: string
@@ -214,7 +214,7 @@ actions:
         - Windows XP, Adobe Reader 9.3.3, Office 2003
         - Windows XP, Adobe Reader 9.4.0, Flash 10, Office 2007
         - Windows XP, Adobe Reader 11, Flash 11, Office 2010
-        - Windows 7 32‐bit, Adobe Reader 11, Flash 11, Office 2010
+        - Windows 7 32-bit, Adobe Reader 11, Flash 11, Office 2010
         - Windows 7 64bit, Adobe Reader 11, Flash 11, Office 2010
         - Android 2.3, API 10, avd2.3.1
         - Mac OS X Mountain Lion
@@ -232,7 +232,7 @@ actions:
     description: Query for a files classification
     input:
       hash:
-        description: The MD5 or SHA‐256 hash value of the sample
+        description: The MD5 or SHA-256 hash value of the sample
         title: Hash
         type: string
         required: true

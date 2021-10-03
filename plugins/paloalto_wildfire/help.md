@@ -15,7 +15,7 @@
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* WildFire 8.0
 
 # Documentation
 
@@ -115,8 +115,8 @@ This action is used to query for a PCAP.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|hash|string|None|True|The MD5 or SHA‐256 hash value of the sample|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|platform|string|None|True|Target analysis environment|['Windows XP, Adobe Reader 9.3.3, Office 2003', 'Windows XP, Adobe Reader 9.4.0, Flash 10, Office 2007', 'Windows XP, Adobe Reader 11, Flash 11, Office 2010', 'Windows 7 32‐bit, Adobe Reader 11, Flash 11, Office 2010', 'Windows 7 64bit, Adobe Reader 11, Flash 11, Office 2010', 'Android 2.3, API 10, avd2.3.1', 'Mac OS X Mountain Lion']|Windows XP, Adobe Reader 11, Flash 11, Office 2010|
+|hash|string|None|True|The MD5 or SHA-256 hash value of the sample|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|platform|string|None|True|Target analysis environment|['Windows XP, Adobe Reader 9.3.3, Office 2003', 'Windows XP, Adobe Reader 9.4.0, Flash 10, Office 2007', 'Windows XP, Adobe Reader 11, Flash 11, Office 2010', 'Windows 7 32-bit, Adobe Reader 11, Flash 11, Office 2010', 'Windows 7 64bit, Adobe Reader 11, Flash 11, Office 2010', 'Android 2.3, API 10, avd2.3.1', 'Mac OS X Mountain Lion']|Windows XP, Adobe Reader 11, Flash 11, Office 2010|
 
 Example input:
 
@@ -149,7 +149,7 @@ This action is used to query for a sample file.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|hash|string|None|True|The MD5 or SHA‐256 hash value of the sample|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|hash|string|None|True|The MD5 or SHA-256 hash value of the sample|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
@@ -218,7 +218,7 @@ This action is used to query for an XML or PDF report for a particular sample.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |format|string|None|True|Report format: PDF or XML|['pdf', 'xml']|pdf|
-|hash|string|None|True|The MD5 or SHA‐256 hash value of the sample|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|hash|string|None|True|The MD5 or SHA-256 hash value of the sample|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
@@ -292,7 +292,7 @@ This action is used to query for a file's classification.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|hash|string|None|True|The MD5 or SHA‐256 hash value of the sample|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|hash|string|None|True|The MD5 or SHA-256 hash value of the sample|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
