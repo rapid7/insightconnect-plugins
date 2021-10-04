@@ -587,7 +587,7 @@ Example input:
 {
   "group_description": "A test group",
   "group_name": "test_group",
-  "mail_enabled": false,
+  "mail_enabled": true,
   "mail_nickname": "TestGroup",
   "members": [
     "user@example.com"
@@ -869,10 +869,11 @@ Example output:
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
+If there is more than one team with the same name in your organization, the oldest team between the two will be used.
 
 # Version History
 
+* 3.1.4 - Update help.md to include troubleshooting message about team names
 * 3.1.3 - Update `docs_url` in plugin spec with a new link to [plugin setup guide](https://docs.rapid7.com/insightconnect/microsoft-teams/)
 * 3.1.2 - Fix issue where a name with a bracket could crash the plugin
 * 3.1.1 - Correct spelling in help.md
