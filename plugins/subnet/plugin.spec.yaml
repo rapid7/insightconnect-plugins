@@ -34,7 +34,7 @@ actions:
         example: 198.51.100.0/24
     output:
       ip:
-        title: IP
+        title: IP Address
         description: IP address
         type: string
         required: false
@@ -49,7 +49,7 @@ actions:
         type: string
         required: false
       cidr:
-        title: CIDR
+        title: CIDR Notation
         description: CIDR notation
         type: string
         required: false
@@ -100,7 +100,7 @@ actions:
         example: 198.51.100.100
       subnet:
         title: Subnet
-        description: The subnet in CIDR or Netmask
+        description: The subnet in CIDR notation or Netmask
         type: string
         required: true
         example: 198.51.100.0/24

@@ -68,7 +68,7 @@ class CalculateOutput(insightconnect_plugin_runtime.Output):
     },
     "cidr": {
       "type": "string",
-      "title": "CIDR",
+      "title": "CIDR Notation",
       "description": "CIDR notation",
       "order": 4
     },
@@ -86,7 +86,7 @@ class CalculateOutput(insightconnect_plugin_runtime.Output):
     },
     "ip": {
       "type": "string",
-      "title": "IP",
+      "title": "IP Address",
       "description": "IP address",
       "order": 1
     },

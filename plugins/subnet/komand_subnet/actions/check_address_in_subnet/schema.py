@@ -31,7 +31,7 @@ class CheckAddressInSubnetInput(insightconnect_plugin_runtime.Input):
     "subnet": {
       "type": "string",
       "title": "Subnet",
-      "description": "The subnet in CIDR or Netmask",
+      "description": "The subnet in CIDR notation or Netmask",
       "order": 2
     }
   },

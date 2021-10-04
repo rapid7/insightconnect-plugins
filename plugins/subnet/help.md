@@ -33,7 +33,7 @@ This action is used to determine if the provided IP address is in the subnet.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |ip_address|string|None|True|The IP address|None|198.51.100.100|
-|subnet|string|None|True|The subnet in CIDR or Netmask|None|198.51.100.0/24|
+|subnet|string|None|True|The subnet in CIDR notation or Netmask|None|198.51.100.0/24|
 
 Example input:
 
