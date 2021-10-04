@@ -14,20 +14,38 @@ This plugin utilizes the Metasploit [RPC API](https://metasploit.help.rapid7.com
 
 * Username and password
 
+# Supported Product Versions
+
+* 4.20.0-2021091301
+
 # Documentation
 
 ## Setup
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|msf|False|Username|None|
-|ssl|boolean|True|False|Use SSL|None|
-|port|integer|55553|False|Port|None|
-|password|password|None|True|Password|None|
-|uri|string|/api/|False|The msfrpcd URI|None|
-|server|string|None|False|Remote Server IP|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|credentials|credential_username_password|None|True|Username and password|None|{"username": example, "password": example}|
+|port|integer|55553|False|Port|None|55553|
+|server|string|None|False|Remote server IP|None|https://example.com|
+|ssl|boolean|True|False|Use SSL|None|True|
+|uri|string|/api/|False|The msfrpcd URI|None|/api/|
+
+Example input:
+
+```
+{
+  "credentials": {
+    "username": example, 
+    "password": example
+  }",
+  "port": 55553,
+  "server": "example.com",
+  "ssl": true,
+  "uri": "/api/"
+}
+```
 
 ## Technical Details
 
@@ -39,15 +57,23 @@ This action is used to search for an exploit within Metasploit over an RPC sessi
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|search_term|string|None|True|Search term, e.g. 'vsftp'|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|search_term|string|None|True|Search term, e.g. 'vsftp'|None|vsftp|
+
+Example input:
+
+```
+{
+  "search_term": "vsftp"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|exploits|[]string|False|A list of exploits found searching Metasploit|
+|search_results|search_results|False|Search results from Metasploit|
 
 Example output:
 
@@ -73,17 +99,30 @@ This action is used to run a selected Metasploit exploit.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|options|object|None|False|Metasploit module options|None|
-|module|string|None|False|A Metasploit module|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|module|string|None|True|A Metasploit module|None|exploit/multi/misc/java_rmi_server|
+|options|object|None|False|Metasploit module options|None|{"RHOST":"10.0.2.5", "RPORT":"1099", "LHOST":"10.0.2.15", "payload":"java/meterpreter/reverse_tcp"}|
+Example input:
+
+```
+{
+  "module": "exploit/multi/misc/java_rmi_server",
+  "options": {
+    "RHOST": "10.0.2.5",
+    "RPORT": "1099",
+    "LHOST": "10.0.2.15",
+    "payload": "java/meterpreter/reverse_tcp"
+  }
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|session_information|[]session_info|False|Session information provided when a module is executed|
 |console_output|[]string|False|Information from the console when a module is executed|
+|session_information|session_info|False|Session information provided when a module is executed|
 
 Example output:
 
@@ -133,7 +172,7 @@ This trigger is used to check for new Metasploit modules.
 
 ##### Input
 
-_This action does not contain any inputs._
+_This trigger does not contain any inputs._
 
 ##### Output
 
@@ -150,8 +189,8 @@ Example output:
     "mod_time": "2018-04-03 15:16:13 +0000",
     "is_client": false,
     "description": "This module exploits the trusted $PATH environment variable of the SUID binary \"ibstat\".",
-    "author": ["Kristian Erik Hermansen", "Sagi Shahar <blah@example.com>",
-    "Kostas Lintovois <kostas.lintovois@mwrinfosecurity.com>"],
+    "author": ["Example Name", "John Doe <user@example.com>",
+    "Example User <user@example.com>"],
     "arch": "cmd",
     "rank": 600,
     "is_server": true, "disclosure_date": "2013-09-24",
@@ -180,6 +219,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.0.0 - Fixed bugs: changed type, updated internal library, added error handling
 * 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Update to new credential types
 * 1.0.4 - Update to use new JSON API

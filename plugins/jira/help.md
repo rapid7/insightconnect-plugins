@@ -5,7 +5,7 @@
 # Key Features
 
 * Create, find, edit, comment, and generally manage your Jira tickets through the Jira REST API to expedite operations
-* (Re-)Assign issues to users to orchestrate operations
+* (Re-)Assign issues to users to orchestrate operations 
 * Find and create new users in your Jira instance to automate account provisioning
 
 # Requirements
@@ -13,6 +13,12 @@
 * URL for Jira Software, Jira Server, or Jira ServiceDesk
 * Jira user email address and API key when using Jira Cloud
 * Jira username and password credentials when using on-prem Jira server
+
+# Supported Product Versions
+
+* Jira Server 6.0
+* Jira (Cloud)
+* Jira ServiceDesk (Cloud)
 
 # Documentation
 
@@ -1200,6 +1206,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 * 6.2.0 - Fix issue in Get Comments actions where normalize_user is missing the is_cloud argument from client connection
+* 6.1.1 - Fix issue where attachments added in tickets were empty
 * 6.1.0 - Add Monitor Issues trigger | Update New Issue trigger to only trigger in case of recently created tickets | Change `required` property to false for `project` input in New Issue trigger | Fix issue in New Issue trigger to include all results that match JQL | Fix issue in New Issue trigger with retrieving attachments
 * 6.0.8 - Fix issue where exception type was wrong in Create Issue
 * 6.0.7 - Fix issue in Create Issue and Attach Issue actions where adding attachments failed
