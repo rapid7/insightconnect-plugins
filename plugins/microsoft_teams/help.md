@@ -866,7 +866,7 @@ Example output:
 
 ## Troubleshooting
 
-If there is more than one team with the same name in your organization, the oldest name between the two will be used.
+If there is more than one team with the same name in your organization, the oldest team between the two will be used.
 
 # Version History
 
