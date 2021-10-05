@@ -4,40 +4,39 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get the contents of a file on Google Drive"
+    DESCRIPTION = "Create a folder"
 
 
 class Input:
-    FILE_ID = "file_id"
-    MIME_TYPE = "mime_type"
+    FOLDER_NAME = "folder_name"
+    PARENT_FOLDER_ID = "parent_folder_id"
     
 
 class Output:
-    FILE = "file"
+    FOLDER_ID = "folder_id"
     
 
-class GetFileContentsInput(insightconnect_plugin_runtime.Input):
+class CreateFolderInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "file_id": {
+    "folder_name": {
       "type": "string",
-      "title": "File ID",
-      "description": "The file ID for the file that will be returned",
+      "title": "Folder Name",
+      "description": "The name for the new folder",
       "order": 1
     },
-    "mime_type": {
+    "parent_folder_id": {
       "type": "string",
-      "title": "MIME Type",
-      "description": "The MIME Type to export the file as e.g. */* , text/plain",
+      "title": "Parent Folder ID",
+      "description": "The ID of the folder in which the new folder will be created",
       "order": 2
     }
   },
   "required": [
-    "file_id",
-    "mime_type"
+    "folder_name"
   ]
 }
     """)
@@ -46,21 +45,22 @@ class GetFileContentsInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class GetFileContentsOutput(insightconnect_plugin_runtime.Output):
+class CreateFolderOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "file": {
+    "folder_id": {
       "type": "string",
-      "title": "File",
-      "displayType": "bytes",
-      "description": "The file in bytes",
-      "format": "bytes",
+      "title": "Folder ID",
+      "description": "Return the ID of the folder created on Google Drive",
       "order": 1
     }
-  }
+  },
+  "required": [
+    "folder_id"
+  ]
 }
     """)
 

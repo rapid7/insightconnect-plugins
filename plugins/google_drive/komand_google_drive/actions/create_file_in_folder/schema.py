@@ -4,21 +4,19 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Upload a file to Google Drive"
+    DESCRIPTION = "Create a file in a folder"
 
 
 class Input:
     FILE = "file"
     FOLDER_ID = "folder_id"
-    GOOGLE_FILE_TYPE = "google_file_type"
     
 
 class Output:
     FILE_ID = "file_id"
-    FILE_LINK = "file_link"
     
 
-class UploadFileInput(insightconnect_plugin_runtime.Input):
+class CreateFileInFolderInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
@@ -27,30 +25,19 @@ class UploadFileInput(insightconnect_plugin_runtime.Input):
     "file": {
       "$ref": "#/definitions/file",
       "title": "File",
-      "description": "The file to upload",
-      "order": 1
+      "description": "The file to create",
+      "order": 2
     },
     "folder_id": {
       "type": "string",
       "title": "Folder ID",
-      "description": "Folder to put the file in",
-      "order": 3
-    },
-    "google_file_type": {
-      "type": "string",
-      "title": "Google File Type",
-      "description": "The file type that Google will convert the file to",
-      "enum": [
-        "Docs",
-        "Sheets",
-        "Slides"
-      ],
-      "order": 2
+      "description": "The ID of the folder where the file will be created",
+      "order": 1
     }
   },
   "required": [
     "file",
-    "google_file_type"
+    "folder_id"
   ],
   "definitions": {
     "file": {
@@ -80,7 +67,7 @@ class UploadFileInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class UploadFileOutput(insightconnect_plugin_runtime.Output):
+class CreateFileInFolderOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
@@ -91,14 +78,11 @@ class UploadFileOutput(insightconnect_plugin_runtime.Output):
       "title": "File ID",
       "description": "Return the ID of the file created on Google Drive",
       "order": 1
-    },
-    "file_link": {
-      "type": "string",
-      "title": "File Link",
-      "description": "A direct link to the created file",
-      "order": 2
     }
-  }
+  },
+  "required": [
+    "file_id"
+  ]
 }
     """)
 
