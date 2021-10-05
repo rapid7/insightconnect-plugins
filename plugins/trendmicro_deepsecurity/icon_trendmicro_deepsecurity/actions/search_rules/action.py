@@ -1,5 +1,6 @@
 from typing import Tuple
 import komand
+import requests
 from .schema import SearchRulesInput, SearchRulesOutput, Input, Output, Component
 
 # Custom imports below
@@ -37,7 +38,9 @@ class SearchRules(komand.Action):
         url = f"{self.connection.dsm_url}/api/intrusionpreventionrules/search"
 
         # Search for IPS rules
-        response = self.connection.session.post(url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl)
+        response = requests.post(
+            url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl, headers=self.connection.headers
+        )
 
         # Check response errors
         checkResponse(response)
@@ -47,7 +50,6 @@ class SearchRules(komand.Action):
 
         # Check if matching IPS rules were found
         if response_data["intrusionPreventionRules"]:
-            hits = len(response_data["intrusionPreventionRules"])
             for rule in response_data["intrusionPreventionRules"]:
                 self.logger.info(f"{cve} -> {rule['ID']}: {rule['name']}")
                 ips_rules.add(rule["ID"])
@@ -77,7 +79,9 @@ class SearchRules(komand.Action):
 
             # Send Request
             url = f"{self.connection.dsm_url}/api/intrusionpreventionrules/search"
-            response = self.connection.session.post(url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl)
+            response = requests.post(
+                url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl, headers=self.connection.headers
+            )
 
             # Check response errors
             checkResponse(response)
@@ -87,7 +91,6 @@ class SearchRules(komand.Action):
 
             # Check if there are results
             if response_data["intrusionPreventionRules"]:
-                hits = len(response_data["intrusionPreventionRules"])
                 ips_id = response_data["intrusionPreventionRules"][-1]["ID"]
             else:
                 break
