@@ -3,9 +3,9 @@ import base64
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-def normalize_comment(source, logger=logging.getLogger()):
+def normalize_comment(source, is_cloud=False, logger=logging.getLogger()):
     comment = source.raw
-    author = normalize_user(source.author, logger=logger)
+    author = normalize_user(source.author, is_cloud, logger)
     comment["author"] = author
     return comment
 
