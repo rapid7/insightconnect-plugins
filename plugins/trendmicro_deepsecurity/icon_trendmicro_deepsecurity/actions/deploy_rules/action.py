@@ -4,6 +4,7 @@ from .schema import DeployRulesInput, DeployRulesOutput, Input, Output, Componen
 # Custom imports below
 
 import json
+import requests
 from icon_trendmicro_deepsecurity.util.shared import tryJSON
 from icon_trendmicro_deepsecurity.util.shared import checkResponse
 
@@ -40,7 +41,9 @@ class DeployRules(komand.Action):
         data = {"ruleIDs": self.rules}
 
         # Set rules
-        response = self.connection.session.post(url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl)
+        response = requests.post(
+            url, data=json.dumps(data), verify=self.connection.dsm_verify_ssl, headers=self.connection.headers
+        )
 
         self.logger.info(f"url: {response.url}")
         self.logger.info(f"status: {response.status_code}")

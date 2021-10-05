@@ -8,10 +8,7 @@ from .schema import (
 )
 
 # Custom imports below
-from insightconnect_plugin_runtime.exceptions import PluginException
-
-import base64
-import json
+from icon_servicenow.util.request_helper import RequestHelper
 
 
 class GetIncidentAttachment(insightconnect_plugin_runtime.Action):
@@ -24,22 +21,6 @@ class GetIncidentAttachment(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        url = f"{self.connection.attachment_url}/{params.get(Input.ATTACHMENT_ID)}/file"
-        method = "get"
-
-        response = self.connection.request.make_request(url, method)
-
-        resource = response.get("resource")
-        result = b""
-        if resource is not None:
-            if isinstance(resource, bytes):
-                result = resource
-            elif isinstance(resource, dict):
-                try:
-                    result = json.dumps(resource).encode("utf-8")
-                except TypeError:
-                    raise PluginException(PluginException.Preset.INVALID_JSON, data=resource)
-            else:
-                raise PluginException(PluginException.Preset.UNKNOWN, data=resource)
-
-        return {Output.ATTACHMENT_CONTENTS: str(base64.b64encode(result), "utf-8")}
+        return {
+            Output.ATTACHMENT_CONTENTS: RequestHelper.get_attachment(self.connection, params.get(Input.ATTACHMENT_ID))
+        }
