@@ -27,7 +27,12 @@ class GetComments(insightconnect_plugin_runtime.Action):
 
         comments = issue.fields.comment.comments or []
 
-        results = list(map(lambda comment: normalize_comment(comment, logger=self.logger), comments))
+        results = list(
+            map(
+                lambda comment: normalize_comment(comment, is_cloud=self.connection.is_cloud, logger=self.logger),
+                comments,
+            )
+        )
         results = insightconnect_plugin_runtime.helper.clean(results)
 
         count = len(results)
