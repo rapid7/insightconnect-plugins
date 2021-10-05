@@ -1191,6 +1191,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.7.1 - Fix bug in Get Alerts trigger which caused trigger to crash
 * 4.7.0 - Add new action Collect Investigation Package
 * 4.6.0 - Add new actions Get Installed Software, Get Related Machines and Manage Tags
 * 4.5.1 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://docs.rapid7.com/insightconnect/microsoft-defender-ATP)
