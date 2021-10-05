@@ -4,9 +4,10 @@ products: [insightconnect]
 name: rapid7_metasploit
 title: Rapid7 Metasploit
 description: This plugin allows you to search for and execute exploits in Metasploit
-version: 2.0.1
+version: 3.0.0
 vendor: rapid7
 support: rapid7
+supported_versions: [4.20.0-2021091301]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_metasploit
@@ -168,7 +169,7 @@ types:
     rport:
       title: Remote Port
       description: Remote Port
-      type: string
+      type: integer
     path:
       title: Path
       description: Location of the Metasploit module
@@ -191,27 +192,32 @@ connection:
     title: Username and Password
     description: Username and password
     required: true
+    example: '{"username": example, "password": example}'
   uri:
     type: string
     title: URI
     description: The msfrpcd URI
     default: /api/
     required: false
+    example: /api/
   port:
     type: integer
     description: Port
     default: 55553
     required: false
+    example: 55553
   server:
     type: string
     description: Remote server IP
     required: false
+    example: example.com
   ssl:
     type: boolean
     title: SSL
     description: Use SSL
     default: true
     required: false
+    example: true
 actions:
   search_for_exploit:
     title: Search for Exploit
@@ -222,6 +228,7 @@ actions:
         description: Search term, e.g. 'vsftp'
         type: string
         required: true
+        example: vsftp
     output:
       search_results:
         title: Search Results
@@ -234,15 +241,16 @@ actions:
     input:
       options:
         title: Options
-        description: Metasploit module options e.g {"RHOST":"10.0.2.5", "RPORT":"1099",
-          "LHOST":"10.0.2.15", "payload":"java/meterpreter/reverse_tcp"}
+        description: Metasploit module options
         type: object
         required: false
+        example: '{"RHOST":"10.0.2.5", "RPORT":"1099", "LHOST":"10.0.2.15", "payload":"java/meterpreter/reverse_tcp"}'
       module:
         title: Metasploit Module
-        description: A Metasploit module e.g exploit/multi/misc/java_rmi_server
+        description: A Metasploit module
         type: string
         required: true
+        example: exploit/multi/misc/java_rmi_server
     output:
       console_output:
         title: Console Information
