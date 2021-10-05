@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="paloalto_wildfire-rapid7-plugin",
-      version="1.1.2",
+      version="1.2.0",
       description="Perform malware analysis with Palo Alto Wildfire",
       author="rapid7",
       author_email="",
