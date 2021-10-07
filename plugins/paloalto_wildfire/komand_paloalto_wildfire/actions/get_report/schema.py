@@ -35,7 +35,7 @@ class GetReportInput(komand.Input):
     "hash": {
       "type": "string",
       "title": "Hash",
-      "description": "The MD5 or SHA‐256 hash value of the sample",
+      "description": "The MD5 or SHA-256 hash value of the sample",
       "order": 1
     }
   },
