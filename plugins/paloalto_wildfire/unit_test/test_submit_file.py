@@ -1,34 +1,31 @@
+import sys
+import os
+from unittest.mock import patch
 from unittest import TestCase
-from komand_paloalto_wildfire.actions import SubmitFile
-from komand_paloalto_wildfire.connection import Connection
-import json
-import logging
+from komand_paloalto_wildfire.actions.submit_file import SubmitFile
+from komand_paloalto_wildfire.actions.submit_file.schema import Input
+from unit_test.test_util import Util
+from pyldfire import WildFireException
+
+sys.path.append(os.path.abspath("../"))
 
 
 class TestSubmitFile(TestCase):
-    def test_submit_file_unsupported_type(self):
-        # Live test - uncomment and use icon-lab set to run
-        log = logging.getLogger("Test")
-        sf = SubmitFile()
-        conn = Connection()
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.action = Util.default_connector(SubmitFile())
 
-        sf.logger = log
-        conn.logger = log
-
-        with open("../tests/submit_file.json") as file:
-            data = json.load(file)
-            connection_params = data.get("body").get("connection")
-
-        conn.connect(connection_params)
-        sf.connection = conn
-
-        action_params = {
-            "filename": "EICAR.txt",
-            "file": "WDVPIVAlQEFQWzRcUFpYNTQoUF4pN0NDKTd9JEVJQ0FSLVNUQU5EQVJELUFOVElWSVJVUy1URVNULUZJTEUhJEgrSCo=",
-        }
-
-        actual = sf.run(action_params)
-
+    @patch(
+        "pyldfire.WildFire.submit_file",
+        side_effect=WildFireException("Unsupport File type with sample sha256:invalidFile"),
+    )
+    def test_submit_file_unsupported_type(self, mock_request):
+        actual = self.action.run(
+            {
+                Input.FILE: "WDVPIVAlQEFQWzRcUFpYNTQoUF4pN0NDKTd9JEVJQ0FSLVNUQU5EQVJELUFOVElWSVJVUy1URVNULUZJTEUhJEgrSCo=",
+                Input.FILENAME: "EICAR.txt",
+            }
+        )
         expected = {"submission": {"supported_file_type": False, "filename": "Unknown", "url": "Unknown"}}
+
         self.assertEqual(actual, expected)
-        pass
