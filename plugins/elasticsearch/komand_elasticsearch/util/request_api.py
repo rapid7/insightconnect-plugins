@@ -62,7 +62,7 @@ class RequestAPI:
         elif total is None:
             total = 0
 
-        for i in range(0, 9999):
+        for _ in range(0, 9999):
             if scroll_id:
                 try:
                     scroll_page = self._get_scroll_page(scroll_id, scroll_time)
@@ -72,7 +72,7 @@ class RequestAPI:
                     hits.extend(page_hits)
                     took += scroll_page.get("took", 0)
                     scroll_id = scroll_page.get("_scroll_id")
-                except PluginException as e:
+                except PluginException:
                     break
 
         return {

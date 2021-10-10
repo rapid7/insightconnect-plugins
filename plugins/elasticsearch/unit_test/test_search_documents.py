@@ -79,6 +79,13 @@ class TestSearchDocuments(TestCase):
     @patch("requests.request", side_effect=Util.mocked_requests_get)
     def test_search_documents_without_route(self, mock_request):
         actual = self.action.run(
+            {Input.INDEX: "search-without-route", Input.QUERY: {"query": {"match_all": {}}}}
+        )
+        self.assertEqual(actual, self.expected)
+
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
+    def test_search_documents_with_route_none(self, mock_request):
+        actual = self.action.run(
             {Input.INDEX: "search-without-route", Input.QUERY: {"query": {"match_all": {}}}, Input.ROUTING: None}
         )
         self.assertEqual(actual, self.expected)
