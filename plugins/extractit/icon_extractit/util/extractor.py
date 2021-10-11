@@ -35,7 +35,7 @@ def extract_filepath(provided_regex: str, provided_string: str, provided_file: s
 def strip_subdomains(matches: list) -> list:
     for match in enumerate(matches):
         stripped_domain = tldextract.extract(match[1])
-        # In some cases, tldextract recognizes a suffix as a domain, adds the domain to subdomain, and returns an empty 
+        # In some cases, tldextract recognizes a suffix as a domain, adds the domain to subdomain, and returns an empty
         # string as suffix, so we check that tldextract extracted the suffix.
         if not stripped_domain.suffix:
             suffix = stripped_domain.domain
