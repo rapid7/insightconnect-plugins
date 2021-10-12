@@ -4,7 +4,7 @@
 
 Welcome to the open source plugins repository for Rapid7 InsightConnect. 
 
-Plugin development documentation can be found at [https://docs.rapid7.com/insightconnect/getting-started](https://docs.rapid7.com/insightconnect/getting-started) and a full list of all plugins available for InsightConnect can be found at the [Rapid7 Extension Library](https://www.extensions.rapid7.com).
+Plugin development documentation can be found at [https://docs.rapid7.com/insightconnect/getting-started](https://docs.rapid7.com/insightconnect/getting-started) and a full list of all plugins available for InsightConnect can be found at the [Rapid7 Extension Library](https://extensions.rapid7.com).
 
 ## Contributing
 
