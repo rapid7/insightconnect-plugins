@@ -317,7 +317,7 @@ _This plugin does not contain any custom output types._
 ## Troubleshooting
 
 When selecting adjusting frequency please review [rate limits](https://developer.carbonblack.com/reference/cb-defense/authentication/#rate-limiting)
-Get Notifications trigger requires that the [API key type](https://developer.carbonblack.com/reference/cb-defense/authentication/#api-key-types) is a 'SIEM' type.
+Get Notifications trigger requires that the [API key type](https://developer.carbonblack.com/reference/carbon-black-cloud/authentication/) is a 'SIEM' type.
 The Role Based Access Control (RBAC) of your API Key will require the right permissions (https://developer.carbonblack.com/reference/carbon-black-cloud/cb-defense/latest/platform-search-api-enriched-events/#authentication).
 
 # Version History
