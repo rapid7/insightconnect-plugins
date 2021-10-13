@@ -37,6 +37,26 @@ class TestSearchDocuments(TestCase):
         },
     }
 
+    expected_with_route = {
+        Output.TOOK: 2,
+        Output.TIMED_OUT: False,
+        Output.SHARDS: {"total": 1, "successful": 1, "skipped": 0, "failed": 0},
+        Output.HITS: {
+            "total": {"value": 2},
+            "max_score": 1.0,
+            "hits": [
+                {
+                    "_index": "test-index",
+                    "_type": "_doc",
+                    "_id": "VWx5O3oBrBTgS4Hhf6Hp",
+                    "_score": 1.0,
+                    "_routing": "test-route",
+                    "_source": {"id": 1, "message": "Some message"},
+                },
+            ],
+        },
+    }
+
     @classmethod
     @patch("requests.request", side_effect=Util.mocked_requests_get)
     def setUpClass(cls, mock_request) -> None:
@@ -50,7 +70,19 @@ class TestSearchDocuments(TestCase):
         self.assertEqual(actual, self.expected)
 
     @patch("requests.request", side_effect=Util.mocked_requests_get)
+    def test_search_documents_with_route(self, mock_request):
+        actual = self.action.run(
+            {Input.INDEX: "search-with-route", Input.QUERY: {"query": {"match_all": {}}}, Input.ROUTING: "test-route"}
+        )
+        self.assertEqual(actual, self.expected_with_route)
+
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
     def test_search_documents_without_route(self, mock_request):
+        actual = self.action.run({Input.INDEX: "search-without-route", Input.QUERY: {"query": {"match_all": {}}}})
+        self.assertEqual(actual, self.expected)
+
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
+    def test_search_documents_with_route_none(self, mock_request):
         actual = self.action.run(
             {Input.INDEX: "search-without-route", Input.QUERY: {"query": {"match_all": {}}}, Input.ROUTING: None}
         )

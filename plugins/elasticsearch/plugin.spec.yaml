@@ -4,7 +4,8 @@ products: [insightconnect]
 name: elasticsearch
 title: Elasticsearch
 description: Distributed Real-Time Search and Analytics Engine
-version: 3.0.0
+version: 3.0.1
+supported_versions: ["7.8.1", "6.0.0"]
 vendor: rapid7
 support: community
 status: []
