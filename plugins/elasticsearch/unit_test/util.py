@@ -64,6 +64,8 @@ class Util:
             return MockResponse("error", 200)
         elif "search-without-route" in args[1]:
             return MockResponse("search_without_route", 200)
+        elif "search-with-route" in args[1]:
+            return MockResponse("search_with_route", 200)
         elif "search/_search" in args[1] or "trigger-index" in args[1]:
             return MockResponse("search_document", 200)
         elif "UpdateError" in args[1]:
