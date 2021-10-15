@@ -89,7 +89,7 @@ class CiscoAsaAPI:
     ) -> bool:
         if shun:
             if not destination_ip:
-                destination_ip = "0.0.0.0"
+                destination_ip = "0.0.0.0"  # nosec
             if not source_port:
                 source_port = 0
             if not destination_port:
@@ -126,7 +126,7 @@ class CiscoAsaAPI:
     @staticmethod
     def _has_data_in_hosts(split_host: list) -> bool:
         if (
-            len(split_host) == 7
+            len(split_host) == 7  # pylint: disable=too-many-boolean-expressions
             and split_host[2]
             and split_host[3]
             and split_host[4]
@@ -160,7 +160,7 @@ class CiscoAsaAPI:
             if response.status_code >= 400:
                 response_data = response.text
                 raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response_data)
-            if response.status_code == 201 or response.status_code == 204:
+            if response.status_code == 201 or response.status_code == 204:  # pylint: disable=consider-using-in
                 return {}
             if 200 <= response.status_code < 300:
                 return response.json()

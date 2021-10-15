@@ -13,5 +13,5 @@ class GetBlockedHosts(insightconnect_plugin_runtime.Action):
             output=GetBlockedHostsOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}):   # pylint: disable=unused-argument
         return {Output.HOSTS: self.connection.cisco_asa_api.get_blocked_hosts()}
