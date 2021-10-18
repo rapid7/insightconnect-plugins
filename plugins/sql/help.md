@@ -16,7 +16,9 @@ This plugin allows users to run and execute queries against a SQL database.
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* MySQL 8.0.21
+* MSSQL 2019 15.0.2000.5
+* PostgresSQL 13.0
 
 # Documentation
 
@@ -29,7 +31,7 @@ The connection configuration accepts the following parameters:
 |credentials|credential_username_password|None|True|Database username and password|None|{ "username": "user@example.com", "password": "mypassword"}|
 |db|string|None|True|Database name|None|database_name|
 |host|string|None|True|Database hostname|None|198.51.100.1|
-|port|string|None|False|Database port|None|443|
+|port|string|None|False|Database port|None|1433|
 |type|string|None|True|Database type (MSSQL, MySQL, PostgreSQL)|['MSSQL', 'MySQL', 'PostgreSQL']|MySQL|
 
 Example input:
@@ -42,7 +44,7 @@ Example input:
   },
   "db": "database_name",
   "host": "198.51.100.1",
-  "port": 443,
+  "port": 1433,
   "type": "MySQL"
 }
 ```
@@ -117,6 +119,7 @@ For the SQL query action, be sure that your query is valid SQL.
 
 # Version History
 
+* 3.0.3 - Change example input Port in Connection | Update file util.py to Python3
 * 3.0.2 - Add default PORT for MSSQL and MySQL connection
 * 3.0.1 - Close database connection after use
 * 3.0.0 - Add example input and title in connection and Query action | Update python version to `python-3-37-plugin:3` | Add `USER` in Dockerfile | Update `psycopg2` and `mysqlclient` version | Code refactor in connection.py, util.py and Query action.py
