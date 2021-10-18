@@ -1907,6 +1907,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 6.2.1 - Fix Get Agent Details and Search Agents actions to handle more response scenarios
 * 6.2.0 - New actions Create Query, Get Query Status, Cancel Running Query, Get Events, Get Events By Type
 * 6.1.0 - Add new actions Disable Agent and Enable Agent
 * 6.0.0 - Add `operational_state` field to input of Get Agent Details and Search Agent actions | Update schema to return new outputs such as Active Directory, firewall, location, and quarantine information for Get Agent Details and Search Agent actions | Use API version 2.1 | Update capitalization according to style in Activities List action for Created Than Date and Less Than Dates inputs to Greater than Date and Less than Date
