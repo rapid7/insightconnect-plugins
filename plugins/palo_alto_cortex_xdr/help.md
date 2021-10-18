@@ -14,6 +14,10 @@ Stop modern attacks with the industry’s first extended detection and response 
 * A Palo Alto Cortex XDR API key ID
 * The URL to your Palo Alto Cortex XDR API instance
 
+# Supported Product Versions
+
+* Palo Alto Cortex XDR API v1
+
 # Documentation
 
 ## Setup
