@@ -1,7 +1,7 @@
 {
-	"spec": "36ff822fde417e00264411dd9dc4ae80",
-	"manifest": "05004c1105ffdb9e223b6e7c8c8fdb18",
-	"setup": "c8000858b5533c60c5495e2c8952031c",
+	"spec": "1576739342ccf11c8fea91e78be37924",
+	"manifest": "0e904005f4356f628a2176a91670175b",
+	"setup": "d4d20857c97229ce3780357bcd6dc398",
 	"schemas": [
 		{
 			"identifier": "get_observables/schema.py",
@@ -29,15 +29,15 @@
 		},
 		{
 			"identifier": "submit_file/schema.py",
-			"hash": "537ca82c6dccadf7a42dc5c72061eebd"
+			"hash": "68083bab2cdf099153389d44800b3525"
 		},
 		{
 			"identifier": "submit_url/schema.py",
-			"hash": "fa26db80c3600ffe64b9177b83480ff1"
+			"hash": "a74664cf1f65efdca020813ff1a7ac5c"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "fae4f1ff734ca4b0f9bbd1cd00524e8a"
+			"hash": "fe5e5d18cff1a94ab63863ef795fbf92"
 		}
 	]
 }

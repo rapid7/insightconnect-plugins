@@ -81,7 +81,7 @@ class SearchComputersInput(komand.Input):
       "type": "integer",
       "title": "Number Value",
       "description": "Number to search for",
-      "default": "",
+      "default": 0,
       "order": 6
     },
     "search_type": {

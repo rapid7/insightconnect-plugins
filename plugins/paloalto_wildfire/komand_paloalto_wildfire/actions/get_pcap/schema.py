@@ -25,7 +25,7 @@ class GetPcapInput(komand.Input):
     "hash": {
       "type": "string",
       "title": "Hash",
-      "description": "The MD5 or SHA‐256 hash value of the sample",
+      "description": "The MD5 or SHA-256 hash value of the sample",
       "order": 1
     },
     "platform": {
@@ -36,7 +36,7 @@ class GetPcapInput(komand.Input):
         "Windows XP, Adobe Reader 9.3.3, Office 2003",
         "Windows XP, Adobe Reader 9.4.0, Flash 10, Office 2007",
         "Windows XP, Adobe Reader 11, Flash 11, Office 2010",
-        "Windows 7 32‐bit, Adobe Reader 11, Flash 11, Office 2010",
+        "Windows 7 32-bit, Adobe Reader 11, Flash 11, Office 2010",
         "Windows 7 64bit, Adobe Reader 11, Flash 11, Office 2010",
         "Android 2.3, API 10, avd2.3.1",
         "Mac OS X Mountain Lion"

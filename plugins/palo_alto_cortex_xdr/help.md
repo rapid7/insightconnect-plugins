@@ -511,6 +511,8 @@ Example output:
 
 ### Tasks
 
+Plugin Tasks are currently in development! This new plugin capability will collect and deliver events to Insight products for search and use in automation workflows.
+
 #### Monitor Incident Events
 
 This task is used to monitor incident events.
