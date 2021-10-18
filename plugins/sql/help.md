@@ -16,9 +16,9 @@ This plugin allows users to run and execute queries against a SQL database.
 
 # Supported Product Versions
 
-* MySQL
-* MSSQL
-* PostgresSQL
+* MySQL 8.0.21
+* MSSQL 2019 15.0.2000.5
+* PostgresSQL 13.0
 
 # Documentation
 
