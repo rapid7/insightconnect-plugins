@@ -33,13 +33,13 @@ def clean(obj):
     # The only *real* difference here is how we have to iterate through these different collection types
     if isinstance(cleaned, list):
         for key, value in enumerate(cleaned):
-            if isinstance(value, list) or isinstance(value, dict):
+            if isinstance(value, list) or isinstance(value, dict):  # pylint: disable=consider-merging-isinstance
                 cleaned[key] = clean(value)
             if key in default_array and (value is None or value == "None"):
                 cleaned[key] = []
     elif isinstance(cleaned, dict):
         for key, value in cleaned.items():
-            if isinstance(value, dict) or isinstance(value, list):
+            if isinstance(value, dict) or isinstance(value, list):  # pylint:disable=consider-merging-isinstance
                 cleaned[key] = clean(value)
             if key in default_array and (value is None or value == "None"):
                 cleaned[key] = []
