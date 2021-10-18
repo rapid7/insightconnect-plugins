@@ -40,7 +40,7 @@ class SubmitFileInput(komand.Input):
     "detail": {
       "type": "string",
       "title": "Detail",
-      "description": "A comma-separated list that provides additional details for the indicator. This information is displayed in the Tag column of the ThreatStream UI. For example, \\"Credential-Exposure,compromised_email\\"",
+      "description": "A comma-separated list that provides additional details for the indicator. This information is displayed in the Tag column of the ThreatStream UI",
       "order": 5
     },
     "file": {
