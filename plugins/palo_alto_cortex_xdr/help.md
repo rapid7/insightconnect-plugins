@@ -632,6 +632,7 @@ Example output:
 
 # Version History
 
+* 2.1.1 - Fix issue in Monitor Incident Events task where fields with null values aren't removed from incidents leading to validation errors
 * 2.1.0 - New task Monitor Incident Events
 * 2.0.0 - New action Get File Quarantine Status | New trigger Get Alerts
 * 1.0.0 - Initial plugin
