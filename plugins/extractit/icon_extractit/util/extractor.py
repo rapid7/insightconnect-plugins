@@ -50,12 +50,18 @@ def strip_subdomains(matches: list) -> list:
 
 
 def clear_domains(matches: list) -> list:
+    # The method is designed to reduce the number of false positives results. The domain regex has been extended to
+    # include the path from the URL and the @ and = characters if they are at the end of the found domain.
     new_matches = []
     for match in enumerate(matches):
-        if not match[1].endswith("@"):
-            split_match = match[1].split("/")[0]
-            if not split_match.endswith("="):
-                new_matches.append(split_match)
+        # Here we remove the path, this solution allows to prevent the situation where the file names from the URL will
+        # be extracted as domains, e.g. www.example.com/test.html
+        split_match = match[1].split("/")[0]
+        # Here we eliminate all domains that end with = or @. This avoids extracting two domains from an email address,
+        # e.g. user.test@example.com, or extracting field names from an EML file as domains, e.g. two domains would be
+        # extracted from "header.from=example.com"
+        if not split_match.endswith("@") and not split_match.endswith("="):
+            new_matches.append(split_match)
     return list(dict.fromkeys(new_matches))
 
 
