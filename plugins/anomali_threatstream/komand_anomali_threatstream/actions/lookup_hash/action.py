@@ -32,7 +32,7 @@ class LookupHash(komand.Action):
         self.request.params.update({"md5": params["hash"], "limit": 1000, "offset": 0})
 
         while self.continue_paging:
-            response = self.connection.session.send(self.request.prepare(), verify=self.request.verify)
+            response = self.connection.send(self.request)
             if response.status_code not in range(200, 299):
                 raise PluginException(
                     cause="Received %d HTTP status code from ThreatStream." % response.status_code,

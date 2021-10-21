@@ -1,25 +1,32 @@
-import komand
+import insightconnect_plugin_runtime
+from .schema import CalculateInput, CalculateOutput, Input, Output, Component
+
+# Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
 import ipcalc
-from .schema import CalculateInput, CalculateOutput
+import validators
 
 
-class Calculate(komand.Action):
+class Calculate(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="calculate",
-            description="Returns Subnet Information for IP and Netmask",
+            description=Component.DESCRIPTION,
             input=CalculateInput(),
             output=CalculateOutput(),
         )
 
     def run(self, params={}):
-        cidr = params.get("cidr")
+        cidr = params.get(Input.CIDR)
 
         # Test for correct input
-        try:
+        if validators.ipv4_cidr(cidr):
             subnet = ipcalc.Network(cidr)
-        except:
-            raise ValueError("Invalid Input")
+        else:
+            raise PluginException(
+                cause=f"Provided network {cidr} is not in CIDR notation.",
+                assistance="Please check that the provided network is correct and try again.",
+            )
 
         # Extract first octet from input
         address = cidr.split("/", 1)
@@ -37,26 +44,21 @@ class Calculate(komand.Action):
             bits = 24
             ip_class = "C"
         else:
-            raise ValueError("IP Resides in Reserved Range")
+            raise PluginException(
+                cause=f"IP address {address[0]} resides in reserved range.",
+                assistance="Please provide an IP address outside the reserved range.",
+            )
         # Error if an invalid mask is provided for the network class
         if int(subnet.subnet()) < bits:
-            raise ValueError("Invalid Mask for Network Class")
+            raise PluginException(
+                cause="Invalid mask for network class.",
+                assistance="Please provide a valid mask for the network class.",
+            )
 
-        # Find first and last host address in subnet
-        first = str(subnet.host_first())
-        last = str(subnet.host_last())
-
-        # Create variables to generate dic
-        hosts = int(subnet.size() - 2)
-        subnet_id = str(subnet.network())
-        host_range = "%s - %s" % (first, last)
-        broadcast = str(subnet.broadcast())
-        ip = address[0]
-        netmask_bin = subnet.netmask()
-        binary_netmask = netmask_bin.bin()
+        hosts = max(int(subnet.size() - 2), 0)
+        host_range = "" if not hosts else f"{str(subnet.host_first())} - {str(subnet.host_last())}"
         netmask = str(subnet.netmask())
         netmask_split = netmask.split(".", 4)
-        cidr_notation = "/%s" % address[1]
 
         # Calculate wildcard mask
         wildcard = []
@@ -72,23 +74,16 @@ class Calculate(komand.Action):
         if subnets == 0:
             subnets = 1
 
-        # Generate dic to return
-        dic = {
-            "ip": ip,
-            "netmask": netmask,
-            "wildcard": wildcard,
-            "cidr": cidr_notation,
-            "binary_netmask": binary_netmask,
-            "ip_class": ip_class,
-            "subnets": subnets,
-            "hosts": hosts,
-            "subnet_id": subnet_id,
-            "host_range": host_range,
-            "broadcast": broadcast,
+        return {
+            Output.IP: address[0],
+            Output.NETMASK: netmask,
+            Output.WILDCARD: wildcard,
+            Output.CIDR: f"/{address[1]}",
+            Output.BINARY_NETMASK: subnet.netmask().bin(),
+            Output.IP_CLASS: ip_class,
+            Output.SUBNETS: subnets,
+            Output.HOSTS: hosts,
+            Output.SUBNET_ID: str(subnet.network()),
+            Output.HOST_RANGE: host_range,
+            Output.BROADCAST: str(subnet.broadcast()),
         }
-
-        return dic
-
-    def test(self):
-        """TODO: Test action"""
-        return {}
