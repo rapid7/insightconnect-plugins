@@ -589,7 +589,7 @@ connection:
     title: URL
     type: string
     description: API URL
-    default: https://api.confer.net
+    default: https://defense.conferdeploy.net
     required: true
   api_key:
     title: API Key
@@ -600,6 +600,11 @@ connection:
     title: Connector
     type: string
     description: Connector ID
+    required: true
+  org_key:
+    title: Organization Key
+    type: string
+    description: The customer's organization key
     required: true
 actions:
   find_event:
@@ -614,21 +619,9 @@ actions:
           will match the hostname WIN-IA9NQ1GN8OI
         type: string
         required: false
-      hostNameExact:
-        title: Hostname Exact
-        description: Filter on the exact hostname. For example hostName=WIN-IA9NQ1GN8OI
-          will only return devices with the exact hostname WIN-IA9NQ1GN8OI but not
-          a host named win-IA9NQ1GN8OI
-        type: string
-        required: false
       ownerName:
         title: Owners Name
         description: Filter on owner name case insensitive
-        type: string
-        required: false
-      ownerNameExact:
-        title: Owners Name Exact
-        description: Same as 'Owners Name' but with case sensitivity
         type: string
         required: false
       ipAddress:
