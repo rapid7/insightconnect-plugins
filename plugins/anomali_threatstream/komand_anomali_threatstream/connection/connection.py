@@ -7,7 +7,8 @@ from requests import Session, Request
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import logging
 from copy import copy
-from komand.exceptions import ConnectionTestException
+import re
+from komand.exceptions import ConnectionTestException, PluginException
 
 
 class Connection(komand.Connection):
@@ -41,3 +42,25 @@ class Connection(komand.Connection):
             raise ConnectionTestException(preset=ConnectionTestException.Preset.INVALID_JSON, data=response.text)
 
         return {"connection": "successful"}
+
+    def send(self, request):
+        try:
+            return self.session.send(request.prepare(), verify=request.verify)
+        except Exception as e:
+            raise PluginException(
+                cause=f"The following exception was raised: {self.hide_api_key(str(e))}",
+                assistance="Please verify your ThreatStream server status and try again. "
+                "If the issue persists please contact support.",
+            ) from None  # Suppresses the exception context from the original error that exposes API key
+
+    @staticmethod
+    def hide_api_key(string):
+        """
+        ThreatStream queries expose the API key as a URL query parameter. This method hides the API key using a regex that
+        substitutes with the replacement the first instance in string of a substring that matches pattern.
+        The pattern regex matches the api_key URL query parameter. It captures whether or not another parameter
+        follows the api_key value in the group named" "end" with an &. The replacement regex retains the end group.
+        """
+        pattern = r"api_key=([a-zA-Z0-9]+)(?P<end>\&|$)"
+        replacement = r"api_key=********\g<end>"
+        return re.sub(pattern, replacement, string)

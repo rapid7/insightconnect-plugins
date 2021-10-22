@@ -4,7 +4,8 @@ products: [insightconnect]
 name: palo_alto_cortex_xdr
 title: Palo Alto Cortex XDR
 description: Stop modern attacks with the industry's first extended detection and response platform that spans your endpoints, network and cloud data
-version: 2.1.0
+version: 2.1.1
+supported_versions: ["Palo Alto Cortex XDR API v1"]
 vendor: rapid7
 support: rapid7
 status: []

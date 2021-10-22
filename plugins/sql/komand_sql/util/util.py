@@ -16,7 +16,7 @@ def generate_results(conn_type, connection, query, parameters, logger):
             rows_affected = analyze_response["Plan Rows"]
             operation = analyze_response["Operation"]
         except KeyError:
-            if "Plan Rows" in analyze_response:
+            if analyze_response.get("Plan Rows", default_value=False):
                 rows_affected = analyze_response["Plan Rows"]
             else:
                 rows_affected = 0
@@ -32,7 +32,7 @@ def generate_results(conn_type, connection, query, parameters, logger):
 
     if rows.is_insert or operation == "Insert":
         connection.session.commit()
-        return {"status": "successfully inserted %d rows" % int(rows_affected)}
+        return {"status": f"successfully inserted {rows_affected} rows."}
 
     if not rows.returns_rows:
         connection.session.commit()
@@ -51,7 +51,7 @@ def generate_results(conn_type, connection, query, parameters, logger):
             for j, col in enumerate(row.keys()):
                 try:
                     v = str(row[col])
-                except:
+                except Exception:
                     v = row[col]
                 result_row[header[j]] = v
             results.append(result_row)
