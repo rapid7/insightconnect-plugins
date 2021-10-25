@@ -336,7 +336,7 @@ actions:
         example: true
       is_closed:
         title: Closed Status
-        description: Is closed/open alerts
+        description: Status of the alert, either closed or open
         type: boolean
         required: false
         example: false
