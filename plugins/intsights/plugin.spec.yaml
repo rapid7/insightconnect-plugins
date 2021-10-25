@@ -193,7 +193,7 @@ actions:
         required: true
   get_indicator_scan_status:
     title: Get Indicator Scan Status
-    description: Get the scan status of an indicator in Insights TIP system
+    description: Get the scan status of an indicator in the IntSights TIP system
     input:
       task_id:
         title: Task ID
