@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="sql-rapid7-plugin",
-      version="3.0.2",
+      version="3.0.3",
       description="The SQL plugin allows you to run SQL queries",
       author="rapid7",
       author_email="",

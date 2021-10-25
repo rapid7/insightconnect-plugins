@@ -631,6 +631,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.1 - Support domain extraction from encoded URL | Fix issue where subdomain removal did not work properly in some cases | Improve domain extraction by limiting the number of false positive results
 * 2.2.0 - Add Extract All, UUID Extractor and CVE Extractor actions | Cloud enabled
 * 2.1.2 - Rollback URL matching regex used in HTML email extraction.
 * 2.1.1 - Rewrite plugin to use the Python SDK | Add input and output examples in plugin.spec and held.md | Fix issue in domain extractor where multiple domains were extracted from a single URL | Fix issue where the URL extractor does not extract URLs containing an email address | Fix issue where hash extractors would return part of SHA256 or SHA512 hashes as SHA1 hash and part of SHA512 hash as SHA256 hash | Update the MD5 regex to exclude spaces or other extra characters in the results | Fix issue where the file path extractor was extracting part of a URL or date as a file path | Add unit tests
