@@ -131,7 +131,7 @@ actions:
         required: true
       related_malware:
         title: Related Malware
-        description: Related Malware
+        description: Related malware
         type: '[]string'
         required: true
       related_campaigns:
