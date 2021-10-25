@@ -106,7 +106,7 @@ actions:
         required: false
       last_update:
         title: Last Update
-        description: Last Update
+        description: Last update
         type: string
         required: false
       geo_location:
