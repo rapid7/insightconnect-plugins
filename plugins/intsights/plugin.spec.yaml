@@ -96,7 +96,7 @@ actions:
         required: true
       first_seen:
         title: First Seen
-        description: First Seen
+        description: First seen
         type: string
         required: false
       last_seen:
