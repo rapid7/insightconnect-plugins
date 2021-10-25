@@ -110,7 +110,7 @@ actions:
         type: string
         required: false
       geo_location:
-        title: GEO Location
+        title: Geographic Location
         description: Geographic location
         type: string
         required: false
