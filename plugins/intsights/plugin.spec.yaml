@@ -141,7 +141,7 @@ actions:
         required: true
       related_threat_actors:
         title: Related Threat Actors
-        description: Related Threat Actors
+        description: Related threat actors
         type: '[]string'
         required: true
   enrich_indicator:
