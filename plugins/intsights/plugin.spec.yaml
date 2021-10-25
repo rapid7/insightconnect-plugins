@@ -334,7 +334,7 @@ actions:
       is_flagged:
         title: Alert Flag Status
         description: Show flagged/unflagged alerts
-        type: boolean
+        type: string
         required: false
         example: true
       is_closed:
