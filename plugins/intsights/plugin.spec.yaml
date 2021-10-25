@@ -172,7 +172,7 @@ actions:
         required: true
   rescan_indicator:
     title: Rescan Indicator
-    description: Force an indicator scan in Intsights TIP system
+    description: Force an indicator scan in IntSights TIP system
     input:
       indicator_file_hash:
         title: Indicator File Hash
