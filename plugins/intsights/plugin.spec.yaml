@@ -101,7 +101,7 @@ actions:
         required: false
       last_seen:
         title: Last Seen
-        description: Last Seen
+        description: Last seen
         type: string
         required: false
       last_update:
