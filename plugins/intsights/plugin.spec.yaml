@@ -126,7 +126,7 @@ actions:
         required: true
       system_tags:
         title: System Tags
-        description: System Tags
+        description: System tags
         type: '[]string'
         required: true
       related_malware:
