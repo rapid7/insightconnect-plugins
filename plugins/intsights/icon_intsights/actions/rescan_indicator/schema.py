@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Force an indicator scan in Intsights TIP system"
+    DESCRIPTION = "Force an indicator scan in IntSights TIP system"
 
 
 class Input:

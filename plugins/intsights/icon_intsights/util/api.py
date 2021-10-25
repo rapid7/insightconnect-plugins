@@ -98,7 +98,7 @@ class ManualAlertParams:
         )
 
 
-class IntSightAPI:
+class IntSightsAPI:
     def __init__(self, account_id: str, api_key: str, logger: Logger):
         self.account_id = account_id
         self.api_key = api_key

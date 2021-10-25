@@ -61,31 +61,31 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
     "first_seen": {
       "type": "string",
       "title": "First Seen",
-      "description": "First Seen",
+      "description": "First seen",
       "order": 6
     },
     "geo_location": {
       "type": "string",
-      "title": "GEO Location",
-      "description": "GEO Location",
+      "title": "Geographic Location",
+      "description": "Geographic location",
       "order": 9
     },
     "last_seen": {
       "type": "string",
       "title": "Last Seen",
-      "description": "Last Seen",
+      "description": "Last seen",
       "order": 7
     },
     "last_update": {
       "type": "string",
       "title": "Last Update",
-      "description": "Last Update",
+      "description": "Last update",
       "order": 8
     },
     "related_campaigns": {
       "type": "array",
       "title": "Related Campaigns",
-      "description": "Related Campaigns",
+      "description": "Related campaigns",
       "items": {
         "type": "string"
       },
@@ -94,7 +94,7 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
     "related_malware": {
       "type": "array",
       "title": "Related Malware",
-      "description": "Related Malware",
+      "description": "Related malware",
       "items": {
         "type": "string"
       },
@@ -103,7 +103,7 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
     "related_threat_actors": {
       "type": "array",
       "title": "Related Threat Actors",
-      "description": "Related Threat Actors",
+      "description": "Related threat actors",
       "items": {
         "type": "string"
       },
@@ -133,7 +133,7 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
     "system_tags": {
       "type": "array",
       "title": "System Tags",
-      "description": "System Tags",
+      "description": "System tags",
       "items": {
         "type": "string"
       },

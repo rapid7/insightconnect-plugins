@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Search Alerts based on criteria"
+    DESCRIPTION = "Search alerts based on criteria"
 
 
 class Input:
@@ -37,7 +37,7 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
     "alert_type": {
       "type": "string",
       "title": "Alert Type",
-      "description": "Comma separated list of alert types. Allowed values - AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip",
+      "description": "Comma-separated list of alert types. Allowed values: AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip",
       "enum": [
         "AttackIndication",
         "DataLeakage",
@@ -50,8 +50,8 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
     },
     "assigned": {
       "type": "boolean",
-      "title": "Assigned",
-      "description": "Show assigned/unAssigned alerts",
+      "title": "Alert Assignment",
+      "description": "Show assigned/unassigned alerts",
       "order": 11
     },
     "found_date_from": {
@@ -74,26 +74,26 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
     },
     "is_closed": {
       "type": "boolean",
-      "title": "Is Closed",
+      "title": "Closed Status",
       "description": "Is closed/open alerts",
       "order": 13
     },
     "is_flagged": {
       "type": "boolean",
-      "title": "Is Flagged",
+      "title": "Alert Flag Status",
       "description": "Show flagged/unflagged alerts",
       "order": 12
     },
     "matched_asset_value": {
       "type": "string",
       "title": "Matched Asset Value",
-      "description": "Comma separated list",
+      "description": "Comma-separated list",
       "order": 5
     },
     "network_type": {
       "type": "string",
       "title": "Network Type",
-      "description": "Comma separated list of network type. Allowed values - ClearWeb, DarkWeb",
+      "description": "Comma-separated list of network type. Allowed values: ClearWeb, DarkWeb",
       "enum": [
         "ClearWeb",
         "DarkWeb"
@@ -103,13 +103,13 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
     "remediation_status": {
       "type": "string",
       "title": "Remediation Status",
-      "description": "Comma separated list of remediation status. Allowed values - InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed",
+      "description": "Comma-separated list of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed",
       "order": 6
     },
     "severity": {
       "type": "string",
       "title": "Severity",
-      "description": "Comma separated list of alerts severity. Allowed values - High, Medium, Low",
+      "description": "Comma-separated list of alerts severity. Allowed values: High, Medium, Low",
       "enum": [
         "High",
         "Medium",
@@ -132,7 +132,7 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
     "source_type": {
       "type": "string",
       "title": "Source Type",
-      "description": "Comma separated list of alerts source type. Allowed values - ApplicationStores, BlackMarkets, HackingForums, SocialMedia, PasteSites, Others",
+      "description": "Comma-separated list of alerts source type. Allowed values: ApplicationStores, BlackMarkets, HackingForums, SocialMedia, PasteSites, Others",
       "enum": [
         "Application Store",
         "Cyber Security Blog",

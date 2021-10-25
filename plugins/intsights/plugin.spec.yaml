@@ -218,7 +218,7 @@ actions:
     input:
       alert_type:
         title: Alert Type
-        description: Comma-separated list of alert types. Allowed values: AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip
+        description: 'Comma-separated list of alert types. Allowed values: AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip'
         type: string
         required: false
         enum:
@@ -231,7 +231,7 @@ actions:
         example: Phishing
       severity:
         title: Severity
-        description: Comma-separated list of alerts severity. Allowed values: High, Medium, Low
+        description: 'Comma-separated list of alerts severity. Allowed values: High, Medium, Low'
         type: string
         required: false
         enum:
@@ -241,7 +241,7 @@ actions:
         example: Low
       source_type:
         title: Source Type
-        description: Comma-separated list of alerts source type. Allowed values: ApplicationStores, BlackMarkets, HackingForums, SocialMedia, PasteSites, Others
+        description: 'Comma-separated list of alerts source type. Allowed values: ApplicationStores, BlackMarkets, HackingForums, SocialMedia, PasteSites, Others'
         type: string
         required: false
         enum:
@@ -282,7 +282,7 @@ actions:
         example: Application Store
       network_type:
         title: Network Type
-        description: Comma-separated list of network type. Allowed values: ClearWeb, DarkWeb
+        description: 'Comma-separated list of network type. Allowed values: ClearWeb, DarkWeb'
         type: string
         required: false
         enum:
@@ -297,7 +297,7 @@ actions:
         example: example.com
       remediation_status:
         title: Remediation Status
-        description: Comma-separated list of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed
+        description: 'Comma-separated list of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed'
         type: string
         required: false
         example: InProgress, Pending

@@ -3,17 +3,17 @@ from .schema import ConnectionSchema, Input
 
 # Custom imports below
 from typing import Optional
-from icon_intsights.util.api import IntSightAPI
+from icon_intsights.util.api import IntSightsAPI
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
-        self.client: Optional[IntSightAPI] = None
+        self.client: Optional[IntSightsAPI] = None
 
     def connect(self, params={}):
-        self.client = IntSightAPI(
+        self.client = IntSightsAPI(
             params.get(Input.ACCOUNT_ID, {}).get("secretKey"),
             params.get(Input.API_KEY, {}).get("secretKey"),
             self.logger,

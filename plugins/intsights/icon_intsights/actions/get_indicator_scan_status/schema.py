@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get the scan status of an indicator in Insights TIP system"
+    DESCRIPTION = "Get the scan status of an indicator in the IntSights TIP system"
 
 
 class Input:

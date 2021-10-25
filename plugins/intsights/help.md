@@ -61,7 +61,7 @@ This action will create a manual alert with the provided parameters.
 |source_date|string|None|False|Alert source date|None|2020-02-01|
 |source_network_type|string|None|True|Source network type|['ClearWeb', 'DarkWeb']|DarkWeb|
 |source_type|string|None|True|Source type|['Application Store', 'Cyber Security Blog', 'Hacking News', 'Cyber Crime Forum', 'Hacktivism Forum', 'Social Media', 'Facebook', 'Twitter', 'LinkedIn', 'Google Plus', 'VK', 'Vimeo', 'YouTube', 'IRC Channel', 'IOC Block List', 'Credit Card Black Market', 'Paste Site', 'Data Leakage Website', 'Leaked Database', 'File Sharing Website', 'Gray Hat Website', 'Black Market', 'WHOIS servers', 'Company Website', 'Wikileaks', 'Pinterest', 'Tumblr', 'Instagram', 'Telegram', 'Webmail', 'Malware Analysis', 'Firehol', 'VRA']|Webmail|
-|source_url|string|None|True|Source URL|None|https://example.com"|
+|source_url|string|None|True|Source URL|None|https://example.com|
 |sub_type|string|None|True|Alert sub type, needs to correlate with the selected "Type"|None|SuspiciousEmailAddress|
 |title|string|None|True|Alert title|None|New Alert|
 |type|string|None|True|Alert type|['AttackIndication', 'DataLeakage', 'Phishing', 'BrandSecurity', 'ExploitableData', 'vip']|Phishing|
@@ -72,12 +72,7 @@ Example input:
 {
   "description": "Suspicious addresses",
   "found_date": "2020-01-01",
-  "images": [
-    {
-      "Type": "jpeg",
-      "Data": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
-    }
-  ],
+  "images": "[{\"Type\": \"jpeg\",\"Data\": \"UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==\"}]",
   "severity": "Medium",
   "source_date": "2020-02-01",
   "source_network_type": "DarkWeb",
@@ -105,7 +100,7 @@ Example output:
 
 #### Takedown Request
 
-This action is used to request a takedown for a given alert in Intsights.
+Request a takedown for a given alert in IntSights
 
 ##### Input
 
@@ -159,7 +154,7 @@ Example input:
 |----|----|--------|-----------|
 |assets|[]string|True|List of assets|
 |assignees|[]string|True|List of assignees|
-|details|object|True|Alert Details|
+|details|object|True|Alert details|
 |found_date|date|True|Alert found date|
 |id|string|True|Alert ID|
 |is_closed|boolean|True|Is alert closed|
@@ -205,7 +200,7 @@ This action is used to force an indicator scan in Intsights TIP system.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|indicator_file_hash|string|None|True|IOC value in type file hash|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
+|indicator_file_hash|string|None|True|IOC value in type file hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
 
 Example input:
 
@@ -273,20 +268,20 @@ This action is used to search Alerts based on criteria.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|alert_type|string|None|False|Comma separated list of alert types. Allowed values - AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip|['AttackIndication', 'DataLeakage', 'Phishing', 'BrandSecurity', 'ExploitableData', 'vip']|Phishing|
-|assigned|boolean|None|False|Show assigned/unAssigned alerts|None|True|
+|alert_type|string|None|False|Comma-separated list of alert types. Allowed values: AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip|['AttackIndication', 'DataLeakage', 'Phishing', 'BrandSecurity', 'ExploitableData', 'vip']|Phishing|
+|assigned|boolean|None|False|Show assigned/unassigned alerts|None|True|
 |found_date_from|number|None|False|Start date to fetch from in Unix Millisecond Timestamp|None|0|
 |found_date_to|number|None|False|End date to fetch to in Unix Millisecond Timestamp|None|1633047102456|
 |has_indicators|boolean|None|False|Show alerts with IOCs results|None|False|
 |is_closed|boolean|None|False|Is closed/open alerts|None|False|
 |is_flagged|boolean|None|False|Show flagged/unflagged alerts|None|True|
-|matched_asset_value|string|None|False|Comma separated list|None|https://example.com|
-|network_type|string|None|False|Comma separated list of network type. Allowed values - ClearWeb, DarkWeb|['ClearWeb', 'DarkWeb']|DarkWeb|
-|remediation_status|string|None|False|Comma separated list of remediation status. Allowed values - InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed|None|InProggres, Pending|
-|severity|string|None|False|Comma separated list of alerts severity. Allowed values - High, Medium, Low|['High', 'Medium', 'Low']|Low|
+|matched_asset_value|string|None|False|Comma-separated list|None|example.com|
+|network_type|string|None|False|Comma-separated list of network type. Allowed values: ClearWeb, DarkWeb|['ClearWeb', 'DarkWeb']|DarkWeb|
+|remediation_status|string|None|False|Comma-separated list of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed|None|InProgress, Pending|
+|severity|string|None|False|Comma-separated list of alerts severity. Allowed values: High, Medium, Low|['High', 'Medium', 'Low']|Low|
 |source_date_from|number|None|False|Start date to fetch from in Unix Millisecond Timestamp|None|1633047083142|
 |source_date_to|number|None|False|End date to fetch to in Unix Millisecond Timestamp|None|1633047102456|
-|source_type|string|None|False|Comma separated list of alerts source type. Allowed values - ApplicationStores, BlackMarkets, HackingForums, SocialMedia, PasteSites, Others|['Application Store', 'Cyber Security Blog', 'Hacking News', 'Cyber Crime Forum', 'Hacktivism Forum', 'Social Media', 'Facebook', 'Twitter', 'LinkedIn', 'Google Plus', 'VK', 'Vimeo', 'YouTube', 'IRC Channel', 'IOC Block List', 'Credit Card Black Market', 'Paste Site', 'Data Leakage Website', 'Leaked Database', 'File Sharing Website', 'Gray Hat Website', 'Black Market', 'WHOIS servers', 'Company Website', 'Wikileaks', 'Pinterest', 'Tumblr', 'Instagram', 'Telegram', 'Webmail', 'Malware Analysis', 'Firehol', 'VRA', 'Other']|Application Store|
+|source_type|string|None|False|Comma-separated list of alerts source type. Allowed values: ApplicationStores, BlackMarkets, HackingForums, SocialMedia, PasteSites, Others|['Application Store', 'Cyber Security Blog', 'Hacking News', 'Cyber Crime Forum', 'Hacktivism Forum', 'Social Media', 'Facebook', 'Twitter', 'LinkedIn', 'Google Plus', 'VK', 'Vimeo', 'YouTube', 'IRC Channel', 'IOC Block List', 'Credit Card Black Market', 'Paste Site', 'Data Leakage Website', 'Leaked Database', 'File Sharing Website', 'Gray Hat Website', 'Black Market', 'WHOIS servers', 'Company Website', 'Wikileaks', 'Pinterest', 'Tumblr', 'Instagram', 'Telegram', 'Webmail', 'Malware Analysis', 'Firehol', 'VRA', 'Other']|Application Store|
 
 Example input:
 
@@ -301,7 +296,7 @@ Example input:
   "is_flagged": true,
   "matched_asset_value": "example.com",
   "network_type": "DarkWeb",
-  "remediation_status": "InProggres, Pending",
+  "remediation_status": "InProgress, Pending",
   "severity": "Low",
   "source_date_from": 1633047083142,
   "source_date_to": 1633047102456,
@@ -334,7 +329,7 @@ This action is used to submit an indicator to IntSights for investigation and re
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|indicator_value|string|None|True|Value of the indicator|None|https://example.com|
+|indicator_value|string|None|True|Value of the indicator|None|example.com|
 
 Example input:
 
@@ -563,7 +558,7 @@ This action will search indicators in IntSights TIP.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|indicator_value|string|None|True|Value of the indicator|None|https://example.com|
+|indicator_value|string|None|True|Value of the indicator|None|example.com|
 
 Example input:
 
@@ -577,17 +572,17 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|first_seen|string|False|First Seen|
-|geo_location|string|False|GEO Location|
-|last_seen|string|False|Last Seen|
-|last_update|string|False|Last Update|
-|related_campaigns|[]string|True|Related Campaigns|
-|related_malware|[]string|True|Related Malware|
-|related_threat_actors|[]string|True|Related Threat Actors|
+|first_seen|string|False|First seen|
+|geo_location|string|False|Geographic location|
+|last_seen|string|False|Last seen|
+|last_update|string|False|Last update|
+|related_campaigns|[]string|True|Related campaigns|
+|related_malware|[]string|True|Related malware|
+|related_threat_actors|[]string|True|Related threat actors|
 |score|integer|True|Score|
 |severity|string|False|Severity|
 |sources|[]source|True|Sources|
-|system_tags|[]string|True|System Tags|
+|system_tags|[]string|True|System tags|
 |tags|[]string|True|Tags|
 |type|string|False|Type|
 |value|string|False|Value|
@@ -614,7 +609,7 @@ Example output:
   "system_tags": [],
   "tags": [],
   "type": "Domains",
-  "value": "https://example.com",
+  "value": "example.com",
   "whitelist": true
 }
 ```

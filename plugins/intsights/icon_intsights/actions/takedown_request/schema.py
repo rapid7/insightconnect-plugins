@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Request a takedown for a given alert in Intsights"
+    DESCRIPTION = "Request a takedown for a given alert in IntSights"
 
 
 class Input:

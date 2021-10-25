@@ -74,7 +74,7 @@ class GetCompleteAlertByIdOutput(insightconnect_plugin_runtime.Output):
     "details": {
       "type": "object",
       "title": "Details",
-      "description": "Alert Details",
+      "description": "Alert details",
       "order": 4
     },
     "found_date": {
