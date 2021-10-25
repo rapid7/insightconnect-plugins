@@ -332,7 +332,7 @@ actions:
         required: false
         example: true
       is_flagged:
-        title: Is Flagged
+        title: Alert Flag Status
         description: Show flagged/unflagged alerts
         type: boolean
         required: false
