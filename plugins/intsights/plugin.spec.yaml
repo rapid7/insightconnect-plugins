@@ -326,7 +326,7 @@ actions:
         required: false
         example: 1633047102456
       assigned:
-        title: Assigned
+        title: Alert Assignment
         description: Show assigned/unassigned alerts
         type: boolean
         required: false
