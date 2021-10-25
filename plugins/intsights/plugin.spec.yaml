@@ -383,7 +383,7 @@ actions:
         required: true
       details:
         title: Details
-        description: Alert Details
+        description: Alert details
         type: object
         required: true
       found_date:
