@@ -285,9 +285,6 @@ actions:
         description: Comma-separated list of network type. Allowed values: ClearWeb, DarkWeb
         type: string
         required: false
-        enum:
-          - ClearWeb
-          - DarkWeb
         example: DarkWeb
       matched_asset_value:
         title: Matched Asset Value
