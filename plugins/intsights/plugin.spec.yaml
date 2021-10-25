@@ -297,7 +297,7 @@ actions:
         example: example.com
       remediation_status:
         title: Remediation Status
-        description: Comma separated list of remediation status. Allowed values - InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed
+        description: Comma-separated list of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed
         type: string
         required: false
         example: InProggres, Pending
