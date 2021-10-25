@@ -218,7 +218,7 @@ actions:
     input:
       alert_type:
         title: Alert Type
-        description: Comma separated list of alert types. Allowed values - AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip
+        description: Comma-separated list of alert types. Allowed values: AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip
         type: string
         required: false
         enum:
