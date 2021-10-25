@@ -38,9 +38,9 @@ class AlertParams:
                 "sourceDateTo": int(self.source_date_to) if self.source_date_to else None,
                 "foundDateFrom": int(self.found_date_from) if self.found_date_from else None,
                 "foundDateTo": int(self.found_date_to) if self.found_date_to else None,
-                "assigned": self.assigned == "Assigned",
-                "isFlagged": self.is_flagged == "Flagged",
-                "isClosed": self.is_closed == "Closed",
+                "assigned": self.assigned == "Assigned" if self.assigned else None,
+                "isFlagged": self.is_flagged == "Flagged" if self.is_flagged else None,
+                "isClosed": self.is_closed == "Closed" if self.is_closed else None,
                 "hasIoc": self.has_ioc,
             }
         )
@@ -153,7 +153,6 @@ class IntSightsAPI:
                     cause="IntSights returned an error response: ", assistance=f"{json_response.get('FailedReason')}."
                 )
 
-            self.logger.info(f"response: {response.json()}")
             return json_response
         except json.decoder.JSONDecodeError as e:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
