@@ -231,7 +231,7 @@ actions:
         example: Phishing
       severity:
         title: Severity
-        description: Comma separated list of alerts severity. Allowed values - High, Medium, Low
+        description: Comma-separated list of alerts severity. Allowed values: High, Medium, Low
         type: string
         required: false
         enum:
