@@ -291,7 +291,7 @@ actions:
         example: DarkWeb
       matched_asset_value:
         title: Matched Asset Value
-        description: Comma separated list
+        description: Comma-separated list
         type: string
         required: false
         example: example.com
