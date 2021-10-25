@@ -49,7 +49,7 @@ connection:
   account_id:
     title: Account ID
     description: Account ID for IntSights
-    type: credential_secret_key
+    type: string
     required: true
     example: 9de5069c5afe602b2ea0a04b
   api_key:
@@ -71,8 +71,8 @@ actions:
         example: example.com
     output:
       value:
-        title: Value
-        description: Value
+        title: Indicator Value
+        description: Indicator value
         type: string
         required: false
       type:
@@ -219,86 +219,40 @@ actions:
     input:
       alert_type:
         title: Alert Type
-        description: 'Comma-separated list of alert types. Allowed values: AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip'
-        type: string
+        description: 'List of alert types. Allowed values: AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip'
+        type: '[]string'
         required: false
-        enum:
-          - AttackIndication
-          - DataLeakage
-          - Phishing
-          - BrandSecurity
-          - ExploitableData
-          - vip
-        example: Phishing
+        example: ["Phishing"]
       severity:
         title: Severity
-        description: 'Comma-separated list of alerts severity. Allowed values: High, Medium, Low'
-        type: string
+        description: 'List of alerts severity. Allowed values: High, Medium, Low'
+        type: '[]string'
         required: false
-        enum:
-          - High
-          - Medium
-          - Low
-        example: Low
+        example: ["Low"]
       source_type:
         title: Source Type
-        description: 'Comma-separated list of alerts source type. Allowed values: ApplicationStores, BlackMarkets, HackingForums, SocialMedia, PasteSites, Others'
-        type: string
+        description: 'List of alerts source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other'
+        type: '[]string'
         required: false
-        enum:
-          - Application Store
-          - Cyber Security Blog
-          - Hacking News
-          - Cyber Crime Forum
-          - Hacktivism Forum
-          - Social Media
-          - Facebook
-          - Twitter
-          - LinkedIn
-          - Google Plus
-          - VK
-          - Vimeo
-          - YouTube
-          - IRC Channel
-          - IOC Block List
-          - Credit Card Black Market
-          - Paste Site
-          - Data Leakage Website
-          - Leaked Database
-          - File Sharing Website
-          - Gray Hat Website
-          - Black Market
-          - WHOIS servers
-          - Company Website
-          - Wikileaks
-          - Pinterest
-          - Tumblr
-          - Instagram
-          - Telegram
-          - Webmail
-          - Malware Analysis
-          - Firehol
-          - VRA
-          - Other
-        example: Application Store
+        example: ["Application Store"]
       network_type:
         title: Network Type
-        description: 'Comma-separated list of network type. Allowed values: ClearWeb, DarkWeb'
-        type: string
+        description: 'List of network type. Allowed values: ClearWeb, DarkWeb'
+        type: '[]string'
         required: false
-        example: DarkWeb
+        example: ["DarkWeb"]
       matched_asset_value:
         title: Matched Asset Value
-        description: Comma-separated list
-        type: string
+        description: List of matched asset values
+        type: '[]string'
         required: false
-        example: example.com
+        example: ["example.com"]
       remediation_status:
         title: Remediation Status
-        description: 'Comma-separated list of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed'
-        type: string
+        description: 'List of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed'
+        type: '[]string'
         required: false
-        example: InProgress, Pending
+        example: ["InProgress", "Pending"]
       source_date_from:
         title: Source Date From
         description: Start date to fetch from in Unix Millisecond Timestamp
@@ -328,19 +282,28 @@ actions:
         description: Show assigned/unassigned alerts
         type: string
         required: false
-        example: true
+        example: Assigned
+        enum:
+          - Assigned
+          - Unassigned
       is_flagged:
         title: Alert Flag Status
         description: Show flagged/unflagged alerts
         type: string
         required: false
-        example: true
+        example: Flagged
+        enum:
+          - Flagged
+          - Unflagged
       is_closed:
         title: Closed Status
         description: Status of the alert, either closed or open
         type: boolean
         required: false
-        example: false
+        example: Closed
+        enum:
+          - Closed
+          - Open
       has_indicators:
         title: Has Indicators
         description: Show alerts with IOCs results

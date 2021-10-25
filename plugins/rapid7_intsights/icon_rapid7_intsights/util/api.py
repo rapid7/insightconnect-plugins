@@ -20,9 +20,9 @@ class AlertParams:
     source_date_to: str
     found_date_from: str
     found_date_to: str
-    assigned: bool
-    is_flagged: bool
-    is_closed: bool
+    assigned: str
+    is_flagged: str
+    is_closed: str
     has_ioc: bool
 
     def to_dict(self) -> dict:
@@ -32,15 +32,15 @@ class AlertParams:
                 "severity": ','.join(self.severity),
                 "sourceType": ','.join(self.source_type),
                 "networkType": ','.join(self.network_type),
-                "matchedAssetValue": self.matched_asset_value,
+                "matchedAssetValue": ','.join(self.matched_asset_value),
                 "remediationStatus": ','.join(self.remediation_status),
                 "sourceDateFrom": int(self.source_date_from),
                 "sourceDateTo": int(self.source_date_to),
                 "foundDateFrom": int(self.found_date_from),
                 "foundDateTo": int(self.found_date_to),
                 "assigned": self.assigned == "Assigned",
-                "isFlagged": self.is_flagged,
-                "isClosed": self.is_closed,
+                "isFlagged": self.is_flagged == "Flagged",
+                "isClosed": self.is_closed == "Closed",
                 "hasIoc": self.has_ioc,
             }
         )
