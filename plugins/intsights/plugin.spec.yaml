@@ -136,7 +136,7 @@ actions:
         required: true
       related_campaigns:
         title: Related Campaigns
-        description: Related Campaigns
+        description: Related campaigns
         type: '[]string'
         required: true
       related_threat_actors:
