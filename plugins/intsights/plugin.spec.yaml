@@ -307,7 +307,7 @@ actions:
       source_date_to:
         title: Source Date To
         description: End date to fetch to in Unix Millisecond Timestamp
-        type: number
+        type: string
         required: false
         example: 1633047102456
       found_date_from:
