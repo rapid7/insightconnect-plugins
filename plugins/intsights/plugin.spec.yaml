@@ -325,7 +325,7 @@ actions:
       assigned:
         title: Alert Assignment
         description: Show assigned/unassigned alerts
-        type: boolean
+        type: string
         required: false
         example: true
       is_flagged:
