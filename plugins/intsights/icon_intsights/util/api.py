@@ -150,7 +150,7 @@ class IntSightAPI:
 
             if json_response.get("Status") == "Invalid":
                 raise PluginException(
-                    cause="There is an error in response.", assistance=f"{json_response.get('FailedReason')}."
+                    cause="IntSights returned an error response: ", assistance=f"{json_response.get('FailedReason')}."
                 )
 
             self.logger.info(f"response: {response.json()}")
