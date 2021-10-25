@@ -65,6 +65,11 @@ class Util:
             and kwargs.get("params", {}).get("alertType") == "Phishing"
         ):
             return MockResponse(200, "get_alerts_empty_list")
+        elif (
+            kwargs.get("url") == "https://api.intsights.com/public/v1/data/alerts/alerts-list"
+            and kwargs.get("params", {}).get("alertType") == "Phishing,AttackIndication"
+        ):
+            return MockResponse(200, "get_alerts_with_types_list")
         elif kwargs.get("url") == "https://api.intsights.com/public/v1/data/alerts/alerts-list":
             return MockResponse(200, "get_alerts")
         elif kwargs.get("url") == "https://api.intsights.com/public/v1/data/alerts/get-complete-alert/123":

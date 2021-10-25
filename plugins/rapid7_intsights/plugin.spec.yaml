@@ -351,17 +351,17 @@ actions:
         title: Found Date
         description: Alert found date
         type: date
-        required: true
+        required: false
       update_date:
         title: Found Date
         description: Alert update date
         type: date
-        required: true
+        required: false
       takedown_status:
         title: Takedown Status
         description: Alert remediation status
         type: string
-        required: true
+        required: false
       is_closed:
         title: Is Closed
         description: Is alert closed

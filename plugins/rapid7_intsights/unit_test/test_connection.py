@@ -21,7 +21,7 @@ class TestConnection(TestCase):
     def test_connection_should_success_when_credentials(self, mock_request) -> None:
         action = Util.default_connector(
             GetIndicatorByValue(),
-            {Input.API_KEY: {"secretKey": "api_key"}, Input.ACCOUNT_ID: {"secretKey": "account_id"}},
+            {Input.API_KEY: {"secretKey": "api_key"}, Input.ACCOUNT_ID: "account_id"},
         )
 
         self.assertEqual("https://api.intsights.com", action.connection.client.url)
@@ -31,7 +31,7 @@ class TestConnection(TestCase):
     @patch("requests.request", side_effect=Util.mock_request)
     def test_connection_should_fail_when_wrong_credentials(self, mock_request) -> None:
         action = Util.default_connector(
-            GetIndicatorByValue(), {Input.API_KEY: {"secretKey": "wrong"}, Input.ACCOUNT_ID: {"secretKey": "wrong"}}
+            GetIndicatorByValue(), {Input.API_KEY: {"secretKey": "wrong"}, Input.ACCOUNT_ID: "wrong"}
         )
         with self.assertRaises(ConnectionTestException) as error:
             action.connection.test()

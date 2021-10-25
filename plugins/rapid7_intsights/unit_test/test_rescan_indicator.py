@@ -28,5 +28,5 @@ class TestRescanIndicator(TestCase):
         with self.assertRaises(PluginException) as error:
             self.action.run({Input.INDICATOR_FILE_HASH: "bad"})
 
-        self.assertEqual("There is an error in response.", error.exception.cause)
+        self.assertEqual("IntSights returned an error response: ", error.exception.cause)
         self.assertEqual("Invalid IOC value. Supported IOC types: file hashes.", error.exception.assistance)

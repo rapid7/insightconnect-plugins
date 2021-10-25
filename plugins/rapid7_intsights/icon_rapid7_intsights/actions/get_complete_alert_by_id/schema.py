@@ -128,12 +128,9 @@ class GetCompleteAlertByIdOutput(insightconnect_plugin_runtime.Output):
     "assets",
     "assignees",
     "details",
-    "found_date",
     "id",
     "is_closed",
-    "is_flagged",
-    "takedown_status",
-    "update_date"
+    "is_flagged"
   ]
 }
     """)

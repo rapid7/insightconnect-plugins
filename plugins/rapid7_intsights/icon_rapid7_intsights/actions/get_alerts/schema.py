@@ -37,26 +37,30 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
     "alert_type": {
       "type": "array",
       "title": "Alert Type",
-      "description": "Comma-separated list of alert types. Allowed values: AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip",
+      "description": "List of alert types. Allowed values: AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip",
       "items": {
         "type": "string"
       },
       "order": 1
     },
     "assigned": {
-      "type": "boolean",
+      "type": "string",
       "title": "Alert Assignment",
       "description": "Show assigned/unassigned alerts",
+      "enum": [
+        "Assigned",
+        "Unassigned"
+      ],
       "order": 11
     },
     "found_date_from": {
-      "type": "number",
+      "type": "string",
       "title": "Found Date From",
       "description": "Start date to fetch from in Unix Millisecond Timestamp",
       "order": 9
     },
     "found_date_to": {
-      "type": "number",
+      "type": "string",
       "title": "Found Date To",
       "description": "End date to fetch to in Unix Millisecond Timestamp",
       "order": 10
@@ -70,100 +74,78 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
     "is_closed": {
       "type": "boolean",
       "title": "Closed Status",
-      "description": "Is closed/open alerts",
+      "description": "Status of the alert, either closed or open",
+      "enum": [
+        "Closed",
+        "Open"
+      ],
       "order": 13
     },
     "is_flagged": {
-      "type": "boolean",
+      "type": "string",
       "title": "Alert Flag Status",
       "description": "Show flagged/unflagged alerts",
+      "enum": [
+        "Flagged",
+        "Unflagged"
+      ],
       "order": 12
     },
     "matched_asset_value": {
-      "type": "string",
+      "type": "array",
       "title": "Matched Asset Value",
-      "description": "Comma-separated list",
+      "description": "List of matched asset values",
+      "items": {
+        "type": "string"
+      },
       "order": 5
     },
     "network_type": {
-      "type": "string",
+      "type": "array",
       "title": "Network Type",
-      "description": "Comma-separated list of network type. Allowed values: ClearWeb, DarkWeb",
-      "enum": [
-        "ClearWeb",
-        "DarkWeb"
-      ],
+      "description": "List of network type. Allowed values: ClearWeb, DarkWeb",
+      "items": {
+        "type": "string"
+      },
       "order": 4
     },
     "remediation_status": {
-      "type": "string",
+      "type": "array",
       "title": "Remediation Status",
-      "description": "Comma-separated list of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed",
+      "description": "List of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed",
+      "items": {
+        "type": "string"
+      },
       "order": 6
     },
     "severity": {
-      "type": "string",
+      "type": "array",
       "title": "Severity",
-      "description": "Comma-separated list of alerts severity. Allowed values: High, Medium, Low",
-      "enum": [
-        "High",
-        "Medium",
-        "Low"
-      ],
+      "description": "List of alerts severity. Allowed values: High, Medium, Low",
+      "items": {
+        "type": "string"
+      },
       "order": 2
     },
     "source_date_from": {
-      "type": "number",
+      "type": "string",
       "title": "Source Date From",
       "description": "Start date to fetch from in Unix Millisecond Timestamp",
       "order": 7
     },
     "source_date_to": {
-      "type": "number",
+      "type": "string",
       "title": "Source Date To",
       "description": "End date to fetch to in Unix Millisecond Timestamp",
       "order": 8
     },
     "source_type": {
-      "type": "string",
+      "type": "array",
       "title": "Source Type",
-      "description": "Comma-separated list of alerts source type. Allowed values: ApplicationStores, BlackMarkets, HackingForums, SocialMedia, PasteSites, Others",
-      "enum": [
-        "Application Store",
-        "Cyber Security Blog",
-        "Hacking News",
-        "Cyber Crime Forum",
-        "Hacktivism Forum",
-        "Social Media",
-        "Facebook",
-        "Twitter",
-        "LinkedIn",
-        "Google Plus",
-        "VK",
-        "Vimeo",
-        "YouTube",
-        "IRC Channel",
-        "IOC Block List",
-        "Credit Card Black Market",
-        "Paste Site",
-        "Data Leakage Website",
-        "Leaked Database",
-        "File Sharing Website",
-        "Gray Hat Website",
-        "Black Market",
-        "WHOIS servers",
-        "Company Website",
-        "Wikileaks",
-        "Pinterest",
-        "Tumblr",
-        "Instagram",
-        "Telegram",
-        "Webmail",
-        "Malware Analysis",
-        "Firehol",
-        "VRA",
-        "Other"
-      ],
+      "description": "List of alerts source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other",
+      "items": {
+        "type": "string"
+      },
       "order": 3
     }
   }

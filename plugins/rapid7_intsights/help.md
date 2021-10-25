@@ -158,13 +158,13 @@ Example input:
 |assets|[]string|True|List of assets|
 |assignees|[]string|True|List of assignees|
 |details|object|True|Alert details|
-|found_date|date|True|Alert found date|
+|found_date|date|False|Alert found date|
 |id|string|True|Alert ID|
 |is_closed|boolean|True|Is alert closed|
 |is_flagged|boolean|True|Is alert flagged|
 |leak_name|string|False|Name of the leak DBs in data leakage alerts|
-|takedown_status|string|True|Alert remediation status|
-|update_date|date|True|Alert update date|
+|takedown_status|string|False|Alert remediation status|
+|update_date|date|False|Alert update date|
 
 Example output:
 
@@ -290,20 +290,33 @@ Example input:
 
 ```
 {
-  "alert_type": "Phishing",
-  "assigned": true,
+  "alert_type": [
+    "Phishing"
+  ],
+  "assigned": "Assigned",
   "found_date_from": 0,
   "found_date_to": 1633047102456,
   "has_indicators": false,
-  "is_closed": false,
-  "is_flagged": true,
-  "matched_asset_value": "example.com",
-  "network_type": "DarkWeb",
-  "remediation_status": "InProgress, Pending",
-  "severity": "Low",
+  "is_closed": "Closed",
+  "is_flagged": "Flagged",
+  "matched_asset_value": [
+    "example.com"
+  ],
+  "network_type": [
+    "DarkWeb"
+  ],
+  "remediation_status": [
+    "InProgress",
+    "Pending"
+  ],
+  "severity": [
+    "Low"
+  ],
   "source_date_from": 1633047083142,
   "source_date_to": 1633047102456,
-  "source_type": "Application Store"
+  "source_type": [
+    "Application Store"
+  ]
 }
 ```
 
