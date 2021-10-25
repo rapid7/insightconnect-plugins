@@ -286,9 +286,6 @@ actions:
         description: 'Comma-separated list of network type. Allowed values: ClearWeb, DarkWeb'
         type: string
         required: false
-        enum:
-          - ClearWeb
-          - DarkWeb
         example: DarkWeb
       matched_asset_value:
         title: Matched Asset Value
@@ -305,42 +302,42 @@ actions:
       source_date_from:
         title: Source Date From
         description: Start date to fetch from in Unix Millisecond Timestamp
-        type: number
+        type: string
         required: false
         example: 1633047083142
       source_date_to:
         title: Source Date To
         description: End date to fetch to in Unix Millisecond Timestamp
-        type: number
+        type: string
         required: false
         example: 1633047102456
       found_date_from:
         title: Found Date From
         description: Start date to fetch from in Unix Millisecond Timestamp
-        type: number
+        type: string
         required: false
         example: 0
       found_date_to:
         title: Found Date To
         description: End date to fetch to in Unix Millisecond Timestamp
-        type: number
+        type: string
         required: false
         example: 1633047102456
       assigned:
         title: Alert Assignment
         description: Show assigned/unassigned alerts
-        type: boolean
+        type: string
         required: false
         example: true
       is_flagged:
         title: Alert Flag Status
         description: Show flagged/unflagged alerts
-        type: boolean
+        type: string
         required: false
         example: true
       is_closed:
         title: Closed Status
-        description: Is closed/open alerts
+        description: Status of the alert, either closed or open
         type: boolean
         required: false
         example: false
