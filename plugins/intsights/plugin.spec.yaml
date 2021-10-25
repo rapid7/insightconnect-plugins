@@ -301,7 +301,7 @@ actions:
       source_date_from:
         title: Source Date From
         description: Start date to fetch from in Unix Millisecond Timestamp
-        type: number
+        type: string
         required: false
         example: 1633047083142
       source_date_to:
