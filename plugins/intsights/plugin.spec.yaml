@@ -111,7 +111,7 @@ actions:
         required: false
       geo_location:
         title: GEO Location
-        description: GEO Location
+        description: Geographic location
         type: string
         required: false
       sources:
