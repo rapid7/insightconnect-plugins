@@ -214,7 +214,7 @@ actions:
         required: true
   get_alerts:
     title: Get Alerts
-    description: Search Alerts based on criteria
+    description: Search alerts based on criteria
     input:
       alert_type:
         title: Alert Type
