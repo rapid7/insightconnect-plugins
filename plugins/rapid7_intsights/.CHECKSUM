@@ -1,0 +1,43 @@
+{
+	"spec": "b088c63ad80764cd577bef4c71444c1a",
+	"manifest": "9a1c0ed12f4a14563a7e6ee8431fcb56",
+	"setup": "03540fca0745c2f43e81830a80d402bb",
+	"schemas": [
+		{
+			"identifier": "add_manual_alert/schema.py",
+			"hash": "66fe76d79131cfff95fd23f003539a3d"
+		},
+		{
+			"identifier": "enrich_indicator/schema.py",
+			"hash": "2f448ecb5acfe3083dbbfa71da28a785"
+		},
+		{
+			"identifier": "get_alerts/schema.py",
+			"hash": "e328ecc4099593ccaea2019fb603dea6"
+		},
+		{
+			"identifier": "get_complete_alert_by_id/schema.py",
+			"hash": "b5f55ac2937665123aeb3c557ff0a180"
+		},
+		{
+			"identifier": "get_indicator_by_value/schema.py",
+			"hash": "1b8a24fd526eebcf1f7b818667c38ce2"
+		},
+		{
+			"identifier": "get_indicator_scan_status/schema.py",
+			"hash": "8dee800f2700228a0ed251111785a228"
+		},
+		{
+			"identifier": "rescan_indicator/schema.py",
+			"hash": "957d18eff29b84ba706c867dddd14139"
+		},
+		{
+			"identifier": "takedown_request/schema.py",
+			"hash": "623d2b1efc3739038015ed9904bea097"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "4d9563dcc56614543713c05f554ef869"
+		}
+	]
+}
