@@ -313,7 +313,7 @@ actions:
       found_date_from:
         title: Found Date From
         description: Start date to fetch from in Unix Millisecond Timestamp
-        type: number
+        type: string
         required: false
         example: 0
       found_date_to:
