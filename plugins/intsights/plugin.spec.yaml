@@ -300,7 +300,7 @@ actions:
         description: Comma-separated list of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed
         type: string
         required: false
-        example: InProggres, Pending
+        example: InProgress, Pending
       source_date_from:
         title: Source Date From
         description: Start date to fetch from in Unix Millisecond Timestamp
