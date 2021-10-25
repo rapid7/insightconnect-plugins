@@ -79,13 +79,13 @@ class FortigateAPI:
     def get_address_object(self, address_name):
         try:
             response_ipv4 = self.call_api(path=f"firewall/address/{address_name}")
-            if response_ipv4["http_status"] == 200:
+            if response_ipv4.get("http_status") == 200:
                 return response_ipv4
         except (PluginException, json.decoder.JSONDecodeError, requests.exceptions.HTTPError):
             pass
 
         response_ipv6 = self.call_api(path=f"firewall/address6/{address_name}")
-        if response_ipv6["http_status"] == 200:
+        if response_ipv6.get("http_status") == 200:
             return response_ipv6
 
         raise PluginException(

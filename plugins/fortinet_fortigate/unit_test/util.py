@@ -29,6 +29,14 @@ class Util:
             return my_file.read()
 
     @staticmethod
+    def load_data(filename):
+        return json.loads(
+            Util.read_file_to_string(
+                os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{filename}.json.resp")
+            )
+        )
+
+    @staticmethod
     def mocked_requests(*args, **kwargs):
         class MockResponse:
             def __init__(self, filename, status_code):
@@ -42,11 +50,7 @@ class Util:
                     self.text = "Error message"
 
             def json(self):
-                return json.loads(
-                    Util.read_file_to_string(
-                        os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{self.filename}.json.resp")
-                    )
-                )
+                return Util.load_data(self.filename)
 
         params = kwargs.get("params")
         url = kwargs.get("url")

@@ -636,9 +636,9 @@ types:
       required: false
   list:
     ip:
-      title: IP
+      title: IP Address
       type: string
-      description: IP
+      description: IP address
       required: false
     obj-id:
       title: Obj-ID
@@ -688,9 +688,9 @@ types:
       description: SDN
       required: false
     ip6:
-      title: IP6
+      title: IPv6 Address
       type: string
-      description: IP6
+      description: IPv6 address
       required: false
     start-ip:
       title: Start-IP
@@ -781,7 +781,8 @@ connection:
     title: SSL Verify
     description: SSL verify
     required: true
-    example: true
+    default: false
+    example: false
 
 actions:
   check_if_address_in_group:
@@ -813,7 +814,7 @@ actions:
         title: Enable Search
         description: When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don't know the Address Object by its name
         type: boolean
-        example: true
+        example: false
         default: false
         required: true
         order: 4
@@ -871,7 +872,7 @@ actions:
         description: Optional IPv6 subnet to filter on
         type: string
         required: false
-        example: 1111:1111:1111:1111:1111:1111:1111:1111/128
+        example: 2001:db8:8:4::2/128
     output:
       address_objects:
         title: Address Objects

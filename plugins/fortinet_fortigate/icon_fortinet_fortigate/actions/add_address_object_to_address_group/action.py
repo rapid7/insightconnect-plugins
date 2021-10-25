@@ -39,6 +39,5 @@ class AddAddressObjectToAddressGroup(insightconnect_plugin_runtime.Action):
         group["member"] = group_members
 
         response = self.connection.api.modify_objects_in_group(endpoint, group)
-        success = response.get("status", "").lower() == "success"
 
-        return {Output.SUCCESS: success, Output.RESULT_OBJECT: response}
+        return {Output.SUCCESS: response.get("status", "").lower() == "success", Output.RESULT_OBJECT: response}

@@ -30,7 +30,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|API key|None|2Fty5834tFpBdidePJnt9075MMdkUb|
 |hostname|string|None|True|Hostname or IP of your FortiGate server e.g. myfortigate.internal, 192.168.10.1, 192.168.10.1:8000|None|example.com|
-|ssl_verify|boolean|None|True|SSL verify|None|True|
+|ssl_verify|boolean|False|True|SSL verify|None|False|
 
 Example input:
 
@@ -38,7 +38,7 @@ Example input:
 {
   "api_key": "2Fty5834tFpBdidePJnt9075MMdkUb",
   "hostname": "example.com",
-  "ssl_verify": true
+  "ssl_verify": false
 }
 ```
 
@@ -107,7 +107,7 @@ This action is used to check if an IP address is in an address group.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |address|string|None|True|The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, domain) within the address object instead of matching the name|None|198.51.100.100|
-|enable_search|boolean|False|True|When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don't know the Address Object by its name|None|True|
+|enable_search|boolean|False|True|When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don't know the Address Object by its name|None|False|
 |group|string|None|True|Name of Address Group to check for address|None|InsightConnect Block Policy|
 |ipv6_group|string|None|True|The name of the IPv6 address group|None|InsightConnect IPv6 Block List|
 
@@ -116,7 +116,7 @@ Example input:
 ```
 {
   "address": "198.51.100.100",
-  "enable_search": true,
+  "enable_search": false,
   "group": "InsightConnect Block Policy",
   "ipv6_group": "InsightConnect IPv6 Block List"
 }
@@ -469,7 +469,7 @@ This action is used to get address objects.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |fqdn_filter|string|None|False|Optional FQDN to filter on|None|example.com|
-|ipv6_subnet_filter|string|None|False|Optional IPv6 subnet to filter on|None|1111:1111:1111:1111:1111:1111:1111:1111/128|
+|ipv6_subnet_filter|string|None|False|Optional IPv6 subnet to filter on|None|2001:db8:8:4::2/128|
 |name_filter|string|None|False|Optional name to filter on|None|MaliciousHost|
 |subnet_filter|string|None|False|Optional subnet to filter on|None|198.51.100.100/32|
 
@@ -478,7 +478,7 @@ Example input:
 ```
 {
   "fqdn_filter": "example.com",
-  "ipv6_subnet_filter": "1111:1111:1111:1111:1111:1111:1111:1111/128",
+  "ipv6_subnet_filter": "2001:db8:8:4::2/128",
   "name_filter": "MaliciousHost",
   "subnet_filter": "198.51.100.100/32"
 }
@@ -719,7 +719,7 @@ Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51
 
 # Version History
 
-* 6.0.0 - Fix the issue where creating address objects for domains does not work in the Create Address Object action | Fix the issue where address objects for IPv4 were created using the wrong endpoint in the Create Address Object action | Correct the payloads for creating address objects for domains and IPv6 in the Create Address Object action | Add support for checking if IPv6 is whitelisted in the Create Address Object action
+* 6.0.0 - Fix the issue where creating address objects for domains does not work in the Create Address Object action | Fix the issue where address objects for IPv4 were created using the wrong endpoint in the Create Address Object action | Correct the payloads for creating address objects for domains and IPv6 in the Create Address Object action | Add support for checking if IPv6 is whitelisted in the Create Address Object action | Fix IPv6 support in all actions | Code refactor | Add default value for SSL verify parameter in connection configuration
 * 5.1.1 - Add `docs_url` in plugin spec | Update `source_url` in plugin spec
 * 5.1.0 - Support for IPV6 in all actions
 * 5.0.0 - Improve input handling to allow IPs, CIDRs, and subnet masks in actions | Fix output of Get Address Objects action to return usable data | Update Get Address Objects action to allow for additional search parameters

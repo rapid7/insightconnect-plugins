@@ -31,6 +31,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "boolean",
       "title": "SSL Verify",
       "description": "SSL verify",
+      "default": false,
       "order": 3
     }
   },

@@ -70,7 +70,7 @@ class CheckIfAddressInGroup(insightconnect_plugin_runtime.Action):
             try:
                 results = self.connection.api.get_address_objects(
                     endpoint, params={"filter": f"name=@{item.get('name')}"}
-                ).get("results")
+                ).get("results", [])
             except KeyError:
                 raise PluginException(
                     cause="No results were returned by FortiGate.\n",
@@ -95,7 +95,7 @@ class CheckIfAddressInGroup(insightconnect_plugin_runtime.Action):
                 # If address_object is a ipmask
                 if result_type == "ipmask":
                     # Convert returned address to CIDR
-                    ipmask = result.get("subnet").replace(" ", "/")
+                    ipmask = result.get("subnet", "").replace(" ", "/")
                     ipmask = ipaddress.IPv4Network(ipmask)
                     # Convert given address to CIDR address to CIDR
                     try:

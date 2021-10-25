@@ -17,7 +17,7 @@ class DeleteAddressObject(insightconnect_plugin_runtime.Action):
         address_object = params[Input.ADDRESS_OBJECT]
         endpoint = f"firewall/address/{address_object}"
 
-        if self.connection.api.get_address_object(address_object)["name"] == "address6":
+        if self.connection.api.get_address_object(address_object).get("name") == "address6":
             endpoint = f"firewall/address6/{address_object}"
 
         return {Output.SUCCESS: True, Output.RESPONSE_OBJECT: self.connection.api.delete_address_object(endpoint)}

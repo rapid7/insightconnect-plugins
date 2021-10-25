@@ -24,7 +24,7 @@ class RemoveAddressObjectFromGroup(insightconnect_plugin_runtime.Action):
         group_name = params[Input.GROUP]
         address_object = params[Input.ADDRESS_OBJECT]
 
-        is_ipv6 = self.connection.api.get_address_object(address_object)["name"] == "address6"
+        is_ipv6 = self.connection.api.get_address_object(address_object).get("name") == "address6"
 
         if is_ipv6:
             group_name = params.get(Input.IPV6_GROUP)
@@ -52,6 +52,5 @@ class RemoveAddressObjectFromGroup(insightconnect_plugin_runtime.Action):
         group["member"] = group_members
 
         response = self.connection.api.modify_objects_in_group(endpoint, group)
-        success = response.get("status", "").lower() == "success"
 
-        return {Output.SUCCESS: success, Output.RESULT_OBJECT: response}
+        return {Output.SUCCESS: response.get("status", "").lower() == "success", Output.RESULT_OBJECT: response}

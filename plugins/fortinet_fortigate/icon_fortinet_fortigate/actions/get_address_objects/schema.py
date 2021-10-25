@@ -258,8 +258,8 @@ class GetAddressObjectsOutput(insightconnect_plugin_runtime.Output):
         },
         "ip6": {
           "type": "string",
-          "title": "IP6",
-          "description": "IP6",
+          "title": "IPv6 Address",
+          "description": "IPv6 address",
           "order": 5
         },
         "list": {
@@ -351,8 +351,8 @@ class GetAddressObjectsOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "ip": {
               "type": "string",
-              "title": "IP",
-              "description": "IP",
+              "title": "IP Address",
+              "description": "IP address",
               "order": 1
             },
             "net-id": {
@@ -454,8 +454,8 @@ class GetAddressObjectsOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "ip": {
           "type": "string",
-          "title": "IP",
-          "description": "IP",
+          "title": "IP Address",
+          "description": "IP address",
           "order": 1
         },
         "net-id": {
