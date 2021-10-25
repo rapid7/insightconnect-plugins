@@ -338,7 +338,7 @@ actions:
         required: false
         example: true
       is_closed:
-        title: Is Closed
+        title: Closed Status
         description: Is closed/open alerts
         type: boolean
         required: false
