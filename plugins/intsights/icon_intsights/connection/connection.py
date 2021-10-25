@@ -1,8 +1,8 @@
 import insightconnect_plugin_runtime
-from typing import Optional
 from .schema import ConnectionSchema, Input
 
 # Custom imports below
+from typing import Optional
 from icon_intsights.util.api import IntSightAPI
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 
