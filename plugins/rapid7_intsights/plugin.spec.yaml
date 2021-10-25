@@ -160,12 +160,12 @@ actions:
         title: Original Value
         description: Original value
         type: string
-        required: true
+        required: false
       status:
         title: Status
         description: Status
         type: string
-        required: true
+        required: false
       data:
         title: Data
         description: Data

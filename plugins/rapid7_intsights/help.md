@@ -360,8 +360,8 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |data|object|True|Data|
-|original_value|string|True|Original value|
-|status|string|True|Status|
+|original_value|string|False|Original value|
+|status|string|False|Status|
 
 Example output:
 

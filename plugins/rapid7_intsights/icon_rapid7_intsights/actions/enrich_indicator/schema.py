@@ -66,9 +66,7 @@ class EnrichIndicatorOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "data",
-    "original_value",
-    "status"
+    "data"
   ]
 }
     """)
