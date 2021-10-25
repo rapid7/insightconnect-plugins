@@ -418,7 +418,7 @@ actions:
         required: false
   takedown_request:
     title: Takedown Request
-    description: Request a takedown for a given alert in Intsights
+    description: Request a takedown for a given alert in IntSights
     input:
       alert_id:
         title: Alert ID
