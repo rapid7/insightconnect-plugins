@@ -16,4 +16,4 @@ class TakedownRequest(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         self.connection.client.takedown_request(params.get(Input.ALERT_ID), params.get(Input.TARGET))
-        return clean({Output.STATUS: True})
+        return {Output.STATUS: True}
