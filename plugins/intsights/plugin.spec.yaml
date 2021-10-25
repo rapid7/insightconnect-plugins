@@ -282,7 +282,7 @@ actions:
         example: Application Store
       network_type:
         title: Network Type
-        description: Comma separated list of network type. Allowed values - ClearWeb, DarkWeb
+        description: Comma-separated list of network type. Allowed values: ClearWeb, DarkWeb
         type: string
         required: false
         enum:
