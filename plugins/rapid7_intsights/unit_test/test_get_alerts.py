@@ -51,10 +51,5 @@ class TestAddManualAlert(TestCase):
     @patch("requests.request", side_effect=Util.mock_request)
     def test_get_alerts_success_with_list_of_alert_types(self, make_request):
         actual = self.action.run({Input.ALERT_TYPE: ["Phishing", "AttackIndication"]})
-        expected = {
-            'alert_ids': [
-                '7cafac7ec5adaebf62257a4a',
-                '7cafac7ec5adaebf62257a4b'
-            ]
-        }
+        expected = {"alert_ids": ["7cafac7ec5adaebf62257a4a", "7cafac7ec5adaebf62257a4b"]}
         self.assertEqual(expected, actual)

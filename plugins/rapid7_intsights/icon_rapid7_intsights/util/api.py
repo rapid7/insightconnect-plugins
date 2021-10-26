@@ -28,12 +28,12 @@ class AlertParams:
     def to_dict(self) -> dict:
         return clean(
             {
-                "alertType": ','.join(self.alert_type) if self.alert_type else None,
-                "severity": ','.join(self.severity) if self.severity else None,
-                "sourceType": ','.join(self.source_type) if self.source_type else None,
-                "networkType": ','.join(self.network_type) if self.network_type else None,
-                "matchedAssetValue": ','.join(self.matched_asset_value) if self.matched_asset_value else None,
-                "remediationStatus": ','.join(self.remediation_status) if self.remediation_status else None,
+                "alertType": ",".join(self.alert_type) if self.alert_type else None,
+                "severity": ",".join(self.severity) if self.severity else None,
+                "sourceType": ",".join(self.source_type) if self.source_type else None,
+                "networkType": ",".join(self.network_type) if self.network_type else None,
+                "matchedAssetValue": ",".join(self.matched_asset_value) if self.matched_asset_value else None,
+                "remediationStatus": ",".join(self.remediation_status) if self.remediation_status else None,
                 "sourceDateFrom": int(self.source_date_from) if self.source_date_from else None,
                 "sourceDateTo": int(self.source_date_to) if self.source_date_to else None,
                 "foundDateFrom": int(self.found_date_from) if self.found_date_from else None,
