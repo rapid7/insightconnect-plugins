@@ -340,6 +340,7 @@ The Role Based Access Control (RBAC) of your API Key will require the right perm
 
 # Version History
 
+* 3.0.0 - Update find event action
 * 2.0.1 - Rebrand and update help references
 * 2.0.0 - New spec and help.md format for the Extension Library | Fix spelling of variable titled Registry Value
 * 1.1.1 - Update to Python 3.7 Slim SDK (plugin size reduction) | Fix bug in output where Security Event Code was defined as an `object` instead of a `string`

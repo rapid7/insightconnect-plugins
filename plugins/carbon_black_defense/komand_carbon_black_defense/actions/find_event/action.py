@@ -31,7 +31,7 @@ class FindEvent(komand.Action):
         url = host + FindEvent._URI
 
         if payload:
-            result = requests.get(url, headers=headers, params=payload)
+            result = requests.get(url, headers=headers, body=payload)
         else:
             result = requests.get(url, headers=headers)
         try:

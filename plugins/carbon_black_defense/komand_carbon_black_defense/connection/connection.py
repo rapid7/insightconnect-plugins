@@ -1,6 +1,7 @@
 import komand
 from .schema import ConnectionSchema, Input
 from komand.exceptions import ConnectionTestException
+from komand_carbon_black_defense.util.api import *
 
 # Custom imports below
 import requests
@@ -15,6 +16,17 @@ class Connection(komand.Connection):
         self.host = params.get(Input.URL)
         self.token = params.get(Input.API_KEY).get("secretKey")
         self.connector = params.get(Input.CONNECTOR)
+
+    def get_enriched_event_type(self, indicator_type: str, indicator: str, find_ioc_id: str = None):
+        return self.make_request(
+            "GET",
+            f"{self.base_url}/iocs/entities/indicators/v1",
+            params={
+                "type": indicator_type,
+                "value": indicator,
+                "ids": find_ioc_id
+            }
+        )
 
     def test(self):
         host = self.host

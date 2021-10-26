@@ -27,15 +27,14 @@ class CarbonBlackAPI(komand.Connection):
        self.logger.info("client_secret: *************" + self.client_secret[-4:])
        self.logger.info(f"Base URL: {self.base_url}")
 
-    def get_job_id(self, event_ids: str) -> Optional[str]:
-            response = self.call_api(
+    def get_job_id(self, query: str, process_name: str, device_name: str) -> Optional[str]:
+            response = self.make_request(
                 "POST",
                 f"{self.base_url}/api/investigate/v2/orgs/{self.org_key}/enriched_events/search_jobs",
                 params={
-                    "event_ids": [event_ids]
+                    "query": {"process_name": process_name and "device_name": device_name}
                 },
-                data=None,
-                json_data=None
+                payload=None
             )
             if 200 <= response.status_code < 300:
                 return response.json()
