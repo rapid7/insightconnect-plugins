@@ -310,6 +310,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.1 - Fix incorrect error messaging when invalid credentials are used
 * 2.0.0 - Update action Isolate Machine | New action Remediate Items
 * 1.2.0 - Add new action Quarantine File
 * 1.1.0 - Add new action Isolate Machine
