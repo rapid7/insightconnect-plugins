@@ -1,7 +1,7 @@
 {
-	"spec": "8a28c87c3a3e8924532ef15afb1bc2c4",
-	"manifest": "218c25c7720de4f87ceff9aebbad23b5",
-	"setup": "4aeed95f2003c5c1285574fa23919a47",
+	"spec": "755aa4ed8995f5d58d591a9cc285d196",
+	"manifest": "d8bb880a9f85619428c1e3a79284e75b",
+	"setup": "0aeacba3d2e123329aae8fdbbea6da4b",
 	"schemas": [
 		{
 			"identifier": "isolate_machine/schema.py",
