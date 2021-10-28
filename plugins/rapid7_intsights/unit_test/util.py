@@ -1,8 +1,12 @@
 import json
 import logging
+import sys
+import os
 
 from icon_rapid7_intsights.connection import Connection
 from icon_rapid7_intsights.connection.schema import Input
+
+sys.path.append(os.path.abspath("../"))
 
 
 class Util:
@@ -32,7 +36,9 @@ class Util:
             def __init__(self, status_code: int, filename: str = None):
                 self.status_code = status_code
                 if filename:
-                    self.text = Util.read_file_to_string(f"payloads/{filename}.json.resp")
+                    self.text = Util.read_file_to_string(
+                        os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{filename}.json.resp")
+                    )
                 else:
                     self.text = ""
 
