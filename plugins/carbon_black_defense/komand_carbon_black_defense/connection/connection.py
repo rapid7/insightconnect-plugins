@@ -1,12 +1,17 @@
 import komand
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import ConnectionSchema, Input
 from komand.exceptions import ConnectionTestException
 
 # Custom imports below
 import requests
+from typing import Optional
+import json
 
 
 class Connection(komand.Connection):
+
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
@@ -14,7 +19,66 @@ class Connection(komand.Connection):
         self.logger.info("Connect: Connecting..")
         self.host = params.get(Input.URL)
         self.token = params.get(Input.API_KEY).get("secretKey")
+        self.connector = params.get(Input.API_ID)
+        self.org_key = params.get(Input.ORG_KEY)
         self.connector = params.get(Input.CONNECTOR)
+
+    def get_job_id_for_detail_search(self, event_id: str) -> Optional[str]:
+        response = self.make_request("POST", f"{self.host}/api/investigate/v2/orgs/{self.org_key}/enriched_events/detail_jobs",
+                                     params={"event_ids": [event_id]}).get("response")
+        if response and len(response) > 0:
+            return response
+        return None
+
+    def check_status_of_detail_search(self, get_job_id_for_detail_search: str = None):
+        response = self.make_request("GET", f"{self.host}/api/investigate/v2/orgs/{self.org_key}/enriched_events/detail_jobs/{self.job_id}",
+                                     params={"job_id": get_job_id_for_detail_search})
+        for key in response.items():
+            if not response[key][0] == response[key][1]:
+                return False
+            return True
+
+    def retrieve_results_for_detail_search(self):
+        results = self.make_request("GET",
+                                     f"{self.host}/api/investigate/v2/orgs/{self.org_key}/enriched_events/detail_jobs/{self.job_id}/results",
+                                     params={"job_id": self.get_job_id_for_detail_search})
+        return results
+
+    def make_request(self, method: str, url: str, params: dict = None, data: str = None, json_data: object = None):
+        try:
+            response = self.call_api(method, url, params, data, json_data)
+
+            if response.status_code == 201 or response.status_code == 204:
+                return {}
+            if 200 <= response.status_code < 300:
+                return response.json()
+        except json.decoder.JSONDecodeError as e:
+            raise PluginException(
+                cause="Received an unexpected response from the server.",
+                assistance="(non-JSON or no response was received).",
+                data=e
+            )
+
+    def call_api(self, method: str, url, params: dict=None, data: str = None, json_data: object = None):
+        try:
+            response = requests.request(method, url, headers=self.get_headers(), params=params, data=data,
+                                        json=json_data)
+            self.raise_for_status_code(response)
+
+            if 200 <= response.status_code < 300:
+                return response
+
+            raise PluginException(
+                cause="Something unexpected occurred.",
+                assistance="Check the logs and if the issue persists please contact support.",
+                data=response.text
+            )
+        except requests.exceptions.HTTPError as e:
+            raise PluginException(
+                cause="Something unexpected occurred.",
+                assistance="Check the logs and if the issue persists please contact support.",
+                data=e
+            )
 
     def test(self):
         host = self.host

@@ -6,6 +6,7 @@ import json
 class Input:
     API_KEY = "api_key"
     CONNECTOR = "connector"
+    ORG_KEY = "org_key"
     URL = "url"
     
 
@@ -25,19 +26,26 @@ class ConnectionSchema(komand.Input):
       "type": "string",
       "title": "Connector",
       "description": "Connector ID",
+      "order": 4
+    },
+    "org_key": {
+      "type": "string",
+      "title": "Organization Key",
+      "description": "Organization key",
       "order": 3
     },
     "url": {
       "type": "string",
       "title": "URL",
       "description": "API URL",
-      "default": "https://api.confer.net",
+      "default": "https://defense.conferdeploy.net",
       "order": 1
     }
   },
   "required": [
     "api_key",
     "connector",
+    "org_key",
     "url"
   ],
   "definitions": {

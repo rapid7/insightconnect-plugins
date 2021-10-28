@@ -589,12 +589,17 @@ connection:
     title: URL
     type: string
     description: API URL
-    default: https://api.confer.net
+    default: https://defense.conferdeploy.net
     required: true
   api_key:
     title: API Key
     type: credential_secret_key
     description: API key
+    required: true
+  org_key:
+    title: Organization Key
+    type: string
+    description: Organization key
     required: true
   connector:
     title: Connector

@@ -1,5 +1,6 @@
 import komand
 from .schema import GetDetailsForSpecificEventInput, GetDetailsForSpecificEventOutput, Input, Output
+from komand_carbon_black_defense.connection import *
 
 # Custom imports below
 import requests
@@ -19,19 +20,37 @@ class GetDetailsForSpecificEvent(komand.Action):
         )
 
     def run(self, params={}):
-        host = self.connection.host
-        token = self.connection.token
-        connector = self.connection.connector
+
         event_id = params.get(Input.EVENT_ID)
+        id_ = self.connection.get_job_id_for_detail_search(event_id=event_id)
 
-        headers = {"X-Auth-Token": f"{token}/{connector}"}
-        url = host + GetDetailsForSpecificEvent._URI + event_id
+        if id_ is None:
+            return {Output.SUCCESS: False,
+                    Output.EVENTINFO: {}
+                    }
+        detail_search_status = self.connection.check_status_of_detail_search(id_)
 
-        result = requests.get(url, headers=headers)
+        # check if status of
+        # detail search is complete by checking if the completed property
+        # in results is not equal to the contacted property
+
+        if not detail_search_status:
+            self.connection.check_status_of_detail_search(id_)
+        else:
+            self.connection.retrieve_results_for_detail_search()
+
         try:
-            data = komand.helper.clean(result.json())
+            success = self.connection.retrieve_results_for_detail_search()
+            data = komand.helper.clean(success.json())
+            message = "message_placeholder"
+            return {
+                Output.SUCCESS: success,
+                Output.MESSAGE: komand.helper.clean(message)
+                Output.EVENTINFO: data["eventInfo"]
+            }
+
         except ValueError:
-            self.logger.error(result.text)
+            self.logger.error(success.text)
             raise Exception(
                 f"Error: Received an unexpected response"
                 f" (non-JSON or no response was received). Raw response in logs."
