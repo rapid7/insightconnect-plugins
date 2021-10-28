@@ -5,7 +5,7 @@ name: anomali_threatstream
 title: Anomali ThreatStream
 description: Anomali ThreatStream operationalizes threat intelligence, automating collection
   and integration that enables security teams to analyze and respond to threats
-version: 3.1.0
+version: 3.1.1
 vendor: rapid7
 support: community
 status: []
@@ -306,22 +306,26 @@ connection:
     title: Username
     description: Anomali ThreatStream username
     type: string
+    example: user1
     required: true
   url:
     title: URL
-    description: URL for the ThreatStream instance e.g. https://ts.example.com
+    description: URL for the ThreatStream instance
     type: string
+    example: https://ts.example.com
     required: true
   api_key:
     title: API Key
     description: Anomali ThreatStream API key
     type: credential_secret_key
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
     required: true
   ssl_verify:
     type: boolean
     title: SSL Verify
     description: Verify the server's SSL/TLS certificate
     default: true
+    example: true
     required: true
 actions:
   lookup_ip:
@@ -332,6 +336,7 @@ actions:
         title: IP Address
         description: IP address
         type: string
+        example: 192.168.1.1
         required: false
     output:
       results:
@@ -347,6 +352,7 @@ actions:
         title: URL
         description: URL
         type: string
+        example: https://example.com
         required: false
     output:
       results:
@@ -362,6 +368,7 @@ actions:
         title: Hash
         description: Hash
         type: string
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
         required: false
     output:
       results:
@@ -377,11 +384,13 @@ actions:
         title: File
         description: File of data to be imported into Anomali ThreatStream
         type: file
+        example: setup.exe
         required: true
       observable_settings:
         title: Observable Settings
         description: Settings needed for importing an observable that needs approval
         type: observable_settings
+        example: none
         required: false
     output:
       results:
@@ -397,6 +406,7 @@ actions:
         title: Value
         description: Value
         type: string
+        example: Example observable
         required: false
     output:
       results:
@@ -413,6 +423,7 @@ actions:
         title: Platform
         description: Platform on which the submitted URL or file will be run
         type: string
+        example: WINDOWS7
         enum:
         - ALL
         - ANDROID4.4
@@ -432,6 +443,7 @@ actions:
         description: Classification of the Sandbox submission, either public or private
         required: false
         type: string
+        example: private
         enum:
         - private
         - public
@@ -440,17 +452,20 @@ actions:
         title: Use Premium Sandbox
         required: true
         description: Specify whether the premium sandbox should be used for detonation
+        example: true
         type: boolean
       file:
         type: file
         title: File
         required: true
         description: File to detonate
+        example: setup.exe
       detail:
         title: Detail
-        description: A comma-separated list that provides additional details for the indicator. This information is displayed in the Tag column of the ThreatStream UI. For example, "Credential-Exposure,compromised_email"
+        description: A comma-separated list that provides additional details for the indicator. This information is displayed in the Tag column of the ThreatStream UI
         required: false
         type: string
+        example: Credential-Exposure,compromised_email
     output:
       success:
         title: Success
@@ -471,6 +486,7 @@ actions:
         title: Platform
         description: Platform on which the submitted URL or file will be run
         type: string
+        example: WINDOWS7
         enum:
         - ALL
         - ANDROID4.4
@@ -490,6 +506,7 @@ actions:
         description: Classification of the sandbox submission, either public or private
         required: false
         type: string
+        example: private
         enum:
         - private
         - public
@@ -499,14 +516,17 @@ actions:
         required: true
         description: Specify whether the premium sandbox should be used for detonation
         type: boolean
+        example: true
       url:
         type: string
         title: URL
         required: true
         description: URL to detonate
+        example: "https://example.com/setup.exe"
       detail:
         title: Detail
-        description: A comma-separated list that provides additional details for the indicator. This information is displayed in the tag column of the ThreatStream UI. For example, "Credential-Exposure,compromised_email"
+        description: A comma-separated list that provides additional details for the indicator. This information is displayed in the tag column of the ThreatStream UI
+        example: Credential-Exposure,compromised_email
         required: false
         type: string
     output:
@@ -528,6 +548,7 @@ actions:
         title: Report ID
         description: Report ID
         type: string
+        example: 101
         required: true
     output:
       sandbox_report:

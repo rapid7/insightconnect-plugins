@@ -4,7 +4,8 @@ products: [insightconnect]
 name: sql
 title: SQL
 description: The SQL plugin allows you to run SQL queries
-version: 3.0.2
+version: 3.0.3
+supported_versions: ["MySQL 8.0.21", "MSSQL 2019 15.0.2000.5", "PostgresSQL 13.0"]
 vendor: rapid7
 support: community
 status: []
@@ -42,7 +43,7 @@ connection:
     description: Database port
     type: string
     required: false
-    example: 443
+    example: 1433
   db:
     title: DB
     description: Database name
