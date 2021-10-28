@@ -26,14 +26,10 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
 
         address_type = helper.determine_address_type(host)
 
-        if address_type == "ipmask" or address_type == "ipprefix":
+        if address_type in ("ipmask", "ipprefix"):
             host = helper.ipmask_converter(host)
 
-        if (
-            (address_type == "ipmask" or address_type == "ipprefix")
-            and skip_rfc1918 is True
-            and ipaddress.ip_network(host).is_private
-        ):
+        if address_type in ("ipmask", "ipprefix") and skip_rfc1918 is True and ipaddress.ip_network(host).is_private:
             return {
                 Output.SUCCESS: False,
                 Output.RESPONSE_OBJECT: {
