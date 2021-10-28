@@ -149,7 +149,14 @@ class CybereasonAPI:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
             if 200 <= response.status_code < 300:
-                return insightconnect_plugin_runtime.helper.clean(json.loads(response.content))
+                # Cybereason will return a Login page with a 200 status code if creds are incorrect
+                # Therefore, check if the response is JSON-decodable (login page is not JSON)
+                try:
+                    json_response = response.json()
+                except json.decoder.JSONDecodeError:
+                    raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
+
+                return insightconnect_plugin_runtime.helper.clean(json_response)
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except json.decoder.JSONDecodeError as e:
