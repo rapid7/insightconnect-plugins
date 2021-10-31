@@ -19,7 +19,7 @@ class TestRemediateItems(TestCase):
     def test_remediate_items(self, mock_request):
         actual = self.action.run(
             {
-                Input.INITIATOR_USER_NAME: "mike_rinehart@rapid7.com",
+                Input.INITIATOR_USER_NAME: "user@example.com",
                 Input.ACTIONS_BY_MACHINE: {
                     "1187140749.1198775089551518743": [
                         {"targetId": "-1187140749.4110133525793827174", "actionType": "KILL_PROCESS"}
@@ -33,7 +33,7 @@ class TestRemediateItems(TestCase):
                 "malopId": "11.2189746432167327222",
                 "remediationId": "5144cf82-94c4-49f8-82cd-9ce1fcbd6a23",
                 "start": 1624819406074,
-                "initiatingUser": "mike_rinehart@rapid7.com",
+                "initiatingUser": "user@example.com",
                 "statusLog": [],
             }
         }
