@@ -12,6 +12,7 @@
 * Get Complete Alert by ID
 * Takedown Request
 * Add Manual Alert
+* Get CVE by ID
 
 # Requirements
 
@@ -46,6 +47,84 @@ Example input:
 
 ### Actions
 
+#### Get CVE by ID
+
+This action is used to get CVE's list from account.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|cve_id|string|None|False|Specific CVE ID. Can be multiple, comma separated|None|CVE-2020-0711|
+
+Example input:
+
+```
+{
+  "cve_id": "CVE-2020-0711"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|content|[]content|True|Response content|
+|next_offset|string|False|Next offset|
+
+Example output:
+
+```
+{
+  "content": {
+    "content": [
+      {
+        "cveId": "CVE-2020-7064",
+        "cpe": [
+          {
+            "Value": "cpe:2.3:a:php:php:*:*:*:*:*:*:*:*",
+            "Range": {
+              "VersionStartIncluding": "7.2.0",
+              "VersionEndIncluding": "",
+              "VersionStartExcluding": "",
+              "VersionEndExcluding": "7.2.9"
+            },
+            "Title": "Php",
+            "VendorProduct": "Php Php"
+          }
+        ],
+        "publishedDate": "2020-04-01T04:15:00.000Z",
+        "updateDate": "2021-10-25T10:14:52.978Z",
+        "severity": "Low",
+        "intsightsScore": 36,
+        "cvssScore": 5.4,
+        "mentionsAmount": 39,
+        "mentionsPerSource": {
+          "PasteSite": 0,
+          "HackingForum": 0,
+          "InstantMessage": 0,
+          "DarkWeb": 0,
+          "ClearWebCyberBlogs": 0,
+          "CodeRepositories": 9,
+          "Exploit": 0,
+          "SocialMedia": 30
+        },
+        "firstMentionDate": "2020-03-19T15:09:00.000Z",
+        "lastMentionDate": "2021-07-22T20:41:00.000Z",
+        "exploitAvailability": false,
+        "vulnerabilityOrigin": [
+          "API"
+        ],
+        "relatedThreatActors": [],
+        "relatedMalware": [],
+        "relatedCampaigns": []
+      }
+    ],
+    "nextOffset": null
+  }
+}
+```
+
 #### Add Manual Alert
 
 This action will create a manual alert with the provided parameters.
@@ -72,10 +151,7 @@ Example input:
 {
   "description": "Suspicious addresses",
   "found_date": "2020-01-01",
-  "images": [{
-    "Type": "jpeg",
-    "Data": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
-  }],
+  "images": "[{\"Type\": \"jpeg\",\"Data\": \"UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==\"}]",
   "severity": "Medium",
   "source_date": "2020-02-01",
   "source_network_type": "DarkWeb",
@@ -203,7 +279,7 @@ This action is used to force an indicator scan in Intsights TIP system.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|indicator_file_hash|string|None|True|IOC value in type file hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
+|indicator_file_hash|string|None|True|IOC value in type file hash|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
 
 Example input:
 
@@ -278,7 +354,7 @@ This action is used to search Alerts based on criteria.
 |has_indicators|boolean|None|False|Show alerts with IOCs results|None|False|
 |is_closed|boolean|None|False|Status of the alert, either closed or open|['Closed', 'Open']|Closed|
 |is_flagged|string|None|False|Show flagged/unflagged alerts|['Flagged', 'Unflagged']|Flagged|
-|matched_asset_value|[]string|None|False|List of matched asset values|None|["example.com"]|
+|matched_asset_value|[]string|None|False|List of matched asset values|None|["https://example.com"]|
 |network_type|[]string|None|False|List of network type. Allowed values: ClearWeb, DarkWeb|None|["DarkWeb"]|
 |remediation_status|[]string|None|False|List of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed|None|["InProgress", "Pending"]|
 |severity|[]string|None|False|List of alerts severity. Allowed values: High, Medium, Low|None|["Low"]|
@@ -345,7 +421,7 @@ This action is used to submit an indicator to IntSights for investigation and re
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|indicator_value|string|None|True|Value of the indicator|None|example.com|
+|indicator_value|string|None|True|Value of the indicator|None|https://example.com|
 
 Example input:
 
@@ -574,7 +650,7 @@ This action will search indicators in IntSights TIP.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|indicator_value|string|None|True|Value of the indicator|None|example.com|
+|indicator_value|string|None|True|Value of the indicator|None|https://example.com|
 
 Example input:
 
@@ -656,6 +732,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.0 - Add new action Get CVE by ID
 * 1.0.0 - Initial plugin
 
 # Links

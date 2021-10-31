@@ -137,6 +137,9 @@ class IntSightsAPI:
     def add_manual_alert(self, manual_alert_params: ManualAlertParams) -> str:
         return self.make_request("PUT", "public/v1/data/alerts/add-alert", json_data=manual_alert_params.to_dict()).text
 
+    def get_cve(self, cve_id: str) -> dict:
+        return self.make_json_request("GET", f"public/v1/cves/get-cves-list?cveId={cve_id}")
+
     def test_credentials(self) -> bool:
         return self.make_request("HEAD", "public/v1/test-credentials").status_code == 200
 

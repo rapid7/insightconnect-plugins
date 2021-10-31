@@ -1,7 +1,7 @@
 {
-	"spec": "e96e8837a5cc1cfaa801b979ffafd9c1",
-	"manifest": "9a1c0ed12f4a14563a7e6ee8431fcb56",
-	"setup": "03540fca0745c2f43e81830a80d402bb",
+	"spec": "162e00994d7fe110d29921a434b840f2",
+	"manifest": "ab7546b34a728428ec917ca13c855567",
+	"setup": "5db13a63e065f0655ce8506247f45b4f",
 	"schemas": [
 		{
 			"identifier": "add_manual_alert/schema.py",
@@ -18,6 +18,10 @@
 		{
 			"identifier": "get_complete_alert_by_id/schema.py",
 			"hash": "2d0aced444d1c084e2e4bf94f62315ba"
+		},
+		{
+			"identifier": "get_cve_by_id/schema.py",
+			"hash": "6fa48bbfb083acdde11083caa8094b9a"
 		},
 		{
 			"identifier": "get_indicator_by_value/schema.py",

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_intsights
 title: Rapid7 IntSights
 description: Rapid7 IntSights is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
-version: 1.0.0
+version: 1.1.0
 supported_versions: ["2.4.0"]
 vendor: rapid7
 support: rapid7
@@ -45,6 +45,100 @@ types:
       description: Data
       type: string
       required: true
+  range:
+    VersionEndExcluding:
+      title: Version End Excluding
+      type: string
+      description: Version end excluding
+      required: false
+    VersionEndIncluding:
+      title: Version End Including
+      type: string
+      description: Version end including
+      required: false
+    VersionStartExcluding:
+      title: Version Start Excluding
+      type: string
+      description: Version start excluding
+      required: false
+    VersionStartIncluding:
+      title: Version start including
+      type: string
+      description: Version Start Including
+      required: false
+  cpe:
+    range:
+      title: Range
+      type: range
+      description: Range
+      required: false
+    Title:
+      title: Title
+      type: string
+      description: Title
+      required: false
+    Value:
+      title: Value
+      type: string
+      description: Value
+      required: false
+    VendorProduct:
+      title: Vendor Product
+      type: string
+      description: Vendor product
+      required: false
+  mentionsPerSource:
+    ClearWebCyberBlogs:
+      title: Clear Web Cyber Blogs
+      type: integer
+      description: Clear web cyber blogs
+      required: false
+    CodeRepositories:
+      title: Code Repositories
+      type: integer
+      description: Code repositories
+      required: false
+    DarkWeb:
+      title: Dark Web
+      type: integer
+      description: Dark web
+      required: false
+    Exploit:
+      title: Exploit
+      type: integer
+      description: Exploit
+      required: false
+    HackingForum:
+      title: Hacking Forum
+      type: integer
+      description: Hacking forum
+      required: false
+    InstantMessage:
+      title: Instant Message
+      type: integer
+      description: Instant message
+      required: false
+    PasteSite:
+      title: Paste Site
+      type: integer
+      description: Paste site
+      required: false
+    SocialMedia:
+      title: Social Media
+      type: integer
+      description: Social media
+      required: false
+  content:
+    mentionsPerSource:
+      title: Mentions Per Source
+      description: Mentions per source
+      type: '[]mentionsPerSource'
+      required: false
+    cpe:
+      title: CPE
+      description: CPE
+      type: '[]cpe'
+      required: false
 connection:
   account_id:
     title: Account ID
@@ -527,3 +621,24 @@ actions:
         description: New created alert ID
         type: string
         required: true
+  get_cve_by_id:
+    title: Get CVE by ID
+    description: Get CVE's list from account
+    input:
+      cve_id:
+        title: CVE ID
+        description: Specific CVE ID. Can be multiple, comma separated
+        type: string
+        required: false
+        example: CVE-2020-0711
+    output:
+      content:
+        title: Content
+        description: Response content
+        type: '[]content'
+        required: true
+      next_offset:
+        title: Next Offset
+        type: string
+        description: Next offset
+        required: false
