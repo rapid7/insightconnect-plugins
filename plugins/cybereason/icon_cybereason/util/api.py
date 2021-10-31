@@ -106,7 +106,7 @@ class CybereasonAPI:
     def get_malop_feature_details(self, malop_guid: str, feature_name: str) -> dict:
         response = self.send_request(
             "POST",
-            "/rest/crimes/unified",
+            "/rest/visualsearch/query/simple",
             payload={
                 "totalResultLimit": 10000,
                 "perGroupLimit": 10000,
@@ -115,33 +115,20 @@ class CybereasonAPI:
                     {
                         "requestedType": "MalopProcess",
                         "guidList": [malop_guid],
-                        "connectionFeature": {
-                            "elementInstanceType": "MalopProcess",
-                            "featureName": feature_name
-                        }
+                        "connectionFeature": {"elementInstanceType": "MalopProcess", "featureName": feature_name},
                     },
-                    {
-                    "requestedType": "Autorun",
-                    "isResult": True
-                    }
-                ]
-            }
+                    {"requestedType": "Autorun", "isResult": True},
+                ],
+                "customFields": ["name", "ownerMachine"],
+            },
         )
+        try:
+            return response["data"]["resultIdToElementDataMap"]
 
-        status = response.get("status")
-        if status == "SUCCESS":
-            try:
-                return response["data"]["resultIdToElementDataMap"]
-                
-            except KeyError:
-                raise PluginException(
-                    cause=f"Unable to retrieve detailed Malop information for {malop_guid}.",
-                    assistance="Please ensure that provided Malop GUID is valid and try again.",
-                )
-        else:
+        except KeyError:
             raise PluginException(
-                cause=f"Malop feature lookup for {malop_guid} failed.",
-                assistance=f"Status message returned by Cybereason is: {status}.",
+                cause=f"Unable to retrieve detailed Malop information for {malop_guid}.",
+                assistance="Please ensure that provided Malop ID is valid and try again.",
             )
 
     def get_visual_search(self, requestedType: str, filters: list, customFields: list) -> dict:
@@ -248,10 +235,10 @@ class CybereasonAPI:
     def get_machine_targets(results: str, machine_guid: str) -> list:
         target_ids = []
 
-        for key, value in results:
+        for key, value in results.items():
             try:
-                for i in value['elementValues']['ownerMachine']['elementValues']:
-                    if machine_guid in i['guid']:
+                for i in value["elementValues"]["ownerMachine"]["elementValues"]:
+                    if machine_guid in i["guid"]:
                         target_ids.append(key)
             except KeyError:
                 pass
@@ -261,5 +248,5 @@ class CybereasonAPI:
                 cause="No targets found for this machine in the Malop provided.",
                 assistance=f"No remediation targets for machine: {machine_guid}, in the provided Malop.",
             )
-        
+
         return target_ids
