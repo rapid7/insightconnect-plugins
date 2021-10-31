@@ -1,5 +1,5 @@
 {
-	"spec": "162e00994d7fe110d29921a434b840f2",
+	"spec": "22335d0663632d81a0ba5e93336defc1",
 	"manifest": "ab7546b34a728428ec917ca13c855567",
 	"setup": "5db13a63e065f0655ce8506247f45b4f",
 	"schemas": [
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "enrich_indicator/schema.py",
-			"hash": "d47d2fcf15a04fbdb9ec87078294d506"
+			"hash": "d65d91c1451a8e7de47b9e709590f5ea"
 		},
 		{
 			"identifier": "get_alerts/schema.py",
@@ -17,23 +17,23 @@
 		},
 		{
 			"identifier": "get_complete_alert_by_id/schema.py",
-			"hash": "2d0aced444d1c084e2e4bf94f62315ba"
+			"hash": "e1caf7b9e81e3e8ccff0dec44f5ec2b7"
 		},
 		{
 			"identifier": "get_cve_by_id/schema.py",
-			"hash": "6fa48bbfb083acdde11083caa8094b9a"
+			"hash": "7c0d2496754331c6e81fe127f281f7cd"
 		},
 		{
 			"identifier": "get_indicator_by_value/schema.py",
-			"hash": "1b8a24fd526eebcf1f7b818667c38ce2"
+			"hash": "39a599120e9f7d02c34a36f607085ae5"
 		},
 		{
 			"identifier": "get_indicator_scan_status/schema.py",
-			"hash": "8dee800f2700228a0ed251111785a228"
+			"hash": "da46d94cb70a3ad32d719881a4fde656"
 		},
 		{
 			"identifier": "rescan_indicator/schema.py",
-			"hash": "957d18eff29b84ba706c867dddd14139"
+			"hash": "9d70900a799a50bafa5b1ba9245b8fe3"
 		},
 		{
 			"identifier": "takedown_request/schema.py",

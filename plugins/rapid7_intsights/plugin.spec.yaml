@@ -217,15 +217,85 @@ types:
       description: Social media
       required: false
   content:
-    mentionsPerSource:
-      title: Mentions Per Source
-      description: Mentions per source
-      type: '[]mentionsPerSource'
+    cveId:
+      title: Cve ID
+      type: string
+      description: Cve ID
       required: false
     cpe:
       title: CPE
       description: CPE
       type: '[]cpe'
+      required: false
+    publishedDate:
+      title: Published Date
+      type: string
+      description: Published Date
+      required: false
+    updateDate:
+      title: Update Date
+      type: string
+      description: Update Date
+      required: false
+    severity:
+      title: Severity
+      type: string
+      description: Severity
+      required: false
+    intsightsScore:
+      title: Intsights Score
+      type: integer
+      description: Intsights score
+      required: false
+    cvssScore:
+      title: CVSs Score
+      type: float
+      description: CVSs score
+      required: false
+    mentionsAmount:
+      title: Mentions Amount
+      type: integer
+      description: Mentions amount
+      required: false
+    mentionsPerSource:
+      title: Mentions Per Source
+      type: mentionsPerSource
+      description: Mentions per source
+      required: false
+    firstMentionDate:
+      title: First Mention Date
+      type: string
+      description: First mention date
+      required: false
+    lastMentionDate:
+      title: Last Mention Date
+      type: string
+      description: Last mention date
+      required: false
+    exploitAvailability:
+      title: Exploit Availability
+      type: boolean
+      description: Exploit availability
+      required: false
+    vulnerabilityOrigin:
+      title: Vulnerability Origin
+      type: "[]string"
+      description: Vulnerability origin
+      required: false
+    relatedThreatActors:
+      title: Related Threat Actors
+      type: "[]string"
+      description: Related threat actors
+      required: false
+    relatedMalware:
+      title: Related Malware
+      type: "[]string"
+      description: Related malware
+      required: false
+    relatedCampaigns:
+      title: Related Campaigns
+      type: "[]string"
+      description: Related campaigns
       required: false
 connection:
   account_id:
@@ -716,7 +786,7 @@ actions:
       cve_id:
         title: CVE ID
         description: Specific CVE ID. Can be multiple, comma separated
-        type: string
+        type: "[]string"
         required: false
         example: CVE-2020-0711
     output:

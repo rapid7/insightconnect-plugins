@@ -72,7 +72,7 @@ class GetCompleteAlertByIdOutput(insightconnect_plugin_runtime.Output):
       "order": 3
     },
     "details": {
-      "type": "object",
+      "$ref": "#/definitions/alert_details",
       "title": "Details",
       "description": "Alert details",
       "order": 4
@@ -128,10 +128,237 @@ class GetCompleteAlertByIdOutput(insightconnect_plugin_runtime.Output):
     "assets",
     "assignees",
     "details",
-    "id",
     "is_closed",
     "is_flagged"
-  ]
+  ],
+  "definitions": {
+    "alert_details": {
+      "type": "object",
+      "title": "alert_details",
+      "properties": {
+        "Description": {
+          "type": "string",
+          "title": "Description",
+          "description": "Description",
+          "order": 6
+        },
+        "Images": {
+          "type": "array",
+          "title": "Images",
+          "description": "Images",
+          "items": {
+            "type": "string"
+          },
+          "order": 7
+        },
+        "RelatedIocs": {
+          "type": "array",
+          "title": "Related IOCs",
+          "description": "Related IOCs",
+          "items": {
+            "type": "string"
+          },
+          "order": 9
+        },
+        "Severity": {
+          "type": "string",
+          "title": "Severity",
+          "description": "Severity",
+          "order": 3
+        },
+        "Source": {
+          "$ref": "#/definitions/alert_source",
+          "title": "Source",
+          "description": "Source",
+          "order": 4
+        },
+        "SubType": {
+          "type": "string",
+          "title": "Sub Type",
+          "description": "Sub type",
+          "order": 2
+        },
+        "Tags": {
+          "type": "array",
+          "title": "Tags",
+          "description": "Tags",
+          "items": {
+            "$ref": "#/definitions/alert_tags"
+          },
+          "order": 8
+        },
+        "Title": {
+          "type": "string",
+          "title": "Title",
+          "description": "Title",
+          "order": 5
+        },
+        "Type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Type",
+          "order": 1
+        }
+      },
+      "required": [
+        "Description",
+        "Images",
+        "RelatedIocs",
+        "Severity",
+        "Source",
+        "SubType",
+        "Tags",
+        "Title",
+        "Type"
+      ],
+      "definitions": {
+        "alert_source": {
+          "type": "object",
+          "title": "alert_source",
+          "properties": {
+            "Date": {
+              "type": "string",
+              "title": "Date",
+              "description": "Date",
+              "order": 5
+            },
+            "Email": {
+              "type": "string",
+              "title": "Email",
+              "description": "Email",
+              "order": 3
+            },
+            "NetworkType": {
+              "type": "string",
+              "title": "Network Type",
+              "description": "Network type",
+              "order": 4
+            },
+            "Type": {
+              "type": "string",
+              "title": "Type",
+              "description": "Type",
+              "order": 1
+            },
+            "URL": {
+              "type": "string",
+              "title": "URL",
+              "description": "URL",
+              "order": 2
+            }
+          },
+          "required": [
+            "Date",
+            "Email",
+            "NetworkType",
+            "Type",
+            "URL"
+          ]
+        },
+        "alert_tags": {
+          "type": "object",
+          "title": "alert_tags",
+          "properties": {
+            "CreatedBy": {
+              "type": "string",
+              "title": "Created By",
+              "description": "Created by",
+              "order": 3
+            },
+            "Name": {
+              "type": "string",
+              "title": "Name",
+              "description": "Name",
+              "order": 2
+            },
+            "_id": {
+              "type": "string",
+              "title": "ID",
+              "description": "ID",
+              "order": 1
+            }
+          },
+          "required": [
+            "CreatedBy",
+            "Name",
+            "_id"
+          ]
+        }
+      }
+    },
+    "alert_source": {
+      "type": "object",
+      "title": "alert_source",
+      "properties": {
+        "Date": {
+          "type": "string",
+          "title": "Date",
+          "description": "Date",
+          "order": 5
+        },
+        "Email": {
+          "type": "string",
+          "title": "Email",
+          "description": "Email",
+          "order": 3
+        },
+        "NetworkType": {
+          "type": "string",
+          "title": "Network Type",
+          "description": "Network type",
+          "order": 4
+        },
+        "Type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Type",
+          "order": 1
+        },
+        "URL": {
+          "type": "string",
+          "title": "URL",
+          "description": "URL",
+          "order": 2
+        }
+      },
+      "required": [
+        "Date",
+        "Email",
+        "NetworkType",
+        "Type",
+        "URL"
+      ]
+    },
+    "alert_tags": {
+      "type": "object",
+      "title": "alert_tags",
+      "properties": {
+        "CreatedBy": {
+          "type": "string",
+          "title": "Created By",
+          "description": "Created by",
+          "order": 3
+        },
+        "Name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
+          "order": 2
+        },
+        "_id": {
+          "type": "string",
+          "title": "ID",
+          "description": "ID",
+          "order": 1
+        }
+      },
+      "required": [
+        "CreatedBy",
+        "Name",
+        "_id"
+      ]
+    }
+  }
 }
     """)
 

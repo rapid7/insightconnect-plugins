@@ -23,9 +23,12 @@ class GetCveByIdInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "cve_id": {
-      "type": "string",
+      "type": "array",
       "title": "CVE ID",
       "description": "Specific CVE ID. Can be multiple, comma separated",
+      "items": {
+        "type": "string"
+      },
       "order": 1
     }
   }
@@ -75,14 +78,107 @@ class GetCveByIdOutput(insightconnect_plugin_runtime.Output):
           },
           "order": 2
         },
+        "cveId": {
+          "type": "string",
+          "title": "Cve ID",
+          "description": "Cve ID",
+          "order": 1
+        },
+        "cvssScore": {
+          "type": "number",
+          "title": "CVSs Score",
+          "description": "CVSs score",
+          "order": 7
+        },
+        "exploitAvailability": {
+          "type": "boolean",
+          "title": "Exploit Availability",
+          "description": "Exploit availability",
+          "order": 12
+        },
+        "firstMentionDate": {
+          "type": "string",
+          "title": "First Mention Date",
+          "description": "First mention date",
+          "order": 10
+        },
+        "intsightsScore": {
+          "type": "integer",
+          "title": "Intsights Score",
+          "description": "Intsights score",
+          "order": 6
+        },
+        "lastMentionDate": {
+          "type": "string",
+          "title": "Last Mention Date",
+          "description": "Last mention date",
+          "order": 11
+        },
+        "mentionsAmount": {
+          "type": "integer",
+          "title": "Mentions Amount",
+          "description": "Mentions amount",
+          "order": 8
+        },
         "mentionsPerSource": {
-          "type": "array",
+          "$ref": "#/definitions/mentionsPerSource",
           "title": "Mentions Per Source",
           "description": "Mentions per source",
+          "order": 9
+        },
+        "publishedDate": {
+          "type": "string",
+          "title": "Published Date",
+          "description": "Published Date",
+          "order": 3
+        },
+        "relatedCampaigns": {
+          "type": "array",
+          "title": "Related Campaigns",
+          "description": "Related campaigns",
           "items": {
-            "$ref": "#/definitions/mentionsPerSource"
+            "type": "string"
           },
-          "order": 1
+          "order": 16
+        },
+        "relatedMalware": {
+          "type": "array",
+          "title": "Related Malware",
+          "description": "Related malware",
+          "items": {
+            "type": "string"
+          },
+          "order": 15
+        },
+        "relatedThreatActors": {
+          "type": "array",
+          "title": "Related Threat Actors",
+          "description": "Related threat actors",
+          "items": {
+            "type": "string"
+          },
+          "order": 14
+        },
+        "severity": {
+          "type": "string",
+          "title": "Severity",
+          "description": "Severity",
+          "order": 5
+        },
+        "updateDate": {
+          "type": "string",
+          "title": "Update Date",
+          "description": "Update Date",
+          "order": 4
+        },
+        "vulnerabilityOrigin": {
+          "type": "array",
+          "title": "Vulnerability Origin",
+          "description": "Vulnerability origin",
+          "items": {
+            "type": "string"
+          },
+          "order": 13
         }
       },
       "definitions": {
