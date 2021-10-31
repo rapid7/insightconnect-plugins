@@ -21,8 +21,8 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|dsm_api_key|credential_secret_key|None|True|API key of the Deep Security Manager|None|12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:12345678901234567890123456789012345678901234|
-|dsm_url|string|https://app.deepsecurity.trendmicro.com|True|URL of the Deep Security Manager|None|https://192.51.100.100:4119|
+|dsm_api_key|credential_secret_key|None|True|API key of the Deep Security Manager|None|12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:02699626f388ed830012e5b787640e71c56d42d81234|
+|dsm_url|string|https://app.deepsecurity.trendmicro.com|True|URL of the Deep Security Manager|None|https://example.com|
 |dsm_verify_ssl|boolean|True|True|Check the certificate of the Deep Security Manager|None|True|
 
 Example input:
@@ -50,7 +50,7 @@ This action is used to search computers.
 |field_name|string|hostName|False|Name of the field to be tested|None|hostName|
 |information|string|none|True|Determines the computer information to include in the response|['none', 'all', 'computerStatus', 'tasks', 'securityUpdates', 'computerSettings', 'allSecurityModules', 'antiMalware', 'webReputation', 'activityMonitoring', 'firewall', 'intrusionPrevention', 'integrityMonitoring', 'logInspection', 'applicationControl', 'SAP', 'interfaces', 'ESXSummary', 'allVirtualMachineSummaries', 'azureARMVirtualMachineSummary', 'azureVMVirtualMachineSummary', 'ec2VirtualMachineSummary', 'noConnectorVirtualMachineSummary', 'vmwareVMVirtualMachineSummary', 'vcloudVMVirtualMachineSummary', 'workspaceVirtualMachineSummary', 'gcpVirtualMachineSummary']|none|
 |max_items|integer|5000|True|Limits the number of objects returned|None|5000|
-|number_value|integer||False|Number to search for|None|42|
+|number_value|integer|0|False|Number to search for|None|42|
 |search_type|string|string|False|Select the search type|['string', 'integer']|string|
 |string_value|string||False|String to search for|None|MS-AD-SRV-%|
 
@@ -349,6 +349,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.2 - Fixed memory leak
 * 2.2.1 - Improve the search for IPS rules
 * 2.2.0 - Add new action Search Computers to receive a list and details of computers matching the search criteria
 * 2.1.0 - Add new actions Get Details and List to receive assigned IPS rules from computers and policies

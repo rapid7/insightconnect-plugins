@@ -1,34 +1,29 @@
-import komand
-from .schema import GetFileContentsInput, GetFileContentsOutput
+import insightconnect_plugin_runtime
+from .schema import GetFileContentsInput, GetFileContentsOutput, Input, Output, Component
 
 # Custom imports below
-import googleapiclient.errors
+from insightconnect_plugin_runtime.exceptions import PluginException
+from googleapiclient.errors import HttpError
 import base64
 
 
-class GetFileContents(komand.Action):
+class GetFileContents(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_file_contents",
-            description="Get the contents of a file on Google Drive",
+            description=Component.DESCRIPTION,
             input=GetFileContentsInput(),
             output=GetFileContentsOutput(),
         )
 
     def run(self, params={}):
-        file_id = params.get("file_id")
-        mime_type = params.get("mime_type")
+        file_id = params.get(Input.FILE_ID)
+        mime_type = params.get(Input.MIME_TYPE)
 
         try:
             response = self.connection.service.files().export(fileId=file_id, mimeType=mime_type).execute()
-        except googleapiclient.errors.HttpError as e:
-            self.logger.error(e)
-            raise
+        except HttpError as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=str(error))
 
-        _file = base64.b64encode(response)
-        _file = _file.decode("UTF-8")
-        return {"file": _file}
-
-    def test(self):
-        # TODO: Implement test function
-        return {}
+        _file = base64.b64encode(response).decode("UTF-8")
+        return {Output.FILE: _file}

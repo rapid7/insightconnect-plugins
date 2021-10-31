@@ -1,6 +1,5 @@
 import base64
 import json
-from io import BytesIO
 from insightconnect_plugin_runtime.exceptions import PluginException
 from jira.resources import User
 
@@ -13,9 +12,9 @@ class JiraApi:
         self.session = jira_client._session
         self.base_url = jira_client._options["server"]
 
-    def delete_user(self, accountId):
-        url = self.jira_client._options["server"] + "/rest/api/latest/user/?accountId=%s" % accountId
-        r = self.jira_client._session.delete(url)
+    def delete_user(self, account_id):
+        url = f"{self.base_url}/rest/api/latest/user/?accountId={account_id}"
+        r = self.session.delete(url)
 
         if 200 <= r.status_code <= 299:
             return True
@@ -24,6 +23,7 @@ class JiraApi:
             return False
 
     def find_users(self, query, max_results=10):
+        # pylint: disable=protected-access
         return self.jira_client._fetch_pages(User, None, "user/search", 0, max_results, {"query": query})
 
     def add_attachment(self, issue, filename, file_bytes):
@@ -35,13 +35,10 @@ class JiraApi:
                 assistance=f"Please provide a valid attachment bytes. Error: {str(e)}",
             )
 
-        attachment = BytesIO()
-        attachment.write(data)
-
         return self.call_api(
             "POST",
             f"/rest/api/latest/issue/{issue}/attachments",
-            files={"file": (filename, attachment, "application/octet-stream")},
+            files={"file": (filename, data, "application/octet-stream")},
             headers={"content-type": None, "X-Atlassian-Token": "nocheck"},
         )[0].get("id")
 
