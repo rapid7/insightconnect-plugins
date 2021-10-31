@@ -53,7 +53,7 @@ This action is used to delete a registry key involved in a Malop.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|initiator_user_name|string|None|True|Initiator user name|None|https://example.com|
+|initiator_user_name|string|None|True|Initiator user name|None|user@example.com|
 |malop_id|string|None|True|Malop ID to associate with the remediation actions|None|22.2787422324806222966|
 |sensor|string|None|True|The unique identifier of the machine you wish to perform the quarantine/unquarantine operation on, this can be an internal IPv4 address, hostname or sensor GUID|None|-1632138521.1198775089551518743|
 
@@ -63,7 +63,7 @@ Example input:
 {
   "initiator_user_name": "user@example.com",
   "malop_id": "22.2787422324806222966",
-  "sensor": "-1632138521.1198775089551518743"
+  "sensor": "hostname"
 }
 ```
 
@@ -76,6 +76,13 @@ Example input:
 Example output:
 
 ```
+{
+  "malopId": "22.2787422324806222966",
+  "remediationId": "5144cf82-94c4-49f8-82cd-9ce1fcbd6a23",
+  "start": 1624819406074,
+  "initiatingUser": "user@example.com",
+  "statusLog": []
+}
 ```
 
 #### Remediate Items
