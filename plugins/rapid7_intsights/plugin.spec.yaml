@@ -218,9 +218,9 @@ types:
       required: false
   content:
     cveId:
-      title: Cve ID
+      title: CVE ID
       type: string
-      description: Cve ID
+      description: CVE ID
       required: false
     cpe:
       title: CPE
@@ -248,9 +248,9 @@ types:
       description: Intsights score
       required: false
     cvssScore:
-      title: CVSs Score
+      title: CVS Score
       type: float
-      description: CVSs score
+      description: CVS score
       required: false
     mentionsAmount:
       title: Mentions Amount

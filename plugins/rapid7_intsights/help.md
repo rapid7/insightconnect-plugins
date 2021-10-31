@@ -209,7 +209,9 @@ Example input:
 Example output:
 
 ```
-
+{
+  "status": true
+}
 ```
 
 #### Get Complete Alert by ID

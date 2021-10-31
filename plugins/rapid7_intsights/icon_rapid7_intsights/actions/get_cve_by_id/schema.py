@@ -80,14 +80,14 @@ class GetCveByIdOutput(insightconnect_plugin_runtime.Output):
         },
         "cveId": {
           "type": "string",
-          "title": "Cve ID",
-          "description": "Cve ID",
+          "title": "CVE ID",
+          "description": "CVE ID",
           "order": 1
         },
         "cvssScore": {
           "type": "number",
-          "title": "CVSs Score",
-          "description": "CVSs score",
+          "title": "CVS Score",
+          "description": "CVS score",
           "order": 7
         },
         "exploitAvailability": {
