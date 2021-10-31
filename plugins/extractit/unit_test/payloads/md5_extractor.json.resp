@@ -13,6 +13,18 @@
       ["44d88612fea8a8f36de82e1278abb02f", "44D88612FEA8A8F36DE82E1278ABB02F"]
     ],
     [
+      "with_string_and_file",
+      "44d88612fea8a8f36de82e1278abb02f and 44D88612FEA8A8F36DE82E1278ABB02F are example MD5 hashes",
+      "NDRkODg2MTJmZWE4YThmMzZkZTgyZTEyNzhhYmIwMmYgYW5kIDQ0RDg4NjEyRkVBOEE4RjM2REU4MkUxMjc4QUJCMDJGIGFyZSBleGFtcGxlIE1ENSBoYXNoZXM=",
+      ["44d88612fea8a8f36de82e1278abb02f", "44D88612FEA8A8F36DE82E1278ABB02F"]
+    ],
+    [
+      "without_string_and_file",
+      null,
+      null,
+      []
+    ],
+    [
       "from_string_bad",
       "44d88612fea8a8f36de82e1278abb02 and 44D88612FEA8A8F36DE82E1278ABB02FA are not example MD5 hashes",
       null,

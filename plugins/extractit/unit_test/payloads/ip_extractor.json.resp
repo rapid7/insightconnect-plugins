@@ -1,6 +1,29 @@
 {
   "parameters": [
     [
+      "with_string_and_file",
+      "0.0.0.0 255.255.255.255 198.51.100.100, 198.51.100.101, 198.51.100.100, 198.51.100.102 1.2.3.4 and 2001:db8:8:4::2 2001:0db8:85a3:0000:0000:8a2e:0370:7334 1762:0:0:0:0:B03:1:AF18 FE80:0000:0000:0000:0202:B3FF:FE1E:8329 are sample IP addresses",
+      "MC4wLjAuMCAyNTUuMjU1LjI1NS4yNTUgMTk4LjUxLjEwMC4xMDAsIDE5OC41MS4xMDAuMTAxLCAxOTguNTEuMTAwLjEwMCwgMTk4LjUxLjEwMC4xMDIgMS4yLjMuNCBhbmQgMjAwMTpkYjg6ODo0OjoyIDIwMDE6MGRiODo4NWEzOjAwMDA6MDAwMDo4YTJlOjAzNzA6NzMzNCAxNzYyOjA6MDowOjA6QjAzOjE6QUYxOCBGRTgwOjAwMDA6MDAwMDowMDAwOjAyMDI6QjNGRjpGRTFFOjgzMjkgYXJlIHNhbXBsZSBJUCBhZGRyZXNzZXM=",
+      [
+        "0.0.0.0",
+        "255.255.255.255",
+        "198.51.100.100",
+        "198.51.100.101",
+        "198.51.100.102",
+        "1.2.3.4",
+        "2001:db8:8:4::2",
+        "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+        "1762:0:0:0:0:B03:1:AF18",
+        "FE80:0000:0000:0000:0202:B3FF:FE1E:8329"
+      ]
+    ],
+    [
+      "without_string_and_file",
+      null,
+      null,
+      []
+    ],
+    [
       "from_string",
       "0.0.0.0 255.255.255.255 198.51.100.100, 198.51.100.101, 198.51.100.100, 198.51.100.102 1.2.3.4 and 2001:db8:8:4::2 2001:0db8:85a3:0000:0000:8a2e:0370:7334 1762:0:0:0:0:B03:1:AF18 FE80:0000:0000:0000:0202:B3FF:FE1E:8329 are sample IP addresses",
       null,

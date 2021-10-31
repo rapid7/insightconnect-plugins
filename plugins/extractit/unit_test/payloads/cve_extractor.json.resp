@@ -13,6 +13,25 @@
       []
     ],
     [
+      "without_string_and_file",
+      null,
+      null,
+      []
+    ],
+    [
+      "with_string_and_file",
+      "user@example.com 198.51.100.100 cve-1111-11111 cve-1111-111111 cve-1111-1111111 CVE-1111-11111 CVE-1111-111111 CVE-1111-1111111 /tmp/script",
+      "dXNlckBleGFtcGxlLmNvbSAxOTguNTEuMTAwLjEwMCBjdmUtMTExMS0xMTExMSBjdmUtMTExMS0xMTExMTEgY3ZlLTExMTEtMTExMTExMSBDVkUtMTExMS0xMTExMSBDVkUtMTExMS0xMTExMTEgQ1ZFLTExMTEtMTExMTExMSAvdG1wL3NjcmlwdA==",
+      [
+        "cve-1111-11111",
+        "cve-1111-111111",
+        "cve-1111-1111111",
+        "CVE-1111-11111",
+        "CVE-1111-111111",
+        "CVE-1111-1111111"
+      ]
+    ],
+    [
       "from_string",
       "user@example.com 198.51.100.100 cve-1111-11111 cve-1111-111111 cve-1111-1111111 CVE-1111-11111 CVE-1111-111111 CVE-1111-1111111 /tmp/script",
       null,
