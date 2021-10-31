@@ -2,7 +2,6 @@ import insightconnect_plugin_runtime
 from .schema import TakedownRequestInput, TakedownRequestOutput, Input, Output, Component
 
 # Custom imports below
-from insightconnect_plugin_runtime.helper import clean
 
 
 class TakedownRequest(insightconnect_plugin_runtime.Action):
