@@ -1,3 +1,4 @@
+from insightconnect_plugin_runtime.exceptions import PluginException
 import regex
 import base64
 import tldextract
@@ -5,6 +6,10 @@ import validators
 from datetime import datetime
 from icon_extractit.util.util import Regex
 import urllib.parse
+import io
+import zipfile
+import pdfplumber
+from pdfminer.pdfparser import PDFSyntaxError
 
 
 def extract(provided_regex: str, provided_string: str, provided_file: str) -> list:
@@ -13,8 +18,13 @@ def extract(provided_regex: str, provided_string: str, provided_file: str) -> li
         provided_string = urllib.parse.unquote(provided_string)
         matches = regex.findall(provided_regex, provided_string)
     elif provided_file:
-        provided_file = urllib.parse.unquote(base64.b64decode(provided_file.encode("utf-8")).decode("utf-8"))
-        matches = regex.findall(provided_regex, provided_file)
+        try:
+            provided_file = urllib.parse.unquote(base64.b64decode(provided_file.encode("utf-8")).decode("utf-8"))
+            matches = regex.findall(provided_regex, provided_file)
+        except UnicodeDecodeError:
+            file_content = extract_content_from_file(provided_file)
+            matches = regex.findall(provided_regex, file_content)
+
     return list(dict.fromkeys(matches))
 
 
@@ -25,11 +35,51 @@ def extract_filepath(provided_regex: str, provided_string: str, provided_file: s
         new_string = regex.sub(Regex.Date, "", new_string)
         matches = regex.findall(provided_regex, new_string)
     elif provided_file:
-        new_file = base64.b64decode(provided_file.encode("utf-8")).decode("utf-8")
+        try:
+            new_file = base64.b64decode(provided_file.encode("utf-8")).decode("utf-8")
+        except UnicodeDecodeError:
+            new_file = extract_content_from_file(provided_file)
         new_file = regex.sub(Regex.URL, "", new_file)
         new_file = regex.sub(Regex.Date, "", new_file)
         matches = regex.findall(provided_regex, new_file)
     return list(dict.fromkeys(matches))
+
+
+def extract_content_from_file(provided_file: str) -> str:
+    file_ = io.BytesIO(base64.b64decode(provided_file))
+    try:
+        # extracting content from DOCX, PPTX, XLSX, ODT, ODP, ODF files
+        unzip_files = zipfile.ZipFile(file_)
+        files_content = ""
+        x = unzip_files.infolist()
+        for i in enumerate(x):
+            try:
+                files_content += unzip_files.read(x[i[0]]).decode()
+            # After unpacking, may contain images for which the decoding will fail
+            except UnicodeDecodeError:
+                continue
+        unzip_files.close()
+        file_.close()
+        # remove xml tags from files content
+        files_content = regex.sub(r"<[\p{L}\p{N}\p{Lo}\p{So} :\/.\"=_%,(){}+#&;?-]*>", " ", files_content)
+        return files_content
+    except zipfile.BadZipFile:
+        try:
+            # extracting content from PDF file
+            pdf_file = pdfplumber.open(file_)
+            pages = pdf_file.pages
+            pdf_content = ""
+            for page in enumerate(pages):
+                pdf_content += page[1].extract_text()
+            pdf_file.close()
+            file_.close()
+            return pdf_content
+        except PDFSyntaxError:
+            file_.close()
+            raise PluginException(
+                cause="The type of the provided file is not supported.",
+                assistance="Supported file types: PDF, DOCX, PPTX, XLSX, ODT, ODP, ODF",
+            )
 
 
 def strip_subdomains(matches: list) -> list:

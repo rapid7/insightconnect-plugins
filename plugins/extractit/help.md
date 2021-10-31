@@ -43,7 +43,7 @@ This action extracts all UUIDs, CVEs, dates, domains, emails, filepaths, IOCs, I
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file|bytes|None|False|Input file as bytes|None|dGVzdCBzdHJpbmcgb2YgZXh0cmFjdCBDVkUtMTIzNC0xMjM0NTY3IDEyLzEyLzIzMTIgMTIzZTQ1NjctZTEyYi0zNGMzLWE0NTYtNDI2Nzg5MTI0MDAwIHVzZXJAZXhhbXBsZS5jb20gMzM5NTg1NmNlODFmMmI3MzgyZGVlNzI2MDJmNzk4YjY0MmYxNDE0MCAyNzVhMDIxYmJmYjY0ODllNTRkNDcxODk5ZjdkYjlkMTY2M2ZjNjk1ZWMyZmUyYTJjNDUzOGFhYmY2NTFmZDBmIDE5OC41MS4xMDAuMC8yNCAxLjEuMS4x|
+|file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|dGVzdCBzdHJpbmcgb2YgZXh0cmFjdCBDVkUtMTIzNC0xMjM0NTY3IDEyLzEyLzIzMTIgMTIzZTQ1NjctZTEyYi0zNGMzLWE0NTYtNDI2Nzg5MTI0MDAwIHVzZXJAZXhhbXBsZS5jb20gMzM5NTg1NmNlODFmMmI3MzgyZGVlNzI2MDJmNzk4YjY0MmYxNDE0MCAyNzVhMDIxYmJmYjY0ODllNTRkNDcxODk5ZjdkYjlkMTY2M2ZjNjk1ZWMyZmUyYTJjNDUzOGFhYmY2NTFmZDBmIDE5OC41MS4xMDAuMC8yNCAxLjEuMS4x|
 |str|string|None|False|Input string|None|test string of extract CVE-1234-1234567 12/12/2312 123e4567-e12b-34c3-a456-426789124000 user@example.com 3395856ce81f2b7382dee72602f798b642f14140 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f 198.51.100.0/24 1.1.1.1|
 
 Example input:
@@ -115,7 +115,7 @@ This action extracts all UUIDs from a string or file.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file|bytes|None|False|Input file as bytes|None|VGVzdCBzdHJpbmcgb2YgZXh0cmFjdCAxMjNlNDU2Ny1lMTJiLTM0YzMtYTQ1Ni00MjY3ODkxMjQwMDA=|
+|file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|VGVzdCBzdHJpbmcgb2YgZXh0cmFjdCAxMjNlNDU2Ny1lMTJiLTM0YzMtYTQ1Ni00MjY3ODkxMjQwMDA=|
 |str|string|None|False|Input string|None|Test string of extract 123e4567-e12b-34c3-a456-426789124000|
 
 Example input:
@@ -151,7 +151,7 @@ This action extracts all CVEs from a string or file.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file|bytes|None|False|Input file as bytes|None|dGVzdCBzdHJpbmcgb2YgZXh0cmFjdCBDVkUtMTIzNC0xMjM0NTY3IDIwMTIvMTIvMTI=|
+|file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|dGVzdCBzdHJpbmcgb2YgZXh0cmFjdCBDVkUtMTIzNC0xMjM0NTY3IDIwMTIvMTIvMTI=|
 |str|string|None|False|Input string|None|Test string of extract CVE-1234-1234567 2012/12/12|
 
 Example input:
@@ -187,7 +187,7 @@ This action extracts all dates from a string or file.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file|bytes|None|False|Input file as bytes|None|MDUvMTIvMTk4MiBpcyBhbiBleGFtcGxlIGRhdGU=|
+|file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|MDUvMTIvMTk4MiBpcyBhbiBleGFtcGxlIGRhdGU=|
 |str|string|None|False|Input string|None|05/12/1982 is an example date|
 
 Example input:
@@ -223,7 +223,7 @@ This action extracts all domain names from a string or file.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file|bytes|None|False|Input file as bytes|None|ZXhhbXBsZS5jb20gaXMgYW4gZXhhbXBsZSBkb21haW4=|
+|file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|ZXhhbXBsZS5jb20gaXMgYW4gZXhhbXBsZSBkb21haW4=|
 |str|string|None|False|Input string|None|example.com is an example domain|
 |subdomain|bool|None|True|Include subdomain in result|None|False|
 
@@ -261,7 +261,7 @@ This action extracts all email addresses from a string or file.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file|bytes|None|False|Input file as bytes|None|dXNlckBleGFtcGxlLmNvbSBpcyBhbiBleGFtcGxlIGVtYWls|
+|file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|dXNlckBleGFtcGxlLmNvbSBpcyBhbiBleGFtcGxlIGVtYWls|
 |str|string|None|False|Input string|None|user@example.com is an example email|
 
 Example input:
@@ -297,7 +297,7 @@ This action extracts all file paths from a string or file.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file|bytes|None|False|Input file as bytes|None|L3RtcC9pbWFnZS5qcGcgaXMgYW4gZXhhbXBsZSBmaWxlIHBhdGg=|
+|file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|L3RtcC9pbWFnZS5qcGcgaXMgYW4gZXhhbXBsZSBmaWxlIHBhdGg=|
 |str|string|None|False|Input string|None|/tmp/image.jpg is an example file path|
 
 Example input:
@@ -333,7 +333,7 @@ This action extracts all Indicators of Compromise from a string or file.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file|bytes|None|False|Input file as bytes|None|dXNlckBleGFtcGxlLmNvbSwgMTk4LjUxLjEwMC4xMDAgYW5kIDQ0ZDg4NjEyZmVhOGE4ZjM2ZGU4MmUxMjc4YWJiMDJmIGFyZSBJT0MgZXhhbXBsZXM=|
+|file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|dXNlckBleGFtcGxlLmNvbSwgMTk4LjUxLjEwMC4xMDAgYW5kIDQ0ZDg4NjEyZmVhOGE4ZjM2ZGU4MmUxMjc4YWJiMDJmIGFyZSBJT0MgZXhhbXBsZXM=|
 |str|string|None|False|Input string|None|user@example.com, 198.51.100.100 and 44d88612fea8a8f36de82e1278abb02f are IOC examples|
 
 Example input:
@@ -372,7 +372,7 @@ This action extracts all IPv4 and IPv6 addresses from a string or file.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file|bytes|None|False|Input file as bytes|None|MTk4LjUxLjEwMC4xMDAgYW5kIDIwMDE6ZGI4Ojg6NDo6MiBhcmUgc2FtcGxlIElQIGFkZHJlc3Nlcw==|
+|file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|MTk4LjUxLjEwMC4xMDAgYW5kIDIwMDE6ZGI4Ojg6NDo6MiBhcmUgc2FtcGxlIElQIGFkZHJlc3Nlcw==|
 |str|string|None|False|Input string|None|198.51.100.100 and 2001:db8:8:4::2 are sample IP addresses|
 
 Example input:
@@ -409,7 +409,7 @@ This action extracts all MAC addresses from a string or file.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file|bytes|None|False|Input file as bytes|None|MDA6MTQ6MjI6MDE6MjM6NDUgaXMgYW4gZXhhbXBsZSBNQUMgYWRkcmVzcw==|
+|file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|MDA6MTQ6MjI6MDE6MjM6NDUgaXMgYW4gZXhhbXBsZSBNQUMgYWRkcmVzcw==|
 |str|string|None|False|Input string|None|00:14:22:01:23:45 is an example MAC address|
 
 Example input:
@@ -445,7 +445,7 @@ This action extracts all MD5 Hashes from a string or file.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file|bytes|None|False|Input file as bytes|None|NDRkODg2MTJmZWE4YThmMzZkZTgyZTEyNzhhYmIwMmYgaXMgYW4gZXhhbXBsZSBNRDUgaGFzaA==|
+|file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|NDRkODg2MTJmZWE4YThmMzZkZTgyZTEyNzhhYmIwMmYgaXMgYW4gZXhhbXBsZSBNRDUgaGFzaA==|
 |str|string|None|False|Input string|None|44d88612fea8a8f36de82e1278abb02f is an example MD5 hash|
 
 Example input:
@@ -481,7 +481,7 @@ This action extracts all SHA1 Hashes from a string or file.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file|bytes|None|False|Input file as bytes|None|MzM5NTg1NmNlODFmMmI3MzgyZGVlNzI2MDJmNzk4YjY0MmYxNDE0MCBpcyBhbiBleGFtcGxlIFNIQTEgaGFzaA==|
+|file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|MzM5NTg1NmNlODFmMmI3MzgyZGVlNzI2MDJmNzk4YjY0MmYxNDE0MCBpcyBhbiBleGFtcGxlIFNIQTEgaGFzaA==|
 |str|string|None|False|Input string|None|3395856ce81f2b7382dee72602f798b642f14140 is an example SHA1 hash|
 
 Example input:
@@ -517,7 +517,7 @@ This action extracts all SHA256 Hashes from a string or file.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file|bytes|None|False|Input file as bytes|None|Mjc1YTAyMWJiZmI2NDg5ZTU0ZDQ3MTg5OWY3ZGI5ZDE2NjNmYzY5NWVjMmZlMmEyYzQ1MzhhYWJmNjUxZmQwZiBpcyBhbiBleGFtcGxlIFNIQTI1NiBoYXNo|
+|file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|Mjc1YTAyMWJiZmI2NDg5ZTU0ZDQ3MTg5OWY3ZGI5ZDE2NjNmYzY5NWVjMmZlMmEyYzQ1MzhhYWJmNjUxZmQwZiBpcyBhbiBleGFtcGxlIFNIQTI1NiBoYXNo|
 |str|string|None|False|Input string|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f is an example SHA256 hash|
 
 Example input:
@@ -553,7 +553,7 @@ This action extracts all SHA512 Hashes from a string or file.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file|bytes|None|False|Input file as bytes|None|Y2M4MDVkNWZhYjFmZDcxYTRhYjM1MmE5YzUzM2U2NWZiMmQ1Yjg4NTUxOGY0ZTU2NWU2ODg0NzIyM2I4ZTZiODVjYjQ4ZjNhZmFkODQyNzI2ZDk5MjM5YzllMzY1MDVjNjRiMGRjOWEwNjFkOWU1MDdkODMzMjc3YWRhMzM2YWIgaXMgYW4gZXhhbXBsZSBTSEE1MTIgaGFzaA==|
+|file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|Y2M4MDVkNWZhYjFmZDcxYTRhYjM1MmE5YzUzM2U2NWZiMmQ1Yjg4NTUxOGY0ZTU2NWU2ODg0NzIyM2I4ZTZiODVjYjQ4ZjNhZmFkODQyNzI2ZDk5MjM5YzllMzY1MDVjNjRiMGRjOWEwNjFkOWU1MDdkODMzMjc3YWRhMzM2YWIgaXMgYW4gZXhhbXBsZSBTSEE1MTIgaGFzaA==|
 |str|string|None|False|Input string|None|cc805d5fab1fd71a4ab352a9c533e65fb2d5b885518f4e565e68847223b8e6b85cb48f3afad842726d99239c9e36505c64b0dc9a061d9e507d833277ada336ab is an example SHA512 hash|
 
 Example input:
@@ -589,7 +589,7 @@ This action is used to extract URLs from a string or file.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file|bytes|None|False|Input file as bytes|None|aHR0cHM6Ly9leGFtcGxlLmNvbSBpcyBhbiBleGFtcGxlIFVSTA==|
+|file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|aHR0cHM6Ly9leGFtcGxlLmNvbSBpcyBhbiBleGFtcGxlIFVSTA==|
 |str|string|None|False|Input string|None|https://example.com is an example URL|
 
 Example input:
@@ -631,6 +631,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.3.0 - Support extraction from binary files for all actions
 * 2.2.1 - Support domain extraction from encoded URL | Fix issue where subdomain removal did not work properly in some cases | Improve domain extraction by limiting the number of false positive results
 * 2.2.0 - Add Extract All, UUID Extractor and CVE Extractor actions | Cloud enabled
 * 2.1.2 - Rollback URL matching regex used in HTML email extraction.
