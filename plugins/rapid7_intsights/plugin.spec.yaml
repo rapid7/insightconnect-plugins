@@ -45,6 +45,94 @@ types:
       description: Data
       type: string
       required: true
+  alert_source:
+    Type:
+      title: Type
+      description: Type
+      type: string
+      required: true
+    URL:
+      title: URL
+      description: URL
+      type: string
+      required: true
+    Email:
+      title: Email
+      description: Email
+      type: string
+      required: true
+    NetworkType:
+      title: Network Type
+      description: Network type
+      type: string
+      required: true
+    Date:
+      title: Date
+      description: Date
+      type: string
+      required: true
+  alert_tags:
+    _id:
+      title: ID
+      description: ID
+      type: string
+      required: true
+    Name:
+      title: Name
+      description: Name
+      type: string
+      required: true
+    CreatedBy:
+      title: Created By
+      description: Created by
+      type: string
+      required: true
+  alert_details:
+    Type:
+      title: Type
+      description: Type
+      type: string
+      required: true
+    SubType:
+      title: Sub Type
+      description: Sub type
+      type: string
+      required: true
+    Severity:
+      title: Severity
+      description: Severity
+      type: string
+      required: true
+    Source:
+      title: Source
+      description: Source
+      type: alert_source
+      required: true
+    Title:
+      title: Title
+      description: Title
+      type: string
+      required: true
+    Description:
+      title: Description
+      description: Description
+      type: string
+      required: true
+    Images:
+      title: Images
+      description: Images
+      type: "[]string"
+      required: true
+    Tags:
+      title: Tags
+      description: Tags
+      type: "[]alert_tags"
+      required: true
+    RelatedIocs:
+      title: Related IOCs
+      description: Related IOCs
+      type: "[]string"
+      required: true
   range:
     VersionEndExcluding:
       title: Version End Excluding
@@ -159,7 +247,7 @@ actions:
     input:
       indicator_value:
         title: Indicator Value
-        description: Value of the indicator
+        description: "Value of the indicator, example: IP Address, URL, Domain, Hash"
         type: string
         required: true
         example: example.com
@@ -245,7 +333,7 @@ actions:
     input:
       indicator_value:
         title: Indicator Value
-        description: Value of the indicator
+        description: "Value of the indicator example: IP Address, URL, Domain, Hash"
         type: string
         required: true
         example: example.com
@@ -254,17 +342,17 @@ actions:
         title: Original Value
         description: Original value
         type: string
-        required: false
+        required: true
       status:
         title: Status
         description: Status
         type: string
-        required: false
+        required: true
       data:
         title: Data
         description: Data
         type: object
-        required: true
+        required: false
   rescan_indicator:
     title: Rescan Indicator
     description: Force an indicator scan in IntSights TIP system
@@ -280,12 +368,12 @@ actions:
         title: Task ID
         description: Task ID
         type: string
-        required: true
+        required: false
       status:
         title: Status
         description: Status
         type: string
-        required: true
+        required: false
   get_indicator_scan_status:
     title: Get Indicator Scan Status
     description: Get the scan status of an indicator in the IntSights TIP system
@@ -301,12 +389,12 @@ actions:
         title: Task ID
         description: Task ID
         type: string
-        required: true
+        required: false
       status:
         title: Status
         description: Status
         type: string
-        required: true
+        required: false
   get_alerts:
     title: Get Alerts
     description: Search alerts based on criteria
@@ -425,7 +513,7 @@ actions:
         title: ID
         description: Alert ID
         type: string
-        required: true
+        required: false
       assets:
         title: Assets
         description: List of assets
@@ -439,7 +527,7 @@ actions:
       details:
         title: Details
         description: Alert details
-        type: object
+        type: alert_details
         required: true
       found_date:
         title: Found Date

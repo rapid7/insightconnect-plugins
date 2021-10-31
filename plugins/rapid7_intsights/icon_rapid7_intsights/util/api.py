@@ -109,7 +109,8 @@ class IntSightsAPI:
         return self.make_json_request("GET", f"public/v2/iocs/ioc-by-value?iocValue={ioc_value}")
 
     def enrich_indicator(self, ioc_value: str) -> dict:
-        while True:
+        response = {}
+        for _ in range(0, 9999):
             response = self.make_json_request("GET", f"public/v1/iocs/enrich/{ioc_value}")
             if response.get("Status", "InProgress") in ["Done", "Failed"]:
                 break
