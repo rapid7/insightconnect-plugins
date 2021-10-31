@@ -55,13 +55,15 @@ This action is used to get CVE's list from account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|cve_id|[]string|None|False|Specific CVE ID. Can be multiple, comma separated|None|CVE-2020-0711|
+|cve_id|[]string|None|False|Specific CVE IDs|None|["CVE-2020-0711"]|
 
 Example input:
 
 ```
 {
-  "cve_id": "CVE-2020-0711"
+  "cve_id": [
+    "CVE-2020-0711"
+  ]
 }
 ```
 

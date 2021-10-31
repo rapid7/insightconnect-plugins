@@ -785,10 +785,10 @@ actions:
     input:
       cve_id:
         title: CVE ID
-        description: Specific CVE ID. Can be multiple, comma separated
+        description: Specific CVE IDs
         type: "[]string"
         required: false
-        example: CVE-2020-0711
+        example: ["CVE-2020-0711"]
     output:
       content:
         title: Content

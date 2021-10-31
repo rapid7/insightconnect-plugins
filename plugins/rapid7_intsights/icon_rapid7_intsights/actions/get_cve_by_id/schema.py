@@ -25,7 +25,7 @@ class GetCveByIdInput(insightconnect_plugin_runtime.Input):
     "cve_id": {
       "type": "array",
       "title": "CVE ID",
-      "description": "Specific CVE ID. Can be multiple, comma separated",
+      "description": "Specific CVE IDs",
       "items": {
         "type": "string"
       },
