@@ -7,7 +7,9 @@ vendor: rapid7
 support: community
 status: []
 description: Lookup file hashes to determine if they are malicious
-version: 2.0.1
+version: 2.0.2
+supported_versions:
+  - Hybrid Analysis API v1
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/hybrid_analysis
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -18,7 +20,7 @@ tags:
 - malware analysis
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [malware, sandbox, malware analysis]
+  keywords: [malware_analysis]
   features: []
 types:
   report:
@@ -105,16 +107,19 @@ connection:
     type: string
     default: https://www.hybrid-analysis.com/api
     required: true
+    example: https://www.hybrid-analysis.com/api
   api_key:
     type: credential_secret_key
     title: API Key
     description: API Key
     required: true
+    example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
   api_token:
     type: credential_secret_key
     title: API Token
     description: API token
     required: true
+    example: 3395856ce81f2b7382dee72602f798b642f14140abababab
 actions:
   lookup_hash:
     title: Lookup Hash
@@ -124,6 +129,7 @@ actions:
         type: string
         description: MD5/SHA1/SHA256 Hash
         required: true
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
     output:
       found:
         description: True if found

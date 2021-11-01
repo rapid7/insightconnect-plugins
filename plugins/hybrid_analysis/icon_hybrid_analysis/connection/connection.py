@@ -32,3 +32,9 @@ class Connection(komand.Connection):
         """ """
         self.logger.info("Connecting")
         self.params = params
+
+    def test(self):
+        """Test action"""
+        result = self.lookup("040c0111aef474d8b7bfa9a7caa0e06b4f1049c7ae8c66611a53fc2599f0b90f")
+        self.logger.info("Got test result: %s", result)
+        return result
