@@ -72,10 +72,7 @@ Example input:
 {
   "description": "Suspicious addresses",
   "found_date": "2020-01-01",
-  "images": [{
-    "Type": "jpeg",
-    "Data": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
-  }],
+  "images": "[{\"Type\": \"jpeg\",\"Data\": \"UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==\"}]",
   "severity": "Medium",
   "source_date": "2020-02-01",
   "source_network_type": "DarkWeb",
@@ -157,9 +154,9 @@ Example input:
 |----|----|--------|-----------|
 |assets|[]string|True|List of assets|
 |assignees|[]string|True|List of assignees|
-|details|object|True|Alert details|
+|details|alert_details|True|Alert details|
 |found_date|date|False|Alert found date|
-|id|string|True|Alert ID|
+|id|string|False|Alert ID|
 |is_closed|boolean|True|Is alert closed|
 |is_flagged|boolean|True|Is alert flagged|
 |leak_name|string|False|Name of the leak DBs in data leakage alerts|
@@ -203,7 +200,7 @@ This action is used to force an indicator scan in Intsights TIP system.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|indicator_file_hash|string|None|True|IOC value in type file hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
+|indicator_file_hash|string|None|True|IOC value in type file hash|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
 
 Example input:
 
@@ -217,8 +214,8 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|True|Status|
-|task_id|string|True|Task ID|
+|status|string|False|Status|
+|task_id|string|False|Task ID|
 
 Example output:
 
@@ -251,8 +248,8 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|True|Status|
-|task_id|string|True|Task ID|
+|status|string|False|Status|
+|task_id|string|False|Task ID|
 
 Example output:
 
@@ -278,7 +275,7 @@ This action is used to search Alerts based on criteria.
 |has_indicators|boolean|None|False|Show alerts with IOCs results|None|False|
 |is_closed|boolean|None|False|Status of the alert, either closed or open|['Closed', 'Open']|Closed|
 |is_flagged|string|None|False|Show flagged/unflagged alerts|['Flagged', 'Unflagged']|Flagged|
-|matched_asset_value|[]string|None|False|List of matched asset values|None|["example.com"]|
+|matched_asset_value|[]string|None|False|List of matched asset values|None|["https://example.com"]|
 |network_type|[]string|None|False|List of network type. Allowed values: ClearWeb, DarkWeb|None|["DarkWeb"]|
 |remediation_status|[]string|None|False|List of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed|None|["InProgress", "Pending"]|
 |severity|[]string|None|False|List of alerts severity. Allowed values: High, Medium, Low|None|["Low"]|
@@ -345,7 +342,7 @@ This action is used to submit an indicator to IntSights for investigation and re
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|indicator_value|string|None|True|Value of the indicator|None|example.com|
+|indicator_value|string|None|True|Value of the indicator example: IP Address, URL, Domain, Hash|None|https://example.com|
 
 Example input:
 
@@ -359,9 +356,9 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|object|True|Data|
-|original_value|string|False|Original value|
-|status|string|False|Status|
+|data|object|False|Data|
+|original_value|string|True|Original value|
+|status|string|True|Status|
 
 Example output:
 
@@ -574,7 +571,7 @@ This action will search indicators in IntSights TIP.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|indicator_value|string|None|True|Value of the indicator|None|example.com|
+|indicator_value|string|None|True|Value of the indicator, example: IP Address, URL, Domain, Hash|None|https://example.com|
 
 Example input:
 

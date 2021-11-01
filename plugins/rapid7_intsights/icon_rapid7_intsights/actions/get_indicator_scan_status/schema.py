@@ -57,11 +57,7 @@ class GetIndicatorScanStatusOutput(insightconnect_plugin_runtime.Output):
       "description": "Task ID",
       "order": 1
     }
-  },
-  "required": [
-    "status",
-    "task_id"
-  ]
+  }
 }
     """)
 
