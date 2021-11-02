@@ -19,7 +19,6 @@ class Connection(komand.Connection):
         self.logger.info("Connect: Connecting..")
         self.host = params.get(Input.URL)
         self.token = params.get(Input.API_KEY).get("secretKey")
-        self.connector = params.get(Input.API_ID)
         self.org_key = params.get(Input.ORG_KEY)
         self.connector = params.get(Input.CONNECTOR)
 
@@ -27,21 +26,24 @@ class Connection(komand.Connection):
         response = self.make_request("POST", f"{self.host}/api/investigate/v2/orgs/{self.org_key}/enriched_events/detail_jobs",
                                      params={"event_ids": [event_id]}).get("response")
         if response and len(response) > 0:
+            self.logger.info(response.json)
             return response
         return None
 
     def check_status_of_detail_search(self, get_job_id_for_detail_search: str = None):
         response = self.make_request("GET", f"{self.host}/api/investigate/v2/orgs/{self.org_key}/enriched_events/detail_jobs/{self.job_id}",
                                      params={"job_id": get_job_id_for_detail_search})
-        for key in response.items():
-            if not response[key][0] == response[key][1]:
-                return False
-            return True
+        self.logger.info(response.json)
+        for data in response.json()['items']:
+            if data['contacted'] == data['completed']:
+                return True
+            return False
 
     def retrieve_results_for_detail_search(self):
         results = self.make_request("GET",
                                      f"{self.host}/api/investigate/v2/orgs/{self.org_key}/enriched_events/detail_jobs/{self.job_id}/results",
                                      params={"job_id": self.get_job_id_for_detail_search})
+        self.logger.info(results.json)
         return results
 
     def make_request(self, method: str, url: str, params: dict = None, data: str = None, json_data: object = None):
@@ -59,7 +61,7 @@ class Connection(komand.Connection):
                 data=e
             )
 
-    def call_api(self, method: str, url, params: dict=None, data: str = None, json_data: object = None):
+    def call_api(self, method: str, url, params: dict = None, data: str = None, json_data: object = None):
         try:
             response = requests.request(method, url, headers=self.get_headers(), params=params, data=data,
                                         json=json_data)
@@ -84,7 +86,7 @@ class Connection(komand.Connection):
         host = self.host
         token = self.token
         connector = self.connector
-        devices = "/integrationServices/v3/device"
+        devices = "/appservices/v6/orgs/" + {self.org_key} + "/devices/_search"
         headers = {"X-Auth-Token": f"{token}/{connector}"}
         url = host + devices
 

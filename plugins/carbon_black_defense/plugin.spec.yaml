@@ -4,7 +4,7 @@ products: [insightconnect]
 name: carbon_black_defense
 title: VMware Carbon Black Cloud Endpoint Standard
 description: Find events and retrieve details for specific events
-version: 2.0.1
+version: 3.0.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -23,47 +23,6 @@ hub_tags:
   keywords: [carbon black, vmware, defense, antivirus, cloud]
   features: []
 types:
-  hash:
-    applicationName:
-      title: Application Name
-      type: string
-    virusName:
-      title: Virus Name
-      type: string
-    reputationProperty:
-      title: Reputation Property
-      type: string
-    effectiveReputation:
-      title: Effective Reputation
-      type: string
-    applicationPath:
-      title: Application Path
-      type: string
-    md5Hash:
-      title: MD5 Hash
-      type: string
-    effectiveReputationSource:
-      title: Effective Reputation Source
-      type: string
-    virusCategory:
-      title: Virus Category
-      type: string
-    sha256Hash:
-      title: SHA256 Hash
-      type: string
-    virusSubCategory:
-      title: Virus Sub Category
-      type: string
-  orgDetails:
-    organizationId:
-      title: Organization ID
-      type: integer
-    organizationName:
-      title: Organization Name
-      type: string
-    organizationType:
-      title: Organization Type
-      type: string
   deviceInfo:
     deviceHostName:
       description: Device Hostname
@@ -109,6 +68,19 @@ types:
       description: Target Priority Type
       title: Target Priority Type
       type: string
+  indicators:
+    applicationName:
+      description: Application Name
+      title: Application Name
+      type: string
+    indicatorName:
+      description: Indicator Name
+      title: Indicator Name
+      type: string
+    sha256Hash:
+      description: SHA-256 Hash
+      title: SHA-256 Hash
+      type: string
   policyAction:
     action:
       description: Policy Action
@@ -121,345 +93,6 @@ types:
     reputation:
       description: Reputation
       title: Reputation
-      type: string
-    sha256Hash:
-      description: SHA-256 Hash
-      title: SHA-256 Hash
-      type: string
-  deviceLocation:
-    areaCode:
-      description: Area Code
-      title: Area Code
-      type: integer
-    city:
-      description: City
-      title: City
-      type: string
-    countryCode:
-      description: Country Code
-      title: Country Code
-      type: string
-    countryName:
-      description: Country Name
-      title: Country Name
-      type: string
-    dmaCode:
-      description: DMA Code
-      title: DMA Code
-      type: integer
-    latitude:
-      description: Latitude
-      title: Latitude
-      type: float
-    longitude:
-      description: Longitude
-      title: Longitude
-      type: float
-    metroCode:
-      description: Metro Code
-      title: Metro Code
-      type: integer
-    postalCode:
-      description: Postal Code
-      title: Postal Code
-      type: string
-    region:
-      description: Region
-      title: Region
-      type: string
-  deviceDetails:
-    agentLocation:
-      description: Agent Location
-      title: Agent Location
-      type: string
-    deviceHostName:
-      description: Device Host Name
-      title: Device Host Name
-      type: string
-    deviceId:
-      description: Device ID
-      title: Device ID
-      type: integer
-    deviceIpAddress:
-      description: Device IP Address
-      title: Device IP Address
-      type: string
-    deviceIpV4Address:
-      description: Device IPv4 Address
-      title: Device IPv4 Address
-      type: string
-    deviceLocation:
-      description: Device Location
-      title: Device Location
-      type: deviceLocation
-    deviceName:
-      description: Device Name
-      title: Device Name
-      type: string
-    deviceOwnerName:
-      description: Device Owner Name
-      title: Device Owner Name
-      type: string
-    deviceType:
-      description: Device Type
-      title: Device Type
-      type: string
-    deviceVersion:
-      description: Device Version
-      title: Device Version
-      type: string
-    email:
-      description: Email
-      title: Email
-      type: string
-    groupName:
-      description: Group Name
-      title: Group Name
-      type: string
-    targetPriorityCode:
-      description: Target Priority Code
-      title: Target Priority Code
-      type: integer
-    targetPriorityType:
-      description: Target Priority Type
-      title: Target Priority Type
-      type: string
-  netFlow:
-    destAddress:
-      description: Net Flow
-      title: Net Flow
-      type: string
-    destPort:
-      description: Destination Port
-      title: Destination Port
-      type: string
-    peerFqdn:
-      description: Peer Fully Qualified Domain Name
-      title: Peer FQDN
-      type: string
-    peerIpAddress:
-      description: Peer IP Address
-      title: Peer IP Address
-      type: string
-    peerIpV4Address:
-      description: Peer IPv4 Address
-      title: Peer IPv4 Address
-      type: string
-    peerLocation:
-      description: Peer Location
-      title: Peer Location
-      type: object
-    peerSiteReputation:
-      description: Peer Site Reputation
-      title: Peer Site Reputation
-      type: string
-    service:
-      description: Service
-      title: Service
-      type: string
-    sourceAddress:
-      description: Source Address
-      title: Source Address
-      type: string
-    sourcePort:
-      description: Source Port
-      title: Source Port
-      type: string
-  parentApp:
-    applicationName:
-      description: Application Name
-      title: Application Name
-      type: string
-    applicationPath:
-      description: Application Path
-      title: Application Path
-      type: string
-    effectiveReputation:
-      description: Effective Reputation
-      title: Effective Reputation
-      type: string
-    effectiveReputationSource:
-      description: Effective Reputation Source
-      title: Effective Reputation Source
-      type: string
-    md5Hash:
-      description: MD5 Hash
-      title: MD5 Hash
-      type: string
-    reputationProperty:
-      description: Reputation Property
-      title: Reputation Property
-      type: string
-    sha256Hash:
-      description: SHA-256 Hash
-      title: SHA-256 Hash
-      type: string
-    virusCategory:
-      description: Virus Category
-      title: Virus Category
-      type: string
-    virusName:
-      description: Virus Name
-      title: Virus Name
-      type: string
-    virusSubCategory:
-      description: Virus Sub Category
-      title: Virus Sub Category
-      type: string
-  processDetails:
-    commandLine:
-      description: Process Details
-      title: Process Details
-      type: string
-    fullUserName:
-      description: Full User Name
-      title: Full User Name
-      type: string
-    interpreterHash:
-      description: Interpreter Hash
-      title: Interpreter Hash
-      type: string
-    interpreterName:
-      description: Interpreter Name
-      title: Interpreter Name
-      type: string
-    milisSinceProcessStart:
-      description: Milliseconds since process has started
-      title: Milliseconds Since Process has Started
-      type: integer
-    name:
-      description: Name
-      title: Name
-      type: string
-    parentCommandLine:
-      description: Parent Command Line
-      title: Parent Command Line
-      type: string
-    parentName:
-      description: Parent Name
-      title: Parent Name
-      type: string
-    parentPid:
-      description: Parent Process ID
-      title: Parent PID
-      type: integer
-    parentPrivatePid:
-      description: Parent Private Process ID
-      title: Parent Private PID
-      type: string
-    privatePid:
-      description: Private Process ID
-      title: Private Process ID
-      type: string
-    processId:
-      description: Process ID
-      title: Process ID
-      type: integer
-    targetCommandLine:
-      description: Target Command Line
-      title: Target Command Line
-      type: string
-    targetName:
-      description: Target Name
-      title: Target Name
-      type: string
-    targetPid:
-      description: Target Process ID
-      title: Target Process ID
-      type: integer
-    targetPrivatePid:
-      description: Target Private Process ID
-      title: Target Private PID
-      type: string
-    userName:
-      description: User Name
-      title: User Name
-      type: string
-  results:
-    alertCategory:
-      description: Alert Category
-      title: Alert Category
-      type: string
-    alertScore:
-      description: Alert Score
-      title: Alert Score
-      type: integer
-    attackStage:
-      description: Attack Stage
-      title: Attack Stage
-      type: string
-    createTime:
-      description: Create Time
-      title: Create Time
-      type: integer
-    deviceDetails:
-      description: Device Details
-      title: Device Details
-      type: deviceDetails
-    eventId:
-      description: Event ID
-      title: Event ID
-      type: string
-    eventTime:
-      description: Event Time
-      title: Event Time
-      type: integer
-    eventType:
-      description: Event Type
-      title: Event Time
-      type: string
-    incidentId:
-      description: Incident ID
-      title: Incident ID
-      type: string
-    longDescription:
-      description: Long Description
-      title: Long Description
-      type: string
-    netFlow:
-      description: Net Flow
-      title: Net Flow
-      type: netFlow
-    parentApp:
-      description: Parent Application
-      title: Parent Application
-      type: parentApp
-    processDetails:
-      description: Process Details
-      title: Process Details
-      type: processDetails
-    registryValue:
-      description: Registry Value
-      title: Registry Value
-      type: string
-    securityEventCode:
-      description: Security Event Code
-      title: Security Event Code
-      type: string
-    selectedApp:
-      description: Selected Application
-      title: Selected Application
-      type: parentApp
-    shortDescription:
-      description: Short Description
-      title: Short Description
-      type: string
-    targetApp:
-      description: Target Application
-      title: Target Application
-      type: parentApp
-    threatIndicators:
-      description: Threat Indicators
-      title: Threat Indicators
-      type: '[]string'
-  indicators:
-    applicationName:
-      description: Application Name
-      title: Application Name
-      type: string
-    indicatorName:
-      description: Indicator Name
-      title: Indicator Name
       type: string
     sha256Hash:
       description: SHA-256 Hash
@@ -503,10 +136,6 @@ types:
       description: Event Time
       title: Event Time
       type: integer
-    policyAction:
-      description: Policy Action
-      title: Policy Action
-      type: policyAction
     ruleName:
       description: Rule Name
       title: Rule Name
@@ -523,67 +152,343 @@ types:
       description: URL
       title: URL
       type: string
-  eventInfo:
-    eventId:
-      title: Event ID
+  event_info:
+    event_network_location:
+      title: "Event Network Location"
       type: string
-    processDetails:
-      title: Process Details
-      type: processDetails
-    eventTime:
-      title: Event Time
+      description: "Event network location"
+      required: false
+    process_name:
+      title: "Process Name"
+      type: string
+      description: "Process name"
+      required: false
+    device_target_priority:
+      title: "Device Target Priority"
+      type: string
+      description: "Device target priority"
+      required: false
+    event_type:
+      title: "Event Type"
+      type: string
+      description: "Event type"
+      required: false
+    netconn_inbound:
+      title: "Netconn Inbound"
+      type: boolean
+      description: "Netconn inbound"
+      required: false
+    process_effective_reputation:
+      title: "Process Effective Reputation"
+      type: string
+      description: "Process effective reputation"
+      required: false
+    event_network_remote_port:
+      title: "Event Network Remote Port"
       type: integer
-    deviceSecurityEventCode:
-      title: Device Security Event Code
-      type: string
-    killChainStatus:
-      title: Kill Chain Status
-      type: string
-    selectedApp:
-      title: Process Hash
-      type: hash
-    registryValue:
-      title: Registry Value
-      type: string
-    parentApp:
-      title: Parent Hash
-      type: hash
-    threatScore:
-      title: Threat Score
+      description: "Event network remote port"
+      required: false
+    device_group_id:
+      title: "Device Group Id"
       type: integer
-    createTime:
-      title: Create Time
+      description: "Device group id"
+      required: false
+    process_effective_reputation_source:
+      title: "Process Effective Reputation Source"
+      type: string
+      description: "Process effective reputation source"
+      required: false
+    legacy:
+      title: "Legacy"
+      type: boolean
+      description: "Legacy"
+      required: false
+    process_start_time:
+      title: "Process Start Time"
+      type: string
+      description: "Process start time"
+      required: false
+    process_username:
+      title: "Process Username"
+      type: "[]string"
+      description: "Process username"
+      required: false
+    netconn_port:
+      title: "Netconn Port"
       type: integer
-    longDescription:
-      title: Long Description
+      description: "Netconn port"
+      required: false
+    netconn_protocol:
+      title: "Netconn Protocol"
       type: string
-    threatIndicators:
-      title: Threat Indicators
-      type: '[]string'
-    securityEventCode:
-      title: Security Event Code
+      description: "Netconn protocol"
+      required: false
+    device_timestamp:
+      title: "Device Timestamp"
       type: string
-    deviceDetails:
-      title: Device Details
-      type: deviceDetails
-    orgDetails:
-      title: Org Details
-      type: orgDetails
-    eventType:
-      title: Event Type
+      description: "Device timestamp"
+      required: false
+    netconn_location:
+      title: "Netconn Location"
       type: string
-    syslogLevel:
-      title: Syslog Level
-      type: object
-    netFlow:
-      title: Net Flow
-      type: netFlow
-    shortDescription:
-      title: Short Description
+      description: "Netconn location"
+      required: false
+    ttp:
+      title: "Ttp"
+      type: "[]string"
+      description: "Ttp"
+      required: false
+    netconn_domain:
+      title: "Netconn Domain"
       type: string
-    targetApp:
-      title: Target Hash
-      type: hash
+      description: "Netconn domain"
+      required: false
+    event_description:
+      title: "Event Description"
+      type: string
+      description: "Event description"
+      required: false
+    process_cmdline:
+      title: "Process Cmdline"
+      type: "[]string"
+      description: "Process cmdline"
+      required: false
+    device_installed_by:
+      title: "Device Installed By"
+      type: string
+      description: "Device installed by"
+      required: false
+    event_id:
+      title: "Event Id"
+      type: string
+      description: "Event id"
+      required: false
+    parent_guid:
+      title: "Parent Guid"
+      type: string
+      description: "Parent guid"
+      required: false
+    document_guid:
+      title: "Document Guid"
+      type: string
+      description: "Document guid"
+      required: false
+    process_cmdline_length:
+      title: "Process Cmdline Length"
+      type: "[]integer"
+      description: "Process cmdline length"
+      required: false
+    enriched_event_type:
+      title: "Enriched Event Type"
+      type: string
+      description: "Enriched event type"
+      required: false
+    enriched:
+      title: "Enriched"
+      type: boolean
+      description: "Enriched"
+      required: false
+    netconn_local_ipv4:
+      title: "Netconn Local Ipv4"
+      type: integer
+      description: "Netconn local ipv4"
+      required: false
+    parent_hash:
+      title: "Parent Hash"
+      type: "[]string"
+      description: "Parent hash"
+      required: false
+    event_network_protocol:
+      title: "Event Network Protocol"
+      type: string
+      description: "Event network protocol"
+      required: false
+    parent_effective_reputation_source:
+      title: "Parent Effective Reputation Source"
+      type: string
+      description: "Parent effective reputation source"
+      required: false
+    process_pid:
+      title: "Process Pid"
+      type: "[]integer"
+      description: "Process pid"
+      required: false
+    event_network_remote_ipv4:
+      title: "Event Network Remote Ipv4"
+      type: string
+      description: "Event network remote ipv4"
+      required: false
+    process_hash:
+      title: "Process Hash"
+      type: "[]string"
+      description: "Process hash"
+      required: false
+    parent_effective_reputation:
+      title: "Parent Effective Reputation"
+      type: string
+      description: "Parent effective reputation"
+      required: false
+    process_sha256:
+      title: "Process Sha256"
+      type: string
+      description: "Process sha256"
+      required: false
+    parent_name:
+      title: "Parent Name"
+      type: string
+      description: "Parent name"
+      required: false
+    device_external_ip:
+      title: "Device External Ip"
+      type: string
+      description: "Device external ip"
+      required: false
+    netconn_ipv4:
+      title: "Netconn Ipv4"
+      type: integer
+      description: "Netconn ipv4"
+      required: false
+    event_report_code:
+      title: "Event Report Code"
+      type: string
+      description: "Event report code"
+      required: false
+    event_threat_score:
+      title: "Event Threat Score"
+      type: "[]integer"
+      description: "Event threat score"
+      required: false
+    device_internal_ip:
+      title: "Device Internal Ip"
+      type: string
+      description: "Device internal ip"
+      required: false
+    event_network_local_ipv4:
+      title: "Event Network Local Ipv4"
+      type: string
+      description: "Event network local ipv4"
+      required: false
+    process_reputation:
+      title: "Process Reputation"
+      type: string
+      description: "Process reputation"
+      required: false
+    ingress_time:
+      title: "Ingress Time"
+      type: integer
+      description: "Ingress time"
+      required: false
+    device_os:
+      title: "Device Os"
+      type: string
+      description: "Device os"
+      required: false
+    device_policy_id:
+      title: "Device Policy Id"
+      type: integer
+      description: "Device policy id"
+      required: false
+    device_id:
+      title: "Device Id"
+      type: integer
+      description: "Device id"
+      required: false
+    event_network_inbound:
+      title: "Event Network Inbound"
+      type: boolean
+      description: "Event network inbound"
+      required: false
+    process_guid:
+      title: "Process Guid"
+      type: string
+      description: "Process guid"
+      required: false
+    device_location:
+      title: "Device Location"
+      type: string
+      description: "Device location"
+      required: false
+    netconn_local_port:
+      title: "Netconn Local Port"
+      type: integer
+      description: "Netconn local port"
+      required: false
+    device_os_version:
+      title: "Device Os Version"
+      type: string
+      description: "Device os version"
+      required: false
+    org_id:
+      title: "Org Id"
+      type: string
+      description: "Org id"
+      required: false
+    device_name:
+      title: "Device Name"
+      type: string
+      description: "Device name"
+      required: false
+    backend_timestamp:
+      title: "Backend Timestamp"
+      type: string
+      description: "Backend timestamp"
+      required: false
+    parent_pid:
+      title: "Parent Pid"
+      type: integer
+      description: "Parent pid"
+      required: false
+    device_policy:
+      title: "Device Policy"
+      type: string
+      description: "Device policy"
+      required: false
+    parent_reputation:
+      title: "Parent Reputation"
+      type: string
+      description: "Parent reputation"
+      required: false
+
+
+output:
+  contacted:
+    title: "Contacted"
+    type: integer
+    description: "Contacted"
+    required: false
+  num_aggregated:
+    title: "Num Aggregated"
+    type: integer
+    description: "Num aggregated"
+    required: false
+  results:
+    title: "Results"
+    type: event_info
+    description: "Results"
+    required: false
+  num_available:
+    title: "Num Available"
+    type: integer
+    description: "Num available"
+    required: false
+  num_found:
+    title: "Num Found"
+    type: integer
+    description: "Num found"
+    required: false
+  approximate_unaggregated:
+    title: "Approximate Unaggregated"
+    type: integer
+    description: "Approximate unaggregated"
+    required: false
+  completed:
+    title: "Completed"
+    type: integer
+    description: "Completed"
+    required: false
+
+
+
 connection:
   url:
     title: URL
@@ -690,7 +595,7 @@ actions:
       results:
         description: Results
         title: Results
-        type: '[]results'
+        type: event_info
         required: false
       elapsed:
         description: Elapsed
@@ -717,20 +622,10 @@ actions:
         type: string
         required: true
     output:
-      success:
-        title: Success
-        description: Success
-        type: boolean
-        required: false
-      message:
-        title: Message
-        description: Message
-        type: string
-        required: false
       eventinfo:
         title: Event Info
         description: Detailed information on the event
-        type: eventInfo
+        type: event_info
         required: false
 triggers:
   get_notifications:

@@ -66,7 +66,7 @@ Example input:
 |elapsed|integer|False|Elapsed|
 |latestTime|integer|False|Latest Time|
 |message|string|False|Message|
-|results|[]results|False|Results|
+|results|event_info|False|Results|
 |success|boolean|False|Success|
 |totalResults|integer|False|Total Results|
 
@@ -214,9 +214,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|eventinfo|eventInfo|False|Detailed information on the event|
-|message|string|False|Message|
-|success|boolean|False|Success|
+|eventinfo|event_info|False|Detailed information on the event|
 
 Example output:
 
