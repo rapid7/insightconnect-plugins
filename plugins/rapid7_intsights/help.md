@@ -72,7 +72,10 @@ Example input:
 {
   "description": "Suspicious addresses",
   "found_date": "2020-01-01",
-  "images": "[{\"Type\": \"jpeg\",\"Data\": \"UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==\"}]",
+  "images": [{
+    "Type": "jpeg",
+    "Data": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
+  }],
   "severity": "Medium",
   "source_date": "2020-02-01",
   "source_network_type": "DarkWeb",
