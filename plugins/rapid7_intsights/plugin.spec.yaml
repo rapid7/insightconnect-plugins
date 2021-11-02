@@ -60,17 +60,17 @@ types:
       title: Email
       description: Email
       type: string
-      required: true
+      required: false
     NetworkType:
       title: Network Type
       description: Network type
       type: string
-      required: true
+      required: false
     Date:
       title: Date
       description: Date
       type: string
-      required: true
+      required: false
   alert_tags:
     _id:
       title: ID
@@ -117,22 +117,22 @@ types:
       title: Description
       description: Description
       type: string
-      required: true
+      required: false
     Images:
       title: Images
       description: Images
       type: "[]string"
-      required: true
+      required: false
     Tags:
       title: Tags
       description: Tags
       type: "[]alert_tags"
-      required: true
+      required: false
     RelatedIocs:
       title: Related IOCs
       description: Related IOCs
       type: "[]string"
-      required: true
+      required: false
 connection:
   account_id:
     title: Account ID
