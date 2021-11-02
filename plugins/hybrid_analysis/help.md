@@ -26,7 +26,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|API Key|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
 |api_token|credential_secret_key|None|True|API token|None|02699626f388ed830012e5b787640e71c56d42d8abababab|
-|url|string|https://example.com|True|URL|None|https://example.com|
+|url|string|https://www.hybrid-analysis.com/api|True|URL|None|https://www.hybrid-analysis.com/api|
 
 Example input:
 
