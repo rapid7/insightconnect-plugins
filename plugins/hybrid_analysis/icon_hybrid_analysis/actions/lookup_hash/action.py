@@ -30,8 +30,8 @@ class LookupHash(komand.Action):
 
         return formatted
 
-    def lookup(self, hash=""):
-        r = self.connection.get(hash)
+    def lookup(self, hash_=""):
+        r = self.connection.get(hash_)
         if r.status_code == 200:
             results = r.json()
             self.logger.debug("Got results %s", results)

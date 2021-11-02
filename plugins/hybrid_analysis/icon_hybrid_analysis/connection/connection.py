@@ -9,12 +9,12 @@ class Connection(komand.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
-    def get(self, hash):
+    def get(self, hash_):
         if self.params.get("url"):
 
-            url = self.params.get("url") + "/scan/" + hash
+            url = self.params.get("url") + "/scan/" + hash_
         else:
-            url = "https://www.hybrid-analysis.com/api" + "/scan/" + hash
+            url = "https://www.hybrid-analysis.com/api" + "/scan/" + hash_
 
         return requests.get(
             url,
