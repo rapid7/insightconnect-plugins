@@ -1,11 +1,15 @@
 {
-	"spec": "f42e20a913cfe638a9c2793035fa079e",
-	"manifest": "6ab898bbdce4d40bf420002e5162b9ac",
-	"setup": "eca16a8087075a1120ff61fa5f217c5e",
+	"spec": "64fb87c7d1f66aefd4e7f7614a19f9af",
+	"manifest": "e2419ec1df006ce82cf0909b1bb65bff",
+	"setup": "48492ed5afb320410fc6d17a1ca24f07",
 	"schemas": [
 		{
 			"identifier": "add_address_to_group/schema.py",
 			"hash": "28866c00bc5f8c943458f0b6c5176647"
+		},
+		{
+			"identifier": "block_host/schema.py",
+			"hash": "74aeff1b3af9a4b757210a741b75bb29"
 		},
 		{
 			"identifier": "check_if_address_object_in_group/schema.py",
@@ -18,6 +22,10 @@
 		{
 			"identifier": "delete_address_object/schema.py",
 			"hash": "379b6330742e8b45c24a532b2d03253c"
+		},
+		{
+			"identifier": "get_blocked_hosts/schema.py",
+			"hash": "2a0caee8d3b1264280da82fceb3d0bba"
 		},
 		{
 			"identifier": "remove_address_from_group/schema.py",
