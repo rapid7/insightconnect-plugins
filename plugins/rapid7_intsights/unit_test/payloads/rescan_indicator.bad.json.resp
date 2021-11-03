@@ -1,0 +1,5 @@
+{
+  "OriginalValue":"",
+  "Status":"Invalid",
+  "FailedReason":"Invalid IOC value. Supported IOC types: file hashes"
+}
