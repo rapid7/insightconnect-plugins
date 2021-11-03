@@ -39,11 +39,11 @@ class MockTrigger:
 
 def check_error():
     expected = {
-        'alert_ids': [
-            '7cafac7ec5adaebf62257a4c',
-            '7cafac7ec5adaebf62257a4d',
-            '7cafac7ec5adaebf62257a4e',
-            '7cafac7ec5adaebf62257a4f'
+        "alert_ids": [
+            "7cafac7ec5adaebf62257a4c",
+            "7cafac7ec5adaebf62257a4d",
+            "7cafac7ec5adaebf62257a4e",
+            "7cafac7ec5adaebf62257a4f",
         ]
     }
     if MockTrigger.actual == expected:
@@ -53,9 +53,7 @@ def check_error():
 
 
 def check_error_empty():
-    expected = {
-        'alert_ids': []
-    }
+    expected = {"alert_ids": []}
     if MockTrigger.actual == expected:
         return True
 

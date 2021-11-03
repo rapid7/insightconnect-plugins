@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 import time
 from .schema import NewAlertInput, NewAlertOutput, Input, Output, Component
+
 # Custom imports below
 from icon_rapid7_intsights.util.api import AlertParams
 
@@ -39,8 +40,6 @@ class NewAlert(insightconnect_plugin_runtime.Trigger):
         while True:
             results = self.connection.client.get_alerts(alert_params)
 
-            self.send({
-                Output.ALERT_IDS: results
-            })
+            self.send({Output.ALERT_IDS: results})
             alert_params.found_date_from = current_milli_time()
             time.sleep(params.get(Input.FREQUENCY, 60))
