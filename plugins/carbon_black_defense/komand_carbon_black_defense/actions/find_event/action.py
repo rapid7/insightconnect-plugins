@@ -1,15 +1,11 @@
 import komand
-from .schema import FindEventInput, FindEventOutput, Output
+from .schema import FindEventInput, FindEventOutput, Output, Input, Output, Component
 
 # Custom imports below
 import requests
 
 
 class FindEvent(komand.Action):
-
-    # URI for Find Event
-    _URI = "/integrationServices/v3/event/"
-
     def __init__(self):
         super(self.__class__, self).__init__(
             name="find_event",
@@ -19,9 +15,14 @@ class FindEvent(komand.Action):
         )
 
     def run(self, params={}):
-        host = self.connection.host
-        token = self.connection.token
-        connector = self.connection.connector
+        device_name = params.get(Input.DEVICE_NAME)
+        ip = params.get(Input.DEVICE_EXTERNAL_IP)
+        device_installed_by = params.get(Input.DEVICE_INSTALLED_BY)
+        process_name = params.get(Input.PROCESS_NAME)
+        process_hash = params.get(Input.PROCESS_HASH)
+        enriched_event_type = params.get(Input.ENRICHED_EVENT_TYPE)
+
+      
         payload = dict()
         for param in params:
             if params[param]:
