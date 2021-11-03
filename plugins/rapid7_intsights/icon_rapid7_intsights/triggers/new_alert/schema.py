@@ -4,14 +4,16 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Search alerts based on criteria"
+    DESCRIPTION = "This trigger will run when a new alert that matches the given criteria is created in Intsights"
 
 
 class Input:
+    
     ALERT_TYPE = "alert_type"
     ASSIGNED = "assigned"
     FOUND_DATE_FROM = "found_date_from"
     FOUND_DATE_TO = "found_date_to"
+    FREQUENCY = "frequency"
     HAS_INDICATORS = "has_indicators"
     IS_CLOSED = "is_closed"
     IS_FLAGGED = "is_flagged"
@@ -25,10 +27,11 @@ class Input:
     
 
 class Output:
+    
     ALERT_IDS = "alert_ids"
     
 
-class GetAlertsInput(insightconnect_plugin_runtime.Input):
+class NewAlertInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
@@ -64,6 +67,13 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
       "title": "Found Date To",
       "description": "End date to fetch to in Unix Millisecond Timestamp",
       "order": 10
+    },
+    "frequency": {
+      "type": "integer",
+      "title": "Frequency",
+      "description": "Poll frequency in seconds",
+      "default": 60,
+      "order": 15
     },
     "has_indicators": {
       "type": "boolean",
@@ -156,7 +166,7 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class GetAlertsOutput(insightconnect_plugin_runtime.Output):
+class NewAlertOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",

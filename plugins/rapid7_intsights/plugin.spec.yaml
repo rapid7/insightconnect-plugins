@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_intsights
 title: Rapid7 IntSights
 description: Rapid7 IntSights is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
-version: 1.0.0
+version: 1.2.0
 supported_versions: ["2.4.0"]
 vendor: rapid7
 support: rapid7
@@ -386,7 +386,7 @@ actions:
       is_closed:
         title: Closed Status
         description: Status of the alert, either closed or open
-        type: boolean
+        type: string
         required: false
         example: Closed
         enum:
@@ -614,4 +614,115 @@ actions:
         title: Alert ID
         description: New created alert ID
         type: string
+        required: true
+triggers:
+  new_alert:
+    title: New Alert
+    description: This trigger will run when a new alert that matches the given criteria is created in Intsights
+    input:
+      alert_type:
+        title: Alert Type
+        description: 'List of alert types. Allowed values: AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip'
+        type: '[]string'
+        required: false
+        example: ["Phishing"]
+      severity:
+        title: Severity
+        description: 'List of alerts severity. Allowed values: High, Medium, Low'
+        type: '[]string'
+        required: false
+        example: ["Low"]
+      source_type:
+        title: Source Type
+        description: 'List of alerts source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other'
+        type: '[]string'
+        required: false
+        example: ["Application Store"]
+      network_type:
+        title: Network Type
+        description: 'List of network type. Allowed values: ClearWeb, DarkWeb'
+        type: '[]string'
+        required: false
+        example: ["DarkWeb"]
+      matched_asset_value:
+        title: Matched Asset Value
+        description: List of matched asset values
+        type: '[]string'
+        required: false
+        example: ["example.com"]
+      remediation_status:
+        title: Remediation Status
+        description: 'List of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed'
+        type: '[]string'
+        required: false
+        example: ["InProgress", "Pending"]
+      source_date_from:
+        title: Source Date From
+        description: Start date to fetch from in Unix Millisecond Timestamp
+        type: string
+        required: false
+        example: 1633047083142
+      source_date_to:
+        title: Source Date To
+        description: End date to fetch to in Unix Millisecond Timestamp
+        type: string
+        required: false
+        example: 1633047102456
+      found_date_from:
+        title: Found Date From
+        description: Start date to fetch from in Unix Millisecond Timestamp
+        type: string
+        required: false
+        example: 0
+      found_date_to:
+        title: Found Date To
+        description: End date to fetch to in Unix Millisecond Timestamp
+        type: string
+        required: false
+        example: 1633047102456
+      assigned:
+        title: Alert Assignment
+        description: Show assigned/unassigned alerts
+        type: string
+        required: false
+        example: Assigned
+        enum:
+          - Assigned
+          - Unassigned
+      is_flagged:
+        title: Alert Flag Status
+        description: Show flagged/unflagged alerts
+        type: string
+        required: false
+        example: Flagged
+        enum:
+          - Flagged
+          - Unflagged
+      is_closed:
+        title: Closed Status
+        description: Status of the alert, either closed or open
+        type: string
+        required: false
+        example: Closed
+        enum:
+          - Closed
+          - Open
+      has_indicators:
+        title: Has Indicators
+        description: Show alerts with IOCs results
+        type: boolean
+        required: false
+        example: false
+      frequency:
+        title: Frequency
+        type: integer
+        description: Poll frequency in seconds
+        required: false
+        default: 60
+        example: 60
+    output:
+      alert_ids:
+        title: Alert IDs
+        description: List of alert IDs
+        type: "[]string"
         required: true
