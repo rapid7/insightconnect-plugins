@@ -1,5 +1,5 @@
 {
-	"spec": "40ba1afd0f136adeabf5b2ed8c123d6e",
+	"spec": "8477340e09d3fd638f84fd4ddf52f6cd",
 	"manifest": "ab7546b34a728428ec917ca13c855567",
 	"setup": "5db13a63e065f0655ce8506247f45b4f",
 	"schemas": [
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "get_complete_alert_by_id/schema.py",
-			"hash": "e1caf7b9e81e3e8ccff0dec44f5ec2b7"
+			"hash": "a5a4e73ebf917dc6ae329aa958ae94a6"
 		},
 		{
 			"identifier": "get_cve_by_id/schema.py",

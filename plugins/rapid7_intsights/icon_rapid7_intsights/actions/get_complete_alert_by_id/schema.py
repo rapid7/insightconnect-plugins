@@ -201,13 +201,9 @@ class GetCompleteAlertByIdOutput(insightconnect_plugin_runtime.Output):
         }
       },
       "required": [
-        "Description",
-        "Images",
-        "RelatedIocs",
         "Severity",
         "Source",
         "SubType",
-        "Tags",
         "Title",
         "Type"
       ],
@@ -248,9 +244,6 @@ class GetCompleteAlertByIdOutput(insightconnect_plugin_runtime.Output):
             }
           },
           "required": [
-            "Date",
-            "Email",
-            "NetworkType",
             "Type",
             "URL"
           ]
@@ -322,9 +315,6 @@ class GetCompleteAlertByIdOutput(insightconnect_plugin_runtime.Output):
         }
       },
       "required": [
-        "Date",
-        "Email",
-        "NetworkType",
         "Type",
         "URL"
       ]
