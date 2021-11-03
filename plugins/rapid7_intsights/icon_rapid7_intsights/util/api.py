@@ -139,7 +139,7 @@ class IntSightsAPI:
         return self.make_request("PUT", "public/v1/data/alerts/add-alert", json_data=manual_alert_params.to_dict()).text
 
     def get_cve(self, cve_ids: [str]) -> dict:
-        path = f"public/v1/cves/get-cves-list"
+        path = "public/v1/cves/get-cves-list"
         if cve_ids:
             cve_ids_str = "&cveId[]=".join(cve_ids)
             path = f"{path}?cveId[]={cve_ids_str}"
