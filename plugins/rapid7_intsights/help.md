@@ -635,7 +635,7 @@ Example output:
 
 #### New Alert
 
-This trigger this trigger will run when a new alert that matches the given criteria is created in Intsights.
+This trigger will run when a new alert that matches the given criteria is created in Intsights.
 
 ##### Input
 

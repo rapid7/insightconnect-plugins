@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This trigger will run when a new alert that matches the given criteria is created in Intsights"
+    DESCRIPTION = "Run when a new alert that matches the given criteria is created in Intsights"
 
 
 class Input:
