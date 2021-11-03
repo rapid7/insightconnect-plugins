@@ -133,7 +133,11 @@ class IntSightsAPI:
         )
 
     def get_alerts(self, alert_params: AlertParams) -> list:
-        return self.make_request("GET", "public/v1/data/alerts/alerts-list", params=alert_params.to_dict()).json()
+        response = self.make_request("GET", "public/v1/data/alerts/alerts-list", params=alert_params.to_dict())
+        if response.text:
+            return response.json()
+
+        return []
 
     def add_manual_alert(self, manual_alert_params: ManualAlertParams) -> str:
         return self.make_request("PUT", "public/v1/data/alerts/add-alert", json_data=manual_alert_params.to_dict()).text
