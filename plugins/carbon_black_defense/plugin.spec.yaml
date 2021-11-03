@@ -7,6 +7,7 @@ description: Find events and retrieve details for specific events
 version: 3.0.0
 vendor: rapid7
 support: rapid7
+supported_versions: ["04/02/2022"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/carbon_black_defense
@@ -20,7 +21,7 @@ tags:
 - vmware
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [carbon black, vmware, defense, antivirus, cloud]
+  keywords: [defense, antivirus]
   features: []
 types:
   deviceInfo:
@@ -76,23 +77,6 @@ types:
     indicatorName:
       description: Indicator Name
       title: Indicator Name
-      type: string
-    sha256Hash:
-      description: SHA-256 Hash
-      title: SHA-256 Hash
-      type: string
-  policyAction:
-    action:
-      description: Policy Action
-      title: Policy Action
-      type: string
-    applicationName:
-      description: Application Name
-      title: Application Name
-      type: string
-    reputation:
-      description: Reputation
-      title: Reputation
       type: string
     sha256Hash:
       description: SHA-256 Hash
@@ -160,7 +144,7 @@ types:
       required: false
     process_name:
       title: "Process Name"
-      type: string
+      type: "[]string"
       description: "Process name"
       required: false
     device_target_priority:
@@ -189,9 +173,9 @@ types:
       description: "Event network remote port"
       required: false
     device_group_id:
-      title: "Device Group Id"
+      title: "Device Group ID"
       type: integer
-      description: "Device group id"
+      description: "Device group ID"
       required: false
     process_effective_reputation_source:
       title: "Process Effective Reputation Source"
@@ -225,7 +209,7 @@ types:
       required: false
     device_timestamp:
       title: "Device Timestamp"
-      type: string
+      type: date
       description: "Device timestamp"
       required: false
     netconn_location:
@@ -234,9 +218,9 @@ types:
       description: "Netconn location"
       required: false
     ttp:
-      title: "Ttp"
+      title: "TTP"
       type: "[]string"
-      description: "Ttp"
+      description: "TTP"
       required: false
     netconn_domain:
       title: "Netconn Domain"
@@ -253,25 +237,20 @@ types:
       type: "[]string"
       description: "Process cmdline"
       required: false
-    device_installed_by:
-      title: "Device Installed By"
-      type: string
-      description: "Device installed by"
-      required: false
     event_id:
-      title: "Event Id"
+      title: "Event ID"
       type: string
-      description: "Event id"
+      description: "Event ID"
       required: false
     parent_guid:
-      title: "Parent Guid"
+      title: "Parent GUID"
       type: string
-      description: "Parent guid"
+      description: "Parent GUID"
       required: false
     document_guid:
-      title: "Document Guid"
+      title: "Document GUID"
       type: string
-      description: "Document guid"
+      description: "Document GUID"
       required: false
     process_cmdline_length:
       title: "Process Cmdline Length"
@@ -280,7 +259,7 @@ types:
       required: false
     enriched_event_type:
       title: "Enriched Event Type"
-      type: string
+      type: "string"
       description: "Enriched event type"
       required: false
     enriched:
@@ -289,9 +268,9 @@ types:
       description: "Enriched"
       required: false
     netconn_local_ipv4:
-      title: "Netconn Local Ipv4"
+      title: "Netconn Local IPv4"
       type: integer
-      description: "Netconn local ipv4"
+      description: "Netconn local IPv4"
       required: false
     parent_hash:
       title: "Parent Hash"
@@ -309,14 +288,14 @@ types:
       description: "Parent effective reputation source"
       required: false
     process_pid:
-      title: "Process Pid"
+      title: "Process PID"
       type: "[]integer"
-      description: "Process pid"
+      description: "Process PID"
       required: false
     event_network_remote_ipv4:
-      title: "Event Network Remote Ipv4"
+      title: "Event Network Remote IPv4"
       type: string
-      description: "Event network remote ipv4"
+      description: "Event network remote IPv4"
       required: false
     process_hash:
       title: "Process Hash"
@@ -329,9 +308,9 @@ types:
       description: "Parent effective reputation"
       required: false
     process_sha256:
-      title: "Process Sha256"
+      title: "Process SHA-256"
       type: string
-      description: "Process sha256"
+      description: "Process SHA-256"
       required: false
     parent_name:
       title: "Parent Name"
@@ -339,14 +318,14 @@ types:
       description: "Parent name"
       required: false
     device_external_ip:
-      title: "Device External Ip"
-      type: string
-      description: "Device external ip"
+      title: "Device External IP"
+      type: "[]string"
+      description: "Device external IP"
       required: false
     netconn_ipv4:
-      title: "Netconn Ipv4"
+      title: "Netconn IPv4"
       type: integer
-      description: "Netconn ipv4"
+      description: "Netconn IPv4"
       required: false
     event_report_code:
       title: "Event Report Code"
@@ -359,14 +338,14 @@ types:
       description: "Event threat score"
       required: false
     device_internal_ip:
-      title: "Device Internal Ip"
+      title: "Device Internal IP"
       type: string
-      description: "Device internal ip"
+      description: "Device internal IP"
       required: false
     event_network_local_ipv4:
-      title: "Event Network Local Ipv4"
+      title: "Event Network Local IPv4"
       type: string
-      description: "Event network local ipv4"
+      description: "Event network local IPv4"
       required: false
     process_reputation:
       title: "Process Reputation"
@@ -379,19 +358,19 @@ types:
       description: "Ingress time"
       required: false
     device_os:
-      title: "Device Os"
+      title: "Device OS"
       type: string
-      description: "Device os"
+      description: "Device OS"
       required: false
     device_policy_id:
-      title: "Device Policy Id"
+      title: "Device Policy ID"
       type: integer
-      description: "Device policy id"
+      description: "Device policy ID"
       required: false
     device_id:
-      title: "Device Id"
+      title: "Device ID"
       type: integer
-      description: "Device id"
+      description: "Device ID"
       required: false
     event_network_inbound:
       title: "Event Network Inbound"
@@ -399,9 +378,9 @@ types:
       description: "Event network inbound"
       required: false
     process_guid:
-      title: "Process Guid"
+      title: "Process GUID"
       type: string
-      description: "Process guid"
+      description: "Process GUID"
       required: false
     device_location:
       title: "Device Location"
@@ -414,29 +393,29 @@ types:
       description: "Netconn local port"
       required: false
     device_os_version:
-      title: "Device Os Version"
+      title: "Device OS Version"
       type: string
-      description: "Device os version"
+      description: "Device OS version"
       required: false
     org_id:
-      title: "Org Id"
+      title: "Org ID"
       type: string
-      description: "Org id"
+      description: "Org ID"
       required: false
     device_name:
       title: "Device Name"
-      type: string
+      type: "[]string"
       description: "Device name"
       required: false
     backend_timestamp:
       title: "Backend Timestamp"
-      type: string
+      type: date
       description: "Backend timestamp"
       required: false
     parent_pid:
-      title: "Parent Pid"
+      title: "Parent PID"
       type: integer
-      description: "Parent pid"
+      description: "Parent PID"
       required: false
     device_policy:
       title: "Device Policy"
@@ -448,47 +427,6 @@ types:
       type: string
       description: "Parent reputation"
       required: false
-
-
-output:
-  contacted:
-    title: "Contacted"
-    type: integer
-    description: "Contacted"
-    required: false
-  num_aggregated:
-    title: "Num Aggregated"
-    type: integer
-    description: "Num aggregated"
-    required: false
-  results:
-    title: "Results"
-    type: event_info
-    description: "Results"
-    required: false
-  num_available:
-    title: "Num Available"
-    type: integer
-    description: "Num available"
-    required: false
-  num_found:
-    title: "Num Found"
-    type: integer
-    description: "Num found"
-    required: false
-  approximate_unaggregated:
-    title: "Approximate Unaggregated"
-    type: integer
-    description: "Approximate unaggregated"
-    required: false
-  completed:
-    title: "Completed"
-    type: integer
-    description: "Completed"
-    required: false
-
-
-
 connection:
   url:
     title: URL
@@ -496,21 +434,25 @@ connection:
     description: API URL
     default: https://defense.conferdeploy.net
     required: true
+    example: https://example.com
   api_key:
     title: API Key
     type: credential_secret_key
     description: API key
     required: true
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
   org_key:
     title: Organization Key
     type: string
     description: Organization key
     required: true
+    example: 1ABCDE5GH
   connector:
     title: Connector
     type: string
     description: Connector ID
     required: true
+    example: 1Y72FRRWVP
 actions:
   find_event:
     title: Find Event
@@ -518,110 +460,70 @@ actions:
       is a list of events in JSON format. Resulting events are sorted in descending
       order of time
     input:
-      hostName:
-        title: Hostname
-        description: Filter on hostnames case insensitive. For example hostName=win-IA9NQ1GN8OI
-          will match the hostname WIN-IA9NQ1GN8OI
-        type: string
+      device_name:
+        title: "Device Name"
+        description: "Device name"
+        type: "[]string"
         required: false
-      hostNameExact:
-        title: Hostname Exact
-        description: Filter on the exact hostname. For example hostName=WIN-IA9NQ1GN8OI
-          will only return devices with the exact hostname WIN-IA9NQ1GN8OI but not
-          a host named win-IA9NQ1GN8OI
-        type: string
+        example: "CONTOSO\\bruce-win10"
+      device_external_ip:
+        title: "Device External IP"
+        type: "[]string"
+        description: "Device external IP"
         required: false
-      ownerName:
-        title: Owners Name
-        description: Filter on owner name case insensitive
-        type: string
-        required: false
-      ownerNameExact:
-        title: Owners Name Exact
-        description: Same as 'Owners Name' but with case sensitivity
-        type: string
-        required: false
-      ipAddress:
-        title: IP Address
-        description: Filter on events generated by a device with a given external
-          or internal IP address
-        type: string
-        required: false
-      sha256hash:
+        example: "192.0.2.0"
+      process_hash:
         title: SHA-256 Hash
         description: Filter on events generated by a process with the given SHA-256
           hash. Note that this hash must be lowercase
-        type: string
+        type: "[]string"
         required: false
-      applicationName:
-        title: Application Name
-        description: Filter on events generated by a process with the given application
-          name (for example, googleupdate.exe. Note that this name must be lowercase)
-        type: string
+        example: ["A3DED3871AC66498E406798B0CA33F1B5E94B9CFB60DD4489475B9C19FBFD7F5"]
+      process_name:
+        title: "Process Name"
+        description: "Process name"
+        type: "[]string"
         required: false
-      eventType:
-        title: Event Type
-        description: Filter on events with a given event type
-        type: string
-        enum:
-        - ''
-        - NETWORK
-        - FILE_CREATE
-        - REGISTRY_ACCESS
-        - SYSTEM_API_CALL
-        - CREATE_PROCESS
-        - DATA_ACCESS
-        - INJECT_CODE
+        example: "c:\\windows\\system32\\windowspowershell\\v1.0\\modules\\smbshare\\disableunusedsmb1.ps1"
+      enriched_event_type:
+        title: "Enriched Event Type"
+        type: "[]string"
+        description: "Enriched event type"
         required: false
-      searchWindow:
-        title: Search Window
-        description: Filter on events generated within a given relative time frame.
-          Note that the default is one day if a searchWindow is not specified. Note
-          that events may not be available past 30 days due to retention policies
-          e.g. 4d, 2w
+        example: "SYSTEM_API_CALL"
+      time_range:
+        title: "Time Range"
         type: string
+        description: "Time frame to limit your search to. Integer used for amount of of the following: s=second(s), m=minute(s), h=hour(s), d=day(s), w=week(s), or y=year(s)"
         required: false
+        example: "-2d"
     output:
       success:
         description: Success
         title: Success
         type: boolean
         required: false
-      latestTime:
-        description: Latest Time
-        title: Latest Time
-        type: integer
-        required: false
-      results:
-        description: Results
-        title: Results
+      eventinfo:
+        title: Event Info
+        description: Detailed information on the event
         type: event_info
-        required: false
-      elapsed:
-        description: Elapsed
-        title: Elapsed
-        type: integer
-        required: false
-      message:
-        description: Message
-        title: Message
-        type: string
-        required: false
-      totalResults:
-        description: Total Results
-        title: Total Results
-        type: integer
         required: false
   get_details_for_specific_event:
     title: Get Details for Specific Event
     description: Retrieve details for an individual event given the event ID
     input:
-      event_id:
+      event_ids:
         title: Event ID
         description: Event ID
         type: string
         required: true
+        example: "422af3fc3a7411ea8da649e797467dc0"
     output:
+      success:
+        title: Success
+        description: Success
+        type: boolean
+        required: false
       eventinfo:
         title: Event Info
         description: Detailed information on the event
@@ -640,6 +542,7 @@ triggers:
         description: How often to poll for new notifications requests, in seconds
         default: 10
         required: true
+        example: 10
     output:
       notifications:
         description: Collection of Notifications

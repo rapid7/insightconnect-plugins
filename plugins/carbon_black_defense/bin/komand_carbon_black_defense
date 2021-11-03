@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
+    import insightconnect_plugin_runtime
     from komand_carbon_black_defense import connection, actions, triggers
 
-    class ICONCarbonBlackDefense(komand.Plugin):
+    class ICONCarbonBlackDefense(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -42,7 +42,7 @@ def main():
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONCarbonBlackDefense())
+    cli = insightconnect_plugin_runtime.CLI(ICONCarbonBlackDefense())
     cli.run()
 
 

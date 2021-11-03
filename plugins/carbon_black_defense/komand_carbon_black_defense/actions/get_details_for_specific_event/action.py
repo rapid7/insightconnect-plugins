@@ -1,14 +1,14 @@
-import komand
-from .schema import GetDetailsForSpecificEventInput, GetDetailsForSpecificEventOutput, Input, Output
-from komand_carbon_black_defense.connection import *
+import time
+from datetime import datetime
 
-# Custom imports below
-import requests
-import json
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
+from .schema import (GetDetailsForSpecificEventInput,
+                     GetDetailsForSpecificEventOutput, Input, Output)
 
 
-class GetDetailsForSpecificEvent(komand.Action):
-
+class GetDetailsForSpecificEvent(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_details_for_specific_event",
@@ -19,50 +19,34 @@ class GetDetailsForSpecificEvent(komand.Action):
 
     def run(self, params={}):
 
-        event_id = params.get(Input.EVENT_ID)
-        id_ = self.connection.get_job_id_for_detail_search(event_id=event_id)
-
+        event_id = params.get(Input.EVENT_IDS)
+        if len(event_id) == 0:
+            raise PluginException(
+                cause="Error. No event IDs were provided as input.",
+                assistance="Please enter at least one event ID.",
+            )
+        id_ = self.connection.get_job_id_for_detail_search(event_ids=event_id)
+        self.logger.info(f"Got job ID for detail search: {id_}")
         if id_ is None:
-            return {Output.EVENTINFO: {}}
+            return {Output.SUCCESS: False, Output.EVENTINFO: {}}
         detail_search_status = self.connection.check_status_of_detail_search(id_)
 
         # check if status of
         # detail search is complete by checking if the completed property
         # in results is not equal to the contacted property
+        t1 = datetime.now()
+        for _ in range(0, 9999):
+            if not detail_search_status:
+                detail_search_status = self.connection.check_status_of_detail_search(id_)
+                if (datetime.now() - t1).seconds > 60:
+                    break
+                time.sleep(3)
+            else:
+                break
+        response = self.connection.retrieve_results_for_detail_search(job_id=id_)
+        data = insightconnect_plugin_runtime.helper.clean(response)
 
-        if not detail_search_status:
-            self.connection.check_status_of_detail_search(id_)
-        else:
-            self.connection.retrieve_results_for_detail_search()
-
-        try:
-            success = self.connection.retrieve_results_for_detail_search()
-            data = komand.helper.clean(success.json())
-
-            if success.status_code == 200:
-                return {
-                Output.EVENTINFO: data["eventInfo"],
-                }
-
-        except ValueError:
-            self.logger.error(success.text)
-            raise Exception(
-                f"Error: Received an unexpected response"
-                f" (non-JSON or no response was received). Raw response in logs."
-            )
-
-        if success.status_code in range(400, 499):
-            raise Exception(
-                f"Carbon Black returned a {success.status_code} code."
-                f" Verify the token and host configuration in the connection. Response was: {result.text}"
-            )
-        if success.status_code in range(500, 599):
-            raise Exception(
-                f"Carbon Black returned a {success.status_code} code."
-                f" If the problem persists please contact support for help. Response was: {result.text}"
-            )
-        self.logger.error(success.text)
-        raise Exception(
-            f"An unknown error occurred."
-            f" Carbon Black returned a {success.status_code} code. Contact support for help. Raw response in logs."
-        )
+        return {
+            Output.SUCCESS: True,
+            Output.EVENTINFO: data,
+        }
