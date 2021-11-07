@@ -240,6 +240,8 @@ class CybereasonAPI:
                 for i in value["elementValues"]["ownerMachine"]["elementValues"]:
                     if machine_guid in i["guid"]:
                         target_ids.append(key)
+            # Doing a KeyError check, as during testing `elementValues`
+            # list was occasionally returned as an empty dictionary
             except KeyError:
                 pass
 
