@@ -4,10 +4,10 @@ import os
 import json
 from sys import argv
 
-Name = "Cisco Adaptive Security Appliance"
+Name = "Rapid7 IntSights"
 Vendor = "rapid7"
-Version = "1.5.0"
-Description = "The Cisco ASA plugin allows you to automate the management of network objects"
+Version = "1.0.0"
+Description = "Rapid7 IntSights is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy"
 
 
 def main():
@@ -23,9 +23,9 @@ def main():
             monkey.patch_all()
 
     import insightconnect_plugin_runtime
-    from icon_cisco_asa import connection, actions, triggers
+    from icon_rapid7_intsights import connection, actions, triggers
 
-    class ICONCiscoAsa(insightconnect_plugin_runtime.Plugin):
+    class ICONRapid7Intsights(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -34,23 +34,25 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
-            self.add_action(actions.AddAddressToGroup())
+            self.add_action(actions.AddManualAlert())
 
-            self.add_action(actions.BlockHost())
+            self.add_action(actions.EnrichIndicator())
 
-            self.add_action(actions.CheckIfAddressObjectInGroup())
+            self.add_action(actions.GetAlerts())
 
-            self.add_action(actions.CreateAddressObject())
+            self.add_action(actions.GetCompleteAlertById())
 
-            self.add_action(actions.DeleteAddressObject())
+            self.add_action(actions.GetIndicatorByValue())
 
-            self.add_action(actions.GetBlockedHosts())
+            self.add_action(actions.GetIndicatorScanStatus())
 
-            self.add_action(actions.RemoveAddressFromGroup())
+            self.add_action(actions.RescanIndicator())
+
+            self.add_action(actions.TakedownRequest())
 
 
     """Run plugin"""
-    cli = insightconnect_plugin_runtime.CLI(ICONCiscoAsa())
+    cli = insightconnect_plugin_runtime.CLI(ICONRapid7Intsights())
     cli.run()
 
 
