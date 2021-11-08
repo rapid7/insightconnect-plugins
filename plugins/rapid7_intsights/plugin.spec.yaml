@@ -709,7 +709,7 @@ triggers:
           - Open
       has_indicators:
         title: Has Indicators
-        description: Show alerts with IOCs results
+        description: Shows alerts with IOC results
         type: boolean
         required: false
         example: false
