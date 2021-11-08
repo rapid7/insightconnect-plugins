@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     CHANNEL_NAME = "channel_name"
+    CHAT_ID = "chat_id"
     MESSAGE = "message"
     TEAM_NAME = "team_name"
     THREAD_ID = "thread_id"
@@ -30,11 +31,17 @@ class SendMessageInput(komand.Input):
       "description": "Channel",
       "order": 2
     },
+    "chat_id": {
+      "type": "string",
+      "title": "Chat ID",
+      "description": "The ID of the chat",
+      "order": 4
+    },
     "message": {
       "type": "string",
       "title": "Message",
       "description": "Message to send",
-      "order": 4
+      "order": 5
     },
     "team_name": {
       "type": "string",
@@ -50,9 +57,7 @@ class SendMessageInput(komand.Input):
     }
   },
   "required": [
-    "channel_name",
-    "message",
-    "team_name"
+    "message"
   ]
 }
     """)

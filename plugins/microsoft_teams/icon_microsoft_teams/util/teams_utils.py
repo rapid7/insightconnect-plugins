@@ -135,9 +135,10 @@ def send_message(
     logger: Logger,
     connection: komand.connection,
     message: str,
-    team_id: str,
-    channel_id: str,
+    team_id: str = None,
+    channel_id: str = None,
     thread_id: str = None,
+    chat_id: str = None,
 ) -> dict:
     """
     Send a message to Teams
@@ -148,12 +149,22 @@ def send_message(
     :param team_id: String
     :param channel_id: String
     :param thread_id: string
+    :param chat_id: string
     :return: dict
     """
-    send_message_url = f"https://graph.microsoft.com/beta/teams/{team_id}/channels/{channel_id}/messages"
 
-    if thread_id:
-        send_message_url = send_message_url + f"/{thread_id}/replies"
+    if chat_id:
+        send_message_url = f"https://graph.microsoft.com/beta/chats/{chat_id}/messages"
+    elif team_id and channel_id:
+        send_message_url = f"https://graph.microsoft.com/beta/teams/{team_id}/channels/{channel_id}/messages"
+        if thread_id:
+            send_message_url = send_message_url + f"/{thread_id}/replies"
+    else:
+        raise PluginException(
+            cause="No chat ID or team ID with channel ID was provided.",
+            assistance="Please provide the chat ID to send the chat message or the team and channel details(name or "
+            "GUID) to send the message to a specific channel.",
+        )
 
     logger.info(f"Sending message to: {send_message_url}")
     headers = connection.get_headers()

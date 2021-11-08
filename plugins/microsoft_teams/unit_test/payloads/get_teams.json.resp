@@ -1,0 +1,21 @@
+{
+    "@odata.context": "https://graph.microsoft.com/beta/$metadata#groups",
+    "value": [
+        {
+            "id": "12345",
+            "description": "Example description.",
+            "displayName": "Example Team",
+            "groupTypes": [
+                "Unified"
+            ],
+            "mailEnabled": true,
+            "mailNickname": "ExampleTeam",
+            "resourceBehaviorOptions": [],
+            "resourceProvisioningOptions": [
+                "Team"
+            ],
+            "securityEnabled": false,
+            "visibility": "Private"
+        }
+    ]
+}
