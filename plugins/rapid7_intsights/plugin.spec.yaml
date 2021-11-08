@@ -781,7 +781,7 @@ actions:
         required: true
   get_cve_by_id:
     title: Get CVE by ID
-    description: Get CVE's list from account
+    description: Get CVE's list with a list of IDs from account
     input:
       cve_id:
         title: CVE ID
