@@ -245,7 +245,7 @@ types:
     intsightsScore:
       title: IntSights Score
       type: integer
-      description: Intsights score
+      description: IntSights score
       required: false
     cvssScore:
       title: CVS Score
