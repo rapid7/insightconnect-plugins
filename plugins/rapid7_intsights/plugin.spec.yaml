@@ -243,7 +243,7 @@ types:
       description: Severity
       required: false
     intsightsScore:
-      title: Intsights Score
+      title: IntSights Score
       type: integer
       description: Intsights score
       required: false
