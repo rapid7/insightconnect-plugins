@@ -45,7 +45,7 @@ Example input:
 
 This action is used to remediate a specific process, file or registry key if remediation is possible.
 
-This action supports the following action types: KILL_PROCESS, DELETE_REGISTRY_KEY, QUARANTINE_FILE, UNQUARANTINE_FILE, BLOCK_FILE, KILL_PREVENT_UNSUSPEND, ISOLATE_MACHINE.
+This action supports the following action types: KILL_PROCESS, DELETE_REGISTRY_KEY, QUARANTINE_FILE, UNQUARANTINE_FILE, BLOCK_FILE, KILL_PREVENT_UNSUSPEND.
 
 For more information about how to generate an `actions_by_machine` object, refer to [Cybereason documentation](https://nest.cybereason.com/documentation/api-documentation/all-versions/remediate-items#remediatemalops).
 
@@ -310,6 +310,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.2 - Remove ISOLATE_MACHINE option from Remediate Items action documentation
 * 2.0.1 - Fix incorrect error messaging when invalid credentials are used
 * 2.0.0 - Update action Isolate Machine | New action Remediate Items
 * 1.2.0 - Add new action Quarantine File
