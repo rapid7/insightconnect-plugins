@@ -1,6 +1,6 @@
 # Description
 
-[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.6.5 and its standard library as well as the following 3rd party libraries:
+[Python](https://www.python.org/) is a programming language that lets you work quickly and integrate systems more effectively. This plugin allows you to run Python 3 code. It includes Python 3.6.5 and its standard library as well as the following 3rd party libraries: 
 
 * [requests 2.18.4](https://requests.readthedocs.io/en/master/)
 * [maya 0.5.0](https://pypi.python.org/pypi/maya)
@@ -94,10 +94,12 @@ _This plugin does not contain any custom output types._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+Some third-party modules defined in the `Modules` connection input (such as `pandas`) can take a long time to install.
+If installation fails, try increasing the `Timeout` connection input to `900` (15 minutes).
 
 # Version History
 
+* 2.0.4 - Update help documentation for installing third-party modules
 * 2.0.3 - Update `docs_url` in plugin spec with a new link to [plugin setup guide](https://docs.rapid7.com/insightconnect/python-2-or-3-script/)
 * 2.0.2 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/python-2-or-3-script)
 * 2.0.1 - New spec and help.md format for the Extension Library
