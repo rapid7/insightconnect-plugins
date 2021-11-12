@@ -5,7 +5,7 @@ name: cybereason
 title: Cybereason
 description: The Cybereason platform provides military-grade cyber security with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin
 version: 2.1.0
-supported_versions: ["20.2"]
+supported_versions: ["All"]
 vendor: rapid7
 support: rapid7
 status: []
