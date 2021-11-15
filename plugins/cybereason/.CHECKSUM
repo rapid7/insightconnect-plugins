@@ -1,13 +1,7 @@
 {
-<<<<<<< HEAD
-	"spec": "d1eded8253778a6144c59b6490b101e0",
-	"manifest": "f7fdb7c4d326ddcd61e513bcff880f77",
-	"setup": "1811feabe71e9d1e39eca7c695ba4bcf",
-=======
 	"spec": "7daea1178fffdfa57bcf28eb9282823a",
 	"manifest": "9c3e0e414a0403a4663c0099024f64a3",
 	"setup": "707950b092fb630491753de6300700a7",
->>>>>>> master
 	"schemas": [
 		{
 			"identifier": "delete_registry_key/schema.py",
