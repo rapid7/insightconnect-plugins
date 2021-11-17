@@ -103,6 +103,34 @@ class CybereasonAPI:
                 assistance="Please ensure that provided Malop GUID is valid and try again.",
             )
 
+    def get_malop_feature_details(self, malop_guid: str, feature_name: str) -> dict:
+        response = self.send_request(
+            "POST",
+            "/rest/visualsearch/query/simple",
+            payload={
+                "totalResultLimit": 10000,
+                "perGroupLimit": 10000,
+                "templateContext": "CUSTOM",
+                "queryPath": [
+                    {
+                        "requestedType": "MalopProcess",
+                        "guidList": [malop_guid],
+                        "connectionFeature": {"elementInstanceType": "MalopProcess", "featureName": feature_name},
+                    },
+                    {"requestedType": "Autorun", "isResult": True},
+                ],
+                "customFields": ["name", "ownerMachine"],
+            },
+        )
+        try:
+            return response["data"]["resultIdToElementDataMap"]
+
+        except KeyError:
+            raise PluginException(
+                cause=f"Unable to retrieve detailed Malop information for {malop_guid}.",
+                assistance="Please ensure that provided Malop ID is valid and try again.",
+            )
+
     def get_visual_search(self, requestedType: str, filters: list, customFields: list) -> dict:
         try:
             return self.send_request(
@@ -202,3 +230,25 @@ class CybereasonAPI:
             sensor_filter["filters"][0]["fieldName"] = "machineName"
 
         return sensor_filter
+
+    @staticmethod
+    def get_machine_targets(results: str, machine_guid: str) -> list:
+        target_ids = []
+
+        for key, value in results.items():
+            try:
+                for i in value["elementValues"]["ownerMachine"]["elementValues"]:
+                    if machine_guid in i["guid"]:
+                        target_ids.append(key)
+            # Doing a KeyError check, as during testing `elementValues`
+            # list was occasionally returned as an empty dictionary
+            except KeyError:
+                pass
+
+        if not target_ids:
+            raise PluginException(
+                cause="No targets found for this machine in the Malop provided.",
+                assistance=f"No remediation targets for machine: {machine_guid}, in the provided Malop.",
+            )
+
+        return target_ids
