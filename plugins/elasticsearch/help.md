@@ -120,7 +120,9 @@ Example input:
   "refresh": "false",
   "retry_on_conflict": 5,
   "routing": "user1",
-  "script": "{\"lang\": \"painless\"}",
+  "script": {
+    "lang": "painless"
+  },
   "source": "meta.*",
   "timeout": "1m",
   "type": "_doc",
@@ -255,7 +257,12 @@ Example input:
 
 ```
 {
-  "document": "{\"firstname\": \"Jon\", \"lastname\": \"Doe\", \"gender\": \"M\", \"city\": \"Dante\"}",
+  "document": {
+    "firstname": "Jon",
+    "lastname": "Doe",
+    "gender": "M",
+    "city": "Dante"
+  },
   "id": "001",
   "index": "index001",
   "parent": "001",
