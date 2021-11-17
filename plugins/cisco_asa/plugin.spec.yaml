@@ -4,7 +4,8 @@ products: [insightconnect]
 name: cisco_asa
 title: Cisco Adaptive Security Appliance
 description: The Cisco ASA plugin allows you to automate the management of network objects
-version: 1.4.2
+version: 1.5.0
+supported_versions: ["9.13(1)"]
 vendor: rapid7
 support: community
 status: []
@@ -58,6 +59,32 @@ types:
       title: Self Link
       type: string
       description: Self link
+      required: false
+  hosts:
+    source_ip:
+      title: Source IP
+      description: Source IP address
+      type: string
+      required: false
+    dest_ip:
+      title: Destination IP
+      description: Destination IP address
+      type: string
+      required: false
+    source_port:
+      title: Source Port
+      description: Source port
+      type: string
+      required: false
+    dest_port:
+      title: Destination Port
+      description: Destination port
+      type: string
+      required: false
+    protocol:
+      title: Protocol
+      description: Protocol
+      type: string
       required: false
 
 connection:
@@ -222,5 +249,61 @@ actions:
       success:
         title: Success
         description: Returns true if object was created
+        type: boolean
+        required: true
+  get_blocked_hosts:
+    title: Get Blocked Hosts
+    description: Get hosts blocked with shun command
+    output:
+      hosts:
+        title: Hosts
+        description: List of hosts blocked with shun command
+        type: "[]hosts"
+        required: true
+  block_host:
+    title: Block Host
+    description: Block hosts by IP address(IPv4) using the shun command
+    input:
+      shun:
+        title: Shun
+        description: True to block a host or false to unblock a host using the shun command
+        type: boolean
+        required: true
+        default: true
+        example: true
+      source_ip:
+        title: Source IP
+        description: Source IP address you want to block or unblock
+        type: string
+        required: true
+        example: 198.51.100.100
+      destination_ip:
+        title: Destination IP
+        description: Destination IP address
+        type: string
+        required: false
+        example: 198.51.100.100
+      source_port:
+        title: Source Port
+        description: Source port
+        type: integer
+        required: false
+        example: 443
+      destination_port:
+        title: Destination Port
+        description: Destination port
+        type: integer
+        required: false
+        example: 443
+      protocol:
+        title: Protocol
+        description: IP protocol, for example TCP or UDP
+        type: string
+        required: false
+        example: TCP
+    output:
+      success:
+        title: Success
+        description: Whether the block or unblock action was successful
         type: boolean
         required: true

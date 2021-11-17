@@ -65,3 +65,11 @@ class Util:
             return MockResponse("isolate_machine", 200)
         elif "/rest/remediate" in args[1]:
             return MockResponse("remediate_items", 200)
+        elif "/rest/visualsearch/query/simple" in args[1]:
+            payload_malop = kwargs["json"]["queryPath"][0]["guidList"]
+            if payload_malop == ["11.2189746432167327222"]:
+                return MockResponse("malop_details", 200)
+            elif payload_malop == ["invalid_malop_id"]:
+                return MockResponse("malop_details_bad_malop", 200)
+            elif payload_malop == ["malop_without_machine"]:
+                return MockResponse("malop_details_bad_machine", 200)

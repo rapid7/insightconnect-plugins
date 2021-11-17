@@ -4,7 +4,8 @@ products: [insightconnect]
 name: google_drive
 title: Google Drive
 description: Upload and retrieve files from Google drive
-version: 2.1.3
+version: 2.2.0
+supported_versions: ["Google Drive API v3 2021-09-27"]
 vendor: rapid7
 support: community
 status: []
@@ -18,7 +19,7 @@ tags:
 - cloud storage
 hub_tags:
   use_cases: [data_utility]
-  keywords: [google, google drive, cloud storage]
+  keywords: [google, google_drive, cloud_storage]
   features: []
 types:
   file_info:
@@ -28,60 +29,83 @@ types:
     file_id:
       title: File ID
       type: string
+  move_file_result:
+    folder_id:
+      title: Folder ID
+      description: Folder ID
+      type: string
+    file_id:
+      title: File ID
+      description: File ID
+      type: string
 connection:
   admin_user:
     title: Admin User
-    description: Admin user to impersonate, e.g. admin@domain.com
+    description: Admin user to impersonate, e.g. user@example.com
     type: string
     required: true
+    example: user@example.com
   project_id:
     title: Project ID
     description: Project ID from service credentials
     type: string
     required: true
+    example: example-12345
   private_key_id:
     title: Private Key ID
     description: Private Key ID from service credentials
     type: string
     required: true
+    example: 02699626f388ed830012e5b787640e71c56d42d8
   private_key:
     title: Private Key
     description: Private Key from service credentials
     type: credential_asymmetric_key
     required: true
+    example: -----BEGIN RSA PRIVATE KEY-----
+
+      MIIEpQIBAAKCAQEAjGnoUtfPHqvX3PIU6N9FKmwQ3Zl+NoaWb4yMLhudkdEBJ3Au...8/dqUH5yjRKs2qxkBWG4HmT3Nx6A8sYIrUYxyqVLBpG8yKngbnaYPV4=
+
+      -----END RSA PRIVATE KEY-----
   client_email:
     title: Client Email
     description: Client email from service credentials
     type: string
     required: true
+    example: user@example.com
   client_id:
     title: Client ID
     description: Client ID
     type: string
     required: true
+    example: 102790495738029996994
   client_x509_cert_url:
     title: Client X509 Cert URL
     description: X509 cert URL from service credentials
     type: string
     required: true
+    example: https://www.googleapis.com/robot/v1/metadata/x509/user@example.com
   auth_uri:
     title: Auth URI
     description: OAUTH2 Auth URI
     type: string
     required: true
     default: https://accounts.google.com/o/oauth2/auth
+    example: https://accounts.google.com/o/oauth2/auth
   token_uri:
     title: Token URI
     description: OAUTH2 Token URI
     type: string
     required: true
     default: https://accounts.google.com/o/oauth2/token
+    example: https://accounts.google.com/o/oauth2/token
   auth_provider_x509_cert_url:
     title: Auth Provider Cert URL
     description: OAUTH2 Auth Provider x509 Cert URL
     type: string
     required: true
     default: https://www.googleapis.com/oauth2/v1/certs
+    example: https://www.googleapis.com/oauth2/v1/certs
 actions:
   get_file_contents:
     title: Get File Contents
@@ -92,11 +116,13 @@ actions:
         description: The file ID for the file that will be returned
         type: string
         required: true
+        example: 1sTWaJ_j7PkjzaBWtNc3IzovK5hQf21FbOw9yLeeLPNQ
       mime_type:
         title: MIME Type
         description: The MIME Type to export the file as e.g. */* , text/plain
         type: string
         required: true
+        example: text/plain
     output:
       file:
         title: File
@@ -112,6 +138,7 @@ actions:
         description: The file to upload
         type: file
         required: true
+        example: {"filename": "test.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}
       google_file_type:
         title: Google File Type
         description: The file type that Google will convert the file to
@@ -121,11 +148,13 @@ actions:
         - Docs
         - Sheets
         - Slides
+        example: Docs
       folder_id:
         title: Folder ID
         description: Folder to put the file in
         type: string
         required: false
+        example: 0BwwA4oUTeiV1TGRPeTVjaWRDY1E
     output:
       file_id:
         title: File ID
@@ -146,16 +175,19 @@ actions:
         description: The new data that will overwrite the old file
         type: bytes
         required: true
+        example: UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==
       file_id:
         title: File ID
         description: The file ID for the file that will be overwritten
         type: string
         required: true
+        example: 1sTWaJ_j7PkjzaBWtNc3IzovK5hQf21FbOw9yLeeLPNQ
       new_file_name:
         title: New File Name
         description: Select a new file name. e.g. testfile.csv
         type: string
         required: false
+        example: test.txt
       new_mime_type:
         title: New MIME Type
         description: Select a new MIME type for the file
@@ -165,6 +197,7 @@ actions:
         - Docs
         - Sheets
         - Slides
+        example: Docs
     output:
       file_id:
         title: File ID
@@ -184,19 +217,88 @@ actions:
         - '='
         - '!='
         - contains
+        example: contains
       filename:
         title: Filename
         description: The name of the file to search for
         type: string
         required: true
+        example: test
       parent_id:
         title: Parent ID
         description: The ID of the parent folder
         type: string
         required: false
+        example: 0BwwA4oUTeiV1TGRPeTVjaWRDY1E
     output:
       files_found:
         title: Files Found
         description: Returns a list of file names and their IDs
         type: '[]file_info'
         required: false
+  create_folder:
+    title: Create Folder
+    description: Create a folder
+    input:
+      folder_name:
+        title: Folder Name
+        description: The name for the new folder
+        type: string
+        required: true
+        example: New Folder
+      parent_folder_id:
+        title: Parent Folder ID
+        description: The ID of the folder in which the new folder will be created
+        type: string
+        required: false
+        example: 0BwwA4oUTeiV1TGRPeTVjaWRDY1E
+    output:
+      folder_id:
+        title: Folder ID
+        description: Return the ID of the folder created on Google Drive
+        type: string
+        required: true
+  create_file_in_folder:
+    title: Create File in Folder
+    description: Create a file in a folder
+    input:
+      folder_id:
+        title: Folder ID
+        description: The ID of the folder where the file will be created
+        type: string
+        required: true
+        example: 0BwwA4oUTeiV1TGRPeTVjaWRDY1E
+      file:
+        title: File
+        description: The file to create
+        type: file
+        required: true
+        example: {"filename": "test.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}
+    output:
+      file_id:
+        title: File ID
+        description: Return the ID of the file created on Google Drive
+        type: string
+        required: true
+  move_file:
+    title: Move File
+    description: Move a file to a different folder
+    input:
+      folder_id:
+        title: Folder ID
+        description: ID of the folder where the file will be moved
+        type: string
+        required: true
+        example: 0BwwA4oUTeiV1TGRPeTVjaWRDY1E
+      file_id:
+        title: File ID
+        description: The ID of the file that will be moved to another folder
+        type: string
+        required: true
+        example: 1pAT5CqVKi6XtyaD4betZvDQqOt8ZcuUR
+    output:
+      result:
+        title: Result
+        description: The result containing the ID of the file and ID of the folder to which the file was moved
+        type: move_file_result
+        required: true

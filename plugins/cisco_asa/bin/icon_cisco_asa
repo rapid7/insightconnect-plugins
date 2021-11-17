@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Cisco Adaptive Security Appliance"
 Vendor = "rapid7"
-Version = "1.4.2"
+Version = "1.5.0"
 Description = "The Cisco ASA plugin allows you to automate the management of network objects"
 
 
@@ -36,11 +36,15 @@ def main():
             )
             self.add_action(actions.AddAddressToGroup())
 
+            self.add_action(actions.BlockHost())
+
             self.add_action(actions.CheckIfAddressObjectInGroup())
 
             self.add_action(actions.CreateAddressObject())
 
             self.add_action(actions.DeleteAddressObject())
+
+            self.add_action(actions.GetBlockedHosts())
 
             self.add_action(actions.RemoveAddressFromGroup())
 

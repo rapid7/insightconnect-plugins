@@ -14,6 +14,11 @@ This plugin utilizes the [Elasticsearch API](https://www.elastic.co/guide/en/ela
 * An Elasticsearch server
 * Elasticsearch credentials
 
+# Supported Product Versions
+
+* 7.8.1
+* 6.0.0
+
 # Documentation
 
 ## Setup
@@ -362,7 +367,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.0.1 - Fix search example input in help.md | Add exception message in search action
+* 3.0.2 - Fix search example input in help.md | Add exception message in search action
+* 3.0.1 - Fix issue where Search Documents and Update Documents action returned no results if optional `routing` field was not provided | Update Index Documents action to handle query parameters correctly
 * 3.0.0 - Update to use the `insightconnect-python-3-38-plugin:4` Docker image | Improve error handling | Add `Plugin Exception` | Add `Connection Test` | Add `timeout-decorator` in requirements | Code refactor | Remove input Type from Index Document, Update Document, Search Documents actions and Search Documents trigger | Change inputs name in actions and trigger to not start with `_` | Add `USER nobody` in Dockerfile | Add `api6.py` file for other Elasticsearch version | Add pagination | Add SSL verify
 * 2.0.5 - Updated example inputs and outputs for all the actions
 * 2.0.4 - Correct spelling in help.md
