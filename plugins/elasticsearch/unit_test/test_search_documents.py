@@ -64,9 +64,7 @@ class TestSearchDocuments(TestCase):
 
     @patch("requests.request", side_effect=Util.mocked_requests_get)
     def test_search_documents(self, mock_request):
-        actual = self.action.run(
-            {Input.INDEX: "search", Input.QUERY: {"match_all": {}}, Input.ROUTING: None}
-        )
+        actual = self.action.run({Input.INDEX: "search", Input.QUERY: {"match_all": {}}, Input.ROUTING: None})
         self.assertEqual(actual, self.expected)
 
     @patch("requests.request", side_effect=Util.mocked_requests_get)
@@ -104,9 +102,7 @@ class TestSearchDocuments(TestCase):
 
     @patch("requests.request", side_effect=Util.mocked_requests_get)
     def test_search_documents_wrong_object(self, mock_request):
-        actual = self.action.run(
-            {Input.INDEX: "wrong_object", Input.QUERY: {"match_all": {}}, Input.ROUTING: None}
-        )
+        actual = self.action.run({Input.INDEX: "wrong_object", Input.QUERY: {"match_all": {}}, Input.ROUTING: None})
 
         self.assertEqual(
             {
@@ -134,5 +130,5 @@ class TestSearchDocuments(TestCase):
             error.exception.assistance,
             "Old query style detected during input. Input shouldn't contain {'query': {'query': ...}}. Please refer "
             "help for more details or elasticsearch API documentation: https://www.elastic.co/guide/en/elasticsearch/"
-            "reference/current/query-filter-context.html#query-filter-context-ex"
+            "reference/current/query-filter-context.html#query-filter-context-ex",
         )
