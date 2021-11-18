@@ -134,8 +134,11 @@ class IntSightsAPI:
 
     def get_alerts(self, alert_params: AlertParams) -> list:
         response = self.make_request("GET", "public/v1/data/alerts/alerts-list", params=alert_params.to_dict())
-        if response.text:
-            return response.json()
+        try:
+            if response.text:
+                return response.json()
+        except json.decoder.JSONDecodeError as e:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
 
         return []
 

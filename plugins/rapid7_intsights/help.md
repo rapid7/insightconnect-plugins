@@ -355,8 +355,8 @@ This action is used to search Alerts based on criteria.
 |----|----|-------|--------|-----------|----|-------|
 |alert_type|[]string|None|False|List of alert types. Allowed values: AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip|None|["Phishing"]|
 |assigned|string|None|False|Show assigned/unassigned alerts|['Assigned', 'Unassigned']|Assigned|
-|found_date_from|string|None|False|Start date to fetch from in Unix Millisecond Timestamp|None|0|
-|found_date_to|string|None|False|End date to fetch to in Unix Millisecond Timestamp|None|1633047102456|
+|found_date_from|string|None|False|Start date (when alert found event) to fetch from in Unix Millisecond Timestamp|None|0|
+|found_date_to|string|None|False|End date (when alert found event) to fetch to in Unix Millisecond Timestamp|None|1633047102456|
 |has_indicators|boolean|None|False|Show alerts with IOCs results|None|False|
 |is_closed|string|None|False|Status of the alert, either closed or open|['Closed', 'Open']|Closed|
 |is_flagged|string|None|False|Show flagged/unflagged alerts|['Flagged', 'Unflagged']|Flagged|
@@ -364,8 +364,8 @@ This action is used to search Alerts based on criteria.
 |network_type|[]string|None|False|List of network type. Allowed values: ClearWeb, DarkWeb|None|["DarkWeb"]|
 |remediation_status|[]string|None|False|List of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed|None|["InProgress", "Pending"]|
 |severity|[]string|None|False|List of alerts severity. Allowed values: High, Medium, Low|None|["Low"]|
-|source_date_from|string|None|False|Start date to fetch from in Unix Millisecond Timestamp|None|1633047083142|
-|source_date_to|string|None|False|End date to fetch to in Unix Millisecond Timestamp|None|1633047102456|
+|source_date_from|string|None|False|Start date (when the event occured) to fetch from in Unix Millisecond Timestamp|None|1633047083142|
+|source_date_to|string|None|False|End date (when the event occured) to fetch to in Unix Millisecond Timestamp|None|1633047102456|
 |source_type|[]string|None|False|List of alerts source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other|None|["Application Store"]|
 
 Example input:
@@ -724,19 +724,19 @@ This trigger will run when a new alert that matches the given criteria is create
 |----|----|-------|--------|-----------|----|-------|
 |alert_type|[]string|None|False|List of alert types. Allowed values: AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip|None|["Phishing"]|
 |assigned|string|None|False|Show assigned/unassigned alerts|['Assigned', 'Unassigned']|Assigned|
-|found_date_from|string|None|False|Start date to fetch from in Unix Millisecond Timestamp|None|0|
-|found_date_to|string|None|False|End date to fetch to in Unix Millisecond Timestamp|None|1633047102456|
+|found_date_from|string|None|False|Start date (when alert found event) to fetch from in Unix Millisecond Timestamp|None|0|
+|found_date_to|string|None|False|End date (when alert found event) to fetch to in Unix Millisecond Timestamp|None|1633047102456|
 |frequency|integer|60|False|Poll frequency in seconds|None|60|
-|has_indicators|boolean|None|False|Show alerts with IOCs results|None|False|
+|has_indicators|boolean|None|False|Shows alerts with IOC results|None|False|
 |is_closed|string|None|False|Status of the alert, either closed or open|['Closed', 'Open']|Closed|
 |is_flagged|string|None|False|Show flagged/unflagged alerts|['Flagged', 'Unflagged']|Flagged|
-|matched_asset_value|[]string|None|False|List of matched asset values|None|["example.com"]|
+|matched_asset_value|[]string|None|False|List of matched asset values, example. domain name, company name, IP|None|["example.com"]|
 |network_type|[]string|None|False|List of network type. Allowed values: ClearWeb, DarkWeb|None|["DarkWeb"]|
 |remediation_status|[]string|None|False|List of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed|None|["InProgress", "Pending"]|
 |severity|[]string|None|False|List of alerts severity. Allowed values: High, Medium, Low|None|["Low"]|
-|source_date_from|string|None|False|Start date to fetch from in Unix Millisecond Timestamp|None|1633047083142|
-|source_date_to|string|None|False|End date to fetch to in Unix Millisecond Timestamp|None|1633047102456|
-|source_type|[]string|None|False|List of alerts source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other|None|["Application Store"]|
+|source_date_from|string|None|False|Start date (when the event occured) to fetch from in Unix Millisecond Timestamp|None|1633047083142|
+|source_date_to|string|None|False|End date (when the event occured) to fetch to in Unix Millisecond Timestamp|None|1633047102456|
+|source_type|[]string|None|False|List of alert's source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other|None|["Application Store"]|
 
 Example input:
 
@@ -811,8 +811,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.2.0 - Add new trigger New Alert
-* 1.1.0 - Add new action Get CVE by ID
+* 2.0.0 - Add new trigger New Alert | Add new action Get CVE by ID
 * 1.0.0 - Initial plugin
 
 # Links

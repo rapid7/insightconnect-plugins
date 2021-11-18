@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_intsights
 title: Rapid7 IntSights
 description: Rapid7 IntSights is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
-version: 1.2.0
+version: 2.0.0
 supported_versions: ["2.4.0"]
 vendor: rapid7
 support: rapid7
@@ -495,7 +495,7 @@ actions:
         example: ["DarkWeb"]
       matched_asset_value:
         title: Matched Asset Value
-        description: List of matched asset values
+        description: List of matched asset values, example. domain name, company name, IP
         type: '[]string'
         required: false
         example: ["example.com"]
@@ -507,25 +507,25 @@ actions:
         example: ["InProgress", "Pending"]
       source_date_from:
         title: Source Date From
-        description: Start date to fetch from in Unix Millisecond Timestamp
+        description: Start date (when the event occured) to fetch from in Unix Millisecond Timestamp
         type: string
         required: false
         example: 1633047083142
       source_date_to:
         title: Source Date To
-        description: End date to fetch to in Unix Millisecond Timestamp
+        description: End date (when the event occured) to fetch to in Unix Millisecond Timestamp
         type: string
         required: false
         example: 1633047102456
       found_date_from:
         title: Found Date From
-        description: Start date to fetch from in Unix Millisecond Timestamp
+        description: Start date (when alert found event) to fetch from in Unix Millisecond Timestamp
         type: string
         required: false
         example: 0
       found_date_to:
         title: Found Date To
-        description: End date to fetch to in Unix Millisecond Timestamp
+        description: End date (when alert found event) to fetch to in Unix Millisecond Timestamp
         type: string
         required: false
         example: 1633047102456
@@ -814,7 +814,7 @@ triggers:
         example: ["Low"]
       source_type:
         title: Source Type
-        description: List of alert's source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other
+        description: "List of alert's source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other"
         type: '[]string'
         required: false
         example: ["Application Store"]
@@ -826,7 +826,7 @@ triggers:
         example: ["DarkWeb"]
       matched_asset_value:
         title: Matched Asset Value
-        description: List of matched asset values
+        description: List of matched asset values, example. domain name, company name, IP
         type: '[]string'
         required: false
         example: ["example.com"]
@@ -838,25 +838,25 @@ triggers:
         example: ["InProgress", "Pending"]
       source_date_from:
         title: Source Date From
-        description: Start date to fetch from in Unix Millisecond Timestamp
+        description: Start date (when the event occured) to fetch from in Unix Millisecond Timestamp
         type: string
         required: false
         example: 1633047083142
       source_date_to:
         title: Source Date To
-        description: End date to fetch to in Unix Millisecond Timestamp
+        description: End date (when the event occured) to fetch to in Unix Millisecond Timestamp
         type: string
         required: false
         example: 1633047102456
       found_date_from:
         title: Found Date From
-        description: Start date to fetch from in Unix Millisecond Timestamp
+        description: Start date (when alert found event) to fetch from in Unix Millisecond Timestamp
         type: string
         required: false
         example: 0
       found_date_to:
         title: Found Date To
-        description: End date to fetch to in Unix Millisecond Timestamp
+        description: End date (when alert found event) to fetch to in Unix Millisecond Timestamp
         type: string
         required: false
         example: 1633047102456

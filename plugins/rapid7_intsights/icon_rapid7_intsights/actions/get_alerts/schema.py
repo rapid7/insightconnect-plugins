@@ -56,13 +56,13 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
     "found_date_from": {
       "type": "string",
       "title": "Found Date From",
-      "description": "Start date to fetch from in Unix Millisecond Timestamp",
+      "description": "Start date (when alert found event) to fetch from in Unix Millisecond Timestamp",
       "order": 9
     },
     "found_date_to": {
       "type": "string",
       "title": "Found Date To",
-      "description": "End date to fetch to in Unix Millisecond Timestamp",
+      "description": "End date (when alert found event) to fetch to in Unix Millisecond Timestamp",
       "order": 10
     },
     "has_indicators": {
@@ -94,7 +94,7 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
     "matched_asset_value": {
       "type": "array",
       "title": "Matched Asset Value",
-      "description": "List of matched asset values",
+      "description": "List of matched asset values, example. domain name, company name, IP",
       "items": {
         "type": "string"
       },
@@ -130,13 +130,13 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
     "source_date_from": {
       "type": "string",
       "title": "Source Date From",
-      "description": "Start date to fetch from in Unix Millisecond Timestamp",
+      "description": "Start date (when the event occured) to fetch from in Unix Millisecond Timestamp",
       "order": 7
     },
     "source_date_to": {
       "type": "string",
       "title": "Source Date To",
-      "description": "End date to fetch to in Unix Millisecond Timestamp",
+      "description": "End date (when the event occured) to fetch to in Unix Millisecond Timestamp",
       "order": 8
     },
     "source_type": {

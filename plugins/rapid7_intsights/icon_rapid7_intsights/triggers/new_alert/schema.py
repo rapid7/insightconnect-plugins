@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Run when a new alert that matches the given criteria is created in Intsights"
+    DESCRIPTION = "Runs when a new alert that matches the given criteria is created in IntSights"
 
 
 class Input:
@@ -59,13 +59,13 @@ class NewAlertInput(insightconnect_plugin_runtime.Input):
     "found_date_from": {
       "type": "string",
       "title": "Found Date From",
-      "description": "Start date to fetch from in Unix Millisecond Timestamp",
+      "description": "Start date (when alert found event) to fetch from in Unix Millisecond Timestamp",
       "order": 9
     },
     "found_date_to": {
       "type": "string",
       "title": "Found Date To",
-      "description": "End date to fetch to in Unix Millisecond Timestamp",
+      "description": "End date (when alert found event) to fetch to in Unix Millisecond Timestamp",
       "order": 10
     },
     "frequency": {
@@ -78,7 +78,7 @@ class NewAlertInput(insightconnect_plugin_runtime.Input):
     "has_indicators": {
       "type": "boolean",
       "title": "Has Indicators",
-      "description": "Show alerts with IOCs results",
+      "description": "Shows alerts with IOC results",
       "order": 14
     },
     "is_closed": {
@@ -104,7 +104,7 @@ class NewAlertInput(insightconnect_plugin_runtime.Input):
     "matched_asset_value": {
       "type": "array",
       "title": "Matched Asset Value",
-      "description": "List of matched asset values",
+      "description": "List of matched asset values, example. domain name, company name, IP",
       "items": {
         "type": "string"
       },
@@ -140,19 +140,19 @@ class NewAlertInput(insightconnect_plugin_runtime.Input):
     "source_date_from": {
       "type": "string",
       "title": "Source Date From",
-      "description": "Start date to fetch from in Unix Millisecond Timestamp",
+      "description": "Start date (when the event occured) to fetch from in Unix Millisecond Timestamp",
       "order": 7
     },
     "source_date_to": {
       "type": "string",
       "title": "Source Date To",
-      "description": "End date to fetch to in Unix Millisecond Timestamp",
+      "description": "End date (when the event occured) to fetch to in Unix Millisecond Timestamp",
       "order": 8
     },
     "source_type": {
       "type": "array",
       "title": "Source Type",
-      "description": "List of alerts source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other",
+      "description": "List of alert's source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other",
       "items": {
         "type": "string"
       },
