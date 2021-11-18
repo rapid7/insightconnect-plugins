@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get CVE's list from account"
+    DESCRIPTION = "Get CVE's list with a list of IDs from account"
 
 
 class Input:
@@ -13,7 +13,6 @@ class Input:
 
 class Output:
     CONTENT = "content"
-    NEXT_OFFSET = "next_offset"
     
 
 class GetCveByIdInput(insightconnect_plugin_runtime.Input):
@@ -53,12 +52,6 @@ class GetCveByIdOutput(insightconnect_plugin_runtime.Output):
         "$ref": "#/definitions/content"
       },
       "order": 1
-    },
-    "next_offset": {
-      "type": "string",
-      "title": "Next Offset",
-      "description": "Next offset",
-      "order": 2
     }
   },
   "required": [
@@ -104,8 +97,8 @@ class GetCveByIdOutput(insightconnect_plugin_runtime.Output):
         },
         "intsightsScore": {
           "type": "integer",
-          "title": "Intsights Score",
-          "description": "Intsights score",
+          "title": "IntSights Score",
+          "description": "IntSights score",
           "order": 6
         },
         "lastMentionDate": {

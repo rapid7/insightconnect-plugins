@@ -72,7 +72,6 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |content|[]content|True|Response content|
-|next_offset|string|False|Next offset|
 
 Example output:
 
