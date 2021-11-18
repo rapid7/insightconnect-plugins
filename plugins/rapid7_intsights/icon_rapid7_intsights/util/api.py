@@ -144,7 +144,7 @@ class IntSightsAPI:
         query_params = {}
         for _ in range(0, 9999):
             if cve_ids:
-                query_params['cveId[]'] = "&cveId[]=".join(cve_ids)
+                query_params["cveId[]"] = "&cveId[]=".join(cve_ids)
 
             local_path = f"{path}"
             if query_params:
@@ -154,10 +154,10 @@ class IntSightsAPI:
                 local_path = local_path[0:-1]
 
             response_cve_list = self.make_json_request("GET", local_path)
-            content.extend(response_cve_list.get('content', []))
+            content.extend(response_cve_list.get("content", []))
 
-            query_params['offset'] = response_cve_list.get('nextOffset', '')
-            if not query_params['offset']:
+            query_params["offset"] = response_cve_list.get("nextOffset", "")
+            if not query_params["offset"]:
                 break
 
         return content
