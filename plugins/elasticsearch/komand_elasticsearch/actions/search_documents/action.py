@@ -20,9 +20,9 @@ class SearchDocuments(insightconnect_plugin_runtime.Action):
 
         if isinstance(query, dict) and query.get("query"):
             raise PluginException(
-                cause="Wrong input 'query'.",
-                assistance="Old query style detected during input. Input shouldn't contain {'query': {'query': ...}}. "
-                "Please refer help for more details or elasticsearch API documentation: "
+                cause="Wrong input query format",
+                assistance="Old query style detected during input. The input shouldn't contain {'query': {'query': ...}}. "
+                "Please refer to the help.md for more details or to the Elasticsearch API documentation: "
                 "https://www.elastic.co/guide/en/elasticsearch/reference/current/query-filter-context.html#query-filter-context-ex",
             )
 
