@@ -360,7 +360,7 @@ This action is used to search Alerts based on criteria.
 |has_indicators|boolean|None|False|Show alerts with IOCs results|None|False|
 |is_closed|string|None|False|Status of the alert, either closed or open|['Closed', 'Open']|Closed|
 |is_flagged|string|None|False|Show flagged/unflagged alerts|['Flagged', 'Unflagged']|Flagged|
-|matched_asset_value|[]string|None|False|List of matched asset values|None|["example.com"]|
+|matched_asset_value|[]string|None|False|List of matched asset values, example. domain name, company name, IP|None|["example.com"]|
 |network_type|[]string|None|False|List of network type. Allowed values: ClearWeb, DarkWeb|None|["DarkWeb"]|
 |remediation_status|[]string|None|False|List of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed|None|["InProgress", "Pending"]|
 |severity|[]string|None|False|List of alerts severity. Allowed values: High, Medium, Low|None|["Low"]|
