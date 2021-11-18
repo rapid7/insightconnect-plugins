@@ -129,6 +129,6 @@ class TestSearchDocuments(TestCase):
         self.assertEqual(
             error.exception.assistance,
             "Old query style detected during input. The input shouldn't contain {'query': {'query': ...}}. "
-                "Please refer to the help.md for more details or to the Elasticsearch API documentation: "
-                "https://www.elastic.co/guide/en/elasticsearch/reference/current/query-filter-context.html#query-filter-context-ex",
+            "Please refer to the help.md for more details or to the Elasticsearch API documentation: "
+            "https://www.elastic.co/guide/en/elasticsearch/reference/current/query-filter-context.html#query-filter-context-ex",
         )
