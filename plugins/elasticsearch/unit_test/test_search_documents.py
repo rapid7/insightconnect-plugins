@@ -125,7 +125,7 @@ class TestSearchDocuments(TestCase):
                 {Input.INDEX: "wrong_object", Input.QUERY: {"query": {"match_all": {}}}, Input.ROUTING: None}
             )
 
-        self.assertEqual(error.exception.cause, "Wrong input 'query'.")
+        self.assertEqual(error.exception.cause, "Wrong input query format")
         self.assertEqual(
             error.exception.assistance,
             "Old query style detected during input. The input shouldn't contain {'query': {'query': ...}}. "
