@@ -12,6 +12,7 @@
 * Get Complete Alert by ID
 * Takedown Request
 * Add Manual Alert
+* Get CVE by ID
 
 # Requirements
 
@@ -45,6 +46,85 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Get CVE by ID
+
+This action is used to get CVE's list from account.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|cve_id|[]string|None|False|Specific CVE IDs|None|["CVE-2020-0711"]|
+
+Example input:
+
+```
+{
+  "cve_id": [
+    "CVE-2020-0711"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|content|[]content|True|Response content|
+
+Example output:
+
+```
+{
+  "content": {
+    "content": [
+      {
+        "cveId": "CVE-2020-7064",
+        "cpe": [
+          {
+            "Value": "cpe:2.3:a:php:php:*:*:*:*:*:*:*:*",
+            "Range": {
+              "VersionStartIncluding": "7.2.0",
+              "VersionEndIncluding": "",
+              "VersionStartExcluding": "",
+              "VersionEndExcluding": "7.2.9"
+            },
+            "Title": "Php",
+            "VendorProduct": "Php Php"
+          }
+        ],
+        "publishedDate": "2020-04-01T04:15:00.000Z",
+        "updateDate": "2021-10-25T10:14:52.978Z",
+        "severity": "Low",
+        "intsightsScore": 36,
+        "cvssScore": 5.4,
+        "mentionsAmount": 39,
+        "mentionsPerSource": {
+          "PasteSite": 0,
+          "HackingForum": 0,
+          "InstantMessage": 0,
+          "DarkWeb": 0,
+          "ClearWebCyberBlogs": 0,
+          "CodeRepositories": 9,
+          "Exploit": 0,
+          "SocialMedia": 30
+        },
+        "firstMentionDate": "2020-03-19T15:09:00.000Z",
+        "lastMentionDate": "2021-07-22T20:41:00.000Z",
+        "exploitAvailability": false,
+        "vulnerabilityOrigin": [
+          "API"
+        ],
+        "relatedThreatActors": [],
+        "relatedMalware": [],
+        "relatedCampaigns": []
+      }
+    ],
+    "nextOffset": null
+  }
+}
+```
 
 #### Add Manual Alert
 
@@ -130,7 +210,9 @@ Example input:
 Example output:
 
 ```
-
+{
+  "status": true
+}
 ```
 
 #### Get Complete Alert by ID
@@ -576,7 +658,6 @@ This action will search indicators in IntSights TIP.
 |----|----|-------|--------|-----------|----|-------|
 |indicator_value|string|None|True|Value of the indicator, example: IP Address, URL, Domain, Hash|None|example.com|
 
-
 Example input:
 
 ```
@@ -731,6 +812,7 @@ _This plugin does not contain any troubleshooting information._
 # Version History
 
 * 1.2.0 - Add new trigger New Alert
+* 1.1.0 - Add new action Get CVE by ID
 * 1.0.0 - Initial plugin
 
 # Links

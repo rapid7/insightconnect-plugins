@@ -44,6 +44,8 @@ def main():
 
             self.add_action(actions.GetCompleteAlertById())
 
+            self.add_action(actions.GetCveById())
+
             self.add_action(actions.GetIndicatorByValue())
 
             self.add_action(actions.GetIndicatorScanStatus())

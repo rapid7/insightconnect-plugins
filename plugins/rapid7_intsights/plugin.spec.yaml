@@ -133,6 +133,170 @@ types:
       description: Related IOCs
       type: "[]string"
       required: false
+  range:
+    VersionEndExcluding:
+      title: Version End Excluding
+      type: string
+      description: Version end excluding
+      required: false
+    VersionEndIncluding:
+      title: Version End Including
+      type: string
+      description: Version end including
+      required: false
+    VersionStartExcluding:
+      title: Version Start Excluding
+      type: string
+      description: Version start excluding
+      required: false
+    VersionStartIncluding:
+      title: Version start including
+      type: string
+      description: Version Start Including
+      required: false
+  cpe:
+    range:
+      title: Range
+      type: range
+      description: Range
+      required: false
+    Title:
+      title: Title
+      type: string
+      description: Title
+      required: false
+    Value:
+      title: Value
+      type: string
+      description: Value
+      required: false
+    VendorProduct:
+      title: Vendor Product
+      type: string
+      description: Vendor product
+      required: false
+  mentionsPerSource:
+    ClearWebCyberBlogs:
+      title: Clear Web Cyber Blogs
+      type: integer
+      description: Clear web cyber blogs
+      required: false
+    CodeRepositories:
+      title: Code Repositories
+      type: integer
+      description: Code repositories
+      required: false
+    DarkWeb:
+      title: Dark Web
+      type: integer
+      description: Dark web
+      required: false
+    Exploit:
+      title: Exploit
+      type: integer
+      description: Exploit
+      required: false
+    HackingForum:
+      title: Hacking Forum
+      type: integer
+      description: Hacking forum
+      required: false
+    InstantMessage:
+      title: Instant Message
+      type: integer
+      description: Instant message
+      required: false
+    PasteSite:
+      title: Paste Site
+      type: integer
+      description: Paste site
+      required: false
+    SocialMedia:
+      title: Social Media
+      type: integer
+      description: Social media
+      required: false
+  content:
+    cveId:
+      title: CVE ID
+      type: string
+      description: CVE ID
+      required: false
+    cpe:
+      title: CPE
+      description: CPE
+      type: '[]cpe'
+      required: false
+    publishedDate:
+      title: Published Date
+      type: string
+      description: Published Date
+      required: false
+    updateDate:
+      title: Update Date
+      type: string
+      description: Update Date
+      required: false
+    severity:
+      title: Severity
+      type: string
+      description: Severity
+      required: false
+    intsightsScore:
+      title: IntSights Score
+      type: integer
+      description: IntSights score
+      required: false
+    cvssScore:
+      title: CVS Score
+      type: float
+      description: CVS score
+      required: false
+    mentionsAmount:
+      title: Mentions Amount
+      type: integer
+      description: Mentions amount
+      required: false
+    mentionsPerSource:
+      title: Mentions Per Source
+      type: mentionsPerSource
+      description: Mentions per source
+      required: false
+    firstMentionDate:
+      title: First Mention Date
+      type: string
+      description: First mention date
+      required: false
+    lastMentionDate:
+      title: Last Mention Date
+      type: string
+      description: Last mention date
+      required: false
+    exploitAvailability:
+      title: Exploit Availability
+      type: boolean
+      description: Exploit availability
+      required: false
+    vulnerabilityOrigin:
+      title: Vulnerability Origin
+      type: "[]string"
+      description: Vulnerability origin
+      required: false
+    relatedThreatActors:
+      title: Related Threat Actors
+      type: "[]string"
+      description: Related threat actors
+      required: false
+    relatedMalware:
+      title: Related Malware
+      type: "[]string"
+      description: Related malware
+      required: false
+    relatedCampaigns:
+      title: Related Campaigns
+      type: "[]string"
+      description: Related campaigns
+      required: false
 connection:
   account_id:
     title: Account ID
@@ -614,6 +778,22 @@ actions:
         title: Alert ID
         description: New created alert ID
         type: string
+        required: true
+  get_cve_by_id:
+    title: Get CVE by ID
+    description: Get CVE's list with a list of IDs from account
+    input:
+      cve_id:
+        title: CVE ID
+        description: Specific CVE IDs
+        type: "[]string"
+        required: false
+        example: ["CVE-2020-0711"]
+    output:
+      content:
+        title: Content
+        description: Response content
+        type: '[]content'
         required: true
 triggers:
   new_alert:
