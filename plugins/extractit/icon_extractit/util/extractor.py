@@ -49,16 +49,15 @@ def extract_content_from_file(provided_file: bytes) -> str:
     with io.BytesIO(provided_file) as f:
         try:
             # extracting content from DOCX, PPTX, XLSX, ODT, ODP, ODF files
-            unzip_files = zipfile.ZipFile(f)
-            files_content = ""
-            x = unzip_files.infolist()
-            for i in enumerate(x):
-                try:
-                    files_content += unzip_files.read(x[i[0]]).decode("utf-8")
-                # After unpacking, may contain images for which the decoding will fail
-                except UnicodeDecodeError:
-                    continue
-            unzip_files.close()
+            with zipfile.ZipFile(f) as unzip_files:
+                files_content = ""
+                x = unzip_files.infolist()
+                for i in enumerate(x):
+                    try:
+                        files_content += unzip_files.read(x[i[0]]).decode("utf-8")
+                    # After unpacking, may contain images for which the decoding will fail
+                    except UnicodeDecodeError:
+                        continue
             # remove xml tags from files content
             return regex.sub(r"<[\p{L}\p{N}\p{Lo}\p{So} :\/.\"=_%,(){}+#&;?-]*>", " ", files_content)
         except zipfile.BadZipFile:
