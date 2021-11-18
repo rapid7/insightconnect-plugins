@@ -138,12 +138,29 @@ class IntSightsAPI:
     def add_manual_alert(self, manual_alert_params: ManualAlertParams) -> str:
         return self.make_request("PUT", "public/v1/data/alerts/add-alert", json_data=manual_alert_params.to_dict()).text
 
-    def get_cve(self, cve_ids: [str]) -> dict:
+    def get_cve(self, cve_ids: [str]) -> list:
+        content = []
         path = "public/v1/cves/get-cves-list"
-        if cve_ids:
-            cve_ids_str = "&cveId[]=".join(cve_ids)
-            path = f"{path}?cveId[]={cve_ids_str}"
-        return self.make_json_request("GET", path)
+        query_params = {}
+        for _ in range(0, 9999):
+            if cve_ids:
+                query_params['cveId[]'] = "&cveId[]=".join(cve_ids)
+
+            local_path = f"{path}"
+            if query_params:
+                local_path = f"{local_path}?"
+                for param in query_params.items():
+                    local_path = f"{local_path}{param[0]}={param[1]}&"
+                local_path = local_path[0:-1]
+
+            response_cve_list = self.make_json_request("GET", local_path)
+            content.extend(response_cve_list.get('content', []))
+
+            query_params['offset'] = response_cve_list.get('nextOffset', '')
+            if not query_params['offset']:
+                break
+
+        return content
 
     def test_credentials(self) -> bool:
         return self.make_request("HEAD", "public/v1/test-credentials").status_code == 200

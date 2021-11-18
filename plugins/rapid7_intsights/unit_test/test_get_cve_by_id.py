@@ -23,6 +23,13 @@ class TestGetCveByID(TestCase):
         self.assertEqual(expected, actual)
 
     @patch("requests.request", side_effect=Util.mock_request)
+    def test_get_cve_with_offset(self, make_request):
+        self.maxDiff = None
+        actual = self.action.run({Input.CVE_ID: ["CVE-2021-7064"]})
+        expected = Util.read_file_to_dict("expecteds/get_cve_by_id_with_offset.json.resp")
+        self.assertEqual(expected, actual)
+
+    @patch("requests.request", side_effect=Util.mock_request)
     def test_get_cve_by_id_with_one_id(self, make_request):
         actual = self.action.run({Input.CVE_ID: ["CVE-2020-7064"]})
         expected = Util.read_file_to_dict("expecteds/get_cve_by_id.json.resp")

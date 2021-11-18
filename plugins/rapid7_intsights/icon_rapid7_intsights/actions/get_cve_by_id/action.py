@@ -12,10 +12,6 @@ class GetCveById(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        response = self.connection.client.get_cve(params.get(Input.CVE_ID, []))
-        return clean(
-            {
-                Output.CONTENT: response.get("content", []),
-                Output.NEXT_OFFSET: response.get("next_offset"),
-            }
-        )
+        return clean({
+            Output.CONTENT: self.connection.client.get_cve(params.get(Input.CVE_ID, []))
+        })

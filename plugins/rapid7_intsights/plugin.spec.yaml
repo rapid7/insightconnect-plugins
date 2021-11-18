@@ -795,8 +795,3 @@ actions:
         description: Response content
         type: '[]content'
         required: true
-      next_offset:
-        title: Next Offset
-        type: string
-        description: Next offset
-        required: false
