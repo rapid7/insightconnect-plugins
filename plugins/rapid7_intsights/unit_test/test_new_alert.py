@@ -70,14 +70,16 @@ class TestNewAlert(TestCase):
     @patch("requests.request", side_effect=Util.mock_request)
     @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=MockTrigger.send)
     def test_trigger(self, mock_request, ss):
-        ErrorChecker.set_expected({
-            "alert_ids": [
-                "7cafac7ec5adaebf62257a4c",
-                "7cafac7ec5adaebf62257a4d",
-                "7cafac7ec5adaebf62257a4e",
-                "7cafac7ec5adaebf62257a4f",
-            ]
-        })
+        ErrorChecker.set_expected(
+            {
+                "alert_ids": [
+                    "7cafac7ec5adaebf62257a4c",
+                    "7cafac7ec5adaebf62257a4d",
+                    "7cafac7ec5adaebf62257a4e",
+                    "7cafac7ec5adaebf62257a4f",
+                ]
+            }
+        )
         self.action.run({Input.IS_CLOSED: "Open"})
 
     @timeout_pass(error_callback=check_error_empty)
@@ -92,7 +94,7 @@ class TestNewAlert(TestCase):
     @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=MockTrigger.send)
     @patch("requests.request", side_effect=Util.mock_request)
     def test_trigger_with_list_of_alert_types(self, make_request, ss):
-        ErrorChecker.set_expected({'alert_ids': ['7cafac7ec5adaebf62257a4a', '7cafac7ec5adaebf62257a4b']})
+        ErrorChecker.set_expected({"alert_ids": ["7cafac7ec5adaebf62257a4a", "7cafac7ec5adaebf62257a4b"]})
         self.action.run({Input.ALERT_TYPE: ["Phishing", "AttackIndication"]})
 
     @timeout_pass(error_callback=ErrorChecker.check_error)
@@ -100,12 +102,14 @@ class TestNewAlert(TestCase):
     @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=MockTrigger.send)
     @patch("requests.request", side_effect=Util.mock_request)
     def test_trigger_with_no_inputs(self, make_request, ss):
-        ErrorChecker.set_expected({
-            'alert_ids': [
-                '7cafac7ec5adaebf62257a4c',
-                '7cafac7ec5adaebf62257a4d',
-                '7cafac7ec5adaebf62257a4e',
-                '7cafac7ec5adaebf62257a4f'
-            ]
-        })
+        ErrorChecker.set_expected(
+            {
+                "alert_ids": [
+                    "7cafac7ec5adaebf62257a4c",
+                    "7cafac7ec5adaebf62257a4d",
+                    "7cafac7ec5adaebf62257a4e",
+                    "7cafac7ec5adaebf62257a4f",
+                ]
+            }
+        )
         self.action.run()
