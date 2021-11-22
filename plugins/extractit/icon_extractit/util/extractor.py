@@ -75,8 +75,6 @@ def extract_content_from_file(provided_file: bytes) -> str:
                     cause="The type of the provided file is not supported.",
                     assistance="Supported file types: PDF, DOCX, PPTX, XLSX, ODT, ODP, ODF",
                 )
-        finally:
-            f.close()
 
 
 def strip_subdomains(matches: list) -> list:
