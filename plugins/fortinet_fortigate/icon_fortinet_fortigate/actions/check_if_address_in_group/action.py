@@ -67,15 +67,18 @@ class CheckIfAddressInGroup(insightconnect_plugin_runtime.Action):
         found = False
         addresses_found = []
         for item in address_objects:
+            item_name = item.get("name")
+            if not item_name:
+                continue
             try:
                 results = self.connection.api.get_address_objects(
-                    endpoint, params={"filter": f"name=@{item.get('name')}"}
+                    endpoint, params={"filter": f"name=@{item_name}"}
                 ).get("results", [])
             except KeyError:
                 raise PluginException(
                     cause="No results were returned by FortiGate.\n",
                     assistance="This is normally caused by an invalid address group name."
-                    " Double check that the address group name is correct",
+                    " Double check that the address group name is correct.",
                 )
             for result in results:
                 result_type = result.get("type")

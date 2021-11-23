@@ -38,13 +38,13 @@ class GetAddressObjects(insightconnect_plugin_runtime.Action):
 
         params = {"filter": filters}
         endpoint = "firewall/address"
-        results = self.connection.api.get_address_objects(endpoint, params).get("results")
+        results = self.connection.api.get_address_objects(endpoint, params).get("results", [])
 
-        for i, result in enumerate(results):
+        for _, result in enumerate(results):
             subnet = result.get("subnet")
             if subnet:
                 subnet = helper.ipmask_converter(subnet)
-                results[i]["subnet"] = subnet
+                results[_]["subnet"] = subnet
 
         ipv6_params = {"filter": ipv6_filters}
         endpoint = "firewall/address6"
