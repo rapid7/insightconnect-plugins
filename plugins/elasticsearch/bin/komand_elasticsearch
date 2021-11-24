@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Elasticsearch"
 Vendor = "rapid7"
-Version = "3.0.1"
+Version = "3.0.2"
 Description = "Distributed Real-Time Search and Analytics Engine"
 
 
