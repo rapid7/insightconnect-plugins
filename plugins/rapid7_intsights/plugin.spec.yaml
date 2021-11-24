@@ -495,7 +495,7 @@ actions:
         example: ["DarkWeb"]
       matched_asset_value:
         title: Matched Asset Value
-        description: List of matched asset values, example. domain name, company name, IP
+        description: List of matched asset values (examples: domain name, company name, IP)
         type: '[]string'
         required: false
         example: ["example.com"]
