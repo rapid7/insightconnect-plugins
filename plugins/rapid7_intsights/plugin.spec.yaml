@@ -248,9 +248,9 @@ types:
       description: IntSights score
       required: false
     cvssScore:
-      title: CVS Score
+      title: CVSS Score
       type: float
-      description: CVS score
+      description: Common Vulnerability Scoring System score
       required: false
     mentionsAmount:
       title: Mentions Amount
