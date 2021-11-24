@@ -820,7 +820,7 @@ triggers:
         example: ["Application Store"]
       network_type:
         title: Network Type
-        description: 'List of network type. Allowed values: ClearWeb, DarkWeb'
+        description: 'List of network types. Allowed values: ClearWeb, DarkWeb'
         type: '[]string'
         required: false
         example: ["DarkWeb"]
