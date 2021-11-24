@@ -4,7 +4,7 @@ products: [insightconnect]
 name: elasticsearch
 title: Elasticsearch
 description: Distributed Real-Time Search and Analytics Engine
-version: 3.0.1
+version: 3.0.2
 supported_versions: ["7.8.1", "6.0.0"]
 vendor: rapid7
 support: community
@@ -391,7 +391,7 @@ actions:
         type: object
         description: JSON Query DSL
         required: false
-        example: '{"query": {"match": {"line_number": {"query": "1.1.1"}}}}'
+        example: '{"match": {"line_number": {"query": "1.1.1"}}}'
     output:
       took:
         title: Took
@@ -448,7 +448,7 @@ triggers:
         type: object
         description: JSON Query DSL
         required: false
-        example: '{"query": {"match": {"line_number": {"query": "1.1.1"}}}}'
+        example: '{"match": {"line_number": {"query": "1.1.1"}}}'
     output:
       hits:
         title: Hits

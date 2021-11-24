@@ -26,7 +26,7 @@ class UuidExtractorInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "File",
       "displayType": "bytes",
-      "description": "Input file as bytes",
+      "description": "Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS",
       "format": "bytes",
       "order": 2
     },

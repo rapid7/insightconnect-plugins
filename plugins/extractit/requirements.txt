@@ -5,3 +5,4 @@ tldextract==3.1.0
 regex==2021.4.4
 validators==0.18.2
 parameterized==0.8.1
+pdfplumber==0.5.28
