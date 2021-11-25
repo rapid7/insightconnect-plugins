@@ -248,9 +248,9 @@ types:
       description: IntSights score
       required: false
     cvssScore:
-      title: CVS Score
+      title: CVSS Score
       type: float
-      description: CVS score
+      description: Common Vulnerability Scoring System score
       required: false
     mentionsAmount:
       title: Mentions Amount
@@ -495,7 +495,7 @@ actions:
         example: ["DarkWeb"]
       matched_asset_value:
         title: Matched Asset Value
-        description: List of matched asset values, example. domain name, company name, IP
+        description: List of matched asset values (examples: domain name, company name, IP)
         type: '[]string'
         required: false
         example: ["example.com"]
@@ -820,13 +820,13 @@ triggers:
         example: ["Application Store"]
       network_type:
         title: Network Type
-        description: 'List of network type. Allowed values: ClearWeb, DarkWeb'
+        description: 'List of network types. Allowed values: ClearWeb, DarkWeb'
         type: '[]string'
         required: false
         example: ["DarkWeb"]
       matched_asset_value:
         title: Matched Asset Value
-        description: List of matched asset values, example. domain name, company name, IP
+        description: 'List of matched asset values. Examples: domain name, company name, IP'
         type: '[]string'
         required: false
         example: ["example.com"]
