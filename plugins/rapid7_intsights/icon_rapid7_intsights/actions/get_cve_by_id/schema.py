@@ -179,6 +179,12 @@ class GetCveByIdOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "cpe",
           "properties": {
+            "Range": {
+              "$ref": "#/definitions/range",
+              "title": "Range",
+              "description": "Range",
+              "order": 1
+            },
             "Title": {
               "type": "string",
               "title": "Title",
@@ -196,12 +202,6 @@ class GetCveByIdOutput(insightconnect_plugin_runtime.Output):
               "title": "Vendor Product",
               "description": "Vendor product",
               "order": 4
-            },
-            "range": {
-              "$ref": "#/definitions/range",
-              "title": "Range",
-              "description": "Range",
-              "order": 1
             }
           },
           "definitions": {
@@ -327,6 +327,12 @@ class GetCveByIdOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "cpe",
       "properties": {
+        "Range": {
+          "$ref": "#/definitions/range",
+          "title": "Range",
+          "description": "Range",
+          "order": 1
+        },
         "Title": {
           "type": "string",
           "title": "Title",
@@ -344,12 +350,6 @@ class GetCveByIdOutput(insightconnect_plugin_runtime.Output):
           "title": "Vendor Product",
           "description": "Vendor product",
           "order": 4
-        },
-        "range": {
-          "$ref": "#/definitions/range",
-          "title": "Range",
-          "description": "Range",
-          "order": 1
         }
       },
       "definitions": {

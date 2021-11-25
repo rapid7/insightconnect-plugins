@@ -155,7 +155,7 @@ types:
       description: Version Start Including
       required: false
   cpe:
-    range:
+    Range:
       title: Range
       type: range
       description: Range
