@@ -1,0 +1,140 @@
+{
+  "parameters": [
+    [
+      "query",
+      "test",
+      null,
+      null,
+      {"message_type": "certificate_update", "data": {"leaf_cert": {"all_domains": ["test.example.com"]}}},
+      {"score": 30, "domain": "test.example.com"}
+    ],
+    [
+      "query2",
+      "example",
+      null,
+      null,
+      {
+	"data": {
+		"cert_index": 1111,
+		"cert_link": "http://example.com",
+		"leaf_cert": {
+			"all_domains": [
+				"login.example.com"
+			],
+			"extensions": {
+				"authorityInfoAccess": "CA Issuers - URI:http://example.com\nOCSP - URI:http://example.com\n",
+				"authorityKeyIdentifier": "keyid:11111\n",
+				"basicConstraints": "CA:FALSE",
+				"certificatePolicies": "Policy: 1.1.1.1.1\n  CPS: http://example.com",
+				"ctlPoisonByte": true,
+				"extendedKeyUsage": "TLS Web server authentication, TLS Web client authentication",
+				"extra": [
+					"1.2.3.4.5"
+				],
+				"keyUsage": "Digital Signature, Key Encipherment",
+				"subjectAltName": "DNS:login.example.com",
+				"subjectKeyIdentifier": "90000"
+			},
+			"fingerprint": "88888",
+			"issuer": {
+				"C": "US",
+				"CN": "(STAGING) Artificial Apricot R3",
+				"L": "None",
+				"O": "(STAGING) Let's Encrypt",
+				"OU": null,
+				"ST": null,
+				"aggregated": "/C=US/CN=(STAGING) Artificial Apricot R3/O=(STAGING) Let's Encrypt",
+				"emailAddress": null
+			},
+			"not_after": 111111111,
+			"not_before": 111111111,
+			"serial_number": "ABCDEFA",
+			"signature_algorithm": "sha256, rsa",
+			"subject": {
+				"C": null,
+				"CN": "login.example.com",
+				"L": null,
+				"O": null,
+				"OU": null,
+				"ST": null,
+				"aggregated": "/CN=login.example.com",
+				"emailAddress": null
+			}
+		},
+		"seen": 1638310252.267204,
+		"source": {
+			"name": "example",
+			"url": "example.com"
+		},
+		"update_type": "PrecertLogEntry"
+	},
+	"message_type": "certificate_update"
+      },
+      {"score": 69, "domain": "login.example.com"}
+    ],
+    [
+      "levenshtein",
+      null,
+      "login.exenpla.com",
+      10,
+      {
+	"data": {
+		"cert_index": 1111,
+		"cert_link": "http://example.com",
+		"leaf_cert": {
+			"all_domains": [
+				"login.example.com"
+			],
+			"extensions": {
+				"authorityInfoAccess": "CA Issuers - URI:http://example.com\nOCSP - URI:http://example.com\n",
+				"authorityKeyIdentifier": "keyid:11111\n",
+				"basicConstraints": "CA:FALSE",
+				"certificatePolicies": "Policy: 1.1.1.1.1\n  CPS: http://example.com",
+				"ctlPoisonByte": true,
+				"extendedKeyUsage": "TLS Web server authentication, TLS Web client authentication",
+				"extra": [
+					"1.2.3.4.5"
+				],
+				"keyUsage": "Digital Signature, Key Encipherment",
+				"subjectAltName": "DNS:login.example.com",
+				"subjectKeyIdentifier": "90000"
+			},
+			"fingerprint": "88888",
+			"issuer": {
+				"C": "US",
+				"CN": "(STAGING) Artificial Apricot R3",
+				"L": "None",
+				"O": "(STAGING) Let's Encrypt",
+				"OU": null,
+				"ST": null,
+				"aggregated": "/C=US/CN=(STAGING) Artificial Apricot R3/O=(STAGING) Let's Encrypt",
+				"emailAddress": null
+			},
+			"not_after": 111111111,
+			"not_before": 111111111,
+			"serial_number": "ABCDEFA",
+			"signature_algorithm": "sha256, rsa",
+			"subject": {
+				"C": null,
+				"CN": "login.example.com",
+				"L": null,
+				"O": null,
+				"OU": null,
+				"ST": null,
+				"aggregated": "/CN=login.example.com",
+				"emailAddress": null
+			}
+		},
+		"seen": 1638310252.267204,
+		"source": {
+			"name": "example",
+			"url": "example.com"
+		},
+		"update_type": "PrecertLogEntry"
+	},
+	"message_type": "certificate_update"
+      },
+      {"score": 69, "domain": "login.example.com"}
+    ]
+  ]
+}
