@@ -9,6 +9,7 @@ from icon_microsoft_teams.util.teams_utils import (
 )
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
 from icon_microsoft_teams.util.words_utils import add_words_values_to_message
+from komand.exceptions import PluginException
 
 
 class SendMessage(komand.Action):
@@ -24,6 +25,7 @@ class SendMessage(komand.Action):
         message = params.get(Input.MESSAGE)
         team = params.get(Input.TEAM_NAME)
         channel = params.get(Input.CHANNEL_NAME)
+        chat_id = params.get(Input.CHAT_ID)
 
         team_id = ""
         channel_id = ""
@@ -36,6 +38,13 @@ class SendMessage(komand.Action):
                 if channels and isinstance(channels, list):
                     channel_id = channels[0].get("id")
 
+        if not chat_id and (not team_id and not channel_id):
+            raise PluginException(
+                cause="No chat ID or team ID with channel ID was provided.",
+                assistance="Please provide the chat ID to send the chat message or the team and channel details(name or"
+                           " GUID) to send the message to a specific channel.",
+            )
+
         message = send_message(
             self.logger,
             self.connection,
@@ -43,7 +52,7 @@ class SendMessage(komand.Action):
             team_id,
             channel_id,
             thread_id=params.get(Input.THREAD_ID, None),
-            chat_id=params.get(Input.CHAT_ID),
+            chat_id=chat_id,
         )
 
         message = remove_null_and_clean(message)

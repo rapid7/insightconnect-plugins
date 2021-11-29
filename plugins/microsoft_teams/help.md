@@ -15,7 +15,7 @@ This plugin uses the [Microsoft Teams API](https://docs.microsoft.com/en-us/grap
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* Microsoft Graph API v1.0 2021-11-28
 
 # Documentation
 

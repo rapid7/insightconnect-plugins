@@ -155,16 +155,10 @@ def send_message(
 
     if chat_id:
         send_message_url = f"https://graph.microsoft.com/beta/chats/{chat_id}/messages"
-    elif team_id and channel_id:
+    else:
         send_message_url = f"https://graph.microsoft.com/beta/teams/{team_id}/channels/{channel_id}/messages"
         if thread_id:
             send_message_url = send_message_url + f"/{thread_id}/replies"
-    else:
-        raise PluginException(
-            cause="No chat ID or team ID with channel ID was provided.",
-            assistance="Please provide the chat ID to send the chat message or the team and channel details(name or "
-            "GUID) to send the message to a specific channel.",
-        )
 
     logger.info(f"Sending message to: {send_message_url}")
     headers = connection.get_headers()
