@@ -70,11 +70,10 @@ Example input:
 |country_name|string|False|Country name|
 |latitude|string|False|Latitude|
 |longitude|string|False|Longitude|
-|metro_code|integer|False|Metro code|
 |region_code|string|False|Region code|
 |region_name|string|False|Region name|
-|time_zone|string|False|Time zone|
-|zip_code|string|False|ZIP code|
+|time_zone|time_zone|False|Time zone information at IP location|
+|zip_code|string|False|ZIP code for current IP lookup|
 
 Example output:
 
