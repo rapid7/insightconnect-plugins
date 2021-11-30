@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import LookupInput, LookupOutput
 
 # Custom imports below
 import json
 
 
-class Lookup(komand.Action):
+class Lookup(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="lookup",
@@ -17,16 +17,20 @@ class Lookup(komand.Action):
     def run(self, params={}):
         token = self.connection.token
         url = "http://api.ipstack.com/" + params["host"] + "?access_key=" + token + "&output=json"
-        resp = komand.helper.open_url(url)
+        resp = insightconnect_plugin_runtime.helper.open_url(url)
         dic = json.loads(resp.read())
 
         # Rename key to fit schema
-        dic["address"] = dic.pop("ip")
+        try:
+            dic["address"] = dic.pop("ip")
+        except KeyError:
+            print(dic)
+            raise KeyError
         # Change types to conform to schema: int -> str
         dic["latitude"] = str(dic["latitude"])
         dic["longitude"] = str(dic["longitude"])
 
-        results = komand.helper.clean_dict(dic)
+        results = insightconnect_plugin_runtime.helper.clean_dict(dic)
         return results
 
     def test(self, params={}):

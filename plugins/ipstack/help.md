@@ -11,6 +11,10 @@
 
 * API Key from the product
 
+# Supported Product Versions
+
+* 2021-11-30T18:50:40Z
+
 # Documentation
 
 ## Setup
@@ -25,7 +29,7 @@ Example input:
 
 ```
 {
-  "api_key": {
+  "cred_token": {
     "secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"
   }
 }
@@ -46,13 +50,13 @@ It accepts a user to query and host (IP or domain) to perform the query.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|host|string|None|True|Host to Lookup|None|rapid7.com|
+|host|string|None|True|Host to Lookup|None|example.com|
 
 Example input:
 
 ```
 {
-  "host": "rapid7.com"
+  "host": "example.com"
 }
 ```
 
