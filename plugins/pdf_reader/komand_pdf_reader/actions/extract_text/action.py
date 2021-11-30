@@ -32,7 +32,4 @@ class ExtractText(insightconnect_plugin_runtime.Action):
                 cause="The provided content is not from the PDF file.",
                 assistance="Please check that the input is correct and try again.",
             )
-        finally:
-            f.close()
-
         return {Output.OUTPUT: pdf_text}
