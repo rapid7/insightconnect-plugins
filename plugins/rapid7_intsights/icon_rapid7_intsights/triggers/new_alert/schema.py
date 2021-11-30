@@ -104,7 +104,7 @@ class NewAlertInput(insightconnect_plugin_runtime.Input):
     "matched_asset_value": {
       "type": "array",
       "title": "Matched Asset Value",
-      "description": "List of matched asset values, example. domain name, company name, IP",
+      "description": "List of matched asset values. Examples: domain name, company name, IP",
       "items": {
         "type": "string"
       },
@@ -113,7 +113,7 @@ class NewAlertInput(insightconnect_plugin_runtime.Input):
     "network_type": {
       "type": "array",
       "title": "Network Type",
-      "description": "List of network type. Allowed values: ClearWeb, DarkWeb",
+      "description": "List of network types. Allowed values: ClearWeb, DarkWeb",
       "items": {
         "type": "string"
       },

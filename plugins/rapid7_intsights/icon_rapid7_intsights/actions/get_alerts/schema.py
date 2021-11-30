@@ -94,7 +94,7 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
     "matched_asset_value": {
       "type": "array",
       "title": "Matched Asset Value",
-      "description": "List of matched asset values, example. domain name, company name, IP",
+      "description": "List of matched asset values (examples: domain name, company name, IP)",
       "items": {
         "type": "string"
       },

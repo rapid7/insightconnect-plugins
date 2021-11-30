@@ -95,23 +95,29 @@ class Util:
             return MockResponse(200, "get_indicator_scan_status.bad")
         elif kwargs.get("url") == "https://api.intsights.com/public/v1/iocs/rescan":
             return MockResponse(200, "rescan_indicator")
+        elif kwargs.get("url") == "https://api.intsights.com/public/v1/cves/get-cves-list" and kwargs.get("params").get(
+            "cveId[]"
+        ) == ["CVE-2020-7064"]:
+            return MockResponse(200, "get_cve_by_id")
+        elif (
+            kwargs.get("url") == "https://api.intsights.com/public/v1/cves/get-cves-list"
+            and kwargs.get("params").get("cveId[]") == ["CVE-2021-7064"]
+            and kwargs.get("params").get("offset") == "2020-08-24T21:47:14.824Z::1f4110cdadb1170007011140"
+        ):
+            return MockResponse(200, "get_cve_by_id")
+        elif kwargs.get("url") == "https://api.intsights.com/public/v1/cves/get-cves-list" and kwargs.get("params").get(
+            "cveId[]"
+        ) == ["CVE-2021-7064"]:
+            return MockResponse(200, "get_cve_by_id_with_offset")
+        elif kwargs.get("url") == "https://api.intsights.com/public/v1/cves/get-cves-list" and kwargs.get("params").get(
+            "cveId[]"
+        ) == ["CVE-2021-3739", "CVE-2020-7064"]:
+            return MockResponse(200, "get_cve_by_ids")
+        elif kwargs.get("url") == "https://api.intsights.com/public/v1/cves/get-cves-list" and kwargs.get("params").get(
+            "cveId[]"
+        ) == ["empty"]:
+            return MockResponse(200, "get_cve_by_id_empty")
         elif kwargs.get("url") == "https://api.intsights.com/public/v1/cves/get-cves-list":
             return MockResponse(200, "get_cve_by_ids")
-        elif kwargs.get("url") == "https://api.intsights.com/public/v1/cves/get-cves-list?cveId[]=CVE-2020-7064":
-            return MockResponse(200, "get_cve_by_id")
-        elif (
-            kwargs.get("url")
-            == "https://api.intsights.com/public/v1/cves/get-cves-list?cveId[]=CVE-2021-7064&offset=2020-08-24T21:47:14.824Z::1f4110cdadb1170007011140"
-        ):
-            return MockResponse(200, "get_cve_by_id")
-        elif kwargs.get("url") == "https://api.intsights.com/public/v1/cves/get-cves-list?cveId[]=CVE-2021-7064":
-            return MockResponse(200, "get_cve_by_id_with_offset")
-        elif (
-            kwargs.get("url")
-            == "https://api.intsights.com/public/v1/cves/get-cves-list?cveId[]=CVE-2021-3739&cveId[]=CVE-2020-7064"
-        ):
-            return MockResponse(200, "get_cve_by_ids")
-        elif kwargs.get("url") == "https://api.intsights.com/public/v1/cves/get-cves-list?cveId[]=empty":
-            return MockResponse(200, "get_cve_by_id_empty")
         else:
             raise NotImplementedError("Not implemented", kwargs)

@@ -79,8 +79,8 @@ class GetCveByIdOutput(insightconnect_plugin_runtime.Output):
         },
         "cvssScore": {
           "type": "number",
-          "title": "CVS Score",
-          "description": "CVS score",
+          "title": "CVSS Score",
+          "description": "Common Vulnerability Scoring System score",
           "order": 7
         },
         "exploitAvailability": {
