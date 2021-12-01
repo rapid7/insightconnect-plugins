@@ -29,7 +29,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Basic Auth username and password|None|{"username":"user1", "password":"mypassword"}|
 |ssl_verify|boolean|True|False|The server's TLS/SSL certificate will be verified before a connection can be established|None|True|
-|url|string|None|True|Elasticsearch URL|None|https://example.com|
+|url|string|None|True|Elasticsearch URL|None|https://www.example.com:9243|
 |use_authentication|boolean|True|True|If the Elasticsearch host does not use authentication set this value to false|None|True|
 
 Example input:
@@ -37,9 +37,9 @@ Example input:
 ```
 {
   "credentials": {
-    "username":"user1",
-    "password":"mypassword"
-    },
+      "username": "user1",
+      "password": "mypassword"
+   },
   "ssl_verify": true,
   "url": "https://www.example.com:9243",
   "use_authentication": true
@@ -165,7 +165,7 @@ This action is used to search for documents.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |index|string|None|True|Document Index|None|shakespeare|
-|query|object|None|False|JSON Query DSL|None|{"query": {"match": {"line_number": {"query": "1.1.1"}}}}|
+|query|object|None|False|JSON Query DSL|None|{"match": {"line_number": {"query": "1.1.1"}}}|
 |routing|string|None|False|Optional Shards to Search|None|user1|
 |type|string|None|False|Document Type|None|doc|
 
@@ -175,17 +175,12 @@ Example input:
 {
   "index": "shakespeare",
   "query": {
-    "query":
-      {
-        "match":
-          {
-            "line_number":
-              {
-                "query": "1.1.1"
-              }
-          }
+    "match": {
+      "line_number": {
+        "query": "1.1.1"
       }
-    },
+    }
+  },
   "routing": "user1",
   "type": "doc"
 }
@@ -316,7 +311,7 @@ This trigger is used to poll for new documents given a query.
 |----|----|-------|--------|-----------|----|-------|
 |frequency|integer|60|False|Poll frequency in seconds|None|60|
 |index|string|None|True|Document Index|None|bank|
-|query|object|None|False|JSON Query DSL|None|{"query": {"match": {"line_number": {"query": "1.1.1"}}}}|
+|query|object|None|False|JSON Query DSL|None|{"match": {"line_number": {"query": "1.1.1"}}}|
 |routing|string|None|False|Optional Shards to Search|None|account|
 |type|string|None|False|Document Type|None|doc|
 
@@ -327,17 +322,12 @@ Example input:
   "frequency": 60,
   "index": "bank",
   "query": {
-    "query":
-      {
-        "match":
-          {
-            "line_number":
-              {
-                "query": "1.1.1"
-              }
-          }
+    "match": {
+      "line_number": {
+        "query": "1.1.1"
       }
-    },
+    }
+  },
   "routing": "account",
   "type": "doc"
 }
@@ -384,6 +374,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.0.2 - Fix search example input in help.md | Add exception message in search action
 * 3.0.1 - Fix issue where Search Documents and Update Documents action returned no results if optional `routing` field was not provided | Update Index Documents action to handle query parameters correctly
 * 3.0.0 - Update to use the `insightconnect-python-3-38-plugin:4` Docker image | Improve error handling | Add `Plugin Exception` | Add `Connection Test` | Add `timeout-decorator` in requirements | Code refactor | Remove input Type from Index Document, Update Document, Search Documents actions and Search Documents trigger | Change inputs name in actions and trigger to not start with `_` | Add `USER nobody` in Dockerfile | Add `api6.py` file for other Elasticsearch version | Add pagination | Add SSL verify
 * 2.0.5 - Updated example inputs and outputs for all the actions

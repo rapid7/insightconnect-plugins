@@ -6,11 +6,17 @@
 
 * Determine if a host is blocked by checking if it's found in an address group applied to a firewall rule
 * Block and unblock hosts from the firewall through object management
+* Block and unblock hosts with the shun command
+* Check which hosts are blocked with the shun command
 
 # Requirements
 
 * Username and Password for an ASA account with the appropriate privilege level for the action
 * Cisco ASA server with the [REST API server enabled](https://www.cisco.com/c/en/us/td/docs/security/asa/api/qsg-asa-api.html)
+
+# Supported Product Versions
+
+* 9.13(1)
 
 # Documentation
 
@@ -51,6 +57,78 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Block Host
+
+This action is used to block hosts by IP address using the shun command.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|destination_ip|string|None|False|Destination IP address|None|198.51.100.100|
+|destination_port|integer|None|False|Destination port|None|443|
+|protocol|string|None|False|IP protocol, for example TCP or UDP|None|TCP|
+|shun|boolean|True|True|True to block a host or false to unblock a host using the shun command|None|True|
+|source_ip|string|None|True|Source IP address you want to block or unblock|None|198.51.100.100|
+|source_port|integer|None|False|Source port|None|443|
+
+Example input:
+
+```
+{
+  "destination_ip": "198.51.100.100",
+  "destination_port": 443,
+  "protocol": "TCP",
+  "shun": true,
+  "source_ip": "198.51.100.100",
+  "source_port": 443
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Whether the block or unblock action was successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Get Blocked Hosts
+
+This action is used to get blocked hosts.
+
+##### Input
+
+_This action does not contain any inputs._
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|hosts|[]hosts|True|List of hosts blocked with shun command|
+
+Example output:
+
+```
+{
+  "hosts": [
+    {
+      "source_ip": "10.1.1.27",
+      "dest_ip": "10.2.2.89",
+      "source_port": "444",
+      "dest_port": "555",
+      "protocol": "6"
+    }
+  ]
+}
+```
 
 #### Create Address Object
 
@@ -254,7 +332,7 @@ _This plugin does not contain any triggers._
 |----|----|--------|-----------|
 |Host|host|False|Host|
 |Kind|string|False|Kind|
-|Name|string|False|Name|
+|Object Name|string|False|The name of the object|
 |Object ID|string|False|Object ID|
 |Self Link|string|False|Self link|
 
@@ -262,8 +340,18 @@ _This plugin does not contain any triggers._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Kind|string|False|Kind|
-|Value|string|False|Value|
+|Kind|string|False|Kind is the type of object e.g. IPv4Address, IPv4FQDN, etc.|
+|Value|string|False|The value of the object. This will be the actual IPv4, IPv6, FQDN, etc. address the object refers to.|
+
+#### hosts
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Destination IP|string|False|Destination IP address|
+|Destination Port|string|False|Destination port|
+|Protocol|string|False|Protocol|
+|Source IP|string|False|Source IP address|
+|Source Port|string|False|Source port|
 
 ## Troubleshooting
 
@@ -271,6 +359,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.5.0 - Add new actions Get Blocked Hosts and Block Host
 * 1.4.2 - Add `docs_url` in plugin spec | Update `source_url` in plugin spec
 * 1.4.1 - Fix None check in actions Add Address to Group and Create Address Object
 * 1.4.0 - Add new action Create Address Object

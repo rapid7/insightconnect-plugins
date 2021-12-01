@@ -1,0 +1,25 @@
+{
+  "data": {
+    "resultIdToElementDataMap": {
+      "-1212949249.-1234563288199313844": {
+        "simpleValues": {
+          "name": {
+            "totalValues": 1,
+            "values": [
+              "hku\\s-1-5-21-3461203602-4096304019-2269080069-1000\\software\\microsoft\\windows\\currentversion\\run\\injectionll.exe"
+            ]
+          }
+        },
+        "elementValues": {
+          "ownerMachine": {
+            "elementValues": [
+              {
+                "guid": "invalid_guid"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

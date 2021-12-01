@@ -1,0 +1,617 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: rapid7_intsights
+title: Rapid7 IntSights
+description: Rapid7 IntSights is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
+version: 1.0.0
+supported_versions: ["2.4.0"]
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_intsights
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://intsights.com/
+tags:
+- rapid7
+- intsights
+- darkweb
+- threatintelligence
+hub_tags:
+  use_cases: [data_utility, threat_detection_and_response]
+  keywords: [threat_intelligence, phishing, remediation, block, malware_analysis]
+  features: []
+types:
+  source:
+    Name:
+      title: Name
+      description: Name
+      type: string
+      required: true
+    ConfidenceLevel:
+      title: Confidence Level
+      description: Level of confidence
+      type: integer
+      required: true
+  image:
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: true
+    data:
+      title: Data
+      description: Data
+      type: string
+      required: true
+  alert_source:
+    Type:
+      title: Type
+      description: Type
+      type: string
+      required: true
+    URL:
+      title: URL
+      description: URL
+      type: string
+      required: true
+    Email:
+      title: Email
+      description: Email
+      type: string
+      required: false
+    NetworkType:
+      title: Network Type
+      description: Network type
+      type: string
+      required: false
+    Date:
+      title: Date
+      description: Date
+      type: string
+      required: false
+  alert_tags:
+    _id:
+      title: ID
+      description: ID
+      type: string
+      required: true
+    Name:
+      title: Name
+      description: Name
+      type: string
+      required: true
+    CreatedBy:
+      title: Created By
+      description: Created by
+      type: string
+      required: true
+  alert_details:
+    Type:
+      title: Type
+      description: Type
+      type: string
+      required: true
+    SubType:
+      title: Sub Type
+      description: Sub type
+      type: string
+      required: true
+    Severity:
+      title: Severity
+      description: Severity
+      type: string
+      required: true
+    Source:
+      title: Source
+      description: Source
+      type: alert_source
+      required: true
+    Title:
+      title: Title
+      description: Title
+      type: string
+      required: true
+    Description:
+      title: Description
+      description: Description
+      type: string
+      required: false
+    Images:
+      title: Images
+      description: Images
+      type: "[]string"
+      required: false
+    Tags:
+      title: Tags
+      description: Tags
+      type: "[]alert_tags"
+      required: false
+    RelatedIocs:
+      title: Related IOCs
+      description: Related IOCs
+      type: "[]string"
+      required: false
+connection:
+  account_id:
+    title: Account ID
+    description: Account ID for IntSights
+    type: string
+    required: true
+    example: 9de5069c5afe602b2ea0a04b
+  api_key:
+    title: API Key
+    description: API key for IntSights
+    type: credential_secret_key
+    required: true
+    example: cc805d5fab1fd71a4ab352a9c533e65fb2d5b885518f4e565e68847223b8e6b85cb48f3afad842726d99239c9e36505c64b0dc9a061d9e507d833277ada336ab
+actions:
+  get_indicator_by_value:
+    title: Get Indicator by Value
+    description: Search indicators in IntSights TIP
+    input:
+      indicator_value:
+        title: Indicator Value
+        description: "Value of the indicator, example: IP Address, URL, Domain, Hash"
+        type: string
+        required: true
+        example: example.com
+    output:
+      value:
+        title: Indicator Value
+        description: Indicator value
+        type: string
+        required: false
+      type:
+        title: Type
+        description: Type
+        type: string
+        required: false
+      severity:
+        title: Severity
+        description: Severity
+        type: string
+        required: false
+      score:
+        title: Score
+        description: Score
+        type: integer
+        required: true
+      whitelist:
+        title: Whitelist
+        description: Whitelist
+        type: boolean
+        required: true
+      first_seen:
+        title: First Seen
+        description: First seen
+        type: string
+        required: false
+      last_seen:
+        title: Last Seen
+        description: Last seen
+        type: string
+        required: false
+      last_update:
+        title: Last Update
+        description: Last update
+        type: string
+        required: false
+      geo_location:
+        title: Geographic Location
+        description: Geographic location
+        type: string
+        required: false
+      sources:
+        title: Sources
+        description: Sources
+        type: '[]source'
+        required: true
+      tags:
+        title: Tags
+        description: Tags
+        type: '[]string'
+        required: true
+      system_tags:
+        title: System Tags
+        description: System tags
+        type: '[]string'
+        required: true
+      related_malware:
+        title: Related Malware
+        description: Related malware
+        type: '[]string'
+        required: true
+      related_campaigns:
+        title: Related Campaigns
+        description: Related campaigns
+        type: '[]string'
+        required: true
+      related_threat_actors:
+        title: Related Threat Actors
+        description: Related threat actors
+        type: '[]string'
+        required: true
+  enrich_indicator:
+    title: Enrich Indicator
+    description: Submit an indicator to IntSights for investigation and return the results
+    input:
+      indicator_value:
+        title: Indicator Value
+        description: "Value of the indicator example: IP Address, URL, Domain, Hash"
+        type: string
+        required: true
+        example: example.com
+    output:
+      original_value:
+        title: Original Value
+        description: Original value
+        type: string
+        required: true
+      status:
+        title: Status
+        description: Status
+        type: string
+        required: true
+      data:
+        title: Data
+        description: Data
+        type: object
+        required: false
+  rescan_indicator:
+    title: Rescan Indicator
+    description: Force an indicator scan in IntSights TIP system
+    input:
+      indicator_file_hash:
+        title: Indicator File Hash
+        description: IOC value in type file hash
+        type: string
+        required: true
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+    output:
+      task_id:
+        title: Task ID
+        description: Task ID
+        type: string
+        required: false
+      status:
+        title: Status
+        description: Status
+        type: string
+        required: false
+  get_indicator_scan_status:
+    title: Get Indicator Scan Status
+    description: Get the scan status of an indicator in the IntSights TIP system
+    input:
+      task_id:
+        title: Task ID
+        description: A string representing the request ID
+        type: string
+        required: true
+        example: 123
+    output:
+      task_id:
+        title: Task ID
+        description: Task ID
+        type: string
+        required: false
+      status:
+        title: Status
+        description: Status
+        type: string
+        required: false
+  get_alerts:
+    title: Get Alerts
+    description: Search alerts based on criteria
+    input:
+      alert_type:
+        title: Alert Type
+        description: 'List of alert types. Allowed values: AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip'
+        type: '[]string'
+        required: false
+        example: ["Phishing"]
+      severity:
+        title: Severity
+        description: 'List of alerts severity. Allowed values: High, Medium, Low'
+        type: '[]string'
+        required: false
+        example: ["Low"]
+      source_type:
+        title: Source Type
+        description: 'List of alerts source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other'
+        type: '[]string'
+        required: false
+        example: ["Application Store"]
+      network_type:
+        title: Network Type
+        description: 'List of network type. Allowed values: ClearWeb, DarkWeb'
+        type: '[]string'
+        required: false
+        example: ["DarkWeb"]
+      matched_asset_value:
+        title: Matched Asset Value
+        description: List of matched asset values
+        type: '[]string'
+        required: false
+        example: ["example.com"]
+      remediation_status:
+        title: Remediation Status
+        description: 'List of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed'
+        type: '[]string'
+        required: false
+        example: ["InProgress", "Pending"]
+      source_date_from:
+        title: Source Date From
+        description: Start date to fetch from in Unix Millisecond Timestamp
+        type: string
+        required: false
+        example: 1633047083142
+      source_date_to:
+        title: Source Date To
+        description: End date to fetch to in Unix Millisecond Timestamp
+        type: string
+        required: false
+        example: 1633047102456
+      found_date_from:
+        title: Found Date From
+        description: Start date to fetch from in Unix Millisecond Timestamp
+        type: string
+        required: false
+        example: 0
+      found_date_to:
+        title: Found Date To
+        description: End date to fetch to in Unix Millisecond Timestamp
+        type: string
+        required: false
+        example: 1633047102456
+      assigned:
+        title: Alert Assignment
+        description: Show assigned/unassigned alerts
+        type: string
+        required: false
+        example: Assigned
+        enum:
+          - Assigned
+          - Unassigned
+      is_flagged:
+        title: Alert Flag Status
+        description: Show flagged/unflagged alerts
+        type: string
+        required: false
+        example: Flagged
+        enum:
+          - Flagged
+          - Unflagged
+      is_closed:
+        title: Closed Status
+        description: Status of the alert, either closed or open
+        type: boolean
+        required: false
+        example: Closed
+        enum:
+          - Closed
+          - Open
+      has_indicators:
+        title: Has Indicators
+        description: Show alerts with IOCs results
+        type: boolean
+        required: false
+        example: false
+    output:
+      alert_ids:
+        title: Alert IDs
+        description: List of alert IDs
+        type: "[]string"
+        required: true
+  get_complete_alert_by_id:
+    title: Get Complete Alert by ID
+    description: Get an alert's complete details for a given alert ID
+    input:
+      alert_id:
+        title: Alert ID
+        description: Alert's unique ID
+        type: string
+        required: true
+        example: 44d88612fea8a8f36de82e12
+    output:
+      id:
+        title: ID
+        description: Alert ID
+        type: string
+        required: false
+      assets:
+        title: Assets
+        description: List of assets
+        type: "[]string"
+        required: true
+      assignees:
+        title: Assignees
+        description: List of assignees
+        type: "[]string"
+        required: true
+      details:
+        title: Details
+        description: Alert details
+        type: alert_details
+        required: true
+      found_date:
+        title: Found Date
+        description: Alert found date
+        type: date
+        required: false
+      update_date:
+        title: Found Date
+        description: Alert update date
+        type: date
+        required: false
+      takedown_status:
+        title: Takedown Status
+        description: Alert remediation status
+        type: string
+        required: false
+      is_closed:
+        title: Is Closed
+        description: Is alert closed
+        type: boolean
+        required: true
+      is_flagged:
+        title: Is Flagged
+        description: Is alert flagged
+        type: boolean
+        required: true
+      leak_name:
+        title: Leak Name
+        description: Name of the leak DBs in data leakage alerts
+        type: string
+        required: false
+  takedown_request:
+    title: Takedown Request
+    description: Request a takedown for a given alert in IntSights
+    input:
+      alert_id:
+        title: Alert ID
+        description: Alert's unique ID
+        type: string
+        required: true
+        example: 44d88612fea8a8f36de82e12
+      target:
+        title: Target
+        description: Target
+        type: string
+        required: true
+        enum:
+          - Website
+          - Domain
+        default: Domain
+        example: Domain
+    output:
+      status:
+        title: Status
+        description: Status from IntSights
+        type: boolean
+        required: true
+  add_manual_alert:
+    title: Add Manual Alert
+    description: Create a manual alert with the provided parameters
+    input:
+      title:
+        title: Title
+        description: Alert title
+        type: string
+        required: true
+        example: New Alert
+      description:
+        title: Description
+        description: Alert description
+        type: string
+        required: true
+        example: Suspicious addresses
+      type:
+        title: Type
+        description: Alert type
+        type: string
+        required: true
+        enum:
+          - AttackIndication
+          - DataLeakage
+          - Phishing
+          - BrandSecurity
+          - ExploitableData
+          - vip
+        example: Phishing
+      sub_type:
+        title: Sub Type
+        description: Alert sub type, needs to correlate with the selected "Type"
+        type: string
+        required: true
+        example: SuspiciousEmailAddress
+      severity:
+        title: Severity
+        description: Alert severity
+        type: string
+        required: true
+        enum:
+          - High
+          - Medium
+          - Low
+        example: Medium
+      source_type:
+        title: Source Type
+        description: Source type
+        type: string
+        required: true
+        enum:
+            - Application Store
+            - Cyber Security Blog
+            - Hacking News
+            - Cyber Crime Forum
+            - Hacktivism Forum
+            - Social Media
+            - Facebook
+            - Twitter
+            - LinkedIn
+            - Google Plus
+            - VK
+            - Vimeo
+            - YouTube
+            - IRC Channel
+            - IOC Block List
+            - Credit Card Black Market
+            - Paste Site
+            - Data Leakage Website
+            - Leaked Database
+            - File Sharing Website
+            - Gray Hat Website
+            - Black Market
+            - WHOIS servers
+            - Company Website
+            - Wikileaks
+            - Pinterest
+            - Tumblr
+            - Instagram
+            - Telegram
+            - Webmail
+            - Malware Analysis
+            - Firehol
+            - VRA
+        example: Webmail
+      source_network_type:
+        title: Source Network Type
+        description: Source network type
+        type: string
+        required: true
+        enum:
+          - ClearWeb
+          - DarkWeb
+        example: DarkWeb
+      source_url:
+        title: Source URL
+        description: Source URL
+        type: string
+        required: true
+        example: https://example.com
+      found_date:
+        title: Found Date
+        description: Alert found date
+        type: string
+        required: false
+        example: 2020-01-01
+      source_date:
+        title: Source Date
+        description: Alert source date
+        type: string
+        required: false
+        example: 2020-02-01
+      images:
+        title: Images
+        description: Alert images
+        type: "[]image"
+        required: false
+        example: '[{"Type": "jpeg","Data": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}]'
+    output:
+      alert_id:
+        title: Alert ID
+        description: New created alert ID
+        type: string
+        required: true

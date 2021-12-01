@@ -16,18 +16,22 @@ class LookupHash(komand.Action):
 
     def normalize(self, result):
         formatted = {"found": False, "threatscore": 0, "reports": []}
-        if result["response_code"]:
+        if result.get("response_code"):
             return formatted
 
-        if result and len(result["response"]) > 0:
+        response = result.get("response", [])
+        if result and len(response) > 0:
             formatted["found"] = True
-            formatted["reports"] = result["response"]
-            formatted["threatscore"] = result["response"][0]["threatscore"]
+            formatted["reports"] = response
+            if response and isinstance(response, list) and response[0] and isinstance(response[0], dict):
+                formatted["threatscore"] = response[0].get("threatscore")
+            else:
+                formatted["threatscore"] = 0
 
         return formatted
 
-    def lookup(self, hash=""):
-        r = self.connection.get(hash)
+    def lookup(self, hash_=""):
+        r = self.connection.get(hash_)
         if r.status_code == 200:
             results = r.json()
             self.logger.debug("Got results %s", results)
@@ -37,9 +41,3 @@ class LookupHash(komand.Action):
     def run(self, params={}):
         """Run action"""
         return self.lookup(params["hash"])
-
-    def test(self):
-        """Test action"""
-        result = self.lookup("040c0111aef474d8b7bfa9a7caa0e06b4f1049c7ae8c66611a53fc2599f0b90f")
-        self.logger.info("Got test result: %s", result)
-        return result

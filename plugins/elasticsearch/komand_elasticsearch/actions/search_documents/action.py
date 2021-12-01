@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import SearchDocumentsInput, SearchDocumentsOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 
@@ -15,7 +16,15 @@ class SearchDocuments(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         index = params.get(Input.INDEX)
-        query = params.get(Input.QUERY)
+        query = params.get(Input.QUERY, {})
+
+        if isinstance(query, dict) and query.get("query"):
+            raise PluginException(
+                cause="Wrong input query format",
+                assistance="Old query style detected during input. The input shouldn't contain {'query': {'query': ...}}. "
+                "Please refer to the help.md for more details or to the Elasticsearch API documentation: "
+                "https://www.elastic.co/guide/en/elasticsearch/reference/current/query-filter-context.html#query-filter-context-ex",
+            )
 
         results = self.connection.client.search_documents(index, query, params.get(Input.ROUTING))
 

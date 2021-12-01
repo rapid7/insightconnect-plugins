@@ -4,7 +4,8 @@ products: [insightconnect]
 name: cybereason
 title: Cybereason
 description: The Cybereason platform provides military-grade cyber security with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin
-version: 2.0.1
+version: 2.1.0
+supported_versions: ["All"]
 vendor: rapid7
 support: rapid7
 status: []
@@ -107,26 +108,26 @@ types:
       description: Field name
       required: false
   actionArguments:
-     yaraName:
-       title: Yara Name
-       type: string
-       description: Yara name
-       required: false
-     machines:
-       title: Machines
-       type: "[]string"
-       description: Machines
-       required: false
-     filters:
-       title: Filters
-       type: "[]filters"
-       description: Filters
-       required: false
-     fileSearchRequestConfiguration:
-       title: File Search Request Configuration
-       type: fileSearchRequestConfiguration
-       description: File search request configuration
-       required: false
+    yaraName:
+      title: Yara Name
+      type: string
+      description: Yara name
+      required: false
+    machines:
+      title: Machines
+      type: "[]string"
+      description: Machines
+      required: false
+    filters:
+      title: Filters
+      type: "[]filters"
+      description: Filters
+      required: false
+    fileSearchRequestConfiguration:
+      title: File Search Request Configuration
+      type: fileSearchRequestConfiguration
+      description: File search request configuration
+      required: false
   stats:
     Aborting:
       title: Aborting
@@ -583,6 +584,34 @@ actions:
         description: Malop ID to associate with the remediation actions
         type: string
         required: false
+        example: "22.2787422324806222966"
+    output:
+      response:
+        title: Malop Response
+        description: Malop response
+        type: remediate_items
+        required: true
+  delete_registry_key:
+    title: Delete Registry Key
+    description: Delete a registry key involved in a Malop
+    input:
+      initiator_user_name:
+        title: Initiator User Name
+        description: Initiator user name
+        type: string
+        required: true
+        example: user@example.com
+      sensor:
+        title: Sensor
+        description: The unique identifier of the machine you wish to perform the quarantine/unquarantine operation on, this can be an internal IPv4 address, hostname or sensor GUID
+        type: string
+        required: true
+        example: "-1632138521.1198775089551518743"
+      malop_id:
+        title: Malop ID
+        description: Malop ID to associate with the remediation actions
+        type: string
+        required: true
         example: "22.2787422324806222966"
     output:
       response:
