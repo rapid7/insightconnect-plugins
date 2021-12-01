@@ -23,10 +23,12 @@ class ExtractText(insightconnect_plugin_runtime.Action):
         try:
             with io.BytesIO(base64.b64decode(params.get(Input.CONTENTS))) as f:
                 pdf_file = pdfplumber.open(f)
-                pages = pdf_file.pages
-                for page in enumerate(pages):
-                    pdf_text += page[1].extract_text().replace("\n", " ")
-                pdf_file.close()
+                try:
+                    pages = pdf_file.pages
+                    for page in enumerate(pages):
+                        pdf_text += page[1].extract_text().replace("\n", " ")
+                finally:
+                    pdf_file.close()
         except PDFSyntaxError:
             raise PluginException(
                 cause="The provided content is not from the PDF file.",
