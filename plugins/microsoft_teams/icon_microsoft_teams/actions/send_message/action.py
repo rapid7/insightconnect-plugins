@@ -42,7 +42,7 @@ class SendMessage(komand.Action):
             raise PluginException(
                 cause="No chat ID or team ID with channel ID was provided.",
                 assistance="Please provide the chat ID to send the chat message or the team and channel details(name or"
-                           " GUID) to send the message to a specific channel.",
+                " GUID) to send the message to a specific channel.",
             )
 
         message = send_message(
