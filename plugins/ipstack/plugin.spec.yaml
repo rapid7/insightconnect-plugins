@@ -4,7 +4,7 @@ products: [insightconnect]
 name: ipstack
 title: IPStack
 description: Lookup geographical information for a host
-version: 2.0.0
+version: 3.0.0
 vendor: rapid7
 support: community
 status: []

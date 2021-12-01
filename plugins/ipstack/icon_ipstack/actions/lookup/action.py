@@ -72,5 +72,5 @@ class Lookup(insightconnect_plugin_runtime.Action):
         results = insightconnect_plugin_runtime.helper.clean_dict(dic)
         return results
 
-    def test(self, params={}): #pylint: disable=unused-argument
+    def test(self, params={}):  # pylint: disable=unused-argument
         return {}
