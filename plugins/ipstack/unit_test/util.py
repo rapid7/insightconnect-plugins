@@ -6,8 +6,8 @@ from icon_ipstack.connection.schema import Input
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-class Util:
 
+class Util:
     @staticmethod
     def read_file_to_string(filename):
         with open(filename, "rt") as my_file:
@@ -24,7 +24,9 @@ class Util:
                     raise PluginException(preset=PluginException.Preset.SERVER_ERROR)
                 if self.filename == "empty":
                     return {}
-                file_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "example_output", f"{self.filename}.json.resp")
+                file_path = os.path.join(
+                    os.path.dirname(os.path.realpath(__file__)), "example_output", f"{self.filename}.json.resp"
+                )
                 file_text = Util.read_file_to_string(file_path)
                 return file_text
 
@@ -49,7 +51,6 @@ class Util:
         else:
             return MockResponse("error")
 
-
     @staticmethod
     def default_connector(action, connect_params: object = None):
         default_connection = Connection()
@@ -57,11 +58,7 @@ class Util:
         if connect_params:
             params = connect_params
         else:
-            params = {
-                Input.CRED_TOKEN: {
-                    "secretKey": "ExampleAuthToken"
-                }
-            }
+            params = {Input.CRED_TOKEN: {"secretKey": "ExampleAuthToken"}}
         default_connection.connect(params)
         action.connection = default_connection
         action.logger = logging.getLogger("action logger")

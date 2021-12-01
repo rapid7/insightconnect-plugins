@@ -9,8 +9,8 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
-class TestLookup(TestCase):
 
+class TestLookup(TestCase):
     @classmethod
     @patch("insightconnect_plugin_runtime.helper.open_url", side_effect=Util.mocked_requests_get)
     def setUpClass(cls, mock_request) -> None:
@@ -35,19 +35,13 @@ class TestLookup(TestCase):
                 "country_flag_emoji_unicode": "U+1F1FA U+1F1F8",
                 "geoname_id": 4140463,
                 "is_eu": False,
-                "languages": [
-                    {
-                        "code": "en",
-                        "name": "English",
-                        "native": "English"
-                    }
-                ]
+                "languages": [{"code": "en", "name": "English", "native": "English"}],
             },
             "longitude": "-77.02839660644531",
             "region_code": "DC",
             "region_name": "Washington",
             "type": "ipv4",
-            "zip": "20026"
+            "zip": "20026",
         }
         self.assertEqual(actual, expected)
 
@@ -70,37 +64,28 @@ class TestLookup(TestCase):
             "location": {
                 "geoname_id": 4930956,
                 "capital": "Washington D.C.",
-                "languages": [
-                    {
-                        "code": "en",
-                        "name": "English",
-                        "native": "English"
-                    }
-                ],
+                "languages": [{"code": "en", "name": "English", "native": "English"}],
                 "country_flag": "https://assets.ipstack.com/images/assets/flags_svg/us.svg",
                 "country_flag_emoji": "🇺🇸",
                 "country_flag_emoji_unicode": "U+1F1FA U+1F1F8",
                 "calling_code": "1",
-                "is_eu": False
+                "is_eu": False,
             },
             "time_zone": {
                 "id": "America/New_York",
                 "current_time": "2018-03-30T07:54:25-04:00",
                 "gmt_offset": -14400,
                 "code": "EDT",
-                "is_daylight_saving": True
+                "is_daylight_saving": True,
             },
             "currency": {
                 "code": "USD",
                 "name": "US Dollar",
                 "plural": "US dollars",
                 "symbol": "$",
-                "symbol_native": "$"
+                "symbol_native": "$",
             },
-            "connection": {
-                "asn": 40127,
-                "isp": "Longwood Medical and Academic Area (LMA)"
-            }
+            "connection": {"asn": 40127, "isp": "Longwood Medical and Academic Area (LMA)"},
         }
         self.assertEqual(actual, expected)
 
@@ -134,7 +119,6 @@ class TestLookup(TestCase):
         expected = "The access key is blank or invalid"
         self.assertEqual(exc.exception.cause, expected)
         self.action.connection.token = temp
-
 
     @patch("insightconnect_plugin_runtime.helper.open_url", side_effect=Util.mocked_requests_get)
     def test_lookup_limit_hit(self, mock_request):
@@ -170,4 +154,3 @@ class TestLookup(TestCase):
             self.action.run({Input.HOST: "server_error"})
         expected = PluginException(preset=PluginException.Preset.SERVER_ERROR)
         self.assertEqual(exc.exception.cause, expected.cause)
-
