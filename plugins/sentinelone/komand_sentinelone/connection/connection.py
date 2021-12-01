@@ -174,7 +174,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         # API v2.0 and 2.1 have different responses -- revert to 2.0
         threats = self._call_api("GET", first_page_endpoint, override_api_version="2.0")
         all_threads_data = threats["data"]
-        next_cursor = threats["pagination"]["nextCursor"]
+        next_cursor = threats.get("pagination", {}).get("nextCursor")
 
         while next_cursor:
             next_threats = self._call_api(
@@ -212,7 +212,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 }
             ]
         }
-        response = self._call_api("POST", "private/threats/ioc-create-threats", body)
+        response = self._call_api("POST", "private/threats/ioc-create-threats", body, full_response=True)
 
         return response.json()["data"]["affected"]
 
