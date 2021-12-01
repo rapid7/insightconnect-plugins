@@ -391,7 +391,7 @@ actions:
         type: string
         required: false
         order: 4
-        example: 19:209856c0f3f847a28431deb8eb300807@thread.v2
+        example: 19:209856c0f3f847a28431deb8eb300807_thread.v2
       message:
         title: Message
         description: Message to send

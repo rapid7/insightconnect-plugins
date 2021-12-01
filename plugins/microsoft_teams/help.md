@@ -129,7 +129,7 @@ Regular expressions used by this action are Python specific.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |channel_name|string|None|False|Channel|None|InsightConnect Channel|
-|chat_id|string|None|False|The ID of the chat|None|19:209856c0f3f847a28431deb8eb300807@thread.v2|
+|chat_id|string|None|False|The ID of the chat|None|19:209856c0f3f847a28431deb8eb300807_thread.v2|
 |message|string|None|True|Message to send|None|Hello!|
 |team_name|string|None|False|Team name|None|InsightConnect Team|
 |thread_id|string|None|False|To post in a thread, select parent message ID|None|1595889908700|
@@ -139,7 +139,7 @@ Example input:
 ```
 {
   "channel_name": "InsightConnect Channel",
-  "chat_id": "19:209856c0f3f847a28431deb8eb300807@thread.v2",
+  "chat_id": "19:209856c0f3f847a28431deb8eb300807_thread.v2",
   "message": "Hello!",
   "team_name": "InsightConnect Team",
   "thread_id": 1595889908700
