@@ -106,16 +106,16 @@ class TestLookup(TestCase):
 
     @patch("insightconnect_plugin_runtime.helper.open_url", side_effect=Util.mocked_requests_get)
     def test_lookup_bad_auth(self, mock_request):
+        expected = "The access key is blank or invalid"
         with self.assertRaises(PluginException) as exc:
             self.action.run({Input.HOST: "unauthorized_user"})
-        expected = "The access key is blank or invalid"
         self.assertEqual(exc.exception.cause, expected)
 
     @patch("insightconnect_plugin_runtime.helper.open_url", side_effect=Util.mocked_requests_get)
     def test_lookup_bad_input(self, mock_request):
+        expected = "The supplied host address/domain is invalid"
         with self.assertRaises(PluginException) as exc:
             self.action.run({Input.HOST: "rapid7.typocom"})
-        expected = "The supplied host address/domain is invalid"
         self.assertEqual(exc.exception.cause, expected)
 
     @patch("insightconnect_plugin_runtime.helper.open_url", side_effect=Util.mocked_requests_get)
@@ -127,11 +127,14 @@ class TestLookup(TestCase):
 
     @patch("insightconnect_plugin_runtime.helper.open_url", side_effect=Util.mocked_requests_get)
     def test_lookup_bad_access_key(self, mock_request):
+        temp = self.action.connection.token
         with self.assertRaises(PluginException) as exc:
             self.action.connection.token = "BADTOKEN"
             self.action.run({Input.HOST: "rapid7.typocom"})
         expected = "The access key is blank or invalid"
         self.assertEqual(exc.exception.cause, expected)
+        self.action.connection.token = temp
+
 
     @patch("insightconnect_plugin_runtime.helper.open_url", side_effect=Util.mocked_requests_get)
     def test_lookup_limit_hit(self, mock_request):
