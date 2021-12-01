@@ -1,0 +1,8 @@
+{
+	"success": false,
+	"error": {
+		"code": 106,
+		"type": "invalid_ip_address",
+		"info": "The IP Address supplied is invalid."
+	}
+}
