@@ -17,7 +17,7 @@ class Lookup(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         token = self.connection.token
-        url = "http://api.ipstack.com/test/" + params["host"] + "/test/?access_key=" + token + "&output=json"
+        url = "http://api.ipstack.com/" + params["host"] + "?access_key=" + token + "&output=json"
         resp = insightconnect_plugin_runtime.helper.open_url(url)
         dic = json.loads(resp.read())
 
