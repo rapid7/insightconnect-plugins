@@ -244,7 +244,7 @@ types:
       required: false
     intsightsScore:
       title: IntSights Score
-      type: integer
+      type: float
       description: IntSights score
       required: false
     cvssScore:
@@ -340,7 +340,7 @@ actions:
       score:
         title: Score
         description: Score
-        type: integer
+        type: float
         required: true
       whitelist:
         title: Whitelist

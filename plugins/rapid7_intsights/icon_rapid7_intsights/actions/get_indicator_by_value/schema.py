@@ -110,7 +110,7 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
       "order": 15
     },
     "score": {
-      "type": "integer",
+      "type": "number",
       "title": "Score",
       "description": "Score",
       "order": 4

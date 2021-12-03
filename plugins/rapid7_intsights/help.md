@@ -677,7 +677,7 @@ Example input:
 |related_campaigns|[]string|True|Related campaigns|
 |related_malware|[]string|True|Related malware|
 |related_threat_actors|[]string|True|Related threat actors|
-|score|integer|True|Score|
+|score|float|True|Score|
 |severity|string|False|Severity|
 |sources|[]source|True|Sources|
 |system_tags|[]string|True|System tags|

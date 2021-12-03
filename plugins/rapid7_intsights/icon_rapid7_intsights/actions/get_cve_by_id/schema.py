@@ -96,7 +96,7 @@ class GetCveByIdOutput(insightconnect_plugin_runtime.Output):
           "order": 10
         },
         "intsightsScore": {
-          "type": "integer",
+          "type": "number",
           "title": "IntSights Score",
           "description": "IntSights score",
           "order": 6
