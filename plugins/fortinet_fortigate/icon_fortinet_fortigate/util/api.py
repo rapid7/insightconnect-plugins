@@ -53,7 +53,7 @@ class FortigateAPI:
     def delete_address_object(self, endpoint: str):
         return self.call_api(endpoint, "DELETE")
 
-    def get_address_group(self, address_group_name, is_ipv6):
+    def get_address_group(self, address_group_name: str, is_ipv6: bool):
         endpoint = "firewall/addrgrp"
 
         if is_ipv6:
@@ -76,7 +76,7 @@ class FortigateAPI:
 
         return groups[0]
 
-    def get_address_object(self, address_name):
+    def get_address_object(self, address_name: str):
         try:
             response_ipv4 = self.call_api(path=f"firewall/address/{address_name}")
             if response_ipv4.get("http_status") == 200:
@@ -94,7 +94,7 @@ class FortigateAPI:
             data=response_ipv6,
         )
 
-    def get_address_objects(self, endpoint, params):
+    def get_address_objects(self, endpoint: str, params: dict):
         return self.call_api(endpoint, params=params)
 
     def get_policies(self, params: dict):

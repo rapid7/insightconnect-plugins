@@ -18,8 +18,7 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         host = params.get(Input.ADDRESS)
-        name = params.get(Input.ADDRESS_OBJECT, "")
-        name = name if name else host
+        name = params.get(Input.ADDRESS_OBJECT) or host
         whitelist = params.get(Input.WHITELIST)
         skip_rfc1918 = params.get(Input.SKIP_RFC1918)
         helper = Helpers(self.logger)
@@ -29,6 +28,8 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
         if address_type in ("ipmask", "ipprefix"):
             host = helper.ipmask_converter(host)
 
+        # skip private addresses - first we check if the given address is IPv4(ipmask) or IPv6(ipprefix), then we check
+        # if we want to skip private addresses(skip_rfc1918), and finally if the given address is private
         if address_type in ("ipmask", "ipprefix") and skip_rfc1918 is True and ipaddress.ip_network(host).is_private:
             return {
                 Output.SUCCESS: False,
