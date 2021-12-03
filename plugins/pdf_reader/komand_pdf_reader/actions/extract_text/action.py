@@ -31,7 +31,7 @@ class ExtractText(insightconnect_plugin_runtime.Action):
                     pdf_file.close()
         except PDFSyntaxError:
             raise PluginException(
-                cause="The provided content is not from the PDF file.",
+                cause="The provided content is not in PDF file format.",
                 assistance="Please check that the input is correct and try again.",
             )
         return {Output.OUTPUT: pdf_text}
