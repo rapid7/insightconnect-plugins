@@ -489,8 +489,8 @@ This action is used to start a Deep Visibility Query and get the queryId. You ca
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |account_ids|[]string|None|False|List of account IDs to filter by|None|["225494730938491234", "225494730938491235"]|
-|from_date|string|None|True|From date|None|2021-03-01 04:49:26.257525+00:00|
-|to_date|string|None|True|Events created before or at this timestamp|None|2021-03-20 04:49:26.257525+00:00|
+|from_date|string|None|True|From date|None|2021-03-01 04:49:26.257525|
+|to_date|string|None|True|Events created before or at this timestamp|None|2021-03-20 04:49:26.257525|
 |group_ids|[]string|None|False|List of group IDs to filter by|None|["225494730938491234", "225494730938491235"]|
 |is_verbose|boolean|None|False|Show all fields or just priority fields|None|True|
 |limit|integer|None|False|Limit number of returned items (1-20000)|None|10|
