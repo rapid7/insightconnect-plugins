@@ -30,8 +30,7 @@ class TestThreatsFetchFile(TestCase):
 
         self.assertEqual("Wrong password.", error.exception.cause)
         self.assertEqual(
-            "Password must have more than 10 characters and cannot contain whitespace.",
-            error.exception.assistance
+            "Password must have more than 10 characters and cannot contain whitespace.", error.exception.assistance
         )
 
     @patch("requests.post", side_effect=Util.mocked_requests_get)
@@ -47,6 +46,5 @@ class TestThreatsFetchFile(TestCase):
 
         self.assertEqual("Wrong password.", error.exception.cause)
         self.assertEqual(
-            "Password must have more than 10 characters and cannot contain whitespace.",
-            error.exception.assistance
+            "Password must have more than 10 characters and cannot contain whitespace.", error.exception.assistance
         )

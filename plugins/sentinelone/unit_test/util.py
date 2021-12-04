@@ -87,7 +87,7 @@ class Util:
             return MockResponse("get_agent_details_partially_disabled", 200)
         elif args[0] == "https://rapid7.com/web/api/v2.1/agents?computerName=hostname_disabled_error":
             return MockResponse("get_agent_details_disabled_error", 200)
-        elif args[1] == 'https://rapid7.com/web/api/v2.1/threats/fetch-file':
+        elif args[1] == "https://rapid7.com/web/api/v2.1/threats/fetch-file":
             return MockResponse("activities_list", 200)
         elif args[1] == "https://rapid7.com/web/api/v2.1/activities":
             return MockResponse("activities_list", 200)
