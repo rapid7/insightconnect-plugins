@@ -67,6 +67,8 @@ class Util:
             return MockResponse("get_token", 200)
         elif args[0] == "https://rapid7.com/web/api/v2.1/agents?networkInterfaceInet__contains=10.10.10.10":
             return MockResponse("none_in_location", 200)
+        elif args[0] == "https://rapid7.com/web/api/v2.1/agents?networkInterfaceInet__contains=10.10.10.11":
+            return MockResponse("good_response", 200)
         elif args[0] == "https://rapid7.com/web/api/v2.1/agents?externalIp__contains=10.10.10.10":
             return MockResponse("none_in_location", 404)
         elif args[0] == "https://rapid7.com/web/api/v2.1/agents?externalIp__contains=10.10.10.11":
@@ -85,6 +87,8 @@ class Util:
             return MockResponse("get_agent_details_partially_disabled", 200)
         elif args[0] == "https://rapid7.com/web/api/v2.1/agents?computerName=hostname_disabled_error":
             return MockResponse("get_agent_details_disabled_error", 200)
+        elif args[1] == 'https://rapid7.com/web/api/v2.1/threats/fetch-file':
+            return MockResponse("activities_list", 200)
         elif args[1] == "https://rapid7.com/web/api/v2.1/activities":
             return MockResponse("activities_list", 200)
         elif args[1] == "https://rapid7.com/web/api/v2.1/activities/types":
