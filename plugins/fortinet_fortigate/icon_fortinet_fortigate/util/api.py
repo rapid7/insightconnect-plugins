@@ -82,8 +82,7 @@ class FortigateAPI:
             if response_ipv4.get("http_status") == 200:
                 return response_ipv4
         except PluginException:
-            self.logger.info(f"The specified object {address_name} was not found in the IPv4 objects.")
-            pass
+            self.logger.info(f"The specified object {address_name} was not found in domain and IPv4 address objects.")
 
         response_ipv6 = self.call_api(path=f"firewall/address6/{address_name}")
         if response_ipv6.get("http_status") == 200:
