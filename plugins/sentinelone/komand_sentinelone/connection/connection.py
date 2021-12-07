@@ -158,14 +158,15 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
                 return {
                     "filename": file_name,
-                    "content": base64.b64encode(downloaded_zipfile.read(downloaded_zipfile.infolist()[-1])).decode("utf-8"),
+                    "content": base64.b64encode(downloaded_zipfile.read(downloaded_zipfile.infolist()[-1])).decode(
+                        "utf-8"
+                    ),
                 }
         except KeyError:
             raise PluginException(
                 cause="An error occurred when trying to download file.",
                 assistance="Please contact support or try again later.",
             )
-
 
     def threats_fetch_file(self, password: str, agents_filter: dict) -> int:
         self.get_auth_token(self.url, self.username, self.password)
