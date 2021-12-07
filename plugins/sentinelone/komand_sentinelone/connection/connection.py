@@ -163,7 +163,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         except KeyError:
             raise PluginException(
                 cause="An error occurred when trying to download file.",
-                assistance=f"Please contact support or try again later.",
+                assistance="Please contact support or try again later.",
             )
 
 
