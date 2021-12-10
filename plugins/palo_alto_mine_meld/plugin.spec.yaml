@@ -4,7 +4,8 @@ products: [insightconnect]
 name: palo_alto_mine_meld
 title: Palo Alto MineMeld
 description: Palo Alto MineMeld is an open-source application that streamlines the aggregation, enforcement and sharing of threat intelligence
-version: 1.0.0
+version: 1.0.1
+supported_versions: ["0.9.70"]
 vendor: rapid7
 support: rapid7
 status: []
@@ -13,7 +14,7 @@ tags:
 - mine_meld
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [palo alto, mine meld]
+  keywords: [palo_alto]
   features: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/palo_alto_mine_meld
@@ -74,6 +75,7 @@ actions:
         - Add
         - Remove
         default: Add
+        example: Add
         required: false
     output:
       success:

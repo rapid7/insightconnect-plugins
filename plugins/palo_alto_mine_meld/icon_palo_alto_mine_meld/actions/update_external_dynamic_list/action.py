@@ -40,6 +40,7 @@ class UpdateExternalDynamicList(insightconnect_plugin_runtime.Action):
         }
 
     def _add_indicator(self, indicators_list: list, indicator: str, list_name: str):
+        indicator_type = self._get_indicator_type(indicator)
         updated_indicators_list = indicators_list.copy()
         for list_indicator in indicators_list:
             if list_indicator.get("indicator") == indicator:
@@ -48,7 +49,7 @@ class UpdateExternalDynamicList(insightconnect_plugin_runtime.Action):
                     assistance=f"Indicator already exists in {list_name}.",
                 )
 
-        updated_indicators_list.append({"indicator": indicator, "type": self._get_indicator_type(indicator)})
+        updated_indicators_list.append({"indicator": indicator, "type": indicator_type})
 
         return updated_indicators_list
 
@@ -74,5 +75,9 @@ class UpdateExternalDynamicList(insightconnect_plugin_runtime.Action):
             return "IPv6"
         elif validators.url(indicator):
             return "URL"
-
-        return "domain"
+        elif validators.domain(indicator):
+            return "domain"
+        raise PluginException(
+            cause=f"The provided indicator {indicator} is invalid.",
+            assistance="The provided indicator must be a domain, IPv4 address, IPv6 address, or URL.",
+        )
