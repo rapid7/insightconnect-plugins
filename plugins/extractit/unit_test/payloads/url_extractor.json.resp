@@ -2,13 +2,14 @@
   "parameters": [
     [
       "from_string",
-      "test http://userid:password@example.com:8080/ http://www.example.com/wpstyle/?p=364 http://www.example.com http://例子.测试 http://example.com/auth/?=UserID&amp;userid=user@example.com www.example.com/awdawd/ www.example.com example.com",
+      "test http://userid:password@example.com:8080/ http://www.example.com/wpstyle/?p=364 http://www.example.com http://例子.测试 http://example.com/auth/?=UserID&amp;userid=user@example.com www.example.com/awdawd/ www.example.com example.com https://test.com/test/!test",
       null,
       [
         "http://userid:password@example.com:8080/",
         "http://www.example.com/wpstyle/?p=364",
         "http://www.example.com",
-        "http://example.com/auth/?=UserID&amp"
+        "http://example.com/auth/?=UserID&amp",
+        "https://test.com/test/!test"
       ]
     ],
     [
