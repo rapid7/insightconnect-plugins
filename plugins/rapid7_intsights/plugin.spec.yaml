@@ -150,7 +150,7 @@ types:
       description: Version start excluding
       required: false
     VersionStartIncluding:
-      title: Version start including
+      title: Version Start Including
       type: string
       description: Version start including
       required: false
