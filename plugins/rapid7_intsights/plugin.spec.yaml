@@ -513,7 +513,7 @@ actions:
         example: 1633047083142
       source_date_to:
         title: Source Date To
-        description: End date (when the event occured) to fetch to in Unix Millisecond Timestamp
+        description: End date (when the event occurred) to fetch to in Unix Millisecond Timestamp
         type: string
         required: false
         example: 1633047102456
