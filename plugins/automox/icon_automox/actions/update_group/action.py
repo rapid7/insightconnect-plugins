@@ -14,7 +14,8 @@ class UpdateGroup(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         # Retrieve current group settings to be used as fallback if not provided as input
-        current_group_settings = self.current_group_settings(params.get(Input.ORG_ID), params.get(Input.GROUP_ID))
+        current_group_settings = self.connection.automox_api.get_group(params.get(Input.ORG_ID),
+                                                                       params.get(Input.GROUP_ID))
 
         payload = {
             "name": params.get(Input.NAME, current_group_settings["name"]),
@@ -30,9 +31,3 @@ class UpdateGroup(insightconnect_plugin_runtime.Action):
         self.connection.automox_api.update_group(params.get(Input.ORG_ID), params.get(Input.GROUP_ID), payload)
 
         return {Output.SUCCESS: True}
-
-    def current_group_settings(self, org_id, group_id):
-        # Get Current Group Settings for defaults
-        for group in self.connection.automox_api.get_groups(org_id, False):
-            if group_id == group.get("id"):
-                return group

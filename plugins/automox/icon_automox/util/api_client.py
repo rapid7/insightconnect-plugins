@@ -167,6 +167,9 @@ class ApiClient:
         return self._sanitize_policies(policies)
 
     # Device Groups
+    def get_group(self, org_id: int, group_id: int) -> Dict:
+        return self._call_api("GET", f"{self.endpoint}/servergroups/{group_id}", params=self._org_param(org_id))
+
     def get_groups(self, org_id: int, sanitize: bool = True) -> List[Dict]:
         """
         Retrieve Automox groups
