@@ -878,6 +878,7 @@ triggers:
         enum:
           - Flagged
           - Unflagged
+          - ""
       is_closed:
         title: Closed Status
         description: Status of the alert, either closed or open
