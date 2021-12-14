@@ -230,7 +230,7 @@ types:
     publishedDate:
       title: Published Date
       type: string
-      description: Published Date
+      description: Published date
       required: false
     updateDate:
       title: Update Date
