@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get CVE's list with a list of IDs from account"
+    DESCRIPTION = "Get a list of CVE's with a list of IDs from an account"
 
 
 class Input:
@@ -122,7 +122,7 @@ class GetCveByIdOutput(insightconnect_plugin_runtime.Output):
         "publishedDate": {
           "type": "string",
           "title": "Published Date",
-          "description": "Published Date",
+          "description": "Published date",
           "order": 3
         },
         "relatedCampaigns": {
@@ -161,7 +161,7 @@ class GetCveByIdOutput(insightconnect_plugin_runtime.Output):
         "updateDate": {
           "type": "string",
           "title": "Update Date",
-          "description": "Update Date",
+          "description": "Update date",
           "order": 4
         },
         "vulnerabilityOrigin": {
@@ -229,8 +229,8 @@ class GetCveByIdOutput(insightconnect_plugin_runtime.Output):
                 },
                 "VersionStartIncluding": {
                   "type": "string",
-                  "title": "Version start including",
-                  "description": "Version Start Including",
+                  "title": "Version Start Including",
+                  "description": "Version start including",
                   "order": 4
                 }
               }
@@ -315,8 +315,8 @@ class GetCveByIdOutput(insightconnect_plugin_runtime.Output):
             },
             "VersionStartIncluding": {
               "type": "string",
-              "title": "Version start including",
-              "description": "Version Start Including",
+              "title": "Version Start Including",
+              "description": "Version start including",
               "order": 4
             }
           }
@@ -377,8 +377,8 @@ class GetCveByIdOutput(insightconnect_plugin_runtime.Output):
             },
             "VersionStartIncluding": {
               "type": "string",
-              "title": "Version start including",
-              "description": "Version Start Including",
+              "title": "Version Start Including",
+              "description": "Version start including",
               "order": 4
             }
           }
@@ -463,8 +463,8 @@ class GetCveByIdOutput(insightconnect_plugin_runtime.Output):
         },
         "VersionStartIncluding": {
           "type": "string",
-          "title": "Version start including",
-          "description": "Version Start Including",
+          "title": "Version Start Including",
+          "description": "Version start including",
           "order": 4
         }
       }

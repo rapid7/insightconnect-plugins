@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Runs when a new alert that matches the given criteria is created in IntSights"
+    DESCRIPTION = "Triggers when a new alert that matches the given criteria is created in IntSights"
 
 
 class Input:
@@ -52,7 +52,8 @@ class NewAlertInput(insightconnect_plugin_runtime.Input):
       "description": "Show assigned/unassigned alerts",
       "enum": [
         "Assigned",
-        "Unassigned"
+        "Unassigned",
+        ""
       ],
       "order": 11
     },
@@ -87,7 +88,8 @@ class NewAlertInput(insightconnect_plugin_runtime.Input):
       "description": "Status of the alert, either closed or open",
       "enum": [
         "Closed",
-        "Open"
+        "Open",
+        ""
       ],
       "order": 13
     },
@@ -97,14 +99,15 @@ class NewAlertInput(insightconnect_plugin_runtime.Input):
       "description": "Show flagged/unflagged alerts",
       "enum": [
         "Flagged",
-        "Unflagged"
+        "Unflagged",
+        ""
       ],
       "order": 12
     },
     "matched_asset_value": {
       "type": "array",
       "title": "Matched Asset Value",
-      "description": "List of matched asset values. Examples: domain name, company name, IP",
+      "description": "List of matched asset values. Examples: IP address, domain name, company name",
       "items": {
         "type": "string"
       },

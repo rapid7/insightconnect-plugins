@@ -538,6 +538,7 @@ actions:
         enum:
           - Assigned
           - Unassigned
+          - ""
       is_flagged:
         title: Alert Flag Status
         description: Show flagged/unflagged alerts
@@ -547,6 +548,7 @@ actions:
         enum:
           - Flagged
           - Unflagged
+          - ""
       is_closed:
         title: Closed Status
         description: Status of the alert, either closed or open
@@ -556,6 +558,7 @@ actions:
         enum:
           - Closed
           - Open
+          - ""
       has_indicators:
         title: Has Indicators
         description: Show alerts with IOCs results
@@ -889,6 +892,7 @@ triggers:
         enum:
           - Closed
           - Open
+          - ""
       has_indicators:
         title: Has Indicators
         description: Shows alerts with IOC results

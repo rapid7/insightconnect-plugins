@@ -49,7 +49,8 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
       "description": "Show assigned/unassigned alerts",
       "enum": [
         "Assigned",
-        "Unassigned"
+        "Unassigned",
+        ""
       ],
       "order": 11
     },
@@ -77,7 +78,8 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
       "description": "Status of the alert, either closed or open",
       "enum": [
         "Closed",
-        "Open"
+        "Open",
+        ""
       ],
       "order": 13
     },
@@ -87,14 +89,15 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
       "description": "Show flagged/unflagged alerts",
       "enum": [
         "Flagged",
-        "Unflagged"
+        "Unflagged",
+        ""
       ],
       "order": 12
     },
     "matched_asset_value": {
       "type": "array",
       "title": "Matched Asset Value",
-      "description": "List of matched asset values. Examples: domain name, company name, IP",
+      "description": "List of matched asset values. Examples: IP address, domain name, company name",
       "items": {
         "type": "string"
       },
@@ -130,13 +133,13 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
     "source_date_from": {
       "type": "string",
       "title": "Source Date From",
-      "description": "Start date (when the event occured) to fetch from in Unix Millisecond Timestamp",
+      "description": "Start date (when the event occurred) to fetch from in Unix Millisecond Timestamp",
       "order": 7
     },
     "source_date_to": {
       "type": "string",
       "title": "Source Date To",
-      "description": "End date (when the event occured) to fetch to in Unix Millisecond Timestamp",
+      "description": "End date (when the event occurred) to fetch to in Unix Millisecond Timestamp",
       "order": 8
     },
     "source_type": {
