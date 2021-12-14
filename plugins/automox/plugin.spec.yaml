@@ -1,0 +1,629 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: automox
+title: Automox
+description: Automox is Modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment
+version: 0.1.0
+vendor: automox_dev
+support: automox_dev
+status: []
+tags: [endpoint, patch]
+hub_tags:
+  use_cases: [threat_detection_and_response, asset_inventory, remediation_management]
+  keywords: [endpoint, patch]
+  features: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/automox
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.automox.com/
+enable_cache: false
+
+types:
+  organization:
+    id:
+      title: Organization ID
+      description: The organization identifier
+      type: integer
+      required: true
+    name:
+      title: Organization Name
+      description: The organization name
+      type: string
+      required: true
+    create_time:
+      title: Creation Time
+      description: The datetime of when the organization was created
+      type: string
+      required: false
+    server_limit:
+      title: Server Limit
+      description: The organization server limit
+      type: integer
+      required: false
+    parent_id:
+      title: Parent Organization ID
+      description: The parent organization identifier
+      type: integer
+      required: false
+    device_limit:
+      title: Device Limit
+      description: The organization device limit
+      type: integer
+      required: false
+    device_count:
+      title: Device Count
+      description: The organization device count
+      type: integer
+      required: false
+  users:
+    id:
+      title: User ID
+      description: The user identifier
+      type: integer
+      required: true
+    firstname:
+      title: First Name
+      description: The first name of the user
+      type: string
+      required: false
+    lastname:
+      title: Last Name
+      description: The last name of the user
+      type: string
+      required: false
+    email:
+      title: Email
+      description: The email of the user
+      type: string
+      required: false
+    features:
+      title: Features
+      description: The features enabled for the user
+      type: "object"
+      required: false
+    orgs:
+      title: Organizations
+      description: The organizations for which the user has access
+      type: "[]object"
+      required: false
+    tags:
+      title: Tags
+      description: The user defined tags
+      type: "[]string"
+      required: false
+    saml_enabled:
+      title: SAML Enabled
+      description: Whether SAML has been enabled for the user
+      type: boolean
+      required: false
+    rbac_roles:
+      title: Roles
+      description: The roles assigned to the user
+      type: "[]object"
+      required: false
+  device:
+    id:
+      title: Device ID
+      description: The device ID
+      type: integer
+      required: true
+    server_group_id:
+      title: Server Group ID
+      description: The server group identifier of the device
+      type: integer
+      required: true 
+    organization_id:
+      title: Organization ID
+      description: The organization identifier of the device
+      type: integer
+      required: true
+    uuid:
+      title: Device UUID
+      description: The device unique identifier
+      type: string
+      required: true
+    name:
+      title: Device Name
+      description: The device name
+      type: string
+      required: true
+  policy:
+    id:
+      title: Policy ID
+      description: The policy identifier
+      type: integer
+      required: true
+    organization_id:
+      title: Organization ID
+      description: The organization identifier of the policy
+      type: integer
+      required: true
+    name:
+      title: Policy Name
+      description: The name of the policy
+      type: string
+      required: false
+    policy_type_name:
+      title: Policy Type Name
+      description: The type of policy
+      type: string
+      required: false
+    configuration:
+      title: Policy Configuration
+      description: The configuration of the policy
+      type: object
+      required: false
+    server_groups:
+      title: Device Groups
+      description: List of device groups assigned policy
+      type: "[]integer"
+      required: false
+  group:
+    id:
+      title: Group ID
+      description: The group identifier
+      type: integer
+      required: true
+    organization_id:
+      title: Organization ID
+      description: The organization identifier of the group
+      type: integer
+      required: true
+    name:
+      title: Group Name
+      description: The name of the group
+      type: string
+      required: false
+    refresh_interval:
+      title: Refresh Interval
+      description: Frequency of device refreshes in minutes
+      type: integer
+      required: false
+    parent_server_group_id:
+      title: Parent Server Group ID
+      description: The identifier of the parent group
+      type: integer
+      required: false
+    ui_color:
+      title: Color
+      description: Automox console highlight color for the group
+      type: string
+      required: false
+    notes:
+      title: Notes
+      description: Notes defined for the group
+      type: string
+      required: false
+    enable_os_auto_update:
+      title: Enable OS Auto Update
+      description: Enable operating system auto update
+      type: boolean
+      required: false
+    server_count:
+      title: Device Count
+      description: Number of devices assigned to group
+      type: integer
+      required: false
+    policies:
+      title: Policies
+      description: List of policies assigned to group
+      type: "[]integer"
+      required: false
+
+connection:
+  api_key:
+    title: API Key
+    type: credential_secret_key
+    description: Enter organization API key
+    required: true
+    example: abc12345-abc1-2345-abc1-abc123456789
+
+actions:
+  list_organizations:
+    title: List Organizations
+    description: Retrieve Automox organizations
+    output:
+      organizations:
+        title: Organizations
+        description: List of Automox organizations
+        type: "[]organization"
+        required: true
+  list_organization_users:
+    title: List Organization Users
+    description: Retrieve users of the Automox organization
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of Organization
+        type: integer
+        required: true
+        example: 1
+    output:
+      users:
+        title: Users
+        description: List of Automox users
+        type: "[]users"
+        required: false
+  list_policies:
+    title: List Policies
+    description: Retrieve Automox policies
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization to restrict results
+        type: integer
+        required: false
+        example: 1
+    output:
+      policies:
+        title: Policies
+        description: List of Automox policies
+        type: "[]policy"
+        required: false
+  list_devices:
+    title: List Devices
+    description: Retrieve Automox managed devices
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization to restrict results
+        type: integer
+        required: false
+        example: 1
+      group_id:
+        title: Group ID
+        description: Identifier of Server Group
+        type: integer
+        required: false
+        example: 1
+    output:
+      devices:
+        title: Devices
+        description: List of Automox managed devices
+        type: "[]device"
+        required: false
+  get_device_by_hostname:
+    title: Get Device by Hostname
+    description: Find an Automox device by hostname
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization to restrict results
+        type: integer
+        required: false
+        example: 1
+      hostname:
+        title: Hostname
+        description: Hostname of device
+        type: string
+        required: true
+        example: hostname-1
+    output:
+      device:
+        title: Device
+        description: The matched Automox device
+        type: device
+        required: false
+  get_device_by_ip:
+    title: Get Device by IP Address
+    description: Find an Automox device by IP address
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization to restrict results
+        type: integer
+        required: false
+        example: 1
+      ip_address:
+        title: IP Address
+        description: IP address of device
+        type: string
+        required: true
+        example: 127.0.0.1
+    output:
+      device:
+        title: Device
+        description: The matched Automox device
+        type: device
+        required: false
+  update_device:
+    title: Update Device
+    description: Update Automox device
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: false
+        example: 1
+      device_id:
+        title: Device ID
+        description: Identifier of device
+        type: integer
+        required: true
+        example: 1
+      server_group_id:
+        title: Server Group ID
+        description: Identifier of server group
+        type: integer
+        required: false
+        example: 1
+      tags:
+        title: Tags
+        description: List of tags
+        type: "[]string"
+        required: false
+      exception:
+        title: Exception
+        description: Exclude the device from reports and statistics
+        required: true
+        type: boolean
+        default: false
+      custom_name:
+        title: Custom Name
+        description: Custom name to set on device
+        type: string
+        required: false
+        example: "custom-name"
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+  delete_device:
+    title: Delete Device
+    description: Delete Automox device
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: false
+        example: 1
+      device_id:
+        title: Device ID
+        description: Identifier of device
+        type: integer
+        required: true
+        example: 1
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+  get_device_software:
+    title: Get Device Software
+    description: Retrieve a list of software installed on the device
+    input:
+      device_id:
+        title: Device ID
+        description: Identifier of device
+        type: integer
+        required: true
+        example: 1
+    output:
+      software:
+        title: Device Software
+        description: List of software on device
+        type: "[]object"
+        required: false
+  run_command:
+    title: Run Device Command
+    description: Run a command on the device
+    input:
+      device_id:
+        title: Device ID
+        description: Identifier of device
+        type: integer
+        required: true
+        example: 1
+      command:
+        title: Device ID
+        description: Identifier of device
+        type: string
+        enum:
+        - "GetOS"
+        - "InstallUpdate"
+        - "InstallAllUpdates"
+        - "PolicyTest"
+        - "PolicyRemediate"
+        - "Reboot"
+        required: true
+        example: "GetOS"
+      patches:
+        title: Patches
+        description: List of patches to be installed (Note that this only works with InstallUpdate command)
+        type: "[]string"
+        required: false
+      policy:
+        title: Patches
+        description: List of patches to be installed (Note that this is only used with PolicyTest and PolicyRemediate commands)
+        type: "[]string"
+        required: false
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+  list_groups:
+    title: List Groups
+    description: List Automox groups
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization to restrict results
+        type: integer
+        required: false
+        example: 1
+    output:
+      groups:
+        title: Groups
+        description: List of Automox groups
+        type: "[]group"
+        required: false
+  create_group:
+    title: Create Group
+    description: Create an Automox group
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: false
+        example: 1
+      name:
+        title: Name
+        description: Name of the group
+        type: string
+        required: true
+      refresh_interval:
+        title: Refresh Interval
+        description: Frequency of device refreshes in minutes
+        type: integer
+        required: true
+        default: 1440
+      parent_server_group_id:
+        title: Parent Server Group ID
+        description: Name of the parent group (Will be set to Default Group ID if not set)
+        type: integer
+        required: false
+      color:
+        title: Group Color
+        description: Automox console highlight color for the group
+        type: string
+        required: false
+        example: "#059F1D"
+      notes:
+        title: Group Notes
+        description: Define notes for the group
+        type: string
+        required: false
+      policies:
+        title: Policies
+        description: List of policies to assign to group
+        type: "[]integer"
+        required: false
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+      group:
+        title: Group
+        description: Detailed infromation about the created group
+        type: group
+        required: true
+  update_group:
+    title: Automox Group
+    description: Update an Automox group
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: false
+        example: 1
+      group_id:
+        title: Group ID
+        description: Identifier of the Automox group
+        type: integer
+        required: true
+        example: 1
+      name:
+        title: Name
+        description: Name of the group
+        type: string
+        required: true
+      refresh_interval:
+        title: Refresh Interval
+        description: Frequency of device refreshes in minutes
+        type: integer
+        required: true
+        default: 1440
+      parent_server_group_id:
+        title: Parent Server Group ID
+        description: Name of the parent group (Will be set to Default Group ID if not set)
+        type: integer
+        required: false
+      color:
+        title: Group Color
+        description: Automox console highlight color for the group
+        type: string
+        required: false
+        example: "#059F1D"
+      notes:
+        title: Group Notes
+        description: Define notes for the group
+        type: string
+        required: false
+      policies:
+        title: Policies
+        description: List of policies to assign to group
+        type: "[]integer"
+        required: false
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+  delete_group:
+    title: Delete Group
+    description: Delete an Automox group
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: false
+        example: 1
+      group_id:
+        title: Group ID
+        description: Identifier of the Automox group
+        type: integer
+        required: true
+        example: 1
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+#  Upload Vulnerability Sync Patch File
+#  Get Vulnerability Sync Batch
+#  List Devices in Vulnerability Sync Batch
+#  Approve Vulnerability Sync Batch
+#  Reject Vulnerability Sync Batch
+#  List Vulnerability Sync Batches
+#  List Vulnerability Sync Tasks
+#  Execute Vulnerability Sync Task
+#  Cancel Vulnerability Sync Task
+
+triggers:
+  get_events:
+    title: TODO
+    description: TODO
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization to restrict results
+        type: integer
+        required: false
+        example: 1
+      event_type:
+        title: Event Type
+        description: Name of event type to be retrieved (List of event types found at https://developer.automox.com/openapi/axconsole/operation/getEvents/)
+        type: string
+        required: true
+        example: "user.login"
+    output:
+      event:
+        title: Event
+        description: Event with details
+        type: string
+        required: true

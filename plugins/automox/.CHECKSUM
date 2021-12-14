@@ -1,0 +1,71 @@
+{
+	"spec": "2d1783c9c27534bd6f2a350771d63096",
+	"manifest": "84a2c8a8a8e9b680f70e83ced8765459",
+	"setup": "4faf5cd86330ce18fc21410c6ce123d3",
+	"schemas": [
+		{
+			"identifier": "create_group/schema.py",
+			"hash": "6c76ed361d8ae04499f5098b98ebe5b8"
+		},
+		{
+			"identifier": "delete_device/schema.py",
+			"hash": "84375147268bc143b19f3cae4690593f"
+		},
+		{
+			"identifier": "delete_group/schema.py",
+			"hash": "66b18c900b75652494434b68687062c3"
+		},
+		{
+			"identifier": "get_device_by_hostname/schema.py",
+			"hash": "1907809ed3076d5fbd7240bbeb6cf2e3"
+		},
+		{
+			"identifier": "get_device_by_ip/schema.py",
+			"hash": "d3d20cc31f52e317acfae967958238f6"
+		},
+		{
+			"identifier": "get_device_software/schema.py",
+			"hash": "790c56dcae32740d697d8a7ec59dbbad"
+		},
+		{
+			"identifier": "list_devices/schema.py",
+			"hash": "edf5d9cd1de05334a449604807e805d5"
+		},
+		{
+			"identifier": "list_groups/schema.py",
+			"hash": "6ac01c94ddaf20449508d017f1a04782"
+		},
+		{
+			"identifier": "list_organization_users/schema.py",
+			"hash": "caef6ce6774ccb03f2d6120f0fc6d531"
+		},
+		{
+			"identifier": "list_organizations/schema.py",
+			"hash": "083009db9c1309a7857d1e32f17b1db2"
+		},
+		{
+			"identifier": "list_policies/schema.py",
+			"hash": "559e738f1bdaf1a7603c345bbd40a71b"
+		},
+		{
+			"identifier": "run_command/schema.py",
+			"hash": "66d2feb0e0bb3e06af2117257b13b20b"
+		},
+		{
+			"identifier": "update_device/schema.py",
+			"hash": "d15b753b7c482fc343b7e83dcb57b141"
+		},
+		{
+			"identifier": "update_group/schema.py",
+			"hash": "7ccb141e3a1bcdf3623aa09b512aae3d"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "2c5f85e9e42316acd2c414cec235484f"
+		},
+		{
+			"identifier": "get_events/schema.py",
+			"hash": "1692c39da0f8e033c6adebdec44aed79"
+		}
+	]
+}
