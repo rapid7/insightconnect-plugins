@@ -152,7 +152,7 @@ types:
     VersionStartIncluding:
       title: Version start including
       type: string
-      description: Version Start Including
+      description: Version start including
       required: false
   cpe:
     Range:
