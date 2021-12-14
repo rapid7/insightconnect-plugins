@@ -235,7 +235,7 @@ types:
     updateDate:
       title: Update Date
       type: string
-      description: Update Date
+      description: Update date
       required: false
     severity:
       title: Severity
