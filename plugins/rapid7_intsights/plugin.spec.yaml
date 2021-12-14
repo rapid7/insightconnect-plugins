@@ -317,7 +317,7 @@ actions:
     input:
       indicator_value:
         title: Indicator Value
-        description: "Value of the indicator. Examples: IP Address, URL, Domain, Hash"
+        description: "Value of the indicator. Examples: IP address, URL, domain name, hash"
         type: string
         required: true
         example: example.com
