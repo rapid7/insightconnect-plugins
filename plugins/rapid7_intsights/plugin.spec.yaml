@@ -869,6 +869,7 @@ triggers:
         enum:
           - Assigned
           - Unassigned
+          - ""
       is_flagged:
         title: Alert Flag Status
         description: Show flagged/unflagged alerts
