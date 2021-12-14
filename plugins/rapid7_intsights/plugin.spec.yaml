@@ -798,7 +798,7 @@ actions:
 triggers:
   new_alert:
     title: New Alert
-    description: Runs when a new alert that matches the given criteria is created in IntSights
+    description: Triggers when a new alert that matches the given criteria is created in IntSights
     input:
       alert_type:
         title: Alert Type
