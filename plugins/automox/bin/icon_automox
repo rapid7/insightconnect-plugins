@@ -5,7 +5,7 @@ import json
 from sys import argv
 
 Name = "Automox"
-Vendor = "automox_dev"
+Vendor = "automox"
 Version = "0.1.0"
 Description = "Automox is Modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment"
 

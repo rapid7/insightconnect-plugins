@@ -13,5 +13,6 @@ class GetDeviceSoftware(insightconnect_plugin_runtime.Action):
                 output=GetDeviceSoftwareOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+        device_software = self.connection.automox_api.get_device_software(params.get(Input.ORG_ID),
+                                                                          params.get(Input.DEVICE_ID))
+        return {Output.SOFTWARE: device_software}

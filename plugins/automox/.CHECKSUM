@@ -1,7 +1,7 @@
 {
-	"spec": "2d1783c9c27534bd6f2a350771d63096",
-	"manifest": "84a2c8a8a8e9b680f70e83ced8765459",
-	"setup": "4faf5cd86330ce18fc21410c6ce123d3",
+	"spec": "372854cee3db159c512d914a408105ff",
+	"manifest": "805a38098410605da188f8424f75bf2c",
+	"setup": "c75540f04c5c1b3a65b8dc5d8c2f9091",
 	"schemas": [
 		{
 			"identifier": "create_group/schema.py",
@@ -25,7 +25,7 @@
 		},
 		{
 			"identifier": "get_device_software/schema.py",
-			"hash": "790c56dcae32740d697d8a7ec59dbbad"
+			"hash": "8cef0f3348f960bbc8ededd056b5f442"
 		},
 		{
 			"identifier": "list_devices/schema.py",
@@ -49,7 +49,7 @@
 		},
 		{
 			"identifier": "run_command/schema.py",
-			"hash": "66d2feb0e0bb3e06af2117257b13b20b"
+			"hash": "084ea25c98e13a7227d3aec2130c3ab2"
 		},
 		{
 			"identifier": "update_device/schema.py",

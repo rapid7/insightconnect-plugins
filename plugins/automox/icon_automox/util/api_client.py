@@ -114,6 +114,29 @@ class ApiClient:
     def get_device(self, org_id: int, device_id: int) -> Dict:
         return self._call_api("GET", f"{self.endpoint}/servers/{device_id}", params=self._org_param(org_id))
 
+    def find_device_by_attribute(self, org_id: int, attributes: List[str], value: str):
+        params = self.first_page({"o": org_id})
+
+        while True:
+            devices = self._call_api("get", f"{self.endpoint}/servers", params)
+
+            for device in devices:
+                for attr in attributes:
+                    if type(device[attr]) is str:
+                        if device[attr].casefold() == value.casefold():
+                            return device
+                    if type(device[attr]) is list:
+                        if value.lower() in (v.upper() for v in device[attr]):
+                            return device
+
+            if len(devices) < self.PAGE_SIZE:
+                break
+
+            self.next_page(params)
+
+    def get_device_software(self, org_id: int, device_id: int) -> Dict:
+        return self._page_results(f"{self.endpoint}/servers/{device_id}/packages", self._org_param(org_id))
+
     def get_devices(self, org_id: int, group_id: int) -> List[Dict]:
         """
         Retrieve Automox managed devices/endpoints
@@ -123,6 +146,17 @@ class ApiClient:
         """
         params = {"o": org_id, "groupId": group_id}
         return self._page_results(f"{self.endpoint}/servers", params)
+
+    def run_device_command(self, org_id: int, device_id: int, command: str):
+        """
+        Run Command on Device
+        :param org_id: Organization ID
+        :param device_id: Device ID
+        :param command: Command to be run
+        :return: Boolean of outcome
+        """
+        return self._call_api("POST", f"{self.endpoint}/servers/{device_id}/queues",
+                              params=self._org_param(org_id), json_data=command)
 
     def update_device(self, org_id: int, device_id: int, payload: Dict) -> bool:
         """

@@ -85,15 +85,17 @@ This action is used to run a command on the device.
 |----|----|-------|--------|-----------|----|-------|
 |command|string|None|True|Identifier of device|['GetOS', 'InstallUpdate', 'InstallAllUpdates', 'PolicyTest', 'PolicyRemediate', 'Reboot']|GetOS|
 |device_id|integer|None|True|Identifier of device|None|1|
+|org_id|integer|None|False|Identifier of organization|None|1|
 |patches|[]string|None|False|List of patches to be installed (Note that this only works with InstallUpdate command)|None|None|
-|policy|[]string|None|False|List of patches to be installed (Note that this is only used with PolicyTest and PolicyRemediate commands)|None|None|
+|policy_id|integer|None|False|Identifier of policy|None|None|
 
 Example input:
 
 ```
 {
   "command": "GetOS",
-  "device_id": 1
+  "device_id": 1,
+  "org_id": 1
 }
 ```
 
@@ -147,12 +149,14 @@ This action is used to retrieve a list of software installed on the device.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |device_id|integer|None|True|Identifier of device|None|1|
+|org_id|integer|None|False|Identifier of organization|None|1|
 
 Example input:
 
 ```
 {
-  "device_id": 1
+  "device_id": 1,
+  "org_id": 1
 }
 ```
 
@@ -165,6 +169,46 @@ Example input:
 Example output:
 
 ```
+{
+  "software": [
+    {
+      "display_name": "NetworkManager-libnm.x86_64",
+      "organization_id": 9237,
+      "repo": "Linux",
+      "version": "1.30.2-1.fc34",
+      "create_time": "2021-04-06T08:11:00+0000",
+      "id": 1235371145,
+      "is_managed": true,
+      "os_name": "Fedora",
+      "os_version_id": 4416,
+      "name": "NetworkManager-libnm.x86_64",
+      "os_version": "34",
+      "package_id": 225916374,
+      "installed": true,
+      "package_version_id": 231241032,
+      "server_id": 1123617,
+      "software_id": 10648
+    },
+    {
+      "id": 1235371146,
+      "os_version_id": 4416,
+      "version": "1.30.2-1.fc34",
+      "display_name": "NetworkManager.x86_64",
+      "is_managed": true,
+      "name": "NetworkManager.x86_64",
+      "os_name": "Fedora",
+      "package_id": 225916389,
+      "create_time": "2021-04-06T08:11:01+0000",
+      "installed": true,
+      "package_version_id": 231241047,
+      "repo": "Linux",
+      "server_id": 1123617,
+      "organization_id": 9237,
+      "os_version": "34",
+      "software_id": 10666
+    }
+  ]
+}
 ```
 
 #### Delete Group
@@ -277,6 +321,7 @@ Example input:
 Example output:
 
 ```
+
 ```
 
 #### Get Device by Hostname
@@ -587,6 +632,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 ### Triggers

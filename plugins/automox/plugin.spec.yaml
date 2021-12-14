@@ -5,8 +5,8 @@ name: automox
 title: Automox
 description: Automox is Modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment
 version: 0.1.0
-vendor: automox_dev
-support: automox_dev
+vendor: automox
+support: automox
 status: []
 tags: [endpoint, patch]
 hub_tags:
@@ -398,6 +398,12 @@ actions:
     title: Get Device Software
     description: Retrieve a list of software installed on the device
     input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: false
+        example: 1
       device_id:
         title: Device ID
         description: Identifier of device
@@ -414,6 +420,12 @@ actions:
     title: Run Device Command
     description: Run a command on the device
     input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: false
+        example: 1
       device_id:
         title: Device ID
         description: Identifier of device
@@ -438,10 +450,10 @@ actions:
         description: List of patches to be installed (Note that this only works with InstallUpdate command)
         type: "[]string"
         required: false
-      policy:
-        title: Patches
-        description: List of patches to be installed (Note that this is only used with PolicyTest and PolicyRemediate commands)
-        type: "[]string"
+      policy_id:
+        title: Policy ID
+        description: Identifier of policy
+        type: integer
         required: false
     output:
       success:

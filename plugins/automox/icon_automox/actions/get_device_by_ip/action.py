@@ -13,5 +13,7 @@ class GetDeviceByIp(insightconnect_plugin_runtime.Action):
                 output=GetDeviceByIpOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+        device = self.connection.automox_api.find_device_by_attribute(params.get(Input.ORG_ID),
+                                                                      ["ip_addrs", "ip_addrs_private"],
+                                                                      params.get(Input.IP_ADDRESS))
+        return {Output.DEVICE: device}

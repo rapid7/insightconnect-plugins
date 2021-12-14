@@ -10,8 +10,9 @@ class Component:
 class Input:
     COMMAND = "command"
     DEVICE_ID = "device_id"
+    ORG_ID = "org_id"
     PATCHES = "patches"
-    POLICY = "policy"
+    POLICY_ID = "policy_id"
     
 
 class Output:
@@ -36,12 +37,18 @@ class RunCommandInput(insightconnect_plugin_runtime.Input):
         "PolicyRemediate",
         "Reboot"
       ],
-      "order": 2
+      "order": 3
     },
     "device_id": {
       "type": "integer",
       "title": "Device ID",
       "description": "Identifier of device",
+      "order": 2
+    },
+    "org_id": {
+      "type": "integer",
+      "title": "Organization ID",
+      "description": "Identifier of organization",
       "order": 1
     },
     "patches": {
@@ -51,16 +58,13 @@ class RunCommandInput(insightconnect_plugin_runtime.Input):
       "items": {
         "type": "string"
       },
-      "order": 3
-    },
-    "policy": {
-      "type": "array",
-      "title": "Patches",
-      "description": "List of patches to be installed (Note that this is only used with PolicyTest and PolicyRemediate commands)",
-      "items": {
-        "type": "string"
-      },
       "order": 4
+    },
+    "policy_id": {
+      "type": "integer",
+      "title": "Policy ID",
+      "description": "Identifier of policy",
+      "order": 5
     }
   },
   "required": [

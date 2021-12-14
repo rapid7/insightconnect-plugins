@@ -2,10 +2,10 @@
 from setuptools import setup, find_packages
 
 
-setup(name="automox-automox_dev-plugin",
+setup(name="automox-automox-plugin",
       version="0.1.0",
       description="Automox is Modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment",
-      author="automox_dev",
+      author="automox",
       author_email="",
       url="",
       packages=find_packages(),

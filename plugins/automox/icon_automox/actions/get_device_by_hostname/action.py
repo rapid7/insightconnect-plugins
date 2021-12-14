@@ -13,5 +13,7 @@ class GetDeviceByHostname(insightconnect_plugin_runtime.Action):
                 output=GetDeviceByHostnameOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+        device = self.connection.automox_api.find_device_by_attribute(params.get(Input.ORG_ID),
+                                                                      ["name"],
+                                                                      params.get(Input.HOSTNAME))
+        return {Output.DEVICE: device}

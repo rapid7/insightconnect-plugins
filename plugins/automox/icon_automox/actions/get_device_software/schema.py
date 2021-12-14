@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     DEVICE_ID = "device_id"
+    ORG_ID = "org_id"
     
 
 class Output:
@@ -25,6 +26,12 @@ class GetDeviceSoftwareInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "Device ID",
       "description": "Identifier of device",
+      "order": 2
+    },
+    "org_id": {
+      "type": "integer",
+      "title": "Organization ID",
+      "description": "Identifier of organization",
       "order": 1
     }
   },
