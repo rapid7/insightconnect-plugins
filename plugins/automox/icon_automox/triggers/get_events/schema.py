@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "TODO"
+    DESCRIPTION = "Retrieve Automox events to trigger workflows"
 
 
 class Input:
@@ -54,7 +54,7 @@ class GetEventsOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "event": {
-      "type": "string",
+      "$ref": "#/definitions/event",
       "title": "Event",
       "description": "Event with details",
       "order": 1
@@ -62,7 +62,85 @@ class GetEventsOutput(insightconnect_plugin_runtime.Output):
   },
   "required": [
     "event"
-  ]
+  ],
+  "definitions": {
+    "event": {
+      "type": "object",
+      "title": "event",
+      "properties": {
+        "create_time": {
+          "type": "string",
+          "title": "Creation Time",
+          "description": "Creation time of event",
+          "order": 11
+        },
+        "data": {
+          "type": "object",
+          "title": "Event Data",
+          "description": "Data included with event",
+          "order": 7
+        },
+        "id": {
+          "type": "integer",
+          "title": "Event ID",
+          "description": "Identifier of event",
+          "order": 1
+        },
+        "name": {
+          "type": "string",
+          "title": "Event name",
+          "description": "Name of event",
+          "order": 2
+        },
+        "organization_id": {
+          "type": "integer",
+          "title": "Organization ID",
+          "description": "Identifier of organization",
+          "order": 5
+        },
+        "policy_id": {
+          "type": "integer",
+          "title": "Policy ID",
+          "description": "Identifier of policy",
+          "order": 6
+        },
+        "policy_name": {
+          "type": "string",
+          "title": "Policy Name",
+          "description": "Name of policydentifier of user",
+          "order": 9
+        },
+        "policy_type_name": {
+          "type": "string",
+          "title": "Policy Type",
+          "description": "Type of policy",
+          "order": 10
+        },
+        "server_id": {
+          "type": "integer",
+          "title": "Device ID",
+          "description": "Identifier of device",
+          "order": 4
+        },
+        "server_name": {
+          "type": "string",
+          "title": "Device Name",
+          "description": "Name of device",
+          "order": 8
+        },
+        "user_id": {
+          "type": "integer",
+          "title": "User ID",
+          "description": "Identifier of user",
+          "order": 3
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    }
+  }
 }
     """)
 

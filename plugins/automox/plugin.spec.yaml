@@ -210,6 +210,189 @@ types:
       description: List of policies assigned to group
       type: "[]integer"
       required: false
+  event:
+    id:
+      title: Event ID
+      description: Identifier of event
+      type: integer
+      required: true
+    name:
+      title: Event name
+      description: Name of event
+      type: string
+      required: true
+    user_id:
+      title: User ID
+      description: Identifier of user
+      type: integer
+      required: false
+    server_id:
+      title: Device ID
+      description: Identifier of device
+      type: integer
+      required: false
+    organization_id:
+      title: Organization ID
+      description: Identifier of organization
+      type: integer
+      required: false
+    policy_id:
+      title: Policy ID
+      description: Identifier of policy
+      type: integer
+      required: false
+    data:
+      title: Event Data
+      description: Data included with event
+      type: object
+      required: false
+    server_name:
+      title: Device Name
+      description: Name of device
+      type: string
+      required: false
+    policy_name:
+      title: Policy Name
+      description: Name of policydentifier of user
+      type: string
+      required: false
+    policy_type_name:
+      title: Policy Type
+      description: Type of policy
+      type: string
+      required: false
+    create_time:
+      title: Creation Time
+      description: Creation time of event
+      type: string
+      required: false
+  batch:
+    id:
+      title: Batch ID
+      description: Identifier of batch
+      type: integer
+      required: true
+    organization_id:
+      title: Organization ID
+      description: Identifier of organization
+      type: integer
+      required: false
+    status:
+      title: Batch Status
+      description: Status of batch
+      type: string
+      required: false
+    source:
+      title: Batch Source
+      description: Source of batch
+      type: string
+      required: false
+    created_by:
+      title: Created By
+      description: Batch creation details
+      type: object
+      required: false
+    updated_by:
+      title: Updated By
+      description: Batch update details
+      type: object
+      required: false
+    uploaded_at:
+      title: Uploaded At
+      description: Datetime the batch was uploaded
+      type: string
+      required: false
+    task_count:
+      title: Task Count
+      description: Number of tasks related to batch
+      type: integer
+      required: false
+    unknown_host_count:
+      title: Uknown Host Count
+      description: Number of hosts that are unknown within batch
+      type: integer
+      required: false
+    impacted_device_count:
+      title: Impacted Device Count
+      description: Number of devices that are impacted by batch
+      type: integer
+      required: false
+    issue_count:
+      title: Issue Count
+      description: Number of issues identified with batch
+      type: integer
+      required: false
+    cve_count:
+      title: CVE Count
+      description: Number of CVEs that are impacted by batch
+      type: integer
+      required: false
+  task:
+    id:
+      title: Task ID
+      description: Identifier of task
+      type: integer
+      required: true
+    organization_id:
+      title: Organization ID
+      description: Identifier of organization
+      type: integer
+      required: false
+    task_type:
+      title: Task Type
+      description: Type of task
+      type: string
+      required: false
+    payload:
+      title: Payload
+      description: Payload associated with task
+      type: object
+      required: false
+    source:
+      title: Task Source
+      description: Source of task
+      type: string
+      required: false
+    notes:
+      title: Task Notes
+      description: Notes associated with task
+      type: string
+      required: false
+    status:
+      title: Task Status
+      description: Status of task
+      type: string
+      required: false
+    created_by_user:
+      title: Created By User
+      description: Task creation details
+      type: object
+      required: false
+    last_updated_by_user:
+      title: Updated By User
+      description: Task update details
+      type: object
+      required: false
+    created_at:
+      title: Created At
+      description: Datetime the task was created
+      type: string
+      required: false
+    updated_at:
+      title: Updated At
+      description: Datetime the task was updated
+      type: string
+      required: false
+    completed_at:
+      title: Completed At
+      description: Datetime the task was completed
+      type: string
+      required: false
+    cves:
+      title: CVEs
+      description: List of CVEs associated with task
+      type: "[]string"
+      required: false
 
 connection:
   api_key:
@@ -606,20 +789,161 @@ actions:
         description: Was operation successful
         type: boolean
         required: true
-#  Upload Vulnerability Sync Patch File
-#  Get Vulnerability Sync Batch
-#  List Devices in Vulnerability Sync Batch
-#  Approve Vulnerability Sync Batch
-#  Reject Vulnerability Sync Batch
-#  List Vulnerability Sync Batches
-#  List Vulnerability Sync Tasks
-#  Execute Vulnerability Sync Task
-#  Cancel Vulnerability Sync Task
+  upload_vulnerability_sync_file:
+    title: Upload Vulnerability Sync File
+    description: Upload CSV file to vulnerability sync for processing
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: true
+        example: 1
+      csv_file:
+        title: CSV File
+        description: Base64 encoded CSV data from which to create the vulnerabiulity sync batch
+        type: bytes
+        required: true
+    output:
+      batch_id:
+        title: Vulnerability Sync Batch ID
+        description: Identifier of vulnerability sync batch
+        type: integer
+        required: true
+        example: 1
+  get_vulnerability_sync_batch:
+    title: Get Vulnerability Sync Batch
+    description: Retrieve details for a specified vulnerability sync batch
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: true
+        example: 1
+      batch_id:
+        title: Batch ID
+        description: Identifier of batch
+        type: integer
+        required: true
+        example: 1
+    output:
+      batch:
+        title: Vulnerability Sync Batch
+        description: Details of a specified vulnerability sync batch
+        type: batch
+        required: true
+  action_on_vulnerability_sync_batch:
+    title: Accept or Reject Vulnerability Sync Batch
+    description: Take action to approve or reject vulnerability sync batch
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: true
+        example: 1
+      batch_id:
+        title: Batch ID
+        description:
+        type: integer
+        required: true
+        example: 1
+      action:
+        title: Action
+        description: Action to take on batch
+        type: string
+        enum:
+        - "accept"
+        - "reject"
+        required: true
+        example: "accept"
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+  list_vulnerability_sync_batches:
+    title: List Vulnerability Sync Batches
+    description: Retrieve list of vulnerability sync batches
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: true
+        example: 1
+    output:
+      batches:
+        title: Vulnerability Sync Batches
+        description: List of vulnerability sync batches
+        type: "[]batch"
+        required: false
+  list_vulnerability_sync_tasks:
+    title: List Vulnerability Sync Tasks
+    description: Retrieve list of vulnerability sync tasks
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: true
+        example: 1
+      status:
+        title: Status
+        description: Filter by status of tasks
+        type: string
+        required: false
+        example: "in_progress"
+      batch_id:
+        title: Batch ID
+        description: Filter by batch identifier
+        type: integer
+        required: false
+        example: 1
+    output:
+      tasks:
+        title: Vulnerability Sync Tasks
+        description: List of vulnerability sync tasks
+        type: "[]task"
+        required: false
+  action_on_vulnerability_sync_task:
+    title: Execute or Cancel Vulnerability Sync Task
+    description: Take action to execute or cancel vulnerability sync task
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: true
+        example: 1
+      task_id:
+        title: Task ID
+        description: Identifier of task
+        type: integer
+        required: true
+        example: 1
+      action:
+        title: Action
+        description: Action to take on vulnerability sync task
+        type: string
+        enum:
+        - "execute"
+        - "cancel"
+        required: true
+        example: "execute"
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
 
 triggers:
   get_events:
-    title: TODO
-    description: TODO
+    title: Get Automox Events
+    description: Retrieve Automox events to trigger workflows
     input:
       org_id:
         title: Organization ID
@@ -637,5 +961,5 @@ triggers:
       event:
         title: Event
         description: Event with details
-        type: string
+        type: event
         required: true

@@ -8,7 +8,7 @@ class ApiClient:
     VERSION = "0.1.0"
     PAGE_SIZE = 500
 
-    def __init__(self, logger, api_key, endpoint = "https://console.automox.com/api"):
+    def __init__(self, logger, api_key, endpoint="https://console.automox.com/api"):
         self.endpoint = endpoint
         self.api_key = api_key
         self.session = requests.session()
@@ -21,9 +21,9 @@ class ApiClient:
 
     def set_headers(self) -> None:
         self.session.headers = {
-           'Authorization': 'Bearer ' + self.api_key,
-           'User-Agent': f"ax:automox-rapid7-insightconnect-plugin/{ApiClient.VERSION}",
-           "content-type": "application/json"
+            'Authorization': 'Bearer ' + self.api_key,
+            'User-Agent': f"ax:automox-rapid7-insightconnect-plugin/{ApiClient.VERSION}",
+            "content-type": "application/json"
         }
 
     def _call_api(self, method: str, url: str, params: Dict = dict(), json_data: object = None) -> json:
@@ -69,6 +69,26 @@ class ApiClient:
 
         return page_resp
 
+    def _page_results_data(self, url: str, init_params: Dict = dict()) -> json:
+        params = self.first_page(init_params)
+
+        page_resp = []
+
+        while True:
+            resp = self._call_api("get", url, params)
+            resp_data = self.remove_null_values(resp.get('data'))
+
+            page_resp.extend(resp_data)
+
+            self.logger.info(f"Page {params.get('page')} result count: {len(resp_data)}")
+
+            if len(resp_data) < self.PAGE_SIZE:
+                break
+
+            self.next_page(params)
+
+        return page_resp
+
     # Remove Null from response to avoid type issues
     def remove_null_values(self, d):
         if type(d) is dict:
@@ -87,7 +107,7 @@ class ApiClient:
         params.update({
             'limit': ApiClient.PAGE_SIZE,
             'page': 0
-            })
+        })
         return params
 
     @staticmethod
@@ -242,3 +262,39 @@ class ApiClient:
         :return: Boolean of outcome
         """
         return self._call_api("DELETE", f"{self.endpoint}/servergroups/{group_id}", params=self._org_param(org_id))
+
+    # Vulnerability Sync
+    def upload_vulnerability_sync_file(self, org_id: int, file_content):
+        payload = {'file': ('insightconnect-report.csv', file_content, 'text/csv')}
+
+        headers = {
+            'Content-Type': 'multipart/form-data',
+            'Authorization': f"Bearer {self.api_key}"
+        }
+
+        try:
+            response = requests.post(f"{self.endpoint}/orgs/{org_id}/tasks/patch/batches/upload",
+                                     payload, headers=headers)
+            if response.status_code == 200:
+                return response.get("id")
+            else:
+                raise PluginException(cause="Failed to upload file to Vulnerability Sync",
+                                      assistance=f"Response code: {response.status_code}")
+        except Exception as e:
+            raise PluginException(cause="Failed to upload file to Vulnerability Sync",
+                                  assistance=f"Review encoded CSV file and try again: {e}")
+
+    def get_vulnerability_sync_batches(self, org_id: int):
+        return self._page_results_data(f"{self.endpoint}/orgs/{org_id}/tasks/batches")
+
+    def get_vulnerability_sync_batch(self, org_id: int, batch_id: int):
+        return self._call_api("GET", f"{self.endpoint}/orgs/{org_id}/tasks/batches/{batch_id}")
+
+    def update_vulnerability_sync_batch(self, org_id: int, batch_id: int, action: str):
+        return self._call_api("POST", f"{self.endpoint}/orgs/{org_id}/tasks/batches/{batch_id}/{action}")
+
+    def get_vulnerability_sync_tasks(self, org_id: int, params: Dict):
+        return self._page_results_data(f"{self.endpoint}/orgs/{org_id}/tasks", params)
+
+    def update_vulnerability_sync_task(self, org_id: int, task_id: int, action: str):
+        return self._call_api("PATCH", f"{self.endpoint}/orgs/{org_id}/tasks/{task_id}", params={"action": action})

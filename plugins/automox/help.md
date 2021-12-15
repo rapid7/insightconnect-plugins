@@ -37,6 +37,305 @@ Example input:
 
 ### Actions
 
+#### Upload Vulnerability Sync File
+
+This action is used to upload CSV file to vulnerability sync for processing.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|csv_file|bytes|None|True|Base64 encoded CSV data from which to create the vulnerabiulity sync batch|None|None|
+|org_id|integer|None|True|Identifier of organization|None|1|
+
+Example input:
+
+```
+{
+  "org_id": 1
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|batch_id|integer|True|Identifier of vulnerability sync batch|
+
+Example output:
+
+```
+```
+
+#### List Vulnerability Sync Tasks
+
+This action is used to retrieve list of vulnerability sync tasks.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|batch_id|integer|None|False|Filter by batch identifier|None|1|
+|org_id|integer|None|True|Identifier of organization|None|1|
+|status|string|None|False|Filter by status of tasks|None|in_progress|
+
+Example input:
+
+```
+{
+  "batch_id": 1,
+  "org_id": 1,
+  "status": "in_progress"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|tasks|[]task|False|List of vulnerability sync tasks|
+
+Example output:
+
+```
+{
+  "tasks": [
+    {
+      "created_at": "2021-09-24T18:45:04+0000",
+      "last_updated_by_user": {
+        "firstname": "Peter",
+        "id": 44688,
+        "lastname": "Pflaster",
+        "email": "user@example.com"
+      },
+      "status": "in_progress",
+      "task_type": "patch-now",
+      "created_by_user": {
+        "email": "user@example.com",
+        "firstname": "Peter",
+        "id": 44688,
+        "lastname": "Pflaster"
+      },
+      "id": 266,
+      "organization_id": 9237,
+      "payload": {
+        "severity": "medium",
+        "package_versions": [
+          {
+            "display_name": "2021-06 Cumulative Update for Windows 10 Version 2...",
+            "id": "232850978",
+            "name": "f2ac1cd6-4c7f-4481-bf8c-abf3ed49d39b",
+            "version": "1"
+          }
+        ],
+        "patch_id": "CVE-2021-31952"
+      },
+      "source": "Automox",
+      "updated_at": "2021-09-24T18:47:11+0000"
+    }
+  ]
+}
+```
+
+#### List Vulnerability Sync Batches
+
+This action is used to retrieve list of vulnerability sync batches.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|org_id|integer|None|True|Identifier of organization|None|1|
+
+Example input:
+
+```
+{
+  "org_id": 1
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|batches|[]batch|False|List of vulnerability sync batches|
+
+Example output:
+
+```
+{
+  "batches": [
+    {
+      "id": 379,
+      "organization_id": 9237,
+      "source": "report.csv",
+      "status": "awaiting_approval",
+      "created_by_user": {
+        "lastname": "Youtz",
+        "email": "user@example.com",
+        "firstname": "Zachary",
+        "id": 43852
+      },
+      "unknown_host_count": 41,
+      "updated_at": "2021-12-02T20:24:09+0000",
+      "updated_by_user": {
+        "id": 43852,
+        "lastname": "Youtz",
+        "email": "user@example.com",
+        "firstname": "Zachary"
+      },
+      "created_at": "2021-12-02T20:24:08+0000"
+    },
+    {
+      "id": 355,
+      "updated_by_user": {
+        "email": "user@example.com",
+        "firstname": "Zachary",
+        "id": 43852,
+        "lastname": "Youtz"
+      },
+      "created_at": "2021-11-23T17:51:04+0000",
+      "created_by_user": {
+        "email": "user@example.com",
+        "firstname": "Zachary",
+        "id": 43852,
+        "lastname": "Youtz"
+      },
+      "organization_id": 9237,
+      "source": "report.csv",
+      "status": "awaiting_approval",
+      "unknown_host_count": 41,
+      "updated_at": "2021-11-23T17:51:06+0000"
+    }
+  ]
+}
+```
+
+#### Get Vulnerability Sync Batch
+
+This action is used to retrieve details for a specified vulnerability sync batch.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|batch_id|integer|None|True|Identifier of batch|None|1|
+|org_id|integer|None|True|Identifier of organization|None|1|
+
+Example input:
+
+```
+{
+  "batch_id": 1,
+  "org_id": 1
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|batch|batch|True|Details of a specified vulnerability sync batch|
+
+Example output:
+
+```
+{
+  "batch": {
+    "task_count": 2,
+    "updated_at": "2021-09-24T18:46:22+0000",
+    "cve_count": 2,
+    "organization_id": 9237,
+    "status": "approved",
+    "impacted_device_count": 6,
+    "issue_count": 3,
+    "source": "peter.csv",
+    "unknown_host_count": 2,
+    "updated_by": {
+      "firstname": "Peter",
+      "id": 44688,
+      "lastname": "Pflaster",
+      "email": "user@example.com"
+    },
+    "created_at": "2021-09-24T18:45:04+0000",
+    "created_by": {
+      "email": "user@example.com",
+      "firstname": "Peter",
+      "id": 44688,
+      "lastname": "Pflaster"
+    },
+    "id": 45
+  }
+}
+```
+
+#### Execute or Cancel Vulnerability Sync Task
+
+This action is used to take action to execute or cancel vulnerability sync task.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|action|string|None|True|Action to take on vulnerability sync task|['execute', 'cancel']|execute|
+|org_id|integer|None|True|Identifier of organization|None|1|
+|task_id|integer|None|True|Identifier of task|None|1|
+
+Example input:
+
+```
+{
+  "action": "execute",
+  "org_id": 1,
+  "task_id": 1
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+```
+
+#### Accept or Reject Vulnerability Sync Batch
+
+This action is used to take action to approve or reject vulnerability sync batch.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|action|string|None|True|Action to take on batch|['accept', 'reject']|accept|
+|batch_id|integer|None|True||None|1|
+|org_id|integer|None|True|Identifier of organization|None|1|
+
+Example input:
+
+```
+{
+  "action": "accept",
+  "batch_id": 1,
+  "org_id": 1
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+```
+
 #### Automox Group
 
 This action is used to update an Automox group.
@@ -516,6 +815,9 @@ This action is used to retrieve Automox policies.
 Example input:
 
 ```
+{
+  "org_id": 1
+}
 ```
 
 ##### Output
@@ -639,9 +941,9 @@ Example output:
 
 ### Triggers
 
-#### TODO
+#### Get Automox Events
 
-This trigger is used to tODO.
+This trigger is used to retrieve Automox events to trigger workflows.
 
 ##### Input
 
@@ -663,7 +965,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|event|string|True|Event with details|
+|event|event|True|Event with details|
 
 Example output:
 

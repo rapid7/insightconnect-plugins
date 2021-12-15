@@ -1,8 +1,16 @@
 {
-	"spec": "372854cee3db159c512d914a408105ff",
-	"manifest": "805a38098410605da188f8424f75bf2c",
+	"spec": "26190636e662778245304e1a2d6bada3",
+	"manifest": "bdac4e9c983e0c741c926b22c710e16c",
 	"setup": "c75540f04c5c1b3a65b8dc5d8c2f9091",
 	"schemas": [
+		{
+			"identifier": "action_on_vulnerability_sync_batch/schema.py",
+			"hash": "b2d51a5ce1d30ebaab91c3b273afeb9a"
+		},
+		{
+			"identifier": "action_on_vulnerability_sync_task/schema.py",
+			"hash": "4f9f6dfc54d432cf629bdc32a7c2cc84"
+		},
 		{
 			"identifier": "create_group/schema.py",
 			"hash": "6c76ed361d8ae04499f5098b98ebe5b8"
@@ -28,6 +36,10 @@
 			"hash": "8cef0f3348f960bbc8ededd056b5f442"
 		},
 		{
+			"identifier": "get_vulnerability_sync_batch/schema.py",
+			"hash": "1eca02a3ca1faf189b0dbdd92bc6debe"
+		},
+		{
 			"identifier": "list_devices/schema.py",
 			"hash": "edf5d9cd1de05334a449604807e805d5"
 		},
@@ -48,6 +60,14 @@
 			"hash": "559e738f1bdaf1a7603c345bbd40a71b"
 		},
 		{
+			"identifier": "list_vulnerability_sync_batches/schema.py",
+			"hash": "8941c0ed2fbc3373fc477f35a8b91887"
+		},
+		{
+			"identifier": "list_vulnerability_sync_tasks/schema.py",
+			"hash": "9ec32645a4b22351d261ff48594a1eea"
+		},
+		{
 			"identifier": "run_command/schema.py",
 			"hash": "084ea25c98e13a7227d3aec2130c3ab2"
 		},
@@ -60,12 +80,16 @@
 			"hash": "7ccb141e3a1bcdf3623aa09b512aae3d"
 		},
 		{
+			"identifier": "upload_vulnerability_sync_file/schema.py",
+			"hash": "9b0613dc34b59eaa405d1a122a7b9120"
+		},
+		{
 			"identifier": "connection/schema.py",
 			"hash": "2c5f85e9e42316acd2c414cec235484f"
 		},
 		{
 			"identifier": "get_events/schema.py",
-			"hash": "1692c39da0f8e033c6adebdec44aed79"
+			"hash": "76a461819667b14d8a8c276d04bf42ef"
 		}
 	]
 }

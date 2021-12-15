@@ -36,6 +36,10 @@ def main():
             )
             self.add_trigger(triggers.GetEvents())
 
+            self.add_action(actions.ActionOnVulnerabilitySyncBatch())
+
+            self.add_action(actions.ActionOnVulnerabilitySyncTask())
+
             self.add_action(actions.CreateGroup())
 
             self.add_action(actions.DeleteDevice())
@@ -48,6 +52,8 @@ def main():
 
             self.add_action(actions.GetDeviceSoftware())
 
+            self.add_action(actions.GetVulnerabilitySyncBatch())
+
             self.add_action(actions.ListDevices())
 
             self.add_action(actions.ListGroups())
@@ -58,11 +64,17 @@ def main():
 
             self.add_action(actions.ListPolicies())
 
+            self.add_action(actions.ListVulnerabilitySyncBatches())
+
+            self.add_action(actions.ListVulnerabilitySyncTasks())
+
             self.add_action(actions.RunCommand())
 
             self.add_action(actions.UpdateDevice())
 
             self.add_action(actions.UpdateGroup())
+
+            self.add_action(actions.UploadVulnerabilitySyncFile())
 
 
     """Run plugin"""
