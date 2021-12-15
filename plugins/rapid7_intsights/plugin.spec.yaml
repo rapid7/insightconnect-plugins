@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_intsights
 title: Rapid7 IntSights
 description: Rapid7 IntSights is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
-version: 1.0.0
+version: 2.0.0
 supported_versions: ["2.4.0"]
 vendor: rapid7
 support: rapid7
@@ -133,6 +133,170 @@ types:
       description: Related IOCs
       type: "[]string"
       required: false
+  range:
+    VersionEndExcluding:
+      title: Version End Excluding
+      type: string
+      description: Version end excluding
+      required: false
+    VersionEndIncluding:
+      title: Version End Including
+      type: string
+      description: Version end including
+      required: false
+    VersionStartExcluding:
+      title: Version Start Excluding
+      type: string
+      description: Version start excluding
+      required: false
+    VersionStartIncluding:
+      title: Version Start Including
+      type: string
+      description: Version start including
+      required: false
+  cpe:
+    Range:
+      title: Range
+      type: range
+      description: Range
+      required: false
+    Title:
+      title: Title
+      type: string
+      description: Title
+      required: false
+    Value:
+      title: Value
+      type: string
+      description: Value
+      required: false
+    VendorProduct:
+      title: Vendor Product
+      type: string
+      description: Vendor product
+      required: false
+  mentionsPerSource:
+    ClearWebCyberBlogs:
+      title: Clear Web Cyber Blogs
+      type: integer
+      description: Clear web cyber blogs
+      required: false
+    CodeRepositories:
+      title: Code Repositories
+      type: integer
+      description: Code repositories
+      required: false
+    DarkWeb:
+      title: Dark Web
+      type: integer
+      description: Dark web
+      required: false
+    Exploit:
+      title: Exploit
+      type: integer
+      description: Exploit
+      required: false
+    HackingForum:
+      title: Hacking Forum
+      type: integer
+      description: Hacking forum
+      required: false
+    InstantMessage:
+      title: Instant Message
+      type: integer
+      description: Instant message
+      required: false
+    PasteSite:
+      title: Paste Site
+      type: integer
+      description: Paste site
+      required: false
+    SocialMedia:
+      title: Social Media
+      type: integer
+      description: Social media
+      required: false
+  content:
+    cveId:
+      title: CVE ID
+      type: string
+      description: CVE ID
+      required: false
+    cpe:
+      title: CPE
+      description: CPE
+      type: '[]cpe'
+      required: false
+    publishedDate:
+      title: Published Date
+      type: string
+      description: Published date
+      required: false
+    updateDate:
+      title: Update Date
+      type: string
+      description: Update date
+      required: false
+    severity:
+      title: Severity
+      type: string
+      description: Severity
+      required: false
+    intsightsScore:
+      title: IntSights Score
+      type: float
+      description: IntSights score
+      required: false
+    cvssScore:
+      title: CVSS Score
+      type: float
+      description: Common Vulnerability Scoring System score
+      required: false
+    mentionsAmount:
+      title: Mentions Amount
+      type: integer
+      description: Mentions amount
+      required: false
+    mentionsPerSource:
+      title: Mentions Per Source
+      type: mentionsPerSource
+      description: Mentions per source
+      required: false
+    firstMentionDate:
+      title: First Mention Date
+      type: string
+      description: First mention date
+      required: false
+    lastMentionDate:
+      title: Last Mention Date
+      type: string
+      description: Last mention date
+      required: false
+    exploitAvailability:
+      title: Exploit Availability
+      type: boolean
+      description: Exploit availability
+      required: false
+    vulnerabilityOrigin:
+      title: Vulnerability Origin
+      type: "[]string"
+      description: Vulnerability origin
+      required: false
+    relatedThreatActors:
+      title: Related Threat Actors
+      type: "[]string"
+      description: Related threat actors
+      required: false
+    relatedMalware:
+      title: Related Malware
+      type: "[]string"
+      description: Related malware
+      required: false
+    relatedCampaigns:
+      title: Related Campaigns
+      type: "[]string"
+      description: Related campaigns
+      required: false
 connection:
   account_id:
     title: Account ID
@@ -153,7 +317,7 @@ actions:
     input:
       indicator_value:
         title: Indicator Value
-        description: "Value of the indicator, example: IP Address, URL, Domain, Hash"
+        description: "Value of the indicator. Examples: IP address, URL, domain name, hash"
         type: string
         required: true
         example: example.com
@@ -176,7 +340,7 @@ actions:
       score:
         title: Score
         description: Score
-        type: integer
+        type: float
         required: true
       whitelist:
         title: Whitelist
@@ -239,7 +403,7 @@ actions:
     input:
       indicator_value:
         title: Indicator Value
-        description: "Value of the indicator example: IP Address, URL, Domain, Hash"
+        description: "Value of the indicator. Examples: IP address, URL, domain name, hash"
         type: string
         required: true
         example: example.com
@@ -331,7 +495,7 @@ actions:
         example: ["DarkWeb"]
       matched_asset_value:
         title: Matched Asset Value
-        description: List of matched asset values
+        description: 'List of matched asset values. Examples: IP address, domain name, company name'
         type: '[]string'
         required: false
         example: ["example.com"]
@@ -343,25 +507,25 @@ actions:
         example: ["InProgress", "Pending"]
       source_date_from:
         title: Source Date From
-        description: Start date to fetch from in Unix Millisecond Timestamp
+        description: Start date (when the event occurred) to fetch from in Unix Millisecond Timestamp
         type: string
         required: false
         example: 1633047083142
       source_date_to:
         title: Source Date To
-        description: End date to fetch to in Unix Millisecond Timestamp
+        description: End date (when the event occurred) to fetch to in Unix Millisecond Timestamp
         type: string
         required: false
         example: 1633047102456
       found_date_from:
         title: Found Date From
-        description: Start date to fetch from in Unix Millisecond Timestamp
+        description: Start date (when alert found event) to fetch from in Unix Millisecond Timestamp
         type: string
         required: false
         example: 0
       found_date_to:
         title: Found Date To
-        description: End date to fetch to in Unix Millisecond Timestamp
+        description: End date (when alert found event) to fetch to in Unix Millisecond Timestamp
         type: string
         required: false
         example: 1633047102456
@@ -374,6 +538,7 @@ actions:
         enum:
           - Assigned
           - Unassigned
+          - ""
       is_flagged:
         title: Alert Flag Status
         description: Show flagged/unflagged alerts
@@ -383,15 +548,17 @@ actions:
         enum:
           - Flagged
           - Unflagged
+          - ""
       is_closed:
         title: Closed Status
         description: Status of the alert, either closed or open
-        type: boolean
+        type: string
         required: false
         example: Closed
         enum:
           - Closed
           - Open
+          - ""
       has_indicators:
         title: Has Indicators
         description: Show alerts with IOCs results
@@ -614,4 +781,134 @@ actions:
         title: Alert ID
         description: New created alert ID
         type: string
+        required: true
+  get_cve_by_id:
+    title: Get CVE by ID
+    description: Get a list of CVE's with a list of IDs from an account
+    input:
+      cve_id:
+        title: CVE ID
+        description: Specific CVE IDs
+        type: "[]string"
+        required: false
+        example: ["CVE-2020-0711"]
+    output:
+      content:
+        title: Content
+        description: Response content
+        type: '[]content'
+        required: true
+triggers:
+  new_alert:
+    title: New Alert
+    description: Triggers when a new alert that matches the given criteria is created in IntSights
+    input:
+      alert_type:
+        title: Alert Type
+        description: 'List of alert types. Allowed values: AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip'
+        type: '[]string'
+        required: false
+        example: ["Phishing"]
+      severity:
+        title: Severity
+        description: 'List of alerts severity. Allowed values: High, Medium, Low'
+        type: '[]string'
+        required: false
+        example: ["Low"]
+      source_type:
+        title: Source Type
+        description: "List of alert's source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other"
+        type: '[]string'
+        required: false
+        example: ["Application Store"]
+      network_type:
+        title: Network Type
+        description: 'List of network types. Allowed values: ClearWeb, DarkWeb'
+        type: '[]string'
+        required: false
+        example: ["DarkWeb"]
+      matched_asset_value:
+        title: Matched Asset Value
+        description: 'List of matched asset values. Examples: IP address, domain name, company name'
+        type: '[]string'
+        required: false
+        example: ["example.com"]
+      remediation_status:
+        title: Remediation Status
+        description: 'List of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed'
+        type: '[]string'
+        required: false
+        example: ["InProgress", "Pending"]
+      source_date_from:
+        title: Source Date From
+        description: Start date (when the event occured) to fetch from in Unix Millisecond Timestamp
+        type: string
+        required: false
+        example: 1633047083142
+      source_date_to:
+        title: Source Date To
+        description: End date (when the event occured) to fetch to in Unix Millisecond Timestamp
+        type: string
+        required: false
+        example: 1633047102456
+      found_date_from:
+        title: Found Date From
+        description: Start date (when alert found event) to fetch from in Unix Millisecond Timestamp
+        type: string
+        required: false
+        example: 0
+      found_date_to:
+        title: Found Date To
+        description: End date (when alert found event) to fetch to in Unix Millisecond Timestamp
+        type: string
+        required: false
+        example: 1633047102456
+      assigned:
+        title: Alert Assignment
+        description: Show assigned/unassigned alerts
+        type: string
+        required: false
+        example: Assigned
+        enum:
+          - Assigned
+          - Unassigned
+          - ""
+      is_flagged:
+        title: Alert Flag Status
+        description: Show flagged/unflagged alerts
+        type: string
+        required: false
+        example: Flagged
+        enum:
+          - Flagged
+          - Unflagged
+          - ""
+      is_closed:
+        title: Closed Status
+        description: Status of the alert, either closed or open
+        type: string
+        required: false
+        example: Closed
+        enum:
+          - Closed
+          - Open
+          - ""
+      has_indicators:
+        title: Has Indicators
+        description: Shows alerts with IOC results
+        type: boolean
+        required: false
+        example: false
+      frequency:
+        title: Frequency
+        type: integer
+        description: Poll frequency in seconds
+        required: false
+        default: 60
+        example: 60
+    output:
+      alert_ids:
+        title: Alert IDs
+        description: List of alert IDs
+        type: "[]string"
         required: true

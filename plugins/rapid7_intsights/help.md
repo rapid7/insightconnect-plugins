@@ -12,6 +12,7 @@
 * Get Complete Alert by ID
 * Takedown Request
 * Add Manual Alert
+* Get CVE by ID
 
 # Requirements
 
@@ -45,6 +46,85 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Get CVE by ID
+
+This action is used to get CVE's list from account.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|cve_id|[]string|None|False|Specific CVE IDs|None|["CVE-2020-0711"]|
+
+Example input:
+
+```
+{
+  "cve_id": [
+    "CVE-2020-0711"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|content|[]content|True|Response content|
+
+Example output:
+
+```
+{
+  "content": {
+    "content": [
+      {
+        "cveId": "CVE-2020-7064",
+        "cpe": [
+          {
+            "Value": "cpe:2.3:a:php:php:*:*:*:*:*:*:*:*",
+            "Range": {
+              "VersionStartIncluding": "7.2.0",
+              "VersionEndIncluding": "",
+              "VersionStartExcluding": "",
+              "VersionEndExcluding": "7.2.9"
+            },
+            "Title": "Php",
+            "VendorProduct": "Php Php"
+          }
+        ],
+        "publishedDate": "2020-04-01T04:15:00.000Z",
+        "updateDate": "2021-10-25T10:14:52.978Z",
+        "severity": "Low",
+        "intsightsScore": 36,
+        "cvssScore": 5.4,
+        "mentionsAmount": 39,
+        "mentionsPerSource": {
+          "PasteSite": 0,
+          "HackingForum": 0,
+          "InstantMessage": 0,
+          "DarkWeb": 0,
+          "ClearWebCyberBlogs": 0,
+          "CodeRepositories": 9,
+          "Exploit": 0,
+          "SocialMedia": 30
+        },
+        "firstMentionDate": "2020-03-19T15:09:00.000Z",
+        "lastMentionDate": "2021-07-22T20:41:00.000Z",
+        "exploitAvailability": false,
+        "vulnerabilityOrigin": [
+          "API"
+        ],
+        "relatedThreatActors": [],
+        "relatedMalware": [],
+        "relatedCampaigns": []
+      }
+    ],
+    "nextOffset": null
+  }
+}
+```
 
 #### Add Manual Alert
 
@@ -130,7 +210,9 @@ Example input:
 Example output:
 
 ```
-
+{
+  "status": true
+}
 ```
 
 #### Get Complete Alert by ID
@@ -272,18 +354,18 @@ This action is used to search Alerts based on criteria.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |alert_type|[]string|None|False|List of alert types. Allowed values: AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip|None|["Phishing"]|
-|assigned|string|None|False|Show assigned/unassigned alerts|['Assigned', 'Unassigned']|Assigned|
-|found_date_from|string|None|False|Start date to fetch from in Unix Millisecond Timestamp|None|0|
-|found_date_to|string|None|False|End date to fetch to in Unix Millisecond Timestamp|None|1633047102456|
+|assigned|string|None|False|Show assigned/unassigned alerts|['Assigned', 'Unassigned', '']|Assigned|
+|found_date_from|string|None|False|Start date (when alert found event) to fetch from in Unix Millisecond Timestamp|None|0|
+|found_date_to|string|None|False|End date (when alert found event) to fetch to in Unix Millisecond Timestamp|None|1633047102456|
 |has_indicators|boolean|None|False|Show alerts with IOCs results|None|False|
-|is_closed|boolean|None|False|Status of the alert, either closed or open|['Closed', 'Open']|Closed|
-|is_flagged|string|None|False|Show flagged/unflagged alerts|['Flagged', 'Unflagged']|Flagged|
-|matched_asset_value|[]string|None|False|List of matched asset values|None|["example.com"]|
+|is_closed|string|None|False|Status of the alert, either closed or open|['Closed', 'Open', '']|Closed|
+|is_flagged|string|None|False|Show flagged/unflagged alerts|['Flagged', 'Unflagged', '']|Flagged|
+|matched_asset_value|[]string|None|False|List of matched asset values. Examples: IP address, domain name, company name|None|["example.com"]|
 |network_type|[]string|None|False|List of network type. Allowed values: ClearWeb, DarkWeb|None|["DarkWeb"]|
 |remediation_status|[]string|None|False|List of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed|None|["InProgress", "Pending"]|
 |severity|[]string|None|False|List of alerts severity. Allowed values: High, Medium, Low|None|["Low"]|
-|source_date_from|string|None|False|Start date to fetch from in Unix Millisecond Timestamp|None|1633047083142|
-|source_date_to|string|None|False|End date to fetch to in Unix Millisecond Timestamp|None|1633047102456|
+|source_date_from|string|None|False|Start date (when the event occurred) to fetch from in Unix Millisecond Timestamp|None|1633047083142|
+|source_date_to|string|None|False|End date (when the event occurred) to fetch to in Unix Millisecond Timestamp|None|1633047102456|
 |source_type|[]string|None|False|List of alerts source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other|None|["Application Store"]|
 
 Example input:
@@ -345,7 +427,7 @@ This action is used to submit an indicator to IntSights for investigation and re
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|indicator_value|string|None|True|Value of the indicator example: IP Address, URL, Domain, Hash|None|example.com|
+|indicator_value|string|None|True|Value of the indicator. Examples: IP address, URL, domain name, hash|None|example.com|
 
 Example input:
 
@@ -574,8 +656,7 @@ This action will search indicators in IntSights TIP.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|indicator_value|string|None|True|Value of the indicator, example: IP Address, URL, Domain, Hash|None|example.com|
-
+|indicator_value|string|None|True|Value of the indicator. Examples: IP address, URL, domain name, hash|None|example.com|
 
 Example input:
 
@@ -596,7 +677,7 @@ Example input:
 |related_campaigns|[]string|True|Related campaigns|
 |related_malware|[]string|True|Related malware|
 |related_threat_actors|[]string|True|Related threat actors|
-|score|integer|True|Score|
+|score|float|True|Score|
 |severity|string|False|Severity|
 |sources|[]source|True|Sources|
 |system_tags|[]string|True|System tags|
@@ -633,7 +714,80 @@ Example output:
 
 ### Triggers
 
-_This plugin does not contain any triggers._
+#### New Alert
+
+This trigger will run when a new alert that matches the given criteria is created in IntSights.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|alert_type|[]string|None|False|List of alert types. Allowed values: AttackIndication, DataLeakage, Phishing, BrandSecurity, ExploitableData, vip|None|["Phishing"]|
+|assigned|string|None|False|Show assigned/unassigned alerts|['Assigned', 'Unassigned', '']|Assigned|
+|found_date_from|string|None|False|Start date (when alert found event) to fetch from in Unix Millisecond Timestamp|None|0|
+|found_date_to|string|None|False|End date (when alert found event) to fetch to in Unix Millisecond Timestamp|None|1633047102456|
+|frequency|integer|60|False|Poll frequency in seconds|None|60|
+|has_indicators|boolean|None|False|Shows alerts with IOC results|None|False|
+|is_closed|string|None|False|Status of the alert, either closed or open|['Closed', 'Open', '']|Closed|
+|is_flagged|string|None|False|Show flagged/unflagged alerts|['Flagged', 'Unflagged', '']|Flagged|
+|matched_asset_value|[]string|None|False|List of matched asset values. Examples: IP address, domain name, company name|None|["example.com"]|
+|network_type|[]string|None|False|List of network types. Allowed values: ClearWeb, DarkWeb|None|["DarkWeb"]|
+|remediation_status|[]string|None|False|List of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed|None|["InProgress", "Pending"]|
+|severity|[]string|None|False|List of alerts severity. Allowed values: High, Medium, Low|None|["Low"]|
+|source_date_from|string|None|False|Start date (when the event occured) to fetch from in Unix Millisecond Timestamp|None|1633047083142|
+|source_date_to|string|None|False|End date (when the event occured) to fetch to in Unix Millisecond Timestamp|None|1633047102456|
+|source_type|[]string|None|False|List of alert's source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other|None|["Application Store"]|
+
+Example input:
+
+```
+{
+  "alert_type": [
+    "Phishing"
+  ],
+  "assigned": "Assigned",
+  "found_date_from": 0,
+  "found_date_to": 1633047102456,
+  "frequency": 60,
+  "has_indicators": false,
+  "is_closed": "Closed",
+  "is_flagged": "Flagged",
+  "matched_asset_value": [
+    "example.com"
+  ],
+  "network_type": [
+    "DarkWeb"
+  ],
+  "remediation_status": [
+    "InProgress",
+    "Pending"
+  ],
+  "severity": [
+    "Low"
+  ],
+  "source_date_from": 1633047083142,
+  "source_date_to": 1633047102456,
+  "source_type": [
+    "Application Store"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|alert_ids|[]string|True|List of alert IDs|
+
+Example output:
+
+```
+{
+  "alert_ids": [
+    "618305318f3b3c0007d2cac0"
+  ]
+}
+```
 
 ### Custom Output Types
 
@@ -657,6 +811,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.0 - Add new trigger New Alert | Add new action Get CVE by ID
 * 1.0.0 - Initial plugin
 
 # Links

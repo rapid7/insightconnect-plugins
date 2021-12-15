@@ -38,7 +38,7 @@ class GetIndicatorByValueInput(insightconnect_plugin_runtime.Input):
     "indicator_value": {
       "type": "string",
       "title": "Indicator Value",
-      "description": "Value of the indicator, example: IP Address, URL, Domain, Hash",
+      "description": "Value of the indicator. Examples: IP address, URL, domain name, hash",
       "order": 1
     }
   },
@@ -110,7 +110,7 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
       "order": 15
     },
     "score": {
-      "type": "integer",
+      "type": "number",
       "title": "Score",
       "description": "Score",
       "order": 4

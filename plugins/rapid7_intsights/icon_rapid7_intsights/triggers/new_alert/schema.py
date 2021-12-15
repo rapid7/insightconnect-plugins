@@ -4,14 +4,16 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Search alerts based on criteria"
+    DESCRIPTION = "Triggers when a new alert that matches the given criteria is created in IntSights"
 
 
 class Input:
+    
     ALERT_TYPE = "alert_type"
     ASSIGNED = "assigned"
     FOUND_DATE_FROM = "found_date_from"
     FOUND_DATE_TO = "found_date_to"
+    FREQUENCY = "frequency"
     HAS_INDICATORS = "has_indicators"
     IS_CLOSED = "is_closed"
     IS_FLAGGED = "is_flagged"
@@ -25,10 +27,11 @@ class Input:
     
 
 class Output:
+    
     ALERT_IDS = "alert_ids"
     
 
-class GetAlertsInput(insightconnect_plugin_runtime.Input):
+class NewAlertInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
@@ -66,10 +69,17 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
       "description": "End date (when alert found event) to fetch to in Unix Millisecond Timestamp",
       "order": 10
     },
+    "frequency": {
+      "type": "integer",
+      "title": "Frequency",
+      "description": "Poll frequency in seconds",
+      "default": 60,
+      "order": 15
+    },
     "has_indicators": {
       "type": "boolean",
       "title": "Has Indicators",
-      "description": "Show alerts with IOCs results",
+      "description": "Shows alerts with IOC results",
       "order": 14
     },
     "is_closed": {
@@ -106,7 +116,7 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
     "network_type": {
       "type": "array",
       "title": "Network Type",
-      "description": "List of network type. Allowed values: ClearWeb, DarkWeb",
+      "description": "List of network types. Allowed values: ClearWeb, DarkWeb",
       "items": {
         "type": "string"
       },
@@ -133,19 +143,19 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
     "source_date_from": {
       "type": "string",
       "title": "Source Date From",
-      "description": "Start date (when the event occurred) to fetch from in Unix Millisecond Timestamp",
+      "description": "Start date (when the event occured) to fetch from in Unix Millisecond Timestamp",
       "order": 7
     },
     "source_date_to": {
       "type": "string",
       "title": "Source Date To",
-      "description": "End date (when the event occurred) to fetch to in Unix Millisecond Timestamp",
+      "description": "End date (when the event occured) to fetch to in Unix Millisecond Timestamp",
       "order": 8
     },
     "source_type": {
       "type": "array",
       "title": "Source Type",
-      "description": "List of alerts source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other",
+      "description": "List of alert's source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other",
       "items": {
         "type": "string"
       },
@@ -159,7 +169,7 @@ class GetAlertsInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class GetAlertsOutput(insightconnect_plugin_runtime.Output):
+class NewAlertOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",

@@ -133,10 +133,34 @@ class IntSightsAPI:
         )
 
     def get_alerts(self, alert_params: AlertParams) -> list:
-        return self.make_request("GET", "public/v1/data/alerts/alerts-list", params=alert_params.to_dict()).json()
+        response = self.make_request("GET", "public/v1/data/alerts/alerts-list", params=alert_params.to_dict())
+        try:
+            if response.text:
+                return response.json()
+        except json.decoder.JSONDecodeError as e:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
+
+        return []
 
     def add_manual_alert(self, manual_alert_params: ManualAlertParams) -> str:
         return self.make_request("PUT", "public/v1/data/alerts/add-alert", json_data=manual_alert_params.to_dict()).text
+
+    def get_cve(self, cve_ids: [str]) -> list:
+        content = []
+        path = "public/v1/cves/get-cves-list"
+        query_params = {}
+        for _ in range(0, 9999):
+            if cve_ids:
+                query_params["cveId[]"] = cve_ids
+
+            response_cve_list = self.make_json_request("GET", path, params=query_params)
+            content.extend(response_cve_list.get("content", []))
+
+            query_params["offset"] = response_cve_list.get("nextOffset", "")
+            if not query_params["offset"]:
+                break
+
+        return content
 
     def test_credentials(self) -> bool:
         return self.make_request("HEAD", "public/v1/test-credentials").status_code == 200
