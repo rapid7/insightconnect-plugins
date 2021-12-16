@@ -1,4 +1,5 @@
 from insightconnect_plugin_runtime.exceptions import PluginException
+import io
 import json
 import requests
 from typing import Dict, List
@@ -264,25 +265,28 @@ class ApiClient:
         return self._call_api("DELETE", f"{self.endpoint}/servergroups/{group_id}", params=self._org_param(org_id))
 
     # Vulnerability Sync
-    def upload_vulnerability_sync_file(self, org_id: int, file_content):
-        payload = {'file': ('insightconnect-report.csv', file_content, 'text/csv')}
+    def upload_vulnerability_sync_file(self, org_id: int, file_content, filename):
+        with io.BytesIO(file_content) as file:
+            files = [
+                ('file', (filename, file, 'text/csv'))
+            ]
 
-        headers = {
-            'Content-Type': 'multipart/form-data',
-            'Authorization': f"Bearer {self.api_key}"
-        }
+            headers = {
+                'Authorization': f"Bearer {self.api_key}"
+            }
 
-        try:
-            response = requests.post(f"{self.endpoint}/orgs/{org_id}/tasks/patch/batches/upload",
-                                     payload, headers=headers)
-            if response.status_code == 200:
-                return response.get("id")
-            else:
+            try:
+                response = requests.post(f"{self.endpoint}/orgs/{org_id}/tasks/patch/batches/upload",
+                                         files=files, headers=headers)
+
+                if response.status_code == 200:
+                    return response.json().get("id")
+                else:
+                    raise PluginException(cause="Failed to upload file to Vulnerability Sync",
+                                          assistance=f"Response code: {response.status_code}, Content: {response.content}")
+            except Exception as e:
                 raise PluginException(cause="Failed to upload file to Vulnerability Sync",
-                                      assistance=f"Response code: {response.status_code}")
-        except Exception as e:
-            raise PluginException(cause="Failed to upload file to Vulnerability Sync",
-                                  assistance=f"Review encoded CSV file and try again: {e}")
+                                      assistance=f"Review encoded CSV file and try again: {e}")
 
     def get_vulnerability_sync_batches(self, org_id: int):
         return self._page_results_data(f"{self.endpoint}/orgs/{org_id}/tasks/batches")
@@ -298,3 +302,13 @@ class ApiClient:
 
     def update_vulnerability_sync_task(self, org_id: int, task_id: int, action: str):
         return self._call_api("PATCH", f"{self.endpoint}/orgs/{org_id}/tasks/{task_id}", params={"action": action})
+
+    # Events
+    def get_events(self, org_id: int, event_type: str, page: int = 0):
+        params = {
+            "o": org_id,
+            "eventName": event_type,
+            "page": page,
+            "limit": self.PAGE_SIZE
+        }
+        return self._call_api("GET", f"{self.endpoint}/events", params)

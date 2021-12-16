@@ -46,6 +46,7 @@ This action is used to upload CSV file to vulnerability sync for processing.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |csv_file|bytes|None|True|Base64 encoded CSV data from which to create the vulnerabiulity sync batch|None|None|
+|csv_file_name|string|https://example.com|False|Name for CSV file uploaded and shown within Automox|None|None|
 |org_id|integer|None|True|Identifier of organization|None|1|
 
 Example input:
@@ -65,6 +66,9 @@ Example input:
 Example output:
 
 ```
+{
+  "batch_id": 424
+}
 ```
 
 #### List Vulnerability Sync Tasks
@@ -815,9 +819,6 @@ This action is used to retrieve Automox policies.
 Example input:
 
 ```
-{
-  "org_id": 1
-}
 ```
 
 ##### Output

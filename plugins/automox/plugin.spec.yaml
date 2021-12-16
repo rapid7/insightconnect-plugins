@@ -804,6 +804,12 @@ actions:
         description: Base64 encoded CSV data from which to create the vulnerabiulity sync batch
         type: bytes
         required: true
+      csv_file_name:
+        title: CSV File Name
+        description: Name for CSV file uploaded and shown within Automox
+        type: string
+        required: false
+        default: "insightconnect-uploaded-report.csv"
     output:
       batch_id:
         title: Vulnerability Sync Batch ID

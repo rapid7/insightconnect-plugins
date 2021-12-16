@@ -1,5 +1,5 @@
 {
-	"spec": "26190636e662778245304e1a2d6bada3",
+	"spec": "1d1a7566c2d641324f778878c74ee322",
 	"manifest": "bdac4e9c983e0c741c926b22c710e16c",
 	"setup": "c75540f04c5c1b3a65b8dc5d8c2f9091",
 	"schemas": [
@@ -81,7 +81,7 @@
 		},
 		{
 			"identifier": "upload_vulnerability_sync_file/schema.py",
-			"hash": "9b0613dc34b59eaa405d1a122a7b9120"
+			"hash": "fb274f15868d4550e9de00a768284f0c"
 		},
 		{
 			"identifier": "connection/schema.py",
