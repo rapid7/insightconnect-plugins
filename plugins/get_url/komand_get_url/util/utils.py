@@ -1,6 +1,7 @@
-import komand
-import json
 import hashlib
+import json
+
+import komand
 from komand.exceptions import PluginException
 
 
@@ -49,14 +50,14 @@ class Utils(object):
             "etag": headers.get("etag"),
             "file": meta.get("file"),
         }
-        with komand.helper.open_cachefile(meta["metafile"]) as f:
+        with komand.helper.open_cachefile(meta.get("metafile")) as f:
             json.dump(data, f)
         self.logger.info(f"CreateUrlMetaFile: MetaFile created: {str(data)}")
 
     def check_url_meta_file(self, meta):
         """Check caching headers from meta info dictionary"""
         try:
-            with komand.helper.open_cachefile(meta["metafile"]) as f:
+            with komand.helper.open_cachefile(meta.get("metafile")) as f:
                 data = json.load(f)
             return data
         except Exception as e:
@@ -66,3 +67,24 @@ class Utils(object):
                 assistance="Error while retreving meta file",
                 data=e,
             )
+
+    def check_prefix_and_download(self, url, is_verify, user_agent, timeout=None):
+        """Check for supported url prefix"""
+        self.validate_url(url)
+        meta = self.hash_url(url)
+
+        """Attempt to retrieve headers from past request"""
+        headers = {}
+        if komand.helper.check_cachefile(meta.get("metafile")):
+            headers = self.check_url_meta_file(meta)
+
+        """Download file"""
+        url_object = komand.helper.open_url(
+            url,
+            timeout=timeout,
+            verify=is_verify,
+            If_None_Match=headers.get("etag", ""),
+            If_Modified_Since=headers.get("last-modified", ""),
+            User_Agent=user_agent,
+        )
+        return url_object, meta
