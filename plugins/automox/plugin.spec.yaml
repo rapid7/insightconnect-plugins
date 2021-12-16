@@ -422,7 +422,7 @@ actions:
         description: Identifier of Organization
         type: integer
         required: true
-        example: 1
+        example: 1234
     output:
       users:
         title: Users
@@ -438,7 +438,7 @@ actions:
         description: Identifier of organization to restrict results
         type: integer
         required: false
-        example: 1
+        example: 1234
     output:
       policies:
         title: Policies
@@ -454,13 +454,13 @@ actions:
         description: Identifier of organization to restrict results
         type: integer
         required: false
-        example: 1
+        example: 1234
       group_id:
         title: Group ID
         description: Identifier of Server Group
         type: integer
         required: false
-        example: 1
+        example: 1234
     output:
       devices:
         title: Devices
@@ -476,7 +476,7 @@ actions:
         description: Identifier of organization to restrict results
         type: integer
         required: false
-        example: 1
+        example: 1234
       hostname:
         title: Hostname
         description: Hostname of device
@@ -498,13 +498,13 @@ actions:
         description: Identifier of organization to restrict results
         type: integer
         required: false
-        example: 1
+        example: 1234
       ip_address:
         title: IP Address
         description: IP address of device
         type: string
         required: true
-        example: "127.0.0.1"
+        example: '192.168.0.1'
     output:
       device:
         title: Device
@@ -520,30 +520,32 @@ actions:
         description: Identifier of organization
         type: integer
         required: false
-        example: 1
+        example: 1234
       device_id:
         title: Device ID
         description: Identifier of device
         type: integer
         required: true
-        example: 1
+        example: 1234
       server_group_id:
         title: Server Group ID
         description: Identifier of server group
         type: integer
         required: false
-        example: 1
+        example: 1234
       tags:
         title: Tags
         description: List of tags
         type: "[]string"
         required: false
+        example: ["tag1", "tag2"]
       exception:
         title: Exception
         description: Exclude the device from reports and statistics
         required: true
         type: boolean
         default: false
+        example: false
       custom_name:
         title: Custom Name
         description: Custom name to set on device
@@ -565,13 +567,13 @@ actions:
         description: Identifier of organization
         type: integer
         required: false
-        example: 1
+        example: 1234
       device_id:
         title: Device ID
         description: Identifier of device
         type: integer
         required: true
-        example: 1
+        example: 1234
     output:
       success:
         title: Success
@@ -587,13 +589,13 @@ actions:
         description: Identifier of organization
         type: integer
         required: false
-        example: 1
+        example: 1234
       device_id:
         title: Device ID
         description: Identifier of device
         type: integer
         required: true
-        example: 1
+        example: 1234
     output:
       software:
         title: Device Software
@@ -609,13 +611,13 @@ actions:
         description: Identifier of organization
         type: integer
         required: false
-        example: 1
+        example: 1234
       device_id:
         title: Device ID
         description: Identifier of device
         type: integer
         required: true
-        example: 1
+        example: 1234
       command:
         title: Device ID
         description: Identifier of device
@@ -634,11 +636,13 @@ actions:
         description: List of patches to be installed (Note that this only works with InstallUpdate command)
         type: "[]string"
         required: false
+        example: [""]
       policy_id:
         title: Policy ID
         description: Identifier of policy
         type: integer
         required: false
+        example: 1234
     output:
       success:
         title: Success
@@ -654,7 +658,7 @@ actions:
         description: Identifier of organization to restrict results
         type: integer
         required: false
-        example: 1
+        example: 1234
     output:
       groups:
         title: Groups
@@ -670,23 +674,26 @@ actions:
         description: Identifier of organization
         type: integer
         required: false
-        example: 1
+        example: 1234
       name:
         title: Name
         description: Name of the group
         type: string
         required: true
+        example: Group1
       refresh_interval:
         title: Refresh Interval
         description: Frequency of device refreshes in minutes
         type: integer
         required: true
         default: 1440
+        example: 1440
       parent_server_group_id:
         title: Parent Server Group ID
         description: Name of the parent group (Will be set to Default Group ID if not set)
         type: integer
         required: false
+        example: 1234
       color:
         title: Group Color
         description: Automox console highlight color for the group
@@ -698,11 +705,13 @@ actions:
         description: Define notes for the group
         type: string
         required: false
+        example: "Example notes go here"
       policies:
         title: Policies
         description: List of policies to assign to group
         type: "[]integer"
         required: false
+        example: [1, 2, 3]
     output:
       success:
         title: Success
@@ -723,29 +732,32 @@ actions:
         description: Identifier of organization
         type: integer
         required: false
-        example: 1
+        example: 1234
       group_id:
         title: Group ID
         description: Identifier of the Automox group
         type: integer
         required: true
-        example: 1
+        example: 1234
       name:
         title: Name
         description: Name of the group
         type: string
         required: true
+        example: Group1
       refresh_interval:
         title: Refresh Interval
         description: Frequency of device refreshes in minutes
         type: integer
         required: true
         default: 1440
+        example: 1440
       parent_server_group_id:
         title: Parent Server Group ID
         description: Name of the parent group (Will be set to Default Group ID if not set)
         type: integer
         required: false
+        example: 1234
       color:
         title: Group Color
         description: Automox console highlight color for the group
@@ -757,11 +769,13 @@ actions:
         description: Define notes for the group
         type: string
         required: false
+        example: "Example notes go here"
       policies:
         title: Policies
         description: List of policies to assign to group
         type: "[]integer"
         required: false
+        example: [1, 2, 3]
     output:
       success:
         title: Success
@@ -777,13 +791,13 @@ actions:
         description: Identifier of organization
         type: integer
         required: false
-        example: 1
+        example: 1234
       group_id:
         title: Group ID
         description: Identifier of the Automox group
         type: integer
         required: true
-        example: 1
+        example: 1234
     output:
       success:
         title: Success
@@ -799,12 +813,13 @@ actions:
         description: Identifier of organization
         type: integer
         required: true
-        example: 1
+        example: 1234
       csv_file:
         title: CSV File
         description: Base64 encoded CSV data from which to create the vulnerabiulity sync batch
         type: bytes
         required: true
+        example: "PGgxPlJhcGlkNzwvaDE+"
       csv_file_name:
         title: CSV File Name
         description: Name for CSV file uploaded and shown within Automox
@@ -818,7 +833,7 @@ actions:
         description: Identifier of vulnerability sync batch
         type: integer
         required: true
-        example: 1
+        example: 1234
   get_vulnerability_sync_batch:
     title: Get Vulnerability Sync Batch
     description: Retrieve details for a specified vulnerability sync batch
@@ -828,13 +843,13 @@ actions:
         description: Identifier of organization
         type: integer
         required: true
-        example: 1
+        example: 1234
       batch_id:
         title: Batch ID
         description: Identifier of batch
         type: integer
         required: true
-        example: 1
+        example: 1234
     output:
       batch:
         title: Vulnerability Sync Batch
@@ -850,13 +865,13 @@ actions:
         description: Identifier of organization
         type: integer
         required: true
-        example: 1
+        example: 1234
       batch_id:
         title: Batch ID
         description: Identifier of batch
         type: integer
         required: true
-        example: 1
+        example: 1234
       action:
         title: Action
         description: Action to take on batch
@@ -881,7 +896,7 @@ actions:
         description: Identifier of organization
         type: integer
         required: true
-        example: 1
+        example: 1234
     output:
       batches:
         title: Vulnerability Sync Batches
@@ -897,7 +912,7 @@ actions:
         description: Identifier of organization
         type: integer
         required: true
-        example: 1
+        example: 1234
       status:
         title: Status
         description: Filter by status of tasks
@@ -909,7 +924,7 @@ actions:
         description: Filter by batch identifier
         type: integer
         required: false
-        example: 1
+        example: 1234
     output:
       tasks:
         title: Vulnerability Sync Tasks
@@ -925,13 +940,13 @@ actions:
         description: Identifier of organization
         type: integer
         required: true
-        example: 1
+        example: 1234
       task_id:
         title: Task ID
         description: Identifier of task
         type: integer
         required: true
-        example: 1
+        example: 1234
       action:
         title: Action
         description: Action to take on vulnerability sync task
@@ -958,7 +973,7 @@ triggers:
         description: Identifier of organization to restrict results
         type: integer
         required: false
-        example: 1
+        example: 1234
       event_type:
         title: Event Type
         description: Name of event type to be retrieved (List of event types found at https://developer.automox.com/openapi/axconsole/operation/getEvents/)

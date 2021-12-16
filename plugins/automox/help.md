@@ -45,16 +45,17 @@ This action is used to upload CSV file to vulnerability sync for processing.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|csv_file|bytes|None|True|Base64 encoded CSV data from which to create the vulnerabiulity sync batch|None|None|
-|csv_file_name|string|https://example.com|False|Name for CSV file uploaded and shown within Automox|None|https://example.com|
-|org_id|integer|None|True|Identifier of organization|None|1|
+|csv_file|bytes|None|True|Base64 encoded CSV data from which to create the vulnerabiulity sync batch|None|PGgxPlJhcGlkNzwvaDE+|
+|csv_file_name|string|https://example.com|False|Name for CSV file uploaded and shown within Automox|None|insightconnect-uploaded-report.csv|
+|org_id|integer|None|True|Identifier of organization|None|1234|
 
 Example input:
 
 ```
 {
+  "csv_file": "PGgxPlJhcGlkNzwvaDE+",
   "csv_file_name": "insightconnect-uploaded-report.csv",
-  "org_id": 1
+  "org_id": 1234
 }
 ```
 
@@ -80,16 +81,16 @@ This action is used to retrieve list of vulnerability sync tasks.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|batch_id|integer|None|False|Filter by batch identifier|None|1|
-|org_id|integer|None|True|Identifier of organization|None|1|
+|batch_id|integer|None|False|Filter by batch identifier|None|1234|
+|org_id|integer|None|True|Identifier of organization|None|1234|
 |status|string|None|False|Filter by status of tasks|None|in_progress|
 
 Example input:
 
 ```
 {
-  "batch_id": 1,
-  "org_id": 1,
+  "batch_id": 1234,
+  "org_id": 1234,
   "status": "in_progress"
 }
 ```
@@ -150,13 +151,13 @@ This action is used to retrieve list of vulnerability sync batches.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|org_id|integer|None|True|Identifier of organization|None|1|
+|org_id|integer|None|True|Identifier of organization|None|1234|
 
 Example input:
 
 ```
 {
-  "org_id": 1
+  "org_id": 1234
 }
 ```
 
@@ -225,15 +226,15 @@ This action is used to retrieve details for a specified vulnerability sync batch
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|batch_id|integer|None|True|Identifier of batch|None|1|
-|org_id|integer|None|True|Identifier of organization|None|1|
+|batch_id|integer|None|True|Identifier of batch|None|1234|
+|org_id|integer|None|True|Identifier of organization|None|1234|
 
 Example input:
 
 ```
 {
-  "batch_id": 1,
-  "org_id": 1
+  "batch_id": 1234,
+  "org_id": 1234
 }
 ```
 
@@ -284,16 +285,16 @@ This action is used to take action to execute or cancel vulnerability sync task.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |action|string|None|True|Action to take on vulnerability sync task|['execute', 'cancel']|execute|
-|org_id|integer|None|True|Identifier of organization|None|1|
-|task_id|integer|None|True|Identifier of task|None|1|
+|org_id|integer|None|True|Identifier of organization|None|1234|
+|task_id|integer|None|True|Identifier of task|None|1234|
 
 Example input:
 
 ```
 {
   "action": "execute",
-  "org_id": 1,
-  "task_id": 1
+  "org_id": 1234,
+  "task_id": 1234
 }
 ```
 
@@ -317,16 +318,16 @@ This action is used to take action to approve or reject vulnerability sync batch
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |action|string|None|True|Action to take on batch|['accept', 'reject']|accept|
-|batch_id|integer|None|True|Identifier of batch|None|1|
-|org_id|integer|None|True|Identifier of organization|None|1|
+|batch_id|integer|None|True|Identifier of batch|None|1234|
+|org_id|integer|None|True|Identifier of organization|None|1234|
 
 Example input:
 
 ```
 {
   "action": "accept",
-  "batch_id": 1,
-  "org_id": 1
+  "batch_id": 1234,
+  "org_id": 1234
 }
 ```
 
@@ -350,21 +351,30 @@ This action is used to update an Automox group.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |color|string|None|False|Automox console highlight color for the group|None|#059F1D|
-|group_id|integer|None|True|Identifier of the Automox group|None|1|
-|name|string|None|True|Name of the group|None|None|
-|notes|string|None|False|Define notes for the group|None|None|
-|org_id|integer|None|False|Identifier of organization|None|1|
-|parent_server_group_id|integer|None|False|Name of the parent group (Will be set to Default Group ID if not set)|None|None|
-|policies|[]integer|None|False|List of policies to assign to group|None|None|
-|refresh_interval|integer|1440|True|Frequency of device refreshes in minutes|None|None|
+|group_id|integer|None|True|Identifier of the Automox group|None|1234|
+|name|string|None|True|Name of the group|None|Group1|
+|notes|string|None|False|Define notes for the group|None|Example notes go here|
+|org_id|integer|None|False|Identifier of organization|None|1234|
+|parent_server_group_id|integer|None|False|Name of the parent group (Will be set to Default Group ID if not set)|None|1234|
+|policies|[]integer|None|False|List of policies to assign to group|None|[1, 2, 3]|
+|refresh_interval|integer|1440|True|Frequency of device refreshes in minutes|None|1440|
 
 Example input:
 
 ```
 {
   "color": "#059F1D",
-  "group_id": 1,
-  "org_id": 1
+  "group_id": 1234,
+  "name": "Group1",
+  "notes": "Example notes go here",
+  "org_id": 1234,
+  "parent_server_group_id": 1234,
+  "policies": [
+    1,
+    2,
+    3
+  ],
+  "refresh_interval": 1440
 }
 ```
 
@@ -388,18 +398,22 @@ This action is used to run a command on the device.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |command|string|None|True|Identifier of device|['GetOS', 'InstallUpdate', 'InstallAllUpdates', 'PolicyTest', 'PolicyRemediate', 'Reboot']|GetOS|
-|device_id|integer|None|True|Identifier of device|None|1|
-|org_id|integer|None|False|Identifier of organization|None|1|
-|patches|[]string|None|False|List of patches to be installed (Note that this only works with InstallUpdate command)|None|None|
-|policy_id|integer|None|False|Identifier of policy|None|None|
+|device_id|integer|None|True|Identifier of device|None|1234|
+|org_id|integer|None|False|Identifier of organization|None|1234|
+|patches|[]string|None|False|List of patches to be installed (Note that this only works with InstallUpdate command)|None|[""]|
+|policy_id|integer|None|False|Identifier of policy|None|1234|
 
 Example input:
 
 ```
 {
   "command": "GetOS",
-  "device_id": 1,
-  "org_id": 1
+  "device_id": 1234,
+  "org_id": 1234,
+  "patches": [
+    ""
+  ],
+  "policy_id": 1234
 }
 ```
 
@@ -422,13 +436,13 @@ This action is used to list Automox groups.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|org_id|integer|None|False|Identifier of organization to restrict results|None|1|
+|org_id|integer|None|False|Identifier of organization to restrict results|None|1234|
 
 Example input:
 
 ```
 {
-  "org_id": 1
+  "org_id": 1234
 }
 ```
 
@@ -452,15 +466,15 @@ This action is used to retrieve a list of software installed on the device.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|device_id|integer|None|True|Identifier of device|None|1|
-|org_id|integer|None|False|Identifier of organization|None|1|
+|device_id|integer|None|True|Identifier of device|None|1234|
+|org_id|integer|None|False|Identifier of organization|None|1234|
 
 Example input:
 
 ```
 {
-  "device_id": 1,
-  "org_id": 1
+  "device_id": 1234,
+  "org_id": 1234
 }
 ```
 
@@ -523,15 +537,15 @@ This action is used to delete an Automox group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|group_id|integer|None|True|Identifier of the Automox group|None|1|
-|org_id|integer|None|False|Identifier of organization|None|1|
+|group_id|integer|None|True|Identifier of the Automox group|None|1234|
+|org_id|integer|None|False|Identifier of organization|None|1234|
 
 Example input:
 
 ```
 {
-  "group_id": 1,
-  "org_id": 1
+  "group_id": 1234,
+  "org_id": 1234
 }
 ```
 
@@ -556,19 +570,28 @@ This action is used to create an Automox group.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |color|string|None|False|Automox console highlight color for the group|None|#059F1D|
-|name|string|None|True|Name of the group|None|None|
-|notes|string|None|False|Define notes for the group|None|None|
-|org_id|integer|None|False|Identifier of organization|None|1|
-|parent_server_group_id|integer|None|False|Name of the parent group (Will be set to Default Group ID if not set)|None|None|
-|policies|[]integer|None|False|List of policies to assign to group|None|None|
-|refresh_interval|integer|1440|True|Frequency of device refreshes in minutes|None|None|
+|name|string|None|True|Name of the group|None|Group1|
+|notes|string|None|False|Define notes for the group|None|Example notes go here|
+|org_id|integer|None|False|Identifier of organization|None|1234|
+|parent_server_group_id|integer|None|False|Name of the parent group (Will be set to Default Group ID if not set)|None|1234|
+|policies|[]integer|None|False|List of policies to assign to group|None|[1, 2, 3]|
+|refresh_interval|integer|1440|True|Frequency of device refreshes in minutes|None|1440|
 
 Example input:
 
 ```
 {
   "color": "#059F1D",
-  "org_id": 1
+  "name": "Group1",
+  "notes": "Example notes go here",
+  "org_id": 1234,
+  "parent_server_group_id": 1234,
+  "policies": [
+    1,
+    2,
+    3
+  ],
+  "refresh_interval": 1440
 }
 ```
 
@@ -604,15 +627,15 @@ This action is used to delete Automox device.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|device_id|integer|None|True|Identifier of device|None|1|
-|org_id|integer|None|False|Identifier of organization|None|1|
+|device_id|integer|None|True|Identifier of device|None|1234|
+|org_id|integer|None|False|Identifier of organization|None|1234|
 
 Example input:
 
 ```
 {
-  "device_id": 1,
-  "org_id": 1
+  "device_id": 1234,
+  "org_id": 1234
 }
 ```
 
@@ -637,14 +660,14 @@ This action is used to find an Automox device by hostname.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |hostname|string|None|True|Hostname of device|None|hostname-1|
-|org_id|integer|None|False|Identifier of organization to restrict results|None|1|
+|org_id|integer|None|False|Identifier of organization to restrict results|None|1234|
 
 Example input:
 
 ```
 {
   "hostname": "hostname-1",
-  "org_id": 1
+  "org_id": 1234
 }
 ```
 
@@ -667,15 +690,15 @@ This action is used to find an Automox device by IP address.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|ip_address|string|None|True|IP address of device|None|https://example.com|
-|org_id|integer|None|False|Identifier of organization to restrict results|None|1|
+|ip_address|string|None|True|IP address of device|None|192.168.0.1|
+|org_id|integer|None|False|Identifier of organization to restrict results|None|1234|
 
 Example input:
 
 ```
 {
-  "ip_address": "127.0.0.1",
-  "org_id": 1
+  "ip_address": "192.168.0.1",
+  "org_id": 1234
 }
 ```
 
@@ -698,15 +721,15 @@ This action is used to retrieve Automox managed devices.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|group_id|integer|None|False|Identifier of Server Group|None|1|
-|org_id|integer|None|False|Identifier of organization to restrict results|None|1|
+|group_id|integer|None|False|Identifier of Server Group|None|1234|
+|org_id|integer|None|False|Identifier of organization to restrict results|None|1234|
 
 Example input:
 
 ```
 {
-  "group_id": 1,
-  "org_id": 1
+  "group_id": 1234,
+  "org_id": 1234
 }
 ```
 
@@ -730,13 +753,13 @@ This action is used to retrieve users of the Automox organization.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|org_id|integer|None|True|Identifier of Organization|None|1|
+|org_id|integer|None|True|Identifier of Organization|None|1234|
 
 Example input:
 
 ```
 {
-  "org_id": 1
+  "org_id": 1234
 }
 ```
 
@@ -815,7 +838,7 @@ This action is used to retrieve Automox policies.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|org_id|integer|None|False|Identifier of organization to restrict results|None|1|
+|org_id|integer|None|False|Identifier of organization to restrict results|None|1234|
 
 Example input:
 
@@ -910,20 +933,25 @@ This action is used to update Automox device.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |custom_name|string|None|False|Custom name to set on device|None|custom-name|
-|device_id|integer|None|True|Identifier of device|None|1|
-|exception|boolean|False|True|Exclude the device from reports and statistics|None|None|
-|org_id|integer|None|False|Identifier of organization|None|1|
-|server_group_id|integer|None|False|Identifier of server group|None|1|
-|tags|[]string|None|False|List of tags|None|None|
+|device_id|integer|None|True|Identifier of device|None|1234|
+|exception|boolean|False|True|Exclude the device from reports and statistics|None|False|
+|org_id|integer|None|False|Identifier of organization|None|1234|
+|server_group_id|integer|None|False|Identifier of server group|None|1234|
+|tags|[]string|None|False|List of tags|None|["tag1", "tag2"]|
 
 Example input:
 
 ```
 {
   "custom_name": "custom-name",
-  "device_id": 1,
-  "org_id": 1,
-  "server_group_id": 1
+  "device_id": 1234,
+  "exception": false,
+  "org_id": 1234,
+  "server_group_id": 1234,
+  "tags": [
+    "tag1",
+    "tag2"
+  ]
 }
 ```
 
@@ -952,14 +980,14 @@ This trigger is used to retrieve Automox events to trigger workflows.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |event_type|string|None|True|Name of event type to be retrieved (List of event types found at https://developer.automox.com/openapi/axconsole/operation/getEvents/)|None|https://example.com|
-|org_id|integer|None|False|Identifier of organization to restrict results|None|1|
+|org_id|integer|None|False|Identifier of organization to restrict results|None|1234|
 
 Example input:
 
 ```
 {
   "event_type": "user.login",
-  "org_id": 1
+  "org_id": 1234
 }
 ```
 
