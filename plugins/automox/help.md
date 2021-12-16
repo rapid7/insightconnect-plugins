@@ -13,7 +13,7 @@ Identify key features of plugin.
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* All
 
 # Documentation
 
@@ -46,13 +46,14 @@ This action is used to upload CSV file to vulnerability sync for processing.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |csv_file|bytes|None|True|Base64 encoded CSV data from which to create the vulnerabiulity sync batch|None|None|
-|csv_file_name|string|https://example.com|False|Name for CSV file uploaded and shown within Automox|None|None|
+|csv_file_name|string|https://example.com|False|Name for CSV file uploaded and shown within Automox|None|https://example.com|
 |org_id|integer|None|True|Identifier of organization|None|1|
 
 Example input:
 
 ```
 {
+  "csv_file_name": "insightconnect-uploaded-report.csv",
   "org_id": 1
 }
 ```
@@ -316,7 +317,7 @@ This action is used to take action to approve or reject vulnerability sync batch
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |action|string|None|True|Action to take on batch|['accept', 'reject']|accept|
-|batch_id|integer|None|True||None|1|
+|batch_id|integer|None|True|Identifier of batch|None|1|
 |org_id|integer|None|True|Identifier of organization|None|1|
 
 Example input:

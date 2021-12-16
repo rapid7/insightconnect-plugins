@@ -4,14 +4,15 @@ products: [insightconnect]
 name: automox
 title: Automox
 description: Automox is Modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment
-version: 0.1.0
+version: 1.0.0
+supported_versions: ["All"]
 vendor: automox
-support: automox
+support: partner
 status: []
 tags: [endpoint, patch]
 hub_tags:
   use_cases: [threat_detection_and_response, asset_inventory, remediation_management]
-  keywords: [endpoint, patch]
+  keywords: [endpoint]
   features: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/automox
@@ -503,7 +504,7 @@ actions:
         description: IP address of device
         type: string
         required: true
-        example: 127.0.0.1
+        example: "127.0.0.1"
     output:
       device:
         title: Device
@@ -810,6 +811,7 @@ actions:
         type: string
         required: false
         default: "insightconnect-uploaded-report.csv"
+        example: "insightconnect-uploaded-report.csv"
     output:
       batch_id:
         title: Vulnerability Sync Batch ID
@@ -851,7 +853,7 @@ actions:
         example: 1
       batch_id:
         title: Batch ID
-        description:
+        description: Identifier of batch
         type: integer
         required: true
         example: 1

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="automox-automox-plugin",
-      version="0.1.0",
+      version="1.0.0",
       description="Automox is Modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment",
       author="automox",
       author_email="",

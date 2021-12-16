@@ -1,11 +1,11 @@
 {
-	"spec": "1d1a7566c2d641324f778878c74ee322",
-	"manifest": "bdac4e9c983e0c741c926b22c710e16c",
-	"setup": "c75540f04c5c1b3a65b8dc5d8c2f9091",
+	"spec": "2f37c85a589ff21a0f342dcc155c4353",
+	"manifest": "745c2159ce7ebcc40426be5f7a74683e",
+	"setup": "17cf3b48ae42eb31f045a39ead237b0b",
 	"schemas": [
 		{
 			"identifier": "action_on_vulnerability_sync_batch/schema.py",
-			"hash": "b2d51a5ce1d30ebaab91c3b273afeb9a"
+			"hash": "4b3f998313fe5fcb484c5c4fff7fa004"
 		},
 		{
 			"identifier": "action_on_vulnerability_sync_task/schema.py",

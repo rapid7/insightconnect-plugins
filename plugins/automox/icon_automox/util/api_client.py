@@ -311,4 +311,4 @@ class ApiClient:
             "page": page,
             "limit": self.PAGE_SIZE
         }
-        return self._call_api("GET", f"{self.endpoint}/events", params)
+        return self.remove_null_values(self._call_api("GET", f"{self.endpoint}/events", params))
