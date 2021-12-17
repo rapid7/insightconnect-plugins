@@ -1,15 +1,23 @@
 # Description
 
-Automox is Modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment
+Automox is modernizing IT operations through cloud-native efficiency and upending the old ways of legacy on-premise 
+tools. Keeping you continuously connected to all your endpoints, regardless of location, environment, and operating
+system type. Now you can manage and apply operating system and third-party patches, enforce security configurations, 
+deploy software, and execute any action across Windows, macOS, and Linux systems. 
+
+Utilizing this plugin allows for the orchestration of IT operations such as device management, triggering remote 
+outcomes on endpoints, and basic Automox platform administration. 
 
 # Key Features
 
-Identify key features of plugin.
+* Ability to retrieve and manage Automox managed devices
+* Ability to managed Automox groups
+* Ability to initiate Vulnerability Sync uploads and remediation of issues
+* Ability to trigger workflows based on Automox platform events
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product's user interface
+* Requires an Automox API Key
 
 # Supported Product Versions
 
@@ -1027,5 +1035,7 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [Automox](LINK TO PRODUCT/VENDOR WEBSITE)
+* [Automox](https://www.automox.com/)
+* [Automox Developer Portal](https://developer.automox.com/)
+* [Managing API Keys](https://support.automox.com/help/managing-keys)
 
