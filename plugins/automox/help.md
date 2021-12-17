@@ -11,7 +11,7 @@ outcomes on endpoints, and basic Automox platform administration.
 # Key Features
 
 * Ability to retrieve and manage Automox managed devices
-* Ability to managed Automox groups
+* Ability to manage Automox groups
 * Ability to initiate Vulnerability Sync uploads and remediation of issues
 * Ability to trigger workflows based on Automox platform events
 
@@ -117,27 +117,27 @@ Example output:
     {
       "created_at": "2021-09-24T18:45:04+0000",
       "last_updated_by_user": {
-        "firstname": "Peter",
-        "id": 44688,
-        "lastname": "Pflaster",
+        "firstname": "John",
+        "id": 1234,
+        "lastname": "Smith",
         "email": "user@example.com"
       },
       "status": "in_progress",
       "task_type": "patch-now",
       "created_by_user": {
         "email": "user@example.com",
-        "firstname": "Peter",
-        "id": 44688,
-        "lastname": "Pflaster"
+        "firstname": "John",
+        "id": 1234,
+        "lastname": "Smith"
       },
-      "id": 266,
-      "organization_id": 9237,
+      "id": 1234,
+      "organization_id": 1234,
       "payload": {
         "severity": "medium",
         "package_versions": [
           {
             "display_name": "2021-06 Cumulative Update for Windows 10 Version 2...",
-            "id": "232850978",
+            "id": "1234",
             "name": "f2ac1cd6-4c7f-4481-bf8c-abf3ed49d39b",
             "version": "1"
           }
@@ -181,46 +181,25 @@ Example output:
 {
   "batches": [
     {
-      "id": 379,
-      "organization_id": 9237,
+      "id": 1234,
+      "organization_id": 1234,
       "source": "report.csv",
       "status": "awaiting_approval",
       "created_by_user": {
-        "lastname": "Youtz",
+        "lastname": "Smith",
         "email": "user@example.com",
-        "firstname": "Zachary",
-        "id": 43852
+        "firstname": "John",
+        "id": 1234
       },
       "unknown_host_count": 41,
       "updated_at": "2021-12-02T20:24:09+0000",
       "updated_by_user": {
         "id": 43852,
-        "lastname": "Youtz",
+        "lastname": "Smith",
         "email": "user@example.com",
-        "firstname": "Zachary"
+        "firstname": "John"
       },
       "created_at": "2021-12-02T20:24:08+0000"
-    },
-    {
-      "id": 355,
-      "updated_by_user": {
-        "email": "user@example.com",
-        "firstname": "Zachary",
-        "id": 43852,
-        "lastname": "Youtz"
-      },
-      "created_at": "2021-11-23T17:51:04+0000",
-      "created_by_user": {
-        "email": "user@example.com",
-        "firstname": "Zachary",
-        "id": 43852,
-        "lastname": "Youtz"
-      },
-      "organization_id": 9237,
-      "source": "report.csv",
-      "status": "awaiting_approval",
-      "unknown_host_count": 41,
-      "updated_at": "2021-11-23T17:51:06+0000"
     }
   ]
 }
@@ -260,24 +239,24 @@ Example output:
     "task_count": 2,
     "updated_at": "2021-09-24T18:46:22+0000",
     "cve_count": 2,
-    "organization_id": 9237,
+    "organization_id": 1234,
     "status": "approved",
     "impacted_device_count": 6,
     "issue_count": 3,
-    "source": "peter.csv",
+    "source": "example.csv",
     "unknown_host_count": 2,
     "updated_by": {
-      "firstname": "Peter",
-      "id": 44688,
-      "lastname": "Pflaster",
+      "firstname": "John",
+      "id": 1234,
+      "lastname": "Smith",
       "email": "user@example.com"
     },
     "created_at": "2021-09-24T18:45:04+0000",
     "created_by": {
       "email": "user@example.com",
-      "firstname": "Peter",
-      "id": 44688,
-      "lastname": "Pflaster"
+      "firstname": "John",
+      "id": 1234,
+      "lastname": "Smith"
     },
     "id": 45
   }
@@ -315,6 +294,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### Accept or Reject Vulnerability Sync Batch
@@ -348,6 +330,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### Automox Group
@@ -395,6 +380,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### Run Device Command
@@ -434,6 +422,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### List Groups
@@ -463,7 +454,28 @@ Example input:
 Example output:
 
 ```
-
+{
+  "groups": [
+    {
+      "id": 1234,
+      "organization_id": 1234,
+      "parent_server_group_id": 1234,
+      "policies": [
+        1234,
+        5678
+      ],
+      "refresh_interval": 360,
+      "server_count": 6,
+      "ui_color": "#059F1D",
+      "wsus_config": {
+        "created_at": "2020-11-03T00:22:06+0000",
+        "id": 21606,
+        "server_group_id": 0,
+        "updated_at": "2020-11-03T00:22:06+0000"
+      }
+    }
+  ]
+}
 ```
 
 #### Get Device Software
@@ -499,7 +511,7 @@ Example output:
   "software": [
     {
       "display_name": "NetworkManager-libnm.x86_64",
-      "organization_id": 9237,
+      "organization_id": 1234,
       "repo": "Linux",
       "version": "1.30.2-1.fc34",
       "create_time": "2021-04-06T08:11:00+0000",
@@ -509,29 +521,11 @@ Example output:
       "os_version_id": 4416,
       "name": "NetworkManager-libnm.x86_64",
       "os_version": "34",
-      "package_id": 225916374,
+      "package_id": 1234,
       "installed": true,
-      "package_version_id": 231241032,
-      "server_id": 1123617,
-      "software_id": 10648
-    },
-    {
-      "id": 1235371146,
-      "os_version_id": 4416,
-      "version": "1.30.2-1.fc34",
-      "display_name": "NetworkManager.x86_64",
-      "is_managed": true,
-      "name": "NetworkManager.x86_64",
-      "os_name": "Fedora",
-      "package_id": 225916389,
-      "create_time": "2021-04-06T08:11:01+0000",
-      "installed": true,
-      "package_version_id": 231241047,
-      "repo": "Linux",
-      "server_id": 1123617,
-      "organization_id": 9237,
-      "os_version": "34",
-      "software_id": 10666
+      "package_version_id": 1234,
+      "server_id": 1234,
+      "software_id": 1234
     }
   ]
 }
@@ -566,7 +560,9 @@ Example input:
 Example output:
 
 ```
-
+{
+  "success": true
+}
 ```
 
 #### Create Group
@@ -615,11 +611,11 @@ Example output:
 ```
 {
   "group": {
-    "organization_id": 9237,
-    "parent_server_group_id": 30599,
+    "organization_id": 1234,
+    "parent_server_group_id": 0,
     "refresh_interval": 1440,
     "ui_color": "#059F1D",
-    "id": 119981,
+    "id": 1234,
     "name": "InsightConnect Test Group",
     "notes": "Hello World"
   },
@@ -656,7 +652,9 @@ Example input:
 Example output:
 
 ```
-
+{
+  "success": true
+}
 ```
 
 #### Get Device by Hostname
@@ -688,6 +686,74 @@ Example input:
 Example output:
 
 ```
+{
+  "device": {
+    "agent_version": "1.0-33",
+    "compliant": true,
+    "create_time": "2021-08-03T15:53:59+0000",
+    "detail": {
+      "CPU": "Intel(R) Core(TM) i5-1038NG7 CPU @ 2.00GHz",
+      "FQDNS": [
+        "hostname.local"
+      ],
+      "IPS": [
+        "192.168.0.1"
+      ]
+    },
+    "display_name": "hostname",
+    "id": 1234,
+    "ip_addrs": [
+      "192.168.0.1"
+    ],
+    "ip_addrs_private": [
+      "192.168.0.1"
+    ],
+    "is_compatible": true,
+    "last_disconnect_time": "2021-10-22T13:56:46+0000",
+    "last_logged_in_user": "jsmith",
+    "last_refresh_time": "2021-10-22T13:54:10+0000",
+    "name": "hostname.local",
+    "organization_id": 1234,
+    "os_family": "Mac",
+    "os_name": "OS X",
+    "os_version": "11.4",
+    "os_version_id": 4476,
+    "patches": 4,
+    "policy_status": [
+      {
+        "create_time": "2021-10-22T13:54:10+0000",
+        "id": 1234,
+        "organization_id": 1234,
+        "policy_id": 1234,
+        "policy_name": "Manual Patching",
+        "policy_type_name": "patch",
+        "result": "{}",
+        "server_id": 1234,
+        "status": 1
+      }
+    ],
+    "refresh_interval": 360,
+    "serial_number": "abcd",
+    "server_group_id": 1234,
+    "status": {
+      "agent_status": "disconnected",
+      "device_status": "not-ready",
+      "policy_status": "compliant",
+      "policy_statuses": [
+        {
+          "compliant": true,
+          "id": 1234
+        }
+      ]
+    },
+    "tags": [
+      "tag1"
+    ],
+    "timezone": "UTC-0700",
+    "total_count": 5,
+    "uuid": "abc12345-abc1-2345-abc1-abc123456789"
+  }
+}
 ```
 
 #### Get Device by IP Address
@@ -719,6 +785,74 @@ Example input:
 Example output:
 
 ```
+{
+  "device": {
+    "agent_version": "1.0-33",
+    "compliant": true,
+    "create_time": "2021-08-03T15:53:59+0000",
+    "detail": {
+      "CPU": "Intel(R) Core(TM) i5-1038NG7 CPU @ 2.00GHz",
+      "FQDNS": [
+        "hostname.local"
+      ],
+      "IPS": [
+        "192.168.0.1"
+      ]
+    },
+    "display_name": "hostname",
+    "id": 1234,
+    "ip_addrs": [
+      "192.168.0.1"
+    ],
+    "ip_addrs_private": [
+      "192.168.0.1"
+    ],
+    "is_compatible": true,
+    "last_disconnect_time": "2021-10-22T13:56:46+0000",
+    "last_logged_in_user": "jsmith",
+    "last_refresh_time": "2021-10-22T13:54:10+0000",
+    "name": "hostname.local",
+    "organization_id": 1234,
+    "os_family": "Mac",
+    "os_name": "OS X",
+    "os_version": "11.4",
+    "os_version_id": 4476,
+    "patches": 4,
+    "policy_status": [
+      {
+        "create_time": "2021-10-22T13:54:10+0000",
+        "id": 1234,
+        "organization_id": 1234,
+        "policy_id": 1234,
+        "policy_name": "Manual Patching",
+        "policy_type_name": "patch",
+        "result": "{}",
+        "server_id": 1234,
+        "status": 1
+      }
+    ],
+    "refresh_interval": 360,
+    "serial_number": "abcd",
+    "server_group_id": 1234,
+    "status": {
+      "agent_status": "disconnected",
+      "device_status": "not-ready",
+      "policy_status": "compliant",
+      "policy_statuses": [
+        {
+          "compliant": true,
+          "id": 1234
+        }
+      ]
+    },
+    "tags": [
+      "tag1"
+    ],
+    "timezone": "UTC-0700",
+    "total_count": 5,
+    "uuid": "abc12345-abc1-2345-abc1-abc123456789"
+  }
+}
 ```
 
 #### List Devices
@@ -750,7 +884,76 @@ Example input:
 Example output:
 
 ```
-
+{
+  "devices": [
+    {
+      "agent_version": "1.0-33",
+      "compliant": true,
+      "create_time": "2021-08-03T15:53:59+0000",
+      "detail": {
+        "CPU": "Intel(R) Core(TM) i5-1038NG7 CPU @ 2.00GHz",
+        "FQDNS": [
+          "hostname.local"
+        ],
+        "IPS": [
+          "192.168.0.1"
+        ]
+      },
+      "display_name": "hostname",
+      "id": 1234,
+      "ip_addrs": [
+        "192.168.0.1"
+      ],
+      "ip_addrs_private": [
+        "192.168.0.1"
+      ],
+      "is_compatible": true,
+      "last_disconnect_time": "2021-10-22T13:56:46+0000",
+      "last_logged_in_user": "jsmith",
+      "last_refresh_time": "2021-10-22T13:54:10+0000",
+      "name": "hostname.local",
+      "organization_id": 1234,
+      "os_family": "Mac",
+      "os_name": "OS X",
+      "os_version": "11.4",
+      "os_version_id": 4476,
+      "patches": 4,
+      "policy_status": [
+        {
+          "create_time": "2021-10-22T13:54:10+0000",
+          "id": 1234,
+          "organization_id": 1234,
+          "policy_id": 1234,
+          "policy_name": "Manual Patching",
+          "policy_type_name": "patch",
+          "result": "{}",
+          "server_id": 1234,
+          "status": 1
+        }
+      ],
+      "refresh_interval": 360,
+      "serial_number": "abcd",
+      "server_group_id": 1234,
+      "status": {
+        "agent_status": "disconnected",
+        "device_status": "not-ready",
+        "policy_status": "compliant",
+        "policy_statuses": [
+          {
+            "compliant": true,
+            "id": 1234
+          }
+        ]
+      },
+      "tags": [
+        "tag1"
+      ],
+      "timezone": "UTC-0700",
+      "total_count": 5,
+      "uuid": "abc12345-abc1-2345-abc1-abc123456789"
+    }
+  ]
+}
 ```
 
 #### List Organization Users
@@ -780,7 +983,44 @@ Example input:
 Example output:
 
 ```
-
+{
+  "users": [
+    {
+      "email": "user@example.com",
+      "features": {
+        "mo": true
+      },
+      "firstname": "John",
+      "id": 1234,
+      "lastname": "Smith",
+      "orgs": [
+        {
+          "id": 1234,
+          "name": "Organization"
+        }
+      ],
+      "prefs": [
+        {
+          "pref_name": "notify.system.add",
+          "user_id": 1234,
+          "value": "true"
+        }
+      ],
+      "rbac_roles": [
+        {
+          "description": "Provides full administrative rights to the entire Automox System.",
+          "id": 1,
+          "name": "Full Administrator",
+          "organization_id": 1234
+        }
+      ],
+      "tags": [
+        "tag1"
+      ],
+      "uuid": "abc12345-abc1-2345-abc1-abc123456789"
+    }
+  ]
+}
 ```
 
 #### List Organizations
@@ -803,36 +1043,19 @@ Example output:
 {
   "organizations": [
     {
-      "access_key": "5ded37d8-2e58-4653-9e21-4c8391e439c8",
+      "access_key": "abc12345-abc1-2345-abc1-abc123456789",
       "bill_overages": true,
       "create_time": "2019-08-27T21:59:19+0000",
       "device_count": 21,
       "metadata": {
         "patchServersDone": true
       },
-      "name": "Automox Worklet Test Org",
+      "name": "Automox Org",
       "sub_plan": "FULL",
-      "id": 9237,
+      "id": 1234,
       "legacy_billing": true,
-      "parent_id": 65,
+      "parent_id": 1,
       "rate_id": 1
-    },
-    {
-      "metadata": {
-        "patchServersDone": true
-      },
-      "name": "Automox - SE",
-      "parent_id": 65,
-      "rate_id": 1,
-      "sub_plan": "FULL",
-      "access_key": "1911ce44-4c92-4242-8565-1b4d91d60445",
-      "billing_email": "user@example.com",
-      "billing_name": "Automox - SE",
-      "create_time": "2020-05-19T18:57:01+0000",
-      "device_count": 64,
-      "id": 16943,
-      "legacy_billing": true,
-      "bill_overages": true
     }
   ]
 }
@@ -851,6 +1074,9 @@ This action is used to retrieve Automox policies.
 Example input:
 
 ```
+{
+  "org_id": 1234
+}
 ```
 
 ##### Output
@@ -865,68 +1091,25 @@ Example output:
 {
   "policies": [
     {
-      "create_time": "2021-03-03T21:29:09+0000",
-      "schedule_time": "00:00",
-      "server_groups": [
-        85579,
-        86754
-      ],
       "configuration": {
-        "custom_notification_reboot_message_mac": "An important update will be installed; reboot may ...",
-        "notify_deferred_reboot_user": true,
-        "patch_rule": "all",
-        "custom_notification_patch_message": "System Update: An important update will be install...",
-        "custom_notification_reboot_message": "An important update will be installed; reboot may ...",
-        "custom_pending_reboot_notification_deferment_periods": [
-          1,
-          4
-        ],
-        "custom_pending_reboot_notification_message_mac": "Updates require reboot: Please save your work.",
-        "filter_type": "all",
         "auto_patch": true,
-        "custom_notification_patch_message_mac": "System Update: An important update will be install...",
-        "custom_pending_reboot_notification_max_delays": 3,
-        "notify_user": true,
-        "custom_notification_max_delays": 3,
-        "custom_pending_reboot_notification_message": "Updates require reboot: Please save your work.",
-        "notify_reboot_user": true,
-        "auto_reboot": true,
-        "custom_notification_deferment_periods": [
-          1,
-          4
-        ]
+        "auto_reboot": true
       },
-      "name": "Amelia Patch All",
+      "create_time": "2021-03-03T21:29:09+0000",
+      "id": 1234,
+      "name": "Patch All",
       "next_remediation": "2021-12-15T00:00:00+0000",
-      "organization_id": 9237,
+      "organization_id": 1234,
       "policy_type_name": "patch",
       "schedule_days": 254,
       "schedule_months": 8190,
-      "schedule_weeks_of_month": 62,
-      "id": 112411,
-      "server_count": 1
-    },
-    {
-      "configuration": {
-        "package_version": "7.8.4",
-        "os_family": "Windows",
-        "package_name": "NotepadPlusPlus"
-      },
-      "next_remediation": "2021-12-15T00:00:00+0000",
-      "schedule_days": 254,
-      "schedule_months": 8190,
       "schedule_time": "00:00",
       "schedule_weeks_of_month": 62,
+      "server_count": 1,
       "server_groups": [
-        85579,
-        86754
-      ],
-      "create_time": "2021-03-03T21:35:39+0000",
-      "id": 112418,
-      "name": "Amelia RSP",
-      "organization_id": 9237,
-      "policy_type_name": "required_software",
-      "server_count": 1
+        1234,
+        5678
+      ]
     }
   ]
 }
@@ -1008,6 +1191,21 @@ Example input:
 Example output:
 
 ```
+{
+  "event": {
+    "id": 1234,
+    "name": "system.delete",
+    "server_id": 1234,
+    "organization_id": 1234,
+    "data": {
+      "ip": "192.168.0.1",
+      "os": "Ubuntu",
+      "systemname": "hostname-1"
+    },
+    "server_name": "hostname-1",
+    "create_time": "2021-12-16 06:20:38.153713"
+  }
+}
 ```
 
 ### Custom Output Types
