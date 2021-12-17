@@ -42,6 +42,10 @@ class ApiClient:
 
             if 200 <= response.status_code < 300:
                 return response.json()
+
+            # Non-success and unknown
+            raise PluginException(cause=f"An error occurred when making {method} request to {url}.",
+                                  assistance=f"Response code: {response.status_code}, Content: {response.text}.")
         except json.decoder.JSONDecodeError as e:
             self.logger.info(f"Invalid json: {e}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)

@@ -724,7 +724,7 @@ actions:
         type: group
         required: true
   update_group:
-    title: Automox Group
+    title: Update Group
     description: Update an Automox group
     input:
       org_id:

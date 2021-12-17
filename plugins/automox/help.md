@@ -45,6 +45,56 @@ Example input:
 
 ### Actions
 
+#### Update Group
+
+This action is used to update an Automox group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|color|string|None|False|Automox console highlight color for the group|None|#059F1D|
+|group_id|integer|None|True|Identifier of the Automox group|None|1234|
+|name|string|None|True|Name of the group|None|Group1|
+|notes|string|None|False|Define notes for the group|None|Example notes go here|
+|org_id|integer|None|False|Identifier of organization|None|1234|
+|parent_server_group_id|integer|None|False|Name of the parent group (Will be set to Default Group ID if not set)|None|1234|
+|policies|[]integer|None|False|List of policies to assign to group|None|[1, 2, 3]|
+|refresh_interval|integer|1440|True|Frequency of device refreshes in minutes|None|1440|
+
+Example input:
+
+```
+{
+  "color": "#059F1D",
+  "group_id": 1234,
+  "name": "Group1",
+  "notes": "Example notes go here",
+  "org_id": 1234,
+  "parent_server_group_id": 1234,
+  "policies": [
+    1,
+    2,
+    3
+  ],
+  "refresh_interval": 1440
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 #### Upload Vulnerability Sync File
 
 This action is used to upload CSV file to vulnerability sync for processing.
@@ -318,56 +368,6 @@ Example input:
   "action": "accept",
   "batch_id": 1234,
   "org_id": 1234
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Was operation successful|
-
-Example output:
-
-```
-{
-  "success": true
-}
-```
-
-#### Automox Group
-
-This action is used to update an Automox group.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|color|string|None|False|Automox console highlight color for the group|None|#059F1D|
-|group_id|integer|None|True|Identifier of the Automox group|None|1234|
-|name|string|None|True|Name of the group|None|Group1|
-|notes|string|None|False|Define notes for the group|None|Example notes go here|
-|org_id|integer|None|False|Identifier of organization|None|1234|
-|parent_server_group_id|integer|None|False|Name of the parent group (Will be set to Default Group ID if not set)|None|1234|
-|policies|[]integer|None|False|List of policies to assign to group|None|[1, 2, 3]|
-|refresh_interval|integer|1440|True|Frequency of device refreshes in minutes|None|1440|
-
-Example input:
-
-```
-{
-  "color": "#059F1D",
-  "group_id": 1234,
-  "name": "Group1",
-  "notes": "Example notes go here",
-  "org_id": 1234,
-  "parent_server_group_id": 1234,
-  "policies": [
-    1,
-    2,
-    3
-  ],
-  "refresh_interval": 1440
 }
 ```
 
