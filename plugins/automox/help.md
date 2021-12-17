@@ -54,7 +54,7 @@ This action is used to upload CSV file to vulnerability sync for processing.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |csv_file|bytes|None|True|Base64 encoded CSV data from which to create the vulnerabiulity sync batch|None|PGgxPlJhcGlkNzwvaDE+|
-|csv_file_name|string|https://example.com|False|Name for CSV file uploaded and shown within Automox|None|insightconnect-uploaded-report.csv|
+|csv_file_name|string|insightconnect-uploaded-report.csv|False|Name for CSV file uploaded and shown within Automox|None|insightconnect-uploaded-report.csv|
 |org_id|integer|None|True|Identifier of organization|None|1234|
 
 Example input:
@@ -987,7 +987,7 @@ This trigger is used to retrieve Automox events to trigger workflows.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|event_type|string|None|True|Name of event type to be retrieved (List of event types found at https://developer.automox.com/openapi/axconsole/operation/getEvents/)|None|https://example.com|
+|event_type|string|None|True|Name of event type to be retrieved (List of event types found at https://developer.automox.com/openapi/axconsole/operation/getEvents/)|None|user.login|
 |org_id|integer|None|False|Identifier of organization to restrict results|None|1234|
 
 Example input:
