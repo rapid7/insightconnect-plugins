@@ -1,0 +1,241 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: opsgenie
+title: OpsGenie
+description: Notify the right people, reduce response time, and avoid alert fatigue within a workflow.
+version: 0.1.0
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/opsgenie
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.atlassian.com/pl/software/opsgenie
+tags:
+  - atlassian
+  - opsgenie
+  - alerts
+  - notifications
+hub_tags:
+  use_cases: [alerting_and_notifications]
+  keywords: [opsgenie, alerts, notifications]
+  features: []
+connection:
+  apikey:
+    title: Authorization API Key
+    description: OpsGenie authorization API Key
+    type: credential_secret_key
+    required: true
+actions:
+  create_alert:
+    title: Create alert
+    description: Creates an alert for OpsGenie
+    input:
+      message:
+        title: Message
+        description: Message of the alert
+        type: string
+        required: true
+      alias:
+        title: Alias
+        description: Client-defined identifier of the alert, that is also the key element of Alert De-Duplication
+        type: string
+        required: false
+      description:
+        title: Description
+        description: Description field of the alert that is generally used to provide a detailed information about the alert
+        type: string
+        required: false
+      responders:
+        title: Responders
+        description: Teams, users, escalations and schedules that the alert will be routed to send notifications. type field is mandatory for each item, where possible values are team, user, escalation and schedule. If the API Key belongs to a team integration, this field will be overwritten with the owner team. Either id or name of each responder should be provided.You can refer below for example values
+        type: "[]object"
+        required: false
+      visibleTo:
+        title: VisibleTo
+        description: Teams and users that the alert will become visible to without sending any notification.type field is mandatory for each item, where possible values are team and user. In addition to the type field, either id or name should be given for teams and either id or username should be given for users. Please note that alert will be visible to the teams that are specified withinresponders field by default, so there is no need to re-specify them within visibleTo field. You can refer below for example values
+        type: "[]object"
+        required: false
+      actions:
+        title: Actions
+        description: Custom actions that will be available for the alert
+        type: "[]string"
+        required: false
+      tags:
+        title: Tags
+        description: Tags of the alert
+        type: "[]string"
+        required: false
+      details:
+        title: Details
+        description: Map of key-value pairs to use as custom properties of the alert
+        type: object
+        required: false
+      entity:
+        title: Entity
+        description: Entity field of the alert that is generally used to specify which domain alert is related to
+        type: string
+        required: false
+      source:
+        title: Source
+        description: Source field of the alert. Default value is IP address of the incoming request
+        type: string
+        required: false
+      priority:
+        title: Priority
+        description: Priority level of the alert. Possible values are P1, P2, P3, P4 and P5. Default value is P3
+        type: string
+        enum:
+          - "P1"
+          - "P2"
+          - "P3"
+          - "P4"
+          - "P5"
+        default: "P3"
+        required: false
+      user:
+        title: User
+        description: Display name of the request owner
+        type: string
+        required: false
+      note:
+        title: Note
+        description: Additional note that will be added while creating the alert
+        type: string
+        required: false
+    output:
+      result:
+        title: Result
+        description: Result message from API
+        type: string
+        required: true
+      took:
+        title: Took
+        description: Time took to execute API
+        type: float
+        required: true
+      requestId:
+        title: Request ID
+        description: ID of a executed API request
+        type: string
+        required: true
+  get_alert:
+    title: Get alert
+    description: Retrieve alert from OpsGenie
+    input:
+      identifier:
+        title: Alert ID
+        description: Identifier of the alert
+        type: string
+        required: true
+      identifierType:
+        title: Identifier Type
+        description: Type of the identifier that is provided as an in-line parameter. Possible values are id, tiny and alias. Default value is id
+        type: string
+        enum:
+          - "id"
+          - "tiny"
+          - "alias"
+        default: "id"
+        required: false
+    output:
+      data:
+        title: Data
+        description: Data that contains JSON response
+        type: object
+        required: true
+  close_alert:
+    title: Close Alert
+    description: Close existing alert from OpsGenie
+    input:
+      identifier:
+        title: Alert ID
+        description: Identifier of the alert
+        type: string
+        required: true
+      identifierType:
+        title: Identifier Type
+        description: Type of the identifier that is provided as an in-line parameter. Possible values are id, tiny and alias. Default value is id
+        type: string
+        enum:
+          - "id"
+          - "tiny"
+          - "alias"
+        default: "id"
+        required: false
+      user:
+        title: User
+        description: Display name of the request owner
+        type: string
+        required: false
+      source:
+        title: Source
+        description: Display name of the request source
+        type: string
+        required: false
+      note:
+        title: Note
+        description: Additional alert note to add
+        type: string
+        required: false
+    output:
+      result:
+        title: Result
+        description: Result message from API
+        type: string
+        required: true
+      took:
+        title: Took
+        description: Time took to execute API
+        type: float
+        required: true
+      requestId:
+        title: Request ID
+        description: ID of a executed API request
+        type: string
+        required: true
+  get_on_calls:
+    title: Get On Calls
+    description: Get on-call request is used to retrieve current on-call participants of a specific schedule
+    input:
+      scheduleIdentifier:
+        title: Schedule Identifier
+        description: Identifier of the schedule
+        type: string
+        required: true
+      scheduleIdentifierType:
+        title: Schedule Identifier Type
+        description: Type of the schedule identifier that is provided as an in-line parameter. Possible values are id and name. Default value is id
+        type: string
+        enum:
+          - "id"
+          - "name"
+        default: "id"
+        required: false
+      flat:
+        title: Flat
+        description: When enabled, retrieves user names of all on call participants. Default value is false
+        type: boolean
+        required: false
+      date:
+        title: Date
+        description: Starting date of the timeline that will be provided in format as (yyyy-MM-dd'T'HH:mm:ssZ) (e.g. 2017-01-15T08:00:00+02:00). Default date is the moment of the time that request is received.
+        type: date
+        required: false
+    output:
+      data:
+        title: Data
+        description: Response DATA from OpsGenie API
+        type: object
+        required: true
+      took:
+        title: Took
+        description: Time took to execute API
+        type: float
+        required: true
+      requestId:
+        title: Request ID
+        description: ID of a executed API request
+        type: string
+        required: true
