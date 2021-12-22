@@ -33,7 +33,7 @@ connection:
 
 actions:
   create_alert:
-    title: Create alert
+    title: Create Alert
     description: Creates an alert for OpsGenie
     input:
       message:
@@ -129,7 +129,7 @@ actions:
         type: string
         required: true
   get_alert:
-    title: Get alert
+    title: Get Alert
     description: Retrieve alert from OpsGenie
     input:
       identifier:
