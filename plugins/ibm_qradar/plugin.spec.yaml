@@ -1,0 +1,212 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: ibm_qradar
+title: IBM Qradar
+vendor: rapid7-sacumen
+support: community
+status: []
+description: Orchestrate and automate ariel search and automate the offence management using the IBM Qradar
+version: 1.0.8
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/ibm_qradar
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.ibm.com
+tags:
+  - qradar
+  - ariel search
+  - offenses
+  - orchestration
+enable_cache: false
+language: python
+connection:
+  hostname:
+    type: string
+    description: Hostname for the Qradar application
+    order: 1
+    required: true
+  username:
+    type: string
+    description: Qradar Username
+    order: 2
+    required: true
+  password:
+    type: password
+    description: Qradar Password
+    order: 3
+    required: true
+types:
+  error_messages:
+    code:
+      title: "Code"
+      type: string
+      description: "Code"
+      required: false
+    contexts:
+      title: "Contexts"
+      type: "[]string"
+      description: "Contexts"
+      required: false
+    message:
+      title: "Message"
+      type: string
+      description: "Message"
+      required: false
+    severity:
+      title: "Severity"
+      type: string
+      description: "Severity"
+      required: false
+  events:
+    qid:
+      title: "Qid"
+      type: integer
+      description: "Qid"
+      required: false
+    sourceip:
+      title: "Sourceip"
+      type: string
+      description: "Sourceip"
+      required: false
+    sourceport:
+      title: "Sourceport"
+      type: integer
+      description: "Sourceport"
+      required: false
+    starttime:
+      title: "Starttime"
+      type: integer
+      description: "Starttime"
+      required: false
+  search:
+    cursor_id:
+        title: "Cursor Id"
+        type: string
+        description: "Cursor id"
+        required: false
+    compressed_data_file_count:
+        title: "Compressed Data File Count"
+        type: integer
+        description: "Compressed data file count"
+        required: false
+    compressed_data_total_size:
+        title: "Compressed Data Total Size"
+        type: integer
+        description: "Compressed data total size"
+        required: false
+    data_file_count:
+        title: "Data File Count"
+        type: integer
+        description: "Data file count"
+        required: false
+    data_total_size:
+        title: "Data Total Size"
+        type: integer
+        description: "Data total size"
+        required: false
+    index_file_count:
+        title: "Index File Count"
+        type: integer
+        description: "Index file count"
+        required: false
+    index_total_size:
+        title: "Index Total Size"
+        type: integer
+        description: "Index total size"
+        required: false
+    processed_record_count:
+        title: "Processed Record Count"
+        type: integer
+        description: "Processed record count"
+        required: false
+    error_messages:
+        title: "Error Messages"
+        type: "[]error_messages"
+        description: "Error messages"
+        required: false
+    desired_retention_time_msec:
+        title: "Desired Retention Time Msec"
+        type: integer
+        description: "Desired retention time msec"
+        required: false
+    progress:
+        title: "Progress"
+        type: integer
+        description: "Progress"
+        required: false
+    progress_details:
+        title: "Progress Details"
+        type: "[]integer"
+        description: "Progress details"
+        required: false
+    query_execution_time:
+        title: "Query Execution Time"
+        type: integer
+        description: "Query execution time"
+        required: false
+    query_string:
+        title: "Query String"
+        type: string
+        description: "Query string"
+        required: false
+    record_count:
+        title: "Record Count"
+        type: integer
+        description: "Record count"
+        required: false
+    save_results:
+        title: "Save Results"
+        type: boolean
+        description: "Save results"
+        required: false
+    status:
+        title: "Status"
+        type: string
+        description: "Status"
+        required: false
+    subsearch_ids:
+        title: "Subsearch Ids"
+        type: "[]string"
+        description: "Subsearch ids"
+        required: false
+    search_id:
+        title: "Search Id"
+        type: string
+        description: "Search id"
+        required: false
+actions:
+  start_ariel_search:
+    title: Start Ariel Search
+    description: Start Ariel Search
+    input:
+      AQL:
+        title: AQL query
+        type: string
+        description: Aql query to perform the search.
+        required: false
+    output:
+      data:
+        title: "Search Data"
+        type: "search"
+        description: "Json Data of the Search"
+        required: false
+  get_ariel_search_by_id:
+    title: Get Ariel Search By Id
+    description: Get Ariel Search By Id
+    input:
+      search_id:
+        type: string
+        required: true
+        description: Specific Search Id
+        order: 1
+      poll_interval:
+        type: number
+        required: false
+        description: Poll interval is the number of seconds to recheck until the search gets COMPLETED.
+        order: 2
+    output:
+      data:
+        title: "Search Data"
+        type: "search"
+        description: "Json Data of the Search"
+        required: false

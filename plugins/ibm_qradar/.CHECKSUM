@@ -1,0 +1,19 @@
+{
+	"spec": "067262797b88f52c252b4a26babc6af1",
+	"manifest": "243f42b6fe940c34f26114247131c53b",
+	"setup": "ca8039c9da1037169380103abb1c6225",
+	"schemas": [
+		{
+			"identifier": "get_ariel_search_by_id/schema.py",
+			"hash": "f29f83bb1c4ab5a7824ffd32353b61f9"
+		},
+		{
+			"identifier": "start_ariel_search/schema.py",
+			"hash": "14d02e36427ceac996b51e238bbf644d"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "1d07d0486561139c1ea37c764f2b5c11"
+		}
+	]
+}
