@@ -128,6 +128,9 @@ def clear_emails(matches: list) -> list:
 
 def parse_time(dates: list) -> list:
     for date in enumerate(dates):
-        date_time_obj = datetime.strptime(date[1], "%d/%m/%Y")
+        try:
+            date_time_obj = datetime.strptime(date[1], "%d/%m/%Y")
+        except Exception:
+            date_time_obj = datetime.strptime(date[1], "%d/%b/%Y")
         dates[date[0]] = date_time_obj.strftime("%Y-%m-%dT%H:%M:%SZ")
     return dates
