@@ -4,7 +4,7 @@ import json
 
 
 class Input:
-    APIKEY = "apikey"
+    API_KEY = "api_key"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -13,15 +13,15 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "apikey": {
+    "api_key": {
       "$ref": "#/definitions/credential_secret_key",
-      "title": "Authorization API Key",
-      "description": "OpsGenie authorization API Key",
+      "title": "Authorization API key",
+      "description": "OpsGenie authorization API key",
       "order": 1
     }
   },
   "required": [
-    "apikey"
+    "api_key"
   ],
   "definitions": {
     "credential_secret_key": {

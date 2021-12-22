@@ -1,26 +1,22 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 from .schema import ConnectionSchema, Input
+from ..util.api import ApiClient
+
 # Custom imports below
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
     def connect(self, params):
-        """
-        Connection config params are supplied as a dict in
-        params or also accessible in self.parameters['key']
-
-        The following will setup the var to be accessed
-          self.blah = self.parameters['blah']
-        in the action and trigger files as:
-          blah = self.connection.blah
-        """
-        # TODO: Implement connection or 'pass' if no connection is necessary
         self.logger.info("Connect: Connecting...")
+        self.client = ApiClient(self.params.get(Input.APIKEY), self.logger)
 
     def test(self):
-        # TODO: Implement connection test
-        pass
+        try:
+            self.client.test_api()
+            return {"success": True}
+        except PluginException as e:
+            raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e.data)
