@@ -1,11 +1,11 @@
 import json
 import requests
+
 from insightconnect_plugin_runtime.exceptions import PluginException
-from typing import Logger
 
 
 class ApiClient:
-    def __init__(self, api_key: str, logger: Logger) -> None:
+    def __init__(self, api_key: str, logger=None) -> None:
         self.api_url = "https://api.opsgenie.com/v2/"
         self.api_key = api_key
         self.logger = logger
@@ -15,20 +15,23 @@ class ApiClient:
         return self._call_api("POST", CREATE_ALERT_URL, data=data)
 
     def get_alert(self, id: str, id_type: str = "id") -> dict:
-        GET_ALERT_URL = f"{self.api_url}alerts/{id}?identifierType={id_type}"
-        return self._call_api("POST", GET_ALERT_URL)
+        GET_ALERT_URL = f"{self.api_url}alerts/{id}"
+        params = {"identifierType": id_type}
+        return self._call_api("GET", GET_ALERT_URL, params=params)
 
     def close_alert(self, id: str, id_type: str = "id", data: dict = None) -> dict:
-        CLOSE_ALERT_URL = f"{self.api_url}alerts/{id}/close?identifierType={id_type}"
-        return self._call_api("POST", CLOSE_ALERT_URL, data=data)
+        CLOSE_ALERT_URL = f"{self.api_url}alerts/{id}/close"
+        params = {"identifierType": id_type}
+        return self._call_api("POST", CLOSE_ALERT_URL, params=params, data=data)
 
     def get_on_calls(self, id: str, id_type: str = "id", flat: bool = False, date: str = None) -> dict:
-        GET_ON_CALLS_URL = f"{self.api_url}schedules/{id}/on-calls?scheduleIdentifierType={id_type}?flat={flat}"
+        GET_ON_CALLS_URL = f"{self.api_url}schedules/{id}/on-calls"
+        params = {"scheduleIdentifierType": id_type, "flat": flat}
 
-        if date is not None:
-            GET_ON_CALLS_URL += f"?date={date}"
+        if date:
+            params["date"] = date
 
-        return self._call_api("GET", GET_ON_CALLS_URL)
+        return self._call_api("GET", GET_ON_CALLS_URL, params=params)
 
     def test_api(self) -> None:
         GET_TEAM_URL = f"{self.api_url}teams"
@@ -53,10 +56,6 @@ class ApiClient:
 
             if response.status_code == 404:
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND)
-
-            if response.status_code >= 400:
-                response_data = response.text
-                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response_data)
 
             if 200 <= response.status_code < 300:
                 return response.json()

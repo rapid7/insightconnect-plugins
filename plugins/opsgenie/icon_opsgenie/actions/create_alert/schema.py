@@ -86,6 +86,7 @@ class CreateAlertInput(insightconnect_plugin_runtime.Input):
       "description": "Priority level of the alert. Possible values are P1, P2, P3, P4 and P5. Default value is P3",
       "default": "P3",
       "enum": [
+        "",
         "P1",
         "P2",
         "P3",

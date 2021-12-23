@@ -1,9 +1,8 @@
 import insightconnect_plugin_runtime
-from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 from .schema import ConnectionSchema, Input
-from ..util.api import ApiClient
+from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 
-# Custom imports below
+from ..util.api import ApiClient
 
 
 class Connection(insightconnect_plugin_runtime.Connection):

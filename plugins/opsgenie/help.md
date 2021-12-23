@@ -43,7 +43,7 @@ This action is used to close existing alert from OpsGenie.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |identifier|string|None|True|Identifier of the alert|None|8418d193-2dab-4490-b331-8c02cdd196b7|
-|identifierType|string|id|False|Type of the identifier that is provided as an in-line parameter. Possible values are id, tiny and alias. Default value is id|['id', 'tiny', 'alias']|id|
+|identifierType|string|id|False|Type of the identifier that is provided as an in-line parameter. Possible values are id, tiny and alias. Default value is id|['', 'id', 'tiny', 'alias']|id|
 |note|string|None|False|Additional alert note to add|None|Action executed via Alert API|
 |source|string|None|False|Display name of the request source|None|AWS Lambda|
 |user|string|None|False|Display name of the request owner|None|Monitoring Script|
@@ -74,19 +74,19 @@ This action creates an alert for OpsGenie.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|actions|[]string|None|False|Custom actions that will be available for the alert|None|None|
-|alias|string|None|False|Client-defined identifier of the alert, that is also the key element of Alert De-Duplication|None|Life is too short for no alias|
-|description|string|None|False|Description field of the alert that is generally used to provide a detailed information about the alert|None|Every alert needs a description|
-|details|object|None|False|Map of key-value pairs to use as custom properties of the alert|None|None|
+|actions|[]string|None|False|Custom actions that will be available for the alert|None|["Restart", "AnExampleAction"]|
+|alias|string|None|False|Client-defined identifier of the alert, that is also the key element of Alert De-Duplication|None|An example Alias|
+|description|string|None|False|Description field of the alert that is generally used to provide a detailed information about the alert|None|An example description|
+|details|object|None|False|Map of key-value pairs to use as custom properties of the alert|None|{"key1":"value1","key2":"value2"}|
 |entity|string|None|False|Entity field of the alert that is generally used to specify which domain alert is related to|None|An example entity|
 |message|string|None|True|Message of the alert|None|An example alert message|
-|note|string|None|False|Additional note that will be added while creating the alert|None|None|
-|priority|string|P3|False|Priority level of the alert. Possible values are P1, P2, P3, P4 and P5. Default value is P3|['P1', 'P2', 'P3', 'P4', 'P5']|None|
-|responders|[]object|None|False|Teams, users, escalations and schedules that the alert will be routed to send notifications. type field is mandatory for each item, where possible values are team, user, escalation and schedule. If the API Key belongs to a team integration, this field will be overwritten with the owner team. Either id or name of each responder should be provided.You can refer below for example values|None|None|
-|source|string|None|False|Source field of the alert. Default value is IP address of the incoming request|None|None|
-|tags|[]string|None|False|Tags of the alert|None|None|
-|user|string|None|False|Display name of the request owner|None|None|
-|visibleTo|[]object|None|False|Teams and users that the alert will become visible to without sending any notification.type field is mandatory for each item, where possible values are team and user. In addition to the type field, either id or name should be given for teams and either id or username should be given for users. Please note that alert will be visible to the teams that are specified withinresponders field by default, so there is no need to re-specify them within visibleTo field. You can refer below for example values|None|None|
+|note|string|None|False|Additional note that will be added while creating the alert|None|Example additional note|
+|priority|string|P3|False|Priority level of the alert. Possible values are P1, P2, P3, P4 and P5. Default value is P3|['', 'P1', 'P2', 'P3', 'P4', 'P5']|P1|
+|responders|[]object|None|False|Teams, users, escalations and schedules that the alert will be routed to send notifications. type field is mandatory for each item, where possible values are team, user, escalation and schedule. If the API Key belongs to a team integration, this field will be overwritten with the owner team. Either id or name of each responder should be provided.You can refer below for example values|None|[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c", "type":"team"},{"name":"NOC","type":"team"}]|
+|source|string|None|False|Source field of the alert. Default value is IP address of the incoming request|None|192.168.0.1|
+|tags|[]string|None|False|Tags of the alert|None|["OverwriteQuietHours","Critical"]|
+|user|string|None|False|Display name of the request owner|None|ExampleName|
+|visibleTo|[]object|None|False|Teams and users that the alert will become visible to without sending any notification.type field is mandatory for each item, where possible values are team and user. In addition to the type field, either id or name should be given for teams and either id or username should be given for users. Please note that alert will be visible to the teams that are specified withinresponders field by default, so there is no need to re-specify them within visibleTo field. You can refer below for example values|None|[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c","type":"team"},{"name":"example_name","type":"team"}]|
 
 Example input:
 
@@ -115,7 +115,7 @@ This action is used to retrieve alert from OpsGenie.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |identifier|string|None|True|Identifier of the alert|None|8418d193-2dab-4490-b331-8c02cdd196b7|
-|identifierType|string|id|False|Type of the identifier that is provided as an in-line parameter. Possible values are id, tiny and alias. Default value is id|['id', 'tiny', 'alias']|id|
+|identifierType|string|id|False|Type of the identifier that is provided as an in-line parameter. Possible values are id, tiny and alias. Default value is id|['', 'id', 'tiny', 'alias']|id|
 
 Example input:
 
@@ -127,6 +127,7 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |data|object|True|Data that contains JSON response|
+|requestId|string|True|ID of an request|
 
 Example output:
 
@@ -142,9 +143,9 @@ This action is used to get on-call request is used to retrieve current on-call p
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |date|date|None|False|Starting date of the timeline that will be provided in format as (yyyy-MM-dd'T'HH:mm:ssZ) (e.g. 2017-01-15T08:00:00+02:00). Default date is the moment of the time that request is received.|None|2017-01-15T08:00:00+02:00|
-|flat|boolean|None|False|When enabled, retrieves user names of all on call participants. Default value is false|None|False|
+|flat|boolean|None|False|When enabled, retrieves user names of all on call participants. Default value is false|None|false|
 |scheduleIdentifier|string|None|True|Identifier of the schedule|None|ScheduleName|
-|scheduleIdentifierType|string|id|False|Type of the schedule identifier that is provided as an in-line parameter. Possible values are id and name. Default value is id|['id', 'name']|name|
+|scheduleIdentifierType|string|id|False|Type of the schedule identifier that is provided as an in-line parameter. Possible values are id and name. Default value is id|['', 'id', 'name']|name|
 
 Example input:
 

@@ -1,8 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import GetOnCallsInput, GetOnCallsOutput, Input, Output, Component
 
-# Custom imports below
-
 
 class GetOnCalls(insightconnect_plugin_runtime.Action):
     def __init__(self):

@@ -14,6 +14,7 @@ class Input:
 
 class Output:
     DATA = "data"
+    REQUESTID = "requestId"
     
 
 class GetAlertInput(insightconnect_plugin_runtime.Input):
@@ -34,6 +35,7 @@ class GetAlertInput(insightconnect_plugin_runtime.Input):
       "description": "Type of the identifier that is provided as an in-line parameter. Possible values are id, tiny and alias. Default value is id",
       "default": "id",
       "enum": [
+        "",
         "id",
         "tiny",
         "alias"
@@ -62,10 +64,17 @@ class GetAlertOutput(insightconnect_plugin_runtime.Output):
       "title": "Data",
       "description": "Data that contains JSON response",
       "order": 1
+    },
+    "requestId": {
+      "type": "string",
+      "title": "Request ID",
+      "description": "ID of an request",
+      "order": 2
     }
   },
   "required": [
-    "data"
+    "data",
+    "requestId"
   ]
 }
     """)

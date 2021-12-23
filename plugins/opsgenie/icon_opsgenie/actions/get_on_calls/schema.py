@@ -52,6 +52,7 @@ class GetOnCallsInput(insightconnect_plugin_runtime.Input):
       "description": "Type of the schedule identifier that is provided as an in-line parameter. Possible values are id and name. Default value is id",
       "default": "id",
       "enum": [
+        "",
         "id",
         "name"
       ],

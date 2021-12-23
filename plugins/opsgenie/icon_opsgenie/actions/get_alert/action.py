@@ -1,8 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import GetAlertInput, GetAlertOutput, Input, Output, Component
 
-# Custom imports below
-
 
 class GetAlert(insightconnect_plugin_runtime.Action):
     def __init__(self):

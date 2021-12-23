@@ -47,38 +47,43 @@ actions:
         description: Client-defined identifier of the alert, that is also the key element of Alert De-Duplication
         type: string
         required: false
-        example: "Life is too short for no alias"
+        example: "An example Alias"
       description:
         title: Description
         description: Description field of the alert that is generally used to provide a detailed information about the alert
         type: string
         required: false
-        example: "Every alert needs a description"
+        example: "An example description"
       responders:
         title: Responders
         description: Teams, users, escalations and schedules that the alert will be routed to send notifications. type field is mandatory for each item, where possible values are team, user, escalation and schedule. If the API Key belongs to a team integration, this field will be overwritten with the owner team. Either id or name of each responder should be provided.You can refer below for example values
         type: "[]object"
         required: false
+        example: '[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c", "type":"team"},{"name":"NOC","type":"team"}]'
       visibleTo:
         title: VisibleTo
         description: Teams and users that the alert will become visible to without sending any notification.type field is mandatory for each item, where possible values are team and user. In addition to the type field, either id or name should be given for teams and either id or username should be given for users. Please note that alert will be visible to the teams that are specified withinresponders field by default, so there is no need to re-specify them within visibleTo field. You can refer below for example values
         type: "[]object"
         required: false
+        example: '[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c","type":"team"},{"name":"example_name","type":"team"}]'
       actions:
         title: Actions
         description: Custom actions that will be available for the alert
         type: "[]string"
         required: false
+        example: '["Restart", "AnExampleAction"]'
       tags:
         title: Tags
         description: Tags of the alert
         type: "[]string"
         required: false
+        example: '["OverwriteQuietHours","Critical"]'
       details:
         title: Details
         description: Map of key-value pairs to use as custom properties of the alert
         type: object
         required: false
+        example: '{"key1":"value1","key2":"value2"}'
       entity:
         title: Entity
         description: Entity field of the alert that is generally used to specify which domain alert is related to
@@ -90,11 +95,13 @@ actions:
         description: Source field of the alert. Default value is IP address of the incoming request
         type: string
         required: false
+        example: "192.168.0.1"
       priority:
         title: Priority
         description: Priority level of the alert. Possible values are P1, P2, P3, P4 and P5. Default value is P3
         type: string
         enum:
+          - ""
           - "P1"
           - "P2"
           - "P3"
@@ -102,16 +109,19 @@ actions:
           - "P5"
         default: "P3"
         required: false
+        example: "P1"
       user:
         title: User
         description: Display name of the request owner
         type: string
         required: false
+        example: "ExampleName"
       note:
         title: Note
         description: Additional note that will be added while creating the alert
         type: string
         required: false
+        example: "Example additional note"
     output:
       result:
         title: Result
@@ -128,6 +138,7 @@ actions:
         description: ID of a executed API request
         type: string
         required: true
+
   get_alert:
     title: Get Alert
     description: Retrieve alert from OpsGenie
@@ -143,6 +154,7 @@ actions:
         description: Type of the identifier that is provided as an in-line parameter. Possible values are id, tiny and alias. Default value is id
         type: string
         enum:
+          - ""
           - "id"
           - "tiny"
           - "alias"
@@ -155,6 +167,12 @@ actions:
         description: Data that contains JSON response
         type: object
         required: true
+      requestId:
+        title: Request ID
+        description: ID of an request
+        type: string
+        required: true
+
   close_alert:
     title: Close Alert
     description: Close existing alert from OpsGenie
@@ -170,6 +188,7 @@ actions:
         description: Type of the identifier that is provided as an in-line parameter. Possible values are id, tiny and alias. Default value is id
         type: string
         enum:
+          - ""
           - "id"
           - "tiny"
           - "alias"
@@ -210,6 +229,7 @@ actions:
         description: ID of a executed API request
         type: string
         required: true
+
   get_on_calls:
     title: Get On Calls
     description: Get on-call request is used to retrieve current on-call participants of a specific schedule
@@ -225,6 +245,7 @@ actions:
         description: Type of the schedule identifier that is provided as an in-line parameter. Possible values are id and name. Default value is id
         type: string
         enum:
+          - ""
           - "id"
           - "name"
         default: "id"
@@ -235,7 +256,7 @@ actions:
         description: When enabled, retrieves user names of all on call participants. Default value is false
         type: boolean
         required: false
-        example: false
+        example: "false"
       date:
         title: Date
         description: Starting date of the timeline that will be provided in format as (yyyy-MM-dd'T'HH:mm:ssZ) (e.g. 2017-01-15T08:00:00+02:00). Default date is the moment of the time that request is received.

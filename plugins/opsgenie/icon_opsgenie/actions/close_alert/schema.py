@@ -39,6 +39,7 @@ class CloseAlertInput(insightconnect_plugin_runtime.Input):
       "description": "Type of the identifier that is provided as an in-line parameter. Possible values are id, tiny and alias. Default value is id",
       "default": "id",
       "enum": [
+        "",
         "id",
         "tiny",
         "alias"
