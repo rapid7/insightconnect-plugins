@@ -1,57 +1,136 @@
 import sys
 import os
+from unittest import TestCase
+from komand_palo_alto_pan_os.actions.check_if_address_object_in_group import CheckIfAddressObjectInGroup
+from komand_palo_alto_pan_os.actions.check_if_address_object_in_group.schema import Input, Output
+from unit_test.util import Util
+from unittest.mock import patch
+from parameterized import parameterized
+from komand.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-from komand_palo_alto_pan_os.connection.connection import Connection
-from komand_palo_alto_pan_os.actions.check_if_address_object_in_group import (
-    CheckIfAddressObjectInGroup,
-)
-import json
-import logging
 
-
+@patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
 class TestCheckIfAddressObjectInGroup(TestCase):
-    def test_integration_check_if_address_object_in_group(self):
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = CheckIfAddressObjectInGroup()
+    @parameterized.expand(
+        [
+            [
+                "success",
+                "test.com",
+                "Test Group",
+                False,
+                "localhost.localdomain",
+                "vsys1",
+                {"found": True, "address_objects": ["test.com"]},
+            ],
+            [
+                "not_found",
+                "example.com",
+                "Test Group",
+                False,
+                "localhost.localdomain",
+                "vsys1",
+                {"found": False, "address_objects": []},
+            ],
+            [
+                "enable_search_domain",
+                "test.com",
+                "Test Group",
+                True,
+                "localhost.localdomain",
+                "vsys1",
+                {"found": True, "address_objects": ["test.com"]},
+            ],
+            [
+                "enable_search_ipv4",
+                "1.1.1.1",
+                "Test Group",
+                True,
+                "localhost.localdomain",
+                "vsys1",
+                {"found": True, "address_objects": ["1.1.1.1"]},
+            ],
+            [
+                "enable_search_ipv6",
+                "abcd:123::1",
+                "Test Group",
+                True,
+                "localhost.localdomain",
+                "vsys1",
+                {"found": True, "address_objects": ["IPv6"]},
+            ],
+            [
+                "enable_search_domain_not_found",
+                "example.com",
+                "Test Group",
+                True,
+                "localhost.localdomain",
+                "vsys1",
+                {"found": False, "address_objects": []},
+            ],
+            [
+                "enable_search_ipv4_not_found",
+                "2.2.2.2",
+                "Test Group",
+                True,
+                "localhost.localdomain",
+                "vsys1",
+                {"found": False, "address_objects": []},
+            ],
+            [
+                "enable_search_ipv6_not_found",
+                "abcd:321::1",
+                "Test Group",
+                True,
+                "localhost.localdomain",
+                "vsys1",
+                {"found": False, "address_objects": []},
+            ],
+        ]
+    )
+    def test_check_if_address_object_in_group(
+        self, mock_get, name, address, group, enable_search, device_name, virtual_system, expected
+    ):
+        action = Util.default_connector(CheckIfAddressObjectInGroup())
+        actual = action.run(
+            {
+                Input.ADDRESS: address,
+                Input.GROUP: group,
+                Input.ENABLE_SEARCH: enable_search,
+                Input.DEVICE_NAME: device_name,
+                Input.VIRTUAL_SYSTEM: virtual_system,
+            }
+        )
+        self.assertEqual(actual, expected)
 
-        test_conn.logger = log
-        test_action.logger = log
-
-        try:
-            with open("../tests/check_if_address_object_in_group.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        self.assertTrue(results.get("found"))
-        self.assertTrue(results.get("address_object_name"))
-
-    def test_check_if_address_object_in_group(self):
-        """
-        TODO: Implement test cases here
-
-        Here you can mock the connection with data returned from the above integration test.
-        For information on mocking and unit testing please go here:
-
-        https://docs.google.com/document/d/1PifePDG1-mBcmNYE8dULwGxJimiRBrax5BIDG_0TFQI/edit?usp=sharing
-
-        You can either create a formal Mock for this, or you can create a fake connection class to pass to your
-        action for testing.
-        """
-        self.fail("Unimplemented Test Case")
+    @parameterized.expand(
+        [
+            [
+                "invalid_group",
+                ["example.com"],
+                "Invalid Group",
+                False,
+                "localhost.localdomain",
+                "vsys1",
+                "PAN OS returned an unexpected response.",
+                "Could not find group 'Invalid Group', or group was empty. Check the name, virtual system name, and device name.\ndevice name: localhost.localdomain\nvirtual system: vsys1",
+            ]
+        ]
+    )
+    def test_check_if_address_object_in_group_bad(
+        self, mock_get, name, address, group, enable_search, device_name, virtual_system, cause, assistance
+    ):
+        action = Util.default_connector(CheckIfAddressObjectInGroup())
+        with self.assertRaises(PluginException) as e:
+            action.run(
+                {
+                    Input.ADDRESS: address,
+                    Input.GROUP: group,
+                    Input.ENABLE_SEARCH: enable_search,
+                    Input.DEVICE_NAME: device_name,
+                    Input.VIRTUAL_SYSTEM: virtual_system,
+                }
+            )
+        self.assertEqual(e.exception.cause, cause)
+        self.assertEqual(e.exception.assistance, assistance)

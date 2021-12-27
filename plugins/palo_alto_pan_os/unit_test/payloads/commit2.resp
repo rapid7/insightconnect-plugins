@@ -1,0 +1,8 @@
+<response status="success" code="19">
+  <result>
+    <msg>
+      <line>Commit job enqueued with jobid 10</line>
+    </msg>
+    <job>10</job>
+  </result>
+</response>

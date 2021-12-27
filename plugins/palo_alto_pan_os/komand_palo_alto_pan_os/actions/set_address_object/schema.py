@@ -31,7 +31,7 @@ class SetAddressObjectInput(komand.Input):
     "address": {
       "type": "string",
       "title": "Address",
-      "description": "The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com google.com",
+      "description": "The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com",
       "order": 1
     },
     "address_object": {

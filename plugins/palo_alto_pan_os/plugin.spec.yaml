@@ -4,7 +4,8 @@ products: [insightconnect]
 name: palo_alto_pan_os
 title: Palo Alto Firewall
 description: Manage Palo Alto Networks firewall devices
-version: 6.1.2
+version: 6.1.3
+supported_versions: ["9.0.3"]
 vendor: rapid7
 support: rapid7
 status: []
@@ -329,7 +330,7 @@ actions:
         type: string
         description: Search query. Format as a log filter expression
         required: false
-        example:
+        example: "receive_time geq '2021/12/22 08:00:00'"
       interval:
         title: Interval
         type: float
@@ -680,7 +681,6 @@ actions:
       address:
         title: Address
         description: The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com
-          google.com
         type: string
         example: 1.1.1.1
         required: true
@@ -698,8 +698,7 @@ actions:
         required: false
       tags:
         title: Tags
-        description: Tags for the address object. Use commas to separate multiple
-          tags
+        description: Tags for the address object. Use commas to separate multiple tags
         type: string
         example: malware
         required: false

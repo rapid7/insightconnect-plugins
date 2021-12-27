@@ -46,7 +46,7 @@ class AddExternalDynamicList(komand.Action):
             source,
             self._REPEAT_KEY[repeat],
             time,
-            day.lower,
+            day.lower(),
         )
 
         output = self.connection.request.set_(xpath=xpath, element=element)
