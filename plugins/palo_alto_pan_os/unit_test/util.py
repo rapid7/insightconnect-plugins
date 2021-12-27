@@ -1,22 +1,22 @@
 import logging
+import sys
 import os
 from komand_palo_alto_pan_os.connection.connection import Connection
 from komand_palo_alto_pan_os.connection.schema import Input
 
+sys.path.append(os.path.abspath("../"))
+
 
 class Util:
     @staticmethod
-    def default_connector(action, connect_params: object = None):
+    def default_connector(action):
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
-        if connect_params:
-            params = connect_params
-        else:
-            params = {
-                Input.SERVER: "https://example.com",
-                Input.CREDENTIALS: {"password": "password", "username": "user"},
-                Input.VERIFY_CERT: True,
-            }
+        params = {
+            Input.SERVER: "https://example.com",
+            Input.CREDENTIALS: {"password": "password", "username": "user"},
+            Input.VERIFY_CERT: True,
+        }
         default_connection.connect(params)
         action.connection = default_connection
         action.logger = logging.getLogger("action logger")
