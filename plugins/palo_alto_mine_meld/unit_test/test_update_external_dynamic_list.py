@@ -36,7 +36,7 @@ class TestUpdateExternalDynamicList(TestCase):
     @parameterized.expand(
         [
             [
-                "already_add",
+                "already_added",
                 "example.com",
                 "domain_list_remove",
                 "Add",
@@ -57,6 +57,38 @@ class TestUpdateExternalDynamicList(TestCase):
                 "domain_list_add",
                 "Add",
                 "The provided indicator example is invalid.",
+                "The provided indicator must be a domain, IPv4 address, IPv6 address, or URL.",
+            ],
+            [
+                "invalid_indicator_domain",
+                "example..com",
+                "domain_list_add",
+                "Add",
+                "The provided indicator example..com is invalid.",
+                "The provided indicator must be a domain, IPv4 address, IPv6 address, or URL.",
+            ],
+            [
+                "invalid_indicator_ipv4",
+                "999.999.999.999",
+                "ipv4_list_add",
+                "Add",
+                "The provided indicator 999.999.999.999 is invalid.",
+                "The provided indicator must be a domain, IPv4 address, IPv6 address, or URL.",
+            ],
+            [
+                "invalid_indicator_ipv6",
+                "2001:db8:8:40000::2",
+                "ipv6_list_add",
+                "Add",
+                "The provided indicator 2001:db8:8:40000::2 is invalid.",
+                "The provided indicator must be a domain, IPv4 address, IPv6 address, or URL.",
+            ],
+            [
+                "invalid_indicator_url",
+                "httx://example.com",
+                "url_list_add",
+                "Add",
+                "The provided indicator httx://example.com is invalid.",
                 "The provided indicator must be a domain, IPv4 address, IPv6 address, or URL.",
             ],
         ]

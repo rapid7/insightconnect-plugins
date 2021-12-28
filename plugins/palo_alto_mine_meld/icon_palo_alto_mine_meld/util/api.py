@@ -45,7 +45,7 @@ class PaloAltoMineMeldAPI:
             if response.status_code == 401:
                 raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
             if response.status_code == 403:
-                raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
+                raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response.text)
             if response.status_code == 404:
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND)
             if 400 <= response.status_code < 500:
