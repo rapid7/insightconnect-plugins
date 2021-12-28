@@ -1,0 +1,6 @@
+{
+  "status": "FAILURE",
+  "message": "Failed to get data! Status: PARTIAL_SUCCESS, [{https://hostname:8443/transparency:javax.ws.rs.InternalServerErrorException: HTTP 500 }]",
+  "expectedResults": 0,
+  "failures": 0
+}

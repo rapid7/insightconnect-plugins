@@ -12,6 +12,10 @@ The Cybereason platform provides military-grade cyber security with real-time aw
 * Requires a Cybereason username and password
 * Cybereason account configured as shown [here](https://nest.cybereason.com/user/login?destination=/documentation/product-documentation/191/search-and-browse-files-machines-0#pre-requisites) for File Search capabilities
 
+# Supported Product Versions
+
+* All
+
 # Documentation
 
 ## Setup
@@ -41,11 +45,51 @@ Example input:
 
 ### Actions
 
+#### Delete Registry Key
+
+This action is used to delete a registry key involved in a Malop.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|initiator_user_name|string|None|True|Initiator user name|None|user@example.com|
+|malop_id|string|None|True|Malop ID to associate with the remediation actions|None|22.2787422324806222966|
+|sensor|string|None|True|The unique identifier of the machine you wish to perform the quarantine/unquarantine operation on, this can be an internal IPv4 address, hostname or sensor GUID|None|-1632138521.1198775089551518743|
+
+Example input:
+
+```
+{
+  "initiator_user_name": "user@example.com",
+  "malop_id": "22.2787422324806222966",
+  "sensor": "hostname"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|response|remediate_items|True|Malop response|
+
+Example output:
+
+```
+{
+  "malopId": "22.2787422324806222966",
+  "remediationId": "5144cf82-94c4-49f8-82cd-9ce1fcbd6a23",
+  "start": 1624819406074,
+  "initiatingUser": "user@example.com",
+  "statusLog": []
+}
+```
+
 #### Remediate Items
 
 This action is used to remediate a specific process, file or registry key if remediation is possible.
 
-This action supports the following action types: KILL_PROCESS, DELETE_REGISTRY_KEY, QUARANTINE_FILE, UNQUARANTINE_FILE, BLOCK_FILE, KILL_PREVENT_UNSUSPEND, ISOLATE_MACHINE.
+This action supports the following action types: KILL_PROCESS, DELETE_REGISTRY_KEY, QUARANTINE_FILE, UNQUARANTINE_FILE, BLOCK_FILE, KILL_PREVENT_UNSUSPEND.
 
 For more information about how to generate an `actions_by_machine` object, refer to [Cybereason documentation](https://nest.cybereason.com/documentation/api-documentation/all-versions/remediate-items#remediatemalops).
 
@@ -310,6 +354,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.0 - New action Delete Registry Key | Add support product versions
+* 2.0.2 - Remove ISOLATE_MACHINE option from Remediate Items action documentation
 * 2.0.1 - Fix incorrect error messaging when invalid credentials are used
 * 2.0.0 - Update action Isolate Machine | New action Remediate Items
 * 1.2.0 - Add new action Quarantine File

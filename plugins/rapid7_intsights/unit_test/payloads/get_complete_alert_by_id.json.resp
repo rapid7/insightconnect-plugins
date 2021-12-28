@@ -1,0 +1,28 @@
+{
+  "_id": "7cafac7ec5adaebf62257a4c",
+  "Details": {
+    "Source": {
+      "Type": "Application Store",
+      "NetworkType": "ClearWeb",
+      "URL": "http://www.rapid7.com"
+    },
+    "Images": [],
+    "Title": "Alerttest3",
+    "Type": "Phishing",
+    "SubType": "SuspiciousEmailAddress",
+    "Severity": "High",
+    "Tags": [],
+    "Description": "APIDescription"
+  },
+  "Assignees": [],
+  "FoundDate": "2021-09-30T19:35:42.441Z",
+  "Assets": [],
+  "TakedownStatus": "NotSent",
+  "IsFlagged": false,
+  "UpdateDate": "2021-09-30T19:35:42.441Z",
+  "RelatedIocs": [],
+  "RelatedThreatIDs": [],
+  "Closed": {
+    "IsClosed": false
+  }
+}

@@ -1,0 +1,303 @@
+{
+  "content": [
+    {
+      "cveId": "CVE-2019-18545",
+      "cpe": [],
+      "publishedDate": "2019-10-28T15:15:00.000Z",
+      "updateDate": "2021-10-24T19:53:21.742Z",
+      "severity": "Low",
+      "intsightsScore": 2,
+      "mentionsAmount": 4,
+      "mentionsPerSource": {
+        "PasteSite": 0,
+        "HackingForum": 0,
+        "InstantMessage": 0,
+        "DarkWeb": 0,
+        "ClearWebCyberBlogs": 0,
+        "CodeRepositories": 2,
+        "Exploit": 0,
+        "SocialMedia": 2
+      },
+      "firstMentionDate": "2019-08-16T17:05:00.000Z",
+      "lastMentionDate": "2019-11-02T17:01:16.000Z",
+      "exploitAvailability": false,
+      "vulnerabilityOrigin": [
+        "API"
+      ],
+      "relatedThreatActors": [],
+      "relatedMalware": [],
+      "relatedCampaigns": []
+    },
+    {
+      "cveId": "CVE-2021-3739",
+      "cpe": [],
+      "publishedDate": "2021-08-26T14:53:19.489Z",
+      "updateDate": "2021-10-24T20:14:32.595Z",
+      "severity": "Low",
+      "intsightsScore": 2,
+      "mentionsAmount": 2,
+      "mentionsPerSource": {
+        "PasteSite": 0,
+        "HackingForum": 0,
+        "InstantMessage": 0,
+        "DarkWeb": 0,
+        "ClearWebCyberBlogs": 0,
+        "CodeRepositories": 0,
+        "Exploit": 0,
+        "SocialMedia": 2
+      },
+      "firstMentionDate": "2021-08-29T06:09:00.000Z",
+      "lastMentionDate": "2021-08-29T06:09:00.000Z",
+      "exploitAvailability": false,
+      "vulnerabilityOrigin": [
+        "API"
+      ],
+      "relatedThreatActors": [],
+      "relatedMalware": [],
+      "relatedCampaigns": []
+    },
+    {
+      "cveId": "CVE-2020-7064",
+      "cpe": [
+        {
+          "Value": "cpe:2.3:a:php:php:*:*:*:*:*:*:*:*",
+          "Range": {
+            "VersionStartIncluding": "7.2.0",
+            "VersionEndIncluding": "",
+            "VersionStartExcluding": "",
+            "VersionEndExcluding": "7.2.9"
+          },
+          "Title": "Php",
+          "VendorProduct": "Php Php"
+        },
+        {
+          "Value": "cpe:2.3:a:php:php:*:*:*:*:*:*:*:*",
+          "Range": {
+            "VersionStartIncluding": "7.3.0",
+            "VersionEndIncluding": "",
+            "VersionStartExcluding": "",
+            "VersionEndExcluding": "7.3.16"
+          },
+          "Title": "Php",
+          "VendorProduct": "Php Php"
+        },
+        {
+          "Value": "cpe:2.3:a:php:php:*:*:*:*:*:*:*:*",
+          "Range": {
+            "VersionStartIncluding": "7.4.0",
+            "VersionEndIncluding": "",
+            "VersionStartExcluding": "",
+            "VersionEndExcluding": "7.4.4"
+          },
+          "Title": "Php",
+          "VendorProduct": "Php Php"
+        },
+        {
+          "Value": "cpe:2.3:o:debian:debian_linux:8.0:*:*:*:*:*:*:*",
+          "Range": {
+            "VersionStartIncluding": "",
+            "VersionEndIncluding": "",
+            "VersionStartExcluding": "",
+            "VersionEndExcluding": ""
+          },
+          "Title": "Debian Debian Linux 8.0",
+          "VendorProduct": "Debian Debian Linux"
+        },
+        {
+          "Value": "cpe:2.3:o:debian:debian_linux:9.0:*:*:*:*:*:*:*",
+          "Range": {
+            "VersionStartIncluding": "",
+            "VersionEndIncluding": "",
+            "VersionStartExcluding": "",
+            "VersionEndExcluding": ""
+          },
+          "Title": "Debian Debian Linux 9.0",
+          "VendorProduct": "Debian Debian Linux"
+        },
+        {
+          "Value": "cpe:2.3:o:debian:debian_linux:10.0:*:*:*:*:*:*:*",
+          "Range": {
+            "VersionStartIncluding": "",
+            "VersionEndIncluding": "",
+            "VersionStartExcluding": "",
+            "VersionEndExcluding": ""
+          },
+          "Title": "Debian Debian Linux 10.0",
+          "VendorProduct": "Debian Debian Linux"
+        },
+        {
+          "Value": "cpe:2.3:o:canonical:ubuntu_linux:12.04:*:*:*:esm:*:*:*",
+          "Range": {
+            "VersionStartIncluding": "",
+            "VersionEndIncluding": "",
+            "VersionStartExcluding": "",
+            "VersionEndExcluding": ""
+          },
+          "Title": "Canonical Ubuntu Linux 12.04 Esm",
+          "VendorProduct": "Canonical Ubuntu Linux"
+        },
+        {
+          "Value": "cpe:2.3:o:canonical:ubuntu_linux:14.04:*:*:*:esm:*:*:*",
+          "Range": {
+            "VersionStartIncluding": "",
+            "VersionEndIncluding": "",
+            "VersionStartExcluding": "",
+            "VersionEndExcluding": ""
+          },
+          "Title": "Canonical Ubuntu Linux 14.04 Esm",
+          "VendorProduct": "Canonical Ubuntu Linux"
+        },
+        {
+          "Value": "cpe:2.3:o:canonical:ubuntu_linux:16.04:*:*:*:lts:*:*:*",
+          "Range": {
+            "VersionStartIncluding": "",
+            "VersionEndIncluding": "",
+            "VersionStartExcluding": "",
+            "VersionEndExcluding": ""
+          },
+          "Title": "Canonical Ubuntu Linux 16.04 Lts",
+          "VendorProduct": "Canonical Ubuntu Linux"
+        },
+        {
+          "Value": "cpe:2.3:o:canonical:ubuntu_linux:18.04:*:*:*:lts:*:*:*",
+          "Range": {
+            "VersionStartIncluding": "",
+            "VersionEndIncluding": "",
+            "VersionStartExcluding": "",
+            "VersionEndExcluding": ""
+          },
+          "Title": "Canonical Ubuntu Linux 18.04 Lts",
+          "VendorProduct": "Canonical Ubuntu Linux"
+        },
+        {
+          "Value": "cpe:2.3:o:canonical:ubuntu_linux:19.10:*:*:*:*:*:*:*",
+          "Range": {
+            "VersionStartIncluding": "",
+            "VersionEndIncluding": "",
+            "VersionStartExcluding": "",
+            "VersionEndExcluding": ""
+          },
+          "Title": "Canonical Ubuntu Linux 19.10",
+          "VendorProduct": "Canonical Ubuntu Linux"
+        },
+        {
+          "Value": "cpe:2.3:o:canonical:ubuntu_linux:20.04:*:*:*:lts:*:*:*",
+          "Range": {
+            "VersionStartIncluding": "",
+            "VersionEndIncluding": "",
+            "VersionStartExcluding": "",
+            "VersionEndExcluding": ""
+          },
+          "Title": "Canonical Ubuntu Linux 20.04 Lts",
+          "VendorProduct": "Canonical Ubuntu Linux"
+        },
+        {
+          "Value": "cpe:2.3:o:opensuse:leap:15.1:*:*:*:*:*:*:*",
+          "Range": {
+            "VersionStartIncluding": "",
+            "VersionEndIncluding": "",
+            "VersionStartExcluding": "",
+            "VersionEndExcluding": ""
+          },
+          "Title": "Opensuse Leap 15.1",
+          "VendorProduct": "Opensuse Leap"
+        }
+      ],
+      "publishedDate": "2020-04-01T04:15:00.000Z",
+      "updateDate": "2021-10-25T10:14:52.978Z",
+      "severity": "Low",
+      "intsightsScore": 36,
+      "cvssScore": 5.4,
+      "mentionsAmount": 39,
+      "mentionsPerSource": {
+        "PasteSite": 0,
+        "HackingForum": 0,
+        "InstantMessage": 0,
+        "DarkWeb": 0,
+        "ClearWebCyberBlogs": 0,
+        "CodeRepositories": 9,
+        "Exploit": 0,
+        "SocialMedia": 30
+      },
+      "firstMentionDate": "2020-03-19T15:09:00.000Z",
+      "lastMentionDate": "2021-07-22T20:41:00.000Z",
+      "exploitAvailability": false,
+      "vulnerabilityOrigin": [
+        "API"
+      ],
+      "relatedThreatActors": [],
+      "relatedMalware": [],
+      "relatedCampaigns": []
+    },
+    {
+      "cveId": "CVE-2017-12609",
+      "cpe": [],
+      "publishedDate": "2018-02-19T16:29:00.000Z",
+      "updateDate": "2021-10-31T19:04:02.927Z",
+      "severity": "Low",
+      "intsightsScore": 2,
+      "mentionsAmount": 4,
+      "mentionsPerSource": {
+        "PasteSite": 0,
+        "HackingForum": 0,
+        "InstantMessage": 0,
+        "DarkWeb": 0,
+        "ClearWebCyberBlogs": 0,
+        "CodeRepositories": 2,
+        "Exploit": 0,
+        "SocialMedia": 2
+      },
+      "firstMentionDate": "2018-02-06T11:33:34.000Z",
+      "lastMentionDate": "2019-03-17T22:19:02.000Z",
+      "exploitAvailability": false,
+      "vulnerabilityOrigin": [
+        "API"
+      ],
+      "relatedThreatActors": [],
+      "relatedMalware": [],
+      "relatedCampaigns": []
+    },
+    {
+      "cveId": "CVE-2018-1999037",
+      "cpe": [
+        {
+          "Value": "cpe:2.3:a:jenkins:resource_disposer:*:*:*:*:*:jenkins:*:*",
+          "Range": {
+            "VersionStartIncluding": "",
+            "VersionEndIncluding": "0.11",
+            "VersionStartExcluding": "",
+            "VersionEndExcluding": ""
+          },
+          "Title": "Jenkins Resource Disposer",
+          "VendorProduct": "Jenkins Resource Disposer"
+        }
+      ],
+      "publishedDate": "2018-08-01T13:29:00.000Z",
+      "updateDate": "2021-10-31T19:04:03.453Z",
+      "severity": "Low",
+      "intsightsScore": 22,
+      "cvssScore": 4.3,
+      "mentionsAmount": 18,
+      "mentionsPerSource": {
+        "PasteSite": 2,
+        "HackingForum": 0,
+        "InstantMessage": 0,
+        "DarkWeb": 0,
+        "ClearWebCyberBlogs": 0,
+        "CodeRepositories": 1,
+        "Exploit": 0,
+        "SocialMedia": 15
+      },
+      "firstMentionDate": "2018-07-31T20:06:00.000Z",
+      "lastMentionDate": "2019-11-29T13:11:00.000Z",
+      "exploitAvailability": false,
+      "vulnerabilityOrigin": [
+        "API"
+      ],
+      "relatedThreatActors": [],
+      "relatedMalware": [],
+      "relatedCampaigns": []
+    }
+  ],
+  "nextOffset": null
+}

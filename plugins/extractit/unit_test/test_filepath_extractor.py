@@ -1,25 +1,16 @@
 from unittest import TestCase
 from icon_extractit.actions.filepath_extractor import FilepathExtractor
 from icon_extractit.actions.filepath_extractor.schema import Input, Output
+from unit_test.util import Util
+from parameterized import parameterized
+
+parameters = Util.load_parameters("filepath_extractor").get("parameters")
 
 
 class TestFilepathExtractor(TestCase):
-    def test_extract_filepath_from_string(self):
+    @parameterized.expand(parameters)
+    def test_extract_filepath(self, name, string, file, expected):
         action = FilepathExtractor()
-        actual = action.run(
-            {
-                Input.STR: "/tmp/image.jpg and /tmp/script are example file paths",
-            }
-        )
-        expected = {Output.FILEPATHS: ["/tmp/image.jpg", "/tmp/script"]}
-        self.assertEqual(actual, expected)
-
-    def test_extract_filepath_from_file(self):
-        action = FilepathExtractor()
-        actual = action.run(
-            {
-                Input.FILE: "L3RtcC9pbWFnZS5qcGcgYW5kIC90bXAvc2NyaXB0IGFyZSBleGFtcGxlIGZpbGUgcGF0aHM=",
-            }
-        )
-        expected = {Output.FILEPATHS: ["/tmp/image.jpg", "/tmp/script"]}
+        actual = action.run({Input.STR: string, Input.FILE: file})
+        expected = {Output.FILEPATHS: expected}
         self.assertEqual(actual, expected)
