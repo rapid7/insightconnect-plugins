@@ -9,7 +9,4 @@ class GetAlert(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        results = self.connection.client.get_alert(
-            self.params.get(Input.IDENTIFIER), self.params.get(Input.IDENTIFIERTYPE)
-        )
-        return {Output.DATA: results}
+        return self.connection.client.get_alert(params.get(Input.IDENTIFIER), params.get(Input.IDENTIFIERTYPE))

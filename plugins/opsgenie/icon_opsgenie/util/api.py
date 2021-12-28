@@ -48,9 +48,6 @@ class ApiClient:
 
             response = requests.request(method, url, json=json_data, params=params, data=data_string, headers=headers)
 
-            if response.status_code == 401:
-                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
-
             if response.status_code == 403:
                 raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
 

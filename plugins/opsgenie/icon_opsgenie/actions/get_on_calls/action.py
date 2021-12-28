@@ -9,10 +9,9 @@ class GetOnCalls(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        results = self.connection.client.get_on_calls(
-            self.params.get(Input.SCHEDULEIDENTIFIER),
-            self.params.get(Input.SCHEDULEIDENTIFIERTYPE),
-            self.params.get(Input.FLAT),
-            self.params.get(Input.DATE),
+        return self.connection.client.get_on_calls(
+            params.get(Input.SCHEDULEIDENTIFIER),
+            params.get(Input.SCHEDULEIDENTIFIERTYPE),
+            params.get(Input.FLAT),
+            params.get(Input.DATE),
         )
-        return {Output.DATA: results}

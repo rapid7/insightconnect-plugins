@@ -10,19 +10,19 @@ class CreateAlert(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         data = {
-            "message": self.params.get(Input.MESSAGE),
-            "alias": self.params.get(Input.ALIAS),
-            "description": self.params.get(Input.DESCRIPTION),
-            "responders": self.params.get(Input.RESPONDERS),
-            "visibleTo": self.params.get(Input.VISIBLETO),
-            "actions": self.params.get(Input.ACTIONS),
-            "tags": self.params.get(Input.TAGS),
-            "details": self.params.get(Input.DETAILS),
-            "entity": self.params.get(Input.ENTITY),
-            "source": self.params.get(Input.SOURCE),
-            "priority": self.params.get(Input.PRIORITY),
-            "user": self.params.get(Input.USER),
-            "note": self.params.get(Input.NOTE),
+            "message": params.get(Input.MESSAGE),
+            "alias": params.get(Input.ALIAS),
+            "description": params.get(Input.DESCRIPTION),
+            "responders": params.get(Input.RESPONDERS),
+            "visibleTo": params.get(Input.VISIBLETO),
+            "actions": params.get(Input.ACTIONS),
+            "tags": params.get(Input.TAGS),
+            "details": params.get(Input.DETAILS),
+            "entity": params.get(Input.ENTITY),
+            "source": params.get(Input.SOURCE),
+            "priority": params.get(Input.PRIORITY),
+            "user": params.get(Input.USER),
+            "note": params.get(Input.NOTE),
         }
 
         results = self.connection.client.create_alert(data)

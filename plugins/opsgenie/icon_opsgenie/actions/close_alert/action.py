@@ -9,9 +9,7 @@ class CloseAlert(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        results = self.connection.client.close_alert(
-            self.params.get(Input.IDENTIFIER), self.params.get(Input.IDENTIFIERTYPE)
-        )
+        results = self.connection.client.close_alert(params.get(Input.IDENTIFIER), params.get(Input.IDENTIFIERTYPE))
 
         return {
             Output.REQUESTID: results[Output.REQUESTID],
