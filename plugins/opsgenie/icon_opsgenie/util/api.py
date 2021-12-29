@@ -33,13 +33,12 @@ class ApiClient:
 
         return self._call_api("GET", GET_ON_CALLS_URL, params=params)
 
-    def test_api(self) -> None:
+    def test_api(self) -> dict:
         GET_TEAM_URL = f"{self.api_url}teams"
         return self._call_api("GET", GET_TEAM_URL)
 
     def _call_api(self, method: str, url: str, json_data: dict = None, params: dict = None, data: dict = None) -> dict:
         headers = {"Authorization": f"GenieKey {self.api_key}"}
-
         try:
             if data is None:
                 data_string = None
@@ -50,10 +49,8 @@ class ApiClient:
 
             if response.status_code == 403:
                 raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
-
             if response.status_code == 404:
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND)
-
             if 200 <= response.status_code < 300:
                 return response.json()
 
