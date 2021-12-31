@@ -5,7 +5,6 @@ from komand_get_url.connection.connection import Connection
 
 
 class Util:
-
     @staticmethod
     def default_connector(action):
         default_connection = Connection()

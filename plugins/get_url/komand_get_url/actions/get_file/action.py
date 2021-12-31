@@ -24,7 +24,7 @@ class GetFile(komand.Action):
         url_object, meta = self.utils.check_prefix_and_download(url, is_verify, user_agent, timeout)
         cache_file = "/var/cache/" + meta.get("file")
         if url_object:
-            contents = url_object.read().decode('utf-8', 'replace')
+            contents = url_object.read().decode("utf-8", "replace")
             # Optional integrity check of file
             if checksum and not komand.helper.check_hashes(contents, checksum):
                 self.logger.error("GetFile: File Checksum Failed")
