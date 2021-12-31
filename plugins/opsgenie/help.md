@@ -28,6 +28,9 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
+{
+  "api_key": "1234567e-123c-123c-123c-1234567e9xAd"
+}
 ```
 
 ## Technical Details
@@ -51,6 +54,13 @@ This action is used to close existing alert from OpsGenie.
 Example input:
 
 ```
+{
+  "identifier": "8418d193-2dab-4490-b331-8c02cdd196b7",
+  "identifierType": "id",
+  "note": "Action executed via Alert API",
+  "source": "AWS Lambda",
+  "user": "Monitoring Script"
+}
 ```
 
 ##### Output
@@ -64,6 +74,11 @@ Example input:
 Example output:
 
 ```
+{
+    "result": "Request will be processed",
+    "took": 0.107,
+    "requestId": "43a29c5c-3dbf-4fa4-9c26-f4f71023e120"
+}
 ```
 
 #### Create Alert
@@ -91,6 +106,21 @@ This action creates an alert for OpsGenie.
 Example input:
 
 ```
+{
+  "actions": "["Restart", "AnExampleAction"]",
+  "alias": "An example Alias",
+  "description": "An example description",
+  "details": "{"key1":"value1","key2":"value2"}",
+  "entity": "An example entity",
+  "message": "An example alert message",
+  "note": "Example additional note",
+  "priority": "P1",
+  "responders": "[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c", "type":"team"},{"name":"NOC","type":"team"}]",
+  "source": "192.168.0.1",
+  "tags": "["OverwriteQuietHours","Critical"]",
+  "user": "ExampleName",
+  "visibleTo": "[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c","type":"team"},{"name":"example_name","type":"team"}]"
+}
 ```
 
 ##### Output
@@ -104,6 +134,11 @@ Example input:
 Example output:
 
 ```
+{
+    "result": "Request will be processed",
+    "took": 0.302,
+    "requestId": "43a29c5c-3dbf-4fa4-9c26-f4f71023e120"
+}
 ```
 
 #### Get Alert
@@ -120,6 +155,10 @@ This action is used to retrieve alert from OpsGenie.
 Example input:
 
 ```
+{
+  "identifier": "8418d193-2dab-4490-b331-8c02cdd196b7",
+  "identifierType": "id"
+}
 ```
 
 ##### Output
@@ -132,6 +171,67 @@ Example input:
 Example output:
 
 ```
+{
+    "data": {
+        "id": "70413a06-38d6-4c85-92b8-5ebc900d42e2",
+        "tinyId": "1791",
+        "alias": "event_573",
+        "message": "Our servers are in danger",
+        "status": "closed",
+        "acknowledged": false,
+        "isSeen": true,
+        "tags": [
+            "OverwriteQuietHours",
+            "Critical"
+        ],
+        "snoozed": true,
+        "snoozedUntil": "2017-04-03T20:32:35.143Z",
+        "count": 79,
+        "lastOccurredAt": "2017-04-03T20:05:50.894Z",
+        "createdAt": "2017-03-21T20:32:52.353Z",
+        "updatedAt": "2017-04-03T20:32:57.301Z",
+        "source": "Isengard",
+        "owner": "example@opsgenie.com",
+        "priority": "P5",
+        "responders":[
+          {
+              "id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c",
+              "type":"team"
+          },
+          {
+              "id":"bb4d9938-c3c2-455d-aaab-727aa701c0d8",
+              "type":"user"
+          },
+          {
+              "id":"aee8a0de-c80f-4515-a232-501c0bc9d715",
+              "type":"escalation"
+          },
+          {
+              "id":"80564037-1984-4f38-b98e-8a1f662df552",
+              "type":"schedule"
+          }
+            ],
+        "integration": {
+            "id": "4513b7ea-3b91-438f-b7e4-e3e54af9147c",
+            "name": "ExampleName",
+            "type": "API"
+        },
+        "report": {
+            "ackTime": 15702,
+            "closeTime": 60503,
+            "acknowledgedBy": "example@opsgenie.com",
+            "closedBy": "example@opsgenie.com"
+        },
+        "actions": ["Restart", "Ping"],
+        "entity": "EC2",
+        "description": "Example description",
+        "details": {
+            "serverName": "ExampleName",
+            "region": "ExampleRegion"
+        }
+    },
+    "requestId": "9ae63dd7-ed00-4c81-86f0-c4ffd33142c9"
+}
 ```
 
 #### Get On Calls
@@ -150,6 +250,12 @@ This action is used to get on-call request is used to retrieve current on-call p
 Example input:
 
 ```
+{
+  "date": "2017-01-15T08:00:00+02:00",
+  "flat": "false",
+  "scheduleIdentifier": "ScheduleName",
+  "scheduleIdentifierType": "name"
+}
 ```
 
 ##### Output
@@ -163,6 +269,64 @@ Example input:
 Example output:
 
 ```
+{
+    "data": {
+        "_parent": {
+            "id": "d875alp4-9b4e-4219-alp3-0c26936d18de",
+            "name": "ScheduleName",
+            "enabled": true
+        },
+        "onCallParticipants": [
+            {
+                "id": "c569c016-alpc-4e20-8a28-bd5dc33b798e",
+                "name": "TeamName",
+                "type": "team"
+            },
+            {
+                "id": "15445alp-e46c-446f-9236-7ad89ad1a4f7",
+                "name": "TeamName_escalation",
+                "type": "escalation",
+                "onCallParticipants": [
+                    {
+                        "id": "e55700e1-ff76-4cd0-a6e8-e1a982423alp",
+                        "name": "TeamName_schedule",
+                        "type": "schedule",
+                        "escalationTime": 0,
+                        "notifyType": "default"
+                    },
+                    {
+                        "id": "e55700e1-ff76-4cd0-a6e8-e1a982423alp",
+                        "name": "TeamName_schedule",
+                        "type": "schedule",
+                        "escalationTime": 5,
+                        "notifyType": "next"
+                    },
+                    {
+                        "id": "c569c016-alpc-4e20-8a28-bd5dc33b798e",
+                        "name": "TeamName",
+                        "type": "team",
+                        "onCallParticipants": [
+                            {
+                                "id": "balp7783-a9f1-40e3-940c-ffde45656054",
+                                "name": "user5@opsgenie.com",
+                                "type": "user"
+                            },
+                            {
+                                "id": "4falpb2e-348d-4b7c-b71b-149efb8361e4",
+                                "name": "user4@opsgenie.com",
+                                "type": "user"
+                            }
+                        ],
+                        "escalationTime": 10,
+                        "notifyType": "all"
+                    }
+                ]
+            }
+        ]
+    },
+    "took": 0.305,
+    "requestId": "e28ce37b-d81c-4b1d-abb8-0c371d8alp5f"
+}
 ```
 
 ### Triggers
@@ -186,4 +350,5 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [OpsGenie](LINK TO PRODUCT/VENDOR WEBSITE)
+
 

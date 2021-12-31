@@ -5,8 +5,8 @@ import json
 from sys import argv
 
 Name = "OpsGenie"
-Vendor = "rapid7"
-Version = "0.1.0"
+Vendor = "rapid7-test"
+Version = "1.0.0"
 Description = "Notify the right people, reduce response time, and avoid alert fatigue within a workflow."
 
 

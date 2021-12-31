@@ -2,10 +2,10 @@
 from setuptools import setup, find_packages
 
 
-setup(name="opsgenie-rapid7-plugin",
-      version="0.1.0",
+setup(name="opsgenie-rapid7-test-plugin",
+      version="1.0.0",
       description="Notify the right people, reduce response time, and avoid alert fatigue within a workflow.",
-      author="rapid7",
+      author="rapid7-test",
       author_email="",
       url="",
       packages=find_packages(),

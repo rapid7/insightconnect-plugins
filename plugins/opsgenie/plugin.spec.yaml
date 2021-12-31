@@ -4,8 +4,8 @@ products: [insightconnect]
 name: opsgenie
 title: OpsGenie
 description: Notify the right people, reduce response time, and avoid alert fatigue within a workflow.
-version: 0.1.0
-vendor: rapid7
+version: 1.0.0
+vendor: rapid7-test
 support: rapid7
 status: []
 resources:
