@@ -45,7 +45,7 @@ class PollFile(komand.Trigger):
             old_cache_file.close()
             if old_contents == contents:
                 self.is_modified = False
-                self.logger.info("GetUrl: File not updated")
+                self.logger.debug("GetUrl: File not updated")
 
         if self.is_modified:
             opened_cache_file = komand.helper.open_cachefile(cache_file)
