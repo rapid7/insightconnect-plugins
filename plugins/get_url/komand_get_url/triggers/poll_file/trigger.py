@@ -38,7 +38,7 @@ class PollFile(komand.Trigger):
         # Write etag and last modified to cache
         self.utils.create_url_meta_file(meta, url_object)
 
-        """We can't guarantee server supports lastmodified/etag, compare contents"""
+        # We can't guarantee server supports lastmodified/etag, compare contents
         if komand.helper.check_cachefile(cache_file):
             old_cache_file = komand.helper.open_cachefile(cache_file)
             old_contents = old_cache_file.read()
