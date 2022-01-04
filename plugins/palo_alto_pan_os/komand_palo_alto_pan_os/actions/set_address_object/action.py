@@ -43,8 +43,7 @@ class SetAddressObject(komand.Action):
             if address in whitelist:
                 self.logger.info(f" Whitelist matched\n{address} was found in whitelist")
                 return True
-            else:
-                return False
+            return False
 
         # if 1.1.1.1/32 - remove /32
         trimmed_address = re.sub(r"/32$", "", address)
@@ -54,13 +53,13 @@ class SetAddressObject(komand.Action):
             return address in whitelist
 
         # IP is in CIDR - Give the user a log message
-        for object in whitelist:
-            type = self.determine_address_type(object)
-            if type == "ip-netmask":
-                net = ip_network(object, False)  # False means ignore the masked bits, otherwise they need to be 0
+        for address_object in whitelist:
+            address_type = self.determine_address_type(address_object)
+            if address_type == "ip-netmask":
+                net = ip_network(address_object, False)  # False means ignore the masked bits, otherwise they need to be 0
                 ip = ip_address(trimmed_address)
                 if ip in net:
-                    self.logger.info(f" Whitelist matched\nIP {address} was found in {object}")
+                    self.logger.info(f" Whitelist matched\nIP {address} was found in {address_object}")
                     return True
 
         return False
@@ -73,8 +72,8 @@ class SetAddressObject(komand.Action):
         if re.search("-", address):  # IP Range
             split_ = address.split("-")
             return IP(split_[0]).iptype() in ip_types and IP(split_[1]).iptype() in ip_types
-        else:  # Other
-            return IP(address).iptype() in ip_types
+        # Other
+        return IP(address).iptype() in ip_types
 
     def run(self, params={}):
         address = params.get(Input.ADDRESS)
@@ -94,15 +93,7 @@ class SetAddressObject(komand.Action):
             for item in tag_list:
                 tag = tag + f"<member>{item}</member>"
 
-        """
-        create object type XML
-        
-        supported types: 
-
-        - ip-netmask
-        - ip-range
-        - fqdn        
-        """
+        # create object type XML, supported types: ip-netmask, ip-range, fqdn
         # object_type = object_type.lower()
         if skip_private:
             if object_type != "fqdn":

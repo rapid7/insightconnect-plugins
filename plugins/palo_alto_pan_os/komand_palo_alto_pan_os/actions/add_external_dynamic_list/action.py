@@ -39,7 +39,7 @@ class AddExternalDynamicList(komand.Action):
         time = params.get("time")
         day = params.get("day")
 
-        xpath = "/config/devices/entry/vsys/entry/external-list/entry[@name='{}']".format(name)
+        xpath = f"/config/devices/entry/vsys/entry/external-list/entry[@name='{name}']"
         element = add.element_for_create_external_list(
             self._LIST_TYPE_KEY[list_type],
             description,
