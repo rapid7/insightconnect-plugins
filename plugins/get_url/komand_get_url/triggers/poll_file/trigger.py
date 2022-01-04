@@ -52,7 +52,7 @@ class PollFile(komand.Trigger):
             opened_cache_file.write(contents)
             opened_cache_file.close()
 
-            """Check URL status code and return file contents"""
+            # Check URL status code and return file contents
             if 200 <= url_object.code <= 299:
                 self.send(
                     {
