@@ -1,0 +1,20 @@
+{
+  "result": [
+    {
+      "indicator": "https://example.com",
+      "type": "URL"
+    },
+    {
+      "indicator": "2001:db8:8:4::2",
+      "type": "IPv6"
+    },
+    {
+      "indicator": "example.com",
+      "type": "domain"
+    },
+    {
+      "indicator": "1.1.1.1",
+      "type": "IPv4"
+    }
+  ]
+}
