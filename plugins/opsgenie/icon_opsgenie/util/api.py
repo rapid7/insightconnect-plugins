@@ -14,17 +14,17 @@ class ApiClient:
         CREATE_ALERT_URL = f"{self.api_url}alerts/"
         return self._call_api("POST", CREATE_ALERT_URL, data=data)
 
-    def get_alert(self, id: str, id_type: str = "id") -> dict:
+    def get_alert(self, id: str, id_type: str = "ID") -> dict:
         GET_ALERT_URL = f"{self.api_url}alerts/{id}"
         params = {"identifierType": id_type}
         return self._call_api("GET", GET_ALERT_URL, params=params)
 
-    def close_alert(self, id: str, id_type: str = "id", data: dict = None) -> dict:
+    def close_alert(self, id: str, id_type: str = "ID", data: dict = None) -> dict:
         CLOSE_ALERT_URL = f"{self.api_url}alerts/{id}/close"
         params = {"identifierType": id_type}
         return self._call_api("POST", CLOSE_ALERT_URL, params=params, data=data)
 
-    def get_on_calls(self, id: str, id_type: str = "id", flat: bool = False, date: str = None) -> dict:
+    def get_on_calls(self, id: str, id_type: str = "ID", flat: bool = False, date: str = None) -> dict:
         GET_ON_CALLS_URL = f"{self.api_url}schedules/{id}/on-calls"
         params = {"scheduleIdentifierType": id_type, "flat": flat}
 

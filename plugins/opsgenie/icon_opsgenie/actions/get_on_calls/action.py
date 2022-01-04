@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetOnCallsInput, GetOnCallsOutput, Input, Output, Component
+from .schema import GetOnCallsInput, GetOnCallsOutput, Input, Component
 
 
 class GetOnCalls(insightconnect_plugin_runtime.Action):

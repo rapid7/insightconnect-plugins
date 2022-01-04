@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetAlertInput, GetAlertOutput, Input, Output, Component
+from .schema import GetAlertInput, GetAlertOutput, Input, Component
 
 
 class GetAlert(insightconnect_plugin_runtime.Action):

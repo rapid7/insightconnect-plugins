@@ -5,7 +5,7 @@ name: opsgenie
 title: OpsGenie
 description: Notify the right people, reduce response time, and avoid alert fatigue within a workflow.
 version: 1.0.0
-vendor: rapid7-test
+vendor: rapid7
 support: rapid7
 status: []
 resources:
@@ -44,10 +44,10 @@ actions:
         example: "An example alert message"
       alias:
         title: Alias
-        description: Client-defined identifier of the alert, that is also the key element of Alert De-Duplication
+        description: Client-defined identifier of the alert, that is also the key element of Alert deduplication
         type: string
         required: false
-        example: "An example Alias"
+        example: "An example alias"
       description:
         title: Description
         description: Description field of the alert that is generally used to provide a detailed information about the alert
@@ -56,13 +56,13 @@ actions:
         example: "An example description"
       responders:
         title: Responders
-        description: Teams, users, escalations and schedules that the alert will be routed to send notifications. type field is mandatory for each item, where possible values are team, user, escalation and schedule. If the API Key belongs to a team integration, this field will be overwritten with the owner team. Either id or name of each responder should be provided.You can refer below for example values
+        description: Teams, users, escalations and schedules that the alert will be routed to send notifications. Type field is mandatory for each item, where possible values are team, user, escalation and schedule. If the API Key belongs to a team integration, this field will be overwritten with the owner team. Either ID or name of each responder should be provided. You can refer below for example values
         type: "[]object"
         required: false
         example: '[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c", "type":"team"},{"name":"NOC","type":"team"}]'
       visibleTo:
         title: VisibleTo
-        description: Teams and users that the alert will become visible to without sending any notification.type field is mandatory for each item, where possible values are team and user. In addition to the type field, either id or name should be given for teams and either id or username should be given for users. Please note that alert will be visible to the teams that are specified withinresponders field by default, so there is no need to re-specify them within visibleTo field. You can refer below for example values
+        description: Teams and users that the alert will become visible to without sending any notification. Type field is mandatory for each item, where possible values are team and user. In addition to the type field, either ID or name should be given for teams and either ID or username should be given for users. Please note that alert will be visible to the teams that are specified within responders field by default, so there is no need to re-specify them within visibleTo field. You can refer below for example values
         type: "[]object"
         required: false
         example: '[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c","type":"team"},{"name":"example_name","type":"team"}]'
@@ -86,7 +86,7 @@ actions:
         example: '{"key1":"value1","key2":"value2"}'
       entity:
         title: Entity
-        description: Entity field of the alert that is generally used to specify which domain alert is related to
+        description: Entity field of the alert that is generally used to specify which domain an alert is related to
         type: string
         required: false
         example: "An example entity"
@@ -151,16 +151,16 @@ actions:
         example: "8418d193-2dab-4490-b331-8c02cdd196b7"
       identifierType:
         title: Identifier Type
-        description: Type of the identifier that is provided as an in-line parameter. Possible values are id, tiny and alias. Default value is id
+        description: Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny and alias. Default value is ID
         type: string
         enum:
           - ""
-          - "id"
+          - "ID"
           - "tiny"
           - "alias"
-        default: "id"
+        default: "ID"
         required: false
-        example: "id"
+        example: "ID"
     output:
       data:
         title: Data
@@ -175,7 +175,7 @@ actions:
 
   close_alert:
     title: Close Alert
-    description: Close existing alert from OpsGenie
+    description: Close an existing alert from OpsGenie
     input:
       identifier:
         title: Alert ID
@@ -185,16 +185,16 @@ actions:
         example: "8418d193-2dab-4490-b331-8c02cdd196b7"
       identifierType:
         title: Identifier Type
-        description: Type of the identifier that is provided as an in-line parameter. Possible values are id, tiny and alias. Default value is id
+        description: Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny and alias. Default value is ID
         type: string
         enum:
           - ""
-          - "id"
+          - "ID"
           - "tiny"
           - "alias"
-        default: "id"
+        default: "ID"
         required: false
-        example: "id"
+        example: "ID"
       user:
         title: User
         description: Display name of the request owner
@@ -231,7 +231,7 @@ actions:
         required: true
 
   get_on_calls:
-    title: Get On Calls
+    title: Get On-Calls
     description: Get on-call request is used to retrieve current on-call participants of a specific schedule
     input:
       scheduleIdentifier:
@@ -242,18 +242,18 @@ actions:
         example: "ScheduleName"
       scheduleIdentifierType:
         title: Schedule Identifier Type
-        description: Type of the schedule identifier that is provided as an in-line parameter. Possible values are id and name. Default value is id
+        description: Type of the schedule identifier that is provided as an in-line parameter. Possible values are ID and name. Default value is ID
         type: string
         enum:
           - ""
-          - "id"
+          - "ID"
           - "name"
-        default: "id"
+        default: "ID"
         required: false
         example: "name"
       flat:
         title: Flat
-        description: When enabled, retrieves user names of all on call participants. Default value is false
+        description: When enabled, retrieves user names of all on-call participants. Default value is false
         type: boolean
         required: false
         example: "false"

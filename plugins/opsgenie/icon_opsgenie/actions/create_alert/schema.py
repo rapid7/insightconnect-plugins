@@ -47,7 +47,7 @@ class CreateAlertInput(insightconnect_plugin_runtime.Input):
     "alias": {
       "type": "string",
       "title": "Alias",
-      "description": "Client-defined identifier of the alert, that is also the key element of Alert De-Duplication",
+      "description": "Client-defined identifier of the alert, that is also the key element of Alert deduplication",
       "order": 2
     },
     "description": {
@@ -65,7 +65,7 @@ class CreateAlertInput(insightconnect_plugin_runtime.Input):
     "entity": {
       "type": "string",
       "title": "Entity",
-      "description": "Entity field of the alert that is generally used to specify which domain alert is related to",
+      "description": "Entity field of the alert that is generally used to specify which domain an alert is related to",
       "order": 9
     },
     "message": {
@@ -98,7 +98,7 @@ class CreateAlertInput(insightconnect_plugin_runtime.Input):
     "responders": {
       "type": "array",
       "title": "Responders",
-      "description": "Teams, users, escalations and schedules that the alert will be routed to send notifications. type field is mandatory for each item, where possible values are team, user, escalation and schedule. If the API Key belongs to a team integration, this field will be overwritten with the owner team. Either id or name of each responder should be provided.You can refer below for example values",
+      "description": "Teams, users, escalations and schedules that the alert will be routed to send notifications. Type field is mandatory for each item, where possible values are team, user, escalation and schedule. If the API Key belongs to a team integration, this field will be overwritten with the owner team. Either ID or name of each responder should be provided. You can refer below for example values",
       "items": {
         "type": "object"
       },
@@ -128,7 +128,7 @@ class CreateAlertInput(insightconnect_plugin_runtime.Input):
     "visibleTo": {
       "type": "array",
       "title": "VisibleTo",
-      "description": "Teams and users that the alert will become visible to without sending any notification.type field is mandatory for each item, where possible values are team and user. In addition to the type field, either id or name should be given for teams and either id or username should be given for users. Please note that alert will be visible to the teams that are specified withinresponders field by default, so there is no need to re-specify them within visibleTo field. You can refer below for example values",
+      "description": "Teams and users that the alert will become visible to without sending any notification. Type field is mandatory for each item, where possible values are team and user. In addition to the type field, either ID or name should be given for teams and either ID or username should be given for users. Please note that alert will be visible to the teams that are specified within responders field by default, so there is no need to re-specify them within visibleTo field. You can refer below for example values",
       "items": {
         "type": "object"
       },

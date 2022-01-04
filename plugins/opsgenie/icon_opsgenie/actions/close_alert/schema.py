@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Close existing alert from OpsGenie"
+    DESCRIPTION = "Close an existing alert from OpsGenie"
 
 
 class Input:
@@ -36,11 +36,11 @@ class CloseAlertInput(insightconnect_plugin_runtime.Input):
     "identifierType": {
       "type": "string",
       "title": "Identifier Type",
-      "description": "Type of the identifier that is provided as an in-line parameter. Possible values are id, tiny and alias. Default value is id",
-      "default": "id",
+      "description": "Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny and alias. Default value is ID",
+      "default": "ID",
       "enum": [
         "",
-        "id",
+        "ID",
         "tiny",
         "alias"
       ],

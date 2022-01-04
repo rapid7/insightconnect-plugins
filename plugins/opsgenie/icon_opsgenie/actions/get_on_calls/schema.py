@@ -37,7 +37,7 @@ class GetOnCallsInput(insightconnect_plugin_runtime.Input):
     "flat": {
       "type": "boolean",
       "title": "Flat",
-      "description": "When enabled, retrieves user names of all on call participants. Default value is false",
+      "description": "When enabled, retrieves user names of all on-call participants. Default value is false",
       "order": 3
     },
     "scheduleIdentifier": {
@@ -49,11 +49,11 @@ class GetOnCallsInput(insightconnect_plugin_runtime.Input):
     "scheduleIdentifierType": {
       "type": "string",
       "title": "Schedule Identifier Type",
-      "description": "Type of the schedule identifier that is provided as an in-line parameter. Possible values are id and name. Default value is id",
-      "default": "id",
+      "description": "Type of the schedule identifier that is provided as an in-line parameter. Possible values are ID and name. Default value is ID",
+      "default": "ID",
       "enum": [
         "",
-        "id",
+        "ID",
         "name"
       ],
       "order": 2
