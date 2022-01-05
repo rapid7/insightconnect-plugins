@@ -25,10 +25,4 @@ class CreateAlert(insightconnect_plugin_runtime.Action):
             "note": params.get(Input.NOTE),
         }
 
-        results = self.connection.client.create_alert(data)
-
-        return {
-            Output.REQUESTID: results[Output.REQUESTID],
-            Output.TOOK: results[Output.TOOK],
-            Output.RESULT: results[Output.RESULT],
-        }
+        return self.connection.client.create_alert(data)

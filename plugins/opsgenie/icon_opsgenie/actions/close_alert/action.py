@@ -9,10 +9,10 @@ class CloseAlert(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        results = self.connection.client.close_alert(params.get(Input.IDENTIFIER), params.get(Input.IDENTIFIERTYPE))
-
-        return {
-            Output.REQUESTID: results[Output.REQUESTID],
-            Output.TOOK: results[Output.TOOK],
-            Output.RESULT: results[Output.RESULT],
+        data = {
+            Input.USER: params.get(Input.USER),
+            Input.SOURCE: params.get(Input.SOURCE),
+            Input.NOTE: params.get(Input.NOTE),
         }
+
+        return self.connection.client.close_alert(params.get(Input.IDENTIFIER), params.get(Input.IDENTIFIERTYPE), data)

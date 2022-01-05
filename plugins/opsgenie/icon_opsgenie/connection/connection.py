@@ -11,7 +11,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params):
         self.logger.info("Connect: Connecting...")
-        self.client = ApiClient(params.get(Input.API_KEY), self.logger)
+        self.client = ApiClient(params.get(Input.API_KEY).get("secretKey"), self.logger)
 
     def test(self):
         try:

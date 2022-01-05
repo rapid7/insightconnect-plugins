@@ -14,16 +14,14 @@ from icon_opsgenie.connection.connection import Connection
 from icon_opsgenie.connection.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from unit_test.mock import (STUB_SCHEDULE_ID, mock_request_202,
-                            mock_request_403, mock_request_404,
-                            mock_request_500)
+from unit_test.mock import STUB_SCHEDULE_ID, mock_request_202, mock_request_403, mock_request_404, mock_request_500
 
 
 class TestGetOnCalls(TestCase):
     def setUp(self) -> None:
         self.connection = Connection()
         self.connection.logger = logging.getLogger("connection logger")
-        self.connection.connect({Input.API_KEY: "1234567e-123c-123c-123c-1234567e9xAd"})
+        self.connection.connect({Input.API_KEY: {"secretKey": "1234567e-123c-123c-123c-1234567e9xAd"}})
 
         self.action = GetOnCalls()
         self.action.connection = self.connection
