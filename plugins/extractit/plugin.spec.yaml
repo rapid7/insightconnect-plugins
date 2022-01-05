@@ -247,6 +247,14 @@ actions:
     title: Date Extractor
     description: Extracts all dates from a string or file
     input:
+      date_format:
+        title: Date Format
+        description: Dates matching this format are extracted
+        type: string
+        required: false
+        enum:
+          - "dd/mm/yyyy"
+          - "mm/dd/yyyy"
       str:
         title: String
         description: Input string
