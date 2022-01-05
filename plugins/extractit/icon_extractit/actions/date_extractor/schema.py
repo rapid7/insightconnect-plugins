@@ -8,6 +8,7 @@ class Component:
 
 
 class Input:
+    DATE_FORMAT = "date_format"
     FILE = "file"
     STR = "str"
     
@@ -22,19 +23,29 @@ class DateExtractorInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "date_format": {
+      "type": "string",
+      "title": "Date Format",
+      "description": "Dates matching this format are extracted",
+      "enum": [
+        "dd/mm/yyyy",
+        "mm/dd/yyyy"
+      ],
+      "order": 1
+    },
     "file": {
       "type": "string",
       "title": "File",
       "displayType": "bytes",
       "description": "Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS",
       "format": "bytes",
-      "order": 2
+      "order": 3
     },
     "str": {
       "type": "string",
       "title": "String",
       "description": "Input string",
-      "order": 1
+      "order": 2
     }
   }
 }

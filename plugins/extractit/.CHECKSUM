@@ -1,5 +1,5 @@
 {
-	"spec": "7cc3ccbe54c83a63aadc94f0ca4007a6",
+	"spec": "f0f194fb3f3ff4d588f1706af263363f",
 	"manifest": "df3e1edd93f4af15ca2b51b0104b768e",
 	"setup": "2f06aa28e0e04ec03e0637ae377826ab",
 	"schemas": [
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "date_extractor/schema.py",
-			"hash": "abcf76e91f9d1949983048c3e2dcf1d7"
+			"hash": "979043a6072e18b403308e9e708d4e94"
 		},
 		{
 			"identifier": "domain_extractor/schema.py",
