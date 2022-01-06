@@ -1,72 +1,79 @@
 import sys
 import os
+from unittest import TestCase
+from komand_palo_alto_pan_os.actions.add_external_dynamic_list import AddExternalDynamicList
+from komand_palo_alto_pan_os.actions.add_external_dynamic_list.schema import Input, Output
+from unit_test.util import Util
+from unittest.mock import patch
+from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-from komand_palo_alto_pan_os.connection.connection import Connection
-from komand_palo_alto_pan_os.actions.add_external_dynamic_list import AddExternalDynamicList
-import json
-import logging
 
-
+@patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
+@patch("requests.sessions.Session.post", side_effect=Util.mocked_requests)
 class TestAddExternalDynamicList(TestCase):
-    def test_integration_add_external_dynamic_list(self):
-        """
-        TODO: Implement assertions at the end of this test case
-
-        This is an integration test that will connect to the services your plugin uses. It should be used
-        as the basis for tests below that can run independent of a "live" connection.
-
-        This test assumes a normal plugin structure with a /tests directory. In that /tests directory should
-        be json samples that contain all the data needed to run this test. To generate samples run:
-
-        icon-plugin generate samples
-
-        """
-
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = AddExternalDynamicList()
-
-        test_conn.logger = log
-        test_action.logger = log
-
-        try:
-            with open("../tests/add_external_dynamic_list.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        # TODO: Remove this line
-        self.fail("Unimplemented test case")
-
-        # TODO: The following assert should be updated to look for data from your action
-        # For example: self.assertEquals({"success": True}, results)
-        self.assertEquals({}, results)
-
-    def test_add_external_dynamic_list(self):
-        """
-        TODO: Implement test cases here
-
-        Here you can mock the connection with data returned from the above integration test.
-        For information on mocking and unit testing please go here:
-
-        https://docs.google.com/document/d/1PifePDG1-mBcmNYE8dULwGxJimiRBrax5BIDG_0TFQI/edit?usp=sharing
-
-        You can either create a formal Mock for this, or you can create a fake connection class to pass to your
-        action for testing.
-        """
-        self.fail("Unimplemented Test Case")
+    @parameterized.expand(
+        [
+            [
+                "ip_list",
+                "IP List",
+                "IP List",
+                "List of IPs",
+                "https://www.example.com/test.txt",
+                "Five Minute",
+                "00",
+                "Monday",
+                {"status": "success", "code": "20", "message": "command succeeded"},
+            ],
+            [
+                "url_list",
+                "URL List",
+                "URL List",
+                "List of URLs",
+                "https://www.example.com/test.txt",
+                "Hourly",
+                "01",
+                "Wednesday",
+                {"status": "success", "code": "20", "message": "command succeeded"},
+            ],
+            [
+                "domain_list",
+                "Domain List",
+                "Domain List",
+                "List of domains",
+                "https://www.example.com/test.txt",
+                "Daily",
+                "08",
+                "Tuesday",
+                {"status": "success", "code": "20", "message": "command succeeded"},
+            ],
+            [
+                "url_list_weekly",
+                "URL List",
+                "URL List",
+                "List of URLs",
+                "https://www.example.com/test.txt",
+                "Weekly",
+                "12",
+                "Thursday",
+                {"status": "success", "code": "20", "message": "command succeeded"},
+            ],
+        ]
+    )
+    def test_add_external_dynamic_list(
+        self, mock_get, mock_post, name, list_name, list_type, description, source, repeat, time, day, expected
+    ):
+        action = Util.default_connector(AddExternalDynamicList())
+        actual = action.run(
+            {
+                Input.NAME: list_name,
+                Input.LIST_TYPE: list_type,
+                Input.DESCRIPTION: description,
+                Input.SOURCE: source,
+                Input.REPEAT: repeat,
+                Input.TIME: time,
+                Input.DAY: day,
+            }
+        )
+        self.assertEqual(actual, expected)

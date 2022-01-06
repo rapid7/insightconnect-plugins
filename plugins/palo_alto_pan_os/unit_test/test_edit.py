@@ -1,72 +1,41 @@
 import sys
 import os
+from unittest import TestCase
+from komand_palo_alto_pan_os.actions.edit import Edit
+from komand_palo_alto_pan_os.actions.edit.schema import Input, Output
+from unit_test.util import Util
+from unittest.mock import patch
+from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-from komand_palo_alto_pan_os.connection.connection import Connection
-from komand_palo_alto_pan_os.actions.edit import Edit
-import json
-import logging
 
-
+@patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
+@patch("requests.sessions.Session.post", side_effect=Util.mocked_requests)
 class TestEdit(TestCase):
-    def test_integration_edit(self):
-        """
-        TODO: Implement assertions at the end of this test case
-
-        This is an integration test that will connect to the services your plugin uses. It should be used
-        as the basis for tests below that can run independent of a "live" connection.
-
-        This test assumes a normal plugin structure with a /tests directory. In that /tests directory should
-        be json samples that contain all the data needed to run this test. To generate samples run:
-
-        icon-plugin generate samples
-
-        """
-
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = Edit()
-
-        test_conn.logger = log
-        test_action.logger = log
-
-        try:
-            with open("../tests/edit.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        # TODO: Remove this line
-        self.fail("Unimplemented test case")
-
-        # TODO: The following assert should be updated to look for data from your action
-        # For example: self.assertEquals({"success": True}, results)
-        self.assertEquals({}, results)
-
-    def test_edit(self):
-        """
-        TODO: Implement test cases here
-
-        Here you can mock the connection with data returned from the above integration test.
-        For information on mocking and unit testing please go here:
-
-        https://docs.google.com/document/d/1PifePDG1-mBcmNYE8dULwGxJimiRBrax5BIDG_0TFQI/edit?usp=sharing
-
-        You can either create a formal Mock for this, or you can create a fake connection class to pass to your
-        action for testing.
-        """
-        self.fail("Unimplemented Test Case")
+    @parameterized.expand(
+        [
+            [
+                "policy",
+                "/config/devices/entry/vsys/entry/rulebase/security/rules/entry[@name='Test Rule']/action",
+                "<action>drop</action>",
+                {"response": {"response": {"@status": "success", "@code": "20", "msg": "command succeeded"}}},
+            ],
+            [
+                "address_object",
+                "/config/devices/entry/vsys/entry/address/entry[@name='example.com']/tag",
+                "<tag><member>test</member></tag>",
+                {"response": {"response": {"@status": "success", "@code": "20", "msg": "command succeeded"}}},
+            ],
+            [
+                "address_group",
+                "/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address-group/entry[@name='Test Group']",
+                "<entry name='Test Group'><static><member>example.com</member><member>IPv6</member></static></entry>",
+                {"response": {"response": {"@status": "success", "@code": "20", "msg": "command succeeded"}}},
+            ],
+        ]
+    )
+    def test_edit(self, mock_get, mock_post, name, xpath, element, expected):
+        action = Util.default_connector(Edit())
+        actual = action.run({Input.XPATH: xpath, Input.ELEMENT: element})
+        self.assertEqual(actual, expected)

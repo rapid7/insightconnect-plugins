@@ -1,0 +1,6 @@
+<response status="success" code="19"><result total-count="1" count="1">
+ <entry name="IPv6">
+  <ip-netmask>abcd:123::1</ip-netmask>
+  <description>Example Description</description>
+ </entry>
+</result></response>
