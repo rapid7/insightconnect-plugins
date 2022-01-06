@@ -1,0 +1,5 @@
+<response status="success">
+  <result>
+    <commit-locks></commit-locks>
+  </result>
+</response>

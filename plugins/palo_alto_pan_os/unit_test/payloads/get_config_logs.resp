@@ -1,0 +1,51 @@
+<response status="success"><result>
+  <job>
+    <tenq>04:46:20</tenq>
+    <tdeq>04:46:20</tdeq>
+    <tlast>04:46:20</tlast>
+    <status>FIN</status>
+    <id>1</id>
+  </job>
+  <log>
+    <logs count="1" progress="100">
+      <entry logid="7044309865149235243">
+        <domain>1</domain>
+        <receive_time>2021/12/22 08:54:51</receive_time>
+        <serial>0000000000000001</serial>
+        <seqno>1550</seqno>
+        <actionflags>0x0</actionflags>
+        <is-logging-service>no</is-logging-service>
+        <type>CONFIG</type>
+        <subtype>0</subtype>
+        <config_ver>0</config_ver>
+        <time_generated>2021/12/22 08:54:51</time_generated>
+        <dg_hier_level_1>0</dg_hier_level_1>
+        <dg_hier_level_2>0</dg_hier_level_2>
+        <dg_hier_level_3>0</dg_hier_level_3>
+        <dg_hier_level_4>0</dg_hier_level_4>
+        <device_name>TEST</device_name>
+        <vsys_id>0</vsys_id>
+        <host>198.51.100.100</host>
+        <cmd>delete</cmd>
+        <admin>admin</admin>
+        <client>Web</client>
+        <result>Succeeded</result>
+        <path> vsys  vsys1 external-list  Test Domain List</path>
+        <dg_id>0</dg_id>
+        <full-path>/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/external-list/entry[@name='Test Domain List']</full-path>
+      </entry>
+    </logs>
+  </log>
+  <meta>
+    <devices>
+      <entry name="localhost.localdomain">
+        <hostname>localhost.localdomain</hostname>
+        <vsys>
+          <entry name="vsys1">
+            <display-name>vsys1</display-name>
+          </entry>
+        </vsys>
+      </entry>
+    </devices>
+  </meta>
+</result></response>
