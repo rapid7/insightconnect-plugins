@@ -1,0 +1,24 @@
+<response status="success"><result>
+  <job>
+    <tenq>06:37:53</tenq>
+    <tdeq>06:37:53</tdeq>
+    <tlast>06:37:53</tlast>
+    <status>FIN</status>
+    <id>4</id>
+  </job>
+  <log>
+    <logs count="0" progress="100"/>
+  </log>
+  <meta>
+    <devices>
+      <entry name="localhost.localdomain">
+        <hostname>localhost.localdomain</hostname>
+        <vsys>
+          <entry name="vsys1">
+            <display-name>vsys1</display-name>
+          </entry>
+        </vsys>
+      </entry>
+    </devices>
+  </meta>
+</result></response>

@@ -1,6 +1,6 @@
 # Description
 
-[PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os) is the software that runs all Palo Alto Networks next-generation firewalls. This plugin utilizes the [PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api) to provide programmatic management of the Palo Alto firewall appliance(s). It supports managing firewalls individually or centralized via [Panorama](https://www.paloaltonetworks.com/network-security/panorama).
+[PAN-OS](https://www.paloaltonetworks.com/documentation/80/pan-os) is the software that runs all Palo Alto Networks next-generation firewalls. This plugin utilizes the [PAN-OS API](https://www.paloaltonetworks.com/documentation/80/pan-os/xml-api) to provide programmatic management of the Palo Alto Firewall appliance(s). It supports managing firewalls individually or centralized via [Panorama](https://www.paloaltonetworks.com/network-security/panorama).
 
 # Key Features
 
@@ -17,6 +17,10 @@
 
 * Access to Palo Alto Next Generation firewall or Palo Alto Panorama device
 
+# Supported Product Versions
+
+* 9.0.3
+
 # Documentation
 
 ## Setup
@@ -26,7 +30,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Username and password|None|{"username":"username", "password":"password"}|
-|server|string|None|True|URL pointing to instance of Panorama or an individual Palo Alto firewall|None|http://www.example.com|
+|server|string|None|True|URL pointing to instance of Panorama or an individual Palo Alto Firewall|None|http://www.example.com|
 |verify_cert|boolean|None|True|If true, validate the server's TLS certificate when contacting the firewall over HTTPS|None|True|
 
 Example input:
@@ -350,7 +354,7 @@ In this case, we will strip the /32 from the end and check the IP against the wh
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com google.com|None|1.1.1.1|
+|address|string|None|True|The IP address, network CIDR, or FQDN e.g. 192.168.1.1, 192.168.1.0/24, google.com|None|1.1.1.1|
 |address_object|string|None|True|The name of the address object|None|Blocked host|
 |description|string|None|False|A description for the address object|None|Blocked host from Insight Connect|
 |skip_rfc1918|boolean|False|True|Skip private IP addresses as defined in RFC 1918|None|True|
@@ -699,7 +703,7 @@ This action is used to query firewall logs.
 |----|----|-------|--------|-----------|----|-------|
 |count|integer|20|False|Number of logs to retrieve (Max: 500, Default: 20)|None|20|
 |direction|string|None|False|Order in which to return the logs|['backward', 'forward']|backward|
-|filter|string|None|False|Search query. Format as a log filter expression|None|None|
+|filter|string|None|False|Search query. Format as a log filter expression|None|receive_time geq '2021/12/22 08:00:00'|
 |interval|float|0.5|False|Time interval in seconds to wait between queries for commit job completion (Default: 0.5)|None|0.5|
 |log_type|string|None|False|Type of log to retrieve|['config', 'hipmatch', 'system', 'threat', 'traffic', 'url', 'wildfire']|config|
 |max_tries|integer|25|False|Maximum number of times to poll for job completion before timing out (Default: 25)|None|25|
@@ -711,6 +715,7 @@ Example input:
 {
   "count": 20,
   "direction": "backward",
+  "filter": "receive_time geq '2021/12/22 08:00:00'",
   "interval": 0.5,
   "log_type": "config",
   "max_tries": 25,
@@ -1066,6 +1071,7 @@ When using the Add External Dynamic List action, a day and time must be chosen e
 
 # Version History
 
+* 6.1.3 - Fix `check_if_private` method in Set Address Object action | Improve `determine_address_type` method in Set Address Object action | Fix issue where Add External Dynamic List action fails when `repeat` input has been set to retrieve updates from list weekly | Add example for `filter` input for Retrieve Logs action
 * 6.1.2 - Add `docs_url` in plugin spec | Update `source_url` in plugin spec
 * 6.1.1 - Remove duplicate Troubleshooting section in documentation
 * 6.1.0 - Improve error handling for xpath elements and paths in `pa_os_request.py` | New action Get Addresses from Group | Support adding a list of address objects in Add Address Object to Group action

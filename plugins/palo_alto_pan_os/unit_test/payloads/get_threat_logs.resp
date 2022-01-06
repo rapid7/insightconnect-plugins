@@ -1,0 +1,66 @@
+<response status="success"><result>
+  <job>
+    <tenq>05:45:27</tenq>
+    <tdeq>05:45:27</tdeq>
+    <tlast>05:45:27</tlast>
+    <status>FIN</status>
+    <id>3</id>
+  </job>
+  <log>
+    <logs count="1" progress="100">
+      <entry logid="191242123113213">
+        <domain>1</domain>
+        <receive_time>2021/12/22 12:50:24</receive_time>
+        <serial>000000000000003</serial>
+        <seqno>8210416</seqno>
+        <actionflags>0x0</actionflags>
+        <type>THREAT</type>
+        <subtype>vulnerability</subtype>
+        <config_ver>1</config_ver>
+        <time_generated>2021/12/22 10:50:24</time_generated>
+        <src>xxx.xxx.xxx.xxx</src>
+        <dst>xxx.xxx.xxx.xxx</dst>
+        <rule>CorporationHQ</rule>
+        <srcloc>United States</srcloc>
+        <dstloc>xxx.xxx.xxx.xxx-xxx.xxx.xxx.xxx</dstloc>
+        <app>smtp</app>
+        <vsys>vsys1</vsys>
+        <from>trust</from>
+        <to>trust</to>
+        <inbound_if>ethernet1/5</inbound_if>
+        <outbound_if>ethernet1/6</outbound_if>
+        <logset>Logs</logset>
+        <time_received>2021/12/22 12:50:24</time_received>
+        <sessionid>135193</sessionid>
+        <repeatcnt>1</repeatcnt>
+        <sport>52252</sport>
+        <dport>25</dport>
+        <action>reset-both</action>
+        <dg_hier_level_1>11</dg_hier_level_1>
+        <dg_hier_level_2>0</dg_hier_level_2>
+        <dg_hier_level_3>0</dg_hier_level_3>
+        <dg_hier_level_4>0</dg_hier_level_4>
+        <device_name>TEST</device_name>
+        <vsys_id>1</vsys_id>
+        <threatid>User Login Brute Force Attempt</threatid>
+        <tid>0</tid>
+        <reportid>0</reportid>
+        <category>any</category>
+        <severity>high</severity>
+        <direction>client-to-server</direction>
+      </entry>
+    </logs>
+  </log>
+  <meta>
+    <devices>
+      <entry name="localhost.localdomain">
+        <hostname>localhost.localdomain</hostname>
+        <vsys>
+          <entry name="vsys1">
+            <display-name>vsys1</display-name>
+          </entry>
+        </vsys>
+      </entry>
+    </devices>
+  </meta>
+</result></response>

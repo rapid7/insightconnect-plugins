@@ -1,0 +1,7 @@
+<response status="error" code="12">
+  <msg>
+    <line><![CDATA[ ICON Block Rule -> category 'hacking1' is not an allowed keyword]]></line>
+    <line><![CDATA[ ICON Block Rule -> category 'hacking1' is not a valid reference]]></line>
+    <line><![CDATA[ ICON Block Rule -> category is invalid]]></line>
+  </msg>
+</response>

@@ -1,0 +1,9 @@
+<response status="success" code="19"><result total-count="1" count="1">
+ <entry name="Test Group" admin="admin" dirtyId="144" time="2021/12/14 09:43:15">
+  <static admin="admin" dirtyId="144" time="2021/12/14 09:43:15">
+   <member admin="admin" dirtyId="144" time="2021/12/14 09:43:15">1.1.1.1</member>
+   <member admin="admin" dirtyId="144" time="2021/12/14 09:43:15">test.com</member>
+   <member admin="admin" dirtyId="144" time="2021/12/14 09:43:15">IPv6</member>
+  </static>
+ </entry>
+</result></response>

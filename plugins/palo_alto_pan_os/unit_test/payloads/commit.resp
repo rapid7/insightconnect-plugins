@@ -1,0 +1,5 @@
+<response status="success" code="19">
+  <result>
+    <msg>There are no changes to commit.</msg>
+  </result>
+</response>
