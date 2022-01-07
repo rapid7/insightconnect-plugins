@@ -4,7 +4,7 @@ import base64
 import tldextract
 import validators
 from datetime import datetime
-from icon_extractit.util.util import Regex
+from icon_extractit.util.util import Regex, DateFormatStrings
 import urllib.parse
 import io
 import zipfile
@@ -126,8 +126,17 @@ def clear_emails(matches: list) -> list:
     return new_matches
 
 
-def parse_time(dates: list) -> list:
+def define_linux_date_time_format(date_format: str) -> str:
+    return DateFormatStrings.human_to_linux_mapping.get(date_format)
+
+
+def define_date_time_regex(date_format: str) -> str:
+    return Regex.HumanToRegexPatterns.get(date_format)
+
+
+def parse_time(dates: list, date_format: str) -> list:
+    linux_date_time_format = define_linux_date_time_format(date_format)
     for date in enumerate(dates):
-        date_time_obj = datetime.strptime(date[1], "%d/%m/%Y")
+        date_time_obj = datetime.strptime(date[1], linux_date_time_format)
         dates[date[0]] = date_time_obj.strftime("%Y-%m-%dT%H:%M:%SZ")
     return dates
