@@ -70,15 +70,18 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|incident_attachments|[]bytes|False|Attachments for a given incident ID|
+|incident_attachments|[]attachment_file|False|List of attachments for a given incident ID|
 
 Example output:
 
 ```
 {
   "incident_attachments": [
-    "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
-    "cmFwaWQ3"
+    {
+      "content": "9de5069c5afe602b2ea0a04b66beb2c0",
+      "content_type": "text/plain",
+      "file_name": "example.txt"
+    }
   ]
 }
 ```
@@ -856,6 +859,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 6.0.0 - Add additional file information in output for Get Attachments for an Incident
 * 5.2.0 - Add new action Get Attachments for an Incident | Add unit test for action Get Attachments for an Incident and Get Incident Attachment
 * 5.1.1 - Fix output parsing bug in Get Incident Attachment action
 * 5.1.0 - Add new Incident URL output for Create Incident action
