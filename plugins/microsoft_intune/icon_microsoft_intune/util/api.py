@@ -306,7 +306,7 @@ class MicrosoftIntuneAPI:
         }
 
     def _filter_policy_id(self, managed_app_policies, policy_name):
-        for item in managed_app_policies["value"]:
+        for item in managed_app_policies.get("value"):
             if item["displayName"] == policy_name:
                 return item["id"]
         return None
