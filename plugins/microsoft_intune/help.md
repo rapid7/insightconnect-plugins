@@ -58,7 +58,7 @@ Example input:
 
 #### Delete Application from Policy
 
-This action delete an application from a given policy.
+This action deletes an application from a given policy.
 
 ##### Input
 
