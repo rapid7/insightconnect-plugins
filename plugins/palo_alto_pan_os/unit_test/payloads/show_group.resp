@@ -1,0 +1,7 @@
+<response status="success"><result><entry name="Test Group">
+  <static>
+    <member>example.com</member>
+    <member>1.1.1.1</member>
+    <member>IPv6</member>
+  </static>
+</entry></result></response>

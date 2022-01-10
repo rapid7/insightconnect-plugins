@@ -1,43 +1,64 @@
 import sys
 import os
+from unittest import TestCase
+from komand_palo_alto_pan_os.actions.remove_address_object_from_group import RemoveAddressObjectFromGroup
+from komand_palo_alto_pan_os.actions.remove_address_object_from_group.schema import Input, Output
+from unit_test.util import Util
+from unittest.mock import patch
+from parameterized import parameterized
+from komand.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-from komand_palo_alto_pan_os.connection.connection import Connection
-from komand_palo_alto_pan_os.actions.remove_address_object_from_group import (
-    RemoveAddressObjectFromGroup,
-)
-import json
-import logging
 
-
+@patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
+@patch("requests.sessions.Session.post", side_effect=Util.mocked_requests)
 class TestRemoveAddressObjectFromGroup(TestCase):
-    def test_integration_remove_address_object_from_group(self):
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = RemoveAddressObjectFromGroup()
+    @parameterized.expand(
+        [
+            ["success", "test.com", "Test Group", "localhost.localdomain", "vsys1", {"success": True}],
+            ["not_found", "example.com", "Test Group", "localhost.localdomain", "vsys1", {"success": False}],
+        ]
+    )
+    def test_add_address_object_to_group(
+        self, mock_get, mock_post, name, address_object, group, device_name, virtual_system, expected
+    ):
+        action = Util.default_connector(RemoveAddressObjectFromGroup())
+        actual = action.run(
+            {
+                Input.ADDRESS_OBJECT: address_object,
+                Input.GROUP: group,
+                Input.DEVICE_NAME: device_name,
+                Input.VIRTUAL_SYSTEM: virtual_system,
+            }
+        )
+        self.assertEqual(actual, expected)
 
-        test_conn.logger = log
-        test_action.logger = log
-
-        try:
-            with open("../tests/remove_address_object_from_group.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        # For example: self.assertEquals({"success": True}, results)
-        self.assertEquals({"success": True}, results)
+    @parameterized.expand(
+        [
+            [
+                "invalid_group",
+                ["example.com"],
+                "Invalid Group",
+                "localhost.localdomain",
+                "vsys1",
+                "PAN OS returned an unexpected response.",
+                "Could not find group 'Invalid Group', or group was empty. Check the name, virtual system name, and device name.\ndevice name: localhost.localdomain\nvirtual system: vsys1",
+            ],
+        ]
+    )
+    def test_add_address_object_to_group_bad(
+        self, mock_get, mock_post, name, address_object, group, device_name, virtual_system, cause, assistance
+    ):
+        action = Util.default_connector(RemoveAddressObjectFromGroup())
+        with self.assertRaises(PluginException) as e:
+            action.run(
+                {
+                    Input.ADDRESS_OBJECT: address_object,
+                    Input.GROUP: group,
+                    Input.DEVICE_NAME: device_name,
+                    Input.VIRTUAL_SYSTEM: virtual_system,
+                }
+            )
+        self.assertEqual(e.exception.cause, cause)
+        self.assertEqual(e.exception.assistance, assistance)

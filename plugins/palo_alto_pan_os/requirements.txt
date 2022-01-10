@@ -5,3 +5,5 @@ gunicorn==19.9.0
 xmltodict==0.12.0
 dicttoxml==1.7.4
 validators==0.14.2
+IPy==1.01
+parameterized==0.8.1

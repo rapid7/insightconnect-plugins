@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Palo Alto Firewall"
 Vendor = "rapid7"
-Version = "6.1.2"
+Version = "6.1.3"
 Description = "Manage Palo Alto Networks firewall devices"
 
 

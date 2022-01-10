@@ -1,0 +1,34 @@
+<response status="success"><result>
+ <entry name="Test Policy" uuid="290ba776-4bd0-49b2-8c20-a35467b22c11">
+  <to>
+   <member>any</member>
+  </to>
+  <from>
+   <member>any</member>
+  </from>
+  <source>
+   <member>any</member>
+  </source>
+  <destination>
+   <member>any</member>
+  </destination>
+  <service>
+   <member>application-default</member>
+   <member>any</member>
+  </service>
+  <application>
+   <member>any</member>
+  </application>
+  <category>
+   <member>adult</member>
+   <member>abused-drugs</member>
+  </category>
+  <hip-profiles>
+   <member>any</member>
+  </hip-profiles>
+  <source-user>
+   <member>Joe Smith</member>
+  </source-user>
+  <action>drop</action>
+ </entry>
+</result></response>
