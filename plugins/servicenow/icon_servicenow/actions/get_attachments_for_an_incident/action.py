@@ -21,6 +21,12 @@ class GetAttachmentsForAnIncident(insightconnect_plugin_runtime.Action):
         attachment = response.get("resource").get("result")
         attachments = []
         for item in attachment:
-            attachments.append(RequestHelper.get_attachment(self.connection, item.get("sys_id")))
+            attachments.append(
+                {
+                    "file_name": item.get("file_name"),
+                    "content": RequestHelper.get_attachment(self.connection, item.get("sys_id")),
+                    "content_type": item.get("content_type"),
+                }
+            )
 
         return {Output.INCIDENT_ATTACHMENTS: attachments}
