@@ -89,7 +89,7 @@ class MicrosoftIntuneAPI:
 
         target_apps = []
 
-        for item in managed_app_policies_with_apps["apps"]:
+        for item in managed_app_policies_with_apps.get("apps"):
             if item["mobileAppIdentifier"]["packageId"] != application_package_id:
                 target_apps.append(
                     {
