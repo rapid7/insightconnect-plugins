@@ -1,7 +1,7 @@
 {
-	"spec": "af59c0709678837af50b8b3219fdf659",
-	"manifest": "9e8d9275627d7b3bc5235c95be2b33a0",
-	"setup": "24ece968582d45ae483f23814dc6edf5",
+	"spec": "186a176b143d0b6e49f54bc3ada4d832",
+	"manifest": "a5e407217c368c65c39c88b78f7a227e",
+	"setup": "178704ea7978345212d8f45da9401a4f",
 	"schemas": [
 		{
 			"identifier": "add_notes_to_offense/schema.py",
