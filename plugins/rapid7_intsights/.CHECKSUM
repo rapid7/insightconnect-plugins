@@ -1,7 +1,7 @@
 {
-	"spec": "0adf1b012936b256501cb9d2365aac51",
-	"manifest": "9a1c0ed12f4a14563a7e6ee8431fcb56",
-	"setup": "03540fca0745c2f43e81830a80d402bb",
+	"spec": "2fb7e16230652a2c3e002c0f51097526",
+	"manifest": "3c433e7244d838d297cc7e06df2b03f4",
+	"setup": "4e46d0d21d1b53ed513ac7a6303c5a0e",
 	"schemas": [
 		{
 			"identifier": "add_manual_alert/schema.py",
@@ -9,19 +9,23 @@
 		},
 		{
 			"identifier": "enrich_indicator/schema.py",
-			"hash": "d65d91c1451a8e7de47b9e709590f5ea"
+			"hash": "4d346b90ed493e6309e69697907b3d09"
 		},
 		{
 			"identifier": "get_alerts/schema.py",
-			"hash": "8bc5304d87461a5b72da0982032bb73a"
+			"hash": "5ca8c26b0fee4a947cfe12e4e76a1981"
 		},
 		{
 			"identifier": "get_complete_alert_by_id/schema.py",
 			"hash": "a5a4e73ebf917dc6ae329aa958ae94a6"
 		},
 		{
+			"identifier": "get_cve_by_id/schema.py",
+			"hash": "0b26d5609b350e9b265f49a76e18d4dc"
+		},
+		{
 			"identifier": "get_indicator_by_value/schema.py",
-			"hash": "39a599120e9f7d02c34a36f607085ae5"
+			"hash": "68cf2854714b7354fdd68077367cc6ea"
 		},
 		{
 			"identifier": "get_indicator_scan_status/schema.py",
@@ -38,6 +42,10 @@
 		{
 			"identifier": "connection/schema.py",
 			"hash": "4d9563dcc56614543713c05f554ef869"
+		},
+		{
+			"identifier": "new_alert/schema.py",
+			"hash": "6342d913ab28fb2425045bfc0b214d3b"
 		}
 	]
 }

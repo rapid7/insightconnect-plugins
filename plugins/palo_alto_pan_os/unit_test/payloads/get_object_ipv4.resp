@@ -1,0 +1,6 @@
+<response status="success" code="19"><result total-count="1" count="1">
+ <entry name="1.1.1.1">
+  <ip-netmask>1.1.1.1</ip-netmask>
+  <description>Example Description</description>
+ </entry>
+</result></response>

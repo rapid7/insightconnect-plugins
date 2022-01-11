@@ -1,0 +1,8 @@
+<response status="success" code="19">
+  <result>
+    <msg>
+      <line>query job enqueued with jobid 4</line>
+    </msg>
+    <job>4</job>
+  </result>
+</response>

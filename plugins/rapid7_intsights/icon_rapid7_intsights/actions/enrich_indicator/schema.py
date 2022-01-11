@@ -26,7 +26,7 @@ class EnrichIndicatorInput(insightconnect_plugin_runtime.Input):
     "indicator_value": {
       "type": "string",
       "title": "Indicator Value",
-      "description": "Value of the indicator example: IP Address, URL, Domain, Hash",
+      "description": "Value of the indicator. Examples: IP address, URL, domain name, hash",
       "order": 1
     }
   },

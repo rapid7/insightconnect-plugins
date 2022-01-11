@@ -1,72 +1,212 @@
 import sys
 import os
+from unittest import TestCase
+from komand_palo_alto_pan_os.actions.get import Get
+from komand_palo_alto_pan_os.actions.get.schema import Input, Output
+from unit_test.util import Util
+from unittest.mock import patch
+from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-from komand_palo_alto_pan_os.connection.connection import Connection
-from komand_palo_alto_pan_os.actions.get import Get
-import json
-import logging
 
-
+@patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
 class TestGet(TestCase):
-    def test_integration_get(self):
-        """
-        TODO: Implement assertions at the end of this test case
-
-        This is an integration test that will connect to the services your plugin uses. It should be used
-        as the basis for tests below that can run independent of a "live" connection.
-
-        This test assumes a normal plugin structure with a /tests directory. In that /tests directory should
-        be json samples that contain all the data needed to run this test. To generate samples run:
-
-        icon-plugin generate samples
-
-        """
-
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = Get()
-
-        test_conn.logger = log
-        test_action.logger = log
-
-        try:
-            with open("../tests/get.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        # TODO: Remove this line
-        self.fail("Unimplemented test case")
-
-        # TODO: The following assert should be updated to look for data from your action
-        # For example: self.assertEquals({"success": True}, results)
-        self.assertEquals({}, results)
-
-    def test_get(self):
-        """
-        TODO: Implement test cases here
-
-        Here you can mock the connection with data returned from the above integration test.
-        For information on mocking and unit testing please go here:
-
-        https://docs.google.com/document/d/1PifePDG1-mBcmNYE8dULwGxJimiRBrax5BIDG_0TFQI/edit?usp=sharing
-
-        You can either create a formal Mock for this, or you can create a fake connection class to pass to your
-        action for testing.
-        """
-        self.fail("Unimplemented Test Case")
+    @parameterized.expand(
+        [
+            [
+                "address_object",
+                "/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address/entry[@name='1.1.1.1']",
+                {
+                    "response": {
+                        "@status": "success",
+                        "@code": "19",
+                        "result": {
+                            "@total-count": "1",
+                            "@count": "1",
+                            "entry": {
+                                "@name": "1.1.1.1",
+                                "ip-netmask": "1.1.1.1",
+                                "description": "Example Description",
+                            },
+                        },
+                    }
+                },
+            ],
+            [
+                "address_group",
+                "/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address-group/entry[@name='Test Group']",
+                {
+                    "response": {
+                        "@status": "success",
+                        "@code": "19",
+                        "result": {
+                            "@total-count": "1",
+                            "@count": "1",
+                            "entry": {
+                                "@name": "Test Group",
+                                "@admin": "admin",
+                                "@dirtyId": "144",
+                                "@time": "2021/12/14 09:43:15",
+                                "static": {
+                                    "@admin": "admin",
+                                    "@dirtyId": "144",
+                                    "@time": "2021/12/14 09:43:15",
+                                    "member": [
+                                        {
+                                            "@admin": "admin",
+                                            "@dirtyId": "144",
+                                            "@time": "2021/12/14 09:43:15",
+                                            "#text": "1.1.1.1",
+                                        },
+                                        {
+                                            "@admin": "admin",
+                                            "@dirtyId": "144",
+                                            "@time": "2021/12/14 09:43:15",
+                                            "#text": "test.com",
+                                        },
+                                        {
+                                            "@admin": "admin",
+                                            "@dirtyId": "144",
+                                            "@time": "2021/12/14 09:43:15",
+                                            "#text": "IPv6",
+                                        },
+                                    ],
+                                },
+                            },
+                        },
+                    }
+                },
+            ],
+            [
+                "policy",
+                "/config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/rulebase/security/rules/entry[@name='Test Rule']",
+                {
+                    "response": {
+                        "@status": "success",
+                        "@code": "19",
+                        "result": {
+                            "@total-count": "1",
+                            "@count": "1",
+                            "entry": {
+                                "@name": "Test Rule",
+                                "@admin": "admin",
+                                "@dirtyId": "145",
+                                "@time": "2021/12/17 08:10:05",
+                                "@uuid": "6783a432-c27a-4bc7-9535-7652ab5a4987",
+                                "to": {
+                                    "@admin": "admin",
+                                    "@dirtyId": "145",
+                                    "@time": "2021/12/17 08:10:05",
+                                    "member": {
+                                        "@admin": "admin",
+                                        "@dirtyId": "145",
+                                        "@time": "2021/12/17 08:10:05",
+                                        "#text": "any",
+                                    },
+                                },
+                                "from": {
+                                    "@admin": "admin",
+                                    "@dirtyId": "145",
+                                    "@time": "2021/12/17 08:10:05",
+                                    "member": {
+                                        "@admin": "admin",
+                                        "@dirtyId": "145",
+                                        "@time": "2021/12/17 08:10:05",
+                                        "#text": "any",
+                                    },
+                                },
+                                "source": {
+                                    "@admin": "admin",
+                                    "@dirtyId": "145",
+                                    "@time": "2021/12/17 08:10:05",
+                                    "member": {
+                                        "@admin": "admin",
+                                        "@dirtyId": "145",
+                                        "@time": "2021/12/17 08:10:05",
+                                        "#text": "any",
+                                    },
+                                },
+                                "destination": {
+                                    "@admin": "admin",
+                                    "@dirtyId": "145",
+                                    "@time": "2021/12/17 08:10:05",
+                                    "member": {
+                                        "@admin": "admin",
+                                        "@dirtyId": "145",
+                                        "@time": "2021/12/17 08:10:05",
+                                        "#text": "any",
+                                    },
+                                },
+                                "source-user": {
+                                    "@admin": "admin",
+                                    "@dirtyId": "145",
+                                    "@time": "2021/12/17 08:10:05",
+                                    "member": {
+                                        "@admin": "admin",
+                                        "@dirtyId": "145",
+                                        "@time": "2021/12/17 08:10:05",
+                                        "#text": "any",
+                                    },
+                                },
+                                "category": {
+                                    "@admin": "admin",
+                                    "@dirtyId": "145",
+                                    "@time": "2021/12/17 08:10:05",
+                                    "member": {
+                                        "@admin": "admin",
+                                        "@dirtyId": "145",
+                                        "@time": "2021/12/17 08:10:05",
+                                        "#text": "any",
+                                    },
+                                },
+                                "application": {
+                                    "@admin": "admin",
+                                    "@dirtyId": "145",
+                                    "@time": "2021/12/17 08:10:05",
+                                    "member": {
+                                        "@admin": "admin",
+                                        "@dirtyId": "145",
+                                        "@time": "2021/12/17 08:10:05",
+                                        "#text": "any",
+                                    },
+                                },
+                                "service": {
+                                    "@admin": "admin",
+                                    "@dirtyId": "145",
+                                    "@time": "2021/12/17 08:10:05",
+                                    "member": {
+                                        "@admin": "admin",
+                                        "@dirtyId": "145",
+                                        "@time": "2021/12/17 08:10:05",
+                                        "#text": "application-default",
+                                    },
+                                },
+                                "hip-profiles": {
+                                    "@admin": "admin",
+                                    "@dirtyId": "145",
+                                    "@time": "2021/12/17 08:10:05",
+                                    "member": {
+                                        "@admin": "admin",
+                                        "@dirtyId": "145",
+                                        "@time": "2021/12/17 08:10:05",
+                                        "#text": "any",
+                                    },
+                                },
+                                "action": {
+                                    "@admin": "admin",
+                                    "@dirtyId": "145",
+                                    "@time": "2021/12/17 08:10:05",
+                                    "#text": "drop",
+                                },
+                            },
+                        },
+                    }
+                },
+            ],
+        ]
+    )
+    def test_get(self, mock_get, name, xpath, expected):
+        action = Util.default_connector(Get())
+        actual = action.run({Input.XPATH: xpath})
+        self.assertEqual(actual, expected)

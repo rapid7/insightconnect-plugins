@@ -5,6 +5,8 @@ from komand.exceptions import PluginException
 # Custom imports below
 import re
 from ipaddress import ip_network, ip_address
+from IPy import IP
+import validators
 
 
 class SetAddressObject(komand.Action):
@@ -16,27 +18,32 @@ class SetAddressObject(komand.Action):
             output=SetAddressObjectOutput(),
         )
 
-    def determine_address_type(self, address):
-        try:
-            ip_address(address)
-            return "ip-netmask"
-        except:  # noqa: B110
-            pass
-        if re.search("[a-zA-Z]", address):
+    @staticmethod
+    def determine_address_type(address):
+        if validators.domain(address):
             return "fqdn"
-        if re.search("/", address):
+        if validators.ipv4(address) or validators.ipv4_cidr(address):
+            return "ip-netmask"
+        if validators.ipv6(address) or validators.ipv6_cidr(address):
             return "ip-netmask"
         if re.search("-", address):
-            return "ip-range"
-        return "ip-netmask"
+            split_range = address.split("-")
+            if len(split_range) == 2:
+                if validators.ipv4(split_range[0]) and validators.ipv4(split_range[1]):
+                    return "ip-range"
+                if validators.ipv6(split_range[0]) and validators.ipv6(split_range[1]):
+                    return "ip-range"
+        raise PluginException(
+            cause=f"Unable to determine type for the given address: {address}.",
+            assistance="Please provide a valid address.",
+        )
 
     def match_whitelist(self, address, whitelist, object_type):
         if object_type == "fqdn":
             if address in whitelist:
                 self.logger.info(f" Whitelist matched\n{address} was found in whitelist")
                 return True
-            else:
-                return False
+            return False
 
         # if 1.1.1.1/32 - remove /32
         trimmed_address = re.sub(r"/32$", "", address)
@@ -46,32 +53,29 @@ class SetAddressObject(komand.Action):
             return address in whitelist
 
         # IP is in CIDR - Give the user a log message
-        for object in whitelist:
-            type = self.determine_address_type(object)
-            if type == "ip-netmask":
-                net = ip_network(object, False)  # False means ignore the masked bits, otherwise they need to be 0
+        for address_object in whitelist:
+            address_type = self.determine_address_type(address_object)
+            if address_type == "ip-netmask":
+                net = ip_network(
+                    address_object, False
+                )  # False means ignore the masked bits, otherwise they need to be 0
                 ip = ip_address(trimmed_address)
                 if ip in net:
-                    self.logger.info(f" Whitelist matched\nIP {address} was found in {object}")
+                    self.logger.info(f" Whitelist matched\nIP {address} was found in {address_object}")
                     return True
 
         return False
 
-    def check_if_private(self, address):
-        if re.search("/", address):  # CIDR
-            return ip_network(address, False).is_private
-        elif re.search("-", address):  # IP Range
+    @staticmethod
+    def check_if_private(address):
+        # IPy returns the IP address type as "PRIVATE" for private IPv4 addresses(RFC1918) and "ULA" for private IPv6
+        # addresses(RFC4193)
+        ip_types = ["PRIVATE", "ULA"]
+        if re.search("-", address):  # IP Range
             split_ = address.split("-")
-            if len(split_) == 2:  # If this isn't 2, I'm not sure what the input was
-                return ip_address(split_[0]).is_private and ip_address(split_[1]).is_private
-        try:  # Other
-            if ip_address(address).is_private:
-                return True
-        except Exception:  # noqa: B110
-            # This was a domain name
-            pass
-
-        return False
+            return IP(split_[0]).iptype() in ip_types and IP(split_[1]).iptype() in ip_types
+        # Other
+        return IP(address).iptype() in ip_types
 
     def run(self, params={}):
         address = params.get(Input.ADDRESS)
@@ -91,15 +95,7 @@ class SetAddressObject(komand.Action):
             for item in tag_list:
                 tag = tag + f"<member>{item}</member>"
 
-        """
-        create object type XML
-        
-        supported types: 
-
-        - ip-netmask
-        - ip-range
-        - fqdn        
-        """
+        # create object type XML, supported types: ip-netmask, ip-range, fqdn
         # object_type = object_type.lower()
         if skip_private:
             if object_type != "fqdn":

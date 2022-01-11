@@ -35,12 +35,23 @@ class PaloAltoMineMeldAPI:
                 auth=(self.username, self.password),
                 verify=self.ssl_verify,
             )
-
+            if response.status_code == 400:
+                raise PluginException(
+                    cause="Bad request.",
+                    assistance="Verify your inputs are correct and try again. If the issue persists, please contact "
+                    "support.",
+                    data=response.text,
+                )
+            if response.status_code == 401:
+                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
             if response.status_code == 403:
-                raise PluginException(preset=PluginException.Preset.API_KEY)
-            if response.status_code >= 400:
-                response_data = response.json()
-                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response_data.message)
+                raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response.text)
+            if response.status_code == 404:
+                raise PluginException(preset=PluginException.Preset.NOT_FOUND)
+            if 400 <= response.status_code < 500:
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+            if response.status_code >= 500:
+                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
             if 200 <= response.status_code < 300:
                 if full_response:
