@@ -42,7 +42,7 @@ class GetNewOffense(insightconnect_plugin_runtime.Trigger):
                     [Input.FILTER, Input.FIELDS, Input.RANGE, Input.SORT],
                 )
                 self.logger.debug(f"Final Url: {basic_url}")
-                response = requests.post(url=basic_url, headers=headers, data={}, auth=auth, verify=False)
+                response = requests.post(url=basic_url, headers=headers, data={}, auth=auth)
                 current_epoch_time = int(time.time()) * 1000
             except requests.exceptions.ConnectionError:
                 raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE)

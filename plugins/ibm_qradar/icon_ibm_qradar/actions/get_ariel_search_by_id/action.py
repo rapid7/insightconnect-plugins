@@ -55,7 +55,7 @@ class GetArielSearchById(insightconnect_plugin_runtime.Action):
         if poll_interval != 0:
             headers["Prefer"] = f"wait={poll_interval}"
         try:
-            response = requests.get(url=basic_url, headers=headers, data={}, auth=auth, verify=False)
+            response = requests.get(url=basic_url, headers=headers, data={}, auth=auth)
         except requests.exceptions.ConnectionError:
             raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE)
 
