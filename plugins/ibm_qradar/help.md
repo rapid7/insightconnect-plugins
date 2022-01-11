@@ -37,6 +37,11 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
+"connection": {
+      "hostname": "hostname",
+      "password": "password",
+      "username": "username"
+    },
 ```
 
 ## Technical Details
@@ -58,6 +63,24 @@ This action is used to add Notes to Offense.
 Example input:
 
 ```
+{
+  "body": {
+    "action": "add_notes_to_offense",
+    "connection": {
+      "hostname": "hostname",
+      "password": "password",
+      "username": "username"
+    },
+    "input": {
+      "fields": "",
+      "note_text": "New Note text",
+      "offense_id": 33
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}
 ```
 
 ##### Output
@@ -88,12 +111,29 @@ This action is used to get Ariel Search By Id.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|poll_interval|number|1|False|Poll interval is the number of seconds to recheck until the search gets COMPLETED.|None|None|
-|search_id|string|None|True|Specific Ariel Search Id for which the search|None|None|
+|poll_interval|number|None|False|Poll interval is the number of seconds to recheck until the search gets COMPLETED.|None|None|
+|search_id|string|None|True|Specific Search Id|None|None|
 
 Example input:
 
 ```
+{
+  "body": {
+    "action": "get_ariel_search_by_id",
+    "connection": {
+      "hostname": "hostname",
+      "password": "password",
+      "username": "username"
+    },
+    "input": {
+      "poll_interval": 0,
+      "search_id": "74b4f184-6e03-41be-8494-2a1c9f6f2faa"
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}
 ```
 
 ##### Output
@@ -146,6 +186,24 @@ This action is used to list all assets found in the model.
 Example input:
 
 ```
+{
+  "body": {
+    "action": "get_assets",
+    "connection": {
+      "hostname": "hostname",
+      "password": "password",
+      "username": "username"
+    },
+    "input": {
+      "fields": "",
+      "filter": "",
+      "range": ""
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}
 ```
 
 ##### Output
@@ -245,6 +303,26 @@ This action is used to get Offense's Closing Reasons.
 Example input:
 
 ```
+{
+  "body": {
+    "action": "get_offense_closing_reasons",
+    "connection": {
+      "hostname": "hostname",
+      "password": "password",
+      "username": "username"
+    },
+    "input": {
+      "fields": "",
+      "filter": "",
+      "include_deleted": false,
+      "include_reserved": false,
+      "range": "1-2"
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}
 ```
 
 ##### Output
@@ -291,6 +369,25 @@ This action is used to get Offense Notes.
 Example input:
 
 ```
+{
+  "body": {
+    "action": "get_offense_note",
+    "connection": {
+      "hostname": "hostname",
+      "password": "password",
+      "username": "username"
+    },
+    "input": {
+      "fields": "",
+      "filter": "",
+      "offense_id": 33,
+      "range": ""
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}
 ```
 
 ##### Output
@@ -335,6 +432,24 @@ This action is used to get Offense Notes By Id.
 Example input:
 
 ```
+{
+  "body": {
+    "action": "get_offense_note_by_id",
+    "connection": {
+      "hostname": "hostname",
+      "password": "password",
+      "username": "username"
+    },
+    "input": {
+      "fields": "",
+      "note_id": 51,
+      "offense_id": 33
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}
 ```
 
 ##### Output
@@ -373,6 +488,25 @@ This action is used to list all Offenses.
 Example input:
 
 ```
+{
+  "body": {
+    "action": "get_offenses",
+     "connection": {
+      "hostname": "hostname",
+      "password": "password",
+      "username": "username"
+    },
+    "input": {
+      "fields": "",
+      "filter": "",
+      "range": "",
+      "sort": ""
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}
 ```
 
 ##### Output
@@ -514,6 +648,22 @@ This action is used to start Ariel Search.
 Example input:
 
 ```
+{
+  "body": {
+    "action": "start_ariel_search",
+    "connection": {
+      "hostname": "hostname",
+      "password": "password",
+      "username": "username"
+    },
+    "input": {
+      "aql": "Select * from events last 10 MINUTES"
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}
 ```
 
 ##### Output
@@ -570,6 +720,27 @@ This action is used to update Offenses.
 Example input:
 
 ```
+{
+  "body": {
+    "action": "update_offense",
+    "connection": {
+      "hostname": "hostname",
+      "password": "password",
+      "username": "username"
+    },
+    "input": {
+      "assigned_to:": "",
+      "fields": "",
+      "follow_up": false,
+      "offense_id": 33,
+      "protected": false,
+      "status" : "OPEN"
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}
 ```
 
 ##### Output
@@ -665,6 +836,30 @@ This trigger is used to list all New Offenses.
 Example input:
 
 ```
+{
+  "body": {
+    "connection": {
+      "hostname": "hostname",
+      "password": "password",
+      "username": "username"
+    },
+    "dispatcher": {
+      "url": "http://localhost:8000",
+      "webhook_url": ""
+    },
+    "input": {
+      "fields": "",
+      "filter": "",
+      "range": "",
+      "sort": "",
+      "interval": 15
+    },
+    "meta": {},
+    "trigger": "get_new_offense"
+  },
+  "type": "trigger_start",
+  "version": "v1"
+}
 ```
 
 ##### Output
