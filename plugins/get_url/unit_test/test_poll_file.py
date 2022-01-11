@@ -59,9 +59,4 @@ class TestPollFile(TestCase):
     @patch("six.moves.urllib.request.urlopen", side_effect=Util.mocked_request)
     @patch("komand_get_url.triggers.PollFile.send", side_effect=MockTrigger.send)
     def test_poll_documents(self, mock_get, mock_send):
-        self.action.run(
-            {
-                Input.URL: "https://test.com/v1/test.pdf",
-                Input.IS_VERIFY: True,
-            }
-        )
+        self.action.run({Input.URL: "https://test.com/v1/test.pdf", Input.IS_VERIFY: False})

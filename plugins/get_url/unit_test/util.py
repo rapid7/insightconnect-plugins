@@ -4,6 +4,18 @@ import os
 from komand_get_url.connection.connection import Connection
 
 
+class MockResponse:
+    def __init__(self, filename, status_code):
+        self.filename = filename
+        self.code = status_code
+        self.headers = {"etag": "test", "last-modified": "test"}
+
+    def read(self):
+        return Util.read_file_to_bytes(
+            os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{self.filename}")
+        )
+
+
 class Util:
     @staticmethod
     def default_connector(action):
@@ -20,21 +32,14 @@ class Util:
 
     @staticmethod
     def mocked_request(*args, **kwargs):
-        class MockResponse:
-            def __init__(self, filename, status_code):
-                self.filename = filename
-                self.code = status_code
-                self.headers = {"etag": "test", "last-modified": "test"}
-
-            def read(self):
-                return Util.read_file_to_bytes(
-                    os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{self.filename}")
-                )
-
         if args[0].full_url == "https://test.com/v1/test.pdf":
             return MockResponse("test.pdf", 200)
         elif args[0].full_url == "https://test.com/v1/test.txt":
             return MockResponse("test.txt", 200)
+
+    @staticmethod
+    def mocked_url_open(*args, **kwargs):
+        return MockResponse("test.txt", 200)
 
     @staticmethod
     def clear_cache():

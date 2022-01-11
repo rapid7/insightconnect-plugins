@@ -21,12 +21,9 @@ class Utils(object):
 
     def get_headers(self, url_object):
         """Return cache related headers from urllib2 headers dictonary"""
-        if "etag" or "last-modified" in url_object.headers.dict:
-            etag = url_object.headers.get("etag")
-            lm = url_object.headers.get("last-modified")
-            return {"etag": etag, "last-modified": lm}
-
-        self.logger.error("GetHeaders: Error occurred while obtaining etag and last-modified headers")
+        etag = url_object.headers.get("etag")
+        lm = url_object.headers.get("last-modified")
+        return {"etag": etag, "last-modified": lm}
 
     def hash_url(self, url):
         """Creates a dictionary containing hashes from a url of type string"""
@@ -73,12 +70,12 @@ class Utils(object):
         self.validate_url(url)
         meta = self.hash_url(url)
 
-        """Attempt to retrieve headers from past request"""
+        # Attempt to retrieve headers from past request
         headers = {}
         if komand.helper.check_cachefile(meta.get("metafile")):
             headers = self.check_url_meta_file(meta)
 
-        """Download file"""
+        # Download file
         url_object = komand.helper.open_url(
             url,
             timeout=timeout,

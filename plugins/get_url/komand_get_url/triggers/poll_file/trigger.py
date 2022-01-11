@@ -26,7 +26,7 @@ class PollFile(komand.Trigger):
             is_verify = params.get(Input.IS_VERIFY, True)
             user_agent = params.get(Input.USER_AGENT, "Mozilla/5.0")
             url_object, meta = self.utils.check_prefix_and_download(url, is_verify, user_agent)
-            """File modified"""
+            # File modified
             if url_object:
                 self._save_to_cache_and_send(url_object, meta)
             time.sleep(poll)
