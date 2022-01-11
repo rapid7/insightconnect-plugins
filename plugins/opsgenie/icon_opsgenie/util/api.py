@@ -1,4 +1,3 @@
-import json
 import requests
 
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -16,7 +15,7 @@ class ApiClient:
     def create_alert(self, data: dict) -> dict:
         CREATE_ALERT_URL = f"{self.api_url}alerts/"
         self.validator.validate(data)
-        return self._call_api("POST", CREATE_ALERT_URL, data=data)
+        return self._call_api("POST", CREATE_ALERT_URL, json_data=data)
 
     def get_alert(self, id: str, id_type: str = "ID") -> dict:
         GET_ALERT_URL = f"{self.api_url}alerts/{id}"
@@ -28,7 +27,7 @@ class ApiClient:
         params = {"identifierType": id_type}
         if data:
             self.validator.validate(data)
-        return self._call_api("POST", CLOSE_ALERT_URL, params=params, data=data)
+        return self._call_api("POST", CLOSE_ALERT_URL, params=params, json_data=data)
 
     def get_on_calls(self, id: str, id_type: str = "ID", flat: bool = False, date: str = None) -> dict:
         GET_ON_CALLS_URL = f"{self.api_url}schedules/{id}/on-calls"
@@ -41,15 +40,10 @@ class ApiClient:
         GET_TEST_URL = f"{self.api_url}alerts/count"
         return self._call_api("GET", GET_TEST_URL)
 
-    def _call_api(self, method: str, url: str, json_data: dict = None, params: dict = None, data: dict = None) -> dict:
+    def _call_api(self, method: str, url: str, json_data: dict = None, params: dict = None) -> dict:
         headers = {"Authorization": f"GenieKey {self.api_key}"}
         try:
-            if data is None:
-                data_string = None
-            else:
-                data_string = json.dumps(data)
-
-            response = requests.request(method, url, json=json_data, params=params, data=data_string, headers=headers)
+            response = requests.request(method, url, json=json_data, params=params, headers=headers)
 
             if response.status_code == 403:
                 raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
@@ -59,10 +53,6 @@ class ApiClient:
                 return response.json()
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-
-        except json.decoder.JSONDecodeError as e:
-            self.logger.info(f"Invalid JSON entered: {e}")
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
 
         except requests.exceptions.HTTPError as e:
             self.logger.info(f"Call to OpsGenie API failed: {e}")

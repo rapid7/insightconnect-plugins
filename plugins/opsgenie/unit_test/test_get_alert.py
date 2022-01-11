@@ -1,7 +1,6 @@
 import os
 import sys
 
-import requests
 from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
@@ -14,7 +13,14 @@ from icon_opsgenie.connection.connection import Connection
 from icon_opsgenie.connection.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from unit_test.mock import STUB_ALERT_ID, mock_request_202, mock_request_403, mock_request_404, mock_request_500
+from unit_test.mock import (
+    STUB_ALERT_ID,
+    mock_request_200,
+    mock_request_403,
+    mock_request_404,
+    mock_request_500,
+    mocked_request,
+)
 
 
 class TestGetAlert(TestCase):
@@ -29,7 +35,7 @@ class TestGetAlert(TestCase):
 
         self.params = {"identifier": STUB_ALERT_ID}
 
-    @mock.patch("requests.request", side_effect=mock_request_202)
+    @mock.patch("requests.request", side_effect=mock_request_200)
     def test_get_alert_when_status_ok(self, mock_get):
         response = self.action.run(self.params)
         expected_response = {
@@ -82,8 +88,7 @@ class TestGetAlert(TestCase):
         ],
     )
     def test_get_alert_when_status_error(self, mock_request, exception):
-        mock_function = requests
-        mock_function.request = mock.Mock(side_effect=mock_request)
+        mocked_request(mock_request)
 
         with self.assertRaises(PluginException) as context:
             self.action.run(self.params)

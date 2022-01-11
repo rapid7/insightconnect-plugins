@@ -1,12 +1,11 @@
 import os
 import sys
 
-import requests
 from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
 import logging
-from unittest import TestCase, mock
+from unittest import TestCase
 
 from icon_opsgenie.actions.create_alert import CreateAlert
 from icon_opsgenie.actions.create_alert.schema import Output
@@ -14,7 +13,7 @@ from icon_opsgenie.connection.connection import Connection
 from icon_opsgenie.connection.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from unit_test.mock import mock_request_202, mock_request_403, mock_request_404, mock_request_500
+from unit_test.mock import mock_request_202, mock_request_403, mock_request_404, mock_request_500, mocked_request
 
 
 class TestCreateAlert(TestCase):
@@ -34,8 +33,8 @@ class TestCreateAlert(TestCase):
             "note": "ExampleNote",
         }
 
-    @mock.patch("requests.request", side_effect=mock_request_202)
-    def test_create_alert_when_status_ok(self, mock_post):
+    def test_create_alert_when_status_ok(self):
+        mocked_request(mock_request_202)
         response = self.action.run(self.params)
         expected_response = {
             Output.RESULT: "Request will be processed",
@@ -53,8 +52,7 @@ class TestCreateAlert(TestCase):
         ],
     )
     def test_create_alert_when_status_error(self, mock_request, exception):
-        mock_function = requests
-        mock_function.request = mock.Mock(side_effect=mock_request)
+        mocked_request(mock_request)
 
         with self.assertRaises(PluginException) as context:
             self.action.run(self.params)
@@ -64,8 +62,7 @@ class TestCreateAlert(TestCase):
         )
 
     def test_create_alert_no_message(self):
-        mock_function = requests
-        mock_function.request = mock.Mock(side_effect=mock_request_500)
+        mocked_request(mock_request_500)
 
         with self.assertRaises(PluginException) as context:
             self.action.run()
@@ -76,8 +73,7 @@ class TestCreateAlert(TestCase):
         self.assertEqual(context.exception.data, "No required parameter has been entered")
 
     def test_create_alert_message_over_130_characters(self):
-        mock_function = requests
-        mock_function.request = mock.Mock(side_effect=mock_request_500)
+        mocked_request(mock_request_500)
         payload = {"message": "LongMessage" * 131}
 
         with self.assertRaises(PluginException) as context:
@@ -92,8 +88,7 @@ class TestCreateAlert(TestCase):
         )
 
     def test_create_alert_user_over_100_characters(self):
-        mock_function = requests
-        mock_function.request = mock.Mock(side_effect=mock_request_500)
+        mocked_request(mock_request_500)
         payload = {"message": "An example message", "user": "LongUsername" * 101}
 
         with self.assertRaises(PluginException) as context:
@@ -108,8 +103,7 @@ class TestCreateAlert(TestCase):
         )
 
     def test_create_alert_actions_over_10_elements(self):
-        mock_function = requests
-        mock_function.request = mock.Mock(side_effect=mock_request_500)
+        mocked_request(mock_request_500)
         payload = {**self.params, "actions": [str(element) for element in range(1, 12)]}
 
         with self.assertRaises(PluginException) as context:
@@ -124,8 +118,7 @@ class TestCreateAlert(TestCase):
         )
 
     def test_create_alert_actions_over_50_characters(self):
-        mock_function = requests
-        mock_function.request = mock.Mock(side_effect=mock_request_202)
+        mocked_request(mock_request_500)
         payload = {**self.params, "actions": ["First", "LongActionName" * 51]}
 
         with self.assertRaises(PluginException) as context:
