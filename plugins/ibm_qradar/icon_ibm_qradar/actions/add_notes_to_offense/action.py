@@ -38,16 +38,8 @@ class AddNotesToOffense(insightconnect_plugin_runtime.Action):
         offense_id = params.get(Input.OFFENSE_ID, "")
         self.logger.info("Offense ID provided: %s", offense_id)
 
-        if offense_id == "":
-            self.logger.info("Terminating: Offense ID provided was empty.")
-            raise ClientException(Exception(EMPTY_OFFENSE_ID_FOUND))
-
         note_text = params.get(Input.NOTE_TEXT, "")
         self.logger.info("Note Text provided: %s", note_text)
-
-        if note_text == "":
-            self.logger.info("Terminating: Note Text provided was empty.")
-            raise ClientException(Exception(EMPTY_NOTE_TEXT_FOUND))
 
         query_params = {}
         query_params["note_text"] = note_text

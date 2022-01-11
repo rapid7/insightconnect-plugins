@@ -87,13 +87,6 @@ class TestGetOffense(TestCase):
             self.action.run(action_params)
 
     @patch("requests.post", side_effect=UpdateOffenseHelper.mock_request)
-    def test_without_offense_id(self, make_request):
-        """To Test update offense without offense id provided."""
-        action_params = {"filter": "id"}
-        with self.assertRaises(ClientException):
-            self.action.run(action_params)
-
-    @patch("requests.post", side_effect=UpdateOffenseHelper.mock_request)
     def test_with_internal_server_error(self, make_request):
         """To Test the update offense with internalServerError."""
         action_params = {"offense_id": 1, "fields": "internalServerError"}

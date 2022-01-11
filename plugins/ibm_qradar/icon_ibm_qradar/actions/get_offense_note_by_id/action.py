@@ -37,16 +37,8 @@ class GetOffenseNoteById(insightconnect_plugin_runtime.Action):
         offense_id = params.get(Input.OFFENSE_ID, "")
         self.logger.info("Offense Id provided: %s", offense_id)
 
-        if offense_id == "":
-            self.logger.info("Terminating: Offense ID provided was empty.")
-            raise ClientException(Exception(EMPTY_OFFENSE_ID_FOUND))
-
         note_id = params.get(Input.NOTE_ID, "")
         self.logger.info("Note Id provided: %s", offense_id)
-
-        if note_id == "":
-            self.logger.info("Terminating: Note ID provided was empty.")
-            raise ClientException(Exception(EMPTY_NOTE_ID_FOUND))
 
         url_obj = URL(self.connection.hostname, self.endpoint)
         basic_url = url_obj.get_basic_url()

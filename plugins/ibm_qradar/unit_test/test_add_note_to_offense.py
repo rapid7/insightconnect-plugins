@@ -31,26 +31,6 @@ class TestAddNoteToOffense(TestCase):
         self.assertEqual(results.get("data")["data"][0]["id"], "10001")
 
     @patch("requests.post", side_effect=OffenseNotesHelper.mock_request)
-    def test_add_note_to_offense_without_offense_id(self, make_request):
-        """To Add notes to offense without offense id provided.
-
-        :return: None
-        """
-        action_params = {"note_text": "Hello"}
-        with self.assertRaises(ClientException):
-            self.action.run(action_params)
-
-    @patch("requests.post", side_effect=OffenseNotesHelper.mock_request)
-    def test_add_note_to_offense_without_note_text(self, make_request):
-        """To Add notes to offense without offense id provided.
-
-        :return: None
-        """
-        action_params = {"offense_id": "33"}
-        with self.assertRaises(ClientException):
-            self.action.run(action_params)
-
-    @patch("requests.post", side_effect=OffenseNotesHelper.mock_request)
     def test_add_note_to_offense_with_fields(self, make_request):
         """To Add notes to offense with field list given.
 

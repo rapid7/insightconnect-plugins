@@ -31,16 +31,6 @@ class TestGetOffenseNote(TestCase):
         self.assertEqual(results.get("data")["data"][0]["id"], "10001")
 
     @patch("requests.get", side_effect=OffenseNotesHelper.mock_request)
-    def test_get_offense_notes_without_offense_id(self, make_request):
-        """To get offense notes without offense id provided.
-
-        :return: None
-        """
-        action_params = {}
-        with self.assertRaises(ClientException):
-            self.action.run(action_params)
-
-    @patch("requests.get", side_effect=OffenseNotesHelper.mock_request)
     def test_get_offense_notes_with_fields(self, make_request):
         """To get offense notes with field list given.
 

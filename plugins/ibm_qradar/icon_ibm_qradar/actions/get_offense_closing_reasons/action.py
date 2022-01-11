@@ -37,12 +37,10 @@ class GetOffenseClosingReasons(insightconnect_plugin_runtime.Action):
         include_reserved = params.get(Input.INCLUDE_RESERVED, False)
         self.logger.info("Include_reserved provided: %s", include_reserved)
 
-        query_params = {}
-        if include_deleted != "":
-            query_params["include_deleted"] = "true" if include_deleted else "false"
-
-        if include_reserved != "":
-            query_params["include_reserved"] = "true" if include_reserved else "false"
+        query_params = {
+            "include_deleted": "true" if include_deleted else "false",
+            "include_reserved": "true" if include_reserved else "false",
+        }
 
         url_obj = URL(self.connection.hostname, self.endpoint)
         basic_url, headers = prepare_request_params(

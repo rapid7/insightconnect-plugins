@@ -34,16 +34,12 @@ class UpdateOffense(insightconnect_plugin_runtime.Action):
         offense_id = params.get(Input.OFFENSE_ID, "")
         self.logger.info("Offense ID provided: %s", offense_id)
 
-        if offense_id == "":
-            self.logger.info("Terminating: Offense id provided was empty.")
-            raise ClientException(Exception(EMPTY_OFFENSE_ID_FOUND))
-
         assigned_to = params.get(Input.ASSIGNED_TO, "")
         self.logger.info("assigned_to provided: %s", assigned_to)
 
         closing_reason_id = params.get(Input.CLOSING_REASON_ID, "")
         self.logger.info("closing_reason_id provided: %s", closing_reason_id)
-        print("isnumeric", closing_reason_id.isnumeric())
+
         if closing_reason_id != "" and not closing_reason_id.isdigit():
             raise ClientException(Exception(CLOSING_REASON_ID_PROVIDED_IS_NOT_INTEGER))
 
@@ -68,11 +64,8 @@ class UpdateOffense(insightconnect_plugin_runtime.Action):
 
             query_params["closing_reason_id"] = closing_reason_id
 
-        if follow_up != "":
-            query_params["follow_up"] = "true" if follow_up else "false"
-
-        if protected != "":
-            query_params["protected"] = "true" if protected else "false"
+        query_params["follow_up"] = "true" if follow_up else "false"
+        query_params["protected"] = "true" if protected else "false"
 
         if status != "":
             query_params["status"] = status
