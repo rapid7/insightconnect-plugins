@@ -4,10 +4,10 @@ import os
 import json
 from sys import argv
 
-Name = "IBM Qradar"
+Name = "IBM QRadar"
 Vendor = "rapid7-sacumen"
-Version = "1.0.8"
-Description = "Orchestrate and automate ariel search and automate the offence management using the IBM Qradar"
+Version = "1.0.28"
+Description = "IBM QRadar reduces billions of events and flows into a manageable number of actionable offenses that are prioritized by their impact on your business operations. This plugin allows you to use IBM QRadar to orchestrate and automate Ariel search queries and automate offense management."
 
 
 def main():
@@ -32,9 +32,25 @@ def main():
             super(self.__class__, self).__init__(
                 name=Name, vendor=Vendor, version=Version, description=Description, connection=connection.Connection()
             )
+            self.add_trigger(triggers.GetNewOffense())
+
+            self.add_action(actions.AddNotesToOffense())
+
             self.add_action(actions.GetArielSearchById())
 
+            self.add_action(actions.GetAssets())
+
+            self.add_action(actions.GetOffenseClosingReasons())
+
+            self.add_action(actions.GetOffenseNote())
+
+            self.add_action(actions.GetOffenseNoteById())
+
+            self.add_action(actions.GetOffenses())
+
             self.add_action(actions.StartArielSearch())
+
+            self.add_action(actions.UpdateOffense())
 
     """Run plugin"""
     cli = insightconnect_plugin_runtime.CLI(ICONIbmQradar())

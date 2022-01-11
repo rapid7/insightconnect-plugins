@@ -27,12 +27,13 @@ class GetArielSearchByIdInput(insightconnect_plugin_runtime.Input):
       "type": "number",
       "title": "Poll Interval",
       "description": "Poll interval is the number of seconds to recheck until the search gets COMPLETED.",
+      "default": 1,
       "order": 2
     },
     "search_id": {
       "type": "string",
       "title": "Search Id",
-      "description": "Specific Search Id",
+      "description": "Specific Ariel Search Id for which the search",
       "order": 1
     }
   },

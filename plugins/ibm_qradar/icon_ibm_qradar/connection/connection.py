@@ -1,15 +1,10 @@
-"""Connection with Qradar."""
 import insightconnect_plugin_runtime
-from insightconnect_plugin_runtime.exceptions import ClientException
 
-from .schema import ConnectionSchema
+from .schema import ConnectionSchema, Input
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
-    """Class to handle the connection."""
-
     def __init__(self):
-        """Initialize the connection."""
         super().__init__(input=ConnectionSchema())
         self.username = ""
         self.password = ""
@@ -21,10 +16,14 @@ class Connection(insightconnect_plugin_runtime.Connection):
         :param params: Config Params required for connection
         :return: None
         """
-        self.username = params.get("username", "")
-        if self.username == "":
-            raise ClientException(Exception("Empty Username provided"))
-        self.password = params.get("password", "")
-        if self.password == "":
-            raise ClientException(Exception("Empty Password provided"))
-        self.hostname = params.get("hostname", "")
+        self.username = params.get(Input.USERNAME)
+        self.password = params.get(Input.PASSWORD)
+        self.hostname = params.get(Input.HOSTNAME)
+
+    def test(self, params):
+        """TO test the connection."""
+        self.username = params.get(Input.USERNAME)
+        self.password = params.get(Input.PASSWORD)
+        self.hostname = params.get(Input.HOSTNAME)
+
+        return {"connection": "successful"}

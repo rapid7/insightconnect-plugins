@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    AQL = "AQL"
+    AQL = "aql"
 
 
 class Output:
@@ -22,13 +22,16 @@ class StartArielSearchInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "AQL": {
+    "aql": {
       "type": "string",
       "title": "AQL query",
-      "description": "Aql query to perform the search.",
+      "description": "AQL query to perform the search.",
       "order": 1
     }
-  }
+  },
+  "required": [
+    "aql"
+  ]
 }
     """
     )

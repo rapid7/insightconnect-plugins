@@ -19,21 +19,21 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "hostname": {
       "type": "string",
       "title": "Hostname",
-      "description": "Hostname for the Qradar application",
+      "description": "Hostname for the QRadar application",
       "order": 1
     },
     "password": {
       "type": "string",
       "title": "Password",
       "displayType": "password",
-      "description": "Qradar Password",
+      "description": "QRadar Password",
       "format": "password",
       "order": 3
     },
     "username": {
       "type": "string",
       "title": "Username",
-      "description": "Qradar Username",
+      "description": "QRadar Username",
       "order": 2
     }
   },

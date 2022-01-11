@@ -1,25 +1,28 @@
-"""Action: Start Ariel Search."""
-
 import insightconnect_plugin_runtime
 import requests
-from insightconnect_plugin_runtime.exceptions import ClientException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
-from icon_ibm_qradar.util.constants.constant import AQL, POST
 from icon_ibm_qradar.util.constants.endpoints import START_ARIEL_SEARCH_ENDPOINT
-from icon_ibm_qradar.util.constants.messages import EMPTY_AQL_FOUND
 from icon_ibm_qradar.util.url import URL
-from icon_ibm_qradar.util.utils import get_default_header, handle_response
+from icon_ibm_qradar.util.utils import (
+    get_default_header,
+    handle_response,
+    prepare_request_params,
+)
 
-from .schema import Component, StartArielSearchInput, StartArielSearchOutput
+from .schema import (
+    Component,
+    StartArielSearchInput,
+    StartArielSearchOutput,
+    Input,
+    Output,
+)
 
 # Custom imports below
 
 
 class StartArielSearch(insightconnect_plugin_runtime.Action):
-    """Action class : Start Ariel Search."""
-
     def __init__(self):
-        """Initialize the action."""
         super().__init__(
             name="start_ariel_search",
             description=Component.DESCRIPTION,
@@ -35,22 +38,19 @@ class StartArielSearch(insightconnect_plugin_runtime.Action):
         :param params: Input Param config required for the Action
         :return: None
         """
-        aql_search_query = params.get(AQL, "")
-        self.logger.info("Aql provided: %s", aql_search_query)
-        if aql_search_query == "":
-            self.logger.info("Terminating: Aql query provided as empty.")
-            raise ClientException(Exception(EMPTY_AQL_FOUND))
+        aql_search_query = params.get(Input.AQL, "")
+        self.logger.info("AQL provided: %s", aql_search_query)
+
+        query_params = {"query_expression": aql_search_query}
 
         url_obj = URL(self.connection.hostname, self.endpoint)
-        basic_url = url_obj.get_basic_url()
-        if aql_search_query:
-            basic_url = f"{basic_url}?query_expression={aql_search_query}"
+        basic_url, headers = prepare_request_params(params, self.logger, url_obj, [], query_params)
 
         auth = (self.connection.username, self.connection.password)
         headers = get_default_header()
         try:
-            response = requests.request(POST, url=basic_url, headers=headers, data={}, auth=auth, verify=False)
+            response = requests.post(url=basic_url, headers=headers, data={}, auth=auth, verify=False)
         except requests.exceptions.ConnectionError:
-            raise requests.exceptions.ConnectionError
+            raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE)
 
-        return handle_response(response)
+        return {Output.DATA: handle_response(response)}
