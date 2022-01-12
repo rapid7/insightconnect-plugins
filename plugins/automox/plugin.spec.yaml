@@ -871,7 +871,7 @@ actions:
         example: 1440
       parent_server_group_id:
         title: Parent Server Group ID
-        description: Name of the parent group (Will be set to Default Group ID if not set)
+        description: Name of the parent group. Defaults to Default Group ID if this is omitted
         type: integer
         required: false
         example: 1234
@@ -901,7 +901,7 @@ actions:
         required: true
       group:
         title: Group
-        description: Detailed infromation about the created group
+        description: Detailed information about the created group
         type: group
         required: true
   update_group:
@@ -935,7 +935,7 @@ actions:
         example: 1440
       parent_server_group_id:
         title: Parent Server Group ID
-        description: Name of the parent group (Will be set to Default Group ID if not set)
+        description: Name of the parent group. Defaults to Default Group ID if omitted
         type: integer
         required: false
         example: 1234
@@ -987,7 +987,7 @@ actions:
         required: true
   upload_vulnerability_sync_file:
     title: Upload Vulnerability Sync File
-    description: Upload CSV file to vulnerability sync for processing
+    description: Upload a CSV file to vulnerability sync for processing
     input:
       org_id:
         title: Organization ID
@@ -997,7 +997,7 @@ actions:
         example: 1234
       csv_file:
         title: CSV File
-        description: Base64 encoded CSV data from which to create the vulnerabiulity sync batch
+        description: Base64 encoded CSV data from which to create the vulnerability sync batch
         type: bytes
         required: true
         example: "PGgxPlJhcGlkNzwvaDE+"
@@ -1114,7 +1114,7 @@ actions:
         required: false
   action_on_vulnerability_sync_task:
     title: Execute or Cancel Vulnerability Sync Task
-    description: Take action to execute or cancel vulnerability sync task
+    description: Take action to execute or cancel a vulnerability sync task
     input:
       org_id:
         title: Organization ID
@@ -1157,7 +1157,7 @@ triggers:
         example: 1234
       event_type:
         title: Event Type
-        description: Name of event type to be retrieved (List of event types found at https://developer.automox.com/openapi/axconsole/operation/getEvents/)
+        description: Name of event type to be retrieved (list of event types found at https://developer.automox.com/openapi/axconsole/operation/getEvents/#!in=query&path=eventName&t=request)
         type: string
         required: true
         example: "user.login"
