@@ -292,23 +292,23 @@ class ApiClient:
                 raise PluginException(cause="Failed to upload file to Vulnerability Sync",
                                       assistance=f"Review encoded CSV file and try again: {e}")
 
-    def get_vulnerability_sync_batches(self, org_id: int):
+    def get_vulnerability_sync_batches(self, org_id: int) -> List[Dict]:
         return self._page_results_data(f"{self.endpoint}/orgs/{org_id}/tasks/batches")
 
-    def get_vulnerability_sync_batch(self, org_id: int, batch_id: int):
+    def get_vulnerability_sync_batch(self, org_id: int, batch_id: int) -> Dict:
         return self._call_api("GET", f"{self.endpoint}/orgs/{org_id}/tasks/batches/{batch_id}")
 
-    def update_vulnerability_sync_batch(self, org_id: int, batch_id: int, action: str):
+    def update_vulnerability_sync_batch(self, org_id: int, batch_id: int, action: str) -> bool:
         return self._call_api("POST", f"{self.endpoint}/orgs/{org_id}/tasks/batches/{batch_id}/{action}")
 
-    def get_vulnerability_sync_tasks(self, org_id: int, params: Dict):
+    def get_vulnerability_sync_tasks(self, org_id: int, params: Dict) -> List[Dict]:
         return self._page_results_data(f"{self.endpoint}/orgs/{org_id}/tasks", params)
 
-    def update_vulnerability_sync_task(self, org_id: int, task_id: int, action: str):
+    def update_vulnerability_sync_task(self, org_id: int, task_id: int, action: str) -> bool:
         return self._call_api("PATCH", f"{self.endpoint}/orgs/{org_id}/tasks/{task_id}", params={"action": action})
 
     # Events
-    def get_events(self, org_id: int, event_type: str, page: int = 0) -> dict:
+    def get_events(self, org_id: int, event_type: str, page: int = 0) -> List[Dict]:
         params = {
             "o": org_id,
             "eventName": event_type,
