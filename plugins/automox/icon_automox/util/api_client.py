@@ -2,7 +2,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 import io
 import json
 import requests
-from typing import Dict, List
+from typing import Dict, List, Optional, Collection
 
 
 class ApiClient:
@@ -27,7 +27,7 @@ class ApiClient:
             "content-type": "application/json"
         }
 
-    def _call_api(self, method: str, url: str, params: Dict = dict(), json_data: object = None) -> json:
+    def _call_api(self, method: str, url: str, params: Dict = dict(), json_data: object = None) -> Optional[dict]:
         try:
             response = self.session.request(method, url, json=json_data, params=params)
 
@@ -53,7 +53,7 @@ class ApiClient:
             self.logger.info(f"Call to Automox Console API failed: {e}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
-    def _page_results(self, url: str, init_params: Dict = dict(), sanitize: bool = True) -> json:
+    def _page_results(self, url: str, init_params: Dict = dict(), sanitize: bool = True) -> [dict]:
         params = self.first_page(init_params)
 
         page_resp = []
@@ -74,7 +74,7 @@ class ApiClient:
 
         return page_resp
 
-    def _page_results_data(self, url: str, init_params: Dict = dict()) -> json:
+    def _page_results_data(self, url: str, init_params: Dict = dict()) -> [dict]:
         params = self.first_page(init_params)
 
         page_resp = []
@@ -95,20 +95,20 @@ class ApiClient:
         return page_resp
 
     # Remove Null from response to avoid type issues
-    def remove_null_values(self, d):
-        if type(d) is dict:
+    def remove_null_values(self, d: Collection):
+        if isinstance(d, dict):
             return dict((k, self.remove_null_values(v)) for k, v in d.items() if v and self.remove_null_values(v))
-        elif type(d) is list:
+        elif isinstance(d, list):
             return [self.remove_null_values(v) for v in d if v and self.remove_null_values(v)]
         else:
             return d
 
     @staticmethod
-    def _org_param(org_id):
+    def _org_param(org_id: str) -> dict:
         return {"o": org_id}
 
     @staticmethod
-    def first_page(params: Dict = {}):
+    def first_page(params: Dict = {}) -> None:
         params.update({
             'limit': ApiClient.PAGE_SIZE,
             'page': 0
@@ -139,7 +139,7 @@ class ApiClient:
     def get_device(self, org_id: int, device_id: int) -> Dict:
         return self._call_api("GET", f"{self.endpoint}/servers/{device_id}", params=self._org_param(org_id))
 
-    def find_device_by_attribute(self, org_id: int, attributes: List[str], value: str):
+    def find_device_by_attribute(self, org_id: int, attributes: List[str], value: str) -> dict:
         params = self.first_page({"o": org_id})
 
         while True:
@@ -172,7 +172,7 @@ class ApiClient:
         params = {"o": org_id, "groupId": group_id}
         return self._page_results(f"{self.endpoint}/servers", params)
 
-    def run_device_command(self, org_id: int, device_id: int, command: str):
+    def run_device_command(self, org_id: int, device_id: int, command: str) -> bool:
         """
         Run Command on Device
         :param org_id: Organization ID
@@ -205,7 +205,7 @@ class ApiClient:
 
     # Policies
     @staticmethod
-    def _sanitize_policies(policies) -> List[Dict]:
+    def _sanitize_policies(policies: [dict]) -> List[Dict]:
         for policy in policies:
             for key, fields in {'configuration': ['evaluation_code', 'installation_code', 'remediation_code']}.items():
                 if key in policy:
@@ -259,7 +259,7 @@ class ApiClient:
         return self._call_api("PUT", f"{self.endpoint}/servergroups/{group_id}",
                               params=self._org_param(org_id), json_data=payload)
 
-    def delete_group(self, org_id: int, group_id: int):
+    def delete_group(self, org_id: int, group_id: int) -> bool:
         """
         Delete Device group
         :param org_id: Organization ID
@@ -269,7 +269,7 @@ class ApiClient:
         return self._call_api("DELETE", f"{self.endpoint}/servergroups/{group_id}", params=self._org_param(org_id))
 
     # Vulnerability Sync
-    def upload_vulnerability_sync_file(self, org_id: int, file_content, filename):
+    def upload_vulnerability_sync_file(self, org_id: int, file_content, filename) -> int:
         with io.BytesIO(file_content) as file:
             files = [
                 ('file', (filename, file, 'text/csv'))
@@ -308,7 +308,7 @@ class ApiClient:
         return self._call_api("PATCH", f"{self.endpoint}/orgs/{org_id}/tasks/{task_id}", params={"action": action})
 
     # Events
-    def get_events(self, org_id: int, event_type: str, page: int = 0):
+    def get_events(self, org_id: int, event_type: str, page: int = 0) -> dict:
         params = {
             "o": org_id,
             "eventName": event_type,

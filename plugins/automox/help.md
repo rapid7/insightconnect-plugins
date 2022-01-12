@@ -10,14 +10,14 @@ outcomes on endpoints, and basic Automox platform administration.
 
 # Key Features
 
-* Ability to retrieve and manage Automox managed devices
-* Ability to manage Automox groups
-* Ability to initiate Vulnerability Sync uploads and remediation of issues
-* Ability to trigger workflows based on Automox platform events
+* Retrieve and manage Automox managed devices
+* Manage Automox groups
+* Initiate Vulnerability Sync uploads and remediation of issues
+* Trigger workflows based on Automox platform events
 
 # Requirements
 
-* Requires an Automox API Key
+* Automox API Key
 
 # Supported Product Versions
 
@@ -1236,4 +1236,5 @@ _This plugin does not contain any troubleshooting information._
 * [Automox](https://www.automox.com/)
 * [Automox Developer Portal](https://developer.automox.com/)
 * [Managing API Keys](https://support.automox.com/help/managing-keys)
+* [Event Types for Get Automox Events action](https://developer.automox.com/openapi/axconsole/operation/getEvents/#!in=query&path=eventName&t=request)
 
