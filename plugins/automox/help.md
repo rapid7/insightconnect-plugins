@@ -396,7 +396,7 @@ This action is used to run a command on the device.
 |command|string|None|True|Command to run on device|['GetOS', 'InstallUpdate', 'InstallAllUpdates', 'PolicyTest', 'PolicyRemediate', 'Reboot']|GetOS|
 |device_id|integer|None|True|Identifier of device|None|1234|
 |org_id|integer|None|False|Identifier of organization|None|1234|
-|patches|[]string|None|False|List of patches to be installed (Note that this only works with InstallUpdate command)|None|[""]|
+|patches|[]string|None|False|List of patches to be installed (Note: this only works with the InstallUpdate command)|None|[""]|
 |policy_id|integer|None|False|Identifier of policy|None|1234|
 
 Example input:
@@ -1074,6 +1074,9 @@ This action is used to retrieve Automox policies.
 Example input:
 
 ```
+{
+  "org_id": 1234
+}
 ```
 
 ##### Output

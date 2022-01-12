@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Run a command on the device"
+    DESCRIPTION = "Run a command on a device"
 
 
 class Input:
@@ -54,7 +54,7 @@ class RunCommandInput(insightconnect_plugin_runtime.Input):
     "patches": {
       "type": "array",
       "title": "Patches",
-      "description": "List of patches to be installed (Note that this only works with InstallUpdate command)",
+      "description": "List of patches to be installed (Note: this only works with the InstallUpdate command)",
       "items": {
         "type": "string"
       },

@@ -448,7 +448,7 @@ types:
       type: integer
       required: false
     unknown_host_count:
-      title: Uknown Host Count
+      title: Unknown Host Count
       description: Number of hosts that are unknown within batch
       type: integer
       required: false
@@ -741,7 +741,7 @@ actions:
         required: true
   delete_device:
     title: Delete Device
-    description: Delete Automox device
+    description: Delete an Automox device
     input:
       org_id:
         title: Organization ID
@@ -763,7 +763,7 @@ actions:
         required: true
   get_device_software:
     title: Get Device Software
-    description: Retrieve a list of software installed on the device
+    description: Retrieve a list of software installed on a device
     input:
       org_id:
         title: Organization ID
@@ -785,7 +785,7 @@ actions:
         required: false
   run_command:
     title: Run Device Command
-    description: Run a command on the device
+    description: Run a command on a device
     input:
       org_id:
         title: Organization ID
@@ -814,7 +814,7 @@ actions:
         example: "GetOS"
       patches:
         title: Patches
-        description: List of patches to be installed (Note that this only works with InstallUpdate command)
+        description: "List of patches to be installed (Note: this only works with the InstallUpdate command)"
         type: "[]string"
         required: false
         example: [""]

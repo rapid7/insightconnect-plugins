@@ -1,5 +1,5 @@
 {
-	"spec": "a6f98d5fa4bdf6149ac1ab7dec5643c6",
+	"spec": "3f758fbe16fef6899ff6f43c14c179c9",
 	"manifest": "cb317bddbf81757e6cefd84ee43e28bd",
 	"setup": "99ad065fc340bac4d8c394f98c761bfe",
 	"schemas": [
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "delete_device/schema.py",
-			"hash": "84375147268bc143b19f3cae4690593f"
+			"hash": "7252543ff89a21c3b0d08c9332072216"
 		},
 		{
 			"identifier": "delete_group/schema.py",
@@ -33,11 +33,11 @@
 		},
 		{
 			"identifier": "get_device_software/schema.py",
-			"hash": "c2cffdf8c41bd14ac6463c1084186232"
+			"hash": "d2af21490f7d51e52a2b3bb68fdedbae"
 		},
 		{
 			"identifier": "get_vulnerability_sync_batch/schema.py",
-			"hash": "f63597234dd74c161a18716a21076c19"
+			"hash": "5765f142f96aa185edc42e9b11f175c4"
 		},
 		{
 			"identifier": "list_devices/schema.py",
@@ -61,7 +61,7 @@
 		},
 		{
 			"identifier": "list_vulnerability_sync_batches/schema.py",
-			"hash": "98582d0739dcc2ea77dfa0552700c7f8"
+			"hash": "90bff67fac53fab74fab99f576f6c789"
 		},
 		{
 			"identifier": "list_vulnerability_sync_tasks/schema.py",
@@ -69,7 +69,7 @@
 		},
 		{
 			"identifier": "run_command/schema.py",
-			"hash": "1cce5f40a126c5cd5d48a3174e6fe469"
+			"hash": "d206c7a21b9a5fbac52bff25aa27f0cd"
 		},
 		{
 			"identifier": "update_device/schema.py",

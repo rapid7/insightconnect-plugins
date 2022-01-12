@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Delete Automox device"
+    DESCRIPTION = "Delete an Automox device"
 
 
 class Input:
