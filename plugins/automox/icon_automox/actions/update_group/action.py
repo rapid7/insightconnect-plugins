@@ -18,15 +18,14 @@ class UpdateGroup(insightconnect_plugin_runtime.Action):
                                                                        params.get(Input.GROUP_ID))
 
         payload = {
-            "name": params.get(Input.NAME, current_group_settings["name"]),
-            "refresh_interval": params.get(Input.REFRESH_INTERVAL, current_group_settings["refresh_interval"]),
-            "parent_server_group_id": params.get(Input.PARENT_SERVER_GROUP_ID,
-                                                 current_group_settings["parent_server_group_id"]),
-            "ui_color": params.get(Input.COLOR, current_group_settings["ui_color"]),
-            "notes": params.get(Input.NOTES, current_group_settings["notes"]),
+            "name": params.get(Input.NAME) or current_group_settings["name"],
+            "refresh_interval": params.get(Input.REFRESH_INTERVAL) or current_group_settings["refresh_interval"],
+            "parent_server_group_id": params.get(Input.PARENT_SERVER_GROUP_ID) or current_group_settings["parent_server_group_id"],
+            "ui_color": params.get(Input.COLOR) or current_group_settings["ui_color"],
+            "notes": params.get(Input.NOTES) or current_group_settings["notes"],
             "enable_os_auto_update": None,
             "enable_wsus": None,
-            "policies": params.get(Input.POLICIES, current_group_settings["policies"])
+            "policies": params.get(Input.POLICIES) or current_group_settings["policies"]
         }
         self.connection.automox_api.update_group(params.get(Input.ORG_ID), params.get(Input.GROUP_ID), payload)
 

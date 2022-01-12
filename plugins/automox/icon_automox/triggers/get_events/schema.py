@@ -107,7 +107,7 @@ class GetEventsOutput(insightconnect_plugin_runtime.Output):
         "policy_name": {
           "type": "string",
           "title": "Policy Name",
-          "description": "Name of policydentifier of user",
+          "description": "Name of policy",
           "order": 9
         },
         "policy_type_name": {

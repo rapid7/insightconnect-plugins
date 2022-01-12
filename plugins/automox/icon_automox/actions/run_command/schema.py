@@ -27,8 +27,8 @@ class RunCommandInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "command": {
       "type": "string",
-      "title": "Device ID",
-      "description": "Identifier of device",
+      "title": "Command",
+      "description": "Command to run on device",
       "enum": [
         "GetOS",
         "InstallUpdate",

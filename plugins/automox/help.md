@@ -21,7 +21,7 @@ outcomes on endpoints, and basic Automox platform administration.
 
 # Supported Product Versions
 
-* All
+* All as of 12/17/2021
 
 # Documentation
 
@@ -31,7 +31,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|Enter organization API key|None|abc12345-abc1-2345-abc1-abc123456789|
+|api_key|credential_secret_key|None|True|Organization API key|None|abc12345-abc1-2345-abc1-abc123456789|
 
 Example input:
 
@@ -104,7 +104,7 @@ This action is used to upload CSV file to vulnerability sync for processing.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |csv_file|bytes|None|True|Base64 encoded CSV data from which to create the vulnerabiulity sync batch|None|PGgxPlJhcGlkNzwvaDE+|
-|csv_file_name|string|insightconnect-uploaded-report.csv|False|Name for CSV file uploaded and shown within Automox|None|insightconnect-uploaded-report.csv|
+|csv_file_name|string|https://example.com|False|Name for CSV file uploaded and shown within Automox|None|https://example.com|
 |org_id|integer|None|True|Identifier of organization|None|1234|
 
 Example input:
@@ -393,7 +393,7 @@ This action is used to run a command on the device.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|command|string|None|True|Identifier of device|['GetOS', 'InstallUpdate', 'InstallAllUpdates', 'PolicyTest', 'PolicyRemediate', 'Reboot']|GetOS|
+|command|string|None|True|Command to run on device|['GetOS', 'InstallUpdate', 'InstallAllUpdates', 'PolicyTest', 'PolicyRemediate', 'Reboot']|GetOS|
 |device_id|integer|None|True|Identifier of device|None|1234|
 |org_id|integer|None|False|Identifier of organization|None|1234|
 |patches|[]string|None|False|List of patches to be installed (Note that this only works with InstallUpdate command)|None|[""]|
@@ -502,7 +502,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|software|[]object|False|List of software on device|
+|software|[]device_software|False|List of software on device|
 
 Example output:
 
@@ -764,7 +764,7 @@ This action is used to find an Automox device by IP address.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|ip_address|string|None|True|IP address of device|None|192.168.0.1|
+|ip_address|string|None|True|IP address of device|None|https://example.com|
 |org_id|integer|None|False|Identifier of organization to restrict results|None|1234|
 
 Example input:
@@ -863,7 +863,7 @@ This action is used to retrieve Automox managed devices.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|group_id|integer|None|False|Identifier of Server Group|None|1234|
+|group_id|integer|None|False|Identifier of server group|None|1234|
 |org_id|integer|None|False|Identifier of organization to restrict results|None|1234|
 
 Example input:
@@ -964,7 +964,7 @@ This action is used to retrieve users of the Automox organization.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|org_id|integer|None|True|Identifier of Organization|None|1234|
+|org_id|integer|None|True|Identifier of organization|None|1234|
 
 Example input:
 
@@ -978,7 +978,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|users|[]users|False|List of Automox users|
+|users|[]user|False|List of Automox users|
 
 Example output:
 
@@ -1074,9 +1074,6 @@ This action is used to retrieve Automox policies.
 Example input:
 
 ```
-{
-  "org_id": 1234
-}
 ```
 
 ##### Output
@@ -1170,7 +1167,7 @@ This trigger is used to retrieve Automox events to trigger workflows.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|event_type|string|None|True|Name of event type to be retrieved (List of event types found at https://developer.automox.com/openapi/axconsole/operation/getEvents/)|None|user.login|
+|event_type|string|None|True|Name of event type to be retrieved (List of event types found at https://developer.automox.com/openapi/axconsole/operation/getEvents/)|None|https://example.com|
 |org_id|integer|None|False|Identifier of organization to restrict results|None|1234|
 
 Example input:

@@ -24,7 +24,7 @@ class ListOrganizationUsersInput(insightconnect_plugin_runtime.Input):
     "org_id": {
       "type": "integer",
       "title": "Organization ID",
-      "description": "Identifier of Organization",
+      "description": "Identifier of organization",
       "order": 1
     }
   },
@@ -49,15 +49,15 @@ class ListOrganizationUsersOutput(insightconnect_plugin_runtime.Output):
       "title": "Users",
       "description": "List of Automox users",
       "items": {
-        "$ref": "#/definitions/users"
+        "$ref": "#/definitions/user"
       },
       "order": 1
     }
   },
   "definitions": {
-    "users": {
+    "user": {
       "type": "object",
-      "title": "users",
+      "title": "user",
       "properties": {
         "email": {
           "type": "string",
@@ -94,7 +94,7 @@ class ListOrganizationUsersOutput(insightconnect_plugin_runtime.Output):
           "title": "Organizations",
           "description": "The organizations for which the user has access",
           "items": {
-            "type": "object"
+            "$ref": "#/definitions/user_org"
           },
           "order": 6
         },
@@ -103,7 +103,7 @@ class ListOrganizationUsersOutput(insightconnect_plugin_runtime.Output):
           "title": "Roles",
           "description": "The roles assigned to the user",
           "items": {
-            "type": "object"
+            "$ref": "#/definitions/user_rbac_role"
           },
           "order": 9
         },
@@ -125,6 +125,106 @@ class ListOrganizationUsersOutput(insightconnect_plugin_runtime.Output):
       },
       "required": [
         "id"
+      ],
+      "definitions": {
+        "user_org": {
+          "type": "object",
+          "title": "user_org",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "title": "Organization ID",
+              "description": "The organization identifier of the user",
+              "order": 1
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "The name of the organization",
+              "order": 2
+            }
+          },
+          "required": [
+            "id"
+          ]
+        },
+        "user_rbac_role": {
+          "type": "object",
+          "title": "user_rbac_role",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "title": "Role ID",
+              "description": "The role identifier",
+              "order": 1
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "The name of the role",
+              "order": 2
+            },
+            "organization_id": {
+              "type": "integer",
+              "title": "Organization ID",
+              "description": "The organization identifier of the user role",
+              "order": 3
+            }
+          },
+          "required": [
+            "id",
+            "organization_id"
+          ]
+        }
+      }
+    },
+    "user_org": {
+      "type": "object",
+      "title": "user_org",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "title": "Organization ID",
+          "description": "The organization identifier of the user",
+          "order": 1
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "The name of the organization",
+          "order": 2
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "user_rbac_role": {
+      "type": "object",
+      "title": "user_rbac_role",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "title": "Role ID",
+          "description": "The role identifier",
+          "order": 1
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "The name of the role",
+          "order": 2
+        },
+        "organization_id": {
+          "type": "integer",
+          "title": "Organization ID",
+          "description": "The organization identifier of the user role",
+          "order": 3
+        }
+      },
+      "required": [
+        "id",
+        "organization_id"
       ]
     }
   }

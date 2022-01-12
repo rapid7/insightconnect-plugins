@@ -73,7 +73,7 @@ class GetDeviceByHostnameOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Device Name",
           "description": "The device name",
-          "order": 5
+          "order": 4
         },
         "organization_id": {
           "type": "integer",
@@ -86,20 +86,13 @@ class GetDeviceByHostnameOutput(insightconnect_plugin_runtime.Output):
           "title": "Server Group ID",
           "description": "The server group identifier of the device",
           "order": 2
-        },
-        "uuid": {
-          "type": "string",
-          "title": "Device UUID",
-          "description": "The device unique identifier",
-          "order": 4
         }
       },
       "required": [
         "id",
         "name",
         "organization_id",
-        "server_group_id",
-        "uuid"
+        "server_group_id"
       ]
     }
   }

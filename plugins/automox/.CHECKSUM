@@ -1,7 +1,7 @@
 {
-	"spec": "9f81ac7541a3410452b77bd40d4efd48",
-	"manifest": "745c2159ce7ebcc40426be5f7a74683e",
-	"setup": "17cf3b48ae42eb31f045a39ead237b0b",
+	"spec": "a6f98d5fa4bdf6149ac1ab7dec5643c6",
+	"manifest": "cb317bddbf81757e6cefd84ee43e28bd",
+	"setup": "99ad065fc340bac4d8c394f98c761bfe",
 	"schemas": [
 		{
 			"identifier": "action_on_vulnerability_sync_batch/schema.py",
@@ -25,23 +25,23 @@
 		},
 		{
 			"identifier": "get_device_by_hostname/schema.py",
-			"hash": "1907809ed3076d5fbd7240bbeb6cf2e3"
+			"hash": "29b14642627a67e5a9f6fc7c910497b7"
 		},
 		{
 			"identifier": "get_device_by_ip/schema.py",
-			"hash": "d3d20cc31f52e317acfae967958238f6"
+			"hash": "54cf619db589dbdbe2a84f0b25862936"
 		},
 		{
 			"identifier": "get_device_software/schema.py",
-			"hash": "8cef0f3348f960bbc8ededd056b5f442"
+			"hash": "c2cffdf8c41bd14ac6463c1084186232"
 		},
 		{
 			"identifier": "get_vulnerability_sync_batch/schema.py",
-			"hash": "1eca02a3ca1faf189b0dbdd92bc6debe"
+			"hash": "f63597234dd74c161a18716a21076c19"
 		},
 		{
 			"identifier": "list_devices/schema.py",
-			"hash": "edf5d9cd1de05334a449604807e805d5"
+			"hash": "1dbc8e0b40ef1e76f2e4d730afca66c0"
 		},
 		{
 			"identifier": "list_groups/schema.py",
@@ -49,7 +49,7 @@
 		},
 		{
 			"identifier": "list_organization_users/schema.py",
-			"hash": "caef6ce6774ccb03f2d6120f0fc6d531"
+			"hash": "29e203b2b3ee3b830270c31f18bba337"
 		},
 		{
 			"identifier": "list_organizations/schema.py",
@@ -57,19 +57,19 @@
 		},
 		{
 			"identifier": "list_policies/schema.py",
-			"hash": "559e738f1bdaf1a7603c345bbd40a71b"
+			"hash": "b8d3145226dcf46c7cf14ef0d71e78cd"
 		},
 		{
 			"identifier": "list_vulnerability_sync_batches/schema.py",
-			"hash": "8941c0ed2fbc3373fc477f35a8b91887"
+			"hash": "98582d0739dcc2ea77dfa0552700c7f8"
 		},
 		{
 			"identifier": "list_vulnerability_sync_tasks/schema.py",
-			"hash": "9ec32645a4b22351d261ff48594a1eea"
+			"hash": "7116ab7ce06edbeb6fbacd29b8e91700"
 		},
 		{
 			"identifier": "run_command/schema.py",
-			"hash": "084ea25c98e13a7227d3aec2130c3ab2"
+			"hash": "1cce5f40a126c5cd5d48a3174e6fe469"
 		},
 		{
 			"identifier": "update_device/schema.py",
@@ -85,11 +85,11 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "2c5f85e9e42316acd2c414cec235484f"
+			"hash": "157c1e850bcde539eb34b4a19d79f79e"
 		},
 		{
 			"identifier": "get_events/schema.py",
-			"hash": "76a461819667b14d8a8c276d04bf42ef"
+			"hash": "021ed8e2f42aa694d9cd9f1df37ae8b2"
 		}
 	]
 }

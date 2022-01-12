@@ -3,9 +3,9 @@ extension: plugin
 products: [insightconnect]
 name: automox
 title: Automox
-description: Automox is Modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment
+description: Automox is modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment
 version: 1.0.0
-supported_versions: ["All"]
+supported_versions: ["All as of 12/17/2021"]
 vendor: automox
 support: partner
 status: []
@@ -57,7 +57,34 @@ types:
       description: The organization device count
       type: integer
       required: false
-  users:
+  user_org:
+    id:
+      title: Organization ID
+      description: The organization identifier of the user
+      type: integer
+      required: true
+    name:
+      title: Name
+      description: The name of the organization
+      type: string
+      required: false
+  user_rbac_role:
+    id:
+      title: Role ID
+      description: The role identifier
+      type: integer
+      required: true
+    name:
+      title: Name
+      description: The name of the role
+      type: string
+      required: false
+    organization_id:
+      title: Organization ID
+      description: The organization identifier of the user role
+      type: integer
+      required: true
+  user:
     id:
       title: User ID
       description: The user identifier
@@ -86,7 +113,7 @@ types:
     orgs:
       title: Organizations
       description: The organizations for which the user has access
-      type: "[]object"
+      type: "[]user_org"
       required: false
     tags:
       title: Tags
@@ -101,7 +128,7 @@ types:
     rbac_roles:
       title: Roles
       description: The roles assigned to the user
-      type: "[]object"
+      type: "[]user_rbac_role"
       required: false
   device:
     id:
@@ -119,16 +146,107 @@ types:
       description: The organization identifier of the device
       type: integer
       required: true
-    uuid:
-      title: Device UUID
-      description: The device unique identifier
-      type: string
-      required: true
     name:
       title: Device Name
       description: The device name
       type: string
       required: true
+  device_software:
+    id:
+      title: Software ID
+      description: The software ID
+      type: integer
+      required: true
+    server_id:
+      title: Device ID
+      description: The device identifier for where the software exists
+      type: integer
+      required: true
+    package_id:
+      title: Package ID
+      description: The software package ID
+      type: integer
+      required: true
+    software_id:
+      title: Software ID
+      description: The software ID
+      type: integer
+      required: true
+    installed:
+      title: Installed Status
+      description: Whether the software package is installed on the device
+      type: boolean
+      required: false
+    ignored:
+      title: Ignored Status
+      description: Whether the software package is ignored on the device
+      type: boolean
+      required: false
+    deferred_until:
+      title: Deferred Until
+      description: The datetime for when the software package was deferred for installation
+      type: string
+      required: false
+    name:
+      title: Software Name
+      description: The name of the software package
+      type: string
+      required: true
+    display_name:
+      title: Software Display Name
+      description: The display name of the software package
+      type: string
+      required: false
+    version:
+      title: Version
+      description: The version of the software package
+      type: string
+      required: false
+    cves:
+      title: CVEs
+      description: List of CVEs associated to software package
+      type: "[]string"
+      required: false
+    cve_score:
+      title: CVE Score
+      description: The CVE score assosicated with the software package
+      type: string
+      required: false
+    severity:
+      title: Severity
+      description: The severity associated with the software package
+      type: string
+      required: false
+    os_name:
+      title: Operating System Name
+      description: The operating system associated with the software package
+      type: string
+      required: false
+    os_version:
+      title: Operating System Version
+      description: The operating system version associated with the software package
+      type: string
+      required: false
+    create_time:
+      title: Creation Time
+      description: The time when the software package was known
+      type: string
+      required: false
+    requires_reboot:
+      title: Requires Reboot
+      description: Whether the device requires reboot for the software package to be installed
+      type: boolean
+      required: false
+    is_uninstallable:
+      title: Is Uninstallable
+      description: Whether the software package can be uninstalled
+      type: boolean
+      required: false
+    organization_id:
+      title: Organization ID
+      description: The organization identifier of the software package
+      type: integer
+      required: false
   policy:
     id:
       title: Policy ID
@@ -156,8 +274,8 @@ types:
       type: object
       required: false
     server_groups:
-      title: Device Groups
-      description: List of device groups assigned policy
+      title: Device Group IDs
+      description: List of identifiers for device groups assigned to the policy
       type: "[]integer"
       required: false
   group:
@@ -254,7 +372,7 @@ types:
       required: false
     policy_name:
       title: Policy Name
-      description: Name of policydentifier of user
+      description: Name of policy
       type: string
       required: false
     policy_type_name:
@@ -265,6 +383,27 @@ types:
     create_time:
       title: Creation Time
       description: Creation time of event
+      type: string
+      required: false
+  batch_user:
+    id:
+      title: User ID
+      description: The user identifier
+      type: integer
+      required: true
+    firstname:
+      title: First Name
+      description: The first name of the user
+      type: string
+      required: false
+    lastname:
+      title: Last Name
+      description: The last name of the user
+      type: string
+      required: false
+    email:
+      title: Email
+      description: The email of the user
       type: string
       required: false
   batch:
@@ -291,12 +430,12 @@ types:
     created_by:
       title: Created By
       description: Batch creation details
-      type: object
+      type: batch_user
       required: false
     updated_by:
       title: Updated By
       description: Batch update details
-      type: object
+      type: batch_user
       required: false
     uploaded_at:
       title: Uploaded At
@@ -328,6 +467,48 @@ types:
       description: Number of CVEs that are impacted by batch
       type: integer
       required: false
+  task_payload_package_versions:
+    id:
+      title: Package ID
+      description: The package identifier associated to the task
+      type: string
+      required: true
+    name:
+      title: Name
+      description: The name of the package associated to the task
+      type: string
+      required: false
+    version:
+      title: Version
+      description: The version of the package associated to the task
+      type: string
+      required: false
+    display_name:
+      title: Display Name
+      description: The display name of the package associated to the task
+      type: string
+      required: false
+    requires_reboot:
+      title: Requires Reboot
+      description: Whether the package installed by the task will require reboot
+      type: boolean
+      required: false
+  task_payload:
+    patch_id:
+      title: Patch ID
+      description: The patch identifier associated to the task
+      type: string
+      required: false
+    severity:
+      title: Severity
+      description: The severity of the patch associated to the task
+      type: string
+      required: false
+    package_versions:
+      title: Package Versions
+      description: The version of the packages within scope of the task
+      type: "[]task_payload_package_versions"
+      required: false
   task:
     id:
       title: Task ID
@@ -347,7 +528,7 @@ types:
     payload:
       title: Payload
       description: Payload associated with task
-      type: object
+      type: task_payload
       required: false
     source:
       title: Task Source
@@ -365,28 +546,28 @@ types:
       type: string
       required: false
     created_by_user:
-      title: Created By User
+      title: Created by User
       description: Task creation details
-      type: object
+      type: batch_user
       required: false
     last_updated_by_user:
-      title: Updated By User
+      title: Updated by User
       description: Task update details
-      type: object
+      type: batch_user
       required: false
     created_at:
       title: Created At
-      description: Datetime the task was created
+      description: The datetime the task was created
       type: string
       required: false
     updated_at:
       title: Updated At
-      description: Datetime the task was updated
+      description: The datetime the task was updated
       type: string
       required: false
     completed_at:
       title: Completed At
-      description: Datetime the task was completed
+      description: The datetime the task was completed
       type: string
       required: false
     cves:
@@ -399,7 +580,7 @@ connection:
   api_key:
     title: API Key
     type: credential_secret_key
-    description: Enter organization API key
+    description: Organization API key
     required: true
     example: abc12345-abc1-2345-abc1-abc123456789
 
@@ -419,7 +600,7 @@ actions:
     input:
       org_id:
         title: Organization ID
-        description: Identifier of Organization
+        description: Identifier of organization
         type: integer
         required: true
         example: 1234
@@ -427,7 +608,7 @@ actions:
       users:
         title: Users
         description: List of Automox users
-        type: "[]users"
+        type: "[]user"
         required: false
   list_policies:
     title: List Policies
@@ -457,7 +638,7 @@ actions:
         example: 1234
       group_id:
         title: Group ID
-        description: Identifier of Server Group
+        description: Identifier of server group
         type: integer
         required: false
         example: 1234
@@ -600,7 +781,7 @@ actions:
       software:
         title: Device Software
         description: List of software on device
-        type: "[]object"
+        type: "[]device_software"
         required: false
   run_command:
     title: Run Device Command
@@ -619,8 +800,8 @@ actions:
         required: true
         example: 1234
       command:
-        title: Device ID
-        description: Identifier of device
+        title: Command
+        description: Command to run on device
         type: string
         enum:
         - "GetOS"

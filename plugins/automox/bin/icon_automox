@@ -7,7 +7,7 @@ from sys import argv
 Name = "Automox"
 Vendor = "automox"
 Version = "1.0.0"
-Description = "Automox is Modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment"
+Description = "Automox is modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment"
 
 
 def main():

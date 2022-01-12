@@ -88,8 +88,8 @@ class ListPoliciesOutput(insightconnect_plugin_runtime.Output):
         },
         "server_groups": {
           "type": "array",
-          "title": "Device Groups",
-          "description": "List of device groups assigned policy",
+          "title": "Device Group IDs",
+          "description": "List of identifiers for device groups assigned to the policy",
           "items": {
             "type": "integer"
           },

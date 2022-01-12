@@ -18,7 +18,7 @@ class CreateGroup(insightconnect_plugin_runtime.Action):
         payload = {
             "name": params.get(Input.NAME),
             "refresh_interval": params.get(Input.REFRESH_INTERVAL, 1440),
-            "parent_server_group_id": params.get(Input.PARENT_SERVER_GROUP_ID, default_server_group_id),
+            "parent_server_group_id": params.get(Input.PARENT_SERVER_GROUP_ID) or default_server_group_id,
             "ui_color": params.get(Input.COLOR),
             "notes": params.get(Input.NOTES),
             "policies": params.get(Input.POLICIES)
