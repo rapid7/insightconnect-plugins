@@ -104,7 +104,7 @@ This action is used to upload CSV file to vulnerability sync for processing.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |csv_file|bytes|None|True|Base64 encoded CSV data from which to create the vulnerability sync batch|None|PGgxPlJhcGlkNzwvaDE+|
-|csv_file_name|string|https://example.com|False|Name for CSV file uploaded and shown within Automox|None|https://example.com|
+|csv_file_name|string|insightconnect-uploaded-report.csv|False|Name for CSV file uploaded and shown within Automox|None|insightconnect-uploaded-report.csv|
 |org_id|integer|None|True|Identifier of organization|None|1234|
 
 Example input:
@@ -764,7 +764,7 @@ This action is used to find an Automox device by IP address.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|ip_address|string|None|True|IP address of device|None|https://example.com|
+|ip_address|string|None|True|IP address of device|None|192.168.0.1|
 |org_id|integer|None|False|Identifier of organization to restrict results|None|1234|
 
 Example input:
@@ -1170,7 +1170,7 @@ This trigger is used to retrieve Automox events to trigger workflows.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|event_type|string|None|True|Name of event type to be retrieved (list of event types found at https://developer.automox.com/openapi/axconsole/operation/getEvents/#!in=query&path=eventName&t=request)|None|https://example.com|
+|event_type|string|None|True|Name of event type to be retrieved (list of event types found at https://developer.automox.com/openapi/axconsole/operation/getEvents/#!in=query&path=eventName&t=request)|None|user.login|
 |org_id|integer|None|False|Identifier of organization to restrict results|None|1234|
 
 Example input:
