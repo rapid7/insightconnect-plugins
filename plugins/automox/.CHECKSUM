@@ -1,5 +1,5 @@
 {
-	"spec": "534313e4011033cd3ebf101f8a4f088a",
+	"spec": "41aa64f866cd208ebb8bfcf8559d6eff",
 	"manifest": "cb317bddbf81757e6cefd84ee43e28bd",
 	"setup": "99ad065fc340bac4d8c394f98c761bfe",
 	"schemas": [
@@ -25,11 +25,11 @@
 		},
 		{
 			"identifier": "get_device_by_hostname/schema.py",
-			"hash": "29b14642627a67e5a9f6fc7c910497b7"
+			"hash": "ff0e51a8b826bc90dbb25b9032d7bae1"
 		},
 		{
 			"identifier": "get_device_by_ip/schema.py",
-			"hash": "54cf619db589dbdbe2a84f0b25862936"
+			"hash": "22d9f6e135b6b4028d6807cc3629cf9e"
 		},
 		{
 			"identifier": "get_device_software/schema.py",
@@ -41,7 +41,7 @@
 		},
 		{
 			"identifier": "list_devices/schema.py",
-			"hash": "1dbc8e0b40ef1e76f2e4d730afca66c0"
+			"hash": "30c56c0c7d76dfae3c58d65dfa5fc7f9"
 		},
 		{
 			"identifier": "list_groups/schema.py",

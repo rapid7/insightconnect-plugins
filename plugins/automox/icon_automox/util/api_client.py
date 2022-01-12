@@ -149,10 +149,10 @@ class ApiClient:
                 for attr in attributes:
                     if type(device[attr]) is str:
                         if device[attr].casefold() == value.casefold():
-                            return device
+                            return self.remove_null_values(device)
                     if type(device[attr]) is list:
                         if value.lower() in (v.upper() for v in device[attr]):
-                            return device
+                            return self.remove_null_values(device)
 
             if len(devices) < self.PAGE_SIZE:
                 break

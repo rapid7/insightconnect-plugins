@@ -130,6 +130,38 @@ types:
       description: The roles assigned to the user
       type: "[]user_rbac_role"
       required: false
+  device_policy_status:
+    id:
+      title: Policy ID
+      description: The identifier of the policy
+      type: integer
+      required: false
+    compliant:
+      title: Compliant
+      description: Whether a device is compliant to given status
+      type: boolean
+      required: false
+  device_status_details:
+    device_status:
+      title: Device Status
+      description: The status of a device
+      type: string
+      required: false
+    agent_status:
+      title: Agent Status
+      description: The status of a device agent
+      type: string
+      required: false
+    policy_status:
+      title: Policy Status
+      description: The overall status of all policies assigned to a device
+      type: string
+      required: false
+    policy_statuses:
+      title: Policy Statuses
+      description: A list of policy statuses with compliant details
+      type: "[]device_policy_status"
+      required: false
   device:
     id:
       title: Device ID
@@ -138,12 +170,12 @@ types:
       required: true
     server_group_id:
       title: Server Group ID
-      description: The server group identifier of the device
+      description: The server group identifier of a device
       type: integer
       required: true 
     organization_id:
       title: Organization ID
-      description: The organization identifier of the device
+      description: The organization identifier of a device
       type: integer
       required: true
     name:
@@ -151,6 +183,166 @@ types:
       description: The device name
       type: string
       required: true
+    last_update_time:
+      title: Last Update Time
+      description: The last time a device was updated in the Automox platform
+      type: string
+      required: false
+    last_refresh_time:
+      title: Last Refresh Time
+      description: The last time a device was refreshed
+      type: string
+      required: false
+    needs_reboot:
+      title: Needs Reboot
+      description: Whether a device needs rebooted
+      type: boolean
+      required: false
+    tags:
+      title: Tags
+      description: List of tags
+      type: "[]string"
+      required: false
+    deleted:
+      title: Deleted
+      description: Whether a device is deleted
+      type: boolean
+      required: false
+    create_time:
+      title: Create Time
+      description: The time a device was created in the Automox platform
+      type: string
+      required: false
+    os_version:
+      title: Operating System Version
+      description: The operating system version of a device
+      type: string
+      required: false
+    os_name:
+      title: Operating System
+      description: The name of the operating system of a device
+      type: string
+      required: false
+    os_family:
+      title: Operating System Family
+      description: The operating system family of a device
+      type: string
+      required: false
+    ip_addrs:
+      title: IP Addresses
+      description: List of IP addresses for a device
+      type: "[]string"
+      required: false
+    ip_addrs_private:
+      title: Private IP Addresses
+      description: List of private IP addresses for a device
+      type: "[]string"
+      required: false
+    patches:
+      title: Patches
+      description: The number of patches currently identified for a device
+      type: integer
+      required: false
+    details:
+      title: Details
+      description: Additional details of a device
+      type: object
+      required: false
+    agent_version:
+      title: Agent Version
+      description: The agent version of a device
+      type: string
+      required: false
+    custom_name:
+      title: Custom Name
+      description: The custom name of a device
+      type: string
+      required: false
+    is_compatible:
+      title: Is Compatible
+      description: Whether a device is compatible with the Automox platform
+      type: boolean
+      required: false
+    last_scan_failed:
+      title: Last Scan Failed
+      description: Whether the last scan failed on a device
+      type: boolean
+      required: false
+    pending:
+      title: Pending
+      description: Whether work is pending on a device
+      type: boolean
+      required: false
+    compliant:
+      title: Compliant
+      description: Whether a device is compliant
+      type: boolean
+      required: false
+    display_name:
+      title: Display Name
+      description: The display name of a device
+      type: string
+      required: false
+    pending_patches:
+      title: Pending Patches
+      description: The number of pending patches for a device
+      type: integer
+      required: false
+    connected:
+      title: Connected
+      description: Whether a device is currently connected to the Automox platform
+      type: boolean
+      required: false
+    next_patch_time:
+      title: Next Patch Time
+      description: The time for the next device patch
+      type: string
+      required: false
+    is_delayed_by_notification:
+      title: Is Delayed by Notification
+      description: Whether patching is delayed by a device notificiation
+      type: boolean
+      required: false
+    reboot_is_delayed_by_notification:
+      title: Reboot Is Delayed By Notification
+      description: Whether rebooting is delayed by a device notification
+      type: boolean
+      required: false
+    is_delayed_by_user:
+      title: Is Delayed By User
+      description: Whether patching is delayed by a user
+      type: boolean
+      required: false
+    reboot_is_delayed_by_user:
+      title: Reboot Is Delayed By User
+      description: Whether rebooting is delayed by a user
+      type: boolean
+      required: false
+    last_disconnect_time:
+      title: Last Disconnect Time
+      description: The last time a device disconnected from the Automox platform
+      type: string
+      required: false
+    needs_attention:
+      title: Needs Attention
+      description: Whether a device currently needs attention
+      type: boolean
+      required: false
+    serial_number:
+      title: Serial Number
+      description: The serial number of a device
+      type: string
+      required: false
+    status:
+      title: Status
+      description: The device status details
+      type: "device_status_details"
+      required: false
+    last_logged_in_user:
+      title: Last Logged In User
+      description: The last logged in user of a device
+      type: string
+      required: false
   device_software:
     id:
       title: Software ID
