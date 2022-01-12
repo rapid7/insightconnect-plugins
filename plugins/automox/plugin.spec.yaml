@@ -817,7 +817,7 @@ actions:
         description: "List of patches to be installed (Note: this only works with the InstallUpdate command)"
         type: "[]string"
         required: false
-        example: [""]
+        example: ["Security Update (KB4549947)"]
       policy_id:
         title: Policy ID
         description: Identifier of policy

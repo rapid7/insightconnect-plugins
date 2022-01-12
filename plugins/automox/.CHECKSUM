@@ -1,5 +1,5 @@
 {
-	"spec": "3f758fbe16fef6899ff6f43c14c179c9",
+	"spec": "534313e4011033cd3ebf101f8a4f088a",
 	"manifest": "cb317bddbf81757e6cefd84ee43e28bd",
 	"setup": "99ad065fc340bac4d8c394f98c761bfe",
 	"schemas": [
@@ -9,11 +9,11 @@
 		},
 		{
 			"identifier": "action_on_vulnerability_sync_task/schema.py",
-			"hash": "4f9f6dfc54d432cf629bdc32a7c2cc84"
+			"hash": "52c436eab10c0aeaa9a45b9c9401a4d3"
 		},
 		{
 			"identifier": "create_group/schema.py",
-			"hash": "6c76ed361d8ae04499f5098b98ebe5b8"
+			"hash": "4a2526ea0e909e915b6a75cdb7067b16"
 		},
 		{
 			"identifier": "delete_device/schema.py",
@@ -77,11 +77,11 @@
 		},
 		{
 			"identifier": "update_group/schema.py",
-			"hash": "7ccb141e3a1bcdf3623aa09b512aae3d"
+			"hash": "756eeadbf6f4e9f3fdade1a2c509c32b"
 		},
 		{
 			"identifier": "upload_vulnerability_sync_file/schema.py",
-			"hash": "fb274f15868d4550e9de00a768284f0c"
+			"hash": "864896cb4256dcf8091f4db38e9782c9"
 		},
 		{
 			"identifier": "connection/schema.py",
@@ -89,7 +89,7 @@
 		},
 		{
 			"identifier": "get_events/schema.py",
-			"hash": "021ed8e2f42aa694d9cd9f1df37ae8b2"
+			"hash": "cdb877b9a9c4db1c9a42bc9296aa2b34"
 		}
 	]
 }

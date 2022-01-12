@@ -61,7 +61,7 @@ class UpdateGroupInput(insightconnect_plugin_runtime.Input):
     "parent_server_group_id": {
       "type": "integer",
       "title": "Parent Server Group ID",
-      "description": "Name of the parent group (Will be set to Default Group ID if not set)",
+      "description": "Name of the parent group. Defaults to Default Group ID if omitted",
       "order": 5
     },
     "policies": {

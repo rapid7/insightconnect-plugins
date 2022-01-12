@@ -55,7 +55,7 @@ class CreateGroupInput(insightconnect_plugin_runtime.Input):
     "parent_server_group_id": {
       "type": "integer",
       "title": "Parent Server Group ID",
-      "description": "Name of the parent group (Will be set to Default Group ID if not set)",
+      "description": "Name of the parent group. Defaults to Default Group ID if this is omitted",
       "order": 4
     },
     "policies": {
@@ -95,7 +95,7 @@ class CreateGroupOutput(insightconnect_plugin_runtime.Output):
     "group": {
       "$ref": "#/definitions/group",
       "title": "Group",
-      "description": "Detailed infromation about the created group",
+      "description": "Detailed information about the created group",
       "order": 2
     },
     "success": {

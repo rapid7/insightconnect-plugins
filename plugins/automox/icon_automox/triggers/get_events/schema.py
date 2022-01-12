@@ -27,7 +27,7 @@ class GetEventsInput(insightconnect_plugin_runtime.Input):
     "event_type": {
       "type": "string",
       "title": "Event Type",
-      "description": "Name of event type to be retrieved (List of event types found at https://developer.automox.com/openapi/axconsole/operation/getEvents/)",
+      "description": "Name of event type to be retrieved (list of event types found at https://developer.automox.com/openapi/axconsole/operation/getEvents/#!in=query\\u0026path=eventName\\u0026t=request)",
       "order": 2
     },
     "org_id": {
