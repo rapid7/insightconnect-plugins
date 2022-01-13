@@ -11,9 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: dump variables
         shell: bash
         run:
           env
+
+      - name: check github base ref
+        shell: bash
+        run:
           echo $GITHUB_BASE_REF
