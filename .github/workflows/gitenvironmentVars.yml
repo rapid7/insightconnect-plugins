@@ -16,7 +16,10 @@ jobs:
         run:
           env
 
-      - name: check github base ref
-        shell: bash
-        run:
-          echo $GITHUB_BASE_REF
+      - name: Dump GitHub context
+        env:
+            GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - name: Github context
+        run: echo ${{ github.event.pull_request.base.ref }}
