@@ -11,22 +11,13 @@
 
 * A Devo authentication token
 
+# Supported Product Versions
+
+* v7.8.0
+
 # Documentation
 
 ## Setup
-
-To use the Devo plugin, you will need to create an authentication token. 
-
-1. In Devo go to the left nav and choose Administration > Credentials
-2. From the credentials screen, choose Authentication Tokens from the top tabs
-3. Click 'CREATE NEW TOKEN'
-
-The Devo authentication token must have access to the tables you are building your query for. In addition, if you are using the alert trigger, the access token will need access to: 
-`siem.logtrust.alert.info`.
-
-For testing purposes, to give access to all tables, use `*.*.**`. This is not recommended for final production use, but can be used to rule out access errors when configuring the plugin for the first time.  
-
-[Authentication Token Documentation](https://docs.devo.com/confluence/ndt/latest/domain-administration/security-credentials/authentication-tokens) 
 
 The connection configuration accepts the following parameters:
 
@@ -112,7 +103,17 @@ This trigger is used to get new alerts.
 
 ##### Input
 
-_This trigger does not contain any inputs._
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|interval|integer|10|False|Interval time in seconds|None|5|
+
+Example input:
+
+```
+{
+  "interval": 5
+}
+```
 
 ##### Output
 
@@ -154,6 +155,7 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
+* 2.0.0 - Configuration for interval input parameter
 * 1.0.0 - Initial plugin
 
 # Links

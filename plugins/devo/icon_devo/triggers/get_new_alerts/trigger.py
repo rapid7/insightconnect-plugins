@@ -16,7 +16,7 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
         )
 
     def run(self, params={}):
-        interval = params.get("interval", 10)
+        interval = params.get(Input.INTERVAL, 10)
         now = datetime.datetime.now()
 
         while True:
