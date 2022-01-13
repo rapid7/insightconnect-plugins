@@ -327,8 +327,9 @@ Example input:
 ```
 {
   "fields": "id",
-  "note_id": 100,
-  "offense_id": 100
+  "filter": "id=100",
+  "offense_id": 100,
+  "range": "1-2"
 }
 ```
 
