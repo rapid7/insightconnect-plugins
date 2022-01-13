@@ -22,4 +22,6 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
 
       - name: Github context
-        run: echo ${{ github.event.pull_request.base.ref }}
+        env:
+            TARGET_BRANCH: ${{github.event.pull_request.base.ref}}
+        run: echo "$TARGET_BRANCH"
