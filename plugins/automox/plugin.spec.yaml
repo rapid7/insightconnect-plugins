@@ -401,7 +401,7 @@ types:
       required: false
     cve_score:
       title: CVE Score
-      description: The CVE score assosicated with the software package
+      description: The CVE score associated with the software package
       type: string
       required: false
     severity:
@@ -662,22 +662,22 @@ types:
   task_payload_package_versions:
     id:
       title: Package ID
-      description: The package identifier associated to the task
+      description: The package identifier associated with the task
       type: string
       required: true
     name:
       title: Name
-      description: The name of the package associated to the task
+      description: The name of the package associated with the task
       type: string
       required: false
     version:
       title: Version
-      description: The version of the package associated to the task
+      description: The version of the package associated with the task
       type: string
       required: false
     display_name:
       title: Display Name
-      description: The display name of the package associated to the task
+      description: The display name of the package associated with the task
       type: string
       required: false
     requires_reboot:
@@ -688,12 +688,12 @@ types:
   task_payload:
     patch_id:
       title: Patch ID
-      description: The patch identifier associated to the task
+      description: The patch identifier associated with the task
       type: string
       required: false
     severity:
       title: Severity
-      description: The severity of the patch associated to the task
+      description: The severity of the patch associated with the task
       type: string
       required: false
     package_versions:
