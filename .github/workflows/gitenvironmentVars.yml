@@ -22,4 +22,7 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
 
       - name: Github context
-        run: echo $github.base_ref
+        run:
+          echo github.event.pull_request.base.ref
+          echo ${ github.event.pull_request.base.ref }
+          echo ${{ github.event.pull_request.base.ref }}
