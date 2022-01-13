@@ -23,6 +23,4 @@ jobs:
 
       - name: Github context
         run:
-          echo github.event.pull_request.base.ref
-          echo $github.event.pull_request.base.ref
-#          echo ${{ github.event.pull_request.base.ref }}
+          echo "$GITHUB_EVENT_PATH"
