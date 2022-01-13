@@ -20,15 +20,4 @@ jobs:
         env:
             GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
-
-      - name: Github context
-        run:
-          if github.base_ref == "develop"; then
-              echo "In develop"
-          elif github.base_ref == "master"; then
-              echo "In master"
-          elif github.base_ref == ""; then
-              echo "empty"
-          else
-              echo "into the unknown"
-          fi
+             echo "Base ref $github.base_ref"
