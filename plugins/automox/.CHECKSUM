@@ -1,5 +1,5 @@
 {
-	"spec": "41aa64f866cd208ebb8bfcf8559d6eff",
+	"spec": "2134da30e0e335bffb8a02f764e54d5d",
 	"manifest": "cb317bddbf81757e6cefd84ee43e28bd",
 	"setup": "99ad065fc340bac4d8c394f98c761bfe",
 	"schemas": [
@@ -33,7 +33,7 @@
 		},
 		{
 			"identifier": "get_device_software/schema.py",
-			"hash": "d2af21490f7d51e52a2b3bb68fdedbae"
+			"hash": "42d9b8777f46e6709a38cf4faf40633c"
 		},
 		{
 			"identifier": "get_vulnerability_sync_batch/schema.py",
@@ -65,7 +65,7 @@
 		},
 		{
 			"identifier": "list_vulnerability_sync_tasks/schema.py",
-			"hash": "7116ab7ce06edbeb6fbacd29b8e91700"
+			"hash": "1ae547513f254ac840a5e5a1542e07b6"
 		},
 		{
 			"identifier": "run_command/schema.py",

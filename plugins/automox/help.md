@@ -1074,6 +1074,9 @@ This action is used to retrieve Automox policies.
 Example input:
 
 ```
+{
+  "org_id": 1234
+}
 ```
 
 ##### Output

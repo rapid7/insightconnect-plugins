@@ -75,7 +75,7 @@ class GetDeviceSoftwareOutput(insightconnect_plugin_runtime.Output):
         "cve_score": {
           "type": "string",
           "title": "CVE Score",
-          "description": "The CVE score assosicated with the software package",
+          "description": "The CVE score associated with the software package",
           "order": 12
         },
         "cves": {
