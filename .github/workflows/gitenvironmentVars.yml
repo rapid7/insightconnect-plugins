@@ -23,4 +23,8 @@ jobs:
 
       - name: Github context
         run:
-          echo "$GITHUB_BASE_REF"
+          if github.base_ref == "develop"; then
+              echo "In develop"
+          else
+              echo "into the unknown
+          fi
