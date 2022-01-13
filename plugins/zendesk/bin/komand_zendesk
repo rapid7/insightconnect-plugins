@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
+    import insightconnect_plugin_runtime
     from komand_zendesk import connection, actions, triggers
 
-    class ICONZendesk(komand.Plugin):
+    class ICONZendesk(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -54,7 +54,7 @@ def main():
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONZendesk())
+    cli = insightconnect_plugin_runtime.CLI(ICONZendesk())
     cli.run()
 
 

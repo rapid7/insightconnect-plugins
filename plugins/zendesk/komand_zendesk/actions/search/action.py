@@ -1,19 +1,19 @@
-import komand
-from .schema import SearchInput, SearchOutput, Output
+import insightconnect_plugin_runtime
+from .schema import SearchInput, SearchOutput, Output, Input
 
 # Custom imports below
 from typing import Optional
 
 
-class Search(komand.Action):
+class Search(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="search", description="Search Zendesk", input=SearchInput(), output=SearchOutput()
         )
 
     def run(self, params={}):
-        s_type = params.get("type")
-        results = self.connection.client.search(params.get("item"), type=params.get("type").lower())
+        s_type = params.get(Input.TYPE)
+        results = self.connection.client.search(params.get(Input.ITEM), type=params.get(Input.TYPE).lower())
         objs = []
         if len(results) == 0:
             return {"error": "Could not find item"}
@@ -23,9 +23,9 @@ class Search(komand.Action):
                 organization_obj = {
                     "created_at": item.created_at,
                     "details": item.details,
-                    "external_id": self.convert_to_string(item.external_id),
-                    "group_id": self.convert_to_string(item.group_id),
-                    "id": self.convert_to_string(item.id),
+                    "external_id": item.external_id,
+                    "group_id": item.group_id,
+                    "id": item.id,
                     "name": item.name,
                     "notes": item.notes,
                     "shared_comments": item.shared_comments,
@@ -38,27 +38,27 @@ class Search(komand.Action):
 
             if s_type == "Ticket" and results is not None:
                 ticket_obj = {
-                    "assignee_id": self.convert_to_string(item.assignee_id),
-                    "brand_id": self.convert_to_string(item.brand_id),
-                    "collaborator_ids": self.convert_array(item.collaborator_ids),
+                    "assignee_id": item.assignee_id,
+                    "brand_id": item.brand_id,
+                    "collaborator_ids": item.collaborator_ids,
                     "created_at": item.created_at,
                     "description": item.description,
                     "due_at": item.due_at,
-                    "external_id": self.convert_to_string(item.external_id),
-                    "forum_topic_id": self.convert_to_string(item.forum_topic_id),
-                    "group_id": self.convert_to_string(item.group_id),
+                    "external_id": item.external_id,
+                    "forum_topic_id": item.forum_topic_id,
+                    "group_id": item.group_id,
                     "has_incidents": item.has_incidents,
                     "id": item.id,
-                    "organization_id": self.convert_to_string(item.organization_id),
+                    "organization_id": item.organization_id,
                     "priority": item.priority,
-                    "problem_id": self.convert_to_string(item.problem_id),
+                    "problem_id": item.problem_id,
                     "raw_subject": item.raw_subject,
-                    "recipient": self.convert_to_string(item.recipient),
-                    "requester_id": self.convert_to_string(item.requester_id),
-                    "sharing_agreement_ids": self.convert_array(item.sharing_agreement_ids),
+                    "recipient": item.recipient,
+                    "requester_id": item.requester_id,
+                    "sharing_agreement_ids": item.sharing_agreement_ids,
                     "status": item.status,
                     "subject": item.subject,
-                    "submitter_id": self.convert_to_string(item.submitter_id),
+                    "submitter_id": item.submitter_id,
                     "tags": item.tags,
                     "type": item.type,
                     "updated_at": item.updated_at,
@@ -72,11 +72,11 @@ class Search(komand.Action):
                     "alias": item.alias,
                     "chat_only": item.chat_only,
                     "created_at": item.created_at,
-                    "custom_role_id": self.convert_to_string(item.custom_role_id),
+                    "custom_role_id": item.custom_role_id,
                     "details": item.details,
                     "email": item.email,
-                    "external_id": self.convert_to_string(item.external_id),
-                    "id": self.convert_to_string(item.id),
+                    "external_id": item.external_id,
+                    "id": item.id,
                     "last_login_at": item.last_login_at,
                     "locale": item.locale,
                     "locale_id": item.locale_id,
@@ -84,7 +84,7 @@ class Search(komand.Action):
                     "name": item.name,
                     "notes": item.notes,
                     "only_private_comments": item.only_private_comments,
-                    "organization_id": self.convert_to_string(item.organization_id),
+                    "organization_id": item.organization_id,
                     "phone": item.phone,
                     "photo": item.photo,
                     "restricted_agent": item.restricted_agent,
@@ -103,11 +103,11 @@ class Search(komand.Action):
                 }
                 objs.append(user_obj)
             if s_type == "Organization":
-                return {Output.ORGANIZATIONS: komand.helper.clean(objs)}
+                return {Output.ORGANIZATIONS: insightconnect_plugin_runtime.helper.clean(objs)}
             elif s_type == "Ticket":
-                return {Output.TICKETS: komand.helper.clean(objs)}
+                return {Output.TICKETS: insightconnect_plugin_runtime.helper.clean(objs)}
             else:
-                return {Output.USERS: komand.helper.clean(objs)}
+                return {Output.USERS: insightconnect_plugin_runtime.helper.clean(objs)}
 
     @staticmethod
     def convert_to_string(values: Optional[int]) -> Optional[str]:

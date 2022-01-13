@@ -1,11 +1,11 @@
-import komand
-from .schema import UpdateTicketInput, UpdateTicketOutput
+import insightconnect_plugin_runtime
+from .schema import UpdateTicketInput, UpdateTicketOutput, Input, Output
 
 # Custom imports below
 import datetime
 
 
-class UpdateTicket(komand.Action):
+class UpdateTicket(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="update_ticket",
@@ -17,36 +17,50 @@ class UpdateTicket(komand.Action):
     def run(self, params={}):
         client = self.connection.client
 
-        ticket = client.tickets(id=params.get("ticket_id"))
+        ticket = client.tickets(id=params.get(Input.TICKET_ID))
 
-        ticket.assignee_id = ticket.assignee_id if params.get("assignee_id") is None else params.get("assignee_id")
-        ticket.collaborator_ids = (
-            ticket.collaborator_ids if params.get("collaborator_ids") is None else params.get("collaborator_ids")
+        # I am aware that the below code is gross- I considered doing a loop over the params passed in
+        # with values. But to do that we'd have to map them 1:1 to the zenpy params and I don't want to be locked into
+        # that type of situation
+
+        ticket.assignee_id = (
+            ticket.assignee_id if params.get(Input.ASSIGNEE_ID) is None else params.get(Input.ASSIGNEE_ID)
         )
-        ticket.due_at = ticket.due_at if params.get("due_at") is None else params.get("due_at")
-        ticket.external_id = ticket.external_id if params.get("external_id") is None else params.get("external_id")
-        ticket.group_id = ticket.group_id if params.get("group_id") is None else params.get("group_id")
-        ticket.problem_id = ticket.problem_id if params.get("problem_id") is None else params.get("problem_id")
-        ticket.recipient = ticket.recipient if params.get("recipient") is None else params.get("recipient")
-        ticket.requester_id = ticket.requester_id if params.get("requester_id") is None else params.get("requester_id")
-        ticket.subject = ticket.subject if params.get("subject") is None else params.get("subject")
-        ticket.tags = ticket.tags if params.get("tags") is None else params.get("tags")
+        ticket.collaborator_ids = (
+            ticket.collaborator_ids
+            if params.get(Input.COLLABORATOR_IDS) is None
+            else params.get(Input.COLLABORATOR_IDS)
+        )
+        ticket.due_at = ticket.due_at if params.get(Input.DUE_AT) is None else params.get(Input.DUE_AT)
+        ticket.external_id = (
+            ticket.external_id if params.get(Input.EXTERNAL_ID) is None else params.get(Input.EXTERNAL_ID)
+        )
+        ticket.group_id = ticket.group_id if params.get(Input.GROUP_ID) is None else params.get(Input.GROUP_ID)
+        ticket.problem_id = ticket.problem_id if params.get(Input.PROBLEM_ID) is None else params.get(Input.PROBLEM_ID)
+        ticket.recipient = ticket.recipient if params.get(Input.RECIPIENT) is None else params.get(Input.RECIPIENT)
+        ticket.requester_id = (
+            ticket.requester_id if params.get(Input.REQUESTER_ID) is None else params.get(Input.REQUESTER_ID)
+        )
+        ticket.subject = ticket.subject if params.get(Input.SUBJECT) is None else params.get(Input.SUBJECT)
+        ticket.tags = ticket.tags if params.get(Input.TAGS) is None else params.get(Input.TAGS)
         ticket.type = (
-            ticket.type if (params.get("type")) is None or params.get("type") == "" else params.get("type").lower()
+            ticket.type
+            if (params.get(Input.TYPE)) is None or params.get(Input.TYPE) == ""
+            else params.get(Input.TYPE).lower()
         )
         ticket.status = (
             ticket.status
-            if (params.get("status")) is None or params.get("status") == ""
-            else params.get("status").lower()
+            if (params.get(Input.STATUS)) is None or params.get(Input.STATUS) == ""
+            else params.get(Input.STATUS).lower()
         )
         ticket.priority = (
             ticket.priority
-            if (params.get("priority")) is None or params.get("priority") == ""
-            else params.get("priority").lower()
+            if (params.get(Input.PRIORITY)) is None or params.get(Input.PRIORITY) == ""
+            else params.get(Input.PRIORITY).lower()
         )
 
-        if params.get("comment") is not None:
-            ticket.comment = params.get("comment")
+        if params.get(Input.COMMENT) is not None:
+            ticket.comment = params.get(Input.COMMENT)
             if ticket.comment.get("author_id") == "":
                 # Avoid bad request error from Zendesk for empty author_id
                 del ticket.comment["author_id"]
@@ -83,9 +97,11 @@ class UpdateTicket(komand.Action):
             "url": ticket.url,
         }
 
-        if params.get("comment") is not None:
+        if params.get(Input.COMMENT) is not None:
             ticket_obj["comment"] = ticket.comment
 
+        # I believe this section is for filling out blank properties that ARE blank in the ticket but we need to
+        # then conform to our schema still (e.g. None is not string errors)
         output = dict(UpdateTicketOutput().schema)["definitions"]["ticket"]["properties"]
         for key in ticket_obj:
             if ticket_obj[key] == None:
@@ -99,9 +115,9 @@ class UpdateTicket(komand.Action):
                     elif output[key]["type"] == "date":
                         ticket_obj[key] = datetime.datetime.now()
 
-        ticket_obj = komand.helper.clean_dict(ticket_obj)
+        ticket_obj = insightconnect_plugin_runtime.helper.clean_dict(ticket_obj)
 
-        return {"ticket": ticket_obj}
+        return {Output.TICKET: ticket_obj}
 
     def test(self):
-        return {"ticket": {}}
+        return {Output.TICKET: {}}

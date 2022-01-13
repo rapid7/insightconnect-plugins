@@ -1,11 +1,11 @@
-import komand
-from .schema import SuspendUserInput, SuspendUserOutput
+import insightconnect_plugin_runtime
+from .schema import SuspendUserInput, SuspendUserOutput, Input, Output
 
 # Custom imports below
-import json
+import zenpy
 
 
-class SuspendUser(komand.Action):
+class SuspendUser(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="suspend_user",
@@ -16,14 +16,18 @@ class SuspendUser(komand.Action):
 
     def run(self, params={}):
         client = self.connection.client
-        user = client.users(id=params.get("user_id"))
-        user.suspended = "true"
-        suspend = client.users.update(user)
-        self.logger.debug(suspend.suspended)
-        if suspend.suspended:
-            return {"status": True}
-        else:
-            return {"status": False}
+        try:
+            user = client.users(id=params.get(Input.USER_ID))
+            user.suspended = "true"
+            suspend = client.users.update(user)
+            self.logger.debug(suspend.suspended)
+            if suspend.suspended:
+                return {Output.STATUS: True}
+            else:
+                return {Output.STATUS: False}
+        except zenpy.lib.exception.APIException as e:
+            self.logger.debug(e)
+            return {Output.STATUS: False}
 
     def test(self):
         try:

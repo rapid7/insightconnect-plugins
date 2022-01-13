@@ -1,11 +1,11 @@
-import komand
-from .schema import ShowMembershipsInput, ShowMembershipsOutput
+import insightconnect_plugin_runtime
+from .schema import ShowMembershipsInput, ShowMembershipsOutput, Input, Output
 
 # Custom imports below
 import json
 
 
-class ShowMemberships(komand.Action):
+class ShowMemberships(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="show_memberships",
@@ -16,7 +16,7 @@ class ShowMemberships(komand.Action):
 
     def run(self, params={}):
         mem_array = []
-        for org_memb in self.connection.client.users.organization_memberships(user_id=params.get("user_id")):
+        for org_memb in self.connection.client.users.organization_memberships(user=params.get(Input.USER_ID)):
             memb_obj = {
                 "id": org_memb.id,
                 "user_id": org_memb.user_id,
@@ -26,7 +26,7 @@ class ShowMemberships(komand.Action):
                 "updated_at": org_memb.updated_at,
             }
             mem_array.append(memb_obj)
-        return {"memberships": mem_array}
+        return {Output.MEMBERSHIPS: mem_array}
 
     def test(self):
         try:

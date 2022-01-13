@@ -14,6 +14,10 @@ This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy).
 * A Zendesk API key
 * Information about your Zendesk instance
 
+# Supported Product Versions
+
+_There are no supported product versions listed._
+
 # Documentation
 
 ## Setup
@@ -23,7 +27,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|False|Zendesk API key|None|A6yLhgioJiF2wOP1omP9sTa5yWSTvucx2U7yg67u|
-|credentials|credential_username_password|None|True|Email and password|None|{"username": "user@example.com", "password": "password"}|
+|credentials|credential_username_password|None|True|Email and password|None|{"username": "https://example.com", "password": "password"}|
 |subdomain|string|None|True|Zendesk subdomain|None|example-subdomain|
 
 Example input:
@@ -31,10 +35,7 @@ Example input:
 ```
 {
   "api_key": "A6yLhgioJiF2wOP1omP9sTa5yWSTvucx2U7yg67u",
-  "credentials": {
-    "username": "user@example.com",
-    "password": "password"
-  },
+  "credentials": "{\"username\": \"user@example.com\", \"password\": \"password\"}",
   "subdomain": "example-subdomain"
 }
 ```
@@ -149,7 +150,7 @@ This action is used to delete a ticket.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|ticket_id|string|None|True|Delete ticket|None|10|
+|ticket_id|integer|None|True|Delete ticket|None|10|
 
 Example input:
 
@@ -181,13 +182,13 @@ This action is used to delete an organization membership.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|membership_id|string|None|True|ID of membership to delete E.g. 1401295821555|None|1401295821555|
+|membership_id|integer|None|True|ID of membership to delete E.g. 1401295821555|None|1401295821555|
 
 Example input:
 
 ```
 {
-  "membership_id": "1401295821555"
+  "membership_id": 1401295821555
 }
 ```
 
@@ -213,13 +214,13 @@ This action is used to retrieve user information.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|user_id|string|None|True|ID of user to show E.g. 361738647591|None|361738647591|
+|user_id|integer|None|True|ID of user to show E.g. 361738647591|None|361738647591|
 
 Example input:
 
 ```
 {
-  "user_id": "361738647591"
+  "user_id": 361738647591
 }
 ```
 
@@ -276,13 +277,13 @@ This action is used to suspend a user.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|user_id|string|None|True|ID of user to delete E.g. 361738647591|None|361738647591|
+|user_id|integer|None|True|ID of user to delete E.g. 361738647591|None|361738647591|
 
 Example input:
 
 ```
 {
-  "user_id": "361738647591"
+  "user_id": 361738647591
 }
 ```
 
@@ -308,13 +309,13 @@ This action is used to delete a user.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|user_id|string|None|True|ID of user to delete E.g. 361738647591|None|361738647591|
+|user_id|integer|None|True|ID of user to delete E.g. 361738647591|None|361738647591|
 
 Example input:
 
 ```
 {
-  "user_id": "361738647591"
+  "user_id": 361738647591
 }
 ```
 
@@ -340,17 +341,17 @@ This action is used to create a ticket.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|assignee_id|string|None|False|Assignee ID|None|361738647591|
-|attachment|file|None|False|Optional file attachment|None|{"content": "Sample Content", "filename": "sample_file.txt"}|
-|collaborator_ids|[]string|None|False|List of collaborator IDs|None|["361738647591", "361738647672"]|
+|assignee_id|integer|None|False|Assignee ID|None|361738647591|
+|attachment|file|None|False|Optional file attachment|None|{"content": "Sample Content", "filename": "https://example.com"}|
+|collaborator_ids|[]integer|None|False|List of collaborator IDs|None|[361738647591, 361738647672]|
 |description|string|None|True|Ticket description|None|Example description|
-|due_at|date|None|False|Time ticket is due|None|2021-04-10 12:00:00|
+|due_at|date|None|False|Time ticket is due|None|2021-04-10T12:00:00Z|
 |external_id|string|None|False|Support ticket ID|None|10|
-|group_id|string|None|False|Group ID|None|1400012453812|
+|group_id|integer|None|False|Group ID|None|1400012453812|
 |priority|string|None|False|Ticket priority|['Urgent', 'High', 'Normal', 'Low', '']|High|
-|problem_id|string|None|False|For tickets of type 'incident', the numeric ID of the problem the incident is linked to|None|25|
-|recipient|string|None|False|ID of user recipient|None|352083642834|
-|requester_id|string|None|False|ID of user requesting support|None|361738647672|
+|problem_id|integer|None|False|For tickets of type 'incident', the numeric ID of the problem the incident is linked to|None|25|
+|recipient|string|None|False|The original recipient e-mail address of the ticket|None|352083642834|
+|requester_id|integer|None|False|ID of user requesting support|None|361738647672|
 |status|string|None|False|Ticket status|['New', 'Open', 'Pending', 'Hold', 'Solved', 'Closed', '']|Open|
 |subject|string|None|True|Subject of ticket|None|New Subject|
 |tags|[]string|None|False|Tags describing ticket|None|["tag", "example", "ticket"]|
@@ -360,23 +361,20 @@ Example input:
 
 ```
 {
-  "assignee_id": "361738647591",
-  "attachment": {
-    "content": "Sample Content",
-    "filename": "sample_file.txt"
-  },
+  "assignee_id": 361738647591,
+  "attachment": "{\"content\": \"Sample Content\", \"filename\": \"sample_file.txt\"}",
   "collaborator_ids": [
-    "361738647591",
-    "361738647672"
+    361738647591,
+    361738647672
   ],
   "description": "Example description",
   "due_at": "2021-04-10T12:00:00Z",
-  "external_id": "10",
-  "group_id": "1400012453812",
+  "external_id": 10,
+  "group_id": 1400012453812,
   "priority": "High",
-  "problem_id": "25",
-  "recipient": "352083642834",
-  "requester_id": "361738647672",
+  "problem_id": 25,
+  "recipient": 352083642834,
+  "requester_id": 361738647672,
   "status": "Open",
   "subject": "New Subject",
   "tags": [
@@ -392,7 +390,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|ticket|object|False|Ticket meta data|
+|ticket|ticket|False|Ticket meta data|
 
 Example output:
 
@@ -441,16 +439,16 @@ This action is used to update ticket.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|assignee_id|string|None|False|Assignee ID|None|361738647591|
-|collaborator_ids|[]string|None|False|List of collaborator IDs|None|["361738647591", "361738647672"]|
-|comment|comment|None|False|Comment|None|{"author_id": "361738647591","body": "Test comment","html_body": "<u>Test Underlined comment</u>","public": true}|
-|due_at|date|None|False|Time ticket is due|None|2021-04-10 12:00:00|
+|assignee_id|integer|None|False|Assignee ID|None|361738647591|
+|collaborator_ids|[]integer|None|False|List of collaborator IDs|None|[361738647591, 361738647672]|
+|comment|comment|None|False|Comment|None|{"author_id": 361738647591,"body": "Test comment","html_body": "<u>Test Underlined comment</u>","public": true}|
+|due_at|date|None|False|Time ticket is due|None|2021-04-10T12:00:00Z|
 |external_id|string|None|False|Support ticket ID|None|10|
-|group_id|string|None|False|Group ID|None|1400012453812|
+|group_id|integer|None|False|Group ID|None|1400012453812|
 |priority|string|None|False|Ticket priority|['Urgent', 'High', 'Normal', 'Low', '']|High|
-|problem_id|string|None|False|For tickets of type 'incident', the numeric ID of the problem the incident is linked to|None|25|
+|problem_id|integer|None|False|For tickets of type 'incident', the numeric ID of the problem the incident is linked to|None|25|
 |recipient|string|None|False|ID of user recipient|None|352083642834|
-|requester_id|string|None|True|ID of user requesting support|None|361738647672|
+|requester_id|integer|None|False|ID of user requesting support|None|361738647672|
 |status|string|None|False|Ticket status|['New', 'Open', 'Pending', 'Hold', 'Solved', 'Closed', '']|Open|
 |subject|string|None|False|Subject of ticket|None|New Subject|
 |tags|[]string|None|False|Tags describing ticket|None|["tag", "example", "ticket"]|
@@ -461,24 +459,19 @@ Example input:
 
 ```
 {
-  "assignee_id": "361738647591",
+  "assignee_id": 361738647591,
   "collaborator_ids": [
-    "361738647591",
-    "361738647672"
+    361738647591,
+    361738647672
   ],
-  "comment": {
-    "author_id": "361738647591",
-    "body": "Test comment",
-    "html_body": "<u>Test Underlined comment</u>",
-    "public": true
-  },
+  "comment": "{\"author_id\": 361738647591,\"body\": \"Test comment\",\"html_body\": \"\u003cu\u003eTest Underlined comment\u003c/u\u003e\",\"public\": true}",
   "due_at": "2021-04-10T12:00:00Z",
-  "external_id": "10",
-  "group_id": "1400012453812",
+  "external_id": 10,
+  "group_id": 1400012453812,
   "priority": "High",
-  "problem_id": "25",
-  "recipient": "352083642834",
-  "requester_id": "361738647672",
+  "problem_id": 25,
+  "recipient": 352083642834,
+  "requester_id": 361738647672,
   "status": "Open",
   "subject": "New Subject",
   "tags": [
@@ -550,13 +543,13 @@ This action is used to show all organization memberships.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|user_id|string|None|True|ID of user to show E.g. 361738647591|None|361738647591|
+|user_id|integer|None|True|ID of user to show E.g. 361738647591|None|361738647591|
 
 Example input:
 
 ```
 {
-  "user_id": "361738647591"
+  "user_id": 361738647591
 }
 ```
 

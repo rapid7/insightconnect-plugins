@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 import zenpy
-from .schema import DeleteMembershipInput, DeleteMembershipOutput
+from .schema import DeleteMembershipInput, DeleteMembershipOutput, Input, Output
 
 # Custom imports below
 
 
-class DeleteMembership(komand.Action):
+class DeleteMembership(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="delete_membership",
@@ -16,12 +16,13 @@ class DeleteMembership(komand.Action):
 
     def run(self, params={}):
         try:
-            org_mem = self.connection.client.organization_memberships(id=params.get("membership_id"))
+            org_mem = self.connection.client.organization_memberships(id=params.get(Input.MEMBERSHIP_ID))
             self.connection.client.organization_memberships.delete(org_mem)
-            return {"status": True}
+            return {Output.STATUS: True}
         except zenpy.lib.exception.APIException as e:
-            return {"status": False}
-            self.logger.debug(e)
+            # API exception is only raised when incorrect data is input (Membership ID here)
+            self.logger.error(e)
+            return {Output.STATUS: False}
 
     def test(self):
         try:

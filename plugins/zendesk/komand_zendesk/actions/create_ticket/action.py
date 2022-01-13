@@ -1,5 +1,5 @@
-import komand
-from .schema import CreateTicketInput, CreateTicketOutput
+import insightconnect_plugin_runtime
+from .schema import CreateTicketInput, CreateTicketOutput, Input
 
 # Custom imports below
 import json
@@ -7,7 +7,7 @@ import zenpy
 from zenpy.lib.api_objects import Comment, Ticket
 
 
-class CreateTicket(komand.Action):
+class CreateTicket(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_ticket",
@@ -19,24 +19,24 @@ class CreateTicket(komand.Action):
     def run(self, params={}):
         client = self.connection.client
 
-        assignee_id = params.get("assignee_id") or None
-        collaborator_ids = params.get("collaborator_ids") or None
-        description = params.get("description") or None
-        due_at = params.get("due_at") or None
-        external_id = params.get("external_id") or None
-        group_id = params.get("group_id") or None
-        priority = (params.get("priority")) or None
+        assignee_id = params.get(Input.ASSIGNEE_ID) or None
+        collaborator_ids = params.get(Input.COLLABORATOR_IDS) or None
+        description = params.get(Input.DESCRIPTION) or None
+        due_at = params.get(Input.DUE_AT) or None
+        external_id = params.get(Input.EXTERNAL_ID) or None
+        group_id = params.get(Input.GROUP_ID) or None
+        priority = (params.get(Input.PRIORITY)) or None
         if priority:
             priority = priority.lower()
-        problem_id = params.get("problem_id") or None
-        recipient = params.get("recipient") or None
-        requester_id = params.get("requester_id") or None
-        status = (params.get("status")) or None
+        problem_id = params.get(Input.PROBLEM_ID) or None
+        recipient = params.get(Input.RECIPIENT) or None
+        requester_id = params.get(Input.REQUESTER_ID) or None
+        status = (params.get(Input.STATUS)) or None
         if status:
             status = status.lower()
-        subject = params.get("subject") or None
-        tags = params.get("tags") or None
-        t_type = (params.get("type")) or None
+        subject = params.get(Input.SUBJECT) or None
+        tags = params.get(Input.TAGS) or None
+        t_type = (params.get(Input.TYPE)) or None
         if t_type:
             t_type = t_type.lower()
         ticket = Ticket(
@@ -55,13 +55,13 @@ class CreateTicket(komand.Action):
             tags=tags,
             type=t_type,
         )
-        if params.get("attachment"):
-            if params.get("attachment")["content"]:
+        if params.get(Input.ATTACHMENT):
+            if params.get(Input.ATTACHMENT)["content"]:
                 upload_instance = client.attachments.upload(
-                    params.get("attachment")["content"],
-                    target_name=params.get("attachment")["filename"],
+                    params.get(Input.ATTACHMENT)["content"],
+                    target_name=params.get(Input.ATTACHMENT)["filename"],
                 )  #  content_type=None, content_url=None, file_name=None
-                ticket.comment = Comment(body=params.get("description"), uploads=[upload_instance.token])
+                ticket.comment = Comment(body=params.get(Input.DESCRIPTION), uploads=[upload_instance.token])
 
         returned_ticket = client.tickets.create(ticket).ticket
         ticket_obj = {
