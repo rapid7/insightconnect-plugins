@@ -21,7 +21,7 @@ tags:
 - chat
 hub_tags:
   use_cases: [alerting_and_notifications, application_management, threat_detection_and_response, user_management]
-  keywords: [microsoft, microsoft_teams, office365, chat]
+  keywords: [microsoft_teams, office365, chat]
   features: []
 types:
   team:

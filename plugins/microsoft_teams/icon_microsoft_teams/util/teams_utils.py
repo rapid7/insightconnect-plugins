@@ -30,7 +30,7 @@ def get_teams_from_microsoft(logger: Logger, connection: komand.connection, team
     if explicit:
         teams_url = f"https://graph.microsoft.com/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team') and displayName eq '{team_name}'"
     else:
-        teams_url = f"https://graph.microsoft.com/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team')"
+        teams_url = "https://graph.microsoft.com/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team')"
     headers = connection.get_headers()
     teams_result = requests.get(teams_url, headers=headers)
     try:
@@ -61,11 +61,11 @@ def get_teams_from_microsoft(logger: Logger, connection: komand.connection, team
             logger.info(f"Checking team: {name}")
             if compiled_team_name.search(name):
                 return [team]
-        else:
-            raise PluginException(
-                cause=f"Team {team_name} was not found.",
-                assistance=f"Please verify {team_name} is a valid team name",
-            )
+    else:
+        raise PluginException(
+            cause=f"Team {team_name} was not found.",
+            assistance=f"Please verify {team_name} is a valid team name",
+        )
 
     return teams
 
@@ -122,11 +122,11 @@ def get_channels_from_microsoft(
             logger.info(f"Checking channel: {name}")
             if compiled_channel_name.search(name):
                 return [channel]
-        else:
-            raise PluginException(
-                cause=f"Channel {channel_name} was not found.",
-                assistance=f"Please verify {channel_name} is a valid channel for the team " f"with id: {team_id}",
-            )
+    else:
+        raise PluginException(
+            cause=f"Channel {channel_name} was not found.",
+            assistance=f"Please verify {channel_name} is a valid channel for the team with id: {team_id}",
+        )
 
     return channels
 
@@ -242,7 +242,7 @@ def create_channel(
         raise PluginException(cause=f"Create channel {channel_name} failed.", assistance=result.text) from e
 
     if not result.status_code == 201:
-        raise PluginException(cause=f"Create channel returned an unexpected result.", assistance=result.text)
+        raise PluginException(cause="Create channel returned an unexpected result.", assistance=result.text)
 
     return True
 
@@ -273,6 +273,6 @@ def delete_channel(logger: Logger, connection: komand.connection, team_id: str, 
         raise PluginException(cause=f"Delete channel {channel_id} failed.", assistance=result.text) from e
 
     if not result.status_code == 204:
-        raise PluginException(cause=f"Delete channel returned an unexpected result.", assistance=result.text)
+        raise PluginException(cause="Delete channel returned an unexpected result.", assistance=result.text)
 
     return True
