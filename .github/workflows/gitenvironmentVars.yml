@@ -16,3 +16,4 @@ jobs:
         shell: bash
         run:
           env
+          echo $GITHUB_BASE_REF
