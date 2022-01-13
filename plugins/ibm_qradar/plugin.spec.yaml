@@ -29,14 +29,17 @@ connection:
     type: string
     description: Hostname for the QRadar application
     required: true
+    example: 127.0.0.1
   username:
     type: string
     description: QRadar Username
     required: true
+    example: username
   password:
     type: password
     description: QRadar Password
     required: true
+    example: password
 types:
   error_messages:
     code:
@@ -692,6 +695,7 @@ actions:
         type: string
         description: AQL query to perform the search
         required: true
+        example: Select * from events
     output:
       data:
         title: Search Data
@@ -706,11 +710,13 @@ actions:
         type: string
         required: true
         description: Specific Ariel Search Id for which the search
+        example: 9102cb1d-5994-4f78-8f08-16c6f6991015
       poll_interval:
         type: number
         required: false
         description: Poll interval is the number of seconds to recheck until the search gets COMPLETED
         default: 1
+        example: 1
     output:
       data:
         title: Search Data
@@ -725,14 +731,17 @@ actions:
         type: string
         required: false
         description: Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero
+        example: 1-2
       filter:
         type: string
         required: false
         description: This parameter is used to restrict the elements in a list base on the contents of various fields
+        example: id=1000
       fields:
         type: string
         required: false
         description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
+        example: id
     output:
       data:
         title: Assets Data
@@ -747,18 +756,22 @@ actions:
         type: string
         required: false
         description: Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero
+        example: 1-2
       filter:
         type: string
         required: false
         description: This parameter is used to restrict the elements in a list base on the contents of various fields
+        example: id=1000
       fields:
         type: string
         required: false
         description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
+        example: id
       sort:
         type: string
         required: false
         description: Use parameter to sort the elements in a list
+        example: +id
     output:
       data:
         title: Offense Data
@@ -773,22 +786,27 @@ actions:
         type: string
         required: false
         description: Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero
+        example: 1-2
       filter:
         type: string
         required: false
         description: This parameter is used to restrict the elements in a list base on the contents of various fields
+        example: id=1000
       fields:
         type: string
         required: false
         description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
+        example: id
       include_deleted:
         type: boolean
         required: false
         description: If true, deleted closing reasons are included in the response. Defaults to false. Deleted closing reasons cannot be used to close an offense
+        example: false
       include_reserved:
         type: boolean
         required: false
         description: If true, reserved closing reasons are included in the response. Defaults to false. Reserved closing reasons cannot be used to close an offense
+        example: false
     output:
       data:
         title: Offense Closing Reasons
@@ -803,26 +821,32 @@ actions:
         type: integer
         required: true
         description: The ID of the offense to update
+        example: 100
       assigned_to:
         type: string
         required: false
         description: A user to assign the offense to
+        example: admin
       closing_reason_id:
         type: string
         required: false
         description: The ID of a closing reason. You must provide a valid closing_reason_id when you close an offense
+        example: 100
       fields:
         type: string
         required: false
         description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
+        example: id
       follow_up:
         type: boolean
         required: false
         description: Set to true to set the follow up flag on the offense
+        example: false
       protected:
         type: boolean
         required: false
         description: The ID of a closing reason. You must provide a valid closing_reason_id when you close an offense
+        example: false
       status:
         type: string
         required: false
@@ -832,6 +856,7 @@ actions:
           - "HIDDEN"
           - "CLOSED"
           - ""
+        example: OPEN
     output:
       data:
         title: Update Offense
@@ -846,18 +871,22 @@ actions:
         type: integer
         required: true
         description: The ID of the offense to get its notes
+        example: 100
       range:
         type: string
         required: false
         description: Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero
+        example: 1-2
       filter:
         type: string
         required: false
         description: This parameter is used to restrict the elements in a list base on the contents of various fields
+        example: id=100
       fields:
         type: string
         required: false
         description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
+        example: id
     output:
       data:
         title: Offense Notes
@@ -872,14 +901,17 @@ actions:
         type: integer
         required: true
         description: The ID of the offense to get its notes
+        example: 100
       note_id:
         type: integer
         required: true
         description: The ID of the offense note to get
+        example: 100
       fields:
         type: string
         required: false
         description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
+        example: id
     output:
       data:
         title: Offense Notes by Id
@@ -894,14 +926,17 @@ actions:
         type: integer
         required: true
         description: The ID of the offense in which you want to add note
+        example: 100
       note_text:
         type: string
         required: true
         description: The Note Text to add to offense
+        example: note_text
       fields:
         type: string
         required: false
         description: Use this parameter to specify which fields you would like to get back in the response. fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
+        example: id
     output:
       data:
         title: "Newly Added Offense Notes"
@@ -917,23 +952,28 @@ triggers:
         type: string
         required: false
         description: Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero
+        example: 1-2
       filter:
         type: string
         required: false
         description: This parameter is used to restrict the elements in a list base on the contents of various fields
+        example: id=100
       fields:
         type: string
         required: false
         description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
+        example: id
       sort:
         type: string
         required: false
         description: Use parameter to sort the elements in a list
+        example: +id
       interval:
         description: How frequently (in seconds) to trigger a greeting
         type: integer
         default: 15
         required: true
+        example: 15
     output:
       data:
         title: "Offense Data"

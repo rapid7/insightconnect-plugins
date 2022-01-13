@@ -1,22 +1,10 @@
 # Description
 
-IBM QRadar reduces billions of events and flows into a manageable number of actionable offenses that are prioritized by their impact on your business operations. This plugin allows you to use IBM QRadar to orchestrate and automate Ariel search queries and automate offense management.
+IBM QRadar reduces billions of events and flows into a manageable number of actionable offenses that are prioritized by their impact on your business operations. This plugin allows you to use IBM QRadar to orchestrate and automate Ariel search queries and automate offense management
 
 # Key Features
 
-- Start Ariel Search
-- Get Ariel Search By ID
-- Get Offenses
-- Get offense Closing Reasons
-- Get Assets
-- Get Offense Notes
-- Get Offense Note By ID
-- Add Note To Offense
-- Update Offense
-- Trigger : Get New Offenses
-
-
-# Requirements
+Identify key features of plugin.
 
 # Supported Product Versions
 
@@ -30,73 +18,23 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|hostname|string|None|True|Hostname for the QRadar application|None|None|
-|password|password|None|True|QRadar Password|None|None|
-|username|string|None|True|QRadar Username|None|None|
+|hostname|string|None|True|Hostname for the QRadar application|None|https://example.com|
+|password|password|None|True|QRadar Password|None|password|
+|username|string|None|True|QRadar Username|None|username|
 
 Example input:
 
 ```
+{
+  "hostname": "127.0.0.1",
+  "password": "password",
+  "username": "username"
+}
 ```
 
 ## Technical Details
 
 ### Actions
-
-#### Get Offense Notes by Id
-
-This action is used to get Offense Notes by Id.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|None|
-|note_id|integer|None|True|The ID of the offense note to get|None|None|
-|offense_id|integer|None|True|The ID of the offense to get its notes|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|data|note|False|JSON Data of the Offense Notes for given id|
-
-Example output:
-
-```
-```
-
-#### Get Ariel Search by ID
-
-This action is used to get ariel search by ID.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|poll_interval|number|1|False|Poll interval is the number of seconds to recheck until the search gets COMPLETED|None|None|
-|search_id|string|None|True|Specific Ariel Search Id for which the search|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|data|search|False|JSON Data of the Search|
-
-Example output:
-
-```
-```
 
 #### Add Notes to Offense
 
@@ -106,13 +44,18 @@ This action is used to add Notes to Offense.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|None|
-|note_text|string|None|True|The Note Text to add to offense|None|None|
-|offense_id|integer|None|True|The ID of the offense in which you want to add note|None|None|
+|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
+|note_text|string|None|True|The Note Text to add to offense|None|note_text|
+|offense_id|integer|None|True|The ID of the offense in which you want to add note|None|100|
 
 Example input:
 
 ```
+{
+  "fields": "id",
+  "note_text": "note_text",
+  "offense_id": 100
+}
 ```
 
 ##### Output
@@ -126,13 +69,67 @@ Example output:
 ```
 {
   "data": {
-    "create_time": 1641447330657,
-    "id": 201,
+    "create_time": 1642056336657,
+    "id": 404,
     "note_text": "New Note text",
     "username": "API_user: admin"
   }
 }
+```
 
+#### Get Ariel Search by ID
+
+This action is used to get ariel search by ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|poll_interval|number|1|False|Poll interval is the number of seconds to recheck until the search gets COMPLETED|None|1|
+|search_id|string|None|True|Specific Ariel Search Id for which the search|None|9102cb1d-5994-4f78-8f08-16c6f6991015|
+
+Example input:
+
+```
+{
+  "poll_interval": 1,
+  "search_id": "9102cb1d-5994-4f78-8f08-16c6f6991015"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|data|search|False|JSON Data of the Search|
+
+Example output:
+
+```
+{
+  "data": {
+    "completed": true,
+    "compressed_data_file_count": 0,
+    "compressed_data_total_size": 0,
+    "cursor_id": "0ab77680-d6a5-4944-9eda-9cb95171c86f",
+    "data_file_count": 2,
+    "data_total_size": 371376,
+    "desired_retention_time_msec": 86400000,
+    "index_file_count": 0,
+    "index_total_size": 0,
+    "processed_record_count": 28752,
+    "progress": 100,
+    "progress_details": [],
+    "query_execution_time": 117,
+    "query_string": "Select * from events",
+    "record_count": 28752,
+    "save_results": false,
+    "search_id": "0ab77680-d6a5-4944-9eda-9cb95171c86f",
+    "size_on_disk": 10809724,
+    "status": "COMPLETED",
+    "subsearch_ids": []
+  }
+}
 ```
 
 #### Get Assets
@@ -143,13 +140,18 @@ This action is used to list all assets found in the model.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|None|
-|filter|string|None|False|This parameter is used to restrict the elements in a list base on the contents of various fields|None|None|
-|range|string|None|False|Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero|None|None|
+|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
+|filter|string|None|False|This parameter is used to restrict the elements in a list base on the contents of various fields|None|id=1000|
+|range|string|None|False|Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero|None|1-2|
 
 Example input:
 
 ```
+{
+  "fields": "id",
+  "filter": "id=1000",
+  "range": "1-2"
+}
 ```
 
 ##### Output
@@ -164,69 +166,38 @@ Example output:
 {
   "data": [
     {
-      "users": [],
-      "domain_id": 0,
-      "interfaces": [],
-      "properties": [],
-      "risk_score_sum": 0,
-      "hostnames": [],
-      "id": 0,
-      "products": [],
-      "vulnerability_count": 0
-    },
-    {
-      "properties": [
-        {
-          "value": "TEst",
-          "id": 1000,
-          "last_reported": 1640264696400,
-          "last_reported_by": "USER:admin",
-          "name": "Given Name",
-          "type_id": 1001
-        },
-        {
-          "last_reported_by": "USER:admin",
-          "name": "Unified Name",
-          "type_id": 1002,
-          "value": "TEst",
-          "id": 1001,
-          "last_reported": 1640264698711
-        }
-      ],
-      "users": [],
-      "products": [
-        {
-          "id": 1000,
-          "product_variant_id": 40335
-        }
-      ],
-      "hostnames": [
-        {
-          "id": 1001,
-          "name": "example.com",
-          "type": "DNS",
-          "created": 1640582726381
-        }
-      ],
-      "id": 1001,
+      "vulnerability_count": 0,
+      "id": 1002,
       "interfaces": [
         {
-          "created": 1640264696400,
-          "id": 1001,
+          "created": 1640265476716,
+          "id": 1002,
           "ip_addresses": [
             {
-              "created": 1640264696400,
-              "id": 1001,
-              "network_id": 2,
               "type": "IPV4",
-              "value": "192.10.10.178"
+              "value": "192.10.10.179",
+              "created": 1640265476716,
+              "id": 1002,
+              "network_id": 2
             }
           ]
         }
       ],
       "risk_score_sum": 0,
-      "vulnerability_count": 0,
-      "domain_id": 0
+      "properties": [
+        {
+          "name": "Unified Name",
+          "type_id": 1002,
+          "value": "192.10.10.179",
+          "id": 1003,
+          "last_reported": 1640265476727,
+          "last_reported_by": "USER:admin"
+        }
+      ],
+      "users": [],
+      "domain_id": 0,
+      "hostnames": [],
+      "products": []
     }
   ]
 }
@@ -240,15 +211,22 @@ This action is used to get Offense's Closing Reasons.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|None|
-|filter|string|None|False|This parameter is used to restrict the elements in a list base on the contents of various fields|None|None|
-|include_deleted|boolean|None|False|If true, deleted closing reasons are included in the response. Defaults to false. Deleted closing reasons cannot be used to close an offense|None|None|
-|include_reserved|boolean|None|False|If true, reserved closing reasons are included in the response. Defaults to false. Reserved closing reasons cannot be used to close an offense|None|None|
-|range|string|None|False|Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero|None|None|
+|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
+|filter|string|None|False|This parameter is used to restrict the elements in a list base on the contents of various fields|None|id=1000|
+|include_deleted|boolean|None|False|If true, deleted closing reasons are included in the response. Defaults to false. Deleted closing reasons cannot be used to close an offense|None|False|
+|include_reserved|boolean|None|False|If true, reserved closing reasons are included in the response. Defaults to false. Reserved closing reasons cannot be used to close an offense|None|False|
+|range|string|None|False|Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero|None|1-2|
 
 Example input:
 
 ```
+{
+  "fields": "id",
+  "filter": "id=1000",
+  "include_deleted": false,
+  "include_reserved": false,
+  "range": "1-2"
+}
 ```
 
 ##### Output
@@ -276,7 +254,6 @@ Example output:
     }
   ]
 }
-
 ```
 
 #### Get Offense Notes
@@ -287,14 +264,20 @@ This action is used to get Offense Notes.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|None|
-|filter|string|None|False|This parameter is used to restrict the elements in a list base on the contents of various fields|None|None|
-|offense_id|integer|None|True|The ID of the offense to get its notes|None|None|
-|range|string|None|False|Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero|None|None|
+|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
+|filter|string|None|False|This parameter is used to restrict the elements in a list base on the contents of various fields|None|id=100|
+|offense_id|integer|None|True|The ID of the offense to get its notes|None|100|
+|range|string|None|False|Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero|None|1-2|
 
 Example input:
 
 ```
+{
+  "fields": "id",
+  "filter": "id=100",
+  "offense_id": 100,
+  "range": "1-2"
+}
 ```
 
 ##### Output
@@ -309,19 +292,62 @@ Example output:
 {
   "data": [
     {
-      "create_time": 1641385258725,
-      "id": 157,
+      "create_time": 1641385946573,
+      "id": 159,
       "note_text": "New Note text",
       "username": "API_user: admin"
     },
     {
-      "id": 159,
+      "create_time": 1641451278329,
+      "id": 209,
       "note_text": "New Note text",
-      "username": "API_user: admin",
-      "create_time": 1641385946573
+      "username": "API_user: admin"
     }
   ]
 }
+```
+
+#### Get Offense Notes by Id
+
+This action is used to get Offense Notes by Id.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
+|note_id|integer|None|True|The ID of the offense note to get|None|100|
+|offense_id|integer|None|True|The ID of the offense to get its notes|None|100|
+
+Example input:
+
+```
+{
+  "fields": "id",
+  "filter": "id=100",
+  "offense_id": 100,
+  "range": "1-2"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|data|note|False|JSON Data of the Offense Notes for given id|
+
+Example output:
+
+```
+{
+  "data": {
+    "create_time": 1640936459993,
+    "id": 51,
+    "note_text": "Test ",
+    "username": "API_user: admin"
+  }
+}
+
 ```
 
 #### Get Offenses
@@ -332,14 +358,20 @@ This action is used to list all Offenses.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|None|
-|filter|string|None|False|This parameter is used to restrict the elements in a list base on the contents of various fields|None|None|
-|range|string|None|False|Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero|None|None|
-|sort|string|None|False|Use parameter to sort the elements in a list|None|None|
+|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
+|filter|string|None|False|This parameter is used to restrict the elements in a list base on the contents of various fields|None|id=1000|
+|range|string|None|False|Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero|None|1-2|
+|sort|string|None|False|Use parameter to sort the elements in a list|None|+id|
 
 Example input:
 
 ```
+{
+  "fields": "id",
+  "filter": "id=1000",
+  "range": "1-2",
+  "sort": "+id"
+}
 ```
 
 ##### Output
@@ -354,38 +386,90 @@ Example output:
 {
   "data": [
     {
-      "offense_source": "127.0.0.1",
-      "policy_category_count": 0,
+      "source_network": "Net-10-172-192.Net_172_16_0_0",
+      "domain_id": 0,
+      "inactive": false,
+      "last_updated_time": 1642054761525,
+      "magnitude": 4,
+      "offense_source": "172.31.34.93",
+      "protected": false,
+      "start_time": 1641970465643,
+      "category_count": 2,
       "rules": [
         {
-          "id": 100475,
+          "id": 100033,
+          "type": "CRE_RULE"
+        },
+        {
+          "id": 100626,
           "type": "CRE_RULE"
         }
       ],
-      "severity": 6,
-      "description": "Access Denied\n",
-      "follow_up": false,
-      "inactive": true,
-      "local_destination_count": 0,
-      "source_address_ids": [
-        21
-      ],
-      "source_network": "other",
+      "event_count": 13493550,
+      "id": 42,
       "remote_destination_count": 1,
-      "start_time": 1641362102216,
-      "security_category_count": 1,
+      "username_count": 2,
+      "first_persisted_time": 1641970466000,
+      "offense_type": 0,
+      "security_category_count": 2,
+      "source_count": 1,
+      "credibility": 2,
+      "description": "Excessive Firewall Denies Between Hosts\n",
+      "flow_count": 0,
+      "local_destination_address_ids": [
+        14
+      ],
+      "severity": 5,
+      "categories": [
+        "Access Denied",
+        "ACL Deny"
+      ],
+      "device_count": 1,
+      "last_persisted_time": 1642054764000,
+      "log_sources": [
+        {
+          "type_name": "EventCRE",
+          "id": 63,
+          "name": "Custom Rule Engine-8 :: ip-172-31-34-93",
+          "type_id": 18
+        }
+      ],
+      "policy_category_count": 0,
+      "relevance": 5,
+      "source_address_ids": [
+        19
+      ],
       "destination_networks": [
+        "Net-10-172-192.Net_172_16_0_0",
         "other"
       ],
-      "flow_count": 0,
-      "id": 40,
+      "local_destination_count": 1,
       "status": "OPEN",
-      "relevance": 2,
-      "source_count": 1,
-      "categories": [
-        "Access Denied"
+      "follow_up": false
+    },
+    {
+      "event_count": 2429,
+      "flow_count": 0,
+      "magnitude": 3,
+      "offense_type": 0,
+      "source_network": "other",
+      "username_count": 1,
+      "close_time": 1641970533000,
+      "first_persisted_time": 1641968803000,
+      "id": 41,
+      "last_updated_time": 1641970524788,
+      "destination_networks": [
+        "Net-10-172-192.Net_172_16_0_0"
       ],
+      "device_count": 1,
       "domain_id": 0,
+      "local_destination_address_ids": [
+        14
+      ],
+      "policy_category_count": 0,
+      "protected": false,
+      "start_time": 1641968802643,
+      "follow_up": false,
       "log_sources": [
         {
           "id": 63,
@@ -394,75 +478,38 @@ Example output:
           "type_name": "EventCRE"
         }
       ],
-      "magnitude": 3,
-      "offense_type": 0,
-      "category_count": 1,
-      "first_persisted_time": 1641362102000,
-      "last_persisted_time": 1641364295000,
-      "last_updated_time": 1641362102216,
-      "protected": false,
-      "username_count": 0,
-      "credibility": 3,
-      "device_count": 1,
-      "event_count": 1,
-      "local_destination_address_ids": []
-    },
-    {
-      "flow_count": 0,
-      "last_updated_time": 1641381314500,
-      "offense_type": 0,
-      "security_category_count": 1,
+      "offense_source": "183.82.206.22",
       "source_address_ids": [
-        20
+        22
       ],
-      "categories": [
-        "Access Denied"
-      ],
-      "credibility": 3,
-      "first_persisted_time": 1641359712000,
-      "last_persisted_time": 1641383499000,
       "source_count": 1,
-      "local_destination_address_ids": [
-        14
+      "categories": [
+        "Access Denied",
+        "ACL Deny"
       ],
-      "magnitude": 4,
+      "closing_user": "admin",
+      "credibility": 2,
+      "remote_destination_count": 0,
       "rules": [
         {
-          "id": 100425,
+          "id": 100625,
+          "type": "CRE_RULE"
+        },
+        {
+          "id": 100033,
           "type": "CRE_RULE"
         }
       ],
-      "category_count": 1,
-      "domain_id": 0,
-      "local_destination_count": 1,
-      "log_sources": [
-        {
-          "name": "Custom Rule Engine-8 :: ip-172-31-34-93",
-          "type_id": 18,
-          "type_name": "EventCRE",
-          "id": 63
-        }
-      ],
-      "policy_category_count": 0,
-      "description": "Access Denied\n",
+      "security_category_count": 2,
+      "closing_reason_id": 54,
+      "description": "Excessive Firewall Denies Between Hosts\n",
+      "last_persisted_time": 1641970583000,
       "relevance": 3,
-      "severity": 6,
-      "source_network": "other",
-      "status": "OPEN",
-      "event_count": 308,
-      "follow_up": false,
-      "username_count": 2,
-      "destination_networks": [
-        "Net-10-172-192.Net_172_16_0_0",
-        "other"
-      ],
-      "id": 39,
+      "category_count": 2,
       "inactive": true,
-      "protected": false,
-      "remote_destination_count": 1,
-      "device_count": 1,
-      "offense_source": "169.254.3.3",
-      "start_time": 1641359711660
+      "local_destination_count": 1,
+      "severity": 5,
+      "status": "CLOSED"
     }
   ]
 }
@@ -476,11 +523,14 @@ This action is used to start Ariel Search.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|aql|string|None|True|AQL query to perform the search|None|None|
+|aql|string|None|True|AQL query to perform the search|None|Select * from events|
 
 Example input:
 
 ```
+{
+  "aql": "Select * from events"
+}
 ```
 
 ##### Output
@@ -494,26 +544,26 @@ Example output:
 ```
 {
   "data": {
-    "save_results": false,
-    "search_id": "9102cb1d-5994-4f78-8f08-16c6f6991015",
-    "status": "WAIT",
-    "subsearch_ids": [],
-    "data_file_count": 8,
-    "query_execution_time": 0,
-    "data_total_size": 1553001,
-    "index_total_size": 0,
-    "record_count": 0,
-    "size_on_disk": 0,
     "completed": false,
-    "cursor_id": "9102cb1d-5994-4f78-8f08-16c6f6991015",
-    "query_string": "Select * from events last 10 MINUTES",
     "compressed_data_file_count": 0,
-    "progress": 0,
     "index_file_count": 0,
-    "processed_record_count": 0,
     "progress_details": [],
+    "record_count": 0,
     "compressed_data_total_size": 0,
-    "desired_retention_time_msec": 86400000
+    "data_total_size": 0,
+    "query_execution_time": 0,
+    "save_results": false,
+    "status": "WAIT",
+    "cursor_id": "6eaa0819-8d37-452b-bf28-d48acd2adf32",
+    "data_file_count": 0,
+    "progress": 0,
+    "size_on_disk": 0,
+    "desired_retention_time_msec": 86400000,
+    "index_total_size": 0,
+    "processed_record_count": 0,
+    "query_string": "Select * from events last 10 MINUTES",
+    "search_id": "6eaa0819-8d37-452b-bf28-d48acd2adf32",
+    "subsearch_ids": []
   }
 }
 ```
@@ -526,17 +576,26 @@ This action is used to update Offenses.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|assigned_to|string|None|False|A user to assign the offense to|None|None|
-|closing_reason_id|string|None|False|The ID of a closing reason. You must provide a valid closing_reason_id when you close an offense|None|None|
-|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|None|
-|follow_up|boolean|None|False|Set to true to set the follow up flag on the offense|None|None|
-|offense_id|integer|None|True|The ID of the offense to update|None|None|
-|protected|boolean|None|False|The ID of a closing reason. You must provide a valid closing_reason_id when you close an offense|None|None|
-|status|string|None|False|The new status for the offense. Set to one of the OPEN, HIDDEN, CLOSED. When the status of an offense is being set to CLOSED, a valid closing_reason_id must be provided. To hide an offense, use the HIDDEN status. To show a previously hidden offense, use the OPEN status|['OPEN', 'HIDDEN', 'CLOSED', '']|None|
+|assigned_to|string|None|False|A user to assign the offense to|None|admin|
+|closing_reason_id|string|None|False|The ID of a closing reason. You must provide a valid closing_reason_id when you close an offense|None|100|
+|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
+|follow_up|boolean|None|False|Set to true to set the follow up flag on the offense|None|False|
+|offense_id|integer|None|True|The ID of the offense to update|None|100|
+|protected|boolean|None|False|The ID of a closing reason. You must provide a valid closing_reason_id when you close an offense|None|False|
+|status|string|None|False|The new status for the offense. Set to one of the OPEN, HIDDEN, CLOSED. When the status of an offense is being set to CLOSED, a valid closing_reason_id must be provided. To hide an offense, use the HIDDEN status. To show a previously hidden offense, use the OPEN status|['OPEN', 'HIDDEN', 'CLOSED', '']|OPEN|
 
 Example input:
 
 ```
+{
+  "assigned_to": "admin",
+  "closing_reason_id": 100,
+  "fields": "id",
+  "follow_up": false,
+  "offense_id": 100,
+  "protected": false,
+  "status": "OPEN"
+}
 ```
 
 ##### Output
@@ -550,65 +609,65 @@ Example output:
 ```
 {
   "data": {
-    "category_count": 3,
-    "description": "Multiple Exploit/Malware Types Targeting a Single ...",
-    "inactive": true,
-    "magnitude": 3,
-    "remote_destination_count": 1,
-    "device_count": 2,
-    "flow_count": 0,
-    "local_destination_address_ids": [],
-    "source_network": "other",
-    "follow_up": false,
-    "id": 33,
-    "protected": false,
-    "relevance": 0,
-    "username_count": 0,
-    "last_persisted_time": 1641447357000,
-    "last_updated_time": 1640155212603,
-    "log_sources": [
-      {
-        "id": 23312,
-        "name": "Virsec Security Platform",
-        "type_id": 4013,
-        "type_name": "VirsecSecurityPlatformCustom"
-      },
-      {
-        "id": 63,
-        "name": "Custom Rule Engine-8 :: ip-172-31-34-93",
-        "type_id": 18,
-        "type_name": "EventCRE"
-      }
-    ],
-    "offense_source": "49.206.13.49",
-    "offense_type": 1,
-    "credibility": 3,
-    "local_destination_count": 0,
-    "severity": 9,
-    "source_address_ids": [
-      18
-    ],
-    "source_count": 1,
-    "start_time": 1640155212500,
-    "categories": [
-      "Command Execution",
-      "Input Validation Exploit"
-    ],
-    "domain_id": 0,
     "event_count": 4,
-    "policy_category_count": 0,
-    "security_category_count": 3,
-    "destination_networks": [
-      "other"
-    ],
+    "last_updated_time": 1640155212603,
+    "magnitude": 3,
+    "start_time": 1640155212500,
+    "description": "Multiple Exploit/Malware Types Targeting a Single ...",
     "first_persisted_time": 1640155213000,
+    "follow_up": false,
+    "inactive": true,
+    "relevance": 0,
+    "source_count": 1,
+    "device_count": 2,
     "rules": [
       {
         "id": 100113,
         "type": "CRE_RULE"
       }
     ],
-    "status": "OPEN"
+    "security_category_count": 3,
+    "policy_category_count": 0,
+    "source_network": "other",
+    "credibility": 3,
+    "flow_count": 0,
+    "local_destination_count": 0,
+    "offense_type": 1,
+    "remote_destination_count": 1,
+    "source_address_ids": [
+      18
+    ],
+    "categories": [
+      "Command Execution",
+      "Input Validation Exploit"
+    ],
+    "id": 33,
+    "offense_source": "49.206.13.49",
+    "protected": false,
+    "domain_id": 0,
+    "last_persisted_time": 1642054784000,
+    "category_count": 3,
+    "destination_networks": [
+      "other"
+    ],
+    "local_destination_address_ids": [],
+    "log_sources": [
+      {
+        "type_name": "VirsecSecurityPlatformCustom",
+        "id": 23312,
+        "name": "Virsec Security Platform",
+        "type_id": 4013
+      },
+      {
+        "type_id": 18,
+        "type_name": "EventCRE",
+        "id": 63,
+        "name": "Custom Rule Engine-8 :: ip-172-31-34-93"
+      }
+    ],
+    "severity": 9,
+    "status": "OPEN",
+    "username_count": 0
   }
 }
 ```
@@ -623,15 +682,22 @@ This trigger is used to list all New Offenses.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|None|
-|filter|string|None|False|This parameter is used to restrict the elements in a list base on the contents of various fields|None|None|
-|interval|integer|15|True|How frequently (in seconds) to trigger a greeting|None|None|
-|range|string|None|False|Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero|None|None|
-|sort|string|None|False|Use parameter to sort the elements in a list|None|None|
+|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
+|filter|string|None|False|This parameter is used to restrict the elements in a list base on the contents of various fields|None|id=100|
+|interval|integer|15|True|How frequently (in seconds) to trigger a greeting|None|15|
+|range|string|None|False|Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero|None|1-2|
+|sort|string|None|False|Use parameter to sort the elements in a list|None|+id|
 
 Example input:
 
 ```
+{
+  "fields": "id",
+  "filter": "id=100",
+  "interval": 15,
+  "range": "1-2",
+  "sort": "+id"
+}
 ```
 
 ##### Output
@@ -647,117 +713,6 @@ Example output:
   "data": [
     {
       "categories": [
-        "Access Denied"
-      ],
-      "category_count": 1,
-      "credibility": 3,
-      "description": "Access Denied\n",
-      "destination_networks": [
-        "other"
-      ],
-      "device_count": 1,
-      "domain_id": 0,
-      "event_count": 1,
-      "first_persisted_time": 1641362102000,
-      "flow_count": 0,
-      "follow_up": false,
-      "id": 40,
-      "inactive": true,
-      "last_persisted_time": 1641364295000,
-      "last_updated_time": 1641362102216,
-      "local_destination_address_ids": [],
-      "local_destination_count": 0,
-      "log_sources": [
-        {
-          "id": 63,
-          "name": "Custom Rule Engine-8 :: ip-172-31-34-93",
-          "type_id": 18,
-          "type_name": "EventCRE"
-        }
-      ],
-      "magnitude": 3,
-      "offense_source": "127.0.0.1",
-      "offense_type": 0,
-      "policy_category_count": 0,
-      "protected": false,
-      "relevance": 2,
-      "remote_destination_count": 1,
-      "rules": [
-        {
-          "id": 100475,
-          "type": "CRE_RULE"
-        }
-      ],
-      "security_category_count": 1,
-      "severity": 6,
-      "source_address_ids": [
-        21
-      ],
-      "source_count": 1,
-      "source_network": "other",
-      "start_time": 1641362102216,
-      "status": "OPEN",
-      "username_count": 0
-    },
-    {
-      "categories": [
-        "Access Denied"
-      ],
-      "category_count": 1,
-      "credibility": 3,
-      "description": "Access Denied\n",
-      "destination_networks": [
-        "Net-10-172-192.Net_172_16_0_0",
-        "other"
-      ],
-      "device_count": 1,
-      "domain_id": 0,
-      "event_count": 308,
-      "first_persisted_time": 1641359712000,
-      "flow_count": 0,
-      "follow_up": false,
-      "id": 39,
-      "inactive": true,
-      "last_persisted_time": 1641383499000,
-      "last_updated_time": 1641381314500,
-      "local_destination_address_ids": [
-        14
-      ],
-      "local_destination_count": 1,
-      "log_sources": [
-        {
-          "id": 63,
-          "name": "Custom Rule Engine-8 :: ip-172-31-34-93",
-          "type_id": 18,
-          "type_name": "EventCRE"
-        }
-      ],
-      "magnitude": 4,
-      "offense_source": "169.254.3.3",
-      "offense_type": 0,
-      "policy_category_count": 0,
-      "protected": false,
-      "relevance": 3,
-      "remote_destination_count": 1,
-      "rules": [
-        {
-          "id": 100425,
-          "type": "CRE_RULE"
-        }
-      ],
-      "security_category_count": 1,
-      "severity": 6,
-      "source_address_ids": [
-        20
-      ],
-      "source_count": 1,
-      "source_network": "other",
-      "start_time": 1641359711660,
-      "status": "OPEN",
-      "username_count": 2
-    },
-    {
-      "categories": [
         "Access Denied",
         "ACL Deny"
       ],
@@ -770,14 +725,14 @@ Example output:
       ],
       "device_count": 1,
       "domain_id": 0,
-      "event_count": 60839680,
-      "first_persisted_time": 1640866551000,
+      "event_count": 13961944,
+      "first_persisted_time": 1641970466000,
       "flow_count": 0,
       "follow_up": false,
-      "id": 38,
+      "id": 42,
       "inactive": false,
-      "last_persisted_time": 1641447333000,
-      "last_updated_time": 1641447324141,
+      "last_persisted_time": 1642056328000,
+      "last_updated_time": 1642056321285,
       "local_destination_address_ids": [
         14
       ],
@@ -803,143 +758,12 @@ Example output:
           "type": "CRE_RULE"
         },
         {
-          "id": 100376,
-          "type": "CRE_RULE"
-        },
-        {
-          "id": 100426,
+          "id": 100626,
           "type": "CRE_RULE"
         },
         {
           "id": 100475,
           "type": "CRE_RULE"
-        }
-      ],
-      "security_category_count": 2,
-      "severity": 5,
-      "source_address_ids": [
-        19
-      ],
-      "source_count": 1,
-      "source_network": "Net-10-172-192.Net_172_16_0_0",
-      "start_time": 1640866550800,
-      "status": "OPEN",
-      "username_count": 2
-    },
-    {
-      "assigned_to": "admin",
-      "categories": [
-        "Access Denied"
-      ],
-      "category_count": 1,
-      "close_time": 1641283132000,
-      "closing_reason_id": 3,
-      "closing_user": "API_user: admin",
-      "credibility": 3,
-      "description": "Access Denied\n",
-      "destination_networks": [
-        "Net-10-172-192.Net_172_16_0_0",
-        "other"
-      ],
-      "device_count": 1,
-      "domain_id": 0,
-      "event_count": 23023,
-      "first_persisted_time": 1640847826000,
-      "flow_count": 0,
-      "follow_up": true,
-      "id": 37,
-      "inactive": true,
-      "last_persisted_time": 1641283171000,
-      "last_updated_time": 1640954519128,
-      "local_destination_address_ids": [
-        14
-      ],
-      "local_destination_count": 1,
-      "log_sources": [
-        {
-          "id": 63,
-          "name": "Custom Rule Engine-8 :: ip-172-31-34-93",
-          "type_id": 18,
-          "type_name": "EventCRE"
-        }
-      ],
-      "magnitude": 2,
-      "offense_source": "169.254.3.3",
-      "offense_type": 0,
-      "policy_category_count": 0,
-      "protected": true,
-      "relevance": 0,
-      "remote_destination_count": 1,
-      "rules": [
-        {
-          "id": 100425,
-          "type": "CRE_RULE"
-        }
-      ],
-      "security_category_count": 1,
-      "severity": 6,
-      "source_address_ids": [
-        20
-      ],
-      "source_count": 1,
-      "source_network": "other",
-      "start_time": 1640847826007,
-      "status": "CLOSED",
-      "username_count": 1
-    },
-    {
-      "assigned_to": "admin",
-      "categories": [
-        "Access Denied",
-        "ACL Deny"
-      ],
-      "category_count": 2,
-      "close_time": 1640866535000,
-      "closing_reason_id": 2,
-      "closing_user": "API_user: admin",
-      "credibility": 2,
-      "description": "Excessive Firewall Denies Between Hosts\n",
-      "destination_networks": [
-        "Net-10-172-192.Net_172_16_0_0",
-        "other"
-      ],
-      "device_count": 1,
-      "domain_id": 0,
-      "event_count": 10546223,
-      "first_persisted_time": 1640776031000,
-      "flow_count": 0,
-      "follow_up": false,
-      "id": 36,
-      "inactive": true,
-      "last_persisted_time": 1640866575000,
-      "last_updated_time": 1640866517848,
-      "local_destination_address_ids": [
-        14
-      ],
-      "local_destination_count": 1,
-      "log_sources": [
-        {
-          "id": 63,
-          "name": "Custom Rule Engine-8 :: ip-172-31-34-93",
-          "type_id": 18,
-          "type_name": "EventCRE"
-        }
-      ],
-      "magnitude": 2,
-      "offense_source": "172.31.34.93",
-      "offense_type": 0,
-      "policy_category_count": 0,
-      "protected": true,
-      "relevance": 0,
-      "remote_destination_count": 1,
-      "rules": [
-        {
-          "id": 100033,
-          "type": "CRE_RULE"
-        },
-        {
-          "id": 100376,
-          "type": "CRE_RULE"
         },
         {
           "id": 100426,
@@ -953,168 +777,39 @@ Example output:
       ],
       "source_count": 1,
       "source_network": "Net-10-172-192.Net_172_16_0_0",
-      "start_time": 1640776030467,
-      "status": "CLOSED",
+      "start_time": 1641970465643,
+      "status": "OPEN",
       "username_count": 2
     },
     {
-      "categories": [
-        "Access Denied"
-      ],
-      "category_count": 1,
-      "close_time": 1640776007000,
-      "closing_reason_id": 2,
-      "closing_user": "API_user: admin",
-      "credibility": 3,
-      "description": "Access Denied\n",
-      "destination_networks": [
-        "other"
-      ],
-      "device_count": 1,
-      "domain_id": 0,
-      "event_count": 18558,
-      "first_persisted_time": 1640775851000,
-      "flow_count": 0,
-      "follow_up": true,
-      "id": 35,
-      "inactive": true,
-      "last_persisted_time": 1640776050000,
-      "last_updated_time": 1640776000385,
-      "local_destination_address_ids": [],
-      "local_destination_count": 0,
-      "log_sources": [
-        {
-          "id": 63,
-          "name": "Custom Rule Engine-8 :: ip-172-31-34-93",
-          "type_id": 18,
-          "type_name": "EventCRE"
-        }
-      ],
-      "magnitude": 2,
-      "offense_source": "172.31.34.93",
-      "offense_type": 0,
-      "policy_category_count": 0,
-      "protected": false,
-      "relevance": 0,
-      "remote_destination_count": 1,
-      "rules": [
-        {
-          "id": 100033,
-          "type": "CRE_RULE"
-        },
-        {
-          "id": 100376,
-          "type": "CRE_RULE"
-        }
-      ],
-      "security_category_count": 1,
-      "severity": 5,
-      "source_address_ids": [
-        19
-      ],
-      "source_count": 1,
-      "source_network": "Net-10-172-192.Net_172_16_0_0",
-      "start_time": 1640775850743,
-      "status": "CLOSED",
-      "username_count": 0
-    },
-    {
-      "assigned_to": "Mike_TM",
       "categories": [
         "Access Denied",
         "ACL Deny"
       ],
       "category_count": 2,
-      "close_time": 1640775830000,
-      "closing_reason_id": 1,
-      "closing_user": "API_user: admin",
+      "close_time": 1641970533000,
+      "closing_reason_id": 54,
+      "closing_user": "admin",
       "credibility": 2,
       "description": "Excessive Firewall Denies Between Hosts\n",
       "destination_networks": [
-        "Net-10-172-192.Net_172_16_0_0",
-        "other"
+        "Net-10-172-192.Net_172_16_0_0"
       ],
       "device_count": 1,
       "domain_id": 0,
-      "event_count": 2165067,
-      "first_persisted_time": 1640758015000,
+      "event_count": 2429,
+      "first_persisted_time": 1641968803000,
       "flow_count": 0,
-      "follow_up": true,
-      "id": 34,
+      "follow_up": false,
+      "id": 41,
       "inactive": true,
-      "last_persisted_time": 1640778017000,
-      "last_updated_time": 1640775819770,
+      "last_persisted_time": 1641970583000,
+      "last_updated_time": 1641970524788,
       "local_destination_address_ids": [
         14
       ],
       "local_destination_count": 1,
       "log_sources": [
-        {
-          "id": 63,
-          "name": "Custom Rule Engine-8 :: ip-172-31-34-93",
-          "type_id": 18,
-          "type_name": "EventCRE"
-        }
-      ],
-      "magnitude": 2,
-      "offense_source": "172.31.34.93",
-      "offense_type": 0,
-      "policy_category_count": 0,
-      "protected": false,
-      "relevance": 0,
-      "remote_destination_count": 1,
-      "rules": [
-        {
-          "id": 100033,
-          "type": "CRE_RULE"
-        },
-        {
-          "id": 100376,
-          "type": "CRE_RULE"
-        }
-      ],
-      "security_category_count": 2,
-      "severity": 5,
-      "source_address_ids": [
-        19
-      ],
-      "source_count": 1,
-      "source_network": "Net-10-172-192.Net_172_16_0_0",
-      "start_time": 1640758014341,
-      "status": "CLOSED",
-      "username_count": 1
-    },
-    {
-      "categories": [
-        "Command Execution",
-        "Input Validation Exploit",
-        "Misc Exploit"
-      ],
-      "category_count": 3,
-      "credibility": 3,
-      "description": "Multiple Exploit/Malware Types Targeting a Single Destination\n containing Command Injection\n",
-      "destination_networks": [
-        "other"
-      ],
-      "device_count": 2,
-      "domain_id": 0,
-      "event_count": 4,
-      "first_persisted_time": 1640155213000,
-      "flow_count": 0,
-      "follow_up": false,
-      "id": 33,
-      "inactive": true,
-      "last_persisted_time": 1641400827000,
-      "last_updated_time": 1640155212603,
-      "local_destination_address_ids": [],
-      "local_destination_count": 0,
-      "log_sources": [
-        {
-          "id": 23312,
-          "name": "Virsec Security Platform",
-          "type_id": 4013,
-          "type_name": "VirsecSecurityPlatformCustom"
-        },
         {
           "id": 63,
           "name": "Custom Rule Engine-8 :: ip-172-31-34-93",
@@ -1123,97 +818,32 @@ Example output:
         }
       ],
       "magnitude": 3,
-      "offense_source": "49.206.13.49",
-      "offense_type": 1,
+      "offense_source": "183.82.206.22",
+      "offense_type": 0,
       "policy_category_count": 0,
       "protected": false,
-      "relevance": 0,
-      "remote_destination_count": 1,
+      "relevance": 3,
+      "remote_destination_count": 0,
       "rules": [
         {
-          "id": 100113,
+          "id": 100625,
           "type": "CRE_RULE"
-        }
-      ],
-      "security_category_count": 3,
-      "severity": 9,
-      "source_address_ids": [
-        18
-      ],
-      "source_count": 1,
-      "source_network": "other",
-      "start_time": 1640155212500,
-      "status": "OPEN",
-      "username_count": 0
-    },
-    {
-      "categories": [
-        "Code Injection",
-        "Buffer Overflow",
-        "SQL Injection",
-        "Cross Site Scripting",
-        "Input Validation Exploit",
-        "Command Execution",
-        "Misc Exploit"
-      ],
-      "category_count": 7,
-      "close_time": 1640756435000,
-      "closing_reason_id": 54,
-      "closing_user": "admin",
-      "credibility": 3,
-      "description": "Multiple Exploit/Malware Types Targeting a Single Destination\n containing CSRF\n",
-      "destination_networks": [
-        "other"
-      ],
-      "device_count": 2,
-      "domain_id": 0,
-      "event_count": 17,
-      "first_persisted_time": 1640075633000,
-      "flow_count": 0,
-      "follow_up": false,
-      "id": 32,
-      "inactive": true,
-      "last_persisted_time": 1640756436000,
-      "last_updated_time": 1640075632599,
-      "local_destination_address_ids": [],
-      "local_destination_count": 0,
-      "log_sources": [
-        {
-          "id": 63,
-          "name": "Custom Rule Engine-8 :: ip-172-31-34-93",
-          "type_id": 18,
-          "type_name": "EventCRE"
         },
         {
-          "id": 23312,
-          "name": "Virsec Security Platform",
-          "type_id": 4013,
-          "type_name": "VirsecSecurityPlatformCustom"
-        }
-      ],
-      "magnitude": 4,
-      "offense_source": "49.36.68.146",
-      "offense_type": 1,
-      "policy_category_count": 0,
-      "protected": false,
-      "relevance": 0,
-      "remote_destination_count": 1,
-      "rules": [
-        {
-          "id": 100113,
+          "id": 100033,
           "type": "CRE_RULE"
         }
       ],
-      "security_category_count": 7,
-      "severity": 10,
+      "security_category_count": 2,
+      "severity": 5,
       "source_address_ids": [
-        17
+        22
       ],
       "source_count": 1,
       "source_network": "other",
-      "start_time": 1640075632388,
+      "start_time": 1641968802643,
       "status": "CLOSED",
-      "username_count": 2
+      "username_count": 1
     }
   ]
 }
@@ -1284,10 +914,10 @@ Example output:
 |First Seen Profiler|string|False|First seen profiler|
 |First Seen Scanner|string|False|First seen scanner|
 |Id|integer|False|Id|
-|Ip Addresses|[]ip_addresses|False|Ip addresses|
+|IP Addresses|[]ip_addresses|False|IP addresses|
 |Last Seen Profiler|string|False|Last seen profiler|
 |Last Seen Scanner|string|False|Last seen scanner|
-|Mac Address|string|False|Mac address|
+|MAC Address|string|False|MAC address|
 
 #### ip_addresses
 
@@ -1433,3 +1063,4 @@ _This plugin does not contain any troubleshooting information._
 
 * [IBM QRadar](https://www.ibm.com/docs/en/qsip)
 * [AQL](https://www.ibm.com/docs/en/qradar-on-cloud?topic=structure-sample-aql-queries)
+
