@@ -1,0 +1,18 @@
+name: Dump git vars
+
+on:
+  push:
+  schedule:
+    - cron: '*/15 * * * *'
+
+jobs:
+  check-status:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: dump variables
+        shell: bash
+        run:
+          env
