@@ -6,6 +6,9 @@ IBM QRadar reduces billions of events and flows into a manageable number of acti
 
 Identify key features of plugin.
 
+# Requirements
+
+
 # Supported Product Versions
 
 * 7.3.3
@@ -324,9 +327,8 @@ Example input:
 ```
 {
   "fields": "id",
-  "filter": "id=100",
-  "offense_id": 100,
-  "range": "1-2"
+  "note_id": 100,
+  "offense_id": 100
 }
 ```
 
