@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v1
       - name: dump variables
         shell: bash
         run:
@@ -20,6 +21,7 @@ jobs:
         env:
             GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
+
       - name: Branch details
         run:
           echo "GITHUB_WORKFLOW:$GITHUB_WORKFLOW"
@@ -30,9 +32,11 @@ jobs:
           echo "GITHUB_REF:$GITHUB_REF"
           echo "GITHUB_HEAD_REF:$GITHUB_HEAD_REF"
           echo "GITHUB_BASE_REF:$GITHUB_BASE_REF"
+
       -name: Details
-       run:
-         if github.event.pull_request.base.ref == 'master'; then
+       shell: bash
+       run: |
+         if [[ github.event.pull_request.base.ref == 'master' ]] ; then
             echo "master"
          else
             echo "dont know"
