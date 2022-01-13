@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get Ariel Search By Id"
+    DESCRIPTION = "Get ariel search by ID"
 
 
 class Input:
@@ -26,7 +26,7 @@ class GetArielSearchByIdInput(insightconnect_plugin_runtime.Input):
     "poll_interval": {
       "type": "number",
       "title": "Poll Interval",
-      "description": "Poll interval is the number of seconds to recheck until the search gets COMPLETED.",
+      "description": "Poll interval is the number of seconds to recheck until the search gets COMPLETED",
       "default": 1,
       "order": 2
     },
@@ -58,7 +58,7 @@ class GetArielSearchByIdOutput(insightconnect_plugin_runtime.Output):
     "data": {
       "$ref": "#/definitions/search",
       "title": "Search Data",
-      "description": "Json Data of the Search",
+      "description": "JSON Data of the Search",
       "order": 1
     }
   },

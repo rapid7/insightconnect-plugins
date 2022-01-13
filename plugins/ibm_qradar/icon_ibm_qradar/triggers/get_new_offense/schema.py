@@ -31,13 +31,13 @@ class GetNewOffenseInput(insightconnect_plugin_runtime.Input):
     "fields": {
       "type": "string",
       "title": "Fields",
-      "description": "Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas.",
+      "description": "Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas",
       "order": 3
     },
     "filter": {
       "type": "string",
       "title": "Filter",
-      "description": "This parameter is used to restrict the elements in a list base on the contents of various fields.",
+      "description": "This parameter is used to restrict the elements in a list base on the contents of various fields",
       "order": 2
     },
     "interval": {
@@ -50,13 +50,13 @@ class GetNewOffenseInput(insightconnect_plugin_runtime.Input):
     "range": {
       "type": "string",
       "title": "Range",
-      "description": "Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero.",
+      "description": "Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero",
       "order": 1
     },
     "sort": {
       "type": "string",
       "title": "Sort",
-      "description": "Use parameter to sort the elements in a list.",
+      "description": "Use parameter to sort the elements in a list",
       "order": 4
     }
   },
@@ -81,7 +81,7 @@ class GetNewOffenseOutput(insightconnect_plugin_runtime.Output):
     "data": {
       "type": "array",
       "title": "Offense Data",
-      "description": "Json Data of the Offense",
+      "description": "JSON Data of the Offense",
       "items": {
         "$ref": "#/definitions/offense"
       },

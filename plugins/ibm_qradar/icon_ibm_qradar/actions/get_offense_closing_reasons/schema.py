@@ -29,31 +29,31 @@ class GetOffenseClosingReasonsInput(insightconnect_plugin_runtime.Input):
     "fields": {
       "type": "string",
       "title": "Fields",
-      "description": "Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas.",
+      "description": "Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas",
       "order": 3
     },
     "filter": {
       "type": "string",
       "title": "Filter",
-      "description": "This parameter is used to restrict the elements in a list base on the contents of various fields.",
+      "description": "This parameter is used to restrict the elements in a list base on the contents of various fields",
       "order": 2
     },
     "include_deleted": {
       "type": "boolean",
       "title": "Include Deleted",
-      "description": "If true, deleted closing reasons are included in the response. Defaults to false. Deleted closing reasons cannot be used to close an offense.",
+      "description": "If true, deleted closing reasons are included in the response. Defaults to false. Deleted closing reasons cannot be used to close an offense",
       "order": 4
     },
     "include_reserved": {
       "type": "boolean",
       "title": "Include Reserved",
-      "description": "If true, reserved closing reasons are included in the response. Defaults to false. Reserved closing reasons cannot be used to close an offense.",
+      "description": "If true, reserved closing reasons are included in the response. Defaults to false. Reserved closing reasons cannot be used to close an offense",
       "order": 5
     },
     "range": {
       "type": "string",
       "title": "Range",
-      "description": "Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero.",
+      "description": "Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero",
       "order": 1
     }
   }
@@ -74,8 +74,8 @@ class GetOffenseClosingReasonsOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "data": {
       "type": "array",
-      "title": "Offense's Closing Reasons",
-      "description": "Json Data of the Offense Closing Reasons",
+      "title": "Offense Closing Reasons",
+      "description": "JSON Data of the Offense Closing Reasons",
       "items": {
         "$ref": "#/definitions/closing_reason"
       },

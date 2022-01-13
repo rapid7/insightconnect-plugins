@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get Offense Notes By Id"
+    DESCRIPTION = "Get Offense Notes by Id"
 
 
 class Input:
@@ -27,19 +27,19 @@ class GetOffenseNoteByIdInput(insightconnect_plugin_runtime.Input):
     "fields": {
       "type": "string",
       "title": "Fields",
-      "description": "Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas.",
+      "description": "Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas",
       "order": 3
     },
     "note_id": {
       "type": "integer",
       "title": "Note Id",
-      "description": "The ID of the offense note to get.",
+      "description": "The ID of the offense note to get",
       "order": 2
     },
     "offense_id": {
       "type": "integer",
       "title": "Offense Id",
-      "description": "The ID of the offense to get its notes.",
+      "description": "The ID of the offense to get its notes",
       "order": 1
     }
   },
@@ -64,8 +64,8 @@ class GetOffenseNoteByIdOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "data": {
       "$ref": "#/definitions/note",
-      "title": "Offense Notes By Id",
-      "description": "Json Data of the Offense Notes for given id.",
+      "title": "Offense Notes by Id",
+      "description": "JSON Data of the Offense Notes for given id",
       "order": 1
     }
   },

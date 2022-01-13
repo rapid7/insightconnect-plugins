@@ -7,7 +7,7 @@ vendor: rapid7-sacumen
 support: community
 status: []
 supported_versions: [7.3.3]
-description: IBM QRadar reduces billions of events and flows into a manageable number of actionable offenses that are prioritized by their impact on your business operations. This plugin allows you to use IBM QRadar to orchestrate and automate Ariel search queries and automate offense management.
+description: IBM QRadar reduces billions of events and flows into a manageable number of actionable offenses that are prioritized by their impact on your business operations. This plugin allows you to use IBM QRadar to orchestrate and automate Ariel search queries and automate offense management
 version: 1.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/ibm_qradar
@@ -19,6 +19,10 @@ tags:
   - aql
   - offenses
   - orchestration
+hub_tags:
+  use_cases: [asset_inventory, vulnerability_management, offensive_security]
+  keywords: [offense, ariel, search]
+  features: []
 enable_cache: false
 connection:
   hostname:
@@ -240,9 +244,9 @@ types:
       description: "Id"
       required: false
     ip_addresses:
-      title: "Ip Addresses"
+      title: "IP Addresses"
       type: "[]ip_addresses"
-      description: "Ip addresses"
+      description: "IP addresses"
       required: false
     last_seen_profiler:
       title: "Last Seen Profiler"
@@ -255,9 +259,9 @@ types:
       description: "Last seen scanner"
       required: false
     mac_address:
-      title: "Mac Address"
+      title: "MAC Address"
       type: string
-      description: "Mac address"
+      description: "MAC address"
       required: false
   properties:
     id:
@@ -684,19 +688,19 @@ actions:
     description: Start Ariel Search
     input:
       aql:
-        title: AQL query
+        title: AQL Query
         type: string
-        description: AQL query to perform the search.
+        description: AQL query to perform the search
         required: true
     output:
       data:
-        title: "Search Data"
+        title: Search Data
         type: search
-        description: "Json Data of the Search"
+        description: JSON Data of the Search
         required: false
   get_ariel_search_by_id:
-    title: Get Ariel Search By Id
-    description: Get Ariel Search By Id
+    title: Get Ariel Search by ID
+    description: Get ariel search by ID
     input:
       search_id:
         type: string
@@ -705,13 +709,13 @@ actions:
       poll_interval:
         type: number
         required: false
-        description: Poll interval is the number of seconds to recheck until the search gets COMPLETED.
+        description: Poll interval is the number of seconds to recheck until the search gets COMPLETED
         default: 1
     output:
       data:
-        title: "Search Data"
+        title: Search Data
         type: search
-        description: "Json Data of the Search"
+        description: JSON Data of the Search
         required: false
   get_assets:
     title: Get Assets
@@ -720,20 +724,20 @@ actions:
       range:
         type: string
         required: false
-        description: Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero.
+        description: Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero
       filter:
         type: string
         required: false
-        description: This parameter is used to restrict the elements in a list base on the contents of various fields.
+        description: This parameter is used to restrict the elements in a list base on the contents of various fields
       fields:
         type: string
         required: false
-        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas.
+        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
     output:
       data:
-        title: "Assets Data"
+        title: Assets Data
         type: "[]assets"
-        description: "Json Data of the Assets"
+        description: JSON Data of the Assets
         required: false
   get_offenses:
     title: Get Offenses
@@ -742,24 +746,24 @@ actions:
       range:
         type: string
         required: false
-        description: Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero.
+        description: Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero
       filter:
         type: string
         required: false
-        description: This parameter is used to restrict the elements in a list base on the contents of various fields.
+        description: This parameter is used to restrict the elements in a list base on the contents of various fields
       fields:
         type: string
         required: false
-        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas.
+        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
       sort:
         type: string
         required: false
-        description: Use parameter to sort the elements in a list.
+        description: Use parameter to sort the elements in a list
     output:
       data:
-        title: "Offense Data"
+        title: Offense Data
         type: "[]offense"
-        description: "Json Data of the Offense"
+        description: "JSON Data of the Offense"
         required: false
   get_offense_closing_reasons:
     title: Get Offense's Closing Reasons
@@ -768,28 +772,28 @@ actions:
       range:
         type: string
         required: false
-        description: Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero.
+        description: Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero
       filter:
         type: string
         required: false
-        description: This parameter is used to restrict the elements in a list base on the contents of various fields.
+        description: This parameter is used to restrict the elements in a list base on the contents of various fields
       fields:
         type: string
         required: false
-        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas.
+        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
       include_deleted:
         type: boolean
         required: false
-        description: If true, deleted closing reasons are included in the response. Defaults to false. Deleted closing reasons cannot be used to close an offense.
+        description: If true, deleted closing reasons are included in the response. Defaults to false. Deleted closing reasons cannot be used to close an offense
       include_reserved:
         type: boolean
         required: false
-        description: If true, reserved closing reasons are included in the response. Defaults to false. Reserved closing reasons cannot be used to close an offense.
+        description: If true, reserved closing reasons are included in the response. Defaults to false. Reserved closing reasons cannot be used to close an offense
     output:
       data:
-        title: "Offense's Closing Reasons"
+        title: Offense Closing Reasons
         type: "[]closing_reason"
-        description: "Json Data of the Offense Closing Reasons"
+        description: JSON Data of the Offense Closing Reasons
         required: false
   update_offense:
     title: Update Offenses
@@ -798,31 +802,31 @@ actions:
       offense_id:
         type: integer
         required: true
-        description: The ID of the offense to update.
+        description: The ID of the offense to update
       assigned_to:
         type: string
         required: false
-        description: A user to assign the offense to.
+        description: A user to assign the offense to
       closing_reason_id:
         type: string
         required: false
-        description: The ID of a closing reason. You must provide a valid closing_reason_id when you close an offense.
+        description: The ID of a closing reason. You must provide a valid closing_reason_id when you close an offense
       fields:
         type: string
         required: false
-        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas.
+        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
       follow_up:
         type: boolean
         required: false
-        description: Set to true to set the follow up flag on the offense.
+        description: Set to true to set the follow up flag on the offense
       protected:
         type: boolean
         required: false
-        description: The ID of a closing reason. You must provide a valid closing_reason_id when you close an offense.
+        description: The ID of a closing reason. You must provide a valid closing_reason_id when you close an offense
       status:
         type: string
         required: false
-        description: The new status for the offense. Set to one of the OPEN, HIDDEN, CLOSED. When the status of an offense is being set to CLOSED, a valid closing_reason_id must be provided. To hide an offense, use the HIDDEN status. To show a previously hidden offense, use the OPEN status.
+        description: The new status for the offense. Set to one of the OPEN, HIDDEN, CLOSED. When the status of an offense is being set to CLOSED, a valid closing_reason_id must be provided. To hide an offense, use the HIDDEN status. To show a previously hidden offense, use the OPEN status
         enum:
           - "OPEN"
           - "HIDDEN"
@@ -830,9 +834,9 @@ actions:
           - ""
     output:
       data:
-        title: "Update Offense"
+        title: Update Offense
         type: "offense"
-        description: "Json Data of the Offense"
+        description: "JSON Data of the Offense"
         required: false
   get_offense_note:
     title: Get Offense Notes
@@ -841,46 +845,46 @@ actions:
       offense_id:
         type: integer
         required: true
-        description: The ID of the offense to get its notes.
+        description: The ID of the offense to get its notes
       range:
         type: string
         required: false
-        description: Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero.
+        description: Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero
       filter:
         type: string
         required: false
-        description: This parameter is used to restrict the elements in a list base on the contents of various fields.
+        description: This parameter is used to restrict the elements in a list base on the contents of various fields
       fields:
         type: string
         required: false
-        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas.
+        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
     output:
       data:
-        title: "Offense Notes"
+        title: Offense Notes
         type: "[]note"
-        description: "Json Data of the Offense Notes"
+        description: JSON Data of the Offense Notes
         required: false
   get_offense_note_by_id:
-    title: Get Offense Notes By Id
-    description: Get Offense Notes By Id
+    title: Get Offense Notes by Id
+    description: Get Offense Notes by Id
     input:
       offense_id:
         type: integer
         required: true
-        description: The ID of the offense to get its notes.
+        description: The ID of the offense to get its notes
       note_id:
         type: integer
         required: true
-        description: The ID of the offense note to get.
+        description: The ID of the offense note to get
       fields:
         type: string
         required: false
-        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas.
+        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
     output:
       data:
-        title: "Offense Notes By Id"
+        title: Offense Notes by Id
         type: note
-        description: "Json Data of the Offense Notes for given id."
+        description: JSON Data of the Offense Notes for given id
         required: false
   add_notes_to_offense:
     title: Add Notes to Offense
@@ -889,20 +893,20 @@ actions:
       offense_id:
         type: integer
         required: true
-        description: The ID of the offense in which you want to add note.
+        description: The ID of the offense in which you want to add note
       note_text:
         type: string
         required: true
-        description: The Note Text to add to offense.
+        description: The Note Text to add to offense
       fields:
         type: string
         required: false
-        description: Use this parameter to specify which fields you would like to get back in the response. fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas.
+        description: Use this parameter to specify which fields you would like to get back in the response. fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
     output:
       data:
         title: "Newly Added Offense Notes"
         type: note
-        description: "Json Data of the newly added Offense Notes "
+        description: "JSON Data of the newly added Offense Notes "
         required: false
 triggers:
   get_new_offense:
@@ -912,19 +916,19 @@ triggers:
       range:
         type: string
         required: false
-        description: Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero.
+        description: Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero
       filter:
         type: string
         required: false
-        description: This parameter is used to restrict the elements in a list base on the contents of various fields.
+        description: This parameter is used to restrict the elements in a list base on the contents of various fields
       fields:
         type: string
         required: false
-        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas.
+        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
       sort:
         type: string
         required: false
-        description: Use parameter to sort the elements in a list.
+        description: Use parameter to sort the elements in a list
       interval:
         description: How frequently (in seconds) to trigger a greeting
         type: integer
@@ -934,5 +938,5 @@ triggers:
       data:
         title: "Offense Data"
         type: "[]offense"
-        description: "Json Data of the Offense"
+        description: "JSON Data of the Offense"
         required: false

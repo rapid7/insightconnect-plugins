@@ -31,43 +31,43 @@ class UpdateOffenseInput(insightconnect_plugin_runtime.Input):
     "assigned_to": {
       "type": "string",
       "title": "Assigned To",
-      "description": "A user to assign the offense to.",
+      "description": "A user to assign the offense to",
       "order": 2
     },
     "closing_reason_id": {
       "type": "string",
       "title": "Closing Reason Id",
-      "description": "The ID of a closing reason. You must provide a valid closing_reason_id when you close an offense.",
+      "description": "The ID of a closing reason. You must provide a valid closing_reason_id when you close an offense",
       "order": 3
     },
     "fields": {
       "type": "string",
       "title": "Fields",
-      "description": "Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas.",
+      "description": "Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas",
       "order": 4
     },
     "follow_up": {
       "type": "boolean",
       "title": "Follow Up",
-      "description": "Set to true to set the follow up flag on the offense.",
+      "description": "Set to true to set the follow up flag on the offense",
       "order": 5
     },
     "offense_id": {
       "type": "integer",
       "title": "Offense Id",
-      "description": "The ID of the offense to update.",
+      "description": "The ID of the offense to update",
       "order": 1
     },
     "protected": {
       "type": "boolean",
       "title": "Protected",
-      "description": "The ID of a closing reason. You must provide a valid closing_reason_id when you close an offense.",
+      "description": "The ID of a closing reason. You must provide a valid closing_reason_id when you close an offense",
       "order": 6
     },
     "status": {
       "type": "string",
       "title": "Status",
-      "description": "The new status for the offense. Set to one of the OPEN, HIDDEN, CLOSED. When the status of an offense is being set to CLOSED, a valid closing_reason_id must be provided. To hide an offense, use the HIDDEN status. To show a previously hidden offense, use the OPEN status.",
+      "description": "The new status for the offense. Set to one of the OPEN, HIDDEN, CLOSED. When the status of an offense is being set to CLOSED, a valid closing_reason_id must be provided. To hide an offense, use the HIDDEN status. To show a previously hidden offense, use the OPEN status",
       "enum": [
         "OPEN",
         "HIDDEN",
@@ -98,7 +98,7 @@ class UpdateOffenseOutput(insightconnect_plugin_runtime.Output):
     "data": {
       "$ref": "#/definitions/offense",
       "title": "Update Offense",
-      "description": "Json Data of the Offense",
+      "description": "JSON Data of the Offense",
       "order": 1
     }
   },

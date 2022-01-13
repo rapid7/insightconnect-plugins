@@ -28,25 +28,25 @@ class GetOffenseNoteInput(insightconnect_plugin_runtime.Input):
     "fields": {
       "type": "string",
       "title": "Fields",
-      "description": "Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas.",
+      "description": "Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas",
       "order": 4
     },
     "filter": {
       "type": "string",
       "title": "Filter",
-      "description": "This parameter is used to restrict the elements in a list base on the contents of various fields.",
+      "description": "This parameter is used to restrict the elements in a list base on the contents of various fields",
       "order": 3
     },
     "offense_id": {
       "type": "integer",
       "title": "Offense Id",
-      "description": "The ID of the offense to get its notes.",
+      "description": "The ID of the offense to get its notes",
       "order": 1
     },
     "range": {
       "type": "string",
       "title": "Range",
-      "description": "Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero.",
+      "description": "Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero",
       "order": 2
     }
   },
@@ -71,7 +71,7 @@ class GetOffenseNoteOutput(insightconnect_plugin_runtime.Output):
     "data": {
       "type": "array",
       "title": "Offense Notes",
-      "description": "Json Data of the Offense Notes",
+      "description": "JSON Data of the Offense Notes",
       "items": {
         "$ref": "#/definitions/note"
       },

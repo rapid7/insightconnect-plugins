@@ -27,19 +27,19 @@ class AddNotesToOffenseInput(insightconnect_plugin_runtime.Input):
     "fields": {
       "type": "string",
       "title": "Fields",
-      "description": "Use this parameter to specify which fields you would like to get back in the response. fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas.",
+      "description": "Use this parameter to specify which fields you would like to get back in the response. fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas",
       "order": 3
     },
     "note_text": {
       "type": "string",
       "title": "Note Text",
-      "description": "The Note Text to add to offense.",
+      "description": "The Note Text to add to offense",
       "order": 2
     },
     "offense_id": {
       "type": "integer",
       "title": "Offense Id",
-      "description": "The ID of the offense in which you want to add note.",
+      "description": "The ID of the offense in which you want to add note",
       "order": 1
     }
   },
@@ -65,7 +65,7 @@ class AddNotesToOffenseOutput(insightconnect_plugin_runtime.Output):
     "data": {
       "$ref": "#/definitions/note",
       "title": "Newly Added Offense Notes",
-      "description": "Json Data of the newly added Offense Notes ",
+      "description": "JSON Data of the newly added Offense Notes ",
       "order": 1
     }
   },

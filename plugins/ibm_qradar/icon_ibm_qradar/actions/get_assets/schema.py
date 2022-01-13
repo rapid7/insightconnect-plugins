@@ -27,19 +27,19 @@ class GetAssetsInput(insightconnect_plugin_runtime.Input):
     "fields": {
       "type": "string",
       "title": "Fields",
-      "description": "Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas.",
+      "description": "Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas",
       "order": 3
     },
     "filter": {
       "type": "string",
       "title": "Filter",
-      "description": "This parameter is used to restrict the elements in a list base on the contents of various fields.",
+      "description": "This parameter is used to restrict the elements in a list base on the contents of various fields",
       "order": 2
     },
     "range": {
       "type": "string",
       "title": "Range",
-      "description": "Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero.",
+      "description": "Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero",
       "order": 1
     }
   }
@@ -61,7 +61,7 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
     "data": {
       "type": "array",
       "title": "Assets Data",
-      "description": "Json Data of the Assets",
+      "description": "JSON Data of the Assets",
       "items": {
         "$ref": "#/definitions/assets"
       },
@@ -228,8 +228,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
             },
             "ip_addresses": {
               "type": "array",
-              "title": "Ip Addresses",
-              "description": "Ip addresses",
+              "title": "IP Addresses",
+              "description": "IP addresses",
               "items": {
                 "$ref": "#/definitions/ip_addresses"
               },
@@ -249,8 +249,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
             },
             "mac_address": {
               "type": "string",
-              "title": "Mac Address",
-              "description": "Mac address",
+              "title": "MAC Address",
+              "description": "MAC address",
               "order": 8
             }
           },
@@ -553,8 +553,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
         },
         "ip_addresses": {
           "type": "array",
-          "title": "Ip Addresses",
-          "description": "Ip addresses",
+          "title": "IP Addresses",
+          "description": "IP addresses",
           "items": {
             "$ref": "#/definitions/ip_addresses"
           },
@@ -574,8 +574,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
         },
         "mac_address": {
           "type": "string",
-          "title": "Mac Address",
-          "description": "Mac address",
+          "title": "MAC Address",
+          "description": "MAC address",
           "order": 8
         }
       },

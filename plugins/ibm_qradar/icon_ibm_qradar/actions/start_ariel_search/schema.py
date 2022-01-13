@@ -24,8 +24,8 @@ class StartArielSearchInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "aql": {
       "type": "string",
-      "title": "AQL query",
-      "description": "AQL query to perform the search.",
+      "title": "AQL Query",
+      "description": "AQL query to perform the search",
       "order": 1
     }
   },
@@ -50,7 +50,7 @@ class StartArielSearchOutput(insightconnect_plugin_runtime.Output):
     "data": {
       "$ref": "#/definitions/search",
       "title": "Search Data",
-      "description": "Json Data of the Search",
+      "description": "JSON Data of the Search",
       "order": 1
     }
   },
