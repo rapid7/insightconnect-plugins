@@ -23,4 +23,4 @@ jobs:
 
       - name: Github context
         run:
-          echo "$GITHUB_EVENT_PATH"
+          echo "$GITHUB_BASE_REF"
