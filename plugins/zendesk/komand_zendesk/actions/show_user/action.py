@@ -1,11 +1,12 @@
-import komand
-from .schema import ShowUserInput, ShowUserOutput
+import insightconnect_plugin_runtime
+from .schema import ShowUserInput, ShowUserOutput, Input, Output
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
-import json
+import zenpy
 
 
-class ShowUser(komand.Action):
+class ShowUser(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="show_user",
@@ -15,7 +16,14 @@ class ShowUser(komand.Action):
         )
 
     def run(self, params={}):
-        user = self.connection.client.users(id=params.get("user_id"))
+        try:
+            user = self.connection.client.users(id=params.get(Input.USER_ID))
+        except zenpy.lib.exception.APIException as e:
+            self.logger.debug(e)
+            raise PluginException(
+                cause=f"User ID {params.get(Input.USER_ID)} not found in Zendesk.",
+                assistance="Make sure the input user ID is correct.",
+            )
         user_obj = {
             "active": user.active,
             "alias": user.alias,
@@ -50,7 +58,7 @@ class ShowUser(komand.Action):
             "url": user.url,
             "verified": user.verified,
         }
-        return user_obj
+        return {Output.USER: user_obj}
 
     def test(self):
         try:

@@ -1,0 +1,15 @@
+{
+	'organization_memberships': [{
+		'url': 'https://rapid79210.zendesk.com/api/v2/organization_memberships/1261124434669.json',
+		'id': 1261124434669,
+		'user_id': 1902872923584,
+		'organization_id': 1260928947869,
+		'default': True,
+		'created_at': '2022-01-04T17:38:25Z',
+		'organization_name': 'Rapid7',
+		'updated_at': '2022-01-04T17:38:25Z'
+	}],
+	'next_page': None,
+	'previous_page': None,
+	'count': 1
+}
