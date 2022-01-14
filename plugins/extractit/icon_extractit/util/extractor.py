@@ -24,7 +24,6 @@ def extract(provided_regex: str, provided_string: str, provided_file: str) -> li
         except UnicodeDecodeError:
             file_content = extract_content_from_file(base64.b64decode(provided_file))
             matches = regex.findall(provided_regex, file_content)
-
     return list(dict.fromkeys(matches))
 
 
@@ -136,7 +135,22 @@ def define_date_time_regex(date_format: str) -> str:
 
 def parse_time(dates: list, date_format: str) -> list:
     linux_date_time_format = define_linux_date_time_format(date_format)
+    # Regex pattern used for identification of separators to handle date time formats in ISO format and all possible
+    # cases of mixed separator format that can be converted to a datetime object
+    date_value_separators = regex.findall(r"[^(%b)(%d)(%m)(%y)(%h)(%s)(%D)(%M)(%Y)(%H)(%S)]",linux_date_time_format)
+
     for date in enumerate(dates):
-        date_time_obj = datetime.strptime(date[1], linux_date_time_format)
-        dates[date[0]] = date_time_obj.strftime("%Y-%m-%dT%H:%M:%SZ")
+        date_string_list = [None] * (len(date[1]) + len(date_value_separators))
+        date_string_list[::2] = date[1];
+        date_string_list[1::2] = date_value_separators
+        date_string = ''.join(date_string_list)
+        try:
+            date_time_obj = datetime.strptime(date_string, linux_date_time_format)
+            dates[date[0]] = date_time_obj.strftime("%Y-%m-%dT%H:%M:%SZ")
+        except ValueError:
+            raise PluginException(
+                cause=f"The found date {date_string} could not be parsed as a real date",
+                assistance="Please review selected date format input for date extraction",
+            )
+
     return dates

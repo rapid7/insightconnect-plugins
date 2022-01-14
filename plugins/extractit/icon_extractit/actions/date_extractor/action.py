@@ -15,5 +15,5 @@ class DateExtractor(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {Output.DATES: parse_time(extract(define_date_time_regex(Input.DATE_FORMAT), params.get(Input.STR), params.get(Input.FILE),Input.DATE_FORMAT))}
+        return {Output.DATES: parse_time(extract(define_date_time_regex(params.get(Input.DATE_FORMAT)), params.get(Input.STR), params.get(Input.FILE)),params.get(Input.DATE_FORMAT))}
 
