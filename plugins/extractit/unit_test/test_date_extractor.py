@@ -10,7 +10,6 @@ negative_parameters = Util.load_parameters("date_extractor_negative").get("param
 error_parameters = Util.load_parameters("date_extractor_error").get("parameters")
 
 
-
 class TestDateExtractor(TestCase):
     @parameterized.expand(positive_parameters)
     def test_extract_dates_positive(self, name, date_format, string, file, expected):
