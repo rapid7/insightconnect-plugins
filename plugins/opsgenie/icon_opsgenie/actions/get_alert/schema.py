@@ -71,11 +71,7 @@ class GetAlertOutput(insightconnect_plugin_runtime.Output):
       "description": "ID of an request",
       "order": 2
     }
-  },
-  "required": [
-    "data",
-    "requestId"
-  ]
+  }
 }
     """)
 

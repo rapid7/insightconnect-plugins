@@ -15,7 +15,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "properties": {
     "api_key": {
       "$ref": "#/definitions/credential_secret_key",
-      "title": "Authorization API key",
+      "title": "Authorization API Key",
       "description": "OpsGenie authorization API key",
       "order": 1
     }

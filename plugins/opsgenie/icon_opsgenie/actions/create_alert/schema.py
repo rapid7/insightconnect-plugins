@@ -169,12 +169,7 @@ class CreateAlertOutput(insightconnect_plugin_runtime.Output):
       "description": "Time took to execute API",
       "order": 2
     }
-  },
-  "required": [
-    "requestId",
-    "result",
-    "took"
-  ]
+  }
 }
     """)
 

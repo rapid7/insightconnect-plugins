@@ -30,7 +30,7 @@ class GetOnCallsInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Date",
       "displayType": "date",
-      "description": "Starting date of the timeline that will be provided in format as (yyyy-MM-dd'T'HH:mm:ssZ) (e.g. 2017-01-15T08:00:00+02:00). Default date is the moment of the time that request is received.",
+      "description": "Starting date of the timeline that will be provided in format as (yyyy-MM-dd'T'HH:mm:ssZ) (e.g. 2017-01-15T08:00:00+02:00). Default date is the moment of the time that request is received",
       "format": "date-time",
       "order": 4
     },
@@ -93,12 +93,7 @@ class GetOnCallsOutput(insightconnect_plugin_runtime.Output):
       "description": "Time took to execute API",
       "order": 2
     }
-  },
-  "required": [
-    "data",
-    "requestId",
-    "took"
-  ]
+  }
 }
     """)
 
