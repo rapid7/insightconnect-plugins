@@ -9,6 +9,7 @@ from unittest import TestCase
 from komand_get_url.actions.get_file import GetFile
 from komand_get_url.actions.get_file.schema import Input
 from unittest.mock import patch
+from komand.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
@@ -38,6 +39,38 @@ class TestGetFile(TestCase):
             "status_code": 200,
         }
         self.assertEqual(actual, expected)
+
+    @patch("six.moves.urllib.request.urlopen", side_effect=Util.mocked_request)
+    def test_get_txt_file_with_checksum(self, mock_get):
+        actual = self.action.run(
+            {
+                Input.URL: "https://test.com/v1/test.txt",
+                Input.CHECKSUM: "5084335576ea9ec4e9d1dcd7536dec3713b3a57a",
+                Input.IS_VERIFY: False,
+            }
+        )
+        expected = {
+            "bytes": "dGVzdAp0ZXN0IGZpbGUKc29tZSB0ZXN0IGRhdGE=",
+            "status_code": 200,
+        }
+        self.assertEqual(actual, expected)
+
+    @patch("six.moves.urllib.request.urlopen", side_effect=Util.mocked_request)
+    def test_get_txt_file_with_bad_checksum(self, mock_get):
+        with self.assertRaises(PluginException) as context:
+            self.action.run(
+                {
+                    Input.URL: "https://test.com/v1/test.txt",
+                    Input.CHECKSUM: "5084335576ea9ec4e9d1dcd7536dec3713b3a57aa",
+                    Input.IS_VERIFY: False,
+                }
+            )
+
+        self.assertTrue("GetURL Failed" in context.exception.cause)
+        self.assertTrue(
+            "Any of file checksums {'md5': '3f290592253742c1ffeac7ccf5d678fd', 'sha1': '5084335576ea9ec4e9d1dcd7536dec3713b3a57a', 'sha256': '231023899ac36cad7fd0c6f034e5ac7c6d0f1ad40400c7e970ed984f8d49cc9b', 'sha512': '51548730d6fda0ab56e43be0b2a943fd808632bd9decc05e46a6e95531940da4b0274a5ab1c8176ca994591ab38105d9de5161b214bd5a4ef2844f005ea0da5a'} does not match 5084335576ea9ec4e9d1dcd7536dec3713b3a57aa."
+            in context.exception.assistance
+        )
 
     @patch("komand.helper.open_url", side_effect=Util.mocked_url_open)
     def test_is_verify(self, mock_get):
