@@ -54,6 +54,10 @@ Example input:
 
 This action adds address objects to an address group. This action supports FQDNs, IPv4 and IPv6 addresses.
 
+##### Support
+
+This action works with a direct connection to the firewall.
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -104,6 +108,10 @@ Example output:
 #### Get Addresses from Group
 
 This action is used to get addresses from an address group.
+
+##### Support
+
+This action works with a direct connection to the firewall.
 
 ##### Input
 
@@ -185,6 +193,10 @@ Example output:
 
 This action checks to see if an IP address, CIDR IP address, or domain is in an Address Group.
 
+##### Support
+
+This action works with a direct connection to the firewall.
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -229,6 +241,10 @@ Example output:
 
 This action removes an address object from an address group.
 
+##### Support
+
+This action works with a direct connection to the firewall.
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -266,6 +282,10 @@ Example output:
 #### Get Policy
 
 This action is used to get a policy.
+
+##### Support
+
+This action works with a direct connection to the firewall.
 
 ##### Input
 
@@ -350,6 +370,10 @@ checked against the whitelist of objects.  An additional note is that the whitel
 not check if a CIDR is within a larger CIDR network. The exception to this rule is if a CIDR is expressed as 1.1.1.1/32. 
 In this case, we will strip the /32 from the end and check the IP against the whitelist or the exact CIDR match.
 
+##### Support
+
+This action works with a direct connection to the firewall.
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -399,6 +423,10 @@ Example output:
 #### Set Security Policy Rule
 
 This action is used to create a new security policy rule.
+
+##### Support
+
+This action works with a direct connection to the firewall.
 
 ##### Input
 
@@ -467,6 +495,10 @@ Example output:
 
 This action is used to create a new object.
 
+##### Support
+
+This action works with Panorama.
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -505,6 +537,10 @@ Example output:
 #### Get
 
 This action is used to get candidate configuration.
+
+##### Support
+
+This action works with Panorama.
 
 ##### Input
 
@@ -569,6 +605,11 @@ Example output:
 
 This action is used to edit an existing object.
 
+
+##### Support
+
+This action works with Panorama.
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -622,6 +663,10 @@ Example output:
 #### Show
 
 This action is used to get an active configuration.
+
+##### Support
+
+This action works with Panorama.
 
 ##### Input
 
@@ -696,6 +741,10 @@ Example output:
 #### Retrieve Logs
 
 This action is used to query firewall logs.
+
+##### Support
+
+This action works with a direct connection to the firewall.
 
 ##### Input
 
@@ -778,6 +827,10 @@ Example output:
 
 This action is used to commit the candidate configuration.
 
+##### Support
+
+This action works with a direct connection to the firewall.
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -820,6 +873,10 @@ Example output:
 
 This action is used to delete an object.
 
+##### Support
+
+This action works with Panorama.
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -857,6 +914,10 @@ Example output:
 
 This action is used to run operational command.
 
+##### Support
+
+This action works with a direct connection to the firewall.
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -893,6 +954,10 @@ Example output:
 #### Add to Policy
 
 This action is used to add a rule to a PAN-OS security policy.
+
+##### Support
+
+This action works with a direct connection to the firewall.
 
 ##### Input
 
@@ -951,6 +1016,10 @@ Example output:
 #### Remove from Policy
 
 This action is used to remove a rule from a PAN-OS security policy.
+
+##### Support
+
+This action works with a direct connection to the firewall.
 
 ##### Input
 
@@ -1011,6 +1080,10 @@ Example output:
 
 This action is used to add an external dynamic list.
 
+##### Support
+
+This action works with a direct connection to the firewall.
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -1069,8 +1142,33 @@ For the URL, include `https://` e.g. `https://10.0.0.1` or `https://myfirewall`.
 
 When using the Add External Dynamic List action, a day and time must be chosen even if they are not used.
 
+Action connection type
+
+   | Action name                       | Connection type |
+   | -----------                       | -------------------- |
+   | Add Address Object to Group       | Direct firewall |
+   | Add External Dynamic List         | Direct firewall |
+   | Add to Policy                     | Direct firewall |
+   | Check if Address in Group         | Direct firewall |
+   | Commit                            | Direct firewall |
+   | Create Address Object             | Direct firewall |
+   | Delete                            | Panorama |
+   | Edit                              | Panorama |
+   | Get                               | Panorama |
+   | Get Addresses from Group          | Direct firewall |
+   | Get Policy                        | Direct firewall |
+   | Op                                | Direct firewall |
+   | Remove Address Object from Group  | Direct firewall |
+   | Remove from Policy                | Direct firewall |
+   | Retrieve Logs                     | Direct firewall |
+   | Set                               | Panorama |
+   | Set Security Policy Rule          | Direct firewall |
+   | Show                              | Panorama |
+
+
 # Version History
 
+* 6.1.4 - Add information to every action is it work with Panorama or direct firewall connection
 * 6.1.3 - Fix `check_if_private` method in Set Address Object action | Improve `determine_address_type` method in Set Address Object action | Fix issue where Add External Dynamic List action fails when `repeat` input has been set to retrieve updates from list weekly | Add example for `filter` input for Retrieve Logs action
 * 6.1.2 - Add `docs_url` in plugin spec | Update `source_url` in plugin spec
 * 6.1.1 - Remove duplicate Troubleshooting section in documentation
