@@ -24,7 +24,9 @@ class ExtractAll(insightconnect_plugin_runtime.Action):
             output=ExtractAllOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params=None):
+        if params is None:
+            params = {}
         string = params.get(Input.STR)
         file = params.get(Input.FILE)
         date_format = params.get(Input.DATE_FORMAT)

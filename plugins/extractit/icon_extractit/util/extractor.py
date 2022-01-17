@@ -148,7 +148,7 @@ def parse_time(dates: list, date_format: str) -> list:
     )
 
     for date in enumerate(dates):
-        date_string_list = [None] * (len(date[1]) + len(date_value_separators))
+        date_string_list = list(range((len(date[1]) + len(date_value_separators))))
         date_string_list[::2] = date[1]
         date_string_list[1::2] = date_value_separators
         date_string = "".join(date_string_list)
