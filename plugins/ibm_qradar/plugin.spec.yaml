@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: ibm_qradar
 title: IBM QRadar
-vendor: rapid7-sacumen
+vendor: rapid7
 support: community
 status: []
 supported_versions: [7.3.3]
@@ -21,7 +21,7 @@ tags:
   - orchestration
 hub_tags:
   use_cases: [asset_inventory, vulnerability_management, offensive_security]
-  keywords: [offense, ariel, search]
+  keywords: [siem, search]
   features: []
 enable_cache: false
 connection:
@@ -34,7 +34,7 @@ connection:
     type: string
     description: QRadar Username
     required: true
-    example: username
+    example: user1
   password:
     type: password
     description: QRadar Password
@@ -771,7 +771,7 @@ actions:
         type: string
         required: false
         description: Use parameter to sort the elements in a list
-        example: +id
+        example: +id,-status
     output:
       data:
         title: Offense Data
@@ -935,7 +935,7 @@ actions:
       fields:
         type: string
         required: false
-        description: Use this parameter to specify which fields you would like to get back in the response. fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
+        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
         example: id
     output:
       data:
@@ -967,7 +967,7 @@ triggers:
         type: string
         required: false
         description: Use parameter to sort the elements in a list
-        example: +id
+        example: +id,-status
       interval:
         description: How frequently (in seconds) to trigger a greeting
         type: integer

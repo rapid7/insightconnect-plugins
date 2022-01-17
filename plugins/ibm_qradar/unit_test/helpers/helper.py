@@ -36,7 +36,7 @@ class Helper:
         else:
             params = {
                 "hostname": "hostname",
-                "username": "username",
+                "username": "user1",
                 "password": "password",
             }
         default_connection.connect(params)

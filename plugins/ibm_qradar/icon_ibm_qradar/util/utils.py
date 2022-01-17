@@ -128,6 +128,10 @@ def handle_response(response: Response) -> dict:
 
     if response.status_code == 401:
         raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
+    if response.status_code == 403:
+        raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
+    if response.status_code == 429:
+        raise PluginException(preset=PluginException.Preset.RATE_LIMIT, data=response.text)
     if response.status_code >= 500:
         raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 

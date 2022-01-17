@@ -44,7 +44,7 @@ class TestStartArielSearch(TestCase):
 
         action = ArielSearchHelper.default_connector(
             StartArielSearch(),
-            {"hostname": "wrong", "username": "username", "password": "password"},
+            {"hostname": "wrong", "username": "user1", "password": "password"},
         )
 
         with self.assertRaises(PluginException):

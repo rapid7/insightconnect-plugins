@@ -19,7 +19,7 @@ class TestConnection(TestCase):
         """To Test the integration connection with qradar."""
         params = {
             "hostname": "hostname",
-            "username": "username",
+            "username": "user1",
             "password": "password",
         }
         self.default_connection.test(params)

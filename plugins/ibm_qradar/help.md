@@ -4,7 +4,16 @@ IBM QRadar reduces billions of events and flows into a manageable number of acti
 
 # Key Features
 
-Identify key features of plugin.
+- Start Ariel Search
+- Get Ariel Search By ID
+- Get Offenses
+- Get offense Closing Reasons
+- Get Assets
+- Get Offense Notes
+- Get Offense Note By ID
+- Add Note To Offense
+- Update Offense
+- Trigger : Get New Offenses
 
 # Requirements
 
@@ -23,7 +32,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |hostname|string|None|True|Hostname for the QRadar application|None|https://example.com|
 |password|password|None|True|QRadar Password|None|password|
-|username|string|None|True|QRadar Username|None|username|
+|username|string|None|True|QRadar Username|None|user1|
 
 Example input:
 
@@ -31,7 +40,7 @@ Example input:
 {
   "hostname": "127.0.0.1",
   "password": "password",
-  "username": "username"
+  "username": "user1"
 }
 ```
 
@@ -47,7 +56,7 @@ This action is used to add Notes to Offense.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
+|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
 |note_text|string|None|True|The Note Text to add to offense|None|note_text|
 |offense_id|integer|None|True|The ID of the offense in which you want to add note|None|100|
 
@@ -327,8 +336,9 @@ Example input:
 ```
 {
   "fields": "id",
-  "note_id": 100,
-  "offense_id": 100
+  "filter": "id=100",
+  "offense_id": 100,
+  "range": "1-2"
 }
 ```
 
@@ -363,7 +373,7 @@ This action is used to list all Offenses.
 |fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
 |filter|string|None|False|This parameter is used to restrict the elements in a list base on the contents of various fields|None|id=1000|
 |range|string|None|False|Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero|None|1-2|
-|sort|string|None|False|Use parameter to sort the elements in a list|None|+id|
+|sort|string|None|False|Use parameter to sort the elements in a list|None|+id,-status|
 
 Example input:
 
@@ -372,7 +382,7 @@ Example input:
   "fields": "id",
   "filter": "id=1000",
   "range": "1-2",
-  "sort": "+id"
+  "sort": "+id,-status"
 }
 ```
 
@@ -688,7 +698,7 @@ This trigger is used to list all New Offenses.
 |filter|string|None|False|This parameter is used to restrict the elements in a list base on the contents of various fields|None|id=100|
 |interval|integer|15|True|How frequently (in seconds) to trigger a greeting|None|15|
 |range|string|None|False|Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero|None|1-2|
-|sort|string|None|False|Use parameter to sort the elements in a list|None|+id|
+|sort|string|None|False|Use parameter to sort the elements in a list|None|+id,-status|
 
 Example input:
 
@@ -698,7 +708,7 @@ Example input:
   "filter": "id=100",
   "interval": 15,
   "range": "1-2",
-  "sort": "+id"
+  "sort": "+id,-status"
 }
 ```
 

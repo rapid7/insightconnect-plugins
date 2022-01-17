@@ -29,6 +29,12 @@ class ArielSearchHelper(Helper):
         if "internalServerError" in url_component.path:
             return MockResponse(500, {})
 
+        if "checkforbidden" in url_component.path:
+            return MockResponse(403, {})
+
+        if "checkratelimit" in url_component.path:
+            return MockResponse(429, {})
+
         if url_component.query != "":
             if "wrong" in url_component.query:
                 return MockResponse(422, data={"description": "wrong aql", "message": "wrong aql"})
