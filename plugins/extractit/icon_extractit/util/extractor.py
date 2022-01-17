@@ -19,7 +19,9 @@ def extract(provided_regex: str, provided_string: str, provided_file: str) -> li
         matches = regex.findall(provided_regex, provided_string)
     elif provided_file:
         try:
-            provided_file = urllib.parse.unquote(base64.b64decode(provided_file.encode("utf-8")).decode("utf-8"))
+            provided_file = urllib.parse.unquote(
+                base64.b64decode(provided_file.encode("utf-8")).decode("utf-8")
+            )
             matches = regex.findall(provided_regex, provided_file)
         except UnicodeDecodeError:
             file_content = extract_content_from_file(base64.b64decode(provided_file))
@@ -27,7 +29,9 @@ def extract(provided_regex: str, provided_string: str, provided_file: str) -> li
     return list(dict.fromkeys(matches))
 
 
-def extract_filepath(provided_regex: str, provided_string: str, provided_file: str) -> list:
+def extract_filepath(
+    provided_regex: str, provided_string: str, provided_file: str
+) -> list:
     matches = []
     if provided_string:
         new_string = regex.sub(Regex.URL, "", provided_string)
@@ -58,7 +62,9 @@ def extract_content_from_file(provided_file: bytes) -> str:
                     except UnicodeDecodeError:
                         continue
             # remove xml tags from files content
-            return regex.sub(r"<[\p{L}\p{N}\p{Lo}\p{So} :\/.\"=_%,(){}+#&;?-]*>", " ", files_content)
+            return regex.sub(
+                r"<[\p{L}\p{N}\p{Lo}\p{So} :\/.\"=_%,(){}+#&;?-]*>", " ", files_content
+            )
         except zipfile.BadZipFile:
             try:
                 # extracting content from PDF file
@@ -137,7 +143,9 @@ def parse_time(dates: list, date_format: str) -> list:
     linux_date_time_format = define_linux_date_time_format(date_format)
     # Regex pattern used for identification of separators to handle date time formats in ISO format and all possible
     # cases of mixed separator format that can be converted to a datetime object
-    date_value_separators = regex.findall(r"[^(%b)(%d)(%m)(%y)(%h)(%s)(%D)(%M)(%Y)(%H)(%S)]", linux_date_time_format)
+    date_value_separators = regex.findall(
+        r"[^(%b)(%d)(%m)(%y)(%h)(%s)(%D)(%M)(%Y)(%H)(%S)]", linux_date_time_format
+    )
 
     for date in enumerate(dates):
         date_string_list = [None] * (len(date[1]) + len(date_value_separators))
