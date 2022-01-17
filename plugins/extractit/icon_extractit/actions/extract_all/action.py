@@ -4,14 +4,24 @@ from .schema import ExtractAllInput, ExtractAllOutput, Input, Output, Component
 # Custom imports below
 
 from icon_extractit.util.util import Regex
-from icon_extractit.util.extractor import extract, parse_time, clear_emails, extract_filepath, clear_urls, \
-    clear_domains, define_date_time_regex
+from icon_extractit.util.extractor import (
+    extract,
+    parse_time,
+    clear_emails,
+    extract_filepath,
+    clear_urls,
+    clear_domains,
+    define_date_time_regex,
+)
 
 
 class ExtractAll(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="extract_all", description=Component.DESCRIPTION, input=ExtractAllInput(), output=ExtractAllOutput()
+            name="extract_all",
+            description=Component.DESCRIPTION,
+            input=ExtractAllInput(),
+            output=ExtractAllOutput(),
         )
 
     def run(self, params={}):
@@ -20,7 +30,9 @@ class ExtractAll(insightconnect_plugin_runtime.Action):
         date_format = params.get(Input.DATE_FORMAT)
         indicators = {
             "cves": extract(Regex.CVE, string, file),
-            "dates": parse_time(extract(define_date_time_regex(date_format), string, file), date_format),
+            "dates": parse_time(
+                extract(define_date_time_regex(date_format), string, file), date_format
+            ),
             "email_addresses": clear_emails(extract(Regex.Email, string, file)),
             "filepaths": extract_filepath(Regex.FilePath, string, file),
             "mac_addresses": extract(Regex.MACAddress, string, file),
