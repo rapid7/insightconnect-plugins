@@ -146,7 +146,7 @@ def parse_time(dates: list, date_format: str) -> list:
     date_value_separators = regex.findall(
         r"[^(%b)(%d)(%m)(%y)(%h)(%s)(%D)(%M)(%Y)(%H)(%S)]", linux_date_time_format
     )
-    print('adam_blakley')
+
     for date in enumerate(dates):
         date_string_list = [None] * (len(date[1]) + len(date_value_separators))
         date_string_list[::2] = date[1]
