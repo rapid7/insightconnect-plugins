@@ -1006,7 +1006,7 @@ actions:
         example: "GetOS"
       patches:
         title: Patches
-        description: "List of patches to be installed (Note: this only works with the InstallUpdate command)"
+        description: "List of patches to be installed by name (Note: this only works with the InstallUpdate command)"
         type: "[]string"
         required: false
         example: ["Security Update (KB4549947)"]
@@ -1069,7 +1069,7 @@ actions:
         example: 1234
       color:
         title: Group Color
-        description: Automox console highlight color for the group
+        description: Automox console highlight color for the group. Value should be a valid Hex color code
         type: string
         required: false
         example: "#059F1D"
@@ -1080,8 +1080,8 @@ actions:
         required: false
         example: "Example notes go here"
       policies:
-        title: Policies
-        description: List of policies to assign to group
+        title: Policy IDs
+        description: List of policy IDs to assign to group
         type: "[]integer"
         required: false
         example: [1, 2, 3]
@@ -1133,7 +1133,7 @@ actions:
         example: 1234
       color:
         title: Group Color
-        description: Automox console highlight color for the group
+        description: Automox console highlight color for the group. Value should be a valid Hex color code
         type: string
         required: false
         example: "#059F1D"
@@ -1144,8 +1144,8 @@ actions:
         required: false
         example: "Example notes go here"
       policies:
-        title: Policies
-        description: List of policies to assign to group
+        title: Policies IDs
+        description: List of policy IDs to assign to group
         type: "[]integer"
         required: false
         example: [1, 2, 3]
