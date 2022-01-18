@@ -32,9 +32,7 @@ class ExtractAll(insightconnect_plugin_runtime.Action):
         date_format = params.get(Input.DATE_FORMAT)
         indicators = {
             "cves": extract(Regex.CVE, string, file),
-            "dates": parse_time(
-                extract(define_date_time_regex(date_format), string, file), date_format
-            ),
+            "dates": parse_time(extract(define_date_time_regex(date_format), string, file), date_format),
             "email_addresses": clear_emails(extract(Regex.Email, string, file)),
             "filepaths": extract_filepath(Regex.FilePath, string, file),
             "mac_addresses": extract(Regex.MACAddress, string, file),

@@ -294,6 +294,7 @@ actions:
           - "yyyy-mm-ddThh:mm"
           - "yyyy-mm-ddThh:mm:ss"
           - ""
+        example: dd/mm/yyyy
       str:
         title: String
         description: Input string
@@ -517,6 +518,7 @@ actions:
           - "yyyy-mm-ddThh:mm"
           - "yyyy-mm-ddThh:mm:ss"
           - ""
+        example: dd/mm/yyyy
       str:
         title: String
         description: Input string
