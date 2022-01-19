@@ -293,7 +293,7 @@ actions:
           - yy\mm\dd
           - yyyy-mm-ddThh:mm
           - yyyy-mm-ddThh:mm:ss
-          -
+          - ""
         example: dd/mm/yyyy
       str:
         title: String
@@ -517,7 +517,7 @@ actions:
           - yy\mm\dd
           - yyyy-mm-ddThh:mm
           - yyyy-mm-ddThh:mm:ss
-          -
+          - ""
         example: dd/mm/yyyy
       str:
         title: String
