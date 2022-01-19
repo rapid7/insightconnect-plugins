@@ -185,10 +185,11 @@ This action extracts all dates from a string or file.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|MDUvMTIvMTk4MiBpcyBhbiBleGFtcGxlIGRhdGU=|
+|Name|Type|Default|Required|Description| Enum     |Example|
+|----|----|-------|--------|-----------|----------|-------|
+|date_format|string|None|False|Dates matching this format are extracted|[dd/mm/yyyy, mm/dd/yyyy, dd/mm/yyyy, dd\mm\yyyy, dd.mm.yyyy, dd-mm-yyyy, dd.mm.yy, dd-mm-yy, dd/mm/yy, dd\mm\yy, mm/dd/yyyy, mm\dd\yyyy, mm.dd.yyyy, mm-dd-yyyy, mm/dd/yy, mm\dd\yy, mm.dd.yy, mm-dd-yy, dd/mmm/yyyy, dd\mmm\yyyy, dd.mmm.yyyy, dd-mmm-yyyy, dd/mmm/yy, dd\mmm\yy, dd.mmm.yy, dd-mmm-yy, yyyy.mm.dd, yyyy-mm-dd, yyyy/mm/dd, yyyy\mm\dd, yyyy.mmm.dd, yyyy-mmm-dd, yyyy/mmm/dd, yyyy\mmm\dd, yy.mm.dd, yy-mm-dd, yy/mm/dd, yy\mm\dd, yyyy-mm-ddThh:mm, yyyy-mm-ddThh:mm:ss, ]|dd/mm/yyyy|
 |str|string|None|False|Input string|None|05/12/1982 is an example date|
+|file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|MDUvMTIvMTk4MiBpcyBhbiBleGFtcGxlIGRhdGU=|
 
 Example input:
 
