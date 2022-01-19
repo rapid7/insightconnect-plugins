@@ -1,0 +1,1361 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: automox
+title: Automox
+description: Automox is modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment
+version: 1.0.0
+supported_versions: ["All as of 12/17/2021"]
+vendor: automox
+support: partner
+status: []
+tags: [endpoint, patch]
+hub_tags:
+  use_cases: [threat_detection_and_response, asset_inventory, remediation_management]
+  keywords: [endpoint]
+  features: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/automox
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.automox.com/
+enable_cache: false
+
+types:
+  organization:
+    id:
+      title: Organization ID
+      description: The organization identifier
+      type: integer
+      required: true
+    name:
+      title: Organization Name
+      description: The organization name
+      type: string
+      required: true
+    create_time:
+      title: Creation Time
+      description: The datetime of when the organization was created
+      type: string
+      required: false
+    server_limit:
+      title: Server Limit
+      description: The organization server limit
+      type: integer
+      required: false
+    parent_id:
+      title: Parent Organization ID
+      description: The parent organization identifier
+      type: integer
+      required: false
+    device_limit:
+      title: Device Limit
+      description: The organization device limit
+      type: integer
+      required: false
+    device_count:
+      title: Device Count
+      description: The organization device count
+      type: integer
+      required: false
+  user_org:
+    id:
+      title: Organization ID
+      description: The organization identifier of the user
+      type: integer
+      required: true
+    name:
+      title: Name
+      description: The name of the organization
+      type: string
+      required: false
+  user_rbac_role:
+    id:
+      title: Role ID
+      description: The role identifier
+      type: integer
+      required: true
+    name:
+      title: Name
+      description: The name of the role
+      type: string
+      required: false
+    organization_id:
+      title: Organization ID
+      description: The organization identifier of the user role
+      type: integer
+      required: true
+  user:
+    id:
+      title: User ID
+      description: The user identifier
+      type: integer
+      required: true
+    firstname:
+      title: First Name
+      description: The first name of the user
+      type: string
+      required: false
+    lastname:
+      title: Last Name
+      description: The last name of the user
+      type: string
+      required: false
+    email:
+      title: Email
+      description: The email of the user
+      type: string
+      required: false
+    features:
+      title: Features
+      description: The features enabled for the user
+      type: "object"
+      required: false
+    orgs:
+      title: Organizations
+      description: The organizations for which the user has access
+      type: "[]user_org"
+      required: false
+    tags:
+      title: Tags
+      description: The user defined tags
+      type: "[]string"
+      required: false
+    saml_enabled:
+      title: SAML Enabled
+      description: Whether SAML has been enabled for the user
+      type: boolean
+      required: false
+    rbac_roles:
+      title: Roles
+      description: The roles assigned to the user
+      type: "[]user_rbac_role"
+      required: false
+  device_policy_status:
+    id:
+      title: Policy ID
+      description: The identifier of the policy
+      type: integer
+      required: false
+    compliant:
+      title: Compliant
+      description: Whether a device is compliant to given status
+      type: boolean
+      required: false
+  device_status_details:
+    device_status:
+      title: Device Status
+      description: The status of a device
+      type: string
+      required: false
+    agent_status:
+      title: Agent Status
+      description: The status of a device agent
+      type: string
+      required: false
+    policy_status:
+      title: Policy Status
+      description: The overall status of all policies assigned to a device
+      type: string
+      required: false
+    policy_statuses:
+      title: Policy Statuses
+      description: A list of policy statuses with compliant details
+      type: "[]device_policy_status"
+      required: false
+  device:
+    id:
+      title: Device ID
+      description: The device ID
+      type: integer
+      required: true
+    server_group_id:
+      title: Server Group ID
+      description: The server group identifier of a device
+      type: integer
+      required: true 
+    organization_id:
+      title: Organization ID
+      description: The organization identifier of a device
+      type: integer
+      required: true
+    name:
+      title: Device Name
+      description: The device name
+      type: string
+      required: true
+    last_update_time:
+      title: Last Update Time
+      description: The last time a device was updated in the Automox platform
+      type: string
+      required: false
+    last_refresh_time:
+      title: Last Refresh Time
+      description: The last time a device was refreshed
+      type: string
+      required: false
+    needs_reboot:
+      title: Needs Reboot
+      description: Whether a device needs rebooted
+      type: boolean
+      required: false
+    tags:
+      title: Tags
+      description: List of tags
+      type: "[]string"
+      required: false
+    deleted:
+      title: Deleted
+      description: Whether a device is deleted
+      type: boolean
+      required: false
+    create_time:
+      title: Create Time
+      description: The time a device was created in the Automox platform
+      type: string
+      required: false
+    os_version:
+      title: Operating System Version
+      description: The operating system version of a device
+      type: string
+      required: false
+    os_name:
+      title: Operating System
+      description: The name of the operating system of a device
+      type: string
+      required: false
+    os_family:
+      title: Operating System Family
+      description: The operating system family of a device
+      type: string
+      required: false
+    ip_addrs:
+      title: IP Addresses
+      description: List of IP addresses for a device
+      type: "[]string"
+      required: false
+    ip_addrs_private:
+      title: Private IP Addresses
+      description: List of private IP addresses for a device
+      type: "[]string"
+      required: false
+    patches:
+      title: Patches
+      description: The number of patches currently identified for a device
+      type: integer
+      required: false
+    details:
+      title: Details
+      description: Additional details of a device
+      type: object
+      required: false
+    agent_version:
+      title: Agent Version
+      description: The agent version of a device
+      type: string
+      required: false
+    custom_name:
+      title: Custom Name
+      description: The custom name of a device
+      type: string
+      required: false
+    is_compatible:
+      title: Is Compatible
+      description: Whether a device is compatible with the Automox platform
+      type: boolean
+      required: false
+    last_scan_failed:
+      title: Last Scan Failed
+      description: Whether the last scan failed on a device
+      type: boolean
+      required: false
+    pending:
+      title: Pending
+      description: Whether work is pending on a device
+      type: boolean
+      required: false
+    compliant:
+      title: Compliant
+      description: Whether a device is compliant
+      type: boolean
+      required: false
+    display_name:
+      title: Display Name
+      description: The display name of a device
+      type: string
+      required: false
+    pending_patches:
+      title: Pending Patches
+      description: The number of pending patches for a device
+      type: integer
+      required: false
+    connected:
+      title: Connected
+      description: Whether a device is currently connected to the Automox platform
+      type: boolean
+      required: false
+    next_patch_time:
+      title: Next Patch Time
+      description: The time for the next device patch
+      type: string
+      required: false
+    is_delayed_by_notification:
+      title: Is Delayed by Notification
+      description: Whether patching is delayed by a device notificiation
+      type: boolean
+      required: false
+    reboot_is_delayed_by_notification:
+      title: Reboot Is Delayed By Notification
+      description: Whether rebooting is delayed by a device notification
+      type: boolean
+      required: false
+    is_delayed_by_user:
+      title: Is Delayed By User
+      description: Whether patching is delayed by a user
+      type: boolean
+      required: false
+    reboot_is_delayed_by_user:
+      title: Reboot Is Delayed By User
+      description: Whether rebooting is delayed by a user
+      type: boolean
+      required: false
+    last_disconnect_time:
+      title: Last Disconnect Time
+      description: The last time a device disconnected from the Automox platform
+      type: string
+      required: false
+    needs_attention:
+      title: Needs Attention
+      description: Whether a device currently needs attention
+      type: boolean
+      required: false
+    serial_number:
+      title: Serial Number
+      description: The serial number of a device
+      type: string
+      required: false
+    status:
+      title: Status
+      description: The device status details
+      type: "device_status_details"
+      required: false
+    last_logged_in_user:
+      title: Last Logged In User
+      description: The last logged in user of a device
+      type: string
+      required: false
+  device_software:
+    id:
+      title: Software ID
+      description: The software ID
+      type: integer
+      required: true
+    server_id:
+      title: Device ID
+      description: The device identifier for where the software exists
+      type: integer
+      required: true
+    package_id:
+      title: Package ID
+      description: The software package ID
+      type: integer
+      required: true
+    software_id:
+      title: Software ID
+      description: The software ID
+      type: integer
+      required: true
+    installed:
+      title: Installed Status
+      description: Whether the software package is installed on the device
+      type: boolean
+      required: false
+    ignored:
+      title: Ignored Status
+      description: Whether the software package is ignored on the device
+      type: boolean
+      required: false
+    deferred_until:
+      title: Deferred Until
+      description: The datetime for when the software package was deferred for installation
+      type: string
+      required: false
+    name:
+      title: Software Name
+      description: The name of the software package
+      type: string
+      required: true
+    display_name:
+      title: Software Display Name
+      description: The display name of the software package
+      type: string
+      required: false
+    version:
+      title: Version
+      description: The version of the software package
+      type: string
+      required: false
+    cves:
+      title: CVEs
+      description: List of CVEs associated to software package
+      type: "[]string"
+      required: false
+    cve_score:
+      title: CVE Score
+      description: The CVE score associated with the software package
+      type: string
+      required: false
+    severity:
+      title: Severity
+      description: The severity associated with the software package
+      type: string
+      required: false
+    os_name:
+      title: Operating System Name
+      description: The operating system associated with the software package
+      type: string
+      required: false
+    os_version:
+      title: Operating System Version
+      description: The operating system version associated with the software package
+      type: string
+      required: false
+    create_time:
+      title: Creation Time
+      description: The time when the software package was known
+      type: string
+      required: false
+    requires_reboot:
+      title: Requires Reboot
+      description: Whether the device requires reboot for the software package to be installed
+      type: boolean
+      required: false
+    is_uninstallable:
+      title: Is Uninstallable
+      description: Whether the software package can be uninstalled
+      type: boolean
+      required: false
+    organization_id:
+      title: Organization ID
+      description: The organization identifier of the software package
+      type: integer
+      required: false
+  policy:
+    id:
+      title: Policy ID
+      description: The policy identifier
+      type: integer
+      required: true
+    organization_id:
+      title: Organization ID
+      description: The organization identifier of the policy
+      type: integer
+      required: true
+    name:
+      title: Policy Name
+      description: The name of the policy
+      type: string
+      required: false
+    policy_type_name:
+      title: Policy Type Name
+      description: The type of policy
+      type: string
+      required: false
+    configuration:
+      title: Policy Configuration
+      description: The configuration of the policy
+      type: object
+      required: false
+    server_groups:
+      title: Device Group IDs
+      description: List of identifiers for device groups assigned to the policy
+      type: "[]integer"
+      required: false
+  group:
+    id:
+      title: Group ID
+      description: The group identifier
+      type: integer
+      required: true
+    organization_id:
+      title: Organization ID
+      description: The organization identifier of the group
+      type: integer
+      required: true
+    name:
+      title: Group Name
+      description: The name of the group
+      type: string
+      required: false
+    refresh_interval:
+      title: Refresh Interval
+      description: Frequency of device refreshes in minutes
+      type: integer
+      required: false
+    parent_server_group_id:
+      title: Parent Server Group ID
+      description: The identifier of the parent group
+      type: integer
+      required: false
+    ui_color:
+      title: Color
+      description: Automox console highlight color for the group
+      type: string
+      required: false
+    notes:
+      title: Notes
+      description: Notes defined for the group
+      type: string
+      required: false
+    enable_os_auto_update:
+      title: Enable OS Auto Update
+      description: Enable operating system auto update
+      type: boolean
+      required: false
+    server_count:
+      title: Device Count
+      description: Number of devices assigned to group
+      type: integer
+      required: false
+    policies:
+      title: Policies
+      description: List of policies assigned to group
+      type: "[]integer"
+      required: false
+  event:
+    id:
+      title: Event ID
+      description: Identifier of event
+      type: integer
+      required: true
+    name:
+      title: Event name
+      description: Name of event
+      type: string
+      required: true
+    user_id:
+      title: User ID
+      description: Identifier of user
+      type: integer
+      required: false
+    server_id:
+      title: Device ID
+      description: Identifier of device
+      type: integer
+      required: false
+    organization_id:
+      title: Organization ID
+      description: Identifier of organization
+      type: integer
+      required: false
+    policy_id:
+      title: Policy ID
+      description: Identifier of policy
+      type: integer
+      required: false
+    data:
+      title: Event Data
+      description: Data included with event
+      type: object
+      required: false
+    server_name:
+      title: Device Name
+      description: Name of device
+      type: string
+      required: false
+    policy_name:
+      title: Policy Name
+      description: Name of policy
+      type: string
+      required: false
+    policy_type_name:
+      title: Policy Type
+      description: Type of policy
+      type: string
+      required: false
+    create_time:
+      title: Creation Time
+      description: Creation time of event
+      type: string
+      required: false
+  batch_user:
+    id:
+      title: User ID
+      description: The user identifier
+      type: integer
+      required: true
+    firstname:
+      title: First Name
+      description: The first name of the user
+      type: string
+      required: false
+    lastname:
+      title: Last Name
+      description: The last name of the user
+      type: string
+      required: false
+    email:
+      title: Email
+      description: The email of the user
+      type: string
+      required: false
+  batch:
+    id:
+      title: Batch ID
+      description: Identifier of batch
+      type: integer
+      required: true
+    organization_id:
+      title: Organization ID
+      description: Identifier of organization
+      type: integer
+      required: false
+    status:
+      title: Batch Status
+      description: Status of batch
+      type: string
+      required: false
+    source:
+      title: Batch Source
+      description: Source of batch
+      type: string
+      required: false
+    created_by:
+      title: Created By
+      description: Batch creation details
+      type: batch_user
+      required: false
+    updated_by:
+      title: Updated By
+      description: Batch update details
+      type: batch_user
+      required: false
+    uploaded_at:
+      title: Uploaded At
+      description: Datetime the batch was uploaded
+      type: string
+      required: false
+    task_count:
+      title: Task Count
+      description: Number of tasks related to batch
+      type: integer
+      required: false
+    unknown_host_count:
+      title: Unknown Host Count
+      description: Number of hosts that are unknown within batch
+      type: integer
+      required: false
+    impacted_device_count:
+      title: Impacted Device Count
+      description: Number of devices that are impacted by batch
+      type: integer
+      required: false
+    issue_count:
+      title: Issue Count
+      description: Number of issues identified with batch
+      type: integer
+      required: false
+    cve_count:
+      title: CVE Count
+      description: Number of CVEs that are impacted by batch
+      type: integer
+      required: false
+  task_payload_package_versions:
+    id:
+      title: Package ID
+      description: The package identifier associated with the task
+      type: string
+      required: true
+    name:
+      title: Name
+      description: The name of the package associated with the task
+      type: string
+      required: false
+    version:
+      title: Version
+      description: The version of the package associated with the task
+      type: string
+      required: false
+    display_name:
+      title: Display Name
+      description: The display name of the package associated with the task
+      type: string
+      required: false
+    requires_reboot:
+      title: Requires Reboot
+      description: Whether the package installed by the task will require reboot
+      type: boolean
+      required: false
+  task_payload:
+    patch_id:
+      title: Patch ID
+      description: The patch identifier associated with the task
+      type: string
+      required: false
+    severity:
+      title: Severity
+      description: The severity of the patch associated with the task
+      type: string
+      required: false
+    package_versions:
+      title: Package Versions
+      description: The version of the packages within scope of the task
+      type: "[]task_payload_package_versions"
+      required: false
+  task:
+    id:
+      title: Task ID
+      description: Identifier of task
+      type: integer
+      required: true
+    organization_id:
+      title: Organization ID
+      description: Identifier of organization
+      type: integer
+      required: false
+    task_type:
+      title: Task Type
+      description: Type of task
+      type: string
+      required: false
+    payload:
+      title: Payload
+      description: Payload associated with task
+      type: task_payload
+      required: false
+    source:
+      title: Task Source
+      description: Source of task
+      type: string
+      required: false
+    notes:
+      title: Task Notes
+      description: Notes associated with task
+      type: string
+      required: false
+    status:
+      title: Task Status
+      description: Status of task
+      type: string
+      required: false
+    created_by_user:
+      title: Created by User
+      description: Task creation details
+      type: batch_user
+      required: false
+    last_updated_by_user:
+      title: Updated by User
+      description: Task update details
+      type: batch_user
+      required: false
+    created_at:
+      title: Created At
+      description: The datetime the task was created
+      type: string
+      required: false
+    updated_at:
+      title: Updated At
+      description: The datetime the task was updated
+      type: string
+      required: false
+    completed_at:
+      title: Completed At
+      description: The datetime the task was completed
+      type: string
+      required: false
+    cves:
+      title: CVEs
+      description: List of CVEs associated with task
+      type: "[]string"
+      required: false
+
+connection:
+  api_key:
+    title: API Key
+    type: credential_secret_key
+    description: Organization API key
+    required: true
+    example: abc12345-abc1-2345-abc1-abc123456789
+
+actions:
+  list_organizations:
+    title: List Organizations
+    description: Retrieve Automox organizations
+    output:
+      organizations:
+        title: Organizations
+        description: List of Automox organizations
+        type: "[]organization"
+        required: true
+  list_organization_users:
+    title: List Organization Users
+    description: Retrieve users of the Automox organization
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: true
+        example: 1234
+    output:
+      users:
+        title: Users
+        description: List of Automox users
+        type: "[]user"
+        required: false
+  list_policies:
+    title: List Policies
+    description: Retrieve Automox policies
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization to restrict results
+        type: integer
+        required: false
+        example: 1234
+    output:
+      policies:
+        title: Policies
+        description: List of Automox policies
+        type: "[]policy"
+        required: false
+  list_devices:
+    title: List Devices
+    description: Retrieve Automox managed devices
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization to restrict results
+        type: integer
+        required: false
+        example: 1234
+      group_id:
+        title: Group ID
+        description: Identifier of server group
+        type: integer
+        required: false
+        example: 1234
+    output:
+      devices:
+        title: Devices
+        description: List of Automox managed devices
+        type: "[]device"
+        required: false
+  get_device_by_hostname:
+    title: Get Device by Hostname
+    description: Find an Automox device by hostname
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization to restrict results
+        type: integer
+        required: false
+        example: 1234
+      hostname:
+        title: Hostname
+        description: Hostname of device
+        type: string
+        required: true
+        example: hostname-1
+    output:
+      device:
+        title: Device
+        description: The matched Automox device
+        type: device
+        required: false
+  get_device_by_ip:
+    title: Get Device by IP Address
+    description: Find an Automox device by IP address
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization to restrict results
+        type: integer
+        required: false
+        example: 1234
+      ip_address:
+        title: IP Address
+        description: IP address of device
+        type: string
+        required: true
+        example: '192.168.0.1'
+    output:
+      device:
+        title: Device
+        description: The matched Automox device
+        type: device
+        required: false
+  update_device:
+    title: Update Device
+    description: Update Automox device
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: false
+        example: 1234
+      device_id:
+        title: Device ID
+        description: Identifier of device
+        type: integer
+        required: true
+        example: 1234
+      server_group_id:
+        title: Server Group ID
+        description: Identifier of server group
+        type: integer
+        required: false
+        example: 1234
+      tags:
+        title: Tags
+        description: List of tags
+        type: "[]string"
+        required: false
+        example: ["tag1", "tag2"]
+      exception:
+        title: Exception
+        description: Exclude the device from reports and statistics
+        required: true
+        type: boolean
+        default: false
+        example: false
+      custom_name:
+        title: Custom Name
+        description: Custom name to set on device
+        type: string
+        required: false
+        example: "custom-name"
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+  delete_device:
+    title: Delete Device
+    description: Delete an Automox device
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: false
+        example: 1234
+      device_id:
+        title: Device ID
+        description: Identifier of device
+        type: integer
+        required: true
+        example: 1234
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+  get_device_software:
+    title: Get Device Software
+    description: Retrieve a list of software installed on a device
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: false
+        example: 1234
+      device_id:
+        title: Device ID
+        description: Identifier of device
+        type: integer
+        required: true
+        example: 1234
+    output:
+      software:
+        title: Device Software
+        description: List of software on device
+        type: "[]device_software"
+        required: false
+  run_command:
+    title: Run Device Command
+    description: Run a command on a device
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: false
+        example: 1234
+      device_id:
+        title: Device ID
+        description: Identifier of device
+        type: integer
+        required: true
+        example: 1234
+      command:
+        title: Command
+        description: Command to run on device
+        type: string
+        enum:
+        - "GetOS"
+        - "InstallUpdate"
+        - "InstallAllUpdates"
+        - "PolicyTest"
+        - "PolicyRemediate"
+        - "Reboot"
+        required: true
+        example: "GetOS"
+      patches:
+        title: Patches
+        description: "List of patches to be installed by name (Note: this only works with the InstallUpdate command)"
+        type: "[]string"
+        required: false
+        example: ["Security Update (KB4549947)"]
+      policy_id:
+        title: Policy ID
+        description: Identifier of policy
+        type: integer
+        required: false
+        example: 1234
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+  list_groups:
+    title: List Groups
+    description: List Automox groups
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization to restrict results
+        type: integer
+        required: false
+        example: 1234
+    output:
+      groups:
+        title: Groups
+        description: List of Automox groups
+        type: "[]group"
+        required: false
+  create_group:
+    title: Create Group
+    description: Create an Automox group
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: false
+        example: 1234
+      name:
+        title: Name
+        description: Name of the group
+        type: string
+        required: true
+        example: Group1
+      refresh_interval:
+        title: Refresh Interval
+        description: Frequency of device refreshes in minutes
+        type: integer
+        required: true
+        default: 1440
+        example: 1440
+      parent_server_group_id:
+        title: Parent Server Group ID
+        description: Name of the parent group. Defaults to Default Group ID if this is omitted
+        type: integer
+        required: false
+        example: 1234
+      color:
+        title: Group Color
+        description: Automox console highlight color for the group. Value should be a valid Hex color code
+        type: string
+        required: false
+        example: "#059F1D"
+      notes:
+        title: Group Notes
+        description: Define notes for the group
+        type: string
+        required: false
+        example: "Example notes go here"
+      policies:
+        title: Policy IDs
+        description: List of policy IDs to assign to group
+        type: "[]integer"
+        required: false
+        example: [1, 2, 3]
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+      group:
+        title: Group
+        description: Detailed information about the created group
+        type: group
+        required: true
+  update_group:
+    title: Update Group
+    description: Update an Automox group
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: false
+        example: 1234
+      group_id:
+        title: Group ID
+        description: Identifier of the Automox group
+        type: integer
+        required: true
+        example: 1234
+      name:
+        title: Name
+        description: Name of the group
+        type: string
+        required: true
+        example: Group1
+      refresh_interval:
+        title: Refresh Interval
+        description: Frequency of device refreshes in minutes
+        type: integer
+        required: true
+        default: 1440
+        example: 1440
+      parent_server_group_id:
+        title: Parent Server Group ID
+        description: Name of the parent group. Defaults to Default Group ID if omitted
+        type: integer
+        required: false
+        example: 1234
+      color:
+        title: Group Color
+        description: Automox console highlight color for the group. Value should be a valid Hex color code
+        type: string
+        required: false
+        example: "#059F1D"
+      notes:
+        title: Group Notes
+        description: Define notes for the group
+        type: string
+        required: false
+        example: "Example notes go here"
+      policies:
+        title: Policies IDs
+        description: List of policy IDs to assign to group
+        type: "[]integer"
+        required: false
+        example: [1, 2, 3]
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+  delete_group:
+    title: Delete Group
+    description: Delete an Automox group
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: false
+        example: 1234
+      group_id:
+        title: Group ID
+        description: Identifier of the Automox group
+        type: integer
+        required: true
+        example: 1234
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+  upload_vulnerability_sync_file:
+    title: Upload Vulnerability Sync File
+    description: Upload a CSV file to vulnerability sync for processing
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: true
+        example: 1234
+      csv_file:
+        title: CSV File
+        description: Base64 encoded CSV data from which to create the vulnerability sync batch
+        type: bytes
+        required: true
+        example: "PGgxPlJhcGlkNzwvaDE+"
+      csv_file_name:
+        title: CSV File Name
+        description: Name for CSV file uploaded and shown within Automox
+        type: string
+        required: false
+        default: "insightconnect-uploaded-report.csv"
+        example: "insightconnect-uploaded-report.csv"
+    output:
+      batch_id:
+        title: Vulnerability Sync Batch ID
+        description: Identifier of vulnerability sync batch
+        type: integer
+        required: true
+        example: 1234
+  get_vulnerability_sync_batch:
+    title: Get Vulnerability Sync Batch
+    description: Retrieve details for a specified vulnerability sync batch
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: true
+        example: 1234
+      batch_id:
+        title: Batch ID
+        description: Identifier of batch
+        type: integer
+        required: true
+        example: 1234
+    output:
+      batch:
+        title: Vulnerability Sync Batch
+        description: Details of a specified vulnerability sync batch
+        type: batch
+        required: true
+  action_on_vulnerability_sync_batch:
+    title: Accept or Reject Vulnerability Sync Batch
+    description: Take action to approve or reject vulnerability sync batch
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: true
+        example: 1234
+      batch_id:
+        title: Batch ID
+        description: Identifier of batch
+        type: integer
+        required: true
+        example: 1234
+      action:
+        title: Action
+        description: Action to take on batch
+        type: string
+        enum:
+        - "accept"
+        - "reject"
+        required: true
+        example: "accept"
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+  list_vulnerability_sync_batches:
+    title: List Vulnerability Sync Batches
+    description: Retrieve list of vulnerability sync batches
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: true
+        example: 1234
+    output:
+      batches:
+        title: Vulnerability Sync Batches
+        description: List of vulnerability sync batches
+        type: "[]batch"
+        required: false
+  list_vulnerability_sync_tasks:
+    title: List Vulnerability Sync Tasks
+    description: Retrieve list of vulnerability sync tasks
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: true
+        example: 1234
+      status:
+        title: Status
+        description: Filter by status of tasks
+        type: string
+        required: false
+        example: "in_progress"
+      batch_id:
+        title: Batch ID
+        description: Filter by batch identifier
+        type: integer
+        required: false
+        example: 1234
+    output:
+      tasks:
+        title: Vulnerability Sync Tasks
+        description: List of vulnerability sync tasks
+        type: "[]task"
+        required: false
+  action_on_vulnerability_sync_task:
+    title: Execute or Cancel Vulnerability Sync Task
+    description: Take action to execute or cancel a vulnerability sync task
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization
+        type: integer
+        required: true
+        example: 1234
+      task_id:
+        title: Task ID
+        description: Identifier of task
+        type: integer
+        required: true
+        example: 1234
+      action:
+        title: Action
+        description: Action to take on vulnerability sync task
+        type: string
+        enum:
+        - "execute"
+        - "cancel"
+        required: true
+        example: "execute"
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+
+triggers:
+  get_events:
+    title: Get Automox Events
+    description: Retrieve Automox events to trigger workflows
+    input:
+      org_id:
+        title: Organization ID
+        description: Identifier of organization to restrict results
+        type: integer
+        required: false
+        example: 1234
+      event_type:
+        title: Event Type
+        description: Name of event type to be retrieved (list of event types found at https://developer.automox.com/openapi/axconsole/operation/getEvents/#!in=query&path=eventName&t=request)
+        type: string
+        required: true
+        example: "user.login"
+    output:
+      event:
+        title: Event
+        description: Event with details
+        type: event
+        required: true
