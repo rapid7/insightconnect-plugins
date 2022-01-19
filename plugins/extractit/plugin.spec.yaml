@@ -5,9 +5,9 @@ name: extractit
 title: ExtractIt
 description: The ExtractIt plugin has a collection of actions used to extract various information from text. These include URLs, domains, emails, IPs, and more
 version: 3.0.0
-vendor: rapid7_a_blakley
+vendor: rapid7
 support: rapid7
-status: []
+status: ["supported"]
 cloud_ready: true
 resources:
   vendor_url: https://www.rapid7.com
