@@ -1,0 +1,13 @@
+{
+  "links": [ 
+    {
+      "href": "https://example.com/api/3/vulnerability_exceptions",
+      "rel": "self"
+    },
+    {
+      "href": "https://example.com/api/3/vulnerability_exceptions/1",
+      "rel": "Vulenrability Exception"
+    }
+  ],
+  "id": 1
+}

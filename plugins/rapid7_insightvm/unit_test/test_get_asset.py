@@ -2,39 +2,75 @@ import sys
 import os
 
 from unittest import TestCase
-from komand_rapid7_insightvm.connection.connection import Connection
+from unittest.mock import patch
+from unit_test.util import Util
 from komand_rapid7_insightvm.actions.get_asset import GetAsset
-import json
-import logging
+from komand_rapid7_insightvm.actions.get_asset.schema import Input
+from parameterized import parameterized
+from komand.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
 
+@patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
 class TestGetAsset(TestCase):
-    def test_integration_get_asset(self):
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = GetAsset()
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.action = Util.default_connector(GetAsset())
 
-        test_conn.logger = log
-        test_action.logger = log
+    @parameterized.expand(
+        [
+            [
+                "found",
+                1,
+                {
+                    "asset": {
+                        "addresses": [{"ip": "198.51.100.100", "mac": "00:00:00:00:00:00"}],
+                        "assessedForPolicies": False,
+                        "assessedForVulnerabilities": True,
+                        "history": [{"date": "2020-08-19T11:14:25.007Z", "scanId": 3, "type": "SCAN", "version": 1}],
+                        "hostName": "example.com",
+                        "hostNames": [{"name": "example.com", "source": "dns"}],
+                        "id": 1,
+                        "ip": "198.51.100.100",
+                        "links": [],
+                        "mac": "00:00:00:00:00:00",
+                        "os": "Linux 3.2",
+                        "osFingerprint": {},
+                        "rawRiskScore": 0.0,
+                        "riskScore": 0.0,
+                        "services": [],
+                        "vulnerabilities": {
+                            "critical": 0,
+                            "exploits": 0,
+                            "malwareKits": 0,
+                            "moderate": 2,
+                            "severe": 0,
+                            "total": 2,
+                        },
+                    }
+                },
+            ]
+        ]
+    )
+    def test_get_asset(self, mock_get, name, asset_id, expected):
+        actual = self.action.run({Input.ID: asset_id})
+        self.assertEqual(actual, expected)
 
-        try:
-            with open("../tests/get_asset.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception:
-            message = """
-            Could not find or read sample tests from /tests directory
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        self.assertIsNotNone(results)
-        self.assertTrue("asset" in results.keys())
+    @parameterized.expand(
+        [
+            [
+                "not_found",
+                2,
+                "InsightVM returned an error message. Not Found",
+                "Ensure that the requested resource exists.",
+                "The resource does not exist or access is prohibited.",
+            ]
+        ]
+    )
+    def test_get_asset_bad(self, mock_get, name, asset_id, cause, assistance, data):
+        with self.assertRaises(PluginException) as e:
+            self.action.run({Input.ID: asset_id})
+        self.assertEqual(e.exception.cause, cause)
+        self.assertEqual(e.exception.assistance, assistance)
+        self.assertEqual(e.exception.data, data)

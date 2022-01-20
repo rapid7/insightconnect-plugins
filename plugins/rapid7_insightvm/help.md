@@ -14,6 +14,10 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 
 * Username and password for a user with the necessary permissions
 
+# Supported Product Versions
+
+* Rapid7 InsightVM API v3 2022-01-20
+
 # Documentation
 
 ## Setup
@@ -4099,11 +4103,11 @@ This action is used to create a vulnerability exception submission.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|Exception created with InsightConnect|True|Comment to include in the vulnerability exception submission|None|example comment|
-|expiration|date|None|False|The date the vulnerability exception expires|None|10-12-2020|
+|expiration|date|None|False|The date the vulnerability exception expires e.g 2021-12-30T00:00:00Z|None|2021-12-30T00:00:00Z|
 |key|string|None|False|The key to identify a specific instance if the type is Instance|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |port|integer|None|False|The port the vulnerability appears on if the type is Instance|None|40000|
 |reason|string|None|True|Reason for the exception|['False Positive', 'Compensating Control', 'Acceptable Use', 'Acceptable Risk', 'Other']|False Positive|
-|scope|integer|None|False|The ID of the scope the vulnerability exception applies to.  May be empty if type is Global|None|1234|
+|scope|integer|None|False|The ID of the scope the vulnerability exception applies to. May be empty if type is Global|None|1234|
 |type|string|None|True|The type of vulnerability exception to create|['Global', 'Site', 'Asset', 'Asset Group', 'Instance']|Global|
 |vulnerability|string|None|True|The vulnerability this exception applies to|None|vulnerability|
 
@@ -4112,7 +4116,7 @@ Example input:
 ```
 {
   "comment": "example comment",
-  "expiration": "10-12-2020",
+  "expiration": "2021-12-30T00:00:00Z",
   "key": "9de5069c5afe602b2ea0a04b66beb2c0",
   "port": 40000,
   "reason": "False Positive",
@@ -5614,6 +5618,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.9.2 - Add expiration date conversion to ISO8601 in Create Vulnerability Exception Submission and Update Vulnerability Exception Expiration Date actions | Fix issue with incorrect expiration date format in Get Expiring Vulnerability Exceptions action
 * 4.9.1 - Rename the plugin with "console" as there is a new cloud based plugin for InsightVM
 * 4.9.0 - Add new `size` input to List Inactive Assets | Update List Inactive Assets to return 500 results by default | Remove the usage of Maya from the plugin
 * 4.8.1 - Fixed an issue where some actions were expecting bytes data and were getting strings instead

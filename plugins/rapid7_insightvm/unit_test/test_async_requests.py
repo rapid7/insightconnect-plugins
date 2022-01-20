@@ -8,11 +8,11 @@ class MockResponse:
     def __init__(self):
         self.status = 200
 
-    def text(self):
+    async def text(self):
         return '{"test_key": "test_value"}'
 
     async def json(self):
-        return json.loads(self.text())
+        return json.loads(await self.text())
 
 
 class MockSession:

@@ -62,5 +62,8 @@ class TestValidateUser(TestCase):
         session = requests.session()
         test_object = resource_helpers.ValidateUser(logger=logger, session=session)
         test_object.validate_user_email(user["email"])
-        with pytest.raises(PluginException, match="The email address for user account was not valid!"):
+        with pytest.raises(
+            PluginException,
+            match="An error occurred during plugin execution!\n\nThe email address for user account was not valid Ensure that the email address is correct",
+        ):
             test_object.validate_user_email("foo")

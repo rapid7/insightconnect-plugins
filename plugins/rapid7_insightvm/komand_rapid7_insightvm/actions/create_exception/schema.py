@@ -40,7 +40,7 @@ class CreateExceptionInput(komand.Input):
       "type": "string",
       "title": "Expiration",
       "displayType": "date",
-      "description": "The date the vulnerability exception expires",
+      "description": "The date the vulnerability exception expires e.g 2021-12-30T00:00:00Z",
       "format": "date-time",
       "order": 4
     },
@@ -72,7 +72,7 @@ class CreateExceptionInput(komand.Input):
     "scope": {
       "type": "integer",
       "title": "Scope ID",
-      "description": "The ID of the scope the vulnerability exception applies to.  May be empty if type is Global",
+      "description": "The ID of the scope the vulnerability exception applies to. May be empty if type is Global",
       "order": 3
     },
     "type": {

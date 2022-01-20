@@ -1,37 +1,41 @@
 import sys
 import os
 from unittest import TestCase
-from komand_rapid7_insightvm.connection.connection import Connection
+from unittest.mock import patch
+from unit_test.util import Util
 from komand_rapid7_insightvm.actions.delete_asset import DeleteAsset
-import json
-import logging
+from komand_rapid7_insightvm.actions.delete_asset.schema import Input
+from parameterized import parameterized
+from komand.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
 
+@patch("requests.sessions.Session.delete", side_effect=Util.mocked_requests)
 class TestDeleteAsset(TestCase):
-    def test_integration_delete_asset(self):
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = DeleteAsset()
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.action = Util.default_connector(DeleteAsset())
 
-        test_conn.logger = log
-        test_action.logger = log
+    @parameterized.expand([["found", 3, {"success": True}]])
+    def test_delete_asset(self, mock_delete, name, asset_id, expected):
+        actual = self.action.run({Input.ID: asset_id})
+        self.assertEqual(actual, expected)
 
-        try:
-            with open("../tests/delete_asset.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception:
-            message = """
-            Could not find or read sample tests from /tests directory
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-        self.assertEquals({}, results)
+    @parameterized.expand(
+        [
+            [
+                "not_found",
+                4,
+                "InsightVM returned an error message. Not Found",
+                "Ensure that the requested resource exists.",
+                "The resource does not exist or access is prohibited.",
+            ]
+        ]
+    )
+    def test_delete_asset_bad(self, mock_delete, name, asset_id, cause, assistance, data):
+        with self.assertRaises(PluginException) as e:
+            self.action.run({Input.ID: asset_id})
+        self.assertEqual(e.exception.cause, cause)
+        self.assertEqual(e.exception.assistance, assistance)
+        self.assertEqual(e.exception.data, data)

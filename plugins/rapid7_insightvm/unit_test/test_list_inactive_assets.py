@@ -2,39 +2,61 @@ import sys
 import os
 
 from unittest import TestCase
-from komand_rapid7_insightvm.connection.connection import Connection
+from unittest.mock import patch
+from unit_test.util import Util
 from komand_rapid7_insightvm.actions.list_inactive_assets import ListInactiveAssets
-import json
-import logging
+from komand_rapid7_insightvm.actions.list_inactive_assets.schema import Input
+from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
 
 
+@patch("requests.sessions.Session.post", side_effect=Util.mocked_requests)
 class TestListInactiveAssets(TestCase):
-    def test_integration_list_inactive_assets(self):
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = ListInactiveAssets()
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.action = Util.default_connector(ListInactiveAssets())
 
-        test_conn.logger = log
-        test_action.logger = log
-
-        try:
-            with open("../tests/list_inactive_assets.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception:
-            message = """
-            Could not find or read sample tests from /tests directory
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        self.assertIsNotNone(results)
-        self.assertTrue()
+    @parameterized.expand(
+        [
+            [
+                "found",
+                30,
+                {
+                    "assets": [
+                        {
+                            "addresses": [{"ip": "198.51.100.100", "mac": "00:00:00:00:00:00"}],
+                            "assessedForPolicies": False,
+                            "assessedForVulnerabilities": True,
+                            "history": [
+                                {"date": "2020-08-19T11:14:25.007Z", "scanId": 3, "type": "SCAN", "version": 1}
+                            ],
+                            "hostName": "example.com",
+                            "hostNames": [{"name": "example.com", "source": "dns"}],
+                            "id": 1,
+                            "ip": "198.51.100.100",
+                            "links": [],
+                            "mac": "00:00:00:00:00:00",
+                            "os": "Linux 3.2",
+                            "osFingerprint": {},
+                            "rawRiskScore": 0.0,
+                            "riskScore": 0.0,
+                            "services": [],
+                            "vulnerabilities": {
+                                "critical": 0,
+                                "exploits": 0,
+                                "malwareKits": 0,
+                                "moderate": 2,
+                                "severe": 0,
+                                "total": 2,
+                            },
+                        }
+                    ]
+                },
+            ],
+            ["not_found", 10, {"assets": []}],
+        ]
+    )
+    def test_get_asset(self, mock_get, name, days_ago, expected):
+        actual = self.action.run({Input.DAYS_AGO: days_ago})
+        self.assertEqual(actual, expected)

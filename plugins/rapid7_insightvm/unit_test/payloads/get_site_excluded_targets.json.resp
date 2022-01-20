@@ -1,0 +1,12 @@
+{
+  "links": [ 
+    {
+      "href": "https://example.com/api/3/sites/1/excluded_targets",
+      "rel": "self"
+    }
+  ],
+  "addresses": [
+    "198.51.100.101",
+    "example2.com"
+  ]
+}
