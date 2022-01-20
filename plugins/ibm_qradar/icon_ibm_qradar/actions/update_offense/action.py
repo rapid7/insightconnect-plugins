@@ -19,7 +19,7 @@ from icon_ibm_qradar.util.utils import prepare_request_params, handle_response
 def parse_params(params: dict, logger: logging.Logger) -> dict:
     """To parse the input params."""
 
-    query_params = dict()
+    query_params = {}
     assigned_to = params.get(Input.ASSIGNED_TO, "")
     logger.info("Provided Assigned to: %s", assigned_to)
 
