@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get Offense Notes by Id"
+    DESCRIPTION = "Get Offense Notes by ID"
 
 
 class Input:
@@ -27,19 +27,19 @@ class GetOffenseNoteByIdInput(insightconnect_plugin_runtime.Input):
     "fields": {
       "type": "string",
       "title": "Fields",
-      "description": "Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas",
+      "description": "Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas",
       "order": 3
     },
     "note_id": {
       "type": "integer",
-      "title": "Note Id",
+      "title": "Note ID",
       "description": "The ID of the offense note to get",
       "order": 2
     },
     "offense_id": {
       "type": "integer",
-      "title": "Offense Id",
-      "description": "The ID of the offense to get its notes",
+      "title": "Offense ID",
+      "description": "The ID of the offense to get notes for",
       "order": 1
     }
   },
@@ -65,7 +65,7 @@ class GetOffenseNoteByIdOutput(insightconnect_plugin_runtime.Output):
     "data": {
       "$ref": "#/definitions/note",
       "title": "Offense Notes by Id",
-      "description": "JSON Data of the Offense Notes for given id",
+      "description": "JSON data of the Offense Notes for given ID",
       "order": 1
     }
   },
@@ -77,18 +77,18 @@ class GetOffenseNoteByIdOutput(insightconnect_plugin_runtime.Output):
         "create_time": {
           "type": "integer",
           "title": "Created Time",
-          "description": "Created Time",
+          "description": "Created time",
           "order": 2
         },
         "id": {
           "type": "integer",
-          "title": "Id",
-          "description": "Id",
+          "title": "ID",
+          "description": "ID",
           "order": 1
         },
         "note_text": {
           "type": "string",
-          "title": "Note text",
+          "title": "Note Text",
           "description": "Note text",
           "order": 3
         },

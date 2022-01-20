@@ -2,7 +2,7 @@ from urllib.parse import urlparse
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from icon_ibm_qradar.util.constants.constant import SUCCESS_RESPONSE_CODE
+from icon_ibm_qradar.util.constants.constant import SUCCESS_RESPONSE_CODES
 from unit_test.helpers.helper import Helper, MockResponse
 
 
@@ -30,4 +30,4 @@ class AsstesHelper(Helper):
         if url_component.query == "wrong":
             raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE)
 
-        return MockResponse(SUCCESS_RESPONSE_CODE[1], data={"data": [{"id": "10001"}]})
+        return MockResponse(SUCCESS_RESPONSE_CODES[1], data={"data": [{"id": "10001"}]})

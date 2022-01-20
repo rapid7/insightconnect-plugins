@@ -1,51 +1,51 @@
 {
-	"spec": "25373c88297980aeefaf8120ca706628",
+	"spec": "7cc716b69959c2590efbb8d48fb10869",
 	"manifest": "fe58af56b34a32f85c4a3bbf27c6933f",
 	"setup": "63a999082656b97912a37e91c2d07689",
 	"schemas": [
 		{
 			"identifier": "add_notes_to_offense/schema.py",
-			"hash": "f404e8ca26de31bb57e3889961b5f88e"
+			"hash": "c35e3733b92e6a7141b4492571a77f1e"
 		},
 		{
 			"identifier": "get_ariel_search_by_id/schema.py",
-			"hash": "f36214733af9346cc0e5b1cc1241a006"
+			"hash": "19c88d787f54e2b62a82cdf308df9443"
 		},
 		{
 			"identifier": "get_assets/schema.py",
-			"hash": "e3df8b525eda81c32e089f9266c682bf"
+			"hash": "4652182e9e303f20be14ea226937ca36"
 		},
 		{
 			"identifier": "get_offense_closing_reasons/schema.py",
-			"hash": "6246abdbc58eb25a9ad5f7cc91f6a9aa"
+			"hash": "85048993724608e4a707ce4c834acabb"
 		},
 		{
 			"identifier": "get_offense_note/schema.py",
-			"hash": "6266bf23f577c5be028994e059ca9fdb"
+			"hash": "2bbcf352c39c5700ff67209291459b6c"
 		},
 		{
 			"identifier": "get_offense_note_by_id/schema.py",
-			"hash": "b67b0afa7577e607659653a3b6b0dae6"
+			"hash": "4d7391a3a7b9de874a8511130f6fc780"
 		},
 		{
 			"identifier": "get_offenses/schema.py",
-			"hash": "f42fc6441d619ed4fd75150f7c43c867"
+			"hash": "638d2f5b71139441dfed84443770ec92"
 		},
 		{
 			"identifier": "start_ariel_search/schema.py",
-			"hash": "3cddadd33394f2a77e4dc903ecd689af"
+			"hash": "d8f9a6bc9f530b709efd3a31ee25009a"
 		},
 		{
 			"identifier": "update_offense/schema.py",
-			"hash": "8204ff42a1188475e7f56eb1a3dc97b3"
+			"hash": "706d3d05ef5b78a5639ff387c971979f"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "fd0848cabda7b7a90fe9e19d85000b1a"
+			"hash": "3261075bd7d1ced6333f919efe320432"
 		},
 		{
 			"identifier": "get_new_offense/schema.py",
-			"hash": "1a4423f2180cc047a8637b3b5e00b383"
+			"hash": "bc8feb0de5a94a792bd4b5bdacada476"
 		}
 	]
 }

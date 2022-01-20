@@ -58,21 +58,21 @@ class TestGetArielSearchById(TestCase):
 
     @patch("requests.get", side_effect=ArielSearchHelper.mock_request)
     def test_get_ariel_search_by_id_with_internal_server_error(self, make_request):
-        """To Test the get serial search by id with internalServerError."""
+        """To Test the get serial search by ID with internalServerError."""
         action_params = {"search_id": "internalServerError"}
         with self.assertRaises(PluginException):
             self.action.run(action_params)
 
     @patch("requests.get", side_effect=ArielSearchHelper.mock_request)
     def test_get_ariel_search_by_id_with_forbidden(self, make_request):
-        """To Test the get serial search by id with for bidden."""
+        """To Test the get serial search by ID with for bidden."""
         action_params = {"search_id": "checkforbidden"}
         with self.assertRaises(PluginException):
             self.action.run(action_params)
 
     @patch("requests.get", side_effect=ArielSearchHelper.mock_request)
     def test_get_ariel_search_by_id_with_rate_limit(self, make_request):
-        """To Test the get serial search by id with for bidden."""
+        """To Test the get serial search by ID with for bidden."""
         action_params = {"search_id": "checkratelimit"}
         with self.assertRaises(PluginException):
             self.action.run(action_params)

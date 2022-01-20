@@ -1,7 +1,7 @@
 from urllib.parse import urlparse
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from icon_ibm_qradar.util.constants.constant import SUCCESS_RESPONSE_CODE
+from icon_ibm_qradar.util.constants.constant import SUCCESS_RESPONSE_CODES
 from icon_ibm_qradar.util.constants.endpoints import START_ARIEL_SEARCH_ENDPOINT
 from unit_test.helpers.helper import Helper, MockResponse
 
@@ -39,8 +39,8 @@ class ArielSearchHelper(Helper):
             if "wrong" in url_component.query:
                 return MockResponse(422, data={"description": "wrong aql", "message": "wrong aql"})
 
-            return MockResponse(SUCCESS_RESPONSE_CODE[1], data={"cursor_id": "test_cursor_id"})
+            return MockResponse(SUCCESS_RESPONSE_CODES[1], data={"cursor_id": "test_cursor_id"})
 
         if "wrong" in url_component.path:
             return MockResponse(422, data={"description": "wrong aql", "message": "wrong aql"})
-        return MockResponse(SUCCESS_RESPONSE_CODE[0], data={"cursor_id": "test_cursor_id"})
+        return MockResponse(SUCCESS_RESPONSE_CODES[0], data={"cursor_id": "test_cursor_id"})

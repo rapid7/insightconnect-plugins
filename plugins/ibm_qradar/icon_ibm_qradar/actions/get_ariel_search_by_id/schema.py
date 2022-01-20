@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get ariel search by ID"
+    DESCRIPTION = "Get an ariel search by ID"
 
 
 class Input:
@@ -26,14 +26,14 @@ class GetArielSearchByIdInput(insightconnect_plugin_runtime.Input):
     "poll_interval": {
       "type": "number",
       "title": "Poll Interval",
-      "description": "Poll interval is the number of seconds to recheck until the search gets COMPLETED",
+      "description": "Number of seconds to recheck until the search is completed",
       "default": 1,
       "order": 2
     },
     "search_id": {
       "type": "string",
-      "title": "Search Id",
-      "description": "Specific Ariel Search Id for which the search",
+      "title": "Search ID",
+      "description": "ID of the Ariel search to get",
       "order": 1
     }
   },
@@ -58,7 +58,7 @@ class GetArielSearchByIdOutput(insightconnect_plugin_runtime.Output):
     "data": {
       "$ref": "#/definitions/search",
       "title": "Search Data",
-      "description": "JSON Data of the Search",
+      "description": "JSON data of the Search",
       "order": 1
     }
   },
@@ -114,8 +114,8 @@ class GetArielSearchByIdOutput(insightconnect_plugin_runtime.Output):
         },
         "cursor_id": {
           "type": "string",
-          "title": "Cursor Id",
-          "description": "Cursor id",
+          "title": "Cursor ID",
+          "description": "Cursor ID",
           "order": 1
         },
         "data_file_count": {
@@ -132,8 +132,8 @@ class GetArielSearchByIdOutput(insightconnect_plugin_runtime.Output):
         },
         "desired_retention_time_msec": {
           "type": "integer",
-          "title": "Desired Retention Time Msec",
-          "description": "Desired retention time msec",
+          "title": "Desired Retention Time Milliseconds",
+          "description": "Desired retention time Milliseconds",
           "order": 10
         },
         "error_messages": {
@@ -204,8 +204,8 @@ class GetArielSearchByIdOutput(insightconnect_plugin_runtime.Output):
         },
         "search_id": {
           "type": "string",
-          "title": "Search Id",
-          "description": "Search id",
+          "title": "Search ID",
+          "description": "Search ID",
           "order": 19
         },
         "status": {
@@ -216,8 +216,8 @@ class GetArielSearchByIdOutput(insightconnect_plugin_runtime.Output):
         },
         "subsearch_ids": {
           "type": "array",
-          "title": "Subsearch Ids",
-          "description": "Subsearch ids",
+          "title": "Subsearch IDs",
+          "description": "Subsearch IDs",
           "items": {
             "type": "string"
           },

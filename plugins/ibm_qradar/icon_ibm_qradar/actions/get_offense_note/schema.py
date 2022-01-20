@@ -28,25 +28,25 @@ class GetOffenseNoteInput(insightconnect_plugin_runtime.Input):
     "fields": {
       "type": "string",
       "title": "Fields",
-      "description": "Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas",
+      "description": "Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas",
       "order": 4
     },
     "filter": {
       "type": "string",
       "title": "Filter",
-      "description": "This parameter is used to restrict the elements in a list base on the contents of various fields",
+      "description": "Restrict the elements in a list based on the contents of various fields",
       "order": 3
     },
     "offense_id": {
       "type": "integer",
       "title": "Offense Id",
-      "description": "The ID of the offense to get its notes",
+      "description": "The ID of the offense to get notes for",
       "order": 1
     },
     "range": {
       "type": "string",
       "title": "Range",
-      "description": "Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero",
+      "description": "Restrict the number of returned elements to a range, eg. 0-10, with 0 being the first index",
       "order": 2
     }
   },
@@ -71,7 +71,7 @@ class GetOffenseNoteOutput(insightconnect_plugin_runtime.Output):
     "data": {
       "type": "array",
       "title": "Offense Notes",
-      "description": "JSON Data of the Offense Notes",
+      "description": "JSON data of the Offense Notes",
       "items": {
         "$ref": "#/definitions/note"
       },
@@ -86,18 +86,18 @@ class GetOffenseNoteOutput(insightconnect_plugin_runtime.Output):
         "create_time": {
           "type": "integer",
           "title": "Created Time",
-          "description": "Created Time",
+          "description": "Created time",
           "order": 2
         },
         "id": {
           "type": "integer",
-          "title": "Id",
-          "description": "Id",
+          "title": "ID",
+          "description": "ID",
           "order": 1
         },
         "note_text": {
           "type": "string",
-          "title": "Note text",
+          "title": "Note Text",
           "description": "Note text",
           "order": 3
         },

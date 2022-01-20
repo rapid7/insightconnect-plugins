@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "List all Offenses"
+    DESCRIPTION = "List all offenses"
 
 
 class Input:
@@ -28,25 +28,25 @@ class GetOffensesInput(insightconnect_plugin_runtime.Input):
     "fields": {
       "type": "string",
       "title": "Fields",
-      "description": "Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas",
+      "description": "Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas",
       "order": 3
     },
     "filter": {
       "type": "string",
       "title": "Filter",
-      "description": "This parameter is used to restrict the elements in a list base on the contents of various fields",
+      "description": "Restrict the elements in a list based on the contents of various fields",
       "order": 2
     },
     "range": {
       "type": "string",
       "title": "Range",
-      "description": "Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero",
+      "description": "Restrict the number of returned elements to a range, eg. 0-10, with 0 being the first index",
       "order": 1
     },
     "sort": {
       "type": "string",
       "title": "Sort",
-      "description": "Use parameter to sort the elements in a list",
+      "description": "Sorting strategy for list elements",
       "order": 4
     }
   }
@@ -68,7 +68,7 @@ class GetOffensesOutput(insightconnect_plugin_runtime.Output):
     "data": {
       "type": "array",
       "title": "Offense Data",
-      "description": "JSON Data of the Offense",
+      "description": "JSON data of the Offense",
       "items": {
         "$ref": "#/definitions/offense"
       },
@@ -82,8 +82,8 @@ class GetOffensesOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "id": {
           "type": "integer",
-          "title": "Id",
-          "description": "Id",
+          "title": "ID",
+          "description": "ID",
           "order": 1
         },
         "name": {
@@ -94,8 +94,8 @@ class GetOffensesOutput(insightconnect_plugin_runtime.Output):
         },
         "type_id": {
           "type": "integer",
-          "title": "Type Id",
-          "description": "Type id",
+          "title": "Type ID",
+          "description": "Type ID",
           "order": 3
         },
         "type_name": {
@@ -139,8 +139,8 @@ class GetOffensesOutput(insightconnect_plugin_runtime.Output):
         },
         "closing_reason_id": {
           "type": "integer",
-          "title": "Closing Reason Id",
-          "description": "Closing reason id",
+          "title": "Closing Reason ID",
+          "description": "Closing reason ID",
           "order": 5
         },
         "closing_user": {
@@ -178,8 +178,8 @@ class GetOffensesOutput(insightconnect_plugin_runtime.Output):
         },
         "domain_id": {
           "type": "integer",
-          "title": "Domain Id",
-          "description": "Domain id",
+          "title": "Domain ID",
+          "description": "Domain ID",
           "order": 11
         },
         "event_count": {
@@ -208,8 +208,8 @@ class GetOffensesOutput(insightconnect_plugin_runtime.Output):
         },
         "id": {
           "type": "integer",
-          "title": "Id",
-          "description": "Id",
+          "title": "ID",
+          "description": "ID",
           "order": 16
         },
         "inactive": {
@@ -232,8 +232,8 @@ class GetOffensesOutput(insightconnect_plugin_runtime.Output):
         },
         "local_destination_address_ids": {
           "type": "array",
-          "title": "Local Destination Address Ids",
-          "description": "Local destination address ids",
+          "title": "Local Destination Address IDs",
+          "description": "Local destination address IDs",
           "items": {
             "type": "integer"
           },
@@ -319,8 +319,8 @@ class GetOffensesOutput(insightconnect_plugin_runtime.Output):
         },
         "source_address_ids": {
           "type": "array",
-          "title": "Source Address Ids",
-          "description": "Source address ids",
+          "title": "Source Address IDs",
+          "description": "Source address IDs",
           "items": {
             "type": "integer"
           },
@@ -364,8 +364,8 @@ class GetOffensesOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "id": {
               "type": "integer",
-              "title": "Id",
-              "description": "Id",
+              "title": "ID",
+              "description": "ID",
               "order": 1
             },
             "name": {
@@ -376,8 +376,8 @@ class GetOffensesOutput(insightconnect_plugin_runtime.Output):
             },
             "type_id": {
               "type": "integer",
-              "title": "Type Id",
-              "description": "Type id",
+              "title": "Type ID",
+              "description": "Type ID",
               "order": 3
             },
             "type_name": {
@@ -394,8 +394,8 @@ class GetOffensesOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "id": {
               "type": "integer",
-              "title": "Id",
-              "description": "Id",
+              "title": "ID",
+              "description": "ID",
               "order": 1
             },
             "type": {
@@ -414,8 +414,8 @@ class GetOffensesOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "id": {
           "type": "integer",
-          "title": "Id",
-          "description": "Id",
+          "title": "ID",
+          "description": "ID",
           "order": 1
         },
         "type": {

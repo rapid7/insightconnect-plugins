@@ -1,18 +1,15 @@
 import json
 import logging
 
-from insightconnect_plugin_runtime.exceptions import (
-    ConnectionTestException,
-    PluginException,
-    ClientException,
-)
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 from requests import Response
 
 from icon_ibm_qradar.util.constants.constant import (
-    SUCCESS_RESPONSE_CODE,
+    SUCCESS_RESPONSE_CODES,
 )
 from icon_ibm_qradar.util.constants.messages import INVALID_RANGE_FOUND
 from icon_ibm_qradar.util.url import URL
+from insightconnect_plugin_runtime.helper import clean
 
 
 def prepare_request_params(
@@ -44,8 +41,8 @@ def prepare_request_params(
             check, query_range = validate_query_range(query_value)
             if not check:
                 logger.error(query_range)
-                logger.info("Terminating: query_range provided is invalid")
-                raise ClientException(Exception(INVALID_RANGE_FOUND))
+                logger.info("Terminating: Query Range provided is invalid")
+                raise PluginException(cause=INVALID_RANGE_FOUND)
             headers["Range"] = f"items={query_range}"
         else:
             if query_value != "":
@@ -61,7 +58,7 @@ def prepare_request_params(
     return basic_url, headers
 
 
-def validate_query_range(query_range) -> (bool, str):
+def validate_query_range(query_range: str) -> (bool, str):
     """To validate the provided range for the output list.
 
     :param query_range: string representation of range
@@ -118,16 +115,11 @@ def handle_response(response: Response) -> dict:
     except json.decoder.JSONDecodeError as err:
         raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=err)
 
-    if response.status_code in SUCCESS_RESPONSE_CODE:
-        if isinstance(response_data, list):
-            for i, _ in enumerate(response_data):
-                response_data[i] = delete_none(response_data[i].copy())
-        else:
-            response_data = delete_none(response_data.copy())
-        return response_data
+    if response.status_code in SUCCESS_RESPONSE_CODES:
+        return clean(response_data)
 
     if response.status_code == 401:
-        raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
+        raise ConnectionTestException(preset=PluginException.Preset.USERNAME_PASSWORD)
     if response.status_code == 403:
         raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
     if response.status_code == 429:

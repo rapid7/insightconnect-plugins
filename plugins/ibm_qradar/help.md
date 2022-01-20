@@ -4,16 +4,16 @@ IBM QRadar reduces billions of events and flows into a manageable number of acti
 
 # Key Features
 
-- Start Ariel Search
-- Get Ariel Search By ID
-- Get Offenses
-- Get offense Closing Reasons
-- Get Assets
-- Get Offense Notes
-- Get Offense Note By ID
-- Add Note To Offense
-- Update Offense
-- Trigger : Get New Offenses
+- Start Ariel search
+- Get Ariel search by ID
+- Get offenses
+- Get offense closing reasons
+- Get assets
+- Get offense notes
+- Get offense note by ID
+- Add note to offense
+- Update offense
+- Watch for new offenses
 
 # Requirements
 
@@ -31,8 +31,8 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |hostname|string|None|True|Hostname for the QRadar application|None|https://example.com|
-|password|password|None|True|QRadar Password|None|password|
-|username|string|None|True|QRadar Username|None|user1|
+|password|password|None|True|QRadar password|None|password|
+|username|string|None|True|QRadar username|None|user1|
 
 Example input:
 
@@ -48,6 +48,55 @@ Example input:
 
 ### Actions
 
+#### Get Offense Notes by ID
+
+This action is used to get Offense Notes by ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|fields|string|None|False|Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
+|note_id|integer|None|True|The ID of the offense note to get|None|100|
+|offense_id|integer|None|True|The ID of the offense to get notes for|None|100|
+
+Example input:
+
+```
+{
+  "fields": "id",
+  "note_id": 100,
+  "offense_id": 100
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|data|note|False|JSON data of the Offense Notes for given ID|
+
+Example output:
+
+```
+{
+  "data": [
+    {
+      "create_time": 1641385946573,
+      "id": 159,
+      "note_text": "New Note text",
+      "username": "API_user: admin"
+    },
+    {
+      "username": "API_user: admin",
+      "create_time": 1641451278329,
+      "id": 209,
+      "note_text": "New Note text"
+    }
+  ]
+}
+```
+
 #### Add Notes to Offense
 
 This action is used to add Notes to Offense.
@@ -56,7 +105,7 @@ This action is used to add Notes to Offense.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
+|fields|string|None|False|Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
 |note_text|string|None|True|The Note Text to add to offense|None|note_text|
 |offense_id|integer|None|True|The ID of the offense in which you want to add note|None|100|
 
@@ -74,7 +123,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|note|False|JSON Data of the newly added Offense Notes |
+|data|note|False|JSON data of the newly added Offense Notes |
 
 Example output:
 
@@ -97,8 +146,8 @@ This action is used to get ariel search by ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|poll_interval|number|1|False|Poll interval is the number of seconds to recheck until the search gets COMPLETED|None|1|
-|search_id|string|None|True|Specific Ariel Search Id for which the search|None|9102cb1d-5994-4f78-8f08-16c6f6991015|
+|poll_interval|number|1|False|Number of seconds to recheck until the search is completed|None|1|
+|search_id|string|None|True|ID of the Ariel search to get|None|9102cb1d-5994-4f78-8f08-16c6f6991015|
 
 Example input:
 
@@ -113,7 +162,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|search|False|JSON Data of the Search|
+|data|search|False|JSON data of the Search|
 
 Example output:
 
@@ -152,9 +201,9 @@ This action is used to list all assets found in the model.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
-|filter|string|None|False|This parameter is used to restrict the elements in a list base on the contents of various fields|None|id=1000|
-|range|string|None|False|Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero|None|1-2|
+|fields|string|None|False|Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
+|filter|string|None|False|Restrict the elements in a list based on the contents of various fields|None|id=1000|
+|range|string|None|False|Restrict the number of returned elements to a range, eg. 0-10, with 0 being the first index|None|1-2|
 
 Example input:
 
@@ -170,7 +219,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|[]assets|False|JSON Data of the Assets|
+|data|[]assets|False|JSON data of the Assets|
 
 Example output:
 
@@ -223,11 +272,11 @@ This action is used to get Offense's Closing Reasons.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
-|filter|string|None|False|This parameter is used to restrict the elements in a list base on the contents of various fields|None|id=1000|
+|fields|string|None|False|Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
+|filter|string|None|False|Restrict the elements in a list based on the contents of various fields|None|id=1000|
 |include_deleted|boolean|None|False|If true, deleted closing reasons are included in the response. Defaults to false. Deleted closing reasons cannot be used to close an offense|None|False|
 |include_reserved|boolean|None|False|If true, reserved closing reasons are included in the response. Defaults to false. Reserved closing reasons cannot be used to close an offense|None|False|
-|range|string|None|False|Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero|None|1-2|
+|range|string|None|False|Restrict the number of returned elements to a range, eg. 0-10, with 0 being the first index|None|1-2|
 
 Example input:
 
@@ -245,7 +294,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|[]closing_reason|False|JSON Data of the Offense Closing Reasons|
+|data|[]closing_reason|False|JSON data of the Offense Closing Reasons|
 
 Example output:
 
@@ -276,10 +325,10 @@ This action is used to get Offense Notes.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
-|filter|string|None|False|This parameter is used to restrict the elements in a list base on the contents of various fields|None|id=100|
-|offense_id|integer|None|True|The ID of the offense to get its notes|None|100|
-|range|string|None|False|Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero|None|1-2|
+|fields|string|None|False|Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
+|filter|string|None|False|Restrict the elements in a list based on the contents of various fields|None|id=100|
+|offense_id|integer|None|True|The ID of the offense to get notes for|None|100|
+|range|string|None|False|Restrict the number of returned elements to a range, eg. 0-10, with 0 being the first index|None|1-2|
 
 Example input:
 
@@ -296,7 +345,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|[]note|False|JSON Data of the Offense Notes|
+|data|[]note|False|JSON data of the Offense Notes|
 
 Example output:
 
@@ -319,48 +368,6 @@ Example output:
 }
 ```
 
-#### Get Offense Notes by Id
-
-This action is used to get Offense Notes by Id.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
-|note_id|integer|None|True|The ID of the offense note to get|None|100|
-|offense_id|integer|None|True|The ID of the offense to get its notes|None|100|
-
-Example input:
-
-```
-{
-  "fields": "id",
-  "note_id": 100,
-  "offense_id": 100
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|data|note|False|JSON Data of the Offense Notes for given id|
-
-Example output:
-
-```
-{
-  "data": {
-    "create_time": 1640936459993,
-    "id": 51,
-    "note_text": "Test ",
-    "username": "API_user: admin"
-  }
-}
-
-```
-
 #### Get Offenses
 
 This action is used to list all Offenses.
@@ -369,10 +376,10 @@ This action is used to list all Offenses.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
-|filter|string|None|False|This parameter is used to restrict the elements in a list base on the contents of various fields|None|id=1000|
-|range|string|None|False|Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero|None|1-2|
-|sort|string|None|False|Use parameter to sort the elements in a list|None|+id,-status|
+|fields|string|None|False|Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
+|filter|string|None|False|Restrict the elements in a list based on the contents of various fields|None|id=1000|
+|range|string|None|False|Restrict the number of returned elements to a range, eg. 0-10, with 0 being the first index|None|1-2|
+|sort|string|None|False|Sorting strategy for list elements|None|+id,-status|
 
 Example input:
 
@@ -389,7 +396,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|[]offense|False|JSON Data of the Offense|
+|data|[]offense|False|JSON data of the Offense|
 
 Example output:
 
@@ -548,7 +555,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|search|False|JSON Data of the Search|
+|data|search|False|JSON data for the Search|
 
 Example output:
 
@@ -588,12 +595,12 @@ This action is used to update Offenses.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |assigned_to|string|None|False|A user to assign the offense to|None|admin|
-|closing_reason_id|string|None|False|The ID of a closing reason. You must provide a valid closing_reason_id when you close an offense|None|100|
-|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
+|closing_reason_id|string|None|False|The ID of a closing reason. A valid Closing Reason ID must be provided when closing an offense|None|100|
+|fields|string|None|False|Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
 |follow_up|boolean|None|False|Set to true to set the follow up flag on the offense|None|False|
 |offense_id|integer|None|True|The ID of the offense to update|None|100|
-|protected|boolean|None|False|The ID of a closing reason. You must provide a valid closing_reason_id when you close an offense|None|False|
-|status|string|None|False|The new status for the offense. Set to one of the OPEN, HIDDEN, CLOSED. When the status of an offense is being set to CLOSED, a valid closing_reason_id must be provided. To hide an offense, use the HIDDEN status. To show a previously hidden offense, use the OPEN status|['OPEN', 'HIDDEN', 'CLOSED', '']|OPEN|
+|protected|boolean|None|False|The ID of a closing reason. A valid Closing Reason ID must be provided when closing an offense|None|False|
+|status|string|None|False|The new status for the offense. Set to either open, hidden, or closed. When the status of an offense is being set to closed, a valid Closing Reason ID must be provided. To hide an offense, use the hidden status. To show a previously hidden offense, use the open status|['OPEN', 'HIDDEN', 'CLOSED', '']|OPEN|
 
 Example input:
 
@@ -613,7 +620,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|offense|False|JSON Data of the Offense|
+|data|offense|False|JSON data of the Offense|
 
 Example output:
 
@@ -693,11 +700,11 @@ This trigger is used to list all New Offenses.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
-|filter|string|None|False|This parameter is used to restrict the elements in a list base on the contents of various fields|None|id=100|
+|fields|string|None|False|Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
+|filter|string|None|False|Restrict the elements in a list based on the contents of various fields|None|id=100|
 |interval|integer|15|True|How frequently (in seconds) to trigger a greeting|None|15|
-|range|string|None|False|Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero|None|1-2|
-|sort|string|None|False|Use parameter to sort the elements in a list|None|+id,-status|
+|range|string|None|False|Restrict the number of returned elements to a range, eg. 0-10, with 0 being the first index|None|1-2|
+|sort|string|None|False|Sorting strategy for list elements|None|+id,-status|
 
 Example input:
 
@@ -715,7 +722,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|[]offense|False|JSON Data of the Offense|
+|data|[]offense|False|JSON data of the Offense|
 
 Example output:
 

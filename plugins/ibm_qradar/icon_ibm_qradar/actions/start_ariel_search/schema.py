@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Start Ariel Search"
+    DESCRIPTION = "Start an Ariel search"
 
 
 class Input:
@@ -50,7 +50,7 @@ class StartArielSearchOutput(insightconnect_plugin_runtime.Output):
     "data": {
       "$ref": "#/definitions/search",
       "title": "Search Data",
-      "description": "JSON Data of the Search",
+      "description": "JSON data for the Search",
       "order": 1
     }
   },
@@ -106,8 +106,8 @@ class StartArielSearchOutput(insightconnect_plugin_runtime.Output):
         },
         "cursor_id": {
           "type": "string",
-          "title": "Cursor Id",
-          "description": "Cursor id",
+          "title": "Cursor ID",
+          "description": "Cursor ID",
           "order": 1
         },
         "data_file_count": {
@@ -124,8 +124,8 @@ class StartArielSearchOutput(insightconnect_plugin_runtime.Output):
         },
         "desired_retention_time_msec": {
           "type": "integer",
-          "title": "Desired Retention Time Msec",
-          "description": "Desired retention time msec",
+          "title": "Desired Retention Time Milliseconds",
+          "description": "Desired retention time Milliseconds",
           "order": 10
         },
         "error_messages": {
@@ -196,8 +196,8 @@ class StartArielSearchOutput(insightconnect_plugin_runtime.Output):
         },
         "search_id": {
           "type": "string",
-          "title": "Search Id",
-          "description": "Search id",
+          "title": "Search ID",
+          "description": "Search ID",
           "order": 19
         },
         "status": {
@@ -208,8 +208,8 @@ class StartArielSearchOutput(insightconnect_plugin_runtime.Output):
         },
         "subsearch_ids": {
           "type": "array",
-          "title": "Subsearch Ids",
-          "description": "Subsearch ids",
+          "title": "Subsearch IDs",
+          "description": "Subsearch IDs",
           "items": {
             "type": "string"
           },

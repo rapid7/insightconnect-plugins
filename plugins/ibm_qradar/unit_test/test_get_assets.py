@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 from unittest import TestCase
 
-from insightconnect_plugin_runtime.exceptions import ClientException, PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_ibm_qradar.actions.get_assets import GetAssets
 from unit_test.helpers.assets import AsstesHelper
@@ -60,7 +60,7 @@ class TestGetAssets(TestCase):
         :return: None
         """
         action_params = {"range": "-0-1"}
-        with self.assertRaises(ClientException):
+        with self.assertRaises(PluginException):
             self.action.run(action_params)
 
     @patch("requests.get", side_effect=AsstesHelper.mock_request)
@@ -87,7 +87,7 @@ class TestGetAssets(TestCase):
 
     @patch("requests.get", side_effect=AsstesHelper.mock_request)
     def test_with_internal_server_error(self, make_request):
-        """To Test the get assets by id with internalServerError."""
+        """To Test the get assets by ID with internalServerError."""
         action_params = {"filter": "internalServerError"}
         with self.assertRaises(PluginException):
             self.action.run(action_params)

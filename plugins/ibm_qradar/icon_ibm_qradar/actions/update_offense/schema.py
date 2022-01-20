@@ -36,14 +36,14 @@ class UpdateOffenseInput(insightconnect_plugin_runtime.Input):
     },
     "closing_reason_id": {
       "type": "string",
-      "title": "Closing Reason Id",
-      "description": "The ID of a closing reason. You must provide a valid closing_reason_id when you close an offense",
+      "title": "Closing Reason ID",
+      "description": "The ID of a closing reason. A valid Closing Reason ID must be provided when closing an offense",
       "order": 3
     },
     "fields": {
       "type": "string",
       "title": "Fields",
-      "description": "Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas",
+      "description": "Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas",
       "order": 4
     },
     "follow_up": {
@@ -54,20 +54,20 @@ class UpdateOffenseInput(insightconnect_plugin_runtime.Input):
     },
     "offense_id": {
       "type": "integer",
-      "title": "Offense Id",
+      "title": "Offense ID",
       "description": "The ID of the offense to update",
       "order": 1
     },
     "protected": {
       "type": "boolean",
       "title": "Protected",
-      "description": "The ID of a closing reason. You must provide a valid closing_reason_id when you close an offense",
+      "description": "The ID of a closing reason. A valid Closing Reason ID must be provided when closing an offense",
       "order": 6
     },
     "status": {
       "type": "string",
       "title": "Status",
-      "description": "The new status for the offense. Set to one of the OPEN, HIDDEN, CLOSED. When the status of an offense is being set to CLOSED, a valid closing_reason_id must be provided. To hide an offense, use the HIDDEN status. To show a previously hidden offense, use the OPEN status",
+      "description": "The new status for the offense. Set to either open, hidden, or closed. When the status of an offense is being set to closed, a valid Closing Reason ID must be provided. To hide an offense, use the hidden status. To show a previously hidden offense, use the open status",
       "enum": [
         "OPEN",
         "HIDDEN",
@@ -98,7 +98,7 @@ class UpdateOffenseOutput(insightconnect_plugin_runtime.Output):
     "data": {
       "$ref": "#/definitions/offense",
       "title": "Update Offense",
-      "description": "JSON Data of the Offense",
+      "description": "JSON data of the Offense",
       "order": 1
     }
   },
@@ -109,8 +109,8 @@ class UpdateOffenseOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "id": {
           "type": "integer",
-          "title": "Id",
-          "description": "Id",
+          "title": "ID",
+          "description": "ID",
           "order": 1
         },
         "name": {
@@ -121,8 +121,8 @@ class UpdateOffenseOutput(insightconnect_plugin_runtime.Output):
         },
         "type_id": {
           "type": "integer",
-          "title": "Type Id",
-          "description": "Type id",
+          "title": "Type ID",
+          "description": "Type ID",
           "order": 3
         },
         "type_name": {
@@ -166,8 +166,8 @@ class UpdateOffenseOutput(insightconnect_plugin_runtime.Output):
         },
         "closing_reason_id": {
           "type": "integer",
-          "title": "Closing Reason Id",
-          "description": "Closing reason id",
+          "title": "Closing Reason ID",
+          "description": "Closing reason ID",
           "order": 5
         },
         "closing_user": {
@@ -205,8 +205,8 @@ class UpdateOffenseOutput(insightconnect_plugin_runtime.Output):
         },
         "domain_id": {
           "type": "integer",
-          "title": "Domain Id",
-          "description": "Domain id",
+          "title": "Domain ID",
+          "description": "Domain ID",
           "order": 11
         },
         "event_count": {
@@ -235,8 +235,8 @@ class UpdateOffenseOutput(insightconnect_plugin_runtime.Output):
         },
         "id": {
           "type": "integer",
-          "title": "Id",
-          "description": "Id",
+          "title": "ID",
+          "description": "ID",
           "order": 16
         },
         "inactive": {
@@ -259,8 +259,8 @@ class UpdateOffenseOutput(insightconnect_plugin_runtime.Output):
         },
         "local_destination_address_ids": {
           "type": "array",
-          "title": "Local Destination Address Ids",
-          "description": "Local destination address ids",
+          "title": "Local Destination Address IDs",
+          "description": "Local destination address IDs",
           "items": {
             "type": "integer"
           },
@@ -346,8 +346,8 @@ class UpdateOffenseOutput(insightconnect_plugin_runtime.Output):
         },
         "source_address_ids": {
           "type": "array",
-          "title": "Source Address Ids",
-          "description": "Source address ids",
+          "title": "Source Address IDs",
+          "description": "Source address IDs",
           "items": {
             "type": "integer"
           },
@@ -391,8 +391,8 @@ class UpdateOffenseOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "id": {
               "type": "integer",
-              "title": "Id",
-              "description": "Id",
+              "title": "ID",
+              "description": "ID",
               "order": 1
             },
             "name": {
@@ -403,8 +403,8 @@ class UpdateOffenseOutput(insightconnect_plugin_runtime.Output):
             },
             "type_id": {
               "type": "integer",
-              "title": "Type Id",
-              "description": "Type id",
+              "title": "Type ID",
+              "description": "Type ID",
               "order": 3
             },
             "type_name": {
@@ -421,8 +421,8 @@ class UpdateOffenseOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "id": {
               "type": "integer",
-              "title": "Id",
-              "description": "Id",
+              "title": "ID",
+              "description": "ID",
               "order": 1
             },
             "type": {
@@ -441,8 +441,8 @@ class UpdateOffenseOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "id": {
           "type": "integer",
-          "title": "Id",
-          "description": "Id",
+          "title": "ID",
+          "description": "ID",
           "order": 1
         },
         "type": {

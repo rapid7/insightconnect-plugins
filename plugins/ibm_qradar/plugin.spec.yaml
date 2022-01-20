@@ -26,18 +26,21 @@ hub_tags:
 enable_cache: false
 connection:
   hostname:
+    title: Hostname
     type: string
     description: Hostname for the QRadar application
     required: true
     example: 127.0.0.1
   username:
+    title: Username
     type: string
-    description: QRadar Username
+    description: QRadar username
     required: true
     example: user1
   password:
+    title: Password
     type: password
-    description: QRadar Password
+    description: QRadar password
     required: true
     example: password
 types:
@@ -64,30 +67,30 @@ types:
       required: false
   events:
     qid:
-      title: "Qid"
+      title: "QID"
       type: integer
       description: "Qid"
       required: false
     sourceip:
-      title: "Sourceip"
+      title: "Source IP"
       type: string
-      description: "Sourceip"
+      description: "Source IP"
       required: false
     sourceport:
-      title: "Sourceport"
+      title: "Source Port"
       type: integer
-      description: "Sourceport"
+      description: "Source port"
       required: false
     starttime:
-      title: "Starttime"
+      title: "Start Time"
       type: integer
-      description: "Starttime"
+      description: "Start time"
       required: false
   search:
     cursor_id:
-        title: "Cursor Id"
+        title: "Cursor ID"
         type: string
-        description: "Cursor id"
+        description: "Cursor ID"
         required: false
     compressed_data_file_count:
         title: "Compressed Data File Count"
@@ -130,9 +133,9 @@ types:
         description: "Error messages"
         required: false
     desired_retention_time_msec:
-        title: "Desired Retention Time Msec"
+        title: "Desired Retention Time Milliseconds"
         type: integer
-        description: "Desired retention time msec"
+        description: "Desired retention time Milliseconds"
         required: false
     progress:
         title: "Progress"
@@ -170,14 +173,14 @@ types:
         description: "Status"
         required: false
     subsearch_ids:
-        title: "Subsearch Ids"
+        title: "Subsearch IDs"
         type: "[]string"
-        description: "Subsearch ids"
+        description: "Subsearch IDs"
         required: false
     search_id:
-        title: "Search Id"
+        title: "Search ID"
         type: string
-        description: "Search id"
+        description: "Search ID"
         required: false
   ip_addresses:
     created:
@@ -196,9 +199,9 @@ types:
       description: "First seen scanner"
       required: false
     id:
-      title: "Id"
+      title: "ID"
       type: integer
-      description: "Id"
+      description: "ID"
       required: false
     last_seen_profiler:
       title: "Last Seen Profiler"
@@ -211,9 +214,9 @@ types:
       description: "Last seen scanner"
       required: false
     network_id:
-      title: "Network Id"
+      title: "Network ID"
       type: integer
-      description: "Network id"
+      description: "Network ID"
       required: false
     type:
       title: "Type"
@@ -242,9 +245,9 @@ types:
       description: "First seen scanner"
       required: false
     id:
-      title: "Id"
+      title: "ID"
       type: integer
-      description: "Id"
+      description: "ID"
       required: false
     ip_addresses:
       title: "IP Addresses"
@@ -268,9 +271,9 @@ types:
       required: false
   properties:
     id:
-      title: "Id"
+      title: "ID"
       type: integer
-      description: "Id"
+      description: "ID"
       required: false
     last_reported:
       title: "Last Reported"
@@ -288,9 +291,9 @@ types:
       description: "Name"
       required: false
     type_id:
-      title: "Type Id"
+      title: "Type ID"
       type: integer
-      description: "Type id"
+      description: "Type ID"
       required: false
     value:
       title: "Value"
@@ -309,9 +312,9 @@ types:
       description: "First seen scanner"
       required: false
     id:
-      title: "Id"
+      title: "ID"
       type: integer
-      description: "Id"
+      description: "ID"
       required: false
     last_scanned_for:
       title: "Last Scanned For"
@@ -329,9 +332,9 @@ types:
       description: "Last seen scanner"
       required: false
     product_variant_id:
-      title: "Product Variant Id"
+      title: "Product Variant ID"
       type: integer
-      description: "Product variant id"
+      description: "Product variant ID"
       required: false
   hostnames:
     created:
@@ -350,9 +353,9 @@ types:
       description: "First seen scanner"
       required: false
     id:
-      title: "Id"
+      title: "ID"
       type: integer
-      description: "Id"
+      description: "ID"
       required: false
     last_seen_profiler:
       title: "Last Seen Profiler"
@@ -376,9 +379,9 @@ types:
       required: false
   rules:
     id:
-      title: "Id"
+      title: "ID"
       type: integer
-      description: "Id"
+      description: "ID"
       required: false
     type:
       title: "Type"
@@ -387,9 +390,9 @@ types:
       required: false
   log_sources:
     id:
-      title: "Id"
+      title: "ID"
       type: integer
-      description: "Id"
+      description: "ID"
       required: false
     name:
       title: "Name"
@@ -397,9 +400,9 @@ types:
       description: "Name"
       required: false
     type_id:
-      title: "Type Id"
+      title: "Type ID"
       type: integer
-      description: "Type id"
+      description: "Type ID"
       required: false
     type_name:
       title: "Type Name"
@@ -428,9 +431,9 @@ types:
       description: "Hostnames"
       required: false
     id:
-      title: "Id"
+      title: "ID"
       type: integer
-      description: "Id"
+      description: "ID"
       required: false
     users:
       title: "Users"
@@ -438,9 +441,9 @@ types:
       description: "Users"
       required: false
     domain_id:
-      title: "Domain Id"
+      title: "Domain ID"
       type: integer
-      description: "Domain id"
+      description: "Domain ID"
       required: false
     properties:
       title: "Properties"
@@ -454,38 +457,38 @@ types:
       required: false
   closing_reason:
     id:
-      title: "Id"
+      title: "ID"
       type: integer
-      description: "Id"
+      description: "ID"
       required: false
     is_deleted:
       title: "Is Deleted"
       type: boolean
-      description: "Is Deleted"
+      description: "Is deleted"
       required: false
     is_reserved:
       title: "Is Reserved"
       type: boolean
-      description: "Is Reserved"
+      description: "Is reserved"
       required: false
     text:
-      title: "text"
+      title: "Text"
       type: string
       description: "text"
       required: false
   note:
     id:
-      title: "Id"
+      title: "ID"
       type: integer
-      description: "Id"
+      description: "ID"
       required: false
     create_time:
       title: "Created Time"
       type: integer
-      description: "Created Time"
+      description: "Created time"
       required: false
     note_text:
-      title: "Note text"
+      title: "Note Text"
       type: string
       description: "Note text"
       required: false
@@ -516,9 +519,9 @@ types:
       description: "Close time"
       required: false
     closing_reason_id:
-      title: "Closing Reason Id"
+      title: "Closing Reason ID"
       type: integer
-      description: "Closing reason id"
+      description: "Closing reason ID"
       required: false
     closing_user:
       title: "Closing User"
@@ -546,9 +549,9 @@ types:
       description: "Device count"
       required: false
     domain_id:
-      title: "Domain Id"
+      title: "Domain ID"
       type: integer
-      description: "Domain id"
+      description: "Domain ID"
       required: false
     event_count:
       title: "Event Count"
@@ -571,9 +574,9 @@ types:
       description: "Follow up"
       required: false
     id:
-      title: "Id"
+      title: "ID"
       type: integer
-      description: "Id"
+      description: "ID"
       required: false
     inactive:
       title: "Inactive"
@@ -591,9 +594,9 @@ types:
       description: "Last updated time"
       required: false
     local_destination_address_ids:
-      title: "Local Destination Address Ids"
+      title: "Local Destination Address IDs"
       type: "[]integer"
-      description: "Local destination address ids"
+      description: "Local destination address IDs"
       required: false
     local_destination_count:
       title: "Local Destination Count"
@@ -656,9 +659,9 @@ types:
       description: "Severity"
       required: false
     source_address_ids:
-      title: "Source Address Ids"
+      title: "Source Address IDs"
       type: "[]integer"
-      description: "Source address ids"
+      description: "Source address IDs"
       required: false
     source_count:
       title: "Source Count"
@@ -688,7 +691,7 @@ types:
 actions:
   start_ariel_search:
     title: Start Ariel Search
-    description: Start Ariel Search
+    description: Start an Ariel search
     input:
       aql:
         title: AQL Query
@@ -700,28 +703,29 @@ actions:
       data:
         title: Search Data
         type: search
-        description: JSON Data of the Search
+        description: JSON data for the Search
         required: false
   get_ariel_search_by_id:
     title: Get Ariel Search by ID
-    description: Get ariel search by ID
+    description: Get an ariel search by ID
     input:
       search_id:
+        title: Search ID
         type: string
         required: true
-        description: Specific Ariel Search Id for which the search
+        description: ID of the Ariel search to get
         example: 9102cb1d-5994-4f78-8f08-16c6f6991015
       poll_interval:
         type: number
         required: false
-        description: Poll interval is the number of seconds to recheck until the search gets COMPLETED
+        description: Number of seconds to recheck until the search is completed
         default: 1
         example: 1
     output:
       data:
         title: Search Data
         type: search
-        description: JSON Data of the Search
+        description: JSON data of the Search
         required: false
   get_assets:
     title: Get Assets
@@ -730,53 +734,53 @@ actions:
       range:
         type: string
         required: false
-        description: Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero
+        description: Restrict the number of returned elements to a range, eg. 0-10, with 0 being the first index
         example: 1-2
       filter:
         type: string
         required: false
-        description: This parameter is used to restrict the elements in a list base on the contents of various fields
+        description: Restrict the elements in a list based on the contents of various fields
         example: id=1000
       fields:
         type: string
         required: false
-        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
+        description: Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
         example: id
     output:
       data:
         title: Assets Data
         type: "[]assets"
-        description: JSON Data of the Assets
+        description: JSON data of the Assets
         required: false
   get_offenses:
     title: Get Offenses
-    description: List all Offenses
+    description: List all offenses
     input:
       range:
         type: string
         required: false
-        description: Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero
+        description: Restrict the number of returned elements to a range, eg. 0-10, with 0 being the first index
         example: 1-2
       filter:
         type: string
         required: false
-        description: This parameter is used to restrict the elements in a list base on the contents of various fields
+        description: Restrict the elements in a list based on the contents of various fields
         example: id=1000
       fields:
         type: string
         required: false
-        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
+        description: Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
         example: id
       sort:
         type: string
         required: false
-        description: Use parameter to sort the elements in a list
+        description: Sorting strategy for list elements
         example: +id,-status
     output:
       data:
         title: Offense Data
         type: "[]offense"
-        description: "JSON Data of the Offense"
+        description: "JSON data of the Offense"
         required: false
   get_offense_closing_reasons:
     title: Get Offense's Closing Reasons
@@ -785,17 +789,17 @@ actions:
       range:
         type: string
         required: false
-        description: Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero
+        description: Restrict the number of returned elements to a range, eg. 0-10, with 0 being the first index
         example: 1-2
       filter:
         type: string
         required: false
-        description: This parameter is used to restrict the elements in a list base on the contents of various fields
+        description: Restrict the elements in a list based on the contents of various fields
         example: id=1000
       fields:
         type: string
         required: false
-        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
+        description: Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
         example: id
       include_deleted:
         type: boolean
@@ -811,13 +815,14 @@ actions:
       data:
         title: Offense Closing Reasons
         type: "[]closing_reason"
-        description: JSON Data of the Offense Closing Reasons
+        description: JSON data of the Offense Closing Reasons
         required: false
   update_offense:
     title: Update Offenses
     description: Update Offenses
     input:
       offense_id:
+        title: Offense ID
         type: integer
         required: true
         description: The ID of the offense to update
@@ -828,14 +833,15 @@ actions:
         description: A user to assign the offense to
         example: admin
       closing_reason_id:
+        title: Closing Reason ID
         type: string
         required: false
-        description: The ID of a closing reason. You must provide a valid closing_reason_id when you close an offense
+        description: The ID of a closing reason. A valid Closing Reason ID must be provided when closing an offense
         example: 100
       fields:
         type: string
         required: false
-        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
+        description: Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
         example: id
       follow_up:
         type: boolean
@@ -845,12 +851,12 @@ actions:
       protected:
         type: boolean
         required: false
-        description: The ID of a closing reason. You must provide a valid closing_reason_id when you close an offense
+        description: The ID of a closing reason. A valid Closing Reason ID must be provided when closing an offense
         example: false
       status:
         type: string
         required: false
-        description: The new status for the offense. Set to one of the OPEN, HIDDEN, CLOSED. When the status of an offense is being set to CLOSED, a valid closing_reason_id must be provided. To hide an offense, use the HIDDEN status. To show a previously hidden offense, use the OPEN status
+        description: The new status for the offense. Set to either open, hidden, or closed. When the status of an offense is being set to closed, a valid Closing Reason ID must be provided. To hide an offense, use the hidden status. To show a previously hidden offense, use the open status
         enum:
           - "OPEN"
           - "HIDDEN"
@@ -861,7 +867,7 @@ actions:
       data:
         title: Update Offense
         type: "offense"
-        description: "JSON Data of the Offense"
+        description: "JSON data of the Offense"
         required: false
   get_offense_note:
     title: Get Offense Notes
@@ -870,39 +876,41 @@ actions:
       offense_id:
         type: integer
         required: true
-        description: The ID of the offense to get its notes
+        description: The ID of the offense to get notes for
         example: 100
       range:
         type: string
         required: false
-        description: Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero
+        description: Restrict the number of returned elements to a range, eg. 0-10, with 0 being the first index
         example: 1-2
       filter:
         type: string
         required: false
-        description: This parameter is used to restrict the elements in a list base on the contents of various fields
+        description: Restrict the elements in a list based on the contents of various fields
         example: id=100
       fields:
         type: string
         required: false
-        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
+        description: Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
         example: id
     output:
       data:
         title: Offense Notes
         type: "[]note"
-        description: JSON Data of the Offense Notes
+        description: JSON data of the Offense Notes
         required: false
   get_offense_note_by_id:
-    title: Get Offense Notes by Id
-    description: Get Offense Notes by Id
+    title: Get Offense Notes by ID
+    description: Get Offense Notes by ID
     input:
       offense_id:
+        title: Offense ID
         type: integer
         required: true
-        description: The ID of the offense to get its notes
+        description: The ID of the offense to get notes for
         example: 100
       note_id:
+        title: Note ID
         type: integer
         required: true
         description: The ID of the offense note to get
@@ -910,19 +918,20 @@ actions:
       fields:
         type: string
         required: false
-        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
+        description: Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
         example: id
     output:
       data:
         title: Offense Notes by Id
         type: note
-        description: JSON Data of the Offense Notes for given id
+        description: JSON data of the Offense Notes for given ID
         required: false
   add_notes_to_offense:
     title: Add Notes to Offense
     description: Add Notes to Offense
     input:
       offense_id:
+        title: Offense ID
         type: integer
         required: true
         description: The ID of the offense in which you want to add note
@@ -935,13 +944,13 @@ actions:
       fields:
         type: string
         required: false
-        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
+        description: Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
         example: id
     output:
       data:
         title: "Newly Added Offense Notes"
         type: note
-        description: "JSON Data of the newly added Offense Notes "
+        description: "JSON data of the newly added Offense Notes "
         required: false
 triggers:
   get_new_offense:
@@ -951,22 +960,22 @@ triggers:
       range:
         type: string
         required: false
-        description: Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero
+        description: Restrict the number of returned elements to a range, eg. 0-10, with 0 being the first index
         example: 1-2
       filter:
         type: string
         required: false
-        description: This parameter is used to restrict the elements in a list base on the contents of various fields
+        description: Restrict the elements in a list based on the contents of various fields
         example: id=100
       fields:
         type: string
         required: false
-        description: Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
+        description: Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
         example: id
       sort:
         type: string
         required: false
-        description: Use parameter to sort the elements in a list
+        description: Sorting strategy for list elements
         example: +id,-status
       interval:
         description: How frequently (in seconds) to trigger a greeting
@@ -978,5 +987,5 @@ triggers:
       data:
         title: "Offense Data"
         type: "[]offense"
-        description: "JSON Data of the Offense"
+        description: "JSON data of the Offense"
         required: false

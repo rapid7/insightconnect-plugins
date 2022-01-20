@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 from unittest import TestCase
 
-from insightconnect_plugin_runtime.exceptions import ClientException, PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_ibm_qradar.actions.add_notes_to_offense import AddNotesToOffense
 from unit_test.helpers.offense_note import OffenseNotesHelper
@@ -54,7 +54,7 @@ class TestAddNoteToOffense(TestCase):
 
     @patch("requests.post", side_effect=OffenseNotesHelper.mock_request)
     def test_with_internal_server_error(self, make_request):
-        """To Test the Add notes to offense by id with internalServerError."""
+        """To Test the Add notes to offense by ID with internalServerError."""
         action_params = {
             "offense_id": "33",
             "note_text": "Hello",

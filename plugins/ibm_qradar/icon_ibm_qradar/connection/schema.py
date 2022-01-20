@@ -26,14 +26,14 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Password",
       "displayType": "password",
-      "description": "QRadar Password",
+      "description": "QRadar password",
       "format": "password",
       "order": 3
     },
     "username": {
       "type": "string",
       "title": "Username",
-      "description": "QRadar Username",
+      "description": "QRadar username",
       "order": 2
     }
   },

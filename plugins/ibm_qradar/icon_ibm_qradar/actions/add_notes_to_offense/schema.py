@@ -27,7 +27,7 @@ class AddNotesToOffenseInput(insightconnect_plugin_runtime.Input):
     "fields": {
       "type": "string",
       "title": "Fields",
-      "description": "Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas",
+      "description": "Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas",
       "order": 3
     },
     "note_text": {
@@ -38,7 +38,7 @@ class AddNotesToOffenseInput(insightconnect_plugin_runtime.Input):
     },
     "offense_id": {
       "type": "integer",
-      "title": "Offense Id",
+      "title": "Offense ID",
       "description": "The ID of the offense in which you want to add note",
       "order": 1
     }
@@ -65,7 +65,7 @@ class AddNotesToOffenseOutput(insightconnect_plugin_runtime.Output):
     "data": {
       "$ref": "#/definitions/note",
       "title": "Newly Added Offense Notes",
-      "description": "JSON Data of the newly added Offense Notes ",
+      "description": "JSON data of the newly added Offense Notes ",
       "order": 1
     }
   },
@@ -77,18 +77,18 @@ class AddNotesToOffenseOutput(insightconnect_plugin_runtime.Output):
         "create_time": {
           "type": "integer",
           "title": "Created Time",
-          "description": "Created Time",
+          "description": "Created time",
           "order": 2
         },
         "id": {
           "type": "integer",
-          "title": "Id",
-          "description": "Id",
+          "title": "ID",
+          "description": "ID",
           "order": 1
         },
         "note_text": {
           "type": "string",
-          "title": "Note text",
+          "title": "Note Text",
           "description": "Note text",
           "order": 3
         },

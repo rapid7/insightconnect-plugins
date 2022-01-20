@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 from unittest import TestCase
 
-from insightconnect_plugin_runtime.exceptions import ClientException, PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_ibm_qradar.actions.get_offense_closing_reasons import GetOffenseClosingReasons
 from unit_test.helpers.offense import OffensesHelper
@@ -60,7 +60,7 @@ class TestGetOffenseClosingReason(TestCase):
         :return: None
         """
         action_params = {"range": "-0-1"}
-        with self.assertRaises(ClientException):
+        with self.assertRaises(PluginException):
             self.action.run(action_params)
 
     @patch("requests.get", side_effect=OffensesHelper.mock_request)

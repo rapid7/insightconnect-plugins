@@ -37,7 +37,7 @@ class GetAssets(insightconnect_plugin_runtime.Action):
 
         auth = (self.connection.username, self.connection.password)
         try:
-            self.logger.debug(f"Final Url: {basic_url}")
+            self.logger.debug(f"Final URL: {basic_url}")
             response = requests.get(url=basic_url, headers=headers, data={}, auth=auth)
         except requests.exceptions.ConnectionError:
             raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE)

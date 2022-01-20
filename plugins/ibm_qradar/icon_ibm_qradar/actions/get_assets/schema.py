@@ -27,19 +27,19 @@ class GetAssetsInput(insightconnect_plugin_runtime.Input):
     "fields": {
       "type": "string",
       "title": "Fields",
-      "description": "Use this parameter to specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas",
+      "description": "Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas",
       "order": 3
     },
     "filter": {
       "type": "string",
       "title": "Filter",
-      "description": "This parameter is used to restrict the elements in a list base on the contents of various fields",
+      "description": "Restrict the elements in a list based on the contents of various fields",
       "order": 2
     },
     "range": {
       "type": "string",
       "title": "Range",
-      "description": "Use this parameter to restrict the number of elements that are returned in the list to a specified range. The list is indexed starting at zero",
+      "description": "Restrict the number of returned elements to a range, eg. 0-10, with 0 being the first index",
       "order": 1
     }
   }
@@ -61,7 +61,7 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
     "data": {
       "type": "array",
       "title": "Assets Data",
-      "description": "JSON Data of the Assets",
+      "description": "JSON data of the Assets",
       "items": {
         "$ref": "#/definitions/assets"
       },
@@ -75,8 +75,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "domain_id": {
           "type": "integer",
-          "title": "Domain Id",
-          "description": "Domain id",
+          "title": "Domain ID",
+          "description": "Domain ID",
           "order": 7
         },
         "hostnames": {
@@ -90,8 +90,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
         },
         "id": {
           "type": "integer",
-          "title": "Id",
-          "description": "Id",
+          "title": "ID",
+          "description": "ID",
           "order": 5
         },
         "interfaces": {
@@ -168,8 +168,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
             },
             "id": {
               "type": "integer",
-              "title": "Id",
-              "description": "Id",
+              "title": "ID",
+              "description": "ID",
               "order": 4
             },
             "last_seen_profiler": {
@@ -222,8 +222,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
             },
             "id": {
               "type": "integer",
-              "title": "Id",
-              "description": "Id",
+              "title": "ID",
+              "description": "ID",
               "order": 4
             },
             "ip_addresses": {
@@ -279,8 +279,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
                 },
                 "id": {
                   "type": "integer",
-                  "title": "Id",
-                  "description": "Id",
+                  "title": "ID",
+                  "description": "ID",
                   "order": 4
                 },
                 "last_seen_profiler": {
@@ -297,8 +297,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
                 },
                 "network_id": {
                   "type": "integer",
-                  "title": "Network Id",
-                  "description": "Network id",
+                  "title": "Network ID",
+                  "description": "Network ID",
                   "order": 7
                 },
                 "type": {
@@ -341,8 +341,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
             },
             "id": {
               "type": "integer",
-              "title": "Id",
-              "description": "Id",
+              "title": "ID",
+              "description": "ID",
               "order": 4
             },
             "last_seen_profiler": {
@@ -359,8 +359,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
             },
             "network_id": {
               "type": "integer",
-              "title": "Network Id",
-              "description": "Network id",
+              "title": "Network ID",
+              "description": "Network ID",
               "order": 7
             },
             "type": {
@@ -395,8 +395,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
             },
             "id": {
               "type": "integer",
-              "title": "Id",
-              "description": "Id",
+              "title": "ID",
+              "description": "ID",
               "order": 3
             },
             "last_scanned_for": {
@@ -419,8 +419,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
             },
             "product_variant_id": {
               "type": "integer",
-              "title": "Product Variant Id",
-              "description": "Product variant id",
+              "title": "Product Variant ID",
+              "description": "Product variant ID",
               "order": 7
             }
           }
@@ -431,8 +431,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "id": {
               "type": "integer",
-              "title": "Id",
-              "description": "Id",
+              "title": "ID",
+              "description": "ID",
               "order": 1
             },
             "last_reported": {
@@ -455,8 +455,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
             },
             "type_id": {
               "type": "integer",
-              "title": "Type Id",
-              "description": "Type id",
+              "title": "Type ID",
+              "description": "Type ID",
               "order": 5
             },
             "value": {
@@ -493,8 +493,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
         },
         "id": {
           "type": "integer",
-          "title": "Id",
-          "description": "Id",
+          "title": "ID",
+          "description": "ID",
           "order": 4
         },
         "last_seen_profiler": {
@@ -547,8 +547,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
         },
         "id": {
           "type": "integer",
-          "title": "Id",
-          "description": "Id",
+          "title": "ID",
+          "description": "ID",
           "order": 4
         },
         "ip_addresses": {
@@ -604,8 +604,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
             },
             "id": {
               "type": "integer",
-              "title": "Id",
-              "description": "Id",
+              "title": "ID",
+              "description": "ID",
               "order": 4
             },
             "last_seen_profiler": {
@@ -622,8 +622,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
             },
             "network_id": {
               "type": "integer",
-              "title": "Network Id",
-              "description": "Network id",
+              "title": "Network ID",
+              "description": "Network ID",
               "order": 7
             },
             "type": {
@@ -666,8 +666,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
         },
         "id": {
           "type": "integer",
-          "title": "Id",
-          "description": "Id",
+          "title": "ID",
+          "description": "ID",
           "order": 4
         },
         "last_seen_profiler": {
@@ -684,8 +684,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
         },
         "network_id": {
           "type": "integer",
-          "title": "Network Id",
-          "description": "Network id",
+          "title": "Network ID",
+          "description": "Network ID",
           "order": 7
         },
         "type": {
@@ -720,8 +720,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
         },
         "id": {
           "type": "integer",
-          "title": "Id",
-          "description": "Id",
+          "title": "ID",
+          "description": "ID",
           "order": 3
         },
         "last_scanned_for": {
@@ -744,8 +744,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
         },
         "product_variant_id": {
           "type": "integer",
-          "title": "Product Variant Id",
-          "description": "Product variant id",
+          "title": "Product Variant ID",
+          "description": "Product variant ID",
           "order": 7
         }
       }
@@ -756,8 +756,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "id": {
           "type": "integer",
-          "title": "Id",
-          "description": "Id",
+          "title": "ID",
+          "description": "ID",
           "order": 1
         },
         "last_reported": {
@@ -780,8 +780,8 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
         },
         "type_id": {
           "type": "integer",
-          "title": "Type Id",
-          "description": "Type id",
+          "title": "Type ID",
+          "description": "Type ID",
           "order": 5
         },
         "value": {

@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 from unittest import TestCase
 
-from insightconnect_plugin_runtime.exceptions import ClientException, PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_ibm_qradar.actions.update_offense import UpdateOffense
 from unit_test.helpers.offense import UpdateOffenseHelper
@@ -59,7 +59,7 @@ class TestGetOffense(TestCase):
 
     @patch("requests.post", side_effect=UpdateOffenseHelper.mock_request)
     def test_close_offense_without_closing_reason(self, make_request):
-        """To update offenses with given closed status without closing id .
+        """To update offenses with given closed status without closing ID .
 
         :return: None
         """
@@ -68,12 +68,12 @@ class TestGetOffense(TestCase):
             "fields": "id",
             "status": "CLOSED",
         }
-        with self.assertRaises(ClientException):
+        with self.assertRaises(PluginException):
             self.action.run(action_params)
 
     @patch("requests.post", side_effect=UpdateOffenseHelper.mock_request)
     def test_open_offense_with_closing_reason(self, make_request):
-        """To update offenses with given closed status without closing id .
+        """To update offenses with given closed status without closing ID .
 
         :return: None
         """
@@ -83,7 +83,7 @@ class TestGetOffense(TestCase):
             "status": "OPEN",
             "closing_reason_id": "1",
         }
-        with self.assertRaises(ClientException):
+        with self.assertRaises(PluginException):
             self.action.run(action_params)
 
     @patch("requests.post", side_effect=UpdateOffenseHelper.mock_request)

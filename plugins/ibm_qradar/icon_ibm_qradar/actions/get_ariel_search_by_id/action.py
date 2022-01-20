@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 import requests
 
-from insightconnect_plugin_runtime.exceptions import ClientException, PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_ibm_qradar.util.constants.endpoints import GET_ARIEL_SEARCH_BY_ID_ENDPOINT
 from icon_ibm_qradar.util.constants.messages import NEGATIVE_POLL_INTERVAL_PROVIDED
@@ -43,7 +43,7 @@ class GetArielSearchById(insightconnect_plugin_runtime.Action):
 
         if poll_interval < 0:
             self.logger.info("Terminating: Poll interval provided as negative value.")
-            raise ClientException(Exception(NEGATIVE_POLL_INTERVAL_PROVIDED))
+            raise PluginException(cause=NEGATIVE_POLL_INTERVAL_PROVIDED)
 
         url_obj = URL(self.connection.hostname, self.endpoint)
         basic_url = url_obj.get_basic_url()

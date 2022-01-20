@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 import time
-
+import datetime
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 
@@ -41,11 +41,19 @@ class GetNewOffense(insightconnect_plugin_runtime.Trigger):
                     url_obj,
                     [Input.FILTER, Input.FIELDS, Input.RANGE, Input.SORT],
                 )
+
+                self.logger.debug(f"current_epoch_time : {current_epoch_time}")
                 self.logger.debug(f"Final Url: {basic_url}")
-                response = requests.post(url=basic_url, headers=headers, data={}, auth=auth)
-                current_epoch_time = int(time.time()) * 1000
+                response = requests.get(url=basic_url, headers=headers, data={}, auth=auth, verify=False)
+                new_offence = {Output.DATA: handle_response(response)}
+
+                self.logger.debug(f"New Offence: {len(new_offence[Output.DATA])}")
+
+                if len(new_offence[Output.DATA]) > 0:
+                    self.send(new_offence)
+                    current_epoch_time = int(time.time()) * 1000
+
             except requests.exceptions.ConnectionError:
                 raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE)
 
-            self.send({Output.DATA: handle_response(response)})
-            time.sleep(params.get(Input.INTERVAL, 10))
+            time.sleep(params.get(Input.INTERVAL, 60))
