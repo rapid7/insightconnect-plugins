@@ -44,7 +44,7 @@ class GetNewOffense(insightconnect_plugin_runtime.Trigger):
 
                 self.logger.debug(f"current_epoch_time : {current_epoch_time}")
                 self.logger.debug(f"Final Url: {basic_url}")
-                response = requests.get(url=basic_url, headers=headers, data={}, auth=auth, verify=False)
+                response = requests.get(url=basic_url, headers=headers, data={}, auth=auth)
                 new_offence = {Output.DATA: handle_response(response)}
 
                 self.logger.debug(f"New Offence: {len(new_offence[Output.DATA])}")
