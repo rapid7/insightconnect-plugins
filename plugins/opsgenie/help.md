@@ -4,12 +4,14 @@ Notify the right people, reduce response time, and avoid alert fatigue within a 
 
 # Key Features
 
-Identify key features of plugin.
+* Create new alert
+* Close existing alert
+* Get information about specific alert 
+* Get on calls is used to retrieve current on-call participants of a specific schedule
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product's user interface
+* Requires an API Key from the product OpsGenie
 
 # Supported Product Versions
 
