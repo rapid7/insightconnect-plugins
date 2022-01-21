@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: servicenow
 title: ServiceNow
 description: ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for Rapid7 InsightConnect, users can manage all aspects of incidents including creation, search, updates, as well as monitor them for changes
-version: 5.2.0
+version: 6.0.0
 supported_versions: ["2020-03-11 Orlando"]
 vendor: rapid7
 support: rapid7
@@ -64,6 +64,22 @@ types:
       description: Either 'comments' or 'work_notes'
       type: string
       required: true
+  attachment_file:
+    file_name:
+      title: File Name
+      description: File name
+      type: string
+      required: false
+    content:
+      title: Content
+      description: File content encoded with base64
+      type: string
+      required: false
+    content_type:
+      title: Content Type
+      description: Content type
+      type: string
+      required: false
 connection:
   url:
     title: ServiceNow URL
@@ -592,8 +608,8 @@ actions:
     output:
       incident_attachments:
         title: Incident Attachments
-        description: Attachments for a given incident ID
-        type: "[]bytes"
+        description: List of attachments for a given incident ID
+        type: "[]attachment_file"
         required: false
 triggers:
   incident_changed:
