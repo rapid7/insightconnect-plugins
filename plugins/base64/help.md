@@ -17,7 +17,7 @@ _This plugin does not contain any requirements._
 
 _This plugin does not contain a connection._
 
-## Technical Details
+## Technical Details 
 
 ### Actions
 
