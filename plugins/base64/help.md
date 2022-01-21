@@ -19,7 +19,7 @@ _This plugin does not contain a connection._
 
 ## Technical Details 
 
-### Actions
+### Actions 
 
 #### Encoder
 
