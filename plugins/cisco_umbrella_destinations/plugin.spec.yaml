@@ -1,0 +1,547 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: cisco_umbrella_destinations
+title: Cisco Umbrella Destinations
+version: 1.0.0
+description: This plugin utilizes the Cisco Umbrella Destination Lists API to provide a consistent way to programmatically manage access to
+  network destinations, and you can block or allow a destination based on the policies applied to the identities within your organization
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/cisco_umbrella_destinations
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.cisco.com
+tags:
+- cisco
+- umbrella
+- destinations
+hub_tags:
+  use_cases: [threat_detection_and_response]
+  keywords: [cisco, umbrella]
+  features: []
+connection:
+  api_key:
+    title: API Key
+    description: Cisco Umbrella Management API key
+    type: credential_secret_key
+    required: true
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
+  api_secret:
+    title: API Secret Key
+    description: Cisco Umbrella Management API secret key
+    type: credential_secret_key
+    required: true
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
+  organization_id:
+    title: Organization ID
+    description: ID for organization
+    type: integer
+    required: true
+    example: 1234567
+types:
+  meta:
+    destinationCount:
+      type: integer
+      description: Total number of destinations in a destination list.
+      required: false
+    domainCount:
+      type: integer
+      description: Total number of domains in a destination list. Domains are part of total destinations in a destination lists.
+      required: false
+    urlCount:
+      type: integer
+      description: Total number of URLs in a destination list. URLs are part of total destinations in a destination lists.
+      required: false
+    ipv4Count:
+      type: integer
+      description: Total number of IP's in a destination list. IP's are part of total destinations in destination lists.
+      required: false
+  destinations:
+    destination:
+      type: string
+      description: Destination can be DOMAIN, URL or IP
+      example: Domain Name
+      required: true
+    type:
+      type: string
+      description: Type can be DOMAIN, URL, IPV4
+      example: 10.10.10.10 / google.com
+      required: true
+    comment:
+      type: string
+      description: None
+      example: Added new destination list
+      required: false
+  dResponse:
+    id:
+      title: ID
+      description: Unique ID of the destination list.
+      example: 1234
+      type: integer
+      required: false
+    organizationId:
+      title: Organization ID
+      description: ID of organization
+      example: 1234567
+      type: integer
+      required: false
+    access:
+      title: Access
+      description: Access can be allow or block. It defines destinationList type.
+      example: allow
+      type: string
+      required: false
+    isGlobal:
+      title: Is Global
+      description: IsGlobal can be true or false. There is only one default destination list of type allow or block for an organization.
+      example: true
+      type: boolean
+      required: false
+    name:
+      title: Name
+      description: Name of the DL list
+      example: ABCList
+      type: string
+      required: false
+    thirdpartyCategoryId:
+      title: Third Party Category ID
+      description: ID, if any, for third parties
+      example: 1
+      type: integer
+      required: false
+    createdAt:
+      title: Created At
+      description: Timestamp for CreatedAt
+      example: 2018-07-23 19:36:45
+      type: date
+      required: false
+    modifiedAt:
+      title: Modified At
+      description: Timestamp for ModifiedAt
+      example: 2018-07-23 19:36:45
+      type: date
+      required: false
+    isMspDefault:
+      title: Is MSP Default
+      description: Boolean for isMspDefault
+      example: false
+      type: boolean
+      required: false
+    markedForDeletion:
+      title: Marked For Deletion
+      description: Boolean for markedForDeletion
+      example: false
+      type: boolean
+      required: false
+    meta:
+      title: Meta Data
+      description: None
+      example: None
+      type: meta
+      required: false
+  dlCollection:
+    id:
+      title: ID
+      description: Unique ID of the destination list.
+      type: integer
+      required: false
+    organizationId:
+      title: Organization ID
+      description: ID of organization
+      example: 1234567
+      type: integer
+      required: false
+    access:
+      title: Access
+      description: Access can be allow or block. It defines destinationList type.
+      example: allow
+      type: string
+      required: false
+    isGlobal:
+      title: Is Global
+      description: IsGlobal can be true or false. There is only one default destination list of type allow or block for an organization.
+      type: boolean
+      required: false
+    name:
+      title: Name
+      description: Name of the DL list
+      type: string
+      required: false
+    thirdpartyCategoryId:
+      title: Third Party Category ID
+      description: ID, if any, for third parties
+      example: 1
+      type: integer
+      required: false
+    createdAt:
+      title: Created At
+      description: Timestamp for CreatedAt
+      example: 2018-07-23 19:36:45
+      type: date
+      required: false
+    modifiedAt:
+      title: Modified At
+      description: Timestamp for ModifiedAt
+      example: 2018-07-23 19:36:45
+      type: date
+      required: false
+    isMspDefault:
+      title: Is MSP Default
+      description: Boolean for isMspDefault
+      example: false
+      type: boolean
+      required: false
+    markedForDeletion:
+      title: Marked For Deletion
+      description: None
+      example: false
+      type: boolean
+      required: false
+    meta:
+      title: Meta Data
+      description: None
+      type: meta
+      required: false
+  dlCreate:
+    access:
+      name: Access
+      description: Access can be allow or block. It defines destinationList type.
+      example: allow
+      type: string
+      required: true
+    isGlobal:
+      name: Is Global
+      description: IsGlobal can be true or false. There is only one default destination list of type allow or block for an organization.
+      type: boolean
+      required: true
+    name:
+      name: Name
+      description: None
+      example: New Destination list
+      type: string
+      required: true
+    destinations:
+      name: Destinations
+      description: Destinations to add to new list
+      type: '[]destinations'
+      required: false
+  dlPatch:
+    name:
+      name: Name
+      description: Name of the destination list
+      type: string
+      required: true
+  destinationsList:
+    destination:
+      name: Destination Name
+      description: Name of the destination
+      type: string
+      required: true
+    comment:
+      name: Comment
+      description: Comment for the destination
+      type: string
+      required: false
+  dlEntity:
+    id:
+      title: ID
+      description: Unique ID of the destination list.
+      type: integer
+      example: 123
+      required: false
+    organizationId:
+      title: Organization ID
+      description: ID of organization
+      example: 1234567
+      type: integer
+      required: false
+    access:
+      title: Access
+      description: Access can be allow or block. It defines destinationList type.
+      example: allow
+      type: string
+      required: false
+    isGlobal:
+      title: Is Global
+      description: IsGlobal can be true or false. There is only one default destination list of type allow or block for an organization.
+      example: true
+      type: boolean
+      required: false
+    name:
+      title: Name
+      description: Name of the DL list
+      type: string
+      required: false
+    thirdpartyCategoryId:
+      title: Third Party Category ID
+      description: ID, if any, for third parties
+      example: 1
+      type: integer
+      required: false
+    createdAt:
+      title: Created At
+      description: Timestamp for CreatedAt
+      example: 2018-07-23 19:36:45
+      type: date
+      required: false
+    modifiedAt:
+      title: Modified At
+      description: Timestamp for ModifiedAt
+      example: 2018-07-23 19:36:45
+      type: date
+      required: false
+    isMspDefault:
+      title: Is MSP Default
+      description: Boolean for isMspDefault
+      example: false
+      type: boolean
+      required: false
+    markedForDeletion:
+      title: Marked For Deletion
+      description: None
+      example: false
+      type: boolean
+      required: false
+    meta:
+      title: Meta Data
+      description: None
+      type: meta
+      required: false
+  destinationList:
+    id:
+      title: ID
+      description: Unique ID of the destination list.
+      type: integer
+      required: false
+    organizationId:
+      title: Organization ID
+      description: ID of organization
+      example: 1234567
+      type: integer
+      required: false
+    access:
+      title: Access
+      description: Access can be allow or block. It defines destinationList type.
+      example: allow
+      type: string
+      required: false
+    isGlobal:
+      title: Is Global
+      description: IsGlobal can be true or false. There is only one default destination list of type allow or block for an organization.
+      type: boolean
+      required: false
+    name:
+      title: Name
+      description: Name of the DL list
+      type: string
+      required: false
+    thirdpartyCategoryId:
+      title: Third Party Category Id
+      description: ID, if any, for third parties
+      example: 1
+      type: integer
+      required: false
+    createdAt:
+      title: Created At
+      description: Timestamp for CreatedAt
+      example: 2018-07-23 19:36:45
+      type: date
+      required: false
+    modifiedAt:
+      title: Modified At
+      description: Timestamp for ModifiedAt
+      example: 2018-07-23 19:36:45
+      type: date
+      required: false
+    isMspDefault:
+      title: Is MSP Default
+      description: Boolean for isMspDefault
+      example: false
+      type: boolean
+      required: false
+    markedForDeletion:
+      title: Marked For Deletion
+      description: None
+      example: false
+      type: boolean
+      required: false
+  destinationsEntity:
+    id:
+      name: ID
+      description: Unique ID of the destination
+      type: string
+      required: false
+    destination:
+      name: Destination
+      description: Destination can be DOMAIN, URL, IP
+      type: string
+      required: false
+    typeOf:
+      name: Type
+      description: Type can be DOMAIN, URL, IPV4
+      type: string
+      required: false
+    comment:
+      name: Comment
+      description: None
+      type: string
+      required: false
+    createdAt:
+      name: Created At
+      description: Date and time it has been created at
+      example: 2018-07-23 19:36:45
+      type: date
+  dlDelete:
+    delete:
+      name: Delete
+      description: Delete
+      type: object
+      required: false
+actions:
+  dlGetAll:
+    title: Destinations List GET (All)
+    description: Retrieve all destination lists of organization
+    output:
+      success:
+        title: Success
+        description: Successful returned value
+        type: dlCollection
+        required: true
+  dlCreate:
+    title: Destination Lists POST
+    description: Create a destination list
+    input:
+      payload:
+        title: Payload
+        description: List of destinations
+        type: dlCreate
+        example: JSON Data for new list and all attributes
+        required: true
+    output:
+      success:
+        title: Success
+        description: Successful returned value
+        type: dlEntity
+        required: true
+  dlPatch:
+    title: Destination Lists PATCH
+    description: Rename a destination list
+    input:
+      destinationListId:
+        title: Destination List ID
+        description: Unique ID for destination list
+        type: integer
+        example: 12345678
+        required: true
+      payload:
+        title: Payload
+        description: Value containing name to change to
+        example: Updated Name List
+        type: dlPatch
+        required: true
+    output:
+      success:
+        title: Success
+        description: Successful returned value
+        type: dlEntity
+        required: true
+  dlDelete:
+    title: Destination Lists DELETE
+    description: Delete a destination list
+    input:
+      destinationListId:
+        title: Destination List ID
+        description: Unique ID for destination list
+        type: integer
+        example: 12345678
+        required: true
+    output:
+      success:
+        title: Success
+        description: Successful returned value
+        type: dlDelete
+        required: true
+  dlGet:
+    title: Destination List GET
+    description: Return a destination list
+    input:
+      destinationListId:
+        title: Destination List ID
+        description: Unique ID for destination list
+        type: integer
+        example: 12345678
+        required: true
+    output:
+      success:
+        title: Success
+        description: Successful returned value
+        type: destinationList
+        required: true
+  dGet:
+    title: Destination GET
+    description: Get list of destinations related to destination list
+    input:
+      destinationListId:
+        title: Destination List ID
+        description: Unique ID for destination list
+        type: integer
+        example: 1234567
+        required: true
+      page:
+        title: Page
+        description: Pagination
+        type: integer
+        example: 1
+        required: false
+      limit:
+        title: Limit
+        description: Limit for page
+        type: integer
+        example: 500
+        required: false
+    output:
+      success:
+        title: Success
+        description: Successful returned value
+        type: destinationsEntity
+        required: true
+  dAdd:
+    title: Destination POST
+    description: Add list of destinations to destination list
+    input:
+      destinationListId:
+        title: Destination List ID
+        description: Unique ID for destination list
+        type: integer
+        example: 12345678
+        required: true
+      payload:
+        title: Payload
+        description: List of destinations
+        example: Destination URL or IP followed by a comment
+        type: '[]destinationsList'
+        required: true
+    output:
+      success:
+        title: Success
+        description: Successful returned value
+        type: dResponse
+        required: true
+  dDelete:
+    title: Destination DELETE
+    description: Delete list of destinations from destination list
+    input:
+      destinationListId:
+        title: Destination List ID
+        description: Unique ID for destination list
+        type: integer
+        example: 12345678
+        required: true
+      payload:
+        title: Payload
+        description: List of destinations
+        example: 1241, 67
+        type: '[]integer'
+        required: true
