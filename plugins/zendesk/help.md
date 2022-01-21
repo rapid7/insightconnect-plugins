@@ -144,7 +144,7 @@ Example output:
 
 #### Delete Ticket
 
-This action is used to delete a ticket.
+This action is used to delete a ticket. 
 
 ##### Input
 
