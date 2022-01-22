@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Adds address objects to an address group"
+    DESCRIPTION = "Adds address objects to an address group. This action works with a direct connection to the firewall"
 
 
 class Input:

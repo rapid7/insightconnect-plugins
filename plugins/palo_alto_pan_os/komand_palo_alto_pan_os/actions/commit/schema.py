@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Commits the candidate configuration"
+    DESCRIPTION = "Commits the candidate configuration. This action works with a direct connection to the firewall"
 
 
 class Input:

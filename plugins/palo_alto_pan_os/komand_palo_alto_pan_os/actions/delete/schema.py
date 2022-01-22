@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Delete an object"
+    DESCRIPTION = "Delete an object. This action works with Panorama"
 
 
 class Input:

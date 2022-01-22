@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Checks to see if an IP address, CIDR IP address, or domain is in an Address Group. Supports IPv6"
+    DESCRIPTION = "Checks to see if an IP address, CIDR IP address, or domain is in an Address Group. Supports IPv6. This action works with a direct connection to the firewall"
 
 
 class Input:
