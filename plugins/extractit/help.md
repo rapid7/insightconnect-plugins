@@ -43,7 +43,7 @@ This action extracts all UUIDs, CVEs, dates, domains, emails, filepaths, IOCs, I
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|date_format|string|None|False|Dates matching this format are extracted|['dd/mm/yyyy', 'mm/dd/yyyy', 'dd/mm/yyyy', 'dd\\mm\\yyyy', 'dd.mm.yyyy', 'dd-mm-yyyy', 'dd.mm.yy', 'dd-mm-yy', 'dd/mm/yy', 'dd\\mm\\yy', 'mm/dd/yyyy', 'mm\\dd\\yyyy', 'mm.dd.yyyy', 'mm-dd-yyyy', 'mm/dd/yy', 'mm\\dd\\yy', 'mm.dd.yy', 'mm-dd-yy', 'dd/mmm/yyyy', 'dd\\mmm\\yyyy', 'dd.mmm.yyyy', 'dd-mmm-yyyy', 'dd/mmm/yy', 'dd\\mmm\\yy', 'dd.mmm.yy', 'dd-mmm-yy', 'yyyy.mm.dd', 'yyyy-mm-dd', 'yyyy/mm/dd', 'yyyy\\mm\\dd', 'yyyy.mmm.dd', 'yyyy-mmm-dd', 'yyyy/mmm/dd', 'yyyy\\mmm\\dd', 'yy.mm.dd', 'yy-mm-dd', 'yy/mm/dd', 'yy\\mm\\dd', 'yyyy-mm-ddThh:mm', 'yyyy-mm-ddThh:mm:ss', '']|dd/mm/yyyy|
+|date_format|string|None|False|Dates matching this format are extracted If All Formats is selected, found dates will be processed in the listed order documented. Note that selecting this option will increase the duration of the process.|['dd/mm/yyyy', 'mm/dd/yyyy', 'dd/mm/yyyy', 'dd\\mm\\yyyy', 'dd.mm.yyyy', 'dd-mm-yyyy', 'dd.mm.yy', 'dd-mm-yy', 'dd/mm/yy', 'dd\\mm\\yy', 'mm/dd/yyyy', 'mm\\dd\\yyyy', 'mm.dd.yyyy', 'mm-dd-yyyy', 'mm/dd/yy', 'mm\\dd\\yy', 'mm.dd.yy', 'mm-dd-yy', 'dd/mmm/yyyy', 'dd\\mmm\\yyyy', 'dd.mmm.yyyy', 'dd-mmm-yyyy', 'dd/mmm/yy', 'dd\\mmm\\yy', 'dd.mmm.yy', 'dd-mmm-yy', 'yyyy.mm.dd', 'yyyy-mm-dd', 'yyyy/mm/dd', 'yyyy\\mm\\dd', 'yyyy.mmm.dd', 'yyyy-mmm-dd', 'yyyy/mmm/dd', 'yyyy\\mmm\\dd', 'yy.mm.dd', 'yy-mm-dd', 'yy/mm/dd', 'yy\\mm\\dd', 'yyyy-mm-ddThh:mm', 'yyyy-mm-ddThh:mm:ss', 'All Formats', '']|dd/mm/yyyy|
 |file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|dGVzdCBzdHJpbmcgb2YgZXh0cmFjdCBDVkUtMTIzNC0xMjM0NTY3IDEyLzEyLzIzMTIgMTIzZTQ1NjctZTEyYi0zNGMzLWE0NTYtNDI2Nzg5MTI0MDAwIHVzZXJAZXhhbXBsZS5jb20gMzM5NTg1NmNlODFmMmI3MzgyZGVlNzI2MDJmNzk4YjY0MmYxNDE0MCAyNzVhMDIxYmJmYjY0ODllNTRkNDcxODk5ZjdkYjlkMTY2M2ZjNjk1ZWMyZmUyYTJjNDUzOGFhYmY2NTFmZDBmIDE5OC41MS4xMDAuMC8yNCAxLjEuMS4x|
 |str|string|None|False|Input string|None|test string of extract CVE-1234-1234567 12/12/2312 123e4567-e12b-34c3-a456-426789124000 user@example.com 3395856ce81f2b7382dee72602f798b642f14140 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f 198.51.100.0/24 1.1.1.1|
 
@@ -188,7 +188,7 @@ This action extracts all dates from a string or file.
 
 |Name|Type|Default|Required|Description| Enum             |Example|
 |----|----|-------|--------|-----------|------------------|-------|
-|date_format|string|None|False|Dates matching this format are extracted|['dd/mm/yyyy', 'mm/dd/yyyy', 'dd/mm/yyyy', 'dd\\mm\\yyyy', 'dd.mm.yyyy', 'dd-mm-yyyy', 'dd.mm.yy', 'dd-mm-yy', 'dd/mm/yy', 'dd\\mm\\yy', 'mm/dd/yyyy', 'mm\\dd\\yyyy', 'mm.dd.yyyy', 'mm-dd-yyyy', 'mm/dd/yy', 'mm\\dd\\yy', 'mm.dd.yy', 'mm-dd-yy', 'dd/mmm/yyyy', 'dd\\mmm\\yyyy', 'dd.mmm.yyyy', 'dd-mmm-yyyy', 'dd/mmm/yy', 'dd\\mmm\\yy', 'dd.mmm.yy', 'dd-mmm-yy', 'yyyy.mm.dd', 'yyyy-mm-dd', 'yyyy/mm/dd', 'yyyy\\mm\\dd', 'yyyy.mmm.dd', 'yyyy-mmm-dd', 'yyyy/mmm/dd', 'yyyy\\mmm\\dd', 'yy.mm.dd', 'yy-mm-dd', 'yy/mm/dd', 'yy\\mm\\dd', 'yyyy-mm-ddThh:mm', 'yyyy-mm-ddThh:mm:ss', '']|dd/mm/yyyy|
+|date_format|string|None|False|Dates matching this format are extracted If All Formats is selected, found dates will be processed in the listed order documented. Note that selecting this option will increase the duration of the process.|['dd/mm/yyyy', 'mm/dd/yyyy', 'dd/mm/yyyy', 'dd\\mm\\yyyy', 'dd.mm.yyyy', 'dd-mm-yyyy', 'dd.mm.yy', 'dd-mm-yy', 'dd/mm/yy', 'dd\\mm\\yy', 'mm/dd/yyyy', 'mm\\dd\\yyyy', 'mm.dd.yyyy', 'mm-dd-yyyy', 'mm/dd/yy', 'mm\\dd\\yy', 'mm.dd.yy', 'mm-dd-yy', 'dd/mmm/yyyy', 'dd\\mmm\\yyyy', 'dd.mmm.yyyy', 'dd-mmm-yyyy', 'dd/mmm/yy', 'dd\\mmm\\yy', 'dd.mmm.yy', 'dd-mmm-yy', 'yyyy.mm.dd', 'yyyy-mm-dd', 'yyyy/mm/dd', 'yyyy\\mm\\dd', 'yyyy.mmm.dd', 'yyyy-mmm-dd', 'yyyy/mmm/dd', 'yyyy\\mmm\\dd', 'yy.mm.dd', 'yy-mm-dd', 'yy/mm/dd', 'yy\\mm\\dd', 'yyyy-mm-ddThh:mm', 'yyyy-mm-ddThh:mm:ss', 'All Formats', '']|dd/mm/yyyy|
 |str|string|None|False|Input string|None|05/12/1982 is an example date|
 |file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|MDUvMTIvMTk4MiBpcyBhbiBleGFtcGxlIGRhdGU=|
 
@@ -659,3 +659,4 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * None
+

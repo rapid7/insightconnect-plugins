@@ -26,7 +26,7 @@ class DateExtractorInput(insightconnect_plugin_runtime.Input):
     "date_format": {
       "type": "string",
       "title": "Date Format",
-      "description": "Dates matching this format are extracted",
+      "description": "Dates matching this format are extracted. If All Formats is selected, found dates will be processed in the listed order documented. Note that selecting this option will increase the duration of the process.",
       "enum": [
         "dd/mm/yyyy",
         "mm/dd/yyyy",
@@ -68,6 +68,7 @@ class DateExtractorInput(insightconnect_plugin_runtime.Input):
         "yy\\\\mm\\\\dd",
         "yyyy-mm-ddThh:mm",
         "yyyy-mm-ddThh:mm:ss",
+        "All Formats",
         ""
       ],
       "order": 1
@@ -86,7 +87,10 @@ class DateExtractorInput(insightconnect_plugin_runtime.Input):
       "description": "Input string",
       "order": 2
     }
-  }
+  },
+  "required": [
+    "date_format"
+  ]
 }
     """)
 

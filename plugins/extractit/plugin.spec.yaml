@@ -249,9 +249,9 @@ actions:
     input:
       date_format:
         title: Date Format
-        description: Dates matching this format are extracted
+        description: Dates matching this format are extracted. If All Formats is selected, found dates will be processed in the listed order documented. Note that selecting this option will increase the duration of the process.
         type: string
-        required: false
+        required: true
         enum:
           - dd/mm/yyyy
           - mm/dd/yyyy
@@ -293,6 +293,7 @@ actions:
           - yy\mm\dd
           - yyyy-mm-ddThh:mm
           - yyyy-mm-ddThh:mm:ss
+          - All Formats
           - ""
         example: dd/mm/yyyy
       str:
@@ -473,9 +474,9 @@ actions:
     input:
       date_format:
         title: Date Format
-        description: Dates matching this format are extracted
+        description: Dates matching this format are extracted. If All Formats is selected, found dates will be processed in the listed order documented. Note that selecting this option will increase the duration of the process.
         type: string
-        required: false
+        required: true
         enum:
           - dd/mm/yyyy
           - mm/dd/yyyy
@@ -517,6 +518,7 @@ actions:
           - yy\mm\dd
           - yyyy-mm-ddThh:mm
           - yyyy-mm-ddThh:mm:ss
+          - All Formats
           - ""
         example: dd/mm/yyyy
       str:

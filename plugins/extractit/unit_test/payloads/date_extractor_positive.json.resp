@@ -8,6 +8,20 @@
       ["1982-12-05T00:00:00Z"]
     ],
     [
+      "from_string all formats",
+      "All Formats",
+      "05/12/1982 and 12/31/1982 and 06-JAN-1982 and 1982.11.30 and 82\\11\\29 and 1982-12-06T00:00:00Z is an example date",
+      null,
+      ["1982-12-05T00:00:00Z", "1982-12-31T00:00:00Z", "1982-01-06T00:00:00Z", "1982-11-30T00:00:00Z", "1982-12-06T00:00:00Z", "1982-11-29T00:00:00Z"]
+    ],
+    [
+      "from_string all formats, single date",
+      "All Formats",
+      "05/12/1982 is an example date",
+      null,
+      ["1982-12-05T00:00:00Z"]
+    ],
+    [
       "from_string dd\\mm\\yyyy",
       "dd\\mm\\yyyy",
       "05\\12\\1982 is an example date",

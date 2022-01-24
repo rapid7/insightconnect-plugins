@@ -12,6 +12,8 @@ from icon_extractit.util.extractor import (
     clear_urls,
     clear_domains,
     define_date_time_regex,
+    extract_all_date_formats,
+    parse_time_all_date_formats
 )
 
 
@@ -24,15 +26,18 @@ class ExtractAll(insightconnect_plugin_runtime.Action):
             output=ExtractAllOutput(),
         )
 
-    def run(self, params=None):
-        if params is None:
-            params = {}
+    def run(self, params={}):
         string = params.get(Input.STR)
         file = params.get(Input.FILE)
         date_format = params.get(Input.DATE_FORMAT)
         indicators = {
             "cves": extract(Regex.CVE, string, file),
-            "dates": parse_time(extract(define_date_time_regex(date_format), string, file), date_format),
+            "dates": parse_time(extract(define_date_time_regex(date_format), string, file), date_format) if date_format != "All Formats" else parse_time_all_date_formats(
+                    extract_all_date_formats(
+                        string,
+                        file,
+                    )
+                ),
             "email_addresses": clear_emails(extract(Regex.Email, string, file)),
             "filepaths": extract_filepath(Regex.FilePath, string, file),
             "mac_addresses": extract(Regex.MACAddress, string, file),
