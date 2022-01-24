@@ -186,7 +186,6 @@ class CiscoUmbrellaManagementAPI:
                         data=response.text,
                     )
 
-        # Why doesnt this work for me?
         except requests.exceptions.HTTPError as e:
             self.logger.info(f"Call to Cisco Umbrella Management API failed: {e}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text) from e
