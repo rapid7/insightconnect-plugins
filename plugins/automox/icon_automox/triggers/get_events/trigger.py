@@ -1,24 +1,21 @@
 import insightconnect_plugin_runtime
 import time
 from .schema import GetEventsInput, GetEventsOutput, Input, Output, Component
+
 # Custom imports below
 import copy
 
 
 class GetEvents(insightconnect_plugin_runtime.Trigger):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_events',
-                description=Component.DESCRIPTION,
-                input=GetEventsInput(),
-                output=GetEventsOutput())
+            name="get_events", description=Component.DESCRIPTION, input=GetEventsInput(), output=GetEventsOutput()
+        )
 
     def run(self, params={}):
         """Run the trigger"""
         # Pull first page of events at start of trigger
-        init_events = self.connection.automox_api.get_events(params.get(Input.ORG_ID),
-                                                             params.get(Input.EVENT_TYPE))
+        init_events = self.connection.automox_api.get_events(params.get(Input.ORG_ID), params.get(Input.EVENT_TYPE))
 
         # Identify the most recent event and record
         if len(init_events) > 0:
@@ -34,9 +31,9 @@ class GetEvents(insightconnect_plugin_runtime.Trigger):
             new_last_event_id = copy.copy(last_event_id)
             # Continue fetching events while trigger is running, sleep 5 minutes in between pulls
             while cont:
-                events = self.connection.automox_api.get_events(params.get(Input.ORG_ID),
-                                                                params.get(Input.EVENT_TYPE),
-                                                                page)
+                events = self.connection.automox_api.get_events(
+                    params.get(Input.ORG_ID), params.get(Input.EVENT_TYPE), page
+                )
 
                 for event in events:
                     if event.get("id") == last_event_id:

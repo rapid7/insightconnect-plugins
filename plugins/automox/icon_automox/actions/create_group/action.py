@@ -1,16 +1,14 @@
 import insightconnect_plugin_runtime
 from .schema import CreateGroupInput, CreateGroupOutput, Input, Output, Component
+
 # Custom imports below
 
 
 class CreateGroup(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='create_group',
-                description=Component.DESCRIPTION,
-                input=CreateGroupInput(),
-                output=CreateGroupOutput())
+            name="create_group", description=Component.DESCRIPTION, input=CreateGroupInput(), output=CreateGroupOutput()
+        )
 
     def run(self, params={}):
         default_server_group_id = self.default_server_group(params.get(Input.ORG_ID))
@@ -21,7 +19,7 @@ class CreateGroup(insightconnect_plugin_runtime.Action):
             "parent_server_group_id": params.get(Input.PARENT_SERVER_GROUP_ID) or default_server_group_id,
             "ui_color": params.get(Input.COLOR),
             "notes": params.get(Input.NOTES),
-            "policies": params.get(Input.POLICIES)
+            "policies": params.get(Input.POLICIES),
         }
         group = self.connection.automox_api.create_group(params.get(Input.ORG_ID), payload)
         self.logger.info("Group Successfully Created")
