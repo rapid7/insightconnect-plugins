@@ -4,8 +4,8 @@ products: [insightconnect]
 name: automox
 title: Automox
 description: Automox is modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment
-version: 1.0.0
-supported_versions: ["All as of 12/17/2021"]
+version: 1.1.0
+supported_versions: ["All as of 1/21/2022"]
 vendor: automox
 support: partner
 status: []
@@ -767,6 +767,11 @@ types:
       description: List of CVEs associated with task
       type: "[]string"
       required: false
+    report_source:
+      title: Report Source
+      description: The source of the vulnerability report
+      type: string
+      required: false
 
 connection:
   api_key:
@@ -1200,6 +1205,19 @@ actions:
         required: false
         default: "insightconnect-uploaded-report.csv"
         example: "insightconnect-uploaded-report.csv"
+      report_source:
+        title: Report Source
+        description: The third-party source of the vulnerability report
+        type: string
+        required: false
+        default: "Generic Report"
+        enum:
+        - "Generic Report"
+        - "CrowdStrike"
+        - "Rapid7"
+        - "TenableIO"
+        - "Qualys"
+        example: "Rapid7"
     output:
       batch_id:
         title: Vulnerability Sync Batch ID

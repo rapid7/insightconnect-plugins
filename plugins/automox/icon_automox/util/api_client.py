@@ -269,7 +269,7 @@ class ApiClient:
         return self._call_api("DELETE", f"{self.endpoint}/servergroups/{group_id}", params=self._org_param(org_id))
 
     # Vulnerability Sync
-    def upload_vulnerability_sync_file(self, org_id: int, file_content, filename) -> int:
+    def upload_vulnerability_sync_file(self, org_id: int, file_content, filename, report_source) -> int:
         with io.BytesIO(file_content) as file:
             files = [
                 ('file', (filename, file, 'text/csv'))
@@ -280,7 +280,7 @@ class ApiClient:
             }
 
             try:
-                response = requests.post(f"{self.endpoint}/orgs/{org_id}/tasks/patch/batches/upload",
+                response = requests.post(f"{self.endpoint}/orgs/{org_id}/tasks/patch/batches/upload?source={report_source}",
                                          files=files, headers=headers)
 
                 if response.status_code == 200:

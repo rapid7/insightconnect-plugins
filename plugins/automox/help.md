@@ -21,7 +21,7 @@ outcomes on endpoints, and basic Automox platform administration.
 
 # Supported Product Versions
 
-* All as of 12/17/2021
+* All as of 1/21/2022
 
 # Documentation
 
@@ -106,6 +106,7 @@ This action is used to upload CSV file to vulnerability sync for processing.
 |csv_file|bytes|None|True|Base64 encoded CSV data from which to create the vulnerability sync batch|None|PGgxPlJhcGlkNzwvaDE+|
 |csv_file_name|string|insightconnect-uploaded-report.csv|False|Name for CSV file uploaded and shown within Automox|None|insightconnect-uploaded-report.csv|
 |org_id|integer|None|True|Identifier of organization|None|1234|
+|report_source|string|Generic Report|False|The third-party source of the vulnerability report|['Generic Report', 'CrowdStrike', 'Rapid7', 'TenableIO', 'Qualys']|Rapid7|
 
 Example input:
 
@@ -113,7 +114,8 @@ Example input:
 {
   "csv_file": "PGgxPlJhcGlkNzwvaDE+",
   "csv_file_name": "insightconnect-uploaded-report.csv",
-  "org_id": 1234
+  "org_id": 1234,
+  "report_source": "Rapid7"
 }
 ```
 
@@ -1227,6 +1229,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.0 - Add `report source` as optional input parameter to Upload Vulnerability Sync File action | Add report source to batch type
 * 1.0.0 - Initial plugin
 
 # Links
