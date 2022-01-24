@@ -69,9 +69,9 @@ class UpdateOffenseInput(insightconnect_plugin_runtime.Input):
       "title": "Status",
       "description": "The new status for the offense. Set to either open, hidden, or closed. When the status of an offense is being set to closed, a valid Closing Reason ID must be provided. To hide an offense, use the hidden status. To show a previously hidden offense, use the open status",
       "enum": [
-        "OPEN",
-        "HIDDEN",
-        "CLOSED",
+        "Open",
+        "Hidden",
+        "Closed",
         ""
       ],
       "order": 7

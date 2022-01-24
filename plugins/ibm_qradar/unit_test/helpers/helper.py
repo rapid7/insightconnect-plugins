@@ -35,7 +35,7 @@ class Helper:
             params = connect_params
         else:
             params = {
-                "hostname": "hostname",
+                "host_url": "http://host_url",
                 "username": "user1",
                 "password": "password",
             }

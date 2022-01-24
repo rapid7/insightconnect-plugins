@@ -35,8 +35,8 @@ class TestStartArielSearch(TestCase):
         self.assertEqual(results.get("data")["cursor_id"], "test_cursor_id")
 
     @patch("requests.post", side_effect=ArielSearchHelper.mock_request)
-    def test_start_ariel_search_wrong_hostname(self, make_request):
-        """To test the ariel search with wrong hostname.
+    def test_start_ariel_search_wrong_host_url(self, make_request):
+        """To test the ariel search with wrong host_url.
 
         :return: None
         """
@@ -44,7 +44,7 @@ class TestStartArielSearch(TestCase):
 
         action = ArielSearchHelper.default_connector(
             StartArielSearch(),
-            {"hostname": "wrong", "username": "user1", "password": "password"},
+            {"host_url": "http://wrong", "username": "user1", "password": "password"},
         )
 
         with self.assertRaises(PluginException):
@@ -71,7 +71,7 @@ class TestStartArielSearch(TestCase):
 
         action = ArielSearchHelper.default_connector(
             StartArielSearch(),
-            {"hostname": "hostname", "username": "wrong", "password": "password"},
+            {"host_url": "http://host_url", "username": "wrong", "password": "password"},
         )
 
         with self.assertRaises(ConnectionTestException) as err:

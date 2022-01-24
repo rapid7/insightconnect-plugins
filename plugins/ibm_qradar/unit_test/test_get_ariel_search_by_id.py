@@ -41,8 +41,8 @@ class TestGetArielSearchById(TestCase):
             self.action.run(action_params)
 
     @patch("requests.get", side_effect=ArielSearchHelper.mock_request)
-    def test_get_ariel_search_by_id_wrong_hostname(self, make_request):
-        """To test the get ariel search with wrong hostname.
+    def test_get_ariel_search_by_id_wrong_host_url(self, make_request):
+        """To test the get ariel search with wrong host_url.
 
         :return: None
         """
@@ -50,7 +50,7 @@ class TestGetArielSearchById(TestCase):
 
         action = ArielSearchHelper.default_connector(
             GetArielSearchById(),
-            {"hostname": "wrong", "username": "user1", "password": "password"},
+            {"host_url": "http://wrong", "username": "user1", "password": "password"},
         )
 
         with self.assertRaises(PluginException):

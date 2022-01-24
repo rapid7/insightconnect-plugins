@@ -30,17 +30,19 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|hostname|string|None|True|Hostname for the QRadar application|None|https://example.com|
+|host_url|string|None|True|Host URL of the QRadar instance.|None|https://example.com|
 |password|password|None|True|QRadar password|None|password|
 |username|string|None|True|QRadar username|None|user1|
+|verify_ssl|boolean|None|False|Whether to verify the SSL for QRadar connection|None|True|
 
 Example input:
 
 ```
 {
-  "hostname": "127.0.0.1",
+  "host_url": "https://127.0.0.1",
   "password": "password",
-  "username": "user1"
+  "username": "user1",
+  "verify_ssl": true
 }
 ```
 
@@ -65,8 +67,9 @@ Example input:
 ```
 {
   "fields": "id",
-  "note_id": 100,
-  "offense_id": 100
+  "filter": "id=100",
+  "offense_id": 100,
+  "range": "1-2"
 }
 ```
 
@@ -257,7 +260,7 @@ Example output:
       ],
       "users": [],
       "domain_id": 0,
-      "hostnames": [],
+      "host_urls": [],
       "products": []
     }
   ]
@@ -600,7 +603,7 @@ This action is used to update Offenses.
 |follow_up|boolean|None|False|Set to true to set the follow up flag on the offense|None|False|
 |offense_id|integer|None|True|The ID of the offense to update|None|100|
 |protected|boolean|None|False|The ID of a closing reason. A valid Closing Reason ID must be provided when closing an offense|None|False|
-|status|string|None|False|The new status for the offense. Set to either open, hidden, or closed. When the status of an offense is being set to closed, a valid Closing Reason ID must be provided. To hide an offense, use the hidden status. To show a previously hidden offense, use the open status|['OPEN', 'HIDDEN', 'CLOSED', '']|OPEN|
+|status|string|None|False|The new status for the offense. Set to either open, hidden, or closed. When the status of an offense is being set to closed, a valid Closing Reason ID must be provided. To hide an offense, use the hidden status. To show a previously hidden offense, use the open status|['Open', 'Hidden', 'Closed', '']|Open|
 
 Example input:
 
@@ -612,7 +615,7 @@ Example input:
   "follow_up": false,
   "offense_id": 100,
   "protected": false,
-  "status": "OPEN"
+  "status": "Open"
 }
 ```
 
@@ -875,7 +878,7 @@ Example output:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |Domain Id|integer|False|Domain id|
-|Hostnames|[]hostnames|False|Hostnames|
+|Hostnames|[]host_urls|False|Hostnames|
 |Id|integer|False|Id|
 |Interfaces|[]interfaces|False|Interfaces|
 |Products|[]products|False|Products|
@@ -911,7 +914,7 @@ Example output:
 |Sourceport|integer|False|Sourceport|
 |Starttime|integer|False|Starttime|
 
-#### hostnames
+#### host_urls
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|

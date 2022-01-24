@@ -11,10 +11,6 @@ from .schema import (
 )
 
 from icon_ibm_qradar.util.constants.endpoints import POST_OFFENSES_NOTES
-from icon_ibm_qradar.util.constants.messages import (
-    EMPTY_OFFENSE_ID_FOUND,
-    EMPTY_NOTE_TEXT_FOUND,
-)
 from icon_ibm_qradar.util.url import URL
 from icon_ibm_qradar.util.utils import prepare_request_params, handle_response
 
@@ -44,7 +40,7 @@ class AddNotesToOffense(insightconnect_plugin_runtime.Action):
         query_params = {}
         query_params["note_text"] = note_text
 
-        url_obj = URL(self.connection.hostname, self.endpoint)
+        url_obj = URL(self.connection.host_url, self.endpoint)
         basic_url = url_obj.get_basic_url()
         if offense_id:
             basic_url = basic_url.format(offense_id=offense_id)
@@ -56,7 +52,9 @@ class AddNotesToOffense(insightconnect_plugin_runtime.Action):
         auth = (self.connection.username, self.connection.password)
         try:
             self.logger.debug(f"Final URL: {basic_url}")
-            response = requests.post(url=basic_url, headers=headers, data={}, auth=auth)
+            response = requests.post(
+                url=basic_url, headers=headers, data={}, auth=auth, verify=self.connection.verify_ssl
+            )
         except requests.exceptions.ConnectionError:
             raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE)
 

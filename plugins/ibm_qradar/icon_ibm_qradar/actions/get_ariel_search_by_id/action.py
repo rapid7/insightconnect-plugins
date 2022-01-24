@@ -45,7 +45,7 @@ class GetArielSearchById(insightconnect_plugin_runtime.Action):
             self.logger.info("Terminating: Poll interval provided as negative value.")
             raise PluginException(cause=NEGATIVE_POLL_INTERVAL_PROVIDED)
 
-        url_obj = URL(self.connection.hostname, self.endpoint)
+        url_obj = URL(self.connection.host_url, self.endpoint)
         basic_url = url_obj.get_basic_url()
         if search_id:
             basic_url = basic_url.format(search_id=search_id)
@@ -55,7 +55,9 @@ class GetArielSearchById(insightconnect_plugin_runtime.Action):
         if poll_interval != 0:
             headers["Prefer"] = f"wait={poll_interval}"
         try:
-            response = requests.get(url=basic_url, headers=headers, data={}, auth=auth)
+            response = requests.get(
+                url=basic_url, headers=headers, data={}, auth=auth, verify=self.connection.verify_ssl
+            )
         except requests.exceptions.ConnectionError:
             raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE)
 

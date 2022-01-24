@@ -26,7 +26,7 @@ class GetOffenses(insightconnect_plugin_runtime.Action):
         :param params: Input Param config required for the Action
         :return: None
         """
-        url_obj = URL(self.connection.hostname, self.endpoint)
+        url_obj = URL(self.connection.host_url, self.endpoint)
         basic_url, headers = prepare_request_params(
             params,
             self.logger,
@@ -37,7 +37,9 @@ class GetOffenses(insightconnect_plugin_runtime.Action):
         auth = (self.connection.username, self.connection.password)
         try:
             self.logger.debug(f"Final URL: {basic_url}")
-            response = requests.get(url=basic_url, headers=headers, data={}, auth=auth)
+            response = requests.get(
+                url=basic_url, headers=headers, data={}, auth=auth, verify=self.connection.verify_ssl
+            )
         except requests.exceptions.ConnectionError:
             raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE)
 

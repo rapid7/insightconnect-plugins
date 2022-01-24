@@ -79,12 +79,12 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
           "description": "Domain ID",
           "order": 7
         },
-        "hostnames": {
+        "host_urls": {
           "type": "array",
           "title": "Hostnames",
           "description": "Hostnames",
           "items": {
-            "$ref": "#/definitions/hostnames"
+            "$ref": "#/definitions/host_urls"
           },
           "order": 4
         },
@@ -144,9 +144,9 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
         }
       },
       "definitions": {
-        "hostnames": {
+        "host_urls": {
           "type": "object",
-          "title": "hostnames",
+          "title": "host_urls",
           "properties": {
             "created": {
               "type": "integer",
@@ -469,9 +469,9 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "hostnames": {
+    "host_urls": {
       "type": "object",
-      "title": "hostnames",
+      "title": "host_urls",
       "properties": {
         "created": {
           "type": "integer",

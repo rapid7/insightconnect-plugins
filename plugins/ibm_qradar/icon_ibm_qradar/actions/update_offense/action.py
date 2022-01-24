@@ -36,6 +36,7 @@ def parse_params(params: dict, logger: logging.Logger) -> dict:
     logger.info("protected provided: %s", protected)
 
     status = params.get(Input.STATUS, "")
+    status = status.upper()
     logger.info("status provided: %s", status)
 
     if assigned_to != "":
@@ -85,7 +86,7 @@ class UpdateOffense(insightconnect_plugin_runtime.Action):
         query_params = parse_params(params, self.logger)
         validate(query_params)
 
-        url_obj = URL(self.connection.hostname, self.endpoint)
+        url_obj = URL(self.connection.host_url, self.endpoint)
         basic_url = url_obj.get_basic_url()
         if offense_id:
             basic_url = basic_url.format(offense_id=offense_id)
@@ -97,7 +98,9 @@ class UpdateOffense(insightconnect_plugin_runtime.Action):
         auth = (self.connection.username, self.connection.password)
         try:
             self.logger.debug(f"Final URL: {basic_url}")
-            response = requests.post(url=basic_url, headers=headers, data={}, auth=auth)
+            response = requests.post(
+                url=basic_url, headers=headers, data={}, auth=auth, verify=self.connection.verify_ssl
+            )
         except requests.exceptions.ConnectionError:
             raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE)
 

@@ -25,12 +25,12 @@ hub_tags:
   features: []
 enable_cache: false
 connection:
-  hostname:
-    title: Hostname
+  host_url:
+    title: Host URL
     type: string
-    description: Hostname for the QRadar application
+    description: Host URL of the QRadar instance.
     required: true
-    example: 127.0.0.1
+    example: https://127.0.0.1
   username:
     title: Username
     type: string
@@ -43,6 +43,12 @@ connection:
     description: QRadar password
     required: true
     example: password
+  verify_ssl:
+    title: Verify SSL
+    type: boolean
+    description: Whether to verify the SSL for QRadar connection
+    example: true
+    required: false
 types:
   error_messages:
     code:
@@ -336,7 +342,7 @@ types:
       type: integer
       description: "Product variant ID"
       required: false
-  hostnames:
+  host_urls:
     created:
       title: "Created"
       type: integer
@@ -425,9 +431,9 @@ types:
       type: float
       description: "Risk score sum"
       required: false
-    hostnames:
+    host_urls:
       title: "Hostnames"
-      type: "[]hostnames"
+      type: "[]host_urls"
       description: "Hostnames"
       required: false
     id:
@@ -858,11 +864,11 @@ actions:
         required: false
         description: The new status for the offense. Set to either open, hidden, or closed. When the status of an offense is being set to closed, a valid Closing Reason ID must be provided. To hide an offense, use the hidden status. To show a previously hidden offense, use the open status
         enum:
-          - "OPEN"
-          - "HIDDEN"
-          - "CLOSED"
+          - "Open"
+          - "Hidden"
+          - "Closed"
           - ""
-        example: OPEN
+        example: Open
     output:
       data:
         title: Update Offense

@@ -4,9 +4,10 @@ import json
 
 
 class Input:
-    HOSTNAME = "hostname"
+    HOST_URL = "host_url"
     PASSWORD = "password"
     USERNAME = "username"
+    VERIFY_SSL = "verify_ssl"
 
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -16,10 +17,10 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "hostname": {
+    "host_url": {
       "type": "string",
-      "title": "Hostname",
-      "description": "Hostname for the QRadar application",
+      "title": "Host URL",
+      "description": "Host URL of the QRadar instance.",
       "order": 1
     },
     "password": {
@@ -35,10 +36,16 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "Username",
       "description": "QRadar username",
       "order": 2
+    },
+    "verify_ssl": {
+      "type": "boolean",
+      "title": "Verify SSL",
+      "description": "Whether to verify the SSL for QRadar connection",
+      "order": 4
     }
   },
   "required": [
-    "hostname",
+    "host_url",
     "password",
     "username"
   ]
