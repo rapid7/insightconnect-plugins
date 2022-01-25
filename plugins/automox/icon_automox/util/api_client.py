@@ -22,12 +22,12 @@ class ApiClient:
 
     def set_headers(self) -> None:
         self.session.headers = {
-            'Authorization': 'Bearer ' + self.api_key,
-            'User-Agent': f"ax:automox-rapid7-insightconnect-plugin/{ApiClient.VERSION}",
-            "content-type": "application/json"
+            "Authorization": "Bearer " + self.api_key,
+            "User-Agent": f"ax:automox-rapid7-insightconnect-plugin/{ApiClient.VERSION}",
+            "content-type": "application/json",
         }
 
-    def _call_api(self, method: str, url: str, params: Dict = dict(), json_data: object = None) -> Optional[dict]:
+    def _call_api(self, method: str, url: str, params: Dict = {}, json_data: object = None) -> Optional[dict]:
         try:
             response = self.session.request(method, url, json=json_data, params=params)
 
@@ -44,8 +44,10 @@ class ApiClient:
                 return response.json()
 
             # Non-success and unknown
-            raise PluginException(cause=f"An error occurred when making {method} request to {url}.",
-                                  assistance=f"Response code: {response.status_code}, Content: {response.text}.")
+            raise PluginException(
+                cause=f"An error occurred when making {method} request to {url}.",
+                assistance=f"Response code: {response.status_code}, Content: {response.text}.",
+            )
         except json.decoder.JSONDecodeError as e:
             self.logger.info(f"Invalid json: {e}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)
@@ -53,7 +55,7 @@ class ApiClient:
             self.logger.info(f"Call to Automox Console API failed: {e}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
-    def _page_results(self, url: str, init_params: Dict = dict(), sanitize: bool = True) -> [dict]:
+    def _page_results(self, url: str, init_params: Dict = {}, sanitize: bool = True) -> [dict]:
         params = self.first_page(init_params)
 
         page_resp = []
@@ -74,14 +76,14 @@ class ApiClient:
 
         return page_resp
 
-    def _page_results_data(self, url: str, init_params: Dict = dict()) -> [dict]:
+    def _page_results_data(self, url: str, init_params: Dict = {}) -> [dict]:
         params = self.first_page(init_params)
 
         page_resp = []
 
         while True:
             resp = self._call_api("get", url, params)
-            resp_data = self.remove_null_values(resp.get('data'))
+            resp_data = self.remove_null_values(resp.get("data"))
 
             page_resp.extend(resp_data)
 
@@ -109,15 +111,12 @@ class ApiClient:
 
     @staticmethod
     def first_page(params: Dict = {}) -> None:
-        params.update({
-            'limit': ApiClient.PAGE_SIZE,
-            'page': 0
-        })
+        params.update({"limit": ApiClient.PAGE_SIZE, "page": 0})
         return params
 
     @staticmethod
     def next_page(params: Dict) -> None:
-        params['page'] += 1
+        params["page"] += 1
 
     # Organizations
     def get_orgs(self) -> Dict:
@@ -147,10 +146,10 @@ class ApiClient:
 
             for device in devices:
                 for attr in attributes:
-                    if type(device[attr]) is str:
+                    if isinstance(device[attr], str):
                         if device[attr].casefold() == value.casefold():
                             return self.remove_null_values(device)
-                    if type(device[attr]) is list:
+                    if isinstance(device[attr], list):
                         if value.lower() in (v.upper() for v in device[attr]):
                             return self.remove_null_values(device)
 
@@ -180,8 +179,9 @@ class ApiClient:
         :param command: Command to be run
         :return: Boolean of outcome
         """
-        return self._call_api("POST", f"{self.endpoint}/servers/{device_id}/queues",
-                              params=self._org_param(org_id), json_data=command)
+        return self._call_api(
+            "POST", f"{self.endpoint}/servers/{device_id}/queues", params=self._org_param(org_id), json_data=command
+        )
 
     def update_device(self, org_id: int, device_id: int, payload: Dict) -> bool:
         """
@@ -191,8 +191,9 @@ class ApiClient:
         :param payload: Dict of parameters to update on device
         :return: Boolean of outcome
         """
-        return self._call_api("PUT", f"{self.endpoint}/servers/{device_id}",
-                              params=self._org_param(org_id), json_data=payload)
+        return self._call_api(
+            "PUT", f"{self.endpoint}/servers/{device_id}", params=self._org_param(org_id), json_data=payload
+        )
 
     def delete_device(self, org_id: int, device_id: int) -> bool:
         """
@@ -207,7 +208,7 @@ class ApiClient:
     @staticmethod
     def _sanitize_policies(policies: [dict]) -> List[Dict]:
         for policy in policies:
-            for key, fields in {'configuration': ['evaluation_code', 'installation_code', 'remediation_code']}.items():
+            for key, fields in {"configuration": ["evaluation_code", "installation_code", "remediation_code"]}.items():
                 if key in policy:
                     for f in fields:
                         try:
@@ -245,8 +246,9 @@ class ApiClient:
         :param payload: Dict of parameters to create group
         :return: Dict of Group
         """
-        return self._call_api("POST", f"{self.endpoint}/servergroups",
-                              params=self._org_param(org_id), json_data=payload)
+        return self._call_api(
+            "POST", f"{self.endpoint}/servergroups", params=self._org_param(org_id), json_data=payload
+        )
 
     def update_group(self, org_id: int, group_id: int, payload: Dict) -> bool:
         """
@@ -256,8 +258,9 @@ class ApiClient:
         :param payload: Dict of parameters to update on group
         :return: Boolean of outcome
         """
-        return self._call_api("PUT", f"{self.endpoint}/servergroups/{group_id}",
-                              params=self._org_param(org_id), json_data=payload)
+        return self._call_api(
+            "PUT", f"{self.endpoint}/servergroups/{group_id}", params=self._org_param(org_id), json_data=payload
+        )
 
     def delete_group(self, org_id: int, group_id: int) -> bool:
         """
@@ -269,28 +272,31 @@ class ApiClient:
         return self._call_api("DELETE", f"{self.endpoint}/servergroups/{group_id}", params=self._org_param(org_id))
 
     # Vulnerability Sync
-    def upload_vulnerability_sync_file(self, org_id: int, file_content, filename) -> int:
+    def upload_vulnerability_sync_file(self, org_id: int, file_content, filename, report_source) -> int:
         with io.BytesIO(file_content) as file:
-            files = [
-                ('file', (filename, file, 'text/csv'))
-            ]
+            files = [("file", (filename, file, "text/csv"))]
 
-            headers = {
-                'Authorization': f"Bearer {self.api_key}"
-            }
+            headers = {"Authorization": f"Bearer {self.api_key}"}
 
             try:
-                response = requests.post(f"{self.endpoint}/orgs/{org_id}/tasks/patch/batches/upload",
-                                         files=files, headers=headers)
+                response = requests.post(
+                    f"{self.endpoint}/orgs/{org_id}/tasks/patch/batches/upload?source={report_source}",
+                    files=files,
+                    headers=headers,
+                )
 
                 if response.status_code == 200:
                     return response.json().get("id")
                 else:
-                    raise PluginException(cause="Failed to upload file to Vulnerability Sync",
-                                          assistance=f"Response code: {response.status_code}, Content: {response.content}")
+                    raise PluginException(
+                        cause="Failed to upload file to Vulnerability Sync",
+                        assistance=f"Response code: {response.status_code}, Content: {response.content}",
+                    )
             except Exception as e:
-                raise PluginException(cause="Failed to upload file to Vulnerability Sync",
-                                      assistance=f"Review encoded CSV file and try again: {e}")
+                raise PluginException(
+                    cause="Failed to upload file to Vulnerability Sync",
+                    assistance=f"Review encoded CSV file and try again: {e}",
+                )
 
     def get_vulnerability_sync_batches(self, org_id: int) -> List[Dict]:
         return self._page_results_data(f"{self.endpoint}/orgs/{org_id}/tasks/batches")
@@ -309,10 +315,5 @@ class ApiClient:
 
     # Events
     def get_events(self, org_id: int, event_type: str, page: int = 0) -> List[Dict]:
-        params = {
-            "o": org_id,
-            "eventName": event_type,
-            "page": page,
-            "limit": self.PAGE_SIZE
-        }
+        params = {"o": org_id, "eventName": event_type, "page": page, "limit": self.PAGE_SIZE}
         return self.remove_null_values(self._call_api("GET", f"{self.endpoint}/events", params))
