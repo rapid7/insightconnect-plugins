@@ -26,7 +26,7 @@ class ExtractAllInput(insightconnect_plugin_runtime.Input):
     "date_format": {
       "type": "string",
       "title": "Date Format",
-      "description": "Dates matching this format are extracted. If All Formats is selected, found dates will be processed in the listed order documented. Note that selecting this option will increase the duration of the process.",
+      "description": "Dates matching this format are extracted. If All Formats is selected, found dates will be processed in the listed order documented (Note that selecting this option will increase the duration of the process)",
       "enum": [
         "dd/mm/yyyy",
         "mm/dd/yyyy",
