@@ -70,7 +70,7 @@ class GetArielSearchByIdOutput(insightconnect_plugin_runtime.Output):
         "code": {
           "type": "string",
           "title": "Code",
-          "description": "Code",
+          "description": "Error Code",
           "order": 1
         },
         "contexts": {
@@ -85,7 +85,7 @@ class GetArielSearchByIdOutput(insightconnect_plugin_runtime.Output):
         "message": {
           "type": "string",
           "title": "Message",
-          "description": "Message",
+          "description": "Error message",
           "order": 3
         },
         "severity": {
@@ -216,8 +216,8 @@ class GetArielSearchByIdOutput(insightconnect_plugin_runtime.Output):
         },
         "subsearch_ids": {
           "type": "array",
-          "title": "Subsearch IDs",
-          "description": "Subsearch IDs",
+          "title": "Sub search IDs",
+          "description": "Sub search IDs",
           "items": {
             "type": "string"
           },
@@ -232,7 +232,7 @@ class GetArielSearchByIdOutput(insightconnect_plugin_runtime.Output):
             "code": {
               "type": "string",
               "title": "Code",
-              "description": "Code",
+              "description": "Error Code",
               "order": 1
             },
             "contexts": {
@@ -247,7 +247,7 @@ class GetArielSearchByIdOutput(insightconnect_plugin_runtime.Output):
             "message": {
               "type": "string",
               "title": "Message",
-              "description": "Message",
+              "description": "Error message",
               "order": 3
             },
             "severity": {

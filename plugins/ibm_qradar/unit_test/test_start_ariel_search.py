@@ -44,7 +44,10 @@ class TestStartArielSearch(TestCase):
 
         action = ArielSearchHelper.default_connector(
             StartArielSearch(),
-            {"host_url": "http://wrong", "username": "user1", "password": "password"},
+            {
+                "host_url": "http://wrong",
+                "credentials": {"username": "user1", "password": "password"},
+            },
         )
 
         with self.assertRaises(PluginException):
@@ -71,7 +74,10 @@ class TestStartArielSearch(TestCase):
 
         action = ArielSearchHelper.default_connector(
             StartArielSearch(),
-            {"host_url": "http://host_url", "username": "wrong", "password": "password"},
+            {
+                "host_url": "http://host_url",
+                "credentials": {"username": "wrong", "password": "password"},
+            },
         )
 
         with self.assertRaises(ConnectionTestException) as err:

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "List all New Offenses"
+    DESCRIPTION = "Watch for new offenses to trigger on"
 
 
 class Input:

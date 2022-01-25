@@ -23,32 +23,29 @@ class GetNewOffense(insightconnect_plugin_runtime.Trigger):
         """Run the trigger."""
         auth = (self.connection.username, self.connection.password)
         current_epoch_time = int(time.time()) * 1000
+        url_obj = URL(self.connection.host_url, self.endpoint)
+
+        if Input.FILTER in params.keys() and params[Input.FILTER] != "":
+            params[Input.FILTER] = params[Input.FILTER] + " and first_persisted_time>={current_epoch_time}"
+        else:
+            params[Input.FILTER] = "first_persisted_time>={current_epoch_time}"
+
+        basic_url, headers = prepare_request_params(
+            params,
+            self.logger,
+            url_obj,
+            [Input.FILTER, Input.FIELDS, Input.RANGE, Input.SORT],
+        )
+
         while True:
             try:
-                url_obj = URL(self.connection.host_url, self.endpoint)
-                copy_params = params.copy()
-                if Input.FILTER in copy_params.keys() and copy_params[Input.FILTER] != "":
-                    copy_params[
-                        Input.FILTER
-                    ] = f"{copy_params[Input.FILTER]},first_persisted_time>={current_epoch_time}"
-                else:
-                    copy_params[Input.FILTER] = f"first_persisted_time>={current_epoch_time}"
-
-                basic_url, headers = prepare_request_params(
-                    copy_params,
-                    self.logger,
-                    url_obj,
-                    [Input.FILTER, Input.FIELDS, Input.RANGE, Input.SORT],
-                )
-
-                self.logger.debug(f"current_epoch_time : {current_epoch_time}")
-                self.logger.debug(f"Final Url: {basic_url}")
+                final_url = basic_url.format(current_epoch_time=current_epoch_time)
                 response = requests.get(
-                    url=basic_url, headers=headers, data={}, auth=auth, verify=self.connection.verify_ssl
+                    url=final_url, headers=headers, data={}, auth=auth, verify=self.connection.verify_ssl
                 )
                 new_offence = {Output.DATA: handle_response(response)}
 
-                self.logger.debug(f"New Offence: {len(new_offence[Output.DATA])}")
+                self.logger.debug(f"Number of new offence found: {len(new_offence[Output.DATA])}")
 
                 if len(new_offence[Output.DATA]) > 0:
                     self.send(new_offence)

@@ -4,9 +4,8 @@ import json
 
 
 class Input:
+    CREDENTIALS = "credentials"
     HOST_URL = "host_url"
-    PASSWORD = "password"
-    USERNAME = "username"
     VERIFY_SSL = "verify_ssl"
 
 
@@ -17,38 +16,57 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "credentials": {
+      "$ref": "#/definitions/credential_username_password",
+      "title": "Credentials",
+      "description": "Auth object consisting of username of type string and password of type password",
+      "order": 2
+    },
     "host_url": {
       "type": "string",
       "title": "Host URL",
       "description": "Host URL of the QRadar instance.",
       "order": 1
     },
-    "password": {
-      "type": "string",
-      "title": "Password",
-      "displayType": "password",
-      "description": "QRadar password",
-      "format": "password",
-      "order": 3
-    },
-    "username": {
-      "type": "string",
-      "title": "Username",
-      "description": "QRadar username",
-      "order": 2
-    },
     "verify_ssl": {
       "type": "boolean",
       "title": "Verify SSL",
       "description": "Whether to verify the SSL for QRadar connection",
-      "order": 4
+      "order": 3
     }
   },
   "required": [
-    "host_url",
-    "password",
-    "username"
-  ]
+    "credentials",
+    "host_url"
+  ],
+  "definitions": {
+    "credential_username_password": {
+      "id": "credential_username_password",
+      "type": "object",
+      "title": "Credential: Username and Password",
+      "description": "A username and password combination",
+      "properties": {
+        "password": {
+          "type": "string",
+          "title": "Password",
+          "displayType": "password",
+          "description": "The password",
+          "format": "password",
+          "order": 2
+        },
+        "username": {
+          "type": "string",
+          "title": "Username",
+          "description": "The username to log in with",
+          "order": 1
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
+    }
+  }
 }
     """
     )

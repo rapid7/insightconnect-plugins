@@ -39,7 +39,7 @@ class GetOffenseNoteInput(insightconnect_plugin_runtime.Input):
     },
     "offense_id": {
       "type": "integer",
-      "title": "Offense Id",
+      "title": "Offense ID",
       "description": "The ID of the offense to get notes for",
       "order": 1
     },

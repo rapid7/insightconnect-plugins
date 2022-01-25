@@ -18,8 +18,7 @@ class TestConnection(TestCase):
     def test_integration_connection_test(self):
         """To Test the integration connection with qradar."""
         params = {
-            "host_url": "http://host_url",
-            "username": "user1",
-            "password": "password",
+            "host_url": "http://hostname",
+            "credentials": {"username": "user1", "password": "password"},
         }
         self.default_connection.test(params)

@@ -33,13 +33,13 @@ class AddNotesToOffenseInput(insightconnect_plugin_runtime.Input):
     "note_text": {
       "type": "string",
       "title": "Note Text",
-      "description": "The Note Text to add to offense",
+      "description": "The note text to add to the offense",
       "order": 2
     },
     "offense_id": {
       "type": "integer",
       "title": "Offense ID",
-      "description": "The ID of the offense in which you want to add note",
+      "description": "The ID of the offense in which to add a note",
       "order": 1
     }
   },

@@ -31,18 +31,12 @@ connection:
     description: Host URL of the QRadar instance.
     required: true
     example: https://127.0.0.1
-  username:
-    title: Username
-    type: string
-    description: QRadar username
+  credentials:
+    title: Credentials
+    type: credential_username_password
+    description: Auth object consisting of username of type string and password of type password
     required: true
-    example: user1
-  password:
-    title: Password
-    type: password
-    description: QRadar password
-    required: true
-    example: password
+    example: "{ 'username': 'user1', 'password': 'password'}"
   verify_ssl:
     title: Verify SSL
     type: boolean
@@ -54,7 +48,7 @@ types:
     code:
       title: "Code"
       type: string
-      description: "Code"
+      description: "Error Code"
       required: false
     contexts:
       title: "Contexts"
@@ -64,7 +58,7 @@ types:
     message:
       title: "Message"
       type: string
-      description: "Message"
+      description: "Error message"
       required: false
     severity:
       title: "Severity"
@@ -179,9 +173,9 @@ types:
         description: "Status"
         required: false
     subsearch_ids:
-        title: "Subsearch IDs"
+        title: "Sub search IDs"
         type: "[]string"
-        description: "Subsearch IDs"
+        description: "Sub search IDs"
         required: false
     search_id:
         title: "Search ID"
@@ -738,16 +732,19 @@ actions:
     description: List all assets found in the model
     input:
       range:
+        title: Range
         type: string
         required: false
         description: Restrict the number of returned elements to a range, eg. 0-10, with 0 being the first index
         example: 1-2
       filter:
+        title: Filter
         type: string
         required: false
         description: Restrict the elements in a list based on the contents of various fields
         example: id=1000
       fields:
+        title: Fields
         type: string
         required: false
         description: Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
@@ -763,21 +760,25 @@ actions:
     description: List all offenses
     input:
       range:
+        title: Range
         type: string
         required: false
         description: Restrict the number of returned elements to a range, eg. 0-10, with 0 being the first index
         example: 1-2
       filter:
+        title: Filter
         type: string
         required: false
         description: Restrict the elements in a list based on the contents of various fields
         example: id=1000
       fields:
+        title: Fields
         type: string
         required: false
         description: Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
         example: id
       sort:
+        title: Sort
         type: string
         required: false
         description: Sorting strategy for list elements
@@ -793,26 +794,31 @@ actions:
     description: Get Offense's Closing Reasons
     input:
       range:
+        title: Range
         type: string
         required: false
         description: Restrict the number of returned elements to a range, eg. 0-10, with 0 being the first index
         example: 1-2
       filter:
+        title: Filter
         type: string
         required: false
         description: Restrict the elements in a list based on the contents of various fields
         example: id=1000
       fields:
+        title: Fields
         type: string
         required: false
         description: Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
         example: id
       include_deleted:
+        title: Include Deleted
         type: boolean
         required: false
         description: If true, deleted closing reasons are included in the response. Defaults to false. Deleted closing reasons cannot be used to close an offense
         example: false
       include_reserved:
+        title: Include Reserved
         type: boolean
         required: false
         description: If true, reserved closing reasons are included in the response. Defaults to false. Reserved closing reasons cannot be used to close an offense
@@ -834,6 +840,7 @@ actions:
         description: The ID of the offense to update
         example: 100
       assigned_to:
+        title: Assigned To
         type: string
         required: false
         description: A user to assign the offense to
@@ -845,21 +852,25 @@ actions:
         description: The ID of a closing reason. A valid Closing Reason ID must be provided when closing an offense
         example: 100
       fields:
+        title: Fields
         type: string
         required: false
         description: Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
         example: id
       follow_up:
+        title: Follow Up
         type: boolean
         required: false
         description: Set to true to set the follow up flag on the offense
         example: false
       protected:
+        title: Protected
         type: boolean
         required: false
         description: The ID of a closing reason. A valid Closing Reason ID must be provided when closing an offense
         example: false
       status:
+        title: Status
         type: string
         required: false
         description: The new status for the offense. Set to either open, hidden, or closed. When the status of an offense is being set to closed, a valid Closing Reason ID must be provided. To hide an offense, use the hidden status. To show a previously hidden offense, use the open status
@@ -880,21 +891,25 @@ actions:
     description: Get Offense Notes
     input:
       offense_id:
+        title: Offense ID
         type: integer
         required: true
         description: The ID of the offense to get notes for
         example: 100
       range:
+        title: Range
         type: string
         required: false
         description: Restrict the number of returned elements to a range, eg. 0-10, with 0 being the first index
         example: 1-2
       filter:
+        title: Filter
         type: string
         required: false
         description: Restrict the elements in a list based on the contents of various fields
         example: id=100
       fields:
+        title: Fields
         type: string
         required: false
         description: Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
@@ -922,6 +937,7 @@ actions:
         description: The ID of the offense note to get
         example: 100
       fields:
+        title: Fields
         type: string
         required: false
         description: Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
@@ -940,14 +956,16 @@ actions:
         title: Offense ID
         type: integer
         required: true
-        description: The ID of the offense in which you want to add note
+        description: The ID of the offense in which to add a note
         example: 100
       note_text:
+        title: Note Text
         type: string
         required: true
-        description: The Note Text to add to offense
+        description: The note text to add to the offense
         example: note_text
       fields:
+        title: Fields
         type: string
         required: false
         description: Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
@@ -961,29 +979,34 @@ actions:
 triggers:
   get_new_offense:
     title: Get New Offenses
-    description: List all New Offenses
+    description: Watch for new offenses to trigger on
     input:
       range:
+        title: Range
         type: string
         required: false
         description: Restrict the number of returned elements to a range, eg. 0-10, with 0 being the first index
         example: 1-2
       filter:
+        title: Filter
         type: string
         required: false
         description: Restrict the elements in a list based on the contents of various fields
         example: id=100
       fields:
+        title: Fields
         type: string
         required: false
         description: Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas
         example: id
       sort:
+        title: Sort
         type: string
         required: false
         description: Sorting strategy for list elements
         example: +id,-status
       interval:
+        title: Interval
         description: How frequently (in seconds) to trigger a greeting
         type: integer
         default: 15

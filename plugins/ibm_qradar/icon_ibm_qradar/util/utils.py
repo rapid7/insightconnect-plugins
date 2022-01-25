@@ -84,23 +84,23 @@ def get_default_header() -> dict:
     return {"Accept": "application/json"}
 
 
-def delete_none(_dict):
+def delete_none(dict_):
     """To remove the key having none value in the dict.
 
-    :param _dict: input dict.
+    :param dict_: input dict.
     :return:
     """
-    if isinstance(_dict, dict):
-        for key, value in list(_dict.items()):
+    if isinstance(dict_, dict):
+        for key, value in list(dict_.items()):
             if isinstance(value, dict):
                 delete_none(value)
             elif value is None:
-                del _dict[key]
+                del dict_[key]
             elif isinstance(value, list):
                 for v_i in value:
                     delete_none(v_i)
 
-    return _dict
+    return dict_
 
 
 def handle_response(response: Response) -> dict:

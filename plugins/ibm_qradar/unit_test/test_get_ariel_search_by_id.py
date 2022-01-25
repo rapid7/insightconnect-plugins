@@ -50,7 +50,10 @@ class TestGetArielSearchById(TestCase):
 
         action = ArielSearchHelper.default_connector(
             GetArielSearchById(),
-            {"host_url": "http://wrong", "username": "user1", "password": "password"},
+            {
+                "host_url": "http://wrong",
+                "credentials": {"username": "user1", "password": "password"},
+            },
         )
 
         with self.assertRaises(PluginException):

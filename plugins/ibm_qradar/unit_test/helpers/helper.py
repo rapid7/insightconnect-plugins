@@ -36,8 +36,8 @@ class Helper:
         else:
             params = {
                 "host_url": "http://host_url",
-                "username": "user1",
-                "password": "password",
+                "credentials": {"username": "user1", "password": "password"},
+                "verify_ssl": False,
             }
         default_connection.connect(params)
         action.connection = default_connection

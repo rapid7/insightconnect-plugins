@@ -30,18 +30,16 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|credentials|credential_username_password|None|True|Auth object consisting of username of type string and password of type password|None|{ 'username': 'user1', 'password': 'password'}|
 |host_url|string|None|True|Host URL of the QRadar instance.|None|https://example.com|
-|password|password|None|True|QRadar password|None|password|
-|username|string|None|True|QRadar username|None|user1|
 |verify_ssl|boolean|None|False|Whether to verify the SSL for QRadar connection|None|True|
 
 Example input:
 
 ```
 {
+  "credentials": "{ 'username': 'user1', 'password': 'password'}",
   "host_url": "https://127.0.0.1",
-  "password": "password",
-  "username": "user1",
   "verify_ssl": true
 }
 ```
@@ -109,8 +107,8 @@ This action is used to add Notes to Offense.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |fields|string|None|False|Specify which fields you would like to get back in the response. Fields that are not named are excluded. Specify subfields in brackets and multiple fields in the same object are separated by commas|None|id|
-|note_text|string|None|True|The Note Text to add to offense|None|note_text|
-|offense_id|integer|None|True|The ID of the offense in which you want to add note|None|100|
+|note_text|string|None|True|The note text to add to the offense|None|note_text|
+|offense_id|integer|None|True|The ID of the offense in which to add a note|None|100|
 
 Example input:
 
