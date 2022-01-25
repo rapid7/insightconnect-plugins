@@ -4,6 +4,7 @@ import json
 
 
 class Input:
+    SSL_VERIFY = "ssl_verify"
     URL = "url"
     USERNAME_PASSWORD = "username_password"
     
@@ -14,6 +15,13 @@ class ConnectionSchema(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "ssl_verify": {
+      "type": "boolean",
+      "title": "SSL Verify",
+      "description": "Validate SSL certificate",
+      "default": true,
+      "order": 3
+    },
     "url": {
       "type": "string",
       "title": "URL",
@@ -28,6 +36,7 @@ class ConnectionSchema(komand.Input):
     }
   },
   "required": [
+    "ssl_verify",
     "url",
     "username_password"
   ],
@@ -43,12 +52,14 @@ class ConnectionSchema(komand.Input):
           "title": "Password",
           "displayType": "password",
           "description": "The password",
-          "format": "password"
+          "format": "password",
+          "order": 2
         },
         "username": {
           "type": "string",
           "title": "Username",
-          "description": "The username to log in with"
+          "description": "The username to log in with",
+          "order": 1
         }
       },
       "required": [

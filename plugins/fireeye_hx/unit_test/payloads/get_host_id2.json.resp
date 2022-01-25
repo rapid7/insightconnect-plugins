@@ -1,0 +1,15 @@
+{
+  "data": {
+    "total": 1,
+    "query": {
+      "search": "invalid_hostname"
+    },
+    "sort": {},
+    "offset": 0,
+    "limit": 50,
+    "entries": []
+  },
+  "message": "OK",
+  "details": [],
+  "route": "/hx/api/v3/hosts"
+}

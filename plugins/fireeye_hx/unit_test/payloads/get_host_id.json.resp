@@ -1,0 +1,67 @@
+{
+  "data": {
+    "total": 1,
+    "query": {
+      "search": "example_hostname"
+    },
+    "sort": {},
+    "offset": 0,
+    "limit": 50,
+    "entries": [
+      {
+        "_id": "1111111111",
+        "agent_version": "34.28.1",
+        "excluded_from_containment": false,
+        "containment_missing_software": false,
+        "containment_queued": true,
+        "containment_state": "uncontaining",
+        "stats": {
+          "acqs": 0,
+          "malware_cleaned_count": 0,
+          "malware_quarantined_count": 0,
+          "alerting_conditions": 0,
+          "alerts": 0,
+          "exploit_alerts": 0,
+          "exploit_blocks": 0,
+          "malware_alerts": 0,
+          "generic_alerts": 0,
+          "false_positive_alerts": 0,
+          "false_positive_alerts_by_source": {},
+          "malware_false_positive_alerts": 0
+        },
+        "hostname": "fireeye-w10",
+        "domain": "WORKGROUP",
+        "ad_domain_comps": "",
+        "ad_org_units": "",
+        "ad_common_names": "",
+        "gmt_offset_seconds": -28800,
+        "timezone": "Pacific Standard Time",
+        "primary_ip_address": "",
+        "last_audit_timestamp": "2022-01-05T04:14:47.419Z",
+        "last_poll_timestamp": "2022-01-05T05:48:06.000Z",
+        "last_poll_ip": "",
+        "reported_clone": false,
+        "initial_agent_checkin": "2021-12-22T19:03:50.834Z",
+        "url": "/hx/api/v3/hosts/1111111111",
+        "last_alert": null,
+        "last_exploit_block": null,
+        "last_alert_timestamp": null,
+        "last_exploit_block_timestamp": null,
+        "sysinfo": {
+          "url": "/hx/api/v3/hosts/1111111111/sysinfo"
+        },
+        "os": {
+          "product_name": "Windows 10 Pro",
+          "patch_level": null,
+          "bitness": "64-bit",
+          "platform": "win",
+          "kernel_version": null
+        },
+        "primary_mac": ""
+      }
+    ]
+  },
+  "message": "OK",
+  "details": [],
+  "route": "/hx/api/v3/hosts"
+}
