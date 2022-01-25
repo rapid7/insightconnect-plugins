@@ -34,9 +34,15 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
+            self.add_action(actions.CheckHostQuarantineStatus())
+
             self.add_action(actions.GetAlertsByHostId())
 
             self.add_action(actions.GetHostIdFromHostname())
+
+            self.add_action(actions.QuarantineHost())
+
+            self.add_action(actions.UnquarantineHost())
 
 
     """Run plugin"""

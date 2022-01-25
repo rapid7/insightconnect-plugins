@@ -1,19 +1,31 @@
 {
-	"spec": "ebb92074a1b2e86d3218a9743b5d4b0e",
-	"manifest": "3762698982ebdda7564c8071e7c2ae5f",
-	"setup": "61aa676f349ecb563d18f05447ea46d8",
+	"spec": "79a47208dc3a2f0a5d21fdac4caec2e8",
+	"manifest": "6cdcbbeed71ee32f6a83d8323f22092d",
+	"setup": "01cdf39563f18234a297554b3aeb4008",
 	"schemas": [
 		{
+			"identifier": "check_host_quarantine_status/schema.py",
+			"hash": "6d453bbb99562a1a473696f8fd5c56da"
+		},
+		{
 			"identifier": "get_alerts_by_host_id/schema.py",
-			"hash": "0df3ed3ce77aa3c0d8bf0a71076487a6"
+			"hash": "2175ed0c6991b842b15e16a0c4c91c83"
 		},
 		{
 			"identifier": "get_host_id_from_hostname/schema.py",
-			"hash": "b825df2e679687edbb42ea474aa0e72f"
+			"hash": "fd68e3a81c914d00b1859432f5e46daa"
+		},
+		{
+			"identifier": "quarantine_host/schema.py",
+			"hash": "ca7832a44bee9be795d2866f7e29c89e"
+		},
+		{
+			"identifier": "unquarantine_host/schema.py",
+			"hash": "27dd3705bd8b7f22485607132f9c4c22"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "776ca44939f482a92e5dadf2b7628b85"
+			"hash": "fe79847b6bb6a3df3f86cdf3d2fca1d0"
 		}
 	]
 }

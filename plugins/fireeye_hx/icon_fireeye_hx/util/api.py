@@ -5,6 +5,7 @@ from requests.auth import HTTPBasicAuth
 from urllib.parse import urlsplit
 import json
 from icon_fireeye_hx.util import endpoint
+import time
 
 
 class FireEyeAPI:
@@ -48,11 +49,28 @@ class FireEyeAPI:
         except requests.exceptions.HTTPError as e:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
 
-    def get_host_id_from_hostname(self, params: dict) -> requests.Response:
+    def get_host_id_from_hostname(self, params: dict) -> dict:
         return self.call_api(endpoint.hosts(), params=params).json()
 
     def get_version(self) -> requests.Response:
         return self.call_api(endpoint.version())
+
+    def check_host_quarantine_status(self, agent_id: str) -> dict:
+        return self.call_api(endpoint.host_containment(agent_id)).json()
+
+    def quarantine_host(self, agent_id: str) -> bool:
+        action_endpoint = endpoint.host_containment(agent_id)
+        self.call_api(action_endpoint, "POST")
+        for _ in range(180):
+            time.sleep(10)
+            if self.call_api(endpoint.host_containment(agent_id)).json().get("data", {}).get("requested_on"):
+                self.call_api(action_endpoint, "PATCH", json_data={"state": "contain"})
+                return True
+        return False
+
+    def unquarantine_host(self, agent_id: str) -> bool:
+        self.call_api(endpoint.host_containment(agent_id), "DELETE")
+        return True
 
     @staticmethod
     def split_url(url: str) -> str:
