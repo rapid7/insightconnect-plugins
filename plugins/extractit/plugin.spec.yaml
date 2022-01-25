@@ -7,7 +7,7 @@ description: The ExtractIt plugin has a collection of actions used to extract va
 version: 3.0.0
 vendor: rapid7
 support: rapid7
-status: ["supported"]
+status: []
 cloud_ready: true
 resources:
   vendor_url: https://www.rapid7.com

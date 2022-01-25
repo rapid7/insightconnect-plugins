@@ -157,7 +157,9 @@ def define_date_time_regex(date_format: str) -> str:
 def parse_time_all_date_formats(dates: list) -> list:
     for date in enumerate(dates):
         for linux_date_time_format in DateFormatStrings.human_to_linux_mapping.values():
-            date_value_separators = regex.findall(r"[^(%b)(%d)(%m)(%y)(%h)(%s)(%D)(%M)(%Y)(%H)(%S)]",linux_date_time_format)
+            date_value_separators = regex.findall(
+                r"[^(%b)(%d)(%m)(%y)(%h)(%s)(%D)(%M)(%Y)(%H)(%S)]", linux_date_time_format
+            )
             # Alternatively insert date and separators into list that is then joined together as a string. Allows
             # for retrieved dates to be read in an extractable format and account for all future date format variations.
             date_string_list = list(range((len(date[1]) + len(date_value_separators))))
@@ -171,6 +173,7 @@ def parse_time_all_date_formats(dates: list) -> list:
             except ValueError:
                 continue
     return dates
+
 
 def parse_time(dates: list, date_format: str) -> list:
     linux_date_time_format = define_linux_date_time_format(date_format)

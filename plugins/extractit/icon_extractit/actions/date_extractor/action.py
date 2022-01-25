@@ -2,7 +2,13 @@ import insightconnect_plugin_runtime
 from .schema import DateExtractorInput, DateExtractorOutput, Input, Output, Component
 
 # Custom imports below
-from icon_extractit.util.extractor import extract, extract_all_date_formats, parse_time, parse_time_all_date_formats, define_date_time_regex
+from icon_extractit.util.extractor import (
+    extract,
+    extract_all_date_formats,
+    parse_time,
+    parse_time_all_date_formats,
+    define_date_time_regex,
+)
 
 
 class DateExtractor(insightconnect_plugin_runtime.Action):
@@ -15,7 +21,7 @@ class DateExtractor(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        if (params.get(Input.DATE_FORMAT)=="All Formats"):
+        if params.get(Input.DATE_FORMAT) == "All Formats":
             return {
                 Output.DATES: parse_time_all_date_formats(
                     extract_all_date_formats(
