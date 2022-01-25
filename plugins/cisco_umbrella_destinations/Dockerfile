@@ -21,6 +21,6 @@ RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 RUN python setup.py build && python setup.py install
 
 # User to run plugin code. The two supported users are: root, nobody
-USER root
+USER nobody
 
 ENTRYPOINT ["/usr/local/bin/icon_cisco_umbrella_destinations"]
