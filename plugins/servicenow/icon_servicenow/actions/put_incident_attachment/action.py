@@ -9,6 +9,7 @@ from .schema import (
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
+import base64
 
 
 class PutIncidentAttachment(insightconnect_plugin_runtime.Action):
@@ -33,7 +34,7 @@ class PutIncidentAttachment(insightconnect_plugin_runtime.Action):
         )
         method = "post"
 
-        response = self.connection.request.make_request(url, method, payload=payload, content_type=content_type)
+        response = self.connection.request.make_request(url, method, payload=base64.b64decode(payload.encode('utf-8')).decode('utf-8'), content_type=content_type)
 
         try:
             result = response["resource"].get("result")
