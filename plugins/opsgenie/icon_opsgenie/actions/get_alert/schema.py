@@ -25,14 +25,14 @@ class GetAlertInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "identifier": {
       "type": "string",
-      "title": "Alert ID",
+      "title": "Alert ID, Tiny ID or Alias",
       "description": "Identifier of the alert",
       "order": 1
     },
     "identifierType": {
       "type": "string",
       "title": "Identifier Type",
-      "description": "Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny and alias. Default value is ID",
+      "description": "Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny ID and alias. Default value is ID",
       "default": "ID",
       "enum": [
         "",

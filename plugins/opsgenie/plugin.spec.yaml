@@ -145,14 +145,14 @@ actions:
     description: Retrieve alert from OpsGenie
     input:
       identifier:
-        title: Alert ID
+        title: Alert ID, Tiny ID or Alias
         description: Identifier of the alert
         type: string
         required: true
         example: "8418d193-2dab-4490-b331-8c02cdd196b7"
       identifierType:
         title: Identifier Type
-        description: Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny and alias. Default value is ID
+        description: Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny ID and alias. Default value is ID
         type: string
         enum:
           - ""
@@ -179,14 +179,14 @@ actions:
     description: Close an existing alert from OpsGenie
     input:
       identifier:
-        title: Alert ID
+        title: Alert ID, Tiny ID or Alias
         description: Identifier of the alert
         type: string
         required: true
         example: "8418d193-2dab-4490-b331-8c02cdd196b7"
       identifierType:
         title: Identifier Type
-        description: Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny and alias. Default value is ID
+        description: Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny ID and alias. Default value is ID
         type: string
         enum:
           - ""

@@ -6,8 +6,8 @@ Notify the right people, reduce response time, and avoid alert fatigue within a 
 
 * Create new alert
 * Close existing alert
-* Get information about specific alert 
-* Get on calls is used to retrieve current on-call participants of a specific schedule
+* Get information about specific alert using ID, tiny or alias type
+* Get on calls is used to retrieve current on-call participants of a specific schedule using ID or name type
 
 # Requirements
 
@@ -48,7 +48,7 @@ This action is used to close an existing alert from OpsGenie.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |identifier|string|None|True|Identifier of the alert|None|8418d193-2dab-4490-b331-8c02cdd196b7|
-|identifierType|string|ID|False|Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny and alias. Default value is ID|['', 'ID', 'tiny', 'alias']|ID|
+|identifierType|string|ID|False|Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny ID and alias. Default value is ID|['', 'ID', 'tiny', 'alias']|ID|
 |note|string|None|False|Additional alert note to add|None|Action executed via Alert API|
 |source|string|None|False|Display name of the request source|None|AWS Lambda|
 |user|string|None|False|Display name of the request owner|None|Monitoring Script|
@@ -155,7 +155,7 @@ This action is used to retrieve alert from OpsGenie.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |identifier|string|None|True|Identifier of the alert|None|8418d193-2dab-4490-b331-8c02cdd196b7|
-|identifierType|string|ID|False|Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny and alias. Default value is ID|['', 'ID', 'tiny', 'alias']|ID|
+|identifierType|string|ID|False|Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny ID and alias. Default value is ID|['', 'ID', 'tiny', 'alias']|ID|
 
 Example input:
 
@@ -348,7 +348,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.0 - Initial plugin
+* 1.0.0 - Initial plugin (Actions: Create Alert, Close Alert, Get Alert, Get On-Calls)
 
 # Links
 
