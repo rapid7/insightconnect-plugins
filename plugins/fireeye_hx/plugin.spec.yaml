@@ -4,7 +4,8 @@ products: [insightconnect]
 name: fireeye_hx
 title: "FireEye HX"
 description: The FireEye plugin will allow you to get alerts from a given host
-version: 1.0.1
+version: 2.0.0
+supported_versions: ["5.2.0.958244"]
 vendor: rapid7
 support: community
 status: []
@@ -314,11 +315,20 @@ connection:
     title: Username and Password
     description: Username and password to authenticate with FireEye HX
     required: true
+    example: '{"username": "user", "password": "password"}'
   url:
     type: string
     title: URL
     description: URL to the appliance, e.g. https://test.fireeye.com
     required: true
+    example: "https://example.com"
+  ssl_verify:
+    title: SSL Verify
+    description: Validate SSL certificate
+    type: boolean
+    default: true
+    required: true
+    example: true
 
 actions:
   get_host_id_from_hostname:
@@ -330,6 +340,7 @@ actions:
         description: Hostname
         required: true
         type: string
+        example: example_hostname
     output:
       host_id:
         title: Host ID
@@ -350,6 +361,7 @@ actions:
         description: Host ID
         required: true
         type: string
+        example: 44d88612fea8a8f36de82e
     output:
       alerts:
         title: Alerts

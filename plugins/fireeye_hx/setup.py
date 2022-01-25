@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='fireeye_hx-rapid7-plugin',
-      version='1.0.1',
-      description='The FireEye plugin will allow you to get alerts from a given host',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="fireeye_hx-rapid7-plugin",
+      version="2.0.0",
+      description="The FireEye plugin will allow you to get alerts from a given host",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/icon_fireeye_hx']

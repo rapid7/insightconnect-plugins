@@ -2,16 +2,17 @@ import komand
 from .schema import ConnectionSchema, Input
 
 # Custom imports below
-from komand.exceptions import ConnectionTestException
+from komand.exceptions import ConnectionTestException, PluginException
 from requests import Session
 from requests.auth import HTTPBasicAuth
-from json import JSONDecodeError
+from icon_fireeye_hx.util.api import FireEyeAPI
 
 
 class Connection(komand.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.session, self.url = None, None
+        self.api = None
 
     def connect(self, params={}):
         username, password = (
@@ -20,28 +21,16 @@ class Connection(komand.Connection):
         )
 
         self.url = params.get(Input.URL)
+        ssl_verify = params.get(Input.SSL_VERIFY)
 
         self.session: Session = Session()
         self.session.auth = HTTPBasicAuth(username=username, password=password)
 
+        self.api = FireEyeAPI(self.url, username, password, ssl_verify, self.logger)
+
     def test(self):
-        test_url = f"{self.url}/hx/api/v3/version"
-        response = self.session.get(url=test_url)
-
-        if response.status_code == 200:
-            return {"status": "success"}
-        else:
-            try:
-                details = response.json()["details"][0]
-                code, message = details["code"], details["message"]
-
-                raise ConnectionTestException(cause=f"Reason: {message} (error code {code}")
-
-            except JSONDecodeError as e:
-                raise ConnectionTestException(
-                    cause=f"Malformed response received from FireEye HX appliance. " f"Got: {response.text}"
-                ) from e
-            except (KeyError, IndexError) as e:
-                raise ConnectionTestException(
-                    cause="Unknown error received from FireEye HX appliance " "(no error cause reported)."
-                ) from e
+        try:
+            self.api.get_version()
+        except PluginException:
+            raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
+        return {"status": "success"}

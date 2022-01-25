@@ -7,10 +7,15 @@ This plugin utilizes the FireEye HX API. Documentation for the API is located in
 # Key Features
 
 * Get alerts for a host
+* Get host ID from hostname
 
 # Requirements
 
 * FireEye credentials
+
+# Supported Product Versions
+
+* 5.2.0.958244
 
 # Documentation
 
@@ -18,10 +23,24 @@ This plugin utilizes the FireEye HX API. Documentation for the API is located in
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username_password|credential_username_password|None|True|Username and password to authenticate with FireEye HX|None|
-|url|string|None|True|URL to the appliance, e.g. https://test.fireeye.com|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ssl_verify|boolean|True|True|Validate SSL certificate|None|True|
+|url|string|None|True|URL to the appliance, e.g. https://test.fireeye.com|None|https://example.com|
+|username_password|credential_username_password|None|True|Username and password to authenticate with FireEye HX|None|{"username": "user", "password": "password"}|
+
+Example input:
+
+```
+{
+  "ssl_verify": true,
+  "url": "https://example.com",
+  "username_password": {
+    "username": "user",
+    "password": "password"
+  }
+}
+```
 
 ## Technical Details
 
@@ -33,9 +52,17 @@ This action is used to get a host ID from a given hostname.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|hostname|string|None|True|Hostname|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|hostname|string|None|True|Hostname|None|example_hostname|
+
+Example input:
+
+```
+{
+  "hostname": "example_hostname"
+}
+```
 
 ##### Output
 
@@ -59,9 +86,17 @@ This action is used to get alerts for a host given the host ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|host_id|string|None|True|Host ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|host_id|string|None|True|Host ID|None|44d88612fea8a8f36de82e|
+
+Example input:
+
+```
+{
+  "host_id": "44d88612fea8a8f36de82e"
+}
+```
 
 ##### Output
 
@@ -76,8 +111,8 @@ Example output:
   "alerts": [{
     "_id": 1,
     "agent": {
-      "_id": "BoT1FTG1l92f2LeJVh6e3p",
-      "url": "/hx/api/v3/hosts/BoT1FTG1l92f2LeJVh6e3p",
+      "_id": "44d88612fea8a8f36de82e",
+      "url": "/hx/api/v3/hosts/44d88612fea8a8f36de82e",
       "containment_state": "normal"
     },
     "condition": {
@@ -114,7 +149,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -126,6 +161,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.0 - Add new actions Quarantine Host, Unquarantine Host and Check Quarantine Status | Add `ssl_verify` input in connection | Add missing input examples | Code refactor 
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 
