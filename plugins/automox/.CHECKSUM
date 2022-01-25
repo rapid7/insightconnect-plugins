@@ -1,7 +1,7 @@
 {
-	"spec": "ea06eed43dbfa16240b855c6284a02b8",
-	"manifest": "cb317bddbf81757e6cefd84ee43e28bd",
-	"setup": "99ad065fc340bac4d8c394f98c761bfe",
+	"spec": "75b8181176d097e4b3a69fadf4c35b75",
+	"manifest": "5b3ca7d7f6ab876b671761d90c40bb85",
+	"setup": "b3af5c60e0f9b556e1d4c5cf1534b877",
 	"schemas": [
 		{
 			"identifier": "action_on_vulnerability_sync_batch/schema.py",
@@ -65,7 +65,7 @@
 		},
 		{
 			"identifier": "list_vulnerability_sync_tasks/schema.py",
-			"hash": "1ae547513f254ac840a5e5a1542e07b6"
+			"hash": "4b6eb5774bcfc5e7c0a7c0e0707b83ee"
 		},
 		{
 			"identifier": "run_command/schema.py",
@@ -81,7 +81,7 @@
 		},
 		{
 			"identifier": "upload_vulnerability_sync_file/schema.py",
-			"hash": "864896cb4256dcf8091f4db38e9782c9"
+			"hash": "47597b34d180d84050c8ea8297f44e0e"
 		},
 		{
 			"identifier": "connection/schema.py",
