@@ -249,7 +249,7 @@ actions:
     input:
       date_format:
         title: Date Format
-        description: Dates matching this format are extracted. If All Formats is selected, found dates will be processed in the listed order documented (Note that selecting this option will increase the duration of the process)
+        description: Dates matching this format are extracted - If All Formats is selected, found dates will be processed in the listed order documented
         type: string
         required: true
         enum:
@@ -474,7 +474,7 @@ actions:
     input:
       date_format:
         title: Date Format
-        description: Dates matching this format are extracted. If All Formats is selected, found dates will be processed in the listed order documented (Note that selecting this option will increase the duration of the process)
+        description: Dates matching this format are extracted - If All Formats is selected, found dates will be processed in the listed order documented
         type: string
         required: true
         enum:
