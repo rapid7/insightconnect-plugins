@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Creates a new Security Policy Rule"
+    DESCRIPTION = "Creates a new Security Policy Rule. This action works with a direct connection to the firewall"
 
 
 class Input:

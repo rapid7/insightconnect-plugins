@@ -4,7 +4,7 @@ products: [insightconnect]
 name: palo_alto_pan_os
 title: Palo Alto Firewall
 description: Manage Palo Alto Networks firewall devices
-version: 6.1.3
+version: 6.1.4
 supported_versions: ["9.0.3"]
 vendor: rapid7
 support: rapid7
@@ -52,7 +52,7 @@ connection:
 actions:
   set_security_policy_rule:
     title: Set Security Policy Rule
-    description: Creates a new Security Policy Rule
+    description: Creates a new Security Policy Rule. This action works with a direct connection to the firewall
     input:
       rule_name:
         title: Rule Name
@@ -163,7 +163,7 @@ actions:
         required: false
   show:
     title: Show
-    description: Gets active configuration
+    description: Gets active configuration. This action works with Panorama
     input:
       xpath:
         title: Xpath
@@ -179,7 +179,7 @@ actions:
         required: false
   get:
     title: Get
-    description: Get candidate configuration
+    description: Get candidate configuration. This action works with Panorama
     input:
       xpath:
         title: Xpath
@@ -195,7 +195,7 @@ actions:
         required: false
   delete:
     title: Delete
-    description: Delete an object
+    description: Delete an object. This action works with Panorama
     input:
       xpath:
         title: Xpath
@@ -211,7 +211,7 @@ actions:
         required: false
   set:
     title: Set
-    description: Create a new object
+    description: Create a new object. This action works with Panorama
     input:
       xpath:
         title: Xpath
@@ -233,7 +233,7 @@ actions:
         required: false
   edit:
     title: Edit
-    description: Edit an existing object
+    description: Edit an existing object. This action works with Panorama
     input:
       xpath:
         title: Xpath
@@ -256,7 +256,7 @@ actions:
         required: false
   commit:
     title: Commit
-    description: Commits the candidate configuration
+    description: Commits the candidate configuration. This action works with a direct connection to the firewall
     input:
       cmd:
         title: CMD
@@ -279,7 +279,7 @@ actions:
         required: false
   op:
     title: Op
-    description: Runs operational command
+    description: Runs operational command. This action works with a direct connection to the firewall
     input:
       cmd:
         title: CMD
@@ -295,7 +295,7 @@ actions:
         required: false
   retrieve_logs:
     title: Retrieve Logs
-    description: Queries firewall logs
+    description: Queries firewall logs. This action works with a direct connection to the firewall
     input:
       log_type:
         title: Log Type
@@ -364,7 +364,7 @@ actions:
         required: false
   add_to_policy:
     title: Add to Policy
-    description: Add a rule to a firewall security policy
+    description: Add a rule to a firewall security policy. This action works with a direct connection to the firewall
     input:
       rule_name:
         title: Rule Name
@@ -465,7 +465,7 @@ actions:
         required: false
   remove_from_policy:
     title: Remove from Policy
-    description: Remove a rule from a firewall security policy
+    description: Remove a rule from a firewall security policy. This action works with a direct connection to the firewall
     input:
       rule_name:
         title: Rule Name
@@ -566,7 +566,7 @@ actions:
         required: false
   add_external_dynamic_list:
     title: Add External Dynamic List
-    description: Add an external dynamic list
+    description: Add an external dynamic list. This action works with a direct connection to the firewall
     input:
       name:
         title: The Name of the List
@@ -676,7 +676,7 @@ actions:
         required: false
   set_address_object:
     title: Create Address Object
-    description: Create a new address object. Supports IPv6
+    description: Create a new address object. Supports IPv6. This action works with a direct connection to the firewall
     input:
       address:
         title: Address
@@ -733,7 +733,7 @@ actions:
         required: false
   get_policy:
     title: Get Policy
-    description: Get a policy by name
+    description: Get a policy by name. This action works with a direct connection to the firewall
     input:
       policy_name:
         title: Policy Name
@@ -811,7 +811,7 @@ actions:
         required: false
   check_if_address_object_in_group:
     title: Check if Address in Group
-    description: Checks to see if an IP address, CIDR IP address, or domain is in an Address Group. Supports IPv6
+    description: Checks to see if an IP address, CIDR IP address, or domain is in an Address Group. Supports IPv6. This action works with a direct connection to the firewall
     input:
       group:
         title: Group
@@ -864,7 +864,7 @@ actions:
         required: false
   remove_address_object_from_group:
     title: Remove Address Object from Group
-    description: Removes an address object from an address group. Supports IPv6
+    description: Removes an address object from an address group. Supports IPv6. This action works with a direct connection to the firewall
     input:
       address_object:
         title: Address Object
@@ -904,7 +904,7 @@ actions:
         required: true
   add_address_object_to_group:
     title: Add Address Object to Group
-    description: Adds address objects to an address group
+    description: Adds address objects to an address group. This action works with a direct connection to the firewall
     input:
       address_object:
         title: Address Object
@@ -949,7 +949,7 @@ actions:
         required: true
   get_addresses_from_group:
     title: Get Addresses from Group
-    description: Get addresses from an address group
+    description: Get addresses from an address group. This action works with a direct connection to the firewall
     input:
       group:
         title: Group

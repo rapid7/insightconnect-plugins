@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Removes an address object from an address group. Supports IPv6"
+    DESCRIPTION = "Removes an address object from an address group. Supports IPv6. This action works with a direct connection to the firewall"
 
 
 class Input:

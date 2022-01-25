@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Create a new object"
+    DESCRIPTION = "Create a new object. This action works with Panorama"
 
 
 class Input:
