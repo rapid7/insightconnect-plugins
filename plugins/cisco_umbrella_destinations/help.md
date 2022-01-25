@@ -14,7 +14,7 @@ This plugin utilizes the Cisco Umbrella Destination Lists API to provide a consi
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* All as of 1/25/2022
 
 # Documentation
 
