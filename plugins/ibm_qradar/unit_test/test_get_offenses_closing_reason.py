@@ -13,7 +13,7 @@ sys.path.append(os.path.abspath("/"))
 
 
 class TestGetOffenseClosingReason(TestCase):
-    """Test case class for action : Get Offense closing reasons."""
+    """Test case class for action: Get Offense closing reasons."""
 
     @classmethod
     def setUpClass(cls) -> None:
@@ -107,7 +107,7 @@ class TestGetOffenseClosingReason(TestCase):
 
     @patch("requests.get", side_effect=OffensesHelper.mock_request)
     def test_get_offense_closing_reason_internal_server_error(self, make_request):
-        """To Test the get offense closing reason by internalServerError."""
+        """To test the get offense closing reason by internalServerError."""
         action_params = {"filter": "internalServerError"}
         with self.assertRaises(PluginException):
             self.action.run(action_params)

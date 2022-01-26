@@ -12,7 +12,7 @@ sys.path.append(os.path.abspath("../"))
 
 
 class TestGetArielSearchById(TestCase):
-    """Unit Test class for Test cases of action : get ariel search by id."""
+    """Unit Test class for Test cases of action: Get ariel search by ID."""
 
     @classmethod
     def setUpClass(cls) -> None:
@@ -21,21 +21,21 @@ class TestGetArielSearchById(TestCase):
 
     @patch("requests.get", side_effect=ArielSearchHelper.mock_request)
     def test_get_ariel_search_by_id(self, make_request):
-        """To Test the get serial search by id."""
+        """To test the get ariel search by ID."""
         action_params = {"search_id": "search_id"}
         results = self.action.run(action_params)
         self.assertEqual(results.get("data")["cursor_id"], "test_cursor_id")
 
     @patch("requests.get", side_effect=ArielSearchHelper.mock_request)
     def test_get_ariel_search_by_id_with_poll_interval(self, make_request):
-        """To Test the get serial search by id."""
+        """To test the get ariel search by ID."""
         action_params = {"search_id": "search_id", "poll_interval": 1}
         results = self.action.run(action_params)
         self.assertEqual(results.get("data")["cursor_id"], "test_cursor_id")
 
     @patch("requests.get", side_effect=ArielSearchHelper.mock_request)
     def test_get_ariel_search_by_wrong_id(self, make_request):
-        """To Test the get serial search by id."""
+        """To test the get ariel search by ID."""
         action_params = {"search_id": "wrong"}
         with self.assertRaises(PluginException):
             self.action.run(action_params)
@@ -61,21 +61,21 @@ class TestGetArielSearchById(TestCase):
 
     @patch("requests.get", side_effect=ArielSearchHelper.mock_request)
     def test_get_ariel_search_by_id_with_internal_server_error(self, make_request):
-        """To Test the get serial search by ID with internalServerError."""
+        """To test the get ariel search by ID with internalServerError."""
         action_params = {"search_id": "internalServerError"}
         with self.assertRaises(PluginException):
             self.action.run(action_params)
 
     @patch("requests.get", side_effect=ArielSearchHelper.mock_request)
     def test_get_ariel_search_by_id_with_forbidden(self, make_request):
-        """To Test the get serial search by ID with for bidden."""
+        """To test the get ariel search by ID with forbidden."""
         action_params = {"search_id": "checkforbidden"}
         with self.assertRaises(PluginException):
             self.action.run(action_params)
 
     @patch("requests.get", side_effect=ArielSearchHelper.mock_request)
     def test_get_ariel_search_by_id_with_rate_limit(self, make_request):
-        """To Test the get serial search by ID with for bidden."""
+        """To test the get ariel search by ID with rate limit."""
         action_params = {"search_id": "checkratelimit"}
         with self.assertRaises(PluginException):
             self.action.run(action_params)

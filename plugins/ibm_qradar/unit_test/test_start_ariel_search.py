@@ -16,7 +16,7 @@ sys.path.append(os.path.abspath("../"))
 
 
 class TestStartArielSearch(TestCase):
-    """Test case class for action : Start ariel search."""
+    """Test case class for action: Start ariel search."""
 
     @classmethod
     def setUpClass(cls) -> None:

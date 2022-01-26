@@ -13,7 +13,7 @@ sys.path.append(os.path.abspath("../"))
 
 
 class TestGetOffense(TestCase):
-    """Test case class for action : get offense."""
+    """Test case class for action: get offense."""
 
     @classmethod
     def setUpClass(cls) -> None:
@@ -88,7 +88,7 @@ class TestGetOffense(TestCase):
 
     @patch("requests.post", side_effect=UpdateOffenseHelper.mock_request)
     def test_with_internal_server_error(self, make_request):
-        """To Test the update offense with internalServerError."""
+        """To test the update offense with internalServerError."""
         action_params = {"offense_id": 1, "fields": "internalServerError"}
         with self.assertRaises(PluginException):
             print(self.action.run(action_params))

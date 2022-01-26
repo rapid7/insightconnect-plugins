@@ -13,7 +13,7 @@ sys.path.append(os.path.abspath("../"))
 
 
 class TestGetOffenseNotesById(TestCase):
-    """Test case class for action : Get offense notes By Id."""
+    """Test case class for action: Get offense notes By ID."""
 
     @classmethod
     def setUpClass(cls) -> None:
@@ -54,7 +54,7 @@ class TestGetOffenseNotesById(TestCase):
 
     @patch("requests.get", side_effect=OffenseNotesHelper.mock_request)
     def test_with_internal_server_error(self, make_request):
-        """To Test the Get offense notes By Id by ID with internalServerError."""
+        """To test the Get offense notes By Id by ID with internalServerError."""
         action_params = {
             "offense_id": "33",
             "note_id": "33",

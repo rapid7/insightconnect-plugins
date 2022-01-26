@@ -43,12 +43,12 @@ class GetNewOffense(insightconnect_plugin_runtime.Trigger):
                 response = requests.get(
                     url=final_url, headers=headers, data={}, auth=auth, verify=self.connection.verify_ssl
                 )
-                new_offence = {Output.DATA: handle_response(response)}
+                new_offense = {Output.DATA: handle_response(response)}
 
-                self.logger.debug(f"Number of new offence found: {len(new_offence[Output.DATA])}")
+                self.logger.debug(f"Number of new offenses found: {len(new_offense[Output.DATA])}")
 
-                if len(new_offence[Output.DATA]) > 0:
-                    self.send(new_offence)
+                if len(new_offense[Output.DATA]) > 0:
+                    self.send(new_offense)
                     current_epoch_time = int(time.time()) * 1000
 
             except requests.exceptions.ConnectionError:

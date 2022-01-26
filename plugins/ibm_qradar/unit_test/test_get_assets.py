@@ -13,7 +13,7 @@ sys.path.append(os.path.abspath("../"))
 
 
 class TestGetAssets(TestCase):
-    """Test case class for action : Get assets."""
+    """Test case class for action: Get assets."""
 
     @classmethod
     def setUpClass(cls) -> None:
@@ -87,7 +87,7 @@ class TestGetAssets(TestCase):
 
     @patch("requests.get", side_effect=AsstesHelper.mock_request)
     def test_with_internal_server_error(self, make_request):
-        """To Test the get assets by ID with internalServerError."""
+        """To test the get assets by ID with internalServerError."""
         action_params = {"filter": "internalServerError"}
         with self.assertRaises(PluginException):
             self.action.run(action_params)

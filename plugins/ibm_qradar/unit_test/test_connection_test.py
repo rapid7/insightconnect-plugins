@@ -16,7 +16,7 @@ class TestConnection(TestCase):
         cls.default_connection = Connection()
 
     def test_integration_connection_test(self):
-        """To Test the integration connection with qradar."""
+        """To test the integration connection with qradar."""
         params = {
             "host_url": "http://hostname",
             "credentials": {"username": "user1", "password": "password"},

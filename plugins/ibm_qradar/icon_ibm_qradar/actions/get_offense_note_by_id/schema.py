@@ -64,7 +64,7 @@ class GetOffenseNoteByIdOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "data": {
       "$ref": "#/definitions/note",
-      "title": "Offense Notes by Id",
+      "title": "Offense Notes by ID",
       "description": "JSON data of the Offense Notes for given ID",
       "order": 1
     }

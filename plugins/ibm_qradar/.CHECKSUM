@@ -1,5 +1,5 @@
 {
-	"spec": "7052502b727814a21af2d65867dd9ceb",
+	"spec": "71c0a22659faf8170af8594b11bf3485",
 	"manifest": "fe58af56b34a32f85c4a3bbf27c6933f",
 	"setup": "63a999082656b97912a37e91c2d07689",
 	"schemas": [
@@ -25,7 +25,7 @@
 		},
 		{
 			"identifier": "get_offense_note_by_id/schema.py",
-			"hash": "4d7391a3a7b9de874a8511130f6fc780"
+			"hash": "c00d4b488663bb9c70edefbe38000c11"
 		},
 		{
 			"identifier": "get_offenses/schema.py",
