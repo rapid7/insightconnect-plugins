@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Edit an existing object"
+    DESCRIPTION = "Edit an existing object. This action uses Panorama"
 
 
 class Input:
