@@ -172,12 +172,10 @@ class IntSightsAPI:
                 return {}
 
             json_response = response.json()
-
             if json_response.get("Status") == "Invalid":
                 raise PluginException(
                     cause="IntSights returned an error response: ", assistance=f"{json_response.get('FailedReason')}."
                 )
-
             return json_response
         except json.decoder.JSONDecodeError as e:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
@@ -194,9 +192,7 @@ class IntSightsAPI:
                 auth=HTTPBasicAuth(self.account_id, self.api_key),
             )
 
-            if response.status_code == 401:
-                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
-            if response.status_code == 403:
+            if response.status_code in [401, 403]:
                 raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
             if response.status_code == 404:
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)

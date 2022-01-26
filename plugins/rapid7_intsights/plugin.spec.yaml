@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_intsights
 title: Rapid7 IntSights
 description: Rapid7 IntSights is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
-version: 2.0.0
+version: 3.0.0
 supported_versions: ["2.4.0"]
 vendor: rapid7
 support: rapid7
@@ -55,7 +55,7 @@ types:
       title: URL
       description: URL
       type: string
-      required: true
+      required: false
     Email:
       title: Email
       description: Email
@@ -133,6 +133,17 @@ types:
       description: Related IOCs
       type: "[]string"
       required: false
+  asset:
+    Type:
+      title: Type
+      description: Asset type
+      type: string
+      required: true
+    Value:
+      title: Value
+      description: Asset value
+      type: string
+      required: true
   range:
     VersionEndExcluding:
       title: Version End Excluding
@@ -590,7 +601,7 @@ actions:
       assets:
         title: Assets
         description: List of assets
-        type: "[]string"
+        type: "[]asset"
         required: true
       assignees:
         title: Assignees
