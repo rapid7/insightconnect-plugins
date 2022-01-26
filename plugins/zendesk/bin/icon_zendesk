@@ -23,7 +23,7 @@ def main():
             monkey.patch_all()
 
     import insightconnect_plugin_runtime
-    from komand_zendesk import connection, actions, triggers
+    from icon_zendesk import connection, actions, triggers
 
     class ICONZendesk(insightconnect_plugin_runtime.Plugin):
         def __init__(self):

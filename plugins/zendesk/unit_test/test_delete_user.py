@@ -1,6 +1,6 @@
 from unittest import TestCase
-from komand_zendesk.actions.delete_user import DeleteUser
-from komand_zendesk.actions.delete_user.schema import Input, Output
+from icon_zendesk.actions.delete_user import DeleteUser
+from icon_zendesk.actions.delete_user.schema import Input, Output
 from unittest.mock import patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException

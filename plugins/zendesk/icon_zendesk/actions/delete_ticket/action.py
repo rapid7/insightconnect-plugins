@@ -19,7 +19,7 @@ class DeleteTicket(insightconnect_plugin_runtime.Action):
         try:
             client = self.connection.client
             ticket = client.tickets(id=params.get(Input.TICKET_ID))
-            deleted = client.tickets.delete(ticket)
+            client.tickets.delete(ticket)
             return {Output.STATUS: True}
         except zenpy.lib.exception.APIException as e:
             self.logger.debug(e)
@@ -29,5 +29,5 @@ class DeleteTicket(insightconnect_plugin_runtime.Action):
         try:
             test = self.connection.client.users.me().email
             return {"success": test}
-        except:
+        except:     # pylint: disable=try-except-raise
             raise

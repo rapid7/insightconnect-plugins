@@ -1,6 +1,6 @@
 from unittest import TestCase
-from komand_zendesk.actions.update_ticket import UpdateTicket
-from komand_zendesk.actions.update_ticket.schema import Input, Output
+from icon_zendesk.actions.update_ticket import UpdateTicket
+from icon_zendesk.actions.update_ticket.schema import Input, Output
 from unittest.mock import patch
 
 from util import Util

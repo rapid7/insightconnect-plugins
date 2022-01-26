@@ -1,6 +1,6 @@
 # from unittest import TestCase
-# from komand_zendesk.actions.delete_membership import DeleteMembership
-# from komand_zendesk.actions.delete_membership.schema import Input, Output
+# from icon_zendesk.actions.delete_membership import DeleteMembership
+# from icon_zendesk.actions.delete_membership.schema import Input, Output
 # from unittest.mock import patch
 
 # from util import Util

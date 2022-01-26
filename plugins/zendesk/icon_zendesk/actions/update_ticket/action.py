@@ -103,8 +103,8 @@ class UpdateTicket(insightconnect_plugin_runtime.Action):
         # I believe this section is for filling out blank properties that ARE blank in the ticket but we need to
         # then conform to our schema still (e.g. None is not string errors)
         output = dict(UpdateTicketOutput().schema)["definitions"]["ticket"]["properties"]
-        for key in ticket_obj:
-            if ticket_obj[key] == None:
+        for key in ticket_obj:  # pylint: disable=consider-using-dict-items
+            if ticket_obj[key] is None:
                 if key in output.keys():
                     if output[key]["type"] == "string":
                         ticket_obj[key] = ""
