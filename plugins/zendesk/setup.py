@@ -10,5 +10,5 @@ setup(name="zendesk-rapid7-plugin",
       url="",
       packages=find_packages(),
       install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_zendesk']
+      scripts=['bin/icon_zendesk']
       )
