@@ -27,7 +27,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|False|Zendesk API key|None|A6yLhgioJiF2wOP1omP9sTa5yWSTvucx2U7yg67u|
-|credentials|credential_username_password|None|True|Email and password|None|{"username": "https://example.com", "password": "password"}|
+|credentials|credential_username_password|None|True|Email and password|None|{"username": "user@example.com", "password": "password"}|
 |subdomain|string|None|True|Zendesk subdomain|None|example-subdomain|
 
 Example input:
@@ -35,7 +35,10 @@ Example input:
 ```
 {
   "api_key": "A6yLhgioJiF2wOP1omP9sTa5yWSTvucx2U7yg67u",
-  "credentials": "{\"username\": \"user@example.com\", \"password\": \"password\"}",
+  "credentials": {
+    "username": "user@example.com",
+    "password": "password"
+  },
   "subdomain": "example-subdomain"
 }
 ```
@@ -342,7 +345,7 @@ This action is used to create a ticket.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |assignee_id|integer|None|False|Assignee ID|None|361738647591|
-|attachment|file|None|False|Optional file attachment|None|{"content": "Sample Content", "filename": "https://example.com"}|
+|attachment|file|None|False|Optional file attachment|None|{"content": "Sample Content", "filename": "sample_file.txt"}|
 |collaborator_ids|[]integer|None|False|List of collaborator IDs|None|[361738647591, 361738647672]|
 |description|string|None|True|Ticket description|None|Example description|
 |due_at|date|None|False|Time ticket is due|None|2021-04-10T12:00:00Z|
@@ -362,7 +365,10 @@ Example input:
 ```
 {
   "assignee_id": 361738647591,
-  "attachment": "{\"content\": \"Sample Content\", \"filename\": \"sample_file.txt\"}",
+  "attachment": {
+    "content": "Sample Content",
+    "filename": "sample_file.txt"
+  },
   "collaborator_ids": [
     361738647591,
     361738647672
@@ -464,7 +470,12 @@ Example input:
     361738647591,
     361738647672
   ],
-  "comment": "{\"author_id\": 361738647591,\"body\": \"Test comment\",\"html_body\": \"\u003cu\u003eTest Underlined comment\u003c/u\u003e\",\"public\": true}",
+  "comment": {
+    "author_id": "361738647591",
+    "body": "Test comment",
+    "html_body": "<u>Test Underlined comment</u>",
+    "public": true
+  },
   "due_at": "2021-04-10T12:00:00Z",
   "external_id": 10,
   "group_id": 1400012453812,
