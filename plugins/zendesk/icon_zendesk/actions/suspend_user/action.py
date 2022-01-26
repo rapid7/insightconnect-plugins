@@ -33,5 +33,5 @@ class SuspendUser(insightconnect_plugin_runtime.Action):
         try:
             test = self.connection.client.users.me().email
             return {"success": test}
-        except:
+        except Exception:   # pylint: disable=try-except-raise
             raise

@@ -5,8 +5,8 @@ from types import SimpleNamespace
 from zenpy.lib.api_objects import Comment, Ticket, User
 import zenpy
 
-from komand_zendesk.connection import Connection
-from komand_zendesk.connection.schema import Input
+from icon_zendesk.connection import Connection
+from icon_zendesk.connection.schema import Input
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 

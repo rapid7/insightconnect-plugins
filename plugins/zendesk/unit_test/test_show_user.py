@@ -1,6 +1,6 @@
 from unittest import TestCase
-from komand_zendesk.actions.show_user import ShowUser
-from komand_zendesk.actions.show_user.schema import Input, Output
+from icon_zendesk.actions.show_user import ShowUser
+from icon_zendesk.actions.show_user.schema import Input, Output
 from unittest.mock import patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
