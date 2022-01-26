@@ -101,11 +101,11 @@ Example output:
       "organization_id": 360002530352,
       "phone": null,
       "photo": {
-        "url": "https://komand.zendesk.com/api/v2/attachments/360004125291.json",
+        "url": "https://organization.zendesk.com/api/v2/attachments/360004125291.json",
         "id": 360004125291,
         "file_name": "profile_image_360385011372_2206139.png",
-        "content_url": "https://komand.zendesk.com/system/photos/3600/0412/5291/profile_image_360385011372_2206139.png",
-        "mapped_content_url": "https://komand.zendesk.com/system/photos/3600/0412/5291/profile_image_360385011372_2206139.png",
+        "content_url": "https://organization.zendesk.com/system/photos/3600/0412/5291/profile_image_360385011372_2206139.png",
+        "mapped_content_url": "https://organization.zendesk.com/system/photos/3600/0412/5291/profile_image_360385011372_2206139.png",
         "content_type": "image/png",
         "size": 1141,
         "width": 80,
@@ -113,11 +113,11 @@ Example output:
         "inline": false,
         "thumbnails": [
           {
-            "url": "https://komand.zendesk.com/api/v2/attachments/360004125311.json",
+            "url": "https://organization.zendesk.com/api/v2/attachments/360004125311.json",
             "id": 360004125311,
             "file_name": "profile_image_360385011372_2206139_thumb.png",
-            "content_url": "https://komand.zendesk.com/system/photos/3600/0412/5291/profile_image_360385011372_2206139_thumb.png",
-            "mapped_content_url": "https://komand.zendesk.com/system/photos/3600/0412/5291/profile_image_360385011372_2206139_thumb.png",
+            "content_url": "https://organization.zendesk.com/system/photos/3600/0412/5291/profile_image_360385011372_2206139_thumb.png",
+            "mapped_content_url": "https://organization.zendesk.com/system/photos/3600/0412/5291/profile_image_360385011372_2206139_thumb.png",
             "content_type": "image/png",
             "size": 601,
             "width": 32,
@@ -137,7 +137,7 @@ Example output:
       "time_zone": "Bogota",
       "two_factor_auth_enabled": null,
       "updated_at": "2018-05-25T12:27:20Z",
-      "url": "https://komand.zendesk.com/api/v2/users/360385011372.json",
+      "url": "https://organization.zendesk.com/api/v2/users/360385011372.json",
       "verified": true
     }
   ]
