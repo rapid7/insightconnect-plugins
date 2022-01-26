@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get candidate configuration. This action works with Panorama"
+    DESCRIPTION = "Get candidate configuration. This action uses Panorama"
 
 
 class Input:

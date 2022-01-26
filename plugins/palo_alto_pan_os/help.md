@@ -1095,7 +1095,7 @@ Action connection type
 
 # Version History
 
-* 6.1.4 - Add information to every action is it work with Panorama or direct firewall connection
+* 6.1.4 - Add information to every action on whether it uses Panorama or a direct firewall connection
 * 6.1.3 - Fix `check_if_private` method in Set Address Object action | Improve `determine_address_type` method in Set Address Object action | Fix issue where Add External Dynamic List action fails when `repeat` input has been set to retrieve updates from list weekly | Add example for `filter` input for Retrieve Logs action
 * 6.1.2 - Add `docs_url` in plugin spec | Update `source_url` in plugin spec
 * 6.1.1 - Remove duplicate Troubleshooting section in documentation

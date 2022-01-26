@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get a policy by name. This action works with a direct connection to the firewall"
+    DESCRIPTION = "Get a policy by name. This action uses a direct connection to the firewall"
 
 
 class Input:

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get addresses from an address group. This action works with a direct connection to the firewall"
+    DESCRIPTION = "Get addresses from an address group. This action uses a direct connection to the firewall"
 
 
 class Input:
