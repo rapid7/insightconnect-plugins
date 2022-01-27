@@ -18,4 +18,4 @@ class DDelete(insightconnect_plugin_runtime.Action):
         dl_id = params.get(Input.DESTINATIONLISTID)
         payload = params.get(Input.PAYLOAD)
 
-        return self.connection.client.delete_destinations(destination_list_id=dl_id, data=payload)
+        return {Output.SUCCESS: self.connection.client.delete_destinations(destination_list_id=dl_id, data=payload)}
