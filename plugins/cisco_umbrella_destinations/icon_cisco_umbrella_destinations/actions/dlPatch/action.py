@@ -18,4 +18,8 @@ class DlPatch(insightconnect_plugin_runtime.Action):
         destination_list_id = params.get(Input.DESTINATIONLISTID)
         data = {"name": params.get(Input.LABEL)}
 
-        return {Output.SUCCESS: self.connection.client.update_destination_list(destination_list_id=destination_list_id, data=data)}
+        return {
+            Output.SUCCESS: self.connection.client.update_destination_list(
+                destination_list_id=destination_list_id, data=data
+            )
+        }

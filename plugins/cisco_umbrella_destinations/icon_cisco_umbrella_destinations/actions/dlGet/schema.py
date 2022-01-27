@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Return a destination list"
+    DESCRIPTION = "Get a destination list"
 
 
 class Input:
@@ -62,14 +62,14 @@ class DlGetOutput(insightconnect_plugin_runtime.Output):
         "access": {
           "type": "string",
           "title": "Access",
-          "description": "Access can be allow or block. It defines destinationList type.",
+          "description": "Can be allow or block",
           "order": 3
         },
         "createdAt": {
           "type": "string",
           "title": "Created At",
           "displayType": "date",
-          "description": "Timestamp for CreatedAt",
+          "description": "Timestamp for creation of the destination list",
           "format": "date-time",
           "order": 7
         },
@@ -82,34 +82,34 @@ class DlGetOutput(insightconnect_plugin_runtime.Output):
         "isGlobal": {
           "type": "boolean",
           "title": "Is Global",
-          "description": "IsGlobal can be true or false. There is only one default destination list of type allow or block for an organization.",
+          "description": "Boolean value indicating global state",
           "order": 4
         },
         "isMspDefault": {
           "type": "boolean",
           "title": "Is MSP Default",
-          "description": "Boolean for isMspDefault",
+          "description": "Whether or not MSP is default",
           "order": 9
+        },
+        "label": {
+          "type": "string",
+          "title": "Label",
+          "description": "Title for the destination list",
+          "order": 5
         },
         "markedForDeletion": {
           "type": "boolean",
           "title": "Marked For Deletion",
-          "description": "None",
+          "description": "Whether or not destination list is marked for deletion",
           "order": 10
         },
         "modifiedAt": {
           "type": "string",
           "title": "Modified At",
           "displayType": "date",
-          "description": "Timestamp for ModifiedAt",
+          "description": "Timestamp for modification of the destination list",
           "format": "date-time",
           "order": 8
-        },
-        "name": {
-          "type": "string",
-          "title": "Name",
-          "description": "Name of the DL list",
-          "order": 5
         },
         "organizationId": {
           "type": "integer",
