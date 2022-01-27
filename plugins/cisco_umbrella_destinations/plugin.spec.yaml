@@ -76,185 +76,11 @@ types:
       description: Information about the destination
       example: Suspicious domain
       required: false
-  dResponse:
-    id:
-      title: ID
-      description: Unique ID of the destination list
-      example: 1234
-      type: integer
-      required: false
-    organizationId:
-      title: Organization ID
-      description: ID of organization
-      example: 1234567
-      type: integer
-      required: false
-    access:
-      title: Access
-      description: Can be allow or block
-      example: allow
-      type: string
-      required: false
-    isGlobal:
-      title: Is Global
-      description: Boolean value indicating global state
-      example: true
-      type: boolean
-      required: false
-    label:
-      title: Label
-      description: Title for the destination list
-      example: New list
-      type: string
-      required: false
-    thirdpartyCategoryId:
-      title: Third Party Category ID
-      description: ID, if any, for third parties
-      example: 1
-      type: integer
-      required: false
-    createdAt:
-      title: Created At
-      description: Timestamp for creation of the destination list
-      example: 2018-07-23 19:36:45
-      type: date
-      required: false
-    modifiedAt:
-      title: Modified At
-      description: Timestamp for modification of the destination list
-      example: 2018-07-23 19:36:45
-      type: date
-      required: false
-    isMspDefault:
-      title: Is MSP Default
-      description: Whether or not MSP is default
-      example: false
-      type: boolean
-      required: false
-    markedForDeletion:
-      title: Marked For Deletion
-      description: Whether or not destination list is marked for deletion
-      example: false
-      type: boolean
-      required: false
-    meta:
-      title: Meta Data
-      description: Secondary information
-      type: meta
-      required: false
   dlCollection:
     id:
       title: ID
       description: Unique ID of the destination list
       type: integer
-      required: false
-    organizationId:
-      title: Organization ID
-      description: ID of organization
-      example: 1234567
-      type: integer
-      required: false
-    access:
-      title: Access
-      description: Can be allow or block
-      example: allow
-      type: string
-      required: false
-    isGlobal:
-      title: Is Global
-      description: Boolean value indicating global state
-      example: true
-      type: boolean
-      required: false
-    label:
-      title: Label
-      description: Title for the destination list
-      example: New list
-      type: string
-      required: false
-    thirdpartyCategoryId:
-      title: Third Party Category ID
-      description: ID, if any, for third parties
-      example: 1
-      type: integer
-      required: false
-    createdAt:
-      title: Created At
-      description: Timestamp for creation of the destination list
-      example: 2018-07-23 19:36:45
-      type: date
-      required: false
-    modifiedAt:
-      title: Modified At
-      description: Timestamp for modification of the destination list
-      example: 2018-07-23 19:36:45
-      type: date
-      required: false
-    isMspDefault:
-      title: Is MSP Default
-      description: Whether or not MSP is default
-      example: false
-      type: boolean
-      required: false
-    markedForDeletion:
-      title: Marked For Deletion
-      description: Whether or not destination list is marked for deletion
-      example: false
-      type: boolean
-      required: false
-    meta:
-      title: Meta Data
-      description: Secondary information
-      type: meta
-      required: false
-  dlCreate:
-    access:
-      title: Access
-      description: Can be allow or block
-      example: allow
-      type: string
-      required: true
-    isGlobal:
-      title: Is Global
-      description: Boolean value indicating global state
-      example: true
-      type: boolean
-      required: true
-    label:
-      title: Label
-      description: Title for the destination list
-      example: New list
-      type: string
-      required: true
-    destinations:
-      title: Destinations
-      description: Values to add to new list
-      type: '[]destinations'
-      required: false
-  dlPatch:
-    label:
-      title: Label
-      description: Title for the destination list
-      example: New list
-      type: string
-      required: true
-  destinationsList:
-    destination:
-      title: Destination Name
-      description: Title for the destination list
-      type: string
-      required: true
-    comment:
-      title: Comment
-      description: Information about domain
-      type: string
-      required: false
-  dlEntity:
-    id:
-      title: ID
-      description: Unique ID of the destination list
-      type: integer
-      example: 123
       required: false
     organizationId:
       title: Organization ID
@@ -426,17 +252,34 @@ actions:
     title: Create Destination List
     description: Create a destination list
     input:
-      payload:
-        title: Payload
-        description: List of destinations
-        type: dlCreate
-        example: JSON Data for new list and all attributes
-        required: true
+      access:
+        title: Access
+        description: Can be allow or block
+        example: allow
+        type: string
+        required: false
+      isGlobal:
+        title: Is Global
+        description: Boolean value indicating global state
+        example: true
+        type: boolean
+        required: false
+      label:
+        title: Label
+        description: Title for the destination list
+        example: New list
+        type: string
+        required: false
+      destinations:
+        title: Destinations
+        description: Values to add to new list
+        type: '[]destinations'
+        required: false
     output:
       success:
         title: Success
         description: Successful returned value
-        type: dlEntity
+        type: dlCollection
         required: true
   dlPatch:
     title: Rename Destination List
@@ -448,17 +291,17 @@ actions:
         type: integer
         example: 12345678
         required: true
-      payload:
-        title: Payload
-        description: Value containing name to change to
-        example: Updated Name List
-        type: dlPatch
+      label:
+        title: Label
+        description: Title for the destination list
+        example: New list
+        type: string
         required: true
     output:
       success:
         title: Success
         description: Successful returned value
-        type: dlEntity
+        type: dlCollection
         required: true
   dlDelete:
     title: Delete Destination List
@@ -502,12 +345,6 @@ actions:
         type: integer
         example: 1234567
         required: true
-      limit:
-        title: Limit
-        description: Maximum number of destinations to display
-        type: integer
-        example: 10
-        required: false
     output:
       success:
         title: Success
@@ -524,17 +361,21 @@ actions:
         type: integer
         example: 12345678
         required: true
-      payload:
-        title: Payload
-        description: List of destinations
-        example: Destination URL or IP followed by a comment
-        type: '[]destinationsList'
+      destination:
+        title: Destination Name
+        description: Title for the destination list
+        type: string
         required: true
+      comment:
+        title: Comment
+        description: Information about domain
+        type: string
+        required: false
     output:
       success:
         title: Success
         description: Successful returned value
-        type: dResponse
+        type: dlCollection
         required: true
   dDelete:
     title: Delete Destinations
@@ -555,7 +396,7 @@ actions:
     output:
       success:
         title: Success
-        description: Boolean value indicating a successful API call
+        description: Updated destination list
         example: true
-        type: boolean
+        type: dlCollection
         required: true
