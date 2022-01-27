@@ -9,15 +9,14 @@ class Component:
 
 class Input:
     AQL = "aql"
-
+    
 
 class Output:
     DATA = "data"
-
+    
 
 class StartArielSearchInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -33,16 +32,14 @@ class StartArielSearchInput(insightconnect_plugin_runtime.Input):
     "aql"
   ]
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class StartArielSearchOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -254,8 +251,7 @@ class StartArielSearchOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

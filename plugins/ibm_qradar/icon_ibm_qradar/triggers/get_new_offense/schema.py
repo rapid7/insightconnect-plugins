@@ -8,22 +8,21 @@ class Component:
 
 
 class Input:
-
+    
     FIELDS = "fields"
     FILTER = "filter"
     INTERVAL = "interval"
     RANGE = "range"
     SORT = "sort"
-
+    
 
 class Output:
-
+    
     DATA = "data"
-
+    
 
 class GetNewOffenseInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -64,16 +63,14 @@ class GetNewOffenseInput(insightconnect_plugin_runtime.Input):
     "interval"
   ]
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class GetNewOffenseOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -441,8 +438,7 @@ class GetNewOffenseOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
