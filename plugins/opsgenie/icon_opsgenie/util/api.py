@@ -17,20 +17,20 @@ class ApiClient:
         self.validator.validate(data)
         return self._call_api("POST", CREATE_ALERT_URL, json_data=data)
 
-    def get_alert(self, id: str, id_type: str = "ID") -> dict:
-        GET_ALERT_URL = f"{self.api_url}alerts/{id}"
+    def get_alert(self, identifier: str, id_type: str = "ID") -> dict:
+        GET_ALERT_URL = f"{self.api_url}alerts/{identifier}"
         params = {"identifierType": id_type}
         return self._call_api("GET", GET_ALERT_URL, params=params)
 
-    def close_alert(self, id: str, id_type: str = "ID", data: dict = None) -> dict:
-        CLOSE_ALERT_URL = f"{self.api_url}alerts/{id}/close"
+    def close_alert(self, identifier: str, id_type: str = "ID", data: dict = None) -> dict:
+        CLOSE_ALERT_URL = f"{self.api_url}alerts/{identifier}/close"
         params = {"identifierType": id_type}
         if data:
             self.validator.validate(data)
         return self._call_api("POST", CLOSE_ALERT_URL, params=params, json_data=data)
 
-    def get_on_calls(self, id: str, id_type: str = "ID", flat: bool = False, date: str = None) -> dict:
-        GET_ON_CALLS_URL = f"{self.api_url}schedules/{id}/on-calls"
+    def get_on_calls(self, identifier: str, id_type: str = "ID", flat: bool = False, date: str = None) -> dict:
+        GET_ON_CALLS_URL = f"{self.api_url}schedules/{identifier}/on-calls"
         params = {"scheduleIdentifierType": id_type, "flat": flat}
         if date:
             params["date"] = date

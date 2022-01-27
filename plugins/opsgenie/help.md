@@ -196,7 +196,7 @@ Example output:
       "createdAt": "2017-03-21T20:32:52.353Z",
       "updatedAt": "2017-04-03T20:32:57.301Z",
       "source": "Isengard",
-      "owner": "example@opsgenie.com",
+      "owner": "user@example.com",
       "priority": "P5",
       "responders":[
         {
@@ -224,8 +224,8 @@ Example output:
       "report": {
           "ackTime": 15702,
           "closeTime": 60503,
-          "acknowledgedBy": "example@opsgenie.com",
-          "closedBy": "example@opsgenie.com"
+          "acknowledgedBy": "user@example.com",
+          "closedBy": "user@example.com"
       },
       "actions": ["Restart", "Ping"],
       "entity": "EC2",
@@ -313,12 +313,16 @@ Example output:
                       "onCallParticipants": [
                           {
                               "id": "balp7783-a9f1-40e3-940c-ffde45656054",
-                              "name": "user5@opsgenie.com",
+
+                              "name": "user@example.com",
+
                               "type": "user"
                           },
                           {
                               "id": "4falpb2e-348d-4b7c-b71b-149efb8361e4",
-                              "name": "user4@opsgenie.com",
+
+                              "name": "user@example.com",
+
                               "type": "user"
                           }
                       ],
