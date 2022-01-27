@@ -635,7 +635,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.0.0 - Add ability to select date format for Date Extractor and Extract All actions
+* 3.0.0 - Update to support date format for Date Extractor and Extract All actions
 * 2.3.1 - Support special character ! for URL Extractor action
 * 2.3.0 - Support extraction from binary files for all actions
 * 2.2.1 - Support domain extraction from encoded URL | Fix issue where subdomain removal did not work properly in some cases | Improve domain extraction by limiting the number of false positive results
