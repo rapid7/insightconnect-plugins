@@ -4,8 +4,7 @@ products: [insightconnect]
 name: cisco_umbrella_destinations
 title: Cisco Umbrella Destinations
 version: 1.0.0
-description: This plugin utilizes the Cisco Umbrella Destination Lists API to provide a consistent way to programmatically manage access to
-  network destinations, and you can block or allow a destination based on the policies applied to the identities within your organization
+description: Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization
 vendor: rapid7
 support: rapid7
 status: []
@@ -44,40 +43,43 @@ types:
   meta:
     destinationCount:
       type: integer
-      description: Total number of destinations in a destination list.
+      description: Total number of destinations in a destination list
       required: false
     domainCount:
       type: integer
-      description: Total number of domains in a destination list. Domains are part of total destinations in a destination lists.
+      description: Total number of domains in a destination list
       required: false
     urlCount:
       type: integer
-      description: Total number of URLs in a destination list. URLs are part of total destinations in a destination lists.
+      description: Total number of URLs in a destination list
       required: false
     ipv4Count:
       type: integer
-      description: Total number of IP's in a destination list. IP's are part of total destinations in destination lists.
+      description: Total number of IP's in a destination list
       required: false
   destinations:
     destination:
+      title: Label
       type: string
-      description: Destination can be DOMAIN, URL or IP
-      example: Domain Name
+      description: Destination name can be domain, URL or IP
+      example: www.example.com
       required: true
     type:
+      title: Type
       type: string
-      description: Type can be DOMAIN, URL, IPV4
-      example: 10.10.10.10 / google.com
+      description: Can be DOMAIN, URL, IPV4
+      example: 10.10.10.10 / www.example.com
       required: true
     comment:
+      title: Comment
       type: string
-      description: None
-      example: Added new destination list
+      description: Information about the destination
+      example: Suspicious domain
       required: false
   dResponse:
     id:
       title: ID
-      description: Unique ID of the destination list.
+      description: Unique ID of the destination list
       example: 1234
       type: integer
       required: false
@@ -89,20 +91,20 @@ types:
       required: false
     access:
       title: Access
-      description: Access can be allow or block. It defines destinationList type.
+      description: Can be allow or block
       example: allow
       type: string
       required: false
     isGlobal:
       title: Is Global
-      description: IsGlobal can be true or false. There is only one default destination list of type allow or block for an organization.
+      description: Boolean value indicating global state
       example: true
       type: boolean
       required: false
-    name:
-      title: Name
-      description: Name of the DL list
-      example: ABCList
+    label:
+      title: Label
+      description: Title for the destination list
+      example: New list
       type: string
       required: false
     thirdpartyCategoryId:
@@ -113,38 +115,37 @@ types:
       required: false
     createdAt:
       title: Created At
-      description: Timestamp for CreatedAt
+      description: Timestamp for creation of the destination list
       example: 2018-07-23 19:36:45
       type: date
       required: false
     modifiedAt:
       title: Modified At
-      description: Timestamp for ModifiedAt
+      description: Timestamp for modification of the destination list
       example: 2018-07-23 19:36:45
       type: date
       required: false
     isMspDefault:
       title: Is MSP Default
-      description: Boolean for isMspDefault
+      description: Whether or not MSP is default
       example: false
       type: boolean
       required: false
     markedForDeletion:
       title: Marked For Deletion
-      description: Boolean for markedForDeletion
+      description: Whether or not destination list is marked for deletion
       example: false
       type: boolean
       required: false
     meta:
       title: Meta Data
-      description: None
-      example: None
+      description: Secondary information
       type: meta
       required: false
   dlCollection:
     id:
       title: ID
-      description: Unique ID of the destination list.
+      description: Unique ID of the destination list
       type: integer
       required: false
     organizationId:
@@ -155,18 +156,20 @@ types:
       required: false
     access:
       title: Access
-      description: Access can be allow or block. It defines destinationList type.
+      description: Can be allow or block
       example: allow
       type: string
       required: false
     isGlobal:
       title: Is Global
-      description: IsGlobal can be true or false. There is only one default destination list of type allow or block for an organization.
+      description: Boolean value indicating global state
+      example: true
       type: boolean
       required: false
-    name:
-      title: Name
-      description: Name of the DL list
+    label:
+      title: Label
+      description: Title for the destination list
+      example: New list
       type: string
       required: false
     thirdpartyCategoryId:
@@ -177,77 +180,79 @@ types:
       required: false
     createdAt:
       title: Created At
-      description: Timestamp for CreatedAt
+      description: Timestamp for creation of the destination list
       example: 2018-07-23 19:36:45
       type: date
       required: false
     modifiedAt:
       title: Modified At
-      description: Timestamp for ModifiedAt
+      description: Timestamp for modification of the destination list
       example: 2018-07-23 19:36:45
       type: date
       required: false
     isMspDefault:
       title: Is MSP Default
-      description: Boolean for isMspDefault
+      description: Whether or not MSP is default
       example: false
       type: boolean
       required: false
     markedForDeletion:
       title: Marked For Deletion
-      description: None
+      description: Whether or not destination list is marked for deletion
       example: false
       type: boolean
       required: false
     meta:
       title: Meta Data
-      description: None
+      description: Secondary information
       type: meta
       required: false
   dlCreate:
     access:
-      name: Access
-      description: Access can be allow or block. It defines destinationList type.
+      title: Access
+      description: Can be allow or block
       example: allow
       type: string
       required: true
     isGlobal:
-      name: Is Global
-      description: IsGlobal can be true or false. There is only one default destination list of type allow or block for an organization.
+      title: Is Global
+      description: Boolean value indicating global state
+      example: true
       type: boolean
       required: true
-    name:
-      name: Name
-      description: None
-      example: New Destination list
+    label:
+      title: Label
+      description: Title for the destination list
+      example: New list
       type: string
       required: true
     destinations:
-      name: Destinations
-      description: Destinations to add to new list
+      title: Destinations
+      description: Values to add to new list
       type: '[]destinations'
       required: false
   dlPatch:
-    name:
-      name: Name
-      description: Name of the destination list
+    label:
+      title: Label
+      description: Title for the destination list
+      example: New list
       type: string
       required: true
   destinationsList:
     destination:
-      name: Destination Name
-      description: Name of the destination
+      title: Destination Name
+      description: Title for the destination list
       type: string
       required: true
     comment:
-      name: Comment
-      description: Comment for the destination
+      title: Comment
+      description: Information about domain
       type: string
       required: false
   dlEntity:
     id:
       title: ID
-      description: Unique ID of the destination list.
+      description: Unique ID of the destination list
       type: integer
       example: 123
       required: false
@@ -259,19 +264,20 @@ types:
       required: false
     access:
       title: Access
-      description: Access can be allow or block. It defines destinationList type.
+      description: Can be allow or block
       example: allow
       type: string
       required: false
     isGlobal:
       title: Is Global
-      description: IsGlobal can be true or false. There is only one default destination list of type allow or block for an organization.
+      description: Boolean value indicating global state
       example: true
       type: boolean
       required: false
-    name:
-      title: Name
-      description: Name of the DL list
+    label:
+      title: Label
+      description: Title for the destination list
+      example: New list
       type: string
       required: false
     thirdpartyCategoryId:
@@ -282,31 +288,31 @@ types:
       required: false
     createdAt:
       title: Created At
-      description: Timestamp for CreatedAt
+      description: Timestamp for creation of the destination list
       example: 2018-07-23 19:36:45
       type: date
       required: false
     modifiedAt:
       title: Modified At
-      description: Timestamp for ModifiedAt
+      description: Timestamp for modification of the destination list
       example: 2018-07-23 19:36:45
       type: date
       required: false
     isMspDefault:
       title: Is MSP Default
-      description: Boolean for isMspDefault
+      description: Whether or not MSP is default
       example: false
       type: boolean
       required: false
     markedForDeletion:
       title: Marked For Deletion
-      description: None
+      description: Whether or not destination list is marked for deletion
       example: false
       type: boolean
       required: false
     meta:
       title: Meta Data
-      description: None
+      description: Secondary information
       type: meta
       required: false
   destinationList:
@@ -323,18 +329,20 @@ types:
       required: false
     access:
       title: Access
-      description: Access can be allow or block. It defines destinationList type.
+      description: Can be allow or block
       example: allow
       type: string
       required: false
     isGlobal:
       title: Is Global
-      description: IsGlobal can be true or false. There is only one default destination list of type allow or block for an organization.
+      description: Boolean value indicating global state
+      example: true
       type: boolean
       required: false
-    name:
-      title: Name
-      description: Name of the DL list
+    label:
+      title: Label
+      description: Title for the destination list
+      example: New list
       type: string
       required: false
     thirdpartyCategoryId:
@@ -345,63 +353,68 @@ types:
       required: false
     createdAt:
       title: Created At
-      description: Timestamp for CreatedAt
+      description: Timestamp for creation of the destination list
       example: 2018-07-23 19:36:45
       type: date
       required: false
     modifiedAt:
       title: Modified At
-      description: Timestamp for ModifiedAt
+      description: Timestamp for modification of the destination list
       example: 2018-07-23 19:36:45
       type: date
       required: false
     isMspDefault:
       title: Is MSP Default
-      description: Boolean for isMspDefault
+      description: Whether or not MSP is default
       example: false
       type: boolean
       required: false
     markedForDeletion:
       title: Marked For Deletion
-      description: None
+      description: Whether or not destination list is marked for deletion
       example: false
       type: boolean
       required: false
   destinationsEntity:
     id:
-      name: ID
+      title: ID
       description: Unique ID of the destination
+      example: 1234
       type: string
       required: false
     destination:
-      name: Destination
-      description: Destination can be DOMAIN, URL, IP
+      title: Destination
+      description: Destination can be DOMAIN, URL or IP
+      example: www.example.com
       type: string
       required: false
     typeOf:
-      name: Type
-      description: Type can be DOMAIN, URL, IPV4
+      title: Type
+      description: Type can be DOMAIN, URL or IPV4
+      example: Domain
       type: string
       required: false
     comment:
-      name: Comment
-      description: None
+      title: Comment
+      description: Information about domain
+      example: Suspicious domain
       type: string
       required: false
     createdAt:
-      name: Created At
-      description: Date and time it has been created at
+      title: Created At
+      description: Timestamp for creation of entity
       example: 2018-07-23 19:36:45
       type: date
+      required: false
   dlDelete:
     delete:
-      name: Delete
+      title: Delete
       description: Delete
       type: object
       required: false
 actions:
   dlGetAll:
-    title: Destinations List GET (All)
+    title: Get All Destination Lists
     description: Retrieve all destination lists of organization
     output:
       success:
@@ -410,7 +423,7 @@ actions:
         type: dlCollection
         required: true
   dlCreate:
-    title: Destination Lists POST
+    title: Create Destination List
     description: Create a destination list
     input:
       payload:
@@ -426,7 +439,7 @@ actions:
         type: dlEntity
         required: true
   dlPatch:
-    title: Destination Lists PATCH
+    title: Rename Destination List
     description: Rename a destination list
     input:
       destinationListId:
@@ -448,7 +461,7 @@ actions:
         type: dlEntity
         required: true
   dlDelete:
-    title: Destination Lists DELETE
+    title: Delete Destination List
     description: Delete a destination list
     input:
       destinationListId:
@@ -464,8 +477,8 @@ actions:
         type: dlDelete
         required: true
   dlGet:
-    title: Destination List GET
-    description: Return a destination list
+    title: Get Destination List
+    description: Get a destination list
     input:
       destinationListId:
         title: Destination List ID
@@ -480,7 +493,7 @@ actions:
         type: destinationList
         required: true
   dGet:
-    title: Destination GET
+    title: Get Destinations
     description: Get list of destinations related to destination list
     input:
       destinationListId:
@@ -489,17 +502,11 @@ actions:
         type: integer
         example: 1234567
         required: true
-      page:
-        title: Page
-        description: Pagination
-        type: integer
-        example: 1
-        required: false
       limit:
         title: Limit
-        description: Limit for page
+        description: Maximum number of destinations to display
         type: integer
-        example: 500
+        example: 10
         required: false
     output:
       success:
@@ -508,8 +515,8 @@ actions:
         type: destinationsEntity
         required: true
   dAdd:
-    title: Destination POST
-    description: Add list of destinations to destination list
+    title: Add Destinations to Destination List
+    description: Add a list of destinations to a destination list
     input:
       destinationListId:
         title: Destination List ID
@@ -530,8 +537,8 @@ actions:
         type: dResponse
         required: true
   dDelete:
-    title: Destination DELETE
-    description: Delete list of destinations from destination list
+    title: Delete Destinations
+    description: Delete a list of destinations from a destination list
     input:
       destinationListId:
         title: Destination List ID
@@ -544,4 +551,11 @@ actions:
         description: List of destinations
         example: 1241, 67
         type: '[]integer'
+        required: true
+    output:
+      success:
+        title: Success
+        description: Boolean value indicating a successful API call
+        example: true
+        type: boolean
         required: true
