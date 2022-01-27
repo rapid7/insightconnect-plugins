@@ -14,7 +14,13 @@ class DlCreate(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        payload = params.get(Input.PAYLOAD)
-        result = self.connection.client.create_destination_list(data=payload)
+        data = {
+            "access": params.get(Input.ACCESS),
+            "isGlobal": params.get(Input.ISGLOBAL),
+            "name": params.get(Input.LABEL),
+            "destinations": params.get(Input.DESTINATIONS)
+        }
+        result = self.connection.client.create_destination_list(data=data)
         newResult = {k: v for k, v in result.items() if v is not None}
+
         return {Output.SUCCESS: newResult}
