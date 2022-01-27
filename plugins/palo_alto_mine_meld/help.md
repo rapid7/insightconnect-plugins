@@ -11,6 +11,10 @@
 * Username and password
 * Base URL for Palo Alto MineMeld
 
+# Supported Product Versions
+
+* 0.9.70
+
 # Documentation
 
 ## Setup
@@ -49,14 +53,14 @@ This action is used to add and remove IP addresses and domains to/from an extern
 |----|----|-------|--------|-----------|----|-------|
 |indicator|string|None|True|Indicator type which is IP address, domain name, or URL|None|198.51.100.100|
 |list_name|string|None|True|Name of the dynamic list|None|example_list_name|
-|operation|string|Add|False|Choose operation to add or remove indicator|['Add', 'Remove']|None|
+|operation|string|Add|False|Choose operation to add or remove indicator|['Add', 'Remove']|Add|
 
 Example input:
 
 ```
 {
   "indicator": "198.51.100.100",
-  "list_name": "example_list_name"
+  "list_name": "example_list_name",
   "operation": "Add"
 }
 ```
@@ -89,6 +93,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.1 - Improve error messaging
 * 1.0.0 - Initial plugin
 
 # Links

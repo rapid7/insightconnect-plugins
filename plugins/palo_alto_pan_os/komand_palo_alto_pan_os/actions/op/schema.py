@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Runs operational command"
+    DESCRIPTION = "Runs operational command. This action uses a direct connection to the firewall"
 
 
 class Input:

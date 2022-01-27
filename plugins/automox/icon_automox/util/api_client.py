@@ -1,0 +1,319 @@
+from insightconnect_plugin_runtime.exceptions import PluginException
+import io
+import json
+import requests
+from typing import Dict, List, Optional, Collection
+
+
+class ApiClient:
+    VERSION = "0.1.0"
+    PAGE_SIZE = 500
+
+    def __init__(self, logger, api_key, endpoint="https://console.automox.com/api"):
+        self.endpoint = endpoint
+        self.api_key = api_key
+        self.session = requests.session()
+
+        # Define headers for client
+        self.set_headers()
+
+        # Define logger
+        self.logger = logger
+
+    def set_headers(self) -> None:
+        self.session.headers = {
+            "Authorization": "Bearer " + self.api_key,
+            "User-Agent": f"ax:automox-rapid7-insightconnect-plugin/{ApiClient.VERSION}",
+            "content-type": "application/json",
+        }
+
+    def _call_api(self, method: str, url: str, params: Dict = {}, json_data: object = None) -> Optional[dict]:
+        try:
+            response = self.session.request(method, url, json=json_data, params=params)
+
+            if response.status_code == 403:
+                raise PluginException(preset=PluginException.Preset.API_KEY)
+
+            if response.status_code == 404:
+                raise PluginException(preset=PluginException.Preset.NOT_FOUND)
+
+            if response.status_code == 204:
+                return
+
+            if 200 <= response.status_code < 300:
+                return response.json()
+
+            # Non-success and unknown
+            raise PluginException(
+                cause=f"An error occurred when making {method} request to {url}.",
+                assistance=f"Response code: {response.status_code}, Content: {response.text}.",
+            )
+        except json.decoder.JSONDecodeError as e:
+            self.logger.info(f"Invalid json: {e}")
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON)
+        except requests.exceptions.HTTPError as e:
+            self.logger.info(f"Call to Automox Console API failed: {e}")
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
+
+    def _page_results(self, url: str, init_params: Dict = {}, sanitize: bool = True) -> [dict]:
+        params = self.first_page(init_params)
+
+        page_resp = []
+
+        while True:
+            resp = self._call_api("get", url, params)
+            if sanitize:
+                resp = self.remove_null_values(resp)
+
+            page_resp.extend(resp)
+
+            self.logger.info(f"Page {params.get('page')} result count: {len(resp)}")
+
+            if len(resp) < self.PAGE_SIZE:
+                break
+
+            self.next_page(params)
+
+        return page_resp
+
+    def _page_results_data(self, url: str, init_params: Dict = {}) -> [dict]:
+        params = self.first_page(init_params)
+
+        page_resp = []
+
+        while True:
+            resp = self._call_api("get", url, params)
+            resp_data = self.remove_null_values(resp.get("data"))
+
+            page_resp.extend(resp_data)
+
+            self.logger.info(f"Page {params.get('page')} result count: {len(resp_data)}")
+
+            if len(resp_data) < self.PAGE_SIZE:
+                break
+
+            self.next_page(params)
+
+        return page_resp
+
+    # Remove Null from response to avoid type issues
+    def remove_null_values(self, d: Collection):
+        if isinstance(d, dict):
+            return dict((k, self.remove_null_values(v)) for k, v in d.items() if v and self.remove_null_values(v))
+        elif isinstance(d, list):
+            return [self.remove_null_values(v) for v in d if v and self.remove_null_values(v)]
+        else:
+            return d
+
+    @staticmethod
+    def _org_param(org_id: str) -> dict:
+        return {"o": org_id}
+
+    @staticmethod
+    def first_page(params: Dict = {}) -> None:
+        params.update({"limit": ApiClient.PAGE_SIZE, "page": 0})
+        return params
+
+    @staticmethod
+    def next_page(params: Dict) -> None:
+        params["page"] += 1
+
+    # Organizations
+    def get_orgs(self) -> Dict:
+        """
+        Retrieve Automox organizations
+        :return: Dict of organizations
+        """
+        return self._page_results(f"{self.endpoint}/orgs")
+
+    def get_org_users(self, org_id: int) -> Dict:
+        """
+        Retrieve Automox organization users
+        :param org_id: Organization ID
+        :return: Dict of users
+        """
+        return self._page_results(f"{self.endpoint}/users", self._org_param(org_id))
+
+    # Devices/Endpoints
+    def get_device(self, org_id: int, device_id: int) -> Dict:
+        return self._call_api("GET", f"{self.endpoint}/servers/{device_id}", params=self._org_param(org_id))
+
+    def find_device_by_attribute(self, org_id: int, attributes: List[str], value: str) -> dict:
+        params = self.first_page({"o": org_id})
+
+        while True:
+            devices = self._call_api("get", f"{self.endpoint}/servers", params)
+
+            for device in devices:
+                for attr in attributes:
+                    if isinstance(device[attr], str):
+                        if device[attr].casefold() == value.casefold():
+                            return self.remove_null_values(device)
+                    if isinstance(device[attr], list):
+                        if value.lower() in (v.upper() for v in device[attr]):
+                            return self.remove_null_values(device)
+
+            if len(devices) < self.PAGE_SIZE:
+                break
+
+            self.next_page(params)
+
+    def get_device_software(self, org_id: int, device_id: int) -> Dict:
+        return self._page_results(f"{self.endpoint}/servers/{device_id}/packages", self._org_param(org_id))
+
+    def get_devices(self, org_id: int, group_id: int) -> List[Dict]:
+        """
+        Retrieve Automox managed devices/endpoints
+        :param org_id: Organization ID
+        :param group_id: Group ID
+        :return: Dict of devices
+        """
+        params = {"o": org_id, "groupId": group_id}
+        return self._page_results(f"{self.endpoint}/servers", params)
+
+    def run_device_command(self, org_id: int, device_id: int, command: str) -> bool:
+        """
+        Run Command on Device
+        :param org_id: Organization ID
+        :param device_id: Device ID
+        :param command: Command to be run
+        :return: Boolean of outcome
+        """
+        return self._call_api(
+            "POST", f"{self.endpoint}/servers/{device_id}/queues", params=self._org_param(org_id), json_data=command
+        )
+
+    def update_device(self, org_id: int, device_id: int, payload: Dict) -> bool:
+        """
+        Update Device
+        :param org_id: Organization ID
+        :param device_id: Device ID
+        :param payload: Dict of parameters to update on device
+        :return: Boolean of outcome
+        """
+        return self._call_api(
+            "PUT", f"{self.endpoint}/servers/{device_id}", params=self._org_param(org_id), json_data=payload
+        )
+
+    def delete_device(self, org_id: int, device_id: int) -> bool:
+        """
+        Delete Device
+        :param org_id: Organization ID
+        :param device_id: Device ID
+        :return: Boolean of outcome
+        """
+        return self._call_api("DELETE", f"{self.endpoint}/servers/{device_id}", params=self._org_param(org_id))
+
+    # Policies
+    @staticmethod
+    def _sanitize_policies(policies: [dict]) -> List[Dict]:
+        for policy in policies:
+            for key, fields in {"configuration": ["evaluation_code", "installation_code", "remediation_code"]}.items():
+                if key in policy:
+                    for f in fields:
+                        try:
+                            del policy[key][f]
+                        except KeyError:
+                            pass
+        return policies
+
+    def get_policies(self, org_id: int) -> List[Dict]:
+        """
+        Retrieve Automox policies
+        :param org_id: Organization ID
+        :return: List of Policies
+        """
+        policies = self._page_results(f"{self.endpoint}/policies", self._org_param(org_id))
+        return self._sanitize_policies(policies)
+
+    # Device Groups
+    def get_group(self, org_id: int, group_id: int) -> Dict:
+        return self._call_api("GET", f"{self.endpoint}/servergroups/{group_id}", params=self._org_param(org_id))
+
+    def get_groups(self, org_id: int, sanitize: bool = True) -> List[Dict]:
+        """
+        Retrieve Automox groups
+        :param org_id: Organization ID
+        :param sanitize: Boolean defining whether null values should be removed
+        :return: List of Groups
+        """
+        return self._page_results(f"{self.endpoint}/servergroups", self._org_param(org_id), sanitize)
+
+    def create_group(self, org_id: int, payload: Dict) -> Dict:
+        """
+        Create Device group
+        :param org_id: Organization ID
+        :param payload: Dict of parameters to create group
+        :return: Dict of Group
+        """
+        return self._call_api(
+            "POST", f"{self.endpoint}/servergroups", params=self._org_param(org_id), json_data=payload
+        )
+
+    def update_group(self, org_id: int, group_id: int, payload: Dict) -> bool:
+        """
+        Update Device group
+        :param org_id: Organization ID
+        :param group_id: Group ID
+        :param payload: Dict of parameters to update on group
+        :return: Boolean of outcome
+        """
+        return self._call_api(
+            "PUT", f"{self.endpoint}/servergroups/{group_id}", params=self._org_param(org_id), json_data=payload
+        )
+
+    def delete_group(self, org_id: int, group_id: int) -> bool:
+        """
+        Delete Device group
+        :param org_id: Organization ID
+        :param group_id: Group ID
+        :return: Boolean of outcome
+        """
+        return self._call_api("DELETE", f"{self.endpoint}/servergroups/{group_id}", params=self._org_param(org_id))
+
+    # Vulnerability Sync
+    def upload_vulnerability_sync_file(self, org_id: int, file_content, filename, report_source) -> int:
+        with io.BytesIO(file_content) as file:
+            files = [("file", (filename, file, "text/csv"))]
+
+            headers = {"Authorization": f"Bearer {self.api_key}"}
+
+            try:
+                response = requests.post(
+                    f"{self.endpoint}/orgs/{org_id}/tasks/patch/batches/upload?source={report_source}",
+                    files=files,
+                    headers=headers,
+                )
+
+                if response.status_code == 200:
+                    return response.json().get("id")
+                else:
+                    raise PluginException(
+                        cause="Failed to upload file to Vulnerability Sync",
+                        assistance=f"Response code: {response.status_code}, Content: {response.content}",
+                    )
+            except Exception as e:
+                raise PluginException(
+                    cause="Failed to upload file to Vulnerability Sync",
+                    assistance=f"Review encoded CSV file and try again: {e}",
+                )
+
+    def get_vulnerability_sync_batches(self, org_id: int) -> List[Dict]:
+        return self._page_results_data(f"{self.endpoint}/orgs/{org_id}/tasks/batches")
+
+    def get_vulnerability_sync_batch(self, org_id: int, batch_id: int) -> Dict:
+        return self._call_api("GET", f"{self.endpoint}/orgs/{org_id}/tasks/batches/{batch_id}")
+
+    def update_vulnerability_sync_batch(self, org_id: int, batch_id: int, action: str) -> bool:
+        return self._call_api("POST", f"{self.endpoint}/orgs/{org_id}/tasks/batches/{batch_id}/{action}")
+
+    def get_vulnerability_sync_tasks(self, org_id: int, params: Dict) -> List[Dict]:
+        return self._page_results_data(f"{self.endpoint}/orgs/{org_id}/tasks", params)
+
+    def update_vulnerability_sync_task(self, org_id: int, task_id: int, action: str) -> bool:
+        return self._call_api("PATCH", f"{self.endpoint}/orgs/{org_id}/tasks/{task_id}", params={"action": action})
+
+    # Events
+    def get_events(self, org_id: int, event_type: str, page: int = 0) -> List[Dict]:
+        params = {"o": org_id, "eventName": event_type, "page": page, "limit": self.PAGE_SIZE}
+        return self.remove_null_values(self._call_api("GET", f"{self.endpoint}/events", params))

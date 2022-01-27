@@ -11,6 +11,10 @@
 
 * A Devo authentication token
 
+# Supported Product Versions
+
+* v7.8.0
+
 # Documentation
 
 ## Setup
@@ -112,7 +116,17 @@ This trigger is used to get new alerts.
 
 ##### Input
 
-_This trigger does not contain any inputs._
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|interval|integer|10|False|Interval time in seconds|None|5|
+
+Example input:
+
+```
+{
+  "interval": 5
+}
+```
 
 ##### Output
 
@@ -154,6 +168,7 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
+* 2.0.0 - Configuration for interval input parameter
 * 1.0.0 - Initial plugin
 
 # Links

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add an external dynamic list"
+    DESCRIPTION = "Add an external dynamic list. This action uses a direct connection to the firewall"
 
 
 class Input:

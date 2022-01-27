@@ -1,48 +1,215 @@
 import sys
 import os
+from unittest import TestCase
+from komand_palo_alto_pan_os.actions.set_address_object import SetAddressObject
+from komand_palo_alto_pan_os.actions.set_address_object.schema import Input, Output
+from unit_test.util import Util
+from unittest.mock import patch
+from parameterized import parameterized
+from komand.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-from komand_palo_alto_pan_os.connection.connection import Connection
-from komand_palo_alto_pan_os.actions.set_address_object import SetAddressObject
-import json
-import logging
 
-
+@patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
+@patch("requests.sessions.Session.post", side_effect=Util.mocked_requests)
 class TestSetAddressObject(TestCase):
-    def test_integration_set_address_object(self):
-        log = logging.getLogger("Test")
-        test_conn = Connection()
+    @parameterized.expand(
+        [
+            [
+                "domain",
+                "example.com",
+                "Domain",
+                "Test",
+                "test",
+                False,
+                [],
+                {"message": "command succeeded", "status": "success", "code": "20"},
+            ],
+            [
+                "domain_whitelisted",
+                "example.com",
+                "Domain Whitelisted",
+                "Test",
+                "test",
+                False,
+                ["example.com"],
+                {"message": "Address object matched whitelist.", "status": "error", "code": ""},
+            ],
+            [
+                "ipv4",
+                "198.51.100.1",
+                "IPv4",
+                "Test",
+                "test",
+                False,
+                [],
+                {"message": "command succeeded", "status": "success", "code": "20"},
+            ],
+            [
+                "ipv4_cidr",
+                "198.51.100.1/32",
+                "IPv4 CIDR",
+                "Test",
+                "test",
+                False,
+                [],
+                {"message": "command succeeded", "status": "success", "code": "20"},
+            ],
+            [
+                "ipv4_range",
+                "198.51.100.1-198.51.100.2",
+                "IPv4 Range",
+                "Test",
+                "test",
+                False,
+                [],
+                {"message": "command succeeded", "status": "success", "code": "20"},
+            ],
+            [
+                "ipv4_private",
+                "192.168.0.0",
+                "IPv4 Private",
+                "Test",
+                "test",
+                True,
+                [],
+                {"message": "Address object was RFC 1918 (private).", "status": "error", "code": ""},
+            ],
+            [
+                "ipv4_whitelisted",
+                "198.51.100.1",
+                "IPv4 Whitelisted",
+                "Test",
+                "test",
+                False,
+                ["198.51.100.1"],
+                {"message": "Address object matched whitelist.", "status": "error", "code": ""},
+            ],
+            [
+                "ipv6",
+                "abcd:123:4::1",
+                "IPv6",
+                "Test",
+                "test",
+                False,
+                [],
+                {"message": "command succeeded", "status": "success", "code": "20"},
+            ],
+            [
+                "ipv6_cidr",
+                "abcd:123:4::1/128",
+                "IPv6 CIDR",
+                "Test",
+                "test",
+                False,
+                [],
+                {"message": "command succeeded", "status": "success", "code": "20"},
+            ],
+            [
+                "ipv6_range",
+                "abcd:123:4::1-abcd:123:4::2",
+                "IPv6 Range",
+                "Test",
+                "test",
+                False,
+                [],
+                {"message": "command succeeded", "status": "success", "code": "20"},
+            ],
+            [
+                "ipv6_private",
+                "fd12:3456:789a:1::1",
+                "IPv6 Private",
+                "Test",
+                "test",
+                True,
+                [],
+                {"message": "Address object was RFC 1918 (private).", "status": "error", "code": ""},
+            ],
+            [
+                "ipv6_whitelisted",
+                "abcd:123:4::1",
+                "IPv6 Whitelisted",
+                "Test",
+                "test",
+                False,
+                ["abcd:123:4::1"],
+                {"message": "Address object matched whitelist.", "status": "error", "code": ""},
+            ],
+            [
+                "without_description_and_tags",
+                "example.com",
+                "Domain",
+                None,
+                None,
+                False,
+                [],
+                {"message": "command succeeded", "status": "success", "code": "20"},
+            ],
+        ]
+    )
+    def test_set_address_object(
+        self, mock_get, mock_post, name, address, address_object, description, tags, skip_rfc1918, whitelist, expected
+    ):
+        action = Util.default_connector(SetAddressObject())
+        actual = action.run(
+            {
+                Input.ADDRESS: address,
+                Input.ADDRESS_OBJECT: address_object,
+                Input.DESCRIPTION: description,
+                Input.TAGS: tags,
+                Input.SKIP_RFC1918: skip_rfc1918,
+                Input.WHITELIST: whitelist,
+            }
+        )
+        self.assertEqual(actual, expected)
+
+    @parameterized.expand(
+        [
+            [
+                "invalid_address",
+                "test",
+                "Invalid Address",
+                "Test",
+                "test",
+                False,
+                [],
+                "Unable to determine type for the given address: test.",
+                "Please provide a valid address.",
+            ],
+        ]
+    )
+    def test_set_address_object_bad(
+        self,
+        mock_get,
+        mock_post,
+        name,
+        address,
+        address_object,
+        description,
+        tags,
+        skip_rfc1918,
+        whitelist,
+        cause,
+        assistance,
+    ):
+        action = Util.default_connector(SetAddressObject())
+        with self.assertRaises(PluginException) as e:
+            action.run(
+                {
+                    Input.ADDRESS: address,
+                    Input.ADDRESS_OBJECT: address_object,
+                    Input.DESCRIPTION: description,
+                    Input.TAGS: tags,
+                    Input.SKIP_RFC1918: skip_rfc1918,
+                    Input.WHITELIST: whitelist,
+                }
+            )
+        self.assertEqual(e.exception.cause, cause)
+        self.assertEqual(e.exception.assistance, assistance)
+
+    def test_in_whitelist(self, mock_get, mock_post):
         test_action = SetAddressObject()
-
-        test_conn.logger = log
-        test_action.logger = log
-
-        try:
-            with open("../tests/set_address_object.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        self.assertIsNotNone(results)
-        self.assertEquals({"code": "20", "message": "command succeeded", "status": "success"}, results)
-
-    def test_in_whitelist(self):
-        test_action = SetAddressObject()
-        test_action.logger = logging.getLogger("test")
 
         self.assertTrue(test_action.match_whitelist("1.1.1.1", ["1.1.1.1/32"], "ip-netmask"))
         self.assertTrue(test_action.match_whitelist("1.1.1.1/32", ["1.1.1.1/32"], "ip-netmask"))
@@ -59,35 +226,31 @@ class TestSetAddressObject(TestCase):
         self.assertTrue(test_action.match_whitelist("1.1.1.1", ["1.1.1.1"], "ip-range"))
         self.assertFalse(test_action.match_whitelist("1.1.1.1/24", ["1.1.1.1"], "ip-range"))
 
-    def test_cidr_vs_cidr_in_whitelis(self):
+    def test_cidr_vs_cidr_in_whitelist(self, mock_get, mock_post):
         test_action = SetAddressObject()
-        test_action.logger = logging.getLogger("test")
 
         self.assertTrue(test_action.match_whitelist("1.1.1.1/24", ["1.1.1.1", "1.1.1.1/24"], "ip-netmask"))
         self.assertTrue(test_action.match_whitelist("1.1.1.1", ["1.1.1.1/24"], "ip-netmask"))
         self.assertFalse(test_action.match_whitelist("1.1.1.1/24", ["1.1.1.1", "1.1.1.1/32"], "ip-netmask"))
 
-    def test_get_address_type(self):
+    def test_get_address_type(self, mock_get, mock_post):
         test_action = SetAddressObject()
-        test_action.logger = logging.getLogger("test")
 
-        self.assertEquals(test_action.determine_address_type("1.1.1.1"), "ip-netmask")
-        self.assertEquals(test_action.determine_address_type("1.1.1.1/32"), "ip-netmask")
-        self.assertEquals(test_action.determine_address_type("www.google.com"), "fqdn")
-        self.assertEquals(test_action.determine_address_type("10.1.1.1-10.1.1.255"), "ip-range")
-        self.assertEquals(test_action.determine_address_type("1:2:3:4:5:6:7:8"), "ip-netmask")
-        self.assertEquals(
+        self.assertEqual(test_action.determine_address_type("1.1.1.1"), "ip-netmask")
+        self.assertEqual(test_action.determine_address_type("1.1.1.1/32"), "ip-netmask")
+        self.assertEqual(test_action.determine_address_type("www.google.com"), "fqdn")
+        self.assertEqual(test_action.determine_address_type("10.1.1.1-10.1.1.255"), "ip-range")
+        self.assertEqual(test_action.determine_address_type("1:2:3:4:5:6:7:8"), "ip-netmask")
+        self.assertEqual(
             test_action.determine_address_type("2001:0db8:85a3:0000:0000:8a2e:0370:7334"),
             "ip-netmask",
         )
 
-    def test_check_if_private(self):
+    def test_check_if_private(self, mock_get, mock_post):
         test_action = SetAddressObject()
-        test_action.logger = logging.getLogger("test")
 
         self.assertTrue(test_action.check_if_private("192.168.1.1"))
         self.assertTrue(test_action.check_if_private("192.168.1.1/32"))
-        self.assertTrue(test_action.check_if_private("FE80::903A:1C1A:E802:11E4"))
-        self.assertFalse(test_action.check_if_private("www.google.com"))
+        self.assertTrue(test_action.check_if_private("fd12:3456:789a:1aa2:22b::1"))
+        self.assertTrue(test_action.check_if_private("192.168.1.1-192.168.1.100"))
         self.assertFalse(test_action.check_if_private("1.1.1.1"))
-        self.assertFalse(test_action.check_if_private("192.168.1.1-192.168.1.100"))

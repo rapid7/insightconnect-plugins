@@ -313,12 +313,16 @@ Example output:
                       "onCallParticipants": [
                           {
                               "id": "balp7783-a9f1-40e3-940c-ffde45656054",
+
                               "name": "user@example.com",
+
                               "type": "user"
                           },
                           {
                               "id": "4falpb2e-348d-4b7c-b71b-149efb8361e4",
+
                               "name": "user@example.com",
+
                               "type": "user"
                           }
                       ],
