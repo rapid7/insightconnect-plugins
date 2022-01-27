@@ -9,8 +9,6 @@ class Component:
 
 class Input:
     DESTINATIONLISTID = "destinationListId"
-    LIMIT = "limit"
-    PAGE = "page"
     
 
 class Output:
@@ -28,18 +26,6 @@ class DGetInput(insightconnect_plugin_runtime.Input):
       "title": "Destination List ID",
       "description": "Unique ID for destination list",
       "order": 1
-    },
-    "limit": {
-      "type": "integer",
-      "title": "Limit",
-      "description": "Limit for page",
-      "order": 3
-    },
-    "page": {
-      "type": "integer",
-      "title": "Page",
-      "description": "Pagination",
-      "order": 2
     }
   },
   "required": [
@@ -76,33 +62,33 @@ class DGetOutput(insightconnect_plugin_runtime.Output):
         "comment": {
           "type": "string",
           "title": "Comment",
-          "description": "None",
+          "description": "Information about domain",
           "order": 4
         },
         "createdAt": {
           "type": "string",
-          "title": "CreatedAt",
+          "title": "Created At",
           "displayType": "date",
-          "description": "Date and time it has been created at",
+          "description": "Timestamp for creation of entity",
           "format": "date-time",
           "order": 5
         },
         "destination": {
           "type": "string",
           "title": "Destination",
-          "description": "Destination can be DOMAIN, URL, IP",
+          "description": "Destination can be DOMAIN, URL or IP",
           "order": 2
         },
         "id": {
           "type": "string",
-          "title": "Id",
+          "title": "ID",
           "description": "Unique ID of the destination",
           "order": 1
         },
         "typeOf": {
           "type": "string",
-          "title": "TypeOf",
-          "description": "Type can be DOMAIN, URL, IPV4",
+          "title": "Type",
+          "description": "Type can be DOMAIN, URL or IPV4",
           "order": 3
         }
       }
