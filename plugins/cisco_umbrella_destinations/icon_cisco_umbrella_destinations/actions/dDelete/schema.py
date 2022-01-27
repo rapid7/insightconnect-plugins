@@ -58,7 +58,7 @@ class DDeleteOutput(insightconnect_plugin_runtime.Output):
     "success": {
       "$ref": "#/definitions/dlEntity",
       "title": "Success",
-      "description": "Boolean value indicating a successful API call",
+      "description": "Updated destination list",
       "order": 1
     }
   },
