@@ -337,7 +337,7 @@ actions:
         required: true
   dGet:
     title: Get Destinations
-    description: Get list of destinations related to destination list
+    description: Get a list of destinations related to a destination list
     input:
       destinationListId:
         title: Destination List ID
