@@ -56,7 +56,7 @@ class DDeleteOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "success": {
-      "$ref": "#/definitions/dlEntity",
+      "$ref": "#/definitions/dlCollection",
       "title": "Success",
       "description": "Updated destination list",
       "order": 1
@@ -66,9 +66,9 @@ class DDeleteOutput(insightconnect_plugin_runtime.Output):
     "success"
   ],
   "definitions": {
-    "dlEntity": {
+    "dlCollection": {
       "type": "object",
-      "title": "dlEntity",
+      "title": "dlCollection",
       "properties": {
         "access": {
           "type": "string",
