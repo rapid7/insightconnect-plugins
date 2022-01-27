@@ -60,7 +60,7 @@ class DAddOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "success": {
-      "$ref": "#/definitions/dResponse",
+      "$ref": "#/definitions/dlCollection",
       "title": "Success",
       "description": "Successful returned value",
       "order": 1
@@ -70,9 +70,9 @@ class DAddOutput(insightconnect_plugin_runtime.Output):
     "success"
   ],
   "definitions": {
-    "dResponse": {
+    "dlCollection": {
       "type": "object",
-      "title": "dResponse",
+      "title": "dlCollection",
       "properties": {
         "access": {
           "type": "string",

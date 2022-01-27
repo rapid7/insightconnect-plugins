@@ -96,7 +96,7 @@ class DlCreateOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "success": {
-      "$ref": "#/definitions/dlEntity",
+      "$ref": "#/definitions/dlCollection",
       "title": "Success",
       "description": "Successful returned value",
       "order": 1
@@ -106,9 +106,9 @@ class DlCreateOutput(insightconnect_plugin_runtime.Output):
     "success"
   ],
   "definitions": {
-    "dlEntity": {
+    "dlCollection": {
       "type": "object",
-      "title": "dlEntity",
+      "title": "dlCollection",
       "properties": {
         "access": {
           "type": "string",

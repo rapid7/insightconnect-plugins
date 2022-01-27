@@ -7,7 +7,7 @@ from sys import argv
 Name = "Cisco Umbrella Destinations"
 Vendor = "rapid7"
 Version = "1.0.0"
-Description = "This plugin utilizes Cisco Umbrella to get the most complete view of the relationships and evolution of Internet domains, IP addresses, and autonomous systems to pinpoint attackers infrastructures and predict future threats"
+Description = "Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization"
 
 
 def main():

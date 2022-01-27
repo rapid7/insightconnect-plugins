@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="cisco_umbrella_destinations-rapid7-plugin",
       version="1.0.0",
-      description="This plugin utilizes Cisco Umbrella to get the most complete view of the relationships and evolution of Internet domains, IP addresses, and autonomous systems to pinpoint attackers infrastructures and predict future threats",
+      description="Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization",
       author="rapid7",
       author_email="",
       url="",
