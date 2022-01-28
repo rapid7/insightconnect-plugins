@@ -51,7 +51,7 @@ This action is used to add a list of destinations to a destination list.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|None|False|Information about domain|None|I trust this domain|
-|destination|string|None|True|Title for the destination list|None|https://example.com|
+|destination|string|None|True|Title for the destination list|None|www.example.com|
 |destinationListId|integer|None|True|Unique ID for destination list|None|12345678|
 
 Example input:
