@@ -1,6 +1,6 @@
 # Description
 
-This plugin utilizes the Cisco Umbrella Destination Lists API to provide a consistent way to programmatically manage access to network destinations, and you can block or allow a destination based on the policies applied to the identities within your organization
+Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization
 
 # Key Features
 
