@@ -30,7 +30,7 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
             if new_alerts:
                 self.logger.info("Alerts received, sending...")
                 cleaned_result = insightconnect_plugin_runtime.helper.clean(new_alerts)
-                self.send({Output.ALERT: cleaned_result})
+                self.send({Output.ALERTS: cleaned_result})
             else:
                 self.logger.info("No new alerts found.")
 
