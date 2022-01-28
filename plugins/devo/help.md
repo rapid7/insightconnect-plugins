@@ -168,7 +168,8 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
-* 2.0.0 - Configuration for interval input parameter, changed way of sending alerts by trigger 
+* 3.0.0 - Fix an issue in Get New Alerts trigger which duplicated alerts sending, output changed
+* 2.0.0 - Configuration for interval input parameter
 * 1.0.0 - Initial plugin
 
 # Links
