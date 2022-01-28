@@ -168,7 +168,7 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
-* 2.0.0 - Configuration for interval input parameter
+* 2.0.0 - Configuration for interval input parameter, changed way of sending alerts by trigger 
 * 1.0.0 - Initial plugin
 
 # Links
