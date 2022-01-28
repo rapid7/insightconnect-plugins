@@ -118,6 +118,3 @@ class UpdateTicket(insightconnect_plugin_runtime.Action):
         ticket_obj = insightconnect_plugin_runtime.helper.clean_dict(ticket_obj)
 
         return {Output.TICKET: ticket_obj}
-
-    def test(self):
-        return {Output.TICKET: {}}
