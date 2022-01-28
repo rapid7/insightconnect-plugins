@@ -92,10 +92,3 @@ class CreateTicket(insightconnect_plugin_runtime.Action):
             "url": returned_ticket.url,
         }
         return ticket_obj
-
-    def test(self):
-        try:
-            test = self.connection.client.users.me().email
-            return {"success": test}
-        except:  # pylint: disable=try-except-raise
-            raise

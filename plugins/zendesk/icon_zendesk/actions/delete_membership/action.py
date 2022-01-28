@@ -23,10 +23,3 @@ class DeleteMembership(insightconnect_plugin_runtime.Action):
             # API exception is only raised when incorrect data is input (Membership ID here)
             self.logger.error(e)
             return {Output.STATUS: False}
-
-    def test(self):
-        try:
-            test = self.connection.client.users.me().email
-            return {"success": test}
-        except:  # pylint: disable=try-except-raise
-            raise

@@ -59,10 +59,3 @@ class ShowUser(insightconnect_plugin_runtime.Action):
             "verified": user.verified,
         }
         return {Output.USER: user_obj}
-
-    def test(self):
-        try:
-            test = self.connection.client.users.me().email
-            return {"success": test}
-        except:  # pylint: disable=try-except-raise
-            raise
