@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get list of destinations related to destination list"
+    DESCRIPTION = "Get a list of destinations related to a destination list"
 
 
 class Input:

@@ -273,6 +273,7 @@ actions:
       destinations:
         title: Destinations
         description: Values to add to new list
+        example: Destination, comment
         type: '[]destinations'
         required: false
     output:
@@ -364,11 +365,13 @@ actions:
       destination:
         title: Destination Name
         description: Title for the destination list
+        example: www.example.com
         type: string
         required: true
       comment:
         title: Comment
         description: Information about domain
+        example: I trust this domain
         type: string
         required: false
     output:
