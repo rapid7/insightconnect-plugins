@@ -50,17 +50,17 @@ This action is used to add a list of destinations to a destination list.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|comment|string|None|False|Information about domain|None|None|
-|destination|string|None|True|Title for the destination list|None|None|
+|comment|string|None|False|Information about domain|None|I trust this domain|
+|destination|string|None|True|Title for the destination list|None|https://example.com|
 |destinationListId|integer|None|True|Unique ID for destination list|None|12345678|
 
 Example input:
 
 ```
 {
-  "destinationListId": 12345678,
+  "comment": "I trust this domain",
   "destination": "www.example.com",
-  "comment": "sample comment"
+  "destinationListId": 12345678
 }
 ```
 
@@ -107,7 +107,7 @@ Example input:
 ```
 {
   "destinationListId": 12345678,
-  "payload": "[1234, 12]"
+  "payload": "1241, 67"
 }
 ```
 
@@ -192,7 +192,7 @@ This action is used to create a destination list.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |access|string|None|False|Can be allow or block|None|allow|
-|destinations|[]destinations|None|False|Values to add to new list|None|None|
+|destinations|[]destinations|None|False|Values to add to new list|None|Destination, comment|
 |isGlobal|boolean|None|False|Boolean value indicating global state|None|True|
 |label|string|None|False|Title for the destination list|None|New list|
 
