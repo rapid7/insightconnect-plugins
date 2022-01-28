@@ -16,7 +16,7 @@ This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy).
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* 2022-01-28
 
 # Documentation
 
@@ -684,6 +684,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.0.0 - Change ID parameter types into integer | Update dependency version
 * 3.0.0 - Add custom output types in Search action | Add conversion of IDs to string in Search action to allow reuse search data in other actions | Add action input and output examples to the documentation
 * 2.0.1 - Change custom output type `group_id` from integer to string | Change `group_id` input type from integer to string in Create Ticket action
 * 2.0.0 - Remove unwanted input fields, add comment field in action Update Ticket | Fix enum fields issue with Create Ticket action
