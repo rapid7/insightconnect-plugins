@@ -132,7 +132,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|alert|object|True|An alert|
+|alerts|[]object|True|An object containing information and results about the alerts from interval time|
 
 Example output:
 

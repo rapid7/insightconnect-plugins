@@ -241,10 +241,10 @@ triggers:
         example: 5
         default: 10
     output:
-      alert:
-        title: Alert
-        description: An alert
-        type: object
+      alerts:
+        title: Alerts
+        description: An object containing information and results about the alerts from interval time
+        type: "[]object"
         required: true
 
 actions:
