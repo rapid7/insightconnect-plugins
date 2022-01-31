@@ -9,9 +9,11 @@ class Component:
 
 class Input:
     ACCESS = "access"
-    DESTINATIONS = "destinations"
+    COMMENT = "comment"
+    DESTINATION = "destination"
     ISGLOBAL = "isGlobal"
     LABEL = "label"
+    TYPE = "type"
     
 
 class Output:
@@ -28,15 +30,22 @@ class DlCreateInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Access",
       "description": "Can be allow or block",
+      "enum": [
+        "allow",
+        "block"
+      ],
       "order": 1
     },
-    "destinations": {
-      "type": "array",
-      "title": "Destinations",
-      "description": "Values to add to new list",
-      "items": {
-        "$ref": "#/definitions/destinations"
-      },
+    "comment": {
+      "type": "string",
+      "title": "Comment",
+      "description": "Information about the destination",
+      "order": 6
+    },
+    "destination": {
+      "type": "string",
+      "title": "Label",
+      "description": "Destination name can be domain, URL or IP",
       "order": 4
     },
     "isGlobal": {
@@ -50,36 +59,17 @@ class DlCreateInput(insightconnect_plugin_runtime.Input):
       "title": "Label",
       "description": "Title for the destination list",
       "order": 3
-    }
-  },
-  "definitions": {
-    "destinations": {
-      "type": "object",
-      "title": "destinations",
-      "properties": {
-        "comment": {
-          "type": "string",
-          "title": "Comment",
-          "description": "Information about the destination",
-          "order": 3
-        },
-        "destination": {
-          "type": "string",
-          "title": "Label",
-          "description": "Destination name can be domain, URL or IP",
-          "order": 1
-        },
-        "type": {
-          "type": "string",
-          "title": "Type",
-          "description": "Can be DOMAIN, URL, IPV4",
-          "order": 2
-        }
-      },
-      "required": [
-        "destination",
-        "type"
-      ]
+    },
+    "type": {
+      "type": "string",
+      "title": "Type",
+      "description": "Can be DOMAIN, URL or IPV4",
+      "enum": [
+        "DOMAIN",
+        "URL",
+        "IPV4"
+      ],
+      "order": 5
     }
   }
 }
