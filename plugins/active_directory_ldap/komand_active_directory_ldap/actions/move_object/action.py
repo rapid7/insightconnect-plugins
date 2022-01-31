@@ -1,12 +1,13 @@
-import komand
-from .schema import MoveObjectInput, MoveObjectOutput
-
 # Custom imports below
 import re
+
+import insightconnect_plugin_runtime
+
 from komand_active_directory_ldap.util.utils import ADUtils
+from .schema import MoveObjectInput, MoveObjectOutput, Output, Input
 
 
-class MoveObject(komand.Action):
+class MoveObject(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="move_object",
@@ -17,9 +18,8 @@ class MoveObject(komand.Action):
 
     def run(self, params={}):
         formatter = ADUtils()
-        conn = self.connection.conn
-        dn = params.get("distinguished_name")
-        new_ou = params.get("new_ou")
+        dn = params.get(Input.DISTINGUISHED_NAME)
+        new_ou = params.get(Input.NEW_OU)
         relative_dn = ""
         dn = formatter.format_dn(dn)[0]
         dn = formatter.unescape_asterisk(dn)
@@ -31,13 +31,4 @@ class MoveObject(komand.Action):
             relative_dn = pattern.group()
             relative_dn = relative_dn[:-1]
             self.logger.debug(relative_dn)
-
-        conn.modify_dn(dn, relative_dn, new_superior=new_ou)
-        result = conn.result
-        output = result["description"]
-
-        if result["result"] == 0:
-            return {"success": True}
-
-        self.logger.error("failed: error message %s" % output)
-        return {"success": False}
+        return {Output.SUCCESS: self.connection.client.move_object(dn, relative_dn, new_ou)}

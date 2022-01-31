@@ -1,5 +1,5 @@
 from unittest import TestCase, mock
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_active_directory_ldap.actions.modify_groups import ModifyGroups
 from komand_active_directory_ldap.actions.modify_groups.schema import Input, Output
 from unit_test.common import MockServer
