@@ -5,8 +5,8 @@ import json
 from sys import argv
 
 Name = "Cisco Umbrella Destinations"
-Vendor = "rapid7"
-Version = "1.0.0"
+Vendor = "conor"
+Version = "1.0.1"
 Description = "Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization"
 
 
