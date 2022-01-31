@@ -44,7 +44,7 @@ class DlCreateInput(insightconnect_plugin_runtime.Input):
     },
     "destination": {
       "type": "string",
-      "title": "Label",
+      "title": "Domain Name / URL / IP Address",
       "description": "Enter the destination here",
       "order": 4
     },
@@ -56,8 +56,8 @@ class DlCreateInput(insightconnect_plugin_runtime.Input):
     },
     "label": {
       "type": "string",
-      "title": "Label",
-      "description": "Name for the destination list",
+      "title": "Name",
+      "description": "Label for the destination list",
       "order": 3
     },
     "type": {

@@ -1,7 +1,7 @@
 {
-	"spec": "edeb0280de1f6046bfd0a10f5c841e6a",
-	"manifest": "7c1d79afe770b29b4a452d3c2f6c8ef3",
-	"setup": "d00640089f7b976facfd51cb0ade5896",
+	"spec": "cf1ffcc4f97867e5f5995d11c3030509",
+	"manifest": "93968a510a69035dd7bf84cc6a75213a",
+	"setup": "1da70bab8e9da2fb8455c67fa7636975",
 	"schemas": [
 		{
 			"identifier": "dAdd/schema.py",
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "dlCreate/schema.py",
-			"hash": "ba1a487c97cf86991a65a25cf78db65c"
+			"hash": "e74baa52af99e23420c167a2df85cdf6"
 		},
 		{
 			"identifier": "dlDelete/schema.py",

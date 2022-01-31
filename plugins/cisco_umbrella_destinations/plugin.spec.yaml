@@ -249,13 +249,13 @@ actions:
         type: boolean
         required: false
       label:
-        title: Label
-        description: Name for the destination list
+        title: Name
+        description: Label for the destination list
         example: New list
         type: string
         required: false
       destination:
-        title: Label
+        title: Domain Name / URL / IP Address
         type: string
         description: Enter the destination here
         example: www.example.com
