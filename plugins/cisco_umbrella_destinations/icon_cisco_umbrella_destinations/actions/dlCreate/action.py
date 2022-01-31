@@ -1,5 +1,3 @@
-import logging
-
 import insightconnect_plugin_runtime
 from .schema import DlCreateInput, DlCreateOutput, Input, Output, Component
 
