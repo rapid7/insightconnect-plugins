@@ -113,7 +113,8 @@ class Util:
         if url == "https://example.com/api/v2/cmdb/firewall/address/test.com" and method == "DELETE":
             return MockResponse("delete_address_object_domain", 200)
         if (
-            url == "https://example.com/api/v2/cmdb/firewall/address6/1111:2222:3333:4444:5555:6666:7777:8888"
+            url
+            == "https://example.com/api/v2/cmdb/firewall/address6/1111%3A2222%3A3333%3A4444%3A5555%3A6666%3A7777%3A8888"
             and method == "DELETE"
         ):
             return MockResponse("delete_address_object_ipv6", 200)
@@ -123,13 +124,19 @@ class Util:
             return MockResponse("get_domain_address_object", 200)
         if url == "https://example.com/api/v2/cmdb/firewall/address/example.com":
             return MockResponse("get_domain_address_object2", 200)
-        if url == "https://example.com/api/v2/cmdb/firewall/address/1111:2222:3333:4444:5555:6666:7777:8888":
+        if (
+            url
+            == "https://example.com/api/v2/cmdb/firewall/address/1111%3A2222%3A3333%3A4444%3A5555%3A6666%3A7777%3A8888"
+        ):
             return MockResponse("not_found", 404)
-        if url == "https://example.com/api/v2/cmdb/firewall/address6/1111:2222:3333:4444:5555:6666:7777:8888":
+        if (
+            url
+            == "https://example.com/api/v2/cmdb/firewall/address6/1111%3A2222%3A3333%3A4444%3A5555%3A6666%3A7777%3A8888"
+        ):
             return MockResponse("get_ipv6_address_object", 200)
-        if url == "https://example.com/api/v2/cmdb/firewall/address/Invalid Object":
+        if url == "https://example.com/api/v2/cmdb/firewall/address/invalid_object":
             return MockResponse("not_found", 404)
-        if url == "https://example.com/api/v2/cmdb/firewall/address6/Invalid Object":
+        if url == "https://example.com/api/v2/cmdb/firewall/address6/invalid_object":
             return MockResponse("not_found", 404)
         if params == {"filter": "name=@Invalid Group"}:
             return MockResponse("not_found", 404)

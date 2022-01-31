@@ -2,6 +2,7 @@ import re
 from ipaddress import ip_network, ip_address, IPv4Network
 from insightconnect_plugin_runtime.exceptions import PluginException
 import validators
+import urllib.parse
 
 
 class Helpers(object):
@@ -148,3 +149,7 @@ class Helpers(object):
         host = str(host)
         host = host.replace("/", " ")
         return host
+
+    @staticmethod
+    def url_encode(string: str) -> str:
+        return urllib.parse.quote(string, safe="")

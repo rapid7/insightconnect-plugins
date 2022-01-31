@@ -100,7 +100,7 @@ class TestDeleteAddressObject(TestCase):
         [
             [
                 "address_object_not_found",
-                "Invalid Object",
+                "invalid_object",
                 "Resource Not Found: Unable to find the specified resource.",
                 "Data was requested but not found. Check that inputs are correct.",
                 'Response was: {"message": "Not Found"}',

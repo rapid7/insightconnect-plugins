@@ -77,14 +77,16 @@ class FortigateAPI:
         return groups[0]
 
     def get_address_object(self, address_name: str):
+        # encode '/' characters in address name
+        encoded_address_name = self.helper.url_encode(address_name)
         try:
-            response_ipv4 = self.call_api(path=f"firewall/address/{address_name}")
+            response_ipv4 = self.call_api(path=f"firewall/address/{encoded_address_name}")
             if response_ipv4.get("http_status") == 200:
                 return response_ipv4
         except PluginException:
             self.logger.info(f"The specified object {address_name} was not found in domain and IPv4 address objects.")
 
-        response_ipv6 = self.call_api(path=f"firewall/address6/{address_name}")
+        response_ipv6 = self.call_api(path=f"firewall/address6/{encoded_address_name}")
         if response_ipv6.get("http_status") == 200:
             return response_ipv6
 

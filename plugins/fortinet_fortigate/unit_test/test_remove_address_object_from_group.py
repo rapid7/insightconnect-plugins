@@ -114,7 +114,7 @@ class TestRemoveAddressObjectFromGroup(TestCase):
         [
             [
                 "address_object_not_found",
-                "Invalid Object",
+                "invalid_object",
                 "Address Object Group",
                 "IPv6 Address Object Group",
                 "Resource Not Found: Unable to find the specified resource.",
