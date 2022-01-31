@@ -1,3 +1,5 @@
+import logging
+
 import insightconnect_plugin_runtime
 from .schema import DlCreateInput, DlCreateOutput, Input, Output, Component
 
@@ -27,6 +29,6 @@ class DlCreate(insightconnect_plugin_runtime.Action):
             ],
         }
         result = self.connection.client.create_destination_list(data=data)
-        newResult = {k: v for k, v in result.items() if v is not None}
+        result = {k: v for k, v in result.items() if v is not None}
 
-        return {Output.SUCCESS: newResult}
+        return {Output.SUCCESS: result}
