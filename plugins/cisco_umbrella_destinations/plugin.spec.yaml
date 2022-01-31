@@ -57,25 +57,6 @@ types:
       type: integer
       description: Total number of IP's in a destination list
       required: false
-  destinations:
-    destination:
-      title: Label
-      type: string
-      description: Destination name can be domain, URL or IP
-      example: www.example.com
-      required: true
-    type:
-      title: Type
-      type: string
-      description: Can be DOMAIN, URL, IPV4
-      example: 10.10.10.10 / www.example.com
-      required: true
-    comment:
-      title: Comment
-      type: string
-      description: Information about the destination
-      example: Suspicious domain
-      required: false
   dlCollection:
     id:
       title: ID
@@ -257,6 +238,9 @@ actions:
         description: Can be allow or block
         example: allow
         type: string
+        enum:
+          - allow
+          - block
         required: false
       isGlobal:
         title: Is Global
@@ -266,15 +250,31 @@ actions:
         required: false
       label:
         title: Label
-        description: Title for the destination list
+        description: Name for the destination list
         example: New list
         type: string
         required: false
-      destinations:
-        title: Destinations
-        description: Values to add to new list
-        example: Destination, comment
-        type: '[]destinations'
+      destination:
+        title: Label
+        type: string
+        description: Enter the destination here
+        example: www.example.com
+        required: false
+      type:
+        title: Type
+        description: Can be DOMAIN, URL or IPV4
+        example: URL
+        type: string
+        enum:
+          - DOMAIN
+          - URL
+          - IPV4
+        required: false
+      comment:
+        title: Comment
+        type: string
+        description: Information about the destination
+        example: Suspicious domain
         required: false
     output:
       success:
@@ -392,9 +392,9 @@ actions:
         required: true
       payload:
         title: Payload
-        description: List of destinations
-        example: 1241, 67
-        type: '[]integer'
+        description: List of destination IDs seperated by a space
+        example: 1241 67
+        type: string
         required: true
     output:
       success:
