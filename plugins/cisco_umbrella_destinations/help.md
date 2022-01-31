@@ -100,14 +100,14 @@ This action is used to delete a list of destinations from a destination list.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |destinationListId|integer|None|True|Unique ID for destination list|None|12345678|
-|payload|[]integer|None|True|List of destinations|None|1241, 67|
+|payload|string|None|True|List of destination IDs seperated by a space|None|1241 67|
 
 Example input:
 
 ```
 {
   "destinationListId": 12345678,
-  "payload": "1241, 67"
+  "payload": "1241 67"
 }
 ```
 
@@ -191,30 +191,23 @@ This action is used to create a destination list.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|access|string|None|False|Can be allow or block|None|allow|
-|destinations|[]destinations|None|False|Values to add to new list|None|Destination, comment|
+|access|string|None|False|Can be allow or block|['allow', 'block']|allow|
+|comment|string|None|False|Information about the destination|None|Suspicious domain|
+|destination|string|None|False|Enter the destination here|None|https://example.com|
 |isGlobal|boolean|None|False|Boolean value indicating global state|None|True|
-|label|string|None|False|Title for the destination list|None|New list|
+|label|string|None|False|Label for the destination list|None|New list|
+|type|string|None|False|Can be DOMAIN, URL or IPV4|['DOMAIN', 'URL', 'IPV4']|URL|
 
 Example input:
 
 ```
 {
   "access": "allow",
-  "isGlobal": false,
-  "label": "TESTLIST123",
-  "destinations": [
-    {
-      "comment": "I don't like this one",
-      "destination": "8.8.8.8",
-      "type": "IPV4"
-    },
-    {
-      "comment": "Not this one either",
-      "destination": "www.example.com",
-      "type": "DOMAIN"
-    }
-  ]
+  "comment": "Suspicious domain",
+  "destination": "www.example.com",
+  "isGlobal": true,
+  "label": "New list",
+  "type": "URL"
 }
 ```
 
@@ -373,7 +366,7 @@ Example input:
 ```
 {
   "destinationListId": 12345678,
-  "label": "NEW NAME"
+  "label": "New list"
 }
 ```
 

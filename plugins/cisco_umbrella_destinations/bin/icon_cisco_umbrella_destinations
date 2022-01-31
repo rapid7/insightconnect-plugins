@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Cisco Umbrella Destinations"
 Vendor = "conor"
-Version = "1.0.1"
+Version = "1.0.3"
 Description = "Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization"
 
 
