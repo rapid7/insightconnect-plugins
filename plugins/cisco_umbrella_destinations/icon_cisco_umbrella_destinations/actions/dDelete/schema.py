@@ -29,12 +29,9 @@ class DDeleteInput(insightconnect_plugin_runtime.Input):
       "order": 1
     },
     "payload": {
-      "type": "array",
+      "type": "string",
       "title": "Payload",
-      "description": "List of destinations",
-      "items": {
-        "type": "integer"
-      },
+      "description": "List of destination IDs seperated by a space",
       "order": 2
     }
   },

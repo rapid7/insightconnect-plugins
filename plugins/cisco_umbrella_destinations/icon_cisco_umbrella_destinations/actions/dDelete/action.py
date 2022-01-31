@@ -16,7 +16,17 @@ class DDelete(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         destination_list_id = params.get(Input.DESTINATIONLISTID)
-        payload = params.get(Input.PAYLOAD)
+
+        # Convert input str 1234 5678 into format [1234, 5678]
+        # x = '1234 5678'
+        # x.split(" ") == ['1234', '5678']
+        payload = params.get(Input.PAYLOAD).split(" ")
+
+        # This handles any characters in the IDs which are not numerical values
+        for index, i in enumerate(payload):
+            numeric_filter = filter(str.isdigit, i)
+            new = "".join(numeric_filter)
+            payload[index] = new
 
         return {
             Output.SUCCESS: self.connection.client.delete_destinations(
