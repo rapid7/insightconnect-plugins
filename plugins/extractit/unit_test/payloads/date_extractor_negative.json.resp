@@ -1,0 +1,270 @@
+{
+  "parameters": [
+    [
+      "from_string dd/mm/yyyy reversed date",
+      "dd/mm/yyyy",
+      "05/28/1982 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string dd\\mm\\yyyy reversed date",
+      "dd\\mm\\yyyy",
+      "05\\28\\1982 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string dd.mm.yyyy reversed date",
+      "dd.mm.yyyy",
+      "05.28.1982 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string dd-mm-yyyy reversed date",
+      "dd-mm-yyyy",
+      "05-28-1982 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string dd/mm/yy reversed date",
+      "dd/mm/yy",
+      "05/28/82 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string dd\\mm\\yy reversed date",
+      "dd\\mm\\yy",
+      "05\\28\\82 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string dd.mm.yy reversed date",
+      "dd.mm.yy",
+      "05.28.82 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string dd-mm-yy reversed date",
+      "dd-mm-yy",
+      "05-28-82 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string mm/dd/yyyy reversed date",
+      "mm/dd/yyyy",
+      "28/05/1982 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string mm\\dd\\yyyy reversed date",
+      "mm\\dd\\yyyy",
+      "28\\05\\1982 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string mm.dd.yyyy reversed date",
+      "mm.dd.yyyy",
+      "28.05.1982 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string mm-dd-yyyy reversed date",
+      "mm-dd-yyyy",
+      "28-05-1982 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string mm/dd/yy reversed date",
+      "mm/dd/yy",
+      "28/05/82 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string mm\\dd\\yy reversed date",
+      "mm\\dd\\yy",
+      "28\\05\\82 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string mm.dd.yy reversed date",
+      "mm.dd.yy",
+      "28.05.82 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string mm-dd-yy reversed date",
+      "mm-dd-yy",
+      "28-05-82 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string dd/mmm/yyyy reversed date",
+      "dd/mmm/yyyy",
+      "DEC/05/1982 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string dd\\mmm\\yyyy reversed date",
+      "dd\\mmm\\yyyy",
+      "DEC\\05\\1982 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string dd.mmm.yyyy reversed date",
+      "dd.mmm.yyyy",
+      "DEC.05.1982 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string dd-mmm-yyyy reversed date",
+      "dd-mmm-yyyy",
+      "DEC-05-1982 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string dd/mmm/yy reversed date",
+      "dd/mmm/yy",
+      "DEC/05/82 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string dd\\mmm\\yy reversed date",
+      "dd\\mmm\\yy",
+      "DEC\\05\\82 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string dd.mmm.yy reversed date",
+      "dd.mmm.yy",
+      "DEC.05.82 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string dd-mmm-yy reversed date",
+      "dd-mmm-yy",
+      "DEC-05-82 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string yyyy/mm/dd reversed date",
+      "yyyy/mm/dd",
+      "1982/28/05 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string yyyy\\mm\\dd reversed date",
+      "yyyy\\mm\\dd",
+      "1982\\28\\05 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string yyyy.mm.dd reversed date",
+      "yyyy.mm.dd",
+      "1982.28.05 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string yyyy-mm-dd reversed date",
+      "yyyy-mm-dd",
+      "1982-28-05 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string yy/mm/dd reversed date",
+      "yy/mm/dd",
+      "82/28/05 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string yy\\mm\\dd reversed date",
+      "yy\\mm\\dd",
+      "82\\28\\05 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string yy.mm.dd reversed date",
+      "yy.mm.dd",
+      "82.28.05 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string yy-mm-dd reversed date",
+      "yy-mm-dd",
+      "82-28-05 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string yyyy/mmm/dd reversed date",
+      "yyyy/mmm/dd",
+      "1982/05/DEC is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string yyyy\\mmm\\dd reversed date",
+      "yyyy\\mmm\\dd",
+      "1982\\05\\DEC is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string yyyy.mmm.dd reversed date",
+      "yyyy.mmm.dd",
+      "1982.05.DEC is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string yyyy-mmm-dd reversed date",
+      "yyyy-mmm-dd",
+      "1982-05-DEC is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string yyyy-mm-ddThh:mm reversed date",
+      "yyyy-mm-ddThh:mm",
+      "1982-28-05T00:00 is an example date",
+      null,
+      []
+    ],
+    [
+      "from_string yyyy-mm-ddThh:mm:ss reversed date",
+      "yyyy-mm-ddThh:mm:ss",
+      "1982-28-05T00:00:00 is an example date",
+      null,
+      []
+    ]
+  ]
+}

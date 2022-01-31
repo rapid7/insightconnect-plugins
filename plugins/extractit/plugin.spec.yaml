@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: extractit
 title: ExtractIt
 description: The ExtractIt plugin has a collection of actions used to extract various information from text. These include URLs, domains, emails, IPs, and more
-version: 2.3.1
+version: 3.0.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -247,6 +247,55 @@ actions:
     title: Date Extractor
     description: Extracts all dates from a string or file
     input:
+      date_format:
+        title: Date Format
+        description: Dates matching this format are extracted - If All Formats is selected, found dates will be processed in the listed order documented
+        type: string
+        required: true
+        enum:
+          - dd/mm/yyyy
+          - mm/dd/yyyy
+          - dd/mm/yyyy
+          - dd\mm\yyyy
+          - dd.mm.yyyy
+          - dd-mm-yyyy
+          - dd.mm.yy
+          - dd-mm-yy
+          - dd/mm/yy
+          - dd\mm\yy
+          - mm/dd/yyyy
+          - mm\dd\yyyy
+          - mm.dd.yyyy
+          - mm-dd-yyyy
+          - mm/dd/yy
+          - mm\dd\yy
+          - mm.dd.yy
+          - mm-dd-yy
+          - dd/mmm/yyyy
+          - dd\mmm\yyyy
+          - dd.mmm.yyyy
+          - dd-mmm-yyyy
+          - dd/mmm/yy
+          - dd\mmm\yy
+          - dd.mmm.yy
+          - dd-mmm-yy
+          - yyyy.mm.dd
+          - yyyy-mm-dd
+          - yyyy/mm/dd
+          - yyyy\mm\dd
+          - yyyy.mmm.dd
+          - yyyy-mmm-dd
+          - yyyy/mmm/dd
+          - yyyy\mmm\dd
+          - yy.mm.dd
+          - yy-mm-dd
+          - yy/mm/dd
+          - yy\mm\dd
+          - yyyy-mm-ddThh:mm
+          - yyyy-mm-ddThh:mm:ss
+          - All Formats
+          - ""
+        example: dd/mm/yyyy
       str:
         title: String
         description: Input string
@@ -423,6 +472,55 @@ actions:
     title: Extract All
     description: Extracts all UUIDs, CVEs, dates, domains, emails, filepaths, IOCs, IPs, MACs, MD5 hashes, SHA1 hashes, SHA256 hashes, SHA 512 hashes and URLs from a string or file
     input:
+      date_format:
+        title: Date Format
+        description: Dates matching this format are extracted - If All Formats is selected, found dates will be processed in the listed order documented
+        type: string
+        required: true
+        enum:
+          - dd/mm/yyyy
+          - mm/dd/yyyy
+          - dd/mm/yyyy
+          - dd\mm\yyyy
+          - dd.mm.yyyy
+          - dd-mm-yyyy
+          - dd.mm.yy
+          - dd-mm-yy
+          - dd/mm/yy
+          - dd\mm\yy
+          - mm/dd/yyyy
+          - mm\dd\yyyy
+          - mm.dd.yyyy
+          - mm-dd-yyyy
+          - mm/dd/yy
+          - mm\dd\yy
+          - mm.dd.yy
+          - mm-dd-yy
+          - dd/mmm/yyyy
+          - dd\mmm\yyyy
+          - dd.mmm.yyyy
+          - dd-mmm-yyyy
+          - dd/mmm/yy
+          - dd\mmm\yy
+          - dd.mmm.yy
+          - dd-mmm-yy
+          - yyyy.mm.dd
+          - yyyy-mm-dd
+          - yyyy/mm/dd
+          - yyyy\mm\dd
+          - yyyy.mmm.dd
+          - yyyy-mmm-dd
+          - yyyy/mmm/dd
+          - yyyy\mmm\dd
+          - yy.mm.dd
+          - yy-mm-dd
+          - yy/mm/dd
+          - yy\mm\dd
+          - yyyy-mm-ddThh:mm
+          - yyyy-mm-ddThh:mm:ss
+          - All Formats
+          - ""
+        example: dd/mm/yyyy
       str:
         title: String
         description: Input string
