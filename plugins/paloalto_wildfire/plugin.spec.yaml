@@ -7,7 +7,7 @@ vendor: rapid7
 support: rapid7
 status: []
 description: Perform malware analysis with Palo Alto Wildfire
-version: 1.2.0
+version: 2.0.0
 supported_versions: ["WildFire 8.0"]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/paloalto_wildfire
@@ -122,7 +122,12 @@ actions:
         title: Submission
         description: Submission
         type: filedata
-        required: true
+        required: false
+      verdict:
+        title: Verdict
+        description: "One of the following verdicts: Benign, Malware, Greyware, Pending, Error, or Not found"
+        type: string
+        required: false
   submit_file_from_url:
     title: Submit File from URL
     description: Submit a file for analysis via a URL
@@ -139,7 +144,12 @@ actions:
         title: Submission
         description: Submission
         type: filedata
-        required: true
+        required: false
+      verdict:
+        title: Verdict
+        description: "One of the following verdicts: Benign, Malware, Greyware, Pending, Error, or Not found"
+        type: string
+        required: false
   submit_url:
     title: Submit URL
     description: Submit a URL for analysis
@@ -240,15 +250,7 @@ actions:
     output:
       verdict:
         title: Verdict
-        description: 'One of the following verdicts: ''Benign'', ''Malware'', ''Greyware'',
-          ''Pending'', ''Error'', or ''Not found`'
-        enum:
-        - Benign
-        - Malware
-        - Greyware
-        - Pending
-        - Error
-        - Not found
+        description: "One of the following verdicts: Benign, Malware, Greyware, Pending, Error, or Not found"
         type: string
         required: true
   get_malware_test_file:

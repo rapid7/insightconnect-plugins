@@ -1,9 +1,15 @@
+import hashlib
+
 import komand
-from .schema import SubmitFileFromUrlInput, SubmitFileFromUrlOutput
 
 # Custom imports below
-import requests
 import xmltodict
+from komand.exceptions import PluginException
+
+from komand_paloalto_wildfire.util.constants import SUPPORTED_FILES
+from komand_paloalto_wildfire.util.utils import Utils
+from .schema import SubmitFileFromUrlInput, SubmitFileFromUrlOutput, Input, Output
+from ...util.constants import UNKNOWN_VERDICT
 
 
 class SubmitFileFromUrl(komand.Action):
@@ -16,11 +22,6 @@ class SubmitFileFromUrl(komand.Action):
         )
 
     def run(self, params={}):
-        """TODO: Run action"""
-        endpoint = "/publicapi/submit/url"
-        client = self.connection.client
-        url = "https://{}{}".format(self.connection.host, endpoint)
-
         # Formatted with None and tuples so requests sends form-data properly
         # => Send data, 299 bytes (0x12b)
         # 0000: --------------------------8557684369749613
@@ -33,35 +34,26 @@ class SubmitFileFromUrl(komand.Action):
         # 00da: pdf
         # 00fd: --------------------------8557684369749613--
         # ...
+        url = params.get(Input.URL)
+        if Utils.check_link_for_supported_file_type(url):
+            file_from_url = self.connection.client.get_file_from_url(url=url)
+            verdict = self.connection.client.get_verdicts(analysed_hash=hashlib.md5(file_from_url).hexdigest())
+            if verdict == UNKNOWN_VERDICT:
+                try:
+                    o = xmltodict.parse(self.connection.client.submit_file_from_url(url))
+                    out = dict(o["wildfire"]["upload-file-info"])
+                except PluginException:
+                    self.logger.info("Error occurred")
+                    raise
 
-        req = {
-            "apikey": (None, self.connection.api_key),
-            "url": (None, params.get("url")),
-        }
+                if not out["filename"]:
+                    out["filename"] = "Unknown"
 
-        try:
-            r = requests.post(url, files=req)
-            o = xmltodict.parse(r.content)
-            out = dict(o["wildfire"]["upload-file-info"])
-        except:
-            self.logger.info("Error occurred")
-            raise
-
-        if not out["filename"]:
-            out["filename"] = "Unknown"
-
-        return {"submission": out}
-
-    def test(self):
-        """TODO: Test action"""
-        client = self.connection.client
-        return {
-            "submission": {
-                "filetype": "Test",
-                "filename": "Test",
-                "url": "Test",
-                "sha256": "Test",
-                "md5": "Test",
-                "size": "Test",
-            }
-        }
+                return {Output.SUBMISSION: out}
+            else:
+                return {Output.VERDICT: verdict.capitalize()}
+        else:
+            raise PluginException(
+                cause="Unsupported file was received by the plugin.",
+                assistance=f"Check if your file is one of the supported files and resubmit with an approved file type. Supported files: {SUPPORTED_FILES}",
+            )

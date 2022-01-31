@@ -1,8 +1,9 @@
-import komand
-from .schema import GetSampleInput, GetSampleOutput
-
 # Custom imports below
 import base64
+
+import komand
+
+from .schema import GetSampleInput, GetSampleOutput, Input, Output
 
 
 class GetSample(komand.Action):
@@ -15,12 +16,5 @@ class GetSample(komand.Action):
         )
 
     def run(self, params={}):
-        """TODO: Run action"""
-        client = self.connection.client
-        out = base64.b64encode(client.get_sample(params.get("hash"))).decode()
-        return {"file": out}
-
-    def test(self):
-        """TODO: Test action"""
-        client = self.connection.client
-        return {"file": "test"}
+        out = base64.b64encode(self.connection.client.get_sample(params.get(Input.HASH))).decode()
+        return {Output.FILE: out}

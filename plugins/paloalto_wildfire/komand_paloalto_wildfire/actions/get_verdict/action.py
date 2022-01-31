@@ -1,5 +1,7 @@
 import komand
-from .schema import GetVerdictInput, GetVerdictOutput
+
+from .schema import GetVerdictInput, GetVerdictOutput, Input, Output
+
 
 # Custom imports below
 
@@ -14,13 +16,6 @@ class GetVerdict(komand.Action):
         )
 
     def run(self, params={}):
-        """TODO: Run action"""
-        client = self.connection.client
-        out = client.get_verdicts(params.get("hash"))
+        out = self.connection.client.get_verdicts(params.get(Input.HASH))
 
-        return {"verdict": out.capitalize()}
-
-    def test(self):
-        """TODO: Test action"""
-        client = self.connection.client
-        return {"verdict": "Not found"}
+        return {Output.VERDICT: out.capitalize()}

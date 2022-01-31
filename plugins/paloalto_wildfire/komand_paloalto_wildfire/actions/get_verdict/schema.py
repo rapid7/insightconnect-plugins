@@ -47,15 +47,7 @@ class GetVerdictOutput(komand.Output):
     "verdict": {
       "type": "string",
       "title": "Verdict",
-      "description": "One of the following verdicts: 'Benign', 'Malware', 'Greyware', 'Pending', 'Error', or 'Not found`",
-      "enum": [
-        "Benign",
-        "Malware",
-        "Greyware",
-        "Pending",
-        "Error",
-        "Not found"
-      ],
+      "description": "One of the following verdicts: Benign, Malware, Greyware, Pending, Error, or Not found",
       "order": 1
     }
   },

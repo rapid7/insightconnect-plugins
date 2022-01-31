@@ -14,6 +14,7 @@ class Input:
 
 class Output:
     SUBMISSION = "submission"
+    VERDICT = "verdict"
     
 
 class SubmitFileInput(komand.Input):
@@ -58,11 +59,14 @@ class SubmitFileOutput(komand.Output):
       "title": "Submission",
       "description": "Submission",
       "order": 1
+    },
+    "verdict": {
+      "type": "string",
+      "title": "Verdict",
+      "description": "One of the following verdicts: Benign, Malware, Greyware, Pending, Error, or Not found",
+      "order": 2
     }
   },
-  "required": [
-    "submission"
-  ],
   "definitions": {
     "filedata": {
       "type": "object",

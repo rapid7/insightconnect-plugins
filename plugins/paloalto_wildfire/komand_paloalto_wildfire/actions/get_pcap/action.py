@@ -1,8 +1,9 @@
-import komand
-from .schema import GetPcapInput, GetPcapOutput
-
 # Custom imports below
 import base64
+
+import komand
+
+from .schema import GetPcapInput, GetPcapOutput, Input, Output
 
 
 class GetPcap(komand.Action):
@@ -25,13 +26,10 @@ class GetPcap(komand.Action):
         )
 
     def run(self, params={}):
-        """TODO: Run action"""
-        client = self.connection.client
-        platform = self.platform.get(params.get("platform"))
-        out = base64.b64encode(client.get_pcap(params.get("hash"), platform=platform)).decode()
-        return {"file": out}
-
-    def test(self):
-        """TODO: Test action"""
-        client = self.connection.client
-        return {"file": "Test"}
+        return {
+            Output.FILE: base64.b64encode(
+                self.connection.client.get_pcap(
+                    params.get(Input.HASH), platform=self.platform.get(params.get(Input.PLATFORM))
+                )
+            ).decode()
+        }

@@ -1,10 +1,10 @@
 import komand
-from .schema import SubmitUrlInput, SubmitUrlOutput
+import xmltodict
 
 # Custom imports below
 from komand.exceptions import PluginException
-import requests
-import xmltodict
+
+from .schema import SubmitUrlInput, SubmitUrlOutput, Output, Input
 
 
 class SubmitUrl(komand.Action):
@@ -17,11 +17,6 @@ class SubmitUrl(komand.Action):
         )
 
     def run(self, params={}):
-        """TODO: Run action"""
-        endpoint = "/publicapi/submit/link"
-        client = self.connection.client
-        url = "https://{}{}".format(self.connection.host, endpoint)
-
         # Formatted with None and tuples so requests sends form-data properly
         # => Send data, 299 bytes (0x12b)
         # 0000: --------------------------8557684369749613
@@ -34,18 +29,10 @@ class SubmitUrl(komand.Action):
         # 00da: pdf
         # 00fd: --------------------------8557684369749613--
         # ...
-
-        req = {
-            "apikey": (None, self.connection.api_key),
-            "link": (None, params.get("url")),
-        }
-
         try:
-            r = requests.post(url, files=req)
-            o = xmltodict.parse(r.content)
+            o = xmltodict.parse(self.connection.client.submit_url(params.get(Input.URL)))
             out = dict(o)
 
-            # self.logger.info(out)
             # {
             #   "submission": {
             #     "error": {
@@ -76,12 +63,11 @@ class SubmitUrl(komand.Action):
                     )
 
             out = dict(o["wildfire"]["submit-link-info"])
-        except:
-            raise
+        except Exception as error:
+            raise PluginException(
+                cause="Some unexpected error appear.",
+                assistance="Please contact support with the status code and error information.",
+                data=error,
+            )
 
-        return {"submission": out}
-
-    def test(self):
-        """TODO: Test action"""
-        client = self.connection.client
-        return {"submission": {"url": "Test", "sha256": "Test", "md5": "Test"}}
+        return {Output.SUBMISSION: out}

@@ -1,9 +1,11 @@
 import komand
+
 from .schema import ConnectionSchema
-from komand.exceptions import ConnectionTestException
+from .schema import Input
+from ..util.api import PaloAltoWildfireAPI
+
 
 # Custom imports below
-import pyldfire
 
 
 class Connection(komand.Connection):
@@ -13,21 +15,13 @@ class Connection(komand.Connection):
     def connect(self, params={}):
         self.logger.info("Connect: Connecting..")
         # These are for cases where the library doesn't support what we want
-        self.host = params.get("host")
-        self.api_key = params.get("api_key").get("secretKey")
-
-        if params.get("proxy"):
-            proxy = params.get("proxy")
-            self.logger.info("Using proxy: %s", proxy)
-        else:
-            proxy = {}
-
-        self.client = pyldfire.WildFire(self.api_key, host=self.host, verify=params.get("verify"), proxies=proxy)
+        self.client = PaloAltoWildfireAPI(
+            host=params.get(Input.HOST),
+            api_key=params.get(Input.API_KEY).get("secretKey"),
+            proxy=params.get(Input.PROXY),
+            verify=params.get(Input.VERIFY),
+        )
 
     def test(self):
-        try:
-            self.client.submit_urls("insight.rapid7.com")
-        except pyldfire.WildFireException as e:
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY, data=e)
-
+        self.client.test_connection()
         return {"success": True}

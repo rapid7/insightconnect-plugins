@@ -1,11 +1,12 @@
-import komand
-from .schema import SubmitFileInput, SubmitFileOutput
-
 # Custom imports below
 import base64
-import io
-import pyldfire
+import hashlib
+
+import komand
+
 from komand.exceptions import PluginException
+from komand_paloalto_wildfire.util.constants import UNKNOWN_VERDICT, SUPPORTED_FILES
+from .schema import SubmitFileInput, SubmitFileOutput, Input, Output
 
 
 class SubmitFile(komand.Action):
@@ -18,42 +19,23 @@ class SubmitFile(komand.Action):
         )
 
     def run(self, params={}):
-        """TODO: Run action"""
-        client = self.connection.client
-        _file = io.BytesIO(base64.b64decode(params.get("file")))
-        filename = params.get("filename")
+        file = base64.b64decode(params.get(Input.FILE))
+        filename = params.get(Input.FILENAME)
+        if filename.lower().endswith(SUPPORTED_FILES):
+            verdict = self.connection.client.get_verdicts(analysed_hash=hashlib.md5(file).hexdigest())
+            if verdict == UNKNOWN_VERDICT:
+                out = self.connection.client.submit_file(_file=file, filename=filename)
+                if "filename" not in out.keys():
+                    out["filename"] = "Unknown"
 
-        out = {}
-        try:
-            if filename:
-                self.logger.info("Filename specified: %s", filename)
-                out = client.submit_file(_file, filename)
+                if "url" not in out.keys():
+                    out["url"] = "Unknown"
+
+                return {Output.SUBMISSION: komand.helper.clean(out)}
             else:
-                out = client.submit_file(_file)
-            out["supported_file_type"] = True
-        except pyldfire.WildFireException as e:
-            if e.args and "Unsupport File type" in e.args[0]:  # Yes, that's the error, not a typo
-                out["supported_file_type"] = False
-            else:
-                raise PluginException(PluginException.Preset.UNKNOWN) from e
-
-        if "filename" not in out.keys():
-            out["filename"] = "Unknown"
-
-        if "url" not in out.keys():
-            out["url"] = "Unknown"
-
-        return {"submission": komand.helper.clean(out)}
-
-    def test(self):
-        """TODO: Test action"""
-        client = self.connection.client
-        return {
-            "submission": {
-                "filetype": "Test",
-                "filename": "Test",
-                "sha256": "Test",
-                "md5": "Test",
-                "size": "Test",
-            }
-        }
+                return {Output.VERDICT: verdict.capitalize()}
+        else:
+            raise PluginException(
+                cause="Unsupported file was received by the plugin.",
+                assistance=f"Check if your file is one of the supported files and resubmit with an approved file type. Supported files: {SUPPORTED_FILES}",
+            )
