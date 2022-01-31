@@ -1,145 +1,1109 @@
 plugin_spec_version: v2
 extension: plugin
-products: [insightconnect]
+products: [ insightconnect ]
 name: hybrid_analysis
 title: Hybrid Analysis
 vendor: rapid7
 support: community
-status: []
+status: [ ]
 description: Lookup file hashes to determine if they are malicious
-version: 2.0.2
+version: 3.0.0
 supported_versions:
-  - Hybrid Analysis API v1
+  - Hybrid Analysis API v2
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/hybrid_analysis
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.hybrid-analysis.com/
 tags:
-- malware
-- sandbox
-- malware analysis
+  - malware
+  - sandbox
+  - malware analysis
 hub_tags:
-  use_cases: [threat_detection_and_response]
-  keywords: [malware_analysis]
-  features: []
+  use_cases: [ threat_detection_and_response ]
+  keywords: [ malware_analysis ]
+  features: [ ]
 types:
-  report:
-    environment_id:
+  certificates:
+    issuer:
+      title: Issuer
       type: string
-      description: Environment ID
-      required: false
-    sha1:
-      type: string
-      description: SHA1
+      description: Issuer
       required: false
     md5:
+      title: MD5
       type: string
       description: MD5
       required: false
+    owner:
+      title: Owner
+      type: string
+      description: Owner
+      required: false
+    serial_number:
+      title: Serial Number
+      type: string
+      description: Serial number
+      required: false
+    sha1:
+      title: SHA1
+      type: string
+      description: SHA1
+      required: false
+    valid_from:
+      title: Valid From
+      type: string
+      description: Valid from
+      required: false
+    valid_until:
+      title: Valid Until
+      type: string
+      description: Valid until
+      required: false
+  extracted_files:
+    av_label:
+      title: Available Label
+      type: string
+      description: Available label
+      required: false
+    av_matched:
+      title: Available Matched
+      type: integer
+      description: Available matched
+      required: false
+    av_total:
+      title: Available Total
+      type: integer
+      description: Available total
+      required: false
+    description:
+      title: Description
+      type: string
+      description: Description
+      required: false
+    file_available_to_download:
+      title: File Available To Download
+      type: boolean
+      description: File available to download
+      required: false
+    file_path:
+      title: File Path
+      type: string
+      description: File path
+      required: false
+    file_size:
+      title: File Size
+      type: integer
+      description: File size
+      required: false
+    md5:
+      title: MD5
+      type: string
+      description: MD5
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    runtime_process:
+      title: Runtime Process
+      type: string
+      description: Runtime process
+      required: false
+    sha1:
+      title: SHA1
+      type: string
+      description: SHA1
+      required: false
     sha256:
+      title: SHA256
       type: string
       description: SHA256
       required: false
-    submitname:
-      type: string
-      description: Submission Name
+    threat_level:
+      title: Threat Level
+      type: integer
+      description: Threat level
       required: false
-    environmentDescription:
+    threat_level_readable:
+      title: Threat Level Readable
       type: string
-      description: Environment Description
+      description: Threat level readable
+      required: false
+    type_tags:
+      title: Type Tags
+      type: '[]string'
+      description: Type tags
+      required: false
+  file_metadata:
+    file_analysis:
+      title: File Analysis
+      type: '[]string'
+      description: File analysis
+      required: false
+    file_compositions:
+      title: File Compositions
+      type: '[]string'
+      description: File compositions
+      required: false
+    imported_objects:
+      title: Imported Objects
+      type: '[]string'
+      description: Imported objects
+      required: false
+    total_file_compositions_imports:
+      title: Total File Compositions Imports
+      type: integer
+      description: Total file compositions imports
+      required: false
+  created_files:
+    file:
+      title: File
+      type: string
+      description: File
+      required: false
+    null_byte:
+      title: Null Byte
+      type: boolean
+      description: Null byte
+      required: false
+  file_accesses:
+    mask:
+      title: Mask
+      type: string
+      description: Mask
+      required: false
+    path:
+      title: Path
+      type: string
+      description: Path
+      required: false
+    type:
+      title: Type
+      type: string
+      description: Type
+      required: false
+  handles:
+    id:
+      title: ID
+      type: integer
+      description: ID
+      required: false
+    path:
+      title: Path
+      type: string
+      description: Path
+      required: false
+    type:
+      title: Type
+      type: string
+      description: Type
+      required: false
+  process_flags:
+    data:
+      title: Data
+      type: string
+      description: Data
+      required: false
+    image:
+      title: Image
+      type: string
+      description: Image
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+  registry:
+    key:
+      title: Key
+      type: string
+      description: Key
+      required: false
+    operation:
+      title: Operation
+      type: string
+      description: Operation
+      required: false
+    path:
+      title: Path
+      type: string
+      description: Path
+      required: false
+    status:
+      title: Status
+      type: string
+      description: Status
+      required: false
+    status_human_readable:
+      title: Status Human Readable
+      type: string
+      description: Status human readable
+      required: false
+    value:
+      title: Value
+      type: string
+      description: Value
+      required: false
+  parameters:
+    argument_number:
+      title: Argument Number
+      type: integer
+      description: Argument number
+      required: false
+    comment:
+      title: Comment
+      type: string
+      description: Comment
+      required: false
+    meaning:
+      title: Meaning
+      type: string
+      description: Meaning
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    value:
+      title: Value
+      type: string
+      description: Value
+      required: false
+  script_calls:
+    cls_id:
+      title: Cls ID
+      type: string
+      description: Cls ID
+      required: false
+    dispatch_id:
+      title: Dispatch ID
+      type: string
+      description: Dispatch ID
+      required: false
+    matched_malicious_signatures:
+      title: Matched Malicious Signatures
+      type: '[]string'
+      description: Matched malicious signatures
+      required: false
+    parameters:
+      title: Parameters
+      type: '[]parameters'
+      description: Parameters
+      required: false
+    result:
+      title: Result
+      type: string
+      description: Result
+      required: false
+    status:
+      title: Status
+      type: string
+      description: Status
+      required: false
+  matched_signatures:
+    id:
+      title: ID
+      type: string
+      description: ID
+      required: false
+    value:
+      title: Value
+      type: string
+      description: Value
+      required: false
+  streams:
+    executed:
+      title: Executed
+      type: boolean
+      description: Executed
+      required: false
+    file_name:
+      title: File Name
+      type: string
+      description: File name
+      required: false
+    human_keywords:
+      title: Human Keywords
+      type: string
+      description: Human keywords
+      required: false
+    instructions:
+      title: Instructions
+      type: '[]string'
+      description: Instructions
+      required: false
+    matched_signatures:
+      title: Matched Signatures
+      type: '[]matched_signatures'
+      description: Matched signatures
+      required: false
+    uid:
+      title: UID
+      type: string
+      description: UID
+      required: false
+  processes:
+    av_label:
+      title: Available Label
+      type: string
+      description: Available label
+      required: false
+    av_matched:
+      title: Available Matched
+      type: integer
+      description: Available matched
+      required: false
+    av_total:
+      title: Available Total
+      type: integer
+      description: Available total
+      required: false
+    command_line:
+      title: Command Line
+      type: string
+      description: Command line
+      required: false
+    created_files:
+      title: Created Files
+      type: '[]created_files'
+      description: Created files
+      required: false
+    file_accesses:
+      title: File Accesses
+      type: '[]file_accesses'
+      description: File accesses
+      required: false
+    handles:
+      title: Handles
+      type: '[]handles'
+      description: Handles
+      required: false
+    icon:
+      title: Icon
+      type: string
+      description: Icon
+      required: false
+    mutants:
+      title: Mutants
+      type: '[]string'
+      description: Mutants
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    normalized_path:
+      title: Normalized Path
+      type: string
+      description: Normalized path
+      required: false
+    parentuid:
+      title: Parent UID
+      type: string
+      description: Parent UID
+      required: false
+    pid:
+      title: PID
+      type: string
+      description: PID
+      required: false
+    process_flags:
+      title: Process Flags
+      type: '[]process_flags'
+      description: Process flags
+      required: false
+    registry:
+      title: Registry
+      type: '[]registry'
+      description: Registry
+      required: false
+    script_calls:
+      title: Script Calls
+      type: '[]script_calls'
+      description: Script calls
+      required: false
+    sha256:
+      title: SHA256
+      type: string
+      description: SHA256
+      required: false
+    streams:
+      title: Streams
+      type: '[]streams'
+      description: Streams
+      required: false
+    uid:
+      title: UID
+      type: string
+      description: UID
+      required: false
+  mitre_attcks:
+    attck_id:
+      title: Attck ID
+      type: string
+      description: Attck ID
+      required: false
+    attck_id_wiki:
+      title: Attck ID Wiki
+      type: string
+      description: Attck ID wiki
+      required: false
+    informative_identifiers:
+      title: Informative Identifiers
+      type: '[]string'
+      description: Informative identifiers
+      required: false
+    informative_identifiers_count:
+      title: Informative Identifiers Count
+      type: integer
+      description: Informative identifiers count
+      required: false
+    malicious_identifiers:
+      title: Malicious Identifiers
+      type: '[]string'
+      description: Malicious identifiers
+      required: false
+    malicious_identifiers_count:
+      title: Malicious Identifiers Count
+      type: integer
+      description: Malicious identifiers count
+      required: false
+    suspicious_identifiers:
+      title: Suspicious Identifiers
+      type: '[]string'
+      description: Suspicious identifiers
+      required: false
+    suspicious_identifiers_count:
+      title: Suspicious Identifiers Count
+      type: integer
+      description: Suspicious identifiers count
+      required: false
+    tactic:
+      title: Tactic
+      type: string
+      description: Tactic
+      required: false
+    technique:
+      title: Technique
+      type: string
+      description: Technique
+      required: false
+  submissions:
+    created_at:
+      title: Created At
+      type: string
+      description: Created at
+      required: false
+    filename:
+      title: file name
+      type: string
+      description: File name
+      required: false
+    submission_id:
+      title: Submission ID
+      type: string
+      description: Submission ID
+      required: false
+    url:
+      title: URL
+      type: string
+      description: URL
+      required: false
+  machine_learning_models:
+    created_at:
+      title: Created At
+      type: string
+      description: Created at
+      required: false
+    data:
+      title: Data
+      type: '[]matched_signatures'
+      description: Data
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    status:
+      title: Status
+      type: string
+      description: Status
+      required: false
+    version:
+      title: Version
+      type: string
+      description: Version
+      required: false
+  report:
+    job_id:
+      title: Job ID
+      type: string
+      description: Job ID which is generated by server
+      required: false
+    environment_id:
+      title: Environment ID
+      type: integer
+      description: The environment that was used for analysis
+      required: false
+    environment_description:
+      title: Environment Description
+      type: string
+      description: Environment description
       required: false
     size:
+      title: Size
       type: integer
       description: Size
       required: false
     type:
+      title: Type
       type: string
-      description: ASCII Text
+      description: Type
       required: false
-    targeturl:
+    type_short:
+      title: Type Short
+      type: '[]string'
+      description: Type short
+      required: false
+    target_url:
+      title: Target URL
       type: string
       description: Target URL
       required: false
-    multiscan_detectrate_pcnt:
-      type: number
+    state:
+      title: State
+      type: string
+      description: State in which the analysis is
       required: false
-    virustotal_familyname:
-      description: VT Family Name
+    error_type:
+      title: Error Type
+      description: Type of error that occurred
       type: string
       required: false
-    virustotal_detectrate_pcnt:
-      description: VT Detect Rate Percent
-      type: number
+    error_origin:
+      title: Error Origin
+      type: string
+      description: Error origin
       required: false
-    isurlanalysis:
+    submit_name:
+      title: Submit Name
+      type: string
+      description: Submit name
+      required: false
+    md5:
+      title: MD5
+      type: string
+      description: MD5
+      required: false
+    sha1:
+      title: SHA1
+      type: string
+      description: SHA1
+      required: false
+    sha256:
+      title: SHA256
+      type: string
+      description: SHA256
+      required: false
+    sha512:
+      title: SHA512
+      type: string
+      description: SHA512
+      required: false
+    ssdeep:
+      title: SS Deep
+      type: string
+      description: SS Deep
+      required: false
+    imphash:
+      title: IMP Hash
+      type: string
+      description: IMP Hash
+      required: false
+    av_detect:
+      title: Available Detect
+      type: integer
+      description: Available detect
+      required: false
+    vx_family:
+      title: VX Family
+      type: string
+      description: VX family
+      required: false
+    url_analysis:
+      title: URL Analysis
       type: boolean
+      description: URL analysis
       required: false
     analysis_start_time:
+      title: Analysis Start Time
       type: string
+      description: Analysis start time
       required: false
-    threatscore:
+    threat_score:
+      title: Threat Score
       type: integer
+      description: Threat score
       required: false
-    isinteresting:
-      description: Is Interesting
+    interesting:
+      title: Interesting
       type: boolean
+      description: Interesting
       required: false
-    threatlevel:
-      description: Threat Level
+    threat_level:
+      title: Threat Level
       type: integer
+      description: Threat level
       required: false
-    compromised_hosts:
-      description: Compromised Hosts
-      type: '[]string'
+    verdict:
+      title: Verdict
+      type: string
+      description: Verdict
+      required: false
+    certificates:
+      title: Certificates
+      type: '[]certificates'
+      description: Certificates
       required: false
     domains:
-      description: Domains
+      title: Domains
       type: '[]string'
+      description: Domains
+      required: false
+    classification_tags:
+      title: Classification Tags
+      type: '[]string'
+      description: Classification tags
+      required: false
+    compromised_hosts:
+      title: Compromised Hosts
+      type: '[]string'
+      description: Compromised hosts
       required: false
     hosts:
-      description: Hosts
+      title: Hosts
       type: '[]string'
+      description: Hosts
+      required: false
+    total_network_connections:
+      title: Total Network Connections
+      type: integer
+      description: Total network connections
+      required: false
+    total_processes:
+      title: Total Processes
+      type: integer
+      description: Total processes
+      required: false
+    total_signatures:
+      title: Total Signatures
+      type: integer
+      description: Total signatures
+      required: false
+    extracted_files:
+      title: Extracted Files
+      type: '[]extracted_files'
+      description: Extracted files
+      required: false
+    file_metadata:
+      title: File Metadata
+      type: file_metadata
+      description: File metadata
+      required: false
+    processes:
+      title: Processes
+      type: '[]processes'
+      description: Processes
+      required: false
+    tags:
+      title: Tags
+      type: '[]string'
+      description: Tags
+      required: false
+    mitre_attcks:
+      title: Mitre Attcks
+      type: '[]mitre_attcks'
+      description: Mitre attcks
+      required: false
+    submissions:
+      title: Submissions
+      type: '[]submissions'
+      description: Submissions
+      required: false
+    network_mode:
+      title: Network Mode
+      type: string
+      description: Network mode
+      required: false
+    machine_learning_models:
+      title: Machine Learning Models
+      type: '[]machine_learning_models'
+      description: Machine learning models
+      required: false
+  searchTerm:
+    id:
+      title: ID
+      description: Name of search term which was used
+      type: string
+      required: false
+    value:
+      title: value
+      description: Value of serch term
+      type: string
+      required: false
+  result:
+    verdict:
+      title: Verdict
+      description: File verdict e.g. malicious
+      type: string
+      required: false
+    av_detect:
+      title: AV detect
+      description: Available MultiScan Detection Percentage
+      type: string
+      required: false
+    threat_score:
+      title: Thread score
+      description: Confidence value of VxStream Sandbox in the verdict; lies between
+        0 and 100
+      type: integer
+      required: false
+    vx_family:
+      title: VX Family
+      description: VX Family e.g. Trojan.Generic
+      type: string
+      required: false
+    job_id:
+      title: Job ID
+      description: Job ID when file was submited
+      type: string
+      required: false
+    sha256:
+      title: SHA256
+      description: SHA256 hash
+      type: string
+      required: false
+    environment_id:
+      title: Environment ID
+      description: The environment that was used for analysis
+      type: integer
+      required: false
+    analysis_start_time:
+      title: Analysis start time
+      description: The time at which the analysis began
+      type: string
+      required: false
+    submit_name:
+      title: Submit name
+      description: File name
+      type: string
+      required: false
+    environment_description:
+      title: Environment description
+      description: Description of the environment on which analysis was conducted
+      type: string
+      required: false
+    size:
+      title: File size (Bytes)
+      description: File size in bytes
+      type: integer
+      required: false
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+    type_short:
+      title: File Extension
+      type: string
+      description: File type e.g. exe
+      required: false
+  related_reports:
+    environment_id:
+      title: Environment ID
+      type: integer
+      description: The environment that was used for analysis
+      required: false
+    error_origin:
+      title: Error Origin
+      type: string
+      description: Error origin
+      required: false
+    error_type:
+      title: Error Type
+      description: Type of error that occurred
+      type: string
+      required: false
+    job_id:
+      title: Job ID
+      type: string
+      description: Job ID which is generated by server
+      required: false
+    sha256:
+      title: SHA256
+      type: string
+      description: SHA256
+      required: false
+    state:
+      title: State
+      type: string
+      description: State in which the analysis is
+      required: false
+    verdict:
+      title: Verdict
+      type: string
+      description: Verdict
       required: false
 connection:
   url:
     title: URL
-    description: URL
     type: string
-    default: https://www.hybrid-analysis.com/api
+    description: Hybrid-analysis API Server URL
     required: true
-    example: https://www.hybrid-analysis.com/api
+    example: https://www.hybrid-analysis.com
+    default: https://www.hybrid-analysis.com
   api_key:
-    type: credential_secret_key
     title: API Key
-    description: API Key
-    required: true
-    example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
-  api_token:
     type: credential_secret_key
-    title: API Token
-    description: API token
+    description: API key
     required: true
-    example: 3395856ce81f2b7382dee72602f798b642f14140abababab
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
 actions:
   lookup_hash:
-    title: Lookup Hash
-    description: Lookup By Hash
+    title: Lookup by Hash
+    description: Get summary information for a given hash
     input:
       hash:
+        title: Hash
+        description: The action takes the following hash types as parameters MD5/SHA1/SHA256
         type: string
-        description: MD5/SHA1/SHA256 Hash
         required: true
-        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+        example: 44d88612fea8a8f36de82e1278abb02f
     output:
       found:
+        title: Found
         description: True if found
         type: boolean
         required: false
       threatscore:
+        title: Threat Score
         description: Threat Score (max found)
         type: integer
         required: false
       reports:
+        title: Reports
         type: '[]report'
         description: Reports
+        required: false
+  lookup_terms:
+    title: Search Database
+    description: Search the database using API v2 provided at https://www.hybrid-analysis.com/docs/api/v2
+    input:
+      filename:
+        title: File Name
+        description: File name
+        type: string
+        required: false
+        example: setup.exe
+      filetype:
+        title: File Type
+        description: File type
+        type: string
+        required: false
+        example: docx
+      country:
+        title: Country
+        description: Country must be specified in the standard ISO 3166-1
+        type: string
+        required: false
+        example: AFG
+      verdict:
+        title: Verdict
+        description: A decision on an submited term
+        type: string
+        enum:
+          - whitelisted
+          - no verdict
+          - no specific threat
+          - suspicious
+          - malicious
+        required: false
+        default: whitelisted
+        example: whitelisted
+      tag:
+        title: Hashtag
+        description: Hashtag by which the analysis will be performed
+        type: string
+        required: false
+        example: ransomware
+      port:
+        title: Port
+        description: Port number which is associated with an IP address
+        type: integer
+        required: false
+        default: 8080
+        example: 8080
+      host:
+        title: Host
+        description: Information about the host which will be analyzed
+        type: string
+        required: false
+        example: 198.51.100.1
+      domain:
+        title: Domain
+        description: Domain which will be analyzed
+        type: string
+        required: false
+        example: example.com
+      url:
+        title: URL
+        description: URL you wish to analyse and get results for
+        type: string
+        required: false
+        example: https://example.com
+      similar_to:
+        title: Similar Samples
+        description: SHA256 Hash of the similar file
+        type: string
+        required: false
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+    output:
+      searchTerms:
+        title: Search Terms
+        description: List of key value pairs. Where the key is the parameter specified and its value
+        type: '[]searchTerm'
+        required: true
+      count:
+        title: Count
+        description: Number of results returned
+        type: integer
+        required: true
+      result:
+        title: Results List
+        description: List of results
+        type: '[]result'
+        required: false
+  submit:
+    title: Submit File
+    description: Submit file for analysis
+    input:
+      file:
+        title: File
+        description: File to be analyzed
+        type: file
+        required: true
+        example: '{"filename": "setup.exe", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" }'
+      submit_name:
+        title: Submit Name
+        type: string
+        description: Optional property which will be used for file type detection and analysis
+        required: false
+        example: testName
+      document_password:
+        title: Password
+        description: Optional document password that will be used to fill-in Adobe/Office password prompts
+        type: string
+        required: false
+        example: somepassword
+      custom_cmd_line:
+        title: Custom Command Line
+        description: Optional commandline that should be passed to the analysis file
+        type: string
+        required: false
+        example: command
+      environment_id:
+        title: Environment ID
+        description: Environment ID on which the analysis will be performed
+        type: string
+        enum:
+          - Linux (Ubuntu 16.04, 64 bit)
+          - Android Static Analysis
+          - Windows 7 64 bit
+          - Windows 7 32 bit (HWP Support)
+          - Windows 7 32 bit
+        default: Linux (Ubuntu 16.04, 64 bit)
+        required: false
+        example: Linux (Ubuntu 16.04, 64 bit)
+      script_logging:
+        title: Enable Script Logging
+        description: When set to true, will set the in-depth script logging engine of the Kernelmode Monitor
+        type: boolean
+        default: false
+        required: false
+        example: true
+      hybrid_analysis:
+        title: Enable Hybrid Analysis
+        description: When set to false, no memory dumps or memory dump analysis will take place
+        type: boolean
+        default: true
+        required: false
+        example: true
+      experimental_anti_evasion:
+        title: Enable Experimental Anti Evasion Techniques
+        description: When set to true, will set all experimental anti-evasion options of the Kernelmode Monitor
+        type: boolean
+        default: true
+        required: false
+        example: true
+    output:
+      job_id:
+        title: Job ID
+        description: Job ID which will be generated by server
+        type: string
+        required: false
+      submission_id:
+        title: Submission ID
+        description: Submission ID which will be generated by server
+        type: string
+        required: false
+      environment_id:
+        title: Enviroment ID
+        description: The environment that was used for analysis
+        type: integer
+        required: false
+      sha256:
+        title: SHA256
+        description: SHA256 Hash which could be used for report retrievement
+        type: string
+        required: false
+  report:
+    title: Retrieve Report
+    description: Retrieve report by providing SHA256. This hash is generated by the API
+    input:
+      hash:
+        title: Hash
+        description: SHA256 hash
+        type: string
+        required: true
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+    output:
+      state:
+        title: State
+        type: string
+        description: State in which the analysis is
+        required: true
+      error_type:
+        title: Error Type
+        type: string
+        description: Type of error that occurred
+        required: false
+      error_origin:
+        title: Error Origin
+        type: string
+        description: Error origin
+        required: false
+      error:
+        title: Error
+        type: string
+        description: An error that occurred during the analysis
+        required: false
+      related_reports:
+        title: Related Reports
+        type: '[]related_reports'
+        description: Related reports which contained analysis information on linked data
         required: false

@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Hybrid Analysis"
 Vendor = "rapid7"
-Version = "2.0.2"
+Version = "3.0.0"
 Description = "Lookup file hashes to determine if they are malicious"
 
 
@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
+    import insightconnect_plugin_runtime
     from icon_hybrid_analysis import connection, actions, triggers
 
-    class ICONHybridAnalysis(komand.Plugin):
+    class ICONHybridAnalysis(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -36,9 +36,15 @@ def main():
             )
             self.add_action(actions.LookupHash())
 
+            self.add_action(actions.LookupTerms())
+
+            self.add_action(actions.Report())
+
+            self.add_action(actions.Submit())
+
 
     """Run plugin"""
-    cli = komand.CLI(ICONHybridAnalysis())
+    cli = insightconnect_plugin_runtime.CLI(ICONHybridAnalysis())
     cli.run()
 
 

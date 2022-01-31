@@ -1,11 +1,13 @@
-import komand
-from .schema import LookupHashInput, LookupHashOutput
+import validators
 
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
+from .schema import LookupHashInput, LookupHashOutput, Input, Output
 
 
-class LookupHash(komand.Action):
+class LookupHash(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="lookup_hash",
@@ -14,30 +16,24 @@ class LookupHash(komand.Action):
             output=LookupHashOutput(),
         )
 
-    def normalize(self, result):
-        formatted = {"found": False, "threatscore": 0, "reports": []}
-        if result.get("response_code"):
-            return formatted
-
-        response = result.get("response", [])
-        if result and len(response) > 0:
-            formatted["found"] = True
-            formatted["reports"] = response
-            if response and isinstance(response, list) and response[0] and isinstance(response[0], dict):
-                formatted["threatscore"] = response[0].get("threatscore")
-            else:
-                formatted["threatscore"] = 0
-
+    def __normalize(self, result):
+        formatted = {Output.FOUND: False, Output.THREATSCORE: 0, Output.REPORTS: []}
+        if result and len(result) > 0:
+            result = insightconnect_plugin_runtime.helper.clean(result)
+            return {
+                Output.FOUND: True,
+                Output.REPORTS: result,
+                Output.THREATSCORE: max(node.get("threat_score", 0) for node in result),
+            }
         return formatted
-
-    def lookup(self, hash_=""):
-        r = self.connection.get(hash_)
-        if r.status_code == 200:
-            results = r.json()
-            self.logger.debug("Got results %s", results)
-            return self.normalize(results)
-        return {"found": False, "threatscore": 0, "reports": []}
 
     def run(self, params={}):
         """Run action"""
-        return self.lookup(params["hash"])
+        hash_to_analise = params.get(Input.HASH)
+        if validators.md5(hash_to_analise) or validators.sha256(hash_to_analise) or validators.sha1(hash_to_analise):
+            return self.__normalize(self.connection.api.lookup_by_hash(hash_to_analise))
+        else:
+            raise PluginException(
+                cause="Provided hash is not supported.",
+                assistance="The API only supports MD5, SHA256, sha1 hashes. Please check the provided hash and try again.",
+            )

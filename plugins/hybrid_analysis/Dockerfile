@@ -1,4 +1,4 @@
-FROM komand/python-pypy3-plugin:2
+FROM rapid7/insightconnect-python-3-38-slim-plugin
 # The three supported python parent images are:
 # - komand/python-2-plugin
 # - komand/python-3-plugin
@@ -21,5 +21,8 @@ RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
 # Install plugin
 RUN python setup.py build && python setup.py install
+
+# User to run plugin code. The two supported users are: root, nobody
+USER nobody
 
 ENTRYPOINT ["/usr/local/bin/icon_hybrid_analysis"]
