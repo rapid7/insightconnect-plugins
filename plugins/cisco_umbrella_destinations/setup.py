@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="cisco_umbrella_destinations-conor-plugin",
-      version="1.0.1",
+      version="1.0.3",
       description="Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization",
       author="conor",
       author_email="",
