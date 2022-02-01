@@ -118,7 +118,7 @@ types:
       type: boolean
       required: false
     meta:
-      title: Meta Data
+      title: Metadata
       description: Secondary information
       type: meta
       required: false
