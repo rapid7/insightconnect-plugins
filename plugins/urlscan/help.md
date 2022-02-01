@@ -14,6 +14,10 @@ on potential malicous indicators.
 
 * A URLScan API key
 
+# Supported Product Versions
+
+* urlscan.io API v1
+
 # Documentation
 
 ## Setup
@@ -819,6 +823,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.0.1 - Fix issue with not compatible types in custom output type for Get Scan Result action | Add unit tests for Get Scan Result | Refactor existing unit tests
 * 4.0.0 - Improve pagination in Search action
 * 3.0.1 - Add unit test for Submit URL for Scan action | Add error handling for HTTP 429 status code in Submit URL for Scan action
 * 3.0.0 - Major version bump to ensure awareness of a breaking change related to the addition of the `was_scan_skipped` output in Submit URL for Scan action in the previous version

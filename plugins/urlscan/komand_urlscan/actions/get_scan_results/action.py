@@ -1,10 +1,13 @@
-import komand
-from .schema import GetScanResultsInput, GetScanResultsOutput, Input, Output, Component
+import json
 
+import komand
+import requests
 # Custom imports below
 from komand.exceptions import PluginException
-import requests
-import json
+
+from komand_urlscan.util.constants import SCAN_RESULTS
+from komand_urlscan.util.util import Util
+from .schema import GetScanResultsInput, GetScanResultsOutput, Input, Output, Component
 
 
 class GetScanResults(komand.Action):
@@ -39,8 +42,8 @@ class GetScanResults(komand.Action):
                 raise PluginException(
                     cause="The requested scan results were not found. ",
                     assistance="If you are running this action directly after a new scan, "
-                    "you may need to add a delay to ensure the scan results "
-                    "are available when they are requested (typically ~5-10 seconds is sufficient.",
+                               "you may need to add a delay to ensure the scan results "
+                               "are available when they are requested (typically ~5-10 seconds is sufficient.",
                 )
 
             if ("message" in js) and ("description" in js):
@@ -64,7 +67,7 @@ class GetScanResults(komand.Action):
         ret["screenshotURL"] = su
 
         return {
-            Output.SCAN_RESULTS: ret,
+            Output.SCAN_RESULTS: Util.update_properties(ret, SCAN_RESULTS),
             Output.TASK: js.get("task", {}),
             Output.PAGE: js.get("page", {}),
             Output.LISTS: js.get("lists", {}),
