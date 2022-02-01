@@ -132,7 +132,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|alert|object|True|An alert|
+|alerts|[]object|True|An object containing information and results about the alerts from interval time|
 
 Example output:
 
@@ -168,6 +168,7 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
+* 3.0.0 - Fix an issue in Get New Alerts trigger to filter duplicate alerts. Output contains list of new alerts
 * 2.0.0 - Configuration for interval input parameter
 * 1.0.0 - Initial plugin
 

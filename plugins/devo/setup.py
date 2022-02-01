@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="devo-rapid7-plugin",
-      version="2.0.0",
+      version="3.0.0",
       description="Devo is the cloud-native logging and security analytics solution that delivers real-time visibility for security and operations teams",
       author="rapid7",
       author_email="",
