@@ -1,0 +1,15 @@
+{
+  "http_method": "DELETE",
+  "revision": "47de64fb6bbc46f7e42e9d7c0046fe61",
+  "revision_changed": true,
+  "old_revision": "b9b80c92ba7aa603a6539274a4e03820",
+  "mkey": "test.com",
+  "status": "success",
+  "http_status": 200,
+  "vdom": "root",
+  "path": "firewall",
+  "name": "address",
+  "serial": "FGVM02TM20001791",
+  "version": "v6.2.3",
+  "build": 1066
+}

@@ -16,6 +16,10 @@ for flexible policy management of large groups of dynamic addresses.
 * An admin API key
 * The IP of the orchestrator must be set as a trusted host in Settings > Administrator (Edit button) > Trusted Hosts 
 
+# Supported Product Versions
+
+* 6.2.3
+
 # Documentation
 
 ## Setup
@@ -26,7 +30,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|API key|None|2Fty5834tFpBdidePJnt9075MMdkUb|
 |hostname|string|None|True|Hostname or IP of your FortiGate server e.g. myfortigate.internal, 192.168.10.1, 192.168.10.1:8000|None|example.com|
-|ssl_verify|boolean|None|True|SSL verify|None|False|
+|ssl_verify|boolean|False|True|SSL verify|None|False|
 
 Example input:
 
@@ -52,13 +56,15 @@ This action removes an address object from an address group.
 |----|----|-------|--------|-----------|----|-------|
 |address_object|string|None|True|Address object|None|MaliciousHost|
 |group|string|None|True|Group name|None|InsightConnect Block List|
+|ipv6_group|string|None|True|The name of the IPv6 address group|None|InsightConnect IPv6 Block List|
 
 Example input:
 
 ```
 {
   "address_object": "MaliciousHost",
-  "group": "InsightConnect Block List"
+  "group": "InsightConnect Block List",
+  "ipv6_group": "InsightConnect IPv6 Block List"
 }
 ```
 
@@ -103,6 +109,7 @@ This action is used to check if an IP address is in an address group.
 |address|string|None|True|The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, domain) within the address object instead of matching the name|None|198.51.100.100|
 |enable_search|boolean|False|True|When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don't know the Address Object by its name|None|False|
 |group|string|None|True|Name of Address Group to check for address|None|InsightConnect Block Policy|
+|ipv6_group|string|None|True|The name of the IPv6 address group|None|InsightConnect IPv6 Block List|
 
 Example input:
 
@@ -110,7 +117,8 @@ Example input:
 {
   "address": "198.51.100.100",
   "enable_search": false,
-  "group": "InsightConnect Block Policy"
+  "group": "InsightConnect Block Policy",
+  "ipv6_group": "InsightConnect IPv6 Block List"
 }
 ```
 
@@ -304,13 +312,15 @@ This action is used to add an address object to an address group.
 |----|----|-------|--------|-----------|----|-------|
 |address_object|string|None|True|Address object|None|MaliciousHost|
 |group|string|None|True|Group name|None|InsightConnect Block List|
+|ipv6_group|string|None|True|The name of the IPv6 address group|None|InsightConnect IPv6 Block List|
 
 Example input:
 
 ```
 {
   "address_object": "MaliciousHost",
-  "group": "InsightConnect Block List"
+  "group": "InsightConnect Block List",
+  "ipv6_group": "InsightConnect IPv6 Block List"
 }
 ```
 
@@ -459,6 +469,7 @@ This action is used to get address objects.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |fqdn_filter|string|None|False|Optional FQDN to filter on|None|example.com|
+|ipv6_subnet_filter|string|None|False|Optional IPv6 subnet to filter on|None|2001:db8:8:4::2/128|
 |name_filter|string|None|False|Optional name to filter on|None|MaliciousHost|
 |subnet_filter|string|None|False|Optional subnet to filter on|None|198.51.100.100/32|
 
@@ -467,6 +478,7 @@ Example input:
 ```
 {
   "fqdn_filter": "example.com",
+  "ipv6_subnet_filter": "2001:db8:8:4::2/128",
   "name_filter": "MaliciousHost",
   "subnet_filter": "198.51.100.100/32"
 }
@@ -477,6 +489,7 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |address_objects|[]address_object|True|A list of address objects|
+|ipv6_address_objects|[]ipv6_address_object|True|A list of IPv6 address objects|
 
 Example output:
 
@@ -513,7 +526,7 @@ _This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-#### address_objects
+#### address_object
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -523,6 +536,7 @@ _This plugin does not contain any triggers._
 |Color|integer|False|Color|
 |Comment|string|False|Comment|
 |End-MAC|string|False|End-MAC|
+|FQDN|string|False|FQDN|
 |FSSO-Group|[]object|False|FSSO-group|
 |List|[]object|False|List|
 |Name|string|False|Name|
@@ -542,6 +556,38 @@ _This plugin does not contain any triggers._
 |----|----|--------|-----------|
 |Name|string|False|Name|
 |Q Origin Key|string|False|Q origin key|
+
+#### ipv6_address_object
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Cache-TTL|integer|False|Cache-TTL|
+|Color|integer|False|Color|
+|Comment|string|False|Comment|
+|End-IP|string|False|End IP|
+|Host|string|False|Host|
+|Host-type|string|False|Host type|
+|IP6|string|False|IP6|
+|List|[]list|False|List|
+|Name|string|False|Name|
+|Obj-ID|string|False|Object ID for NSX|
+|Q Origin Key|string|False|Q origin key|
+|SDN|string|False|SDN|
+|Start-IP|string|False|Start IP|
+|Subnet-segment|[]segments|False|Subnet segment|
+|Tagging|[]tagging|False|Tagging|
+|Template|string|False|Template|
+|Type|string|False|Type|
+|UUID|string|False|UUID|
+|Visibility|string|False|Visibility|
+
+#### list
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|IP|string|False|IP|
+|Net-ID|string|False|Network ID|
+|Obj-ID|string|False|Object ID|
 
 #### policies
 
@@ -644,6 +690,28 @@ _This plugin does not contain any triggers._
 |Web cache-https|string|False|Web cache-https|
 |WSSO|string|False|WSSO|
 
+#### segments
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Name|string|False|Name|
+|Type|string|False|Type|
+|Value|string|False|Value|
+
+#### tagging
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Category|string|False|Category|
+|Name|string|False|Name|
+|Tags|[]tags|False|Tags|
+
+#### tags
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Name|string|False|Name|
+
 ## Troubleshooting
 
 To accomplish this, log into the FortiGate firewall. Go to the System tab -> Administrator subtab and then select and edit the API admin.
@@ -651,6 +719,7 @@ Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51
 
 # Version History
 
+* 6.0.0 - Fix the issue where creating address objects for domains does not work in the Create Address Object action | Fix the issue where address objects for IPv4 were created using the wrong endpoint in the Create Address Object action | Correct the payloads for creating address objects for domains and IPv6 in the Create Address Object action | Add support for checking if IPv6 is whitelisted in the Create Address Object action | Fix IPv6 support in all actions | Code refactor | Add default value for SSL verify parameter in connection configuration
 * 5.1.1 - Add `docs_url` in plugin spec | Update `source_url` in plugin spec
 * 5.1.0 - Support for IPV6 in all actions
 * 5.0.0 - Improve input handling to allow IPs, CIDRs, and subnet masks in actions | Fix output of Get Address Objects action to return usable data | Update Get Address Objects action to allow for additional search parameters
