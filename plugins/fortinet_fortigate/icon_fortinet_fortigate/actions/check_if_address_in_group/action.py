@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import (
     CheckIfAddressInGroupInput,
     CheckIfAddressInGroupOutput,
@@ -8,12 +8,13 @@ from .schema import (
 )
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 import ipaddress
+import validators
 from icon_fortinet_fortigate.util.util import Helpers
 
 
-class CheckIfAddressInGroup(komand.Action):
+class CheckIfAddressInGroup(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="check_if_address_in_group",
@@ -23,71 +24,89 @@ class CheckIfAddressInGroup(komand.Action):
         )
 
     def run(self, params={}):  # noqa: MC0001
-        addrgrp = params.get(Input.GROUP)
+        group_name = params.get(Input.GROUP)
+        ipv6_group_name = params.get(Input.IPV6_GROUP)
         address_to_check = params.get(Input.ADDRESS)
         enable_search = params.get(Input.ENABLE_SEARCH)
-        helper = Helpers(self.logger)
 
-        is_ipv6 = self.connection.get_address_object(address_to_check)["name"] == "address6"
-        response = self.connection.get_address_group(addrgrp, is_ipv6)
-        address_objects = response["member"]
+        address_objects = self.connection.api.get_address_group(group_name, False).get("member")
+        ipv6_address_objects = self.connection.api.get_address_group(ipv6_group_name, True).get("member")
 
         found = False
-        addresses_found = list()
+        addresses_found = []
 
-        if enable_search:
-            for item in address_objects:
-                name = item["name"]
-                params = {"filter": f"name=@{name}"}
-                endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/address/"
-                response = self.connection.session.get(endpoint, params=params, verify=self.connection.ssl_verify)
-                try:
-                    address_data = response.json()
-                except ValueError:
-                    raise PluginException(
-                        cause="Data sent by FortiGate was not in JSON format.\n",
-                        assistance="Contact support for help.",
-                        data=response.text,
-                    )
+        if enable_search and address_objects:
+            found, addresses_found = self.search_address_object_by_address(
+                address_to_check, address_objects, "firewall/address"
+            )
 
-                helper.http_errors(address_data, response.status_code)
+        if enable_search and ipv6_address_objects and not found:
+            found, addresses_found = self.search_address_object_by_address(
+                address_to_check, ipv6_address_objects, "firewall/address6"
+            )
 
-                try:
-                    results = address_data["results"]
-                except KeyError:
-                    raise PluginException(
-                        cause="No results were returned by FortiGate.\n",
-                        assistance="This is normally caused by an invalid address group name."
-                        " Double check that the address group name is correct",
-                    )
-                for result in results:
-                    # If address_object is a fqdn
-                    if result["type"] == "fqdn":
-                        if address_to_check == result["fqdn"]:
-                            addresses_found.append(result["fqdn"])
-                            found = True
-                    # If address_object is a ipmask
-                    if result["type"] == "ipmask":
-                        # Convert returned address to CIDR
-                        ipmask = result["subnet"].replace(" ", "/")
-                        ipmask = ipaddress.IPv4Network(ipmask)
+        if address_objects and not found:
+            found, addresses_found = self.search_address_object_by_name(address_to_check, address_objects)
 
-                        # Convert given address to CIDR address to CIDR
-                        try:
-                            address_to_check = ipaddress.IPv4Network(address_to_check)
-                        except ipaddress.AddressValueError:
-                            pass
-
-                        if address_to_check == ipmask:
-                            addresses_found.append(str(ipmask))
-                            found = True
-                    # This only looks for ipmasks (IP or CIDR) and FQDN's.
-                    # Other address types like mac address are not searchable at present
-            return {Output.FOUND: found, Output.ADDRESS_OBJECTS: addresses_found}
-
-        for item in address_objects:
-            if address_to_check == item["name"]:
-                addresses_found.append(item["name"])
-                found = True
+        if ipv6_address_objects and not found:
+            found, addresses_found = self.search_address_object_by_name(address_to_check, ipv6_address_objects)
 
         return {Output.FOUND: found, Output.ADDRESS_OBJECTS: addresses_found}
+
+    @staticmethod
+    def search_address_object_by_name(address_name: str, address_objects: list) -> bool:
+        found = False
+        addresses_found = []
+        for item in address_objects:
+            if address_name == item["name"]:
+                addresses_found.append(item["name"])
+                found = True
+        return found, addresses_found
+
+    def search_address_object_by_address(self, address: str, address_objects: list, endpoint: str) -> bool:
+        found = False
+        addresses_found = []
+        for item in address_objects:
+            item_name = item.get("name")
+            if not item_name:
+                continue
+            try:
+                results = self.connection.api.get_address_objects(
+                    endpoint, params={"filter": f"name=@{item_name}"}
+                ).get("results", [])
+            except KeyError:
+                raise PluginException(
+                    cause="No results were returned by FortiGate.\n",
+                    assistance="This is normally caused by an invalid address group name."
+                    " Double check that the address group name is correct.",
+                )
+            for result in results:
+                result_type = result.get("type")
+                # If address_object is a IPv6
+                if result_type == "ipprefix" and (validators.ipv6(address) or validators.ipv6_cidr(address)):
+                    address = str(ipaddress.IPv6Network(address))
+                    result_ipv6 = result.get("ip6")
+                    if address == result_ipv6:
+                        addresses_found.append(result_ipv6)
+                        found = True
+                # If address_object is a fqdn
+                if result_type == "fqdn":
+                    result_fqdn = result.get("fqdn")
+                    if address == result_fqdn:
+                        addresses_found.append(result_fqdn)
+                        found = True
+                # If address_object is a ipmask
+                if result_type == "ipmask":
+                    # Convert returned address to CIDR
+                    ipmask = result.get("subnet", "").replace(" ", "/")
+                    ipmask = ipaddress.IPv4Network(ipmask)
+                    # Convert given address to CIDR address to CIDR
+                    try:
+                        address = ipaddress.IPv4Network(address)
+                    except ipaddress.AddressValueError:
+                        pass
+                    if address == ipmask:
+                        addresses_found.append(str(ipmask))
+                        found = True
+
+        return found, addresses_found

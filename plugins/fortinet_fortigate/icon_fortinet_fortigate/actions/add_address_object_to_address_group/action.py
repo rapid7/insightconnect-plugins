@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import (
     AddAddressObjectToAddressGroupInput,
     AddAddressObjectToAddressGroupOutput,
@@ -8,11 +8,10 @@ from .schema import (
 )
 
 # Custom imports below
-from komand.exceptions import PluginException
-from icon_fortinet_fortigate.util.util import Helpers
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class AddAddressObjectToAddressGroup(komand.Action):
+class AddAddressObjectToAddressGroup(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_address_object_to_address_group",
@@ -22,46 +21,23 @@ class AddAddressObjectToAddressGroup(komand.Action):
         )
 
     def run(self, params={}):
-        group_name = params[Input.GROUP]
-        address_name = params[Input.ADDRESS_OBJECT]
-        helper = Helpers(self.logger)
+        group_name = params.get(Input.GROUP)
+        ipv6_group_name = params.get(Input.IPV6_GROUP)
+        address_name = params.get(Input.ADDRESS_OBJECT)
 
-        is_ipv6 = self.connection.get_address_object(address_name)["name"] == "address6"
+        is_ipv6 = self.connection.api.get_address_object(address_name)["name"] == "address6"
 
-        group = self.connection.get_address_group(group_name, is_ipv6)
+        if is_ipv6:
+            group = self.connection.api.get_address_group(ipv6_group_name, is_ipv6)
+            endpoint = f"firewall/addrgrp6/{ipv6_group_name}"
+        else:
+            group = self.connection.api.get_address_group(group_name, is_ipv6)
+            endpoint = f"firewall/addrgrp/{group_name}"
+
         group_members = group.get("member")
-
         group_members.append({"name": address_name})
         group["member"] = group_members
 
-        endpoint = self._determine_endpoint(is_ipv6, group_name)
+        response = self.connection.api.modify_objects_in_group(endpoint, group)
 
-        response = self.connection.session.put(endpoint, json=group, verify=self.connection.ssl_verify)
-
-        try:
-            json_response = response.json()
-        except ValueError:
-            raise PluginException(
-                cause="Data sent by FortiGate was not in JSON format.\n",
-                assistance="Contact support for help.",
-                data=response.text,
-            )
-
-        if json_response.get("error", 0) == -3:
-            raise PluginException(
-                cause=f"Add address object to address group failed: {endpoint}\n",
-                assistance="The error code returned was -3. This usually indicates"
-                "that the address object specified could not be found.",
-                data=response.text,
-            )
-        helper.http_errors(json_response, response.status_code)
-
-        success = json_response.get("status", "").lower() == "success"
-
-        return {Output.SUCCESS: success, Output.RESULT_OBJECT: json_response}
-
-    def _determine_endpoint(self, is_ipv6, group_name):
-        if is_ipv6:
-            return f"https://{self.connection.host}/api/v2/cmdb/firewall/addrgrp6/{group_name}"
-
-        return f"https://{self.connection.host}/api/v2/cmdb/firewall/addrgrp/{group_name}"
+        return {Output.SUCCESS: response.get("status", "").lower() == "success", Output.RESULT_OBJECT: response}

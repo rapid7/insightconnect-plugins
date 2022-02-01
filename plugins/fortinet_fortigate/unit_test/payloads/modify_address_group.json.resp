@@ -1,0 +1,15 @@
+{
+  "build": 1066,
+  "http_method": "PUT",
+  "http_status": 200,
+  "mkey": "Address Object Group",
+  "name": "addrgrp",
+  "old_revision": "24672d1fabce76df50acf6442f2109c0",
+  "path": "firewall",
+  "revision": "30b53592bb7296648e9dd4b2233e9ff3",
+  "revision_changed": true,
+  "serial": "FGVM02TM20001791",
+  "status": "success",
+  "vdom": "root",
+  "version": "v6.2.3"
+}
