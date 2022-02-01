@@ -193,7 +193,7 @@ This action is used to create a destination list.
 |----|----|-------|--------|-----------|----|-------|
 |access|string|None|False|Can be allow or block|['allow', 'block']|allow|
 |comment|string|None|False|Information about the destination|None|Suspicious domain|
-|destination|string|None|False|Enter the destination here|None|https://example.com|
+|destination|string|None|False|Enter the destination here|None|www.example.com|
 |isGlobal|boolean|None|False|Boolean value indicating global state|None|True|
 |label|string|None|False|Label for the destination list|None|New list|
 |type|string|None|False|Can be DOMAIN, URL or IPV4|['DOMAIN', 'URL', 'IPV4']|URL|
@@ -482,4 +482,3 @@ _This plugin does not contain any troubleshooting information._
 
 * [Cisco Umbrella](https://umbrella.cisco.com/)
 * [Cisco Umbrella Destinations Docs](https://developer.cisco.com/docs/cloud-security/#!destination-lists-introduction-overview)
-
