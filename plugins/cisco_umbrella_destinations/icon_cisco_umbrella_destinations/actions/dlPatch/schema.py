@@ -113,7 +113,7 @@ class DlPatchOutput(insightconnect_plugin_runtime.Output):
         },
         "meta": {
           "$ref": "#/definitions/meta",
-          "title": "Meta Data",
+          "title": "Metadata",
           "description": "Secondary information",
           "order": 11
         },

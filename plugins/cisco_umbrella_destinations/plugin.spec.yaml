@@ -4,6 +4,7 @@ products: [insightconnect]
 name: cisco_umbrella_destinations
 title: Cisco Umbrella Destinations
 version: 1.0.0
+supported_versions: ["2022-31-01"]
 description: Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization
 vendor: rapid7
 support: rapid7
