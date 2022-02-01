@@ -14,7 +14,7 @@ class Input:
 
 class Output:
     
-    ALERT = "alert"
+    ALERTS = "alerts"
     
 
 class GetNewAlertsInput(insightconnect_plugin_runtime.Input):
@@ -44,15 +44,18 @@ class GetNewAlertsOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "alert": {
-      "type": "object",
-      "title": "Alert",
-      "description": "An alert",
+    "alerts": {
+      "type": "array",
+      "title": "Alerts",
+      "description": "An object containing information and results about the alerts from interval time",
+      "items": {
+        "type": "object"
+      },
       "order": 1
     }
   },
   "required": [
-    "alert"
+    "alerts"
   ]
 }
     """)

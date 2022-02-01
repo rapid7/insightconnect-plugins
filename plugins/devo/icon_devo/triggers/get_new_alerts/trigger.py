@@ -29,9 +29,8 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
             new_alerts = new_alerts_query_output.get("object", {})
             if new_alerts:
                 self.logger.info("Alerts received, sending...")
-                for alert in new_alerts:
-                    cleaned_result = insightconnect_plugin_runtime.helper.clean(alert)
-                    self.send({Output.ALERT: cleaned_result})
+                cleaned_result = insightconnect_plugin_runtime.helper.clean(new_alerts)
+                self.send({Output.ALERTS: cleaned_result})
             else:
                 self.logger.info("No new alerts found.")
 
