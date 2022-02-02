@@ -1060,19 +1060,33 @@ actions:
         type: boolean
         description: Whether or not the unisolation was successful
         required: false
-  uninstall_sensor:
-    title: Uninstall Sensor
-    description: Uninstalls a sensor given a sensor ID
+  uninstall_sensors:
+    title: Uninstall sensors
+    description: Uninstalls a single or multiple sensors
     input:
       id:
         type: string
         description: The sensor ID
         required: false
         title: ID
-        example: '1234'
+      hostname:
+        type: string
+        description: The sensor hostname
+        required: false
+        title: Hostname
+      ip:
+        type: string
+        description: The sensor IP address
+        required: false
+        title: IP Address
+      groupid:
+        type: string
+        description: The sensor group ID
+        required: false
+        title: Group ID
     output:
       success:
-        description: Whether or not the uninstall was successful
+        description: Whether or not the uninstallation/s was successful
         type: boolean
         required: false
 

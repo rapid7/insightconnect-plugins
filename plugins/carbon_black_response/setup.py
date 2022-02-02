@@ -9,6 +9,6 @@ setup(name="carbon_black_response-rapid7-plugin",
       author_email="",
       url="",
       packages=find_packages(),
-      install_requires=['insightconnect_plugin_runtime'],  # Add third-party dependencies to requirements.txt, not here!
+      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/icon_carbon_black_response']
       )
