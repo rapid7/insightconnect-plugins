@@ -12,5 +12,6 @@ from .list_feeds.action import ListFeeds
 from .list_processes.action import ListProcesses
 from .list_sensors.action import ListSensors
 from .list_watchlists.action import ListWatchlists
+from .uninstall_sensors.action import UninstallSensors
 from .unisolate_sensor.action import UnisolateSensor
 from .update_alert.action import UpdateAlert
