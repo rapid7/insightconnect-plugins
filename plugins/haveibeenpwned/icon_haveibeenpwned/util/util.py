@@ -50,7 +50,7 @@ class HaveIBeenPwned(object):
             else:
                 # Just in case we don't get a Retry-After in the header
                 if max_attempts > 0:
-                    range_increase = 2 ** self._retries
+                    range_increase = 2**self._retries
                     self._retries = self._retries + 1
                     # set random time to wait
                     back_off = random.randrange(3, 5 + range_increase)  # nosec

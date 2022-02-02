@@ -68,7 +68,7 @@ class Calculate(insightconnect_plugin_runtime.Action):
 
         # Calculate number of subnets
         borrowed = int(subnet.subnet()) - bits
-        subnets = 2 ** borrowed
+        subnets = 2**borrowed
 
         # Subnets should never return zero
         if subnets == 0:
