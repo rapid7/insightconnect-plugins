@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "VMware Carbon Black EDR"
 Vendor = "rapid7"
-Version = "3.2.11"
+Version = "3.1.11"
 Description = "Automate information collection, endpoint isolation and hash blacklisting"
 
 
@@ -62,7 +62,7 @@ def main():
 
             self.add_action(actions.ListWatchlists())
 
-            self.add_action(actions.UninstallSensor())
+            self.add_action(actions.UninstallSensors())
 
             self.add_action(actions.UnisolateSensor())
 
