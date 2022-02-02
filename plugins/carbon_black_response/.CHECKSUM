@@ -1,7 +1,7 @@
 {
-	"spec": "580b806f120a887ed5413ae82565bd0e",
-	"manifest": "49b27207ffb2a8b12a2e0ec59d7bae5e",
-	"setup": "c20be629208b89f0026c4d655f62b7f0",
+	"spec": "31b203fe20a054ca8cf962e838d4aed8",
+	"manifest": "0dbb366c9cc4315564cb4bad43760bd2",
+	"setup": "2af334ffce5807391d6dcd0b1701aa5c",
 	"schemas": [
 		{
 			"identifier": "add_feed/schema.py",
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "add_watchlist/schema.py",
-			"hash": "69e34c719ee5ea630d4c36ebd5667895"
+			"hash": "c6b4345f1d5748de1c4cb5379ed8ea04"
 		},
 		{
 			"identifier": "blacklist_hash/schema.py",
@@ -56,8 +56,8 @@
 			"hash": "a735c34a0a78b7500fd2a2bec1106074"
 		},
 		{
-			"identifier": "uninstall_sensor/schema.py",
-			"hash": "b63fc68d1498f9d07022096d23a1e1b4"
+			"identifier": "uninstall_sensors/schema.py",
+			"hash": "6e3879759aa50c32cc3b06a8b8b34085"
 		},
 		{
 			"identifier": "unisolate_sensor/schema.py",
@@ -65,7 +65,7 @@
 		},
 		{
 			"identifier": "update_alert/schema.py",
-			"hash": "11e53578f364db41d7c57e9bca9b479c"
+			"hash": "5a0f71a75b4c86bd9e06a819bf685d3c"
 		},
 		{
 			"identifier": "connection/schema.py",
@@ -74,6 +74,46 @@
 		{
 			"identifier": "new_alert/schema.py",
 			"hash": "13fcb7caa9b1f801f5e694d05378cd4a"
+		},
+		{
+			"identifier": "insightconnect_plugin_runtime/schema.py",
+			"hash": "98e2cf8bf394d0b6f97cdfeb657ea71b"
+		},
+		{
+			"identifier": "komand/schema.py",
+			"hash": "37985d79c6d8a2b36ddb69e12ee6e0bb"
+		},
+		{
+			"identifier": "marshmallow/schema.py",
+			"hash": "7c9fc22caa77ab8be9957e79867f426a"
+		},
+		{
+			"identifier": "hello/schema.py",
+			"hash": "92ec4b966e523fe43b8d3e1589ecd235"
+		},
+		{
+			"identifier": "return_bad_json/schema.py",
+			"hash": "bb41c13e9e71e212c1545150a16f8b73"
+		},
+		{
+			"identifier": "throw_exception/schema.py",
+			"hash": "f59f8278af731495ae3b2367744224f2"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "f1bf7d508c81c245888665a322d984e8"
+		},
+		{
+			"identifier": "hello_trigger/schema.py",
+			"hash": "6fda62f9b28a899e2ecb7aab1311bbb2"
+		},
+		{
+			"identifier": "return_bad_json_trigger/schema.py",
+			"hash": "9a207816ba5b0ab0f9e4f40d86c4cc3e"
+		},
+		{
+			"identifier": "throw_exception_trigger/schema.py",
+			"hash": "23e4aee31e1c532d9ed50830efad1b8d"
 		}
 	]
 }
