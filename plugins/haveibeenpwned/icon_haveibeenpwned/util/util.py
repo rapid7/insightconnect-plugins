@@ -42,8 +42,8 @@ class HaveIBeenPwned(object):
                 retry = response.headers["Retry-After"]
                 # HIBP recommendation on adding an additional 100 millisecond delay between requests
                 self.logger.info(
-                    f"Too many requests. The rate limit has been exceeded."
-                    " Will retry after back off of: {retry} sec")
+                    f"Too many requests. The rate limit has been exceeded." " Will retry after back off of: {retry} sec"
+                )
                 time.sleep(retry + 0.100)
                 return self.get_request(url, params, max_attempts=0)  # Retry get_request
             else:
@@ -55,7 +55,8 @@ class HaveIBeenPwned(object):
                     back_off = random.randrange(3, 5 + range_increase)  # nosec
                     self.logger.info(
                         f"Too many requests. The rate limit has been exceeded."
-                        " Will retry after back off of: {back_off} sec")
+                        " Will retry after back off of: {back_off} sec"
+                    )
                     time.sleep(back_off)  # Wait to slow down request rate
                     return self.get_request(url, params, max_attempts=max_attempts - 1)  # Retry get_request
             raise Exception(
