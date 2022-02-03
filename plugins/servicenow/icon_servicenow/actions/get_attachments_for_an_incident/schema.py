@@ -44,13 +44,37 @@ class GetAttachmentsForAnIncidentOutput(insightconnect_plugin_runtime.Output):
     "incident_attachments": {
       "type": "array",
       "title": "Incident Attachments",
-      "description": "Attachments for a given incident ID",
+      "description": "List of attachments for a given incident ID",
       "items": {
-        "type": "string",
-        "displayType": "bytes",
-        "format": "bytes"
+        "$ref": "#/definitions/attachment_file"
       },
       "order": 1
+    }
+  },
+  "definitions": {
+    "attachment_file": {
+      "type": "object",
+      "title": "attachment_file",
+      "properties": {
+        "content": {
+          "type": "string",
+          "title": "Content",
+          "description": "File content encoded with base64",
+          "order": 2
+        },
+        "content_type": {
+          "type": "string",
+          "title": "Content Type",
+          "description": "Content type",
+          "order": 3
+        },
+        "file_name": {
+          "type": "string",
+          "title": "File Name",
+          "description": "File name",
+          "order": 1
+        }
+      }
     }
   }
 }

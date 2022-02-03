@@ -4,7 +4,7 @@ products: [insightconnect]
 name: microsoft_teams
 title: Microsoft Teams
 description: The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users
-version: 3.1.4
+version: 3.1.5
 vendor: rapid7
 support: community
 status: []
@@ -20,7 +20,7 @@ tags:
 - chat
 hub_tags:
   use_cases: [alerting_and_notifications, application_management, threat_detection_and_response, user_management]
-  keywords: [microsoft, teams, office 365, chat]
+  keywords: [microsoft_teams, office365, chat]
   features: []
 types:
   team:

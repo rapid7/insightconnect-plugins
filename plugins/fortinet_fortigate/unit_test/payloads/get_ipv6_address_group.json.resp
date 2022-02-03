@@ -1,0 +1,29 @@
+{
+  "http_method": "GET",
+  "revision": "d1464c520d6e938fe64062f4f057dc4f",
+  "results": [
+    {
+      "name": "IPv6 Address Object Group",
+      "q_origin_key": "IPv6 Address Object Group",
+      "uuid": "a574acea-1bc7-51ec-145a-e5c1a7998bed",
+      "visibility": "enable",
+      "color": 0,
+      "comment": "",
+      "member": [
+        {
+          "name": "1111:2222:3333:4444:5555:6666:7777:8888",
+          "q_origin_key": "1111:2222:3333:4444:5555:6666:7777:8888"
+        }
+      ],
+      "tagging": []
+    }
+  ],
+  "vdom": "root",
+  "path": "firewall",
+  "name": "addrgrp6",
+  "status": "success",
+  "http_status": 200,
+  "serial": "FGVM02TM20001791",
+  "version": "v6.2.3",
+  "build": 1066
+}

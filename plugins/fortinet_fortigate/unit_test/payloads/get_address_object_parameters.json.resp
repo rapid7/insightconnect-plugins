@@ -1,0 +1,190 @@
+{
+  "parameters": [
+    [
+      "get_address_objects_all",
+      null,
+      null,
+      null,
+      null,
+      {
+        "address_objects": [
+          {
+            "name": "test.com",
+            "q_origin_key": "test.com",
+            "uuid": "9db45558-f60d-51eb-a7f8-32bdbc2b980e",
+            "type": "fqdn",
+            "sub-type": "sdn",
+            "clearpass-spt": "unknown",
+            "start-mac": "00:00:00:00:00:00",
+            "end-mac": "00:00:00:00:00:00",
+            "fqdn": "test.com",
+            "cache-ttl": 0,
+            "fsso-group": [],
+            "visibility": "enable",
+            "color": 0,
+            "sdn-addr-type": "private",
+            "list": [],
+            "tagging": [],
+            "allow-routing": "disable"
+          },
+          {
+            "name": "1.1.1.1",
+            "q_origin_key": "1.1.1.1",
+            "uuid": "5d0cb376-025a-51eb-6130-f201926180c8",
+            "subnet": "1.1.1.1/32",
+            "type": "ipmask",
+            "sub-type": "sdn",
+            "clearpass-spt": "unknown",
+            "start-mac": "00:00:00:00:00:00",
+            "end-mac": "00:00:00:00:00:00",
+            "cache-ttl": 0,
+            "fsso-group": [],
+            "visibility": "enable",
+            "color": 0,
+            "sdn-addr-type": "private",
+            "list": [],
+            "tagging": [],
+            "allow-routing": "disable"
+          }
+        ],
+        "ipv6_address_objects": [
+          {
+            "name": "1111:2222:3333:4444:5555:6666:7777:8888",
+            "q_origin_key": "1111:2222:3333:4444:5555:6666:7777:8888",
+            "uuid": "2dfbc876-1ba2-51ec-235c-e80fafc76aeb",
+            "type": "ipprefix",
+            "ip6": "1111:2222:3333:4444:5555:6666:7777:8888/128",
+            "end-ip": "::",
+            "cache-ttl": 0,
+            "visibility": "enable",
+            "color": 0,
+            "list": [],
+            "tagging": [],
+            "subnet-segment": [],
+            "host-type": "any"
+          }
+        ]
+      }
+    ],
+    [
+      "get_address_objects_by_name",
+      "1.1.1.1",
+      null,
+      null,
+      null,
+      {
+        "address_objects": [
+          {
+            "name": "1.1.1.1",
+            "q_origin_key": "1.1.1.1",
+            "uuid": "5d0cb376-025a-51eb-6130-f201926180c8",
+            "subnet": "1.1.1.1/32",
+            "type": "ipmask",
+            "sub-type": "sdn",
+            "clearpass-spt": "unknown",
+            "start-mac": "00:00:00:00:00:00",
+            "end-mac": "00:00:00:00:00:00",
+            "cache-ttl": 0,
+            "fsso-group": [],
+            "visibility": "enable",
+            "color": 0,
+            "sdn-addr-type": "private",
+            "list": [],
+            "tagging": [],
+            "allow-routing": "disable"
+          }
+        ],
+        "ipv6_address_objects": []
+      }
+    ],
+    [
+      "get_address_objects_by_fqdn",
+      "test.com",
+      null,
+      "test.com",
+      null,
+      {
+        "address_objects": [
+          {
+            "name": "test.com",
+            "q_origin_key": "test.com",
+            "uuid": "9db45558-f60d-51eb-a7f8-32bdbc2b980e",
+            "type": "fqdn",
+            "sub-type": "sdn",
+            "clearpass-spt": "unknown",
+            "start-mac": "00:00:00:00:00:00",
+            "end-mac": "00:00:00:00:00:00",
+            "fqdn": "test.com",
+            "cache-ttl": 0,
+            "fsso-group": [],
+            "visibility": "enable",
+            "color": 0,
+            "sdn-addr-type": "private",
+            "list": [],
+            "tagging": [],
+            "allow-routing": "disable"
+          }
+        ],
+        "ipv6_address_objects": []
+      }
+    ],
+    [
+      "get_address_objects_by_subnet",
+      "1.1.1.1",
+      "1.1.1.1/32",
+      null,
+      null,
+      {
+        "address_objects": [
+          {
+            "name": "1.1.1.1",
+            "q_origin_key": "1.1.1.1",
+            "uuid": "5d0cb376-025a-51eb-6130-f201926180c8",
+            "subnet": "1.1.1.1/32",
+            "type": "ipmask",
+            "sub-type": "sdn",
+            "clearpass-spt": "unknown",
+            "start-mac": "00:00:00:00:00:00",
+            "end-mac": "00:00:00:00:00:00",
+            "cache-ttl": 0,
+            "fsso-group": [],
+            "visibility": "enable",
+            "color": 0,
+            "sdn-addr-type": "private",
+            "list": [],
+            "tagging": [],
+            "allow-routing": "disable"
+          }
+        ],
+        "ipv6_address_objects": []
+      }
+    ],
+    [
+      "get_address_objects_by_ip6",
+      "1111:2222:3333:4444:5555:6666:7777:8888",
+      null,
+      null,
+      "1111:2222:3333:4444:5555:6666:7777:8888/128",
+      {
+        "address_objects": [],
+        "ipv6_address_objects": [
+          {
+            "name": "1111:2222:3333:4444:5555:6666:7777:8888",
+            "q_origin_key": "1111:2222:3333:4444:5555:6666:7777:8888",
+            "uuid": "2dfbc876-1ba2-51ec-235c-e80fafc76aeb",
+            "type": "ipprefix",
+            "ip6": "1111:2222:3333:4444:5555:6666:7777:8888/128",
+            "end-ip": "::",
+            "cache-ttl": 0,
+            "visibility": "enable",
+            "color": 0,
+            "list": [],
+            "tagging": [],
+            "subnet-segment": [],
+            "host-type": "any"
+          }
+        ]
+      }
+    ]
+  ]
+}

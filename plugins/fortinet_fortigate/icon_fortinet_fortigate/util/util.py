@@ -1,6 +1,8 @@
 import re
 from ipaddress import ip_network, ip_address, IPv4Network
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
+import validators
+import urllib.parse
 
 
 class Helpers(object):
@@ -46,9 +48,9 @@ class Helpers(object):
         },
         500: {
             "cause": "Internal Server Error: Internal error when processing the request.",
-            "assistance": "Something went wrong and the API did not provide a reason."
-            "This can happen when an object you're trying to create already exists or when an object you're trying to remove doesn't exist."
-            "If the issue persists contact support for additional assistance.",
+            "assistance": "Something went wrong and the API did not provide a reason. This can happen when an object "
+            "you're trying to create already exists or when an object you're trying to remove doesn't exist. If the "
+            "issue persists contact support for additional assistance.",
         },
     }
 
@@ -70,20 +72,28 @@ class Helpers(object):
             raise PluginException(
                 cause=self._STATUS_CODES[status_code]["cause"],
                 assistance=self._STATUS_CODES[status_code]["assistance"],
-                data=f"Raw response data: {response}",
+                data=response,
             )
         if status_code not in range(200, 299):
             raise PluginException(
                 cause="An undocumented response code was returned.",
                 assistance="Contact support for assistance",
-                data=f"Raw response data: {response}",
+                data=response,
             )
 
     @staticmethod
     def determine_address_type(address: str) -> str:
-        if re.search("[a-zA-Z]", address):
+        if validators.domain(address):
             return "fqdn"
-        return "ipmask"
+        if validators.ipv4(address) or validators.ipv4_cidr(address):
+            return "ipmask"
+        if validators.ipv6(address) or validators.ipv6_cidr(address):
+            return "ipprefix"
+        else:
+            raise PluginException(
+                cause=f"The type could not be determined for the given address: {address}.",
+                assistance="Please check that provided address is correct and try again.",
+            )
 
     def match_whitelist(self, address: str, whitelist: list) -> bool:
         """
@@ -95,13 +105,16 @@ class Helpers(object):
         object_type = self.determine_address_type(address)
         if object_type == "fqdn":
             if address in whitelist:
-                self.logger.info(f" Whitelist matched.  {address} was found in whitelist")
+                self.logger.info(f"Whitelist matched. The domain {address} was found on the whitelist.")
                 return True
             else:
                 return False
 
-        # if 1.1.1.1/32 - remove /32
-        trimmed_address = re.sub(r"/32$", "", address)
+        if object_type == "ipmask":
+            # if 1.1.1.1/32 - remove /32
+            trimmed_address = re.sub(r"/32$", "", address)
+        else:
+            trimmed_address = re.sub(r"/128$", "", address)
 
         # if contains / we compare explicit matches, but not subnets in subnets
         if "/" in trimmed_address:
@@ -110,34 +123,17 @@ class Helpers(object):
         # IP is in CIDR - Give the user a log message
         for item in whitelist:
             type_ = self.determine_address_type(item)
-            if type_ == "ipmask":
+            if type_ == object_type:
                 net = ip_network(item, False)  # False means ignore the masked bits, otherwise they need to be 0
                 ip = ip_address(trimmed_address)
                 if ip in net:
-                    self.logger.info(f" Whitelist matched\nIP {address} was found in {item}")
+                    self.logger.info(f"Whitelist matched.\nThe IP address {address} was found on the whitelist.")
                     return True
 
         return False
 
-    def type_finder(self, host: str) -> str:
-        """determines the type of host ipmask or fqdn"""
-        type_ = "ipmask"
-        try:
-            host = ip_network(host)
-        except ValueError:
-            if re.match("^[0-9 .]+$", host):
-                return type_
-            elif host[-1].isdigit() or host[-2].isdigit():
-                raise PluginException(
-                    cause="The host input appears to be an invalid IP or domain name.",
-                    assistance="Ensure that the host input is a valid IP or domain.",
-                    data=host,
-                )
-            type_ = "fqdn"
-            return type_
-        return type_
-
-    def ipmask_converter(self, host: str) -> str:
+    @staticmethod
+    def ipmask_converter(host: str) -> str:
         """Converts a IP or netmask into a CIDR"""
         try:
             host = ip_network(host)
@@ -146,9 +142,14 @@ class Helpers(object):
             host = ip_network(host)
         return str(host)
 
-    def netmask_converter(self, host: str) -> str:
+    @staticmethod
+    def netmask_converter(host: str) -> str:
         """Converts a CIDR or IP to a netmask"""
         host = IPv4Network(host).with_netmask
         host = str(host)
         host = host.replace("/", " ")
         return host
+
+    @staticmethod
+    def url_encode(string: str) -> str:
+        return urllib.parse.quote(string, safe="")

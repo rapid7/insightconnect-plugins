@@ -15,14 +15,15 @@ class Input:
     OFFENSE_ID = "offense_id"
     PROTECTED = "protected"
     STATUS = "status"
-    
+
 
 class Output:
     DATA = "data"
-    
+
 
 class UpdateOffenseInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads("""
+    schema = json.loads(
+        """
    {
   "type": "object",
   "title": "Variables",
@@ -80,14 +81,16 @@ class UpdateOffenseInput(insightconnect_plugin_runtime.Input):
     "offense_id"
   ]
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class UpdateOffenseOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads("""
+    schema = json.loads(
+        """
    {
   "type": "object",
   "title": "Variables",
@@ -452,7 +455,8 @@ class UpdateOffenseOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """)
+    """
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

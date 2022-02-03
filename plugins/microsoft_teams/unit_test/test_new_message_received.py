@@ -2,6 +2,7 @@ from unittest import TestCase, mock
 import json
 import logging
 import requests
+import os
 from icon_microsoft_teams.triggers.new_message_received import NewMessageReceived
 from komand.exceptions import PluginException
 
@@ -31,7 +32,7 @@ def mocked_requests_get(*args, **kwargs):
         def json(self):
             return json.loads(self.text)
 
-    messages_payload = read_file_to_string("./payloads/get_messages.json")
+    messages_payload = read_file_to_string(os.path.join(os.path.dirname(__file__), "./payloads/get_messages.json"))
 
     if args[0] == "http://somefakeendpoint.com":
         return MockResponse(messages_payload, 200)
@@ -42,7 +43,7 @@ def mocked_requests_get(*args, **kwargs):
 
 class TestNewMessageReceived(TestCase):
     def test_sort_messages_from_request(self):
-        with open("./payloads/get_messages.json") as f:
+        with open(os.path.join(os.path.dirname(__file__), "./payloads/get_messages.json")) as f:
             text = f.read()
             json_payload = json.loads(text)
 

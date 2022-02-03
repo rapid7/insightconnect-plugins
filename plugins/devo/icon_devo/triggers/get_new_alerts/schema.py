@@ -8,17 +8,30 @@ class Component:
 
 
 class Input:
-    pass
+    
+    INTERVAL = "interval"
     
 
 class Output:
     
-    ALERT = "alert"
+    ALERTS = "alerts"
     
 
 class GetNewAlertsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "interval": {
+      "type": "integer",
+      "title": "Interval",
+      "description": "Interval time in seconds",
+      "default": 10,
+      "order": 1
+    }
+  }
+}
     """)
 
     def __init__(self):
@@ -31,15 +44,18 @@ class GetNewAlertsOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "alert": {
-      "type": "object",
-      "title": "Alert",
-      "description": "An alert",
+    "alerts": {
+      "type": "array",
+      "title": "Alerts",
+      "description": "An object containing information and results about the alerts from interval time",
+      "items": {
+        "type": "object"
+      },
       "order": 1
     }
   },
   "required": [
-    "alert"
+    "alerts"
   ]
 }
     """)
