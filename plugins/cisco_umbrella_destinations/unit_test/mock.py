@@ -2,11 +2,18 @@ import json
 import os
 from typing import Callable
 from unittest import mock
+from icon_cisco_umbrella_destinations.connection.schema import Input
 
 import requests
 
 STUB_ORG_ID = "1234567"
+STUB_API_KEY = "j5740ps1cbukyk3t8kib3wa36aq2v3da"
 STUB_DESTINATION_LIST_ID = "12345678"
+STUB_CONNECTION = {
+    Input.API_KEY: {"secretKey": STUB_API_KEY},
+    Input.API_SECRET: {"secretKey": STUB_API_KEY},
+    Input.ORGANIZATION_ID: STUB_ORG_ID,
+}
 
 
 class MockResponse:
@@ -17,7 +24,7 @@ class MockResponse:
 
     def json(self):
         with open(
-                os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json.resp")
+            os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json.resp")
         ) as file:
             return json.load(file)
 
@@ -30,24 +37,24 @@ def mocked_request(side_effect: Callable) -> None:
 def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
     base_url = f"https://management.api.umbrella.com/v1/organizations/{STUB_ORG_ID}/destinationlists"
     if url == base_url:
-        if method == 'GET':
+        if method == "GET":
             return MockResponse("dlGetAll", status_code)
-        if method == 'POST':
-            return MockResponse('dlCreate', status_code)
-    if url == base_url + f'{STUB_DESTINATION_LIST_ID}':
-        if method == 'GET':
-            return MockResponse('dlGet', status_code)
-        if method == 'PATCH':
-            return MockResponse('dlPatch', status_code)
-        if method == 'DELETE':
-            return MockResponse('dlDelete', status_code)
-    if url == base_url + f'{STUB_DESTINATION_LIST_ID}/destinations':
-        if method == 'GET':
-            return MockResponse('dGet', status_code)
-        if method == 'POST':
-            return MockResponse('dAdd', status_code)
-    if url == base_url + f'{STUB_DESTINATION_LIST_ID}/destinations/remove':
-        return MockResponse('dDelete', status_code)
+        if method == "POST":
+            return MockResponse("dlCreate", status_code)
+    if url == base_url + f"{STUB_DESTINATION_LIST_ID}":
+        if method == "GET":
+            return MockResponse("dlGet", status_code)
+        if method == "PATCH":
+            return MockResponse("dlPatch", status_code)
+        if method == "DELETE":
+            return MockResponse("dlDelete", status_code)
+    if url == base_url + f"{STUB_DESTINATION_LIST_ID}/destinations":
+        if method == "GET":
+            return MockResponse("dGet", status_code)
+        if method == "POST":
+            return MockResponse("dAdd", status_code)
+    if url == base_url + f"{STUB_DESTINATION_LIST_ID}/destinations/remove":
+        return MockResponse("dDelete", status_code)
 
 
 def mock_request_200(*args, **kwargs) -> MockResponse:
