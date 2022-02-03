@@ -1,4 +1,4 @@
-FROM rapid7/insightconnect-python-3-38-slim-plugin:4
+FROM komand/python-pypy3-plugin:2.1.2
 # The three supported python parent images are:
 # - komand/python-2-plugin
 # - komand/python-3-plugin
@@ -22,4 +22,4 @@ RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 # Install plugin
 RUN python setup.py build && python setup.py install
 
-ENTRYPOINT ["/usr/local/bin/icon_zendesk"]
+ENTRYPOINT ["/usr/local/bin/komand_zendesk"]
