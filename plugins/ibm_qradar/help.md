@@ -56,7 +56,7 @@ This action is used to get Offense Notes by ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, create_time, username, note_text. More information about the fields can be found in plugin documentation|None|id|
+|fields|string|None|False|Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, create_time, username, note_text. More information about the fields can be found in plugin documentation|None|id, note_text|
 |note_id|integer|None|True|The ID of the offense note to get|None|100|
 |offense_id|integer|None|True|The ID of the offense to get notes for|None|100|
 
@@ -64,7 +64,7 @@ Example input:
 
 ```
 {
-  "fields": "id",
+  "fields": "id, note_text",
   "filter": "id=100",
   "offense_id": 100,
   "range": "1-2"
@@ -106,7 +106,7 @@ This action is used to add Notes to Offense.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, create_time, username, note_text. More information about the fields can be found in plugin documentation|None|id|
+|fields|string|None|False|Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, create_time, username, note_text. More information about the fields can be found in plugin documentation|None|id, note_text|
 |note_text|string|None|True|The note text to add to the offense|None|note_text|
 |offense_id|integer|None|True|The ID of the offense in which to add a note|None|100|
 
@@ -114,7 +114,7 @@ Example input:
 
 ```
 {
-  "fields": "id",
+  "fields": "id, note_text",
   "note_text": "note_text",
   "offense_id": 100
 }
@@ -202,7 +202,7 @@ This action is used to list all assets found in the model.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, domain_id, hostnames(id), interfaces, products etc. More information about the fields can be found in plugin documentation|None|id|
+|fields|string|None|False|Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, domain_id, hostnames(id), interfaces, products etc. More information about the fields can be found in plugin documentation|None|id, hostnames(id)|
 |filter|string|None|False|Restrict the elements in a list based on the contents of various fields. E.g  id = 1001 and vulnerability_count >= 0|None|id = 1001 and vulnerability_count >= 0|
 |range|string|1-50|False|Paging requests are specified with the Range parameter. E.g Example Default Range returns the first 50 records Custom Range like 1-5 will Returns the first 5 records and Range like 6-10 Return the 6th to 10th records|None|1-2|
 
@@ -210,7 +210,7 @@ Example input:
 
 ```
 {
-  "fields": "id",
+  "fields": "id, hostnames(id)",
   "filter": "id = 1001 and vulnerability_count \u003e= 0",
   "range": "1-2"
 }
@@ -273,7 +273,7 @@ This action is used to get Offense's Closing Reasons.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, text, is_deleted, is_reserved. More information about the fields can be found in plugin documentation|None|id|
+|fields|string|None|False|Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, text, is_deleted, is_reserved. More information about the fields can be found in plugin documentation|None|id, is_deleted|
 |filter|string|None|False|Restrict the elements in a list based on the contents of various fields. E.g  id=55 and is_deleted = false|None|id=1000|
 |include_deleted|boolean|None|False|If true, deleted closing reasons are included in the response. Defaults to false. Deleted closing reasons cannot be used to close an offense|None|False|
 |include_reserved|boolean|None|False|If true, reserved closing reasons are included in the response. Defaults to false. Reserved closing reasons cannot be used to close an offense|None|False|
@@ -283,7 +283,7 @@ Example input:
 
 ```
 {
-  "fields": "id",
+  "fields": "id, is_deleted",
   "filter": "id=1000",
   "include_deleted": false,
   "include_reserved": false,
@@ -326,7 +326,7 @@ This action is used to get Offense Notes.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, create_time, username, note_text. More information about the fields can be found in plugin documentation|None|id|
+|fields|string|None|False|Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, create_time, username, note_text. More information about the fields can be found in plugin documentation|None|id, note_text|
 |filter|string|None|False|Restrict the elements in a list based on the contents of various fields. E.g  id=55 and username = admin|None|id=100|
 |offense_id|integer|None|True|The ID of the offense to get notes for|None|100|
 |range|string|1-50|False|Paging requests are specified with the Range parameter. E.g Example Default Range returns the first 50 records Custom Range like 1-5 will Returns the first 5 records and Range like 6-10 Return the 6th to 10th records|None|1-2|
@@ -335,7 +335,7 @@ Example input:
 
 ```
 {
-  "fields": "id",
+  "fields": "id, note_text",
   "filter": "id=100",
   "offense_id": 100,
   "range": "1-2"
@@ -377,7 +377,7 @@ This action is used to list all Offenses.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, assigned_to, inactive, offense_source,  offense_type, rules(id), protected, follow_up, status, domain_id, rules, log_sources etc. More information about the fields can be found in plugin documentation|None|id|
+|fields|string|None|False|Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, assigned_to, inactive, offense_source,  offense_type, rules(id), protected, follow_up, status, domain_id, rules, log_sources etc. More information about the fields can be found in plugin documentation|None|id, rules(id)|
 |filter|string|None|False|Restrict the elements in a list based on the contents of various fields. E.g  id=55 and follow_up = false|None|id=1000|
 |range|string|1-50|False|Paging requests are specified with the Range parameter. E.g Example Default Range returns the first 50 records Custom Range like 1-5 will Returns the first 5 records and Range like 6-10 Return the 6th to 10th records|None|1-2|
 |sort|string|None|False|Apply sorting order to result sets i.e. +id which indicates sort the result in ascending order of id value|None|+id,-status|
@@ -386,7 +386,7 @@ Example input:
 
 ```
 {
-  "fields": "id",
+  "fields": "id, rules(id)",
   "filter": "id=1000",
   "range": "1-2",
   "sort": "+id,-status"
@@ -597,7 +597,7 @@ This action is used to update Offenses.
 |----|----|-------|--------|-----------|----|-------|
 |assigned_to|string|None|False|A user to assign the offense to|None|admin|
 |closing_reason_id|string|None|False|The ID of a closing reason. A valid Closing Reason ID must be provided when closing an offense|None|100|
-|fields|string|None|False|Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, assigned_to, inactive, offense_source,  offense_type, rules(id), protected, follow_up, status, domain_id, rules, log_sources etc. More information about the fields can be found in plugin documentation|None|id|
+|fields|string|None|False|Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, assigned_to, inactive, offense_source,  offense_type, rules(id), protected, follow_up, status, domain_id, rules, log_sources etc. More information about the fields can be found in plugin documentation|None|id, rules(id)|
 |follow_up|boolean|None|False|Set to true to set the follow up flag on the offense|None|False|
 |offense_id|integer|None|True|The ID of the offense to update|None|100|
 |protected|boolean|None|False|The ID of a closing reason. A valid Closing Reason ID must be provided when closing an offense|None|False|
@@ -609,7 +609,7 @@ Example input:
 {
   "assigned_to": "admin",
   "closing_reason_id": 100,
-  "fields": "id",
+  "fields": "id, rules(id)",
   "follow_up": false,
   "offense_id": 100,
   "protected": false,
@@ -701,7 +701,7 @@ This trigger is used to list all New Offenses.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fields|string|None|False|Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, assigned_to, inactive, offense_source,  offense_type, rules(id), protected, follow_up, status, domain_id, rules, log_sources etc. More information about the fields can be found in plugin documentation|None|id|
+|fields|string|None|False|Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, assigned_to, inactive, offense_source,  offense_type, rules(id), protected, follow_up, status, domain_id, rules, log_sources etc. More information about the fields can be found in plugin documentation|None|id, rules(id)|
 |filter|string|None|False|Restrict the elements in a list based on the contents of various fields. E.g  id=55 and follow_up = false|None|id=100|
 |interval|integer|15|True|How frequently (in seconds) to trigger a greeting|None|15|
 |range|string|1-50|False|Paging requests are specified with the Range parameter. E.g Example Default Range returns the first 50 records Custom Range like 1-5 will Returns the first 5 records and Range like 6-10 Return the 6th to 10th records|None|1-2|
@@ -711,7 +711,7 @@ Example input:
 
 ```
 {
-  "fields": "id",
+  "fields": "id, rules(id)",
   "filter": "id=100",
   "interval": 15,
   "range": "1-2",
