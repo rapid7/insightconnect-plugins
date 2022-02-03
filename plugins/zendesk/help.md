@@ -348,7 +348,7 @@ This action is used to create a ticket.
 |attachment|file|None|False|Optional file attachment|None|{"content": "Sample Content", "filename": "sample_file.txt"}|
 |collaborator_ids|[]integer|None|False|List of collaborator IDs|None|[361738647591, 361738647672]|
 |description|string|None|True|Ticket description|None|Example description|
-|due_at|date|None|False|Time ticket is due|None|2021-04-10T12:00:00Z|
+|due_at|date|None|False|Time ticket is due|None|2021-04-10 12:00:00+00:00|
 |external_id|string|None|False|Support ticket ID|None|10|
 |group_id|integer|None|False|Group ID|None|1400012453812|
 |priority|string|None|False|Ticket priority|['Urgent', 'High', 'Normal', 'Low', '']|High|
@@ -448,7 +448,7 @@ This action is used to update ticket.
 |assignee_id|integer|None|False|Assignee ID|None|361738647591|
 |collaborator_ids|[]integer|None|False|List of collaborator IDs|None|[361738647591, 361738647672]|
 |comment|comment|None|False|Comment|None|{"author_id": 361738647591,"body": "Test comment","html_body": "<u>Test Underlined comment</u>","public": true}|
-|due_at|date|None|False|Time ticket is due|None|2021-04-10T12:00:00Z|
+|due_at|date|None|False|Time ticket is due|None|2021-04-10 12:00:00+00:00|
 |external_id|string|None|False|Support ticket ID|None|10|
 |group_id|integer|None|False|Group ID|None|1400012453812|
 |priority|string|None|False|Ticket priority|['Urgent', 'High', 'Normal', 'Low', '']|High|
