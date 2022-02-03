@@ -27,13 +27,13 @@ class GetOffenseNoteInput(insightconnect_plugin_runtime.Input):
     "fields": {
       "type": "string",
       "title": "Fields",
-      "description": "Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, create_time, username, note_text. More information about the fields can be found in plugin documentation",
+      "description": "Specify the list of fields to be returned in the response. Specify the subfields in parentheses. Multiple fields in the same object must be comma separated. Sample fields to filter are id, create_time, username, note_text. More information about the fields can be found in plugin documentation",
       "order": 4
     },
     "filter": {
       "type": "string",
       "title": "Filter",
-      "description": "Restrict the elements in a list based on the contents of various fields. E.g  id=55 and username = admin",
+      "description": "Restrict the elements in a list based on the contents of various fields. E.g. id=55 and username = admin",
       "order": 3
     },
     "offense_id": {
@@ -45,7 +45,7 @@ class GetOffenseNoteInput(insightconnect_plugin_runtime.Input):
     "range": {
       "type": "string",
       "title": "Range",
-      "description": "Paging requests are specified with the Range parameter. E.g Example Default Range returns the first 50 records Custom Range like 1-5 will Returns the first 5 records and Range like 6-10 Return the 6th to 10th records",
+      "description": "Paging requests are specified with the Range parameter. E.g. the example default range returns the first 50 records, a custom range of 6-10 returns the 6th to 10th records",
       "default": "1-50",
       "order": 2
     }

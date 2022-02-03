@@ -26,7 +26,7 @@ class AddNotesToOffenseInput(insightconnect_plugin_runtime.Input):
     "fields": {
       "type": "string",
       "title": "Fields",
-      "description": "Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, create_time, username, note_text. More information about the fields can be found in plugin documentation",
+      "description": "Specify the list of fields to be returned in the response. Specify the subfields in parentheses. Multiple fields in the same object must be comma separated. Sample fields to filter are id, create_time, username, note_text. More information about the fields can be found in plugin documentation",
       "order": 3
     },
     "note_text": {

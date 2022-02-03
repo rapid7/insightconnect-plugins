@@ -68,9 +68,9 @@ def validate_query_range(query_range: str) -> (bool, str):
         start = int(start.strip())
         end = int(end.strip())
         if start < 1:
-            return False, "Range should start from 1 or greater than 1 "
+            return False, "Start of range should be >= 1"
         if end < 1:
-            return False, "Range should start end 1 or greater than 1"
+            return False, "End of range should be >= 1"
 
         return True, f"{start-1}-{end-1}"  # subtract by one as index always start with 0
 

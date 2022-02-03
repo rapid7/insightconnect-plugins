@@ -735,20 +735,20 @@ actions:
         title: Range
         type: string
         required: false
-        description: Paging requests are specified with the Range parameter. E.g Example Default Range returns the first 50 records Custom Range like 1-5 will Returns the first 5 records and Range like 6-10 Return the 6th to 10th records
+        description: Paging requests are specified with the Range parameter. E.g. the example default range returns the first 50 records, a custom range of 6-10 returns the 6th to 10th records
         example: 1-2
         default: 1-50
       filter:
         title: Filter
         type: string
         required: false
-        description: Restrict the elements in a list based on the contents of various fields. E.g  id = 1001 and vulnerability_count >= 0
+        description: Restrict the elements in a list based on the contents of various fields
         example: id = 1001 and vulnerability_count >= 0
       fields:
         title: Fields
         type: string
         required: false
-        description: Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, domain_id, hostnames(id), interfaces, products etc. More information about the fields can be found in plugin documentation
+        description: Specify the list of fields to be returned in the response. Specify the subfields in parentheses. Multiple fields in the same object must be comma separated. Sample fields to filter are id, domain_id, hostnames(id), interfaces, products. More information about the fields can be found in plugin documentation
         example: id, hostnames(id)
     output:
       data:
@@ -764,26 +764,26 @@ actions:
         title: Range
         type: string
         required: false
-        description: Paging requests are specified with the Range parameter. E.g Example Default Range returns the first 50 records Custom Range like 1-5 will Returns the first 5 records and Range like 6-10 Return the 6th to 10th records
+        description: Paging requests are specified with the Range parameter. E.g. the example default range returns the first 50 records, a custom range of 6-10 returns the 6th to 10th records
         example: 1-2
         default: 1-50
       filter:
         title: Filter
         type: string
         required: false
-        description: Restrict the elements in a list based on the contents of various fields. E.g  id=55 and follow_up = false
+        description: Restrict the elements in a list based on the contents of various fields. E.g.  id=55 and follow_up = false
         example: id=1000
       fields:
         title: Fields
         type: string
         required: false
-        description: Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, assigned_to, inactive, offense_source,  offense_type, rules(id), protected, follow_up, status, domain_id, rules, log_sources etc. More information about the fields can be found in plugin documentation
+        description: Specify the list of fields to be returned in the response. Specify the subfields in parentheses. Multiple fields in the same object must be comma separated. Sample fields to filter are id, assigned_to, inactive, offense_source,  offense_type, rules(id), protected, follow_up, status, domain_id, rules, log_sources. More information about the fields can be found in plugin documentation
         example: id, rules(id)
       sort:
         title: Sort
         type: string
         required: false
-        description: Apply sorting order to result sets i.e. +id which indicates sort the result in ascending order of id value
+        description: Apply sorting order to result sets, e.g. +id to sort the result in ascending order of id value
         example: +id,-status
     output:
       data:
@@ -799,20 +799,20 @@ actions:
         title: Range
         type: string
         required: false
-        description: Paging requests are specified with the Range parameter. E.g Example Default Range returns the first 50 records Custom Range like 1-5 will Returns the first 5 records and Range like 6-10 Return the 6th to 10th records
+        description: Paging requests are specified with the Range parameter. E.g. the example default range returns the first 50 records, a custom range of 6-10 returns the 6th to 10th records
         default: 1-50
         example: 1-2
       filter:
         title: Filter
         type: string
         required: false
-        description: Restrict the elements in a list based on the contents of various fields. E.g  id=55 and is_deleted = false
+        description: Restrict the elements in a list based on the contents of various fields. E.g. id=55 and is_deleted = false
         example: id=1000
       fields:
         title: Fields
         type: string
         required: false
-        description: Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, text, is_deleted, is_reserved. More information about the fields can be found in plugin documentation
+        description: Specify the list of fields to be returned in the response. Specify the subfields in parentheses. Multiple fields in the same object must be comma separated. Sample fields to filter are id, text, is_deleted, is_reserved. More information about the fields can be found in plugin documentation
         example: id, is_deleted
       include_deleted:
         title: Include Deleted
@@ -858,7 +858,7 @@ actions:
         title: Fields
         type: string
         required: false
-        description: Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, assigned_to, inactive, offense_source,  offense_type, rules(id), protected, follow_up, status, domain_id, rules, log_sources etc. More information about the fields can be found in plugin documentation
+        description: Specify the list of fields to be returned in the response. Specify the subfields in parentheses. Multiple fields in the same object must be comma separated. Sample fields to filter are id, assigned_to, inactive, offense_source,  offense_type, rules(id), protected, follow_up, status, domain_id, rules, log_sources. More information about the fields can be found in plugin documentation
         example: id, rules(id)
       follow_up:
         title: Follow Up
@@ -903,20 +903,20 @@ actions:
         title: Range
         type: string
         required: false
-        description: Paging requests are specified with the Range parameter. E.g Example Default Range returns the first 50 records Custom Range like 1-5 will Returns the first 5 records and Range like 6-10 Return the 6th to 10th records
+        description: Paging requests are specified with the Range parameter. E.g. the example default range returns the first 50 records, a custom range of 6-10 returns the 6th to 10th records
         example: 1-2
         default: 1-50
       filter:
         title: Filter
         type: string
         required: false
-        description: Restrict the elements in a list based on the contents of various fields. E.g  id=55 and username = admin
+        description: Restrict the elements in a list based on the contents of various fields. E.g. id=55 and username = admin
         example: id=100
       fields:
         title: Fields
         type: string
         required: false
-        description: Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, create_time, username, note_text. More information about the fields can be found in plugin documentation
+        description: Specify the list of fields to be returned in the response. Specify the subfields in parentheses. Multiple fields in the same object must be comma separated. Sample fields to filter are id, create_time, username, note_text. More information about the fields can be found in plugin documentation
         example: id, note_text
     output:
       data:
@@ -944,7 +944,7 @@ actions:
         title: Fields
         type: string
         required: false
-        description: Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, create_time, username, note_text. More information about the fields can be found in plugin documentation
+        description: Specify the list of fields to be returned in the response. Specify the subfields in parentheses. Multiple fields in the same object must be comma separated. Sample fields to filter are id, create_time, username, note_text. More information about the fields can be found in plugin documentation
         example: id, note_text
     output:
       data:
@@ -972,7 +972,7 @@ actions:
         title: Fields
         type: string
         required: false
-        description: Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, create_time, username, note_text. More information about the fields can be found in plugin documentation
+        description: Specify the list of fields to be returned in the response. Specify the subfields in parentheses. Multiple fields in the same object must be comma separated. Sample fields to filter are id, create_time, username, note_text. More information about the fields can be found in plugin documentation
         example: id, note_text
     output:
       data:
@@ -989,26 +989,26 @@ triggers:
         title: Range
         type: string
         required: false
-        description: Paging requests are specified with the Range parameter. E.g Example Default Range returns the first 50 records Custom Range like 1-5 will Returns the first 5 records and Range like 6-10 Return the 6th to 10th records
+        description: Paging requests are specified with the Range parameter. E.g. the example default range returns the first 50 records, a custom range of 6-10 returns the 6th to 10th records
         example: 1-2
         default: 1-50
       filter:
         title: Filter
         type: string
         required: false
-        description: Restrict the elements in a list based on the contents of various fields. E.g  id=55 and follow_up = false
+        description: Restrict the elements in a list based on the contents of various fields. E.g. id=55 and follow_up = false
         example: id=100
       fields:
         title: Fields
         type: string
         required: false
-        description: Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, assigned_to, inactive, offense_source,  offense_type, rules(id), protected, follow_up, status, domain_id, rules, log_sources etc. More information about the fields can be found in plugin documentation
+        description: Specify the list of fields to be returned in the response. Specify the subfields in parentheses. Multiple fields in the same object must be comma separated. Sample fields to filter are id, assigned_to, inactive, offense_source,  offense_type, rules(id), protected, follow_up, status, domain_id, rules, log_sources. More information about the fields can be found in plugin documentation
         example: id, rules(id)
       sort:
         title: Sort
         type: string
         required: false
-        description: Apply sorting order to result sets i.e. +id which indicates sort the result in ascending order of id value
+        description: Apply sorting order to result sets, e.g. +id to sort the result in ascending order of id value
         example: +id,-status
       interval:
         title: Interval
