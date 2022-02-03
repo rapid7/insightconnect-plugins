@@ -393,7 +393,7 @@ actions:
         required: true
       payload:
         title: Payload
-        description: List of destination IDs seperated by a space
+        description: List of destination IDs separated by a space
         example: 1241 67
         type: string
         required: true

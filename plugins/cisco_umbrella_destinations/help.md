@@ -100,7 +100,7 @@ This action is used to delete a list of destinations from a destination list.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |destinationListId|integer|None|True|Unique ID for destination list|None|12345678|
-|payload|string|None|True|List of destination IDs seperated by a space|None|1241 67|
+|payload|string|None|True|List of destination IDs separated by a space|None|1241 67|
 
 Example input:
 
@@ -474,7 +474,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.0 - Initial plugin
+* 1.0.0 - Initial plugin includes create and modify destination lists
 
 # Links
 

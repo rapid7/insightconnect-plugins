@@ -31,7 +31,7 @@ class DDeleteInput(insightconnect_plugin_runtime.Input):
     "payload": {
       "type": "string",
       "title": "Payload",
-      "description": "List of destination IDs seperated by a space",
+      "description": "List of destination IDs separated by a space",
       "order": 2
     }
   },
