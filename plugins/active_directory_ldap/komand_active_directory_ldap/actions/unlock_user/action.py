@@ -12,5 +12,8 @@ class UnlockUser(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {Output.SUCCESS: self.connection.client.unblock_user(params.get(Input.DISTINGUISHED_NAME),
-                                                                    UserAccountFlags.LOCKOUT)}
+        return {
+            Output.SUCCESS: self.connection.client.unblock_user(
+                params.get(Input.DISTINGUISHED_NAME), UserAccountFlags.LOCKOUT
+            )
+        }

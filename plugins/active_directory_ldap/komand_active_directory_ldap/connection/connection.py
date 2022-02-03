@@ -17,11 +17,15 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params={}):
         self.use_ssl = params.get(Input.USE_SSL)
-        self.client = ActiveDirectoryLdapAPI(self.logger, use_ssl=self.use_ssl, host=params.get(Input.HOST),
-                                             port=params.get(Input.PORT),
-                                             referrals=params.get(Input.CHASE_REFERRALS),
-                                             user_name=params.get(Input.USERNAME_PASSWORD).get("username"),
-                                             password=params.get(Input.USERNAME_PASSWORD).get("password"))
+        self.client = ActiveDirectoryLdapAPI(
+            self.logger,
+            use_ssl=self.use_ssl,
+            host=params.get(Input.HOST),
+            port=params.get(Input.PORT),
+            referrals=params.get(Input.CHASE_REFERRALS),
+            user_name=params.get(Input.USERNAME_PASSWORD).get("username"),
+            password=params.get(Input.USERNAME_PASSWORD).get("password"),
+        )
 
     def test(self):
         try:

@@ -56,4 +56,6 @@ class AddUser(insightconnect_plugin_runtime.Action):
         log_parameters = parameters
         log_parameters.pop("userPassword")
         self.logger.info(log_parameters)
-        return {Output.SUCCESS: self.connection.client.add_user(dn, user_account_control, use_ssl, password, parameters)}
+        return {
+            Output.SUCCESS: self.connection.client.add_user(dn, user_account_control, use_ssl, password, parameters)
+        }

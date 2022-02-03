@@ -48,8 +48,11 @@ class ActiveDirectoryLdapAPI:
         self.logger.info(f"Connecting to {self.host}:{self.port}")
 
         server = ldap3.Server(
-            host=self.host, port=self.port, use_ssl=self.use_ssl, allowed_referral_hosts=[("*", True)],
-            get_info=ldap3.ALL
+            host=self.host,
+            port=self.port,
+            use_ssl=self.use_ssl,
+            allowed_referral_hosts=[("*", True)],
+            get_info=ldap3.ALL,
         )
 
         try:
@@ -73,8 +76,11 @@ class ActiveDirectoryLdapAPI:
             self.logger.info("Failed to connect to the server with NTLM, attempting to connect with basic auth")
             try:
                 conn = ldap3.Connection(
-                    server=server, user=self.user_name, password=self.password, auto_referrals=self.referrals,
-                    auto_bind=True
+                    server=server,
+                    user=self.user_name,
+                    password=self.password,
+                    auto_referrals=self.referrals,
+                    auto_bind=True,
                 )
             except LDAPBindError as e:
                 raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=e)
@@ -159,9 +165,7 @@ class ActiveDirectoryLdapAPI:
 
     @with_connection
     def manage_user(self, conn, dn: str, status: bool):
-        return ADUtils.change_account_status(
-            conn, dn, status, self.logger
-        )
+        return ADUtils.change_account_status(conn, dn, status, self.logger)
 
     @with_connection
     def force_password_reset(self, conn, dn: str, password_expire: dict):
@@ -257,9 +261,7 @@ class ActiveDirectoryLdapAPI:
     @with_connection
     def query_group_membership(self, conn, base: str, group_name: str, include_groups: str, expand_nested_groups: str):
         try:
-            group = self.__search_data(conn, base=base, filter_query=f"(sAMAccountName={group_name})").get(
-                "entries"
-            )
+            group = self.__search_data(conn, base=base, filter_query=f"(sAMAccountName={group_name})").get("entries")
             if group and isinstance(group, list):
                 group_dn = group[0].get("dn")
             else:
@@ -281,7 +283,7 @@ class ActiveDirectoryLdapAPI:
             raise PluginException(
                 cause="LDAP returned unexpected response.",
                 assistance="Check that the provided inputs are correct and try again. If the issue persists please "
-                           "contact support.",
+                "contact support.",
                 data=e,
             )
 
@@ -311,9 +313,7 @@ class ActiveDirectoryLdapAPI:
 
     @with_connection
     def unblock_user(self, conn, dn: str, user_flag: int):
-        return ADUtils.change_useraccountcontrol_property(
-            conn, dn, True, user_flag, self.logger
-        )
+        return ADUtils.change_useraccountcontrol_property(conn, dn, True, user_flag, self.logger)
 
     @with_connection
     def who_am_i(self, conn):
