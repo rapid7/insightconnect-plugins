@@ -1,0 +1,11 @@
+"""Constant Endpoints."""
+START_ARIEL_SEARCH_ENDPOINT = "api/ariel/searches"
+GET_ARIEL_SEARCH_BY_ID_ENDPOINT = "api/ariel/searches/{search_id}"
+GET_ASSETS_ENDPOINT = "api/asset_model/assets"
+GET_OFFENSES_ENDPOINT = "api/siem/offenses"
+GET_CLOSING_REASON_ENDPOINT = "api/siem/offense_closing_reasons"
+UPDATE_OFFENSES_ENDPOINT = "api/siem/offenses/{offense_id}"
+
+GET_OFFENSES_NOTES = "api/siem/offenses/{offense_id}/notes"
+GET_OFFENSES_NOTES_BY_ID = "api/siem/offenses/{offense_id}/notes/{note_id}"
+POST_OFFENSES_NOTES = "api/siem/offenses/{offense_id}/notes"
