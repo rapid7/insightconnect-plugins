@@ -1,0 +1,16 @@
+{
+    "id": 15755711,
+    "organizationId": 2372338,
+    "access": "allow",
+    "isGlobal": false,
+    "name": "CreateListTest",
+    "thirdpartyCategoryId": null,
+    "createdAt": "2022-01-28T16:03:36+0000",
+    "modifiedAt": "2022-02-02T14:04:29+0000",
+    "isMspDefault": false,
+    "markedForDeletion": false,
+    "bundleTypeId": 1,
+    "meta": {
+        "destinationCount": 5
+    }
+}

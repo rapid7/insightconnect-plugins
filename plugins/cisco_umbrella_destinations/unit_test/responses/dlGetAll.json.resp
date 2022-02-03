@@ -1,0 +1,62 @@
+[
+    {
+        "id": 5798992,
+        "organizationId": 2303280,
+        "access": "block",
+        "isGlobal": false,
+        "name": "Block For All",
+        "thirdpartyCategoryId": null,
+        "createdAt": "2020-05-19T20:58:55+0000",
+        "modifiedAt": "2020-05-19T21:11:15+0000",
+        "isMspDefault": false,
+        "markedForDeletion": false,
+        "bundleTypeId": 1,
+        "meta": {
+            "destinationCount": 0,
+            "domainCount": 0,
+            "urlCount": 0,
+            "ipv4Count": 0,
+            "applicationCount": 0
+        }
+    },
+    {
+        "id": 1912718,
+        "organizationId": 2372338,
+        "access": "allow",
+        "isGlobal": true,
+        "name": "Global Allow List",
+        "thirdpartyCategoryId": null,
+        "createdAt": "2017-10-25T19:45:48+0000",
+        "modifiedAt": "2017-10-25T19:45:48+0000",
+        "isMspDefault": false,
+        "markedForDeletion": false,
+        "bundleTypeId": 1,
+        "meta": {
+            "destinationCount": 0,
+            "domainCount": 0,
+            "urlCount": 0,
+            "ipv4Count": 0,
+            "applicationCount": 0
+        }
+    },
+    {
+        "id": 1912720,
+        "organizationId": 2372338,
+        "access": "block",
+        "isGlobal": true,
+        "name": "Global Block List",
+        "thirdpartyCategoryId": null,
+        "createdAt": "2017-10-25T19:45:48+0000",
+        "modifiedAt": "2017-10-25T19:45:48+0000",
+        "isMspDefault": false,
+        "markedForDeletion": false,
+        "bundleTypeId": 1,
+        "meta": {
+            "destinationCount": 0,
+            "domainCount": 0,
+            "urlCount": 0,
+            "ipv4Count": 0,
+            "applicationCount": 0
+        }
+    }
+]

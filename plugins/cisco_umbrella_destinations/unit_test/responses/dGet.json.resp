@@ -1,0 +1,37 @@
+[
+    {
+        "id": "34",
+        "destination": "facebook.com",
+        "type": "domain",
+        "comment": "another",
+        "createdAt": "2022-02-02 14:04:29"
+    },
+    {
+        "id": "571",
+        "destination": "amazon.com",
+        "type": "domain",
+        "comment": "another",
+        "createdAt": "2022-02-02 14:04:29"
+    },
+    {
+        "id": "6672",
+        "destination": "google.co.uk",
+        "type": "domain",
+        "comment": "comment",
+        "createdAt": "2022-02-02 14:04:29"
+    },
+    {
+        "id": "183128",
+        "destination": "stackoverflow.com",
+        "type": "domain",
+        "comment": "another",
+        "createdAt": "2022-01-31 17:07:15"
+    },
+    {
+        "id": "42882950",
+        "destination": "enteradestination",
+        "type": "domain",
+        "comment": "EnterAComment",
+        "createdAt": "2022-01-31 17:06:28"
+    }
+]
