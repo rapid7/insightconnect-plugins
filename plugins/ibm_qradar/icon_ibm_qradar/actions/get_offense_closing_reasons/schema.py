@@ -13,15 +13,14 @@ class Input:
     INCLUDE_DELETED = "include_deleted"
     INCLUDE_RESERVED = "include_reserved"
     RANGE = "range"
-
+    
 
 class Output:
     DATA = "data"
-
+    
 
 class GetOffenseClosingReasonsInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -59,16 +58,14 @@ class GetOffenseClosingReasonsInput(insightconnect_plugin_runtime.Input):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class GetOffenseClosingReasonsOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -116,8 +113,7 @@ class GetOffenseClosingReasonsOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

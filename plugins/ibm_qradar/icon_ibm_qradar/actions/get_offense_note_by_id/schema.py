@@ -11,15 +11,14 @@ class Input:
     FIELDS = "fields"
     NOTE_ID = "note_id"
     OFFENSE_ID = "offense_id"
-
+    
 
 class Output:
     DATA = "data"
-
+    
 
 class GetOffenseNoteByIdInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -48,16 +47,14 @@ class GetOffenseNoteByIdInput(insightconnect_plugin_runtime.Input):
     "offense_id"
   ]
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class GetOffenseNoteByIdOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -102,8 +99,7 @@ class GetOffenseNoteByIdOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
