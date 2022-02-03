@@ -1,5 +1,4 @@
 import json
-import logging
 
 from icon_ibm_qradar.connection import Connection
 
@@ -30,7 +29,6 @@ class Helper:
     def default_connector(action, connect_params: object = None):
         """Get the default connector for unit testing."""
         default_connection = Connection()
-        default_connection.logger = logging.getLogger("connection logger")
         if connect_params:
             params = connect_params
         else:
@@ -41,5 +39,4 @@ class Helper:
             }
         default_connection.connect(params)
         action.connection = default_connection
-        action.logger = logging.getLogger("action logger")
         return action

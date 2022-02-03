@@ -1,5 +1,4 @@
 import json
-import logging
 
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 from requests import Response
@@ -14,7 +13,7 @@ from insightconnect_plugin_runtime.helper import clean
 
 def prepare_request_params(
     params: {},
-    logger: logging.Logger,
+    logger,
     url_obj: URL,
     input_fields: list,
     query_params: dict = None,
@@ -68,12 +67,12 @@ def validate_query_range(query_range: str) -> (bool, str):
         start, end = query_range.split("-")
         start = int(start.strip())
         end = int(end.strip())
-        if start < 0:
-            return False, "Range should start from 0 or greater than 0 "
-        if end < 0:
-            return False, "Range should start end 0 or greater than 0"
+        if start < 1:
+            return False, "Start of range should be >= 1"
+        if end < 1:
+            return False, "End of range should be >= 1"
 
-        return True, f"{start}-{end}"
+        return True, f"{start-1}-{end-1}"  # subtract by one as index always start with 0
 
     except ValueError as err:
         return False, err

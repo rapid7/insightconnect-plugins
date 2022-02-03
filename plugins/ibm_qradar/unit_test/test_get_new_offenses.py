@@ -26,7 +26,7 @@ class TestGetNewOffense(TestCase):
 
         :return: None
         """
-        action_params = {"range": "-0-1"}
+        action_params = {"range": "-1-2"}
         with self.assertRaises(PluginException):
             self.action.run(action_params)
 
