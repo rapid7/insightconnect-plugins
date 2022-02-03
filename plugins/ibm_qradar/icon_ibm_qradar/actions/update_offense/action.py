@@ -1,5 +1,3 @@
-import logging
-
 import insightconnect_plugin_runtime
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -16,7 +14,7 @@ from icon_ibm_qradar.util.url import URL
 from icon_ibm_qradar.util.utils import prepare_request_params, handle_response
 
 
-def parse_params(params: dict, logger: logging.Logger) -> dict:
+def parse_params(params: dict, logger) -> dict:
     """To parse the input params."""
 
     query_params = {}
