@@ -4,7 +4,8 @@ products: [insightconnect]
 name: devo
 title: Devo
 description: Devo is the cloud-native logging and security analytics solution that delivers real-time visibility for security and operations teams
-version: 1.0.0
+version: 3.0.0
+supported_versions: ["v7.8.0"]
 vendor: rapid7
 support: community
 status: []
@@ -231,11 +232,19 @@ triggers:
   get_new_alerts:
     title: Get New Alerts
     description: Get new alerts
+    input:
+      interval:
+        title: Interval
+        description: Interval time in seconds
+        type: integer
+        required: false
+        example: 5
+        default: 10
     output:
-      alert:
-        title: Alert
-        description: An alert
-        type: object
+      alerts:
+        title: Alerts
+        description: An object containing information and results about the alerts from interval time
+        type: "[]object"
         required: true
 
 actions:

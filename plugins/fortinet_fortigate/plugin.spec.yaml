@@ -4,7 +4,8 @@ products: [insightconnect]
 name: fortinet_fortigate
 title: Fortinet FortiGate
 description: FortiGate Next Generation Firewalls (NGFWs) enable security-driven networking and consolidate industry-leading security capabilities such as intrusion prevention system (IPS), web filtering, secure sockets layer (SSL) inspection, and automated threat protection
-version: 5.1.1
+version: 6.0.0
+supported_versions: ["6.2.3"]
 vendor: rapid7
 support: community
 status: []
@@ -546,6 +547,11 @@ types:
       type: string
       description: "Subnet"
       required: false
+    fqdn:
+      title: FQDN
+      description: FQDN
+      type: string
+      required: false
     color:
       title: "Color"
       type: integer
@@ -606,6 +612,156 @@ types:
       type: string
       description: "UUID"
       required: false
+  tags:
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+  tagging:
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    category:
+      title: Category
+      type: string
+      description: Category
+      required: false
+    tags:
+      title: Tags
+      type: "[]tags"
+      description: Tags
+      required: false
+  list:
+    ip:
+      title: IP Address
+      type: string
+      description: IP address
+      required: false
+    obj-id:
+      title: Obj-ID
+      type: string
+      description: Object ID
+      required: false
+    net-id:
+      title: Net-ID
+      type: string
+      description: Network ID
+      required: false
+  segments:
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    type:
+      title: Type
+      type: string
+      description: Type
+      required: false
+    value:
+      title: Value
+      type: string
+      description: Value
+      required: false
+  ipv6_address_object:
+    name:
+      title: Name
+      type: string
+      description: Name
+      required: false
+    uuid:
+      title: UUID
+      type: string
+      description: UUID
+      required: false
+    type:
+      title: Type
+      type: string
+      description: Type
+      required: false
+    sdn:
+      title: SDN
+      type: string
+      description: SDN
+      required: false
+    ip6:
+      title: IPv6 Address
+      type: string
+      description: IPv6 address
+      required: false
+    start-ip:
+      title: Start-IP
+      type: string
+      description: Start IP
+      required: false
+    end-ip:
+      title: End-IP
+      type: string
+      description: End IP
+      required: false
+    cache-ttl:
+      title: Cache-TTL
+      type: integer
+      description: Cache-TTL
+      required: false
+    visibility:
+      title: Visibility
+      type: string
+      description: Visibility
+      required: false
+    color:
+      title: Color
+      type: integer
+      description: Color
+      required: false
+    obj-id:
+      title: Obj-ID
+      type: string
+      description: Object ID for NSX
+      required: false
+    list:
+      title: List
+      type: "[]list"
+      description: List
+      required: false
+    tagging:
+      title: Tagging
+      type: "[]tagging"
+      description: Tagging
+      required: false
+    comment:
+      title: Comment
+      type: string
+      description: Comment
+      required: false
+    template:
+      title: Template
+      type: string
+      description: Template
+      required: false
+    subnet-segment:
+      title: Subnet-segment
+      description: Subnet segment
+      type: "[]segments"
+      required: false
+    q_origin_key:
+      title: Q Origin Key
+      type: string
+      description: Q origin key
+      required: false
+    host-type:
+      title: Host-type
+      type: string
+      description: Host type
+      required: false
+    host:
+      title: Host
+      type: string
+      description: Host
+      required: false
 
 connection:
   hostname:
@@ -625,6 +781,7 @@ connection:
     title: SSL Verify
     description: SSL verify
     required: true
+    default: false
     example: false
 
 actions:
@@ -639,13 +796,20 @@ actions:
         required: true
         example: InsightConnect Block Policy
         order: 1
+      ipv6_group:
+        title: IPv6 Group
+        description: The name of the IPv6 address group
+        type: string
+        required: true
+        example: InsightConnect IPv6 Block List
+        order: 2
       address:
         title: Address
         description: The Address Object name to check. If Enable Search is set to true then we search the addresses (IP, CIDR, domain) within the address object instead of matching the name
         type: string
         example: 198.51.100.100
         required: true
-        order: 2
+        order: 3
       enable_search:
         title: Enable Search
         description: When enabled, the Address input will accept a IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don't know the Address Object by its name
@@ -653,7 +817,7 @@ actions:
         example: false
         default: false
         required: true
-        order: 3
+        order: 4
     output:
       found:
         title: Found
@@ -703,11 +867,22 @@ actions:
         type: string
         required: false
         example: example.com
+      ipv6_subnet_filter:
+        title: IPv6 Subnet Filter
+        description: Optional IPv6 subnet to filter on
+        type: string
+        required: false
+        example: 2001:db8:8:4::2/128
     output:
       address_objects:
         title: Address Objects
         description: A list of address objects
         type: '[]address_object'
+        required: true
+      ipv6_address_objects:
+        title: IPv6 Address Objects
+        description: A list of IPv6 address objects
+        type: '[]ipv6_address_object'
         required: true
   create_address_object:
     title: Create Address Object
@@ -784,6 +959,12 @@ actions:
         type: string
         required: true
         example: InsightConnect Block List
+      ipv6_group:
+        title: IPv6 Group
+        description: The name of the IPv6 address group
+        type: string
+        required: true
+        example: InsightConnect IPv6 Block List
       address_object:
         title: Address Object
         description: Address object
@@ -811,6 +992,12 @@ actions:
         type: string
         required: true
         example: InsightConnect Block List
+      ipv6_group:
+        title: IPv6 Group
+        description: The name of the IPv6 address group
+        type: string
+        required: true
+        example: InsightConnect IPv6 Block List
       address_object:
         title: Address Object
         description: Address object

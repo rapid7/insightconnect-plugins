@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Queries firewall logs"
+    DESCRIPTION = "Queries firewall logs. This action uses a direct connection to the firewall"
 
 
 class Input:

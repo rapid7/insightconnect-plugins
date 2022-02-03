@@ -8,6 +8,7 @@ class Component:
 
 
 class Input:
+    DATE_FORMAT = "date_format"
     FILE = "file"
     STR = "str"
     
@@ -22,21 +23,74 @@ class DateExtractorInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "date_format": {
+      "type": "string",
+      "title": "Date Format",
+      "description": "Dates matching this format are extracted - If All Formats is selected, found dates will be processed in the listed order documented",
+      "enum": [
+        "dd/mm/yyyy",
+        "mm/dd/yyyy",
+        "dd/mm/yyyy",
+        "dd\\\\mm\\\\yyyy",
+        "dd.mm.yyyy",
+        "dd-mm-yyyy",
+        "dd.mm.yy",
+        "dd-mm-yy",
+        "dd/mm/yy",
+        "dd\\\\mm\\\\yy",
+        "mm/dd/yyyy",
+        "mm\\\\dd\\\\yyyy",
+        "mm.dd.yyyy",
+        "mm-dd-yyyy",
+        "mm/dd/yy",
+        "mm\\\\dd\\\\yy",
+        "mm.dd.yy",
+        "mm-dd-yy",
+        "dd/mmm/yyyy",
+        "dd\\\\mmm\\\\yyyy",
+        "dd.mmm.yyyy",
+        "dd-mmm-yyyy",
+        "dd/mmm/yy",
+        "dd\\\\mmm\\\\yy",
+        "dd.mmm.yy",
+        "dd-mmm-yy",
+        "yyyy.mm.dd",
+        "yyyy-mm-dd",
+        "yyyy/mm/dd",
+        "yyyy\\\\mm\\\\dd",
+        "yyyy.mmm.dd",
+        "yyyy-mmm-dd",
+        "yyyy/mmm/dd",
+        "yyyy\\\\mmm\\\\dd",
+        "yy.mm.dd",
+        "yy-mm-dd",
+        "yy/mm/dd",
+        "yy\\\\mm\\\\dd",
+        "yyyy-mm-ddThh:mm",
+        "yyyy-mm-ddThh:mm:ss",
+        "All Formats",
+        ""
+      ],
+      "order": 1
+    },
     "file": {
       "type": "string",
       "title": "File",
       "displayType": "bytes",
       "description": "Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS",
       "format": "bytes",
-      "order": 2
+      "order": 3
     },
     "str": {
       "type": "string",
       "title": "String",
       "description": "Input string",
-      "order": 1
+      "order": 2
     }
-  }
+  },
+  "required": [
+    "date_format"
+  ]
 }
     """)
 
