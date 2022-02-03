@@ -749,7 +749,7 @@ actions:
         type: string
         required: false
         description: Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, domain_id, hostnames(id), interfaces, products etc. More information about the fields can be found in plugin documentation
-        example: id
+        example: id, hostnames(id)
     output:
       data:
         title: Assets Data
@@ -778,7 +778,7 @@ actions:
         type: string
         required: false
         description: Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, assigned_to, inactive, offense_source,  offense_type, rules(id), protected, follow_up, status, domain_id, rules, log_sources etc. More information about the fields can be found in plugin documentation
-        example: id
+        example: id, rules(id)
       sort:
         title: Sort
         type: string
@@ -813,7 +813,7 @@ actions:
         type: string
         required: false
         description: Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, text, is_deleted, is_reserved. More information about the fields can be found in plugin documentation
-        example: id
+        example: id, is_deleted
       include_deleted:
         title: Include Deleted
         type: boolean
@@ -859,7 +859,7 @@ actions:
         type: string
         required: false
         description: Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, assigned_to, inactive, offense_source,  offense_type, rules(id), protected, follow_up, status, domain_id, rules, log_sources etc. More information about the fields can be found in plugin documentation
-        example: id
+        example: id, rules(id)
       follow_up:
         title: Follow Up
         type: boolean
@@ -917,7 +917,7 @@ actions:
         type: string
         required: false
         description: Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, create_time, username, note_text. More information about the fields can be found in plugin documentation
-        example: id
+        example: id, note_text
     output:
       data:
         title: Offense Notes
@@ -945,7 +945,7 @@ actions:
         type: string
         required: false
         description: Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, create_time, username, note_text. More information about the fields can be found in plugin documentation
-        example: id
+        example: id, note_text
     output:
       data:
         title: Offense Notes by ID
@@ -973,7 +973,7 @@ actions:
         type: string
         required: false
         description: Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, create_time, username, note_text. More information about the fields can be found in plugin documentation
-        example: id
+        example: id, note_text
     output:
       data:
         title: "Newly Added Offense Notes"
@@ -1003,7 +1003,7 @@ triggers:
         type: string
         required: false
         description: Specify the list of fields to be returned in the response. Specify the subfields in brackets (). Multiple fields in the same object must be comma separated. Sample fields to filter are  id, assigned_to, inactive, offense_source,  offense_type, rules(id), protected, follow_up, status, domain_id, rules, log_sources etc. More information about the fields can be found in plugin documentation
-        example: id
+        example: id, rules(id)
       sort:
         title: Sort
         type: string
