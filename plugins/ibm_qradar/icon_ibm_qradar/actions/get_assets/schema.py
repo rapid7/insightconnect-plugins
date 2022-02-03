@@ -11,15 +11,14 @@ class Input:
     FIELDS = "fields"
     FILTER = "filter"
     RANGE = "range"
-
+    
 
 class Output:
     DATA = "data"
-
+    
 
 class GetAssetsInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -45,16 +44,14 @@ class GetAssetsInput(insightconnect_plugin_runtime.Input):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class GetAssetsOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -795,8 +792,7 @@ class GetAssetsOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

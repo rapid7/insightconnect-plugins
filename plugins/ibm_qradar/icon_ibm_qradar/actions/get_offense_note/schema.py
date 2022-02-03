@@ -12,15 +12,14 @@ class Input:
     FILTER = "filter"
     OFFENSE_ID = "offense_id"
     RANGE = "range"
-
+    
 
 class Output:
     DATA = "data"
-
+    
 
 class GetOffenseNoteInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -55,16 +54,14 @@ class GetOffenseNoteInput(insightconnect_plugin_runtime.Input):
     "offense_id"
   ]
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class GetOffenseNoteOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -112,8 +109,7 @@ class GetOffenseNoteOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)

@@ -10,15 +10,14 @@ class Component:
 class Input:
     POLL_INTERVAL = "poll_interval"
     SEARCH_ID = "search_id"
-
+    
 
 class Output:
     DATA = "data"
-
+    
 
 class GetArielSearchByIdInput(insightconnect_plugin_runtime.Input):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -41,16 +40,14 @@ class GetArielSearchByIdInput(insightconnect_plugin_runtime.Input):
     "search_id"
   ]
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
 class GetArielSearchByIdOutput(insightconnect_plugin_runtime.Output):
-    schema = json.loads(
-        """
+    schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
@@ -262,8 +259,7 @@ class GetArielSearchByIdOutput(insightconnect_plugin_runtime.Output):
     }
   }
 }
-    """
-    )
+    """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
