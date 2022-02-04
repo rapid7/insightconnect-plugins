@@ -7,7 +7,7 @@ description: Notify the right people, reduce response time, and avoid alert fati
 version: 1.0.0
 vendor: rapid7
 support: rapid7
-supported_versions: ["All as of 01/11/2022"]
+supported_versions: ["2022-01-11"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/opsgenie
@@ -23,7 +23,6 @@ hub_tags:
   keywords: [atlassian]
   features: []
 enable_cache: false
-
 connection:
   api_key:
     title: Authorization API Key
@@ -31,7 +30,6 @@ connection:
     type: credential_secret_key
     required: true
     example: "1234567e-123c-123c-123c-1234567e9xAd"
-
 actions:
   create_alert:
     title: Create Alert
@@ -57,7 +55,7 @@ actions:
         example: "An example description"
       responders:
         title: Responders
-        description: Teams, users, escalations and schedules that the alert will be routed to send notifications. Type field is mandatory for each item, where possible values are team, user, escalation and schedule. If the API Key belongs to a team integration, this field will be overwritten with the owner team. Either ID or name of each responder should be provided. You can refer below for example values
+        description: 'Teams, users, escalations and schedules that the alert will be routed to send notifications. "id/name": Either id or name of each responder should be provided. "type": team, user, escalation, schedule. Format: [{"id/name":"value", "type":"team/user/escalation/schedule"}]'
         type: "[]object"
         required: false
         example: '[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c", "type":"team"},{"name":"NOC","type":"team"}]'
@@ -139,7 +137,6 @@ actions:
         description: ID of a executed API request
         type: string
         required: false
-
   get_alert:
     title: Get Alert
     description: Retrieve alert from OpsGenie
@@ -173,7 +170,6 @@ actions:
         description: ID of an request
         type: string
         required: false
-
   close_alert:
     title: Close Alert
     description: Close an existing alert from OpsGenie
@@ -230,7 +226,6 @@ actions:
         description: ID of a executed API request
         type: string
         required: false
-
   get_on_calls:
     title: Get On-Calls
     description: Get on-call request is used to retrieve current on-call participants of a specific schedule

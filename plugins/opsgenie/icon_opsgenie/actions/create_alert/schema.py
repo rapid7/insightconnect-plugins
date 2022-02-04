@@ -98,7 +98,7 @@ class CreateAlertInput(insightconnect_plugin_runtime.Input):
     "responders": {
       "type": "array",
       "title": "Responders",
-      "description": "Teams, users, escalations and schedules that the alert will be routed to send notifications. Type field is mandatory for each item, where possible values are team, user, escalation and schedule. If the API Key belongs to a team integration, this field will be overwritten with the owner team. Either ID or name of each responder should be provided. You can refer below for example values",
+      "description": "Teams, users, escalations and schedules that the alert will be routed to send notifications. \\"id/name\\": Either id or name of each responder should be provided. \\"type\\": team, user, escalation, schedule. Format: [{\\"id/name\\":\\"value\\", \\"type\\":\\"team/user/escalation/schedule\\"}]",
       "items": {
         "type": "object"
       },

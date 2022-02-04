@@ -15,7 +15,7 @@ Notify the right people, reduce response time, and avoid alert fatigue within a 
 
 # Supported Product Versions
 
-* All as of 01/11/2022
+* 2022-01-11
 
 # Documentation
 
@@ -99,7 +99,7 @@ This action creates an alert for OpsGenie.
 |message|string|None|True|Message of the alert|None|An example alert message|
 |note|string|None|False|Additional note that will be added while creating the alert|None|Example additional note|
 |priority|string|P3|False|Priority level of the alert. Possible values are P1, P2, P3, P4 and P5. Default value is P3|['', 'P1', 'P2', 'P3', 'P4', 'P5']|P1|
-|responders|[]object|None|False|Teams, users, escalations and schedules that the alert will be routed to send notifications. Type field is mandatory for each item, where possible values are team, user, escalation and schedule. If the API Key belongs to a team integration, this field will be overwritten with the owner team. Either ID or name of each responder should be provided. You can refer below for example values|None|[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c", "type":"team"},{"name":"NOC","type":"team"}]|
+|responders|[]object|None|False|Teams, users, escalations and schedules that the alert will be routed to send notifications. "id/name": Either id or name of each responder should be provided. "type": team, user, escalation, schedule. Format: [{"id/name":"value", "type":"team/user/escalation/schedule"}]|None|[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c", "type":"team"},{"name":"NOC","type":"team"}]|
 |source|string|None|False|Source field of the alert. Default value is IP address of the incoming request|None|192.168.0.1|
 |tags|[]string|None|False|Tags of the alert|None|["OverwriteQuietHours","Critical"]|
 |user|string|None|False|Display name of the request owner|None|ExampleName|
