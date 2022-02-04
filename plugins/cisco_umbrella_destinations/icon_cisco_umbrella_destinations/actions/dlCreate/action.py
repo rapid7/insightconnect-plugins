@@ -27,6 +27,6 @@ class DlCreate(insightconnect_plugin_runtime.Action):
             ],
         }
         result = self.connection.client.create_destination_list(data=data)
-        result = {k: v for k, v in result.items() if v is not None}
+        result = {key: value for key, value in result.items() if value is not None}
 
         return {Output.SUCCESS: result}

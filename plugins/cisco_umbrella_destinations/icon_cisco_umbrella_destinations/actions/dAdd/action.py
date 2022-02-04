@@ -19,7 +19,7 @@ class DAdd(insightconnect_plugin_runtime.Action):
         destination = params.get(Input.DESTINATION)
         comment = params.get(Input.COMMENT)
 
-        if comment is not None:
+        if comment:
             data = [{"destination": destination, "comment": comment}]
         else:
             data = [{"destination": destination}]
