@@ -1,5 +1,4 @@
 class Util:
-
     @staticmethod
     def update_properties(object_to_validate: dict, properties: list) -> dict:
         for checked_property in properties:
