@@ -17,12 +17,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install prospector[with_bandit]
+          pip install prospector[with_bandit]==1.6.0
 
       - name: Prospector
         run: |
           CHANGED_FILES=()
-          for OUTPUT in $(git diff --no-commit-id --name-only -r HEAD..origin/master)
+          for OUTPUT in $(git diff --no-commit-id --name-only -r HEAD..origin/develop)
           do
             if ! [[ -d ${OUTPUT} ]] && [[ ${OUTPUT} == *.py ]]
             then
