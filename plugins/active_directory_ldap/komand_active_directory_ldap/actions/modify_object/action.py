@@ -25,7 +25,7 @@ class ModifyObject(insightconnect_plugin_runtime.Action):
         pairs = formatter.find_parentheses_pairs(dn)
         # replace ( and ) when they are part of a name rather than a search parameter
         if pairs:
-            dn = formatter.escape_brackets_for_query(dn)
+            dn = formatter.escape_brackets_for_query(dn, pairs)
 
         self.logger.info(dn)
 

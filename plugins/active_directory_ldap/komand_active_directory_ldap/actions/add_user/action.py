@@ -37,9 +37,9 @@ class AddUser(insightconnect_plugin_runtime.Action):
         else:
             user_ou = user_ou.replace(",", ",OU=")
         if user_ou == "Users":
-            dn = "CN={},CN={},DC={}".format(full_name, user_ou, domain_dn)
+            dn = f"CN={full_name},CN={user_ou},DC={domain_dn}"
         else:
-            dn = "CN={},OU={},DC={}".format(full_name, user_ou, domain_dn)
+            dn = f"CN={full_name},OU={user_ou},DC={domain_dn}"
 
         self.logger.info("User DN=" + dn)
 
