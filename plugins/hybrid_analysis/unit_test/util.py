@@ -36,14 +36,20 @@ class Util:
             def json(self):
                 return Util.load_json(f"payloads/{self.filename}.json.resp")
 
-        if args[1] == "https://www.hybrid-analysis.com/api/v2/search/hash" and kwargs.get("data").get(
-                "hash") == "40451f20371329b992fb1b85c754d062":
+        if (
+            args[1] == "https://www.hybrid-analysis.com/api/v2/search/hash"
+            and kwargs.get("data").get("hash") == "40451f20371329b992fb1b85c754d062"
+        ):
             return MockResponse("action_lookup_hash", 200)
-        elif args[1] == "https://www.hybrid-analysis.com/api/v2/search/hash" and (kwargs.get("data").get(
-                "hash") == "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f" or kwargs.get("data").get(
-            "hash") == "44d88612fea8a8f36de82e1278abb02f"):
+        elif args[1] == "https://www.hybrid-analysis.com/api/v2/search/hash" and (
+            kwargs.get("data").get("hash") == "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+            or kwargs.get("data").get("hash") == "44d88612fea8a8f36de82e1278abb02f"
+        ):
             return MockResponse("action_lookup_hash_sha256_sha1", 200)
-        elif args[1] == "https://www.hybrid-analysis.com/api/v2/report/30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050/state":
+        elif (
+            args[1]
+            == "https://www.hybrid-analysis.com/api/v2/report/30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050/state"
+        ):
             return MockResponse("action_report", 200)
         elif args[1] == "https://www.hybrid-analysis.com/api/v2/submit/file":
             return MockResponse("action_submit", 200)
@@ -59,8 +65,10 @@ class Util:
                 return MockResponse("action_lookup_terms_filetype", 200)
             elif request_data.get(Input_terms.HOST) == "198.51.100.1":
                 return MockResponse("action_lookup_terms_host", 200)
-            elif request_data.get(
-                    Input_terms.SIMILAR_TO) == "ef537f25c895bfa782526529a9b63d97aa631564d5d789c2b765448c8635fb6c":
+            elif (
+                request_data.get(Input_terms.SIMILAR_TO)
+                == "ef537f25c895bfa782526529a9b63d97aa631564d5d789c2b765448c8635fb6c"
+            ):
                 return MockResponse("action_lookup_terms_similarto", 200)
             elif request_data.get(Input_terms.TAG) == "ransomware":
                 return MockResponse("action_lookup_terms_tag", 200)
