@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetAlertInput, GetAlertOutput, Input, Component
+from .schema import GetAlertInput, GetAlertOutput, Input, Output, Component
 
 
 class GetAlert(insightconnect_plugin_runtime.Action):
@@ -9,4 +9,9 @@ class GetAlert(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return self.connection.client.get_alert(params.get(Input.IDENTIFIER), params.get(Input.IDENTIFIERTYPE))
+        response = self.connection.client.get_alert(params.get(Input.IDENTIFIER), params.get(Input.IDENTIFIERTYPE))
+        return {
+            Output.DATA: response.get("data"),
+            Output.REQUESTID: response.get("requestId"),
+            Output.ELAPSED_TIME: response.get("took"),
+        }

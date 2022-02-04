@@ -4,10 +4,10 @@ import os
 import json
 from sys import argv
 
-Name = "OpsGenie"
+Name = "Opsgenie"
 Vendor = "rapid7"
 Version = "1.0.0"
-Description = "Notify the right people, reduce response time, and avoid alert fatigue within a workflow"
+Description = "Notify the right people, reduce response time, and avoid alert fatigue with Opsgenie"
 
 
 def main():

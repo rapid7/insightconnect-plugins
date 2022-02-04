@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import CloseAlertInput, CloseAlertOutput, Input, Component
+from .schema import CloseAlertInput, CloseAlertOutput, Input, Output, Component
 
 
 class CloseAlert(insightconnect_plugin_runtime.Action):
@@ -10,9 +10,15 @@ class CloseAlert(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         data = {
-            Input.USER: params.get(Input.USER),
-            Input.SOURCE: params.get(Input.SOURCE),
-            Input.NOTE: params.get(Input.NOTE),
+            "user": params.get(Input.USER),
+            "source": params.get(Input.SOURCE),
+            "note": params.get(Input.NOTE),
         }
-
-        return self.connection.client.close_alert(params.get(Input.IDENTIFIER), params.get(Input.IDENTIFIERTYPE), data)
+        response = self.connection.client.close_alert(
+            params.get(Input.IDENTIFIER), params.get(Input.IDENTIFIERTYPE), data
+        )
+        return {
+            Output.RESULT: response.get("result"),
+            Output.REQUESTID: response.get("requestId"),
+            Output.ELAPSED_TIME: response.get("took"),
+        }

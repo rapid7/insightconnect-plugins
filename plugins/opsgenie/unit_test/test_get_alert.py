@@ -76,6 +76,7 @@ class TestGetAlert(TestCase):
                 "details": {"serverName": "ExampleName", "region": "ExampleRegion"},
             },
             Output.REQUESTID: "9ae63dd7-ed00-4c81-86f0-c4ffd33142c9",
+            Output.ELAPSED_TIME: 0.001,
         }
 
         self.assertEqual(response, expected_response)

@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import CreateAlertInput, CreateAlertOutput, Input, Component
+from .schema import CreateAlertInput, CreateAlertOutput, Input, Output, Component
 
 
 class CreateAlert(insightconnect_plugin_runtime.Action):
@@ -25,4 +25,10 @@ class CreateAlert(insightconnect_plugin_runtime.Action):
             "note": params.get(Input.NOTE),
         }
 
-        return self.connection.client.create_alert(data)
+        response = self.connection.client.create_alert(data)
+
+        return {
+            Output.RESULT: response.get("result"),
+            Output.REQUESTID: response.get("requestId"),
+            Output.ELAPSED_TIME: response.get("took"),
+        }

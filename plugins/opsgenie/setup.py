@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(name="opsgenie-rapid7-plugin",
       version="1.0.0",
-      description="Notify the right people, reduce response time, and avoid alert fatigue within a workflow",
+      description="Notify the right people, reduce response time, and avoid alert fatigue with Opsgenie",
       author="rapid7",
       author_email="",
       url="",

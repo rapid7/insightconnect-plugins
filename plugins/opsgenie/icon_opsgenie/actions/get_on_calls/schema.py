@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get on-call request is used to retrieve current on-call participants of a specific schedule"
+    DESCRIPTION = "Get current on-call participants"
 
 
 class Input:
@@ -16,8 +16,8 @@ class Input:
 
 class Output:
     DATA = "data"
+    ELAPSED_TIME = "elapsed_time"
     REQUESTID = "requestId"
-    TOOK = "took"
     
 
 class GetOnCallsInput(insightconnect_plugin_runtime.Input):
@@ -36,7 +36,7 @@ class GetOnCallsInput(insightconnect_plugin_runtime.Input):
     },
     "flat": {
       "type": "boolean",
-      "title": "Flat",
+      "title": "Retrieve All Participants",
       "description": "When enabled, retrieves user names of all on-call participants. Default value is false",
       "order": 3
     },
@@ -49,7 +49,7 @@ class GetOnCallsInput(insightconnect_plugin_runtime.Input):
     "scheduleIdentifierType": {
       "type": "string",
       "title": "Schedule Identifier Type",
-      "description": "Type of the schedule identifier that is provided as an in-line parameter. Possible values are ID and name. Default value is ID",
+      "description": "Type of the schedule identifier. Possible values are ID and name. Default value is ID",
       "default": "ID",
       "enum": [
         "",
@@ -78,22 +78,27 @@ class GetOnCallsOutput(insightconnect_plugin_runtime.Output):
     "data": {
       "type": "object",
       "title": "Data",
-      "description": "Response DATA from OpsGenie API",
+      "description": "Response data from Opsgenie",
       "order": 1
+    },
+    "elapsed_time": {
+      "type": "number",
+      "title": "Elapsed Time",
+      "description": "Time taken to execute",
+      "order": 2
     },
     "requestId": {
       "type": "string",
       "title": "Request ID",
       "description": "ID of a executed API request",
       "order": 3
-    },
-    "took": {
-      "type": "number",
-      "title": "Took",
-      "description": "Time took to execute API",
-      "order": 2
     }
-  }
+  },
+  "required": [
+    "data",
+    "elapsed_time",
+    "requestId"
+  ]
 }
     """)
 

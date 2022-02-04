@@ -85,7 +85,7 @@ class TestGetOnCalls(TestCase):
                     },
                 ],
             },
-            Output.TOOK: 0.305,
+            Output.ELAPSED_TIME: 0.305,
             Output.REQUESTID: "e28ce37b-d81c-4b1d-abb8-0c371d8alp5f",
         }
 
