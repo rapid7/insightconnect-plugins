@@ -58,7 +58,7 @@ class GetCompleteAlertByIdOutput(insightconnect_plugin_runtime.Output):
       "title": "Assets",
       "description": "List of assets",
       "items": {
-        "type": "string"
+        "$ref": "#/definitions/asset"
       },
       "order": 2
     },
@@ -244,8 +244,7 @@ class GetCompleteAlertByIdOutput(insightconnect_plugin_runtime.Output):
             }
           },
           "required": [
-            "Type",
-            "URL"
+            "Type"
           ]
         },
         "alert_tags": {
@@ -315,8 +314,7 @@ class GetCompleteAlertByIdOutput(insightconnect_plugin_runtime.Output):
         }
       },
       "required": [
-        "Type",
-        "URL"
+        "Type"
       ]
     },
     "alert_tags": {
@@ -346,6 +344,28 @@ class GetCompleteAlertByIdOutput(insightconnect_plugin_runtime.Output):
         "CreatedBy",
         "Name",
         "_id"
+      ]
+    },
+    "asset": {
+      "type": "object",
+      "title": "asset",
+      "properties": {
+        "Type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Asset type",
+          "order": 1
+        },
+        "Value": {
+          "type": "string",
+          "title": "Value",
+          "description": "Asset value",
+          "order": 2
+        }
+      },
+      "required": [
+        "Type",
+        "Value"
       ]
     }
   }
