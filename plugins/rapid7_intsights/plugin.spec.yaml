@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_intsights
 title: Rapid7 IntSights
 description: Rapid7 IntSights is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
-version: 3.0.1
+version: 3.1.0
 supported_versions: ["2.4.0"]
 vendor: rapid7
 support: rapid7
@@ -308,6 +308,18 @@ types:
       type: "[]string"
       description: Related campaigns
       required: false
+  cve_failure_type:
+    cveId:
+      title: CVE ID
+      description: CVE ID
+      type: string
+      required: true
+    failReason:
+      title: Fail Reason
+      description: Fail reason
+      type: string
+      required: true
+
 connection:
   account_id:
     title: Account ID
@@ -809,6 +821,58 @@ actions:
         description: Response content
         type: '[]content'
         required: true
+  get_cve_list:
+    title: Get CVE List
+    description: Get a list of all CVEs from an account
+    output:
+      content:
+        title: Content
+        description: Response content
+        type: '[]content'
+        required: true
+  add_cve:
+    title: Add CVEs
+    description: Add CVEs to account
+    input:
+      cve_id:
+        title: CVE ID
+        description: List of CVE IDs
+        type: "[]string"
+        required: false
+        example: ["CVE-2020-0711"]
+    output:
+      success_amount:
+          title: Success Amount
+          description: Amount of successfully added CVEs
+          type: integer
+          required: true
+      failure:
+        title: Failure
+        description: Failure details
+        type: "[]cve_failure_type"
+        required: true
+  delete_cve:
+    title: Delete CVEs
+    description: Delete CVEs from account
+    input:
+      cve_id:
+        title: CVE ID
+        description: List of CVE IDs
+        type: "[]string"
+        required: false
+        example: ["CVE-2020-0711"]
+    output:
+      success_amount:
+          title: Success Amount
+          description: Amount of successfully deleted CVEs
+          type: integer
+          required: true
+      failure:
+        title: Failure
+        description: Failure details
+        type: "[]cve_failure_type"
+        required: true
+
 triggers:
   new_alert:
     title: New Alert
