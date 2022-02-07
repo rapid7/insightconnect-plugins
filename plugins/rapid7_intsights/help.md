@@ -152,10 +152,12 @@ Example input:
 {
   "description": "Suspicious addresses",
   "found_date": "2020-01-01",
-  "images": [{
-    "Type": "jpeg",
-    "Data": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
-  }],
+  "images": [
+    {
+      "Type": "jpeg",
+      "Data": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
+    }
+  ],
   "severity": "Medium",
   "source_date": "2020-02-01",
   "source_network_type": "DarkWeb",
@@ -237,7 +239,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|assets|[]string|True|List of assets|
+|assets|[]asset|True|List of assets|
 |assignees|[]string|True|List of assignees|
 |details|alert_details|True|Alert details|
 |found_date|date|False|Alert found date|
@@ -252,11 +254,18 @@ Example output:
 
 ```
 {
-  "assets": [],
+  "assets": [
+    {
+      "Type": "Domain",
+      "Value": "https://example.com"
+    }
+  ],
   "assignees": [],
   "details": {
     "Description": "APIDescription",
-    "Images": [],
+    "Images": [
+      "61efc2286b02dcd558929918"
+    ],
     "Severity": "High",
     "Source": {
       "NetworkType": "ClearWeb",
@@ -811,6 +820,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.0.0 - Add `assets` custom output type in Add Manual Alert action | Fix missing URL bug in DarkWeb Webmail alerts in Add Manual Alert action
 * 2.0.0 - Add new trigger New Alert | Add new action Get CVE by ID
 * 1.0.0 - Initial plugin
 
