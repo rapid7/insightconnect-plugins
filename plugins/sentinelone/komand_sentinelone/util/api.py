@@ -35,7 +35,7 @@ def clean(obj):
         for key, value in enumerate(cleaned):
             if isinstance(value, list) or isinstance(value, dict):  # pylint: disable=consider-merging-isinstance
                 cleaned[key] = clean(value)
-            if key in default_array and (value is None or value == "None"):
+            if value is None or value == "None":
                 cleaned[key] = []
     elif isinstance(cleaned, dict):
         for key, value in cleaned.items():
