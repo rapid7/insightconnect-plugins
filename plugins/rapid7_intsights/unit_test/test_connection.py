@@ -36,5 +36,5 @@ class TestConnection(TestCase):
         with self.assertRaises(ConnectionTestException) as error:
             action.connection.test()
 
-        self.assertEqual("Invalid username or password provided.", error.exception.cause)
-        self.assertEqual("Verify your username and password are correct.", error.exception.assistance)
+        self.assertEqual("Invalid API key provided.", error.exception.cause)
+        self.assertEqual("Verify your API key configured in your connection is correct.", error.exception.assistance)
