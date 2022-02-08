@@ -22,9 +22,9 @@ jobs:
       - name: Prospector
         run: |
           CHANGED_FILES=()
-          for OUTPUT in $(git diff --no-commit-id --name-only -r HEAD..origin/develop)
+          for OUTPUT in $(git diff --no-commit-id --name-only --no-renames HEAD..origin/develop)
           do
-            if ! [[ -d ${OUTPUT} ]] && [[ ${OUTPUT} == *.py ]]
+            if [[ -f ${OUTPUT} ]] && [[ ${OUTPUT} == *.py ]]
             then
               CHANGED_FILES+=( ${OUTPUT} )
             fi
