@@ -28,3 +28,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         self.client = zenpy.Zenpy(**creds)
         self.logger.info("Connect: Connecting...")
+
+    def test(self):
+        try:
+            self.client.users()
+        except zenpy.lib.exception.APIException as e:
+            self.logger.debug(e)
+            raise PluginException(
+                cause=f"Zendesk API connection test failed.",
+                assistance="Make sure your credentials are correct.",
+            )
