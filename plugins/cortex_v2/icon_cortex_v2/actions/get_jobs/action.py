@@ -1,11 +1,9 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import GetJobsInput, GetJobsOutput, Input, Output, Component
 
 # Custom imports below
-from cortex4py.query import And, Eq
-from icon_cortex_v2.util.convert import jobs_to_dicts
-from cortex4py.exceptions import ServiceUnavailableError, AuthenticationError
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from icon_cortex_v2.util.util import filter_jobs, filter_job_artifacts, eq_, and_
 
 
 class GetJobs(insightconnect_plugin_runtime.Action):
@@ -18,7 +16,7 @@ class GetJobs(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        api = self.connection.api
+        api = self.connection.API
         query_params = []
 
         start = params.get(Input.START, 0)
@@ -28,28 +26,23 @@ class GetJobs(insightconnect_plugin_runtime.Action):
         analyzer_filter = params.get(Input.ANALYZERFILTER)
 
         if data_type_filter:
-            query_params.append(Eq("dataType", data_type_filter))
+            query_params.append(eq_("dataType", data_type_filter))
         if data_filter:
-            query_params.append(Eq("data", data_filter))
+            query_params.append(eq_("data", data_filter))
         if analyzer_filter:
-            query_params.append(Eq("analyzerId", analyzer_filter))
+            query_params.append(eq_("analyzerId", analyzer_filter))
 
-        query = And(*query_params)
+        query = and_(query_params)
         self.logger.info(f"Query: {query}")
 
-        range_ = f"{start}-{start+limit}"
+        range_ = f"{start}-{start + limit}"
         self.logger.info(f"Range: {range_}")
 
         try:
-            jobs = api.jobs.find_all(query, range=range_, sort="-createdAt")
-            jobs = jobs_to_dicts(jobs, api)
-        except AuthenticationError as e:
-            self.logger.error(e)
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
-        except ServiceUnavailableError as e:
-            self.logger.error(e)
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
+            jobs = filter_jobs(api.search_for_all_jobs(query, range_=range_, sort_="-createdAt"))
+            for job in jobs:
+                job["artifacts"] = filter_job_artifacts(api.get_job_artifacts(job["id"]))
         except Exception as e:
-            raise ConnectionTestException(cause="Failed to obtain the list of jobs.", assistance=f"{e}.")
+            raise PluginException(cause="Failed to obtain the list of jobs.", assistance=f"{e}.")
 
         return {Output.LIST: jobs}

@@ -1,10 +1,9 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import RunAnalyzerInput, RunAnalyzerOutput, Input, Output, Component
 
 # Custom imports below
-from icon_cortex_v2.util.convert import job_to_dict
-from cortex4py.exceptions import ServiceUnavailableError, AuthenticationError, CortexException
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from icon_cortex_v2.util.util import filter_job, filter_job_artifacts
 
 
 class RunAnalyzer(insightconnect_plugin_runtime.Action):
@@ -19,31 +18,20 @@ class RunAnalyzer(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        api = self.connection.api
+        api = self.connection.API
 
         analyzer_name = params.get(Input.ANALYZER_ID)
         observable = params.get(Input.OBSERVABLE)
         data_type = params.get(Input.ATTRIBUTES).get("dataType")
         tlp_num = params.get(Input.ATTRIBUTES).get("tlp")
 
-        try:
-            job = api.analyzers.run_by_name(
-                analyzer_name, {"data": observable, "dataType": data_type, "tlp": tlp_num}, force=1
-            )
-            job = job_to_dict(job, api)
-        except AuthenticationError as e:
-            self.logger.error(e)
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
-        except ServiceUnavailableError as e:
-            self.logger.error(e)
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
-        except CortexException as e:
-            raise ConnectionTestException(cause="Failed to run analyzer.", assistance=f"{e}.")
-        except Exception:
-            # A bad analyzer returns: AttributeError: 'NoneType' object has no attribute 'id'
-            raise ConnectionTestException(
-                cause="Failed to run analyzer.",
-                assistance="The selected analyzer may not exist in Cortex!",
-            )
+        analyzer = api.get_analyzer_by_name(analyzer_name)
+        analyzer_id = analyzer.get("id")
+        if not analyzer_id:
+            raise PluginException(f"Analyzer {analyzer_name} not found")
+        job = filter_job(api.run_analyzer(analyzer_id, {"data": observable, "dataType": data_type, "tlp": tlp_num}))
+        if not job or not isinstance(job, dict) or "id" not in job:
+            raise PluginException(f"Failed to receive job from analyzer {analyzer_name}")
+        job["artifacts"] = filter_job_artifacts(api.get_job_artifacts(job["id"]))
 
         return {Output.JOB: job}

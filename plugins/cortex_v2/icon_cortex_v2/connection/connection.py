@@ -1,38 +1,36 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
+from icon_cortex_v2.util.api import API
 
 # Custom imports below
-from cortex4py.api import Api
-from cortex4py.exceptions import ServiceUnavailableError, AuthenticationError
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
+        self.API = None
 
     def connect(self, params={}):
         url = f"{params.get(Input.PROTOCOL).lower()}://{params.get(Input.HOST)}:{params.get(Input.PORT)}"
         api_key = params.get(Input.API_KEY).get("secretKey")
-        self.verify = params.get(Input.VERIFY, True)
-        self.logger.info("URL: %s", url)
+        verify = params.get(Input.VERIFY, True)
+        self.logger.info(f"URL: {url}")
 
-        if not params.get(Input.PROXY):
-            self.proxy = {}
-        else:
-            self.proxy = params.get(Input.PROXY)
-            self.logger.info("Proxy specified: %s", self.proxy)
+        proxy = {}
+        if params.get(Input.PROXY):
+            proxy = params.get(Input.PROXY)
+            self.logger.info(f"Proxy specified: {proxy}")
 
-        self.logger.info("Connect: Connecting..")
-        self.api = Api(url, api_key, verify_cert=self.verify, proxies=self.proxy)
+        self.logger.info("Connect: Connecting...")
+        self.API = API(url, api_key, verify_cert=verify, proxies=proxy)
 
     def test(self):
         try:
-            self.api.analyzers.definitions()
-        except AuthenticationError as e:
+            response = self.API.status()
+            # Expected = {"versions":{"Cortex":"1.1.4","Play":"2.5.9"},"config":{"authType":"none","capabilities":[]}}
+            # Returns the BOOLEAN of whether Cortex exists in "versions" in the response data
+            return "Cortex" in response.get("versions", {})
+        except PluginException as e:
             self.logger.error(e)
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
-        except ServiceUnavailableError as e:
-            self.logger.error(e)
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
-        return {}
+            raise ConnectionTestException(e)

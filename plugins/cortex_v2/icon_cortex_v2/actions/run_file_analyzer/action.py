@@ -1,14 +1,14 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import RunFileAnalyzerInput, RunFileAnalyzerOutput, Input, Output, Component
 
 # Custom imports below
-import os
-import base64
-import shutil
-import tempfile
-from icon_cortex_v2.util.convert import job_to_dict
-from cortex4py.exceptions import ServiceUnavailableError, AuthenticationError, CortexException
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from icon_cortex_v2.util.util import filter_job, filter_job_artifacts
+from os.path import basename, join
+from json import dumps as dict_to_string
+from base64 import b64decode as base64_decode
+from tempfile import TemporaryDirectory
+from magic import Magic as IdentifyMimeType
 
 
 class RunFileAnalyzer(insightconnect_plugin_runtime.Action):
@@ -23,34 +23,30 @@ class RunFileAnalyzer(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        api = self.connection.api
+        api = self.connection.API
 
         analyzer_name = params.get(Input.ANALYZER_ID)
-        file_content = base64.b64decode(params.get(Input.FILE))
+        file_content = base64_decode(params.get(Input.FILE))
         tlp_num = params.get(Input.ATTRIBUTES).get("tlp")
-        filename = params.get(Input.ATTRIBUTES).get("filename") or "Not_Available"
+        filename = params.get(Input.ATTRIBUTES).get("filename", "Not_Available")
 
-        try:
-            temp_dir = tempfile.mkdtemp()
-            filename = os.path.basename(filename)
-            file_path = os.path.join(temp_dir, filename)
-
-            with open(file_path, "w+b") as f:
-                f.write(file_content)
-
-            job = api.analyzers.run_by_name(
-                analyzer_name, {"data": file_path, "dataType": "file", "tlp": tlp_num}, force=1
-            )
-            job = job_to_dict(job, api)
-
-            shutil.rmtree(temp_dir)
-        except AuthenticationError as e:
-            self.logger.error(e)
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
-        except ServiceUnavailableError as e:
-            self.logger.error(e)
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
-        except CortexException as e:
-            raise ConnectionTestException(cause="Failed to run analyzer.", assistance=f"{e}.")
-
-        return {Output.JOB: job}
+        with TemporaryDirectory() as temp_dir:
+            filename = basename(filename)
+            file_path = join(temp_dir, filename)
+            with open(file_path, "w+b") as temp_file_w:
+                temp_file_w.write(file_content)
+            mime_type = IdentifyMimeType(mime=True).from_file(file_path)
+            analyzer = api.get_analyzer_by_name(analyzer_name)
+            analyzer_id = analyzer.get("id")
+            if not analyzer_id:
+                raise PluginException(f"Analyzer {analyzer_name} not found")
+            with open(file_path, "rb") as temp_file_r:
+                file_obj = (filename, temp_file_r, mime_type)
+                data = dict_to_string({"dataType": "file", "tlp": tlp_num})
+                job = filter_job(api.run_analyzer(analyzer_id=analyzer_id,
+                                                  data={"_json": data},
+                                                  files={"data": file_obj}))
+                if not job or not isinstance(job, dict) or "id" not in job:
+                    raise PluginException(f"Failed to receive job from analyzer {analyzer_name}")
+                job["artifacts"] = filter_job_artifacts(api.get_job_artifacts(job["id"]))
+                return {Output.JOB: job}

@@ -28,7 +28,7 @@ jobs:
             TARGET_BRANCH="develop"
           fi
           CHANGED_FILES=()
-          for OUTPUT in $(git diff --no-commit-id --name-only -r HEAD..origin/develop)
+          for OUTPUT in $(git diff --no-commit-id --name-only --no-renames HEAD..origin/${TARGET_BRANCH})
           do
             if [[ -f ${OUTPUT} ]] && [[ ${OUTPUT} == *.py ]]
             then
