@@ -2,6 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import ConnectionSchema
 
 # Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
 import zenpy
 
 
@@ -21,7 +22,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
         elif params.get("api_key").get("secretKey"):
             creds["token"] = params.get("api_key").get("secretKey")
         else:
-            raise Exception("Error: Must define either password or API key!")
+            raise PluginException(cause="Could not authenticate to Zendesk.",
+                                  assistance="Please provide a password or API key.")
 
         self.client = zenpy.Zenpy(**creds)
         self.logger.info("Connect: Connecting...")
