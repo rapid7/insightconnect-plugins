@@ -22,8 +22,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
         elif params.get("api_key").get("secretKey"):
             creds["token"] = params.get("api_key").get("secretKey")
         else:
-            raise PluginException(cause="Could not authenticate to Zendesk.",
-                                  assistance="Please provide a password or API key.")
+            raise PluginException(
+                cause="Could not authenticate to Zendesk.", assistance="Please provide a password or API key."
+            )
 
         self.client = zenpy.Zenpy(**creds)
         self.logger.info("Connect: Connecting...")
