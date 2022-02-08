@@ -35,6 +35,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         except zenpy.lib.exception.APIException as e:
             self.logger.debug(e)
             raise ConnectionTestException(
-                cause=f"Zendesk API connection test failed.",
-                assistance="Make sure your credentials are correct.",
+                cause=f"Zendesk API connection test failed: {e.args[0]}",
+                assistance="Make sure your credentials are correct."
             )
