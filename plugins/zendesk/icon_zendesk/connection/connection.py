@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import ConnectionSchema
 
 # Custom imports below
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 import zenpy
 
 
