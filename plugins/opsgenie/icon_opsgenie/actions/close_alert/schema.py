@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Close an existing alert from OpsGenie"
+    DESCRIPTION = "Close an existing alert from Opsgenie"
 
 
 class Input:
@@ -16,9 +16,9 @@ class Input:
     
 
 class Output:
+    ELAPSED_TIME = "elapsed_time"
     REQUESTID = "requestId"
     RESULT = "result"
-    TOOK = "took"
     
 
 class CloseAlertInput(insightconnect_plugin_runtime.Input):
@@ -81,6 +81,12 @@ class CloseAlertOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "elapsed_time": {
+      "type": "number",
+      "title": "Elapsed Time",
+      "description": "Time taken to execute",
+      "order": 2
+    },
     "requestId": {
       "type": "string",
       "title": "Request ID",
@@ -92,14 +98,13 @@ class CloseAlertOutput(insightconnect_plugin_runtime.Output):
       "title": "Result",
       "description": "Result message from API",
       "order": 1
-    },
-    "took": {
-      "type": "number",
-      "title": "Took",
-      "description": "Time took to execute API",
-      "order": 2
     }
-  }
+  },
+  "required": [
+    "elapsed_time",
+    "requestId",
+    "result"
+  ]
 }
     """)
 

@@ -38,8 +38,8 @@ class TestCreateAlert(TestCase):
         response = self.action.run(self.params)
         expected_response = {
             Output.RESULT: "Request will be processed",
-            Output.TOOK: 0.302,
             Output.REQUESTID: "43a29c5c-3dbf-4fa4-9c26-f4f71023e120",
+            Output.ELAPSED_TIME: 0.302,
         }
 
         self.assertEqual(response, expected_response)

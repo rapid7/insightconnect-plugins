@@ -45,7 +45,7 @@ class ApiClient:
         try:
             response = requests.request(method, url, json=json_data, params=params, headers=headers)
 
-            if response.status_code == 403:
+            if response.status_code in (401, 403):
                 raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
             if response.status_code == 404:
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND)

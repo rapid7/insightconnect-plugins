@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieve alert from OpsGenie"
+    DESCRIPTION = "Retrieve alert from Opsgenie"
 
 
 class Input:
@@ -14,6 +14,7 @@ class Input:
 
 class Output:
     DATA = "data"
+    ELAPSED_TIME = "elapsed_time"
     REQUESTID = "requestId"
     
 
@@ -65,13 +66,24 @@ class GetAlertOutput(insightconnect_plugin_runtime.Output):
       "description": "Data that contains JSON response",
       "order": 1
     },
+    "elapsed_time": {
+      "type": "number",
+      "title": "Elapsed Time",
+      "description": "Time taken to execute",
+      "order": 3
+    },
     "requestId": {
       "type": "string",
       "title": "Request ID",
       "description": "ID of an request",
       "order": 2
     }
-  }
+  },
+  "required": [
+    "data",
+    "elapsed_time",
+    "requestId"
+  ]
 }
     """)
 

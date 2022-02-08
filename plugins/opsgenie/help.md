@@ -6,16 +6,16 @@ Notify the right people, reduce response time, and avoid alert fatigue within a 
 
 * Create new alert
 * Close existing alert
-* Get information about specific alert using ID, tiny or alias type
-* Get on calls is used to retrieve current on-call participants of a specific schedule using ID or name type
+* Get information about specific alerts
+* Get current on-call participants
 
 # Requirements
 
-* Requires an API Key from the product OpsGenie
+* Opsgenie API Key
 
 # Supported Product Versions
 
-* All as of 01/11/2022
+* 2022-01-11
 
 # Documentation
 
@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|OpsGenie authorization API key|None|1234567e-123c-123c-123c-1234567e9xAd|
+|api_key|credential_secret_key|None|True|Opsgenie authorization API key|None|1234567e-123c-123c-123c-1234567e9xAd|
 
 Example input:
 
@@ -41,7 +41,7 @@ Example input:
 
 #### Close Alert
 
-This action is used to close an existing alert from OpsGenie.
+This action is used to close an existing alert from Opsgenie.
 
 ##### Input
 
@@ -49,7 +49,7 @@ This action is used to close an existing alert from OpsGenie.
 |----|----|-------|--------|-----------|----|-------|
 |identifier|string|None|True|Identifier of the alert|None|8418d193-2dab-4490-b331-8c02cdd196b7|
 |identifierType|string|ID|False|Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny ID and alias. Default value is ID|['', 'ID', 'tiny', 'alias']|ID|
-|note|string|None|False|Additional alert note to add|None|Action executed via Alert API|
+|note|string|None|False|Additional alert note to add|None|Action executed via InsightConnect|
 |source|string|None|False|Display name of the request source|None|AWS Lambda|
 |user|string|None|False|Display name of the request owner|None|Monitoring Script|
 
@@ -59,7 +59,7 @@ Example input:
 {
   "identifier": "8418d193-2dab-4490-b331-8c02cdd196b7",
   "identifierType": "ID",
-  "note": "Action executed via Alert API",
+  "note": "Action executed via InsightConnect",
   "source": "AWS Lambda",
   "user": "Monitoring Script"
 }
@@ -69,9 +69,9 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|requestId|string|False|ID of a executed API request|
-|result|string|False|Result message from API|
-|took|float|False|Time took to execute API|
+|elapsed_time|float|True|Time taken to execute|
+|requestId|string|True|ID of a executed API request|
+|result|string|True|Result message from API|
 
 Example output:
 
@@ -85,7 +85,7 @@ Example output:
 
 #### Create Alert
 
-This action creates an alert for OpsGenie.
+This action creates an alert for Opsgenie.
 
 ##### Input
 
@@ -93,17 +93,17 @@ This action creates an alert for OpsGenie.
 |----|----|-------|--------|-----------|----|-------|
 |actions|[]string|None|False|Custom actions that will be available for the alert|None|["Restart", "AnExampleAction"]|
 |alias|string|None|False|Client-defined identifier of the alert, that is also the key element of Alert deduplication|None|An example alias|
-|description|string|None|False|Description field of the alert that is generally used to provide a detailed information about the alert|None|An example description|
-|details|object|None|False|Map of key-value pairs to use as custom properties of the alert|None|{"key1":"value1","key2":"value2"}|
+|description|string|None|False|Alert description|None|An example description|
+|details|object|None|False|JSON object of key-value pairs to use as custom properties of the alert|None|{"key1":"value1","key2":"value2"}|
 |entity|string|None|False|Entity field of the alert that is generally used to specify which domain an alert is related to|None|An example entity|
 |message|string|None|True|Message of the alert|None|An example alert message|
-|note|string|None|False|Additional note that will be added while creating the alert|None|Example additional note|
-|priority|string|P3|False|Priority level of the alert. Possible values are P1, P2, P3, P4 and P5. Default value is P3|['', 'P1', 'P2', 'P3', 'P4', 'P5']|P1|
-|responders|[]object|None|False|Teams, users, escalations and schedules that the alert will be routed to send notifications. Type field is mandatory for each item, where possible values are team, user, escalation and schedule. If the API Key belongs to a team integration, this field will be overwritten with the owner team. Either ID or name of each responder should be provided. You can refer below for example values|None|[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c", "type":"team"},{"name":"NOC","type":"team"}]|
+|note|string|None|False|Additional note that will be added when creating the alert|None|Example additional note|
+|priority|string|P3|False|Priority level of the alert. Possible values are P1, P2, P3, P4 and P5. Default value is P3|['', 'P2', 'P1', 'P3', 'P4', 'P5']|P1|
+|responders|[]object|None|False|Teams, users, escalations and schedules that the alert will be routed to send notifications. "id/name": Either id or name of each responder should be provided. "type": team, user, escalation, schedule. Format: [{"id/name":"value", "type":"team/user/escalation/schedule"}]|None|[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c", "type":"team"},{"name":"NOC","type":"team"}]|
 |source|string|None|False|Source field of the alert. Default value is IP address of the incoming request|None|192.168.0.1|
 |tags|[]string|None|False|Tags of the alert|None|["OverwriteQuietHours","Critical"]|
 |user|string|None|False|Display name of the request owner|None|ExampleName|
-|visibleTo|[]object|None|False|Teams and users that the alert will become visible to without sending any notification. Type field is mandatory for each item, where possible values are team and user. In addition to the type field, either ID or name should be given for teams and either ID or username should be given for users. Please note that alert will be visible to the teams that are specified within responders field by default, so there is no need to re-specify them within visibleTo field. You can refer below for example values|None|[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c","type":"team"},{"name":"example_name","type":"team"}]|
+|visibleTo|[]object|None|False|Teams and users that the alert will become visible to without sending any notification. Type field is mandatory for each item, where possible values are team and user. In addition to the type field, either ID or name should be given for teams and either ID or username should be given for users. Please note that alert will be visible to the teams that are specified within responders field by default, so there is no need to re-specify them within visibleTo field. "id/name": Either id or name of each responder should be provided. "type": team, user, escalation, schedule. Format: [{"id/name":"value", "type":"team/user/escalation/schedule"}]|None|[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c","type":"team"},{"name":"example_name","type":"team"}]|
 
 Example input:
 
@@ -132,9 +132,9 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|requestId|string|False|ID of a executed API request|
-|result|string|False|Result message from API|
-|took|float|False|Time took to execute API|
+|elapsed_time|float|True|Time taken to execute|
+|requestId|string|True|ID of a executed API request|
+|result|string|True|Result message from API|
 
 Example output:
 
@@ -148,7 +148,7 @@ Example output:
 
 #### Get Alert
 
-This action is used to retrieve alert from OpsGenie.
+This action is used to retrieve alert from Opsgenie.
 
 ##### Input
 
@@ -170,8 +170,9 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|object|False|Data that contains JSON response|
-|requestId|string|False|ID of an request|
+|data|object|True|Data that contains JSON response|
+|elapsed_time|float|True|Time taken to execute|
+|requestId|string|True|ID of an request|
 
 Example output:
 
@@ -198,22 +199,22 @@ Example output:
       "source": "Isengard",
       "owner": "user@example.com",
       "priority": "P5",
-      "responders":[
+      "responders": [
         {
-            "id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c",
-            "type":"team"
+            "id": "4513b7ea-3b91-438f-b7e4-e3e54af9147c",
+            "type": "team"
         },
         {
-            "id":"bb4d9938-c3c2-455d-aaab-727aa701c0d8",
-            "type":"user"
+            "id": "bb4d9938-c3c2-455d-aaab-727aa701c0d8",
+            "type": "user"
         },
         {
-            "id":"aee8a0de-c80f-4515-a232-501c0bc9d715",
-            "type":"escalation"
+            "id": "aee8a0de-c80f-4515-a232-501c0bc9d715",
+            "type": "escalation"
         },
         {
-            "id":"80564037-1984-4f38-b98e-8a1f662df552",
-            "type":"schedule"
+            "id": "80564037-1984-4f38-b98e-8a1f662df552",
+            "type": "schedule"
         }
           ],
       "integration": {
@@ -248,16 +249,16 @@ This action is used to get on-call request which is used to retrieve current on-
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |date|date|None|False|Starting date of the timeline that will be provided in format as (yyyy-MM-dd'T'HH:mm:ssZ) (e.g. 2017-01-15T08:00:00+02:00). Default date is the moment of the time that request is received|None|2017-01-15T08:00:00+02:00|
-|flat|boolean|None|False|When enabled, retrieves user names of all on-call participants. Default value is false|None|false|
+|flat|boolean|None|False|When enabled, retrieves user names of all on-call participants. Default value is false|None|False|
 |scheduleIdentifier|string|None|True|Identifier of the schedule|None|ScheduleName|
-|scheduleIdentifierType|string|ID|False|Type of the schedule identifier that is provided as an in-line parameter. Possible values are ID and name. Default value is ID|['', 'ID', 'name']|name|
+|scheduleIdentifierType|string|ID|False|Type of the schedule identifier. Possible values are ID and name. Default value is ID|['', 'ID', 'name']|name|
 
 Example input:
 
 ```
 {
   "date": "2017-01-15T08:00:00+02:00",
-  "flat": "false",
+  "flat": false,
   "scheduleIdentifier": "ScheduleName",
   "scheduleIdentifierType": "name"
 }
@@ -267,9 +268,9 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|object|False|Response DATA from OpsGenie API|
-|requestId|string|False|ID of a executed API request|
-|took|float|False|Time took to execute API|
+|data|object|True|Response data from Opsgenie|
+|elapsed_time|float|True|Time taken to execute|
+|requestId|string|True|ID of a executed API request|
 
 Example output:
 
@@ -358,5 +359,5 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [OpsGenie](https://docs.opsgenie.com/docs/api-overview)
+* [Opsgenie](https://docs.opsgenie.com/docs/api-overview)
 

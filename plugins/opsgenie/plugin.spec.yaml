@@ -2,12 +2,12 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: opsgenie
-title: OpsGenie
-description: Notify the right people, reduce response time, and avoid alert fatigue within a workflow
+title: Opsgenie
+description: Notify the right people, reduce response time, and avoid alert fatigue with Opsgenie
 version: 1.0.0
 vendor: rapid7
 support: rapid7
-supported_versions: ["All as of 01/11/2022"]
+supported_versions: ["2022-01-11"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/opsgenie
@@ -23,47 +23,45 @@ hub_tags:
   keywords: [atlassian]
   features: []
 enable_cache: false
-
 connection:
   api_key:
     title: Authorization API Key
-    description: OpsGenie authorization API key
+    description: Opsgenie authorization API key
     type: credential_secret_key
     required: true
-    example: "1234567e-123c-123c-123c-1234567e9xAd"
-
+    example: 1234567e-123c-123c-123c-1234567e9xAd
 actions:
   create_alert:
     title: Create Alert
-    description: Creates an alert for OpsGenie
+    description: Creates an alert for Opsgenie
     input:
       message:
         title: Message
         description: Message of the alert
         type: string
         required: true
-        example: "An example alert message"
+        example: An example alert message
       alias:
         title: Alias
         description: Client-defined identifier of the alert, that is also the key element of Alert deduplication
         type: string
         required: false
-        example: "An example alias"
+        example: An example alias
       description:
         title: Description
-        description: Description field of the alert that is generally used to provide a detailed information about the alert
+        description: Alert description
         type: string
         required: false
-        example: "An example description"
+        example: An example description
       responders:
         title: Responders
-        description: Teams, users, escalations and schedules that the alert will be routed to send notifications. Type field is mandatory for each item, where possible values are team, user, escalation and schedule. If the API Key belongs to a team integration, this field will be overwritten with the owner team. Either ID or name of each responder should be provided. You can refer below for example values
+        description: 'Teams, users, escalations and schedules that the alert will be routed to send notifications. "id/name": Either id or name of each responder should be provided. "type": team, user, escalation, schedule. Format: [{"id/name":"value", "type":"team/user/escalation/schedule"}]'
         type: "[]object"
         required: false
         example: '[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c", "type":"team"},{"name":"NOC","type":"team"}]'
       visibleTo:
         title: VisibleTo
-        description: Teams and users that the alert will become visible to without sending any notification. Type field is mandatory for each item, where possible values are team and user. In addition to the type field, either ID or name should be given for teams and either ID or username should be given for users. Please note that alert will be visible to the teams that are specified within responders field by default, so there is no need to re-specify them within visibleTo field. You can refer below for example values
+        description: 'Teams and users that the alert will become visible to without sending any notification. Type field is mandatory for each item, where possible values are team and user. In addition to the type field, either ID or name should be given for teams and either ID or username should be given for users. Please note that alert will be visible to the teams that are specified within responders field by default, so there is no need to re-specify them within visibleTo field. "id/name": Either id or name of each responder should be provided. "type": team, user, escalation, schedule. Format: [{"id/name":"value", "type":"team/user/escalation/schedule"}]'
         type: "[]object"
         required: false
         example: '[{"id":"4513b7ea-3b91-438f-b7e4-e3e54af9147c","type":"team"},{"name":"example_name","type":"team"}]'
@@ -81,7 +79,7 @@ actions:
         example: '["OverwriteQuietHours","Critical"]'
       details:
         title: Details
-        description: Map of key-value pairs to use as custom properties of the alert
+        description: JSON object of key-value pairs to use as custom properties of the alert
         type: object
         required: false
         example: '{"key1":"value1","key2":"value2"}'
@@ -90,7 +88,7 @@ actions:
         description: Entity field of the alert that is generally used to specify which domain an alert is related to
         type: string
         required: false
-        example: "An example entity"
+        example: An example entity
       source:
         title: Source
         description: Source field of the alert. Default value is IP address of the incoming request
@@ -103,161 +101,163 @@ actions:
         type: string
         enum:
           - ""
-          - "P1"
-          - "P2"
-          - "P3"
-          - "P4"
-          - "P5"
-        default: "P3"
+          - P2
+          - P1
+          - P3
+          - P4
+          - P5
+        default: P3
         required: false
-        example: "P1"
+        example: P1
       user:
         title: User
         description: Display name of the request owner
         type: string
         required: false
-        example: "ExampleName"
+        example: ExampleName
       note:
         title: Note
-        description: Additional note that will be added while creating the alert
+        description: Additional note that will be added when creating the alert
         type: string
         required: false
-        example: "Example additional note"
+        example: Example additional note
     output:
       result:
         title: Result
         description: Result message from API
         type: string
-        required: false
-      took:
-        title: Took
-        description: Time took to execute API
+        required: true
+      elapsed_time:
+        title: Elapsed Time
+        description: Time taken to execute
         type: float
-        required: false
+        required: true
       requestId:
         title: Request ID
         description: ID of a executed API request
         type: string
-        required: false
-
+        required: true
   get_alert:
     title: Get Alert
-    description: Retrieve alert from OpsGenie
+    description: Retrieve alert from Opsgenie
     input:
       identifier:
         title: Alert ID, Tiny ID or Alias
         description: Identifier of the alert
         type: string
         required: true
-        example: "8418d193-2dab-4490-b331-8c02cdd196b7"
+        example: 8418d193-2dab-4490-b331-8c02cdd196b7
       identifierType:
         title: Identifier Type
         description: Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny ID and alias. Default value is ID
         type: string
         enum:
           - ""
-          - "ID"
-          - "tiny"
-          - "alias"
-        default: "ID"
+          - ID
+          - tiny
+          - alias
+        default: ID
         required: false
-        example: "ID"
+        example: ID
     output:
       data:
         title: Data
         description: Data that contains JSON response
         type: object
-        required: false
+        required: true
       requestId:
         title: Request ID
         description: ID of an request
         type: string
-        required: false
-
+        required: true
+      elapsed_time:
+        title: Elapsed Time
+        description: Time taken to execute
+        type: float
+        required: true
   close_alert:
     title: Close Alert
-    description: Close an existing alert from OpsGenie
+    description: Close an existing alert from Opsgenie
     input:
       identifier:
         title: Alert ID, Tiny ID or Alias
         description: Identifier of the alert
         type: string
         required: true
-        example: "8418d193-2dab-4490-b331-8c02cdd196b7"
+        example: 8418d193-2dab-4490-b331-8c02cdd196b7
       identifierType:
         title: Identifier Type
         description: Type of the identifier that is provided as an in-line parameter. Possible values are ID, tiny ID and alias. Default value is ID
         type: string
         enum:
           - ""
-          - "ID"
-          - "tiny"
-          - "alias"
-        default: "ID"
+          - ID
+          - tiny
+          - alias
+        default: ID
         required: false
-        example: "ID"
+        example: ID
       user:
         title: User
         description: Display name of the request owner
         type: string
         required: false
-        example: "Monitoring Script"
+        example: Monitoring Script
       source:
         title: Source
         description: Display name of the request source
         type: string
         required: false
-        example: "AWS Lambda"
+        example: AWS Lambda
       note:
         title: Note
         description: Additional alert note to add
         type: string
         required: false
-        example: "Action executed via Alert API"
+        example: Action executed via InsightConnect
     output:
       result:
         title: Result
         description: Result message from API
         type: string
-        required: false
-      took:
-        title: Took
-        description: Time took to execute API
+        required: true
+      elapsed_time:
+        title: Elapsed Time
+        description: Time taken to execute
         type: float
-        required: false
+        required: true
       requestId:
         title: Request ID
         description: ID of a executed API request
         type: string
-        required: false
-
+        required: true
   get_on_calls:
     title: Get On-Calls
-    description: Get on-call request is used to retrieve current on-call participants of a specific schedule
+    description: Get current on-call participants
     input:
       scheduleIdentifier:
         title: Schedule Identifier
         description: Identifier of the schedule
         type: string
         required: true
-        example: "ScheduleName"
+        example: ScheduleName
       scheduleIdentifierType:
         title: Schedule Identifier Type
-        description: Type of the schedule identifier that is provided as an in-line parameter. Possible values are ID and name. Default value is ID
+        description: Type of the schedule identifier. Possible values are ID and name. Default value is ID
         type: string
         enum:
           - ""
-          - "ID"
-          - "name"
-        default: "ID"
+          - ID
+          - name
+        default: ID
         required: false
         example: "name"
       flat:
-        title: Flat
+        title: Retrieve All Participants
         description: When enabled, retrieves user names of all on-call participants. Default value is false
         type: boolean
         required: false
-        example: "false"
+        example: false
       date:
         title: Date
         description: Starting date of the timeline that will be provided in format as (yyyy-MM-dd'T'HH:mm:ssZ) (e.g. 2017-01-15T08:00:00+02:00). Default date is the moment of the time that request is received
@@ -267,16 +267,16 @@ actions:
     output:
       data:
         title: Data
-        description: Response DATA from OpsGenie API
+        description: Response data from Opsgenie
         type: object
-        required: false
-      took:
-        title: Took
-        description: Time took to execute API
+        required: true
+      elapsed_time:
+        title: Elapsed Time
+        description: Time taken to execute
         type: float
-        required: false
+        required: true
       requestId:
         title: Request ID
         description: ID of a executed API request
         type: string
-        required: false
+        required: true

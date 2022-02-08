@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Creates an alert for OpsGenie"
+    DESCRIPTION = "Creates an alert for Opsgenie"
 
 
 class Input:
@@ -24,9 +24,9 @@ class Input:
     
 
 class Output:
+    ELAPSED_TIME = "elapsed_time"
     REQUESTID = "requestId"
     RESULT = "result"
-    TOOK = "took"
     
 
 class CreateAlertInput(insightconnect_plugin_runtime.Input):
@@ -53,13 +53,13 @@ class CreateAlertInput(insightconnect_plugin_runtime.Input):
     "description": {
       "type": "string",
       "title": "Description",
-      "description": "Description field of the alert that is generally used to provide a detailed information about the alert",
+      "description": "Alert description",
       "order": 3
     },
     "details": {
       "type": "object",
       "title": "Details",
-      "description": "Map of key-value pairs to use as custom properties of the alert",
+      "description": "JSON object of key-value pairs to use as custom properties of the alert",
       "order": 8
     },
     "entity": {
@@ -77,7 +77,7 @@ class CreateAlertInput(insightconnect_plugin_runtime.Input):
     "note": {
       "type": "string",
       "title": "Note",
-      "description": "Additional note that will be added while creating the alert",
+      "description": "Additional note that will be added when creating the alert",
       "order": 13
     },
     "priority": {
@@ -87,8 +87,8 @@ class CreateAlertInput(insightconnect_plugin_runtime.Input):
       "default": "P3",
       "enum": [
         "",
-        "P1",
         "P2",
+        "P1",
         "P3",
         "P4",
         "P5"
@@ -98,7 +98,7 @@ class CreateAlertInput(insightconnect_plugin_runtime.Input):
     "responders": {
       "type": "array",
       "title": "Responders",
-      "description": "Teams, users, escalations and schedules that the alert will be routed to send notifications. Type field is mandatory for each item, where possible values are team, user, escalation and schedule. If the API Key belongs to a team integration, this field will be overwritten with the owner team. Either ID or name of each responder should be provided. You can refer below for example values",
+      "description": "Teams, users, escalations and schedules that the alert will be routed to send notifications. \\"id/name\\": Either id or name of each responder should be provided. \\"type\\": team, user, escalation, schedule. Format: [{\\"id/name\\":\\"value\\", \\"type\\":\\"team/user/escalation/schedule\\"}]",
       "items": {
         "type": "object"
       },
@@ -128,7 +128,7 @@ class CreateAlertInput(insightconnect_plugin_runtime.Input):
     "visibleTo": {
       "type": "array",
       "title": "VisibleTo",
-      "description": "Teams and users that the alert will become visible to without sending any notification. Type field is mandatory for each item, where possible values are team and user. In addition to the type field, either ID or name should be given for teams and either ID or username should be given for users. Please note that alert will be visible to the teams that are specified within responders field by default, so there is no need to re-specify them within visibleTo field. You can refer below for example values",
+      "description": "Teams and users that the alert will become visible to without sending any notification. Type field is mandatory for each item, where possible values are team and user. In addition to the type field, either ID or name should be given for teams and either ID or username should be given for users. Please note that alert will be visible to the teams that are specified within responders field by default, so there is no need to re-specify them within visibleTo field. \\"id/name\\": Either id or name of each responder should be provided. \\"type\\": team, user, escalation, schedule. Format: [{\\"id/name\\":\\"value\\", \\"type\\":\\"team/user/escalation/schedule\\"}]",
       "items": {
         "type": "object"
       },
@@ -151,6 +151,12 @@ class CreateAlertOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "elapsed_time": {
+      "type": "number",
+      "title": "Elapsed Time",
+      "description": "Time taken to execute",
+      "order": 2
+    },
     "requestId": {
       "type": "string",
       "title": "Request ID",
@@ -162,14 +168,13 @@ class CreateAlertOutput(insightconnect_plugin_runtime.Output):
       "title": "Result",
       "description": "Result message from API",
       "order": 1
-    },
-    "took": {
-      "type": "number",
-      "title": "Took",
-      "description": "Time took to execute API",
-      "order": 2
     }
-  }
+  },
+  "required": [
+    "elapsed_time",
+    "requestId",
+    "result"
+  ]
 }
     """)
 

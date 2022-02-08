@@ -57,5 +57,6 @@
             "region": "ExampleRegion"
         }
     },
-    "requestId": "9ae63dd7-ed00-4c81-86f0-c4ffd33142c9"
+    "requestId": "9ae63dd7-ed00-4c81-86f0-c4ffd33142c9",
+    "took": 0.001
 }
