@@ -531,7 +531,7 @@ actions:
         title: Due At
         type: date
         description: Time ticket is due
-        example: 2021-04-10T12:00:00Z
+        example: 2021-04-10 12:00:00
         required: false
       external_id:
         title: External ID
@@ -657,7 +657,7 @@ actions:
         title: Due At
         type: date
         description: Time ticket is due
-        example: 2021-04-10T12:00:00Z
+        example: 2021-04-10 12:00:00
         required: false
       external_id:
         title: External ID
