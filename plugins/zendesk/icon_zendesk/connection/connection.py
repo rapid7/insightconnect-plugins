@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import ConnectionSchema
 
 # Custom imports below
-from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 import zenpy
 
 
@@ -34,7 +34,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.client.users()
         except zenpy.lib.exception.APIException as e:
             self.logger.debug(e)
-            raise PluginException(
+            raise ConnectionTestException(
                 cause=f"Zendesk API connection test failed.",
                 assistance="Make sure your credentials are correct.",
             )
