@@ -42,21 +42,20 @@ class HaveIBeenPwned(object):
                 retry = response.headers["Retry-After"]
                 # HIBP recommendation on adding an additional 100 millisecond delay between requests
                 self.logger.info(
-                    "Too many requests. The rate limit has been exceeded."
-                    " Will retry after back off of: {0} sec".format(retry)
+                    "Too many requests. The rate limit has been exceeded." f" Will retry after back off of: {retry} sec"
                 )
                 time.sleep(retry + 0.100)
                 return self.get_request(url, params, max_attempts=0)  # Retry get_request
             else:
                 # Just in case we don't get a Retry-After in the header
                 if max_attempts > 0:
-                    range_increase = 2 ** self._retries
+                    range_increase = 2**self._retries
                     self._retries = self._retries + 1
                     # set random time to wait
                     back_off = random.randrange(3, 5 + range_increase)  # nosec
                     self.logger.info(
                         "Too many requests. The rate limit has been exceeded."
-                        " Will retry after back off of: {0} sec".format(back_off)
+                        f" Will retry after back off of: {back_off} sec"
                     )
                     time.sleep(back_off)  # Wait to slow down request rate
                     return self.get_request(url, params, max_attempts=max_attempts - 1)  # Retry get_request
@@ -72,8 +71,8 @@ class HaveIBeenPwned(object):
                 " and try again. If the issue persists, contact support."
             )
         else:
-            self.logger.error("An unknown error occurred status code: {0}".format(response.status_code))
-            raise Exception("{0} error".format(response.status_code))
+            self.logger.error(f"An unknown error occurred status code: {response.status_code}")
+            raise Exception(f"{response.status_code} error")
 
     def get_password(self, hash_start: str) -> list:
         """

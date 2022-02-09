@@ -64,7 +64,7 @@
         "http://foo3.com/unicode_",
         "http://foo4.com/",
         "http://code.test2.com/events/#&product=browser",
-        "http://foo-2.bar/?q=Test",
+        "http://foo-2.bar/?q=Test%20URL-encoded%20stuff",
         "http://1234.net",
         "http://a.b-c.de",
         "https://foo-bar.example.com/",

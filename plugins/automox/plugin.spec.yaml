@@ -4,8 +4,8 @@ products: [insightconnect]
 name: automox
 title: Automox
 description: Automox is modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment
-version: 1.0.0
-supported_versions: ["All as of 12/17/2021"]
+version: 1.1.0
+supported_versions: ["All as of 1/21/2022"]
 vendor: automox
 support: partner
 status: []
@@ -767,6 +767,11 @@ types:
       description: List of CVEs associated with task
       type: "[]string"
       required: false
+    report_source:
+      title: Report Source
+      description: The source of the vulnerability report
+      type: string
+      required: false
 
 connection:
   api_key:
@@ -1006,7 +1011,7 @@ actions:
         example: "GetOS"
       patches:
         title: Patches
-        description: "List of patches to be installed (Note: this only works with the InstallUpdate command)"
+        description: "List of patches to be installed by name (Note: this only works with the InstallUpdate command)"
         type: "[]string"
         required: false
         example: ["Security Update (KB4549947)"]
@@ -1069,7 +1074,7 @@ actions:
         example: 1234
       color:
         title: Group Color
-        description: Automox console highlight color for the group
+        description: Automox console highlight color for the group. Value should be a valid Hex color code
         type: string
         required: false
         example: "#059F1D"
@@ -1080,8 +1085,8 @@ actions:
         required: false
         example: "Example notes go here"
       policies:
-        title: Policies
-        description: List of policies to assign to group
+        title: Policy IDs
+        description: List of policy IDs to assign to group
         type: "[]integer"
         required: false
         example: [1, 2, 3]
@@ -1133,7 +1138,7 @@ actions:
         example: 1234
       color:
         title: Group Color
-        description: Automox console highlight color for the group
+        description: Automox console highlight color for the group. Value should be a valid Hex color code
         type: string
         required: false
         example: "#059F1D"
@@ -1144,8 +1149,8 @@ actions:
         required: false
         example: "Example notes go here"
       policies:
-        title: Policies
-        description: List of policies to assign to group
+        title: Policies IDs
+        description: List of policy IDs to assign to group
         type: "[]integer"
         required: false
         example: [1, 2, 3]
@@ -1200,6 +1205,19 @@ actions:
         required: false
         default: "insightconnect-uploaded-report.csv"
         example: "insightconnect-uploaded-report.csv"
+      report_source:
+        title: Report Source
+        description: The third-party source of the vulnerability report
+        type: string
+        required: false
+        default: "Generic Report"
+        enum:
+        - "Generic Report"
+        - "CrowdStrike"
+        - "Rapid7"
+        - "TenableIO"
+        - "Qualys"
+        example: "Rapid7"
     output:
       batch_id:
         title: Vulnerability Sync Batch ID

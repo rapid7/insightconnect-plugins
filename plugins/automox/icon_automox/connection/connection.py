@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
+
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 from icon_automox.util.api_client import ApiClient
@@ -23,4 +24,3 @@ class Connection(insightconnect_plugin_runtime.Connection):
             raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e)
 
         return {}
-

@@ -1,12 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetPoliciesInput, GetPoliciesOutput, Input, Output, Component
 
 # Custom imports below
-from komand.exceptions import PluginException
-from icon_fortinet_fortigate.util.util import Helpers
 
 
-class GetPolicies(komand.Action):
+class GetPolicies(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_policies",
@@ -16,26 +14,13 @@ class GetPolicies(komand.Action):
         )
 
     def run(self, params={}):
-        endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/policy"
-        helper = Helpers(self.logger)
-
-        filter_ = params.get(Input.NAME_FILTER, "")
+        name_filter = params.get(Input.NAME_FILTER)
         get_params = {}
-        if filter_:
-            get_params = {"filter": f"name=@{filter_}"}
+        if name_filter:
+            get_params = {"filter": f"name=@{name_filter}"}
 
-        response = self.connection.session.get(endpoint, params=get_params, verify=self.connection.ssl_verify)
-
-        try:
-            json_response = response.json()
-        except ValueError:
-            raise PluginException(
-                cause="Data sent by FortiGate was not in JSON format.\n",
-                assistance="Contact support for help.",
-                data=response.text,
+        return {
+            Output.POLICIES: insightconnect_plugin_runtime.helper.clean(
+                self.connection.api.get_policies(get_params).get("results")
             )
-        helper.http_errors(json_response, response.status_code)
-
-        policies = response.json().get("results")
-
-        return {Output.POLICIES: komand.helper.clean(policies)}
+        }

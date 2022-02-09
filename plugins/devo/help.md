@@ -132,25 +132,40 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|alert|object|True|An alert|
+|alerts|[]object|True|An object containing information and results about the alerts from interval time|
 
 Example output:
 
 ```
 {
-  "alert": {
-    "eventdate": 1622747437335,
-    "alertHost": "backoffice",
-    "domain": "rapid7",
-    "priority": 3,
-    "context": "my.alert.rapid7.example",
-    "category": "my.context",
-    "status": 0,
-    "alertId": "26004002",
-    "username": "user@example.com",
-    "engine": "pil01-pro-custom-us-aws",
-    "extraData": "{\"clientIpAddress\":\"192.168.50.1\",\"timeTaken\":\"176\",\"protocol\":\"HTTP+1.1\",\"bytesTransferred\":\"3295\",\"method\":\"GET\",\"cookie\":\"3djv1l0ebi7cmsai1131pf2a65%3A-\",\"userAgent\":\"Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F42.0.2311.135+Safari%2F537.36+Edge%2F12.246\",\"referralUri\":\"http%3A%2F%2Fwww.google.com%2Fcategory.screen%3Fcategory_id%3DBEDROOM%26JSESSIONID%3DSD1SL6FF5ADFF2\",\"uri\":\"%2Fcategory.screen%3Fcategory_id%3DBEDROOM%26JSESSIONID%3DSD1SL6FF5ADFF2\",\"eventdate\":\"2021-06-03+19%3A10%3A28.676\",\"timestamp\":\"03%2FJun%2F2021%3A19%3A10%3A26+%2B0000\",\"statusCode\":\"500\"}"
-  }
+  "alerts": [
+    {
+      "alertHost": "backoffice",
+      "alertId": "123456",
+      "category": "my.context",
+      "context": "my.alert.rapid7.asdf",
+      "domain": "rapid7",
+      "engine": "pil01-pro-custom-us-aws",
+      "eventdate": 1643377735505,
+      "extraData": "{\"clientIpAddress\":\"%2F87.210.152.183\",\"timeTaken\":\"909\",\"protocol\":\"HTTP+1.1\",\"bytesTransferred\":\"1381\",\"method\":\"GET\",\"cookie\":\"mc0ocue109c4n9fkvof64ou0i1%3A-\",\"userAgent\":\"Mozilla%2F5.0+%28Macintosh%3B+U%3B+Intel+Mac+OS+X+10_6_3%3B+en-US%29+AppleWebKit%2F533.4+%28KHTML%2C+like+Gecko%29+Chrome%2F5.0.375.38+Safari%2F533.4\",\"referralUri\":\"http%3A%2F%2Fwww.bing.com%2Fcategory.screen%3Fcategory_id%3DFURNITURE%26JSESSIONID%3DSD8SL8FF10ADFF4\",\"uri\":\"%2Fcart.do%3Faction%3Dview%26itemId%3DLOG-77%26product_id%3D009-73CKH-JASKD%26JSESSIONID%3DSD8SL8FF10ADFF4\",\"eventdate\":\"2022-01-28+13%3A48%3A36.498\",\"timestamp\":\"28%2FJan%2F2022%3A13%3A48%3A27+%2B0000\",\"statusCode\":\"500\"}",
+      "priority": 3,
+      "status": 0,
+      "username": "username@example.com"
+    },
+    {
+      "alertHost": "backoffice",
+      "alertId": "12345",
+      "category": "my.context",
+      "context": "my.alert.rapid7.asdf",
+      "domain": "rapid7",
+      "engine": "pil01-pro-custom-us-aws",
+      "eventdate": 1643379230038,
+      "extraData": "{\"clientIpAddress\":\"%2F87.210.152.183\",\"timeTaken\":\"545\",\"protocol\":\"HTTP+1.1\",\"bytesTransferred\":\"3403\",\"method\":\"GET\",\"cookie\":\"mc0ocue109c4n9fkvof64ou0i1%3A-\",\"userAgent\":\"Opera%2F9.80+%28X11%3B+Linux+i686%3B+Ubuntu%2F14.10%29+Presto%2F2.12.388+Version%2F12.16\",\"referralUri\":\"http%3A%2F%2Fwww.logcasts.com%2Fcategory.screen%3Fcategory_id%3DBEDROOM%26JSESSIONID%3DSD3SL8FF6ADFF2\",\"uri\":\"%2Fcategory.screen%3Fcategory_id%3DBEDROOM%26JSESSIONID%3DSD3SL8FF6ADFF2\",\"eventdate\":\"2022-01-28+14%3A13%3A30.056\",\"timestamp\":\"28%2FJan%2F2022%3A14%3A13%3A18+%2B0000\",\"statusCode\":\"500\"}",
+      "priority": 3,
+      "status": 0,
+      "username": "username@example.com"
+    }
+  ]
 }
 ```
 
@@ -168,6 +183,7 @@ _This plugin does not contain any custom output types._
 
 # Version History
 
+* 3.0.0 - Fix an issue in Get New Alerts trigger to filter duplicate alerts. Output contains list of new alerts
 * 2.0.0 - Configuration for interval input parameter
 * 1.0.0 - Initial plugin
 

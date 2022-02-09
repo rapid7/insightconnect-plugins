@@ -1,0 +1,18 @@
+"""Constant Messages."""
+EMPTY_AQL_FOUND = "Empty AQL found."
+EMPTY_RANGE_FOUND = "Empty range provided."
+INVALID_RANGE_FOUND = "Invalid range provided."
+EMPTY_FILTERS_FOUND = "Empty filters found."
+EMPTY_FILED_LIST_FOUND = "Empty field list provided."
+EMPTY_SEARCH_ID_FOUND = "Empty search ID found."
+NEGATIVE_POLL_INTERVAL_PROVIDED = "Negative poll interval is invalid."
+INVALID_INCLUDE_DELETE_FOUND = "Invalid include delete provided."
+INVALID_INCLUDE_RESERVED_FOUND = "Invalid include reserve provided."
+EMPTY_OFFENSE_ID_FOUND = "Empty offense ID provided."
+CLOSING_REASON_ID_PROVIDED_IS_NOT_INTEGER = "Closing reason ID provided is not an integer."
+EMPTY_NOTE_TEXT_FOUND = "Empty note text provided."
+EMPTY_NOTE_ID_FOUND = "Empty note ID provided."
+CLOSING_REASON_ID_NOT_PROVIDED = "Offense closing reason ID is not provided."
+CLOSING_REASON_ID_PROVIDED_FOR_OTHER_STATUS = (
+    "Closing reason ID is unnecessary when attempting to open or hide an offense."
+)

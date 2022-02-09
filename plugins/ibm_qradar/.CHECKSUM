@@ -1,0 +1,51 @@
+{
+	"spec": "2edfb73612c60ce8b84bf181fb133cbb",
+	"manifest": "fe58af56b34a32f85c4a3bbf27c6933f",
+	"setup": "63a999082656b97912a37e91c2d07689",
+	"schemas": [
+		{
+			"identifier": "add_notes_to_offense/schema.py",
+			"hash": "00172f21971f37d878292527909ddec3"
+		},
+		{
+			"identifier": "get_ariel_search_by_id/schema.py",
+			"hash": "17de9161033e15bad1ab9d4ddbd0311c"
+		},
+		{
+			"identifier": "get_assets/schema.py",
+			"hash": "102c1e049e195b43cb0dad51b0ad03ef"
+		},
+		{
+			"identifier": "get_offense_closing_reasons/schema.py",
+			"hash": "b372d032730ba93acba4f4ac4f39fca9"
+		},
+		{
+			"identifier": "get_offense_note/schema.py",
+			"hash": "c5566bd82fd67577bb0a86510b5b503a"
+		},
+		{
+			"identifier": "get_offense_note_by_id/schema.py",
+			"hash": "b27b1e58151705a12ea087ebc3a5c53c"
+		},
+		{
+			"identifier": "get_offenses/schema.py",
+			"hash": "0570a7403ea9e62bc00818e79f2a54ad"
+		},
+		{
+			"identifier": "start_ariel_search/schema.py",
+			"hash": "50f3252509a5b0329a09abe140bf2f36"
+		},
+		{
+			"identifier": "update_offense/schema.py",
+			"hash": "7094097ee5cce3cbf83813161958f518"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "428d495b53f3f291b1e5a377638d2e38"
+		},
+		{
+			"identifier": "get_new_offense/schema.py",
+			"hash": "5bff9551fe467ef253a224d81c582fec"
+		}
+	]
+}

@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import (
     RemoveAddressObjectFromGroupInput,
     RemoveAddressObjectFromGroupOutput,
@@ -8,11 +8,10 @@ from .schema import (
 )
 
 # Custom imports below
-from komand.exceptions import PluginException
-from icon_fortinet_fortigate.util.util import Helpers
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class RemoveAddressObjectFromGroup(komand.Action):
+class RemoveAddressObjectFromGroup(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="remove_address_object_from_group",
@@ -24,42 +23,34 @@ class RemoveAddressObjectFromGroup(komand.Action):
     def run(self, params={}):
         group_name = params[Input.GROUP]
         address_object = params[Input.ADDRESS_OBJECT]
-        helper = Helpers(self.logger)
 
-        is_ipv6 = self.connection.get_address_object(address_object)["name"] == "address6"
+        is_ipv6 = self.connection.api.get_address_object(address_object).get("name") == "address6"
 
-        group = self.connection.get_address_group(group_name, is_ipv6)
+        if is_ipv6:
+            group_name = params.get(Input.IPV6_GROUP)
+            group = self.connection.api.get_address_group(group_name, is_ipv6)
+            endpoint = f"firewall/addrgrp6/{group_name}"
+        else:
+            group = self.connection.api.get_address_group(group_name, is_ipv6)
+            endpoint = f"firewall/addrgrp/{group_name}"
+
         group_members = group.get("member")
         found = False
         for item in group_members:
             if "name" in item and address_object == item["name"]:
                 group_members.remove(item)
                 found = True
+
         if not found:
             return {
                 Output.SUCCESS: False,
-                Output.RESULT_OBJECT: f"The address object {address_object} was not in the group {group_name}",
+                Output.RESULT_OBJECT: {
+                    "message": f"The address object {address_object} was not in the group {group_name}"
+                },
             }
 
         group["member"] = group_members
 
-        if is_ipv6:
-            endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/addrgrp6/{group.get('name')}"
-        else:
-            endpoint = f"https://{self.connection.host}/api/v2/cmdb/firewall/addrgrp/{group.get('name')}"
+        response = self.connection.api.modify_objects_in_group(endpoint, group)
 
-        response = self.connection.session.put(endpoint, json=group, verify=self.connection.ssl_verify)
-
-        try:
-            json_response = response.json()
-        except ValueError:
-            raise PluginException(
-                cause="Data sent by FortiGate was not in JSON format.\n",
-                assistance="Contact support for help.",
-                data=response.text,
-            )
-        helper.http_errors(json_response, response.status_code)
-
-        success = json_response.get("status", "").lower() == "success"
-
-        return {Output.SUCCESS: success, Output.RESULT_OBJECT: json_response}
+        return {Output.SUCCESS: response.get("status", "").lower() == "success", Output.RESULT_OBJECT: response}

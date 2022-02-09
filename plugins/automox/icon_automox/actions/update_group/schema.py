@@ -31,7 +31,7 @@ class UpdateGroupInput(insightconnect_plugin_runtime.Input):
     "color": {
       "type": "string",
       "title": "Group Color",
-      "description": "Automox console highlight color for the group",
+      "description": "Automox console highlight color for the group. Value should be a valid Hex color code",
       "order": 6
     },
     "group_id": {
@@ -66,8 +66,8 @@ class UpdateGroupInput(insightconnect_plugin_runtime.Input):
     },
     "policies": {
       "type": "array",
-      "title": "Policies",
-      "description": "List of policies to assign to group",
+      "title": "Policies IDs",
+      "description": "List of policy IDs to assign to group",
       "items": {
         "type": "integer"
       },

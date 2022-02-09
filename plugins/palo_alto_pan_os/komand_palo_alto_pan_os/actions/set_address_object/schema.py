@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Create a new address object. Supports IPv6"
+    DESCRIPTION = "Create a new address object. Supports IPv6. This action uses a direct connection to the firewall"
 
 
 class Input:

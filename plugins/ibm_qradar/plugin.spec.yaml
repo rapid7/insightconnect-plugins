@@ -1,0 +1,1025 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: ibm_qradar
+title: IBM QRadar
+vendor: rapid7
+support: community
+status: []
+supported_versions: [7.3.3]
+description: IBM QRadar reduces billions of events and flows into a manageable number of actionable offenses that are prioritized by their impact on your business operations. This plugin allows you to use IBM QRadar to orchestrate and automate Ariel search queries and automate offense management
+version: 1.0.0
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/ibm_qradar
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.ibm.com
+tags:
+  - qradar
+  - ariel
+  - aql
+  - offenses
+  - orchestration
+hub_tags:
+  use_cases: [asset_inventory, vulnerability_management, offensive_security]
+  keywords: [siem, search]
+  features: []
+enable_cache: false
+connection:
+  host_url:
+    title: Host URL
+    type: string
+    description: Host URL of the QRadar instance.
+    required: true
+    example: https://127.0.0.1
+  credentials:
+    title: Credentials
+    type: credential_username_password
+    description: Auth object consisting of username of type string and password of type password
+    required: true
+    example: "{ 'username': 'user1', 'password': 'password'}"
+  verify_ssl:
+    title: Verify SSL
+    type: boolean
+    description: Whether to verify the SSL for QRadar connection
+    example: true
+    required: false
+types:
+  error_messages:
+    code:
+      title: "Code"
+      type: string
+      description: "Error Code"
+      required: false
+    contexts:
+      title: "Contexts"
+      type: "[]string"
+      description: "Contexts"
+      required: false
+    message:
+      title: "Message"
+      type: string
+      description: "Error message"
+      required: false
+    severity:
+      title: "Severity"
+      type: string
+      description: "Severity"
+      required: false
+  events:
+    qid:
+      title: "QID"
+      type: integer
+      description: "Qid"
+      required: false
+    sourceip:
+      title: "Source IP"
+      type: string
+      description: "Source IP"
+      required: false
+    sourceport:
+      title: "Source Port"
+      type: integer
+      description: "Source port"
+      required: false
+    starttime:
+      title: "Start Time"
+      type: integer
+      description: "Start time"
+      required: false
+  search:
+    cursor_id:
+        title: "Cursor ID"
+        type: string
+        description: "Cursor ID"
+        required: false
+    compressed_data_file_count:
+        title: "Compressed Data File Count"
+        type: integer
+        description: "Compressed data file count"
+        required: false
+    compressed_data_total_size:
+        title: "Compressed Data Total Size"
+        type: integer
+        description: "Compressed data total size"
+        required: false
+    data_file_count:
+        title: "Data File Count"
+        type: integer
+        description: "Data file count"
+        required: false
+    data_total_size:
+        title: "Data Total Size"
+        type: integer
+        description: "Data total size"
+        required: false
+    index_file_count:
+        title: "Index File Count"
+        type: integer
+        description: "Index file count"
+        required: false
+    index_total_size:
+        title: "Index Total Size"
+        type: integer
+        description: "Index total size"
+        required: false
+    processed_record_count:
+        title: "Processed Record Count"
+        type: integer
+        description: "Processed record count"
+        required: false
+    error_messages:
+        title: "Error Messages"
+        type: "[]error_messages"
+        description: "Error messages"
+        required: false
+    desired_retention_time_msec:
+        title: "Desired Retention Time Milliseconds"
+        type: integer
+        description: "Desired retention time Milliseconds"
+        required: false
+    progress:
+        title: "Progress"
+        type: integer
+        description: "Progress"
+        required: false
+    progress_details:
+        title: "Progress Details"
+        type: "[]integer"
+        description: "Progress details"
+        required: false
+    query_execution_time:
+        title: "Query Execution Time"
+        type: integer
+        description: "Query execution time"
+        required: false
+    query_string:
+        title: "Query String"
+        type: string
+        description: "Query string"
+        required: false
+    record_count:
+        title: "Record Count"
+        type: integer
+        description: "Record count"
+        required: false
+    save_results:
+        title: "Save Results"
+        type: boolean
+        description: "Save results"
+        required: false
+    status:
+        title: "Status"
+        type: string
+        description: "Status"
+        required: false
+    subsearch_ids:
+        title: "Sub search IDs"
+        type: "[]string"
+        description: "Sub search IDs"
+        required: false
+    search_id:
+        title: "Search ID"
+        type: string
+        description: "Search ID"
+        required: false
+  ip_addresses:
+    created:
+      title: "Created"
+      type: integer
+      description: "Created"
+      required: false
+    first_seen_profiler:
+      title: "First Seen Profiler"
+      type: string
+      description: "First seen profiler"
+      required: false
+    first_seen_scanner:
+      title: "First Seen Scanner"
+      type: string
+      description: "First seen scanner"
+      required: false
+    id:
+      title: "ID"
+      type: integer
+      description: "ID"
+      required: false
+    last_seen_profiler:
+      title: "Last Seen Profiler"
+      type: string
+      description: "Last seen profiler"
+      required: false
+    last_seen_scanner:
+      title: "Last Seen Scanner"
+      type: string
+      description: "Last seen scanner"
+      required: false
+    network_id:
+      title: "Network ID"
+      type: integer
+      description: "Network ID"
+      required: false
+    type:
+      title: "Type"
+      type: string
+      description: "Type"
+      required: false
+    value:
+      title: "Value"
+      type: string
+      description: "Value"
+      required: false
+  interfaces:
+    created:
+      title: "Created"
+      type: integer
+      description: "Created"
+      required: false
+    first_seen_profiler:
+      title: "First Seen Profiler"
+      type: string
+      description: "First seen profiler"
+      required: false
+    first_seen_scanner:
+      title: "First Seen Scanner"
+      type: string
+      description: "First seen scanner"
+      required: false
+    id:
+      title: "ID"
+      type: integer
+      description: "ID"
+      required: false
+    ip_addresses:
+      title: "IP Addresses"
+      type: "[]ip_addresses"
+      description: "IP addresses"
+      required: false
+    last_seen_profiler:
+      title: "Last Seen Profiler"
+      type: string
+      description: "Last seen profiler"
+      required: false
+    last_seen_scanner:
+      title: "Last Seen Scanner"
+      type: string
+      description: "Last seen scanner"
+      required: false
+    mac_address:
+      title: "MAC Address"
+      type: string
+      description: "MAC address"
+      required: false
+  properties:
+    id:
+      title: "ID"
+      type: integer
+      description: "ID"
+      required: false
+    last_reported:
+      title: "Last Reported"
+      type: integer
+      description: "Last reported"
+      required: false
+    last_reported_by:
+      title: "Last Reported By"
+      type: string
+      description: "Last reported by"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    type_id:
+      title: "Type ID"
+      type: integer
+      description: "Type ID"
+      required: false
+    value:
+      title: "Value"
+      type: string
+      description: "Value"
+      required: false
+  products:
+    first_seen_profiler:
+      title: "First Seen Profiler"
+      type: string
+      description: "First seen profiler"
+      required: false
+    first_seen_scanner:
+      title: "First Seen Scanner"
+      type: string
+      description: "First seen scanner"
+      required: false
+    id:
+      title: "ID"
+      type: integer
+      description: "ID"
+      required: false
+    last_scanned_for:
+      title: "Last Scanned For"
+      type: string
+      description: "Last scanned for"
+      required: false
+    last_seen_profiler:
+      title: "Last Seen Profiler"
+      type: string
+      description: "Last seen profiler"
+      required: false
+    last_seen_scanner:
+      title: "Last Seen Scanner"
+      type: string
+      description: "Last seen scanner"
+      required: false
+    product_variant_id:
+      title: "Product Variant ID"
+      type: integer
+      description: "Product variant ID"
+      required: false
+  host_urls:
+    created:
+      title: "Created"
+      type: integer
+      description: "Created"
+      required: false
+    first_seen_profiler:
+      title: "First Seen Profiler"
+      type: string
+      description: "First seen profiler"
+      required: false
+    first_seen_scanner:
+      title: "First Seen Scanner"
+      type: string
+      description: "First seen scanner"
+      required: false
+    id:
+      title: "ID"
+      type: integer
+      description: "ID"
+      required: false
+    last_seen_profiler:
+      title: "Last Seen Profiler"
+      type: string
+      description: "Last seen profiler"
+      required: false
+    last_seen_scanner:
+      title: "Last Seen Scanner"
+      type: string
+      description: "Last seen scanner"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    type:
+      title: "Type"
+      type: string
+      description: "Type"
+      required: false
+  rules:
+    id:
+      title: "ID"
+      type: integer
+      description: "ID"
+      required: false
+    type:
+      title: "Type"
+      type: string
+      description: "Type"
+      required: false
+  log_sources:
+    id:
+      title: "ID"
+      type: integer
+      description: "ID"
+      required: false
+    name:
+      title: "Name"
+      type: string
+      description: "Name"
+      required: false
+    type_id:
+      title: "Type ID"
+      type: integer
+      description: "Type ID"
+      required: false
+    type_name:
+      title: "Type Name"
+      type: string
+      description: "Type name"
+      required: false
+  assets:
+    vulnerability_count:
+      title: "Vulnerability Count"
+      type: integer
+      description: "Vulnerability count"
+      required: false
+    interfaces:
+      title: "Interfaces"
+      type: "[]interfaces"
+      description: "Interfaces"
+      required: false
+    risk_score_sum:
+      title: "Risk Score Sum"
+      type: float
+      description: "Risk score sum"
+      required: false
+    host_urls:
+      title: "Hostnames"
+      type: "[]host_urls"
+      description: "Hostnames"
+      required: false
+    id:
+      title: "ID"
+      type: integer
+      description: "ID"
+      required: false
+    users:
+      title: "Users"
+      type: "[]object"
+      description: "Users"
+      required: false
+    domain_id:
+      title: "Domain ID"
+      type: integer
+      description: "Domain ID"
+      required: false
+    properties:
+      title: "Properties"
+      type: "[]properties"
+      description: "Properties"
+      required: false
+    products:
+      title: "Products"
+      type: "[]products"
+      description: "Products"
+      required: false
+  closing_reason:
+    id:
+      title: "ID"
+      type: integer
+      description: "ID"
+      required: false
+    is_deleted:
+      title: "Is Deleted"
+      type: boolean
+      description: "Is deleted"
+      required: false
+    is_reserved:
+      title: "Is Reserved"
+      type: boolean
+      description: "Is reserved"
+      required: false
+    text:
+      title: "Text"
+      type: string
+      description: "text"
+      required: false
+  note:
+    id:
+      title: "ID"
+      type: integer
+      description: "ID"
+      required: false
+    create_time:
+      title: "Created Time"
+      type: integer
+      description: "Created time"
+      required: false
+    note_text:
+      title: "Note Text"
+      type: string
+      description: "Note text"
+      required: false
+    username:
+      title: "Username"
+      type: string
+      description: "Username"
+      required: false
+  offense:
+    assigned_to:
+      title: "Assigned To"
+      type: string
+      description: "Assigned to"
+      required: false
+    categories:
+      title: "Categories"
+      type: "[]string"
+      description: "Categories"
+      required: false
+    category_count:
+      title: "Category Count"
+      type: integer
+      description: "Category count"
+      required: false
+    close_time:
+      title: "Close Time"
+      type: integer
+      description: "Close time"
+      required: false
+    closing_reason_id:
+      title: "Closing Reason ID"
+      type: integer
+      description: "Closing reason ID"
+      required: false
+    closing_user:
+      title: "Closing User"
+      type: string
+      description: "Closing user"
+      required: false
+    credibility:
+      title: "Credibility"
+      type: integer
+      description: "Credibility"
+      required: false
+    description:
+      title: "Description"
+      type: string
+      description: "Description"
+      required: false
+    destination_networks:
+      title: "Destination Networks"
+      type: "[]string"
+      description: "Destination networks"
+      required: false
+    device_count:
+      title: "Device Count"
+      type: integer
+      description: "Device count"
+      required: false
+    domain_id:
+      title: "Domain ID"
+      type: integer
+      description: "Domain ID"
+      required: false
+    event_count:
+      title: "Event Count"
+      type: integer
+      description: "Event count"
+      required: false
+    first_persisted_time:
+      title: "First Persisted Time"
+      type: integer
+      description: "First persisted time"
+      required: false
+    flow_count:
+      title: "Flow Count"
+      type: integer
+      description: "Flow count"
+      required: false
+    follow_up:
+      title: "Follow Up"
+      type: boolean
+      description: "Follow up"
+      required: false
+    id:
+      title: "ID"
+      type: integer
+      description: "ID"
+      required: false
+    inactive:
+      title: "Inactive"
+      type: boolean
+      description: "Inactive"
+      required: false
+    last_persisted_time:
+      title: "Last Persisted Time"
+      type: integer
+      description: "Last persisted time"
+      required: false
+    last_updated_time:
+      title: "Last Updated Time"
+      type: integer
+      description: "Last updated time"
+      required: false
+    local_destination_address_ids:
+      title: "Local Destination Address IDs"
+      type: "[]integer"
+      description: "Local destination address IDs"
+      required: false
+    local_destination_count:
+      title: "Local Destination Count"
+      type: integer
+      description: "Local destination count"
+      required: false
+    log_sources:
+      title: "Log Sources"
+      type: "[]log_sources"
+      description: "Log sources"
+      required: false
+    magnitude:
+      title: "Magnitude"
+      type: integer
+      description: "Magnitude"
+      required: false
+    offense_source:
+      title: "Offense Source"
+      type: string
+      description: "Offense source"
+      required: false
+    offense_type:
+      title: "Offense Type"
+      type: integer
+      description: "Offense type"
+      required: false
+    policy_category_count:
+      title: "Policy Category Count"
+      type: integer
+      description: "Policy category count"
+      required: false
+    protected:
+      title: "Protected"
+      type: boolean
+      description: "Protected"
+      required: false
+    relevance:
+      title: "Relevance"
+      type: integer
+      description: "Relevance"
+      required: false
+    remote_destination_count:
+      title: "Remote Destination Count"
+      type: integer
+      description: "Remote destination count"
+      required: false
+    rules:
+      title: "Rules"
+      type: "[]rules"
+      description: "Rules"
+      required: false
+    security_category_count:
+      title: "Security Category Count"
+      type: integer
+      description: "Security category count"
+      required: false
+    severity:
+      title: "Severity"
+      type: integer
+      description: "Severity"
+      required: false
+    source_address_ids:
+      title: "Source Address IDs"
+      type: "[]integer"
+      description: "Source address IDs"
+      required: false
+    source_count:
+      title: "Source Count"
+      type: integer
+      description: "Source count"
+      required: false
+    source_network:
+      title: "Source Network"
+      type: string
+      description: "Source network"
+      required: false
+    start_time:
+      title: "Start Time"
+      type: integer
+      description: "Start time"
+      required: false
+    status:
+      title: "Status"
+      type: string
+      description: "Status"
+      required: false
+    username_count:
+      title: "Username Count"
+      type: integer
+      description: "Username count"
+      required: false
+actions:
+  start_ariel_search:
+    title: Start Ariel Search
+    description: Start an Ariel search
+    input:
+      aql:
+        title: AQL Query
+        type: string
+        description: AQL query to perform the search
+        required: true
+        example: Select * from events
+    output:
+      data:
+        title: Search Data
+        type: search
+        description: JSON data for the Search
+        required: false
+  get_ariel_search_by_id:
+    title: Get Ariel Search by ID
+    description: Get an ariel search by ID
+    input:
+      search_id:
+        title: Search ID
+        type: string
+        required: true
+        description: ID of the Ariel search to get
+        example: 9102cb1d-5994-4f78-8f08-16c6f6991015
+      poll_interval:
+        type: number
+        required: false
+        description: Number of seconds to recheck until the search is completed
+        default: 1
+        example: 1
+    output:
+      data:
+        title: Search Data
+        type: search
+        description: JSON data of the Search
+        required: false
+  get_assets:
+    title: Get Assets
+    description: List all assets found in the model
+    input:
+      range:
+        title: Range
+        type: string
+        required: false
+        description: Paging requests are specified with the Range parameter. E.g. the example default range returns the first 50 records, a custom range of 6-10 returns the 6th to 10th records
+        example: 1-2
+        default: 1-50
+      filter:
+        title: Filter
+        type: string
+        required: false
+        description: Restrict the elements in a list based on the contents of various fields
+        example: id = 1001 and vulnerability_count >= 0
+      fields:
+        title: Fields
+        type: string
+        required: false
+        description: Specify the list of fields to be returned in the response. Specify the subfields in parentheses. Multiple fields in the same object must be comma separated. Sample fields to filter are id, domain_id, hostnames(id), interfaces, products. More information about the fields can be found in plugin documentation
+        example: id, hostnames(id)
+    output:
+      data:
+        title: Assets Data
+        type: "[]assets"
+        description: JSON data of the Assets
+        required: false
+  get_offenses:
+    title: Get Offenses
+    description: List all offenses
+    input:
+      range:
+        title: Range
+        type: string
+        required: false
+        description: Paging requests are specified with the Range parameter. E.g. the example default range returns the first 50 records, a custom range of 6-10 returns the 6th to 10th records
+        example: 1-2
+        default: 1-50
+      filter:
+        title: Filter
+        type: string
+        required: false
+        description: Restrict the elements in a list based on the contents of various fields. E.g.  id=55 and follow_up = false
+        example: id=1000
+      fields:
+        title: Fields
+        type: string
+        required: false
+        description: Specify the list of fields to be returned in the response. Specify the subfields in parentheses. Multiple fields in the same object must be comma separated. Sample fields to filter are id, assigned_to, inactive, offense_source,  offense_type, rules(id), protected, follow_up, status, domain_id, rules, log_sources. More information about the fields can be found in plugin documentation
+        example: id, rules(id)
+      sort:
+        title: Sort
+        type: string
+        required: false
+        description: Apply sorting order to result sets, e.g. +id to sort the result in ascending order of id value
+        example: +id,-status
+    output:
+      data:
+        title: Offense Data
+        type: "[]offense"
+        description: "JSON data of the Offense"
+        required: false
+  get_offense_closing_reasons:
+    title: Get Offense's Closing Reasons
+    description: Get Offense's Closing Reasons
+    input:
+      range:
+        title: Range
+        type: string
+        required: false
+        description: Paging requests are specified with the Range parameter. E.g. the example default range returns the first 50 records, a custom range of 6-10 returns the 6th to 10th records
+        default: 1-50
+        example: 1-2
+      filter:
+        title: Filter
+        type: string
+        required: false
+        description: Restrict the elements in a list based on the contents of various fields. E.g. id=55 and is_deleted = false
+        example: id=1000
+      fields:
+        title: Fields
+        type: string
+        required: false
+        description: Specify the list of fields to be returned in the response. Specify the subfields in parentheses. Multiple fields in the same object must be comma separated. Sample fields to filter are id, text, is_deleted, is_reserved. More information about the fields can be found in plugin documentation
+        example: id, is_deleted
+      include_deleted:
+        title: Include Deleted
+        type: boolean
+        required: false
+        description: If true, deleted closing reasons are included in the response. Defaults to false. Deleted closing reasons cannot be used to close an offense
+        example: false
+      include_reserved:
+        title: Include Reserved
+        type: boolean
+        required: false
+        description: If true, reserved closing reasons are included in the response. Defaults to false. Reserved closing reasons cannot be used to close an offense
+        example: false
+    output:
+      data:
+        title: Offense Closing Reasons
+        type: "[]closing_reason"
+        description: JSON data of the Offense Closing Reasons
+        required: false
+  update_offense:
+    title: Update Offenses
+    description: Update Offenses
+    input:
+      offense_id:
+        title: Offense ID
+        type: integer
+        required: true
+        description: The ID of the offense to update
+        example: 100
+      assigned_to:
+        title: Assigned To
+        type: string
+        required: false
+        description: A user to assign the offense to
+        example: admin
+      closing_reason_id:
+        title: Closing Reason ID
+        type: string
+        required: false
+        description: The ID of a closing reason. A valid Closing Reason ID must be provided when closing an offense
+        example: 100
+      fields:
+        title: Fields
+        type: string
+        required: false
+        description: Specify the list of fields to be returned in the response. Specify the subfields in parentheses. Multiple fields in the same object must be comma separated. Sample fields to filter are id, assigned_to, inactive, offense_source,  offense_type, rules(id), protected, follow_up, status, domain_id, rules, log_sources. More information about the fields can be found in plugin documentation
+        example: id, rules(id)
+      follow_up:
+        title: Follow Up
+        type: boolean
+        required: false
+        description: Set to true to set the follow up flag on the offense
+        example: false
+      protected:
+        title: Protected
+        type: boolean
+        required: false
+        description: The ID of a closing reason. A valid Closing Reason ID must be provided when closing an offense
+        example: false
+      status:
+        title: Status
+        type: string
+        required: false
+        description: The new status for the offense. Set to either open, hidden, or closed. When the status of an offense is being set to closed, a valid Closing Reason ID must be provided. To hide an offense, use the hidden status. To show a previously hidden offense, use the open status
+        enum:
+          - "Open"
+          - "Hidden"
+          - "Closed"
+          - ""
+        example: Open
+    output:
+      data:
+        title: Update Offense
+        type: "offense"
+        description: "JSON data of the Offense"
+        required: false
+  get_offense_note:
+    title: Get Offense Notes
+    description: Get Offense Notes
+    input:
+      offense_id:
+        title: Offense ID
+        type: integer
+        required: true
+        description: The ID of the offense to get notes for
+        example: 100
+      range:
+        title: Range
+        type: string
+        required: false
+        description: Paging requests are specified with the Range parameter. E.g. the example default range returns the first 50 records, a custom range of 6-10 returns the 6th to 10th records
+        example: 1-2
+        default: 1-50
+      filter:
+        title: Filter
+        type: string
+        required: false
+        description: Restrict the elements in a list based on the contents of various fields. E.g. id=55 and username = admin
+        example: id=100
+      fields:
+        title: Fields
+        type: string
+        required: false
+        description: Specify the list of fields to be returned in the response. Specify the subfields in parentheses. Multiple fields in the same object must be comma separated. Sample fields to filter are id, create_time, username, note_text. More information about the fields can be found in plugin documentation
+        example: id, note_text
+    output:
+      data:
+        title: Offense Notes
+        type: "[]note"
+        description: JSON data of the Offense Notes
+        required: false
+  get_offense_note_by_id:
+    title: Get Offense Notes by ID
+    description: Get Offense Notes by ID
+    input:
+      offense_id:
+        title: Offense ID
+        type: integer
+        required: true
+        description: The ID of the offense to get notes for
+        example: 100
+      note_id:
+        title: Note ID
+        type: integer
+        required: true
+        description: The ID of the offense note to get
+        example: 100
+      fields:
+        title: Fields
+        type: string
+        required: false
+        description: Specify the list of fields to be returned in the response. Specify the subfields in parentheses. Multiple fields in the same object must be comma separated. Sample fields to filter are id, create_time, username, note_text. More information about the fields can be found in plugin documentation
+        example: id, note_text
+    output:
+      data:
+        title: Offense Notes by ID
+        type: note
+        description: JSON data of the Offense Notes for given ID
+        required: false
+  add_notes_to_offense:
+    title: Add Notes to Offense
+    description: Add Notes to Offense
+    input:
+      offense_id:
+        title: Offense ID
+        type: integer
+        required: true
+        description: The ID of the offense in which to add a note
+        example: 100
+      note_text:
+        title: Note Text
+        type: string
+        required: true
+        description: The note text to add to the offense
+        example: note_text
+      fields:
+        title: Fields
+        type: string
+        required: false
+        description: Specify the list of fields to be returned in the response. Specify the subfields in parentheses. Multiple fields in the same object must be comma separated. Sample fields to filter are id, create_time, username, note_text. More information about the fields can be found in plugin documentation
+        example: id, note_text
+    output:
+      data:
+        title: "Newly Added Offense Notes"
+        type: note
+        description: "JSON data of the newly added Offense Notes "
+        required: false
+triggers:
+  get_new_offense:
+    title: Get New Offenses
+    description: Watch for new offenses to trigger on
+    input:
+      range:
+        title: Range
+        type: string
+        required: false
+        description: Paging requests are specified with the Range parameter. E.g. the example default range returns the first 50 records, a custom range of 6-10 returns the 6th to 10th records
+        example: 1-2
+        default: 1-50
+      filter:
+        title: Filter
+        type: string
+        required: false
+        description: Restrict the elements in a list based on the contents of various fields. E.g. id=55 and follow_up = false
+        example: id=100
+      fields:
+        title: Fields
+        type: string
+        required: false
+        description: Specify the list of fields to be returned in the response. Specify the subfields in parentheses. Multiple fields in the same object must be comma separated. Sample fields to filter are id, assigned_to, inactive, offense_source,  offense_type, rules(id), protected, follow_up, status, domain_id, rules, log_sources. More information about the fields can be found in plugin documentation
+        example: id, rules(id)
+      sort:
+        title: Sort
+        type: string
+        required: false
+        description: Apply sorting order to result sets, e.g. +id to sort the result in ascending order of id value
+        example: +id,-status
+      interval:
+        title: Interval
+        description: How frequently (in seconds) to trigger a greeting
+        type: integer
+        default: 15
+        required: true
+        example: 15
+    output:
+      data:
+        title: "Offense Data"
+        type: "[]offense"
+        description: "JSON data of the Offense"
+        required: false

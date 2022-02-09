@@ -21,7 +21,7 @@ outcomes on endpoints, and basic Automox platform administration.
 
 # Supported Product Versions
 
-* All as of 12/17/2021
+* All as of 1/21/2022
 
 # Documentation
 
@@ -53,13 +53,13 @@ This action is used to update an Automox group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|color|string|None|False|Automox console highlight color for the group|None|#059F1D|
+|color|string|None|False|Automox console highlight color for the group. Value should be a valid Hex color code|None|#059F1D|
 |group_id|integer|None|True|Identifier of the Automox group|None|1234|
 |name|string|None|True|Name of the group|None|Group1|
 |notes|string|None|False|Define notes for the group|None|Example notes go here|
 |org_id|integer|None|False|Identifier of organization|None|1234|
 |parent_server_group_id|integer|None|False|Name of the parent group. Defaults to Default Group ID if omitted|None|1234|
-|policies|[]integer|None|False|List of policies to assign to group|None|[1, 2, 3]|
+|policies|[]integer|None|False|List of policy IDs to assign to group|None|[1, 2, 3]|
 |refresh_interval|integer|1440|True|Frequency of device refreshes in minutes|None|1440|
 
 Example input:
@@ -106,6 +106,7 @@ This action is used to upload CSV file to vulnerability sync for processing.
 |csv_file|bytes|None|True|Base64 encoded CSV data from which to create the vulnerability sync batch|None|PGgxPlJhcGlkNzwvaDE+|
 |csv_file_name|string|insightconnect-uploaded-report.csv|False|Name for CSV file uploaded and shown within Automox|None|insightconnect-uploaded-report.csv|
 |org_id|integer|None|True|Identifier of organization|None|1234|
+|report_source|string|Generic Report|False|The third-party source of the vulnerability report|['Generic Report', 'CrowdStrike', 'Rapid7', 'TenableIO', 'Qualys']|Rapid7|
 
 Example input:
 
@@ -113,7 +114,8 @@ Example input:
 {
   "csv_file": "PGgxPlJhcGlkNzwvaDE+",
   "csv_file_name": "insightconnect-uploaded-report.csv",
-  "org_id": 1234
+  "org_id": 1234,
+  "report_source": "Rapid7"
 }
 ```
 
@@ -396,7 +398,7 @@ This action is used to run a command on the device.
 |command|string|None|True|Command to run on device|['GetOS', 'InstallUpdate', 'InstallAllUpdates', 'PolicyTest', 'PolicyRemediate', 'Reboot']|GetOS|
 |device_id|integer|None|True|Identifier of device|None|1234|
 |org_id|integer|None|False|Identifier of organization|None|1234|
-|patches|[]string|None|False|List of patches to be installed (Note: this only works with the InstallUpdate command)|None|["Security Update (KB4549947)"]|
+|patches|[]string|None|False|List of patches to be installed by name (Note: this only works with the InstallUpdate command)|None|["Security Update (KB4549947)"]|
 |policy_id|integer|None|False|Identifier of policy|None|1234|
 
 Example input:
@@ -573,12 +575,12 @@ This action is used to create an Automox group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|color|string|None|False|Automox console highlight color for the group|None|#059F1D|
+|color|string|None|False|Automox console highlight color for the group. Value should be a valid Hex color code|None|#059F1D|
 |name|string|None|True|Name of the group|None|Group1|
 |notes|string|None|False|Define notes for the group|None|Example notes go here|
 |org_id|integer|None|False|Identifier of organization|None|1234|
 |parent_server_group_id|integer|None|False|Name of the parent group. Defaults to Default Group ID if this is omitted|None|1234|
-|policies|[]integer|None|False|List of policies to assign to group|None|[1, 2, 3]|
+|policies|[]integer|None|False|List of policy IDs to assign to group|None|[1, 2, 3]|
 |refresh_interval|integer|1440|True|Frequency of device refreshes in minutes|None|1440|
 
 Example input:
@@ -1227,6 +1229,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.0 - Add `report source` as optional input parameter to Upload Vulnerability Sync File action | Add report source to batch type
 * 1.0.0 - Initial plugin
 
 # Links
