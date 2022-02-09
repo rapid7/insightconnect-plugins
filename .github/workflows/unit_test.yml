@@ -17,6 +17,8 @@ jobs:
     - name: Run Unit Tests on Plugin(s)
       env: 
         PACKAGE_CLOUD_TOKEN: ${{ secrets.CI_PACKAGECLOUD_TOKEN }}
+        GITHUB_HEAD_REF: ${{ github.head_ref }}
+        GITHUB_BASE_REF: ${{ github.base_ref }}
       run: |
         python -m pip install --upgrade pip setuptools
         curl -s "https://${PACKAGE_CLOUD_TOKEN}@packagecloud.io/install/repositories/rapid7/insightconnect_internal_python_tooling/script.python.sh" | bash
