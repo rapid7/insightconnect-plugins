@@ -19,13 +19,13 @@ jobs:
         PACKAGE_CLOUD_TOKEN: ${{ secrets.CI_PACKAGECLOUD_TOKEN }}
       run: |
         echo '-------------------------------------------------------------------------------------------------------'
-        echo "Run 2"
-        echo "GITHUB_REF is $GITHUB_REF"
-        echo "GITHUB_REF_NAME is $GITHUB_REF_NAME"
-        echo "GITHUB_HEAD_REF is $GITHUB_HEAD_REF"
-        echo "GITHUB_BASE_REF is $GITHUB_BASE_REF"
-        echo "GITHUB_REF_TYPE is $GITHUB_REF_TYPE"
-        echo "GITHUB_REF_PROTECTED is $GITHUB_REF_PROTECTED"
+        echo "Using dollar sign curly braces dot github"
+        echo "GITHUB_REF is ${{ github.ref }}"
+        echo "GITHUB_REF_NAME is ${{ github.ref_name }}"
+        echo "GITHUB_HEAD_REF is ${{ github.head_ref }}"
+        echo "GITHUB_BASE_REF is ${{ github.base_ref }}"
+        echo "GITHUB_REF_TYPE is ${{ github.ref_type }}"
+        echo "GITHUB_REF_PROTECTED is ${{ github.ref_protected }}"
         echo '-------------------------------------------------------------------------------------------------------'
         python -m pip install --upgrade pip setuptools
         curl -s "https://${PACKAGE_CLOUD_TOKEN}@packagecloud.io/install/repositories/rapid7/insightconnect_internal_python_tooling/script.python.sh" | bash

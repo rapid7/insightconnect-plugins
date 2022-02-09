@@ -22,6 +22,7 @@ jobs:
       - name: Prospector
         run: |
           echo '-------------------------------------------------------------------------------------------------------'
+          echo "Using dollar sign GITHUB env vars"
           echo "GITHUB_REF is $GITHUB_REF"
           echo "GITHUB_REF_NAME is $GITHUB_REF_NAME"
           echo "GITHUB_HEAD_REF is $GITHUB_HEAD_REF"
