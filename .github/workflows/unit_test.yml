@@ -17,13 +17,15 @@ jobs:
     - name: Run Unit Tests on Plugin(s)
       env: 
         PACKAGE_CLOUD_TOKEN: ${{ secrets.CI_PACKAGECLOUD_TOKEN }}
+        GITHUB_HEAD_REF: ${{ github.head_ref }}
+        GITHUB_BASE_REF: ${{ github.base_ref }}
       run: |
         echo '-------------------------------------------------------------------------------------------------------'
         echo "Using dollar sign curly braces dot github"
         echo "GITHUB_REF is ${{ github.ref }}"
         echo "GITHUB_REF_NAME is ${{ github.ref_name }}"
-        echo "GITHUB_HEAD_REF is ${{ github.head_ref }}"
-        echo "GITHUB_BASE_REF is ${{ github.base_ref }}"
+        echo "GITHUB_HEAD_REF is ${GITHUB_HEAD_REF} coming from env yaml"
+        echo "GITHUB_BASE_REF is ${GITHUB_BASE_REF} coming from env yaml"
         echo "GITHUB_REF_TYPE is ${{ github.ref_type }}"
         echo "GITHUB_REF_PROTECTED is ${{ github.ref_protected }}"
         echo '-------------------------------------------------------------------------------------------------------'
