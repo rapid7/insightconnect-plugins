@@ -19,6 +19,7 @@ jobs:
         PACKAGE_CLOUD_TOKEN: ${{ secrets.CI_PACKAGECLOUD_TOKEN }}
       run: |
         echo '-------------------------------------------------------------------------------------------------------'
+        echo "Run 2"
         echo "GITHUB_REF is $GITHUB_REF"
         echo "GITHUB_REF_NAME is $GITHUB_REF_NAME"
         echo "GITHUB_HEAD_REF is $GITHUB_HEAD_REF"
