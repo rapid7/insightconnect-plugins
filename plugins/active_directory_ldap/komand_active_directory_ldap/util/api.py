@@ -34,7 +34,7 @@ class ActiveDirectoryLdapAPI:
         self.user_name = user_name
         self.password = password
 
-    def establish_connection(self):
+    def establish_connection(self) -> ldap3.Connection:
         """
         Connect to LDAP
         """
@@ -56,13 +56,25 @@ class ActiveDirectoryLdapAPI:
         )
 
         try:
+            conn = self.__connect_to_server(server, ldap3.NTLM)
+        except LDAPException:
+            # An exception here is likely caused because the ldap server dose use NTLM
+            # A basic auth connection will be tried instead
+            self.logger.info("Failed to connect to the server with NTLM, attempting to connect with basic auth")
+            conn = self.__connect_to_server(server)
+
+        self.logger.info("Connected!")
+        return conn
+
+    def __connect_to_server(self, server, authentication=None) -> ldap3.Connection:
+        try:
             conn = ldap3.Connection(
                 server=server,
                 user=self.user_name,
                 password=self.password,
                 auto_bind=True,
                 auto_referrals=self.referrals,
-                authentication=ldap3.NTLM,
+                authentication=authentication,
             )
         except LDAPBindError as e:
             raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=e)
@@ -70,31 +82,11 @@ class ActiveDirectoryLdapAPI:
             raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=e)
         except LDAPSocketOpenError as e:
             raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE, data=e)
-        except LDAPException:
-            # An exception here is likely caused because the ldap server dose use NTLM
-            # A basic auth connection will be tried instead
-            self.logger.info("Failed to connect to the server with NTLM, attempting to connect with basic auth")
-            try:
-                conn = ldap3.Connection(
-                    server=server,
-                    user=self.user_name,
-                    password=self.password,
-                    auto_referrals=self.referrals,
-                    auto_bind=True,
-                )
-            except LDAPBindError as e:
-                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=e)
-            except LDAPAuthorizationDeniedResult as e:
-                raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=e)
-            except LDAPSocketOpenError as e:
-                raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE, data=e)
-
-        self.logger.info("Connected!")
         return conn
 
     def host_formatter(self, host: str) -> str:
         """
-        Formats The host as needed for the connection
+        Formats the host as needed for the connection
         """
         colons = host.count(":")
         if colons > 0:
@@ -186,7 +178,10 @@ class ActiveDirectoryLdapAPI:
         # Check that dn exists in AD
         if not ADUtils.check_user_dn_is_valid(conn, dn, search_base):
             self.logger.error(f"The DN {dn} was not found")
-            raise PluginException(cause="The DN was not found.", assistance=f"The DN {dn} was not found.")
+            raise PluginException(
+                cause="The DN was not found.",
+                assistance=f"Please check that the specified DN {dn} is correct and try again.",
+            )
 
         try:
             if add_remove == "add":
@@ -220,7 +215,10 @@ class ActiveDirectoryLdapAPI:
         dn_test = [d["dn"] for d in entries if "dn" in d]
         if len(dn_test) == 0:
             self.logger.error(f"The DN {dn} was not found")
-            raise PluginException(cause="The DN was not found.", assistance="The DN " + dn + " was not found")
+            raise PluginException(
+                cause="The DN was not found.",
+                assistance=f"Please check that the specified DN {dn} is correct and try again.",
+            )
 
         conn.modify(ADUtils().unescape_asterisk(dn), {attribute: [(MODIFY_REPLACE, [attribute_value])]})
         result = conn.result

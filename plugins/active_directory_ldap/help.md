@@ -19,7 +19,6 @@
 
 # Supported Product Versions
 
-* ldap3 2.9.1
 * Azure Active Directory 2.0.89.0
 
 # Documentation
@@ -677,7 +676,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
-* 5.3.2 - Created decorator to explicitly close the LDAP connection | Moved communication methods with LDAP to a separate class
+* 5.3.2 - Improve LDAP connection handling
 * 5.3.1 - Improved error messaging in case the specified group was not found in the Query Group Membership action
 * 5.3.0 - Add Unlock User action
 * 5.2.2 - Add automatic pagination in Query Group Membership and Query actions
