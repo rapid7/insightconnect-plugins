@@ -23,7 +23,7 @@ class GetFile(komand.Action):
         is_verify = params.get(Input.IS_VERIFY, True)
         user_agent = params.get(Input.USER_AGENT, constants.DEFAULT_USER_AGENT)
         url_object, meta = self.utils.check_prefix_and_download(url, is_verify, user_agent, timeout)
-        cache_file = "/var/cache/" + meta.get("file")
+        cache_file = constants.DEFAULT_CACHE_FOLDER + meta.get("file")
         if url_object:
             contents = url_object.read().decode(constants.DEFAULT_ENCODING, "replace")
             # Optional integrity check of file
@@ -31,8 +31,8 @@ class GetFile(komand.Action):
                 self.logger.error("GetFile: File Checksum Failed")
                 checked_checksums = komand.helper.get_hashes_string(contents)
                 raise PluginException(
-                    cause="GetURL Failed",
-                    assistance=f"Any of file checksums {checked_checksums} does not match {checksum}.",
+                    cause="Checksums between the downloaded file and provided checksum did not match.",
+                    assistance=f"Verify the file you meant to download and the checksum you provided are correct.",
                 )
 
             # Write etag and last modified to cache

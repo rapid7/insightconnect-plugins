@@ -32,7 +32,7 @@ class PollFile(komand.Trigger):
             time.sleep(poll)
 
     def _save_to_cache_and_send(self, url_object, meta):
-        cache_file = "/var/cache/" + meta.get("file")
+        cache_file = constants.DEFAULT_CACHE_FOLDER + meta.get("file")
         contents = url_object.read().decode(constants.DEFAULT_ENCODING, "replace")
 
         # Write etag and last modified to cache

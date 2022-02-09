@@ -42,7 +42,12 @@ class Util:
         return MockResponse("test.txt", 200)
 
     @staticmethod
-    def clear_cache():
-        cache_dir = "/var/cache/"
-        file_to_remove = (".meta", ".file")
-        [os.remove(cache_dir + file) for file in os.listdir(cache_dir) if file.endswith(file_to_remove)]
+    def mock_for_cache_creation(*args, **kwargs):
+        class MockCache:
+            def write(self, content):
+                pass
+
+            def close(self):
+                pass
+
+        return MockCache()
