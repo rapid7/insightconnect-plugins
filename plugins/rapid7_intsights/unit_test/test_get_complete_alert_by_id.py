@@ -15,12 +15,13 @@ class TestAddManualAlert(TestCase):
     @patch("requests.request", side_effect=Util.mock_request)
     def setUpClass(cls, mock_request) -> None:
         cls.action = Util.default_connector(GetCompleteAlertById())
+        cls.maxDiff = None
 
     @patch("requests.request", side_effect=Util.mock_request)
     def test_get_complete_alert_by_id_should_success(self, make_request):
         actual = self.action.run({Input.ALERT_ID: "123"})
         expected = {
-            "assets": [],
+            "assets": [{"Type": "Domain", "Value": "https://example.com"}],
             "assignees": [],
             "details": {
                 "Description": "APIDescription",
