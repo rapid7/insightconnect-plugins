@@ -18,15 +18,6 @@ jobs:
       env: 
         PACKAGE_CLOUD_TOKEN: ${{ secrets.CI_PACKAGECLOUD_TOKEN }}
       run: |
-        echo '-------------------------------------------------------------------------------------------------------'
-        echo "Run 2"
-        echo "GITHUB_REF is $GITHUB_REF"
-        echo "GITHUB_REF_NAME is $GITHUB_REF_NAME"
-        echo "GITHUB_HEAD_REF is $GITHUB_HEAD_REF"
-        echo "GITHUB_BASE_REF is $GITHUB_BASE_REF"
-        echo "GITHUB_REF_TYPE is $GITHUB_REF_TYPE"
-        echo "GITHUB_REF_PROTECTED is $GITHUB_REF_PROTECTED"
-        echo '-------------------------------------------------------------------------------------------------------'
         python -m pip install --upgrade pip setuptools
         curl -s "https://${PACKAGE_CLOUD_TOKEN}@packagecloud.io/install/repositories/rapid7/insightconnect_internal_python_tooling/script.python.sh" | bash
         python -m pip install --user icon-integrations-ci --no-cache-dir --no-warn-script-location
