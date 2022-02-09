@@ -21,6 +21,14 @@ jobs:
 
       - name: Prospector
         run: |
+          echo '-------------------------------------------------------------------------------------------------------'
+          echo "GITHUB_REF is $GITHUB_REF"
+          echo "GITHUB_REF_NAME is $GITHUB_REF_NAME"
+          echo "GITHUB_HEAD_REF is $GITHUB_HEAD_REF"
+          echo "GITHUB_BASE_REF is $GITHUB_BASE_REF"
+          echo "GITHUB_REF_TYPE is $GITHUB_REF_TYPE"
+          echo "GITHUB_REF_PROTECTED is $GITHUB_REF_PROTECTED"
+          echo '-------------------------------------------------------------------------------------------------------'
           CHANGED_FILES=()
           for OUTPUT in $(git diff --no-commit-id --name-only --no-renames HEAD..origin/develop)
           do
