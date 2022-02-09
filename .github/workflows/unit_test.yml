@@ -28,6 +28,7 @@ jobs:
         echo "GITHUB_BASE_REF is ${GITHUB_BASE_REF} coming from env yaml"
         echo "GITHUB_REF_TYPE is ${{ github.ref_type }}"
         echo "GITHUB_REF_PROTECTED is ${{ github.ref_protected }}"
+        echo "GITHUB_EVENT_NAME is $GITHUB_EVENT_NAME"
         echo '-------------------------------------------------------------------------------------------------------'
         python -m pip install --upgrade pip setuptools
         curl -s "https://${PACKAGE_CLOUD_TOKEN}@packagecloud.io/install/repositories/rapid7/insightconnect_internal_python_tooling/script.python.sh" | bash
