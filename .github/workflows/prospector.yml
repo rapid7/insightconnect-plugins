@@ -28,11 +28,7 @@ jobs:
             TARGET_BRANCH="develop"
           fi
           CHANGED_FILES=()
-<<<<<<< HEAD
           for OUTPUT in $(git diff --no-commit-id --name-only --no-renames HEAD..origin/$TARGET_BRANCH)
-=======
-          for OUTPUT in $(git diff --no-commit-id --name-only --no-renames HEAD..origin/develop)
->>>>>>> 78cb9336 (Run prospector only on existing files. (#1105))
           do
             if [[ -f ${OUTPUT} ]] && [[ ${OUTPUT} == *.py ]]
             then
