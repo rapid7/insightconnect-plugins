@@ -7,7 +7,9 @@ vendor: rapid7
 support: community
 status: []
 description: Analyze URLs for malicious indicators using the URLScan website scanner
-version: 4.0.0
+version: 4.0.1
+supported_versions:
+  - urlscan.io API v1
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/urlscan
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE

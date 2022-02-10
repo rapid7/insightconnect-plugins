@@ -1,10 +1,14 @@
+import json
+
 import komand
-from .schema import GetScanResultsInput, GetScanResultsOutput, Input, Output, Component
+import requests
 
 # Custom imports below
 from komand.exceptions import PluginException
-import requests
-import json
+
+from komand_urlscan.util.constants import SCAN_RESULTS
+from komand_urlscan.util.util import Util
+from .schema import GetScanResultsInput, GetScanResultsOutput, Input, Output, Component
 
 
 class GetScanResults(komand.Action):
@@ -64,7 +68,7 @@ class GetScanResults(komand.Action):
         ret["screenshotURL"] = su
 
         return {
-            Output.SCAN_RESULTS: ret,
+            Output.SCAN_RESULTS: Util.update_properties(ret, SCAN_RESULTS),
             Output.TASK: js.get("task", {}),
             Output.PAGE: js.get("page", {}),
             Output.LISTS: js.get("lists", {}),
