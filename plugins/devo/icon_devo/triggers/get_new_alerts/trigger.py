@@ -17,15 +17,15 @@ class GetNewAlerts(insightconnect_plugin_runtime.Trigger):
 
     def run(self, params={}):
         interval = params.get(Input.INTERVAL, 10)
-        now = datetime.datetime.now()
-
+        request_elapsed_time = datetime.timedelta(seconds=interval)
         while True:
-            time_ago = now - datetime.timedelta(seconds=interval)
             now = datetime.datetime.now()
+            time_ago = now - (request_elapsed_time + datetime.timedelta(seconds=interval))
 
             query = "from siem.logtrust.alert.info select *"
-
-            new_alerts_query_output = self.connection.api.query(query, time_ago.isoformat(), now.isoformat())
+            new_alerts_query_output, request_elapsed_time = self.connection.api.query(
+                query, time_ago.isoformat(), now.isoformat()
+            )
             new_alerts = new_alerts_query_output.get("object", {})
             if new_alerts:
                 self.logger.info("Alerts received, sending...")

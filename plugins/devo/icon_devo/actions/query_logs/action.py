@@ -17,7 +17,7 @@ class QueryLogs(insightconnect_plugin_runtime.Action):
 
         from_date = params.get(Input.FROM_DATE)
         to_date = params.get(Input.TO_DATE)
-        output = self.connection.api.query(query, from_date, to_date)
+        output, _ = self.connection.api.query(query, from_date, to_date)
         if output:
             return {Output.RESULTS: insightconnect_plugin_runtime.helper.clean(output)}
 
