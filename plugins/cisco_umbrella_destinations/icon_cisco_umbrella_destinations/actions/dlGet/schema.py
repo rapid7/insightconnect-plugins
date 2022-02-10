@@ -76,7 +76,7 @@ class DlGetOutput(insightconnect_plugin_runtime.Output):
         "id": {
           "type": "integer",
           "title": "ID",
-          "description": "Unique ID of the destination list.",
+          "description": "Unique ID of the destination list",
           "order": 1
         },
         "isGlobal": {
@@ -119,7 +119,7 @@ class DlGetOutput(insightconnect_plugin_runtime.Output):
         },
         "thirdpartyCategoryId": {
           "type": "integer",
-          "title": "Third Party Category Id",
+          "title": "Third Party Category ID",
           "description": "ID, if any, for third parties",
           "order": 6
         }

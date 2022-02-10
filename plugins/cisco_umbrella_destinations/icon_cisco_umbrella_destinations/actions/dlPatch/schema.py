@@ -158,7 +158,7 @@ class DlPatchOutput(insightconnect_plugin_runtime.Output):
             "ipv4Count": {
               "type": "integer",
               "title": "Ipv4Count",
-              "description": "Total number of IP's in a destination list",
+              "description": "Total number of IPs in a destination list",
               "order": 4
             },
             "urlCount": {
@@ -190,7 +190,7 @@ class DlPatchOutput(insightconnect_plugin_runtime.Output):
         "ipv4Count": {
           "type": "integer",
           "title": "Ipv4Count",
-          "description": "Total number of IP's in a destination list",
+          "description": "Total number of IPs in a destination list",
           "order": 4
         },
         "urlCount": {

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: cisco_umbrella_destinations
 title: Cisco Umbrella Destinations
 version: 1.0.0
-supported_versions: ["2022-31-01"]
+supported_versions: ["2022-01-31"]
 description: Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization
 vendor: rapid7
 support: rapid7
@@ -56,7 +56,7 @@ types:
       required: false
     ipv4Count:
       type: integer
-      description: Total number of IP's in a destination list
+      description: Total number of IPs in a destination list
       required: false
   dlCollection:
     id:
@@ -126,7 +126,7 @@ types:
   destinationList:
     id:
       title: ID
-      description: Unique ID of the destination list.
+      description: Unique ID of the destination list
       type: integer
       required: false
     organizationId:
@@ -154,7 +154,7 @@ types:
       type: string
       required: false
     thirdpartyCategoryId:
-      title: Third Party Category Id
+      title: Third Party Category ID
       description: ID, if any, for third parties
       example: 1
       type: integer
