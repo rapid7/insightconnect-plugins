@@ -13,7 +13,15 @@ from icon_opsgenie.connection.connection import Connection
 from icon_opsgenie.connection.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from unit_test.mock import mock_request_202, mock_request_403, mock_request_404, mock_request_500, mocked_request
+from unit_test.mock import (
+    STUB_ALERT_ID,
+    STUB_REQUEST_ID,
+    mock_request_202,
+    mock_request_403,
+    mock_request_404,
+    mock_request_500,
+    mocked_request,
+)
 
 
 class TestCreateAlert(TestCase):
@@ -38,8 +46,9 @@ class TestCreateAlert(TestCase):
         response = self.action.run(self.params)
         expected_response = {
             Output.RESULT: "Request will be processed",
-            Output.REQUESTID: "43a29c5c-3dbf-4fa4-9c26-f4f71023e120",
+            Output.REQUESTID: STUB_REQUEST_ID,
             Output.ELAPSED_TIME: 0.302,
+            Output.ALERTID: STUB_ALERT_ID,
         }
 
         self.assertEqual(response, expected_response)

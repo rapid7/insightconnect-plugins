@@ -7,6 +7,7 @@ import requests
 
 STUB_ALERT_ID = "8418d193-2dab-4490-b331-8c02cdd196b7"
 STUB_SCHEDULE_ID = "d875alp4-9b4e-4219-alp3-0c26936d18de"
+STUB_REQUEST_ID = "ec7e1d8e-1c75-442e-a271-731070a7fa4d"
 
 
 class MockResponse:
@@ -30,6 +31,8 @@ def mocked_request(side_effect: Callable) -> None:
 def mock_conditions(url: str, status_code: int) -> MockResponse:
     if url == "https://api.opsgenie.com/v2/alerts/":
         return MockResponse("create_alert", status_code)
+    elif url == f"https://api.opsgenie.com/v2/alerts/requests/{STUB_REQUEST_ID}":
+        return MockResponse("get_request", status_code)
     elif url == f"https://api.opsgenie.com/v2/alerts/{STUB_ALERT_ID}/close":
         return MockResponse("close_alert", status_code)
     elif url == f"https://api.opsgenie.com/v2/alerts/{STUB_ALERT_ID}":

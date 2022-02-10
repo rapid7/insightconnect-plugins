@@ -31,4 +31,5 @@ class CreateAlert(insightconnect_plugin_runtime.Action):
             Output.RESULT: response.get("result"),
             Output.REQUESTID: response.get("requestId"),
             Output.ELAPSED_TIME: response.get("took"),
+            Output.ALERTID: response.get("alertId"),
         }

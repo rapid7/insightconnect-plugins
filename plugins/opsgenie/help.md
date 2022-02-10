@@ -132,6 +132,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|alertId|string|True|ID of an created alert|
 |elapsed_time|float|True|Time taken to execute|
 |requestId|string|True|ID of a executed API request|
 |result|string|True|Result message from API|
@@ -142,7 +143,8 @@ Example output:
 {
   "result": "Request will be processed",
   "took": 0.302,
-  "requestId": "43a29c5c-3dbf-4fa4-9c26-f4f71023e120"
+  "requestId": "43a29c5c-3dbf-4fa4-9c26-f4f71023e120",
+  "alertId": "43a29c5c-3dbf-4fa4-9c26-f4f71023e120",
 }
 ```
 
@@ -353,6 +355,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.0 - Added alertId field to the output of Create Alert action
 * 1.0.0 - Initial plugin (Actions: Create Alert, Close Alert, Get Alert, Get On-Calls)
 
 # Links
