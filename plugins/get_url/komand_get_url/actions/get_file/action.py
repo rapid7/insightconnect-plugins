@@ -29,10 +29,9 @@ class GetFile(komand.Action):
             # Optional integrity check of file
             if checksum and not komand.helper.check_hashes(contents, checksum):
                 self.logger.error("GetFile: File Checksum Failed")
-                checked_checksums = komand.helper.get_hashes_string(contents)
                 raise PluginException(
                     cause="Checksums between the downloaded file and provided checksum did not match.",
-                    assistance=f"Verify the file you meant to download and the checksum you provided are correct.",
+                    assistance="Verify the file you meant to download and the checksum you provided are correct.",
                 )
 
             # Write etag and last modified to cache
