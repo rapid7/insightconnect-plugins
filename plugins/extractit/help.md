@@ -635,6 +635,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.0.1 - Fix issue where encoded urls would be incorrectly extracted after the top level domain for Extract URL action
 * 3.0.0 - Update to support date format for Date Extractor and Extract All actions
 * 2.3.1 - Support special character ! for URL Extractor action
 * 2.3.0 - Support extraction from binary files for all actions

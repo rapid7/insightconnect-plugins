@@ -1,7 +1,7 @@
 {
-	"spec": "83c3661cac487bf8242181cda7798039",
-	"manifest": "5c939094eac4692050bc0a1558b0c2b5",
-	"setup": "ab898c9cdb3103e79c6da1e0638224bf",
+	"spec": "ceb96ae06f9da9e558bd6c998af5fe15",
+	"manifest": "dd0c605e4bd6eed943239b5d57affb3e",
+	"setup": "3ea68bd09015aa46040f990c2b17ca03",
 	"schemas": [
 		{
 			"identifier": "cve_extractor/schema.py",
@@ -66,6 +66,78 @@
 		{
 			"identifier": "connection/schema.py",
 			"hash": "da5382221ca2a33a2f854e17b068d502"
+		},
+		{
+			"identifier": "mysql/schema.py",
+			"hash": "987a148987644bce6f0b61d7c3cfd337"
+		},
+		{
+			"identifier": "oracle/schema.py",
+			"hash": "18b0cc7e833a688110a5733c163ea5c0"
+		},
+		{
+			"identifier": "postgis/schema.py",
+			"hash": "1963fe6441f5e2e3cb409f3542854b94"
+		},
+		{
+			"identifier": "spatialite/schema.py",
+			"hash": "39a6da977f5ffc400601b18bff528115"
+		},
+		{
+			"identifier": "base/schema.py",
+			"hash": "a9da2f22843be6b4e5c4e4d7141d3af8"
+		},
+		{
+			"identifier": "mysql/schema.py",
+			"hash": "f74889bc10b293ac9eac13acae08c595"
+		},
+		{
+			"identifier": "oracle/schema.py",
+			"hash": "a6431e7df8f40bb19fda9fad275260b8"
+		},
+		{
+			"identifier": "postgresql/schema.py",
+			"hash": "9024a4e27b6001dc8b5067429a18922c"
+		},
+		{
+			"identifier": "sqlite3/schema.py",
+			"hash": "942cd5bd2ea44ef35a8681a7169fcd6d"
+		},
+		{
+			"identifier": "insightconnect_plugin_runtime/schema.py",
+			"hash": "98e2cf8bf394d0b6f97cdfeb657ea71b"
+		},
+		{
+			"identifier": "marshmallow/schema.py",
+			"hash": "7c9fc22caa77ab8be9957e79867f426a"
+		},
+		{
+			"identifier": "hello/schema.py",
+			"hash": "92ec4b966e523fe43b8d3e1589ecd235"
+		},
+		{
+			"identifier": "return_bad_json/schema.py",
+			"hash": "bb41c13e9e71e212c1545150a16f8b73"
+		},
+		{
+			"identifier": "throw_exception/schema.py",
+			"hash": "f59f8278af731495ae3b2367744224f2"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "f1bf7d508c81c245888665a322d984e8"
+		},
+		{
+			"identifier": "hello_trigger/schema.py",
+			"hash": "6fda62f9b28a899e2ecb7aab1311bbb2"
+		},
+		{
+			"identifier": "return_bad_json_trigger/schema.py",
+			"hash": "9a207816ba5b0ab0f9e4f40d86c4cc3e"
+		},
+		{
+			"identifier": "throw_exception_trigger/schema.py",
+			"hash": "23e4aee31e1c532d9ed50830efad1b8d"
 		}
 	]
 }
