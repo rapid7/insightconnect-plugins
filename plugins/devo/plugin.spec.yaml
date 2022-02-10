@@ -4,7 +4,7 @@ products: [insightconnect]
 name: devo
 title: Devo
 description: Devo is the cloud-native logging and security analytics solution that delivers real-time visibility for security and operations teams
-version: 3.0.0
+version: 3.0.1
 supported_versions: ["v7.8.0"]
 vendor: rapid7
 support: community
