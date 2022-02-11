@@ -1,5 +1,5 @@
 import komand
-from .schema import PowershellStringInput, PowershellStringOutput
+from .schema import PowershellStringInput, PowershellStringOutput, Input
 
 # Custom imports below
 from komand_powershell.util import util
@@ -15,96 +15,25 @@ class PowershellString(komand.Action):
         )
 
     def run(self, params={}):
-        auth = self.connection.auth_type
-        host_ip = params.get("address")
-        powershell_script = params.get("script")
-        username = self.connection.username
-        password = self.connection.password
-        port = self.connection.port
-        # Set variables for Kerberos
-        host_name = params.get("host_name")
-        kdc = self.connection.kdc
-        domain = self.connection.domain
-        self.logger.debug(powershell_script)
+        host_ip = params.get(Input.ADDRESS)
+        powershell_script = params.get(Input.SCRIPT)
+        host_name = params.get(Input.HOST_NAME)
 
-        # This will run PowerShell on the linux VM
-        if auth == "None" or not host_ip:
-            data = util.local(action=self, powershell_script=powershell_script)
-            output = data.get("output")
-            stderr = data.get("stderr")
+        powershell_script = util.add_credentials_to_script(powershell_script, params)
 
-            if output:
-                output = self.safe_encode(output)
+        return util.run_powershell_script(
+            auth=self.connection.auth_type,
+            action=self,
+            host_ip=host_ip,
+            kdc=self.connection.kdc,
+            domain=self.connection.domain,
+            host_name=host_name,
+            powershell_script=powershell_script,
+            password=self.connection.password,
+            username=self.connection.username,
+            port=self.connection.port,
+        )
 
-            if stderr:
-                stderr = self.safe_encode(stderr)
-
-            return {"stdout": output, "stderr": stderr}
-
-        # This code will run a PowerShell script with a NTLM connection
-        if auth == "NTLM":
-            data = util.ntlm(
-                action=self,
-                host_ip=host_ip,
-                powershell_script=powershell_script,
-                username=username,
-                password=password,
-                port=port,
-            )
-            output = data.get("output")
-            stderr = data.get("stderr")
-
-            if output:
-                output = self.safe_encode(output)
-
-            if stderr:
-                stderr = self.safe_encode(stderr)
-
-            return {"stdout": output, "stderr": stderr}
-
-        # This code will run a PowerShell script with a Kerberos account
-        if auth == "Kerberos":
-            data = util.kerberos(
-                action=self,
-                host_ip=host_ip,
-                kdc=kdc,
-                domain=domain,
-                host_name=host_name,
-                powershell_script=powershell_script,
-                password=password,
-                username=username,
-                port=port,
-            )
-            output = data.get("output")
-            stderr = data.get("stderr")
-
-            if output:
-                output = self.safe_encode(output)
-
-            if stderr:
-                stderr = self.safe_encode(stderr)
-
-            return {"stdout": output, "stderr": stderr}
-        if auth == "CredSSP":
-            data = util.credssp(
-                action=self,
-                host_ip=host_ip,
-                powershell_script=powershell_script,
-                username=username,
-                password=password,
-                port=port,
-            )
-            output = data.get("output")
-            stderr = data.get("stderr")
-
-            if output:
-                output = self.safe_encode(output)
-
-            if stderr:
-                stderr = self.safe_encode(stderr)
-
-            return {"stdout": output, "stderr": stderr}
-
-    def safe_encode(self, in_byte):
-        new_string = str(in_byte)
+    @staticmethod
+    def safe_encode(in_byte: str) -> str:
         return in_byte.replace("\u0000", "")
