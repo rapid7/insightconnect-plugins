@@ -20,6 +20,7 @@ class ConnectionSchema(komand.Input):
       "type": "string",
       "title": "Auth Type",
       "description": "Authentication type",
+      "default": "None",
       "enum": [
         "NTLM",
         "Kerberos",
