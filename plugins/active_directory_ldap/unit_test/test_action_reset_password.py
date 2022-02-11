@@ -1,5 +1,5 @@
 from unittest import TestCase, mock
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_active_directory_ldap.actions.reset_password import ResetPassword
 from komand_active_directory_ldap.actions.reset_password.schema import Input, Output
 from unit_test.common import MockServer
@@ -33,7 +33,7 @@ class TestActionResetPassword(TestCase):
     @mock.patch("ldap3.Connection", mock.MagicMock(return_value=MockConnection()))
     @default_connector(action=ResetPassword())
     def test_reset_password_raise_when_ssl_false(self, action):
-        action.connection.ssl = False
+        action.connection.use_ssl = False
         with self.assertRaises(PluginException) as context:
             action.run({Input.DISTINGUISHED_NAME: "CN=Users,DC=example,DC=com", Input.NEW_PASSWORD: "test_pass"})
 
