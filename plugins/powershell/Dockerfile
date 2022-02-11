@@ -1,4 +1,4 @@
-FROM komand/python-3-plugin:2
+FROM komand/python-3-37-plugin:3.2
 LABEL organization=komand
 LABEL sdk=python
 LABEL type=plugin
@@ -14,20 +14,39 @@ WORKDIR /python/src
 # Add any package dependencies here
 ENV DEBIAN_FRONTEND noninteractive
 # Kerberos dependencies
-RUN apt-get update && apt-get install -y libffi6 libffi-dev \
+RUN apt-get update && apt-get install -y \
+    apt-transport-https \
+    curl \
     gcc python-dev libkrb5-dev \
-    realmd \
+    git \
+    gnupg \
+    krb5-user \
+    libffi6 libffi-dev \
+    libssl1.1 \
     ntp adcli sssd \
     samba-common \
-    krb5-user
+    software-properties-common \
+    sudo \
+    realmd \
+    wget
+
 # Local PowerShell dependencies
-RUN apt-get install -y apt-transport-https
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-jessie-prod jessie main" > /etc/apt/sources.list.d/microsoft.list
-RUN apt-get update && apt-get install -y powershell
-RUN python setup.py build && python setup.py install
+RUN echo "deb http://security.ubuntu.com/ubuntu bionic-security main" | sudo tee -a /etc/apt/sources.list.d/bionic.list && \
+    apt-cache policy libssl1.0-dev && \
+    sudo apt-get install libssl1.0-dev && \
+    wget http://mirrors.kernel.org/ubuntu/pool/main/i/icu/libicu52_52.1-3ubuntu0.8_amd64.deb && \
+    sudo apt install -y ./libicu52_52.1-3ubuntu0.8_amd64.deb && \
+    rm ./libicu52_52.1-3ubuntu0.8_amd64.deb && \
+    wget https://github.com/PowerShell/PowerShell/releases/download/v7.1.5/powershell_7.1.5-1.debian.9_amd64.deb && \
+    sudo apt install -y ./powershell_7.1.5-1.debian.9_amd64.deb && \
+    rm ./powershell_7.1.5-1.debian.9_amd64.deb
+
+
 # End package dependencies
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 RUN python setup.py build && python setup.py install
+
+# User to run plugin code. The two supported users are: root, nobody
+USER root
 
 ENTRYPOINT ["/usr/local/bin/komand_powershell"]
