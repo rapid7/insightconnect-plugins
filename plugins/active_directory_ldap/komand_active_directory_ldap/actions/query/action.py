@@ -1,13 +1,13 @@
-import komand
-from .schema import QueryInput, QueryOutput, Input, Output
+import ldap3
+
+import insightconnect_plugin_runtime
 
 # Custom imports below
 from komand_active_directory_ldap.util.utils import ADUtils
-import json
-import ldap3
+from .schema import QueryInput, QueryOutput, Input, Output
 
 
-class Query(komand.Action):
+class Query(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="query", description="Run a LDAP query", input=QueryInput(), output=QueryOutput()
@@ -15,7 +15,6 @@ class Query(komand.Action):
 
     def run(self, params={}):
         formatter = ADUtils()
-        conn = self.connection.conn
         query = params.get(Input.SEARCH_FILTER)
 
         query = query.replace("\\>=", ">=")
@@ -32,16 +31,8 @@ class Query(komand.Action):
         if not attributes:
             attributes = [ldap3.ALL_ATTRIBUTES, ldap3.ALL_OPERATIONAL_ATTRIBUTES]
 
-        conn.extend.standard.paged_search(
-            search_base=params.get(Input.SEARCH_BASE),
-            search_filter=escaped_query,
-            attributes=attributes,
-            paged_size=100,
-            generator=False,
-        )
-
-        result_list_json = conn.response_to_json()
-        result_list_object = json.loads(result_list_json)
-        entries = result_list_object["entries"]
-
-        return {Output.RESULTS: entries, Output.COUNT: len(entries)}
+        entries = self.connection.client.query(params.get(Input.SEARCH_BASE), escaped_query, attributes)
+        if entries:
+            return {Output.RESULTS: entries, Output.COUNT: len(entries)}
+        else:
+            return {Output.RESULTS: [], Output.COUNT: 0}

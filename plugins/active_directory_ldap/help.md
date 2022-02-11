@@ -17,6 +17,10 @@
 * To connect, you must have NTLM credentials.
 * Please make sure you enter your credentials with the DOMAIN\username format.
 
+# Supported Product Versions
+
+* Azure Active Directory 2.0.89.0
+
 # Documentation
 
 ## Setup
@@ -40,7 +44,7 @@ Example input:
   "port": 389,
   "use_ssl": true,
   "username_password": {
-    "username": "user1",
+    "username": "user1", 
     "password": "mypassword"
   }
 }
@@ -672,6 +676,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 5.3.2 - Improve LDAP connection handling
 * 5.3.1 - Improved error messaging in case the specified group was not found in the Query Group Membership action
 * 5.3.0 - Add Unlock User action
 * 5.2.2 - Add automatic pagination in Query Group Membership and Query actions
@@ -715,6 +720,5 @@ the query results, and then using the variable step $item.dn
 
 ## References
 
-[Python LDAP3 Search](https://ldap3.readthedocs.io/searches.html)
 [Python LDAP3](https://ldap3.readthedocs.io)
 [RFC4515](https://tools.ietf.org/search/rfc4515)
