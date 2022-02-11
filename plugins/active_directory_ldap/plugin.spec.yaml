@@ -4,7 +4,8 @@ products: [insightconnect]
 name: active_directory_ldap
 title: Active Directory LDAP
 description: "This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network"
-version: 5.3.1
+version: 5.3.2
+supported_versions: ["Azure Active Directory 2.0.89.0"]
 vendor: rapid7
 support: rapid7
 status: []
