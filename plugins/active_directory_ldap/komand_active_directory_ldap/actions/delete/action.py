@@ -1,12 +1,11 @@
-import komand
-from .schema import DeleteInput, DeleteOutput
+import insightconnect_plugin_runtime
 
 # Custom imports below
-from komand.exceptions import PluginException
 from komand_active_directory_ldap.util.utils import ADUtils
+from .schema import DeleteInput, DeleteOutput, Output, Input
 
 
-class Delete(komand.Action):
+class Delete(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="delete",
@@ -17,18 +16,7 @@ class Delete(komand.Action):
 
     def run(self, params={}):
         formatter = ADUtils()
-        conn = self.connection.conn
-        dn = params.get("distinguished_name")
+        dn = params.get(Input.DISTINGUISHED_NAME)
         dn = formatter.format_dn(dn)[0]
         dn = formatter.unescape_asterisk(dn)
-        conn.delete(dn)
-        result = conn.result
-        output = result["description"]
-
-        if result["result"] == 0:
-            return {"success": True}
-
-        self.logger.error("failed: error message %s" % output)
-        raise PluginException(
-            cause=PluginException.causes[PluginException.Preset.UNKNOWN], assistance=f"failed: error message {output}"
-        )
+        return {Output.SUCCESS: self.connection.client.delete(dn)}
