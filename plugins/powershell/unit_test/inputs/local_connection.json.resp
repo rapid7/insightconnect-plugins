@@ -1,0 +1,12 @@
+{
+  "credentials": {
+    "username": "user",
+    "password": "passw"
+  },
+  "auth": "None",
+  "port": "",
+  "kerberos": {
+    "domain_name": "",
+    "kdc": ""
+  }
+}
