@@ -1,5 +1,5 @@
 import re
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from ldap3.core.exceptions import LDAPInvalidDnError, LDAPOperationsErrorResult
 from ldap3 import MODIFY_REPLACE
 from logging import Logger
