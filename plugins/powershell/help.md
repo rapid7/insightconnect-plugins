@@ -28,7 +28,6 @@ The connection configuration accepts the following parameters. SSL is enforced f
 |kerberos|kerberos|None|False|Connection information required for Kerberos|None| {"kdc": "10.0.1.11", "domain": "EXAMPLE.domain"}|
 |port|integer|5986|False|Port number, defaults are 5986 for SSL and 5985 for unencrypted|None|5986|
 
-Example input:
 
 ```
 {
@@ -273,7 +272,11 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 
 # Version History
 
+<<<<<<< HEAD
 * 2.2.0 - Add custom credentials in Execute Script and PowerShell String actions | Update plugin to allow unencrypted connections when connection is targeting port 5985
+=======
+* 2.2.0 - Add custom credentials in Execute Script and PowerShell String actions
+>>>>>>> a29227724 (PowerShell_Python - MC-524 Add credentials and secret_key as python and powershell scripts variables (#1092))
 * 2.1.4 - Update `docs_url` in plugin spec with a new link to [plugin setup guide](https://docs.rapid7.com/insightconnect/mass-delete-with-powershell/)
 * 2.1.3 - Correct spelling in help.md
 * 2.1.2 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/mass-delete-with-powershell)

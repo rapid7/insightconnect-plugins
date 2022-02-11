@@ -169,8 +169,12 @@ def run_script_using_kerberos(
 ) -> dict:
     action.logger.info("Running Kerberos connection")
     # Adds needed https and port number to host IP
+<<<<<<< HEAD
     prefix = "http" if port == 5985 else "https"
     host_address = f"{prefix}://{host_ip}:{port}/wsman"
+=======
+    host_address = f"https://{host_ip}:{port}/wsman"
+>>>>>>> a29227724 (PowerShell_Python - MC-524 Add credentials and secret_key as python and powershell scripts variables (#1092))
     configure_machine_for_kerberos_connection(
         action, domain, host_ip, host_name, kdc, password, powershell_script, username
     )
