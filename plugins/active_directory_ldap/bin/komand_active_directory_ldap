@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Active Directory LDAP"
 Vendor = "rapid7"
-Version = "5.3.1"
+Version = "5.3.2"
 Description = "This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network"
 
 
@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
+    import insightconnect_plugin_runtime
     from komand_active_directory_ldap import connection, actions, triggers
 
-    class ICONActiveDirectoryLdap(komand.Plugin):
+    class ICONActiveDirectoryLdap(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -60,7 +60,7 @@ def main():
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONActiveDirectoryLdap())
+    cli = insightconnect_plugin_runtime.CLI(ICONActiveDirectoryLdap())
     cli.run()
 
 
