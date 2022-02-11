@@ -1,0 +1,162 @@
+{
+  "data": {
+    "requests": [
+      {
+        "request": {
+          "requestId": "B1541FEC52C937F761572C45C03F7828",
+          "loaderId": "B1541FEC52C937F761572C45C03F7828",
+          "documentURL": "https://arnaozn.rxxyy.com/",
+          "request": {
+            "url": "https://arnaozn.rxxyy.com/",
+            "method": "GET",
+            "headers": {
+              "Upgrade-Insecure-Requests": "1",
+              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.93 Safari/537.36",
+              "Accept-Language": "de-DE,de;q=0.9"
+            },
+            "mixedContentType": "none",
+            "initialPriority": "VeryHigh",
+            "referrerPolicy": "strict-origin-when-cross-origin",
+            "isSameSite": true
+          },
+          "timestamp": 8606950.228358,
+          "wallTime": 1639777539.03175,
+          "initiator": {
+            "type": "other"
+          },
+          "type": "Document",
+          "frameId": "D9EC8BB56F0DA9B834B06FE284EB5EBE",
+          "hasUserGesture": false,
+          "primaryRequest": true
+        },
+        "response": {
+          "encodedDataLength": 0,
+          "dataLength": 0
+        }
+      }
+    ],
+    "cookies": {},
+    "console": [],
+    "links": [],
+    "timing": {
+      "beginNavigation": "2021-12-17T21:45:39.028Z"
+    },
+    "globals": []
+  },
+  "stats": {
+    "resourceStats": [],
+    "protocolStats": [],
+    "tlsStats": [],
+    "serverStats": [],
+    "domainStats": [
+      {
+        "count": 0,
+        "ips": [],
+        "domain": "arnaozn.rxxyy.com",
+        "size": 0,
+        "encodedSize": 0,
+        "countries": [],
+        "index": 0,
+        "initiators": []
+      }
+    ],
+    "regDomainStats": [
+      {
+        "count": 0,
+        "ips": [],
+        "regDomain": "rxxyy.com",
+        "size": 0,
+        "encodedSize": 0,
+        "countries": [],
+        "index": 0,
+        "subDomains": [
+          {
+            "domain": "arnaozn",
+            "failed": true
+          }
+        ]
+      }
+    ],
+    "secureRequests": 0,
+    "securePercentage": 0,
+    "IPv6Percentage": null,
+    "uniqCountries": 0,
+    "totalLinks": 0,
+    "malicious": 0,
+    "adBlocked": 0,
+    "ipStats": []
+  },
+  "meta": {
+    "processors": {}
+  },
+  "task": {
+    "uuid": "0a2121d2-76ae-43f0-a4f9-b4b43cd3770a",
+    "time": "2021-12-17T21:45:38.988Z",
+    "url": "https://arnaozn.rxxyy.com/",
+    "visibility": "private",
+    "method": "api",
+    "source": "66de627f",
+    "tags": [],
+    "reportURL": "https://urlscan.io/result/0a2121d2-76ae-43f0-a4f9-b4b43cd3770a/",
+    "screenshotURL": "https://urlscan.io/screenshots/0a2121d2-76ae-43f0-a4f9-b4b43cd3770a.png",
+    "domURL": "https://urlscan.io/dom/0a2121d2-76ae-43f0-a4f9-b4b43cd3770a/"
+  },
+  "page": {
+    "url": "https://arnaozn.rxxyy.com/",
+    "domain": "arnaozn.rxxyy.com"
+  },
+  "lists": {
+    "ips": [],
+    "countries": [],
+    "asns": [],
+    "domains": [
+      "arnaozn.rxxyy.com"
+    ],
+    "servers": [],
+    "urls": [
+      "https://arnaozn.rxxyy.com/"
+    ],
+    "linkDomains": [],
+    "certificates": [],
+    "hashes": []
+  },
+  "verdicts": {
+    "overall": {
+      "score": 0,
+      "categories": [],
+      "brands": [],
+      "tags": [],
+      "malicious": false,
+      "hasVerdicts": 0
+    },
+    "urlscan": {
+      "score": 0,
+      "categories": [],
+      "brands": [],
+      "tags": [],
+      "detectionDetails": [],
+      "malicious": false
+    },
+    "engines": {
+      "score": 0,
+      "malicious": [],
+      "benign": [],
+      "maliciousTotal": 0,
+      "benignTotal": 0,
+      "verdicts": [],
+      "enginesTotal": 0
+    },
+    "community": {
+      "score": 0,
+      "votes": [],
+      "votesTotal": 0,
+      "votesMalicious": 0,
+      "votesBenign": 0,
+      "tags": [],
+      "categories": []
+    }
+  },
+  "submitter": {
+    "country": "JP"
+  }
+}
