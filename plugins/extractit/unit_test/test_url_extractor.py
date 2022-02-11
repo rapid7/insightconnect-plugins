@@ -13,4 +13,4 @@ class TestUrlExtractor(TestCase):
         action = UrlExtractor()
         actual = action.run({Input.STR: string, Input.FILE: file})
         expected = {Output.URLS: expected}
-        self.assertEqual(actual, expected)
+        self.assertEqual(expected, actual)

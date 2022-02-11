@@ -15,12 +15,17 @@ from pdfminer.pdfparser import PDFSyntaxError
 def extract(provided_regex: str, provided_string: str, provided_file: str) -> list:
     matches = []
     if provided_string:
-        provided_string = urllib.parse.unquote(provided_string)
-        matches = regex.findall(provided_regex, provided_string)
+        mixedmatches = regex.findall(provided_regex, provided_string)  # regex finds both encoded and unencoded urls
+        for match in mixedmatches:
+            decoded = urllib.parse.unquote(match)
+            matches.append(match) if decoded != match else matches.append(decoded)
     elif provided_file:
         try:
-            provided_file = urllib.parse.unquote(base64.b64decode(provided_file.encode("utf-8")).decode("utf-8"))
-            matches = regex.findall(provided_regex, provided_file)
+            provided_file = base64.b64decode(provided_file.encode("utf-8")).decode("utf-8")
+            mixedmatches = regex.findall(provided_regex, provided_file)
+            for match in mixedmatches:
+                decoded = urllib.parse.unquote(match)
+                matches.append(match) if decoded != match else matches.append(decoded)
         except UnicodeDecodeError:
             file_content = extract_content_from_file(base64.b64decode(provided_file))
             matches = regex.findall(provided_regex, file_content)
