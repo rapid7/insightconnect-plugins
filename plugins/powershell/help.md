@@ -11,20 +11,39 @@
 * For local Orchestrator execution, ensure connectivity to any network resources the script will use
 * For remote server execution, a PowerShell-enabled server and administrative credentials
 
+# Supported Product Versions
+
+* PowerShell 6.1.2
+
 # Documentation
 
 ## Setup
 
-Check out the [plugin guide](https://docs.rapid7.com/insightconnect/mass-delete-with-powershell/) for more details on how to configure this plugin.
-
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_username_password|None|False|Username and password|None|
-|kerberos|kerberos|None|False|Connection information required for Kerberos|None|
-|port|integer|5986|False|Port number, defaults are 5986 for SSL and 5985 for unencrypted|None|
-|auth|string|None|True|Authentication type|['NTLM', 'Kerberos', 'None', 'CredSSP']|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|auth|string|None|True|Authentication type|['NTLM', 'Kerberos', 'CredSSP', 'None']|Kerberos|
+|credentials|credential_username_password|None|False|Username and password|None|{"username": "user", "password": "mypassword"}|
+|kerberos|kerberos|None|False|Connection information required for Kerberos|None| {"kdc": "10.0.1.11", "domain": "EXAMPLE.domain"}|
+|port|integer|5986|False|Port number, defaults are 5986 for SSL and 5985 for unencrypted|None|5986|
+
+Example input:
+
+```
+{
+  "auth": "Kerberos",
+  "credentials": {
+    "username": "user",
+    "password": "mypassword"
+  },
+  "kerberos": {
+    "kdc": "10.0.1.11",
+    "domain": "EXAMPLE.domain"
+  },
+  "port": 5986
+}
+```
 
 ## Technical Details
 
@@ -32,62 +51,172 @@ The connection configuration accepts the following parameters:
 
 #### PowerShell String
 
-This action is used to execute a PowerShell script in the form of a string on a remote host or locally on the Komand host.
+This action is used to execute PowerShell script in the form of a string.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|script|string|None|True|PowerShell script as a string|None|
-|host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|
-|address|string|None|True|IP address of the remote host e.g. 192.168.1.1|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|10.0.1.17|
+|host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|windows|
+|script|string|None|True|PowerShell script as a string|None|Get-Date|
+|secret_key|credential_secret_key|None|False|Credential secret key available in script as PowerShell variable (`$secret_key`)|None|{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}|
+|username_and_password|credential_username_password|None|False|Username and password available in script as PowerShell variables (`$username`, `$password`)|None|{"username": "user", "password": "mypassword"}|
+
+Example input:
+
+```
+{
+  "address": "10.0.1.17",
+  "host_name": "windows",
+  "script": "Get-Date",
+  "secret_key": {
+    "secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"
+  },
+  "username_and_password": {
+    "username": "user",
+    "password": "mypassword"
+  }
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|stderr|string|False|PowerShell standard error|
-|stdout|string|False|PowerShell standard output|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|--------|
+|stderr|string|False|PowerShell standard error|#< CLIXML\r\n<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>|
+|stdout|string|False|PowerShell standard output|Tuesday, January 11, 2022 5:05:42 AM|
+
 
 Example output:
 
 ```
-
 {
-  "stdout": "Mr $test  $test2\r\nMr bob  said hello\r\nbob \n  said hello\r\n5\r\ntesting chars in lit string \\ / \\r /r // \\\\ ! @ ## $ %\r\ntesting chars in interpreted string // \\\\ /r/n ! @ ## $\r\n\r\nPath            \r\n----            \r\nC:\\Users\\mhofert\r\nC:\\Users        \r\nC:\\             \r\n\r\n\r\n",
-  "stderr": "#< CLIXML\r\n<Objs Version=\"1.1.0.1\" xmlns=\"http://schemas.microsoft.com/powershell/2004/04\"><Obj S=\"progress\" RefId=\"0\"><TN RefId=\"0\"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S=\"progress\" RefId=\"1\"><TNRef RefId=\"0\" /><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>"
+  "stdout": "Tuesday, January 11, 2022 5:05:42 AM",
+  "stderr": "#< CLIXML
+            <Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+                <Obj S="progress" RefId="0">
+                    <TN RefId="0">
+                        <T>System.Management.Automation.PSCustomObject</T>
+                        <T>System.Object</T>
+                    </TN>
+                    <MS>
+                        <I64 N="SourceId">1</I64>
+                        <PR N="Record">
+                            <AV>Preparing modules for first use.</AV>
+                            <AI>0</AI>
+                            <Nil/>
+                            <PI>-1</PI>
+                            <PC>-1</PC>
+                            <T>Completed</T>
+                            <SR>-1</SR>
+                            <SD> </SD>
+                        </PR>
+                    </MS>
+                </Obj>
+                <Obj S="progress" RefId="1">
+                    <TNRef RefId="0"/>
+                    <MS>
+                        <I64 N="SourceId">1</I64>
+                        <PR N="Record">
+                            <AV>Preparing modules for first use.</AV>
+                            <AI>0</AI>
+                            <Nil/>
+                            <PI>-1</PI>
+                            <PC>-1</PC>
+                            <T>Completed</T>
+                            <SR>-1</SR>
+                            <SD> </SD>
+                        </PR>
+                    </MS>
+                </Obj>
+            </Objs>"
 }
-
 ```
 
 #### Execute Script
 
-This action is used to execute a PowerShell script on a remote host or locally on the Komand host.
+This action is used to execute PowerShell script encoded as a base64 file on a remote host.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|script|bytes|None|True|PowerShell script as base64|None|
-|host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|
-|address|string|None|True|IP address of the remote host e.g. 192.168.1.1|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|10.0.1.15|
+|host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|windows|
+|script|bytes|None|True|PowerShell script as base64|None|R2V0LURhdGU=|
+|secret_key|credential_secret_key|None|False|Credential secret key available in script as PowerShell variable (`$secret_key`)|None|{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}|
+|username_and_password|credential_username_password|None|False|Username and password available in script as PowerShell variables (`$username`, `$password`)|None|{"username": "user", "password": "mypassword"}|
+
+Example input:
+
+```
+{
+  "address": "10.0.1.15",
+  "host_name": "windows",
+  "script": "R2V0LURhdGU=",
+  "secret_key": {
+    "secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"
+  },
+  "username_and_password": {
+    "username": "user",
+    "password": "mypassword"
+  }
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|stderr|string|False|PowerShell standard error|
-|stdout|string|False|PowerShell standard output|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|--------|
+|stderr|string|False|PowerShell standard error|#< CLIXML\r\n<Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>|
+|stdout|string|False|PowerShell standard output|Tuesday, January 11, 2022 5:05:42 AM|
+
 
 Example output:
 
 ```
-
 {
-  "stdout": "Mr $test  $test2\r\nMr bob  said hello\r\nbob \n  said hello\r\n5\r\ntesting chars in lit string \\ / \\r /r // \\\\ ! @ ## $ %\r\ntesting chars in interpreted string // \\\\ /r/n ! @ ## $\r\n\r\nPath            \r\n----            \r\nC:\\Users\\mhofert\r\nC:\\Users        \r\nC:\\             \r\n\r\n\r\n",
-  "stderr": "#< CLIXML\r\n<Objs Version=\"1.1.0.1\" xmlns=\"http://schemas.microsoft.com/PowerShell/2004/04\"><Obj S=\"progress\" RefId=\"0\"><TN RefId=\"0\"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S=\"progress\" RefId=\"1\"><TNRef RefId=\"0\" /><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>"
+  "stdout": "Tuesday, January 11, 2022 5:05:42 AM",
+  "stderr": "#< CLIXML
+            <Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04">
+                <Obj S="progress" RefId="0">
+                    <TN RefId="0">
+                        <T>System.Management.Automation.PSCustomObject</T>
+                        <T>System.Object</T>
+                    </TN>
+                    <MS>
+                        <I64 N="SourceId">1</I64>
+                        <PR N="Record">
+                            <AV>Preparing modules for first use.</AV>
+                            <AI>0</AI>
+                            <Nil/>
+                            <PI>-1</PI>
+                            <PC>-1</PC>
+                            <T>Completed</T>
+                            <SR>-1</SR>
+                            <SD> </SD>
+                        </PR>
+                    </MS>
+                </Obj>
+                <Obj S="progress" RefId="1">
+                    <TNRef RefId="0"/>
+                    <MS>
+                        <I64 N="SourceId">1</I64>
+                        <PR N="Record">
+                            <AV>Preparing modules for first use.</AV>
+                            <AI>0</AI>
+                            <Nil/>
+                            <PI>-1</PI>
+                            <PC>-1</PC>
+                            <T>Completed</T>
+                            <SR>-1</SR>
+                            <SD> </SD>
+                        </PR>
+                    </MS>
+                </Obj>
+            </Objs>"
 }
-
 ```
 
 ### Triggers
@@ -144,6 +273,7 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 
 # Version History
 
+* 2.2.0 - Add custom credentials in Execute Script and PowerShell String actions
 * 2.1.4 - Update `docs_url` in plugin spec with a new link to [plugin setup guide](https://docs.rapid7.com/insightconnect/mass-delete-with-powershell/)
 * 2.1.3 - Correct spelling in help.md
 * 2.1.2 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/mass-delete-with-powershell)
@@ -167,4 +297,4 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 * [samba-common](https://packages.debian.org/sid/samba-common)
 * [krb5-user](https://packages.debian.org/search?keywords=krb5-user)
 * [realmd](https://packages.debian.org/jessie/admin/realmd)
-* [InsightConnect Powershell Plugin Guide](https://docs.rapid7.com/insightconnect/mass-delete-with-powershell/)
+* [InsightConnect Powershell Plugin Guide](https://docs.rapid7.com/insightconnect/mass-delete-with-PowerShell/)
