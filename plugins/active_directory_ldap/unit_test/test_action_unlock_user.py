@@ -1,5 +1,5 @@
 from unittest import TestCase, mock
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_active_directory_ldap.actions.unlock_user import UnlockUser
 from komand_active_directory_ldap.actions.enable_user.schema import Input, Output
 from unit_test.common import MockServer
