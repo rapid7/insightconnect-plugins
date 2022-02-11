@@ -1,0 +1,12 @@
+{
+  "credentials": {
+    "username": "user",
+    "password": "passw"
+  },
+  "auth": "CredSSP",
+  "port": "5986",
+  "kerberos": {
+    "domain_name": "",
+    "kdc": ""
+  }
+}
