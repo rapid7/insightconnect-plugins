@@ -1,9 +1,11 @@
+import logging
 from unittest import TestCase, mock
+
 from komand_active_directory_ldap import connection
 from komand_active_directory_ldap.connection.schema import Input
-import logging
-from unit_test.common import MockServer
+from komand_active_directory_ldap.util.api import ActiveDirectoryLdapAPI
 from unit_test.common import MockConnection
+from unit_test.common import MockServer
 
 
 class TestHostFormatter(TestCase):
@@ -42,7 +44,7 @@ class TestHostFormatter(TestCase):
             "ldaps://mydomain.com/stuff:345",
         ]
         output = list()
-        conn = connection.Connection()
+        conn = ActiveDirectoryLdapAPI(None, None)
         conn.logger = logging.getLogger("test_host_formatter")
         for item in host_types:
             output.append(conn.host_formatter(item))
