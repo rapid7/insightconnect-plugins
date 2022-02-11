@@ -1,7 +1,10 @@
-import komand
-from .schema import ExecuteScriptInput, ExecuteScriptOutput
 import base64
+
+import komand
+
+from .schema import ExecuteScriptInput, ExecuteScriptOutput, Input
 from komand_powershell.util import util
+from komand.exceptions import PluginException
 
 
 class ExecuteScript(komand.Action):
@@ -14,121 +17,56 @@ class ExecuteScript(komand.Action):
         )
 
     def run(self, params={}):  # noqa: MC0001
-        auth = self.connection.auth_type
-        host_ip = params.get("address")
-        encoded_powershell_script = params.get("script")
-        username = self.connection.username
-        password = self.connection.password
-        port = self.connection.port
-        # Set variables for Kerberos
-        host_name = params.get("host_name")
-        kdc = self.connection.kdc
-        domain = self.connection.domain
+        host_ip = params.get(Input.ADDRESS)
+        encoded_powershell_script = params.get(Input.SCRIPT)
+        host_name = params.get(Input.HOST_NAME)
 
+        powershell_script = self.decode_b64_script(encoded_powershell_script)
+        powershell_script = util.add_credentials_to_script(powershell_script, params)
+
+        return util.run_powershell_script(
+            auth=self.connection.auth_type,
+            action=self,
+            host_ip=host_ip,
+            kdc=self.connection.kdc,
+            domain=self.connection.domain,
+            host_name=host_name,
+            powershell_script=powershell_script,
+            password=self.connection.password,
+            username=self.connection.username,
+            port=self.connection.port,
+        )
+
+    def decode_b64_script(self, encoded_powershell_script):
         try:
             powershell_script = base64.b64decode(encoded_powershell_script)
         except base64.binascii.Error as e:
             self.logger.error("Base64 input" + encoded_powershell_script)
-            raise Exception("While decoding the base64 into bytes the following error occurred" + e)
-        except:
+            raise PluginException(cause="While decoding the base64 into bytes the following error occurred", data=e)
+        except Exception as e:
             self.logger.error("Base64 input " + encoded_powershell_script)
-            raise Exception("Something went wrong decoding the base64 script into bytes. See log for more information")
+            raise PluginException(
+                cause="Something went wrong decoding the base64 script into bytes",
+                assistance="See log for more information",
+                data=e,
+            )
         try:
             powershell_script = powershell_script.decode("utf-8")
-        except base64.binascii.Error as e:
+        except (base64.binascii.Error, UnicodeDecodeError) as e:
             self.logger.error("Base64 input " + encoded_powershell_script)
             self.logger.error("Base64 decoded as bytes" + powershell_script)
-            raise Exception("While decoding the bytes into utf-8 the following error occurred" + e)
-        except UnicodeDecodeError as e:
+            raise PluginException(cause="While decoding the bytes into utf-8 the following error occurred", data=e)
+        except Exception as e:
             self.logger.error("Base64 input " + encoded_powershell_script)
             self.logger.error("Base64 decoded as bytes" + powershell_script)
-            raise Exception("While decoding the bytes into utf-8 the following error occurred" + e)
-        except:
-            self.logger.error("Base64 input " + encoded_powershell_script)
-            self.logger.error("Base64 decoded as bytes" + powershell_script)
-            raise Exception(
-                "Something went wrong decoding the base64 script bytes into utf-8." " See log for more information"
+            raise PluginException(
+                cause="Something went wrong decoding the base64 script bytes into utf-8.",
+                assistance="See log for more information",
+                data=e,
             )
+        return powershell_script
 
-        # This will run PowerShell on the linux VM
-        if auth == "None" or not host_ip:
-            data = util.local(action=self, powershell_script=powershell_script)
-            output = data.get("output")
-            stderr = data.get("stderr")
-
-            if output:
-                output = self.safe_encode(output)
-
-            if stderr:
-                stderr = self.safe_encode(stderr)
-
-            return {"stdout": output, "stderr": stderr}
-
-        # This code will run a PowerShell script with a NTLM connection
-        if auth == "NTLM":
-            data = util.ntlm(
-                action=self,
-                host_ip=host_ip,
-                powershell_script=powershell_script,
-                username=username,
-                password=password,
-                port=port,
-            )
-            output = data.get("output")
-            stderr = data.get("stderr")
-
-            if output:
-                output = self.safe_encode(output)
-
-            if stderr:
-                stderr = self.safe_encode(stderr)
-
-            return {"stdout": output, "stderr": stderr}
-
-        # This code will run a PowerShell script with a Kerberos account
-        if auth == "Kerberos":
-            data = util.kerberos(
-                action=self,
-                host_ip=host_ip,
-                kdc=kdc,
-                domain=domain,
-                host_name=host_name,
-                powershell_script=powershell_script,
-                password=password,
-                username=username,
-                port=port,
-            )
-            output = data.get("output")
-            stderr = data.get("stderr")
-
-            if output:
-                output = self.safe_encode(output)
-
-            if stderr:
-                stderr = self.safe_encode(stderr)
-
-            return {"stdout": output, "stderr": stderr}
-
-        if auth == "CredSSP":
-            data = util.credssp(
-                action=self,
-                host_ip=host_ip,
-                powershell_script=powershell_script,
-                username=username,
-                password=password,
-                port=port,
-            )
-            output = data.get("output")
-            stderr = data.get("stderr")
-
-            if output:
-                output = self.safe_encode(output)
-
-            if stderr:
-                stderr = self.safe_encode(stderr)
-
-            return {"stdout": output, "stderr": stderr}
-
-    def safe_encode(self, in_byte):
+    @staticmethod
+    def safe_encode(in_byte):
         new_string = str(in_byte)
         return str(new_string.encode("ascii", "ignore"), "utf-8")
