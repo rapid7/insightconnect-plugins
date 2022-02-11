@@ -4,7 +4,8 @@ products: [insightconnect]
 name: zendesk
 title: Zendesk
 description: Regulate customer communications by managing tickets and users in Zendesk data
-version: 3.0.0
+version: 4.0.0
+supported_versions: ["2022-01-28"]
 vendor: rapid7
 support: community
 status: []
@@ -57,12 +58,12 @@ types:
     group_id:
       title: Group ID
       description: Group ID
-      type: string
+      type: integer
       required: false
     id:
       title: ID
       description: ID
-      type: string
+      type: integer
       required: false
     name: 
       title: Name
@@ -108,12 +109,12 @@ types:
     assignee_id:
       title: Assignee ID
       description: Assignee ID
-      type: string
+      type: integer
       required: false
     collaborator_ids:
       title: Collaborator IDs
       description: Collaborator IDs
-      type: '[]string'
+      type: '[]integer'
       required: false
     comment:
       title: Comment
@@ -138,7 +139,7 @@ types:
     group_id:
       title: Group ID
       description: Group ID
-      type: string
+      type: integer
       required: false
     id:
       title: ID
@@ -148,7 +149,7 @@ types:
     requester_id:
       title: Requester ID
       description: Requester ID
-      type: string
+      type: integer
       required: false
     recipient:
       title: Recipient ID
@@ -158,7 +159,7 @@ types:
     problem_id:
       title: Problem ID
       description: Problem ID
-      type: string
+      type: integer
       required: false
     subject:
       title: Subject
@@ -209,7 +210,7 @@ types:
     custom_role_id: 
       title: Custom Role ID
       description: Custom role ID
-      type: string
+      type: integer
       required: false
     details:
       title: Details
@@ -229,7 +230,7 @@ types:
     id:
       title: ID
       description: ID
-      type: string
+      type: integer
       required: false
     last_login_at:
       title: Last Login At
@@ -269,7 +270,7 @@ types:
     organization_id:
       title: Organization ID
       description: Organization ID
-      type: string
+      type: integer
       required: false
     phone:
       title: Phone
@@ -408,7 +409,7 @@ actions:
     input:
       user_id:
         title: User ID
-        type: string
+        type: integer
         description: ID of user to delete E.g. 361738647591
         example: 361738647591
         required: true
@@ -424,7 +425,7 @@ actions:
     input:
       user_id:
         title: User ID
-        type: string
+        type: integer
         description: ID of user to delete E.g. 361738647591
         example: 361738647591
         required: true
@@ -440,7 +441,7 @@ actions:
     input:
       user_id:
         title: User ID
-        type: string
+        type: integer
         description: ID of user to show E.g. 361738647591
         example: 361738647591
         required: true
@@ -456,7 +457,7 @@ actions:
     input:
       user_id:
         title: User ID
-        type: string
+        type: integer
         description: ID of user to show E.g. 361738647591
         example: 361738647591
         required: true
@@ -472,7 +473,7 @@ actions:
     input:
       membership_id:
         title: Membership ID
-        type: string
+        type: integer
         description: ID of membership to delete E.g. 1401295821555
         example: 1401295821555
         required: true
@@ -488,7 +489,7 @@ actions:
     input:
       ticket_id:
         title: Delete Ticket
-        type: string
+        type: integer
         description: Delete ticket
         example: 10
         required: true
@@ -510,15 +511,15 @@ actions:
         required: false
       assignee_id:
         title: Assignee ID
-        type: string
+        type: integer
         description: Assignee ID
-        example: "361738647591"
+        example: 361738647591
         required: false
       collaborator_ids:
         title: Collaborator IDs
-        type: '[]string'
+        type: '[]integer'
         description: List of collaborator IDs
-        example: ["361738647591", "361738647672"]
+        example: [361738647591, 361738647672]
         required: false
       description:
         title: Description
@@ -530,7 +531,7 @@ actions:
         title: Due At
         type: date
         description: Time ticket is due
-        example: 2021-04-10T12:00:00Z
+        example: 2021-04-10 12:00:00
         required: false
       external_id:
         title: External ID
@@ -540,25 +541,25 @@ actions:
         required: false
       group_id:
         title: Group ID
-        type: string
+        type: integer
         description: Group ID
         example: 1400012453812
         required: false
       requester_id:
         title: Requester ID
-        type: string
+        type: integer
         description: ID of user requesting support
         example: 361738647672
         required: false
       recipient:
         title: Recipient ID
         type: string
-        description: ID of user recipient
+        description: The original recipient e-mail address of the ticket
         example: 352083642834
         required: false
       problem_id:
         title: Problem ID
-        type: string
+        type: integer
         description: For tickets of type 'incident', the numeric ID of the problem the incident is linked to
         example: 25
         required: false
@@ -615,7 +616,7 @@ actions:
     output:
       ticket:
         title: Ticket
-        type: object
+        type: ticket
         description: Ticket meta data
         required: false
   update_ticket:
@@ -632,31 +633,31 @@ actions:
         title: Comment
         description: Comment
         type: comment
-        example: '{"author_id": "361738647591","body": "Test comment","html_body": "<u>Test Underlined comment</u>","public": true}'
+        example: '{"author_id": 361738647591,"body": "Test comment","html_body": "<u>Test Underlined comment</u>","public": true}'
         required: false
       requester_id:
         title: Requester ID
-        type: string
+        type: integer
         description: ID of user requesting support
         example: 361738647672
-        required: true
+        required: false
       assignee_id:
         title: Assignee ID
-        type: string
+        type: integer
         description: Assignee ID
         example: 361738647591
         required: false
       collaborator_ids:
         title: Collaborator IDs
-        type: '[]string'
+        type: '[]integer'
         description: List of collaborator IDs
-        example: ["361738647591", "361738647672"]
+        example: [361738647591, 361738647672]
         required: false
       due_at:
         title: Due At
         type: date
         description: Time ticket is due
-        example: 2021-04-10T12:00:00Z
+        example: 2021-04-10 12:00:00
         required: false
       external_id:
         title: External ID
@@ -666,7 +667,7 @@ actions:
         required: false
       group_id:
         title: Group ID
-        type: string
+        type: integer
         description: Group ID
         example: 1400012453812
         required: false
@@ -678,7 +679,7 @@ actions:
         required: false
       problem_id:
         title: Problem ID
-        type: string
+        type: integer
         description: For tickets of type 'incident', the numeric ID of the problem the incident is linked to
         example: 25
         required: false
