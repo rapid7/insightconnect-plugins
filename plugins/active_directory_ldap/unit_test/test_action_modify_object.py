@@ -1,5 +1,5 @@
 from unittest import TestCase, mock
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_active_directory_ldap.actions.modify_object import ModifyObject
 from komand_active_directory_ldap.actions.modify_object.schema import Input, Output
 from unit_test.common import MockServer
@@ -34,4 +34,7 @@ class TestActionModifyObject(TestCase):
             action.run({Input.DISTINGUISHED_NAME: "CN=empty_search,DC=example,DC=com"})
 
         self.assertEqual("The DN was not found.", context.exception.cause)
-        self.assertEqual("The DN CN=empty_search,DC=example,DC=com was not found", context.exception.assistance)
+        self.assertEqual(
+            "Please check that the specified DN CN=empty_search,DC=example,DC=com is correct and try again.",
+            context.exception.assistance,
+        )
