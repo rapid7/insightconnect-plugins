@@ -9,6 +9,21 @@ STUB_ALERT_ID = "8418d193-2dab-4490-b331-8c02cdd196b7"
 STUB_SCHEDULE_ID = "d875alp4-9b4e-4219-alp3-0c26936d18de"
 STUB_REQUEST_ID = "ec7e1d8e-1c75-442e-a271-731070a7fa4d"
 
+STUB_REQUEST_RESPONSE_NO_ALERT = {
+    "data": {
+        "success": False,
+        "action": "Create",
+        "processedAt": "2017-05-24T14:24:20.844Z",
+        "integrationId": "c9cec2cb-e782-4ebb-bc1d-1b2fa703cf03",
+        "isSuccess": False,
+        "status": "Created alert",
+        "alertId": "",
+        "alias": "",
+    },
+    "took": 0.022,
+    "requestId": "ec7e1d8e-1c75-442e-a271-731070a7fa4d",
+}
+
 
 class MockResponse:
     def __init__(self, filename: str, status_code: int, text: str = "") -> None:
@@ -62,6 +77,10 @@ def mock_request_403(*args, **kwargs) -> MockResponse:
 
 def mock_request_404(*args, **kwargs) -> MockResponse:
     return mock_conditions(args[1], 404)
+
+
+def mock_request_429(*args, **kwargs) -> MockResponse:
+    return mock_conditions(args[1], 429)
 
 
 def mock_request_500(*args, **kwargs) -> MockResponse:

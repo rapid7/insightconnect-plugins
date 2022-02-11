@@ -1,6 +1,5 @@
 {
     "result": "Request will be processed",
     "took": 0.302,
-    "requestId": "ec7e1d8e-1c75-442e-a271-731070a7fa4d",
-    "alertId": "8418d193-2dab-4490-b331-8c02cdd196b7"
+    "requestId": "ec7e1d8e-1c75-442e-a271-731070a7fa4d"
 }
