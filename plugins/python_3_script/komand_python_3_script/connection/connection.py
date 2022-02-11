@@ -1,9 +1,10 @@
-import komand
-from .schema import ConnectionSchema, Input
-
-# Custom imports below
-from subprocess import run, check_output, TimeoutExpired, CalledProcessError  # noqa: B404
 import os
+import komand
+
+from subprocess import run, check_output, TimeoutExpired, CalledProcessError  # noqa: B404
+from komand.exceptions import ConnectionTestException
+
+from .schema import ConnectionSchema, Input
 
 
 class Connection(komand.Connection):
@@ -22,7 +23,7 @@ class Connection(komand.Connection):
         self.logger.info(check)
 
         if "Python 3." not in check:
-            raise Exception("[-] Python 3 is not installed correctly")
+            raise ConnectionTestException(cause="[-] Python 3 is not installed correctly")
 
         if not self.dependencies:
             return {}
@@ -43,7 +44,11 @@ class Connection(komand.Connection):
 
         try:
             run(args=command.split(" "), capture_output=True, timeout=self.timeout, check=True)  # noqa: B603
-        except TimeoutExpired as e:
-            raise Exception("Error: Installing Python dependencies exceeded timeout") from e
+        except TimeoutExpired:
+            raise ConnectionTestException(
+                cause="Error: Installing Python dependencies exceeded timeout", assistance="Consider increasing timeout"
+            )
         except CalledProcessError as e:
-            raise Exception("Error: Non-zero exit code returned. Message: %s" % e.output.decode("UTF8")) from e
+            raise ConnectionTestException(
+                cause=f"Error: Non-zero exit code returned. Message: {e.output.decode('UTF8')}"
+            )
