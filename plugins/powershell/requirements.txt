@@ -1,8 +1,6 @@
 # List third-party dependencies here, separated by newlines. 
 # All dependencies must be version-pinned, eg. requests==1.2.0
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
-
 git+https://github.com/komand/pywinrm.git@v0.3.1dev0#pywinrm
-pykerberos==1.2.1
 requests-kerberos==0.12.0
 requests-credssp==1.1.0
