@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="python_3_script-rapid7-plugin",
-      version="2.0.4",
+      version="3.0.0",
       description="Run a Python 3 script",
       author="rapid7",
       author_email="",

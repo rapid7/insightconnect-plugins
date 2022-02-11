@@ -7,7 +7,8 @@ vendor: rapid7
 support: rapid7
 status: []
 description: Run a Python 3 script
-version: 2.0.4
+version: 3.0.0
+supported_versions: ["Python 3.7.2"]
 enable_cache: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/python_3_script
@@ -20,7 +21,7 @@ tags:
  - utilities
 hub_tags:
   use_cases: [data_utility]
-  keywords: [python, python3, scripting, utilities]
+  keywords: [python, scripting]
   features: []
 
 connection:
@@ -29,12 +30,14 @@ connection:
     description: "List of third-party modules to install for use in the supplied Python script"
     required: false
     type: "[]string"
+    example: ["pandas", "numpy"]
   timeout:
     title: "Timeout"
     description: "Timeout (in seconds) for installing third-party modules"
     required: true
     type: integer
     default: 60
+    example: 120
 
 actions:
   run:
@@ -46,17 +49,33 @@ actions:
           object as params. Returns the dict as output
         type: python
         default: def run(params={}):\n    return {}
-        required: false
+        required: true
+        example: def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username, password)\n\treturn {}
       input:
         description: Input object to be passed as `params={}` to the `run` function
         type: object
         required: false
+        example: '{"some_input": "example input"}'
+      secret_key:
+        title: Secret Key
+        description: Credential secret key available in script as python variable (`secret_key`)
+        type: credential_secret_key
+        required: false
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+      username_and_password:
+        title: Username and Password
+        description: Username and password available in script as python variables (`username`, `password`)
+        type: credential_username_password
+        required: false
+        example: '{"username": "user", "password": "mypassword"}'
     output:
       result1:
         description: Sample output result1 (delete or edit)
         type: string
         required: false
+        example: example output 1
       result2:
         description: Sample output result2 (delete or edit)
         type: string
         required: false
+        example: example output 2

@@ -1,0 +1,13 @@
+{
+  "username_and_password": {
+    "password": "mypassword",
+    "username": "user"
+  },
+  "function": "def run(params={}):\n\treturn {'some_output': params.get('some_input'), 'user_name': username, 'password': password, 'secret_key': secret_key}",
+  "input": {
+    "some_input": "example_param"
+  },
+  "secret_key": {
+    "secretKey": "1111243354"
+  }
+}
