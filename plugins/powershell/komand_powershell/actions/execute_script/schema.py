@@ -11,6 +11,8 @@ class Input:
     ADDRESS = "address"
     HOST_NAME = "host_name"
     SCRIPT = "script"
+    SECRET_KEY = "secret_key"
+    USERNAME_AND_PASSWORD = "username_and_password"
     
 
 class Output:
@@ -43,11 +45,69 @@ class ExecuteScriptInput(komand.Input):
       "description": "PowerShell script as base64",
       "format": "bytes",
       "order": 1
+    },
+    "secret_key": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "Secret Key",
+      "description": "Credential secret key available in script as PowerShell variable (`$secret_key`)",
+      "order": 4
+    },
+    "username_and_password": {
+      "$ref": "#/definitions/credential_username_password",
+      "title": "Username and Password",
+      "description": "Username and password available in script as PowerShell variables (`$username`, `$password`)",
+      "order": 5
     }
   },
   "required": [
     "script"
-  ]
+  ],
+  "definitions": {
+    "credential_secret_key": {
+      "id": "credential_secret_key",
+      "type": "object",
+      "title": "Credential: Secret Key",
+      "description": "A shared secret key",
+      "properties": {
+        "secretKey": {
+          "type": "string",
+          "title": "Secret Key",
+          "displayType": "password",
+          "description": "The shared secret key",
+          "format": "password"
+        }
+      },
+      "required": [
+        "secretKey"
+      ]
+    },
+    "credential_username_password": {
+      "id": "credential_username_password",
+      "type": "object",
+      "title": "Credential: Username and Password",
+      "description": "A username and password combination",
+      "properties": {
+        "password": {
+          "type": "string",
+          "title": "Password",
+          "displayType": "password",
+          "description": "The password",
+          "format": "password",
+          "order": 2
+        },
+        "username": {
+          "type": "string",
+          "title": "Username",
+          "description": "The username to log in with",
+          "order": 1
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
+    }
+  }
 }
     """)
 
