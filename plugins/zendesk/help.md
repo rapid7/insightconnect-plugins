@@ -14,6 +14,10 @@ This plugin utilizes the [Zendesk Python SDK](https://github.com/facetoe/zenpy).
 * A Zendesk API key
 * Information about your Zendesk instance
 
+# Supported Product Versions
+
+* 2022-01-28
+
 # Documentation
 
 ## Setup
@@ -97,11 +101,11 @@ Example output:
       "organization_id": 360002530352,
       "phone": null,
       "photo": {
-        "url": "https://komand.zendesk.com/api/v2/attachments/360004125291.json",
+        "url": "https://organization.zendesk.com/api/v2/attachments/360004125291.json",
         "id": 360004125291,
         "file_name": "profile_image_360385011372_2206139.png",
-        "content_url": "https://komand.zendesk.com/system/photos/3600/0412/5291/profile_image_360385011372_2206139.png",
-        "mapped_content_url": "https://komand.zendesk.com/system/photos/3600/0412/5291/profile_image_360385011372_2206139.png",
+        "content_url": "https://organization.zendesk.com/system/photos/3600/0412/5291/profile_image_360385011372_2206139.png",
+        "mapped_content_url": "https://organization.zendesk.com/system/photos/3600/0412/5291/profile_image_360385011372_2206139.png",
         "content_type": "image/png",
         "size": 1141,
         "width": 80,
@@ -109,11 +113,11 @@ Example output:
         "inline": false,
         "thumbnails": [
           {
-            "url": "https://komand.zendesk.com/api/v2/attachments/360004125311.json",
+            "url": "https://organization.zendesk.com/api/v2/attachments/360004125311.json",
             "id": 360004125311,
             "file_name": "profile_image_360385011372_2206139_thumb.png",
-            "content_url": "https://komand.zendesk.com/system/photos/3600/0412/5291/profile_image_360385011372_2206139_thumb.png",
-            "mapped_content_url": "https://komand.zendesk.com/system/photos/3600/0412/5291/profile_image_360385011372_2206139_thumb.png",
+            "content_url": "https://organization.zendesk.com/system/photos/3600/0412/5291/profile_image_360385011372_2206139_thumb.png",
+            "mapped_content_url": "https://organization.zendesk.com/system/photos/3600/0412/5291/profile_image_360385011372_2206139_thumb.png",
             "content_type": "image/png",
             "size": 601,
             "width": 32,
@@ -133,7 +137,7 @@ Example output:
       "time_zone": "Bogota",
       "two_factor_auth_enabled": null,
       "updated_at": "2018-05-25T12:27:20Z",
-      "url": "https://komand.zendesk.com/api/v2/users/360385011372.json",
+      "url": "https://organization.zendesk.com/api/v2/users/360385011372.json",
       "verified": true
     }
   ]
@@ -149,7 +153,7 @@ This action is used to delete a ticket.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|ticket_id|string|None|True|Delete ticket|None|10|
+|ticket_id|integer|None|True|Delete ticket|None|10|
 
 Example input:
 
@@ -181,13 +185,13 @@ This action is used to delete an organization membership.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|membership_id|string|None|True|ID of membership to delete E.g. 1401295821555|None|1401295821555|
+|membership_id|integer|None|True|ID of membership to delete E.g. 1401295821555|None|1401295821555|
 
 Example input:
 
 ```
 {
-  "membership_id": "1401295821555"
+  "membership_id": 1401295821555
 }
 ```
 
@@ -213,13 +217,13 @@ This action is used to retrieve user information.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|user_id|string|None|True|ID of user to show E.g. 361738647591|None|361738647591|
+|user_id|integer|None|True|ID of user to show E.g. 361738647591|None|361738647591|
 
 Example input:
 
 ```
 {
-  "user_id": "361738647591"
+  "user_id": 361738647591
 }
 ```
 
@@ -276,13 +280,13 @@ This action is used to suspend a user.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|user_id|string|None|True|ID of user to delete E.g. 361738647591|None|361738647591|
+|user_id|integer|None|True|ID of user to delete E.g. 361738647591|None|361738647591|
 
 Example input:
 
 ```
 {
-  "user_id": "361738647591"
+  "user_id": 361738647591
 }
 ```
 
@@ -308,13 +312,13 @@ This action is used to delete a user.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|user_id|string|None|True|ID of user to delete E.g. 361738647591|None|361738647591|
+|user_id|integer|None|True|ID of user to delete E.g. 361738647591|None|361738647591|
 
 Example input:
 
 ```
 {
-  "user_id": "361738647591"
+  "user_id": 361738647591
 }
 ```
 
@@ -340,17 +344,17 @@ This action is used to create a ticket.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|assignee_id|string|None|False|Assignee ID|None|361738647591|
+|assignee_id|integer|None|False|Assignee ID|None|361738647591|
 |attachment|file|None|False|Optional file attachment|None|{"content": "Sample Content", "filename": "sample_file.txt"}|
-|collaborator_ids|[]string|None|False|List of collaborator IDs|None|["361738647591", "361738647672"]|
+|collaborator_ids|[]integer|None|False|List of collaborator IDs|None|[361738647591, 361738647672]|
 |description|string|None|True|Ticket description|None|Example description|
 |due_at|date|None|False|Time ticket is due|None|2021-04-10 12:00:00|
 |external_id|string|None|False|Support ticket ID|None|10|
-|group_id|string|None|False|Group ID|None|1400012453812|
+|group_id|integer|None|False|Group ID|None|1400012453812|
 |priority|string|None|False|Ticket priority|['Urgent', 'High', 'Normal', 'Low', '']|High|
-|problem_id|string|None|False|For tickets of type 'incident', the numeric ID of the problem the incident is linked to|None|25|
-|recipient|string|None|False|ID of user recipient|None|352083642834|
-|requester_id|string|None|False|ID of user requesting support|None|361738647672|
+|problem_id|integer|None|False|For tickets of type 'incident', the numeric ID of the problem the incident is linked to|None|25|
+|recipient|string|None|False|The original recipient e-mail address of the ticket|None|352083642834|
+|requester_id|integer|None|False|ID of user requesting support|None|361738647672|
 |status|string|None|False|Ticket status|['New', 'Open', 'Pending', 'Hold', 'Solved', 'Closed', '']|Open|
 |subject|string|None|True|Subject of ticket|None|New Subject|
 |tags|[]string|None|False|Tags describing ticket|None|["tag", "example", "ticket"]|
@@ -360,23 +364,23 @@ Example input:
 
 ```
 {
-  "assignee_id": "361738647591",
+  "assignee_id": 361738647591,
   "attachment": {
     "content": "Sample Content",
     "filename": "sample_file.txt"
   },
   "collaborator_ids": [
-    "361738647591",
-    "361738647672"
+    361738647591,
+    361738647672
   ],
   "description": "Example description",
-  "due_at": "2021-04-10T12:00:00Z",
-  "external_id": "10",
-  "group_id": "1400012453812",
+  "due_at": "2021-04-10 12:00:00",
+  "external_id": 10,
+  "group_id": 1400012453812,
   "priority": "High",
-  "problem_id": "25",
-  "recipient": "352083642834",
-  "requester_id": "361738647672",
+  "problem_id": 25,
+  "recipient": 352083642834,
+  "requester_id": 361738647672,
   "status": "Open",
   "subject": "New Subject",
   "tags": [
@@ -392,7 +396,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|ticket|object|False|Ticket meta data|
+|ticket|ticket|False|Ticket meta data|
 
 Example output:
 
@@ -441,16 +445,16 @@ This action is used to update ticket.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|assignee_id|string|None|False|Assignee ID|None|361738647591|
-|collaborator_ids|[]string|None|False|List of collaborator IDs|None|["361738647591", "361738647672"]|
-|comment|comment|None|False|Comment|None|{"author_id": "361738647591","body": "Test comment","html_body": "<u>Test Underlined comment</u>","public": true}|
+|assignee_id|integer|None|False|Assignee ID|None|361738647591|
+|collaborator_ids|[]integer|None|False|List of collaborator IDs|None|[361738647591, 361738647672]|
+|comment|comment|None|False|Comment|None|{"author_id": 361738647591,"body": "Test comment","html_body": "<u>Test Underlined comment</u>","public": true}|
 |due_at|date|None|False|Time ticket is due|None|2021-04-10 12:00:00|
 |external_id|string|None|False|Support ticket ID|None|10|
-|group_id|string|None|False|Group ID|None|1400012453812|
+|group_id|integer|None|False|Group ID|None|1400012453812|
 |priority|string|None|False|Ticket priority|['Urgent', 'High', 'Normal', 'Low', '']|High|
-|problem_id|string|None|False|For tickets of type 'incident', the numeric ID of the problem the incident is linked to|None|25|
+|problem_id|integer|None|False|For tickets of type 'incident', the numeric ID of the problem the incident is linked to|None|25|
 |recipient|string|None|False|ID of user recipient|None|352083642834|
-|requester_id|string|None|True|ID of user requesting support|None|361738647672|
+|requester_id|integer|None|False|ID of user requesting support|None|361738647672|
 |status|string|None|False|Ticket status|['New', 'Open', 'Pending', 'Hold', 'Solved', 'Closed', '']|Open|
 |subject|string|None|False|Subject of ticket|None|New Subject|
 |tags|[]string|None|False|Tags describing ticket|None|["tag", "example", "ticket"]|
@@ -461,10 +465,10 @@ Example input:
 
 ```
 {
-  "assignee_id": "361738647591",
+  "assignee_id": 361738647591,
   "collaborator_ids": [
-    "361738647591",
-    "361738647672"
+    361738647591,
+    361738647672
   ],
   "comment": {
     "author_id": "361738647591",
@@ -473,12 +477,12 @@ Example input:
     "public": true
   },
   "due_at": "2021-04-10T12:00:00Z",
-  "external_id": "10",
-  "group_id": "1400012453812",
+  "external_id": 10,
+  "group_id": 1400012453812,
   "priority": "High",
-  "problem_id": "25",
-  "recipient": "352083642834",
-  "requester_id": "361738647672",
+  "problem_id": 25,
+  "recipient": 352083642834,
+  "requester_id": 361738647672,
   "status": "Open",
   "subject": "New Subject",
   "tags": [
@@ -550,13 +554,13 @@ This action is used to show all organization memberships.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|user_id|string|None|True|ID of user to show E.g. 361738647591|None|361738647591|
+|user_id|integer|None|True|ID of user to show E.g. 361738647591|None|361738647591|
 
 Example input:
 
 ```
 {
-  "user_id": "361738647591"
+  "user_id": 361738647591
 }
 ```
 
@@ -680,6 +684,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.0.0 - Change ID parameter types into integer | Update dependency version
 * 3.0.0 - Add custom output types in Search action | Add conversion of IDs to string in Search action to allow reuse search data in other actions | Add action input and output examples to the documentation
 * 2.0.1 - Change custom output type `group_id` from integer to string | Change `group_id` input type from integer to string in Create Ticket action
 * 2.0.0 - Remove unwanted input fields, add comment field in action Update Ticket | Fix enum fields issue with Create Ticket action
