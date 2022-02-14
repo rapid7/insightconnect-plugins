@@ -18,14 +18,20 @@ def extract(provided_regex: str, provided_string: str, provided_file: str) -> li
         mixedmatches = regex.findall(provided_regex, provided_string)  # regex finds both encoded and unencoded urls
         for match in mixedmatches:
             decoded = urllib.parse.unquote(match)
-            matches.append(match) if decoded != match else matches.append(decoded)
+            if decoded != match:
+                matches.append(match)
+            else:
+                matches.append(decoded)
     elif provided_file:
         try:
             provided_file = base64.b64decode(provided_file.encode("utf-8")).decode("utf-8")
             mixedmatches = regex.findall(provided_regex, provided_file)
             for match in mixedmatches:
                 decoded = urllib.parse.unquote(match)
-                matches.append(match) if decoded != match else matches.append(decoded)
+                if decoded != match:
+                    matches.append(match)
+                else:
+                    matches.append(decoded)
         except UnicodeDecodeError:
             file_content = extract_content_from_file(base64.b64decode(provided_file))
             matches = regex.findall(provided_regex, file_content)
