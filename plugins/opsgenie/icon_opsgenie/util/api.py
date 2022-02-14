@@ -12,6 +12,8 @@ GET_REQUEST_ID_RETRY_MESSAGE = (
     "Request is still being processed. Retrying in {delay} seconds ({attemps_counter}/{max_tries})"
 )
 
+MAX_REQUEST_TRIES = 10
+
 
 class ApiClient:
     def __init__(self, api_key: str, logger: Type[Logger] = None) -> None:
@@ -24,7 +26,7 @@ class ApiClient:
         CREATE_ALERT_URL = f"{self.api_url}alerts/"
         self.validator.validate(data)
         create_alert_reponse = self._call_api("POST", CREATE_ALERT_URL, json_data=data)
-        request_alert_id = self._retry_request(create_alert_reponse.get("requestId"), 10)
+        request_alert_id = self._retry_request(create_alert_reponse.get("requestId"), MAX_REQUEST_TRIES)
         return {**create_alert_reponse, "alertId": request_alert_id}
 
     def get_alert(self, identifier: str, id_type: str = "ID") -> dict:
@@ -75,7 +77,7 @@ class ApiClient:
 
         return _decorate
 
-    @_rate_limiting(max_tries=10)
+    @_rate_limiting(max_tries=MAX_REQUEST_TRIES)
     def _call_api(self, method: str, url: str, json_data: dict = None, params: dict = None) -> dict:
         headers = {"Authorization": f"GenieKey {self.api_key}"}
         try:
@@ -99,7 +101,7 @@ class ApiClient:
     def _retry_request(self, request_id: str, max_tries: int) -> str:
         request_response = self._get_request_status(request_id)
         attemps_counter, delay = 0, 0
-        while not request_response.get("data").get("isSuccess") and attemps_counter < max_tries:
+        while not request_response.get("data").get("alertId", "") and attemps_counter < max_tries:
             time.sleep(delay)
             request_response = self._get_request_status(request_id)
             attemps_counter += 1
