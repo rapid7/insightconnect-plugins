@@ -1,49 +1,51 @@
-import komand
-from .schema import CheckForSquattersInput, CheckForSquattersOutput
+import insightconnect_plugin_runtime
+from .schema import CheckForSquattersInput, CheckForSquattersOutput, Input, Output, Component
 
 # Custom imports below
-import json
-import subprocess  # noqa: B404
-import shutil
-import tempfile
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_typo_squatter.util import utils
+import subprocess  # nosec B404
+import validators
+import json
 
 
-class CheckForSquatters(komand.Action):
+class CheckForSquatters(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="check_for_squatters",
-            description="Look for potential typo squatters",
+            description=Component.DESCRIPTION,
             input=CheckForSquattersInput(),
             output=CheckForSquattersOutput(),
         )
 
     def run(self, params={}):
-        domain = params.get("domain")
-        flag = (
-            ""
-            if not params.get("flag")
-            else (params.get("flag") if params.get("flag")[0:2] == "--" else "--" + params.get("flag"))
-        )
-        path = tempfile.mkdtemp() + "/"
-        fname = "results.json"
-        cmd = (
-            "./dnstwist/dnstwist.py --json %s %s > %s" % (flag, domain, path + fname)
-            if flag
-            else "./dnstwist/dnstwist.py --json  %s > %s" % (domain, path + fname)
-        )
-        self.logger.info("Running command: %s" % cmd)
-        subprocess.call(cmd, shell=True)  # noqa: B602
+        return {
+            Output.POTENTIAL_SQUATTERS: self.check_for_squatters(params.get(Input.DOMAIN), params.get(Input.FLAG, ""))
+        }
 
-        j = ""
-        with open(path + fname, "r") as f:
-            j = f.read()
-        js = json.loads(j)
+    def check_for_squatters(self, domain: str, flag: str) -> list:
+        if not validators.domain(domain):
+            raise PluginException(
+                cause="Invalid domain provided.", assistance="Please provide a valid domain and try again."
+            )
+        cmd = f"dnstwist {flag} -f json {domain}" if flag else f"dnstwist -f json {domain}"
+        self.logger.info(f"Running command: {cmd}")
+        results = subprocess.run(  # nosec B603
+            cmd.split(" "), stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True
+        )
+        error = results.stderr.decode()
+        if error:
+            if "unrecognized arguments" in error:
+                raise PluginException(
+                    cause="Invalid flag provided.", assistance="Please provide a valid flag and try again.", data=error
+                )
+            raise PluginException(
+                cause=f"An error occurred while executing the command: {cmd}.",
+                assistance="Please try again and contact support if the problem persists.",
+                data=error,
+            )
+        js = json.loads(results.stdout.decode().replace("\\n", ""))
         for i, item in enumerate(js):
-            js[i]["phishing_score"] = utils.score_domain(js[i]["domain-name"])
-        shutil.rmtree(path)
-        return {"potential_squatters": js}
+            js[i]["phishing_score"] = utils.score_domain(item.get("domain-name"))
 
-    def test(self, params={}):
-
-        return {"potential_squatters": []}
+        return js

@@ -1,4 +1,4 @@
-FROM komand/python-2-plugin
+FROM rapid7/insightconnect-python-3-38-plugin:4
 # The three supported python parent images are:
 # - komand/python-2-plugin
 # - komand/python-3-plugin
@@ -9,8 +9,7 @@ FROM komand/python-2-plugin
 # Add any custom package dependencies here
 # NOTE: Add pip packages to requirements.txt
 RUN apt-get update
-RUN apt-get install -y python-dnspython python-geoip python-whois python-requests python-ssdeep python-cffi git
-RUN git clone https://github.com/elceef/dnstwist
+RUN apt-get install -y libgeoip-dev libfuzzy-dev python3-dnspython python3-geoip python3-whois python3-requests python3-ssdeep python3-cffi gcc
 
 # End package dependencies
 
@@ -24,5 +23,7 @@ RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
 # Install plugin
 RUN python setup.py build && python setup.py install
+
+USER nobody
 
 ENTRYPOINT ["/usr/local/bin/komand_typo_squatter"]
