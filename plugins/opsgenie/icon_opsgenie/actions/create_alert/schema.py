@@ -24,6 +24,7 @@ class Input:
     
 
 class Output:
+    ALERTID = "alertId"
     ELAPSED_TIME = "elapsed_time"
     REQUESTID = "requestId"
     RESULT = "result"
@@ -151,6 +152,12 @@ class CreateAlertOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "alertId": {
+      "type": "string",
+      "title": "Alert ID",
+      "description": "ID of an created alert",
+      "order": 4
+    },
     "elapsed_time": {
       "type": "number",
       "title": "Elapsed Time",
@@ -171,6 +178,7 @@ class CreateAlertOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
+    "alertId",
     "elapsed_time",
     "requestId",
     "result"

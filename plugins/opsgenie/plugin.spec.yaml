@@ -4,10 +4,10 @@ products: [insightconnect]
 name: opsgenie
 title: Opsgenie
 description: Notify the right people, reduce response time, and avoid alert fatigue with Opsgenie
-version: 1.0.0
+version: 1.1.0
 vendor: rapid7
 support: rapid7
-supported_versions: ["2022-01-11"]
+supported_versions: ["2022-02-11"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/opsgenie
@@ -135,6 +135,11 @@ actions:
       requestId:
         title: Request ID
         description: ID of a executed API request
+        type: string
+        required: true
+      alertId:
+        title: Alert ID
+        description: ID of an created alert
         type: string
         required: true
   get_alert:
