@@ -1,14 +1,21 @@
 import re
-import tqdm
-import entropy
+import math
 from tld import get_tld
 from Levenshtein import distance
-from termcolor import colored, cprint
-
 from .suspicious import keywords, tlds
 
 
-def score_domain(domain):
+def entropy(string: str) -> float:
+    """
+    Calculates the Shannon entropy of a string
+    Original code: https://github.com/x0rz/phishing_catcher/blob/master/catch_phishing.py
+    """
+    prob = [float(string.count(c)) / len(string) for c in dict.fromkeys(list(string))]
+    ent = -sum([p * math.log(p) / math.log(2.0) for p in prob])
+    return ent
+
+
+def score_domain(domain: str) -> int:
     """Score `domain`.
     The highest score, the most probable `domain` is a phishing site.
     Args:
@@ -43,12 +50,12 @@ def score_domain(domain):
             score += 10
 
     # Testing keywords
-    for word in keywords.keys():
-        if word in domain:
-            score += keywords[word]
+    for word in keywords.items():
+        if word[0] in domain:
+            score += word[1]
 
-    # Higer entropy is kind of suspicious
-    score += int(round(entropy.shannon_entropy(domain) * 50))
+    # Higher entropy is kind of suspicious
+    score += int(round(entropy(domain) * 10))
 
     # Testing Levenshtein distance for strong keywords (>= 70 points) (ie. paypol)
     for key in [k for (k, s) in keywords.items() if s >= 70]:
