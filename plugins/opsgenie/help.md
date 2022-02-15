@@ -144,7 +144,7 @@ Example output:
   "result": "Request will be processed",
   "took": 0.302,
   "requestId": "43a29c5c-3dbf-4fa4-9c26-f4f71023e120",
-  "alertId": "43a29c5c-3dbf-4fa4-9c26-f4f71023e120",
+  "alertId": "8418d193-2dab-4490-b331-8c02cdd196b7",
 }
 ```
 
@@ -355,7 +355,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.1.0 - Added alertId field to the output of Create Alert action
+* 1.1.0 - Added Alert ID field to the Create Alert action output
 * 1.0.0 - Initial plugin (Actions: Create Alert, Close Alert, Get Alert, Get On-Calls)
 
 # Links

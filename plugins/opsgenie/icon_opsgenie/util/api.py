@@ -1,22 +1,22 @@
 from logging import Logger
 import time
-from typing import Callable, Type
+from typing import Callable, Optional
 import requests
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from .validators import InputDataValidator
 
-RETRY_MESSAGE = "Rate limiting error occurred. Retrying in {delay} seconds ({attemps_counter}/{max_tries})"
+RETRY_MESSAGE = "Rate limiting error occurred. Retrying in {delay:.1f} seconds ({attempts_counter}/{max_tries})"
 GET_REQUEST_ID_RETRY_MESSAGE = (
-    "Request is still being processed. Retrying in {delay} seconds ({attemps_counter}/{max_tries})"
+    "Request is still being processed. Retrying in {delay:.1f} seconds ({attempts_counter}/{max_tries})"
 )
 
 MAX_REQUEST_TRIES = 10
 
 
 class ApiClient:
-    def __init__(self, api_key: str, logger: Type[Logger] = None) -> None:
+    def __init__(self, api_key: str, logger: Optional[Logger] = None) -> None:
         self.api_url = "https://api.opsgenie.com/v2/"
         self.api_key = api_key
         self.logger = logger
@@ -56,19 +56,21 @@ class ApiClient:
         def _decorate(func: Callable):
             def _wrapper(self, *args, **kwargs):
                 retry = True
-                attemps_counter, delay = 0, 0
-                while retry and attemps_counter < max_tries:
-                    if attemps_counter:
+                attempts_counter, delay = 0, 0
+                while retry and attempts_counter < max_tries:
+                    if attempts_counter:
                         time.sleep(delay)
                     try:
                         retry = False
                         return func(self, *args, **kwargs)
                     except PluginException as e:
-                        attemps_counter += 1
-                        delay = 1 * attemps_counter
+                        attempts_counter += 1
+                        delay = 2 ** (attempts_counter * 0.6)
                         if e.cause == PluginException.causes[PluginException.Preset.RATE_LIMIT]:
                             self.logger.info(
-                                RETRY_MESSAGE.format(delay=delay, attemps_counter=attemps_counter, max_tries=max_tries)
+                                RETRY_MESSAGE.format(
+                                    delay=delay, attempts_counter=attempts_counter, max_tries=max_tries
+                                )
                             )
                             retry = True
                 return func(self, *args, **kwargs)
@@ -100,14 +102,14 @@ class ApiClient:
 
     def _retry_request(self, request_id: str, max_tries: int) -> str:
         request_response = self._get_request_status(request_id)
-        attemps_counter, delay = 0, 0
-        while not request_response.get("data").get("alertId", "") and attemps_counter < max_tries:
+        attempts_counter, delay = 0, 0
+        while not request_response.get("data").get("alertId", "") and attempts_counter < max_tries:
             time.sleep(delay)
             request_response = self._get_request_status(request_id)
-            attemps_counter += 1
-            delay = 1 * attemps_counter
+            attempts_counter += 1
+            delay = 2 ** (attempts_counter * 0.6)
             self.logger.info(
-                GET_REQUEST_ID_RETRY_MESSAGE.format(delay=delay, attemps_counter=attemps_counter, max_tries=max_tries)
+                GET_REQUEST_ID_RETRY_MESSAGE.format(delay=delay, attempts_counter=attempts_counter, max_tries=max_tries)
             )
         alert_id = request_response.get("data").get("alertId")
         if alert_id:
