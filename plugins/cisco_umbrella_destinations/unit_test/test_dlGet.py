@@ -21,6 +21,7 @@ from unit_test.mock import (
     mock_request_404,
     STUB_DESTINATION_LIST_ID,
     mocked_request,
+    STUB_RESPONSE
 )
 
 
@@ -34,30 +35,12 @@ class TestDlGet(TestCase):
         self.action.connection = self.connection
         self.action.logger = logging.getLogger("Action logger")
 
-        self.params = {"destination_list_id": STUB_DESTINATION_LIST_ID}
+        self.params = {Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID}
 
     @mock.patch("requests.request", side_effect=mock_request_200)
     def test_destination_list_get_success(self, mock_get):
-        response = self.action.run({Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID})
-        expected_response = {
-            "success": {
-                "status": {"code": 200, "text": "OK"},
-                "data": {
-                    "id": 15755711,
-                    "organizationId": 2372338,
-                    "access": "allow",
-                    "isGlobal": False,
-                    "name": "CreateListTest",
-                    "thirdpartyCategoryId": None,
-                    "createdAt": "2022-01-28T16:03:36+0000",
-                    "modifiedAt": "2022-02-04T14:59:22+0000",
-                    "isMspDefault": False,
-                    "markedForDeletion": False,
-                    "bundleTypeId": 1,
-                    "meta": {"destinationCount": 3},
-                },
-            }
-        }
+        response = self.action.run(self.params)
+        expected_response = STUB_RESPONSE
         self.assertEqual(response, expected_response)
 
     @parameterized.expand(
@@ -72,5 +55,5 @@ class TestDlGet(TestCase):
         mocked_request(mock_request)
 
         with self.assertRaises(PluginException) as context:
-            self.action.run({Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID})
+            self.action.run(self.params)
         self.assertEqual(context.exception.cause, PluginException.causes[exception])

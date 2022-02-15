@@ -34,9 +34,11 @@ class TestDGet(TestCase):
         self.action.connection = self.connection
         self.action.logger = logging.getLogger("Action logger")
 
+        self.params = {Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID}
+
     @mock.patch("requests.request", side_effect=mock_request_200)
     def test_destination_get_success(self, mock_get):
-        response = self.action.run({Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID})
+        response = self.action.run(self.params)
         expected_response = {
             "success": {
                 "status": {"code": 200, "text": "OK"},
@@ -80,5 +82,5 @@ class TestDGet(TestCase):
         mocked_request(mock_request)
 
         with self.assertRaises(PluginException) as context:
-            self.action.run({Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID})
+            self.action.run(self.params)
         self.assertEqual(context.exception.cause, PluginException.causes[exception])

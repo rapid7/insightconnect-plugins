@@ -34,17 +34,11 @@ class TestDlCreate(TestCase):
         self.action.connection = self.connection
         self.action.logger = logging.getLogger("Action logger")
 
-        self.data = {
-            "access": "allow",
-            "isGlobal": False,
-            "name": "DELETEME2",
-        }
-
         self.params = {Input.ACCESS: "allow", Input.ISGLOBAL: False, Input.LABEL: "DELETEME2"}
 
     @mock.patch("requests.request", side_effect=mock_request_200)
     def test_successful(self, mock_post):
-        response = self.action.run({Input.ACCESS: "allow", Input.ISGLOBAL: False, Input.LABEL: "DELETEME2"})
+        response = self.action.run(self.params)
         expected_response = {
             "success": {
                 "id": 15786904,

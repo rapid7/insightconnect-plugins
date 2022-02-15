@@ -11,12 +11,12 @@
         "name": "CreateListTest",
         "thirdpartyCategoryId": null,
         "createdAt": "2022-01-28T16:03:36+0000",
-        "modifiedAt": "2022-02-04T14:59:22+0000",
+        "modifiedAt": "2022-02-09T11:47:00+0000",
         "isMspDefault": false,
         "markedForDeletion": false,
         "bundleTypeId": 1,
         "meta": {
-            "destinationCount": 3
+            "destinationCount": 5
         }
     }
 }

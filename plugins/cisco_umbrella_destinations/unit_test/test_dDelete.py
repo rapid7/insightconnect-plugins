@@ -22,6 +22,7 @@ from unit_test.mock import (
     mock_request_404,
     STUB_DESTINATION_LIST_ID,
     mocked_request,
+    STUB_RESPONSE,
 )
 
 
@@ -35,28 +36,12 @@ class TestDDelete(TestCase):
         self.action.connection = self.connection
         self.action.logger = logging.getLogger("Action logger")
 
+        self.params = {Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID, Input.PAYLOAD: "1234 5678"}
+
     @mock.patch("requests.request", side_effect=mock_request_200)
     def test_successful(self, mock_delete):
-        response = self.action.run({Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID, Input.PAYLOAD: "1234 5678"})
-        expected_response = {
-            "success": {
-                "status": {"code": 200, "text": "OK"},
-                "data": {
-                    "id": 15755711,
-                    "organizationId": 2372338,
-                    "access": "allow",
-                    "isGlobal": False,
-                    "name": "CreateListTest",
-                    "thirdpartyCategoryId": None,
-                    "createdAt": "2022-01-28T16:03:36+0000",
-                    "modifiedAt": "2022-02-09T11:47:00+0000",
-                    "isMspDefault": False,
-                    "markedForDeletion": False,
-                    "bundleTypeId": 1,
-                    "meta": {"destinationCount": 5},
-                },
-            }
-        }
+        response = self.action.run(self.params)
+        expected_response = STUB_RESPONSE
         self.assertEqual(response, expected_response)
 
     @parameterized.expand(
@@ -71,8 +56,5 @@ class TestDDelete(TestCase):
         mocked_request(mock_request)
 
         with self.assertRaises(PluginException) as context:
-            self.action.run({Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID, Input.PAYLOAD: "1234 5678"})
+            self.action.run(self.params)
         self.assertEqual(context.exception.cause, PluginException.causes[exception])
-
-
-#     Do I write a test for when there is no payload?

@@ -21,6 +21,7 @@ from unit_test.mock import (
     mock_request_404,
     STUB_DESTINATION_LIST_ID,
     mocked_request,
+    STUB_RESPONSE,
 )
 
 
@@ -34,36 +35,27 @@ class TestDAdd(TestCase):
         self.action.connection = self.connection
         self.action.logger = logging.getLogger("Action logger")
 
-        self.params = {Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID}
+        self.params = {
+            Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID,
+            Input.DESTINATION: "dummyDestination",
+            Input.COMMENT: "dummyComment",
+        }
+
+        self.params_no_comment = {
+            Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID,
+            Input.DESTINATION: "dummyDestination",
+        }
 
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_if_successful(self, mock_post):
-        response = self.action.run(
-            {
-                Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID,
-                Input.DESTINATION: "dummyDestination",
-                Input.COMMENT: "dummyComment",
-            }
-        )
-        expected_response = {
-            "success": {
-                "status": {"code": 200, "text": "OK"},
-                "data": {
-                    "id": 15755711,
-                    "organizationId": 2372338,
-                    "access": "allow",
-                    "isGlobal": False,
-                    "name": "CreateListTest",
-                    "thirdpartyCategoryId": None,
-                    "createdAt": "2022-01-28T16:03:36+0000",
-                    "modifiedAt": "2022-02-09T11:47:00+0000",
-                    "isMspDefault": False,
-                    "markedForDeletion": False,
-                    "bundleTypeId": 1,
-                    "meta": {"destinationCount": 5},
-                },
-            }
-        }
+    def test_if_ok(self, mock_post):
+        response = self.action.run(self.params)
+        expected_response = STUB_DADD_RESPONSE
+        self.assertEqual(response, expected_response)
+
+    @mock.patch("requests.request", side_effect=mock_request_200)
+    def test_if_comment_is_none(self, mock_post):
+        response = self.action.run(self.params_no_comment)
+        expected_response = STUB_DADD_RESPONSE
         self.assertEqual(response, expected_response)
 
     @parameterized.expand(

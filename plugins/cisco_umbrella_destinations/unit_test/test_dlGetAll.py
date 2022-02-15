@@ -18,7 +18,6 @@ from unit_test.mock import (
     mock_request_500,
     mock_request_400,
     mock_request_404,
-    STUB_DESTINATION_LIST_ID,
     mocked_request,
 )
 
