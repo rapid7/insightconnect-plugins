@@ -5,7 +5,7 @@ from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
 import logging
-from unittest import TestCase
+from unittest import TestCase, mock
 
 from icon_opsgenie.actions.create_alert import CreateAlert
 from icon_opsgenie.actions.create_alert.schema import Output
@@ -13,7 +13,17 @@ from icon_opsgenie.connection.connection import Connection
 from icon_opsgenie.connection.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from unit_test.mock import mock_request_202, mock_request_403, mock_request_404, mock_request_500, mocked_request
+from unit_test.mock import (
+    STUB_ALERT_ID,
+    STUB_REQUEST_ID,
+    STUB_REQUEST_RESPONSE_NO_ALERT,
+    mock_request_202,
+    mock_request_403,
+    mock_request_404,
+    mock_request_429,
+    mock_request_500,
+    mocked_request,
+)
 
 
 class TestCreateAlert(TestCase):
@@ -38,16 +48,28 @@ class TestCreateAlert(TestCase):
         response = self.action.run(self.params)
         expected_response = {
             Output.RESULT: "Request will be processed",
-            Output.REQUESTID: "43a29c5c-3dbf-4fa4-9c26-f4f71023e120",
+            Output.REQUESTID: STUB_REQUEST_ID,
             Output.ELAPSED_TIME: 0.302,
+            Output.ALERTID: STUB_ALERT_ID,
         }
 
         self.assertEqual(response, expected_response)
+
+    @mock.patch("icon_opsgenie.util.api.ApiClient._get_request_status", return_value=STUB_REQUEST_RESPONSE_NO_ALERT)
+    def test_create_alert_when_no_alertId(self, mock_get_request):
+        mocked_request(mock_request_202)
+        with self.assertRaises(PluginException) as context:
+            self.action.run(self.params)
+        self.assertEqual(
+            context.exception.cause,
+            PluginException.causes[PluginException.Preset.NOT_FOUND],
+        )
 
     @parameterized.expand(
         [
             (mock_request_403, PluginException.Preset.UNAUTHORIZED),
             (mock_request_404, PluginException.Preset.NOT_FOUND),
+            (mock_request_429, PluginException.Preset.RATE_LIMIT),
             (mock_request_500, PluginException.Preset.UNKNOWN),
         ],
     )
