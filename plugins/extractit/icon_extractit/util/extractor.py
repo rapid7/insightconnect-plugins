@@ -12,26 +12,22 @@ import pdfplumber
 from pdfminer.pdfparser import PDFSyntaxError
 
 
-def extract(provided_regex: str, provided_string: str, provided_file: str) -> list:
+def extract(provided_regex: str, provided_string: str, provided_file: str, keep_original_url=False) -> list:
     matches = []
     if provided_string:
-        mixedmatches = regex.findall(provided_regex, provided_string)  # regex finds both encoded and unencoded urls
-        for match in mixedmatches:
-            decoded = urllib.parse.unquote(match)
-            if decoded != match:
-                matches.append(match)
-            else:
-                matches.append(decoded)
+        if keep_original_url:
+            matches = regex.findall(provided_regex, provided_string)  # regex finds both encoded and unencoded urls
+        else:
+            provided_string = urllib.parse.unquote(provided_string)
+            matches = regex.findall(provided_regex, provided_string)
     elif provided_file:
         try:
-            provided_file = base64.b64decode(provided_file.encode("utf-8")).decode("utf-8")
-            mixedmatches = regex.findall(provided_regex, provided_file)
-            for match in mixedmatches:
-                decoded = urllib.parse.unquote(match)
-                if decoded != match:
-                    matches.append(match)
-                else:
-                    matches.append(decoded)
+            if keep_original_url:
+                provided_file = base64.b64decode(provided_file.encode("utf-8")).decode("utf-8")
+                matches = regex.findall(provided_regex, provided_file)
+            else:
+                provided_file = urllib.parse.unquote(base64.b64decode(provided_file.encode("utf-8")).decode("utf-8"))
+                matches = regex.findall(provided_regex, provided_file)
         except UnicodeDecodeError:
             file_content = extract_content_from_file(base64.b64decode(provided_file))
             matches = regex.findall(provided_regex, file_content)

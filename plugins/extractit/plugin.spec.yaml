@@ -121,6 +121,13 @@ actions:
         type: bytes
         required: false
         example: aHR0cHM6Ly9leGFtcGxlLmNvbSBpcyBhbiBleGFtcGxlIFVSTA==
+      keep_original_urls:
+        title: Keep Original URLs
+        description: Keep original urls encoded if they're encoded
+        type: boolean
+        required: false
+        example: false
+        default: false
     output:
       urls:
         title: URLs
