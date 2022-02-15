@@ -1,0 +1,16 @@
+{
+    "id": 15786904,
+    "organizationId": 2372338,
+    "access": "allow",
+    "isGlobal": false,
+    "name": "DELETEME2",
+    "thirdpartyCategoryId": null,
+    "createdAt": "2022-02-10T11:01:20+0000",
+    "modifiedAt": "2022-02-10T11:01:20+0000",
+    "isMspDefault": false,
+    "markedForDeletion": false,
+    "bundleTypeId": 1,
+    "meta": {
+        "destinationCount": 0
+    }
+}
