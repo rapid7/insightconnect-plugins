@@ -20,6 +20,7 @@ from unit_test.mock import (
     mock_request_404,
     STUB_DESTINATION_LIST_ID,
     mocked_request,
+    STUB_RESPONSE
 )
 
 
@@ -33,30 +34,12 @@ class TestDlPatch(TestCase):
         self.action.connection = self.connection
         self.action.logger = logging.getLogger("Action logger")
 
-        self.params = {Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID, Input.LABEL: "DUMMYNAME"}
+        self.params = {Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID, Input.LABEL: "CreateListTest"}
 
     @mock.patch("requests.request", side_effect=mock_request_200)
     def test_successful(self, mock_patch):
         response = self.action.run(self.params)
-        expected_response = {
-            "success": {
-                "status": {"code": 200, "text": "OK"},
-                "data": {
-                    "id": 15755492,
-                    "organizationId": 2372338,
-                    "access": "allow",
-                    "isGlobal": False,
-                    "name": "DUMMYNAME",
-                    "thirdpartyCategoryId": None,
-                    "createdAt": "2022-01-28T14:11:53+0000",
-                    "modifiedAt": "2022-02-02T14:15:29+0000",
-                    "isMspDefault": False,
-                    "markedForDeletion": False,
-                    "bundleTypeId": 1,
-                    "meta": {"destinationCount": 1},
-                },
-            }
-        }
+        expected_response = STUB_RESPONSE
 
         self.assertEqual(response, expected_response)
 

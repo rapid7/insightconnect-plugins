@@ -14,6 +14,25 @@ STUB_CONNECTION = {
     Input.API_SECRET: {"secretKey": STUB_API_KEY},
     Input.ORGANIZATION_ID: STUB_ORG_ID,
 }
+STUB_RESPONSE = {
+            "success": {
+                "status": {"code": 200, "text": "OK"},
+                "data": {
+                    "id": 15755711,
+                    "organizationId": 2372338,
+                    "access": "allow",
+                    "isGlobal": False,
+                    "name": "CreateListTest",
+                    "thirdpartyCategoryId": None,
+                    "createdAt": "2022-01-28T16:03:36+0000",
+                    "modifiedAt": "2022-02-09T11:47:00+0000",
+                    "isMspDefault": False,
+                    "markedForDeletion": False,
+                    "bundleTypeId": 1,
+                    "meta": {"destinationCount": 5},
+                },
+            }
+        }
 
 
 class MockResponse:

@@ -34,9 +34,13 @@ class TestDlDelete(TestCase):
         self.action.connection = self.connection
         self.action.logger = logging.getLogger("Action logger")
 
+        self.params = {
+            Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID
+        }
+
     @mock.patch("requests.request", side_effect=mock_request_200)
     def test_successful(self, mock_delete):
-        response = self.action.run({Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID})
+        response = self.action.run(self.params)
         expected_response = {"success": []}
 
         self.assertEqual(response, expected_response)
@@ -53,5 +57,5 @@ class TestDlDelete(TestCase):
         mocked_request(mock_request)
 
         with self.assertRaises(PluginException) as context:
-            self.action.run({Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID})
+            self.action.run(self.params)
         self.assertEqual(context.exception.cause, PluginException.causes[exception])
