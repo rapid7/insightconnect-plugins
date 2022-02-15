@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Uninstalls a sensor given a sensor ID"
+    DESCRIPTION = "Uninstalls a single sensor"
 
 
 class Input:
@@ -27,7 +27,10 @@ class UninstallSensorInput(insightconnect_plugin_runtime.Input):
       "description": "The sensor ID",
       "order": 1
     }
-  }
+  },
+  "required": [
+    "id"
+  ]
 }
     """)
 
@@ -44,7 +47,7 @@ class UninstallSensorOutput(insightconnect_plugin_runtime.Output):
     "success": {
       "type": "boolean",
       "title": "Success",
-      "description": "Whether or not the uninstall was successful",
+      "description": "Whether or not the uninstallation was successful",
       "order": 1
     }
   }
