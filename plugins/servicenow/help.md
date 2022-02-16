@@ -90,6 +90,8 @@ Example output:
 
 This action is used to create a new ServiceNow CI record.
 
+For more information about the **query** input, please refer to [InsightConnect ServiceNow Query Syntax documentation](http://docs.rapid7.com/insightconnect/servicenow#query-syntax).
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -527,6 +529,8 @@ Example output:
 
 This action is used to search for Incidents satisfying the given query.
 
+For more information about the **query** input, please refer to [InsightConnect ServiceNow Query Syntax documentation](http://docs.rapid7.com/insightconnect/servicenow#query-syntax).
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -770,6 +774,8 @@ Example output:
 
 This trigger identifies if a new incident has been created.
 
+For more information about the **query** input, please refer to [InsightConnect ServiceNow Query Syntax documentation](http://docs.rapid7.com/insightconnect/servicenow#query-syntax).
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -859,6 +865,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 6.0.1 - Update documentation references | Add links to Query Examples documentation
 * 6.0.0 - Add additional file information in output for Get Attachments for an Incident
 * 5.2.0 - Add new action Get Attachments for an Incident | Add unit test for action Get Attachments for an Incident and Get Incident Attachment
 * 5.1.1 - Fix output parsing bug in Get Incident Attachment action
@@ -887,7 +894,7 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [ServiceNow](https://www.servicenow.com/)
-* [ServiceNow API](https://developer.servicenow.com/app.do#!/rest_api_doc?v=fuji&id=c_TableAPI)
-* [ServiceNow User Administration](http://wiki.servicenow.com/index.php?title=User_Administration)
-* [ServiceNow Operators](http://wiki.servicenow.com/index.php?title=Operators_Available_for_Filters_and_Queries)
+* [ServiceNow API](https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/)
+* [ServiceNow User Administration](https://docs.servicenow.com/bundle/rome-platform-administration/page/administer/roles/concept/c_UserAdministration.html)
+* [ServiceNow Operators](https://docs.servicenow.com/bundle/quebec-platform-user-interface/page/use/common-ui-elements/reference/r_OpAvailableFiltersQueries.html)
 * [ServiceNow Plugin Setup Guide](https://docs.rapid7.com/insightconnect/servicenow)
