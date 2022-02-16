@@ -1,5 +1,5 @@
 {
-	"spec": "c09be870735a7d68d864aeaf1361e8ef",
+	"spec": "65d80b658198c44f43f26dfb5fbfaeb8",
 	"manifest": "dd0c605e4bd6eed943239b5d57affb3e",
 	"setup": "3ea68bd09015aa46040f990c2b17ca03",
 	"schemas": [
@@ -57,7 +57,7 @@
 		},
 		{
 			"identifier": "url_extractor/schema.py",
-			"hash": "5e6d93412e049429f556515e6d6223a9"
+			"hash": "7eecb4decfb77206b13cc0d1393f144b"
 		},
 		{
 			"identifier": "uuid_extractor/schema.py",
