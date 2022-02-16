@@ -154,7 +154,7 @@ class DevoAPI:
         if content:
             try:
                 return json.loads(content)
-            except Exception as e:
+            except Exception:
                 raise PluginException(PluginException.Preset.INVALID_JSON)
         else:
             return {}
