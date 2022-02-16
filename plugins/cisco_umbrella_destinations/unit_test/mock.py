@@ -15,24 +15,25 @@ STUB_CONNECTION = {
     Input.ORGANIZATION_ID: STUB_ORG_ID,
 }
 STUB_RESPONSE = {
-            "success": {
-                "status": {"code": 200, "text": "OK"},
-                "data": {
-                    "id": 15755711,
-                    "organizationId": 2372338,
-                    "access": "allow",
-                    "isGlobal": False,
-                    "name": "CreateListTest",
-                    "thirdpartyCategoryId": None,
-                    "createdAt": "2022-01-28T16:03:36+0000",
-                    "modifiedAt": "2022-02-09T11:47:00+0000",
-                    "isMspDefault": False,
-                    "markedForDeletion": False,
-                    "bundleTypeId": 1,
-                    "meta": {"destinationCount": 5},
-                },
-            }
-        }
+    "success": {
+        "status": {"code": 200, "text": "OK"},
+        "data": {
+            "id": 15755711,
+            "organizationId": 2372338,
+            "access": "allow",
+            "isGlobal": False,
+            "name": "CreateListTest",
+            "thirdpartyCategoryId": None,
+            "createdAt": "2022-01-28T16:03:36+0000",
+            "modifiedAt": "2022-02-09T11:47:00+0000",
+            "isMspDefault": False,
+            "markedForDeletion": False,
+            "bundleTypeId": 1,
+            "meta": {"destinationCount": 5},
+        },
+    }
+}
+BASE_URL = f"https://management.api.umbrella.com/v1/organizations/{STUB_ORG_ID}/destinationlists"
 
 
 class MockResponse:
@@ -54,26 +55,35 @@ def mocked_request(side_effect: Callable) -> None:
 
 
 def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
-    base_url = f"https://management.api.umbrella.com/v1/organizations/{STUB_ORG_ID}/destinationlists"
-    if url == base_url:
+    if url == BASE_URL:
         if method == "GET":
             return MockResponse("dlGetAll", status_code)
         if method == "POST":
             return MockResponse("dlCreate", status_code)
-    if url == base_url + f"/{STUB_DESTINATION_LIST_ID}":
+    if url == BASE_URL + f"/{STUB_DESTINATION_LIST_ID}":
         if method == "GET":
             return MockResponse("dlGet", status_code)
         if method == "PATCH":
             return MockResponse("dlPatch", status_code)
         if method == "DELETE":
             return MockResponse("dlDelete", status_code)
-    if url == base_url + f"/{STUB_DESTINATION_LIST_ID}/destinations":
+    if url == BASE_URL + f"/{STUB_DESTINATION_LIST_ID}/destinations":
         if method == "GET":
             return MockResponse("dGet", status_code)
         if method == "POST":
             return MockResponse("dAdd", status_code)
-    if url == base_url + f"/{STUB_DESTINATION_LIST_ID}/destinations/remove":
+    if url == BASE_URL + f"/{STUB_DESTINATION_LIST_ID}/destinations/remove":
         return MockResponse("dDelete", status_code)
+
+
+def mock_conditions_connection(url: str, status_code: int) -> MockResponse:
+    if url == BASE_URL:
+        if status_code == 200:
+            return MockResponse("test_connection_ok", status_code)
+        elif status_code >= 400:
+            return MockResponse("test_connection_bad", status_code)
+
+    raise Exception("Response has not been implemented")
 
 
 def mock_request_200(*args, **kwargs) -> MockResponse:
@@ -93,8 +103,20 @@ def mock_request_403(*args, **kwargs) -> MockResponse:
 
 
 def mock_request_404(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 403)
+    return mock_conditions(args[0], args[1], 404)
 
 
 def mock_request_500(*args, **kwargs) -> MockResponse:
     return mock_conditions(args[0], args[1], 500)
+
+
+def mock_request_200_connection(*args, **kwargs) -> MockResponse:
+    return mock_conditions_connection(args[1], 200)
+
+
+def mock_request_403_connection(*args, **kwargs) -> MockResponse:
+    return mock_conditions_connection(args[1], 403)
+
+
+def mock_request_500_connection(*args, **kwargs) -> MockResponse:
+    return mock_conditions_connection(args[1], 500)
