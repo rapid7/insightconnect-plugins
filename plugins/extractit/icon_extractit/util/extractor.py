@@ -11,8 +11,9 @@ import zipfile
 import pdfplumber
 from pdfminer.pdfparser import PDFSyntaxError
 
+DEFAULT_ENCODING = "utf-8"
 
-def extract(provided_regex: str, provided_string: str, provided_file: str, keep_original_url=False) -> list:
+def extract(provided_regex: str, provided_string: str, provided_file: str, keep_original_url: bool = False) -> list:
     matches = []
     if provided_string:
         if keep_original_url:
@@ -23,10 +24,10 @@ def extract(provided_regex: str, provided_string: str, provided_file: str, keep_
     elif provided_file:
         try:
             if keep_original_url:
-                provided_file = base64.b64decode(provided_file.encode("utf-8")).decode("utf-8")
+                provided_file = base64.b64decode(provided_file.encode(DEFAULT_ENCODING)).decode(DEFAULT_ENCODING)
                 matches = regex.findall(provided_regex, provided_file)
             else:
-                provided_file = urllib.parse.unquote(base64.b64decode(provided_file.encode("utf-8")).decode("utf-8"))
+                provided_file = urllib.parse.unquote(base64.b64decode(provided_file.encode(DEFAULT_ENCODING)).decode(DEFAULT_ENCODING))
                 matches = regex.findall(provided_regex, provided_file)
         except UnicodeDecodeError:
             file_content = extract_content_from_file(base64.b64decode(provided_file))
@@ -43,7 +44,7 @@ def extract_all_date_formats(provided_string: str, provided_file: str) -> list:
             provided_string = regex.sub(regex_pattern, "", provided_string)
     elif provided_file:
         try:
-            provided_file = urllib.parse.unquote(base64.b64decode(provided_file.encode("utf-8")).decode("utf-8"))
+            provided_file = urllib.parse.unquote(base64.b64decode(provided_file.encode(DEFAULT_ENCODING)).decode(DEFAULT_ENCODING))
             for regex_pattern in Regex.HumanToRegexPatterns.items():
                 matches += regex.findall(regex_pattern, provided_file)
                 provided_file = regex.sub(regex_pattern, "", provided_file)
@@ -63,7 +64,7 @@ def extract_filepath(provided_regex: str, provided_string: str, provided_file: s
         matches = regex.findall(provided_regex, new_string)
     elif provided_file:
         try:
-            new_file = base64.b64decode(provided_file.encode("utf-8")).decode("utf-8")
+            new_file = base64.b64decode(provided_file.encode(DEFAULT_ENCODING)).decode(DEFAULT_ENCODING)
         except UnicodeDecodeError:
             new_file = extract_content_from_file(base64.b64decode(provided_file))
         new_file = regex.sub(Regex.URL, "", new_file)
@@ -81,7 +82,7 @@ def extract_content_from_file(provided_file: bytes) -> str:
                 x = unzip_files.infolist()
                 for i in enumerate(x):
                     try:
-                        files_content += unzip_files.read(x[i[0]]).decode("utf-8")
+                        files_content += unzip_files.read(x[i[0]]).decode(DEFAULT_ENCODING)
                     # After unpacking, may contain images for which the decoding will fail
                     except UnicodeDecodeError:
                         continue
