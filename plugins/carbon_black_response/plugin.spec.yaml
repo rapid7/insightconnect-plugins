@@ -1020,7 +1020,7 @@ actions:
         description: Whether or not the unisolation was successful
         required: false
   uninstall_sensor:
-    title: Uninstall sensor
+    title: Uninstall Sensor
     description: Uninstalls a sensor given a sensor ID
     input:
       id:

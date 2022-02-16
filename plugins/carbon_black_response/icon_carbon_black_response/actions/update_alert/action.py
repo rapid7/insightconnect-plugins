@@ -1,4 +1,4 @@
-import kominsightconnect_plugin_runtimeand
+import insightconnect_plugin_runtime
 from .schema import UpdateAlertInput, UpdateAlertOutput
 
 # Custom imports below
