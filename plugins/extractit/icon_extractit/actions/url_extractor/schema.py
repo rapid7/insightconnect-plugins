@@ -34,7 +34,7 @@ class UrlExtractorInput(insightconnect_plugin_runtime.Input):
     "keep_original_urls": {
       "type": "boolean",
       "title": "Keep Original URLs",
-      "description": "Retain original URL encoding, if applicable. e.g: If true: http://foo.bar/?q=Test%20URL-encoded%20stuff will be extracted as http://foo.bar/?q=Test%20URL-encoded%20stuff. If false, http://foo.bar/?q=Test%20URL-encoded%20stuff will be extracted as http://foo.bar/?q=Test as %20 is decoded as a space",
+      "description": "Retain original URL encoding, if applicable, e.g: if true: http://foo.bar/?q=Test%20URL-encoded%20stuff will be extracted as http://foo.bar/?q=Test%20URL-encoded%20stuff. If false, http://foo.bar/?q=Test%20URL-encoded%20stuff will be extracted as http://foo.bar/?q=Test because %20 is decoded as a space.",
       "default": false,
       "order": 3
     },
