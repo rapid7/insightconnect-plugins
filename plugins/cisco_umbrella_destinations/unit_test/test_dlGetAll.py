@@ -8,7 +8,7 @@ from unittest import TestCase, mock
 from icon_cisco_umbrella_destinations.connection.connection import Connection
 from icon_cisco_umbrella_destinations.actions.dlGetAll import DlGetAll
 from insightconnect_plugin_runtime.exceptions import PluginException
-from icon_cisco_umbrella_destinations.util.api import error_msg
+from icon_cisco_umbrella_destinations.util.api import ERROR_MSG
 import logging
 from unit_test.mock import (
     STUB_CONNECTION,
@@ -108,7 +108,7 @@ class TestDlGetAll(TestCase):
 
     @parameterized.expand(
         [
-            (mock_request_400, error_msg),
+            (mock_request_400, ERROR_MSG),
             (mock_request_401, PluginException.causes[PluginException.Preset.USERNAME_PASSWORD]),
             (mock_request_403, PluginException.causes[PluginException.Preset.UNAUTHORIZED]),
             (mock_request_404, PluginException.causes[PluginException.Preset.NOT_FOUND]),
