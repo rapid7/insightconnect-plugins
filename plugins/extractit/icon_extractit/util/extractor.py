@@ -13,6 +13,7 @@ from pdfminer.pdfparser import PDFSyntaxError
 
 DEFAULT_ENCODING = "utf-8"
 
+
 def extract(provided_regex: str, provided_string: str, provided_file: str, keep_original_url: bool = False) -> list:
     matches = []
     if provided_string:
@@ -27,7 +28,9 @@ def extract(provided_regex: str, provided_string: str, provided_file: str, keep_
                 provided_file = base64.b64decode(provided_file.encode(DEFAULT_ENCODING)).decode(DEFAULT_ENCODING)
                 matches = regex.findall(provided_regex, provided_file)
             else:
-                provided_file = urllib.parse.unquote(base64.b64decode(provided_file.encode(DEFAULT_ENCODING)).decode(DEFAULT_ENCODING))
+                provided_file = urllib.parse.unquote(
+                    base64.b64decode(provided_file.encode(DEFAULT_ENCODING)).decode(DEFAULT_ENCODING)
+                )
                 matches = regex.findall(provided_regex, provided_file)
         except UnicodeDecodeError:
             file_content = extract_content_from_file(base64.b64decode(provided_file))
@@ -44,7 +47,9 @@ def extract_all_date_formats(provided_string: str, provided_file: str) -> list:
             provided_string = regex.sub(regex_pattern, "", provided_string)
     elif provided_file:
         try:
-            provided_file = urllib.parse.unquote(base64.b64decode(provided_file.encode(DEFAULT_ENCODING)).decode(DEFAULT_ENCODING))
+            provided_file = urllib.parse.unquote(
+                base64.b64decode(provided_file.encode(DEFAULT_ENCODING)).decode(DEFAULT_ENCODING)
+            )
             for regex_pattern in Regex.HumanToRegexPatterns.items():
                 matches += regex.findall(regex_pattern, provided_file)
                 provided_file = regex.sub(regex_pattern, "", provided_file)
