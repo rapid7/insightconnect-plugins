@@ -1,10 +1,11 @@
 import json
-from json import JSONDecodeError
 from logging import Logger
 from typing import Optional
 import requests
 from requests.auth import HTTPBasicAuth
 from insightconnect_plugin_runtime.exceptions import PluginException
+
+error_msg = "Invalid input data, ensure the information you are inputting is correct"
 
 
 class CiscoUmbrellaManagementAPI:
@@ -108,17 +109,17 @@ class CiscoUmbrellaManagementAPI:
         )
 
     def _call_api(
-        self,
-        # method -> GET/POST/etc
-        method: str,
-        # path -> url
-        path: str,
-        # json_data -> Json to send in body
-        json_data: Optional[dict] = None,
-        # Params -> Query (Params) String
-        params: Optional[dict] = None,
-        # data(payload) -> dict in body
-        data: Optional = None,
+            self,
+            # method -> GET/POST/etc
+            method: str,
+            # path -> url
+            path: str,
+            # json_data -> Json to send in body
+            json_data: Optional[dict] = None,
+            # Params -> Query (Params) String
+            params: Optional[dict] = None,
+            # data(payload) -> dict in body
+            data: Optional = None,
     ) -> dict:
 
         headers = {
@@ -141,7 +142,7 @@ class CiscoUmbrellaManagementAPI:
             auth=HTTPBasicAuth(self.api_key, self.api_secret),
         )
         if response.status_code == 400:
-            raise PluginException(cause="Invalid input data, ensure the information you are inputting is correct")
+            raise PluginException(cause=error_msg)
         if response.status_code == 401:
             raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
         if response.status_code == 403:
