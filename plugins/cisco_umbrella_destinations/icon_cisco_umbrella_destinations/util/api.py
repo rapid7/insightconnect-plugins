@@ -109,17 +109,17 @@ class CiscoUmbrellaManagementAPI:
         )
 
     def _call_api(
-            self,
-            # method -> GET/POST/etc
-            method: str,
-            # path -> url
-            path: str,
-            # json_data -> Json to send in body
-            json_data: Optional[dict] = None,
-            # Params -> Query (Params) String
-            params: Optional[dict] = None,
-            # data(payload) -> dict in body
-            data: Optional = None,
+        self,
+        # method -> GET/POST/etc
+        method: str,
+        # path -> url
+        path: str,
+        # json_data -> Json to send in body
+        json_data: Optional[dict] = None,
+        # Params -> Query (Params) String
+        params: Optional[dict] = None,
+        # data(payload) -> dict in body
+        data: Optional = None,
     ) -> dict:
 
         headers = {
