@@ -1,11 +1,12 @@
-import logging
+import datetime
+from logging import Logger
 
 import dateparser
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 import urllib
 import requests
 import json
-from typing import Optional
+from typing import Optional, Callable
 
 # From: https://docs.devo.com/confluence/ndt/api-reference/query-api
 REGION_MAP = {
@@ -17,8 +18,18 @@ REGION_MAP = {
 RESPONSE_MAXSIZE = 2e8  # 200 MB in bytes
 
 
+def request_execution_time(func: Callable):
+    def _wrap(*args, **kwargs):
+        start_request_time = datetime.datetime.now()
+        response = func(*args, **kwargs)
+        end_request_time = datetime.datetime.now()
+        return response, end_request_time - start_request_time
+
+    return _wrap
+
+
 class DevoAPI:
-    def __init__(self, logger: logging.Logger, api_token: str, region: str):
+    def __init__(self, logger: Logger, api_token: str, region: str):
         self.logger = logger
         self.token = api_token
         self.region = region
@@ -34,6 +45,7 @@ class DevoAPI:
 
         self.session = requests.Session()
 
+    @request_execution_time
     def query(self, query: str, from_date: str, to_date: str) -> dict:
         endpoint = "/search/query"
 
@@ -142,7 +154,7 @@ class DevoAPI:
         if content:
             try:
                 return json.loads(content)
-            except Exception as e:
+            except Exception:
                 raise PluginException(PluginException.Preset.INVALID_JSON)
         else:
             return {}
