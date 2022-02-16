@@ -1,7 +1,7 @@
 {
-	"spec": "31b203fe20a054ca8cf962e838d4aed8",
-	"manifest": "0dbb366c9cc4315564cb4bad43760bd2",
-	"setup": "2af334ffce5807391d6dcd0b1701aa5c",
+	"spec": "8a81d205f7f22037274cb7d28e0927a1",
+	"manifest": "7f30bc74bc392563bb9dc523986abddc",
+	"setup": "d50ba2246b90853986f531bf294f9621",
 	"schemas": [
 		{
 			"identifier": "add_feed/schema.py",
@@ -56,8 +56,8 @@
 			"hash": "a735c34a0a78b7500fd2a2bec1106074"
 		},
 		{
-			"identifier": "uninstall_sensors/schema.py",
-			"hash": "6e3879759aa50c32cc3b06a8b8b34085"
+			"identifier": "uninstall_sensor/schema.py",
+			"hash": "b63fc68d1498f9d07022096d23a1e1b4"
 		},
 		{
 			"identifier": "unisolate_sensor/schema.py",
