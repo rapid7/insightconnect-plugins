@@ -34,11 +34,39 @@ class TestDlCreate(TestCase):
         self.action.connection = self.connection
         self.action.logger = logging.getLogger("Action logger")
 
-        self.params = {Input.ACCESS: "allow", Input.ISGLOBAL: False, Input.LABEL: "DELETEME2"}
+        self.params_data = {
+            Input.ACCESS: "allow",
+            Input.ISGLOBAL: False,
+            Input.LABEL: "DELETEME2",
+            Input.DESTINATION: "google.com",
+            Input.TYPE: "domain",
+            Input.COMMENT: "I dont trust this one",
+        }
+        self.params_no_data = {Input.ACCESS: "allow", Input.ISGLOBAL: False, Input.LABEL: "DELETEME2"}
 
     @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_successful(self, mock_post):
-        response = self.action.run(self.params)
+    def test_if_ok_without_data(self, mock_post):
+        response = self.action.run(self.params_no_data)
+        expected_response = {
+            "success": {
+                "id": 15786904,
+                "organizationId": 2372338,
+                "access": "allow",
+                "isGlobal": False,
+                "name": "DELETEME2",
+                "createdAt": "2022-02-10T11:01:20+0000",
+                "modifiedAt": "2022-02-10T11:01:20+0000",
+                "isMspDefault": False,
+                "markedForDeletion": False,
+                "bundleTypeId": 1,
+                "meta": {"destinationCount": 0},
+            }
+        }
+        self.assertEqual(response, expected_response)
+
+    @mock.patch("requests.request", side_effect=mock_request_200)
+    def test_if_ok_with_data(self, mock_post):
+        response = self.action.run(self.params_data)
         expected_response = {
             "success": {
                 "id": 15786904,
@@ -58,15 +86,16 @@ class TestDlCreate(TestCase):
 
     @parameterized.expand(
         [
-            (mock_request_401, PluginException.Preset.USERNAME_PASSWORD),
-            (mock_request_403, PluginException.Preset.UNAUTHORIZED),
-            (mock_request_404, PluginException.Preset.UNAUTHORIZED),
-            (mock_request_500, PluginException.Preset.SERVER_ERROR),
+            (mock_request_400, "Invalid input data, ensure the information you are inputting is correct"),
+            (mock_request_401, PluginException.causes[PluginException.Preset.USERNAME_PASSWORD]),
+            (mock_request_403, PluginException.causes[PluginException.Preset.UNAUTHORIZED]),
+            (mock_request_404, PluginException.causes[PluginException.Preset.NOT_FOUND]),
+            (mock_request_500, PluginException.causes[PluginException.Preset.SERVER_ERROR]),
         ],
     )
     def test_not_ok(self, mock_request, exception):
         mocked_request(mock_request)
 
         with self.assertRaises(PluginException) as context:
-            self.action.run(self.params)
-        self.assertEqual(context.exception.cause, PluginException.causes[exception])
+            self.action.run(self.params_data)
+        self.assertEqual(context.exception.cause, exception)

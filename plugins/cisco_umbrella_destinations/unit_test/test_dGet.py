@@ -72,10 +72,11 @@ class TestDGet(TestCase):
 
     @parameterized.expand(
         [
-            (mock_request_401, PluginException.Preset.USERNAME_PASSWORD),
-            (mock_request_403, PluginException.Preset.UNAUTHORIZED),
-            (mock_request_404, PluginException.Preset.UNAUTHORIZED),
-            (mock_request_500, PluginException.Preset.SERVER_ERROR),
+            (mock_request_400, "Invalid input data, ensure the information you are inputting is correct"),
+            (mock_request_401, PluginException.causes[PluginException.Preset.USERNAME_PASSWORD]),
+            (mock_request_403, PluginException.causes[PluginException.Preset.UNAUTHORIZED]),
+            (mock_request_404, PluginException.causes[PluginException.Preset.NOT_FOUND]),
+            (mock_request_500, PluginException.causes[PluginException.Preset.SERVER_ERROR]),
         ],
     )
     def test_not_ok(self, mock_request, exception):
@@ -83,4 +84,4 @@ class TestDGet(TestCase):
 
         with self.assertRaises(PluginException) as context:
             self.action.run(self.params)
-        self.assertEqual(context.exception.cause, PluginException.causes[exception])
+        self.assertEqual(context.exception.cause, exception)

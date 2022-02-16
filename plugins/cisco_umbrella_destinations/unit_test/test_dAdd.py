@@ -49,21 +49,30 @@ class TestDAdd(TestCase):
     @mock.patch("requests.request", side_effect=mock_request_200)
     def test_if_ok(self, mock_post):
         response = self.action.run(self.params)
-        expected_response = STUB_DADD_RESPONSE
+        expected_response = STUB_RESPONSE
         self.assertEqual(response, expected_response)
 
     @mock.patch("requests.request", side_effect=mock_request_200)
     def test_if_comment_is_none(self, mock_post):
         response = self.action.run(self.params_no_comment)
-        expected_response = STUB_DADD_RESPONSE
+        expected_response = STUB_RESPONSE
         self.assertEqual(response, expected_response)
+
+    # @mock.patch("requests.request", side_effect=mock_request_200_invalid_json)
+    # def test_if_invalid_json(self, mock_post):
+    #     # Need to send across call which returns 200
+    #     response = self.action.run()
+    #     # Need to map a JSON Decode error here
+    #     expected_response =
+    #     self.assertEqual(response, expected_response)
 
     @parameterized.expand(
         [
-            (mock_request_401, PluginException.Preset.USERNAME_PASSWORD),
-            (mock_request_403, PluginException.Preset.UNAUTHORIZED),
-            (mock_request_404, PluginException.Preset.UNAUTHORIZED),
-            (mock_request_500, PluginException.Preset.SERVER_ERROR),
+            (mock_request_400, "Invalid input data, ensure the information you are inputting is correct"),
+            (mock_request_401, PluginException.causes[PluginException.Preset.USERNAME_PASSWORD]),
+            (mock_request_403, PluginException.causes[PluginException.Preset.UNAUTHORIZED]),
+            (mock_request_404, PluginException.causes[PluginException.Preset.NOT_FOUND]),
+            (mock_request_500, PluginException.causes[PluginException.Preset.SERVER_ERROR]),
         ],
     )
     def test_not_ok(self, mock_request, exception):
@@ -71,4 +80,4 @@ class TestDAdd(TestCase):
 
         with self.assertRaises(PluginException) as context:
             self.action.run(self.params)
-        self.assertEqual(context.exception.cause, PluginException.causes[exception])
+        self.assertEqual(context.exception.cause, exception)
