@@ -594,7 +594,7 @@ This action is used to extract URLs from a string or file.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|aHR0cHM6Ly9leGFtcGxlLmNvbSBpcyBhbiBleGFtcGxlIFVSTA==|
-|keep_original_urls|boolean|False|False|Retain original URL encoding, if applicable, e.g: if true: http://foo.bar/?q=Test%20URL-encoded%20stuff will be extracted as http://foo.bar/?q=Test%20URL-encoded%20stuff. If false, http://foo.bar/?q=Test%20URL-encoded%20stuff will be extracted as http://foo.bar/?q=Test because %20 is decoded as a space.|None|False|
+|keep_original_urls|boolean|False|False|Retain original URL encoding, if applicable, e.g: if true: http://foo.bar/?q=Test%20URL-encoded%20stuff will be extracted as http://foo.bar/?q=Test%20URL-encoded%20stuff. If false, http://foo.bar/?q=Test%20URL-encoded%20stuff will be extracted as http://foo.bar/?q=Test because %20 is decoded as a space|None|False|
 |str|string|None|False|Input string|None|https://example.com is an example URL|
 
 Example input:
