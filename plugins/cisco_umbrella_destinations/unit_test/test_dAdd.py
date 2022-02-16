@@ -58,14 +58,6 @@ class TestDAdd(TestCase):
         expected_response = STUB_RESPONSE
         self.assertEqual(response, expected_response)
 
-    # @mock.patch("requests.request", side_effect=mock_request_200_invalid_json)
-    # def test_if_invalid_json(self, mock_post):
-    #     # Need to send across call which returns 200
-    #     response = self.action.run()
-    #     # Need to map a JSON Decode error here
-    #     expected_response =
-    #     self.assertEqual(response, expected_response)
-
     @parameterized.expand(
         [
             (mock_request_400, "Invalid input data, ensure the information you are inputting is correct"),
