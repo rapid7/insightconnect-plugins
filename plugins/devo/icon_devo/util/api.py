@@ -1,5 +1,5 @@
 import datetime
-import logging
+from logging import Logger
 
 import dateparser
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
@@ -29,7 +29,7 @@ def request_execution_time(func: Callable):
 
 
 class DevoAPI:
-    def __init__(self, logger: logging.Logger, api_token: str, region: str):
+    def __init__(self, logger: Logger, api_token: str, region: str):
         self.logger = logger
         self.token = api_token
         self.region = region
