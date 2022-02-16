@@ -123,7 +123,7 @@ actions:
         example: aHR0cHM6Ly9leGFtcGxlLmNvbSBpcyBhbiBleGFtcGxlIFVSTA==
       keep_original_urls:
         title: Keep Original URLs
-        description: Keep original urls encoded if they're encoded
+        description: Retain original URL encoding, if applicable
         type: boolean
         required: false
         example: false

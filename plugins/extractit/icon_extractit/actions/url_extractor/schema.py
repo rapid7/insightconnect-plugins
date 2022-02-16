@@ -34,7 +34,7 @@ class UrlExtractorInput(insightconnect_plugin_runtime.Input):
     "keep_original_urls": {
       "type": "boolean",
       "title": "Keep Original URLs",
-      "description": "Keep original urls encoded if they're encoded",
+      "description": "Retain original URL encoding, if applicable",
       "default": false,
       "order": 3
     },

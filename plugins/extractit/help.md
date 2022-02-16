@@ -594,7 +594,7 @@ This action is used to extract URLs from a string or file.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|aHR0cHM6Ly9leGFtcGxlLmNvbSBpcyBhbiBleGFtcGxlIFVSTA==|
-|keep_original_urls|boolean|False|False|Keep original urls encoded if they're encoded|None|False|
+|keep_original_urls|boolean|False|False|Retain original URL encoding, if applicable|None|False|
 |str|string|None|False|Input string|None|https://example.com is an example URL|
 
 Example input:
