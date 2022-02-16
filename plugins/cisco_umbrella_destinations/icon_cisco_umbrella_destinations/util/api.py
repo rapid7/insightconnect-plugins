@@ -142,7 +142,7 @@ class CiscoUmbrellaManagementAPI:
             auth=HTTPBasicAuth(self.api_key, self.api_secret),
         )
         if response.status_code == 400:
-            raise PluginException(cause=error_msg)
+            raise PluginException(cause=ERROR_MSG)
         if response.status_code == 401:
             raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
         if response.status_code == 403:
