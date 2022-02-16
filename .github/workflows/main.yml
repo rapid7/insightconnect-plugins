@@ -22,4 +22,5 @@ jobs:
         python -m pip install --user icon-integrations-ci --no-warn-script-location
         export ICON_INTEGRATIONS_RELEASES_SLACK_WEBHOOK=${{ secrets.ICON_INTEGRATIONS_RELEASES_SLACK_WEBHOOK }}
         cd plugins
+        python -m pip list
         /home/runner/.local/bin/icon-ci pr
