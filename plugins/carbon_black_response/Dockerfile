@@ -1,4 +1,4 @@
-FROM rapid7/insightconnect-python-3-38-slim-plugin:4
+FROM rapid7/insightconnect-python-3-38-plugin:latest
 
 # Add any custom package dependencies here
 # NOTE: Add pip packages to requirements.txt

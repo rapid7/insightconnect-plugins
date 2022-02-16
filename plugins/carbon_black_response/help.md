@@ -39,18 +39,15 @@ Example input:
 
 ### Actions
 
-#### Uninstall sensors
+#### Uninstall sensor
 
-This action uninstalls a single or multiple sensors.
+This action uninstalls a sensor given a sensor ID.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|groupid|string|None|False|The sensor group ID|None|None|
-|hostname|string|None|False|The sensor hostname|None|None|
 |id|string|None|False|The sensor ID|None|None|
-|ip|string|None|False|The sensor IP address|None|None|
 
 Example input:
 
@@ -61,7 +58,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|boolean|False|Whether or not the uninstallation/s was successful|
+|success|boolean|False|Whether or not the uninstall was successful|
 
 Example output:
 
