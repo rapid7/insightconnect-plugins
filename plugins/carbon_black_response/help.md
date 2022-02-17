@@ -40,7 +40,7 @@ Example input:
 
 ### Actions
 
-#### Uninstall sensor
+#### Uninstall Sensor
 
 This action uninstalls a sensor given a sensor ID.
 
