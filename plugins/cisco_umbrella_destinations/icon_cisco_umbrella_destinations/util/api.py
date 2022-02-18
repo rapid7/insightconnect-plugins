@@ -128,7 +128,7 @@ class CiscoUmbrellaManagementAPI:
         }
 
         # Prevents json.dumps() on 'None' data
-        if data is None:
+        if not data:
             data_string = None
         else:
             data_string = json.dumps(data)
