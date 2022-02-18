@@ -594,6 +594,7 @@ This action is used to extract URLs from a string or file.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|aHR0cHM6Ly9leGFtcGxlLmNvbSBpcyBhbiBleGFtcGxlIFVSTA==|
+|keep_original_urls|boolean|False|False|Retain original URL encoding, if applicable, e.g: if true: http://foo.bar/?q=Test%20URL-encoded%20stuff will be extracted as http://foo.bar/?q=Test%20URL-encoded%20stuff. If false, http://foo.bar/?q=Test%20URL-encoded%20stuff will be extracted as http://foo.bar/?q=Test because %20 is decoded as a space|None|False|
 |str|string|None|False|Input string|None|https://example.com is an example URL|
 
 Example input:
@@ -601,6 +602,7 @@ Example input:
 ```
 {
   "file": "aHR0cHM6Ly9leGFtcGxlLmNvbSBpcyBhbiBleGFtcGxlIFVSTA==",
+  "keep_original_urls": false,
   "str": "https://example.com is an example URL"
 }
 ```
@@ -635,6 +637,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.0.1 - Fix issue where encoded URLs would be incorrectly extracted after the top level domain for Extract URL action
 * 3.0.0 - Update to support date format for Date Extractor and Extract All actions
 * 2.3.1 - Support special character ! for URL Extractor action
 * 2.3.0 - Support extraction from binary files for all actions

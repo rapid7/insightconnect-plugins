@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: extractit
 title: ExtractIt
 description: The ExtractIt plugin has a collection of actions used to extract various information from text. These include URLs, domains, emails, IPs, and more
-version: 3.0.0
+version: 3.0.1
 vendor: rapid7
 support: rapid7
 status: []
@@ -121,6 +121,13 @@ actions:
         type: bytes
         required: false
         example: aHR0cHM6Ly9leGFtcGxlLmNvbSBpcyBhbiBleGFtcGxlIFVSTA==
+      keep_original_urls:
+        title: Keep Original URLs
+        description: "Retain original URL encoding, if applicable, e.g: if true: http://foo.bar/?q=Test%20URL-encoded%20stuff will be extracted as http://foo.bar/?q=Test%20URL-encoded%20stuff. If false, http://foo.bar/?q=Test%20URL-encoded%20stuff will be extracted as http://foo.bar/?q=Test because %20 is decoded as a space"
+        type: boolean
+        required: false
+        example: false
+        default: false
     output:
       urls:
         title: URLs

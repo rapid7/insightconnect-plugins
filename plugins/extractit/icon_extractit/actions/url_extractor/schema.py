@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     FILE = "file"
+    KEEP_ORIGINAL_URLS = "keep_original_urls"
     STR = "str"
     
 
@@ -29,6 +30,13 @@ class UrlExtractorInput(insightconnect_plugin_runtime.Input):
       "description": "Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS",
       "format": "bytes",
       "order": 2
+    },
+    "keep_original_urls": {
+      "type": "boolean",
+      "title": "Keep Original URLs",
+      "description": "Retain original URL encoding, if applicable, e.g: if true: http://foo.bar/?q=Test%20URL-encoded%20stuff will be extracted as http://foo.bar/?q=Test%20URL-encoded%20stuff. If false, http://foo.bar/?q=Test%20URL-encoded%20stuff will be extracted as http://foo.bar/?q=Test because %20 is decoded as a space",
+      "default": false,
+      "order": 3
     },
     "str": {
       "type": "string",
