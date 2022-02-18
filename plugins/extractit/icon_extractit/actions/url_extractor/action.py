@@ -16,4 +16,8 @@ class UrlExtractor(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {Output.URLS: clear_urls(extract(Regex.URL, params.get(Input.STR), params.get(Input.FILE)))}
+        return {
+            Output.URLS: clear_urls(
+                extract(Regex.URL, params.get(Input.STR), params.get(Input.FILE), params.get(Input.KEEP_ORIGINAL_URLS))
+            )
+        }
