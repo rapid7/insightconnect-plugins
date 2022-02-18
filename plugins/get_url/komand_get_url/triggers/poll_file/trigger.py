@@ -40,17 +40,13 @@ class PollFile(komand.Trigger):
 
         # We can't guarantee server supports lastmodified/etag, compare contents
         if komand.helper.check_cachefile(cache_file):
-            old_cache_file = komand.helper.open_cachefile(cache_file)
-            old_contents = old_cache_file.read()
-            old_cache_file.close()
+            old_contents = self.utils.read_contents_from_cache(cache_file)
             if old_contents == contents:
                 self.is_modified = False
                 self.logger.debug("GetUrl: File not updated")
 
         if self.is_modified:
-            opened_cache_file = komand.helper.open_cachefile(cache_file)
-            opened_cache_file.write(contents)
-            opened_cache_file.close()
+            self.utils.write_contents_to_cache(cache_file, contents)
 
             # Check URL status code and return file contents
             if 200 <= url_object.code <= 299:

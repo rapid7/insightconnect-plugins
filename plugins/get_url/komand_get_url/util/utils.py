@@ -19,7 +19,7 @@ class Utils(object):
             assistance=f"GetURL: Unsupported URL prefix: {url}",
         )
 
-    def get_headers(self, url_object):
+    def __get_headers(self, url_object):
         """Return cache related headers from urllib2 headers dictonary"""
         etag = url_object.headers.get("etag")
         lm = url_object.headers.get("last-modified")
@@ -40,28 +40,28 @@ class Utils(object):
 
     def create_url_meta_file(self, meta, url_object):
         """Create metadata file from meta info information"""
-        headers = self.get_headers(url_object)
+        headers = self.__get_headers(url_object)
         data = {
             "url": meta.get("url"),
             "last-modified": headers.get("last-modified"),
             "etag": headers.get("etag"),
             "file": meta.get("file"),
         }
-        with komand.helper.open_cachefile(meta.get("metafile")) as f:
-            json.dump(data, f)
+        with komand.helper.open_cachefile(meta.get("metafile")) as loaded_file:
+            json.dump(data, loaded_file)
         self.logger.info(f"CreateUrlMetaFile: MetaFile created: {str(data)}")
 
     def check_url_meta_file(self, meta):
         """Check caching headers from meta info dictionary"""
         try:
-            with komand.helper.open_cachefile(meta.get("metafile")) as f:
-                data = json.load(f)
+            with komand.helper.open_cachefile(meta.get("metafile")) as loaded_file:
+                data = json.load(loaded_file)
             return data
         except Exception as e:
-            self.logger.error(f"CheckUrlMetaFile: Error while retreving meta file, error {e}")
+            self.logger.error(f"CheckUrlMetaFile: Error while retrieving meta file, error {e}")
             raise PluginException(
                 preset=PluginException.Preset.UNKNOWN,
-                assistance="Error while retreving meta file",
+                assistance="Error while retrieving meta file",
                 data=e,
             )
 
@@ -85,3 +85,28 @@ class Utils(object):
             User_Agent=user_agent,
         )
         return url_object, meta
+
+    def write_contents_to_cache(self, cache_file, contents):
+        try:
+            old_cache_file = komand.helper.open_cachefile(cache_file)
+            old_cache_file.write(contents)
+            old_cache_file.close()
+        except IOError as error:
+            raise PluginException(
+                cause="Error appear while saving data to cache file.",
+                assistance="Please contact support for assistance.",
+                data=error,
+            )
+
+    def read_contents_from_cache(self, cache_file):
+        try:
+            old_cache_file = komand.helper.open_cachefile(cache_file)
+            old_contents = old_cache_file.read()
+            old_cache_file.close()
+        except Exception as error:
+            raise PluginException(
+                cause="Error appear while reading contents from cache file.",
+                assistance="Please contact support for assistance.",
+                data=error,
+            )
+        return old_contents

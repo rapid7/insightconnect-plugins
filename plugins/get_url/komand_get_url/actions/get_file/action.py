@@ -38,9 +38,7 @@ class GetFile(komand.Action):
             self.utils.create_url_meta_file(meta, url_object)
 
             # Write URL file contents to cache
-            old_cache_file = komand.helper.open_cachefile(cache_file)
-            old_cache_file.write(contents)
-            old_cache_file.close()
+            self.utils.write_contents_to_cache(cache_file, contents)
 
             # Check URL status code and return file contents
             if not url_object.code or 200 <= url_object.code <= 299:
