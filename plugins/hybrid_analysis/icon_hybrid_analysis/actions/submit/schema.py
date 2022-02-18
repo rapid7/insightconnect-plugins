@@ -34,7 +34,7 @@ class SubmitInput(insightconnect_plugin_runtime.Input):
     "custom_cmd_line": {
       "type": "string",
       "title": "Custom Command Line",
-      "description": "Optional commandline that should be passed to the analysis file",
+      "description": "Optional command line that should be passed to the analysis file",
       "order": 4
     },
     "document_password": {

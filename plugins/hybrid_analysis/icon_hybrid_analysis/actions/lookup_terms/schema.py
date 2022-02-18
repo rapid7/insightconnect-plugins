@@ -241,7 +241,7 @@ class LookupTermsOutput(insightconnect_plugin_runtime.Output):
         },
         "value": {
           "type": "string",
-          "title": "value",
+          "title": "Value",
           "description": "Value of serch term",
           "order": 2
         }

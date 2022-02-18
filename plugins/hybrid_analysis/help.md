@@ -88,7 +88,7 @@ This action is used to submit file for analysis.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|custom_cmd_line|string|None|False|Optional commandline that should be passed to the analysis file|None|command|
+|custom_cmd_line|string|None|False|Optional command line that should be passed to the analysis file|None|command|
 |document_password|string|None|False|Optional document password that will be used to fill-in Adobe/Office password prompts|None|somepassword|
 |environment_id|string|Linux (Ubuntu 16.04, 64 bit)|False|Environment ID on which the analysis will be performed|['Linux (Ubuntu 16.04, 64 bit)', 'Android Static Analysis', 'Windows 7 64 bit', 'Windows 7 32 bit (HWP Support)', 'Windows 7 32 bit']|Linux (Ubuntu 16.04, 64 bit)|
 |experimental_anti_evasion|boolean|True|False|When set to true, will set all experimental anti-evasion options of the Kernelmode Monitor|None|True|

@@ -18,7 +18,7 @@ class LookupHash(insightconnect_plugin_runtime.Action):
 
     def __normalize(self, result):
         formatted = {Output.FOUND: False, Output.THREATSCORE: 0, Output.REPORTS: []}
-        if result and len(result) > 0:
+        if result and isinstance(result, list):
             result = insightconnect_plugin_runtime.helper.clean(result)
             return {
                 Output.FOUND: True,
@@ -35,5 +35,5 @@ class LookupHash(insightconnect_plugin_runtime.Action):
         else:
             raise PluginException(
                 cause="Provided hash is not supported.",
-                assistance="The API only supports MD5, SHA256, sha1 hashes. Please check the provided hash and try again.",
+                assistance="The API only supports MD5, SHA256, SHA1 hashes. Please check the provided hash and try again.",
             )

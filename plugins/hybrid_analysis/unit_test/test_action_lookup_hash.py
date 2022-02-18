@@ -88,6 +88,6 @@ class TestLookUpHash(TestCase):
 
         self.assertEqual("Provided hash is not supported.", context.exception.cause)
         self.assertEqual(
-            "The API only supports MD5, SHA256, sha1 hashes. Please check the provided hash and try again.",
+            "The API only supports MD5, SHA256, SHA1 hashes. Please check the provided hash and try again.",
             context.exception.assistance,
         )

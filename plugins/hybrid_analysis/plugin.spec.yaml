@@ -752,7 +752,7 @@ types:
       type: string
       required: false
     value:
-      title: value
+      title: Value
       description: Value of serch term
       type: string
       required: false
@@ -1012,7 +1012,7 @@ actions:
         example: somepassword
       custom_cmd_line:
         title: Custom Command Line
-        description: Optional commandline that should be passed to the analysis file
+        description: Optional command line that should be passed to the analysis file
         type: string
         required: false
         example: command
