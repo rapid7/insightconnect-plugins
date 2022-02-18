@@ -7,7 +7,7 @@ from icon_cisco_umbrella_destinations.connection.schema import Input
 import requests
 
 STUB_ORG_ID = "1234567"
-STUB_API_KEY = "j5740ps1cbukyk3t8kib3wa36aq2v3da"
+STUB_API_KEY = "9de5069c5afe602b2ea0a04b66beb2c0"
 STUB_DESTINATION_LIST_ID = "12345678"
 STUB_CONNECTION = {
     Input.API_KEY: {"secretKey": STUB_API_KEY},
