@@ -15,7 +15,7 @@ _This plugin does not contain any requirements._
 
 # Supported Product Versions
 
-* CertStream 1.12
+_There are no supported product versions listed._
 
 # Documentation
 
@@ -135,7 +135,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.2 - Fix Check for Squatters action | Fix Search Certstream trigger | Update to use the `insightconnect-python-3-38-plugin:4` Docker image | Code refactor | Add input and output examples in plugin spec and help.md
+* 1.0.2 - Fix Check for Squatters action | Fix Search Certstream trigger | Update container image | Code refactor | Add input and output examples in plugin spec and help.md
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Support web server mode | Rename "Score domain" action to "Score Domain" | Rename "Search certstream" trigger to "Search Certstream"
 * 0.1.1 - Search certstream flag bug fix
