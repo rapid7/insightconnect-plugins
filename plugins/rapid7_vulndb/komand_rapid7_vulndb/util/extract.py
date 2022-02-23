@@ -4,6 +4,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_vulndb.util.transform import *
 from typing import Dict
 import requests
+import time
 import copy
 from urllib.parse import urljoin
 
@@ -25,6 +26,10 @@ class Search:
         :return: Data as dictionary
         """
         response = requests.get(cls.search_url, params=query, allow_redirects=False)
+        if response.status_code != requests.codes.ok:
+            time.sleep(5)
+            response = requests.get(cls.search_url, params=query, allow_redirects=False)
+        ResponseHandler.response_error_handler(response.status_code)
         response.raise_for_status()
         return response.json()
 
@@ -107,6 +112,10 @@ class Content:
 
         # extract data from API
         response = requests.get(urljoin(cls.content_url, identifier))
+        if response.status_code != requests.codes.ok:
+            time.sleep(5)
+            response = requests.get(urljoin(cls.content_url, identifier))
+        ResponseHandler.response_error_handler(response.status_code)
         response.raise_for_status()
         modifiers = []
         data = response.json()
@@ -138,3 +147,19 @@ class Content:
 
         # transform the data
         return transform(data, *modifiers)
+
+
+class ResponseHandler:
+
+    @classmethod
+    def response_error_handler(cls, status_code: int):
+        if status_code == 404:
+            raise PluginException(
+                cause="The requested resource could not be found.",
+                assistance="Please contact Rapid7 Support if the issue persists.",
+            )
+        if status_code != requests.codes.ok:
+            raise PluginException(
+                cause= f"A {status_code} error occurred.",
+                assistance="Please contact Rapid7 Support if the issue persists.",
+            )
