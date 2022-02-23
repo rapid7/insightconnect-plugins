@@ -4,7 +4,7 @@ products: [insightconnect]
 name: abuseipdb
 title: AbuseIPDB
 description: Enables the look up of IP reports, provides list and details of blacklisted IPs, and submissions of abusive IPs
-version: 6.0.0
+version: 5.0.8
 vendor: rapid7
 support: community
 cloud_ready: false
@@ -195,9 +195,9 @@ actions:
         description: List of reports
         type: '[]report'
         required: false
-      isMalicious:
-        title: Is Malicious
-        description: Whether an IP address is malicious
+      found:
+        title: Found
+        description: Whether an IP address has been found, indicating it may be malicious
         type: boolean
         required: false
 

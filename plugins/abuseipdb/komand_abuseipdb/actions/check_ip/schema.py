@@ -18,9 +18,9 @@ class Output:
     COUNTRYCODE = "countryCode"
     COUNTRYNAME = "countryName"
     DOMAIN = "domain"
+    FOUND = "found"
     IPADDRESS = "ipAddress"
     IPVERSION = "ipVersion"
-    ISMALICIOUS = "isMalicious"
     ISPUBLIC = "isPublic"
     ISWHITELISTED = "isWhitelisted"
     ISP = "isp"
@@ -100,6 +100,12 @@ class CheckIpOutput(insightconnect_plugin_runtime.Output):
       "description": "Domain Name of IP",
       "order": 9
     },
+    "found": {
+      "type": "boolean",
+      "title": "Found",
+      "description": "Whether an IP address has been found, indicating it may be malicious",
+      "order": 15
+    },
     "ipAddress": {
       "type": "string",
       "title": "IP Address",
@@ -111,12 +117,6 @@ class CheckIpOutput(insightconnect_plugin_runtime.Output):
       "title": "IP Version",
       "description": "Version of IP Address",
       "order": 3
-    },
-    "isMalicious": {
-      "type": "boolean",
-      "title": "Is Malicious",
-      "description": "Whether an IP address is malicious",
-      "order": 15
     },
     "isPublic": {
       "type": "boolean",

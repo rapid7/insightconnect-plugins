@@ -116,9 +116,9 @@ Example input:
 |countryCode|string|False|Code of country IP is registered in|
 |countryName|string|False|Name of Country IP is registered in|
 |domain|string|False|Domain Name of IP|
+|found|boolean|False|Whether an IP address has been found, indicating it may be malicious|
 |ipAddress|string|False|Queried IP Address|
 |ipVersion|integer|False|Version of IP Address|
-|isMalicious|boolean|False|Whether an IP address is malicious|
 |isPublic|boolean|False|Whether or not the IP Address is public|
 |isWhitelisted|boolean|False|Whether or not IP Address is whitelisted|
 |isp|string|False|Internet Service Provider for IP|
@@ -337,7 +337,7 @@ There's a rate limit on the free API service. The following error messages `429 
 
 # Version History
 
-* 6.0.0 - Changed output 'found' to 'isMalicious' | Set cloud_ready flag to false
+* 5.0.8 - Changed description for output 'found' | Set cloud_ready flag to false
 * 5.0.7 - Fix error message in IPv4 search
 * 5.0.6 - Fix none type error in Check CIDR action
 * 5.0.5 - Correct spelling in help.md
