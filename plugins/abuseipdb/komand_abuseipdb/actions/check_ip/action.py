@@ -52,8 +52,8 @@ class CheckIp(insightconnect_plugin_runtime.Action):
             )
 
         if len(out) > 0:
-            out[Output.FOUND] = True
+            out[Output.ISMALICIOUS] = True
         else:
-            out[Output.FOUND] = False
+            out[Output.ISMALICIOUS] = False
 
         return out
