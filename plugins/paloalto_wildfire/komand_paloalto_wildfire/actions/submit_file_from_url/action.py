@@ -37,7 +37,7 @@ class SubmitFileFromUrl(komand.Action):
         url = params.get(Input.URL)
         if Utils.check_link_for_supported_file_type(url):
             file_from_url = self.connection.client.get_file_from_url(url=url)
-            verdict = self.connection.client.get_verdicts(analysed_hash=hashlib.md5(file_from_url).hexdigest())
+            verdict = self.connection.client.get_verdicts(analysed_hash=hashlib.sha256(file_from_url).hexdigest())
             if verdict == UNKNOWN_VERDICT:
                 try:
                     o = xmltodict.parse(self.connection.client.submit_file_from_url(url))

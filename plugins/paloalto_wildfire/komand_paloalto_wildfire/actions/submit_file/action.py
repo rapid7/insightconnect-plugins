@@ -22,7 +22,7 @@ class SubmitFile(komand.Action):
         file = base64.b64decode(params.get(Input.FILE))
         filename = params.get(Input.FILENAME)
         if filename.lower().endswith(SUPPORTED_FILES):
-            verdict = self.connection.client.get_verdicts(analysed_hash=hashlib.md5(file).hexdigest())
+            verdict = self.connection.client.get_verdicts(analysed_hash=hashlib.sha256(file).hexdigest())
             if verdict == UNKNOWN_VERDICT:
                 out = self.connection.client.submit_file(_file=file, filename=filename)
                 if "filename" not in out.keys():
