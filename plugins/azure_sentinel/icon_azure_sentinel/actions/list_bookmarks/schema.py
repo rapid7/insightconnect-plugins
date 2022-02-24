@@ -223,7 +223,9 @@ class ListBookmarksOutput(insightconnect_plugin_runtime.Output):
             "created": {
               "type": "string",
               "title": "The time the bookmark was created",
+              "displayType": "date",
               "description": "The time the bookmark was created",
+              "format": "date-time",
               "order": 2
             },
             "createdBy": {
@@ -241,7 +243,9 @@ class ListBookmarksOutput(insightconnect_plugin_runtime.Output):
             "eventTime": {
               "type": "string",
               "title": "Event Time",
+              "displayType": "date",
               "description": "The time of the event",
+              "format": "date-time",
               "order": 5
             },
             "friendlyName": {
@@ -286,7 +290,9 @@ class ListBookmarksOutput(insightconnect_plugin_runtime.Output):
             "updated": {
               "type": "string",
               "title": "The last time the bookmark was updated",
+              "displayType": "date",
               "description": "The last time the bookmark was updated",
+              "format": "date-time",
               "order": 12
             },
             "updatedBy": {
@@ -440,7 +446,9 @@ class ListBookmarksOutput(insightconnect_plugin_runtime.Output):
         "created": {
           "type": "string",
           "title": "The time the bookmark was created",
+          "displayType": "date",
           "description": "The time the bookmark was created",
+          "format": "date-time",
           "order": 2
         },
         "createdBy": {
@@ -458,7 +466,9 @@ class ListBookmarksOutput(insightconnect_plugin_runtime.Output):
         "eventTime": {
           "type": "string",
           "title": "Event Time",
+          "displayType": "date",
           "description": "The time of the event",
+          "format": "date-time",
           "order": 5
         },
         "friendlyName": {
@@ -503,7 +513,9 @@ class ListBookmarksOutput(insightconnect_plugin_runtime.Output):
         "updated": {
           "type": "string",
           "title": "The last time the bookmark was updated",
+          "displayType": "date",
           "description": "The last time the bookmark was updated",
+          "format": "date-time",
           "order": 12
         },
         "updatedBy": {

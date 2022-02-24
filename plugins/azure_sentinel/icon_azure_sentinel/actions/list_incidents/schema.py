@@ -332,7 +332,9 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
             "createdTimeUtc": {
               "type": "string",
               "title": "The time the incident was created",
+              "displayType": "date",
               "description": "The time the incident was created",
+              "format": "date-time",
               "order": 5
             },
             "description": {
@@ -350,7 +352,9 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
             "firstActivityTimeUtc": {
               "type": "string",
               "title": "The time of the first activity in the incident",
+              "displayType": "date",
               "description": "The time of the first activity in the incident",
+              "format": "date-time",
               "order": 8
             },
             "id": {
@@ -383,13 +387,17 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
             "lastActivityTimeUtc": {
               "type": "string",
               "title": "The time of the last activity in the incident",
+              "displayType": "date",
               "description": "The time of the last activity in the incident",
+              "format": "date-time",
               "order": 13
             },
             "lastModifiedTimeUtc": {
               "type": "string",
               "title": "The last time the incident was updated",
+              "displayType": "date",
               "description": "The last time the incident was updated",
+              "format": "date-time",
               "order": 14
             },
             "name": {
@@ -881,7 +889,9 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
         "createdTimeUtc": {
           "type": "string",
           "title": "The time the incident was created",
+          "displayType": "date",
           "description": "The time the incident was created",
+          "format": "date-time",
           "order": 5
         },
         "description": {
@@ -899,7 +909,9 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
         "firstActivityTimeUtc": {
           "type": "string",
           "title": "The time of the first activity in the incident",
+          "displayType": "date",
           "description": "The time of the first activity in the incident",
+          "format": "date-time",
           "order": 8
         },
         "id": {
@@ -932,13 +944,17 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
         "lastActivityTimeUtc": {
           "type": "string",
           "title": "The time of the last activity in the incident",
+          "displayType": "date",
           "description": "The time of the last activity in the incident",
+          "format": "date-time",
           "order": 13
         },
         "lastModifiedTimeUtc": {
           "type": "string",
           "title": "The last time the incident was updated",
+          "displayType": "date",
           "description": "The last time the incident was updated",
+          "format": "date-time",
           "order": 14
         },
         "name": {

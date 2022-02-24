@@ -209,7 +209,9 @@ class ListAlertsOutput(insightconnect_plugin_runtime.Output):
             "endTimeUtc": {
               "type": "string",
               "title": "End Time",
+              "displayType": "date",
               "description": "The impact end time of the alert (the time of the last event contributing to the alert).",
+              "format": "date-time",
               "order": 11
             },
             "friendlyName": {
@@ -227,7 +229,9 @@ class ListAlertsOutput(insightconnect_plugin_runtime.Output):
             "processingEndTime": {
               "type": "string",
               "title": "Processing End Time",
+              "displayType": "date",
               "description": "The time the alert was made available for consumption.",
+              "format": "date-time",
               "order": 14
             },
             "productComponentName": {
@@ -287,7 +291,9 @@ class ListAlertsOutput(insightconnect_plugin_runtime.Output):
             "startTimeUtc": {
               "type": "string",
               "title": "The impact start time of the alert (the time of the first event contributing to the alert).",
+              "displayType": "date",
               "description": "The impact start time of the alert (the time of the first event contributing to the alert).",
+              "format": "date-time",
               "order": 22
             },
             "status": {
@@ -327,7 +333,9 @@ class ListAlertsOutput(insightconnect_plugin_runtime.Output):
             "timeGenerated": {
               "type": "string",
               "title": "The time the alert was generated.",
+              "displayType": "date",
               "description": "The time the alert was generated.",
+              "format": "date-time",
               "order": 27
             },
             "type": {
@@ -681,7 +689,9 @@ class ListAlertsOutput(insightconnect_plugin_runtime.Output):
         "endTimeUtc": {
           "type": "string",
           "title": "End Time",
+          "displayType": "date",
           "description": "The impact end time of the alert (the time of the last event contributing to the alert).",
+          "format": "date-time",
           "order": 11
         },
         "friendlyName": {
@@ -699,7 +709,9 @@ class ListAlertsOutput(insightconnect_plugin_runtime.Output):
         "processingEndTime": {
           "type": "string",
           "title": "Processing End Time",
+          "displayType": "date",
           "description": "The time the alert was made available for consumption.",
+          "format": "date-time",
           "order": 14
         },
         "productComponentName": {
@@ -759,7 +771,9 @@ class ListAlertsOutput(insightconnect_plugin_runtime.Output):
         "startTimeUtc": {
           "type": "string",
           "title": "The impact start time of the alert (the time of the first event contributing to the alert).",
+          "displayType": "date",
           "description": "The impact start time of the alert (the time of the first event contributing to the alert).",
+          "format": "date-time",
           "order": 22
         },
         "status": {
@@ -799,7 +813,9 @@ class ListAlertsOutput(insightconnect_plugin_runtime.Output):
         "timeGenerated": {
           "type": "string",
           "title": "The time the alert was generated.",
+          "displayType": "date",
           "description": "The time the alert was generated.",
+          "format": "date-time",
           "order": 27
         },
         "type": {

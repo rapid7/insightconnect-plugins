@@ -2,10 +2,10 @@
 from setuptools import setup, find_packages
 
 
-setup(name="azure_sentinel-rapid7_test-plugin",
-      version="1.0.3",
+setup(name="azure_sentinel-rapid7-plugin",
+      version="1.0.1",
       description="Azure Sentinel is Microsoft's' automated security service.",
-      author="rapid7_test",
+      author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
