@@ -6,4 +6,3 @@ regex==2021.4.4
 validators==0.18.2
 parameterized==0.8.1
 pdfplumber==0.5.28
-flask==2.0.3
