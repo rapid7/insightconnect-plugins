@@ -1,10 +1,11 @@
 import json
-from json import JSONDecodeError
 from logging import Logger
 from typing import Optional
 import requests
 from requests.auth import HTTPBasicAuth
 from insightconnect_plugin_runtime.exceptions import PluginException
+
+ERROR_MSG = "Invalid input data, ensure the input is correct"
 
 
 class CiscoUmbrellaManagementAPI:
@@ -126,37 +127,29 @@ class CiscoUmbrellaManagementAPI:
             "Accept": "application/json",
         }
 
-        try:
-            # Prevents json.dumps() on 'None' data
-            if data is None:
-                data_string = None
-            else:
-                data_string = json.dumps(data)
-            response = requests.request(
-                method,
-                self.url + path,
-                json=json_data,
-                params=params,
-                data=data_string,
-                headers=headers,
-                auth=HTTPBasicAuth(self.api_key, self.api_secret),
-            )
-            if response.status_code == 400:
-                raise PluginException(cause="Invalid input data, ensure the information you are inputting is correct")
-            if response.status_code == 401:
-                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
-            if response.status_code == 403:
-                raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
-            if response.status_code == 404:
-                raise PluginException(preset=PluginException.Preset.NOT_FOUND)
-            if response.status_code >= 500:
-                raise PluginException(preset=PluginException.Preset.SERVER_ERROR)
-            if 200 <= response.status_code < 300:
-                try:
-                    return response.json()
-                except JSONDecodeError:
-                    raise PluginException(preset=PluginException.Preset.INVALID_JSON)
-
-        except requests.exceptions.HTTPError as e:
-            self.logger.info(f"Call to Cisco Umbrella Management API failed: {e}")
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text) from e
+        # Prevents json.dumps() on 'None' data
+        if not data:
+            data_string = None
+        else:
+            data_string = json.dumps(data)
+        response = requests.request(
+            method,
+            self.url + path,
+            json=json_data,
+            params=params,
+            data=data_string,
+            headers=headers,
+            auth=HTTPBasicAuth(self.api_key, self.api_secret),
+        )
+        if response.status_code == 400:
+            raise PluginException(cause=ERROR_MSG)
+        if response.status_code == 401:
+            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
+        if response.status_code == 403:
+            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
+        if response.status_code == 404:
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND)
+        if response.status_code >= 500:
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR)
+        if 200 <= response.status_code < 300:
+            return response.json()
