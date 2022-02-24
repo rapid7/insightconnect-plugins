@@ -1,0 +1,8 @@
+{
+    "status": "error",
+    "errorCode": "General Error",
+    "errors": [
+        "name not passed",
+        "list not passed"
+    ]
+}
