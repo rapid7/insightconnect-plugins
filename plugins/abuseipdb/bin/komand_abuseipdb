@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "AbuseIPDB"
 Vendor = "rapid7"
-Version = "5.0.7"
+Version = "5.0.8"
 Description = "Enables the look up of IP reports, provides list and details of blacklisted IPs, and submissions of abusive IPs"
 
 
