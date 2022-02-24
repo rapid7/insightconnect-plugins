@@ -1,7 +1,7 @@
 {
-	"spec": "dab05963ef3f1e07032765b74165bb8f",
-	"manifest": "7532405f68db2882c12ea3cb48320bba",
-	"setup": "fd726ba3bcec6d4139385f1cf974d95b",
+	"spec": "0407042e0b364351b77eaa4f6d3fff63",
+	"manifest": "6b2b58b325cfcb0cfbb64baf1361e71f",
+	"setup": "49f0c084b36bb0bd634496d317e89328",
 	"schemas": [
 		{
 			"identifier": "check_cidr/schema.py",
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "check_ip/schema.py",
-			"hash": "b015694a0abe21e1efc016ce843dfd4d"
+			"hash": "4789907ca647b874877479ecf4a3868c"
 		},
 		{
 			"identifier": "get_blacklist/schema.py",

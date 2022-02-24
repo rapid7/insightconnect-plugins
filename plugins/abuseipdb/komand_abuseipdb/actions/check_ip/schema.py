@@ -103,7 +103,7 @@ class CheckIpOutput(insightconnect_plugin_runtime.Output):
     "found": {
       "type": "boolean",
       "title": "Found",
-      "description": "Whether an IP address was found in the database",
+      "description": "Whether an IP address was found, indicating it may be malicious",
       "order": 15
     },
     "ipAddress": {
