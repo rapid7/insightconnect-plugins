@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AddUrlsInput, AddUrlsOutput
 
 # Custom imports below
 
 
-class AddUrls(komand.Action):
+class AddUrls(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_urls",

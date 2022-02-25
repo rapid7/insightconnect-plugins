@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AddAttachmentInput, AddAttachmentOutput
 
 # Custom imports below
@@ -7,7 +7,7 @@ import tempfile
 import base64
 
 
-class AddAttachment(komand.Action):
+class AddAttachment(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_attachment",

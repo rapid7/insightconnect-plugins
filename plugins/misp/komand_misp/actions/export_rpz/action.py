@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ExportRpzInput, ExportRpzOutput
 
 # Custom imports below
@@ -6,7 +6,7 @@ import requests
 import base64
 
 
-class ExportRpz(komand.Action):
+class ExportRpz(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="export_rpz",

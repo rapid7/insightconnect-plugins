@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ExportRulesInput, ExportRulesOutput
 
 # Custom imports below
@@ -6,7 +6,7 @@ import requests
 import base64
 
 
-class ExportRules(komand.Action):
+class ExportRules(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="export_rules",

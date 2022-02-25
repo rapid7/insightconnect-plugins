@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CreateAnEventInput, CreateAnEventOutput
 
 # Custom imports below
 import json
 
 
-class CreateAnEvent(komand.Action):
+class CreateAnEvent(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_an_event",

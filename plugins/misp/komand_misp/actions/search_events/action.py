@@ -1,13 +1,13 @@
 import json
 
-import komand
+import insightconnect_plugin_runtime
 from .schema import SearchEventsInput, SearchEventsOutput, Input, Component
 
 
 # Custom imports below
 
 
-class SearchEvents(komand.Action):
+class SearchEvents(insightconnect_plugin_runtime.Action):
     _THREAT_LEVELS = {"Do not search on": None, "Undefined": 1, "Low": 2, "Medium": 3, "High": 4}
 
     _ANALYSIS_LEVEL = {"Do not search on": None, "Initial": 0, "Ongoing": 1, "Completed": 2}

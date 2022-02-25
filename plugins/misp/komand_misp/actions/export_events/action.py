@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ExportEventsInput, ExportEventsOutput
 
 # Custom imports below
@@ -7,7 +7,7 @@ import base64
 import json
 
 
-class ExportEvents(komand.Action):
+class ExportEvents(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="export_events",

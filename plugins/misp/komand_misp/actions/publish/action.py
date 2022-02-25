@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import PublishInput, PublishOutput
 
 # Custom imports below
 
 
-class Publish(komand.Action):
+class Publish(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="publish",
