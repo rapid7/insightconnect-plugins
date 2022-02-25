@@ -1,4 +1,5 @@
 import time
+from http.client import HTTPResponse
 
 import komand
 
@@ -31,7 +32,11 @@ class PollFile(komand.Trigger):
                 self._save_to_cache_and_send(url_object, meta)
             time.sleep(poll)
 
-    def _save_to_cache_and_send(self, url_object, meta):
+    def _save_to_cache_and_send(self, url_object: HTTPResponse, meta: dict):
+        """The function checks whether changes have been made to the file the user is monitoring using trigger.
+        If the file under the given URL does not match the cache,
+        the function refreshes the cache and returns the new file to the user.
+        """
         cache_file = constants.DEFAULT_CACHE_FOLDER + meta.get("file")
         contents = url_object.read().decode(constants.DEFAULT_ENCODING, "replace")
 

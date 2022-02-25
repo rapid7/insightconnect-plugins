@@ -1,15 +1,17 @@
 import hashlib
 import json
+from http.client import HTTPResponse
 
 import komand
 from komand.exceptions import PluginException
+from typing import AnyStr
 
 
 class Utils(object):
     def __init__(self, action):
         self.logger = action.logger
 
-    def validate_url(self, url):
+    def validate_url(self, url: str) -> bool:
         """Check for supported URL prefixes from url string"""
         if url.startswith("http://") or url.startswith("https://") or url.startswith("ftp://"):
             return True
@@ -19,13 +21,13 @@ class Utils(object):
             assistance=f"GetURL: Unsupported URL prefix: {url}",
         )
 
-    def __get_headers(self, url_object):
+    def __get_headers(self, url_object: HTTPResponse) -> dict:
         """Return cache related headers from urllib2 headers dictonary"""
         etag = url_object.headers.get("etag")
         lm = url_object.headers.get("last-modified")
         return {"etag": etag, "last-modified": lm}
 
-    def hash_url(self, url):
+    def hash_url(self, url: str) -> dict:
         """Creates a dictionary containing hashes from a url of type string"""
         try:
             self.logger.info(f"url: {url}")
@@ -38,7 +40,7 @@ class Utils(object):
             self.logger.error(f"HashUrl: Error hashing url {e}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
 
-    def create_url_meta_file(self, meta, url_object):
+    def create_url_meta_file(self, meta: dict, url_object: HTTPResponse):
         """Create metadata file from meta info information"""
         headers = self.__get_headers(url_object)
         data = {
@@ -51,7 +53,7 @@ class Utils(object):
             json.dump(data, loaded_file)
         self.logger.info(f"CreateUrlMetaFile: MetaFile created: {str(data)}")
 
-    def check_url_meta_file(self, meta):
+    def check_url_meta_file(self, meta: dict):
         """Check caching headers from meta info dictionary"""
         try:
             with komand.helper.open_cachefile(meta.get("metafile")) as loaded_file:
@@ -65,7 +67,9 @@ class Utils(object):
                 data=e,
             )
 
-    def check_prefix_and_download(self, url, is_verify, user_agent, timeout=None):
+    def check_prefix_and_download(
+        self, url: str, is_verify: bool, user_agent: str, timeout: int = None
+    ) -> (HTTPResponse, dict):
         """Check for supported url prefix"""
         self.validate_url(url)
         meta = self.hash_url(url)
@@ -86,7 +90,7 @@ class Utils(object):
         )
         return url_object, meta
 
-    def write_contents_to_cache(self, cache_file, contents):
+    def write_contents_to_cache(self, cache_file: str, contents: bytes):
         try:
             old_cache_file = komand.helper.open_cachefile(cache_file)
             old_cache_file.write(contents)
@@ -98,7 +102,7 @@ class Utils(object):
                 data=error,
             )
 
-    def read_contents_from_cache(self, cache_file):
+    def read_contents_from_cache(self, cache_file: str) -> AnyStr:
         try:
             old_cache_file = komand.helper.open_cachefile(cache_file)
             old_contents = old_cache_file.read()
