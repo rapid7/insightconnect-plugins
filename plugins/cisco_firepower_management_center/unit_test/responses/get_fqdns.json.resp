@@ -1,0 +1,22 @@
+{
+  "links": {
+    "self": "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/fqdns?offset=0&limit=5"
+  },
+  "items": [
+    {
+      "links": {
+        "self": "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/fqdns/00000000-0000-0000-0000-000000000001",
+        "parent": "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/networkaddresses"
+      },
+      "type": "FQDN",
+      "name": "example.com",
+      "id": "00000000-0000-0000-0000-000000000001"
+    }
+  ],
+  "paging": {
+    "offset": 0,
+    "limit": 1,
+    "count": 1,
+    "pages": 1
+  }
+}

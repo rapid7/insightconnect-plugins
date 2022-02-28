@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import (
     CheckIfAddressInGroupInput,
     CheckIfAddressInGroupOutput,
@@ -12,7 +12,7 @@ import ipaddress
 import validators
 
 
-class CheckIfAddressInGroup(komand.Action):
+class CheckIfAddressInGroup(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="check_if_address_in_group",

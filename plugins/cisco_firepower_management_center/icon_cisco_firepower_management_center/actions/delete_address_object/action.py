@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import DeleteAddressObjectInput, DeleteAddressObjectOutput, Input, Output, Component
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class DeleteAddressObject(komand.Action):
+class DeleteAddressObject(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="delete_address_object",
@@ -35,5 +35,5 @@ class DeleteAddressObject(komand.Action):
 
         raise PluginException(
             cause=f"The address object {name} does not exist in Cisco Firepower.",
-            assistance="Please enter valid names and try again.",
+            assistance="Please enter valid name and try again.",
         )

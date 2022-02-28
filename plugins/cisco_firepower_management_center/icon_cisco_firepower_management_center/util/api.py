@@ -1,7 +1,6 @@
 import json
 import requests
-from komand.exceptions import PluginException
-import datetime
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class CiscoFirePowerApi:
@@ -13,22 +12,23 @@ class CiscoFirePowerApi:
         verify_ssl: bool,
         port: int,
         domain: str,
-        logger: object,
+        logger,
     ):
         self.url = url.rstrip("/").replace("/api", "") + "/api/"
         self.verify_ssl = verify_ssl
         self.username = username
         self.password = password
         self.domain = domain
+        self.port = port
         self.logger = logger
         self.domain_uuid = self.find_domain_uuid()
 
     def create_address_object(self, object_type: str, payload: dict) -> dict:
-        if object_type == "ipv4" or object_type == "ipv6":
+        if object_type in ["ipv4", "ipv6"]:
             endpoint = "hosts"
-        if object_type == "fqdn":
+        elif object_type == "fqdn":
             endpoint = "fqdns"
-        if object_type == "cidr":
+        else:
             endpoint = "networks"
 
         return self._call_api("POST", f"fmc_config/v1/domain/{self.domain_uuid}/object/{endpoint}", json_data=payload)
@@ -68,6 +68,9 @@ class CiscoFirePowerApi:
                 return item
 
         return {}
+
+    def get_server_version(self) -> list:
+        return self._call_api("GET", "fmc_platform/v1/info/serverversion")
 
     def update_address_group(self, payload):
         return self._call_api(
@@ -146,8 +149,7 @@ class CiscoFirePowerApi:
         for domain in domains:
             if domain.get("name") == self.domain:
                 return domain.get("uuid")
-        else:
-            raise PluginException(
-                cause="Unable to find Domain provided.",
-                assistance="Please validate the domain name provided and try again.",
-            )
+        raise PluginException(
+            cause="Unable to find Domain provided.",
+            assistance="Please validate the domain name provided and try again.",
+        )
