@@ -1,12 +1,12 @@
-import sys
 import os
+import sys
+
 from komand_rest.util.util import *
-import json
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase, mock
 import logging
+from unittest import TestCase, mock
 
 
 class MockResponse:

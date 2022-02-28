@@ -1,9 +1,20 @@
-from requests import Response
-from komand_rest.util.util import Common
-from insightconnect_plugin_runtime.exceptions import PluginException
-import insightconnect_plugin_runtime
-import logging
 import json
+
+import insightconnect_plugin_runtime
+from requests import Response
+
+
+class MockResponse:
+    def __init__(self, json_data, status_code, text):
+        self.json_data = json_data
+        self.status_code = status_code
+        self.text = text
+        self.headers = {}
+
+    def json(self):
+        if self.status_code == 418:
+            raise json.decoder.JSONDecodeError("I am a teapot", "NA", 0)
+        return json.loads(json.dumps(self.json_data))
 
 
 class MockConnection(insightconnect_plugin_runtime.Connection):
@@ -44,16 +55,3 @@ class MockConnectionApi:
             response = MockResponse({"SampleBodyError": "SampleVal"}, 404, "TRYGOOGLE for method " + method)
             response.headers = {"SampleError": "SampleVal"}
             return response
-
-
-class MockResponse:
-    def __init__(self, json_data, status_code, text):
-        self.json_data = json_data
-        self.status_code = status_code
-        self.text = text
-        self.headers = {}
-
-    def json(self):
-        if self.status_code == 418:
-            raise json.decoder.JSONDecodeError("I am a teapot", "NA", 0)
-        return json.loads(json.dumps(self.json_data))

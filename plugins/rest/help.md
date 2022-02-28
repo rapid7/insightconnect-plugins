@@ -11,6 +11,10 @@ This plugin is often used to integrate with ad-hoc 3rd party API's in a workflow
 
 * A RESTFUL HTTP/HTTPS resource and supported authentication, if any
 
+# Supported Product Versions
+
+* 2022-02-22
+
 # Documentation
 
 ## Setup
@@ -449,6 +453,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
+* 5.0.2 - Fix issue with JSON data parser for PATCH request
 * 5.0.1 - Update to make 'No Authentication' the default connection type
 * 5.0.0 - Add ability for user to choose if the plugin should fail on standard HTTP error codes (4xx-5xx) | Add 'No Authentication' as another authentication type
 * 4.0.5 - Fix issue where if an API returned a list it would crash the plugin
