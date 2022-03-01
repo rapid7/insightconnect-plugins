@@ -1,3 +1,5 @@
+import logging
+
 from insightconnect_plugin_runtime.exceptions import PluginException
 import regex
 import base64
@@ -95,6 +97,7 @@ def extract_content_from_file(provided_file: bytes) -> str:
             return regex.sub(r"<[\p{L}\p{N}\p{Lo}\p{So} :\/.\"=_%,(){}+#&;?-]*>", " ", files_content)
         except zipfile.BadZipFile:
             try:
+                logging.getLogger("pdfminer").setLevel(logging.WARNING)
                 # extracting content from PDF file
                 pdf_file = pdfplumber.open(f)
                 pages = pdf_file.pages
