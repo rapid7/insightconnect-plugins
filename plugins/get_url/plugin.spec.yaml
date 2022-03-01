@@ -4,7 +4,8 @@ products: [insightconnect]
 name: get_url
 title: Get URL
 description: Get URL plugin downloads files by URL using HTTP, HTTPS, or FTP
-version: 2.0.0
+version: 2.0.1
+supported_versions: ["_There are no supported product versions listed._"]
 vendor: rapid7
 support: community
 status: []
@@ -12,14 +13,14 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/get_url
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
 tags:
-- url
-- file
-- download
-- http
-- ftp
+  - url
+  - files
+  - document
+  - http
+  - ftp
 hub_tags:
   use_cases: [data_utility]
-  keywords: [url, file, download, http, ftp]
+  keywords: [url, files, document, http]
   features: []
 enable_cache: true
 triggers:
