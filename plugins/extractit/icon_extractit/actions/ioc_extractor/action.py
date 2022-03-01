@@ -4,6 +4,7 @@ from .schema import IocExtractorInput, IocExtractorOutput, Input, Output, Compon
 # Custom imports below
 from icon_extractit.util.util import Regex
 from icon_extractit.util import extractor
+from ...util.extractor import define_date_time_regex
 
 
 class IocExtractor(insightconnect_plugin_runtime.Action):
@@ -20,7 +21,11 @@ class IocExtractor(insightconnect_plugin_runtime.Action):
         provided_string = params.get(Input.STR)
         provided_file = params.get(Input.FILE)
         matches.extend(extractor.clear_domains(extractor.extract(Regex.Domain, provided_string, provided_file)))
-        matches.extend(extractor.parse_time(extractor.extract(Regex.Date, provided_string, provided_file)))
+        matches.extend(
+            extractor.parse_time(
+                extractor.extract(define_date_time_regex("dd/mm/yyyy"), provided_string, provided_file), "dd/mm/yyyy"
+            )
+        )
         matches.extend(extractor.extract_filepath(Regex.FilePath, provided_string, provided_file))
         matches.extend(extractor.clear_emails(extractor.extract(Regex.Email, provided_string, provided_file)))
         matches.extend(extractor.extract(Regex.MACAddress, provided_string, provided_file))

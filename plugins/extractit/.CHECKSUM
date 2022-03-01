@@ -1,7 +1,7 @@
 {
-	"spec": "83c3661cac487bf8242181cda7798039",
-	"manifest": "5c939094eac4692050bc0a1558b0c2b5",
-	"setup": "ab898c9cdb3103e79c6da1e0638224bf",
+	"spec": "1a793e3e810a0a33bc6e2a49d262c85c",
+	"manifest": "dd0c605e4bd6eed943239b5d57affb3e",
+	"setup": "3ea68bd09015aa46040f990c2b17ca03",
 	"schemas": [
 		{
 			"identifier": "cve_extractor/schema.py",
@@ -57,7 +57,7 @@
 		},
 		{
 			"identifier": "url_extractor/schema.py",
-			"hash": "acebca4ace36f85e3179002ed0a0893a"
+			"hash": "b47592bac75b59a78d447c53b8168974"
 		},
 		{
 			"identifier": "uuid_extractor/schema.py",
