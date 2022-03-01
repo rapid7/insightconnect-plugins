@@ -53,9 +53,9 @@ class TestPollFile(TestCase):
 
     @timeout_pass(error_callback=check_error)
     @timeout_decorator.timeout(2)
-    @patch("urllib.request.urlopen", side_effect=Util.mocked_request)
+    @patch("six.moves.urllib.request.urlopen", side_effect=Util.mocked_request)
     @patch("komand_get_url.triggers.PollFile.send", side_effect=MockTrigger.send)
-    @patch("insightconnect_plugin_runtime.helper.open_cachefile", side_effect=Util.mock_for_cache_creation)
+    @patch("komand.helper.open_cachefile", side_effect=Util.mock_for_cache_creation)
     @patch("komand_get_url.util.utils.Utils.create_url_meta_file")
     def test_poll_documents(self, mock_get, mock_send, mock_cache, mock_create_url_meta_file):
         self.action.run({Input.URL: "https://test.com/v1/test.pdf", Input.IS_VERIFY: False})

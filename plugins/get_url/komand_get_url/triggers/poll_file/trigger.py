@@ -1,7 +1,7 @@
 import time
 from http.client import HTTPResponse
 
-import insightconnect_plugin_runtime
+import komand
 
 # Custom imports below
 from komand_get_url.util import constants
@@ -44,7 +44,7 @@ class PollFile(insightconnect_plugin_runtime.Trigger):
         self.utils.create_url_meta_file(meta, url_object)
 
         # We can't guarantee server supports lastmodified/etag, compare contents
-        if insightconnect_plugin_runtime.helper.check_cachefile(cache_file):
+        if komand.helper.check_cachefile(cache_file):
             old_contents = self.utils.read_contents_from_cache(cache_file)
             if old_contents == contents:
                 self.is_modified = False
@@ -57,9 +57,7 @@ class PollFile(insightconnect_plugin_runtime.Trigger):
             if 200 <= url_object.code <= 299:
                 self.send(
                     {
-                        Output.BYTES: insightconnect_plugin_runtime.helper.encode_string(contents).decode(
-                            constants.DEFAULT_ENCODING
-                        ),
+                        Output.BYTES: komand.helper.encode_string(contents).decode(constants.DEFAULT_ENCODING),
                         Output.STATUS_CODE: url_object.code or 200,
                     }
                 )
