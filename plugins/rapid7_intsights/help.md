@@ -820,6 +820,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.0.1 - Fix issue where New Alert trigger sends empty list when there are no new alerts
 * 3.0.0 - Add `assets` custom output type in Add Manual Alert action | Fix missing URL bug in DarkWeb Webmail alerts in Add Manual Alert action
 * 2.0.0 - Add new trigger New Alert | Add new action Get CVE by ID
 * 1.0.0 - Initial plugin

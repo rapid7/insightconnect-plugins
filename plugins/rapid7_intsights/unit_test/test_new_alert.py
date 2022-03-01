@@ -51,14 +51,6 @@ class ErrorChecker:
         TestCase.assertDictEqual(TestCase(), MockTrigger.actual, ErrorChecker.expected)
 
 
-def check_error_empty():
-    expected = {"alert_ids": []}
-    if MockTrigger.actual == expected:
-        return True
-
-    TestCase.assertDictEqual(TestCase(), MockTrigger.actual, expected)
-
-
 class TestNewAlert(TestCase):
     @classmethod
     @patch("requests.request", side_effect=Util.mock_request)
@@ -81,13 +73,6 @@ class TestNewAlert(TestCase):
             }
         )
         self.action.run({Input.IS_CLOSED: "Open"})
-
-    @timeout_pass(error_callback=check_error_empty)
-    @timeout_decorator.timeout(2)
-    @patch("requests.request", side_effect=Util.mock_request)
-    @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=MockTrigger.send)
-    def test_trigger_with_empty(self, mock_request, ss):
-        self.action.run({Input.ALERT_TYPE: ["Phishing"]})
 
     @timeout_pass(error_callback=ErrorChecker.check_error)
     @timeout_decorator.timeout(2)

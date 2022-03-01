@@ -40,6 +40,7 @@ class NewAlert(insightconnect_plugin_runtime.Trigger):
         while True:
             results = self.connection.client.get_alerts(alert_params)
 
-            self.send({Output.ALERT_IDS: results})
+            if results:
+                self.send({Output.ALERT_IDS: results})
             alert_params.found_date_from = current_milli_time()
             time.sleep(params.get(Input.FREQUENCY, 60))
