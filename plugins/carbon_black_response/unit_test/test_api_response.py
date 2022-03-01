@@ -29,6 +29,7 @@ class TestUninstallSensors(TestCase):
         self.connection = Connection()
         self.connection.logger = logging.getLogger("Connection logger")
         self.connection.connect(STUB_CONNECTION)
+        print("connected")
 
         self.action = UninstallSensor()
         self.action.connection = self.connection
@@ -39,13 +40,13 @@ class TestUninstallSensors(TestCase):
     @mock.patch("requests.request", side_effect=mock_request_204)
     def test_successful(self, mock_patch):
         response = self.action.run(self.params)
-        expected_response = {}
+        expected_response = {"success": True}
 
         self.assertEqual(response, expected_response)
 
     @parameterized.expand(
         [
-            (mock_request_400, "Bad request"),
+            (mock_request_400, PluginException.causes[PluginException.Preset.NOT_FOUND]),
             (mock_request_401, PluginException.causes[PluginException.Preset.USERNAME_PASSWORD]),
             (mock_request_403, PluginException.causes[PluginException.Preset.UNAUTHORIZED]),
             (mock_request_404, PluginException.causes[PluginException.Preset.NOT_FOUND]),

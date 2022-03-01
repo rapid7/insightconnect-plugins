@@ -72,8 +72,6 @@ STUB_SENSOR_RESPONSE = {
 }
 
 
-
-
 class MockResponse:
     def __init__(self, filename: str, status_code: int, text: str = "") -> None:
         self.filename = filename
@@ -102,7 +100,10 @@ def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
         if method == "GET":
             return MockResponse("dlGet", status_code)
         if method == "PUT":
+            print("reached")
             return MockResponse("dlPatch", status_code)
+
+
 # Add other test cases for other actions
 
 
