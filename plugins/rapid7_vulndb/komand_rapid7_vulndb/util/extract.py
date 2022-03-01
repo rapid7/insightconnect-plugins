@@ -29,8 +29,7 @@ class Search:
         if response.status_code != requests.codes.ok:
             time.sleep(5)
             response = requests.get(cls.search_url, params=query, allow_redirects=False)
-        ResponseHandler.response_error_handler(response.status_code)
-        response.raise_for_status()
+        response_error_handler(response.status_code, response.text)
         return response.json()
 
     @classmethod
@@ -115,8 +114,7 @@ class Content:
         if response.status_code != requests.codes.ok:
             time.sleep(5)
             response = requests.get(urljoin(cls.content_url, identifier))
-        ResponseHandler.response_error_handler(response.status_code)
-        response.raise_for_status()
+        response_error_handler(response.status_code, response.text)
         modifiers = []
         data = response.json()
 
@@ -149,17 +147,17 @@ class Content:
         return transform(data, *modifiers)
 
 
-class ResponseHandler:
-
-    @classmethod
-    def response_error_handler(cls, status_code: int):
+def response_error_handler(status_code: int, text: str):
+    if 400 <= status_code < 500:
         if status_code == 404:
             raise PluginException(
                 cause="The requested resource could not be found.",
-                assistance="Please contact Rapid7 Support if the issue persists.",
+                assistance="Please ensure that the input parameters are correct.",
+                data=text,
             )
-        if status_code != requests.codes.ok:
-            raise PluginException(
-                cause= f"A {status_code} error occurred.",
-                assistance="Please contact Rapid7 Support if the issue persists.",
-            )
+        raise PluginException(
+            preset=PluginException.Preset.UNKNOWN,
+            data=text,
+        )
+    if status_code >= 500:
+        raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=text)
