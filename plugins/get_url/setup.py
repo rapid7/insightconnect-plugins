@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="get_url-rapid7-plugin",
-      version="2.0.0",
+      version="2.0.1",
       description="Get URL plugin downloads files by URL using HTTP, HTTPS, or FTP",
       author="rapid7",
       author_email="",

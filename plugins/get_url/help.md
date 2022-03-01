@@ -14,11 +14,15 @@ To reduce the number of subsequent requests the Etag and If-Modified-Since field
 
 _This plugin does not contain any requirements._
 
+# Supported Product Versions
+
+* _There are no supported product versions listed._
+
 # Documentation
 
 ## Setup
 
-This plugin does not contain a connection.
+_This plugin does not contain a connection._
 
 ## Technical Details
 
@@ -32,19 +36,40 @@ This action is used to download the contents of a URL.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|url|string|None|True|URL to Download|None|https://example.com|
 |checksum|string|None|False|Checksum verification (MD5, SHA1, SHA256)|None|0800fc577294c34e0b28ad2839435945|
 |is_verify|boolean|True|True|Validate certificate|None|True|
 |timeout|integer|60|False|Timeout in seconds|None|60|
+|url|string|None|True|URL to Download|None|https://example.com|
 |user_agent|string|Mozilla/5.0|False|Send requests with user agent|None|Mozilla/5.0|
 
 Example input:
 
 ```
 {
-  "is_verify": false,
+  "checksum": "0800fc577294c34e0b28ad2839435945",
+  "is_verify": true,
   "timeout": 60,
-  "url": "https://httpbin.org/base64/a29tYW5kIHRlc3Q%3D"
+  "url": "https://example.com",
+  "user_agent": "Mozilla/5.0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|bytes|bytes|False|Bytes|
+|status_code|integer|False|Status code|
+
+Example input:
+
+```
+{
+  "checksum": "0800fc577294c34e0b28ad2839435945",
+  "is_verify": true,
+  "timeout": 60,
+  "url": "https://example.com",
+  "user_agent": "Mozilla/5.0"
 }
 ```
 
@@ -76,9 +101,9 @@ This trigger is used to monitor the contents of a URL for changes. The contents 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|url|string|None|True|URL to Download|None|https://example.com|
-|poll|integer|60|False|Poll in seconds|None|60|
 |is_verify|boolean|True|True|Validate certificate|None|True|
+|poll|integer|60|False|Poll in seconds|None|60|
+|url|string|None|True|URL to Download|None|https://example.com|
 |user_agent|string|Mozilla/5.0|False|Send requests with user agent|None|Mozilla/5.0|
 
 Example input:
@@ -87,7 +112,26 @@ Example input:
 {
   "is_verify": true,
   "poll": 60,
-  "url": "https://httpbin.org/base64/a29tYW5kIHRlc3Q%3D"
+  "url": "https://example.com",
+  "user_agent": "Mozilla/5.0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|bytes|bytes|False|Bytes|
+|status_code|integer|False|Status code|
+
+Example input:
+
+```
+{
+  "is_verify": true,
+  "poll": 60,
+  "url": "https://example.com",
+  "user_agent": "Mozilla/5.0"
 }
 ```
 
@@ -119,6 +163,7 @@ Some web servers do not support cache control mechanisms, or do not use them pro
 
 # Version History
 
+* 2.0.1 - Fix file decoding error after file download
 * 2.0.0 - Use input and output constants | Add example inputs | Changed `Exception` to `PluginException` | Added "f" strings | Move test from actions to connection | Change in return `file` key to `bytes` | Add new input User Agent to Get File action and Poll URL trigger
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Support web server mode
