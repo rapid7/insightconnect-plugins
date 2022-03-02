@@ -35,6 +35,7 @@ def mock_request(*args, **kwargs):
 
         def json(self):
             return json.loads(self.text)
+
     # Check reqeust type and endpoint. Return appropriate file name to be loaded and response code
     query = kwargs.get("params").get("query")
     page = kwargs.get("params").get("page")
