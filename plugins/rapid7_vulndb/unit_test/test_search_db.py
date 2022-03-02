@@ -64,8 +64,8 @@ class TestSearchDb(TestCase):
             Input.DATABASE: self.params.get("database")
         })
         expected = {
-            'results_found': False,
-            'search_results': []
+            "results_found": False,
+            "search_results": []
         }
         self.assertEqual(actual,expected)
 

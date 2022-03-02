@@ -35,8 +35,10 @@ def mock_request(*args, **kwargs):
 
         def json(self):
             return json.loads(self.text)
-    print('URL = ',args, kwargs)
     # Check reqeust type and endpoint. Return appropriate file name to be loaded and response code
+    query = kwargs.get("params").get("query")
+    page = kwargs.get("params").get("page")
+    type_ = kwargs.get("params").get("type")
     if args[0] == f"https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/{STUB_IDENTIFIER}":
         return MockResponse("get_content", 200)
     if args[0] == f"https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/{STUB_SEARCH_CONTENT_IDENTIFIER_1}":
@@ -52,26 +54,24 @@ def mock_request(*args, **kwargs):
     if args[0] == f"https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/{STUB_504_IDENTIFIER}":
         return MockResponse("get_content_bad2", 504)
     if args[0] == f"https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/search":
-        if kwargs.get("params").get("query") == STUB_SEARCH_NO_RESULTS_IDENTIFIER:
+        if query == STUB_SEARCH_NO_RESULTS_IDENTIFIER:
             return MockResponse("search_db_no_results", 200)
-        if kwargs.get("params").get("query") == STUB_SEARCH_404_IDENTIFIER:
+        if query == STUB_SEARCH_404_IDENTIFIER:
             return MockResponse("search_db_bad", 404)
-        if kwargs.get("params").get("query") == STUB_SEARCH_504_IDENTIFIER:
+        if query == STUB_SEARCH_504_IDENTIFIER:
             return MockResponse("search_db_bad", 504)
-        if kwargs.get("params").get("query") == STUB_SEARCH_IDENTIFIER and kwargs.get("params").get("type") == "Metasploit":
-            print('here')
-            if kwargs.get("params").get("page") == 0:
+        if query == STUB_SEARCH_IDENTIFIER and type_ == "Metasploit":
+            if page == 0:
                 return MockResponse("search_db_metasploit_page_0", 200)
             return MockResponse("search_db_metasploit", 200)
-        if kwargs.get("params").get("query") == STUB_SEARCH_IDENTIFIER and kwargs.get("params").get("type") == "Nexpose":
-            print('here')
-            if kwargs.get("params").get("page") == 0:
+        if query == STUB_SEARCH_IDENTIFIER and type_ == "Nexpose":
+            if page == 0:
                 return MockResponse("search_db_nexpose_page_0", 200)
             return MockResponse("search_db_nexpose", 200)
-        if kwargs.get("params").get("query") == STUB_SEARCH_IDENTIFIER:
-            if kwargs.get("params").get("page") == 0:
+        if query == STUB_SEARCH_IDENTIFIER:
+            if page == 0:
                 return MockResponse("search_db_page_0", 200)
-            if kwargs.get("params").get("page") == 1:
+            if page == 1:
                 return MockResponse("search_db_page_1", 200)
             return MockResponse("search_db", 200)
         return MockResponse("search_db", 200)

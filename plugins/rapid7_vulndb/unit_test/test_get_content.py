@@ -18,21 +18,21 @@ class TestGetContent(TestCase):
     @classmethod
     def setUpClass(self) -> None:
         self.params = {
-            'identifier': "3395856ce81f2b7382dee72602f798b642f14140-cve",
-            'identifier_404': "4416967df92g3c8493eff83513g819c753g23241-cve",
-            'identifier_504': "5527178eg13h4d9514egg94624h921d864h34352-cve"
+            "identifier": "3395856ce81f2b7382dee72602f798b642f14140-cve",
+            "identifier_404": "4416967df92g3c8493eff83513g819c753g23241-cve",
+            "identifier_504": "5527178eg13h4d9514egg94624h921d864h34352-cve"
         }
         self.action = GetContent()
 
     @patch("requests.get", side_effect=mock_request)
     def test_get_content(self, mock_req):
         actual = self.action.run({
-            Input.IDENTIFIER: self.params.get('identifier')
+            Input.IDENTIFIER: self.params.get("identifier")
         })
         expected = {
-            'content_result': {
-                'title': 'test_title_1',
-                'description': '\n    <p>test_description_1</p>\n  ',
+            "content_result": {
+                "title": "test_title_1",
+                "description": "\n    <p>test_description_1</p>\n  ",
                 'references': 'test_reference_1',
                 'published_at': '2021-01-01T00:00:00.000Z',
                 'content_type': 'vulnerability',

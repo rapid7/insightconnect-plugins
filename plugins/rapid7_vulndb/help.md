@@ -137,33 +137,6 @@ _This plugin does not contain any triggers._
 |Published_at|string|False|Published date of vulnerability|
 |Title|string|False|Title of Vulnerability|
 
-## Troubleshooting
-
-_This plugin does not contain any troubleshooting information._
-
-# Version History# Description
-
-Make searching the Rapid7 vulnerability and exploit data fast, easy and efficient with the InsightConnect plugin. Leverage this curated repository of vetted computer software exploits and exploitable vulnerabilities to ensure your security operations are always aware of the latest threats that could be used against your environment
-
-# Key Features
-
-* Search Database for vulnerabilities
-* Retrieve vulnerability or Metasploit module details based on a CVE or module identifier
-
-# Requirements
-
-_This plugin does not contain any requirements._
-
-# Documentation
-
-## Setup
-
-_This plugin does not contain a connection._
-
-## Technical Details
-
-### Actions
-
 #### Search Database
 
 This action is used to search the database to find vulnerabilities and exploits.
@@ -248,38 +221,6 @@ Example output:
   }
 }
 ```
-
-### Triggers
-
-_This plugin does not contain any triggers._
-
-### Custom Output Types
-
-#### content
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Alternative identifiers|string|False|List of alternative identifiers of vulnerability|
-|architectures|string|False|List of applicable architectures for the module|
-|Authors|string|False|List of module authors|
-|Content type|string|False|Type of returned content, module or vulnerability|
-|Description|string|False|Brief summary of the returned content|
-|Published_at|string|False|Published date of vulnerability|
-|Rank|int|False|Rank of module|
-|References|string|False|List of references|
-|Reliability|string|False|Reliability of module|
-|Severity|string|False|Severity of vulnerability|
-|Solutions|string|False|List of possible solutions for vulnerability|
-|Title|string|False|Title of Vulnerability|
-
-#### search_result
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Link|string|False|Link to vulnerability|
-|Published_at|string|False|Published date of vulnerability|
-|Title|string|False|Title of Vulnerability|
-
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
@@ -297,12 +238,6 @@ _This plugin does not contain any troubleshooting information._
 * 1.1.0 - Fix issue where Published Date input in the Search Database action would not always parse correctly | Fix issue with memory leaks
 * 1.0.1 - Update to v2 Python plugin architecture and support web server mode
 * 1.0.0 - Initial plugin
-
-# Links
-
-## References
-
-* [Rapid7 Vulnerability & Exploit Database API Specification](https://vdb.rapid7.com/swagger_doc)
 
 # Links
 
