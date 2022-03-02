@@ -10,7 +10,7 @@ from komand_rapid7_vulndb.util.transform import (
     generate_link_attr,
     pop_non_relevant_search_fields,
     pop_non_relevant_module_fields,
-    pop_non_relevant_vuln_fields
+    pop_non_relevant_vuln_fields,
 )
 from typing import Dict
 import requests
