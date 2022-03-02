@@ -37,9 +37,6 @@ def mock_request(*args, **kwargs):
             return json.loads(self.text)
 
     # Check reqeust type and endpoint. Return appropriate file name to be loaded and response code
-    query = kwargs.get("params").get("query")
-    page = kwargs.get("params").get("page")
-    type_ = kwargs.get("params").get("type")
     if args[0] == f"https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/{STUB_IDENTIFIER}":
         return MockResponse("get_content", 200)
     if args[0] == f"https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/{STUB_SEARCH_CONTENT_IDENTIFIER_1}":
@@ -55,6 +52,9 @@ def mock_request(*args, **kwargs):
     if args[0] == f"https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/{STUB_504_IDENTIFIER}":
         return MockResponse("get_content_bad2", 504)
     if args[0] == f"https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/search":
+        query = kwargs.get("params").get("query")
+        page = kwargs.get("params").get("page")
+        type_ = kwargs.get("params").get("type")
         if query == STUB_SEARCH_NO_RESULTS_IDENTIFIER:
             return MockResponse("search_db_no_results", 200)
         if query == STUB_SEARCH_404_IDENTIFIER:
