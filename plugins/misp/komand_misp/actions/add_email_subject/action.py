@@ -25,7 +25,7 @@ class AddEmailSubject(insightconnect_plugin_runtime.Action):
 
         try:
             event = client.get_event(params.get("event"))
-            sub = client.add_email_subject(
+            client.add_email_subject(
                 event,
                 email=params.get("subject"),
                 category="Payload delivery",
@@ -34,14 +34,8 @@ class AddEmailSubject(insightconnect_plugin_runtime.Action):
                 distribution=dist[params.get("distribution")],
                 proposal=proposal,
             )
-        except:
+        except:  # pylint: disable=bare-except
             self.logger.error(event)
             return {"status": False}
 
-        return {"status": True}
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        self.logger.info(output)
         return {"status": True}

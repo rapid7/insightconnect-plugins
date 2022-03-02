@@ -38,14 +38,8 @@ class AddEmailRecipient(insightconnect_plugin_runtime.Action):
                 distribution=dist[params.get("distribution")],
                 proposal=proposal,
             )
-        except:
+        except:  # pylint: disable=bare-except
             self.logger.error(recip)
             return {"status": False}
 
-        return {"status": True}
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        self.logger.info(output)
         return {"status": True}

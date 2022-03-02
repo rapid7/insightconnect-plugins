@@ -51,6 +51,7 @@ class CreateAnEventInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Analysis",
       "description": "The analysis level of the event",
+      "default": "0",
       "enum": [
         "2",
         "1",
@@ -93,6 +94,7 @@ class CreateAnEventInput(insightconnect_plugin_runtime.Input):
       "type": "boolean",
       "title": "Published",
       "description": "Published event?",
+      "default": true,
       "order": 5
     },
     "sharing_group_id": {
@@ -105,6 +107,7 @@ class CreateAnEventInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Threat Level",
       "description": "Importance of the threat",
+      "default": "1",
       "enum": [
         "4",
         "3",

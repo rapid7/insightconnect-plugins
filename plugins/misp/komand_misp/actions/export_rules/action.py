@@ -25,36 +25,36 @@ class ExportRules(insightconnect_plugin_runtime.Action):
         _to = params.get("to")
         last = params.get("last")
 
-        path = "/events/nids/%s/download" % _format
+        path = f"/events/nids/{_format}/download"
         if event_id:
-            path = "%s/%s" % (path, event_id)
+            path = f"{path}/{event_id}"
         else:
-            path = "%s/null" % path
-        path = "%s/%s" % (path, frame)
+            path = f"{path}/null"
+        path = f"{path}/{frame}"
         if tags:
             # If more than 1 tag, separate with &&
             if len(tags) > 1:
                 tags_str = tags[0]
                 tags.pop(0)
                 for i in tags:
-                    tags_str = "%s&&%s"(tags_str, i)
-                path = "%s/%s" % (path, tags_str)
+                    tags_str = f"{tags_str}&&{i}"
+                path = f"{path}/{tags_str}"
             else:
-                path = "%s/%s" % (path, tags)
+                path = f"{path}/{tags}"
         else:
-            path = "%s/null" % path
+            path = f"{path}/null"
         if _from:
-            path = "%s/%s" % (path, _from)
+            path = f"{path}/{_from}"
         else:
-            path = "%s/null" % path
+            path = f"{path}/null"
         if _to:
-            path = "%s/%s" % (path, _to)
+            path = f"{path}/{_to}"
         else:
-            path = "%s/null" % path
+            path = f"{path}/null"
         if last:
-            path = "%s/%s" % (path, last)
+            path = f"{path}/{last}"
         else:
-            path = "%s/null" % path
+            path = f"{path}/null"
         url = self.connection.url + path
         headers = {"content-type": "application/json", "Authorization": key}
 
@@ -72,8 +72,3 @@ class ExportRules(insightconnect_plugin_runtime.Action):
         rules = base64.b64encode(response.text.encode("ascii"))
 
         return {"rules": rules.decode("utf-8")}
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        return {"rules": ""}

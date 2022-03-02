@@ -41,11 +41,5 @@ class AddUrls(insightconnect_plugin_runtime.Action):
                 )
             return {"status": True}
         except Exception as e:
-            self.logger.error("An error has occurred adding one or more URLs. Error: {}".format(e))
+            self.logger.error("An error has occurred adding one or more URLs. Error: %s", e)
             return {"status": False}
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        self.logger.info(output)
-        return {"status": True}

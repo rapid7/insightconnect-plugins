@@ -23,7 +23,7 @@ class AddAttachment(insightconnect_plugin_runtime.Action):
 
         path = tempfile.mkdtemp() + "/"
         fname = "tmp.txt"
-        with open(path + fname, "w") as f:
+        with open(path + fname, "w", encoding="utf-8") as f:
             f.write(base64.b64decode(attachment).decode("utf-8"))
 
         client = self.connection.client
@@ -31,10 +31,4 @@ class AddAttachment(insightconnect_plugin_runtime.Action):
         out = client.add_attachment(in_event, attachment=path + fname, filename=filename)
         self.logger.info(out)
         shutil.rmtree(path)
-        return {"status": True}
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        self.logger.info(output)
         return {"status": True}

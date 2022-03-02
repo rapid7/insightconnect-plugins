@@ -20,14 +20,8 @@ class Publish(insightconnect_plugin_runtime.Action):
         in_event = client.get_event(event)
         published = client.publish(in_event, True)
         try:
-            test = published["id"]
+            published["id"]
         except KeyError:
-            self.logger.error("Something went wrong see returned request, " + published)
+            self.logger.error("Something went wrong see returned request, %s", published)
             raise
         return {"published": published}
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        self.logger.info(output)
-        return {"status": True}

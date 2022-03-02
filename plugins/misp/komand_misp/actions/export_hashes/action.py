@@ -23,32 +23,32 @@ class ExportHashes(insightconnect_plugin_runtime.Action):
         to_ = params.get("to")
         last = params.get("last")
 
-        path = "/events/hids/%s/download" % format_
+        path = f"/events/hids/{format_}/download"
         if tags:
             # If more than 1 tag, separate with &&
             if len(tags) > 1:
                 tags_str = tags[0]
                 tags.pop(0)
                 for i in tags:
-                    tags_str = "%s&&%s" % (tags_str, i)
-                path = "%s/%s" % (path, tags_str)
+                    tags_str = f"{tags_str}&&{i}"
+                path = f"{path}/{tags_str}"
             else:
                 tags_str = str(tags[0])
-                path = "%s/%s" % (path, tags_str)
+                path = f"{path}/{tags_str}"
         else:
-            path = "%s/null" % path
+            path = f"{path}/null"
         if from_:
-            path = "%s/%s" % (path, from_)
+            path = f"{path}/{from_}"
         else:
-            path = "%s/null" % path
+            path = f"{path}/null"
         if to_:
-            path = "%s/%s" % (path, to_)
+            path = f"{path}/{to_}"
         else:
-            path = "%s/null" % path
+            path = f"{path}/null"
         if last:
-            path = "%s/%s" % (path, last)
+            path = f"{path}/{last}"
         else:
-            path = "%s/null" % path
+            path = f"{path}/null"
         url = self.connection.url + path
         headers = {"content-type": "application/json", "Authorization": key}
 
@@ -66,8 +66,3 @@ class ExportHashes(insightconnect_plugin_runtime.Action):
         hashes = base64.b64encode(response.text.encode("ascii"))
 
         return {"hashes": hashes.decode("utf-8")}
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        return {"hashes": ""}

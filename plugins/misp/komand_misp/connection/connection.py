@@ -20,3 +20,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
         except:
             self.logger.error("Connect: Not Connected")
             raise
+
+    def test(self):
+        output = self.client.test_connection()
+        self.logger.info(output)
+        return {"status": True}

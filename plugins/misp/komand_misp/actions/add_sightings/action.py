@@ -24,12 +24,6 @@ class AddSightings(insightconnect_plugin_runtime.Action):
             else:
                 self.logger.info(item)
                 return {"status": False}
-        except:
+        except:  # pylint: disable=bare-except
             self.logger.error(item)
             return {"status": False}
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        self.logger.info(output)
-        return {"status": True}

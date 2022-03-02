@@ -62,8 +62,3 @@ class ExportEvents(insightconnect_plugin_runtime.Action):
         events = base64.b64encode(response.text.encode("ascii"))
 
         return {"events": events.decode("utf-8")}
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        return {"events": ""}

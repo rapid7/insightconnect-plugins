@@ -25,6 +25,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "boolean",
       "title": "SSL",
       "description": "If true will use SSL for communication to MISP",
+      "default": true,
       "order": 3
     },
     "url": {

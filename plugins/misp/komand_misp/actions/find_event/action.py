@@ -40,8 +40,3 @@ class FindEvent(insightconnect_plugin_runtime.Action):
             raise
 
         return {"event": event["Event"], "message": message, "errors": errors}
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        return {"event": {}, "message": "", "errors": [""]}

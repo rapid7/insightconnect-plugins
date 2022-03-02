@@ -92,7 +92,7 @@ types:
     event:
       title: Event ID
       description: Event ID to append to
-      example: "1"
+      example: "1099"
       type: string
     comment_in:
       title: Comment
@@ -118,7 +118,7 @@ types:
     event:
       title: Event ID
       description: Event ID to append to
-      example: "1"
+      example: "1099"
       type: string
     link:
       title: Link
@@ -144,7 +144,7 @@ types:
     event:
       title: Event ID
       description: Event ID to append to
-      example: "1"
+      example: "1099"
       type: string
     other:
       title: Other
@@ -154,7 +154,7 @@ types:
     comment:
       title: Comment
       description: Attribute comment
-      example: "Example attribute comment"
+      example: "Add UUID to an event"
       type: string
     distribution:
       title: Distribution
@@ -170,7 +170,7 @@ types:
     event:
       title: Event ID
       description: Event ID to append to
-      example: "1"
+      example: "1099"
       type: string
     text:
       title: Text
@@ -180,7 +180,7 @@ types:
     comment:
       title: Comment
       description: Attribute comment
-      example: "Example attribute comment"
+      example: "Updating title"
       type: string
     distribution:
       title: Distribution
@@ -387,6 +387,7 @@ connection:
     title: SSL
     description: If true will use SSL for communication to MISP
     example: true
+    default: true
     type: boolean
     required: true
 triggers:
@@ -411,6 +412,7 @@ triggers:
         title: Remove
         description: If true the tag will be removed
         example: false
+        default: false
         type: boolean
         required: true
     output:
@@ -441,6 +443,7 @@ actions:
         description: Importance of the threat
         type: string
         example: "1"
+        default: "1"
         enum:
         - '4'
         - '3'
@@ -452,6 +455,7 @@ actions:
         description: The analysis level of the event
         type: string
         example: "0"
+        default: "0"
         enum:
         - '2'
         - '1'
@@ -467,6 +471,7 @@ actions:
         title: Published
         description: Published event?
         example: true
+        default: true
         type: boolean
         required: true
       orgc_id:
@@ -595,7 +600,7 @@ actions:
       event:
         title: Event ID
         description: Event ID to append to
-        example: "1"
+        example: "1099"
         type: string
         required: true
       attachment:
@@ -623,7 +628,7 @@ actions:
       event:
         title: Event ID
         description: Event ID to append to
-        example: "1"
+        example: "1099"
         type: string
         required: false
       urls:
@@ -675,7 +680,7 @@ actions:
       event:
         title: Event ID
         description: Event ID to append to
-        example: "1"
+        example: "1099"
         type: string
         required: true
       comment:
@@ -721,7 +726,7 @@ actions:
       event:
         title: Event ID
         description: Event ID to append to
-        example: "1"
+        example: "1099"
         type: string
         required: true
       comment:
@@ -767,7 +772,7 @@ actions:
       event:
         title: Event ID
         description: Event ID to append to
-        example: "1"
+        example: "1099"
         type: string
         required: true
       comment:
@@ -864,7 +869,7 @@ actions:
       event:
         title: Event ID
         description: Event ID to append to
-        example: "1"
+        example: "1099"
         type: string
         required: true
       tag:
@@ -886,7 +891,7 @@ actions:
       event_id:
         title: Event ID
         description: Specify single event to export
-        example: "1"
+        example: "1099"
         type: string
         required: false
       encode_attachments:
@@ -1008,7 +1013,7 @@ actions:
       event_id:
         title: Event ID
         description: Narrow results to a single event
-        example: "1"
+        example: "1099"
         type: string
         required: false
       frame:
@@ -1098,7 +1103,7 @@ actions:
       event_id:
         title: Event ID
         description: Specify single event to export
-        example: "1"
+        example: "1099"
         type: string
         required: false
       encode_attachments:
@@ -1145,7 +1150,7 @@ actions:
       event_id:
         title: Event ID
         description: Specify single event to export
-        example: "1"
+        example: "1099"
         type: string
         required: false
       tags:
@@ -1195,7 +1200,7 @@ actions:
       event_id:
         title: Event ID
         description: Event ID e.g. 123
-        example: "1"
+        example: "1099"
         type: string
         required: true
     output:
@@ -1221,7 +1226,7 @@ actions:
       event:
         title: Event ID
         description: Event ID to append to
-        example: "1"
+        example: "1099"
         type: string
         required: true
       tag:
@@ -1243,7 +1248,7 @@ actions:
       event:
         title: Event ID
         description: ID of event to append to
-        example: "1"
+        example: "1099"
         type: string
         required: true
       type_value:
@@ -1283,7 +1288,7 @@ actions:
       event:
         title: Event
         description: Search by event ID
-        example: "1"
+        example: "1099"
         type: string
         required: false
       tag:
@@ -1377,7 +1382,7 @@ actions:
       event:
         title: Event
         description: Search by event ID
-        example: "1"
+        example: "1099"
         type: string
         required: false
     output:

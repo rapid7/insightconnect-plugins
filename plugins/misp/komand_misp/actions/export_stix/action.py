@@ -65,8 +65,3 @@ class ExportStix(insightconnect_plugin_runtime.Action):
         stix = base64.b64encode(response.text.encode("ascii"))
 
         return {"stix": stix.decode("utf-8")}
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        return {"stix": ""}

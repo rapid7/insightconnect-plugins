@@ -36,6 +36,7 @@ class SearchForTagInput(insightconnect_plugin_runtime.Input):
       "type": "boolean",
       "title": "Remove",
       "description": "If true the tag will be removed",
+      "default": false,
       "order": 3
     },
     "tag": {

@@ -64,8 +64,3 @@ class ExportAttributes(insightconnect_plugin_runtime.Action):
         attributes = base64.b64encode(response.text.encode("ascii"))
 
         return {"attributes": attributes.decode("utf-8")}
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        return {"attributes": ""}
