@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "SentinelOne"
 Vendor = "rapid7"
-Version = "6.2.0"
+Version = "6.3.0"
 Description = "The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne"
 
 
@@ -85,6 +85,10 @@ def main():
             self.add_action(actions.SearchAgents())
 
             self.add_action(actions.ThreatsFetchFile())
+
+            self.add_action(actions.UpdateAnalystVerdict())
+
+            self.add_action(actions.UpdateIncidentStatus())
 
 
     """Run plugin"""
