@@ -23,9 +23,10 @@ class Util:
                     while (datetime.now() - t1).seconds < timeout:
                         try:
                             # Sleep exponentially increases per retry
-                            # #nosec prevents bandit warning
+                            # # nosec prevents bandit warning
                             time.sleep(
-                                backoff_seconds * 2**attempt + random.uniform(0, 1) # nosec
+                                backoff_seconds * 2**attempt
+                                + random.uniform(0, 1)  # nosec
                             )
                             return func(*args, **kwargs)
                         except exceptions:
