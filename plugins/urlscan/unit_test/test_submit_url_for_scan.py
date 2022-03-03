@@ -9,7 +9,7 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_urlscan.actions.submit_url_for_scan import SubmitUrlForScan
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 @mock.patch("requests.post", side_effect=Util.mocked_requests_post)

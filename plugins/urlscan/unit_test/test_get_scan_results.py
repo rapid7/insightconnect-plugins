@@ -3,7 +3,7 @@ import sys
 from unittest import TestCase
 
 import mock
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 from komand_urlscan.actions import GetScanResults
 from komand_urlscan.actions.get_scan_results.schema import Input

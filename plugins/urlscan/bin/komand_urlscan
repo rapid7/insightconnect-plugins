@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "urlscan.io"
 Vendor = "rapid7"
-Version = "4.0.1"
+Version = "4.0.2"
 Description = "Analyze URLs for malicious indicators using the URLScan website scanner"
 
 
@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
+    import insightconnect_plugin_runtime
     from komand_urlscan import connection, actions, triggers
 
-    class ICONUrlscan(komand.Plugin):
+    class ICONUrlscan(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -42,7 +42,7 @@ def main():
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONUrlscan())
+    cli = insightconnect_plugin_runtime.CLI(ICONUrlscan())
     cli.run()
 
 
