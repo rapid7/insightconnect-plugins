@@ -25,8 +25,8 @@ class Util:
                             # Sleep exponentially increases per retry
                             # #nosec prevents bandit warning
                             time.sleep(
-                                backoff_seconds * 2**attempt + random.uniform(0, 1)
-                            )  # nosec
+                                backoff_seconds * 2**attempt + random.uniform(0, 1) # nosec
+                            )
                             return func(*args, **kwargs)
                         except exceptions:
                             attempt += 1
