@@ -1,17 +1,15 @@
+import base64
+import io
+import time
+import zipfile
+
 import insightconnect_plugin_runtime
 import requests
-from .schema import ConnectionSchema, Input
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 
 from komand_sentinelone.util.api import SentineloneAPI
-from insightconnect_plugin_runtime.exceptions import (
-    ConnectionTestException,
-    PluginException,
-)
-import zipfile
-import io
-import base64
-import time
 from komand_sentinelone.util.helper import Helper
+from .schema import ConnectionSchema, Input
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -104,7 +102,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def make_token_header(self):
         self.header = {
-            "Authorization": "Token %s" % (self.token),
+            "Authorization": f"Token {self.token}",
             "Content-Type": "application/json",
         }
 
@@ -151,13 +149,22 @@ class Connection(insightconnect_plugin_runtime.Connection):
             activities = self.activities_list(agent_filter)
         self.get_auth_token(self.url, self.username, self.password)
         response = self._call_api("GET", activities["data"][0]["data"]["filePath"][1:], full_response=True)
-        downloaded_zipfile = zipfile.ZipFile(io.BytesIO(response.content))
-        downloaded_zipfile.setpassword(password.encode("UTF-8"))
+        try:
+            file_name = activities["data"][-1]["data"]["fileDisplayName"]
+            with zipfile.ZipFile(io.BytesIO(response.content)) as downloaded_zipfile:
+                downloaded_zipfile.setpassword(password.encode("UTF-8"))
 
-        return {
-            "filename": activities["data"][-1]["data"]["fileDisplayName"],
-            "content": base64.b64encode(downloaded_zipfile.read(downloaded_zipfile.infolist()[-1])).decode("utf-8"),
-        }
+                return {
+                    "filename": file_name,
+                    "content": base64.b64encode(downloaded_zipfile.read(downloaded_zipfile.infolist()[-1])).decode(
+                        "utf-8"
+                    ),
+                }
+        except KeyError:
+            raise PluginException(
+                cause="An error occurred when trying to download file.",
+                assistance="Please contact support or try again later.",
+            )
 
     def threats_fetch_file(self, password: str, agents_filter: dict) -> int:
         self.get_auth_token(self.url, self.username, self.password)
@@ -174,7 +181,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         # API v2.0 and 2.1 have different responses -- revert to 2.0
         threats = self._call_api("GET", first_page_endpoint, override_api_version="2.0")
         all_threads_data = threats["data"]
-        next_cursor = threats["pagination"]["nextCursor"]
+        next_cursor = threats.get("pagination", {}).get("nextCursor")
 
         while next_cursor:
             next_threats = self._call_api(
@@ -212,7 +219,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 }
             ]
         }
-        response = self._call_api("POST", "private/threats/ioc-create-threats", body)
+        response = self._call_api("POST", "private/threats/ioc-create-threats", body, full_response=True)
 
         return response.json()["data"]["affected"]
 
@@ -238,10 +245,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
         # Mark as threat does not exist in v2.1
         return self._call_api("POST", "threats/mark-as-threat", body, override_api_version="2.0")["data"]["affected"]
 
-    def get_threats(self, params):
+    def get_threats(self, params: dict, api_version: str = "2.0") -> dict:
         # GET /threats has different response schemas for 2.1 and 2.0
         # Use 2.0 endpoint to be consistent and support as many S1 consoles as possible
-        return self._call_api("GET", "threats", params=params, override_api_version="2.0")
+        return self._call_api("GET", "threats", params=params, override_api_version=api_version)
+
+    def get_alerts(self, params: dict) -> dict:
+        return self._call_api("GET", "cloud-detection/alerts", params=params)
 
     def create_blacklist_item(self, blacklist_hash: str, description: str):
         sites = self._call_api("GET", "sites").get("data", {}).get("sites", [])
@@ -345,6 +355,98 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         return insightconnect_plugin_runtime.helper.clean(self._call_api("GET", endpoint, params=params))
 
+    def update_analyst_verdict(self, incident_ids: list, analyst_verdict: str, _type: str) -> dict:
+        if _type == "threats":
+            endpoint = "threats/analyst-verdict"
+        else:
+            endpoint = "cloud-detection/alerts/analyst-verdict"
+
+        return self._call_api(
+            "POST",
+            endpoint,
+            {"filter": {"ids": incident_ids}, "data": {"analystVerdict": analyst_verdict}},
+        )
+
+    def update_incident_status(self, incident_ids: list, incident_status: str, _type: str) -> dict:
+        if _type == "threats":
+            endpoint = "threats/incident"
+        else:
+            endpoint = "cloud-detection/alerts/incident"
+
+        return self._call_api(
+            "POST",
+            endpoint,
+            {"filter": {"ids": incident_ids}, "data": {"incidentStatus": incident_status}},
+        )
+
+    def remove_non_existing_incidents(self, incident_ids: list, _type: str) -> list:
+        """
+        This function checks each incident ID in the provided list
+        of incident IDs, against the SentinelOne instance, to see
+        if they exist. Only incident IDs that do exist within that
+        instance are returned.
+
+        @param incident_ids: list of incidents IDs to check if they
+        exist in the SentinelOne instance
+        @param _type: type of the incident - either 'threats' or
+        'alerts'
+        @return: returns a list of incident IDs that exist in the
+        SentinelOne instance
+        """
+        for incident_id in incident_ids:
+            response_data = self.get_incident(incident_id, _type).get("data")
+            if isinstance(response_data, list) and response_data.__len__() == 0:
+                self.logger.info(f"Incident {incident_id} was not found.")
+                incident_ids.remove(incident_id)
+
+        return incident_ids
+
+    def validate_incident_state(self, incident_ids: list, _type: str, new_state: str, attribute: str) -> list:
+        """
+        This function checks each incident ID in the provided list
+        of incident IDs, against the SentinelOne instance, validating
+        that the current value of a certain attribute (either
+        'analystVerdict' or 'incidentStatus') of the incident is
+        different to the 'new_state' attribute. Only incident IDs that
+        have different status are returned.
+
+        @param incident_ids: list of incidents IDs to validate the
+        status of in the SentinelOne instance
+        @param _type: type of the incident - either 'threats' or
+        'alerts'
+        @param new_state: the new state of the incident we wish to
+        update the incident status on
+        @param attribute: attribute to update, either 'analystVerdict'
+        or 'incidentStatus'
+        @return: returns a list of incidents that have different status
+        compared to the `new_state` argument
+        """
+        for incident_id in incident_ids:
+            response_data = self.get_incident(incident_id, _type).get("data")
+            for incident in response_data:
+                if _type == "threats":
+                    object_name = "threatInfo"
+                    resp_incident_id = incident.get("id")
+                else:
+                    object_name = "alertInfo"
+                    resp_incident_id = incident.get(object_name, {}).get("alertId")
+
+                attribute_name = "analystVerdict" if attribute == "analystVerdict" else "incidentStatus"
+                if resp_incident_id == incident_id and incident.get(object_name, {}).get(attribute_name) == new_state:
+                    self.logger.info(f"Incident {incident_id} has the {attribute_name} already set to {new_state}.")
+                    incident_ids.remove(incident_id)
+
+        return incident_ids
+
+    def get_incident(self, incident_id: str, _type: str) -> dict:
+        params = {"ids": [incident_id]}
+        if _type == "threats":
+            response = self.get_threats(params, api_version="2.1")
+        else:
+            response = self.get_alerts(params)
+
+        return response
+
     def get_all_paginated_results(
         self,
         endpoint: str,
@@ -409,4 +511,3 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test(self):
         self.get_auth_token(self.url, self.username, self.password)
-        return
