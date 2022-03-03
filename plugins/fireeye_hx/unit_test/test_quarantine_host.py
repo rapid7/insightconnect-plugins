@@ -7,7 +7,7 @@ from icon_fireeye_hx.actions.quarantine_host.schema import Input, Output
 from unit_test.util import Util
 from unittest.mock import patch
 from parameterized import parameterized
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
