@@ -24,3 +24,5 @@ from .name_available.action import NameAvailable
 from .quarantine.action import Quarantine
 from .search_agents.action import SearchAgents
 from .threats_fetch_file.action import ThreatsFetchFile
+from .update_analyst_verdict.action import UpdateAnalystVerdict
+from .update_incident_status.action import UpdateIncidentStatus
