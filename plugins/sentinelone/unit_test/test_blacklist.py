@@ -3,49 +3,59 @@ import os
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-from komand_sentinelone.connection.connection import Connection
+from unittest.mock import patch
 from komand_sentinelone.actions.blacklist import Blacklist
-import json
-import logging
+from komand_sentinelone.actions.blacklist.schema import Input
+from insightconnect_plugin_runtime.exceptions import PluginException
+from unit_test.util import Util
+from unittest import TestCase
 
 
 class TestBlacklist(TestCase):
-    def test_integration_blacklist(self):
-        """
-        This is an integration test that will connect to the services your plugin uses. It should be used
-        as the basis for tests below that can run independent of a "live" connection.
+    @classmethod
+    @patch("requests.post", side_effect=Util.mocked_requests_get)
+    def setUpClass(cls, mock_request) -> None:
+        cls.action = Util.default_connector(Blacklist())
 
-        This test assumes a normal plugin structure with a /tests directory. In that /tests directory should
-        be json samples that contain all the data needed to run this test. To generate samples run:
+    def test_should_fail_when_wrong_api_version(self):
+        with self.assertRaises(PluginException) as error:
+            self.action.run({Input.HASH: "wrong_hash"})
 
-        icon-plugin generate samples
+        self.assertEqual("An invalid hash was provided.", error.exception.cause)
+        self.assertEqual("Please enter a SHA1 hash and try again.", error.exception.assistance)
 
-        """
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
+    def test_should_success_when_blacklist(self, mock_request):
+        expected = {"success": True}
+        actual = self.action.run({Input.HASH: "3395856ce81f2b7382dee72602f798b642f14140", Input.BLACKLIST_STATE: True})
+        self.assertEqual(expected, actual)
 
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = Blacklist()
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
+    def test_should_success_when_unblacklist(self, mock_request):
+        expected = {"success": True}
+        actual = self.action.run({Input.HASH: "3395856ce81f2b7382dee72602f798b642f14140", Input.BLACKLIST_STATE: False})
+        self.assertEqual(expected, actual)
 
-        test_conn.logger = log
-        test_action.logger = log
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
+    def test_should_success_when_blacklist_and_description(self, mock_request):
+        expected = {"success": True}
+        actual = self.action.run(
+            {
+                Input.HASH: "3395856ce81f2b7382dee72602f798b642f14140",
+                Input.BLACKLIST_STATE: True,
+                Input.DESCRIPTION: "Description",
+            }
+        )
+        self.assertEqual(expected, actual)
 
-        try:
-            with open("../tests/blacklist.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        self.assertEqual({"success": True}, results)
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
+    def test_should_success_when_unblacklist_and_description(self, mock_request):
+        expected = {"success": True}
+        actual = self.action.run(
+            {
+                Input.HASH: "3395856ce81f2b7382dee72602f798b642f14140",
+                Input.BLACKLIST_STATE: False,
+                Input.DESCRIPTION: "Description",
+            }
+        )
+        self.assertEqual(expected, actual)
