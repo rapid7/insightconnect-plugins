@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import AgentsSummaryInput, AgentsSummaryOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_sentinelone.util.helper import Helper
 
 
