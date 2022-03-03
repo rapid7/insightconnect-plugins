@@ -1,10 +1,11 @@
+import json
+from logging import Logger
+from urllib.parse import urlparse, urlsplit, urlunsplit
+
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 from requests import Response
-from urllib.parse import urlparse, urlsplit, urlunsplit
-from logging import Logger
-from requests.auth import HTTPDigestAuth, HTTPBasicAuth
-import json
+from requests.auth import HTTPBasicAuth, HTTPDigestAuth
 
 
 class Common:
@@ -17,10 +18,9 @@ class Common:
         z.update(y)
         return z
 
-    """Copy the case insensitive headers dict to a normal one"""
-
     @staticmethod
     def copy_dict(x):
+        """Copy the case insensitive headers dict to a normal one"""
         d = {}
         for key in x:
             d[key] = x[key]
@@ -28,12 +28,12 @@ class Common:
 
     @staticmethod
     def body_object(response) -> dict:
-
         body_object = {}
         try:
             body_object = response.json()
         except ValueError:
-            """Nothing? We don't care if it fails, that could be normal"""
+            pass
+        # Nothing? We don't care if it fails, that could be normal
         # It's possible to have a successful call with no body
         # https://stackoverflow.com/questions/32319845/python-requests-gives-none-response-where-json-data-is-expected
         if body_object is None:
@@ -77,7 +77,7 @@ class RestAPI(object):
     def with_credentials(
         self, authentication_type: str, username: str = None, password: str = None, secret_key: str = None
     ):
-        if authentication_type == "Basic Auth" or authentication_type == "Digest Auth":
+        if authentication_type in ("Basic Auth", "Digest Auth"):
             if not username or not password:
                 raise PluginException(
                     cause="Basic Auth authentication selected without providing username and password.",
@@ -124,10 +124,11 @@ class RestAPI(object):
         self, method: str, path: str, data: str = None, json_data: dict = None, headers: dict = None
     ) -> Response:
         try:
+            data_string = json.dumps(data) if data else None
             response = requests.request(
                 method,
                 url_path_join(self.url, path),
-                data=data,
+                data=data_string,
                 json=json_data,
                 headers=Common.merge_dicts(self.default_headers, headers or {}),
                 auth=self.auth,

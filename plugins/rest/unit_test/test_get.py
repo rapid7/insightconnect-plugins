@@ -1,10 +1,12 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from unit_test.mockconnection import MockConnection
+
+from mockconnection import MockConnection
+
 from komand_rest.actions.get import Get
 
 
