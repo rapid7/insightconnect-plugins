@@ -1,0 +1,209 @@
+{
+  "errors": [
+    {}
+  ],
+  "pagination": {
+    "totalItems": 1
+  },
+  "data": [
+    {
+      "threatInfo": {
+        "classificationSource": "Cloud",
+        "mitigatedPreemptively": true,
+        "originatorProcess": "string",
+        "certificateId": "string",
+        "initiatingUsername": "string",
+        "incidentStatusDescription": {},
+        "pendingActions": true,
+        "initiatedBy": "agent_policy",
+        "externalTicketId": "string",
+        "reachedEventsLimit": true,
+        "md5": "string",
+        "fileSize": 0,
+        "fileExtensionType": "string",
+        "isFileless": {},
+        "browserType": "string",
+        "storyline": "string",
+        "processUser": "string",
+        "failedActions": true,
+        "sha256": "string",
+        "confidenceLevel": "malicious",
+        "detectionEngines": [
+          "reputation",
+          "pre_execution"
+        ],
+        "detectionType": "static",
+        "analystVerdictDescription": {},
+        "classification": "string",
+        "identifiedAt": "2018-02-27T04:49:26.257525Z",
+        "incidentStatus": "in_progress",
+        "maliciousProcessArguments": "string",
+        "publisherName": "string",
+        "initiatingUserId": "string",
+        "filePath": {},
+        "collectionId": "string",
+        "engines": [
+          "reputation",
+          "pre_execution"
+        ],
+        "fileVerificationType": "string",
+        "threatName": "string",
+        "sha1": "string",
+        "analystVerdict": "false_positive",
+        "updatedAt": "2018-02-27T04:49:26.257525Z",
+        "initiatedByDescription": {},
+        "fileExtension": "string",
+        "mitigationStatusDescription": {},
+        "externalTicketExists": {},
+        "automaticallyResolved": true,
+        "threatId": "string",
+        "isValidCertificate": true,
+        "rebootRequired": true,
+        "cloudFilesHashVerdict": "string",
+        "mitigationStatus": "not_mitigated",
+        "createdAt": "2018-02-27T04:49:26.257525Z"
+      },
+      "whiteningOptions": [
+        "string"
+      ],
+      "agentDetectionInfo": {
+        "agentDetectionState": "string",
+        "agentIpV6": "string",
+        "agentUuid": "string",
+        "groupId": "string",
+        "agentRegisteredAt": "2018-02-27T04:49:26.257525Z",
+        "siteName": "string",
+        "agentVersion": "3.6.1.14",
+        "agentDomain": "string",
+        "accountName": "string",
+        "siteId": "string",
+        "agentLastLoggedInUserName": "janedoe3",
+        "agentMitigationMode": "detect",
+        "externalIp": "string",
+        "agentOsName": "string",
+        "agentIpV4": "string",
+        "cloudProviders": {},
+        "accountId": "string",
+        "agentOsRevision": "string",
+        "groupName": "string"
+      },
+      "id": "same_status_threat_id_1",
+      "kubernetesInfo": {
+        "namespace": "string",
+        "controllerLabels": [
+          "string"
+        ],
+        "controllerName": "string",
+        "namespaceLabels": [
+          "string"
+        ],
+        "cluster": "string",
+        "controllerKind": "string",
+        "node": "string",
+        "podLabels": [
+          "string"
+        ],
+        "pod": "string"
+      },
+      "indicators": [
+        {
+          "description": "string",
+          "category": "string",
+          "categoryId": 0,
+          "ids": [
+            0
+          ],
+          "tactics": [
+            {
+              "source": "string",
+              "techniques": [
+                {
+                  "link": "string",
+                  "name": "string"
+                }
+              ],
+              "name": "string"
+            }
+          ]
+        }
+      ],
+      "containerInfo": {
+        "image": "string",
+        "name": "string",
+        "labels": [
+          "string"
+        ],
+        "id": "string"
+      },
+      "mitigationStatus": [
+        {
+          "action": "kill",
+          "lastUpdate": "2018-02-27T04:49:26.257525Z",
+          "groupNotFound": true,
+          "latestReport": "string",
+          "mitigationEndedAt": "2018-02-27T04:49:26.257525Z",
+          "mitigationStartedAt": "2018-02-27T04:49:26.257525Z",
+          "agentSupportsReport": true,
+          "status": "success",
+          "actionsCounters": {
+            "failed": 0,
+            "notFound": 0,
+            "total": 0,
+            "success": 0,
+            "pendingReboot": 0
+          }
+        }
+      ],
+      "agentRealtimeInfo": {
+        "accountId": "string",
+        "agentDomain": "string",
+        "agentInfected": true,
+        "storageName": "string",
+        "agentMachineType": "unknown",
+        "storageType": "string",
+        "agentIsActive": true,
+        "scanStatus": "none",
+        "agentUuid": "string",
+        "groupId": "string",
+        "userActionsNeeded": [
+          "none"
+        ],
+        "siteId": "string",
+        "agentId": "string",
+        "agentComputerName": "string",
+        "accountName": "string",
+        "agentOsName": "string",
+        "networkInterfaces": [
+          {
+            "physical": "00:25:96:FF:FE:12:34:56",
+            "inet6": [
+              "string",
+              "string"
+            ],
+            "id": "225494730938493804",
+            "name": "string",
+            "inet": [
+              "string",
+              "string"
+            ]
+          }
+        ],
+        "agentDecommissionedAt": true,
+        "scanAbortedAt": "2018-02-27T04:49:26.257525Z",
+        "agentOsType": "macos",
+        "scanFinishedAt": "2018-02-27T04:49:26.257525Z",
+        "agentVersion": "3.6.1.14",
+        "agentOsRevision": "string",
+        "activeThreats": 0,
+        "operationalState": "string",
+        "scanStartedAt": "2018-02-27T04:49:26.257525Z",
+        "agentNetworkStatus": "connected",
+        "groupName": "string",
+        "rebootRequired": true,
+        "siteName": "string",
+        "agentMitigationMode": "detect",
+        "agentIsDecommissioned": true
+      }
+    }
+  ]
+}
