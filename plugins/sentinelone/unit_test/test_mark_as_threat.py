@@ -3,49 +3,23 @@ import os
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-from komand_sentinelone.connection.connection import Connection
+from unittest.mock import patch
 from komand_sentinelone.actions.mark_as_threat import MarkAsThreat
-import json
-import logging
+from komand_sentinelone.actions.mark_as_threat.schema import Input
+from unit_test.util import Util
+from unittest import TestCase
 
 
 class TestMarkAsThreat(TestCase):
-    def test_integration_mark_as_threat(self):
-        """
-        This is an integration test that will connect to the services your plugin uses. It should be used
-        as the basis for tests below that can run independent of a "live" connection.
+    @classmethod
+    @patch("requests.post", side_effect=Util.mocked_requests_get)
+    def setUpClass(cls, mock_request) -> None:
+        cls.action = Util.default_connector(MarkAsThreat())
 
-        This test assumes a normal plugin structure with a /tests directory. In that /tests directory should
-        be json samples that contain all the data needed to run this test. To generate samples run:
-
-        icon-plugin generate samples
-
-        """
-
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = MarkAsThreat()
-
-        test_conn.logger = log
-        test_action.logger = log
-
-        try:
-            with open("../tests/mark_as_threat.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        self.assertTrue("affected" in results.keys())
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
+    def test_should_success_with_target_scope(self, mock_request):
+        expected = {"affected": 1}
+        for test in ["group", "site", "tenant"]:
+            with self.subTest(f"Running agent with action: {test}"):
+                actual = self.action.run({Input.THREAT_ID: "1000000000000000000", Input.TARGET_SCOPE: test})
+                self.assertEqual(expected, actual)
