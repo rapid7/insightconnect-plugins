@@ -6,19 +6,10 @@ import zipfile
 import insightconnect_plugin_runtime
 import requests
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
-from typing import Union, Tuple
 
 from komand_sentinelone.util.api import SentineloneAPI
 from komand_sentinelone.util.helper import Helper
 from .schema import ConnectionSchema, Input
-from komand_sentinelone.util.constants import (
-    BASIC_AUTH,
-    API_TOKEN_AUTH,
-    USERNAME_FIELD,
-    DATA_FIELD,
-    PASSWORD_FIELD,
-    API_TOKEN_FIELD,
-)
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -430,14 +421,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
         @return: returns a list of incident IDs that exist in the
         SentinelOne instance
         """
-        incident_ids_copy = incident_ids.copy()
         for incident_id in incident_ids:
             response_data = self.get_incident(incident_id, _type).get("data")
-            if isinstance(response_data, list) and len(response_data) == 0:
+            if isinstance(response_data, list) and response_data.__len__() == 0:
                 self.logger.info(f"Incident {incident_id} was not found.")
-                incident_ids_copy.remove(incident_id)
+                incident_ids.remove(incident_id)
 
-        return incident_ids_copy
+        return incident_ids
 
     def validate_incident_state(self, incident_ids: list, _type: str, new_state: str, attribute: str) -> list:
         """
@@ -548,4 +538,4 @@ class Connection(insightconnect_plugin_runtime.Connection):
             raise PluginException(cause="API call failed: " + response.text)
 
     def test(self):
-        self.get_auth_token()
+        self.get_auth_token(self.url, self.username, self.password)
