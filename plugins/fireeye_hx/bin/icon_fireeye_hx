@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
+    import insightconnect_plugin_runtime
     from icon_fireeye_hx import connection, actions, triggers
 
-    class ICONFireeyeHx(komand.Plugin):
+    class ICONFireeyeHx(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -40,7 +40,7 @@ def main():
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONFireeyeHx())
+    cli = insightconnect_plugin_runtime.CLI(ICONFireeyeHx())
     cli.run()
 
 
