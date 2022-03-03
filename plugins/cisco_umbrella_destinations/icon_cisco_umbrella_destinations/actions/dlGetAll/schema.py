@@ -11,7 +11,7 @@ class Input:
     pass
 
 class Output:
-    SUCCESS = "success"
+    DATA = "data"
     
 
 class DlGetAllInput(insightconnect_plugin_runtime.Input):
@@ -29,16 +29,16 @@ class DlGetAllOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "success": {
-      "$ref": "#/definitions/dlCollection",
-      "title": "Success",
-      "description": "Successful returned value",
+    "data": {
+      "type": "array",
+      "title": "Data",
+      "description": "List of all destination lists",
+      "items": {
+        "$ref": "#/definitions/dlCollection"
+      },
       "order": 1
     }
   },
-  "required": [
-    "success"
-  ],
   "definitions": {
     "dlCollection": {
       "type": "object",
