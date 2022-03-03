@@ -225,11 +225,11 @@ actions:
     title: Get All Destination Lists
     description: Retrieve all destination lists of organization
     output:
-      success:
-        title: Success
-        description: Successful returned value
-        type: dlCollection
-        required: true
+      data:
+        title: Data
+        description: List of all destination lists
+        type: "[]dlCollection"
+        required: false
   dlCreate:
     title: Create Destination List
     description: Create a destination list

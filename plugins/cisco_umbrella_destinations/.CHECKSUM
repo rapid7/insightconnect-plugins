@@ -1,5 +1,5 @@
 {
-	"spec": "520e685c961089fa5c2643fe6ba3fa30",
+	"spec": "aa37ebf2a0adbeca2d228e0cb9ea21a3",
 	"manifest": "54c3d5776f2857653f5f285d6a2b3830",
 	"setup": "f2bef22ef4fccbc2b650cd695baeb1d2",
 	"schemas": [
@@ -29,7 +29,7 @@
 		},
 		{
 			"identifier": "dlGetAll/schema.py",
-			"hash": "75c6e274a9b1fbb25bef7ca810994eab"
+			"hash": "9a4ed267be222f8da918fe0f15d1100d"
 		},
 		{
 			"identifier": "dlPatch/schema.py",

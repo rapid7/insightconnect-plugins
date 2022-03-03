@@ -323,7 +323,7 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|dlCollection|True|Successful returned value|
+|data|[]dlCollection|False|List of all destination lists|
 
 Example output:
 
