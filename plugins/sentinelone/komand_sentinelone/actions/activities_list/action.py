@@ -45,7 +45,7 @@ class ActivitiesList(insightconnect_plugin_runtime.Action):
 
         limit = params.get(Input.LIMIT, 1000)
 
-        pagination = response.get("pagination")
+        pagination = response.get("pagination", {})
         next_cursor = pagination.get("nextCursor")
         while next_cursor and not limit:
             response = self.connection.activities_list(
