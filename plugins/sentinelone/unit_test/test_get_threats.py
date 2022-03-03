@@ -1,84 +1,64 @@
 import sys
 import os
+import timeout_decorator
+from komand_sentinelone.triggers import GetThreats
+from komand_sentinelone.triggers.get_threats.schema import Input
+from unit_test.util import Util
+from unittest import TestCase
+from unittest.mock import patch
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-from unittest.mock import patch
-from komand_sentinelone.connection.connection import Connection
-from komand_sentinelone.triggers.get_threats import GetThreats
-import logging
-import json
-import timeout_decorator
+
+def timeout_pass(error_callback=None):
+    def func_timeout(func):
+        def func_wrapper(*args, **kwargs):
+            try:
+                return func(*args, **kwargs)
+            except timeout_decorator.timeout_decorator.TimeoutError as e:
+                if error_callback:
+                    return error_callback()
+
+                return None
+
+        return func_wrapper
+
+    return func_timeout
 
 
-# This will catch timeout errors and return None. This tells the test framework our test passed.
-# This is needed because the run function in a trigger is an endless loop.
-def timeout_pass(func):
-    def func_wrapper(*args, **kwargs):
-        try:
-            return func(*args, **kwargs)
-        except timeout_decorator.timeout_decorator.TimeoutError as e:
-            print(f"Test timed out as expected: {e}")
-            return None
+class MockTrigger:
+    actual = None
 
-    return func_wrapper
-
-
-# This mocks komand.Trigger.send
-# We need this to fake out the plugin into thinking it's sending output in the trigger's run function
-class fakeSender:
+    @staticmethod
     def send(params):
-        print(params)
+        MockTrigger.actual = params
 
 
-# Test class
+def check_error():
+    expected = {"threat": {"id": "1111-1111-11111111-1111", "status": "active"}}
+    if MockTrigger.actual == expected:
+        return True
+
+    TestCase.assertDictEqual(TestCase(), MockTrigger.actual, expected)
+
+
 class TestGetThreats(TestCase):
-    @timeout_pass
-    @timeout_decorator.timeout(30)
-    @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=fakeSender.send)
-    def test_integration_get_threats(self, mockSend):
-        """
-        TODO: Manually validate results
+    @classmethod
+    @patch("requests.post", side_effect=Util.mocked_requests_get)
+    def setUpClass(cls, mock_request) -> None:
+        cls.action = Util.default_connector(GetThreats())
 
-        Because the send function is essentially an endless loop, there's no way to validate the output from
-        that in an elegant way. Really this test is just making sure no exceptions are thrown.
-
-        The bulk of your logic for your trigger should not be in the run loop and should be tested with subsequent
-        tests.
-        """
-        log = logging.getLogger("Test")
-
-        try:
-            with open("../tests/get_threats.json") as f:
-                data = json.load(f)
-                connection_params = data.get("body").get("connection")
-                trigger_params = data.get("body").get("input")
-        except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_connection = Connection()
-        test_connection.logger = log
-        test_connection.connect(connection_params)
-
-        test_email_received = GetThreats()
-        test_email_received.connection = test_connection
-        test_email_received.logger = log
-
-        test_email_received.run(trigger_params)
-
-        self.fail()  # If we made it this far, the run loop failed somehow
-
-    def test_get_threats_some_function_to_test(self):
-        """
-        TODO: Test your trigger logic
-
-        Here and in following tests you should test everything you can in your trigger that's not in the run loop.
-        """
-        # self.fail("Unimplemented Test")
+    @timeout_pass(error_callback=check_error)
+    @timeout_decorator.timeout(2)
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
+    @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=MockTrigger.send)
+    def test_poll_threats(self, mock_request, ss):
+        self.action.run(
+            {
+                Input.FREQUENCY: 5,
+                Input.RESOLVED: True,
+                Input.CLASSIFICATIONS: ["class1"],
+                Input.AGENT_IS_ACTIVE: True,
+                Input.ENGINES: ["engine1"],
+            }
+        )
