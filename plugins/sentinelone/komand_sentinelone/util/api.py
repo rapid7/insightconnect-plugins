@@ -1,8 +1,50 @@
 from json import dumps, loads
 from re import match
 from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.helper import clean_list, clean_dict
 
 import requests
+
+
+default_array = [
+    "computerMemberOf",
+    "lastUserMemberOf",
+    "locations",
+    "networkInterfaces",
+    "inet",
+    "inet6",
+    "userActionsNeeded",
+]
+
+
+def clean(obj):
+    """
+    Returns a new but cleaned JSON object.
+
+    * Recursively iterates through the collection
+    * None type values are removed
+    * Empty string values are removed
+
+    This function is designed so we only return useful data
+    """
+
+    cleaned = clean_list(obj) if isinstance(obj, list) else clean_dict(obj)
+
+    # The only *real* difference here is how we have to iterate through these different collection types
+    if isinstance(cleaned, list):
+        for key, value in enumerate(cleaned):
+            if isinstance(value, list) or isinstance(value, dict):  # pylint: disable=consider-merging-isinstance
+                cleaned[key] = clean(value)
+            if value is None or value == "None":
+                cleaned[key] = []
+    elif isinstance(cleaned, dict):
+        for key, value in cleaned.items():
+            if isinstance(value, dict) or isinstance(value, list):  # pylint:disable=consider-merging-isinstance
+                cleaned[key] = clean(value)
+            if key in default_array and (value is None or value == "None"):
+                cleaned[key] = []
+
+    return cleaned
 
 
 class SentineloneAPI:
@@ -35,8 +77,10 @@ class SentineloneAPI:
                     endpoint = f"{self.url}web/api/v{api_version}/agents?{search}={agent}"
                     output = requests.get(endpoint, headers=self.token_header)
 
-                    if output.status_code == 200 and output.json()["pagination"]["totalItems"] >= 1:
-                        results.append(output.json()["data"][0])
+                    if output.status_code == 200 and output.json().get("pagination", {}).get("totalItems", 0) >= 1:
+                        agents_data = output.json().get("data", [])
+                        if agents_data:
+                            results.append(agents_data[0])
 
                 if results_length:
                     if len(results) >= results_length:
@@ -78,7 +122,7 @@ class SentineloneAPI:
 
     @staticmethod
     def clean_results(results):
-        return loads(dumps(results).replace("null", '"None"'))
+        return clean(loads(dumps(results).replace("null", '"None"')))
 
     @staticmethod
     def __check_agents_found(agents: list) -> bool:
