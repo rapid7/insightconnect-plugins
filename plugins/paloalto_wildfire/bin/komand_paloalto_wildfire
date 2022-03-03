@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
+    import insightconnect_plugin_runtime
     from komand_paloalto_wildfire import connection, actions, triggers
 
-    class ICONPaloaltoWildfire(komand.Plugin):
+    class ICONPaloaltoWildfire(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -52,7 +52,7 @@ def main():
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONPaloaltoWildfire())
+    cli = insightconnect_plugin_runtime.CLI(ICONPaloaltoWildfire())
     cli.run()
 
 

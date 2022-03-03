@@ -3,7 +3,7 @@ import sys
 from unittest import TestCase
 from unittest.mock import patch
 
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_paloalto_wildfire.actions import SubmitFileFromUrl
 from komand_paloalto_wildfire.actions.submit_file_from_url.schema import Input, Output
 from unit_test.test_util import Util

@@ -1,12 +1,12 @@
 # Custom imports below
 import base64
 
-import komand
+import insightconnect_plugin_runtime
 
 from .schema import GetPcapInput, GetPcapOutput, Input, Output
 
 
-class GetPcap(komand.Action):
+class GetPcap(insightconnect_plugin_runtime.Action):
     platform = {
         "Windows XP, Adobe Reader 9.3.3, Office 2003": 1,
         "Windows XP, Adobe Reader 9.4.0, Flash 10, Office 2007": 2,

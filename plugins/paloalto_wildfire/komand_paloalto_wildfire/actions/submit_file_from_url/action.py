@@ -1,10 +1,10 @@
 import hashlib
 
-import komand
+import insightconnect_plugin_runtime
 
 # Custom imports below
 import xmltodict
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 from komand_paloalto_wildfire.util.constants import SUPPORTED_FILES
 from komand_paloalto_wildfire.util.utils import Utils
@@ -12,7 +12,7 @@ from .schema import SubmitFileFromUrlInput, SubmitFileFromUrlOutput, Input, Outp
 from ...util.constants import UNKNOWN_VERDICT
 
 
-class SubmitFileFromUrl(komand.Action):
+class SubmitFileFromUrl(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="submit_file_from_url",

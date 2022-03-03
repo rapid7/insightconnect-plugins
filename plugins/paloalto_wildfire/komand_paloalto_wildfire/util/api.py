@@ -1,7 +1,7 @@
 import pyldfire
 import requests
-from komand.exceptions import ConnectionTestException
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class PaloAltoWildfireAPI:

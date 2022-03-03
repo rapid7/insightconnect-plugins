@@ -2,14 +2,14 @@
 import base64
 import hashlib
 
-import komand
+import insightconnect_plugin_runtime
 
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_paloalto_wildfire.util.constants import UNKNOWN_VERDICT, SUPPORTED_FILES
 from .schema import SubmitFileInput, SubmitFileOutput, Input, Output
 
 
-class SubmitFile(komand.Action):
+class SubmitFile(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="submit_file",
@@ -31,7 +31,7 @@ class SubmitFile(komand.Action):
                 if "url" not in out.keys():
                     out["url"] = "Unknown"
 
-                return {Output.SUBMISSION: komand.helper.clean(out)}
+                return {Output.SUBMISSION: insightconnect_plugin_runtime.helper.clean(out)}
             else:
                 return {Output.VERDICT: verdict.capitalize()}
         else:
