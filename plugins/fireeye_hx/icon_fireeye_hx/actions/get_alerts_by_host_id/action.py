@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetAlertsByHostIdInput, GetAlertsByHostIdOutput, Input, Output, Component
 
 # Custom imports below
@@ -6,7 +6,7 @@ import json
 from json import JSONDecodeError
 
 
-class GetAlertsByHostId(komand.Action):
+class GetAlertsByHostId(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_alerts_by_host_id",
@@ -27,7 +27,11 @@ class GetAlertsByHostId(komand.Action):
             raw: str = response.text
 
             # Unkludge the kludgefest "valid JSON" (lol) response from FireEye
-            objects = [komand.helper.clean(json.loads(l)) for l in raw.splitlines() if (not l.isnumeric() and len(l))]
+            objects = [
+                insightconnect_plugin_runtime.helper.clean(json.loads(l))
+                for l in raw.splitlines()
+                if (not l.isnumeric() and len(l))
+            ]
 
             return {Output.ALERTS: objects}
         else:

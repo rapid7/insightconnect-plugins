@@ -1,4 +1,4 @@
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 import requests
 from requests import Session
 from requests.auth import HTTPBasicAuth
