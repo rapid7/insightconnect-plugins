@@ -1,7 +1,8 @@
-import sys
 import os
-from unit_test.mockconnection import MockConnection
+import sys
 from unittest import TestCase
+
+from mockconnection import MockConnection
 
 sys.path.append(os.path.abspath("../"))
 from komand_rest.actions.patch import Patch

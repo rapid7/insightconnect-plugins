@@ -1,10 +1,12 @@
-import sys
 import os
-from unit_test.mockconnection import MockConnection
+import sys
+
+from mockconnection import MockConnection
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
+
 from komand_rest.actions.delete import Delete
 
 
