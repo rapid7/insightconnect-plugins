@@ -3,7 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 6.2.0
+version: 6.3.0
+supported_versions: ["2.0.0", "2.1.0"]
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
 support: rapid7
@@ -2597,6 +2598,77 @@ actions:
         title: Response
         description: SentinelOne API call response data
         type: get_events_response
+        required: false
+  update_analyst_verdict:
+    title: Update Analyst Verdict
+    description: Updates an analyst verdict for each incident ID provided
+    input:
+      incident_ids:
+        title: Incident IDs
+        description: A list of alert or threat IDs on which we may update the analyst verdict
+        type: "[]string"
+        example: ["1118189762920424575", "1118189762920424576"]
+        required: true
+      analyst_verdict:
+        title: Analyst Verdict
+        description: Analyst verdict
+        type: string
+        enum:
+          - true positive
+          - suspicious
+          - false positive
+          - undefined
+        example: true positive
+        required: true
+      type:
+        title: Type
+        description: Type of incidents
+        type: string
+        enum:
+          - threats
+          - alerts
+        example: threats
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
+        required: false
+  update_incident_status:
+    title: Update Incident Status
+    description: Updates an incident status for each incident ID provided
+    input:
+      incident_ids:
+        title: Incident IDs
+        description: A list of alert or threat IDs to update the incident status on
+        type: "[]string"
+        example: ["1118189762920424575", "1118189762920424576"]
+        required: true
+      incident_status:
+        title: Incident Status
+        description: Incident status
+        type: string
+        enum:
+          - unresolved
+          - in progress
+          - resolved
+        example: resolved
+        required: true
+      type:
+        title: Type
+        description: Type of incidents
+        type: string
+        enum:
+          - threats
+          - alerts
+        example: threats
+        required: true
+    output:
+      affected:
+        title: Affected
+        description: Number of entities affected by the requested operation
+        type: integer
         required: false
 triggers:
   get_threats:
