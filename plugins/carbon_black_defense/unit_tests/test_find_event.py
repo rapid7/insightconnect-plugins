@@ -28,20 +28,11 @@ class TestFindEvent(TestCase):
 
     def setUp(self) -> None:
         self.connection, self.action = Util.default_connector(FindEvent())
-        self.real_connection, self.real_action = Util.default_connector(
-            FindEvent(),
-            {
-                ConnectionSchema.CONNECTOR: "2U14HDTMSJ",
-                ConnectionSchema.URL: "https://defense.conferdeploy.net",
-                ConnectionSchema.API_KEY: {"secretKey": "B415DJWQ34TCR99QVHZ42J1A"},
-                ConnectionSchema.ORG_KEY: "7DESJ9GN",
-            },
-        )
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
     def test_find_event_all_inputs(self, _mock_req):
-        actual = self.real_action.run(
+        actual = self.action.run(
             {
                 FindEventSchemaInput.PROCESS_NAME: self.params.get("process_name"),
                 FindEventSchemaInput.DEVICE_NAME: self.params.get("device_name"),
@@ -128,7 +119,7 @@ class TestFindEvent(TestCase):
                 }
             )
         cause = (
-            f"Access to resource at url/api/investigate/v2/orgs/org_key_forbidden/enriched_events/search_jobs is "
-            f"forbidden. The client has authenticated but does not have permission to perform the POST operation."
+            "Access to resource at url/api/investigate/v2/orgs/org_key_forbidden/enriched_events/search_jobs is "
+            "forbidden. The client has authenticated but does not have permission to perform the POST operation."
         )
         self.assertEqual(exception.exception.cause, cause)

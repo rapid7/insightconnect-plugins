@@ -15,53 +15,65 @@ REQUEST_POST = "POST"
 
 # Define and return mock API responses based on request type and endpoint
 def mock_request(*args, **_kwarg):
-    class MockResponse:
-        def __init__(self, filename: str, status_code: int) -> None:
-            self.status_code = status_code
-            if filename:
-                self.text = Util.read_file_to_string(
-                    os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{filename}.json.resp")
-                )
-            else:
-                self.text = ""
+    return mock_request_selection(args[0], args[1])
 
-        def json(self):
-            return json.loads(self.text)
 
+class MockResponse:
+    def __init__(self, filename: str, status_code: int) -> None:
+        self.status_code = status_code
+        if filename:
+            self.text = Util.read_file_to_string(
+                os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{filename}.json.resp")
+            )
+        else:
+            self.text = ""
+
+    def json(self):
+        return json.loads(self.text)
+
+
+def mock_request_post(url):
+    if url == f"{STUB_HOST_VALID}/api/investigate/v2/orgs/{STUB_ORG_KEY_VALID}/enriched_events/search_jobs":
+        return MockResponse("get_job_id_for_enriched_event", 200)
+    if url == f"{STUB_HOST_VALID}/api/investigate/v2/orgs/{STUB_ORG_KEY_VALID}/enriched_events/detail_jobs":
+        return MockResponse("get_job_id_for_detail_search", 200)
+    if url == f"{STUB_HOST_INVALID}/api/investigate/v2/orgs/{STUB_ORG_KEY_VALID}/enriched_events/search_jobs":
+        return MockResponse("find_event_unauthorized", 401)
+    if url == f"{STUB_HOST_INVALID}/api/investigate/v2/orgs/{STUB_ORG_KEY_VALID}/enriched_events/detail_jobs":
+        return MockResponse("find_event_unauthorized", 401)
+    if url == f"{STUB_HOST_VALID}/api/investigate/v2/orgs/{STUB_ORG_KEY_FORBIDDEN}/enriched_events/search_jobs":
+        return MockResponse("find_event_forbidden", 403)
+    if url == f"{STUB_HOST_VALID}/api/investigate/v2/orgs/{STUB_ORG_KEY_FORBIDDEN}/enriched_events/detail_jobs":
+        return MockResponse("find_event_forbidden", 403)
+
+
+def mock_request_get(url):
+    if (
+        url
+        == f"{STUB_HOST_VALID}/api/investigate/v1/orgs/{STUB_ORG_KEY_VALID}/enriched_events/search_jobs/{STUB_JOB_ID}"
+    ):
+        return MockResponse("get_enriched_event_status", 200)
+    if (
+        url
+        == f"{STUB_HOST_VALID}/api/investigate/v2/orgs/{STUB_ORG_KEY_VALID}/enriched_events/search_jobs/{STUB_JOB_ID}/results"
+    ):
+        return MockResponse("retrieve_results_for_enriched_event", 200)
+    if (
+        url
+        == f"{STUB_HOST_VALID}/api/investigate/v2/orgs/{STUB_ORG_KEY_VALID}/enriched_events/detail_jobs/{STUB_JOB_ID_DETAIL_SEARCH}"
+    ):
+        return MockResponse("check_status_of_detail_search", 200)
+    if (
+        url
+        == f"{STUB_HOST_VALID}/api/investigate/v2/orgs/{STUB_ORG_KEY_VALID}/enriched_events/detail_jobs/{STUB_JOB_ID_DETAIL_SEARCH}/results"
+    ):
+        return MockResponse("retrieve_results_for_detail_search", 200)
+
+
+def mock_request_selection(method, url):
     # Check reqeust type and endpoint. Return appropriate file name to be loaded and response code
-    if args[0] == REQUEST_POST:
-        if args[1] == f"{STUB_HOST_VALID}/api/investigate/v2/orgs/{STUB_ORG_KEY_VALID}/enriched_events/search_jobs":
-            return MockResponse("get_job_id_for_enriched_event", 200)
-        if args[1] == f"{STUB_HOST_VALID}/api/investigate/v2/orgs/{STUB_ORG_KEY_VALID}/enriched_events/detail_jobs":
-            return MockResponse("get_job_id_for_detail_search", 200)
-        if args[1] == f"{STUB_HOST_INVALID}/api/investigate/v2/orgs/{STUB_ORG_KEY_VALID}/enriched_events/search_jobs":
-            return MockResponse("find_event_unauthorized", 401)
-        if args[1] == f"{STUB_HOST_INVALID}/api/investigate/v2/orgs/{STUB_ORG_KEY_VALID}/enriched_events/detail_jobs":
-            return MockResponse("find_event_unauthorized", 401)
-        if args[1] == f"{STUB_HOST_VALID}/api/investigate/v2/orgs/{STUB_ORG_KEY_FORBIDDEN}/enriched_events/search_jobs":
-            return MockResponse("find_event_forbidden", 403)
-        if args[1] == f"{STUB_HOST_VALID}/api/investigate/v2/orgs/{STUB_ORG_KEY_FORBIDDEN}/enriched_events/detail_jobs":
-            return MockResponse("find_event_forbidden", 403)
-    elif args[0] == REQUEST_GET:
-        if (
-            args[1]
-            == f"{STUB_HOST_VALID}/api/investigate/v1/orgs/{STUB_ORG_KEY_VALID}/enriched_events/search_jobs/{STUB_JOB_ID}"
-        ):
-            return MockResponse("get_enriched_event_status", 200)
-        if (
-            args[1]
-            == f"{STUB_HOST_VALID}/api/investigate/v2/orgs/{STUB_ORG_KEY_VALID}/enriched_events/search_jobs/{STUB_JOB_ID}/results"
-        ):
-            return MockResponse("retrieve_results_for_enriched_event", 200)
-        if (
-            args[1]
-            == f"{STUB_HOST_VALID}/api/investigate/v2/orgs/{STUB_ORG_KEY_VALID}/enriched_events/detail_jobs/{STUB_JOB_ID_DETAIL_SEARCH}"
-        ):
-            return MockResponse("check_status_of_detail_search", 200)
-        if (
-            args[1]
-            == f"{STUB_HOST_VALID}/api/investigate/v2/orgs/{STUB_ORG_KEY_VALID}/enriched_events/detail_jobs/{STUB_JOB_ID_DETAIL_SEARCH}/results"
-        ):
-            return MockResponse("retrieve_results_for_detail_search", 200)
-
+    if method == REQUEST_POST:
+        return mock_request_post(url)
+    elif method == REQUEST_GET:
+        return mock_request_get(url)
     raise Exception("Response has been not implemented")

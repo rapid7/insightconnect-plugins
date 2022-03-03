@@ -22,7 +22,9 @@ class Util:
                 while attempt < tries:
                     while (datetime.now() - t1).seconds < timeout:
                         try:
-                            time.sleep(backoff_seconds * 2 ** attempt + random.uniform(0, 1))
+                            # Sleep exponentially increases per retry
+                            # #nosec prevents bandit warning
+                            time.sleep(backoff_seconds * 2 ** attempt + random.uniform(0, 1))  # nosec
                             return func(*args, **kwargs)
                         except exceptions:
                             attempt += 1
