@@ -1,6 +1,7 @@
 import time
 
 import insightconnect_plugin_runtime
+
 # Custom imports below
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -34,10 +35,7 @@ class GetNotifications(insightconnect_plugin_runtime.Trigger):
                 data = insightconnect_plugin_runtime.helper.clean(result.json())
             except ValueError:
                 self.logger.error(result.text)
-                raise PluginException(
-                    cause="Error: Received an unexpected response",
-                    assistance=" (non-JSON or no response was received). Raw response in logs.",
-                )
+                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=result.text)
             if "notifications" in data and len(data["notifications"]) > 0:
                 self.send(
                     {

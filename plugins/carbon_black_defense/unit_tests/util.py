@@ -3,21 +3,20 @@ import os
 import json
 
 from komand_carbon_black_defense.connection.connection import Connection
-from komand_carbon_black_defense.actions.find_event.schema import Input
 from komand_carbon_black_defense.connection.schema import Input
 
 
 class Util:
     @staticmethod
     def read_file_to_dict(filename):
-        with open(filename, "rt") as my_file:
+        with open(filename, "rt", encoding="utf8"):
             return json.loads(
                 Util.read_file_to_string(os.path.join(os.path.dirname(os.path.realpath(__file__)), filename))
             )
 
     @staticmethod
     def read_file_to_string(filename):
-        with open(filename, "rt") as my_file:
+        with open(filename, "rt", encoding="utf8") as my_file:
             return my_file.read()
 
     @staticmethod

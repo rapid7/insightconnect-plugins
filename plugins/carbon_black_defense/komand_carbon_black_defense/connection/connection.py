@@ -2,6 +2,7 @@ import json
 from typing import Optional
 
 import insightconnect_plugin_runtime
+
 # Custom imports below
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -86,8 +87,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
             if 400 <= response.status_code < 500:
                 if response.status_code == 403:
                     raise PluginException(
-                        cause="Access to this resource is forbidden.",
-                        assistance="Please ensure the org key is valid. If the issue persists, please contact support.",
+                        cause=f"Access to resource at {url} is forbidden. The client has authenticated but "
+                        f"does not have permission to perform the {method} operation.",
+                        assistance="Please ensure the org key is valid.",
                     )
                 elif response.status_code == 401:
                     raise PluginException(

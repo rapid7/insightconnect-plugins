@@ -12,8 +12,9 @@ STUB_ORG_KEY_FORBIDDEN = "org_key_forbidden"
 REQUEST_GET = "GET"
 REQUEST_POST = "POST"
 
+
 # Define and return mock API responses based on request type and endpoint
-def mock_request(*args, **kwargs):
+def mock_request(*args, **_kwarg):
     class MockResponse:
         def __init__(self, filename: str, status_code: int) -> None:
             self.status_code = status_code

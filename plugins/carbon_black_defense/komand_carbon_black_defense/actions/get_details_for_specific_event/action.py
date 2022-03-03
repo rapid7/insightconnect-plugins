@@ -4,8 +4,7 @@ from datetime import datetime
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from .schema import (GetDetailsForSpecificEventInput,
-                     GetDetailsForSpecificEventOutput, Input, Output)
+from .schema import GetDetailsForSpecificEventInput, GetDetailsForSpecificEventOutput, Input, Output
 
 
 class GetDetailsForSpecificEvent(insightconnect_plugin_runtime.Action):

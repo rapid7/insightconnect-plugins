@@ -1,17 +1,17 @@
 import sys
 import os
-
-sys.path.append(os.path.abspath("../tests/"))
-
 from unittest import TestCase
 from unittest.mock import patch
 from komand_carbon_black_defense.actions.find_event import FindEvent
 from komand_carbon_black_defense.actions.find_event.schema import Input as FindEventSchemaInput
 from unit_tests.util import Util
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_carbon_black_defense.connection.schema import Input as ConnectionSchema
 from unit_tests.mock import (
     mock_request,
 )
+
+sys.path.append(os.path.abspath("../tests/"))
 
 
 class TestFindEvent(TestCase):
@@ -28,11 +28,20 @@ class TestFindEvent(TestCase):
 
     def setUp(self) -> None:
         self.connection, self.action = Util.default_connector(FindEvent())
+        self.real_connection, self.real_action = Util.default_connector(
+            FindEvent(),
+            {
+                ConnectionSchema.CONNECTOR: "2U14HDTMSJ",
+                ConnectionSchema.URL: "https://defense.conferdeploy.net",
+                ConnectionSchema.API_KEY: {"secretKey": "B415DJWQ34TCR99QVHZ42J1A"},
+                ConnectionSchema.ORG_KEY: "7DESJ9GN",
+            },
+        )
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
-    def test_find_event_all_inputs(self, mock_req):
-        actual = self.action.run(
+    def test_find_event_all_inputs(self, _mock_req):
+        actual = self.real_action.run(
             {
                 FindEventSchemaInput.PROCESS_NAME: self.params.get("process_name"),
                 FindEventSchemaInput.DEVICE_NAME: self.params.get("device_name"),
@@ -58,7 +67,7 @@ class TestFindEvent(TestCase):
 
     # test finding event via single input
     @patch("requests.request", side_effect=mock_request)
-    def test_find_event_single_input(self, mock_req):
+    def test_find_event_single_input(self, _mock_req):
         actual = self.action.run(
             {
                 FindEventSchemaInput.PROCESS_NAME: self.params.get("process_name"),
@@ -80,7 +89,7 @@ class TestFindEvent(TestCase):
 
     # test finding an event with invalid credentials
     @patch("requests.request", side_effect=mock_request)
-    def test_find_event_unauthorized(self, mock_req):
+    def test_find_event_unauthorized(self, _mock_req):
         with self.assertRaises(PluginException) as exception:
             self.connection.host = "url_invalid"
             self.action.run(
@@ -97,15 +106,15 @@ class TestFindEvent(TestCase):
 
     # testing a user not entering a criteria to search by
     @patch("requests.request", side_effect=mock_request)
-    def test_get_job_id_for_enriched_event_with_no_criteria(self, make_request):
+    def test_get_job_id_for_enriched_event_with_no_criteria(self, _mock_req):
         with self.assertRaises(PluginException) as exception:
             self.action.run({FindEventSchemaInput.PROCESS_NAME: ""})
-        cause = "Error. Have not entered a criteria for action to run."
+        cause = "No inputs were provided."
         self.assertEqual(exception.exception.cause, cause)
 
     # test get details for specific event with an invalid org key
     @patch("requests.request", side_effect=mock_request)
-    def test_get_details_for_specific_event_forbidden(self, mock_req):
+    def test_get_details_for_specific_event_forbidden(self, _mock_req):
         self.connection.org_key = "org_key_forbidden"
         with self.assertRaises(PluginException) as exception:
             self.action.run(
@@ -118,5 +127,8 @@ class TestFindEvent(TestCase):
                     FindEventSchemaInput.TIME_RANGE: self.params.get("time_range"),
                 }
             )
-        cause = "Access to this resource is forbidden."
+        cause = (
+            f"Access to resource at url/api/investigate/v2/orgs/org_key_forbidden/enriched_events/search_jobs is "
+            f"forbidden. The client has authenticated but does not have permission to perform the POST operation."
+        )
         self.assertEqual(exception.exception.cause, cause)

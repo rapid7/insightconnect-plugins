@@ -17,10 +17,11 @@ class FindEvent(insightconnect_plugin_runtime.Action):
             output=FindEventOutput(),
         )
 
-    @Util.retry(9999, 60, exceptions=(ValueError))
+    @Util.retry(tries=6, timeout=60, exceptions=ValueError, backoff_seconds=1)
     def get_enriched_event_status(self, id_):
         enriched_event_search_status = self.connection.get_enriched_event_status(id_)
         if not enriched_event_search_status:
+            print("hello")
             raise ValueError
         return enriched_event_search_status
 
@@ -46,15 +47,15 @@ class FindEvent(insightconnect_plugin_runtime.Action):
             criteria["device_name"] = device_name
         if not criteria:
             raise PluginException(
-                cause="Error. Have not entered a criteria for action to run.",
-                assistance="Enter a criteria of at least one plugin input.",
+                cause="No inputs were provided.",
+                assistance="At least one input must be provided while configuring this action.",
             )
         id_ = self.connection.get_job_id_for_enriched_event(criteria, None, time_range)
 
         self.logger.info(f"Got enriched event job ID: {id_}")
         if id_ is None:
             return {Output.EVENTINFO: None, Output.SUCCESS: False}
-        enriched_event_search_status = self.get_enriched_event_status(id_)
+        self.get_enriched_event_status(id_)
         response = self.connection.retrieve_results_for_enriched_event(job_id=id_)
         data = insightconnect_plugin_runtime.helper.clean(response)
 
