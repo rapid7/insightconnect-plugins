@@ -3,9 +3,9 @@ extension: plugin
 products: [insightconnect]
 name: att_cybersecurity_alienvault_otx
 title: AT&T Cybersecurity AlienVault Open Threat Exchange
-description: This plugin utilizes AT&T Cybersecurity (AlienVault OTX) to retrieve details about an indicator
- Open Threat Exchange is the neighborhood watch of the global intelligence community
-version: 2.0.0
+description: This plugin utilizes AT&T Cybersecurity (AlienVault OTX) to retrieve details about an indicator. Open Threat Exchange is the neighborhood watch of the global intelligence community
+version: 3.0.0
+supported_versions: ["OTX DirectConnect API v1 2022-03-29T14:00:00Z"]
 vendor: rapid7
 support: community
 status: []
@@ -19,7 +19,7 @@ tags:
 - ATT
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [Threat, Exchange, ATT]
+  keywords: [Exchange, at_and_t]
   features: []
 types:
   groups:
@@ -455,12 +455,12 @@ types:
       required: false
     is_following:
       title: Is Following
-      type: integer
+      type: boolean
       description: Is following
       required: false
     is_subscribed:
       title: Is Subscribed
-      type: integer
+      type: boolean
       description: Is subscribed
       required: false
     username:
@@ -577,12 +577,12 @@ types:
       required: false
     is_following:
       title: Is Following
-      type: integer
+      type: boolean
       description: Is following
       required: false
     is_subscribed:
       title: Is Subscribed
-      type: integer
+      type: boolean
       description: Is subscribed
       required: false
     is_subscribing:
@@ -592,7 +592,7 @@ types:
       required: false
     locked:
       title: Locked
-      type: integer
+      type: boolean
       description: Locked
       required: false
     modified:
@@ -758,7 +758,7 @@ types:
       required: false
     is_following:
       title: Is Following
-      type: integer
+      type: boolean
       description: Is following
       required: false
     is_modified:
@@ -768,12 +768,12 @@ types:
       required: false
     is_subscribing:
       title: Is Subscribing
-      type: integer
+      type: boolean
       description: Is subscribing
       required: false
     locked:
       title: Locked
-      type: integer
+      type: boolean
       description: Locked
       required: false
     modified:
@@ -1201,12 +1201,14 @@ connection:
     description: AlienVault Open Threat Exchange API key
     type: credential_secret_key
     required: true
+    example: 3395856ce81f2b7382dee72602f798b642f14140
   url:
     title: URL
     description: AlienVault Open Threat Exchange URL
     type: string
     default: https://otx.alienvault.com
     required: true
+    example: https://otx.alienvault.com
 actions:
   get_indicator_details:
     title: Get Indicator Details
@@ -1222,11 +1224,13 @@ actions:
         - IPv6
         - URL
         - HOSTNAME
+        example: URL
       indicator:
         title: Indicator
         description: Indicator to search in OTX
         type: string
         required: true
+        example: "https://example.com"
       section:
         title: Section
         description: Section of information returned from the searched
@@ -1240,6 +1244,7 @@ actions:
         - reputation
         - url_list
         - full
+        example: general
     output:
       results:
         title: Results

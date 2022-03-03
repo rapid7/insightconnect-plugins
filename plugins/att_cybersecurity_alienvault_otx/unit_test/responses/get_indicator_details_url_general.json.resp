@@ -1,0 +1,109 @@
+{
+  "sections": [
+    "general",
+    "url_list",
+    "http_scans",
+    "screenshot"
+  ],
+  "indicator": "http://example.com",
+  "type": "url",
+  "type_title": "URL",
+  "validation": [],
+  "base_indicator": {
+    "id": 11376318,
+    "indicator": "http://example.com",
+    "type": "URL",
+    "title": "",
+    "description": "",
+    "content": "",
+    "access_type": "public",
+    "access_reason": ""
+  },
+  "pulse_info": {
+    "count": 1,
+    "pulses": [
+      {
+        "id": "617b087e22ddb5289335a80d",
+        "name": "PhishTank - Dynamic List of Verified/Online Docusign Phishing URLs",
+        "description": "",
+        "modified": "2022-03-03T12:38:07.895000",
+        "created": "2021-10-28T20:30:54.199000",
+        "tags": [
+          "phishing",
+          "docusign",
+          "vsoc",
+          "Vertek MTI"
+        ],
+        "references": [
+          "managedthreatintelligence.com",
+          "phishtank.com"
+        ],
+        "public": 1,
+        "adversary": "",
+        "targeted_countries": [],
+        "malware_families": [],
+        "attack_ids": [],
+        "industries": [],
+        "TLP": "white",
+        "cloned_from": "591c42c5f6d89f0e66168fd6",
+        "export_count": 0,
+        "upvotes_count": 0,
+        "downvotes_count": 0,
+        "votes_count": 0,
+        "locked": false,
+        "pulse_source": "web",
+        "validator_count": 0,
+        "comment_count": 0,
+        "follower_count": 0,
+        "vote": 0,
+        "author": {
+          "username": "Example User",
+          "id": "1",
+          "avatar_url": "avatar.png",
+          "is_subscribed": false,
+          "is_following": false
+        },
+        "indicator_type_counts": {
+          "URL": 21
+        },
+        "indicator_count": 21,
+        "is_author": false,
+        "is_subscribing": null,
+        "subscriber_count": 27,
+        "modified_text": "17 minutes ago ",
+        "is_modified": true,
+        "groups": [],
+        "in_group": false,
+        "threat_hunter_scannable": false,
+        "threat_hunter_has_agents": 1,
+        "related_indicator_type": "URL",
+        "related_indicator_is_active": 1
+      }
+    ],
+    "references": [
+      "phishtank.com",
+      "https://techhelplist.com/pastes/1131-phishing-sites-and-php-kits-april-2017-part-2",
+      "managedthreatintelligence.com",
+      "https://techhelplist.com/pastes/1126-phishing-sites-and-php-kits-april-2017-part-1"
+    ],
+    "related": {
+      "alienvault": {
+        "adversary": [],
+        "malware_families": [],
+        "industries": [],
+        "unique_indicators": 0
+      },
+      "other": {
+        "adversary": [],
+        "malware_families": [],
+        "industries": [],
+        "unique_indicators": 3364
+      }
+    }
+  },
+  "false_positive": [],
+  "alexa": "http://www.alexa.com/siteinfo/example.com",
+  "whois": "http://whois.domaintools.com/example.com",
+  "domain": "example.com",
+  "hostname": "Unavailable"
+}

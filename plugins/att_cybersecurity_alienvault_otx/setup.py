@@ -2,13 +2,13 @@
 from setuptools import setup, find_packages
 
 
-setup(name='att_cybersecurity_alienvault_otx-rapid7-plugin',
-      version='2.0.0',
-      description='This plugin utilizes AT&T Cybersecurity (AlienVault OTX) to retrieve details about an indicator Open Threat Exchange is the neighborhood watch of the global intelligence community',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="att_cybersecurity_alienvault_otx-rapid7-plugin",
+      version="3.0.0",
+      description="This plugin utilizes AT&T Cybersecurity (AlienVault OTX) to retrieve details about an indicator. Open Threat Exchange is the neighborhood watch of the global intelligence community",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
-      install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
+      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_att_cybersecurity_alienvault_otx']
       )

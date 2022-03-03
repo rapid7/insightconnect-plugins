@@ -1,0 +1,21 @@
+{
+  "asn": "AS17501 WorldLink Communications Pvt Ltd",
+  "city_data": true,
+  "city": "Kathmandu",
+  "region": "P3",
+  "continent_code": "AS",
+  "country_code3": "NPL",
+  "country_code2": "NP",
+  "subdivision": "P3",
+  "latitude": 27.7142,
+  "postal_code": null,
+  "longitude": 85.3145,
+  "accuracy_radius": 100,
+  "country_code": "NP",
+  "country_name": "Nepal",
+  "dma_code": 0,
+  "charset": 0,
+  "area_code": 0,
+  "flag_url": "image.png",
+  "flag_title": "Nepal"
+}

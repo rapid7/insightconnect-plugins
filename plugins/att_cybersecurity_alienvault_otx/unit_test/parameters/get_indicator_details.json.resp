@@ -1,0 +1,685 @@
+{
+  "parameters": [
+    [
+      "url_general",
+      "URL",
+      "https://example.com",
+      "general",
+      {
+        "results": {
+          "general": {
+            "sections": [
+              "general",
+              "url_list",
+              "http_scans",
+              "screenshot"
+            ],
+            "indicator": "http://example.com",
+            "type": "url",
+            "type_title": "URL",
+            "validation": [],
+            "base_indicator": {
+              "id": 11376318,
+              "indicator": "http://example.com",
+              "type": "URL",
+              "access_type": "public"
+            },
+            "pulse_info": {
+              "count": 1,
+              "pulses": [
+                {
+                  "id": "617b087e22ddb5289335a80d",
+                  "name": "PhishTank - Dynamic List of Verified/Online Docusign Phishing URLs",
+                  "modified": "2022-03-03T12:38:07.895000",
+                  "created": "2021-10-28T20:30:54.199000",
+                  "tags": [
+                    "phishing",
+                    "docusign",
+                    "vsoc",
+                    "Vertek MTI"
+                  ],
+                  "references": [
+                    "managedthreatintelligence.com",
+                    "phishtank.com"
+                  ],
+                  "public": 1,
+                  "targeted_countries": [],
+                  "malware_families": [],
+                  "attack_ids": [],
+                  "industries": [],
+                  "TLP": "white",
+                  "cloned_from": "591c42c5f6d89f0e66168fd6",
+                  "export_count": 0,
+                  "upvotes_count": 0,
+                  "downvotes_count": 0,
+                  "votes_count": 0,
+                  "locked": false,
+                  "pulse_source": "web",
+                  "validator_count": 0,
+                  "comment_count": 0,
+                  "follower_count": 0,
+                  "vote": 0,
+                  "author": {
+                    "username": "Example User",
+                    "id": "1",
+                    "avatar_url": "avatar.png",
+                    "is_subscribed": false,
+                    "is_following": false
+                  },
+                  "indicator_type_counts": {
+                    "URL": 21
+                  },
+                  "indicator_count": 21,
+                  "is_author": false,
+                  "subscriber_count": 27,
+                  "modified_text": "17 minutes ago ",
+                  "is_modified": true,
+                  "groups": [],
+                  "in_group": false,
+                  "threat_hunter_scannable": false,
+                  "threat_hunter_has_agents": 1,
+                  "related_indicator_type": "URL",
+                  "related_indicator_is_active": 1
+                }
+              ],
+              "references": [
+                "phishtank.com",
+                "https://techhelplist.com/pastes/1131-phishing-sites-and-php-kits-april-2017-part-2",
+                "managedthreatintelligence.com",
+                "https://techhelplist.com/pastes/1126-phishing-sites-and-php-kits-april-2017-part-1"
+              ],
+              "related": {
+                "alienvault": {
+                  "adversary": [],
+                  "malware_families": [],
+                  "industries": [],
+                  "unique_indicators": 0
+                },
+                "other": {
+                  "adversary": [],
+                  "malware_families": [],
+                  "industries": [],
+                  "unique_indicators": 3364
+                }
+              }
+            },
+            "false_positive": [],
+            "alexa": "http://www.alexa.com/siteinfo/example.com",
+            "whois": "http://whois.domaintools.com/example.com",
+            "domain": "example.com",
+            "hostname": "Unavailable"
+          },
+          "geo": {},
+          "reputation": {},
+          "url_list": {},
+          "passive_dns": {},
+          "malware": {},
+          "nids_list": {},
+          "http_scans": {}
+        }
+      }
+    ],
+    [
+      "url_list",
+      "URL",
+      "https://example.com",
+      "url_list",
+      {
+        "results": {
+          "general": {},
+          "geo": {},
+          "reputation": {},
+          "url_list": {
+            "url_list": [
+              {
+                "url": "http://example.com",
+                "result": {
+                  "urlworker": {
+                    "url": "http://example.com",
+                    "ip": "198.51.100.100",
+                    "filetype": "text/html",
+                    "filemagic": "HTML document, ASCII text, with very long lines, with CRLF line terminators",
+                    "http_response": {
+                      "Content-Length": "29453",
+                      "Keep-Alive": "timeout=5, max=100",
+                      "Server": "Apache",
+                      "Connection": "Keep-Alive",
+                      "Date": "Thu, 07 Dec 2017 06:47:35 GMT",
+                      "Content-Type": "text/html; charset=UTF-8"
+                    },
+                    "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+                    "http_code": 200,
+                    "md5": "44d88612fea8a8f36de82e1278abb02f",
+                    "has_file_analysis": false
+                  },
+                  "safebrowsing": {
+                    "matches": []
+                  }
+                },
+                "params": {},
+                "date": "2017-12-07T06:46:58",
+                "checked": 1,
+                "deep_analysis": true,
+                "secs": 1512629218.0,
+                "httpcode": 200,
+                "gsb": []
+              }
+            ],
+            "net_loc": "example.com",
+            "city_data": true,
+            "continent_code": "EU",
+            "country_code3": "IRL",
+            "country_code2": "IE",
+            "latitude": 53.3472,
+            "longitude": -6.2439,
+            "accuracy_radius": 200,
+            "country_code": "IE",
+            "country_name": "Ireland",
+            "dma_code": 0,
+            "charset": 0,
+            "area_code": 0,
+            "flag_title": "Ireland",
+            "flag_url": "image.png"
+          },
+          "passive_dns": {},
+          "malware": {},
+          "nids_list": {},
+          "http_scans": {}
+        }
+      }
+    ],
+    [
+      "url_full",
+      "URL",
+      "https://example.com",
+      "full",
+      {
+        "results": {
+          "general": {
+            "sections": [
+              "general",
+              "url_list",
+              "http_scans",
+              "screenshot"
+            ],
+            "indicator": "http://example.com",
+            "type": "url",
+            "type_title": "URL",
+            "validation": [],
+            "base_indicator": {
+              "id": 11376318,
+              "indicator": "http://example.com",
+              "type": "URL",
+              "access_type": "public"
+            },
+            "pulse_info": {
+              "count": 1,
+              "pulses": [
+                {
+                  "id": "617b087e22ddb5289335a80d",
+                  "name": "PhishTank - Dynamic List of Verified/Online Docusign Phishing URLs",
+                  "modified": "2022-03-03T12:38:07.895000",
+                  "created": "2021-10-28T20:30:54.199000",
+                  "tags": [
+                    "phishing",
+                    "docusign",
+                    "vsoc",
+                    "Vertek MTI"
+                  ],
+                  "references": [
+                    "managedthreatintelligence.com",
+                    "phishtank.com"
+                  ],
+                  "public": 1,
+                  "targeted_countries": [],
+                  "malware_families": [],
+                  "attack_ids": [],
+                  "industries": [],
+                  "TLP": "white",
+                  "cloned_from": "591c42c5f6d89f0e66168fd6",
+                  "export_count": 0,
+                  "upvotes_count": 0,
+                  "downvotes_count": 0,
+                  "votes_count": 0,
+                  "locked": false,
+                  "pulse_source": "web",
+                  "validator_count": 0,
+                  "comment_count": 0,
+                  "follower_count": 0,
+                  "vote": 0,
+                  "author": {
+                    "username": "Example User",
+                    "id": "1",
+                    "avatar_url": "avatar.png",
+                    "is_subscribed": false,
+                    "is_following": false
+                  },
+                  "indicator_type_counts": {
+                    "URL": 21
+                  },
+                  "indicator_count": 21,
+                  "is_author": false,
+                  "subscriber_count": 27,
+                  "modified_text": "17 minutes ago ",
+                  "is_modified": true,
+                  "groups": [],
+                  "in_group": false,
+                  "threat_hunter_scannable": false,
+                  "threat_hunter_has_agents": 1,
+                  "related_indicator_type": "URL",
+                  "related_indicator_is_active": 1
+                }
+              ],
+              "references": [
+                "phishtank.com",
+                "https://techhelplist.com/pastes/1131-phishing-sites-and-php-kits-april-2017-part-2",
+                "managedthreatintelligence.com",
+                "https://techhelplist.com/pastes/1126-phishing-sites-and-php-kits-april-2017-part-1"
+              ],
+              "related": {
+                "alienvault": {
+                  "adversary": [],
+                  "malware_families": [],
+                  "industries": [],
+                  "unique_indicators": 0
+                },
+                "other": {
+                  "adversary": [],
+                  "malware_families": [],
+                  "industries": [],
+                  "unique_indicators": 3364
+                }
+              }
+            },
+            "false_positive": [],
+            "alexa": "http://www.alexa.com/siteinfo/example.com",
+            "whois": "http://whois.domaintools.com/example.com",
+            "domain": "example.com",
+            "hostname": "Unavailable"
+          },
+          "url_list": {
+            "url_list": [
+              {
+                "url": "http://example.com",
+                "result": {
+                  "urlworker": {
+                    "url": "http://example.com",
+                    "ip": "198.51.100.100",
+                    "filetype": "text/html",
+                    "filemagic": "HTML document, ASCII text, with very long lines, with CRLF line terminators",
+                    "http_response": {
+                      "Content-Length": "29453",
+                      "Keep-Alive": "timeout=5, max=100",
+                      "Server": "Apache",
+                      "Connection": "Keep-Alive",
+                      "Date": "Thu, 07 Dec 2017 06:47:35 GMT",
+                      "Content-Type": "text/html; charset=UTF-8"
+                    },
+                    "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+                    "http_code": 200,
+                    "md5": "44d88612fea8a8f36de82e1278abb02f",
+                    "has_file_analysis": false
+                  },
+                  "safebrowsing": {
+                    "matches": []
+                  }
+                },
+                "params": {},
+                "date": "2017-12-07T06:46:58",
+                "checked": 1,
+                "deep_analysis": true,
+                "secs": 1512629218.0,
+                "httpcode": 200,
+                "gsb": []
+              }
+            ],
+            "net_loc": "example.com",
+            "city_data": true,
+            "continent_code": "EU",
+            "country_code3": "IRL",
+            "country_code2": "IE",
+            "latitude": 53.3472,
+            "longitude": -6.2439,
+            "accuracy_radius": 200,
+            "country_code": "IE",
+            "country_name": "Ireland",
+            "dma_code": 0,
+            "charset": 0,
+            "area_code": 0,
+            "flag_title": "Ireland",
+            "flag_url": "image.png"
+          }
+        }
+      }
+    ],
+    [
+      "ipv4_general",
+      "IPv4",
+      "198.51.100.100",
+      "general",
+      {
+        "results": {
+          "general": {
+            "whois": "http://whois.domaintools.com/198.51.100.100",
+            "reputation": 0,
+            "indicator": "198.51.100.100",
+            "type": "IPv4",
+            "type_title": "IPv4",
+            "base_indicator": {
+              "id": 1,
+              "indicator": "198.51.100.100",
+              "type": "IPv4",
+              "access_type": "public"
+            },
+            "pulse_info": {
+              "count": 1,
+              "pulses": [
+                {
+                  "id": "1",
+                  "name": "QakBot IOCs",
+                  "description": "The following is the full text of the letter sent by the BBC's Jeremy Vine, who describes himself as \"the most intelligent, intelligent and intelligent person in the world\" - and the person he is.",
+                  "modified": "2022-03-02T13:59:28.273000",
+                  "created": "2022-03-02T13:59:28.273000",
+                  "tags": [
+                    "zip file",
+                    "download urls",
+                    "qakbot payload",
+                    "jjccbb",
+                    "observed",
+                    "domains",
+                    "xlsb file",
+                    "file hashes",
+                    "file hash",
+                    "qakbot c2s"
+                  ],
+                  "references": [
+                    "https://twitter.com/executemalware/status/1",
+                    "https://twitter.com/executemalware/status/2",
+                    "https://twitter.com/ankit_anubhav/status/3"
+                  ],
+                  "public": 1,
+                  "targeted_countries": [],
+                  "malware_families": [],
+                  "attack_ids": [],
+                  "industries": [],
+                  "TLP": "green",
+                  "export_count": 3,
+                  "upvotes_count": 0,
+                  "downvotes_count": 0,
+                  "votes_count": 0,
+                  "locked": false,
+                  "pulse_source": "web",
+                  "validator_count": 0,
+                  "comment_count": 0,
+                  "follower_count": 0,
+                  "vote": 0,
+                  "author": {
+                    "username": "Example User",
+                    "id": "1",
+                    "avatar_url": "avatar.png",
+                    "is_subscribed": false,
+                    "is_following": false
+                  },
+                  "indicator_type_counts": {
+                    "FileHash-MD5": 36,
+                    "FileHash-SHA1": 1,
+                    "FileHash-SHA256": 1,
+                    "IPv4": 794,
+                    "URL": 805,
+                    "domain": 7,
+                    "email": 16
+                  },
+                  "indicator_count": 1660,
+                  "is_author": false,
+                  "subscriber_count": 32,
+                  "modified_text": "23 hours ago ",
+                  "is_modified": false,
+                  "groups": [],
+                  "in_group": false,
+                  "threat_hunter_scannable": true,
+                  "threat_hunter_has_agents": 1,
+                  "related_indicator_type": "IPv4",
+                  "related_indicator_is_active": 1
+                }
+              ],
+              "references": [
+                "https://twitter.com/executemalware/status/1",
+                "https://twitter.com/executemalware/status/2",
+                "https://twitter.com/ankit_anubhav/status/3"
+              ],
+              "related": {
+                "alienvault": {
+                  "adversary": [],
+                  "malware_families": [],
+                  "industries": []
+                },
+                "other": {
+                  "adversary": [],
+                  "malware_families": [],
+                  "industries": []
+                }
+              }
+            },
+            "false_positive": [],
+            "validation": [],
+            "asn": "AS17501 WorldLink Communications Pvt Ltd",
+            "city_data": true,
+            "city": "Kathmandu",
+            "region": "P3",
+            "continent_code": "AS",
+            "country_code3": "NPL",
+            "country_code2": "NP",
+            "subdivision": "P3",
+            "latitude": 27.7142,
+            "longitude": 85.3145,
+            "accuracy_radius": 100,
+            "country_code": "NP",
+            "country_name": "Nepal",
+            "dma_code": 0,
+            "charset": 0,
+            "area_code": 0,
+            "flag_url": "image.png",
+            "flag_title": "Nepal",
+            "sections": [
+              "general",
+              "geo",
+              "reputation",
+              "url_list",
+              "passive_dns",
+              "malware",
+              "nids_list",
+              "http_scans"
+            ]
+          },
+          "geo": {},
+          "reputation": {},
+          "url_list": {},
+          "passive_dns": {},
+          "malware": {},
+          "nids_list": {},
+          "http_scans": {}
+        }
+      }
+    ],
+    [
+      "ipv4_geo",
+      "IPv4",
+      "198.51.100.100",
+      "geo",
+      {
+        "results": {
+          "general": {},
+          "geo": {
+            "asn": "AS17501 WorldLink Communications Pvt Ltd",
+            "city_data": true,
+            "city": "Kathmandu",
+            "region": "P3",
+            "continent_code": "AS",
+            "country_code3": "NPL",
+            "country_code2": "NP",
+            "subdivision": "P3",
+            "latitude": 27.7142,
+            "longitude": 85.3145,
+            "accuracy_radius": 100,
+            "country_code": "NP",
+            "country_name": "Nepal",
+            "dma_code": 0,
+            "charset": 0,
+            "area_code": 0,
+            "flag_url": "image.png",
+            "flag_title": "Nepal"
+          },
+          "reputation": {},
+          "url_list": {},
+          "passive_dns": {},
+          "malware": {},
+          "nids_list": {},
+          "http_scans": {}
+        }
+      }
+    ],
+    [
+      "ipv4_url_list",
+      "IPv4",
+      "198.50.100.100",
+      "url_list",
+      {
+        "results": {
+          "general": {},
+          "geo": {},
+          "reputation": {},
+          "url_list": {
+            "url_list": [
+              {
+                "url": "http://198.50.100.100",
+                "date": "2022-03-02T14:12:54",
+                "hostname": "198.50.100.100",
+                "result": {
+                  "urlworker": {
+                    "http_code": 0
+                  },
+                  "safebrowsing": {
+                    "matches": []
+                  }
+                },
+                "httpcode": 0,
+                "gsb": [],
+                "encoded": "http%3A//198.50.100.100"
+              },
+              {
+                "url": "http://198.50.100.100:443",
+                "date": "2022-03-02T14:11:03",
+                "hostname": "198.50.100.100",
+                "result": {
+                  "urlworker": {
+                    "http_code": 0
+                  },
+                  "safebrowsing": {
+                    "matches": []
+                  }
+                },
+                "httpcode": 0,
+                "gsb": [],
+                "encoded": "http%3A//198.50.100.100%3A443"
+              }
+            ],
+            "page_num": 1,
+            "limit": 10,
+            "paged": true,
+            "has_next": false,
+            "full_size": 2,
+            "actual_size": 2
+          },
+          "passive_dns": {},
+          "malware": {},
+          "nids_list": {},
+          "http_scans": {}
+        }
+      }
+    ],
+    [
+      "hostname_passive_dns",
+      "HOSTNAME",
+      "example.com",
+      "passive_dns",
+      {
+        "results": {
+          "general": {},
+          "geo": {},
+          "reputation": {},
+          "url_list": {},
+          "passive_dns": {
+            "passive_dns": [
+              {
+                "address": "198.50.100.100",
+                "first": "2021-09-16T07:00:12",
+                "last": "2022-03-02T14:29:50",
+                "hostname": "example.com",
+                "record_type": "A",
+                "indicator_link": "/indicator/domain/example.com",
+                "flag_url": "image.png",
+                "flag_title": "France",
+                "asset_type": "domain",
+                "asn": "AS21499 Host Europe GmbH"
+              },
+              {
+                "address": "198.50.100.101",
+                "first": "2021-04-16T03:37:52",
+                "last": "2021-04-16T03:37:52",
+                "hostname": "example.com",
+                "record_type": "A",
+                "indicator_link": "/indicator/domain/example.com",
+                "flag_url": "image.png",
+                "flag_title": "United States",
+                "asset_type": "domain",
+                "asn": "AS398101 GO-DADDY-COM-LLC"
+              }
+            ],
+            "count": 2
+          },
+          "malware": {},
+          "nids_list": {},
+          "http_scans": {}
+        }
+      }
+    ],
+    [
+      "hostname_geo",
+      "HOSTNAME",
+      "example.com",
+      "geo",
+      {
+        "results": {
+          "general": {},
+          "geo": {
+            "asn": "AS21499 Host Europe GmbH",
+            "city_data": true,
+            "city": "Strasbourg",
+            "region": "GES",
+            "continent_code": "EU",
+            "country_code3": "FRA",
+            "country_code2": "FR",
+            "subdivision": "67",
+            "latitude": 48.5855,
+            "postal_code": "67000",
+            "longitude": 7.7418,
+            "accuracy_radius": 200,
+            "country_code": "FR",
+            "country_name": "France",
+            "dma_code": 0,
+            "charset": 0,
+            "area_code": 0,
+            "flag_url": "image.png",
+            "flag_title": "France"
+          },
+          "reputation": {},
+          "url_list": {},
+          "passive_dns": {},
+          "malware": {},
+          "nids_list": {},
+          "http_scans": {}
+        }
+      }
+    ]
+  ]
+}
