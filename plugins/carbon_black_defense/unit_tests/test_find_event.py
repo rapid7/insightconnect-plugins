@@ -6,7 +6,6 @@ from komand_carbon_black_defense.actions.find_event import FindEvent
 from komand_carbon_black_defense.actions.find_event.schema import Input as FindEventSchemaInput
 from unit_tests.util import Util
 from insightconnect_plugin_runtime.exceptions import PluginException
-from komand_carbon_black_defense.connection.schema import Input as ConnectionSchema
 from unit_tests.mock import (
     mock_request,
 )

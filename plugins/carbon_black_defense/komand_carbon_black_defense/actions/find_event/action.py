@@ -17,12 +17,12 @@ class FindEvent(insightconnect_plugin_runtime.Action):
             output=FindEventOutput(),
         )
 
-    @Util.retry(tries=6, timeout=60, exceptions=ValueError, backoff_seconds=1)
+    @Util.retry(tries=6, timeout=60, exceptions=PluginException, backoff_seconds=1)
     def get_enriched_event_status(self, id_):
         enriched_event_search_status = self.connection.get_enriched_event_status(id_)
         if not enriched_event_search_status:
             print("hello")
-            raise ValueError
+            raise PluginException
         return enriched_event_search_status
 
     def run(self, params={}):
