@@ -21,8 +21,14 @@ jobs:
 
       - name: Prospector
         run: |
+          if [[ ${GITHUB_REF_NAME} == "develop" ]]
+          then
+            TARGET_BRANCH="master"
+          else
+            TARGET_BRANCH="develop"
+          fi
           CHANGED_FILES=()
-          for OUTPUT in $(git diff --no-commit-id --name-only --no-renames HEAD..origin/develop)
+          for OUTPUT in $(git diff --no-commit-id --name-only --no-renames HEAD..origin/${TARGET_BRANCH})
           do
             if [[ -f ${OUTPUT} ]] && [[ ${OUTPUT} == *.py ]]
             then
