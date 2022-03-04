@@ -42,9 +42,9 @@ Example input:
 
 ### Actions
 
-#### Add Destinations to Destination List
+#### Add a destination to a Destination List
 
-This action is used to add a list of destinations to a destination list.
+This action is used to add a destination to a destination list.
 
 ##### Input
 
