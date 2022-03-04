@@ -160,7 +160,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|destinationsEntity|True|Successful returned value|
+|success|[]destinationsEntity|True|Successful returned value|
 
 Example output:
 

@@ -16,5 +16,5 @@ class DGet(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         destination_list_id = params.get(Input.DESTINATIONLISTID)
-
-        return {Output.SUCCESS: self.connection.client.get_destinations(destination_list_id=destination_list_id)}
+        result = self.connection.client.get_destinations(destination_list_id=destination_list_id).get('data', [])
+        return {Output.SUCCESS: result}
