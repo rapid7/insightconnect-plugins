@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add a list of destinations to a destination list"
+    DESCRIPTION = "Add a destination to a destination list"
 
 
 class Input:
