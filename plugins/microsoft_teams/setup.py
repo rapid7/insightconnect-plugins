@@ -9,6 +9,6 @@ setup(name="microsoft_teams-rapid7-plugin",
       author_email="",
       url="",
       packages=find_packages(),
-      install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
+      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/icon_microsoft_teams']
       )

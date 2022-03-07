@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
+    import insightconnect_plugin_runtime
     from icon_microsoft_teams import connection, actions, triggers
 
-    class ICONMicrosoftTeams(komand.Plugin):
+    class ICONMicrosoftTeams(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -64,7 +64,7 @@ def main():
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONMicrosoftTeams())
+    cli = insightconnect_plugin_runtime.CLI(ICONMicrosoftTeams())
     cli.run()
 
 

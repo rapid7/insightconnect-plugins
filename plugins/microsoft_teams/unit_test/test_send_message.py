@@ -7,7 +7,7 @@ from icon_microsoft_teams.actions.send_message.schema import Input, Output
 from unit_test.util import Util
 from unittest.mock import patch
 from parameterized import parameterized
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 

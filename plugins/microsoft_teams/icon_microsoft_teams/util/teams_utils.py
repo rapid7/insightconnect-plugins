@@ -1,17 +1,19 @@
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 import requests
 import re
 from logging import Logger
-import komand.connection
+import insightconnect_plugin_runtime.connection
 
 
-def get_teams_from_microsoft(logger: Logger, connection: komand.connection, team_name=None, explicit=True) -> list:
+def get_teams_from_microsoft(
+    logger: Logger, connection: insightconnect_plugin_runtime.connection, team_name=None, explicit=True
+) -> list:
     """
     This will get teams from the Graph API. If a team_name is provided it will only return that team, or throw
     an error if that team is not found
 
     :param logger: object (logging.logger)
-    :param connection: object (komand.connection)
+    :param connection: object (insightconnect_plugin_runtime.connection)
     :param team_name: string
     :param explicit: boolean
     :return: array of teams
@@ -71,7 +73,11 @@ def get_teams_from_microsoft(logger: Logger, connection: komand.connection, team
 
 
 def get_channels_from_microsoft(
-    logger: Logger, connection: komand.connection, team_id: str, channel_name=None, explicit=False
+    logger: Logger,
+    connection: insightconnect_plugin_runtime.connection,
+    team_id: str,
+    channel_name=None,
+    explicit=False,
 ) -> list:
     """
     This will get all channels available to a team from the Graph API
@@ -80,7 +86,7 @@ def get_channels_from_microsoft(
 
 
     :param logger: object (logging.logger)
-    :param connection: (komand.connection)
+    :param connection: (insightconnect_plugin_runtime.connection)
     :param team_id: String
     :param channel_name: String
     :param explicit: boolean
@@ -133,7 +139,7 @@ def get_channels_from_microsoft(
 
 def send_message(
     logger: Logger,
-    connection: komand.connection,
+    connection: insightconnect_plugin_runtime.connection,
     message: str,
     team_id: str = None,
     channel_id: str = None,
@@ -144,7 +150,7 @@ def send_message(
     Send a message to Teams
 
     :param logger: object (logging.logger)
-    :param connection: object (komand.connection)
+    :param connection: object (insightconnect_plugin_runtime.connection)
     :param message: String
     :param team_id: String
     :param channel_id: String
@@ -177,7 +183,7 @@ def send_message(
 
 def send_html_message(
     logger: Logger,
-    connection: komand.connection,
+    connection: insightconnect_plugin_runtime.connection,
     message: str,
     team_id: str,
     channel_id: str,
@@ -187,7 +193,7 @@ def send_html_message(
     Send HTML content as a message to Teams
 
     :param logger: object (logging.logger)
-    :param connection: object (komand.connection)
+    :param connection: object (insightconnect_plugin_runtime.connection)
     :param message: String (HTML)
     :param team_id: String
     :param channel_id: String
@@ -215,13 +221,17 @@ def send_html_message(
 
 
 def create_channel(
-    logger: Logger, connection: komand.connection, team_id: str, channel_name: str, description: str
+    logger: Logger,
+    connection: insightconnect_plugin_runtime.connection,
+    team_id: str,
+    channel_name: str,
+    description: str,
 ) -> bool:
     """
     Creates a channel for a given team
 
     :param logger: (logging.logger)
-    :param connection: Object (komand.connection)
+    :param connection: Object (insightconnect_plugin_runtime.connection)
     :param team_id: String
     :param channel_name: String
     :param description: String
@@ -247,12 +257,14 @@ def create_channel(
     return True
 
 
-def delete_channel(logger: Logger, connection: komand.connection, team_id: str, channel_id: str) -> bool:
+def delete_channel(
+    logger: Logger, connection: insightconnect_plugin_runtime.connection, team_id: str, channel_id: str
+) -> bool:
     """
     Deletes a channel for a given team
 
     :param logger: (logging.logger)
-    :param connection: Object (komand.connection)
+    :param connection: Object (insightconnect_plugin_runtime.connection)
     :param team_id: String
     :param channel_id: String
     :return: boolean

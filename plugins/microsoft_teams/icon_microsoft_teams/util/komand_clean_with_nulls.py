@@ -1,4 +1,4 @@
-from komand import helper
+from insightconnect_plugin_runtime import helper
 
 
 def remove_null_and_clean(in_dict):

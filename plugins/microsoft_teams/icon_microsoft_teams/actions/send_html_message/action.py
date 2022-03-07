@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import SendHtmlMessageInput, SendHtmlMessageOutput, Input, Output, Component
 
 # Custom imports below
@@ -11,7 +11,7 @@ from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_cl
 from icon_microsoft_teams.util.words_utils import add_words_values_to_message
 
 
-class SendHtmlMessage(komand.Action):
+class SendHtmlMessage(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="send_html_message",

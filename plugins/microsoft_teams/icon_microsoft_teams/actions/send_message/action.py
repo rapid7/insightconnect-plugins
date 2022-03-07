@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import SendMessageInput, SendMessageOutput, Input, Output, Component
 
 # Custom imports below
@@ -9,10 +9,10 @@ from icon_microsoft_teams.util.teams_utils import (
 )
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
 from icon_microsoft_teams.util.words_utils import add_words_values_to_message
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class SendMessage(komand.Action):
+class SendMessage(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="send_message",
