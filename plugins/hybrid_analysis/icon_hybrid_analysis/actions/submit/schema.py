@@ -34,7 +34,7 @@ class SubmitInput(insightconnect_plugin_runtime.Input):
     "custom_cmd_line": {
       "type": "string",
       "title": "Custom Command Line",
-      "description": "Optional command line that should be passed to the analysis file",
+      "description": "Optional command line that should be passed to the file analysis",
       "order": 4
     },
     "document_password": {
@@ -59,7 +59,7 @@ class SubmitInput(insightconnect_plugin_runtime.Input):
     },
     "experimental_anti_evasion": {
       "type": "boolean",
-      "title": "Enable Experimental Anti Evasion Techniques",
+      "title": "Enable Experimental Anti-Evasion Techniques",
       "description": "When set to true, will set all experimental anti-evasion options of the Kernelmode Monitor",
       "default": true,
       "order": 8
@@ -143,7 +143,7 @@ class SubmitOutput(insightconnect_plugin_runtime.Output):
     "sha256": {
       "type": "string",
       "title": "SHA256",
-      "description": "SHA256 Hash which could be used for report retrievement",
+      "description": "SHA256 hash for report retrieval",
       "order": 4
     },
     "submission_id": {

@@ -32,7 +32,7 @@ class Submit(insightconnect_plugin_runtime.Action):
         except binascii.Error:
             raise PluginException(
                 cause="Unable to decode base64.",
-                assistance="Contents of the file must be encoded with base64!",
+                assistance="Contents of the file must be base64-encoded!",
             )
         response_json = self.connection.api.submit(files={"file": (file_info.get("filename"), file_bytes)}, data=params)
 

@@ -41,7 +41,7 @@
       "verdict": "malicious"
     }
   ],
-  "searchTerms": [
+  "search_terms": [
     {
       "id": "url",
       "value": "http://checkip.dyndns.org"

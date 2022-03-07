@@ -35,7 +35,7 @@ class TestLookUpTerms(TestCase):
                     "verdict": "whitelisted",
                 }
             ],
-            "searchTerms": [{"id": "filename", "value": "test"}, {"id": "verdict", "value": "1"}],
+            "search_terms": [{"id": "filename", "value": "test"}, {"id": "verdict", "value": "1"}],
         }
         self.assertEqual(actual, expected)
 
@@ -69,7 +69,7 @@ class TestLookUpTerms(TestCase):
         expected = {
             "count": 0,
             "result": [],
-            "searchTerms": [
+            "search_terms": [
                 {"id": "similar_to", "value": "ef537f25c895bfa782526529a9b63d97aa631564d5d789c2b765448c8635fb6c"}
             ],
         }

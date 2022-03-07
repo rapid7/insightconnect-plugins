@@ -499,7 +499,7 @@ types:
       description: Created at
       required: false
     filename:
-      title: file name
+      title: Filename
       type: string
       description: File name
       required: false
@@ -578,7 +578,7 @@ types:
     state:
       title: State
       type: string
-      description: State in which the analysis is
+      description: State in which the analysis is in
       required: false
     error_type:
       title: Error Type
@@ -626,9 +626,9 @@ types:
       description: IMP Hash
       required: false
     av_detect:
-      title: Available Detect
+      title: Antivirus Detect
       type: integer
-      description: Available detect
+      description: Antivirus detect
       required: false
     vx_family:
       title: VX Family
@@ -726,9 +726,9 @@ types:
       description: Tags
       required: false
     mitre_attcks:
-      title: Mitre Attcks
+      title: MITRE Attcks
       type: '[]mitre_attcks'
-      description: Mitre attcks
+      description: MITRE attcks
       required: false
     submissions:
       title: Submissions
@@ -745,7 +745,7 @@ types:
       type: '[]machine_learning_models'
       description: Machine learning models
       required: false
-  searchTerm:
+  search_term:
     id:
       title: ID
       description: Name of search term which was used
@@ -753,7 +753,7 @@ types:
       required: false
     value:
       title: Value
-      description: Value of serch term
+      description: Value of search term
       type: string
       required: false
   result:
@@ -764,7 +764,7 @@ types:
       required: false
     av_detect:
       title: AV detect
-      description: Available MultiScan Detection Percentage
+      description: AV MultiScan Detection Percentage
       type: string
       required: false
     threat_score:
@@ -794,22 +794,22 @@ types:
       type: integer
       required: false
     analysis_start_time:
-      title: Analysis start time
+      title: Analysis Start Time
       description: The time at which the analysis began
       type: string
       required: false
     submit_name:
-      title: Submit name
-      description: File name
+      title: Submit Name
+      description: Submit name
       type: string
       required: false
     environment_description:
-      title: Environment description
+      title: Environment Description
       description: Description of the environment on which analysis was conducted
       type: string
       required: false
     size:
-      title: File size (Bytes)
+      title: File Size
       description: File size in bytes
       type: integer
       required: false
@@ -852,7 +852,7 @@ types:
     state:
       title: State
       type: string
-      description: State in which the analysis is
+      description: State in which the analysis is in
       required: false
     verdict:
       title: Verdict
@@ -863,7 +863,7 @@ connection:
   url:
     title: URL
     type: string
-    description: Hybrid-analysis API Server URL
+    description: Hybrid Analysis API server URL
     required: true
     example: https://www.hybrid-analysis.com
     default: https://www.hybrid-analysis.com
@@ -880,7 +880,7 @@ actions:
     input:
       hash:
         title: Hash
-        description: The action takes the following hash types as parameters MD5/SHA1/SHA256
+        description: Hash to lookup. Must be MD5, SHA1, or SHA256
         type: string
         required: true
         example: 44d88612fea8a8f36de82e1278abb02f
@@ -902,7 +902,7 @@ actions:
         required: false
   lookup_terms:
     title: Search Database
-    description: Search the database using API v2 provided at https://www.hybrid-analysis.com/docs/api/v2
+    description: Search the Hybrid Analysis database
     input:
       filename:
         title: File Name
@@ -918,13 +918,13 @@ actions:
         example: docx
       country:
         title: Country
-        description: Country must be specified in the standard ISO 3166-1
+        description: Country must be specified in the ISO 3166-1 standard
         type: string
         required: false
         example: AFG
       verdict:
         title: Verdict
-        description: A decision on an submited term
+        description: A decision on a submitted term
         type: string
         enum:
           - whitelisted
@@ -962,21 +962,21 @@ actions:
         example: example.com
       url:
         title: URL
-        description: URL you wish to analyse and get results for
+        description: URL to analyze
         type: string
         required: false
         example: https://example.com
       similar_to:
         title: Similar Samples
-        description: SHA256 Hash of the similar file
+        description: SHA256 hash of the similar file
         type: string
         required: false
         example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
     output:
-      searchTerms:
+      search_terms:
         title: Search Terms
         description: List of key value pairs. Where the key is the parameter specified and its value
-        type: '[]searchTerm'
+        type: '[]search_term'
         required: true
       count:
         title: Count
@@ -1012,7 +1012,7 @@ actions:
         example: somepassword
       custom_cmd_line:
         title: Custom Command Line
-        description: Optional command line that should be passed to the analysis file
+        description: Optional command line that should be passed to the file analysis
         type: string
         required: false
         example: command
@@ -1044,7 +1044,7 @@ actions:
         required: false
         example: true
       experimental_anti_evasion:
-        title: Enable Experimental Anti Evasion Techniques
+        title: Enable Experimental Anti-Evasion Techniques
         description: When set to true, will set all experimental anti-evasion options of the Kernelmode Monitor
         type: boolean
         default: true
@@ -1068,12 +1068,12 @@ actions:
         required: false
       sha256:
         title: SHA256
-        description: SHA256 Hash which could be used for report retrievement
+        description: SHA256 hash for report retrieval
         type: string
         required: false
   report:
     title: Retrieve Report
-    description: Retrieve report by providing SHA256. This hash is generated by the API
+    description: Retrieve report by providing SHA256 generated by the Submit File action
     input:
       hash:
         title: Hash
@@ -1085,7 +1085,7 @@ actions:
       state:
         title: State
         type: string
-        description: State in which the analysis is
+        description: State in which the analysis is in
         required: true
       error_type:
         title: Error Type

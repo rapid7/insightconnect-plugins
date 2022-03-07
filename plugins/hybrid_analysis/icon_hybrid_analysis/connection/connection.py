@@ -1,7 +1,7 @@
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 
 import insightconnect_plugin_runtime
-from icon_hybrid_analysis.util import constans
+from icon_hybrid_analysis.util import constants
 
 # Custom imports below
 from .schema import ConnectionSchema, Input
@@ -16,7 +16,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
         self.api = HybridAnalysisAPI(
-            url=params.get(Input.URL, constans.DEFAULT_URL),
+            url=params.get(Input.URL, constants.DEFAULT_URL),
             api_key=params.get(Input.API_KEY).get("secretKey"),
             logger=self.logger,
         )

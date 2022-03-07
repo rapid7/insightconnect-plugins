@@ -4,7 +4,7 @@ from logging import Logger
 
 import requests
 
-from icon_hybrid_analysis.util import constans
+from icon_hybrid_analysis.util import constants
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
@@ -12,7 +12,7 @@ class HybridAnalysisAPI:
     def __init__(self, url, api_key, logger: Logger):
         self.api_version = "v2"
         self.base_url = f"{url}/api/{self.api_version}"
-        self.headers = {"User-Agent": constans.DEFAULT_USER_AGENT, "api-key": api_key}
+        self.headers = {"User-Agent": constants.DEFAULT_USER_AGENT, "api-key": api_key}
         self.logger = logger
 
     def lookup_by_hash(self, analyzed_hash: str):
@@ -48,7 +48,7 @@ class HybridAnalysisAPI:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
             else:
                 raise PluginException(
-                    cause=response.json().get("message"),
+                    cause=response.json().get("message", "Unknown"),
                     assistance=f"validation_errors: {response.json().get('validation_errors')}",
                 )
 

@@ -29,9 +29,9 @@ class LookupHash(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         """Run action"""
-        hash_to_analise = params.get(Input.HASH)
-        if validators.md5(hash_to_analise) or validators.sha256(hash_to_analise) or validators.sha1(hash_to_analise):
-            return self.__normalize(self.connection.api.lookup_by_hash(hash_to_analise))
+        hash_to_analyze = params.get(Input.HASH)
+        if validators.md5(hash_to_analyze) or validators.sha256(hash_to_analyze) or validators.sha1(hash_to_analyze):
+            return self.__normalize(self.connection.api.lookup_by_hash(hash_to_analyze))
         else:
             raise PluginException(
                 cause="Provided hash is not supported.",

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Search the database using API v2 provided at https://www.hybrid-analysis.com/docs/api/v2"
+    DESCRIPTION = "Search the Hybrid Analysis database"
 
 
 class Input:
@@ -23,7 +23,7 @@ class Input:
 class Output:
     COUNT = "count"
     RESULT = "result"
-    SEARCHTERMS = "searchTerms"
+    SEARCH_TERMS = "search_terms"
     
 
 class LookupTermsInput(insightconnect_plugin_runtime.Input):
@@ -35,7 +35,7 @@ class LookupTermsInput(insightconnect_plugin_runtime.Input):
     "country": {
       "type": "string",
       "title": "Country",
-      "description": "Country must be specified in the standard ISO 3166-1",
+      "description": "Country must be specified in the ISO 3166-1 standard",
       "order": 3
     },
     "domain": {
@@ -72,7 +72,7 @@ class LookupTermsInput(insightconnect_plugin_runtime.Input):
     "similar_to": {
       "type": "string",
       "title": "Similar Samples",
-      "description": "SHA256 Hash of the similar file",
+      "description": "SHA256 hash of the similar file",
       "order": 10
     },
     "tag": {
@@ -84,13 +84,13 @@ class LookupTermsInput(insightconnect_plugin_runtime.Input):
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "URL you wish to analyse and get results for",
+      "description": "URL to analyze",
       "order": 9
     },
     "verdict": {
       "type": "string",
       "title": "Verdict",
-      "description": "A decision on an submited term",
+      "description": "A decision on a submitted term",
       "default": "whitelisted",
       "enum": [
         "whitelisted",
@@ -130,19 +130,19 @@ class LookupTermsOutput(insightconnect_plugin_runtime.Output):
       },
       "order": 3
     },
-    "searchTerms": {
+    "search_terms": {
       "type": "array",
       "title": "Search Terms",
       "description": "List of key value pairs. Where the key is the parameter specified and its value",
       "items": {
-        "$ref": "#/definitions/searchTerm"
+        "$ref": "#/definitions/search_term"
       },
       "order": 1
     }
   },
   "required": [
     "count",
-    "searchTerms"
+    "search_terms"
   ],
   "definitions": {
     "result": {
@@ -151,19 +151,19 @@ class LookupTermsOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "analysis_start_time": {
           "type": "string",
-          "title": "Analysis start time",
+          "title": "Analysis Start Time",
           "description": "The time at which the analysis began",
           "order": 8
         },
         "av_detect": {
           "type": "string",
           "title": "AV detect",
-          "description": "Available MultiScan Detection Percentage",
+          "description": "AV MultiScan Detection Percentage",
           "order": 2
         },
         "environment_description": {
           "type": "string",
-          "title": "Environment description",
+          "title": "Environment Description",
           "description": "Description of the environment on which analysis was conducted",
           "order": 10
         },
@@ -187,14 +187,14 @@ class LookupTermsOutput(insightconnect_plugin_runtime.Output):
         },
         "size": {
           "type": "integer",
-          "title": "File size (Bytes)",
+          "title": "File Size",
           "description": "File size in bytes",
           "order": 11
         },
         "submit_name": {
           "type": "string",
-          "title": "Submit name",
-          "description": "File name",
+          "title": "Submit Name",
+          "description": "Submit name",
           "order": 9
         },
         "threat_score": {
@@ -229,9 +229,9 @@ class LookupTermsOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "searchTerm": {
+    "search_term": {
       "type": "object",
-      "title": "searchTerm",
+      "title": "search_term",
       "properties": {
         "id": {
           "type": "string",
@@ -242,7 +242,7 @@ class LookupTermsOutput(insightconnect_plugin_runtime.Output):
         "value": {
           "type": "string",
           "title": "Value",
-          "description": "Value of serch term",
+          "description": "Value of search term",
           "order": 2
         }
       }

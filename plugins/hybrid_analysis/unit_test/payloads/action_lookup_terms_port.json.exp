@@ -690,7 +690,7 @@
       "verdict": "malicious"
     }
   ],
-  "searchTerms": [
+  "search_terms": [
     {
       "id": "port",
       "value": "8080"

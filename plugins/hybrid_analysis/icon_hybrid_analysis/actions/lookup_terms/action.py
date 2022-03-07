@@ -44,7 +44,7 @@ class LookupTerms(insightconnect_plugin_runtime.Action):
 
         response_json = insightconnect_plugin_runtime.helper.clean(self.connection.api.lookup_by_terms(cleaned_params))
         return {
-            Output.SEARCHTERMS: response_json.get("search_terms"),
-            Output.COUNT: response_json.get("count"),
+            Output.SEARCH_TERMS: response_json.get("search_terms", []),
+            Output.COUNT: response_json.get("count", 0),
             Output.RESULT: response_json.get("result"),
         }

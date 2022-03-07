@@ -26,7 +26,7 @@ class LookupHashInput(insightconnect_plugin_runtime.Input):
     "hash": {
       "type": "string",
       "title": "Hash",
-      "description": "The action takes the following hash types as parameters MD5/SHA1/SHA256",
+      "description": "Hash to lookup. Must be MD5, SHA1, or SHA256",
       "order": 1
     }
   },
@@ -1073,8 +1073,8 @@ class LookupHashOutput(insightconnect_plugin_runtime.Output):
         },
         "av_detect": {
           "type": "integer",
-          "title": "Available Detect",
-          "description": "Available detect",
+          "title": "Antivirus Detect",
+          "description": "Antivirus detect",
           "order": 18
         },
         "certificates": {
@@ -1196,8 +1196,8 @@ class LookupHashOutput(insightconnect_plugin_runtime.Output):
         },
         "mitre_attcks": {
           "type": "array",
-          "title": "Mitre Attcks",
-          "description": "Mitre attcks",
+          "title": "MITRE Attcks",
+          "description": "MITRE attcks",
           "items": {
             "$ref": "#/definitions/mitre_attcks"
           },
@@ -1251,7 +1251,7 @@ class LookupHashOutput(insightconnect_plugin_runtime.Output):
         "state": {
           "type": "string",
           "title": "State",
-          "description": "State in which the analysis is",
+          "description": "State in which the analysis is in",
           "order": 8
         },
         "submissions": {
@@ -2507,7 +2507,7 @@ class LookupHashOutput(insightconnect_plugin_runtime.Output):
             },
             "filename": {
               "type": "string",
-              "title": "file name",
+              "title": "Filename",
               "description": "File name",
               "order": 2
             },
@@ -2693,7 +2693,7 @@ class LookupHashOutput(insightconnect_plugin_runtime.Output):
         },
         "filename": {
           "type": "string",
-          "title": "file name",
+          "title": "Filename",
           "description": "File name",
           "order": 2
         },
