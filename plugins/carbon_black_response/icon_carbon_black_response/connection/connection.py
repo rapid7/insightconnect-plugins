@@ -34,7 +34,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.carbon_black = CbEnterpriseResponseAPI(
                 url=url, token=token, ssl_verify=ssl_verify, max_retries=2
             )  # Two retries to speed up a likely failure
-            print(vars(self.carbon_black))
         except UnauthorizedError as e:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY) from e
         except ApiError as e:
