@@ -354,7 +354,7 @@ actions:
         type: '[]destinationsEntity'
         required: true
   dAdd:
-    title: Add a destination to a Destination List
+    title: Add a Destination to a Destination List
     description: Add a destination to a destination list
     input:
       destinationListId:
