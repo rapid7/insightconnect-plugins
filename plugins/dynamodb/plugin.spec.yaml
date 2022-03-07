@@ -8,16 +8,17 @@ support: community
 status: []
 description: "Dynamo DB is a key/value store powered by Amazon available for members of AWS. Users can manage their data
 using the DynamoDB plugin for Rapid7 InsightConnect"
-version: 2.0.0
+version: 3.0.0
+supported_versions: ['Amazon DynamoDB 2022-03-11']
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/dynamodb
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.amazon.com
 tags:
-- dynamodb
-- aws
-- amazon
-- database
+  - dynamodb
+  - aws
+  - amazon
+  - database
 hub_tags:
   use_cases: [application_management, reporting_and_analytics]
   keywords: [dynamodb, aws, amazon, database]
@@ -100,27 +101,100 @@ connection:
     description: Region
     type: string
     required: false
-    example: us-east-2
+    example: us-east-1
+    default: us-east-1
 actions:
   scan:
     title: Scan
     description: Scan Dynamo and return any objects found
     input:
-      table:
+      table_name:
+        title: Table Name
         description: The table name to search
         type: string
         required: true
         example: Table-name
-      index:
+      index_name:
+        title: Index Name
         description: The index to use. If empty, defaults to a full Scan of the table
         type: string
         required: false
         example: index-name
-      params:
-        description: The params to query with, as key/value pairs
+      limit:
+        title: Limit
+        description: The maximum number of items to evaluate (not necessarily the number of matching items)
+        type: integer
+        required: false
+        example: 100
+        default: 100
+      select:
+        title: Select
+        description: The attributes to be returned in the result
+        type: string
+        enum:
+          - ALL_ATTRIBUTES
+          - ALL_PROJECTED_ATTRIBUTES
+          - COUNT
+          - SPECIFIC_ATTRIBUTES
+        required: false
+        example: ALL_ATTRIBUTES
+      exclusive_start_key:
+        title: Exclusive Start Key
+        description: The primary key of the first item that this operation will evaluate
         type: object
         required: false
         example: '{"email": "user@example.com"}'
+      return_consumed_capacity:
+        title: Return Consumed Capacity
+        description: Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response
+        type: string
+        enum:
+          - INDEXES
+          - TOTAL
+        required: false
+        example: TOTAL
+      total_segments:
+        title: Total Segments
+        description: For a parallel Scan request, TotalSegments represents the total number of segments into which the Scan operation will be divided
+        type: integer
+        required: false
+        example: 100
+      segment:
+        title: Segment
+        description: For a parallel Scan request, Segment identifies an individual segment to be scanned by an application worker
+        type: integer
+        required: false
+        example: 100
+      projection_expression:
+        title: Projection Expression
+        description: A string that identifies one or more attributes to retrieve from the specified table or index
+        type: string
+        required: false
+        example: Description
+      filter_expression:
+        title: Filter Expression
+        description: A string that contains conditions that DynamoDB applies after the Scan operation
+        type: string
+        required: false
+        example: "test = :test"
+      expression_attribute_names:
+        title: Expression Attribute Names
+        description: One or more substitution tokens for attribute names in an expression
+        type: object
+        required: false
+        example: '{"#P":"Percentile"}'
+      expression_attribute_values:
+        title: Expression Attribute Values
+        description: One or more values that can be substituted in an expression
+        type: object
+        required: false
+        example: '{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }'
+      consistent_read:
+        title: Consistent Read
+        description: Value that determines the read consistency model during the scan
+        type: boolean
+        required: false
+        example: false
     output:
       Count:
         title: Count
@@ -146,21 +220,57 @@ actions:
     title: Insert
     description: Store an object into Dynamo
     input:
-      table:
+      table_name:
+        title: Table Name
         description: The table name to store into
         type: string
         required: true
         example: Table-name
-      data:
+      item:
+        title: Item
         description: The object data to store
         type: object
         required: true
         example: '{"keytable": "login", "e-mail": "user@example.com", "user": "Username"}'
       condition_expression:
+        title: Condition Expression
         description: An optional expression that can be used to reject inserts based on evaluating existing data
         type: string
         required: false
         example: keytable<>user
+      return_values:
+        title: Return Values
+        description: Use ReturnValues if you want to get the item attributes as they appeared before they were updated with the PutItem request
+        type: boolean
+        required: false
+        example: false
+      return_consumed_capacity:
+        title: Return Consumed Capacity
+        description: Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response
+        type: string
+        enum:
+          - INDEXES
+          - TOTAL
+        required: false
+        example: TOTAL
+      return_item_collection_metrics:
+        title: Return Item Collection Metrics
+        description: Determines whether item collection metrics are returned
+        type: boolean
+        required: false
+        example: false
+      expression_attribute_names:
+        title: Expression Attribute Names
+        description: One or more substitution tokens for attribute names in an expression
+        type: object
+        required: false
+        example: '{"#P":"Percentile"}'
+      expression_attribute_values:
+        title: Expression Attribute Values
+        description: One or more values that can be substituted in an expression
+        type: object
+        required: false
+        example: '{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }'
     output:
       success:
         title: Success
@@ -171,26 +281,68 @@ actions:
     title: Update
     description: Update an object in Dyanmo
     input:
-      table:
+      table_name:
+        title: Table Name
         description: The table name to store into
         type: string
         required: true
         example: Table-name
       key:
+        title: Key
         description: The primary key and optionally the sort key of the object to update. Provided as a pair of key/values
         type: object
         required: true
         example: '{"keytable": "login"}'
       condition_expression:
+        title: Condition Expression
         description: An optional expression that can be used to reject updates based on evaluating existing data
         type: string
         required: false
         example: keytable<>user
-      data:
-        description: The object data to update, as key/value pairs
+      return_values:
+        title: Return Values
+        description: Use ReturnValues if you want to get the item attributes as they appear before or after they are updated
+        required: false
+        type: string
+        enum:
+          - ALL_OLD
+          - UPDATE_OLD
+          - ALL_NEW
+          - UPDATED_NEW
+        example: ALL_OLD
+      return_consumed_capacity:
+        title: Return Consumed Capacity
+        description: Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response
+        required: false
+        type: string
+        enum:
+          - INDEXES
+          - TOTAL
+        example: TOTAL
+      return_item_collection_metrics:
+        title: Return Item Collection Metrics
+        description: Determines whether item collection metrics are returned
+        type: boolean
+        required: false
+        example: false
+      update_expression:
+        title: Update Expression
+        description: An expression that defines one or more attributes to be updated, the action to be performed on them, and new values for them
+        required: false
+        type: string
+        example: 'SET #Y = :y, #AT = :t'
+      expression_attribute_names:
+        title: Expression Attribute Names
+        description: One or more substitution tokens for attribute names in an expression
         type: object
-        required: true
-        example: '{"e-mail": "user2@example.com", "user": "Username2"}'
+        required: false
+        example: '{"#P":"Percentile"}'
+      expression_attribute_values:
+        title: Expression Attribute Values
+        description: One or more values that can be substituted in an expression
+        type: object
+        required: false
+        example: '{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }'
     output:
       success:
         title: Success

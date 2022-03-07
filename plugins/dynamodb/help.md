@@ -16,6 +16,10 @@ Rapid7 InsightConnect.
 * Access key
 * Secret key
 
+# Supported Product Versions
+
+* Amazon DynamoDB 2022-03-11
+
 # Documentation
 
 ## Setup
@@ -25,7 +29,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |access_key|credential_secret_key|None|True|Access key ID|None|602B2EA0A04B66BEB2C0|
-|region|string|None|False|Region|None|us-east-2|
+|region|string|us-east-1|False|Region|None|us-east-1|
 |secret_key|credential_secret_key|None|True|Secret access key|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
@@ -33,7 +37,7 @@ Example input:
 ```
 {
   "access_key": "602B2EA0A04B66BEB2C0",
-  "region": "us-east-2",
+  "region": "us-east-1",
   "secret_key": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
@@ -56,20 +60,42 @@ overwrite the existing record.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |condition_expression|string|None|False|An optional expression that can be used to reject inserts based on evaluating existing data|None|keytable<>user|
-|data|object|None|True|The object data to store|None|{"keytable": "login", "e-mail": "user@example.com", "user": "Username"}|
-|table|string|None|True|The table name to store into|None|Table-name|
+|expression_attribute_names|object|None|False|One or more substitution tokens for attribute names in an expression|None|{"#P":"Percentile"}|
+|expression_attribute_values|object|None|False|One or more values that can be substituted in an expression|None|{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }|
+|item|object|None|True|The object data to store|None|{"keytable": "login", "e-mail": "user@example.com", "user": "Username"}|
+|return_consumed_capacity|string|None|False|Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response|['INDEXES', 'TOTAL']|TOTAL|
+|return_item_collection_metrics|boolean|None|False|Determines whether item collection metrics are returned|None|False|
+|return_values|boolean|None|False|Use ReturnValues if you want to get the item attributes as they appeared before they were updated with the PutItem request|None|False|
+|table_name|string|None|True|The table name to store into|None|Table-name|
 
 Example input:
 
 ```
 {
-  "condition_expression": "keytable<>user",
-  "data": {
-    "keytable": "login",
-    "e-mail": "user@example.com",
-    "user": "Username"
-  },
-  "table": "Table-name"
+   "condition_expression":"keytableu003cu003euser",
+   "expression_attribute_names":{
+      "#P":"Percentile"
+   },
+   "expression_attribute_values":{
+      ":avail":{
+         "S":"Available"
+      },
+      ":back":{
+         "S":"Backordered"
+      },
+      ":disc":{
+         "S":"Discontinued"
+      }
+   },
+   "item":{
+      "keytable":"login",
+      "e-mail":"user@example.com",
+      "user":"Username"
+   },
+   "return_consumed_capacity":"TOTAL",
+   "return_item_collection_metrics":false,
+   "return_values":false,
+   "table_name":"Table-name"
 }
 ```
 
@@ -98,23 +124,42 @@ are met.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |condition_expression|string|None|False|An optional expression that can be used to reject updates based on evaluating existing data|None|keytable<>user|
-|data|object|None|True|The object data to update, as key/value pairs|None|{"e-mail": "user2@example.com", "user": "Username2"}|
+|expression_attribute_names|object|None|False|One or more substitution tokens for attribute names in an expression|None|{"#P":"Percentile"}|
+|expression_attribute_values|object|None|False|One or more values that can be substituted in an expression|None|{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }|
 |key|object|None|True|The primary key and optionally the sort key of the object to update. Provided as a pair of key/values|None|{"keytable": "login"}|
-|table|string|None|True|The table name to store into|None|Table-name|
+|return_consumed_capacity|string|None|False|Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response|['INDEXES', 'TOTAL']|TOTAL|
+|return_item_collection_metrics|boolean|None|False|Determines whether item collection metrics are returned|None|False|
+|return_values|string|None|False|Use ReturnValues if you want to get the item attributes as they appear before or after they are updated|['ALL_OLD', 'UPDATE_OLD', 'ALL_NEW', 'UPDATED_NEW']|ALL_OLD|
+|table_name|string|None|True|The table name to store into|None|Table-name|
+|update_expression|string|None|False|An expression that defines one or more attributes to be updated, the action to be performed on them, and new values for them|None|SET #Y = :y, #AT = :t|
 
 Example input:
 
 ```
 {
-  "condition_expression": "keytable<>user",
-  "data": {
-    "e-mail": "user2@example.com",
-    "user": "Username2"
-    },
-  "key": {
-  "keytable": "login"
-  },
-  "table": "Table-name"
+   "condition_expression":"keytableu003cu003euser",
+   "expression_attribute_names":{
+      "#P":"Percentile"
+   },
+   "expression_attribute_values":{
+      ":avail":{
+         "S":"Available"
+      },
+      ":back":{
+         "S":"Backordered"
+      },
+      ":disc":{
+         "S":"Discontinued"
+      }
+   },
+   "key":{
+      "keytable":"login"
+   },
+   "return_consumed_capacity":"TOTAL",
+   "return_item_collection_metrics":false,
+   "return_values":"ALL_OLD",
+   "table_name":"Table-name",
+   "update_expression":"SET #Y = :y, #AT = :t"
 }
 ```
 
@@ -142,19 +187,51 @@ It will return the list of objects found, and a count of the records.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|index|string|None|False|The index to use. If empty, defaults to a full Scan of the table|None|index-name|
-|params|object|None|False|The params to query with, as key/value pairs|None|{"email": "user@example.com"}|
-|table|string|None|True|The table name to search|None|Table-name|
+|consistent_read|boolean|None|False|Value that determines the read consistency model during the scan|None|False|
+|exclusive_start_key|object|None|False|The primary key of the first item that this operation will evaluate|None|{"email": "user@example.com"}|
+|expression_attribute_names|object|None|False|One or more substitution tokens for attribute names in an expression|None|{"#P":"Percentile"}|
+|expression_attribute_values|object|None|False|One or more values that can be substituted in an expression|None|{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }|
+|filter_expression|string|None|False|A string that contains conditions that DynamoDB applies after the Scan operation|None|test = :test|
+|index_name|string|None|False|The index to use. If empty, defaults to a full Scan of the table|None|index-name|
+|limit|integer|100|False|The maximum number of items to evaluate (not necessarily the number of matching items)|None|100|
+|projection_expression|string|None|False|A string that identifies one or more attributes to retrieve from the specified table or index|None|Description|
+|return_consumed_capacity|string|None|False|Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response|['INDEXES', 'TOTAL']|TOTAL|
+|segment|integer|None|False|For a parallel Scan request, Segment identifies an individual segment to be scanned by an application worker|None|100|
+|select|string|None|False|The attributes to be returned in the result|['ALL_ATTRIBUTES', 'ALL_PROJECTED_ATTRIBUTES', 'COUNT', 'SPECIFIC_ATTRIBUTES']|ALL_ATTRIBUTES|
+|table_name|string|None|True|The table name to search|None|Table-name|
+|total_segments|integer|None|False|For a parallel Scan request, TotalSegments represents the total number of segments into which the Scan operation will be divided|None|100|
 
 Example input:
 
 ```
 {
-  "index": "index-name",
-  "params": {
-    "email": "user@example.com"
-    },
-  "table": "Table-name"
+   "consistent_read":false,
+   "exclusive_start_key":{
+      "email":"user@example.com"
+   },
+   "expression_attribute_names":{
+      "#P":"Percentile"
+   },
+   "expression_attribute_values":{
+      ":avail":{
+         "S":"Available"
+      },
+      ":back":{
+         "S":"Backordered"
+      },
+      ":disc":{
+         "S":"Discontinued"
+      }
+   },
+   "filter_expression":"test = :test",
+   "index_name":"index-name",
+   "limit":100,
+   "projection_expression":"Description",
+   "return_consumed_capacity":"TOTAL",
+   "segment":100,
+   "select":"ALL_ATTRIBUTES",
+   "table_name":"Table-name",
+   "total_segments":100
 }
 ```
 
@@ -214,6 +291,7 @@ Any situation in which you provide a ConditionExpression and it causes the job t
 
 # Version History
 
+* 3.0.0 - Create separate class for communication with AWS | Refactor all actions | Fix incompatible types in output in Scan action | Update Python SDK version
 * 2.0.0 - Create custom output type for Scan action | Add example inputs and outputs
 * 1.0.3 - Correct spelling in help.md
 * 1.0.2 - New spec and help.md format for the Extension Library | Add missing title values for actions in plugin.spec.yaml
