@@ -52,9 +52,7 @@ class TestDlPatch(TestCase):
                 "isMspDefault": False,
                 "markedForDeletion": False,
                 "bundleTypeId": 1,
-                "meta": {
-                    "destinationCount": 5
-                }
+                "meta": {"destinationCount": 5},
             }
         }
 
