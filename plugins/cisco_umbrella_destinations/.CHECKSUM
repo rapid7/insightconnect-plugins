@@ -1,0 +1,43 @@
+{
+	"spec": "8dc381c31e1a6dcf99a6c7f34d23174c",
+	"manifest": "54c3d5776f2857653f5f285d6a2b3830",
+	"setup": "f2bef22ef4fccbc2b650cd695baeb1d2",
+	"schemas": [
+		{
+			"identifier": "dAdd/schema.py",
+			"hash": "757efd2dfe7390c28ed659265324d48e"
+		},
+		{
+			"identifier": "dDelete/schema.py",
+			"hash": "0ef3981a395a15481a9ab0a96fc8510b"
+		},
+		{
+			"identifier": "dGet/schema.py",
+			"hash": "f4a78952f12c5c6e459d27065b37a54a"
+		},
+		{
+			"identifier": "dlCreate/schema.py",
+			"hash": "ed5875f06260d30b1057fc1dc885ce1f"
+		},
+		{
+			"identifier": "dlDelete/schema.py",
+			"hash": "49c85c9eb1464be559ef5510f16d6183"
+		},
+		{
+			"identifier": "dlGet/schema.py",
+			"hash": "c8069e82f762e70535ea68029706af00"
+		},
+		{
+			"identifier": "dlGetAll/schema.py",
+			"hash": "8dfe022c7dfd86cb7ada9f42e32ca346"
+		},
+		{
+			"identifier": "dlPatch/schema.py",
+			"hash": "3b61bcc9cea579d4ff952a2845498d40"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "36c77942e499ae314d8487dbde4e97a3"
+		}
+	]
+}
