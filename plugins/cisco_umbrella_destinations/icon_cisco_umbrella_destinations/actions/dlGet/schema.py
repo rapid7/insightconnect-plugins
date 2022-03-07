@@ -91,12 +91,6 @@ class DlGetOutput(insightconnect_plugin_runtime.Output):
           "description": "Whether or not MSP is default",
           "order": 9
         },
-        "label": {
-          "type": "string",
-          "title": "Label",
-          "description": "Title for the destination list",
-          "order": 5
-        },
         "markedForDeletion": {
           "type": "boolean",
           "title": "Marked For Deletion",
@@ -110,6 +104,12 @@ class DlGetOutput(insightconnect_plugin_runtime.Output):
           "description": "Timestamp for modification of the destination list",
           "format": "date-time",
           "order": 8
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Title for the destination list",
+          "order": 5
         },
         "organizationId": {
           "type": "integer",

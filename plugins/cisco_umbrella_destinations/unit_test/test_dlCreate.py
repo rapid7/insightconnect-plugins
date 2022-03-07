@@ -38,12 +38,12 @@ class TestDlCreate(TestCase):
         self.params_data = {
             Input.ACCESS: "allow",
             Input.ISGLOBAL: False,
-            Input.LABEL: "DELETEME2",
+            Input.NAME: "DELETEME2",
             Input.DESTINATION: "google.com",
             Input.TYPE: "domain",
             Input.COMMENT: "I dont trust this one",
         }
-        self.params_no_data = {Input.ACCESS: "allow", Input.ISGLOBAL: False, Input.LABEL: "DELETEME2"}
+        self.params_no_data = {Input.ACCESS: "allow", Input.ISGLOBAL: False, Input.NAME: "DELETEME2"}
 
     @mock.patch("requests.request", side_effect=mock_request_200)
     def test_if_ok_without_data(self, mock_post):

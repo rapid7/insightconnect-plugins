@@ -42,9 +42,9 @@ Example input:
 
 ### Actions
 
-#### Add Destinations to Destination List
+#### Add Destination to Destination List
 
-This action is used to add a list of destinations to a destination list.
+This action is used to add a destination to the destination list.
 
 ##### Input
 
@@ -160,7 +160,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|destinationsEntity|True|Successful returned value|
+|success|[]destinationsEntity|True|Successful returned value|
 
 Example output:
 
@@ -195,7 +195,7 @@ This action is used to create a destination list.
 |comment|string|None|False|Information about the destination|None|Suspicious domain|
 |destination|string|None|False|Enter the destination here|None|www.example.com|
 |isGlobal|boolean|None|False|Boolean value indicating global state|None|True|
-|label|string|None|False|Label for the destination list|None|New list|
+|name|string|None|False|Label for the destination list|None|New list|
 |type|string|None|False|Can be DOMAIN, URL or IPV4|['DOMAIN', 'URL', 'IPV4']|URL|
 
 Example input:
@@ -206,7 +206,7 @@ Example input:
   "comment": "Suspicious domain",
   "destination": "www.example.com",
   "isGlobal": true,
-  "label": "New list",
+  "name": "New list",
   "type": "URL"
 }
 ```
@@ -359,14 +359,14 @@ This action is used to rename a destination list.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |destinationListId|integer|None|True|Unique ID for destination list|None|12345678|
-|label|string|None|True|Title for the destination list|None|New list|
+|name|string|None|True|Title for the destination list|None|New list|
 
 Example input:
 
 ```
 {
   "destinationListId": 12345678,
-  "label": "New list"
+  "name": "New list"
 }
 ```
 
