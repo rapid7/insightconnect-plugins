@@ -474,7 +474,6 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.1 - Updated action title (dAdd) and included an icon runtime helper function
 * 1.0.0 - Initial plugin includes create and modify destination lists
 
 # Links
