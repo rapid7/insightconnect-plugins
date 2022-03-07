@@ -2,10 +2,10 @@
 from setuptools import setup, find_packages
 
 
-setup(name="carbon_black_response-rapid7-tcheng-plugin",
-      version="3.2.11-alpha3",
+setup(name="carbon_black_response-rapid7-plugin",
+      version="3.2.0",
       description="Automate information collection, endpoint isolation and hash blacklisting",
-      author="rapid7-tcheng",
+      author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
