@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import DlPatchInput, DlPatchOutput, Input, Output, Component
-
+from insightconnect_plugin_runtime.helper import clean
 
 # Custom imports below
 
@@ -16,10 +16,9 @@ class DlPatch(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         destination_list_id = params.get(Input.DESTINATIONLISTID)
-        data = {"name": params.get(Input.LABEL)}
-
-        return {
-            Output.SUCCESS: self.connection.client.update_destination_list(
-                destination_list_id=destination_list_id, data=data
-            )
-        }
+        data = {"name": params.get(Input.NAME)}
+        result = self.connection.client.update_destination_list(destination_list_id=destination_list_id, data=data).get(
+            "data", {}
+        )
+        result = clean(result)
+        return {Output.SUCCESS: result}
