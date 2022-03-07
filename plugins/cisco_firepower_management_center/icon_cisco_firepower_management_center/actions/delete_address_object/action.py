@@ -15,7 +15,7 @@ class DeleteAddressObject(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        object_info = self.find_object_type_id(params.get(Input.ADDRESS_OBJECT))
+        object_info = self._find_object_type_id(params.get(Input.ADDRESS_OBJECT))
 
         return {
             Output.ADDRESS_OBJECT: self.connection.cisco_firepower_api.delete_address_object(
@@ -23,7 +23,7 @@ class DeleteAddressObject(insightconnect_plugin_runtime.Action):
             )
         }
 
-    def find_object_type_id(self, name: str) -> dict:
+    def _find_object_type_id(self, name: str) -> dict:
         object_types = ["hosts", "fqdns", "networks", "ranges"]
 
         for object_type in object_types:

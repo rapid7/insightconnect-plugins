@@ -1,5 +1,5 @@
 {
-	"spec": "3f4d6c1b4099992412a9dabeb6d31d29",
+	"spec": "49e62427d0d74297c138ba90ad6c207c",
 	"manifest": "ac3fddc14ab80d69ab6270b07b1d6af9",
 	"setup": "f4ece57764fd50768f42d776dd99ae19",
 	"schemas": [
@@ -9,15 +9,15 @@
 		},
 		{
 			"identifier": "add_scan_result/schema.py",
-			"hash": "d01f14babcabc67c4f5fe7e42c5fd781"
+			"hash": "02cbd5fdc18217d09fa469ec7380259f"
 		},
 		{
 			"identifier": "block_url_policy/schema.py",
-			"hash": "2a93cdcbd7605f0a7246b5f147064fc2"
+			"hash": "89af1fb834be678a1a527b5d74a89992"
 		},
 		{
 			"identifier": "bulk_add_scan_result/schema.py",
-			"hash": "e2ba1db8426ba23b504f623a5a11fc5c"
+			"hash": "0594b89ac6f23d211843137eda178cc0"
 		},
 		{
 			"identifier": "check_if_address_in_group/schema.py",
@@ -37,7 +37,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "b4dbea34dfcf8fc49f3be173064b099d"
+			"hash": "a7226adb026c4543cedb5d9ecd3f5d2b"
 		}
 	]
 }

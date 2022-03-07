@@ -458,7 +458,7 @@ connection:
     required: false
     example: 443
   host_input_port:
-    title: Port
+    title: Host Input Port
     description: The port number for the provided host used in the Host Input API calls
     type: integer
     default: 8307
@@ -499,13 +499,13 @@ actions:
         title: Access Policy Name
         required: true
         type: string
-        description: Access Policy name
+        description: Name for the access policy to be created
         example: Example Access Policy
       rule_name:
         title: Access Rule Name
         required: true
         type: string
-        description: Name for the Access Rule to be created
+        description: Name for the access rule to be created
         example: Example Access Rule
     output:
       success:
@@ -648,7 +648,7 @@ actions:
       scan_result:
         title: Scan Result
         type: scan_result
-        description: Scan result for the host
+        description: The host scan result to be added
         required: false
         example: '{"host": {"ip_address": "0.0.0.164", "operating_system": {"name": "Ubuntu", "vendor": "Canonical", "version": "16.04"}}, "scan_result_details": {"description": "Example description", "protocol_id": "6", "scanner_id": "ProductZImport", "source_id": "ProductZ", "vulnerability_id": "943387", "vulnerability_title": "Virus Wire 0"}}'
       operation:
@@ -678,7 +678,7 @@ actions:
       scan_results:
         title: Scan Results
         type: '[]scan_result'
-        description: Scan results to add
+        description: Host scan results to be added
         required: false
         example: '[{"host": {"ip_address": "0.0.0.164", "operating_system": {"name": "Ubuntu", "vendor": "Canonical", "version": "16.04"}}, "scan_result_details": {"description": "Example description", "protocol_id": "6", "scanner_id": "ProductZImport", "source_id": "ProductZ", "vulnerability_id": "943387", "vulnerability_title": "Virus Wire 0"}}]'
       operation:

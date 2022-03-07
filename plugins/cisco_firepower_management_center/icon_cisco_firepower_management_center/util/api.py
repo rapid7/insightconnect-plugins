@@ -97,7 +97,7 @@ class CiscoFirePowerApi:
     def _call_api(self, method: str, path: str, json_data: dict = None, params: dict = None):
         response = {"text": ""}
 
-        headers = {"Content-Type": "application/json", "X-auth-access-token": self.generate_token()}
+        headers = {"Content-Type": "application/json", "X-auth-access-token": self._generate_token()}
 
         try:
             response = requests.request(
@@ -130,7 +130,7 @@ class CiscoFirePowerApi:
             self.logger.info(f"Call to Cisco FirePower API failed: {e}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
 
-    def generate_token(self) -> str:
+    def _generate_token(self) -> str:
         response = requests.post(
             f"{self.url}fmc_platform/v1/auth/generatetoken",
             headers={"Content-Type": "application/json"},

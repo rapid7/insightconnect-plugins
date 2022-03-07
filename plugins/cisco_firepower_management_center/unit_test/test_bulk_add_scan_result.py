@@ -46,7 +46,7 @@ class TestBulkAddScanResult(TestCase):
 
     def test_bulk_add_scan_result_bad(self, mock_connect, mock_write, mock_send, mock_recv, mock_post, mock_request):
         action = Util.default_connector(BulkAddScanResult())
-        with self.assertRaises(PluginException) as e:
+        with self.assertRaises(PluginException) as error:
             action.run(
                 {
                     Input.SCAN_RESULTS: [
@@ -68,5 +68,5 @@ class TestBulkAddScanResult(TestCase):
                     Input.OPERATION: "ScanUpdate",
                 }
             )
-        self.assertEqual(e.exception.cause, "The provided IP address 999.999.999.999 is invalid.")
-        self.assertEqual(e.exception.assistance, "Please provide a valid IP address for the host and try again.")
+        self.assertEqual(error.exception.cause, "The provided IP address 999.999.999.999 is invalid.")
+        self.assertEqual(error.exception.assistance, "Please provide a valid IP address for the host and try again.")

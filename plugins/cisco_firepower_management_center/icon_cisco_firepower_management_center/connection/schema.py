@@ -43,7 +43,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     },
     "host_input_port": {
       "type": "integer",
-      "title": "Port",
+      "title": "Host Input Port",
       "description": "The port number for the provided host used in the Host Input API calls",
       "default": 8307,
       "order": 5

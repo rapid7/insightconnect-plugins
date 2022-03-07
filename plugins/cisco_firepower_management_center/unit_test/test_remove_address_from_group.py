@@ -55,7 +55,7 @@ class TestRemoveAddressFromGroup(TestCase):
         self, mock_post, mock_request, mock_write, mock_connect, mock_recv, name, address, group, cause, assistance
     ):
         action = Util.default_connector(RemoveAddressFromGroup())
-        with self.assertRaises(PluginException) as e:
+        with self.assertRaises(PluginException) as error:
             action.run({Input.ADDRESS: address, Input.GROUP: group})
-        self.assertEqual(e.exception.cause, cause)
-        self.assertEqual(e.exception.assistance, assistance)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)

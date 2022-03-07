@@ -61,7 +61,7 @@ class TestCreateAddressObject(TestCase):
         assistance,
     ):
         action = Util.default_connector(CreateAddressObject())
-        with self.assertRaises(PluginException) as e:
+        with self.assertRaises(PluginException) as error:
             action.run(
                 {
                     Input.ADDRESS_OBJECT: address_name,
@@ -70,5 +70,5 @@ class TestCreateAddressObject(TestCase):
                     Input.WHITELIST: whitelist,
                 }
             )
-        self.assertEqual(e.exception.cause, cause)
-        self.assertEqual(e.exception.assistance, assistance)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)

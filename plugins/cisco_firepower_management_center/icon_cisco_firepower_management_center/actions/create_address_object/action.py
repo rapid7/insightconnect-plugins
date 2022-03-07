@@ -23,6 +23,9 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
         if validators.ipv6_cidr(address):
             address = address.replace("/128", "")
         address_type = self._determine_address_type(address)
+        address_object_name = params.get(Input.ADDRESS_OBJECT)
+        if not address_object_name:
+            address_object_name = address
         whitelist = params.get(Input.WHITELIST)
 
         if (
@@ -45,7 +48,7 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
             Output.ADDRESS_OBJECT: self.connection.cisco_firepower_api.create_address_object(
                 address_type,
                 {
-                    "name": params.get(Input.ADDRESS_OBJECT, address).replace("/", "-"),
+                    "name": address_object_name.replace("/", "-"),
                     "value": address,
                 },
             )
@@ -64,7 +67,7 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
         # IP is in CIDR - Give the user a log message
         for address_object in whitelist:
             type_ = self._determine_address_type(address_object)
-            if type_ == "cidr":
+            if type_ in ["ipv4_cidr", "ipv6_cidr"]:
                 net = ip_network(
                     address_object, False
                 )  # False means ignore the masked bits, otherwise they need to be 0
@@ -75,7 +78,7 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
 
     @staticmethod
     def _check_if_private(address: str, address_type: str) -> bool:
-        if address_type == "ipv6":
+        if address_type in ["ipv6", "ipv6_cidr"]:
             ip_list = [str(ip) for ip in IPv6Network(address)]
         else:
             ip_list = [str(ip) for ip in IPv4Network(address)]
@@ -92,8 +95,10 @@ class CreateAddressObject(insightconnect_plugin_runtime.Action):
             return "ipv6"
         if validators.domain(address):
             return "fqdn"
-        if validators.ipv4_cidr(address) or validators.ipv6_cidr(address):
-            return "cidr"
+        if validators.ipv4_cidr(address):
+            return "ipv4_cidr"
+        if validators.ipv6_cidr(address):
+            return "ipv6_cidr"
         raise PluginException(
             cause="Unknown address type provided.",
             assistance=f"{address} is not one of the following: IPv4, IPv6, CIDR or domain name.",

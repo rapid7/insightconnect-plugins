@@ -26,13 +26,13 @@ class BlockUrlPolicyInput(insightconnect_plugin_runtime.Input):
     "access_policy": {
       "type": "string",
       "title": "Access Policy Name",
-      "description": "Access Policy name",
+      "description": "Name for the access policy to be created",
       "order": 2
     },
     "rule_name": {
       "type": "string",
       "title": "Access Rule Name",
-      "description": "Name for the Access Rule to be created",
+      "description": "Name for the access rule to be created",
       "order": 3
     },
     "url_objects": {

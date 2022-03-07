@@ -36,7 +36,7 @@ class BulkAddScanResultInput(insightconnect_plugin_runtime.Input):
     "scan_results": {
       "type": "array",
       "title": "Scan Results",
-      "description": "Scan results to add",
+      "description": "Host scan results to be added",
       "items": {
         "$ref": "#/definitions/scan_result"
       },

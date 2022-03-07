@@ -66,7 +66,7 @@ This action is used to add scan results from a third-party vulnerability scanner
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |operation|string|None|True|The operation to be performed when adding scan results. ScanFlush to remove existing scan results or ScanUpdate to keep existing scan results|['ScanUpdate', 'ScanFlush']|ScanUpdate|
-|scan_results|[]scan_result|None|False|Scan results to add|None|[{"host": {"ip_address": "0.0.0.164", "operating_system": {"name": "Ubuntu", "vendor": "Canonical", "version": "16.04"}}, "scan_result_details": {"description": "Example description", "protocol_id": "6", "scanner_id": "ProductZImport", "source_id": "ProductZ", "vulnerability_id": "943387", "vulnerability_title": "Virus Wire 0"}}]|
+|scan_results|[]scan_result|None|False|Host scan results to be added|None|[{"host": {"ip_address": "0.0.0.164", "operating_system": {"name": "Ubuntu", "vendor": "Canonical", "version": "16.04"}}, "scan_result_details": {"description": "Example description", "protocol_id": "6", "scanner_id": "ProductZImport", "source_id": "ProductZ", "vulnerability_id": "943387", "vulnerability_title": "Virus Wire 0"}}]|
 
 Example input:
 
@@ -121,7 +121,7 @@ This action is used to add a scan result from a third-party vulnerability scanne
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |operation|string|None|True|The operation to be performed when adding scan results. ScanFlush to remove existing scan results or ScanUpdate to keep existing scan results|['ScanUpdate', 'ScanFlush']|ScanUpdate|
-|scan_result|scan_result|None|False|Scan result for the host|None|{"host": {"ip_address": "0.0.0.164", "operating_system": {"name": "Ubuntu", "vendor": "Canonical", "version": "16.04"}}, "scan_result_details": {"description": "Example description", "protocol_id": "6", "scanner_id": "ProductZImport", "source_id": "ProductZ", "vulnerability_id": "943387", "vulnerability_title": "Virus Wire 0"}}|
+|scan_result|scan_result|None|False|The host scan result to be added|None|{"host": {"ip_address": "0.0.0.164", "operating_system": {"name": "Ubuntu", "vendor": "Canonical", "version": "16.04"}}, "scan_result_details": {"description": "Example description", "protocol_id": "6", "scanner_id": "ProductZImport", "source_id": "ProductZ", "vulnerability_id": "943387", "vulnerability_title": "Virus Wire 0"}}|
 
 Example input:
 
@@ -497,8 +497,8 @@ This action is used to create a new block URL policy.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|access_policy|string|None|True|Access Policy name|None|Example Access Policy|
-|rule_name|string|None|True|Name for the Access Rule to be created|None|Example Access Rule|
+|access_policy|string|None|True|Name for the access policy to be created|None|Example Access Policy|
+|rule_name|string|None|True|Name for the access rule to be created|None|Example Access Rule|
 |url_objects|[]url_object|None|True|URL objects to block|None|[{'name': 'example_url', 'url': 'https://example.com'}]|
 
 Example input:

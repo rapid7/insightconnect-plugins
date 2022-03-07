@@ -19,14 +19,15 @@ class BlockUrlPolicy(insightconnect_plugin_runtime.Action):
     def make_policy(self, fmc: fmcapi.FMC, policy_name: str):
         acp = fmcapi.AccessPolicies(fmc=fmc)
         acp.name = policy_name
-        p = acp.get()
-        if "paging" in p:
-            if p.get("paging", {}).get("count") == 0:
-                p = acp.post()
-        self.logger.info(p)
-        return p
+        policy = acp.get()
+        if "paging" in policy:
+            if policy.get("paging", {}).get("count") == 0:
+                policy = acp.post()
+        self.logger.info(policy)
+        return policy
 
-    def make_url_object(self, fmc: fmcapi.FMC, name: str, fqdn: str) -> str:
+    @staticmethod
+    def _make_url_object(fmc: fmcapi.FMC, name: str, fqdn: str) -> str:
         url = fmcapi.URLs(fmc=fmc)
         url.name = name
         url.url = fqdn
@@ -34,7 +35,8 @@ class BlockUrlPolicy(insightconnect_plugin_runtime.Action):
         url.get()
         return url.id
 
-    def make_rule(self, fmc: fmcapi.FMC, policy: dict, rule_name: str, urls: dict) -> str:
+    @staticmethod
+    def _make_rule(fmc: fmcapi.FMC, policy: dict, rule_name: str, urls: dict) -> str:
         acr = fmcapi.AccessRules(fmc=fmc)
         acr.name = rule_name
         acr.urls = urls
@@ -67,9 +69,9 @@ class BlockUrlPolicy(insightconnect_plugin_runtime.Action):
                         assistance="Please shorten the URL or try another.",
                     )
 
-                url_id = self.make_url_object(fmc=fmc_from_api, name=url_object_name, fqdn=url)
+                url_id = self._make_url_object(fmc=fmc_from_api, name=url_object_name, fqdn=url)
                 urls["objects"].append({"type": "URL", "id": url_id, "name": url_object_name})
             policy = self.make_policy(fmc=fmc_from_api, policy_name=policy_name)
-            self.make_rule(fmc=fmc_from_api, policy=policy, rule_name=rule_name, urls=urls)
+            self._make_rule(fmc=fmc_from_api, policy=policy, rule_name=rule_name, urls=urls)
 
         return {Output.SUCCESS: True}

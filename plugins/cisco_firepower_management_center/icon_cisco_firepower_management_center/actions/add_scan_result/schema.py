@@ -36,7 +36,7 @@ class AddScanResultInput(insightconnect_plugin_runtime.Input):
     "scan_result": {
       "$ref": "#/definitions/scan_result",
       "title": "Scan Result",
-      "description": "Scan result for the host",
+      "description": "The host scan result to be added",
       "order": 1
     }
   },
