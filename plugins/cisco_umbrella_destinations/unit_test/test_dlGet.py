@@ -41,7 +41,22 @@ class TestDlGet(TestCase):
     @mock.patch("requests.request", side_effect=mock_request_200)
     def test_destination_list_get_success(self, mock_get):
         response = self.action.run(self.params)
-        expected_response = STUB_RESPONSE
+        expected_response = {
+            "success": {
+                "id": 15755711,
+                "organizationId": 2372338,
+                "access": "allow",
+                "isGlobal": False,
+                "name": "CreateListTest",
+                "createdAt": "2022-01-28T16:03:36+0000",
+                "modifiedAt": "2022-02-09T11:47:00+0000",
+                "isMspDefault": False,
+                "markedForDeletion": False,
+                "bundleTypeId": 1,
+                "meta": {"destinationCount": 5},
+            }
+        }
+
         self.assertEqual(response, expected_response)
 
     @parameterized.expand(

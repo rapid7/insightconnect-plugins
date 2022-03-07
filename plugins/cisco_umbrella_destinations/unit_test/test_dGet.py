@@ -41,33 +41,29 @@ class TestDGet(TestCase):
     def test_destination_get_success(self, mock_get):
         response = self.action.run(self.params)
         expected_response = {
-            "success": {
-                "status": {"code": 200, "text": "OK"},
-                "meta": {"page": 1, "limit": 100, "total": 3},
-                "data": [
-                    {
-                        "id": "6672",
-                        "destination": "google.co.uk",
-                        "type": "domain",
-                        "comment": "comment",
-                        "createdAt": "2022-02-02 14:04:29",
-                    },
-                    {
-                        "id": "183128",
-                        "destination": "stackoverflow.com",
-                        "type": "domain",
-                        "comment": "another",
-                        "createdAt": "2022-01-31 17:07:15",
-                    },
-                    {
-                        "id": "42882950",
-                        "destination": "enteradestination",
-                        "type": "domain",
-                        "comment": "EnterAComment",
-                        "createdAt": "2022-01-31 17:06:28",
-                    },
-                ],
-            }
+            "success": [
+                {
+                    "id": "6672",
+                    "destination": "google.co.uk",
+                    "type": "domain",
+                    "comment": "comment",
+                    "createdAt": "2022-02-02 14:04:29",
+                },
+                {
+                    "id": "183128",
+                    "destination": "stackoverflow.com",
+                    "type": "domain",
+                    "comment": "another",
+                    "createdAt": "2022-01-31 17:07:15",
+                },
+                {
+                    "id": "42882950",
+                    "destination": "enteradestination",
+                    "type": "domain",
+                    "comment": "EnterAComment",
+                    "createdAt": "2022-01-31 17:06:28",
+                },
+            ],
         }
         self.assertEqual(response, expected_response)
 

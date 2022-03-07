@@ -45,9 +45,12 @@ class DGetOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "success": {
-      "$ref": "#/definitions/destinationsEntity",
+      "type": "array",
       "title": "Success",
       "description": "Successful returned value",
+      "items": {
+        "$ref": "#/definitions/destinationsEntity"
+      },
       "order": 1
     }
   },

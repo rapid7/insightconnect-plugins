@@ -9,7 +9,7 @@ class Component:
 
 class Input:
     DESTINATIONLISTID = "destinationListId"
-    LABEL = "label"
+    NAME = "name"
     
 
 class Output:
@@ -28,16 +28,16 @@ class DlPatchInput(insightconnect_plugin_runtime.Input):
       "description": "Unique ID for destination list",
       "order": 1
     },
-    "label": {
+    "name": {
       "type": "string",
-      "title": "Label",
+      "title": "Name",
       "description": "Title for the destination list",
       "order": 2
     }
   },
   "required": [
     "destinationListId",
-    "label"
+    "name"
   ]
 }
     """)
@@ -99,12 +99,6 @@ class DlPatchOutput(insightconnect_plugin_runtime.Output):
           "description": "Whether or not MSP is default",
           "order": 9
         },
-        "label": {
-          "type": "string",
-          "title": "Label",
-          "description": "Title for the destination list",
-          "order": 5
-        },
         "markedForDeletion": {
           "type": "boolean",
           "title": "Marked For Deletion",
@@ -124,6 +118,12 @@ class DlPatchOutput(insightconnect_plugin_runtime.Output):
           "description": "Timestamp for modification of the destination list",
           "format": "date-time",
           "order": 8
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Title for the destination list",
+          "order": 5
         },
         "organizationId": {
           "type": "integer",
