@@ -21,7 +21,6 @@ class FindEvent(insightconnect_plugin_runtime.Action):
     def get_enriched_event_status(self, id_):
         enriched_event_search_status = self.connection.get_enriched_event_status(id_)
         if not enriched_event_search_status:
-            print("hello")
             raise PluginException
         return enriched_event_search_status
 
