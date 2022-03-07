@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import DGetInput, DGetOutput, Input, Output, Component
-
+from insightconnect_plugin_runtime.helper import clean
 
 # Custom imports below
 
@@ -16,5 +16,6 @@ class DGet(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         destination_list_id = params.get(Input.DESTINATIONLISTID)
-
-        return {Output.SUCCESS: self.connection.client.get_destinations(destination_list_id=destination_list_id)}
+        result = self.connection.client.get_destinations(destination_list_id=destination_list_id).get("data", [])
+        result = clean(result)
+        return {Output.SUCCESS: result}

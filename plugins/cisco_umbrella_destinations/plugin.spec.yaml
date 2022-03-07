@@ -82,8 +82,8 @@ types:
       example: true
       type: boolean
       required: false
-    label:
-      title: Label
+    name:
+      title: Name
       description: Title for the destination list
       example: New list
       type: string
@@ -147,8 +147,8 @@ types:
       example: true
       type: boolean
       required: false
-    label:
-      title: Label
+    name:
+      title: Name
       description: Title for the destination list
       example: New list
       type: string
@@ -249,7 +249,7 @@ actions:
         example: true
         type: boolean
         required: false
-      label:
+      name:
         title: Name
         description: Label for the destination list
         example: New list
@@ -293,8 +293,8 @@ actions:
         type: integer
         example: 12345678
         required: true
-      label:
-        title: Label
+      name:
+        title: Name
         description: Title for the destination list
         example: New list
         type: string
@@ -351,11 +351,11 @@ actions:
       success:
         title: Success
         description: Successful returned value
-        type: destinationsEntity
+        type: '[]destinationsEntity'
         required: true
   dAdd:
-    title: Add Destinations to Destination List
-    description: Add a list of destinations to a destination list
+    title: Add Destination to Destination List
+    description: Add a destination to the destination list
     input:
       destinationListId:
         title: Destination List ID
