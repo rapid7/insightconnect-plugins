@@ -42,7 +42,7 @@ Example input:
 
 ### Actions
 
-#### Add a Destination to a Destination List
+#### Add Destination to Destination List
 
 This action is used to add a destination to a destination list.
 
@@ -474,6 +474,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.1 - Updated action title (dAdd) and included an icon runtime helper function
 * 1.0.0 - Initial plugin includes create and modify destination lists
 
 # Links
