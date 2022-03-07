@@ -17,7 +17,7 @@ class DlCreate(insightconnect_plugin_runtime.Action):
         data = {
             "access": params.get(Input.ACCESS),
             "isGlobal": params.get(Input.ISGLOBAL),
-            "name": params.get(Input.LABEL),
+            "name": params.get(Input.NAME),
             "destinations": [
                 {
                     "destination": params.get(Input.DESTINATION),
