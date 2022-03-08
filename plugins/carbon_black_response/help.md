@@ -886,7 +886,6 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-
 * 3.2.0 - Add uninstall sensor action | upgrade to insightconnect-plugin-runtime
 * 3.1.11 - Correct spelling in help.md
 * 3.1.10 - Rebrand plugin
