@@ -38,7 +38,7 @@ class SendMessage(insightconnect_plugin_runtime.Action):
                 if channels and isinstance(channels, list):
                     channel_id = channels[0].get("id")
 
-        if not chat_id and (not team_id and not channel_id):
+        if not chat_id and not team_id and not channel_id:
             raise PluginException(
                 cause="No chat ID or team ID with channel ID was provided.",
                 assistance="Please provide the chat ID to send the chat message or the team and channel details(name or"

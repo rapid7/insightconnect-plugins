@@ -55,7 +55,6 @@ class Util:
             def raise_for_status(self):
                 return
 
-        print(args[0])
         if (
             args[0]
             == "https://graph.microsoft.com/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team') and displayName eq 'Example Team'"

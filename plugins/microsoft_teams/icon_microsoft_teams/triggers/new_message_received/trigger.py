@@ -49,7 +49,7 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
 
         time.sleep(1)  # Make sure we don't kill the API. It's limited to 3 calls a second
 
-        while True:
+        while True:  # pylint: disable=too-many-nested-blocks
             # Get messages
             sorted_messages = self.get_sorted_messages(messages_endpoint)
             most_recent_message_time = maya.parse(sorted_messages[0].get("createdDateTime"))
@@ -253,7 +253,7 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
             r"(?:" + ipv6_seg + r":){1,4}:[^\s:]" + ipv4_addr,
         )
 
-        return re.findall("|".join(["(?:{})".format(g) for g in ipv6_groups[::-1]]), msg)
+        return re.findall("|".join([f"(?:{g})" for g in ipv6_groups[::-1]]), msg)
 
     @staticmethod
     def extract_md5(msg: str) -> list:
