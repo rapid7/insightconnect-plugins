@@ -1,12 +1,15 @@
-import komand
 import time
-from .schema import GetNotificationsInput, GetNotificationsOutput, Input
+
+import insightconnect_plugin_runtime
 
 # Custom imports below
 import requests
+from insightconnect_plugin_runtime.exceptions import PluginException
+
+from .schema import GetNotificationsInput, GetNotificationsOutput, Input
 
 
-class GetNotifications(komand.Trigger):
+class GetNotifications(insightconnect_plugin_runtime.Trigger):
 
     # Notification URI
     _URI = "/integrationServices/v3/notification"
@@ -29,13 +32,10 @@ class GetNotifications(komand.Trigger):
         while True:
             result = requests.get(url, headers=headers)
             try:
-                data = komand.helper.clean(result.json())
+                data = insightconnect_plugin_runtime.helper.clean(result.json())
             except ValueError:
                 self.logger.error(result.text)
-                raise Exception(
-                    f"Error: Received an unexpected response"
-                    f" (non-JSON or no response was received). Raw response in logs."
-                )
+                raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=result.text)
             if "notifications" in data and len(data["notifications"]) > 0:
                 self.send(
                     {
