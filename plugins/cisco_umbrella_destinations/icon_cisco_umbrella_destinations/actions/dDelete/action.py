@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import DDeleteInput, DDeleteOutput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
-
+from insightconnect_plugin_runtime.helper import clean
 
 # Custom imports below
 
@@ -22,14 +22,13 @@ class DDelete(insightconnect_plugin_runtime.Action):
         # x = '1234 5678'
         # x.split(" ") == ['1234', '5678']
         payload = params.get(Input.PAYLOAD).split(" ")
-
         payload = remove_non_numerical_characters(payload)
 
-        return {
-            Output.SUCCESS: self.connection.client.delete_destinations(
-                destination_list_id=destination_list_id, data=payload
-            )
-        }
+        result = self.connection.client.delete_destinations(destination_list_id=destination_list_id, data=payload).get(
+            "data", {}
+        )
+        result = clean(result)
+        return {Output.SUCCESS: result}
 
 
 # This handles any characters in the IDs which are not numerical values
