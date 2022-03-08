@@ -18,13 +18,13 @@ class UninstallSensor(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        id = params.get("id", "")
+        sensorId = params.get("id", "")
         try:
             # Returns single sensor if ID is supplied
-            get_response = self.connection.carbon_black.get_object("/api/v1/sensor/%s" % id)
+            get_response = self.connection.carbon_black.get_object(f"/api/v1/sensor/{sensorId}")
             sensor_data = get_response.json_data
             sensor_data["uninstall"] = True
-            put_response = self.connection.carbon_black.put_object("/api/v1/sensor/%s" % id, sensor_data)
+            self.connection.carbon_black.put_object(f"/api/v1/sensor/{sensorId}", sensor_data)
         except ApiError as ex:
             if isinstance(ex, ObjectNotFoundError):
                 raise PluginException(
