@@ -63,7 +63,7 @@ class AddFeed(insightconnect_plugin_runtime.Action):
             self.logger.error(f"Could not add feed: {str(ex)}")
             raise ex
         else:
-            self.logger.debug("Feed data: {0:s}".format(str(feed)))
+            self.logger.debug(f"Feed data: {str(feed)}")
             self.logger.info(f"Added feed. New feed ID is {feed.id}")
             return {"id": feed.id}
 
