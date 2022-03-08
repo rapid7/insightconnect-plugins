@@ -819,7 +819,7 @@ actions:
         description: The sensor ID
         required: false
         title: ID
-        example: '1234'
+        example: '1'
       hostname:
         type: string
         description: The sensor hostname
@@ -890,7 +890,6 @@ actions:
         enum:
         - modules
         - events
-        - ""
         example: 'modules'
       query:
         type: string
@@ -937,12 +936,12 @@ actions:
         description: Certificate file
         type: file
         required: false
-        example: '{"filename": "name", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}'
+        example: { "filename": "<name>", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" }
       key:
         description: Key
         type: file
         required: false
-        example: '{"domain": "example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}'
+        example: { "domain": "example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0" }
       use_proxy:
         description: Whether or not to use proxy
         type: boolean
@@ -989,7 +988,7 @@ actions:
         type: string
         required: true
         title: ID
-        example: '1234'
+        example: '1'
       force:
         type: boolean
         description: Force deletion of all matches if multiple matches found
@@ -1068,6 +1067,7 @@ actions:
         description: The sensor ID
         required: false
         title: ID
+        example: '1'
     output:
       success:
         description: Whether or not the uninstall was successful
