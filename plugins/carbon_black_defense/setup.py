@@ -3,12 +3,12 @@ from setuptools import setup, find_packages
 
 
 setup(name="carbon_black_defense-rapid7-plugin",
-      version="2.0.1",
+      version="3.0.0",
       description="Find events and retrieve details for specific events",
       author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
-      install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
+      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_carbon_black_defense']
       )
