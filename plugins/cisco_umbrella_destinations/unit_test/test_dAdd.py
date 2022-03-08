@@ -12,7 +12,6 @@ from icon_cisco_umbrella_destinations.util.api import ERROR_MSG
 from insightconnect_plugin_runtime.exceptions import PluginException
 import logging
 
-
 from unit_test.mock import (
     STUB_CONNECTION,
     mock_request_200,
@@ -23,7 +22,6 @@ from unit_test.mock import (
     mock_request_404,
     STUB_DESTINATION_LIST_ID,
     mocked_request,
-    STUB_RESPONSE,
 )
 
 
@@ -51,13 +49,41 @@ class TestDAdd(TestCase):
     @mock.patch("requests.request", side_effect=mock_request_200)
     def test_if_ok(self, mock_post):
         response = self.action.run(self.params)
-        expected_response = STUB_RESPONSE
+        expected_response = {
+            "success": {
+                "id": 15755711,
+                "organizationId": 2372338,
+                "access": "allow",
+                "isGlobal": False,
+                "name": "CreateListTest",
+                "createdAt": "2022-01-28T16:03:36+0000",
+                "modifiedAt": "2022-02-09T11:47:00+0000",
+                "isMspDefault": False,
+                "markedForDeletion": False,
+                "bundleTypeId": 1,
+                "meta": {"destinationCount": 5},
+            },
+        }
         self.assertEqual(response, expected_response)
 
     @mock.patch("requests.request", side_effect=mock_request_200)
     def test_if_comment_is_none(self, mock_post):
         response = self.action.run(self.params_no_comment)
-        expected_response = STUB_RESPONSE
+        expected_response = {
+            "success": {
+                "id": 15755711,
+                "organizationId": 2372338,
+                "access": "allow",
+                "isGlobal": False,
+                "name": "CreateListTest",
+                "createdAt": "2022-01-28T16:03:36+0000",
+                "modifiedAt": "2022-02-09T11:47:00+0000",
+                "isMspDefault": False,
+                "markedForDeletion": False,
+                "bundleTypeId": 1,
+                "meta": {"destinationCount": 5},
+            },
+        }
         self.assertEqual(response, expected_response)
 
     @parameterized.expand(
