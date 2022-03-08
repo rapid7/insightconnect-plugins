@@ -15,7 +15,7 @@ This plugin utilizes the [VMware Carbon Black Cloud Endpoint Standard API](https
 
 # Supported Product Versions
 
-* 04/02/2022
+* 08/03/2022
 
 # Documentation
 
@@ -376,7 +376,7 @@ The Role Based Access Control (RBAC) of your API Key will require the right perm
 The Find Event API and Get Details for Specific Event API are now documented as Enriched Events Search and Enriched Event Details Search at the following links: [https://developer.carbonblack.com/reference/carbon-black-cloud/cb-defense/latest/platform-search-api-enriched-events/#start-an-enriched-events-search-v2](https://developer.carbonblack.com/reference/carbon-black-cloud/cb-defense/latest/platform-search-api-enriched-events/#start-an-enriched-events-search-v2) and [https://developer.carbonblack.com/reference/carbon-black-cloud/cb-defense/latest/platform-search-api-enriched-events/#request-details-for-enriched-events-v2](https://developer.carbonblack.com/reference/carbon-black-cloud/cb-defense/latest/platform-search-api-enriched-events/#request-details-for-enriched-events-v2).
 # Version History
 
-* 3.0.0 - Update Get Event Details Action and Find Event Action
+* 3.0.0 - Update Get Event Details Action and Find Event Action supporting new API with new inputs and outputs | Update SDK to version 4
 * 2.0.1 - Rebrand and update help references
 * 2.0.0 - New spec and help.md format for the Extension Library | Fix spelling of variable titled Registry Value
 * 1.1.1 - Update to Python 3.7 Slim SDK (plugin size reduction) | Fix bug in output where Security Event Code was defined as an `object` instead of a `string`
