@@ -21,19 +21,19 @@ class AddWatchlist(insightconnect_plugin_runtime.Action):
         )
         watchlist.query = params["query"]
 
-        self.logger.debug("Adding watchlist: {0:s}".format(str(watchlist)))
+        self.logger.debug(f"Adding watchlist: {str(watchlist)}")
 
         try:
             watchlist.save()
         except ServerError as se:
-            self.logger.error("Could not add watchlist: {0:s}".format(str(se)))
+            self.logger.error(f"Could not add watchlist: {str(se)}")
             raise se
         except Exception as ex:
-            self.logger.error("Could not add watchlist: {0:s}".format(str(ex)))
+            self.logger.error(f"Could not add watchlist: {str(ex)}")
             raise ex
         else:
-            self.logger.debug("Watchlist data: {0:s}".format(str(watchlist)))
-            self.logger.info("Added watchlist. New watchlist ID is {0:s}".format(str(watchlist.id)))
+            self.logger.debug(f"Watchlist data: {str(watchlist)}")
+            self.logger.info(f"Added watchlist. New watchlist ID is {str(watchlist.id)}")
         return {"id": str(watchlist.id)}
 
     def test(self):

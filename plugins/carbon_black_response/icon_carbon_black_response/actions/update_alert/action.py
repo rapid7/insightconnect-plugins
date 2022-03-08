@@ -21,7 +21,7 @@ class UpdateAlert(insightconnect_plugin_runtime.Action):
             alert.status = params["status"]
             alert.save()
         except ApiError as ex:
-            self.logger.error("Error: Unable to update alert. Error is: {error}".format(error=str(ex)))
+            self.logger.error(f"Error: Unable to update alert. Error is: {str(ex)}")
             raise ex
 
         self.logger.info("Success: Updated alert!")

@@ -13,11 +13,11 @@ class ListWatchlists(insightconnect_plugin_runtime.Action):
             output=ListWatchlistsOutput(),
         )
 
-    def run(self, params={}):
+    def run(self):
         try:
             results = self.connection.carbon_black.get_object("/api/v1/watchlist")
         except Exception as ex:
-            self.logger.error("Failed to get alerts: %s", ex)
+            self.logger.error(f"Failed to get alerts: {ex}")
             raise ex
 
         results = insightconnect_plugin_runtime.helper.clean(results)

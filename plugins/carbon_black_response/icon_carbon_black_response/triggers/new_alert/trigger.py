@@ -15,7 +15,7 @@ class NewAlert(insightconnect_plugin_runtime.Trigger):
             output=NewAlertOutput(),
         )
 
-    def run(self, params={}):
+    def run(self):
         """Run the trigger"""
         # TODO: this currently selects alerts that have happened in the past 5 minutes
         # TODO: since we don't have a good solution for distributed caching
@@ -57,7 +57,7 @@ class NewAlert(insightconnect_plugin_runtime.Trigger):
                 raise ex
 
             # sleep for 5 minutes before getting the next results
-            self.logger.info("Sleeping for %d seconds..." % five_minutes_secs)
+            self.logger.info(f"Sleeping for {five_minutes_secs} seconds...")
             time.sleep(five_minutes_secs)
 
     def test(self):

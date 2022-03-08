@@ -16,7 +16,7 @@ class AddFeed(insightconnect_plugin_runtime.Action):
         feed_url = params["feed_url"]
         configured_feeds = [f for f in self.connection.carbon_black.select(Feed) if f.feed_url == feed_url]
         if configured_feeds:
-            self.logger.info("Warning: Feeds already configured for this url: {0:s}:".format(feed_url))
+            self.logger.info(f"Warning: Feeds already configured for this url: {feed_url}:")
             for feed in configured_feeds:
                 self.logger.info(feed)
             if not params["force"]:
@@ -43,7 +43,7 @@ class AddFeed(insightconnect_plugin_runtime.Action):
         if params["validate_server_cert"] is not None:
             feed.validate_server_cert = params["validate_server_cert"]
 
-        self.logger.debug("Adding feed: {0:s}".format(str(feed)))
+        self.logger.debug(f"Adding feed: {str(feed)}")
 
         try:
             feed.save()
@@ -57,14 +57,14 @@ class AddFeed(insightconnect_plugin_runtime.Action):
                     " Check to ensure the Cb server has network connectivity and the credentials are correct."
                 )
             else:
-                self.logger.error("Could not add feed: {0:s}".format(str(se)))
+                self.logger.error(f"Could not add feed: {str(se)}")
             raise se
         except Exception as ex:
-            self.logger.error("Could not add feed: {0:s}".format(str(ex)))
+            self.logger.error(f"Could not add feed: {str(ex)}")
             raise ex
         else:
             self.logger.debug("Feed data: {0:s}".format(str(feed)))
-            self.logger.info("Added feed. New feed ID is {0:d}".format(feed.id))
+            self.logger.info(f"Added feed. New feed ID is {feed.id}")
             return {"id": feed.id}
 
     def test(self):

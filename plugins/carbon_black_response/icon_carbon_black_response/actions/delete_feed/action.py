@@ -14,7 +14,7 @@ class DeleteFeed(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         feed_id = params["id"]
         force_deletion = params["force"]
-        attempted_to_find = "ID of {0:s}".format(feed_id)
+        attempted_to_find = f"ID of {feed_id}"
 
         try:
             feeds = [self.connection.carbon_black.select(Feed, feed_id, force_init=True)]
@@ -22,7 +22,7 @@ class DeleteFeed(insightconnect_plugin_runtime.Action):
                 self.logger.info("No feeds were found that match the specified feed ID!")
                 return {"success": False}
         except Exception as e:
-            raise Exception("Error: {error}\n Please contact support for assistance.".format(error=e))
+            raise Exception(f"Error: {e}\n Please contact support for assistance.")
 
         if len(feeds) > 1 and not force_deletion:
             self.logger.error(
@@ -35,10 +35,10 @@ class DeleteFeed(insightconnect_plugin_runtime.Action):
             try:
                 feed.delete()
             except Exception:
-                self.logger.error("Error: Unable to delete feed ID {id}".format(id=attempted_to_find))
+                self.logger.error(f"Error: Unable to delete feed ID {attempted_to_find}")
                 return {"success": False}
 
-            self.logger.info("Success: Deleted feed {name} with ID {id}".format(name=feed.name, id=feed.id))
+            self.logger.info(f"Success: Deleted feed {feed.name} with ID {feed.id}")
             return {"success": True}
 
     def test(self):

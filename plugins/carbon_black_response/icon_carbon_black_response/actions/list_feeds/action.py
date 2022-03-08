@@ -13,7 +13,7 @@ class ListFeeds(insightconnect_plugin_runtime.Action):
             output=ListFeedsOutput(),
         )
 
-    def run(self, params={}):
+    def run(self):
         try:
             results = self.connection.carbon_black.get_object("/api/v1/feed")
         except Exception as ex:

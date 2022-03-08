@@ -24,7 +24,7 @@ class DeleteWatchlist(insightconnect_plugin_runtime.Action):
                 self.logger.info("No watchlists were found that match the specified watchlist ID!")
                 return {"success": False}
         except Exception as e:
-            raise Exception("Error: {error}\n Please contact support for assistance.".format(error=e))
+            raise Exception(f"Error: {e}\n Please contact support for assistance.")
 
         if len(watchlists) > 1 and not force_deletion:
             self.logger.error(
@@ -37,11 +37,11 @@ class DeleteWatchlist(insightconnect_plugin_runtime.Action):
             try:
                 watchlist.delete()
             except Exception:
-                self.logger.error("Error: Unable to delete watchlist ID {id}".format(id=watchlist.name))
+                self.logger.error(f"Error: Unable to delete watchlist ID {watchlist.name}")
                 return {"success": False}
 
             self.logger.info(
-                "Success: Deleted watchlist {name} with ID {id}".format(name=watchlist.name, id=watchlist.id)
+                f"Success: Deleted watchlist {watchlist.name} with ID {watchlist.id}"
             )
             return {"success": True}
 
