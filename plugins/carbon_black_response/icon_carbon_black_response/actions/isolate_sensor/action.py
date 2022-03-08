@@ -18,7 +18,9 @@ class IsolateSensor(insightconnect_plugin_runtime.Action):
         try:
             sensor = self.connection.carbon_black.select(Sensor).where("hostname:" + params.get("hostname")).first()
             length = len(self.connection.carbon_black.select(Sensor).where("hostname:" + params.get("hostname")))
-            self.logger.info(f"List size is: {length}")
+            self.logger.info(
+                f"List size is: {length}"
+            )
             sensor.isolate()
         except Exception as ex:
             self.logger.error("Failed to isolate sensor: %s", ex)

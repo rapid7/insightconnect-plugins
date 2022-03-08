@@ -132,11 +132,8 @@ class TestUninstallSensors(TestCase):
         test_action.logger = log
 
         working_params = {"id": "bad"}
-        results = test_action.run(working_params)
 
-        expected = {"success": False}
-        self.assertNotEqual({}, results, "returns non - empty results")
-        self.assertEqual(expected, results)
+        self.assertRaises(PluginException, test_action.run, working_params)
 
     @mock.patch("cbapi.CbEnterpriseResponseAPI", side_effect=MockCbEnterpriseResponseAPI)
     def test_uninstall_sensor_invalid_id(self, mockCbEnterpriseResponseAPI):
