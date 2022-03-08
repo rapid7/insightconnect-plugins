@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import DAddInput, DAddOutput, Input, Output, Component
-
+from insightconnect_plugin_runtime.helper import clean
 
 # Custom imports below
 
@@ -24,8 +24,7 @@ class DAdd(insightconnect_plugin_runtime.Action):
         else:
             data = [{"destination": destination}]
 
-        return {
-            Output.SUCCESS: self.connection.client.create_destinations(
-                destination_list_id=destination_list_id, data=data
-            )
-        }
+        result = self.connection.client.create_destinations(destination_list_id=destination_list_id, data=data).get('data', {})
+
+        result = clean(result)
+        return {Output.SUCCESS: result}
