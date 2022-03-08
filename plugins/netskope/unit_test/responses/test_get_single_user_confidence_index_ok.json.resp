@@ -1,0 +1,9 @@
+{
+  "userId": "ExampleUser",
+  "confidences": [
+    {
+      "start": 0,
+      "confidenceScore": 0
+    }
+  ]
+}
