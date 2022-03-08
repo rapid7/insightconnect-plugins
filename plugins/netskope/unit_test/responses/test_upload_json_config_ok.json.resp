@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "name": "test",
+        "data": {
+            "urls": [
+                "www.example.com"
+            ],
+            "type": "exact",
+            "json_version": 2
+        },
+        "modify_by": "Netskope REST API",
+        "modify_time": "2022-02-01T12:20:23.000Z",
+        "modify_type": "Created",
+        "pending": 1
+    }
+]
