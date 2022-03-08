@@ -1,6 +1,10 @@
 import json
 import os
 from unittest import TestCase, mock
+
+from cbapi.errors import ServerError
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from icon_carbon_black_response.actions.uninstall_sensor import UninstallSensor
 import logging
 
@@ -82,7 +86,10 @@ class MockCbEnterpriseResponseAPI:
         get_messages_from_user_payload = read_file_to_string(actual_joined_path, False)
         if uri == "/api/v1/sensor/1":
             return MockResponse(get_messages_from_user_payload, 200)
-        return MockResponse(None, 404)
+        elif uri == "/api/v1/sensor/150":
+            raise ServerError(404, "Invalid Sensor")
+        elif uri == "/api/v1/sensor/bad":
+            raise ServerError(400, "Bad Request")
 
     def put_object(self, uri, body, **kwargs):
         actual_path = os.path.dirname(os.path.realpath(__file__))
@@ -90,7 +97,10 @@ class MockCbEnterpriseResponseAPI:
         get_messages_from_user_payload = read_file_to_string(actual_joined_path, True)
         if uri == "/api/v1/sensor/1" and body == get_messages_from_user_payload:
             return MockResponse(get_messages_from_user_payload, 204)
-        return MockResponse(None, 404)
+        elif uri == "/api/v1/sensor/150":
+            raise ServerError(404, "Invalid Sensor")
+        elif uri == "/api/v1/sensor/bad":
+            raise ServerError(400, "Bad Request")
 
 
 class MockConnection:
@@ -121,9 +131,20 @@ class TestUninstallSensors(TestCase):
         test_action.connection = MockConnection()
         test_action.logger = log
 
-        working_params = {"id": "14"}
+        working_params = {"id": "bad"}
         results = test_action.run(working_params)
 
         expected = {"success": False}
         self.assertNotEqual({}, results, "returns non - empty results")
         self.assertEqual(expected, results)
+
+    @mock.patch("cbapi.CbEnterpriseResponseAPI", side_effect=MockCbEnterpriseResponseAPI)
+    def test_uninstall_sensor_invalid_id(self, mockCbEnterpriseResponseAPI):
+        log = logging.getLogger("Test")
+        test_action = UninstallSensor()
+        test_action.connection = MockConnection()
+        test_action.logger = log
+
+        working_params = {"id": "150"}
+
+        self.assertRaises(PluginException, test_action.run, working_params)
