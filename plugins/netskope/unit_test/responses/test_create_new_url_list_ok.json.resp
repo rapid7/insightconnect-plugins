@@ -1,0 +1,11 @@
+[
+    {
+        "id": 0,
+        "name": "ExampleName",
+        "data": {"urls": ["https://example.com", "https://example.com"], "type": "exact"},
+        "modify_type": "Created",
+        "modify_by": "Netskope API",
+        "modify_time": "1997-01-01 00:00:00",
+        "pending": 0
+    }
+]
