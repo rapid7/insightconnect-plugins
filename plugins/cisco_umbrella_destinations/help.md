@@ -14,7 +14,7 @@ Cisco Umbrella Destinations allows users to manage, block, and allow network des
 
 # Supported Product Versions
 
-* 2022-01-31
+* 2022-03-08
 
 # Documentation
 
@@ -474,6 +474,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.0 - Updated output for dAdd & dDelete - Removed data element in the response
 * 1.0.0 - Initial plugin includes create and modify destination lists
 
 # Links
