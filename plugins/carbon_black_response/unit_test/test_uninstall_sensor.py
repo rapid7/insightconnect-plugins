@@ -2,7 +2,7 @@ import json
 import os
 from unittest import TestCase, mock
 
-from cbapi.errors import ServerError
+from cbapi.errors import ServerError, ObjectNotFoundError
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_carbon_black_response.actions.uninstall_sensor import UninstallSensor
@@ -87,7 +87,7 @@ class MockCbEnterpriseResponseAPI:
         if uri == "/api/v1/sensor/1":
             return MockResponse(get_messages_from_user_payload, 200)
         elif uri == "/api/v1/sensor/150":
-            raise ServerError(404, "Invalid Sensor")
+            raise ObjectNotFoundError(uri)
         elif uri == "/api/v1/sensor/bad":
             raise ServerError(400, "Bad Request")
 
