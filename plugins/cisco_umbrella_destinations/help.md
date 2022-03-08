@@ -14,7 +14,7 @@ Cisco Umbrella Destinations allows users to manage, block, and allow network des
 
 # Supported Product Versions
 
-* 2022-01-31
+* 2022-03-08
 
 # Documentation
 
