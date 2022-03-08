@@ -19,17 +19,14 @@ class ListSensors(insightconnect_plugin_runtime.Action):
             ("ip", params.get("ip", "")),
             ("groupid", params.get("groupid", "")),
         ]
-        sensor_id = params.get("id", "")
+        sensorId = params.get("id", "")
         try:
-            if not sensor_id:
+            if not sensorId:
                 results = self.connection.carbon_black.get_object("/api/v1/sensor", query_parameters=query_params)
             else:
                 # Returns single sensor if ID is supplied
-                results = [
-                    self.connection.carbon_black.get_object(
-                        f"/api/v1/sensor/{sensor_id}", query_parameters=query_params
-                    )
-                ]
+                results = [self.connection.carbon_black.get_object(f"/api/v1/sensor/{sensorId}",
+                                                                   query_parameters=query_params)]
             updated_results = []
             for result in results:
                 result["found"] = True

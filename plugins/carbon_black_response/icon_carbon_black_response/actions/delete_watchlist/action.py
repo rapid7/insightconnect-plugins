@@ -40,7 +40,9 @@ class DeleteWatchlist(insightconnect_plugin_runtime.Action):
                 self.logger.error(f"Error: Unable to delete watchlist ID {watchlist.name}")
                 return {"success": False}
 
-            self.logger.info(f"Success: Deleted watchlist {watchlist.name} with ID {watchlist.id}")
+            self.logger.info(
+                f"Success: Deleted watchlist {watchlist.name} with ID {watchlist.id}"
+            )
             return {"success": True}
 
     def test(self):
