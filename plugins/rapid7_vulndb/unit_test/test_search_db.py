@@ -26,6 +26,10 @@ class TestSearchDb(TestCase):
             "search_404": "3395856ce81f2b7382dee72602f798b642f14140-cve",
             "search_504": "6628289fh24g5e1625fhh15735i132e97i45463-cve",
         }
+        self.params_list = [
+            ("404", "3395856ce81f2b7382dee72602f798b642f14140-cve", "The requested resource could not be found."),
+            ("504", "6628289fh24g5e1625fhh15735i132e97i45463-cve", "Server error occurred"),
+        ]
         self.action = SearchDb()
 
     @patch("requests.get", side_effect=mock_request)
@@ -99,19 +103,8 @@ class TestSearchDb(TestCase):
         self.assertEqual(actual, expected)
 
     @patch("requests.get", side_effect=mock_request)
-    def test_search_db_404(self, mock_req):
-        expected = "The requested resource could not be found."
-        with self.assertRaises(PluginException) as exception:
-            actual = self.action.run(
-                {Input.SEARCH: self.params.get("search_404"), Input.DATABASE: self.params.get("database")}
-            )
-        self.assertEqual(exception.exception.cause, expected)
-
-    @patch("requests.get", side_effect=mock_request)
-    def test_search_db_504(self, mock_req):
-        expected = "Server error occurred"
-        with self.assertRaises(PluginException) as exception:
-            actual = self.action.run(
-                {Input.SEARCH: self.params.get("search_504"), Input.DATABASE: self.params.get("database")}
-            )
-        self.assertEqual(exception.exception.cause, expected)
+    def test_get_content_error(self, mock_req):
+        for error, identifier, expected in self.params_list:
+            with self.assertRaises(PluginException) as exception:
+                self.action.run({Input.SEARCH: identifier, Input.DATABASE: self.params.get("database")})
+            self.assertEqual(exception.exception.cause, expected)

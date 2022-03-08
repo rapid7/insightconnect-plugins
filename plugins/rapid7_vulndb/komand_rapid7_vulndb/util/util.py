@@ -20,16 +20,20 @@ class Util:
             @wraps(func)
             def f_retry(*args, **kwargs):
                 attempt = 1
+                print(attempt)
                 t1 = datetime.now()
                 while attempt < tries:
                     while (datetime.now() - t1).seconds < timeout:
                         try:
                             # Sleep exponentially increases per retry
                             # # nosec prevents bandit warning
-                            time.sleep(backoff_seconds * 2 ** attempt + random.uniform(0, 1))  # nosec
+                            time.sleep(backoff_seconds * 2**attempt + random.uniform(0, 1))  # nosec
                             return func(*args, **kwargs)
                         except exceptions:
+                            print("except")
                             attempt += 1
+
+                return func(*args, **kwargs)
 
             return f_retry
 

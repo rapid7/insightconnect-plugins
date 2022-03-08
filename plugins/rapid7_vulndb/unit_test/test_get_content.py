@@ -22,6 +22,10 @@ class TestGetContent(TestCase):
             "identifier_404": "4416967df92g3c8493eff83513g819c753g23241-cve",
             "identifier_504": "5527178eg13h4d9514egg94624h921d864h34352-cve",
         }
+        self.params_list = [
+            ("404", "4416967df92g3c8493eff83513g819c753g23241-cve", "The requested resource could not be found."),
+            ("504", "5527178eg13h4d9514egg94624h921d864h34352-cve", "Server error occurred"),
+        ]
         self.action = GetContent()
 
     @patch("requests.get", side_effect=mock_request)
@@ -42,15 +46,8 @@ class TestGetContent(TestCase):
         self.assertEqual(actual, expected)
 
     @patch("requests.get", side_effect=mock_request)
-    def test_get_content_404(self, mock_req):
-        expected = "The requested resource could not be found."
-        with self.assertRaises(PluginException) as exception:
-            actual = self.action.run({Input.IDENTIFIER: self.params.get("identifier_404")})
-        self.assertEqual(exception.exception.cause, expected)
-
-    @patch("requests.get", side_effect=mock_request)
-    def test_get_content_504(self, mock_req):
-        expected = "Server error occurred"
-        with self.assertRaises(PluginException) as exception:
-            actual = self.action.run({Input.IDENTIFIER: self.params.get("identifier_504")})
-        self.assertEqual(exception.exception.cause, expected)
+    def test_get_content_error(self, mock_req):
+        for error, identifier, expected in self.params_list:
+            with self.assertRaises(PluginException) as exception:
+                self.action.run({Input.IDENTIFIER: identifier})
+            self.assertEqual(exception.exception.cause, expected)
