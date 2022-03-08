@@ -25,7 +25,7 @@ class UpdateAlertInput(insightconnect_plugin_runtime.Input):
     "id": {
       "type": "string",
       "title": "Unique ID",
-      "description": "Unique ID of the alert. Example: 1cb11d0d-f86b-415d-aeb3-05f085973fbb",
+      "description": "Unique ID of the alert. ",
       "order": 1
     },
     "status": {

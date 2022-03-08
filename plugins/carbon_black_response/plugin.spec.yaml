@@ -691,18 +691,21 @@ connection:
     type: credential_secret_key
     description: API token found in your Carbon Black profile
     required: true
+    example: { "domain": "example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0" }
   url:
     title: URL
     type: string
     description: Carbon Black Server API URL
     default: https://127.0.0.1/api/bit9platform/v1
     required: true
+    example: 'https://127.0.0.1/api/bit9platform/v1'
   ssl_verify:
     title: SSL Verify
     type: boolean
     description: SSL certificate verification
     default: true
     required: true
+    example: true
 actions:
   list_alerts:
     title: List Alerts
