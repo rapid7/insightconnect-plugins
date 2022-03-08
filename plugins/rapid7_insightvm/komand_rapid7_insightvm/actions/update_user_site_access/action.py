@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import UpdateUserSiteAccessInput, UpdateUserSiteAccessOutput
 
 # Custom imports below
@@ -6,7 +6,7 @@ from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
-class UpdateUserSiteAccess(komand.Action):
+class UpdateUserSiteAccess(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="update_user_site_access",

@@ -1,5 +1,5 @@
 import json
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class RequestParams(object):

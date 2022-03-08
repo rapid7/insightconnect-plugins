@@ -1,7 +1,7 @@
 from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
-import komand
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 import time
 from dateutil.parser import parse
 
@@ -82,12 +82,12 @@ def adhoc_sql_report(connection, logger, report_payload: dict):
 
 
 def write_to_cache(filename, data):
-    with komand.helper.open_cachefile(filename) as cache_file:
+    with insightconnect_plugin_runtime.helper.open_cachefile(filename) as cache_file:
         cache_file.write(data)
 
 
 def read_from_cache(filename):
-    with komand.helper.open_cachefile(filename) as cache_file:
+    with insightconnect_plugin_runtime.helper.open_cachefile(filename) as cache_file:
         contents = cache_file.read()
 
         return contents

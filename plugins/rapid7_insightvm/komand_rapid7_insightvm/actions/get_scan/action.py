@@ -1,14 +1,14 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetScanInput, GetScanOutput
 
 # Custom imports below
 import requests
 from komand_rapid7_insightvm.util import endpoints
 import json
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class GetScan(komand.Action):
+class GetScan(insightconnect_plugin_runtime.Action):
 
     _ERRORS = {
         400: "Bad Request",

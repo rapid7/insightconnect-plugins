@@ -7,7 +7,7 @@ from unit_test.util import Util
 from komand_rapid7_insightvm.actions.get_asset import GetAsset
 from komand_rapid7_insightvm.actions.get_asset.schema import Input
 from parameterized import parameterized
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 

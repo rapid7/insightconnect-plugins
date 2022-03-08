@@ -3,7 +3,7 @@ from .shared_resources import resource_request_status_code_check
 import json
 import requests
 import urllib3
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from typing import NamedTuple, Collection
 
 # Suppress insecure request messages

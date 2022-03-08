@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import TopRemediationsInput, TopRemediationsOutput, Input, Output, Component
 
 # Custom imports below
@@ -6,10 +6,10 @@ import csv
 import io
 import uuid
 from komand_rapid7_insightvm.util import util
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class TopRemediations(komand.Action):
+class TopRemediations(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="top_remediations",

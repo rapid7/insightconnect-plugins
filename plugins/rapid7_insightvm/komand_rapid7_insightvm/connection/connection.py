@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 
 # Custom imports below
@@ -11,7 +11,7 @@ from collections import namedtuple
 from komand_rapid7_insightvm.util import endpoints
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         self.session = None
         self.console_url = None
@@ -31,7 +31,7 @@ class Connection(komand.Connection):
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
     def test(self):
-        from komand.exceptions import ConnectionTestException
+        from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
         """
         Tests connectivity to the InsightVM Console via administrative info endpoint

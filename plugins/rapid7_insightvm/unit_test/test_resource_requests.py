@@ -1,7 +1,7 @@
 import sys
 import os
 
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from unittest import TestCase
 from komand_rapid7_insightvm.util import resource_requests
 import logging

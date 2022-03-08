@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import UpdateUserInput, UpdateUserOutput
 
 # Custom imports below
@@ -7,7 +7,7 @@ from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 from komand_rapid7_insightvm.util.resource_helpers import ValidateUser
 
 
-class UpdateUser(komand.Action):
+class UpdateUser(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="update_user",

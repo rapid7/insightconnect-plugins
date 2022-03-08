@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetSiteAssetsInput, GetSiteAssetsOutput
 
 # Custom imports below
@@ -6,10 +6,10 @@ import requests
 from komand_rapid7_insightvm.util import endpoints
 from collections import namedtuple
 import json
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class GetSiteAssets(komand.Action):
+class GetSiteAssets(insightconnect_plugin_runtime.Action):
     _ERRORS = {
         400: "Bad Request",
         401: "Unauthorized",

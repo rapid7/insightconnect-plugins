@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ListReportsInput, ListReportsOutput
 
 # Custom imports below
@@ -7,7 +7,7 @@ import json
 from komand_rapid7_insightvm.util import endpoints
 
 
-class ListReports(komand.Action):
+class ListReports(insightconnect_plugin_runtime.Action):
     _ERRORS = {
         401: "Unauthorized",
         404: "Not Found",

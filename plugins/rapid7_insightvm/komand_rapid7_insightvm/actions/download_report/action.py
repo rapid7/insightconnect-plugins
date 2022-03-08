@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import DownloadReportInput, DownloadReportOutput
 
 # Custom imports below
@@ -6,10 +6,10 @@ import requests
 from komand_rapid7_insightvm.util import endpoints
 import base64
 import json
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class DownloadReport(komand.Action):
+class DownloadReport(insightconnect_plugin_runtime.Action):
     _ERRORS = {
         401: "Unauthorized",
         404: "Not Found",

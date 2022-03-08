@@ -2,7 +2,7 @@ import sys
 import os
 from unittest import TestCase
 from komand_rapid7_insightvm.util.util import convert_date_to_iso8601
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
 
 

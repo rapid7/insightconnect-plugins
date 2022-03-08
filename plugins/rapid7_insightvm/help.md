@@ -4103,7 +4103,7 @@ This action is used to create a vulnerability exception submission.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|Exception created with InsightConnect|True|Comment to include in the vulnerability exception submission|None|example comment|
-|expiration|date|None|False|The date the vulnerability exception expires e.g 2021-12-30T00:00:00Z|None|2021-12-30T00:00:00Z|
+|expiration|date|None|False|The date the vulnerability exception expires e.g 2021-12-30T00:00:00Z|None|2021-12-30 00:00:00|
 |key|string|None|False|The key to identify a specific instance if the type is Instance|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |port|integer|None|False|The port the vulnerability appears on if the type is Instance|None|40000|
 |reason|string|None|True|Reason for the exception|['False Positive', 'Compensating Control', 'Acceptable Use', 'Acceptable Risk', 'Other']|False Positive|
@@ -4116,7 +4116,7 @@ Example input:
 ```
 {
   "comment": "example comment",
-  "expiration": "2021-12-30T00:00:00Z",
+  "expiration": "2021-12-30 00:00:00",
   "key": "9de5069c5afe602b2ea0a04b66beb2c0",
   "port": 40000,
   "reason": "False Positive",
