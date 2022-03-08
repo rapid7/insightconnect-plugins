@@ -18,6 +18,8 @@ import time
 import copy
 from urllib.parse import urljoin
 
+from komand_rapid7_vulndb.util.util import Util
+
 
 class Search:
     """
@@ -27,6 +29,7 @@ class Search:
     search_url: str = "https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/search"
 
     @classmethod
+    @Util.retry(tries=6, timeout=60, exceptions=PluginException, backoff_seconds=1)
     def execute_query(cls, query: Dict) -> Dict:
         """
         Executes API query by sending a request to API
@@ -36,9 +39,6 @@ class Search:
         :return: Data as dictionary
         """
         response = requests.get(cls.search_url, params=query, allow_redirects=False)
-        if response.status_code != requests.codes.ok:
-            time.sleep(5)
-            response = requests.get(cls.search_url, params=query, allow_redirects=False)
         response_error_handler(response.status_code, response.text)
         return response.json()
 
@@ -109,6 +109,14 @@ class Content:
     ]
 
     @classmethod
+    @Util.retry(tries=6, timeout=60, exceptions=PluginException, backoff_seconds=1)
+    def retrieve_data(cls, identifier: str):
+        # extract data from API
+        response = requests.get(urljoin(cls.content_url, identifier))
+        response_error_handler(response.status_code, response.text)
+        return response.json()
+
+    @classmethod
     def get(cls, identifier: str) -> Dict:
 
         """
@@ -119,14 +127,8 @@ class Content:
         :return:  transformed data
         """
 
-        # extract data from API
-        response = requests.get(urljoin(cls.content_url, identifier))
-        if response.status_code != requests.codes.ok:
-            time.sleep(5)
-            response = requests.get(urljoin(cls.content_url, identifier))
-        response_error_handler(response.status_code, response.text)
         modifiers = []
-        data = response.json()
+        data = cls.retrieve_data(identifier)
 
         # Fix for bug in API where an int is returned in some conditions on severity
         # E.g. msft-cve-2019-0708
