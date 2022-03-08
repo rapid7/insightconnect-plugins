@@ -5,8 +5,8 @@ import json
 from sys import argv
 
 Name = "VMware Carbon Black EDR"
-Vendor = "rapid7"
-Version = "3.2.0"
+Vendor = "rapid7-tcheng"
+Version = "3.2.0-beta"
 Description = "Automate information collection, endpoint isolation and hash blacklisting"
 
 
