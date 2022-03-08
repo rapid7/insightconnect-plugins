@@ -16,7 +16,7 @@ class LookupHash(insightconnect_plugin_runtime.Action):
             output=LookupHashOutput(),
         )
 
-    def __normalize(self, result):
+    def _normalize(self, result):
         formatted = {Output.FOUND: False, Output.THREATSCORE: 0, Output.REPORTS: []}
         if result and isinstance(result, list):
             result = insightconnect_plugin_runtime.helper.clean(result)
@@ -31,7 +31,7 @@ class LookupHash(insightconnect_plugin_runtime.Action):
         """Run action"""
         hash_to_analyze = params.get(Input.HASH)
         if validators.md5(hash_to_analyze) or validators.sha256(hash_to_analyze) or validators.sha1(hash_to_analyze):
-            return self.__normalize(self.connection.api.lookup_by_hash(hash_to_analyze))
+            return self._normalize(self.connection.api.lookup_by_hash(hash_to_analyze))
         else:
             raise PluginException(
                 cause="Provided hash is not supported.",

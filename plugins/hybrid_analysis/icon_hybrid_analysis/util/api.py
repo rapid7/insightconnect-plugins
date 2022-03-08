@@ -16,18 +16,18 @@ class HybridAnalysisAPI:
         self.logger = logger
 
     def lookup_by_hash(self, analyzed_hash: str):
-        return self.__send_request(method="POST", path="/search/hash", data={"hash": analyzed_hash})
+        return self._send_request(method="POST", path="/search/hash", data={"hash": analyzed_hash})
 
     def lookup_by_terms(self, data: dict):
-        return self.__send_request(method="POST", path="/search/terms", data=data)
+        return self._send_request(method="POST", path="/search/terms", data=data)
 
     def report(self, analyzed_hash: str):
-        return self.__send_request(method="GET", path=f"/report/{urllib.parse.quote(analyzed_hash)}/state")
+        return self._send_request(method="GET", path=f"/report/{urllib.parse.quote(analyzed_hash)}/state")
 
     def submit(self, files: dict, data: dict):
-        return self.__send_request(method="POST", path="/submit/file", files=files, data=data)
+        return self._send_request(method="POST", path="/submit/file", files=files, data=data)
 
-    def __send_request(self, method: str, path: str, data: dict = None, files: dict = None) -> dict:
+    def _send_request(self, method: str, path: str, data: dict = None, files: dict = None) -> dict:
         try:
             response = requests.request(
                 method.upper(),
