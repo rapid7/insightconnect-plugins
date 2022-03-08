@@ -1,5 +1,8 @@
+import cbapi.errors
 import insightconnect_plugin_runtime
 from .schema import UninstallSensorInput, UninstallSensorOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 
 # Custom imports below
 
@@ -18,14 +21,14 @@ class UninstallSensor(insightconnect_plugin_runtime.Action):
         try:
             # Returns single sensor if ID is supplied
             get_response = self.connection.carbon_black.get_object("/api/v1/sensor/%s" % id)
-            if get_response.status_code != 200:
-                return {"success": False}
             sensor_data = get_response.json_data
             sensor_data["uninstall"] = True
             put_response = self.connection.carbon_black.put_object("/api/v1/sensor/%s" % id, sensor_data)
-            if not put_response.status_code == 204:
-                return {"success": False}
-        except Exception as ex:
-            self.logger.error("Failed to uninstall sensor: %s", ex)
-            raise ex
+        except cbapi.errors.ServerError as ex:
+            if ex.error_code == 404:
+                raise PluginException(
+                    cause="Invalid sensor ID. The server ID was not found on the server.",
+                    assistance="Please verify that the provided sensor ID exists.",
+                ) from cbapi.errors.ServerError(404, "Invalid Sensor")
+            return {"success": False}
         return {"success": True}
