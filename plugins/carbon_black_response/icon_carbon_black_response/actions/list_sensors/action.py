@@ -25,8 +25,9 @@ class ListSensors(insightconnect_plugin_runtime.Action):
                 results = self.connection.carbon_black.get_object("/api/v1/sensor", query_parameters=query_params)
             else:
                 # Returns single sensor if ID is supplied
-                results = [self.connection.carbon_black.get_object(f"/api/v1/sensor/{sensorId}",
-                                                                   query_parameters=query_params)]
+                results = [
+                    self.connection.carbon_black.get_object(f"/api/v1/sensor/{sensorId}", query_parameters=query_params)
+                ]
             updated_results = []
             for result in results:
                 result["found"] = True
