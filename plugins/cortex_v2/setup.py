@@ -10,5 +10,5 @@ setup(name='cortex_v2-rapid7-plugin',
       url='',
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_cortex_v2']
+      scripts=['bin/icon_cortex_v2']
       )
