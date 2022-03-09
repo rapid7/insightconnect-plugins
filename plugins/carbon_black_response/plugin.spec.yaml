@@ -691,7 +691,7 @@ connection:
     type: credential_secret_key
     description: API token found in your Carbon Black profile
     required: true
-    example: { domain": "example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}
+    example: '{"domain": "example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}'
   url:
     title: URL
     type: string
@@ -937,12 +937,12 @@ actions:
         description: Certificate file
         type: file
         required: false
-        example: {"filename": "<name>", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}
+        example: '{"filename": "<name>", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}'
       key:
         description: Key
         type: file
         required: false
-        example: {"domain": "example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}
+        example: '{"domain": "example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}'
       use_proxy:
         description: Whether or not to use proxy
         type: boolean
