@@ -286,7 +286,7 @@ This action is used to add a feed.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|cert|file|None|False|Certificate file|None|{"filename": "<name>", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}|
+|cert|file|None|False|Certificate file|None|{"filename": "name", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}|
 |enabled|boolean|None|False|Enable feed|None|True|
 |feed_url|string|None|False|The URL of the feed to add|None|https://example.com|
 |force|boolean|False|False|Add feed even if the feed URL is already in use|None|False|
@@ -300,11 +300,11 @@ Example input:
 
 ```
 {
-  "cert": "{\"filename\": \"\u003cname\u003e\", \"content\": \"UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==\"}",
+  "cert": "{"filename": "name", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}",
   "enabled": true,
   "feed_url": "https://example.com",
   "force": false,
-  "key": "{\"domain\": \"example.com\", \"token\": \"9de5069c5afe602b2ea0a04b66beb2c0\"}",
+  "key": "{"domain": "https://example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}",
   "password": "mypassword",
   "use_proxy": true,
   "username": "user1",
