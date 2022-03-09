@@ -300,11 +300,11 @@ Example input:
 
 ```
 {
-  "cert": "{"filename": "name", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}",
+  "cert": {"filename": "name", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="},
   "enabled": true,
   "feed_url": "https://example.com",
   "force": false,
-  "key": "{"domain": "https://example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}",
+  "key": {"domain": "https://example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"},
   "password": "mypassword",
   "use_proxy": true,
   "username": "user1",
@@ -521,7 +521,7 @@ This action is used to list all sensors.
 |groupid|string|None|False|The sensor group ID|None|50|
 |hostname|string|None|False|The sensor hostname|None|cb-response-example|
 |id|string|None|False|The sensor ID|None|1234|
-|ip|string|None|False|The sensor IP address|None|https://example.com|
+|ip|string|None|False|The sensor IP address|None|192.0.2.0|
 
 Example input:
 
