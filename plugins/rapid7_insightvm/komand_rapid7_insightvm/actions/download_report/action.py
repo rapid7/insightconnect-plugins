@@ -30,7 +30,7 @@ class DownloadReport(insightconnect_plugin_runtime.Action):
         report_id = params.get("id")
         instance_id = params.get("instance")
         endpoint = endpoints.Report.download(self.connection.console_url, report_id, instance_id)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         try:
             response = self.connection.session.get(url=endpoint, verify=False)
@@ -52,9 +52,5 @@ class DownloadReport(insightconnect_plugin_runtime.Action):
                     raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=reason.text)
 
                 status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
-                self.logger.error(
-                    "{status} ({code}): {reason}".format(
-                        status=status_code_message, code=response.status_code, reason=reason
-                    )
-                )
+                self.logger.error(f"{status_code_message} ({response.status_code}): {reason}")
                 raise PluginException(preset=PluginException.Preset.UNKNOWN)

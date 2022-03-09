@@ -9,6 +9,7 @@ from requests.exceptions import RequestException
 from komand_rapid7_insightvm.util import async_requests
 from collections import namedtuple
 from komand_rapid7_insightvm.util import endpoints
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -31,8 +32,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
     def test(self):
-        from insightconnect_plugin_runtime.exceptions import ConnectionTestException
-
         """
         Tests connectivity to the InsightVM Console via administrative info endpoint
         :param session: Requests session populated with basic auth credentials
@@ -59,7 +58,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 test_result = Result(status, response.json()["message"])
 
         if not test_result.status:
-            raise ConnectionTestException("Connectivity test to InsightVM Console failed: %s" % test_result.message)
+            raise ConnectionTestException(f"Connectivity test to InsightVM Console failed: {test_result.message}")
         else:
             self.logger.info("Connectivity test to InsightVM Console passed")
             return

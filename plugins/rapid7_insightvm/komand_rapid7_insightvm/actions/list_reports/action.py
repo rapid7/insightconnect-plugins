@@ -53,7 +53,7 @@ class ListReports(insightconnect_plugin_runtime.Action):
         # Get total pages
         try:
             tp = page_dict["totalPages"]
-            self.logger.info("Total pages of results: %s", tp)
+            self.logger.info(f"Total pages of results: {tp}")
         except KeyError:
             self.logger.error("Unable to obtain totalPages from InsightVM")
             if isinstance(page_dict, dict):
@@ -63,14 +63,14 @@ class ListReports(insightconnect_plugin_runtime.Action):
         reports = []
 
         if name_search is True:
-            self.logger.info("Searching for report matching name %s", name)
+            self.logger.info(f"Searching for report matching name {name}")
 
-        for i in range(tp):
+        for _ in range(tp):  # pylint: disable=too-many-nested-blocks
             page = page + 1
             # Build API URL
             endpoint = endpoints.Report.list_reports(self.connection.console_url, page, size, sort)
             try:
-                self.logger.info("Trying %s", endpoint)
+                self.logger.info(f"Trying {endpoint}")
                 item = self.connection.session.get(url=endpoint, verify=False)
                 r = item.json()
 
@@ -83,7 +83,7 @@ class ListReports(insightconnect_plugin_runtime.Action):
                                 for report in resources:
                                     if name_search is True:
                                         if report["name"] == name:
-                                            self.logger.info("Found entry matching %s", name)
+                                            self.logger.info(f"Found entry matching {name}")
                                             return {
                                                 "found": True,
                                                 "list": [{"name": report["name"], "id": report["id"]}],
@@ -96,17 +96,14 @@ class ListReports(insightconnect_plugin_runtime.Action):
                                         }
                                     )
                         else:
-                            self.logger.error(
-                                "Resource is not a key in object returned by InsightVM for %s",
-                                endpoint,
-                            )
+                            self.logger.error(f"Resource is not a key in object returned by InsightVM for {endpoint}")
                             self.logger.debug(r)
 
             except requests.RequestException as e:
                 self.logger.error(e)
                 raise
             except json.decoder.JSONDecodeError:
-                self.logger.error("InsightVM is returning malformed JSON for %s", endpoint)
+                self.logger.error(f"InsightVM is returning malformed JSON for {endpoint}")
                 continue
 
             # Did not find user supplied name

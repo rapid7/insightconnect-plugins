@@ -21,7 +21,7 @@ class GetSites(insightconnect_plugin_runtime.Action):
         name = params.get("name")
 
         endpoint = endpoints.Site.sites(self.connection.console_url)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         sites = resource_helper.paged_resource_request(endpoint=endpoint)
 
@@ -34,7 +34,7 @@ class GetSites(insightconnect_plugin_runtime.Action):
             for s in sites:
                 if regex.match(s["name"]):
                     filtered_sites.append(s)
-            self.logger.info("Returning %d sites based on filters..." % (len(filtered_sites)))
+            self.logger.info(f"Returning {len(filtered_sites)} sites based on filters...")
             sites = filtered_sites
 
         return {"sites": sites}

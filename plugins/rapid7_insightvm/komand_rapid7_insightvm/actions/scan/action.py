@@ -22,7 +22,7 @@ class Scan(insightconnect_plugin_runtime.Action):
         hosts = params.get("hosts")
         endpoint = endpoints.Scan.site_scans(self.connection.console_url, site_id)
 
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         if hosts:
             payload = {"hosts": hosts}

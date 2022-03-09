@@ -19,18 +19,10 @@ class GetAssetGroupAssets(insightconnect_plugin_runtime.Action):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         asset_group_id = params.get(Input.ID)
         endpoint = endpoints.AssetGroup.asset_group_assets(self.connection.console_url, asset_group_id)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
         asset_group_assets = resource_helper.resource_request(endpoint)
 
-        try:
-            links = asset_group_assets["links"]
-        except KeyError:
-            self.logger.info("Warning: No links returned in response. Using empty list.")
-            links = list()
-        try:
-            resources = asset_group_assets["resources"]
-        except KeyError:
-            self.logger.info("Warning: No resources returned in response. Using empty list.")
-            resources = list()
-
-        return {Output.LINKS: links, Output.RESOURCES: resources}
+        return {
+            Output.LINKS: asset_group_assets.get("links", []),
+            Output.RESOURCES: asset_group_assets.get("resources", []),
+        }

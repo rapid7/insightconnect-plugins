@@ -20,7 +20,7 @@ class UpdateTagSearchCriteria(insightconnect_plugin_runtime.Action):
         tag_id = params.get("id")
         search_criteria = params.get("searchCriteria")
         endpoint = endpoints.Tag.tag_search_criteria(self.connection.console_url, tag_id)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         response = resource_helper.resource_request(endpoint=endpoint, method="put", payload=search_criteria)
 

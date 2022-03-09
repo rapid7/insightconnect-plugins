@@ -38,7 +38,7 @@ class GetScanEngines(insightconnect_plugin_runtime.Action):
             for e in engines:
                 if regex.match(e["name"]):
                     filtered_engines.append(e)
-            self.logger.info("Returning %d scan engines based on filters..." % (len(filtered_engines)))
+            self.logger.info(f"Returning {len(filtered_engines)} scan engines based on filters...")
             engines = filtered_engines
 
         if address:
@@ -47,7 +47,7 @@ class GetScanEngines(insightconnect_plugin_runtime.Action):
             for e in engines:
                 if regex.match(e["address"]):
                     filtered_engines.append(e)
-            self.logger.info("Returning %d scan engines based on filters..." % (len(filtered_engines)))
+            self.logger.info(f"Returning {len(filtered_engines)} scan engines based on filters...")
             engines = filtered_engines
 
         # Remove the default engine pool if it's in the list...

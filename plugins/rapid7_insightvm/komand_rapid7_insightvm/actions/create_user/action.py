@@ -20,7 +20,7 @@ class CreateUser(insightconnect_plugin_runtime.Action):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         validate = ValidateUser(self.connection.session, self.logger)
         endpoint = endpoints.User.users(self.connection.console_url)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         # Set dict params and delete the original keys
         payload = params

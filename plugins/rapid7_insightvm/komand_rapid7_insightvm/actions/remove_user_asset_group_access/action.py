@@ -20,7 +20,7 @@ class RemoveUserAssetGroupAccess(insightconnect_plugin_runtime.Action):
         endpoint = endpoints.User.user_asset_groups(
             self.connection.console_url, params.get("user_id"), params.get("asset_group_id")
         )
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         response = resource_helper.resource_request(endpoint=endpoint, method="delete")
 

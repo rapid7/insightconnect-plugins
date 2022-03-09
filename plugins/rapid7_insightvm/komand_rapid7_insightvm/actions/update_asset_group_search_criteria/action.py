@@ -20,7 +20,7 @@ class UpdateAssetGroupSearchCriteria(insightconnect_plugin_runtime.Action):
         asset_group_id = params.get("id")
         search_criteria = params.get("searchCriteria")
         endpoint = endpoints.AssetGroup.asset_group_search_criteria(self.connection.console_url, asset_group_id)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         response = resource_helper.resource_request(endpoint=endpoint, method="put", payload=search_criteria)
 

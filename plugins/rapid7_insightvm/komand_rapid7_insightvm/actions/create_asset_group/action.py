@@ -22,7 +22,7 @@ class CreateAssetGroup(insightconnect_plugin_runtime.Action):
             params.pop("searchCriteria")
 
         resource_helper = ResourceRequests(self.connection.session, self.logger)
-        self.logger.info("Creating asset group with name %s and type %s" % (params["name"], params["type"]))
+        self.logger.info(f"Creating asset group with name {params.get('name')} and type {params.get('type')}")
         endpoint = endpoints.AssetGroup.asset_groups(self.connection.console_url)
 
         response = resource_helper.resource_request(endpoint=endpoint, method="post", payload=params)

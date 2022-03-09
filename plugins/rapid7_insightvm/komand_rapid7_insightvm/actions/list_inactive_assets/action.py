@@ -21,7 +21,7 @@ class ListInactiveAssets(insightconnect_plugin_runtime.Action):
         days_ago = params.get(Input.DAYS_AGO)
         size = params.get(Input.SIZE, 500)
         endpoint = endpoints.Asset.asset_search(self.connection.console_url)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         if size > 1000:
             self.logger.info("The action will return the maximum number of results: 1000")

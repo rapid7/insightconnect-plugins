@@ -20,7 +20,7 @@ class TagSite(insightconnect_plugin_runtime.Action):
         site_id = params.get("site_id")
         tag_id = params.get("tag_id")
         endpoint = endpoints.Site.site_tags(self.connection.console_url, site_id, tag_id)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         response = resource_helper.resource_request(endpoint=endpoint, method="put")
 

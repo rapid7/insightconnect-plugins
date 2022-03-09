@@ -90,9 +90,9 @@ class ResourceRequests(object):
 
         request_method = getattr(self.session, method.lower())
         if not payload:
-            payload = dict()
+            payload = {}
         if not params:
-            params = dict()
+            params = {}
         if isinstance(params, list):
             parameters = RequestParams.from_tuples(params)
         else:
@@ -143,7 +143,7 @@ class ResourceRequests(object):
 
         # Handle various scenarios where params may be passed
         if not payload:
-            payload = dict()
+            payload = {}
         if not params:
             params = {"size": 500, "page": current_page}
         if isinstance(params, list):
@@ -170,12 +170,11 @@ class ResourceRequests(object):
             if (response.total_pages == 0) or ((response.total_pages - 1) == response.page_num):
                 self.logger.info("All pages consumed, returning results...")
                 break  # exit the loop
-            elif last_page:
+            if last_page:
                 self.logger.info(f"{number_of_results} results consumed, returning results")
                 break
-            else:
-                self.logger.info("More pages exist, fetching...")
-                current_page += 1
+            self.logger.info("More pages exist, fetching...")
+            current_page += 1
 
         return resources
 

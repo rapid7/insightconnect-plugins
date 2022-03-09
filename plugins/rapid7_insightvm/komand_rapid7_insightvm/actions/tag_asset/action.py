@@ -20,7 +20,7 @@ class TagAsset(insightconnect_plugin_runtime.Action):
         asset_id = params.get("asset_id")
         tag_id = params.get("tag_id")
         endpoint = endpoints.Asset.asset_tags(self.connection.console_url, asset_id, tag_id)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         response = resource_helper.resource_request(endpoint=endpoint, method="put")
 

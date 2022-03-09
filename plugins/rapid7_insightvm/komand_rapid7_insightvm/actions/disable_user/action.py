@@ -18,7 +18,7 @@ class DisableUser(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         endpoint = endpoints.User.users(self.connection.console_url, params.get("id"))
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         # Get the existing details so the specific key can be modified
         payload = resource_helper.resource_request(endpoint=endpoint)

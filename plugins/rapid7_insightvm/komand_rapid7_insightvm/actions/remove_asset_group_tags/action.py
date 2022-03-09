@@ -19,7 +19,7 @@ class RemoveAssetGroupTags(insightconnect_plugin_runtime.Action):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         asset_group_id = params.get("id")
         endpoint = endpoints.AssetGroup.asset_group_tags(self.connection.console_url, asset_group_id)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         response = resource_helper.resource_request(endpoint=endpoint, method="delete")
 

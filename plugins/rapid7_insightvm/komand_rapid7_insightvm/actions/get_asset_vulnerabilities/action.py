@@ -55,8 +55,8 @@ class GetAssetVulnerabilities(insightconnect_plugin_runtime.Action):
         :param resources: A list of asset_vulnerabilities
         :return: A list of asset_vulnerabilities with risk scores
         """
-        vuln_ids = list()
-        risk_score = list()
+        vuln_ids = []
+        risk_score = []
         for resource in resources:
             try:
                 vuln_ids.append(resource["id"])

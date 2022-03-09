@@ -21,7 +21,7 @@ class GetAssetGroups(insightconnect_plugin_runtime.Action):
         name = params.get("name")
 
         endpoint = endpoints.AssetGroup.asset_groups(self.connection.console_url)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         groups = resource_helper.paged_resource_request(endpoint=endpoint)
 
@@ -34,7 +34,7 @@ class GetAssetGroups(insightconnect_plugin_runtime.Action):
             for g in groups:
                 if regex.match(g["name"]):
                     filtered_groups.append(g)
-            self.logger.info("Returning %d asset groups based on filters..." % (len(filtered_groups)))
+            self.logger.info(f"Returning {len(filtered_groups)} asset groups based on filters...")
             groups = filtered_groups
 
         return {"asset_groups": groups}

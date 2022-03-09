@@ -29,30 +29,29 @@ class GetSiteAssets(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         site_id = params.get("site_id")
         endpoint = endpoints.Site.get_site_assets(self.connection.console_url, site_id)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         resources = []
         current_page = 0
         while True:
-            self.logger.info("Fetching results from page %d" % current_page)
+            self.logger.info(f"Fetching results from page {current_page}")
             response = self.get_assets(endpoint=endpoint, endpoint_page=current_page)
 
             resources += response.resources  # Grab resources and append to total
             self.logger.info(
-                "Got %d assets from page %d / %d" % (len(response.resources), response.page_num, response.total_pages)
+                f"Got {len(response.resources)} assets from page {response.page_num} / {response.total_pages}"
             )
 
             if (response.total_pages == 0) or ((response.total_pages - 1) == response.page_num):
                 self.logger.info("All pages consumed, returning results...")
                 break  # exit the loop
-            else:
-                self.logger.info("More pages exist, fetching...")
-                current_page += 1
+            self.logger.info("More pages exist, fetching...")
+            current_page += 1
 
         return {"assets": resources}
 
     def get_assets(self, endpoint, endpoint_page, size=500):
-        self.logger.info("Fetching up to %d assets from endpoint page %d ..." % (size, endpoint_page))
+        self.logger.info(f"Fetching up to {size} assets from endpoint page {endpoint_page} ...")
         try:
             response = self.connection.session.get(
                 url=endpoint, verify=False, params={"size": size, "page": endpoint_page}
@@ -83,9 +82,5 @@ class GetSiteAssets(insightconnect_plugin_runtime.Action):
                     raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=reason.text)
 
                 status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
-                self.logger.error(
-                    "{status} ({code}): {reason}".format(
-                        status=status_code_message, code=response.status_code, reason=reason
-                    )
-                )
+                self.logger.error(f"{status_code_message} ({response.status_code}): {reason}")
                 raise PluginException(preset=PluginException.Preset.UNKNOWN)

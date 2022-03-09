@@ -18,7 +18,7 @@ class DeleteTag(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         tag_id = params.get("id")
-        self.logger.info("Deleting tag ID %d" % tag_id)
+        self.logger.info(f"Deleting tag ID {tag_id}")
         endpoint = endpoints.Tag.tags(self.connection.console_url, tag_id)
 
         response = resource_helper.resource_request(endpoint=endpoint, method="delete")

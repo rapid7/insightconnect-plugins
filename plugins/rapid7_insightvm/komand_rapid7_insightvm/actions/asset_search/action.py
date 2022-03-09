@@ -20,10 +20,10 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         search_criteria = params.get(Input.SEARCHCRITERIA)
         size = params.get(Input.SIZE, 0)
-        sort_criteria = params.get(Input.SORT_CRITERIA, dict())
+        sort_criteria = params.get(Input.SORT_CRITERIA, {})
         self.logger.info(f"Performing filtered asset search with criteria {search_criteria}")
         endpoint = endpoints.Asset.search(self.connection.console_url)
-        parameters = list()
+        parameters = []
 
         for key, value in sort_criteria.items():
             parameters.append(("sort", f"{key},{value}"))

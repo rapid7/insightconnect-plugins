@@ -19,7 +19,7 @@ class GetAssetGroup(insightconnect_plugin_runtime.Action):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         asset_group_id = params.get("id")
         endpoint = endpoints.AssetGroup.asset_groups(self.connection.console_url, asset_group_id)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
         asset_group = resource_helper.resource_request(endpoint)
 
         return {"asset_group": asset_group}

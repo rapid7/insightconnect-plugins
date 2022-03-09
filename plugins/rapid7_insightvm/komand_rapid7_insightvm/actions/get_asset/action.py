@@ -19,7 +19,7 @@ class GetAsset(insightconnect_plugin_runtime.Action):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         asset_id = params.get(Input.ID)
         endpoint = endpoints.Asset.assets(self.connection.console_url, asset_id)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
         asset = resource_helper.resource_request(endpoint)
 
         return {Output.ASSET: asset}

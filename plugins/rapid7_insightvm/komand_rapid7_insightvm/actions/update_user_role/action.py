@@ -20,7 +20,7 @@ class UpdateUserRole(insightconnect_plugin_runtime.Action):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         validate = ValidateUser(self.connection.session, self.logger)
         endpoint = endpoints.User.users(self.connection.console_url, params.get("user_id"))
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         # Get the existing details so the specific role ID key can be modified
         payload = resource_helper.resource_request(endpoint=endpoint)

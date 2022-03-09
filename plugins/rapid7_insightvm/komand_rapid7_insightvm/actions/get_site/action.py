@@ -19,7 +19,7 @@ class GetSite(insightconnect_plugin_runtime.Action):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         site_id = params.get("id")
         endpoint = endpoints.Site.sites(self.connection.console_url, site_id)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
         site = resource_helper.resource_request(endpoint)
 
         return {"site": site}

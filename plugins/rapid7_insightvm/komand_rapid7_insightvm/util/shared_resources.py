@@ -13,7 +13,7 @@ class RequestParams(object):
 
     @classmethod
     def from_dict(cls, params: dict):
-        params_list = list()
+        params_list = []
         for key, item in params.items():
             params_list.append((key, item))
         return cls(params=params_list)

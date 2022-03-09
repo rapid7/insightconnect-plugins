@@ -18,7 +18,7 @@ class GetAuthenticationSource(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         endpoint = endpoints.AuthenticationSource.authentication_sources(self.connection.console_url, params.get("id"))
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         response = resource_helper.resource_request(endpoint=endpoint)
 

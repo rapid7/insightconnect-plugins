@@ -20,7 +20,7 @@ class DeleteAsset(insightconnect_plugin_runtime.Action):
 
         asset_id = params.get(Input.ID)
         endpoint = endpoints.Asset.assets(self.connection.console_url, asset_id)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         resource_helper.resource_request(endpoint, method="delete")
 
