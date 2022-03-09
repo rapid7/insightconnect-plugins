@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AddUrlsInput, AddUrlsOutput
 
 # Custom imports below
 
 
-class AddUrls(komand.Action):
+class AddUrls(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_urls",
@@ -41,11 +41,5 @@ class AddUrls(komand.Action):
                 )
             return {"status": True}
         except Exception as e:
-            self.logger.error("An error has occurred adding one or more URLs. Error: {}".format(e))
+            self.logger.error("An error has occurred adding one or more URLs. Error: %s", e)
             return {"status": False}
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        self.logger.info(output)
-        return {"status": True}

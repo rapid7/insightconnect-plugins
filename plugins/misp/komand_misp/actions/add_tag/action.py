@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AddTagInput, AddTagOutput
 
 # Custom imports below
 
 
-class AddTag(komand.Action):
+class AddTag(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_tag", description="Add tag", input=AddTagInput(), output=AddTagOutput()

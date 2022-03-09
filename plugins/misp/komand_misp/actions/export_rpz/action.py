@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ExportRpzInput, ExportRpzOutput
 
 # Custom imports below
@@ -6,7 +6,7 @@ import requests
 import base64
 
 
-class ExportRpz(komand.Action):
+class ExportRpz(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="export_rpz",
@@ -28,23 +28,23 @@ class ExportRpz(komand.Action):
                 tags_str = tags[0]
                 tags.pop(0)
                 for i in tags:
-                    tags_str = "%s&&%s" % (tags_str, i)
-                path = "%s/%s" % (path, tags_str)
+                    tags_str = f"{tags_str}&&{i}"
+                path = f"{path}/{tags_str}"
             else:
                 tags_str = str(tags[0])
-                path = "%s/%s" % (path, tags_str)
+                path = f"{path}/{tags_str}"
         else:
-            path = "%s/null" % path
+            path = f"{path}/null"
         if event_id:
-            path = "%s/%s" % (path, event_id)
+            path = f"{path}/{event_id}"
         else:
-            path = "%s/null" % path
+            path = f"{path}/null"
         if from_:
-            path = "%s/%s" % (path, from_)
+            path = f"{path}/{from_}"
         else:
-            path = "%s/null" % path
+            path = f"{path}/null"
         if to_:
-            path = "%s/%s" % (path, to_)
+            path = f"{path}/{to_}"
 
         url = self.connection.url + path
         headers = {"content-type": "application/json", "Authorization": key}
@@ -65,8 +65,3 @@ class ExportRpz(komand.Action):
         self.logger.debug("*" * 10)
         self.logger.debug(rpz)
         return {"rpz": rpz.decode("utf-8")}
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        return {"rpz": ""}

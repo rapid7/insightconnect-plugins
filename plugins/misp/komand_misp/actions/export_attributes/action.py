@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ExportAttributesInput, ExportAttributesOutput
 
 # Custom imports below
@@ -7,7 +7,7 @@ import requests
 import base64
 
 
-class ExportAttributes(komand.Action):
+class ExportAttributes(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="export_attributes",
@@ -64,8 +64,3 @@ class ExportAttributes(komand.Action):
         attributes = base64.b64encode(response.text.encode("ascii"))
 
         return {"attributes": attributes.decode("utf-8")}
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        return {"attributes": ""}

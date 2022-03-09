@@ -4,9 +4,10 @@ products: [insightconnect]
 name: misp
 title: MISP
 description: MISP is an open source threat sharing platform
-version: 5.0.0
+version: 5.0.1
 vendor: rapid7
 support: community
+supported_versions: ["2.4.96"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/misp
@@ -91,18 +92,22 @@ types:
     event:
       title: Event ID
       description: Event ID to append to
+      example: "1099"
       type: string
     comment_in:
       title: Comment
       description: Comment for context
+      example: "Example context comment"
       type: string
     comment:
       title: Comment
       description: Attribute comment
+      example: "Example attribute comment"
       type: string
     distribution:
       title: Distribution
       description: Distribution type
+      example: "All Communities"
       type: string
       enum:
       - This Community
@@ -113,19 +118,23 @@ types:
     event:
       title: Event ID
       description: Event ID to append to
+      example: "1099"
       type: string
     link:
       title: Link
       description: Link
+      example: "Link"
       type: string
     comment:
       title: Comment
       description: Attribute comment
+      example: "Example attribute comment"
       type: string
     distribution:
       title: Distribution
       description: Distribution type
       type: string
+      example: "All Communities"
       enum:
       - This Community
       - This Organization
@@ -135,18 +144,22 @@ types:
     event:
       title: Event ID
       description: Event ID to append to
+      example: "1099"
       type: string
     other:
       title: Other
       description: Other
+      example: "Other"
       type: string
     comment:
       title: Comment
       description: Attribute comment
+      example: "Add UUID to an event"
       type: string
     distribution:
       title: Distribution
       description: Distribution type
+      example: "All Communities"
       type: string
       enum:
       - This Community
@@ -157,18 +170,22 @@ types:
     event:
       title: Event ID
       description: Event ID to append to
+      example: "1099"
       type: string
     text:
       title: Text
       description: Text
+      example: "Example text"
       type: string
     comment:
       title: Comment
       description: Attribute comment
+      example: "Updating title"
       type: string
     distribution:
       title: Distribution
       description: Distribution type
+      example: "All Communities"
       type: string
       enum:
       - This Community
@@ -357,16 +374,20 @@ connection:
   url:
     title: URL
     description: URL of the MISP server e.g. https://misp-2-4.example.com
+    example: "https://example.com"
     type: string
     required: true
   automation_code:
     title: Automation Code
     description: API/Automation code of MISP server
+    example: "9de5069c5afe602b2ea0a04b66beb2c0"
     type: credential_secret_key
     required: true
   ssl:
     title: SSL
     description: If true will use SSL for communication to MISP
+    example: true
+    default: true
     type: boolean
     required: true
 triggers:
@@ -377,17 +398,21 @@ triggers:
       interval:
         title: Interval
         description: How frequently (in seconds) to trigger a search
+        example: 60
         type: integer
         default: 60
         required: true
       tag:
         title: Tag
         description: The tag to search for
+        example: "Example tag"
         type: string
         required: true
       remove:
         title: Remove
         description: If true the tag will be removed
+        example: false
+        default: false
         type: boolean
         required: true
     output:
@@ -404,6 +429,7 @@ actions:
       distribution:
         title: Distribution
         description: Distribution type
+        example: "This Organization"
         type: string
         enum:
         - This Community
@@ -416,6 +442,8 @@ actions:
         title: Threat Level
         description: Importance of the threat
         type: string
+        example: "1"
+        default: "1"
         enum:
         - '4'
         - '3'
@@ -426,6 +454,8 @@ actions:
         title: Analysis
         description: The analysis level of the event
         type: string
+        example: "0"
+        default: "0"
         enum:
         - '2'
         - '1'
@@ -434,26 +464,32 @@ actions:
       info:
         title: Info
         description: Extra event information
+        example: "Example information"
         type: string
         required: true
       published:
         title: Published
         description: Published event?
+        example: true
+        default: true
         type: boolean
         required: true
       orgc_id:
         title: Organization C ID
         description: Organization C ID
+        example: "1"
         type: string
         required: false
       org_id:
         title: Organization ID
         description: Organization ID
+        example: "1"
         type: string
         required: false
       sharing_group_id:
         title: Sharing Group ID
         description: Sharing group ID
+        example: "1"
         type: string
         required: false
     output:
@@ -564,16 +600,19 @@ actions:
       event:
         title: Event ID
         description: Event ID to append to
+        example: "1099"
         type: string
         required: true
       attachment:
         title: Attachment
         description: Attachment for event
+        example: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
         type: bytes
         required: true
       filename:
         title: Filename
         description: Filename of attachment
+        example: "setup.exe"
         type: string
         required: false
     output:
@@ -589,21 +628,25 @@ actions:
       event:
         title: Event ID
         description: Event ID to append to
+        example: "1099"
         type: string
         required: false
       urls:
         title: URLs
         description: URLs to add
+        example: ["https://example.com"]
         type: '[]string'
         required: false
       comment:
         title: Comment
         description: Attribute comment
+        example: "Example comment"
         type: string
         required: false
       distribution:
         title: Distribution
         description: Distribution type
+        example: "All Communities"
         type: string
         enum:
         - This Community
@@ -614,6 +657,7 @@ actions:
       proposal:
         title: Proposal
         description: 'Mark request as a proposal (Default: false)'
+        example: false
         type: boolean
         default: false
         required: true
@@ -630,21 +674,25 @@ actions:
       recipient:
         title: Recipient
         description: Recipient email address
+        example: "user@example.com"
         type: string
         required: true
       event:
         title: Event ID
         description: Event ID to append to
+        example: "1099"
         type: string
         required: true
       comment:
         title: Comment
         description: Attribute comment
+        example: "Example comment"
         type: string
         required: true
       distribution:
         title: Distribution
         description: Distribution type
+        example: "All Communities"
         type: string
         enum:
         - This Community
@@ -655,6 +703,7 @@ actions:
       proposal:
         title: Proposal
         description: 'Mark request as a proposal (Default: false)'
+        example: false
         type: boolean
         default: false
         required: true
@@ -671,21 +720,25 @@ actions:
       sender:
         title: Sender
         description: Sender email address
+        example: "user@example.com"
         type: string
         required: true
       event:
         title: Event ID
         description: Event ID to append to
+        example: "1099"
         type: string
         required: true
       comment:
         title: Comment
         description: Attribute comment
+        example: "Example comment"
         type: string
         required: true
       distribution:
         title: Distribution
         description: Distribution type
+        example: "All Communities"
         type: string
         enum:
         - This Community
@@ -696,6 +749,7 @@ actions:
       proposal:
         title: Proposal
         description: 'Mark request as a proposal (Default: false)'
+        example: false
         type: boolean
         default: false
         required: true
@@ -712,21 +766,25 @@ actions:
       subject:
         title: Subject
         description: Email subject
+        example: "Example subject"
         type: string
         required: true
       event:
         title: Event ID
         description: Event ID to append to
+        example: "1099"
         type: string
         required: true
       comment:
         title: Comment
         description: Attribute comment
+        example: "Example comment"
         type: string
         required: true
       distribution:
         title: Distribution
         description: Distribution type
+        example: "All Communities"
         type: string
         enum:
         - This Community
@@ -737,6 +795,7 @@ actions:
       proposal:
         title: Proposal
         description: 'Mark request as a proposal (Default: false)'
+        example: false
         type: boolean
         default: false
         required: true
@@ -753,27 +812,32 @@ actions:
       comment:
         title: Comment
         description: Comment
+        example: "Example comment"
         type: comment_input
         required: true
       link:
         title: Link
         description: Link
+        example: "Example link"
         type: link_input
         required: true
       other:
         title: Other
         description: Other
+        example: "Example"
         type: other_input
         required: true
       text:
         title: Text
         description: Text
+        example: "Example text"
         type: text_input
         required: true
       proposal:
         title: Proposal
         description: 'Mark request as a proposal (Default: false)'
         type: boolean
+        example: false
         default: false
         required: true
     output:
@@ -788,7 +852,8 @@ actions:
     input:
       sightings:
         title: Sightings
-        description: Event sightings
+        description: Event sightings E.g. sighting, false-positive, expiration
+        example: ["sighting"]
         type: '[]string'
         required: true
     output:
@@ -804,11 +869,13 @@ actions:
       event:
         title: Event ID
         description: Event ID to append to
+        example: "1099"
         type: string
         required: true
       tag:
         title: Tag
         description: Event tag to add
+        example: "Example tag"
         type: string
         required: true
     output:
@@ -824,32 +891,38 @@ actions:
       event_id:
         title: Event ID
         description: Specify single event to export
+        example: "1099"
         type: string
         required: false
       encode_attachments:
         title: Encode Attachments
         description: Encode attachments in export
+        example: true
         type: boolean
         default: true
         required: true
       tags:
         title: Tags
         description: Array of tags to include in results
+        example: ["tag"]
         type: '[]string'
         required: false
       from:
         title: From Date
         description: From date E.g. 2015-02-15
+        example: "2015-02-15"
         type: string
         required: false
       to:
         title: To Date
         description: To date E.g. 2015-02-17
+        example: "2015-02-17"
         type: string
         required: false
       last:
         title: Last Events
         description: Events within x amount of time E.g. 5d
+        example: "5d"
         type: string
         required: false
     output:
@@ -865,48 +938,57 @@ actions:
       event_id:
         title: Event ID
         description: Array of events to download
+        example: ["1"]
         type: '[]string'
         required: false
       include:
         title: Include
         description: Include attributes not marked as to_ids
+        example: true
         type: boolean
         default: true
         required: true
       tags:
         title: Tags
         description: Array of tags to include in results
+        example: ["tag"]
         type: '[]string'
         required: false
       category:
         title: Category
         description: Attribute category
+        example: "Example attribute category"
         type: string
         required: false
       type:
         title: Type
-        description: Attribute type
+        description: Attribute type e.g. URL, SHA256
+        example: "URL"
         type: string
         required: false
       include_context:
         title: Include Context
         description: Include event data with each attribute
+        example: true
         type: boolean
         default: true
         required: true
       from:
         title: From Date
         description: From date E.g. 2015-02-15
+        example: "2015-02-15"
         type: string
         required: false
       to:
         title: To Date
         description: To date E.g. 2015-02-17
+        example: "2015-02-17"
         type: string
         required: false
       last:
         title: Last Events
         description: Events within x amount of time E.g. 5d
+        example: "5d"
         type: string
         required: false
     output:
@@ -922,6 +1004,7 @@ actions:
       format:
         title: Export Format
         description: Export format as either Suricata or Snort
+        example: "suricata"
         type: string
         required: true
         enum:
@@ -930,32 +1013,38 @@ actions:
       event_id:
         title: Event ID
         description: Narrow results to a single event
+        example: "1099"
         type: string
         required: false
       frame:
         title: Commented Explanation
         description: Commented out explanation framing the data
+        example: true
         type: boolean
         default: true
         required: true
       tags:
         title: Tags
         description: Array of tags to include in results
+        example: ["example tag"]
         type: '[]string'
         required: false
       from:
         title: From Date
         description: From date E.g. 2015-02-15
+        example: "2015-02-15"
         type: string
         required: false
       to:
         title: To Date
         description: To date E.g. 2015-02-17
+        example: "2015-02-17"
         type: string
         required: false
       last:
         title: Last Events
         description: Events within x amount of time E.g. 5d
+        example: "5d"
         type: string
         required: false
     output:
@@ -971,6 +1060,7 @@ actions:
       format:
         title: Export Format
         description: Export format as either MD5 or SHA1
+        example: "md5"
         type: string
         required: true
         enum:
@@ -979,21 +1069,25 @@ actions:
       tags:
         title: Tags
         description: Array of tags to include in results
+        example: ["example tag"]
         type: '[]string'
         required: false
       from:
         title: From Date
         description: From date E.g. 2015-02-15
+        example: "2015-02-15"
         type: string
         required: false
       to:
         title: To Date
         description: To date E.g. 2015-02-17
+        example: "2015-02-17"
         type: string
         required: false
       last:
         title: Last Events
         description: Events within x amount of time E.g. 5d
+        example: "5d"
         type: string
         required: false
     output:
@@ -1009,32 +1103,38 @@ actions:
       event_id:
         title: Event ID
         description: Specify single event to export
+        example: "1099"
         type: string
         required: false
       encode_attachments:
         title: Encode Attachments
         description: Encode attachments in export
+        example: true
         type: boolean
         default: true
         required: true
       tags:
         title: Tags
         description: Array of tags to include in results
+        example: ["example tag"]
         type: '[]string'
         required: false
       from:
         title: From Date
         description: From date E.g. 2015-02-15
+        example: "2015-02-15"
         type: string
         required: false
       to:
         title: To Date
         description: To date E.g. 2015-02-17
+        example: "2015-02-17"
         type: string
         required: false
       last:
         title: Last Events
         description: Events within x amount of time E.g. 5d
+        example: "5d"
         type: string
         required: false
     output:
@@ -1050,21 +1150,25 @@ actions:
       event_id:
         title: Event ID
         description: Specify single event to export
+        example: "1099"
         type: string
         required: false
       tags:
         title: Tags
         description: Array of tags to include in results
+        example: ["example tag"]
         type: '[]string'
         required: false
       from:
         title: From Date
         description: From date E.g. 2015-02-15
+        example: "2015-02-15"
         type: string
         required: false
       to:
         title: To Date
         description: To date E.g. 2015-02-17
+        example: "2015-02-17"
         type: string
         required: false
     output:
@@ -1080,6 +1184,7 @@ actions:
       attribute_id:
         title: Attribute ID
         description: Attribute ID of attachment or malware sample
+        example: "1"
         type: string
         required: true
     output:
@@ -1095,6 +1200,7 @@ actions:
       event_id:
         title: Event ID
         description: Event ID e.g. 123
+        example: "1099"
         type: string
         required: true
     output:
@@ -1120,11 +1226,13 @@ actions:
       event:
         title: Event ID
         description: Event ID to append to
+        example: "1099"
         type: string
         required: true
       tag:
         title: Tag
         description: Event tag for search
+        example: "Example tag"
         type: string
         required: true
     output:
@@ -1140,26 +1248,31 @@ actions:
       event:
         title: Event ID
         description: ID of event to append to
+        example: "1099"
         type: string
         required: true
       type_value:
         title: Type Value
         description: The Type of attribute e.g. URL, SHA256
+        example: "URL"
         type: string
         required: true
       category:
         title: Category
         description: The attribute category e.g. external analysis, network activity
+        example: "Example category"
         type: string
         required: true
       value:
         title: Value
         description: The Value of the attribute e.g. for a URL https://malware.com
+        example: "https://example.com"
         type: string
         required: true
       comment:
         title: Comment
         description: Optional comment to add to attribute
+        example: "Example comment"
         type: string
         required: false
     output:
@@ -1175,28 +1288,34 @@ actions:
       event:
         title: Event
         description: Search by event ID
+        example: "1099"
         type: string
         required: false
       tag:
         title: Tag
         description: Search by tag
+        example: "tag"
         type: string
         required: false
       date_from:
         title: Date
         description: Search after this date e.g. 2018-03-22
+        example: "2018-03-22"
         type: string
         required: false
       date_until:
         title: Date Until
         description: Search before this date e.g. 2018-03-22
+        example: "2018-03-22"
         type: string
         required: false
       threat_level:
         title: Threat Level
         description: Search by threat level
+        example: "Do not search on"
         type: string
         required: false
+        default: Do not search on
         enum:
         - Do not search on
         - Undefined
@@ -1206,8 +1325,10 @@ actions:
       published:
         title: Published
         description: Search by if published
+        example: "Do not search on"
         type: string
         required: false
+        default: Do not search on
         enum:
         - Do not search on
         - 'True'
@@ -1215,13 +1336,16 @@ actions:
       organization:
         title: Organization
         description: Search by organization
+        example: "Organization name"
         type: string
         required: false
       analysis:
         title: Analysis
         description: Search by analysis level
+        example: "Do not search on"
         type: string
         required: false
+        default: Do not search on
         enum:
         - Do not search on
         - Initial
@@ -1258,6 +1382,7 @@ actions:
       event:
         title: Event
         description: Search by event ID
+        example: "1099"
         type: string
         required: false
     output:

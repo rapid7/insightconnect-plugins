@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CreateAnEventInput, CreateAnEventOutput
 
 # Custom imports below
 import json
 
 
-class CreateAnEvent(komand.Action):
+class CreateAnEvent(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_an_event",
@@ -40,33 +40,5 @@ class CreateAnEvent(komand.Action):
             raise
         try:
             return output["Event"]
-        except Exception as e:
+        except Exception:
             raise Exception(output["message"])
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        return {
-            "id": "",
-            "org_id": "",
-            "date": "",
-            "info": "",
-            "uuid": "",
-            "published": True,
-            "analysis": "",
-            "attribute_count": "",
-            "orgc_id": "",
-            "timestamp": "",
-            "distribution": "",
-            "sharing_group_id": "",
-            "proposal_email_lock": False,
-            "locked": False,
-            "threat_level_id": "",
-            "publish_timestamp": "",
-            "disable_correlation": False,
-            "Org": {"id": "1", "name": "ORGNAME"},
-            "Orgc": {},
-            "Attribute": [{}],
-            "sharing_group_id": "",
-            "event_creator_email": "",
-        }

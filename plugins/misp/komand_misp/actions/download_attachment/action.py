@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import DownloadAttachmentInput, DownloadAttachmentOutput
 
 # Custom imports below
@@ -6,7 +6,7 @@ import requests
 import base64
 
 
-class DownloadAttachment(komand.Action):
+class DownloadAttachment(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="download_attachment",
@@ -21,13 +21,13 @@ class DownloadAttachment(komand.Action):
 
         headers = {"content-type": "application/json", "Authorization": key}
 
-        path = "/attributes/downloadAttachment/download/%s" % attribute_id
+        path = f"/attributes/downloadAttachment/download/{attribute_id}"
         url = self.connection.url + path
 
         try:
             # Generate request
             response = requests.get(url, headers=headers, verify=False)  # noqa: B501
-            message = str(response.json()["message"])
+            str(response.json()["message"])
             response.raise_for_status()
         except ValueError:
             self.logger.error("Attribute ID did not contain an attachment")
@@ -40,9 +40,3 @@ class DownloadAttachment(komand.Action):
         attachment = base64.b64encode(response.content).decode("utf-8")
 
         return {"attachment": attachment}
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        self.logger.info(output)
-        return {"status": True}
