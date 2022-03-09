@@ -819,7 +819,7 @@ actions:
         description: The sensor ID
         required: false
         title: ID
-        example: '1'
+        example: '1234'
       hostname:
         type: string
         description: The sensor hostname
@@ -988,7 +988,7 @@ actions:
         type: string
         required: true
         title: ID
-        example: '1'
+        example: '1234'
       force:
         type: boolean
         description: Force deletion of all matches if multiple matches found
@@ -1067,7 +1067,7 @@ actions:
         description: The sensor ID
         required: false
         title: ID
-        example: '1'
+        example: '1234'
     output:
       success:
         description: Whether or not the uninstall was successful
