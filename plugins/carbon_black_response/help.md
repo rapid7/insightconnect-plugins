@@ -290,7 +290,7 @@ This action is used to add a feed.
 |enabled|boolean|None|False|Enable feed|None|True|
 |feed_url|string|None|False|The URL of the feed to add|None|https://example.com|
 |force|boolean|False|False|Add feed even if the feed URL is already in use|None|False|
-|key|file|None|False|Key|None|{"domain": "https://example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}|
+|key|file|None|False|Key|None|{"domain": "example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}|
 |password|password|None|False|Password|None|mypassword|
 |use_proxy|boolean|None|False|Whether or not to use proxy|None|True|
 |username|string|None|False|Username|None|user1|
