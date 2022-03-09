@@ -75,7 +75,7 @@ class FindEventInput(insightconnect_plugin_runtime.Input):
     "time_range": {
       "type": "string",
       "title": "Time Range",
-      "description": "Time frame to limit your search to. Integer used for amount of of the following: s=second(s), m=minute(s), h=hour(s), d=day(s), w=week(s), or y=year(s)",
+      "description": "Time frame to limit your search to. Integer used for amount of the following: s=second(s), m=minute(s), h=hour(s), d=day(s), w=week(s), or y=year(s). Example: -2d",
       "order": 6
     }
   }
