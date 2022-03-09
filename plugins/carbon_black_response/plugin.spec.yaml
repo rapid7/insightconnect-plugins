@@ -937,7 +937,7 @@ actions:
         description: Certificate file
         type: file
         required: false
-        example: '{"filename": "<name>", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}'
+        example: '{"filename": "name", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}'
       key:
         description: Key
         type: file
