@@ -623,7 +623,7 @@ This action is used to update or resolve an alert.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|Unique ID of the alert. |None|1cb11d0d-f86b-415d-aeb3-05f085973fbb|
-|status|string|Resolved|True|The status to update|['Resolved', 'Unresolved', 'In Progress', 'False Positive']|Resolved|
+|status|string|Resolved|True|The status to update|['Resolved', 'Unresolved', 'In Progress', 'False Positive', '']|Resolved|
 
 Example input:
 
@@ -658,7 +658,7 @@ This action is used to add a watchlist.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|index_type|string|modules|True|Either modules or events for binary and process watchlists, respectively|['modules', 'events']|modules|
+|index_type|string|modules|True|Either modules or events for binary and process watchlists, respectively|['modules', 'events', '']|modules|
 |name|string|None|True|Watchlist name|None|examplename|
 |query|string|None|True|Raw Carbon Black query that this watchlist matches|None|test|
 
