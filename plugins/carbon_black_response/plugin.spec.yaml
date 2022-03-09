@@ -705,7 +705,7 @@ connection:
     required: true
 actions:
   list_alerts:
-    title: List Alerts
+    title: List Alerts-test
     description: List Carbon Black alerts with given parameters
     input:
       query:
