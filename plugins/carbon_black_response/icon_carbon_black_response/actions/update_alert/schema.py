@@ -37,7 +37,8 @@ class UpdateAlertInput(insightconnect_plugin_runtime.Input):
         "Resolved",
         "Unresolved",
         "In Progress",
-        "False Positive"
+        "False Positive",
+        ""
       ],
       "order": 2
     }

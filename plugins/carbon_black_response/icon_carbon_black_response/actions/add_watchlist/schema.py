@@ -30,7 +30,8 @@ class AddWatchlistInput(insightconnect_plugin_runtime.Input):
       "default": "modules",
       "enum": [
         "modules",
-        "events"
+        "events",
+        ""
       ],
       "order": 2
     },

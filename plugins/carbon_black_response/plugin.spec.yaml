@@ -890,6 +890,7 @@ actions:
         enum:
         - modules
         - events
+        - ""
         example: 'modules'
       query:
         type: string
@@ -1018,6 +1019,7 @@ actions:
         - Unresolved
         - In Progress
         - False Positive
+        - ""
         required: true
         default: Resolved
         title: Status
