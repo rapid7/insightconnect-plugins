@@ -48,13 +48,13 @@ This action uninstalls a sensor given a sensor ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|False|The sensor ID|None|1|
+|id|string|None|False|The sensor ID|None|1234|
 
 Example input:
 
 ```
 {
-  "id": "1"
+  "id": "1234"
 }
 ```
 
@@ -397,14 +397,14 @@ This action is used to delete a watchlist.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |force|boolean|None|True|Force deletion of all matches if multiple matches found|None|False|
-|id|string|None|True|The ID of the watchlist|None|1|
+|id|string|None|True|The ID of the watchlist|None|1234|
 
 Example input:
 
 ```
 {
   "force": false,
-  "id": "1"
+  "id": "1234"
 }
 ```
 
@@ -506,7 +506,7 @@ This action is used to list all sensors.
 |----|----|-------|--------|-----------|----|-------|
 |groupid|string|None|False|The sensor group ID|None|50|
 |hostname|string|None|False|The sensor hostname|None|cb-response-example|
-|id|string|None|False|The sensor ID|None|1|
+|id|string|None|False|The sensor ID|None|1234|
 |ip|string|None|False|The sensor IP address|None|https://example.com|
 
 Example input:
@@ -515,7 +515,7 @@ Example input:
 {
   "groupid": "50",
   "hostname": "cb-response-example",
-  "id": "1",
+  "id": "1234",
   "ip": "192.0.2.0"
 }
 ```
