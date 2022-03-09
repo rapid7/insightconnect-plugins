@@ -890,6 +890,7 @@ actions:
         enum:
         - modules
         - events
+        - ""
         example: 'modules'
       query:
         type: string
