@@ -768,7 +768,7 @@ types:
       type: string
       required: false
     threat_score:
-      title: Thread score
+      title: Threat score
       description: Confidence value of VxStream Sandbox in the verdict; lies between
         0 and 100
       type: integer

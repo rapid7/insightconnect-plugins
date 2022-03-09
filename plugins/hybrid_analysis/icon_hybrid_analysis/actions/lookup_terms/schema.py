@@ -199,7 +199,7 @@ class LookupTermsOutput(insightconnect_plugin_runtime.Output):
         },
         "threat_score": {
           "type": "integer",
-          "title": "Thread score",
+          "title": "Threat score",
           "description": "Confidence value of VxStream Sandbox in the verdict; lies between 0 and 100",
           "order": 3
         },

@@ -101,14 +101,17 @@ Example input:
 
 ```
 {
-  "custom_cmd_line": "command",
-  "document_password": "somepassword",
-  "environment_id": "Linux (Ubuntu 16.04, 64 bit)",
-  "experimental_anti_evasion": true,
-  "file": "{\"filename\": \"setup.exe\", \"content\": \"UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==\" }",
-  "hybrid_analysis": true,
-  "script_logging": true,
-  "submit_name": "testName"
+   "custom_cmd_line":"command",
+   "document_password":"somepassword",
+   "environment_id":"Linux (Ubuntu 16.04, 64 bit)",
+   "experimental_anti_evasion":true,
+   "file":{
+      "filename":"setup.exe",
+      "content":"UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
+   },
+   "hybrid_analysis":true,
+   "script_logging":true,
+   "submit_name":"testName"
 }
 ```
 
@@ -308,7 +311,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 3.0.0 - Update of plugin for compatibility with new version of HybridAnalysis API | Created new actions which was moved from plugin **vxstream_sandbox** such as: Submit File, Lookup by Hash, Search Database, Retrieve Report
+* 3.0.0 - Update to support version 2 API | Created new actions which was moved from plugin **vxstream_sandbox** such as: Submit File, Lookup by Hash, Search Database, Retrieve Report
 * 2.0.2 - Fix threatscore KeyError
 * 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Update to new secret key credential type
