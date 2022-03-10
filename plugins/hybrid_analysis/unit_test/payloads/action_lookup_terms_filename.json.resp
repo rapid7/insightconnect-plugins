@@ -1,0 +1,30 @@
+{
+  "search_terms": [
+    {
+      "id": "filename",
+      "value": "test"
+    },
+    {
+      "id": "verdict",
+      "value": "1"
+    }
+  ],
+  "count": 1,
+  "result": [
+    {
+      "verdict": "whitelisted",
+      "av_detect": "0",
+      "threat_score": null,
+      "vx_family": null,
+      "job_id": "58ff0387aac2edb41849c732",
+      "sha256": "f6edcd8a1b4f7cb85486d0c6777f9174eadbc4d1d0d9e5aeba7132f30b34bc3e",
+      "environment_id": 100,
+      "analysis_start_time": "2017-04-25 09:06:48",
+      "submit_name": "pdf-test.pdf",
+      "environment_description": "Windows 7 32 bit",
+      "size": 28895,
+      "type": null,
+      "type_short": "pdf"
+    }
+  ]
+}
