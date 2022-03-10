@@ -88,7 +88,7 @@ class DGetOutput(insightconnect_plugin_runtime.Output):
           "description": "Unique ID of the destination",
           "order": 1
         },
-        "typeOf": {
+        "type": {
           "type": "string",
           "title": "Type",
           "description": "Type can be DOMAIN, URL or IPV4",
