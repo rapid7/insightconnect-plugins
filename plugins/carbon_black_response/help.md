@@ -71,6 +71,9 @@ Example input:
 Example output:
 
 ```
+{
+  "success": true
+}
 ```
 
 #### List Alerts
@@ -290,7 +293,7 @@ This action is used to add a feed.
 |enabled|boolean|None|False|Enable feed|None|True|
 |feed_url|string|None|False|The URL of the feed to add|None|https://example.com|
 |force|boolean|False|False|Add feed even if the feed URL is already in use|None|False|
-|key|file|None|False|Key|None|{"domain": "example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}|
+|key|file|None|False|Key|None|{"domain": "https://example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}|
 |password|password|None|False|Password|None|mypassword|
 |use_proxy|boolean|None|False|Whether or not to use proxy|None|True|
 |username|string|None|False|Username|None|user1|
@@ -366,10 +369,6 @@ Example output:
 
 This action is used to list all watchlists.
 
-Example input:
-
-```
-```
 
 ##### Output
 
@@ -521,7 +520,7 @@ This action is used to list all sensors.
 |groupid|string|None|False|The sensor group ID|None|50|
 |hostname|string|None|False|The sensor hostname|None|cb-response-example|
 |id|string|None|False|The sensor ID|None|1234|
-|ip|string|None|False|The sensor IP address|None|192.0.2.0|
+|ip|string|None|False|The sensor IP address|None|https://example.com|
 
 Example input:
 
@@ -796,6 +795,9 @@ This action is used to bring a sensor back into the network.
 Example input:
 
 ```
+{
+    "hostname": "cb-response-example"
+}
 ```
 
 ##### Output

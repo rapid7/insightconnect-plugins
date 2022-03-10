@@ -1,11 +1,7 @@
-import cbapi.errors
 import insightconnect_plugin_runtime
 from .schema import UninstallSensorInput, UninstallSensorOutput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 from cbapi.errors import ObjectNotFoundError, ApiError, UnauthorizedError, ServerError
-
-
-# Custom imports below
 
 
 class UninstallSensor(insightconnect_plugin_runtime.Action):
@@ -18,13 +14,13 @@ class UninstallSensor(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        sensorId = params.get("id", "")
+        sensor_id = params.get("id", "")
         try:
             # Returns single sensor if ID is supplied
-            get_response = self.connection.carbon_black.get_object(f"/api/v1/sensor/{sensorId}")
+            get_response = self.connection.carbon_black.get_object(f"/api/v1/sensor/{sensor_id}")
             sensor_data = get_response.json_data
             sensor_data["uninstall"] = True
-            self.connection.carbon_black.put_object(f"/api/v1/sensor/{sensorId}", sensor_data)
+            self.connection.carbon_black.put_object(f"/api/v1/sensor/{sensor_id}", sensor_data)
         except ApiError as ex:
             if isinstance(ex, ObjectNotFoundError):
                 raise PluginException(
