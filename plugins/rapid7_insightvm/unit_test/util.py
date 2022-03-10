@@ -46,6 +46,10 @@ class Util:
                 else:
                     raise Exception("Error")
 
+        if kwargs.get("url") == "https://example.com/api/3/reports?page=0&size=10&sort=ASC":
+            return MockResponse("list_reports", 200)
+        if kwargs.get("url") == "https://example.com/api/3/reports?page=1&size=10&sort=ASC":
+            return MockResponse("list_reports_2", 200)
         if kwargs.get("url") == "https://example.com/api/3/assets/1":
             return MockResponse("get_asset", 200)
         if kwargs.get("url") == "https://example.com/api/3/assets/2":
