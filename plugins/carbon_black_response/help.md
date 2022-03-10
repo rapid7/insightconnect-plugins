@@ -34,7 +34,7 @@ Example input:
 
 ```
 {
-  "api_key": "{\"domain\": \"example.com\", \"token\": \"9de5069c5afe602b2ea0a04b66beb2c0\"}",
+  "api_key": "{"domain": "example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}",
   "ssl_verify": true,
   "url": "https://127.0.0.1/api/bit9platform/v1"
 }
