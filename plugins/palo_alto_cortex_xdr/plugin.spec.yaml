@@ -1072,7 +1072,6 @@ actions:
         description: Was the operation successful
         type: boolean
         required: true
-
   block_file:
     title: Block File
     description: Add a file to the block list
@@ -1102,7 +1101,52 @@ actions:
         description: Was the operation successful
         type: boolean
         required: true
-
+  get_xql_query_results:
+    title: Get XQL Query Results
+    description: Start an XQL query and retrieve the query results
+    input:
+      query:
+        title: Query
+        description: String of the XQL query
+        type: string
+        required: true
+        example: dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3
+      tenants:
+        title: Tenants
+        description: String that represents additional information regarding the action
+        type: "[]string"
+        required: true
+        example: ["tenantID", "tenantID"]
+      start_time_range:
+        title: Start Time Range
+        description: Integer in timestamp epoch milliseconds for start of the time range, Cortex XDR calls by default the last 24 hours
+        type: integer
+        required: false
+        example: 1598907600000
+      end_time_range:
+        title: End Time Range
+        description: Integer in timestamp epoch milliseconds for end of the time range, Cortex XDR calls by default the last 24 hours
+        type: integer
+        required: false
+        example: 1599080399000
+      pending_flag:
+        title: Pending Flag
+        description: String of the XQL query
+        type: string
+        required: true
+        example: dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3\
+      limit:
+        title: Limit
+        description: String of the XQL query
+        type: string
+        required: true
+        example: dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3
+    output:
+      success:
+        title: Success
+        description: Was the operation successful
+        type: boolean
+        required: true
 triggers:
   get_incidents:
     title: Get Incidents
