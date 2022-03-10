@@ -474,6 +474,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.0.0 - Updated output for 'typeOf' to reflect update to Cisco API
 * 2.0.0 - Updated output for dAdd & dDelete - Removed data element in the response
 * 1.0.0 - Initial plugin includes create and modify destination lists
 
