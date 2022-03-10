@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import RemoveTagInput, RemoveTagOutput
 
 # Custom imports below
 
 
-class RemoveTag(komand.Action):
+class RemoveTag(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="remove_tag",

@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AddContextInput, AddContextOutput
 
 # Custom imports below
 
 
-class AddContext(komand.Action):
+class AddContext(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_context",
@@ -30,7 +30,7 @@ class AddContext(komand.Action):
             event_txt = client.get_event(params.get("text")["event"])
             proposal = params.get("proposal")
 
-            cmt_o = client.add_internal_comment(
+            client.add_internal_comment(
                 event_cmt,
                 reference=params.get("comment")["comment_in"],
                 category="Internal reference",
@@ -40,7 +40,7 @@ class AddContext(komand.Action):
                 proposal=proposal,
             )
 
-            link_o = client.add_internal_link(
+            client.add_internal_link(
                 event_link,
                 reference=params.get("link")["link"],
                 category="Internal reference",
@@ -50,7 +50,7 @@ class AddContext(komand.Action):
                 proposal=proposal,
             )
 
-            other_o = client.add_internal_other(
+            client.add_internal_other(
                 event_other,
                 reference=params.get("other")["other"],
                 category="Internal reference",
@@ -60,7 +60,7 @@ class AddContext(komand.Action):
                 proposal=proposal,
             )
 
-            txt_o = client.add_internal_text(
+            client.add_internal_text(
                 event_txt,
                 reference=params.get("text")["text"],
                 category="Internal reference",
@@ -71,16 +71,10 @@ class AddContext(komand.Action):
             )
 
             return {"status": True}
-        except:
+        except:  # pylint: disable=bare-except
             self.logger.error(event_cmt)
             self.logger.error(event_link)
             self.logger.error(event_other)
             self.logger.error(event_txt)
 
         return {"status": False}
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        self.logger.info(output)
-        return {"status": True}

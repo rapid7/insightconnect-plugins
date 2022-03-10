@@ -1,13 +1,13 @@
 import json
 
-import komand
+import insightconnect_plugin_runtime
 from .schema import SearchEventsInput, SearchEventsOutput, Input, Component
 
 
 # Custom imports below
 
 
-class SearchEvents(komand.Action):
+class SearchEvents(insightconnect_plugin_runtime.Action):
     _THREAT_LEVELS = {"Do not search on": None, "Undefined": 1, "Low": 2, "Medium": 3, "High": 4}
 
     _ANALYSIS_LEVEL = {"Do not search on": None, "Initial": 0, "Ongoing": 1, "Completed": 2}
@@ -24,7 +24,7 @@ class SearchEvents(komand.Action):
 
     def run(self, params={}):  # noqa: MC0001
         # Set blank strings to None
-        for k, v in params.items():
+        for k in params.keys():
             if not params[k]:
                 params[k] = None
 
@@ -74,13 +74,13 @@ class SearchEvents(komand.Action):
             try:
                 search_index_events = search_index_events["response"]
             except KeyError:
-                self.logger.error("Returned events were not formatted correctly, " + json.dumps(search_index_events))
+                self.logger.error("Returned events were not formatted correctly, %s", json.dumps(search_index_events))
                 raise
             for event in search_index_events:
                 try:
                     search_index_event_id.append(event["id"])
                 except KeyError:
-                    self.logger.error("No ID in event, " + event)
+                    self.logger.error("No ID in event, %s", event)
                     raise
 
         if should_search:
@@ -88,18 +88,18 @@ class SearchEvents(komand.Action):
             try:
                 search_events = search_events["response"]
             except KeyError:
-                self.logger.error("Returned events were not formatted correctly, " + json.dumps(search_events))
+                self.logger.error("Returned events were not formatted correctly, %s", json.dumps(search_events))
                 raise
             for eventWrapper in search_events:
                 try:
                     event = eventWrapper["Event"]
                 except KeyError:
-                    self.logger.error("Event was not formatted correctly, " + json.dumps(eventWrapper))
+                    self.logger.error("Event was not formatted correctly, %s", json.dumps(eventWrapper))
                     raise
                 try:
                     search_event_id.append(event["id"])
                 except KeyError:
-                    self.logger.error("No ID in event, " + json.dumps(event))
+                    self.logger.error("No ID in event, %s", json.dumps(event))
                     raise
         if should_search and should_search_index:
             event_id = list(set(search_event_id).intersection(search_index_event_id))

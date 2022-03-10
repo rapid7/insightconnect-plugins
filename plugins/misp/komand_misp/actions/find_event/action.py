@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import FindEventInput, FindEventOutput
 
 # Custom imports below
 
 
-class FindEvent(komand.Action):
+class FindEvent(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="find_event",
@@ -40,8 +40,3 @@ class FindEvent(komand.Action):
             raise
 
         return {"event": event["Event"], "message": message, "errors": errors}
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        return {"event": {}, "message": "", "errors": [""]}

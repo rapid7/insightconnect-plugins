@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AddAttributeInput, AddAttributeOutput
 
 # Custom imports below
 
 
-class AddAttribute(komand.Action):
+class AddAttribute(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_attribute",

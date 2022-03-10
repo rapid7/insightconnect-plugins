@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AddSightingsInput, AddSightingsOutput
 
 # Custom imports below
 
 
-class AddSightings(komand.Action):
+class AddSightings(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_sightings",
@@ -24,12 +24,6 @@ class AddSightings(komand.Action):
             else:
                 self.logger.info(item)
                 return {"status": False}
-        except:
+        except:  # pylint: disable=bare-except
             self.logger.error(item)
             return {"status": False}
-
-    def test(self):
-        client = self.connection.client
-        output = client.test_connection()
-        self.logger.info(output)
-        return {"status": True}
