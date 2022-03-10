@@ -26,9 +26,9 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|API token found in your Carbon Black profile|None|{"domain": "https://example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}|
+|api_key|credential_secret_key|None|True|API token found in your Carbon Black profile|None|{"domain": "example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}|
 |ssl_verify|boolean|True|True|SSL certificate verification|None|True|
-|url|string|https://example.com|True|Carbon Black Server API URL|None|https://example.com|
+|url|string|https://127.0.0.1/api/bit9platform/v1|True|Carbon Black Server API URL|None|https://127.0.0.1/api/bit9platform/v1|
 
 Example input:
 
@@ -293,7 +293,7 @@ This action is used to add a feed.
 |enabled|boolean|None|False|Enable feed|None|True|
 |feed_url|string|None|False|The URL of the feed to add|None|https://example.com|
 |force|boolean|False|False|Add feed even if the feed URL is already in use|None|False|
-|key|file|None|False|Key|None|{"domain": "https://example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}|
+|key|file|None|False|Key|None|{"domain": "example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}|
 |password|password|None|False|Password|None|mypassword|
 |use_proxy|boolean|None|False|Whether or not to use proxy|None|True|
 |username|string|None|False|Username|None|user1|
@@ -520,7 +520,7 @@ This action is used to list all sensors.
 |groupid|string|None|False|The sensor group ID|None|50|
 |hostname|string|None|False|The sensor hostname|None|cb-response-example|
 |id|string|None|False|The sensor ID|None|1234|
-|ip|string|None|False|The sensor IP address|None|https://example.com|
+|ip|string|None|False|The sensor IP address|None|192.0.2.0|
 
 Example input:
 
@@ -796,7 +796,7 @@ Example input:
 
 ```
 {
-    "hostname": "cb-response-example"
+  "hostname": "cb-response-example"
 }
 ```
 
