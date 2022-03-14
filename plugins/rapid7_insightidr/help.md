@@ -14,7 +14,7 @@ Do more with Investigations in [InsightIDR](https://www.rapid7.com/products/insi
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* Latest release successfully tested on 2021-09-15.
 
 # Documentation
 
@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|InsightIDR API key|None|4472f2g7-991z-4w70-li11-7552w8qm0266|
-|url|string|https://us.api.insight.rapid7.com|True|The URL endpoint for InsightIDR. e.g. https://<REGION_CODE>.api.insight.rapid7.com|None|https://us.api.insight.rapid7.com|
+|url|string|https://example.com|True|The URL endpoint for InsightIDR. e.g. https://<REGION_CODE>.api.insight.rapid7.com|None|https://example.com|
 
 Example input:
 
@@ -805,6 +805,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.0.0 - Change object `labels` to `[]string` in Advanced Query on Log and Advanced Query on Log Set actions
 * 3.1.4 - Add `docs_url` to plugin spec with a link to [InsightIDR plugin setup guide](https://docs.rapid7.com/insightconnect/rapid7-insightidr)
 * 3.1.3 - Fix issue where Get a Log and Get All Logs would either fail in workflow or in connection test
 * 3.1.2 - Send plugin name and version in the User-Agent string to vendor
