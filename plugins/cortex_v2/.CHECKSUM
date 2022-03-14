@@ -1,47 +1,87 @@
 {
-	"spec": "820e04612da780b5817d14cccc0a1a06",
-	"manifest": "57ac5a0fe5b06325ebadb56ad4b175af",
-	"setup": "d3c43778a3853f30699f559dedc27e0d",
+	"spec": "239d585c3a58e60ac4366ee9e90badf4",
+	"manifest": "9fe0d80aca9eaede7080ce532d6a4ff4",
+	"setup": "45777a899e9ac8ed65b5ea740f78bf3e",
 	"schemas": [
 		{
 			"identifier": "bulk_analyze/schema.py",
-			"hash": "308ec6d98446410ae5012e6fc2a3b99c"
+			"hash": "ba14dfcb1c05ae515c60680430c4c00d"
 		},
 		{
 			"identifier": "delete_job/schema.py",
-			"hash": "a6869db0161f63b83eba85baf3255404"
+			"hash": "803e19667f19ec672dd63e0d62814b0a"
 		},
 		{
 			"identifier": "get_analyzer/schema.py",
-			"hash": "1d64ef767e90536718af3c8a69fdc4a4"
+			"hash": "76e0f8c75282ddc49cfa2797444e38b2"
 		},
 		{
 			"identifier": "get_analyzer_by_type/schema.py",
-			"hash": "c78c214733297c955c86db492458880b"
+			"hash": "74dff78e72fae1627db9d66e34619c73"
 		},
 		{
 			"identifier": "get_job_details/schema.py",
-			"hash": "c99896ff22f3a6ed4d33baddb0c21b69"
+			"hash": "c257ba98aeb23d45dd5e90044904f293"
 		},
 		{
 			"identifier": "get_job_report/schema.py",
-			"hash": "58caa8ea1f413b3b82c4ad9dbc3b3af5"
+			"hash": "a250fd62714223c0127fb089f146b368"
 		},
 		{
 			"identifier": "get_jobs/schema.py",
-			"hash": "a9783fe83832f3f30b12686952e3b68c"
+			"hash": "946e7491f018164b3aeb75290d1e1f5c"
 		},
 		{
 			"identifier": "run_analyzer/schema.py",
-			"hash": "3433a59c81e5a570e2d77f4deaa5e1eb"
+			"hash": "e669e90ee50bd5b6d5c71cec8bca5be4"
 		},
 		{
 			"identifier": "run_file_analyzer/schema.py",
-			"hash": "6387668f167346da6875c76f2b372fc4"
+			"hash": "a7541ac5ff871ec4ab295a58446a08dc"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "c277d771d45b8ebf080985f46c4ad9b3"
+			"hash": "fc73a8c2a6319d8062a71f3b7736d736"
+		},
+		{
+			"identifier": "insightconnect_plugin_runtime/schema.py",
+			"hash": "98e2cf8bf394d0b6f97cdfeb657ea71b"
+		},
+		{
+			"identifier": "komand/schema.py",
+			"hash": "37985d79c6d8a2b36ddb69e12ee6e0bb"
+		},
+		{
+			"identifier": "marshmallow/schema.py",
+			"hash": "7c9fc22caa77ab8be9957e79867f426a"
+		},
+		{
+			"identifier": "hello/schema.py",
+			"hash": "92ec4b966e523fe43b8d3e1589ecd235"
+		},
+		{
+			"identifier": "return_bad_json/schema.py",
+			"hash": "bb41c13e9e71e212c1545150a16f8b73"
+		},
+		{
+			"identifier": "throw_exception/schema.py",
+			"hash": "f59f8278af731495ae3b2367744224f2"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "f1bf7d508c81c245888665a322d984e8"
+		},
+		{
+			"identifier": "hello_trigger/schema.py",
+			"hash": "6fda62f9b28a899e2ecb7aab1311bbb2"
+		},
+		{
+			"identifier": "return_bad_json_trigger/schema.py",
+			"hash": "9a207816ba5b0ab0f9e4f40d86c4cc3e"
+		},
+		{
+			"identifier": "throw_exception_trigger/schema.py",
+			"hash": "23e4aee31e1c532d9ed50830efad1b8d"
 		}
 	]
 }

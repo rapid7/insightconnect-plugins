@@ -12,16 +12,16 @@ class Connection(insightconnect_plugin_runtime.Connection):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
     def connect(self, params={}):
-        url = "{}://{}:{}".format(params.get("protocol").lower(), params.get("host"), params.get("port"))
+        url = f"{params.get('protocol').lower()}://{params.get('host')}:params.get('port')"
         api_key = params.get("api_key").get("secretKey")
         self.verify = params.get("verify", True)
-        self.logger.info("URL: %s", url)
+        self.logger.info(f"URL: {url}")
 
         if not params.get("proxy"):
             self.proxy = {}
         else:
             self.proxy = params.get("proxy")
-            self.logger.info("Proxy specified: %s", self.proxy)
+            self.logger.info(f"Proxy specified: {self.proxy}")
 
         self.logger.info("Connect: Connecting..")
         self.api = Api(url, api_key, verify_cert=self.verify, proxies=self.proxy)
