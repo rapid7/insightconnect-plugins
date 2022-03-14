@@ -4,7 +4,7 @@ products: [insightconnect]
 name: carbon_black_defense
 title: VMware Carbon Black Cloud Endpoint Standard
 description: Find events and retrieve details for specific events
-version: 3.0.1
+version: 3.0.0
 vendor: rapid7
 support: rapid7
 supported_versions: ["09/03/2022"]
