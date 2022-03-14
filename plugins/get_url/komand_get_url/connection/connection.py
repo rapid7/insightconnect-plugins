@@ -11,7 +11,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params):
         pass
 
-    def test(self, params={}):
+    def test(self):
         url = "https://www.google.com"
         insightconnect_plugin_runtime.helper.check_url(url)
         return {}
