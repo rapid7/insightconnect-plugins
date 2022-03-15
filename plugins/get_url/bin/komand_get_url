@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Get URL"
 Vendor = "rapid7"
-Version = "2.0.1"
+Version = "2.0.2"
 Description = "Get URL plugin downloads files by URL using HTTP, HTTPS, or FTP"
 
 
@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
+    import insightconnect_plugin_runtime
     from komand_get_url import connection, actions, triggers
 
-    class ICONGetUrl(komand.Plugin):
+    class ICONGetUrl(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -40,7 +40,7 @@ def main():
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONGetUrl())
+    cli = insightconnect_plugin_runtime.CLI(ICONGetUrl())
     cli.run()
 
 
