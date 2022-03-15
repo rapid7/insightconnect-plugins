@@ -1,4 +1,4 @@
-FROM komand/python-3-37-slim-plugin:3
+FROM rapid7/insightconnect-python-3-38-slim-plugin:4
 LABEL organization=komand
 
 # Add any custom package dependencies here
