@@ -119,5 +119,31 @@ class Util:
             return MockResponse(200, "get_cve_by_id_empty")
         elif kwargs.get("url") == "https://api.intsights.com/public/v1/cves/get-cves-list":
             return MockResponse(200, "get_cve_by_ids")
+        elif kwargs.get("url") == "https://api.intsights.com/public/v1/cves/add-cves" and kwargs.get("json").get(
+            "cveIds"
+        ) == ["CVE-1999-0003"]:
+            return MockResponse(200, "add_cve_with_one_id")
+        elif kwargs.get("url") == "https://api.intsights.com/public/v1/cves/add-cves" and kwargs.get("json").get(
+            "cveIds"
+        ) == ["CVE-2021-3739", "CVE-2020-7064", "CVE-1999-003"]:
+            return MockResponse(200, "add_cve_with_many_id")
+        elif (
+            kwargs.get("url") == "https://api.intsights.com/public/v1/cves/add-cves"
+            and kwargs.get("json").get("cveIds") == []
+        ):
+            return MockResponse(200, "delete_cve_empty")
+        elif kwargs.get("url") == "https://api.intsights.com/public/v1/cves/delete-cves" and kwargs.get("json").get(
+            "cveIds"
+        ) == ["CVE-1999-0003"]:
+            return MockResponse(200, "delete_cve_with_one_id")
+        elif kwargs.get("url") == "https://api.intsights.com/public/v1/cves/delete-cves" and kwargs.get("json").get(
+            "cveIds"
+        ) == ["CVE-2021-3739", "CVE-2020-7064", "CVE-1999-003"]:
+            return MockResponse(200, "delete_cve_with_many_id")
+        elif (
+            kwargs.get("url") == "https://api.intsights.com/public/v1/cves/delete-cves"
+            and kwargs.get("json").get("cveIds") == []
+        ):
+            return MockResponse(200, "delete_cve_empty")
         else:
             raise NotImplementedError("Not implemented", kwargs)

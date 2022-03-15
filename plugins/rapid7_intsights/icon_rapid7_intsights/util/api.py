@@ -162,6 +162,18 @@ class IntSightsAPI:
 
         return content
 
+    def add_cve(self, cve_ids: [str]) -> dict:
+        path = "public/v1/cves/add-cves"
+        response = self.make_json_request("POST", path, json_data={"cveIds": cve_ids})
+
+        return response
+
+    def delete_cve(self, cve_ids: [str]) -> dict:
+        path = "public/v1/cves/delete-cves"
+        response = self.make_json_request("DELETE", path, json_data={"cveIds": cve_ids})
+
+        return response
+
     def test_credentials(self) -> bool:
         return self.make_request("HEAD", "public/v1/test-credentials").status_code == 200
 
