@@ -2,8 +2,8 @@ import hashlib
 import json
 from http.client import HTTPResponse
 
-import komand
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 from typing import AnyStr
 
 
@@ -49,14 +49,14 @@ class Utils(object):
             "etag": headers.get("etag"),
             "file": meta.get("file"),
         }
-        with komand.helper.open_cachefile(meta.get("metafile")) as loaded_file:
+        with insightconnect_plugin_runtime.helper.open_cachefile(meta.get("metafile")) as loaded_file:
             json.dump(data, loaded_file)
         self.logger.info(f"CreateUrlMetaFile: MetaFile created: {str(data)}")
 
     def check_url_meta_file(self, meta: dict):
         """Check caching headers from meta info dictionary"""
         try:
-            with komand.helper.open_cachefile(meta.get("metafile")) as loaded_file:
+            with insightconnect_plugin_runtime.helper.open_cachefile(meta.get("metafile")) as loaded_file:
                 data = json.load(loaded_file)
             return data
         except Exception as e:
@@ -76,11 +76,11 @@ class Utils(object):
 
         # Attempt to retrieve headers from past request
         headers = {}
-        if komand.helper.check_cachefile(meta.get("metafile")):
+        if insightconnect_plugin_runtime.helper.check_cachefile(meta.get("metafile")):
             headers = self.check_url_meta_file(meta)
 
         # Download file
-        url_object = komand.helper.open_url(
+        url_object = insightconnect_plugin_runtime.helper.open_url(
             url,
             timeout=timeout,
             verify=is_verify,
@@ -92,7 +92,7 @@ class Utils(object):
 
     def write_contents_to_cache(self, cache_file: str, contents: bytes):
         try:
-            old_cache_file = komand.helper.open_cachefile(cache_file)
+            old_cache_file = insightconnect_plugin_runtime.helper.open_cachefile(cache_file)
             old_cache_file.write(contents)
             old_cache_file.close()
         except IOError as error:
@@ -104,7 +104,7 @@ class Utils(object):
 
     def read_contents_from_cache(self, cache_file: str) -> AnyStr:
         try:
-            old_cache_file = komand.helper.open_cachefile(cache_file)
+            old_cache_file = insightconnect_plugin_runtime.helper.open_cachefile(cache_file)
             old_contents = old_cache_file.read()
             old_cache_file.close()
         except Exception as error:
