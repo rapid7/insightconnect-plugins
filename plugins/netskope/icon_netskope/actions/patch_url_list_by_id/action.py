@@ -15,6 +15,7 @@ class PatchUrlListById(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         data = {
             Input.NAME: params.get(Input.NAME),
-            "data": {Input.URLS: params.get(Input.URLS), Input.TYPE: params.get(Input.TYPE)},
         }
+        if all((params.get(Input.URLS), params.get(Input.TYPE))):
+            data["data"] = {Input.URLS: params.get(Input.URLS), Input.TYPE: params.get(Input.TYPE)}
         return self.connection.client.patch_url_list_by_id(params.get(Input.ID), params.get(Input.ACTION), data)

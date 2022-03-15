@@ -87,27 +87,27 @@ def mock_conditions_connection(url: str, status_code: int) -> MockResponse:
 
 
 def mock_request_200_api_v1(*args, **kwargs) -> MockResponse:
-    return mock_conditions_actions_api_v1(args[1], 200, kwargs.get("json"))
+    return mock_conditions_actions_api_v1(args[1], 200, kwargs.get("params"))
 
 
 def mock_request_201_api_v1(*args, **kwargs) -> MockResponse:
-    return mock_conditions_actions_api_v1(args[1], 201, kwargs.get("json"))
+    return mock_conditions_actions_api_v1(args[1], 201, kwargs.get("params"))
 
 
 def mock_request_400_api_v1(*args, **kwargs) -> MockResponse:
-    return mock_conditions_actions_api_v1(args[1], 400, kwargs.get("json"))
+    return mock_conditions_actions_api_v1(args[1], 400, kwargs.get("params"))
 
 
 def mock_request_403_api_v1(*args, **kwargs) -> MockResponse:
-    return mock_conditions_actions_api_v1(args[1], 403, kwargs.get("json"))
+    return mock_conditions_actions_api_v1(args[1], 403, kwargs.get("params"))
 
 
 def mock_request_404_api_v1(*args, **kwargs) -> MockResponse:
-    return mock_conditions_actions_api_v1(args[1], 404, kwargs.get("json"))
+    return mock_conditions_actions_api_v1(args[1], 404, kwargs.get("params"))
 
 
 def mock_request_429_api_v1(*args, **kwargs) -> MockResponse:
-    return mock_conditions_actions_api_v1(args[1], 429, kwargs.get("json"))
+    return mock_conditions_actions_api_v1(args[1], 429, kwargs.get("params"))
 
 
 def mock_request_bad_json_response_api_v1(*args, **kwargs) -> MockResponse:
@@ -115,7 +115,7 @@ def mock_request_bad_json_response_api_v1(*args, **kwargs) -> MockResponse:
 
 
 def mock_request_500_api_v1(*args, **kwargs) -> MockResponse:
-    return mock_conditions_actions_api_v1(args[1], 500, kwargs.get("json"))
+    return mock_conditions_actions_api_v1(args[1], 500, kwargs.get("params"))
 
 
 def mock_request_200_api_v2(*args, **kwargs) -> MockResponse:

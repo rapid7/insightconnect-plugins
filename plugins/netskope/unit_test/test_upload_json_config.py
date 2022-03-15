@@ -46,12 +46,12 @@ class TestUploadJsonConfig(TestCase):
             "uploaded_urllist": [
                 {
                     "id": 1,
-                    "name": "test",
-                    "data": {"urls": ["www.example.com"], "type": "exact", "json_version": 2},
+                    "name": "ExampleName",
+                    "data": {"urls": ["https://example.com", "https://example.com"], "type": "exact"},
                     "modify_by": "Netskope REST API",
-                    "modify_time": "2022-02-01T12:20:23.000Z",
+                    "modify_time": "1997-01-01 00:00:00",
                     "modify_type": "Created",
-                    "pending": 1,
+                    "pending": 0,
                 }
             ]
         }

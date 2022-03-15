@@ -18,7 +18,7 @@ This plugin allows users to create, read, update, and delete URL list
 
 # Requirements
 
-* Requires an API Keys for versions v1 and v2 from the product Netskope. Both API Keys are required.
+* Requires an API Keys for versions v1 and v2, tenant name from the product Netskope. Note: Both API Keys are required.
 
 # Supported Product Versions
 
@@ -60,9 +60,9 @@ This action is used to update the name, URLs, and/or type of a URL list object.
 |----|----|-------|--------|-----------|----|-------|
 |action|string|None|True|Replace or append to current URLs|['replace', 'append']|append|
 |id|integer|None|True|ID of the URL list|None|1|
-|name|string|None|True|Name of replaced URL list|None|ExampleName|
-|type|string|None|True|Category of URL list|['exact', 'regex']|exact|
-|urls|[]string|None|True|List of URLs|None|["https://example.com", "https://example.com"]|
+|name|string|None|False|Name of replaced URL list|None|ExampleName|
+|type|string|None|False|Category of URL list|['', 'exact', 'regex']|exact|
+|urls|[]string|None|False|List of URLs|None|["https://example.com", "https://example.com"]|
 
 Example input (type exact):
 
@@ -100,8 +100,8 @@ Example input (type regex):
 |data|object|True|Data containing and type|
 |id|integer|True|URL list identifier|
 |modify_by|string|True|Name of the URL list modifier|
-|modify_time|string|True|Last URL list modification time|
-|modify_type|date|True|Shows last modification type. Expected values are Created, Edited, Deleted|
+|modify_time|date|True|Last URL list modification time|
+|modify_type|string|True|Shows last modification type. Expected values are Created, Edited, Deleted|
 |name|string|True|URL list name|
 |pending|integer|True|URL list status of pending (1) and applied (0)|
 
@@ -116,8 +116,7 @@ Example output:
       "https://example.com",
       "https://example.com"
     ],
-    "type": "exact",
-    "json_version": 2
+    "type": "exact"
   },
 	"modify_by": "Netskope REST API",
 	"modify_time": "1997-01-01 00:00:00",
@@ -174,8 +173,8 @@ Example input (type regex):
 |data|data|True|Data containing URLs and type|
 |id|integer|True|URL list identifier|
 |modify_by|string|True|Name of the URL list modifier|
-|modify_time|string|True|Last URL list modification time|
-|modify_type|date|True|Shows last modification type. Expected values are Created, Edited, Deleted|
+|modify_time|date|True|Last URL list modification time|
+|modify_type|string|True|Shows last modification type. Expected values are Created, Edited, Deleted|
 |name|string|True|URL list name|
 |pending|integer|True|URL list status of pending (1) and applied (0)|
 
@@ -190,8 +189,7 @@ Example output:
       "https://example.com",
       "https://example.com"
     ],
-    "type": "exact",
-    "json_version": 2
+    "type": "exact"
   },
 	"modify_by": "Netskope REST API",
 	"modify_time": "1997-01-01 00:00:00",
@@ -208,7 +206,7 @@ This action is used to get all applied or pending URL lists.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|status|string|None|False|Status of URL lists to be received|['', 'applied', 'pending']|applied|
+|status|string|any|True|Status of URL lists to be received|['any', 'applied', 'pending']|applied|
 
 Example input:
 
@@ -237,8 +235,7 @@ Example output:
           "https://example.com",
           "https://example.com"
         ],
-        "type": "exact",
-        "json_version": 2
+        "type": "exact"
       },
       "modify_by": "Netskope REST API",
       "modify_time": "2022-01-03T00:00:00.000Z",
@@ -274,8 +271,8 @@ Example input:
 |data|data|True|Data containing URLs and type|
 |id|integer|True|URL list identifier|
 |modify_by|string|True|Name of the URL list modifier|
-|modify_time|string|True|Last URL list modification time|
-|modify_type|date|True|Shows last modification type. Expected values are Created, Edited, Deleted|
+|modify_time|date|True|Last URL list modification time|
+|modify_type|string|True|Shows last modification type. Expected values are Created, Edited, Deleted|
 |name|string|True|URL list name|
 |pending|integer|True|URL list status of pending (1) and applied (0)|
 
@@ -290,8 +287,7 @@ Example output:
       "https://example.com",
       "https://example.com"
     ],
-    "type": "exact",
-    "json_version": 2
+    "type": "exact"
   },
   "modify_by": "Netskope REST API",
   "modify_time": "1997-01-01 00:00:00",
@@ -327,8 +323,7 @@ Example output:
 					"https://example.com",
 					"https://example.com"
 				], 
-			"type": "exact",
-			"json_version": 2,
+			"type": "exact"
 			},
 			"modify_by": "Netskope REST API",
 			"modify_time": "1997-01-01 00:00:00",
@@ -385,8 +380,8 @@ Example input (type regex):
 |data|data|True|Data containing URLs and type|
 |id|integer|True|URL list identifier|
 |modify_by|string|True|Name of the URL list modifier|
-|modify_time|string|True|Last URL list modification time|
-|modify_type|date|True|Shows last modification type. Expected values are Created, Edited, Deleted|
+|modify_time|date|True|Last URL list modification time|
+|modify_type|string|True|Shows last modification type. Expected values are Created, Edited, Deleted|
 |name|string|True|URL list name|
 |pending|integer|True|URL list status of pending (1) and applied (0)|
 
@@ -401,8 +396,7 @@ Example output:
           "https://example.com",
           "https://example.com"
         ],
-    "type": "exact",
-    "json_version": 2
+    "type": "exact"
       },
   "modify_by": "Netskope REST API",
 			"modify_time": "1997-01-01 00:00:00",
@@ -419,14 +413,14 @@ This action is used to get single user's confidence index.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|fromTime|integer|None|True|Numeric value representing the time in epoch timestamp from the beginning of which confidence score values are taken until now|None|0|
+|fromTime|integer|None|True|Numeric value representing the time in epoch timestamp from the beginning of which confidence score values are taken until now (in miliseconds)|None|1647357793000|
 |username|string|None|True|Username of an existing user|None|ExampleUser|
 
 Example input:
 
 ```
 {
-  "fromTime": 0,
+  "fromTime": 1647357793000,
   "username": "ExampleUser"
 }
 ```
@@ -477,8 +471,8 @@ Example input:
 |data|data|True|Data containing URLs and type|
 |id|integer|True|URL list identifier|
 |modify_by|string|True|Name of the URL list modifier|
-|modify_time|string|True|Last URL list modification time|
-|modify_type|date|True|Shows last modification type. Expected values are Created, Edited, Deleted|
+|modify_time|date|True|Last URL list modification time|
+|modify_type|string|True|Shows last modification type. Expected values are Created, Edited, Deleted|
 |name|string|True|URL list name|
 |pending|integer|True|URL list status of pending (1) and applied (0)|
 
@@ -493,8 +487,7 @@ Example output:
       "https://example.com",
       "https://example.com"
     ],
-    "type": "exact",
-    "json_version": 2
+    "type": "exact"
   },
   "modify_by": "Netskope REST API",
   "modify_time": "1997-01-01 00:00:00",
@@ -519,9 +512,9 @@ Example input:
 ```
 {
   "list": [
-  	"e28eb9739b6e84d0f796e3acc0f5b71e",
-  	"e28eb9739b6e84d0f697e3acc0f5b71a",
-  	"e28eb9839b6e74d0f696e3acc0f6b710"
+    "e28eb9739b6e84d0f796e3acc0f5b71e",
+    "e28eb9739b6e84d0f697e3acc0f5b71a",
+    "e28eb9839b6e74d0f696e3acc0f6b710"
   ],
   "name": "ExampleExistingFileHashList"
 }
@@ -557,18 +550,19 @@ Example input:
 
 ```
 {
-  "items": [
-    {
-      "name": "string",
-      "data": {
-        "urls": [
-          "https://example.com",
-          "https://example.com"
-        ],
-        "type": "exact"
+  "urllist": {
+    "items": [
+      {
+        "name": "string",
+        "data": {
+          "urls": [
+            "https://example.com"
+          ],
+          "type": "exact"
+        }
       }
-    }
-  ]
+    ]
+  }
 }
 ```
 
@@ -590,8 +584,7 @@ Example output:
         "urls": [
           "https://example.com"
         ],
-        "type": "exact",
-        "json_version": 2
+        "type": "exact"
       },
       "modify_by": "Netskope REST API",
       "modify_time": "2022-02-01T12:20:23.000Z",
