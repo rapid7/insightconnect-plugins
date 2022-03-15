@@ -27,6 +27,7 @@ jobs:
           else
             TARGET_BRANCH="develop"
           fi
+          echo ${TARGET_BRANCH}
           CHANGED_FILES=()
           for OUTPUT in $(git diff --no-commit-id --name-only --no-renames HEAD..origin/${TARGET_BRANCH})
           do
