@@ -4,7 +4,7 @@ products: [insightconnect]
 name: get_url
 title: Get URL
 description: Get URL plugin downloads files by URL using HTTP, HTTPS, or FTP
-version: 2.0.1
+version: 2.0.2
 supported_versions: ["_There are no supported product versions listed._"]
 vendor: rapid7
 support: community

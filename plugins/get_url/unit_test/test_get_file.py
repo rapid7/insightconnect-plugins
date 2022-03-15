@@ -9,13 +9,13 @@ from unittest import TestCase
 from komand_get_url.actions.get_file import GetFile
 from komand_get_url.actions.get_file.schema import Input
 from unittest.mock import patch
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
 
-@patch("six.moves.urllib.request.urlopen", side_effect=Util.mocked_request)
-@patch("komand.helper.open_cachefile", side_effect=Util.mock_for_cache_creation)
+@patch("urllib.request.urlopen", side_effect=Util.mocked_request)
+@patch("insightconnect_plugin_runtime.helper.open_cachefile", side_effect=Util.mock_for_cache_creation)
 @patch("komand_get_url.util.utils.Utils.create_url_meta_file")
 class TestGetFile(TestCase):
     @classmethod
@@ -70,7 +70,7 @@ class TestGetFile(TestCase):
             context.exception.assistance,
         )
 
-    @patch("komand.helper.open_url", side_effect=Util.mocked_url_open)
+    @patch("insightconnect_plugin_runtime.helper.open_url", side_effect=Util.mocked_url_open)
     def test_is_verify(self, mock_get, mock_request, mock_create_url_meta, mock_open_cache):
         actual = self.action.run({Input.URL: "https://test.com/v1/test.txt", Input.IS_VERIFY: True})
         self.assertTrue(mock_get.call_args_list[0][1].get("verify"))
