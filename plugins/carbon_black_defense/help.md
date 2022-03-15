@@ -303,4 +303,3 @@ The Find Event API and Get Details for Specific Event API are now documented as 
 * [VMware Carbon Black Cloud Endpoint Standard API](https://developer.carbonblack.com/reference/carbon-black-cloud/cb-defense/latest/rest-api/)
 * [Rate Limits](https://developer.carbonblack.com/reference/carbon-black-cloud/rate-limiting/)
 * [API Key Types](https://developer.carbonblack.com/reference/carbon-black-cloud/authentication/#creating-an-api-key)
-

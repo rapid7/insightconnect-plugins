@@ -60,11 +60,11 @@ class FindEvent(insightconnect_plugin_runtime.Action):
 
         return {
             Output.SUCCESS: True,
-            Output.RESULTS: data.get('results'),
-            Output.APPROXIMATE_UNAGGREGATED: data.get('approximate_unaggregated'),
-            Output.NUM_AGGREGATED: data.get('num_aggregated'),
-            Output.NUM_AVAILABLE: data.get('num_available'),
-            Output.NUM_FOUND: data.get('num_found'),
-            Output.CONTACTED: data.get('contacted'),
-            Output.COMPLETED: data.get('completed'),
+            Output.RESULTS: data.get("results"),
+            Output.APPROXIMATE_UNAGGREGATED: data.get("approximate_unaggregated"),
+            Output.NUM_AGGREGATED: data.get("num_aggregated"),
+            Output.NUM_AVAILABLE: data.get("num_available"),
+            Output.NUM_FOUND: data.get("num_found"),
+            Output.CONTACTED: data.get("contacted"),
+            Output.COMPLETED: data.get("completed"),
         }

@@ -189,7 +189,7 @@ types:
       required: false
     process_start_time:
       title: Process Start Time
-      type: string
+      type: date
       description: Sensor reported timestamp of when the process started
       required: false
     process_username:
@@ -242,6 +242,11 @@ types:
       type: string
       description: Unique event identifier assigned by the Carbon Black Cloud
       required: false
+    event_hash:
+      title: Event Hash
+      type: string
+      description: Hash of the event to allow for deduplication of events
+      required: false
     parent_guid:
       title: Parent GUID
       type: string
@@ -259,7 +264,7 @@ types:
       required: false
     enriched_event_type:
       title: Enriched Event Type"
-      type: "string"
+      type: string
       description: Event type(s) as determined by the Carbon Black Cloud
       required: false
     enriched:
@@ -400,7 +405,7 @@ types:
     org_id:
       title: Org ID
       type: string
-      description: 	Organization identifer
+      description: Organization identifer
       required: false
     device_name:
       title: Device Name
@@ -522,7 +527,7 @@ types:
       description: Reputation of the child process; applied by the Carbon Black Cloud when the event was processed
       required: false
     childproc_sha256:
-      title: Childproc SHA256
+      title: Childproc SHA-256
       type: string
       description: SHA-256 hash of the binary executed by the child process in the event
       required: false
@@ -570,64 +575,77 @@ types:
       title: Crossproc Effective Reputation Source
       type: string
       description: Source of the effective reputation for the cross-process
+      required: false
     crossproc_guid:
       title: Crossproc GUID
       type: string
       description: Unique process identifier of one of the cross-process members
+      required: false
     crossproc_hash:
       title: Crossproc Hash
       type: "[]string"
       description: MD5 and/or SHA-256 hash(es) of the binaries whose processes are running on one side of the cross-process action
+      required: false
     crossproc_md5:
       title: Crossproc MD5
       type: string
       description: MD5 hash of the binary on one side of the cross-process action
+      required: false
     crossproc_name:
       title: Crossproc Name
       type: string
       description: Filesystem path of the binary of one side of the cross-process action
+      required: false
     crossproc_pid:
       title: Crossproc PID
       type: integer
       description: Process identifier assigned by the operating system to one of the cross-process members
+      required: false
     crossproc_process_guid:
       title: Crossproc Process GUID
       type: string
       description: Unique identifer of the process on one side of the cross-process action
+      required: false
     crossproc_sha256:
-      title: Crossproc SHA256
+      title: Crossproc SHA-256
       type: string
       description: SHA-256 hash of the binary on one side of the cross-process action
+      required: false
     crossproc_target:
       title: Crossproc Target
       type: boolean
       description: True if the process was the target of the cross-process event; false if the process was the actor
+      required: false
     device_group:
       title: Device Group
       type: string
       description: Sensor group to which the endpoint was assigned when the sensor recorded the event data
+      required: false
     device_installed_by:
       title: Device Installed By
       type: string
       description: The Carbon Black Cloud user who was logged in to the endpoint when the sensor was installed
+      required: false
     event_attack_stage:
       title: Event Attack Stage
       type: string
       description: Stage(s) of the cyber kill chain when an attack was terminated by sensor
+      required: false
     event_timestamp:
       title: Event Timestamp
       type: date
       description: Timestamp reported by the sensor when the event occured
+      required: false
     file_scan_result:
       title: File Scan Result
       type: string
       description: Classification of malware detected during a background scan performed by the Endpoint Standard sensor
       required: false
     fileless_scriptload_cmdline:
-        title: Fileless Scriptload Cmdline
-        type: "[]string"
-        description: Deobfuscated script content run in a fileless context by the process
-        required: false
+      title: Fileless Scriptload Cmdline
+      type: "[]string"
+      description: Deobfuscated script content run in a fileless context by the process
+      required: false
     fileless_scriptload_cmdline_length:
       title: Fileless Scriptload Cmdline Length
       type: "[]integer"
@@ -639,7 +657,7 @@ types:
       description: SHA-256 hash(es) of the deobfuscated script content run by the process in a fileless context
       required: false
     fileless_scriptload_sha256:
-      title: Fileless Scriptload SHA256
+      title: Fileless Scriptload SHA-256
       type: string
       description: SHA-256 hash of the deobfuscated script content run by the process in a fileless context
       required: false
@@ -691,10 +709,10 @@ types:
     filemod_reputation:
       title: Filemod Reputation
       type: string
-      description: Reputation of the target file.
+      description: Reputation of the target file
       required: false
     filemod_sha256:
-      title: Filemod SHA256
+      title: Filemod SHA-256
       type: string
       description: SHA-256 hash of the file modified by the actor process
       required: false
@@ -749,7 +767,7 @@ types:
       description: Digital signature state(s) of the loaded modules' binaries
       required: false
     modload_sha256:
-      title: Modload SHA256
+      title: Modload SHA-256
       type: string
       description: SHA-256 hash of the module loaded by the process
       required: false
@@ -771,7 +789,7 @@ types:
     netconn_ipv6:
       title: Netconn IPv6
       type: string
-      description: IPv6 address of the remote side of the network connection; stored as a string without octet-separating colon characters
+      description: IPv6 address of the remote side of the network connection
       required: false
     netconn_listen:
       title: Netconn Listen
@@ -1019,7 +1037,7 @@ types:
       description: State of the loaded script(s)' digital signature(s); checks signatures on Powershell scripts and .MSI/.MSP files
       required: false
     scriptload_sha256:
-      title: Scriptload SHA256
+      title: Scriptload SHA-256
       type: string
       description: SHA-256 hash of the filesystem script file loaded at process launch
       required: false
