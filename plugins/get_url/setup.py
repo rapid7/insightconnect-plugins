@@ -3,12 +3,12 @@ from setuptools import setup, find_packages
 
 
 setup(name="get_url-rapid7-plugin",
-      version="2.0.1",
+      version="2.0.2",
       description="Get URL plugin downloads files by URL using HTTP, HTTPS, or FTP",
       author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
-      install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
+      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_get_url']
       )

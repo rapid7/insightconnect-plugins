@@ -1,12 +1,12 @@
-import komand
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 from komand_get_url.util import constants
 from komand_get_url.util.utils import Utils
 from .schema import GetFileInput, GetFileOutput, Input, Output, Component
 
 
-class GetFile(komand.Action):
+class GetFile(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_file",
@@ -27,7 +27,7 @@ class GetFile(komand.Action):
         if url_object:
             contents = url_object.read().decode(constants.DEFAULT_ENCODING, "replace")
             # Optional integrity check of file
-            if checksum and not komand.helper.check_hashes(contents, checksum):
+            if checksum and not insightconnect_plugin_runtime.helper.check_hashes(contents, checksum):
                 self.logger.error("GetFile: File Checksum Failed")
                 raise PluginException(
                     cause="Checksums between the downloaded file and provided checksum did not match.",
@@ -43,7 +43,9 @@ class GetFile(komand.Action):
             # Check URL status code and return file contents
             if not url_object.code or 200 <= url_object.code <= 299:
                 return {
-                    Output.BYTES: komand.helper.encode_string(contents).decode(constants.DEFAULT_ENCODING),
+                    Output.BYTES: insightconnect_plugin_runtime.helper.encode_string(contents).decode(
+                        constants.DEFAULT_ENCODING
+                    ),
                     Output.STATUS_CODE: url_object.code or 200,
                 }
 
@@ -51,10 +53,12 @@ class GetFile(komand.Action):
         else:
             # Attempt to return file from cache if available
             self.logger.info(f"GetURL: File not modified: {url}")
-            if komand.helper.check_cachefile(cache_file):
+            if insightconnect_plugin_runtime.helper.check_cachefile(cache_file):
                 self.logger.info(f"GetURL: File returned from cache: {cache_file}")
                 return {
-                    Output.BYTES: komand.helper.encode_file(cache_file).decode(constants.DEFAULT_ENCODING),
+                    Output.BYTES: insightconnect_plugin_runtime.helper.encode_file(cache_file).decode(
+                        constants.DEFAULT_ENCODING
+                    ),
                     Output.STATUS_CODE: 200,
                 }
 
