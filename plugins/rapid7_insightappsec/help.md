@@ -13,6 +13,10 @@ This plugin utilizes the [Rapid7 InsightAppSec API](https://insightappsec.help.r
 
 * Requires an API Key from Insight platform
 
+# Supported Product Versions
+
+* Rapid7 InsightAppSec
+
 # Documentation
 
 ## Setup
@@ -38,6 +42,38 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Submit Scan
+
+This action is used to submit a new scan.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|scan_config_id|string|None|True|UUID of the scan config to use|None|a709c972-cb1f-4790-bfce-6ab74653900c|
+
+Example input:
+
+```
+{
+  "scan_config_id": "a709c972-cb1f-4790-bfce-6ab74653900c"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|status|integer|False|Status code of the request|
+
+Example output:
+
+```
+{
+  "status": 201
+}
+```
 
 #### Create Scan Config
 
@@ -283,38 +319,6 @@ Example output:
       ]
     }
   ]
-}
-```
-
-#### Sumbit Scan
-
-This action is used to submit a new scan.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|scan_config_id|string|None|True|UUID of the scan config to use|None|a709c972-cb1f-4790-bfce-6ab74653900c|
-
-Example input:
-
-```
-{
-  "scan_config_id": "a709c972-cb1f-4790-bfce-6ab74653900c"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|status|integer|False|Status code of the request|
-
-Example output:
-
-```
-{
-  "status": 201
 }
 ```
 
@@ -625,6 +629,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.0 - Update plugin spec with changing title for action Submit scan | Update keywords
 * 1.0.3 - Send plugin name and version in the User-Agent string to vendor
 * 1.0.2 - Update to v4 Python plugin runtime | Add example inputs
 * 1.0.1 - New spec and help.md format for the Extension Library

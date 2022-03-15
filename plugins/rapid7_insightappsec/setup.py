@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="rapid7_insightappsec-rapid7-plugin",
-      version="1.0.3",
+      version="2.0.0",
       description="This plugin allows for the creation, configuration, and starting of scans. The plugin can also retrieve scan results and logging related to the execution of the scan",
       author="rapid7",
       author_email="",
