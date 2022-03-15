@@ -1,0 +1,9 @@
+{
+  "success_amount": 2,
+  "failure": [
+    {
+      "cveId": "CVE-1999-003",
+      "failReason": "Invalid CVE format"
+    }
+  ]
+}
