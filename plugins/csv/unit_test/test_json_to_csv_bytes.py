@@ -1,3 +1,8 @@
+import os
+import sys
+
+sys.path.append(os.path.abspath("../"))
+
 from unittest import TestCase
 from komand_csv.actions.json_to_csv_bytes import JsonToCsvBytes
 from komand_csv.actions.json_to_csv_bytes.schema import Input, Output
