@@ -787,7 +787,7 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "order": 5
         },
         "netconn_ipv4": {
-          "type": "string",
+          "type": "integer",
           "title": "Netconn IPv4",
           "description": "IPv4 address of the remote side of the network connection",
           "order": 39
@@ -805,7 +805,7 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "order": 132
         },
         "netconn_local_ipv4": {
-          "type": "string",
+          "type": "integer",
           "title": "Netconn Local IPv4",
           "description": "Pv4 address of the local side of the network connection; stored as an integer",
           "order": 28
@@ -853,7 +853,7 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "order": 135
         },
         "netconn_proxy_ipv4": {
-          "type": "string",
+          "type": "integer",
           "title": "Netconn Proxy IPv4",
           "description": "Pv4 address of the remote side of the connection with an intermediary HTTP network device, usually a proxy server",
           "order": 136
@@ -871,7 +871,7 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "order": 138
         },
         "netconn_remote_ipv4": {
-          "type": "string",
+          "type": "integer",
           "title": "Netconn Remote IPv4",
           "description": "IPv4 address of the remote side of the network connection",
           "order": 139
