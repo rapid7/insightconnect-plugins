@@ -108,7 +108,7 @@ Example input:
 
 ```
 {
-  "log_set": "Firewall Activity",
+  "log": "Firewall Activity",
   "query": "where(user=adagentadmin, loose)",
   "relative_time": "Last 5 Minutes",
   "time_from": "01-01-2020T00:00:00",
@@ -413,9 +413,6 @@ This action is used to get a specific log from an account.
 Example input:
 
 ```
-{
-  "id": "174e4f99-2ac7-4481-9301-4d24c34baf06"
-}
 ```
 
 ##### Output

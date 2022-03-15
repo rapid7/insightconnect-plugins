@@ -4,3 +4,4 @@
 python-dateutil==2.8.1
 validators == 0.18.2
 aiohttp==3.7.4.post0
+flask==2.0.3
