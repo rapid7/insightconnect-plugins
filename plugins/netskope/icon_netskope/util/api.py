@@ -24,7 +24,7 @@ class ApiClient:
     def update_file_hash_list(self, name: str, hash_list: List[str]) -> dict:
         update_file_hash_list_url = f"{self.api_url_v1}updateFileHashList/"
         return self._call_api_v1(
-            "GET",
+            "PUT",
             update_file_hash_list_url,
             params={"token": self.api_key_v1, "name": name, "list": ",".join(hash_list)},
         )
