@@ -25,7 +25,7 @@ class GetDetailsForSpecificEventInput(insightconnect_plugin_runtime.Input):
     "event_ids": {
       "type": "string",
       "title": "Event ID",
-      "description": "Event ID",
+      "description": "Event ID used to retrieve event details. Example: 422af3fc3a7411ea8da649e797467dc0",
       "order": 1
     }
   },
