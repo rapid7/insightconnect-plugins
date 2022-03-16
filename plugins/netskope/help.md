@@ -18,7 +18,7 @@ This plugin allows users to create, read, update, and delete URL list
 
 # Requirements
 
-* Requires an API Keys for versions v1 and v2, tenant name from the product Netskope. Note: Both API Keys are required.
+* Requires an API Keys for versions v1 and v2, tenant name from the Netskope. Note: Both API Keys are required.
 
 # Supported Product Versions
 
