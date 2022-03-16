@@ -15,7 +15,7 @@ This plugin utilizes the [VMware Carbon Black Cloud Endpoint Standard API](https
 
 # Supported Product Versions
 
-* 08/03/2022
+* 2022-15-03T12:00:00Z
 
 # Documentation
 
