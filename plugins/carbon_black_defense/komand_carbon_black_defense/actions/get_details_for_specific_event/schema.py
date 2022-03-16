@@ -12,7 +12,13 @@ class Input:
     
 
 class Output:
-    EVENTINFO = "eventinfo"
+    APPROXIMATE_UNAGGREGATED = "approximate_unaggregated"
+    COMPLETED = "completed"
+    CONTACTED = "contacted"
+    NUM_AGGREGATED = "num_aggregated"
+    NUM_AVAILABLE = "num_available"
+    NUM_FOUND = "num_found"
+    RESULTS = "results"
     SUCCESS = "success"
     
 
@@ -45,11 +51,50 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "eventinfo": {
-      "$ref": "#/definitions/event_info",
-      "title": "Event Info",
-      "description": "Detailed information on the event",
+    "approximate_unaggregated": {
+      "type": "integer",
+      "title": "Approximate Unaggregated",
+      "description": "The number of matching events used to construct the processes which will be equivalent to Num Found",
+      "order": 7
+    },
+    "completed": {
+      "type": "integer",
+      "title": "Completed",
+      "description": "The number of searchers that have reported their results",
+      "order": 5
+    },
+    "contacted": {
+      "type": "integer",
+      "title": "Contacted",
+      "description": "The number of searchers contacted for this query",
+      "order": 6
+    },
+    "num_aggregated": {
+      "type": "integer",
+      "title": "Num Aggregated",
+      "description": "The number of processes that were constructed from the events which will be equal or greater than Num Available",
+      "order": 4
+    },
+    "num_available": {
+      "type": "integer",
+      "title": "Num Available",
+      "description": "Number of found results able to be paginated",
+      "order": 3
+    },
+    "num_found": {
+      "type": "integer",
+      "title": "Num Found",
+      "description": "Number of results found",
       "order": 2
+    },
+    "results": {
+      "type": "array",
+      "title": "Results",
+      "description": "Detailed information on the event",
+      "items": {
+        "$ref": "#/definitions/event_info"
+      },
+      "order": 8
     },
     "success": {
       "type": "boolean",
@@ -105,12 +150,9 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "order": 50
         },
         "device_name": {
-          "type": "array",
+          "type": "string",
           "title": "Device Name",
           "description": "Device name",
-          "items": {
-            "type": "string"
-          },
           "order": 54
         },
         "device_os": {
@@ -395,12 +437,9 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "order": 33
         },
         "process_name": {
-          "type": "array",
+          "type": "string",
           "title": "Process Name",
           "description": "Process name",
-          "items": {
-            "type": "string"
-          },
           "order": 2
         },
         "process_pid": {
