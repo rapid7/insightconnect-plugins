@@ -85,7 +85,7 @@ class MockCbEnterpriseResponseAPI:
         actual_joined_path = os.path.join(actual_path, "payloads/uninstall_sensors_get.json")
         get_messages_from_user_payload = read_file_to_string(actual_joined_path, False)
         if uri == "/api/v1/sensor/1":
-            return MockResponse(get_messages_from_user_payload, 200)
+            return get_messages_from_user_payload
         elif uri == "/api/v1/sensor/150":
             raise ObjectNotFoundError(uri)
         elif uri == "/api/v1/sensor/bad":
@@ -96,7 +96,7 @@ class MockCbEnterpriseResponseAPI:
         actual_joined_path = os.path.join(actual_path, "payloads/uninstall_sensors_get.json")
         get_messages_from_user_payload = read_file_to_string(actual_joined_path, True)
         if uri == "/api/v1/sensor/1" and body == get_messages_from_user_payload:
-            return MockResponse(get_messages_from_user_payload, 204)
+            return {}
         elif uri == "/api/v1/sensor/150":
             raise ServerError(404, "Invalid Sensor")
         elif uri == "/api/v1/sensor/bad":
