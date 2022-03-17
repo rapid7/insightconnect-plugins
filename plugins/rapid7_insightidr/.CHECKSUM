@@ -1,7 +1,7 @@
 {
-	"spec": "857f4c9c3a03dc5135c7f8f0e82e3835",
-	"manifest": "1429256a3a10ddf8ca003ed88b6f7e94",
-	"setup": "c0936d8a3a6342746cbad617c2ee3496",
+	"spec": "b535119a3aa975285bf164b20334a0cf",
+	"manifest": "4c6d8df1c8edef50822433da5bcceaea",
+	"setup": "8976b03a4c4f09d03198af991c137913",
 	"schemas": [
 		{
 			"identifier": "add_indicators_to_a_threat/schema.py",
@@ -9,11 +9,11 @@
 		},
 		{
 			"identifier": "advanced_query_on_log/schema.py",
-			"hash": "9574167e905686edeff81311376bad10"
+			"hash": "4fb724585e7ed29b4f9f189fd7f5502d"
 		},
 		{
 			"identifier": "advanced_query_on_log_set/schema.py",
-			"hash": "ca090916657bb82a4a8dd1283d4a4a2d"
+			"hash": "687d80adc99c57bea51106fc91b38a46"
 		},
 		{
 			"identifier": "assign_user_to_investigation/schema.py",
@@ -41,7 +41,7 @@
 		},
 		{
 			"identifier": "query/schema.py",
-			"hash": "346df336b3848609eec53f1565e8285b"
+			"hash": "18e107ccc21975ea1ddf106786f539d8"
 		},
 		{
 			"identifier": "set_status_of_investigation_action/schema.py",
@@ -50,6 +50,38 @@
 		{
 			"identifier": "connection/schema.py",
 			"hash": "45d7934b0faa77cca06d13a6f1d0a812"
+		},
+		{
+			"identifier": "komand/schema.py",
+			"hash": "37985d79c6d8a2b36ddb69e12ee6e0bb"
+		},
+		{
+			"identifier": "hello/schema.py",
+			"hash": "b90d03b9142c388ea4b26b9cd2f0c37e"
+		},
+		{
+			"identifier": "return_bad_json/schema.py",
+			"hash": "7f2a6015db1c8dd1dde0a2df4bd947c2"
+		},
+		{
+			"identifier": "throw_exception/schema.py",
+			"hash": "0f3fb02850381992580983f15bff1d53"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "3e24424e9071e11e15cc6d732ccd34dc"
+		},
+		{
+			"identifier": "hello_trigger/schema.py",
+			"hash": "2f2cf5e92c72551042c5fccdbecf0e89"
+		},
+		{
+			"identifier": "return_bad_json_trigger/schema.py",
+			"hash": "6f897a989652d327a62f35eee0f2f485"
+		},
+		{
+			"identifier": "throw_exception_trigger/schema.py",
+			"hash": "a6d9bc70c4e5d9120fa39abf37dcd17c"
 		}
 	]
 }

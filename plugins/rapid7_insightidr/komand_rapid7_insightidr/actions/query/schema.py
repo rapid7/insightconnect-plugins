@@ -226,7 +226,7 @@ class QueryOutput(komand.Output):
           "title": "Labels",
           "description": "List of labels",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/label"
           },
           "order": 1
         },
@@ -421,6 +421,47 @@ class QueryOutput(komand.Output):
               "title": "RTP State",
               "description": "RTP state",
               "order": 15
+            }
+          }
+        },
+        "label": {
+          "type": "object",
+          "title": "label",
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "ID",
+              "description": "Label ID",
+              "order": 1
+            },
+            "links": {
+              "type": "array",
+              "title": "Links",
+              "description": "Label links",
+              "items": {
+                "$ref": "#/definitions/link"
+              },
+              "order": 2
+            }
+          },
+          "definitions": {
+            "link": {
+              "type": "object",
+              "title": "link",
+              "properties": {
+                "href": {
+                  "type": "string",
+                  "title": "HREF",
+                  "description": "HREF",
+                  "order": 2
+                },
+                "rel": {
+                  "type": "string",
+                  "title": "Relation",
+                  "description": "Relation",
+                  "order": 1
+                }
+              }
             }
           }
         },
@@ -641,6 +682,47 @@ class QueryOutput(komand.Output):
                   "order": 15
                 }
               }
+            }
+          }
+        }
+      }
+    },
+    "label": {
+      "type": "object",
+      "title": "label",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "description": "Label ID",
+          "order": 1
+        },
+        "links": {
+          "type": "array",
+          "title": "Links",
+          "description": "Label links",
+          "items": {
+            "$ref": "#/definitions/link"
+          },
+          "order": 2
+        }
+      },
+      "definitions": {
+        "link": {
+          "type": "object",
+          "title": "link",
+          "properties": {
+            "href": {
+              "type": "string",
+              "title": "HREF",
+              "description": "HREF",
+              "order": 2
+            },
+            "rel": {
+              "type": "string",
+              "title": "Relation",
+              "description": "Relation",
+              "order": 1
             }
           }
         }

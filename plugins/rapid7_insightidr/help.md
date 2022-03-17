@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|InsightIDR API key|None|4472f2g7-991z-4w70-li11-7552w8qm0266|
-|url|string|https://example.com|True|The URL endpoint for InsightIDR. e.g. https://<REGION_CODE>.api.insight.rapid7.com|None|https://example.com|
+|url|string|https://us.api.insight.rapid7.com|True|The URL endpoint for InsightIDR. e.g. https://<REGION_CODE>.api.insight.rapid7.com|None|https://us.api.insight.rapid7.com|
 
 Example input:
 
@@ -108,7 +108,7 @@ Example input:
 
 ```
 {
-  "log": "Firewall Activity",
+  "log_set": "Firewall Activity",
   "query": "where(user=adagentadmin, loose)",
   "relative_time": "Last 5 Minutes",
   "time_from": "01-01-2020T00:00:00",

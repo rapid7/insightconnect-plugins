@@ -135,6 +135,15 @@ types:
       title: HREF
       description: HREF
       type: string
+  label:
+    id:
+      title: ID
+      description: Label ID
+      type: string
+    links:
+      title: Links
+      description: Label links
+      type: "[]link"
   eventData:
     oaState:
       title: OA State
@@ -319,15 +328,6 @@ types:
       type: string
       description: REL
       required: false
-  label:
-    id:
-      title: ID
-      description: Label ID
-      type: string
-    links:
-      title: Links
-      description: Label links
-      type: "[]link"
   user_data:
     platform_managed:
       title: Platform Managed
