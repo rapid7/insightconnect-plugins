@@ -9,3 +9,8 @@ class Endpoint:
     LISTALERTS = COMMON_URI + "incidents/{}/alerts?api-version={}"
     LISTBOOKMARKS = COMMON_URI + "incidents/{}/bookmarks?api-version={}"
     LISTENTITIES = COMMON_URI + "incidents/{}/entities?api-version={}"
+    # Comment related URLs
+    GETCOMMENT = COMMON_URI + "incidents/{}/comments/{}?api-version={}"
+    LISTCOMMENTS = COMMON_URI + "incidents/{}/comments?api-version={}"
+    CREATEUPDATECOMMENT = COMMON_URI + "incidents/{}/comments/{}?api-version={}"
+    DELETECOMMENT = COMMON_URI + "incidents/{}/comments/{}?api-version={}"

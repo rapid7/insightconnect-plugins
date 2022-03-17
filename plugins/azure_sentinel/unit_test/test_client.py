@@ -214,3 +214,99 @@ class TestClient(TestCase):
                 mock.call("POST", result_url, self.client.headers, params={}),
             ]
         )
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_get_comment(self, mock_get):
+        incident_comment_id = "comment1"
+        incident_id = "incident1"
+        group = "group1"
+        workspace = "workspace1"
+        subscription_id = "1234"
+        mock_get.return_value = (200, {})
+        api_version = "2021-04-01"
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.get_comment(incident_id, incident_comment_id, group, workspace, subscription_id)
+        result_url = Endpoint.GETCOMMENT.format(
+            subscription_id,
+            group,
+            workspace,
+            incident_id,
+            incident_comment_id,
+            api_version,
+        )
+        mock_get.assert_called_once_with("GET", result_url, self.client.headers)
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_list_entities(self, mock_get):
+        mock_get.return_value = {}
+        group = "group1"
+        incident_id = "incident1"
+        workspace = "workspace1"
+        subscription_id = "1234"
+        mock_get.return_value = (204, {})
+        api_version = "2021-04-01"
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.logger = logger
+        self.client.list_comments(incident_id, group, workspace, subscription_id)
+        result_url = Endpoint.LISTCOMMENTS.format(
+            subscription_id,
+            group,
+            workspace,
+            incident_id,
+            api_version,
+        )
+
+        mock_get.assert_has_calls(
+            [
+                mock.call("GET", result_url, self.client.headers, params={}),
+            ]
+        )
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_create_update_incident(self, mock_get):
+        payload = {
+            "properties": {
+                "message": "Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur."
+            }
+        }
+        incident_id = "incident1"
+        incident_comment_id = "comment1"
+        group = "group1"
+        workspace = "workspace1"
+        subscription_id = "123-123-123"
+        api_version = "2021-04-01"
+        mock_get.return_value = (200, {})
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.create_update_comment(
+            incident_id, incident_comment_id, group, workspace, subscription_id, **payload
+        )
+        result_url = Endpoint.CREATEUPDATECOMMENT.format(
+            subscription_id, group, workspace, incident_id, incident_comment_id, api_version
+        )
+
+        mock_get.assert_called_once_with("PUT", result_url, headers=self.client.headers, payload=payload)
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_delete_comment(self, mock_get):
+        incident_comment_id = "comment1"
+        incident_id = "incident1"
+        group = "group1"
+        workspace = "workspace1"
+        subscription_id = "1234"
+        mock_get.return_value = (200, {})
+        api_version = "2021-04-01"
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.delete_comment(incident_id, incident_comment_id, group, workspace, subscription_id)
+        result_url = Endpoint.DELETECOMMENT.format(
+            subscription_id,
+            group,
+            workspace,
+            incident_id,
+            incident_comment_id,
+            api_version,
+        )
+        mock_get.assert_called_once_with("DELETE", result_url, self.client.headers)

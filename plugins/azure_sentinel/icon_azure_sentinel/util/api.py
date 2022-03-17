@@ -102,8 +102,14 @@ class AzureSentinelClient(AzureClient):
                 raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
             if error.response.status_code == 404:
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND)
+            if error.response.status_code == 409:
+                raise PluginException(
+                    cause="Conflicted state of the object",
+                    assistance=error.response.json().get("error", {}).get("message"),
+                )
             if error.response.status_code >= 500:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR)
+            raise PluginException(cause=error.response.json().get("error"))
         except requests.exceptions.Timeout:
             raise PluginException(preset=PluginException.Preset.TIMEOUT)
 
@@ -259,3 +265,87 @@ class AzureSentinelClient(AzureClient):
         )
         results = self._list_all("POST", final_uri, type_="entities")
         return [return_non_empty(entity) for entity in results]
+
+    def get_comment(
+        self,
+        incident_id: str,
+        incident_comment_id: str,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        api_version: str = "2021-04-01",
+    ):
+        uri = Endpoint.GETCOMMENT
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            incident_id,
+            incident_comment_id,
+            api_version,
+        )
+        _, result = self._call_api("GET", final_uri, self.headers)
+        return return_non_empty(result)
+
+    def list_comments(
+        self,
+        incident_id: str,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        api_version: str = "2021-04-01",
+    ) -> List:
+        uri = Endpoint.LISTCOMMENTS
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            incident_id,
+            api_version,
+        )
+        results = self._list_all("GET", final_uri)
+        return [return_non_empty(result) for result in results]
+
+    def create_update_comment(
+        self,
+        incident_id: str,
+        incident_comment_id: str,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        api_version: str = "2021-04-01",
+        **kwargs,
+    ):
+        uri = Endpoint.CREATEUPDATECOMMENT
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            incident_id,
+            incident_comment_id,
+            api_version,
+        )
+        data = kwargs
+        _, result = self._call_api("PUT", final_uri, headers=self.headers, payload=data)
+        return result
+
+    def delete_comment(
+        self,
+        incident_id: str,
+        incident_comment_id: str,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        api_version: str = "2021-04-01",
+    ):
+        uri = Endpoint.DELETECOMMENT
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            incident_id,
+            incident_comment_id,
+            api_version,
+        )
+        status_code, _ = self._call_api("DELETE", final_uri, self.headers)
+        return status_code

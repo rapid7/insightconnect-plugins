@@ -34,15 +34,23 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
+            self.add_action(actions.CreateUpdateComment())
+
             self.add_action(actions.CreateUpdateIncident())
 
+            self.add_action(actions.DeleteComment())
+
             self.add_action(actions.DeleteIncident())
+
+            self.add_action(actions.GetComment())
 
             self.add_action(actions.GetIncident())
 
             self.add_action(actions.ListAlerts())
 
             self.add_action(actions.ListBookmarks())
+
+            self.add_action(actions.ListComments())
 
             self.add_action(actions.ListEntities())
 

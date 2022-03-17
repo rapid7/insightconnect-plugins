@@ -8,7 +8,7 @@ support: community
 supported_versions: [2021-04-01]
 status: []
 description: Microsoft Azure Sentinel is a cloud-native SIEM that provides intelligent security analytics for your entire enterprise, powered by AI
-version: 1.0.0
+version: 1.1.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/azure_sentinel
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -22,7 +22,7 @@ tags:
 hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [azure, incidents, cloud, microsoft]
-  features: [create incident, delete incident, get incident, list incidents, list alerts, list bookmarks, list entities]
+  features: [create incident, delete incident, get incident, list incidents, list alerts, list bookmarks, list entities, get comment, list comments, delete comment, create or update comment]
 types:
   # Common types
   CreatedByType:
@@ -474,26 +474,90 @@ types:
       description: Azure resource type
       type: string
   Incident:
-      id:
-        title: ID 
-        description: Full incident ID
-        type: string
-      name:
-        title: Name 
-        description: Incident name - short ID
-        type: string
-      type:
-        title: Type
-        description: Incident type
-        type: string
-      etag:
-        title: Etag
-        description: Etag
-        type: string
-      properties:
-        title: Incident Properties
-        description: Incident properties object
-        type: IncidentProperties
+    id:
+      title: ID 
+      description: Full incident ID
+      type: string
+    name:
+      title: Name 
+      description: Incident name - short ID
+      type: string
+    type:
+      title: Type
+      description: Incident type
+      type: string
+    etag:
+      title: Etag
+      description: Etag
+      type: string
+    properties:
+      title: Incident Properties
+      description: Incident properties object
+      type: IncidentProperties
+  ClientInfo:
+    email:
+      description: The email of the client
+      title: Email
+      type: string
+    name:
+      description: The name of the client
+      title: Name
+      type: string
+    objectId:
+      description: The object id of the client
+      title: Object ID
+      type: string
+    userPrincipaName:
+      description: The user principal name of the client
+      title: User Principa Name
+      type: string
+  CommentProperties:
+    author:
+      description: Describes the client that created the comment
+      title: Author
+      type: ClientInfo
+    createdTimeUtc:
+      description: The time the comment was created
+      title: Created Time UTC
+      type: date
+    lastModifiedTimeUtc:
+      description: The time the comment was updated
+      title: Last Modified Time UTC
+      type: date
+    message:
+      description: The comment message
+      title: Message
+      type: string
+    name:
+      description: The name of the resource
+      title: Name
+      type: string
+    systemData:
+      description: Azure Resource Manager metadata containing createdBy and modifiedBy
+        information
+      title: System Data
+      type: SystemData
+  IncidentComment:
+    etag:
+      title: Etag
+      description: Entity tag of the resource
+      type: string
+    id:
+      title: ID
+      description: Resource ID
+      type: string
+    name:
+      title: Name
+      description: The name of the resource
+      type: string
+    type:
+      description: The type of the resource
+      title: Type
+      type: string
+    properties:
+      description: Comment properties
+      title: Properties
+      type: CommentProperties
 connection:
   client_id:
     title: Client ID
@@ -516,6 +580,179 @@ connection:
     required: true
     example: 5ceea899-ae8c-4ff1-fffe-353646eeeff0
 actions:
+  get_comment:
+    title: Get Comment
+    description: Gets a comment for a given incident
+    input:
+      incidentCommentId:
+        title: Incident Comment ID
+        required: true
+        description: Incident Comment ID
+        type: string
+        example: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+      incidentId:
+        title: Incident ID
+        required: true
+        description: Incident ID
+        type: string
+        example: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+      resourceGroupName:
+        title: Resource Group Name
+        required: true
+        description: The name of the resource group within the user's subscription. The name is case insensitive
+        type: string
+        example: resourcegroup1
+      subscriptionId:
+        title: Subscription ID
+        required: true
+        description: Azure subscription ID
+        type: string
+        example: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+      workspaceName:
+        title: Workspace Name
+        required: true
+        description: The name of the workspace
+        type: string
+        example: workspace1
+    output:
+      comment:
+        title: Comment
+        description: Requested comment
+        type: IncidentComment
+  list_comments:
+    title: List Comments
+    description: List all the comment of the requested incident 
+    input:
+      incidentId:
+        title: Incident ID
+        required: true
+        description: Incident ID
+        type: string
+        example: 09b341e0-b2db-464e-9fef-c950b4eafa56
+      resourceGroupName:
+        title: Resource Group Name
+        required: true
+        description: The name of the resource group within the user's subscription
+        type: string
+        example: resourcegroup1
+      subscriptionId:
+        title: Subscription ID
+        required: true
+        description: Azure subscription ID
+        type: string
+        example: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+      workspaceName:
+        title: Workspace Name
+        required: true
+        description: The name of the workspace
+        type: string
+        example: workspace1
+      filter:
+        title: Filter 
+        required: false
+        description: Filters the results, based on a Boolean condition
+        type: string
+      orderBy:
+        title: Order By
+        required: false
+        description: sorts the results 
+        type: string
+    output:
+      comments:
+        title: Comments
+        description: List of comment objects
+        type: "[]IncidentComment"
+  create_update_comment:
+    title: Create Update Comment
+    description: Creates or updates a comment for a given incident 
+    input:
+      incidentCommentId:
+        title: Incident Comment ID
+        required: true
+        description: Incident Comment ID
+        type: string
+        example: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+      incidentId:
+        title: Incident ID
+        required: true
+        description: Incident ID
+        type: string
+        example: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+      resourceGroupName:
+        title: Resource Group Name
+        required: true
+        description: The name of the resource group within the user's subscription
+        type: string
+        example: resourcegroup1
+      subscriptionId:
+        title: Subscription ID
+        required: true
+        description: Azure subscription ID
+        type: string
+        example: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+      workspaceName:
+        title: Workspace Name
+        required: true
+        description: The name of the workspace
+        type: string
+        example: workspace1
+      etag:
+        title: Etag
+        description: Entity tag of the azure resource
+        type: string
+        example: "0300bf09-0000-0000-0000-5c37296e0000"
+      properties:
+        title: Properties
+        description: Comment properties
+        required: true
+        type: CommentProperties
+        example: "{\"message\": \"some message\"}"
+    output:
+      comment:
+        title: Comment
+        description: Newly created incident comment 
+        type: IncidentComment
+  delete_comment:
+    title: Delete Comment
+    description: Deletes a comment for a given incident 
+    input:
+      incidentCommentId:
+        title: Incident Comment ID
+        required: true
+        description: Incident Comment ID
+        type: string
+        example: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+      incidentId:
+        title: Incident ID
+        required: true
+        description: Incident ID
+        type: string
+        example: 73e01a99-5cd7-4139-a149-9f2736ff2ab5
+      resourceGroupName:
+        title: Resource Group Name
+        required: true
+        description: The name of the resource group within the user's subscription
+        type: string
+        example: resourcegroup1
+      subscriptionId:
+        title: Subscription ID
+        required: true
+        description: Azure subscription ID
+        type: string
+        example: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0
+      workspaceName:
+        title: Workspace Name
+        required: true
+        description: The name of the workspace
+        type: string
+        example: workspace1
+    output:
+      status:
+        title: Status
+        description: Status code of the requested operation
+        type: integer
+        required: true
+        example: 200
   create_update_incident:
     title: Create or Update Incident
     description: Creates a new incident or updates an existing incident 

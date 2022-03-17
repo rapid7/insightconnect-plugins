@@ -10,6 +10,11 @@ Azure Sentinel is Microsoft's' automated security service.
 * Listing incidents for a given workspace
 * Listing bookmarks for a given incident
 * Listing alerts for a given incident
+* Creating and updating incident comments
+* Deleting incident comments
+* Listing incident comments
+* Retriveing incident's details
+
 
 # Requirements
 
@@ -44,6 +49,158 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Delete Comment
+
+This action deletes a comment for a given incident.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|incidentCommentId|string|None|True|Incident Comment ID|None|4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014|
+|incidentId|string|None|True|Incident ID|None|73e01a99-5cd7-4139-a149-9f2736ff2ab5|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup1|
+|subscriptionId|string|None|True|Azure subscription ID|None|d0cfe6b2-9ac0-4464-9919-dccaee2e48c0|
+|workspaceName|string|None|True|The name of the workspace|None|workspace1|
+
+Example input:
+
+```
+{
+  "incidentCommentId": "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014",
+  "incidentId": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+  "resourceGroupName": "resourcegroup1",
+  "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+  "workspaceName": "workspace1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|status|integer|True|Status code of the requested operation|
+
+Example output:
+
+```
+```
+
+#### Create Update Comment
+
+This action creates or updates a comment for a given incident.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|etag|string|None|False|Entity tag of the azure resource|None|0300bf09-0000-0000-0000-5c37296e0000|
+|incidentCommentId|string|None|True|Incident Comment ID|None|4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014|
+|incidentId|string|None|True|Incident ID|None|73e01a99-5cd7-4139-a149-9f2736ff2ab5|
+|properties|CommentProperties|None|True|Comment properties|None|{"message": "some message"}|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup1|
+|subscriptionId|string|None|True|Azure subscription ID|None|d0cfe6b2-9ac0-4464-9919-dccaee2e48c0|
+|workspaceName|string|None|True|The name of the workspace|None|workspace1|
+
+Example input:
+
+```
+{
+  "etag": "0300bf09-0000-0000-0000-5c37296e0000",
+  "incidentCommentId": "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014",
+  "incidentId": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+  "properties": "{\"message\": \"some message\"}",
+  "resourceGroupName": "resourcegroup1",
+  "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+  "workspaceName": "workspace1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|comment|IncidentComment|False|Newly created incident comment|
+
+Example output:
+
+```
+```
+
+#### List Comments
+
+This action is used to list all the comment of the requested incident.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|filter|string|None|False|Filters the results, based on a Boolean condition|None|None|
+|incidentId|string|None|True|Incident ID|None|09b341e0-b2db-464e-9fef-c950b4eafa56|
+|orderBy|string|None|False|sorts the results|None|None|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup1|
+|subscriptionId|string|None|True|Azure subscription ID|None|73e01a99-5cd7-4139-a149-9f2736ff2ab5|
+|workspaceName|string|None|True|The name of the workspace|None|workspace1|
+
+Example input:
+
+```
+{
+  "incidentId": "09b341e0-b2db-464e-9fef-c950b4eafa56",
+  "resourceGroupName": "resourcegroup1",
+  "subscriptionId": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+  "workspaceName": "workspace1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|comments|[]IncidentComment|False|List of comment objects|
+
+Example output:
+
+```
+```
+
+#### Get Comment
+
+This action gets a comment for a given incident.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|incidentCommentId|string|None|True|Incident Comment ID|None|4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014|
+|incidentId|string|None|True|Incident ID|None|73e01a99-5cd7-4139-a149-9f2736ff2ab5|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription. The name is case insensitive|None|resourcegroup1|
+|subscriptionId|string|None|True|Azure subscription ID|None|d0cfe6b2-9ac0-4464-9919-dccaee2e48c0|
+|workspaceName|string|None|True|The name of the workspace|None|workspace1|
+
+Example input:
+
+```
+{
+  "incidentCommentId": "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014",
+  "incidentId": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
+  "resourceGroupName": "resourcegroup1",
+  "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+  "workspaceName": "workspace1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|comment|IncidentComment|False|Requested comment|
+
+Example output:
+
+```
+```
 
 #### List Entities
 
@@ -694,6 +851,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.0 - New actions: Create or Update Comment, Delete Comment, List Comments, Get Comment
 * 1.0.0 - Initial plugin (Actions: Create or Update Incident, Delete Incident, List Incidents, Get Incident, List Alerts, List Bookmarks, List Entities)
 
 # Links
