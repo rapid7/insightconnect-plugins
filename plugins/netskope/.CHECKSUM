@@ -1,0 +1,51 @@
+{
+	"spec": "5fb1119598a7fa2cd6390d4472cd26d3",
+	"manifest": "a0228e2da4330999a834aa56676febaf",
+	"setup": "bbaa07fd7250b5a5c535d90194b3509a",
+	"schemas": [
+		{
+			"identifier": "apply_pending_url_list_changes/schema.py",
+			"hash": "84775e408466b6a8e349d3d4c5b5f91a"
+		},
+		{
+			"identifier": "create_new_url_list/schema.py",
+			"hash": "51106374d7b6b28acb3db7a9e1ab283a"
+		},
+		{
+			"identifier": "delete_url_list_by_id/schema.py",
+			"hash": "fa9a41e88f4ccebf10a1b4a5b4129588"
+		},
+		{
+			"identifier": "get_all_url_list/schema.py",
+			"hash": "802c07d77c9c29707d1b050e44006c26"
+		},
+		{
+			"identifier": "get_single_user_confidence_index/schema.py",
+			"hash": "dbdc827eda7943dde9bd8cc0a7237e3f"
+		},
+		{
+			"identifier": "get_url_list_by_id/schema.py",
+			"hash": "42c7022b3763bf7a60d64d2643047667"
+		},
+		{
+			"identifier": "patch_url_list_by_id/schema.py",
+			"hash": "63204cc88b1dfb05a2e82733b4852fa7"
+		},
+		{
+			"identifier": "replace_url_list_by_id/schema.py",
+			"hash": "a4b554245607cbbd3e066a7404c726f8"
+		},
+		{
+			"identifier": "update_file_hash_list/schema.py",
+			"hash": "fe65bb1be95cbf3459ebb76ff0ecd37b"
+		},
+		{
+			"identifier": "upload_json_config/schema.py",
+			"hash": "586f0f87de3e66c770c86e145856b9aa"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "7c0a1ea598b740f8bfdc0ea04fb5f6ec"
+		}
+	]
+}

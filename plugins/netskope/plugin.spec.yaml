@@ -1,0 +1,500 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: netskope
+title: Netskope
+description: This plugin allows users to create, read, update, and delete URL lists in their Netskope environment
+version: 1.0.0
+vendor: rapid7
+support: rapid7
+supported_versions: ["2022-02-11"]
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/netskope
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.netskope.com/
+tags:
+  - netskope
+  - cloud
+  - security
+hub_tags:
+  use_cases: [cloud_security]
+  keywords: [endpoint]
+  features: []
+enable_cache: false
+types:
+  data:
+    urls:
+      title: URLs
+      description: List of URLs
+      type: "[]string"
+      required: true
+    type:
+      title: URL List Category
+      description: Category of URL list
+      type: string
+      required: true
+  urllist:
+    id:
+      title: ID
+      description: URL list identifier
+      type: integer
+      required: true
+    name:
+      title: Name
+      description: URL list name
+      type: string
+      required: true
+    data:
+      title: Data
+      description: Data containing URLs and type
+      type: data
+      required: false
+    modify_type:
+      title: Modify Type
+      description: Shows last modification type. Expected values are Created, Edited, Deleted
+      type: string
+      required: true
+    modify_by:
+      title: Modify By
+      description: Name of the URL list modifier
+      type: string
+      required: true
+    modify_time:
+      title: Modify Time
+      description: Last URL list modification time
+      type: date
+      required: true
+    pending:
+      title: Pending
+      description: URL list status of pending (1) and applied (0)
+      type: integer
+      required: true
+  confidence:
+    start:
+      title: Start
+      description: Numeric value representing epoch timestamp 
+      type: integer
+      required: true
+    confidenceScore:
+      title: Confidence Score
+      description: Numeric value representing user's confidence score
+      type: integer
+      required: true
+connection:
+  tenant:
+    title: Tenant
+    description: Owner's name that is included in URL
+    type: string
+    required: true
+    example: exampletenant
+  api_key_v1:
+    title: API Key v1
+    description: Netskope authorization token for v1 API
+    type: credential_secret_key
+    required: true
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
+  api_key_v2:
+    title: API Key v2
+    description: Netskope authorization token for v2 API
+    type: credential_secret_key
+    required: true
+    example: ef50c6bx9umaik9agvoxtoqec2fg9f0y
+actions:
+  update_file_hash_list:
+    title: Update a File Hash List
+    description: Updates the File Hash List with the values provided
+    input:
+      name:
+        title: Name
+        description: Name of an existing File Hash List shown in the Netskope UI on the File Hash List page
+        type: string
+        required: true
+        example: ExampleExistingFileHashList
+      list:
+        title: Hashes
+        description: Comma-separated list of file hashes (MD5 or SHA256), with the maximum size of the list being 8MB
+        type: "[]string"
+        required: true
+        example: '["e28eb9739b6e84d0f796e3acc0f5b71e", "e28eb9739b6e84d0f697e3acc0f5b71a", "e28eb9839b6e74d0f696e3acc0f6b710"]'
+    output:
+      status:
+        title: Status
+        description: API response status
+        type: string
+        required: true
+      message:
+        title: Message
+        description: API response message
+        type: string
+        required: true
+  get_all_url_list:
+    title: Get All URL Lists
+    description: Get all applied or pending URL lists
+    input:
+      status:
+        title: Status
+        description: Status of URL lists to be received
+        type: string
+        enum:
+          - any
+          - applied
+          - pending
+        required: true
+        example: applied
+        default: any
+    output:
+      urllists:
+        title: URL Lists
+        description: Contains list of URL list objects
+        type: "[]urllist"
+        required: true
+  create_new_url_list:
+    title: Create a New URL List
+    description: Create a new URL list configuration
+    input:
+      name:
+        title: Name
+        description: Name of new URL list
+        type: string
+        required: true
+        example: ExampleName
+      urls:
+        title: URLs
+        description: List of URLs
+        type: "[]string"
+        required: true
+        example: '["https://example.com", "https://example.com"]'
+      type:
+        title: URL List Category
+        description: Category of URL list
+        type: string
+        enum:
+          - exact
+          - regex
+        required: true
+        example: exact
+    output:
+      id:
+        title: ID
+        description: URL list identifier
+        type: integer
+        required: true
+      name:
+        title: Name
+        description: URL list name
+        type: string
+        required: true
+      data:
+        title: Data
+        description: Data containing URLs and type
+        type: data
+        required: true
+      modify_type:
+        title: Modify Type
+        description: Shows last modification type. Expected values are Created, Edited, Deleted
+        type: string
+        required: true
+      modify_by:
+        title: Modify By
+        description: Name of the URL list modifier
+        type: string
+        required: true
+      modify_time:
+        title: Modify Time
+        description: Last URL list modification time
+        type: date
+        required: true
+      pending:
+        title: Pending
+        description: URL list status of pending (1) and applied (0)
+        type: integer
+        required: true
+  upload_json_config:
+    title: Upload JSON File Configurations
+    description: Send multiple configurations via a JSON file
+    input:
+      urllist:
+        title: URL List
+        description: File that includes urllist in JSON format, which must have extension as *.json
+        type: file
+        required: true
+        example: '{"items": [{"name": "string", "data": {"urls": ["https://example.com"], "type": "exact" }}]}'
+    output:
+      uploaded_urllist:
+        title: Uploaded URL Lists
+        description: Contains list of uploaded URL list objects
+        type: "[]urllist"
+        required: true
+  get_url_list_by_id:
+    title: Get URL List by ID
+    description: Retrieve the configuration of a URL list by ID
+    input:
+      id:
+        title: ID
+        description: ID of the URL list
+        type: integer
+        required: true
+        example: 1
+    output:
+      id:
+        title: ID
+        description: URL list identifier
+        type: integer
+        required: true
+      name:
+        title: Name
+        description: URL list name
+        type: string
+        required: true
+      data:
+        title: Data
+        description: Data containing URLs and type
+        type: data
+        required: true
+      modify_type:
+        title: Modify Type
+        description: Shows last modification type. Expected values are Created, Edited, Deleted
+        type: string
+        required: true
+      modify_by:
+        title: Modify By
+        description: Name of the URL list modifier
+        type: string
+        required: true
+      modify_time:
+        title: Modify Time
+        description: Last URL list modification time
+        type: date
+        required: true
+      pending:
+        title: Pending
+        description: URL list status of pending (1) and applied (0)
+        type: integer
+        required: true
+  replace_url_list_by_id:
+    title: Replace URL List Configuration by ID
+    description: Replace the configuration of the given URL list by ID
+    input:
+      id:
+        title: ID
+        description: ID of the URL list
+        type: integer
+        required: true
+        example: 1
+      name:
+        title: Name
+        description: Name of replaced URL list
+        type: string
+        required: true
+        example: ExampleName
+      urls:
+        title: URLs
+        description: List that contains URLs
+        type: "[]string"
+        required: true
+        example: '["https://example.com", "https://example.com"]'
+      type:
+        title: URL List Category
+        description: Category of URL list
+        type: string
+        enum:
+          - exact
+          - regex
+        required: true
+        example: exact
+    output:
+      id:
+        title: ID
+        description: URL list identifier
+        type: integer
+        required: true
+      name:
+        title: Name
+        description: URL list name
+        type: string
+        required: true
+      data:
+        title: Data
+        description: Data containing URLs and type
+        type: data
+        required: true
+      modify_type:
+        title: Modify Type
+        description: Shows last modification type. Expected values are Created, Edited, Deleted
+        type: string
+        required: true
+      modify_by:
+        title: Modify By
+        description: Name of the URL list modifier
+        type: string
+        required: true
+      modify_time:
+        title: Modify Time
+        description: Last URL list modification time
+        type: date
+        required: true
+      pending:
+        title: Pending
+        description: URL list status of pending (1) and applied (0)
+        type: integer
+        required: true
+  delete_url_list_by_id:
+    title: Delete a URL List by ID
+    description: Mark a URL list as pending deletion
+    input:
+      id:
+        title: ID
+        description: ID of the URL list
+        type: integer
+        required: true
+        example: 1
+    output:
+      id:
+        title: ID
+        description: URL list identifier
+        type: integer
+        required: true
+      name:
+        title: Name
+        description: URL list name
+        type: string
+        required: true
+      data:
+        title: Data
+        description: Data containing URLs and type
+        type: data
+        required: true
+      modify_type:
+        title: Modify Type
+        description: Shows last modification type. Expected values are Created, Edited, Deleted
+        type: string
+        required: true
+      modify_by:
+        title: Modify By
+        description: Name of the URL list modifier
+        type: string
+        required: true
+      modify_time:
+        title: Modify Time
+        description: Last URL list modification time
+        type: date
+        required: true
+      pending:
+        title: Pending
+        description: URL list status of pending (1) and applied (0)
+        type: integer
+        required: true
+  patch_url_list_by_id:
+    title: Update URL List by ID
+    description: Update the name, URLs, and/or type of a URL list object
+    input:
+      id:
+        title: ID
+        description: ID of the URL list
+        type: integer
+        required: true
+        example: 1
+      action:
+        title: Action
+        description: Replace or append to current URLs
+        type: string
+        enum:
+          - replace
+          - append
+        required: true
+        example: append
+      name:
+        title: Name
+        description: Name of replaced URL list
+        type: string
+        required: false
+        example: ExampleName
+      urls:
+        title: URLs
+        description: List of URLs
+        type: "[]string"
+        required: false
+        example: '["https://example.com", "https://example.com"]'
+      type:
+        title: URL List Category
+        description: Category of URL list
+        type: string
+        enum:
+          - ""
+          - exact
+          - regex
+        required: false
+        example: exact
+    output:
+      id:
+        title: ID
+        description: URL list identifier
+        type: integer
+        required: true
+      name:
+        title: Name
+        description: URL list name
+        type: string
+        required: true
+      data:
+        title: Data
+        description: Data containing and type
+        type: object
+        required: true
+      modify_type:
+        title: Modify Type
+        description: Shows last modification type. Expected values are Created, Edited, Deleted
+        type: string
+        required: true
+      modify_by:
+        title: Modify By
+        description: Name of the URL list modifier
+        type: string
+        required: true
+      modify_time:
+        title: Modify Time
+        description: Last URL list modification time
+        type: date
+        required: true
+      pending:
+        title: Pending
+        description: URL list status of pending (1) and applied (0)
+        type: integer
+        required: true
+  apply_pending_url_list_changes:
+    title: Apply Pending URL List Changes
+    description: Applies currently pending changes for URL lists
+    output:
+      deployed_urllists:
+        title: Deployed URL Lists
+        description: Contains list of deployed URL lists
+        type: "[]urllist"
+        required: true
+  get_single_user_confidence_index:
+    title: Get Single User's Confidence Index
+    description: Get the confidence index for a user
+    input:
+      username:
+        title: Username
+        description: Username of an existing user
+        type: string
+        required: true
+        example: ExampleUser
+      fromTime:
+        title: From Time
+        description: Numeric value representing the time in epoch timestamp from the beginning of which confidence score values are taken until now (in miliseconds)
+        type: integer
+        required: true
+        example: 1647357793000
+    output:
+      userId:
+        title: User ID
+        description: Identifier of user
+        type: string
+        required: true
+      confidences:
+        title: Confidences
+        description: Contains User Confidence Index with starting score and confidence score
+        type: "[]confidence"
+        required: true
