@@ -7,7 +7,8 @@ vendor: rapid7
 support: community
 status: []
 description: This plugin utilizes Cisco Firepower Management Center to create URL block policies and manage address objects to block hosts
-version: 1.2.0
+version: 2.0.0
+supported_versions: ["6.6.0"]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/cisco_firepower_management_center
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -18,10 +19,94 @@ tags:
 - firepower
 hub_tags:
   use_cases: [vulnerability_management]
-  keywords: [cisco, firesight, firepower]
+  keywords: [firewall, cisco, firesight, firepower]
   features: []
 language: python
 types:
+  os:
+    vendor:
+      title: Vendor
+      description: Vendor
+      type: string
+      required: false
+    name:
+      title: Name
+      description: Name
+      type: string
+      required: false
+    version:
+      title: Version
+      description: Version
+      type: string
+      required: false
+  host:
+    ip_address:
+      title: IP Address
+      description: IP address
+      type: string
+      required: true
+    operating_system:
+      title: Host Operating System
+      description: Host operating system
+      type: os
+      required: false
+  result_details:
+    source_id:
+      title: Source ID
+      description: Application or source ID
+      type: string
+      required: true
+    scanner_id:
+      title: Scanner ID
+      description: Scanner ID for the scanner that obtained the scan results
+      type: string
+      required: true
+    vulnerability_id:
+      title: Vulnerability ID
+      description: Vulnerability ID
+      type: string
+      required: true
+    vulnerability_title:
+      title: Vulnerability Title
+      description: Title of the vulnerability
+      type: string
+      required: true
+    port:
+      title: Port
+      description: Port
+      type: string
+      required: false
+    protocol_id:
+      title: Protocol ID
+      description: Protocol ID
+      type: string
+      required: false
+    description:
+      title: Description
+      description: Description
+      type: string
+      required: false
+    cve_ids:
+      title: CVE IDs
+      description: The identification number associated with the vulnerability in MITRE's Common Vulnerabilities and Exposures (CVE) database (http://www.cve.mitre.org/)
+      type: '[]string'
+      required: false
+    bugtraq_ids:
+      title: Bugtraq IDs
+      description: The identification numbers associated with the vulnerability in the Bugtraq database (http://www.securityfocus.com/bid)
+      type: '[]string'
+      required: false
+  scan_result:
+    host:
+      title: Host
+      description: Add an untracked host to the network map
+      type: host
+      required: false
+    scan_result_details:
+      title: Scan Result Details
+      type: result_details
+      description: Scan result for the host
+      required: false
   url_object:
     name:
       title: Name
@@ -372,13 +457,32 @@ connection:
     default: 443
     required: false
     example: 443
+  host_input_port:
+    title: Host Input Port
+    description: The port number for the provided host used in the Host Input API calls
+    type: integer
+    default: 8307
+    required: false
+    example: 8307
   domain:
     title: Domain
-    description: Cisco FirePower Management Centre Domain
+    description: Cisco FirePower Management Center Domain
     type: string
     default: Global
     required: false
     example: Global
+  certificate:
+    title: Certificate
+    type: bytes
+    description: Base64-encoded certificate to authenticate with the host input API
+    required: true
+    example: VGhpcyBpcyBhIHNhbXBsZSBiYXNlNjQtZW5jb2RlZCBjZXJ0aWZpY2F0ZSB0byBhdXRoZW50aWNhdGUgd2l0aCB0aGUgaG9zdCBpbnB1dCBBUEku
+  certificate_passphrase:
+    title: Certificate Passphrase
+    type: credential_secret_key
+    description: The passphrase to access the certificate
+    required: true
+    example: passphrase
 
 actions:
   block_url_policy:
@@ -390,16 +494,19 @@ actions:
         required: true
         type: "[]url_object"
         description: URL objects to block
+        example: "[{'name': 'example_url', 'url': 'https://example.com'}]"
       access_policy:
         title: Access Policy Name
         required: true
         type: string
-        description: Access Policy name
+        description: Name for the access policy to be created
+        example: Example Access Policy
       rule_name:
         title: Access Rule Name
         required: true
         type: string
-        description: Name for the Access Rule to be created
+        description: Name for the access rule to be created
+        example: Example Access Rule
     output:
       success:
         type: boolean
@@ -474,7 +581,7 @@ actions:
         example: MaliciousHost
       enable_search:
         title: Enable Search
-        description: When enabled, the Address input will accept an IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don’t know the Address Object by its name
+        description: When enabled, the Address input will accept an IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don't know the Address Object by its name
         type: boolean
         required: false
         default: false
@@ -534,3 +641,63 @@ actions:
         description: Returns information about the network group
         type: network_group
         required: false
+  add_scan_result:
+    title: Add Scan Result
+    description: Add a scan result from a third-party vulnerability scanner
+    input:
+      scan_result:
+        title: Scan Result
+        type: scan_result
+        description: The host scan result to be added
+        required: false
+        example: '{"host": {"ip_address": "0.0.0.164", "operating_system": {"name": "Ubuntu", "vendor": "Canonical", "version": "16.04"}}, "scan_result_details": {"description": "Example description", "protocol_id": "6", "scanner_id": "ProductZImport", "source_id": "ProductZ", "vulnerability_id": "943387", "vulnerability_title": "Virus Wire 0"}}'
+      operation:
+        title: Operation
+        description: The operation to be performed when adding scan results. ScanFlush to remove existing scan results or ScanUpdate to keep existing scan results
+        type: string
+        required: true
+        enum:
+          - ScanUpdate
+          - ScanFlush
+        example: ScanUpdate
+    output:
+      errors:
+        description: Number of errors
+        title: Errors
+        type: number
+        required: true
+      commands_processed:
+        description: Number of commands processed
+        title: Commands Processed
+        type: number
+        required: true
+  bulk_add_scan_result:
+    title: Bulk Add Scan Result
+    description: Add scan results from a third-party vulnerability scanner
+    input:
+      scan_results:
+        title: Scan Results
+        type: '[]scan_result'
+        description: Host scan results to be added
+        required: false
+        example: '[{"host": {"ip_address": "0.0.0.164", "operating_system": {"name": "Ubuntu", "vendor": "Canonical", "version": "16.04"}}, "scan_result_details": {"description": "Example description", "protocol_id": "6", "scanner_id": "ProductZImport", "source_id": "ProductZ", "vulnerability_id": "943387", "vulnerability_title": "Virus Wire 0"}}]'
+      operation:
+        title: Operation
+        description: The operation to be performed when adding scan results. ScanFlush to remove existing scan results or ScanUpdate to keep existing scan results
+        type: string
+        required: true
+        enum:
+          - ScanUpdate
+          - ScanFlush
+        example: ScanUpdate
+    output:
+      errors:
+        description: Number of errors
+        title: Errors
+        type: number
+        required: true
+      commands_processed:
+        description: Number of commands processed
+        title: Commands Processed
+        type: number
+        required: true

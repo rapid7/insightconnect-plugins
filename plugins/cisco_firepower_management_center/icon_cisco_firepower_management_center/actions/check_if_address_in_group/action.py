@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import (
     CheckIfAddressInGroupInput,
     CheckIfAddressInGroupOutput,
@@ -12,7 +12,7 @@ import ipaddress
 import validators
 
 
-class CheckIfAddressInGroup(komand.Action):
+class CheckIfAddressInGroup(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="check_if_address_in_group",
@@ -24,7 +24,6 @@ class CheckIfAddressInGroup(komand.Action):
     def run(self, params={}):
         address_to_check = params.get(Input.ADDRESS)
         group_name = params.get(Input.GROUP)
-        enable_search = params.get(Input.ENABLE_SEARCH)
         found = False
         object_names_to_return = []
 
@@ -40,7 +39,7 @@ class CheckIfAddressInGroup(komand.Action):
 
                 return {Output.FOUND: found, Output.ADDRESS_OBJECTS: object_names_to_return}
 
-        if enable_search:
+        if params.get(Input.ENABLE_SEARCH):
             all_objects = self.connection.cisco_firepower_api.get_network_addresses()
             for group_object in address_group_objects:
                 for address_object in all_objects:

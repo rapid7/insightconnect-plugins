@@ -1,0 +1,169 @@
+{
+    "parameters": [
+        [
+            "fqdn",
+            "example.com",
+            "example.com",
+            false,
+            [],
+            {
+                "address_object": {
+                    "links": {
+                        "self": "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/fqdns/00000000-0000-0000-0000-000000000001",
+                        "parent": "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/networkaddresses"
+                    },
+                    "type": "FQDN",
+                    "value": "example.com",
+                    "dnsResolution": "IPV4_AND_IPV6",
+                    "overridable": false,
+                    "name": "example.com",
+                    "id": "00000000-0000-0000-0000-000000000001",
+                    "metadata": {
+                        "timestamp": 0,
+                        "lastUser": {
+                            "name": "admin"
+                        },
+                        "domain": {
+                            "name": "Global",
+                            "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+                            "type": "Domain"
+                        },
+                        "parentType": "NetworkAddress"
+                    }
+                }
+            }
+        ],
+        [
+            "ipv4",
+            "1.1.1.1",
+            "1.1.1.1",
+            false,
+            [],
+            {
+                "address_object": {
+                    "links": {
+                        "self": "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/hosts/00000000-0000-0000-0000-000000000001",
+                        "parent": "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/networkaddresses"
+                    },
+                    "type": "Host",
+                    "value": "1.1.1.1",
+                    "overridable": false,
+                    "name": "1.1.1.1",
+                    "id": "00000000-0000-0000-0000-000000000001",
+                    "metadata": {
+                        "timestamp": 0,
+                        "lastUser": {
+                            "name": "admin"
+                        },
+                        "domain": {
+                            "name": "Global",
+                            "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+                            "type": "Domain"
+                        },
+                        "ipType": "V_4",
+                        "parentType": "NetworkAddress"
+                    }
+                }
+            }
+        ],
+        [
+            "ipv6",
+            "123:45:6::1",
+            "123:45:6::1",
+            false,
+            [],
+            {
+                "address_object": {
+                    "links": {
+                        "self": "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/hosts/00000000-0000-0000-0000-000000000002",
+                        "parent": "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/networkaddresses"
+                    },
+                    "type": "Host",
+                    "value": "123:45:6::1",
+                    "overridable": false,
+                    "name": "123:45:6::1",
+                    "id": "00000000-0000-0000-0000-000000000002",
+                    "metadata": {
+                        "timestamp": 0,
+                        "lastUser": {
+                            "name": "admin"
+                        },
+                        "domain": {
+                            "name": "Global",
+                            "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+                            "type": "Domain"
+                        },
+                        "ipType": "V_6",
+                        "parentType": "NetworkAddress"
+                    }
+                }
+            }
+        ],
+        [
+            "ipv4_cidr",
+            "2.2.2.2/31",
+            "2.2.2.2/31",
+            false,
+            [],
+            {
+                "address_object": {
+                    "links": {
+                        "self": "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/networks/00000000-0000-0000-0000-000000000001",
+                        "parent": "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/networkaddresses"
+                    },
+                    "type": "Network",
+                    "value": "2.2.2.2/31",
+                    "overridable": false,
+                    "name": "2.2.2.2-31",
+                    "id": "00000000-0000-0000-0000-000000000001",
+                    "metadata": {
+                        "timestamp": 0,
+                        "lastUser": {
+                            "name": "admin"
+                        },
+                        "domain": {
+                            "name": "Global",
+                            "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+                            "type": "Domain"
+                        },
+                        "ipType": "V_4",
+                        "parentType": "NetworkAddress"
+                    }
+                }
+            }
+        ],
+        [
+            "ipv6_cidr",
+            "123:45:6::0/127",
+            "123:45:6::0/127",
+            false,
+            [],
+            {
+                "address_object": {
+                    "links": {
+                        "self": "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/networks/00000000-0000-0000-0000-000000000002",
+                        "parent": "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/networkaddresses"
+                    },
+                    "type": "Network",
+                    "value": "123:45:6::/127",
+                    "overridable": false,
+                    "name": "123:45:6::0-127",
+                    "id": "00000000-0000-0000-0000-000000000002",
+                    "metadata": {
+                        "timestamp": 0,
+                        "lastUser": {
+                            "name": "admin"
+                        },
+                        "domain": {
+                            "name": "Global",
+                            "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+                            "type": "Domain"
+                        },
+                        "ipType": "V_6",
+                        "parentType": "NetworkAddress"
+                    }
+                }
+            }
+        ]
+    ]
+}
