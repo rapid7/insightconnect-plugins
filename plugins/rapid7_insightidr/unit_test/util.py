@@ -115,6 +115,11 @@ class Util:
             or args[0] == "https://rapid7.com/log_search/query/logsets/log_id4"
         ):
             return MockResponse("log_id4", 200)
+        elif (
+            args[0] == "https://rapid7.com/log_search/query/logs/log_id5"
+            or args[0] == "https://rapid7.com/log_search/query/logsets/log_id5"
+        ):
+            return MockResponse("log_id5", 200)
         elif args[0] == "https://rapid7.com/log_search/management/logsets":
             return MockResponse("logsets", 200)
 

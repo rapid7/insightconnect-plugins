@@ -15,6 +15,10 @@
     {
       "name": "example_log4",
       "id": "log_id4"
+    },
+    {
+      "name": "example_log5",
+      "id": "log_id5"
     }
   ]
 }

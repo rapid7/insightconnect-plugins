@@ -60,3 +60,15 @@ class TestAdvancedQueryOnLog(TestCase):
 
         self.assertEqual(actual.get(Output.COUNT), 1)
         self.assertEqual(actual.get(Output.RESULTS)[0].get("labels"), expected)
+
+    def test_advanced_query_on_log_populated_labels(self, mock_get, mock_async_get):
+        actual = self.action.run(
+            {
+                Input.QUERY: "",
+                Input.LOG: "example_log5",
+            }
+        )
+        expected = ["Out of order entry", "Out of events"]
+
+        self.assertEqual(actual.get(Output.COUNT), 1)
+        self.assertEqual(actual.get(Output.RESULTS)[0].get("labels"), expected)
