@@ -26,7 +26,7 @@ class GetSingleUserConfidenceIndexInput(insightconnect_plugin_runtime.Input):
     "fromTime": {
       "type": "integer",
       "title": "From Time",
-      "description": "Numeric value representing the time in epoch timestamp from the beginning of which confidence score values are taken until now",
+      "description": "Numeric value representing the time in epoch timestamp from the beginning of which confidence score values are taken until now (in miliseconds)",
       "order": 2
     },
     "username": {

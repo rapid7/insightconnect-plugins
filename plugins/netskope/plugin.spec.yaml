@@ -34,11 +34,6 @@ types:
       description: Category of URL list
       type: string
       required: true
-    json_version:
-      title: JSON version
-      description: Current version of JSON format
-      type: int
-      required: false
   urllist:
     id:
       title: ID
@@ -142,11 +137,12 @@ actions:
         description: Status of URL lists to be received
         type: string
         enum:
-          - ""
+          - any
           - applied
           - pending
-        required: false
+        required: true
         example: applied
+        default: any
     output:
       urllists:
         title: URL Lists
@@ -412,22 +408,23 @@ actions:
         title: Name
         description: Name of replaced URL list
         type: string
-        required: true
+        required: false
         example: ExampleName
       urls:
         title: URLs
         description: List of URLs
         type: "[]string"
-        required: true
+        required: false
         example: '["https://example.com", "https://example.com"]'
       type:
         title: URL List Category
         description: Category of URL list
         type: string
         enum:
+          - ""
           - exact
           - regex
-        required: true
+        required: false
         example: exact
     output:
       id:
@@ -486,10 +483,10 @@ actions:
         example: ExampleUser
       fromTime:
         title: From Time
-        description: Numeric value representing the time in epoch timestamp from the beginning of which confidence score values are taken until now
+        description: Numeric value representing the time in epoch timestamp from the beginning of which confidence score values are taken until now (in miliseconds)
         type: integer
         required: true
-        example: 0
+        example: 1647357793000
     output:
       userId:
         title: User ID
