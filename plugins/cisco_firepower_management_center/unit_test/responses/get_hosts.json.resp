@@ -1,0 +1,31 @@
+{
+  "links": {
+    "self": "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/hosts?offset=0&limit=5"
+  },
+  "items": [
+    {
+      "links": {
+        "self": "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/hosts/00000000-0000-0000-0000-000000000001",
+        "parent": "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/networkaddresses"
+      },
+      "type": "Host",
+      "name": "1.1.1.1",
+      "id": "00000000-0000-0000-0000-000000000001"
+    },
+    {
+      "links": {
+        "self": "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/hosts/00000000-0000-0000-0000-000000000002",
+        "parent": "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/networkaddresses"
+      },
+      "type": "Host",
+      "name": "123:45:6::1",
+      "id": "00000000-0000-0000-0000-000000000002"
+    }
+  ],
+  "paging": {
+    "offset": 0,
+    "limit": 2,
+    "count": 2,
+    "pages": 1
+  }
+}

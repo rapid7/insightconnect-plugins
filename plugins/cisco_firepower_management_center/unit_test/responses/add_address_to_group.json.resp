@@ -1,0 +1,52 @@
+{
+  "links": {
+    "self": "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/networkgroups/00000000-0000-0000-0000-000000000001"
+  },
+  "type": "NetworkGroup",
+  "objects": [
+    {
+      "type": "FQDN",
+      "name": "example1.com",
+      "id": "00000000-0000-0ed3-0000-017179870402"
+    },
+    {
+      "type": "FQDN",
+      "name": "example.com",
+      "id": "00000000-0000-0000-0000-000000000001"
+    },
+    {
+      "type": "Host",
+      "name": "1.1.1.1",
+      "id": "00000000-0000-0000-0000-000000000001"
+    },
+    {
+      "type": "Host",
+      "name": "123:45:6::1",
+      "id": "00000000-0000-0000-0000-000000000002"
+    },
+    {
+      "type": "Network",
+      "name": "2.2.2.2/31",
+      "id": "00000000-0000-0000-0000-000000000001"
+    },
+    {
+      "type": "Network",
+      "name": "123:45:6::0/127",
+      "id": "00000000-0000-0000-0000-000000000002"
+    }
+  ],
+  "overridable": "False",
+  "name": "Test_Group",
+  "id": "00000000-0000-0000-0000-000000000001",
+  "metadata": {
+    "timestamp": 0,
+    "lastUser": {
+      "name": "admin"
+    },
+    "domain": {
+      "name": "Global",
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "type": "Domain"
+    }
+  }
+}

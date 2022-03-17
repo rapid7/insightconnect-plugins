@@ -14,6 +14,10 @@ In this example, adding an address object to a group attached to a deny-all rule
 * Cisco Firepower Management Center server name
 * Cisco Firepower Management Center username and password
 
+# Supported Product Versions
+
+* 6.6.0
+
 # Documentation
 
 ## Setup
@@ -22,7 +26,10 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|domain|string|Global|False|Cisco FirePower Management Centre Domain|None|Global|
+|certificate|bytes|None|True|Base64-encoded certificate to authenticate with the host input API|None|VGhpcyBpcyBhIHNhbXBsZSBiYXNlNjQtZW5jb2RlZCBjZXJ0aWZpY2F0ZSB0byBhdXRoZW50aWNhdGUgd2l0aCB0aGUgaG9zdCBpbnB1dCBBUEku|
+|certificate_passphrase|credential_secret_key|None|True|The passphrase to access the certificate|None|passphrase|
+|domain|string|Global|False|Cisco FirePower Management Center Domain|None|Global|
+|host_input_port|integer|8307|False|The port number for the provided host used in the Host Input API calls|None|8307|
 |port|integer|443|False|The port number for provided host|None|443|
 |server|string|None|False|Enter the address for the server|None|www.example.com|
 |ssl_verify|boolean|True|False|Validate TLS / SSL certificate|None|True|
@@ -32,7 +39,10 @@ Example input:
 
 ```
 {
+  "certificate": "VGhpcyBpcyBhIHNhbXBsZSBiYXNlNjQtZW5jb2RlZCBjZXJ0aWZpY2F0ZSB0byBhdXRoZW50aWNhdGUgd2l0aCB0aGUgaG9zdCBpbnB1dCBBUEku",
+  "certificate_passphrase": "passphrase",
   "domain": "Global",
+  "host_input_port": 8307,
   "port": 443,
   "server": "www.example.com",
   "ssl_verify": true,
@@ -47,6 +57,114 @@ Example input:
 
 ### Actions
 
+#### Bulk Add Scan Result
+
+This action is used to add scan results from a third-party vulnerability scanner.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|operation|string|None|True|The operation to be performed when adding scan results. ScanFlush to remove existing scan results or ScanUpdate to keep existing scan results|['ScanUpdate', 'ScanFlush']|ScanUpdate|
+|scan_results|[]scan_result|None|False|Host scan results to be added|None|[{"host": {"ip_address": "0.0.0.164", "operating_system": {"name": "Ubuntu", "vendor": "Canonical", "version": "16.04"}}, "scan_result_details": {"description": "Example description", "protocol_id": "6", "scanner_id": "ProductZImport", "source_id": "ProductZ", "vulnerability_id": "943387", "vulnerability_title": "Virus Wire 0"}}]|
+
+Example input:
+
+```
+{
+  "operation": "ScanUpdate",
+  "scan_results": [
+    {
+      "host": {
+        "ip_address": "0.0.0.164",
+        "operating_system": {
+          "name": "Ubuntu",
+          "vendor": "Canonical",
+          "version": "16.04"
+        }
+      },
+      "scan_result_details": {
+        "description": "Example description",
+        "protocol_id": "6",
+        "scanner_id": "ProductZImport",
+        "source_id": "ProductZ",
+        "vulnerability_id": "943387",
+        "vulnerability_title": "Virus Wire 0"
+      }
+    }
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|commands_processed|number|True|Number of commands processed|
+|errors|number|True|Number of errors|
+
+Example output:
+
+```
+{
+  "commands_processed": 4,
+  "errors": 0
+}
+```
+
+#### Add Scan Result
+
+This action is used to add a scan result from a third-party vulnerability scanner.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|operation|string|None|True|The operation to be performed when adding scan results. ScanFlush to remove existing scan results or ScanUpdate to keep existing scan results|['ScanUpdate', 'ScanFlush']|ScanUpdate|
+|scan_result|scan_result|None|False|The host scan result to be added|None|{"host": {"ip_address": "0.0.0.164", "operating_system": {"name": "Ubuntu", "vendor": "Canonical", "version": "16.04"}}, "scan_result_details": {"description": "Example description", "protocol_id": "6", "scanner_id": "ProductZImport", "source_id": "ProductZ", "vulnerability_id": "943387", "vulnerability_title": "Virus Wire 0"}}|
+
+Example input:
+
+```
+{
+  "operation": "ScanUpdate",
+  "scan_result": {
+    "host": {
+      "ip_address": "0.0.0.164",
+      "operating_system": {
+        "name": "Ubuntu",
+        "vendor": "Canonical",
+        "version": "16.04"
+      }
+    },
+    "scan_result_details": {
+      "description": "Example description",
+      "protocol_id": "6",
+      "scanner_id": "ProductZImport",
+      "source_id": "ProductZ",
+      "vulnerability_id": "943387",
+      "vulnerability_title": "Virus Wire 0"
+    }
+  }
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|commands_processed|number|True|Number of commands processed|
+|errors|number|True|Number of errors|
+
+Example output:
+
+```
+{
+  "commands_processed": 4,
+  "errors": 0
+}
+```
+
 #### Check if Address in Group
 
 This action checks if the provided Address Object name or host exists in an Address Group. If you don't know the Address Object by name, set Enable Search to true to allow a network indicator search in the Group. This is useful when working directly with IPs and domains.
@@ -56,7 +174,7 @@ This action checks if the provided Address Object name or host exists in an Addr
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |address|string|None|True|Address Object name, or IP, CIDR, or domain name when Enable Search is on|None|MaliciousHost|
-|enable_search|boolean|False|False|When enabled, the Address input will accept an IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don’t know the Address Object by its name|None|False|
+|enable_search|boolean|False|False|When enabled, the Address input will accept an IP, CIDR, or domain name to search across the available Address Objects in the system. This is useful when you don't know the Address Object by its name|None|False|
 |group|string|None|True|Name of address group to check|None|MaliciousAddressGroup|
 
 Example input:
@@ -379,13 +497,23 @@ This action is used to create a new block URL policy.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|access_policy|string|None|True|Access Policy name|None|None|
-|rule_name|string|None|True|Name for the Access Rule to be created|None|None|
-|url_objects|[]url_object|None|True|URL objects to block|None|None|
+|access_policy|string|None|True|Name for the access policy to be created|None|Example Access Policy|
+|rule_name|string|None|True|Name for the access rule to be created|None|Example Access Rule|
+|url_objects|[]url_object|None|True|URL objects to block|None|[{'name': 'example_url', 'url': 'https://example.com'}]|
 
 Example input:
 
 ```
+{
+  "access_policy": "Example Access Policy",
+  "rule_name": "Example Access Rule",
+  "url_objects": [
+    {
+      'name': 'example_url',
+      'url': 'https://example.com'
+    }
+  ]
+}
 ```
 
 ##### Output
@@ -416,6 +544,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.0 - Combine Cisco Firepower and Cisco Firepower Management Center plugins
 * 1.2.0 - New actions - Check If Address in Group, Add Address to Group, Remove Address from Group
 * 1.1.0 - New actions - Create Address Object, Delete Address Object
 * 1.0.1 - New spec and help.md format for the Extension Library
