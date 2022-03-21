@@ -721,6 +721,175 @@ Example output:
 }
 ```
 
+#### Get CVE List
+
+This action is used to get a list of all CVEs from an account.
+
+##### Input
+
+_This action does not contain any inputs._
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|content|[]content|True|Response content|
+
+Example output:
+
+```
+{
+  "content": [
+    {
+      "cpe": [],
+      "cveId": "CVE-2020-20795",
+      "exploitAvailability": false,
+      "firstMentionDate": "https://example.com",
+      "intsightsScore": 1,
+      "lastMentionDate": "https://example.com",
+      "mentionsAmount": 1,
+      "mentionsPerSource": {
+        "ClearWebCyberBlogs": 0,
+        "CodeRepositories": 0,
+        "DarkWeb": 0,
+        "Exploit": 0,
+        "HackingForum": 0,
+        "InstantMessage": 0,
+        "PasteSite": 0,
+        "SocialMedia": 1
+      },
+      "publishedDate": "https://example.com",
+      "relatedCampaigns": [],
+      "relatedMalware": [],
+      "relatedThreatActors": [],
+      "severity": "Low",
+      "updateDate": "https://example.com",
+      "vulnerabilityOrigin": [
+        "API"
+      ]
+    },
+    {
+      "cpe": [
+        {
+          "Range": {
+            "VersionEndExcluding": "2017-08-25"
+          },
+          "Title": "Voten",
+          "Value": "https://example.com*:*:*:*:*:*:*:*",
+          "VendorProduct": "Voten Voten"
+        }
+      ],
+      "cveId": "CVE-2018-7663",
+      "cvssScore": "https://example.com",
+      "exploitAvailability": false,
+      "firstMentionDate": "https://example.com",
+      "intsightsScore": 28,
+      "lastMentionDate": "https://example.com",
+      "mentionsAmount": 20,
+      "mentionsPerSource": {
+        "ClearWebCyberBlogs": 0,
+        "CodeRepositories": 1,
+        "DarkWeb": 0,
+        "Exploit": 0,
+        "HackingForum": 0,
+        "InstantMessage": 0,
+        "PasteSite": 0,
+        "SocialMedia": 19
+      },
+      "publishedDate": "https://example.com",
+      "relatedCampaigns": [],
+      "relatedMalware": [],
+      "relatedThreatActors": [],
+      "severity": "Low",
+      "updateDate": "https://example.com",
+      "vulnerabilityOrigin": [
+        "API"
+      ]
+    }
+  ]
+}
+```
+
+#### Add CVEs
+
+This action is used to add CVEs to account.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|cve_id|[]string|None|False|List of CVE IDs|None|["CVE-2020-0711"]|
+
+Example input:
+
+```
+{
+  "cve_id": [
+    "CVE-2020-0711"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|failure|[]cve_failure_type|True|Failure details|
+|success_amount|integer|True|Amount of successfully added CVEs|
+
+Example output:
+
+```
+{
+  "success": {
+    "amount": 2
+  },
+  "failure": [
+    {
+      "cveId": "CVE-1999-003",
+      "failReason": "Invalid CVE format"
+    }
+  ]
+}
+```
+
+#### Delete CVEs
+
+This action is used to delete CVEs from account.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|cve_id|[]string|None|False|List of CVE IDs|None|["CVE-2020-0711"]|
+
+Example input:
+
+```
+{
+  "cve_id": [
+    "CVE-2020-0711"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|failure|[]cve_failure_type|True|Failure details|
+|success_amount|integer|True|Amount of successfully deleted CVEs|
+
+Example output:
+
+```
+{
+  "failure": [],
+  "success_amount": 3
+}
+```
+
+
 ### Triggers
 
 #### New Alert
@@ -820,6 +989,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.0 - Add new actions Add CVEs, Delete CVEs and Get CVE List
 * 3.0.1 - Fix issue where New Alert trigger sends empty list when there are no new alerts
 * 3.0.0 - Add `assets` custom output type in Add Manual Alert action | Fix missing URL bug in DarkWeb Webmail alerts in Add Manual Alert action
 * 2.0.0 - Add new trigger New Alert | Add new action Get CVE by ID

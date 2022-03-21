@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Rapid7 IntSights"
 Vendor = "rapid7"
-Version = "3.0.1"
+Version = "3.1.0"
 Description = "Rapid7 IntSights is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy"
 
 
@@ -36,7 +36,11 @@ def main():
             )
             self.add_trigger(triggers.NewAlert())
 
+            self.add_action(actions.AddCve())
+
             self.add_action(actions.AddManualAlert())
+
+            self.add_action(actions.DeleteCve())
 
             self.add_action(actions.EnrichIndicator())
 
@@ -45,6 +49,8 @@ def main():
             self.add_action(actions.GetCompleteAlertById())
 
             self.add_action(actions.GetCveById())
+
+            self.add_action(actions.GetCveList())
 
             self.add_action(actions.GetIndicatorByValue())
 
