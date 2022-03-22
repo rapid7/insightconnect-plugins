@@ -11,6 +11,10 @@ Make searching the Rapid7 vulnerability and exploit data fast, easy and efficien
 
 _This plugin does not contain any requirements._
 
+# Supported Product Versions
+
+* v1
+
 # Documentation
 
 ## Setup
@@ -137,90 +141,6 @@ _This plugin does not contain any triggers._
 |Published_at|string|False|Published date of vulnerability|
 |Title|string|False|Title of Vulnerability|
 
-#### Search Database
-
-This action is used to search the database to find vulnerabilities and exploits.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|database|string|None|True|Name of the database|['Vulnerability Database', 'Metasploit Modules']|Vulnerability Database|
-|search|string|None|True|Search parameter for database|None|cve-2015-9542|
-
-Example input:
-
-```
-{
-  "database": "Vulnerability Database",
-  "search": "cve-2015-9542"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results_found|bool|True|Will return false if no results are found|
-|search_results|[]search_result|False|Vulnerability and exploits found|
-
-Example output:
-
-```
-{
-  "results_found": true,
-  "search_results": [
-    {
-      "identifier": "ubuntu-cve-2015-9542",
-      "title": "Ubuntu: (Multiple Advisories) (CVE-2015-9542): libpam-radius-auth vulnerability",
-      "published_at": "2020-02-24T00:00:00.000Z",
-      "solutions": "ubuntu-upgrade-chromium",
-      "link": "https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/content/ubuntu-cve-2015-9542"
-    }
-  ]
-}
-```
-
-#### Get Content
-
-This action is used to fetch content results for a vulnerability or module.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|identifier|string|None|True|Rapid7 vulnerability/module identifier|None|apple-itunes-cve-2019-8835|
-
-Example input:
-
-```
-{
-  "identifier": "apple-itunes-cve-2019-8835"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|content_result|content|True|Content record for the vulnerability or module|
-
-Example output:
-
-```
-{
-  "content_result": {
-    "published_at": "2015-11-05T00:00:00.000Z",
-    "references": "mozilla-thunderbird-upgrade-38_4",
-    "severity": "7",
-    "solutions": "mozilla-thunderbird-upgrade-38_4",
-    "title": "MFSA2015-123 Thunderbird: Buffer overflow during i...",
-    "alternate_ids": "BID/77411,CVE/2015-7189,DEBIAN/DSA-3393,DEBIAN/DSA...",
-    "content_type": "vulnerability",
-    "description": "\n    <p>Race condition in the JPEGEncoder function..."
-  }
-}
-```
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
