@@ -32,3 +32,7 @@ class UninstallSensor(insightconnect_plugin_runtime.Action):
                 raise PluginException(preset=ConnectionTestException.Preset.SERVER_ERROR) from None
             return {"success": False}
         return {"success": True}
+
+    def test(self):
+        if self.connection.test():
+            return {}
