@@ -23,7 +23,7 @@ def main():
             monkey.patch_all()
 
     import insightconnect_plugin_runtime
-    from komand_rapid7_vulndb import connection, actions
+    from komand_rapid7_vulndb import connection, actions, triggers
 
     class ICONRapid7Vulndb(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
