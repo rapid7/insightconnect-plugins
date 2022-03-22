@@ -15,7 +15,7 @@ class RequestHelper(object):
         self.logger = logger
         self.session = session
 
-    def make_request(self, endpoint, method, payload=None, params=None, content_type="application/json"):
+    def make_request(self, endpoint, method, payload=None, params=None, data=None, content_type="application/json"):
         try:
             request_method = getattr(self.session, method.lower())
 
@@ -23,7 +23,9 @@ class RequestHelper(object):
 
             if not params:
                 params = {}
-            response = request_method(url=endpoint, headers=headers, params=params, json=payload, verify=False)
+            response = request_method(
+                url=endpoint, headers=headers, params=params, json=payload, data=data, verify=False
+            )
         except requests.RequestException as e:
             self.logger.error(e)
             raise
@@ -59,16 +61,18 @@ class RequestHelper(object):
         response = connection.request.make_request(f"{connection.attachment_url}/{sys_id}/file", "get")
 
         resource = response.get("resource")
-        result = b""
-        if resource is not None:
-            if isinstance(resource, bytes):
-                result = resource
-            elif isinstance(resource, dict):
-                try:
-                    result = json.dumps(resource).encode("utf-8")
-                except TypeError:
-                    raise PluginException(PluginException.Preset.INVALID_JSON, data=resource)
-            else:
-                raise PluginException(PluginException.Preset.UNKNOWN, data=resource)
+
+        if not resource:
+            return ""
+
+        if isinstance(resource, bytes):
+            result = resource
+        elif isinstance(resource, dict):
+            try:
+                result = json.dumps(resource).encode("utf-8")
+            except TypeError:
+                raise PluginException(PluginException.Preset.INVALID_JSON, data=resource)
+        else:
+            raise PluginException(PluginException.Preset.UNKNOWN, data=resource)
 
         return str(base64.b64encode(result), "utf-8")
