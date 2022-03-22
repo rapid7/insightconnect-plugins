@@ -3,14 +3,17 @@ from .append_tags.action import AppendTags
 from .create_indicator.action import CreateIndicator
 from .create_update_comment.action import CreateUpdateComment
 from .create_update_incident.action import CreateUpdateIncident
+from .create_update_watchlist.action import CreateUpdateWatchlist
 from .create_update_watchlist_items.action import CreateUpdateWatchlistItems
 from .delete_comment.action import DeleteComment
 from .delete_incident.action import DeleteIncident
 from .delete_indicator.action import DeleteIndicator
+from .delete_watchlist.action import DeleteWatchlist
 from .delete_watchlist_item.action import DeleteWatchlistItem
 from .get_comment.action import GetComment
 from .get_incident.action import GetIncident
 from .get_indicator.action import GetIndicator
+from .get_watchlist.action import GetWatchlist
 from .get_watchlist_item.action import GetWatchlistItem
 from .list_alerts.action import ListAlerts
 from .list_bookmarks.action import ListBookmarks
@@ -18,6 +21,7 @@ from .list_comments.action import ListComments
 from .list_entities.action import ListEntities
 from .list_incidents.action import ListIncidents
 from .list_watchlist_items.action import ListWatchlistItems
+from .list_watchlists.action import ListWatchlists
 from .query_indicator.action import QueryIndicator
 from .replace_tags.action import ReplaceTags
 from .update_indicator.action import UpdateIndicator

@@ -20,6 +20,10 @@ Azure Sentinel is Microsoft's' automated security service.
 * Query indicator
 * Append tags for indicator
 * Replace tags for indicator
+* Creating and updating watchlists
+* Retriveing a watchlist
+* Deleting a watchlist
+* Listing watchlists for a given workspace
 * Creating and updating watchlist items
 * Retrieving watchlist item
 * Deleting watchlist item
@@ -60,6 +64,236 @@ Example input:
 
 ### Actions
 
+#### List Watchlists
+
+This action is used to list watchlists.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription. The name is case insensitive|None|resourcegroup1|
+|subscriptionId|string|None|True|Azure subscription ID|None|d0cfe6b2-9ac0-4464-9919-dccaee2e48c0|
+|workspaceName|string|None|True|The name of the workspace|None|workspace1|
+
+Example input:
+
+```
+{
+  "resourceGroupName": "resourcegroup1",
+  "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+  "workspaceName": "workspace1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|watchlists|[]Watchlist|False|List of watchlists|
+
+Example output:
+
+```
+{
+  "watchlists":[
+    {
+      "id":"/subscriptions/0cea5e5b-a751-42ca-9151-dg965e27aefe/resourceGroups/integrationLab/providers/Microsoft.OperationalInsights/workspaces/sentinel/providers/Microsoft.SecurityInsights/Watchlists/Od nendzy do piniendzy",
+      "name":"Od nendzy do piniendzy",
+      "type":"Microsoft.SecurityInsights/Watchlists",
+      "systemData":{
+        "createdAt":"2022-04-12T18:37:46.6066473Z",
+        "createdBy":"cbebe4c0-d1a1-43e8-973a-5292f659c22e",
+        "createdByType":"Application",
+        "lastModifiedAt":"2022-04-12T18:37:46.6066473Z",
+        "lastModifiedBy":"cbebe4c0-d1a1-43e8-973a-5292f659c22e",
+        "lastModifiedByType":"Application"
+      },
+      "properties":{
+        "watchlistId":"8964710e-13fb-4b57-a6b6-90592a92b0fb",
+        "displayName":"High Value Assets Watchlist",
+        "provider":"Microsoft",
+        "source":"Local File",
+        "itemsSearchKey":"header1",
+        "created":"2022-04-12T18:37:46.6066473+00:00",
+        "updated":"2022-04-12T18:37:46.6066473+00:00",
+        "createdBy":{
+          "objectId":"dd702e59-e27b-48f6-95df-05c12f3f47c4",
+          "name":"cbebe4c0-d1a1-43e8-973a-5292f659c22e"
+        },
+        "updatedBy":{
+          "objectId":"dd702e59-ed7d-48d6-15d1-15a12a3f47e4",
+          "name":"cbebe4c0-d1a1-43e8-973a-5292f659c22e"
+        },
+        "description":"Watchlist from CSV content",
+        "watchlistType":"watchlist",
+        "watchlistAlias":"Od nendzy do piniendzy",
+        "isDeleted":false,
+        "labels":[
+          
+        ],
+        "tenantId":"5c1214199-de3c-4531-96fb-3b886d4f8f10",
+        "numberOfLinesToSkip":0,
+        "uploadStatus":"Complete"
+      }
+    }
+  ]
+}
+```
+
+#### Get Watchlist
+
+This action is used to get requested watchlist.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription. The name is case insensitive|None|resourcegroup1|
+|subscriptionId|string|None|True|Azure subscription ID|None|d0cfe6b2-9ac0-4464-9919-dccaee2e48c0|
+|watchlistAlias|string|None|True|The watchlist alias|None|examplealias1|
+|workspaceName|string|None|True|The name of the workspace|None|workspace1|
+
+Example input:
+
+```
+{
+  "resourceGroupName": "resourcegroup1",
+  "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+  "watchlistAlias": "examplealias1",
+  "workspaceName": "workspace1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|watchlist|Watchlist|False|Requested watchlist|
+
+Example output:
+
+```
+{
+  "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/watchlists/highValueAsset",
+  "name": "highValueAsset",
+  "type": "Microsoft.SecurityInsights/Watchlists",
+  "etag": "\"0300bf09-0000-0000-0000-5c37296e0000\"",
+  "properties": {
+    "watchlistId": "76d5a51f-ba1f-4038-9d22-59fda38dc017",
+    "displayName": "High Value Assets Watchlist",
+    "provider": "Microsoft",
+    "source": "Local file",
+    "created": "2020-09-28T00:26:54.7746089+00:00",
+    "updated": "2020-09-28T00:26:57+00:00",
+    "createdBy": {
+      "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
+      "email": "user@example.com",
+      "name": "john doe"
+    },
+    "updatedBy": {
+      "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
+      "email": "user@example.com",
+      "name": "john doe"
+    },
+    "description": "Watchlist from CSV content",
+    "watchlistType": "watchlist",
+    "watchlistAlias": "highValueAsset",
+    "itemsSearchKey": "header1",
+    "isDeleted": false,
+    "labels": [
+      "Tag1",
+      "Tag2"
+    ],
+    "defaultDuration": "P1279DT12H30M5S",
+    "tenantId": "f686d426-8d16-42db-81b7-ab578e110ccd"
+  }
+}
+```
+
+#### Delete Watchlist
+
+This action is used to delete requested watchlist.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription. The name is case insensitive|None|resourcegroup1|
+|subscriptionId|string|None|True|Azure subscription ID|None|d0cfe6b2-9ac0-4464-9919-dccaee2e48c0|
+|watchlistAlias|string|None|True|The watchlist alias|None|examplealias1|
+|workspaceName|string|None|True|The name of the workspace|None|workspace1|
+
+Example input:
+
+```
+{
+  "resourceGroupName": "resourcegroup1",
+  "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+  "watchlistAlias": "examplealias1",
+  "workspaceName": "workspace1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|status|integer|False|Deletion status, 200 - ok, 204 - no content|
+
+Example output:
+
+```
+{
+  "status": 200
+}
+
+```
+
+#### Create or Update Watchlist
+
+This action is used to create or update a Watchlist and its Watchlist Items.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|properties|WatchlistProperties|None|True|All the properties included in the body of the query|None|{'displayName': 'High Value Assets Watchlist', 'source': 'Local File', 'provider': 'Microsoft', 'description': 'Watchlist from CSV content', 'itemsSearchKey': 'header1', 'contentType': 'text/csv'}|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription. The name is case insensitive|None|resourcegroup1|
+|subscriptionId|string|None|True|Azure subscription ID|None|d0cfe6b2-9ac0-4464-9919-dccaee2e48c0|
+|watchlistAlias|string|None|True|The watchlist alias|None|somealias1|
+|workspaceName|string|None|True|The name of the workspace|None|workspace1|
+
+Example input:
+
+```
+{
+  "properties": "{'displayName': 'High Value Assets Watchlist', 'source': 'Local File', 'provider': 'Microsoft', 'description': 'Watchlist from CSV content', 'itemsSearchKey': 'header1', 'contentType': 'text/csv'}",
+  "resourceGroupName": "resourcegroup1",
+  "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+  "watchlistAlias": "somealias1",
+  "workspaceName": "workspace1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|watchlist|Watchlist|False|Output watchlist|
+
+Example output:
+
+```
+{
+  "properties": {"displayName": "HighValueAssets"},
+  "resourceGroupName": "resourcegroup1",
+  "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+  "watchlistAlias": "somealias1",
+  "workspaceName": "workspace1"
+}
+```
+
 #### List Watchlist Items
 
 This action is used to list existing Watchlist Items.
@@ -93,6 +327,52 @@ Example input:
 Example output:
 
 ```
+{
+  "watchlistItems":[
+    {
+      "id":"/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/Watchlists/highValueAsset/WatchlistItems/fd37d325-7090-47fe-851a-5b5a00c3f576",
+      "name":"fd37d325-7090-47fe-851a-5b5a00c3f576",
+      "etag":"\"f2089bfa-0000-0d00-0000-601c58b42021\"",
+      "type":"Microsoft.SecurityInsights/Watchlists/WatchlistItems",
+      "systemData":{
+        "createdAt":"2022-04-12T18:37:46.6066473Z",
+        "createdBy":"cbebe4c0-d1a1-43e8-973a-5292f659c22e",
+        "createdByType":"Application",
+        "lastModifiedAt":"2022-04-12T18:37:46.6066473Z",
+        "lastModifiedBy":"cbebe4c0-d1a1-43e8-973a-5292f659c22e",
+        "lastModifiedByType":"Application"
+      },
+      "properties":{
+        "watchlistItemType":"watchlist-item",
+        "watchlistItemId":"fd37d325-7090-47fe-851a-5b5a00c3f576",
+        "tenantId":"3f8901fe-63d9-4875-9ad5-9fb3b8105797",
+        "isDeleted":false,
+        "created":"2021-02-04T12:27:32.3783333-08:00",
+        "updated":"2021-02-04T12:27:32.3783333-08:00",
+        "createdBy":{
+          "objectId":"2046feea-040d-4a46-9e2b-91c2941bfa70",
+          "email":"user@example.com",
+          "name":"john doe"
+        },
+        "updatedBy":{
+          "objectId":"2046feea-040d-4a46-9e2b-91c2941bfa70",
+          "email":"user@example.com",
+          "name":"john doe"
+        },
+        "itemsKeyValue":{
+          "Header-1":"v1_1",
+          "Header-2":"v1_2",
+          "Header-3":"v1_3",
+          "Header-4":"v1_4",
+          "Header-5":"v1_5"
+        },
+        "entityMapping":{
+          
+        }
+      }
+    }
+  ]
+}
 ```
 
 #### Get Watchlist Item
@@ -135,6 +415,38 @@ Example input:
 Example output:
 
 ```
+{
+  "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/Watchlists/highValueAsset/WatchlistItems/fd37d325-7090-47fe-851a-5b5a00c3f576",
+  "name": "fd37d325-7090-47fe-851a-5b5a00c3f576",
+  "etag": "\"f2089bfa-0000-0d00-0000-601c58b42021\"",
+  "type": "Microsoft.SecurityInsights/Watchlists/WatchlistItems",
+  "properties": {
+    "watchlistItemType": "watchlist-item",
+    "watchlistItemId": "fd37d325-7090-47fe-851a-5b5a00c3f576",
+    "tenantId": "3f8901fe-63d9-4875-9ad5-9fb3b8105797",
+    "isDeleted": false,
+    "created": "2021-02-04T12:27:32.3783333-08:00",
+    "updated": "2021-02-04T12:27:32.3783333-08:00",
+    "createdBy": {
+      "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
+      "email": "user@example.com",
+      "name": "john doe"
+    },
+    "updatedBy": {
+      "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
+      "email": "user@example.com",
+      "name": "john doe"
+    },
+    "itemsKeyValue": {
+      "Header-1": "v1_1",
+      "Header-2": "v1_2",
+      "Header-3": "v1_3",
+      "Header-4": "v1_4",
+      "Header-5": "v1_5"
+    },
+    "entityMapping": {}
+  }
+}
 ```
 
 #### Delete Watchlist Item
@@ -172,6 +484,9 @@ Example input:
 Example output:
 
 ```
+{
+  "message": "Watchlist item name: fd37d325-7090-47fe-851a-5b5a00c3f576 deleted"}
+}
 ```
 
 #### Create or Update Watchlist Item
@@ -218,6 +533,37 @@ Example input:
 Example output:
 
 ```
+{
+  "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/Watchlists/highValueAsset/WatchlistItems/82ba292c-dc97-4dfc-969d-d4dd9e666842",
+  "etag": "0300bf09-0000-0000-0000-5c37296e0000",
+  "type": "Microsoft.SecurityInsights/Watchlists/WatchlistItems",
+  "properties": {
+    "watchlistItemType": "watchlist-item",
+    "watchlistItemId": "82ba292c-dc97-4dfc-969d-d4dd9e666842",
+    "tenantId": "4008512e-1d30-48b2-9ee2-d3612ed9d3ea",
+    "isDeleted": false,
+    "created": "2020-11-15T04:58:56.0748363+00:00",
+    "updated": "2020-11-16T16:05:20+00:00",
+    "createdBy": {
+      "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
+      "email": "user@example.com",
+      "name": "john doe"
+    },
+    "updatedBy": {
+      "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
+      "email": "user@example.com",
+      "name": "john doe"
+    },
+    "itemsKeyValue": {
+      "Gateway subnet": "10.0.255.224/27",
+      "Web Tier": "10.0.1.0/24",
+      "Business tier": "10.0.2.0/24",
+      "Data tier": "10.0.2.0/24",
+      "Private DMZ in": "10.0.0.0/27",
+      "Public DMZ out": "10.0.0.96/27"
+    }
+  }
+}
 ```
 
 #### Update Indicator
@@ -271,6 +617,36 @@ Example input:
 Example output:
 
 ```
+{
+  "id": "/subscriptions/bd794837-4d29-4647-9105-6339bfdb4e6a/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/ThreatIntelligence/180105c7-a28d-b1a2-4a78-234f6ec80fd6",
+  "name": "180105c7-a28d-b1a2-4a78-234f6ec80fd6",
+  "etag": "0000322c-0000-0800-0000-5e976c960000",
+  "type": "Microsoft.SecurityInsights/ThreatIntelligence",
+  "kind": "indicator",
+  "properties": {
+    "confidence": 78,
+    "created": "2021-04-15T20:20:38.6160949Z",
+    "createdByRef": "user@example.com",
+    "externalId": "indicator--a2b6a95e-2108-4a38-bd49-ef95811bbcd7",
+    "externalReferences": [],
+    "granularMarkings": [],
+    "lastUpdatedTimeUtc": "2020-04-15T20:20:38.6161887Z",
+    "revoked": false,
+    "source": "Azure Sentinel",
+    "threatIntelligenceTags": [
+      "new schema"
+    ],
+    "displayName": "new schema",
+    "description": "debugging indicators",
+    "threatTypes": [
+      "compromised"
+    ],
+    "killChainPhases": [],
+    "pattern": "[url:value = 'https://www.contoso.com']",
+    "patternType": "url",
+    "validFrom": "2021-04-15T17:44:00.114052Z"
+  }
+}
 ```
 
 #### Replace Tags
@@ -313,6 +689,36 @@ Example input:
 Example output:
 
 ```
+{
+  "id": "/subscriptions/bd794837-4d29-4647-9105-6339bfdb4e6a/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/ThreatIntelligence/e16ef847-962e-d7b6-9c8b-a33e4bd30e47",
+  "name": "e16ef847-962e-d7b6-9c8b-a33e4bd30e47",
+  "etag": "00002a2c-0000-0800-0000-5e97683b0000",
+  "type": "Microsoft.SecurityInsights/ThreatIntelligence",
+  "kind": "indicator",
+  "properties": {
+    "confidence": 78,
+    "created": "2021-04-15T19:51:17.1050923Z",
+    "createdByRef": "user@example.com",
+    "externalId": "indicator--73be1729-babb-4348-a6c4-94621cae2530",
+    "externalReferences": [],
+    "granularMarkings": [],
+    "lastUpdatedTimeUtc": "2021-04-15T19:56:08.828946Z",
+    "revoked": false,
+    "source": "Azure Sentinel",
+    "threatIntelligenceTags": [
+      "patching tags"
+    ],
+    "displayName": "updated indicator",
+    "description": "debugging indicators",
+    "threatTypes": [
+      "compromised"
+    ],
+    "killChainPhases": [],
+    "pattern": "[url:value = 'https://abc.com']",
+    "patternType": "url",
+    "validFrom": "2021-04-15T17:44:00.114052Z"
+  }
+}
 ```
 
 #### Query Threat Indicator
@@ -370,6 +776,85 @@ Example input:
 Example output:
 
 ```
+{
+  "value": [
+    {
+      "id": "/subscriptions/bd794837-4d29-4647-9105-6339bfdb4e6a/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/ThreatIntelligence/27d963e6-e6e4-e0f9-e9d7-c53985b3bbe8",
+      "name": "27d963e6-e6e4-e0f9-e9d7-c53985b3bbe8",
+      "etag": "00002f2c-0000-0800-0000-5e976a8e0000",
+      "type": "Microsoft.SecurityInsights/ThreatIntelligence",
+      "kind": "indicator",
+      "properties": {
+        "confidence": 90,
+        "created": "2021-04-15T20:11:57.9666134Z",
+        "createdByRef": "user@example.com",
+        "externalId": "indicator--8516d567-0daa-4614-8745-e3591e1b48cf",
+        "externalReferences": [],
+        "granularMarkings": [],
+        "lastUpdatedTimeUtc": "2020-04-15T20:15:11.0746926Z",
+        "revoked": false,
+        "source": "Azure Sentinel",
+        "threatIntelligenceTags": [
+          "new schema"
+        ],
+        "displayName": "new schema 2",
+        "description": "debugging indicators 2",
+        "threatTypes": [
+          "compromised"
+        ],
+        "killChainPhases": [],
+        "pattern": "[url:value = 'https://www.contoso.com']",
+        "patternType": "url",
+        "validFrom": "2021-04-15T17:44:00.114052Z",
+        "parsedPattern": [
+          {
+            "patternTypeKey": "network-traffic",
+            "patternTypeValues": [
+              {
+                "valueType": "0",
+                "value": "SSH-2.0-PuTTY_Release_0.64"
+              },
+              {
+                "valueType": "1",
+                "value": "194.88.106.146"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "/subscriptions/bd794837-4d29-4647-9105-6339bfdb4e6a/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/ThreatIntelligence/e16ef847-962e-d7b6-9c8b-a33e4bd30e47",
+      "name": "e16ef847-962e-d7b6-9c8b-a33e4bd30e47",
+      "etag": "00002a2c-0000-0800-0000-5e97683b0000",
+      "type": "Microsoft.SecurityInsights/ThreatIntelligence",
+      "kind": "indicator",
+      "properties": {
+        "confidence": 78,
+        "created": "2021-04-15T19:51:17.1050923Z",
+        "createdByRef": "user@example.com",
+        "externalId": "indicator--73be1729-babb-4348-a6c4-94621cae2530",
+        "externalReferences": [],
+        "granularMarkings": [],
+        "lastUpdatedTimeUtc": "2021-04-15T20:15:11.074903Z",
+        "revoked": false,
+        "source": "Azure Sentinel",
+        "threatIntelligenceTags": [
+          "patching tags"
+        ],
+        "displayName": "updated indicator",
+        "description": "debugging indicators",
+        "threatTypes": [
+          "compromised"
+        ],
+        "killChainPhases": [],
+        "pattern": "[url:value = 'https://www.contoso.com']",
+        "patternType": "url",
+        "validFrom": "2021-04-15T17:44:00.114052Z"
+      }
+    }
+  ]
+}
 ```
 
 #### Get Indicator
@@ -410,6 +895,36 @@ Example input:
 Example output:
 
 ```
+{
+  "id": "/subscriptions/bd794837-4d29-4647-9105-6339bfdb4e6a/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/ThreatIntelligence/e16ef847-962e-d7b6-9c8b-a33e4bd30e47",
+  "name": "e16ef847-962e-d7b6-9c8b-a33e4bd30e47",
+  "etag": "\"00002a2c-0000-0800-0000-5e97683b0000\"",
+  "type": "Microsoft.SecurityInsights/ThreatIntelligence",
+  "kind": "indicator",
+  "properties": {
+    "confidence": 78,
+    "created": "2021-04-15T19:51:17.1050923Z",
+    "createdByRef": "user@example.com",
+    "externalId": "indicator--73be1729-babb-4348-a6c4-94621cae2530",
+    "externalReferences": [],
+    "granularMarkings": [],
+    "lastUpdatedTimeUtc": "2021-04-15T20:18:49.2259902Z",
+    "revoked": false,
+    "source": "Azure Sentinel",
+    "threatIntelligenceTags": [
+      "patching tags"
+    ],
+    "displayName": "updated indicator",
+    "description": "debugging indicators",
+    "threatTypes": [
+      "compromised"
+    ],
+    "killChainPhases": [],
+    "pattern": "[url:value = 'https://abc.com']",
+    "patternType": "url",
+    "validFrom": "2021-04-15T17:44:00.114052Z"
+  }
+}
 ```
 
 #### Delete Indicator
@@ -445,6 +960,9 @@ Example input:
 Example output:
 
 ```
+{
+  "message": Indicator name: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014 deleted"}
+}
 ```
 
 #### Create Indicator
@@ -487,6 +1005,36 @@ Example input:
 Example output:
 
 ```
+{
+  "id": "/subscriptions/bd794837-4d29-4647-9105-6339bfdb4e6a/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/ThreatIntelligence/180105c7-a28d-b1a2-4a78-234f6ec80fd6",
+  "name": "180105c7-a28d-b1a2-4a78-234f6ec80fd6",
+  "etag": "0000322c-0000-0800-0000-5e976c960000",
+  "type": "Microsoft.SecurityInsights/ThreatIntelligence",
+  "kind": "indicator",
+  "properties": {
+    "confidence": 78,
+    "created": "2021-09-15T20:20:38.6160949Z",
+    "createdByRef": "user@example.com",
+    "externalId": "indicator--a2b6a95e-2108-4a38-bd49-ef95811bbcd7",
+    "externalReferences": [],
+    "granularMarkings": [],
+    "lastUpdatedTimeUtc": "2020-04-15T20:20:38.6161887Z",
+    "revoked": false,
+    "source": "Azure Sentinel",
+    "threatIntelligenceTags": [
+      "new schema"
+    ],
+    "displayName": "new schema",
+    "description": "debugging indicators",
+    "threatTypes": [
+      "compromised"
+    ],
+    "killChainPhases": [],
+    "pattern": "[url:value = 'https://www.contoso.com']",
+    "patternType": "url",
+    "validFrom": "2021-09-15T17:44:00.114052Z"
+  }
+}
 ```
 
 #### Append Tags
@@ -529,6 +1077,36 @@ Example input:
 Example output:
 
 ```
+{
+  "id": "/subscriptions/bd794837-4d29-4647-9105-6339bfdb4e6a/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/ThreatIntelligence/e16ef847-962e-d7b6-9c8b-a33e4bd30e47",
+  "name": "e16ef847-962e-d7b6-9c8b-a33e4bd30e47",
+  "etag": "00002a2c-0000-0800-0000-5e97683b0000",
+  "type": "Microsoft.SecurityInsights/ThreatIntelligence",
+  "kind": "indicator",
+  "properties": {
+    "confidence": 78,
+    "created": "2021-04-15T19:51:17.1050923Z",
+    "createdByRef": "user@example.com",
+    "externalId": "indicator--73be1729-babb-4348-a6c4-94621cae2530",
+    "externalReferences": [],
+    "granularMarkings": [],
+    "lastUpdatedTimeUtc": "2021-04-15T20:18:49.2259902Z",
+    "revoked": false,
+    "source": "Azure Sentinel",
+    "threatIntelligenceTags": [
+      "patching tags"
+    ],
+    "displayName": "updated indicator",
+    "description": "debugging indicators",
+    "threatTypes": [
+      "compromised"
+    ],
+    "killChainPhases": [],
+    "pattern": "[url:value = 'https://abc.com']",
+    "patternType": "url",
+    "validFrom": "2021-04-15T17:44:00.114052Z"
+  }
+}
 ```
 
 #### Delete Comment
@@ -566,6 +1144,9 @@ Example input:
 Example output:
 
 ```
+{
+"status": 200
+}
 ```
 
 #### Create Update Comment
@@ -607,6 +1188,23 @@ Example input:
 Example output:
 
 ```
+{
+  "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/incidents/73e01a99-5cd7-4139-a149-9f2736ff2ab5/comments/4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014",
+  "name": "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014",
+  "type": "Microsoft.SecurityInsights/incidents/comments",
+  "etag": "190057d0-0000-0d00-0000-5c6f5adb0000",
+  "properties": {
+    "message": "Some message",
+    "createdTimeUtc": "2019-01-01T13:15:30Z",
+    "lastModifiedTimeUtc": "2019-01-03T11:10:30Z",
+    "author": {
+      "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
+      "email": "user@example.com",
+      "userPrincipalName": "user@example.com",
+      "name": "john doe"
+    }
+  }
+}
 ```
 
 #### List Comments
@@ -646,6 +1244,27 @@ Example input:
 Example output:
 
 ```
+{
+  "comments": [
+    {
+      "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/incidents/73e01a99-5cd7-4139-a149-9f2736ff2ab5/comments/4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014",
+      "name": "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014",
+      "type": "Microsoft.SecurityInsights/incidents/comments",
+      "etag": "190057d0-0000-0d00-0000-5c6f5adb0000",
+      "properties": {
+        "message": "Some message",
+        "createdTimeUtc": "2019-01-01T13:15:30Z",
+        "lastModifiedTimeUtc": "2019-01-03T11:10:30Z",
+        "author": {
+          "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
+          "email": "user@example.com",
+          "userPrincipalName": "user@example.com",
+          "name": "john doe"
+        }
+      }
+    }
+  ]
+}
 ```
 
 #### Get Comment
@@ -683,6 +1302,25 @@ Example input:
 Example output:
 
 ```
+{
+  "comment": {
+    "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/incidents/73e01a99-5cd7-4139-a149-9f2736ff2ab5/comments/4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014",
+    "name": "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014",
+    "type": "Microsoft.SecurityInsights/incidents/comments",
+    "etag": "190057d0-0000-0d00-0000-5c6f5adb0000",
+    "properties": {
+      "message": "Some message",
+      "createdTimeUtc": "2019-01-01T13:15:30Z",
+      "lastModifiedTimeUtc": "2019-01-03T11:10:30Z",
+      "author": {
+        "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
+        "email": "user@example.com",
+        "userPrincipalName": "user@example.com",
+        "name": "john doe"
+      }
+    }
+  }
+}
 ```
 
 #### List Entities
@@ -803,7 +1441,7 @@ Example output:
 ```
 #### Create or Update Incident
 
-This action this action creates or updates an incident.
+This action creates or updates an incident.
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -1333,7 +1971,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.0.0 - Changed CreatedByType field for enum types. New actions: Create or Update Comment, Delete Comment, List Comments, Get Comment, Create Indicator, Get Indicator, Update Indicator, Delete Indicator, Query Indicator, Append Tags, Replace Tags, Create Or Update Watchlist Items, Get Watchlist Item, Delete Watchlist Item, List Watchlist Items
+* 2.0.0 - Changed CreatedByType field for enum types. New actions: Create or Update Comment, Delete Comment, List Comments, Get Comment, Create Indicator, Get Indicator, Update Indicator, Delete Indicator, Query Indicator, Append Tags, Replace Tags, Create or Update Watchlist, Delete Watchlist, List Watchlists, Get Watchlist, Create Or Update Watchlist Items, Get Watchlist Item, Delete Watchlist Item, List Watchlist Items
 * 1.0.0 - Initial plugin (Actions: Create or Update Incident, Delete Incident, List Incidents, Get Incident, List Alerts, List Bookmarks, List Entities)
 
 # Links

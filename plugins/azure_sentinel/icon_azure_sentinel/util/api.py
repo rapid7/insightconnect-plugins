@@ -1,6 +1,7 @@
 import json
 from typing import Any, Dict, List, Tuple, Optional, Union
 import urllib.parse
+from pathlib import PosixPath
 
 import requests
 from icon_azure_sentinel.util.tools import return_non_empty
@@ -325,6 +326,7 @@ class AzureSentinelClient(AzureClient):
             incident_comment_id,
             api_version,
         )
+        kwargs = return_non_empty(kwargs)
         data = kwargs
         _, result = self._call_api("PUT", final_uri, headers=self.headers, payload=data)
         return result
@@ -387,11 +389,8 @@ class AzureSentinelClient(AzureClient):
             api_version,
         )
         indicator = self.get_indicator(resource_group_name, workspace_name, subscription_id, indicator_name)
-        data = kwargs
-        blocked_fields = self._get_blocked_fields(indicator)
+        data = return_non_empty(kwargs)
         data = self._prepared_necessary_data(indicator, data)
-        data = return_non_empty(data)
-        data["properties"].update(blocked_fields["properties"])
 
         _, result = self._call_api("PUT", final_uri, headers=self.headers, payload=data)
         return result
@@ -496,6 +495,55 @@ class AzureSentinelClient(AzureClient):
         _, result = self._call_api("POST", final_uri, headers=self.headers, payload=data)
         return result
 
+    def create_update_watchlist(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        watchlist_alias: str,
+        subscription_id: str,
+        api_version: str = "2021-04-01",
+        **kwargs,
+    ):
+        kwargs = return_non_empty(kwargs)
+        uri = Endpoint.CREATEUPDATEWATCHLIST
+        final_uri = uri.format(subscription_id, resource_group_name, workspace_name, watchlist_alias, api_version)
+        _, result = self._call_api("PUT", final_uri, self.headers, payload=kwargs)
+        return return_non_empty(result)
+
+    def get_watchlist(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        watchlist_alias: str,
+        subscription_id: str,
+        api_version: str = "2021-04-01",
+    ):
+        uri = Endpoint.GETWATCHLIST
+        final_uri = uri.format(subscription_id, resource_group_name, workspace_name, watchlist_alias, api_version)
+        _, result = self._call_api("GET", final_uri, self.headers)
+        return return_non_empty(result)
+
+    def delete_watchlist(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        watchlist_alias: str,
+        subscription_id: str,
+        api_version: str = "2021-04-01",
+    ):
+        uri = Endpoint.DELETEWATCHLIST
+        final_uri = uri.format(subscription_id, resource_group_name, workspace_name, watchlist_alias, api_version)
+        status_code, _ = self._call_api("DELETE", final_uri, self.headers)
+        return status_code
+
+    def list_watchlists(
+        self, resource_group_name: str, workspace_name: str, subscription_id: str, api_version: str = "2021-04-01"
+    ):
+        uri = Endpoint.LISTWATCHLISTS
+        final_uri = uri.format(subscription_id, resource_group_name, workspace_name, api_version)
+        results = self._list_all("GET", final_uri)
+        return [return_non_empty(result) for result in results]
+
     def create_update_watchlist_items(
         self,
         resource_group_name: str,
@@ -582,23 +630,10 @@ class AzureSentinelClient(AzureClient):
         return result
 
     def _prepared_necessary_data(self, indicator, data):
-        data["etag"] = indicator.get("etag")
-        data["kind"] = indicator.get("kind")
-        # optional data
-        if not data["properties"].get("displayName"):
-            data["properties"]["displayName"] = indicator["properties"].get("displayName")
-        if not data["properties"].get("pattern"):
-            data["properties"]["pattern"] = indicator["properties"].get("pattern")
-        if not data["properties"].get("patternType"):
-            data["properties"]["patternType"] = indicator["properties"].get("patternType")
-        if not data["properties"].get("threatTypes"):
-            data["properties"]["threatTypes"] = indicator["properties"].get("threatTypes")
-        return data
-
-    def _get_blocked_fields(self, indicator):
         """
         fields blocked to change for update indicator
         """
+
         blocked_keys = [
             "description",
             "killChainPhases",
@@ -608,8 +643,19 @@ class AzureSentinelClient(AzureClient):
             "externalId",
             "source",
         ]
+        # optional data
+        fields_to_update = ["displayName", "pattern", "patternType", "threatTypes"]
+        for field in fields_to_update:
+            if not data["properties"].get(field):
+                blocked_keys.append(field)
+
         blocked_fields = {"properties": {}}
         for key in blocked_keys:
             if indicator["properties"].get(key) is not None:
                 blocked_fields["properties"][key] = indicator["properties"].get(key)
-        return blocked_fields
+
+        data["etag"] = indicator.get("etag")
+        data["kind"] = indicator.get("kind")
+        data["properties"].update(blocked_fields["properties"])
+
+        return data

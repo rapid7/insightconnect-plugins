@@ -1,6 +1,6 @@
 {
-	"spec": "da85e530c677c0cc2aa39ed3a4bc442e",
-	"manifest": "f7378be0e75d50ff91ae0f876f5afd89",
+	"spec": "3ef451ec402e639f48c7793194bd09a1",
+	"manifest": "a14337092840993b4578eeb429dacc73",
 	"setup": "9c3ad6b7855229190e684d437e54267a",
 	"schemas": [
 		{
@@ -20,6 +20,10 @@
 			"hash": "8f46c14f0a84ca53eb2d8c8c6464acc8"
 		},
 		{
+			"identifier": "create_update_watchlist/schema.py",
+			"hash": "ca112a8375a83a85e00b072ccee9c67f"
+		},
+		{
 			"identifier": "create_update_watchlist_items/schema.py",
 			"hash": "e583a38f15261a227c61001cc61c5452"
 		},
@@ -36,6 +40,10 @@
 			"hash": "04d174f293c3ca26a6a016a96c9c24cc"
 		},
 		{
+			"identifier": "delete_watchlist/schema.py",
+			"hash": "46a56ffb221502147f1bf8eed845b625"
+		},
+		{
 			"identifier": "delete_watchlist_item/schema.py",
 			"hash": "3e2b8434adf15e6aa0941bf6f8389355"
 		},
@@ -50,6 +58,10 @@
 		{
 			"identifier": "get_indicator/schema.py",
 			"hash": "dd5d981b29fe62a6a69126a333696d68"
+		},
+		{
+			"identifier": "get_watchlist/schema.py",
+			"hash": "4ddf655742f1b1be1d49b28785dbda5f"
 		},
 		{
 			"identifier": "get_watchlist_item/schema.py",
@@ -78,6 +90,10 @@
 		{
 			"identifier": "list_watchlist_items/schema.py",
 			"hash": "ea851fc87cc7912de499a647cf536567"
+		},
+		{
+			"identifier": "list_watchlists/schema.py",
+			"hash": "5befd89a6fcb3fe7f15158c02eb38426"
 		},
 		{
 			"identifier": "query_indicator/schema.py",

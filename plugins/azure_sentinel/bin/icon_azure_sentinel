@@ -42,6 +42,8 @@ def main():
 
             self.add_action(actions.CreateUpdateIncident())
 
+            self.add_action(actions.CreateUpdateWatchlist())
+
             self.add_action(actions.CreateUpdateWatchlistItems())
 
             self.add_action(actions.DeleteComment())
@@ -50,6 +52,8 @@ def main():
 
             self.add_action(actions.DeleteIndicator())
 
+            self.add_action(actions.DeleteWatchlist())
+
             self.add_action(actions.DeleteWatchlistItem())
 
             self.add_action(actions.GetComment())
@@ -57,6 +61,8 @@ def main():
             self.add_action(actions.GetIncident())
 
             self.add_action(actions.GetIndicator())
+
+            self.add_action(actions.GetWatchlist())
 
             self.add_action(actions.GetWatchlistItem())
 
@@ -71,6 +77,8 @@ def main():
             self.add_action(actions.ListIncidents())
 
             self.add_action(actions.ListWatchlistItems())
+
+            self.add_action(actions.ListWatchlists())
 
             self.add_action(actions.QueryIndicator())
 

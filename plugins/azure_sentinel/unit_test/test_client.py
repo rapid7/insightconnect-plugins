@@ -343,7 +343,10 @@ class TestClient(TestCase):
                 "displayName": "New Test indicator",
                 "description": "Example description",
                 "created": "2021-04-15T19:51:17.1050923Z",
+                "pattern": "[url:value = 'https://www.contoso.com']",
+                "patternType": "url",
                 "source": "Azure Sentinel",
+                "threatTypes": ["compromised"],
             },
         }
         indicator = {
@@ -450,6 +453,91 @@ class TestClient(TestCase):
         )
 
         mock_get.assert_called_once_with("POST", result_url, headers=self.client.headers, payload=payload)
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_create_update_watchlist(self, mock_get):
+        payload = {"properties": {"name": "Od nendzy do piniendzy"}}
+        group = "group1"
+        workspace = "workspace1"
+        subscription_id = "123-123-123"
+        api_version = "2021-04-01"
+        alias = "testalias"
+        mock_get.return_value = (200, {})
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.create_update_watchlist(group, workspace, alias, subscription_id, api_version, **payload)
+        result_url = Endpoint.CREATEUPDATEWATCHLIST.format(subscription_id, group, workspace, alias, api_version)
+        mock_get.assert_called_once_with("PUT", result_url, self.client.headers, payload=payload)
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_delete_watchlist(self, mock_get):
+        group = "group1"
+        workspace = "workspace1"
+        subscription_id = "123-123-123"
+        api_version = "2021-04-01"
+        alias = "testalias"
+        group = "group1"
+        workspace = "workspace1"
+        subscription_id = "1234"
+        mock_get.return_value = (200, {})
+        api_version = "2021-04-01"
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.delete_watchlist(group, workspace, alias, subscription_id, api_version)
+        result_url = Endpoint.DELETEWATCHLIST.format(
+            subscription_id,
+            group,
+            workspace,
+            alias,
+            api_version,
+        )
+        mock_get.assert_called_once_with("DELETE", result_url, self.client.headers)
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_get_watchlist(self, mock_get):
+        group = "group1"
+        workspace = "workspace1"
+        subscription_id = "123-123-123"
+        api_version = "2021-04-01"
+        alias = "testalias"
+        group = "group1"
+        workspace = "workspace1"
+        subscription_id = "1234"
+        mock_get.return_value = (200, {})
+        api_version = "2021-04-01"
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.get_watchlist(group, workspace, alias, subscription_id, api_version)
+        result_url = Endpoint.GETWATCHLIST.format(
+            subscription_id,
+            group,
+            workspace,
+            alias,
+            api_version,
+        )
+        mock_get.assert_called_once_with("GET", result_url, self.client.headers)
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_list_watchlist(self, mock_get):
+        group = "group1"
+        workspace = "workspace1"
+        subscription_id = "123-123-123"
+        api_version = "2021-04-01"
+        group = "group1"
+        workspace = "workspace1"
+        subscription_id = "1234"
+        mock_get.return_value = (200, {})
+        api_version = "2021-04-01"
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.list_watchlists(group, workspace, subscription_id, api_version)
+        result_url = Endpoint.LISTWATCHLISTS.format(
+            subscription_id,
+            group,
+            workspace,
+            api_version,
+        )
+        mock_get.assert_called_once_with("GET", result_url, self.client.headers, params={})
 
     def _get_indicator_url_data(self):
         resource_group_name = "group1"
