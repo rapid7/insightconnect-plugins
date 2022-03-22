@@ -1,3 +1,5 @@
+import base64
+
 import insightconnect_plugin_runtime
 from .schema import (
     PutIncidentAttachmentInput,
@@ -25,15 +27,16 @@ class PutIncidentAttachment(insightconnect_plugin_runtime.Action):
             f"{self.connection.attachment_url}/file?table_name=incident&table_sys_id={params.get(Input.SYSTEM_ID)}"
             f"&file_name={params.get(Input.ATTACHMENT_NAME)}"
         )
-        payload = params.get(Input.BASE64_CONTENT)
+
         content_type = (
             params.get(Input.MIME_TYPE)
             if params.get(Input.OTHER_MIME_TYPE) == ""
             else params.get(Input.OTHER_MIME_TYPE)
         )
-        method = "post"
 
-        response = self.connection.request.make_request(url, method, payload=payload, content_type=content_type)
+        response = self.connection.request.make_request(
+            url, "post", data=base64.b64decode(params.get(Input.BASE64_CONTENT)), content_type=content_type
+        )
 
         try:
             result = response["resource"].get("result")
