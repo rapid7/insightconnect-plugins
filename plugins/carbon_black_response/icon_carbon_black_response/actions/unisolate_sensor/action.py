@@ -24,3 +24,6 @@ class UnisolateSensor(insightconnect_plugin_runtime.Action):
 
         return {"success": True}
 
+    def test(self):
+        if self.connection.test():
+            return {}
