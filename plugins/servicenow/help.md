@@ -865,6 +865,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 6.0.1 - Fix base64 decoding in Put Incident Attachment action
 * 6.0.0 - Add additional file information in output for Get Attachments for an Incident
 * 5.2.0 - Add new action Get Attachments for an Incident | Add unit test for action Get Attachments for an Incident and Get Incident Attachment
 * 5.1.1 - Fix output parsing bug in Get Incident Attachment action
