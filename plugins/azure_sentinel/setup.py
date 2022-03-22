@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="azure_sentinel-rapid7-plugin",
-      version="1.0.0",
+      version="1.1.0",
       description="Microsoft Azure Sentinel is a cloud-native SIEM that provides intelligent security analytics for your entire enterprise, powered by AI",
       author="rapid7",
       author_email="",

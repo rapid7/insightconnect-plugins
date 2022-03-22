@@ -1,19 +1,31 @@
 {
-	"spec": "d357e4b624f37ab1d39487782d8142cd",
-	"manifest": "484bf4424ae48b5bdfb4833c3ec39ff2",
-	"setup": "5456f851cb1b0069d3a8c46fe79fe0fb",
+	"spec": "29e0eb6e15754303855089d09ad747ff",
+	"manifest": "47cd47b1e776ec3d7795d510cc91ca91",
+	"setup": "ac699adfc8d79aeef99c72d70a4560b6",
 	"schemas": [
 		{
 			"identifier": "create_update_incident/schema.py",
 			"hash": "93f9976acee6e0cddf338bfd6c0b759c"
 		},
 		{
+			"identifier": "create_update_watchlist/schema.py",
+			"hash": "ca112a8375a83a85e00b072ccee9c67f"
+		},
+		{
 			"identifier": "delete_incident/schema.py",
 			"hash": "4263c94749a3cd045cdbaf8b9547eda3"
 		},
 		{
+			"identifier": "delete_watchlist/schema.py",
+			"hash": "46a56ffb221502147f1bf8eed845b625"
+		},
+		{
 			"identifier": "get_incident/schema.py",
 			"hash": "baa46f97dc96396261e5f17497773c08"
+		},
+		{
+			"identifier": "get_watchlist/schema.py",
+			"hash": "4ddf655742f1b1be1d49b28785dbda5f"
 		},
 		{
 			"identifier": "list_alerts/schema.py",
@@ -30,6 +42,10 @@
 		{
 			"identifier": "list_incidents/schema.py",
 			"hash": "7d2fa306f13509685b00195d61b7da71"
+		},
+		{
+			"identifier": "list_watchlists/schema.py",
+			"hash": "5befd89a6fcb3fe7f15158c02eb38426"
 		},
 		{
 			"identifier": "connection/schema.py",

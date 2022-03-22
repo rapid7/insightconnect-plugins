@@ -10,6 +10,10 @@ Azure Sentinel is Microsoft's' automated security service.
 * Listing incidents for a given workspace
 * Listing bookmarks for a given incident
 * Listing alerts for a given incident
+* Creating and updating watchlists
+* Retriveing a watchlist
+* Deleting a watchlist
+* Listing watchlists for a given workspace
 
 # Requirements
 
@@ -44,6 +48,196 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### List Watchlists
+
+This action is used to list watchlists.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription. The name is case insensitive|None|resourcegroup1|
+|subscriptionId|string|None|True|Azure subscription ID|None|d0cfe6b2-9ac0-4464-9919-dccaee2e48c0|
+|workspaceName|string|None|True|The name of the workspace|None|workspace1|
+
+Example input:
+
+```
+{
+  "resourceGroupName": "resourcegroup1",
+  "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+  "workspaceName": "workspace1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|watchlists|[]Watchlist|False|List of watchlists|
+
+Example output:
+
+```
+{
+  "watchlists":[
+    {
+      "id":"/subscriptions/0cea5e5b-a751-42ca-9151-dg965e27aefe/resourceGroups/integrationLab/providers/Microsoft.OperationalInsights/workspaces/sentinel/providers/Microsoft.SecurityInsights/Watchlists/Od nendzy do piniendzy",
+      "name":"Od nendzy do piniendzy",
+      "type":"Microsoft.SecurityInsights/Watchlists",
+      "systemData":{
+        "createdAt":"2022-04-12T18:37:46.6066473Z",
+        "createdBy":"cbebe4c0-d1a1-43e8-973a-5292f659c22e",
+        "createdByType":"Application",
+        "lastModifiedAt":"2022-04-12T18:37:46.6066473Z",
+        "lastModifiedBy":"cbebe4c0-d1a1-43e8-973a-5292f659c22e",
+        "lastModifiedByType":"Application"
+      },
+      "properties":{
+        "watchlistId":"8964710e-13fb-4b57-a6b6-90592a92b0fb",
+        "displayName":"High Value Assets Watchlist",
+        "provider":"Microsoft",
+        "source":"Local File",
+        "itemsSearchKey":"header1",
+        "created":"2022-04-12T18:37:46.6066473+00:00",
+        "updated":"2022-04-12T18:37:46.6066473+00:00",
+        "createdBy":{
+          "objectId":"dd702e59-e27b-48f6-95df-05c12f3f47c4",
+          "name":"cbebe4c0-d1a1-43e8-973a-5292f659c22e"
+        },
+        "updatedBy":{
+          "objectId":"dd702e59-ed7d-48d6-15d1-15a12a3f47e4",
+          "name":"cbebe4c0-d1a1-43e8-973a-5292f659c22e"
+        },
+        "description":"Watchlist from CSV content",
+        "watchlistType":"watchlist",
+        "watchlistAlias":"Od nendzy do piniendzy",
+        "isDeleted":false,
+        "labels":[
+          
+        ],
+        "tenantId":"5c1214199-de3c-4531-96fb-3b886d4f8f10",
+        "numberOfLinesToSkip":0,
+        "uploadStatus":"Complete"
+      }
+    }
+  ]
+}
+```
+
+#### Get Watchlist
+
+This action is used to get requested watchlist.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription. The name is case insensitive|None|resourcegroup1|
+|subscriptionId|string|None|True|Azure subscription ID|None|d0cfe6b2-9ac0-4464-9919-dccaee2e48c0|
+|watchlistAlias|string|None|True|The watchlist alias|None|examplealias1|
+|workspaceName|string|None|True|The name of the workspace|None|workspace1|
+
+Example input:
+
+```
+{
+  "resourceGroupName": "resourcegroup1",
+  "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+  "watchlistAlias": "examplealias1",
+  "workspaceName": "workspace1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|watchlist|Watchlist|False|Requested watchlist|
+
+Example output:
+
+```
+```
+
+#### Delete Watchlist
+
+This action is used to delete requested watchlist.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription. The name is case insensitive|None|resourcegroup1|
+|subscriptionId|string|None|True|Azure subscription ID|None|d0cfe6b2-9ac0-4464-9919-dccaee2e48c0|
+|watchlistAlias|string|None|True|The watchlist alias|None|examplealias1|
+|workspaceName|string|None|True|The name of the workspace|None|workspace1|
+
+Example input:
+
+```
+{
+  "resourceGroupName": "resourcegroup1",
+  "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+  "watchlistAlias": "examplealias1",
+  "workspaceName": "workspace1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|status|integer|False|Deletion status, 200 - ok, 204 - no content|
+
+Example output:
+
+```
+```
+
+#### Create or Update Watchlist
+
+This action is used to create or update a Watchlist and its Watchlist Items.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|properties|WatchlistProperties|None|True|All the properties included in the body of the query|None|{'displayName': 'High Value Assets Watchlist', 'source': 'Local File', 'provider': 'Microsoft', 'description': 'Watchlist from CSV content', 'itemsSearchKey': 'header1', 'contentType': 'text/csv'}|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription. The name is case insensitive|None|resourcegroup1|
+|subscriptionId|string|None|True|Azure subscription ID|None|d0cfe6b2-9ac0-4464-9919-dccaee2e48c0|
+|watchlistAlias|string|None|True|The watchlist alias|None|somealias1|
+|workspaceName|string|None|True|The name of the workspace|None|workspace1|
+
+Example input:
+
+```
+{
+  "resourceGroupName": "resourcegroup1",
+  "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+  "watchlistAlias": "somealias1",
+  "workspaceName": "workspace1"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|watchlist|Watchlist|False|Output watchlist|
+
+Example output:
+
+```
+{
+  "properties": {"displayName": "HighValueAssets"},
+  "resourceGroupName": "resourcegroup1",
+  "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+  "watchlistAlias": "somealias1",
+  "workspaceName": "workspace1"
+}
+```
 
 #### List Entities
 
@@ -694,6 +888,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.0 - New actions related to watchlists (Actions: Create or Update Watchlist, Delete Watchlist, List Watchlists, Get Watchlist)
 * 1.0.0 - Initial plugin (Actions: Create or Update Incident, Delete Incident, List Incidents, Get Incident, List Alerts, List Bookmarks, List Entities)
 
 # Links

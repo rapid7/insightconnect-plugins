@@ -6,22 +6,21 @@ title: Azure Sentinel Plugin
 vendor: rapid7
 support: community
 supported_versions: [2021-04-01]
-status: []
 description: Microsoft Azure Sentinel is a cloud-native SIEM that provides intelligent security analytics for your entire enterprise, powered by AI
-version: 1.0.0
+version: 1.1.0
+status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/azure_sentinel
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.microsoft.com/
 tags:
-  - cloud
   - Azure Sentinel
   - VM
   - Microsoft
   - automation
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [azure, incidents, cloud, microsoft]
+  keywords: [azure, incidents, microsoft]
   features: [create incident, delete incident, get incident, list incidents, list alerts, list bookmarks, list entities]
 types:
   # Common types
@@ -474,26 +473,155 @@ types:
       description: Azure resource type
       type: string
   Incident:
-      id:
-        title: ID 
-        description: Full incident ID
-        type: string
-      name:
-        title: Name 
-        description: Incident name - short ID
-        type: string
-      type:
-        title: Type
-        description: Incident type
-        type: string
-      etag:
-        title: Etag
-        description: Etag
-        type: string
-      properties:
-        title: Incident Properties
-        description: Incident properties object
-        type: IncidentProperties
+    id:
+      title: ID 
+      description: Full incident ID
+      type: string
+    name:
+      title: Name 
+      description: Incident name - short ID
+      type: string
+    type:
+      title: Type
+      description: Incident type
+      type: string
+    etag:
+      title: Etag
+      description: Etag
+      type: string
+    properties:
+      title: Incident Properties
+      description: Incident properties object
+      type: IncidentProperties
+  ClientInfo:
+    email:
+      description: The email of the client
+      title: Email
+      type: string
+    name:
+      description: The name of the client
+      title: Name
+      type: string
+    objectId:
+      description: The object id of the client
+      title: Object ID
+      type: string
+    userPrincipaName:
+      description: The user principal name of the client
+      title: User Principa Name
+      type: string
+  WatchlistProperties:
+    contentType:
+      title: Content Type
+      description: The content type of the raw content
+      type: string
+      example: text/csv
+    created:
+      title: Created
+      description: The time the watchlist was created
+      type: date 
+    createdBy:
+      title: Created By
+      description: Describes a user that created the watchlist
+      type: UserInfo
+    defaultDuration:
+      title: Default Duration
+      description: The default duration of a watchlist (in ISO 8601 duration format)
+      type: string
+    description:
+      title: Description 
+      description: A description of the watchlist
+      type: string
+    displayName:
+      title: Display Name 
+      description: The display name of the watchlist
+      type: string
+      required: true
+    isDeleted:
+      title: Is Deleted
+      description: A flag that indicates if the watchlist is deleted or not
+      type: boolean
+    itemsSearchKey:
+      title: Items Search Key 
+      description: The search key is used to optimize query performance when using watchlists
+        for joins with other data. For example, enable a column with IP addresses to
+        be the designated SearchKey field, then use this field as the key field when
+        joining to other event data by IP address
+      example: header1 
+      required: true
+      type: string
+    labels:
+      description: List of labels relevant to this watchlist
+      title: List of labels relevant to this watchlist
+      type: "[]string"
+    numberOfLinesToSkip:
+      description: The number of lines in a CSV content to skip before the header
+      title: Number Of Lines To Skip
+      type: integer
+    provider:
+      description: The provider of the watchlist
+      title: Provider 
+      type: string
+      required: true
+    rawContent:
+      description: The raw content that represents to watchlist items to create
+      title: Raw Content
+      type: string
+    source:
+      description: The source of the watchlist
+      title: Source 
+      type: string
+      required: true
+      example: Local File
+    tenantId:
+      description: The tenantId where the watchlist belongs to
+      title: Tenant ID
+      type: string
+    updated:
+      description: The last time the watchlist was updated
+      title: Updated 
+      type: string
+    updatedBy:
+      description: Describes a user that updated the watchlist
+      title: Updated By 
+      type: UserInfo
+    uploadStatus:
+      description: The status of the watchlist
+      title: Watchlist Upload Status 
+      type: string
+    watchlistAlias:
+      description: The alias of the watchlist
+      title: Watchlist Alias 
+      type: string
+    watchlistId:
+      description: The id (a Guid) of the watchlist
+      title: Watchlist ID 
+      type: string
+    watchlistType:
+      description: The type of the watchlist
+      title: Watchlist Type 
+      type: string
+  Watchlist:
+    type:
+      title: Type
+      description: Resource type
+      type: string
+    id:
+      title: ID
+      description: Fully qualified resource ID for the resource
+      type: string
+    etag:
+      title: Etag
+      description: Entity tag of the resource
+      type: string
+    name:
+      title: Name
+      description: Resource name (short ID)
+      type: string
+    properties:
+      title: Properties
+      description: Watchlist properties
+      type: WatchlistProperties
 connection:
   client_id:
     title: Client ID
@@ -516,6 +644,46 @@ connection:
     required: true
     example: 5ceea899-ae8c-4ff1-fffe-353646eeeff0
 actions:
+  create_update_watchlist:
+    title: Create or Update Watchlist
+    description: Create or update a Watchlist and its Watchlist Items
+    input:
+      resourceGroupName:
+        title: Resource Group Name
+        required: true
+        description: The name of the resource group within the user's subscription. The name is case insensitive
+        type: string
+        example: resourcegroup1
+      subscriptionId:
+        title: Subscription ID
+        required: true
+        description: Azure subscription ID
+        type: string
+        example: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0 
+      workspaceName:
+        title: Workspace Name
+        required: true
+        description: The name of the workspace
+        type: string
+        example: workspace1
+      watchlistAlias:
+        title: Watchlist Alias
+        description: The watchlist alias
+        type: string
+        required: true
+        example: somealias1
+      properties:
+        title: Watchlist Properties
+        description: All the properties included in the body of the query
+        type: WatchlistProperties
+        required: true
+        example: "{'displayName': 'High Value Assets Watchlist', 'source': 'Local File', 'provider': 'Microsoft', 'description': 'Watchlist from CSV content', 'itemsSearchKey': 'header1', 'contentType': 'text/csv'}"
+    output:
+      watchlist:
+        title: Output Watchlist
+        description: Output watchlist
+        type: Watchlist
+        required: false
   create_update_incident:
     title: Create or Update Incident
     description: Creates a new incident or updates an existing incident 
@@ -800,3 +968,99 @@ actions:
         description: All the entities assigned to the given incident
         type: "[]Entity"
         required: false
+  get_watchlist:
+    title: Get Watchlist 
+    description: Get requested watchlist 
+    input:
+      resourceGroupName:
+        title: Resource Group Name
+        required: true
+        description: The name of the resource group within the user's subscription. The name is case insensitive
+        type: string
+        example: resourcegroup1
+      subscriptionId:
+        title: Subscription ID
+        required: true
+        description: Azure subscription ID
+        type: string
+        example: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0 
+      workspaceName:
+        title: Workspace Name
+        required: true
+        description: The name of the workspace
+        type: string
+        example: workspace1
+      watchlistAlias:
+        title: Watchlist Alias
+        description: The watchlist alias
+        type: string
+        required: true
+        example: examplealias1
+    output:
+      watchlist:
+        title: Watchlist
+        description: Requested watchlist
+        type: Watchlist
+        required: False
+  delete_watchlist:
+    title: Delete Watchlist
+    description: Delete requested watchlist
+    input:
+      resourceGroupName:
+        title: Resource Group Name
+        required: true
+        description: The name of the resource group within the user's subscription. The name is case insensitive
+        type: string
+        example: resourcegroup1
+      subscriptionId:
+        title: Subscription ID
+        required: true
+        description: Azure subscription ID
+        type: string
+        example: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0 
+      workspaceName:
+        title: Workspace Name
+        required: true
+        description: The name of the workspace
+        type: string
+        example: workspace1
+      watchlistAlias:
+        title: Watchlist Alias
+        description: The watchlist alias
+        type: string
+        required: true
+        example: examplealias1
+    output:
+      status:
+        title: Deletion Status
+        description: Deletion status, 200 - ok, 204 - no content
+        type: integer
+        required: false   
+  list_watchlists:
+    title: List Watchlists
+    description: List watchlists
+    input:
+      resourceGroupName:
+        title: Resource Group Name
+        required: true
+        description: The name of the resource group within the user's subscription. The name is case insensitive
+        type: string
+        example: resourcegroup1
+      subscriptionId:
+        title: Subscription ID
+        required: true
+        description: Azure subscription ID
+        type: string
+        example: d0cfe6b2-9ac0-4464-9919-dccaee2e48c0 
+      workspaceName:
+        title: Workspace Name
+        required: true
+        description: The name of the workspace
+        type: string
+        example: workspace1
+    output:
+      watchlists:
+        title: Output Watchlists
+        description: List of watchlists
+        type: "[]Watchlist"
+        required: False
