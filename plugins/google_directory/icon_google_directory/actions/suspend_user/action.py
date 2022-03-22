@@ -1,28 +1,27 @@
-import komand
-from .schema import SuspendUserInput, SuspendUserOutput, Input
+import insightconnect_plugin_runtime
+from .schema import SuspendUserInput, SuspendUserOutput, Input, Output, Component
 
 # Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class SuspendUser(komand.Action):
+class SuspendUser(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="suspend_user",
-            description="Suspends a user account",
+            description=Component.DESCRIPTION,
             input=SuspendUserInput(),
             output=SuspendUserOutput(),
         )
 
     def run(self, params={}):
-        email = params.get(Input.EMAIL)
-        service = self.connection.service
-
-        user = service.users().update(userKey=email, body={"suspended": True}).execute()
-
+        user = (
+            self.connection.service.users().update(userKey=params.get(Input.EMAIL), body={"suspended": True}).execute()
+        )
         if "suspended" in user:
-            return {"success": user["suspended"]}
+            return {Output.SUCCESS: user.get("suspended")}
         else:
-            raise Exception(
-                "Error: Suspend status was not found in the server response. "
-                "Please check and verify the status of the user."
+            raise PluginException(
+                cause="Suspend status was not found in the server response.",
+                assistance="Please check and verify the status of the user.",
             )
