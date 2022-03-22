@@ -130,7 +130,7 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Backend Timestamp",
           "displayType": "date",
-          "description": "Timestamp when the Carbon Black Cloud processed and enabled the data for searching",
+          "description": "ISO 8601 Timestamp when the Carbon Black Cloud processed and enabled the data for searching",
           "format": "date-time",
           "order": 56
         },
@@ -212,6 +212,12 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "description": "Filesystem path of the child process' binary",
           "order": 73
         },
+        "childproc_pid": {
+          "type": "integer",
+          "title": "Childproc PID",
+          "description": "Process identifier assigned by the operating system to the child process",
+          "order": 74
+        },
         "childproc_process_guid": {
           "type": "string",
           "title": "Childproc Process GUID",
@@ -259,12 +265,6 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "title": "Childproc Username",
           "description": "The user context in which the child process was executed",
           "order": 81
-        },
-        "childprod_pid": {
-          "type": "integer",
-          "title": "Childproc PID",
-          "description": "Process identifier assigned by the operating system to the child process",
-          "order": 74
         },
         "crossproc_action": {
           "type": "string",
@@ -441,7 +441,7 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Device Timestamp",
           "displayType": "date",
-          "description": "Sensor-reported timestamp of the batch of events in which this record was submitted to Carbon Black Cloud",
+          "description": "Sensor-reported ISO 8601 timestamp of the batch of events in which this record was submitted to Carbon Black Cloud",
           "format": "date-time",
           "order": 15
         },
@@ -542,7 +542,7 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Event Timestamp",
           "displayType": "date",
-          "description": "Timestamp reported by the sensor when the event occured",
+          "description": "ISO 8601 Timestamp reported by the sensor when the event occured",
           "format": "date-time",
           "order": 100
         },
@@ -1033,7 +1033,7 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Process End Time",
           "displayType": "date",
-          "description": "Sensor timestamp when the process terminated; available after sensor reports the process has terminated",
+          "description": "Sensor ISO 8601 timestamp when the process terminated; available after sensor reports the process has terminated",
           "format": "date-time",
           "order": 151
         },
@@ -1173,7 +1173,7 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Process Start Time",
           "displayType": "date",
-          "description": "Sensor reported timestamp of when the process started",
+          "description": "Sensor reported ISO 8601 timestamp of when the process started",
           "format": "date-time",
           "order": 11
         },

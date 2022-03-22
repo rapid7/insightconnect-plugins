@@ -7,7 +7,7 @@ description: Find events and retrieve details for specific events
 version: 3.0.0
 vendor: rapid7
 support: rapid7
-supported_versions: ["2022-15-03T12:00:00Z"]
+supported_versions: ["2022-03-15"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/carbon_black_defense
@@ -190,7 +190,7 @@ types:
     process_start_time:
       title: Process Start Time
       type: date
-      description: Sensor reported timestamp of when the process started
+      description: Sensor reported ISO 8601 timestamp of when the process started
       required: false
     process_username:
       title: Process Username
@@ -210,7 +210,7 @@ types:
     device_timestamp:
       title: Device Timestamp
       type: date
-      description: Sensor-reported timestamp of the batch of events in which this record was submitted to Carbon Black Cloud
+      description: Sensor-reported ISO 8601 timestamp of the batch of events in which this record was submitted to Carbon Black Cloud
       required: false
     netconn_location:
       title: Netconn Location
@@ -415,7 +415,7 @@ types:
     backend_timestamp:
       title: Backend Timestamp
       type: date
-      description: Timestamp when the Carbon Black Cloud processed and enabled the data for searching
+      description: ISO 8601 Timestamp when the Carbon Black Cloud processed and enabled the data for searching
       required: false
     parent_pid:
       title: Parent PID
@@ -501,7 +501,7 @@ types:
       type: string
       description: Filesystem path of the child process' binary
       required: false
-    childprod_pid:
+    childproc_pid:
       title: Childproc PID
       type: integer
       description: Process identifier assigned by the operating system to the child process
@@ -634,7 +634,7 @@ types:
     event_timestamp:
       title: Event Timestamp
       type: date
-      description: Timestamp reported by the sensor when the event occured
+      description: ISO 8601 Timestamp reported by the sensor when the event occured
       required: false
     file_scan_result:
       title: File Scan Result
@@ -889,7 +889,7 @@ types:
     process_end_time:
       title: Process End Time
       type: date
-      description: Sensor timestamp when the process terminated; available after sensor reports the process has terminated
+      description: Sensor ISO 8601 timestamp when the process terminated; available after sensor reports the process has terminated
       required: false
     process_file_description:
       title: Process File Description

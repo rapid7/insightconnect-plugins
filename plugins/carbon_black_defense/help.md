@@ -15,7 +15,7 @@ This plugin utilizes the [VMware Carbon Black Cloud Endpoint Standard API](https
 
 # Supported Product Versions
 
-* 2022-15-03T12:00:00Z
+* 2022-15-03
 
 # Documentation
 
@@ -60,19 +60,6 @@ This action is used to retrieve all events matching the input search criteria. R
 |process_name|[]string|None|False|Process name|None|c:\windows\system32\windowspowershell\v1.0\modules\smbshare\disableunusedsmb1.ps1|
 |time_range|string|None|False|Time frame to limit your search to. Integer used for amount of the following: s=second(s), m=minute(s), h=hour(s), d=day(s), w=week(s), or y=year(s). Example: -2d|None|-2d|
 
-```
-{
-  "device_external_ip": "45.62.187.4",
-  "device_installed_by": "CONTOSO\\admin",
-  "device_name": "CONTOSO\\bruce-win10",
-  "enriched_event_type": "SYSTEM_API_CALL",
-  "event_id": "422af3fc3a7411ea8da649e797467dc0",
-  "process_hash": [
-    "A3DED3871AC66498E406798B0CA33F1B5E94B9CFB60DD4489475B9C19FBFD7F5"
-  ],
-  "process_name": "c:\\windows\\system32\\windowspowershell\\v1.0\\modules\\smbshare\\disableunusedsmb1.ps1"
-}
-```
 
 Example input:
 
@@ -303,4 +290,3 @@ The Find Event API and Get Details for Specific Event API are now documented as 
 * [VMware Carbon Black Cloud Endpoint Standard API](https://developer.carbonblack.com/reference/carbon-black-cloud/cb-defense/latest/rest-api/)
 * [Rate Limits](https://developer.carbonblack.com/reference/carbon-black-cloud/rate-limiting/)
 * [API Key Types](https://developer.carbonblack.com/reference/carbon-black-cloud/authentication/#creating-an-api-key)
-* 
