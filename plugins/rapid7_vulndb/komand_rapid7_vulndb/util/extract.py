@@ -1,11 +1,23 @@
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 # import all transformations
-from komand_rapid7_vulndb.util.transform import *
+from komand_rapid7_vulndb.util.transform import (
+    transform,
+    serialize_fields,
+    normalize_published_field,
+    flatten_data_field,
+    serialize_alternate_ids,
+    generate_link_attr,
+    pop_non_relevant_search_fields,
+    pop_non_relevant_module_fields,
+    pop_non_relevant_vuln_fields,
+)
 from typing import Dict
 import requests
 import copy
 from urllib.parse import urljoin
+
+from komand_rapid7_vulndb.util.util import Util
 
 
 class Search:
@@ -16,6 +28,7 @@ class Search:
     search_url: str = "https://vdb-kasf1i23nr1kl2j4.rapid7.com/v1/search"
 
     @classmethod
+    @Util.retry(tries=1, timeout=30, exceptions=PluginException, backoff_seconds=1)
     def execute_query(cls, query: Dict) -> Dict:
         """
         Executes API query by sending a request to API
@@ -25,7 +38,7 @@ class Search:
         :return: Data as dictionary
         """
         response = requests.get(cls.search_url, params=query, allow_redirects=False)
-        response.raise_for_status()
+        _response_error_handler(response.status_code, response.text)
         return response.json()
 
     @classmethod
@@ -95,6 +108,14 @@ class Content:
     ]
 
     @classmethod
+    @Util.retry(tries=1, timeout=30, exceptions=PluginException, backoff_seconds=1)
+    def retrieve_by_identifier(cls, identifier: str):
+        # extract data from API
+        response = requests.get(urljoin(cls.content_url, identifier))
+        _response_error_handler(response.status_code, response.text)
+        return response.json()
+
+    @classmethod
     def get(cls, identifier: str) -> Dict:
 
         """
@@ -105,11 +126,8 @@ class Content:
         :return:  transformed data
         """
 
-        # extract data from API
-        response = requests.get(urljoin(cls.content_url, identifier))
-        response.raise_for_status()
         modifiers = []
-        data = response.json()
+        data = cls.retrieve_by_identifier(identifier)
 
         # Fix for bug in API where an int is returned in some conditions on severity
         # E.g. msft-cve-2019-0708
@@ -138,3 +156,19 @@ class Content:
 
         # transform the data
         return transform(data, *modifiers)
+
+
+def _response_error_handler(status_code: int, text: str):
+    if 400 <= status_code < 500:
+        if status_code == 404:
+            raise PluginException(
+                cause="The requested resource could not be found.",
+                assistance="Please ensure that the input parameters are correct.",
+                data=text,
+            )
+        raise PluginException(
+            preset=PluginException.Preset.UNKNOWN,
+            data=text,
+        )
+    if status_code >= 500:
+        raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=text)

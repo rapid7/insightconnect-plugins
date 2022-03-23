@@ -1,0 +1,39 @@
+{
+    "data": [
+        {
+            "id": 1234,
+            "type": "Metasploit",
+            "identifier": "test_identifier_5",
+            "title": "test_title_5",
+            "description": "test_description_5",
+            "data": {
+                "disclosure_date": "2017-01-01",
+                "architectures": "",
+                "platform": "Windows",
+                "authors": [
+                    "Example User \"123456\" <user@example.co>"
+                ],
+                "rank": 600,
+                "targets": [
+                    "Windows x86",
+                    "Windows x64"
+                ],
+                "path": "/modules/exploits/windows/local/test_identifier_5"
+            },
+            "references": [
+                "test_reference_5"
+            ],
+            "created_at": "2018-01-01T00:00:00.000Z",
+            "updated_at": "2018-01-01T00:00:00.000Z",
+            "published_at": "2018-01-01T00:00:00.000Z",
+            "content_type": "module"
+        }
+    ],
+    "metadata": {
+        "index": 1,
+        "size": 1,
+        "sort": "created_at,DESC",
+        "total_pages": 1,
+        "total_data": 1
+    }
+}
