@@ -1,27 +1,59 @@
 {
-	"spec": "d357e4b624f37ab1d39487782d8142cd",
-	"manifest": "484bf4424ae48b5bdfb4833c3ec39ff2",
-	"setup": "5456f851cb1b0069d3a8c46fe79fe0fb",
+	"spec": "02007525f223bfe83a1718d37702b4fa",
+	"manifest": "57dd73fbc3c30e783f0c9d2acd507913",
+	"setup": "ac699adfc8d79aeef99c72d70a4560b6",
 	"schemas": [
 		{
+			"identifier": "append_tags/schema.py",
+			"hash": "970578dff23d82b552ce67b6dc2e15c0"
+		},
+		{
+			"identifier": "create_indicator/schema.py",
+			"hash": "5d7c50b4689e4207e097a477d131c501"
+		},
+		{
+			"identifier": "create_update_comment/schema.py",
+			"hash": "be1845f2d47ae7a6abb7c9a68e435a60"
+		},
+		{
 			"identifier": "create_update_incident/schema.py",
-			"hash": "93f9976acee6e0cddf338bfd6c0b759c"
+			"hash": "1dc9f0b995716d6441f69df44d311811"
+		},
+		{
+			"identifier": "delete_comment/schema.py",
+			"hash": "88792508d72442af971d56020124c814"
 		},
 		{
 			"identifier": "delete_incident/schema.py",
 			"hash": "4263c94749a3cd045cdbaf8b9547eda3"
 		},
 		{
+			"identifier": "delete_indicator/schema.py",
+			"hash": "04d174f293c3ca26a6a016a96c9c24cc"
+		},
+		{
+			"identifier": "get_comment/schema.py",
+			"hash": "dac724e1be2278cbc65fec91760ed51e"
+		},
+		{
 			"identifier": "get_incident/schema.py",
-			"hash": "baa46f97dc96396261e5f17497773c08"
+			"hash": "83c7748a6de073685953f8c0ef128946"
+		},
+		{
+			"identifier": "get_indicator/schema.py",
+			"hash": "dd5d981b29fe62a6a69126a333696d68"
 		},
 		{
 			"identifier": "list_alerts/schema.py",
-			"hash": "c713c5063438528c5c89fc1ffb9869ee"
+			"hash": "79613958f949e6fdaf54e981d0578cb3"
 		},
 		{
 			"identifier": "list_bookmarks/schema.py",
-			"hash": "bc375af7afc92b1784374ac28b2fc04e"
+			"hash": "df5a3c3b1a0f50ff98cc6c0818603900"
+		},
+		{
+			"identifier": "list_comments/schema.py",
+			"hash": "88db02fedaffaa6bc6c33b708357f514"
 		},
 		{
 			"identifier": "list_entities/schema.py",
@@ -29,7 +61,19 @@
 		},
 		{
 			"identifier": "list_incidents/schema.py",
-			"hash": "7d2fa306f13509685b00195d61b7da71"
+			"hash": "8ffbb236cb2cd267f8b268be86997ff4"
+		},
+		{
+			"identifier": "query_indicator/schema.py",
+			"hash": "94dc763a0f8e337bfa6013d10bf388e1"
+		},
+		{
+			"identifier": "replace_tags/schema.py",
+			"hash": "d71ab962502cc5876da3a39aab97141e"
+		},
+		{
+			"identifier": "update_indicator/schema.py",
+			"hash": "db483a64c961b6325daf39786f155050"
 		},
 		{
 			"identifier": "connection/schema.py",

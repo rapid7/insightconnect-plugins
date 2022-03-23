@@ -104,7 +104,7 @@ class AzureSentinelClient(AzureClient):
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND)
             if error.response.status_code == 409:
                 raise PluginException(
-                    cause="Conflicted state of the object",
+                    cause="Conflicted state of the target resource",
                     assistance=error.response.json().get("error", {}).get("message"),
                 )
             if error.response.status_code >= 500:
@@ -349,3 +349,163 @@ class AzureSentinelClient(AzureClient):
         )
         status_code, _ = self._call_api("DELETE", final_uri, self.headers)
         return status_code
+
+    def create_indicator(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        api_version: str = "2021-10-01",
+        **kwargs,
+    ):
+        uri = Endpoint.CREATEINDICATOR
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            api_version,
+        )
+        data = kwargs
+        _, result = self._call_api("POST", final_uri, headers=self.headers, payload=data)
+        return result
+
+    def update_indicator(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        indicator_name: str,
+        api_version: str = "2021-10-01",
+        **kwargs,
+    ):
+        uri = Endpoint.UPDATEINDICATOR
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            indicator_name,
+            api_version,
+        )
+        indicator = self.get_indicator(resource_group_name, workspace_name, subscription_id, indicator_name)
+        data = self._prepared_necessary_data(indicator, kwargs)
+
+        _, result = self._call_api("PUT", final_uri, headers=self.headers, payload=data)
+        return result
+
+    def get_indicator(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        indicator_name: str,
+        api_version: str = "2021-10-01",
+    ):
+        uri = Endpoint.GETINDICATOR
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            indicator_name,
+            api_version,
+        )
+        _, result = self._call_api("GET", final_uri, headers=self.headers)
+        return result
+
+    def delete_indicator(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        indicator_name: str,
+        api_version: str = "2021-10-01",
+    ):
+        uri = Endpoint.DELETEINDICATOR
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            indicator_name,
+            api_version,
+        )
+        _, result = self._call_api("DELETE", final_uri, headers=self.headers)
+        return result
+
+    def query_indicator(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        api_version: str = "2021-10-01",
+        **kwargs,
+    ):
+        uri = Endpoint.QUERYINDICATORS
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            api_version,
+        )
+        data = kwargs
+        _, result = self._call_api("POST", final_uri, headers=self.headers, payload=data)
+        return result
+
+    def append_tags(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        indicator_name: str,
+        api_version: str = "2021-10-01",
+        **kwargs,
+    ):
+        uri = Endpoint.APPENDTAGS
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            indicator_name,
+            api_version,
+        )
+        data = kwargs
+        _, result = self._call_api("POST", final_uri, headers=self.headers, payload=data)
+        return result
+
+    def replace_tags(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        indicator_name: str,
+        api_version: str = "2021-10-01",
+        **kwargs,
+    ):
+        uri = Endpoint.REPLACETAGS
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            indicator_name,
+            api_version,
+        )
+        data = kwargs
+        _, result = self._call_api("POST", final_uri, headers=self.headers, payload=data)
+        return result
+
+    def _prepared_necessary_data(self, indicator, kwargs):
+        data = kwargs
+        data["etag"] = indicator.get("etag")
+        data["kind"] = indicator.get("kind")
+        data["properties"]["created"] = indicator["properties"].get("created")
+        data["properties"]["createdByRef"] = indicator["properties"].get("createdByRef")
+        data["properties"]["externalId"] = indicator["properties"].get("externalId")
+        data["properties"]["source"] = indicator["properties"].get("source")
+        # optional data
+        if not data["properties"].get("displayName"):
+            data["properties"]["displayName"] = indicator["properties"].get("displayName")
+        if not data["properties"].get("pattern"):
+            data["properties"]["pattern"] = indicator["properties"].get("pattern")
+        if not data["properties"].get("patternType"):
+            data["properties"]["patternType"] = indicator["properties"].get("patternType")
+        if not data["properties"].get("threatTypes"):
+            data["properties"]["threatTypes"] = indicator["properties"].get("threatTypes")
+        return data

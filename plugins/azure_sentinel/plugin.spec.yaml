@@ -36,7 +36,7 @@ types:
       description: Description 
       type: string
     ManagedIdentity:
-      title: Managed Indentity
+      title: Managed Identity
       description: Managed identity
       type: string
     User:
@@ -507,9 +507,9 @@ types:
       description: The object id of the client
       title: Object ID
       type: string
-    userPrincipaName:
+    userPrincipalName:
       description: The user principal name of the client
-      title: User Principa Name
+      title: User Principal Name
       type: string
   CommentProperties:
     author:
@@ -558,6 +558,360 @@ types:
       description: Comment properties
       title: Properties
       type: CommentProperties
+  ## ThreatInteligence Types
+  ThreatIntelligenceKillChainPhase:
+    killChainName:
+      title: Chain Name
+      description: Kill chain name
+      type: string
+    phaseName:
+      title: Phase Name
+      description: Kill chain phase name
+      type: string
+  ThreatIntelligenceParsedPatternTypeValue:
+    value:
+      title: Value
+      description: Value
+      type: string
+    valueType:
+      title: Value Type
+      description: Type of the value
+      type: string
+  ThreatIntelligenceParsedPattern:
+    patternTypeKey:
+      title: Pattern Type Key
+      description: Pattern Type Key
+      type: string
+    patternTypeValues:
+      title: Pattern Type Values
+      description: Pattern Type Values
+      type: "[]ThreatIntelligenceParsedPatternTypeValue"
+  ThreatIntelligenceGranularMarkingModel:
+    language:
+      title: Language
+      description: Language granular marking model
+      type: string
+      required: false
+    markingRef:
+      title: Marking Reference
+      description: Marking reference granular marking model
+      type: string
+      required: false
+    selectors:
+      title: Selectors
+      description: Granular marking model selectors
+      type: "[]string"
+      required: false
+  ThreatIntelligenceExternalReference:
+    description:
+      title: Description
+      description: External reference description
+      type: string
+      required: false
+    externalId:
+      title: External ID
+      description: External reference ID
+      type: string
+      required: false
+    hashes:
+      title: Hashes
+      description: External reference hashes
+      type: object
+      required: false
+    sourceName:
+      title: Source name
+      description: External reference source name
+      type: string
+      required: false
+    url:
+      title: URL
+      description: External reference URL
+      type: string
+      required: false
+  ThreatIntelligenceSortingCriteria:
+    itemKey:
+      title: Item Key
+      description: Column name to sort by
+      type: string
+      required: false
+    sortOrder:
+      title: Sorting Order
+      description: Sorting Order
+      type: string
+      required: false
+      enum:
+        - ascending
+        - descending
+        - unsorted
+  ThreatIntelligenceIndicatorProperties:
+    confidence:
+      title: Confidence
+      description: Confidence of threat intelligence entity
+      type: integer
+      required: false
+    created:
+        title: Created at
+        description: Date of created
+        type: string
+        required: false
+    createdByRef:
+        title: Created by
+        description: Created by reference of threat intelligence entity
+        type: string
+        required: false
+    defanged:
+        title: Defanged
+        description: Is threat intelligence entity defanged
+        type: boolean
+        required: false
+    description:
+        title: Description
+        description: Description of a threat intelligence entity
+        type: string
+        required: false
+    displayName:
+        title: Display Name
+        description: Display name of a threat intelligence entity
+        type: string
+        required: true
+    externalId:
+        title: External ID
+        description: External ID of threat intelligence entity
+        type: string
+        required: false
+    externalReferences:
+        title: External References
+        description: Array of Threat Intelligence External Reference
+        type: "[]ThreatIntelligenceExternalReference"
+        required: false
+    granularMarkings:
+        title: Granular Markings
+        description: Describes threat granular marking model entity
+        type: "[]ThreatIntelligenceGranularMarkingModel"
+        required: false
+    indicatorTypes:
+        title: Indicator Types
+        description: Indicator types of threat intelligence entities
+        type: "[]string"
+        required: false
+    killChainPhases:
+        title: Kill Chain Phases
+        description: Describes threat kill chain phase entity
+        type: "[]ThreatIntelligenceKillChainPhase"
+        required: false
+    labels:
+        title: Labels
+        description: Labels of threat intelligence entity
+        type: "[]string"
+        required: false
+    language:
+        title: Language
+        description: Language of threat intelligence entity
+        type: string
+        required: false
+    modified:
+        title: Modified by
+        description: Modified by
+        type: string
+        required: false
+    objectMarkingRefs:
+        title: Marking References
+        description: Threat intelligence entity object marking references
+        type: "[]string"
+        required: false
+    parsedPattern:
+        title: Parsed patterns
+        description: Parsed patterns
+        type: "[]ThreatIntelligenceParsedPattern"
+        required: false
+    pattern:
+        title: Pattern
+        description: Pattern of a threat intelligence entity
+        type: string
+        required: true
+    patternType:
+        title: Pattern Type
+        description: Pattern type of a threat intelligence entity
+        type: string
+        required: true
+    patternVersion:
+        title: Pattern Version
+        description: Pattern version of a threat intelligence entity
+        type: string
+        required: false
+    revoked:
+        title: Revoked
+        description: Is threat intelligence entity revoked
+        type: boolean
+        required: false
+    source:
+        title: Source
+        description: Source of a threat intelligence entity
+        type: string
+        required: true
+    threatIntelligenceTags:
+        title: Tags
+        description: List of tags
+        type: "[]string"
+        required: false
+    threatTypes:
+        title: Threat Types
+        description: Threat types
+        type: "[]string"
+        required: true
+    validFrom:
+        title: Valid From
+        description: Valid from
+        type: string
+        required: false
+    validUntil:
+        title: Valid Until
+        description: Valid until
+        type: string
+        required: false
+  ThreatIntelligenceIndicators:
+    id:
+      title: ID
+      description: Identifier created indicator
+      type: string
+      required: true
+    name:
+      title: Name
+      description: Name of the entity
+      type: string
+      required: true
+    etag:
+      title: Etag
+      description: Etag of the azure resource
+      type: string
+      required: true
+    type:
+      title: Type
+      description: Type of the entity
+      type: string
+      required: true
+    kind:
+      title: Kind
+      description: The kind of the entity
+      type: string
+      required: true
+    properties:
+      title: Properties
+      description: Object containing all the necessary properties to conclude a query
+      type: ThreatIntelligenceIndicatorProperties
+      required: true
+  ThreatIntelligenceIndicatorPropertiesUpdate:
+    confidence:
+      title: Confidence
+      description: Confidence of threat intelligence entity
+      type: integer
+      required: false
+    defanged:
+      title: Defanged
+      description: Is threat intelligence entity defanged
+      type: boolean
+      required: false
+    description:
+      title: Description
+      description: Description of a threat intelligence entity
+      type: string
+      required: false
+    displayName:
+      title: Display Name
+      description: Display name of a threat intelligence entity
+      type: string
+      required: false
+    externalReferences:
+      title: External References
+      description: Array of Threat Intelligence External Reference
+      type: "[]ThreatIntelligenceExternalReference"
+      required: false
+    granularMarkings:
+      title: Granular Markings
+      description: Describes threat granular marking model entity
+      type: "[]ThreatIntelligenceGranularMarkingModel"
+      required: false
+    indicatorTypes:
+      title: Indicator Types
+      description: Indicator types of threat intelligence entities
+      type: "[]string"
+      required: false
+    killChainPhases:
+      title: Kill Chain Phases
+      description: Describes threat kill chain phase entity
+      type: "[]ThreatIntelligenceKillChainPhase"
+      required: false
+    labels:
+      title: Labels
+      description: Labels of threat intelligence entity
+      type: "[]string"
+      required: false
+    language:
+      title: Language
+      description: Language of threat intelligence entity
+      type: string
+      required: false
+    modified:
+      title: Modified by
+      description: Modified by
+      type: string
+      required: false
+    objectMarkingRefs:
+      title: Marking References
+      description: Threat intelligence entity object marking references
+      type: "[]string"
+      required: false
+    parsedPattern:
+      title: Parsed patterns
+      description: Parsed patterns
+      type: "[]ThreatIntelligenceParsedPattern"
+      required: false
+    pattern:
+      title: Pattern
+      description: Pattern of a threat intelligence entity
+      type: string
+      required: false
+    patternType:
+      title: Pattern Type
+      description: Pattern type of a threat intelligence entity
+      type: string
+      required: false
+    patternVersion:
+      title: Pattern Version
+      description: Pattern version of a threat intelligence entity
+      type: string
+      required: false
+    revoked:
+      title: Revoked
+      description: Is threat intelligence entity revoked
+      type: boolean
+      required: false
+    threatIntelligenceTags:
+      title: Tags
+      description: List of tags
+      type: "[]string"
+      required: false
+    threatTypes:
+      title: Threat Types
+      description: Threat types
+      type: "[]string"
+      required: false
+    validFrom:
+      title: Valid From
+      description: Valid from
+      type: string
+      required: false
+    validUntil:
+      title: Valid Until
+      description: Valid until
+      type: string
+      required: false
+  ThreatIntelligenceIndicatorPropertiesReplaceTags:
+    threatIntelligenceTags:
+      title: Tags
+      description: List of tags
+      type: "[]string"
+      required: false
 connection:
   client_id:
     title: Client ID
@@ -619,6 +973,7 @@ actions:
         title: Comment
         description: Requested comment
         type: IncidentComment
+        required: true
   list_comments:
     title: List Comments
     description: List all the comment of the requested incident 
@@ -652,16 +1007,19 @@ actions:
         required: false
         description: Filters the results, based on a Boolean condition
         type: string
+        example: properties/author
       orderBy:
         title: Order By
         required: false
-        description: sorts the results 
+        description: Sorts the results
         type: string
+        example: properties/createdTimeUtc
     output:
       comments:
         title: Comments
         description: List of comment objects
         type: "[]IncidentComment"
+        required: true
   create_update_comment:
     title: Create Update Comment
     description: Creates or updates a comment for a given incident 
@@ -701,6 +1059,7 @@ actions:
         description: Entity tag of the azure resource
         type: string
         example: "0300bf09-0000-0000-0000-5c37296e0000"
+        required: false
       properties:
         title: Properties
         description: Comment properties
@@ -712,6 +1071,7 @@ actions:
         title: Comment
         description: Newly created incident comment 
         type: IncidentComment
+        required: true
   delete_comment:
     title: Delete Comment
     description: Deletes a comment for a given incident 
@@ -768,7 +1128,7 @@ actions:
         required: true
         description: The name of the resource group within the user's subscription
         type: string
-        example: resourcegrup1
+        example: resourcegroup1
       subscriptionId:
         title: Subscription ID
         required: true
@@ -822,7 +1182,7 @@ actions:
         required: true
         description: The name of the resource group within the user's subscription
         type: string
-        example: resourcegrup1
+        example: resourcegroup1
       subscriptionId:
         title: Subscription ID
         required: true
@@ -862,7 +1222,7 @@ actions:
         required: true
         description: The name of the resource group within the user's subscription
         type: string
-        example: resourcegrup1
+        example: resourcegroup1
       subscriptionId:
         title: Subscription ID
         required: true
@@ -916,7 +1276,7 @@ actions:
         required: true
         description: The name of the resource group within the user's subscription
         type: string
-        example: resourcegrup1
+        example: resourcegroup1
       subscriptionId:
         title: Subscription ID
         required: true
@@ -950,7 +1310,7 @@ actions:
         required: true
         description: The name of the resource group within the user's subscription
         type: string
-        example: resourcegrup1
+        example: resourcegroup1
       subscriptionId:
         title: Subscription ID
         required: true
@@ -1018,7 +1378,7 @@ actions:
         required: true
         description: The name of the resource group within the user's subscription
         type: string
-        example: resourcegrup12
+        example: resourcegroup12
       subscriptionId:
         title: Subscription ID
         required: true
@@ -1037,3 +1397,479 @@ actions:
         description: All the entities assigned to the given incident
         type: "[]Entity"
         required: false
+  create_indicator:
+    title: Create Indicator
+    description: Create a new threat intelligence indicator
+    input:
+      resourceGroupName:
+        title: Resource Group Name
+        required: true
+        description: The name of the resource group within the user's subscription
+        type: string
+        example: resourcegroup12
+      subscriptionId:
+        title: Subscription ID
+        required: true
+        description: Azure subscription ID
+        type: string
+        example: 0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe
+      workspaceName:
+        title: Workspace Name
+        required: true
+        description: The name of the workspace
+        type: string
+        example: workspace23
+      kind:
+        title: Kind
+        description: The kind of the entity
+        type: string
+        required: true
+        example: indicator
+      properties:
+        title: Properties
+        description: Object containing all the necessary properties to conclude a query
+        type: ThreatIntelligenceIndicatorProperties
+        required: true
+        example: "{'source': 'Azure Sentinel',
+          'threatIntelligenceTags': [
+            'new schema'
+          ],
+          'displayName': 'new schema',
+          'threatTypes': [
+            'compromised'
+          ],
+          'pattern': '[url:value = 'https://example.com']',
+          'patternType': 'url'}"
+    output:
+      id:
+        title: ID
+        description: Identifier created indicator
+        type: string
+        required: true
+      etag:
+        title: Etag
+        description: Etag of the azure resource
+        type: string
+        required: true
+      kind:
+        title: Kind
+        description: The kind of the entity
+        type: string
+        required: true
+      name:
+        title: Name
+        description: Name of the entity
+        type: string
+        required: true
+      type:
+        title: Type
+        description: Type of the entity
+        type: string
+        required: true
+      properties:
+        title: Properties
+        description: Object containing all the necessary properties to conclude a query
+        type: ThreatIntelligenceIndicatorProperties
+        required: true
+  get_indicator:
+    title: Get Indicator
+    description: Get existing threat intelligence indicator
+    input:
+      resourceGroupName:
+        title: Resource Group Name
+        required: true
+        description: The name of the resource group within the user's subscription
+        type: string
+        example: resourcegroup12
+      subscriptionId:
+        title: Subscription ID
+        required: true
+        description: Azure subscription ID
+        type: string
+        example: 0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe
+      workspaceName:
+        title: Workspace Name
+        required: true
+        description: The name of the workspace
+        type: string
+        example: workspace23
+      name:
+        title: Name
+        description: Threat intelligence indicator name field
+        type: string
+        required: true
+        example: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+    output:
+      id:
+        title: ID
+        description: Identifier created indicator
+        type: string
+        required: true
+      etag:
+        title: Etag
+        description: Etag of the azure resource
+        type: string
+        required: true
+      kind:
+        title: Kind
+        description: The kind of the entity
+        type: string
+        required: true
+      name:
+        title: Name
+        description: Name of the entity
+        type: string
+        required: true
+      type:
+        title: Type
+        description: Type of the entity
+        type: string
+        required: true
+      properties:
+        title: Properties
+        description: Object containing all the necessary properties to conclude a query
+        type: ThreatIntelligenceIndicatorProperties
+        required: true
+  update_indicator:
+    title: Update Indicator
+    description: Update existing threat intelligence indicator
+    input:
+      resourceGroupName:
+        title: Resource Group Name
+        required: true
+        description: The name of the resource group within the user's subscription
+        type: string
+        example: resourcegroup12
+      subscriptionId:
+        title: Subscription ID
+        required: true
+        description: Azure subscription ID
+        type: string
+        example: 0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe
+      workspaceName:
+        title: Workspace Name
+        required: true
+        description: The name of the workspace
+        type: string
+        example: workspace23
+      name:
+        title: Name
+        description: Threat intelligence indicator name field
+        type: string
+        required: true
+        example: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+      properties:
+        title: Properties
+        description: Object containing all the necessary properties to conclude a query
+        type: ThreatIntelligenceIndicatorPropertiesUpdate
+        required: true
+        example: "{'source': 'Azure Sentinel',
+          'threatIntelligenceTags': [
+            'new schema'
+          ],
+          'displayName': 'new schema',
+          'threatTypes': [
+            'compromised'
+          ],
+          'pattern': '[url:value = 'https://example.com']',
+          'patternType': 'url'}"
+    output:
+      id:
+        title: ID
+        description: Identifier created indicator
+        type: string
+        required: true
+      etag:
+        title: Etag
+        description: Etag of the azure resource
+        type: string
+        required: true
+      kind:
+        title: Kind
+        description: The kind of the entity
+        type: string
+        required: true
+      name:
+        title: Name
+        description: Name of the entity
+        type: string
+        required: true
+      type:
+        title: Type
+        description: Type of the entity
+        type: string
+        required: true
+      properties:
+        title: Properties
+        description: Object containing all the necessary properties to conclude a query
+        type: ThreatIntelligenceIndicatorProperties
+        required: true
+  delete_indicator:
+    title: Delete Indicator
+    description: Delete existing threat intelligence indicator
+    input:
+      resourceGroupName:
+        title: Resource Group Name
+        required: true
+        description: The name of the resource group within the user's subscription
+        type: string
+        example: resourcegroup12
+      subscriptionId:
+        title: Subscription ID
+        required: true
+        description: Azure subscription ID
+        type: string
+        example: 0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe
+      workspaceName:
+        title: Workspace Name
+        required: true
+        description: The name of the workspace
+        type: string
+        example: workspace23
+      name:
+        title: Name
+        description: Threat intelligence indicator name field
+        type: string
+        required: true
+        example: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+    output:
+      message:
+        title: Message
+        description: Response message
+        type: string
+        required: true
+  query_indicator:
+    title: Query Threat Indicator
+    description: Query threat intelligence indicators as per filtering criteria
+    input:
+      resourceGroupName:
+        title: Resource Group Name
+        required: true
+        description: The name of the resource group within the user's subscription
+        type: string
+        example: resourcegroup12
+      subscriptionId:
+        title: Subscription ID
+        required: true
+        description: Azure subscription ID
+        type: string
+        example: 0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe
+      workspaceName:
+        title: Workspace Name
+        required: true
+        description: The name of the workspace
+        type: string
+        example: workspace23
+      names:
+        title: Names
+        description: Names of threat intelligence indicators
+        type: "[]string"
+        required: false
+        example: "['4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014']"
+      includeDisabled:
+        title: Include Disabled Indicators
+        description: Parameter to include/exclude disabled indicators
+        type: boolean
+        required: false
+        example: true
+      keywords:
+        title: Keywords
+        description: Keywords for searching threat intelligence indicators
+        type: string
+        required: false
+        example: new schema
+      maxConfidence:
+        title: Maximum Confidence
+        description: Filter by maximum confidence
+        type: integer
+        required: false
+        example: 75
+      minConfidence:
+        title: Minimum Confidence
+        description: Filter by minimum confidence
+        type: integer
+        required: false
+        example: 0
+      maxValidUntil:
+        title: End Time
+        description: End time for ValidUntil filter
+        type: date
+        required: false
+        example: "2021-04-05T17:44:00.114052Z"
+      minValidUntil:
+        title: Start Time
+        description: Start time for ValidUntil filter
+        type: date
+        required: false
+        example: "2021-04-06T17:44:00.114052Z"
+      pageSize:
+        title: Page Size
+        description: The number of items on the page
+        type: integer
+        required: false
+        example: 100
+      patternTypes:
+        title: Pattern Types
+        description: Filter by pattern types
+        type: "[]string"
+        required: false
+        example: url
+      sortBy:
+        title: Sort By
+        description: Columns to sort by and sorting order
+        type: "[]ThreatIntelligenceSortingCriteria"
+        required: false
+        example: "[
+          {
+            'itemKey': 'created',
+            'sortOrder': 'descending'
+          }
+        ]"
+      sources:
+        title: Sources
+        description: Sources of threat intelligence indicators
+        type: "[]string"
+        required: false
+        example: "['Azure Sentinel']"
+      threatTypes:
+        title: Threat Types
+        description: Threat Types of Threat Inteligence Indicators
+        type: "[]string"
+        required: false
+        example: "['compromised']"
+    output:
+      indicators:
+        title: Threat Intelligence Indicators
+        description: Filtred threat intelligence indicators
+        type: "[]ThreatIntelligenceIndicators"
+        required: true
+  append_tags:
+    title: Append Tags
+    description: Append tags to a threat intelligence indicator
+    input:
+      resourceGroupName:
+        title: Resource Group Name
+        required: true
+        description: The name of the resource group within the user's subscription
+        type: string
+        example: resourcegroup12
+      subscriptionId:
+        title: Subscription ID
+        required: true
+        description: Azure subscription ID
+        type: string
+        example: 0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe
+      workspaceName:
+        title: Workspace Name
+        required: true
+        description: The name of the workspace
+        type: string
+        example: workspace23
+      name:
+        title: Name
+        description: Threat intelligence indicator name field
+        type: string
+        required: true
+        example: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+      threatIntelligenceTags:
+        title: Tags
+        description: Array of tags to be appended to the threat intelligence indicator
+        type: "[]string"
+        required: true
+        example: "['tag1', 'tag2']"
+    output:
+      id:
+        title: ID
+        description: Identifier created indicator
+        type: string
+        required: true
+      etag:
+        title: Etag
+        description: Etag of the azure resource
+        type: string
+        required: true
+      kind:
+        title: Kind
+        description: The kind of the entity
+        type: string
+        required: true
+      name:
+        title: Name
+        description: Name of the entity
+        type: string
+        required: true
+      type:
+        title: Type
+        description: Type of the entity
+        type: string
+        required: true
+      properties:
+        title: Properties
+        description: Object containing all the necessary properties to conclude a query
+        type: ThreatIntelligenceIndicatorProperties
+        required: true
+  replace_tags:
+    title: Replace Tags
+    description: Replace tags to a threat intelligence indicator
+    input:
+      resourceGroupName:
+        title: Resource Group Name
+        required: true
+        description: The name of the resource group within the user's subscription
+        type: string
+        example: resourcegroup12
+      subscriptionId:
+        title: Subscription ID
+        required: true
+        description: Azure subscription ID
+        type: string
+        example: 0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe
+      workspaceName:
+        title: Workspace Name
+        required: true
+        description: The name of the workspace
+        type: string
+        example: workspace23
+      name:
+        title: Name
+        description: Threat intelligence indicator name field
+        type: string
+        required: true
+        example: 4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014
+      properties:
+        title: Properties
+        description: Object containing all the necessary properties to conclude a query
+        type: ThreatIntelligenceIndicatorPropertiesReplaceTags
+        required: true
+        example: "{'threatIntelligenceTags': ['new_tag', 'another_tag]}"
+    output:
+      id:
+        title: ID
+        description: Identifier created indicator
+        type: string
+        required: true
+      etag:
+        title: Etag
+        description: Etag of the azure resource
+        type: string
+        required: true
+      kind:
+        title: Kind
+        description: The kind of the entity
+        type: string
+        required: true
+      name:
+        title: Name
+        description: Name of the entity
+        type: string
+        required: true
+      type:
+        title: Type
+        description: Type of the entity
+        type: string
+        required: true
+      properties:
+        title: Properties
+        description: Object containing all the necessary properties to conclude a query
+        type: ThreatIntelligenceIndicatorProperties
+        required: true

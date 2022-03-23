@@ -6,14 +6,13 @@ Azure Sentinel is Microsoft's' automated security service.
 
 * Creating and updating incidents
 * Deleting incidents
-* Retriveing an incident's details
+* Retrieving incident's details
 * Listing incidents for a given workspace
 * Listing bookmarks for a given incident
 * Listing alerts for a given incident
 * Creating and updating incident comments
 * Deleting incident comments
 * Listing incident comments
-* Retriveing incident's details
 
 
 # Requirements
@@ -49,6 +48,317 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Update Indicator
+
+This action is used to update existing threat intelligence indicator.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|name|string|None|True|Threat intelligence indicator name field|None|4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014|
+|properties|ThreatIntelligenceIndicatorPropertiesUpdate|None|True|Object containing all the necessary properties to conclude a query|None|{'source': 'Azure Sentinel', 'threatIntelligenceTags': [ 'new schema' ], 'displayName': 'new schema', 'threatTypes': [ 'compromised' ], 'pattern': '[url:value = 'https://example.com']', 'patternType': 'url'}|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup12|
+|subscriptionId|string|None|True|Azure subscription ID|None|0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe|
+|workspaceName|string|None|True|The name of the workspace|None|workspace23|
+
+Example input:
+
+```
+{
+  "name": "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014",
+  "properties": {
+    "source": "Azure Sentinel",
+    "threatIntelligenceTags": [
+      "new schema"
+    ],
+    "displayName": "new schema",
+    "threatTypes": [
+      "compromised"
+    ],
+    "pattern": "[url:value = 'https://example.com']",
+    "patternType": "url"
+  },
+  "resourceGroupName": "resourcegroup12",
+  "subscriptionId": "0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe",
+  "workspaceName": "workspace23"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|etag|string|True|Etag of the azure resource|
+|id|string|True|Identifier created indicator|
+|kind|string|True|The kind of the entity|
+|name|string|True|Name of the entity|
+|properties|ThreatIntelligenceIndicatorProperties|True|Object containing all the necessary properties to conclude a query|
+|type|string|True|Type of the entity|
+
+Example output:
+
+```
+```
+
+#### Replace Tags
+
+This action is used to replace tags to a threat intelligence indicator.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|name|string|None|True|Threat intelligence indicator name field|None|4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014|
+|properties|ThreatIntelligenceIndicatorPropertiesReplaceTags|None|True|Object containing all the necessary properties to conclude a query|None|{'threatIntelligenceTags': ['new_tag', 'another_tag]}|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup12|
+|subscriptionId|string|None|True|Azure subscription ID|None|0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe|
+|workspaceName|string|None|True|The name of the workspace|None|workspace23|
+
+Example input:
+
+```
+{
+  "name": "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014",
+  "properties": "{'threatIntelligenceTags': ['new_tag', 'another_tag]}",
+  "resourceGroupName": "resourcegroup12",
+  "subscriptionId": "0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe",
+  "workspaceName": "workspace23"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|etag|string|True|Etag of the azure resource|
+|id|string|True|Identifier created indicator|
+|kind|string|True|The kind of the entity|
+|name|string|True|Name of the entity|
+|properties|ThreatIntelligenceIndicatorProperties|True|Object containing all the necessary properties to conclude a query|
+|type|string|True|Type of the entity|
+
+Example output:
+
+```
+```
+
+#### Query Threat Indicator
+
+This action is used to query threat intelligence indicators as per filtering criteria.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|includeDisabled|boolean|None|False|Parameter to include/exclude disabled indicators|None|True|
+|keywords|string|None|False|Keywords for searching threat intelligence indicators|None|new schema|
+|maxConfidence|integer|None|False|Filter by maximum confidence|None|75|
+|maxValidUntil|date|None|False|End time for ValidUntil filter|None|2021-04-05T17:44:00.114052Z|
+|minConfidence|integer|None|False|Filter by minimum confidence|None|0|
+|minValidUntil|date|None|False|Start time for ValidUntil filter|None|2021-04-06T17:44:00.114052Z|
+|names|[]string|None|False|Names of threat intelligence indicators|None|['4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014']|
+|pageSize|integer|None|False|The number of items on the page|None|100|
+|patternTypes|[]string|None|False|Filter by pattern types|None|url|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup12|
+|sortBy|[]ThreatIntelligenceSortingCriteria|None|False|Columns to sort by and sorting order|None|[ { 'itemKey': 'created', 'sortOrder': 'descending' } ]|
+|sources|[]string|None|False|Sources of threat intelligence indicators|None|['Azure Sentinel']|
+|subscriptionId|string|None|True|Azure subscription ID|None|0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe|
+|threatTypes|[]string|None|False|Threat Types of Threat Inteligence Indicators|None|['compromised']|
+|workspaceName|string|None|True|The name of the workspace|None|workspace23|
+
+Example input:
+
+```
+{
+  "includeDisabled": true,
+  "keywords": "new schema",
+  "maxConfidence": 75,
+  "maxValidUntil": "2021-04-05T17:44:00.114052Z",
+  "minConfidence": 0,
+  "minValidUntil": "2021-04-06T17:44:00.114052Z",
+  "names": "['4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014']",
+  "pageSize": 100,
+  "patternTypes": "url",
+  "resourceGroupName": "resourcegroup12",
+  "sortBy": "[ { 'itemKey': 'created', 'sortOrder': 'descending' } ]",
+  "sources": "['Azure Sentinel']",
+  "subscriptionId": "0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe",
+  "threatTypes": "['compromised']",
+  "workspaceName": "workspace23"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|indicators|[]ThreatIntelligenceIndicators|True|Filtred threat intelligence indicators|
+
+Example output:
+
+```
+```
+
+#### Get Indicator
+
+This action is used to get existing threat intelligence indicator.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|name|string|None|True|Threat intelligence indicator name field|None|4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup12|
+|subscriptionId|string|None|True|Azure subscription ID|None|0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe|
+|workspaceName|string|None|True|The name of the workspace|None|workspace23|
+
+Example input:
+
+```
+{
+  "name": "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014",
+  "resourceGroupName": "resourcegroup12",
+  "subscriptionId": "0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe",
+  "workspaceName": "workspace23"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|etag|string|True|Etag of the azure resource|
+|id|string|True|Identifier created indicator|
+|kind|string|True|The kind of the entity|
+|name|string|True|Name of the entity|
+|properties|ThreatIntelligenceIndicatorProperties|True|Object containing all the necessary properties to conclude a query|
+|type|string|True|Type of the entity|
+
+Example output:
+
+```
+```
+
+#### Delete Indicator
+
+This action is used to delete existing threat intelligence indicator.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|name|string|None|True|Threat intelligence indicator name field|None|4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup12|
+|subscriptionId|string|None|True|Azure subscription ID|None|0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe|
+|workspaceName|string|None|True|The name of the workspace|None|workspace23|
+
+Example input:
+
+```
+{
+  "name": "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014",
+  "resourceGroupName": "resourcegroup12",
+  "subscriptionId": "0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe",
+  "workspaceName": "workspace23"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|message|string|True|Response message|
+
+Example output:
+
+```
+```
+
+#### Create Indicator
+
+This action is used to create a new threat intelligence indicator.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|kind|string|None|True|The kind of the entity|None|indicator|
+|properties|ThreatIntelligenceIndicatorProperties|None|True|Object containing all the necessary properties to conclude a query|None|{'source': 'Azure Sentinel', 'threatIntelligenceTags': [ 'new schema' ], 'displayName': 'new schema', 'threatTypes': [ 'compromised' ], 'pattern': '[url:value = 'https://example.com']', 'patternType': 'url'}|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup12|
+|subscriptionId|string|None|True|Azure subscription ID|None|0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe|
+|workspaceName|string|None|True|The name of the workspace|None|workspace23|
+
+Example input:
+
+```
+{
+  "kind": "indicator",
+  "properties": "{'source': 'Azure Sentinel', 'threatIntelligenceTags': [ 'new schema' ], 'displayName': 'new schema', 'threatTypes': [ 'compromised' ], 'pattern': '[url:value = 'https://example.com']', 'patternType': 'url'}",
+  "resourceGroupName": "resourcegroup12",
+  "subscriptionId": "0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe",
+  "workspaceName": "workspace23"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|etag|string|True|Etag of the azure resource|
+|id|string|True|Identifier created indicator|
+|kind|string|True|The kind of the entity|
+|name|string|True|Name of the entity|
+|properties|ThreatIntelligenceIndicatorProperties|True|Object containing all the necessary properties to conclude a query|
+|type|string|True|Type of the entity|
+
+Example output:
+
+```
+```
+
+#### Append Tags
+
+This action is used to append tags to a threat intelligence indicator.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|name|string|None|True|Threat intelligence indicator name field|None|4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup12|
+|subscriptionId|string|None|True|Azure subscription ID|None|0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe|
+|threatIntelligenceTags|[]string|None|True|Array of tags to be appended to the threat intelligence indicator|None|['tag1', 'tag2']|
+|workspaceName|string|None|True|The name of the workspace|None|workspace23|
+
+Example input:
+
+```
+{
+  "name": "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014",
+  "resourceGroupName": "resourcegroup12",
+  "subscriptionId": "0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe",
+  "threatIntelligenceTags": "['tag1', 'tag2']",
+  "workspaceName": "workspace23"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|etag|string|True|Etag of the azure resource|
+|id|string|True|Identifier created indicator|
+|kind|string|True|The kind of the entity|
+|name|string|True|Name of the entity|
+|properties|ThreatIntelligenceIndicatorProperties|True|Object containing all the necessary properties to conclude a query|
+|type|string|True|Type of the entity|
+
+Example output:
+
+```
+```
 
 #### Delete Comment
 
@@ -121,7 +431,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|comment|IncidentComment|False|Newly created incident comment|
+|comment|IncidentComment|True|Newly created incident comment|
 
 Example output:
 
@@ -130,15 +440,15 @@ Example output:
 
 #### List Comments
 
-This action is used to list all the comment of the requested incident.
+This action is used to list all the comments of the requested incident.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|filter|string|None|False|Filters the results, based on a Boolean condition|None|None|
+|filter|string|None|False|Filters the results, based on a Boolean condition|None|properties/author|
 |incidentId|string|None|True|Incident ID|None|09b341e0-b2db-464e-9fef-c950b4eafa56|
-|orderBy|string|None|False|sorts the results|None|None|
+|orderBy|string|None|False|Sorts the results|None|properties/createdTimeUtc|
 |resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup1|
 |subscriptionId|string|None|True|Azure subscription ID|None|73e01a99-5cd7-4139-a149-9f2736ff2ab5|
 |workspaceName|string|None|True|The name of the workspace|None|workspace1|
@@ -147,7 +457,9 @@ Example input:
 
 ```
 {
+  "filter": "properties/author",
   "incidentId": "09b341e0-b2db-464e-9fef-c950b4eafa56",
+  "orderBy": "properties/createdTimeUtc",
   "resourceGroupName": "resourcegroup1",
   "subscriptionId": "73e01a99-5cd7-4139-a149-9f2736ff2ab5",
   "workspaceName": "workspace1"
@@ -158,7 +470,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|comments|[]IncidentComment|False|List of comment objects|
+|comments|[]IncidentComment|True|List of comment objects|
 
 Example output:
 
@@ -195,7 +507,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|comment|IncidentComment|False|Requested comment|
+|comment|IncidentComment|True|Requested comment|
 
 Example output:
 
@@ -211,7 +523,7 @@ This action is used to get all incidents entities.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |incidentId|string|None|True|Incident ID|None|incident123|
-|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegrup12|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup12|
 |subscriptionId|string|None|True|Azure subscription ID|None|0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe|
 |workspaceName|string|None|True|The name of the workspace|None|workspace23|
 
@@ -220,7 +532,7 @@ Example input:
 ```
 {
   "incidentId": "incident123",
-  "resourceGroupName": "resourcegrup12",
+  "resourceGroupName": "resourcegroup12",
   "subscriptionId": "0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe",
   "workspaceName": "workspace23"
 }
@@ -261,7 +573,7 @@ This action is used to list all the incidents matching specified criteria.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |orderBy|string|None|False|Field to sort results by|None|properties/createdTimeUtc desc|
-|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegrup1|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup1|
 |subscriptionId|string|None|True|Azure subscription ID|None|0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe|
 |workspaceName|string|None|True|The name of the workspace|None|workspace23|
 
@@ -270,7 +582,7 @@ Example input:
 ```
 {
   "orderBy": "properties/createdTimeUtc desc",
-  "resourceGroupName": "resourcegrup1",
+  "resourceGroupName": "resourcegroup1",
   "subscriptionId": "0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe",
   "workspaceName": "workspace23"
 }
@@ -320,15 +632,14 @@ Example output:
 ```
 #### Create or Update Incident
 
-This action creates or updates an incident.
-
+This action this action creates or updates an incident.
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |incidentId|string|None|True|Incident ID|None|incident-14071867|
 |properties|IncidentProperties|None|True|Incident properties object|None|{'status': 'Closed'}|
-|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegrup1|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup1|
 |subscriptionId|string|None|True|Azure subscription ID|None|aaaef455-a780-44ca-9e51-aaafffeeea3a|
 |workspaceName|string|None|True|The name of the workspace|None|workspace23|
 
@@ -338,7 +649,7 @@ Example input:
 {
   "incidentId": "incident-14071867",
   "properties": "{'status': 'Closed'}",
-  "resourceGroupName": "resourcegrup1",
+  "resourceGroupName": "resourcegroup1",
   "subscriptionId": "aaaef455-a780-44ca-9e51-aaafffeeea3a",
   "workspaceName": "workspace23"
 }
@@ -409,7 +720,7 @@ Delete an incident from the system.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |incidentId|string|None|True|ID of the incident to delete|None|incident123|
-|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegrup1|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup1|
 |subscriptionId|string|None|True|Azure subscription ID|None|0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe|
 |workspaceName|string|None|True|The name of the workspace|None|workspace23|
 
@@ -418,7 +729,7 @@ Example input:
 ```
 {
   "incidentId": "incident123",
-  "resourceGroupName": "resourcegrup1",
+  "resourceGroupName": "resourcegroup1",
   "subscriptionId": "0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe",
   "workspaceName": "workspace23"
 }
@@ -447,7 +758,7 @@ This action is used to get all alerts for a given incident.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |incidentId|string|None|True|Incident ID|None|incident123|
-|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegrup1|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup1|
 |subscriptionId|string|None|True|Azure subscription ID|None|0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe|
 |workspaceName|string|None|True|The name of the workspace|None|workspacename12|
 
@@ -456,7 +767,7 @@ Example input:
 ```
 {
   "incidentId": "incident123",
-  "resourceGroupName": "resourcegrup1",
+  "resourceGroupName": "resourcegroup1",
   "subscriptionId": "0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe",
   "workspaceName": "workspacename12"
 }
@@ -521,7 +832,7 @@ This action is used to get all details for one specific incident.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |incidentId|string|None|True|Incident ID|None|incident123|
-|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegrup1|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup1|
 |subscriptionId|string|None|True|Azure subscription ID|None|0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe|
 |workspaceName|string|None|True|The name of the workspace|None|workspace23|
 
@@ -530,7 +841,7 @@ Example input:
 ```
 {
   "incidentId": "incident123",
-  "resourceGroupName": "resourcegrup1",
+  "resourceGroupName": "resourcegroup1",
   "subscriptionId": "0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe",
   "workspaceName": "workspace23"
 }

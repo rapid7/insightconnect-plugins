@@ -14,3 +14,11 @@ class Endpoint:
     LISTCOMMENTS = COMMON_URI + "incidents/{}/comments?api-version={}"
     CREATEUPDATECOMMENT = COMMON_URI + "incidents/{}/comments/{}?api-version={}"
     DELETECOMMENT = COMMON_URI + "incidents/{}/comments/{}?api-version={}"
+    # Threat Intelligence Indicator related URLs
+    CREATEINDICATOR = COMMON_URI + "threatIntelligence/main/createIndicator?api-version={}"
+    GETINDICATOR = COMMON_URI + "threatIntelligence/main/indicators/{}?api-version={}"
+    UPDATEINDICATOR = COMMON_URI + "threatIntelligence/main/indicators/{}?api-version={}"
+    DELETEINDICATOR = COMMON_URI + "threatIntelligence/main/indicators/{}?api-version={}"
+    QUERYINDICATORS = COMMON_URI + "threatIntelligence/main/queryIndicators?api-version={}"
+    APPENDTAGS = COMMON_URI + "threatIntelligence/main/indicators/{}/appendTags?api-version={}"
+    REPLACETAGS = COMMON_URI + "threatIntelligence/main/indicators/{}/replaceTags?api-version={}"

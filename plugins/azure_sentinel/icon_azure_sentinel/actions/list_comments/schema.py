@@ -41,7 +41,7 @@ class ListCommentsInput(insightconnect_plugin_runtime.Input):
     "orderBy": {
       "type": "string",
       "title": "Order By",
-      "description": "sorts the results",
+      "description": "Sorts the results",
       "order": 6
     },
     "resourceGroupName": {
@@ -92,6 +92,9 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
+  "required": [
+    "comments"
+  ],
   "definitions": {
     "ClientInfo": {
       "type": "object",
@@ -115,9 +118,9 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
           "description": "The object id of the client",
           "order": 3
         },
-        "userPrincipaName": {
+        "userPrincipalName": {
           "type": "string",
-          "title": "User Principa Name",
+          "title": "User Principal Name",
           "description": "The user principal name of the client",
           "order": 4
         }
@@ -191,9 +194,9 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
               "description": "The object id of the client",
               "order": 3
             },
-            "userPrincipaName": {
+            "userPrincipalName": {
               "type": "string",
-              "title": "User Principa Name",
+              "title": "User Principal Name",
               "description": "The user principal name of the client",
               "order": 4
             }
@@ -217,7 +220,7 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
             },
             "ManagedIdentity": {
               "type": "string",
-              "title": "Managed Indetity",
+              "title": "Managed Identity",
               "description": "Managed identity",
               "order": 3
             },
@@ -293,7 +296,7 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
                 },
                 "ManagedIdentity": {
                   "type": "string",
-                  "title": "Managed Indetity",
+                  "title": "Managed Identity",
                   "description": "Managed identity",
                   "order": 3
                 },
@@ -327,7 +330,7 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
         },
         "ManagedIdentity": {
           "type": "string",
-          "title": "Managed Indetity",
+          "title": "Managed Identity",
           "description": "Managed identity",
           "order": 3
         },
@@ -397,9 +400,9 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
               "description": "The object id of the client",
               "order": 3
             },
-            "userPrincipaName": {
+            "userPrincipalName": {
               "type": "string",
-              "title": "User Principa Name",
+              "title": "User Principal Name",
               "description": "The user principal name of the client",
               "order": 4
             }
@@ -473,9 +476,9 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
                   "description": "The object id of the client",
                   "order": 3
                 },
-                "userPrincipaName": {
+                "userPrincipalName": {
                   "type": "string",
-                  "title": "User Principa Name",
+                  "title": "User Principal Name",
                   "description": "The user principal name of the client",
                   "order": 4
                 }
@@ -499,7 +502,7 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
                 },
                 "ManagedIdentity": {
                   "type": "string",
-                  "title": "Managed Indetity",
+                  "title": "Managed Identity",
                   "description": "Managed identity",
                   "order": 3
                 },
@@ -575,7 +578,7 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
                     },
                     "ManagedIdentity": {
                       "type": "string",
-                      "title": "Managed Indetity",
+                      "title": "Managed Identity",
                       "description": "Managed identity",
                       "order": 3
                     },
@@ -609,7 +612,7 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
             },
             "ManagedIdentity": {
               "type": "string",
-              "title": "Managed Indetity",
+              "title": "Managed Identity",
               "description": "Managed identity",
               "order": 3
             },
@@ -685,7 +688,7 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
                 },
                 "ManagedIdentity": {
                   "type": "string",
-                  "title": "Managed Indetity",
+                  "title": "Managed Identity",
                   "description": "Managed identity",
                   "order": 3
                 },
@@ -765,7 +768,7 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
             },
             "ManagedIdentity": {
               "type": "string",
-              "title": "Managed Indetity",
+              "title": "Managed Identity",
               "description": "Managed identity",
               "order": 3
             },

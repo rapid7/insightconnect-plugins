@@ -97,7 +97,7 @@ class ListBookmarksOutput(insightconnect_plugin_runtime.Output):
         },
         "ManagedIdentity": {
           "type": "string",
-          "title": "Managed Indentity",
+          "title": "Managed Identity",
           "description": "Managed identity",
           "order": 3
         },
@@ -169,7 +169,7 @@ class ListBookmarksOutput(insightconnect_plugin_runtime.Output):
             },
             "ManagedIdentity": {
               "type": "string",
-              "title": "Managed Indentity",
+              "title": "Managed Identity",
               "description": "Managed identity",
               "order": 3
             },
@@ -364,7 +364,7 @@ class ListBookmarksOutput(insightconnect_plugin_runtime.Output):
                 },
                 "ManagedIdentity": {
                   "type": "string",
-                  "title": "Managed Indentity",
+                  "title": "Managed Identity",
                   "description": "Managed identity",
                   "order": 3
                 },
@@ -587,7 +587,7 @@ class ListBookmarksOutput(insightconnect_plugin_runtime.Output):
             },
             "ManagedIdentity": {
               "type": "string",
-              "title": "Managed Indentity",
+              "title": "Managed Identity",
               "description": "Managed identity",
               "order": 3
             },

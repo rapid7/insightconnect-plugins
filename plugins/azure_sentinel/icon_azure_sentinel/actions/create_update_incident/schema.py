@@ -86,7 +86,7 @@ class CreateUpdateIncidentInput(insightconnect_plugin_runtime.Input):
         },
         "ManagedIdentity": {
           "type": "string",
-          "title": "Managed Indentity",
+          "title": "Managed Identity",
           "description": "Managed identity",
           "order": 3
         },
@@ -362,7 +362,7 @@ class CreateUpdateIncidentInput(insightconnect_plugin_runtime.Input):
             },
             "ManagedIdentity": {
               "type": "string",
-              "title": "Managed Indentity",
+              "title": "Managed Identity",
               "description": "Managed identity",
               "order": 3
             },
@@ -528,7 +528,7 @@ class CreateUpdateIncidentInput(insightconnect_plugin_runtime.Input):
                 },
                 "ManagedIdentity": {
                   "type": "string",
-                  "title": "Managed Indentity",
+                  "title": "Managed Identity",
                   "description": "Managed identity",
                   "order": 3
                 },
@@ -608,7 +608,7 @@ class CreateUpdateIncidentInput(insightconnect_plugin_runtime.Input):
             },
             "ManagedIdentity": {
               "type": "string",
-              "title": "Managed Indentity",
+              "title": "Managed Identity",
               "description": "Managed identity",
               "order": 3
             },
@@ -686,7 +686,7 @@ class CreateUpdateIncidentOutput(insightconnect_plugin_runtime.Output):
         },
         "ManagedIdentity": {
           "type": "string",
-          "title": "Managed Indentity",
+          "title": "Managed Identity",
           "description": "Managed identity",
           "order": 3
         },
@@ -962,7 +962,7 @@ class CreateUpdateIncidentOutput(insightconnect_plugin_runtime.Output):
             },
             "ManagedIdentity": {
               "type": "string",
-              "title": "Managed Indentity",
+              "title": "Managed Identity",
               "description": "Managed identity",
               "order": 3
             },
@@ -1128,7 +1128,7 @@ class CreateUpdateIncidentOutput(insightconnect_plugin_runtime.Output):
                 },
                 "ManagedIdentity": {
                   "type": "string",
-                  "title": "Managed Indentity",
+                  "title": "Managed Identity",
                   "description": "Managed identity",
                   "order": 3
                 },
@@ -1208,7 +1208,7 @@ class CreateUpdateIncidentOutput(insightconnect_plugin_runtime.Output):
             },
             "ManagedIdentity": {
               "type": "string",
-              "title": "Managed Indentity",
+              "title": "Managed Identity",
               "description": "Managed identity",
               "order": 3
             },

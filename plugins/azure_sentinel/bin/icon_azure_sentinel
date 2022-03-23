@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Azure Sentinel Plugin"
 Vendor = "rapid7"
-Version = "1.0.0"
+Version = "1.1.0"
 Description = "Microsoft Azure Sentinel is a cloud-native SIEM that provides intelligent security analytics for your entire enterprise, powered by AI"
 
 
@@ -34,6 +34,10 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
+            self.add_action(actions.AppendTags())
+
+            self.add_action(actions.CreateIndicator())
+
             self.add_action(actions.CreateUpdateComment())
 
             self.add_action(actions.CreateUpdateIncident())
@@ -42,9 +46,13 @@ def main():
 
             self.add_action(actions.DeleteIncident())
 
+            self.add_action(actions.DeleteIndicator())
+
             self.add_action(actions.GetComment())
 
             self.add_action(actions.GetIncident())
+
+            self.add_action(actions.GetIndicator())
 
             self.add_action(actions.ListAlerts())
 
@@ -55,6 +63,12 @@ def main():
             self.add_action(actions.ListEntities())
 
             self.add_action(actions.ListIncidents())
+
+            self.add_action(actions.QueryIndicator())
+
+            self.add_action(actions.ReplaceTags())
+
+            self.add_action(actions.UpdateIndicator())
 
 
     """Run plugin"""
