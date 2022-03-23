@@ -9,6 +9,6 @@ setup(name="rapid7_insightidr-rapid7-plugin",
       author_email="",
       url="",
       packages=find_packages(),
-      install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_rapid7_insightidr']
+      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
+      scripts=['bin/icon_rapid7_insightidr']
       )

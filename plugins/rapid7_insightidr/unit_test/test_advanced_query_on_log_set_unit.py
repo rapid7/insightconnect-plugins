@@ -4,8 +4,8 @@ import os
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from komand_rapid7_insightidr.actions.advanced_query_on_log_set import AdvancedQueryOnLogSet
-from komand_rapid7_insightidr.actions.advanced_query_on_log_set.schema import Input, Output
+from icon_rapid7_insightidr.actions.advanced_query_on_log_set import AdvancedQueryOnLogSet
+from icon_rapid7_insightidr.actions.advanced_query_on_log_set.schema import Input, Output
 from unit_test.util import Util
 from unittest.mock import patch
 

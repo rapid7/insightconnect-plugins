@@ -4,8 +4,8 @@ import os
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from komand_rapid7_insightidr.connection.connection import Connection
-from komand_rapid7_insightidr.actions.set_status_of_investigation_action import SetStatusOfInvestigationAction
+from icon_rapid7_insightidr.connection.connection import Connection
+from icon_rapid7_insightidr.actions.set_status_of_investigation_action import SetStatusOfInvestigationAction
 import json
 import logging
 

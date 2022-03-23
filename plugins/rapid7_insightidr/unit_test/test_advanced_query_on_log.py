@@ -4,9 +4,9 @@ import os
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from komand_rapid7_insightidr.connection.connection import Connection
-from komand_rapid7_insightidr.actions.advanced_query_on_log import AdvancedQueryOnLog
-from komand.exceptions import PluginException
+from icon_rapid7_insightidr.connection.connection import Connection
+from icon_rapid7_insightidr.actions.advanced_query_on_log import AdvancedQueryOnLog
+from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 import logging
 

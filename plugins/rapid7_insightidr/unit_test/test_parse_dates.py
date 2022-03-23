@@ -1,6 +1,6 @@
 from unittest import TestCase
-from komand_rapid7_insightidr.util.parse_dates import parse_dates
-from komand.exceptions import PluginException
+from icon_rapid7_insightidr.util.parse_dates import parse_dates
+from insightconnect_plugin_runtime.exceptions import PluginException
 import time
 
 

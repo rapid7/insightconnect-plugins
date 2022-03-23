@@ -3,9 +3,9 @@ import json
 import logging
 import os
 
-from komand.exceptions import PluginException
-from komand_rapid7_insightidr.connection import Connection
-from komand_rapid7_insightidr.connection.schema import Input
+from insightconnect_plugin_runtime.exceptions import PluginException
+from icon_rapid7_insightidr.connection import Connection
+from icon_rapid7_insightidr.connection.schema import Input
 from requests.models import HTTPError
 
 
