@@ -1,6 +1,8 @@
 import sys
 import os
 
+sys.path.append(os.path.abspath("../"))
+
 from unittest import TestCase
 from unittest.mock import patch
 from unit_test.util import Util
@@ -8,8 +10,6 @@ from komand_rapid7_insightvm.actions.get_asset import GetAsset
 from komand_rapid7_insightvm.actions.get_asset.schema import Input
 from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
-
-sys.path.append(os.path.abspath("../"))
 
 
 @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)

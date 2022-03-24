@@ -1,6 +1,8 @@
 import sys
 import os
 
+sys.path.append(os.path.abspath("../"))
+
 from insightconnect_plugin_runtime.exceptions import PluginException
 from unittest import TestCase
 from komand_rapid7_insightvm.util import resource_requests
@@ -8,8 +10,6 @@ import logging
 import requests
 import json
 import pytest
-
-sys.path.append(os.path.abspath("../"))
 
 
 class MockResponse:

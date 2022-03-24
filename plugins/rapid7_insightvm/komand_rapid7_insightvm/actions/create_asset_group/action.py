@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import CreateAssetGroupInput, CreateAssetGroupOutput
+from .schema import CreateAssetGroupInput, CreateAssetGroupOutput, Input, Output
 
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
@@ -22,9 +22,10 @@ class CreateAssetGroup(insightconnect_plugin_runtime.Action):
             params.pop("searchCriteria")
 
         resource_helper = ResourceRequests(self.connection.session, self.logger)
-        self.logger.info(f"Creating asset group with name {params.get('name')} and type {params.get('type')}")
-        endpoint = endpoints.AssetGroup.asset_groups(self.connection.console_url)
+        self.logger.info(f"Creating asset group with name {params.get(Input.NAME)} and type {params.get(Input.TYPE)}")
 
-        response = resource_helper.resource_request(endpoint=endpoint, method="post", payload=params)
-
-        return {"id": response["id"]}
+        return {
+            Output.ID: resource_helper.resource_request(
+                endpoint=endpoints.AssetGroup.asset_groups(self.connection.console_url), method="post", payload=params
+            ).get("id")
+        }

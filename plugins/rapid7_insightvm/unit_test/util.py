@@ -1,11 +1,12 @@
 import logging
 import sys
 import os
+
+sys.path.append(os.path.abspath("../"))
+
 from komand_rapid7_insightvm.connection.connection import Connection
 from komand_rapid7_insightvm.connection.schema import Input
 import json
-
-sys.path.append(os.path.abspath("../"))
 
 
 class Util:

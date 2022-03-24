@@ -1,12 +1,12 @@
 import sys
 import os
+
+sys.path.append(os.path.abspath("../"))
+
 from unittest import TestCase
 from komand_rapid7_insightvm.util.util import convert_date_to_iso8601
 from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
-
-
-sys.path.append(os.path.abspath("../"))
 
 
 class TestCreateException(TestCase):
