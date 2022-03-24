@@ -929,14 +929,41 @@ types:
         type: "[]string"
         description: "Users"
         required: false
-
+  reply:
+    status:
+      title: "Status"
+      type: string
+      description: "API call status: 'SUCCESS', 'FAIL', 'PENDING', 'PARTIAL_SUCCESS'"
+      required: false
+    number_of_results:
+      title: "Number of Results"
+      type: integer
+      description: "Integer representing the number of results returned"
+      required: false
+    query_cost:
+      title: "Query Cost"
+      type: object
+      description: "Float representing the number of query units collected for this API"
+      required: false
+    remaining_quota:
+      title: "Remaining Quota"
+      type: float
+      description: "Float representing the number of query units available for you to use"
+      required: false
+    results:
+      title: "Results"
+      type: object
+      description: "Displays the API response in either of the following fields according to the number of results:
+        data—API results according to defined format field
+        stream_id—String representing a unique ID of more than 1000 number of results"
+      required: false
 connection:
   url:
     title: URL
     description: Cortex XDR API URL
     type: string
     required: true
-    example: https://api-example.xdr.us.paloaltonetworks.com/
+    example: https://api-example.xdr.us.paloalqtonetworks.com/
   api_key_id:
     title: API Key ID
     description: The API Key ID shown in the Cortex XDR API Keys table in settings. e.g. 1, 2, 3
@@ -1129,24 +1156,19 @@ actions:
         type: integer
         required: false
         example: 1599080399000
-      pending_flag:
-        title: Pending Flag
-        description: String of the XQL query
-        type: string
-        required: true
-        example: dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3\
       limit:
         title: Limit
         description: String of the XQL query
-        type: string
-        required: true
-        example: dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3
+        type: integer
+        required: false
+        example: 100
+        default: 20
     output:
-      success:
-        title: Success
+      reply:
+        title: Reply
         description: Was the operation successful
-        type: boolean
-        required: true
+        type: reply
+        required: false
 triggers:
   get_incidents:
     title: Get Incidents

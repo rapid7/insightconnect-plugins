@@ -1,6 +1,6 @@
 {
-	"spec": "4609c6c6619845ca57b90c4e92eced87",
-	"manifest": "1e9b8120641b43506f5b338d91f0cfae",
+	"spec": "dbdd062302ba0f2fe7e7907475dfc156",
+	"manifest": "962c20e1b2124cd988d8652d70517331",
 	"setup": "53ef908b27d5afb456ad53cfe422f805",
 	"schemas": [
 		{
@@ -18,6 +18,10 @@
 		{
 			"identifier": "get_file_quarantine_status/schema.py",
 			"hash": "d6e68dfff8a6e78936c598df71ab2928"
+		},
+		{
+			"identifier": "get_xql_query_results/schema.py",
+			"hash": "da865d99b8d0e7c3f57e11e69b7bab5f"
 		},
 		{
 			"identifier": "isolate_endpoint/schema.py",

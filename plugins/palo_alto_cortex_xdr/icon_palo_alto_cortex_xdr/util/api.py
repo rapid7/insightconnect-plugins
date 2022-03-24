@@ -41,6 +41,71 @@ class CortexXdrAPI:
                 data=e,
             )
 
+    def start_xql_query(self, query, tenants, start_time_range=None, end_time_range=None) -> int:
+        start_xql_query_endpoint = "/public_api/v1/xql/start_xql_query/"
+        ###
+        # Check if 'from' and 'to' are present, default to current Unix epoch time if absent
+        # Validate 'from' and 'to' fields
+        ###
+        current_date_time = int(time.time() * 1000)
+        if not start_time_range or not end_time_range:
+            time_frame = {"relative_time": current_date_time}
+        elif start_time_range >= end_time_range or\
+                start_time_range > current_date_time or\
+                end_time_range > current_date_time:
+            raise PluginException(
+                cause="Invalid 'To' or 'From' time range inputs",
+                assistance=f"'To' or 'From' must be valid Unix timestamps in epoch milliseconds, they must be past "
+                           f"timestamps, and 'To' must be more recent than 'From'",
+                data=f"'From'= {start_time_range}, 'To'= {end_time_range}",
+            )
+        else:
+            time_frame = {"from": start_time_range, "to": end_time_range}
+
+        post_body = {
+            "request_data": {
+                "query": query,
+                "tenants": tenants,
+                "timeframe": time_frame,
+            }
+        }
+        self.logger.info("Posting to API...")
+        resp_json = self._post_to_api(start_xql_query_endpoint, post_body)
+        self.logger.info("Getting reply...")
+        execution_id = resp_json.get("reply", None)
+        if execution_id is None:
+            resp_text = resp_json.text
+            raise PluginException(
+                cause="API Error. API returned an empty Execution ID",
+                assistance=f"The XQL Query could not be completed. Check input and try again.",
+                data=resp_text,
+            )
+        return execution_id
+
+    def get_xql_query_results(self, query_id, limit) -> Dict:
+        get_xql_query_results_endpoint = "/public_api/v1/xql/get_query_results/"
+        pending_flag = False
+        format = "json"
+        post_body = {
+            "request_data": {
+                "query_id": query_id,
+                "limit": limit,
+                "pending_flag": pending_flag,
+                "format": format,
+            }
+        }
+        resp_json = self._post_to_api(get_xql_query_results_endpoint, post_body)
+        output_object = {
+            "reply": {
+                "status": resp_json.get("reply").get("status"),
+                "number_of_results": resp_json.get("reply").get("number_of_results"),
+                "query_cost": resp_json.get("reply").get("query_cost"),
+                "remaining_quota": resp_json.get("reply").get("remaining_quota"),
+                "results": resp_json.get("reply").get("results")
+            }
+        }
+        return output_object
+
     def get_file_quarantine_status(self, file: dict) -> Dict:
         quarantine_status_endpoint = "/public_api/v1/quarantine/status/"
         post_body = {"request_data": {"files": [file]}}
@@ -98,7 +163,7 @@ class CortexXdrAPI:
         return self._isolate_endpoint(endpoints, isolation_state)
 
     def get_alerts(
-        self, from_time: int, to_time: int, time_sort_field: str = "creation_time", filters: List = None
+            self, from_time: int, to_time: int, time_sort_field: str = "creation_time", filters: List = None
     ) -> List[Dict]:
         endpoint = "/public_api/v1/alerts/get_alerts_multi_events/"
         response_alerts_field = "alerts"
@@ -107,7 +172,7 @@ class CortexXdrAPI:
         )
 
     def get_incidents(
-        self, from_time: int, to_time: int, time_sort_field: str = "creation_time", filters: List = None
+            self, from_time: int, to_time: int, time_sort_field: str = "creation_time", filters: List = None
     ) -> List[Dict]:
         endpoint = "/public_api/v1/incidents/get_incidents/"
         response_incidents_field = "incidents"
@@ -116,7 +181,7 @@ class CortexXdrAPI:
         )
 
     def allow_or_block_file(
-        self, file_hash: str, comment: str, incident_id: str = None, block_file: bool = True
+            self, file_hash: str, comment: str, incident_id: str = None, block_file: bool = True
     ) -> bool:
         if block_file:
             endpoint = "/public_api/v1/hash_exceptions/blocklist/"
@@ -151,13 +216,13 @@ class CortexXdrAPI:
     # Private Methods
     ###########################
     def _get_items_from_endpoint(
-        self,
-        endpoint: str,
-        from_time: int,
-        to_time: int,
-        response_item_field: str,
-        time_sort_field: str = "creation_time",
-        filters: List = None,
+            self,
+            endpoint: str,
+            from_time: int,
+            to_time: int,
+            response_item_field: str,
+            time_sort_field: str = "creation_time",
+            filters: List = None,
     ) -> List[Dict]:
         batch_size = 100
         search_from = 0
