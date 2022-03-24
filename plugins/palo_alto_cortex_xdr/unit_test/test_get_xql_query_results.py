@@ -3,19 +3,21 @@ import os
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase, mock
-from icon_palo_alto_cortex_xdr.connection.connection import Connection
+from parameterized import parameterized
+from unittest import TestCase
+from unittest.mock import patch
 from icon_palo_alto_cortex_xdr.actions.get_xql_query_results import GetXqlQueryResults
 from icon_palo_alto_cortex_xdr.actions.get_xql_query_results.schema import Input
-import json
+from insightconnect_plugin_runtime.exceptions import PluginException
+from unit_test.util import Util
+
 import logging
 
 from unit_test.mock import (
-    STUB_CONNECTION,
     mock_request_200,
     mock_request_403,
     mock_request_401,
-    mock_request_500,
+    mock_request_402,
     mock_request_400,
     mock_request_404,
     mocked_request,
@@ -25,28 +27,18 @@ class TestGetEndpointDetails(TestCase):
 
     def setUp(self) -> None:
         self.log = logging.getLogger("Test")
+        self.test_conn, self.test_action = Util.default_connector(GetXqlQueryResults())
+        self.test_params = {
+            Input.END_TIME_RANGE: 1599080399000,
+            Input.LIMIT: 20,
+            Input.QUERY: "dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3",
+            Input.START_TIME_RANGE: 1598907600000,
+            Input.TENANTS: []
+        }
 
-        self.test_conn = Connection()
-        self.test_conn.logger = self.log
-        self.test_conn.connect(STUB_CONNECTION)
-
-        self.test_action = GetXqlQueryResults()
-        self.test_action.logger = self.log
-        self.test_action.connection = self.test_conn
-
-    @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_get_xql_query_results1(self, mock_post):
-
-
-        actual = self.test_action.run(
-            {
-                Input.END_TIME_RANGE: 1599080399000,
-                Input.LIMIT: 20,
-                Input.QUERY: "dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3",
-                Input.START_TIME_RANGE: 1598907600000,
-                Input.TENANTS: []
-            }
-        )
+    @patch("requests.post", side_effect=mock_request_200)
+    def test_get_xql_query_results(self, _mock_req):
+        actual = self.test_action.run(self.test_params)
 
         expected = {
             "reply": {
@@ -62,31 +54,24 @@ class TestGetEndpointDetails(TestCase):
             }
         }
 
-        self.assertEqual(actual, expected)
+        self.assertEqual(expected, actual)
 
-    def test_get_xql_query_results(self):
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = GetXqlQueryResults()
-        test_conn.logger = log
-        test_action.logger = log
-
-        try:
-            with open("../tests/get_xql_query_results.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-        print(results)
-        self.assertIsNotNone(results)
+    @parameterized.expand(
+        [
+            (mock_request_400, "API Error. API returned 400", "Bad request, invalid JSON."),
+            (mock_request_401, "API Error. API returned 401", "Authorization failed. Check your API Key ID & API Key."),
+            (mock_request_402, "API Error. API returned 402", "Unauthorized access. User does not have the required "
+                                                              "license type to run this API."),
+            (mock_request_403, "API Error. API returned 403", "Forbidden. The provided API Key does not have the "
+                                                              "required RBAC permissions to run this API."),
+            (mock_request_404, "API Error. API returned 404", "The object at https://example.com/public_api/v1/xql"
+                                                              "/start_xql_query/ does not exist. Check the FQDN "
+                                                              "connection setting and try again."),
+        ],
+    )
+    def test_get_xql_query_results_bad(self, _mock_req, cause, assistance):
+        mocked_request(_mock_req)
+        with self.assertRaises(PluginException) as context:
+            self.test_action.run(self.test_params)
+        self.assertEqual(cause, context.exception.cause)
+        self.assertEqual(assistance, context.exception.assistance)

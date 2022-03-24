@@ -34,37 +34,35 @@ class MockResponse:
 
 def mocked_request(side_effect: Callable) -> None:
     mock_function = requests
-    mock_function.request = mock.Mock(side_effect=side_effect)
+    mock_function.post = mock.Mock(side_effect=side_effect)
 
 
-def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
+def mock_conditions(url: str, status_code: int) -> MockResponse:
     if url == STUB_URL + "public_api/v1/xql/start_xql_query/":
-        if method == "POST":
             return MockResponse("start_xql_query", status_code)
     if url == STUB_URL + "public_api/v1/xql/get_query_results/":
-        if method == "POST":
             return MockResponse("get_query_results", status_code)
 
 
 def mock_request_200(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 200)
+    return mock_conditions(kwargs.get('url'), 200)
 
 
 def mock_request_400(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 400)
+    return mock_conditions(kwargs.get('url'), 400)
 
 
 def mock_request_401(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 401)
+    return mock_conditions(kwargs.get('url'),  401)
 
 
 def mock_request_403(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 403)
+    return mock_conditions(kwargs.get('url'), 403)
 
 
 def mock_request_404(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 403)
+    return mock_conditions(kwargs.get('url'), 404)
 
 
-def mock_request_500(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 500)
+def mock_request_402(*args, **kwargs) -> MockResponse:
+    return mock_conditions(kwargs.get('url'), 402)

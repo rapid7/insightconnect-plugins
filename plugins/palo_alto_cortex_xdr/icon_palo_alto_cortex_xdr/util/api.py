@@ -10,6 +10,7 @@ import urllib
 
 from re import match
 from datetime import datetime, timezone
+from icon_palo_alto_cortex_xdr.util.util import Util
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 
 
@@ -41,6 +42,7 @@ class CortexXdrAPI:
                 data=e,
             )
 
+    @Util.retry(tries=1, timeout=900, exceptions=PluginException, backoff_seconds=1)
     def start_xql_query(self, query, tenants, start_time_range=None, end_time_range=None) -> int:
         start_xql_query_endpoint = "/public_api/v1/xql/start_xql_query/"
         ###
@@ -82,6 +84,7 @@ class CortexXdrAPI:
             )
         return execution_id
 
+    @Util.retry(tries=1, timeout=900, exceptions=PluginException, backoff_seconds=1)
     def get_xql_query_results(self, query_id, limit) -> Dict:
         get_xql_query_results_endpoint = "/public_api/v1/xql/get_query_results/"
         pending_flag = False
@@ -96,13 +99,11 @@ class CortexXdrAPI:
         }
         resp_json = self._post_to_api(get_xql_query_results_endpoint, post_body)
         output_object = {
-            "reply": {
-                "status": resp_json.get("reply").get("status"),
-                "number_of_results": resp_json.get("reply").get("number_of_results"),
-                "query_cost": resp_json.get("reply").get("query_cost"),
-                "remaining_quota": resp_json.get("reply").get("remaining_quota"),
-                "results": resp_json.get("reply").get("results")
-            }
+            "status": resp_json.get("reply").get("status"),
+            "number_of_results": resp_json.get("reply").get("number_of_results"),
+            "query_cost": resp_json.get("reply").get("query_cost"),
+            "remaining_quota": resp_json.get("reply").get("remaining_quota"),
+            "results": resp_json.get("reply").get("results")
         }
         return output_object
 
