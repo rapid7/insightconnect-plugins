@@ -1,0 +1,32 @@
+{
+    "id": 1234,
+    "type": "Metasploit",
+    "identifier": "test_identifier_5",
+    "title": "test_title_5",
+    "description": "test_description_5",
+    "data": {
+        "disclosure_date": "2017-01-01",
+        "architectures": "",
+        "platform": "Windows",
+        "authors": [
+            "Example User \"123456\" <user@example.co>"
+        ],
+        "rank": 600,
+        "targets": [
+            "Windows x86",
+            "Windows x64"
+        ],
+        "path": "/modules/exploits/windows/local/test_identifier_5"
+    },
+    "references": [
+        "test_reference_5"
+    ],
+    "created_at": "2018-01-01T00:00:00.000Z",
+    "updated_at": "2018-01-01T00:00:00.000Z",
+    "tsv_body": "'a':29B 'abusing':9A,40B 'also':86B 'architecture':77B 'be':79B 'binaries':67B 'binary':62B 'by':17B,39B 'bypass':5A,14B 'certificate':22B 'correct':76B 'dll':53B,60B 'drop':57B 'escalate':2A 'flag':36B 'for':83B 'has':33B 'however':72B 'in':6A,45B,68B 'injection':8A,25B,54B 'instead':63B 'it':26B,73B 'memory':7A 'module':12B,49B 'of':64B 'off':38B 'only':58B 'payload':61B 'process':24B 'protection':4A 'publisher':21B 'reflective':52B 'requires':74B 'second':30B 'selected':80B 'seperate':66B 'shell':31B 'spawn':28B 'standard':70B 'systems':47B,85B 'syswow64':84B 'technique':55B,71B 'that':32B 'the':19B,34B,41B,51B,59B,69B,75B 'this':11B,48B 'three':65B 'through':23B 'to':56B,78B 'trusted':20B 'turned':37B 'uac':3A,16B,35B 'use':81B 'uses':50B 'utilizing':18B 'way':42B 'will':13B,27B 'windows':1A,15B,46B 'winsxs':10A,43B 'works':44B 'x64':82B",
+    "published_at": "2018-01-01T00:00:00.000Z",
+    "content_type": "module",
+    "content_url": "https://example.com/test_identifier_5",
+    "hits": 113,
+    "reliability": "excellent"
+}
