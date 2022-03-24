@@ -63,7 +63,6 @@ def get_teams_from_microsoft(
             logger.info(f"Checking team: {name}")
             if compiled_team_name.search(name):
                 return [team]
-    else:
         raise PluginException(
             cause=f"Team {team_name} was not found.",
             assistance=f"Please verify {team_name} is a valid team name",
@@ -128,7 +127,6 @@ def get_channels_from_microsoft(
             logger.info(f"Checking channel: {name}")
             if compiled_channel_name.search(name):
                 return [channel]
-    else:
         raise PluginException(
             cause=f"Channel {channel_name} was not found.",
             assistance=f"Please verify {channel_name} is a valid channel for the team with id: {team_id}",
