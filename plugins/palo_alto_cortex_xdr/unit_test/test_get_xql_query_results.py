@@ -23,6 +23,7 @@ from unit_test.mock import (
     mocked_request,
 )
 
+
 class TestGetEndpointDetails(TestCase):
     def setUp(self) -> None:
         self.log = logging.getLogger("Test")
