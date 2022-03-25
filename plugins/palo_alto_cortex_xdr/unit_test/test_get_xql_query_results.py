@@ -21,8 +21,6 @@ from unit_test.mock import (
     mocked_request,
 )
 
-sys.path.append(os.path.abspath("../"))
-
 
 class TestGetEndpointDetails(TestCase):
     def setUp(self) -> None:
