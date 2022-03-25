@@ -1,0 +1,26 @@
+{
+  "details": [],
+  "route": "/hx/api/v3/hosts/agent_id/containment",
+  "data": {
+    "_id": "1111111111",
+    "last_sysinfo": "2022-01-05T04:14:47.419Z",
+    "requested_by_actor": {
+      "_id": 1000,
+      "username": "admin"
+    },
+    "requested_on": "2022-01-05T16:56:52.718Z",
+    "contained_by_actor": {
+      "_id": 1000,
+      "username": "admin"
+    },
+    "contained_on": "2022-01-05T16:56:52.718Z",
+    "queued": true,
+    "excluded": false,
+    "missing_software": false,
+    "reported_clone": false,
+    "state": "uncontaining",
+    "state_update_time": "2022-01-05T17:11:03.276Z",
+    "url": "/hx/api/v3/hosts/1111111111"
+  },
+  "message": "OK"
+}
