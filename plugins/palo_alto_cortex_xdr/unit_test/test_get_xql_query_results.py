@@ -1,8 +1,6 @@
 import sys
 import os
 
-sys.path.append(os.path.abspath("../"))
-
 import logging
 import time
 
@@ -22,6 +20,8 @@ from unit_test.mock import (
     mock_request_404,
     mocked_request,
 )
+
+sys.path.append(os.path.abspath("../"))
 
 
 class TestGetEndpointDetails(TestCase):
