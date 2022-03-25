@@ -33,6 +33,9 @@ class Util:
                 self.status_code = status_code
                 self.text = ""
 
+                if self.filename == "not_found":
+                    self.text = '{"message": "Not Found"}'
+
             def json(self):
                 return json.loads(
                     Util.read_file_to_string(
@@ -41,8 +44,21 @@ class Util:
                 )
 
         params = kwargs.get("params")
+        url = kwargs.get("url")
+        method = kwargs.get("method")
+
         if params == {"search": "example_hostname"}:
             return MockResponse("get_host_id", 200)
         if params == {"search": "invalid_hostname"}:
             return MockResponse("get_host_id2", 200)
+        if method == "POST" and url == "https://example.com/hx/api/v3/hosts/1111111111/containment":
+            return MockResponse("send_request_for_host_containment", 202)
+        if method == "PATCH" and url == "https://example.com/hx/api/v3/hosts/1111111111/containment":
+            return MockResponse("approve_request_for_host_containment", 201)
+        if method == "DELETE" and url == "https://example.com/hx/api/v3/hosts/1111111111/containment":
+            return MockResponse("delete_host_containment", 204)
+        if method == "GET" and url == "https://example.com/hx/api/v3/hosts/1111111111/containment":
+            return MockResponse("get_containment_state", 200)
+        if url == "https://example.com/hx/api/v3/hosts/invalid_host_id/containment":
+            return MockResponse("not_found", 404)
         raise Exception("Not implemented")

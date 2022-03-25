@@ -309,6 +309,84 @@ types:
       type: object
       required: false
 
+  user:
+    _id:
+      title: ID
+      description: ID
+      type: integer
+      required: false
+    username:
+      title: Username
+      description: Username
+      type: string
+      required: false
+  data:
+    _id:
+      title: ID
+      description: ID
+      type: string
+      required: false
+    last_sysinfo:
+      title: Last System Info
+      description: Last system info
+      type: string
+      required: false
+    requested_by_actor:
+      title: Requested By Actor
+      description: Requested by actor
+      type: user
+      required: false
+    requested_on:
+      title: Requested On
+      description: Requested on
+      type: string
+      required: false
+    contained_by_actor:
+      title: Contained By Actor
+      description: Contained by actor
+      type: user
+      required: false
+    contained_on:
+      title: Contained On
+      description: Contained on
+      type: string
+      required: false
+    queued:
+      title: Queued
+      description: Queued
+      type: boolean
+      required: false
+    excluded:
+      title: Excluded
+      description: Excluded
+      type: boolean
+      required: false
+    missing_software:
+      title: Missing Software
+      description: Missing software
+      type: boolean
+      required: false
+    reported_clone:
+      title: Reported Clone
+      description: Reported clone
+      type: boolean
+      required: false
+    state:
+      title: State
+      description: State
+      type: string
+      required: false
+    state_update_time:
+      title: State Update Time
+      description: State update time
+      type: string
+      required: false
+    url:
+      title: URL
+      description: URL
+      type: string
+      required: false
+
 connection:
   username_password:
     type: credential_username_password
@@ -368,3 +446,51 @@ actions:
         description: Alerts
         type: "[]alert"
         required: false
+  check_host_quarantine_status:
+    title: Check Host Quarantine Status
+    description: Check whether a host is quarantined or not
+    input:
+      agent_id:
+        title: Agent ID
+        description: The ID of the agent you want to check
+        type: string
+        required: false
+        example: 44d88612fea8a8f36de82e
+    output:
+      results:
+        title: Results
+        description: Results obtained for a specific agent
+        type: data
+        required: false
+  quarantine_host:
+    title: Quarantine Host
+    description: Quarantine a host
+    input:
+      agent_id:
+        title: Agent ID
+        description: The ID of the agent you want to isolate
+        type: string
+        required: false
+        example: 44d88612fea8a8f36de82e
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+  unquarantine_host:
+    title: Unquarantine Host
+    description: Remove a host from quarantine
+    input:
+      agent_id:
+        title: Agent ID
+        description: The ID of the agent you want to unisolate
+        type: string
+        required: false
+        example: 44d88612fea8a8f36de82e
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
