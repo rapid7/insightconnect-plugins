@@ -14,5 +14,4 @@ class UnquarantineHost(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+        return {Output.SUCCESS: self.connection.api.unquarantine_host(params.get(Input.AGENT_ID))}
