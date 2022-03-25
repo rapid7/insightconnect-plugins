@@ -57,8 +57,8 @@ class CortexXdrAPI:
         ):
             raise PluginException(
                 cause="Invalid 'To' or 'From' time range inputs",
-                assistance=f"'To' or 'From' must be valid Unix timestamps in epoch milliseconds, they must be past "
-                f"timestamps, and 'To' must be more recent than 'From'",
+                assistance="'To' or 'From' must be valid Unix timestamps in epoch milliseconds, they must be past "
+                "timestamps, and 'To' must be more recent than 'From'",
                 data=f"'From'= {start_time_range}, 'To'= {end_time_range}",
             )
         else:
@@ -79,7 +79,7 @@ class CortexXdrAPI:
             resp_text = resp_json.text
             raise PluginException(
                 cause="API Error. API returned an empty Execution ID",
-                assistance=f"The XQL Query could not be completed. Check input and try again.",
+                assistance="The XQL Query could not be completed. Check input and try again.",
                 data=resp_text,
             )
         return execution_id
@@ -94,13 +94,13 @@ class CortexXdrAPI:
                 assistance="Limit input value must be between 1 and 1000",
             )
         pending_flag = False
-        format = "json"
+        format_ = "json"
         post_body = {
             "request_data": {
                 "query_id": query_id,
                 "limit": limit,
                 "pending_flag": pending_flag,
-                "format": format,
+                "format": format_,
             }
         }
         resp_json = self._post_to_api(get_xql_query_results_endpoint, post_body)
@@ -335,7 +335,7 @@ class CortexXdrAPI:
         # Get the current timestamp as milliseconds.
         timestamp = int(datetime.now(timezone.utc).timestamp()) * 1000
         # Generate the auth key:
-        auth_key = "%s%s%s" % (api_key, nonce, timestamp)
+        auth_key = f"{api_key}{nonce}{timestamp}"
         # Convert to bytes object
         auth_key = auth_key.encode("utf-8")
         # Calculate sha256:

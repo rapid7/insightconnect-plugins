@@ -1,5 +1,8 @@
 import sys
 import os
+
+sys.path.append(os.path.abspath("../"))
+
 import logging
 import time
 
@@ -20,9 +23,6 @@ from unit_test.mock import (
     mocked_request,
 )
 
-sys.path.append(os.path.abspath("../"))
-
-
 class TestGetEndpointDetails(TestCase):
     def setUp(self) -> None:
         self.log = logging.getLogger("Test")
@@ -32,7 +32,7 @@ class TestGetEndpointDetails(TestCase):
             Input.LIMIT: 1000,
             Input.QUERY: "dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3",
             Input.FROM: 1598907600000,
-            Input.TENANTS: ['user1'],
+            Input.TENANTS: ["user1"],
         }
 
     @patch("requests.post", side_effect=mock_request_200)
@@ -46,17 +46,35 @@ class TestGetEndpointDetails(TestCase):
                 "remaining_quota": 4.998403611111111,
                 "results": {
                     "data": [
-                        {"event_id": "eventID1", "_vendor": "PANW", "_product": "Fusion",
-                         "insert_timestamp": 1621541825324, "_time": 1621541523000, "event_type": "STORY",
-                         "event_sub_type": "NULL"},
-                        {"event_id": "eventID2", "_vendor": "PANW", "_product": "Fusion",
-                         "insert_timestamp": 1621541825326, "_time": 1621541528000, "event_type": "STORY",
-                         "event_sub_type": "NULL"},
-                        {"event_id": "eventID3", "_vendor": "PANW", "_product": "Fusion",
-                         "insert_timestamp": 1621541825325, "_time": 1621541517000, "event_type": "STORY",
-                         "event_sub_type": "NULL"}
+                        {
+                            "event_id": "eventID1",
+                            "_vendor": "PANW",
+                            "_product": "Fusion",
+                            "insert_timestamp": 1621541825324,
+                            "_time": 1621541523000,
+                            "event_type": "STORY",
+                            "event_sub_type": "NULL",
+                        },
+                        {
+                            "event_id": "eventID2",
+                            "_vendor": "PANW",
+                            "_product": "Fusion",
+                            "insert_timestamp": 1621541825326,
+                            "_time": 1621541528000,
+                            "event_type": "STORY",
+                            "event_sub_type": "NULL",
+                        },
+                        {
+                            "event_id": "eventID3",
+                            "_vendor": "PANW",
+                            "_product": "Fusion",
+                            "insert_timestamp": 1621541825325,
+                            "_time": 1621541517000,
+                            "event_type": "STORY",
+                            "event_sub_type": "NULL",
+                        },
                     ]
-                }
+                },
             }
         }
         self.assertEqual(expected, actual)
@@ -74,17 +92,35 @@ class TestGetEndpointDetails(TestCase):
                 "remaining_quota": 4.998403611111111,
                 "results": {
                     "data": [
-                        {"event_id": "eventID1", "_vendor": "PANW", "_product": "Fusion",
-                         "insert_timestamp": 1621541825324, "_time": 1621541523000, "event_type": "STORY",
-                         "event_sub_type": "NULL"},
-                        {"event_id": "eventID2", "_vendor": "PANW", "_product": "Fusion",
-                         "insert_timestamp": 1621541825326, "_time": 1621541528000, "event_type": "STORY",
-                         "event_sub_type": "NULL"},
-                        {"event_id": "eventID3", "_vendor": "PANW", "_product": "Fusion",
-                         "insert_timestamp": 1621541825325, "_time": 1621541517000, "event_type": "STORY",
-                         "event_sub_type": "NULL"}
+                        {
+                            "event_id": "eventID1",
+                            "_vendor": "PANW",
+                            "_product": "Fusion",
+                            "insert_timestamp": 1621541825324,
+                            "_time": 1621541523000,
+                            "event_type": "STORY",
+                            "event_sub_type": "NULL",
+                        },
+                        {
+                            "event_id": "eventID2",
+                            "_vendor": "PANW",
+                            "_product": "Fusion",
+                            "insert_timestamp": 1621541825326,
+                            "_time": 1621541528000,
+                            "event_type": "STORY",
+                            "event_sub_type": "NULL",
+                        },
+                        {
+                            "event_id": "eventID3",
+                            "_vendor": "PANW",
+                            "_product": "Fusion",
+                            "insert_timestamp": 1621541825325,
+                            "_time": 1621541517000,
+                            "event_type": "STORY",
+                            "event_sub_type": "NULL",
+                        },
                     ]
-                }
+                },
             }
         }
 
@@ -103,17 +139,35 @@ class TestGetEndpointDetails(TestCase):
                 "remaining_quota": 4.998403611111111,
                 "results": {
                     "data": [
-                        {"event_id": "eventID1", "_vendor": "PANW", "_product": "Fusion",
-                         "insert_timestamp": 1621541825324, "_time": 1621541523000, "event_type": "STORY",
-                         "event_sub_type": "NULL"},
-                        {"event_id": "eventID2", "_vendor": "PANW", "_product": "Fusion",
-                         "insert_timestamp": 1621541825326, "_time": 1621541528000, "event_type": "STORY",
-                         "event_sub_type": "NULL"},
-                        {"event_id": "eventID3", "_vendor": "PANW", "_product": "Fusion",
-                         "insert_timestamp": 1621541825325, "_time": 1621541517000, "event_type": "STORY",
-                         "event_sub_type": "NULL"}
+                        {
+                            "event_id": "eventID1",
+                            "_vendor": "PANW",
+                            "_product": "Fusion",
+                            "insert_timestamp": 1621541825324,
+                            "_time": 1621541523000,
+                            "event_type": "STORY",
+                            "event_sub_type": "NULL",
+                        },
+                        {
+                            "event_id": "eventID2",
+                            "_vendor": "PANW",
+                            "_product": "Fusion",
+                            "insert_timestamp": 1621541825326,
+                            "_time": 1621541528000,
+                            "event_type": "STORY",
+                            "event_sub_type": "NULL",
+                        },
+                        {
+                            "event_id": "eventID3",
+                            "_vendor": "PANW",
+                            "_product": "Fusion",
+                            "insert_timestamp": 1621541825325,
+                            "_time": 1621541517000,
+                            "event_type": "STORY",
+                            "event_sub_type": "NULL",
+                        },
                     ]
-                }
+                },
             }
         }
 
@@ -156,21 +210,21 @@ class TestGetEndpointDetails(TestCase):
             (mock_request_400, "API Error. API returned 400", "Bad request, invalid JSON."),
             (mock_request_401, "API Error. API returned 401", "Authorization failed. Check your API Key ID & API Key."),
             (
-                    mock_request_402,
-                    "API Error. API returned 402",
-                    "Unauthorized access. User does not have the required " "license type to run this API.",
+                mock_request_402,
+                "API Error. API returned 402",
+                "Unauthorized access. User does not have the required " "license type to run this API.",
             ),
             (
-                    mock_request_403,
-                    "API Error. API returned 403",
-                    "Forbidden. The provided API Key does not have the " "required RBAC permissions to run this API.",
+                mock_request_403,
+                "API Error. API returned 403",
+                "Forbidden. The provided API Key does not have the " "required RBAC permissions to run this API.",
             ),
             (
-                    mock_request_404,
-                    "API Error. API returned 404",
-                    "The object at https://example.com/public_api/v1/xql"
-                    "/start_xql_query/ does not exist. Check the FQDN "
-                    "connection setting and try again.",
+                mock_request_404,
+                "API Error. API returned 404",
+                "The object at https://example.com/public_api/v1/xql"
+                "/start_xql_query/ does not exist. Check the FQDN "
+                "connection setting and try again.",
             ),
         ],
     )
