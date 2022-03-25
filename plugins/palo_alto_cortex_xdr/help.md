@@ -22,16 +22,6 @@ Stop modern attacks with the industry’s first extended detection and response 
 
 ## Setup
 
-The required connection information is available in the Cortex XDR web dashboard. Click the gear icon, click settings, and then click on API Keys on the left.
-
-The API Key will be generated when you create a new API key.
-
-The API Key ID is the value from the ID column.
-
-To get the API URL, right click on your API key and pick generate examples. The generated example is a URL that should look similar to "https://api-yourorg.xdr.us.paloaltonetworks.com/api_keys/validate/".
-In our example the API URL is "https://api-yourorg.xdr.us.paloaltonetworks.com" and should be copied.
-
-
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -55,6 +45,46 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Get XQL Query Results
+
+This action is used to start an XQL query and retrieve the query results.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|from|integer|None|False|Integer in timestamp epoch milliseconds for end of the time range, Cortex XDR calls by default the last 24 hours if both 'To' and 'From' values are not present|None|1599080399000|
+|limit|integer|20|False|Integer representing the maximum number of results to return, defaults to 20, max value 1000|None|100|
+|query|string|None|True|String of the XQL query|None|dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3|
+|tenants|[]string|None|True|String that represents additional information regarding the action|None|["tenantID", "tenantID"]|
+|to|integer|None|False|Integer in timestamp epoch milliseconds for start of the time range, Cortex XDR calls by default the last 24 hours if both 'To' and 'From' values are not present|None|1598907600000|
+
+Example input:
+
+```
+{
+  "from": 1599080399000,
+  "limit": 100,
+  "query": "dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3",
+  "tenants": [
+    "tenantID",
+    "tenantID"
+  ],
+  "to": 1598907600000
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|reply|reply|False|Was the operation successful|
+
+Example output:
+
+```
+```
 
 #### Get File Quarantine Status
 
@@ -638,6 +668,7 @@ Example output:
 
 # Version History
 
+* 2.2.0 - New action Get XQL Query Results
 * 2.1.1 - Fix issue in Monitor Incident Events task where fields with null values aren't removed from incidents leading to validation errors
 * 2.1.0 - New task Monitor Incident Events
 * 2.0.0 - New action Get File Quarantine Status | New trigger Get Alerts

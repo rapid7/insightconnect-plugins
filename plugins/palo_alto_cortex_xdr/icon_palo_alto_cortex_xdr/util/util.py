@@ -32,12 +32,18 @@ class Util:
                 yield last_event_processed_time_ms
 
     def retry(tries: int, timeout: int, exceptions, backoff_seconds: int = 1):
-        """
-        @param tries: Amount of times function is to be retried
-        @param timeout: Timeout period in seconds. Retries will cease after this period
-        @param exceptions: Increment number of function attempts if these exceptions are raised
-        @param backoff_seconds: Time in seconds to be used in sleep algorithm for backoff. Value will be multiplied by
-        2, multiplied again by the number of attempts, and have a randomised ms value as an addition.
+        """Function retries passed function based on input values
+        :param tries: Amount of times function is to be retried
+        :type tries: int, required
+        :param timeout: Timeout period in seconds. Retries will cease after this period
+        :type timeout: int, required
+        :param exceptions: Increment number of function attempts if these exceptions are raised
+        :type exceptions: []Exception, required
+        :param backoff_seconds: Time in seconds to be used in sleep algorithm for backoff. Value will be multiplied by
+        2, multiplied again by the number of attempts, and have a randomised ms value as an addition. Defaults to 1.
+        :type backoff_seconds: int, required
+        :return: Itself
+        :rtype: func
         """
 
         def decorator(func):
@@ -50,7 +56,7 @@ class Util:
                         try:
                             # Sleep exponentially increases per retry
                             # # nosec prevents bandit warning
-                            time.sleep(backoff_seconds * 2 ** attempt + random.uniform(0, 1))  # nosec
+                            time.sleep(backoff_seconds * 2**attempt + random.uniform(0, 1))  # nosec
                             return func(*args, **kwargs)
                         except exceptions:
                             attempt += 1

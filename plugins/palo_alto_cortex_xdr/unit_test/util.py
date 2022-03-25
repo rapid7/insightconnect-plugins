@@ -30,7 +30,7 @@ class Util:
                 Input.API_KEY: {"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"},
                 Input.API_KEY_ID: "1",
                 Input.SECURITY_LEVEL: "Standard",
-                Input.URL: "https://example.com/"
+                Input.URL: "https://example.com/",
             }
         default_connection.connect(params)
         action.connection = default_connection

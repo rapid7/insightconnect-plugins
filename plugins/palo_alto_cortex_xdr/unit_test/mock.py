@@ -15,7 +15,7 @@ STUB_CONNECTION = {
     Input.API_KEY: {"secretKey": STUB_API_KEY},
     Input.API_KEY_ID: STUB_API_KEY_ID,
     Input.SECURITY_LEVEL: STUB_SECURITY_LEVEL,
-    Input.URL: STUB_URL
+    Input.URL: STUB_URL,
 }
 
 
@@ -39,30 +39,30 @@ def mocked_request(side_effect: Callable) -> None:
 
 def mock_conditions(url: str, status_code: int) -> MockResponse:
     if url == STUB_URL + "public_api/v1/xql/start_xql_query/":
-            return MockResponse("start_xql_query", status_code)
+        return MockResponse("start_xql_query", status_code)
     if url == STUB_URL + "public_api/v1/xql/get_query_results/":
-            return MockResponse("get_query_results", status_code)
+        return MockResponse("get_query_results", status_code)
 
 
 def mock_request_200(*args, **kwargs) -> MockResponse:
-    return mock_conditions(kwargs.get('url'), 200)
+    return mock_conditions(kwargs.get("url"), 200)
 
 
 def mock_request_400(*args, **kwargs) -> MockResponse:
-    return mock_conditions(kwargs.get('url'), 400)
+    return mock_conditions(kwargs.get("url"), 400)
 
 
 def mock_request_401(*args, **kwargs) -> MockResponse:
-    return mock_conditions(kwargs.get('url'),  401)
+    return mock_conditions(kwargs.get("url"), 401)
 
 
 def mock_request_403(*args, **kwargs) -> MockResponse:
-    return mock_conditions(kwargs.get('url'), 403)
+    return mock_conditions(kwargs.get("url"), 403)
 
 
 def mock_request_404(*args, **kwargs) -> MockResponse:
-    return mock_conditions(kwargs.get('url'), 404)
+    return mock_conditions(kwargs.get("url"), 404)
 
 
 def mock_request_402(*args, **kwargs) -> MockResponse:
-    return mock_conditions(kwargs.get('url'), 402)
+    return mock_conditions(kwargs.get("url"), 402)
