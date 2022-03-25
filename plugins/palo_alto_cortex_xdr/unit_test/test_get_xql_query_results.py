@@ -9,8 +9,8 @@ import time
 from parameterized import parameterized
 from unittest import TestCase
 from unittest.mock import patch
-from icon_palo_alto_cortex_xdr.actions.get_xql_query_results import GetXqlQueryResults
 from icon_palo_alto_cortex_xdr.actions.get_xql_query_results.schema import Input
+from icon_palo_alto_cortex_xdr.actions.get_xql_query_results import GetXqlQueryResults
 from insightconnect_plugin_runtime.exceptions import PluginException
 from unit_test.util import Util
 from unit_test.mock import (
