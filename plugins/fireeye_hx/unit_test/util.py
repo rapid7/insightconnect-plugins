@@ -1,5 +1,9 @@
 import logging
+import sys
 import os
+
+sys.path.append(os.path.abspath("../"))
+
 from icon_fireeye_hx.connection.connection import Connection
 from icon_fireeye_hx.connection.schema import Input
 import json

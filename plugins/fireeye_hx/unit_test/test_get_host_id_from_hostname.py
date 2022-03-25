@@ -1,14 +1,14 @@
 import sys
 import os
 
+sys.path.append(os.path.abspath("../"))
+
 from unittest import TestCase
 from icon_fireeye_hx.actions.get_host_id_from_hostname import GetHostIdFromHostname
 from icon_fireeye_hx.actions.get_host_id_from_hostname.schema import Input, Output
 from unit_test.util import Util
 from unittest.mock import patch
 from parameterized import parameterized
-
-sys.path.append(os.path.abspath("../"))
 
 
 @patch("requests.sessions.Session.request", side_effect=Util.mocked_requests)
