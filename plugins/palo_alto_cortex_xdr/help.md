@@ -16,7 +16,7 @@ Stop modern attacks with the industry’s first extended detection and response 
 
 # Supported Product Versions
 
-* Palo Alto Cortex XDR API v1
+* 2022-03-28 Palo Alto Cortex XDR API v1
 
 # Documentation
 
@@ -668,7 +668,7 @@ Example output:
 
 # Version History
 
-* 2.2.0 - New action Get XQL Query Results
+* 2.2.0 - New action Get XQL Query Results | Update SDK to insightconnect-python-3-38-slim-plugin:4
 * 2.1.1 - Fix issue in Monitor Incident Events task where fields with null values aren't removed from incidents leading to validation errors
 * 2.1.0 - New task Monitor Incident Events
 * 2.0.0 - New action Get File Quarantine Status | New trigger Get Alerts

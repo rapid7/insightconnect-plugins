@@ -54,6 +54,8 @@ class CortexXdrAPI:
             start_time_range >= end_time_range
             or start_time_range > current_date_time
             or end_time_range > current_date_time
+            or start_time_range < 1
+            or end_time_range < 1
         ):
             raise PluginException(
                 cause="Invalid 'To' or 'From' time range inputs",
