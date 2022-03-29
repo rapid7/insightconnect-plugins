@@ -3,7 +3,7 @@ from typing import Optional
 
 import requests
 
-import icon_rapid7_insight_agent.util.graphql_api.agent_typer as agent_typer
+from icon_rapid7_insight_agent.util.graphql_api import agent_typer
 from icon_rapid7_insight_agent.util.graphql_api.region_map import region_map
 from insightconnect_plugin_runtime.exceptions import PluginException
 
@@ -96,12 +96,10 @@ class ApiConnection:
                 data=str(results_object),
             )
 
-        is_online = True if agent_status == "ONLINE" else False
-        is_quarantine_requested = True if quarantine_state == "QUARANTINE_IN_PROGRESS" else False
-        is_unquarantine_requested = True if quarantine_state == "UNQUARANTINE_IN_PROGRESS" else False
-        is_is_quarantined = (
-            True if (quarantine_state == "QUARANTINED" or quarantine_state == "UNQUARANTINE_IN_PROGRESS") else False
-        )
+        is_online = bool(agent_status == "ONLINE")
+        is_quarantine_requested = bool(quarantine_state == "QUARANTINE_IN_PROGRESS")
+        is_unquarantine_requested = bool(quarantine_state == "UNQUARANTINE_IN_PROGRESS")
+        is_is_quarantined = bool(quarantine_state in ('QUARANTINED', 'UNQUARANTINE_IN_PROGRESS'))
 
         return {
             "is_currently_quarantined": is_is_quarantined,
