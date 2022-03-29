@@ -110,15 +110,17 @@ class MockConnection:
 
 
 class TestUninstallSensors(TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.log = logging.getLogger("Test")
+        cls.test_action = UninstallSensor()
+        cls.test_action.connection = MockConnection()
+        cls.test_action.logger = cls.log
+
     @mock.patch("cbapi.CbEnterpriseResponseAPI", side_effect=MockCbEnterpriseResponseAPI)
     def test_uninstall_sensor_success(self, mockCbEnterpriseResponseAPI):
-        log = logging.getLogger("Test")
-        test_action = UninstallSensor()
-        test_action.connection = MockConnection()
-        test_action.logger = log
-
         working_params = {"id": "1"}
-        results = test_action.run(working_params)
+        results = self.test_action.run(working_params)
 
         expected = {"success": True}
         self.assertNotEqual({}, results, "returns non - empty results")
@@ -126,22 +128,12 @@ class TestUninstallSensors(TestCase):
 
     @mock.patch("cbapi.CbEnterpriseResponseAPI", side_effect=MockCbEnterpriseResponseAPI)
     def test_uninstall_sensor_failure(self, mockCbEnterpriseResponseAPI):
-        log = logging.getLogger("Test")
-        test_action = UninstallSensor()
-        test_action.connection = MockConnection()
-        test_action.logger = log
-
         working_params = {"id": "bad"}
 
-        self.assertRaises(PluginException, test_action.run, working_params)
+        self.assertRaises(PluginException, self.test_action.run, working_params)
 
     @mock.patch("cbapi.CbEnterpriseResponseAPI", side_effect=MockCbEnterpriseResponseAPI)
     def test_uninstall_sensor_invalid_id(self, mockCbEnterpriseResponseAPI):
-        log = logging.getLogger("Test")
-        test_action = UninstallSensor()
-        test_action.connection = MockConnection()
-        test_action.logger = log
-
         working_params = {"id": "150"}
 
-        self.assertRaises(PluginException, test_action.run, working_params)
+        self.assertRaises(PluginException, self.test_action.run, working_params)
