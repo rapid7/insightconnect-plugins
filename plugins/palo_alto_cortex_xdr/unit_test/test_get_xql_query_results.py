@@ -187,7 +187,7 @@ class TestGetEndpointDetails(TestCase):
         self.test_params[Input.START_TIME] = from_
         self.test_params[Input.END_TIME] = to
         expected_cause = "Invalid 'To' or 'From' time range inputs"
-        expected_assistance = f"'To' or 'From' must be valid Unix timestamps in epoch milliseconds, they must be past timestamps, and 'To' must be more recent than 'From'"
+        expected_assistance = f"'To' or 'From' must be valid Unix timestamps in epoch milliseconds, they must be past timestamps, and 'Start Time' must be more recent than 'End Time'"
         expected_data = f"'From'= {from_}, 'To'= {to}"
         with self.assertRaises(PluginException) as context:
             self.test_action.run(self.test_params)
