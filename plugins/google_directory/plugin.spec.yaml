@@ -5,6 +5,7 @@ name: google_directory
 title: Google Directory
 description: Uses the Google Directory plugin to manage members, users, and user aliases
 version: 2.0.2
+supported_versions: ["Google Directory API v1 2022-03-29"]
 vendor: rapid7
 support: community
 status: []
