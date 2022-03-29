@@ -29,10 +29,10 @@ class TestGetEndpointDetails(TestCase):
         self.log = logging.getLogger("Test")
         self.test_conn, self.test_action = Util.default_connector(GetXqlQueryResults())
         self.test_params = {
-            Input.TO: 1599080399000,
+            Input.END_TIME: 1599080399000,
             Input.LIMIT: 1000,
             Input.QUERY: "dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3",
-            Input.FROM: 1598907600000,
+            Input.START_TIME: 1598907600000,
             Input.TENANTS: ["user1"],
         }
 
@@ -129,7 +129,7 @@ class TestGetEndpointDetails(TestCase):
 
     @patch("requests.post", side_effect=mock_request_200)
     def test_get_xql_query_results_absent_from(self, _mock_req):
-        self.test_params[Input.FROM] = None
+        self.test_params[Input.START_TIME] = None
         actual = self.test_action.run(self.test_params)
 
         expected = {
@@ -184,8 +184,8 @@ class TestGetEndpointDetails(TestCase):
     )
     def test_get_xql_query_results_bad_to_from(self, _mock_req, from_, to):
         mocked_request(_mock_req)
-        self.test_params[Input.FROM] = from_
-        self.test_params[Input.TO] = to
+        self.test_params[Input.START_TIME] = from_
+        self.test_params[Input.END_TIME] = to
         expected_cause = "Invalid 'To' or 'From' time range inputs"
         expected_assistance = f"'To' or 'From' must be valid Unix timestamps in epoch milliseconds, they must be past timestamps, and 'To' must be more recent than 'From'"
         expected_data = f"'From'= {from_}, 'To'= {to}"

@@ -64,24 +64,24 @@ This action is used to start an XQL query and retrieve the query results.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|from|integer|None|False|Integer in timestamp epoch milliseconds for end of the time range, Cortex XDR calls by default the last 24 hours if both 'To' and 'From' values are not present|None|1599080399000|
+|start_time|integer|None|False|Integer in timestamp epoch milliseconds for start of the time range, Cortex XDR calls by default the last 24 hours if both 'Start Time' and 'End Time' values are not present|None|1599080399000|
 |limit|integer|20|False|Integer representing the maximum number of results to return, defaults to 20, max value 1000|None|100|
 |query|string|None|True|String of the XQL query|None|dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3|
 |tenants|[]string|None|True|String that represents additional information regarding the action|None|["tenantID", "tenantID"]|
-|to|integer|None|False|Integer in timestamp epoch milliseconds for start of the time range, Cortex XDR calls by default the last 24 hours if both 'To' and 'From' values are not present|None|1598907600000|
+|end_time|integer|None|False|Integer in timestamp epoch milliseconds for end of the time range, Cortex XDR calls by default the last 24 hours if both 'Start Time' and 'End Time' values are not present|None|1598907600000|
 
 Example input:
 
 ```
 {
-  "from": 1599080399000,
+  "start_time": 1599080399000,
   "limit": 100,
   "query": "dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3",
   "tenants": [
     "tenantID",
     "tenantID"
   ],
-  "to": 1598907600000
+  "end_time": 1598907600000
 }
 ```
 
@@ -94,6 +94,28 @@ Example input:
 Example output:
 
 ```
+{
+  "reply": {
+    "number_of_results": 1,
+    "query_cost": {
+      "1098781949": 0.0007469444444444444
+    },
+    "remaining_quota": 4.999253055555555,
+    "results": {
+      "data": [
+        {
+          "event_id": "eventID1",
+          "_vendor": "PANW",
+          "_product": "Fusion",
+          "insert_timestamp": 1621541825324,
+          "_time": 1621541523000,
+          "event_type": "STORY",
+          "event_sub_type": "NULL"
+        }
+      ]
+    }
+  }
+}
 ```
 
 #### Get File Quarantine Status

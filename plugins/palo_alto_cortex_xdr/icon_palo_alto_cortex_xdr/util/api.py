@@ -58,9 +58,9 @@ class CortexXdrAPI:
             or end_time_range < 1
         ):
             raise PluginException(
-                cause="Invalid 'To' or 'From' time range inputs",
-                assistance="'To' or 'From' must be valid Unix timestamps in epoch milliseconds, they must be past "
-                "timestamps, and 'To' must be more recent than 'From'",
+                cause="Invalid 'Start Time' or 'End Time' time range inputs",
+                assistance="'Start Time' or 'End Time' must be valid Unix timestamps in epoch milliseconds, they must be past "
+                "timestamps, and 'End Time' must be more recent than 'Start Time'",
                 data=f"'From'= {start_time_range}, 'To'= {end_time_range}",
             )
         else:
