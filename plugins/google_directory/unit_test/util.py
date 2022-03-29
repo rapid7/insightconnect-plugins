@@ -1,6 +1,10 @@
 import json
 import logging
 import os
+import sys
+
+sys.path.append(os.path.abspath("../"))
+
 from icon_google_directory.connection.connection import Connection
 
 
