@@ -1,5 +1,8 @@
 import sys
 import os
+
+sys.path.append(os.path.abspath("../"))
+
 import timeout_decorator
 from unittest import TestCase
 from unittest.mock import patch
@@ -7,8 +10,6 @@ from icon_palo_alto_cortex_xdr.triggers.get_incidents import GetIncidents
 from icon_palo_alto_cortex_xdr.triggers.get_incidents.schema import Input
 from unit_test.util import Util, MockTrigger
 from typing import Callable, Optional
-
-sys.path.append(os.path.abspath("../"))
 
 
 def timeout_pass(error_callback: Optional[Callable] = None):
