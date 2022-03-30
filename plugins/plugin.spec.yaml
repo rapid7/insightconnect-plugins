@@ -1,0 +1,237 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: manage_engine_service_desk
+title: Manage Engine Service Desk
+version: 1.0.0
+supported_versions: ["2022-03-08"]
+description: < fill in later >
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/cisco_umbrella_destinations
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.cisco.com
+tags:
+- manage engine
+- service desk
+hub_tags:
+  use_cases: [threat_detection_and_response]
+  keywords: [manage, engine, service, desk]
+  features: []
+connection:
+  api_key:
+    title: API Key
+    description: Manage Service Engine API key
+    type: credential_secret_key
+    required: true
+    example: 6A70F2A8-BC42-49A0-98A4-20FECF4C96EC
+
+types:
+  resolution_object:
+    content:
+      title: Content
+      description: Resolution content provided by the technician to resolve this request
+      type: string
+      required: false
+    submitted_by:
+      title: Submitted By
+      description: No description
+      type:
+      required: false
+  service_approvers_object:
+    org_role:
+      title: Organisation Role
+      description: Org roles of the service approvers configured
+      type: string
+      enum:
+        - CEO
+        - CFO
+        - ETC <Add more here>
+      required: false
+    users:
+      title: Users
+      description: The users who are configured as service approvers for the request
+      type: string
+      required: false
+  onhold_scheduler_object:
+    scheduled_time:
+      title: Scheduled Time
+      description: Denotes the scheduled time for the onhold scheduler to change the Request’s status
+      type: datetime
+      required: false
+    comments:
+      title: Comments
+      description: Details or comments added for linking requests
+      type: string
+      required: false
+    held_by:
+      title: Held By
+      description: The technician who stopped the timer/who changed the status to OnHold of the Request
+      type: string
+      required: false
+    change_to_status:
+      title: Change to Status
+      description: Status object to which the request is scheduled to move to, after the onhold scheduler is completed
+      type: string
+      required: false
+  closure_info_object:
+    requester_ack_resolution:
+      title: Requester Ack Solution
+      description: Denotes if the requester has acknowledged the resolution he/she has been given
+      type: boolean
+      required: false
+    requester_ack_comments:
+      title: Requester Ack Comments
+      description: Comments from the requester in regards to the resolution he/she has been given
+      type: string
+      required: false
+    closure_comments:
+      title: Closure Comments
+      description: Closure comments denotes the reason for closing the request and can only be given by technician
+      type: string
+      required: false
+    closure_code:
+      title: Closure Code
+      description: Closure Codes are codes that denote the reason for closing a request(ticket)/change request, whether the request/change was closed due to completion, rejection, and so on
+      type: string
+      required: false
+
+
+  help_desk_ticket:
+    id:
+      title: ID
+      description: Unique identifer of this request
+      type: integer
+      required: false
+    subject:
+      title: Subject
+      description: Title of the request
+      type: string
+      required: false
+    description:
+      title: Description
+      description: Details about the request
+      type:
+      required: false
+    impact_details:
+      title: Impact Details
+      description: Description about the impact of the request
+      type: string
+      required: false
+    resolution:
+      title: Resolution
+      description: A solution for the request
+      type: resolution_object
+      required: false
+    time_elapsed:
+      title: Time Elapsed
+      description: Indicates the time spent on this request
+      type: integer
+      required: false
+    email_cc:
+      title: Email CC
+      description: List of e-mail addresses(cc addresses) which receives the request through e-mail
+      type: string
+      required: false
+    email_ids_to_notify:
+      title: Email IDs to Notify
+      description: Array of Email ids, which needs to be notified about the happenings of this request
+      type: string
+      required: false
+    delete_pre_template_tasks:
+      title: Delete Pre Template Tasks
+      description: The reason for updating this request
+      type: boolean
+      required: false
+    update_reason:
+      title: Update Reason
+      description: The reason for which the request has been updated
+      type: string
+      required: false
+    service_approvers:
+      title: Service Approvers
+      description: The configured users will be added to the first stage of approval for the service request which can be added only by requesters
+      type: service_approvers_object
+      required: false
+    email_to:
+      title: Email To
+      description: List of email addresses(to addresses) while receiving the request
+      type: string
+      required: false
+    email_bcc:
+      title: Email BCC
+      description: List of email addresses(bcc addresses) which receives the request
+      type: string
+      required: false
+    onhold_scheduler:
+      title: Onhold Scheduler
+      description: Contains the scheduling details for the request, when the request is in Onhold status
+      type: onhold_scheduler_object
+      required: false
+    closure_info:
+      title: Closure Info
+      description: Contains the closure information when the request is in closed status
+      type: closure_info_object
+      required: false
+    cancellation_requested:
+      title: Cancellation Requested
+      description: Boolean which indicates whether the request is raised for cancelation by the requester
+      type: boolean
+      required: false
+    cancel_flag_comments:
+      title: Cancel Flag Comments
+      description: Information provided by the requester to cancel a request to the technician
+      type: string
+      required: false
+    impact:
+      title: Impact
+      description: Indicates the impact of the request
+      type: string
+      required: false
+    status:
+      title: Status
+      description: Indicates the current status of this request
+      type: string
+      required: false
+    display_id:
+      title: Display ID
+      description: Indicates the display ID of the request
+      type: integer
+      required: false
+    requester:
+      title: Requester
+      description: Indicates the requester of this request
+      type: string
+      required: false
+    created_time:
+      title: Created Time
+      description: Indicates the time at which this request is created
+      type: datetime
+      required: false
+    responded_time:
+      title: Responded Time
+      description: Indicates the time at which this request is responded
+      type: datetime
+      required: false
+    due_by_time:
+      title: Due By Time
+      description: Indicates the time at which this request is scheduled to be completed
+      type: datetime
+      required: false
+
+
+
+actions:
+  addRequest:
+    title: Add Request
+    description: This operation is used to add a new request
+    input:
+      subject:
+        title: Subject
+        description: Details of the request
+        type: string
+        required: true
+
+
