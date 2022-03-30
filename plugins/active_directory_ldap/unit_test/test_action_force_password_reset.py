@@ -1,5 +1,5 @@
 from unittest import TestCase, mock
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_active_directory_ldap.actions.force_password_reset import ForcePasswordReset
 from komand_active_directory_ldap.actions.force_password_reset.schema import Input, Output
 from unit_test.common import MockServer
