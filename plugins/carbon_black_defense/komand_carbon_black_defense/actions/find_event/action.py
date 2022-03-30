@@ -53,12 +53,18 @@ class FindEvent(insightconnect_plugin_runtime.Action):
 
         self.logger.info(f"Got enriched event job ID: {id_}")
         if id_ is None:
-            return {Output.EVENTINFO: None, Output.SUCCESS: False}
+            return {Output.RESULTS: None, Output.SUCCESS: False}
         self.get_enriched_event_status(id_)
         response = self.connection.retrieve_results_for_enriched_event(job_id=id_)
         data = insightconnect_plugin_runtime.helper.clean(response)
 
         return {
             Output.SUCCESS: True,
-            Output.EVENTINFO: data,
+            Output.RESULTS: data.get("results"),
+            Output.APPROXIMATE_UNAGGREGATED: data.get("approximate_unaggregated"),
+            Output.NUM_AGGREGATED: data.get("num_aggregated"),
+            Output.NUM_AVAILABLE: data.get("num_available"),
+            Output.NUM_FOUND: data.get("num_found"),
+            Output.CONTACTED: data.get("contacted"),
+            Output.COMPLETED: data.get("completed"),
         }

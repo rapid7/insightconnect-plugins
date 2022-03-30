@@ -15,7 +15,7 @@ This plugin utilizes the [VMware Carbon Black Cloud Endpoint Standard API](https
 
 # Supported Product Versions
 
-* 09/03/2022
+* 2022-15-03
 
 # Documentation
 
@@ -60,19 +60,6 @@ This action is used to retrieve all events matching the input search criteria. R
 |process_name|[]string|None|False|Process name|None|c:\windows\system32\windowspowershell\v1.0\modules\smbshare\disableunusedsmb1.ps1|
 |time_range|string|None|False|Time frame to limit your search to. Integer used for amount of the following: s=second(s), m=minute(s), h=hour(s), d=day(s), w=week(s), or y=year(s). Example: -2d|None|-2d|
 
-```
-{
-  "device_external_ip": "45.62.187.4",
-  "device_installed_by": "CONTOSO\\admin",
-  "device_name": "CONTOSO\\bruce-win10",
-  "enriched_event_type": "SYSTEM_API_CALL",
-  "event_id": "422af3fc3a7411ea8da649e797467dc0",
-  "process_hash": [
-    "A3DED3871AC66498E406798B0CA33F1B5E94B9CFB60DD4489475B9C19FBFD7F5"
-  ],
-  "process_name": "c:\\windows\\system32\\windowspowershell\\v1.0\\modules\\smbshare\\disableunusedsmb1.ps1"
-}
-```
 
 Example input:
 
@@ -93,131 +80,68 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|eventinfo|event_info|False|Detailed information on the event|
+|approximate_unaggregated|integer|False|The number of matching events used to construct the processes which will be equivalent to Num Found|
+|completed|integer|False|The number of searchers that have reported their results|
+|contacted|integer|False|The number of searchers contacted for this query|
+|num_aggregated|integer|False|The number of processes that were constructed from the events which will be equal or greater than Num Available|
+|num_available|integer|False|Number of found results able to be paginated|
+|num_found|integer|False|Number of results found|
+|results|[]event_info|False|Detailed information on the event|
 |success|boolean|False|Success|
 
 Example output:
 
 ```
 {
-  "success": true,
-  "latestTime": 0,
+  "approximate_unaggregated": 78750,
+  "completed": 5,
+  "contacted": 5,
+  "num_aggregated": 503,
+  "num_available": 500,
+  "num_found": 78750,
   "results": [
     {
-      "eventId": "1defe38112e911e7b34047d6447797bd",
-      "processDetails": {
-        "userName": "SYSTEM",
-        "processId": 2872,
-        "milisSinceProcessStart": 32,
-        "name": "taskeng.exe",
-        "parentPid": 772,
-        "interpreterHash": null,
-        "interpreterName": null,
-        "commandLine": "taskeng.exe {5267BC82-9B0D-4F0B-A566-E06CDE5602F1} S-1-5-18:NT AUTHORITY\\System:Service:",
-        "parentName": "svchost.exe",
-        "parentPrivatePid": "772-1489763380982-18",
-        "targetPid": 2468,
-        "targetPrivatePid": "2468-1490617768051-975",
-        "parentCommandLine": "C:\\Windows\\system32\\svchost.exe -k netsvcs",
-        "targetCommandLine": "C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe",
-        "privatePid": "2872-1490617768004-974",
-        "targetName": "GoogleUpdate.exe",
-        "fullUserName": "NT AUTHORITY\\SYSTEM"
-      },
-      "eventTime": 1490617768036,
-      "selectedApp": {
-        "applicationName": "taskeng.exe",
-        "virusName": null,
-        "reputationProperty": "TRUSTED_WHITE_LIST",
-        "effectiveReputation": null,
-        "applicationPath": "C:\\Windows\\System32\\taskeng.exe",
-        "md5Hash": "a21ac8d41e63cf1aa24ebc165ae82c9a",
-        "effectiveReputationSource": null,
-        "virusCategory": null,
-        "sha256Hash": "74b9cf472d5008e00735482f084f886eaa201248d6e87ab6b1990e3670bd6693",
-        "virusSubCategory": null
-      },
-      "attackStage": null,
-      "targetApp": {
-        "applicationName": "C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe",
-        "virusName": null,
-        "reputationProperty": "TRUSTED_WHITE_LIST",
-        "effectiveReputation": null,
-        "applicationPath": null,
-        "md5Hash": null,
-        "effectiveReputationSource": null,
-        "virusCategory": null,
-        "sha256Hash": "52fc3aa9f704300041e486e57fe863218e4cdf4c8eee05ca6b99a296efee5737",
-        "virusSubCategory": null
-      },
-      "registryValue": null,
-      "alertCategory": null,
-      "longDescription": "The application \"<share><link hash=\"74b9cf472d5008e00735482f084f886eaa201248d6e87ab6b1990e3670bd6693\">C:\\Windows\\System32\\taskeng.exe</link></share>\" attempted to invoke the application \"C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe\", by calling the function \"CreateProcessW\". The operation was successful.",
-      "threatIndicators": [
-        "SUSPENDED_PROCESS"
+      "backend_timestamp": "2022-03-15T10:28:11.423Z",
+      "device_group_id": 0,
+      "device_id": 4849627,
+      "device_name": "wb-auto-qa",
+      "device_policy_id": 6525,
+      "device_timestamp": "2022-03-15T10:26:39.253Z",
+      "enriched": true,
+      "enriched_event_type": "NETWORK",
+      "event_description": "The operation was <accent>blocked by Cb Defense</accent>.",
+      "event_id": "8581bd14a44a11ec8b1abf3be4c31ca0",
+      "event_network_inbound": false,
+      "event_network_local_ipv4": "10.0.7.12",
+      "event_network_location": "Piscataway,NJ,United States",
+      "event_network_protocol": "TCP",
+      "event_network_remote_ipv4": "23.4.227.29",
+      "event_network_remote_port": 443,
+      "event_type": "netconn",
+      "ingress_time": 1647340061569,
+      "legacy": true,
+      "org_id": "7DESJ9GN",
+      "parent_guid": "7DESJ9GN-0049ffdb-000003c4-00000000-1d8336797e1b8e5",
+      "parent_pid": 964,
+      "process_guid": "7DESJ9GN-0049ffdb-0000175c-00000000-1d836263d49edea",
+      "process_hash": [
+        "cd10cb894be2128fca0bf0e2b0c27c16",
+        "f3feb95e7bcfb0766a694d93fca29eda7e2ca977c2395b4be75242814eb6d881"
       ],
-      "securityEventCode": null,
-      "deviceDetails": {
-        "deviceName": "WIN-EK5MJ5DQC3Q",
-        "agentLocation": "OFFSITE",
-        "targetPriorityCode": 2,
-        "deviceOwnerName": null,
-        "deviceIpAddress": "1.2.3.4",
-        "deviceHostName": "example.com",
-        "email": "Administrator",
-        "groupName": "Restrictive_Windows_Workstation",
-        "deviceType": "WINDOWS",
-        "deviceId": 218616,
-        "targetPriorityType": "HIGH",
-        "deviceIpV4Address": "1.2.3.4",
-        "deviceLocation": {
-          "city": "Ashburn",
-          "countryCode": "US",
-          "areaCode": 703,
-          "metroCode": 123,
-          "region": "VA",
-          "dmaCode": 123,
-          "countryName": "United States",
-          "postalCode": "20148",
-          "longitude": -77.487442,
-          "latitude": 39.043757
-        },
-        "deviceVersion": "Server 2012 R2 x64 "
-      },
-      "eventType": "SYSTEM_API_CALL",
-      "netFlow": {
-        "service": null,
-        "peerSiteReputation": null,
-        "peerIpAddress": null,
-        "destPort": null,
-        "sourcePort": null,
-        "peerFqdn": null,
-        "destAddress": null,
-        "peerIpV4Address": null,
-        "sourceAddress": null,
-        "peerLocation": null
-      },
-      "incidentId": null,
-      "shortDescription": "The application \"<share><link hash=\"74b9cf472d5008e00735482f084f886eaa201248d6e87ab6b1990e3670bd6693\">taskeng.exe</link></share>\" successfully attempted to invoke the application \"C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe\".",
-      "createTime": 1490617872232,
-      "alertScore": 0,
-      "parentApp": {
-        "applicationName": "C:\\Windows\\System32\\svchost.exe",
-        "virusName": null,
-        "reputationProperty": null,
-        "effectiveReputation": null,
-        "applicationPath": null,
-        "md5Hash": null,
-        "effectiveReputationSource": null,
-        "virusCategory": null,
-        "sha256Hash": "c7db4ae8175c33a47baa3ddfa089fad17bc8e362f21e835d78ab22c9231fe370",
-        "virusSubCategory": null
-      }
+      "process_name": "c:\\windows\\system32\\svchost.exe",
+      "process_pid": [
+        5980
+      ],
+      "process_username": [
+        "NT AUTHORITY\\NETWORK SERVICE"
+      ],
+      "sensor_action": [
+        "DENY",
+        "BLOCK"
+      ]
     }
   ],
-  "elapsed": 3,
-  "message": "Success",
-  "totalResults": 28
+  "success": true
 }
 ```
 
@@ -244,94 +168,68 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|eventinfo|event_info|False|Detailed information on the event|
+|approximate_unaggregated|integer|False|The number of matching events used to construct the processes which will be equivalent to Num Found|
+|completed|integer|False|The number of searchers that have reported their results|
+|contacted|integer|False|The number of searchers contacted for this query|
+|num_aggregated|integer|False|The number of processes that were constructed from the events which will be equal or greater than Num Available|
+|num_available|integer|False|Number of found results able to be paginated|
+|num_found|integer|False|Number of results found|
+|results|[]event_info|False|Detailed information on the event|
 |success|boolean|False|Success|
 
 Example output:
 
 ```
 {
-  "success": true,
-  "message": "Success",
-  "eventinfo": {
-    "shortDescription": "The application \"<share><link hash=\"9e70685b73b3eab78c55863babceecc7cca89475b508b2a9c651ade6fde0751a\">taskeng.exe</link></share>\" successfully attempted to invoke the application \"C:\\Program Files\\Google\\Update\\GoogleUpdate.exe\".",
-    "longDescription": "The application \"<share><link hash=\"9e70685b73b3eab78c55863babceecc7cca89475b508b2a9c651ade6fde0751a\">C:\\Windows\\System32\\taskeng.exe</link></share>\" attempted to invoke the application \"C:\\Program Files\\Google\\Update\\GoogleUpdate.exe\", by calling the function \"CreateProcessW\". The operation was successful.",
-    "eventTime": 1548878769180,
-    "eventId": "8a57e38b24ca11e9ae3ab1dc32845eba",
-    "netFlow": {},
-    "createTime": 1548878809327,
-    "threatIndicators": [
-      "SUSPENDED_PROCESS"
-    ],
-    "deviceDetails": {
-      "deviceIpAddress": "180.179.136.50",
-      "agentLocation": "OFFSITE",
-      "deviceLocation": {
-        "city": "Mumbai",
-        "region": "16",
-        "areaCode": 0,
-        "countryName": "India",
-        "countryCode": "IN",
-        "dmaCode": 0,
-        "latitude": 18.972107,
-        "longitude": 72.8246,
-        "metroCode": 0,
-        "postalCode": "400010"
-      },
-      "deviceIpV4Address": "180.179.136.50",
-      "deviceType": "WINDOWS",
-      "email": "Smokescreen-PC\\Smokescreen",
-      "deviceId": 1155127,
-      "deviceName": "Smokescreen-PC",
-      "policyId": 6525,
-      "deviceVersion": "Windows 7 x86 SP: 1",
-      "targetPriorityType": "MEDIUM",
-      "targetPriorityCode": 1,
-      "policyName": "default"
-    },
-    "processDetails": {
-      "targetName": "GoogleUpdate.exe",
-      "fullUserName": "NT AUTHORITY\\SYSTEM",
-      "userName": "SYSTEM",
-      "parentName": "svchost.exe",
-      "privatePid": "2912-1548878769008-846",
-      "targetPrivatePid": "1088-1548878769164-848",
-      "commandLine": "taskeng.exe {C6E24162-53E3-4116-85C3-452978163C7A} S-1-5-18:NT AUTHORITY\\System:Service:",
-      "milisSinceProcessStart": 172,
-      "processId": 2912,
-      "parentPid": 940,
-      "parentCommandLine": "C:\\Windows\\system32\\svchost.exe -k netsvcs",
-      "targetCommandLine": "GoogleUpdate.exe",
-      "targetPid": 1088,
-      "parentPrivatePid": "940-1548747298649-32",
-      "name": "taskeng.exe"
-    },
-    "eventType": "SYSTEM_API_CALL",
-    "selectedApp": {
-      "reputationProperty": "TRUSTED_WHITE_LIST",
-      "applicationName": "taskeng.exe",
-      "md5Hash": "4f2659160afcca990305816946f69407",
-      "sha256Hash": "9e70685b73b3eab78c55863babceecc7cca89475b508b2a9c651ade6fde0751a",
-      "applicationPath": "C:\\Windows\\System32\\taskeng.exe",
-      "effectiveReputationSource": "WHITE_DATABASE",
-      "effectiveReputation": "TRUSTED_WHITE_LIST"
-    },
-    "targetApp": {
-      "reputationProperty": "TRUSTED_WHITE_LIST",
-      "applicationName": "GoogleUpdate.exe",
-      "sha256Hash": "542294724926b0e156224b9ebd33e6354d79da4c828fb52f7f4233df45e3f624",
-      "effectiveReputationSource": "CLOUD",
-      "effectiveReputation": "TRUSTED_WHITE_LIST"
-    },
-    "parentApp": {
-      "reputationProperty": "TRUSTED_WHITE_LIST",
-      "applicationName": "svchost.exe",
-      "sha256Hash": "121118a0f5e0e8c933efd28c9901e54e42792619a8a3a6d11e1f0025a7324bc2",
-      "effectiveReputationSource": "WHITE_DATABASE",
-      "effectiveReputation": "TRUSTED_WHITE_LIST"
-    },
-    "alertScore": 0
-  }
+  "approximate_unaggregated": 78750,
+  "completed": 5,
+  "contacted": 5,
+  "num_aggregated": 503,
+  "num_available": 500,
+  "num_found": 78750,
+  "results": [
+    {
+      "backend_timestamp": "2022-03-15T10:28:11.423Z",
+      "device_group_id": 0,
+      "device_id": 4849627,
+      "device_name": "wb-auto-qa",
+      "device_policy_id": 6525,
+      "device_timestamp": "2022-03-15T10:26:39.253Z",
+      "enriched": true,
+      "enriched_event_type": "NETWORK",
+      "event_description": "The operation was <accent>blocked by Cb Defense</accent>.",
+      "event_id": "8581bd14a44a11ec8b1abf3be4c31ca0",
+      "event_network_inbound": false,
+      "event_network_local_ipv4": "10.0.7.12",
+      "event_network_location": "Piscataway,NJ,United States",
+      "event_network_protocol": "TCP",
+      "event_network_remote_ipv4": "23.4.227.29",
+      "event_network_remote_port": 443,
+      "event_type": "netconn",
+      "ingress_time": 1647340061569,
+      "legacy": true,
+      "org_id": "7DESJ9GN",
+      "parent_guid": "7DESJ9GN-0049ffdb-000003c4-00000000-1d8336797e1b8e5",
+      "parent_pid": 964,
+      "process_guid": "7DESJ9GN-0049ffdb-0000175c-00000000-1d836263d49edea",
+      "process_hash": [
+        "cd10cb894be2128fca0bf0e2b0c27c16",
+        "f3feb95e7bcfb0766a694d93fca29eda7e2ca977c2395b4be75242814eb6d881"
+      ],
+      "process_name": "c:\\windows\\system32\\svchost.exe",
+      "process_pid": [
+        5980
+      ],
+      "process_username": [
+        "NT AUTHORITY\\NETWORK SERVICE"
+      ],
+      "sensor_action": [
+        "DENY",
+        "BLOCK"
+      ]
+    }
+  ],
+  "success": true
 }
 ```
 
