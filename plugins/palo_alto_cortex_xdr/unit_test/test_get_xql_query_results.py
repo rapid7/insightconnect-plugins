@@ -82,7 +82,7 @@ class TestGetEndpointDetails(TestCase):
 
     @patch("requests.post", side_effect=mock_request_200)
     def test_get_xql_query_results_absent_to(self, _mock_req):
-        self.test_params[Input.TO] = None
+        self.test_params[Input.END_TIME] = None
         actual = self.test_action.run(self.test_params)
 
         expected = {
@@ -186,8 +186,8 @@ class TestGetEndpointDetails(TestCase):
         mocked_request(_mock_req)
         self.test_params[Input.START_TIME] = from_
         self.test_params[Input.END_TIME] = to
-        expected_cause = "Invalid 'To' or 'From' time range inputs"
-        expected_assistance = f"'To' or 'From' must be valid Unix timestamps in epoch milliseconds, they must be past timestamps, and 'Start Time' must be more recent than 'End Time'"
+        expected_cause = "Invalid 'Start Time' or 'End Time' time range inputs"
+        expected_assistance = f"'Start Time' or 'End Time' must be valid Unix timestamps in epoch milliseconds, they must be past timestamps, and 'End Time' must be more recent than 'Start Time'"
         expected_data = f"'From'= {from_}, 'To'= {to}"
         with self.assertRaises(PluginException) as context:
             self.test_action.run(self.test_params)
