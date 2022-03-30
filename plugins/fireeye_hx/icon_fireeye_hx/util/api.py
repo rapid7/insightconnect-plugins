@@ -49,6 +49,15 @@ class FireEyeAPI:
         except requests.exceptions.HTTPError as e:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
 
+    def get_alerts_by_host_id(self, payload: dict) -> list:
+        alerts = []
+        response = self.call_api(endpoint.alerts(), params=payload).json().get("data", {}).get("entries", [])
+        while response:
+            alerts += response
+            payload["offset"] += payload.get("limit")
+            response = self.call_api(endpoint.alerts(), params=payload).json().get("data", {}).get("entries", [])
+        return alerts
+
     def get_host_id_from_hostname(self, params: dict) -> dict:
         return self.call_api(endpoint.hosts(), params=params).json()
 
@@ -63,7 +72,7 @@ class FireEyeAPI:
         self.call_api(action_endpoint, "POST")
         for _ in range(180):
             time.sleep(10)
-            if self.call_api(endpoint.host_containment(agent_id)).json().get("data", {}).get("requested_on"):
+            if self.call_api(action_endpoint).json().get("data", {}).get("requested_on"):
                 self.call_api(action_endpoint, "PATCH", json_data={"state": "contain"})
                 return True
         return False

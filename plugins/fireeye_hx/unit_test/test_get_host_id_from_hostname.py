@@ -19,22 +19,10 @@ class TestGetHostIdFromHostname(TestCase):
 
     @parameterized.expand(
         [
-            [
-                "found",
-                "example_hostname",
-                {"success": True, "host_id": "1111111111"},
-            ],
-            [
-                "not_found",
-                "invalid_hostname",
-                {"success": False},
-            ],
+            ["found", "example_hostname", {"success": True, "host_id": "1111111111"}],
+            ["not_found", "invalid_hostname", {"success": False}],
         ]
     )
     def test_get_host_id_from_hostname(self, mock_request, name, hostname, expected):
-        actual = self.action.run(
-            {
-                Input.HOSTNAME: hostname,
-            }
-        )
+        actual = self.action.run({Input.HOSTNAME: hostname})
         self.assertEqual(actual, expected)

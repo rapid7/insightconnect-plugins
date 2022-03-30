@@ -30,6 +30,14 @@ class Util:
             return my_file.read()
 
     @staticmethod
+    def load_parameters(filename):
+        return json.loads(
+            Util.read_file_to_string(
+                os.path.join(os.path.dirname(os.path.realpath(__file__)), f"parameters/{filename}.json.resp")
+            )
+        )
+
+    @staticmethod
     def mocked_requests(*args, **kwargs):
         class MockResponse:
             def __init__(self, filename, status_code):
@@ -43,7 +51,9 @@ class Util:
             def json(self):
                 return json.loads(
                     Util.read_file_to_string(
-                        os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{self.filename}.json.resp")
+                        os.path.join(
+                            os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json.resp"
+                        )
                     )
                 )
 
@@ -51,6 +61,12 @@ class Util:
         url = kwargs.get("url")
         method = kwargs.get("method")
 
+        if params == {"agent._id": "11111", "limit": 50, "offset": 0}:
+            return MockResponse("get_alerts_by_host_id", 200)
+        if params == {"agent._id": "11111", "limit": 50, "offset": 50}:
+            return MockResponse("get_alerts_by_host_id_empty", 200)
+        if params == {"agent._id": "22222", "limit": 50, "offset": 0}:
+            return MockResponse("get_alerts_by_host_id_empty", 200)
         if params == {"search": "example_hostname"}:
             return MockResponse("get_host_id", 200)
         if params == {"search": "invalid_hostname"}:

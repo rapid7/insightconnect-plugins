@@ -297,7 +297,7 @@ _This plugin does not contain any triggers._
 |Reported At|date|False|Timestamp for the alert report|
 |Resolution|string|False|Resolution|
 |Source|string|False|Alert source|
-|Subtype|object|False|Alert subtype|
+|Subtype|string|False|Alert subtype|
 
 #### condition
 
@@ -383,7 +383,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 2.0.0 - Add new actions Quarantine Host, Unquarantine Host and Check Quarantine Status | Add `SSL Verify` input in connection | Add missing input examples | Code refactor
+* 2.0.0 - Add new actions Quarantine Host, Unquarantine Host and Check Quarantine Status | Add `SSL Verify` input in connection | Add missing input examples | Correct type for `subtype` in custom output for Get Alerts from Host ID action | Code refactor
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 

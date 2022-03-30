@@ -306,7 +306,7 @@ types:
     subtype:
       title: Subtype
       description: Alert subtype
-      type: object
+      type: string
       required: false
 
   user:

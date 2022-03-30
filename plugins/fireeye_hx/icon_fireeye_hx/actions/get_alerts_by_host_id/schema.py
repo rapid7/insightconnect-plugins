@@ -177,7 +177,7 @@ class GetAlertsByHostIdOutput(insightconnect_plugin_runtime.Output):
           "order": 14
         },
         "subtype": {
-          "type": "object",
+          "type": "string",
           "title": "Subtype",
           "description": "Alert subtype",
           "order": 15

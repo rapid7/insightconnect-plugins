@@ -1,0 +1,149 @@
+{
+  "parameters": [
+    [
+      "found",
+      "11111",
+      {
+        "alerts": [
+          {
+            "_id": 1,
+            "agent": {
+              "_id": "11111",
+              "url": "/hx/api/v3/hosts/11111",
+              "containment_state": "normal"
+            },
+            "multi_indicators": [],
+            "event_at": "2022-03-26T15:24:48.023Z",
+            "matched_at": "2022-03-26T15:24:48.023Z",
+            "reported_at": "2022-03-26T15:24:49.039Z",
+            "source": "MAL",
+            "subtype": "AV",
+            "matched_source_alerts": [],
+            "resolution": "QUARANTINED",
+            "is_false_positive": false,
+            "decorators": [],
+            "md5values": [
+              "44d88612fea8a8f36de82e1278abb02f"
+            ],
+            "decorator_statuses": [],
+            "url": "/hx/api/v3/alerts/1",
+            "event_values": {
+              "system-data": {
+                "xmlns": "http://www.fireeye.com/antimalware-alert",
+                "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+                "xsi:schemaLocation": "http://www.fireeye.com/antimalware-alert AM-alert.xsd",
+                "alert-version": "3",
+                "correlation-id": "44d88612-fea8-a8f3-6de82e1278abb02f",
+                "timestamp": "2022-03-26T15:24:48.023Z",
+                "product-version": "34.27.0",
+                "engine-version": "11.0.1.19",
+                "content-version": "7.91504",
+                "mg-engine-version": "34.28.1.15070",
+                "mg-content-version": "31",
+                "whitelist-schema-version": "1.0.0",
+                "whitelist-content-version": "1.39.7"
+              },
+              "os-details": {
+                "$": {
+                  "name": "windows",
+                  "version": "6.3.9600",
+                  "patch": "0",
+                  "os-arch": "64-bit",
+                  "os-language": "en-US"
+                }
+              },
+              "scan-type": "oas",
+              "scanned-object": {
+                "scanned-object-type": "file-event",
+                "file-event": {
+                  "file-path": "C:\\Temp\\Unconfirmed 196853.crdownload",
+                  "actor-process": {
+                    "pid": "3660",
+                    "path": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+                    "user": {
+                      "username": "Administrator",
+                      "domain": "FIREEYE-W81"
+                    }
+                  },
+                  "sub-type": "FILE_OPERATION_OPENED"
+                }
+              },
+              "detections": {
+                "detection": [
+                  {
+                    "engine": {
+                      "engine-type": "av",
+                      "engine-version": "11.0.1.19",
+                      "content-version": "7.91504"
+                    },
+                    "infected-object": {
+                      "object-type": "file",
+                      "file-object": {
+                        "file-path": "C:\\Temp\\Unconfirmed 196853.crdownload",
+                        "container": "false",
+                        "packed": "false",
+                        "hidden": "false",
+                        "system-file": "false",
+                        "read-only": "false",
+                        "temporary": "false",
+                        "md5sum": "44d88612fea8a8f36de82e1278abb02f",
+                        "sha1sum": "3395856ce81f2b7382dee72602f798b642f14140",
+                        "sha256sum": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+                        "size-in-bytes": "3529",
+                        "creation-time": "2022-03-26T15:24:18.564Z",
+                        "modification-time": "2022-03-26T15:24:18.570Z",
+                        "access-time": "2022-03-26T15:24:18.564Z"
+                      }
+                    },
+                    "infection": {
+                      "confidence-level": "high",
+                      "infection-type": "malware",
+                      "infection-name": "Exploit.PDF-JS.MF"
+                    },
+                    "action": {
+                      "actioned-object": {
+                        "object-type": "file",
+                        "file-object": {
+                          "file-path": "C:\\Temp\\Unconfirmed 196853.crdownload",
+                          "container": "false",
+                          "packed": "false",
+                          "hidden": "false",
+                          "system-file": "false",
+                          "read-only": "false",
+                          "temporary": "false",
+                          "md5sum": "44d88612fea8a8f36de82e1278abb02f",
+                          "sha1sum": "3395856ce81f2b7382dee72602f798b642f14140",
+                          "sha256sum": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+                          "size-in-bytes": "3529",
+                          "creation-time": "2022-03-26T15:24:18.564Z",
+                          "modification-time": "2022-03-26T15:24:18.570Z",
+                          "access-time": "2022-03-26T15:24:18.564Z"
+                        }
+                      },
+                      "requested-action": "clean",
+                      "applied-action": "quarantine",
+                      "result": "success",
+                      "error": "0",
+                      "reboot-required": "false"
+                    }
+                  }
+                ]
+              },
+              "scan-statistics": {
+                "total-scan-time-in-ms": "13992"
+              }
+            },
+            "appliance": {
+              "_id": "1"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      "not_found",
+      "22222",
+      {"alerts": []}
+    ]
+  ]
+}
