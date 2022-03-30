@@ -78,3 +78,16 @@ def clean_query_output(query_response_input: dict) -> dict:
         new_rows = [{columns[index].get("name"): _row[index] for index in range(0, len(_row))} for _row in rows]
         table["rows"] = new_rows
     return cleaned_output
+
+
+def return_non_empty_query_output(query_response_input: dict) -> dict:
+    """This function returns query response output with not empty rows
+
+    :param query_response_input: query API response input
+    :type query_response_input: dict
+
+    :returns: API call function data
+    :rtype: dict
+    """
+
+    return {"tables": list(filter(lambda x: x.get("rows"), query_response_input.get("tables")))}

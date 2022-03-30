@@ -6,6 +6,7 @@ Edit, run log queries with data in Azure Monitor Logs
 
 * Send Log Data
 * Get Log Data
+* Search Trigger
 
 # Requirements
 
@@ -49,7 +50,7 @@ This action retrieves log data from Log Analytics workspace in Azure Monitor by 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|query|string|None|True|Microsoft Log Analytics query|None|AzureActivity | summarize count() by Category|
+|query|string|None|True|Microsoft Log Analytics query|None|AzureActivity I summarize count() by Category|
 |resource_group_name|string|None|True|Name of the resource group|None|ExampleResourceGroupName|
 |subscription_id|string|None|True|Current subscription identifier that Azure application portal assigned to|None|5cdad72f-c848-4df0-8aaa-ffe033e75d57|
 |workspace_name|string|None|True|Customer's workspace name that the application registration portal is assigned|None|ExampleWorkspaceName|
@@ -69,7 +70,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|tables|[]table|True|Array of tables representing the query result. Each table contains name, columns, and rows keys|
+|tables|[]table|True|Array of tables representing the query result, with each table containing a name, columns and rows keys|
 
 Example output:
 
@@ -181,7 +182,77 @@ Example output:
 
 ### Triggers
 
-_This plugin does not contain any triggers._
+#### Search
+
+This trigger is used to run Log Analytics query every interval time (expressed in seconds).
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|interval|integer|60|True|Integer value that represents interval time in seconds|None|60|
+|query|string|None|True|Microsoft Log Analytics query|None|AzureActivity I summarize count() by Category|
+|resource_group_name|string|None|True|Name of the resource group|None|ExampleResourceGroupName|
+|subscription_id|string|None|True|Current subscription identifier that Azure application portal assigned to|None|5cdad72f-c848-4df0-8aaa-ffe033e75d57|
+|workspace_name|string|None|True|Customer's workspace name that the application registration portal is assigned|None|ExampleWorkspaceName|
+
+Example input:
+
+```
+{
+  "interval": 60,
+  "query": "AzureActivity | summarize count() by Category",
+  "resource_group_name": "ExampleResourceGroupName",
+  "subscription_id": "5cdad72f-c848-4df0-8aaa-ffe033e75d57",
+  "workspace_name": "ExampleWorkspaceName"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|tables|[]table|True|Array of tables representing the query result, with each table containing a name, columns and rows keys|
+
+Example output:
+
+```
+{
+  "tables": [
+    {
+      "name": "PrimaryResult",
+      "columns": [
+        {
+          "name": "Category",
+          "type": "string"
+        },
+        {
+          "name": "count_l",
+          "type": "long"
+        }
+      ],
+      "rows": [
+        {
+          "Category": "Administrative",
+          "count_l": 20839
+        },
+        {
+          "Category": "Recommendation",
+          "count_l": 122
+        },
+        {
+          "Category": "Alert",
+          "count_l": 64
+        },
+        {
+          "Category": "ServiceHealth",
+          "count_l": 11
+        }
+      ]
+    }
+  ]
+}
+```
 
 ### Custom Output Types
 
@@ -207,6 +278,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.0 - Search trigger thats run Log Analytics query every interval time
 * 1.0.0 - Initial plugin (Actions: Get Log Data, Send Log Data)
 
 # Links
