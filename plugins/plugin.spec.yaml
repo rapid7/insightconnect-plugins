@@ -97,7 +97,12 @@ types:
       description: Closure Codes are codes that denote the reason for closing a request(ticket)/change request, whether the request/change was closed due to completion, rejection, and so on
       type: string
       required: false
-
+  linked_to_request_object:
+    request:
+      title: Request
+      description: Holds linked request details
+      type: string
+      required: false
 
   help_desk_ticket:
     id:
@@ -220,7 +225,305 @@ types:
       description: Indicates the time at which this request is scheduled to be completed
       type: datetime
       required: false
-
+    completed_time:
+      title: Completed Time
+      description: Indicates the time at which this request is completed
+      type: datetime
+      required: false
+    mode:
+      title: Mode
+      description: The mode in which this request is created
+      type: string
+      required: false
+    sla:
+      title: SLA
+      description: The SLA details associated with this request
+      type: string
+      required: false
+    department:
+      title: Department
+      description: Indicates the department to which this requester belongs
+      type: string
+      required: false
+    site:
+      title: Site
+      description: Denotes the site to which this request belongs
+      type: string
+      required: false
+    deleted_time:
+      title: Deleted Time
+      description: Denotes the time at which the request will be deleted
+      type: datetime
+      required: false
+    template:
+      title: Template
+      description: Indicates the template which is used to create this request
+      type: string
+      required: false
+    service_cost:
+      title: Service Cost
+      description: Basic cost for the service which we are requesting
+      type: float
+      required: false
+    total_cost:
+      title: Total Cost
+      description: Total Cost is the cumulative value of service cost and the cost of the individual resources selected
+      type: float
+      required: false
+    lifecycle:
+      title: Lifecycle
+      description: Indicates the lifecycle associated with this request
+      type: string
+      required: false
+    first_response_due_by_time:
+      title: First Response due by Time
+      description: Indicates the time at which the first response for this request is schedule
+      type: datetime
+      required: false
+    service_category:
+      title: Service Category
+      description: Indicates the service category to which this request belongs
+      type: string
+      required: false
+    is_service_request:
+      title: Is Service Request
+      description: Boolean value indicating whether this request is a service request or not
+      type: boolean
+      required: false
+    resolved_time:
+      title: Resolved Time
+      description: Indicates the time at which this request is resolved
+      type: datetime
+      required: false
+    last_updated_time:
+      title: Last Updated Time
+      description: Indicates the time when this request is last updated
+      type: datetime
+      required: false
+    is_overdue:
+      title: Is Overdue
+      description: Boolean value indicating whether this request is overdue
+      type: boolean
+      required: false
+    is_first_response_overdue:
+      title: Is First Response Overdue
+      description: Boolean value indicating whether this request is in overdue to make first response
+      type: boolean
+      required: false
+    is_escalated:
+      title: Is Escalated
+      description: A boolean value which represents whether the request is escalated or not
+      type: boolean
+      required: false
+    is_read:
+      title: Is Read
+      description: Boolean value indicating whether this request’s replies are read or not
+      type: boolean
+      required: false
+    is_fcr:
+      title: Is FCR
+      description: Boolean value indicating if the request has been marked as First Call Resolution
+      type: boolean
+      required: false
+    notification_status:
+      title: Notification Status
+      description: Shows the current status of request’s replies, whether last one from requester or technician
+      type: string
+      required: false
+    approval_status:
+      title: Approval Status
+      description: Denotes the approval status of this request
+      type: string
+      enum:
+        - Approved
+        - Pending Approval
+        - Rejected
+      required: false
+    assigned_time:
+      title: Assigned Time
+      description: Indicates the time at which this request is assigned to a technician
+      type: datetime
+      required: false
+    priority:
+      title: Priority
+      description: Denotes the priority of the request
+      type: string
+      required: false
+    category:
+      title: Category
+      description: Indicates the category to which the request belongs
+      type: string
+      required: false
+    urgency:
+      title: Urgency
+      description: Denotes the urgency of the request
+      type: string
+      required: false
+    request_type:
+      title: Request Type
+      description: Indicates the type of the request
+      type: string
+      required: false
+    assets:
+      title: Assets
+      description: Array of asset objects associated to this request
+      type: string
+      required: false
+    deleted_assets:
+      title: Deleted Assets
+      description: The assets that are disassociated from this request
+      type: string
+      required: false
+    has_attachments:
+      title: Has Attachments
+      description: Boolean value indicating whether this request has any attachments or not
+      type: boolean
+      required: false
+    has_notes:
+      title: Has Notes
+      description: Boolean value indicating whether this request has any notes or not
+      type: boolean
+      required: false
+    has_linked_requests:
+      title: Has Linked Requests
+      description: Boolean value indicating whether this request has any linked requests or not
+      type: boolean
+      required: false
+    has_project:
+      title: Has Project
+      description: Boolean value indicating whether this request is associated to a project or not
+      type: boolean
+      required: false
+    has_problem:
+      title: Has Problem
+      description: Boolean value indicating whether this request is associated to a problem or not
+      type: boolean
+      required: false
+    has_request_initiated_change:
+      title: Has Request Initiated Change
+      description: Boolean value indicating whether this request is initiated a change or not
+      type: boolean
+      required: false
+    has_change_initiated_request:
+      title: Has Change Initiated Request
+      description: Boolean to show whether there are requests which are initated by the change
+      type: boolean
+      required: false
+    has_purchase_orders:
+      title: Has Purchase Orders
+      description: Boolean value indicating whether this request is associated to Purchase Orders
+      type: boolean
+      required: false
+    has_draft:
+      title: Has Draft
+      description: Boolean value indicating whether this request has drafts or not
+      type: boolean
+      required: false
+    is_reopened:
+      title: Is Reopened
+      description: Boolean value indicating whether this request is reopened or not
+      type: boolean
+      required: false
+    is_trashed:
+      title: Is Trashed
+      description: Boolean value indicating whether this request is in trash
+      type: boolean
+      required: false
+    linked_to_request:
+      title: Linked To Request
+      description: Holds linked request details
+      type: linked_to_request_object
+      required: false
+    attachments:
+      title: Attachments
+      description: Files that are attached to the request with a maximum of 10 files that can be attached to a request
+      type: file
+      required: false
+    resources:
+      title: Resources
+      description: Holds the resource data mapped to the request
+      type: string
+      required: false
+    status_change_comments:
+      title: Status Change Comments
+      description: The reason why the status is changed
+      type: string
+      required: false
+    on_behalf_of:
+      title: On Behalf Of
+      description: Requesters can raise request on behalf of other users, this field denotes the user, on behalf of who the request has been raised
+      type: string
+      required: false
+    configuration_items:
+      title: Configuration Items
+      description: Critical Items for which the request has been raised
+      type: string
+      required: false
+    unreplied_count:
+      title: Unreplied Count
+      description: The number of requester replies for which the technician haven’t replied yet
+      type: integer
+      required: false
+    editor:
+      title: Editor
+      description: The user who is configured as the Editor of the request
+      type: string
+      required: false
+    editor_status:
+      title: Editor Status
+      description: The status of the Editor’s review/update
+      type: integer
+      required: false
+    level:
+      title: Level
+      description: Denotes the level of the request
+      type: string
+      required: false
+    created_by:
+      title: Created By
+      description: Indicates the requester who created this request
+      type: string
+      required: false
+    scheduled_start_time:
+      title: Scheduled Start Time
+      description: Date and time at which the request is scheduled to start
+      type: datetime
+      required: false
+    scheduled_end_time:
+      title: Scheduled End Time
+      description: Date and time at which the request is scheduled to end
+      type: datetime
+      required: false
+    group:
+      title: Group
+      description: The group to which the request is assigned to
+      type: string
+      required: false
+    item:
+      title: Item
+      description: Displays the item of the request
+      type: string
+      required: false
+    technician:
+      title: Technician
+      description: Denotes the technician assigned to this request
+      type: string
+      required: false
+    udf_fields:
+      title: UDF Fields
+      description: Holds user defined fields’ values associated with the request
+      type: string
+      required: false
+    subcategory:
+      title: Subcategory
+      description: Denotes the subcategory to which the request belongs
+      type: string
+      required: false
+    completed_by_denial:
+      title: Completed By Denial
+      description: Boolean which denotes whether the request is completed, when the request was denied
+      type: boolean
+      required: false
 
 
 actions:
