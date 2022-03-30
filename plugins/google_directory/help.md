@@ -15,7 +15,7 @@ The Google Directory plugin allows you to list all users, suspend and unsuspend 
 
 # Supported Product Versions
 
-* Google Directory API v1 2022-03-29
+* Google Directory API v1 2022-03-29T12:00:00Z
 
 # Documentation
 
