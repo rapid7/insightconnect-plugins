@@ -3,13 +3,13 @@ import sys
 
 import mock
 
-from unit_test.util import Util
+from unittest import TestCase
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
-
-from unittest import TestCase
+from unit_test.util import Util
 from komand_urlscan.actions.submit_url_for_scan import SubmitUrlForScan
-from insightconnect_plugin_runtime.exceptions import PluginException
+
 
 
 @mock.patch("requests.post", side_effect=Util.mocked_requests_post)
@@ -47,19 +47,19 @@ class TestSubmitUrlForScan(TestCase):
         with self.assertRaises(PluginException) as error:
             self.action.run({"public": True, "url": "unexpect"})
 
-        self.assertTrue("Received an unexpected response from the Urlscan API. " in error.exception.cause)
+        self.assertTrue("Received an unexpected response from the Urlscan API." in error.exception.cause)
         self.assertTrue("If the problem persists, please contact support." in error.exception.assistance)
 
     def test_submit_url_for_scan_json_decoder_error(self, mock_post):
         with self.assertRaises(PluginException) as error:
             self.action.run({"public": True, "url": "json_error"})
 
-        self.assertTrue("Received an unexpected response from the Urlscan API. " in error.exception.cause)
+        self.assertTrue("Received an unexpected response from the Urlscan API." in error.exception.cause)
         self.assertTrue("(non-JSON or no response was received). Response was: " in error.exception.assistance)
 
     def test_submit_url_for_scan_499(self, mock_post):
         with self.assertRaises(PluginException) as error:
             self.action.run({"public": True, "url": "499"})
 
-        self.assertTrue("Error 499. " in error.exception.cause)
+        self.assertTrue("Error 499." in error.exception.cause)
         self.assertTrue("Test 499" in error.exception.assistance)

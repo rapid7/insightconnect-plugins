@@ -5,11 +5,10 @@ from unittest import TestCase
 import mock
 from insightconnect_plugin_runtime.exceptions import PluginException
 
+sys.path.append(os.path.abspath("../"))
 from komand_urlscan.actions import GetScanResults
 from komand_urlscan.actions.get_scan_results.schema import Input
 from unit_test.util import Util
-
-sys.path.append(os.path.abspath("../"))
 
 
 @mock.patch("requests.get", side_effect=Util.mocked_requests_post)
@@ -34,7 +33,7 @@ class TestGetScanResults(TestCase):
         with self.assertRaises(PluginException) as context:
             self.action.run({Input.SCAN_ID: "404"})
 
-        self.assertEqual("The requested scan results were not found. ", context.exception.cause)
+        self.assertEqual("The requested scan results were not found.", context.exception.cause)
         self.assertEqual(
             "If you are running this action directly after a new scan, you may need to add a delay to ensure the scan results are available when they are requested (typically ~5-10 seconds is sufficient.",
             context.exception.assistance,

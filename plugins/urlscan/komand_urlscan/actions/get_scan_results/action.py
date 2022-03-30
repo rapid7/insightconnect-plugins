@@ -30,7 +30,7 @@ class GetScanResults(insightconnect_plugin_runtime.Action):
             json_response = response.json()
         except json.JSONDecodeError as e:
             raise PluginException(
-                cause="Received an unexpected response from the Urlscan API. ",
+                cause="Received an unexpected response from the Urlscan API.",
                 assistance=f"(non-JSON or no response was received). Response was: {response.text}",
                 data=e,
             )
@@ -38,17 +38,17 @@ class GetScanResults(insightconnect_plugin_runtime.Action):
         if response.status_code != 200:
             if response.status_code == 404:
                 raise PluginException(
-                    cause="The requested scan results were not found. ",
-                    assistance="If you are running this action directly after a new scan, "
-                    "you may need to add a delay to ensure the scan results "
+                    cause="The requested scan results were not found.",
+                    assistance="If you are running this action directly after a new scan, you may need to add a delay "
+                               "to ensure the scan results "
                     "are available when they are requested (typically ~5-10 seconds is sufficient.",
                 )
 
-            if ("message" in json_response) and ("description" in json_response):
+            if "message" in json_response and "description" in json_response:
                 raise PluginException(cause=json_response.get("message"), assistance=json_response.get("description"))
 
             raise PluginException(
-                cause="Received an unexpected response from the Urlscan API. ",
+                cause="Received an unexpected response from the Urlscan API.",
                 assistance=f"If the problem persists, please contact support. Response was: {response.text}",
             )
 
