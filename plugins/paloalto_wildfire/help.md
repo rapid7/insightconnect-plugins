@@ -35,13 +35,13 @@ Example input:
 ```
 {
    "api_key":{
-      "secretKey":"5df698b6778e586b704460731b921e52"
+      "secretKey": "5df698b6778e586b704460731b921e52"
    },
-   "host":"wildfire.paloaltonetworks.com",
-   "proxy":{
-      "https":"https://proxy.example.com"
+   "host": "wildfire.paloaltonetworks.com",
+   "proxy": {
+      "https": "https://proxy.example.com"
    },
-   "verify":true
+   "verify": true
 }
 ```
 
@@ -124,6 +124,10 @@ This action is used to query for a PCAP.
 Example input:
 
 ```
+{
+  "hash": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "platform": "Windows XP, Adobe Reader 9.4.0, Flash 10, Office 2007"
+}
 ```
 
 ##### Output

@@ -3,7 +3,7 @@ import base64
 
 import insightconnect_plugin_runtime
 
-from .schema import GetPcapInput, GetPcapOutput, Input, Output
+from .schema import GetPcapInput, GetPcapOutput, Input, Output, Component
 
 
 class GetPcap(insightconnect_plugin_runtime.Action):
@@ -20,7 +20,7 @@ class GetPcap(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_pcap",
-            description="Query for a PCAP",
+            description=Component.DESCRIPTION,
             input=GetPcapInput(),
             output=GetPcapOutput(),
         )

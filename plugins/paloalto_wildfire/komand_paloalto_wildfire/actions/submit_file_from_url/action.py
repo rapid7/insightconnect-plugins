@@ -8,7 +8,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 from komand_paloalto_wildfire.util.constants import SUPPORTED_FILES
 from komand_paloalto_wildfire.util.utils import Utils
-from .schema import SubmitFileFromUrlInput, SubmitFileFromUrlOutput, Input, Output
+from .schema import SubmitFileFromUrlInput, SubmitFileFromUrlOutput, Input, Output, Component
 from ...util.constants import UNKNOWN_VERDICT
 
 
@@ -16,7 +16,7 @@ class SubmitFileFromUrl(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="submit_file_from_url",
-            description="Submit a file for analysis via a URL",
+            description=Component.DESCRIPTION,
             input=SubmitFileFromUrlInput(),
             output=SubmitFileFromUrlOutput(),
         )
@@ -46,7 +46,7 @@ class SubmitFileFromUrl(insightconnect_plugin_runtime.Action):
                     self.logger.info("Error occurred")
                     raise
 
-                if not out["filename"]:
+                if not out.get("filename"):
                     out["filename"] = "Unknown"
 
                 return {Output.SUBMISSION: out}

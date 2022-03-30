@@ -4,14 +4,14 @@ import xmltodict
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from .schema import SubmitUrlInput, SubmitUrlOutput, Output, Input
+from .schema import SubmitUrlInput, SubmitUrlOutput, Output, Input, Component
 
 
 class SubmitUrl(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="submit_url",
-            description="Submit a URL for analysis",
+            description=Component.DESCRIPTION,
             input=SubmitUrlInput(),
             output=SubmitUrlOutput(),
         )

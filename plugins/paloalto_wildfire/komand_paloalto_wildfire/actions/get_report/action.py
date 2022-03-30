@@ -3,15 +3,14 @@ import base64
 
 import insightconnect_plugin_runtime
 
-from .schema import GetReportInput, GetReportOutput, Output
-from .schema import Input
+from .schema import GetReportInput, GetReportOutput, Output, Input, Component
 
 
 class GetReport(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_report",
-            description="Query for an XML or PDF report for a particular sample",
+            description=Component.DESCRIPTION,
             input=GetReportInput(),
             output=GetReportOutput(),
         )
@@ -29,7 +28,8 @@ class GetReport(insightconnect_plugin_runtime.Action):
         # 00da: pdf
         # 00fd: --------------------------8557684369749613--
         # ...
-        out = base64.b64encode(
-            self.connection.client.get_report(params.get(Input.HASH), params.get(Input.FORMAT))
-        ).decode()
-        return {Output.REPORT: out}
+        return {
+            Output.REPORT: base64.b64encode(
+                self.connection.client.get_report(params.get(Input.HASH), params.get(Input.FORMAT))
+            ).decode()
+        }

@@ -6,14 +6,14 @@ import insightconnect_plugin_runtime
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_paloalto_wildfire.util.constants import UNKNOWN_VERDICT, SUPPORTED_FILES
-from .schema import SubmitFileInput, SubmitFileOutput, Input, Output
+from .schema import SubmitFileInput, SubmitFileOutput, Input, Output, Component
 
 
 class SubmitFile(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="submit_file",
-            description="Submit a file for analysis",
+            description=Component.DESCRIPTION,
             input=SubmitFileInput(),
             output=SubmitFileOutput(),
         )
