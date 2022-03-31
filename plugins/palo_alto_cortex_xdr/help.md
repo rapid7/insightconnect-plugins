@@ -711,4 +711,4 @@ Example output:
 ## References
 
 * [Palo Alto Cortex XDR](https://www.paloaltonetworks.com/cortex/cortex-xdr)
-* This plugin was tested using Visitor, Security Admin, and Instance Administrator Roles using both Standard and Advanced Security Levels. Please ensure your selected Role has adequate permissions to perform the desired actions.
+* This plugin was tested using Viewer, Security Admin, and Instance Administrator Roles using both Standard and Advanced Security Levels. Please ensure your selected Role has adequate permissions to perform the desired actions.
