@@ -74,6 +74,7 @@ class GetSiteAssets(insightconnect_plugin_runtime.Action):
                 return r
 
             else:
+                reason = ""
                 try:
                     reason = response.json()["message"]
                 except KeyError:

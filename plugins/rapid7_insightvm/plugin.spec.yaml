@@ -5,7 +5,7 @@ name: rapid7_insightvm
 title: Rapid7 InsightVM Console
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations, scan results and start scans
 version: 4.9.2
-supported_versions: ["Rapid7 InsightVM API v3 2022-01-20"]
+supported_versions: ["Rapid7 InsightVM API v3 2022-03-30T12:00:00Z"]
 vendor: rapid7
 support: rapid7
 status: []

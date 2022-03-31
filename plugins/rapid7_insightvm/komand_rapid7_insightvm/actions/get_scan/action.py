@@ -43,6 +43,7 @@ class GetScan(insightconnect_plugin_runtime.Action):
 
                 return scan_details
             else:
+                reason = ""
                 try:
                     reason = response.json()["message"]
                 except KeyError:

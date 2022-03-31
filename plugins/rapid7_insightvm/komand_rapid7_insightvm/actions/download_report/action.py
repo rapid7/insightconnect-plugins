@@ -44,6 +44,7 @@ class DownloadReport(insightconnect_plugin_runtime.Action):
 
                 return {"report": report}
             else:
+                reason = ""
                 try:
                     reason = response.json()["message"]
                 except KeyError:

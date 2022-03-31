@@ -16,7 +16,7 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 
 # Supported Product Versions
 
-* Rapid7 InsightVM API v3 2022-01-20
+* Rapid7 InsightVM API v3 2022-03-30T12:00:00Z
 
 # Documentation
 
