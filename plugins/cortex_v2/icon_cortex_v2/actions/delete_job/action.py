@@ -1,9 +1,7 @@
 import insightconnect_plugin_runtime
-from .schema import DeleteJobInput, DeleteJobOutput
+from .schema import DeleteJobInput, DeleteJobOutput, Input, Output
 
 # Custom imports below
-from cortex4py.exceptions import ServiceUnavailableError, AuthenticationError, CortexException
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 
 class DeleteJob(insightconnect_plugin_runtime.Action):
@@ -16,19 +14,6 @@ class DeleteJob(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        job_id = params.get("job_id")
-        self.logger.info("Removing job {}".format(job_id))
-
-        try:
-            status = self.connection.api.jobs.delete(job_id)
-        except AuthenticationError as e:
-            self.logger.error(e)
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
-        except ServiceUnavailableError as e:
-            self.logger.error(e)
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
-        except CortexException as e:
-            self.logger.error("Failed to delete job: {}".format(e))
-            status = False
-
-        return {"status": status}
+        job_id = params.get(Input.JOB_ID)
+        self.logger.info(f"Removing job {job_id}")
+        return {Output.STATUS: self.connection.api.send_request("DELETE", f"/job/{job_id}")}
