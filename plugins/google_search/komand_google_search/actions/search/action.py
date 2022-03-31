@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import SearchInput, SearchOutput
 
 # Custom imports below
 import googlesearch
 
 
-class Search(komand.Action):
+class Search(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="search",
@@ -25,7 +25,6 @@ class Search(komand.Action):
             lang=params.get("lang", "en"),
             stop=stop,
             num=params.get("num", 10),
-            only_standard=params.get("only_standard", False),
             pause=params.get("pause", 1.0),
         ):
 

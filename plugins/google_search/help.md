@@ -13,6 +13,10 @@ This plugin utilizes the Python [google library](https://pypi.python.org/pypi/go
 
 _This plugin does not contain any requirements._
 
+# Supported Product Versions
+
+* 2022-03-31
+
 # Documentation
 
 ## Setup
@@ -32,12 +36,10 @@ This action is used to return URLs from a Google Search.
 |Name|Type|Default|Required|Description|Enum|
 |----|----|-------|--------|-----------|----|
 |lang|string|en|True|Language, default is en|None|
-|start|integer|1|True|First result to retrieve, default is 1|None|
 |pause|float|1.0|True|Lapse to wait between HTTP requests. A lapse too long will make the search slow, but a lapse too short may cause Google to block your IP. Your mileage may vary|None|
 |num|integer|10|True|Number of results per page, default is 10|None|
 |query|string|None|True|Query string. Must NOT be URL-encoded|None|
 |stop|integer|16|True|Number of results to retrieve to limit amount, default is 16 and the search will allows return at least 16 results if available. This option seems to have odd behavior|None|
-|only_standard|boolean|False|True|Only returns the standard results from each page. If false, it returns every possible link from each page, except for those that point back to Google itself|None|
 
 ##### Output
 
@@ -75,6 +77,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.0 - Bug fix for Search action | Removal of retired Search action parameter | Update to Insight Connect SDK
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Bug fix for no google module
 * 0.1.1 - SSL bug fix in SDK

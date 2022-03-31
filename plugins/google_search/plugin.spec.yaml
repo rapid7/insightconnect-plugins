@@ -5,7 +5,8 @@ name: google_search
 title: Google Search
 description: Search the worlds information, including webpages, images, videos and
   more using Google
-version: 1.0.1
+version: 2.0.0
+supported_versions: ["2022-03-31"]
 vendor: rapid7
 support: community
 status: []
@@ -50,14 +51,6 @@ actions:
         type: integer
         description: Number of results per page, default is 10
         default: 10
-        required: true
-      only_standard:
-        title: All
-        type: boolean
-        description: Only returns the standard results from each page. If false, it
-          returns every possible link from each page, except for those that point
-          back to Google itself
-        default: false
         required: true
       pause:
         title: Pause

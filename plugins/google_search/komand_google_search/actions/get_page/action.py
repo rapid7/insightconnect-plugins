@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetPageInput, GetPageOutput
 
 # Custom imports below
 import googlesearch
 
 
-class GetPage(komand.Action):
+class GetPage(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_page",
