@@ -14,9 +14,8 @@ class CheckHostQuarantineStatus(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        agent_id = params.get(Input.AGENT_ID)
         return {
             Output.RESULTS: insightconnect_plugin_runtime.helper.clean(
-                self.connection.api.check_host_quarantine_status(agent_id).get("data")
+                self.connection.api.check_host_quarantine_status(params.get(Input.AGENT_ID)).get("data")
             )
         }
