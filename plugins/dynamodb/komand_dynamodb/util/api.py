@@ -32,17 +32,17 @@ class AWSCommunicationAPI:
         self.aws_service = service_name
 
     @prepare_input_and_output
-    def insert_data(self, input_schema: dict, params: dict) -> dict:
+    def insert_data(self, input_schema: dict, params: dict) -> dict:  # pylint: disable=unused-argument
         self.logger.info("Insert data")
         return self._handle_rest_call(self._get_function_from_client(name=constants.INSERT_COMMAND), params)
 
     @prepare_input_and_output
-    def update_data(self, input_schema: dict, params: dict) -> dict:
+    def update_data(self, input_schema: dict, params: dict) -> dict:  # pylint: disable=unused-argument
         self.logger.info("Update data")
         return self._handle_rest_call(self._get_function_from_client(name=constants.UPDATE_COMMAND), params)
 
     @prepare_input_and_output
-    def scan_table(self, input_schema: dict, params: dict) -> dict:
+    def scan_table(self, input_schema: dict, params: dict) -> dict:  # pylint: disable=unused-argument
         self.logger.info("Start scan")
         return self._handle_rest_call(self._get_function_from_client(name=constants.SCAN_COMMAND), params)
 
