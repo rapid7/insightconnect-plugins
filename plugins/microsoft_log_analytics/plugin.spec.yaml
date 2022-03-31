@@ -1,0 +1,149 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: microsoft_log_analytics
+title: Microsoft Log Analytics
+description: Edit, run log queries with data in Azure Monitor Logs
+version: 1.0.0
+vendor: rapid7
+support: rapid7
+supported_versions: ["2022-03-18"]
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/microsoft_log_analytics
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.microsoft.com/
+tags:
+  - cloud
+  - microsoft
+  - log analytics
+  - azure
+hub_tags:
+  use_cases: [data_utility]
+  keywords: [microsoft, azure]
+  features: []
+enable_cache: false
+connection:
+  client_id:
+    title: Client ID
+    description: The application ID that the application registration portal assigned
+      to your app
+    type: string
+    required: true
+    example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
+  client_secret:
+    title: Client Secret
+    description: The application secret that you generated for your app in the app
+      registration portal
+    type: credential_secret_key
+    required: true
+    example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
+  tenant_id:
+    title: Tenant ID
+    description: This is Active Directory ID
+    type: string
+    required: true
+    example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
+types:
+  column:
+    name:
+      title: Name
+      description: Column's name
+      type: string
+    type:
+      title: Data Type
+      description: Column's data type
+      type: string
+  table:
+    name:
+      title: Name
+      description: Table's name
+      type: string
+    columns:
+      title: Columns
+      description: Table's columns
+      type: "[]column"
+    rows:
+      title: Rows
+      description: Table's rows
+      type: "[]object"
+actions:
+  send_log_data:
+    title: Send Log Data
+    description: Sends log data to a Log Analytics workspace in Azure Monitor
+    input:
+      subscription_id:
+        title: Subscription ID
+        description: Current subscription identifier that Azure application portal assigned to
+        type: string
+        required: true
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
+      resource_group_name:
+        title: Resource Group Name
+        description: Name of the resource group
+        type: string
+        required: true
+        example: ExampleResourceGroupName
+      workspace_name:
+        title: Workspace Name
+        description: Customer's workspace name that the application registration portal is assigned
+        type: string
+        required: true
+        example: ExampleWorkspaceName
+      log_type:
+        title: Log Type
+        description: Specify the record type of the data that's being submitted, that can contain only letters, numbers, and the underscore (_) character, and it can't exceed 100 characters
+        type: string
+        required: true
+        example: MyExampleRecordType
+      log_data:
+        title: Log Data
+        description: JSON log data body that must include one or more records with the property name and value pairs in the following format, the property name can contain only letters, numbers, and the underscore (_) character
+        type: "[]object"
+        required: true
+        example: '[{"property 1": "value1", "property 2": "value2", "property 3": "value3", "property 4": "value4"},{"property 1": "value1", "property 2": "value2", "property 3": "value3", "property 4": "value4"}]'
+    output:
+      message:
+        title: Message
+        description: Text message indicates that log data has been added to workspace
+        type: string
+        required: true
+      log_data:
+        title: Log Data
+        description: Data that has been sent
+        type: "[]object"
+        required: true
+  get_log_data:
+    title: Get Log Data
+    description: Retrieves log data from Log Analytics workspace in Azure Monitor by a specific query
+    input:
+      subscription_id:
+        title: Subscription ID
+        description: Current subscription identifier that Azure application portal assigned to
+        type: string
+        required: true
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
+      resource_group_name:
+        title: Resource Group Name
+        description: Name of the resource group
+        type: string
+        required: true
+        example: ExampleResourceGroupName
+      workspace_name:
+        title: Workspace Name
+        description: Customer's workspace name that the application registration portal is assigned
+        type: string
+        required: true
+        example: ExampleWorkspaceName
+      query:
+        title: Query
+        description: Microsoft Log Analytics query
+        type: string
+        required: true
+        example: "AzureActivity | summarize count() by Category"
+    output:
+      tables:
+        title: Tables
+        description: Array of tables representing the query result. Each table contains name, columns, and rows keys
+        type: "[]table"
+        required: true
