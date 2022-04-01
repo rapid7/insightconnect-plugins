@@ -22,7 +22,7 @@ class GetPage(insightconnect_plugin_runtime.Action):
             return {"web_page": response.decode("utf-8")}
         else:
             self.logger.info("A valid URL was not passed, be sure to include the prefix e.g. http://")
-            raise Exception("A valid URL was not passed")
+            raise ("A valid URL was not passed")
 
     def test(self):
         return {"web_page": "blah"}
