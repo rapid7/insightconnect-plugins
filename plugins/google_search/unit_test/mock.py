@@ -1,4 +1,3 @@
-import json
 import os
 
 from unit_test.util import Util
@@ -15,22 +14,22 @@ REQUEST_POST = "POST"
 
 
 # Define and return mock API responses based on request type and endpoint
-def mock_func(*args, **kwargs):
+def mock_search_func(*args, **kwargs):
     return mock_response_selection(kwargs.get(SearchInput.QUERY))
 
+def mock_get_page_func(*args, **kwargs):
+    return mock_response_selection(args[0])
 
-def mock_response_retrieval(filename: str):
+def mock_response_retrieval(filename: str) -> str:
     text = ""
     if filename:
         text = Util.read_file_to_string(
-            os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/{filename}.json.resp")
+            os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/{filename}.resp")
         )
-    else:
-        text = ""
+    return text
 
-    return text.split(",")
-
-
-def mock_response_selection(query):
-    if query == 'Example Organization':
-        return mock_response_retrieval("search")
+def mock_response_selection(query_param):
+    if query_param == "Example Organization":
+        return mock_response_retrieval("search").split(",")
+    if query_param == "http://www.example.com":
+        return mock_response_retrieval("get_page").encode('utf8')

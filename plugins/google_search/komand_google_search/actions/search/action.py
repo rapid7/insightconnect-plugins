@@ -21,8 +21,8 @@ class Search(insightconnect_plugin_runtime.Action):
         self.logger.info("Parameters: %s", params)
         if params.get(Input.STOP) <= 0 or params.get(Input.NUM) <= 0 or params.get(Input.PAUSE) <= 0:
             raise PluginException(
-                cause="One or more inputs were of an invalid value.",
-                assistance="Please check that 'Num', 'Pause', and 'Stop' are values greater than 0.",
+                cause="One or more inputs were of an invalid value",
+                assistance="Please check that 'Num', 'Pause', and 'Stop' are values greater than 0",
                 data=f"Num: {params.get(Input.NUM)}, Pause: {params.get(Input.PAUSE)}, Stop: {params.get(Input.STOP)}"
             )
         count = 0

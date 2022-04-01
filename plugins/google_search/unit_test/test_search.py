@@ -1,17 +1,15 @@
 import sys
 import os
-from unittest.mock import patch
-
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase
-from unit_test.mock import mock_func
+from unittest.mock import patch
+from unit_test.mock import mock_search_func
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_google_search.connection.connection import Connection
 from komand_google_search.actions.search import Search
 from komand_google_search.actions.search.schema import Input
-import json
 import logging
 
 
@@ -38,7 +36,7 @@ class TestSearch(TestCase):
             Input.PAUSE: 2.0,
         }
 
-    @patch("googlesearch.search", side_effect = mock_func)
+    @patch("googlesearch.search", side_effect=mock_search_func)
     def test_search(self, _mock_req):
         actual = self.action.run(self.params)
         expected = {
@@ -64,19 +62,19 @@ class TestSearch(TestCase):
         self.params[Input.NUM] = 0
         with self.assertRaises(PluginException) as exception:
             actual = self.action.run(self.params)
-            cause = "One or more inputs were of an invalid value."
+            cause = "One or more inputs were of an invalid value"
             self.assertEqual(exception.exception.cause, cause)
 
     def test_search_bad_stop(self):
         self.params[Input.STOP] = 0
         with self.assertRaises(PluginException) as exception:
             actual = self.action.run(self.params)
-            cause = "One or more inputs were of an invalid value."
+            cause = "One or more inputs were of an invalid value"
             self.assertEqual(exception.exception.cause, cause)
 
     def test_search_bad_pause(self):
         self.params[Input.PAUSE] = 0
         with self.assertRaises(PluginException) as exception:
             actual = self.action.run(self.params)
-            cause = "One or more inputs were of an invalid value."
+            cause = "One or more inputs were of an invalid value"
             self.assertEqual(exception.exception.cause, cause)
