@@ -3,7 +3,7 @@ import os
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
@@ -30,9 +30,7 @@ class TestGetPage(TestCase):
         cls.action.logger = logging.getLogger("Action Logger")
 
     def setUp(cls) -> None:
-        cls.params = {
-            Input.URL: "http://www.example.com"
-        }
+        cls.params = {Input.URL: "http://www.example.com"}
 
     @patch("googlesearch.get_page", side_effect=mock_get_page_func)
     def test_get_page(self, _mock_req):

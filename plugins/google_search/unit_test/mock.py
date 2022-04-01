@@ -17,8 +17,10 @@ REQUEST_POST = "POST"
 def mock_search_func(*args, **kwargs):
     return mock_response_selection(kwargs.get(SearchInput.QUERY))
 
+
 def mock_get_page_func(*args, **kwargs):
     return mock_response_selection(args[0])
+
 
 def mock_response_retrieval(filename: str) -> str:
     text = ""
@@ -28,8 +30,9 @@ def mock_response_retrieval(filename: str) -> str:
         )
     return text
 
+
 def mock_response_selection(query_param):
     if query_param == "Example Organization":
         return mock_response_retrieval("search").split(",")
     if query_param == "http://www.example.com":
-        return mock_response_retrieval("get_page").encode('utf8')
+        return mock_response_retrieval("get_page").encode("utf8")

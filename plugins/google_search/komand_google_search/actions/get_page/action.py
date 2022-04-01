@@ -28,7 +28,7 @@ class GetPage(insightconnect_plugin_runtime.Action):
             raise PluginException(
                 cause="URL input must be a valid URL value",
                 assistance="Please ensure the prefix is included. e.g. http://",
-                data=f"URL: {params.get(Input.URL)}"
+                data=f"URL: {params.get(Input.URL)}",
             )
 
     def test(self):

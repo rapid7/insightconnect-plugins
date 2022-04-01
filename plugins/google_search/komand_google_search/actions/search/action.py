@@ -23,7 +23,7 @@ class Search(insightconnect_plugin_runtime.Action):
             raise PluginException(
                 cause="One or more inputs were of an invalid value",
                 assistance="Please check that 'Num', 'Pause', and 'Stop' are values greater than 0",
-                data=f"Num: {params.get(Input.NUM)}, Pause: {params.get(Input.PAUSE)}, Stop: {params.get(Input.STOP)}"
+                data=f"Num: {params.get(Input.NUM)}, Pause: {params.get(Input.PAUSE)}, Stop: {params.get(Input.STOP)}",
             )
         count = 0
         stop = params.get(Input.STOP, 10)
