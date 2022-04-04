@@ -10,6 +10,7 @@ import urllib
 
 from re import match
 from datetime import datetime, timezone
+from icon_palo_alto_cortex_xdr.util.util import Util
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 
 
@@ -40,6 +41,79 @@ class CortexXdrAPI:
                 assistance="Please check your connection settings and try again.",
                 data=e,
             )
+
+    @Util.retry(tries=1, timeout=900, exceptions=PluginException, backoff_seconds=1)
+    def start_xql_query(self, query, tenants, start_time_range=None, end_time_range=None) -> int:
+        start_xql_query_endpoint = "/public_api/v1/xql/start_xql_query/"
+        # Check if 'start_time_range' and 'end_time_range' are present, default to current Unix epoch time if absent
+        # Validate 'start_time_range' and 'end_time_range' fields
+        current_date_time = int(time.time() * 1000)
+        if not start_time_range or not end_time_range:
+            time_frame = None
+        elif (
+            start_time_range >= end_time_range
+            or start_time_range > current_date_time
+            or end_time_range > current_date_time
+            or start_time_range < 1
+            or end_time_range < 1
+        ):
+            raise PluginException(
+                cause="Invalid 'Start Time' or 'End Time' time range inputs",
+                assistance="'Start Time' or 'End Time' must be valid Unix timestamps in epoch milliseconds, they must be past "
+                "timestamps, and 'End Time' must be more recent than 'Start Time'",
+                data=f"'From'= {start_time_range}, 'To'= {end_time_range}",
+            )
+        else:
+            time_frame = {"from": start_time_range, "to": end_time_range}
+
+        post_body = {
+            "request_data": {
+                "query": query,
+                "tenants": tenants,
+                "timeframe": time_frame,
+            }
+        }
+        self.logger.info("Posting to API...")
+        resp_json = self._post_to_api(start_xql_query_endpoint, post_body)
+        self.logger.info("Getting reply...")
+        execution_id = resp_json.get("reply", None)
+        if execution_id is None:
+            resp_text = resp_json.text
+            raise PluginException(
+                cause="API Error. API returned an empty Execution ID",
+                assistance="The XQL Query could not be completed. Check input and try again.",
+                data=resp_text,
+            )
+        return execution_id
+
+    @Util.retry(tries=1, timeout=900, exceptions=PluginException, backoff_seconds=1)
+    def get_xql_query_results(self, query_id, limit) -> Dict:
+        get_xql_query_results_endpoint = "/public_api/v1/xql/get_query_results/"
+        # Limit must be between 1 and 1000. Limits of over 1000 require the use of the Get XQL Query Results Stream API
+        if limit > 1000 or limit < 1:
+            raise PluginException(
+                cause=f"A limit of {limit} is an invalid input value",
+                assistance="Limit input value must be between 1 and 1000",
+            )
+        pending_flag = False
+        format_ = "json"
+        post_body = {
+            "request_data": {
+                "query_id": query_id,
+                "limit": limit,
+                "pending_flag": pending_flag,
+                "format": format_,
+            }
+        }
+        resp_json = self._post_to_api(get_xql_query_results_endpoint, post_body)
+        output_object = {
+            "status": resp_json.get("reply").get("status"),
+            "number_of_results": resp_json.get("reply").get("number_of_results"),
+            "query_cost": resp_json.get("reply").get("query_cost"),
+            "remaining_quota": resp_json.get("reply").get("remaining_quota"),
+            "results": resp_json.get("reply").get("results"),
+        }
+        return output_object
 
     def get_file_quarantine_status(self, file: dict) -> Dict:
         quarantine_status_endpoint = "/public_api/v1/quarantine/status/"
@@ -263,7 +337,7 @@ class CortexXdrAPI:
         # Get the current timestamp as milliseconds.
         timestamp = int(datetime.now(timezone.utc).timestamp()) * 1000
         # Generate the auth key:
-        auth_key = "%s%s%s" % (api_key, nonce, timestamp)
+        auth_key = f"{api_key}{nonce}{timestamp}"
         # Convert to bytes object
         auth_key = auth_key.encode("utf-8")
         # Calculate sha256:

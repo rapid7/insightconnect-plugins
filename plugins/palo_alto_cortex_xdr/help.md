@@ -16,7 +16,7 @@ Stop modern attacks with the industry’s first extended detection and response 
 
 # Supported Product Versions
 
-* Palo Alto Cortex XDR API v1
+* 2022-03-28 Palo Alto Cortex XDR API v1
 
 # Documentation
 
@@ -55,6 +55,68 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Get XQL Query Results
+
+This action is used to start an XQL query and retrieve the query results.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|start_time|integer|None|False|Integer in timestamp epoch milliseconds for start of the time range, Cortex XDR calls by default the last 24 hours if both 'Start Time' and 'End Time' values are not present|None|1599080399000|
+|limit|integer|20|False|Integer representing the maximum number of results to return, defaults to 20, max value 1000|None|100|
+|query|string|None|True|String of the XQL query|None|dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3|
+|tenants|[]string|None|True|String that represents additional information regarding the action|None|["tenantID", "tenantID"]|
+|end_time|integer|None|False|Integer in timestamp epoch milliseconds for end of the time range, Cortex XDR calls by default the last 24 hours if both 'Start Time' and 'End Time' values are not present|None|1598907600000|
+
+Example input:
+
+```
+{
+  "start_time": 1599080399000,
+  "limit": 100,
+  "query": "dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3",
+  "tenants": [
+    "tenantID",
+    "tenantID"
+  ],
+  "end_time": 1598907600000
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|reply|reply|False|Was the operation successful|
+
+Example output:
+
+```
+{
+  "reply": {
+    "number_of_results": 1,
+    "query_cost": {
+      "1098781949": 0.0007469444444444444
+    },
+    "remaining_quota": 4.999253055555555,
+    "results": {
+      "data": [
+        {
+          "event_id": "eventID1",
+          "_vendor": "PANW",
+          "_product": "Fusion",
+          "insert_timestamp": 1621541825324,
+          "_time": 1621541523000,
+          "event_type": "STORY",
+          "event_sub_type": "NULL"
+        }
+      ]
+    }
+  }
+}
+```
 
 #### Get File Quarantine Status
 
@@ -638,6 +700,7 @@ Example output:
 
 # Version History
 
+* 2.2.0 - New action Get XQL Query Results | Update SDK to insightconnect-python-3-38-slim-plugin:4
 * 2.1.1 - Fix issue in Monitor Incident Events task where fields with null values aren't removed from incidents leading to validation errors
 * 2.1.0 - New task Monitor Incident Events
 * 2.0.0 - New action Get File Quarantine Status | New trigger Get Alerts
@@ -648,3 +711,4 @@ Example output:
 ## References
 
 * [Palo Alto Cortex XDR](https://www.paloaltonetworks.com/cortex/cortex-xdr)
+* This plugin was tested using Viewer, Security Admin, and Instance Administrator Roles using both Standard and Advanced Security Levels. Please ensure your selected Role has adequate permissions to perform the desired actions.
