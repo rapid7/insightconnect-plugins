@@ -4,7 +4,7 @@ products: [insightconnect]
 name: microsoft_log_analytics
 title: Microsoft Log Analytics
 description: Edit, run log queries with data in Azure Monitor Logs
-version: 1.0.0
+version: 1.1.0
 vendor: rapid7
 support: rapid7
 supported_versions: ["2022-03-18"]
@@ -140,10 +140,52 @@ actions:
         description: Microsoft Log Analytics query
         type: string
         required: true
-        example: "AzureActivity | summarize count() by Category"
+        example: "AzureActivity I summarize count() by Category"
     output:
       tables:
         title: Tables
-        description: Array of tables representing the query result. Each table contains name, columns, and rows keys
+        description: Array of tables representing the query result, with each table containing a name, columns and rows keys
+        type: "[]table"
+        required: true
+triggers:
+  search:
+    title: Search
+    description: Run Log Analytics query every interval time (expressed in seconds)
+    input:
+      interval:
+        title: Interval
+        description: Integer value that represents interval time in seconds
+        type: integer
+        required: true
+        example: 60
+        default: 60
+      subscription_id:
+        title: Subscription ID
+        description: Current subscription identifier that Azure application portal assigned to
+        type: string
+        required: true
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
+      resource_group_name:
+        title: Resource Group Name
+        description: Name of the resource group
+        type: string
+        required: true
+        example: ExampleResourceGroupName
+      workspace_name:
+        title: Workspace Name
+        description: Customer's workspace name that the application registration portal is assigned
+        type: string
+        required: true
+        example: ExampleWorkspaceName
+      query:
+        title: Query
+        description: Microsoft Log Analytics query
+        type: string
+        required: true
+        example: "AzureActivity I summarize count() by Category"
+    output:
+      tables:
+        title: Tables
+        description: Array of tables representing the query result, with each table containing a name, columns and rows keys
         type: "[]table"
         required: true

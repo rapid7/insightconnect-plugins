@@ -4,10 +4,12 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieves log data from Log Analytics workspace in Azure Monitor by a specific query"
+    DESCRIPTION = "Run Log Analytics query every interval time (expressed in seconds)"
 
 
 class Input:
+    
+    INTERVAL = "interval"
     QUERY = "query"
     RESOURCE_GROUP_NAME = "resource_group_name"
     SUBSCRIPTION_ID = "subscription_id"
@@ -15,41 +17,50 @@ class Input:
     
 
 class Output:
+    
     TABLES = "tables"
     
 
-class GetLogDataInput(insightconnect_plugin_runtime.Input):
+class SearchInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
+    "interval": {
+      "type": "integer",
+      "title": "Interval",
+      "description": "Integer value that represents interval time in seconds",
+      "default": 60,
+      "order": 1
+    },
     "query": {
       "type": "string",
       "title": "Query",
       "description": "Microsoft Log Analytics query",
-      "order": 4
+      "order": 5
     },
     "resource_group_name": {
       "type": "string",
       "title": "Resource Group Name",
       "description": "Name of the resource group",
-      "order": 2
+      "order": 3
     },
     "subscription_id": {
       "type": "string",
       "title": "Subscription ID",
       "description": "Current subscription identifier that Azure application portal assigned to",
-      "order": 1
+      "order": 2
     },
     "workspace_name": {
       "type": "string",
       "title": "Workspace Name",
       "description": "Customer's workspace name that the application registration portal is assigned",
-      "order": 3
+      "order": 4
     }
   },
   "required": [
+    "interval",
     "query",
     "resource_group_name",
     "subscription_id",
@@ -62,7 +73,7 @@ class GetLogDataInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class GetLogDataOutput(insightconnect_plugin_runtime.Output):
+class SearchOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
