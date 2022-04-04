@@ -8,23 +8,22 @@ import requests
 
 class API:
     def __init__(self, url: str, api_key: str, verify_cert: bool, proxies):
-        # self._url = url
-        self._base_url = f"{url}/api"
-        self._api_key = api_key
-        self._verify_cert = verify_cert
-        self._proxies = proxies
+        self.base_url = f"{url}/api"
+        self.api_key = api_key
+        self.verify_cert = verify_cert
+        self.proxies = proxies
         self.session = requests.Session()
 
     def send_request(self, method: str, path: str, params={}, **kwargs):
-        headers = {"Authorization": f"Bearer {self._api_key}"}
+        headers = {"Authorization": f"Bearer {self.api_key}"}
         try:
             response = self.session.request(
                 method.upper(),
-                f"{self._base_url}{path}",
+                f"{self.base_url}/{path}",
                 headers=headers,
                 params=params,
-                proxies=self._proxies,
-                verify=self._verify_cert,
+                proxies=self.proxies,
+                verify=self.verify_cert,
                 **kwargs
             )
 
@@ -49,6 +48,10 @@ class API:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
         except JSONDecodeError as e:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
+
+    def test_connection(self):
+        # List all available analyzers
+        return self.send_request("GET", "analyzer").json()
 
     def find_all(self, query, **kwargs):
         url = f"{self._base_url}/analyzer/_search"

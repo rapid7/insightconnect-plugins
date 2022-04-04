@@ -3,7 +3,7 @@ from .schema import ConnectionSchema
 from icon_cortex_v2.util.api import API
 
 # Custom imports below
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -28,11 +28,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test(self):
         try:
-            self.API.analyzers.definitions()
-        except AuthenticationError as e:
+            self.API.test_connection()
+        except PluginException as e:
             self.logger.error(e)
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
-        except ServiceUnavailableError as e:
-            self.logger.error(e)
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
+            raise ConnectionTestException(e)
         return {}
