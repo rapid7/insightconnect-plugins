@@ -62,7 +62,7 @@ actions:
         description: Lapse to wait between HTTP requests. A lapse too long will make
           the search slow, but a lapse too short may cause Google to block your IP.
           Your mileage may vary
-        default: 1
+        default: 1.0
         example: 1.0
         required: true
     output:
@@ -79,7 +79,7 @@ actions:
       url:
         title: URL
         type: string
-        description: URL to retrieve e.g. https://www.google.com
+        description: URL to retrieve
         example: https://example.com
         required: true
     output:

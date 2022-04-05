@@ -24,7 +24,7 @@ class GetPageInput(insightconnect_plugin_runtime.Input):
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "URL to retrieve e.g. https://www.google.com",
+      "description": "URL to retrieve",
       "order": 1
     }
   },

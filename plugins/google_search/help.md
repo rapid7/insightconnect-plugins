@@ -37,7 +37,8 @@ This action is used to return URLs from a Google Search.
 |----|----|-------|--------|-----------|----|-------|
 |lang|string|en|True|Language, default is en|None|en|
 |num|integer|10|True|Number of results per page, default is 10|None|10|
-|pause|float|1|True|Lapse to wait between HTTP requests. A lapse too long will make the search slow, but a lapse too short may cause Google to block your IP. Your mileage may vary|None|1.0||num|integer|10|True|Number of results per page, default is 10|None|10|
+|pause|float|1.0|True|Lapse to wait between HTTP requests. A lapse too long will make the search slow, but a lapse too short may cause Google to block your IP. Your mileage may vary|None|1.0|
+|num|integer|10|True|Number of results per page, default is 10|None|10|
 |query|string|None|True|Query string. Must NOT be URL-encoded|None|example.com|
 |stop|integer|16|True|Number of results to retrieve to limit amount, default is 16 and the search will allows return at least 16 results if available. This option seems to have odd behavior|None|16|
 
@@ -77,7 +78,7 @@ This action is used to request the given URL and return the response page, using
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|url|string|None|True|URL to retrieve e.g. https://www.google.com|None|https://example.com|
+|url|string|None|True|URL to retrieve|None|https://example.com|
 
 Example input:
 
@@ -115,7 +116,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 2.0.0 - Bug fix for Search action | Removal of retired Search action parameter | Update to Insight Connect SDK
+* 2.0.0 - Bug fix and removal of "only_standard" input parameter in the Search action | Update Insight Connect SDK to version 4
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Bug fix for no google module
 * 0.1.1 - SSL bug fix in SDK
