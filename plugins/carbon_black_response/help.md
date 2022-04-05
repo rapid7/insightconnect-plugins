@@ -16,7 +16,7 @@ This plugin utilizes the [VMware Carbon Black EDR REST API](https://developer.ca
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* 6.0-6.2x Carbon Black EDR API
 
 # Documentation
 
@@ -925,3 +925,4 @@ This plugin does not contain any troubleshooting information.
 ## References
 
 * [VMware Carbon Black EDR REST API](https://developer.carbonblack.com/guide/enterprise-response/)
+* [VMware Carbon Black EDR REST API 6.0-6.2x](https://developer.carbonblack.com/reference/enterprise-response/6.1/rest-api/)
