@@ -3,4 +3,5 @@ from .allow_file.action import AllowFile
 from .block_file.action import BlockFile
 from .get_endpoint_details.action import GetEndpointDetails
 from .get_file_quarantine_status.action import GetFileQuarantineStatus
+from .get_xql_query_results.action import GetXqlQueryResults
 from .isolate_endpoint.action import IsolateEndpoint

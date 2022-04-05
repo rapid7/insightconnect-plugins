@@ -1,7 +1,7 @@
 {
-	"spec": "4609c6c6619845ca57b90c4e92eced87",
-	"manifest": "1e9b8120641b43506f5b338d91f0cfae",
-	"setup": "53ef908b27d5afb456ad53cfe422f805",
+	"spec": "b2348ff015dd04406b33237cc16a203f",
+	"manifest": "41e11104be3c229dbd2f4322b39b2267",
+	"setup": "59d9eec923dbad66e9f669caa776a27a",
 	"schemas": [
 		{
 			"identifier": "allow_file/schema.py",
@@ -18,6 +18,10 @@
 		{
 			"identifier": "get_file_quarantine_status/schema.py",
 			"hash": "d6e68dfff8a6e78936c598df71ab2928"
+		},
+		{
+			"identifier": "get_xql_query_results/schema.py",
+			"hash": "c0b607f55fd662bbc38229c4b9bb1e65"
 		},
 		{
 			"identifier": "isolate_endpoint/schema.py",
