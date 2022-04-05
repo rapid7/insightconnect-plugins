@@ -3302,7 +3302,7 @@ actions:
         title: Email
         description: The email address of the user
         type: string
-        example: "example@gmail.com"
+        example: "user@example.com"
         required: true
       enabled:
         title: Enabled
@@ -3392,7 +3392,7 @@ actions:
         title: Email
         description: The email address of the user
         type: string
-        example: "example@gmail.com"
+        example: "user@example.com"
         required: true
       enabled:
         title: Enabled
@@ -4054,8 +4054,8 @@ triggers:
         description: 'List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown'
         type: '[]string'
         required: false
-        example: ['Successful']
-        default: ['Successful']
+        example: ["Successful"]
+        default: '["Successful"]'
     output:
       scan:
         title: Scan
@@ -4078,8 +4078,8 @@ triggers:
         description: 'List of vulnerability statuses to match against. Options include: Under Review and Approved'
         type: '[]string'
         required: false
-        example: ['Under Review']
-        default: ['Under Review']
+        example: ["Under Review"]
+        default: '["Under Review"]'
     output:
       exception:
         title: Vulnerability Exception

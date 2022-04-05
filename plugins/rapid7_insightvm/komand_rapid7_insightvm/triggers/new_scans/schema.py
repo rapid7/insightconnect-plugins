@@ -54,9 +54,7 @@ class NewScansInput(insightconnect_plugin_runtime.Input):
       "items": {
         "type": "string"
       },
-      "default": [
-        "Successful"
-      ],
+      "default": "[\\"Successful\\"]",
       "order": 4
     }
   },

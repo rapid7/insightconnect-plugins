@@ -4881,7 +4881,7 @@ This action is used to create a new user account (limited to external authentica
 |access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|False|
 |authentication_id|integer|None|False|The identifier of the authentication source to use to authenticate the user. The source with the specified identifier must be of the type specified by Authentication Type. If Authentication ID is omitted, then one source of the specified Authentication Type is selected|None|1234|
 |authentication_type|string|ldap|True|The type of the authentication source to use to authenticate the user|['kerberos', 'ldap', 'saml']|ldap|
-|email|string|None|True|The email address of the user|None|example@gmail.com|
+|email|string|None|True|The email address of the user|None|user@example.com|
 |enabled|boolean|True|True|Whether the user account is enabled|None|True|
 |login|string|None|True|The login name of the user|None|jdoe24|
 |name|string|None|True|The full name of the user|None|John Doe|
@@ -4895,7 +4895,7 @@ Example input:
   "access_all_sites": false,
   "authentication_id": 1234,
   "authentication_type": "ldap",
-  "email": "example@gmail.com",
+  "email": "user@example.com",
   "enabled": true,
   "login": "jdoe24",
   "name": "John Doe",
@@ -4940,7 +4940,7 @@ This action is used to update the configuration of an existing user account.
 |access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|False|
 |authentication_id|integer|None|False|The identifier of the authentication source to use to authenticate the user. The source with the specified identifier must be of the type specified by Authentication Type. If Authentication ID is omitted, then one source of the specified Authentication Type is selected|None|567|
 |authentication_type|string|ldap|True|The type of the authentication source to use to authenticate the user|['normal', 'admin', 'kerberos', 'ldap', 'saml']|ldap|
-|email|string|None|True|The email address of the user|None|example@gmail.com|
+|email|string|None|True|The email address of the user|None|user@example.com|
 |enabled|boolean|True|True|Whether the user account is enabled|None|True|
 |id|integer|None|True|The identifier of the user|None|1234|
 |login|string|None|True|The login name of the user|None|jdoe24|
@@ -4955,7 +4955,7 @@ Example input:
   "access_all_sites": false,
   "authentication_id": 567,
   "authentication_type": "ldap",
-  "email": "example@gmail.com",
+  "email": "user@example.com",
   "enabled": true,
   "id": 1234,
   "login": "jdoe24",
@@ -5113,14 +5113,8 @@ Example input:
 {
   "access_all_asset_groups": false,
   "access_all_sites": false,
-  "authentication_id": 567,
-  "authentication_type": "ldap",
-  "email": "example@gmail.com",
-  "enabled": true,
-  "id": 1234,
-  "login": "jdoe24",
-  "name": "John Doe",
-  "role_id": "global-admin"
+  "role_id": "global-admin",
+  "user_id": 1234
 }
 ```
 
@@ -5158,16 +5152,11 @@ Example input:
 
 ```
 {
-  "access_all_asset_groups": false,
-  "access_all_sites": false,
-  "authentication_id": 567,
-  "authentication_type": "ldap",
-  "email": "example@gmail.com",
-  "enabled": true,
-  "id": 1234,
-  "login": "jdoe24",
-  "name": "John Doe",
-  "role_id": "global-admin"
+  "asset_group_ids": [
+    1234,
+    5678
+  ],
+  "user_id": 1234
 }
 ```
 
@@ -5283,16 +5272,11 @@ Example input:
 
 ```
 {
-  "access_all_asset_groups": false,
-  "access_all_sites": false,
-  "authentication_id": 567,
-  "authentication_type": "ldap",
-  "email": "example@gmail.com",
-  "enabled": true,
-  "id": 1234,
-  "login": "jdoe24",
-  "name": "John Doe",
-  "role_id": "global-admin"
+  "site_ids": [
+    1234,
+    567
+  ],
+  "user_id": 1234
 }
 ```
 

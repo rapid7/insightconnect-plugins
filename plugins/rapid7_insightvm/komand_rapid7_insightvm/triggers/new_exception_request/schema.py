@@ -38,9 +38,7 @@ class NewExceptionRequestInput(insightconnect_plugin_runtime.Input):
       "items": {
         "type": "string"
       },
-      "default": [
-        "Under Review"
-      ],
+      "default": "[\\"Under Review\\"]",
       "order": 2
     }
   },
