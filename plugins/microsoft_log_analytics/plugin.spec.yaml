@@ -157,8 +157,8 @@ triggers:
         description: Integer value that represents interval time in seconds
         type: integer
         required: true
-        example: 60
-        default: 60
+        example: 900
+        default: 900
       subscription_id:
         title: Subscription ID
         description: Current subscription identifier that Azure application portal assigned to
@@ -179,10 +179,10 @@ triggers:
         example: ExampleWorkspaceName
       query:
         title: Query
-        description: Microsoft Log Analytics query
+        description: "Microsoft Log Analytics query, in order to get data in specific time interval append query with 'I where TimeGenerated > ago(900s)'"
         type: string
         required: true
-        example: "AzureActivity I summarize count() by Category"
+        example: "AzureActivity I summarize count() by Category I where TimeGenerated > ago(900s)"
     output:
       tables:
         title: Tables

@@ -190,8 +190,8 @@ This trigger is used to run Log Analytics query every interval time (expressed i
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|interval|integer|60|True|Integer value that represents interval time in seconds|None|60|
-|query|string|None|True|Microsoft Log Analytics query|None|AzureActivity I summarize count() by Category|
+|interval|integer|900|True|Integer value that represents interval time in seconds|None|900|
+|query|string|None|True|Microsoft Log Analytics query, in order to get data in specific time interval append query with 'I where TimeGenerated > ago(900s)'|None|AzureActivity I summarize count() by Category I where TimeGenerated > ago(900s)|
 |resource_group_name|string|None|True|Name of the resource group|None|ExampleResourceGroupName|
 |subscription_id|string|None|True|Current subscription identifier that Azure application portal assigned to|None|5cdad72f-c848-4df0-8aaa-ffe033e75d57|
 |workspace_name|string|None|True|Customer's workspace name that the application registration portal is assigned|None|ExampleWorkspaceName|
@@ -200,8 +200,8 @@ Example input:
 
 ```
 {
-  "interval": 60,
-  "query": "AzureActivity | summarize count() by Category",
+  "interval": 900,
+  "query": "AzureActivity | summarize count() by Category | where TimeGenerated ago(900s)",
   "resource_group_name": "ExampleResourceGroupName",
   "subscription_id": "5cdad72f-c848-4df0-8aaa-ffe033e75d57",
   "workspace_name": "ExampleWorkspaceName"

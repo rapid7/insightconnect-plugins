@@ -31,13 +31,13 @@ class SearchInput(insightconnect_plugin_runtime.Input):
       "type": "integer",
       "title": "Interval",
       "description": "Integer value that represents interval time in seconds",
-      "default": 60,
+      "default": 900,
       "order": 1
     },
     "query": {
       "type": "string",
       "title": "Query",
-      "description": "Microsoft Log Analytics query",
+      "description": "Microsoft Log Analytics query, in order to get data in specific time interval append query with 'I where TimeGenerated \\u003e ago(900s)'",
       "order": 5
     },
     "resource_group_name": {
