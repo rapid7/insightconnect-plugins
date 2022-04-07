@@ -1,11 +1,11 @@
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from time import sleep
 import requests
 from logging import Logger
-import komand.connection
+import insightconnect_plugin_runtime.connection
 
 
-def get_user_info(logger: Logger, connection: komand.connection, user_login: str) -> dict:
+def get_user_info(logger: Logger, connection: insightconnect_plugin_runtime.connection, user_login: str) -> dict:
     """
     This is used to get information about a user using the user login
 
@@ -49,7 +49,9 @@ def get_user_info(logger: Logger, connection: komand.connection, user_login: str
     return user
 
 
-def add_user_to_group(logger: Logger, connection: komand.connection, group_id: str, user_id: str) -> bool:
+def add_user_to_group(
+    logger: Logger, connection: insightconnect_plugin_runtime.connection, group_id: str, user_id: str
+) -> bool:
     """
     This will add a user to a group
 
@@ -85,7 +87,9 @@ def add_user_to_group(logger: Logger, connection: komand.connection, group_id: s
     )
 
 
-def remove_user_from_group(logger: Logger, connection: komand.connection, group_id: str, user_id: str) -> bool:
+def remove_user_from_group(
+    logger: Logger, connection: insightconnect_plugin_runtime.connection, group_id: str, user_id: str
+) -> bool:
     """
     Removes a user from a group
 
@@ -123,7 +127,7 @@ def remove_user_from_group(logger: Logger, connection: komand.connection, group_
 
 def create_group(
     logger: Logger,
-    connection: komand.connection,
+    connection: insightconnect_plugin_runtime.connection,
     group_name: str,
     group_description: str,
     group_nickname: str,
@@ -185,7 +189,7 @@ def create_group(
     )
 
 
-def create_user_paylaod(logger: Logger, connection: komand.connection, group_list: list) -> list:
+def create_user_paylaod(logger: Logger, connection: insightconnect_plugin_runtime.connection, group_list: list) -> list:
     """
     This takes a list of user names, gets their IDs, then returns a list of odata objects that can
     be fed into create group
@@ -206,7 +210,7 @@ def create_user_paylaod(logger: Logger, connection: komand.connection, group_lis
     return user_payload
 
 
-def delete_group(logger: Logger, connection: komand.connection, group_name: str) -> bool:
+def delete_group(logger: Logger, connection: insightconnect_plugin_runtime.connection, group_name: str) -> bool:
     """
     This will delete a group from Azure
 
@@ -237,7 +241,9 @@ def delete_group(logger: Logger, connection: komand.connection, group_name: str)
     )
 
 
-def get_group_id_from_name(logger: Logger, connection: komand.connection, group_name: str) -> str:
+def get_group_id_from_name(
+    logger: Logger, connection: insightconnect_plugin_runtime.connection, group_name: str
+) -> str:
     """
     This will take a group name and return its ID
 
@@ -338,7 +344,9 @@ def enable_teams_for_group(logger, connection, group_id):
     )
 
 
-def add_user_to_owners(logger: Logger, connection: komand.connection.Connection, group_id: str, user_id: str) -> bool:
+def add_user_to_owners(
+    logger: Logger, connection: insightconnect_plugin_runtime.connection.Connection, group_id: str, user_id: str
+) -> bool:
     endpoint = f"https://graph.microsoft.com/beta/groups/{group_id}/owners/$ref"
     logger.info(f"Adding user to group owners with: {endpoint}")
 
@@ -385,7 +393,7 @@ def add_user_to_owners(logger: Logger, connection: komand.connection.Connection,
 
 def add_user_to_channel(
     logger: Logger,
-    connection: komand.connection.Connection,
+    connection: insightconnect_plugin_runtime.connection.Connection,
     group_id: str,
     channel_id: str,
     user_id: str,
