@@ -1,15 +1,22 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 
 # Custom imports below
-from komand.exceptions import ConnectionTestException, PluginException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 import requests
 import time
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
+        self.app_id = None
+        self.tenant_id = None
+        self.app_secret = None
+        self.username = None
+        self.password = None
+        self.api_token = None
+        self.refresh_token = None
 
     def connect(self, params):
         self.app_id = params.get(Input.APPLICATION_ID)
@@ -17,9 +24,6 @@ class Connection(komand.Connection):
         self.app_secret = params.get(Input.APPLICATION_SECRET).get("secretKey")
         self.username = params.get(Input.USERNAME_PASSWORD).get("username")
         self.password = params.get(Input.USERNAME_PASSWORD).get("password")
-
-        self.api_token = ""
-        self.refresh_token = ""
 
         # Auth tokens expire after 1 hour. Only make that call if we need to
         self.time_ago = 0  # Jan 1, 1970

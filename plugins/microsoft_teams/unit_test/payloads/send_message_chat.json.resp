@@ -1,0 +1,29 @@
+{
+  "@odata.context": "https://graph.microsoft.com/beta/$metadata#chats('19%!A(MISSING)10000_20000%!u(MISSING)nq.gbl.spaces')/messages/$entity",
+  "attachments": [],
+  "body": {
+    "content": "test",
+    "contentType": "text"
+  },
+  "chatId": "19:10000_20000@unq.gbl.spaces",
+  "createdDateTime": "2021-11-08T14:11:54.572Z",
+  "etag": "1688920714572",
+  "first_word": "test",
+  "from": {
+    "user": {
+      "displayName": "Example User",
+      "id": "0",
+      "userIdentityType": "aadUser"
+    }
+  },
+  "id": "1688920714572",
+  "importance": "normal",
+  "lastModifiedDateTime": "2021-11-08T14:11:54.572Z",
+  "locale": "en-us",
+  "mentions": [],
+  "messageType": "message",
+  "reactions": [],
+  "words": [
+    "test"
+  ]
+}

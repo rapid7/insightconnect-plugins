@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import (
     CreateTeamsEnabledGroupInput,
     CreateTeamsEnabledGroupOutput,
@@ -12,7 +12,7 @@ from icon_microsoft_teams.util.azure_ad_utils import create_group, enable_teams_
 from icon_microsoft_teams.util.komand_clean_with_nulls import remove_null_and_clean
 
 
-class CreateTeamsEnabledGroup(komand.Action):
+class CreateTeamsEnabledGroup(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_teams_enabled_group",

@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AddChannelToTeamInput, AddChannelToTeamOutput, Input, Output, Component
 
 # Custom imports below
 from icon_microsoft_teams.util.teams_utils import get_teams_from_microsoft, create_channel
 
 
-class AddChannelToTeam(komand.Action):
+class AddChannelToTeam(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_channel_to_team",
