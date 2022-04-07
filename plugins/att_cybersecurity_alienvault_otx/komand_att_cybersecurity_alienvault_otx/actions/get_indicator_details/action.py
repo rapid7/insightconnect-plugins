@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import GetIndicatorDetailsInput, GetIndicatorDetailsOutput, Input, Output, Component
 
 # Custom imports below
-from komand_att_cybersecurity_alienvault_otx.util.utils import get_indicator_type
+from komand_att_cybersecurity_alienvault_otx.util.utils import get_indicator_type, raise_exception
 
 
 class GetIndicatorDetails(insightconnect_plugin_runtime.Action):
@@ -31,17 +31,20 @@ class GetIndicatorDetails(insightconnect_plugin_runtime.Action):
         indicator = params.get(Input.INDICATOR)
         section = params.get(Input.SECTION)
 
-        if section == "full":
-            return {
-                Output.RESULTS: insightconnect_plugin_runtime.helper.clean(
-                    self.connection.client.get_indicator_details_full(
-                        indicator_type=indicator_type, indicator=indicator
+        try:
+            if section == "full":
+                return {
+                    Output.RESULTS: insightconnect_plugin_runtime.helper.clean(
+                        self.connection.client.get_indicator_details_full(
+                            indicator_type=indicator_type, indicator=indicator
+                        )
                     )
-                )
-            }
+                }
 
-        results[section] = self.connection.client.get_indicator_details_by_section(
-            indicator_type=indicator_type, indicator=indicator, section=section
-        )
+            results[section] = self.connection.client.get_indicator_details_by_section(
+                indicator_type=indicator_type, indicator=indicator, section=section
+            )
 
-        return {Output.RESULTS: insightconnect_plugin_runtime.helper.clean(results)}
+            return {Output.RESULTS: insightconnect_plugin_runtime.helper.clean(results)}
+        except Exception as error:
+            raise_exception(error)

@@ -83,18 +83,6 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "definitions": {
-    "_id": {
-      "type": "object",
-      "title": "_id",
-      "properties": {
-        "$id": {
-          "type": "string",
-          "title": "$ID",
-          "description": "$ID",
-          "order": 1
-        }
-      }
-    },
     "activities": {
       "type": "object",
       "title": "activities",
@@ -1530,7 +1518,7 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
                   "title": "Industries",
                   "description": "Industries",
                   "items": {
-                    "type": "object"
+                    "type": "string"
                   },
                   "order": 16
                 },
@@ -1629,7 +1617,7 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
                   "title": "Targeted Countries",
                   "description": "Targeted countries",
                   "items": {
-                    "type": "object"
+                    "type": "string"
                   },
                   "order": 31
                 },
@@ -2151,7 +2139,7 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
               "title": "Industries",
               "description": "Industries",
               "items": {
-                "type": "object"
+                "type": "string"
               },
               "order": 16
             },
@@ -2250,7 +2238,7 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
               "title": "Targeted Countries",
               "description": "Targeted countries",
               "items": {
-                "type": "object"
+                "type": "string"
               },
               "order": 31
             },
@@ -2790,6 +2778,18 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
+    "id": {
+      "type": "object",
+      "title": "id",
+      "properties": {
+        "$id": {
+          "type": "string",
+          "title": "$ID",
+          "description": "$ID",
+          "order": 1
+        }
+      }
+    },
     "indicator_detail_full": {
       "type": "object",
       "title": "indicator_detail_full",
@@ -2832,18 +2832,6 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
         }
       },
       "definitions": {
-        "_id": {
-          "type": "object",
-          "title": "_id",
-          "properties": {
-            "$id": {
-              "type": "string",
-              "title": "$ID",
-              "description": "$ID",
-              "order": 1
-            }
-          }
-        },
         "activities": {
           "type": "object",
           "title": "activities",
@@ -4279,7 +4267,7 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
                       "title": "Industries",
                       "description": "Industries",
                       "items": {
-                        "type": "object"
+                        "type": "string"
                       },
                       "order": 16
                     },
@@ -4378,7 +4366,7 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
                       "title": "Targeted Countries",
                       "description": "Targeted countries",
                       "items": {
-                        "type": "object"
+                        "type": "string"
                       },
                       "order": 31
                     },
@@ -4900,7 +4888,7 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
                   "title": "Industries",
                   "description": "Industries",
                   "items": {
-                    "type": "object"
+                    "type": "string"
                   },
                   "order": 16
                 },
@@ -4999,7 +4987,7 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
                   "title": "Targeted Countries",
                   "description": "Targeted countries",
                   "items": {
-                    "type": "object"
+                    "type": "string"
                   },
                   "order": 31
                 },
@@ -5535,6 +5523,18 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
               "type": "string",
               "title": "Name",
               "description": "Group name",
+              "order": 1
+            }
+          }
+        },
+        "id": {
+          "type": "object",
+          "title": "id",
+          "properties": {
+            "$id": {
+              "type": "string",
+              "title": "$ID",
+              "description": "$ID",
               "order": 1
             }
           }
@@ -6567,7 +6567,7 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
                   "title": "Industries",
                   "description": "Industries",
                   "items": {
-                    "type": "object"
+                    "type": "string"
                   },
                   "order": 16
                 },
@@ -6666,7 +6666,7 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
                   "title": "Targeted Countries",
                   "description": "Targeted countries",
                   "items": {
-                    "type": "object"
+                    "type": "string"
                   },
                   "order": 31
                 },
@@ -7188,7 +7188,7 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
               "title": "Industries",
               "description": "Industries",
               "items": {
-                "type": "object"
+                "type": "string"
               },
               "order": 16
             },
@@ -7287,7 +7287,7 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
               "title": "Targeted Countries",
               "description": "Targeted countries",
               "items": {
-                "type": "object"
+                "type": "string"
               },
               "order": 31
             },
@@ -7717,18 +7717,6 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
             }
           },
           "definitions": {
-            "_id": {
-              "type": "object",
-              "title": "_id",
-              "properties": {
-                "$id": {
-                  "type": "string",
-                  "title": "$ID",
-                  "description": "$ID",
-                  "order": 1
-                }
-              }
-            },
             "activities": {
               "type": "object",
               "title": "activities",
@@ -7957,14 +7945,26 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
                 }
               }
             },
+            "id": {
+              "type": "object",
+              "title": "id",
+              "properties": {
+                "$id": {
+                  "type": "string",
+                  "title": "$ID",
+                  "description": "$ID",
+                  "order": 1
+                }
+              }
+            },
             "reputation_details": {
               "type": "object",
               "title": "reputation_details",
               "properties": {
                 "_id": {
-                  "$ref": "#/definitions/_id",
-                  "title": " Id",
-                  "description": " id",
+                  "$ref": "#/definitions/id",
+                  "title": "ID",
+                  "description": "ID",
                   "order": 25
                 },
                 "activities": {
@@ -8131,18 +8131,6 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
                 }
               },
               "definitions": {
-                "_id": {
-                  "type": "object",
-                  "title": "_id",
-                  "properties": {
-                    "$id": {
-                      "type": "string",
-                      "title": "$ID",
-                      "description": "$ID",
-                      "order": 1
-                    }
-                  }
-                },
                 "activities": {
                   "type": "object",
                   "title": "activities",
@@ -8371,6 +8359,18 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
                     }
                   }
                 },
+                "id": {
+                  "type": "object",
+                  "title": "id",
+                  "properties": {
+                    "$id": {
+                      "type": "string",
+                      "title": "$ID",
+                      "description": "$ID",
+                      "order": 1
+                    }
+                  }
+                },
                 "vt": {
                   "type": "object",
                   "title": "vt",
@@ -8404,9 +8404,9 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
           "title": "reputation_details",
           "properties": {
             "_id": {
-              "$ref": "#/definitions/_id",
-              "title": " Id",
-              "description": " id",
+              "$ref": "#/definitions/id",
+              "title": "ID",
+              "description": "ID",
               "order": 25
             },
             "activities": {
@@ -8573,18 +8573,6 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
             }
           },
           "definitions": {
-            "_id": {
-              "type": "object",
-              "title": "_id",
-              "properties": {
-                "$id": {
-                  "type": "string",
-                  "title": "$ID",
-                  "description": "$ID",
-                  "order": 1
-                }
-              }
-            },
             "activities": {
               "type": "object",
               "title": "activities",
@@ -8809,6 +8797,18 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
                   "type": "integer",
                   "title": "Usec",
                   "description": "Usec",
+                  "order": 1
+                }
+              }
+            },
+            "id": {
+              "type": "object",
+              "title": "id",
+              "properties": {
+                "$id": {
+                  "type": "string",
+                  "title": "$ID",
+                  "description": "$ID",
                   "order": 1
                 }
               }
@@ -10384,7 +10384,7 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
               "title": "Industries",
               "description": "Industries",
               "items": {
-                "type": "object"
+                "type": "string"
               },
               "order": 16
             },
@@ -10483,7 +10483,7 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
               "title": "Targeted Countries",
               "description": "Targeted countries",
               "items": {
-                "type": "object"
+                "type": "string"
               },
               "order": 31
             },
@@ -11005,7 +11005,7 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
           "title": "Industries",
           "description": "Industries",
           "items": {
-            "type": "object"
+            "type": "string"
           },
           "order": 16
         },
@@ -11104,7 +11104,7 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
           "title": "Targeted Countries",
           "description": "Targeted countries",
           "items": {
-            "type": "object"
+            "type": "string"
           },
           "order": 31
         },
@@ -11534,18 +11534,6 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
         }
       },
       "definitions": {
-        "_id": {
-          "type": "object",
-          "title": "_id",
-          "properties": {
-            "$id": {
-              "type": "string",
-              "title": "$ID",
-              "description": "$ID",
-              "order": 1
-            }
-          }
-        },
         "activities": {
           "type": "object",
           "title": "activities",
@@ -11774,14 +11762,26 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
+        "id": {
+          "type": "object",
+          "title": "id",
+          "properties": {
+            "$id": {
+              "type": "string",
+              "title": "$ID",
+              "description": "$ID",
+              "order": 1
+            }
+          }
+        },
         "reputation_details": {
           "type": "object",
           "title": "reputation_details",
           "properties": {
             "_id": {
-              "$ref": "#/definitions/_id",
-              "title": " Id",
-              "description": " id",
+              "$ref": "#/definitions/id",
+              "title": "ID",
+              "description": "ID",
               "order": 25
             },
             "activities": {
@@ -11948,18 +11948,6 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
             }
           },
           "definitions": {
-            "_id": {
-              "type": "object",
-              "title": "_id",
-              "properties": {
-                "$id": {
-                  "type": "string",
-                  "title": "$ID",
-                  "description": "$ID",
-                  "order": 1
-                }
-              }
-            },
             "activities": {
               "type": "object",
               "title": "activities",
@@ -12188,6 +12176,18 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
                 }
               }
             },
+            "id": {
+              "type": "object",
+              "title": "id",
+              "properties": {
+                "$id": {
+                  "type": "string",
+                  "title": "$ID",
+                  "description": "$ID",
+                  "order": 1
+                }
+              }
+            },
             "vt": {
               "type": "object",
               "title": "vt",
@@ -12221,9 +12221,9 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
       "title": "reputation_details",
       "properties": {
         "_id": {
-          "$ref": "#/definitions/_id",
-          "title": " Id",
-          "description": " id",
+          "$ref": "#/definitions/id",
+          "title": "ID",
+          "description": "ID",
           "order": 25
         },
         "activities": {
@@ -12390,18 +12390,6 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
         }
       },
       "definitions": {
-        "_id": {
-          "type": "object",
-          "title": "_id",
-          "properties": {
-            "$id": {
-              "type": "string",
-              "title": "$ID",
-              "description": "$ID",
-              "order": 1
-            }
-          }
-        },
         "activities": {
           "type": "object",
           "title": "activities",
@@ -12626,6 +12614,18 @@ class GetIndicatorDetailsOutput(insightconnect_plugin_runtime.Output):
               "type": "integer",
               "title": "Usec",
               "description": "Usec",
+              "order": 1
+            }
+          }
+        },
+        "id": {
+          "type": "object",
+          "title": "id",
+          "properties": {
+            "$id": {
+              "type": "string",
+              "title": "$ID",
+              "description": "$ID",
               "order": 1
             }
           }

@@ -3,7 +3,7 @@ from .schema import ConnectionSchema, Input
 
 # Custom imports below
 from OTXv2 import OTXv2
-from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
+from komand_att_cybersecurity_alienvault_otx.util.utils import raise_exception
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -18,5 +18,5 @@ class Connection(insightconnect_plugin_runtime.Connection):
         try:
             self.client.search_users("")
             return {"success": True}
-        except Exception:
-            raise ConnectionTestException(preset=PluginException.Preset.API_KEY)
+        except Exception as error:
+            raise_exception(error)

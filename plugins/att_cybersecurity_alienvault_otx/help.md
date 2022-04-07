@@ -16,7 +16,7 @@ This plugin utilizes the Python library [OTXv2](https://github.com/AlienVault-OT
 
 # Supported Product Versions
 
-* OTX DirectConnect API v1 2022-03-29T14:00:00Z
+* OTX DirectConnect API v1 2022-03-29
 
 # Documentation
 
@@ -27,7 +27,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|AlienVault Open Threat Exchange API key|None|3395856ce81f2b7382dee72602f798b642f14140|
-|url|string|https://example.com|True|AlienVault Open Threat Exchange URL|None|https://otx.alienvault.com|
+|url|string|https://otx.alienvault.com|True|AlienVault Open Threat Exchange URL|None|https://otx.alienvault.com|
 
 Example input:
 
@@ -250,7 +250,7 @@ _This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-#### _id
+#### id
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
@@ -534,7 +534,7 @@ _This plugin does not contain any triggers._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-| Id|_id|False| id|
+|ID|id|False|ID|
 |Activities|[]activities|False|Activities|
 |Address|string|False|Address|
 |Allow Ping|string|False|Allow ping|
@@ -625,7 +625,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 3.0.0 - Update custom output types in plugin.spec | Add input examples | Code refactor
+* 3.0.0 - Update custom output types in plugin spec | Add input examples | Code refactor
 * 2.0.0 - New spec and help.md format update for the Extension Library | Variable names updated as acronyms
 * 1.0.1 - Update custom type and added HOSTNAME as a supported indicator type for Get Indicator Details
 * 1.0.0 - Initial plugin

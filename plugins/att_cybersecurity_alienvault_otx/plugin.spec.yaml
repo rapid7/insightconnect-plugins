@@ -5,7 +5,7 @@ name: att_cybersecurity_alienvault_otx
 title: AT&T Cybersecurity AlienVault Open Threat Exchange
 description: This plugin utilizes AT&T Cybersecurity (AlienVault OTX) to retrieve details about an indicator. Open Threat Exchange is the neighborhood watch of the global intelligence community
 version: 3.0.0
-supported_versions: ["OTX DirectConnect API v1 2022-03-29T14:00:00Z"]
+supported_versions: ["OTX DirectConnect API v1 2022-03-29"]
 vendor: rapid7
 support: community
 status: []
@@ -148,7 +148,7 @@ types:
       type: integer
       description: Sec
       required: false
-  _id:
+  id:
     $id:
       title: $ID
       type: string
@@ -276,9 +276,9 @@ types:
       description: Reputation value checked
       required: false
     _id:
-      title: ' Id'
-      type: _id
-      description: ' id'
+      title: ID
+      type: id
+      description: ID
       required: false
     last_seen:
       title: Last Seen
@@ -748,7 +748,7 @@ types:
       required: false
     industries:
       title: Industries
-      type: '[]object'
+      type: '[]string'
       description: Industries
       required: false
     is_author:
@@ -823,7 +823,7 @@ types:
       required: false
     targeted_countries:
       title: Targeted Countries
-      type: '[]object'
+      type: '[]string'
       description: Targeted countries
       required: false
     threat_hunter_scannable:
@@ -1208,7 +1208,7 @@ connection:
     type: string
     default: https://otx.alienvault.com
     required: true
-    example: https://otx.alienvault.com
+    example: "https://otx.alienvault.com"
 actions:
   get_indicator_details:
     title: Get Indicator Details
