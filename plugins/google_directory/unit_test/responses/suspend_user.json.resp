@@ -1,0 +1,42 @@
+{
+  "kind": "admin#directory#user",
+  "id": "1",
+  "etag": "1111111111",
+  "primaryEmail": "user@example.com",
+  "name": {
+    "givenName": "Example",
+    "familyName": "User",
+    "fullName": "Example User"
+  },
+  "isAdmin": false,
+  "isDelegatedAdmin": false,
+  "lastLoginTime": "2020-12-10T17:57:33.000Z",
+  "creationTime": "2020-12-10T17:56:50.000Z",
+  "agreedToTerms": true,
+  "suspended": true,
+  "suspensionReason": "ADMIN",
+  "archived": false,
+  "changePasswordAtNextLogin": false,
+  "ipWhitelisted": false,
+  "emails": [
+    {
+      "address": "user@example.com",
+      "type": "work"
+    },
+    {
+      "address": "user2@example.com",
+      "primary": true
+    },
+    {
+      "address": "user@example2.com"
+    }
+  ],
+  "nonEditableAliases": [
+    "user@example.com"
+  ],
+  "customerId": "1",
+  "orgUnitPath": "/",
+  "isMailboxSetup": true,
+  "includeInGlobalAddressList": true,
+  "recoveryEmail": ""
+}
