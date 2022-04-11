@@ -1,0 +1,96 @@
+{
+  "kind": "admin#directory#users",
+  "etag": "1111111111111",
+  "users": [
+    {
+      "kind": "admin#directory#user",
+      "id": "1",
+      "etag": "22222222222",
+      "primaryEmail": "user@example.com",
+      "name": {
+        "givenName": "Test",
+        "familyName": "User",
+        "fullName": "Test User"
+      },
+      "isAdmin": true,
+      "isDelegatedAdmin": false,
+      "lastLoginTime": "2022-03-22T14:00:13.000Z",
+      "creationTime": "2018-07-28T16:58:27.000Z",
+      "agreedToTerms": true,
+      "suspended": false,
+      "archived": false,
+      "changePasswordAtNextLogin": false,
+      "ipWhitelisted": false,
+      "emails": [
+        {
+          "address": "user@example.com",
+          "primary": true
+        },
+        {
+          "address": "user@example.com"
+        }
+      ],
+      "languages": [
+        {
+          "languageCode": "en",
+          "preference": "preferred"
+        }
+      ],
+      "nonEditableAliases": [
+        "user@example.com"
+      ],
+      "customerId": "1",
+      "orgUnitPath": "/",
+      "isMailboxSetup": true,
+      "isEnrolledIn2Sv": false,
+      "isEnforcedIn2Sv": false,
+      "includeInGlobalAddressList": true,
+      "recoveryEmail": "user@example.com"
+    },
+    {
+      "kind": "admin#directory#user",
+      "id": "1",
+      "etag": "3333333333",
+      "primaryEmail": "user2@example.com",
+      "name": {
+        "givenName": "Example",
+        "familyName": "User",
+        "fullName": "Example User"
+      },
+      "isAdmin": true,
+      "isDelegatedAdmin": false,
+      "lastLoginTime": "2022-03-22T14:00:13.000Z",
+      "creationTime": "2018-07-28T16:58:27.000Z",
+      "agreedToTerms": true,
+      "suspended": false,
+      "archived": false,
+      "changePasswordAtNextLogin": false,
+      "ipWhitelisted": false,
+      "emails": [
+        {
+          "address": "user2@example.com",
+          "primary": true
+        },
+        {
+          "address": "user2@example.com"
+        }
+      ],
+      "languages": [
+        {
+          "languageCode": "en",
+          "preference": "preferred"
+        }
+      ],
+      "nonEditableAliases": [
+        "user2@example.com"
+      ],
+      "customerId": "2",
+      "orgUnitPath": "/",
+      "isMailboxSetup": true,
+      "isEnrolledIn2Sv": false,
+      "isEnforcedIn2Sv": false,
+      "includeInGlobalAddressList": true,
+      "recoveryEmail": "user2@example.com"
+    }
+  ]
+}
