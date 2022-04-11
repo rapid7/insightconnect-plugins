@@ -2,13 +2,13 @@
 from setuptools import setup, find_packages
 
 
-setup(name='google_search-rapid7-plugin',
-      version='1.0.1',
-      description='Search the worlds information, including webpages, images, videos and more using Google',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="google_search-rapid7-plugin",
+      version="2.0.0",
+      description="Search the worlds information, including webpages, images, videos and more using Google",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
-      install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
+      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_google_search']
       )
