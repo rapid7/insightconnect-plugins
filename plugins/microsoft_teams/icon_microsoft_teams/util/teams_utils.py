@@ -1,17 +1,19 @@
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 import requests
 import re
 from logging import Logger
-import komand.connection
+import insightconnect_plugin_runtime.connection
 
 
-def get_teams_from_microsoft(logger: Logger, connection: komand.connection, team_name=None, explicit=True) -> list:
+def get_teams_from_microsoft(
+    logger: Logger, connection: insightconnect_plugin_runtime.connection, team_name=None, explicit=True
+) -> list:
     """
     This will get teams from the Graph API. If a team_name is provided it will only return that team, or throw
     an error if that team is not found
 
     :param logger: object (logging.logger)
-    :param connection: object (komand.connection)
+    :param connection: object (insightconnect_plugin_runtime.connection)
     :param team_name: string
     :param explicit: boolean
     :return: array of teams
@@ -30,7 +32,7 @@ def get_teams_from_microsoft(logger: Logger, connection: komand.connection, team
     if explicit:
         teams_url = f"https://graph.microsoft.com/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team') and displayName eq '{team_name}'"
     else:
-        teams_url = f"https://graph.microsoft.com/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team')"
+        teams_url = "https://graph.microsoft.com/beta/groups?$filter=resourceProvisioningOptions/Any(x:x eq 'Team')"
     headers = connection.get_headers()
     teams_result = requests.get(teams_url, headers=headers)
     try:
@@ -61,17 +63,20 @@ def get_teams_from_microsoft(logger: Logger, connection: komand.connection, team
             logger.info(f"Checking team: {name}")
             if compiled_team_name.search(name):
                 return [team]
-        else:
-            raise PluginException(
-                cause=f"Team {team_name} was not found.",
-                assistance=f"Please verify {team_name} is a valid team name",
-            )
+        raise PluginException(
+            cause=f"Team {team_name} was not found.",
+            assistance=f"Please verify {team_name} is a valid team name",
+        )
 
     return teams
 
 
 def get_channels_from_microsoft(
-    logger: Logger, connection: komand.connection, team_id: str, channel_name=None, explicit=False
+    logger: Logger,
+    connection: insightconnect_plugin_runtime.connection,
+    team_id: str,
+    channel_name=None,
+    explicit=False,
 ) -> list:
     """
     This will get all channels available to a team from the Graph API
@@ -80,7 +85,7 @@ def get_channels_from_microsoft(
 
 
     :param logger: object (logging.logger)
-    :param connection: (komand.connection)
+    :param connection: (insightconnect_plugin_runtime.connection)
     :param team_id: String
     :param channel_name: String
     :param explicit: boolean
@@ -122,38 +127,42 @@ def get_channels_from_microsoft(
             logger.info(f"Checking channel: {name}")
             if compiled_channel_name.search(name):
                 return [channel]
-        else:
-            raise PluginException(
-                cause=f"Channel {channel_name} was not found.",
-                assistance=f"Please verify {channel_name} is a valid channel for the team " f"with id: {team_id}",
-            )
+        raise PluginException(
+            cause=f"Channel {channel_name} was not found.",
+            assistance=f"Please verify {channel_name} is a valid channel for the team with id: {team_id}",
+        )
 
     return channels
 
 
 def send_message(
     logger: Logger,
-    connection: komand.connection,
+    connection: insightconnect_plugin_runtime.connection,
     message: str,
-    team_id: str,
-    channel_id: str,
+    team_id: str = None,
+    channel_id: str = None,
     thread_id: str = None,
+    chat_id: str = None,
 ) -> dict:
     """
     Send a message to Teams
 
     :param logger: object (logging.logger)
-    :param connection: object (komand.connection)
+    :param connection: object (insightconnect_plugin_runtime.connection)
     :param message: String
     :param team_id: String
     :param channel_id: String
     :param thread_id: string
+    :param chat_id: string
     :return: dict
     """
-    send_message_url = f"https://graph.microsoft.com/beta/teams/{team_id}/channels/{channel_id}/messages"
 
-    if thread_id:
-        send_message_url = send_message_url + f"/{thread_id}/replies"
+    if chat_id:
+        send_message_url = f"https://graph.microsoft.com/beta/chats/{chat_id}/messages"
+    else:
+        send_message_url = f"https://graph.microsoft.com/beta/teams/{team_id}/channels/{channel_id}/messages"
+        if thread_id:
+            send_message_url = f"{send_message_url}/{thread_id}/replies"
 
     logger.info(f"Sending message to: {send_message_url}")
     headers = connection.get_headers()
@@ -172,7 +181,7 @@ def send_message(
 
 def send_html_message(
     logger: Logger,
-    connection: komand.connection,
+    connection: insightconnect_plugin_runtime.connection,
     message: str,
     team_id: str,
     channel_id: str,
@@ -182,7 +191,7 @@ def send_html_message(
     Send HTML content as a message to Teams
 
     :param logger: object (logging.logger)
-    :param connection: object (komand.connection)
+    :param connection: object (insightconnect_plugin_runtime.connection)
     :param message: String (HTML)
     :param team_id: String
     :param channel_id: String
@@ -210,13 +219,17 @@ def send_html_message(
 
 
 def create_channel(
-    logger: Logger, connection: komand.connection, team_id: str, channel_name: str, description: str
+    logger: Logger,
+    connection: insightconnect_plugin_runtime.connection,
+    team_id: str,
+    channel_name: str,
+    description: str,
 ) -> bool:
     """
     Creates a channel for a given team
 
     :param logger: (logging.logger)
-    :param connection: Object (komand.connection)
+    :param connection: Object (insightconnect_plugin_runtime.connection)
     :param team_id: String
     :param channel_name: String
     :param description: String
@@ -237,17 +250,19 @@ def create_channel(
         raise PluginException(cause=f"Create channel {channel_name} failed.", assistance=result.text) from e
 
     if not result.status_code == 201:
-        raise PluginException(cause=f"Create channel returned an unexpected result.", assistance=result.text)
+        raise PluginException(cause="Create channel returned an unexpected result.", assistance=result.text)
 
     return True
 
 
-def delete_channel(logger: Logger, connection: komand.connection, team_id: str, channel_id: str) -> bool:
+def delete_channel(
+    logger: Logger, connection: insightconnect_plugin_runtime.connection, team_id: str, channel_id: str
+) -> bool:
     """
     Deletes a channel for a given team
 
     :param logger: (logging.logger)
-    :param connection: Object (komand.connection)
+    :param connection: Object (insightconnect_plugin_runtime.connection)
     :param team_id: String
     :param channel_id: String
     :return: boolean
@@ -268,6 +283,6 @@ def delete_channel(logger: Logger, connection: komand.connection, team_id: str, 
         raise PluginException(cause=f"Delete channel {channel_id} failed.", assistance=result.text) from e
 
     if not result.status_code == 204:
-        raise PluginException(cause=f"Delete channel returned an unexpected result.", assistance=result.text)
+        raise PluginException(cause="Delete channel returned an unexpected result.", assistance=result.text)
 
     return True

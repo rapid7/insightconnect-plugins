@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AddGroupOwnerInput, AddGroupOwnerOutput, Input, Output, Component
 
 # Custom imports below
@@ -7,10 +7,10 @@ from icon_microsoft_teams.util.azure_ad_utils import (
     get_group_id_from_name,
     add_user_to_owners,
 )
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class AddGroupOwner(komand.Action):
+class AddGroupOwner(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_group_owner",
