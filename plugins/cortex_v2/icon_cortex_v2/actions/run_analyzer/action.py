@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import RunAnalyzerInput, RunAnalyzerOutput
+from .schema import RunAnalyzerInput, RunAnalyzerOutput, Input, Output
 
 # Custom imports below
 from icon_cortex_v2.util.convert import job_to_dict
@@ -21,10 +21,10 @@ class RunAnalyzer(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         api = self.connection.api
 
-        analyzer_name = params.get("analyzer_id")
-        observable = params.get("observable")
-        data_type = params.get("attributes").get("dataType")
-        tlp_num = params.get("attributes").get("tlp")
+        analyzer_name = params.get(Input.ANALYZER_ID)
+        observable = params.get(Input.OBSERVABLE)
+        data_type = params.get(Input.ATTRIBUTES).get("dataType")
+        tlp_num = params.get(Input.ATTRIBUTES).get("tlp")
 
         try:
             job = api.analyzers.run_by_name(
@@ -46,4 +46,4 @@ class RunAnalyzer(insightconnect_plugin_runtime.Action):
                 assistance="The selected analyzer may not exist in Cortex!",
             )
 
-        return {"job": job}
+        return {Output.JOB: job}

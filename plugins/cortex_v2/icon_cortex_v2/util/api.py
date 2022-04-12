@@ -1,4 +1,3 @@
-import insightconnect_plugin_runtime.exceptions
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 from json.decoder import JSONDecodeError
 
@@ -14,17 +13,19 @@ class API:
         self.proxies = proxies
         self.session = requests.Session()
 
-    def send_request(self, method: str, path: str, params={}, **kwargs):
+    def send_request(self, method: str, path: str, params={}):
+        method = method.upper()
         headers = {"Authorization": f"Bearer {self.api_key}"}
+        if method in ["POST", "PATCH"]:
+            headers["Content-Type"] = "application/json"
         try:
             response = self.session.request(
-                method.upper(),
+                method,
                 f"{self.base_url}/{path}",
                 headers=headers,
                 params=params,
                 proxies=self.proxies,
                 verify=self.verify_cert,
-                **kwargs
             )
 
             if response.status_code == 401:
@@ -45,7 +46,7 @@ class API:
 
             return response
         except requests.exceptions.ConnectionError as e:
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
+            raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE, data=e)
         except JSONDecodeError as e:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
 
@@ -53,17 +54,21 @@ class API:
         # List all available analyzers
         return self.send_request("GET", "analyzer").json()
 
-    def find_all(self, query, **kwargs):
-        url = f"{self._base_url}/analyzer/_search"
-        params = dict((k, kwargs.get(k, None)) for k in ("sort", "range"))
-        return self.send_request("POST", url, {"query": query or {}}, params).json()
+    def find_all(self, query, _range=0, _sort=""):
+        path = "_search"
+        query = {"query": query if query else {}}
+        # Simplified of https://github.com/TheHive-Project/Cortex4py/blob/2.1.0/cortex4py/controllers/abstract.py#L16
+        params = {"range": _range if _range else None, "sort": _sort if _sort else None}
+        return self.send_request("POST", path, query, params).json()
 
-    def get_jobs_by_id(self, org_id):
-        url = f"{self._base_url}/{org_id}"
-        return self.send_request("GET", url).json()
+    def get_job_by_id(self, job_id):
+        return self.send_request("GET", f"job/{job_id}").json()
 
     def delete_job_by_id(self, job_id) -> bool:
-        self.send_request("DELETE", f"{self._base_url}/{job_id}")
+        self.send_request("DELETE", f"job/{job_id}")
         # Return true if request did not raise exception
         # https://github.com/TheHive-Project/Cortex4py/blob/2.1.0/cortex4py/api.py#L140
         return True
+
+    def get_job_report(self, job_id):
+        return self.send_request("GET", f"job/{job_id}/report").json()

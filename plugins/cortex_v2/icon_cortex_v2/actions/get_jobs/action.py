@@ -1,11 +1,8 @@
 import insightconnect_plugin_runtime
-from .schema import GetJobsInput, GetJobsOutput
+from .schema import GetJobsInput, GetJobsOutput, Input, Output
 
 # Custom imports below
-from cortex4py.query import And, Eq
-from icon_cortex_v2.util.convert import jobs_to_dicts
-from cortex4py.exceptions import ServiceUnavailableError, AuthenticationError
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class GetJobs(insightconnect_plugin_runtime.Action):
@@ -21,35 +18,34 @@ class GetJobs(insightconnect_plugin_runtime.Action):
         api = self.connection.api
         query_params = []
 
-        start = params.get("start", 0)
-        limit = params.get("limit", 10)
-        data_type_filter = params.get("dataTypeFilter")
-        data_filter = params.get("dataFilter")
-        analyzer_filter = params.get("analyzerFilter")
+        start = params.get(Input.START, 0)
+        limit = params.get(Input.LIMIT, 10)
+        data_type_filter = params.get(Input.DATATYPEFILTER)
+        data_filter = params.get(Input.DATAFILTER)
+        analyzer_filter = params.get(Input.ANALYZERFILTER)
 
         if data_type_filter:
-            query_params.append(Eq("dataType", data_type_filter))
+            query_params.append(self._eq("dataType", data_type_filter))
         if data_filter:
-            query_params.append(Eq("data", data_filter))
+            query_params.append(self._eq("data", data_filter))
         if analyzer_filter:
-            query_params.append(Eq("analyzerId", analyzer_filter))
+            query_params.append(self._eq("analyzerId", analyzer_filter))
 
-        query = And(*query_params)
-        self.logger.info("Query: {}".format(query))
+        # Based on https://github.com/TheHive-Project/Cortex4py/blob/2.1.0/cortex4py/query.py#L22
+        query = {"_and": query_params}
+        self.logger.info(f"Query: {query}")
 
-        range_ = "{}-{}".format(start, start + limit)
-        self.logger.info("Range: {}".format(range_))
+        range_ = f"{start}-{start + limit}"
+        self.logger.info(f"Range: {range_}")
 
         try:
-            jobs = api.jobs.find_all(query, range=range_, sort="-createdAt")
-            jobs = jobs_to_dicts(jobs, api)
-        except AuthenticationError as e:
-            self.logger.error(e)
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
-        except ServiceUnavailableError as e:
-            self.logger.error(e)
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
+            jobs = api.find_all(query, range=range_, sort="-createdAt")
         except Exception as e:
-            raise ConnectionTestException(cause="Failed to obtain the list of jobs.", assistance="{}.".format(e))
+            raise PluginException(cause="Failed to obtain the list of jobs.", assistance=f"{e}.")
 
-        return {"list": jobs}
+        return {Output.LIST: jobs}
+
+    @staticmethod
+    def _eq(field, value):
+        # Based on https://github.com/TheHive-Project/Cortex4py/blob/2.1.0/cortex4py/query.py#L2
+        return {'_field': field, '_value': value}

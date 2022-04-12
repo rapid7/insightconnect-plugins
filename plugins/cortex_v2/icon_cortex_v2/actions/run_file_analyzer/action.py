@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import RunFileAnalyzerInput, RunFileAnalyzerOutput
+from .schema import RunFileAnalyzerInput, RunFileAnalyzerOutput, Input, Output
 
 # Custom imports below
 import os
@@ -25,10 +25,10 @@ class RunFileAnalyzer(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         api = self.connection.api
 
-        analyzer_name = params.get("analyzer_id")
-        file_content = base64.b64decode(params.get("file"))
-        tlp_num = params.get("attributes").get("tlp")
-        filename = params.get("attributes").get("filename") or "Not_Available"
+        analyzer_name = params.get(Input.ANALYZER_ID)
+        file_content = base64.b64decode(params.get(Input.FILE))
+        tlp_num = params.get(Input.ATTRIBUTES).get("tlp")
+        filename = params.get(Input.ATTRIBUTES).get("filename") or "Not_Available"
 
         try:
             temp_dir = tempfile.mkdtemp()
@@ -51,6 +51,6 @@ class RunFileAnalyzer(insightconnect_plugin_runtime.Action):
             self.logger.error(e)
             raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
         except CortexException as e:
-            raise ConnectionTestException(cause="Failed to run analyzer.", assistance="{}.".format(e))
+            raise ConnectionTestException(cause="Failed to run analyzer.", assistance=f"{e}.")
 
-        return {"job": job}
+        return {Output.JOB: job}

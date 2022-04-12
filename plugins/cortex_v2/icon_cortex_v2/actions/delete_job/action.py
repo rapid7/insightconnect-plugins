@@ -1,4 +1,5 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import DeleteJobInput, DeleteJobOutput, Input, Output
 
 # Custom imports below
@@ -16,4 +17,7 @@ class DeleteJob(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         job_id = params.get(Input.JOB_ID)
         self.logger.info(f"Removing job {job_id}")
-        return {Output.STATUS: self.connection.api.send_request("DELETE", f"/job/{job_id}")}
+        try:
+            return {Output.STATUS, self.connection.api.delete_job_by_id(job_id)}
+        except Exception as e:
+            raise PluginException(f"Failed to delete job.", assistance=f"{e}")
