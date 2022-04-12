@@ -15,15 +15,16 @@ from icon_microsoft_log_analytics.actions.send_log_data.schema import Input, Out
 from icon_microsoft_log_analytics.util.tools import Message
 from unit_test.mock import (
     mock_request_200,
+    mock_request_400,
     mock_request_404,
     mock_request_429,
     mock_request_500,
     mock_request_503,
+    mock_request_505,
     mocked_request,
     STUB_WORKSPACE_ID,
     STUB_SHARED_KEY,
     STUB_CONNECTION,
-    mock_request_400,
 )
 
 STUB_RFC1123_DATE = "Thu, 01 Dec 1994 16:00:00 GMT"
@@ -32,7 +33,7 @@ STUB_JSON_BODY = [{"key1": "key1"}]
 
 
 class TestSendLogData(TestCase):
-    @mock.patch("icon_microsoft_log_analytics.util.api.AzureLogAnalyticsClientAPI._connection", return_value=None)
+    @mock.patch("icon_microsoft_log_analytics.util.api.AzureLogAnalyticsClientAPI._connection")
     def setUp(self, mock_connection):
         self.connection = Connection()
         self.connection.logger = logging.getLogger("connection logger")
@@ -78,15 +79,17 @@ class TestSendLogData(TestCase):
             (mock_request_400, Message.BAD_REQUEST_MESSAGE),
             (mock_request_404, PluginException.causes[PluginException.Preset.NOT_FOUND]),
             (mock_request_429, PluginException.causes[PluginException.Preset.RATE_LIMIT]),
-            (mock_request_500, PluginException.causes[PluginException.Preset.UNKNOWN]),
+            (mock_request_500, PluginException.causes[PluginException.Preset.SERVER_ERROR]),
             (mock_request_503, PluginException.causes[PluginException.Preset.RATE_LIMIT]),
+            (mock_request_505, PluginException.causes[PluginException.Preset.UNKNOWN]),
         ],
     )
     @mock.patch("icon_microsoft_log_analytics.util.tools.backoff_function", return_value=0)
-    def test_send_log_data_exception(self, mock_request, exception, mock_backoff_function):
+    @mock.patch("icon_microsoft_log_analytics.util.api.AzureLogAnalyticsClientAPI._connection")
+    def test_send_log_data_exception(self, mock_request, exception, mock_backoff_function, mock_connection):
         mocked_request(mock_request)
         with self.assertRaises(PluginException) as context:
-            self.action.run()
+            self.action.run(self.payload)
         self.assertEqual(
             context.exception.cause,
             exception,
