@@ -40,11 +40,17 @@ class SubmitFileFromUrl(insightconnect_plugin_runtime.Action):
             verdict = self.connection.client.get_verdicts(analysed_hash=hashlib.sha256(file_from_url).hexdigest())
             if verdict == UNKNOWN_VERDICT:
                 try:
-                    o = xmltodict.parse(self.connection.client.submit_file_from_url(url))
-                    out = dict(o["wildfire"]["upload-file-info"])
+                    response = xmltodict.parse(self.connection.client.submit_file_from_url(url))
+                    out = dict(response["wildfire"]["upload-file-info"])
                 except PluginException:
                     self.logger.info("Error occurred")
                     raise
+                except KeyError:
+                    self.logger.warning(f"The response contain unexpected format. Response {response}")
+                    raise PluginException(
+                        cause="The response did not contain a correct format.",
+                        assistance="Check the logs and if the issue persists please contact support.",
+                    )
 
                 if not out.get("filename"):
                     out["filename"] = "Unknown"

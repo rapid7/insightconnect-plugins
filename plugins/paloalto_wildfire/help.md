@@ -34,7 +34,7 @@ Example input:
 
 ```
 {
-   "api_key":{
+   "api_key": {
       "secretKey": "5df698b6778e586b704460731b921e52"
    },
    "host": "wildfire.paloaltonetworks.com",
