@@ -1,6 +1,7 @@
 from pyldfire import WildFire
 
 UNKNOWN_VERDICT_CODE = -102
+# pylint: disable=protected-access
 UNKNOWN_VERDICT = WildFire._verdicts.get(UNKNOWN_VERDICT_CODE)
 SUPPORTED_FILES = (
     ".apk",
