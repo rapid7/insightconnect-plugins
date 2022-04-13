@@ -11,7 +11,6 @@ class API:
         self.api_key = api_key
         self.verify_cert = verify_cert
         self.proxies = proxies
-        self.session = requests.Session()
 
     def send_request(self, method: str, path: str, params={}):
         method = method.upper()
@@ -19,7 +18,7 @@ class API:
         if method in ["POST", "PATCH"]:
             headers["Content-Type"] = "application/json"
         try:
-            response = self.session.request(
+            response = requests.request(
                 method,
                 f"{self.base_url}/{path}",
                 headers=headers,
@@ -50,9 +49,8 @@ class API:
         except JSONDecodeError as e:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
 
-    def test_connection(self):
-        # List all available analyzers
-        return self.send_request("GET", "analyzer").json()
+    def status(self):
+        return self.send_request("GET", "status").json()
 
     def find_all(self, query, _range=0, _sort=""):
         path = "_search"

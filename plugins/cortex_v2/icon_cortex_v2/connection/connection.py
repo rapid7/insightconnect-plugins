@@ -23,13 +23,14 @@ class Connection(insightconnect_plugin_runtime.Connection):
             proxy = params.get("proxy")
             self.logger.info(f"Proxy specified: {proxy}")
 
-        self.logger.info("Connect: Connecting..")
+        self.logger.info("Connect: Connecting...")
         self.API = API(url, api_key, verify_cert=verify, proxies=proxy)
 
     def test(self):
         try:
-            self.API.test_connection()
+            response = self.API.status()
+            # Expected = {"versions":{"Cortex":"1.1.4","Play":"2.5.9"},"config":{"authType":"none","capabilities":[]}}
+            return "Cortex" in response.get("versions", {})
         except PluginException as e:
             self.logger.error(e)
             raise ConnectionTestException(e)
-        return {}

@@ -2,7 +2,6 @@ import insightconnect_plugin_runtime
 from .schema import BulkAnalyzeInput, BulkAnalyzeOutput, Input, Output, Component
 
 # Custom imports below
-from icon_cortex_v2.util.convert import job_to_dict
 
 
 class BulkAnalyze(insightconnect_plugin_runtime.Action):
