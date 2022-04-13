@@ -16,7 +16,7 @@ The agent is used by [Rapid7 InsightIDR](https://www.rapid7.com/products/insight
 
 # Supported Product Versions
 
-* Rapid7 Insight Agent
+* Rapid7 Insight Agent 2022-04-06
 
 # Documentation
 

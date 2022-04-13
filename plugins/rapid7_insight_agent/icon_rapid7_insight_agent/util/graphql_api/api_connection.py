@@ -99,7 +99,7 @@ class ApiConnection:
         is_online = bool(agent_status == "ONLINE")
         is_quarantine_requested = bool(quarantine_state == "QUARANTINE_IN_PROGRESS")
         is_unquarantine_requested = bool(quarantine_state == "UNQUARANTINE_IN_PROGRESS")
-        is_is_quarantined = bool(quarantine_state in ('QUARANTINED', 'UNQUARANTINE_IN_PROGRESS'))
+        is_is_quarantined = bool(quarantine_state in ("QUARANTINED", "UNQUARANTINE_IN_PROGRESS"))
 
         return {
             "is_currently_quarantined": is_is_quarantined,
