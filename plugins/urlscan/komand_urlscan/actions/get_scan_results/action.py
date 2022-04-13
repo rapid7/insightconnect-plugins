@@ -40,7 +40,7 @@ class GetScanResults(insightconnect_plugin_runtime.Action):
                 raise PluginException(
                     cause="The requested scan results were not found.",
                     assistance="If you are running this action directly after a new scan, you may need to add a delay "
-                               "to ensure the scan results "
+                    "to ensure the scan results "
                     "are available when they are requested (typically ~5-10 seconds is sufficient.",
                 )
 

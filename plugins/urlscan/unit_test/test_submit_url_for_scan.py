@@ -11,7 +11,6 @@ from unit_test.util import Util
 from komand_urlscan.actions.submit_url_for_scan import SubmitUrlForScan
 
 
-
 @mock.patch("requests.post", side_effect=Util.mocked_requests_post)
 class TestSubmitUrlForScan(TestCase):
     @classmethod

@@ -51,11 +51,15 @@ class SubmitUrlForScan(insightconnect_plugin_runtime.Action):
             and "scan prevented" in json_response.get("message", "").lower()
             and any(key_word in description for key_word in ERROR_KEY_WORDS)
         ):
-            self.logger.error(f'Description: {json_response.get("description")}. Message: {json_response.get("message")}')
+            self.logger.error(
+                f'Description: {json_response.get("description")}. Message: {json_response.get("message")}'
+            )
             return {Output.WAS_SCAN_SKIPPED: True, Output.SCAN_ID: ""}
 
         if ("message" in json_response) and ("description" in json_response):
-            raise PluginException(cause=f"{json_response.get('message')}.", assistance=f"{json_response.get('description')}.")
+            raise PluginException(
+                cause=f"{json_response.get('message')}.", assistance=f"{json_response.get('description')}."
+            )
 
         raise PluginException(
             cause="Received an unexpected response from the Urlscan API.",
