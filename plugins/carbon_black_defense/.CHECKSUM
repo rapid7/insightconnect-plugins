@@ -1,14 +1,19 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"spec": "3b3a5c8cd5848e649faeb89c3fd6bbbf",
 =======
 	"spec": "ad5178558cad9f2e31d786f624571825",
 >>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
+=======
+	"spec": "cd240b1dfdb207055099292109f87a5b",
+>>>>>>> 64630a6ee ([SOAR-8726] Carbon Black Defense Input Description Update (#1163))
 	"manifest": "1c7df23d4c4bde8fe05f154ffd898647",
 	"setup": "841ea8255f9edc134f6bd8f55eb29af1",
 	"schemas": [
 		{
 			"identifier": "find_event/schema.py",
+<<<<<<< HEAD
 <<<<<<< HEAD
 			"hash": "f881beab29f67b147d689c97333cb707"
 		},
@@ -22,6 +27,13 @@
 			"identifier": "get_details_for_specific_event/schema.py",
 			"hash": "6f25dd5db7f2bfd1a105bea79bbf23f9"
 >>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
+=======
+			"hash": "32697f4387a250861dd62ad1842e758f"
+		},
+		{
+			"identifier": "get_details_for_specific_event/schema.py",
+			"hash": "4ef5370494cae733df1332efa63c3cad"
+>>>>>>> 64630a6ee ([SOAR-8726] Carbon Black Defense Input Description Update (#1163))
 		},
 		{
 			"identifier": "connection/schema.py",

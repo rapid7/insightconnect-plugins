@@ -86,10 +86,14 @@ class FindEventInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Time Range",
 <<<<<<< HEAD
+<<<<<<< HEAD
       "description": "Time frame to limit your search to. Integer used for amount of the following: s=second(s), m=minute(s), h=hour(s), d=day(s), w=week(s), or y=year(s). Example: -2d",
 =======
       "description": "Time frame to limit your search to. Integer used for amount of of the following: s=second(s), m=minute(s), h=hour(s), d=day(s), w=week(s), or y=year(s)",
 >>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
+=======
+      "description": "Time frame to limit your search to. Integer used for amount of the following: s=second(s), m=minute(s), h=hour(s), d=day(s), w=week(s), or y=year(s). Example: -2d",
+>>>>>>> 64630a6ee ([SOAR-8726] Carbon Black Defense Input Description Update (#1163))
       "order": 6
     }
   }
