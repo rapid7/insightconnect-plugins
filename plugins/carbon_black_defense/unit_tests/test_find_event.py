@@ -42,6 +42,7 @@ class TestFindEvent(TestCase):
             }
         )
         expected = {
+<<<<<<< HEAD
             "success": True,
             "results": [
                 {
@@ -84,6 +85,18 @@ class TestFindEvent(TestCase):
             "num_found": 100,
             "contacted": 48,
             "completed": 48,
+=======
+            "eventinfo": {
+                "results": [],
+                "num_found": 0,
+                "num_available": 0,
+                "approximate_unaggregated": 0,
+                "num_aggregated": 0,
+                "contacted": 5,
+                "completed": 5,
+            },
+            "success": True,
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         }
         self.assertEqual(actual, expected)
 
@@ -95,6 +108,7 @@ class TestFindEvent(TestCase):
                 FindEventSchemaInput.PROCESS_NAME: self.params.get("process_name"),
             }
         )
+<<<<<<< HEAD
         print(actual)
         expected = {
             "success": True,
@@ -139,6 +153,19 @@ class TestFindEvent(TestCase):
             "num_found": 100,
             "contacted": 48,
             "completed": 48,
+=======
+        expected = {
+            "eventinfo": {
+                "results": [],
+                "num_found": 0,
+                "num_available": 0,
+                "approximate_unaggregated": 0,
+                "num_aggregated": 0,
+                "contacted": 5,
+                "completed": 5,
+            },
+            "success": True,
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         }
         self.assertEqual(actual, expected)
 

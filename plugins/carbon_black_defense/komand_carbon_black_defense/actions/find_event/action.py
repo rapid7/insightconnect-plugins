@@ -53,13 +53,18 @@ class FindEvent(insightconnect_plugin_runtime.Action):
 
         self.logger.info(f"Got enriched event job ID: {id_}")
         if id_ is None:
+<<<<<<< HEAD
             return {Output.RESULTS: None, Output.SUCCESS: False}
+=======
+            return {Output.EVENTINFO: None, Output.SUCCESS: False}
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         self.get_enriched_event_status(id_)
         response = self.connection.retrieve_results_for_enriched_event(job_id=id_)
         data = insightconnect_plugin_runtime.helper.clean(response)
 
         return {
             Output.SUCCESS: True,
+<<<<<<< HEAD
             Output.RESULTS: data.get("results"),
             Output.APPROXIMATE_UNAGGREGATED: data.get("approximate_unaggregated"),
             Output.NUM_AGGREGATED: data.get("num_aggregated"),
@@ -67,4 +72,7 @@ class FindEvent(insightconnect_plugin_runtime.Action):
             Output.NUM_FOUND: data.get("num_found"),
             Output.CONTACTED: data.get("contacted"),
             Output.COMPLETED: data.get("completed"),
+=======
+            Output.EVENTINFO: data,
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         }

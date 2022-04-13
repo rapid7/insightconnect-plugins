@@ -12,6 +12,7 @@ class Input:
     
 
 class Output:
+<<<<<<< HEAD
     APPROXIMATE_UNAGGREGATED = "approximate_unaggregated"
     COMPLETED = "completed"
     CONTACTED = "contacted"
@@ -19,6 +20,9 @@ class Output:
     NUM_AVAILABLE = "num_available"
     NUM_FOUND = "num_found"
     RESULTS = "results"
+=======
+    EVENTINFO = "eventinfo"
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
     SUCCESS = "success"
     
 
@@ -51,6 +55,7 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+<<<<<<< HEAD
     "approximate_unaggregated": {
       "type": "integer",
       "title": "Approximate Unaggregated",
@@ -85,6 +90,12 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
       "type": "integer",
       "title": "Num Found",
       "description": "Number of results found",
+=======
+    "eventinfo": {
+      "$ref": "#/definitions/event_info",
+      "title": "Event Info",
+      "description": "Detailed information on the event",
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
       "order": 2
     },
     "results": {
@@ -108,6 +119,7 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "event_info",
       "properties": {
+<<<<<<< HEAD
         "alert_category": {
           "type": "array",
           "title": "Alert Category",
@@ -375,11 +387,35 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "type": "integer",
           "title": "Device Group ID",
           "description": "ID assigned to the device_group by Carbon Black Cloud",
+=======
+        "backend_timestamp": {
+          "type": "string",
+          "title": "Backend Timestamp",
+          "displayType": "date",
+          "description": "Backend timestamp",
+          "format": "date-time",
+          "order": 55
+        },
+        "device_external_ip": {
+          "type": "array",
+          "title": "Device External IP",
+          "description": "Device external IP",
+          "items": {
+            "type": "string"
+          },
+          "order": 37
+        },
+        "device_group_id": {
+          "type": "integer",
+          "title": "Device Group ID",
+          "description": "Device group ID",
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
           "order": 8
         },
         "device_id": {
           "type": "integer",
           "title": "Device ID",
+<<<<<<< HEAD
           "description": "ID assigned to the endpoint by Carbon Black Cloud; unique across all Carbon Black Cloud environments",
           "order": 48
         },
@@ -406,60 +442,124 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "title": "Device Name",
           "description": "Hostname of the endpoint recorded by the sensor when last initialized",
           "order": 55
+=======
+          "description": "Device ID",
+          "order": 47
+        },
+        "device_internal_ip": {
+          "type": "string",
+          "title": "Device Internal IP",
+          "description": "Device internal IP",
+          "order": 41
+        },
+        "device_location": {
+          "type": "string",
+          "title": "Device Location",
+          "description": "Device location",
+          "order": 50
+        },
+        "device_name": {
+          "type": "array",
+          "title": "Device Name",
+          "description": "Device name",
+          "items": {
+            "type": "string"
+          },
+          "order": 54
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "device_os": {
           "type": "string",
           "title": "Device OS",
+<<<<<<< HEAD
           "description": "The operating system of the endpoint",
           "order": 46
+=======
+          "description": "Device OS",
+          "order": 45
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "device_os_version": {
           "type": "string",
           "title": "Device OS Version",
+<<<<<<< HEAD
           "description": "The operating system and version of the endpoint",
           "order": 53
+=======
+          "description": "Device OS version",
+          "order": 52
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "device_policy": {
           "type": "string",
           "title": "Device Policy",
+<<<<<<< HEAD
           "description": "Policy applied to the endpoint in the Carbon Black Cloud",
           "order": 58
+=======
+          "description": "Device policy",
+          "order": 57
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "device_policy_id": {
           "type": "integer",
           "title": "Device Policy ID",
+<<<<<<< HEAD
           "description": "ID assigned to the device_policy by the Carbon Black Cloud",
           "order": 47
+=======
+          "description": "Device policy ID",
+          "order": 46
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "device_target_priority": {
           "type": "string",
           "title": "Device Target Priority",
+<<<<<<< HEAD
           "description": "The 'Target value' configured in the policy assigned to the sensor",
+=======
+          "description": "Device target priority",
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
           "order": 3
         },
         "device_timestamp": {
           "type": "string",
           "title": "Device Timestamp",
           "displayType": "date",
+<<<<<<< HEAD
           "description": "Sensor-reported ISO 8601 timestamp of the batch of events in which this record was submitted to Carbon Black Cloud",
+=======
+          "description": "Device timestamp",
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
           "format": "date-time",
           "order": 15
         },
         "document_guid": {
           "type": "string",
           "title": "Document GUID",
+<<<<<<< HEAD
           "description": "Unique process identifier assigned to document",
           "order": 24
+=======
+          "description": "Document GUID",
+          "order": 23
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "enriched": {
           "type": "boolean",
           "title": "Enriched",
+<<<<<<< HEAD
           "description": "True if the result includes data from the Endpoint Standard product",
           "order": 27
+=======
+          "description": "Enriched",
+          "order": 26
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "enriched_event_type": {
           "type": "string",
           "title": "Enriched Event Type",
+<<<<<<< HEAD
           "description": "Event type(s) as determined by the Carbon Black Cloud",
           "order": 26
         },
@@ -492,46 +592,97 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "title": "Event Network Inbound",
           "description": "True if the network connection was inbound",
           "order": 49
+=======
+          "description": "Enriched event type",
+          "order": 25
+        },
+        "event_description": {
+          "type": "string",
+          "title": "Event Description",
+          "description": "Event description",
+          "order": 19
+        },
+        "event_id": {
+          "type": "string",
+          "title": "Event ID",
+          "description": "Event ID",
+          "order": 21
+        },
+        "event_network_inbound": {
+          "type": "boolean",
+          "title": "Event Network Inbound",
+          "description": "Event network inbound",
+          "order": 48
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "event_network_local_ipv4": {
           "type": "string",
           "title": "Event Network Local IPv4",
+<<<<<<< HEAD
           "description": "IPv4 address of the local side of the network connection",
           "order": 43
+=======
+          "description": "Event network local IPv4",
+          "order": 42
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "event_network_location": {
           "type": "string",
           "title": "Event Network Location",
+<<<<<<< HEAD
           "description": "Geolocation of the remote side of the network connection",
+=======
+          "description": "Event network location",
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
           "order": 1
         },
         "event_network_protocol": {
           "type": "string",
           "title": "Event Network Protocol",
+<<<<<<< HEAD
           "description": "Network protocol of the network connection",
           "order": 30
+=======
+          "description": "Event network protocol",
+          "order": 29
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "event_network_remote_ipv4": {
           "type": "string",
           "title": "Event Network Remote IPv4",
+<<<<<<< HEAD
           "description": "IPv4 address of the remote side of the network connection",
           "order": 33
+=======
+          "description": "Event network remote IPv4",
+          "order": 32
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "event_network_remote_port": {
           "type": "integer",
           "title": "Event Network Remote Port",
+<<<<<<< HEAD
           "description": "TCP or UDP port used by the remote side of the network connection",
+=======
+          "description": "Event network remote port",
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
           "order": 7
         },
         "event_report_code": {
           "type": "string",
           "title": "Event Report Code",
+<<<<<<< HEAD
           "description": "Report code of the detected threat",
           "order": 40
+=======
+          "description": "Event report code",
+          "order": 39
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "event_threat_score": {
           "type": "array",
           "title": "Event Threat Score",
+<<<<<<< HEAD
           "description": "Score(s) assigned by Carbon Black Cloud for the detected threat (Returns values 0-8)",
           "items": {
             "type": "integer"
@@ -545,10 +696,18 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "description": "ISO 8601 Timestamp reported by the sensor when the event occured",
           "format": "date-time",
           "order": 100
+=======
+          "description": "Event threat score",
+          "items": {
+            "type": "integer"
+          },
+          "order": 40
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "event_type": {
           "type": "string",
           "title": "Event Type",
+<<<<<<< HEAD
           "description": "Type of event observed",
           "order": 4
         },
@@ -686,10 +845,21 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "title": "Ingress Time",
           "description": "Timestamp of when the Carbon Black Cloud receives data for initial processing (Unix format)",
           "order": 45
+=======
+          "description": "Event type",
+          "order": 4
+        },
+        "ingress_time": {
+          "type": "integer",
+          "title": "Ingress Time",
+          "description": "Ingress time",
+          "order": 44
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "legacy": {
           "type": "boolean",
           "title": "Legacy",
+<<<<<<< HEAD
           "description": "True if the record includes data from the Endpoint Standard",
           "order": 10
         },
@@ -784,11 +954,27 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "type": "boolean",
           "title": "Netconn Inbound",
           "description": "True if the network connection was inbound; false if outbound",
+=======
+          "description": "Legacy",
+          "order": 10
+        },
+        "netconn_domain": {
+          "type": "string",
+          "title": "Netconn Domain",
+          "description": "Netconn domain",
+          "order": 18
+        },
+        "netconn_inbound": {
+          "type": "boolean",
+          "title": "Netconn Inbound",
+          "description": "Netconn inbound",
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
           "order": 5
         },
         "netconn_ipv4": {
           "type": "integer",
           "title": "Netconn IPv4",
+<<<<<<< HEAD
           "description": "IPv4 address of the remote side of the network connection",
           "order": 39
         },
@@ -803,10 +989,15 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "title": "Netconn Listen",
           "description": "True if the process opened a socket to listen for incoming connections",
           "order": 132
+=======
+          "description": "Netconn IPv4",
+          "order": 38
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "netconn_local_ipv4": {
           "type": "integer",
           "title": "Netconn Local IPv4",
+<<<<<<< HEAD
           "description": "Pv4 address of the local side of the network connection; stored as an integer",
           "order": 28
         },
@@ -821,28 +1012,46 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "title": "Netconn Local Location",
           "description": "Geolocation of the local side of the network connection",
           "order": 134
+=======
+          "description": "Netconn local IPv4",
+          "order": 27
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "netconn_local_port": {
           "type": "integer",
           "title": "Netconn Local Port",
+<<<<<<< HEAD
           "description": "TCP or UDP port used by the local side of the network connection",
           "order": 52
+=======
+          "description": "Netconn local port",
+          "order": 51
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "netconn_location": {
           "type": "string",
           "title": "Netconn Location",
+<<<<<<< HEAD
           "description": "Geolocation of the remote side of the network connection",
+=======
+          "description": "Netconn location",
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
           "order": 16
         },
         "netconn_port": {
           "type": "integer",
           "title": "Netconn Port",
+<<<<<<< HEAD
           "description": "TCP or UDP port used by the interesting side of the network connection",
+=======
+          "description": "Netconn port",
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
           "order": 13
         },
         "netconn_protocol": {
           "type": "string",
           "title": "Netconn Protocol",
+<<<<<<< HEAD
           "description": "Network protocol of the network connection",
           "order": 14
         },
@@ -917,43 +1126,82 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "title": "Parent Cmdline Length",
           "description": "Character count of the parent process' command line",
           "order": 145
+=======
+          "description": "Netconn protocol",
+          "order": 14
+        },
+        "org_id": {
+          "type": "string",
+          "title": "Org ID",
+          "description": "Org ID",
+          "order": 53
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "parent_effective_reputation": {
           "type": "string",
           "title": "Parent Effective Reputation",
+<<<<<<< HEAD
           "description": "Effective reputation of the parent process; applied by the sensor when the event occurred",
           "order": 35
+=======
+          "description": "Parent effective reputation",
+          "order": 34
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "parent_effective_reputation_source": {
           "type": "string",
           "title": "Parent Effective Reputation Source",
+<<<<<<< HEAD
           "description": "Source of the effective reputation for the parent process",
           "order": 31
+=======
+          "description": "Parent effective reputation source",
+          "order": 30
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "parent_guid": {
           "type": "string",
           "title": "Parent GUID",
+<<<<<<< HEAD
           "description": "Unique process identifier assigned to the parent process",
           "order": 23
+=======
+          "description": "Parent GUID",
+          "order": 22
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "parent_hash": {
           "type": "array",
           "title": "Parent Hash",
+<<<<<<< HEAD
           "description": "MD5 and/or SHA-256 hash of the parent process binary",
           "items": {
             "type": "string"
           },
           "order": 29
+=======
+          "description": "Parent hash",
+          "items": {
+            "type": "string"
+          },
+          "order": 28
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "parent_name": {
           "type": "string",
           "title": "Parent Name",
+<<<<<<< HEAD
           "description": "Filesystem path of the parent process binary",
           "order": 37
+=======
+          "description": "Parent name",
+          "order": 36
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "parent_pid": {
           "type": "integer",
           "title": "Parent PID",
+<<<<<<< HEAD
           "description": "Identifier assigned by the operating system to the parent process",
           "order": 57
         },
@@ -974,17 +1222,30 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
             "type": "string"
           },
           "order": 147
+=======
+          "description": "Parent PID",
+          "order": 56
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "parent_reputation": {
           "type": "string",
           "title": "Parent Reputation",
+<<<<<<< HEAD
           "description": "Reputation of the parent process; applied when event is processed by the Carbon Black Cloud",
           "order": 59
+=======
+          "description": "Parent reputation",
+          "order": 58
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "process_cmdline": {
           "type": "array",
           "title": "Process Cmdline",
+<<<<<<< HEAD
           "description": "Command line executed by the actor process",
+=======
+          "description": "Process cmdline",
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
           "items": {
             "type": "string"
           },
@@ -993,6 +1254,7 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
         "process_cmdline_length": {
           "type": "array",
           "title": "Process Cmdline Length",
+<<<<<<< HEAD
           "description": "Character count of the actor process command line",
           "items": {
             "type": "integer"
@@ -1010,16 +1272,28 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "title": "Process Duration",
           "description": "Duration of the process (in milliseconds)",
           "order": 149
+=======
+          "description": "Process cmdline length",
+          "items": {
+            "type": "integer"
+          },
+          "order": 24
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "process_effective_reputation": {
           "type": "string",
           "title": "Process Effective Reputation",
+<<<<<<< HEAD
           "description": "Effective reputation of the actor process; applied by the sensor when the event occurred",
+=======
+          "description": "Process effective reputation",
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
           "order": 6
         },
         "process_effective_reputation_source": {
           "type": "string",
           "title": "Process Effective Reputation Source",
+<<<<<<< HEAD
           "description": "Source of the effective reputation for the actor process",
           "order": 9
         },
@@ -1048,10 +1322,21 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "title": "Process GUID",
           "description": "Unique process identifier for the actor process",
           "order": 50
+=======
+          "description": "Process effective reputation source",
+          "order": 9
+        },
+        "process_guid": {
+          "type": "string",
+          "title": "Process GUID",
+          "description": "Process GUID",
+          "order": 49
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "process_hash": {
           "type": "array",
           "title": "Process Hash",
+<<<<<<< HEAD
           "description": "Aggregate set of MD5 and SHA-256 hashes associated with the process",
           "items": {
             "type": "string"
@@ -1147,10 +1432,36 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
             "type": "string"
           },
           "order": 162
+=======
+          "description": "Process hash",
+          "items": {
+            "type": "string"
+          },
+          "order": 33
+        },
+        "process_name": {
+          "type": "array",
+          "title": "Process Name",
+          "description": "Process name",
+          "items": {
+            "type": "string"
+          },
+          "order": 2
+        },
+        "process_pid": {
+          "type": "array",
+          "title": "Process PID",
+          "description": "Process PID",
+          "items": {
+            "type": "integer"
+          },
+          "order": 31
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "process_reputation": {
           "type": "string",
           "title": "Process Reputation",
+<<<<<<< HEAD
           "description": "Reputation of the actor process; applied when event is processed by the Carbon Black Cloud",
           "order": 44
         },
@@ -1162,16 +1473,26 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
             "type": "string"
           },
           "order": 163
+=======
+          "description": "Process reputation",
+          "order": 43
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "process_sha256": {
           "type": "string",
           "title": "Process SHA-256",
+<<<<<<< HEAD
           "description": "SHA-256 hash of the actor process binary",
           "order": 36
+=======
+          "description": "Process SHA-256",
+          "order": 35
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         },
         "process_start_time": {
           "type": "string",
           "title": "Process Start Time",
+<<<<<<< HEAD
           "displayType": "date",
           "description": "Sensor reported ISO 8601 timestamp of when the process started",
           "format": "date-time",
@@ -1187,11 +1508,21 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "type": "array",
           "title": "Process Username",
           "description": "User context in which the actor process was executed",
+=======
+          "description": "Process start time",
+          "order": 11
+        },
+        "process_username": {
+          "type": "array",
+          "title": "Process Username",
+          "description": "Process username",
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
           "items": {
             "type": "string"
           },
           "order": 12
         },
+<<<<<<< HEAD
         "regmod_action": {
           "type": "string",
           "title": "Regmod Action",
@@ -1331,6 +1662,15 @@ class GetDetailsForSpecificEventOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "string"
           },
+=======
+        "ttp": {
+          "type": "array",
+          "title": "TTP",
+          "description": "TTP",
+          "items": {
+            "type": "string"
+          },
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
           "order": 17
         },
         "watchlist_hit": {

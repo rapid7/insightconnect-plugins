@@ -30,6 +30,7 @@ class TestGetDetailsForSpecificEvent(TestCase):
             }
         )
         expected = {
+<<<<<<< HEAD
             "success": True,
             "results": [
                 {
@@ -72,6 +73,18 @@ class TestGetDetailsForSpecificEvent(TestCase):
             "num_found": 100,
             "contacted": 48,
             "completed": 48,
+=======
+            "eventinfo": {
+                "results": [],
+                "num_found": 0,
+                "num_available": 0,
+                "approximate_unaggregated": 0,
+                "num_aggregated": 0,
+                "contacted": 48,
+                "completed": 48,
+            },
+            "success": True,
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         }
         self.assertEqual(actual, expected)
 

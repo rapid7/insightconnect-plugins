@@ -1,4 +1,8 @@
 {
+<<<<<<< HEAD
     "success": false,
     "message": "User is forbidden"
+=======
+    "test":"test"
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
 }

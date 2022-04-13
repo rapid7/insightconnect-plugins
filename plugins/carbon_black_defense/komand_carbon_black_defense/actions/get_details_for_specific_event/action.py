@@ -27,7 +27,11 @@ class GetDetailsForSpecificEvent(insightconnect_plugin_runtime.Action):
         id_ = self.connection.get_job_id_for_detail_search(event_ids=event_id)
         self.logger.info(f"Got job ID for detail search: {id_}")
         if id_ is None:
+<<<<<<< HEAD
             return {Output.SUCCESS: False, Output.RESULTS: {}}
+=======
+            return {Output.SUCCESS: False, Output.EVENTINFO: {}}
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         detail_search_status = self.connection.check_status_of_detail_search(id_)
 
         # check if status of
@@ -47,6 +51,7 @@ class GetDetailsForSpecificEvent(insightconnect_plugin_runtime.Action):
 
         return {
             Output.SUCCESS: True,
+<<<<<<< HEAD
             Output.RESULTS: data.get("results"),
             Output.APPROXIMATE_UNAGGREGATED: data.get("approximate_unaggregated"),
             Output.NUM_AGGREGATED: data.get("num_aggregated"),
@@ -54,4 +59,7 @@ class GetDetailsForSpecificEvent(insightconnect_plugin_runtime.Action):
             Output.NUM_FOUND: data.get("num_found"),
             Output.CONTACTED: data.get("contacted"),
             Output.COMPLETED: data.get("completed"),
+=======
+            Output.EVENTINFO: data,
+>>>>>>> af0ac7065 (Carbon Black - [SOAR-7132] Update Find Event and Get Details for a Specific Event Actions (#1034))
         }
