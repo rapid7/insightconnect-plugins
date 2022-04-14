@@ -17,6 +17,10 @@ This plugin utilizes the [Mimecast API](https://www.mimecast.com/developer/docum
 * Mimecast server
 * API Username and Password
 
+# Supported Product Versions
+
+* Mimecast API 2022-04-22
+
 # Documentation
 
 * https://www.mimecast.com/tech-connect/documentation/api-overview
@@ -30,8 +34,8 @@ The connection configuration accepts the following parameters:
 |access_key|credential_secret_key|None|True|The application access key|None|eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi|
 |app_id|string|None|True|Application ID|None|78d2e4b1-8cc2-4806-nt79-6ef332a47374|
 |app_key|credential_secret_key|None|True|The application key|None|475x54c6-4f61-4fab-8be7-a0710f3859e3|
+|region|string|Sandbox|True|The region for the Mimecast server|['EU', 'DE', 'US', 'CA', 'ZA', 'AU', 'Offshore']|EU|
 |secret_key|credential_secret_key|None|True|The application secret key|None|FgHrtydiP4TynI+rTZF42Qu0FtGuhJtuNM5bDh82goJQHed9kJZ5t/ORwGnI5r2hkl/bzCosZ+KVapJFeaf3Yw==|
-|url|string|None|True|The URL for the Mimecast server|None|https://api.mimecast.com|
 
 Example input:
 
@@ -40,14 +44,75 @@ Example input:
   "access_key": "eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi",
   "app_id": "78d2e4b1-8cc2-4806-nt79-6ef332a47374",
   "app_key": "475x54c6-4f61-4fab-8be7-a0710f3859e3",
-  "secret_key": "FgHrtydiP4TynI+rTZF42Qu0FtGuhJtuNM5bDh82goJQHed9kJZ5t/ORwGnI5r2hkl/bzCosZ+KVapJFeaf3Yw==",
-  "url": "https://api.mimecast.com"
+  "region": "EU",
+  "secret_key": "FgHrtydiP4TynI+rTZF42Qu0FtGuhJtuNM5bDh82goJQHed9kJZ5t/ORwGnI5r2hkl/bzCosZ+KVapJFeaf3Yw=="
 }
 ```
 
 ## Technical Details
 
 ### Actions
+
+#### Get Audit Events
+
+This action is used to get audit of events in Mimecast service.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|audit_events_data|audit_events_data|None|True|Data for requst|None|{"categories": ["test", "malware"], "endDateTime": "2022-02-02T08:15:30-05:00", "query": "example query", "startDateTime": "2022-02-02T08:15:30-05:00"}|
+|audit_events_pagination|audit_events_request_pagination|None|None|Pagination object for request|None|{"pageSize": 25, "pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"}|
+
+Example input:
+
+```
+{
+   "audit_events_data": {
+      "categories": [
+         "test",
+         "malware"
+      ],
+      "endDateTime": "2022-02-02T08:15:30-05:00",
+      "query": "example query",
+      "startDateTime": "2022-02-02T08:15:30-05:00"
+   },
+   "audit_events_pagination": {
+      "pageSize": 25,
+      "pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"
+   }
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|pagination|pagination|True|Pagination for request|
+|response|[]audit_events_response|True|Event logs data|
+
+Example output:
+
+```
+{
+   "response":[
+      {
+         "id":"wOi3MCwj2RMAhvN30QSmqOT7D-g10nypvPqTB5X5oQtdKJE4Qkl51X5Ue_U",
+         "scheme":"https",
+         "domain":"www.testset3444412312.net",
+         "port":-1,
+         "path":"/",
+         "queryString":"",
+         "matchType":"explicit",
+         "action":"block",
+         "comment":"",
+         "disableUserAwareness":false,
+         "disableRewrite":false,
+         "disableLogClick":false
+      }
+   ]
+}
+```
 
 #### Create Managed URL
 
@@ -58,7 +123,7 @@ This action is used to create a managed URL.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |action|string|block|True|Set to 'block' to blacklist the URL, 'permit' to whitelist it|['block', 'permit']|block|
-|comment|string|None|False|A comment about the why the URL is managed; for tracking purposes|None|i'm blocking this because virustotal said it was malicious|
+|comment|string|None|False|A comment about the why the URL is managed; for tracking purposes|None|Deemed malicious by VirusTotal|
 |disable_log_click|boolean|None|True|Disable logging of user clicks on the URL|None|Flase|
 |disable_rewrite|boolean|None|True|Disable rewriting of this URL in emails. Applies only if action = 'permit'|None|True|
 |disable_user_awareness|boolean|None|True|Disable User Awareness challenges for this URL. Applies only if action = 'permit'|None|False|
@@ -89,20 +154,22 @@ Example output:
 
 ```
 {
-  "response": [
-    {
-      "id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLhQT4SWBA3wB_E-UNk-s0gc6iZeMRZzgizv28dIpyFWXw",
-      "scheme": "http",
-      "domain": "youtube.com",
-      "port": -1,
-      "matchType": "explicit",
-      "action": "block",
-      "comment": "test",
-      "disableUserAwareness": false,
-      "disableRewrite": false,
-      "disableLogClick": false
-    }
-  ]
+   "response":[
+      {
+         "id":"wOi3MCwjYFqOT7D-I9AbwlwvY3ImP7QVjTLhGwOgsDbzzFK8SjGLNE4",
+         "scheme":"https",
+         "domain":"www.test.net",
+         "port":-1,
+         "path":"/",
+         "queryString":"",
+         "matchType":"explicit",
+         "action":"permit",
+         "comment":"",
+         "disableUserAwareness":false,
+         "disableRewrite":false,
+         "disableLogClick":false
+      }
+   ]
 }
 ```
 
@@ -114,26 +181,15 @@ This action is used to get information on a managed URL.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|action|string|none|False|Filter on whether or not the action is 'block' or 'permit'|['none', 'block', 'permit']|block|
-|disable_log_click|string|none|False|Filter on whether or not clicks are logged for this URL|['none', 'false', 'true']|True|
-|disable_rewrite|string|none|False|Filter on whether or not rewriting of this URL in emails is enabled|['none', 'false', 'true']|False|
-|disable_user_awareness|string|none|False|Filter on whether or not User Awareness challenges for this URL|['none', 'false', 'true']|False|
-|domain|string|None|False|The managed domain|None|rapid7.com|
-|id|string|None|False|Filter on the Mimecast secure ID of the managed URL|None|None|
-|match_type|string|none|False|Filter on whether or not the match type is 'explicit' or 'domain'|['none', 'explicit', 'domain']|domain|
-|scheme|string|None|False|Filter on whether or not the protocol is HTTP or HTTPS|None|http|
+|domainOrUrl|string|None|False|A domain or URL to filter results|None|example.com|
+|exactMatch|boolean|False|False|If true, the domainOrUrl value to act as an exact match value. If false, any partial matches will be returned|None|False|
 
 Example input:
 
 ```
 {
-  "action": "block",
-  "disable_log_click": true,
-  "disable_rewrite": false,
-  "disable_user_awareness": false,
-  "domain": "rapid7.com",
-  "match_type": "domain",
-  "scheme": "http"
+  "domainOrUrl": "example.com",
+  "exactMatch": false
 }
 ```
 
@@ -491,7 +547,8 @@ This action is used to get TTP URL logs.
 |----|----|-------|--------|-----------|----|-------|
 |from|string|None|False|Start date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is the start of the current day|None|2018-11-22T14:49:18+0000|
 |max_pages|integer|100|False|Max pages returned, default 100|None|10|
-|page_size|integer|10|False|The number of logs returned per page, default value is 10|None|10|
+|oldest_first|boolean|False|False|When true return results in descending order with oldest result first|None|False|
+|page_size|integer|10|False|The number of results to request|None|10|
 |route|string|all|True|Filters logs by route, must be one of inbound, outbound, internal, or all|['all', 'inbound', 'outbound', 'internal']|inbound|
 |scan_result|string|all|True|Filters logs by scan result, must be one of clean, malicious, or all|['clean', 'malicious', 'all']|malicious|
 |to|string|None|False|End date of logs to return in the following format 2015-11-16T14:49:18+0000. Default is time of request|None|2018-11-22T14:49:18+0000|
@@ -503,6 +560,7 @@ Example input:
 {
   "from": "2018-11-22T14:49:18+0000",
   "max_pages": 10,
+  "oldest_first": false,
   "page_size": 10,
   "route": "inbound",
   "scan_result": "malicious",
@@ -630,6 +688,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 
 # Version History
 
+* 5.0.0 - Update SDK version | Add new action Get Audit Events | Add unit tests for all actions | Update error handling for all action | Create separate class for API communication | Add base URL of API for plugin
 * 4.1.2 - Fix bug in connection test where it could succeed when an empty response was returned
 * 4.1.1 - Fix bug where the connection test would sometimes pass even with invalid credentials
 * 4.1.0 - Update Get TTP URL Logs action to use pagination

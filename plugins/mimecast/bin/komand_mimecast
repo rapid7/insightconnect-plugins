@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Mimecast"
 Vendor = "rapid7"
-Version = "4.1.2"
+Version = "5.0.0"
 Description = "Services for email security, archiving and continuity. Protect, manage and archive without compromise"
 
 
@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
+    import insightconnect_plugin_runtime
     from komand_mimecast import connection, actions, triggers
 
-    class ICONMimecast(komand.Plugin):
+    class ICONMimecast(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -48,6 +48,8 @@ def main():
 
             self.add_action(actions.FindGroups())
 
+            self.add_action(actions.GetAuditEvents())
+
             self.add_action(actions.GetManagedUrl())
 
             self.add_action(actions.GetTtpUrlLogs())
@@ -56,7 +58,7 @@ def main():
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONMimecast())
+    cli = insightconnect_plugin_runtime.CLI(ICONMimecast())
     cli.run()
 
 

@@ -1,0 +1,23 @@
+{
+    "meta": {
+        "status": 200
+    },
+    "data": [],
+    "fail": [
+        {
+            "key": {
+                "sender": "bad_email",
+                "to": "test2@rapid7.com",
+                "action": "block"
+            },
+            "errors": [
+                {
+                    "field": "sender",
+                    "code": "err_validation_invalid_email_address",
+                    "message": "Email address is not valid",
+                    "retryable": false
+                }
+            ]
+        }
+    ]
+}

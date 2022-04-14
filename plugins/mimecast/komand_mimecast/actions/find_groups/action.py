@@ -1,15 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import FindGroupsInput, FindGroupsOutput, Input, Output, Component
 
 # Custom imports below
-from komand_mimecast.util import util
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_mimecast.util.constants import DATA_FIELD
 
 
-class FindGroups(komand.Action):
-
-    _URI = "/api/directory/find-groups"
-
+class FindGroups(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="find_groups",
@@ -19,34 +16,16 @@ class FindGroups(komand.Action):
         )
 
     def run(self, params={}):
-        # Import variables from connection
-        url = self.connection.url
-        access_key = self.connection.access_key
-        secret_key = self.connection.secret_key
-        app_id = self.connection.app_id
-        app_key = self.connection.app_key
-
         query = params.get(Input.QUERY)
         source = params.get(Input.SOURCE)
         if query:
             data = {"query": query, "source": source}
         else:
             data = {"source": source}
-
-        # Mimecast request
-        mimecast_request = util.MimecastRequests()
-        response = mimecast_request.mimecast_post(
-            url=url,
-            uri=FindGroups._URI,
-            access_key=access_key,
-            secret_key=secret_key,
-            app_id=app_id,
-            app_key=app_key,
-            data=data,
-        )
+        response = self.connection.client.find_groups(data)
 
         try:
-            output = response["data"][0]["folders"]
+            output = response[DATA_FIELD][0]["folders"]
         except KeyError:
             self.logger.error(response)
             raise PluginException(

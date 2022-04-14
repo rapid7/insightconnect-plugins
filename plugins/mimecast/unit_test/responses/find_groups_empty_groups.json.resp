@@ -1,0 +1,16 @@
+{
+    "meta": {
+        "status": 200,
+        "pagination": {
+            "pageSize": 0
+        }
+    },
+    "data": [
+        {
+            "source": "cloud",
+            "query": "test_query",
+            "folders": []
+        }
+    ],
+    "fail": []
+}
