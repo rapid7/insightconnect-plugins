@@ -1,0 +1,5 @@
+{
+  "action": "block",
+  "sender": "test@rapid7.com",
+  "to": "test2@rapid7.com"
+}

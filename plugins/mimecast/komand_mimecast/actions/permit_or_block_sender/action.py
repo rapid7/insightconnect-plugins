@@ -1,47 +1,23 @@
-import komand
-from .schema import PermitOrBlockSenderInput, PermitOrBlockSenderOutput, Output
+import insightconnect_plugin_runtime
+from .schema import PermitOrBlockSenderInput, PermitOrBlockSenderOutput, Output, Component
 
 # Custom imports below
-from komand_mimecast.util import util
+from komand_mimecast.util.util import Utils
+from komand_mimecast.util.constants import DATA_FIELD
 
 
-class PermitOrBlockSender(komand.Action):
-
-    # URI for Permit or Block Sender
-    _URI = "/api/managedsender/permit-or-block-sender"
-
+class PermitOrBlockSender(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="permit_or_block_sender",
-            description="Permits or blocks a sender",
+            description=Component.DESCRIPTION,
             input=PermitOrBlockSenderInput(),
             output=PermitOrBlockSenderOutput(),
         )
 
     def run(self, params={}):
-        # Import variables from connection
-        url = self.connection.url
-        access_key = self.connection.access_key
-        secret_key = self.connection.secret_key
-        app_id = self.connection.app_id
-        app_key = self.connection.app_key
-
-        # Generate payload dictionary
         data = {}
         for key, value in params.items():
-            temp = util.normalize(key, value)
+            temp = Utils.normalize(key, value)
             data.update(temp)
-
-        # Mimecast request
-        mimecast_request = util.MimecastRequests()
-        response = mimecast_request.mimecast_post(
-            url=url,
-            uri=PermitOrBlockSender._URI,
-            access_key=access_key,
-            secret_key=secret_key,
-            app_id=app_id,
-            app_key=app_key,
-            data=data,
-        )
-
-        return {Output.RESPONSE: response["data"]}
+        return {Output.RESPONSE: self.connection.client.permit_or_block_sender(data).get(DATA_FIELD, {})}

@@ -1,0 +1,10 @@
+{
+  "from": "2021-11-16T14:49:18+0000",
+  "max_pages": 100,
+  "oldest_first": false,
+  "page_size": 10,
+  "route": "all",
+  "scan_result": "all",
+  "to": "",
+  "url_to_filter": ""
+}

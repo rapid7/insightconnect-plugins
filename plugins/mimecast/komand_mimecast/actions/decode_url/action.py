@@ -1,15 +1,13 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import DecodeUrlInput, DecodeUrlOutput, Input, Output, Component
 
 # Custom imports below
 from komand_mimecast.util import util
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_mimecast.util.constants import DATA_FIELD
 
 
-class DecodeUrl(komand.Action):
-    # URI for Decode URL
-    _URI = "/api/ttp/url/decode-url"
-
+class DecodeUrl(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="decode_url",
@@ -19,29 +17,10 @@ class DecodeUrl(komand.Action):
         )
 
     def run(self, params={}):
-        # Import variables from connection
-        url = self.connection.url
-        access_key = self.connection.access_key
-        secret_key = self.connection.secret_key
-        app_id = self.connection.app_id
-        app_key = self.connection.app_key
-
-        # Generate payload dictionary
         data = {"url": params.get(Input.ENCODED_URL)}
-
-        mimecast_request = util.MimecastRequests()
-        response = mimecast_request.mimecast_post(
-            url=url,
-            uri=DecodeUrl._URI,
-            access_key=access_key,
-            secret_key=secret_key,
-            app_id=app_id,
-            app_key=app_key,
-            data=data,
-        )
-
+        response = self.connection.client.decode_url(data)
         try:
-            if not response["data"][0]["success"]:
+            if not response.get(DATA_FIELD)[0]["success"]:
                 raise PluginException(
                     cause=f"The URL {params.get(Input.ENCODED_URL)} could not be decoded.",
                     assistance="Please ensure that it is a Mimecast encoded URL.",
@@ -53,7 +32,7 @@ class DecodeUrl(komand.Action):
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response)
 
         try:
-            output = response["data"][0]["url"]
+            output = response[DATA_FIELD][0]["url"]
         except KeyError:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response)
         except IndexError:

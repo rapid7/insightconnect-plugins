@@ -1,0 +1,29 @@
+API = "/api"
+REGIONS = ["EU", "DE", "US", "CA", "ZA", "AU", "Offshore"]
+HOSTS = ["eu-api", "de-api", "us-api", "ca-api", "za-api", "au-api", "je-api"]
+BASE_HOSTNAME_MAP = dict(zip(REGIONS, HOSTS))
+DEFAULT_REGION = "EU"
+DATA_FIELD = "data"
+META_FIELD = "meta"
+PAGINATION_FIELD = "pagination"
+GROUP_MEMBER_ALREADY_EXISTS_ERROR = "err_folder_group_member_already_exists"
+XDK_BINDING_EXPIRED_ERROR = "err_xdk_binding_expired"
+MANAGED_URL_EXISTST_ERROR = "err_managed_url_exists_code"
+CODE = "code"
+FOLDER_EMAIL_NOT_FOUND_ERROR = "err_folder_email_address_not_found"
+MANAGED_URL_NOT_FOUND_ERROR = "err_managed_url_not_found"
+DEVELOPER_KEY_ERROR = "err_developer_key"
+FIELD_VALIDATION_ERROR = "err_validation_null"
+VALIDATION_BLANK_ERROR = "err_validation_blank"
+VALIDATION_INVALID_EMAIL_ADRESS_ERROR = "err_validation_invalid_email_address"
+BASIC_ASSISTANCE_MESSAGE = "Please check input and try again."
+BASIC_ASSISTANCE_MESSAGE_CONNECTION = "Please check input connection and try again."
+ERROR_CASES = {
+    XDK_BINDING_EXPIRED_ERROR: "AccessKey has expired.",
+    MANAGED_URL_EXISTST_ERROR: "The managed URL already exists; to update it, delete and recreate.",
+    GROUP_MEMBER_ALREADY_EXISTS_ERROR: "Group member already exists.",
+    FOLDER_EMAIL_NOT_FOUND_ERROR: "Error email address not found.",
+    MANAGED_URL_NOT_FOUND_ERROR: "Managed URL not found.",
+    DEVELOPER_KEY_ERROR: "Connection headers has not been configured.",
+    VALIDATION_INVALID_EMAIL_ADRESS_ERROR: "Email address is not valid.",
+}

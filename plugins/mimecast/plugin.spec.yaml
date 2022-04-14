@@ -5,7 +5,8 @@ name: mimecast
 title: Mimecast
 description: Services for email security, archiving and continuity. Protect, manage
   and archive without compromise
-version: 4.1.2
+version: 5.0.0
+supported_versions: ["Mimecast API 2022-04-22"]
 vendor: rapid7
 support: rapid7
 status: []
@@ -22,14 +23,49 @@ hub_tags:
   features: []
 types:
   managed_url:
-    comment:
-      title: Comment
-      description: The comment that was posted in the request
+    id:
+      title: ID
+      description: The Mimecast secure ID of the managed URL
+      type: string
+      required: false
+    scheme:
+      title: Scheme
+      description: The protocol to apply for the managed URL. Either HTTP or HTTPS
       type: string
       required: false
     domain:
       title: Domain
       description: The managed domain
+      type: string
+      required: false
+    port:
+      title: Port
+      description: The specified in the managed URL. Default value is -1 if no port was provided
+      type: integer
+      required: false
+    path:
+      title: Path
+      description: The resource path of the managed URL
+      type: string
+      required: false
+    queryString:
+      title: Query string
+      description: The query string of the managed URL
+      type: string
+      required: false
+    matchType:
+      title: Match Type
+      description: The type of URL to match against
+      type: string
+      required: false
+    action:
+      title: Action
+      description:  Action to take for when URL is clicked. Either block or permit
+      type: string
+      required: false
+    comment:
+      title: Comment
+      description: The comment that was posted in the request
       type: string
       required: false
     disableUserAwareness:
@@ -42,35 +78,10 @@ types:
       description: If logging of user clicks on the URL is disabled
       type: boolean
       required: false
-    action:
-      title: Action
-      description: Either block or permit
-      type: string
-      required: false
-    matchType:
-      title: Match Type
-      description: Either 'explicit' or 'domain'
-      type: string
-      required: false
-    scheme:
-      title: Scheme
-      description: The protocol to apply for the managed URL. Either HTTP or HTTPS
-      type: string
-      required: false
     disableRewrite:
       title: URL Rewriting
       description: If rewriting of this URL in emails is disabled
       type: boolean
-      required: false
-    id:
-      title: ID
-      description: The Mimecast secure ID of the managed URL
-      type: string
-      required: false
-    port:
-      title: Port
-      description: Port
-      type: integer
       required: false
   managed_sender:
     type:
@@ -283,14 +294,467 @@ types:
       description: The action requested by the user
       type: string
       required: false
-
+  audit_events_data:
+    startDateTime:
+      title: Start Date Time
+      description: The start date of events in ISO 8601 date time format
+      type: string
+      required: true
+      example: "2011-12-03T10:15:30+0000"
+    endDateTime:
+      title: End Date Time
+      description: The end date of events in ISO 8601 date time format
+      type: string
+      required: true
+      example: "2015-12-03T10:15:30+0000"
+    query:
+      title: Query
+      description: A character string to search for the audit events
+      type: string
+      required: false
+      example: "test query"
+    categories:
+      title: Categories
+      description: A list of audit category types
+      type: "[]string"
+      required: false
+      example: ["test", "malware"]
+  audit_events_request_pagination:
+    pageSize:
+      title: Page Size
+      description: The number of results to request
+      type: integer
+      required: false
+      default: 25
+    pageToken:
+      title: Page Token
+      description: The value of the next or previous fields from an earlier request
+      type: string
+      required: false
+  audit_events_response:
+    auditType:
+      title: Audit Type
+      description: The Mimecast audit type of the event
+      type: string
+      required: false
+    category:
+      title: Category
+      description: The category of the event
+      type: string
+      required: false
+    eventInfo:
+      title: Event Info
+      description: The detailed event information
+      type: string
+      required: false
+    eventTime:
+      title: Event Time
+      description: The time of the event in ISO 8601 format
+      type: string
+      required: false
+    id:
+      title: ID
+      description: The Mimecast unique id of the event
+      type: string
+      required: false
+  pagination:
+    pageSize:
+      title: Page Size
+      description: The number of results requested
+      type: integer
+      required: false
+    next:
+      title: Next
+      description: A pageToken value that can be used to request the next page of results. Only returned if there are more results to return
+      type: string
+      required: false
+    previous:
+      title: Previous
+      description: A pageToken value that can be used to request the previous page of results. Only returned if there is a previous page
+      type: string
+      required: false
+  search_criteria_object:
+    end:
+      title: End
+      type: string
+      description: The end date of messages included in ISO 8601 format
+      required: false
+    fileHash:
+      title: File Hash
+      type: string
+      description: The file hash used in creation of the remediation incident
+      required: false
+    from:
+      title: From
+      type: string
+      description: The sender address of the message
+      required: false
+    messageId:
+      title: Message ID
+      type: string
+      description: The message id use in creation of the remediation incident
+      required: false
+    restoreCode:
+      title: Restore Code
+      type: string
+      description: The restore code used if the incident type is restore
+      required: false
+    start:
+      title: Start
+      type: string
+      description: The start date of messages included in ISO 8601 format
+      required: false
+    subject:
+      title: Subject
+      type: string
+      description: Message subject line of the remediated message
+      required: false
+    to:
+      title: To
+      type: string
+      description: The recipient email address of the message
+      required: false
+    unremediateCode:
+      title: Unremediate Code
+      type: string
+      description: The Mimecast code used to restore a previously remediated message
+      required: false
+    url:
+      title: URL
+      type: string
+      description: URL used to create the remediation incident, if remediation type is URL
+      required: false
+  response_remediation_incident:
+    search_criteria_object:
+      title: Search Criteria Object
+      type: search_criteria_object
+      description: The search criteria used to identify messages
+      required: false
+    code:
+      title: Code
+      type: string
+      description: The incident code generated at creation, to be used as a reference for the remediation incident lookup
+      required: false
+    create:
+      title: Create
+      type: string
+      description: Timestamp of the incident creation in ISO 8601 format
+      required: false
+    failed:
+      title: Failed
+      type: integer
+      description: The number of messages that failed to remediate
+      required: false
+    fileRemediationCanBeCancelled:
+      title: File Remediation Can be Cancelled
+      type: boolean
+      description: Indicates whether the file remediation incident can still be cancelled
+      required: false
+    fileRemediationCancelled:
+      title: File Remediation Cancelled
+      type: string
+      description: Timestamp of an incident cancellation, if it has been cancelled, in ISO 8601 format
+      required: false
+    fileRemediationExpiryTime:
+      title: File Remediation Expiry Time
+      type: string
+      description: Timestamp of a file-bases remediation should expiration in ISO 8601 format
+      required: false
+    id:
+      title: ID
+      type: string
+      description: The Mimecast secure ID of the remediation incident
+      required: false
+    identified:
+      title: Identified
+      type: integer
+      description: Number of messages identified with provided search criteria
+      required: false
+    modified:
+      title: Modified
+      type: string
+      description: Timestamp of the incident's last modification date in ISO 8601 format
+      required: false
+    reason:
+      title: Reason
+      type: string
+      description: The reason provided at the creation of the remediation incident
+      required: false
+    remediatedBy:
+      title: Remediated by
+      type: string
+      description: Email address of the user who created the remediation incident
+      required: false
+    removeFromDevice:
+      title: Remove From Device
+      type: string
+      enum:
+        - recipient
+        - all
+      description: The devices where the downloaded file should be removed from
+      required: false
+    restored:
+      title: Restored
+      type: integer
+      description: The number of messages that were restored, if incident was a restore
+      required: false
+    successful:
+      title: Successful
+      type: integer
+      description: The number successfully remediated messages
+      required: false
+    type:
+      title: Type
+      type: string
+      enum:
+        - notify_only
+        - automatic
+        - manual
+        - restored
+      description: Type of incident
+      required: false
+  searchCriteria:
+    start:
+      title: Start
+      type: string
+      description: The start date from the remediation incident creation
+      required: false
+    end:
+      title: End
+      type: string
+      description: The end date from the remediation incident creation
+      required: false
+    fileHash:
+      title: File Hash
+      type: string
+      description: The file hash provided during the remediation incident creation
+      required: false
+    from:
+      title: From
+      type: string
+      description: The sender address provided at the remediation incident creation
+      required: false
+    messageId:
+      title: Message ID
+      type: string
+      description: The message ID provided during the remediation incident creation
+      required: false
+    restoreCode:
+      title: Restore Code
+      type: string
+      description: The code provided to restore a message
+      required: false
+    to:
+      title: To
+      type: string
+      description: The recipient address provided at the remediation incident creation
+      required: false
+    unremediateCode:
+      title: Unremediate Code
+      type: string
+      description: Code used to restore messages that were previously removed by remediation incident
+      required: false
+  get_remediation_incident_response:
+    code:
+      title: Code
+      type: string
+      description: Incident code, used as a reference for a remediation incident
+      required: false
+    create:
+      title: Create
+      type: string
+      description: Date that the remediation incident was created
+      required: false
+    failed:
+      title: Failed
+      type: integer
+      description: The number of messages that failed to remediate as part of the incident
+      required: false
+    id:
+      title: ID
+      type: string
+      description: The Mimecast ID of the remediation incident, provided when the incident was created
+      required: false
+    identified:
+      title: Identified
+      type: integer
+      description: Number of messages identified by the search criteria
+      required: false
+    modified:
+      title: Modified
+      type: string
+      description: Date that the remediation incident was last updated
+      required: false
+    reason:
+      title: Reason
+      type: string
+      description: The reason provided when an incident was created
+      required: false
+    restored:
+      title: Restored
+      type: integer
+      description: The number of messages restored as part of the incident
+      required: false
+    searchCriteria:
+      title: Searchcriteria
+      type: "[]searchCriteria"
+      description: Conditions used to build a remediation incident. Includes messageId, file-hash, from or to addresses.
+      required: false
+    successful:
+      title: Successful
+      type: integer
+      description: The number of messages successfully remediated as part of the incident
+      required: false
+    type:
+      title: Type
+      type: string
+      description: The type of incident action taken. Can be one of notify_only, automatic, manual or restored
+      required: false
+  find_remediation_searchBy:
+    value:
+      title: Value
+      description: The text used to filter results
+      type: string
+      required: false
+    fieldName:
+      title: Field Name
+      description: Incident fields to filter based on
+      type: string
+      enum:
+        - all
+        - code
+        - file_hash
+        - reason
+      required: false
+  find_remediation_filterBy:
+    type:
+      title: Type
+      description: Specify the type of incidents to return
+      type: string
+      enum:
+        - notify_only
+        - automatic
+        - manual
+        - restore
+      required: false
+  searchCritera:
+    unremediateCode:
+      title: Unremediate Code
+      description: Code required to perform a message restoration
+      type: string
+      required: false
+    start:
+      title: Start
+      description: Date of oldest results to return
+      type: string
+      required: false
+    end:
+      title: End
+      description: Date of most recent incidents to return
+      type: string
+      required: false
+    fileHash:
+      title: File Hash
+      description: File hash used to create remediation incident
+      type: string
+      required: false
+    messageId:
+      title: Message ID
+      description: Message id used to create remediation incident
+      type: string
+      required: false
+    restoreCode:
+      title: Restore Code
+      description: Restore code for remediation event
+      type: string
+      required: false
+    from:
+      title: From
+      description: Sender address or domain name used to create remediation incident
+      type: string
+      required: false
+    to:
+      title: To
+      description: Recipient address or domain name used to create remediation incident
+      type: string
+      required: false
+  incidents:
+    code:
+      title: Code
+      description: The remediation incident unique code
+      type: string
+      required: false
+    type:
+      title: Type
+      description: The incident type
+      type: string
+      enum:
+        - notify_only
+        - automatic
+        - manual
+        - restored
+      required: false
+    reason:
+      title: Reason
+      description: The reason provided when the remediation incident was created
+      type: string
+      required: false
+    create:
+      title: Create
+      description: The time stamp of the incident creation
+      type: string
+      required: false
+    modified:
+      title: Modified
+      description: The time stamp of the last modification to the incident
+      type: string
+      required: false
+    identified:
+      title: Identified
+      description: The total number of messages identified as part of the remediation incident
+      type: integer
+      required: false
+    successful:
+      title: Successful
+      description: The number of messages sucessfully rememdiated
+      type: integer
+      required: false
+    failed:
+      title: Failed
+      description: The number of messages that failed to remediate
+      type: integer
+      required: false
+    restored:
+      title: Restored
+      description: The number of messages restored from the remediation incident
+      type: integer
+      required: false
+    id:
+      title: ID
+      description: The Mimecast secure id of the remediation incident
+      type: string
+      required: false
+    searchCriteria:
+      title: Search Criteria
+      description: Criteria used to when the remediation incident was created
+      type: "searchCritera"
+      required: false
 connection:
-  url:
-    title: URL
-    description: The URL for the Mimecast server
+  region:
+    title: Region
+    description: The region for the Mimecast server
     type: string
-    example: https://api.mimecast.com
+    enum:
+      - EU
+      - DE
+      - US
+      - CA
+      - ZA
+      - AU
+      - Offshore
     required: true
+    example: EU
+    default: Sandbox
   app_id:
     title: App ID
     description: Application ID
@@ -331,7 +795,7 @@ actions:
         title: Comment
         description: A comment about the why the URL is managed; for tracking purposes
         type: string
-        example: i'm blocking this because virustotal said it was malicious
+        example: Deemed malicious by VirusTotal
         required: false
       disable_rewrite:
         title: Disable Rewrite
@@ -400,78 +864,19 @@ actions:
     title: Get Managed URL
     description: Get information on a managed URL
     input:
-      domain:
-        title: Domain
-        description: The managed domain
+      domainOrUrl:
+        title: Domain or URL
+        description: A domain or URL to filter results
         type: string
-        example: rapid7.com
         required: false
-      disable_user_awareness:
-        title: 'Filter: User Awareness'
-        description: Filter on whether or not User Awareness challenges for this URL
-        type: string
+        example: example.com
+      exactMatch:
+        title: Exact Match
+        description: If true, the domainOrUrl value to act as an exact match value. If false, any partial matches will be returned
+        type: boolean
+        required: false
+        default: false
         example: false
-        required: false
-        default: none
-        enum:
-        - none
-        - 'false'
-        - 'true'
-      disable_log_click:
-        title: 'Filter: Log Click'
-        description: Filter on whether or not clicks are logged for this URL
-        type: string
-        required: false
-        example: true
-        default: none
-        enum:
-        - none
-        - 'false'
-        - 'true'
-      action:
-        title: 'Filter: Action'
-        description: Filter on whether or not the action is 'block' or 'permit'
-        type: string
-        required: false
-        example: block
-        default: none
-        enum:
-        - none
-        - block
-        - permit
-      match_type:
-        title: 'Filter: Match Type'
-        description: Filter on whether or not the match type is 'explicit' or 'domain'
-        type: string
-        example: domain
-        required: false
-        default: none
-        enum:
-        - none
-        - explicit
-        - domain
-      scheme:
-        title: 'Filter: Scheme'
-        description: Filter on whether or not the protocol is HTTP or HTTPS
-        type: string
-        example: http
-        required: false
-      disable_rewrite:
-        title: 'Filter: URL Rewrite'
-        description: Filter on whether or not rewriting of this URL in emails is enabled
-        type: string
-        example: false
-        required: false
-        default: none
-        enum:
-        - none
-        - 'false'
-        - 'true'
-      id:
-        title: 'Filter: ID'
-        description: Filter on the Mimecast secure ID of the managed URL
-        type: string
-        required: false
     output:
       response:
         title: Managed URL
@@ -742,12 +1147,13 @@ actions:
         - clean
         - malicious
         - all
-      url_to_filter:
-        title: URL Regular Expression Filter
-        description: Regular expression to filter on. e.g. `examp` will return only URLs with the letters examp in them
-        example: exam.*
-        type: string
+      oldest_first:
+        title: Oldest First
+        description: When true return results in descending order with oldest result first
+        type: boolean
+        example: false
         required: false
+        default: false
       max_pages:
         title: Max Pages
         description: Max pages returned, default 100
@@ -755,10 +1161,16 @@ actions:
         required: false
         default: 100
         example: 10
+      url_to_filter:
+        title: URL Regular Expression Filter
+        description: Regular expression to filter on. e.g. `examp` will return only URLs with the letters examp in them
+        example: exam.*
+        type: string
+        required: false
       page_size:
         title: Page Size
         type: integer
-        description: "The number of logs returned per page, default value is 10"
+        description: The number of results to request
         required: false
         default: 10
         example: 10
@@ -783,4 +1195,30 @@ actions:
         title: Decoded URL
         description: Original decoded URL
         type: string
+        required: true
+  get_audit_events:
+    title: Get Audit Events
+    description: Get audit of events in Mimecast service
+    input:
+      audit_events_data:
+        title: Audit Events Data
+        description: Data for requst
+        type: "audit_events_data"
+        required: true
+        example: '{"categories": ["test", "malware"], "endDateTime": "2022-02-02T08:15:30-05:00", "query": "example query", "startDateTime": "2022-02-02T08:15:30-05:00"}'
+      audit_events_pagination:
+        title: Audit Events Pagination
+        description: Pagination object for request
+        type: "audit_events_request_pagination"
+        example: '{"pageSize": 25, "pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"}'
+    output:
+      response:
+        title: Response
+        description: Event logs data
+        type: "[]audit_events_response"
+        required: true
+      pagination:
+        title: Pagination
+        description: Pagination for request
+        type: "pagination"
         required: true

@@ -1,0 +1,14 @@
+{
+   "meta":{
+      "status":200
+   },
+   "data":[
+      {
+         "url":"https://protect-xx.mimecast.com/",
+         "success":true
+      }
+   ],
+   "fail":[
+
+   ]
+}
