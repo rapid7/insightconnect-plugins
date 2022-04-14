@@ -72,30 +72,30 @@ Example input:
 
 ```
 {
-   "condition_expression":"keytableu003cu003euser",
-   "expression_attribute_names":{
-      "#P":"Percentile"
+   "condition_expression": "keytableu003cu003euser",
+   "expression_attribute_names": {
+      "#P": "Percentile"
    },
-   "expression_attribute_values":{
-      ":avail":{
-         "S":"Available"
+   "expression_attribute_values": {
+      ":avail": {
+         "S": "Available"
       },
-      ":back":{
-         "S":"Backordered"
+      ":back": {
+         "S": "Backordered"
       },
-      ":disc":{
-         "S":"Discontinued"
+      ":disc": {
+         "S": "Discontinued"
       }
    },
-   "item":{
-      "keytable":"login",
-      "e-mail":"user@example.com",
-      "user":"Username"
+   "item": {
+      "keytable": "login",
+      "e-mail": "user@example.com",
+      "user": "Username"
    },
-   "return_consumed_capacity":"TOTAL",
-   "return_item_collection_metrics":false,
-   "return_values":false,
-   "table_name":"Table-name"
+   "return_consumed_capacity": "TOTAL",
+   "return_item_collection_metrics": false,
+   "return_values": false,
+   "table_name": "Table-name"
 }
 ```
 
@@ -137,29 +137,29 @@ Example input:
 
 ```
 {
-   "condition_expression":"keytableu003cu003euser",
-   "expression_attribute_names":{
-      "#P":"Percentile"
+   "condition_expression": "keytableu003cu003euser",
+   "expression_attribute_names": {
+      "#P": "Percentile"
    },
-   "expression_attribute_values":{
-      ":avail":{
-         "S":"Available"
+   "expression_attribute_values": {
+      ":avail": {
+         "S": "Available"
       },
-      ":back":{
-         "S":"Backordered"
+      ":back": {
+         "S": "Backordered"
       },
-      ":disc":{
-         "S":"Discontinued"
+      ":disc": {
+         "S": "Discontinued"
       }
    },
-   "key":{
-      "keytable":"login"
+   "key": {
+      "keytable": "login"
    },
-   "return_consumed_capacity":"TOTAL",
-   "return_item_collection_metrics":false,
-   "return_values":"ALL_OLD",
-   "table_name":"Table-name",
-   "update_expression":"SET #Y = :y, #AT = :t"
+   "return_consumed_capacity": "TOTAL",
+   "return_item_collection_metrics": false,
+   "return_values": "ALL_OLD",
+   "table_name": "Table-name",
+   "update_expression": "SET #Y = :y, #AT = :t"
 }
 ```
 
@@ -205,33 +205,33 @@ Example input:
 
 ```
 {
-   "consistent_read":false,
-   "exclusive_start_key":{
-      "email":"user@example.com"
+   "consistent_read": false,
+   "exclusive_start_key": {
+      "email": "user@example.com"
    },
-   "expression_attribute_names":{
-      "#P":"Percentile"
+   "expression_attribute_names": {
+      "#P": "Percentile"
    },
-   "expression_attribute_values":{
-      ":avail":{
-         "S":"Available"
+   "expression_attribute_values": {
+      ":avail": {
+         "S": "Available"
       },
-      ":back":{
-         "S":"Backordered"
+      ":back": {
+         "S": "Backordered"
       },
-      ":disc":{
-         "S":"Discontinued"
+      ":disc": {
+         "S": "Discontinued"
       }
    },
-   "filter_expression":"test = :test",
-   "index_name":"index-name",
-   "limit":100,
-   "projection_expression":"Description",
-   "return_consumed_capacity":"TOTAL",
-   "segment":100,
-   "select":"ALL_ATTRIBUTES",
-   "table_name":"Table-name",
-   "total_segments":100
+   "filter_expression": "test = :test",
+   "index_name": "index-name",
+   "limit": 100,
+   "projection_expression": "Description",
+   "return_consumed_capacity": "TOTAL",
+   "segment": 100,
+   "select": "ALL_ATTRIBUTES",
+   "table_name": "Table-name",
+   "total_segments": 100
 }
 ```
 
