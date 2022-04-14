@@ -30,7 +30,7 @@ class Mock:
         return action
 
     @staticmethod
-    def mocked_request(method: str, path: str, params={}):
+    def mocked_request(method: str, path: str, headers={}, params={}, proxies={}, verify=False):
         if method == "GET" and path == "status":
             return MockResponse(status_code=200, content='{"versions":{"Cortex":"1.1.4"},"config":{"authType":"none"}}')
         elif method == "GET" and path == "another test case but 404":
