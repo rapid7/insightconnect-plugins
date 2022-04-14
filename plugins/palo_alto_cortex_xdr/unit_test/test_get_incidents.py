@@ -72,7 +72,7 @@ def check_error():
 class TestGetIncidents(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.action = Util.default_connector(GetIncidents())
+        _, cls.action = Util.default_connector(GetIncidents())
 
     @timeout_pass(error_callback=check_error)
     @timeout_decorator.timeout(2)
