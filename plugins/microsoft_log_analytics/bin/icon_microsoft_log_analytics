@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Microsoft Log Analytics"
 Vendor = "rapid7"
-Version = "1.1.0"
+Version = "1.2.0"
 Description = "Edit, run log queries with data in Azure Monitor Logs"
 
 
@@ -36,7 +36,15 @@ def main():
             )
             self.add_trigger(triggers.Search())
 
+            self.add_action(actions.CreateOrUpdateSavedSearch())
+
+            self.add_action(actions.DeleteSavedSearch())
+
             self.add_action(actions.GetLogData())
+
+            self.add_action(actions.GetSavedSearch())
+
+            self.add_action(actions.ListAllSearches())
 
             self.add_action(actions.SendLogData())
 

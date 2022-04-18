@@ -50,13 +50,13 @@ class SendLogDataInput(insightconnect_plugin_runtime.Input):
     "subscription_id": {
       "type": "string",
       "title": "Subscription ID",
-      "description": "Current subscription identifier that Azure application portal assigned to",
+      "description": "Current subscription identifier assigned within the Azure application portal",
       "order": 1
     },
     "workspace_name": {
       "type": "string",
       "title": "Workspace Name",
-      "description": "Customer's workspace name that the application registration portal is assigned",
+      "description": "Customer's workspace name assigned to the application registration portal",
       "order": 3
     }
   },

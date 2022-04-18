@@ -9,18 +9,14 @@ from unittest import TestCase, mock
 from parameterized import parameterized
 
 from icon_microsoft_log_analytics.connection.connection import Connection
-from icon_microsoft_log_analytics.actions.get_log_data import GetLogData
-from icon_microsoft_log_analytics.actions.get_log_data.schema import Input
-from icon_microsoft_log_analytics.util.tools import clean_query_output
+from icon_microsoft_log_analytics.actions.delete_saved_search import DeleteSavedSearch
+from icon_microsoft_log_analytics.actions.delete_saved_search.schema import Input
 import logging
 
 from icon_microsoft_log_analytics.util.tools import Message
 from unit_test.mock import (
     mock_request_200,
-    mock_request_201_invalid_json,
     mock_request_400,
-    mock_request_403,
-    mock_request_409,
     mock_request_429,
     mock_request_500,
     mock_request_503,
@@ -28,70 +24,53 @@ from unit_test.mock import (
     mocked_request,
     STUB_CONNECTION,
     STUB_RESOURCE_GROUP_NAME,
-    STUB_SUBSCRIPTION_ID,
     STUB_WORKSPACE_NAME,
+    STUB_SUBSCRIPTION_ID,
+    STUB_SAVED_SEARCH_NAME,
 )
 
+
 STUB_EXAMPLE_ACTION_RESPONSE = {
-    "tables": [
-        {
-            "name": "PrimaryResult",
-            "columns": [{"name": "Category", "type": "string"}, {"name": "count_l", "type": "long"}],
-            "rows": [
-                {"Category": "Administrative", "count_l": 20839},
-                {"Category": "Recommendation", "count_l": 122},
-                {"Category": "Alert", "count_l": 64},
-                {"Category": "ServiceHealth", "count_l": 11},
-            ],
-        }
-    ]
-}
-
-STUB_EXAMPLE_API_RESPONSE = {
-    "tables": [
-        {
-            "name": "PrimaryResult",
-            "columns": [{"name": "Category", "type": "string"}, {"name": "count_l", "type": "long"}],
-            "rows": [["Administrative", 20839], ["Recommendation", 122], ["Alert", 64], ["ServiceHealth", 11]],
-        }
-    ]
+    "message": "Saved search test-new-saved-search-id-2015 has been deleted",
+    "deleted_saved_search": {
+        "id": "subscriptions/00000000-0000-0000-0000-000000000005/resourceGroups/mms-eus/providers/Microsoft.OperationalInsights/workspaces/AtlantisDemo/savedSearches/test-new-saved-search-id-2015",
+        "name": "test-new-saved-search-id-2015",
+        "properties": {
+            "category": " Saved Search Test Category",
+            "displayName": "Create or Update Saved Search Test",
+            "query": "* | where TimeGenerated > ago(1h)",
+        },
+    },
 }
 
 
-class TestGetLogData(TestCase):
+class TestDeleteSavedSearch(TestCase):
     @mock.patch("icon_microsoft_log_analytics.util.api.AzureLogAnalyticsClientAPI._connection", return_value=None)
     def setUp(self, mock_connection) -> None:
         self.connection = Connection()
         self.connection.logger = logging.getLogger("connection logger")
         self.connection.connect(STUB_CONNECTION)
 
-        self.action = GetLogData()
+        self.action = DeleteSavedSearch()
         self.action.connection = self.connection
         self.action.logger = logging.getLogger("action logger")
 
         self.payload = {
-            Input.QUERY: "TestQuery",
             Input.RESOURCE_GROUP_NAME: STUB_RESOURCE_GROUP_NAME,
             Input.SUBSCRIPTION_ID: STUB_SUBSCRIPTION_ID,
             Input.WORKSPACE_NAME: STUB_WORKSPACE_NAME,
+            Input.SAVED_SEARCH_NAME: STUB_SAVED_SEARCH_NAME,
         }
 
-    def test_get_log_data(self):
+    def test_delete_saved_search_ok(self):
         mocked_request(mock_request_200)
         response = self.action.run(self.payload)
         expected_response = STUB_EXAMPLE_ACTION_RESPONSE
         self.assertEqual(expected_response, response)
 
-    def test_clean_query_output(self):
-        response = clean_query_output(STUB_EXAMPLE_API_RESPONSE)
-        self.assertEqual(STUB_EXAMPLE_ACTION_RESPONSE, response)
-
     @parameterized.expand(
         [
-            (mock_request_201_invalid_json, PluginException.causes[PluginException.Preset.INVALID_JSON]),
             (mock_request_400, Message.BAD_REQUEST_MESSAGE),
-            (mock_request_403, PluginException.causes[PluginException.Preset.UNAUTHORIZED]),
-            (mock_request_409, Message.CONFLICTED_STATE_OF_OBJECT_MESSAGE),
             (mock_request_429, PluginException.causes[PluginException.Preset.RATE_LIMIT]),
             (mock_request_500, PluginException.causes[PluginException.Preset.SERVER_ERROR]),
             (mock_request_503, PluginException.causes[PluginException.Preset.RATE_LIMIT]),
@@ -99,10 +78,11 @@ class TestGetLogData(TestCase):
         ],
     )
     @mock.patch("icon_microsoft_log_analytics.util.tools.backoff_function", return_value=0)
-    def test_get_log_data_exception(self, mock_request, exception, mock_backoff_function):
+    @mock.patch("icon_microsoft_log_analytics.util.api.AzureLogAnalyticsClientAPI.get_saved_search")
+    def test_delete_saved_search_exception(self, mock_request, exception, mock_backoff_function, mock_get):
         mocked_request(mock_request)
         with self.assertRaises(PluginException) as context:
-            self.action.run()
+            self.action.run(self.payload)
         self.assertEqual(
             context.exception.cause,
             exception,

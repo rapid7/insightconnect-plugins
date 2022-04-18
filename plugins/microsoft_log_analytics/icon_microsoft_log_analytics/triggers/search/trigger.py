@@ -3,7 +3,7 @@ import time
 from .schema import SearchInput, SearchOutput, Input, Component
 
 # Custom imports below
-from icon_microsoft_log_analytics.util.tools import return_non_empty_query_output
+from icon_microsoft_log_analytics.util.tools import return_non_empty_query_output, Defaults
 
 
 class Search(insightconnect_plugin_runtime.Trigger):
@@ -13,7 +13,7 @@ class Search(insightconnect_plugin_runtime.Trigger):
         )
 
     def run(self, params={}):
-        interval = abs(params.get(Input.INTERVAL, 60))
+        interval = abs(params.get(Input.INTERVAL, Defaults.DEFAULT_TRIGGER_SEARCH_INTERVAL))
         subscription_id = params.get(Input.SUBSCRIPTION_ID)
         resource_group_name = params.get(Input.RESOURCE_GROUP_NAME)
         workspace_name = params.get(Input.WORKSPACE_NAME)
