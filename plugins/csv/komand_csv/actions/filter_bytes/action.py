@@ -31,8 +31,8 @@ class FilterBytes(insightconnect_plugin_runtime.Action):
                 converted = utils.convert_csv_array(filtered)
                 return {Output.FILTERED: base64.b64encode(converted.encode()).decode()}
             else:
-                raise PluginException(cause="Wrong input", assistance="Invalid field indices")
+                raise PluginException(cause="Wrong input.", assistance="Invalid field indices.")
         elif not csv_good:
-            raise PluginException(cause="Wrong input", assistance="Improper syntax in CSV bytes")
+            raise PluginException(cause="Wrong input.", assistance="Improper syntax in CSV bytes.")
         else:
-            raise PluginException(cause="Wrong input", assistance="Improper syntax in fields string")
+            raise PluginException(cause="Wrong input.", assistance="Improper syntax in fields string.")

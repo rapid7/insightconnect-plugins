@@ -15,6 +15,10 @@ as well as filter data within a CSV file.
 
 _This plugin does not contain any requirements._
 
+# Supported Product Versions
+
+_There are no supported product versions listed._
+
 # Documentation
 
 ## Setup
@@ -250,6 +254,7 @@ CSV files must not have non-CSV data such as comments.
 
 # Version History
 
+* 2.0.1 - Fix bug with extra space character in JSON keys in `To JSON` action | Fix bugs with parsing cells with quotes and comma in `To JSON`, `Filter Bytes` and `Filter String` actions | Add unit tests for `To JSON`, `Filter Bytes` and `Filter String` actions
 * 2.0.0 - Add JSON to CSV String action | Rename JSON to CSV action to JSON to CSV Bytes
 * 1.1.6 - Update to v4 Python plugin runtime
 * 1.1.5 - Use input and output constants | Change docker image from `komand/python-2-plugin:2` to `komand/python-3-37-slim-plugin:3` to reduce plugin image size | Changed `Exception` to `PluginException`
