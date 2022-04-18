@@ -1,0 +1,44 @@
+{
+  "url_list": [
+    {
+      "url": "http://198.50.100.100",
+      "date": "2022-03-02T14:12:54",
+      "domain": "",
+      "hostname": "198.50.100.100",
+      "result": {
+        "urlworker": {
+          "http_code": 0
+        },
+        "safebrowsing": {
+          "matches": []
+        }
+      },
+      "httpcode": 0,
+      "gsb": [],
+      "encoded": "http%3A//198.50.100.100"
+    },
+    {
+      "url": "http://198.50.100.100:443",
+      "date": "2022-03-02T14:11:03",
+      "domain": "",
+      "hostname": "198.50.100.100",
+      "result": {
+        "urlworker": {
+          "http_code": 0
+        },
+        "safebrowsing": {
+          "matches": []
+        }
+      },
+      "httpcode": 0,
+      "gsb": [],
+      "encoded": "http%3A//198.50.100.100%3A443"
+    }
+  ],
+  "page_num": 1,
+  "limit": 10,
+  "paged": true,
+  "has_next": false,
+  "full_size": 2,
+  "actual_size": 2
+}

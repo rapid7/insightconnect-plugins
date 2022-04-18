@@ -1,0 +1,12 @@
+{
+  "parameters": [
+    [
+      "indicator_type",
+      "Invalid",
+      "https://example.com",
+      "general",
+      "Indicator type Invalid is not a supported indicator type.",
+      "Please provide a valid indicator type."
+    ]
+  ]
+}

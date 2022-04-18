@@ -1,0 +1,21 @@
+{
+  "asn": "AS21499 Host Europe GmbH",
+  "city_data": true,
+  "city": "Strasbourg",
+  "region": "GES",
+  "continent_code": "EU",
+  "country_code3": "FRA",
+  "country_code2": "FR",
+  "subdivision": "67",
+  "latitude": 48.5855,
+  "postal_code": "67000",
+  "longitude": 7.7418,
+  "accuracy_radius": 200,
+  "country_code": "FR",
+  "country_name": "France",
+  "dma_code": 0,
+  "charset": 0,
+  "area_code": 0,
+  "flag_url": "image.png",
+  "flag_title": "France"
+}
