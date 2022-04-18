@@ -1,9 +1,20 @@
-import logging
+import sys
 import os
-import json
+
+sys.path.append(os.path.abspath("../"))
 
 from icon_palo_alto_cortex_xdr.connection.connection import Connection
 from icon_palo_alto_cortex_xdr.connection.schema import Input
+import logging
+import json
+
+
+class MockTrigger:
+    actual = None
+
+    @staticmethod
+    def send(params):
+        MockTrigger.actual = params
 
 
 class Util:
@@ -36,3 +47,24 @@ class Util:
         action.connection = default_connection
         action.logger = logging.getLogger("action logger")
         return default_connection, action
+
+    @staticmethod
+    def mocked_requests(*args, **kwargs):
+        class MockResponse:
+            def __init__(self, filename, status_code):
+                self.filename = filename
+                self.status_code = status_code
+                self.text = ""
+
+            def json(self):
+                return json.loads(
+                    Util.read_file_to_string(
+                        os.path.join(
+                            os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json.resp"
+                        )
+                    )
+                )
+
+        if kwargs.get("url") == "https://example.com/public_api/v1/incidents/get_incidents/":
+            return MockResponse("get_incidents", 200)
+        raise Exception("Not implemented")

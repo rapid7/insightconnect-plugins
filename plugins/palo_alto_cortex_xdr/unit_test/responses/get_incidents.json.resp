@@ -1,0 +1,60 @@
+{
+  "reply": {
+    "total_count": 1,
+    "result_count": 1,
+    "incidents": [
+      {
+        "incident_id": "1",
+        "incident_name": null,
+        "creation_time": 1642917540319,
+        "modification_time": 1642919521805,
+        "detection_time": null,
+        "status": "new",
+        "severity": "high",
+        "description": "Example description",
+        "assigned_user_mail": null,
+        "assigned_user_pretty_name": null,
+        "alert_count": 14,
+        "low_severity_alert_count": 0,
+        "med_severity_alert_count": 10,
+        "high_severity_alert_count": 4,
+        "user_count": 1,
+        "host_count": 1,
+        "notes": null,
+        "resolve_comment": null,
+        "resolved_timestamp": null,
+        "manual_severity": null,
+        "manual_description": null,
+        "xdr_url": "https://example.com/incident-view?caseId=1",
+        "starred": false,
+        "hosts": [
+          "example-host"
+        ],
+        "users": [
+          "administrator"
+        ],
+        "incident_sources": [
+          "XDR Agent"
+        ],
+        "rule_based_score": null,
+        "manual_score": null,
+        "wildfire_hits": 4,
+        "alerts_grouping_status": "Disabled",
+        "mitre_tactics_ids_and_names": [
+          "TA0002 - Execution",
+          "TA0005 - Defense Evasion",
+          "TA0006 - Credential Access"
+        ],
+        "mitre_techniques_ids_and_names": [
+          "T1059 - Command and Scripting Interpreter",
+          "T1059.001 - Command and Scripting Interpreter: PowerShell",
+          "T1064 - Scripting",
+          "T1086 - PowerShell"
+        ],
+        "alert_categories": [
+          "Malware"
+        ]
+      }
+    ]
+  }
+}

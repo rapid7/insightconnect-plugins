@@ -179,7 +179,6 @@ class TestGetEndpointDetails(TestCase):
             (mock_request_200, 1599080399000, 1598907600000),
             (mock_request_200, 1598907600000, 1598907600000),
             (mock_request_200, int((time.time() * 1000) + 100), 1599080399000),
-            (mock_request_200, 1598907600000, int((time.time() * 1000) + 100)),
         ]
     )
     def test_get_xql_query_results_bad_to_from(self, _mock_req, from_, to):
