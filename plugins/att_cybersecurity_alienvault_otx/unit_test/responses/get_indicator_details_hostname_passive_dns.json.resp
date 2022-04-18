@@ -1,0 +1,29 @@
+{
+  "passive_dns": [
+    {
+      "address": "198.50.100.100",
+      "first": "2021-09-16T07:00:12",
+      "last": "2022-03-02T14:29:50",
+      "hostname": "example.com",
+      "record_type": "A",
+      "indicator_link": "/indicator/domain/example.com",
+      "flag_url": "image.png",
+      "flag_title": "France",
+      "asset_type": "domain",
+      "asn": "AS21499 Host Europe GmbH"
+    },
+    {
+      "address": "198.50.100.101",
+      "first": "2021-04-16T03:37:52",
+      "last": "2021-04-16T03:37:52",
+      "hostname": "example.com",
+      "record_type": "A",
+      "indicator_link": "/indicator/domain/example.com",
+      "flag_url": "image.png",
+      "flag_title": "United States",
+      "asset_type": "domain",
+      "asn": "AS398101 GO-DADDY-COM-LLC"
+    }
+  ],
+  "count": 2
+}

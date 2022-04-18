@@ -1,0 +1,56 @@
+{
+  "url_list": [
+    {
+      "url": "http://example.com",
+      "result": {
+        "urlworker": {
+          "url": "http://example.com",
+          "ip": "198.51.100.100",
+          "filetype": "text/html",
+          "filemagic": "HTML document, ASCII text, with very long lines, with CRLF line terminators",
+          "http_response": {
+            "Content-Length": "29453",
+            "Keep-Alive": "timeout=5, max=100",
+            "Server": "Apache",
+            "Connection": "Keep-Alive",
+            "Date": "Thu, 07 Dec 2017 06:47:35 GMT",
+            "Content-Type": "text/html; charset=UTF-8"
+          },
+          "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+          "http_code": 200,
+          "md5": "44d88612fea8a8f36de82e1278abb02f",
+          "has_file_analysis": false
+        },
+        "safebrowsing": {
+          "matches": []
+        }
+      },
+      "params": {},
+      "date": "2017-12-07T06:46:58",
+      "checked": 1,
+      "deep_analysis": true,
+      "secs": 1512629218.0,
+      "httpcode": 200,
+      "gsb": []
+    }
+  ],
+  "net_loc": "example.com",
+  "city_data": true,
+  "city": null,
+  "region": null,
+  "continent_code": "EU",
+  "country_code3": "IRL",
+  "country_code2": "IE",
+  "subdivision": null,
+  "latitude": 53.3472,
+  "postal_code": null,
+  "longitude": -6.2439,
+  "accuracy_radius": 200,
+  "country_code": "IE",
+  "country_name": "Ireland",
+  "dma_code": 0,
+  "charset": 0,
+  "area_code": 0,
+  "flag_title": "Ireland",
+  "flag_url": "image.png"
+}
