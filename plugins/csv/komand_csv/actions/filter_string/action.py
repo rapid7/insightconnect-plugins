@@ -16,20 +16,23 @@ class FilterString(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        csv_good = utils.csv_syntax_good(params[Input.CSV])
-        fields_good = utils.fields_syntax_good(params[Input.FIELDS])
+        csv_string = params.get(Input.CSV, "")
+        fields_to_filter = params.get(Input.FIELDS)
+
+        csv_good = utils.csv_syntax_good(csv_string)
+        fields_good = utils.fields_syntax_good(fields_to_filter)
 
         if csv_good and fields_good:
-            csv_array = utils.parse_csv_string(params[Input.CSV])
-            fields = utils.get_field_list(params[Input.FIELDS], len(csv_array[0]))
+            csv_array = utils.parse_csv_string(csv_string)
+            fields = utils.get_field_list(fields_to_filter, len(csv_array[0]))
             if fields:
                 filtered = []
                 for line in csv_array:
                     filtered.append(utils.keep_fields(line, fields))
                 return {Output.STRING: utils.convert_csv_array(filtered)}
             else:
-                raise PluginException(cause="Wrong input", assistance="Invalid field indices")
+                raise PluginException(cause="Wrong input.", assistance="Invalid field indices.")
         elif not csv_good:
-            raise PluginException(cause="Wrong input", assistance="Improper syntax in CSV bytes")
+            raise PluginException(cause="Wrong input.", assistance="Improper syntax in CSV string.")
         else:
-            raise PluginException(cause="Wrong input", assistance="Improper syntax in fields string")
+            raise PluginException(cause="Wrong input.", assistance="Improper syntax in fields string.")
