@@ -4,7 +4,7 @@ products: [insightconnect]
 name: microsoft_log_analytics
 title: Microsoft Log Analytics
 description: Edit, run log queries with data in Azure Monitor Logs
-version: 1.1.0
+version: 1.2.0
 vendor: rapid7
 support: rapid7
 supported_versions: ["2022-03-18"]
@@ -67,6 +67,59 @@ types:
       title: Rows
       description: Table's rows
       type: "[]object"
+  tag:
+    name:
+      title: Name
+      description: Tag's name
+      type: string
+    value:
+      title: Value
+      description: Tag's value
+      type: string
+  properties:
+    category:
+      title: Category
+      description: The category of the saved search
+      type: string
+      required: true
+    displayName:
+      title: Display Name
+      description: Saved search display name
+      type: string
+      required: true
+    functionAlias:
+      title: Function Alias
+      description: The function alias if query serves as a function
+      type: string
+      required: false
+    functionParameters:
+      title: Function Parameters
+      description: The optional function parameters if query serves as a function, where value should be in the following format - param-name1:type1 = default_value1, param-name2:type2 = default_value2
+      type: string
+      required: false
+    query:
+      title: Query
+      description: The query expression for the saved search
+      type: string
+      required: true
+    tags:
+      title: Tags
+      description: "The tags attached to the saved search, proper format is '[{'name': ExampleName, 'value': ExampleValue}]'"
+      type: "[]tag"
+      required: false
+  saved_search:
+    id:
+      title: Saved Search Identifier
+      description: Fully qualified resource
+      type: string
+    name:
+      title: Name
+      description: Saved search name
+      type: string
+    properties:
+      title: Properties
+      description: Saved search properties
+      type: properties
 actions:
   send_log_data:
     title: Send Log Data
@@ -74,7 +127,7 @@ actions:
     input:
       subscription_id:
         title: Subscription ID
-        description: Current subscription identifier that Azure application portal assigned to
+        description: Current subscription identifier assigned within the Azure application portal
         type: string
         required: true
         example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
@@ -86,7 +139,7 @@ actions:
         example: ExampleResourceGroupName
       workspace_name:
         title: Workspace Name
-        description: Customer's workspace name that the application registration portal is assigned
+        description: Customer's workspace name assigned to the application registration portal
         type: string
         required: true
         example: ExampleWorkspaceName
@@ -119,7 +172,7 @@ actions:
     input:
       subscription_id:
         title: Subscription ID
-        description: Current subscription identifier that Azure application portal assigned to
+        description: Current subscription identifier assigned within the Azure application portal
         type: string
         required: true
         example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
@@ -131,7 +184,7 @@ actions:
         example: ExampleResourceGroupName
       workspace_name:
         title: Workspace Name
-        description: Customer's workspace name that the application registration portal is assigned
+        description: Customer's workspace name assigned to the application registration portal
         type: string
         required: true
         example: ExampleWorkspaceName
@@ -147,6 +200,167 @@ actions:
         description: Array of tables representing the query result, with each table containing a name, columns and rows keys
         type: "[]table"
         required: true
+  create_or_update_saved_search:
+    title: Create or Update Saved Search
+    description: Creates or updates a saved search for a given workspace
+    input:
+      subscription_id:
+        title: Subscription ID
+        description: Current subscription identifier assigned within the Azure application portal
+        type: string
+        required: true
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
+      resource_group_name:
+        title: Resource Group Name
+        description: Name of the resource group
+        type: string
+        required: true
+        example: ExampleResourceGroupName
+      workspace_name:
+        title: Workspace Name
+        description: Customer's workspace name assigned to the application registration portal
+        type: string
+        required: true
+        example: ExampleWorkspaceName
+      saved_search_name:
+        title: Saved Search Name
+        description: Name of the saved search (case-sensitive)
+        type: string
+        required: true
+        example: ExampleSavedSearchName
+      properties:
+        title: Properties
+        description: Saved search properties object
+        type: properties
+        required: true
+        example: '{"properties":{"category":"Saved Search Test Category","displayName":"Create or Update Saved Search Test","functionAlias":"heartbeat_func","functionParameters":"a:int=1","query":"Heartbeat | summarize Count() by Computer | take a","tags":[{"name":"Group","value":"Computer"}]}}'
+    output:
+      id:
+        title: Saved Search Identifier
+        description: Fully qualified resource ID
+        type: string
+        required: true
+      name:
+        title: Name
+        description: Saved search name
+        type: string
+        required: true
+      properties:
+        title: Properties
+        description: Saved search properties object
+        type: properties
+        required: true
+  delete_saved_search:
+    title: Delete Saved Search
+    description: Deletes the specified saved search in a given workspace
+    input:
+      subscription_id:
+        title: Subscription ID
+        description: Current subscription identifier assigned within the Azure application portal
+        type: string
+        required: true
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
+      resource_group_name:
+        title: Resource Group Name
+        description: Name of the resource group
+        type: string
+        required: true
+        example: ExampleResourceGroupName
+      workspace_name:
+        title: Workspace Name
+        description: Customer's workspace name assigned to the application registration portal
+        type: string
+        required: true
+        example: ExampleWorkspaceName
+      saved_search_name:
+        title: Saved Search Name
+        description: Name of the saved search (case sensitive)
+        type: string
+        required: true
+        example: ExampleSavedSearchName
+    output:
+      message:
+        title: Message
+        description: Text message that indicates the log data has been added to workspace
+        type: string
+        required: true
+      deleted_saved_search:
+        title: Deleted Saved Search
+        description: Data of deleted saved search
+        type: saved_search
+        required: true
+  get_saved_search:
+    title: Get Saved Search
+    description: Retrieves all the saved searches from Log Analytics by name
+    input:
+      subscription_id:
+        title: Subscription ID
+        description: Current subscription identifier assigned within the Azure application portal
+        type: string
+        required: true
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
+      resource_group_name:
+        title: Resource Group Name
+        description: Name of the resource group
+        type: string
+        required: true
+        example: ExampleResourceGroupName
+      workspace_name:
+        title: Workspace Name
+        description: Customer's workspace name assigned to the application registration portal
+        type: string
+        required: true
+        example: ExampleWorkspaceName
+      saved_search_name:
+        title: Saved Search Name
+        description: Name of the saved search (case-sensitive)
+        type: string
+        required: true
+        example: ExampleSavedSearchName
+    output:
+      id:
+        title: Saved Search Identifier
+        description: Fully qualified resource ID
+        type: string
+        required: true
+      name:
+        title: Name
+        description: Saved search name
+        type: string
+        required: true
+      properties:
+        title: Properties
+        description: Saved search properties object
+        type: properties
+        required: true
+  list_all_searches:
+    title: List All Searches
+    description: Gets the saved searches for a given Log Analytics workspace
+    input:
+      subscription_id:
+        title: Subscription ID
+        description: Current subscription identifier assigned within the Azure application portal
+        type: string
+        required: true
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
+      resource_group_name:
+        title: Resource Group Name
+        description: Name of the resource group
+        type: string
+        required: true
+        example: ExampleResourceGroupName
+      workspace_name:
+        title: Workspace Name
+        description: Customer's workspace name assigned to the application registration portal
+        type: string
+        required: true
+        example: ExampleWorkspaceName
+    output:
+      saved_searches:
+        title: Saved Searches
+        description: List of found saved search results
+        type: "[]saved_search"
+        required: true
 triggers:
   search:
     title: Search
@@ -161,7 +375,7 @@ triggers:
         default: 900
       subscription_id:
         title: Subscription ID
-        description: Current subscription identifier that Azure application portal assigned to
+        description: Current subscription identifier assigned within the Azure application portal
         type: string
         required: true
         example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
@@ -173,7 +387,7 @@ triggers:
         example: ExampleResourceGroupName
       workspace_name:
         title: Workspace Name
-        description: Customer's workspace name that the application registration portal is assigned
+        description: Customer's workspace name assigned to the application registration portal
         type: string
         required: true
         example: ExampleWorkspaceName

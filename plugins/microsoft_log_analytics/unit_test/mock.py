@@ -13,6 +13,7 @@ STUB_WORKSPACE_ID = "12345"
 STUB_RESOURCE_GROUP_NAME = "exampleresourcegroupname"
 STUB_WORKSPACE_NAME = "ExampleWorkspace"
 STUB_SUBSCRIPTION_ID = "1234"
+STUB_SAVED_SEARCH_NAME = "test-new-saved-search-id-2015"
 
 STUB_CONNECTION = {"client_id": "1234", "client_secret": {"secretKey": "1234"}, "tenant_id": "123"}
 
@@ -56,8 +57,19 @@ def mock_conditions(url: str, status_code: int) -> MockResponse:
         return MockResponse("test_get_workspace_id", status_code)
     if url == Endpoint.GET_LOG_DATA.format("v1", STUB_WORKSPACE_ID):
         return MockResponse("test_get_log_data_ok", status_code)
-    if url == Endpoint.SEND_LOG_DATA.format(STUB_WORKSPACE_ID, "2016-04-01"):
+    if url in (
+        Endpoint.SEND_LOG_DATA.format("", "2016-04-01"),
+        Endpoint.SEND_LOG_DATA.format(STUB_WORKSPACE_ID, "2016-04-01"),
+    ):
         return MockResponse("test_send_log_data_ok", status_code)
+    if url == Endpoint.LIST_ALL_SEARCHES.format(
+        STUB_SUBSCRIPTION_ID, STUB_RESOURCE_GROUP_NAME, STUB_WORKSPACE_NAME, "2020-08-01"
+    ):
+        return MockResponse("test_list_all_searches_ok", status_code)
+    if url == Endpoint.GET_SAVED_SEARCH.format(
+        STUB_SUBSCRIPTION_ID, STUB_RESOURCE_GROUP_NAME, STUB_WORKSPACE_NAME, STUB_SAVED_SEARCH_NAME, "2020-08-01"
+    ):
+        return MockResponse("test_get_saved_search_ok", status_code)
 
     raise Exception("Response has been not implemented")
 
@@ -96,3 +108,7 @@ def mock_request_500(*args, **kwargs) -> MockResponse:
 
 def mock_request_503(*args, **kwargs) -> MockResponse:
     return mock_conditions(args[1], 503)
+
+
+def mock_request_505(*args, **kwargs) -> MockResponse:
+    return mock_conditions(args[1], 505)

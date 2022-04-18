@@ -21,6 +21,7 @@ from unit_test.mock import (
     mock_request_429,
     mock_request_500,
     mock_request_503,
+    mock_request_505,
     mocked_request,
     STUB_CONNECTION,
 )
@@ -46,8 +47,9 @@ class TestConnection(TestCase):
             (mock_request_403, PluginException.causes[PluginException.Preset.UNAUTHORIZED]),
             (mock_request_409, Message.CONFLICTED_STATE_OF_OBJECT_MESSAGE),
             (mock_request_429, PluginException.causes[PluginException.Preset.RATE_LIMIT]),
-            (mock_request_500, PluginException.causes[PluginException.Preset.UNKNOWN]),
+            (mock_request_500, PluginException.causes[PluginException.Preset.SERVER_ERROR]),
             (mock_request_503, PluginException.causes[PluginException.Preset.RATE_LIMIT]),
+            (mock_request_505, PluginException.causes[PluginException.Preset.UNKNOWN]),
         ],
     )
     @mock.patch("icon_microsoft_log_analytics.util.tools.backoff_function", return_value=0)
