@@ -534,7 +534,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.2.0 - Added new actions Create or Update Saved Search, Get Saved Search, Delete Saved Search, and List All Saved Searches
+* 1.2.0 - Add new actions Create or Update Saved Search, Get Saved Search, Delete Saved Search, and List All Saved Searches
 * 1.1.0 - Search trigger thats run Log Analytics query every interval time
 * 1.0.0 - Initial plugin (Actions: Get Log Data, Send Log Data)
 
