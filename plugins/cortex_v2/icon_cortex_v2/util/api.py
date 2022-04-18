@@ -59,8 +59,26 @@ class API:
         params = {"range": _range if _range else None, "sort": _sort if _sort else None}
         return self.send_request("POST", path, query, params).json()
 
-    def get_job_by_id(self, job_id):
-        return self.send_request("GET", f"job/{job_id}").json()
+    def get_analyzer_by_id(self, analyzer_id: str = None):
+        # If no analyzer_id then return all analyzers
+        # Example curl request https://github.com/TheHive-Project/CortexDocs/blob/2.1/api/api-guide.md#list-and-search-1
+        endpoint = f"analyzer/{analyzer_id}" if analyzer_id else "analyzer"
+        return self.send_request("GET", endpoint).json()
+
+    def get_analyzer_by_type(self, analyzer_type: str = None):
+        # Example curl request https://github.com/TheHive-Project/CortexDocs/blob/2.1/api/api-guide.md#get-by-type
+        return self.send_request("GET", f"analyzer/type/{analyzer_type}").json()
+
+    def get_analyzers(self):
+        return self.get_analyzer_by_id()
+
+    def get_job_by_id(self, job_id: str = None):
+        # If no job_id then return all jobs
+        endpoint = f"job/{job_id}" if job_id else "job"
+        return self.send_request("GET", endpoint).json()
+
+    def get_jobs(self):
+        return self.get_job_by_id()
 
     def delete_job_by_id(self, job_id) -> bool:
         self.send_request("DELETE", f"job/{job_id}")
