@@ -1,0 +1,10 @@
+{
+  "status": 404,
+  "message": "The resource does not exist or access is prohibited.",
+  "links": [
+    {
+      "href": "https://example.com/api/3/assets/4",
+      "rel": "self"
+    }
+  ]
+}

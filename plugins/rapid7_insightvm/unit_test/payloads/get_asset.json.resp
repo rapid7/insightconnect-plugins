@@ -1,0 +1,36 @@
+{
+  "addresses" : [ {
+    "ip" : "198.51.100.100",
+    "mac" : "00:00:00:00:00:00"
+  } ],
+  "assessedForPolicies" : false,
+  "assessedForVulnerabilities" : true,
+  "history" : [ {
+    "date" : "2020-08-19T11:14:25.007Z",
+    "scanId" : 3,
+    "type" : "SCAN",
+    "version" : 1
+  } ],
+  "hostName" : "example.com",
+  "hostNames" : [ {
+    "name" : "example.com",
+    "source" : "dns"
+  } ],
+  "id" : 1,
+  "ip" : "198.51.100.100",
+  "links" : [],
+  "mac" : "00:00:00:00:00:00",
+  "os" : "Linux 3.2",
+  "osFingerprint" : {},
+  "rawRiskScore" : 0.0,
+  "riskScore" : 0.0,
+  "services" : [],
+  "vulnerabilities" : {
+    "critical" : 0,
+    "exploits" : 0,
+    "malwareKits" : 0,
+    "moderate" : 2,
+    "severe" : 0,
+    "total" : 2
+  }
+}

@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import UpdateTagSearchCriteriaInput, UpdateTagSearchCriteriaOutput
 
 # Custom imports below
@@ -6,7 +6,7 @@ from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
-class UpdateTagSearchCriteria(komand.Action):
+class UpdateTagSearchCriteria(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="update_tag_search_criteria",
@@ -20,7 +20,7 @@ class UpdateTagSearchCriteria(komand.Action):
         tag_id = params.get("id")
         search_criteria = params.get("searchCriteria")
         endpoint = endpoints.Tag.tag_search_criteria(self.connection.console_url, tag_id)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         response = resource_helper.resource_request(endpoint=endpoint, method="put", payload=search_criteria)
 

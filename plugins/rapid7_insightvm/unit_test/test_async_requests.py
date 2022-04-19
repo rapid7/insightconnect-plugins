@@ -1,3 +1,8 @@
+import sys
+import os
+
+sys.path.append(os.path.abspath("../"))
+
 from unittest import TestCase
 from komand_rapid7_insightvm.util import async_requests
 import asyncio
@@ -8,11 +13,11 @@ class MockResponse:
     def __init__(self):
         self.status = 200
 
-    def text(self):
+    async def text(self):
         return '{"test_key": "test_value"}'
 
     async def json(self):
-        return json.loads(self.text())
+        return json.loads(await self.text())
 
 
 class MockSession:

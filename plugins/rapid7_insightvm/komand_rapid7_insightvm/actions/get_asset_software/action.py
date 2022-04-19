@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetAssetSoftwareInput, GetAssetSoftwareOutput, Input, Output, Component
 
 # Custom imports below
@@ -6,7 +6,7 @@ from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
-class GetAssetSoftware(komand.Action):
+class GetAssetSoftware(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_asset_software",
@@ -20,7 +20,7 @@ class GetAssetSoftware(komand.Action):
         asset_id = params.get(Input.ASSET_ID)
 
         endpoint = endpoints.Asset.asset_software(self.connection.console_url, asset_id)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         software = resource_helper.resource_request(endpoint=endpoint)
 

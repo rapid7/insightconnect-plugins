@@ -4,7 +4,8 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM Console
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations, scan results and start scans
-version: 4.9.1
+version: 4.9.2
+supported_versions: ["Rapid7 InsightVM API v3 2022-03-30"]
 vendor: rapid7
 support: rapid7
 status: []
@@ -3301,7 +3302,7 @@ actions:
         title: Email
         description: The email address of the user
         type: string
-        example: "example@gmail.com"
+        example: "user@example.com"
         required: true
       enabled:
         title: Enabled
@@ -3391,7 +3392,7 @@ actions:
         title: Email
         description: The email address of the user
         type: string
-        example: "example@gmail.com"
+        example: "user@example.com"
         required: true
       enabled:
         title: Enabled
@@ -3830,15 +3831,15 @@ actions:
         required: true
       scope:
         title: Scope ID
-        description: The ID of the scope the vulnerability exception applies to.  May be empty if type is Global
+        description: The ID of the scope the vulnerability exception applies to. May be empty if type is Global
         type: integer
         example: 1234
         required: false
       expiration:
         title: Expiration
-        description: The date the vulnerability exception expires
+        description: The date the vulnerability exception expires e.g 2021-12-30T00:00:00Z
         type: date
-        example: 10-12-2020
+        example: 2021-12-30 00:00:00
         required: false
       comment:
         title: Comment
@@ -4053,8 +4054,8 @@ triggers:
         description: 'List of scan statuses to match for trigger; options include: Aborted, Successful, Running, Stopped, Failed, Paused, Unknown'
         type: '[]string'
         required: false
-        example: ['Successful']
-        default: ['Successful']
+        example: ["Successful"]
+        default: '["Successful"]'
     output:
       scan:
         title: Scan
@@ -4077,8 +4078,8 @@ triggers:
         description: 'List of vulnerability statuses to match against. Options include: Under Review and Approved'
         type: '[]string'
         required: false
-        example: ['Under Review']
-        default: ['Under Review']
+        example: ["Under Review"]
+        default: '["Under Review"]'
     output:
       exception:
         title: Vulnerability Exception

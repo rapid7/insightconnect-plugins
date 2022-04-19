@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import DeleteAssetInput, DeleteAssetOutput, Input, Output, Component
 
 # Custom imports below
@@ -6,7 +6,7 @@ from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
-class DeleteAsset(komand.Action):
+class DeleteAsset(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="delete_asset",
@@ -20,7 +20,7 @@ class DeleteAsset(komand.Action):
 
         asset_id = params.get(Input.ID)
         endpoint = endpoints.Asset.assets(self.connection.console_url, asset_id)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         resource_helper.resource_request(endpoint, method="delete")
 
