@@ -1,0 +1,48 @@
+{
+  "resources" : [ {
+    "format" : "pdf",
+    "frequency" : {
+      "type" : "none"
+    },
+    "id" : 1,
+    "language" : "en-US",
+    "links" : [ {
+      "href" : "https://example.com/api/3/reports/1",
+      "rel" : "self"
+    }, {
+      "id" : 1,
+      "href" : "https://exammple.com/api/3/users/1",
+      "rel" : "Owner"
+    }, {
+      "id" : "audit-report",
+      "href" : "https://example.com/api/3/report_templates/audit-report",
+      "rel" : "Template"
+    } ],
+    "name" : "Report",
+    "owner" : 1,
+    "riskTrend" : {
+      "allAssets" : {
+        "total" : true,
+        "trend" : "average-risk"
+      },
+      "assets" : false,
+      "from" : "P1Y"
+    },
+    "scope" : {
+      "assetsInOnlyMostRecentScanOfSite" : false,
+      "sites" : [ 1 ]
+    },
+    "template" : "audit-report",
+    "timezone" : "America/Los_Angeles"
+  } ],
+  "page" : {
+    "number" : 0,
+    "size" : 1,
+    "totalResources" : 2,
+    "totalPages" : 2
+  },
+  "links" : [ {
+    "href" : "https://example.com/api/3/reports?page=0&size=1",
+    "rel" : "self"
+  } ]
+}

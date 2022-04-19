@@ -1,7 +1,7 @@
 import aiohttp
 from typing import Collection
 from .shared_resources import RequestParams, resource_request_status_code_check
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class AsyncRequests:

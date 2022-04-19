@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 import time
 from .schema import NewExceptionRequestInput, NewExceptionRequestOutput, Input, Output, Component
 
@@ -7,7 +7,7 @@ from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
-class NewExceptionRequest(komand.Trigger):
+class NewExceptionRequest(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="new_exception_request",

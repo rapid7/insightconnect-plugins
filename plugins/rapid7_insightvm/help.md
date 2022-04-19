@@ -14,6 +14,10 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 
 * Username and password for a user with the necessary permissions
 
+# Supported Product Versions
+
+* Rapid7 InsightVM API v3 2022-03-30
+
 # Documentation
 
 ## Setup
@@ -4099,11 +4103,11 @@ This action is used to create a vulnerability exception submission.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|Exception created with InsightConnect|True|Comment to include in the vulnerability exception submission|None|example comment|
-|expiration|date|None|False|The date the vulnerability exception expires|None|10-12-2020|
+|expiration|date|None|False|The date the vulnerability exception expires e.g 2021-12-30T00:00:00Z|None|2021-12-30 00:00:00|
 |key|string|None|False|The key to identify a specific instance if the type is Instance|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |port|integer|None|False|The port the vulnerability appears on if the type is Instance|None|40000|
 |reason|string|None|True|Reason for the exception|['False Positive', 'Compensating Control', 'Acceptable Use', 'Acceptable Risk', 'Other']|False Positive|
-|scope|integer|None|False|The ID of the scope the vulnerability exception applies to.  May be empty if type is Global|None|1234|
+|scope|integer|None|False|The ID of the scope the vulnerability exception applies to. May be empty if type is Global|None|1234|
 |type|string|None|True|The type of vulnerability exception to create|['Global', 'Site', 'Asset', 'Asset Group', 'Instance']|Global|
 |vulnerability|string|None|True|The vulnerability this exception applies to|None|vulnerability|
 
@@ -4112,7 +4116,7 @@ Example input:
 ```
 {
   "comment": "example comment",
-  "expiration": "10-12-2020",
+  "expiration": "2021-12-30 00:00:00",
   "key": "9de5069c5afe602b2ea0a04b66beb2c0",
   "port": 40000,
   "reason": "False Positive",
@@ -4877,7 +4881,7 @@ This action is used to create a new user account (limited to external authentica
 |access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|False|
 |authentication_id|integer|None|False|The identifier of the authentication source to use to authenticate the user. The source with the specified identifier must be of the type specified by Authentication Type. If Authentication ID is omitted, then one source of the specified Authentication Type is selected|None|1234|
 |authentication_type|string|ldap|True|The type of the authentication source to use to authenticate the user|['kerberos', 'ldap', 'saml']|ldap|
-|email|string|None|True|The email address of the user|None|example@gmail.com|
+|email|string|None|True|The email address of the user|None|user@example.com|
 |enabled|boolean|True|True|Whether the user account is enabled|None|True|
 |login|string|None|True|The login name of the user|None|jdoe24|
 |name|string|None|True|The full name of the user|None|John Doe|
@@ -4891,7 +4895,7 @@ Example input:
   "access_all_sites": false,
   "authentication_id": 1234,
   "authentication_type": "ldap",
-  "email": "example@gmail.com",
+  "email": "user@example.com",
   "enabled": true,
   "login": "jdoe24",
   "name": "John Doe",
@@ -4936,7 +4940,7 @@ This action is used to update the configuration of an existing user account.
 |access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|False|
 |authentication_id|integer|None|False|The identifier of the authentication source to use to authenticate the user. The source with the specified identifier must be of the type specified by Authentication Type. If Authentication ID is omitted, then one source of the specified Authentication Type is selected|None|567|
 |authentication_type|string|ldap|True|The type of the authentication source to use to authenticate the user|['normal', 'admin', 'kerberos', 'ldap', 'saml']|ldap|
-|email|string|None|True|The email address of the user|None|example@gmail.com|
+|email|string|None|True|The email address of the user|None|user@example.com|
 |enabled|boolean|True|True|Whether the user account is enabled|None|True|
 |id|integer|None|True|The identifier of the user|None|1234|
 |login|string|None|True|The login name of the user|None|jdoe24|
@@ -4951,7 +4955,7 @@ Example input:
   "access_all_sites": false,
   "authentication_id": 567,
   "authentication_type": "ldap",
-  "email": "example@gmail.com",
+  "email": "user@example.com",
   "enabled": true,
   "id": 1234,
   "login": "jdoe24",
@@ -5109,14 +5113,8 @@ Example input:
 {
   "access_all_asset_groups": false,
   "access_all_sites": false,
-  "authentication_id": 567,
-  "authentication_type": "ldap",
-  "email": "example@gmail.com",
-  "enabled": true,
-  "id": 1234,
-  "login": "jdoe24",
-  "name": "John Doe",
-  "role_id": "global-admin"
+  "role_id": "global-admin",
+  "user_id": 1234
 }
 ```
 
@@ -5154,16 +5152,11 @@ Example input:
 
 ```
 {
-  "access_all_asset_groups": false,
-  "access_all_sites": false,
-  "authentication_id": 567,
-  "authentication_type": "ldap",
-  "email": "example@gmail.com",
-  "enabled": true,
-  "id": 1234,
-  "login": "jdoe24",
-  "name": "John Doe",
-  "role_id": "global-admin"
+  "asset_group_ids": [
+    1234,
+    5678
+  ],
+  "user_id": 1234
 }
 ```
 
@@ -5279,16 +5272,11 @@ Example input:
 
 ```
 {
-  "access_all_asset_groups": false,
-  "access_all_sites": false,
-  "authentication_id": 567,
-  "authentication_type": "ldap",
-  "email": "example@gmail.com",
-  "enabled": true,
-  "id": 1234,
-  "login": "jdoe24",
-  "name": "John Doe",
-  "role_id": "global-admin"
+  "site_ids": [
+    1234,
+    567
+  ],
+  "user_id": 1234
 }
 ```
 
@@ -5614,6 +5602,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.9.2 - Add expiration date conversion to ISO8601 in Create Vulnerability Exception Submission and Update Vulnerability Exception Expiration Date actions | Fix issue with incorrect expiration date format in Get Expiring Vulnerability Exceptions action | Fix issue in List Reports action where first page of reports was not included | Fix issue in List Reports action where `found` output was returned as false even though list of reports was returned | Updated plugin SDK to latest version
 * 4.9.1 - Rename the plugin with "console" as there is a new cloud based plugin for InsightVM
 * 4.9.0 - Add new `size` input to List Inactive Assets | Update List Inactive Assets to return 500 results by default | Remove the usage of Maya from the plugin
 * 4.8.1 - Fixed an issue where some actions were expecting bytes data and were getting strings instead

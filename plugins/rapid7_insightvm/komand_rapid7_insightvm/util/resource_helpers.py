@@ -3,7 +3,7 @@ import urllib3
 import re
 from requests import Session
 from logging import Logger
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from .exceptions import ResourceNotFound
 from . import endpoints, resource_requests
 
