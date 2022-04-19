@@ -4,7 +4,8 @@ products: [insightconnect]
 name: csv
 title: CSV
 description: CSV (Comma Separated Values) is a simple data format for storing data. This plugin allows one to extract fields from CSV strings and files
-version: 2.0.0
+version: 2.0.1
+supported_versions: []
 vendor: rapid7
 support: community
 status: []
