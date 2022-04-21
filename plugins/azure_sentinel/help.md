@@ -13,6 +13,17 @@ Azure Sentinel is Microsoft's' automated security service.
 * Creating and updating incident comments
 * Deleting incident comments
 * Listing incident comments
+* Creating indicator
+* Retrieving indicator
+* Updating indicator
+* Deleting indicator
+* Query indicator
+* Append tags for indicator
+* Replace tags for indicator
+* Creating and updating watchlist items
+* Retrieving watchlist item
+* Deleting watchlist item
+* Listing watchlist items
 
 
 # Requirements
@@ -48,6 +59,166 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### List Watchlist Items
+
+This action is used to list existing Watchlist Items.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup1|
+|subscriptionId|string|None|True|Azure subscription ID|None|aaaef455-a780-44ca-9e51-aaafffeeea3a|
+|watchlistAlias|string|None|True|The watchlist alias|None|exampleAlias|
+|workspaceName|string|None|True|The name of the workspace|None|workspace23|
+
+Example input:
+
+```
+{
+  "resourceGroupName": "resourcegroup1",
+  "subscriptionId": "aaaef455-a780-44ca-9e51-aaafffeeea3a",
+  "watchlistAlias": "exampleAlias",
+  "workspaceName": "workspace23"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|watchlistItems|[]WatchListItems|True|Gets all watchlist Items|
+
+Example output:
+
+```
+```
+
+#### Get Watchlist Item
+
+This action is used to get existing Watchlist Item.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup1|
+|subscriptionId|string|None|True|Azure subscription ID|None|aaaef455-a780-44ca-9e51-aaafffeeea3a|
+|watchlistAlias|string|None|True|The watchlist alias|None|exampleAlias|
+|watchlistItemId|string|None|True|Watchlist Item Id (GUID)|None|3395856c-e81f-2b73-82de-e72602f798b6|
+|workspaceName|string|None|True|The name of the workspace|None|workspace23|
+
+Example input:
+
+```
+{
+  "resourceGroupName": "resourcegroup1",
+  "subscriptionId": "aaaef455-a780-44ca-9e51-aaafffeeea3a",
+  "watchlistAlias": "exampleAlias",
+  "watchlistItemId": "3395856c-e81f-2b73-82de-e72602f798b6",
+  "workspaceName": "workspace23"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|etag|string|True|Etag of the azure resource|
+|id|string|True|Identifier created indicator|
+|name|string|True|Name of the entity|
+|properties|WatchlistItemProperties|True|Object containing all the necessary properties to conclude a query|
+|systemData|SystemData|False|Azure Resource Manager metadata containing createdBy and modifiedBy information|
+|type|string|True|Type of the entity|
+
+Example output:
+
+```
+```
+
+#### Delete Watchlist Item
+
+This action is used to delete existing Watchlist Item.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup1|
+|subscriptionId|string|None|True|Azure subscription ID|None|aaaef455-a780-44ca-9e51-aaafffeeea3a|
+|watchlistAlias|string|None|True|The watchlist alias|None|exampleAlias|
+|watchlistItemId|string|None|True|Watchlist Item Id (GUID)|None|3395856c-e81f-2b73-82de-e72602f798b6|
+|workspaceName|string|None|True|The name of the workspace|None|workspace23|
+
+Example input:
+
+```
+{
+  "resourceGroupName": "resourcegroup1",
+  "subscriptionId": "aaaef455-a780-44ca-9e51-aaafffeeea3a",
+  "watchlistAlias": "exampleAlias",
+  "watchlistItemId": "3395856c-e81f-2b73-82de-e72602f798b6",
+  "workspaceName": "workspace23"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|message|string|True|Response message|
+
+Example output:
+
+```
+```
+
+#### Create or Update Watchlist Item
+
+This action creates a new watchlist item or updates an existing watchlist item.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|etag|string|None|False|Etag of the azure resource|None|0300bf09-0000-0000-0000-5c37296e0000|
+|properties|WatchlistItemProperties|None|True|Object containing all the necessary properties to conclude a query|None|{ 'Gateway subnet': 'https://example.com' }|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup1|
+|subscriptionId|string|None|True|Azure subscription ID|None|aaaef455-a780-44ca-9e51-aaafffeeea3a|
+|watchlistAlias|string|None|True|The watchlist alias|None|exampleAlias|
+|watchlistItemId|string|None|True|Watchlist Item Id (GUID)|None|3395856c-e81f-2b73-82de-e72602f798b6|
+|workspaceName|string|None|True|The name of the workspace|None|workspace23|
+
+Example input:
+
+```
+{
+  "etag": "0300bf09-0000-0000-0000-5c37296e0000",
+  "properties": "{ 'Gateway subnet': 'https://example.com' }",
+  "resourceGroupName": "resourcegroup1",
+  "subscriptionId": "aaaef455-a780-44ca-9e51-aaafffeeea3a",
+  "watchlistAlias": "exampleAlias",
+  "watchlistItemId": "3395856c-e81f-2b73-82de-e72602f798b6",
+  "workspaceName": "workspace23"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|etag|string|True|Etag of the azure resource|
+|id|string|True|Identifier created indicator|
+|name|string|True|Name of the entity|
+|properties|WatchlistItemProperties|True|Object containing all the necessary properties to conclude a query|
+|systemData|SystemData|False|Azure Resource Manager metadata containing createdBy and modifiedBy information|
+|type|string|True|Type of the entity|
+
+Example output:
+
+```
+```
 
 #### Update Indicator
 
@@ -1162,7 +1333,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.1.0 - New actions: Create or Update Comment, Delete Comment, List Comments, Get Comment
+* 2.0.0 - Changed CreatedByType field for enum types. New actions: Create or Update Comment, Delete Comment, List Comments, Get Comment, Create Indicator, Get Indicator, Update Indicator, Delete Indicator, Query Indicator, Append Tags, Replace Tags, Create Or Update Watchlist Items, Get Watchlist Item, Delete Watchlist Item, List Watchlist Items
 * 1.0.0 - Initial plugin (Actions: Create or Update Incident, Delete Incident, List Incidents, Get Incident, List Alerts, List Bookmarks, List Entities)
 
 # Links

@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 
 from .schema import AppendTagsInput, AppendTagsOutput, Input, Component
+from icon_azure_sentinel.util.tools import map_output
 
 
 class AppendTags(insightconnect_plugin_runtime.Action):
@@ -17,5 +18,6 @@ class AppendTags(insightconnect_plugin_runtime.Action):
         data_dict = self.connection.api_client.append_tags(
             resource_group_name, workspace_name, subscription_id, indicator_name, **params
         )
+        data_dict = map_output(data_dict)
 
         return data_dict

@@ -148,17 +148,11 @@ class UpdateIndicatorInput(insightconnect_plugin_runtime.Input):
           "description": "Is threat intelligence entity defanged",
           "order": 2
         },
-        "description": {
-          "type": "string",
-          "title": "Description",
-          "description": "Description of a threat intelligence entity",
-          "order": 3
-        },
         "displayName": {
           "type": "string",
           "title": "Display Name",
           "description": "Display name of a threat intelligence entity",
-          "order": 4
+          "order": 3
         },
         "externalReferences": {
           "type": "array",
@@ -167,7 +161,7 @@ class UpdateIndicatorInput(insightconnect_plugin_runtime.Input):
           "items": {
             "$ref": "#/definitions/ThreatIntelligenceExternalReference"
           },
-          "order": 5
+          "order": 4
         },
         "granularMarkings": {
           "type": "array",
@@ -176,7 +170,7 @@ class UpdateIndicatorInput(insightconnect_plugin_runtime.Input):
           "items": {
             "$ref": "#/definitions/ThreatIntelligenceGranularMarkingModel"
           },
-          "order": 6
+          "order": 5
         },
         "indicatorTypes": {
           "type": "array",
@@ -185,16 +179,7 @@ class UpdateIndicatorInput(insightconnect_plugin_runtime.Input):
           "items": {
             "type": "string"
           },
-          "order": 7
-        },
-        "killChainPhases": {
-          "type": "array",
-          "title": "Kill Chain Phases",
-          "description": "Describes threat kill chain phase entity",
-          "items": {
-            "$ref": "#/definitions/ThreatIntelligenceKillChainPhase"
-          },
-          "order": 8
+          "order": 6
         },
         "labels": {
           "type": "array",
@@ -203,19 +188,19 @@ class UpdateIndicatorInput(insightconnect_plugin_runtime.Input):
           "items": {
             "type": "string"
           },
-          "order": 9
+          "order": 7
         },
         "language": {
           "type": "string",
           "title": "Language",
           "description": "Language of threat intelligence entity",
-          "order": 10
+          "order": 8
         },
         "modified": {
           "type": "string",
           "title": "Modified by",
           "description": "Modified by",
-          "order": 11
+          "order": 9
         },
         "objectMarkingRefs": {
           "type": "array",
@@ -224,7 +209,7 @@ class UpdateIndicatorInput(insightconnect_plugin_runtime.Input):
           "items": {
             "type": "string"
           },
-          "order": 12
+          "order": 10
         },
         "parsedPattern": {
           "type": "array",
@@ -233,31 +218,31 @@ class UpdateIndicatorInput(insightconnect_plugin_runtime.Input):
           "items": {
             "$ref": "#/definitions/ThreatIntelligenceParsedPattern"
           },
-          "order": 13
+          "order": 11
         },
         "pattern": {
           "type": "string",
           "title": "Pattern",
           "description": "Pattern of a threat intelligence entity",
-          "order": 14
+          "order": 12
         },
         "patternType": {
           "type": "string",
           "title": "Pattern Type",
           "description": "Pattern type of a threat intelligence entity",
-          "order": 15
+          "order": 13
         },
         "patternVersion": {
           "type": "string",
           "title": "Pattern Version",
           "description": "Pattern version of a threat intelligence entity",
-          "order": 16
+          "order": 14
         },
         "revoked": {
           "type": "boolean",
           "title": "Revoked",
           "description": "Is threat intelligence entity revoked",
-          "order": 17
+          "order": 15
         },
         "threatIntelligenceTags": {
           "type": "array",
@@ -266,7 +251,7 @@ class UpdateIndicatorInput(insightconnect_plugin_runtime.Input):
           "items": {
             "type": "string"
           },
-          "order": 18
+          "order": 16
         },
         "threatTypes": {
           "type": "array",
@@ -275,19 +260,13 @@ class UpdateIndicatorInput(insightconnect_plugin_runtime.Input):
           "items": {
             "type": "string"
           },
-          "order": 19
-        },
-        "validFrom": {
-          "type": "string",
-          "title": "Valid From",
-          "description": "Valid from",
-          "order": 20
+          "order": 17
         },
         "validUntil": {
           "type": "string",
           "title": "Valid Until",
           "description": "Valid until",
-          "order": 21
+          "order": 18
         }
       },
       "definitions": {
@@ -354,24 +333,6 @@ class UpdateIndicatorInput(insightconnect_plugin_runtime.Input):
             }
           }
         },
-        "ThreatIntelligenceKillChainPhase": {
-          "type": "object",
-          "title": "ThreatIntelligenceKillChainPhase",
-          "properties": {
-            "killChainName": {
-              "type": "string",
-              "title": "Chain Name",
-              "description": "Kill chain name",
-              "order": 1
-            },
-            "phaseName": {
-              "type": "string",
-              "title": "Phase Name",
-              "description": "Kill chain phase name",
-              "order": 2
-            }
-          }
-        },
         "ThreatIntelligenceParsedPattern": {
           "type": "object",
           "title": "ThreatIntelligenceParsedPattern",
@@ -430,24 +391,6 @@ class UpdateIndicatorInput(insightconnect_plugin_runtime.Input):
               "order": 2
             }
           }
-        }
-      }
-    },
-    "ThreatIntelligenceKillChainPhase": {
-      "type": "object",
-      "title": "ThreatIntelligenceKillChainPhase",
-      "properties": {
-        "killChainName": {
-          "type": "string",
-          "title": "Chain Name",
-          "description": "Kill chain name",
-          "order": 1
-        },
-        "phaseName": {
-          "type": "string",
-          "title": "Phase Name",
-          "description": "Kill chain phase name",
-          "order": 2
         }
       }
     },

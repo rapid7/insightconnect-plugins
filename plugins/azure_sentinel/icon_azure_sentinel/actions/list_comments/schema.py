@@ -202,36 +202,6 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "CreatedByType": {
-          "type": "object",
-          "title": "CreatedByType",
-          "properties": {
-            "Application": {
-              "type": "string",
-              "title": "Application",
-              "description": "Application",
-              "order": 1
-            },
-            "Key": {
-              "type": "string",
-              "title": "Key",
-              "description": "Description",
-              "order": 2
-            },
-            "ManagedIdentity": {
-              "type": "string",
-              "title": "Managed Identity",
-              "description": "Managed identity",
-              "order": 3
-            },
-            "User": {
-              "type": "string",
-              "title": "User",
-              "description": "User",
-              "order": 4
-            }
-          }
-        },
         "SystemData": {
           "type": "object",
           "title": "SystemData",
@@ -251,9 +221,15 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
               "order": 2
             },
             "createdByType": {
-              "$ref": "#/definitions/CreatedByType",
+              "type": "string",
               "title": "Created By Type",
               "description": "The type of identity that created the resource",
+              "enum": [
+                "Application",
+                "Key",
+                "ManagedIdentity",
+                "User"
+              ],
               "order": 3
             },
             "lastModifiedAt": {
@@ -271,74 +247,18 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
               "order": 5
             },
             "lastModifiedByType": {
-              "$ref": "#/definitions/CreatedByType",
+              "type": "string",
               "title": "Last Modified By Type",
               "description": "The type of identity that last modified the resource",
+              "enum": [
+                "Application",
+                "Key",
+                "ManagedIdentity",
+                "User"
+              ],
               "order": 6
             }
-          },
-          "definitions": {
-            "CreatedByType": {
-              "type": "object",
-              "title": "CreatedByType",
-              "properties": {
-                "Application": {
-                  "type": "string",
-                  "title": "Application",
-                  "description": "Application",
-                  "order": 1
-                },
-                "Key": {
-                  "type": "string",
-                  "title": "Key",
-                  "description": "Description",
-                  "order": 2
-                },
-                "ManagedIdentity": {
-                  "type": "string",
-                  "title": "Managed Identity",
-                  "description": "Managed identity",
-                  "order": 3
-                },
-                "User": {
-                  "type": "string",
-                  "title": "User",
-                  "description": "User",
-                  "order": 4
-                }
-              }
-            }
           }
-        }
-      }
-    },
-    "CreatedByType": {
-      "type": "object",
-      "title": "CreatedByType",
-      "properties": {
-        "Application": {
-          "type": "string",
-          "title": "Application",
-          "description": "Application",
-          "order": 1
-        },
-        "Key": {
-          "type": "string",
-          "title": "Key",
-          "description": "Description",
-          "order": 2
-        },
-        "ManagedIdentity": {
-          "type": "string",
-          "title": "Managed Identity",
-          "description": "Managed identity",
-          "order": 3
-        },
-        "User": {
-          "type": "string",
-          "title": "User",
-          "description": "User",
-          "order": 4
         }
       }
     },
@@ -484,36 +404,6 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
                 }
               }
             },
-            "CreatedByType": {
-              "type": "object",
-              "title": "CreatedByType",
-              "properties": {
-                "Application": {
-                  "type": "string",
-                  "title": "Application",
-                  "description": "Application",
-                  "order": 1
-                },
-                "Key": {
-                  "type": "string",
-                  "title": "Key",
-                  "description": "Description",
-                  "order": 2
-                },
-                "ManagedIdentity": {
-                  "type": "string",
-                  "title": "Managed Identity",
-                  "description": "Managed identity",
-                  "order": 3
-                },
-                "User": {
-                  "type": "string",
-                  "title": "User",
-                  "description": "User",
-                  "order": 4
-                }
-              }
-            },
             "SystemData": {
               "type": "object",
               "title": "SystemData",
@@ -533,9 +423,15 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
                   "order": 2
                 },
                 "createdByType": {
-                  "$ref": "#/definitions/CreatedByType",
+                  "type": "string",
                   "title": "Created By Type",
                   "description": "The type of identity that created the resource",
+                  "enum": [
+                    "Application",
+                    "Key",
+                    "ManagedIdentity",
+                    "User"
+                  ],
                   "order": 3
                 },
                 "lastModifiedAt": {
@@ -553,74 +449,18 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
                   "order": 5
                 },
                 "lastModifiedByType": {
-                  "$ref": "#/definitions/CreatedByType",
+                  "type": "string",
                   "title": "Last Modified By Type",
                   "description": "The type of identity that last modified the resource",
+                  "enum": [
+                    "Application",
+                    "Key",
+                    "ManagedIdentity",
+                    "User"
+                  ],
                   "order": 6
                 }
-              },
-              "definitions": {
-                "CreatedByType": {
-                  "type": "object",
-                  "title": "CreatedByType",
-                  "properties": {
-                    "Application": {
-                      "type": "string",
-                      "title": "Application",
-                      "description": "Application",
-                      "order": 1
-                    },
-                    "Key": {
-                      "type": "string",
-                      "title": "Key",
-                      "description": "Description",
-                      "order": 2
-                    },
-                    "ManagedIdentity": {
-                      "type": "string",
-                      "title": "Managed Identity",
-                      "description": "Managed identity",
-                      "order": 3
-                    },
-                    "User": {
-                      "type": "string",
-                      "title": "User",
-                      "description": "User",
-                      "order": 4
-                    }
-                  }
-                }
               }
-            }
-          }
-        },
-        "CreatedByType": {
-          "type": "object",
-          "title": "CreatedByType",
-          "properties": {
-            "Application": {
-              "type": "string",
-              "title": "Application",
-              "description": "Application",
-              "order": 1
-            },
-            "Key": {
-              "type": "string",
-              "title": "Key",
-              "description": "Description",
-              "order": 2
-            },
-            "ManagedIdentity": {
-              "type": "string",
-              "title": "Managed Identity",
-              "description": "Managed identity",
-              "order": 3
-            },
-            "User": {
-              "type": "string",
-              "title": "User",
-              "description": "User",
-              "order": 4
             }
           }
         },
@@ -643,9 +483,15 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
               "order": 2
             },
             "createdByType": {
-              "$ref": "#/definitions/CreatedByType",
+              "type": "string",
               "title": "Created By Type",
               "description": "The type of identity that created the resource",
+              "enum": [
+                "Application",
+                "Key",
+                "ManagedIdentity",
+                "User"
+              ],
               "order": 3
             },
             "lastModifiedAt": {
@@ -663,42 +509,16 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
               "order": 5
             },
             "lastModifiedByType": {
-              "$ref": "#/definitions/CreatedByType",
+              "type": "string",
               "title": "Last Modified By Type",
               "description": "The type of identity that last modified the resource",
+              "enum": [
+                "Application",
+                "Key",
+                "ManagedIdentity",
+                "User"
+              ],
               "order": 6
-            }
-          },
-          "definitions": {
-            "CreatedByType": {
-              "type": "object",
-              "title": "CreatedByType",
-              "properties": {
-                "Application": {
-                  "type": "string",
-                  "title": "Application",
-                  "description": "Application",
-                  "order": 1
-                },
-                "Key": {
-                  "type": "string",
-                  "title": "Key",
-                  "description": "Description",
-                  "order": 2
-                },
-                "ManagedIdentity": {
-                  "type": "string",
-                  "title": "Managed Identity",
-                  "description": "Managed identity",
-                  "order": 3
-                },
-                "User": {
-                  "type": "string",
-                  "title": "User",
-                  "description": "User",
-                  "order": 4
-                }
-              }
             }
           }
         }
@@ -723,9 +543,15 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
           "order": 2
         },
         "createdByType": {
-          "$ref": "#/definitions/CreatedByType",
+          "type": "string",
           "title": "Created By Type",
           "description": "The type of identity that created the resource",
+          "enum": [
+            "Application",
+            "Key",
+            "ManagedIdentity",
+            "User"
+          ],
           "order": 3
         },
         "lastModifiedAt": {
@@ -743,42 +569,16 @@ class ListCommentsOutput(insightconnect_plugin_runtime.Output):
           "order": 5
         },
         "lastModifiedByType": {
-          "$ref": "#/definitions/CreatedByType",
+          "type": "string",
           "title": "Last Modified By Type",
           "description": "The type of identity that last modified the resource",
+          "enum": [
+            "Application",
+            "Key",
+            "ManagedIdentity",
+            "User"
+          ],
           "order": 6
-        }
-      },
-      "definitions": {
-        "CreatedByType": {
-          "type": "object",
-          "title": "CreatedByType",
-          "properties": {
-            "Application": {
-              "type": "string",
-              "title": "Application",
-              "description": "Application",
-              "order": 1
-            },
-            "Key": {
-              "type": "string",
-              "title": "Key",
-              "description": "Description",
-              "order": 2
-            },
-            "ManagedIdentity": {
-              "type": "string",
-              "title": "Managed Identity",
-              "description": "Managed identity",
-              "order": 3
-            },
-            "User": {
-              "type": "string",
-              "title": "User",
-              "description": "User",
-              "order": 4
-            }
-          }
         }
       }
     }

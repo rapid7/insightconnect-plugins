@@ -341,6 +341,9 @@ class TestClient(TestCase):
             "kind": "example-kind",
             "properties": {
                 "displayName": "New Test indicator",
+                "description": "Example description",
+                "created": "2021-04-15T19:51:17.1050923Z",
+                "source": "Azure Sentinel",
             },
         }
         indicator = {

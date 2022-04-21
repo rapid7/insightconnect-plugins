@@ -22,3 +22,8 @@ class Endpoint:
     QUERYINDICATORS = COMMON_URI + "threatIntelligence/main/queryIndicators?api-version={}"
     APPENDTAGS = COMMON_URI + "threatIntelligence/main/indicators/{}/appendTags?api-version={}"
     REPLACETAGS = COMMON_URI + "threatIntelligence/main/indicators/{}/replaceTags?api-version={}"
+    # Watchlist Items related URLs
+    CREATE_UPDATE_WATCHLIST_ITEMS = COMMON_URI + "watchlists/{}/watchlistItems/{}?api-version={}"
+    DELETE_WATCHLIST_ITEMS = COMMON_URI + "watchlists/{}/watchlistItems/{}?api-version={}"
+    GET_WATCHLIST_ITEMS = COMMON_URI + "watchlists/{}/watchlistItems/{}?api-version={}"
+    LIST_WATCHLIST_ITEMS = COMMON_URI + "watchlists/{}/watchlistItems?api-version={}"

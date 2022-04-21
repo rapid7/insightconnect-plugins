@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 
 from .schema import QueryIndicatorInput, QueryIndicatorOutput, Input, Output, Component
+from icon_azure_sentinel.util.tools import map_output_for_list
 
 
 class QueryIndicator(insightconnect_plugin_runtime.Action):
@@ -19,5 +20,6 @@ class QueryIndicator(insightconnect_plugin_runtime.Action):
         data_dict = self.connection.api_client.query_indicator(
             resource_group_name, workspace_name, subscription_id, **params
         )
+        values = map_output_for_list(data_dict.get("value"))
 
-        return {Output.INDICATORS: data_dict.get("value")}
+        return {Output.INDICATORS: values}

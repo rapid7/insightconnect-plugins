@@ -15,6 +15,9 @@ def return_non_empty(input_dict: Dict[str, Any]) -> Dict[Any, Any]:
                 return_dict = return_non_empty(value)
                 if return_dict:
                     temp_dict[key] = return_dict
+            elif isinstance(value, list):
+                if len(value) > 0:
+                    temp_dict[key] = value
             else:
                 temp_dict[key] = value
     return temp_dict
