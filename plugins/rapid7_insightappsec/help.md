@@ -629,7 +629,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 2.0.0 - Update plugin spec with changing title for action Submit scan | Update keywords
+* 1.0.4 - Fix typo in title for Submit Scan action | Update keywords
 * 1.0.3 - Send plugin name and version in the User-Agent string to vendor
 * 1.0.2 - Update to v4 Python plugin runtime | Add example inputs
 * 1.0.1 - New spec and help.md format for the Extension Library
