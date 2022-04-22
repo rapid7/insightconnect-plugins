@@ -25,7 +25,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "URL to the appliance, e.g. https://test.fireeye.com",
+      "description": "URL to the application, e.g. https://test.fireeye.com",
       "order": 2
     },
     "username_password": {

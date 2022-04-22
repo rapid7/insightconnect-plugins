@@ -348,7 +348,7 @@ types:
       required: false
     contained_on:
       title: Contained On
-      description: Contained on
+      description: Date this was contained on
       type: string
       required: false
     queued:
@@ -397,7 +397,7 @@ connection:
   url:
     type: string
     title: URL
-    description: URL to the appliance, e.g. https://test.fireeye.com
+    description: URL to the application, e.g. https://test.fireeye.com
     required: true
     example: "https://example.com"
   ssl_verify:
@@ -470,7 +470,7 @@ actions:
         title: Agent ID
         description: The ID of the agent you want to isolate
         type: string
-        required: false
+        required: true
         example: 44d88612fea8a8f36de82e
     output:
       success:
@@ -486,7 +486,7 @@ actions:
         title: Agent ID
         description: The ID of the agent you want to unisolate
         type: string
-        required: false
+        required: true
         example: 44d88612fea8a8f36de82e
     output:
       success:

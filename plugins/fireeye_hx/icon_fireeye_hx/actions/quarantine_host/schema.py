@@ -27,7 +27,10 @@ class QuarantineHostInput(insightconnect_plugin_runtime.Input):
       "description": "The ID of the agent you want to isolate",
       "order": 1
     }
-  }
+  },
+  "required": [
+    "agent_id"
+  ]
 }
     """)
 

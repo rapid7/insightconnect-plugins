@@ -28,7 +28,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |ssl_verify|boolean|True|True|Validate SSL certificate|None|True|
-|url|string|None|True|URL to the appliance, e.g. https://test.fireeye.com|None|https://example.com|
+|url|string|None|True|URL to the application, e.g. https://test.fireeye.com|None|https://example.com|
 |username_password|credential_username_password|None|True|Username and password to authenticate with FireEye HX|None|{"username": "user", "password": "password"}|
 
 Example input:
@@ -56,7 +56,7 @@ This action is used to remove a host from quarantine.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent_id|string|None|False|The ID of the agent you want to unisolate|None|44d88612fea8a8f36de82e|
+|agent_id|string|None|True|The ID of the agent you want to unisolate|None|44d88612fea8a8f36de82e|
 
 Example input:
 
@@ -88,7 +88,7 @@ This action is used to quarantine a host.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent_id|string|None|False|The ID of the agent you want to isolate|None|44d88612fea8a8f36de82e|
+|agent_id|string|None|True|The ID of the agent you want to isolate|None|44d88612fea8a8f36de82e|
 
 Example input:
 

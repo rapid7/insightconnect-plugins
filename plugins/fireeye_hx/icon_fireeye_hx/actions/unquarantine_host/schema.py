@@ -27,7 +27,10 @@ class UnquarantineHostInput(insightconnect_plugin_runtime.Input):
       "description": "The ID of the agent you want to unisolate",
       "order": 1
     }
-  }
+  },
+  "required": [
+    "agent_id"
+  ]
 }
     """)
 

@@ -1,11 +1,11 @@
 {
-	"spec": "64bf405196d120ffbb70c94640efc8f4",
+	"spec": "8e599ced4ea09c3be22650440de22fe6",
 	"manifest": "1d4f667eeeb30f5f44972a6976848e79",
 	"setup": "61aa676f349ecb563d18f05447ea46d8",
 	"schemas": [
 		{
 			"identifier": "check_host_quarantine_status/schema.py",
-			"hash": "18f11711c378fb158aebef27c0aac07d"
+			"hash": "77de25fc0d2c500c0d428c71f4eae498"
 		},
 		{
 			"identifier": "get_alerts_by_host_id/schema.py",
@@ -17,15 +17,15 @@
 		},
 		{
 			"identifier": "quarantine_host/schema.py",
-			"hash": "286194abcdd642d120ae719cf1d2e6a2"
+			"hash": "e2418e66eb58db4812dd13d162e04967"
 		},
 		{
 			"identifier": "unquarantine_host/schema.py",
-			"hash": "1d2bb041408e2419ef471fe6460efd78"
+			"hash": "96d892a02e28692f0aa55bbd4d463a0a"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "776ca44939f482a92e5dadf2b7628b85"
+			"hash": "af06b1b927545074c78e2f1d09115be1"
 		}
 	]
 }

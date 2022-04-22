@@ -68,7 +68,7 @@ class CheckHostQuarantineStatusOutput(insightconnect_plugin_runtime.Output):
         "contained_on": {
           "type": "string",
           "title": "Contained On",
-          "description": "Contained on",
+          "description": "Date this was contained on",
           "order": 6
         },
         "excluded": {
