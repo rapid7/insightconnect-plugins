@@ -18,6 +18,6 @@ class DeleteJob(insightconnect_plugin_runtime.Action):
         job_id = params.get(Input.JOB_ID)
         self.logger.info(f"Removing job {job_id}")
         try:
-            return {Output.STATUS, self.connection.API.delete_job_by_id(job_id)}
+            return {Output.STATUS: self.connection.API.delete_job_by_id(job_id)}
         except Exception as e:
             raise PluginException(f"Failed to delete job.", assistance=f"{e}")

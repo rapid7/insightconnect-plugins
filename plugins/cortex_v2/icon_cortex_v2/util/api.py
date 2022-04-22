@@ -12,7 +12,7 @@ class API:
         self.verify_cert = verify_cert
         self.proxies = proxies
 
-    def send_request(self, method: str, path: str, params={}):
+    def send_request(self, method: str, path: str, data=None, params=None):
         method = method.upper()
         headers = {"Authorization": f"Bearer {self.api_key}"}
         if method in ["POST", "PATCH"]:
@@ -22,6 +22,7 @@ class API:
                 method,
                 f"{self.base_url}/{path}",
                 headers=headers,
+                json=data,
                 params=params,
                 proxies=self.proxies,
                 verify=self.verify_cert,

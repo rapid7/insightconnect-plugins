@@ -16,11 +16,11 @@ class TestDeleteJob(TestCase):
     def setUpClass(cls) -> None:
         cls.action = Mock.default_connector(DeleteJob())
         cls.params = {
-            Input.JOB_ID: "c9uZDbHBf32DdIV"
+            Input.JOB_ID: "02pxZ35f7bX4Lnij"
         }
 
     @patch("requests.request", side_effect=Mock.mocked_request)
     def test_delete_job(self, _mock_request):
         actual = self.action.run(self.params)
-        expected = ""
+        expected = {Output.STATUS: True}
         self.assertEqual(expected, actual)
