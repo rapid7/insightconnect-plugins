@@ -114,8 +114,8 @@ actions:
       filename:
         title: Filename
         type: string
-        description: Optional file name
-        required: false
+        description: File name of submitted file
+        required: true
         example: ImportantCompanyFinancialReport.pdf
     output:
       submission:

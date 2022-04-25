@@ -255,7 +255,7 @@ This action is used to submit a file for analysis.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |file|bytes|None|True|File to submit. Supported types are Email-link, Flash, APK, PDF, JAR, PE, MS-Office|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAA...|
-|filename|string|None|False|Optional file name|None|ImportantCompanyFinancialReport.pdf|
+|filename|string|None|True|File name of submitted file|None|ImportantCompanyFinancialReport.pdf|
 
 Example input:
 

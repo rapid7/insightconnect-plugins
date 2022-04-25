@@ -34,12 +34,13 @@ class SubmitFileInput(insightconnect_plugin_runtime.Input):
     "filename": {
       "type": "string",
       "title": "Filename",
-      "description": "Optional file name",
+      "description": "File name of submitted file",
       "order": 2
     }
   },
   "required": [
-    "file"
+    "file",
+    "filename"
   ]
 }
     """)
