@@ -4,8 +4,10 @@ from requests import Session
 from requests.auth import HTTPBasicAuth
 from urllib.parse import urlsplit
 import json
-from icon_fireeye_hx.util import endpoint
+from icon_fireeye_hx.util.endpoint import Endpoint
 import time
+
+MAX_TRIES = 10
 
 
 class FireEyeAPI:
@@ -51,34 +53,35 @@ class FireEyeAPI:
 
     def get_alerts_by_host_id(self, payload: dict) -> list:
         alerts = []
-        response = self.call_api(endpoint.alerts(), params=payload).json().get("data", {}).get("entries", [])
+        action_endpoint = Endpoint.ALERTS
+        response = self.call_api(action_endpoint, params=payload).json().get("data", {}).get("entries", [])
         while response:
             alerts += response
             payload["offset"] += payload.get("limit")
-            response = self.call_api(endpoint.alerts(), params=payload).json().get("data", {}).get("entries", [])
+            response = self.call_api(action_endpoint, params=payload).json().get("data", {}).get("entries", [])
         return alerts
 
     def get_host_id_from_hostname(self, params: dict) -> dict:
-        return self.call_api(endpoint.hosts(), params=params).json()
+        return self.call_api(Endpoint.HOSTS, params=params).json()
 
     def get_version(self) -> requests.Response:
-        return self.call_api(endpoint.version())
+        return self.call_api(Endpoint.VERSION)
 
     def check_host_quarantine_status(self, agent_id: str) -> dict:
-        return self.call_api(endpoint.host_containment(agent_id)).json()
+        return self.call_api(Endpoint.HOST_CONTAINMENT.format(agent_id)).json()
 
     def quarantine_host(self, agent_id: str) -> bool:
-        action_endpoint = endpoint.host_containment(agent_id)
+        action_endpoint = Endpoint.HOST_CONTAINMENT.format(agent_id)
         self.call_api(action_endpoint, "POST")
-        for _ in range(180):
-            time.sleep(10)
+        for attempt in range(MAX_TRIES):
+            time.sleep(2 ** (attempt * 0.6))
             if self.call_api(action_endpoint).json().get("data", {}).get("requested_on"):
                 self.call_api(action_endpoint, "PATCH", json_data={"state": "contain"})
                 return True
         return False
 
     def unquarantine_host(self, agent_id: str) -> bool:
-        self.call_api(endpoint.host_containment(agent_id), "DELETE")
+        self.call_api(Endpoint.HOST_CONTAINMENT.format(agent_id), "DELETE")
         return True
 
     @staticmethod
