@@ -1,26 +1,27 @@
-import komand
-from .schema import SubmitFileFromUrlInput, SubmitFileFromUrlOutput
+import hashlib
+
+import insightconnect_plugin_runtime
 
 # Custom imports below
-import requests
 import xmltodict
+from insightconnect_plugin_runtime.exceptions import PluginException
+
+from komand_paloalto_wildfire.util.constants import SUPPORTED_FILES
+from komand_paloalto_wildfire.util.utils import Utils
+from .schema import SubmitFileFromUrlInput, SubmitFileFromUrlOutput, Input, Output, Component
+from ...util.constants import UNKNOWN_VERDICT
 
 
-class SubmitFileFromUrl(komand.Action):
+class SubmitFileFromUrl(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="submit_file_from_url",
-            description="Submit a file for analysis via a URL",
+            description=Component.DESCRIPTION,
             input=SubmitFileFromUrlInput(),
             output=SubmitFileFromUrlOutput(),
         )
 
     def run(self, params={}):
-        """TODO: Run action"""
-        endpoint = "/publicapi/submit/url"
-        client = self.connection.client
-        url = "https://{}{}".format(self.connection.host, endpoint)
-
         # Formatted with None and tuples so requests sends form-data properly
         # => Send data, 299 bytes (0x12b)
         # 0000: --------------------------8557684369749613
@@ -33,35 +34,32 @@ class SubmitFileFromUrl(komand.Action):
         # 00da: pdf
         # 00fd: --------------------------8557684369749613--
         # ...
+        url = params.get(Input.URL)
+        if Utils.check_link_for_supported_file_type(url):
+            file_from_url = self.connection.client.get_file_from_url(url=url)
+            verdict = self.connection.client.get_verdicts(analysed_hash=hashlib.sha256(file_from_url).hexdigest())
+            if verdict == UNKNOWN_VERDICT:
+                try:
+                    response = xmltodict.parse(self.connection.client.submit_file_from_url(url))
+                    out = dict(response["wildfire"]["upload-file-info"])
+                except PluginException:
+                    self.logger.info("Error occurred")
+                    raise
+                except KeyError:
+                    self.logger.warning(f"The response contain unexpected format. Response {response}")
+                    raise PluginException(
+                        cause="The response did not contain a correct format.",
+                        assistance="Check the logs and if the issue persists please contact support.",
+                    )
 
-        req = {
-            "apikey": (None, self.connection.api_key),
-            "url": (None, params.get("url")),
-        }
+                if not out.get("filename"):
+                    out["filename"] = "Unknown"
 
-        try:
-            r = requests.post(url, files=req)
-            o = xmltodict.parse(r.content)
-            out = dict(o["wildfire"]["upload-file-info"])
-        except:
-            self.logger.info("Error occurred")
-            raise
-
-        if not out["filename"]:
-            out["filename"] = "Unknown"
-
-        return {"submission": out}
-
-    def test(self):
-        """TODO: Test action"""
-        client = self.connection.client
-        return {
-            "submission": {
-                "filetype": "Test",
-                "filename": "Test",
-                "url": "Test",
-                "sha256": "Test",
-                "md5": "Test",
-                "size": "Test",
-            }
-        }
+                return {Output.SUBMISSION: out}
+            else:
+                return {Output.VERDICT: verdict.capitalize()}
+        else:
+            raise PluginException(
+                cause="Unsupported file was received by the plugin.",
+                assistance=f"Check if your file is one of the supported files and resubmit with an approved file type. Supported files: {SUPPORTED_FILES}",
+            )

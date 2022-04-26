@@ -3,12 +3,12 @@ from setuptools import setup, find_packages
 
 
 setup(name="paloalto_wildfire-rapid7-plugin",
-      version="1.2.0",
+      version="2.0.0",
       description="Perform malware analysis with Palo Alto Wildfire",
       author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
-      install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
+      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_paloalto_wildfire']
       )
