@@ -67,7 +67,7 @@ class SubmitUrl(insightconnect_plugin_runtime.Action):
             raise PluginException(
                 cause="Some unexpected error appear.",
                 assistance="Please contact support with the status code and error information.",
-                data=error,
+                data=error
             )
 
         return {Output.SUBMISSION: out}
