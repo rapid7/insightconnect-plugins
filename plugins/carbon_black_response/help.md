@@ -9,6 +9,7 @@ This plugin utilizes the [VMware Carbon Black EDR REST API](https://developer.ca
 * Investigate endpoints
 * Blacklist hashes
 * Isolate endpoints
+* Uninstall endpoints
 
 # Requirements
 
@@ -26,7 +27,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|API token found in your Carbon Black profile|None|{"domain": "example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}|
+|api_key|credential_secret_key|None|True|API token found in your Carbon Black profile|None|{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}|
 |ssl_verify|boolean|True|True|SSL certificate verification|None|True|
 |url|string|https://127.0.0.1/api/bit9platform/v1|True|Carbon Black Server API URL|None|https://127.0.0.1/api/bit9platform/v1|
 
@@ -34,7 +35,7 @@ Example input:
 
 ```
 {
-  "api_key": "{"domain": "example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}",
+  "api_key": "{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}",
   "ssl_verify": true,
   "url": "https://127.0.0.1/api/bit9platform/v1"
 }
@@ -84,7 +85,7 @@ This action is used to list alerts with given parameters.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|query|string|None|False|Accepts the same data as the search box on the Process Search page|None|test|
+|query|string|None|False|Accepts the same data as the search box on the Process Search page|None|domain:www.carbonblack.com|
 |rows|integer|10|False|How many rows of data to return. Default is 10|None|10|
 |start|integer|0|False|What row of data to start at. Default is 0|None|0|
 
@@ -92,7 +93,7 @@ Example input:
 
 ```
 {
-  "query": "test",
+  "query": "domain:www.carbonblack.com",
   "rows": 10,
   "start": 0
 }
@@ -208,7 +209,7 @@ This action is used to list binaries with given parameters.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|query|string|None|False|Accepts the same data as the search box on the Process Search page|None|test|
+|query|string|None|False|Accepts the same data as the search box on the Process Search page|None|domain:www.carbonblack.com|
 |rows|integer|10|False|How many rows of data to return. Default is 10|None|10|
 |start|integer|0|False|What row of data to start at. Default is 0|None|0|
 
@@ -216,7 +217,7 @@ Example input:
 
 ```
 {
-  "query": "test",
+  "query": "domain:www.carbonblack.com",
   "rows": 10,
   "start": 0
 }
@@ -293,7 +294,7 @@ This action is used to add a feed.
 |enabled|boolean|None|False|Enable feed|None|True|
 |feed_url|string|None|False|The URL of the feed to add|None|https://example.com|
 |force|boolean|False|False|Add feed even if the feed URL is already in use|None|False|
-|key|file|None|False|Key|None|{"domain": "example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}|
+|key|file|None|False|Key|None|{"filename": "<name>", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}|
 |password|password|None|False|Password|None|mypassword|
 |use_proxy|boolean|None|False|Whether or not to use proxy|None|True|
 |username|string|None|False|Username|None|user1|
@@ -307,7 +308,7 @@ Example input:
   "enabled": true,
   "feed_url": "https://example.com",
   "force": false,
-  "key": {"domain": "https://example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"},
+  "key": "{"filename": "name", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}",
   "password": "mypassword",
   "use_proxy": true,
   "username": "user1",
@@ -368,7 +369,6 @@ Example output:
 #### List Watchlists
 
 This action is used to list all watchlists.
-
 
 ##### Output
 
@@ -445,7 +445,7 @@ This action is used to list processes with given parameters.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|query|string|None|False|Accepts the same data as the search box on the Process Search page|None|test|
+|query|string|None|False|Accepts the same data as the search box on the Process Search page|None|domain:www.carbonblack.com|
 |rows|integer|10|False|How many rows of data to return. Default is 10|None|10|
 |start|integer|0|False|What row of data to start at. Default is 0|None|0|
 
@@ -453,7 +453,7 @@ Example input:
 
 ```
 {
-  "query": "test",
+  "query": "domain:www.carbonblack.com",
   "rows": 10,
   "start": 0
 }

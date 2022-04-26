@@ -692,7 +692,7 @@ connection:
     type: credential_secret_key
     description: API token found in your Carbon Black profile
     required: true
-    example: '{"domain": "example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}'
+    example: '{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}'
   url:
     title: URL
     type: string
@@ -718,7 +718,7 @@ actions:
           page
         required: false
         title: Query String
-        example: 'test'
+        example: 'domain:www.carbonblack.com'
       rows:
         type: integer
         description: How many rows of data to return. Default is 10
@@ -747,7 +747,7 @@ actions:
           page
         required: false
         title: Query String
-        example: 'test'
+        example: 'domain:www.carbonblack.com'
       rows:
         type: integer
         description: How many rows of data to return. Default is 10
@@ -776,7 +776,7 @@ actions:
           page
         required: false
         title: Query String
-        example: 'test'
+        example: 'domain:www.carbonblack.com'
       rows:
         type: integer
         description: How many rows of data to return. Default is 10
@@ -943,7 +943,7 @@ actions:
         description: Key
         type: file
         required: false
-        example: '{"domain": "example.com", "token": "9de5069c5afe602b2ea0a04b66beb2c0"}'
+        example: '{"filename": "<name>", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}'
       use_proxy:
         description: Whether or not to use proxy
         type: boolean
