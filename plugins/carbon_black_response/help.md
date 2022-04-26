@@ -9,10 +9,15 @@ This plugin utilizes the [VMware Carbon Black EDR REST API](https://developer.ca
 * Investigate endpoints
 * Blacklist hashes
 * Isolate endpoints
+* Uninstall endpoints
 
 # Requirements
 
 * Requires an API Key from VMware Carbon Black EDR
+
+# Supported Product Versions
+
+* 6.0-6.2x Carbon Black EDR API
 
 # Documentation
 
@@ -20,15 +25,57 @@ This plugin utilizes the [VMware Carbon Black EDR REST API](https://developer.ca
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|url|string|https://127.0.0.1/api/bit9platform/v1|True|Carbon Black Server API URL|None|
-|ssl_verify|boolean|True|True|SSL certificate verification|None|
-|api_key|credential_secret_key|None|True|API token found in your Carbon Black profile|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|True|API token found in your Carbon Black profile|None|{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}|
+|ssl_verify|boolean|True|True|SSL certificate verification|None|True|
+|url|string|https://127.0.0.1/api/bit9platform/v1|True|Carbon Black Server API URL|None|https://127.0.0.1/api/bit9platform/v1|
+
+Example input:
+
+```
+{
+  "api_key": "{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}",
+  "ssl_verify": true,
+  "url": "https://127.0.0.1/api/bit9platform/v1"
+}
+```
 
 ## Technical Details
 
 ### Actions
+
+#### Uninstall Sensor
+
+This action uninstalls a sensor given a sensor ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|False|The sensor ID|None|1234|
+
+Example input:
+
+```
+{
+  "id": "1234"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Whether or not the uninstall was successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### List Alerts
 
@@ -36,11 +83,21 @@ This action is used to list alerts with given parameters.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|False|Accepts the same data as the search box on the Process Search page|None|
-|rows|integer|10|False|How many rows of data to return. Default is 10|None|
-|start|integer|0|False|What row of data to start at. Default is 0|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query|string|None|False|Accepts the same data as the search box on the Process Search page|None|domain:www.carbonblack.com|
+|rows|integer|10|False|How many rows of data to return. Default is 10|None|10|
+|start|integer|0|False|What row of data to start at. Default is 0|None|0|
+
+Example input:
+
+```
+{
+  "query": "domain:www.carbonblack.com",
+  "rows": 10,
+  "start": 0
+}
+```
 
 ##### Output
 
@@ -114,10 +171,19 @@ This action is used to delete a feed.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|force|boolean|None|True|Force deletion of all matches if multiple matches found|None|
-|id|string|None|True|The ID of the feed|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|force|boolean|None|True|Force deletion of all matches if multiple matches found|None|False|
+|id|string|None|True|The ID of the feed|None|example_protection|
+
+Example input:
+
+```
+{
+  "force": false,
+  "id": "example_protection"
+}
+```
 
 ##### Output
 
@@ -141,11 +207,21 @@ This action is used to list binaries with given parameters.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|False|Accepts the same data as the search box on the Process Search page|None|
-|rows|integer|10|False|How many rows of data to return. Default is 10|None|
-|start|integer|0|False|What row of data to start at. Default is 0|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query|string|None|False|Accepts the same data as the search box on the Process Search page|None|domain:www.carbonblack.com|
+|rows|integer|10|False|How many rows of data to return. Default is 10|None|10|
+|start|integer|0|False|What row of data to start at. Default is 0|None|0|
+
+Example input:
+
+```
+{
+  "query": "domain:www.carbonblack.com",
+  "rows": 10,
+  "start": 0
+}
+```
 
 ##### Output
 
@@ -212,17 +288,33 @@ This action is used to add a feed.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|False|Username|None|
-|force|boolean|False|False|Add feed even if the feed URL is already in use|None|
-|use_proxy|boolean|None|False|Whether or not to use proxy|None|
-|feed_url|string|None|False|The URL of the feed to add|None|
-|enabled|boolean|None|False|Enable feed|None|
-|cert|file|None|False|Certificate file|None|
-|key|file|None|False|Key|None|
-|password|password|None|False|Password|None|
-|validate_server_cert|boolean|None|False|Whether or not to validate server certificate|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|cert|file|None|False|Certificate file|None|{"filename": "name", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}|
+|enabled|boolean|None|False|Enable feed|None|True|
+|feed_url|string|None|False|The URL of the feed to add|None|https://example.com|
+|force|boolean|False|False|Add feed even if the feed URL is already in use|None|False|
+|key|file|None|False|Key|None|{"filename": "<name>", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}|
+|password|password|None|False|Password|None|mypassword|
+|use_proxy|boolean|None|False|Whether or not to use proxy|None|True|
+|username|string|None|False|Username|None|user1|
+|validate_server_cert|boolean|None|False|Whether or not to validate server certificate|None|True|
+
+Example input:
+
+```
+{
+  "cert": {"filename": "name", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="},
+  "enabled": true,
+  "feed_url": "https://example.com",
+  "force": false,
+  "key": "{"filename": "name", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}",
+  "password": "mypassword",
+  "use_proxy": true,
+  "username": "user1",
+  "validate_server_cert": true
+}
+```
 
 ##### Output
 
@@ -246,9 +338,17 @@ This action is used to ban a hash given its MD5.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|md5_hash|string|None|True|An MD5 hash|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|md5_hash|string|None|True|An MD5 hash|None|9de5069c5afe602b2ea0a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "md5_hash": "9de5069c5afe602b2ea0a04b66beb2c0"
+}
+```
 
 ##### Output
 
@@ -307,10 +407,19 @@ This action is used to delete a watchlist.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|force|boolean|None|True|Force deletion of all matches if multiple matches found|None|
-|id|string|None|True|The ID of the watchlist|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|force|boolean|None|True|Force deletion of all matches if multiple matches found|None|False|
+|id|string|None|True|The ID of the watchlist|None|1234|
+
+Example input:
+
+```
+{
+  "force": false,
+  "id": "1234"
+}
+```
 
 ##### Output
 
@@ -334,11 +443,21 @@ This action is used to list processes with given parameters.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|query|string|None|False|Accepts the same data as the search box on the Process Search page|None|
-|rows|integer|10|False|How many rows of data to return. Default is 10|None|
-|start|integer|0|False|What row of data to start at. Default is 0|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query|string|None|False|Accepts the same data as the search box on the Process Search page|None|domain:www.carbonblack.com|
+|rows|integer|10|False|How many rows of data to return. Default is 10|None|10|
+|start|integer|0|False|What row of data to start at. Default is 0|None|0|
+
+Example input:
+
+```
+{
+  "query": "domain:www.carbonblack.com",
+  "rows": 10,
+  "start": 0
+}
+```
 
 ##### Output
 
@@ -396,12 +515,23 @@ This action is used to list all sensors.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|ip|string|None|False|The sensor IP address|None|
-|hostname|string|None|False|The sensor hostname|None|
-|id|string|None|False|The sensor ID|None|
-|groupid|string|None|False|The sensor group ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|groupid|string|None|False|The sensor group ID|None|50|
+|hostname|string|None|False|The sensor hostname|None|cb-response-example|
+|id|string|None|False|The sensor ID|None|1234|
+|ip|string|None|False|The sensor IP address|None|192.0.2.0|
+
+Example input:
+
+```
+{
+  "groupid": "50",
+  "hostname": "cb-response-example",
+  "id": "1234",
+  "ip": "192.0.2.0"
+}
+```
 
 ##### Output
 
@@ -469,9 +599,17 @@ This action is used to retrieve a binary by its MD5 hash.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|hash|string|None|True|An MD5 hash|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|hash|string|None|True|An MD5 hash|None|9de5069c5afe602b2ea0a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "hash": "9de5069c5afe602b2ea0a04b66beb2c0"
+}
+```
 
 ##### Output
 
@@ -495,10 +633,19 @@ This action is used to update or resolve an alert.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|status|string|Resolved|True|The status to update|['Resolved', 'Unresolved', 'In Progress', 'False Positive']|
-|id|string|None|True|Unique ID of the alert. Example: 1cb11d0d-f86b-415d-aeb3-05f085973fbb|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|Unique ID of the alert. |None|1cb11d0d-f86b-415d-aeb3-05f085973fbb|
+|status|string|Resolved|True|The status to update|['Resolved', 'Unresolved', 'In Progress', 'False Positive', '']|Resolved|
+
+Example input:
+
+```
+{
+  "id": "1cb11d0d-f86b-415d-aeb3-05f085973fbb",
+  "status": "Resolved"
+}
+```
 
 ##### Output
 
@@ -522,11 +669,21 @@ This action is used to add a watchlist.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|index_type|string|modules|True|Either modules or events for binary and process watchlists, respectively|['modules', 'events']|
-|name|string|None|True|Watchlist name|None|
-|query|string|None|True|Raw Carbon Black query that this watchlist matches|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|index_type|string|modules|True|Either modules or events for binary and process watchlists, respectively|['modules', 'events', '']|modules|
+|name|string|None|True|Watchlist name|None|examplename|
+|query|string|None|True|Raw Carbon Black query that this watchlist matches|None|test|
+
+Example input:
+
+```
+{
+  "index_type": "modules",
+  "name": "examplename",
+  "query": "test"
+}
+```
 
 ##### Output
 
@@ -550,9 +707,17 @@ This action is used to isolate a sensor from the network.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|hostname|string|None|False|Hostname of the sensor to isolate|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|hostname|string|None|False|Hostname of the sensor to isolate|None|cb-response-example|
+
+Example input:
+
+```
+{
+  "hostname": "cb-response-example"
+}
+```
 
 ##### Output
 
@@ -623,9 +788,17 @@ This action is used to bring a sensor back into the network.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|hostname|string|None|False|Hostname of the sensor to unisolate|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|hostname|string|None|False|Hostname of the sensor to unisolate|None|cb-response-example|
+
+Example input:
+
+```
+{
+  "hostname": "cb-response-example"
+}
+```
 
 ##### Output
 
@@ -651,7 +824,7 @@ This trigger is used to fire when a new alert is found.
 
 ##### Input
 
-_This action does not contain any inputs._
+_This trigger does not contain any inputs._
 
 ##### Output
 
@@ -729,6 +902,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.2.0 - Add uninstall sensor action | upgrade to insightconnect-plugin-runtime
 * 3.1.11 - Correct spelling in help.md
 * 3.1.10 - Rebrand plugin
 * 3.1.9 - Pin to latest version of cbapi (1.6.2) to fix broken isolate() function
@@ -751,3 +925,4 @@ This plugin does not contain any troubleshooting information.
 ## References
 
 * [VMware Carbon Black EDR REST API](https://developer.carbonblack.com/guide/enterprise-response/)
+* [VMware Carbon Black EDR REST API 6.0-6.2x](https://developer.carbonblack.com/reference/enterprise-response/6.1/rest-api/)
