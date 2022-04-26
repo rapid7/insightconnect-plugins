@@ -22,7 +22,7 @@ This plugin allows users to create, read, update, and delete URL list
 
 # Supported Product Versions
 
-* 2022-02-11
+* 2022-04-26
 
 # Documentation
 
@@ -609,6 +609,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.1 - Fix bug where Update URL List by ID did not support empty non-required fields
 * 1.0.0 - Initial plugin (Actions: Apply Pending URL List Changes, Create a New URL List, Delete a URL List by ID, Get All URL Lists, Get Single User's Confidence Index, Get URL List by ID, Replace URL List Configuration by ID, Update URL List by ID, Update a File Hash List, Upload JSON File Configurations)
 
 # Links
@@ -618,4 +619,3 @@ _This plugin does not contain any troubleshooting information._
 * [Netskope](https://www.netskope.com/)
 * [Netskope API v1](https://docs.netskope.com/en/rest-api-v1-overview.html)
 * [Netskope API v2](https://docs.netskope.com/en/rest-api-v2-overview-312207.html)
-

@@ -1,7 +1,7 @@
 {
-	"spec": "5fb1119598a7fa2cd6390d4472cd26d3",
-	"manifest": "a0228e2da4330999a834aa56676febaf",
-	"setup": "bbaa07fd7250b5a5c535d90194b3509a",
+	"spec": "2defd240782880fd9af1cff6a9543026",
+	"manifest": "f40dd8619fedb69c6861e25f61a4ea71",
+	"setup": "9965a2869343ac9bfd291027f0e3fd7b",
 	"schemas": [
 		{
 			"identifier": "apply_pending_url_list_changes/schema.py",
