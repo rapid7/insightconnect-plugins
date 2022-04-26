@@ -1,59 +1,41 @@
-import komand
-from .schema import SubmitFileInput, SubmitFileOutput
-
 # Custom imports below
 import base64
-import io
-import pyldfire
-from komand.exceptions import PluginException
+import hashlib
+
+import insightconnect_plugin_runtime
+
+from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_paloalto_wildfire.util.constants import UNKNOWN_VERDICT, SUPPORTED_FILES
+from .schema import SubmitFileInput, SubmitFileOutput, Input, Output, Component
 
 
-class SubmitFile(komand.Action):
+class SubmitFile(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="submit_file",
-            description="Submit a file for analysis",
+            description=Component.DESCRIPTION,
             input=SubmitFileInput(),
             output=SubmitFileOutput(),
         )
 
     def run(self, params={}):
-        """TODO: Run action"""
-        client = self.connection.client
-        _file = io.BytesIO(base64.b64decode(params.get("file")))
-        filename = params.get("filename")
+        file = base64.b64decode(params.get(Input.FILE))
+        filename = params.get(Input.FILENAME)
+        if filename.lower().endswith(SUPPORTED_FILES):
+            verdict = self.connection.client.get_verdicts(analysed_hash=hashlib.sha256(file).hexdigest())
+            if verdict == UNKNOWN_VERDICT:
+                out = self.connection.client.submit_file(_file=file, filename=filename)
+                if "filename" not in out.keys():
+                    out["filename"] = "Filename was not found in the response"
 
-        out = {}
-        try:
-            if filename:
-                self.logger.info("Filename specified: %s", filename)
-                out = client.submit_file(_file, filename)
+                if "url" not in out.keys():
+                    out["url"] = "URL was not found in the response"
+
+                return {Output.SUBMISSION: insightconnect_plugin_runtime.helper.clean(out)}
             else:
-                out = client.submit_file(_file)
-            out["supported_file_type"] = True
-        except pyldfire.WildFireException as e:
-            if e.args and "Unsupport File type" in e.args[0]:  # Yes, that's the error, not a typo
-                out["supported_file_type"] = False
-            else:
-                raise PluginException(PluginException.Preset.UNKNOWN) from e
-
-        if "filename" not in out.keys():
-            out["filename"] = "Unknown"
-
-        if "url" not in out.keys():
-            out["url"] = "Unknown"
-
-        return {"submission": komand.helper.clean(out)}
-
-    def test(self):
-        """TODO: Test action"""
-        client = self.connection.client
-        return {
-            "submission": {
-                "filetype": "Test",
-                "filename": "Test",
-                "sha256": "Test",
-                "md5": "Test",
-                "size": "Test",
-            }
-        }
+                return {Output.VERDICT: verdict.capitalize()}
+        else:
+            raise PluginException(
+                cause="Unsupported file was received by the plugin.",
+                assistance=f"Check if your file is one of the supported files and resubmit with an approved file type. Supported files: {SUPPORTED_FILES}",
+            )

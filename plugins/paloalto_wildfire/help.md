@@ -34,12 +34,14 @@ Example input:
 
 ```
 {
-  "api_key": {
-    "secretKey": "5df698b6778e586b704460731b921e52"
-  },
-  "host": "wildfire.paloaltonetworks.com",
-  "proxy": {},
-  "verify": true
+   "api_key": {
+      "secretKey": "5df698b6778e586b704460731b921e52"
+   },
+   "host": "wildfire.paloaltonetworks.com",
+   "proxy": {
+      "https": "https://proxy.example.com"
+   },
+   "verify": true
 }
 ```
 
@@ -69,7 +71,8 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|submission|filedata|True|Submission|
+|submission|filedata|False|Submission|
+|verdict|string|False|One of the following verdicts: Benign, Malware, Greyware, Pending, Error, or Not found|
 
 Example output:
 
@@ -224,8 +227,8 @@ Example input:
 
 ```
 {
-  "hash": "9de5069c5afe602b2ea0a04b66beb2c0",
-  "format": "PDF"
+  "format": "pdf",
+  "hash": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 
@@ -252,7 +255,7 @@ This action is used to submit a file for analysis.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |file|bytes|None|True|File to submit. Supported types are Email-link, Flash, APK, PDF, JAR, PE, MS-Office|None|TVqQAAMAAAAEAAAA//8AALgAAAAAAAAAQAAAAAAAAAAAA...|
-|filename|string|None|False|Optional file name|None|ImportantCompanyFinancialReport.pdf|
+|filename|string|None|True|File name of submitted file|None|ImportantCompanyFinancialReport.pdf|
 
 Example input:
 
@@ -267,7 +270,8 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|submission|filedata|True|Submission|
+|submission|filedata|False|Submission|
+|verdict|string|False|One of the following verdicts: Benign, Malware, Greyware, Pending, Error, or Not found|
 
 Example output:
 
@@ -306,7 +310,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|verdict|string|True|One of the following verdicts: 'Benign', 'Malware', 'Greyware', 'Pending', 'Error', or 'Not found`|
+|verdict|string|True|One of the following verdicts: Benign, Malware, Greyware, Pending, Error, or Not found|
 
 Example output:
 
@@ -330,6 +334,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.0 - Moved communication with API to separate class | Add logic for validation if submitted file is already in API DB | Add validation for submitting only supported by API file types | Refactor unit tests for Submit File action | Add unit test for Submit File From URL action
 * 1.2.0 - Added connection test
 * 1.1.2 - Fix bug where output doesn't match schema in Get Verdict action | Add improved error messaging in Submit URL action | Add example inputs
 * 1.1.1 - New spec and help.md format for the Extension Library
