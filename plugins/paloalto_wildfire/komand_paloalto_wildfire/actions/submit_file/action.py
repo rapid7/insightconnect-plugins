@@ -26,10 +26,10 @@ class SubmitFile(insightconnect_plugin_runtime.Action):
             if verdict == UNKNOWN_VERDICT:
                 out = self.connection.client.submit_file(_file=file, filename=filename)
                 if "filename" not in out.keys():
-                    out["filename"] = "Unknown"
+                    out["filename"] = "Filename was not found in the response"
 
                 if "url" not in out.keys():
-                    out["url"] = "Unknown"
+                    out["url"] = "URL was not found in the response"
 
                 return {Output.SUBMISSION: insightconnect_plugin_runtime.helper.clean(out)}
             else:
