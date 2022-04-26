@@ -76,7 +76,8 @@ class PatchUrlListByIdInput(insightconnect_plugin_runtime.Input):
   },
   "required": [
     "action",
-    "id"
+    "id",
+    "type"
   ]
 }
     """)

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: netskope
 title: Netskope
 description: This plugin allows users to create, read, update, and delete URL lists in their Netskope environment
-version: 1.0.1
+version: 2.0.0
 vendor: rapid7
 support: rapid7
 supported_versions: ["2022-04-26"]
@@ -424,7 +424,7 @@ actions:
           - ""
           - exact
           - regex
-        required: false
+        required: true
         example: exact
     output:
       id:

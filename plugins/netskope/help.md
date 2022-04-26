@@ -61,7 +61,7 @@ This action is used to update the name, URLs, and/or type of a URL list object.
 |action|string|None|True|Replace or append to current URLs|['replace', 'append']|append|
 |id|integer|None|True|ID of the URL list|None|1|
 |name|string|None|False|Name of replaced URL list|None|ExampleName|
-|type|string|None|False|Category of URL list|['', 'exact', 'regex']|exact|
+|type|string|None|True|Category of URL list|['', 'exact', 'regex']|exact|
 |urls|[]string|None|False|List of URLs|None|["https://example.com", "https://example.com"]|
 
 Example input (type exact):
@@ -609,7 +609,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.1 - Fix bug where Update URL List by ID did not support empty non-required fields
+* 2.0.0 - Fix bug where Update URL List by ID did not support empty non-required fields | URL List Category is now a required input for Update URL List by ID
 * 1.0.0 - Initial plugin (Actions: Apply Pending URL List Changes, Create a New URL List, Delete a URL List by ID, Get All URL Lists, Get Single User's Confidence Index, Get URL List by ID, Replace URL List Configuration by ID, Update URL List by ID, Update a File Hash List, Upload JSON File Configurations)
 
 # Links
