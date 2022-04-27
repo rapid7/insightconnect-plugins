@@ -6,8 +6,12 @@ from typing import Dict, List, Optional, Collection
 
 
 class ApiClient:
-    VERSION = "0.1.0"
+    INTEGRATION_NAME = "rapid7-insightconnect-plugin"
+    VERSION = "1.1.1"
     PAGE_SIZE = 500
+
+    OUTCOME_FAIL = "failure"
+    OUTCOME_SUCCESS = "success"
 
     def __init__(self, logger, api_key, endpoint="https://console.automox.com/api"):
         self.endpoint = endpoint
@@ -23,7 +27,7 @@ class ApiClient:
     def set_headers(self) -> None:
         self.session.headers = {
             "Authorization": "Bearer " + self.api_key,
-            "User-Agent": f"ax:automox-rapid7-insightconnect-plugin/{ApiClient.VERSION}",
+            "User-Agent": f"ax:automox-{ApiClient.INTEGRATION_NAME}/{ApiClient.VERSION}",
             "content-type": "application/json",
         }
 
@@ -107,10 +111,13 @@ class ApiClient:
 
     @staticmethod
     def _org_param(org_id: str) -> dict:
+        if not org_id:
+            return {}
+
         return {"o": org_id}
 
     @staticmethod
-    def first_page(params: Dict = {}) -> None:
+    def first_page(params: Dict = {}) -> Dict:
         params.update({"limit": ApiClient.PAGE_SIZE, "page": 0})
         return params
 
@@ -139,7 +146,7 @@ class ApiClient:
         return self._call_api("GET", f"{self.endpoint}/servers/{device_id}", params=self._org_param(org_id))
 
     def find_device_by_attribute(self, org_id: int, attributes: List[str], value: str) -> dict:
-        params = self.first_page({"o": org_id})
+        params = self.first_page(self._org_param(org_id))
 
         while True:
             devices = self._call_api("get", f"{self.endpoint}/servers", params)
@@ -168,7 +175,8 @@ class ApiClient:
         :param group_id: Group ID
         :return: Dict of devices
         """
-        params = {"o": org_id, "groupId": group_id}
+        params = self._org_param(org_id)
+        params["groupId"] = group_id
         return self._page_results(f"{self.endpoint}/servers", params)
 
     def run_device_command(self, org_id: int, device_id: int, command: str) -> bool:
@@ -315,5 +323,32 @@ class ApiClient:
 
     # Events
     def get_events(self, org_id: int, event_type: str, page: int = 0) -> List[Dict]:
-        params = {"o": org_id, "eventName": event_type, "page": page, "limit": self.PAGE_SIZE}
+        params = self._org_param(org_id)
+        params.update({"eventName": event_type, "page": page, "limit": self.PAGE_SIZE})
         return self.remove_null_values(self._call_api("GET", f"{self.endpoint}/events", params))
+
+    # Instrumentation for usage/adoption
+    def report_api_outcome(self, outcome: str, function: str, elapsed_time: int, fail_reason: str = ""):
+        """
+        Record API Outcome to Automox
+        :param outcome: Success/failure
+        :param function: Capability being instrumented
+        :param fail_reason: Optional failure reason
+        :param elapsed_time: Elapsed time in seconds
+        """
+        payload = {
+            "name": ApiClient.INTEGRATION_NAME,
+            "version": ApiClient.VERSION,
+            "function": function,
+            "outcome": outcome,
+            "elapsed_time": elapsed_time
+        }
+
+        if outcome == ApiClient.OUTCOME_FAIL:
+            payload['reason_for_failure'] = fail_reason
+
+        try:
+            self._call_api("POST", f"{self.endpoint}/integration-health", json_data=payload)
+        except Exception:
+            # Do nothing, we don't care if it fails
+            return
