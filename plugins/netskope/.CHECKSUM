@@ -1,7 +1,7 @@
 {
-	"spec": "592f28d645dac331d657124638581d8e",
-	"manifest": "a0c9f2782e9d48b01f901b378f7f69b3",
-	"setup": "0a195349e5a0f094f0244eae9eca6763",
+	"spec": "fe934117f055bf8380ce04d0158a12b4",
+	"manifest": "f40dd8619fedb69c6861e25f61a4ea71",
+	"setup": "9965a2869343ac9bfd291027f0e3fd7b",
 	"schemas": [
 		{
 			"identifier": "apply_pending_url_list_changes/schema.py",
@@ -29,7 +29,7 @@
 		},
 		{
 			"identifier": "patch_url_list_by_id/schema.py",
-			"hash": "6408ea41afe88385002ffc0f14c5b590"
+			"hash": "ec30e9e11147f45318e958e76e534585"
 		},
 		{
 			"identifier": "replace_url_list_by_id/schema.py",
