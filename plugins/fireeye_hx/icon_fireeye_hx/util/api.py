@@ -59,7 +59,7 @@ class FireEyeAPI:
 
         payload = {"agent._id": agent_id, "limit": limit if limit else 100, "offset": offset if offset else 0}
 
-        for i in range(0, 99999):
+        for _ in range(0, 99999):
             response = self.call_api(action_endpoint, params=payload).get("data", {}).get("entries", [])
             alerts += response
             if not response or limit:
