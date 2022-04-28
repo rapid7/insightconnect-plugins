@@ -42,8 +42,10 @@ class FireEyeAPI:
             if response.status_code > 500:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
-            if 200 <= response.status_code < 300:
+            if response.status_code == 204:
                 return response
+            if 200 <= response.status_code < 300:
+                return response.json()
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except json.decoder.JSONDecodeError as e:
@@ -51,31 +53,37 @@ class FireEyeAPI:
         except requests.exceptions.HTTPError as e:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
 
-    def get_alerts_by_host_id(self, payload: dict) -> list:
+    def get_alerts_by_host_id(self, agent_id: str, offset: int, limit: int) -> list:
         alerts = []
         action_endpoint = Endpoint.ALERTS
-        response = self.call_api(action_endpoint, params=payload).json().get("data", {}).get("entries", [])
-        while response:
+
+        payload = {"agent._id": agent_id, "limit": limit if limit else 100, "offset": offset if offset else 0}
+
+        for i in range(0, 99999):
+            response = self.call_api(action_endpoint, params=payload).get("data", {}).get("entries", [])
             alerts += response
+            if not response or limit:
+                break
+
             payload["offset"] += payload.get("limit")
-            response = self.call_api(action_endpoint, params=payload).json().get("data", {}).get("entries", [])
+
         return alerts
 
     def get_host_id_from_hostname(self, params: dict) -> dict:
-        return self.call_api(Endpoint.HOSTS, params=params).json()
+        return self.call_api(Endpoint.HOSTS, params=params)
 
     def get_version(self) -> requests.Response:
         return self.call_api(Endpoint.VERSION)
 
     def check_host_quarantine_status(self, agent_id: str) -> dict:
-        return self.call_api(Endpoint.HOST_CONTAINMENT.format(agent_id)).json()
+        return self.call_api(Endpoint.HOST_CONTAINMENT.format(agent_id))
 
     def quarantine_host(self, agent_id: str) -> bool:
         action_endpoint = Endpoint.HOST_CONTAINMENT.format(agent_id)
         self.call_api(action_endpoint, "POST")
         for attempt in range(MAX_TRIES):
             time.sleep(2 ** (attempt * 0.6))
-            if self.call_api(action_endpoint).json().get("data", {}).get("requested_on"):
+            if self.call_api(action_endpoint).get("data", {}).get("requested_on"):
                 self.call_api(action_endpoint, "PATCH", json_data={"state": "contain"})
                 return True
         return False

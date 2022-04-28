@@ -4,11 +4,13 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get alerts for a host given the host ID"
+    DESCRIPTION = "Get alerts for a host given the host ID. To get all alerts for the host, leave the offset and limit parameters empty or set to 0"
 
 
 class Input:
     HOST_ID = "host_id"
+    LIMIT = "limit"
+    OFFSET = "offset"
     
 
 class Output:
@@ -26,6 +28,19 @@ class GetAlertsByHostIdInput(insightconnect_plugin_runtime.Input):
       "title": "Host ID",
       "description": "Host ID",
       "order": 1
+    },
+    "limit": {
+      "type": "integer",
+      "title": "Limit",
+      "description": "Specifies how many alerts are returned",
+      "default": 100,
+      "order": 3
+    },
+    "offset": {
+      "type": "integer",
+      "title": "Offset",
+      "description": "Specifies which alert to start with in the response",
+      "order": 2
     }
   },
   "required": [

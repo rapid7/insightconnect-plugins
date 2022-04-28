@@ -432,7 +432,7 @@ actions:
         required: true
   get_alerts_by_host_id:
     title: Get Alerts by Host ID
-    description: Get alerts for a host given the host ID
+    description: Get alerts for a host given the host ID. To get all alerts for the host, leave the offset and limit parameters empty or set to 0
     input:
       host_id:
         title: Host ID
@@ -440,6 +440,19 @@ actions:
         required: true
         type: string
         example: 44d88612fea8a8f36de82e
+      offset:
+        title: Offset
+        description: Specifies which alert to start with in the response
+        required: false
+        type: integer
+        example: 0
+      limit:
+        title: Limit
+        description: Specifies how many alerts are returned
+        required: false
+        type: integer
+        default: 100
+        example: 100
     output:
       alerts:
         title: Alerts

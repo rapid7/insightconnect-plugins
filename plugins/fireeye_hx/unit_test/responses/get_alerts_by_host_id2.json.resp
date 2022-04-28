@@ -1,0 +1,58 @@
+{
+  "data": {
+    "total": 1,
+    "query": {
+      "agent._id": "33333"
+    },
+    "sort": {},
+    "offset": 0,
+    "limit": 50,
+    "entries": [
+      {
+        "_id": 3,
+        "agent": {
+          "_id": "33333",
+          "url": "/hx/api/v3/hosts/33333",
+          "containment_state": "normal"
+        },
+        "event_at": "2022-03-26T15:24:48.023Z",
+        "matched_at": "2022-03-26T15:24:48.023Z",
+        "reported_at": "2022-03-26T15:24:49.039Z",
+        "source": "MAL",
+        "subtype": "AV",
+        "resolution": "QUARANTINED",
+        "is_false_positive": false,
+        "md5values": [
+          "44d88612fea8a8f36de82e1278abb02f"
+        ],
+        "url": "/hx/api/v3/alerts/1",
+        "event_values": {
+          "system-data": {},
+          "os-details": {},
+          "scan-type": "oas",
+          "scanned-object": {
+            "scanned-object-type": "file-event",
+            "file-event": {
+              "file-path": "C:\\Temp\\Unconfirmed 196853.crdownload",
+              "actor-process": {
+                "pid": "3660",
+                "path": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+                "user": {
+                  "username": "Administrator",
+                  "domain": "FIREEYE-W81"
+                }
+              },
+              "sub-type": "FILE_OPERATION_OPENED"
+            }
+          }
+        },
+        "appliance": {
+          "_id": "3"
+        }
+      }
+    ]
+  },
+  "message": "OK",
+  "details": [],
+  "route": "/hx/api/v3/alerts"
+}

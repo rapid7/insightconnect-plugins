@@ -61,12 +61,20 @@ class Util:
         url = kwargs.get("url")
         method = kwargs.get("method")
 
-        if params == {"agent._id": "11111", "limit": 50, "offset": 0}:
+        if params == {"agent._id": "11111", "limit": 100, "offset": 0}:
             return MockResponse("get_alerts_by_host_id", 200)
-        if params == {"agent._id": "11111", "limit": 50, "offset": 50}:
+        if params == {"agent._id": "11111", "limit": 100, "offset": 100}:
             return MockResponse("get_alerts_by_host_id_empty", 200)
-        if params == {"agent._id": "22222", "limit": 50, "offset": 0}:
+        if params == {"agent._id": "22222", "limit": 100, "offset": 0}:
             return MockResponse("get_alerts_by_host_id_empty", 200)
+        if params == {"agent._id": "33333", "limit": 100, "offset": 5}:
+            return MockResponse("get_alerts_by_host_id2", 200)
+        if params == {"agent._id": "33333", "limit": 100, "offset": 105}:
+            return MockResponse("get_alerts_by_host_id_empty", 200)
+        if params == {"agent._id": "33333", "limit": 50, "offset": 0}:
+            return MockResponse("get_alerts_by_host_id2", 200)
+        if params == {"agent._id": "33333", "limit": 50, "offset": 10}:
+            return MockResponse("get_alerts_by_host_id2", 200)
         if params == {"search": "example_hostname"}:
             return MockResponse("get_host_id", 200)
         if params == {"search": "invalid_hostname"}:

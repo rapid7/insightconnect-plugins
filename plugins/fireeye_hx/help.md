@@ -200,19 +200,23 @@ Example output:
 
 #### Get Alerts by Host ID
 
-This action is used to get alerts for a host given the host ID.
+This action is used to get alerts for a host given the host ID. To get all alerts for the host, leave the offset and limit parameters empty or set to 0.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |host_id|string|None|True|Host ID|None|44d88612fea8a8f36de82e|
+|limit|integer|100|False|Specifies how many alerts are returned|None|100|
+|offset|integer|None|False|Specifies which alert to start with in the response|None|0|
 
 Example input:
 
 ```
 {
-  "host_id": "44d88612fea8a8f36de82e"
+  "host_id": "44d88612fea8a8f36de82e",
+  "limit": 100,
+  "offset": 0
 }
 ```
 
@@ -383,7 +387,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 2.0.0 - Add new actions Quarantine Host, Unquarantine Host and Check Quarantine Status | Add `SSL Verify` input in connection | Add missing input examples | Correct type for `subtype` in custom output for Get Alerts from Host ID action | Code refactor
+* 2.0.0 - Add new actions Quarantine Host, Unquarantine Host and Check Quarantine Status | Add `SSL Verify` input in connection | Add missing input examples | Correct type for `subtype` in custom output for Get Alerts from Host ID action | Code refactor | Add `offset` and `limit` inputs in Get Alerts from Host ID action
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin
 

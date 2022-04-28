@@ -17,7 +17,7 @@ class GetAlertsByHostId(insightconnect_plugin_runtime.Action):
         return {
             Output.ALERTS: insightconnect_plugin_runtime.helper.clean(
                 self.connection.api.get_alerts_by_host_id(
-                    {"agent._id": params.get(Input.HOST_ID), "limit": 50, "offset": 0}
+                    params.get(Input.HOST_ID), params.get(Input.OFFSET), params.get(Input.LIMIT)
                 )
             )
         }

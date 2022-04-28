@@ -18,6 +18,6 @@ class TestGetAlertsByHostId(TestCase):
         cls.action = Util.default_connector(GetAlertsByHostId())
 
     @parameterized.expand(Util.load_parameters("get_alerts_by_host_id").get("parameters"))
-    def test_get_alerts_by_host_id(self, mock_request, name, host_id, expected):
-        actual = self.action.run({Input.HOST_ID: host_id})
+    def test_get_alerts_by_host_id(self, mock_request, name, host_id, offset, limit, expected):
+        actual = self.action.run({Input.HOST_ID: host_id, Input.OFFSET: offset, Input.LIMIT: limit})
         self.assertEqual(actual, expected)
