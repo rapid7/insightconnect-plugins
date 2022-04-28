@@ -60,9 +60,9 @@ class FireEyeAPI:
         payload = {"agent._id": agent_id, "limit": limit if limit else 100, "offset": offset if offset else 0}
 
         for _ in range(0, 99999):
-            response = self.call_api(action_endpoint, params=payload).get("data", {}).get("entries", [])
-            alerts += response
-            if not response or limit:
+            new_alerts = self.call_api(action_endpoint, params=payload).get("data", {}).get("entries", [])
+            alerts += new_alerts
+            if not new_alerts or limit:
                 break
 
             payload["offset"] += payload.get("limit")
