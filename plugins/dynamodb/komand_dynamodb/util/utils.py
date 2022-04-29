@@ -98,8 +98,8 @@ class Utils:
     def get_schema_from_ref(schema: dict, ref: str) -> any:
         """
         Return object which describe of custom type definition.
-        For example if ref is equals "#/definitions/custom_definition_object" function will return object
-        from schema which define structure of custom_definition_object.
+        For example if ref is equal to "#/definitions/custom_definition_object" function will return object
+        from schema which defines structure of the custom_definition_object.
         :param schema: The schema, which is generated from plugin spec.
         :param ref: The ref string which tell which definitions need to pull from schema
         :return: The object which define type of ref
@@ -124,7 +124,7 @@ class Utils:
     @staticmethod
     def get_empty_output(schema: dict) -> dict:
         """
-        Returns a dictionary where schema parameters mapped to default values.
+        Returns a dictionary where schema parameters are mapped to the default values.
         :param schema: The output schema.
         :return: A dictionary which maps properties to empty values.
         """

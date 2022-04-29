@@ -72,30 +72,30 @@ Example input:
 
 ```
 {
-   "condition_expression": "keytableu003cu003euser",
-   "expression_attribute_names": {
-      "#P": "Percentile"
-   },
-   "expression_attribute_values": {
-      ":avail": {
-         "S": "Available"
-      },
-      ":back": {
-         "S": "Backordered"
-      },
-      ":disc": {
-         "S": "Discontinued"
-      }
-   },
-   "item": {
-      "keytable": "login",
-      "e-mail": "user@example.com",
-      "user": "Username"
-   },
-   "return_consumed_capacity": "TOTAL",
-   "return_item_collection_metrics": false,
-   "return_values": false,
-   "table_name": "Table-name"
+  "condition_expression": "keytableu003cu003euser",
+  "expression_attribute_names": {
+    "#P": "Percentile"
+  },
+  "expression_attribute_values": {
+    ":avail": {
+      "S": "Available"
+    },
+    ":back": {
+      "S": "Backordered"
+    },
+    ":disc": {
+      "S": "Discontinued"
+    }
+  },
+  "item": {
+    "keytable": "login",
+    "e-mail": "user@example.com",
+    "user": "Username"
+  },
+  "return_consumed_capacity": "TOTAL",
+  "return_item_collection_metrics": false,
+  "return_values": false,
+  "table_name": "Table-name"
 }
 ```
 
@@ -137,29 +137,29 @@ Example input:
 
 ```
 {
-   "condition_expression": "keytableu003cu003euser",
-   "expression_attribute_names": {
-      "#P": "Percentile"
-   },
-   "expression_attribute_values": {
-      ":avail": {
-         "S": "Available"
-      },
-      ":back": {
-         "S": "Backordered"
-      },
-      ":disc": {
-         "S": "Discontinued"
-      }
-   },
-   "key": {
-      "keytable": "login"
-   },
-   "return_consumed_capacity": "TOTAL",
-   "return_item_collection_metrics": false,
-   "return_values": "ALL_OLD",
-   "table_name": "Table-name",
-   "update_expression": "SET #Y = :y, #AT = :t"
+  "condition_expression": "keytableu003cu003euser",
+  "expression_attribute_names": {
+    "#P": "Percentile"
+  },
+  "expression_attribute_values": {
+    ":avail": {
+       "S": "Available"
+    },
+    ":back": {
+       "S": "Backordered"
+    },
+    ":disc": {
+       "S": "Discontinued"
+    }
+  },
+  "key": {
+    "keytable": "login"
+  },
+  "return_consumed_capacity": "TOTAL",
+  "return_item_collection_metrics": false,
+  "return_values": "ALL_OLD",
+  "table_name": "Table-name",
+  "update_expression": "SET #Y = :y, #AT = :t"
 }
 ```
 
@@ -205,33 +205,33 @@ Example input:
 
 ```
 {
-   "consistent_read": false,
-   "exclusive_start_key": {
-      "email": "user@example.com"
-   },
-   "expression_attribute_names": {
-      "#P": "Percentile"
-   },
-   "expression_attribute_values": {
-      ":avail": {
-         "S": "Available"
-      },
-      ":back": {
-         "S": "Backordered"
-      },
-      ":disc": {
-         "S": "Discontinued"
-      }
-   },
-   "filter_expression": "test = :test",
-   "index_name": "index-name",
-   "limit": 100,
-   "projection_expression": "Description",
-   "return_consumed_capacity": "TOTAL",
-   "segment": 100,
-   "select": "ALL_ATTRIBUTES",
-   "table_name": "Table-name",
-   "total_segments": 100
+  "consistent_read": false,
+  "exclusive_start_key": {
+    "email": "user@example.com"
+  },
+  "expression_attribute_names": {
+    "#P": "Percentile"
+  },
+  "expression_attribute_values": {
+    ":avail": {
+       "S": "Available"
+    },
+    ":back": {
+       "S": "Backordered"
+    },
+    ":disc": {
+       "S": "Discontinued"
+    }
+  },
+  "filter_expression": "test = :test",
+  "index_name": "index-name",
+  "limit": 100,
+  "projection_expression": "Description",
+  "return_consumed_capacity": "TOTAL",
+  "segment": 100,
+  "select": "ALL_ATTRIBUTES",
+  "table_name": "Table-name",
+  "total_segments": 100
 }
 ```
 
@@ -249,29 +249,29 @@ Example output:
 ```
 {
   "response": {
-    "Items": [
-      {
-        "e-mail": "user@example.com",
-        "user": "Username",
-        "keytable": "login"
-      }
-    ],
-    "Count": 1,
-    "ScannedCount": 2,
-    "ResponseMetadata": {
-      "RequestId": "b42ec8b47deb2dc75edebd01132d63f8e8d4cd08e5d26d8bd366",
-      "HTTPStatusCode": 200,
-      "HTTPHeaders": {
-        "server": "Server",
-        "date": "Sun, 25 Jul 2021 20:46:19 GMT",
-        "content-type": "application/x-amz-json-1.0",
-        "content-length": "130",
-        "connection": "keep-alive",
-        "x-amzn-requestid": "b42ec8b47deb2dc75edebd01132d63f8e8d4cd08e5d26d8bd366",
-        "x-amz-crc32": "1592874513"
-      },
-      "RetryAttempts": 0
+  "Items": [
+    {
+      "e-mail": "user@example.com",
+      "user": "Username",
+      "keytable": "login"
     }
+  ],
+  "Count": 1,
+  "ScannedCount": 2,
+  "ResponseMetadata": {
+    "RequestId": "b42ec8b47deb2dc75edebd01132d63f8e8d4cd08e5d26d8bd366",
+    "HTTPStatusCode": 200,
+    "HTTPHeaders": {
+      "server": "Server",
+      "date": "Sun, 25 Jul 2021 20:46:19 GMT",
+      "content-type": "application/x-amz-json-1.0",
+      "content-length": "130",
+      "connection": "keep-alive",
+      "x-amzn-requestid": "b42ec8b47deb2dc75edebd01132d63f8e8d4cd08e5d26d8bd366",
+      "x-amz-crc32": "1592874513"
+    },
+    "RetryAttempts": 0
+  }
   }
 }
 
