@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 3.1.5
+version: 3.2.0
 supported_versions: ["Latest release successfully tested on 2022-05-05."]
 vendor: rapid7
 resources:
@@ -14,6 +14,7 @@ resources:
   docs_url: https://docs.rapid7.com/insightconnect/rapid7-insightidr
 tags: [ "IDR", "SIEM" ]
 support: rapid7
+supported_versions: ["2022-05-03"]
 status: []
 hub_tags:
   use_cases: [threat_detection_and_response]
@@ -350,6 +351,54 @@ types:
       title: User Data
       type: user_data
       description: User data
+      required: false
+  during:
+    time_range:
+      title: Time Range
+      type: string
+      description: Time range description
+      required: false
+    to:
+      title: To
+      type: integer
+      description: Time range end value
+      required: false
+    from:
+      title: From
+      type: integer
+      description: Time range start value
+      required: false
+  leql:
+    statement:
+      title: Statement
+      type: string
+      description: Logentries Query Language statement
+      required: false
+    during:
+      title: During
+      type: during
+      description: Query duration data
+      required: false
+  query:
+    id:
+      title: ID
+      type: string
+      description: Query ID
+      required: false
+    name:
+      title: Name
+      type: string
+      description: Query name
+      required: false
+    leql:
+      title: LEQL
+      type: leql
+      description: LEQL data
+      required: false
+    logs:
+      title: Logs
+      type: "[]string"
+      description: Query logs
       required: false
 
 
@@ -816,4 +865,20 @@ actions:
         title: Threat
         description: The information about the new threat
         type: threat
+        required: true
+  get_a_saved_query:
+    title: Get a Saved Query
+    description: Retrieve a saved InsightIDR LEQL query by its ID
+    input:
+      query_id:
+        title: Query ID
+        description: UUID of saved query
+        type: string
+        required: true
+        example: "00000000-0000-10d0-0000-000000000000"
+    output:
+      saved_query:
+        title: Saved Query
+        description: Saved LEQL query
+        type: query
         required: true

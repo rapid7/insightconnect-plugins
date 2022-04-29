@@ -1,4 +1,4 @@
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 import requests
 
 import aiohttp
@@ -68,7 +68,6 @@ class ResourceHelper(object):
         """
         try:
             request_method = getattr(self.session, method.lower())
-
             if not params:
                 params = {}
             if not payload:
@@ -87,6 +86,7 @@ class ResourceHelper(object):
                 error = response.json()["message"]
             except KeyError:
                 error = "Unknown error occurred. Please contact support or try again later."
+                self.logger.error(f"Code: {response.status_code}, message: {error}")
 
             status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
             self.logger.error(f"{status_code_message} ({response.status_code}): {error}")
