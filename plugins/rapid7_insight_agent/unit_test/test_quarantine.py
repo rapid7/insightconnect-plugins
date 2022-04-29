@@ -1,40 +1,33 @@
-import sys
 import os
+import sys
+from unittest import TestCase
+from unittest.mock import patch
+
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
-
-from unittest import TestCase
-from icon_rapid7_insight_agent.connection.connection import Connection
-from icon_rapid7_insight_agent.actions.quarantine import Quarantine
-import json
-import logging
+from icon_rapid7_insight_agent.actions.quarantine.action import Quarantine
+from icon_rapid7_insight_agent.actions.quarantine.schema import Input
+from unit_test.util import Util
 
 
-class TestQuarantine(TestCase):
-    def test_integration_quarantine(self):
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = Quarantine()
+@patch("requests.sessions.Session.post", side_effect=Util.mocked_request)
+class TestCheckAgentStatus(TestCase):
+    @classmethod
+    @patch("requests.sessions.Session.post", side_effect=Util.mocked_request_for_api_key)
+    def setUpClass(cls, mock_request) -> None:
+        cls.action = Util.default_connector(Quarantine())
 
-        test_conn.logger = log
-        test_action.logger = log
+    def test_check_agent_status(self, mock_request):
+        actual = self.action.run(
+            {Input.AGENT_ID: "goodIDQuarantine", Input.INTERVAL: 604800, Input.QUARANTINE_STATE: True}
+        )
+        expect = Util.load_json("expected/quarantine.exp")
+        self.assertEqual(expect, actual)
 
-        try:
-            with open("../tests/quarantine.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        self.assertEquals({"success": True}, results)
+    def test_bad_agent_id(self, mock_request):
+        actual = self.action.run(
+            {Input.AGENT_ID: "badIDQuarantine", Input.INTERVAL: 604800, Input.QUARANTINE_STATE: True}
+        )
+        expect = Util.load_json("expected/quarantine_bad.exp")
+        self.assertEqual(expect, actual)

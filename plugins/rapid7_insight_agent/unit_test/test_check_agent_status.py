@@ -1,43 +1,33 @@
-import sys
 import os
+import sys
+from unittest import TestCase
+from unittest.mock import patch
+
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
-
-from unittest import TestCase
-from icon_rapid7_insight_agent.connection.connection import Connection
-from icon_rapid7_insight_agent.actions.check_agent_status import CheckAgentStatus
-import json
-import logging
+from icon_rapid7_insight_agent.actions.check_agent_status.action import CheckAgentStatus
+from icon_rapid7_insight_agent.actions.check_agent_status.schema import Input
+from unit_test.util import Util
 
 
+@patch("requests.sessions.Session.post", side_effect=Util.mocked_request)
 class TestCheckAgentStatus(TestCase):
-    def test_integration_check_agent_status(self):
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = CheckAgentStatus()
+    @classmethod
+    @patch("requests.sessions.Session.post", side_effect=Util.mocked_request_for_api_key)
+    def setUpClass(cls, mock_request) -> None:
+        cls.action = Util.default_connector(CheckAgentStatus())
 
-        test_conn.logger = log
-        test_action.logger = log
+    def test_check_agent_status(self, mock_request):
+        actual = self.action.run({Input.AGENT_ID: "goodID"})
+        expect = Util.load_json("expected/check_agent_status.exp")
+        self.assertEqual(expect, actual)
 
-        try:
-            with open("../tests/check_agent_status.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        self.assertTrue("is_currently_quarantined" in results.keys())
-        self.assertTrue("is_asset_online" in results.keys())
-        self.assertTrue("is_quarantine_requested" in results.keys())
-        self.assertTrue("is_unquarantine_requested" in results.keys())
+    def test_bad_agent_id(self, mock_request):
+        with self.assertRaises(PluginException) as exception:
+            self.action.run({Input.AGENT_ID: "badID"})
+        self.assertEqual(exception.exception.cause, "Received an unexpected response from the server.")
+        self.assertEqual(
+            exception.exception.assistance,
+            "Verify your plugin connection inputs are correct especially region. If the issue persists, please contact support.",
+        )
