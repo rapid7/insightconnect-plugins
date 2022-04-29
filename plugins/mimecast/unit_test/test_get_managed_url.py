@@ -24,4 +24,3 @@ class TestGetManagedUrl(TestCase):
         actual = self.action.run(Util.load_json("inputs/get_managed_url_with_filter.json.exp"))
         expect = Util.load_json("expected/get_managed_url_empty_response.json.exp")
         self.assertEqual(expect, actual)
-

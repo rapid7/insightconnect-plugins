@@ -35,7 +35,7 @@ class GetTtpUrlLogs(insightconnect_plugin_runtime.Action):
 
         responses = []
 
-        for pages in range(max_pages):
+        for _ in range(max_pages):
             response = self.connection.client.get_ttp_url_logs(data, meta)
             responses.append(response)
 
@@ -48,15 +48,15 @@ class GetTtpUrlLogs(insightconnect_plugin_runtime.Action):
             meta[PAGINATION_FIELD]["pageToken"] = response[META_FIELD]["pagination"]["next"]
 
         try:
-            output = list()
+            output = []
             if url_to_filter:
                 for response in responses:
                     for log in response[DATA_FIELD][0]["clickLogs"]:
-                        if re.search(r"{}".format(url_to_filter), log["url"]):
+                        if re.search(f"{url_to_filter}", log.get("url")):
                             output.append(log)
             else:
                 for response in responses:
-                    output.extend(response[DATA_FIELD][0]["clickLogs"])
+                    output.extend(response.get(DATA_FIELD)[0]["clickLogs"])
         except (KeyError, IndexError):
             self.logger.error(responses)
             raise PluginException(

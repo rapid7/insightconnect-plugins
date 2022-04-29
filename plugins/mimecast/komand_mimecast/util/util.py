@@ -9,10 +9,10 @@ class Utils:
     @staticmethod
     def normalize(key: str, value: str) -> dict:
         if "_" not in key:
-            if value  and value != "none":
+            if value and value != "none":
                 return {key: value}
             return {}
-
+        # pylint: disable=unnecessary-lambda
         chunks = list(filter(lambda c: len(c), key.split("_")))
 
         for i in range(1, len(chunks)):
