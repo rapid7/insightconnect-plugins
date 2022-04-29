@@ -5,8 +5,8 @@ import json
 from sys import argv
 
 Name = "Rapid7 InsightIDR"
-Vendor = "rapid7"
-Version = "3.1.4"
+Vendor = "rapid7_ab"
+Version = "3.2.0"
 Description = "This plugin allows you to add indicators to a threat and see the status of investigations"
 
 
@@ -47,6 +47,8 @@ def main():
             self.add_action(actions.CreateThreat())
 
             self.add_action(actions.GetALog())
+
+            self.add_action(actions.GetASavedQuery())
 
             self.add_action(actions.GetAllLogs())
 

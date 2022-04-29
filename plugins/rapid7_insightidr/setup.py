@@ -2,10 +2,10 @@
 from setuptools import setup, find_packages
 
 
-setup(name="rapid7_insightidr-rapid7-plugin",
-      version="3.1.4",
+setup(name="rapid7_insightidr-rapid7_ab-plugin",
+      version="3.2.0",
       description="This plugin allows you to add indicators to a threat and see the status of investigations",
-      author="rapid7",
+      author="rapid7_ab",
       author_email="",
       url="",
       packages=find_packages(),
