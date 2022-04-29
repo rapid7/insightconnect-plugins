@@ -4,10 +4,9 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from insightconnect_plugin_runtime.exceptions import PluginException
-from komand_mimecast.util.constants import BASIC_ASSISTANCE_MESSAGE, VALIDATION_INVALID_EMAIL_ADRESS_ERROR, ERROR_CASES
 
 sys.path.append(os.path.abspath("../"))
-
+from komand_mimecast.util.constants import BASIC_ASSISTANCE_MESSAGE, VALIDATION_INVALID_EMAIL_ADDRESS_ERROR, ERROR_CASES
 from unit_test.util import Util
 from komand_mimecast.actions import PermitOrBlockSender
 
@@ -31,5 +30,5 @@ class TestPermitOrBlockSender(TestCase):
     def test_bad_email(self, mock_request):
         with self.assertRaises(PluginException) as exception:
             self.action.run(Util.load_json("inputs/permit_or_block_sender_bad.json.exp"))
-        self.assertEqual(exception.exception.cause, ERROR_CASES.get(VALIDATION_INVALID_EMAIL_ADRESS_ERROR))
+        self.assertEqual(exception.exception.cause, ERROR_CASES.get(VALIDATION_INVALID_EMAIL_ADDRESS_ERROR))
         self.assertEqual(exception.exception.assistance, BASIC_ASSISTANCE_MESSAGE)

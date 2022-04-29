@@ -7,7 +7,7 @@ from unittest.mock import patch
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
-from komand_mimecast.util.constants import BASIC_ASSISTANCE_MESSAGE, MANAGED_URL_EXISTST_ERROR, ERROR_CASES
+from komand_mimecast.util.constants import BASIC_ASSISTANCE_MESSAGE, MANAGED_URL_EXISTS_ERROR, ERROR_CASES
 from unit_test.util import Util
 from komand_mimecast.actions import CreateManagedUrl
 
@@ -26,5 +26,5 @@ class TestCreateManagedURl(TestCase):
     def test_bad_create_managed_url(self, mocked_request):
         with self.assertRaises(PluginException) as exception:
             self.action.run(Util.load_json("inputs/create_managed_url_bad.json.exp"))
-        self.assertEqual(exception.exception.cause, ERROR_CASES.get(MANAGED_URL_EXISTST_ERROR))
+        self.assertEqual(exception.exception.cause, ERROR_CASES.get(MANAGED_URL_EXISTS_ERROR))
         self.assertEqual(exception.exception.assistance, BASIC_ASSISTANCE_MESSAGE)
