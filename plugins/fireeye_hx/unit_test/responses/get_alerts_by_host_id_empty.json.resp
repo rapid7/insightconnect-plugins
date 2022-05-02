@@ -1,0 +1,15 @@
+{
+  "data": {
+    "total": 0,
+    "query": {
+      "agent._id": "11111"
+    },
+    "sort": {},
+    "offset": 0,
+    "limit": 50,
+    "entries": []
+  },
+  "message": "OK",
+  "details": [],
+  "route": "/hx/api/v3/alerts"
+}
