@@ -22,5 +22,14 @@ jobs:
         curl -s "https://${PACKAGE_CLOUD_TOKEN}@packagecloud.io/install/repositories/rapid7/insightconnect_internal_python_tooling/script.python.sh" | bash
         python -m pip install --user icon-integrations-ci --no-cache-dir --no-warn-script-location
         python -m pip install --user insightconnect_plugin_runtime --no-cache-dir --no-warn-script-location
+        python -m pip install --user coverage --no-cache-dir
         cd plugins
-        /home/runner/.local/bin/icon-ci run_unit_tests
+        /home/runner/.local/bin/icon-ci run_unit_tests --generate_coverage
+    - name: Show coverage 
+      run: |
+        cd plugins
+        for i in coverage_* 
+          do
+            echo $i
+            python -m coverage report --data-file=$i
+          done
