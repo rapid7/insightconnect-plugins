@@ -56,7 +56,7 @@ class PatchUrlListByIdInput(insightconnect_plugin_runtime.Input):
     "type": {
       "type": "string",
       "title": "URL List Category",
-      "description": "Category of URL list",
+      "description": "Category of URL list (to update this value, URLs input must also be provided)",
       "enum": [
         "",
         "exact",
@@ -67,7 +67,7 @@ class PatchUrlListByIdInput(insightconnect_plugin_runtime.Input):
     "urls": {
       "type": "array",
       "title": "URLs",
-      "description": "List of URLs",
+      "description": "List of URLs (to update this value, URL List Category input must also be provided)",
       "items": {
         "type": "string"
       },

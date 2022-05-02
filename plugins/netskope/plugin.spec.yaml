@@ -4,10 +4,10 @@ products: [insightconnect]
 name: netskope
 title: Netskope
 description: This plugin allows users to create, read, update, and delete URL lists in their Netskope environment
-version: 1.0.0
+version: 1.0.1
 vendor: rapid7
 support: rapid7
-supported_versions: ["2022-02-11"]
+supported_versions: ["2022-04-26"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/netskope
@@ -412,13 +412,13 @@ actions:
         example: ExampleName
       urls:
         title: URLs
-        description: List of URLs
+        description: List of URLs (to update this value, URL List Category input must also be provided)
         type: "[]string"
         required: false
         example: '["https://example.com", "https://example.com"]'
       type:
         title: URL List Category
-        description: Category of URL list
+        description: Category of URL list (to update this value, URLs input must also be provided)
         type: string
         enum:
           - ""
