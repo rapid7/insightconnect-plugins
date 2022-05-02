@@ -4,33 +4,32 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get a host ID from a given hostname"
+    DESCRIPTION = "Quarantine a host"
 
 
 class Input:
-    HOSTNAME = "hostname"
+    AGENT_ID = "agent_id"
     
 
 class Output:
-    HOST_ID = "host_id"
     SUCCESS = "success"
     
 
-class GetHostIdFromHostnameInput(insightconnect_plugin_runtime.Input):
+class QuarantineHostInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "hostname": {
+    "agent_id": {
       "type": "string",
-      "title": "Hostname",
-      "description": "Hostname",
+      "title": "Agent ID",
+      "description": "The ID of the agent you want to isolate",
       "order": 1
     }
   },
   "required": [
-    "hostname"
+    "agent_id"
   ]
 }
     """)
@@ -39,23 +38,17 @@ class GetHostIdFromHostnameInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class GetHostIdFromHostnameOutput(insightconnect_plugin_runtime.Output):
+class QuarantineHostOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "host_id": {
-      "type": "string",
-      "title": "Host ID",
-      "description": "ID for the host",
-      "order": 1
-    },
     "success": {
       "type": "boolean",
       "title": "Success",
-      "description": "Whether or not a match was found",
-      "order": 2
+      "description": "Whether the action was successful",
+      "order": 1
     }
   },
   "required": [
