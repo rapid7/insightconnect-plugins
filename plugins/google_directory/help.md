@@ -7,6 +7,7 @@ The Google Directory plugin allows you to list all users, suspend and unsuspend 
 
 * Suspend and unsuspend users
 * List all users
+* Get user contact information
 
 # Requirements
 
@@ -59,6 +60,68 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Get User's Contact Information
+
+This action retrieves all contact information from a specific user in the domain by email.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum| Example          |
+|----|----|-------|--------|-----------|----|------------------|
+|email|string|None|True|Email of user|None|user@example.com|
+
+Example input:
+
+```
+{
+  "email": "user@example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|contact|contact|True|User's contact information|
+
+Example output:
+
+```
+{
+  "contact": {
+    "addresses": [
+      {
+        "country": "England",
+        "street": "1 Test street"
+      },
+      {
+        "country": "England",
+        "postal_code": "31-222"
+      },
+      {
+        "country": "England",
+        "postal_code": "31-111",
+        "street": "3 Test street"
+      },
+      {
+        "postal_code": "31-333",
+        "street": "4 Test street"
+      }
+    ],
+    "phone_numbers": [
+      "111111111",
+      "222222222",
+      "333333333"
+    ],
+    "email_addresses": [
+      "user@example.com",
+      "user2@example.com",
+      "user3@example.com"
+    ]
+  }
+}
+```
 
 #### Get All Domain Users
 
@@ -186,7 +249,29 @@ _This plugin does not contain any triggers._
 
 ### Custom Output Types
 
-_This plugin does not contain any custom output types._
+#### address
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Country|string|False|User's nation/territory|
+|Postal Code|string|False|User's ZIP or postal code|
+|Street|string|False|User's street address|
+
+#### contact
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Addresses|[]address|True|User's addresses|
+|Email Addresses|[]string|True|User's emails|
+|Phone Numbers|[]string|True|User's phone numbers|
+
+#### user
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Email|string|True|Email address|
+|Full Name|string|False|Full name of the user|
+
 
 ## Troubleshooting
 
@@ -194,6 +279,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.1.0 - Add new action Get User's Contact Information
 * 2.0.2 - Add required OAuth scope for actions in help.md | Code refactor | Add input examples
 * 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - Update connection to add support for the read-only Google Admin Directory OAuth scope

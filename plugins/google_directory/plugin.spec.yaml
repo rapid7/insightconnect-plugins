@@ -4,7 +4,7 @@ products: [insightconnect]
 name: google_directory
 title: Google Directory
 description: Uses the Google Directory plugin to manage members, users, and user aliases
-version: 2.0.2
+version: 2.1.0
 supported_versions: ["Google Directory API v1 2022-03-29T12:00:00Z"]
 vendor: rapid7
 support: community
@@ -33,6 +33,38 @@ types:
       description: Full name of the user
       type: string
       required: false
+  address:
+    country:
+      title: Country
+      description: User's nation/territory
+      type: string
+      required: false
+    street:
+      title: Street
+      description: User's street address
+      type: string
+      required: false
+    postal_code:
+      title: Postal Code
+      description: User's ZIP or postal code
+      type: string
+      required: false
+  contact:
+    email_addresses:
+      title: Email addresses
+      description: User's emails
+      type: "[]string"
+      required: true
+    phone_numbers:
+      title: Phone Numbers
+      description: User's phone numbers
+      type: "[]string"
+      required: true
+    addresses:
+      title: Addresses
+      description: User's addresses
+      type: "[]address"
+      required: true
 connection:
   admin_user:
     title: Admin User
@@ -125,6 +157,22 @@ actions:
         description: Users in the domain
         required: true
         type: '[]user'
+  get_user_contact:
+    title: Get User's Contact Information
+    description: Retrieves all contact information from a specific user in the domain by email
+    input:
+      email:
+        title: User Email
+        description: Email of user
+        type: string
+        required: true
+        example: user@example.com
+    output:
+      contact:
+        title: Contact
+        description: User's contact information
+        required: true
+        type: contact
   suspend_user:
     title: Suspend User
     description: Suspends a user account

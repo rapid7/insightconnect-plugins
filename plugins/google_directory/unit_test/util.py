@@ -3,6 +3,8 @@ import logging
 import os
 import sys
 
+from typing import List
+
 sys.path.append(os.path.abspath("../"))
 
 from icon_google_directory.connection.connection import Connection
@@ -30,6 +32,10 @@ class MockClient:
             self.filename = "suspend_user"
         if body == {"suspended": False}:
             self.filename = "unsuspend_user"
+        return self
+
+    def get(self, userKey):
+        self.filename = "get_contact_user"
         return self
 
     def execute(self):
