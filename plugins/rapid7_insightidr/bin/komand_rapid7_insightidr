@@ -5,7 +5,7 @@ import json
 from sys import argv
 
 Name = "Rapid7 InsightIDR"
-Vendor = "rapid7_ab"
+Vendor = "rapid7"
 Version = "3.2.0"
 Description = "This plugin allows you to add indicators to a threat and see the status of investigations"
 

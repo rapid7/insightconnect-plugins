@@ -1,13 +1,11 @@
-import uuid
-
 import komand
+
 from .schema import GetASavedQueryInput, GetASavedQueryOutput, Input, Output, Component
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 from komand_rapid7_insightidr.util.endpoints import Queries
 from komand.exceptions import PluginException
-from uuid import UUID
 from validators import uuid
-# Custom imports below
+import json
 
 
 class GetASavedQuery(komand.Action):
@@ -30,4 +28,13 @@ class GetASavedQuery(komand.Action):
         request = ResourceHelper(self.connection.session, self.logger)
         response = request.resource_request(Queries.get_query_by_id(self.connection.url, query_id),
                                             "get")
-        return {Output.SAVED_QUERY: response}
+        try:
+            result = json.loads(response["resource"])
+        except json.decoder.JSONDecodeError:
+            self.logger.error(f"InsightIDR response: {response}")
+            raise PluginException(
+                cause="The response from InsightIDR was not in the correct format.",
+                assistance="Contact support for help. See log for more details",
+                data=response,
+            )
+        return {Output.SAVED_QUERY: result}
