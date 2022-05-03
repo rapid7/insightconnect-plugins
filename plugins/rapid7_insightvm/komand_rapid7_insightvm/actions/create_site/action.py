@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CreateSiteInput, CreateSiteOutput
 
 # Custom imports below
@@ -6,7 +6,7 @@ from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
-class CreateSite(komand.Action):
+class CreateSite(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_site",

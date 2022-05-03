@@ -1,0 +1,49 @@
+{
+    "data": [
+        {
+            "id": 123456789,
+            "type": "Nexpose",
+            "identifier": "test_identifier_6",
+            "title": "test_title_6",
+            "description": "\n    <p>test_description_6</p>\n  ",
+            "data": {
+                "solutions": [
+                    "test_solution_1",
+                    "test_solution_2"
+                ],
+                "alternate_ids": [
+                    {
+                        "namespace": "CVE",
+                        "name": "2019-12345",
+                        "unified_name": "CVE/2019-12345"
+                    },
+                    {
+                        "namespace": "URL",
+                        "name": "https://example.com",
+                        "unified_name": "URL/https://example.com"
+                    }
+                ],
+                "severity": "2",
+                "csvss": "(AV:L/AC:L/Au:N/C:P/I:N/A:N)",
+                "date_published": "2019-01-01T00:00:00+00:00",
+                "date_added": "2021-01-01T00:00:00+00:00",
+                "date_modified": "2021-01-01T00:00:00+00:00"
+            },
+            "references": [
+                "test_reference_6",
+                "test_reference_7"
+            ],
+            "created_at": "2021-01-01T00:00:00.000Z",
+            "updated_at": "2022-01-01T00:00:00.000Z",
+            "published_at": "2019-01-01T00:00:00.000Z",
+            "content_type": "vulnerability"
+        }
+    ],
+    "metadata": {
+        "index": 1,
+        "size": 1,
+        "sort": "created_at,DESC",
+        "total_pages": 1,
+        "total_data": 1
+    }
+}

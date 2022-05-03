@@ -1,0 +1,15 @@
+{
+  "resources": [],
+  "page": {
+    "number": 0,
+    "size": 100,
+    "totalResources": 1,
+    "totalPages": 1
+  },
+  "links": [
+    {
+      "href": "https://example.com/api/3/assets/search?size=100&page=0",
+      "rel": "self"
+    }
+  ]
+}

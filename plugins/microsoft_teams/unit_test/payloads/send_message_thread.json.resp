@@ -1,0 +1,35 @@
+{
+  "@odata.context": "https://graph.microsoft.com/beta",
+  "attachments": [],
+  "body": {
+    "content": "test response",
+    "contentType": "text"
+  },
+  "channelIdentity": {
+    "channelId": "56789",
+    "teamId": "12345"
+  },
+  "createdDateTime": "2021-11-08T14:12:14.086Z",
+  "etag": "1636389034086",
+  "first_word": "test",
+  "from": {
+    "user": {
+      "displayName": "Example User 1",
+      "id": "1",
+      "userIdentityType": "aadUser"
+    }
+  },
+  "id": "1636389034086",
+  "importance": "normal",
+  "lastModifiedDateTime": "2021-11-08T14:12:14.086Z",
+  "locale": "en-us",
+  "mentions": [],
+  "messageType": "message",
+  "reactions": [],
+  "replyToId": "1636037542013",
+  "webUrl": "https://teams.microsoft.com/l/message",
+  "words": [
+    "test",
+    "response"
+  ]
+}

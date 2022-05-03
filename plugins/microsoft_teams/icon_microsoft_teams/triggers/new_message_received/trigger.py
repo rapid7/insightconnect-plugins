@@ -1,9 +1,9 @@
-import komand
+import insightconnect_plugin_runtime
 import time
 from .schema import NewMessageReceivedInput, NewMessageReceivedOutput, Input, Output, Component
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_microsoft_teams.util.teams_utils import (
     get_teams_from_microsoft,
     get_channels_from_microsoft,
@@ -17,7 +17,7 @@ import maya
 import validators
 
 
-class NewMessageReceived(komand.Trigger):
+class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="new_message_received",
@@ -49,7 +49,7 @@ class NewMessageReceived(komand.Trigger):
 
         time.sleep(1)  # Make sure we don't kill the API. It's limited to 3 calls a second
 
-        while True:
+        while True:  # pylint: disable=too-many-nested-blocks
             # Get messages
             sorted_messages = self.get_sorted_messages(messages_endpoint)
             most_recent_message_time = maya.parse(sorted_messages[0].get("createdDateTime"))
@@ -253,7 +253,7 @@ class NewMessageReceived(komand.Trigger):
             r"(?:" + ipv6_seg + r":){1,4}:[^\s:]" + ipv4_addr,
         )
 
-        return re.findall("|".join(["(?:{})".format(g) for g in ipv6_groups[::-1]]), msg)
+        return re.findall("|".join([f"(?:{g})" for g in ipv6_groups[::-1]]), msg)
 
     @staticmethod
     def extract_md5(msg: str) -> list:

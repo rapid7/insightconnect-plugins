@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetTagsInput, GetTagsOutput
 
 # Custom imports below
@@ -7,7 +7,7 @@ from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
-class GetTags(komand.Action):
+class GetTags(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_tags",
@@ -22,7 +22,7 @@ class GetTags(komand.Action):
         tag_type = params.get("type")
 
         endpoint = endpoints.Tag.tags(self.connection.console_url)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         tags = resource_helper.paged_resource_request(endpoint=endpoint)
 
@@ -41,7 +41,7 @@ class GetTags(komand.Action):
                 else:
                     if (regex.match(t["name"])) or (t["type"] == tag_type):
                         filtered_tags.append(t)
-            self.logger.info("Returning %d tags based on filters..." % (len(filtered_tags)))
+            self.logger.info(f"Returning {len(filtered_tags)} tags based on filters...")
             tags = filtered_tags
 
         return {"tags": tags}

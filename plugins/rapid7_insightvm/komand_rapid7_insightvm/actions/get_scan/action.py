@@ -1,14 +1,14 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetScanInput, GetScanOutput
 
 # Custom imports below
 import requests
 from komand_rapid7_insightvm.util import endpoints
 import json
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class GetScan(komand.Action):
+class GetScan(insightconnect_plugin_runtime.Action):
 
     _ERRORS = {
         400: "Bad Request",
@@ -29,7 +29,7 @@ class GetScan(komand.Action):
     def run(self, params={}):
         scan_id = params.get("scan_id")
         endpoint = endpoints.Scan.scans(self.connection.console_url, scan_id)
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         try:
             response = self.connection.session.get(url=endpoint, verify=False)
@@ -43,6 +43,7 @@ class GetScan(komand.Action):
 
                 return scan_details
             else:
+                reason = ""
                 try:
                     reason = response.json()["message"]
                 except KeyError:
@@ -51,9 +52,5 @@ class GetScan(komand.Action):
                     raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=reason.text)
 
                 status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
-                self.logger.error(
-                    "{status} ({code}): {reason}".format(
-                        status=status_code_message, code=response.status_code, reason=reason
-                    )
-                )
+                self.logger.error(f"{status_code_message} ({response.status_code}): {reason}")
                 raise PluginException(preset=PluginException.Preset.UNKNOWN)

@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import UpdateUserRoleInput, UpdateUserRoleOutput
 
 # Custom imports below
@@ -7,7 +7,7 @@ from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 from komand_rapid7_insightvm.util.resource_helpers import ValidateUser
 
 
-class UpdateUserRole(komand.Action):
+class UpdateUserRole(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="update_user_role",
@@ -20,7 +20,7 @@ class UpdateUserRole(komand.Action):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         validate = ValidateUser(self.connection.session, self.logger)
         endpoint = endpoints.User.users(self.connection.console_url, params.get("user_id"))
-        self.logger.info("Using %s ..." % endpoint)
+        self.logger.info(f"Using {endpoint}")
 
         # Get the existing details so the specific role ID key can be modified
         payload = resource_helper.resource_request(endpoint=endpoint)

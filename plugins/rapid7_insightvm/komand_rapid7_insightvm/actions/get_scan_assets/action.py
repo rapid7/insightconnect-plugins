@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetScanAssetsInput, GetScanAssetsOutput, Input, Output, Component
 
 # Custom imports below
@@ -8,10 +8,10 @@ import uuid
 from komand_rapid7_insightvm.util import util
 from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class GetScanAssets(komand.Action):
+class GetScanAssets(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_scan_assets",

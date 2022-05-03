@@ -1,0 +1,15 @@
+{
+    "reply": {
+        "status": "SUCCESS",
+        "number_of_results": 3,
+        "query_cost": {"user1": 0.001596388888888889},
+        "remaining_quota": 4.998403611111111,
+        "results": {
+            "data": [
+                {"event_id": "eventID1", "_vendor": "PANW", "_product": "Fusion", "insert_timestamp": 1621541825324, "_time": 1621541523000, "event_type": "STORY", "event_sub_type": "NULL"},
+                {"event_id": "eventID2", "_vendor": "PANW", "_product": "Fusion", "insert_timestamp": 1621541825326, "_time": 1621541528000, "event_type": "STORY", "event_sub_type": "NULL"},
+                {"event_id": "eventID3", "_vendor": "PANW", "_product": "Fusion", "insert_timestamp": 1621541825325, "_time": 1621541517000, "event_type": "STORY", "event_sub_type": "NULL"}
+            ]
+        }
+    }
+}
