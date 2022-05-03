@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
+    import insightconnect_plugin_runtime
     from komand_rapid7_insightidr import connection, actions, triggers
 
-    class ICONRapid7Insightidr(komand.Plugin):
+    class ICONRapid7Insightidr(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -60,7 +60,7 @@ def main():
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONRapid7Insightidr())
+    cli = insightconnect_plugin_runtime.CLI(ICONRapid7Insightidr())
     cli.run()
 
 

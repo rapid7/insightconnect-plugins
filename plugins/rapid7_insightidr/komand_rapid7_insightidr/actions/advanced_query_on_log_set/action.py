@@ -1,15 +1,15 @@
 from dateutil.parser import ParserError
-import komand
+import insightconnect_plugin_runtime
 from .schema import AdvancedQueryOnLogSetInput, AdvancedQueryOnLogSetOutput, Input, Output, Component
 
 # Custom imports below
 import time
 import json
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightidr.util.parse_dates import parse_dates
 
 
-class AdvancedQueryOnLogSet(komand.Action):
+class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="advanced_query_on_log_set",
@@ -46,7 +46,7 @@ class AdvancedQueryOnLogSet(komand.Action):
         if not log_entries:
             log_entries = self.get_results_from_callback(callback_url, timeout)
 
-        log_entries = komand.helper.clean(log_entries)
+        log_entries = insightconnect_plugin_runtime.helper.clean(log_entries)
 
         for log_entry in log_entries:
             log_entry["message"] = json.loads(log_entry.get("message", "{}"))

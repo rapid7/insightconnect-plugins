@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import (
     AssignUserToInvestigationInput,
     AssignUserToInvestigationOutput,
@@ -10,10 +10,10 @@ from .schema import (
 # Custom imports below
 import json
 from komand_rapid7_insightidr.util.endpoints import Investigations
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class AssignUserToInvestigation(komand.Action):
+class AssignUserToInvestigation(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="assign_user_to_investigation",

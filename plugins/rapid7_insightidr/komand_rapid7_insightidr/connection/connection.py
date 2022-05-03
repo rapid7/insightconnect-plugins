@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
-from komand.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 # Custom imports below
 import requests
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.url = None
@@ -20,8 +20,10 @@ class Connection(komand.Connection):
 
         self.session = requests.session()
         self.session.headers["X-Api-Key"] = api_key
-        self.session.headers["User-Agent"] = f"r7:insightconnect-insightidr-plugin/{self.meta.version}"
-
+        try:
+            self.session.headers["User-Agent"] = f"r7:insightconnect-insightidr-plugin/{self.meta.version}"
+        except AttributeError:
+            self.session.headers["User-Agent"] = "test-version"
         self.logger.info("Connect: Connecting...")
 
     def test(self):

@@ -1,4 +1,4 @@
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 import requests
 
 
@@ -40,13 +40,12 @@ class ResourceHelper(object):
         """
         try:
             request_method = getattr(self.session, method.lower())
-
             if not params:
                 params = {}
             if not payload:
-                response = request_method(url=endpoint, params=params, verify=False)
+                response = requests.request(method, url=endpoint, params=params, verify=False)
             else:
-                response = request_method(url=endpoint, params=params, json=payload, verify=False)
+                response = requests.request(method, url=endpoint, params=params, json=payload, verify=False)
         except requests.RequestException as e:
             self.logger.error(e)
             raise

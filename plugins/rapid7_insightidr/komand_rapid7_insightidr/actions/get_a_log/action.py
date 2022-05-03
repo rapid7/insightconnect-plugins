@@ -1,14 +1,14 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetALogInput, GetALogOutput, Input, Output, Component
 from komand_rapid7_insightidr.util.endpoints import Logs
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import json
 
 
-class GetALog(komand.Action):
+class GetALog(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_a_log", description=Component.DESCRIPTION, input=GetALogInput(), output=GetALogOutput()
