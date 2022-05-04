@@ -1,10 +1,12 @@
 import json
 import logging
 import os
+import sys
 
 import boto3
 import botocore.exceptions
 
+sys.path.append(os.path.abspath("../"))
 from insightconnect_plugin_runtime import Action
 from komand_dynamodb.connection import Connection
 from komand_dynamodb.connection.schema import Input

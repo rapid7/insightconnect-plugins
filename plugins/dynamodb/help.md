@@ -143,13 +143,13 @@ Example input:
   },
   "expression_attribute_values": {
     ":avail": {
-       "S": "Available"
+      "S": "Available"
     },
     ":back": {
-       "S": "Backordered"
+      "S": "Backordered"
     },
     ":disc": {
-       "S": "Discontinued"
+      "S": "Discontinued"
     }
   },
   "key": {
@@ -214,13 +214,13 @@ Example input:
   },
   "expression_attribute_values": {
     ":avail": {
-       "S": "Available"
+      "S": "Available"
     },
     ":back": {
-       "S": "Backordered"
+      "S": "Backordered"
     },
     ":disc": {
-       "S": "Discontinued"
+      "S": "Discontinued"
     }
   },
   "filter_expression": "test = :test",
@@ -249,29 +249,29 @@ Example output:
 ```
 {
   "response": {
-  "Items": [
-    {
-      "e-mail": "user@example.com",
-      "user": "Username",
-      "keytable": "login"
+    "Items": [
+      {
+        "e-mail": "user@example.com",
+        "user": "Username",
+        "keytable": "login"
+      }
+    ],
+    "Count": 1,
+    "ScannedCount": 2,
+    "ResponseMetadata": {
+      "RequestId": "b42ec8b47deb2dc75edebd01132d63f8e8d4cd08e5d26d8bd366",
+      "HTTPStatusCode": 200,
+      "HTTPHeaders": {
+        "server": "Server",
+        "date": "Sun, 25 Jul 2021 20:46:19 GMT",
+        "content-type": "application/x-amz-json-1.0",
+        "content-length": "130",
+        "connection": "keep-alive",
+        "x-amzn-requestid": "b42ec8b47deb2dc75edebd01132d63f8e8d4cd08e5d26d8bd366",
+        "x-amz-crc32": "1592874513"
+      },
+      "RetryAttempts": 0
     }
-  ],
-  "Count": 1,
-  "ScannedCount": 2,
-  "ResponseMetadata": {
-    "RequestId": "b42ec8b47deb2dc75edebd01132d63f8e8d4cd08e5d26d8bd366",
-    "HTTPStatusCode": 200,
-    "HTTPHeaders": {
-      "server": "Server",
-      "date": "Sun, 25 Jul 2021 20:46:19 GMT",
-      "content-type": "application/x-amz-json-1.0",
-      "content-length": "130",
-      "connection": "keep-alive",
-      "x-amzn-requestid": "b42ec8b47deb2dc75edebd01132d63f8e8d4cd08e5d26d8bd366",
-      "x-amz-crc32": "1592874513"
-    },
-    "RetryAttempts": 0
-  }
   }
 }
 
