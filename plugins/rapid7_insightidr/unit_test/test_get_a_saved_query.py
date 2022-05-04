@@ -11,7 +11,7 @@ from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 from insightconnect_plugin_runtime.exceptions import PluginException
 from unit_test.util import Util
 from unit_test.mock import (
-    mock_request,
+    mock_get_request,
 )
 import logging
 
@@ -35,7 +35,7 @@ class TestGetASavedQuery(TestCase):
         self.action.logger = log
         self.connection.logger = log
 
-    @patch("requests.request", side_effect=mock_request)
+    @patch("requests.Session.get", side_effect=mock_get_request)
     def test_get_a_saved_query(self, _mock_req):
         actual = self.action.run({Input.QUERY_ID: self.params.get("query_id")})
         expected = {
@@ -57,7 +57,7 @@ class TestGetASavedQuery(TestCase):
         cause = "Query ID field did not contain a valid UUID."
         self.assertEqual(exception.exception.cause, cause)
 
-    @patch("requests.request", side_effect=mock_request)
+    @patch("requests.Session.get", side_effect=mock_get_request)
     def test_get_a_saved_query_not_found(self, _mock_req):
         with self.assertRaises(PluginException) as exception:
             self.action.run({Input.QUERY_ID: self.params.get("not_found_query_id")})

@@ -12,8 +12,12 @@ STUB_API_KEY = "j5740ps1cbukyk3t8kib3wa36aq2v3da"
 STUB_CONNECTION = {"api_key": {"secretKey": STUB_API_KEY}, "url": STUB_API_KEY}
 
 # Define and return mock API responses based on request type and endpoint
-def mock_request(*args, **_kwarg):
-    return mock_request_selection(args[0], _kwarg.get("url"))
+def mock_get_request(*args, **_kwarg):
+    return mock_request_selection(_kwarg.get("url"), method=REQUEST_GET)
+
+
+def mock_post_request(*args, **_kwarg):
+    return mock_request_selection(_kwarg.get("url"), method=REQUEST_POST)
 
 
 class MockResponse:
@@ -42,7 +46,7 @@ def mock_request_get(url):
         return MockResponse("get_a_saved_query_404", 404)
 
 
-def mock_request_selection(method, url):
+def mock_request_selection(url, method="get"):
     # Check reqeust type and endpoint. Return appropriate file name to be loaded and response code
     if method == REQUEST_POST:
         return mock_request_post(url)

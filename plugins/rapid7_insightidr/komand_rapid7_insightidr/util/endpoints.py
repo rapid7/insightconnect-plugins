@@ -74,6 +74,7 @@ class QueryLogs:
 
         return f"{console_url}query/logs/{log_id}"
 
+
 class Queries:
     @staticmethod
     def get_query_by_id(console_url: str, query_id: str):
@@ -84,6 +85,7 @@ class Queries:
         :return: pre-populated /query/saved_queries/{query_id}
         """
         return f"{console_url}query/saved_queries/{query_id}"
+
 
 class Logs:
     @staticmethod
