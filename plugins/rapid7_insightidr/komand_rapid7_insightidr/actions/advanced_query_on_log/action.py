@@ -50,7 +50,7 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
         for log_entry in log_entries:
             log_entry["message"] = json.loads(log_entry.get("message", "{}"))
 
-        self.logger.info(f"Sending results to orchestrator.")
+        self.logger.info("Sending results to orchestrator.")
         return {Output.RESULTS: log_entries, Output.COUNT: len(log_entries)}
 
     def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:
@@ -178,19 +178,19 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
 
         logs = response.json().get("logs")
 
-        id = ""
+        id_ = ""
 
         for log in logs:
             name = log.get("name")
             self.logger.info(f"Checking {log_name} against {name}")
             if name == log_name:
                 self.logger.info("Log found.")
-                id = log.get("id")
+                id_ = log.get("id")
                 break
 
-        if id:
-            self.logger.info(f"Found log with name {log_name} and ID: {id}")
-            return id
+        if id_:
+            self.logger.info(f"Found log with name {log_name} and ID: {id_}")
+            return id_
 
         self.logger.error(f"Could not find log with name {log_name}")
         raise PluginException(

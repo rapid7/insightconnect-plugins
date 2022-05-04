@@ -32,7 +32,7 @@ class AssignUserToInvestigation(insightconnect_plugin_runtime.Action):
         response = self.connection.session.put(endpoint, json=payload)
         try:
             response.raise_for_status()
-        except Exception as e:
+        except Exception:
             raise PluginException(
                 cause="The IDR API returned an error.",
                 assistance="Usually this is the result of an invalid user email or investigation ID. Please see the following for more information:\n",

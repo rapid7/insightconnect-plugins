@@ -54,6 +54,7 @@ class ResourceHelper(object):
             resource = response.text
             return {"resource": resource, "status": response.status_code}
         else:
+            error = ""
             try:
                 error = response.json()["message"]
             except KeyError:

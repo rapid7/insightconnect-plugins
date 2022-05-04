@@ -14,7 +14,7 @@ class GetAllLogs(insightconnect_plugin_runtime.Action):
             name="get_all_logs", description=Component.DESCRIPTION, input=GetAllLogsInput(), output=GetAllLogsOutput()
         )
 
-    def run(self, params={}):
+    def run(self):
         request = ResourceHelper(self.connection.session, self.logger)
         response = request.resource_request(Logs.get_all_logs(self.connection.url), "get")
         try:

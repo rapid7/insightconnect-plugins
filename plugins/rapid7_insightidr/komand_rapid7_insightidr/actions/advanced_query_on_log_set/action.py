@@ -51,7 +51,7 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
         for log_entry in log_entries:
             log_entry["message"] = json.loads(log_entry.get("message", "{}"))
 
-        self.logger.info(f"Sending results to orchestrator.")
+        self.logger.info("Sending results to orchestrator.")
         return {Output.RESULTS: log_entries, Output.COUNT: len(log_entries)}
 
     def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:
@@ -179,19 +179,19 @@ class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
 
         log_sets = response.json().get("logsets")
 
-        id = ""
+        id_ = ""
 
         for log_set in log_sets:
             name = log_set.get("name")
             self.logger.info(f"Checking {log_name} against {name}")
             if name == log_name:
                 self.logger.info("Log set found.")
-                id = log_set.get("id")
+                id_ = log_set.get("id")
                 break
 
-        if id:
-            self.logger.info(f"Found log set with name {log_name} and ID: {id}")
-            return id
+        if id_:
+            self.logger.info(f"Found log set with name {log_name} and ID: {id_}")
+            return id_
 
         self.logger.error(f"Could not find log set with name {log_name}")
         raise PluginException(
