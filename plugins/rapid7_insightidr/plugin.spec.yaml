@@ -13,6 +13,7 @@ resources:
   docs_url: https://docs.rapid7.com/insightconnect/rapid7-insightidr
 tags: [ "IDR", "SIEM" ]
 support: rapid7
+supported_versions: ["2022-05-03"]
 status: []
 hub_tags:
   use_cases: [threat_detection_and_response]
@@ -866,7 +867,7 @@ actions:
         required: true
   get_a_saved_query:
     title: Get a Saved Query
-    description: Retrieved a saved InsightIDR LEQL query by its ID
+    description: Retrieve a saved InsightIDR LEQL query by its ID
     input:
       query_id:
         title: Query ID

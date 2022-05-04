@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieved a saved InsightIDR LEQL query by its ID"
+    DESCRIPTION = "Retrieve a saved InsightIDR LEQL query by its ID"
 
 
 class Input:

@@ -14,7 +14,7 @@ Do more with Investigations in [InsightIDR](https://www.rapid7.com/products/insi
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* 2022-05-03
 
 # Documentation
 
@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|InsightIDR API key|None|4472f2g7-991z-4w70-li11-7552w8qm0266|
-|url|string|https://us.api.insight.rapid7.com|True|The URL endpoint for InsightIDR. e.g. https://<REGION_CODE>.api.insight.rapid7.com|None|https://us.api.insight.rapid7.com|
+|url|string|https://example.com|True|The URL endpoint for InsightIDR. e.g. https://<REGION_CODE>.api.insight.rapid7.com|None|https://example.com|
 
 Example input:
 
@@ -39,6 +39,66 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Get a Saved Query
+
+Retrieve a saved InsightIDR LEQL query by its ID
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query_id|string|None|True|UUID of saved query|None|00000000-0000-10d0-0000-000000000000|
+
+Example input:
+
+```
+{
+  "query_id": "00000000-0000-10d0-0000-000000000000"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|saved_query|query|True|Saved LEQL query|
+
+Example input:
+
+```
+{
+  "query_id": "00000000-0000-10d0-0000-000000000000"
+}
+```
+
+##### Output
+
+|Name|Type| Required |Description|
+|----|----|----|-----------|
+|saved_query|query|True|Saved LEQL query|
+
+```
+{
+  "saved_query": {
+    "saved_query": {
+      "id": "00000000-0000-9eec-0000-000000000000",
+      "leql": {
+        "during": {
+          "from": null,
+          "time_range": "yesterday",
+          "to": null
+        },
+        "statement": "where(931dde6c60>=800)"
+      },
+      "logs": [
+        "31a4d56e-460e-460f-9542-c2bc8edd7c6b"
+      ],
+      "name": "Large Values Yesterday"
+    }
+  }
+}
+```
 
 #### Create Threat
 
@@ -116,32 +176,6 @@ Example input:
   "timeout": 60
 }
 ```
-
-To use Relative Time, leave `Time From` and `Time To` blank. For example:
-
-```
-{
-  "relative_time": "Last 5 Minutes",
-  "time_from": "",
-  "time_to": "",
-  ...
-}
-```
-
-The above settings will run your search from 5 minutes ago until now.
-
-If you want to use absolute time for a query. You can set up the input like this:
-
-```
-{
-  "relative_time": "Use Time From Value",
-  "time_from": "1/1/2021",
-  "time_to": "1/31/2021",
-  ...
-}
-```
-
-This will run your search for the entire month of January every time.
 
 ##### Output
 
@@ -243,32 +277,6 @@ Example input:
   "timeout": 60
 }
 ```
-
-To use Relative Time, leave `Time From` and `Time To` blank. For example:
-
-```
-{
-  "relative_time": "Last 5 Minutes",
-  "time_from": "",
-  "time_to": "",
-  ...
-}
-```
-
-The above settings will run your search from 5 minutes ago until now.
-
-If you want to use absolute time for a query. You can set up the input like this:
-
-```
-{
-  "relative_time": "Use Time From Value",
-  "time_from": "1/1/2021",
-  "time_to": "1/31/2021",
-  ...
-}
-```
-
-This will run your search for the entire month of January every time.
 
 ##### Output
 
