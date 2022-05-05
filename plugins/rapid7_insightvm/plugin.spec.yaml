@@ -4,8 +4,8 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM Console
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations, scan results and start scans
-version: 4.10.0
-supported_versions: ["Rapid7 InsightVM API v3 2022-05-18"]
+version: 5.0.0
+supported_versions: ["Rapid7 InsightVM API v3 2022-05-25"]
 vendor: rapid7
 support: rapid7
 status: []
@@ -1890,7 +1890,7 @@ actions:
       asset_id:
         title: Asset ID
         description: ID of the asset for which to find vulnerabilities
-        type: string
+        type: integer
         required: true
         example: 234
       get_risk_score:
@@ -1912,9 +1912,9 @@ actions:
       asset_id:
         title: Asset ID
         description: ID of the asset for which to find software
-        type: string
+        type: integer
         required: true
-        example: "234"
+        example: 234
     output:
       software:
         title: Software
@@ -2395,9 +2395,9 @@ actions:
     title: Get Asset
     description: Gets an asset by ID
     input:
-      id:
-        title: ID
-        description: Get an asset by ID
+      asset_id:
+        title: Asset ID
+        description: Identifier of asset
         type: integer
         example: 1234
         required: true
@@ -4047,7 +4047,7 @@ actions:
       asset_id:
         title: Asset ID
         description: The identifier of the asset
-        type: string
+        type: integer
         required: true
         example: 423
       vulnerability_ids:

@@ -23,7 +23,7 @@ class GetAssetVulnerabilitiesInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "asset_id": {
-      "type": "string",
+      "type": "integer",
       "title": "Asset ID",
       "description": "ID of the asset for which to find vulnerabilities",
       "order": 1

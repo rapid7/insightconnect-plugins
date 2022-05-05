@@ -16,7 +16,7 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 
 # Supported Product Versions
 
-* Rapid7 InsightVM API v3 2022-05-18
+* Rapid7 InsightVM API v3 2022-05-25
 
 # Documentation
 
@@ -50,7 +50,7 @@ This action returns the highest-superceding rollup solutions for a list of vulne
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_id|string|None|True|The identifier of the asset|None|423|
+|asset_id|integer|None|True|The identifier of the asset|None|423|
 |vulnerability_ids|[]string|None|True|A list of identifiers of the vulnerabilities|None|["flash_player-cve-2017-11305"]|
 
 Example input:
@@ -78,7 +78,7 @@ Example output:
     {
       "links": [
         {
-          "href": "https://ivm-console.rapid7.com:3780/api/3/assets/234/vulnerabilities/flash_player-cve-2017-11305/solution",
+          "href": "https://example.com/api/3/assets/234/vulnerabilities/flash_player-cve-2017-11305/solution",
           "rel": "self"
         }
       ],
@@ -90,15 +90,15 @@ Example output:
           "id": "adobe-flash-windows-upgrade-latest",
           "links": [
             {
-              "href": "https://ivm-consolelax.rapid7.com:3780/api/3/solutions/adobe-flash-windows-upgrade-latest",
+              "href": "https://example.com/api/3/solutions/adobe-flash-windows-upgrade-latest",
               "rel": "self"
             },
             {
-              "href": "https://ivm-console.rapid7.com:3780/api/3/solutions/adobe-flash-windows-upgrade-latest/prerequisites",
+              "href": "https://example.com/api/3/solutions/adobe-flash-windows-upgrade-latest/prerequisites",
               "rel": "Prerequisites"
             },
             {
-              "href": "https://ivm-console.rapid7.com:3780/api/3/solutions/adobe-flash-windows-upgrade-latest/supersedes",
+              "href": "https://example.com/api/3/solutions/adobe-flash-windows-upgrade-latest/supersedes",
               "rel": "Supersedes"
             }
           ],
@@ -114,7 +114,7 @@ Example output:
               },
               "links": [
                 {
-                  "href": "https://ivm-console.rapid7.com:3780/api/3/solutions/adobe-flash-upgrade-28-0-0-126-windows",
+                  "href": "https://example.com/api/3/solutions/adobe-flash-upgrade-28-0-0-126-windows",
                   "id": "adobe-flash-upgrade-28-0-0-126-windows",
                   "rel": "Solution"
                 }
@@ -472,13 +472,13 @@ This action gets an asset by ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Get an asset by ID|None|1234|
+|asset_id|integer|None|True|Identifier of asset|None|1234|
 
 Example input:
 
 ```
 {
-  "id": 1234
+  "asset_id": 1234
 }
 ```
 
@@ -756,7 +756,7 @@ This action is used to get vulnerabilities found on an asset. Can only be used i
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_id|string|None|True|ID of the asset for which to find vulnerabilities|None|234|
+|asset_id|integer|None|True|ID of the asset for which to find vulnerabilities|None|234|
 |get_risk_score|boolean|None|False|Return risk score along with other vulnerability data|None|True|
 
 Example input:
@@ -830,7 +830,7 @@ This action is used to get software found on an asset. Can only be used if the a
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_id|string|None|True|ID of the asset for which to find software|None|234|
+|asset_id|integer|None|True|ID of the asset for which to find software|None|234|
 
 Example input:
 
@@ -1282,11 +1282,11 @@ Example output:
     },
     "links": [
       {
-        "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+        "href": "https://example.com/...",
         "rel": "self"
       },
       {
-        "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/...",
+        "href": "https://example.com/...",
         "rel": "Vulnerability Checks"
       }
     ],
@@ -5662,6 +5662,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 5.0.0 - Fix parameters type, input examples and description for `Get Asset Vulnerability Solutions`, `Get Asset Vulnerabilities`, `Get Asset Software` and `Get Asset` actions
 * 4.10.0 - Add new action Tag Assets
 * 4.9.2 - Add expiration date conversion to ISO8601 in Create Vulnerability Exception Submission and Update Vulnerability Exception Expiration Date actions | Fix issue with incorrect expiration date format in Get Expiring Vulnerability Exceptions action | Fix issue in List Reports action where first page of reports was not included | Fix issue in List Reports action where `found` output was returned as false even though list of reports was returned | Updated plugin SDK to latest version
 * 4.9.1 - Rename the plugin with "console" as there is a new cloud based plugin for InsightVM
