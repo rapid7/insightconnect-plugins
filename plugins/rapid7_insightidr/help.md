@@ -60,20 +60,6 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|saved_query|query|True|Saved LEQL query|
-
-Example input:
-
-```
-{
-  "query_id": "00000000-0000-10d0-0000-000000000000"
-}
-```
-
-##### Output
-
 |Name|Type| Required |Description|
 |----|----|----|-----------|
 |saved_query|query|True|Saved LEQL query|
