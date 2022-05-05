@@ -1,0 +1,19 @@
+{
+  "resources": [
+    {
+      "description": "Adobe Flash 18.0.0.209",
+      "family": "Flash",
+      "id": 31,
+      "product": "Flash",
+      "type": "Internet Client",
+      "vendor": "Adobe",
+      "version": "18.0.0.209"
+    }
+  ],
+  "links": [
+    {
+      "href": "https://example.com/api/3/assets/234/software",
+      "rel": "self"
+    }
+  ]
+}

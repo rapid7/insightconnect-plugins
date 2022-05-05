@@ -27,7 +27,7 @@ class MockSession:
 
 class TestAsyncRequests(TestCase):
     def test_async_request(self):
-        loop = asyncio.get_event_loop()
+        loop = asyncio.new_event_loop()
 
         asyc_obj = async_requests.AsyncRequests("user", "pass")
         session = MockSession()

@@ -54,7 +54,7 @@ class TestGetAsset(TestCase):
         ]
     )
     def test_get_asset(self, mock_get, name, asset_id, expected):
-        actual = self.action.run({Input.ID: asset_id})
+        actual = self.action.run({Input.ASSET_ID: asset_id})
         self.assertEqual(actual, expected)
 
     @parameterized.expand(
@@ -70,7 +70,7 @@ class TestGetAsset(TestCase):
     )
     def test_get_asset_bad(self, mock_get, name, asset_id, cause, assistance, data):
         with self.assertRaises(PluginException) as e:
-            self.action.run({Input.ID: asset_id})
+            self.action.run({Input.ASSET_ID: asset_id})
         self.assertEqual(e.exception.cause, cause)
         self.assertEqual(e.exception.assistance, assistance)
         self.assertEqual(e.exception.data, data)
