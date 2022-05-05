@@ -865,6 +865,15 @@ actions:
         description: The information about the new threat
         type: threat
         required: true
+  get_all_saved_queries:
+    title: Get All Saved Queries
+    description: Retrieve all saved InsightIDR LEQL queries
+    output:
+      saved_queries:
+        title: Saved Queries
+        description: Saved LEQL queries
+        type: "[]query"
+        required: true
   get_a_saved_query:
     title: Get a Saved Query
     description: Retrieve a saved InsightIDR LEQL query by its ID

@@ -40,6 +40,8 @@ def mock_request_post(url):
 
 
 def mock_request_get(url):
+    if url == f"{STUB_URL}/query/saved_queries":
+        return MockResponse("get_all_saved_queries", 200)
     if url == f"{STUB_URL}/query/saved_queries/{STUB_QUERY_ID}":
         return MockResponse("get_a_saved_query", 200)
     if url == f"{STUB_URL}/query/saved_queries/{STUB_QUERY_ID_NOT_FOUND}":

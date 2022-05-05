@@ -77,6 +77,15 @@ class QueryLogs:
 
 class Queries:
     @staticmethod
+    def get_all_queries(console_url: str):
+        """
+        URI for retrieving all saved queries
+        :param console_url: URL to the InsightIDR console
+        :return: pre-populated /query/saved_queries
+        """
+        return f"{console_url}query/saved_queries"
+
+    @staticmethod
     def get_query_by_id(console_url: str, query_id: str):
         """
         URI for retrieving a query
