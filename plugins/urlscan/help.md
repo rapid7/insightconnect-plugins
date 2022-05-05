@@ -823,6 +823,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.0.2 - Fix error handling while submit URL which is in blacklist of URLScan API | Update SDK to version 4
 * 4.0.1 - Fix issue with not compatible types in custom output type for Get Scan Result action | Add unit tests for Get Scan Result | Refactor existing unit tests
 * 4.0.0 - Improve pagination in Search action
 * 3.0.1 - Add unit test for Submit URL for Scan action | Add error handling for HTTP 429 status code in Submit URL for Scan action

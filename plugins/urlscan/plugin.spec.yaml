@@ -7,7 +7,7 @@ vendor: rapid7
 support: community
 status: []
 description: Analyze URLs for malicious indicators using the URLScan website scanner
-version: 4.0.1
+version: 4.0.2
 supported_versions:
   - urlscan.io API v1
 resources:
