@@ -1,21 +1,21 @@
-import sys
 import os
+import sys
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
+import logging
 from unittest import TestCase, mock
+
 from parameterized import parameterized
 
 from icon_microsoft_log_analytics.connection.connection import Connection
 from icon_microsoft_log_analytics.triggers.search import Search
 from icon_microsoft_log_analytics.triggers.search.schema import Input
-from icon_microsoft_log_analytics.util.tools import return_non_empty_query_output
-import logging
-
-from icon_microsoft_log_analytics.util.tools import Message
+from icon_microsoft_log_analytics.util.tools import Message, return_non_empty_query_output
 from unit_test.mock import (
+    STUB_CONNECTION,
     mock_request_201_invalid_json,
     mock_request_400,
     mock_request_403,
@@ -25,7 +25,6 @@ from unit_test.mock import (
     mock_request_503,
     mock_request_505,
     mocked_request,
-    STUB_CONNECTION,
 )
 
 STUB_EXAMPLE_FUNCTION_RESPONSE = {

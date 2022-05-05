@@ -8,12 +8,14 @@ from unittest import TestCase, mock
 from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
 
-from icon_microsoft_log_analytics.connection.connection import Connection
 from icon_microsoft_log_analytics.actions.send_log_data import SendLogData
 from icon_microsoft_log_analytics.actions.send_log_data.schema import Input, Output
-
+from icon_microsoft_log_analytics.connection.connection import Connection
 from icon_microsoft_log_analytics.util.tools import Message
 from unit_test.mock import (
+    STUB_CONNECTION,
+    STUB_SHARED_KEY,
+    STUB_WORKSPACE_ID,
     mock_request_200,
     mock_request_400,
     mock_request_404,
@@ -22,9 +24,6 @@ from unit_test.mock import (
     mock_request_503,
     mock_request_505,
     mocked_request,
-    STUB_WORKSPACE_ID,
-    STUB_SHARED_KEY,
-    STUB_CONNECTION,
 )
 
 STUB_RFC1123_DATE = "Thu, 01 Dec 1994 16:00:00 GMT"
@@ -77,7 +76,7 @@ class TestSendLogData(TestCase):
     @parameterized.expand(
         [
             (mock_request_400, Message.BAD_REQUEST_MESSAGE),
-            (mock_request_404, PluginException.causes[PluginException.Preset.NOT_FOUND]),
+            (mock_request_404, Message.SAVED_SEARCH_NOT_FOUND_CAUSE),
             (mock_request_429, PluginException.causes[PluginException.Preset.RATE_LIMIT]),
             (mock_request_500, PluginException.causes[PluginException.Preset.SERVER_ERROR]),
             (mock_request_503, PluginException.causes[PluginException.Preset.RATE_LIMIT]),
