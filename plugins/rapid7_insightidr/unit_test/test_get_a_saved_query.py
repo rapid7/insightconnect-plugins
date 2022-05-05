@@ -42,7 +42,7 @@ class TestGetASavedQuery(TestCase):
             "saved_query": {
                 "id": "00000000-0000-9eec-0000-000000000000",
                 "leql": {
-                    "during": {"from": None, "time_range": "yesterday", "to": None},
+                    "during": {"from": 1234567890, "time_range": "yesterday", "to": 1234567890},
                     "statement": "where(931dde6c60>=800)",
                 },
                 "logs": ["31a4d56e-460e-460f-9542-c2bc8edd7c6b"],

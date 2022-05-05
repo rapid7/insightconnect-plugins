@@ -29,6 +29,7 @@ class GetASavedQuery(insightconnect_plugin_runtime.Action):
         response = request.resource_request(Queries.get_query_by_id(self.connection.url, query_id), "get")
         try:
             result = json.loads(response["resource"])
+            saved_query = insightconnect_plugin_runtime.helper.clean(result.get("saved_query"))
         except json.decoder.JSONDecodeError:
             self.logger.error(f"InsightIDR response: {response}")
             raise PluginException(
@@ -36,4 +37,4 @@ class GetASavedQuery(insightconnect_plugin_runtime.Action):
                 assistance="Contact support for help. See log for more details",
                 data=response,
             )
-        return {Output.SAVED_QUERY: result}
+        return {Output.SAVED_QUERY: saved_query}
