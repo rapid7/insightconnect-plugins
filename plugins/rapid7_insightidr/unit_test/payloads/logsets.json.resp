@@ -1,0 +1,20 @@
+{
+  "logsets": [
+    {
+      "name": "log_set",
+      "id": "log_id"
+    },
+    {
+      "name": "log_set2",
+      "id": "log_id2"
+    },
+    {
+      "name": "log_set3",
+      "id": "log_id3"
+    },
+    {
+      "name": "log_set4",
+      "id": "log_id4"
+    }
+  ]
+}

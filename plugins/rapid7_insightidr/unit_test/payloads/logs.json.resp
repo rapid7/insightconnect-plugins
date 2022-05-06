@@ -1,0 +1,20 @@
+{
+  "logs": [
+    {
+      "name": "example_log1",
+      "id": "log_id"
+    },
+    {
+      "name": "example_log2",
+      "id": "log_id2"
+    },
+    {
+      "name": "example_log3",
+      "id": "log_id3"
+    },
+    {
+      "name": "example_log4",
+      "id": "log_id4"
+    }
+  ]
+}

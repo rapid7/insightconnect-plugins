@@ -1,0 +1,16 @@
+{
+  "events": [{
+    "links": [
+        {
+          "href": "https://us.api.insight.rapid7.com/log_search/query/context/3235937417370673152?per_page=50\u0026timestamp=1617235238436\u0026log_keys=5c6cc7cb-25bb-4423-8e43-7b2543489bbe\u0026context_type=SURROUND",
+          "rel": "Context"
+        }
+      ],
+    "log_id": "5c6cc7cb-25bb-4423-8e43-7b2543489bbe",
+    "message": "{\"destination_account\": \"ibot\",\"destination_account_sid\": \"S-1-5-21-2677061338-3577197041-828036409-1608\",\"destination_asset\": \"unknown\",\"destination_asset_address\": \"10.4.20.11\",\"destination_domain\": \"soarcerrors\",\"logon_type\": \"NETWORK\",\"result\": \"SUCCESS\",\"service\": \"ntlmssp\",      \"source_asset_address\": \"10.4.20.11\",      \"source_json\": {        \"computerName\": \"iagent5-dcwin12.soarcerrors.vuln.lax.rapid7.com\",        \"eventCode\": 4624,        \"insertionStrings\": [          \"S-1-0-0\",          \"-\",          \"-\",          \"0x0\",          \"S-1-5-21-2677061338-3577197041-828036409-1608\",          \"ibot\",          \"SOARCERRORS\",          \"0x343967d4\",          \"3\",          \"NtLmSsp \",          \"NTLM\",          \"500e75420764\",          \"{00000000-0000-0000-0000-000000000000}\",          \"-\",          \"NTLM V2\",          \"0\",          \"0x0\",          \"-\",          \"10.4.20.11\",          \"59603\",          \"%1833\"        ],        \"timeGenerated\": \"20210401000023.939620-000\"      },      \"timestamp\": \"2021-04-01T00:00:23.939Z\"}",
+    "labels":[{"id":"00000000-0000-0000-0000-000000000006"}, {"id":"00000000-0000-0000-0000-000000000007"}],
+    "sequence_number": 3235937417370673000,
+    "sequence_number_str": "3235937417370673152",
+    "timestamp": 1617235238436
+  }]
+}

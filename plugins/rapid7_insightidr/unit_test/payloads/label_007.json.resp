@@ -1,0 +1,9 @@
+{
+  "label": {
+    "id": "00000000-0000-0000-0000-000000000007",
+    "sn": 7,
+    "name": "Out of events",
+    "color": "ffab04",
+    "reserved": true
+  }
+}
