@@ -2,6 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import DeleteManagedUrlInput, DeleteManagedUrlOutput, Input, Output, Component
 from komand_mimecast.util.constants import ID_FIELD
 
+
 class DeleteManagedUrl(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(

@@ -13,7 +13,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
-        self.client = EasyVistaApi(self.logger, params.get(Input.CLIENT_LOGIN), params.get(Input.ACCOUNT), params.get(Input.URL))
+        self.client = EasyVistaApi(params.get(Input.CLIENT_LOGIN), params.get(Input.ACCOUNT), params.get(Input.URL))
 
     def test(self):
         try:
