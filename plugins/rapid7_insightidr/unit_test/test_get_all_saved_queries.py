@@ -6,7 +6,6 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 from komand_rapid7_insightidr.actions.get_all_saved_queries.action import GetAllSavedQueries
-from komand_rapid7_insightidr.actions.get_all_saved_queries.schema import Input
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 from insightconnect_plugin_runtime.exceptions import PluginException
 from unit_test.util import Util
@@ -65,10 +64,3 @@ class TestGetAllSavedQueries(TestCase):
             ]
         }
         self.assertEqual(actual, expected)
-
-    @patch("requests.Session.get", side_effect=mock_get_request)
-    def test_get_a_saved_query_not_found(self, _mock_req):
-        with self.assertRaises(PluginException) as exception:
-            self.action.run()
-        cause = "InsightIDR returned a status code of 404: Not Found"
-        self.assertEqual(exception.exception.cause, cause)
