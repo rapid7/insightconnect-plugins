@@ -13,7 +13,6 @@ from unit_test.util import Util
 from unit_test.mock import (
     mock_get_request,
 )
-import logging
 
 
 class TestGetASavedQuery(TestCase):
@@ -30,10 +29,8 @@ class TestGetASavedQuery(TestCase):
         }
 
     def setUp(self) -> None:
-        self.connection, self.action = Util.default_connector(GetASavedQuery())
-        log = logging.getLogger("Test")
-        self.action.logger = log
-        self.connection.logger = log
+        self.action = Util.default_connector(GetASavedQuery())
+        self.connection = self.action.connection
 
     @patch("requests.Session.get", side_effect=mock_get_request)
     def test_get_a_saved_query(self, _mock_req):
