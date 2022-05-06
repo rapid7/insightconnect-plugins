@@ -28,7 +28,7 @@ class GetManagedUrl(insightconnect_plugin_runtime.Action):
                 temp = Utils.normalize(key, value)
                 filter_.update(temp)
 
-        for item in filter_:
-            data[:] = [d for d in data if str(d.get(item)) == filter_[item]]
+        for key, value in filter_.items():
+            data[:] = [d for d in data if str(d.get(key)) == value]
 
         return {Output.RESPONSE: data}
