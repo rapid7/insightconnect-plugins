@@ -67,21 +67,19 @@ Example input:
 ```
 {
   "saved_query": {
-    "saved_query": {
-      "id": "00000000-0000-9eec-0000-000000000000",
-      "leql": {
-        "during": {
-          "from": null,
-          "time_range": "yesterday",
-          "to": null
-        },
-        "statement": "where(931dde6c60>=800)"
+    "id": "00000000-0000-9eec-0000-000000000000",
+    "leql": {
+      "during": {
+        "from": null,
+        "time_range": "yesterday",
+        "to": null
       },
-      "logs": [
-        "31a4d56e-460e-460f-9542-c2bc8edd7c6b"
-      ],
-      "name": "Large Values Yesterday"
-    }
+      "statement": "where(931dde6c60>=800)"
+    },
+    "logs": [
+      "31a4d56e-460e-460f-9542-c2bc8edd7c6b"
+    ],
+    "name": "Large Values Yesterday"
   }
 }
 ```
