@@ -34,7 +34,7 @@ The connection configuration accepts the following parameters:
 |access_key|credential_secret_key|None|True|The application access key|None|eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi|
 |app_id|string|None|True|Application ID|None|78d2e4b1-8cc2-4806-nt79-6ef332a47374|
 |app_key|credential_secret_key|None|True|The application key|None|475x54c6-4f61-4fab-8be7-a0710f3859e3|
-|region|string|Sandbox|True|The region for the Mimecast server|['EU', 'DE', 'US', 'CA', 'ZA', 'AU', 'Offshore']|EU|
+|region|string|EU|True|The region for the Mimecast server|['EU', 'DE', 'US', 'CA', 'ZA', 'AU', 'Offshore']|EU|
 |secret_key|credential_secret_key|None|True|The application secret key|None|FgHrtydiP4TynI+rTZF42Qu0FtGuhJtuNM5bDh82goJQHed9kJZ5t/ORwGnI5r2hkl/bzCosZ+KVapJFeaf3Yw==|
 
 Example input:
@@ -62,25 +62,25 @@ This action is used to get audit of events in Mimecast service.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |audit_events_data|audit_events_data|None|True|Data for requst|None|{"categories": ["test", "malware"], "endDateTime": "2022-02-02T08:15:30-05:00", "query": "example query", "startDateTime": "2022-02-02T08:15:30-05:00"}|
-|audit_events_pagination|audit_events_request_pagination|None|None|Pagination object for request|None|{"pageSize": 25, "pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"}|
+|audit_events_pagination|audit_events_request_pagination|None|False|Pagination object for request|None|{"pageSize": 25, "pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"}|
 
 Example input:
 
 ```
 {
-   "audit_events_data": {
-      "categories": [
-         "test",
-         "malware"
-      ],
-      "endDateTime": "2022-02-02T08:15:30-05:00",
-      "query": "example query",
-      "startDateTime": "2022-02-02T08:15:30-05:00"
-   },
-   "audit_events_pagination": {
-      "pageSize": 25,
-      "pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"
-   }
+  "audit_events_data": {
+    "categories": [
+      "test",
+      "malware"
+    ],
+    "endDateTime": "2022-02-02T08:15:30-05:00",
+    "query": "example query",
+    "startDateTime": "2022-02-02T08:15:30-05:00"
+  },
+  "audit_events_pagination": {
+    "pageSize": 25,
+    "pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"
+  }
 }
 ```
 
@@ -95,22 +95,22 @@ Example output:
 
 ```
 {
-   "response":[
-      {
-         "id":"wOi3MCwj2RMAhvN30QSmqOT7D-g10nypvPqTB5X5oQtdKJE4Qkl51X5Ue_U",
-         "scheme":"https",
-         "domain":"www.testset3444412312.net",
-         "port":-1,
-         "path":"/",
-         "queryString":"",
-         "matchType":"explicit",
-         "action":"block",
-         "comment":"",
-         "disableUserAwareness":false,
-         "disableRewrite":false,
-         "disableLogClick":false
-      }
-   ]
+  "response": [
+    {
+      "id": "wOi3MCwj2RMAhvN30QSmqOT7D-g10nypvPqTB5X5oQtdKJE4Qkl51X5Ue_U",
+      "scheme": "https",
+      "domain": "www.testset3444412312.net",
+      "port": -1,
+      "path": "/",
+      "queryString": "",
+      "matchType": "explicit",
+      "action": "block",
+      "comment": "",
+      "disableUserAwareness": false,
+      "disableRewrite": false,
+      "disableLogClick": false
+    }
+  ]
 }
 ```
 
@@ -154,22 +154,22 @@ Example output:
 
 ```
 {
-   "response":[
-      {
-         "id":"wOi3MCwjYFqOT7D-I9AbwlwvY3ImP7QVjTLhGwOgsDbzzFK8SjGLNE4",
-         "scheme":"https",
-         "domain":"www.test.net",
-         "port":-1,
-         "path":"/",
-         "queryString":"",
-         "matchType":"explicit",
-         "action":"permit",
-         "comment":"",
-         "disableUserAwareness":false,
-         "disableRewrite":false,
-         "disableLogClick":false
-      }
-   ]
+ "response":[
+    {
+      "id": "wOi3MCwjYFqOT7D-I9AbwlwvY3ImP7QVjTLhGwOgsDbzzFK8SjGLNE4",
+      "scheme": "https",
+      "domain": "www.test.net",
+      "port": -1,
+      "path": "/",
+      "queryString": "",
+      "matchType": "explicit",
+      "action": "permit",
+      "comment": "",
+      "disableUserAwareness": false,
+      "disableRewrite": false,
+      "disableLogClick": false
+    }
+  ]
 }
 ```
 
@@ -181,15 +181,31 @@ This action is used to get information on a managed URL.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|action|string|none|False|Filter on whether or not the action is 'block' or 'permit'|['none', 'block', 'permit']|block|
+|disable_log_click|string|none|False|Filter on whether or not clicks are logged for this URL|['none', 'False', 'True']|True|
+|disable_rewrite|string|none|False|Filter on whether or not rewriting of this URL in emails is enabled|['none', 'False', 'True']|False|
+|disable_user_awareness|string|none|False|Filter on whether or not User Awareness challenges for this URL|['none', 'False', 'True']|False|
+|domain|string|None|False|The managed domain|None|rapid7.com|
 |domainOrUrl|string|None|False|A domain or URL to filter results|None|example.com|
 |exactMatch|boolean|False|False|If true, the domainOrUrl value to act as an exact match value. If false, any partial matches will be returned|None|False|
-
+|id|string|None|False|Filter on the Mimecast secure ID of the managed URL|None|wOi3MCwjYFYhZfkYlp2RMAhwOgsDZixCK43rDjLP0YPWrtBgqVtVbzzFK8SjGLNE4|
+|match_type|string|none|False|Filter on whether or not the match type is 'explicit' or 'domain'|['none', 'explicit', 'domain']|domain|
+|scheme|string|None|False|Filter on whether or not the protocol is HTTP or HTTPS|None|http|
+f
 Example input:
 
 ```
 {
+  "action": "block",
+  "disable_log_click": true,
+  "disable_rewrite": false,
+  "disable_user_awareness": false,
+  "domain": "rapid7.com",
   "domainOrUrl": "example.com",
-  "exactMatch": false
+  "exactMatch": false,
+  "id": "wOi3MCwjYFYhZfkYlp2RMAhwOgsDZixCK43rDjLP0YPWrtBgqVtVbzzFK8SjGLNE4",
+  "match_type": "domain",
+  "scheme": "http"
 }
 ```
 

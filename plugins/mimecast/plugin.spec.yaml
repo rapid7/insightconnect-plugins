@@ -754,7 +754,7 @@ connection:
       - Offshore
     required: true
     example: EU
-    default: Sandbox
+    default: EU
   app_id:
     title: App ID
     description: Application ID
@@ -877,6 +877,79 @@ actions:
         required: false
         default: false
         example: false
+      domain:
+        title: Domain
+        description: The managed domain
+        type: string
+        example: rapid7.com
+        required: false
+      disable_user_awareness:
+        title: 'Filter: User Awareness'
+        description: Filter on whether or not User Awareness challenges for this URL
+        type: string
+        example: false
+        required: false
+        default: none
+        enum:
+          - none
+          - 'False'
+          - 'True'
+      disable_log_click:
+        title: 'Filter: Log Click'
+        description: Filter on whether or not clicks are logged for this URL
+        type: string
+        required: false
+        example: true
+        default: none
+        enum:
+          - none
+          - 'False'
+          - 'True'
+      action:
+        title: 'Filter: Action'
+        description: Filter on whether or not the action is 'block' or 'permit'
+        type: string
+        required: false
+        example: block
+        default: none
+        enum:
+          - none
+          - block
+          - permit
+      match_type:
+        title: 'Filter: Match Type'
+        description: Filter on whether or not the match type is 'explicit' or 'domain'
+        type: string
+        example: domain
+        required: false
+        default: none
+        enum:
+          - none
+          - explicit
+          - domain
+      scheme:
+        title: 'Filter: Scheme'
+        description: Filter on whether or not the protocol is HTTP or HTTPS
+        type: string
+        example: http
+        required: false
+      disable_rewrite:
+        title: 'Filter: URL Rewrite'
+        description: Filter on whether or not rewriting of this URL in emails is enabled
+        type: string
+        example: false
+        required: false
+        default: none
+        enum:
+          - none
+          - 'False'
+          - 'True'
+      id:
+        title: 'Filter: ID'
+        description: Filter on the Mimecast secure ID of the managed URL
+        type: string
+        example: wOi3MCwjYFYhZfkYlp2RMAhwOgsDZixCK43rDjLP0YPWrtBgqVtVbzzFK8SjGLNE4
+        required: false
     output:
       response:
         title: Managed URL
@@ -1210,6 +1283,7 @@ actions:
         title: Audit Events Pagination
         description: Pagination object for request
         type: "audit_events_request_pagination"
+        required: false
         example: '{"pageSize": 25, "pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"}'
     output:
       response:

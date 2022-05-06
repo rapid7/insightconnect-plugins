@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import GetTtpUrlLogsInput, GetTtpUrlLogsOutput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
 import re
-from komand_mimecast.util.constants import DATA_FIELD, META_FIELD, PAGINATION_FIELD
+from komand_mimecast.util.constants import DATA_FIELD, META_FIELD, PAGINATION_FIELD, URL_FIELD
 
 
 class GetTtpUrlLogs(insightconnect_plugin_runtime.Action):
@@ -31,7 +31,7 @@ class GetTtpUrlLogs(insightconnect_plugin_runtime.Action):
         if from_:
             data["from"] = from_
 
-        meta = {"pagination": {"pageSize": params.get(Input.PAGE_SIZE, 10)}}
+        meta = {PAGINATION_FIELD: {"pageSize": params.get(Input.PAGE_SIZE, 10)}}
 
         responses = []
 
@@ -41,18 +41,18 @@ class GetTtpUrlLogs(insightconnect_plugin_runtime.Action):
 
             if (
                 "meta" not in response
-                or "pagination" not in response[META_FIELD]
-                or "pageToken" not in response[META_FIELD]["pagination"]
+                or PAGINATION_FIELD not in response[META_FIELD]
+                or "pageToken" not in response[META_FIELD][PAGINATION_FIELD]
             ):
                 break
-            meta[PAGINATION_FIELD]["pageToken"] = response[META_FIELD]["pagination"]["next"]
+            meta[PAGINATION_FIELD]["pageToken"] = response[META_FIELD][PAGINATION_FIELD]["next"]
 
         try:
             output = []
             if url_to_filter:
                 for response in responses:
                     for log in response[DATA_FIELD][0]["clickLogs"]:
-                        if re.search(f"{url_to_filter}", log.get("url")):
+                        if re.search(f"{url_to_filter}", log.get(URL_FIELD)):
                             output.append(log)
             else:
                 for response in responses:

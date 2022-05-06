@@ -3,7 +3,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 from .schema import AddGroupMemberInput, AddGroupMemberOutput, Input, Output, Component
-from komand_mimecast.util.constants import DATA_FIELD
+from komand_mimecast.util.constants import DATA_FIELD, ID_FIELD, DOMAIN_FIELD, EMAIL_FIELD
 
 
 class AddGroupMember(insightconnect_plugin_runtime.Action):
@@ -30,14 +30,14 @@ class AddGroupMember(insightconnect_plugin_runtime.Action):
             )
 
         if email:
-            data = {"id": params.get(Input.ID), "emailAddress": email}
+            data = {ID_FIELD: params.get(Input.ID), EMAIL_FIELD: email}
         else:
-            data = {"id": params.get(Input.ID), "domain": domain}
+            data = {ID_FIELD: params.get(Input.ID), DOMAIN_FIELD: domain}
 
         response = self.connection.client.add_group_member(data).get(DATA_FIELD)[0]
         return {
-            Output.ID: response.get("id"),
+            Output.ID: response.get(ID_FIELD),
             Output.FOLDER_ID: response.get("folderId"),
-            Output.EMAIL_ADDRESS: response.get("emailAddress"),
+            Output.EMAIL_ADDRESS: response.get(EMAIL_FIELD),
             Output.INTERNAL: response.get("internal"),
         }
