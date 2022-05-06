@@ -374,7 +374,7 @@ types:
       description: Logentries Query Language statement
       required: false
     during:
-      title: Statement
+      title: During
       type: during
       description: Query duration data
       required: false

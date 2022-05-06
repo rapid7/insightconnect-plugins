@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|InsightIDR API key|None|4472f2g7-991z-4w70-li11-7552w8qm0266|
-|url|string|https://example.com|True|The URL endpoint for InsightIDR. e.g. https://<REGION_CODE>.api.insight.rapid7.com|None|https://example.com|
+|url|string|https://us.api.insight.rapid7.com|True|The URL endpoint for InsightIDR. e.g. https://<REGION_CODE>.api.insight.rapid7.com|None|https://us.api.insight.rapid7.com|
 
 Example input:
 
@@ -803,7 +803,7 @@ _This plugin does not contain any troubleshooting information._
 * 3.1.4 - Add `docs_url` to plugin spec with a link to [InsightIDR plugin setup guide](https://docs.rapid7.com/insightconnect/rapid7-insightidr)
 * 3.1.3 - Fix issue where Get a Log and Get All Logs would either fail in workflow or in connection test
 * 3.1.2 - Send plugin name and version in the User-Agent string to vendor
-* 3.1.1 - Convert given date from timezone to UTC in List Investigataions action
+* 3.1.1 - Convert given date from timezone to UTC in List Investigations action
 * 3.1.0 - Add new action Create Threat
 * 3.0.0 - Added Relative Time options to Advanced Query actions | Fix issue where a query with no results would crash the plugin
 * 2.1.0 - New action Close Investigations in Bulk

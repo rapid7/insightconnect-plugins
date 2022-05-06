@@ -85,7 +85,7 @@ class GetASavedQueryOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "during": {
           "$ref": "#/definitions/during",
-          "title": "Statement",
+          "title": "During",
           "description": "Query duration data",
           "order": 2
         },
@@ -186,7 +186,7 @@ class GetASavedQueryOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "during": {
               "$ref": "#/definitions/during",
-              "title": "Statement",
+              "title": "During",
               "description": "Query duration data",
               "order": 2
             },
