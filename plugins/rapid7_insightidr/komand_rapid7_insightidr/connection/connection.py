@@ -4,13 +4,14 @@ from komand.exceptions import ConnectionTestException
 
 # Custom imports below
 import requests
+from typing import Optional
 
 
 class Connection(komand.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.url = None
-        self.session = None
+        self.session: Optional[requests.Session] = None
 
     def connect(self, params={}):
         api_key = params.get(Input.API_KEY).get("secretKey")
@@ -28,9 +29,9 @@ class Connection(komand.Connection):
         response = self.session.get(f"{self.url}validate")
         if response.status_code == 401:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.UNAUTHORIZED)
-        elif response.status_code in range(500, 599):
+        if response.status_code in range(500, 599):
             raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
-        elif response.status_code == 200:
+        if response.status_code == 200:
             return response.json()
         else:
             self.logger.error(response.text)
