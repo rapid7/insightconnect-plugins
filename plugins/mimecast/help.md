@@ -110,7 +110,11 @@ Example output:
       "disableRewrite": false,
       "disableLogClick": false
     }
-  ]
+  ],
+  "pagination": {
+    "pageSize": 25,
+    "pageToken": "9de5069c5afe602b2ea0a04b66beb2c0"
+  }
 }
 ```
 
@@ -154,7 +158,7 @@ Example output:
 
 ```
 {
- "response":[
+ "response": [
     {
       "id": "wOi3MCwjYFqOT7D-I9AbwlwvY3ImP7QVjTLhGwOgsDbzzFK8SjGLNE4",
       "scheme": "https",
@@ -191,7 +195,7 @@ This action is used to get information on a managed URL.
 |id|string|None|False|Filter on the Mimecast secure ID of the managed URL|None|wOi3MCwjYFYhZfkYlp2RMAhwOgsDZixCK43rDjLP0YPWrtBgqVtVbzzFK8SjGLNE4|
 |match_type|string|none|False|Filter on whether or not the match type is 'explicit' or 'domain'|['none', 'explicit', 'domain']|domain|
 |scheme|string|None|False|Filter on whether or not the protocol is HTTP or HTTPS|None|http|
-f
+
 Example input:
 
 ```
