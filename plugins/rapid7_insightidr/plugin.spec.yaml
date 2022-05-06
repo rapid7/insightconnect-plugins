@@ -14,7 +14,6 @@ resources:
   docs_url: https://docs.rapid7.com/insightconnect/rapid7-insightidr
 tags: [ "IDR", "SIEM" ]
 support: rapid7
-supported_versions: ["2022-05-03"]
 status: []
 hub_tags:
   use_cases: [threat_detection_and_response]
