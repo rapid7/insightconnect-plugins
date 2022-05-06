@@ -39,7 +39,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Region",
       "description": "The region for the Mimecast server",
-      "default": "Sandbox",
+      "default": "EU",
       "enum": [
         "EU",
         "DE",

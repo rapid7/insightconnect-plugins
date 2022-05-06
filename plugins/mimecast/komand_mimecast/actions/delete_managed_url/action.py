@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import DeleteManagedUrlInput, DeleteManagedUrlOutput, Input, Output, Component
-
+from komand_mimecast.util.constants import ID_FIELD
 
 class DeleteManagedUrl(insightconnect_plugin_runtime.Action):
     def __init__(self):
@@ -12,5 +12,5 @@ class DeleteManagedUrl(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        self.connection.client.delete_managed_url(data={"id": params.get(Input.ID)})
+        self.connection.client.delete_managed_url(data={ID_FIELD: params.get(Input.ID)})
         return {Output.SUCCESS: True}

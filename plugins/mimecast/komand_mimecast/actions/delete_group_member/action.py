@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import DeleteGroupMemberInput, DeleteGroupMemberOutput, Input, Component, Output
 
 # Custom imports below
-from komand_mimecast.util import util
+from komand_mimecast.util.constants import ID_FIELD, DOMAIN_FIELD, EMAIL_FIELD
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
@@ -32,9 +32,9 @@ class DeleteGroupMember(insightconnect_plugin_runtime.Action):
             )
 
         if email:
-            data = {"id": group_id, "emailAddress": email}
+            data = {ID_FIELD: group_id, EMAIL_FIELD: email}
         else:
-            data = {"id": group_id, "domain": domain}
+            data = {ID_FIELD: group_id, DOMAIN_FIELD: domain}
 
         self.connection.client.delete_group_member(data)
         return {Output.SUCCESS: True}

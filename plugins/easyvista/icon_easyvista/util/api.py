@@ -1,3 +1,5 @@
+from logging import Logger
+
 from insightconnect_plugin_runtime.exceptions import PluginException
 from json import JSONDecodeError
 import requests
@@ -6,8 +8,10 @@ from urllib.parse import urlsplit
 
 
 class EasyVistaApi:
-    def __init__(self, client_login: dict, account: int, url: str):
+    def __init__(self, logger: Logger, client_login: dict, account: int, url: str):
+        self.logger = logger
         self.base_url = f"{self.split_url(url)}/api/v1/{account}/"
+        self.logger.info(f"BASE URL {self.base_url}")
         self.username = client_login.get("username")
         self.password = client_login.get("password")
 

@@ -2,9 +2,8 @@ import insightconnect_plugin_runtime
 from .schema import DecodeUrlInput, DecodeUrlOutput, Input, Output, Component
 
 # Custom imports below
-from komand_mimecast.util import util
 from insightconnect_plugin_runtime.exceptions import PluginException
-from komand_mimecast.util.constants import DATA_FIELD
+from komand_mimecast.util.constants import DATA_FIELD, URL_FIELD, FAIL_FIELD
 
 
 class DecodeUrl(insightconnect_plugin_runtime.Action):
@@ -17,14 +16,14 @@ class DecodeUrl(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        data = {"url": params.get(Input.ENCODED_URL)}
+        data = {URL_FIELD: params.get(Input.ENCODED_URL)}
         response = self.connection.client.decode_url(data)
         try:
             if not response.get(DATA_FIELD)[0]["success"]:
                 raise PluginException(
                     cause=f"The URL {params.get(Input.ENCODED_URL)} could not be decoded.",
                     assistance="Please ensure that it is a Mimecast encoded URL.",
-                    data=response["fail"],
+                    data=response.get(FAIL_FIELD),
                 )
         except KeyError:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response)
@@ -32,7 +31,7 @@ class DecodeUrl(insightconnect_plugin_runtime.Action):
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response)
 
         try:
-            output = response[DATA_FIELD][0]["url"]
+            output = response[DATA_FIELD][0][URL_FIELD]
         except KeyError:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response)
         except IndexError:

@@ -19,6 +19,8 @@ from komand_mimecast.util.constants import (
     VALIDATION_BLANK_ERROR,
     ERROR_CASES,
     BASIC_ASSISTANCE_MESSAGE,
+    FAIL_FIELD,
+    STATUS_FIELD,
 )
 
 
@@ -103,7 +105,7 @@ class MimecastAPI:
         }
 
     def _handle_error_response(self, response: dict):
-        for errors in response.get("fail", []):
+        for errors in response.get(FAIL_FIELD, []):
             for error in errors.get("errors", []):
                 if error.get(CODE) == XDK_BINDING_EXPIRED_ERROR:
                     raise PluginException(
@@ -155,28 +157,30 @@ class MimecastAPI:
 
         try:
             response = request.json()
-        except json.decoder.JSONDecodeError:
+        except json.decoder.JSONDecodeError as error:
             raise PluginException(
                 cause="Unknown error.",
                 assistance="The Mimecast server did not respond correctly. Response not in JSON format. Response in logs.",
+                data=error,
             )
 
-        if response.get("fail"):
+        if response.get(FAIL_FIELD):
             self._handle_error_response(response)
 
-        if not response.get(META_FIELD).get("status") or 200 <= response.get(META_FIELD).get("status") <= 299:
+        status_code = response.get(META_FIELD).get(STATUS_FIELD)
+        if not status_code or 200 <= status_code <= 299:
             return response
 
-        if response.get(META_FIELD).get("status") == 403:
+        if status_code == 403:
             raise PluginException(preset=PluginException.Preset.API_KEY, data=response)
-        elif response.get(META_FIELD).get("status") == 404:
+        elif status_code == 404:
             raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response)
-        elif response.get(META_FIELD).get("status") >= 500:
+        elif status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response)
         else:
             self.logger.error(response)
             raise PluginException(
                 cause="Server request failed.",
-                assistance=f"Status code is {response.get('meta').get('status')}, see log for details.",
-                data=response.get("fail"),
+                assistance=f"Status code is {status_code}, see log for details.",
+                data=response.get(FAIL_FIELD),
             )

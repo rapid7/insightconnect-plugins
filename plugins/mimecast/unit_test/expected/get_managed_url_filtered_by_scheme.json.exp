@@ -1,0 +1,32 @@
+{
+    "response": [
+        {
+            "id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLh57bBti0RSgeBgPwqiLBJ4Nlka1xxRTCaPHWCN77UKxE",
+            "scheme": "http",
+            "domain": "aadroid.net",
+            "port": -1,
+            "path": "/",
+            "queryString": "",
+            "matchType": "explicit",
+            "action": "block",
+            "comment": "",
+            "disableUserAwareness": false,
+            "disableRewrite": false,
+            "disableLogClick": false
+        },
+        {
+            "id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLhMlVR5p5NhTOlw4hrUdeqvtc0CbwX9wB3s7em6Hsp-Eo",
+            "scheme": "http",
+            "domain": "aadroid.net",
+            "port": -1,
+            "path": "",
+            "queryString": "",
+            "matchType": "explicit",
+            "action": "block",
+            "comment": "Blocked by @jmontero from Slack!",
+            "disableUserAwareness": false,
+            "disableRewrite": false,
+            "disableLogClick": false
+        }
+    ]
+}

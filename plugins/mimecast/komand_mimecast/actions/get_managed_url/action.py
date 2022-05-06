@@ -1,7 +1,8 @@
 import insightconnect_plugin_runtime
 
-from .schema import GetManagedUrlInput, GetManagedUrlOutput, Component, Output
+from .schema import GetManagedUrlInput, GetManagedUrlOutput, Component, Output, Input
 from komand_mimecast.util.constants import DATA_FIELD
+from ...util.util import Utils
 
 
 class GetManagedUrl(insightconnect_plugin_runtime.Action):
@@ -14,4 +15,20 @@ class GetManagedUrl(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {Output.RESPONSE: self.connection.client.get_managed_url(params).get(DATA_FIELD, [])}
+        data = self.connection.client.get_managed_url(
+            {
+                Input.DOMAINORURL: params.get(Input.DOMAINORURL, ""),
+                Input.EXACTMATCH: params.get(Input.EXACTMATCH, False),
+            }
+        ).get(DATA_FIELD, [])
+
+        filter_ = {}
+        for key, value in params.items():
+            if key != Input.DOMAINORURL or key != Input.EXACTMATCH:
+                temp = Utils.normalize(key, value)
+                filter_.update(temp)
+
+        for item in filter_:
+            data[:] = [d for d in data if str(d.get(item)) == filter_[item]]
+
+        return {Output.RESPONSE: data}
