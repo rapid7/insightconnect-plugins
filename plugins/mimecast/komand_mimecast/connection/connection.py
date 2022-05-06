@@ -33,7 +33,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.logger.error(response)
             raise ConnectionTestException(
                 cause="Server request failed.",
-                assistance=f'Status code is {response.get(META_FIELD, {})(STATUS_FIELD)}, see log for details.',
+                assistance=f"Status code is {response.get(META_FIELD, {})(STATUS_FIELD)}, see log for details.",
                 data=response.get(FAIL_FIELD),
             )
 
