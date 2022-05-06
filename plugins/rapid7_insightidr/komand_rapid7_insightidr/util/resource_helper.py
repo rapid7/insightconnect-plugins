@@ -54,12 +54,11 @@ class ResourceHelper(object):
             resource = response.text
             return {"resource": resource, "status": response.status_code}
         else:
-            error = ""
             try:
                 error = response.json()["message"]
             except KeyError:
-                self.logger.error(f"Code: {response.status_code}, message: {error}")
                 error = "Unknown error occurred. Please contact support or try again later."
+                self.logger.error(f"Code: {response.status_code}, message: {error}")
 
             status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
             self.logger.error(f"{status_code_message} ({response.status_code}): {error}")
