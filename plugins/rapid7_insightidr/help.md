@@ -14,7 +14,7 @@ Do more with Investigations in [InsightIDR](https://www.rapid7.com/products/insi
 
 # Supported Product Versions
 
-* Latest release successfully tested on 2022-05-05.
+* Latest release successfully tested on 2022-05-09.
 
 # Documentation
 
@@ -405,6 +405,9 @@ This action is used to get a specific log from an account.
 Example input:
 
 ```
+{
+  "id": "174e4f99-2ac7-4481-9301-4d24c34baf06"
+}
 ```
 
 ##### Output

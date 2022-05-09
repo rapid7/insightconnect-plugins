@@ -7,7 +7,7 @@ REQUEST_GET = "get"
 REQUEST_POST = "post"
 STUB_QUERY_ID = "00000000-0000-1eec-0000-000000000000"
 STUB_QUERY_ID_NOT_FOUND = "00000000-0000-8eec-0000-000000000000"
-STUB_URL = "http://url"
+STUB_URL = "https://rapid7.com"
 STUB_API_KEY = "j5740ps1cbukyk3t8kib3wa36aq2v3da"
 STUB_CONNECTION = {"api_key": {"secretKey": STUB_API_KEY}, "url": STUB_API_KEY}
 
