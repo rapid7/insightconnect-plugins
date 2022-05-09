@@ -1,6 +1,6 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CreateThreatInput, CreateThreatOutput, Input, Output, Component
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import validators
@@ -9,7 +9,7 @@ from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 import json
 
 
-class CreateThreat(komand.Action):
+class CreateThreat(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_threat",

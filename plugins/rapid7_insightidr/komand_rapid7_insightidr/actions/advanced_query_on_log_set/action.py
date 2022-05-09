@@ -1,15 +1,15 @@
 from dateutil.parser import ParserError
-import komand
+import insightconnect_plugin_runtime
 from .schema import AdvancedQueryOnLogSetInput, AdvancedQueryOnLogSetOutput, Input, Output, Component
 
 # Custom imports below
 import time
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightidr.util.parse_dates import parse_dates
 
 
-class AdvancedQueryOnLogSet(komand.Action):
+class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="advanced_query_on_log_set",
@@ -48,7 +48,7 @@ class AdvancedQueryOnLogSet(komand.Action):
 
         if log_entries:
             log_entries = ResourceHelper.get_log_entries_with_new_labels(
-                self.connection, komand.helper.clean(log_entries)
+                self.connection, insightconnect_plugin_runtime.helper.clean(log_entries)
             )
 
         self.logger.info("Sending results to orchestrator.")

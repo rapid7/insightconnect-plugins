@@ -1,7 +1,7 @@
-import komand
+import insightconnect_plugin_runtime
 
 from .schema import ListInvestigationsInput, ListInvestigationsOutput, Component, Output, Input
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Investigations
@@ -10,7 +10,7 @@ import json
 import datetime
 
 
-class ListInvestigations(komand.Action):
+class ListInvestigations(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="list_investigations",
