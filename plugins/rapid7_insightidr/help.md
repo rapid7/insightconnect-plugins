@@ -14,7 +14,7 @@ Do more with Investigations in [InsightIDR](https://www.rapid7.com/products/insi
 
 # Supported Product Versions
 
-* 2022-05-03
+* Latest release successfully tested on 2022-05-05.
 
 # Documentation
 
@@ -152,7 +152,7 @@ Example input:
 
 ```
 {
-  "log_set": "Firewall Activity",
+  "log": "Firewall Activity",
   "query": "where(user=adagentadmin, loose)",
   "relative_time": "Last 5 Minutes",
   "time_from": "01-01-2020T00:00:00",
@@ -405,9 +405,6 @@ This action is used to get a specific log from an account.
 Example input:
 
 ```
-{
-  "id": "174e4f99-2ac7-4481-9301-4d24c34baf06"
-}
 ```
 
 ##### Output
@@ -798,6 +795,7 @@ _This plugin does not contain any troubleshooting information._
 # Version History
 
 * 3.2.0 - Add new action Get A Saved Query
+* 3.1.5 - Patch issue parsing labels in Advanced Query on Log and Advanced Query on Log Set actions
 * 3.1.4 - Add `docs_url` to plugin spec with a link to [InsightIDR plugin setup guide](https://docs.rapid7.com/insightconnect/rapid7-insightidr)
 * 3.1.3 - Fix issue where Get a Log and Get All Logs would either fail in workflow or in connection test
 * 3.1.2 - Send plugin name and version in the User-Agent string to vendor

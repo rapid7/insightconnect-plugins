@@ -4,8 +4,8 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import time
-import json
 from komand_rapid7_insightidr.util.parse_dates import parse_dates
+from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 
 
 class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
@@ -42,13 +42,13 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
         # It will return results if it gets them. If not, we'll get a call back URL to work on
         callback_url, log_entries = self.maybe_get_log_entries(log_id, query, time_from, time_to)
 
-        if not log_entries:
+        if callback_url and not log_entries:
             log_entries = self.get_results_from_callback(callback_url, timeout)
 
-        log_entries = insightconnect_plugin_runtime.helper.clean(log_entries)
-
-        for log_entry in log_entries:
-            log_entry["message"] = json.loads(log_entry.get("message", "{}"))
+        if log_entries:
+            log_entries = ResourceHelper.get_log_entries_with_new_labels(
+                self.connection, insightconnect_plugin_runtime.helper.clean(log_entries)
+            )
 
         self.logger.info("Sending results to orchestrator.")
         return {Output.RESULTS: log_entries, Output.COUNT: len(log_entries)}
@@ -154,7 +154,7 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
             return None, potential_results
         else:
             self.logger.info("Got a callback url. Polling results...")
-            return results_object.get("links")[0].get("href"), None
+            return results_object.get("links", [{}])[0].get("href"), []
 
     def get_log_id(self, log_name: str) -> str:
         """
@@ -178,19 +178,19 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
 
         logs = response.json().get("logs")
 
-        id_ = ""
+        log_id = ""
 
         for log in logs:
             name = log.get("name")
             self.logger.info(f"Checking {log_name} against {name}")
             if name == log_name:
                 self.logger.info("Log found.")
-                id_ = log.get("id")
+                log_id = log.get("id")
                 break
 
-        if id_:
-            self.logger.info(f"Found log with name {log_name} and ID: {id_}")
-            return id_
+        if log_id:
+            self.logger.info(f"Found log with name {log_name} and ID: {log_id}")
+            return log_id
 
         self.logger.error(f"Could not find log with name {log_name}")
         raise PluginException(
