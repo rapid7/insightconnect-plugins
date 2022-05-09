@@ -86,6 +86,12 @@ Retrieve a saved InsightIDR LEQL query by its ID
 |----|----|-------|--------|-----------|----|-------|
 |query_id|string|None|True|UUID of saved query|None|00000000-0000-10d0-0000-000000000000|
 
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|saved_query|query|True|Saved LEQL query|
+
 Example input:
 
 ```
@@ -188,7 +194,7 @@ Example input:
 
 ```
 {
-  "log": "Firewall Activity",
+  "log_set": "Firewall Activity",
   "query": "where(user=adagentadmin, loose)",
   "relative_time": "Last 5 Minutes",
   "time_from": "01-01-2020T00:00:00",
