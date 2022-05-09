@@ -1,7 +1,6 @@
 import os
 import sys
 
-
 sys.path.append(os.path.abspath("../"))
 import logging
 from unittest import TestCase, mock
@@ -11,8 +10,8 @@ from parameterized import parameterized
 
 from icon_microsoft_log_analytics.connection.connection import Connection
 from icon_microsoft_log_analytics.util.tools import Message
-
 from unit_test.mock import (
+    STUB_CONNECTION,
     mock_request_200,
     mock_request_201_invalid_json,
     mock_request_400,
@@ -23,7 +22,6 @@ from unit_test.mock import (
     mock_request_503,
     mock_request_505,
     mocked_request,
-    STUB_CONNECTION,
 )
 
 

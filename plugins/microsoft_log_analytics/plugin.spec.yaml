@@ -4,7 +4,7 @@ products: [insightconnect]
 name: microsoft_log_analytics
 title: Microsoft Log Analytics
 description: Edit, run log queries with data in Azure Monitor Logs
-version: 1.2.0
+version: 1.2.1
 vendor: rapid7
 support: rapid7
 supported_versions: ["2022-03-18"]

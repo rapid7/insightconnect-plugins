@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="microsoft_log_analytics-rapid7-plugin",
-      version="1.2.0",
+      version="1.2.1",
       description="Edit, run log queries with data in Azure Monitor Logs",
       author="rapid7",
       author_email="",
