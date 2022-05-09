@@ -8,6 +8,7 @@ from .create_threat.action import CreateThreat
 from .get_a_log.action import GetALog
 from .get_a_saved_query.action import GetASavedQuery
 from .get_all_logs.action import GetAllLogs
+from .get_all_saved_queries.action import GetAllSavedQueries
 from .list_investigations.action import ListInvestigations
 from .query.action import Query
 from .set_status_of_investigation_action.action import SetStatusOfInvestigationAction
