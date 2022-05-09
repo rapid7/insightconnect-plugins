@@ -1,6 +1,6 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CloseInvestigationsInBulkInput, CloseInvestigationsInBulkOutput, Input, Output, Component
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Investigations
@@ -10,7 +10,7 @@ from datetime import datetime
 from datetime import timedelta
 
 
-class CloseInvestigationsInBulk(komand.Action):
+class CloseInvestigationsInBulk(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="close_investigations_in_bulk",
