@@ -40,6 +40,42 @@ Example input:
 
 ### Actions
 
+#### Get All Saved Queries
+
+This action is used to retrieve all saved InsightIDR LEQL queries.
+
+##### Input
+
+_This action does not contain any inputs._
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|saved_queries|[]query|True|Saved LEQL queries|
+
+```
+{
+  "saved_queries": [
+    {
+      "id": "00000000-0000-9eec-0000-000000000000",
+      "leql": {
+        "during": {
+          "from": null,
+          "time_range": "yesterday",
+          "to": null
+        },
+        "statement": "where(931dde6c60>=800)"
+      },
+      "logs": [
+        "31a4d56e-460e-460f-9542-c2bc8edd7c6b"
+      ],
+      "name": "Large Values Yesterday"
+    }
+  ]
+}
+```
+
 #### Get a Saved Query
 
 Retrieve a saved InsightIDR LEQL query by its ID
@@ -49,6 +85,12 @@ Retrieve a saved InsightIDR LEQL query by its ID
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |query_id|string|None|True|UUID of saved query|None|00000000-0000-10d0-0000-000000000000|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|saved_query|query|True|Saved LEQL query|
 
 Example input:
 
@@ -120,12 +162,12 @@ Example output:
 
 ```
 {
-    "rejected_indicators": [],
-    "threat": {
-      "name": "Threat created via InsightConnect",
-      "note": "Threat created via InsightConnect",
-      "published": false,
-      "indicator_count": 2
+  "rejected_indicators": [],
+  "threat": {
+    "name": "Threat created via InsightConnect",
+    "note": "Threat created via InsightConnect",
+    "published": false,
+    "indicator_count": 2
   }
 }
 ```
@@ -152,7 +194,7 @@ Example input:
 
 ```
 {
-  "log": "Firewall Activity",
+  "log_set": "Firewall Activity",
   "query": "where(user=adagentadmin, loose)",
   "relative_time": "Last 5 Minutes",
   "time_from": "01-01-2020T00:00:00",
@@ -797,7 +839,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.2.0 - Add new action Get A Saved Query
+* 3.2.0 - Add new actions Get A Saved Query and Get All Saved Queries
 * 3.1.5 - Patch issue parsing labels in Advanced Query on Log and Advanced Query on Log Set actions
 * 3.1.4 - Add `docs_url` to plugin spec with a link to [InsightIDR plugin setup guide](https://docs.rapid7.com/insightconnect/rapid7-insightidr)
 * 3.1.3 - Fix issue where Get a Log and Get All Logs would either fail in workflow or in connection test
