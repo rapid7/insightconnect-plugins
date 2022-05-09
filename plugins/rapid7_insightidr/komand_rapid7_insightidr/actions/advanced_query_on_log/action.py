@@ -56,7 +56,6 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
     def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:
         """
         Get log entries from a callback URL
-
         @param callback_url: str
         @return: list of log entries
         """
@@ -119,13 +118,10 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
     def maybe_get_log_entries(self, log_id: str, query: str, time_from: int, time_to: int) -> (str, [object]):
         """
         Make a call to the API and ask politely for log results.
-
         If the query runs exceptionally fast the API will return results immediately. In this case, we will return the
         results as the second return entry in the return tuple. The first element of the tuple will be None
-
         Usually, the API will return a 202 with callback URL to poll for results. If this is the case, we
         return the URL as the first entry in the tuple return. The second element in the return tuple will be None
-
         @param log_id: str
         @param query: str
         @param time_from: int
@@ -159,7 +155,6 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
     def get_log_id(self, log_name: str) -> str:
         """
         Gets a log ID for a given log name
-
         @param log_name: str
         @return: str
         """

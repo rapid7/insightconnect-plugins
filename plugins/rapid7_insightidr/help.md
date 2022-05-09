@@ -188,7 +188,7 @@ Example input:
 
 ```
 {
-  "log_set": "Firewall Activity",
+  "log": "Firewall Activity",
   "query": "where(user=adagentadmin, loose)",
   "relative_time": "Last 5 Minutes",
   "time_from": "01-01-2020T00:00:00",
