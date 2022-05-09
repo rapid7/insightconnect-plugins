@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import (
     AssignUserToInvestigationInput,
     AssignUserToInvestigationOutput,
@@ -10,10 +10,10 @@ from .schema import (
 # Custom imports below
 import json
 from komand_rapid7_insightidr.util.endpoints import Investigations
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class AssignUserToInvestigation(komand.Action):
+class AssignUserToInvestigation(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="assign_user_to_investigation",
@@ -32,7 +32,7 @@ class AssignUserToInvestigation(komand.Action):
         response = self.connection.session.put(endpoint, json=payload)
         try:
             response.raise_for_status()
-        except Exception as e:
+        except Exception:
             raise PluginException(
                 cause="The IDR API returned an error.",
                 assistance="Usually this is the result of an invalid user email or investigation ID. Please see the following for more information:\n",
