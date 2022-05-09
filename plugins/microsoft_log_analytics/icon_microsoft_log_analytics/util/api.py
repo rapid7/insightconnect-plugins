@@ -119,7 +119,11 @@ class AzureClient:
             if response.status_code in (401, 403):
                 raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
             if response.status_code == 404:
-                raise PluginException(preset=PluginException.Preset.NOT_FOUND)
+                raise PluginException(
+                    cause=Message.SAVED_SEARCH_NOT_FOUND_CAUSE,
+                    assistance=Message.SAVED_SEARCH_NOT_FOUND_ASSISTANCE,
+                    data=response.json().get("error", {}).get("message", ""),
+                )
             if response.status_code == 409:
                 raise PluginException(cause=Message.CONFLICTED_STATE_OF_OBJECT_MESSAGE, data=response.text)
             if response.status_code in (429, 503):
@@ -150,7 +154,11 @@ class AzureClient:
             if response.status_code == 400:
                 raise PluginException(cause=Message.BAD_REQUEST_MESSAGE, data=response.text)
             if response.status_code == 404:
-                raise PluginException(preset=PluginException.Preset.NOT_FOUND)
+                raise PluginException(
+                    cause=Message.SAVED_SEARCH_NOT_FOUND_CAUSE,
+                    assistance=Message.SAVED_SEARCH_NOT_FOUND_ASSISTANCE,
+                    data=response.json().get("error", {}).get("message", ""),
+                )
             if response.status_code in (429, 503):
                 raise PluginException(preset=PluginException.Preset.RATE_LIMIT)
             if response.status_code == 500:
