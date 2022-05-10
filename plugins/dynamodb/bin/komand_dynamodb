@@ -5,7 +5,7 @@ import json
 from sys import argv
 
 Name = "Dynamo DB"
-Vendor = "rapid7"
+Vendor = "more_code"
 Version = "3.0.0"
 Description = "Dynamo DB is a key/value store powered by Amazon available for members of AWS. Users can manage their data using the DynamoDB plugin for Rapid7 InsightConnect"
 

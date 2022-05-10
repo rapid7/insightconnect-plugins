@@ -138,6 +138,7 @@ actions:
           - SPECIFIC_ATTRIBUTES
         required: false
         example: ALL_ATTRIBUTES
+        default: ALL_ATTRIBUTES
       exclusive_start_key:
         title: Exclusive Start Key
         description: The primary key of the first item that this operation will evaluate
@@ -153,6 +154,7 @@ actions:
           - TOTAL
         required: false
         example: TOTAL
+        default: TOTAL
       total_segments:
         title: Total Segments
         description: For a parallel Scan request, TotalSegments represents the total number of segments into which the Scan operation will be divided

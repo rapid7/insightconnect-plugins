@@ -89,6 +89,7 @@ class ScanInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Return Consumed Capacity",
       "description": "Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response",
+      "default": "TOTAL",
       "enum": [
         "INDEXES",
         "TOTAL"
@@ -105,6 +106,7 @@ class ScanInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Select",
       "description": "The attributes to be returned in the result",
+      "default": "ALL_ATTRIBUTES",
       "enum": [
         "ALL_ATTRIBUTES",
         "ALL_PROJECTED_ATTRIBUTES",

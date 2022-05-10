@@ -195,9 +195,9 @@ It will return the list of objects found, and a count of the records.
 |index_name|string|None|False|The index to use. If empty, defaults to a full Scan of the table|None|index-name|
 |limit|integer|100|False|The maximum number of items to evaluate (not necessarily the number of matching items)|None|100|
 |projection_expression|string|None|False|A string that identifies one or more attributes to retrieve from the specified table or index|None|Description|
-|return_consumed_capacity|string|None|False|Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response|['INDEXES', 'TOTAL']|TOTAL|
+|return_consumed_capacity|string|TOTAL|False|Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response|['INDEXES', 'TOTAL']|TOTAL|
 |segment|integer|None|False|For a parallel Scan request, Segment identifies an individual segment to be scanned by an application worker|None|100|
-|select|string|None|False|The attributes to be returned in the result|['ALL_ATTRIBUTES', 'ALL_PROJECTED_ATTRIBUTES', 'COUNT', 'SPECIFIC_ATTRIBUTES']|ALL_ATTRIBUTES|
+|select|string|ALL_ATTRIBUTES|False|The attributes to be returned in the result|['ALL_ATTRIBUTES', 'ALL_PROJECTED_ATTRIBUTES', 'COUNT', 'SPECIFIC_ATTRIBUTES']|ALL_ATTRIBUTES|
 |table_name|string|None|True|The table name to search|None|Table-name|
 |total_segments|integer|None|False|For a parallel Scan request, TotalSegments represents the total number of segments into which the Scan operation will be divided|None|100|
 
