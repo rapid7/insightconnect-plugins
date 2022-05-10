@@ -1,6 +1,7 @@
 import json
 from typing import Any, Dict, List, Tuple, Optional, Union
 import urllib.parse
+from pathlib import PosixPath
 
 import requests
 from icon_azure_sentinel.util.tools import return_non_empty
@@ -102,8 +103,14 @@ class AzureSentinelClient(AzureClient):
                 raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
             if error.response.status_code == 404:
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND)
+            if error.response.status_code == 409:
+                raise PluginException(
+                    cause="Conflicted state of the target resource",
+                    assistance=error.response.json().get("error", {}).get("message"),
+                )
             if error.response.status_code >= 500:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR)
+            raise PluginException(cause=error.response.json().get("error"))
         except requests.exceptions.Timeout:
             raise PluginException(preset=PluginException.Preset.TIMEOUT)
 
@@ -259,3 +266,396 @@ class AzureSentinelClient(AzureClient):
         )
         results = self._list_all("POST", final_uri, type_="entities")
         return [return_non_empty(entity) for entity in results]
+
+    def get_comment(
+        self,
+        incident_id: str,
+        incident_comment_id: str,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        api_version: str = "2021-04-01",
+    ):
+        uri = Endpoint.GETCOMMENT
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            incident_id,
+            incident_comment_id,
+            api_version,
+        )
+        _, result = self._call_api("GET", final_uri, self.headers)
+        return return_non_empty(result)
+
+    def list_comments(
+        self,
+        incident_id: str,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        api_version: str = "2021-04-01",
+    ) -> List:
+        uri = Endpoint.LISTCOMMENTS
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            incident_id,
+            api_version,
+        )
+        results = self._list_all("GET", final_uri)
+        return [return_non_empty(result) for result in results]
+
+    def create_update_comment(
+        self,
+        incident_id: str,
+        incident_comment_id: str,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        api_version: str = "2021-04-01",
+        **kwargs,
+    ):
+        uri = Endpoint.CREATEUPDATECOMMENT
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            incident_id,
+            incident_comment_id,
+            api_version,
+        )
+        kwargs = return_non_empty(kwargs)
+        data = kwargs
+        _, result = self._call_api("PUT", final_uri, headers=self.headers, payload=data)
+        return result
+
+    def delete_comment(
+        self,
+        incident_id: str,
+        incident_comment_id: str,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        api_version: str = "2021-04-01",
+    ):
+        uri = Endpoint.DELETECOMMENT
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            incident_id,
+            incident_comment_id,
+            api_version,
+        )
+        status_code, _ = self._call_api("DELETE", final_uri, self.headers)
+        return status_code
+
+    def create_indicator(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        api_version: str = "2021-10-01",
+        **kwargs,
+    ):
+        uri = Endpoint.CREATEINDICATOR
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            api_version,
+        )
+        data = kwargs
+        _, result = self._call_api("POST", final_uri, headers=self.headers, payload=data)
+        return result
+
+    def update_indicator(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        indicator_name: str,
+        api_version: str = "2021-10-01",
+        **kwargs,
+    ):
+        uri = Endpoint.UPDATEINDICATOR
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            indicator_name,
+            api_version,
+        )
+        indicator = self.get_indicator(resource_group_name, workspace_name, subscription_id, indicator_name)
+        data = return_non_empty(kwargs)
+        data = self._prepared_necessary_data(indicator, data)
+
+        _, result = self._call_api("PUT", final_uri, headers=self.headers, payload=data)
+        return result
+
+    def get_indicator(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        indicator_name: str,
+        api_version: str = "2021-10-01",
+    ):
+        uri = Endpoint.GETINDICATOR
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            indicator_name,
+            api_version,
+        )
+        _, result = self._call_api("GET", final_uri, headers=self.headers)
+        return result
+
+    def delete_indicator(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        indicator_name: str,
+        api_version: str = "2021-10-01",
+    ):
+        uri = Endpoint.DELETEINDICATOR
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            indicator_name,
+            api_version,
+        )
+        _, result = self._call_api("DELETE", final_uri, headers=self.headers)
+        return result
+
+    def query_indicator(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        api_version: str = "2021-10-01",
+        **kwargs,
+    ):
+        uri = Endpoint.QUERYINDICATORS
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            api_version,
+        )
+        data = kwargs
+        data = return_non_empty(data)
+        _, result = self._call_api("POST", final_uri, headers=self.headers, payload=data)
+        return result
+
+    def append_tags(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        indicator_name: str,
+        api_version: str = "2021-10-01",
+        **kwargs,
+    ):
+        uri = Endpoint.APPENDTAGS
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            indicator_name,
+            api_version,
+        )
+        data = kwargs
+        _, result = self._call_api("POST", final_uri, headers=self.headers, payload=data)
+        return result
+
+    def replace_tags(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        indicator_name: str,
+        api_version: str = "2021-10-01",
+        **kwargs,
+    ):
+        uri = Endpoint.REPLACETAGS
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            indicator_name,
+            api_version,
+        )
+        data = kwargs
+        _, result = self._call_api("POST", final_uri, headers=self.headers, payload=data)
+        return result
+
+    def create_update_watchlist(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        watchlist_alias: str,
+        subscription_id: str,
+        api_version: str = "2021-04-01",
+        **kwargs,
+    ):
+        kwargs = return_non_empty(kwargs)
+        uri = Endpoint.CREATEUPDATEWATCHLIST
+        final_uri = uri.format(subscription_id, resource_group_name, workspace_name, watchlist_alias, api_version)
+        _, result = self._call_api("PUT", final_uri, self.headers, payload=kwargs)
+        return return_non_empty(result)
+
+    def get_watchlist(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        watchlist_alias: str,
+        subscription_id: str,
+        api_version: str = "2021-04-01",
+    ):
+        uri = Endpoint.GETWATCHLIST
+        final_uri = uri.format(subscription_id, resource_group_name, workspace_name, watchlist_alias, api_version)
+        _, result = self._call_api("GET", final_uri, self.headers)
+        return return_non_empty(result)
+
+    def delete_watchlist(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        watchlist_alias: str,
+        subscription_id: str,
+        api_version: str = "2021-04-01",
+    ):
+        uri = Endpoint.DELETEWATCHLIST
+        final_uri = uri.format(subscription_id, resource_group_name, workspace_name, watchlist_alias, api_version)
+        status_code, _ = self._call_api("DELETE", final_uri, self.headers)
+        return status_code
+
+    def list_watchlists(
+        self, resource_group_name: str, workspace_name: str, subscription_id: str, api_version: str = "2021-04-01"
+    ):
+        uri = Endpoint.LISTWATCHLISTS
+        final_uri = uri.format(subscription_id, resource_group_name, workspace_name, api_version)
+        results = self._list_all("GET", final_uri)
+        return [return_non_empty(result) for result in results]
+
+    def create_update_watchlist_items(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        watchlist_alias: str,
+        watchlist_item_id: str,
+        api_version: str = "2021-10-01",
+        **kwargs,
+    ):
+        uri = Endpoint.CREATE_UPDATE_WATCHLIST_ITEMS
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            watchlist_alias,
+            watchlist_item_id,
+            api_version,
+        )
+        data = kwargs
+        data = return_non_empty(data)
+        _, result = self._call_api("PUT", final_uri, headers=self.headers, payload=data)
+        return result
+
+    def get_watchlist_items(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        watchlist_alias: str,
+        watchlist_item_id: str,
+        api_version: str = "2021-10-01",
+    ):
+        uri = Endpoint.GET_WATCHLIST_ITEMS
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            watchlist_alias,
+            watchlist_item_id,
+            api_version,
+        )
+        _, result = self._call_api("GET", final_uri, headers=self.headers)
+        return result
+
+    def delete_watchlist_items(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        watchlist_alias: str,
+        watchlist_item_id: str,
+        api_version: str = "2021-10-01",
+    ):
+        uri = Endpoint.DELETE_WATCHLIST_ITEMS
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            watchlist_alias,
+            watchlist_item_id,
+            api_version,
+        )
+        _, result = self._call_api("DELETE", final_uri, headers=self.headers)
+        return result
+
+    def list_watchlist_items(
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        subscription_id: str,
+        watchlist_alias: str,
+        api_version: str = "2021-10-01",
+    ):
+        uri = Endpoint.LIST_WATCHLIST_ITEMS
+        final_uri = uri.format(
+            subscription_id,
+            resource_group_name,
+            workspace_name,
+            watchlist_alias,
+            api_version,
+        )
+        _, result = self._call_api("GET", final_uri, headers=self.headers)
+        return result
+
+    def _prepared_necessary_data(self, indicator, data):
+        """
+        fields blocked to change for update indicator
+        """
+
+        blocked_keys = [
+            "description",
+            "killChainPhases",
+            "validFrom",
+            "created",
+            "createdByRef",
+            "externalId",
+            "source",
+        ]
+        # optional data
+        fields_to_update = ["displayName", "pattern", "patternType", "threatTypes"]
+        for field in fields_to_update:
+            if not data["properties"].get(field):
+                blocked_keys.append(field)
+
+        blocked_fields = {"properties": {}}
+        for key in blocked_keys:
+            if indicator["properties"].get(key) is not None:
+                blocked_fields["properties"][key] = indicator["properties"].get(key)
+
+        data["etag"] = indicator.get("etag")
+        data["kind"] = indicator.get("kind")
+        data["properties"].update(blocked_fields["properties"])
+
+        return data
