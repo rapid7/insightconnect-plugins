@@ -72,7 +72,7 @@ Example input:
 
 ```
 {
-  "condition_expression": "keytableu003cu003euser",
+  "condition_expression": "keytable<>user",
   "expression_attribute_names": {
     "#P": "Percentile"
   },
@@ -137,7 +137,7 @@ Example input:
 
 ```
 {
-  "condition_expression": "keytableu003cu003euser",
+  "condition_expression": "keytable<>euser",
   "expression_attribute_names": {
     "#P": "Percentile"
   },
