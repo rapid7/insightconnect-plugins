@@ -214,3 +214,334 @@ class TestClient(TestCase):
                 mock.call("POST", result_url, self.client.headers, params={}),
             ]
         )
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_get_comment(self, mock_get):
+        incident_comment_id = "comment1"
+        incident_id = "incident1"
+        group = "group1"
+        workspace = "workspace1"
+        subscription_id = "1234"
+        mock_get.return_value = (200, {})
+        api_version = "2021-04-01"
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.get_comment(incident_id, incident_comment_id, group, workspace, subscription_id)
+        result_url = Endpoint.GETCOMMENT.format(
+            subscription_id,
+            group,
+            workspace,
+            incident_id,
+            incident_comment_id,
+            api_version,
+        )
+        mock_get.assert_called_once_with("GET", result_url, self.client.headers)
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_list_entities(self, mock_get):
+        mock_get.return_value = {}
+        group = "group1"
+        incident_id = "incident1"
+        workspace = "workspace1"
+        subscription_id = "1234"
+        mock_get.return_value = (204, {})
+        api_version = "2021-04-01"
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.logger = logger
+        self.client.list_comments(incident_id, group, workspace, subscription_id)
+        result_url = Endpoint.LISTCOMMENTS.format(
+            subscription_id,
+            group,
+            workspace,
+            incident_id,
+            api_version,
+        )
+
+        mock_get.assert_has_calls(
+            [
+                mock.call("GET", result_url, self.client.headers, params={}),
+            ]
+        )
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_create_update_incident(self, mock_get):
+        payload = {
+            "properties": {
+                "message": "Gallia est omnis divisa in partes tres, quarum unam incolunt Belgae, aliam Aquitani, tertiam qui ipsorum lingua Celtae, nostra Galli appellantur."
+            }
+        }
+        incident_id = "incident1"
+        incident_comment_id = "comment1"
+        group = "group1"
+        workspace = "workspace1"
+        subscription_id = "123-123-123"
+        api_version = "2021-04-01"
+        mock_get.return_value = (200, {})
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.create_update_comment(
+            incident_id, incident_comment_id, group, workspace, subscription_id, **payload
+        )
+        result_url = Endpoint.CREATEUPDATECOMMENT.format(
+            subscription_id, group, workspace, incident_id, incident_comment_id, api_version
+        )
+
+        mock_get.assert_called_once_with("PUT", result_url, headers=self.client.headers, payload=payload)
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_delete_comment(self, mock_get):
+        incident_comment_id = "comment1"
+        incident_id = "incident1"
+        group = "group1"
+        workspace = "workspace1"
+        subscription_id = "1234"
+        mock_get.return_value = (200, {})
+        api_version = "2021-04-01"
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.delete_comment(incident_id, incident_comment_id, group, workspace, subscription_id)
+        result_url = Endpoint.DELETECOMMENT.format(
+            subscription_id,
+            group,
+            workspace,
+            incident_id,
+            incident_comment_id,
+            api_version,
+        )
+        mock_get.assert_called_once_with("DELETE", result_url, self.client.headers)
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_create_indicator(self, mock_get):
+        payload = {
+            "properties": {
+                "confidence": 100,
+                "description": "Example description",
+                "displayName": "Test indicator",
+                "pattern": "[url:value = 'https://www.contoso.com']",
+                "patternType": "url",
+                "source": "Azure Sentinel",
+                "threatTypes": ["compromised"],
+            }
+        }
+        api_version, resource_group_name, subscription_id, workspace_name = self._get_indicator_url_data()
+        mock_get.return_value = (200, {})
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.create_indicator(resource_group_name, workspace_name, subscription_id, **payload)
+        result_url = Endpoint.CREATEINDICATOR.format(subscription_id, resource_group_name, workspace_name, api_version)
+
+        mock_get.assert_called_once_with("POST", result_url, headers=self.client.headers, payload=payload)
+
+    @mock.patch(__name__ + ".AzureSentinelClient.get_indicator")
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_update_indicator(self, mock_get, mock_get_indicator):
+        payload = {
+            "etag": "example-tag",
+            "kind": "example-kind",
+            "properties": {
+                "displayName": "New Test indicator",
+                "description": "Example description",
+                "created": "2021-04-15T19:51:17.1050923Z",
+                "pattern": "[url:value = 'https://www.contoso.com']",
+                "patternType": "url",
+                "source": "Azure Sentinel",
+                "threatTypes": ["compromised"],
+            },
+        }
+        indicator = {
+            "etag": "example-tag",
+            "kind": "example-kind",
+            "properties": {
+                "created": "2021-04-15T19:51:17.1050923Z",
+                "description": "Example description",
+                "displayName": "Test indicator",
+                "pattern": "[url:value = 'https://www.contoso.com']",
+                "patternType": "url",
+                "source": "Azure Sentinel",
+                "threatTypes": ["compromised"],
+            },
+        }
+        api_version, resource_group_name, subscription_id, workspace_name = self._get_indicator_url_data()
+        indicator_name = "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014"
+        mock_get_indicator.return_value = indicator
+        mock_get.return_value = (200, {})
+
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.update_indicator(resource_group_name, workspace_name, subscription_id, indicator_name, **payload)
+        result_url = Endpoint.UPDATEINDICATOR.format(
+            subscription_id, resource_group_name, workspace_name, indicator_name, api_version
+        )
+
+        mock_get.assert_called_once_with("PUT", result_url, headers=self.client.headers, payload=payload)
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_get_indicator(self, mock_get):
+        api_version, resource_group_name, subscription_id, workspace_name = self._get_indicator_url_data()
+        indicator_name = "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014"
+        mock_get.return_value = (200, {})
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.get_indicator(resource_group_name, workspace_name, subscription_id, indicator_name)
+        result_url = Endpoint.GETINDICATOR.format(
+            subscription_id, resource_group_name, workspace_name, indicator_name, api_version
+        )
+
+        mock_get.assert_called_once_with("GET", result_url, headers=self.client.headers)
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_delete_indicator(self, mock_get):
+        api_version, resource_group_name, subscription_id, workspace_name = self._get_indicator_url_data()
+        indicator_name = "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014"
+        mock_get.return_value = (200, {})
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.delete_indicator(resource_group_name, workspace_name, subscription_id, indicator_name)
+        result_url = Endpoint.DELETEINDICATOR.format(
+            subscription_id, resource_group_name, workspace_name, indicator_name, api_version
+        )
+
+        mock_get.assert_called_once_with("DELETE", result_url, headers=self.client.headers)
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_query_indicator(self, mock_get):
+        payload = {
+            "keywords": "test",
+        }
+        api_version, resource_group_name, subscription_id, workspace_name = self._get_indicator_url_data()
+        mock_get.return_value = (200, {})
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.query_indicator(resource_group_name, workspace_name, subscription_id, **payload)
+        result_url = Endpoint.QUERYINDICATORS.format(subscription_id, resource_group_name, workspace_name, api_version)
+
+        mock_get.assert_called_once_with("POST", result_url, headers=self.client.headers, payload=payload)
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_append_tags(self, mock_get):
+        payload = {
+            "threatIntelligenceTags": "test tag",
+        }
+        api_version, resource_group_name, subscription_id, workspace_name = self._get_indicator_url_data()
+        indicator_name = "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014"
+        mock_get.return_value = (200, {})
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.append_tags(resource_group_name, workspace_name, subscription_id, indicator_name, **payload)
+        result_url = Endpoint.APPENDTAGS.format(
+            subscription_id, resource_group_name, workspace_name, indicator_name, api_version
+        )
+
+        mock_get.assert_called_once_with("POST", result_url, headers=self.client.headers, payload=payload)
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_replace_tags(self, mock_get):
+        payload = {
+            "properties": {
+                "threatIntelligenceTags": "new test tag",
+            }
+        }
+        api_version, resource_group_name, subscription_id, workspace_name = self._get_indicator_url_data()
+        indicator_name = "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014"
+        mock_get.return_value = (200, {})
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.replace_tags(resource_group_name, workspace_name, subscription_id, indicator_name, **payload)
+        result_url = Endpoint.REPLACETAGS.format(
+            subscription_id, resource_group_name, workspace_name, indicator_name, api_version
+        )
+
+        mock_get.assert_called_once_with("POST", result_url, headers=self.client.headers, payload=payload)
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_create_update_watchlist(self, mock_get):
+        payload = {"properties": {"name": "Od nendzy do piniendzy"}}
+        group = "group1"
+        workspace = "workspace1"
+        subscription_id = "123-123-123"
+        api_version = "2021-04-01"
+        alias = "testalias"
+        mock_get.return_value = (200, {})
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.create_update_watchlist(group, workspace, alias, subscription_id, api_version, **payload)
+        result_url = Endpoint.CREATEUPDATEWATCHLIST.format(subscription_id, group, workspace, alias, api_version)
+        mock_get.assert_called_once_with("PUT", result_url, self.client.headers, payload=payload)
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_delete_watchlist(self, mock_get):
+        group = "group1"
+        workspace = "workspace1"
+        subscription_id = "123-123-123"
+        api_version = "2021-04-01"
+        alias = "testalias"
+        group = "group1"
+        workspace = "workspace1"
+        subscription_id = "1234"
+        mock_get.return_value = (200, {})
+        api_version = "2021-04-01"
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.delete_watchlist(group, workspace, alias, subscription_id, api_version)
+        result_url = Endpoint.DELETEWATCHLIST.format(
+            subscription_id,
+            group,
+            workspace,
+            alias,
+            api_version,
+        )
+        mock_get.assert_called_once_with("DELETE", result_url, self.client.headers)
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_get_watchlist(self, mock_get):
+        group = "group1"
+        workspace = "workspace1"
+        subscription_id = "123-123-123"
+        api_version = "2021-04-01"
+        alias = "testalias"
+        group = "group1"
+        workspace = "workspace1"
+        subscription_id = "1234"
+        mock_get.return_value = (200, {})
+        api_version = "2021-04-01"
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.get_watchlist(group, workspace, alias, subscription_id, api_version)
+        result_url = Endpoint.GETWATCHLIST.format(
+            subscription_id,
+            group,
+            workspace,
+            alias,
+            api_version,
+        )
+        mock_get.assert_called_once_with("GET", result_url, self.client.headers)
+
+    @mock.patch(__name__ + ".AzureSentinelClient._call_api")
+    def test_list_watchlist(self, mock_get):
+        group = "group1"
+        workspace = "workspace1"
+        subscription_id = "123-123-123"
+        api_version = "2021-04-01"
+        group = "group1"
+        workspace = "workspace1"
+        subscription_id = "1234"
+        mock_get.return_value = (200, {})
+        api_version = "2021-04-01"
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        self.client.list_watchlists(group, workspace, subscription_id, api_version)
+        result_url = Endpoint.LISTWATCHLISTS.format(
+            subscription_id,
+            group,
+            workspace,
+            api_version,
+        )
+        mock_get.assert_called_once_with("GET", result_url, self.client.headers, params={})
+
+    def _get_indicator_url_data(self):
+        resource_group_name = "group1"
+        subscription_id = "123-123-123"
+        workspace_name = "workspace1"
+        api_version = "2021-10-01"
+        return api_version, resource_group_name, subscription_id, workspace_name
