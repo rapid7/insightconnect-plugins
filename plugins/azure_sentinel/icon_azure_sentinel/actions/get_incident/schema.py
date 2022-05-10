@@ -463,7 +463,6 @@ class GetIncidentOutput(insightconnect_plugin_runtime.Output):
               "title": "Created By Type",
               "description": "The type of identity that created the resource",
               "enum": [
-                "",
                 "Application",
                 "Key",
                 "ManagedIdentity",
@@ -490,7 +489,6 @@ class GetIncidentOutput(insightconnect_plugin_runtime.Output):
               "title": "Last Modified By Type",
               "description": "The type of identity that last modified the resource",
               "enum": [
-                "",
                 "Application",
                 "Key",
                 "ManagedIdentity",
@@ -525,7 +523,6 @@ class GetIncidentOutput(insightconnect_plugin_runtime.Output):
           "title": "Created By Type",
           "description": "The type of identity that created the resource",
           "enum": [
-            "",
             "Application",
             "Key",
             "ManagedIdentity",
@@ -552,7 +549,6 @@ class GetIncidentOutput(insightconnect_plugin_runtime.Output):
           "title": "Last Modified By Type",
           "description": "The type of identity that last modified the resource",
           "enum": [
-            "",
             "Application",
             "Key",
             "ManagedIdentity",

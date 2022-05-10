@@ -2,6 +2,7 @@ import json
 import sys
 from typing import Any, Dict, List, Tuple, Optional, Union
 import urllib.parse
+from pathlib import PosixPath
 
 import requests
 from icon_azure_sentinel.util.tools import return_non_empty
@@ -334,7 +335,7 @@ class AzureSentinelClient(AzureClient):
         kwargs = return_non_empty(kwargs)
         data = kwargs
         _, result = self._call_api("PUT", final_uri, headers=self.headers, payload=data)
-        return return_non_empty(result)
+        return result
 
     def delete_comment(
         self,

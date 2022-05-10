@@ -394,9 +394,10 @@ Example input:
 ```
 {
   "resourceGroupName": "resourcegroup1",
-  "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
-  "watchlistAlias": "examplealias1",
-  "workspaceName": "workspace1"
+  "subscriptionId": "aaaef455-a780-44ca-9e51-aaafffeeea3a",
+  "watchlistAlias": "exampleAlias",
+  "watchlistItemId": "3395856c-e81f-2b73-82de-e72602f798b6",
+  "workspaceName": "workspace23"
 }
 ```
 
@@ -584,7 +585,18 @@ Example input:
 ```
 {
   "name": "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014",
-  "properties": "{'source': 'Azure Sentinel', 'threatIntelligenceTags': [ 'new schema' ], 'displayName': 'new schema', 'threatTypes': [ 'compromised' ], 'pattern': '[url:value = 'https://example.com']', 'patternType': 'url'}",
+  "properties": {
+    "source": "Azure Sentinel",
+    "threatIntelligenceTags": [
+      "new schema"
+    ],
+    "displayName": "new schema",
+    "threatTypes": [
+      "compromised"
+    ],
+    "pattern": "[url:value = 'https://example.com']",
+    "patternType": "url"
+  },
   "resourceGroupName": "resourcegroup12",
   "subscriptionId": "0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe",
   "workspaceName": "workspace23"
@@ -2001,8 +2013,6 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.1.0 - Triggers: Get New Incidents | Add `top` argument to the List Incidents action
-* 2.0.1 - Fixed Create Update Comment input validation bug
 * 2.0.0 - Changed CreatedByType field for enum types. New actions: Create or Update Comment, Delete Comment, List Comments, Get Comment, Create Indicator, Get Indicator, Update Indicator, Delete Indicator, Query Indicator, Append Tags, Replace Tags, Create or Update Watchlist, Delete Watchlist, List Watchlists, Get Watchlist, Create Or Update Watchlist Items, Get Watchlist Item, Delete Watchlist Item, List Watchlist Items
 * 1.0.0 - Initial plugin (Actions: Create or Update Incident, Delete Incident, List Incidents, Get Incident, List Alerts, List Bookmarks, List Entities)
 
