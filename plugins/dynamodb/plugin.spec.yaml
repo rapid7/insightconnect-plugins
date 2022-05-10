@@ -150,6 +150,7 @@ actions:
         description: Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response
         type: string
         enum:
+          - NONE
           - INDEXES
           - TOTAL
         required: false
@@ -251,10 +252,12 @@ actions:
         description: Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response
         type: string
         enum:
+          - NONE
           - INDEXES
           - TOTAL
         required: false
         example: TOTAL
+        default: TOTAL
       return_item_collection_metrics:
         title: Return Item Collection Metrics
         description: Determines whether item collection metrics are returned
@@ -307,20 +310,24 @@ actions:
         required: false
         type: string
         enum:
+          - NONE
           - ALL_OLD
           - UPDATE_OLD
           - ALL_NEW
           - UPDATED_NEW
         example: ALL_OLD
+        default: NONE
       return_consumed_capacity:
         title: Return Consumed Capacity
         description: Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response
         required: false
         type: string
         enum:
+          - NONE
           - INDEXES
           - TOTAL
         example: TOTAL
+        default: TOTAL
       return_item_collection_metrics:
         title: Return Item Collection Metrics
         description: Determines whether item collection metrics are returned

@@ -63,7 +63,7 @@ overwrite the existing record.
 |expression_attribute_names|object|None|False|One or more substitution tokens for attribute names in an expression|None|{"#P":"Percentile"}|
 |expression_attribute_values|object|None|False|One or more values that can be substituted in an expression|None|{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }|
 |item|object|None|True|The object data to store|None|{"keytable": "login", "e-mail": "user@example.com", "user": "Username"}|
-|return_consumed_capacity|string|None|False|Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response|['INDEXES', 'TOTAL']|TOTAL|
+|return_consumed_capacity|string|TOTAL|False|Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response|['NONE', 'INDEXES', 'TOTAL']|TOTAL|
 |return_item_collection_metrics|boolean|None|False|Determines whether item collection metrics are returned|None|False|
 |return_values|boolean|None|False|Use ReturnValues if you want to get the item attributes as they appeared before they were updated with the PutItem request|None|False|
 |table_name|string|None|True|The table name to store into|None|Table-name|
@@ -127,9 +127,9 @@ are met.
 |expression_attribute_names|object|None|False|One or more substitution tokens for attribute names in an expression|None|{"#P":"Percentile"}|
 |expression_attribute_values|object|None|False|One or more values that can be substituted in an expression|None|{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }|
 |key|object|None|True|The primary key and optionally the sort key of the object to update. Provided as a pair of key/values|None|{"keytable": "login"}|
-|return_consumed_capacity|string|None|False|Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response|['INDEXES', 'TOTAL']|TOTAL|
+|return_consumed_capacity|string|TOTAL|False|Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response|['NONE', 'INDEXES', 'TOTAL']|TOTAL|
 |return_item_collection_metrics|boolean|None|False|Determines whether item collection metrics are returned|None|False|
-|return_values|string|None|False|Use ReturnValues if you want to get the item attributes as they appear before or after they are updated|['ALL_OLD', 'UPDATE_OLD', 'ALL_NEW', 'UPDATED_NEW']|ALL_OLD|
+|return_values|string|NONE|False|Use ReturnValues if you want to get the item attributes as they appear before or after they are updated|['NONE', 'ALL_OLD', 'UPDATE_OLD', 'ALL_NEW', 'UPDATED_NEW']|ALL_OLD|
 |table_name|string|None|True|The table name to store into|None|Table-name|
 |update_expression|string|None|False|An expression that defines one or more attributes to be updated, the action to be performed on them, and new values for them|None|SET #Y = :y, #AT = :t|
 
@@ -195,7 +195,7 @@ It will return the list of objects found, and a count of the records.
 |index_name|string|None|False|The index to use. If empty, defaults to a full Scan of the table|None|index-name|
 |limit|integer|100|False|The maximum number of items to evaluate (not necessarily the number of matching items)|None|100|
 |projection_expression|string|None|False|A string that identifies one or more attributes to retrieve from the specified table or index|None|Description|
-|return_consumed_capacity|string|TOTAL|False|Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response|['INDEXES', 'TOTAL']|TOTAL|
+|return_consumed_capacity|string|TOTAL|False|Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response|['NONE', 'INDEXES', 'TOTAL']|TOTAL|
 |segment|integer|None|False|For a parallel Scan request, Segment identifies an individual segment to be scanned by an application worker|None|100|
 |select|string|ALL_ATTRIBUTES|False|The attributes to be returned in the result|['ALL_ATTRIBUTES', 'ALL_PROJECTED_ATTRIBUTES', 'COUNT', 'SPECIFIC_ATTRIBUTES']|ALL_ATTRIBUTES|
 |table_name|string|None|True|The table name to search|None|Table-name|

@@ -57,7 +57,9 @@ class UpdateInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Return Consumed Capacity",
       "description": "Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response",
+      "default": "TOTAL",
       "enum": [
+        "NONE",
         "INDEXES",
         "TOTAL"
       ],
@@ -73,7 +75,9 @@ class UpdateInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Return Values",
       "description": "Use ReturnValues if you want to get the item attributes as they appear before or after they are updated",
+      "default": "NONE",
       "enum": [
+        "NONE",
         "ALL_OLD",
         "UPDATE_OLD",
         "ALL_NEW",

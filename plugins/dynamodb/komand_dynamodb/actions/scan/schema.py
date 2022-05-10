@@ -91,6 +91,7 @@ class ScanInput(insightconnect_plugin_runtime.Input):
       "description": "Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response",
       "default": "TOTAL",
       "enum": [
+        "NONE",
         "INDEXES",
         "TOTAL"
       ],

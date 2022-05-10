@@ -2,10 +2,10 @@
 from setuptools import setup, find_packages
 
 
-setup(name="dynamodb-more_code-plugin",
+setup(name="dynamodb-rapid7-plugin",
       version="3.0.0",
       description="Dynamo DB is a key/value store powered by Amazon available for members of AWS. Users can manage their data using the DynamoDB plugin for Rapid7 InsightConnect",
-      author="more_code",
+      author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
