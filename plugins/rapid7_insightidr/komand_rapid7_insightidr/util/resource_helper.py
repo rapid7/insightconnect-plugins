@@ -1,4 +1,4 @@
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 import requests
 
 import aiohttp
@@ -68,7 +68,6 @@ class ResourceHelper(object):
         """
         try:
             request_method = getattr(self.session, method.lower())
-
             if not params:
                 params = {}
             if not payload:

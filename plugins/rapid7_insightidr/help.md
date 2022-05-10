@@ -14,7 +14,7 @@ Do more with Investigations in [InsightIDR](https://www.rapid7.com/products/insi
 
 # Supported Product Versions
 
-* Latest release successfully tested on 2022-05-05.
+* Latest release successfully tested on 2022-05-09.
 
 # Documentation
 
@@ -25,7 +25,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|InsightIDR API key|None|4472f2g7-991z-4w70-li11-7552w8qm0266|
-|url|string|https://example.com|True|The URL endpoint for InsightIDR. e.g. https://<REGION_CODE>.api.insight.rapid7.com|None|https://example.com|
+|url|string|https://us.api.insight.rapid7.com|True|The URL endpoint for InsightIDR. e.g. https://<REGION_CODE>.api.insight.rapid7.com|None|https://us.api.insight.rapid7.com|
 
 Example input:
 
@@ -39,6 +39,92 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Get All Saved Queries
+
+This action is used to retrieve all saved InsightIDR LEQL queries.
+
+##### Input
+
+_This action does not contain any inputs._
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|saved_queries|[]query|True|Saved LEQL queries|
+
+```
+{
+  "saved_queries": [
+    {
+      "id": "00000000-0000-9eec-0000-000000000000",
+      "leql": {
+        "during": {
+          "from": null,
+          "time_range": "yesterday",
+          "to": null
+        },
+        "statement": "where(931dde6c60>=800)"
+      },
+      "logs": [
+        "31a4d56e-460e-460f-9542-c2bc8edd7c6b"
+      ],
+      "name": "Large Values Yesterday"
+    }
+  ]
+}
+```
+
+#### Get a Saved Query
+
+Retrieve a saved InsightIDR LEQL query by its ID
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|query_id|string|None|True|UUID of saved query|None|00000000-0000-10d0-0000-000000000000|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|saved_query|query|True|Saved LEQL query|
+
+Example input:
+
+```
+{
+  "query_id": "00000000-0000-10d0-0000-000000000000"
+}
+```
+
+##### Output
+
+|Name|Type| Required |Description|
+|----|----|----|-----------|
+|saved_query|query|True|Saved LEQL query|
+
+```
+{
+  "saved_query": {
+    "id": "00000000-0000-9eec-0000-000000000000",
+    "leql": {
+      "during": {
+        "from": null,
+        "time_range": "yesterday",
+        "to": null
+      },
+      "statement": "where(931dde6c60>=800)"
+    },
+    "logs": [
+      "31a4d56e-460e-460f-9542-c2bc8edd7c6b"
+    ],
+    "name": "Large Values Yesterday"
+  }
+}
+```
 
 #### Create Threat
 
@@ -76,12 +162,12 @@ Example output:
 
 ```
 {
-    "rejected_indicators": [],
-    "threat": {
-      "name": "Threat created via InsightConnect",
-      "note": "Threat created via InsightConnect",
-      "published": false,
-      "indicator_count": 2
+  "rejected_indicators": [],
+  "threat": {
+    "name": "Threat created via InsightConnect",
+    "note": "Threat created via InsightConnect",
+    "published": false,
+    "indicator_count": 2
   }
 }
 ```
@@ -108,7 +194,7 @@ Example input:
 
 ```
 {
-  "log": "Firewall Activity",
+  "log_set": "Firewall Activity",
   "query": "where(user=adagentadmin, loose)",
   "relative_time": "Last 5 Minutes",
   "time_from": "01-01-2020T00:00:00",
@@ -413,6 +499,9 @@ This action is used to get a specific log from an account.
 Example input:
 
 ```
+{
+  "id": "174e4f99-2ac7-4481-9301-4d24c34baf06"
+}
 ```
 
 ##### Output
@@ -802,6 +891,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.2.0 - Add new actions Get A Saved Query and Get All Saved Queries
 * 3.1.5 - Patch issue parsing labels in Advanced Query on Log and Advanced Query on Log Set actions
 * 3.1.4 - Add `docs_url` to plugin spec with a link to [InsightIDR plugin setup guide](https://docs.rapid7.com/insightconnect/rapid7-insightidr)
 * 3.1.3 - Fix issue where Get a Log and Get All Logs would either fail in workflow or in connection test
