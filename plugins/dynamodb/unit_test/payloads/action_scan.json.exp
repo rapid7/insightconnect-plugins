@@ -1,0 +1,99 @@
+{
+  "Count": 3,
+  "Items": [
+    {
+      "AlbumTitle": {
+        "S": "Louder Than Everrrrrr"
+      },
+      "Artist": {
+        "S": "No One You Know"
+      },
+      "SongTitle": {
+        "S": "Call Me Today"
+      },
+      "partitional_key": {
+        "S": "test3"
+      }
+    },
+    {
+      "AlbumTitle": {
+        "S": "Somewhat Famous"
+      },
+      "Artist": {
+        "S": "No One You Know"
+      },
+      "SongTitle": {
+        "S": "Call Me Today"
+      },
+      "partitional_key": {
+        "S": "test2"
+      }
+    },
+    {
+      "Binary": {
+        "B": "9de5069c5afe602b2ea0a04b66beb2c0"
+      },
+      "List": {
+        "L": [
+          {
+            "N": "1"
+          },
+          {
+            "SS": [
+              "test"
+            ]
+          }
+        ]
+      },
+      "Map": {
+        "M": {
+          "MapKey1": {
+            "S": "Key1"
+          }
+        }
+      },
+      "Null": {
+        "NULL": true
+      },
+      "Number": {
+        "N": "213123123"
+      },
+      "NumberSet": {
+        "NS": [
+          "2",
+          "1"
+        ]
+      },
+      "String Set": {
+        "SS": [
+          "Test",
+          "test2"
+        ]
+      },
+      "boolean": {
+        "BOOL": false
+      },
+      "partitional_key": {
+        "S": "test1"
+      },
+      "test_str": {
+        "S": "test2"
+      }
+    }
+  ],
+  "ResponseMetadata": {
+    "HTTPHeaders": {
+      "connection": "keep-alive",
+      "content-length": "646",
+      "content-type": "application/x-amz-json-1.0",
+      "date": "Wed, 09 Mar 2022 11:09:47 GMT",
+      "server": "Server",
+      "x-amz-crc32": "2272329632",
+      "x-amzn-requestid": "70f76f31-3df2-4eb9-80c0-13bd4e87064a"
+    },
+    "HTTPStatusCode": 200,
+    "RequestId": "060a8d58-563b-4428-9e4b-31caf24145da",
+    "RetryAttempts": 0
+  },
+  "ScannedCount": 3
+}
