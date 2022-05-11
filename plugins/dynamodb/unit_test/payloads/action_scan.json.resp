@@ -1,0 +1,99 @@
+{
+   "Items":[
+      {
+         "partitional_key":{
+            "S":"test3"
+         },
+         "AlbumTitle":{
+            "S":"Louder Than Everrrrrr"
+         },
+         "Artist":{
+            "S":"No One You Know"
+         },
+         "SongTitle":{
+            "S":"Call Me Today"
+         }
+      },
+      {
+         "partitional_key":{
+            "S":"test2"
+         },
+         "AlbumTitle":{
+            "S":"Somewhat Famous"
+         },
+         "Artist":{
+            "S":"No One You Know"
+         },
+         "SongTitle":{
+            "S":"Call Me Today"
+         }
+      },
+      {
+         "Binary":{
+            "B":"9de5069c5afe602b2ea0a04b66beb2c0"
+         },
+         "partitional_key":{
+            "S":"test1"
+         },
+         "Map":{
+            "M":{
+               "MapKey1":{
+                  "S":"Key1"
+               }
+            }
+         },
+         "test_str":{
+            "S":"test2"
+         },
+         "Null":{
+            "NULL":true
+         },
+         "NumberSet":{
+            "NS":[
+               "2",
+               "1"
+            ]
+         },
+         "boolean":{
+            "BOOL":false
+         },
+         "List":{
+            "L":[
+               {
+                  "N":"1"
+               },
+               {
+                  "SS":[
+                     "test"
+                  ]
+               }
+            ]
+         },
+         "Number":{
+            "N":"213123123"
+         },
+         "String Set":{
+            "SS":[
+               "Test",
+               "test2"
+            ]
+         }
+      }
+   ],
+   "Count":3,
+   "ScannedCount":3,
+   "ResponseMetadata":{
+      "RequestId":"060a8d58-563b-4428-9e4b-31caf24145da",
+      "HTTPStatusCode":200,
+      "HTTPHeaders":{
+         "server":"Server",
+         "date":"Wed, 09 Mar 2022 11:09:47 GMT",
+         "content-type":"application/x-amz-json-1.0",
+         "content-length":"646",
+         "connection":"keep-alive",
+         "x-amzn-requestid":"70f76f31-3df2-4eb9-80c0-13bd4e87064a",
+         "x-amz-crc32":"2272329632"
+      },
+      "RetryAttempts":0
+   }
+}
