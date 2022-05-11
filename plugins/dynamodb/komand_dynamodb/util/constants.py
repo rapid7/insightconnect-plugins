@@ -1,0 +1,7 @@
+SCAN_COMMAND = "scan"
+INSERT_COMMAND = "put_item"
+UPDATE_COMMAND = "update_item"
+LIST_TABLES = "list_tables"
+SERVICE_NAME = "dynamodb"
+DEFAULT_REGION = "us-east-1"
+AWS_NONE_VALUE = "NONE"
