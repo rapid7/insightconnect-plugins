@@ -1,44 +1,28 @@
-import komand
-from .schema import UpdateInput, UpdateOutput
+import copy
+
+import insightconnect_plugin_runtime
+from .schema import UpdateInput, UpdateOutput, Component, Input, Output
+from komand_dynamodb.util.constants import AWS_NONE_VALUE
 
 # Custom imports below
+from ...util.utils import Utils
 
 
-class Update(komand.Action):
+class Update(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="update",
-            description="A full update of all fields in a  single object in Dynamo. Performs a read, updates the provided fields, then a full write back. Will fail if Dynamo rejects the update unless force is true",
+            description=Component.DESCRIPTION,
             input=UpdateInput(),
             output=UpdateOutput(),
         )
 
     def run(self, params={}):
-        pk = params.get("key")
-        data = params.get("data")
-        table_name = params.get("table")
-        cond_expr = params.get("condition_expression")
-        t = self.connection.dynamodb.Table(table_name)
-        props = {}
-        exp = "set "
-        for key in data:
-            pkey = ":" + key
-            # Need to prep the data by prefixing the : so it meets the search api expectation
-            props[pkey] = data[key]
-            # Append to the expression
-            exp += key + " = " + pkey + ","
-        exp = exp[:-1]  # Chop off the trailing comma
-        kwargs = {
-            "Key": pk,
-            "UpdateExpression": exp,
-            "ExpressionAttributeValues": props,
-        }
-        if (cond_expr is not None) and (len(cond_expr) > 0):
-            kwargs["ConditionExpression"] = cond_expr
-
-        t.update_item(**kwargs)
-        return {"success": True}
-
-    def test(self):
-        """TODO: Test action"""
-        return {}
+        mapped_params = copy.deepcopy(params)
+        mapped_params[Input.RETURN_ITEM_COLLECTION_METRICS] = Utils.map_return_item_collection_metrics(
+            params.get(Input.RETURN_ITEM_COLLECTION_METRICS, False)
+        )
+        mapped_params[Input.RETURN_CONSUMED_CAPACITY] = params.get(Input.RETURN_CONSUMED_CAPACITY, AWS_NONE_VALUE)
+        mapped_params[Input.RETURN_VALUES] = params.get(Input.RETURN_VALUES, AWS_NONE_VALUE)
+        self.connection.client.update_data(input_schema=self.input.schema, params=mapped_params)
+        return {Output.SUCCESS: True}
