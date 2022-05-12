@@ -6,22 +6,34 @@ import zipfile
 import insightconnect_plugin_runtime
 import requests
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
+from typing import Union, Tuple
 
 from komand_sentinelone.util.api import SentineloneAPI
 from komand_sentinelone.util.helper import Helper
 from .schema import ConnectionSchema, Input
+from komand_sentinelone.util.constants import (
+    BASIC_AUTH,
+    API_TOKEN_AUTH,
+    USERNAME_FIELD,
+    DATA_FIELD,
+    PASSWORD_FIELD,
+    API_TOKEN_FIELD,
+)
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
+        self.client = None
         self.username = None
         self.password = None
         self.url = None
         self.api_version = None
+        self.api_key = None
         self.token = None
+        self.authentication_type = None
 
-    def connect(self, params):
+    def connect(self, params={}):
         """
         Connection config params are supplied as a dict in
         params or also accessible in self.parameters['key']
@@ -32,9 +44,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
           blah = self.connection.blah
         """
         self.logger.info("Connect: Connecting...")
-
-        self.username = params.get(Input.CREDENTIALS).get("username")
-        self.password = params.get(Input.CREDENTIALS).get("password")
+        self.authentication_type = params.get(Input.AUTHENTICATION_TYPE)
+        self.username = params.get(Input.BASIC_AUTH_CREDENTIALS).get("username")
+        self.password = params.get(Input.BASIC_AUTH_CREDENTIALS).get("password")
+        self.api_key = params.get(Input.API_KEY).get("secretKey")
         self.url = params.get(Input.URL)
 
         index = self.url.find("/", self._get_start_index(self.url))
@@ -45,9 +58,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
         if not self.url.endswith("/"):
             self.url = self.url + "/"
 
-        token = self.get_auth_token(self.url, self.username, self.password)
+        self.token, self.api_version = self.get_auth_token()
         self.client = SentineloneAPI(self.url, self.make_token_header())
-        self.logger.info("Token: " + "*************" + str(token[len(token) - 5 : len(token)]))
+        self.logger.info("Token: " + "*************" + str(self.token[len(self.token) - 5 : len(self.token)]))
 
     @staticmethod
     def _get_start_index(url):
@@ -55,50 +68,74 @@ class Connection(insightconnect_plugin_runtime.Connection):
             return 9
         return 0
 
-    def get_auth_token(self, url, username, password, version="2.1"):
-        # TODO: Need to make a token timeout here for 7 days
-        final_url = f"{url}web/api/v{version}/users/login"
+    def get_auth_token(self) -> Tuple[str, str]:
+        version = "2.1"
+        request_url = self._prepare_auth_url_based_on_version(version)
+        request_data = self._prepare_body_for_auth_request()
+        self.logger.info(f"Trying to authenticate with API version {version}")
+        response = requests.post(request_url, json=request_data)
+        self._handle_auth_response(request_url, response)
 
-        auth_headers = {"username": username, "password": password}
-
-        r = requests.post(final_url, json=auth_headers)
-        if r.status_code == 401:
-            raise ConnectionTestException(
-                cause=f"Could not authorize with SentinelOne instance at: {final_url}.",
-                assistance="Your 'username' in connection configuration should be an e-mail address. Check if your e-mail address is correct. Response was: "
-                + r.text,
-            )
-
-        token = ""  # noqa: B105
-
-        # Some consoles do not support v2.1 but some actions are not included in 2.0
-        # Instead, try getting an auth token from 2.1 first, then rollback to 2.0 if needed
-        # Find the list of supported consoles for each API in the SentinelOne API docs
-        if r.status_code != 200:
-            if version == "2.1":
-                self.logger.info("API v2.1 failed... trying v2.0")
-                token = self.get_auth_token(url, username, password, version="2.0")
-
+        if response.status_code == 200:
+            token = response.json().get(DATA_FIELD).get("token")
+        else:
+            version = "2.0"
+            self.logger.info(f"API v2.1 failed... trying v{version}")
+            request_url = self._prepare_auth_url_based_on_version(version)
+            response = requests.post(request_url, json=request_data)
+            self._handle_auth_response(request_url, response)
+            token = response.json().get(DATA_FIELD).get("token")
             # We know the connection failed when both 2.1 and 2.0 do not give 200 responses
             if not token:
                 raise ConnectionTestException(
-                    cause=f"Could not authorize with SentinelOne instance at: {final_url}.",
-                    assistance=f"Response was: {r.text}",
+                    cause=f"Could not authorize with SentinelOne instance at: {self.url}.",
+                    assistance="An attempt was made to connect using a version of the API 2.0 and 2.1. "
+                    "Check the inputs params and try again. "
+                    "If the problem persists contact with development team.",
                 )
 
-        if version == "2.0":
-            return r.json().get("data").get("token")
+        return token, version
 
-        # When we do not have a token, we know that 2.1 responded with no problems
-        # If we do, we know that it came from 2.0 and we can use that in our actions
-        if token:
-            self.token = token
-            self.api_version = "2.0"
-        else:
-            self.token = r.json().get("data").get("token")
-            self.api_version = "2.1"
+    def _handle_auth_response(self, url: str, response):
+        if response.status_code == 401:
+            raise ConnectionTestException(
+                cause=f"Could not authorize with SentinelOne instance at: {url}.",
+                assistance="User authentication failed. Check your input for connection and try again.",
+                data=response.json(),
+            )
+        elif response.status_code == 400:
+            raise PluginException(
+                cause=f"Could not authorize with SentinelOne instance at: {url}.",
+                assistance="Invalid user input received. Check the response to get error information.",
+                data=response.json(),
+            )
 
-        return self.token
+    def _prepare_auth_url_based_on_version(self, version: str) -> str:
+        url = f"{self.url}web/api/v{version}/users/login"
+        if self.authentication_type == BASIC_AUTH:
+            return url
+        elif self.authentication_type == API_TOKEN_AUTH:
+            return f"{url}/by-api-token"
+
+    def _prepare_body_for_auth_request(self):
+        if self.authentication_type == BASIC_AUTH:
+            if self.username and self.password:
+                return {USERNAME_FIELD: self.username, PASSWORD_FIELD: self.password}
+            else:
+                raise PluginException(
+                    cause="Inputs related to basic authentication are invalid.",
+                    assistance="Check username and password inputs and try again. "
+                    "If the problem persists contact with development team.",
+                )
+        elif self.authentication_type == API_TOKEN_AUTH:
+            if self.api_key:
+                return {DATA_FIELD: {API_TOKEN_FIELD: self.api_key}}
+            else:
+                raise PluginException(
+                    cause="Inputs related to API key authentication is invalid.",
+                    assistance="Check API key input and try again. "
+                    "If the problem persists contact with development team.",
+                )
 
     def make_token_header(self):
         self.header = {
@@ -138,7 +175,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return self._call_api("POST", f"agents/actions/{action}", {"filter": agents_filter})
 
     def download_file(self, agent_filter: dict, password: str):
-        self.get_auth_token(self.url, self.username, self.password)
+        self.get_auth_token()
         agent_filter["activityTypes"] = 86
         agent_filter["sortBy"] = "createdAt"
         agent_filter["sortOrder"] = "desc"
@@ -147,7 +184,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             self.logger.info("Waiting 5 seconds for successful threat file upload...")
             time.sleep(5)
             activities = self.activities_list(agent_filter)
-        self.get_auth_token(self.url, self.username, self.password)
+        self.get_auth_token()
         response = self._call_api("GET", activities["data"][0]["data"]["filePath"][1:], full_response=True)
         try:
             file_name = activities["data"][-1]["data"]["fileDisplayName"]
@@ -167,7 +204,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             )
 
     def threats_fetch_file(self, password: str, agents_filter: dict) -> int:
-        self.get_auth_token(self.url, self.username, self.password)
+        self.get_auth_token()
         return self._call_api("POST", "threats/fetch-file", {"data": {"password": password}, "filter": agents_filter})
 
     def agents_support_action(self, action: str, agents_filter: str, module: str):
@@ -510,4 +547,4 @@ class Connection(insightconnect_plugin_runtime.Connection):
             raise PluginException(cause="API call failed: " + response.text)
 
     def test(self):
-        self.get_auth_token(self.url, self.username, self.password)
+        self.get_auth_token()

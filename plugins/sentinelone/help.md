@@ -30,14 +30,18 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Username and password|None|{"username": "user@example.com", "password": "mypassword"}|
-|url|string|None|True|SentinelOne Console URL|None|https://example.sentinelone.com|
+|api_key|credential_secret_key|None|False|Credential secret API key. Provide if you choose API Token Auth type|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|authentication_type|string|Basic Auth|True|Type of authentication|['Basic Auth', 'API Token Auth']|Basic Auth|
+|basic_auth_credentials|credential_username_password|None|False|Username and password. Provide if you choose Basic Auth type|None|{"username": "https://example.com", "password": "mypassword"}|
+|url|string|None|True|SentinelOne Console URL|None|https://example.com|
 
 Example input:
 
 ```
 {
-  "credentials": {
+  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "authentication_type": "Basic Auth",
+  "basic_auth_credentials": {
     "username": "user@example.com",
     "password": "mypassword"
   },
@@ -567,8 +571,8 @@ This action is used to start a Deep Visibility Query and get the queryId. You ca
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |account_ids|[]string|None|False|List of account IDs to filter by|None|["225494730938491234", "225494730938491235"]|
-|from_date|string|None|True|From date|None|2021-03-01 04:49:26.257525|
-|to_date|string|None|True|Events created before or at this timestamp|None|2021-03-20 04:49:26.257525|
+|from_date|string|None|True|From date|None|2021-03-01 04:49:26.257525+00:00|
+|to_date|string|None|True|Events created before or at this timestamp|None|2021-03-20 04:49:26.257525+00:00|
 |group_ids|[]string|None|False|List of group IDs to filter by|None|["225494730938491234", "225494730938491235"]|
 |is_verbose|boolean|None|False|Show all fields or just priority fields|None|True|
 |limit|integer|None|False|Limit number of returned items (1-20000)|None|10|
@@ -907,7 +911,8 @@ Example input:
     "ids": [
       "1000000000000000000"
     ]
-  }
+  },
+  "module": "monitor"
 }
 ```
 
@@ -1050,8 +1055,6 @@ Example input:
 
 ```
 {
-  "blacklist_state": true,
-  "description": "Hash Blacklisted from InsightConnect",
   "hash": "3395856ce81f2b7382dee72602f798b642f14140"
 }
 ```
@@ -1992,6 +1995,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 7.0.0 - Add option to authentication with API key
 * 6.3.0 - Add new actions Update Analyst Verdict and Update Incident Status | Fix Get Agent Details and Search Agents actions to handle more response scenarios
 * 6.2.0 - New actions Create Query, Get Query Status, Cancel Running Query, Get Events, Get Events By Type
 * 6.1.0 - Add new actions Disable Agent and Enable Agent
