@@ -16,7 +16,12 @@ class TestActivitiesList(TestCase):
     def setUpClass(cls, mock_request) -> None:
         cls.action = Util.default_connector(
             ActivitiesList(),
-            {"url": "https://rapid7.com", "credentials": {"username": "params", "password": "password"}},
+            {
+                "url": "https://rapid7.com",
+                "authentication_type": "Basic Auth",
+                "basic_auth_credentials": {"username": "params", "password": "password"},
+                "api_key": {"secretKey": "test"},
+            },
         )
         Util.mock_response_params = {}
 
@@ -26,7 +31,7 @@ class TestActivitiesList(TestCase):
     @patch("requests.post", side_effect=Util.mocked_requests_get)
     @patch("requests.request", side_effect=Util.mocked_requests_get)
     def test_should_success_without_inputs(self, mock_request, mock_request_post):
-        actual = Util.default_connector(ActivitiesList()).run()
+        actual = self.action.run()
         expected = {
             "data": [
                 {

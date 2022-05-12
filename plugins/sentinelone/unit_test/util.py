@@ -25,7 +25,9 @@ class Util:
         else:
             params = {
                 Input.URL: "https://rapid7.com",
-                Input.CREDENTIALS: {"username": "username", "password": "password"},
+                Input.AUTHENTICATION_TYPE: "Basic Auth",
+                Input.BASIC_AUTH_CREDENTIALS: {"username": "username", "password": "password"},
+                Input.API_KEY: {"secretKey": "test"},
             }
         default_connection.connect(params)
         action.connection = default_connection
