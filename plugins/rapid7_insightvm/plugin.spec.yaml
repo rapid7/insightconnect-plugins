@@ -2278,6 +2278,46 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
+  tag_assets:
+    title: Tag Assets
+    description: Add a tag to multiple assets in bulk
+    input:
+      asset_ids:
+        title: Asset IDs
+        description: Asset IDs to tag
+        type: "[]integer"
+        example: 12345
+        required: true
+      tag_id:
+        title: Tag ID
+        description: ID of tag to add to assets
+        type: integer
+        example: 1234
+        required: true
+      tag_name:
+        title: Tag Name
+        description: Name of tag to add to assets
+        type: string
+        example: "Very High"
+        required: true
+      tag_type:
+        title: Tag Type
+        description: Type of tag to add to assets
+        type: string
+        example: "criticality"
+        required: true
+      tag_source:
+        title: Tag Source
+        description: Source of tag to add to assets
+        type: string
+        example: "built-in"
+        required: true
+    output:
+      links:
+        title: Links
+        description: Hypermedia links to corresponding or related resources
+        type: '[]link'
+        required: true
   tag_asset_group:
     title: Tag Asset Group
     description: Add a tag to an asset group

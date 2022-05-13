@@ -5602,6 +5602,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.10.0 - Add new action Tag Assets
 * 4.9.2 - Add expiration date conversion to ISO8601 in Create Vulnerability Exception Submission and Update Vulnerability Exception Expiration Date actions | Fix issue with incorrect expiration date format in Get Expiring Vulnerability Exceptions action | Fix issue in List Reports action where first page of reports was not included | Fix issue in List Reports action where `found` output was returned as false even though list of reports was returned | Updated plugin SDK to latest version
 * 4.9.1 - Rename the plugin with "console" as there is a new cloud based plugin for InsightVM
 * 4.9.0 - Add new `size` input to List Inactive Assets | Update List Inactive Assets to return 500 results by default | Remove the usage of Maya from the plugin

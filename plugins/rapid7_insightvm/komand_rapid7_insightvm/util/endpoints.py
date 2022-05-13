@@ -36,6 +36,17 @@ class Asset:
             return f"{console_url}/api/3/assets/{asset_id}/tags"
 
     @staticmethod
+    def tag_assets(console_url, tag_id):
+        """
+        Tag Assets
+        :param console_url: URL to the InsightVM console
+        :param asset_id: IDs of the assets with which to interact
+        :param tag_id: ID of the tag with which to interact
+        :return: pre-populated /api/2.0/tags/{id}
+        """
+        return f"{console_url}/api/2.0/tags/{tag_id}"
+
+    @staticmethod
     def asset_software(console_url, asset_id):
         """
         Gets assets by site

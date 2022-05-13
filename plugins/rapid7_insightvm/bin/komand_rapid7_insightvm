@@ -180,6 +180,8 @@ def main():
 
             self.add_action(actions.TagAssetGroup())
 
+            self.add_action(actions.TagAssets())
+
             self.add_action(actions.TagSite())
 
             self.add_action(actions.TopRemediations())
