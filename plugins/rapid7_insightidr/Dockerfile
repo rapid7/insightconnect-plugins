@@ -1,4 +1,4 @@
-FROM komand/python-3-37-slim-plugin:3
+FROM rapid7/insightconnect-python-3-38-slim-plugin:4
 # Refer to the following documentation for available SDK parent images: https://docs.rapid7.com/insightconnect/sdk-guide/#sdk-guide
 
 LABEL organization=rapid7
@@ -6,6 +6,8 @@ LABEL sdk=python
 
 # Add any custom package dependencies here
 # NOTE: Add pip packages to requirements.txt
+
+RUN apk add gcc musl-dev
 
 # End package dependencies
 

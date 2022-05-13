@@ -10,6 +10,10 @@ class Defaults:
 
 class Message:
     BAD_REQUEST_MESSAGE = "Bad request error occured."
+    SAVED_SEARCH_NOT_FOUND_CAUSE = "Resource has been not found."
+    SAVED_SEARCH_NOT_FOUND_ASSISTANCE = (
+        "Please verify that the item exists. If so, please contact support for more information."
+    )
     CONFLICTED_STATE_OF_OBJECT_MESSAGE = "Conflicted state of the object"
     RETRY_MESSAGE = "Rate limiting error occurred. Retrying in {delay:.1f} seconds ({attempts_counter}/{max_tries})"
 

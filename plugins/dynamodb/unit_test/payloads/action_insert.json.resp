@@ -1,0 +1,20 @@
+{
+   "ConsumedCapacity":{
+      "TableName":"more_code_test_table",
+      "CapacityUnits":1.0
+   },
+   "ResponseMetadata":{
+      "RequestId":"060a8d58-563b-4428-9e4b-31caf24145da",
+      "HTTPStatusCode":200,
+      "HTTPHeaders":{
+         "server":"Server",
+         "date":"Wed, 09 Mar 2022 12:51:48 GMT",
+         "content-type":"application/x-amz-json-1.0",
+         "content-length":"77",
+         "connection":"keep-alive",
+         "x-amzn-requestid":"70f76f31-3df2-4eb9-80c0-13bd4e87064a",
+         "x-amz-crc32":"1646891831"
+      },
+      "RetryAttempts":0
+   }
+}

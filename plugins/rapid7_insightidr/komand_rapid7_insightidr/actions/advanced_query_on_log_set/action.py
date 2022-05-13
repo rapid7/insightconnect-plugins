@@ -1,15 +1,15 @@
 from dateutil.parser import ParserError
-import komand
+import insightconnect_plugin_runtime
 from .schema import AdvancedQueryOnLogSetInput, AdvancedQueryOnLogSetOutput, Input, Output, Component
 
 # Custom imports below
 import time
-import json
-from komand.exceptions import PluginException
+from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightidr.util.parse_dates import parse_dates
 
 
-class AdvancedQueryOnLogSet(komand.Action):
+class AdvancedQueryOnLogSet(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="advanced_query_on_log_set",
@@ -43,15 +43,15 @@ class AdvancedQueryOnLogSet(komand.Action):
         # It will return results if it gets them. If not, we'll get a call back URL to work on
         callback_url, log_entries = self.maybe_get_log_entries(log_set_id, query, time_from, time_to)
 
-        if not log_entries:
+        if callback_url and not log_entries:
             log_entries = self.get_results_from_callback(callback_url, timeout)
 
-        log_entries = komand.helper.clean(log_entries)
+        if log_entries:
+            log_entries = ResourceHelper.get_log_entries_with_new_labels(
+                self.connection, insightconnect_plugin_runtime.helper.clean(log_entries)
+            )
 
-        for log_entry in log_entries:
-            log_entry["message"] = json.loads(log_entry.get("message", "{}"))
-
-        self.logger.info(f"Sending results to orchestrator.")
+        self.logger.info("Sending results to orchestrator.")
         return {Output.RESULTS: log_entries, Output.COUNT: len(log_entries)}
 
     def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:
@@ -155,7 +155,7 @@ class AdvancedQueryOnLogSet(komand.Action):
             return None, potential_results
         else:
             self.logger.info("Got a callback url. Polling results...")
-            return results_object.get("links")[0].get("href"), None
+            return results_object.get("links", [{}])[0].get("href"), []
 
     def get_log_set_id(self, log_name: str) -> str:
         """
@@ -179,19 +179,19 @@ class AdvancedQueryOnLogSet(komand.Action):
 
         log_sets = response.json().get("logsets")
 
-        id = ""
+        log_id = ""
 
         for log_set in log_sets:
             name = log_set.get("name")
             self.logger.info(f"Checking {log_name} against {name}")
             if name == log_name:
                 self.logger.info("Log set found.")
-                id = log_set.get("id")
+                log_id = log_set.get("id")
                 break
 
-        if id:
-            self.logger.info(f"Found log set with name {log_name} and ID: {id}")
-            return id
+        if log_id:
+            self.logger.info(f"Found log set with name {log_name} and ID: {log_id}")
+            return log_id
 
         self.logger.error(f"Could not find log set with name {log_name}")
         raise PluginException(

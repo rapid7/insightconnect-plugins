@@ -1,15 +1,15 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import QueryInput, QueryOutput, Input, Output, Component
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightidr.util.endpoints import QueryLogs
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 import json
 import time
 
 
-class Query(komand.Action):
+class Query(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="query",

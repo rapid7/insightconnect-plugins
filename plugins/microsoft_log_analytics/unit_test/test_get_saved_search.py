@@ -1,37 +1,37 @@
-import sys
 import os
+import sys
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
+import logging
 from unittest import TestCase, mock
+
 from parameterized import parameterized
 
-from icon_microsoft_log_analytics.connection.connection import Connection
 from icon_microsoft_log_analytics.actions.get_saved_search import GetSavedSearch
 from icon_microsoft_log_analytics.actions.get_saved_search.schema import Input
-import logging
-
+from icon_microsoft_log_analytics.connection.connection import Connection
 from icon_microsoft_log_analytics.util.tools import Message
 from unit_test.mock import (
+    STUB_CONNECTION,
+    STUB_RESOURCE_GROUP_NAME,
+    STUB_SAVED_SEARCH_NAME,
+    STUB_SUBSCRIPTION_ID,
+    STUB_WORKSPACE_NAME,
     mock_request_200,
     mock_request_201_invalid_json,
     mock_request_400,
     mock_request_403,
+    mock_request_404,
     mock_request_409,
     mock_request_429,
     mock_request_500,
     mock_request_503,
-    mocked_request,
-    STUB_CONNECTION,
-    STUB_RESOURCE_GROUP_NAME,
-    STUB_WORKSPACE_NAME,
-    STUB_SUBSCRIPTION_ID,
-    STUB_SAVED_SEARCH_NAME,
     mock_request_505,
+    mocked_request,
 )
-
 
 STUB_EXAMPLE_ACTION_RESPONSE = {
     "id": "subscriptions/00000000-0000-0000-0000-000000000005/resourceGroups/mms-eus/providers/Microsoft.OperationalInsights/workspaces/AtlantisDemo/savedSearches/test-new-saved-search-id-2015",
@@ -73,6 +73,7 @@ class TestGetSavedSearch(TestCase):
             (mock_request_201_invalid_json, PluginException.causes[PluginException.Preset.INVALID_JSON]),
             (mock_request_400, Message.BAD_REQUEST_MESSAGE),
             (mock_request_403, PluginException.causes[PluginException.Preset.UNAUTHORIZED]),
+            (mock_request_404, Message.SAVED_SEARCH_NOT_FOUND_CAUSE),
             (mock_request_409, Message.CONFLICTED_STATE_OF_OBJECT_MESSAGE),
             (mock_request_429, PluginException.causes[PluginException.Preset.RATE_LIMIT]),
             (mock_request_500, PluginException.causes[PluginException.Preset.SERVER_ERROR]),

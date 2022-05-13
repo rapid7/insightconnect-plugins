@@ -1,34 +1,34 @@
-import sys
 import os
+import sys
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
+import logging
 from unittest import TestCase, mock
+
 from parameterized import parameterized
 
-from icon_microsoft_log_analytics.connection.connection import Connection
 from icon_microsoft_log_analytics.actions.delete_saved_search import DeleteSavedSearch
 from icon_microsoft_log_analytics.actions.delete_saved_search.schema import Input
-import logging
-
+from icon_microsoft_log_analytics.connection.connection import Connection
 from icon_microsoft_log_analytics.util.tools import Message
 from unit_test.mock import (
+    STUB_CONNECTION,
+    STUB_RESOURCE_GROUP_NAME,
+    STUB_SAVED_SEARCH_NAME,
+    STUB_SUBSCRIPTION_ID,
+    STUB_WORKSPACE_NAME,
     mock_request_200,
     mock_request_400,
+    mock_request_404,
     mock_request_429,
     mock_request_500,
     mock_request_503,
     mock_request_505,
     mocked_request,
-    STUB_CONNECTION,
-    STUB_RESOURCE_GROUP_NAME,
-    STUB_WORKSPACE_NAME,
-    STUB_SUBSCRIPTION_ID,
-    STUB_SAVED_SEARCH_NAME,
 )
-
 
 STUB_EXAMPLE_ACTION_RESPONSE = {
     "message": "Saved search test-new-saved-search-id-2015 has been deleted",
@@ -71,6 +71,7 @@ class TestDeleteSavedSearch(TestCase):
     @parameterized.expand(
         [
             (mock_request_400, Message.BAD_REQUEST_MESSAGE),
+            (mock_request_404, Message.SAVED_SEARCH_NOT_FOUND_CAUSE),
             (mock_request_429, PluginException.causes[PluginException.Preset.RATE_LIMIT]),
             (mock_request_500, PluginException.causes[PluginException.Preset.SERVER_ERROR]),
             (mock_request_503, PluginException.causes[PluginException.Preset.RATE_LIMIT]),
