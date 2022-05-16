@@ -329,7 +329,7 @@ class AzureSentinelClient(AzureClient):
         kwargs = return_non_empty(kwargs)
         data = kwargs
         _, result = self._call_api("PUT", final_uri, headers=self.headers, payload=data)
-        return result
+        return return_non_empty(result)
 
     def delete_comment(
         self,

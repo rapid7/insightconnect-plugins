@@ -21,4 +21,4 @@ class CreateUpdateComment(insightconnect_plugin_runtime.Action):
         data_dict = self.connection.api_client.create_update_comment(
             incident_id, incident_comment_id, resource_group_name, workspace_name, subscription_id, **params
         )
-        return data_dict
+        return {Output.COMMENT: data_dict}
