@@ -17,46 +17,67 @@ class RunAnalysis(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         files = None
+        object_type = params.get(Input.OBJ_TYPE)
+        provided_file = params.get(Input.FILE)
+        provided_url = params.get(Input.OBJ_URL)
+        filename = None
+        file_content = None
 
-        if (
-            params.get(Input.OBJ_TYPE)
-            and params.get(Input.OBJ_TYPE) != "file"
-            and Input.FILE in params
-            and params.get(Input.FILE).get("content")
-        ):
+        if provided_file:
+            filename = provided_file.get("filename")
+            file_content = provided_file.get("content")
+
+        if object_type != "file" and file_content:
             raise PluginException(
-                cause="Missing file content.",
-                assistance="Complete the file input with base64 file content.",
+                cause=f"The content of the file was provided, but the object type '{object_type}' was selected.",
+                assistance="To analyze a file, change the object type to 'file'.",
             )
 
-        if params.get(Input.OBJ_TYPE) == "file" and Input.OBJ_URL in params:
-            raise PluginException(
-                cause="Invalid input.",
-                assistance='File submission from URL only possible with type "url" or "download".',
-            )
-
-        if params.get(Input.OBJ_TYPE) != "url" and Input.OBJ_EXT_BROWSER in params:
-            raise PluginException(cause="Invalid input.", assistance='Browser name only possible with type "url".')
-
-        if params.get(Input.OBJ_TYPE) not in ["download", "url"] and (
-            Input.OBJ_EXT_USERAGENT in params or Input.OPT_PRIVACY_HIDESOURCE in params
-        ):
+        if object_type == "file" and provided_url:
             raise PluginException(
                 cause="Invalid input.",
-                assistance='User agent only possible with type "download" or "url".',
+                assistance="File submission from URL only possible with type 'url' or 'download'.",
             )
 
-        if params.get(Input.OBJ_TYPE) == "file" and Input.FILE in params and params.get(Input.FILE).get("content"):
-            file = params.get(Input.FILE)
+        if object_type == "file" and (not filename or not file_content):
+            raise PluginException(
+                cause="Missing filename or content.",
+                assistance="Complete the file input with filename and base64 file content.",
+            )
+
+        if object_type in ["url", "download"] and not provided_url:
+            raise PluginException(
+                cause=f"Object type '{object_type}' was selected, but no URL was provided.",
+                assistance="Please provide a URL and try again.",
+            )
+
+        if object_type != "url" and params.get(Input.OBJ_EXT_BROWSER):
+            raise PluginException(cause="Invalid input.", assistance="Browser name only possible with type 'url'.")
+
+        if object_type not in ["download", "url"] and (
+            params.get(Input.OBJ_EXT_USERAGENT) or params.get(Input.OPT_PRIVACY_HIDESOURCE)
+        ):
+            raise PluginException(
+                cause="Invalid input.",
+                assistance="User agent only possible with type 'download' or 'url'.",
+            )
+
+        if object_type == "file" and filename and file_content:
             files = {
                 "file": (
-                    file.get("filename"),
-                    base64.decodebytes(file.get("content").encode("ascii")),
+                    filename,
+                    base64.decodebytes(file_content.encode("ascii")),
                 )
             }
 
-        if params.get(Input.FILE):
+        if filename:
             params.pop(Input.FILE)
 
-        task_result = self.connection.any_run_api.run_analysis(json_data=params, files=files)
+        new_params = params.copy()
+        for key in params.keys():
+            param = params.get(key)
+            if not param and isinstance(param, str):
+                new_params.pop(key)
+
+        task_result = self.connection.any_run_api.run_analysis(json_data=new_params, files=files)
         return {Output.UUID: task_result.get("data", {}).get("taskid", None)}
