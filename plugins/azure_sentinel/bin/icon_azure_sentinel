@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Azure Sentinel Plugin"
 Vendor = "rapid7"
-Version = "2.0.0"
+Version = "2.0.1"
 Description = "Microsoft Azure Sentinel is a cloud-native SIEM that provides intelligent security analytics for your entire enterprise, powered by AI"
 
 
