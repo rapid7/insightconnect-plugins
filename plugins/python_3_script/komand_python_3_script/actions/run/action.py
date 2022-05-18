@@ -43,7 +43,9 @@ class Run(komand.Action):
         return out
 
     @staticmethod
-    def _add_credentials_to_function(func: str, params: dict):
+    def _add_credentials_to_function(func: str, params: dict) -> str:
+        if not params.get(Input.ADD_CREDENTIALS_TO_SCRIPT):
+            return func
         credentials_definition = [
             f"\tusername='{params.get(Input.USERNAME_AND_PASSWORD).get('username')}'",
             f"\tpassword='{params.get(Input.USERNAME_AND_PASSWORD).get('password')}'",

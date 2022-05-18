@@ -4,7 +4,7 @@ products: [insightconnect]
 name: powershell
 title: PowerShell
 description: Run a PowerShell script
-version: 2.2.0
+version: 3.0.0
 supported_versions: ["PowerShell 6.1.2"]
 vendor: rapid7
 support: community
@@ -72,7 +72,7 @@ connection:
 actions:
   execute_script:
     title: Execute Script
-    description: Execute PowerShell script encoded as a base64 file on a remote host
+    description: Execute PowerShell script encoded as a base64 file on a remote host. This action allows you to you provide additional credentials such as username, password, secret_key available in script as PowerShell variables (`$username`, `$password`, `$secret_key`)
     input:
       script:
         title: Script
@@ -94,17 +94,23 @@ actions:
         type: string
         required: false
         example: windows
+      add_credentials_to_script:
+        title: Add Credentials to Script
+        description: This parameter indicates whether `Username and Password` and `Secret Key` action parameters will be added to script as powershell variables or not. Choosing `True` creates powershell variables (`$username`, `$password` and `$secret_key`) which you can use in your script in `Script` parameter. If you don't need those credentials choose `False` and provide some random values for `Username and Password` and `Secret Key` parameters
+        type: boolean
+        required: true
+        example: false
       secret_key:
         title: Secret Key
         description: Credential secret key available in script as PowerShell variable (`$secret_key`)
         type: credential_secret_key
-        required: false
+        required: true
         example: '{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}'
       username_and_password:
         title: Username and Password
         description: Username and password available in script as PowerShell variables (`$username`, `$password`)
         type: credential_username_password
-        required: false
+        required: true
         example: '{"username": "user", "password": "mypassword"}'
     output:
       stdout:
@@ -121,7 +127,7 @@ actions:
         example: #< CLIXML\r\n<Objs Version=\"1.1.0.1\" xmlns=\"http://schemas.microsoft.com/powershell/2004/04\"><Obj S=\"progress\" RefId=\"0\"><TN RefId=\"0\"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S=\"progress\" RefId=\"1\"><TNRef RefId=\"0\" /><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
   powershell_string:
     title: PowerShell String
-    description: Execute PowerShell script in the form of a string
+    description: Execute PowerShell script in the form of a string. This action allows you to you provide additional credentials such as username, password, secret_key available in script as PowerShell variables (`$username`, `$password`, `$secret_key`)
     input:
       script:
         title: Script
@@ -143,17 +149,23 @@ actions:
         type: string
         required: false
         example: windows
+      add_credentials_to_script:
+        title: Add Credentials to Script
+        description: This parameter indicates whether `Username and Password` and `Secret Key` action parameters will be added to script as powershell variables or not. Choosing `True` creates powershell variables (`$username`, `$password` and `$secret_key`) which you can use in your script in `Script` parameter. If you don't need those credentials choose `False` and provide some random values for `Username and Password` and `Secret Key` parameters
+        type: boolean
+        required: true
+        example: false
       secret_key:
         title: Secret Key
         description: Credential secret key available in script as PowerShell variable (`$secret_key`)
         type: credential_secret_key
-        required: false
+        required: true
         example: '{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}'
       username_and_password:
         title: Username and Password
         description: Username and password available in script as PowerShell variables (`$username`, `$password`)
         type: credential_username_password
-        required: false
+        required: true
         example: '{"username": "user", "password": "mypassword"}'
     output:
       stdout:
@@ -168,4 +180,3 @@ actions:
         type: string
         required: false
         example: #< CLIXML\r\n<Objs Version=\"1.1.0.1\" xmlns=\"http://schemas.microsoft.com/powershell/2004/04\"><Obj S=\"progress\" RefId=\"0\"><TN RefId=\"0\"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S=\"progress\" RefId=\"1\"><TNRef RefId=\"0\" /><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
-

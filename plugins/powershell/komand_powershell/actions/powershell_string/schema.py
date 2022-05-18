@@ -4,10 +4,11 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Execute PowerShell script in the form of a string"
+    DESCRIPTION = "Execute PowerShell script in the form of a string. This action allows you to you provide additional credentials such as username, password, secret_key available in script as PowerShell variables (`$username`, `$password`, `$secret_key`)"
 
 
 class Input:
+    ADD_CREDENTIALS_TO_SCRIPT = "add_credentials_to_script"
     ADDRESS = "address"
     HOST_NAME = "host_name"
     SCRIPT = "script"
@@ -26,6 +27,12 @@ class PowershellStringInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "add_credentials_to_script": {
+      "type": "boolean",
+      "title": "Add Credentials to Script",
+      "description": "This parameter indicates whether `Username and Password` and `Secret Key` action parameters will be added to script as powershell variables or not. Choosing `True` creates powershell variables (`$username`, `$password` and `$secret_key`) which you can use in your script in `Script` parameter. If you don't need those credentials choose `False` and provide some random values for `Username and Password` and `Secret Key` parameters",
+      "order": 4
+    },
     "address": {
       "type": "string",
       "title": "Address",
@@ -48,17 +55,20 @@ class PowershellStringInput(komand.Input):
       "$ref": "#/definitions/credential_secret_key",
       "title": "Secret Key",
       "description": "Credential secret key available in script as PowerShell variable (`$secret_key`)",
-      "order": 4
+      "order": 5
     },
     "username_and_password": {
       "$ref": "#/definitions/credential_username_password",
       "title": "Username and Password",
       "description": "Username and password available in script as PowerShell variables (`$username`, `$password`)",
-      "order": 5
+      "order": 6
     }
   },
   "required": [
-    "script"
+    "add_credentials_to_script",
+    "script",
+    "secret_key",
+    "username_and_password"
   ],
   "definitions": {
     "credential_secret_key": {

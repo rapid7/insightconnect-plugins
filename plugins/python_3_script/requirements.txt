@@ -7,3 +7,4 @@ lxml==4.2.2
 datetime==4.2
 pyyaml==3.12
 beautifulsoup4==4.6.0
+parameterized==0.8.1

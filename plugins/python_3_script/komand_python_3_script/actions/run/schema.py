@@ -4,10 +4,11 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Run Python function"
+    DESCRIPTION = "Run Python function. This action allows you to you provide additional credentials such as username, password, secret_key available in script as Python variables (`username`, `password`, 'secret_key')"
 
 
 class Input:
+    ADD_CREDENTIALS_TO_SCRIPT = "add_credentials_to_script"
     FUNCTION = "function"
     INPUT = "input"
     SECRET_KEY = "secret_key"
@@ -25,6 +26,12 @@ class RunInput(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "add_credentials_to_script": {
+      "type": "boolean",
+      "title": "Add Credentials to Script",
+      "description": "This parameter indicates whether `Username and Password` and `Secret Key` action parameters will be added to script as python variables or not. Choosing `True` creates python variables (`username`, `password` and 'secret_key`) which you can use in your script in `Function` parameter. If you don't need those credentials choose `False` and provide some random values for `Username and Password` and `Secret Key` parameters",
+      "order": 3
+    },
     "function": {
       "type": "string",
       "title": "Function",
@@ -44,16 +51,17 @@ class RunInput(komand.Input):
       "$ref": "#/definitions/credential_secret_key",
       "title": "Secret Key",
       "description": "Credential secret key available in script as python variable (`secret_key`)",
-      "order": 3
+      "order": 4
     },
     "username_and_password": {
       "$ref": "#/definitions/credential_username_password",
       "title": "Username and Password",
       "description": "Username and password available in script as python variables (`username`, `password`)",
-      "order": 4
+      "order": 5
     }
   },
   "required": [
+    "add_credentials_to_script",
     "function"
   ],
   "definitions": {

@@ -33,6 +33,8 @@ class Util:
     @staticmethod
     def mock_exec_python_function(*args, **kwargs):
         function = kwargs.get("params", dict()).get(Input.FUNCTION, "").split("\n")
-        if "return {" in function[-1]:
+        if "return {" in function[-1] and kwargs.get("params", {}).get("add_credentials_to_script"):
             return Util.read_file_to_dict(f"payloads/run.json.resp")
+        if "return {" in function[-1]:
+            return Util.read_file_to_dict(f"payloads/run_no_credentials.json.resp")
         return None

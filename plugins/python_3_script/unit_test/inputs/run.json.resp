@@ -3,6 +3,7 @@
     "password": "mypassword",
     "username": "user"
   },
+  "add_credentials_to_script": true,
   "function": "def run(params={}):\n\treturn {'some_output': params.get('some_input'), 'user_name': username, 'password': password, 'secret_key': secret_key}",
   "input": {
     "some_input": "example_param"

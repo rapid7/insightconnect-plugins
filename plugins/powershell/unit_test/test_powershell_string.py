@@ -16,6 +16,7 @@ class TestPowershellString(TestCase):
     def setUpClass(cls) -> None:
         cls.params = {
             "address": "10.0.1.11",
+            "add_credentials_to_script": True,
             "username_and_password": {"password": "example_password", "username": "example_user"},
             "host_name": "windows",
             "script": "Get-Date",

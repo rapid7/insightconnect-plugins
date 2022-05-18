@@ -70,6 +70,7 @@ This returns a string with key `hello` on the output object accessible at `{{Ste
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|----------------------------------------------------------------------------------------------|
+|add_credentials_to_script|boolean|None|True|This parameter indicates whether `Username and Password` and `Secret Key` action parameters will be added to script as python variables or not. Choosing `True` creates python variables (`username`, `password` and 'secret_key`) which you can use in your script in `Function` parameter. If you don't need those credentials choose `False` and provide some random values for `Username and Password` and `Secret Key` parameters|None|False|
 |function|python|def run(params={}):\n    return {}|True|Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output|None|def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username, password)\n\treturn {}|
 |input|object|None|False|Input object to be passed as `params={}` to the `run` function|None|{"some_input": "example input"}|
 |secret_key|credential_secret_key|None|False|Credential secret key available in script as python variable (`secret_key`)|None|9de5069c5afe602b2ea0a04b66beb2c0|
@@ -83,6 +84,7 @@ Example input:
   "input": {
     "some_input": "example input"
   },
+  "add_credentials_to_script": true
   "secret_key": {
     "secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"
   },
