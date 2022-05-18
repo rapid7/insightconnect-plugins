@@ -4,6 +4,7 @@ import subprocess  # noqa: B404
 
 import komand
 from komand.exceptions import PluginException
+from komand_powershell.actions.powershell_string.schema import Input
 
 DECODING_TYPE = "utf-8"
 
@@ -273,10 +274,17 @@ def run_powershell_session(action: komand.Action, powershell_script: str, powers
     return error_value, output
 
 
-def add_credentials_to_script(powershell_script: str, params: dict) -> dict:
-    powershell_credentials = (
-        f"$username = '{params.get('username_and_password', {}).get('username')}'\n"
-        f"$password = '{params.get('username_and_password', {}).get('password')}' | ConvertTo-SecureString -asPlainText -Force\n"
-        f"$secret_key = '{params.get('secret_key', {}).get('secretKey')}'\n"
-    )
-    return powershell_credentials + powershell_script
+def add_credentials_to_script(powershell_script: str, credentials: dict) -> str:
+    credentials_definition = ""
+    username = credentials.get("username")
+    password = credentials.get("password")
+    secret_key = credentials.get("secret_key")
+
+    if username:
+        credentials_definition += f"$username = '{username}'\n"
+    if password:
+        credentials_definition += f"$password = '{password}' | ConvertTo-SecureString -asPlainText -Force\n"
+    if secret_key:
+        credentials_definition += f"$secret_key = '{secret_key}'\n"
+
+    return credentials_definition + powershell_script

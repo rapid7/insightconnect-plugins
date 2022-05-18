@@ -5,6 +5,8 @@ import json
 
 class Input:
     MODULES = "modules"
+    SCRIPT_SECRET_KEY = "script_secret_key"
+    SCRIPT_USERNAME_AND_PASSWORD = "script_username_and_password"
     TIMEOUT = "timeout"
     
 
@@ -23,6 +25,18 @@ class ConnectionSchema(komand.Input):
       },
       "order": 1
     },
+    "script_secret_key": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "Script Secret Key",
+      "description": "Credential secret key available in script as python variable (`secret_key`)",
+      "order": 3
+    },
+    "script_username_and_password": {
+      "$ref": "#/definitions/credential_username_password",
+      "title": "Script Username and Password",
+      "description": "Username and password available in script as python variables (`username`, `password`)",
+      "order": 4
+    },
     "timeout": {
       "type": "integer",
       "title": "Timeout",
@@ -33,7 +47,53 @@ class ConnectionSchema(komand.Input):
   },
   "required": [
     "timeout"
-  ]
+  ],
+  "definitions": {
+    "credential_secret_key": {
+      "id": "credential_secret_key",
+      "type": "object",
+      "title": "Credential: Secret Key",
+      "description": "A shared secret key",
+      "properties": {
+        "secretKey": {
+          "type": "string",
+          "title": "Secret Key",
+          "displayType": "password",
+          "description": "The shared secret key",
+          "format": "password"
+        }
+      },
+      "required": [
+        "secretKey"
+      ]
+    },
+    "credential_username_password": {
+      "id": "credential_username_password",
+      "type": "object",
+      "title": "Credential: Username and Password",
+      "description": "A username and password combination",
+      "properties": {
+        "password": {
+          "type": "string",
+          "title": "Password",
+          "displayType": "password",
+          "description": "The password",
+          "format": "password",
+          "order": 2
+        },
+        "username": {
+          "type": "string",
+          "title": "Username",
+          "description": "The username to log in with",
+          "order": 1
+        }
+      },
+      "required": [
+        "username",
+        "password"
+      ]
+    }
+  }
 }
     """)
 

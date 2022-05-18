@@ -38,6 +38,18 @@ connection:
     type: integer
     default: 60
     example: 120
+  script_secret_key:
+    title: Script Secret Key
+    description: Credential secret key available in script as python variable (`secret_key`)
+    type: credential_secret_key
+    required: false
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
+  script_username_and_password:
+    title: Script Username and Password
+    description: Username and password available in script as python variables (`username`, `password`)
+    type: credential_username_password
+    required: false
+    example: '{"username": "user", "password": "mypassword"}'
 
 actions:
   run:
@@ -45,8 +57,7 @@ actions:
     description: Run Python function
     input:
       function:
-        description: Function definition. Must be named `run`. Accepts the `input`
-          object as params. Returns the dict as output
+        description: Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` variables if defined in connection
         type: python
         default: def run(params={}):\n    return {}
         required: true
@@ -56,18 +67,6 @@ actions:
         type: object
         required: false
         example: '{"some_input": "example input"}'
-      secret_key:
-        title: Secret Key
-        description: Credential secret key available in script as python variable (`secret_key`)
-        type: credential_secret_key
-        required: false
-        example: 9de5069c5afe602b2ea0a04b66beb2c0
-      username_and_password:
-        title: Username and Password
-        description: Username and password available in script as python variables (`username`, `password`)
-        type: credential_username_password
-        required: false
-        example: '{"username": "user", "password": "mypassword"}'
     output:
       result1:
         description: Sample output result1 (delete or edit)
