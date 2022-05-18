@@ -76,7 +76,7 @@ class TestRunAnalysis(TestCase):
         self.assertEqual(actual, expected)
 
     @parameterized.expand(Util.load_parameters("run_analysis_bad").get("parameters"))
-    def test_run_analysis(
+    def test_run_analysis_bad(
         self,
         mock_request,
         name,
