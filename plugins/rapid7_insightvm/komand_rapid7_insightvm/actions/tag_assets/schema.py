@@ -16,7 +16,7 @@ class Input:
     
 
 class Output:
-    LINKS = "links"
+    SUCCESS = "success"
     
 
 class TagAssetsInput(insightconnect_plugin_runtime.Input):
@@ -79,39 +79,16 @@ class TagAssetsOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "links": {
-      "type": "array",
-      "title": "Links",
-      "description": "Hypermedia links to corresponding or related resources",
-      "items": {
-        "$ref": "#/definitions/link"
-      },
+    "success": {
+      "type": "boolean",
+      "title": "Success",
+      "description": "Was the operation successful",
       "order": 1
     }
   },
   "required": [
-    "links"
-  ],
-  "definitions": {
-    "link": {
-      "type": "object",
-      "title": "link",
-      "properties": {
-        "href": {
-          "type": "string",
-          "title": "URL",
-          "description": "A hypertext reference, which is either a URI (see RFC 3986) or URI template (see RFC 6570)",
-          "order": 1
-        },
-        "rel": {
-          "type": "string",
-          "title": "Rel",
-          "description": "Link relation type following RFC 5988",
-          "order": 2
-        }
-      }
-    }
-  }
+    "success"
+  ]
 }
     """)
 

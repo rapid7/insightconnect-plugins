@@ -1,3 +1,5 @@
+import logging
+
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 
@@ -42,7 +44,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         endpoint = endpoints.Administration.get_info(self.console_url)
         Result = namedtuple("Result", "status message")
         response = None
-
         try:
             response = self.session.get(url=endpoint, verify=False)
         except RequestException:

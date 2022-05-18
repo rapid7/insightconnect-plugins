@@ -4,8 +4,8 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM Console
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations, scan results and start scans
-version: 4.9.2
-supported_versions: ["Rapid7 InsightVM API v3 2022-03-30"]
+version: 4.10.0
+supported_versions: ["Rapid7 InsightVM API v3 2022-05-18"]
 vendor: rapid7
 support: rapid7
 status: []
@@ -2286,13 +2286,13 @@ actions:
         title: Asset IDs
         description: Asset IDs to tag
         type: "[]integer"
-        example: 12345
+        example: [1,2,3,4]
         required: true
       tag_id:
         title: Tag ID
         description: ID of tag to add to assets
         type: integer
-        example: 1234
+        example: 12345
         required: true
       tag_name:
         title: Tag Name
@@ -2313,10 +2313,10 @@ actions:
         example: "built-in"
         required: true
     output:
-      links:
-        title: Links
-        description: Hypermedia links to corresponding or related resources
-        type: '[]link'
+      success:
+        title: Success
+        description: Was the operation successful
+        type: boolean
         required: true
   tag_asset_group:
     title: Tag Asset Group

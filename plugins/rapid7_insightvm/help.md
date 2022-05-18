@@ -16,7 +16,7 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 
 # Supported Product Versions
 
-* Rapid7 InsightVM API v3 2022-03-30
+* Rapid7 InsightVM API v3 2022-05-18
 
 # Documentation
 
@@ -57,7 +57,10 @@ Example input:
 
 ```
 {
-  "id": 1234
+  "asset_id": 423,
+  "vulnerability_ids": [
+    "flash_player-cve-2017-11305"
+  ]
 }
 ```
 
@@ -632,7 +635,7 @@ Example input:
 
 ```
 {
-  "id": 1234
+  "asset_id": 1234
 }
 ```
 
@@ -760,7 +763,8 @@ Example input:
 
 ```
 {
-  "id": 1234
+  "asset_id": 234,
+  "get_risk_score": true
 }
 ```
 
@@ -832,7 +836,7 @@ Example input:
 
 ```
 {
-  "id": 1234
+  "asset_id": "234"
 }
 ```
 
@@ -1323,7 +1327,10 @@ Example input:
 {
   "color": "default",
   "name": "example name",
-  "searchCriteria": "{'risk-score': 'asc', 'criticality-tag': 'desc'}",
+  "searchCriteria": {
+    "risk-score": "asc",
+    "criticality-tag": "desc"
+  },
   "type": "owner"
 }
 ```
@@ -1907,6 +1914,49 @@ Example output:
 }
 ```
 
+#### Tag Assets
+
+This action is used to add a tag to an asset.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|asset_ids|[]integer|None|True|Asset IDs to tag|None|[1, 2, 3, 4]|
+|tag_id|integer|None|True|ID of tag to add to assets|None|12345|
+|tag_name|string|None|True|Name of tag to add to assets|None|Very High|
+|tag_source|string|None|True|Source of tag to add to assets|None|built-in|
+|tag_type|string|None|True|Type of tag to add to assets|None|criticality|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was the operation successful|
+
+Example input:
+
+```
+{
+  "asset_id": 12345,
+  "tag_id": 1234
+}
+```
+
+##### Output
+
+| Name  | Type  | Required |Description|
+|-------|-------|----|-----------|
+|success|boolean|True|Was the operation successful|
+
+Example output:
+
+```
+{
+  "success": true,
+}
+```
+
 #### Tag Asset Group
 
 This action is used to add a tag to an asset group.
@@ -2454,12 +2504,12 @@ Example input:
 
 ```
 {
-  "description": "example description",
-  "engine_id": 1234,
   "id": 1234,
-  "importance": "low",
-  "name": "example name",
-  "scan_template_id": 1234
+  "included_asset_groups": [
+    1234,
+    567
+  ],
+  "overwrite": true
 }
 ```
 
@@ -2581,7 +2631,7 @@ Example input:
 
 ```
 {
-  "id": 1234
+  "name": "example name"
 }
 ```
 
@@ -3155,7 +3205,7 @@ Example input:
 
 ```
 {
-  "scan_id": 123456789
+  "scan_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
 }
 ```
 
@@ -3904,13 +3954,11 @@ Example input:
 
 ```
 {
-  "address": "10.4.36.120",
-  "name": "example name",
-  "port": 40814,
-  "sites": [
+  "engines": [
     1234,
     5678
-  ]
+  ],
+  "name": "example name"
 }
 ```
 
@@ -4350,7 +4398,8 @@ Example input:
 
 ```
 {
-  "id": 1234
+  "name": "example name",
+  "type": "admin"
 }
 ```
 
@@ -5113,8 +5162,14 @@ Example input:
 {
   "access_all_asset_groups": false,
   "access_all_sites": false,
-  "role_id": "global-admin",
-  "user_id": 1234
+  "authentication_id": 567,
+  "authentication_type": "ldap",
+  "email": "user@example.com",
+  "enabled": true,
+  "id": 1234,
+  "login": "jdoe24",
+  "name": "John Doe",
+  "role_id": "global-admin"
 }
 ```
 
@@ -5152,11 +5207,16 @@ Example input:
 
 ```
 {
-  "asset_group_ids": [
-    1234,
-    5678
-  ],
-  "user_id": 1234
+  "access_all_asset_groups": false,
+  "access_all_sites": false,
+  "authentication_id": 567,
+  "authentication_type": "ldap",
+  "email": "user@example.com",
+  "enabled": true,
+  "id": 1234,
+  "login": "jdoe24",
+  "name": "John Doe",
+  "role_id": "global-admin"
 }
 ```
 
