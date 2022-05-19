@@ -36,7 +36,7 @@ class Asset:
             return f"{console_url}/api/3/assets/{asset_id}/tags"
 
     @staticmethod
-    def tag_assets(console_url, tag_id):
+    def tag_assets(console_url: str, tag_id: int) -> str:
         """
         Tag Assets
         :param console_url: URL to the InsightVM console
