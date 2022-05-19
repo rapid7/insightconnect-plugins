@@ -67,11 +67,11 @@ class TestTagAssets(TestCase):
             "conflict with the current state of the target resource."
         )
         data = "You cannot change the source of a tag."
-        with self.assertRaises(PluginException) as e:
+        with self.assertRaises(PluginException) as error:
             self.action.run(self.params)
-        self.assertEqual(cause, e.exception.cause)
-        self.assertEqual(assistance, e.exception.assistance)
-        self.assertEqual(data, e.exception.data)
+        self.assertEqual(cause, error.exception.cause)
+        self.assertEqual(assistance, error.exception.assistance)
+        self.assertEqual(data, error.exception.data)
 
     def test_tag_asset_bad_tag_type(self, mock_put):
         self.params["tag_type"] = "Criticality"
