@@ -52,11 +52,11 @@ class TestTagAssets(TestCase):
             "`exposure-analytics.insight.rapid7.com` If this issue persists contact support for assistance."
         )
         data = "An unexpected error occurred. See the nsc.log file for more information."
-        with self.assertRaises(PluginException) as e:
+        with self.assertRaises(PluginException) as error:
             self.action.run(self.params)
-        self.assertEqual(cause, e.exception.cause)
-        self.assertEqual(assistance, e.exception.assistance)
-        self.assertEqual(data, e.exception.data)
+        self.assertEqual(cause, error.exception.cause)
+        self.assertEqual(assistance, error.exception.assistance)
+        self.assertEqual(data, error.exception.data)
 
     def test_tag_asset_bad_tag_source(self, mock_put):
         self.params["tag_source"] = "VM"
