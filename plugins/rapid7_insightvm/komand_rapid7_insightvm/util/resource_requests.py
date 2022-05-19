@@ -1,5 +1,3 @@
-import logging
-
 from .shared_resources import RequestParams
 from .shared_resources import resource_request_status_code_check
 import json

@@ -493,34 +493,35 @@ class VulnerabilityException:
         return f"{console_url}/api/3/vulnerability_exceptions"
 
     @staticmethod
-    def vulnerability_exception(console_url, id):
+    def vulnerability_exception(console_url, exception_id):
         """
         Interacts with a single vulnerability exception
         :param console_url: URL to the InsightVM console
-        :parm id: optional sort order for results
+        :param exception_id: ID of vulnerability exception
         :return: pre-populated GET /api/3/vulnerability_exceptions
         """
-        return f"{console_url}/api/3/vulnerability_exceptions/{id}"
+        return f"{console_url}/api/3/vulnerability_exceptions/{exception_id}"
 
     @staticmethod
-    def vulnerability_exception_expiration(console_url, id):
+    def vulnerability_exception_expiration(console_url, exception_id):
         """
         Interacts with vulnerability exception expiration
         :param console_url: URL to the InsightVM console
-        :parm id: optional sort order for results
+        :param exception_id: ID of vulnerability exception
         :return: pre-populated GET /api/3/vulnerability_exceptions
         """
-        return f"{console_url}/api/3/vulnerability_exceptions/{id}/expires"
+        return f"{console_url}/api/3/vulnerability_exceptions/{exception_id}/expires"
 
     @staticmethod
-    def vulnerability_exception_status(console_url, id, status):
+    def vulnerability_exception_status(console_url, exception_id, status):
         """
         Update vulnerability exception status
         :param console_url: URL to the InsightVM console
-        :parm id: optional sort order for results
+        :param exception_id: ID of vulnerability exception
+        :param status: Exception status
         :return: pre-populated POST /api/3/vulnerability_exceptions
         """
-        return f"{console_url}/api/3/vulnerability_exceptions/{id}/{status}"
+        return f"{console_url}/api/3/vulnerability_exceptions/{exception_id}/{status}"
 
 
 class User:

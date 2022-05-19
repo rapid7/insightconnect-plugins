@@ -22,21 +22,21 @@ class TestTagAssets(TestCase):
             "asset_ids": [1, 2, 3],
             "tag_source": "CUSTOM",
             "tag_type": "Custom",
-            "tag_name": "Example Tag"
+            "tag_name": "Example Tag",
         }
 
     def test_tag_asset(self, mock_put):
-        expected = {
-            "success": True
-        }
+        expected = {"success": True}
         actual = self.action.run(self.params)
         self.assertEqual(actual, expected)
 
     def test_tag_asset_bad_id(self, mock_put):
         self.params["tag_id"] = 2
         cause = "Malformed JSON received along with a status code of Not Found"
-        assistance = "Verify your connection is pointing to your local console and not " \
-                     "`exposure-analytics.insight.rapid7.com` Ensure that the requested resource exists."
+        assistance = (
+            "Verify your connection is pointing to your local console and not "
+            "`exposure-analytics.insight.rapid7.com` Ensure that the requested resource exists."
+        )
         data = "The ID 2 is not available. Enter a different ID for this tag."
         with self.assertRaises(PluginException) as e:
             self.action.run(self.params)
@@ -47,8 +47,10 @@ class TestTagAssets(TestCase):
     def test_tag_asset_bad_asset_ids(self, mock_put):
         self.params["asset_ids"] = [4, 5, 6]
         cause = "Malformed JSON received along with a status code of Internal Server Error"
-        assistance = "Verify your connection is pointing to your local console and not " \
-                     "`exposure-analytics.insight.rapid7.com` If this issue persists contact support for assistance."
+        assistance = (
+            "Verify your connection is pointing to your local console and not "
+            "`exposure-analytics.insight.rapid7.com` If this issue persists contact support for assistance."
+        )
         data = "An unexpected error occurred. See the nsc.log file for more information."
         with self.assertRaises(PluginException) as e:
             self.action.run(self.params)
@@ -59,9 +61,11 @@ class TestTagAssets(TestCase):
     def test_tag_asset_bad_tag_source(self, mock_put):
         self.params["tag_source"] = "VM"
         cause = "Malformed JSON received along with a status code of Conflict"
-        assistance = "Verify your connection is pointing to your local console and not " \
-                     "`exposure-analytics.insight.rapid7.com` Ensure that the requested action does not cause a " \
-                     "conflict with the current state of the target resource."
+        assistance = (
+            "Verify your connection is pointing to your local console and not "
+            "`exposure-analytics.insight.rapid7.com` Ensure that the requested action does not cause a "
+            "conflict with the current state of the target resource."
+        )
         data = "You cannot change the source of a tag."
         with self.assertRaises(PluginException) as e:
             self.action.run(self.params)
@@ -72,8 +76,10 @@ class TestTagAssets(TestCase):
     def test_tag_asset_bad_tag_type(self, mock_put):
         self.params["tag_type"] = "Criticality"
         cause = "Malformed JSON received along with a status code of Method Not Allowed"
-        assistance = "Verify your connection is pointing to your local console and not " \
-                     "`exposure-analytics.insight.rapid7.com` Ensure that the requested action is permitted."
+        assistance = (
+            "Verify your connection is pointing to your local console and not "
+            "`exposure-analytics.insight.rapid7.com` Ensure that the requested action is permitted."
+        )
         data = "You cannot create, edit or remove the tag 4 because it is a built-in tag."
         with self.assertRaises(PluginException) as e:
             self.action.run(self.params)

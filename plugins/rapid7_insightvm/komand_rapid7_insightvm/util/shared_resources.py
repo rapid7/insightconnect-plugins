@@ -66,7 +66,7 @@ def resource_request_status_code_check(response_text: str, status_code: str) -> 
         404: "Ensure that the requested resource exists.",
         405: "Ensure that the requested action is permitted.",
         409: "Ensure that the requested action does not cause a conflict with the current state of the target "
-             "resource.",
+        "resource.",
         500: _CONTACT_SUPPORT,
         503: _CONTACT_SUPPORT,
         000: _CONTACT_SUPPORT,
