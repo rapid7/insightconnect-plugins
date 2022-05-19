@@ -40,7 +40,6 @@ class Asset:
         """
         Tag Assets
         :param console_url: URL to the InsightVM console
-        :param asset_id: IDs of the assets with which to interact
         :param tag_id: ID of the tag with which to interact
         :return: pre-populated /api/2.0/tags/{id}
         """
