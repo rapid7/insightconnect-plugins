@@ -81,8 +81,8 @@ class TestTagAssets(TestCase):
             "`exposure-analytics.insight.rapid7.com` Ensure that the requested action is permitted."
         )
         data = "You cannot create, edit or remove the tag 4 because it is a built-in tag."
-        with self.assertRaises(PluginException) as e:
+        with self.assertRaises(PluginException) as error:
             self.action.run(self.params)
-        self.assertEqual(cause, e.exception.cause)
-        self.assertEqual(assistance, e.exception.assistance)
-        self.assertEqual(data, e.exception.data)
+        self.assertEqual(cause, error.exception.cause)
+        self.assertEqual(assistance, error.exception.assistance)
+        self.assertEqual(data, error.exception.data)
