@@ -38,11 +38,11 @@ class TestTagAssets(TestCase):
             "`exposure-analytics.insight.rapid7.com` Ensure that the requested resource exists."
         )
         data = "The ID 2 is not available. Enter a different ID for this tag."
-        with self.assertRaises(PluginException) as e:
+        with self.assertRaises(PluginException) as error:
             self.action.run(self.params)
-        self.assertEqual(cause, e.exception.cause)
-        self.assertEqual(assistance, e.exception.assistance)
-        self.assertEqual(data, e.exception.data)
+        self.assertEqual(cause, error.exception.cause)
+        self.assertEqual(assistance, error.exception.assistance)
+        self.assertEqual(data, error.exception.data)
 
     def test_tag_asset_bad_asset_ids(self, mock_put):
         self.params["asset_ids"] = [4, 5, 6]
