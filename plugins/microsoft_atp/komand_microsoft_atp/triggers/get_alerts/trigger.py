@@ -21,7 +21,7 @@ class GetAlerts(insightconnect_plugin_runtime.Trigger):
 
         # Set a baseline for the time to start looking for alerts.
         initial_results = self.connection.client.get_all_alerts(
-            query_parameters="?$orderby=alertCreationTime+desc&$top=1"
+            query_parameters="?$orderby=alertCreationTime+desc&$top=1&$expand=evidence"
         )
         all_results = initial_results
 
@@ -34,7 +34,8 @@ class GetAlerts(insightconnect_plugin_runtime.Trigger):
 
         # Start looking for new results
         while True:
-            query_params = f"?$filter=alertCreationTime+gt+{most_recent_time_string}&$orderby=alertCreationTime+desc"
+            query_params = f"?$filter=alertCreationTime+gt+{most_recent_time_string}&$orderby=alertCreationTime+desc" \
+                           f"&$expand=evidence"
 
             self.logger.info("Looking for new alerts.")
             self.logger.info(f"Query params:{query_params}")

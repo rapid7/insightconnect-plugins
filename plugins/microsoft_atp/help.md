@@ -15,6 +15,10 @@ This plugin utilizes the [Microsoft ATP API](https://docs.microsoft.com/en-us/wi
 
 * Windows Defender Advanced Threat Protection application credentials
 
+# Supported Product Versions
+
+* 2022-05-20
+
 # Documentation
 
 ## Setup
@@ -903,7 +907,35 @@ Example output:
       "comments":[
 
       ],
-      "evidence":[]
+      "evidence":[
+        {
+          "entityType": "User",
+          "evidenceCreationTime": "2021-01-26T20:33:58.42Z",
+          "sha1": "ff836cfb1af40252bd2a2ea843032e99a5b262ed",
+          "sha256": "a4752c71d81afd3d5865d24ddb11a6b0c615062fcc448d24050c2172d2cbccd6",
+          "fileName": "rundll32.exe",
+          "filePath": "C:\\Windows\\SysWOW64",
+          "processId": 3276,
+          "processCommandLine": "rundll32.exe  c:\\temp\\suspicious.dll,RepeatAfterMe",
+          "processCreationTime": "2021-01-26T20:31:32.9581596Z",
+          "parentProcessId": 8420,
+          "parentProcessCreationTime": "2021-01-26T20:31:32.9004163Z",
+          "parentProcessFileName": "rundll32.exe",
+          "parentProcessFilePath": "C:\\Windows\\System32",
+          "ipAddress": "8.8.8.8",
+          "url": null,
+          "registryKey": "Test9999",
+          "registryHive": null,
+          "registryValueType": null,
+          "registryValue": null,
+          "accountName": "name",
+          "domainName": "DOMAIN",
+          "userSid": "S-1-5-21-11111607-1111760036-109187956-75141",
+          "aadUserId": "11118379-2a59-1111-ac3c-a51eb4a3c627",
+          "userPrincipalName": "temp123@microsoft.com",
+          "detectionStatus": "Detected"
+        }
+      ]
    }
 }
 ```
@@ -1191,6 +1223,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.8.0 - Add Evidence output for Get Alerts trigger and Get Alert Matching Key trigger
 * 4.7.1 - Fix bug in Get Alerts trigger which caused trigger to crash
 * 4.7.0 - Add new action Collect Investigation Package
 * 4.6.0 - Add new actions Get Installed Software, Get Related Machines and Manage Tags
