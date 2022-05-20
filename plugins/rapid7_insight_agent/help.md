@@ -204,7 +204,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.4 - Add new supported regions for API
+* 1.0.4 - Add new supported regions for API | Create unit tests for actions Check Agent Status, Quarantine, Get Agent Details  
 * 1.0.3 - Documentation update
 * 1.0.2 - Fix for a case-sensitive agent hostname
 * 1.0.1 - Documentation update
