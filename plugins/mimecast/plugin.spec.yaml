@@ -501,7 +501,7 @@ types:
     successful:
       title: Successful
       type: integer
-      description: The number successfully remediated messages
+      description: The number of successfully remediated messages
       required: false
     type:
       title: Type
@@ -660,7 +660,7 @@ types:
       required: false
     messageId:
       title: Message ID
-      description: Message id used to create remediation incident
+      description: Message ID used to create remediation incident
       type: string
       required: false
     restoreCode:
@@ -731,12 +731,12 @@ types:
       required: false
     id:
       title: ID
-      description: The Mimecast secure id of the remediation incident
+      description: The Mimecast secure ID of the remediation incident
       type: string
       required: false
     searchCriteria:
       title: Search Criteria
-      description: Criteria used to when the remediation incident was created
+      description: Criteria used when the remediation incident was created
       type: "searchCritera"
       required: false
 connection:
@@ -1275,7 +1275,7 @@ actions:
     input:
       audit_events_data:
         title: Audit Events Data
-        description: Data for requst
+        description: Data for request
         type: "audit_events_data"
         required: true
         example: '{"categories": ["test", "malware"], "endDateTime": "2022-02-02T08:15:30-05:00", "query": "example query", "startDateTime": "2022-02-02T08:15:30-05:00"}'

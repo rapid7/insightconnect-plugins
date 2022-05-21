@@ -16,12 +16,12 @@ class TestDeleteGroupMember(TestCase):
     def setUpClass(cls) -> None:
         cls.action = Util.default_connector(DeleteGroupMember())
 
-    def test_decode_url(self, mocked_request):
+    def test_delete_group_member(self, mocked_request):
         actual = self.action.run(Util.load_json("inputs/delete_group_member.json.exp"))
         expect = Util.load_json("expected/delete_group_member.json.exp")
         self.assertEqual(expect, actual)
 
-    def test_bad_create_managed_url(self, mocked_request):
+    def test_bad_delete_group_member(self, mocked_request):
         with self.assertRaises(PluginException) as exception:
             self.action.run(Util.load_json("inputs/delete_group_member_bad.json.exp"))
         self.assertEqual(exception.exception.cause, ERROR_CASES.get(FOLDER_EMAIL_NOT_FOUND_ERROR))
