@@ -26,7 +26,7 @@ class GetAuditEventsInput(insightconnect_plugin_runtime.Input):
     "audit_events_data": {
       "$ref": "#/definitions/audit_events_data",
       "title": "Audit Events Data",
-      "description": "Data for requst",
+      "description": "Data for request",
       "order": 1
     },
     "audit_events_pagination": {

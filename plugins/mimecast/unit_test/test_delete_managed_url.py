@@ -21,7 +21,7 @@ class TestDeleteManagedURl(TestCase):
         expect = Util.load_json("expected/delete_managed_url.json.exp")
         self.assertEqual(expect, actual)
 
-    def test_bad_create_managed_url(self, mocked_request):
+    def test_bad_delete_managed_url(self, mocked_request):
         with self.assertRaises(PluginException) as exception:
             self.action.run(Util.load_json("inputs/delete_managed_url_bad.json.exp"))
         self.assertEqual(exception.exception.cause, ERROR_CASES.get(MANAGED_URL_NOT_FOUND_ERROR))
