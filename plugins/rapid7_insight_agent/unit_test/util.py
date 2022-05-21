@@ -39,7 +39,9 @@ class Util:
             def raise_for_status(self):
                 pass
 
-        if kwargs.get("json").get("variables").get("agentID") == "goodID":
+        if kwargs.get("json").get("query") == "{ organizations(first: 1) { edges { node { id name } } } }":
+            return MockResponse("org_key.json.resp")
+        elif kwargs.get("json").get("variables").get("agentID") == "goodID":
             return MockResponse("check_agent_status.resp")
         elif kwargs.get("json").get("variables").get("agentID") == "badID":
             return MockResponse("check_agent_status_bad.resp")
@@ -50,17 +52,3 @@ class Util:
         elif kwargs.get("json").get("variables").get("orgId") == "9de5069c5afe602b2ea0a04b66beb2c0":
             return MockResponse("get_agent_details.resp")
         return "Not implemented"
-
-    @staticmethod
-    def mocked_request_for_api_key(*args, **kwargs):
-        class MockResponse:
-            def __init__(self, filename: str = None):
-                self.filename = filename
-
-            def json(self):
-                return Util.load_json(f"responses/{self.filename}")
-
-            def raise_for_status(self):
-                pass
-
-        return MockResponse("org_key.json.resp")

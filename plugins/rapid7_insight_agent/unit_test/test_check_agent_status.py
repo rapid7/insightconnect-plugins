@@ -13,19 +13,16 @@ from unit_test.util import Util
 
 @patch("requests.sessions.Session.post", side_effect=Util.mocked_request)
 class TestCheckAgentStatus(TestCase):
-    @classmethod
-    @patch("requests.sessions.Session.post", side_effect=Util.mocked_request_for_api_key)
-    def setUpClass(cls, mock_request) -> None:
-        cls.action = Util.default_connector(CheckAgentStatus())
-
     def test_check_agent_status(self, mock_request):
-        actual = self.action.run({Input.AGENT_ID: "goodID"})
+        action = Util.default_connector(CheckAgentStatus())
+        actual = action.run({Input.AGENT_ID: "goodID"})
         expect = Util.load_json("expected/check_agent_status.exp")
         self.assertEqual(expect, actual)
 
     def test_bad_agent_id(self, mock_request):
         with self.assertRaises(PluginException) as exception:
-            self.action.run({Input.AGENT_ID: "badID"})
+            action = Util.default_connector(CheckAgentStatus())
+            action.run({Input.AGENT_ID: "badID"})
         self.assertEqual(exception.exception.cause, "Received an unexpected response from the server.")
         self.assertEqual(
             exception.exception.assistance,
