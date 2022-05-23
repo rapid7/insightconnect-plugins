@@ -35,8 +35,10 @@ class GetAlertMatchingKey(insightconnect_plugin_runtime.Trigger):
 
         # Start looking for new results
         while True:
-            query_params = f"?$filter=alertCreationTime+gt+{most_recent_time_string}&$orderby=alertCreationTime+desc" \
-                           f"&$expand=evidence"
+            query_params = (
+                f"?$filter=alertCreationTime+gt+{most_recent_time_string}&$orderby=alertCreationTime+desc"
+                f"&$expand=evidence"
+            )
 
             self.logger.info("Looking for new alerts.")
             self.logger.info(f"Query params:{query_params}")
