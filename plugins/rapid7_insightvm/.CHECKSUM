@@ -1,7 +1,7 @@
 {
-	"spec": "68b68938c674ad05c92634f575eba5bc",
-	"manifest": "243de56d3b4e9e450b2495ff712710c8",
-	"setup": "55ad1e39164d70aca6523d9e4b51f1d0",
+	"spec": "896bed8a75691e7d6f4e49e349ead4a2",
+	"manifest": "b096ea79dfff01bcf792179ceac75353",
+	"setup": "38efc26d64ac89fc85ee517206350f82",
 	"schemas": [
 		{
 			"identifier": "add_scan_engine_pool_engine/schema.py",
@@ -286,6 +286,10 @@
 		{
 			"identifier": "tag_asset_group/schema.py",
 			"hash": "6c949d7c35213e909a2c4ddf1f0e89ef"
+		},
+		{
+			"identifier": "tag_assets/schema.py",
+			"hash": "1616cccc6bb8a40a351b1402f6ce35c6"
 		},
 		{
 			"identifier": "tag_site/schema.py",
