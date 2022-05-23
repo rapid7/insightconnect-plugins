@@ -1,0 +1,6 @@
+{
+  "Error": {
+    "Code": "InvalidResourceName",
+    "Message": "The specifed resource name contains invalid characters.\n        RequestId:f802c229-b01e-0020-3d3b-8530a0000000\n        Time:2022-06-21T06:49:40.7813726Z"
+  }
+}

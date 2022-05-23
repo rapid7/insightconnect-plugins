@@ -1,0 +1,12 @@
+{
+  "container_name": "valid-container-name",
+  "include": [
+    "tags",
+    "metadata",
+    "copy",
+    "deleted"
+  ],
+  "max_results": 150,
+  "prefix": "my",
+  "timeout": 50
+}

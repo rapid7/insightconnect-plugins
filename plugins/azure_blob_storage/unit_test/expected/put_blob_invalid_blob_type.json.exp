@@ -1,0 +1,6 @@
+{
+  "Error": {
+    "Code": "InvalidBlobType",
+    "Message": "The blob type is invalid for this operation.\n        RequestId:49c9dd9f-601e-0041-0260-8513e3000000\n        Time:2022-06-21T11:14:04.3691007Z"
+  }
+}

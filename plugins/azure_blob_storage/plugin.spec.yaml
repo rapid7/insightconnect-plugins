@@ -1,0 +1,580 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: azure_blob_storage
+title: Azure Blob Storage
+description: Azure Blob storage is Microsoft's massively scalable and secure object storage for cloud-native workloads, archives, data lakes, high-performance computing, and machine learning. Azure Blob Storage helps you create data lakes for your analytics needs, and provides storage to build powerful cloud-native and mobile apps. Optimize costs with tiered storage for your long-term data, and flexibly scale up for high-performance computing and machine learning workloads.
+version: 1.0.0
+supported_versions: ["Azure Storage 2021-08-06"]
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/azure_blob_storage
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.microsoft.com/
+tags:
+- Azure Blob Storage
+- Azure
+- Storage
+hub_tags:
+  use_cases: []
+  keywords: [microsoft, azure, azure_blob_storage, storage]
+  features: []
+types:
+  container_properties:
+    last_modified:
+      title: Last Modified
+      description: Last modified date
+      type: string
+      required: false
+      example: Mon, 23 May 2022 16:50:24 GMT
+    etag:
+      title: Etag
+      description: Container's etag
+      type: string
+      required: false
+      example: 0x8DG3CDC551G9BCE
+    public_access:
+      title: Public Access
+      description: Public Access
+      type: string
+      required: false
+      example: container
+  container:
+    name:
+      title: Name
+      description: Container name
+      type: string
+      required: false
+      example: my_container
+    deleted:
+      title: Deleted
+      description: Whether the container is soft deleted or not
+      type: string
+      required: false
+      example: true
+    properties:
+      title: Properties
+      description: Container properties
+      type: container_properties
+      required: false
+    metadata:
+      title: Metadata
+      description: Container metadata
+      type: object
+      required: false
+      example: '{"key":"value"}'
+  blob_properties:
+    creation_time:
+      title: Creation Time
+      description: Creation date
+      type: string
+      required: false
+      example: Mon, 23 May 2022 16:50:24 GMT
+    remaining_retention_days:
+      title: Remaining Retention Days
+      description: Remaining retention days
+      type: string
+      required: false
+      example: 2
+    tag_count:
+      title: Tag Count
+      description: Tag count
+      type: string
+      required: false
+      example: 1
+    server_encrypted:
+      title: Server Encrypted
+      description: Server encrypted
+      type: string
+      required: false
+      example: true
+    last_modified:
+      title: Last Modified
+      description: Last modified date
+      type: string
+      required: false
+      example: Mon, 23 May 2022 16:50:24 GMT
+    content_type:
+      title: Content Type
+      description: Blob content type
+      type: string
+      required: false
+      example: application/octet-stream
+    blob_type:
+      title: Blob Type
+      description: Blob type
+      type: string
+      example: PageBlob
+    access_tier:
+      title: Access Tier
+      description: Access tier
+      type: string
+      required: false
+      example: Hot
+    etag:
+      title: Etag
+      description: Blob's etag
+      type: string
+      required: false
+      example: 0x8DA3CDC950G9BMB
+  blob:
+    name:
+      title: Name
+      description: Blob name
+      type: string
+      required: false
+      example: my_blob
+    version_id:
+      title: Version ID
+      description: Blob version id
+      type: string
+      required: false
+      example: 2022-04-24T14:23:47.9548405Z
+    snapshot_id:
+      title: Snapshot ID
+      description: Blob snapshot id
+      type: string
+      required: false
+      example: 2022-04-21T14:23:47.9546324Z
+    is_current_version:
+      title: Is Current Version
+      description: Is current version
+      type: string
+      required: false
+      example: true
+    deleted:
+      title: Deleted
+      description: Whether the blob is soft deleted or not
+      type: string
+      required: false
+      example: true
+    properties:
+      title: Properties
+      description: Blob properties
+      type: blob_properties
+      required: false
+    metadata:
+      title: Metadata
+      description: Blob metadata
+      type: object
+      required: false
+      example: '{"X":"yz"}'
+    tags:
+      title: Tags
+      description: Blob tags
+      type: "[]object"
+      required: false
+      example: '[{"X":"yz"},{"a":"b"}]'
+
+connection:
+  client_id:
+    title: Client ID
+    description: The application ID that the application registration portal assigned to your app
+    type: string
+    required: true
+    example: c163eff0-d1a1-4618-ee2a-453534f43cee
+  client_secret:
+    title: Client Secret
+    description: The application secret key that the application registration portal assigned to your app
+    type: credential_secret_key
+    required: true
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
+  tenant_id:
+    title: Tenant ID
+    description: The ID of the directory that identifies the tenant
+    type: string
+    required: true
+    example: 5ceea899-ae8c-4ff1-fffe-353646eeeff0
+  account:
+    title: Account
+    description: Storage account name. Found in Microsoft Azure Portal > Storage Accounts
+    type: string
+    required: true
+    example: myaccount
+actions:
+  create_container:
+    title: Create container
+    description: The Create Container action creates a new container under the specified account. If a container with the same name already exists, the operation fails
+    input:
+      container_name:
+        title: Container Name
+        description: Name of the new container. Container name should contain only lowercase letters, numbers and dash
+        type: string
+        required: true
+        example: my-new-container-432
+      additional_headers:
+        title: Additional Headers
+        description: Additional headers to pass to the API request
+        type: object
+        required: false
+        example: '{"x-ms-meta-Name":"StorageSample","x-ms-blob-public-access":"blob"}'
+        default: '{}'
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful or not
+        type: boolean
+        required: true
+        example: true
+      message:
+        title: Message
+        description: Deletion Message
+        type: string
+        required: false
+        example: Container creation was successfully submitted.
+  list_containers:
+    title: List Containers
+    description: The List Containers action returns a list of the containers under the specified storage account. At Least one parameter in the input is required
+    input:
+      prefix:
+        title: Prefix
+        description: Filters the results to return only containers whose name begins with the specified prefix
+        type: string
+        required: false
+        example: new
+      max_results:
+        title: Max Results
+        description: Specifies the maximum number of containers to return. If the request does not specify max_results, or specifies a value greater than 100, the action will return up to 100 items
+        type: integer
+        required: false
+        example: 12
+        default: 20
+      include:
+        title: Include
+        description: Specifies one or more datasets to include in the response. Datasets available to choose are 'system', 'deleted', and 'metadata'
+        type: "[]string"
+        required: false
+        example: ["system", "deleted"]
+        default: []
+      timeout:
+        title: Timeout
+        description: Maximum time to wait for server response in seconds, between 0 and 30
+        type: integer
+        required: false
+        example: 14
+        default: 30
+      additional_headers:
+        title: Additional Headers
+        description: Additional headers to pass to the API request
+        type: object
+        required: false
+        example: '{"x-ms-client-request-id":"some_request_id"}'
+        default: '{}'
+    output:
+      prefix:
+        title: Prefix
+        description: The Prefix given as input, if present
+        type: string
+        required: false
+        example: new
+      max_results:
+        title: Max results
+        description: Max results given as input
+        type: string
+        required: false
+        example: 12
+      containers:
+        title: Containers
+        description: Containers list
+        type: "[]container"
+        required: false
+  delete_container:
+    title: Delete Container
+    description: The Delete Container action marks the specified container for deletion. The container and any blobs contained within it are later deleted during garbage collection
+    input:
+      container_name:
+        title: Container Name
+        description: Name of the container to delete
+        type: string
+        required: true
+        example: my_container
+      additional_headers:
+        title: Additional Headers
+        description: Additional headers to pass to the API request
+        type: object
+        required: false
+        example: '{"x-ms-meta-Name":"StorageSample","x-ms-blob-public-access":"blob"}'
+        default: '{}'
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful or not
+        type: boolean
+        required: true
+        example: true
+      message:
+        title: Message
+        description: Deletion result message
+        type: string
+        required: false
+        example: Container deletion was successfully submitted
+  list_blobs:
+    title: List Blobs
+    description: The List Blobs action returns a list of the blobs under the specified container
+    input:
+      container_name:
+        title: Container Name
+        description: Name of the container
+        type: string
+        required: true
+        example: example_container_name
+      prefix:
+        title: Prefix
+        description: Filters the results to return only blobs whose name begins with the specified prefix
+        type: string
+        required: false
+        example: new
+      delimiter:
+        title: Delimiter
+        description: When this parameter is provided, the action returns a 'blobs_with_delimiter_match' element in the output that acts as a placeholder for all blobs whose names begin with the same substring up to the appearance of the delimiter character. The delimiter may be a single character or a string
+        type: string
+        required: false
+        example: bob
+      max_results:
+        title: Max Results
+        description: Specifies the maximum number of blobs to return. If the request does not specify max_results, or specifies a value greater than 100, the action will return up to 100 items
+        type: integer
+        required: false
+        example: 12
+        default: 20
+      include:
+        title: Include
+        description: Specifies one or more datasets to include in the response. Available values - 'snapshots', 'metadata', 'uncommittedblobs', 'copy', 'deleted', 'tags', 'versions', 'deletedwithversions', 'immutabilitypolicy', 'legalhold', 'permissions'
+        type: "[]string"
+        required: false
+        example: ["uncommittedblob", "copy", "deleted", "tags", "versions"]
+        default: []
+      timeout:
+        title: Timeout
+        description: Maximum time to wait for server response in seconds, between 0 and 30
+        type: integer
+        required: false
+        example: 14
+        default: 30
+      additional_headers:
+        title: Additional Headers
+        description: Additional headers to pass to the API request
+        type: object
+        required: false
+        example: '{"x-ms-client-request-id":"some_request_id"}'
+        default: '{}'
+    output:
+      prefix:
+        title: Prefix
+        description: Prefix used as input parameter
+        type: string
+        required: false
+        example: new
+      delimiter:
+        title: Delimiter
+        description: The Delimiter given as input, if present
+        type: string
+        required: false
+        example: bob
+      max_results:
+        title: Max results
+        description: Max results given as input
+        type: string
+        required: false
+        example: 12
+      blobs:
+        title: Blobs
+        description: Blobs list
+        type: "[]blob"
+        required: false
+      blobs_with_delimiter_match:
+        title: Blobs With Delimiter Match
+        description: Blobs which contains 'delimiter' in name
+        type: '[]string'
+        required: false
+        example: '["first_bob","sebob"]'
+  put_blob:
+    title: Put Blob
+    description: The Put Blob action creates a new block, page, or append blob, or updates the content of an existing block blob
+    input:
+      container_name:
+        title: Container Name
+        description: Container name where the new blob will be put
+        type: string
+        required: true
+        example: example_container_name
+      blob_name:
+        title: Blob Name
+        description: Name of the new blob
+        type: string
+        required: true
+        example: my_new_blob
+      timeout:
+        title: Timeout
+        description: Maximum time to wait for server response in seconds, not larger than 10 minutes per megabyte
+        type: integer
+        required: false
+        example: 14
+        default: 30
+      blob_type:
+        title: Blob Type
+        description: Specifies the type of blob to create - block blob, page blob, or append blob
+        type: string
+        required: false
+        enum:
+          - BlockBlob
+          - PageBlob
+          - AppendBlob
+        example: BlockBlob
+        default: PageBlob
+      blob_content:
+        title: Blob Content
+        description: Content of the new blob. This field is allowed only for BlockBlob type
+        type: string
+        required: false
+        example: hello world
+      access_tier:
+        title: Access Tier
+        description: Indicates the tier to be set on blob. For page blobs on a premium storage account only. Valid values for block blob tiers are Hot/Cool/Archive. For detailed information about block blob tiering see https://docs.microsoft.com/enus/azure/storage/blobs/access -tiers-overview
+        type: string
+        required: false
+        enum:
+          - Hot
+          - Cool
+          - Archive
+        example: Hot
+        default: Cool
+      blob_content_length:
+        title: Blob Content Length
+        description: Required for page blobs. This header specifies the maximum size for the page blob, up to 8 TiB. The page blob size must be aligned to a 512-byte boundary
+        type: bytes
+        required: false
+        example: 512
+      additional_headers:
+        title: Additional Headers
+        description: Additional headers to pass to the API request
+        type: object
+        required: false
+        example: '{"x-ms-client-request-id":"some_request_id","x-ms-lease-id":"some_123_id"}'
+        default: '{}'
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful or not
+        type: boolean
+        required: true
+        example: true
+      message:
+        title: Message
+        description: Creation message
+        type: string
+        required: true
+        example: Blob was successfully created
+  get_blob:
+    title: Get Blob
+    description: The Get Blob action reads or downloads a blob from the system, including its metadata and properties. You can also use Get Blob to read a snapshot
+    input:
+      container_name:
+        title: Container Name
+        description: Name of the container
+        type: string
+        required: true
+        example: example_container_name
+      blob_name:
+        title: Blob Name
+        description: Name of the blob to retrieve
+        type: string
+        required: true
+        example: my_new_blob
+      snapshot_id:
+        title: Snapshot ID
+        description: The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to delete
+        type: string
+        required: false
+        example: 2022-05-24T15:22:30.1616830Z
+      version_id:
+        title: Version ID
+        description: The versionid parameter is an opaque DateTime value that, when present, specifies the Version of the blob to delete
+        type: string
+        required: false
+        example: 2022-05-20T15:38:24.8240240Z
+      byte_to_string:
+        title: Byte To String
+        description: Whether output data should be converte from bytes to string or not
+        type: boolean
+        required: false
+        example: true
+      additional_headers:
+        title: Additional Headers
+        description: Additional headers to pass to the API request
+        type: object
+        required: false
+        example: '{"x-ms-client-request-id":"some_request_id"}'
+        default: '{}'
+    output:
+      data:
+        title: Data
+        description: Blob byte data
+        type: bytes
+        required: true
+        example: \x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x03\xe9\x00\x00\x01\xe2\x08\x06\x00\x00\x00\x94e\x8d\x95\x00\x0
+  delete_blob:
+    title: Delete Blob
+    description: The Delete Blob action marks the specified blob or snapshot for deletion. The blob is later deleted during garbage collection. Note that in order to delete a blob, you must delete all of its snapshots. You can delete both at the same time using snapshots = include parameter
+    input:
+      container_name:
+        title: Container Name
+        description: Name of the container
+        type: string
+        required: true
+        example: example_container_name
+      blob_name:
+        title: Blob Name
+        description: Name of the blob to delete
+        type: string
+        required: true
+        example: my_old_blob
+      snapshot_id:
+        title: Snapshot ID
+        description: The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to delete
+        type: string
+        required: false
+        example: 2022-05-24T15:22:30.1616830Z
+      version_id:
+        title: Version ID
+        description: The versionid parameter is an opaque DateTime value that, when present, specifies the Version of the blob to delete
+        type: string
+        required: false
+        example: 2022-05-20T15:38:24.8240240Z
+      snapshots:
+        title: Snapshots
+        description: Required if the blob has associated snapshots. Specify one of the following two options. 'include' - delete the base blob and all of its snapshots; ‘only’ - delete only the blob's snapshots and not the blob itself. This header should be specified only for a request against the base blob resource
+        type: string
+        enum:
+          - include
+          - only
+        required: false
+        example: include
+      additional_headers:
+        title: Additional Headers
+        description: Additional headers to pass to the API request
+        type: object
+        required: false
+        example: '{"x-ms-client-request-id":"some_request_id","x-ms-lease-id":"exa12_lease_id"}'
+        default: '{}'
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful or not
+        type: boolean
+        required: true
+        example: true
+      message:
+        title: Message
+        description: Deletion message
+        type: string
+        required: true
+        example: Blob deletion was successfully submitted.
+      delete_type:
+        title: Delete Type
+        description: Blob's delete type
+        type: string
+        required: true
+        example: permanent

@@ -1,0 +1,23 @@
+{
+  "max_results": "20",
+  "prefix": "m",
+  "containers": [
+    {
+      "name": "example",
+      "properties": {
+        "last_modified": "Wed, 08 Jun 2022 12: 48: 16 GMT",
+        "public_access": "blob",
+        "etag": "\"0x8DA494D2826EA21\""
+      },
+      "metadata": {}
+    },
+    {
+      "name": "new",
+      "properties": {
+        "last_modified": "Wed, 08 Jun 2022 12: 44: 35 GMT",
+        "etag": "\"0x8DA494CA481C42D\""
+      },
+      "metadata": {}
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Error>
+    <Code>MutuallyExclusiveQueryParameters</Code>
+    <Message>Mutually exclusive query parameters may not be simultaneously present.
+        RequestId: 0768257c-701e-002f-320d-8646cc000000
+        Time: 2022-06-22T07: 53: 53.1519927Z
+    </Message>
+    <QueryParameterName>versionid</QueryParameterName>
+    <QueryParameterValue>2022-05-23T11: 06: 05.8071297Z</QueryParameterValue>
+</Error>

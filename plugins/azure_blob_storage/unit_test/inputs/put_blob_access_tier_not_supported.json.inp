@@ -1,0 +1,10 @@
+{
+  "access_tier": "Hot",
+  "blob_content_length": "512",
+  "blob_content": "hh world",
+  "blob_name": "access_tier_not_supported_blob",
+  "blob_type": "PageBlob",
+  "container_name": "valid-container-name",
+  "timeout": 42,
+  "additional_headers": {}
+}

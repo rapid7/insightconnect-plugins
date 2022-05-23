@@ -1,0 +1,7 @@
+{
+  "container_name": "valid-container-name",
+  "delimiter": "plugin",
+  "max_results": 150,
+  "prefix": "my",
+  "timeout": 50
+}

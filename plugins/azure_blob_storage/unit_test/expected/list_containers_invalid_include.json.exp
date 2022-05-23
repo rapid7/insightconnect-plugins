@@ -1,0 +1,9 @@
+{
+  "Error": {
+    "Code": "InvalidQueryParameterValue",
+    "Message": "Value for one of the query parameters specified in the request URI is invalid.\n        RequestId:ea430306-401e-0024-5baf-84bda7000000\n        Time:2022-06-20T14:10:06.8759164Z",
+    "QueryParameterName": "include",
+    "QueryParameterValue": "sysxastem",
+    "Reason": "This query parameter value is invalid."
+  }
+}
