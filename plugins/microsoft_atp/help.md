@@ -932,7 +932,7 @@ Example output:
           "domainName": "DOMAIN",
           "userSid": "S-1-5-21-11111607-1111760036-109187956-75141",
           "aadUserId": "11118379-2a59-1111-ac3c-a51eb4a3c627",
-          "userPrincipalName": "temp123@microsoft.com",
+          "userPrincipalName": "user@example.com",
           "detectionStatus": "Detected"
         }
       ]
