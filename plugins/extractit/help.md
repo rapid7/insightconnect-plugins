@@ -637,6 +637,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.0.2 - Fix issue where domains and URLs were not parsed correctly if top level domain contained uppercase | Fix issue where parts of URL were incorrectly recognized as domains if URL contained port
 * 3.0.1 - Fix issue where encoded URLs would be incorrectly extracted after the top level domain for Extract URL action
 * 3.0.0 - Update to support date format for Date Extractor and Extract All actions
 * 2.3.1 - Support special character ! for URL Extractor action
