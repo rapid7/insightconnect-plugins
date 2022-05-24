@@ -36,7 +36,7 @@ class fakeSender:
 class TestGetAlertMatchingKey(TestCase):
     @timeout_pass
     @timeout_decorator.timeout(30)
-    @patch("komand.Trigger.send", side_effect=fakeSender.send)
+    @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=fakeSender.send)
     def test_integration_get_alert_matching_key(self, mockSend):
         """
         TODO: Manually validate results
