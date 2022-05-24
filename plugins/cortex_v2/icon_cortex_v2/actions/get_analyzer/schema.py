@@ -24,7 +24,7 @@ class GetAnalyzerInput(insightconnect_plugin_runtime.Input):
     "analyzer_id": {
       "type": "string",
       "title": "Analyzer ID",
-      "description": "Analyzer ID e.g. VirusTotal_Scan_3_0. If empty, all enabled analyzers will be returned",
+      "description": "Analyzer ID. If empty, all enabled analyzers will be returned",
       "order": 1
     }
   }

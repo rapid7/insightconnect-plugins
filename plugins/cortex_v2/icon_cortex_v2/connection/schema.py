@@ -27,13 +27,13 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "host": {
       "type": "string",
       "title": "Host",
-      "description": "Cortex host e.g. cortex.company.com or 10.3.4.50",
+      "description": "Cortex host e.g. cortex.example.com or 10.3.4.50",
       "order": 1
     },
     "port": {
       "type": "string",
       "title": "Port",
-      "description": "Cortex API port e.g. 9999",
+      "description": "Cortex API port",
       "default": "9999",
       "order": 2
     },

@@ -389,6 +389,7 @@ actions:
       attributes:
         type: attributes
         description: Attributes
+        example: None
         required: true
     output:
       jobs:

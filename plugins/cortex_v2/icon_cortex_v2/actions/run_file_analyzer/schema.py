@@ -26,7 +26,7 @@ class RunFileAnalyzerInput(insightconnect_plugin_runtime.Input):
     "analyzer_id": {
       "type": "string",
       "title": "Analyzer ID",
-      "description": "Analyzer ID e.g. File_Info_2_0",
+      "description": "ID of the analyzer",
       "order": 1
     },
     "attributes": {
