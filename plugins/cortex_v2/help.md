@@ -28,17 +28,25 @@ _There are no supported product versions listed._
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|API key assigned to the user|None|None|
-|host|string|None|True|Cortex host e.g. cortex.company.com or 10.3.4.50|None|None|
-|port|string|9999|True|Cortex API port e.g. 9999|None|None|
-|protocol|string|None|True|HTTP protocol|['HTTP', 'HTTPS']|None|
-|proxy|object|None|False|An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value|None|None|
-|verify|boolean|True|True|Verify the certificate|None|None|
+|----|----|-------|--------|-----------|----|--|
+|api_key|credential_secret_key|None|True|API key assigned to the user|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|host|string|None|True|Cortex host e.g. cortex.company.com or 10.3.4.50|None|example.com|
+|port|string|9999|True|Cortex API port e.g. 9999|None|9999|
+|protocol|string|None|True|HTTP protocol|['HTTP', 'HTTPS']|HTTPS|
+|proxy|object|None|False|An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value|None|{}|
+|verify|boolean|True|True|Verify the certificate|None|True|
 
 Example input:
 
 ```
+{
+  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "host": "example.com",
+  "port": "9999",
+  "protocol": "HTTPS",
+  "proxy": {},
+  "verify": "True",
+}
 ```
 
 ## Technical Details
@@ -53,13 +61,18 @@ This action is used to run an analyzer on an observable.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|analyzer_id|string|None|True|Analyzer ID e.g. Hipposcore_1_0|None|None|
+|analyzer_id|string|None|True|Analyzer ID e.g. Hipposcore_1_0|None|Hipposcore_1_0|
 |attributes|attributes|None|True|Attributes|None|None|
 |observable|string|None|True|A string representing an observable value. This could be an IP address, a domain, URL, or other indicator|None|None|
 
 Example input:
 
 ```
+{
+  "analyzer_id": "Hipposcore_1_0",
+  "attributes: {},
+  "observable": "example.com"
+}
 ```
 
 ##### Output
@@ -90,11 +103,14 @@ This action is used to list the details of a given job, identified by its ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|job_id|string|None|True|Job ID e.g. c9uZDbHBf32DdIVJ|None|None|
+|job_id|string|None|True|Job ID e.g. c9uZDbHBf32DdIVJ|None|c9uZDbHBf32DdIVJ|
 
 Example input:
 
 ```
+{
+  "job_id": "c9uZDbHBf32DdIVJ"
+}
 ```
 
 ##### Output
