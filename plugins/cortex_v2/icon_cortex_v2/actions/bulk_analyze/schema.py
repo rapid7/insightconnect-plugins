@@ -34,7 +34,7 @@ class BulkAnalyzeInput(insightconnect_plugin_runtime.Input):
     "analyzer_ids": {
       "type": "array",
       "title": "Analyzer IDs",
-      "description": "A collection of analyzer IDs e.g [\\"Hipposcore_1_0\\", \\"Robtex\\"]",
+      "description": "A collection of analyzer IDs",
       "items": {
         "type": "string"
       },

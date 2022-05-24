@@ -24,7 +24,7 @@ class GetJobDetailsInput(insightconnect_plugin_runtime.Input):
     "job_id": {
       "type": "string",
       "title": "Job ID",
-      "description": "Job ID e.g. c9uZDbHBf32DdIVJ",
+      "description": "ID of the job",
       "order": 1
     }
   },

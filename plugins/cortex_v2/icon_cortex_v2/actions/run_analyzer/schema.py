@@ -26,7 +26,7 @@ class RunAnalyzerInput(insightconnect_plugin_runtime.Input):
     "analyzer_id": {
       "type": "string",
       "title": "Analyzer ID",
-      "description": "Analyzer ID e.g. Hipposcore_1_0",
+      "description": "ID of the Analyzer",
       "order": 1
     },
     "attributes": {

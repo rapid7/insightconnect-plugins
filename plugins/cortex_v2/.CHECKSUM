@@ -1,19 +1,19 @@
 {
-	"spec": "80b48db8ffbddad18115f71a09d5c2d8",
+	"spec": "71fa5d28de39d2bde6c93a78adc4335b",
 	"manifest": "9fe0d80aca9eaede7080ce532d6a4ff4",
 	"setup": "45777a899e9ac8ed65b5ea740f78bf3e",
 	"schemas": [
 		{
 			"identifier": "bulk_analyze/schema.py",
-			"hash": "ba14dfcb1c05ae515c60680430c4c00d"
+			"hash": "22546c2a40c23c639ea321b364c0cc78"
 		},
 		{
 			"identifier": "delete_job/schema.py",
-			"hash": "803e19667f19ec672dd63e0d62814b0a"
+			"hash": "63689c372b2f8e9c5c963c5b9450f6a3"
 		},
 		{
 			"identifier": "get_analyzer/schema.py",
-			"hash": "59bc188250a633e5086519f0f8d6309c"
+			"hash": "d3470d97fd401bfdcf20a5340cd06db5"
 		},
 		{
 			"identifier": "get_analyzer_by_type/schema.py",
@@ -21,11 +21,11 @@
 		},
 		{
 			"identifier": "get_job_details/schema.py",
-			"hash": "c257ba98aeb23d45dd5e90044904f293"
+			"hash": "aecfea5874af4d08c2aad9ca262805da"
 		},
 		{
 			"identifier": "get_job_report/schema.py",
-			"hash": "a250fd62714223c0127fb089f146b368"
+			"hash": "9428786b463b4a3301a5105881627042"
 		},
 		{
 			"identifier": "get_jobs/schema.py",
@@ -33,15 +33,15 @@
 		},
 		{
 			"identifier": "run_analyzer/schema.py",
-			"hash": "e669e90ee50bd5b6d5c71cec8bca5be4"
+			"hash": "06d11d6bc79a6178f697cb979423b9a9"
 		},
 		{
 			"identifier": "run_file_analyzer/schema.py",
-			"hash": "a7541ac5ff871ec4ab295a58446a08dc"
+			"hash": "5c12042b01caa60b01ac261c9ecf6e9f"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "fc73a8c2a6319d8062a71f3b7736d736"
+			"hash": "860ab8cc282de5fe8765b18f8b7e1c26"
 		}
 	]
 }
