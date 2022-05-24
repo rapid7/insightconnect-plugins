@@ -4,7 +4,8 @@ products: ["insightconnect"]
 name: microsoft_atp
 title: Microsoft Windows Defender ATP
 description: The Windows Defender Advanced Threat Protection plugin allows Rapid7 InsightConnect users to quickly take remediation actions across their organization. This plugin can isolate machines, run virus scans, and quarantine files
-version: 4.7.1
+version: 4.8.0
+supported_versions: ["2022-05-20"]
 vendor: rapid7
 support: community
 status: []
@@ -171,6 +172,132 @@ types:
       description: User name
       required: false
       type: string
+  evidence:
+    entityType:
+      title: Entity Type
+      description: Type of evidence
+      required: false
+      type: string
+    evidenceCreationTime:
+      title: Evidence Creation Time
+      description: Creation time of evidence in ISO 8601 format
+      required: false
+      type: string
+    sha1:
+      title: SHA1
+      description: SHA1 hash
+      required: false
+      type: string
+    sha256:
+      title: SHA256
+      description: SHA256 hash
+      required: false
+      type: string
+    filePath:
+      title: File Path
+      description: File Path
+      required: false
+      type: string
+    fileName:
+      title: File Name
+      description: File Name
+      required: false
+      type: string
+    processId:
+      title: Process ID
+      description: Process ID
+      required: false
+      type: integer
+    processCommandLine:
+      title: Process Command Line
+      description: Process Command Line
+      required: false
+      type: string
+    processCreationTime:
+      title: Process Creation Time
+      description: Process Creation Time in ISO 8601 format
+      required: false
+      type: string
+    parentProcessID:
+      title: Parent Process ID
+      description: Parent process ID
+      required: false
+      type: integer
+    parentProcessCreationTime:
+      title: Parent Process Creation Time
+      description: Parent Process Creation Time in ISO 8601 format
+      required: false
+      type: string
+    parentProcessFileName:
+      title: Parent Process File Name
+      description: Parent Process File Name
+      required: false
+      type: string
+    parentProcessFilePath:
+      title: Parent Process File Path
+      description: Parent Process File Path
+      required: false
+      type: string
+    ipAddress:
+      title: IP Address
+      description: IP Address
+      required: false
+      type: string
+    url:
+      title: URL
+      description: URL
+      required: false
+      type: string
+    registryKey:
+      title: Registry Key
+      description: A key-level node in the Windows registry
+      required: false
+      type: string
+    registryHive:
+      title: Registry Hive
+      description: Registry Hive
+      required: false
+      type: string
+    registryValueType:
+      title: Registry Value Type
+      description: Registry Value Type
+      required: false
+      type: string
+    registryValue:
+      title: Registry Value
+      description: Registry Value
+      required: false
+      type: string
+    accountName:
+      title: Account Name
+      description: Account Name
+      required: false
+      type: string
+    domainName:
+      title: Domain Name
+      description: Domain Name
+      required: false
+      type: string
+    userSid:
+      title: User SID
+      description: User Secrurity ID
+      required: false
+      type: string
+    aadUserId:
+      title: AAD User ID
+      description: Azure Active Directory User ID
+      required: false
+      type: string
+    userPrincipalName:
+      title: User Principal Name
+      description: User Principal Name
+      required: false
+      type: string
+    detectionStatus:
+      title: Detection Status
+      description: Detection Status
+      required: false
+      type: string
   alert:
     id:
       title: "ID"
@@ -292,7 +419,11 @@ types:
       type: related_user_object
       description: "Related user"
       required: false
-
+    evidence:
+      title: "Evidence"
+      type: "[]evidence"
+      description: List of related alert evidence
+      required: false
   file_type:
     sha1:
       title: "SHA1"
