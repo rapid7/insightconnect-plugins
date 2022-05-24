@@ -158,9 +158,7 @@ class ResourceRequests(object):
                 if results_retrieved + parameters["size"] > number_of_results:
                     parameters["size"] = number_of_results - results_retrieved
                     last_page = True
-
             response = self.get_resource_page(endpoint=endpoint, method=method, params=parameters, payload=payload)
-
             resources += response.resources  # Grab resources and append to total
             self.logger.info(
                 f"Got {len(response.resources)} resources "
