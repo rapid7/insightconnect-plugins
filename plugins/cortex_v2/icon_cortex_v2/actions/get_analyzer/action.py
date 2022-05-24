@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetAnalyzerInput, GetAnalyzerOutput
+from .schema import GetAnalyzerInput, GetAnalyzerOutput, Input, Output, Component
 
 # Custom imports below
 from icon_cortex_v2.util.convert import analyzers_to_dicts
@@ -11,14 +11,14 @@ class GetAnalyzer(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_analyzer",
-            description="List enabled analyzers within Cortex",
+            description=Component.DESCRIPTION,
             input=GetAnalyzerInput(),
             output=GetAnalyzerOutput(),
         )
 
     def run(self, params={}):
         api = self.connection.api
-        analyzer_id = params.get("analyzer_id")
+        analyzer_id = params.get(Input.ANALYZER_ID)
 
         if analyzer_id:
             self.logger.info("User specified Analyzer ID: %s", analyzer_id)
@@ -31,7 +31,7 @@ class GetAnalyzer(insightconnect_plugin_runtime.Action):
                 self.logger.error(e)
                 raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
             except CortexException as e:
-                raise ConnectionTestException(cause="Failed to get analyzers.", assistance="{}.".format(e))
+                raise ConnectionTestException(cause="Failed to get analyzers.", assistance=f"{e}.")
         else:
             try:
                 analyzers = api.analyzers.find_all({}, range="all")
@@ -42,6 +42,6 @@ class GetAnalyzer(insightconnect_plugin_runtime.Action):
                 self.logger.error(e)
                 raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
             except CortexException as e:
-                raise ConnectionTestException(cause="Failed to get analyzers.", assistance="{}.".format(e))
+                raise ConnectionTestException(cause="Failed to get analyzers.", assistance=f"{e}.")
 
-        return {"list": analyzers_to_dicts(analyzers)}
+        return {Output.LIST: analyzers_to_dicts(analyzers)}

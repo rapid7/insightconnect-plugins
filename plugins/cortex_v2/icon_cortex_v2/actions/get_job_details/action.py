@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetJobDetailsInput, GetJobDetailsOutput
+from .schema import GetJobDetailsInput, GetJobDetailsOutput, Input, Output, Component
 
 # Custom imports below
 from icon_cortex_v2.util.convert import job_to_dict
@@ -11,7 +11,7 @@ class GetJobDetails(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_job_details",
-            description="List the details of a given job, " "identified by its ID",
+            description=Component.DESCRIPTION,
             input=GetJobDetailsInput(),
             output=GetJobDetailsOutput(),
         )
@@ -19,7 +19,7 @@ class GetJobDetails(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         api = self.connection.api
 
-        job_id = params.get("job_id")
+        job_id = params.get(Input.JOB_ID)
         self.logger.info("Getting details for job {}".format(job_id))
 
         try:
@@ -32,6 +32,6 @@ class GetJobDetails(insightconnect_plugin_runtime.Action):
             self.logger.error(e)
             raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
         except Exception as e:
-            raise ConnectionTestException(cause="Unable to retrieve job details.", assistance="{}.".format(e))
+            raise ConnectionTestException(cause="Unable to retrieve job details.", assistance=f"{e}.")
 
-        return {"job": job}
+        return {Output.JOB: job}

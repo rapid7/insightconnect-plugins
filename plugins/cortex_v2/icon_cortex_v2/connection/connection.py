@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import ConnectionSchema
+from .schema import ConnectionSchema, Input
 
 # Custom imports below
 from cortex4py.api import Api
@@ -12,15 +12,15 @@ class Connection(insightconnect_plugin_runtime.Connection):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
     def connect(self, params={}):
-        url = "{}://{}:{}".format(params.get("protocol").lower(), params.get("host"), params.get("port"))
-        api_key = params.get("api_key").get("secretKey")
-        self.verify = params.get("verify", True)
+        url = f"{params.get(Input.PROTOCOL).lower()}://{params.get(Input.HOST)}:{params.get(Input.PORT)}"
+        api_key = params.get(Input.API_KEY).get("secretKey")
+        self.verify = params.get(Input.VERIFY, True)
         self.logger.info("URL: %s", url)
 
-        if not params.get("proxy"):
+        if not params.get(Input.PROXY):
             self.proxy = {}
         else:
-            self.proxy = params.get("proxy")
+            self.proxy = params.get(Input.PROXY)
             self.logger.info("Proxy specified: %s", self.proxy)
 
         self.logger.info("Connect: Connecting..")

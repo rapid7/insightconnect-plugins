@@ -33,7 +33,7 @@ class BulkAnalyze(insightconnect_plugin_runtime.Action):
         for analyzer in all_analyzers:
             cortex_analyzers.add(analyzer.json()["name"])
         # check analyzers in list and available
-        if analyze_all == False:
+        if not analyze_all:
             missing_ids = set(analyzer_ids).difference(cortex_analyzers)
             if len(missing_ids) > 0:
                 self.logger.error(f"Error Analyzers: {missing_ids} not found in Cortex")
@@ -58,4 +58,4 @@ class BulkAnalyze(insightconnect_plugin_runtime.Action):
                 job_results.append(job_to_dict(job, api))
 
         # results
-        return {"jobs": job_results}
+        return {Output.JOBS: job_results}
