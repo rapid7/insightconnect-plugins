@@ -3,12 +3,12 @@ from setuptools import setup, find_packages
 
 
 setup(name='cortex_v2-rapid7-plugin',
-      version='1.1.1',
+      version='1.1.2',
       description='Cortex is an observable analysis and active response engine. With the Cortex plugin for Rapid7 InsightConnect, users can manage analyzers, jobs, and run file analyzers',
       author='rapid7',
       author_email='',
       url='',
       packages=find_packages(),
-      install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_cortex_v2']
+      install_requires=['insightconnect_plugin_runtime'],  # Add third-party dependencies to requirements.txt, not here!
+      scripts=['bin/icon_cortex_v2']
       )
