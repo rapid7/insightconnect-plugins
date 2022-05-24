@@ -39,7 +39,7 @@ class RunAnalyzer(insightconnect_plugin_runtime.Action):
             raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
         except CortexException as e:
             raise ConnectionTestException(cause="Failed to run analyzer.", assistance=f"{e}.")
-        except Exception as e:
+        except Exception:
             # A bad analyzer returns: AttributeError: 'NoneType' object has no attribute 'id'
             raise ConnectionTestException(
                 cause="Failed to run analyzer.",
