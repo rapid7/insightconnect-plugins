@@ -17,7 +17,7 @@ class DeleteJob(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         job_id = params.get(Input.JOB_ID)
-        self.logger.info("Removing job {}".format(job_id))
+        self.logger.info(f"Removing job {job_id}")
 
         try:
             status = self.connection.api.jobs.delete(job_id)

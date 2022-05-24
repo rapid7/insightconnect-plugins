@@ -18,7 +18,7 @@ class GetJobReport(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         job_id = params.get(Input.JOB_ID)
-        self.logger.info("Getting report for job {}".format(job_id))
+        self.logger.info(f"Getting report for job {job_id}")
 
         try:
             report = self.connection.api.jobs.get_report(job_id)

@@ -35,10 +35,10 @@ class GetJobs(insightconnect_plugin_runtime.Action):
             query_params.append(Eq("analyzerId", analyzer_filter))
 
         query = And(*query_params)
-        self.logger.info("Query: {}".format(query))
+        self.logger.info(f"Query: {query}")
 
         range_ = f"{start}-{start+limit}"
-        self.logger.info("Range: {}".format(range_))
+        self.logger.info(f"Range: {range_}")
 
         try:
             jobs = api.jobs.find_all(query, range=range_, sort="-createdAt")

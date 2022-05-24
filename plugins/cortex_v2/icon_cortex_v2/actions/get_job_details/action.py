@@ -20,7 +20,7 @@ class GetJobDetails(insightconnect_plugin_runtime.Action):
         api = self.connection.api
 
         job_id = params.get(Input.JOB_ID)
-        self.logger.info("Getting details for job {}".format(job_id))
+        self.logger.info(f"Getting details for job {job_id}")
 
         try:
             job = api.jobs.get_by_id(job_id)
