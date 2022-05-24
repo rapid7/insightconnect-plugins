@@ -104,7 +104,7 @@ class GetAnalyzerByTypeOutput(insightconnect_plugin_runtime.Output):
         "url": {
           "type": "string",
           "title": "Url",
-          "description": "The analyzer's url",
+          "description": "The analyzer's URL",
           "order": 8
         },
         "version": {

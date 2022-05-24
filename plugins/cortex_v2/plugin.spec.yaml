@@ -15,11 +15,10 @@ resources:
   vendor_url: https://www.thehive-project.org
 tags:
 - cortex
-- hive
 - intel
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [cortex, hive, intel]
+  keywords: [cortex, intel]
   features: []
 types:
   analyzers:
