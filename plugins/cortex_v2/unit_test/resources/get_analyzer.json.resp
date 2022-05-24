@@ -1,0 +1,15 @@
+{
+    "name": "VirusTotal_GetReport",
+    "version": "3.0",
+    "description": "Get the latest VirusTotal report for a file, hash, domain or an IP address",
+    "dataTypeList": [
+        "file",
+        "hash",
+        "domain",
+        "ip"
+    ],
+    "author": "CERT-BDF",
+    "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+    "license": "AGPL-V3",
+    "id": "VirusTotal_GetReport_3_0"
+}

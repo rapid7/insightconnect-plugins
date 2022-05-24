@@ -1,0 +1,28 @@
+[
+    {
+        "id": "02pxZ35f7bX4Lnij",
+        "analyzerId": "JoeSandbox_Url_Analysis_2_0",
+        "status": "Failure",
+        "date": 1648846129365,
+        "artifact": {
+            "data": "aadroid.net",
+            "attributes": {
+                "dataType": "url",
+                "tlp": 2
+            }
+        },
+        "report": {
+            "errorMessage": "JoeSandbox url is missing",
+            "input": {
+                "dataType": "url",
+                "config": {
+                    "check_tlp": false,
+                    "service": "url_analysis"
+                },
+                "tlp": 2,
+                "data": "aadroid.net"
+            },
+            "success": false
+        }
+    }
+]

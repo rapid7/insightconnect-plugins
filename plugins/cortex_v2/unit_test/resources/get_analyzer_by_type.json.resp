@@ -1,0 +1,331 @@
+[
+    {
+        "name": "Fortiguard_URLCategory",
+        "version": "2.0",
+        "description": "Check the Fortiguard category of a URL or a domain",
+        "dataTypeList": [
+            "domain",
+            "url"
+        ],
+        "author": "Eric Capuano",
+        "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+        "license": "AGPL-V3",
+        "id": "Fortiguard_URLCategory_2_0"
+    },
+    {
+        "name": "Abuse_Finder",
+        "version": "2.0",
+        "description": "Find abuse contacts associated with domain names, URLs, IPs and email addresses",
+        "dataTypeList": [
+            "ip",
+            "domain",
+            "url",
+            "mail"
+        ],
+        "author": "CERT-BDF",
+        "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+        "license": "AGPL-V3",
+        "id": "Abuse_Finder_2_0"
+    },
+    {
+        "name": "PassiveTotal_Passive_Dns",
+        "version": "2.0",
+        "description": "PassiveTotal Passive DNS Lookup",
+        "dataTypeList": [
+            "domain",
+            "fqdn",
+            "ip"
+        ],
+        "author": "CERT-BDF",
+        "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+        "license": "AGPL-V3",
+        "id": "PassiveTotal_Passive_Dns_2_0"
+    },
+    {
+        "name": "PassiveTotal_Malware",
+        "version": "2.0",
+        "description": "PassiveTotal Malware Lookup",
+        "dataTypeList": [
+            "domain",
+            "fqdn",
+            "ip"
+        ],
+        "author": "CERT-BDF",
+        "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+        "license": "AGPL-V3",
+        "id": "PassiveTotal_Malware_2_0"
+    },
+    {
+        "name": "PassiveTotal_Osint",
+        "version": "2.0",
+        "description": "PassiveTotal Osint Lookup",
+        "dataTypeList": [
+            "domain",
+            "fqdn",
+            "ip"
+        ],
+        "author": "CERT-BDF",
+        "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+        "license": "AGPL-V3",
+        "id": "PassiveTotal_Osint_2_0"
+    },
+    {
+        "name": "PassiveTotal_Unique_Resolutions",
+        "version": "2.0",
+        "description": "PassiveTotal Unique Resolutions Lookup",
+        "dataTypeList": [
+            "domain",
+            "fqdn",
+            "ip"
+        ],
+        "author": "CERT-BDF",
+        "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+        "license": "AGPL-V3",
+        "id": "PassiveTotal_Unique_Resolutions_2_0"
+    },
+    {
+        "name": "PassiveTotal_Whois_Details",
+        "version": "2.0",
+        "description": "PassiveTotal Whois Details Lookup",
+        "dataTypeList": [
+            "domain",
+            "fqdn",
+            "ip"
+        ],
+        "author": "CERT-BDF",
+        "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+        "license": "AGPL-V3",
+        "id": "PassiveTotal_Whois_Details_2_0"
+    },
+    {
+        "name": "PassiveTotal_Enrichment",
+        "version": "2.0",
+        "description": "PassiveTotal Enrichment Lookup",
+        "dataTypeList": [
+            "domain",
+            "fqdn",
+            "ip"
+        ],
+        "author": "CERT-BDF",
+        "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+        "license": "AGPL-V3",
+        "id": "PassiveTotal_Enrichment_2_0"
+    },
+    {
+        "name": "HippoMore",
+        "version": "2.0",
+        "description": "Get the Hippocampe detailed report for an IP address, a domain or a URL",
+        "dataTypeList": [
+            "ip",
+            "domain",
+            "fqdn",
+            "url"
+        ],
+        "author": "CERT-BDF",
+        "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+        "license": "AGPL-V3",
+        "id": "HippoMore_2_0"
+    },
+    {
+        "name": "Hipposcore",
+        "version": "2.0",
+        "description": "Get the Hippocampe Score report associated with an IP address, a domain or a URL",
+        "dataTypeList": [
+            "ip",
+            "domain",
+            "fqdn",
+            "url"
+        ],
+        "author": "CERT-BDF",
+        "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+        "license": "AGPL-V3",
+        "id": "Hipposcore_2_0"
+    },
+    {
+        "name": "CIRCLPassiveDNS",
+        "version": "2.0",
+        "description": "Check CIRCL's Passive DNS for a given domain or URL",
+        "dataTypeList": [
+            "domain",
+            "url"
+        ],
+        "author": "Nils Kuhnert, CERT-Bund",
+        "url": "https://github.com/BSI-CERT-Bund/cortex-analyzers",
+        "license": "AGPL-V3",
+        "id": "CIRCLPassiveDNS_2_0"
+    },
+    {
+        "name": "WOT_Lookup",
+        "version": "1.0",
+        "description": "Check a Domain against Web of Trust (WOT) a website reputation service",
+        "dataTypeList": [
+            "domain",
+            "fqdn"
+        ],
+        "author": "Andrea Garavaglia - LDO-CERT",
+        "url": "https://github.com/garanews/Cortex-Analyzers",
+        "license": "AGPL-V3",
+        "id": "WOT_Lookup_1_0"
+    },
+    {
+        "name": "GoogleSafebrowsing",
+        "version": "2.0",
+        "description": "Check URLs and domain names against Google Safebrowsing",
+        "dataTypeList": [
+            "url",
+            "domain"
+        ],
+        "author": "Nils Kuhnert, CERT-Bund",
+        "url": "https://github.com/BSI-CERT-Bund/cortex-analyzers",
+        "license": "AGPL-V3",
+        "id": "GoogleSafebrowsing_2_0"
+    },
+    {
+        "name": "OTXQuery",
+        "version": "2.0",
+        "description": "Query AlienVault OTX for IPs, domains, URLs, or file hashes",
+        "dataTypeList": [
+            "url",
+            "domain",
+            "file",
+            "hash",
+            "ip"
+        ],
+        "author": "Eric Capuano",
+        "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+        "license": "AGPL-V3",
+        "id": "OTXQuery_2_0"
+    },
+    {
+        "name": "VirusTotal_GetReport",
+        "version": "3.0",
+        "description": "Get the latest VirusTotal report for a file, hash, domain or an IP address",
+        "dataTypeList": [
+            "file",
+            "hash",
+            "domain",
+            "ip"
+        ],
+        "author": "CERT-BDF",
+        "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+        "license": "AGPL-V3",
+        "id": "VirusTotal_GetReport_3_0"
+    },
+    {
+        "name": "DNSDB_DomainName",
+        "version": "2.0",
+        "description": "Provide history records for a domain using DNSDB Passive DNS service",
+        "dataTypeList": [
+            "domain"
+        ],
+        "author": "CERT-BDF",
+        "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+        "license": "AGPL-V3",
+        "id": "DNSDB_DomainName_2_0"
+    },
+    {
+        "name": "Yeti",
+        "version": "1.0",
+        "description": "Fetch observable details from a Yeti",
+        "dataTypeList": [
+            "domain",
+            "fqdn",
+            "ip",
+            "url",
+            "hash"
+        ],
+        "author": "CERT-BDF",
+        "url": "https://github.com/CERT/cortex-analyzers",
+        "license": "AGPL-V3",
+        "id": "Yeti_1_0"
+    },
+    {
+        "name": "DomainTools_WhoisHistory",
+        "version": "2.0",
+        "description": "Get a list of historic Whois records associated with a domain name through DomainTools Whois History service",
+        "dataTypeList": [
+            "domain"
+        ],
+        "author": "CERT-BDF",
+        "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+        "license": "AGPL-V3",
+        "id": "DomainTools_WhoisHistory_2_0"
+    },
+    {
+        "name": "DomainTools_WhoisLookup",
+        "version": "2.0",
+        "description": "Get the ownership record for a domain with basic registration details using DomainTools Whois Lookup service",
+        "dataTypeList": [
+            "domain"
+        ],
+        "author": "CERT-BDF",
+        "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+        "license": "AGPL-V3",
+        "id": "DomainTools_WhoisLookup_2_0"
+    },
+    {
+        "name": "DomainTools_ReverseNameServer",
+        "version": "2.0",
+        "description": "Use DomainTools Reverse Name Server service to get a list of domain names that share the same primary or secondary name server",
+        "dataTypeList": [
+            "domain"
+        ],
+        "author": "CERT-BDF",
+        "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+        "license": "AGPL-V3",
+        "id": "DomainTools_ReverseNameServer_2_0"
+    },
+    {
+        "name": "DomainTools_ReverseWhois",
+        "version": "2.0",
+        "description": "Get a list of domain names which share the same registrant information through Domaintools Reverse Whois service",
+        "dataTypeList": [
+            "mail",
+            "ip",
+            "domain",
+            "other"
+        ],
+        "author": "CERT-BDF",
+        "url": "https://github.com/CERT-BDF/Cortex-Analyzers",
+        "license": "AGPL-V3",
+        "id": "DomainTools_ReverseWhois_2_0"
+    },
+    {
+        "name": "MISP",
+        "version": "2.0",
+        "description": "Query multiple MISP instances for events containing an observable.",
+        "dataTypeList": [
+            "domain",
+            "ip",
+            "url",
+            "fqdn",
+            "uri_path",
+            "user-agent",
+            "hash",
+            "email",
+            "mail",
+            "mail_subject",
+            "registry",
+            "regexp",
+            "other",
+            "filename"
+        ],
+        "author": "Nils Kuhnert, CERT-Bund",
+        "url": "https://github.com/BSI-CERT-Bund/cortex-analyzers",
+        "license": "AGPL-V3",
+        "id": "MISP_2_0"
+    },
+    {
+        "name": "CERTatPassiveDNS",
+        "version": "2.0",
+        "description": "Checks CERT.at Passive DNS for a given domain, API Key via cert.at.",
+        "dataTypeList": [
+            "domain",
+            "fqdn"
+        ],
+        "author": "Nils Kuhnert, CERT-Bund",
+        "url": "https://github.com/BSI-CERT-Bund/cortex-analyzers",
+        "license": "AGPL-V3",
+        "id": "CERTatPassiveDNS_2_0"
+    }
+]
