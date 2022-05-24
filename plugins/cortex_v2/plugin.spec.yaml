@@ -55,7 +55,7 @@ types:
       type: string
       required: false
     url:
-      description: The analyzer's url
+      description: The analyzer's URL
       type: string
       required: false
   attributes:
@@ -131,7 +131,7 @@ types:
       type: integer
       required: false
     content-type:
-      description: The files mime type
+      description: The file's MIME type
       title: Content Type
       type: string
       required: false
