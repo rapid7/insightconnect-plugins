@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetJobsInput, GetJobsOutput
+from .schema import GetJobsInput, GetJobsOutput, Input, Output, Component
 
 # Custom imports below
 from cortex4py.query import And, Eq
@@ -12,7 +12,7 @@ class GetJobs(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_jobs",
-            description="List of analysis jobs",
+            description=Component.DESCRIPTION,
             input=GetJobsInput(),
             output=GetJobsOutput(),
         )
@@ -21,11 +21,11 @@ class GetJobs(insightconnect_plugin_runtime.Action):
         api = self.connection.api
         query_params = []
 
-        start = params.get("start", 0)
-        limit = params.get("limit", 10)
-        data_type_filter = params.get("dataTypeFilter")
-        data_filter = params.get("dataFilter")
-        analyzer_filter = params.get("analyzerFilter")
+        start = params.get(Input.START, 0)
+        limit = params.get(Input.LIMIT, 10)
+        data_type_filter = params.get(Input.DATATYPEFILTER)
+        data_filter = params.get(Input.DATAFILTER)
+        analyzer_filter = params.get(Input.ANALYZERFILTER)
 
         if data_type_filter:
             query_params.append(Eq("dataType", data_type_filter))
@@ -37,7 +37,7 @@ class GetJobs(insightconnect_plugin_runtime.Action):
         query = And(*query_params)
         self.logger.info("Query: {}".format(query))
 
-        range_ = "{}-{}".format(start, start + limit)
+        range_ = f"{start}-{start+limit}"
         self.logger.info("Range: {}".format(range_))
 
         try:
@@ -50,6 +50,6 @@ class GetJobs(insightconnect_plugin_runtime.Action):
             self.logger.error(e)
             raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
         except Exception as e:
-            raise ConnectionTestException(cause="Failed to obtain the list of jobs.", assistance="{}.".format(e))
+            raise ConnectionTestException(cause="Failed to obtain the list of jobs.", assistance=f"{e}.")
 
-        return {"list": jobs}
+        return {Output.LIST: jobs}
