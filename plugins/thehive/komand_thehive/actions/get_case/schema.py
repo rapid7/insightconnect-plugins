@@ -24,7 +24,7 @@ class GetCaseInput(komand.Input):
     "id": {
       "type": "string",
       "title": "Case ID",
-      "description": "Case ID e.g. AV_ajI_oYMfcbXhqb9tS",
+      "description": "ID of the case",
       "order": 1
     }
   },
