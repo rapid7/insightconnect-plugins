@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CreateCaseInput, CreateCaseOutput, Component
 
 # Custom imports below
@@ -6,7 +6,7 @@ import requests
 from thehive4py.models import Case, CaseTask
 
 
-class CreateCase(komand.Action):
+class CreateCase(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_case",
