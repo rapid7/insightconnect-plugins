@@ -17,10 +17,9 @@ resources:
 tags:
 - thehive
 - intel
-- case
 hub_tags:
   use_cases: [remediation_management]
-  keywords: [thehive, intel, case]
+  keywords: [thehive, intel]
   features: []
 enable_cache: true
 language: python
