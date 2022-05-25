@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import CloseCaseInput, CloseCaseOutput, Component
+from .schema import CloseCaseInput, CloseCaseOutput, Input, Output, Component
 
 # Custom imports below
 import requests
@@ -17,11 +17,11 @@ class CloseCase(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
 
         client = self.connection.client
-        case_id = params.get("id")
-        summary = params.get("summary")
-        resolution_status = params.get("resolution_status")
-        impact_status = params.get("impact_status")
-        url = "{}/api/case/{}".format(client.url, case_id)
+        case_id = params.get(Input.ID)
+        summary = params.get(Input.SUMMARY)
+        resolution_status = params.get(Input.RESOLUTION_STATUS)
+        impact_status = params.get(Input.IMPACT_STATUS)
+        url = f"{client.url}/api/case/{case_id}"
         data = {
             "summary": summary,
             "resolutionStatus": resolution_status,
@@ -38,9 +38,9 @@ class CloseCase(insightconnect_plugin_runtime.Action):
             user.raise_for_status()
         except requests.exceptions.HTTPError:
             self.logger.error(user.json())
-            return {"type": "NotFound", "message": "NotClosed"}
+            return {Output.TYPE: "NotFound", Output.MESSAGE: "NotClosed"}
         except:
             self.logger.error("Failed to close case")
             raise
 
-        return {"type": "Found", "message": "Closed"}
+        return {Output.TYPE: "Found", Output.MESSAGE: "Closed"}

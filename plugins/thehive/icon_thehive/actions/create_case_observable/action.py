@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import CreateCaseObservableInput, CreateCaseObservableOutput, Component
+from .schema import CreateCaseObservableInput, CreateCaseObservableOutput, Input, Output, Component
 
 # Custom imports below
 from thehive4py.models import Case, CaseObservable
@@ -20,15 +20,15 @@ class CreateCaseObservable(insightconnect_plugin_runtime.Action):
         self.logger.info(params)
 
         observable = CaseObservable(
-            dataType=params.get("observable").get("dataType", None),
-            data=params.get("observable").get("data", None),
-            tlp=params.get("observable").get("tlp", 2),
-            ioc=params.get("observable").get("ioc", None),
-            tags=params.get("observable").get("tags", []),
-            message=params.get("observable").get("message", None),
+            dataType=params.get(Input.OBSERVABLE).get("dataType", None),
+            data=params.get(Input.OBSERVABLE).get("data", None),
+            tlp=params.get(Input.OBSERVABLE).get("tlp", 2),
+            ioc=params.get(Input.OBSERVABLE).get("ioc", None),
+            tags=params.get(Input.OBSERVABLE).get("tags", []),
+            message=params.get(Input.OBSERVABLE).get("message", None),
         )
         try:
-            observable = client.create_case_observable(params.get("id"), observable)
+            observable = client.create_case_observable(params.get(Input.ID), observable)
             observable.raise_for_status()
         except requests.exceptions.HTTPError:
             self.logger.error(observable.json())
@@ -37,4 +37,4 @@ class CreateCaseObservable(insightconnect_plugin_runtime.Action):
             self.logger.error("Failed to create observable")
             raise
 
-        return {"case": observable.json()}
+        return {Output.CASE: observable.json()}

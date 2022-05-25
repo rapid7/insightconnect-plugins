@@ -1,8 +1,8 @@
 import insightconnect_plugin_runtime
-from .schema import CreateCaseTaskInput, CreateCaseTaskOutput, Component
+from .schema import CreateCaseTaskInput, CreateCaseTaskOutput, Input, Output, Component
 
 # Custom imports below
-from thehive4py.models import Case, CaseTask
+from thehive4py.models import CaseTask
 import time
 import requests
 
@@ -22,15 +22,15 @@ class CreateCaseTask(insightconnect_plugin_runtime.Action):
 
         self.logger.info(params)
         task = CaseTask(
-            title=params.get("task").get("title", None),
-            description=params.get("task").get("description", None),
-            flag=params.get("task").get("flag", False),
-            owner=params.get("task").get("owner", None),
-            status=params.get("task").get("status", None),
+            title=params.get(Input.TASK).get("title", None),
+            description=params.get(Input.TASK).get("description", None),
+            flag=params.get(Input.TASK).get("flag", False),
+            owner=params.get(Input.TASK).get("owner", None),
+            status=params.get(Input.TASK).get("status", None),
         )
 
         try:
-            task = client.create_case_task(params.get("id"), task)
+            task = client.create_case_task(params.get(Input.ID), task)
             task.raise_for_status()
         except requests.exceptions.HTTPError:
             self.logger.error(task.json())
@@ -46,4 +46,4 @@ class CreateCaseTask(insightconnect_plugin_runtime.Action):
             if isinstance(d["startDate"], type(None)):
                 d["startDate"] = int(time.time()) * 1000
 
-        return {"case": d}
+        return {Output.CASE: d}

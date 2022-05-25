@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetUserInput, GetUserOutput, Component
+from .schema import GetUserInput, GetUserOutput, Input, Component
 
 # Custom imports below
 import requests
@@ -16,12 +16,12 @@ class GetUser(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         client = self.connection.client
-        user_id = params.get("id")
+        user_id = params.get(Input.ID)
 
         if user_id:
-            url = "{}/api/user/{}".format(client.url, user_id)
+            url = f"{client.url}/api/user/{user_id}"
         else:
-            url = "{}/api/user/current".format(client.url)
+            url = f"{client.url}/api/user/current"
 
         try:
             user = requests.get(

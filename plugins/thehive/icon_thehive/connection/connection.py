@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import ConnectionSchema
+from .schema import ConnectionSchema, Input
 
 # Custom imports below
 from thehive4py.api import TheHiveApi
@@ -16,20 +16,20 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.proxy = None
 
     def connect(self, params):
-        url = "{}://{}:{}".format(params.get("protocol"), params.get("host").rstrip("/"), params.get("port"))
-        self.password = params.get("credentials").get("password")
-        self.username = params.get("credentials").get("username")
-        self.verify = params.get("verify", True)
-        self.logger.info("URL: %s", url)
+        url = f"{params.get(Input.PROTOCOL)}://{params.get(Input.HOST).rstrip('/')}:{params.get(Input.PORT)}"
+        self.password = params.get(Input.CREDENTIALS).get("password")
+        self.username = params.get(Input.CREDENTIALS).get("username")
+        self.verify = params.get(Input.VERIFY, True)
+        self.logger.info(f"URL: {url}")
 
-        if not params.get("proxy"):
+        if not params.get(Input.PROXY):
             self.proxy = {}
         else:
-            self.proxy = params.get("proxy")
-            self.logger.info("Proxy specified: %s", self.proxy)
+            self.proxy = params.get(Input.PROXY)
+            self.logger.info(f"Proxy specified: {self.proxy}")
 
         self.logger.info("Connect: Connecting...")
-        self.logger.info("SSL Verify: %s" % str(self.verify))
+        self.logger.info(f"SSL Verify: {str(self.verify)}")
         self.client = TheHiveApi(
             url=url,
             principal=self.username,
