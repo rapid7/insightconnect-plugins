@@ -710,6 +710,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.0 - Implement custom API-level handling
 * 1.1.2 - Update SDK runtime
 * 1.1.1 - New spec and help.md format for the Extension Library
 * 1.1.0 - New action Bulk Analyze
@@ -720,5 +721,3 @@ This plugin does not contain any troubleshooting information.
 ## References
 
 * [Cortex](https://github.com/TheHive-Project/Cortex)
-* [cortex4py](https://github.com/TheHive-Project/Cortex4py/blob/master/Usage.md)
-
