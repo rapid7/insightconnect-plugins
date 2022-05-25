@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import GetCasesInput, GetCasesOutput, Component
+from .schema import GetCasesInput, GetCasesOutput, Output, Component
 
 # Custom imports below
 import requests
@@ -27,4 +27,4 @@ class GetCases(insightconnect_plugin_runtime.Action):
             self.logger.error("Failed to get cases")
             raise
 
-        return {"list": cases.json()}
+        return {Output.LIST: cases.json()}

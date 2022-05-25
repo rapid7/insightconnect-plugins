@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import CreateCaseInput, CreateCaseOutput, Component
+from .schema import CreateCaseInput, CreateCaseOutput, Input, Output, Component
 
 # Custom imports below
 import requests
@@ -19,24 +19,24 @@ class CreateCase(insightconnect_plugin_runtime.Action):
 
         client = self.connection.client
 
-        self.logger.info("Input: %s", params)
+        self.logger.info(f"Input: {params}")
         task = CaseTask(
-            title=params.get("task").get("title", None),
-            description=params.get("task").get("description", None),
-            flag=params.get("task").get("flag", False),
-            owner=params.get("task").get("owner", None),
-            status=params.get("task").get("status", None),
-            startDate=params.get("task").get("startDate", None),
+            title=params.get(Input.TASK).get("title", None),
+            description=params.get(Input.TASK).get("description", None),
+            flag=params.get(Input.TASK).get("flag", False),
+            owner=params.get(Input.TASK).get("owner", None),
+            status=params.get(Input.TASK).get("status", None),
+            startDate=params.get(Input.TASK).get("startDate", None),
         )
 
         case = Case(
-            title=params.get("title", None),
-            tlp=params.get("tlp", 2),
-            flag=params.get("flag", False),
-            tags=params.get("tags", []),
-            description=params.get("description", None),
+            title=params.get(Input.TITLE, None),
+            tlp=params.get(Input.TLP, 2),
+            flag=params.get(Input.FLAG, False),
+            tags=params.get(Input.TAGS, []),
+            description=params.get(Input.DESCRIPTION, None),
             tasks=[task],
-            customFields=params.get("customFields", None),
+            customFields=params.get(Input.CUSTOMFIELDS, None),
         )
 
         try:
@@ -49,4 +49,4 @@ class CreateCase(insightconnect_plugin_runtime.Action):
             self.logger.error("Failed to create case")
             raise
 
-        return {"case": new_case.json()}
+        return {Output.CASE: new_case.json()}
