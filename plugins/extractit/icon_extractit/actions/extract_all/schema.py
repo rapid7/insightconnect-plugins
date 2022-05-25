@@ -30,7 +30,6 @@ class ExtractAllInput(insightconnect_plugin_runtime.Input):
       "enum": [
         "dd/mm/yyyy",
         "mm/dd/yyyy",
-        "dd/mm/yyyy",
         "dd\\\\mm\\\\yyyy",
         "dd.mm.yyyy",
         "dd-mm-yyyy",
@@ -38,7 +37,6 @@ class ExtractAllInput(insightconnect_plugin_runtime.Input):
         "dd-mm-yy",
         "dd/mm/yy",
         "dd\\\\mm\\\\yy",
-        "mm/dd/yyyy",
         "mm\\\\dd\\\\yyyy",
         "mm.dd.yyyy",
         "mm-dd-yyyy",
