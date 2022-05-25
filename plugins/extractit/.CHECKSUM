@@ -1,7 +1,7 @@
 {
-	"spec": "50cf604ba83360babde819d374fa4612",
-	"manifest": "47ddf89438e387aca9a1f27ab24e78d5",
-	"setup": "bb5fe35e428bdbdb565ea322cffddb7c",
+	"spec": "9d386ecb3d7a4ef30be37688edf632c1",
+	"manifest": "4cad03cf1aa5da8741bc1277d5ac4ae2",
+	"setup": "05134e395257517079aff60814099d2b",
 	"schemas": [
 		{
 			"identifier": "cve_extractor/schema.py",
