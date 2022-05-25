@@ -403,6 +403,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.6 - Update SDK runtime
 * 2.0.5 - New spec and help.md format for the Extension Library. Update help key features and fix description capitalisation
 * 2.0.4 - Update to use the `komand/python-2-27-slim-plugin` Docker image to reduce plugin size and to support SSL Verify
 * 2.0.3 - Fix issue where SSL Verify was not used in actions that utilize requests | Updated test method and moved it to connection
