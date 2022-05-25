@@ -27,7 +27,7 @@ class ConnectionSchema(komand.Input):
     "host": {
       "type": "string",
       "title": "Host",
-      "description": "TheHive host e.g. thehive.company.com or 10.3.4.50",
+      "description": "TheHive host e.g. thehive.example.com or 10.3.4.50",
       "order": 1
     },
     "port": {
@@ -80,12 +80,14 @@ class ConnectionSchema(komand.Input):
           "title": "Password",
           "displayType": "password",
           "description": "The password",
-          "format": "password"
+          "format": "password",
+          "order": 2
         },
         "username": {
           "type": "string",
           "title": "Username",
-          "description": "The username to log in with"
+          "description": "The username to log in with",
+          "order": 1
         }
       },
       "required": [
