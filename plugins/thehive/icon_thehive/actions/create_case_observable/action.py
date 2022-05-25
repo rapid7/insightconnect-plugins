@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CreateCaseObservableInput, CreateCaseObservableOutput, Component
 
 # Custom imports below
@@ -6,7 +6,7 @@ from thehive4py.models import Case, CaseObservable
 import requests
 
 
-class CreateCaseObservable(komand.Action):
+class CreateCaseObservable(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_case_observable",
