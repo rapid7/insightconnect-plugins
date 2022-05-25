@@ -1,0 +1,24 @@
+{
+  "data": {
+    "tasks": [
+      {
+        "verdict": "No threats detected",
+        "name": "http://www.example.com",
+        "related": "https://app.any.run/tasks/44d88612-fea8-a8f3-6de8-2e1278abb02f",
+        "pcap": "https://content.any.run/tasks/44d88612-fea8-a8f3-6de8-2e1278abb02f/download/pcap",
+        "file": "https://content.any.run/tasks/44d88612-fea8-a8f3-6de8-2e1278abb02f/download/files/44d88612-fea8-a8f3-6de8-2e1278abb02f",
+        "json": "https://api.any.run/report/44d88612-fea8-a8f3-6de8-2e1278abb02f/summary/json",
+        "misp": "https://api.any.run/report/44d88612-fea8-a8f3-6de8-2e1278abb02f/summary/misp",
+        "tags": [],
+        "date": "2022-05-16T11:33:59.616Z",
+        "hashes": {
+          "ssdeep": "3:N1KJS4GVJJT:Cc4Cb",
+          "head_hash": "44d88612fea8a8f36de82e1278abb02f",
+          "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+          "sha1": "3395856ce81f2b7382dee72602f798b642f14140",
+          "md5": "44d88612fea8a8f36de82e1278abb02f"
+        }
+      }
+    ]
+  }
+}
