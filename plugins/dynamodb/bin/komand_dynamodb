@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Dynamo DB"
 Vendor = "rapid7"
-Version = "2.0.0"
+Version = "3.0.0"
 Description = "Dynamo DB is a key/value store powered by Amazon available for members of AWS. Users can manage their data using the DynamoDB plugin for Rapid7 InsightConnect"
 
 
@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
+    import insightconnect_plugin_runtime
     from komand_dynamodb import connection, actions, triggers
 
-    class ICONDynamodb(komand.Plugin):
+    class ICONDynamodb(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -42,7 +42,7 @@ def main():
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONDynamodb())
+    cli = insightconnect_plugin_runtime.CLI(ICONDynamodb())
     cli.run()
 
 

@@ -23,4 +23,19 @@ jobs:
         python -m pip install --user icon-integrations-ci --no-cache-dir --no-warn-script-location
         python -m pip install --user insightconnect_plugin_runtime --no-cache-dir --no-warn-script-location
         cd plugins
-        /home/runner/.local/bin/icon-ci run_unit_tests
+        /home/runner/.local/bin/icon-ci run_unit_tests --generate_coverage
+    - name: Show coverage 
+      run: |
+        cd plugins
+        array=()
+        while IFS=  read -r -d $'\0'; do
+         array+=("$REPLY")
+        done < <(find "." -maxdepth 1 -iname '*\.coverage' -print0)
+        if [ ${#array[@]} -eq 0 ]; then
+            echo "No coverage data."
+        else
+            for i in "${array[@]}"
+            do
+              python -m coverage report --data-file=$i
+            done
+        fi

@@ -63,6 +63,31 @@ class Util:
             return MockResponse("get_site_excluded_targets", 200)
         if kwargs.get("url") == "https://example.com/api/3/sites/1/included_targets":
             return MockResponse("get_site_included_targets", 200)
+        if kwargs.get("url") == "https://example.com/api/2.0/tags/1":
+            if kwargs.get("json") == {
+                "attributes": [{"tag_attribute_name": "SOURCE", "tag_attribute_value": "CUSTOM"}],
+                "tag_name": "Example Tag",
+                "tag_config": {"tag_associated_asset_ids": [1, 2, 3]},
+                "tag_type": "Criticality",
+            }:
+                return MockResponse("tag_assets_bad_type", 405)
+            if kwargs.get("json") == {
+                "attributes": [{"tag_attribute_name": "SOURCE", "tag_attribute_value": "VM"}],
+                "tag_name": "Example Tag",
+                "tag_config": {"tag_associated_asset_ids": [1, 2, 3]},
+                "tag_type": "Custom",
+            }:
+                return MockResponse("tag_assets_bad_source", 409)
+            if kwargs.get("json") == {
+                "attributes": [{"tag_attribute_name": "SOURCE", "tag_attribute_value": "CUSTOM"}],
+                "tag_name": "Example Tag",
+                "tag_config": {"tag_associated_asset_ids": [4, 5, 6]},
+                "tag_type": "Custom",
+            }:
+                return MockResponse("tag_assets_bad_asset_ids", 500)
+            return MockResponse("tag_assets", 200)
+        if kwargs.get("url") == "https://example.com/api/2.0/tags/2":
+            return MockResponse("tag_assets_bad_id", 404)
         if kwargs.get("json") == {
             "filters": [{"field": "last-scan-date", "operator": "is-earlier-than", "value": 30}],
             "match": "all",

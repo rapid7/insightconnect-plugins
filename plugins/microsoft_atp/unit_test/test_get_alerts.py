@@ -36,7 +36,7 @@ class fakeSender:
 class TestGetAlerts(TestCase):
     @timeout_pass
     @timeout_decorator.timeout(30)
-    @patch("komand.Trigger.send", side_effect=fakeSender.send)
+    @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=fakeSender.send)
     def test_integration_get_alerts(self, mockSend):
         log = logging.getLogger("Test")
 

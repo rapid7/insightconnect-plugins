@@ -1,0 +1,21 @@
+{
+   "Error":{
+      "Message":"Requested resource not found",
+      "Code":"ResourceNotFoundException"
+   },
+   "ResponseMetadata":{
+      "RequestId":"060a8d58-563b-4428-9e4b-31caf24145da",
+      "HTTPStatusCode":400,
+      "HTTPHeaders":{
+         "server":"Server",
+         "date":"Wed, 30 Mar 2022 08:15:03 GMT",
+         "content-type":"application/x-amz-json-1.0",
+         "content-length":"112",
+         "connection":"keep-alive",
+         "x-amzn-requestid":"70f76f31-3df2-4eb9-80c0-13bd4e87064a",
+         "x-amz-crc32":"3737639027"
+      },
+      "RetryAttempts":0
+   },
+   "message":"Requested resource not found"
+}

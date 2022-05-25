@@ -3,50 +3,46 @@ import os
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-from komand_sentinelone.connection.connection import Connection
+from unittest.mock import patch
 from komand_sentinelone.actions.activities_types import ActivitiesTypes
-import json
-import logging
+from unit_test.util import Util
+from unittest import TestCase
 
 
 class TestActivitiesTypes(TestCase):
-    def test_integration_activities_types(self):
-        """
-        This is an integration test that will connect to the services your plugin uses. It should be used
-        as the basis for tests below that can run independent of a "live" connection.
+    @classmethod
+    @patch("requests.post", side_effect=Util.mocked_requests_get)
+    def setUpClass(cls, mock_request) -> None:
+        cls.action = Util.default_connector(ActivitiesTypes())
+        Util.mock_response_params = {}
 
-        This test assumes a normal plugin structure with a /tests directory. In that /tests directory should
-        be json samples that contain all the data needed to run this test. To generate samples run:
-
-        icon-plugin generate samples
-
-        """
-
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = ActivitiesTypes()
-
-        test_conn.logger = log
-        test_action.logger = log
-
-        try:
-            with open("../tests/activities_types.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        print(len(results.get("activity_types")))
-        self.assertTrue(len(results.get("activity_types")) > 0)
+    @patch("requests.post", side_effect=Util.mocked_requests_get)
+    @patch("requests.request", side_effect=Util.mocked_requests_get)
+    def test_should_success_without_inputs(self, mock_request, mock_request_post):
+        actual = self.action.run()
+        expected = {
+            "activity_types": [
+                {
+                    "action": "Account Created",
+                    "descriptionTemplate": "The management user {{ username }} created {{ account_name }} account.",
+                    "id": 5040,
+                },
+                {
+                    "action": "Account Deleted",
+                    "descriptionTemplate": "The management user {{ username }} deleted the account {{ account_name }}",
+                    "id": 5042,
+                },
+                {
+                    "action": "Account Expired",
+                    "descriptionTemplate": "The account {{ account_name }} expired automatically at "
+                    "{{ account_expiration | datetime}} because the expiration day was over",
+                    "id": 5043,
+                },
+                {
+                    "action": "Account marked as Expired",
+                    "descriptionTemplate": "The management user {{ username }} marked account {{ account_name }} as expired",
+                    "id": 5045,
+                },
+            ]
+        }
+        self.assertEqual(expected, actual)
