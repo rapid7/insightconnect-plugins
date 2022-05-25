@@ -30,8 +30,18 @@ class AnyRunAPI:
                 headers=self.authentication_header,
             )
 
+            if response.status_code == 400:
+                raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
             if response.status_code == 403:
-                raise PluginException(preset=PluginException.Preset.API_KEY)
+                raise PluginException(
+                    cause="Invalid API key or username and password provided.",
+                    assistance="Verify your API key, username or password is correct.",
+                )
+            if response.status_code == 404:
+                raise PluginException(
+                    cause="Not found.",
+                    assistance="Check that the provided input is correct and try again.",
+                )
             if response.status_code == 429:
                 raise PluginException(preset=PluginException.Preset.RATE_LIMIT)
             if response.status_code >= 400:

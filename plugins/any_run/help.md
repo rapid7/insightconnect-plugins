@@ -14,6 +14,10 @@ This plugin utilizes the [Any.Run API](https://any.run/api-documentation/).
 
 * Requires an API Key or username and password combination
 
+# Supported Product Versions
+
+* Any.Run API 2022-05-17
+
 # Documentation
 
 ## Setup
@@ -25,7 +29,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|False|API key for Any.Run|None|WbTbwa4KFk77eQNffMJynWXm49jLwGjwPMKM9Xc4|
-|credentials|credential_username_password|None|False|Username and password|None|{ "username": "user@example.com", "password": "mypassword"}|
+|credentials|credential_username_password|None|False|Username and password|None|{"username": "user@example.com", "password": "mypassword"}|
 
 Example input:
 
@@ -875,7 +879,7 @@ This action is used to run a new analysis.
 |opt_network_geo|string|None|False|Geo location option|['fastest', 'AU', 'BR', 'DE', 'CH', 'FR', 'KR', 'US', 'RU', 'GB', 'IT']|fastest|
 |opt_network_mitm|boolean|False|False|HTTPS MITM proxy option|None|False|
 |opt_network_tor|boolean|False|False|TOR using|None|False|
-|opt_privacy_hidesource|boolean|True|False|Option for hiding of source URL, used only for "download" type|None|True|
+|opt_privacy_hidesource|boolean|False|False|Option for hiding of source URL, used only for "download" type|None|False|
 |opt_privacy_type|string|bylink|False|Privacy settings|['public', 'bylink', 'owner']|bylink|
 |opt_timeout|integer|60|False|Timeout option, size range 10-660|None|60|
 
@@ -905,7 +909,7 @@ Example input:
   "opt_network_geo": "fastest",
   "opt_network_mitm": false,
   "opt_network_tor": false,
-  "opt_privacy_hidesource": true,
+  "opt_privacy_hidesource": false,
   "opt_privacy_type": "bylink",
   "opt_timeout": 60
 }
@@ -962,6 +966,7 @@ When configuring the connection, only one authentication method can be supplied.
 
 # Version History
 
+* 1.1.1 - Fix issue with invalid inputs in Run Analysis action | Fix issue where Run Analysis action fails if optional inputs are provided as empty strings | Fix issue where Get Report action fails when fields in output contain `None` value | Improve error handling
 * 1.1.0 - Allow user agent input when using URL type in Run Analysis action
 * 1.0.0 - Initial plugin
 
