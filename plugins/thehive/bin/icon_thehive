@@ -23,7 +23,7 @@ def main():
             monkey.patch_all()
 
     import komand
-    from komand_thehive import connection, actions, triggers
+    from icon_thehive import connection, actions, triggers
 
     class ICONThehive(komand.Plugin):
         def __init__(self):
