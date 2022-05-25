@@ -1,0 +1,150 @@
+{
+  "parameters": [
+    [
+      "file",
+      {
+        "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
+        "filename": "file.txt"
+      },
+      "file",
+      "",
+      "",
+      "",
+      "",
+      true,
+      true,
+      "temp",
+      "windows",
+      32,
+      "7",
+      "complete",
+      false,
+      true,
+      false,
+      false,
+      false,
+      "fastest",
+      false,
+      "bylink",
+      60,
+      {
+        "uuid": "44d88612-fea8-a8f3-6de8-2e1278abb02f"
+      }
+    ],
+    [
+      "file_2",
+      {
+        "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
+        "filename": "file.txt"
+      },
+      "file",
+      "",
+      "",
+      "",
+      "",
+      true,
+      true,
+      "desktop",
+      "windows",
+      64,
+      "10",
+      "clean",
+      false,
+      true,
+      true,
+      true,
+      true,
+      "US",
+      true,
+      "owner",
+      60,
+      {
+        "uuid": "44d88612-fea8-a8f3-6de8-2e1278abb02f"
+      }
+    ],
+    [
+      "url",
+      {},
+      "url",
+      "http://example.com",
+      "",
+      "Mozilla Firefox",
+      "Mozilla/5.0 (Windows 10; Win64; x64; rv:47.0) Firefox/47.0",
+      true,
+      true,
+      "temp",
+      "windows",
+      64,
+      "10",
+      "complete",
+      true,
+      true,
+      false,
+      false,
+      false,
+      "GB",
+      false,
+      "bylink",
+      60,
+      {
+        "uuid": "44d88612-fea8-a8f3-6de8-2e1278abb02f"
+      }
+    ],
+    [
+      "url_2",
+      {},
+      "url",
+      "http://example.com",
+      "",
+      "Google Chrome",
+      "",
+      true,
+      true,
+      "windows",
+      "windows",
+      64,
+      "8.1",
+      "office",
+      false,
+      true,
+      false,
+      false,
+      false,
+      "DE",
+      false,
+      "public",
+      60,
+      {
+        "uuid": "44d88612-fea8-a8f3-6de8-2e1278abb02f"
+      }
+    ],
+    [
+      "download",
+      {},
+      "download",
+      "https://upload.example.com/test.png",
+      "",
+      "",
+      "",
+      true,
+      true,
+      "temp",
+      "windows",
+      64,
+      "8.1",
+      "complete",
+      true,
+      true,
+      false,
+      false,
+      false,
+      "fastest",
+      false,
+      "public",
+      60,
+      {
+        "uuid": "44d88612-fea8-a8f3-6de8-2e1278abb02f"
+      }
+    ]
+  ]
+}
