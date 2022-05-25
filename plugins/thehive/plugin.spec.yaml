@@ -27,12 +27,14 @@ connection:
   host:
     type: string
     title: Host
-    description: TheHive host e.g. thehive.company.com or 10.3.4.50
+    description: TheHive host e.g. thehive.example.com or 10.3.4.50
+    example: thehive.example.com
     required: true
   port:
     type: string
     title: Port
     description: TheHive API port e.g. 9000
+    example: 9000
     default: "9000"
     required: true
   protocol:
@@ -42,23 +44,27 @@ connection:
     enum:
     - http
     - https
+    example: HTTPS
     required: true
   credentials:
     type: credential_username_password
     title: Credentials
     description: Username and password
+    example: None
     required: true
   proxy:
     type: object
     title: Proxy
     description: An optional dictionary containing proxy data, with HTTP or HTTPS
       as the key, and the proxy URL as the value
+    example: None
     required: false
   verify:
     type: boolean
     title: SSL Verify
     description: Verify the certificate
     default: true
+    example: true
     required: true
 types:
   itask:
@@ -282,6 +288,7 @@ actions:
         title: User ID
         description: User ID. If empty, the current user is used
         type: string
+        example: None
         required: false
     output:
       status:
@@ -351,38 +358,45 @@ actions:
         title: Case Title
         description: Name of the case
         type: string
+        example: Title
         required: true
       description:
         title: Case Description
         description: Description of the case
         type: string
+        example: Description
         required: false
       tlp:
         title: TLP
         description: Traffic Light Protocol level, default is 2
         default: 2
         type: integer
+        example: 2
         required: false
       flag:
         title: Flag
         description: Flag, default is false
         default: false
         type: boolean
+        example: false
         required: false
       tags:
         title: Tags
         description: List of tags
         type: '[]string'
+        example: None
         required: false
       task:
         type: itask
         title: Task
         description: Case task
+        example: None
         required: false
       customFields:
         title: Custom Fields
         description: Case custom fields
         type: object
+        example: None
         required: false
     output:
       case:
@@ -395,13 +409,15 @@ actions:
     input:
       id:
         title: Case ID
-        description: Case ID e.g. AV_ajI_oYMfcbXhqb9tS
+        description: ID of the case
         type: string
+        example: AV_ajI_oYMfcbXhqb9tS
         required: true
       task:
         type: itask
         title: Task
         description: Task name
+        example: None
         required: true
     output:
       case:
@@ -414,13 +430,15 @@ actions:
     input:
       id:
         title: Case ID
-        description: Case ID e.g. AV_ajI_oYMfcbXhqb9tS
+        description: ID of the case
         type: string
+        example: AV_ajI_oYMfcbXhqb9tS
         required: true
       observable:
         type: iobservable
         title: Observable
         required: true
+        example: None
         description: Observable
     output:
       case:
@@ -433,8 +451,9 @@ actions:
     input:
       id:
         title: Case ID
-        description: Case ID e.g. AV_ajI_oYMfcbXhqb9tS
+        description: ID of the case
         type: string
+        example: AV_ajI_oYMfcbXhqb9tS
         required: true
     output:
       case:
@@ -455,13 +474,15 @@ actions:
     input:
       id:
         title: Case ID
-        description: Case ID e.g. AV_ajI_oYMfcbXhqb9tS
+        description: ID of the case
         type: string
+        example: AV_ajI_oYMfcbXhqb9tS
         required: true
       resolution_status:
         title: Resolution Status
         description: Case resolution status
         type: string
+        example: low
         required: false
         enum:
         - low
@@ -471,6 +492,7 @@ actions:
         title: Impact Status
         description: Case impact status
         type: string
+        example: low
         required: false
         enum:
         - low
@@ -480,6 +502,7 @@ actions:
         title: Summary
         description: Case Summary
         type: string
+        example: None
         required: false
     output:
       type:
