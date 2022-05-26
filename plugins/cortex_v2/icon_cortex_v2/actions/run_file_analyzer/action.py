@@ -1,4 +1,5 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import RunFileAnalyzerInput, RunFileAnalyzerOutput, Input, Output, Component
 
 # Custom imports below
@@ -6,9 +7,6 @@ import os
 import base64
 import shutil
 import tempfile
-from icon_cortex_v2.util.convert import job_to_dict
-from cortex4py.exceptions import ServiceUnavailableError, AuthenticationError, CortexException
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 
 class RunFileAnalyzer(insightconnect_plugin_runtime.Action):
@@ -23,7 +21,7 @@ class RunFileAnalyzer(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        api = self.connection.api
+        api = self.connection.API
 
         analyzer_name = params.get(Input.ANALYZER_ID)
         file_content = base64.b64decode(params.get(Input.FILE))
@@ -38,19 +36,12 @@ class RunFileAnalyzer(insightconnect_plugin_runtime.Action):
             with open(file_path, "w+b") as f:
                 f.write(file_content)
 
-            job = api.analyzers.run_by_name(
-                analyzer_name, {"data": file_path, "dataType": "file", "tlp": tlp_num}, force=1
-            )
-            job = job_to_dict(job, api)
+            job = None  # api.analyzers.run_by_name(
+            #     analyzer_name, {"data": file_path, "dataType": "file", "tlp": tlp_num}, force=1
+            # )
+            # job = job_to_dict(job, api)
 
             shutil.rmtree(temp_dir)
-        except AuthenticationError as e:
-            self.logger.error(e)
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
-        except ServiceUnavailableError as e:
-            self.logger.error(e)
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
-        except CortexException as e:
-            raise ConnectionTestException(cause="Failed to run analyzer.", assistance=f"{e}.")
-
+        except Exception as e:
+            raise PluginException(e)
         return {Output.JOB: job}

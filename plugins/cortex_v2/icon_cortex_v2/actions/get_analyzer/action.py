@@ -1,10 +1,8 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import GetAnalyzerInput, GetAnalyzerOutput, Input, Output, Component
 
 # Custom imports below
-from icon_cortex_v2.util.convert import analyzers_to_dicts
-from cortex4py.exceptions import ServiceUnavailableError, AuthenticationError, CortexException
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 
 class GetAnalyzer(insightconnect_plugin_runtime.Action):
@@ -17,31 +15,12 @@ class GetAnalyzer(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        api = self.connection.api
         analyzer_id = params.get(Input.ANALYZER_ID)
-
         if analyzer_id:
-            self.logger.info("User specified Analyzer ID: %s", analyzer_id)
-            try:
-                analyzers = [api.analyzers.get_by_id(analyzer_id)]
-            except AuthenticationError as e:
-                self.logger.error(e)
-                raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
-            except ServiceUnavailableError as e:
-                self.logger.error(e)
-                raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
-            except CortexException as e:
-                raise ConnectionTestException(cause="Failed to get analyzers.", assistance=f"{e}.")
+            self.logger.info(f"User specified analyzer ID: {analyzer_id}")
         else:
-            try:
-                analyzers = api.analyzers.find_all({}, range="all")
-            except AuthenticationError as e:
-                self.logger.error(e)
-                raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
-            except ServiceUnavailableError as e:
-                self.logger.error(e)
-                raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
-            except CortexException as e:
-                raise ConnectionTestException(cause="Failed to get analyzers.", assistance=f"{e}.")
-
-        return {Output.LIST: analyzers_to_dicts(analyzers)}
+            self.logger.info("Getting all analyzers...")
+        try:
+            return {Output.LIST: self.connection.API.get_analyzer_by_id(analyzer_id)}
+        except Exception as e:
+            raise PluginException(f"Failed to get analyzers.", assistance=f"{e}")

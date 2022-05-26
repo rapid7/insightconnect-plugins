@@ -1,10 +1,8 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import RunAnalyzerInput, RunAnalyzerOutput, Input, Output, Component
 
 # Custom imports below
-from icon_cortex_v2.util.convert import job_to_dict
-from cortex4py.exceptions import ServiceUnavailableError, AuthenticationError, CortexException
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 
 class RunAnalyzer(insightconnect_plugin_runtime.Action):
@@ -19,7 +17,7 @@ class RunAnalyzer(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        api = self.connection.api
+        api = self.connection.API
 
         analyzer_name = params.get(Input.ANALYZER_ID)
         observable = params.get(Input.OBSERVABLE)
@@ -27,23 +25,11 @@ class RunAnalyzer(insightconnect_plugin_runtime.Action):
         tlp_num = params.get(Input.ATTRIBUTES).get("tlp")
 
         try:
-            job = api.analyzers.run_by_name(
-                analyzer_name, {"data": observable, "dataType": data_type, "tlp": tlp_num}, force=1
-            )
-            job = job_to_dict(job, api)
-        except AuthenticationError as e:
-            self.logger.error(e)
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
-        except ServiceUnavailableError as e:
-            self.logger.error(e)
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE)
-        except CortexException as e:
-            raise ConnectionTestException(cause="Failed to run analyzer.", assistance=f"{e}.")
-        except Exception:
-            # A bad analyzer returns: AttributeError: 'NoneType' object has no attribute 'id'
-            raise ConnectionTestException(
-                cause="Failed to run analyzer.",
-                assistance="The selected analyzer may not exist in Cortex!",
-            )
+            job = None  # api.analyzers.run_by_name(
+            #     analyzer_name, {"data": observable, "dataType": data_type, "tlp": tlp_num}, force=1
+            # )
+            # job = job_to_dict(job, api)
+        except Exception as e:
+            raise PluginException(e)
 
         return {Output.JOB: job}
