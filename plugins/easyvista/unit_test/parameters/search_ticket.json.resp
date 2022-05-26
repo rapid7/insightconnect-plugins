@@ -1,0 +1,94 @@
+{
+  "parameters": [
+    [
+      "found",
+      "I2210520_000001",
+      {
+        "results": {
+          "record_count": "1",
+          "records": [
+            {
+              "COMMENT": {
+                "HREF": "https://example.easyvista.com/api/v1..."
+              },
+              "DEPARTMENT": {
+                "DEPARTMENT_LABEL": "",
+                "DEPARTMENT_PATH": "",
+                "HREF": "https://example.easyvista.com/api/v1...",
+                "DEPARTMENT_CODE": "",
+                "DEPARTMENT_EN": "-",
+                "DEPARTMENT_ID": "5"
+              },
+              "KNOWNERROR": {
+                "KNOWNERROR_PATH": "",
+                "KNOWN_PROBLEMS_ID": "",
+                "KP_NUMBER": "",
+                "QUESTION_EN": ""
+              },
+              "LOCATION": {
+                "LOCATION_CODE": "",
+                "LOCATION_EN": "-",
+                "LOCATION_ID": "6",
+                "LOCATION_PATH": "",
+                "CITY": "",
+                "HREF": "https://example.easyvista.com/api/v1..."
+              },
+              "MAX_RESOLUTION_DATE_UT": "",
+              "RECIPIENT": {
+                "DEPARTMENT_PATH": "",
+                "EMPLOYEE_ID": "16",
+                "E_MAIL": "user@example.com",
+                "LAST_NAME": "employee3",
+                "LOCATION_PATH": "",
+                "PHONE_NUMBER": " -",
+                "BEGIN_OF_CONTRACT": "2021-04-02",
+                "CELLULAR_NUMBER": " -"
+              },
+              "RFC_NUMBER": "I2210520_000001",
+              "CATALOG_REQUEST": {
+                "CATALOG_REQUEST_PATH": "Incidents/Test_Catalog",
+                "CODE": "Test1",
+                "HREF": "https://example.easyvista.com/api/v1...",
+                "SD_CATALOG_ID": "5218",
+                "TITLE_EN": "Test_Catalog"
+              },
+              "HREF": "https://example.easyvista.com/api/v1...",
+              "REQUESTOR": {
+                "LOCATION_PATH": "",
+                "PHONE_NUMBER": " -",
+                "BEGIN_OF_CONTRACT": "2021-04-02",
+                "CELLULAR_NUMBER": " -",
+                "DEPARTMENT_PATH": "",
+                "EMPLOYEE_ID": "16",
+                "E_MAIL": "user@example.com",
+                "LAST_NAME": "employee1"
+              },
+              "REQUEST_ID": "9",
+              "STATUS": {
+                "HREF": "https://example.easyvista.com/api/v1...",
+                "STATUS_EN": "Closed",
+                "STATUS_GUID": "{C3D9DFA7-7A21-46C2-B3A3-8BC50C9FF4F3}",
+                "STATUS_ID": "8"
+              },
+              "SUBMIT_DATE_UT": "2021-04-09T11:29:36.947Z"
+            }
+          ],
+          "total_record_count": "1",
+          "HREF": "https://example.easyvista.com/api/v1..."
+        }
+      }
+    ],
+    [
+      "not_found",
+      "I2210520_000009",
+      {
+        "results": {
+          "record_count": "0",
+          "records": [],
+          "total_record_count": "0",
+          "HREF": "https://example.easyvista.com/api/v1..."
+        }
+      }
+    ]
+  ]
+}

@@ -31,6 +31,12 @@ class EasyVistaApi:
             )
         if 400 <= response.status_code < 500:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+        if response.status_code == 590:
+            raise PluginException(
+                cause="Incorrect input was provided.",
+                assistance="Please provide valid inputs and try again.",
+                data=response.text,
+            )
         if response.status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
         try:
