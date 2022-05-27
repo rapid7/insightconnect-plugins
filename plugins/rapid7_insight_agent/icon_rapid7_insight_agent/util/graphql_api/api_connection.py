@@ -1,9 +1,11 @@
-from icon_rapid7_insight_agent.util.graphql_api.region_map import region_map
-from icon_rapid7_insight_agent.util.graphql_api.api_exception import APIException
-from typing import Optional
-import icon_rapid7_insight_agent.util.graphql_api.agent_typer as agent_typer
-import requests
 import logging
+from typing import Optional
+
+import requests
+
+from icon_rapid7_insight_agent.util.graphql_api import agent_typer
+from icon_rapid7_insight_agent.util.graphql_api.region_map import region_map
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class ApiConnection:
@@ -83,24 +85,21 @@ class ApiConnection:
         }
 
         results_object = self._post_payload(payload)
-
         try:
             agent = results_object.get("data").get("assets")[0].get("agent")
             quarantine_state = agent.get("quarantineState").get("currentState")
             agent_status = agent.get("agentStatus")
-        except (KeyError, IndexError):
-            raise APIException(
+        except (Exception, IndexError):
+            raise PluginException(
                 cause="Received an unexpected response from the server.",
-                assistance="(non-JSON or no response was received).\n",
+                assistance="Verify your plugin connection inputs are correct especially region. If the issue persists, please contact support.",
                 data=str(results_object),
             )
 
-        is_online = True if agent_status == "ONLINE" else False
-        is_quarantine_requested = True if quarantine_state == "QUARANTINE_IN_PROGRESS" else False
-        is_unquarantine_requested = True if quarantine_state == "UNQUARANTINE_IN_PROGRESS" else False
-        is_is_quarantined = (
-            True if (quarantine_state == "QUARANTINED" or quarantine_state == "UNQUARANTINE_IN_PROGRESS") else False
-        )
+        is_online = bool(agent_status == "ONLINE")
+        is_quarantine_requested = bool(quarantine_state == "QUARANTINE_IN_PROGRESS")
+        is_unquarantine_requested = bool(quarantine_state == "UNQUARANTINE_IN_PROGRESS")
+        is_is_quarantined = bool(quarantine_state in ("QUARANTINED", "UNQUARANTINE_IN_PROGRESS"))
 
         return {
             "is_currently_quarantined": is_is_quarantined,
@@ -173,7 +172,7 @@ class ApiConnection:
         try:
             result.raise_for_status()
         except Exception:
-            raise APIException(
+            raise PluginException(
                 cause="Error connecting to the Insight Agent API.",
                 assistance="Please check your Organization ID and API key.\n",
                 data=result.text,
@@ -182,7 +181,7 @@ class ApiConnection:
         results_object = result.json()
 
         if results_object.get("errors"):
-            raise APIException(
+            raise PluginException(
                 cause="The Insight Agent API returned errors",
                 assistance=results_object.get("errors"),
             )
@@ -202,7 +201,7 @@ class ApiConnection:
             endpoint = f"https://{region_code}.api.insight.rapid7.com/graphql"
         else:
             # It's an enum, hopefully this never happens.
-            raise APIException(
+            raise PluginException(
                 cause="Region not found.",
                 assistance="Region code was not found for selected region. Available regions are: United States, "
                 "Europe, Canada, Australia, Japan",
@@ -245,7 +244,7 @@ class ApiConnection:
             if agent:
                 return agent
 
-        raise APIException(
+        raise PluginException(
             cause=f"Could not find agent matching {agent_input} of type {agent_type}.",
             assistance="Check the agent input value and try again.",
             data="NA",
@@ -308,7 +307,7 @@ class ApiConnection:
                     if stripped_input_mac == stripped_target_mac:
                         return agent
                 else:
-                    raise APIException(
+                    raise PluginException(
                         cause="Could not determine agent type.",
                         assistance=f"Agent {agent_input} was not a MAC address, IP address, or hostname.",
                     )
@@ -333,7 +332,7 @@ class ApiConnection:
                 agent = edge.get("node")
                 agent_list.append(agent)
         except KeyError:
-            raise APIException(
+            raise PluginException(
                 cause="Insight Agent API returned data in an unexpected format.\n",
                 data=str(results_object),
             )
