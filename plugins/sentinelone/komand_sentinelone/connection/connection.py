@@ -393,13 +393,14 @@ class Connection(insightconnect_plugin_runtime.Connection):
         @return: returns a list of incident IDs that exist in the
         SentinelOne instance
         """
+        incident_ids_copy = incident_ids.copy()
         for incident_id in incident_ids:
             response_data = self.get_incident(incident_id, _type).get("data")
             if isinstance(response_data, list) and response_data.__len__() == 0:
                 self.logger.info(f"Incident {incident_id} was not found.")
-                incident_ids.remove(incident_id)
+                incident_ids_copy.remove(incident_id)
 
-        return incident_ids
+        return incident_ids_copy
 
     def validate_incident_state(self, incident_ids: list, _type: str, new_state: str, attribute: str) -> list:
         """
