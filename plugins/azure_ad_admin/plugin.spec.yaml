@@ -4,9 +4,10 @@ products: [insightconnect]
 name: azure_ad_admin
 title: Azure AD Admin
 description: Perform administrative operations in Azure AD
-version: 2.2.5
+version: 2.2.6
 vendor: rapid7
 support: community
+supported_versions: [2022-05-30]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/azure_ad_admin
@@ -299,16 +300,19 @@ connection:
     description: The ID of the directory that identifies the tenant
     type: string
     required: true
+    example: 5ceea899-ae8c-4ff1-fffe-353646eeeff0
   application_id:
     title: App ID
     description: The ID of the registered application that obtained the refresh token
     type: string
     required: true
+    example: 6731de76-14a6-49ae-97bc-6eba6914391e
   application_secret:
     title: App Secret
     description: The secret of the registered application that obtained the refresh token
     type: credential_secret_key
     required: true
+    example: JqQX2PNo9bpM0uEihUPzyrh
 actions:
   disable_user_account:
     title: Disable User Account
@@ -317,8 +321,9 @@ actions:
       user_id:
         title: User ID
         type: string
-        description: User ID to disable e.g. user@example.com
+        description: User ID to disable
         required: true
+        example: user@example.com
     output:
       success:
         title: Success
@@ -332,8 +337,9 @@ actions:
       user_id:
         title: User ID
         type: string
-        description: User ID to enable e.g. user@example.com
+        description: User ID to enable
         required: true
+        example: user@example.com
     output:
       success:
         title: Success
@@ -347,8 +353,9 @@ actions:
       user_id:
         title: User ID
         type: string
-        description: User ID e.g. user@example.com
+        description: Retrieve information about specific User ID
         required: true
+        example: user@example.com
     output:
       user_information:
         title: User Information
@@ -361,40 +368,47 @@ actions:
     input:
       display_name:
         title: Display Name
-        description: The name to display in the address book for the user e.g. displayName-value
+        description: The name to display in the address book for the user
         type: string
         required: true
+        example: displayName-value
       mail_nickname:
         title: Mail Nickname
-        description: The mail alias for the user e.g. mailNickname-value
+        description: The mail alias for the user
         required: false
         type: string
+        example: user@example.com
       user_principal_name:
         title: User Principal Name
-        description: The user principal name e.g. user@example.com
+        description: The user principal name
         required: true
         type: string
+        example: user@example.com
       account_enabled:
         title: Account Enabled
         description: True if the account is enabled; otherwise, false
         type: boolean
         default: true
         required: false
+        example: true
       notify_email_body:
         required: false
         title: Notify Email Body
         type: string
         description: Body of the email to be sent out. Use $password to place the generated password
+        example: Example message to send,
       notify_recipient:
         required: true
         title: Recipient of Creation Email
         type: string
         description: Email address of the account to be notified of user creation
+        example: user@example.com
       notify_from:
-          required: true
-          title: Notify from
-          description: User from which email notifcation will be sent
-          type: string
+        required: true
+        title: Notify from
+        description: User from which email notifcation will be sent
+        type: string
+        example: user@example.com
     output:
       success:
         title: Success
@@ -408,8 +422,9 @@ actions:
       user_id:
         title: User ID
         type: string
-        description: User ID
+        description: User ID to password change
         required: true
+        example: user@example.com
     output:
       success:
         title: Success
@@ -418,13 +433,14 @@ actions:
         required: true
   get_group_by_name:
     title: Get Group by Name
-    description: Get a group by it's name
+    description: Get a group by its name
     input:
       name:
         title: Name
-        description: Name
+        description: Display name to filter
         type: string
         required: true
+        example: displayName
     output:
         group:
           title: Group
@@ -437,14 +453,16 @@ actions:
     input:
       user_id:
         title: User ID
-        description: User ID e.g. user@example.com
+        description: User ID
         type: string
         required: true
+        example: user@example.com
       group_name:
         title: Group Name
-        description: Group Name e.g. My Azure Group
+        description: Name of the group to add a user to
         type: string
         required: true
+        example: Example Group Name
     output:
       success:
         title: Success
@@ -457,7 +475,7 @@ actions:
     input:
       user_id:
         title: User ID
-        description: User ID e.g. user@example.com
+        description: User ID to add
         type: string
         required: true
         example: user@example.com
@@ -479,14 +497,16 @@ actions:
     input:
       user_id:
         title: User ID
-        description: User ID e.g. user@example.com
+        description: User ID to remove from group
         type: string
         required: true
+        example: user@example.com
       group_name:
         title: Group Name
-        description: Group Name e.g. My Azure Group
+        description: Group Name to manage
         type: string
         required: true
+        example: Example Group Name
     output:
       success:
         title: Success
@@ -518,7 +538,7 @@ actions:
       job_title:
         title: Job Title
         type: string
-        description: The user’s job title
+        description: The user's job title
         required: false
         example: Desktop Technician
       state:
@@ -551,7 +571,7 @@ actions:
     input:
       user_id:
         title: User ID
-        description: User ID
+        description: User ID to revoke
         type: string
         example: user@example.com
         required: true
@@ -572,6 +592,7 @@ triggers:
         description: Poll frequency in seconds
         default: 60
         required: false
+        example: 60
       risk_level:
         title: Risk Level
         description: Risk level
@@ -584,6 +605,7 @@ triggers:
           - "hidden"
           - "none"
           - "all"
+        example: all
     output:
       risk:
         title: Risk
