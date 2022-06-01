@@ -18,13 +18,18 @@ class LookupAlert(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         try:
             return {
+                Output.RESULT_FOUND: True,
                 Output.ALERT: insightconnect_plugin_runtime.helper.clean(
                     self.connection.client.make_request(Endpoint.lookup_alert(params.get(Input.ALERT_ID))).get("data")
-                )
+                ),
             }
-        except AttributeError as e:
+        except AttributeError as error:
             raise PluginException(
                 cause="Recorded Future returned unexpected response.",
                 assistance="Please check that the provided input is correct and try again.",
-                data=e,
+                data=error,
             )
+        except PluginException as error:
+            if "No results found." in error.cause:
+                return {Output.RESULT_FOUND: False, Output.ALERT: {}}
+            raise error
