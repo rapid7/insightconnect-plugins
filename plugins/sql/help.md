@@ -69,7 +69,7 @@ Example input:
 ```
 {
   "parameters": {
-    "name": "user" 
+    "name": "user"
   },
   "query": "SELECT * FROM example WHERE name=:name"
 }
@@ -119,6 +119,7 @@ For the SQL query action, be sure that your query is valid SQL.
 
 # Version History
 
+* 3.0.4 - Patch keyword argument error
 * 3.0.3 - Change example input Port in Connection | Update file util.py to Python3
 * 3.0.2 - Add default PORT for MSSQL and MySQL connection
 * 3.0.1 - Close database connection after use
