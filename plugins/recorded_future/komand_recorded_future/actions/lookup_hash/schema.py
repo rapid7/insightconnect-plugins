@@ -14,6 +14,7 @@ class Input:
 
 class Output:
     DATA = "data"
+    RESULT_FOUND = "result_found"
     
 
 class LookupHashInput(insightconnect_plugin_runtime.Input):
@@ -55,11 +56,18 @@ class LookupHashOutput(insightconnect_plugin_runtime.Output):
       "$ref": "#/definitions/hash_search_data",
       "title": "Data",
       "description": "Data",
+      "order": 2
+    },
+    "result_found": {
+      "type": "boolean",
+      "title": "Result Found",
+      "description": "Whether the result was found",
       "order": 1
     }
   },
   "required": [
-    "data"
+    "data",
+    "result_found"
   ],
   "definitions": {
     "analystNote": {
