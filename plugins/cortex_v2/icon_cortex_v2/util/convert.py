@@ -1,3 +1,5 @@
+from typing import Set, List, Dict
+
 def report_to_dict(report):
     return report.json()
 
@@ -29,3 +31,28 @@ def _convert_to_dicts(objects, keys):
 
 def _convert_to_dict(object_, keys):
     return {key: getattr(object_, key) for key in keys}
+
+
+def filter_analyzers(analyzers: List[Dict]):
+    return [filter_analyzer(analyzer) for analyzer in analyzers]
+
+
+def filter_analyzer(analyzer: Dict):
+    return {k: v for k, v in analyzer.items() if k in
+            {"id", "version", "dataTypeList", "name", "description", "license", "author", "url"}}
+
+
+def filter_jobs(jobs: List[Dict]):
+    return [filter_job(job) for job in jobs]
+
+
+def filter_job(job: Dict):
+    return {k: v for k, v in job.items() if k in {"status", "date", "id", "analyzerId"}}
+
+
+def filter_job_artifacts(artifacts: List[Dict]):
+    return [filter_job_artifact(artifact) for artifact in artifacts]
+
+
+def filter_job_artifact(artifact: Dict):
+    return {k: v for k, v in artifact.items() if k in {"dataType", "data"}}
