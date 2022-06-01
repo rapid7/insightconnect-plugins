@@ -193,10 +193,9 @@ actions:
     input:
       analyzer_id:
         title: Analyzer ID
-        description: Analyzer ID. If empty, all enabled analyzers
-          will be returned
+        description: ID of an analyzer. If empty, all enabled analyzers will be returned
         type: string
-        example: VirusTotal_Scan_3_0
+        example: 12a6ed3c998d2969a58d65494df802b7
         required: false
     output:
       list:
