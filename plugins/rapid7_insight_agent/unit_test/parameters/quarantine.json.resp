@@ -1,0 +1,22 @@
+{
+   "parameters":[
+      [
+         "good_agent_id",
+         "goodIDQuarantine",
+         604800,
+         true,
+         {
+            "success":true
+         }
+      ],
+      [
+         "bad_agent_id",
+         "badIDQuarantine",
+         604800,
+         true,
+         {
+            "success":false
+         }
+      ]
+   ]
+}

@@ -1,0 +1,15 @@
+{
+   "data":{
+      "assets":[
+         {
+            "agent":{
+               "id":"9de5069c5afe602b2ea0a04b66beb2c0",
+               "quarantineState":{
+                  "currentState":"UNQUARANTINED"
+               },
+               "agentStatus":"ONLINE"
+            }
+         }
+      ]
+   }
+}
