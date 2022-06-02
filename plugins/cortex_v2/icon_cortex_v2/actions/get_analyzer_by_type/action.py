@@ -3,6 +3,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import GetAnalyzerByTypeInput, GetAnalyzerByTypeOutput, Input, Output, Component
 
 # Custom imports below
+from icon_cortex_v2.util.convert import filter_analyzers
 
 
 class GetAnalyzerByType(insightconnect_plugin_runtime.Action):
@@ -16,6 +17,6 @@ class GetAnalyzerByType(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         try:
-            return {Output.LIST: self.connection.API.get_analyzer_by_type(params.get(Input.TYPE))}
+            return {Output.LIST: filter_analyzers(self.connection.API.get_analyzer_by_type(params.get(Input.TYPE)))}
         except Exception as e:
             raise PluginException(f"Failed to get analyzers.", assistance=f"{e}")

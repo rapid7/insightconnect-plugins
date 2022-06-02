@@ -20,7 +20,7 @@ class GetAnalyzer(insightconnect_plugin_runtime.Action):
         try:
             if analyzer_id:
                 self.logger.info(f"User specified analyzer ID: {analyzer_id}")
-                result = filter_analyzer(self.connection.API.get_analyzer_by_id(analyzer_id))
+                result = [filter_analyzer(self.connection.API.get_analyzer_by_id(analyzer_id))]
             else:
                 self.logger.info("Getting all analyzers...")
                 result = filter_analyzers(self.connection.API.get_analyzers())

@@ -1,4 +1,5 @@
-from typing import Set, List, Dict
+from typing import List, Dict
+
 
 def report_to_dict(report):
     return report.json()
