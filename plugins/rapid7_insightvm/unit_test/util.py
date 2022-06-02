@@ -149,3 +149,5 @@ class Util:
             return MockAsyncResponse("asset_vulnerability_solution_invalid_vulnerability_id", 404)
         if kwargs.get("url") == "https://example.com/api/3/assets/11/vulnerabilities/ssl-cve-2011-3389-beast/solution":
             return MockAsyncResponse("asset_vulnerability_solution_invalid_asset_id", 404)
+        if kwargs.get("url") == "https://example.com/api/3/vulnerabilities/certificate-common-name-mismatch":
+            return MockAsyncResponse("get_asset_vulnerabilities_with_risk_score", 200)
