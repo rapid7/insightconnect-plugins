@@ -89,3 +89,6 @@ class API:
 
     def get_job_report(self, job_id):
         return self.send_request("GET", f"job/{job_id}/report").json()
+
+    def get_job_artifacts(self, job_id):
+        return self.send_request("GET", f"job/{job_id}/artifacts").json()
