@@ -1,0 +1,12 @@
+{
+   "data":{
+      "quarantineAssets":{
+         "results":[
+            {
+               "assetId":"goodIDQuarantine",
+               "failed":false
+            }
+         ]
+      }
+   }
+}

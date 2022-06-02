@@ -1,42 +1,32 @@
 import sys
 import os
+from unittest.mock import patch
+
+from insightconnect_plugin_runtime.exceptions import PluginException
+from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from icon_rapid7_insight_agent.connection.connection import Connection
+from unit_test.util import Util
 from icon_rapid7_insight_agent.actions.get_agent_details import GetAgentDetails
-import json
-import logging
+from icon_rapid7_insight_agent.actions.get_agent_details.schema import Input
 
 
+@patch("requests.sessions.Session.post", side_effect=Util.mocked_request)
 class TestGetAgentDetails(TestCase):
-    def test_integration_get_agent_details(self):
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = GetAgentDetails()
+    @parameterized.expand(Util.load_json("parameters/get_agents_details.json.resp").get("parameters"))
+    def test_get_agent_details(self, mock_request, name, agent, expect):
+        action = Util.default_connector(GetAgentDetails())
+        actual = action.run({Input.AGENT: agent})
+        self.assertEqual(expect, actual)
 
-        test_conn.logger = log
-        test_action.logger = log
-
-        try:
-            with open("../tests/get_agent_details.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        self.assertTrue("agent" in results.keys())
-        self.assertTrue(len(results), 1)
-        self.assertEqual(results.get("agent").get("id"), "15eec979a15f75ad70567d58ad8a0aef")
+    def test_get_agent_by_hostname_bad(self, mock_request):
+        with self.assertRaises(PluginException) as exception:
+            action = Util.default_connector(GetAgentDetails())
+            action.run({Input.AGENT: "badID"})
+        self.assertEqual(exception.exception.cause, "Could not find agent matching badID of type Host Name.")
+        self.assertEqual(
+            exception.exception.assistance,
+            "Check the agent input value and try again.",
+        )
