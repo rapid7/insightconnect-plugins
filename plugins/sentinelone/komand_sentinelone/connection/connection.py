@@ -432,7 +432,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         """
         for incident_id in incident_ids:
             response_data = self.get_incident(incident_id, _type).get("data")
-            if isinstance(response_data, list) and response_data.__len__() == 0:
+            if isinstance(response_data, list) and len(response_data) == 0:
                 self.logger.info(f"Incident {incident_id} was not found.")
                 incident_ids.remove(incident_id)
 
