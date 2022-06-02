@@ -1,0 +1,72 @@
+{
+  "added": "2018-02-21",
+  "categories": [
+    "CIFS"
+  ],
+  "cvss": {
+    "links": [
+      {
+        "href": "https://example.com/vuln-metrics/cvss/v2-calculator?vector=(AV:A/AC:H/Au:N/C:C/I:C/A:N)",
+        "rel": "CVSS v2 Calculator"
+      }
+    ],
+    "v2": {
+      "accessComplexity": "H",
+      "accessVector": "A",
+      "authentication": "N",
+      "availabilityImpact": "N",
+      "confidentialityImpact": "C",
+      "exploitScore": 3.1835,
+      "impactScore": 9.2066,
+      "integrityImpact": "C",
+      "score": 6.2,
+      "vector": "AV:A/AC:H/Au:N/C:C/I:C/A:N"
+    }
+  },
+  "denialOfService": false,
+  "description": {
+    "html": "<p>\n         This system enables, but does not require SMB signing. SMB signing\n         allows the recipient of SMB packets to confirm their authenticity and\n         helps prevent man in the middle attacks against SMB. SMB 2.x signing\n         can be configured in one of two ways: not required (least secure) and\n         required (most secure).\n      </p>",
+    "text": "This system enables, but does not require SMB signing. SMB signing allows the recipient of SMB packets to confirm their authenticity and helps prevent man in the middle attacks against SMB. SMB 2.x signing can be configured in one of two ways: not required (least secure) and required (most secure)."
+  },
+  "exploits": 0,
+  "id": "cifs-smb2-signing-not-required",
+  "links": [
+    {
+      "href": "https://example.com/api/3/vulnerabilities/cifs-smb2-signing-not-required",
+      "rel": "self"
+    },
+    {
+      "href": "https://example.com/api/3/vulnerabilities/cifs-smb2-signing-not-required/checks",
+      "rel": "Vulnerability Checks"
+    },
+    {
+      "href": "https://example.com/api/3/vulnerabilities/cifs-smb2-signing-not-required/references",
+      "rel": "Vulnerability References"
+    },
+    {
+      "href": "https://example.com/api/3/vulnerabilities/cifs-smb2-signing-not-required/malware_kits",
+      "rel": "Vulnerability Malware Kits"
+    },
+    {
+      "href": "https://example.com/api/3/vulnerabilities/cifs-smb2-signing-not-required/exploits",
+      "rel": "Vulnerability Exploits"
+    },
+    {
+      "href": "https://example.com/api/3/vulnerabilities/cifs-smb2-signing-not-required/solutions",
+      "rel": "Vulnerability Solutions"
+    }
+  ],
+  "malwareKits": 0,
+  "modified": "2018-02-21",
+  "pci": {
+    "adjustedCVSSScore": 6,
+    "adjustedSeverityScore": 4,
+    "fail": true,
+    "status": "Fail"
+  },
+  "published": "2004-11-01",
+  "riskScore": 849.0,
+  "severity": "Severe",
+  "severityScore": 6,
+  "title": "SMBv2 signing not required"
+}
