@@ -15,7 +15,7 @@ class Util:
     @staticmethod
     def default_connector(action: insightconnect_plugin_runtime.Action, params=None):
         if not params:
-            params = {Input.API_KEY: {"secretKey": "gf844hgja77cff5417f9df14165c74e1538"}}
+            params = {Input.API_KEY: {"secretKey": "***REMOVED***"}}
         action.connection = Connection()
         action.connection.meta = "{}"
         action.connection.logger = logging.getLogger("connection logger")
