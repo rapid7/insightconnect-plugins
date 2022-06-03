@@ -1,4 +1,4 @@
-FROM komand/python-3-37-slim-plugin:3
+FROM rapid7/insightconnect-python-3-38-slim-plugin:4
 # Refer to the following documentation for available SDK parent images: https://docs.rapid7.com/insightconnect/sdk-guide/#sdk-guide
 
 LABEL organization=rapid7
@@ -20,9 +20,6 @@ RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 # Install plugin
 RUN python setup.py build && python setup.py install
 
-
-
-# Root - Needs SSL CA
-USER root
+USER nobody
 
 ENTRYPOINT ["/usr/local/bin/icon_azure_ad_admin"]
