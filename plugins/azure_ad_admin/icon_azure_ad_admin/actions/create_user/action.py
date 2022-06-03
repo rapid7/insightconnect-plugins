@@ -1,15 +1,16 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CreateUserInput, CreateUserOutput, Input, Output, Component
 
 # Custom imports below
 import requests
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 import string
 import random
 
 
 def _pw_gen(size: int = 16, chars: [str] = string.ascii_letters + string.digits + string.punctuation) -> (str):
+    # pylint: disable=unused-argument
     def gen(size: int = 16) -> str:
         return "".join(random.choice(chars) for _ in range(size))  # noqa: B311
 
@@ -35,7 +36,7 @@ def _pw_gen(size: int = 16, chars: [str] = string.ascii_letters + string.digits 
             return password
 
 
-class CreateUser(komand.Action):
+class CreateUser(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_user",
@@ -47,10 +48,10 @@ class CreateUser(komand.Action):
     def run(self, params={}):
         passwd = _pw_gen()
 
-        user_created = self._create_user(params, passwd)
+        self._create_user(params, passwd)
 
-        message_to_send = self.compose_email(params, passwd)
-        result = self.send_message(message_to_send, params.get(Input.NOTIFY_FROM))
+        message_to_send = self._compose_email(params, passwd)
+        self.send_message(message_to_send, params.get(Input.NOTIFY_FROM))
         self.logger.info("API call complete")
 
         return {"success": True}
@@ -87,7 +88,6 @@ class CreateUser(komand.Action):
         email_to = params.get(Input.NOTIFY_RECIPIENT)
         subject = "New user created"
         message = params.get(Input.NOTIFY_EMAIL_BODY, "$password")
-        html = False
 
         message = message.replace("$password", passwd)
 
