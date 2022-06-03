@@ -173,7 +173,7 @@ This action is used to create a user with a randomly generated password and send
 |account_enabled|boolean|True|False|True if the account is enabled; otherwise, false|None|True|
 |display_name|string|None|True|The name to display in the address book for the user|None|displayName-value|
 |mail_nickname|string|None|False|The mail alias for the user|None|user@example.com|
-|notify_email_body|string|None|False|Body of the email to be sent out. Use $password to place the generated password|None|Example message to send,|
+|notify_email_body|string|None|False|Body of the email to be sent out. Use $password to place the generated password|None|Example message to send|
 |notify_from|string|None|True|User from which email notifcation will be sent|None|user@example.com|
 |notify_recipient|string|None|True|Email address of the account to be notified of user creation|None|user@example.com|
 |user_principal_name|string|None|True|The user principal name|None|user@example.com|

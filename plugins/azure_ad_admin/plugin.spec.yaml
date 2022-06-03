@@ -396,7 +396,7 @@ actions:
         title: Notify Email Body
         type: string
         description: Body of the email to be sent out. Use $password to place the generated password
-        example: Example message to send,
+        example: Example message to send
       notify_recipient:
         required: true
         title: Recipient of Creation Email
