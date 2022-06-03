@@ -1,14 +1,14 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetUserInfoInput, GetUserInfoOutput, Input, Output, Component
 
 # Custom imports below
 import requests
 import time
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_azure_ad_admin.util.get_user_info import get_user_info
 
 
-class GetUserInfo(komand.Action):
+class GetUserInfo(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_user_info",
@@ -34,15 +34,14 @@ class GetUserInfo(komand.Action):
         except Exception:
             for counter in range(1, 6):
                 self.logger.info(f"Get user enabled failed, trying again, attempt {counter}.")
-                self.logger.info(f"Sleeping for 5 seconds...")
+                self.logger.info("Sleeping for 5 seconds...")
                 time.sleep(5)
                 try:
-                    self.logger.info(f"Attempting to get user info.")
+                    self.logger.info("Attempting to get user info.")
                     result_enabled = requests.get(endpoint_for_account_enabled, headers=headers)
                     break  # We didn't get an exception, so break the loop
                 except Exception:
-                    self.logger.info(f"Get user info failed.")
-                    pass  # we got an exception, force pass and try again
+                    self.logger.info("Get user info failed.")
 
         if not result_enabled or not result_enabled.status_code == 200:
             raise PluginException(
@@ -66,7 +65,7 @@ class GetUserInfo(komand.Action):
         # case for that as well. It comes back as a boolean.
         for key in full_result.keys():
             # If you do a falsey here, False trips the if. Thus have to do a manual check for None or len 0
-            if full_result.get(key) == None:
+            if full_result.get(key) is None:
                 if not key == "businessPhones":
                     full_result[key] = ""
                 else:

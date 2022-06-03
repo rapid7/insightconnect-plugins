@@ -1,15 +1,15 @@
-import komand
+import insightconnect_plugin_runtime
 import requests
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 from .schema import DisableUserAccountInput, DisableUserAccountOutput, Input, Output, Component
 
 
 # NOTE: You need to add your app to the Global Admin role
 # https://social.msdn.microsoft.com/Forums/azure/en-US/c7e2507c-35c4-43c0-a5db-41973611e356/authorizationrequestdeniedquot-quotinsufficient-privileges-to-complete-the-operationquot?forum=WindowsAzureAD
-class DisableUserAccount(komand.Action):
+class DisableUserAccount(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="disable_user_account",
