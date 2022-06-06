@@ -4,32 +4,51 @@ import json
 
 
 class Component:
-    DESCRIPTION = "List all the incidents matching specified criteria"
+    DESCRIPTION = "Retrieves all new incidents with specific status within interval time"
 
 
 class Input:
-    ORDERBY = "orderBy"
+    
+    ASSIGNED_TO = "assigned_to"
+    INTERVAL = "interval"
+    LAST_UPDATE_TIME = "last_update_time"
     RESOURCEGROUPNAME = "resourceGroupName"
+    STATUS = "status"
     SUBSCRIPTIONID = "subscriptionId"
-    TOP = "top"
     WORKSPACENAME = "workspaceName"
     
 
 class Output:
+    
     INCIDENTS = "incidents"
     
 
-class ListIncidentsInput(insightconnect_plugin_runtime.Input):
+class GetNewIncidentsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "orderBy": {
+    "assigned_to": {
       "type": "string",
-      "title": "Order By",
-      "description": "Field to sort results by",
+      "title": "Assigned To",
+      "description": "Filters incidents by who they were assigned to",
+      "order": 7
+    },
+    "interval": {
+      "type": "integer",
+      "title": "Interval",
+      "description": "Integer value that represents interval time in seconds",
+      "default": 900,
       "order": 4
+    },
+    "last_update_time": {
+      "type": "string",
+      "title": "Last Update Time",
+      "displayType": "date",
+      "description": "Minimum time the incident was updated in ISO format",
+      "format": "date-time",
+      "order": 6
     },
     "resourceGroupName": {
       "type": "string",
@@ -37,17 +56,23 @@ class ListIncidentsInput(insightconnect_plugin_runtime.Input):
       "description": "The name of the resource group within the user's subscription",
       "order": 1
     },
+    "status": {
+      "type": "string",
+      "title": "Status",
+      "description": "Specifies the current status of incidents to show",
+      "default": "New",
+      "enum": [
+        "Active",
+        "Closed",
+        "New"
+      ],
+      "order": 5
+    },
     "subscriptionId": {
       "type": "string",
       "title": "Subscription ID",
       "description": "Azure subscription ID",
       "order": 2
-    },
-    "top": {
-      "type": "integer",
-      "title": "Top",
-      "description": "Return top N elements from the collection",
-      "order": 5
     },
     "workspaceName": {
       "type": "string",
@@ -57,7 +82,9 @@ class ListIncidentsInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
+    "interval",
     "resourceGroupName",
+    "status",
     "subscriptionId",
     "workspaceName"
   ]
@@ -68,7 +95,7 @@ class ListIncidentsInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
+class GetNewIncidentsOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
@@ -77,13 +104,16 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
     "incidents": {
       "type": "array",
       "title": "Incidents",
-      "description": "List of incidents objects",
+      "description": "List of all found incidents",
       "items": {
         "$ref": "#/definitions/Incident"
       },
       "order": 1
     }
   },
+  "required": [
+    "incidents"
+  ],
   "definitions": {
     "Incident": {
       "type": "object",

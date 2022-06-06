@@ -29,6 +29,30 @@ class TestClient(TestCase):
         response = self.client._call_api("POST", url, headers=self.client.headers, payload=payload)
         self.assertEqual(response[1]["fake_data"], "1234")
 
+    @mock.patch("requests.request", side_effect=mock_request_200)
+    def test__list_all_ok(self, side_effect=mock_request_200):
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        url = "https://fake.azure.list.all.com"
+        response = self.client._list_all("GET", url, filters={"top": 2})
+        self.assertEqual(response, [1, 2])
+
+    @mock.patch("requests.request", side_effect=mock_request_200)
+    def test__list_all_ok_no_top(self, side_effect=mock_request_200):
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        url = "https://fake.azure.list.all.com"
+        response = self.client._list_all("GET", url)
+        self.assertEqual(response, [1, 2, 3, 4, 5, 6])
+
+    @mock.patch("requests.request", side_effect=mock_request_200)
+    def test__list_all_ok_link(self, side_effect=mock_request_200):
+        self.client = AzureSentinelClient(logger, "12345", "123-123-123", "secret")
+        self.client.headers = {"content-type": "application/json; charset=utf-8"}
+        url = "https://test__list_all_ok_link.com"
+        response = self.client._list_all("GET", url)
+        self.assertEqual(response, [1, 2, 3, 4, 1, 2, 3, 4, 5, 6])
+
     @parameterized.expand(
         [
             (mock_request_500, PluginException(cause="HTTP Error"), FAKE_AZURE_URL),
