@@ -4,7 +4,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 def get_user_info(connection, user_id, logger):
-    endpoint = f"https://graph.microsoft.com/v1.0/{connection.tenant}/users/{user_id}"
+    endpoint = f"https://graph.microsoft.com/v1.0/{connection.tenant}/users/{user_id}?$expand=manager"
     headers = connection.get_headers(connection.get_auth_token())
 
     result = None

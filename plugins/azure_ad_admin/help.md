@@ -185,7 +185,7 @@ Example input:
   "account_enabled": true,
   "display_name": "displayName-value",
   "mail_nickname": "user@example.com",
-  "notify_email_body": "Example message to send,",
+  "notify_email_body": "Example message to send",
   "notify_from": "user@example.com",
   "notify_recipient": "user@example.com",
   "user_principal_name": "user@example.com"
@@ -635,7 +635,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.2.6 - Update SDK runtime
+* 2.2.6 - Update SDK runtime | Adding additional manager response to get user info action
 * 2.2.5 - Correct spelling in help.md
 * 2.2.4 - Fix issue where Get User Info would fail on a disabled account
 * 2.2.3 - Fix issue where Get User Info occasionally fails with an SSL error in secondary call for user status

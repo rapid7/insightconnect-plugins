@@ -58,17 +58,27 @@ class GetUserInfo(insightconnect_plugin_runtime.Action):
         full_result = result.json()
         full_result["accountEnabled"] = account_enabled
 
-        # I didn't want to use clean in case a user is looking for a key that came back as null
-        # businessPhones is a list, thus the special check for that key
-
-        # If account is disabled, this will fail also, so there's a special
-        # case for that as well. It comes back as a boolean.
-        for key in full_result.keys():
-            # If you do a falsey here, False trips the if. Thus have to do a manual check for None or len 0
-            if full_result.get(key) is None:
-                if not key == "businessPhones":
-                    full_result[key] = ""
-                else:
-                    full_result[key] = []
+        full_result = self._clean_empty_values(full_result)
 
         return {Output.USER_INFORMATION: full_result}
+
+    def _clean_empty_values(self, input_dict):
+        """return_non_empty. Cleans up recusively the dictionary
+
+        :param input_dict:
+        :type input_dict: Dict[str, Any]
+        :rtype: Dict[Any, Any]
+        """
+        temp_dict = {}
+        for key, value in input_dict.items():
+            if value is not None and value != "":
+                if isinstance(value, dict):
+                    return_dict = self._clean_empty_values(value)
+                    if return_dict:
+                        temp_dict[key] = return_dict
+                elif isinstance(value, list):
+                    if len(value) > 0:
+                        temp_dict[key] = value
+                else:
+                    temp_dict[key] = value
+        return temp_dict
