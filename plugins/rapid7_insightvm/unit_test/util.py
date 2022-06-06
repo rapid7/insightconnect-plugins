@@ -7,7 +7,6 @@ sys.path.append(os.path.abspath("../"))
 from komand_rapid7_insightvm.connection.connection import Connection
 from komand_rapid7_insightvm.connection.schema import Input
 import json
-from asyncinit import asyncinit
 
 
 class Util:
@@ -123,10 +122,9 @@ class Util:
         raise Exception("Not implemented")
 
     @staticmethod
-    def mocked_async_requests(*args, **kwargs):
-        @asyncinit
+    async def mocked_async_requests(*args, **kwargs):
         class MockAsyncResponse:
-            async def __init__(self, filename, status_code):
+            def __init__(self, filename, status_code):
                 self.filename = filename
                 self.status = status_code
                 self.response_text = ""
