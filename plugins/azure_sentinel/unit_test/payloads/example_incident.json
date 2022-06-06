@@ -1,0 +1,24 @@
+{
+    "id": "/subscriptions/0ce65e6b-a780-44ca-9e51-df965e27aefe/resourceGroups/integrationLab/providers/Microsoft.OperationalInsights/workspaces/sentinel/providers/Microsoft.SecurityInsights/Incidents/1505",
+    "name": "1505",
+    "etag": "\"37078dd0-0000-0100-0000-629888400000\"",
+    "type": "Microsoft.SecurityInsights/Incidents",
+    "properties": {
+        "title": "Not a test at all",
+        "description": "This is a totally real incident",
+        "severity": "Low",
+        "status": "Active",
+        "labels": [],
+        "lastModifiedTimeUtc": "2022-06-02T09:52:00.5643443Z",
+        "createdTimeUtc": "2022-06-02T09:52:00.5643443Z",
+        "incidentNumber": 1020,
+        "additionalData": {
+            "alertsCount": 0,
+            "bookmarksCount": 0,
+            "commentsCount": 0,
+            "alertProductNames": [],
+            "tactics": []
+        },
+        "relatedAnalyticRuleIds": []
+    }
+}
