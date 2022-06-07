@@ -5,10 +5,11 @@ name: aws_ec2
 title: AWS EC2
 vendor: rapid7
 support: rapid7
+supported_versions: ["botocore 1.26.5"]
 status: []
 description: Amazon Elastic Compute Cloud (Amazon EC2) provides resizable computing
-  capacity in the Amazon Web Services (AWS) cloud. This plugin allows you to manage your EC2 environment.
-version: 1.0.1
+  capacity in the Amazon Web Services (AWS) cloud. This plugin allows you to manage your EC2 environment
+version: 1.1.0
 resources:
   vendor_url: https://www.amazon.com
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/aws_ec2
@@ -155,12 +156,12 @@ types:
       description: The ID of an AWS account
       required: false
     vpc_id:
-      title: Vpc ID
+      title: VPC ID
       type: string
       description: The ID of the VPC for the referenced security group, if applicable
       required: false
     vpc_peering_connection_id:
-      title: Vpc Peering Connection ID
+      title: VPC Peering Connection ID
       type: string
       description: The ID of the VPC peering connection, if applicable
       required: false
@@ -250,7 +251,7 @@ types:
       description: One or more IPv6 addresses associated with the network interface
       required: false
     mac_address:
-      title: Mac Address
+      title: MAC Address
       type: string
       description: The MAC address
       required: false
@@ -297,29 +298,29 @@ types:
       description: The ID of the subnet
       required: false
     vpc_id:
-      title: Vpc ID
+      title: VPC ID
       type: string
       description: The ID of the VPC
       required: false
   elastic_gpu_association:
     elastic_gpu_id:
-      title: Elastic Gpu ID
+      title: Elastic GPU ID
       type: string
       description: The ID of the Elastic GPU
       required: false
     elastic_gpu_association_id:
-      title: Elastic Gpu Association ID
+      title: Elastic GPU Association ID
       type: string
       description: The ID of the association
       required: false
     elastic_gpu_association_state:
-      title: Elastic Gpu Association State
+      title: Elastic GPU Association State
       type: string
       description: The state of the association between the instance and the Elastic
         GPU
       required: false
     elastic_gpu_association_time:
-      title: Elastic Gpu Association Time
+      title: Elastic GPU Association Time
       type: string
       description: The time the Elastic GPU was associated with the instance
       required: false
@@ -447,7 +448,7 @@ types:
       required: false
   instance:
     ami_launch_index:
-      title: Ami Launch Index
+      title: AMI Launch Index
       type: integer
       description: The AMI launch index, which can be used to find this instance in
         the launch group
@@ -544,7 +545,7 @@ types:
       description: '[EC2-VPC] The ID of the subnet in which the instance is running'
       required: false
     vpc_id:
-      title: Vpc ID
+      title: VPC ID
       type: string
       description: '[EC2-VPC] The ID of the VPC in which the instance is running'
       required: false
@@ -580,7 +581,7 @@ types:
       description: The hypervisor type of the instance
       required: false
     iam_instance_profile:
-      title: Iam Instance Profile
+      title: IAM Instance Profile
       type: iam_instance_profile
       description: The IAM instance profile associated with the instance, if applicable
       required: false
@@ -590,7 +591,7 @@ types:
       description: Indicates whether this is a Spot Instance or a Scheduled Instance
       required: false
     elastic_gpu_associations:
-      title: Elastic Gpu Associations
+      title: Elastic GPU Associations
       type: '[]elastic_gpu_association'
       description: The Elastic GPU associated with the instance
       required: false
@@ -695,7 +696,7 @@ types:
       description: Any tags assigned to the security group
       required: false
     vpc_id:
-      title: Vpc ID
+      title: VPC ID
       type: string
       description: '[EC2-VPC] The ID of the VPC for the security group'
       required: false
@@ -742,6 +743,7 @@ connection:
     title: AWS Access Key ID
     description: The ID of the AWS Access Key to use for authentication with AWS
     type: credential_secret_key
+    example: "KKILPPPPPRAA4OBNTHE2"
     required: true
   aws_secret_access_key:
     title: AWS Secret Access Key
@@ -749,10 +751,12 @@ connection:
       AWS Access Key ID. Note: Domain is not required'
     type: credential_secret_key
     required: true
+    example: "pp20bF88GZ2PGY+QUAAc2BSNA/6TUprPpYMCSc0tD"
   region:
     title: Region
     description: The AWS Region to use for requests. An example would be us-east-1
     type: string
+    example: "us-east-1"
     required: true
 actions:
   authorize_security_group_egress:
@@ -766,46 +770,62 @@ actions:
         description: Checks whether you have the required permissions for the action,
           without actually making the request, and provides an error response
         required: false
+        example: true
       group_id:
         title: Group ID
         type: string
         description: The ID of the security group
         required: true
+        example: "sg-a02005k2"
       ip_permissions:
         title: IP Permissions
         type: '[]ip_permission'
         description: One or more sets of IP permissions
         required: false
+        example: ['{
+            "from_port": 8080,
+            "ip_protocol": "tcp",
+            "ip_ranges" : [{
+               "cidr_ip": "10.20.0.0/27",
+               "description": "Blah"
+            }],
+            "to_port": 8090}']
       cidr_ip:
         title: CIDR IP
         type: string
         description: Not supported
         required: false
+        example: 10.20.0.0/27
       from_port:
         title: From Port
         type: integer
         description: Not supported
         required: false
+        example: 8800
       ip_protocol:
         title: IP Protocol
         type: string
         description: Not supported
         required: false
+        example: "UDP"
       to_port:
         title: To Port
         type: integer
         description: Not supported
         required: false
+        example: 8900
       source_security_group_name:
         title: Source Security Group Name
         type: string
         description: Not supported
         required: false
+        example: "launch-wizard-1"
       source_security_group_owner_id:
         title: Source Security Group Owner ID
         type: string
         description: Not supported
         required: false
+        example: "otheraccountgroup"
     output:
       response_metadata:
         title: Response Metadata
@@ -821,56 +841,73 @@ actions:
         type: string
         description: The CIDR IPv4 address range
         required: false
+        example: "10.2.0.0/27"
       from_port:
         title: From Port
         type: integer
         description: The start of port range for the TCP and UDP protocols, or an
           ICMP/ICMPv6 type number
         required: false
+        example: 8800
       group_id:
         title: Group ID
         type: string
         description: The ID of the security group
         required: false
+        example: "sg-123456"
       group_name:
         title: Group Name
         type: string
         description: '[EC2-Classic, default VPC] The name of the security group'
         required: false
+        example: "default"
       ip_permissions:
         title: IP Permissions
         type: '[]ip_permission'
         description: One or more sets of IP permissions
         required: false
+        example: ['{
+            "from_port": 8080,
+            "ip_protocol": "tcp",
+            "ip_ranges" : [{
+               "cidr_ip": "10.20.0.0/27",
+               "description": "Blah"
+            }],
+            "to_port": 8090}']
       ip_protocol:
         title: IP Protocol
         type: string
         description: The IP protocol name (tcp, udp, icmp) or number (see Protocol
           Numbers)
         required: false
+        example: "UDP"
       source_security_group_name:
         title: Source Security Group Name
         type: string
         description: '[EC2-Classic, default VPC] The name of the source security group'
         required: false
+        example: "group_name"
       source_security_group_owner_id:
         title: Source Security Group Owner ID
         type: string
         description: '[EC2-Classic] The AWS account ID for the source security group,
           if the source security group is in a different account'
         required: false
+        example: "otheraccount"
       to_port:
         title: To Port
         type: integer
         description: The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6
           code number
         required: false
+        example: 8900
       dry_run:
         title: Dry Run
         type: boolean
         description: Checks whether you have the required permissions for the action,
           without actually making the request, and provides an error response
         required: false
+        example: false
     output:
       response_metadata:
         title: Response Metadata
@@ -886,17 +923,20 @@ actions:
         type: '[]filter'
         description: One or more filters
         required: false
+        example: "{'name': 'instance-type', 'values': ['t2.micro', 't3.micro']}"
       instance_ids:
         title: Instance IDs
         type: '[]string'
         description: One or more instance IDs
         required: false
+        example: ["i-0dd117dc6df90be2e"]
       dry_run:
         title: Dry Run
         type: boolean
         description: Checks whether you have the required permissions for the action,
           without actually making the request, and provides an error response
         required: false
+        example: false
     output:
       response_metadata:
         title: Response Metadata
@@ -917,23 +957,27 @@ actions:
         type: '[]filter'
         description: One or more filters
         required: false
+        example: ["{'name': 'ip-permission.from-port', 'values': [80]}"]
       group_ids:
         title: Group IDs
         type: '[]string'
         description: One or more security group IDs
         required: false
+        example: ["sg-123456"]
       group_names:
         title: Group Names
         type: '[]string'
         description: '[EC2-Classic and default VPC only] One or more security group
           names'
         required: false
+        example: ["groupname"]
       dry_run:
         title: Dry Run
         type: boolean
         description: Checks whether you have the required permissions for the action,
           without actually making the request, and provides an error response
         required: false
+        example: false
     output:
       response_metadata:
         title: Response Metadata
@@ -956,46 +1000,62 @@ actions:
         description: Checks whether you have the required permissions for the action,
           without actually making the request, and provides an error response
         required: false
+        example: true
       group_id:
         title: Group ID
         type: string
         description: The ID of the security group
         required: true
+        example: "sg-123456"
       ip_permissions:
         title: IP Permissions
         type: '[]ip_permission'
         description: One or more sets of IP permissions
         required: false
+        example: ['{
+            "from_port": 8080,
+            "ip_protocol": "tcp",
+            "ip_ranges" : [{
+               "cidr_ip": "10.20.0.0/27",
+               "description": "Blah"
+            }],
+            "to_port": 8090}']
       cidr_ip:
         title: CIDR IP
         type: string
         description: Not supported
         required: false
+        example: "10.10.0.0/27"
       from_port:
         title: From Port
         type: integer
         description: Not supported
         required: false
+        example: 8000
       ip_protocol:
         title: IP Protocol
         type: string
         description: Not supported
         required: false
+        example: "UDP"
       to_port:
         title: To Port
         type: integer
         description: Not supported
         required: false
+        example: 9000
       source_security_group_name:
         title: Source Security Group Name
         type: string
         description: Not supported
         required: false
+        example: "sourcegroup"
       source_security_group_owner_id:
         title: Source Security Group Owner ID
         type: string
         description: Not supported
         required: false
+        example: "ownergroup"
     output:
       response_metadata:
         title: Response Metadata
@@ -1011,56 +1071,73 @@ actions:
         type: string
         description: The CIDR IP address range
         required: false
+        example: "10.2.0.0/27"
       from_port:
         title: From Port
         type: integer
         description: The start of port range for the TCP and UDP protocols, or an
           ICMP type number
         required: false
+        example: 8000
       group_id:
         title: Group ID
         type: string
         description: The ID of the security group
         required: false
+        example: "sg-123456"
       group_name:
         title: Group Name
         type: string
         description: '[EC2-Classic, default VPC] The name of the security group'
         required: false
+        example: "groupname"
       ip_permissions:
         title: IP Permissions
         type: '[]ip_permission'
         description: One or more sets of IP permissions
         required: false
+        example: ['{
+            "from_port": 8080,
+            "ip_protocol": "tcp",
+            "ip_ranges" : [{
+               "cidr_ip": "10.20.0.0/27",
+               "description": "Blah"
+            }],
+            "to_port": 8090}']
       ip_protocol:
         title: IP Protocol
         type: string
         description: The IP protocol name (tcp, udp, icmp) or number (see Protocol
           Numbers)
         required: false
+        example: "UDP"
       source_security_group_name:
         title: Source Security Group Name
         type: string
         description: '[EC2-Classic, default VPC] The name of the source security group'
         required: false
+        example: "name"
       source_security_group_owner_id:
         title: Source Security Group Owner ID
         type: string
         description: '[EC2-Classic] The AWS account ID of the source security group,
           if the source security group is in a different account'
         required: false
+        example: "ownername"
       to_port:
         title: To Port
         type: integer
         description: The end of port range for the TCP and UDP protocols, or an ICMP
           code number
         required: false
+        example: 9000
       dry_run:
         title: Dry Run
         type: boolean
         description: Checks whether you have the required permissions for the action,
           without actually making the request, and provides an error response
         required: false
+        example: true
     output:
       response_metadata:
         title: Response Metadata
@@ -1078,21 +1155,32 @@ actions:
         description: Checks whether you have the required permissions for the action,
           without actually making the request, and provides an error response
         required: false
+        example: true
       group_id:
         title: Group ID
         type: string
         description: The ID of the security group
         required: false
+        example: "sg-123456"
       group_name:
         title: Group Name
         type: string
         description: '[Default VPC] The name of the security group'
         required: false
+        example: "groupname"
       ip_permissions:
         title: IP Permissions
         type: '[]ip_permission'
         description: The IP permissions for the security group rule
         required: true
+        example: ['{
+            "from_port": 8080,
+            "ip_protocol": "tcp",
+            "ip_ranges" : [{
+               "cidr_ip": "10.20.0.0/27",
+               "description": "Blah"
+            }],
+            "to_port": 8090}']
     output:
       response_metadata:
         title: Response Metadata
@@ -1114,21 +1202,32 @@ actions:
         description: Checks whether you have the required permissions for the action,
           without actually making the request, and provides an error response
         required: false
+        example: true
       group_id:
         title: Group ID
         type: string
         description: The ID of the security group
         required: false
+        example: "sg-123456"
       group_name:
         title: Group Name
         type: string
         description: '[EC2-Classic, default VPC] The name of the security group'
         required: false
+        example: "groupname"
       ip_permissions:
         title: IP Permissions
         type: '[]ip_permission'
         description: The IP permissions for the security group rule
         required: true
+        example: ['{
+            "from_port": 8080,
+            "ip_protocol": "tcp",
+            "ip_ranges" : [{
+               "cidr_ip": "10.20.0.0/27",
+               "description": "Blah"
+            }],
+            "to_port": 8090}']
     output:
       response_metadata:
         title: Response Metadata
