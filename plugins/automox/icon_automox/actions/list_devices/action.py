@@ -11,7 +11,12 @@ class ListDevices(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        devices = self.connection.automox_api.get_devices(params.get(Input.ORG_ID), params.get(Input.GROUP_ID))
+        # Don't define optional inputs to avoid zero value
+        group_id = None
+        if params.get(Input.GROUP_ID):
+            group_id = params.get(Input.GROUP_ID)
+
+        devices = self.connection.automox_api.get_devices(params.get(Input.ORG_ID), group_id)
         self.logger.info(f"Returned {len(devices)} devices")
 
         return {Output.DEVICES: devices}
