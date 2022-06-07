@@ -30,7 +30,7 @@ The connection configuration accepts the following parameters:
 |api_version|string|2016-04-30-preview|True|The version of the API to use|None|2016-04-30-preview|
 |client_id|string|None|True|The application ID that the application registration portal assigned to your app|None|5cdad72f-c848-4df0-8aaa-ffe033e75d57|
 |client_secret|credential_asymmetric_key|None|True|The application secret that you generated for your app in the app registration portal|None|5cdad72f-c848-4df0-8aaa-ffe033e75d57|
-|host|string|https://example.com|True|Azure REST API Server|None|https://example.com|
+|host|string|https://management.azure.com|True|Azure REST API Server|None|https://management.azure.com|
 |tenant_id|string|None|True|This is active directory ID|None|5cdad72f-c848-4df0-8aaa-ffe033e75d57|
 
 Example input:
@@ -725,6 +725,111 @@ Example input:
 Example output:
 
 ```
+{
+  "value": {
+    "name": "myVM",
+    "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM",
+    "type": "Microsoft.Compute/virtualMachines",
+    "location": "West US",
+    "tags": {
+      "myTag1": "tagValue1"
+    },
+    "properties": {
+      "vmId": "0f47b100-583c-48e3-a4c0-aefc2c9bbcc1",
+      "availabilitySet": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/availabilitySets/my-AvailabilitySet"
+      },
+      "hardwareProfile": {
+        "vmSize": "Standard_DS3_v2",
+        "vmSizeProperties": {
+          "vCPUsAvailable": 1,
+          "vCPUsPerCore": 1
+        }
+      },
+      "storageProfile": {
+        "imageReference": {
+          "publisher": "MicrosoftWindowsServer",
+          "offer": "WindowsServer",
+          "sku": "2016-Datacenter",
+          "version": "latest"
+        },
+        "osDisk": {
+          "osType": "Windows",
+          "name": "myOsDisk",
+          "createOption": "FromImage",
+          "caching": "ReadWrite",
+          "managedDisk": {
+            "storageAccountType": "Premium_LRS",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myOsDisk"
+          },
+          "diskSizeGB": 30
+        },
+        "dataDisks": [
+          {
+            "lun": 0,
+            "name": "myDataDisk0",
+            "createOption": "Empty",
+            "caching": "ReadWrite",
+            "managedDisk": {
+              "storageAccountType": "Premium_LRS",
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDataDisk0"
+            },
+            "diskSizeGB": 30
+          },
+          {
+            "lun": 1,
+            "name": "myDataDisk1",
+            "createOption": "Attach",
+            "caching": "ReadWrite",
+            "managedDisk": {
+              "storageAccountType": "Premium_LRS",
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myDataDisk1"
+            },
+            "diskSizeGB": 100
+          }
+        ]
+      },
+      "applicationProfile": {
+        "galleryApplications": [
+          {
+            "tags": "myTag1",
+            "order": 1,
+            "packageReferenceId": "/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdb/resourceGroups/myresourceGroupName2/providers/Microsoft.Compute/galleries/myGallery1/applications/MyApplication1/versions/1.0",
+            "configurationReference": "https://mystorageaccount.blob.core.windows.net/configurations/settings.config"
+          },
+          {
+            "packageReferenceId": "/subscriptions/32c17a9e-aa7b-4ba5-a45b-e324116b6fdg/resourceGroups/myresourceGroupName3/providers/Microsoft.Compute/galleries/myGallery2/applications/MyApplication2/versions/1.1"
+          }
+        ]
+      },
+      "userData": "RXhhbXBsZSBVc2VyRGF0YQ==",
+      "osProfile": {
+        "computerName": "myVM",
+        "adminUsername": "admin",
+        "windowsConfiguration": {
+          "provisionVMAgent": true,
+          "enableAutomaticUpdates": false
+        },
+        "secrets": []
+      },
+      "networkProfile": {
+        "networkInterfaces": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkInterfaces/{myNIC}"
+          }
+        ]
+      },
+      "diagnosticsProfile": {
+        "bootDiagnostics": {
+          "enabled": true,
+          "storageUri": "http://{myStorageAccount}.blob.core.windows.net"
+        }
+      },
+      "extensionsTimeBudget": "PT50M",
+      "provisioningState": "Succeeded"
+    }
+  }
+}
 ```
 
 #### Start a Virtual Machine
