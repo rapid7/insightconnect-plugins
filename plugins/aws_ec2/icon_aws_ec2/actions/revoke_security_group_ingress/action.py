@@ -1,0 +1,17 @@
+from .schema import RevokeSecurityGroupIngressInput, RevokeSecurityGroupIngressOutput, Component
+
+# Custom imports below
+from icon_aws_ec2.util.common import AWSAction
+
+
+class RevokeSecurityGroupIngress(AWSAction):
+    def __init__(self):
+        super().__init__(
+            name="revoke_security_group_ingress",
+            description=Component.DESCRIPTION,
+            input_=RevokeSecurityGroupIngressInput(),
+            output=RevokeSecurityGroupIngressOutput(),
+            aws_service="ec2",
+            aws_command="revoke_security_group_ingress",
+            pagination_helper=None,
+        )
