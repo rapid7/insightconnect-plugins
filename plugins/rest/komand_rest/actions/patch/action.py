@@ -1,3 +1,6 @@
+import json
+import ast
+
 import insightconnect_plugin_runtime
 from .schema import PatchInput, PatchOutput, Component, Input, Output
 
@@ -18,7 +21,7 @@ class Patch(insightconnect_plugin_runtime.Action):
         response = self.connection.api.call_api(
             method="PATCH",
             path=params.get(Input.ROUTE),
-            json_data=params.get(Input.BODY, {}),
+            json_data=ast.literal_eval(params.get(Input.BODY)),
             headers=params.get(Input.HEADERS, {}),
         )
 
