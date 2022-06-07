@@ -4,9 +4,10 @@ products: [insightconnect]
 name: azure_compute
 title: Azure Compute
 description: Azure Virtual Machines is one of several types of on-demand, scalable computing resources that Azure offers
-version: 3.0.1
+version: 3.0.2
 vendor: rapid7
 support: community
+supported_versions: ["2022-06-01"]
 status: []
 author: komand
 resources:
@@ -119,12 +120,12 @@ types:
       type: bootDiagnostics
       title: Boot Diagnostics
       description: Boot diagnostics is a debugging feature which allows you to view
-        console Output and screenshot to diagnose vm status
+        console Output and screenshot to diagnose VM status
   publicKeys:
     keyData:
       type: string
       title: Key Data
-      description: SSH public key certificate used to authenticate with the vm through
+      description: SSH public key certificate used to authenticate with the VM through
         SSH
     path:
       type: string
@@ -237,7 +238,7 @@ types:
       type: string
       title: OS Type
       description: This property allows you to specify the type of the os that is
-        included in the disk if creating a vm from user-image or a specialized vhd
+        included in the disk if creating a VM from user-image or a specialized vhd
     vhd:
       type: vhd
       title: VHD
@@ -290,7 +291,7 @@ types:
     vmId:
       type: string
       title: Virtual Machine ID
-      description: The vm unique ID
+      description: The VM unique ID
   value_vm:
     id:
       type: string
@@ -322,7 +323,7 @@ types:
       type: int
       title: Max Data Disk Count
       description: Specifies the maximum number of data disks that can be attached
-        to the vm size
+        to the VM size
     memoryInMB:
       type: int
       title: Memory In MB
@@ -350,29 +351,34 @@ connection:
     description: Azure REST API Server
     required: true
     default: https://management.azure.com
+    example: https://management.azure.com
   client_id:
     title: Client ID
     type: string
     description: The application ID that the application registration portal assigned
       to your app
     required: true
+    example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
   client_secret:
     title: Client Secret
     type: credential_asymmetric_key
     description: The application secret that you generated for your app in the app
       registration portal
     required: true
+    example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
   tenant_id:
     title: Tenant ID
     type: string
     description: This is active directory ID
     required: true
+    example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
   api_version:
     title: API Version
     type: string
-    description: The version of the API to use. The current version is 2016-04-30-preview
+    description: The version of the API to use
     required: true
     default: 2016-04-30-preview
+    example: 2016-04-30-preview
 actions:
   generalized_vm:
     title: Generalize a Virtual Machine
@@ -383,16 +389,19 @@ actions:
         title: Subscription ID
         description: The identifier of your subscription
         required: true
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
       resourceGroup:
         type: string
         title: Resource Group
         description: The resource group that will contain the virtual machine
         required: true
+        example: ExampleResourceGroupName
       vm:
         type: string
         title: Name of Virtual Machine
         description: The name of the virtual machine
         required: true
+        example: ExampleVirtualMachineName
     output:
       status_code:
         type: integer
@@ -408,16 +417,19 @@ actions:
         title: Subscription ID
         description: The identifier of your subscription
         required: true
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
       resourceGroup:
         type: string
         title: Resource Group
         description: The resource group that will contain the virtual machine
         required: true
+        example: ExampleResourceGroupName
       vm:
         type: string
         title: Name of Virtual Machine
         description: The name of the virtual machine
         required: true
+        example: ExampleVirtualMachineName
       mode:
         type: string
         title: Mode
@@ -427,6 +439,7 @@ actions:
         - instanceView
         - modelViewAndInstanceView
         default: modelViewAndInstanceView
+        example: modelViewAndInstanceView
         required: false
     output:
       name:
@@ -473,16 +486,19 @@ actions:
         title: Subscription ID
         description: The identifier of your subscription
         required: true
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
       resourceGroup:
         type: string
         title: Resource Group
         description: The resource group that will contain the virtual machine
         required: true
+        example: ExampleResourceGroupName
       vm:
         type: string
         title: Name of Virtual Machine
         description: The name of the virtual machine
         required: true
+        example: ExampleVirtualMachineName
     output:
       status_code:
         type: integer
@@ -498,11 +514,13 @@ actions:
         title: Subscription ID
         description: The identifier of your subscription
         required: true
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
       resourceGroup:
         type: string
         title: Resource Group
         description: The resource group that will contain the virtual machine
         required: true
+        example: ExampleResourceGroupName
     output:
       value:
         type: '[]value_vm'
@@ -518,16 +536,19 @@ actions:
         title: Subscription ID
         description: The identifier of your subscription
         required: true
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
       resourceGroup:
         type: string
         title: Resource Group
         description: The resource group that will contain the virtual machine
         required: true
+        example: ExampleResourceGroupName
       availabilitySet:
         type: string
         title: Availability Set
         description: The availability set that contains the virtual machine
         required: true
+        example: ExampleAvailabilitySet
     output:
       value:
         type: '[]value_size_vm'
@@ -543,16 +564,19 @@ actions:
         title: Subscription ID
         description: The identifier of your subscription
         required: true
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
       resourceGroup:
         type: string
         title: Resource Group
         description: The resource group that will contain the virtual machine
         required: true
+        example: ExampleResourceGroupName
       vm:
         type: string
         title: Name of Virtual Machine
         description: The name of the virtual machine
         required: true
+        example: ExampleVirtualMachineName
     output:
       value:
         type: '[]value_size_vm'
@@ -568,11 +592,13 @@ actions:
         title: Subscription ID
         description: The identifier of your subscription
         required: true
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
       location:
         type: string
         title: Location
         description: The location of the virtual machine
         required: true
+        example: ExampleLocation
     output:
       value:
         type: '[]value_size_vm'
@@ -588,6 +614,7 @@ actions:
         title: Subscription ID
         description: The identifier of your subscription
         required: true
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
     output:
       value:
         type: '[]value_vm'
@@ -603,16 +630,19 @@ actions:
         title: Subscription ID
         description: The identifier of your subscription
         required: true
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
       resourceGroup:
         type: string
         title: Resource Group
         description: The resource group that will contain the virtual machine
         required: true
+        example: ExampleResourceGroupName
       vm:
         type: string
         title: Name of Virtual Machine
         description: The name of the virtual machine
         required: true
+        example: ExampleVirtualMachineName
     output:
       status_code:
         type: integer
@@ -628,28 +658,33 @@ actions:
         title: Subscription ID
         description: The identifier of your subscription
         required: true
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
       resourceGroup:
         type: string
         title: Resource Group
         description: The resource group that will contain the virtual machine
         required: true
+        example: ExampleResourceGroupName
       vm:
         type: string
         title: Name of Virtual Machine
         description: The name of the virtual machine
         required: true
+        example: ExampleVirtualMachineName
       vhdPrefix:
         type: string
         title: VHDPrefix
         description: Specifies the prefix in the name of the blobs that constitute
           the storage profile of the image
         required: true
+        example: ExamplePrefix
       destinationContainerName:
         type: string
         title: Destination Container Name
         description: Specifies the name of the container inside which the vhds constituting
           the image resides
         required: true
+        example: ExampleContainerName
       overwriteVhds:
         type: boolean
         title: VHDPrefix
@@ -657,6 +692,7 @@ actions:
           container is overwritten
         required: true
         default: true
+        example: true
     output:
       status_code:
         type: integer
@@ -672,16 +708,19 @@ actions:
         title: Subscription ID
         description: The identifier of your subscription
         required: true
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
       resourceGroup:
         type: string
         title: Resource Group
         description: The resource group that will contain the virtual machine
         required: true
+        example: ExampleResourceGroupName
       vm:
         type: string
         title: Name of Virtual Machine
         description: The name of the virtual machine
         required: true
+        example: ExampleVirtualMachineName
     output:
       status_code:
         type: integer
@@ -697,16 +736,19 @@ actions:
         title: Subscription ID
         description: The identifier of your subscription
         required: true
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
       resourceGroup:
         type: string
         title: Resource Group
         description: The resource group that will contain the virtual machine
         required: true
+        example: ExampleResourceGroupName
       vm:
         type: string
         title: Name of Virtual Machine
         description: The name of the virtual machine
         required: true
+        example: ExampleVirtualMachineName
     output:
       status_code:
         type: integer
@@ -722,16 +764,19 @@ actions:
         title: Subscription ID
         description: The identifier of your subscription
         required: true
+        example: 5cdad72f-c848-4df0-8aaa-ffe033e75d57
       resourceGroup:
         type: string
         title: Resource Group
         description: The resource group that will contain the virtual machine
         required: true
+        example: ExampleResourceGroupName
       vm:
         type: string
         title: Name of Virtual Machine
         description: The name of the virtual machine
         required: true
+        example: ExampleVirtualMachineName
     output:
       status_code:
         type: integer
