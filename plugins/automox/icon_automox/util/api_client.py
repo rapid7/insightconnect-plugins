@@ -341,11 +341,11 @@ class ApiClient:
             "version": ApiClient.VERSION,
             "function": function,
             "outcome": outcome,
-            "elapsed_time": elapsed_time
+            "elapsed_time": elapsed_time,
         }
 
         if outcome == ApiClient.OUTCOME_FAIL:
-            payload['reason_for_failure'] = fail_reason
+            payload["reason_for_failure"] = fail_reason
 
         try:
             self._call_api("POST", f"{self.endpoint}/integration-health", json_data=payload)

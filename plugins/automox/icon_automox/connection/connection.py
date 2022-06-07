@@ -33,7 +33,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
             elapsed_time = int(end_time - start_time)
             failure_message = "Unable to list orgs during api test."
 
-            self.automox_api.report_api_outcome(ApiClient.OUTCOME_FAIL, "connection_test", elapsed_time, failure_message)
+            self.automox_api.report_api_outcome(
+                ApiClient.OUTCOME_FAIL, "connection_test", elapsed_time, failure_message
+            )
 
             raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e)
 
