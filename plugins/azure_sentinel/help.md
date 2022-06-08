@@ -394,10 +394,9 @@ Example input:
 ```
 {
   "resourceGroupName": "resourcegroup1",
-  "subscriptionId": "aaaef455-a780-44ca-9e51-aaafffeeea3a",
-  "watchlistAlias": "exampleAlias",
-  "watchlistItemId": "3395856c-e81f-2b73-82de-e72602f798b6",
-  "workspaceName": "workspace23"
+  "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+  "watchlistAlias": "examplealias1",
+  "workspaceName": "workspace1"
 }
 ```
 
@@ -585,18 +584,7 @@ Example input:
 ```
 {
   "name": "4bb36b7b-26ff-4d1c-9cbe-0d8ab3da0014",
-  "properties": {
-    "source": "Azure Sentinel",
-    "threatIntelligenceTags": [
-      "new schema"
-    ],
-    "displayName": "new schema",
-    "threatTypes": [
-      "compromised"
-    ],
-    "pattern": "[url:value = 'https://example.com']",
-    "patternType": "url"
-  },
+  "properties": "{'source': 'Azure Sentinel', 'threatIntelligenceTags': [ 'new schema' ], 'displayName': 'new schema', 'threatTypes': [ 'compromised' ], 'pattern': '[url:value = 'https://example.com']', 'patternType': 'url'}",
   "resourceGroupName": "resourcegroup12",
   "subscriptionId": "0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe",
   "workspaceName": "workspace23"
@@ -1384,6 +1372,7 @@ This action is used to list all the incidents matching specified criteria.
 |orderBy|string|None|False|Field to sort results by|None|properties/createdTimeUtc desc|
 |resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup1|
 |subscriptionId|string|None|True|Azure subscription ID|None|0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe|
+|top|integer|None|False|Return top N elements from the collection|None|1867|
 |workspaceName|string|None|True|The name of the workspace|None|workspace23|
 
 Example input:
@@ -1393,6 +1382,7 @@ Example input:
   "orderBy": "properties/createdTimeUtc desc",
   "resourceGroupName": "resourcegroup1",
   "subscriptionId": "0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe",
+  "top": 1867,
   "workspaceName": "workspace23"
 }
 ```
@@ -1784,7 +1774,47 @@ Example output:
 ```
 ### Triggers
 
-_This plugin does not contain any triggers._
+#### Get New Incidents
+
+This trigger retrieves all new incidents with specific status within interval time.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|assigned_to|string|None|False|Filters incidents by who they were assigned to|None|user@example.com|
+|interval|integer|900|True|Integer value that represents interval time in seconds|None|900|
+|last_update_time|date|None|False|Minimum time the incident was updated in ISO format|None|2022-05-06 12:20:18.364306|
+|resourceGroupName|string|None|True|The name of the resource group within the user's subscription|None|resourcegroup1|
+|status|string|New|True|Specifies the current status of incidents to show|['Active', 'Closed', 'New']|Active|
+|subscriptionId|string|None|True|Azure subscription ID|None|0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe|
+|workspaceName|string|None|True|The name of the workspace|None|workspace23|
+
+
+Example input:
+
+```
+{
+  "assigned_to": "user@example.com",
+  "interval": 900,
+  "last_update_time": "2022-05-06T12:20:18.364306",
+  "resourceGroupName": "resourcegroup1",
+  "status": "Active",
+  "subscriptionId": "0caafeeb-aaa0-44ca-ffe1-aaaaeeeffffe",
+  "workspaceName": "workspace23"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|incidents|[]Incident|True|List of all found incidents|
+
+Example output:
+
+```
+```
 
 ### Custom Output Types
 
@@ -1971,6 +2001,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.0 - Triggers: Get New Incidents | Add `top` argument to the List Incidents action
 * 2.0.1 - Fixed Create Update Comment input validation bug
 * 2.0.0 - Changed CreatedByType field for enum types. New actions: Create or Update Comment, Delete Comment, List Comments, Get Comment, Create Indicator, Get Indicator, Update Indicator, Delete Indicator, Query Indicator, Append Tags, Replace Tags, Create or Update Watchlist, Delete Watchlist, List Watchlists, Get Watchlist, Create Or Update Watchlist Items, Get Watchlist Item, Delete Watchlist Item, List Watchlist Items
 * 1.0.0 - Initial plugin (Actions: Create or Update Incident, Delete Incident, List Incidents, Get Incident, List Alerts, List Bookmarks, List Entities)

@@ -29,7 +29,6 @@ class MockResponse:
 
     def json(self) -> Dict[Any, Any]:
         path = Path(__file__).parent / f"payloads/{self.filename}.json"
-
         with open(path) as file:
             return json.load(file)
 
@@ -39,8 +38,14 @@ def mock_conditions(url: str, status_code: int) -> MockResponse:
         return MockResponse("test_connection_ok", status_code)
     elif url == "https://fake.azure.com":
         return MockResponse("test__call_api_ok", status_code)
+    elif url == "https://fake.azure.list.all.com":
+        return MockResponse("test__list_all_ok", status_code)
+    elif url == "https://test__list_all_ok_link.com":
+        return MockResponse("test__list_all_ok_pages", status_code)
     elif url == "https://fake.azure.com/invalid":
         return MockResponse("test__call_api_invalid_json", status_code)
+    elif url == "link":
+        return MockResponse("test__list_all_ok", status_code)
     raise Exception(f"Response has been not implemented: {url}")
 
 
