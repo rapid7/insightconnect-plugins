@@ -19,8 +19,9 @@ class ListIncidents(insightconnect_plugin_runtime.Action):
         workspace_name = params.get(Input.WORKSPACENAME)
         filters = {
             Input.ORDERBY: params.get(Input.ORDERBY),
+            Input.TOP: params.get(Input.TOP),
         }
-        incidents = self.connection.api_client.list_incident(
+        incidents, _ = self.connection.api_client.list_incident(
             resource_group_name, workspace_name, filters, subscription_id
         )
         incidents = map_output_for_list(incidents)

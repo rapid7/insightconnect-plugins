@@ -1,3 +1,4 @@
+import json
 import logging
 import sys
 from pathlib import Path
@@ -8,6 +9,11 @@ from icon_azure_sentinel.connection import Connection
 from icon_azure_sentinel.util.api import AzureSentinelClient
 
 sys.path.append(str(Path("../").absolute()))
+
+# Opening JSON file
+path = Path(__file__).parent / "payloads/example_incident.json"
+with open(path) as file:
+    TEST_INCIDENT = json.load(file)
 
 
 class TestListIncidents(TestCase):
@@ -23,9 +29,10 @@ class TestListIncidents(TestCase):
             "workspaceName": "sentinel",
         }
         self.action.connection.api_client = mock.create_autospec(AzureSentinelClient)
+        self.action.connection.api_client.list_incident.return_value = ([TEST_INCIDENT], 3)
 
     def test_list_incidents_ok(self):
         self.action.run(self.params)
         self.action.connection.api_client.list_incident.assert_called_once_with(
-            "integrationLab", "sentinel", {"orderBy": None}, "abcde"
+            "integrationLab", "sentinel", {"orderBy": None, "top": None}, "abcde"
         )
