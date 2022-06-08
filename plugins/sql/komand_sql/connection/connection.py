@@ -1,8 +1,9 @@
 import komand
-from .schema import ConnectionSchema, Input
-from komand.exceptions import ConnectionTestException
 import sqlalchemy
+from komand.exceptions import ConnectionTestException
 from sqlalchemy.orm import sessionmaker
+
+from .schema import ConnectionSchema, Input
 
 
 class SQLConnection(object):
@@ -71,9 +72,9 @@ class Connection(komand.Connection):
             try:
                 conn.session.execute("select 1")
                 return {"status": "Success"}
-            except Exception as e:
+            except Exception as error:
                 raise ConnectionTestException(
-                    cause="Unable to connect to the server.", assistance="Check connection credentials.", data=e
+                    cause="Unable to connect to the server.", assistance="Check connection credentials.", data=error
                 )
             finally:
                 conn.session.close()
