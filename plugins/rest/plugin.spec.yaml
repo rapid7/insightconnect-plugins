@@ -4,8 +4,8 @@ products: [insightconnect]
 name: rest
 title: HTTP Requests
 description: The HTTP Requests plugin to make it easy to integrate with RESTful services
-version: 6.0.0
-vendor: rapid7
+version: 5.0.2
+vendor: not_rapid7
 support: community
 supported_versions: ["2022-06-15"]
 status: []
@@ -223,7 +223,7 @@ actions:
       body:
         title: Body
         description: Payload to submit to the server when making the HTTP Request call
-        type: string
+        type: '[]object'
         required: false
         example: '[{"user": "user@example.com"}]'
     output:

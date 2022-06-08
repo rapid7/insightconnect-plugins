@@ -27,7 +27,7 @@ class PatchInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "body": {
-      "type": "string",
+      "type": "array",
       "title": "Body",
       "description": "Payload to submit to the server when making the HTTP Request call",
       "items": {
