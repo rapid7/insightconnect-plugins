@@ -17,7 +17,10 @@ class TestRun(TestCase):
     @parameterized.expand(
         [
             [Util.read_file_to_dict(f"inputs/run.json.resp"), Util.read_file_to_dict(f"payloads/run.json.resp")],
-            [Util.read_file_to_dict(f"inputs/run_no_credentials.json.resp"), Util.read_file_to_dict(f"payloads/run_no_credentials.json.resp")],
+            [
+                Util.read_file_to_dict(f"inputs/run_no_credentials.json.resp"),
+                Util.read_file_to_dict(f"payloads/run_no_credentials.json.resp"),
+            ],
         ]
     )
     def test_run(self, mock_exec_python_function, params, expected):

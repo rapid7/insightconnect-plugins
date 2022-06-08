@@ -32,6 +32,6 @@ class TestUtil(TestCase):
                 Input.USERNAME_AND_PASSWORD: {"username": username, "password": password},
                 Input.SECRET_KEY: {"secretKey": secret_key},
                 Input.ADD_CREDENTIALS_TO_SCRIPT: add_credentials,
-            }
+            },
         )
         self.assertEqual(actual, expected)
