@@ -2,10 +2,10 @@
 from setuptools import setup, find_packages
 
 
-setup(name="rest-rapid7-plugin",
+setup(name="rest-not_rapid7-plugin",
       version="5.0.2",
       description="The HTTP Requests plugin to make it easy to integrate with RESTful services",
-      author="rapid7",
+      author="not_rapid7",
       author_email="",
       url="",
       packages=find_packages(),

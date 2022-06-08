@@ -199,7 +199,7 @@ This action is used to make a PATCH request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|body|string|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "https://example.com"}|
+|body|[]object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "https://example.com"}|
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "https://example.com"}|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
 
