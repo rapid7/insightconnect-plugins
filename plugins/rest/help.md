@@ -23,9 +23,9 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|authentication_type|string|No Authentication|False|Type of authentication|['Basic Auth', 'Digest Auth', 'Bearer Token', 'Rapid7 Insight', 'OpsGenie', 'Pendo', 'Custom', 'No Authentication']|Basic Auth|
-|base_url|string|None|True|Base URL e.g. https://httpbin.org|None|https://example.com|
-|basic_auth_credentials|credential_username_password|None|False|Username and password. Provide if you choose Basic Auth or Digest Auth authentication type|None|{"username": "https://example.com", "password": "mypassword"}|
+|authentication_type|string|No Authentication|False|Type of authentication|['Basic Auth', 'Digest Auth', 'Bearer Token', 'Rapid7 Insight', 'OpsGenie', 'Pendo', 'Custom', 'No Authentication']|No Authentication|
+|base_url|string|None|True|Base URL e.g. https://httpbin.org|None|https://httpbin.org/|
+|basic_auth_credentials|credential_username_password|None|False|Username and password. Provide if you choose Basic Auth or Digest Auth authentication type|None|{"username": "user@example.com", "password": "mypassword"}|
 |default_headers|object|None|False|Custom headers to include in all requests associated with this connection. To pass a encrypted key as a header value, enter your key in the Secret Key input and set the value of the header in this field to "CUSTOM_SECRET_INPUT" instead of secret key. The plugin will replace "CUSTOM_SECRET_INPUT" with the encrypted key stored in the Secret Key input when the plugin runs.|None|{ "User-Agent": "Rapid7 InsightConnect", "Custom-Key-Header": "CUSTOM_SECRET_INPUT" }|
 |fail_on_http_errors|boolean|True|False|Indicates whether the plugin should fail on standard HTTP errors (4xx-5xx)|None|True|
 |secret|credential_secret_key|None|False|Credential secret key. Provide a Bearer Token, Rapid7 Insight, OpsGenie, Pendo or using "CUSTOM_SECRET_INPUT" in the Default Headers field for Custom authentication type|None|9de5069c5afe602b2ea0a04b66beb2c0|
@@ -37,10 +37,52 @@ Example input:
 {
   "authentication_type": "Basic Auth",
   "base_url": "https://httpbin.org/",
-  "basic_auth_credentials": "{\"username\": \"user@example.com\", \"password\": \"mypassword\"}",
-  "default_headers": "{ \"User-Agent\": \"Rapid7 InsightConnect\", \"Custom-Key-Header\": \"CUSTOM_SECRET_INPUT\" }",
+  "basic_auth_credentials": {
+    
+    "username": "user@example.com", 
+    
+    "password": "mypassword"
+    
+  },
+  "default_headers": {
+    "User-Agent": "Rapid7 InsightConnect", 
+  },
   "fail_on_http_errors": true,
-  "secret": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "ssl_verify": true
+}
+```
+
+Example input (with Custom header auth):
+
+```
+{
+  "authentication_type": "Custom",
+  "base_url": "https://httpbin.org",
+  "secret": {
+    "secretKey": "ABCDEF123456"
+  }
+  "default_headers": {
+    "User-Agent": "Rapid7 InsightConnect",
+    "API-Token": "CUSTOM_SECRET_INPUT"
+  },
+  "fail_on_http_errors": true,
+  "ssl_verify": true
+}
+```
+
+Example input (with Insight Platform):
+
+```
+{
+  "authentication_type": "Rapid7 Insight",
+  "base_url": "https://us.api.insight.rapid7.com",
+  "secret": {
+    "secretKey": "12341234-1234-1234-1234-123412341234"
+  }
+  "default_headers": {
+    "User-Agent": "Rapid7 InsightConnect"
+  },
+  "fail_on_http_errors": false,
   "ssl_verify": true
 }
 ```
@@ -57,16 +99,20 @@ This action is used to make a PUT request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|body|object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "https://example.com"}|
-|headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "https://example.com"}|
+|body|object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "user@example.com"}|
+|headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
 
 Example input:
 
 ```
 {
-  "body": "{\"user\": \"user@example.com\"}",
-  "headers": "{\"Host\": \"rapid7.com\"}",
+  "body": {
+    "user": "user@example.com"
+  },
+  "headers": {
+    "Host": "rapid7.com"
+    },
   "route": "/org/users"
 }
 ```
@@ -128,8 +174,8 @@ This action is used to make a POST request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|body|object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "https://example.com"}|
-|headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "https://example.com"}|
+|body|object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "user@example.com"}|
+|headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
 
 Example input:
@@ -207,8 +253,12 @@ Example input:
 
 ```
 {
-  "body": "{\"user\": \"user@example.com\"}",
-  "headers": "{\"Host\": \"rapid7.com\"}",
+  "body": {
+    "user": "user@example.com"
+  },
+  "headers": {
+    "Host": "rapid7.com\"
+  },
   "route": "/org/users"
 }
 ```
@@ -267,14 +317,16 @@ This action is used to make a GET request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "https://example.com"}|
+|headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
 
 Example input:
 
 ```
 {
-  "headers": "{\"Host\": \"rapid7.com\"}",
+  "headers": {
+    "Host": "rapid7.com\"
+  },
   "route": "/org/users"
 }
 ```
@@ -318,16 +370,20 @@ This action is used to make a DELETE request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|body|object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "https://example.com"}|
-|headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "https://example.com"}|
+|body|object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "user@example.com"}|
+|headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
 
 Example input:
 
 ```
 {
-  "body": "{\"user\": \"user@example.com\"}",
-  "headers": "{\"Host\": \"rapid7.com\"}",
+  "body": {
+    "user": "user@example.com"
+  },
+  "headers": {
+    "Host": "rapid7.com"
+  },
   "route": "/org/users"
 }
 ```
