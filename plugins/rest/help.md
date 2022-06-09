@@ -19,6 +19,8 @@ This plugin is often used to integrate with ad-hoc 3rd party API's in a workflow
 
 ## Setup
 
+Check out the [plugin guide](https://docs.rapid7.com/insightconnect/http-requests) for more details on how to configure this plugin.
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -36,10 +38,10 @@ Example input:
 ```
 {
   "authentication_type": "Basic Auth",
-  "base_url": "https://httpbin.org/",
+  "base_url": "https://httpbin.org",
   "basic_auth_credentials": {
     
-    "username": "user@example.com", 
+    "username": "user@example.com" 
     
     "password": "mypassword"
     
@@ -112,7 +114,7 @@ Example input:
   },
   "headers": {
     "Host": "rapid7.com"
-    },
+  },
   "route": "/org/users"
 }
 ```
@@ -182,8 +184,12 @@ Example input:
 
 ```
 {
-  "body": "{\"user\": \"user@example.com\"}",
-  "headers": "{\"Host\": \"rapid7.com\"}",
+  "body": {
+    "user": "user@example.com"
+  },
+  "headers": {
+    "Host": "rapid7.com"
+  },
   "route": "/org/users"
 }
 ```
@@ -245,8 +251,8 @@ This action is used to make a PATCH request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|body|[]object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "https://example.com"}|
-|headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "https://example.com"}|
+|body|[]object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "user@example.com"}|
+|headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
 
 Example input:
@@ -257,7 +263,7 @@ Example input:
     "user": "user@example.com"
   },
   "headers": {
-    "Host": "rapid7.com\"
+    "Host": "rapid7.com"
   },
   "route": "/org/users"
 }
@@ -325,7 +331,7 @@ Example input:
 ```
 {
   "headers": {
-    "Host": "rapid7.com\"
+    "Host": "rapid7.com"
   },
   "route": "/org/users"
 }
