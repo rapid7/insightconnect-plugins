@@ -56,10 +56,10 @@ This action is used to execute PowerShell script in the form of a string. This a
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|add_credentials_to_script|boolean|None|True|This parameter indicates whether `Username and Password` and `Secret Key` action parameters will be added to script as PowerShell variables or not. Choosing `True` creates PowerShell variables (`$username`, `$password` and `$secret_key`) which you can use in your script in `Script` parameter. If you don't need those credentials choose `False` and provide some random values for `Username and Password` and `Secret Key` parameters|None|False|
 |script|string|None|True|PowerShell script as a string|None|Get-Date|
 |address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|10.0.1.17|
 |host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|windows|
-|add_credentials_to_script|boolean|None|True|This parameter indicates whether `Username and Password` and `Secret Key` action parameters will be added to script as powershell variables or not. Choosing `True` creates powershell variables (`$username`, `$password` and `$secret_key`) which you can use in your script in `Script` parameter. If you don't need those credentials choose `False` and provide some random values for `Username and Password` and `Secret Key` parameters|None|False|
 |username_and_password|credential_username_password|None|True|Username and password available in script as PowerShell variables (`$username`, `$password`)|None|{"username": "user", "password": "mypassword"}|
 |secret_key|credential_secret_key|None|True|Credential secret key available in script as PowerShell variable (`$secret_key`)|None|{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}|
 
@@ -108,7 +108,7 @@ This action is used to execute PowerShell script encoded as a base64 file on a r
 |script|bytes|None|True|PowerShell script as base64|None|R2V0LURhdGU=|
 |address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|10.0.1.15|
 |host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|windows|
-|add_credentials_to_script|boolean|None|True|This parameter indicates whether `Username and Password` and `Secret Key` action parameters will be added to script as powershell variables or not. Choosing `True` creates powershell variables (`$username`, `$password` and `$secret_key`) which you can use in your script in `Script` parameter. If you don't need those credentials choose `False` and provide some random values for `Username and Password` and `Secret Key` parameters|None|False|
+|add_credentials_to_script|boolean|None|True|This parameter indicates whether `Username and Password` and `Secret Key` action parameters will be added to script as PowerShell variables or not. Choosing `True` creates PowerShell variables (`$username`, `$password` and `$secret_key`) which you can use in your script in `Script` parameter. If you don't need those credentials choose `False` and provide some random values for `Username and Password` and `Secret Key` parameters|None|False|
 |username_and_password|credential_username_password|None|True|Username and password available in script as PowerShell variables (`$username`, `$password`)|None|{"username": "user", "password": "mypassword"}|
 |secret_key|credential_secret_key|None|True|Credential secret key available in script as PowerShell variable (`$secret_key`)|None|{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}|
 

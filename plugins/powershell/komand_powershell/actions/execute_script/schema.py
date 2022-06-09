@@ -30,7 +30,7 @@ class ExecuteScriptInput(komand.Input):
     "add_credentials_to_script": {
       "type": "boolean",
       "title": "Add Credentials to Script",
-      "description": "This parameter indicates whether `Username and Password` and `Secret Key` action parameters will be added to script as powershell variables or not. Choosing `True` creates powershell variables (`$username`, `$password` and `$secret_key`) which you can use in your script in `Script` parameter. If you don't need those credentials choose `False` and provide some random values for `Username and Password` and `Secret Key` parameters",
+      "description": "This parameter indicates whether `Username and Password` and `Secret Key` action parameters will be added to script as PowerShell variables or not. Choosing `True` creates PowerShell variables (`$username`, `$password` and `$secret_key`) which you can use in your script in `Script` parameter. If you don't need those credentials choose `False` and provide some random values for `Username and Password` and `Secret Key` parameters",
       "order": 4
     },
     "address": {
