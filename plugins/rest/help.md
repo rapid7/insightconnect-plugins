@@ -38,7 +38,7 @@ Example input:
   "authentication_type": "Basic Auth",
   "base_url": "https://httpbin.org",
   "basic_auth_credentials": {
-    "username": "user@example.com" 
+    "username": "user@example.com", 
     "password": "mypassword"
   },
   "default_headers": {
