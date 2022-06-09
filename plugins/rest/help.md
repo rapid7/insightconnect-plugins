@@ -40,14 +40,11 @@ Example input:
   "authentication_type": "Basic Auth",
   "base_url": "https://httpbin.org",
   "basic_auth_credentials": {
-    
     "username": "user@example.com" 
-    
     "password": "mypassword"
-    
   },
   "default_headers": {
-    "User-Agent": "Rapid7 InsightConnect", 
+    "User-Agent": "Rapid7 InsightConnect" 
   },
   "fail_on_http_errors": true,
   "ssl_verify": true
