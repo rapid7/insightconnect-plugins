@@ -1,29 +1,29 @@
 import time
 
-import komand
+import insightconnect_plugin_runtime
 
 # Custom imports below
 import requests
-from komand.exceptions import PluginException, ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 
 from .schema import ConnectionSchema, Input
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.O365_AUTH_ENDPOINT = "https://login.microsoftonline.com/{}/oauth2/token"
         self.SCOPE = "https://graph.microsoft.com"
 
         self.tenant = ""
-        self.app_secret = ""
+        self.app_secret = ""  # nosec
 
         # Auth tokens expire after 1 hour. Only make that call if we need to
         self.time_ago = 0  # Jan 1, 1970
         self.time_now = time.time()  # More than 1 hour since 1978
 
         self.app_id = ""
-        self.auth_token = ""
+        self.auth_token = ""  # nosec
 
     def connect(self, params):
         self.logger.info("Connect: Connecting...")
@@ -57,7 +57,7 @@ class Connection(komand.Connection):
         request = requests.post(formatted_endpoint, data=data)
         self.logger.info("Authentication request status: " + str(request.status_code))
 
-        if request.status_code is not 200:
+        if request.status_code != 200:
             self.logger.error(request.text)
             raise PluginException(
                 cause="Unable to authorize against Microsoft graph API.",
