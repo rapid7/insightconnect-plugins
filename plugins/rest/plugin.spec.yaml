@@ -225,7 +225,7 @@ actions:
         description: Payload to submit to the server when making the HTTP Request call
         type: '[]object'
         required: false
-        example: '{"user": "user@example.com"}'
+        example: '[{"user": "user@example.com"}]'
     output:
       body_object:
         title: Body Object
