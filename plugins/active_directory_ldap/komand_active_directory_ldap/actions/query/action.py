@@ -1,10 +1,10 @@
-import ldap3
-
 import insightconnect_plugin_runtime
+import ldap3
 
 # Custom imports below
 from komand_active_directory_ldap.util.utils import ADUtils
-from .schema import QueryInput, QueryOutput, Input, Output
+
+from .schema import Input, Output, QueryInput, QueryOutput
 
 
 class Query(insightconnect_plugin_runtime.Action):
@@ -20,17 +20,15 @@ class Query(insightconnect_plugin_runtime.Action):
         query = query.replace("\\>=", ">=")
         query = query.replace("\\<=", "<=")
 
-        # find pars of `(` `)`
-        pairs = formatter.find_parentheses_pairs(query)
-
         # replace ( and ) when they are part of a name rather than a search parameter
-        escaped_query = formatter.escape_brackets_for_query(query, pairs)
-        self.logger.info(f"Escaped query: {escaped_query}")
+        escaped_query = formatter.escape_brackets_for_query(query)
+        self.logger.info("Escaped query: %s", escaped_query)
 
-        attributes = params.get(Input.ATTRIBUTES)
+        attributes = params.get(Input.ATTRIBUTES, [])
         if not attributes:
             attributes = [ldap3.ALL_ATTRIBUTES, ldap3.ALL_OPERATIONAL_ATTRIBUTES]
 
+        # pylint: disable=no-value-for-parameter
         entries = self.connection.client.query(params.get(Input.SEARCH_BASE), escaped_query, attributes)
         if entries:
             return {Output.RESULTS: entries, Output.COUNT: len(entries)}

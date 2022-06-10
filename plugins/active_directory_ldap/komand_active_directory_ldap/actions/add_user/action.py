@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 
 # Custom imports below
-from .schema import AddUserInput, AddUserOutput, Output, Input
+from .schema import AddUserInput, AddUserOutput, Input, Output
 
 
 class AddUser(insightconnect_plugin_runtime.Action):

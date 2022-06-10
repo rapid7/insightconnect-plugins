@@ -1,10 +1,9 @@
-from ldap3.core.exceptions import LDAPExtensionError
-
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
-from .schema import ConnectionSchema, Input
-from ..util.api import ActiveDirectoryLdapAPI
+from ldap3.core.exceptions import LDAPExtensionError
 
+from ..util.api import ActiveDirectoryLdapAPI
+from .schema import ConnectionSchema, Input
 
 # Custom imports below
 

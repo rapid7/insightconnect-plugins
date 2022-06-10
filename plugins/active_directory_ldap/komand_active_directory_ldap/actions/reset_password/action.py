@@ -3,7 +3,8 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 from komand_active_directory_ldap.util.utils import ADUtils
-from .schema import ResetPasswordInput, ResetPasswordOutput, Output, Input
+
+from .schema import Input, Output, ResetPasswordInput, ResetPasswordOutput
 
 
 class ResetPassword(insightconnect_plugin_runtime.Action):

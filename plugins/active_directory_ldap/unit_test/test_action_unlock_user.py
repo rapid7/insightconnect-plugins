@@ -1,13 +1,13 @@
-from unittest import TestCase, mock
-from insightconnect_plugin_runtime.exceptions import PluginException
-from komand_active_directory_ldap.actions.unlock_user import UnlockUser
-from komand_active_directory_ldap.actions.enable_user.schema import Input, Output
-from unit_test.common import MockServer
-from unit_test.common import MockConnection
-from unit_test.common import default_connector
-from komand_active_directory_ldap.connection import Connection
-import logging
 import json
+import logging
+from unittest import TestCase, mock
+
+from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_active_directory_ldap.actions.enable_user.schema import Input, Output
+from komand_active_directory_ldap.actions.unlock_user import UnlockUser
+from komand_active_directory_ldap.connection import Connection
+
+from unit_test.common import MockConnection, MockServer, default_connector
 
 
 class TestActionUnlockUser(TestCase):

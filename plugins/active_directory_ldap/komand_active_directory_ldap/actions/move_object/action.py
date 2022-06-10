@@ -4,7 +4,8 @@ import re
 import insightconnect_plugin_runtime
 
 from komand_active_directory_ldap.util.utils import ADUtils
-from .schema import MoveObjectInput, MoveObjectOutput, Output, Input
+
+from .schema import Input, MoveObjectInput, MoveObjectOutput, Output
 
 
 class MoveObject(insightconnect_plugin_runtime.Action):
