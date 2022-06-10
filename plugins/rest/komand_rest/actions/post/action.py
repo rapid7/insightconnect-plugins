@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import PostInput, PostOutput, Component, Input, Output
+import json
 
 # Custom imports below
 from komand_rest.util.util import Common
@@ -12,10 +13,23 @@ class Post(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        headers = params.get(Input.HEADERS, {})
+        body = params.get(Input.BODY, {})
+
+        for key, value in headers.items():
+            if "content-type" in key.lower():
+                if "x-www-form-urlencoded" in value:
+                    # TODO Parse string for oAuth
+
+                    return body
+                elif "json" in value:
+                    body = json.loads(body)
+                    return body
+
         response = self.connection.api.call_api(
             method="POST",
             path=params.get(Input.ROUTE),
-            json_data=params.get(Input.BODY, {}),
+            json_data=body,
             headers=params.get(Input.HEADERS, {}),
         )
 

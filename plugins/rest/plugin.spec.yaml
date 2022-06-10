@@ -137,7 +137,7 @@ actions:
       body:
         title: Body
         description: Payload to submit to the server when making the HTTP Request call
-        type: object
+        type: string
         required: false
         example: '{"user": "user@example.com"}'
     output:
