@@ -1,6 +1,7 @@
 import json
 from logging import Logger
 from urllib.parse import urlparse, urlsplit, urlunsplit
+from typing import Dict, Any
 
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -59,6 +60,20 @@ def url_path_join(*parts):
 
 def first(sequence, default=""):
     return next((x for x in sequence if x), default)
+
+
+def convert_dict_body_to_string(dict_object: Dict[str, Any]):
+    """
+    This method will convert a dict object to a string
+    suitable for sending data in x-www-form-urlencoded format
+    :param dict_object: The dict object to convert
+    :return: A new string properly formatted
+    """
+    output_string = ""
+    for key, value in dict_object.items():
+        output_string += f"{key}={value}&"
+    output_string = output_string[:-1]
+    return output_string
 
 
 class RestAPI(object):

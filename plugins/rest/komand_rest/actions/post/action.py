@@ -4,6 +4,7 @@ import json
 
 # Custom imports below
 from komand_rest.util.util import Common
+from komand_rest.util.util import convert_dict_body_to_string
 
 
 class Post(insightconnect_plugin_runtime.Action):
@@ -16,16 +17,20 @@ class Post(insightconnect_plugin_runtime.Action):
         headers = params.get(Input.HEADERS, {})
         body = params.get(Input.BODY, {})
 
+        # Determine if headers / content-type == x-www-form-urlencoded
+        # If so, convert body to string and urlencode ('&', '=')
+        # Else, proceed with regular body
         for key, value in headers.items():
             if "content-type" in key.lower():
                 if "x-www-form-urlencoded" in value:
-                    # TODO Parse string for oAuth
-
+                    body = convert_dict_body_to_string(body)
+                    print("FORM ENCODED POINT")
                     return body
                 elif "json" in value:
-                    body = json.loads(body)
                     return body
-
+        # Error 415
+        # Basically, the data being sent is being refused because it is in the wrong format
+        # Determine the header type - application
         response = self.connection.api.call_api(
             method="POST",
             path=params.get(Input.ROUTE),
