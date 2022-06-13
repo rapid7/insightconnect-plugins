@@ -68,5 +68,5 @@ class EasyVistaApi:
 
     @staticmethod
     def split_url(url: str) -> str:
-        scheme, netloc, paths, queries, fragments = urlsplit(url.strip())
+        scheme, netloc, paths, queries, fragments = urlsplit(url.strip())  # pylint: disable=unused-variable
         return f"{scheme}://{netloc}"
