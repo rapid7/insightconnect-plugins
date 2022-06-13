@@ -1,7 +1,7 @@
 import json
 from logging import Logger
-from urllib.parse import urlparse, urlsplit, urlunsplit, urlencode
-from typing import Dict, Any, Union
+from urllib.parse import urlparse, urlsplit, urlunsplit
+from typing import Dict, Any
 
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -62,27 +62,18 @@ def first(sequence, default=""):
     return next((x for x in sequence if x), default)
 
 
-def check_headers_for_urlencoded(headers: Dict[str, str]):
+def convert_dict_body_to_string(dict_object: Dict[str, Any]):
     """
-    This method will check the headers for 'content-type' == 'application/x-www-form-urlencoded'
-    :param headers: Headers dict to read
-    :return: Boolean value indicating if the conditional is present
+    This method will convert a dict object to a string
+    suitable for sending data in x-www-form-urlencoded format
+    :param dict_object: The dict object to convert
+    :return: A new string properly formatted
     """
-    for key, value in headers.items():
-        if key.lower() == "content-type" and value.lower() == "application/x-www-form-urlencoded":
-            return True
-
-
-def convert_body_for_urlencoded(headers: Dict[str, str], body: Dict[str, Any]) -> Union[Dict[str, Any], str]:
-    """
-    This method will encode the body if the headers == x-www-form-urlencoded
-    :param headers: Headers dict to read into function call
-    :param body: Body dict to convert to string with encoding
-    :return: Body as an encoded string value
-    """
-    if check_headers_for_urlencoded(headers):
-        body = urlencode(body)
-    return body
+    output_string = ""
+    for key, value in dict_object.items():
+        output_string += f"{key}={value}&"
+    output_string = output_string[:-1]
+    return output_string
 
 
 class RestAPI(object):
