@@ -24,19 +24,18 @@ class Post(insightconnect_plugin_runtime.Action):
             if "content-type" in key.lower():
                 if "x-www-form-urlencoded" in value:
                     body = convert_dict_body_to_string(body)
-                    print("FORM ENCODED POINT")
                     return body
                 elif "json" in value:
                     return body
-        # Error 415
-        # Basically, the data being sent is being refused because it is in the wrong format
-        # Determine the header type - application
+
         response = self.connection.api.call_api(
             method="POST",
             path=params.get(Input.ROUTE),
             json_data=body,
-            headers=params.get(Input.HEADERS, {}),
+            headers=headers,
         )
+
+        print(response)
 
         return {
             Output.BODY_OBJECT: Common.body_object(response),
