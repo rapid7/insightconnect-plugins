@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 
 # Custom imports below
-from .schema import Component, Input, Output, QueryGroupMembershipInput, QueryGroupMembershipOutput
+from .schema import QueryGroupMembershipInput, QueryGroupMembershipOutput, Input, Output, Component
 
 
 class QueryGroupMembership(insightconnect_plugin_runtime.Action):

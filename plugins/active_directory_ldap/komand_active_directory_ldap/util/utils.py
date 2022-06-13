@@ -1,11 +1,9 @@
 import re
-from logging import Logger
 from typing import List, Optional
-
-from insightconnect_plugin_runtime.exceptions import PluginException
-from ldap3 import MODIFY_REPLACE
 from ldap3.core.exceptions import LDAPInvalidDnError, LDAPOperationsErrorResult
-from ldap3.utils.conv import escape_filter_chars
+from ldap3 import MODIFY_REPLACE
+from insightconnect_plugin_runtime.exceptions import PluginException
+from logging import Logger
 
 
 class ADUtils:
@@ -71,11 +69,11 @@ class ADUtils:
         try:
             for idx, value in enumerate(attribute):
                 dn_list[idx + 1] = f"{value}{dn_list[idx + 1]}"[1:]
-        except PluginException as e:
+        except PluginException as error:
             raise PluginException(
                 cause="The input DN was invalid. ",
                 assistance="Please double check input. Input was:{dn}",
-            ) from e
+            ) from error
         return dn_list
 
     @staticmethod
@@ -160,7 +158,6 @@ class ADUtils:
         """
         This method will properly escape a query
         :param query: The string to evaluate
-        :param pairs: indexes of the start and end of brackets
         :return: An escaped query
         """
         change = True
@@ -187,10 +184,12 @@ class ADUtils:
                 search_filter=f"(distinguishedName={ADUtils.escape_user_dn(user_dn)})",
                 attributes=["userAccountControl"],
             )
-        except LDAPInvalidDnError as e:
-            raise PluginException(cause="The DN was not found.", assistance=f"The DN {user_dn} was not found.", data=e)
-        except LDAPOperationsErrorResult as e:
-            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=e)
+        except LDAPInvalidDnError as error:
+            raise PluginException(
+                cause="The DN was not found.", assistance=f"The DN {user_dn} was not found.", data=error
+            )
+        except LDAPOperationsErrorResult as error:
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=error)
         return len([d["dn"] for d in conn.response if "dn" in d]) > 0
 
     @staticmethod

@@ -3,10 +3,11 @@ from functools import wraps
 from json import loads
 
 import ldap3
-from insightconnect_plugin_runtime.exceptions import PluginException
-from ldap3 import ALL_ATTRIBUTES, ALL_OPERATIONAL_ATTRIBUTES, MODIFY_REPLACE, extend
-from ldap3.core.exceptions import LDAPAuthorizationDeniedResult, LDAPBindError, LDAPException, LDAPSocketOpenError
+from ldap3 import MODIFY_REPLACE, ALL_ATTRIBUTES, ALL_OPERATIONAL_ATTRIBUTES
+from ldap3 import extend
+from ldap3.core.exceptions import LDAPBindError, LDAPAuthorizationDeniedResult, LDAPSocketOpenError, LDAPException
 
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_active_directory_ldap.util.utils import ADUtils
 
 

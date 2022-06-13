@@ -3,8 +3,7 @@ import ldap3
 
 # Custom imports below
 from komand_active_directory_ldap.util.utils import ADUtils
-
-from .schema import Input, Output, QueryInput, QueryOutput
+from .schema import QueryInput, QueryOutput, Input, Output
 
 
 class Query(insightconnect_plugin_runtime.Action):
@@ -28,7 +27,6 @@ class Query(insightconnect_plugin_runtime.Action):
         if not attributes:
             attributes = [ldap3.ALL_ATTRIBUTES, ldap3.ALL_OPERATIONAL_ATTRIBUTES]
 
-        # pylint: disable=no-value-for-parameter
         entries = self.connection.client.query(params.get(Input.SEARCH_BASE), escaped_query, attributes)
         if entries:
             return {Output.RESULTS: entries, Output.COUNT: len(entries)}

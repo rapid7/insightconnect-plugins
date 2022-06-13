@@ -1,9 +1,8 @@
-import json
-import logging
 from unittest import TestCase
-
 from komand_active_directory_ldap.actions import Query
 from komand_active_directory_ldap.connection import Connection
+import logging
+import json
 
 
 class TestQuery(TestCase):

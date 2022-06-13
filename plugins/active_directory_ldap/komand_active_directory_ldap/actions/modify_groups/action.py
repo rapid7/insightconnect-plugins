@@ -2,8 +2,7 @@ import insightconnect_plugin_runtime
 
 # Custom imports below
 from komand_active_directory_ldap.util.utils import ADUtils
-
-from .schema import Input, ModifyGroupsInput, ModifyGroupsOutput, Output
+from .schema import ModifyGroupsInput, ModifyGroupsOutput, Input, Output
 
 
 class ModifyGroups(insightconnect_plugin_runtime.Action):
