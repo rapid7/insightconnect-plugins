@@ -35,8 +35,6 @@ class Post(insightconnect_plugin_runtime.Action):
             headers=headers,
         )
 
-        print(response)
-
         return {
             Output.BODY_OBJECT: Common.body_object(response),
             Output.BODY_STRING: response.text,
