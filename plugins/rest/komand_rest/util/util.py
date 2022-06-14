@@ -76,22 +76,11 @@ def convert_dict_body_to_string(dict_object: Dict[str, Any]):
     return output_string
 
 
-def convert_string_to_dict(input_string: str) -> dict:
-    output_dict = {}
-    for parameter in input_string.split('&'):
-        try:
-            splitted_parameter = parameter.split('=')
-            output_dict[splitted_parameter[0]] = splitted_parameter[1]
-        except:
-            raise PluginException(cause="Wrong format of input_string")
-    return output_dict
-
-
 class RestAPI(object):
     CUSTOM_SECRET_INPUT = "CUSTOM_SECRET_INPUT"  # noqa: B105
 
     def __init__(
-            self, url: str, logger: Logger, ssl_verify: bool, default_headers: dict = None, fail_on_error: bool = True
+        self, url: str, logger: Logger, ssl_verify: bool, default_headers: dict = None, fail_on_error: bool = True
     ):
         self.url = url
         self.logger = logger
@@ -101,14 +90,14 @@ class RestAPI(object):
         self.fail_on_error = fail_on_error
 
     def with_credentials(
-            self, authentication_type: str, username: str = None, password: str = None, secret_key: str = None
+        self, authentication_type: str, username: str = None, password: str = None, secret_key: str = None
     ):
         if authentication_type in ("Basic Auth", "Digest Auth"):
             if not username or not password:
                 raise PluginException(
                     cause="Basic Auth authentication selected without providing username and password.",
                     assistance="The authentication type requires a username and password."
-                               " Please complete the connection with a username and password or change the authentication type.",
+                    " Please complete the connection with a username and password or change the authentication type.",
                 )
         else:
             if not secret_key and authentication_type != "Custom":
@@ -139,7 +128,7 @@ class RestAPI(object):
                         raise PluginException(
                             cause="'CUSTOM_SECRET_INPUT' used in authentication header, but no secret provided.",
                             assistance="When using 'CUSTOM_SECRET_INPUT' as a value in authentication headers the"
-                                       " 'secret_key' field is required.",
+                            " 'secret_key' field is required.",
                         )
                     new_headers[key] = secret_key
                 else:
@@ -147,7 +136,7 @@ class RestAPI(object):
             self.default_headers = new_headers
 
     def call_api(
-            self, method: str, path: str, data: str = None, json_data: dict = None, headers: dict = None
+        self, method: str, path: str, data: str = None, json_data: dict = None, headers: dict = None
     ) -> Response:
         try:
             data_string = json.dumps(data) if data else None
