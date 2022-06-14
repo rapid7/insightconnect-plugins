@@ -1,6 +1,5 @@
 import insightconnect_plugin_runtime
 from .schema import PostInput, PostOutput, Component, Input, Output
-import logging
 
 # Custom imports below
 from komand_rest.util.util import Common
