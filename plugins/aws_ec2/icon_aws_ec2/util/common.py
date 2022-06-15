@@ -337,7 +337,6 @@ class ActionHelper:
         :param output: The response from the botocore call
         :return: Correctly formatted botocall response
         """
-
         # Fix types
         output = self.fix_output_types(output)
 
@@ -390,9 +389,9 @@ class PaginationHelper:
         :param output: The output variables
         :return: True if more results are available, False otherwise
         """
-
         is_paginated = False
 
+        # It seems that is never being executed.
         if self.more_results and self.more_results in output.keys() and output[self.more_results]:
             is_paginated = True
 
@@ -411,7 +410,6 @@ class PaginationHelper:
         :param b:
         :return:
         """
-
         max_hit = False
 
         for r in self.result_key:
