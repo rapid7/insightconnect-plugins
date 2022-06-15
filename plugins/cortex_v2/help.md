@@ -63,7 +63,7 @@ This action is used to run an analyzer on an observable.
 |----|----|-------|--------|-----------|----|-------|
 |analyzer_id|string|None|True|ID of the Analyzer|None|Hipposcore_1_0|
 |attributes|attributes|None|True|Attributes|None|None|
-|observable|string|None|True|A string representing an observable value. This could be an IP address, a domain, URL, or other indicator|None|https://example.com|
+|observable|string|None|True|A string representing an observable value. This could be an IP address, a domain, URL, or other indicator|None|example.com|
 
 Example input:
 
@@ -338,8 +338,7 @@ This action is used to list enabled analyzers within Cortex.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|analyzer_id|string|None|False|ID of an analyzer. If empty, all enabled analyzers will be returned|None|9de5069c5afe602b2ea0a04b66beb2c0|
-
+|analyzer_id|string|None|False|ID of an analyzer. If empty, all enabled analyzers will be returned|None|12a6ed3c998d2969a58d65494df802b7|
 Example input:
 
 ```
@@ -651,7 +650,7 @@ This action is used to run all or a collection of analyzers on an observable.
 |analyze_all|boolean|False|True|Use all available analyzers on observable (ignores list of Analyzer IDs)|None|False|
 |analyzer_ids|[]string|None|False|A collection of analyzer IDs|None|["Hipposcore_1_0", "Robtex"]|
 |attributes|attributes|None|True|Attributes|None|None|
-|observable|string|None|True|A string representing an observable value. This could be an IP address, a domain, URL, or other indicator|None|https://example.com|
+|observable|string|None|True|A string representing an observable value. This could be an IP address, a domain, URL, or other indicator|None|example.com|
 
 Example input:
 
