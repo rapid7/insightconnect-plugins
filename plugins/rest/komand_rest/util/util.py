@@ -62,7 +62,7 @@ def first(sequence, default=""):
     return next((x for x in sequence if x), default)
 
 
-def convert_dict_body_to_string(dict_object: Dict[str, Any]):
+def convert_dict_body_to_string(dict_object: Dict[str, Any]) -> str:
     """
     This method will convert a dict object to a string
     suitable for sending data in x-www-form-urlencoded format
@@ -72,8 +72,7 @@ def convert_dict_body_to_string(dict_object: Dict[str, Any]):
     output_string = ""
     for key, value in dict_object.items():
         output_string += f"{key}={value}&"
-    output_string = output_string[:-1]
-    return output_string
+    return output_string[:-1]
 
 
 class RestAPI(object):

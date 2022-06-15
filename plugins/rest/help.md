@@ -19,6 +19,8 @@ This plugin is often used to integrate with ad-hoc 3rd party API's in a workflow
 
 ## Setup
 
+Check out the [plugin guide](https://docs.rapid7.com/insightconnect/http-requests) for more details on how to configure this plugin.
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
