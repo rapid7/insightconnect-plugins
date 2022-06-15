@@ -453,7 +453,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
-* 6.0.0 - PATCH accepts array of objects | POST supports x-www-form-urlencoded
+* 6.0.0 - POST supports x-www-form-urlencoded
 * 5.0.2 - Fix issue with JSON data parser for PATCH request
 * 5.0.1 - Update to make 'No Authentication' the default connection type
 * 5.0.0 - Add ability for user to choose if the plugin should fail on standard HTTP error codes (4xx-5xx) | Add 'No Authentication' as another authentication type
