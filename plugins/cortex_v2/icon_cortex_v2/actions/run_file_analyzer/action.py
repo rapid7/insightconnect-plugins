@@ -43,9 +43,9 @@ class RunFileAnalyzer(insightconnect_plugin_runtime.Action):
             with open(file_path, "rb") as temp_file_r:
                 file_obj = (filename, temp_file_r, mime_type)
                 data = dict_to_string({"dataType": "file", "tlp": tlp_num})
-                job = filter_job(api.run_analyzer(analyzer_id=analyzer_id,
-                                                  data={"_json": data},
-                                                  files={"data": file_obj}))
+                job = filter_job(
+                    api.run_analyzer(analyzer_id=analyzer_id, data={"_json": data}, files={"data": file_obj})
+                )
                 if not job or not isinstance(job, dict) or "id" not in job:
                     raise PluginException(f"Failed to receive job from analyzer {analyzer_name}")
                 job["artifacts"] = filter_job_artifacts(api.get_job_artifacts(job["id"]))

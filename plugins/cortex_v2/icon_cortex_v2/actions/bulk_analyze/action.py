@@ -45,13 +45,15 @@ class BulkAnalyze(insightconnect_plugin_runtime.Action):
 
             # loop through analyzers and run
             for analyzer_name in analyzer_names:
-                job_results.append(self.run_analyzer(analyzer_name,
-                                                     {"data": observable, "dataType": data_type, "tlp": tlp_num}))
+                job_results.append(
+                    self.run_analyzer(analyzer_name, {"data": observable, "dataType": data_type, "tlp": tlp_num})
+                )
         else:
             # Analyze all
             for analyzer_name in cortex_analyzers:
-                job_results.append(self.run_analyzer(analyzer_name,
-                                                     {"data": observable, "dataType": data_type, "tlp": tlp_num}))
+                job_results.append(
+                    self.run_analyzer(analyzer_name, {"data": observable, "dataType": data_type, "tlp": tlp_num})
+                )
         # results
         return {Output.JOBS: job_results}
 

@@ -93,8 +93,9 @@ class API:
         return self.get_analyzer_by_id()
 
     def run_analyzer(self, analyzer_id, data=None, files=None):
-        return self.send_request("POST", f"analyzer/{analyzer_id}/run",
-                                 data=data, params={"force": 1}, files=files).json()
+        return self.send_request(
+            "POST", f"analyzer/{analyzer_id}/run", data=data, params={"force": 1}, files=files
+        ).json()
 
     def search_for_all_jobs(self, query, range_, sort_):
         return self.search("job", query, range_, sort_)

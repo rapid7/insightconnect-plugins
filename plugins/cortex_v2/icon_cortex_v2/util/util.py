@@ -39,8 +39,11 @@ def filter_analyzers(analyzers: List[Dict]):
 
 
 def filter_analyzer(analyzer: Dict):
-    return {k: v for k, v in analyzer.items() if k in
-            {"id", "version", "dataTypeList", "name", "description", "license", "author", "url"}}
+    return {
+        k: v
+        for k, v in analyzer.items()
+        if k in {"id", "version", "dataTypeList", "name", "description", "license", "author", "url"}
+    }
 
 
 def filter_jobs(jobs: List[Dict]):
