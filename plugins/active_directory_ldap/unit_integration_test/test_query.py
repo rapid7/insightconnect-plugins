@@ -17,7 +17,7 @@ class TestQuery(TestCase):
         test_connection.logger = log
         test_query.logger = log
 
-        with open("../tests/query.json") as file:
+        with open("../tests/query.json", encoding="utf-8") as file:
             data = json.load(file)
             connection_params = data.get("body").get("connection")
 
@@ -46,4 +46,3 @@ class TestQuery(TestCase):
             actual.get("distinguishedName"),
             'CN=Bob "Sponge,Pants" (somestuff),OU=Test Users,OU=User,DC=intad,DC=dslab,DC=internal',
         )
-        pass
