@@ -1,0 +1,26 @@
+{
+  "body": {
+    "action": "run_analyzer",
+    "connection": {
+      "api_key": {
+        "secretKey": "aJAQOq8yNOcV0n4oC9EhLVbzerCm4kBX"
+      },
+      "host": "host.docker.internal",
+      "port": "9999",
+      "protocol": "HTTP",
+      "proxy": {},
+      "verify": false
+    },
+    "input": {
+      "analyzer_id": "VirusTotal_GetReport_3_0",
+      "attributes": {
+        "dataType": "domain",
+        "tlp": 0
+      },
+      "observable": "aadroid.net"
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}

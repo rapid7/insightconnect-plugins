@@ -1,0 +1,26 @@
+{
+  "body": {
+    "action": "run_file_analyzer",
+    "connection": {
+      "api_key": {
+        "secretKey": "aJAQOq8yNOcV0n4oC9EhLVbzerCm4kBX"
+      },
+      "host": "host.docker.internal",
+      "port": "9999",
+      "protocol": "HTTP",
+      "proxy": {},
+      "verify": false
+    },
+    "input": {
+      "analyzer_id": "FileInfo_8_0",
+      "attributes": {
+        "filename": "eicar.txt",
+        "tlp": 0
+      },
+      "file": "WDVPIVAlQEFQWzRcUFpYNTQoUF4pN0NDKTd9JEVJQ0FSLVNUQU5EQVJELUFOVElWSVJVUy1URVNULUZJTEUhJEgrSCo="
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}

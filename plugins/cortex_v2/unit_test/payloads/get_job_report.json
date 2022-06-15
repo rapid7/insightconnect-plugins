@@ -1,0 +1,21 @@
+{
+  "body": {
+    "action": "get_job_report",
+    "connection": {
+      "api_key": {
+        "secretKey": "aJAQOq8yNOcV0n4oC9EhLVbzerCm4kBX"
+      },
+      "host": "host.docker.internal",
+      "port": "9999",
+      "protocol": "HTTP",
+      "proxy": {},
+      "verify": false
+    },
+    "input": {
+      "job_id": "5SzxIIEBz1WePCeJF6FQ"
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}

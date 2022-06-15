@@ -1,0 +1,25 @@
+{
+  "body": {
+    "action": "get_jobs",
+    "connection": {
+      "api_key": {
+        "secretKey": "aJAQOq8yNOcV0n4oC9EhLVbzerCm4kBX"
+      },
+      "host": "host.docker.internal",
+      "port": "9999",
+      "protocol": "HTTP",
+      "proxy": {},
+      "verify": false
+    },
+    "input": {
+      "analyzerFilter": "",
+      "dataFilter": "",
+      "dataTypeFilter": "domain",
+      "limit": 10,
+      "start": 0
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}

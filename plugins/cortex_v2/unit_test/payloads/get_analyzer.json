@@ -1,0 +1,21 @@
+{
+  "body": {
+    "action": "get_analyzer",
+    "connection": {
+      "api_key": {
+        "secretKey": "aJAQOq8yNOcV0n4oC9EhLVbzerCm4kBX"
+      },
+      "host": "host.docker.internal",
+      "port": "9999",
+      "protocol": "HTTP",
+      "proxy": {},
+      "verify": false
+    },
+    "input": {
+      "analyzer_id": "12a6ed3c998d2969a58d65494df802b7"
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}

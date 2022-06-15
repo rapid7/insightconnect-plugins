@@ -1,0 +1,11 @@
+unit_test/payloads/run_analyzer.json
+unit_test/payloads/get_analyzer.json
+unit_test/payloads/get_analyzer_by_type.json
+unit_test/payloads/get_analyzer_id.json
+unit_test/payloads/get_job_details.json
+unit_test/payloads/get_job_report.json
+unit_test/payloads/get_jobs.json
+unit_test/payloads/get_jobs_params.json
+unit_test/payloads/run_analyzer_bad.json
+unit_test/payloads/run_file_analyzer.json
+unit_test/payloads/delete_job.json

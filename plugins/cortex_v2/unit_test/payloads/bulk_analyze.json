@@ -1,0 +1,27 @@
+{
+  "body": {
+    "action": "bulk_analyze",
+    "connection": {
+      "api_key": {
+        "secretKey": "aJAQOq8yNOcV0n4oC9EhLVbzerCm4kBX"
+      },
+      "host": "host.docker.internal",
+      "port": "9999",
+      "protocol": "HTTP",
+      "proxy": {},
+      "verify": false
+    },
+    "input": {
+      "analyze_all": false,
+      "analyzer_ids": ["VirusTotal_GetReport_3_0", "JoeSandbox_Url_Analysis_2_0"],
+      "attributes": {
+        "dataType": "",
+        "tlp": 0
+      },
+      "observable": "aadroid.net"
+    },
+    "meta": {}
+  },
+  "type": "action_start",
+  "version": "v1"
+}
