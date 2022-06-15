@@ -338,13 +338,13 @@ This action is used to list enabled analyzers within Cortex.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|analyzer_id|string|None|False|Analyzer ID. If empty, all enabled analyzers will be returned|None|VirusTotal_Scan_3_0|
+|analyzer_id|string|None|False|ID of an analyzer. If empty, all enabled analyzers will be returned|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
 ```
 {
-  "analyzer_id": "VirusTotal_Scan_3_0"
+  "analyzer_id": "12a6ed3c998d2969a58d65494df802b7"
 }
 ```
 
