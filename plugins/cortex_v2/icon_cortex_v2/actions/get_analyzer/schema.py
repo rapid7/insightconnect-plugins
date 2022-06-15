@@ -24,7 +24,7 @@ class GetAnalyzerInput(insightconnect_plugin_runtime.Input):
     "analyzer_id": {
       "type": "string",
       "title": "Analyzer ID",
-      "description": "Analyzer ID. If empty, all enabled analyzers will be returned",
+      "description": "ID of an analyzer. If empty, all enabled analyzers will be returned",
       "order": 1
     }
   }
