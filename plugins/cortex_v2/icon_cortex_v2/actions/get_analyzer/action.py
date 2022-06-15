@@ -26,4 +26,4 @@ class GetAnalyzer(insightconnect_plugin_runtime.Action):
                 result = filter_analyzers(self.connection.API.get_analyzers())
             return {Output.LIST: result}
         except Exception as e:
-            raise PluginException(f"Failed to get analyzers.", assistance=f"{e}")
+            raise PluginException("Failed to get analyzers.", assistance=f"{e}")
