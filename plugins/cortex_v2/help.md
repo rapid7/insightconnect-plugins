@@ -17,20 +17,37 @@ malicious or safe.
 * API key
 * Cortex hostname
 
+# Supported Product Versions
+
+_There are no supported product versions listed._
+
 # Documentation
 
 ## Setup
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|verify|boolean|True|True|Verify the certificate|None|
-|host|string|None|True|Cortex host e.g. cortex.company.com or 10.3.4.50|None|
-|protocol|string|None|True|HTTP protocol|['HTTP', 'HTTPS']|
-|port|string|9999|True|Cortex API port e.g. 9999|None|
-|proxy|object|None|False|An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value|None|
-|api_key|credential_secret_key|None|True|API key assigned to the user|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|True|API key assigned to the user|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|host|string|None|True|Cortex host e.g. cortex.example.com or 10.3.4.50|None|https://example.com|
+|port|string|9999|True|Cortex API port|None|9999|
+|protocol|string|None|True|HTTP protocol|['HTTP', 'HTTPS']|HTTPS|
+|proxy|object|None|False|An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value|None|None|
+|verify|boolean|True|True|Verify the certificate|None|True|
+
+Example input:
+
+```
+{
+  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "host": "cortex.example.com",
+  "port": 9999,
+  "protocol": "HTTPS",
+  "proxy": "None",
+  "verify": true
+}
+```
 
 ## Technical Details
 
@@ -42,11 +59,21 @@ This action is used to run an analyzer on an observable.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|observable|string|None|True|A string representing an observable value. This could be an IP address, a domain, URL, or other indicator|None|
-|analyzer_id|string|None|True|Analyzer ID e.g. Hipposcore_1_0|None|
-|attributes|attributes|None|True|Attributes|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|analyzer_id|string|None|True|ID of the Analyzer|None|Hipposcore_1_0|
+|attributes|attributes|None|True|Attributes|None|None|
+|observable|string|None|True|A string representing an observable value. This could be an IP address, a domain, URL, or other indicator|None|example.com|
+
+Example input:
+
+```
+{
+  "analyzer_id": "Hipposcore_1_0",
+  "attributes": "None",
+  "observable": "example.com"
+}
+```
 
 ##### Output
 
@@ -74,9 +101,17 @@ This action is used to list the details of a given job, identified by its ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|job_id|string|None|True|Job ID e.g. c9uZDbHBf32DdIVJ|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|job_id|string|None|True|ID of the job|None|c9uZDbHBf32DdIVJ|
+
+Example input:
+
+```
+{
+  "job_id": "c9uZDbHBf32DdIVJ"
+}
+```
 
 ##### Output
 
@@ -104,9 +139,17 @@ This action is used to list analyzers that can act upon a given datatype.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|type|string|None|True|Data type, e.g. IP address, hash, domain|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|type|string|None|True|Data type, e.g. IP address, hash, domain|None|198.51.100.2|
+
+Example input:
+
+```
+{
+  "type": "198.51.100.2"
+}
+```
 
 ##### Output
 
@@ -199,9 +242,17 @@ This action is used to list the report of a given job, identified by its ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|job_id|string|None|True|Job ID e.g. c9uZDbHBf32DdIVJ|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|job_id|string|None|True|ID of the job|None|c9uZDbHBf32DdIVJ|
+
+Example input:
+
+```
+{
+  "job_id": "c9uZDbHBf32DdIVJ"
+}
+```
 
 ##### Output
 
@@ -285,9 +336,17 @@ This action is used to list enabled analyzers within Cortex.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|analyzer_id|string|None|False|Analyzer ID e.g. VirusTotal_Scan_3_0. If empty, all enabled analyzers will be returned|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|analyzer_id|string|None|False|Analyzer ID. If empty, all enabled analyzers will be returned|None|VirusTotal_Scan_3_0|
+
+Example input:
+
+```
+{
+  "analyzer_id": "VirusTotal_Scan_3_0"
+}
+```
 
 ##### Output
 
@@ -416,13 +475,25 @@ This action is used to list analysis jobs.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|dataTypeFilter|string|None|False|Data type filter e.g. ip, domain, hash, etc.|None|
-|start|integer|0|False|A number representing the index of the page start|None|
-|analyzerFilter|string|None|False|Analyzer's ID|None|
-|dataFilter|string|None|False|A string representing a part of an observable value. Could be an IP or part of an IP, a domain, URL and so on|None|
-|limit|integer|10|False|A number representing a page size|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|analyzerFilter|string|None|False|Analyzer's ID|None|Hipposcore_1_0|
+|dataFilter|string|None|False|A string representing a part of an observable value. Could be an IP or part of an IP, a domain, URL and so on|None|domain|
+|dataTypeFilter|string|None|False|Data type filter e.g. ip, domain, hash, etc|None|domain|
+|limit|integer|10|False|A number representing a page size|None|10|
+|start|integer|0|False|A number representing the index of the page start|None|0|
+
+Example input:
+
+```
+{
+  "analyzerFilter": "Hipposcore_1_0",
+  "dataFilter": "domain",
+  "dataTypeFilter": "domain",
+  "limit": 10,
+  "start": 0
+}
+```
 
 ##### Output
 
@@ -501,9 +572,17 @@ This action is used to delete an existing job, identified by its ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|job_id|string|None|True|Job ID e.g. c9uZDbHBf32DdIVJ|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|job_id|string|None|True|ID of the job|None|c9uZDbHBf32DdIVJ|
+
+Example input:
+
+```
+{
+  "job_id": "c9uZDbHBf32DdIVJ"
+}
+```
 
 ##### Output
 
@@ -525,11 +604,21 @@ This action is used to run analyzers on a file.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|attributes|input_file_attributes|None|True|Attributes|None|
-|analyzer_id|string|None|True|Analyzer ID e.g. File_Info_2_0|None|
-|file|bytes|None|True|A file to analyze|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|analyzer_id|string|None|True|ID of the analyzer|None|File_Info_2_0|
+|attributes|input_file_attributes|None|True|Attributes|None|None|
+|file|bytes|None|True|A file to analyze|None|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
+
+Example input:
+
+```
+{
+  "analyzer_id": "File_Info_2_0",
+  "attributes": "None",
+  "file": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
+}
+```
 
 ##### Output
 
@@ -557,12 +646,26 @@ This action is used to run all or a collection of analyzers on an observable.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|analyzer_ids|[]string|None|False|A collection of analyzer IDs e.g ["Hipposcore_1_0", "Robtex"]|None|
-|analyze_all|boolean|False|True|Use all analyzers on observable|None|
-|observable|string|None|True|A string representing an observable value. This could be an IP address, a domain, URL, or other indicator|None|
-|attributes|attributes|None|True|Attributes|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|analyze_all|boolean|False|True|Use all available analyzers on observable (ignores list of Analyzer IDs)|None|False|
+|analyzer_ids|[]string|None|False|A collection of analyzer IDs|None|["Hipposcore_1_0", "Robtex"]|
+|attributes|attributes|None|True|Attributes|None|None|
+|observable|string|None|True|A string representing an observable value. This could be an IP address, a domain, URL, or other indicator|None|example.com|
+
+Example input:
+
+```
+{
+  "analyze_all": false,
+  "analyzer_ids": [
+    "Hipposcore_1_0",
+    "Robtex"
+  ],
+  "attributes": "None",
+  "observable": "example.com"
+}
+```
 
 ##### Output
 
@@ -595,7 +698,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -607,6 +710,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.1.2 - Update SDK runtime
 * 1.1.1 - New spec and help.md format for the Extension Library
 * 1.1.0 - New action Bulk Analyze
 * 1.0.0 - Initial plugin
