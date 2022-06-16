@@ -19,6 +19,8 @@ This plugin is often used to integrate with ad-hoc 3rd party API's in a workflow
 
 ## Setup
 
+Check out the [plugin guide](https://docs.rapid7.com/insightconnect/http-requests) for more details on how to configure this plugin.
+
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -451,7 +453,6 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
-* 6.0.0 - Updated input in action - patch to now take in an array of objects
 * 5.0.2 - Fix issue with JSON data parser for PATCH request
 * 5.0.1 - Update to make 'No Authentication' the default connection type
 * 5.0.0 - Add ability for user to choose if the plugin should fail on standard HTTP error codes (4xx-5xx) | Add 'No Authentication' as another authentication type
