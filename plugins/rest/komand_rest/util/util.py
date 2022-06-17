@@ -139,17 +139,30 @@ class RestAPI(object):
             self.default_headers = new_headers
 
     def call_api(
-        self, method: str, path: str, data: str = None, json_data: dict = None, headers: dict = None,
+        self,
+        method: str,
+        path: str,
+        data: str = None,
+        json_data: dict = None,
+        headers: dict = None,
     ) -> Response:
         try:
-            # data_string = json.dumps(data) if data else None
+
+            # TODO
+
+            # If data is not encoded do this
+            data_string = json.dumps(data) if data else None
+
+            # If data is encoded do this
             data_string = data
             print(url_path_join(self.url, path))
             print("\n\n\nDATA STRING: ", data_string)
             print("\n\n\nHEADERS: ", headers)
             print("\n\n\nMETHOD: ", method)
             print("\n\n\nJSON_DATA: ", json_data)
-            payload='client_id=b77086fd23fb49fdaccc163d4a923d51&client_secret=63vX4UwTIn1H8Vg0AKzadmrk9NE5iBuYSDC7b2tl'
+            payload = (
+                "client_id=b77086fd23fb49fdaccc163d4a923d51&client_secret=63vX4UwTIn1H8Vg0AKzadmrk9NE5iBuYSDC7b2tl"
+            )
             print("are the same: ", payload == data_string)
             response = requests.request(
                 method,
@@ -157,8 +170,8 @@ class RestAPI(object):
                 data=data_string,
                 json=json_data,
                 headers=Common.merge_dicts(self.default_headers, headers or {}),
-                # auth=self.auth,
-                # verify=self.ssl_verify,
+                auth=self.auth,
+                verify=self.ssl_verify,
             )
             if not self.fail_on_error:
                 return response
