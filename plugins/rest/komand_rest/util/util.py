@@ -1,6 +1,6 @@
 import json
 from logging import Logger
-import logging
+
 from urllib.parse import urlparse, urlsplit, urlunsplit, urlencode
 from typing import Dict, Any, Union
 
