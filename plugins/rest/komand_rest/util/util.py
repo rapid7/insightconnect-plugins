@@ -1,6 +1,5 @@
 import json
 from logging import Logger
-import logging
 from urllib.parse import urlparse, urlsplit, urlunsplit, urlencode
 from typing import Dict, Any, Union
 
@@ -63,19 +62,26 @@ def first(sequence, default=""):
     return next((x for x in sequence if x), default)
 
 
+def check_headers_for_urlencoded(headers: Dict[str, str]):
+    """
+    This method will check the headers for 'content-type' == 'application/x-www-form-urlencoded'
+    :param headers: Headers dict to read
+    :return: Boolean value indicating if the conditional is present
+    """
+    for key, value in headers.items():
+        if key.lower() == "content-type" and value.lower() == "application/x-www-form-urlencoded":
+            return True
+
+
 def convert_body_for_urlencoded(headers: Dict[str, str], body: Dict[str, Any]) -> Union[Dict[str, Any], str]:
     """
     This method will encode the body if the headers == x-www-form-urlencoded
-    :param headers: Headers dict to read for conditional
+    :param headers: Headers dict to read into function call
     :param body: Body dict to convert to string with encoding
     :return: Body as an encoded string value
     """
-    print("First BODY: ", body)
-    for key, value in headers.items():
-        if key.lower() == "content-type" and value.lower() == "application/x-www-form-urlencoded":
-            body = urlencode(body)
-            print("FINAL BODY:", body)
-            break
+    if check_headers_for_urlencoded(headers):
+        body = urlencode(body)
     return body
 
 
@@ -139,26 +145,29 @@ class RestAPI(object):
             self.default_headers = new_headers
 
     def call_api(
-        self, method: str, path: str, data: str = None, json_data: dict = None, headers: dict = None,
+        self,
+        method: str,
+        path: str,
+        data: str = None,
+        json_data: dict = None,
+        headers: dict = None,
     ) -> Response:
         try:
-            # data_string = json.dumps(data) if data else None
+            # TODO
+            # We want this line if there is data but it has not been encoded
+            data_string = json.dumps(data) if data else None
+
+            # We only want this line if the data has been encoded
             data_string = data
-            print(url_path_join(self.url, path))
-            print("\n\n\nDATA STRING: ", data_string)
-            print("\n\n\nHEADERS: ", headers)
-            print("\n\n\nMETHOD: ", method)
-            print("\n\n\nJSON_DATA: ", json_data)
-            payload='client_id=b77086fd23fb49fdaccc163d4a923d51&client_secret=63vX4UwTIn1H8Vg0AKzadmrk9NE5iBuYSDC7b2tl'
-            print("are the same: ", payload == data_string)
+
             response = requests.request(
                 method,
                 url_path_join(self.url, path),
                 data=data_string,
                 json=json_data,
                 headers=Common.merge_dicts(self.default_headers, headers or {}),
-                # auth=self.auth,
-                # verify=self.ssl_verify,
+                auth=self.auth,
+                verify=self.ssl_verify,
             )
             if not self.fail_on_error:
                 return response
