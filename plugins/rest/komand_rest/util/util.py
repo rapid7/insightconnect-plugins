@@ -1,6 +1,6 @@
 import json
 from logging import Logger
-from urllib.parse import urlparse, urlsplit, urlunsplit
+from urllib.parse import urlparse, urlsplit, urlunsplit, urlencode
 from typing import Dict, Any, Union
 
 import requests
@@ -62,17 +62,17 @@ def first(sequence, default=""):
     return next((x for x in sequence if x), default)
 
 
-def convert_dict_body_to_string(dict_object: Dict[str, Any]) -> str:
-    """
-    This method will convert a dict object to a string
-    suitable for sending data in x-www-form-urlencoded format
-    :param dict_object: The dict object to convert
-    :return: A new string properly formatted
-    """
-    output_string = ""
-    for key, value in dict_object.items():
-        output_string += f"{key}={value}&"
-    return output_string[:-1]
+# def convert_dict_body_to_string(dict_object: Dict[str, Any]) -> str:
+#     """
+#     This method will convert a dict object to a string
+#     suitable for sending data in x-www-form-urlencoded format
+#     :param dict_object: The dict object to convert
+#     :return: A new string properly formatted
+#     """
+#     output_string = ""
+#     for key, value in dict_object.items():
+#         output_string += f"{key}={value}&"
+#     return output_string[:-1]
 
 
 def convert_body_for_urlencoded(headers: Dict[str, str], body: Dict[str, Any]) -> Union[Dict[str, Any], str]:
@@ -83,10 +83,9 @@ def convert_body_for_urlencoded(headers: Dict[str, str], body: Dict[str, Any]) -
     :return: Body as an encoded string value
     """
     for key, value in headers.items():
-        if "content-type" in key.lower():
-            if "x-www-form-urlencoded" in value:
-                body = convert_dict_body_to_string(body)
-                break
+        if key.lower() == "content-type" and value.lower() == "x-www-form-urlencoded":
+            body = urlencode(body)
+            break
     return body
 
 
