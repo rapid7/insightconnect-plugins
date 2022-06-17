@@ -21,9 +21,34 @@ class Post(insightconnect_plugin_runtime.Action):
         response = self.connection.api.call_api(
             method="POST",
             path=params.get(Input.ROUTE),
-            json_data=body,
+            data=body,
             headers=headers,
         )
+        # x = ""
+        # for key, value in headers.items():
+        #
+        #     if key.lower() == "content-type" and value.lower() == "application/x-www-form-urlencoded":
+        #         x += value.lower()
+        #         print("\n\n\nXXXXX: ", x)
+        #
+        # args = {'method': 'POST', "path": params.get(Input.ROUTE), 'json_data': body, 'headers': headers}
+        # args2 = {'method': 'POST', "path": params.get(Input.ROUTE), 'data': body, 'headers': headers}
+        # if x == 'application/x-www-form-urlencoded':
+        #     response = self.connection.api.call_api(
+        #         *args
+        #         # method="POST",
+        #         # path=params.get(Input.ROUTE),
+        #         # json_data=body,
+        #         # headers=headers,
+        #     )
+        # else:
+        #     response = self.connection.api.call_api(
+        #         *args2
+        #         # method="POST",
+        #         # path=params.get(Input.ROUTE),
+        #         # json_data=body,
+        #         # headers=headers,
+        #     )
 
         return {
             Output.BODY_OBJECT: Common.body_object(response),
