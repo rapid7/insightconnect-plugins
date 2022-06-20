@@ -74,7 +74,9 @@ def check_headers_for_urlencoded(headers: Dict[str, str]) -> bool:
             if key.lower() == "content-type" and value.lower() == "application/x-www-form-urlencoded":
                 return True
     except AttributeError:
-        raise AttributeError("No headers found")
+        raise PluginException(
+            cause="Headers is a None value", assistance="Ensure there is a value within the headers field"
+        )
 
 
 def convert_body_for_urlencoded(headers: Dict[str, str], body: Dict[str, Any]) -> Union[Dict[str, Any], str]:
@@ -165,13 +167,11 @@ class RestAPI(object):
             # IF urlencoded is in headers, send data as it is
             # ELSE run json.dumps(data)
             # ELSE data == None
-            if data:
-                if check_headers_for_urlencoded(headers):
-                    data_string = data
-                else:
-                    data_string = json.dumps(data)
-            else:
-                data_string = None
+            data_string = None
+            if data and check_headers_for_urlencoded(headers):
+                data_string = data
+            elif data:
+                data_string = json.dumps(data)
 
             response = requests.request(
                 method,

@@ -14,44 +14,16 @@ class Post(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         headers = params.get(Input.HEADERS, {})
-        switch_ONoff = check_headers_for_urlencoded(headers)
 
         body = params.get(Input.BODY, {})
-        body = convert_body_for_urlencoded(headers, body)
 
-        body = convert_body_for_urlencoded(headers, body)
+        if check_headers_for_urlencoded(headers):
+            body = convert_body_for_urlencoded(headers, body)
+            kwargs = {"method": "POST", "path": params.get(Input.ROUTE), "data": body, "headers": headers}
+        else:
+            kwargs = {"method": "POST", "path": params.get(Input.ROUTE), "json_data": body, "headers": headers}
 
-        response = self.connection.api.call_api(
-            method="POST",
-            path=params.get(Input.ROUTE),
-            data=body,
-            headers=headers,
-        )
-        # x = ""
-        # for key, value in headers.items():
-        #
-        #     if key.lower() == "content-type" and value.lower() == "application/x-www-form-urlencoded":
-        #         x += value.lower()
-        #         print("\n\n\nXXXXX: ", x)
-        #
-        # args = {'method': 'POST', "path": params.get(Input.ROUTE), 'json_data': body, 'headers': headers}
-        # args2 = {'method': 'POST', "path": params.get(Input.ROUTE), 'data': body, 'headers': headers}
-        # if x == 'application/x-www-form-urlencoded':
-        #     response = self.connection.api.call_api(
-        #         *args
-        #         # method="POST",
-        #         # path=params.get(Input.ROUTE),
-        #         # json_data=body,
-        #         # headers=headers,
-        #     )
-        # else:
-        #     response = self.connection.api.call_api(
-        #         *args2
-        #         # method="POST",
-        #         # path=params.get(Input.ROUTE),
-        #         # json_data=body,
-        #         # headers=headers,
-        #     )
+        response = self.connection.api.call_api(**kwargs)
 
         return {
             Output.BODY_OBJECT: Common.body_object(response),
