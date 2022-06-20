@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     BODY = "body"
+    BODY_AS_AN_ARRAY = "body_as_an_array"
     HEADERS = "headers"
     ROUTE = "route"
     
@@ -27,13 +28,19 @@ class PatchInput(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "body": {
-      "type": "array",
+      "type": "object",
       "title": "Body",
       "description": "Payload to submit to the server when making the HTTP Request call",
+      "order": 3
+    },
+    "body_as_an_array": {
+      "type": "array",
+      "title": "Body",
+      "description": "Payload to submit to the server when making the HTTP Request call as an array of objects",
       "items": {
         "type": "object"
       },
-      "order": 3
+      "order": 4
     },
     "headers": {
       "type": "object",

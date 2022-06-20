@@ -15,10 +15,16 @@ class Patch(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        #TODO
+        """
+        If both inputs exist throw pluginException
+        Otherwise determine which one is empty
+        Send non-empty data
+        """
         response = self.connection.api.call_api(
             method="PATCH",
             path=params.get(Input.ROUTE),
-            json_data=params.get(Input.BODY),
+            json_data=params.get(Input.BODY, {}),
             headers=params.get(Input.HEADERS, {}),
         )
 
