@@ -88,7 +88,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|pagination|pagination|True|Pagination for request|
+|pagination|pagination|False|Pagination for request|
 |response|[]audit_events_response|True|Event logs data|
 
 Example output:
@@ -186,9 +186,9 @@ This action is used to get information on a managed URL.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |action|string|none|False|Filter on whether or not the action is 'block' or 'permit'|['none', 'block', 'permit']|block|
-|disable_log_click|string|none|False|Filter on whether or not clicks are logged for this URL|['none', 'False', 'True']|True|
-|disable_rewrite|string|none|False|Filter on whether or not rewriting of this URL in emails is enabled|['none', 'False', 'True']|False|
-|disable_user_awareness|string|none|False|Filter on whether or not User Awareness challenges for this URL|['none', 'False', 'True']|False|
+|disable_log_click|string|none|False|Filter on whether or not clicks are logged for this URL|['None', 'False', 'True']|True|
+|disable_rewrite|string|none|False|Filter on whether or not rewriting of this URL in emails is enabled|['None', 'False', 'True']|False|
+|disable_user_awareness|string|none|False|Filter on whether or not User Awareness challenges for this URL|['None', 'False', 'True']|False|
 |domain|string|None|False|The managed domain|None|rapid7.com|
 |domainOrUrl|string|None|False|A domain or URL to filter results|None|example.com|
 |exactMatch|boolean|False|False|If true, the domainOrUrl value to act as an exact match value. If false, any partial matches will be returned|None|False|

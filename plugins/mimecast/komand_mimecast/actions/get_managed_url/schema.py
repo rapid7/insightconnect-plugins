@@ -48,7 +48,7 @@ class GetManagedUrlInput(insightconnect_plugin_runtime.Input):
       "description": "Filter on whether or not clicks are logged for this URL",
       "default": "none",
       "enum": [
-        "none",
+        "None",
         "False",
         "True"
       ],
@@ -60,7 +60,7 @@ class GetManagedUrlInput(insightconnect_plugin_runtime.Input):
       "description": "Filter on whether or not rewriting of this URL in emails is enabled",
       "default": "none",
       "enum": [
-        "none",
+        "None",
         "False",
         "True"
       ],
@@ -72,7 +72,7 @@ class GetManagedUrlInput(insightconnect_plugin_runtime.Input):
       "description": "Filter on whether or not User Awareness challenges for this URL",
       "default": "none",
       "enum": [
-        "none",
+        "None",
         "False",
         "True"
       ],

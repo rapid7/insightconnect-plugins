@@ -56,13 +56,13 @@ class MimecastAPI:
         return self._handle_rest_call("POST", f"{API}/directory/remove-group-member", data=data)
 
     def delete_managed_url(self, data: dict) -> dict:
-        return self._handle_rest_call("POST", f"{API}/ttp/url/delete-managed-url", data)
+        return self._handle_rest_call("POST", f"{API}/ttp/url/delete-managed-url", data=data)
 
     def find_groups(self, data: dict) -> dict:
-        return self._handle_rest_call("POST", f"{API}/directory/find-groups", data)
+        return self._handle_rest_call("POST", f"{API}/directory/find-groups", data=data)
 
     def permit_or_block_sender(self, data: dict) -> dict:
-        return self._handle_rest_call("POST", f"{API}/managedsender/permit-or-block-sender", data)
+        return self._handle_rest_call("POST", f"{API}/managedsender/permit-or-block-sender", data=data)
 
     def get_audit_events(self, data: dict, meta_data: dict) -> dict:
         return self._handle_rest_call("POST", f"{API}/audit/get-audit-events", data=data, meta_data=meta_data)

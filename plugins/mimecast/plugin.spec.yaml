@@ -891,7 +891,7 @@ actions:
         required: false
         default: none
         enum:
-          - none
+          - 'None'
           - 'False'
           - 'True'
       disable_log_click:
@@ -902,7 +902,7 @@ actions:
         example: true
         default: none
         enum:
-          - none
+          - 'None'
           - 'False'
           - 'True'
       action:
@@ -941,7 +941,7 @@ actions:
         required: false
         default: none
         enum:
-          - none
+          - 'None'
           - 'False'
           - 'True'
       id:
@@ -1295,4 +1295,4 @@ actions:
         title: Pagination
         description: Pagination for request
         type: "pagination"
-        required: true
+        required: false

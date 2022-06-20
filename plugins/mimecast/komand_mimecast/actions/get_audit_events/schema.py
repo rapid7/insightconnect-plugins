@@ -127,7 +127,6 @@ class GetAuditEventsOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
-    "pagination",
     "response"
   ],
   "definitions": {
