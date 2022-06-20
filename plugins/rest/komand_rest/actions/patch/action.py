@@ -3,6 +3,7 @@ from .schema import PatchInput, PatchOutput, Component, Input, Output
 
 # Custom imports below
 from komand_rest.util.util import Common
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class Patch(insightconnect_plugin_runtime.Action):
@@ -15,16 +16,27 @@ class Patch(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        #TODO
         """
         If both inputs exist throw pluginException
         Otherwise determine which one is empty
         Send non-empty data
         """
+        body_non_array = params.get(Input.BODY, {})
+        body_array = params.get(Input.BODY_AS_AN_ARRAY, [])
+        if not body_array:
+            data = body_non_array
+        elif not body_non_array:
+            data = body_array
+        elif body_array and body_non_array:
+            raise PluginException(
+                cause="You cannot send both inputs",
+                assistance="Try sending data either as an array OR an object, not both",
+            )
+
         response = self.connection.api.call_api(
             method="PATCH",
             path=params.get(Input.ROUTE),
-            json_data=params.get(Input.BODY, {}),
+            json_data=data,
             headers=params.get(Input.HEADERS, {}),
         )
 

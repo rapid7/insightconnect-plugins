@@ -63,6 +63,17 @@ def first(sequence, default=""):
     return next((x for x in sequence if x), default)
 
 
+def check_headers_for_urlencoded(headers: Dict[str, str]) -> bool:
+    """
+    This method will check the headers for 'content-type' == 'application/x-www-form-urlencoded'
+    :param headers: Headers dict to read
+    :return: Boolean value indicating if the conditional is present
+    """
+    for key, value in headers.items():
+        if key.lower() == "content-type" and value.lower() == "application/x-www-form-urlencoded":
+            return True
+
+
 def convert_body_for_urlencoded(headers: Dict[str, str], body: Dict[str, Any]) -> Union[Dict[str, Any], str]:
     """
     This method will encode the body if the headers == x-www-form-urlencoded
