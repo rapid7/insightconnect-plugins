@@ -14,7 +14,10 @@ class Post(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         headers = params.get(Input.HEADERS, {})
+        switch_ONoff = check_headers_for_urlencoded(headers)
+
         body = params.get(Input.BODY, {})
+        body = convert_body_for_urlencoded(headers, body)
 
         body = convert_body_for_urlencoded(headers, body)
 

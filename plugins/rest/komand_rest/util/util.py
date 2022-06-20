@@ -147,23 +147,11 @@ class RestAPI(object):
         headers: dict = None,
     ) -> Response:
         try:
+            if check_headers_for_urlencoded(headers):
+                data_string = data
+            else:
+                data_string = json.dumps(data) if data else None
 
-            # TODO
-
-            # If data is not encoded do this
-            data_string = json.dumps(data) if data else None
-
-            # If data is encoded do this
-            data_string = data
-            print(url_path_join(self.url, path))
-            print("\n\n\nDATA STRING: ", data_string)
-            print("\n\n\nHEADERS: ", headers)
-            print("\n\n\nMETHOD: ", method)
-            print("\n\n\nJSON_DATA: ", json_data)
-            payload = (
-                "client_id=b77086fd23fb49fdaccc163d4a923d51&client_secret=63vX4UwTIn1H8Vg0AKzadmrk9NE5iBuYSDC7b2tl"
-            )
-            print("are the same: ", payload == data_string)
             response = requests.request(
                 method,
                 url_path_join(self.url, path),
