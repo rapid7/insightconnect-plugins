@@ -36,7 +36,7 @@ class PatchInput(insightconnect_plugin_runtime.Input):
     "body_as_an_array": {
       "type": "array",
       "title": "Body",
-      "description": "Payload to submit to the server when making the HTTP Request call as an array of objects",
+      "description": "Payload (Array) to submit to the server when making the HTTP Request call",
       "items": {
         "type": "object"
       },
