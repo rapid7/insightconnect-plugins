@@ -58,3 +58,14 @@ class TestPost(TestCase):
         self.assertEqual(results["body_object"], {"SampleSuccessBody": "SampleVal"})
         self.assertEqual(results["body_string"], "SAMPLETEXT for method POST")
         self.assertEqual(results["headers"], {"SampleHeader": "SampleVal"})
+
+    def test_post_with_header(self):
+        test_conn = MockConnection()
+        test_action = Post()
+
+        test_action.connection = test_conn
+        action_params = {"route": "https://www.google.com", "headers": {"Content-Type": "application/x-www-form-urlencoded"}, "body": {"key": "value"}}
+        results = test_action.run(action_params)
+
+        self.assertEqual(results["status"], 200)
+        self.assertEqual(results["body_object"], {"SampleSuccessBody": "SampleVal"})

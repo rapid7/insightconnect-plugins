@@ -69,14 +69,9 @@ def check_headers_for_urlencoded(headers: Dict[str, str]) -> bool:
     :param headers: Headers dict to read
     :return: Boolean value indicating if the conditional is present
     """
-    try:
-        for key, value in headers.items():
-            if key.lower() == "content-type" and value.lower() == "application/x-www-form-urlencoded":
-                return True
-    except AttributeError:
-        raise PluginException(
-            cause="Headers is a None value", assistance="Ensure there is a value within the headers field"
-        )
+    for key, value in headers.items():
+        if key.lower() == "content-type" and value.lower() == "application/x-www-form-urlencoded":
+            return True
 
 
 def convert_body_for_urlencoded(headers: Dict[str, str], body: Dict[str, Any]) -> Union[Dict[str, Any], str]:
