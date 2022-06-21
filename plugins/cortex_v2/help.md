@@ -19,7 +19,8 @@ malicious or safe.
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* Cortex 2.0.0 - 2.1.3
+* Cortex 3.0.0 - 3.1.3
 
 # Documentation
 

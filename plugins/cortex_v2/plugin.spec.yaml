@@ -6,6 +6,7 @@ title: Cortex v2
 vendor: rapid7
 support: community
 status: []
+supported_versions: ["Cortex 2.0.0 - 2.1.3", "Cortex 3.0.0 - 3.1.3"]
 description: "Cortex is an observable analysis and active response engine. With the Cortex plugin for
   Rapid7 InsightConnect, users can manage analyzers, jobs, and run file analyzers"
 version: 2.0.0
