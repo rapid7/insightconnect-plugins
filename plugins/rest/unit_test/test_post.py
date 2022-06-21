@@ -64,7 +64,11 @@ class TestPost(TestCase):
         test_action = Post()
 
         test_action.connection = test_conn
-        action_params = {"route": "https://www.google.com", "headers": {"Content-Type": "application/x-www-form-urlencoded"}, "body": {"key": "value"}}
+        action_params = {
+            "route": "https://www.google.com",
+            "headers": {"Content-Type": "application/x-www-form-urlencoded"},
+            "body": {"key": "value"},
+        }
         results = test_action.run(action_params)
 
         self.assertEqual(results["status"], 200)

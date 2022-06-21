@@ -69,6 +69,8 @@ def check_headers_for_urlencoded(headers: Dict[str, str]) -> bool:
     :param headers: Headers dict to read
     :return: Boolean value indicating if the conditional is present
     """
+    if headers is None:
+        headers = {}
     for key, value in headers.items():
         if key.lower() == "content-type" and value.lower() == "application/x-www-form-urlencoded":
             return True
