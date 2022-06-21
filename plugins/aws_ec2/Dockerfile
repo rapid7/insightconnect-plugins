@@ -1,8 +1,10 @@
-FROM rapid7/insightconnect-python-3-38-plugin:4
-# Refer to the following documentation for available SDK parent images: https://komand.github.io/python/sdk.html#version
-
-LABEL organization=rapid7
-LABEL sdk=python
+FROM komand/python-3-plugin:2
+# The three supported python parent images are:
+# - komand/python-2-plugin
+# - komand/python-3-plugin
+# - komand/python-pypy3-plugin
+#
+# Update the tag to a full semver version
 
 # Add any custom package dependencies here
 # NOTE: Add pip packages to requirements.txt
@@ -20,7 +22,4 @@ RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 # Install plugin
 RUN python setup.py build && python setup.py install
 
-# User to run plugin code. The two supported users are: root, nobody
-USER nobody
-
-ENTRYPOINT ["/usr/local/bin/icon_aws_ec2"]
+ENTRYPOINT ["/usr/local/bin/komand_aws_ec2"]

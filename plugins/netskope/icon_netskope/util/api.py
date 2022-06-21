@@ -2,7 +2,7 @@ import base64
 import time
 from json import JSONDecodeError
 from logging import Logger
-from typing import Callable, Optional, Union, List
+from typing import Callable, Optional, Union
 
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -21,17 +21,13 @@ class ApiClient:
         self.test_connection = False
         self.logger = logger
 
-    def update_file_hash_list(self, name: str, hash_list: List[str]) -> dict:
+    def update_file_hash_list(self, data: dict) -> dict:
         update_file_hash_list_url = f"{self.api_url_v1}updateFileHashList/"
-        return self._call_api_v1(
-            "PUT",
-            update_file_hash_list_url,
-            params={"token": self.api_key_v1, "name": name, "list": ",".join(hash_list)},
-        )
+        return self._call_api_v1("GET", update_file_hash_list_url, json_data={"token": self.api_key_v1, **data})
 
     def get_all_url_list(self, params: dict) -> list:
         get_all_url_list_url = f"{self.api_url_v2}policy/urllist/"
-        return self._remove_json_version_from_data(self._call_api_v2("GET", get_all_url_list_url, params=params))
+        return self._call_api_v2("GET", get_all_url_list_url, params=params)
 
     def create_a_new_url_list(self, params: dict) -> list:
         create_a_new_url_list_url = f"{self.api_url_v2}policy/urllist/"
@@ -41,15 +37,13 @@ class ApiClient:
 
     def upload_json_config(self, filename: str, content: bytes) -> dict:
         upload_json_config_url = f"{self.api_url_v2}policy/urllist/file/"
-        uploaded_urllist = self._call_api_v2(
+        return self._call_api_v2(
             "POST", upload_json_config_url, files={"urllist": (filename, base64.b64decode(content))}
         )
-        self.apply_pending_url_list_changes()
-        return self._get_all_uploaded_json_config(uploaded_urllist)
 
     def get_url_list_by_id(self, identifier: int) -> dict:
         get_url_list_by_id_url = f"{self.api_url_v2}policy/urllist/{identifier}"
-        return self._remove_json_version_from_data(self._call_api_v2("GET", get_url_list_by_id_url))
+        return self._call_api_v2("GET", get_url_list_by_id_url)
 
     def replace_url_list_by_id(self, identifier: int, data: dict) -> dict:
         replace_url_list_by_id_url = f"{self.api_url_v2}policy/urllist/{identifier}"
@@ -86,37 +80,6 @@ class ApiClient:
         self.test_connection = True
         self._call_api_v1("GET", GET_TEST_URL, json_data={"token": self.api_key_v1})
         return self.get_all_url_list({"pending": 1})
-
-    def _get_all_uploaded_json_config(self, input_list_of_items: List[dict]) -> List[dict]:
-        """Gets all the items by ID and returns list of URL lists with data it got.
-
-        :param input_list_of_items: Input list of dict that contains "id" key
-        :type input_list_of_items: List[dict]
-
-        :returns: List of dict of items from upload JSON config file action
-        :rtype: List[dict]
-        """
-
-        return [self.get_url_list_by_id(item.get("id")) for item in input_list_of_items]
-
-    def _remove_json_version_from_data(self, input_list_of_dicts: Union[List[dict], dict]) -> List[dict]:
-        """Method allows to remove json_version key from Get All URL lists action's output.
-
-        :param input_list_of_dicts: Input dictionary from which all keys will be removed
-        :type input_list_of_dicts: List[dict]
-
-        :returns: API call function data without json_version keys
-        :rtype: List[dict]
-        """
-
-        if isinstance(input_list_of_dicts, list):
-            for element in input_list_of_dicts:
-                if "json_version" in element.get("data"):
-                    element.get("data").pop("json_version")
-        elif isinstance(input_list_of_dicts, dict):
-            if "json_version" in input_list_of_dicts.get("data"):
-                input_list_of_dicts.get("data").pop("json_version")
-        return input_list_of_dicts
 
     def _rate_limiting(max_tries: int) -> dict:
         """This decorator allows to work API call with rate limiting by using exponential backoff function. Decorator needs to have

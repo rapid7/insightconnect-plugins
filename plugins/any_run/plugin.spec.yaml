@@ -4,8 +4,7 @@ products: [insightconnect]
 name: any_run
 title: "Any.Run"
 description: Analyze suspicious and malicious activities using the cloud-based malware analysis service
-version: 1.1.1
-supported_versions: ["Any.Run API 2022-05-17"]
+version: 1.1.0
 vendor: rapid7
 support: community
 status: []
@@ -19,7 +18,7 @@ tags:
 - threat intelligence
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [malware_analysis, threat_intelligence]
+  keywords: [any run, malware, threat intelligence]
   features: []
 types:
   hashes:
@@ -1343,7 +1342,7 @@ connection:
     description: Username and password
     type: credential_username_password
     required: false
-    example: '{"username": "user@example.com", "password": "mypassword"}'
+    example: '{ "username": "user@example.com", "password": "mypassword"}'
 actions:
   get_history:
     title: Get Task History
@@ -1456,8 +1455,8 @@ actions:
         description: Option for hiding of source URL, used only for "download" type
         type: boolean
         required: false
-        default: false
-        example: false
+        default: true
+        example: true
       env_os:
         title: OS
         description: Operation system

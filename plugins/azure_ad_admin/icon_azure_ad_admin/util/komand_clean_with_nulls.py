@@ -1,4 +1,4 @@
-from insightconnect_plugin_runtime import helper
+from komand import helper
 
 
 def remove_null_and_clean(in_list):

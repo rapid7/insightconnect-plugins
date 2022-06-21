@@ -1,13 +1,13 @@
-import insightconnect_plugin_runtime
+import komand
 import requests
 
 # Custom imports below
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
 
 from .schema import EnableUserAccountInput, EnableUserAccountOutput, Input, Output, Component
 
 
-class EnableUserAccount(insightconnect_plugin_runtime.Action):
+class EnableUserAccount(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="enable_user_account",

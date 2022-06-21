@@ -1,4 +1,4 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import GetAssetGroupsInput, GetAssetGroupsOutput
 
 # Custom imports below
@@ -7,7 +7,7 @@ from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
-class GetAssetGroups(insightconnect_plugin_runtime.Action):
+class GetAssetGroups(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_asset_groups",
@@ -21,7 +21,7 @@ class GetAssetGroups(insightconnect_plugin_runtime.Action):
         name = params.get("name")
 
         endpoint = endpoints.AssetGroup.asset_groups(self.connection.console_url)
-        self.logger.info(f"Using {endpoint}")
+        self.logger.info("Using %s ..." % endpoint)
 
         groups = resource_helper.paged_resource_request(endpoint=endpoint)
 
@@ -34,7 +34,7 @@ class GetAssetGroups(insightconnect_plugin_runtime.Action):
             for g in groups:
                 if regex.match(g["name"]):
                     filtered_groups.append(g)
-            self.logger.info(f"Returning {len(filtered_groups)} asset groups based on filters...")
+            self.logger.info("Returning %d asset groups based on filters..." % (len(filtered_groups)))
             groups = filtered_groups
 
         return {"asset_groups": groups}

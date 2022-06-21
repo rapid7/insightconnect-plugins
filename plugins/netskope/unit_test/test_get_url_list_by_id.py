@@ -42,7 +42,7 @@ class TestGetUrlListById(TestCase):
         expected_response = {
             "id": 1,
             "name": "ExampleName",
-            "data": {"urls": ["https://example.com", "https://example.com"], "type": "exact"},
+            "data": {"urls": ["https://example.com", "https://example.com"], "type": "exact", "json_version": 2},
             "modify_by": "Netskope REST API",
             "modify_time": "1997-01-01 00:00:00",
             "modify_type": "Created",

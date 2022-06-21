@@ -1,4 +1,4 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import GenerateSharedSecretInput, GenerateSharedSecretOutput
 
 # Custom imports below
@@ -7,7 +7,7 @@ from komand_rapid7_insightvm.util.resource_helpers import V1Session
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
-class GenerateSharedSecret(insightconnect_plugin_runtime.Action):
+class GenerateSharedSecret(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="generate_shared_secret",

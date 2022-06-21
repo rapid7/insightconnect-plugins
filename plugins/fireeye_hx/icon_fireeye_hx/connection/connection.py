@@ -1,18 +1,17 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import ConnectionSchema, Input
 
 # Custom imports below
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
+from komand.exceptions import ConnectionTestException
 from requests import Session
 from requests.auth import HTTPBasicAuth
-from icon_fireeye_hx.util.api import FireEyeAPI
+from json import JSONDecodeError
 
 
-class Connection(insightconnect_plugin_runtime.Connection):
+class Connection(komand.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.session, self.url = None, None
-        self.api = None
 
     def connect(self, params={}):
         username, password = (
@@ -21,16 +20,28 @@ class Connection(insightconnect_plugin_runtime.Connection):
         )
 
         self.url = params.get(Input.URL)
-        ssl_verify = params.get(Input.SSL_VERIFY)
 
         self.session: Session = Session()
         self.session.auth = HTTPBasicAuth(username=username, password=password)
 
-        self.api = FireEyeAPI(self.url, username, password, ssl_verify, self.logger)
-
     def test(self):
-        try:
-            self.api.get_version()
-        except PluginException:
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.USERNAME_PASSWORD)
-        return {"status": "success"}
+        test_url = f"{self.url}/hx/api/v3/version"
+        response = self.session.get(url=test_url)
+
+        if response.status_code == 200:
+            return {"status": "success"}
+        else:
+            try:
+                details = response.json()["details"][0]
+                code, message = details["code"], details["message"]
+
+                raise ConnectionTestException(cause=f"Reason: {message} (error code {code}")
+
+            except JSONDecodeError as e:
+                raise ConnectionTestException(
+                    cause=f"Malformed response received from FireEye HX appliance. " f"Got: {response.text}"
+                ) from e
+            except (KeyError, IndexError) as e:
+                raise ConnectionTestException(
+                    cause="Unknown error received from FireEye HX appliance " "(no error cause reported)."
+                ) from e

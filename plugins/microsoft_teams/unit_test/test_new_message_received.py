@@ -2,13 +2,9 @@ from unittest import TestCase, mock
 import json
 import logging
 import requests
-import sys
 import os
-
-sys.path.append(os.path.abspath("../"))
-
 from icon_microsoft_teams.triggers.new_message_received import NewMessageReceived
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
 
 
 # Get a real payload from file

@@ -22,17 +22,15 @@ class LookupDomain(insightconnect_plugin_runtime.Action):
         if not comment:
             comment = None
         domain = params.get(Input.DOMAIN)
-
         try:
             self.logger.info(f"Looking up domain: {domain}")
             return {
-                Output.RESULT_FOUND: True,
                 Output.DATA: insightconnect_plugin_runtime.helper.clean(
                     self.connection.client.make_request(
                         Endpoint.lookup_domain(self.get_domain(domain)),
                         {"fields": AvailableInputs.DomainFields, "comment": comment},
                     ).get("data")
-                ),
+                )
             }
         except AttributeError as e:
             raise PluginException(
@@ -40,10 +38,6 @@ class LookupDomain(insightconnect_plugin_runtime.Action):
                 assistance="Please check that the provided inputs are correct and try again.",
                 data=e,
             )
-        except PluginException as error:
-            if "No results found." in error.cause:
-                return {Output.RESULT_FOUND: False, Output.DATA: {}}
-            raise error
 
     @staticmethod
     def get_domain(original_domain):

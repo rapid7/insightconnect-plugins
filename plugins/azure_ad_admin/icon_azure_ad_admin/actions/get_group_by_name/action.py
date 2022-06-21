@@ -1,11 +1,11 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import GetGroupByNameInput, GetGroupByNameOutput, Input, Output, Component
 
 # Custom imports below
 from icon_azure_ad_admin.util.get_group import get_group
 
 
-class GetGroupByName(insightconnect_plugin_runtime.Action):
+class GetGroupByName(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_group_by_name",
@@ -26,4 +26,4 @@ class GetGroupByName(insightconnect_plugin_runtime.Action):
             if group_output.get(key) == "null":
                 group_output.pop(key)
 
-        return {Output.GROUP: insightconnect_plugin_runtime.helper.clean(group_output)}
+        return {Output.GROUP: komand.helper.clean(group_output)}

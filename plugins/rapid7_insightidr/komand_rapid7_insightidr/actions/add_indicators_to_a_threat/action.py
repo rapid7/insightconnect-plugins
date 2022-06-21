@@ -1,4 +1,4 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import (
     AddIndicatorsToAThreatInput,
     AddIndicatorsToAThreatOutput,
@@ -6,7 +6,7 @@ from .schema import (
     Output,
     Component,
 )
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
 
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Threats
@@ -14,7 +14,7 @@ from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 import json
 
 
-class AddIndicatorsToAThreat(insightconnect_plugin_runtime.Action):
+class AddIndicatorsToAThreat(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_indicators_to_a_threat",

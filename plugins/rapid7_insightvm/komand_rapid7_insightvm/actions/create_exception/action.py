@@ -1,13 +1,12 @@
-import insightconnect_plugin_runtime
-from .schema import CreateExceptionInput, CreateExceptionOutput, Component, Input, Output
+import komand
+from .schema import CreateExceptionInput, CreateExceptionOutput, Component
 
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
-from komand_rapid7_insightvm.util.util import convert_date_to_iso8601
 
 
-class CreateException(insightconnect_plugin_runtime.Action):
+class CreateException(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_exception",
@@ -21,25 +20,24 @@ class CreateException(insightconnect_plugin_runtime.Action):
         payload = {}
         scope = {}
         submit = {}
-        scope["id"] = params.get(Input.SCOPE)
-        scope["type"] = params.get(Input.TYPE)
+        scope["id"] = params.get("scope")
+        scope["type"] = params.get("type")
         if scope["type"] == "Instance":
-            if params.get(Input.KEY, "") != "":
-                scope["key"] = params.get(Input.KEY)
-            if params.get(Input.PORT, 0) != 0:
-                scope["port"] = params.get(Input.PORT)
-        scope["vulnerability"] = params.get(Input.VULNERABILITY)
-        submit["reason"] = params.get(Input.REASON, "Other")
-        submit["comment"] = params.get(Input.COMMENT, "Created with InsightConnect")
+            if params.get("key", "") != "":
+                scope["key"] = params.get("key")
+            if params.get("port", 0) != 0:
+                scope["port"] = params.get("port")
+        scope["vulnerability"] = params.get("vulnerability")
+        submit["reason"] = params.get("reason", "Other")
+        submit["comment"] = params.get("comment", "Created with InsightConnect")
 
         payload["scope"] = scope
         payload["submit"] = submit
-        expires = params.get(Input.EXPIRATION, "")
-        if expires:
-            payload["expires"] = convert_date_to_iso8601(expires)
-
+        payload["expires"] = params.get("expiration", "")
+        if payload["expires"] == "":
+            payload.pop("expires", None)
         payload["state"] = "Under Review"
 
         endpoint = endpoints.VulnerabilityException.vulnerability_exceptions(self.connection.console_url)
         response = resource_helper.resource_request(endpoint=endpoint, method="post", payload=payload)
-        return {Output.LINKS: response.get("links", []), Output.ID: response.get("id")}
+        return response

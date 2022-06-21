@@ -1,7 +1,7 @@
 {
-	"spec": "8c46948117fc59cc424af64b4e53d200",
-	"manifest": "f52b757abf364fd60f622ab92a5117af",
-	"setup": "8f8b1e862421b3cda5aaa79944eb261a",
+	"spec": "05ee28d56207c9644123a51ad2e2c052",
+	"manifest": "79d48127c3855fc14440262d72297048",
+	"setup": "dd99967f59fde2a980f91e6ec3456fa3",
 	"schemas": [
 		{
 			"identifier": "download_IP_addresses_risk_list/schema.py",
@@ -45,15 +45,15 @@
 		},
 		{
 			"identifier": "lookup_IP_address/schema.py",
-			"hash": "3dd65e3b83b0dde6b0240c5c7a0618da"
+			"hash": "9f713e0b1940ebf80947160758e77d34"
 		},
 		{
 			"identifier": "lookup_alert/schema.py",
-			"hash": "6b7483a4fa7aa79441f917fb1ce5ee24"
+			"hash": "0fdb2b1f592faa286d084d5feec3d501"
 		},
 		{
 			"identifier": "lookup_domain/schema.py",
-			"hash": "5afece6256fa764a899c2f829d8ae780"
+			"hash": "c6da04866b01f9b7b7a03e78e987a5cf"
 		},
 		{
 			"identifier": "lookup_entity_list/schema.py",
@@ -61,19 +61,19 @@
 		},
 		{
 			"identifier": "lookup_hash/schema.py",
-			"hash": "cf7fd2668cfea5ff844a52e420e00a49"
+			"hash": "42e01755b203f1393a3438d2398059a0"
 		},
 		{
 			"identifier": "lookup_malware/schema.py",
-			"hash": "d6c4958d5d320be8c470c840f8f52fd6"
+			"hash": "ba1860d440fec865a7ea49ec22f4f792"
 		},
 		{
 			"identifier": "lookup_url/schema.py",
-			"hash": "043ce313efaf76d3e506265e4ffb4704"
+			"hash": "9835053af9979fc40472ed05d29d9e78"
 		},
 		{
 			"identifier": "lookup_vulnerability/schema.py",
-			"hash": "fa29225aa9454b34ffc219b5ffe17bac"
+			"hash": "261fe5f7163960e0e2bf833e1c69383b"
 		},
 		{
 			"identifier": "search_IP_addresses/schema.py",

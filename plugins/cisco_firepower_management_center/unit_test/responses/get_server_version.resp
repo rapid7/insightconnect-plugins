@@ -1,1 +1,0 @@
-{"links": {"self": "https://example.com/api/fmc_platform/v1/info/serverversion?offset=0&limit=1"}, "items": [{"serverVersion": "6.6.0 (build 90)", "geoVersion": "2020-09-09-003", "vdbVersion": "build 328 ( 2019-10-08 15:47:00 )", "sruVersion": "2022-02-24-001-vrt", "type": "ServerVersion"}], "paging": {"offset": 0, "limit": 1, "count": 1, "pages": 1}}

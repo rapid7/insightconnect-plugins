@@ -3,14 +3,8 @@ import json
 import re
 from io import StringIO
 
-import insightconnect_plugin_runtime
-from insightconnect_plugin_runtime.exceptions import PluginException
 
-
-def csv_syntax_good(csv_string: str) -> bool:
-    if not csv_string:
-        raise PluginException(cause="CSV input is empty.", assistance="Please provide a valid CSV input.")
-
+def csv_syntax_good(csv_string):
     parsed = parse_csv_string(csv_string)
     size = len(parsed[0])
     for row in parsed:
@@ -19,10 +13,7 @@ def csv_syntax_good(csv_string: str) -> bool:
     return True
 
 
-def fields_syntax_good(fields: str) -> bool:
-    if not fields:
-        raise PluginException(cause="Empty fields input.", assistance="Please provide valid fields.")
-
+def fields_syntax_good(fields):
     re_single = r"\s*f[0-9]+\s*"
     re_range = r"" + re_single + "(-" + re_single + ")?"
     re_multi = r"" + re_range + "(," + re_range + ")*"
@@ -74,12 +65,18 @@ def get_field_list(fields, num_fields):
     return field_list
 
 
-def parse_csv_string(csv_string: str) -> list:
+##
+# Converts CSV string to two-dimensional list
+#
+# @param csv The string to parse
+# @return Two-dimensional list consisting of items on each line of CSV string
+##
+def parse_csv_string(csv_string):
     csv_list = csv_string.split("\n")
     parsed = []
-    for line in csv.reader(csv_list, quotechar='"', delimiter=",", quoting=csv.QUOTE_ALL, skipinitialspace=True):
-        if line:
-            parsed.append(line)
+    for line in csv_list:
+        if line != "":
+            parsed.append(line.split(","))
     return parsed
 
 
@@ -114,30 +111,43 @@ def keep_fields(line, fields):
     return result
 
 
-def csv_to_dict(string_csv: str, action: insightconnect_plugin_runtime.Action) -> list:
-    csv_list = string_csv.split("\n")
+##
+# Converts a CSV string to a list of dictionariea
+#
+# @param csv The string of the CSV
+# @return List of dictionaries
+##
+def csv_to_dict(s, action):
+    ret_list = []
 
-    if len(csv_list) > 0:
-        try:
+    # Create array of CSV rows
+    csv_list = s.split("\n")
+
+    # Create list from CSV header (first line)
+    try:
+        if len(csv_list) > 0:
             header = [csv_list[0]]
-            action.logger.info(f"Header: {header}, Length: {len(header)}")
-        except Exception:
-            raise PluginException(
-                cause="CSV string seems to be invalid - cannot extract header row.",
-                assistance="Please provide a valid CSV input.",
-            )
-        try:
+            action.logger.info("Header: %s, Length: %s", header, len(header))
+    except Exception as e:
+        action.logger.error("Element 0 doesn't exist in array")
+        action.logger.error("Exception: " + str(e))
+        raise
+
+    # Skip first line to get data
+    try:
+        if len(csv_list) > 0:
             first_row = [csv_list[1]]
-            action.logger.info(f"Sample Data: {first_row}, Length: {len(first_row)}")
-        except Exception:
-            raise PluginException(
-                cause="CSV string seems to be invalid - cannot extract first value row.",
-                assistance="Please provide a valid CSV input.",
-            )
+            action.logger.info("Sample Data: %s, Length: %s", first_row, len(first_row))
+    except Exception as e:
+        action.logger.error("Element 1 doesn't exist in array")
+        action.logger.error("Exception: " + str(e))
+        raise
 
-    csv_data = csv.DictReader(csv_list, quotechar='"', delimiter=",", quoting=csv.QUOTE_ALL, skipinitialspace=True)
+    csv_data = csv.DictReader(csv_list)
+    for row in csv_data:
+        ret_list.append(json.loads(json.dumps(row)))
 
-    return [json.loads(json.dumps(row)) for row in csv_data]
+    return ret_list
 
 
 def json_to_csv(input_json: dict) -> str:
@@ -155,8 +165,8 @@ def json_to_csv(input_json: dict) -> str:
     if keys:
         csv_writer.writerow(keys)
         for entry in input_json:
-            for index, _ in enumerate(keys):
-                entry[keys[index]] = entry.get(keys[index], "")
+            for i in range(len(keys)):
+                entry[keys[i]] = entry.get(keys[i], "")
             csv_writer.writerow(entry.values())
 
     return output.getvalue()

@@ -1,14 +1,14 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import AdvancedQueryOnLogInput, AdvancedQueryOnLogOutput, Input, Output, Component
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
 
 # Custom imports below
 import time
+import json
 from komand_rapid7_insightidr.util.parse_dates import parse_dates
-from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 
 
-class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
+class AdvancedQueryOnLog(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="advanced_query_on_log",
@@ -42,15 +42,15 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
         # It will return results if it gets them. If not, we'll get a call back URL to work on
         callback_url, log_entries = self.maybe_get_log_entries(log_id, query, time_from, time_to)
 
-        if callback_url and not log_entries:
+        if not log_entries:
             log_entries = self.get_results_from_callback(callback_url, timeout)
 
-        if log_entries:
-            log_entries = ResourceHelper.get_log_entries_with_new_labels(
-                self.connection, insightconnect_plugin_runtime.helper.clean(log_entries)
-            )
+        log_entries = komand.helper.clean(log_entries)
 
-        self.logger.info("Sending results to orchestrator.")
+        for log_entry in log_entries:
+            log_entry["message"] = json.loads(log_entry.get("message", "{}"))
+
+        self.logger.info(f"Sending results to orchestrator.")
         return {Output.RESULTS: log_entries, Output.COUNT: len(log_entries)}
 
     def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:
@@ -154,7 +154,7 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
             return None, potential_results
         else:
             self.logger.info("Got a callback url. Polling results...")
-            return results_object.get("links", [{}])[0].get("href"), []
+            return results_object.get("links")[0].get("href"), None
 
     def get_log_id(self, log_name: str) -> str:
         """
@@ -178,19 +178,19 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
 
         logs = response.json().get("logs")
 
-        log_id = ""
+        id = ""
 
         for log in logs:
             name = log.get("name")
             self.logger.info(f"Checking {log_name} against {name}")
             if name == log_name:
                 self.logger.info("Log found.")
-                log_id = log.get("id")
+                id = log.get("id")
                 break
 
-        if log_id:
-            self.logger.info(f"Found log with name {log_name} and ID: {log_id}")
-            return log_id
+        if id:
+            self.logger.info(f"Found log with name {log_name} and ID: {id}")
+            return id
 
         self.logger.error(f"Could not find log with name {log_name}")
         raise PluginException(

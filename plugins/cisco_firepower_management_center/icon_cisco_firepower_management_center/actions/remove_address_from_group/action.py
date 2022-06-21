@@ -1,4 +1,4 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import (
     RemoveAddressFromGroupInput,
     RemoveAddressFromGroupOutput,
@@ -8,10 +8,10 @@ from .schema import (
 )
 
 # Custom imports below
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
 
 
-class RemoveAddressFromGroup(insightconnect_plugin_runtime.Action):
+class RemoveAddressFromGroup(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="remove_address_from_group",
@@ -51,7 +51,7 @@ class RemoveAddressFromGroup(insightconnect_plugin_runtime.Action):
         if not found:
             raise PluginException(
                 cause=f"The address {address} does not exist in the address group.",
-                assistance="Please enter valid name and try again.",
+                assistance="Please enter valid names and try again.",
             )
 
         address_group.pop("links", None)

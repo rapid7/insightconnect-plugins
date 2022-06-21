@@ -1,34 +1,45 @@
-import insightconnect_plugin_runtime
-from .schema import GetAllDomainUsersInput, GetAllDomainUsersOutput, Input, Output, Component
+import komand
+from .schema import GetAllDomainUsersInput, GetAllDomainUsersOutput, Input
 
 # Custom imports below
 
 
-class GetAllDomainUsers(insightconnect_plugin_runtime.Action):
+class GetAllDomainUsers(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_all_domain_users",
-            description=Component.DESCRIPTION,
+            description="Get all domain users",
             input=GetAllDomainUsersInput(),
             output=GetAllDomainUsersOutput(),
         )
 
     def run(self, params={}):
+        domain = params.get(Input.DOMAIN)
         service = self.connection.service
-        self.logger.info("Fetching users...")
-        request = service.users().list(domain=params.get(Input.DOMAIN), orderBy="email")
 
+        # Call the Admin SDK Directory API
+        self.logger.info("Fetching users...")
+        request = service.users().list(domain=domain, orderBy="email")
+
+        # Get all users
         users = []
-        while request:
+        while request is not None:
             result = request.execute()
-            users += result.get("users", [])
+            users += result.get("users") or []
             request = service.users().list_next(request, result)
 
-        if users:
-            formatted_users = []
-            for user in users:
-                formatted_users.append(
-                    {"email": user.get("primaryEmail", ""), "name": user.get("name", {}).get("fullName", "")}
-                )
-            return {Output.USERS: formatted_users}
-        return {Output.USERS: users}
+        if len(users) == 0:
+            return {"users": []}
+
+        # Format output
+        formatted_users = []
+        for user in users:
+            email = user.get("primaryEmail", "")
+            if "name" in user:
+                name = user["name"].get("fullName", "")
+            else:
+                name = ""
+
+            formatted_users.append({"email": email, "name": name})
+
+        return {"users": formatted_users}

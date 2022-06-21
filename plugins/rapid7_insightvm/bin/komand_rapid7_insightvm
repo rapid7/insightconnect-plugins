@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Rapid7 InsightVM Console"
 Vendor = "rapid7"
-Version = "4.10.0"
+Version = "4.9.1"
 Description = "InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations, scan results and start scans"
 
 
@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import insightconnect_plugin_runtime
+    import komand
     from komand_rapid7_insightvm import connection, actions, triggers
 
-    class ICONRapid7Insightvm(insightconnect_plugin_runtime.Plugin):
+    class ICONRapid7Insightvm(komand.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -180,8 +180,6 @@ def main():
 
             self.add_action(actions.TagAssetGroup())
 
-            self.add_action(actions.TagAssets())
-
             self.add_action(actions.TagSite())
 
             self.add_action(actions.TopRemediations())
@@ -216,7 +214,7 @@ def main():
 
 
     """Run plugin"""
-    cli = insightconnect_plugin_runtime.CLI(ICONRapid7Insightvm())
+    cli = komand.CLI(ICONRapid7Insightvm())
     cli.run()
 
 

@@ -2,13 +2,13 @@
 from setuptools import setup, find_packages
 
 
-setup(name="azure_compute-rapid7-plugin",
-      version="3.0.2",
-      description="Azure Virtual Machines is one of several types of on-demand, scalable computing resources that Azure offers",
-      author="rapid7",
-      author_email="",
-      url="",
+setup(name='azure_compute-rapid7-plugin',
+      version='3.0.1',
+      description='Azure Virtual Machines is one of several types of on-demand, scalable computing resources that Azure offers',
+      author='rapid7',
+      author_email='',
+      url='',
       packages=find_packages(),
-      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/icon_azure_compute']
+      install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
+      scripts=['bin/komand_azure_compute']
       )

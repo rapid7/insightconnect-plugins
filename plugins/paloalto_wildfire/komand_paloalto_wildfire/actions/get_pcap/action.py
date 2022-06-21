@@ -1,12 +1,11 @@
+import komand
+from .schema import GetPcapInput, GetPcapOutput
+
 # Custom imports below
 import base64
 
-import insightconnect_plugin_runtime
 
-from .schema import GetPcapInput, GetPcapOutput, Input, Output, Component
-
-
-class GetPcap(insightconnect_plugin_runtime.Action):
+class GetPcap(komand.Action):
     platform = {
         "Windows XP, Adobe Reader 9.3.3, Office 2003": 1,
         "Windows XP, Adobe Reader 9.4.0, Flash 10, Office 2007": 2,
@@ -20,16 +19,19 @@ class GetPcap(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_pcap",
-            description=Component.DESCRIPTION,
+            description="Query for a PCAP",
             input=GetPcapInput(),
             output=GetPcapOutput(),
         )
 
     def run(self, params={}):
-        return {
-            Output.FILE: base64.b64encode(
-                self.connection.client.get_pcap(
-                    params.get(Input.HASH), platform=self.platform.get(params.get(Input.PLATFORM))
-                )
-            ).decode()
-        }
+        """TODO: Run action"""
+        client = self.connection.client
+        platform = self.platform.get(params.get("platform"))
+        out = base64.b64encode(client.get_pcap(params.get("hash"), platform=platform)).decode()
+        return {"file": out}
+
+    def test(self):
+        """TODO: Test action"""
+        client = self.connection.client
+        return {"file": "Test"}

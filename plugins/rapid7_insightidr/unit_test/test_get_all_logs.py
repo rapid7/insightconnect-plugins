@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from komand_rapid7_insightidr.connection.connection import Connection
 from komand_rapid7_insightidr.actions.get_all_logs import GetAllLogs
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
 import json
 import logging
 

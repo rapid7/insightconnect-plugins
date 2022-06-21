@@ -4,8 +4,7 @@ products: [insightconnect]
 name: rapid7_insightappsec
 title: Rapid7 InsightAppSec
 description: This plugin allows for the creation, configuration, and starting of scans. The plugin can also retrieve scan results and logging related to the execution of the scan
-version: 1.0.4
-supported_versions: ["Rapid7 InsightAppSec"]
+version: 1.0.3
 vendor: rapid7
 status: []
 support: rapid7
@@ -16,10 +15,9 @@ resources:
 tags:
 - insightappsec
 - Rapid7
-- appsec
 hub_tags:
   use_cases: [devops, remediation_management, reporting_and_analytics, vulnerability_management]
-  keywords: [insightappsec, scan, vulnerability_scanner, vulnerability_validation, rapid7]
+  keywords: [insightappsec, rapid7]
   features: []
 types:
   link:
@@ -370,7 +368,7 @@ actions:
         type: '[]scan_config'
         required: false
   submit_scan:
-    title: Submit Scan
+    title: Sumbit Scan
     description: Submit a new scan
     input:
       scan_config_id:

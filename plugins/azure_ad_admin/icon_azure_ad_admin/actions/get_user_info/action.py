@@ -1,14 +1,14 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import GetUserInfoInput, GetUserInfoOutput, Input, Output, Component
 
 # Custom imports below
 import requests
 import time
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
 from icon_azure_ad_admin.util.get_user_info import get_user_info
 
 
-class GetUserInfo(insightconnect_plugin_runtime.Action):
+class GetUserInfo(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_user_info",
@@ -34,14 +34,15 @@ class GetUserInfo(insightconnect_plugin_runtime.Action):
         except Exception:
             for counter in range(1, 6):
                 self.logger.info(f"Get user enabled failed, trying again, attempt {counter}.")
-                self.logger.info("Sleeping for 5 seconds...")
+                self.logger.info(f"Sleeping for 5 seconds...")
                 time.sleep(5)
                 try:
-                    self.logger.info("Attempting to get user info.")
+                    self.logger.info(f"Attempting to get user info.")
                     result_enabled = requests.get(endpoint_for_account_enabled, headers=headers)
                     break  # We didn't get an exception, so break the loop
                 except Exception:
-                    self.logger.info("Get user info failed.")
+                    self.logger.info(f"Get user info failed.")
+                    pass  # we got an exception, force pass and try again
 
         if not result_enabled or not result_enabled.status_code == 200:
             raise PluginException(
@@ -58,27 +59,17 @@ class GetUserInfo(insightconnect_plugin_runtime.Action):
         full_result = result.json()
         full_result["accountEnabled"] = account_enabled
 
-        full_result = self._clean_empty_values(full_result)
+        # I didn't want to use clean in case a user is looking for a key that came back as null
+        # businessPhones is a list, thus the special check for that key
+
+        # If account is disabled, this will fail also, so there's a special
+        # case for that as well. It comes back as a boolean.
+        for key in full_result.keys():
+            # If you do a falsey here, False trips the if. Thus have to do a manual check for None or len 0
+            if full_result.get(key) == None:
+                if not key == "businessPhones":
+                    full_result[key] = ""
+                else:
+                    full_result[key] = []
 
         return {Output.USER_INFORMATION: full_result}
-
-    def _clean_empty_values(self, input_dict):
-        """return_non_empty. Cleans up recusively the dictionary
-
-        :param input_dict:
-        :type input_dict: Dict[str, Any]
-        :rtype: Dict[Any, Any]
-        """
-        temp_dict = {}
-        for key, value in input_dict.items():
-            if value is not None and value != "":
-                if isinstance(value, dict):
-                    return_dict = self._clean_empty_values(value)
-                    if return_dict:
-                        temp_dict[key] = return_dict
-                elif isinstance(value, list):
-                    if len(value) > 0:
-                        temp_dict[key] = value
-                else:
-                    temp_dict[key] = value
-        return temp_dict

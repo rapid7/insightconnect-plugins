@@ -7,8 +7,7 @@ vendor: rapid7
 support: rapid7
 status: []
 description: Recorded Future arms threat analysts, security operators, and incident responders to rapidly connect the dots and reveal unknown threats. Using the Recorded Future plugin for Rapid7 InsightConnect, users can search domain lists, entity lists, and more
-version: 6.0.1
-supported_versions: ["Recorded Future API 2022-04-09"]
+version: 5.0.1
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/recorded_future
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -21,7 +20,7 @@ tags:
 - vulnerability prioritization
 hub_tags:
   use_cases: [threat_detection_and_response]
-  keywords: [recorded_future, threat_intelligence, machine_learning, vulnerability_prioritization, domains, hash, url, ip_address]
+  keywords: [recorded future, threat intelligence, machine learning, threat analysis, vulnerability prioritization]
   features: []
 enable_cache: false
 language: python
@@ -1167,11 +1166,6 @@ actions:
         required: false
         example: Domain look up performed by InsightConnect
     output:
-      result_found:
-        title: Result Found
-        type: boolean
-        description: Whether the result was found
-        required: true
       data:
         title: Data
         type: domain_search_data
@@ -1352,11 +1346,6 @@ actions:
         required: false
         example: Hash look up performed by InsightConnect
     output:
-      result_found:
-        title: Result Found
-        type: boolean
-        description: Whether the result was found
-        required: true
       data:
         title: Data
         description: Data
@@ -1588,11 +1577,6 @@ actions:
         required: false
         example: IP look up performed by InsightConnect
     output:
-      result_found:
-        title: Result Found
-        type: boolean
-        description: Whether the result was found
-        required: true
       data:
         title: Data
         description: Data
@@ -1676,11 +1660,6 @@ actions:
         required: true
         example: ShciZX
     output:
-      result_found:
-        title: Result Found
-        type: boolean
-        description: Whether the result was found
-        required: true
       data:
         title: Data
         description: Data
@@ -1864,11 +1843,6 @@ actions:
         required: true
         example: CVE-2014-0160
     output:
-      result_found:
-        title: Result Found
-        type: boolean
-        description: Whether the result was found
-        required: true
       data:
         title: Data
         type: vulnerability_search_data
@@ -1891,11 +1865,6 @@ actions:
         required: false
         example: URL look up performed by InsightConnect
     output:
-      result_found:
-        title: Result Found
-        type: boolean
-        description: Whether the result was found
-        required: true
       data:
         title: Data
         description: Data
@@ -1912,11 +1881,6 @@ actions:
         example: fhS1El
         required: true
     output:
-      result_found:
-        title: Result Found
-        type: boolean
-        description: Whether the result was found
-        required: true
       alert:
         title: Alert
         description: Alert details

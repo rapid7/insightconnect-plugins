@@ -1,15 +1,10 @@
-import sys
-import os
-
-sys.path.append(os.path.abspath("../"))
-
+from komand.exceptions import PluginException
 from unittest import TestCase
+from komand_rapid7_insightvm.util import resource_helpers
 import logging
 import requests
 import json
-from komand_rapid7_insightvm.util import resource_helpers
-from insightconnect_plugin_runtime.exceptions import PluginException
-
+import pytest
 
 # Mock user dictionary
 user = {
@@ -67,7 +62,5 @@ class TestValidateUser(TestCase):
         session = requests.session()
         test_object = resource_helpers.ValidateUser(logger=logger, session=session)
         test_object.validate_user_email(user["email"])
-        with self.assertRaises(PluginException) as error:
+        with pytest.raises(PluginException, match="The email address for user account was not valid!"):
             test_object.validate_user_email("foo")
-        self.assertEqual(error.exception.cause, "The email address for user account was not valid")
-        self.assertEqual(error.exception.assistance, "Ensure that the email address is correct")

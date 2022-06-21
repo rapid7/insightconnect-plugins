@@ -1,4 +1,4 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import UpdateSiteIncludedAssetGroupsInput, UpdateSiteIncludedAssetGroupsOutput, Input
 
 # Custom imports below
@@ -6,7 +6,7 @@ from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
-class UpdateSiteIncludedAssetGroups(insightconnect_plugin_runtime.Action):
+class UpdateSiteIncludedAssetGroups(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="update_site_included_asset_groups",

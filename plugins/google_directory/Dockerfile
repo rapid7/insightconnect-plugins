@@ -1,8 +1,10 @@
-FROM rapid7/insightconnect-python-3-38-plugin:4
-# Refer to the following documentation for available SDK parent images: https://docs.rapid7.com/insightconnect/sdk-guide/#sdk-guide
-
-LABEL organization=rapid7
-LABEL sdk=python
+FROM komand/python-3-plugin:2
+# The three supported python parent images are:
+# - komand/python-2-plugin
+# - komand/python-3-plugin
+# - komand/python-pypy3-plugin
+#
+LABEL organization=komand
 
 # Add any custom package dependencies here
 # NOTE: Add pip packages to requirements.txt
@@ -19,8 +21,5 @@ RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
 # Install plugin
 RUN python setup.py build && python setup.py install
-
-# User to run plugin code. The two supported users are: root, nobody
-USER nobody
 
 ENTRYPOINT ["/usr/local/bin/icon_google_directory"]

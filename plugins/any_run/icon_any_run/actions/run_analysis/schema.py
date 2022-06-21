@@ -218,7 +218,7 @@ class RunAnalysisInput(insightconnect_plugin_runtime.Input):
       "type": "boolean",
       "title": "Privacy Hidesource",
       "description": "Option for hiding of source URL, used only for \\"download\\" type",
-      "default": false,
+      "default": true,
       "order": 9
     },
     "opt_privacy_type": {

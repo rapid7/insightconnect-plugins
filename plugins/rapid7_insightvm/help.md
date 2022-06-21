@@ -14,10 +14,6 @@ This plugin utilizes the [InsightVM API 3](https://help.rapid7.com/insightvm/en-
 
 * Username and password for a user with the necessary permissions
 
-# Supported Product Versions
-
-* Rapid7 InsightVM API v3 2022-05-18
-
 # Documentation
 
 ## Setup
@@ -57,10 +53,7 @@ Example input:
 
 ```
 {
-  "asset_id": 423,
-  "vulnerability_ids": [
-    "flash_player-cve-2017-11305"
-  ]
+  "id": 1234
 }
 ```
 
@@ -635,7 +628,7 @@ Example input:
 
 ```
 {
-  "asset_id": 1234
+  "id": 1234
 }
 ```
 
@@ -763,8 +756,7 @@ Example input:
 
 ```
 {
-  "asset_id": 234,
-  "get_risk_score": true
+  "id": 1234
 }
 ```
 
@@ -836,7 +828,7 @@ Example input:
 
 ```
 {
-  "asset_id": "234"
+  "id": 1234
 }
 ```
 
@@ -1327,10 +1319,7 @@ Example input:
 {
   "color": "default",
   "name": "example name",
-  "searchCriteria": {
-    "risk-score": "asc",
-    "criticality-tag": "desc"
-  },
+  "searchCriteria": "{'risk-score': 'asc', 'criticality-tag': 'desc'}",
   "type": "owner"
 }
 ```
@@ -1914,49 +1903,6 @@ Example output:
 }
 ```
 
-#### Tag Assets
-
-This action is used to add a tag to an asset.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|asset_ids|[]integer|None|True|Asset IDs to tag|None|[1, 2, 3, 4]|
-|tag_id|integer|None|True|ID of tag to add to assets|None|12345|
-|tag_name|string|None|True|Name of tag to add to assets|None|Very High|
-|tag_source|string|None|True|Source of tag to add to assets|None|built-in|
-|tag_type|string|None|True|Type of tag to add to assets|None|criticality|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Was the operation successful|
-
-Example input:
-
-```
-{
-  "asset_id": 12345,
-  "tag_id": 1234
-}
-```
-
-##### Output
-
-| Name  | Type  | Required |Description|
-|-------|-------|----|-----------|
-|success|boolean|True|Was the operation successful|
-
-Example output:
-
-```
-{
-  "success": true,
-}
-```
-
 #### Tag Asset Group
 
 This action is used to add a tag to an asset group.
@@ -2504,12 +2450,12 @@ Example input:
 
 ```
 {
+  "description": "example description",
+  "engine_id": 1234,
   "id": 1234,
-  "included_asset_groups": [
-    1234,
-    567
-  ],
-  "overwrite": true
+  "importance": "low",
+  "name": "example name",
+  "scan_template_id": 1234
 }
 ```
 
@@ -2631,7 +2577,7 @@ Example input:
 
 ```
 {
-  "name": "example name"
+  "id": 1234
 }
 ```
 
@@ -3205,7 +3151,7 @@ Example input:
 
 ```
 {
-  "scan_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
+  "scan_id": 123456789
 }
 ```
 
@@ -3954,11 +3900,13 @@ Example input:
 
 ```
 {
-  "engines": [
+  "address": "10.4.36.120",
+  "name": "example name",
+  "port": 40814,
+  "sites": [
     1234,
     5678
-  ],
-  "name": "example name"
+  ]
 }
 ```
 
@@ -4151,11 +4099,11 @@ This action is used to create a vulnerability exception submission.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|Exception created with InsightConnect|True|Comment to include in the vulnerability exception submission|None|example comment|
-|expiration|date|None|False|The date the vulnerability exception expires e.g 2021-12-30T00:00:00Z|None|2021-12-30 00:00:00|
+|expiration|date|None|False|The date the vulnerability exception expires|None|10-12-2020|
 |key|string|None|False|The key to identify a specific instance if the type is Instance|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |port|integer|None|False|The port the vulnerability appears on if the type is Instance|None|40000|
 |reason|string|None|True|Reason for the exception|['False Positive', 'Compensating Control', 'Acceptable Use', 'Acceptable Risk', 'Other']|False Positive|
-|scope|integer|None|False|The ID of the scope the vulnerability exception applies to. May be empty if type is Global|None|1234|
+|scope|integer|None|False|The ID of the scope the vulnerability exception applies to.  May be empty if type is Global|None|1234|
 |type|string|None|True|The type of vulnerability exception to create|['Global', 'Site', 'Asset', 'Asset Group', 'Instance']|Global|
 |vulnerability|string|None|True|The vulnerability this exception applies to|None|vulnerability|
 
@@ -4164,7 +4112,7 @@ Example input:
 ```
 {
   "comment": "example comment",
-  "expiration": "2021-12-30 00:00:00",
+  "expiration": "10-12-2020",
   "key": "9de5069c5afe602b2ea0a04b66beb2c0",
   "port": 40000,
   "reason": "False Positive",
@@ -4398,8 +4346,7 @@ Example input:
 
 ```
 {
-  "name": "example name",
-  "type": "admin"
+  "id": 1234
 }
 ```
 
@@ -4930,7 +4877,7 @@ This action is used to create a new user account (limited to external authentica
 |access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|False|
 |authentication_id|integer|None|False|The identifier of the authentication source to use to authenticate the user. The source with the specified identifier must be of the type specified by Authentication Type. If Authentication ID is omitted, then one source of the specified Authentication Type is selected|None|1234|
 |authentication_type|string|ldap|True|The type of the authentication source to use to authenticate the user|['kerberos', 'ldap', 'saml']|ldap|
-|email|string|None|True|The email address of the user|None|user@example.com|
+|email|string|None|True|The email address of the user|None|example@gmail.com|
 |enabled|boolean|True|True|Whether the user account is enabled|None|True|
 |login|string|None|True|The login name of the user|None|jdoe24|
 |name|string|None|True|The full name of the user|None|John Doe|
@@ -4944,7 +4891,7 @@ Example input:
   "access_all_sites": false,
   "authentication_id": 1234,
   "authentication_type": "ldap",
-  "email": "user@example.com",
+  "email": "example@gmail.com",
   "enabled": true,
   "login": "jdoe24",
   "name": "John Doe",
@@ -4989,7 +4936,7 @@ This action is used to update the configuration of an existing user account.
 |access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|False|
 |authentication_id|integer|None|False|The identifier of the authentication source to use to authenticate the user. The source with the specified identifier must be of the type specified by Authentication Type. If Authentication ID is omitted, then one source of the specified Authentication Type is selected|None|567|
 |authentication_type|string|ldap|True|The type of the authentication source to use to authenticate the user|['normal', 'admin', 'kerberos', 'ldap', 'saml']|ldap|
-|email|string|None|True|The email address of the user|None|user@example.com|
+|email|string|None|True|The email address of the user|None|example@gmail.com|
 |enabled|boolean|True|True|Whether the user account is enabled|None|True|
 |id|integer|None|True|The identifier of the user|None|1234|
 |login|string|None|True|The login name of the user|None|jdoe24|
@@ -5004,7 +4951,7 @@ Example input:
   "access_all_sites": false,
   "authentication_id": 567,
   "authentication_type": "ldap",
-  "email": "user@example.com",
+  "email": "example@gmail.com",
   "enabled": true,
   "id": 1234,
   "login": "jdoe24",
@@ -5164,7 +5111,7 @@ Example input:
   "access_all_sites": false,
   "authentication_id": 567,
   "authentication_type": "ldap",
-  "email": "user@example.com",
+  "email": "example@gmail.com",
   "enabled": true,
   "id": 1234,
   "login": "jdoe24",
@@ -5211,7 +5158,7 @@ Example input:
   "access_all_sites": false,
   "authentication_id": 567,
   "authentication_type": "ldap",
-  "email": "user@example.com",
+  "email": "example@gmail.com",
   "enabled": true,
   "id": 1234,
   "login": "jdoe24",
@@ -5332,11 +5279,16 @@ Example input:
 
 ```
 {
-  "site_ids": [
-    1234,
-    567
-  ],
-  "user_id": 1234
+  "access_all_asset_groups": false,
+  "access_all_sites": false,
+  "authentication_id": 567,
+  "authentication_type": "ldap",
+  "email": "example@gmail.com",
+  "enabled": true,
+  "id": 1234,
+  "login": "jdoe24",
+  "name": "John Doe",
+  "role_id": "global-admin"
 }
 ```
 
@@ -5662,8 +5614,6 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 4.10.0 - Add new action Tag Assets
-* 4.9.2 - Add expiration date conversion to ISO8601 in Create Vulnerability Exception Submission and Update Vulnerability Exception Expiration Date actions | Fix issue with incorrect expiration date format in Get Expiring Vulnerability Exceptions action | Fix issue in List Reports action where first page of reports was not included | Fix issue in List Reports action where `found` output was returned as false even though list of reports was returned | Updated plugin SDK to latest version
 * 4.9.1 - Rename the plugin with "console" as there is a new cloud based plugin for InsightVM
 * 4.9.0 - Add new `size` input to List Inactive Assets | Update List Inactive Assets to return 500 results by default | Remove the usage of Maya from the plugin
 * 4.8.1 - Fixed an issue where some actions were expecting bytes data and were getting strings instead

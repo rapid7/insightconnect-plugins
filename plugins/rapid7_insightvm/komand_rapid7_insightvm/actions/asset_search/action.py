@@ -1,4 +1,4 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import AssetSearchInput, AssetSearchOutput, Input, Output
 
 # Custom imports below
@@ -6,7 +6,7 @@ from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
-class AssetSearch(insightconnect_plugin_runtime.Action):
+class AssetSearch(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="asset_search",
@@ -20,10 +20,10 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         search_criteria = params.get(Input.SEARCHCRITERIA)
         size = params.get(Input.SIZE, 0)
-        sort_criteria = params.get(Input.SORT_CRITERIA, {})
+        sort_criteria = params.get(Input.SORT_CRITERIA, dict())
         self.logger.info(f"Performing filtered asset search with criteria {search_criteria}")
         endpoint = endpoints.Asset.search(self.connection.console_url)
-        parameters = []
+        parameters = list()
 
         for key, value in sort_criteria.items():
             parameters.append(("sort", f"{key},{value}"))

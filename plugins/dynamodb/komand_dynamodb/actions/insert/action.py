@@ -1,28 +1,29 @@
-import copy
-
-import insightconnect_plugin_runtime
-from komand_dynamodb.util.constants import AWS_NONE_VALUE
-from .schema import InsertOutput, InsertInput, Component, Input, Output
+import komand
+from .schema import InsertOutput, InsertInput
 
 # Custom imports below
-from ...util.utils import Utils
 
 
-class Insert(insightconnect_plugin_runtime.Action):
+class Insert(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="insert",
-            description=Component.DESCRIPTION,
+            description="Store an object into Dynamo",
             input=InsertInput(),
             output=InsertOutput(),
         )
 
     def run(self, params={}):
-        mapped_params = copy.deepcopy(params)
-        mapped_params[Input.RETURN_ITEM_COLLECTION_METRICS] = Utils.map_return_item_collection_metrics(
-            params.get(Input.RETURN_ITEM_COLLECTION_METRICS, False)
-        )
-        mapped_params[Input.RETURN_VALUES] = Utils.map_return_values(params.get(Input.RETURN_VALUES, False))
-        mapped_params[Input.RETURN_CONSUMED_CAPACITY] = params.get(Input.RETURN_CONSUMED_CAPACITY, AWS_NONE_VALUE)
-        self.connection.client.insert_data(input_schema=self.input.schema, params=mapped_params)
-        return {Output.SUCCESS: True}
+        table_name = params.get("table")
+        expr = params.get("condition_expression")
+        t = self.connection.dynamodb.Table(table_name)
+        data = params.get("data")
+        kwargs = {"Item": data}
+        if (expr is not None) and (len(expr) > 0):
+            kwargs["ConditionExpression"] = expr
+        t.put_item(**kwargs)
+        return {"success": True}
+
+    def test(self):
+        """TODO: Test action"""
+        return {}

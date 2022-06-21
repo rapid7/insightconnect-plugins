@@ -927,47 +927,6 @@
           "aaaaaaaa-aaaa-aaaa-aaaa-aaaaffffffff"
         ]
       }
-    ],
-    [
-      "from_string2",
-      "dd/mm/yyyy",
-      "https://website.COM/login.aspx http://WWW.example.COM, EXAMPLE.org http://test.EXAMPLE.NET:443/test.html Test.Domain.Com http://ExAmpLe.DomaIN.OrG/image.png https://website.com:443/login.aspx https://smtpfilter.crystalcomputer.com:443/cgi-mod/mark.cgi",
-      null,
-      {
-        "cves": [],
-        "dates": [],
-        "domains": [
-          "website.com",
-          "www.example.com",
-          "example.org",
-          "test.example.net",
-          "test.domain.com",
-          "example.domain.org",
-          "smtpfilter.crystalcomputer.com"
-        ],
-        "email_addresses": [],
-        "filepaths": [],
-        "hashes": {
-          "md5_hashes": [],
-          "sha1_hashes": [],
-          "sha256_hashes": [],
-          "sha512_hashes": []
-        },
-        "ip_addresses": {
-          "ipv4_addresses": [],
-          "ipv6_addresses": []
-        },
-        "mac_addresses": [],
-        "urls": [
-          "https://website.COM/login.aspx",
-          "http://WWW.example.COM",
-          "http://test.EXAMPLE.NET:443/test.html",
-          "http://ExAmpLe.DomaIN.OrG/image.png",
-          "https://website.com:443/login.aspx",
-          "https://smtpfilter.crystalcomputer.com:443/cgi-mod/mark.cgi"
-        ],
-        "uuids": []
-      }
     ]
   ]
 }

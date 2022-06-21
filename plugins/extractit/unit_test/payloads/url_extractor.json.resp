@@ -247,20 +247,6 @@
         "https://example.com/Hello%20G%C3%BCnter",
         "https://exampledefense.com/v3/__https:/adclick.g.doubleclick.net/pcs/click?xai=AKAOjsubIrdpBrIB6JQ4RQQPz9hzgxn5m9sIwZYlpBJI3tQUXQvgevzMkyn19WvrCJFzhUsBU_KmEaoqh7BILzD2y0Ax9pQ0u6OBq5hyavC8-QInr1TYHj5B0GJ80UsqMbErrdYt3f0xY7jK-0P4&sig=Cg0ArKJSzHryoFf6mU8e&fbs_aeid=*gw_fbsaeid*&urlfix=1&nx=74&ny=69&dim=160x600&bg=!-fql-sDNAAY6sG-_OrA7ACkAdvg8Wuf4Gj-lFr3CqVG3T2hPPNp4W6JmRGiAwtPFlGvQnMgTHUGLbQ8ABB4OHBxoAQeZAqBmiebtQCl76P_nI0sCRKmQdrCSEC5GzMJI1SnrbgxBd-SoxlbtYK08LXpubcnY83odzpxxdnCyaT-1-JMKFeBfy09FLVb6_p9iS-GVSId5PmdNI7P9RME8CuQthYsjafFja2nOTj9GUsEm2qyni6cL2klyhD7hP69kkPf8mN9XUoYo7_oCfm8aViXlmESolYmJUwRYi1Duj1YVbCrVrn05nNWlQCrjg-S5kKedQo8KAN4koCHNPqqOYszBhHBPa9aMGoLMZLlIaQeO7OtfH_0h7R1HMS6tV7siGOzaxF2Qk4fzauB7hZJCF0Ik1NLVYrHD7KVlbYca33FFTqTrndgc1MJ4FaUb81OA-JY4Paz7KYtKX3U_qdEdGCMmPt5YoudV7aW48-XCRudcNJh3fO69Lf2KQnhDvd_FfkpFSfTJE2jd1G104HdwCI_p2GeKW9M-uZUVQLVsx4p-d1jdFYOG7J5Chou01ZhTMEgTWuIM0aoHspj05NixFmIh8EvbrTzz3Z897N1OEJFi86HHlkDHuGfurDy1TRAmKeEdhthQa5QuBud8S3mxsqxIIl_aXtI98BdRQbuY59kRe275MXjLmLfTt_qlT6kSYauPnVQvL_xpR6kkhztmd0sTvTIht2N13DQX066FCjUX8_Vtihw04Jb3UNo8cam4jVFA2jsCY8uYp1nwEjsLJaaNbCV_kr-XwMjzHm3r_x6IEcYcZB9kQjdpFcgBurM_sRR1w3_6z5cA2X08MQ2_IrawnOnbNi6gsf6SGMax3aO0solxPRB7zdgPwZ5MZrFw8TKzNl-zcM0xIy5a0Muus5boXut4ejQLwDMKdLTB0lKU3nox4KC8x6XqRfWZ0IvTwp8JNNZ9wp797WUkSwqIjzTv4WIP8_w&adurl=http*3a*2f*2flittlepopcorn.jp*2f*SnVhbi5kZWxhY2FsbGVAYW1lci5taHBzLmNvbQ==__;W10lJSUlIw!!OMpWhA!IsXSqEMqaYkoSsxcS5riQDQLhAKV1Z7E_joGFgI7kTFJu6o6xE2jttK7bvmpiApfbNIpEa$"
       ]
-    ],
-    [
-      "capitalized",
-      "https://website.COM:443/login.aspx, http://WWW.example.COM, http://EXAMPLE.org, http://test.EXAMPLE.NET:443/test.html, https://Test.Domain.Com, http://ExAmpLe.DomaIN.OrG/image.png",
-      null,
-      true,
-      [
-        "https://website.COM:443/login.aspx",
-        "http://WWW.example.COM",
-        "http://EXAMPLE.org",
-        "http://test.EXAMPLE.NET:443/test.html",
-        "https://Test.Domain.Com",
-        "http://ExAmpLe.DomaIN.OrG/image.png"
-      ]
     ]
   ]
 }

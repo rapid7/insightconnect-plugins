@@ -1,4 +1,4 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import GetAssetVulnerabilitiesInput, GetAssetVulnerabilitiesOutput, Input, Output
 
 # Custom imports below
@@ -8,7 +8,7 @@ from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 from operator import itemgetter
 
 
-class GetAssetVulnerabilities(insightconnect_plugin_runtime.Action):
+class GetAssetVulnerabilities(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_asset_vulnerabilities",
@@ -55,8 +55,8 @@ class GetAssetVulnerabilities(insightconnect_plugin_runtime.Action):
         :param resources: A list of asset_vulnerabilities
         :return: A list of asset_vulnerabilities with risk scores
         """
-        vuln_ids = []
-        risk_score = []
+        vuln_ids = list()
+        risk_score = list()
         for resource in resources:
             try:
                 vuln_ids.append(resource["id"])

@@ -30,6 +30,7 @@ STUB_EXPECTED_RESPONSE_APPLIED = {
             "data": {
                 "urls": ["https://example.com", "https://example.com"],
                 "type": "exact",
+                "json_version": 2,
             },
             "modify_by": "Netskope REST API",
             "modify_time": "2022-01-03T00:00:00.000Z",
@@ -47,6 +48,7 @@ STUB_EXPECTED_RESPONSE_APPLIED_MANY = {
             "data": {
                 "urls": ["https://example.com", "https://example.com"],
                 "type": "exact",
+                "json_version": 2,
             },
             "modify_by": "Netskope REST API",
             "modify_time": "2022-01-03T00:00:00.000Z",
@@ -59,6 +61,7 @@ STUB_EXPECTED_RESPONSE_APPLIED_MANY = {
             "data": {
                 "urls": ["https://example.com", "https://example.com"],
                 "type": "exact",
+                "json_version": 2,
             },
             "modify_by": "Netskope REST API",
             "modify_time": "2022-01-03T00:00:00.000Z",
@@ -71,6 +74,7 @@ STUB_EXPECTED_RESPONSE_APPLIED_MANY = {
             "data": {
                 "urls": ["https://example.com", "https://example.com"],
                 "type": "exact",
+                "json_version": 2,
             },
             "modify_by": "Netskope REST API",
             "modify_time": "2022-01-03T00:00:00.000Z",
@@ -88,6 +92,7 @@ STUB_EXPECTED_RESPONSE_PENDING = {
             "data": {
                 "urls": ["https://example.com", "https://example.com"],
                 "type": "exact",
+                "json_version": 2,
             },
             "modify_by": "Netskope REST API",
             "modify_time": "2022-01-03T00:00:00.000Z",
@@ -110,7 +115,7 @@ class TestGetAllUrlList(TestCase):
 
     @parameterized.expand(
         [
-            ("any", STUB_EXPECTED_RESPONSE_APPLIED),
+            ("", STUB_EXPECTED_RESPONSE_APPLIED),
             ("applied", STUB_EXPECTED_RESPONSE_APPLIED),
             ("pending", STUB_EXPECTED_RESPONSE_PENDING),
         ],

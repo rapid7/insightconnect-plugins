@@ -1,4 +1,4 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import (
     GenerateAdhocSqlReportInput,
     GenerateAdhocSqlReportOutput,
@@ -12,10 +12,10 @@ import base64
 import json
 import uuid
 from komand_rapid7_insightvm.util import util
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
 
 
-class GenerateAdhocSqlReport(insightconnect_plugin_runtime.Action):
+class GenerateAdhocSqlReport(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="generate_adhoc_sql_report",

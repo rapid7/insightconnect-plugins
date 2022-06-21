@@ -1,4 +1,4 @@
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
 import requests
 
 

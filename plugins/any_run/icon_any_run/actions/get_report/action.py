@@ -15,4 +15,4 @@ class GetReport(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         report = self.connection.any_run_api.get_report(params.get(Input.TASK, False))
-        return {Output.REPORTS: insightconnect_plugin_runtime.helper.clean(report.get("data", {}))}
+        return {Output.REPORTS: report.get("data", {})}

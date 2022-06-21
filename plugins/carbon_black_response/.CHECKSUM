@@ -1,79 +1,75 @@
 {
-	"spec": "8bd7e25ec3eec06cfd611f38e2d822a4",
-	"manifest": "49b27207ffb2a8b12a2e0ec59d7bae5e",
-	"setup": "c20be629208b89f0026c4d655f62b7f0",
+	"spec": "97f1b066ae926b9b23de142c02717597",
+	"manifest": "506b38ec5b674489f8040f727a0b644c",
+	"setup": "fa13147edc5d8b26ee4f947875fc4f67",
 	"schemas": [
 		{
 			"identifier": "add_feed/schema.py",
-			"hash": "f58f8cfdcf30baabfe1c725ebc5cfa28"
+			"hash": "b840c47ac1c7b6343c7b8f0b155d6e79"
 		},
 		{
 			"identifier": "add_watchlist/schema.py",
-			"hash": "69e34c719ee5ea630d4c36ebd5667895"
+			"hash": "3895c35e806dd2c5d4bbee959deaaaee"
 		},
 		{
 			"identifier": "blacklist_hash/schema.py",
-			"hash": "d7a9bc91df66d622960144e002852f74"
+			"hash": "e8f40f76694803dd024aba98fd04071d"
 		},
 		{
 			"identifier": "delete_feed/schema.py",
-			"hash": "c3af3b385825b9ed8cab3fb898a717a4"
+			"hash": "a48c80949518a6fc88d4936c507e5224"
 		},
 		{
 			"identifier": "delete_watchlist/schema.py",
-			"hash": "82383a1a22656c45d372a642afeaa9e7"
+			"hash": "5727fc3534f700757ff0f98847d7dbdc"
 		},
 		{
 			"identifier": "get_binary/schema.py",
-			"hash": "53ca510360a8541ebca03d9ad6b96ed1"
+			"hash": "03f03dacae605edcfbf92f45cd01d6c7"
 		},
 		{
 			"identifier": "isolate_sensor/schema.py",
-			"hash": "efa1b96e3237ec113d6688843a624081"
+			"hash": "ee8f2de12c3630e4ad8e0f651d7a1a70"
 		},
 		{
 			"identifier": "list_alerts/schema.py",
-			"hash": "0cbcaa9bd92be9cca03e79044eed292e"
+			"hash": "3e9552bec796dbe3a1a0e450f3454f31"
 		},
 		{
 			"identifier": "list_binaries/schema.py",
-			"hash": "797633bee96104d1aca58eb452a10077"
+			"hash": "697da08340fdbcb2fabea13c553af391"
 		},
 		{
 			"identifier": "list_feeds/schema.py",
-			"hash": "47d4284207a607d7bb017a74ccca5e4a"
+			"hash": "aec23d1056ca5b37057b642c17f6b798"
 		},
 		{
 			"identifier": "list_processes/schema.py",
-			"hash": "6a7db7f17f97da097b6224e853d3d0ba"
+			"hash": "cad43ab76390f21682b5331f8abca835"
 		},
 		{
 			"identifier": "list_sensors/schema.py",
-			"hash": "890747598d2b90ab35f1bb920d5d4d99"
+			"hash": "19fc29fcacff2a0449bc93c8b28baade"
 		},
 		{
 			"identifier": "list_watchlists/schema.py",
-			"hash": "a735c34a0a78b7500fd2a2bec1106074"
-		},
-		{
-			"identifier": "uninstall_sensor/schema.py",
-			"hash": "b63fc68d1498f9d07022096d23a1e1b4"
+			"hash": "15077e13706336b22b80e0ab4c0b95fb"
 		},
 		{
 			"identifier": "unisolate_sensor/schema.py",
-			"hash": "4cc81ebfa6c6c2b1045808f8c0e64ae6"
+			"hash": "befd3d134c19b46a8c4531fcf29c0df0"
 		},
 		{
 			"identifier": "update_alert/schema.py",
-			"hash": "11e53578f364db41d7c57e9bca9b479c"
+			"hash": "44c2b1eef22804d4765c6acfbcd8cb26"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "59c980c15d668ef5f3c1804abe7c477e"
+			"hash": "75fa2bf5b9eef4f5683f206a07bda397"
 		},
 		{
 			"identifier": "new_alert/schema.py",
-			"hash": "13fcb7caa9b1f801f5e694d05378cd4a"
+			"hash": "bfb1583f5c2c0ef018708985ea89b9eb"
 		}
 	]
 }

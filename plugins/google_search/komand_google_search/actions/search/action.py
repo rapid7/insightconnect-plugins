@@ -1,12 +1,11 @@
-import insightconnect_plugin_runtime
-from insightconnect_plugin_runtime.exceptions import PluginException
-from .schema import SearchInput, SearchOutput, Input
+import komand
+from .schema import SearchInput, SearchOutput
 
 # Custom imports below
 import googlesearch
 
 
-class Search(insightconnect_plugin_runtime.Action):
+class Search(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="search",
@@ -19,20 +18,15 @@ class Search(insightconnect_plugin_runtime.Action):
         urls = []
 
         self.logger.info("Parameters: %s", params)
-        if params.get(Input.STOP) <= 0 or params.get(Input.NUM) <= 0 or params.get(Input.PAUSE) <= 0:
-            raise PluginException(
-                cause="One or more inputs were of an invalid value",
-                assistance="Please check that 'Num', 'Pause', and 'Stop' are values greater than 0",
-                data=f"Num: {params.get(Input.NUM)}, Pause: {params.get(Input.PAUSE)}, Stop: {params.get(Input.STOP)}",
-            )
         count = 0
-        stop = params.get(Input.STOP, 10)
+        stop = params.get("stop", 10)
         for url in googlesearch.search(
-            query=params.get(Input.QUERY),
-            lang=params.get(Input.LANG, "en"),
+            query=params.get("query"),
+            lang=params.get("lang", "en"),
             stop=stop,
-            num=params.get(Input.NUM, 10),
-            pause=params.get(Input.PAUSE, 1.0),
+            num=params.get("num", 10),
+            only_standard=params.get("only_standard", False),
+            pause=params.get("pause", 1.0),
         ):
 
             urls.append(url)

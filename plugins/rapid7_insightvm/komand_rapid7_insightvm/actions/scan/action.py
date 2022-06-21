@@ -1,4 +1,4 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import ScanInput, ScanOutput
 
 # Custom imports below
@@ -6,7 +6,7 @@ from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
-class Scan(insightconnect_plugin_runtime.Action):
+class Scan(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="scan",
@@ -22,7 +22,7 @@ class Scan(insightconnect_plugin_runtime.Action):
         hosts = params.get("hosts")
         endpoint = endpoints.Scan.site_scans(self.connection.console_url, site_id)
 
-        self.logger.info(f"Using {endpoint}")
+        self.logger.info("Using %s ..." % endpoint)
 
         if hosts:
             payload = {"hosts": hosts}

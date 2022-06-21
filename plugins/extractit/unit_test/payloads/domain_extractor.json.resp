@@ -324,54 +324,6 @@
         "www.example-domain.com",
         "example1.com"
       ]
-    ],
-    [
-      "from_url_containg_port_without_subdomains",
-      "https://website.com:443/login.aspx https://smtpfilter.crystalcomputer.com:443/cgi-mod/mark.cgi",
-      null,
-      false,
-      [
-        "website.com",
-        "crystalcomputer.com"
-      ]
-    ],
-    [
-      "from_url_containg_port_with_subdomains",
-      "https://website.com:443/login.aspx https://smtpfilter.crystalcomputer.com:443/cgi-mod/mark.cgi",
-      null,
-      true,
-      [
-        "website.com",
-        "smtpfilter.crystalcomputer.com"
-      ]
-    ],
-    [
-      "capitalized_without_subdomains",
-      "https://website.COM:443/login.aspx http://WWW.example.COM, EXAMPLE.org http://test.EXAMPLE.NET:443/test.html Test.Domain.Com http://ExAmpLe.DomaIN.OrG/image.png",
-      null,
-      false,
-      [
-        "website.com",
-        "example.com",
-        "example.org",
-        "example.net",
-        "domain.com",
-        "domain.org"
-      ]
-    ],
-    [
-      "capitalized_with_subdomains",
-      "https://website.COM:443/login.aspx http://WWW.example.COM, EXAMPLE.org http://test.EXAMPLE.NET:443/test.html Test.Domain.Com http://ExAmpLe.DomaIN.OrG/image.png",
-      null,
-      true,
-      [
-        "website.com",
-        "www.example.com",
-        "example.org",
-        "test.example.net",
-        "test.domain.com",
-        "example.domain.org"
-      ]
     ]
   ]
 }

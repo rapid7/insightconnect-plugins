@@ -70,7 +70,6 @@ from .review_exception.action import ReviewException
 from .scan.action import Scan
 from .tag_asset.action import TagAsset
 from .tag_asset_group.action import TagAssetGroup
-from .tag_assets.action import TagAssets
 from .tag_site.action import TagSite
 from .top_remediations.action import TopRemediations
 from .update_asset_group_search_criteria.action import UpdateAssetGroupSearchCriteria

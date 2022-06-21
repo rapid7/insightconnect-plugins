@@ -1,55 +1,47 @@
 import logging
-import sys
-import os
-from unittest import TestCase, mock
+from unittest import TestCase
 
-sys.path.append(os.path.abspath("../"))
+from icon_azure_ad_admin.actions import GetUserInfo
+from icon_azure_ad_admin.connection import Connection
 
-from icon_azure_ad_admin.connection.connection import Connection
-from icon_azure_ad_admin.actions.get_user_info import GetUserInfo
-
-
-class MockRequest:
-    def __init__(self):
-        self.status_code = 200
-
-    def json(self):
-        return {
-            "accountEnabled": True,
-            "mobilePhone": None,
-            "manager": {
-                "@odata.type": "#microsoft.graph.user",
-                "city": None,
-                "companyName": None,
-            },
-        }
+import json
 
 
 class TestGetUserInfo(TestCase):
-    @mock.patch("icon_azure_ad_admin.util.get_user_info", return_value={"some": "some"})
-    def setUp(self, mock_connection) -> None:
-        self.connection = mock.create_autospec(Connection())
-        self.connection.logger = logging.getLogger("connection logger")
-        self.connection.tenant = "tenant_id"
+    def test_get_user_info(self):
+        log = logging.getLogger("TestLogger")
 
-        self.action = GetUserInfo()
-        self.action.connection = self.connection
-        self.action.logger = logging.getLogger("action loger")
+        test_connection = Connection()
+        test_get_user_info = GetUserInfo()
 
-        self.app_id = "application_id"
-        self.app_secret = {"application_secret": {"secretKey": "secret_key"}}
-        self.params = {"user_id": "user@example.com"}
+        test_connection.logger = log
+        test_get_user_info.logger = log
 
-    @mock.patch("requests.get", return_value=MockRequest())
-    def test_get_user_info(self, mocked):
-        response = self.action.run(self.params)
-        expected_response = {
+        with open("../tests/get_user_info.json") as file:
+            data = json.load(file)
+            connection_params = data.get("body").get("connection")
+
+        action_params = {"user_id": "user@example.com"}
+
+        test_connection.connect(connection_params)
+        test_get_user_info.connection = test_connection
+
+        result = test_get_user_info.run(action_params)
+        expected = {
             "user_information": {
+                "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+                "businessPhones": [],
+                "displayName": "Joey McAdams",
+                "givenName": "Joey",
+                "jobTitle": "Sr. Software Engineer",
+                "mail": "",
+                "mobilePhone": "",
+                "officeLocation": "",
+                "preferredLanguage": "",
+                "surname": "McAdams",
+                "userPrincipalName": "user@example.com",
+                "id": "08290005-23ba-46b4-a377-b381d651a2fb",
                 "accountEnabled": True,
-                "manager": {
-                    "@odata.type": "#microsoft.graph.user",
-                },
             }
         }
-
-        self.assertEqual(response, expected_response)
+        self.assertEqual(result, expected)

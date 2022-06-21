@@ -1,20 +1,20 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import GetAllLogsInput, GetAllLogsOutput, Output, Component
 from komand_rapid7_insightidr.util.endpoints import Logs
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
 
 # Custom imports below
 import json
 
 
-class GetAllLogs(insightconnect_plugin_runtime.Action):
+class GetAllLogs(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_all_logs", description=Component.DESCRIPTION, input=GetAllLogsInput(), output=GetAllLogsOutput()
         )
 
-    def run(self):
+    def run(self, params={}):
         request = ResourceHelper(self.connection.session, self.logger)
         response = request.resource_request(Logs.get_all_logs(self.connection.url), "get")
         try:

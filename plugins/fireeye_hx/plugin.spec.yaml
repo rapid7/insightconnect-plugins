@@ -4,8 +4,7 @@ products: [insightconnect]
 name: fireeye_hx
 title: "FireEye HX"
 description: The FireEye plugin will allow you to get alerts from a given host
-version: 2.0.0
-supported_versions: ["5.2.0.958244"]
+version: 1.0.1
 vendor: rapid7
 support: community
 status: []
@@ -306,85 +305,7 @@ types:
     subtype:
       title: Subtype
       description: Alert subtype
-      type: string
-      required: false
-
-  user:
-    _id:
-      title: ID
-      description: ID
-      type: integer
-      required: false
-    username:
-      title: Username
-      description: Username
-      type: string
-      required: false
-  data:
-    _id:
-      title: ID
-      description: ID
-      type: string
-      required: false
-    last_sysinfo:
-      title: Last System Info
-      description: Last system info
-      type: string
-      required: false
-    requested_by_actor:
-      title: Requested By Actor
-      description: Requested by actor
-      type: user
-      required: false
-    requested_on:
-      title: Requested On
-      description: Requested on
-      type: string
-      required: false
-    contained_by_actor:
-      title: Contained By Actor
-      description: Contained by actor
-      type: user
-      required: false
-    contained_on:
-      title: Contained On
-      description: Date this was contained on
-      type: string
-      required: false
-    queued:
-      title: Queued
-      description: Queued
-      type: boolean
-      required: false
-    excluded:
-      title: Excluded
-      description: Excluded
-      type: boolean
-      required: false
-    missing_software:
-      title: Missing Software
-      description: Missing software
-      type: boolean
-      required: false
-    reported_clone:
-      title: Reported Clone
-      description: Reported clone
-      type: boolean
-      required: false
-    state:
-      title: State
-      description: State
-      type: string
-      required: false
-    state_update_time:
-      title: State Update Time
-      description: State update time
-      type: string
-      required: false
-    url:
-      title: URL
-      description: URL
-      type: string
+      type: object
       required: false
 
 connection:
@@ -393,20 +314,11 @@ connection:
     title: Username and Password
     description: Username and password to authenticate with FireEye HX
     required: true
-    example: '{"username": "user", "password": "password"}'
   url:
     type: string
     title: URL
-    description: URL to the application, e.g. https://test.fireeye.com
+    description: URL to the appliance, e.g. https://test.fireeye.com
     required: true
-    example: "https://example.com"
-  ssl_verify:
-    title: SSL Verify
-    description: Validate SSL certificate
-    type: boolean
-    default: true
-    required: true
-    example: true
 
 actions:
   get_host_id_from_hostname:
@@ -418,7 +330,6 @@ actions:
         description: Hostname
         required: true
         type: string
-        example: example_hostname
     output:
       host_id:
         title: Host ID
@@ -432,78 +343,16 @@ actions:
         required: true
   get_alerts_by_host_id:
     title: Get Alerts by Host ID
-    description: Get alerts for a host given the host ID. To get all alerts for the host, leave the offset and limit parameters empty or set to 0
+    description: Get alerts for a host given the host ID
     input:
       host_id:
         title: Host ID
         description: Host ID
         required: true
         type: string
-        example: 44d88612fea8a8f36de82e
-      offset:
-        title: Offset
-        description: Specifies which alert to start with in the response
-        required: false
-        type: integer
-        example: 0
-      limit:
-        title: Limit
-        description: Specifies how many alerts are returned
-        required: false
-        type: integer
-        default: 100
-        example: 100
     output:
       alerts:
         title: Alerts
         description: Alerts
         type: "[]alert"
         required: false
-  check_host_quarantine_status:
-    title: Check Host Quarantine Status
-    description: Check whether a host is quarantined or not
-    input:
-      agent_id:
-        title: Agent ID
-        description: The ID of the agent you want to check
-        type: string
-        required: false
-        example: 44d88612fea8a8f36de82e
-    output:
-      results:
-        title: Results
-        description: Results obtained for a specific agent
-        type: data
-        required: false
-  quarantine_host:
-    title: Quarantine Host
-    description: Quarantine a host
-    input:
-      agent_id:
-        title: Agent ID
-        description: The ID of the agent you want to isolate
-        type: string
-        required: true
-        example: 44d88612fea8a8f36de82e
-    output:
-      success:
-        title: Success
-        description: Whether the action was successful
-        type: boolean
-        required: true
-  unquarantine_host:
-    title: Unquarantine Host
-    description: Remove a host from quarantine
-    input:
-      agent_id:
-        title: Agent ID
-        description: The ID of the agent you want to unisolate
-        type: string
-        required: true
-        example: 44d88612fea8a8f36de82e
-    output:
-      success:
-        title: Success
-        description: Whether the action was successful
-        type: boolean
-        required: true

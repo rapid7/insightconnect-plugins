@@ -1,6 +1,7 @@
 import json
 import requests
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
+import datetime
 
 
 class CiscoFirePowerApi:
@@ -12,23 +13,22 @@ class CiscoFirePowerApi:
         verify_ssl: bool,
         port: int,
         domain: str,
-        logger,
+        logger: object,
     ):
         self.url = url.rstrip("/").replace("/api", "") + "/api/"
         self.verify_ssl = verify_ssl
         self.username = username
         self.password = password
         self.domain = domain
-        self.port = port
         self.logger = logger
         self.domain_uuid = self.find_domain_uuid()
 
     def create_address_object(self, object_type: str, payload: dict) -> dict:
-        if object_type in ["ipv4", "ipv6"]:
+        if object_type == "ipv4" or object_type == "ipv6":
             endpoint = "hosts"
-        elif object_type == "fqdn":
+        if object_type == "fqdn":
             endpoint = "fqdns"
-        else:
+        if object_type == "cidr":
             endpoint = "networks"
 
         return self._call_api("POST", f"fmc_config/v1/domain/{self.domain_uuid}/object/{endpoint}", json_data=payload)
@@ -69,9 +69,6 @@ class CiscoFirePowerApi:
 
         return {}
 
-    def get_server_version(self) -> list:
-        return self._call_api("GET", "fmc_platform/v1/info/serverversion")
-
     def update_address_group(self, payload):
         return self._call_api(
             "PUT",
@@ -97,7 +94,7 @@ class CiscoFirePowerApi:
     def _call_api(self, method: str, path: str, json_data: dict = None, params: dict = None):
         response = {"text": ""}
 
-        headers = {"Content-Type": "application/json", "X-auth-access-token": self._generate_token()}
+        headers = {"Content-Type": "application/json", "X-auth-access-token": self.generate_token()}
 
         try:
             response = requests.request(
@@ -130,7 +127,7 @@ class CiscoFirePowerApi:
             self.logger.info(f"Call to Cisco FirePower API failed: {e}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
 
-    def _generate_token(self) -> str:
+    def generate_token(self) -> str:
         response = requests.post(
             f"{self.url}fmc_platform/v1/auth/generatetoken",
             headers={"Content-Type": "application/json"},
@@ -149,7 +146,8 @@ class CiscoFirePowerApi:
         for domain in domains:
             if domain.get("name") == self.domain:
                 return domain.get("uuid")
-        raise PluginException(
-            cause="Unable to find Domain provided.",
-            assistance="Please validate the domain name provided and try again.",
-        )
+        else:
+            raise PluginException(
+                cause="Unable to find Domain provided.",
+                assistance="Please validate the domain name provided and try again.",
+            )

@@ -1,7 +1,7 @@
 {
-	"spec": "ef6909ed3195645244f1fca04d1a2922",
-	"manifest": "54e43e9ae5f0e0f3d37d9fba197aad20",
-	"setup": "49990f4a121e259c35944d2862c986d0",
+	"spec": "75b8181176d097e4b3a69fadf4c35b75",
+	"manifest": "5b3ca7d7f6ab876b671761d90c40bb85",
+	"setup": "b3af5c60e0f9b556e1d4c5cf1534b877",
 	"schemas": [
 		{
 			"identifier": "action_on_vulnerability_sync_batch/schema.py",

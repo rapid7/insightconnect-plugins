@@ -1,5 +1,5 @@
 import json
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
 
 
 class RequestParams(object):
@@ -13,7 +13,7 @@ class RequestParams(object):
 
     @classmethod
     def from_dict(cls, params: dict):
-        params_list = []
+        params_list = list()
         for key, item in params.items():
             params_list.append((key, item))
         return cls(params=params_list)
@@ -53,8 +53,6 @@ def resource_request_status_code_check(response_text: str, status_code: str) -> 
         400: "Bad Request",
         401: "Unauthorized",
         404: "Not Found",
-        405: "Method Not Allowed",
-        409: "Conflict",
         500: "Internal Server Error",
         503: "Service Unavailable",
         000: "Unknown Status Code",
@@ -64,9 +62,6 @@ def resource_request_status_code_check(response_text: str, status_code: str) -> 
         400: _CONTACT_SUPPORT,
         401: "Ensure that the user name and password are correct.",
         404: "Ensure that the requested resource exists.",
-        405: "Ensure that the requested action is permitted.",
-        409: "Ensure that the requested action does not cause a conflict with the current state of the target "
-        "resource.",
         500: _CONTACT_SUPPORT,
         503: _CONTACT_SUPPORT,
         000: _CONTACT_SUPPORT,

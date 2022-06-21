@@ -1,43 +1,43 @@
 {
-	"spec": "e2242e670c3b0a214e785a1f17551208",
-	"manifest": "f3f12ef99c091139b19611386e265484",
-	"setup": "d434e6048cb0865e1d207519ac0446d1",
+	"spec": "6c02fcf353ecf2f94497c4488266de60",
+	"manifest": "42ddf8d159a037e4564b4554f53bcd6c",
+	"setup": "dfcacbb0a2f0185c2cee397b2f089cf0",
 	"schemas": [
 		{
 			"identifier": "get_malware_test_file/schema.py",
-			"hash": "f6c2d06cb30a01e9c75ef33aed7d4d83"
+			"hash": "467543c22d6770fb27efe581342e4b60"
 		},
 		{
 			"identifier": "get_pcap/schema.py",
-			"hash": "9cf0a635ec14ca674f4a294b925150d6"
+			"hash": "e8a0c046e250e449b0f6458e9f3e0b74"
 		},
 		{
 			"identifier": "get_report/schema.py",
-			"hash": "932991b0891190aa071bfe3fbdc90b95"
+			"hash": "364c96a98128ee813478a61c86dc3e2b"
 		},
 		{
 			"identifier": "get_sample/schema.py",
-			"hash": "e0f0c3af3b6403605f3b440acabff4dc"
+			"hash": "a82357d2fe38d026d4dd14bfa284a59f"
 		},
 		{
 			"identifier": "get_verdict/schema.py",
-			"hash": "346876c87a4967eb499d483be714bd5a"
+			"hash": "773986a0ccbcafba78fa4eb59de0c77c"
 		},
 		{
 			"identifier": "submit_file/schema.py",
-			"hash": "38268e3e53b9effee2508b45775a66a6"
+			"hash": "d4f69dc7653bf14cf22d9527228f3c11"
 		},
 		{
 			"identifier": "submit_file_from_url/schema.py",
-			"hash": "0c89062e70dee2de8376b63e431b175e"
+			"hash": "1bd3799b7ab9c9f985e79838a05c1f80"
 		},
 		{
 			"identifier": "submit_url/schema.py",
-			"hash": "e0940cc5d475a6d023cc674391f003e1"
+			"hash": "eb7284ce505a577fb326c8c663e96e32"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "1762661ef3efb815b54b1bfcf5d22d17"
+			"hash": "bc69dbe6e41ed2dc978845094163348b"
 		}
 	]
 }

@@ -1,14 +1,14 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import ConnectionSchema, Input
 
 # Custom imports below
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from komand.exceptions import ConnectionTestException
 import googleapiclient.discovery
 from googleapiclient.errors import HttpError
 from google.oauth2 import service_account
 
 
-class Connection(insightconnect_plugin_runtime.Connection):
+class Connection(komand.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.auth = None
@@ -83,10 +83,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
             service = googleapiclient.discovery.build(
                 "discovery", "v1", credentials=self.credentials, cache_discovery=False
             )
-            service.apis().list(name="admin", preferred=True).execute()
-            return {"success": True}
+            api = service.apis().list(name="admin", preferred=True).execute()
         except HttpError as e:
             raise ConnectionTestException(
                 cause=f"Failed to retrieve Admin SDK API info via the provided service account, API error: {e}",
                 assistance="Verify the input service credentials and the permissions on the service account.",
             )
+
+        return api

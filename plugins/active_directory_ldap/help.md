@@ -676,7 +676,6 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
-* 5.3.3 - Fix issue with escaping brackets in Query action
 * 5.3.2 - Improve LDAP connection handling
 * 5.3.1 - Improved error messaging in case the specified group was not found in the Query Group Membership action
 * 5.3.0 - Add Unlock User action

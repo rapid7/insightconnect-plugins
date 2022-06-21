@@ -1,1 +1,0 @@
-{"links":{"self":"https://example.com/api/fmc_config/v1/domain/1/object/urls/00000000-0000-0000-0000-000000000001"},"type":"Url","url":"example.com","overridable":false,"description":"Test","name":"example.com","id":"00000000-0000-0000-0000-000000000001","metadata":{"timestamp":0,"lastUser":{"name":"admin"},"domain":{"name":"Global","id":"1","type":"Domain"}}}

@@ -1,6 +1,6 @@
 from dateutil.parser import parse, ParserError
 from komand_rapid7_insightidr.util.relative_time_codes import relative_time_to_milliseconds
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
 import time
 from typing import Optional
 

@@ -1,21 +1,25 @@
+import komand
+from .schema import GetReportInput, GetReportOutput
+
 # Custom imports below
+import requests
 import base64
 
-import insightconnect_plugin_runtime
 
-from .schema import GetReportInput, GetReportOutput, Output, Input, Component
-
-
-class GetReport(insightconnect_plugin_runtime.Action):
+class GetReport(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_report",
-            description=Component.DESCRIPTION,
+            description="Query for an XML or PDF report for a particular sample",
             input=GetReportInput(),
             output=GetReportOutput(),
         )
 
     def run(self, params={}):
+        """TODO: Run action"""
+        endpoint = "/publicapi/get/report"
+        client = self.connection.client
+        url = "https://{}/{}".format(self.connection.host, endpoint)
         # Formatted with None and tuples so requests sends form-data properly
         # => Send data, 299 bytes (0x12b)
         # 0000: --------------------------8557684369749613
@@ -28,8 +32,17 @@ class GetReport(insightconnect_plugin_runtime.Action):
         # 00da: pdf
         # 00fd: --------------------------8557684369749613--
         # ...
-        return {
-            Output.REPORT: base64.b64encode(
-                self.connection.client.get_report(params.get(Input.HASH), params.get(Input.FORMAT))
-            ).decode()
+
+        req = {
+            "apikey": (None, self.connection.api_key),
+            "hash": (None, params.get("hash")),
+            "format": (None, params.get("format")),
         }
+        r = requests.post(url, files=req)
+        out = base64.b64encode(r.content).decode()
+        return {"report": out}
+
+    def test(self):
+        """TODO: Test action"""
+        client = self.connection.client
+        return {"report": "Test"}

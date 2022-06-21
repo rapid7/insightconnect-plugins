@@ -7,8 +7,7 @@ vendor: rapid7
 support: rapid7
 status: []
 description: Automate information collection, endpoint isolation and hash blacklisting
-version: 3.2.0
-supported_versions: ["6.0-6.2x Carbon Black EDR API"]
+version: 3.1.11
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/carbon_black_response
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -692,21 +691,18 @@ connection:
     type: credential_secret_key
     description: API token found in your Carbon Black profile
     required: true
-    example: '{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}'
   url:
     title: URL
     type: string
     description: Carbon Black Server API URL
     default: https://127.0.0.1/api/bit9platform/v1
     required: true
-    example: 'https://127.0.0.1/api/bit9platform/v1'
   ssl_verify:
     title: SSL Verify
     type: boolean
     description: SSL certificate verification
     default: true
     required: true
-    example: true
 actions:
   list_alerts:
     title: List Alerts
@@ -718,20 +714,17 @@ actions:
           page
         required: false
         title: Query String
-        example: 'domain:www.carbonblack.com'
       rows:
         type: integer
         description: How many rows of data to return. Default is 10
         default: 10
         required: false
         title: Rows
-        example: 10
       start:
         type: integer
         description: What row of data to start at. Default is 0
         default: 0
         required: false
-        example: 0
     output:
       alerts:
         description: The lists of alerts
@@ -747,20 +740,17 @@ actions:
           page
         required: false
         title: Query String
-        example: 'domain:www.carbonblack.com'
       rows:
         type: integer
         description: How many rows of data to return. Default is 10
         default: 10
         required: false
         title: Rows
-        example: 10
       start:
         type: integer
         description: What row of data to start at. Default is 0
         default: 0
         required: false
-        example: 0
     output:
       processes:
         description: The list of processes
@@ -776,20 +766,17 @@ actions:
           page
         required: false
         title: Query String
-        example: 'domain:www.carbonblack.com'
       rows:
         type: integer
         description: How many rows of data to return. Default is 10
         default: 10
         required: false
         title: Rows
-        example: 10
       start:
         type: integer
         description: What row of data to start at. Default is 0
         default: 0
         required: false
-        example: 0
     output:
       binaries:
         description: The list of binaries
@@ -820,25 +807,21 @@ actions:
         description: The sensor ID
         required: false
         title: ID
-        example: '1234'
       hostname:
         type: string
         description: The sensor hostname
         required: false
         title: Hostname
-        example: 'cb-response-example'
       ip:
         type: string
         description: The sensor IP address
         required: false
         title: IP Address
-        example: '192.0.2.0'
       groupid:
         type: string
         description: The sensor group ID
         required: false
         title: Group ID
-        example: '50'
     output:
       sensors:
         description: The list of sensors
@@ -853,7 +836,6 @@ actions:
         type: string
         required: true
         title: Hash
-        example: '9de5069c5afe602b2ea0a04b66beb2c0'
     output:
       binary:
         description: A resulting binary, Base64-encoded
@@ -868,7 +850,6 @@ actions:
         type: string
         required: true
         title: MD5 Hash
-        example: '9de5069c5afe602b2ea0a04b66beb2c0'
     output:
       success:
         type: boolean
@@ -882,7 +863,6 @@ actions:
         type: string
         description: Watchlist name
         required: true
-        example: 'examplename'
       index_type:
         type: string
         description: Either modules or events for binary and process watchlists, respectively
@@ -891,13 +871,10 @@ actions:
         enum:
         - modules
         - events
-        - ""
-        example: 'modules'
       query:
         type: string
         description: Raw Carbon Black query that this watchlist matches
         required: true
-        example: 'test'
     output:
       id:
         description: The ID of the created watchlist
@@ -912,48 +889,39 @@ actions:
         description: The URL of the feed to add
         type: string
         required: false
-        example: 'https://example.com'
       force:
         type: boolean
         default: false
         description: Add feed even if the feed URL is already in use
         required: false
-        example: false
       enabled:
         type: boolean
         description: Enable feed
         required: false
-        example: true
       username:
         description: Username
         type: string
         required: false
-        example: 'user1'
       password:
         description: Password
         type: password
         required: false
-        example: 'mypassword'
       cert:
         description: Certificate file
         type: file
         required: false
-        example: '{"filename": "name", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}'
       key:
         description: Key
         type: file
         required: false
-        example: '{"filename": "<name>", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}'
       use_proxy:
         description: Whether or not to use proxy
         type: boolean
         required: false
-        example: true
       validate_server_cert:
         description: Whether or not to validate server certificate
         type: boolean
         required: false
-        example: true
     output:
       id:
         description: The ID of the added feed
@@ -969,13 +937,11 @@ actions:
         type: string
         required: true
         title: ID
-        example: 'example_protection'
       force:
         type: boolean
         description: Force deletion of all matches if multiple matches found
         required: true
         title: Force
-        example: false
     output:
       success:
         type: boolean
@@ -990,13 +956,11 @@ actions:
         type: string
         required: true
         title: ID
-        example: '1234'
       force:
         type: boolean
         description: Force deletion of all matches if multiple matches found
         required: true
         title: Force
-        example: false
     output:
       success:
         type: boolean
@@ -1007,11 +971,10 @@ actions:
     description: Updates or Resolves an Alert in Carbon Black
     input:
       id:
-        description: 'Unique ID of the alert. '
+        description: 'Unique ID of the alert. Example: 1cb11d0d-f86b-415d-aeb3-05f085973fbb'
         type: string
         required: true
         title: Unique ID
-        example: '1cb11d0d-f86b-415d-aeb3-05f085973fbb'
       status:
         description: The status to update
         type: string
@@ -1020,11 +983,9 @@ actions:
         - Unresolved
         - In Progress
         - False Positive
-        - ""
         required: true
         default: Resolved
         title: Status
-        example: 'Resolved'
     output:
       success:
         type: boolean
@@ -1039,7 +1000,6 @@ actions:
         type: string
         required: false
         title: Hostname
-        example: 'cb-response-example'
     output:
       success:
         type: boolean
@@ -1054,28 +1014,11 @@ actions:
         type: string
         required: false
         title: Hostname
-        example: 'cb-response-example'
     output:
       success:
         type: boolean
         description: Whether or not the unisolation was successful
         required: false
-  uninstall_sensor:
-    title: Uninstall Sensor
-    description: Uninstalls a sensor given a sensor ID
-    input:
-      id:
-        type: string
-        description: The sensor ID
-        required: false
-        title: ID
-        example: '1234'
-    output:
-      success:
-        description: Whether or not the uninstall was successful
-        type: boolean
-        required: false
-
 triggers:
   new_alert:
     title: New Alert

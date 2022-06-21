@@ -75,27 +75,6 @@ class QueryLogs:
         return f"{console_url}query/logs/{log_id}"
 
 
-class Queries:
-    @staticmethod
-    def get_all_queries(console_url: str):
-        """
-        URI for retrieving all saved queries
-        :param console_url: URL to the InsightIDR console
-        :return: pre-populated /query/saved_queries
-        """
-        return f"{console_url}query/saved_queries"
-
-    @staticmethod
-    def get_query_by_id(console_url: str, query_id: str):
-        """
-        URI for retrieving a query
-        :param console_url: URL to the InsightIDR console
-        :param query_id: The ID of a query which is to be retrieved
-        :return: pre-populated /query/saved_queries/{query_id}
-        """
-        return f"{console_url}query/saved_queries/{query_id}"
-
-
 class Logs:
     @staticmethod
     def get_a_log(console_url: str, log_id: str):

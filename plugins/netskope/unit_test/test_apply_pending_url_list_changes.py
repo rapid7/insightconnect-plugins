@@ -43,6 +43,7 @@ class TestApplyPendingUrlListChanges(TestCase):
                     "data": {
                         "urls": ["https://example.com", "https://example.com"],
                         "type": "exact",
+                        "json_version": 2,
                     },
                     "modify_by": "Netskope REST API",
                     "modify_time": "2022-01-03T00:00:00.000Z",

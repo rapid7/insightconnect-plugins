@@ -1,22 +1,27 @@
-import insightconnect_plugin_runtime
-import xmltodict
+import komand
+from .schema import SubmitUrlInput, SubmitUrlOutput
 
 # Custom imports below
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
+import requests
+import xmltodict
 
-from .schema import SubmitUrlInput, SubmitUrlOutput, Output, Input, Component
 
-
-class SubmitUrl(insightconnect_plugin_runtime.Action):
+class SubmitUrl(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="submit_url",
-            description=Component.DESCRIPTION,
+            description="Submit a URL for analysis",
             input=SubmitUrlInput(),
             output=SubmitUrlOutput(),
         )
 
     def run(self, params={}):
+        """TODO: Run action"""
+        endpoint = "/publicapi/submit/link"
+        client = self.connection.client
+        url = "https://{}{}".format(self.connection.host, endpoint)
+
         # Formatted with None and tuples so requests sends form-data properly
         # => Send data, 299 bytes (0x12b)
         # 0000: --------------------------8557684369749613
@@ -29,10 +34,18 @@ class SubmitUrl(insightconnect_plugin_runtime.Action):
         # 00da: pdf
         # 00fd: --------------------------8557684369749613--
         # ...
+
+        req = {
+            "apikey": (None, self.connection.api_key),
+            "link": (None, params.get("url")),
+        }
+
         try:
-            o = xmltodict.parse(self.connection.client.submit_url(params.get(Input.URL)))
+            r = requests.post(url, files=req)
+            o = xmltodict.parse(r.content)
             out = dict(o)
 
+            # self.logger.info(out)
             # {
             #   "submission": {
             #     "error": {
@@ -63,11 +76,12 @@ class SubmitUrl(insightconnect_plugin_runtime.Action):
                     )
 
             out = dict(o["wildfire"]["submit-link-info"])
-        except Exception as error:
-            raise PluginException(
-                cause="Some unexpected error appear.",
-                assistance="Please contact support with the status code and error information.",
-                data=error,
-            )
+        except:
+            raise
 
-        return {Output.SUBMISSION: out}
+        return {"submission": out}
+
+    def test(self):
+        """TODO: Test action"""
+        client = self.connection.client
+        return {"submission": {"url": "Test", "sha256": "Test", "md5": "Test"}}

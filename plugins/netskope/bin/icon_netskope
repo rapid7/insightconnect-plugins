@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Netskope"
 Vendor = "rapid7"
-Version = "1.0.1"
+Version = "1.0.0"
 Description = "This plugin allows users to create, read, update, and delete URL lists in their Netskope environment"
 
 

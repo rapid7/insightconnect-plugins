@@ -2,6 +2,11 @@ import unittest
 from dataclasses import dataclass
 from typing import Optional
 
+from komand_sql.connection.connection import Connection
+import logging
+
+from komand_sql.connection.schema import Input
+
 
 @dataclass
 class TestCase:
@@ -86,4 +91,10 @@ class TestConnection(unittest.TestCase):
         return default_connection
 
     def test_connect(self):
-        pass
+        for case in testcases:
+            with self.subTest(case.name):
+                actual = TestConnection.configure_connection(case.input_type, case.input_port).conn_str
+                self.assertEqual(
+                    case.expected,
+                    actual,
+                )

@@ -19,10 +19,6 @@ the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=g
   * User.ReadWrite.All
 * The application will need to be added to the Global Administrator role. This can be done in `Roles and administrators` in Azure Active directory via the Azure Portal.
 
-# Supported Product Versions
-
-* 2022-05-30
-
 # Documentation
 
 ## Setup
@@ -31,17 +27,19 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|application_id|string|None|True|The ID of the registered application that obtained the refresh token|None|6731de76-14a6-49ae-97bc-6eba6914391e|
-|application_secret|credential_secret_key|None|True|The secret of the registered application that obtained the refresh token|None|JqQX2PNo9bpM0uEihUPzyrh|
-|tenant_id|string|None|True|The ID of the directory that identifies the tenant|None|5ceea899-ae8c-4ff1-fffe-353646eeeff0|
+|application_id|string|None|True|The ID of the registered application that obtained the refresh token|None|None|
+|application_secret|credential_secret_key|None|True|The secret of the registered application that obtained the refresh token|None|None|
+|tenant_id|string|None|True|The ID of the directory that identifies the tenant|None|None|
 
 Example input:
 
 ```
 {
-  "application_id": "6731de76-14a6-49ae-97bc-6eba6914391e",
-  "application_secret": "JqQX2PNo9bpM0uEihUPzyrh",
-  "tenant_id": "5ceea899-ae8c-4ff1-fffe-353646eeeff0"
+  "application_id": "abcd12345-ab12-1234-abcd-1ab2c3d4e5g6",
+  "application_secret": {
+    "secretKey": "abcdefghi12345678abcdef1234"
+  },
+  "tenant_id": "abcd12345-ab12-1234-abcd-1ab2c3d4e5g6"
 }
 ```
 
@@ -58,7 +56,7 @@ This action invalidates all the refresh tokens issued to applications for a user
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|user_id|string|None|True|User ID to revoke|None|user@example.com|
+|user_id|string|None|True|User ID|None|user@example.com|
 
 Example input:
 
@@ -91,7 +89,7 @@ This action is used to add a user to a set of groups by group ID.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |group_id|[]string|None|True|IDs of Groups to Add User to|None|["b4d41d4-eb13-4a33-99b5-7d7290df22e9"]|
-|user_id|string|None|True|User ID to add|None|user@example.com|
+|user_id|string|None|True|User ID e.g. user@example.com|None|user@example.com|
 
 Example input:
 
@@ -129,7 +127,7 @@ This action is used to update a users information.
 |city|string|None|False|The city in which the user is located|None|Boston|
 |country|string|None|False|The country or region in which the user is located; for example, US or UK|None|US|
 |department|string|None|False|The name for the department in which the user works|None|IT|
-|job_title|string|None|False|The user's job title|None|Desktop Technician|
+|job_title|string|None|False|The user’s job title|None|Desktop Technician|
 |state|string|None|False|The state or province in the users address|None|MA|
 |user_id|string|None|True|User to updates ID|None|user@example.com|
 |user_type|string|None|False|A string value that can be used to classify user types in your directory, such as Member and Guest|None|Member|
@@ -170,27 +168,13 @@ This action is used to create a user with a randomly generated password and send
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|account_enabled|boolean|True|False|True if the account is enabled; otherwise, false|None|True|
-|display_name|string|None|True|The name to display in the address book for the user|None|displayName-value|
-|mail_nickname|string|None|False|The mail alias for the user|None|user@example.com|
-|notify_email_body|string|None|False|Body of the email to be sent out. Use $password to place the generated password|None|Example message to send|
-|notify_from|string|None|True|User from which email notifcation will be sent|None|user@example.com|
-|notify_recipient|string|None|True|Email address of the account to be notified of user creation|None|user@example.com|
-|user_principal_name|string|None|True|The user principal name|None|user@example.com|
-
-Example input:
-
-```
-{
-  "account_enabled": true,
-  "display_name": "displayName-value",
-  "mail_nickname": "user@example.com",
-  "notify_email_body": "Example message to send",
-  "notify_from": "user@example.com",
-  "notify_recipient": "user@example.com",
-  "user_principal_name": "user@example.com"
-}
-```
+|account_enabled|boolean|True|False|True if the account is enabled; otherwise, false|None|None|
+|display_name|string|None|True|The name to display in the address book for the user e.g. displayName-value|None|None|
+|mail_nickname|string|None|False|The mail alias for the user e.g. mailNickname-value|None|None|
+|notify_email_body|string|None|False|Body of the email to be sent out. Use $password to place the generated password|None|None|
+|notify_from|string|None|True|User from which email notifcation will be sent|None|None|
+|notify_recipient|string|None|True|Email address of the account to be notified of user creation|None|None|
+|user_principal_name|string|None|True|The user principal name e.g. user@example.com|None|None|
 
 ##### Output
 
@@ -214,15 +198,7 @@ This action is used to disable a user account. This action will not disable an a
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|user_id|string|None|True|User ID to disable|None|user@example.com|
-
-Example input:
-
-```
-{
-  "user_id": "user@example.com"
-}
-```
+|user_id|string|None|True|User ID to disable e.g. user@example.com|None|None|
 
 ##### Output
 
@@ -246,15 +222,7 @@ This action is used to enable a user account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|user_id|string|None|True|User ID to enable|None|user@example.com|
-
-Example input:
-
-```
-{
-  "user_id": "user@example.com"
-}
-```
+|user_id|string|None|True|User ID to enable e.g. user@example.com|None|None|
 
 ##### Output
 
@@ -278,15 +246,7 @@ This action forces a user to change their password on their next successful logi
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|user_id|string|None|True|User ID to password change|None|user@example.com|
-
-Example input:
-
-```
-{
-  "user_id": "user@example.com"
-}
-```
+|user_id|string|None|True|User ID|None|None|
 
 ##### Output
 
@@ -310,15 +270,7 @@ This action is used to get user information.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|user_id|string|None|True|Retrieve information about specific User ID|None|user@example.com|
-
-Example input:
-
-```
-{
-  "user_id": "user@example.com"
-}
-```
+|user_id|string|None|True|User ID e.g. user@example.com|None|None|
 
 ##### Output
 
@@ -356,15 +308,7 @@ This action is used to get a group by it's name.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name|string|None|True|Display name to filter|None|displayName|
-
-Example input:
-
-```
-{
-  "name": "displayName"
-}
-```
+|name|string|None|True|Name|None|None|
 
 ##### Output
 
@@ -417,17 +361,8 @@ This action is used to add a user to a group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|group_name|string|None|True|Name of the group to add a user to|None|Example Group Name|
-|user_id|string|None|True|User ID|None|user@example.com|
-
-Example input:
-
-```
-{
-  "group_name": "Example Group Name",
-  "user_id": "user@example.com"
-}
-```
+|group_name|string|None|True|Group Name e.g. My Azure Group|None|None|
+|user_id|string|None|True|User ID e.g. user@example.com|None|None|
 
 ##### Output
 
@@ -451,17 +386,8 @@ This action is used to remove a user from a group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|group_name|string|None|True|Group Name to manage|None|Example Group Name|
-|user_id|string|None|True|User ID to remove from group|None|user@example.com|
-
-Example input:
-
-```
-{
-  "group_name": "Example Group Name",
-  "user_id": "user@example.com"
-}
-```
+|group_name|string|None|True|Group Name e.g. My Azure Group|None|None|
+|user_id|string|None|True|User ID e.g. user@example.com|None|None|
 
 ##### Output
 
@@ -487,17 +413,8 @@ This trigger provides list of both user and sign-in linked risk detections and a
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|frequency|integer|60|False|Poll frequency in seconds|None|60|
-|risk_level|string|None|True|Risk level|['low', 'medium', 'high', 'hidden', 'none', 'all']|all|
-
-Example input:
-
-```
-{
-  "frequency": 60,
-  "risk_level": "all"
-}
-```
+|frequency|integer|60|False|Poll frequency in seconds|None|None|
+|risk_level|string|None|True|Risk level|['low', 'medium', 'high', 'hidden', 'none', 'all']|None|
 
 ##### Output
 
@@ -635,7 +552,6 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.2.6 - Update SDK runtime | Adding additional manager response to Get User Info action
 * 2.2.5 - Correct spelling in help.md
 * 2.2.4 - Fix issue where Get User Info would fail on a disabled account
 * 2.2.3 - Fix issue where Get User Info occasionally fails with an SSL error in secondary call for user status

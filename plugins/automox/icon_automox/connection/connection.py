@@ -4,7 +4,6 @@ from .schema import ConnectionSchema, Input
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 from icon_automox.util.api_client import ApiClient
-import time
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -19,24 +18,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.automox_api = ApiClient(self.logger, self.api_key)
 
     def test(self):
-        start_time = time.time()
-
         try:
             self.automox_api.get_orgs()
-
-            end_time = time.time()
-            elapsed_time = int(end_time - start_time)
-
-            self.automox_api.report_api_outcome(ApiClient.OUTCOME_SUCCESS, "connection_test", elapsed_time)
         except Exception as e:
-            end_time = time.time()
-            elapsed_time = int(end_time - start_time)
-            failure_message = "Unable to list orgs during api test."
-
-            self.automox_api.report_api_outcome(
-                ApiClient.OUTCOME_FAIL, "connection_test", elapsed_time, failure_message
-            )
-
             raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e)
 
         return {}

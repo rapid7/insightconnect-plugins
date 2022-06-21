@@ -13,7 +13,6 @@ class Input:
 
 class Output:
     ALERT = "alert"
-    RESULT_FOUND = "result_found"
     
 
 class LookupAlertInput(insightconnect_plugin_runtime.Input):
@@ -49,18 +48,11 @@ class LookupAlertOutput(insightconnect_plugin_runtime.Output):
       "$ref": "#/definitions/alert",
       "title": "Alert",
       "description": "Alert details",
-      "order": 2
-    },
-    "result_found": {
-      "type": "boolean",
-      "title": "Result Found",
-      "description": "Whether the result was found",
       "order": 1
     }
   },
   "required": [
-    "alert",
-    "result_found"
+    "alert"
   ],
   "definitions": {
     "alert": {

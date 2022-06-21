@@ -12,17 +12,13 @@ returned in the [STIX](https://stixproject.github.io/about/) format.
 
 # Key Features
 
-* Search domain, hash, malware, vulnerability, entity, URL and IP lists
+* Search domain and IP lists
 * Download risk lists
-* Lookup alert, domain, hash, malware, vulnerability, entity, URL and IP
+* Lookup and search hashes
 
 # Requirements
 
 * Recorded Future API key
-
-# Supported Product Versions
-
-* Recorded Future API 2022-04-09
 
 # Documentation
 
@@ -71,13 +67,11 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |alert|alert|True|Alert details|
-|result_found|boolean|True|Whether the result was found|
 
 Example output:
 
 ```
 {
-  "result_found": true,
   "alert": {
     "review": {
       "status": "no-action"
@@ -131,6 +125,11 @@ Example output:
                       "id": "url:https://www.sesin.at/2020/10/02/cve-2015-4719-infinity/",
                       "name": "https://www.sesin.at/2020/10/02/cve-2015-4719-infinity/",
                       "type": "URL"
+                    },
+                    {
+                      "id": "url:https://www.sesin.at/",
+                      "name": "https://www.sesin.at/",
+                      "type": "URL"
                     }
                   ],
                   "language": "eng"
@@ -152,6 +151,13 @@ Example output:
               "evidenceString": "8 sightings on 8 sources including: SecurityDatabase Alerts Monitor Last 100 Alerts, vulmon.com, @NetHaxBot, @VulmonFeeds, @VulnSME. Most recent tweet: New/Modified vulnerability published September 23, 2020 at 07:15PM on the NVD: CVE-2015-4719 https://t.co/oso1bdme0I The client API authentication mechanism in Pexip Infinity before 10 allows remote attackers to gain privileges via a crafted request. Most recent link (Sep 25, 2020): https://twitter.com/SecRiskRptSME/statuses/1309391474354802688",
               "rule": "Linked to Recent Cyber Exploit",
               "criticality": 1
+            },
+            {
+              "timestamp": "2020-10-02T00:25:00.000Z",
+              "criticalityLabel": "High",
+              "evidenceString": "1 sighting on 1 source: Recorded Future Vulnerability Analysis. CVSS v3.1 Score (8.3) calculated using NIST reported CVSS Base Score (9.8) and Recorded Future Temporal Metrics. Base vector string: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H. Temporal vector string: E:U/RL:X/RC:U. Most recent link (Oct 2, 2020): https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2015-4719",
+              "rule": "NIST Severity: High",
+              "criticality": 3
             }
           ],
           "criticality": 3
@@ -213,17 +219,17 @@ Example output:
       "@timestamp": "2020-09-29T16:56:54.355Z",
       "@version": "1.2",
       "@xmlns": "http://xml/metadataSharing.xsd",
-      "@xmlns:FileObj": "http://example.com",
-      "@xmlns:RF": "http://example.com",
-      "@xmlns:URIObj": "http://example.com",
+      "@xmlns:FileObj": "http://cybox.mitre.org/objects#FileObject-2",
+      "@xmlns:RF": "http://stix.recordedfuture.com/",
+      "@xmlns:URIObj": "http://cybox.mitre.org/objects#URIObject-2",
       "@xmlns:cybox": "http://cybox.mitre.org/cybox-2",
-      "@xmlns:cyboxCommon": "http://example.com",
-      "@xmlns:cyboxVocabs": "http://example.com",
-      "@xmlns:indicator": "http://example.com",
-      "@xmlns:stix": "http://example.com",
-      "@xmlns:stixCommon": "http://example.com",
-      "@xmlns:stixVocabs": "http://example.com",
-      "@xmlns:ttp": "http://example.com",
+      "@xmlns:cyboxCommon": "http://cybox.mitre.org/common-2",
+      "@xmlns:cyboxVocabs": "http://cybox.mitre.org/default_vocabularies-2",
+      "@xmlns:indicator": "http://stix.mitre.org/Indicator-2",
+      "@xmlns:stix": "http://stix.mitre.org/stix-1",
+      "@xmlns:stixCommon": "http://stix.mitre.org/common-1",
+      "@xmlns:stixVocabs": "http://stix.mitre.org/default_vocabularies-1",
+      "@xmlns:ttp": "http://stix.mitre.org/TTP-1",
       "stix:Indicators": {
         "stix:Indicator": [
           {
@@ -269,7 +275,7 @@ Example output:
             "indicator:Producer": {
               "stixCommon:Description": "Recorded Future",
               "stixCommon:References": {
-                "stixCommon:Reference": "http://example.com"
+                "stixCommon:Reference": "https://app.recordedfuture.com/live/sc/entity/url%!A(MISSING)http%!A(MISSING)%!F(MISSING)%!F(MISSING)bolizarsospos.com%!F(MISSING)raph9xccgxt"
               }
             },
             "indicator:Title": "URL http://bolizarsospos.com/raph9xccgxt",
@@ -790,15 +796,15 @@ Example output:
 ```
 {
   "stix:STIX_Package": {
-    "@xmlns:FileObj": "http://example.com",
+    "@xmlns:FileObj": "http://cybox.mitre.org/objects#FileObject-2",
     "@xmlns:cybox": "http://cybox.mitre.org/cybox-2",
-    "@xmlns:indicator": "http://example.com",
-    "@xmlns:stix": "http://example.com",
-    "@xmlns:stixCommon": "http://example.com",
+    "@xmlns:indicator": "http://stix.mitre.org/Indicator-2",
+    "@xmlns:stix": "http://stix.mitre.org/stix-1",
+    "@xmlns:stixCommon": "http://stix.mitre.org/common-1",
     "@id": "RF:Package-54aacd87-04f9-41b8-ae7d-f42eb0247d02",
     "@version": "1.2",
-    "@xmlns:stixVocabs": "http://example.com",
-    "@xmlns:ttp": "http://example.com",
+    "@xmlns:stixVocabs": "http://stix.mitre.org/default_vocabularies-1",
+    "@xmlns:ttp": "http://stix.mitre.org/TTP-1",
     "stix:Indicators": {
       "stix:Indicator": [
         {
@@ -852,7 +858,7 @@ Example output:
           "indicator:Producer": {
             "stixCommon:Description": "Recorded Future",
             "stixCommon:References": {
-              "stixCommon:Reference": "http://example.com"
+              "stixCommon:Reference": "https://app.recordedfuture.com/live/sc/entity/idn%..."
             }
           },
           "indicator:Valid_Time_Position": {
@@ -888,7 +894,7 @@ Example output:
           "indicator:Producer": {
             "stixCommon:Description": "Recorded Future",
             "stixCommon:References": {
-              "stixCommon:Reference": "http://example.com"
+              "stixCommon:Reference": "https://app.recordedfuture.com/live/sc/entity/idn%..."
             }
           },
           "indicator:Type": {
@@ -960,13 +966,13 @@ Example output:
       ]
     },
     "@timestamp": "2021-03-08T12:25:06.596Z",
-    "@xmlns:cyboxVocabs": "http://example.com",
+    "@xmlns:cyboxVocabs": "http://cybox.mitre.org/default_vocabularies-2",
     "stix:STIX_Header": {
       "stix:Description": "Recorded Future STIX"
     },
     "@xmlns": "http://xml/metadataSharing.xsd",
-    "@xmlns:RF": "http://example.com",
-    "@xmlns:cyboxCommon": "http://example.com",
+    "@xmlns:RF": "http://stix.recordedfuture.com/",
+    "@xmlns:cyboxCommon": "http://cybox.mitre.org/common-2",
     "@xmlns:DomainNameObj": "http://cybox.mitre.org/objects#DomainNameObject-1"
   }
 }
@@ -1193,16 +1199,16 @@ Example output:
       "@timestamp": "2021-03-17T12:40:03.438Z",
       "@version": "1.2",
       "@xmlns": "http://xml/metadataSharing.xsd",
-      "@xmlns:FileObj": "http://example.com",
-      "@xmlns:RF": "http://example.com",
+      "@xmlns:FileObj": "http://cybox.mitre.org/objects#FileObject-2",
+      "@xmlns:RF": "http://stix.recordedfuture.com/",
       "@xmlns:cybox": "http://cybox.mitre.org/cybox-2",
-      "@xmlns:cyboxCommon": "http://example.com",
-      "@xmlns:cyboxVocabs": "http://example.com",
-      "@xmlns:indicator": "http://example.com",
-      "@xmlns:stix": "http://example.com",
-      "@xmlns:stixCommon": "http://example.com",
-      "@xmlns:stixVocabs": "http://example.com",
-      "@xmlns:ttp": "http://example.com",
+      "@xmlns:cyboxCommon": "http://cybox.mitre.org/common-2",
+      "@xmlns:cyboxVocabs": "http://cybox.mitre.org/default_vocabularies-2",
+      "@xmlns:indicator": "http://stix.mitre.org/Indicator-2",
+      "@xmlns:stix": "http://stix.mitre.org/stix-1",
+      "@xmlns:stixCommon": "http://stix.mitre.org/common-1",
+      "@xmlns:stixVocabs": "http://stix.mitre.org/default_vocabularies-1",
+      "@xmlns:ttp": "http://stix.mitre.org/TTP-1",
       "stix:Indicators": {
         "stix:Indicator": [
           {
@@ -1256,7 +1262,7 @@ Example output:
             "indicator:Producer": {
               "stixCommon:Description": "Recorded Future",
               "stixCommon:References": {
-                "stixCommon:Reference": "http://example.com"
+                "stixCommon:Reference": "https://app.recordedfuture.com/live/sc/entity/hash%!A(MISSING)f34d5f2d4577ed6d9ceec516c1f5a744"
               }
             },
             "indicator:Title": "MD5-hash f34d5f2d4577ed6d9ceec516c1f5a744",
@@ -1405,7 +1411,7 @@ Example output:
           }
         ],
         "hashAlgorithm": "MD5",
-        "intelCard": "http://example.com",
+        "intelCard": "https://app.recordedfuture.com/live/sc/entity/hash...",
         "metrics": [
           {
             "type": "pasteHits",
@@ -1487,7 +1493,7 @@ Example output:
           "id": "hash:83fc4b1052f1b8cb9c8da36419a850e1",
           "name": "83fc4b1052f1b8cb9c8da36419a850e1"
         },
-        "intelCard": "http://example.com",
+        "intelCard": "https://app.recordedfuture.com/live/sc/entity/hash...",
         "metrics": [
           {
             "value": 0,
@@ -1575,67 +1581,26 @@ Example input:
 }
 ```
 
-{
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |data|malware_search_data|True|Data|
-|result_found|boolean|True|Whether the result was found|
 
 Example output:
 
 ```
 {
-  "result_found": true,
   "data": {
-    "analystNotes": [],
-    "timestamps": {
-      "lastSeen": "2022-02-06T10:48:58.974Z",
-      "firstSeen": "2013-09-02T21:10:52.988Z"
-    },
-    "intelCard": "http://example.com",
-    "sightings": [
-      {
-        "source": "Bank Information Security",
-        "url": "https://www.bankinfosecurity.com/leak-reveals-cia-cherryblossom-program-targeting-routers-a-10023",
-        "published": "2017-06-19T00:00:00.000Z",
-        "fragment": "Previously leaked Vault 7 information, which dated from 2013 to 2016, described programs with such names as AfterMidnight, Athena, Dark Matter, Grasshopper, Hive, Pandemic and Weeping Angel.",
-        "type": "recentInfoSec"
-      }
-    ],
     "entity": {
       "id": "ShciZX",
       "name": "AfterMidnight",
       "type": "Malware"
     },
-    "relatedEntities": [
-      {
-        "entities": [
-          {
-            "count": 5,
-            "entity": {
-              "id": "KeKwRK",
-              "name": "CWE-20",
-              "type": "CyberVulnerability"
-            }
-          }
-        ],
-        "type": "RelatedCyberVulnerability"
-      }
-    ],
-    "counts": [
-      {
-        "date": "2017-07-01",
-        "count": 11
-      }
-    ],
-    "metrics": [
-      {
-        "type": "sevenDaysHits",
-        "value": 0
-      }
-    ]
+    "timestamps": {
+      "firstSeen": "2013-09-02T21:10:52.988Z",
+      "lastSeen": "2020-03-11T12:10:48.788Z"
+    }
   }
 }
 ```
@@ -1667,72 +1632,21 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |data|domain_search_data|True|Data|
-|result_found|boolean|True|Whether the result was found|
 
 Example output:
 
 ```
 {
-  "result_found": true,
   "data": {
-    "analystNotes": [],
-    "enterpriseLists": [],
-    "risk": {
-      "criticalityLabel": "None",
-      "riskString": "0/49",
-      "rules": 0,
-      "criticality": 0,
-      "riskSummary": "No Risk Rules are currently observed.",
-      "score": 0,
-      "evidenceDetails": []
-    },
-    "intelCard": "http://example.com",
-    "sightings": [
-      {
-        "source": "New Domain Registrations",
-        "published": "2017-04-04T00:00:00.000Z",
-        "fragment": "The domain example.com has been registered",
-        "title": "New domain registration for example.com",
-        "type": "first"
-      }
-    ],
     "entity": {
-      "id": "idn:example.com",
-      "name": "example.com",
+      "id": "idn:google.com",
+      "name": "google.com",
       "type": "InternetDomainName"
     },
-    "relatedEntities": [
-      {
-        "entities": [
-          {
-            "count": 2,
-            "entity": {
-              "id": "email:user@example.com",
-              "name": "user@example.com",
-              "type": "EmailAddress"
-            }
-          }
-        ],
-        "type": "RelatedEmailAddress"
-      }
-    ],
     "timestamps": {
-      "lastSeen": "2018-11-26T20:23:12.915Z",
-      "firstSeen": "2018-08-03T03:29:57.749Z"
-    },
-    "threatLists": [],
-    "counts": [
-      {
-        "date": "2017-04-04",
-        "count": 2
-      }
-    ],
-    "metrics": [
-      {
-        "type": "sevenDaysHits",
-        "value": 0
-      }
-    ]
+      "firstSeen": "2009-01-23T02:00:08.000Z",
+      "lastSeen": "2019-07-25T15:44:00.328Z"
+    }
   }
 }
 ```
@@ -1762,82 +1676,48 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |data|hash_search_data|True|Data|
-|result_found|boolean|True|Whether the result was found|
 
 Example output:
 
 ```
 {
-  "result_found": true,
   "data": {
-    "enterpriseLists": [],
     "risk": {
       "criticalityLabel": "Malicious",
-      "riskString": "6/14",
-      "rules": 6,
-      "criticality": 3,
-      "riskSummary": "6 of 14 Risk Rules currently observed.",
-      "score": 73,
+      "score": 68,
       "evidenceDetails": [
         {
-          "evidenceString": "2 sightings on 1 source: Dancho Danchev's Blog. Most recent link (Apr 29, 2021): https://ddanchev.blogspot.com/2021/04/dancho-danchevs-law-enforcement-and.html",
+          "timestamp": "2015-06-17T15:09:38.000Z",
+          "criticalityLabel": "Unusual",
+          "evidenceString": "3 sightings on 1 source: Kaspersky Securelist and Lab. Most recent link (Jun 17, 2015): https://securelist.ru/blog/issledovaniya/25905/modul-duqu-2-0-soxranyayushhij-prisutstvie-v-seti/",
           "rule": "Threat Researcher",
-          "criticality": 1,
-          "timestamp": "2021-04-29T17:25:00.000Z",
-          "criticalityLabel": "Unusual"
+          "criticality": 1
+        },
+        {
+          "timestamp": "2015-06-17T15:09:38.000Z",
+          "criticalityLabel": "Suspicious",
+          "evidenceString": "6 sightings on 3 sources: Kaspersky Securelist and Lab, Hei Shou, www.hx95.com. 2 related malwares: Duqu2, Computer Worm. Most recent link (Jun 17, 2015): https://securelist.ru/blog/issledovaniya/25905/modul-duqu-2-0-soxranyayushhij-prisutstvie-v-seti/",
+          "rule": "Linked to Malware",
+          "criticality": 2
+        },
+        {
+          "timestamp": "2015-06-14T00:00:00.000Z",
+          "criticalityLabel": "Malicious",
+          "evidenceString": "1 sighting on 1 source: VirusTotal. Most recent link (Jun 14, 2015): https://www.virustotal.com/en/file/bc4ae56434b45818f57724f4cd19354a13e5964fd097d1933a30e2e31c9bdfa5/analysis/",
+          "rule": "Positive Malware Verdict",
+          "criticality": 3
         }
-      ]
+      ],
+      "riskString": "3/12",
+      "rules": 3,
+      "criticality": 3,
+      "riskSummary": "3 of 12 Risk Rules currently observed."
     },
-    "intelCard": "http://example.com",
-    "sightings": [
-      {
-        "source": "PasteBin",
-        "url": "https://pastebin.com/ws6iEuJn",
-        "published": "2021-10-06T01:02:03.000Z",
-        "fragment": "44d88612fea8a8f36de82e1278abb02f",
-        "title": "Untitled Paste from Pastebin",
-        "type": "recentPaste"
-      }
-    ],
-    "entity": {
-      "id": "hash:44d88612fea8a8f36de82e1278abb02f",
-      "name": "44d88612fea8a8f36de82e1278abb02f",
-      "type": "Hash"
-    },
-    "relatedEntities": [
-      {
-        "entities": [
-          {
-            "count": 6,
-            "entity": {
-              "id": "0e4eL",
-              "name": "Computer virus",
-              "type": "MalwareCategory"
-            }
-          }
-        ]
-      }
-    ],
-    "analystNotes": [],
-    "hashAlgorithm": "MD5",
-    "timestamps": {
-      "lastSeen": "2022-03-23T05:51:50.136Z",
-      "firstSeen": "2013-10-07T07:56:14.576Z"
-    },
-    "threatLists": [],
-    "counts": [
-      {
-        "date": "2018-08-21",
-        "count": 1
-      }
-    ],
-    "metrics": [
-      {
-        "type": "sevenDaysHits",
-        "value": 0
-      }
-    ]
-  }
+    "analystNotes": []
+  },
+  "warnings": [
+    "Unknown field nope"
+  ]
 }
 ```
 
@@ -1866,53 +1746,22 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |data|url_search_data|True|Data|
-|result_found|boolean|True|Whether the result was found|
 
 Example output:
 
 ```
 {
-  "result_found": true,
-  "data": {
-    "analystNotes": [],
-    "enterpriseLists": [],
-    "timestamps": {
-      "lastSeen": "2022-02-03T23:59:59.000Z",
-      "firstSeen": "2022-02-03T00:00:00.000Z"
-    },
-    "risk": {
-      "criticalityLabel": "None",
-      "riskString": "0/28",
-      "rules": 0,
-      "criticality": 0,
-      "riskSummary": "No Risk Rules are currently observed.",
-      "score": 0,
-      "evidenceDetails": [
-        {
-          "evidenceString": "1 sighting on 1 source: External Sensor Data Analysis. No risk observed from an endpoint agent via global telemetry. Last checked: Feb 3, 2022.",
-          "rule": "No Risk Observed",
-          "criticality": 0,
-          "timestamp": "2022-02-03T21:32:02.386Z",
-          "criticalityLabel": "None"
-        }
-      ]
-    },
-    "sightings": [],
-    "entity": {
-      "id": "url:https://example.com",
-      "name": "https://example.com",
-      "type": "URL"
-    },
-    "relatedEntities": [],
-    "counts": [],
-    "metrics": [
-      {
-        "type": "oneDayHits",
-        "value": 0
-      }
-    ]
+  "entity": {
+    "id": "url:http://www.google.com",
+    "name": "http://www.google.com",
+    "type": "URL"
+  },
+  "timestamps": {
+    "firstSeen": "2019-07-26T00:00:00.000Z",
+    "lastSeen": "2019-07-26T23:59:59.000Z"
   }
 }
+
 ```
 
 #### Download IP Addresses Risk List
@@ -1945,16 +1794,16 @@ Example output:
 {
   "stix:STIX_Package": {
     "@xmlns": "http://xml/metadataSharing.xsd",
-    "@xmlns:indicator": "http://example.com",
-    "@xmlns:stix": "http://example.com",
-    "@xmlns:ttp": "http://example.com",
+    "@xmlns:indicator": "http://stix.mitre.org/Indicator-2",
+    "@xmlns:stix": "http://stix.mitre.org/stix-1",
+    "@xmlns:ttp": "http://stix.mitre.org/TTP-1",
     "stix:STIX_Header": {
       "stix:Description": "Recorded Future STIX"
     },
     "@id": "RF:Package-9144eafb-a082-49d1-97a1-e7ceb4d8e955",
     "@timestamp": "2020-04-01T12:10:12.058Z",
-    "@xmlns:FileObj": "http://example.com",
-    "@xmlns:stixCommon": "http://example.com",
+    "@xmlns:FileObj": "http://cybox.mitre.org/objects#FileObject-2",
+    "@xmlns:stixCommon": "http://stix.mitre.org/common-1",
     "stix:Indicators": {
       "stix:Indicator": [
         {
@@ -1993,7 +1842,7 @@ Example output:
           },
           "indicator:Producer": {
             "stixCommon:References": {
-              "stixCommon:Reference": "http://example.com"
+              "stixCommon:Reference": "https://app.recordedfuture.com/live/sc/entity/ip%!..."
             },
             "stixCommon:Description": "Recorded Future"
           },
@@ -2038,7 +1887,7 @@ Example output:
           "indicator:Producer": {
             "stixCommon:Description": "Recorded Future",
             "stixCommon:References": {
-              "stixCommon:Reference": "http://example.com"
+              "stixCommon:Reference": "https://app.recordedfuture.com/live/sc/entity/ip%!..."
             }
           },
           "@id": "RF:Indicator-eafa3166-7abc-33af-8789-ede692bf230a",
@@ -2098,13 +1947,13 @@ Example output:
         }
       ]
     },
-    "@xmlns:RF": "http://example.com",
+    "@xmlns:RF": "http://stix.recordedfuture.com/",
     "@xmlns:cybox": "http://cybox.mitre.org/cybox-2",
-    "@xmlns:cyboxCommon": "http://example.com",
-    "@xmlns:stixVocabs": "http://example.com",
+    "@xmlns:cyboxCommon": "http://cybox.mitre.org/common-2",
+    "@xmlns:stixVocabs": "http://stix.mitre.org/default_vocabularies-1",
     "@version": "1.2",
     "@xmlns:AddressObj": "http://cybox.mitre.org/objects#AddressObject-2",
-    "@xmlns:cyboxVocabs": "http://example.com"
+    "@xmlns:cyboxVocabs": "http://cybox.mitre.org/default_vocabularies-2"
   }
 }
 ```
@@ -2134,123 +1983,19 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |data|ip_search_data|True|Data|
-|result_found|boolean|True|Whether the result was found|
 
 Example output:
 
 ```
 {
-  "result_found": true,
-  "data": {
-    "riskyCIDRIPs": [],
-    "enterpriseLists": [],
-    "risk": {
-      "criticalityLabel": "Suspicious",
-      "riskString": "11/64",
-      "rules": 11,
-      "criticality": 2,
-      "riskSummary": "11 of 64 Risk Rules currently observed.",
-      "score": 58,
-      "evidenceDetails": [
-        {
-          "evidenceString": "149 sightings on 18 sources including: Acunetix Web Application Security Blog, Recorded Future Malware Detonation, binarydefense.com, HackerOne Hacktivity, ehcgroup.io. 18 related intrusion methods including POS Malware, Source Address Spoofing, DNS Spoofing, njRAT, Mozart. Most recent tweet: @engage_vdms @edgecast @verizondigital https://t.co/65QIJaVmkr reserved https://t.co/uWt2rpURVy resolving to 93.184.216.34 as Adware or spyware by @zscaler (URL: https://t.co/pd3PacufyS ). Most recent link (Jun 25, 2019): https://twitter.com/npandraju/statuses/1143466069803196416",
-          "rule": "Historically Linked to Intrusion Method",
-          "criticality": 1,
-          "timestamp": "2019-06-25T10:28:50.000Z",
-          "criticalityLabel": "Unusual"
-        }
-      ]
-    },
-    "intelCard": "http://example.com",
-    "sightings": [
-      {
-        "source": "PasteBin",
-        "url": "http://pastebin.com/bDJ7rarf",
-        "published": "2014-12-16T18:49:06.000Z",
-        "fragment": "ip.addr == 93.184.216.34",
-        "title": "Untitled",
-        "type": "first"
-      }
-    ],
-    "entity": {
-      "id": "ip:198.51.100.100",
-      "name": "198.51.100.100",
-      "type": "IpAddress"
-    },
-    "relatedEntities": [
-      {
-        "entities": [
-          {
-            "count": 85,
-            "entity": {
-              "id": "0fL5H",
-              "name": "Adware",
-              "type": "MalwareCategory"
-            }
-          }
-        ],
-        "type": "RelatedMalwareCategory"
-      },
-      {
-        "entities": [
-          {
-            "count": 140,
-            "entity": {
-              "id": "hash:b71e4d17274636b97179ba2d97c742735b6510eb54f22893d3a2daff2ceb28db",
-              "name": "b71e4d17274636b97179ba2d97c742735b6510eb54f22893d3a2daff2ceb28db",
-              "type": "Hash"
-            }
-          }
-        ],
-        "type": "RelatedProduct"
-      }
-    ],
-    "analystNotes": [],
-    "location": {
-      "organization": "EdgeCast Networks, Inc.",
-      "cidr": {
-        "id": "ip:93.184.216.0/24",
-        "name": "93.184.216.0/24",
-        "type": "IpAddress"
-      },
-      "location": {
-        "continent": "North America",
-        "country": "United States"
-      },
-      "asn": "AS15133"
-    },
-    "timestamps": {
-      "lastSeen": "2022-04-08T10:57:07.595Z",
-      "firstSeen": "2014-12-16T18:51:34.533Z"
-    },
-    "threatLists": [
-      {
-        "id": "report:TmXa90",
-        "name": "Alexa Top 10000 Domains and IP Addresses (White List)",
-        "type": "EntityList",
-        "description": "This informational list contains the current Alexa Top 10000 Sites, and IP Addresses that have recently been observed by Recorded Future as DNS Name resolutions.IP Address risk scoring uses this list as a evidence of non-maliciousness, but IPs for Alexa Top 500 sites are not categorically whitelisted.DNS resolutions include both IPv4 and IPv6 resolutions, but are not necessarily comprehensive. These DNS Names may resolve to other IP Addresses depending on time and DNS lookup request location.For more information, see support.alexa.com/hc/en-us/articles/200449834-Does-Alexa-have-a-list-of-its-top-ranked-websites-"
-      }
-    ],
-    "counts": [
-      {
-        "date": "2021-03-26",
-        "count": 4
-      },
-      {
-        "date": "2018-01-22",
-        "count": 6
-      }
-    ],
-    "metrics": [
-      {
-        "type": "defangedSightings",
-        "value": 15
-      },
-      {
-        "type": "recentBruteForceSightings",
-        "value": 1
-      }
-    ]
+  "entity": {
+    "id": "ip:8.8.8.8",
+    "name": "8.8.8.8",
+    "type": "IpAddress"
+  },
+  "timestamps": {
+    "firstSeen": "2010-04-27T12:46:51.000Z",
+    "lastSeen": "2019-07-26T15:26:50.084Z"
   }
 }
 ```
@@ -2285,11 +2030,11 @@ Example output:
 {
   "stix:STIX_Package": {
     "@xmlns": "http://xml/metadataSharing.xsd",
-    "@xmlns:RF": "http://example.com",
+    "@xmlns:RF": "http://stix.recordedfuture.com/",
     "@xmlns:cybox": "http://cybox.mitre.org/cybox-2",
-    "@xmlns:et": "http://example.com",
-    "@xmlns:stix": "http://example.com",
-    "@xmlns:stixCommon": "http://example.com",
+    "@xmlns:et": "http://stix.mitre.org/ExploitTarget-1",
+    "@xmlns:stix": "http://stix.mitre.org/stix-1",
+    "@xmlns:stixCommon": "http://stix.mitre.org/common-1",
     "stix:Exploit_Targets": {
       "stixCommon:Exploit_Target": [
         {
@@ -2302,7 +2047,7 @@ Example output:
           "et:Vulnerability": {
             "et:CVE_ID": "CVE-2020-6819",
             "et:References": {
-              "stixCommon:Reference": "http://example.com"
+              "stixCommon:Reference": "https://app.recordedfuture.com/live/sc/entity/dXhB..."
             }
           }
         },
@@ -2310,7 +2055,7 @@ Example output:
           "et:Vulnerability": {
             "et:CVE_ID": "CVE-2020-6820",
             "et:References": {
-              "stixCommon:Reference": "http://example.com"
+              "stixCommon:Reference": "https://app.recordedfuture.com/live/sc/entity/dXhB..."
             }
           },
           "@id": "RF:et-159738b9-a6c0-3ff8-bef1-fdc9b8a66491",
@@ -2396,13 +2141,11 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |data|vulnerability_search_data|True|Data|
-|result_found|boolean|True|Whether the result was found|
 
 Example output:
 
 ```
 {
-  "result_found": true,
   "data": {
     "timestamps": {
       "firstSeen": "2017-03-14T16:59:26.413Z",
@@ -2429,7 +2172,7 @@ Example output:
     },
     "commonNames": [],
     "cvssv3": {},
-    "intelCard": "http://example.com",
+    "intelCard": "https://app.recordedfuture.com/live/sc/entity/OjOAdZ",
     "rawrisk": [
       {
         "rule": "linkedToCyberExploit",
@@ -2885,8 +2628,6 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 6.0.1 - Security patch
-* 6.0.0 - Handle 404 Not Found Error | Create unit_tests | Update example outputs in help.md | Update keywords | Update key features
 * 5.0.1 - Update error handling around a domain that is not found in Lookup Domain
 * 5.0.0 - Rewrite all API calls and move them to api.py | Improve error handling | Add more user-friendly cause and assistance messaging using PluginException | Add missing Input, Output, and Component imports and use them in actions | Add the `riskRuleMap` parameter for the Download Risk List actions | Move the `fields` and `riskRuleMap` parameters from actions to util.py | Remove unused `risklist` parameter from the List Risk Rules actions | Remove private variables from the Search actions | Update the available values for the `list` parameter for the Download Risk List actions in plugin.spec.yaml | Add missing titles for input and output parameters for actions in plugin.spec.yaml | Remove blank input from the List Risk Rules actions in plugin.spec.yaml | Add missing titles and descriptions for parameters in custom types | Update custom types for action outputs | Remove unnecessary quotes and new lines from plugin.spec.yaml | Update Python version in Dockerfile | Add USER nobody in Dockerfile | Update xmltodict in requirements.txt | Remove rfapi from requirements.txt | Add output example for the Download Domain Risk List and Download Hash Risk List actions | Add custom types in help.md
 * 4.0.4 - Fix issue where Lookup Domain could corrupt non-common domain name extensions

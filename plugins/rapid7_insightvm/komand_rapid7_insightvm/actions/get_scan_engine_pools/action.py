@@ -1,4 +1,4 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import GetScanEnginePoolsInput, GetScanEnginePoolsOutput
 
 # Custom imports below
@@ -7,7 +7,7 @@ from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
-class GetScanEnginePools(insightconnect_plugin_runtime.Action):
+class GetScanEnginePools(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_scan_engine_pools",
@@ -35,7 +35,7 @@ class GetScanEnginePools(insightconnect_plugin_runtime.Action):
             for e in engine_pools:
                 if regex.match(e["name"]):
                     filtered_engine_pools.append(e)
-            self.logger.info(f"Returning {len(filtered_engine_pools)} scan engine pools based on filters...")
+            self.logger.info("Returning %d scan engine pools based on filters..." % (len(filtered_engine_pools)))
             engine_pools = filtered_engine_pools
 
         # Add an engines key to the default engine pool if it's in the list...

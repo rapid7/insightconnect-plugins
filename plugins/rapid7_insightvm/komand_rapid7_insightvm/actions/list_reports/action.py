@@ -1,75 +1,116 @@
-import insightconnect_plugin_runtime
-from .schema import ListReportsInput, ListReportsOutput, Input, Output, Component
+import komand
+from .schema import ListReportsInput, ListReportsOutput
 
 # Custom imports below
 import requests
 import json
 from komand_rapid7_insightvm.util import endpoints
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class ListReports(insightconnect_plugin_runtime.Action):
+class ListReports(komand.Action):
+    _ERRORS = {
+        401: "Unauthorized",
+        404: "Not Found",
+        500: "Internal Server Error",
+        503: "Service Unavailable",
+        000: "Unknown Status Code",
+    }
+
     def __init__(self):
         super(self.__class__, self).__init__(
             name="list_reports",
-            description=Component.DESCRIPTION,
+            description="List reports and return their identifiers",
             input=ListReportsInput(),
             output=ListReportsOutput(),
         )
 
     def run(self, params={}):  # noqa: MC0001
         page = 0
-        size = 10
-        sort = params.get(Input.SORT)
-        name = params.get(Input.NAME)
+        size = 1
+        sort = params.get("sort")
 
+        name_search = False
+        if params.get("name"):
+            name = params.get("name")
+            name_search = True
+
+        # Get pages
         try:
-            page_response = self.connection.session.get(
-                url=endpoints.Report.list_reports(self.connection.console_url, page, size, sort), verify=False
-            ).json()
-            total_pages = page_response.get("page", {}).get("totalPages", 0)
+            # Build API URL
+            page_endpoint = endpoints.Report.list_reports(self.connection.console_url, page, size, sort)
+            page_resp = self.connection.session.get(url=page_endpoint, verify=False)
+            self.logger.info(page_resp.json())
+            page_dict = page_resp.json()["page"]
         except json.decoder.JSONDecodeError:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON)
-        except requests.RequestException as error:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+            self.logger.error("InsightVM is returning malformed JSON")
+            raise
+        except KeyError:
+            self.logger.info(page_resp.json())
+            reason = "Unknown error occurred. Please contact support or try again later."
+            self.logger.error(reason)
+            raise
+
+        # Get total pages
+        try:
+            tp = page_dict["totalPages"]
+            self.logger.info("Total pages of results: %s", tp)
+        except KeyError:
+            self.logger.error("Unable to obtain totalPages from InsightVM")
+            if isinstance(page_dict, dict):
+                self.logger.info(page_dict)
+            raise
 
         reports = []
 
-        if name:
-            self.logger.info(f"Searching for report matching name {name}")
+        if name_search is True:
+            self.logger.info("Searching for report matching name %s", name)
 
-        for page in range(total_pages):  # pylint: disable=too-many-nested-blocks
+        for i in range(tp):
+            page = page + 1
+            # Build API URL
             endpoint = endpoints.Report.list_reports(self.connection.console_url, page, size, sort)
             try:
-                self.logger.info(f"Trying {endpoint}")
-                current_page = self.connection.session.get(url=endpoint, verify=False)
-                if current_page.status_code in [200, 201]:  # 200 is documented, 201 is undocumented
-                    obtained_reports = current_page.json().get("resources", [])
-                    if obtained_reports and isinstance(obtained_reports, list):
-                        for report in obtained_reports:
-                            if name and report.get("name") == name:
-                                self.logger.info(f"Found entry matching {name}")
-                                return {
-                                    Output.FOUND: True,
-                                    Output.LIST: [{"name": report.get("name"), "id": report.get("id")}],
-                                }
-                            if not name:
-                                reports.append(
-                                    {
-                                        "name": report.get("name", "None"),
-                                        "id": report.get("id", "None"),
-                                    }
-                                )
-                    else:
-                        self.logger.error(f"Resource is not a key in object returned by InsightVM for {endpoint}")
-                        self.logger.debug(current_page)
-            except requests.RequestException as error:
-                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+                self.logger.info("Trying %s", endpoint)
+                item = self.connection.session.get(url=endpoint, verify=False)
+                r = item.json()
+
+                if item.status_code in [200, 201]:  # 200 is documented, 201 is undocumented
+
+                    if isinstance(r, dict):
+                        if "resources" in r:
+                            resources = r["resources"]
+                            if isinstance(resources, list):
+                                for report in resources:
+                                    if name_search is True:
+                                        if report["name"] == name:
+                                            self.logger.info("Found entry matching %s", name)
+                                            return {
+                                                "found": True,
+                                                "list": [{"name": report["name"], "id": report["id"]}],
+                                            }
+
+                                    reports.append(
+                                        {
+                                            "name": report.get("name", "None"),
+                                            "id": report.get("id", "None"),
+                                        }
+                                    )
+                        else:
+                            self.logger.error(
+                                "Resource is not a key in object returned by InsightVM for %s",
+                                endpoint,
+                            )
+                            self.logger.debug(r)
+
+            except requests.RequestException as e:
+                self.logger.error(e)
+                raise
             except json.decoder.JSONDecodeError:
-                self.logger.error(f"InsightVM is returning malformed JSON for {endpoint}")
+                self.logger.error("InsightVM is returning malformed JSON for %s", endpoint)
                 continue
 
-        if reports:
-            return {Output.FOUND: True, Output.LIST: reports}
+            # Did not find user supplied name
+            if name_search is True:
+                self.logger.info("Matching report name not found")
 
-        return {Output.FOUND: False, Output.LIST: reports}
+        return {"found": False, "list": reports}

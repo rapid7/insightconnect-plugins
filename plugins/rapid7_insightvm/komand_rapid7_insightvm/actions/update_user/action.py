@@ -1,4 +1,4 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import UpdateUserInput, UpdateUserOutput
 
 # Custom imports below
@@ -7,7 +7,7 @@ from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 from komand_rapid7_insightvm.util.resource_helpers import ValidateUser
 
 
-class UpdateUser(insightconnect_plugin_runtime.Action):
+class UpdateUser(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="update_user",
@@ -20,7 +20,7 @@ class UpdateUser(insightconnect_plugin_runtime.Action):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         validate = ValidateUser(self.connection.session, self.logger)
         endpoint = endpoints.User.users(self.connection.console_url, params.get("id"))
-        self.logger.info(f"Using {endpoint}")
+        self.logger.info("Using %s ..." % endpoint)
 
         # Set dict params and delete the original keys
         payload = params

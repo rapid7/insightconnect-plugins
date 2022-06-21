@@ -453,26 +453,6 @@
         "https://foo-bar.example.com/",
         "http://example1.com/test_1"
       ]
-    ],
-    [
-      "from_string2",
-      "https://website.COM/login.aspx http://WWW.example.COM, EXAMPLE.org http://test.EXAMPLE.NET:443/test.html Test.Domain.Com http://ExAmpLe.DomaIN.OrG/image.png https://website.com:443/login.aspx https://smtpfilter.crystalcomputer.com:443/cgi-mod/mark.cgi",
-      null,
-      [
-        "website.com",
-        "www.example.com",
-        "example.org",
-        "test.example.net",
-        "test.domain.com",
-        "example.domain.org",
-        "smtpfilter.crystalcomputer.com",
-        "https://website.COM/login.aspx",
-        "http://WWW.example.COM",
-        "http://test.EXAMPLE.NET:443/test.html",
-        "http://ExAmpLe.DomaIN.OrG/image.png",
-        "https://website.com:443/login.aspx",
-        "https://smtpfilter.crystalcomputer.com:443/cgi-mod/mark.cgi"
-      ]
     ]
   ]
 }

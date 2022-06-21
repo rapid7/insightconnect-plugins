@@ -1,12 +1,12 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import UpdateUserInfoInput, UpdateUserInfoOutput, Input, Output, Component
 
 # Custom imports below
 import requests
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
 
 
-class UpdateUserInfo(insightconnect_plugin_runtime.Action):
+class UpdateUserInfo(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="update_user_info",
@@ -29,7 +29,7 @@ class UpdateUserInfo(insightconnect_plugin_runtime.Action):
             payload["city"] = city
         if country:
             payload["country"] = country
-        if dept:
+        if country:
             payload["department"] = dept
         if job_title:
             payload["jobTitle"] = job_title
@@ -45,4 +45,5 @@ class UpdateUserInfo(insightconnect_plugin_runtime.Action):
 
         if result.status_code not in range(200, 209):
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=result.text)
+            return {Output.SUCCESS: False}
         return {Output.SUCCESS: True}

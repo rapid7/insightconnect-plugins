@@ -1,22 +1,22 @@
-import insightconnect_plugin_runtime
-from .schema import GetIndicatorDetailsInput, GetIndicatorDetailsOutput, Input, Output, Component
+import komand
+from .schema import GetIndicatorDetailsInput, GetIndicatorDetailsOutput, Input, Output
 
 # Custom imports below
-from komand_att_cybersecurity_alienvault_otx.util.utils import get_indicator_type, raise_exception
+from komand_att_cybersecurity_alienvault_otx.util.utils import get_indicatortypes
 
 
-class GetIndicatorDetails(insightconnect_plugin_runtime.Action):
+class GetIndicatorDetails(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_indicator_details",
-            description=Component.DESCRIPTION,
+            description="Returns details about an indicator",
             input=GetIndicatorDetailsInput(),
             output=GetIndicatorDetailsOutput(),
         )
 
     def run(self, params={}):
         # for results that are not retrieving full details
-        results = {
+        output_template = {
             "general": {},
             "geo": {},
             "reputation": {},
@@ -27,24 +27,21 @@ class GetIndicatorDetails(insightconnect_plugin_runtime.Action):
             "http_scans": {},
         }
 
-        indicator_type = get_indicator_type(params.get(Input.INDICATOR_TYPE))
+        indicator_type = get_indicatortypes(params.get(Input.INDICATOR_TYPE))
         indicator = params.get(Input.INDICATOR)
         section = params.get(Input.SECTION)
-
-        try:
-            if section == "full":
-                return {
-                    Output.RESULTS: insightconnect_plugin_runtime.helper.clean(
-                        self.connection.client.get_indicator_details_full(
-                            indicator_type=indicator_type, indicator=indicator
-                        )
-                    )
-                }
-
-            results[section] = self.connection.client.get_indicator_details_by_section(
-                indicator_type=indicator_type, indicator=indicator, section=section
+        if section == "full":
+            results = self.connection.client.get_indicator_details_full(
+                indicator_type=indicator_type, indicator=indicator
             )
+            clean_results = komand.helper.clean(results)
+            return {Output.RESULTS: clean_results}
 
-            return {Output.RESULTS: insightconnect_plugin_runtime.helper.clean(results)}
-        except Exception as error:
-            raise_exception(error)
+        results = self.connection.client.get_indicator_details_by_section(
+            indicator_type=indicator_type, indicator=indicator, section=section
+        )
+        output_template[section] = results
+
+        clean_results = komand.helper.clean(output_template)
+
+        return {Output.RESULTS: clean_results}

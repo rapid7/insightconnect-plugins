@@ -1,20 +1,8 @@
 from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
-import insightconnect_plugin_runtime
-from insightconnect_plugin_runtime.exceptions import PluginException
+import komand
+from komand.exceptions import PluginException
 import time
-from dateutil.parser import parse
-
-
-def convert_date_to_iso8601(date: str) -> str:
-    try:
-        date_object = parse(date)
-        return date_object.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
-    except ValueError:
-        raise PluginException(
-            cause=f"The provided date format {date} is not supported.",
-            assistance="Please provide the date in a different format e.g. 2022-01-01T00:00:00Z and try again.",
-        )
 
 
 def adhoc_sql_report(connection, logger, report_payload: dict):
@@ -82,12 +70,12 @@ def adhoc_sql_report(connection, logger, report_payload: dict):
 
 
 def write_to_cache(filename, data):
-    with insightconnect_plugin_runtime.helper.open_cachefile(filename) as cache_file:
+    with komand.helper.open_cachefile(filename) as cache_file:
         cache_file.write(data)
 
 
 def read_from_cache(filename):
-    with insightconnect_plugin_runtime.helper.open_cachefile(filename) as cache_file:
+    with komand.helper.open_cachefile(filename) as cache_file:
         contents = cache_file.read()
 
         return contents

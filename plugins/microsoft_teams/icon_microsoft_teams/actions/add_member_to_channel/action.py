@@ -1,4 +1,4 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import AddMemberToChannelInput, AddMemberToChannelOutput, Input, Output, Component
 
 # Custom imports below
@@ -8,10 +8,10 @@ from icon_microsoft_teams.util.azure_ad_utils import (
     get_group_id_from_name,
     add_user_to_channel,
 )
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
 
 
-class AddMemberToChannel(insightconnect_plugin_runtime.Action):
+class AddMemberToChannel(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_member_to_channel",

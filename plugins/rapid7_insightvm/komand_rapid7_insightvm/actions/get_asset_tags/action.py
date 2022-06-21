@@ -1,4 +1,4 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import GetAssetTagsInput, GetAssetTagsOutput, Input, Output, Component
 
 # Custom imports below
@@ -6,7 +6,7 @@ from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
-class GetAssetTags(insightconnect_plugin_runtime.Action):
+class GetAssetTags(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_asset_tags",
@@ -20,7 +20,7 @@ class GetAssetTags(insightconnect_plugin_runtime.Action):
         asset_id = params.get(Input.ASSET_ID)
 
         endpoint = endpoints.Asset.asset_tags(self.connection.console_url, asset_id)
-        self.logger.info(f"Using {endpoint}")
+        self.logger.info("Using %s ..." % endpoint)
 
         tags = resource_helper.resource_request(endpoint=endpoint)
 

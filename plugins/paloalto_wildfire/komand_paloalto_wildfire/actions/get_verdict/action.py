@@ -1,19 +1,26 @@
-import insightconnect_plugin_runtime
-
-from .schema import GetVerdictInput, GetVerdictOutput, Input, Output, Component
-
+import komand
+from .schema import GetVerdictInput, GetVerdictOutput
 
 # Custom imports below
 
 
-class GetVerdict(insightconnect_plugin_runtime.Action):
+class GetVerdict(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_verdict",
-            description=Component.DESCRIPTION,
+            description="Query for a files classification",
             input=GetVerdictInput(),
             output=GetVerdictOutput(),
         )
 
     def run(self, params={}):
-        return {Output.VERDICT: self.connection.client.get_verdicts(params.get(Input.HASH)).capitalize()}
+        """TODO: Run action"""
+        client = self.connection.client
+        out = client.get_verdicts(params.get("hash"))
+
+        return {"verdict": out.capitalize()}
+
+    def test(self):
+        """TODO: Test action"""
+        client = self.connection.client
+        return {"verdict": "Not found"}

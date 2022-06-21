@@ -1,4 +1,4 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import (
     ForceUserToChangePasswordInput,
     ForceUserToChangePasswordOutput,
@@ -8,11 +8,11 @@ from .schema import (
 )
 
 # Custom imports below
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
 import requests
 
 
-class ForceUserToChangePassword(insightconnect_plugin_runtime.Action):
+class ForceUserToChangePassword(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="force_user_to_change_password",

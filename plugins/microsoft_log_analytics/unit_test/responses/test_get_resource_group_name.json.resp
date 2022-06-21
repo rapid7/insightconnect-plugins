@@ -1,9 +1,0 @@
-{
-  "value": [
-    {
-      "id": "/subscriptions/1234/resourcegroups/exampleresourcegroupname/providers/microsoft.operationalinsights",
-      "name": "ExampleWorkspace",
-      "type": "Microsoft.OperationalInsights/workspaces"
-    }
-  ]
-}

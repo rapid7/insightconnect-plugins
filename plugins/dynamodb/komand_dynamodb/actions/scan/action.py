@@ -1,24 +1,44 @@
+import komand
+from .schema import ScanInput, ScanOutput, Output
+
 # Custom imports below
-import copy
-
-import insightconnect_plugin_runtime
-from .schema import ScanInput, ScanOutput, Output, Component, Input
-from komand_dynamodb.util.constants import AWS_NONE_VALUE
+from boto3.dynamodb.conditions import Attr
 
 
-class Scan(insightconnect_plugin_runtime.Action):
+class Scan(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="scan",
-            description=Component.DESCRIPTION,
+            description="Scan Dynamo and return any objects found",
             input=ScanInput(),
             output=ScanOutput(),
         )
 
     def run(self, params={}):
-        mapped_params = copy.deepcopy(params)
-        mapped_params[Input.RETURN_CONSUMED_CAPACITY] = params.get(Input.RETURN_CONSUMED_CAPACITY, AWS_NONE_VALUE)
-        results = self.connection.client.scan_table(input_schema=self.input.schema, params=mapped_params)
+        """TODO: Run action"""
+        table_name = params.get("table")
+        # Get the table ref
+        t = self.connection.dynamodb.Table(table_name)
+        # If they're using an index, slap it on there
+        index = params.get("index")
+        filter_exp = None
+        if params.get("params"):
+            args = params.get("params")  # I already regret naming them this
+            for key in args:
+                if filter_exp is None:
+                    filter_exp = Attr(key).eq(args.get(key))
+                else:
+                    filter_exp = filter_exp & Attr(key).eq(args.get(key))
+            kwargs = {"FilterExpression": filter_exp}
+        else:
+            kwargs = {}
+        # Run the query, will raise an exception if something breaks
+
+        if (index is not None) and (len(index) > 0):
+            self.logger.info("Length: %s", len(index))
+            kwargs["IndexName"] = index
+
+        results = t.scan(**kwargs)
         return {
             Output.COUNT: results.get("Count", 0),
             Output.ITEMS: results.get("Items", []),

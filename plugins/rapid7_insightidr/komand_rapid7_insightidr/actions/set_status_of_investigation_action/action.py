@@ -1,4 +1,4 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import (
     SetStatusOfInvestigationActionInput,
     SetStatusOfInvestigationActionOutput,
@@ -6,7 +6,7 @@ from .schema import (
     Input,
     Output,
 )
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
 
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Investigations
@@ -14,7 +14,7 @@ from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 import json
 
 
-class SetStatusOfInvestigationAction(insightconnect_plugin_runtime.Action):
+class SetStatusOfInvestigationAction(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="set_status_of_investigation_action",

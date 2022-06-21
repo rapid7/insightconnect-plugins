@@ -1,14 +1,14 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import RemoveUserFromGroupInput, RemoveUserFromGroupOutput, Input, Output, Component
 
 # Custom imports below
 from icon_azure_ad_admin.util.get_group import get_group
 from icon_azure_ad_admin.util.get_user_info import get_user_info
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
 import requests
 
 
-class RemoveUserFromGroup(insightconnect_plugin_runtime.Action):
+class RemoveUserFromGroup(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="remove_user_from_group",

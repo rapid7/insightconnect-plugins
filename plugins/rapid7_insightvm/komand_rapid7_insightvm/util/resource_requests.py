@@ -3,7 +3,7 @@ from .shared_resources import resource_request_status_code_check
 import json
 import requests
 import urllib3
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
 from typing import NamedTuple, Collection
 
 # Suppress insecure request messages
@@ -90,9 +90,9 @@ class ResourceRequests(object):
 
         request_method = getattr(self.session, method.lower())
         if not payload:
-            payload = {}
+            payload = dict()
         if not params:
-            params = {}
+            params = dict()
         if isinstance(params, list):
             parameters = RequestParams.from_tuples(params)
         else:
@@ -143,7 +143,7 @@ class ResourceRequests(object):
 
         # Handle various scenarios where params may be passed
         if not payload:
-            payload = {}
+            payload = dict()
         if not params:
             params = {"size": 500, "page": current_page}
         if isinstance(params, list):
@@ -158,7 +158,9 @@ class ResourceRequests(object):
                 if results_retrieved + parameters["size"] > number_of_results:
                     parameters["size"] = number_of_results - results_retrieved
                     last_page = True
+
             response = self.get_resource_page(endpoint=endpoint, method=method, params=parameters, payload=payload)
+
             resources += response.resources  # Grab resources and append to total
             self.logger.info(
                 f"Got {len(response.resources)} resources "
@@ -168,11 +170,12 @@ class ResourceRequests(object):
             if (response.total_pages == 0) or ((response.total_pages - 1) == response.page_num):
                 self.logger.info("All pages consumed, returning results...")
                 break  # exit the loop
-            if last_page:
+            elif last_page:
                 self.logger.info(f"{number_of_results} results consumed, returning results")
                 break
-            self.logger.info("More pages exist, fetching...")
-            current_page += 1
+            else:
+                self.logger.info("More pages exist, fetching...")
+                current_page += 1
 
         return resources
 

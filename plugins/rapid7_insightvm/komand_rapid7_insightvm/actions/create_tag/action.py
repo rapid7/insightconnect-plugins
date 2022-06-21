@@ -1,4 +1,4 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import CreateTagInput, CreateTagOutput
 
 # Custom imports below
@@ -6,7 +6,7 @@ from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
 
 
-class CreateTag(insightconnect_plugin_runtime.Action):
+class CreateTag(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_tag",
@@ -22,7 +22,7 @@ class CreateTag(insightconnect_plugin_runtime.Action):
             params.pop("searchCriteria")
 
         resource_helper = ResourceRequests(self.connection.session, self.logger)
-        self.logger.info(f"Creating tag with name {params.get('name')} and type {params.get('type')}")
+        self.logger.info("Creating tag with name %s and type %s" % (params["name"], params["type"]))
         endpoint = endpoints.Tag.tags(self.connection.console_url)
 
         response = resource_helper.resource_request(endpoint=endpoint, method="post", payload=params)

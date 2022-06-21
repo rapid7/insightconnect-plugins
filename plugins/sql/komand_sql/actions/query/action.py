@@ -1,11 +1,9 @@
 import komand
-
-from komand_sql.connection import connection
+from .schema import QueryInput, QueryOutput, Input, Output
 
 # Custom imports below
 from komand_sql.util.util import generate_results
-
-from .schema import Input, Output, QueryInput, QueryOutput
+from komand_sql.connection import connection
 
 
 class Query(komand.Action):

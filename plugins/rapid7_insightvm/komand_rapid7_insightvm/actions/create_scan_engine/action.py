@@ -1,13 +1,13 @@
-import insightconnect_plugin_runtime
+import komand
 from .schema import CreateScanEngineInput, CreateScanEngineOutput
 
 # Custom imports below
 from komand_rapid7_insightvm.util import endpoints
 from komand_rapid7_insightvm.util.resource_requests import ResourceRequests
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand.exceptions import PluginException
 
 
-class CreateScanEngine(insightconnect_plugin_runtime.Action):
+class CreateScanEngine(komand.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_scan_engine",

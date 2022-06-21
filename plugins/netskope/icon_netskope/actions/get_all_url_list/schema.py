@@ -25,18 +25,14 @@ class GetAllUrlListInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Status",
       "description": "Status of URL lists to be received",
-      "default": "any",
       "enum": [
-        "any",
+        "",
         "applied",
         "pending"
       ],
       "order": 1
     }
-  },
-  "required": [
-    "status"
-  ]
+  }
 }
     """)
 
@@ -68,6 +64,12 @@ class GetAllUrlListOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "data",
       "properties": {
+        "json_version": {
+          "type": "integer",
+          "title": "JSON version",
+          "description": "Current version of JSON format",
+          "order": 3
+        },
         "type": {
           "type": "string",
           "title": "URL List Category",
@@ -151,6 +153,12 @@ class GetAllUrlListOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "data",
           "properties": {
+            "json_version": {
+              "type": "integer",
+              "title": "JSON version",
+              "description": "Current version of JSON format",
+              "order": 3
+            },
             "type": {
               "type": "string",
               "title": "URL List Category",

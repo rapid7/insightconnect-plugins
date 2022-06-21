@@ -69,7 +69,7 @@ class TestUpdateFileHashList(TestCase):
     def test_update_file_hash_list_bad(self, mock_request, exception):
         mocked_request(mock_request)
         with self.assertRaises(PluginException) as context:
-            self.action.run({"name": "test", "list": []})
+            self.action.run()
         self.assertEqual(
             context.exception.cause,
             PluginException.causes[exception],
