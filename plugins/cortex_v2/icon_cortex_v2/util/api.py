@@ -1,6 +1,7 @@
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 from json.decoder import JSONDecodeError
-import requests
+from requests import request
+from requests.exceptions import ConnectionError
 
 # Custom imports below
 from icon_cortex_v2.util.util import filter_job, filter_job_artifacts, eq_
@@ -27,7 +28,7 @@ class API:
         try:
             if method in ["POST", "PATCH"] and not files:
                 # Using the json named input parameter automatically sets header Content-Type = application/json
-                response = requests.request(
+                response = request(
                     method,
                     f"{self.base_url}/{path}",
                     headers=headers,
@@ -38,7 +39,7 @@ class API:
                     verify=self.verify_cert,
                 )
             else:
-                response = requests.request(
+                response = request(
                     method,
                     f"{self.base_url}/{path}",
                     headers=headers,
