@@ -66,5 +66,5 @@ class BulkAnalyze(insightconnect_plugin_runtime.Action):
         job = filter_job(self.connection.API.run_analyzer(analyzer_id, data))
         if not job or not isinstance(job, dict) or "id" not in job:
             raise PluginException(f"Failed to receive job from analyzer {analyzer_name}")
-        job["artifacts"] = filter_job_artifacts(self.connection.API.get_job_artifacts(job["id"]))
+        job["artifacts"] = filter_job_artifacts(self.connection.API.get_job_artifacts(job.get("id")))
         return job

@@ -32,6 +32,6 @@ class RunAnalyzer(insightconnect_plugin_runtime.Action):
         job = filter_job(api.run_analyzer(analyzer_id, {"data": observable, "dataType": data_type, "tlp": tlp_num}))
         if not job or not isinstance(job, dict) or "id" not in job:
             raise PluginException(f"Failed to receive job from analyzer {analyzer_name}")
-        job["artifacts"] = filter_job_artifacts(api.get_job_artifacts(job["id"]))
+        job["artifacts"] = filter_job_artifacts(api.get_job_artifacts(job.get("id")))
 
         return {Output.JOB: job}

@@ -48,5 +48,5 @@ class RunFileAnalyzer(insightconnect_plugin_runtime.Action):
                 )
                 if not job or not isinstance(job, dict) or "id" not in job:
                     raise PluginException(f"Failed to receive job from analyzer {analyzer_name}")
-                job["artifacts"] = filter_job_artifacts(api.get_job_artifacts(job["id"]))
+                job["artifacts"] = filter_job_artifacts(api.get_job_artifacts(job.get("id")))
                 return {Output.JOB: job}

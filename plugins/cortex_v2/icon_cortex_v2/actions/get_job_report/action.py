@@ -19,5 +19,5 @@ class GetJobReport(insightconnect_plugin_runtime.Action):
         self.logger.info(f"Getting report for job {job_id}")
         try:
             return {Output.REPORT: self.connection.API.get_job_report(job_id)}
-        except Exception as e:
-            raise PluginException(cause="Failed to get job report.", assistance=f"{e}")
+        except Exception as error:
+            raise PluginException(cause="Failed to get job report.", assistance=f"{error}")

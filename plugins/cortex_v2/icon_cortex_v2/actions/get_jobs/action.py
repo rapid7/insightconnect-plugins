@@ -41,8 +41,8 @@ class GetJobs(insightconnect_plugin_runtime.Action):
         try:
             jobs = filter_jobs(api.search_for_all_jobs(query, range_=range_, sort_="-createdAt"))
             for job in jobs:
-                job["artifacts"] = filter_job_artifacts(api.get_job_artifacts(job["id"]))
-        except Exception as e:
-            raise PluginException(cause="Failed to obtain the list of jobs.", assistance=f"{e}.")
+                job["artifacts"] = filter_job_artifacts(api.get_job_artifacts(job.get("id")))
+        except Exception as error:
+            raise PluginException(cause="Failed to obtain the list of jobs.", assistance=f"{error}.")
 
         return {Output.LIST: jobs}

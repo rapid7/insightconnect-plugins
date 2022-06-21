@@ -22,5 +22,5 @@ class GetJobDetails(insightconnect_plugin_runtime.Action):
             result = filter_job(self.connection.API.get_job_by_id(job_id))
             result["artifacts"] = filter_job_artifacts(self.connection.API.get_job_artifacts(job_id))
             return {Output.JOB: result}
-        except Exception as e:
-            raise PluginException(cause="Failed to get job details.", assistance=f"{e}")
+        except Exception as error:
+            raise PluginException(cause="Failed to get job details.", assistance=f"{error}")

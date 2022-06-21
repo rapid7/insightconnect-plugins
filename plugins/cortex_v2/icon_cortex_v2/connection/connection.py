@@ -31,6 +31,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
             # Expected = {"versions":{"Cortex":"1.1.4","Play":"2.5.9"},"config":{"authType":"none","capabilities":[]}}
             # Returns the BOOLEAN of whether Cortex exists in "versions" in the response data
             return "Cortex" in response.get("versions", {})
-        except PluginException as e:
-            self.logger.error(e)
-            raise ConnectionTestException(e)
+        except PluginException as error:
+            self.logger.error(error)
+            raise ConnectionTestException(error)

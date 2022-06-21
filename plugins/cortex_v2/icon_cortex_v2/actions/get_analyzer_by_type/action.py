@@ -18,5 +18,5 @@ class GetAnalyzerByType(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         try:
             return {Output.LIST: filter_analyzers(self.connection.API.get_analyzer_by_type(params.get(Input.TYPE)))}
-        except Exception as e:
-            raise PluginException("Failed to get analyzers.", assistance=f"{e}")
+        except Exception as error:
+            raise PluginException("Failed to get analyzers.", assistance=f"{error}")
