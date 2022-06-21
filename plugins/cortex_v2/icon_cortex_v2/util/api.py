@@ -1,25 +1,26 @@
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 from json.decoder import JSONDecodeError
-import requests
+from requests import request
+from requests.exceptions import ConnectionError
 
 # Custom imports below
 from icon_cortex_v2.util.util import eq_
 
 
 class API:
-    def __init__(self, url: str, api_key: str, verify_cert: bool, proxies):
+    def __init__(self, url: str, api_key: str, verify_cert: bool, proxies: dict):
         self.base_url = f"{url}/api"
         self.api_key = api_key
         self.verify_cert = verify_cert
         self.proxies = proxies
 
-    def send_request(self, method: str, path: str, data=None, params=None, files=None):
+    def send_request(self, method: str, path: str, data: dict = None, params: dict = None, files: dict = None):
         method = method.upper()
         headers = {"Authorization": f"Bearer {self.api_key}"}
         try:
             if method in ["POST", "PATCH"] and not files:
                 # Using the json named input parameter automatically sets header Content-Type = application/json
-                response = requests.request(
+                response = request(
                     method,
                     f"{self.base_url}/{path}",
                     headers=headers,
@@ -30,7 +31,7 @@ class API:
                     verify=self.verify_cert,
                 )
             else:
-                response = requests.request(
+                response = request(
                     method,
                     f"{self.base_url}/{path}",
                     headers=headers,
@@ -58,10 +59,10 @@ class API:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
             return response
-        except requests.exceptions.ConnectionError as e:
-            raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE, data=e)
-        except JSONDecodeError as e:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
+        except ConnectionError as error:
+            raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE, data=error)
+        except JSONDecodeError as error:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
 
     def status(self):
         return self.send_request("GET", "status").json()
@@ -92,12 +93,12 @@ class API:
     def get_analyzers(self):
         return self.get_analyzer_by_id()
 
-    def run_analyzer(self, analyzer_id, data=None, files=None):
+    def run_analyzer(self, analyzer_id: str, data: dict = None, files: dict = None):
         return self.send_request(
             "POST", f"analyzer/{analyzer_id}/run", data=data, params={"force": 1}, files=files
         ).json()
 
-    def search_for_all_jobs(self, query, range_, sort_):
+    def search_for_all_jobs(self, query, range_: str = None, sort_: str = None):
         return self.search("job", query, range_, sort_)
 
     def get_job_by_id(self, job_id: str = None):
@@ -108,14 +109,14 @@ class API:
     def get_jobs(self):
         return self.get_job_by_id()
 
-    def delete_job_by_id(self, job_id) -> bool:
+    def delete_job_by_id(self, job_id: str) -> bool:
         self.send_request("DELETE", f"job/{job_id}")
         # Return true if request did not raise exception
         # https://github.com/TheHive-Project/Cortex4py/blob/2.1.0/cortex4py/api.py#L140
         return True
 
-    def get_job_report(self, job_id):
+    def get_job_report(self, job_id: str):
         return self.send_request("GET", f"job/{job_id}/report").json()
 
-    def get_job_artifacts(self, job_id):
+    def get_job_artifacts(self, job_id: str):
         return self.send_request("GET", f"job/{job_id}/artifacts").json()
