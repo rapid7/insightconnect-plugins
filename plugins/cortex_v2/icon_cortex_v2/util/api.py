@@ -15,7 +15,9 @@ class API:
         self.verify_cert = verify_cert
         self.proxies = proxies
 
-    def send_request(self, method: str, path: str, data: Dict = None, params: Dict = None, files: Dict = None) -> Response:
+    def send_request(
+        self, method: str, path: str, data: Dict = None, params: Dict = None, files: Dict = None
+    ) -> Response:
         method = method.upper()
         headers = {"Authorization": f"Bearer {self.api_key}"}
         try:
