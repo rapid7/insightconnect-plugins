@@ -3,8 +3,8 @@ from json.decoder import JSONDecodeError
 import requests
 
 # Custom imports below
-from icon_cortex_v2.util.util import eq_
-from typing import Dict
+from icon_cortex_v2.util.util import filter_job, filter_job_artifacts, eq_
+from typing import Dict, Tuple, Any
 
 
 class API:
@@ -92,10 +92,21 @@ class API:
     def get_analyzers(self):
         return self.get_analyzer_by_id()
 
-    def run_analyzer(self, analyzer_id: str, data: Dict = None, files: Dict = None):
+    def run_analyzer(self, analyzer_id: str, data: Dict[str, Any] = None, files: Dict[str, Tuple] = None):
         return self.send_request(
             "POST", f"analyzer/{analyzer_id}/run", data=data, params={"force": 1}, files=files
         ).json()
+
+    def run_analyzer_by_name(self, analyzer_name: str, data: Dict[str, Any] = None, files: Dict[str, Tuple] = None):
+        analyzer = self.get_analyzer_by_name(analyzer_name)
+        analyzer_id = analyzer.get("id")
+        if not analyzer_id:
+            raise PluginException(f"Analyzer {analyzer_name} not found")
+        job = filter_job(self.run_analyzer(analyzer_id, data, files))
+        if not job or not isinstance(job, dict) or "id" not in job:
+            raise PluginException(f"Failed to receive job from analyzer {analyzer_name}")
+        job["artifacts"] = filter_job_artifacts(self.get_job_artifacts(job.get("id")))
+        return job
 
     def search_for_all_jobs(self, query, range_: str = None, sort_: str = None):
         return self.search("job", query, range_, sort_)

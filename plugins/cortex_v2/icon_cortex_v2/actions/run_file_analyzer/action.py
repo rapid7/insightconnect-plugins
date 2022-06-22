@@ -36,17 +36,8 @@ class RunFileAnalyzer(insightconnect_plugin_runtime.Action):
             with open(file_path, "w+b") as temp_file_w:
                 temp_file_w.write(file_content)
             mime_type = IdentifyMimeType(mime=True).from_file(file_path)
-            analyzer = api.get_analyzer_by_name(analyzer_name)
-            analyzer_id = analyzer.get("id")
-            if not analyzer_id:
-                raise PluginException(f"Analyzer {analyzer_name} not found")
             with open(file_path, "rb") as temp_file_r:
                 file_obj = (filename, temp_file_r, mime_type)
                 data = dict_to_string({"dataType": "file", "tlp": tlp_num})
-                job = filter_job(
-                    api.run_analyzer(analyzer_id=analyzer_id, data={"_json": data}, files={"data": file_obj})
-                )
-                if not job or not isinstance(job, dict) or "id" not in job:
-                    raise PluginException(f"Failed to receive job from analyzer {analyzer_name}")
-                job["artifacts"] = filter_job_artifacts(api.get_job_artifacts(job.get("id")))
+                job = api.run_analyzer_by_name(analyzer_name, data={"_json": data}, files={"data": file_obj})
                 return {Output.JOB: job}

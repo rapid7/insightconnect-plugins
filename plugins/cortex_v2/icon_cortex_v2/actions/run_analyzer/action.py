@@ -18,20 +18,13 @@ class RunAnalyzer(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        api = self.connection.API
-
         analyzer_name = params.get(Input.ANALYZER_ID)
         observable = params.get(Input.OBSERVABLE)
         data_type = params.get(Input.ATTRIBUTES).get("dataType")
         tlp_num = params.get(Input.ATTRIBUTES).get("tlp")
 
-        analyzer = api.get_analyzer_by_name(analyzer_name)
-        analyzer_id = analyzer.get("id")
-        if not analyzer_id:
-            raise PluginException(f"Analyzer {analyzer_name} not found")
-        job = filter_job(api.run_analyzer(analyzer_id, {"data": observable, "dataType": data_type, "tlp": tlp_num}))
-        if not job or not isinstance(job, dict) or "id" not in job:
-            raise PluginException(f"Failed to receive job from analyzer {analyzer_name}")
-        job["artifacts"] = filter_job_artifacts(api.get_job_artifacts(job.get("id")))
-
-        return {Output.JOB: job}
+        return {
+            Output.JOB: self.connection.API.run_analyzer_by_name(
+                analyzer_name, {"data": observable, "dataType": data_type, "tlp": tlp_num}
+            )
+        }
