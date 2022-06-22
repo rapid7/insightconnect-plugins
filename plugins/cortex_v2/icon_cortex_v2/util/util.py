@@ -22,7 +22,7 @@ def filter_job(job: Dict[str, Any]) -> Dict[str, Any]:
     return {key: value for key, value in job.items() if key in RELEVANT_JOB_KEYS}
 
 
-def filter_job_artifacts(artifacts: List[Dict]) -> List[Dict[str, Any]]:
+def filter_job_artifacts(artifacts: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     return [filter_job_artifact(artifact) for artifact in artifacts]
 
 
