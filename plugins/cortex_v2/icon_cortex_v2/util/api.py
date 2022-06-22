@@ -1,10 +1,11 @@
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 from json.decoder import JSONDecodeError
-from requests import request
+from requests import request, Response
 from requests.exceptions import ConnectionError
 
 # Custom imports below
 from icon_cortex_v2.util.util import eq_
+from typing import Dict
 
 
 class API:
@@ -14,7 +15,7 @@ class API:
         self.verify_cert = verify_cert
         self.proxies = proxies
 
-    def send_request(self, method: str, path: str, data: dict = None, params: dict = None, files: dict = None):
+    def send_request(self, method: str, path: str, data: Dict = None, params: Dict = None, files: Dict = None) -> Response:
         method = method.upper()
         headers = {"Authorization": f"Bearer {self.api_key}"}
         try:
@@ -93,7 +94,7 @@ class API:
     def get_analyzers(self):
         return self.get_analyzer_by_id()
 
-    def run_analyzer(self, analyzer_id: str, data: dict = None, files: dict = None):
+    def run_analyzer(self, analyzer_id: str, data: Dict = None, files: Dict = None):
         return self.send_request(
             "POST", f"analyzer/{analyzer_id}/run", data=data, params={"force": 1}, files=files
         ).json()
