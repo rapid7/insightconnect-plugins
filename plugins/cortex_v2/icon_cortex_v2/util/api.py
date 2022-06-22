@@ -1,6 +1,6 @@
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 from json.decoder import JSONDecodeError
-from requests import request
+from requests import request, Response
 from requests.exceptions import ConnectionError
 
 # Custom imports below
