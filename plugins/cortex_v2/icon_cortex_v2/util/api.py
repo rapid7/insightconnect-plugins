@@ -4,7 +4,7 @@ import requests
 
 # Custom imports below
 from icon_cortex_v2.util.util import filter_job, filter_job_artifacts, eq_
-from typing import Dict, Tuple, Any
+from typing import Dict, List, Tuple, Any
 
 
 class API:
@@ -15,7 +15,12 @@ class API:
         self.proxies = proxies
 
     def send_request(
-        self, method: str, path: str, data: Dict = None, params: Dict = None, files: Dict = None
+        self,
+        method: str,
+        path: str,
+        data: Dict[str, Any] = None,
+        params: Dict[str, Any] = None,
+        files: Dict[str, Any] = None,
     ) -> requests.Response:
         method = method.upper()
         headers = {"Authorization": f"Bearer {self.api_key}"}
@@ -66,38 +71,42 @@ class API:
         except JSONDecodeError as error:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
 
-    def status(self):
+    def status(self) -> Dict[str, Any]:
         return self.send_request("GET", "status").json()
 
-    def search(self, path, query=None, range_=None, sort_=""):
+    def search(self, path, query=None, range_=None, sort_="") -> Dict[str, Any]:
         path = f"{path}/_search"
         query = {"query": query if query else {}}
         # Simplified of https://github.com/TheHive-Project/Cortex4py/blob/2.1.0/cortex4py/controllers/abstract.py#L16
         params = {"range": range_ if range_ else None, "sort": sort_ if sort_ else None}
         return self.send_request("POST", path, query, params).json()
 
-    def get_analyzer_by_name(self, analyzer_name: str = None):
+    def get_analyzer_by_name(self, analyzer_name: str = None) -> Dict[str, Any]:
         return self.search("analyzer", eq_("name", analyzer_name), range_="0-1")[0]
 
-    def get_analyzer_by_id(self, analyzer_id: str = None):
+    def get_analyzer_by_id(self, analyzer_id: str = None) -> Dict[str, Any]:
         # If no analyzer_id then return all analyzers
         # Example curl request https://github.com/TheHive-Project/CortexDocs/blob/2.1/api/api-guide.md#list-and-search-1
         endpoint = f"analyzer/{analyzer_id}" if analyzer_id else "analyzer"
         return self.send_request("GET", endpoint).json()
 
-    def get_analyzer_by_type(self, analyzer_type: str = None):
+    def get_analyzer_by_type(self, analyzer_type: str = None) -> Dict[str, Any]:
         # Example curl request https://github.com/TheHive-Project/CortexDocs/blob/2.1/api/api-guide.md#get-by-type
         return self.send_request("GET", f"analyzer/type/{analyzer_type}").json()
 
-    def get_analyzers(self):
+    def get_analyzers(self) -> Dict[str, Any]:
         return self.get_analyzer_by_id()
 
-    def run_analyzer(self, analyzer_id: str, data: Dict[str, Any] = None, files: Dict[str, Tuple] = None):
+    def run_analyzer(
+        self, analyzer_id: str, data: Dict[str, Any] = None, files: Dict[str, Tuple] = None
+    ) -> Dict[str, Any]:
         return self.send_request(
             "POST", f"analyzer/{analyzer_id}/run", data=data, params={"force": 1}, files=files
         ).json()
 
-    def run_analyzer_by_name(self, analyzer_name: str, data: Dict[str, Any] = None, files: Dict[str, Tuple] = None):
+    def run_analyzer_by_name(
+        self, analyzer_name: str, data: Dict[str, Any] = None, files: Dict[str, Tuple] = None
+    ) -> Dict[str, Any]:
         analyzer = self.get_analyzer_by_name(analyzer_name)
         analyzer_id = analyzer.get("id")
         if not analyzer_id:
@@ -108,15 +117,15 @@ class API:
         job["artifacts"] = filter_job_artifacts(self.get_job_artifacts(job.get("id")))
         return job
 
-    def search_for_all_jobs(self, query, range_: str = None, sort_: str = None):
+    def search_for_all_jobs(self, query, range_: str = None, sort_: str = None) -> Dict[str, Any]:
         return self.search("job", query, range_, sort_)
 
-    def get_job_by_id(self, job_id: str = None):
+    def get_job_by_id(self, job_id: str = None) -> Dict[str, Any]:
         # If no job_id then return all jobs
         endpoint = f"job/{job_id}" if job_id else "job"
         return self.send_request("GET", endpoint).json()
 
-    def get_jobs(self):
+    def get_jobs(self) -> Dict[str, Any]:
         return self.get_job_by_id()
 
     def delete_job_by_id(self, job_id: str) -> bool:
@@ -125,8 +134,8 @@ class API:
         # https://github.com/TheHive-Project/Cortex4py/blob/2.1.0/cortex4py/api.py#L140
         return True
 
-    def get_job_report(self, job_id: str):
+    def get_job_report(self, job_id: str) -> Dict[str, Any]:
         return self.send_request("GET", f"job/{job_id}/report").json()
 
-    def get_job_artifacts(self, job_id: str):
+    def get_job_artifacts(self, job_id: str) -> List[Dict[str, Any]]:
         return self.send_request("GET", f"job/{job_id}/artifacts").json()
