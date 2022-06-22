@@ -1,7 +1,6 @@
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 from json.decoder import JSONDecodeError
-from requests import request, Response
-from requests.exceptions import ConnectionError
+import requests
 
 # Custom imports below
 from icon_cortex_v2.util.util import eq_
@@ -17,13 +16,13 @@ class API:
 
     def send_request(
         self, method: str, path: str, data: Dict = None, params: Dict = None, files: Dict = None
-    ) -> Response:
+    ) -> requests.Response:
         method = method.upper()
         headers = {"Authorization": f"Bearer {self.api_key}"}
         try:
             if method in ["POST", "PATCH"] and not files:
                 # Using the json named input parameter automatically sets header Content-Type = application/json
-                response = request(
+                response = requests.request(
                     method,
                     f"{self.base_url}/{path}",
                     headers=headers,
@@ -34,7 +33,7 @@ class API:
                     verify=self.verify_cert,
                 )
             else:
-                response = request(
+                response = requests.request(
                     method,
                     f"{self.base_url}/{path}",
                     headers=headers,
@@ -62,7 +61,7 @@ class API:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
 
             return response
-        except ConnectionError as error:
+        except requests.exceptions.ConnectionError as error:
             raise ConnectionTestException(preset=ConnectionTestException.Preset.SERVICE_UNAVAILABLE, data=error)
         except JSONDecodeError as error:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
