@@ -1,5 +1,4 @@
 import insightconnect_plugin_runtime
-from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import RunAnalyzerInput, RunAnalyzerOutput, Input, Output, Component
 
 # Custom imports below
