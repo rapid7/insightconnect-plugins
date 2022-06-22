@@ -31,7 +31,7 @@ class BulkAnalyze(insightconnect_plugin_runtime.Action):
         tlp_num = attributes.get("tlp", None)
         data = {"data": observable, "dataType": data_type, "tlp": tlp_num}
         # get list of analyzers
-        all_analyzers = api.search_for_all_analyzers()
+        all_analyzers = api.search("analyzer", "")
         # get list of cortex analyzers
         for analyzer in all_analyzers:
             cortex_analyzers.add(analyzer.get("name"))

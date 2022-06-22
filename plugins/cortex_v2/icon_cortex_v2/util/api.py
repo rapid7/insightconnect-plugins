@@ -76,9 +76,6 @@ class API:
         params = {"range": range_ if range_ else None, "sort": sort_ if sort_ else None}
         return self.send_request("POST", path, query, params).json()
 
-    def search_for_all_analyzers(self):
-        return self.search("analyzer", "")
-
     def get_analyzer_by_name(self, analyzer_name: str = None):
         return self.search("analyzer", eq_("name", analyzer_name), range_="0-1")[0]
 
