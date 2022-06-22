@@ -257,8 +257,11 @@ Example input:
 
 ```
 {
-  "body": [{
+  "body": {
     "user": "user@example.com"
+  },
+  "body_as_an_array": [{
+    'user': 'user@example.com'
   }],
   "headers": {
     "Host": "rapid7.com"

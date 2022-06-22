@@ -8,6 +8,10 @@ sys.path.append(os.path.abspath("../"))
 import logging
 from unittest import TestCase, mock
 
+from parameterized import parameterized
+
+STUB_DATA = "client_id=12345&client_secret=passwd"
+
 
 class MockResponse:
     def __init__(self, json_data, status_code, data):
@@ -114,25 +118,38 @@ class TestUtil(TestCase):
 
         self.assertIn("I am a teapot", e.exception.data.msg)
 
-    @mock.patch("requests.request", side_effect=mocked_requests_get)
-    def test_get_data_string_is_unencoded(self, mock_get):
-        data = "client_id=12345&client_secret=passwd"
-        expected = "client_id=12345&client_secret=passwd"
-        log = logging.getLogger("Test")
-        api = RestAPI("www.httpbin.org", log, True, {})
-        result = api.call_api("get", "/", data)
-        result = result.data
-        self.assertEqual(expected, result)
+    """
+    Tests the call_api function for data string
+    """
 
+    @parameterized.expand(
+        [
+            ("get", "/", STUB_DATA, {"Content-Type": "application/json"}, STUB_DATA),
+            ("get", "/", STUB_DATA, {"Content-Type": "application/x-www-form-urlencoded"}, STUB_DATA)
+        ]
+    )
     @mock.patch("requests.request", side_effect=mocked_requests_get)
-    def test_get_data_string_is_encoded(self, mock_get):
-        data = "client_id=12345&client_secret=passwd"
-        expected = "client_id=12345&client_secret=passwd"
-        log = logging.getLogger("Test")
-        api = RestAPI("www.httpbin.org", log, True, {})
-        result = api.call_api("get", "/", data, headers={"Content-Type": "application/x-www-form-urlencoded"})
+    def test_data_string(self, method, route, data, headers, mock_expected, mock_get):
+        api = RestAPI("www.httpbin.org", None, True, {})
+        result = api.call_api(method, route, data, headers)
         result = result.data
-        self.assertEqual(expected, result)
+        self.assertEqual(result, mock_expected)
+
+    # @mock.patch("requests.request", side_effect=mocked_requests_get)
+    # def test_get_data_string_is_unencoded(self, mock_get):
+    #     log = logging.getLogger("Test")
+    #     api = RestAPI("www.httpbin.org", log, True, {})
+    #     result = api.call_api("get", "/", STUB_DATA)
+    #     result = result.data
+    #     self.assertEqual(STUB_DATA, result)
+    #
+    # @mock.patch("requests.request", side_effect=mocked_requests_get)
+    # def test_get_data_string_is_encoded(self, mock_get):
+    #     log = logging.getLogger("Test")
+    #     api = RestAPI("www.httpbin.org", log, True, {})
+    #     result = api.call_api("get", "/", STUB_DATA, headers={"Content-Type": "application/x-www-form-urlencoded"})
+    #     result = result.data
+    #     self.assertEqual(STUB_DATA, result)
 
     """
     Tests the with_credentials function

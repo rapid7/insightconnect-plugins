@@ -96,7 +96,7 @@ class TestPatch(TestCase):
             "route": "https://www.google.com",
             "headers": {},
             "body_as_an_array": [],
-            "body": {"client_id":  "name", "client_secret": "passwd"},
+            "body": {"client_id": "name", "client_secret": "passwd"},
         }
 
         results = test_action.run(action_params)
@@ -121,4 +121,3 @@ class TestPatch(TestCase):
 
         self.assertEqual(cause, e.exception.cause)
         self.assertEqual(assistance, e.exception.assistance)
-
