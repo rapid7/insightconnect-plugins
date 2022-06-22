@@ -3,7 +3,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import BulkAnalyzeInput, BulkAnalyzeOutput, Input, Output, Component
 
 # Custom imports below
-from icon_cortex_v2.util.util import filter_job, filter_job_artifacts
 from typing import Iterable, List, Dict, Any
 
 
