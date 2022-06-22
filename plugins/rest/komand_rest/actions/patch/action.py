@@ -23,15 +23,18 @@ class Patch(insightconnect_plugin_runtime.Action):
         """
         body_non_array = params.get(Input.BODY, {})
         body_array = params.get(Input.BODY_AS_AN_ARRAY, [])
-        if not body_array:
-            data = body_non_array
-        elif not body_non_array:
-            data = body_array
-        elif body_array and body_non_array:
+
+        if body_array and body_non_array:
             raise PluginException(
                 cause="You cannot send both inputs",
-                assistance="Try sending data either as an array OR an object, not both",
+                assistance="Try sending data either as an array OR an object, not both.",
             )
+        elif body_array:
+            data = body_array
+        elif body_non_array:
+            data = body_non_array
+        else:
+            data = None
 
         response = self.connection.api.call_api(
             method="PATCH",

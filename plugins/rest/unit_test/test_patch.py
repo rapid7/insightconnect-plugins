@@ -6,6 +6,7 @@ from mockconnection import MockConnection
 
 sys.path.append(os.path.abspath("../"))
 from komand_rest.actions.patch import Patch
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class TestPatch(TestCase):
@@ -70,3 +71,54 @@ class TestPatch(TestCase):
         self.assertEqual(results["body_object"], {"SampleSuccessBody": "SampleVal"})
         self.assertEqual(results["body_string"], "SAMPLETEXT for method PATCH")
         self.assertEqual(results["headers"], {"SampleHeader": "SampleVal"})
+
+    def test_post_with_body_array(self):
+        test_conn = MockConnection()
+        test_action = Patch()
+
+        test_action.connection = test_conn
+        action_params = {
+            "route": "https://www.google.com",
+            "headers": {},
+            "body_as_an_array": [{"action": "jumps"}, {"over": "dog"}, {"ip": "192.168.0.1"}],
+            "body": {},
+        }
+
+        results = test_action.run(action_params)
+        self.assertEqual(results["body_object"], {"SampleSuccessBody": "SampleVal"})
+
+    def test_post_with_body_non_array(self):
+        test_conn = MockConnection()
+        test_action = Patch()
+
+        test_action.connection = test_conn
+        action_params = {
+            "route": "https://www.google.com",
+            "headers": {},
+            "body_as_an_array": [],
+            "body": {"client_id":  "name", "client_secret": "passwd"},
+        }
+
+        results = test_action.run(action_params)
+        self.assertEqual(results["body_object"], {"SampleSuccessBody": "SampleVal"})
+
+    def test_post_with_both_bodies(self):
+        with self.assertRaises(PluginException) as e:
+            test_conn = MockConnection()
+            test_action = Patch()
+
+            test_action.connection = test_conn
+            action_params = {
+                "route": "https://www.google.com",
+                "headers": {},
+                "body_as_an_array": [{"action": "jumps"}, {"over": "dog"}, {"ip": "192.168.0.1"}],
+                "body": {"key": "value"},
+            }
+
+            test_action.run(action_params)
+        cause = "You cannot send both inputs"
+        assistance = "Try sending data either as an array OR an object, not both."
+
+        self.assertEqual(cause, e.exception.cause)
+        self.assertEqual(assistance, e.exception.assistance)
+
