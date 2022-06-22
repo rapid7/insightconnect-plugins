@@ -4,7 +4,7 @@ import requests
 
 # Custom imports below
 from icon_cortex_v2.util.util import filter_job, filter_job_artifacts, eq_
-from typing import Dict, List, Tuple, Any
+from typing import Union, Dict, List, Tuple, Any
 
 
 class API:
@@ -74,7 +74,9 @@ class API:
     def status(self) -> Dict[str, Any]:
         return self.send_request("GET", "status").json()
 
-    def search(self, path, query=None, range_=None, sort_="") -> Dict[str, Any]:
+    def search(
+        self, path, query: Union[str, Dict[str, Any]] = None, range_: str = None, sort_: str = ""
+    ) -> Dict[str, Any]:
         path = f"{path}/_search"
         query = {"query": query if query else {}}
         # Simplified of https://github.com/TheHive-Project/Cortex4py/blob/2.1.0/cortex4py/controllers/abstract.py#L16
