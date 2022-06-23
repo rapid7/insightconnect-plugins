@@ -34,6 +34,14 @@ class Util:
                     raise json.decoder.JSONDecodeError("json error", "json error", 0)
                 return Util.load_json(f"payloads/{self.filename}.json.resp")
 
+        if args[0] == 'https://urlscan.io/api/v1/search/?q=page.domain:"example.com"&size=10000&sort=_score':
+            return MockResponse("search_domain", 200)
+        if args[0] == 'https://urlscan.io/api/v1/search/?q=page.url: "http://example.com"&size=10000&sort=_score':
+            return MockResponse("search_url", 200)
+        if args[0] == 'https://urlscan.io/api/v1/search/?q=example*&size=10000&sort=_score':
+            return MockResponse("search_domain", 200)
+        if args[0] == 'https://urlscan.io/api/v1/search/?q=empty&size=10000&sort=_score':
+            return MockResponse("search_empty", 200)
         if args[0] == "https://urlscan.io/api/v1/result/full_objects":
             return MockResponse("get_scan_results", 200)
         elif args[0] == "https://urlscan.io/api/v1/result/empty":

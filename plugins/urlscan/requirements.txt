@@ -3,3 +3,4 @@
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 validators==0.18.2
 mock==4.0.3
+parameterized==0.8.1

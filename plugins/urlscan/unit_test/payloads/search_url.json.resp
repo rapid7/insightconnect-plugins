@@ -1,0 +1,38 @@
+{
+  "has_more": false,
+  "results": [
+    {
+      "task": {
+        "visibility": "public",
+        "method": "manual",
+        "domain": "example.com",
+        "apexDomain": "example.com",
+        "time": "2016-11-29T19:42:02.607Z",
+        "uuid": "e6f782e2-88e3-4e65-ad98-12d47a13e025",
+        "url": "http://example.com/"
+      },
+      "stats": {
+        "uniqIPs": 1,
+        "uniqCountries": 1,
+        "dataLength": 2540,
+        "encodedDataLength": 1963,
+        "requests": 2
+      },
+      "page": {
+        "country": "US",
+        "server": "ECS (ewr/15BD)",
+        "ip": "2606:2800:220:1:248:1893:25c8:1946",
+        "domain": "example.com",
+        "apexDomain": "example.com",
+        "mimeType": "text/html",
+        "asnname": "EDGECAST - MCI Communications Services, Inc. d/b/a Verizon Business, US",
+        "asn": "AS15133",
+        "url": "http://example.com/",
+        "status": "200"
+      },
+      "_id": "e6f782e2-88e3-4e65-ad98-12d47a13e025",
+      "result": "https://urlscan.io/api/v1/result/e6f782e2-88e3-4e65-ad98-12d47a13e025/",
+      "screenshot": "https://urlscan.io/screenshots/e6f782e2-88e3-4e65-ad98-12d47a13e025.png"
+    }
+  ]
+}

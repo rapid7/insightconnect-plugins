@@ -1,0 +1,20 @@
+{
+  "parameters": [
+    [
+      "domain",
+      "Domain",
+      "example",
+      "_score",
+      "Domain entered as input type, but not provided in query.",
+      "Please check domain address and try again."
+    ],
+    [
+      "url",
+      "URL",
+      "example.com",
+      "_score",
+      "URL entered as input type, but not provided in query.",
+      "Please check URL and try again."
+    ]
+  ]
+}
