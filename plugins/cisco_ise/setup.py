@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='cisco_ise-rapid7-plugin',
-      version='2.2.1',
-      description='This plugin utilizes Cisco Identity Services Engine to retrieve ANC details, endpoint details and manage Quarantine Cisco Identity Services Engine allows users to gain awareness of everything hitting their networks',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="cisco_ise-rapid7-plugin",
+      version="2.2.2",
+      description="This plugin utilizes Cisco Identity Services Engine to retrieve ANC details, endpoint details and manage Quarantine Cisco Identity Services Engine allows users to gain awareness of everything hitting their networks",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_cisco_ise']

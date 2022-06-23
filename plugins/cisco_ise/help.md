@@ -22,11 +22,11 @@ This plugin utilizes the [ISE](https://github.com/bobthebutcher/ise) library.
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|True|User with administrator privileges on Cisco ISE|None|
-|password|password|None|True|Password|None|
-|address|string|None|True|IP address for Cisco ISE|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|IP address for Cisco ISE|None|None|
+|credentials|credential_username_password|None|True|Username and password|None|None|
+|ssl_verify|boolean|True|True|Enable SSL verification|None|None|
 
 ## Technical Details
 
@@ -38,9 +38,9 @@ This action is used to remove a host from quarantine.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|mac_address|string|None|True|The host MAC address|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|mac_address|string|None|True|The host MAC address|None|None|
 
 ##### Output
 
@@ -62,16 +62,16 @@ This action is used to quarantine a host.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|policy|string|None|True|The quarantine policy to apply|None|
-|mac_address|string|None|True|The host MAC address|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|mac_address|string|None|True|The host MAC address|None|None|
+|policy|string|None|True|The quarantine policy to apply|None|None|
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|result|ErsAncEndpoint|False|Returns info on the endpoint and what policy was applied|
+|ers_anc_endpoint|ErsAncEndpoint|False|Returns info on the endpoint and what policy was applied|
 
 Example output:
 
@@ -100,9 +100,9 @@ This action is used to query an endpoint for more information.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|hostname|string|None|True|The host name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|hostname|string|None|True|The hostname or MAC of the endpoint|None|None|
 
 ##### Output
 
@@ -143,9 +143,9 @@ This action is used to return ANC information based on the MAC address supplied.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|mac|string|None|True|MAC address of the endpoint|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|mac|string|None|True|MAC address of the endpoint|None|None|
 
 ##### Output
 
@@ -182,6 +182,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.2.2 - Update requests dependency
 * 2.2.1 - New spec and help.md format for the Extension Library
 * 2.2.0 - New action Get ANC Endpoint
 * 2.1.2 - Fixed issue where Query Endpoint would return an error if endpoint was not found | Update to input description for Query Endpoint
