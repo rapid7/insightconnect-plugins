@@ -7,6 +7,7 @@ from mockconnection import MockConnection
 sys.path.append(os.path.abspath("../"))
 from komand_rest.actions.patch import Patch
 from insightconnect_plugin_runtime.exceptions import PluginException
+from parameterized import parameterized
 
 
 class TestPatch(TestCase):
@@ -72,31 +73,22 @@ class TestPatch(TestCase):
         self.assertEqual(results["body_string"], "SAMPLETEXT for method PATCH")
         self.assertEqual(results["headers"], {"SampleHeader": "SampleVal"})
 
-    def test_post_with_body_array(self):
+    @parameterized.expand(
+        [
+            ("https://www.google.com", {}, [{"action": "jumps"}, {"over": "dog"}, {"ip": "192.168.0.1"}], {}),
+            ("https://www.google.com", {}, [], {"client_id": "name", "client_secret": "passwd"}),
+        ]
+    )
+    def test_post_with_either_value(self, route, headers, body_as_an_array, body):
         test_conn = MockConnection()
         test_action = Patch()
 
         test_action.connection = test_conn
         action_params = {
-            "route": "https://www.google.com",
-            "headers": {},
-            "body_as_an_array": [{"action": "jumps"}, {"over": "dog"}, {"ip": "192.168.0.1"}],
-            "body": {},
-        }
-
-        results = test_action.run(action_params)
-        self.assertEqual(results["body_object"], {"SampleSuccessBody": "SampleVal"})
-
-    def test_post_with_body_non_array(self):
-        test_conn = MockConnection()
-        test_action = Patch()
-
-        test_action.connection = test_conn
-        action_params = {
-            "route": "https://www.google.com",
-            "headers": {},
-            "body_as_an_array": [],
-            "body": {"client_id": "name", "client_secret": "passwd"},
+            "route": route,
+            "headers": headers,
+            "body_as_an_array": body_as_an_array,
+            "body": body,
         }
 
         results = test_action.run(action_params)
