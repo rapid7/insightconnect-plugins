@@ -16,11 +16,21 @@
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|API Key|None|
-|service_address|string|te.checkpoint.com|True|The Service Address|None|
-|using_cloud_server|boolean|True|True|Set to true if using the cloud version|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|True|API Key|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|service_address|string|te.checkpoint.com|True|The Service Address|None|example.com|
+|using_cloud_server|boolean|True|True|Set to true if using the cloud version|None|True|
+
+Example input:
+
+```
+{
+  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "service_address": "example.com",
+  "using_cloud_server": true
+}
+```
 
 ## Technical Details
 
@@ -32,21 +42,21 @@ This action is used to query the status of a file.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|features|string|None|False|Features|None|
-|file_digest|string|None|True|Hash of the file|None|
-|file_digest_type|string|None|True|The type of hash used for the digest|['md5', 'sha1', 'sha2']|
-|file_name|string|None|False|File name|None|
-|file_type|string|None|False|The file extension|None|
-|quota|boolean|None|False|Quota|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|features|string|None|False|Features|None|te|
+|file_digest|string|None|True|Hash of the file|None|44d88612fea8a8f36de82e1278abb02f|
+|file_digest_type|string|None|True|The type of hash used for the digest|['md5', 'sha1', 'sha2']|md5|
+|file_name|string|None|False|File name|None|hash.png|
+|file_type|string|None|False|The file extension|None|png|
+|quota|boolean|None|False|Quota|None|False|
 
 Example input:
 
 ```
 {
   "features": "te",
-  "file_digest": "0800fc577294c34e0b28ad2839435945",
+  "file_digest": "44d88612fea8a8f36de82e1278abb02f",
   "file_digest_type": "md5",
   "file_name": "hash.png",
   "file_type": "png",
@@ -116,19 +126,19 @@ This action is used to upload a file for analysis.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|file_bytes|bytes|None|True|The file bytes|None|
-|file_name|string|None|True|The name of the file|None|
-|file_type|string|None|False|File extension e.g. DOCX, PDF|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|file_bytes|bytes|None|True|The file bytes|None|UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==|
+|file_name|string|None|True|The name of the file|None|example.pdf|
+|file_type|string|None|False|File extension e.g. DOCX, PDF|None|PDF|
 
 Example input:
 
 ```
 {
-  "file_bytes": "YmxhaA==",
-  "file_name": "blah.txt",
-  "file_type": "txt"
+  "file_bytes": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==",
+  "file_name": "example.pdf",
+  "file_type": "PDF"
 }
 ```
 
@@ -201,6 +211,7 @@ When using the local version of Check Point SandBlast the query report action mu
 
 # Version History
 
+* 1.0.3 - Update requests dependency
 * 1.0.2 - Update Check Point branding
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Initial plugin

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: checkpoint_sand_blast
 title: Check Point SandBlast
 description: The Check Point SandBlast plugin extends the SandBlast service and enables report status and suspicious file upload
-version: 1.0.2
+version: 1.0.3
 vendor: rapid7
 support: community
 status: []
@@ -90,13 +90,13 @@ connection:
     type: string
     default: te.checkpoint.com
     required: true
-    example: "te.checkpoint.com"
+    example: "example.com"
   api_key:
     title: API Key
     description: API Key
     type: credential_secret_key
     required: true
-    example: "TE_API_KEY_grH54uBqMleMweizSuQdifIdfhoqPe2mGCPeOx3E"
+    example: "9de5069c5afe602b2ea0a04b66beb2c0"
   using_cloud_server:
     title: Using Cloud Server
     description: Set to true if using the cloud version
@@ -114,7 +114,7 @@ actions:
         description: Hash of the file
         type: string
         required: true
-        example: "0800fc577294c34e0b28ad2839435945"
+        example: "44d88612fea8a8f36de82e1278abb02f"
       file_digest_type:
         title: File Digest Type
         description: The type of hash used for the digest
@@ -169,19 +169,19 @@ actions:
         description: The name of the file
         type: string
         required: true
-        example: "YmxhaA=="
+        example: "example.pdf"
       file_type:
         title: File Type
         description: File extension e.g. DOCX, PDF
         type: string
         required: false
-        example: "blah.txt"
+        example: "PDF"
       file_bytes:
         title: File Bytes
         description: The file bytes
         type: bytes
         required: true
-        example: "txt"
+        example: "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
     output:
       results:
         title: Results
