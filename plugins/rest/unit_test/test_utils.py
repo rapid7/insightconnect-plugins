@@ -124,32 +124,16 @@ class TestUtil(TestCase):
 
     @parameterized.expand(
         [
-            ("get", "/", STUB_DATA, {"Content-Type": "application/json"}, STUB_DATA),
-            ("get", "/", STUB_DATA, {"Content-Type": "application/x-www-form-urlencoded"}, STUB_DATA)
+            ("get", "/", STUB_DATA, None, {"Content-Type": "application/x-www-form-urlencoded"}, STUB_DATA),
+            ("get", "/", STUB_DATA, None, {"Content-Type": "application/json"}, STUB_DATA),
         ]
     )
     @mock.patch("requests.request", side_effect=mocked_requests_get)
-    def test_data_string(self, method, route, data, headers, mock_expected, mock_get):
+    def test_data_string(self, method, route, data, json_data, headers, mock_expected, mock_get):
         api = RestAPI("www.httpbin.org", None, True, {})
-        result = api.call_api(method, route, data, headers)
+        result = api.call_api(method, route, data, json_data, headers)
         result = result.data
         self.assertEqual(result, mock_expected)
-
-    # @mock.patch("requests.request", side_effect=mocked_requests_get)
-    # def test_get_data_string_is_unencoded(self, mock_get):
-    #     log = logging.getLogger("Test")
-    #     api = RestAPI("www.httpbin.org", log, True, {})
-    #     result = api.call_api("get", "/", STUB_DATA)
-    #     result = result.data
-    #     self.assertEqual(STUB_DATA, result)
-    #
-    # @mock.patch("requests.request", side_effect=mocked_requests_get)
-    # def test_get_data_string_is_encoded(self, mock_get):
-    #     log = logging.getLogger("Test")
-    #     api = RestAPI("www.httpbin.org", log, True, {})
-    #     result = api.call_api("get", "/", STUB_DATA, headers={"Content-Type": "application/x-www-form-urlencoded"})
-    #     result = result.data
-    #     self.assertEqual(STUB_DATA, result)
 
     """
     Tests the with_credentials function
