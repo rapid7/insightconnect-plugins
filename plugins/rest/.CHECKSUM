@@ -1,7 +1,7 @@
 {
-	"spec": "6229d0da34a99794a56bdcd9d317800d",
-	"manifest": "21f38d847b819857d2841723ca634357",
-	"setup": "1485b78e3a1f2e8e92ab8e8b09e218ce",
+	"spec": "e39e74c5ad06c281367ab4d5c0e902c0",
+	"manifest": "3a5a2a7d5d2a262c68919c90575ed2e6",
+	"setup": "67a559753717f7ed8c281c1383c8a7de",
 	"schemas": [
 		{
 			"identifier": "delete/schema.py",
