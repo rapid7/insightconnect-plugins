@@ -19,7 +19,8 @@ malicious or safe.
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* Cortex 2.0.0 - 2.1.3
+* Cortex 3.0.0 - 3.1.3
 
 # Documentation
 
@@ -338,13 +339,12 @@ This action is used to list enabled analyzers within Cortex.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|analyzer_id|string|None|False|Analyzer ID. If empty, all enabled analyzers will be returned|None|VirusTotal_Scan_3_0|
-
+|analyzer_id|string|None|False|ID of an analyzer. If empty, all enabled analyzers will be returned|None|12a6ed3c998d2969a58d65494df802b7|
 Example input:
 
 ```
 {
-  "analyzer_id": "VirusTotal_Scan_3_0"
+  "analyzer_id": "12a6ed3c998d2969a58d65494df802b7"
 }
 ```
 
@@ -710,6 +710,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.0 - Implement custom API-level handling
 * 1.1.2 - Update SDK runtime
 * 1.1.1 - New spec and help.md format for the Extension Library
 * 1.1.0 - New action Bulk Analyze
@@ -720,5 +721,3 @@ This plugin does not contain any troubleshooting information.
 ## References
 
 * [Cortex](https://github.com/TheHive-Project/Cortex)
-* [cortex4py](https://github.com/TheHive-Project/Cortex4py/blob/master/Usage.md)
-
