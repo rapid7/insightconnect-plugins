@@ -1,35 +1,23 @@
-import komand
-from .schema import AddGroupMemberInput, AddGroupMemberOutput, Input, Output
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
-from komand_mimecast.util import util
-from komand.exceptions import PluginException
+from .schema import AddGroupMemberInput, AddGroupMemberOutput, Input, Output, Component
+from komand_mimecast.util.constants import DATA_FIELD, ID_FIELD, DOMAIN_FIELD, EMAIL_FIELD
 
 
-class AddGroupMember(komand.Action):
-
-    _URI = "/api/directory/add-group-member"
-
+class AddGroupMember(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_group_member",
-            description="Add an email address or domain to a group",
+            description=Component.DESCRIPTION,
             input=AddGroupMemberInput(),
             output=AddGroupMemberOutput(),
         )
 
     def run(self, params={}):
-        # Import variables from connection
-        url = self.connection.url
-        access_key = self.connection.access_key
-        secret_key = self.connection.secret_key
-        app_id = self.connection.app_id
-        app_key = self.connection.app_key
-
-        id_ = params.get(Input.ID)
         email = params.get(Input.EMAIL_ADDRESS)
         domain = params.get(Input.DOMAIN)
-
         if not email and not domain:
             raise PluginException(
                 cause="Invalid input.",
@@ -42,26 +30,14 @@ class AddGroupMember(komand.Action):
             )
 
         if email:
-            data = {"id": id_, "emailAddress": email}
+            data = {ID_FIELD: params.get(Input.ID), EMAIL_FIELD: email}
         else:
-            data = {"id": id_, "domain": domain}
+            data = {ID_FIELD: params.get(Input.ID), DOMAIN_FIELD: domain}
 
-        # Mimecast request
-        mimecast_request = util.MimecastRequests()
-        response = mimecast_request.mimecast_post(
-            url=url,
-            uri=AddGroupMember._URI,
-            access_key=access_key,
-            secret_key=secret_key,
-            app_id=app_id,
-            app_key=app_key,
-            data=data,
-        )
-        output = response["data"][0]
-
+        response = self.connection.client.add_group_member(data).get(DATA_FIELD)[0]
         return {
-            Output.ID: output["id"],
-            Output.FOLDER_ID: output["folderId"],
-            Output.EMAIL_ADDRESS: output["emailAddress"],
-            Output.INTERNAL: output["internal"],
+            Output.ID: response.get(ID_FIELD),
+            Output.FOLDER_ID: response.get("folderId"),
+            Output.EMAIL_ADDRESS: response.get(EMAIL_FIELD),
+            Output.INTERNAL: response.get("internal"),
         }

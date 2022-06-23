@@ -1,0 +1,19 @@
+{
+   "meta":{
+      "status":200
+   },
+   "data":[
+
+   ],
+   "fail":[
+      {
+         "errors":[
+            {
+               "code":"err_managed_url_not_found",
+               "message":"Managed URL not found",
+               "retryable":false
+            }
+         ]
+      }
+   ]
+}

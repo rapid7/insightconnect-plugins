@@ -1,0 +1,10 @@
+{
+    "response": [
+        {
+            "id": "MTOKEN:eNoVzk0TQkAcgPHvslcOEYmZDlZNw0h5SekWu3kJO_mzMU3fPZ2fw-_5IKDZ0NGSIAPxqI-3ee_AsiqaiagkWMHNWSReGnM9tCq3EdTDzr4oODAnds1zwYZQr932HO3WR7egD0ex-hPbP-MByjeW6qTGx3SixeCnMrEPfHxxzwc8wgaJKBugZw3tMkborFuht5VMTVeVuXHaQclaZEgiau4t0Jb8F5earH5_pHo79g",
+            "sender": "test@rapid7.com",
+            "to": "test2@rapid7.com",
+            "type": "Block"
+        }
+    ]
+}

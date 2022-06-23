@@ -1,0 +1,18 @@
+{
+   "meta":{
+      "status":200,
+      "pagination":{
+         "pageSize":0
+      }
+   },
+   "data":[
+      {
+         "clickLogs":[
+
+         ]
+      }
+   ],
+   "fail":[
+
+   ]
+}

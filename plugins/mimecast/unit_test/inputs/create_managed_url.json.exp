@@ -1,0 +1,9 @@
+{
+  "action": "permit",
+  "comment": "",
+  "disable_log_click": false,
+  "disable_rewrite": false,
+  "disable_user_awareness": false,
+  "match_type": "explicit",
+  "url": "https://www.test.net/"
+}
