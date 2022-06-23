@@ -1,0 +1,60 @@
+{
+    "groups": [
+        {
+            "id": "eNoVzrsOgjAUANB_uaskgoFgSRwsGoMBVFB8xEXoRdBilVJ8xX9X9zOcN0jMVI0lAwfyfVclYXSb2-LeI16yK142Laf6NkyTlsTuya86VjD21iaNhk-xOR47nowJ9y-r5bg_8wvMp6bbzMXknChZ3qnBt5zO0icWapH2mBe0j1sbLiR9yAFowNnhCk5-4BI1yJRsRIV1Jhj-Lm4cjoyhTSzzB1usZSku4Bga5IIzrP9fS9eJ-fkCsJk_yA",
+            "description": "InsightConnect test",
+            "source": "cloud",
+            "parentId": "eNoVzkkOgjAUANC7_K0kguIAiQsoxKCAA85xA_QzaKVKBVHj3dX9W7w3CIyrEnMKOij8ZbHHsU26vHAGXtZvXsSfHuS9H21qLSAn99LqebazVc2l8eS7NG05ItCYW6xX9nDmZphMVHKf8_F5U4n8YSpsz8xZ9MSsWkQd6nh1c6v9hTAbMQIJGA2voCchEyhBXIk7v2AZc4q_Cwl8SzEGWk_9wRpLkfMCdEWChDOK5f8rf763Yz78",
+            "userCount": 2,
+            "folderCount": 0
+        },
+        {
+            "id": "eNoVzsESgUAYAOB3-a86qAnVjENbjcmkELFH7f6lbDatwhjvjvt3-N6gkPUdVhwcyChpqMvaqR-WLqtonWaP6XJM4zwb7NSro2Y0WQXhwSRb9yWPZTkKVWqL6LrfBVYSnbFYmt59LReXrFfVg-iCCpLkLzz3m9zg4Wp43oZ4o8hTzUEDwU8tOMVJKNSA9eouG-yY5PireGns6-7Mnpg_OGCnKnkFR9egkIJj9--almHYny94Qz-I",
+            "description": "New Folder",
+            "source": "cloud",
+            "parentId": "eNoVzrsOgjAUANB_uasMgjUIiQNFYiCIDxRlFHpBtFKlUCHGf1f3M5w3SMy7BisGNljGfheo1lMkfNQU841nlMtgnEZZoqzYvYb30XTl-UdCd84gTmU58mVs8bA-7L3ZOrxgERC33YjlLelk9aI6TzldZwNeum1mMH-l-qeKtpL2cg4acHZ-gF2cuUQN8k624o5NLhj-Km4cLXTHtKbkBxU2shI12LoGheAMm3-XmBOTfL5PMT9K",
+            "userCount": 13,
+            "folderCount": 0
+        },
+        {
+            "id": "eNoVzrsOgjAUANB_uSsMgiUIiYPgIyjiA0UZgV4eWq1QqBLjv6v7Gc4bBGZdgxUFG-KpZKRP6vaZ1PNK08vgwlbGIA7SSFqhe_FvirGeeSfi7Cc9PxeF4onQYv79eJiNNn6J-ZK47ZYvrlEnqqejsZg5m7THstulOvXW8lXLYCeclxiDCowmD7DzhAlUIetEy2_YZJzir-KGwVSbmJZBflBiIyp-B1tTIeeMYvPvEnNo6p8vyK0_-g",
+            "description": "Permitted senders",
+            "source": "cloud",
+            "parentId": "eNoVzkkOgjAUANC7_K0kguIAiQsoxKCAA85xA_QzaKVKBVHj3dX9W7w3CIyrEnMKOij8ZbHHsU26vHAGXtZvXsSfHuS9H21qLSAn99LqebazVc2l8eS7NG05ItCYW6xX9nDmZphMVHKf8_F5U4n8YSpsz8xZ9MSsWkQd6nh1c6v9hTAbMQIJGA2voCchEyhBXIk7v2AZc4q_Cwl8SzEGWk_9wRpLkfMCdEWChDOK5f8rf763Yz78",
+            "userCount": 3,
+            "folderCount": 1
+        },
+        {
+            "id": "eNoVzrsOgjAUANB_uasMgjUIiQNFYiCIDxRlFHpBtFKlUCHGf1f3M5w3SMy7BisGNljGfheo1lMkfNQU841nlMtgnEZZoqzYvYb30XTl-UdCd84gTmU58mVs8bA-7L3ZOrxgERC33YjlLelk9aI6TzldZwNeum1mMH-l-qeKtpL2cg4acHZ-gF2cuUQN8k624o5NLhj-Km4cLXTHtKbkBxU2shI12LoGheAMm3-XmBOTfL5PMT9K",
+            "description": "Blocked Senders",
+            "source": "cloud",
+            "parentId": "eNoVzkkOgjAUANC7_K0kguIAiQsoxKCAA85xA_QzaKVKBVHj3dX9W7w3CIyrEnMKOij8ZbHHsU26vHAGXtZvXsSfHuS9H21qLSAn99LqebazVc2l8eS7NG05ItCYW6xX9nDmZphMVHKf8_F5U4n8YSpsz8xZ9MSsWkQd6nh1c6v9hTAbMQIJGA2voCchEyhBXIk7v2AZc4q_Cwl8SzEGWk_9wRpLkfMCdEWChDOK5f8rf763Yz78",
+            "userCount": 1,
+            "folderCount": 1
+        },
+        {
+            "id": "eNoVzsuOgjAUANB_uVtJFIUwkLigRQ2Gh8r4jBuhF2WmUocrVWP899H9WZwnEBZtg5UAD2LSdXDhwcDecdx3bykrxxt_19sm-Uq7Gf-Jzh07HoVriy38h9ocj52QMldG9fJ79JVGJyynFr_O1OR31VJ1Y6bcSpbmDzy187wvwljf_3QyJ3anIRggxeECXnmQhAYULV3VGZtCCXxfeJYEpu-4tvWGGhuqVA2eaUCppMDm87WcgWO-_gGRvz-b",
+            "description": "Relay",
+            "source": "cloud",
+            "parentId": "eNoVzkkOgjAUANC7_K0kguIAiQsoxKCAA85xA_QzaKVKBVHj3dX9W7w3CIyrEnMKOij8ZbHHsU26vHAGXtZvXsSfHuS9H21qLSAn99LqebazVc2l8eS7NG05ItCYW6xX9nDmZphMVHKf8_F5U4n8YSpsz8xZ9MSsWkQd6nh1c6v9hTAbMQIJGA2voCchEyhBXIk7v2AZc4q_Cwl8SzEGWk_9wRpLkfMCdEWChDOK5f8rf763Yz78",
+            "userCount": 0,
+            "folderCount": 0
+        },
+        {
+            "id": "eNoVzkkOgjAUANC7_K0kiqmRkrgQHIAADggOcSP0M2i1SgVR493V_Vu8N0hMqhILBjrk7PXQ1p7r8H2bWFFoTWhBm11n68dRTQPz6J5bPW9sr4mxHD7FJstatgwody_haqzN3BxTh5j3uZieokoWD0PlW27M4ifm1SLuMturm1vtL6TRyAEowNnhCnp64BIVSCp5F2csE8HwdzEDf6QO-7RHfrDGUhbiArqqQCo4w_L_JRrV1M8Xmyg_sA",
+            "description": "New Folder",
+            "source": "cloud",
+            "parentId": "eNoVzkkOgjAUANC7_K0kguIAiQsoxKCAA85xA_QzaKVKBVHj3dX9W7w3CIyrEnMKOij8ZbHHsU26vHAGXtZvXsSfHuS9H21qLSAn99LqebazVc2l8eS7NG05ItCYW6xX9nDmZphMVHKf8_F5U4n8YSpsz8xZ9MSsWkQd6nh1c6v9hTAbMQIJGA2voCchEyhBXIk7v2AZc4q_Cwl8SzEGWk_9wRpLkfMCdEWChDOK5f8rf763Yz78",
+            "userCount": 0,
+            "folderCount": 0
+        },
+        {
+            "id": "eNoVzs0SgVAUAOB3OVstRI1qxkJpTCb5ScSuuifi5nKPUox3l_23-D5AmFUSCwYWpMeyKSNjE_nzaSvp7cRhfNf7hyDd1WboXPyypy9cb6_Zm0kr4tOp51Focv8WbV1j6Z8xn2vOcyVm111FxctW-YHby7TFc7VOB8xb1M2jDtZkNzQGBThL7mDlCSdUIKvoKUqUmWDYVZwwmKqTkalrHaxRUiFuYKkK5IIzlP-uZpjG8PsDyv1ACQ",
+            "description": "adminnystuff",
+            "source": "cloud",
+            "parentId": "eNoVzrsOgjAUANB_uSsMgiUIiYPgIyjiA0UZgV4eWq1QqBLjv6v7Gc4bBGZdgxUFG-KpZKRP6vaZ1PNK08vgwlbGIA7SSFqhe_FvirGeeSfi7Cc9PxeF4onQYv79eJiNNn6J-ZK47ZYvrlEnqqejsZg5m7THstulOvXW8lXLYCeclxiDCowmD7DzhAlUIetEy2_YZJzir-KGwVSbmJZBflBiIyp-B1tTIeeMYvPvEnNo6p8vyK0_-g",
+            "userCount": 6,
+            "folderCount": 0
+        }
+    ]
+}

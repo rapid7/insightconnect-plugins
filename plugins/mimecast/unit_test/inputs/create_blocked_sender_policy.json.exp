@@ -1,0 +1,10 @@
+{
+      "description": "some test policy",
+      "from_part": "envelope_from",
+      "from_type": "everyone",
+      "from_value": "",
+      "option": "block_sender",
+      "source_ips": "",
+      "to_type": "everyone",
+      "to_value": ""
+}

@@ -1,0 +1,28 @@
+{
+   "meta":{
+      "status":200
+   },
+   "data":[
+
+   ],
+   "fail":[
+      {
+         "key":{
+            "url":"https://www.morele344.net/",
+            "matchType":"explicit",
+            "action":"permit",
+            "overrideUrl":false,
+            "disableUserAwareness":false,
+            "disableRewrite":false,
+            "disableLogClick":false
+         },
+         "errors":[
+            {
+               "code":"err_managed_url_exists_code",
+               "message":"The managed URL already exists; to update it, delete and recreate",
+               "retryable":false
+            }
+         ]
+      }
+   ]
+}

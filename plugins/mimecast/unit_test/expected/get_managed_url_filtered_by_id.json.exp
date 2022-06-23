@@ -1,0 +1,18 @@
+{
+    "response": [
+        {
+            "id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLhGwOgsDZixCK43rDjLP0YPWrtBgqVtVbzzFK8SjGLNE4",
+            "scheme": "https",
+            "domain": "www.morele344.net",
+            "port": -1,
+            "path": "/",
+            "queryString": "",
+            "matchType": "explicit",
+            "action": "permit",
+            "comment": "",
+            "disableUserAwareness": false,
+            "disableRewrite": false,
+            "disableLogClick": false
+        }
+    ]
+}
