@@ -49,6 +49,7 @@ Example input:
   "fail_on_http_errors": true,
   "ssl_verify": true
 }
+
 ```
 
 Example input (with Custom header auth):
@@ -249,7 +250,7 @@ This action is used to make a PATCH request.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |body|object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "user@example.com"}|
-|body_as_an_array|[]object|None|False|Payload (Array) to submit to the server when making the HTTP Request call|None|[{"user": "https://example.com"}]|
+|body_as_an_array|[]object|None|False|Payload (Array) to submit to the server when making the HTTP Request call|None|[{"user": "user@example.com"}]|
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
 
@@ -261,7 +262,7 @@ Example input:
     "user": "user@example.com"
   },
   "body_as_an_array": [{
-    'user': 'user@example.com'
+    "user": "user@example.com"
   }],
   "headers": {
     "Host": "rapid7.com"
