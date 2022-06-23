@@ -83,12 +83,8 @@ def convert_body_for_urlencoded(headers: Dict[str, str], body: Dict[str, Any]) -
     :param body: Body dict to convert to string with encoding
     :return: Body as an encoded string value
     """
-    print("First BODY: ", body)
-    for key, value in headers.items():
-        if key.lower() == "content-type" and value.lower() == "application/x-www-form-urlencoded":
-            body = urlencode(body)
-            print("FINAL BODY:", body)
-            break
+    if check_headers_for_urlencoded(headers):
+        body = urlencode(body)
     return body
 
 

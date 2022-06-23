@@ -29,7 +29,7 @@ class MockResponse:
 # This method will be used by the mock to replace requests.get
 def mocked_requests_get(*args, **kwargs):
     payload = [{"key": "value"}]
-    data = "client_id=12345&client_secret=passwd"
+    data = STUB_DATA
     if args[0] == "get":
         if args[1] == "www.google.com/":
             return MockResponse(payload, 200, data=None)
