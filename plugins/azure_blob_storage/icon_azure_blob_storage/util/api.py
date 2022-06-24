@@ -30,12 +30,12 @@ class AzureBlobStorageAPI:
         self._uri = COMMON_URI.format(account=account_name)
         self._logger = logger
         self._token_expires_on = 0
-        self._auth_token = ""
+        self.auth_token = None
 
     @property
-    def _auth_token(self) -> str:
+    def auth_token(self) -> str:
         if self._token_expires_on and self._token_expires_on - time.time() > 10:
-            return self.__auth_token
+            return self._auth_token
 
         request_data = {
             "grant_type": "client_credentials",
@@ -58,21 +58,21 @@ class AzureBlobStorageAPI:
                 data=response.text,
             )
         response_json = response.json()
-        self._auth_token = response_json.get("access_token")
+        self.auth_token = response_json.get("access_token")
         self._token_expires_on = int(response_json.get("expires_on"))
-        self._logger.info(f"Authentication Token: ****************{self.__auth_token[-5:]}")
+        self._logger.info(f"Authentication Token: ****************{self._auth_token[-5:]}")
 
-        return self.__auth_token
+        return self._auth_token
 
-    @_auth_token.setter
-    def _auth_token(self, auth_token):
-        self.__auth_token = auth_token
+    @auth_token.setter
+    def auth_token(self, auth_token):
+        self._auth_token = auth_token
 
     def _get_headers(self, additional_headers: dict = None) -> dict:
         base_headers = {
             "x-ms-version": "2021-04-10",
             "x-ms-date": datetime.datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S GMT"),
-            "Authorization": f"Bearer {self._auth_token}",
+            "Authorization": f"Bearer {self.auth_token}",
         }
         if additional_headers:
             return {**base_headers, **additional_headers}

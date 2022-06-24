@@ -1,10 +1,8 @@
 import insightconnect_plugin_runtime
-import requests
 
 from .schema import ConnectionSchema, Input
 
 # Custom imports below
-from icon_azure_blob_storage.connection.schema import Input
 from icon_azure_blob_storage.util.api import AzureBlobStorageAPI
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 
@@ -26,7 +24,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test(self):
         try:
-            if self.api_client._auth_token:
+            if self.api_client.auth_token:
                 return {"success": True}
         except PluginException as e:
             raise ConnectionTestException(cause=e.cause, assistance=e.assistance)

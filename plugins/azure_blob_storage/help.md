@@ -46,7 +46,7 @@ Example input:
 
 ### Actions
 
-#### Create container
+#### Create Container
 
 The Create Container action creates a new container under the specified account. If a container with the same name already exists, the operation fails.
 
@@ -102,9 +102,9 @@ The Delete Blob action marks the specified blob or snapshot for deletion. The bl
 |additional_headers|object|{}|False|Additional headers to pass to the API request|None|{"x-ms-client-request-id":"some_request_id","x-ms-lease-id":"exa12_lease_id"}|
 |blob_name|string|None|True|Name of the blob to delete|None|my_old_blob|
 |container_name|string|None|True|Name of the container|None|example_container_name|
-|snapshot_id|string|None|False|The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to delete|None|2022-05-20T15:38:24.8240240Z|
-|snapshots|string|None|False|Required if the blob has associated snapshots. Specify one of the following two options. 'include' - delete the base blob and all of its snapshots; ‘only’ - delete only the blob's snapshots and not the blob itself. This header should be specified only for a request against the base blob resource|['include', 'only']|include|
-|version_id|string|None|False|The versionid parameter is an opaque DateTime value that, when present, specifies the Version of the blob to delete|None|2022-05-24T15:22:30.1616830Z|
+|snapshot_id|string|None|False|The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to delete|None|2022-05-24 15:22:30.161683+00:00|
+|version_id|string|None|False|The versionid parameter is an opaque DateTime value that, when present, specifies the Version of the blob to delete|None|2022-05-20 15:38:24.824024+00:00|
+|snapshots|string|None|False|Required if the blob has associated snapshots. Specify one of the following two options - 'include' - delete the base blob and all of its snapshots, 'only' - delete only the blob's snapshots and not the blob itself. This header should be specified only for a request against the base blob resource|['include', 'only']|include|
 
 Example input:
 
@@ -191,8 +191,8 @@ This action is used to the Get Blob action reads or downloads a blob from the sy
 |blob_name|string|None|True|Name of the blob to retrieve|None|my_new_blob|
 |byte_to_string|boolean|None|False|Whether output data should be converte from bytes to string or not|None|True|
 |container_name|string|None|True|Name of the container|None|example_container_name|
-|snapshot_id|string|None|False|The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to delete|None|2022-05-24T15:22:30.1616830Z|
-|version_id|string|None|False|The versionid parameter is an opaque DateTime value that, when present, specifies the Version of the blob to delete|None|2022-05-20T15:38:24.8240240Z|
+|snapshot_id|string|None|False|The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to delete|None|2022-05-24 15:22:30.161683+00:00|
+|version_id|string|None|False|The versionid parameter is an opaque DateTime value that, when present, specifies the Version of the blob to delete|None|2022-05-20 15:38:24.824024+00:00|
 
 Example input:
 
@@ -234,8 +234,8 @@ The List Blobs action returns a list of the blobs under the specified container.
 |additional_headers|object|{}|False|Additional headers to pass to the API request|None|{"x-ms-client-request-id":"some_request_id"}|
 |container_name|string|None|True|Name of the container|None|example_container_name|
 |delimiter|string|None|False|When this parameter is provided, the action returns a 'blobs_with_delimiter_match' element in the output that acts as a placeholder for all blobs whose names begin with the same substring up to the appearance of the delimiter character. The delimiter may be a single character or a string|None|bob|
-|include|[]string|[]|False|Specifies one or more datasets to include in the response. Available values - 'snapshots', metadata, 'uncommittedblobs', 'copy', 'deleted', 'tags', 'versions', 'deletedwithversions', 'immutabilitypolicy', 'legalhold', 'permissions'|None|["uncommittedblob", "copy", "deleted", "tags", "versions"]|
-|max_results|integer|20|False|Specifies the maximum number of blobs to return. If the request does not specify max_results, or specifies a value greater than 100, the action will return up to 100 items.|None|12|
+|max_results|integer|20|False|Specifies the maximum number of blobs to return. If the request does not specify max_results, or specifies a value greater than 100, the action will return up to 100 items|None|12|
+|include|[]string|[]|False|Specifies one or more datasets to include in the response. Available values - 'snapshots', 'metadata', 'uncommittedblobs', 'copy', 'deleted', 'tags', 'versions', 'deletedwithversions', 'immutabilitypolicy', 'legalhold', 'permissions'|None|["uncommittedblob", "copy", "deleted", "tags", "versions"]|
 |prefix|string|None|False|Filters the results to return only blobs whose name begins with the specified prefix|None|new|
 |timeout|integer|30|False|Maximum time to wait for server response in seconds, between 0 and 30|None|14|
 
@@ -319,8 +319,8 @@ The List Containers action returns a list of the containers under the specified 
 |----|----|-------|--------|-----------|----|-------|
 |additional_headers|object|{}|False|Additional headers to pass to the API request|None|{"x-ms-client-request-id":"some_request_id"}|
 |include|[]string|[]|False|Specifies one or more datasets to include in the response. Datasets available to choose are 'system', 'deleted', and 'metadata'|None|["system", "deleted"]|
-|max_results|integer|20|False|Specifies the maximum number of containers to return. If the request does not specify max_results, or specifies a value greater than 100, the action will return up to 100 items.|None|12|
-|prefix|string|None|False|Filters the results to return only containers whose name begins with the specified prefix.|None|new|
+|prefix|string|None|False|Filters the results to return only containers whose name begins with the specified prefix|None|new|
+|max_results|integer|20|False|Specifies the maximum number of containers to return. If the request does not specify max_results, or specifies a value greater than 100, the action will return up to 100 items|None|12|
 |timeout|integer|30|False|Maximum time to wait for server response in seconds, between 0 and 30|None|14|
 
 Example input:
@@ -394,12 +394,12 @@ A blob name must conforming to the following naming rules:
 |----|----|-------|--------|-----------|----|-------|
 |access_tier|string|Cool|False|Indicates the tier to be set on blob. For page blobs on a premium storage account only. Valid values for block blob tiers are Hot/Cool/Archive. For detailed information about block blob tiering see https://docs.microsoft.com/enus/azure/storage/blobs/access -tiers-overview|['Hot', 'Cool', 'Archive']|Hot|
 |additional_headers|object|{}|False|Additional headers to pass to the API request|None|{"x-ms-client-request-id":"some_request_id","x-ms-lease-id":"some_123_id"}|
-|blob_content|string|None|False|Content of the new blob. This field is allowed only for BlockBlob type.|None|hello world|
-|blob_content_length|bytes|None|False|Required for page blobs. This header specifies the maximum size for the page blob, up to 8 TiB. The page blob size must be aligned to a 512-byte boundary.|None|512|
 |blob_name|string|None|True|Name of the new blob|None|my_new_blob|
-|blob_type|string|PageBlob|False|Specifies the type of blob to create - block blob, page blob, or append blob.|['BlockBlob', 'PageBlob', 'AppendBlob']|BlockBlob|
 |container_name|string|None|True|Container name where the new blob will be put|None|example_container_name|
 |timeout|integer|30|False|Maximum time to wait for server response in seconds, not larger than 10 minutes per megabyte|None|14|
+|blob_type|string|PageBlob|False|Specifies the type of blob to create - block blob, page blob, or append blob|['BlockBlob', 'PageBlob', 'AppendBlob']|BlockBlob|
+|blob_content|string|None|False|Content of the new blob. This field is allowed only for BlockBlob type|None|hello world|
+|blob_content_length|bytes|None|False|Required for page blobs. This header specifies the maximum size for the page blob, up to 8 TiB. The page blob size must be aligned to a 512-byte boundary|None|512|
 
 Example input:
 

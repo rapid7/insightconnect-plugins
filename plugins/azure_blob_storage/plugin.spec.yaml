@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: azure_blob_storage
 title: Azure Blob Storage
-description: Azure Blob storage is Microsoft's massively scalable and secure object storage for cloud-native workloads, archives, data lakes, high-performance computing, and machine learning. Azure Blob Storage helps you create data lakes for your analytics needs, and provides storage to build powerful cloud-native and mobile apps. Optimize costs with tiered storage for your long-term data, and flexibly scale up for high-performance computing and machine learning workloads.
+description: Azure Blob storage is Microsoft's massively scalable and secure object storage for cloud-native workloads, archives, data lakes, high-performance computing, and machine learning. Azure Blob Storage helps you create data lakes for your analytics needs, and provides storage to build powerful cloud-native and mobile apps. Optimize costs with tiered storage for your long-term data, and flexibly scale up for high-performance computing and machine learning workloads
 version: 1.0.0
 supported_versions: ["Azure Storage 2021-08-06"]
 vendor: rapid7
@@ -18,8 +18,8 @@ tags:
 - Azure
 - Storage
 hub_tags:
-  use_cases: []
-  keywords: [microsoft, azure, azure_blob_storage, storage]
+  use_cases: [data_enrichment, asset_inventory]
+  keywords: [microsoft, azure, storage]
   features: []
 types:
   container_properties:
@@ -195,7 +195,7 @@ connection:
     example: myaccount
 actions:
   create_container:
-    title: Create container
+    title: Create Container
     description: The Create Container action creates a new container under the specified account. If a container with the same name already exists, the operation fails
     input:
       container_name:
@@ -270,7 +270,7 @@ actions:
         required: false
         example: new
       max_results:
-        title: Max results
+        title: Max Results
         description: Max results given as input
         type: string
         required: false
@@ -374,7 +374,7 @@ actions:
         required: false
         example: bob
       max_results:
-        title: Max results
+        title: Max Results
         description: Max results given as input
         type: string
         required: false
@@ -385,7 +385,7 @@ actions:
         type: "[]blob"
         required: false
       blobs_with_delimiter_match:
-        title: Blobs With Delimiter Match
+        title: Blobs with Delimiter Match
         description: Blobs which contains 'delimiter' in name
         type: '[]string'
         required: false
@@ -496,7 +496,7 @@ actions:
         required: false
         example: 2022-05-20T15:38:24.8240240Z
       byte_to_string:
-        title: Byte To String
+        title: Byte to String
         description: Whether output data should be converte from bytes to string or not
         type: boolean
         required: false
@@ -545,7 +545,7 @@ actions:
         example: 2022-05-20T15:38:24.8240240Z
       snapshots:
         title: Snapshots
-        description: Required if the blob has associated snapshots. Specify one of the following two options. 'include' - delete the base blob and all of its snapshots; ‘only’ - delete only the blob's snapshots and not the blob itself. This header should be specified only for a request against the base blob resource
+        description: Required if the blob has associated snapshots. Specify one of the following two options - 'include' - delete the base blob and all of its snapshots, 'only' - delete only the blob's snapshots and not the blob itself. This header should be specified only for a request against the base blob resource
         type: string
         enum:
           - include

@@ -24,7 +24,7 @@ class TestConnection(TestCase):
             },
         )
 
-        self.assertEqual("valid_access_token", action.connection.api_client._auth_token)
+        self.assertEqual("valid_access_token", action.connection.api_client.auth_token)
 
     def test_connection_wrong_credentials(self, mock_request) -> None:
         with self.assertRaises(PluginException) as error:
@@ -37,7 +37,7 @@ class TestConnection(TestCase):
                     Input.TENANT_ID: "valid_tenant_id",
                 },
             )
-            auth_token = action.connection.api_client._auth_token
+            auth_token = action.connection.api_client.auth_token
 
         self.assertEqual("Unable to authorize against Azure Storage API.", error.exception.cause)
         self.assertEqual(

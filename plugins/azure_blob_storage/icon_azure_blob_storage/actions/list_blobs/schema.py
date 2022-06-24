@@ -108,7 +108,7 @@ class ListBlobsOutput(insightconnect_plugin_runtime.Output):
     },
     "blobs_with_delimiter_match": {
       "type": "array",
-      "title": "Blobs With Delimiter Match",
+      "title": "Blobs with Delimiter Match",
       "description": "Blobs which contains 'delimiter' in name",
       "items": {
         "type": "string"
@@ -123,7 +123,7 @@ class ListBlobsOutput(insightconnect_plugin_runtime.Output):
     },
     "max_results": {
       "type": "string",
-      "title": "Max results",
+      "title": "Max Results",
       "description": "Max results given as input",
       "order": 3
     },

@@ -89,7 +89,7 @@ class ListContainersOutput(insightconnect_plugin_runtime.Output):
     },
     "max_results": {
       "type": "string",
-      "title": "Max results",
+      "title": "Max Results",
       "description": "Max results given as input",
       "order": 2
     },
