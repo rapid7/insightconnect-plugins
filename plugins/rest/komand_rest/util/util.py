@@ -9,6 +9,9 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from requests import Response
 from requests.auth import HTTPBasicAuth, HTTPDigestAuth
 
+MESSAGE_CAUSE_BOTH_INPUTS = "You cannot send both inputs"
+MESSAGE_ASSISTANCE_BOTH_INPUTS = "Try sending data either as an array OR an object, not both."
+
 
 class Common:
     """Merge 2 dictionaries"""
@@ -63,7 +66,7 @@ def first(sequence, default=""):
     return next((x for x in sequence if x), default)
 
 
-def check_headers_for_urlencoded(headers: Dict[str, str]) -> bool:
+def check_headers_for_urlencoded(headers: Union[Dict[str, str], None]) -> bool:
     """
     This method will check the headers for 'content-type' == 'application/x-www-form-urlencoded'
     :param headers: Headers dict to read
@@ -74,6 +77,7 @@ def check_headers_for_urlencoded(headers: Dict[str, str]) -> bool:
     for key, value in headers.items():
         if key.lower() == "content-type" and value.lower() == "application/x-www-form-urlencoded":
             return True
+    return False
 
 
 def convert_body_for_urlencoded(headers: Dict[str, str], body: Dict[str, Any]) -> Union[Dict[str, Any], str]:

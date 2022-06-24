@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import PatchInput, PatchOutput, Component, Input, Output
 
 # Custom imports below
-from komand_rest.util.util import Common
+from komand_rest.util.util import Common, MESSAGE_CAUSE_BOTH_INPUTS, MESSAGE_ASSISTANCE_BOTH_INPUTS
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
@@ -26,8 +26,8 @@ class Patch(insightconnect_plugin_runtime.Action):
 
         if body_array and body_non_array:
             raise PluginException(
-                cause="You cannot send both inputs",
-                assistance="Try sending data either as an array OR an object, not both.",
+                cause=MESSAGE_CAUSE_BOTH_INPUTS,
+                assistance=MESSAGE_ASSISTANCE_BOTH_INPUTS,
             )
         elif body_array:
             data = body_array

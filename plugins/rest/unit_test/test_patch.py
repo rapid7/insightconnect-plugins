@@ -7,6 +7,7 @@ from mockconnection import MockConnection
 sys.path.append(os.path.abspath("../"))
 from komand_rest.actions.patch import Patch
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_rest.util.util import MESSAGE_CAUSE_BOTH_INPUTS, MESSAGE_ASSISTANCE_BOTH_INPUTS
 from parameterized import parameterized
 
 
@@ -95,7 +96,7 @@ class TestPatch(TestCase):
         self.assertEqual(results["body_object"], {"SampleSuccessBody": "SampleVal"})
 
     def test_post_with_both_bodies(self):
-        with self.assertRaises(PluginException) as e:
+        with self.assertRaises(PluginException) as error:
             test_conn = MockConnection()
             test_action = Patch()
 
@@ -108,8 +109,8 @@ class TestPatch(TestCase):
             }
 
             test_action.run(action_params)
-        cause = "You cannot send both inputs"
-        assistance = "Try sending data either as an array OR an object, not both."
+        cause = MESSAGE_CAUSE_BOTH_INPUTS
+        assistance = MESSAGE_ASSISTANCE_BOTH_INPUTS
 
-        self.assertEqual(cause, e.exception.cause)
-        self.assertEqual(assistance, e.exception.assistance)
+        self.assertEqual(cause, error.exception.cause)
+        self.assertEqual(assistance, error.exception.assistance)
