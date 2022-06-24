@@ -80,7 +80,7 @@ class TestPatch(TestCase):
             ("https://www.google.com", {}, [], {"client_id": "name", "client_secret": "passwd"}),
         ]
     )
-    def test_post_with_either_value(self, route, headers, body_as_an_array, body):
+    def test_patch_with_either_value(self, route, headers, body_as_an_array, body):
         test_conn = MockConnection()
         test_action = Patch()
 
@@ -95,7 +95,7 @@ class TestPatch(TestCase):
         results = test_action.run(action_params)
         self.assertEqual(results["body_object"], {"SampleSuccessBody": "SampleVal"})
 
-    def test_post_with_both_bodies(self):
+    def test_patch_with_both_bodies(self):
         with self.assertRaises(PluginException) as error:
             test_conn = MockConnection()
             test_action = Patch()
