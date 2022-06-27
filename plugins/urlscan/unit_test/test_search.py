@@ -25,7 +25,7 @@ class TestSearch(TestCase):
 
     @parameterized.expand(Util.load_json("payloads/search_parameters_bad.json.resp").get("parameters"))
     def test_search_bad(self, mock_get, name, input_type, query, sort, cause, assistance):
-        with self.assertRaises(PluginException) as e:
+        with self.assertRaises(PluginException) as error:
             self.action.run({Input.INPUT_TYPE: input_type, Input.Q: query, Input.SORT: sort})
-        self.assertEqual(e.exception.cause, cause)
-        self.assertEqual(e.exception.assistance, assistance)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)
