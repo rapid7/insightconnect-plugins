@@ -39,8 +39,8 @@ class AlertParams:
                 "foundDateFrom": int(self.found_date_from) if self.found_date_from else None,
                 "foundDateTo": int(self.found_date_to) if self.found_date_to else None,
                 "assigned": self.assigned == "Assigned" if self.assigned else None,
-                "isFlagged": self.is_flagged == "Flagged" if self.is_flagged else None,
-                "isClosed": self.is_closed == "Closed" if self.is_closed else None,
+                "isFlagged": json.dumps(self.is_flagged == "Flagged" if self.is_flagged else None),
+                "isClosed": json.dumps(self.is_closed == "Closed" if self.is_closed else None),
                 "hasIoc": self.has_ioc,
             }
         )
