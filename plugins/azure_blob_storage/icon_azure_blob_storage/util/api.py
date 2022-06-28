@@ -1,3 +1,4 @@
+import base64
 import datetime
 import json
 import xmltodict
@@ -175,7 +176,7 @@ class AzureBlobStorageAPI:
             endpoint=BLOB_ENDPOINT.format(container_name=container_name, blob_name=blob_name),
             headers=headers,
             params={UrlParam.TIMEOUT: timeout},
-            data=block_blob_content.encode(),
+            data=block_blob_content.encode().decode("unicode_escape").encode("raw_unicode_escape"),
         )
         return True
 
@@ -204,7 +205,7 @@ class AzureBlobStorageAPI:
         if byte_to_string:
             return response.text
 
-        return response.content
+        return str(base64.b64encode(response.content), "utf-8")
 
     def delete_blob(
         self,

@@ -104,8 +104,7 @@ The Delete Blob action marks the specified blob or snapshot for deletion. The bl
 |container_name|string|None|True|Name of the container|None|example_container_name|
 |snapshot_id|string|None|False|The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to delete|None|2022-05-24 15:22:30.161683+00:00|
 |version_id|string|None|False|The versionid parameter is an opaque DateTime value that, when present, specifies the Version of the blob to delete|None|2022-05-20 15:38:24.824024+00:00|
-|snapshots|string|None|False|Required if the blob has associated snapshots. Specify one of the following two options - 'include' - delete the base blob and all of its snapshots, 'only' - delete only the blob's snapshots and not the blob itself. This header should be specified only for a request against the base blob resource|['include', 'only']|include|
-
+|snapshots|string|None|False|Required if the blob has associated snapshots. Specify one of the following two options - 'include' - delete the base blob and all of its snapshots, 'only' - delete only the blob's snapshots and not the blob itself. This header should be specified only for a request against the base blob resource|['include', 'only', 'None']|include|
 Example input:
 
 ```
@@ -392,7 +391,7 @@ A blob name must conforming to the following naming rules:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|access_tier|string|Cool|False|Indicates the tier to be set on blob. For page blobs on a premium storage account only. Valid values for block blob tiers are Hot/Cool/Archive. For detailed information about block blob tiering see https://docs.microsoft.com/enus/azure/storage/blobs/access -tiers-overview|['Hot', 'Cool', 'Archive']|Hot|
+|access_tier|string|Cool|False|Indicates the tier to be set on blob. For page blobs on a premium storage account only. Valid values for block blob tiers are Hot/Cool/Archive. For detailed information about block blob tiering see https://docs.microsoft.com/enus/azure/storage/blobs/access -tiers-overview|['Hot', 'Cool', 'Archive', 'None']|Hot|
 |additional_headers|object|{}|False|Additional headers to pass to the API request|None|{"x-ms-client-request-id":"some_request_id","x-ms-lease-id":"some_123_id"}|
 |blob_name|string|None|True|Name of the new blob|None|my_new_blob|
 |container_name|string|None|True|Container name where the new blob will be put|None|example_container_name|

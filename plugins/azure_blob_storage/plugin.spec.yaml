@@ -439,6 +439,7 @@ actions:
           - Hot
           - Cool
           - Archive
+          - None
         example: Hot
         default: Cool
       blob_content_length:
@@ -550,6 +551,7 @@ actions:
         enum:
           - include
           - only
+          - None
         required: false
         example: include
       additional_headers:

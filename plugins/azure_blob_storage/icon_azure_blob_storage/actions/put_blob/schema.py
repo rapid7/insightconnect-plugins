@@ -37,7 +37,8 @@ class PutBlobInput(insightconnect_plugin_runtime.Input):
       "enum": [
         "Hot",
         "Cool",
-        "Archive"
+        "Archive",
+        "None"
       ],
       "order": 6
     },

@@ -59,7 +59,8 @@ class DeleteBlobInput(insightconnect_plugin_runtime.Input):
       "description": "Required if the blob has associated snapshots. Specify one of the following two options - 'include' - delete the base blob and all of its snapshots, 'only' - delete only the blob's snapshots and not the blob itself. This header should be specified only for a request against the base blob resource",
       "enum": [
         "include",
-        "only"
+        "only",
+        "None"
       ],
       "order": 5
     },

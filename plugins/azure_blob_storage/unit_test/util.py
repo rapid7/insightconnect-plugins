@@ -29,13 +29,15 @@ class Util:
         return action
 
     @staticmethod
-    def read_file_to_string(filename):
-        with open(filename, "r", encoding="utf-8") as file_reader:
+    def read_file_to_string(filename: str) -> str:
+        with open(
+            os.path.join(os.path.dirname(os.path.realpath(__file__)), filename), "r", encoding="utf-8"
+        ) as file_reader:
             return file_reader.read()
 
     @staticmethod
-    def read_file_to_dict(filename):
-        return json.loads(Util.read_file_to_string(os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)))
+    def read_file_to_dict(filename: str) -> dict:
+        return json.loads(Util.read_file_to_string(filename))
 
     @staticmethod
     def mock_request(*args, **kwargs):
@@ -47,13 +49,9 @@ class Util:
                     if filename == "delete_blob_headers.json.resp":
                         self.headers = Util.read_file_to_dict(f"responses/{filename}")
                     elif "get_blob" in filename:
-                        self.content = Util.read_file_to_string(
-                            os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/{filename}")
-                        )
+                        self.content = Util.read_file_to_string(f"responses/{filename}")
                     else:
-                        self.text = Util.read_file_to_string(
-                            os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/{filename}")
-                        )
+                        self.text = Util.read_file_to_string(f"responses/{filename}")
 
             def json(self):
                 return json.loads(self.text)
@@ -104,11 +102,11 @@ class Util:
                 "timeout": 30,
             }:
                 return MockResponse(200, "list_blobs.xml.resp")
-            if kwargs.get("params", {}).get("prefix") == None:
+            if kwargs.get("params", {}).get("prefix") is None:
                 return MockResponse(200, "list_blobs_without_prefix.xml.resp")
             if kwargs.get("params", {}).get("include") == []:
                 return MockResponse(200, "list_blobs_without_include.xml.resp")
-            if kwargs.get("params", {}).get("delimiter") == None:
+            if kwargs.get("params", {}).get("delimiter") is None:
                 return MockResponse(200, "list_blobs_without_delimiter.xml.resp")
             if kwargs.get("params", {}).get("include") == ["taRANDOMgs", "metadata", "copy", "deleted"]:
                 return MockResponse(400, "list_blobs_invalid_include.xml.resp")

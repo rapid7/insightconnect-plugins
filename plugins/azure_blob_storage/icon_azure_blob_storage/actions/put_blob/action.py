@@ -15,6 +15,9 @@ class PutBlob(insightconnect_plugin_runtime.Action):
 
     def run(self, params: dict = None):
         timeout = params.get(Input.TIMEOUT)
+        access_tier = params.get(Input.ACCESS_TIER)
+        access_tier = None if access_tier == "None" else access_tier
+
         if timeout and timeout < 1:
             self.logger.info(f"Provided timeout = {timeout} is incorrect. Setting timeout = {DEFAULT_TIMEOUT}s")
             timeout = DEFAULT_TIMEOUT
@@ -24,7 +27,7 @@ class PutBlob(insightconnect_plugin_runtime.Action):
             blob_name=params.get(Input.BLOB_NAME),
             blob_type=params.get(Input.BLOB_TYPE),
             timeout=timeout,
-            access_tier=params.get(Input.ACCESS_TIER),
+            access_tier=access_tier,
             block_blob_content=params.get(Input.BLOB_CONTENT, ""),
             additional_headers=params.get(Input.ADDITIONAL_HEADERS, {}),
             page_blob_content_length=params.get(Input.BLOB_CONTENT_LENGTH),

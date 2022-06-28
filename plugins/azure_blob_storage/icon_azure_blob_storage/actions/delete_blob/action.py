@@ -12,12 +12,14 @@ class DeleteBlob(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params: dict = None):
+        delete_snapshots = params.get(Input.SNAPSHOTS)
+        delete_snapshots = None if delete_snapshots == "None" else delete_snapshots
         delete_type_permanent = self.connection.api_client.delete_blob(
             container_name=params.get(Input.CONTAINER_NAME),
             blob_name=params.get(Input.BLOB_NAME),
             snapshot_id=params.get(Input.SNAPSHOT_ID, None),
             version_id=params.get(Input.VERSION_ID, None),
-            delete_snapshots=params.get(Input.SNAPSHOTS, {}),
+            delete_snapshots=delete_snapshots,
             additional_headers=params.get(Input.ADDITIONAL_HEADERS, {}),
         )
         delete_type = "soft" if delete_type_permanent == "false" else "permanent"
