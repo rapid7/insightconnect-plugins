@@ -49,7 +49,7 @@ class Util:
                     if filename == "delete_blob_headers.json.resp":
                         self.headers = Util.read_file_to_dict(f"responses/{filename}")
                     elif "get_blob" in filename:
-                        self.content = Util.read_file_to_string(f"responses/{filename}")
+                        self.content = Util.read_file_to_string(f"responses/{filename}").encode().decode("unicode_escape").encode("raw_unicode_escape")
                     else:
                         self.text = Util.read_file_to_string(f"responses/{filename}")
 
