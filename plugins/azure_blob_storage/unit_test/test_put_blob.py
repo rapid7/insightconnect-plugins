@@ -59,8 +59,8 @@ class TestPutBlob(TestCase):
             [
                 "invalid_blob_type",
                 Util.read_file_to_dict("inputs/put_blob_invalid_blob_type.json.inp"),
-                "Resource already exists.",
-                "Please change resource name or contact support.",
+                "Request made conflicts with an existing resource.",
+                "Please verify inputs and if the issue persists, contact support.",
                 Util.read_file_to_string("expected/put_blob_invalid_blob_type.json.exp"),
             ],
         ]

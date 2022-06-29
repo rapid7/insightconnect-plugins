@@ -261,8 +261,8 @@ class AzureBlobStorageAPI:
                 )
             if response.status_code == 409:
                 raise PluginException(
-                    cause="Resource already exists.",
-                    assistance="Please change resource name or contact support.",
+                    cause="Request made conflicts with an existing resource.",
+                    assistance="Please verify inputs and if the issue persists, contact support.",
                     data=xml_to_json(response.text),
                 )
             if 400 <= response.status_code < 500:

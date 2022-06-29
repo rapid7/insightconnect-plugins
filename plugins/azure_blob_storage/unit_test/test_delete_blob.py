@@ -73,8 +73,8 @@ class TestDeleteBlob(TestCase):
             [
                 "snapshots_not_specified",
                 Util.read_file_to_dict("inputs/delete_blob_no_snapshots.json.inp"),
-                "Resource already exists.",
-                "Please change resource name or contact support.",
+                "Request made conflicts with an existing resource.",
+                "Please verify inputs and if the issue persists, contact support.",
                 Util.read_file_to_string("expected/delete_blob_no_snapshots.json.exp"),
             ],
         ]

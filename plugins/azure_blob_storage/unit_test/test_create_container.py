@@ -40,8 +40,8 @@ class TestCreateContainer(TestCase):
             [
                 "container_exists",
                 {Input.CONTAINER_NAME: "existing-container-name"},
-                "Resource already exists.",
-                "Please change resource name or contact support.",
+                "Request made conflicts with an existing resource.",
+                "Please verify inputs and if the issue persists, contact support.",
                 Util.read_file_to_string("expected/create_container_container_exists.json.exp"),
             ],
         ]
