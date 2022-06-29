@@ -5,7 +5,10 @@ import xmltodict
 def xml_to_json(xml_string: str) -> str:
     if not xml_string:
         return ""
-    return json.dumps(xmltodict.parse(xml_string), indent=2)
+    try:
+        return json.dumps(xmltodict.parse(xml_string), indent=2)
+    except:
+        return xml_string
 
 
 def dict_to_list(item) -> list:

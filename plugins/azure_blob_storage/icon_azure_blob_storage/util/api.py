@@ -311,7 +311,7 @@ class AzureBlobStorageAPI:
         if access_tier:
             additional_headers[HeaderParam.ACCESS_TIER] = access_tier
         if page_blob_content_length:
-            additional_headers[HeaderParam.BLOB_CONTENT_LENGTH] = page_blob_content_length
+            additional_headers[HeaderParam.BLOB_CONTENT_LENGTH] = str(page_blob_content_length)
         if block_blob_content:
             additional_headers[HeaderParam.CONTENT_LENGTH] = str(len(block_blob_content))
         return self._get_headers(additional_headers)

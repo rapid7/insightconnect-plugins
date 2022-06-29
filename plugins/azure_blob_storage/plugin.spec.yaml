@@ -445,7 +445,7 @@ actions:
       blob_content_length:
         title: Blob Content Length
         description: Required for page blobs. This header specifies the maximum size for the page blob, up to 8 TiB. The page blob size must be aligned to a 512-byte boundary
-        type: bytes
+        type: integer
         required: false
         example: 512
       additional_headers:
@@ -512,10 +512,10 @@ actions:
     output:
       data:
         title: Data
-        description: Blob byte data
+        description: Base64 encoded Blob data
         type: bytes
         required: true
-        example: \x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x03\xe9\x00\x00\x01\xe2\x08\x06\x00\x00\x00\x94e\x8d\x95\x00\x0
+        example: aGVsbG8gYXp1cmUgYmxvYiBzdG9yYWdlIHBsdWdpbg==
   delete_blob:
     title: Delete Blob
     description: The Delete Blob action marks the specified blob or snapshot for deletion. The blob is later deleted during garbage collection. Note that in order to delete a blob, you must delete all of its snapshots. You can delete both at the same time using snapshots = include parameter

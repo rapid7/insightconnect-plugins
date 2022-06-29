@@ -102,9 +102,10 @@ The Delete Blob action marks the specified blob or snapshot for deletion. The bl
 |additional_headers|object|{}|False|Additional headers to pass to the API request|None|{"x-ms-client-request-id":"some_request_id","x-ms-lease-id":"exa12_lease_id"}|
 |blob_name|string|None|True|Name of the blob to delete|None|my_old_blob|
 |container_name|string|None|True|Name of the container|None|example_container_name|
-|snapshot_id|string|None|False|The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to delete|None|2022-05-24 15:22:30.161683+00:00|
-|version_id|string|None|False|The versionid parameter is an opaque DateTime value that, when present, specifies the Version of the blob to delete|None|2022-05-20 15:38:24.824024+00:00|
+|snapshot_id|string|None|False|The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to delete|None|2022-05-24 15:22:30.161683|
+|version_id|string|None|False|The versionid parameter is an opaque DateTime value that, when present, specifies the Version of the blob to delete|None|2022-05-20 15:38:24.824024|
 |snapshots|string|None|False|Required if the blob has associated snapshots. Specify one of the following two options - 'include' - delete the base blob and all of its snapshots, 'only' - delete only the blob's snapshots and not the blob itself. This header should be specified only for a request against the base blob resource|['include', 'only', 'None']|include|
+
 Example input:
 
 ```
@@ -190,8 +191,8 @@ This action is used to the Get Blob action reads or downloads a blob from the sy
 |blob_name|string|None|True|Name of the blob to retrieve|None|my_new_blob|
 |byte_to_string|boolean|None|False|Whether output data should be converte from bytes to string or not|None|True|
 |container_name|string|None|True|Name of the container|None|example_container_name|
-|snapshot_id|string|None|False|The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to delete|None|2022-05-24 15:22:30.161683+00:00|
-|version_id|string|None|False|The versionid parameter is an opaque DateTime value that, when present, specifies the Version of the blob to delete|None|2022-05-20 15:38:24.824024+00:00|
+|snapshot_id|string|None|False|The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to delete|None|2022-05-24 15:22:30.161683|
+|version_id|string|None|False|The versionid parameter is an opaque DateTime value that, when present, specifies the Version of the blob to delete|None|2022-05-20 15:38:24.824024|
 
 Example input:
 
@@ -212,13 +213,13 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|bytes|True|Blob byte data|
+|data|bytes|True|Base64 encoded Blob data|
 
 Example output:
 
 ```
 {
-  "data": "\\x89PNG\\r\\n\\x1a\\n\\x00\\x00\\x00\\rIHDR\\x00\\x00\\x00\\x00\\x00IEND\\xaeB`\\x82"
+  "data": "aGVsbG8gYXp1cmUgYmxvYiBzdG9yYWdlIHBsdWdpbg=="
 }
 ```
 
@@ -274,26 +275,49 @@ Example output:
 
 ```
 {
-  "prefix": "my",
+  "prefix": "new",
+  "delimiter": "plugin",
+  "max_results": "20",
+  "blobs": [
   "delimiter": "plugin",
   "max_results": "20",
   "blobs": [
     {
-      "name": "mybllob2",
+      "name": "new_blob.PNG",
+      "version_id": "2022-06-14T12:32:03.9792491Z",
+      "is_current_version": "true",
       "properties": {
-        "last_modified": "Fri, 20 May 2022 15:42:23 GMT",
-        "content_type": "application/octet-stream",
+        "creation_time": "Wed, 25 May 2022 13:03:28 GMT",
+        "tag_count": "2",
+        "server_encrypted": "true",
+        "last_modified": "Tue, 14 Jun 2022 12:32:03 GMT",
+        "content_type": "image/png",
         "blob_type": "BlockBlob",
         "access_tier": "Hot",
-        "etag": "0x8DA3A77554265C1"
+        "etag": "0x8DA4E01E2EE85B"
       },
-      "metadata": {},
-      "tags": []
+      "metadata": {
+        "key": "value",
+        "second_key": "second_value"
+      },
+      "tags": [
+        {
+          "Key": "example",
+          "Value": "value"
+        },
+        {
+          "Key": "x",
+          "Value": "z"
+        }
+      ]
     },
     {
-      "name": "mypeblob2",
+      "name": "new_example_blob",
       "version_id": "2022-06-15T08:35:15.4662051Z",
+      "is_current_version": "true",
       "properties": {
+        "creation_time": "Wed, 15 Jun 2022 08:35:15 GMT",
+        "server_encrypted": "true",
         "last_modified": "Wed, 15 Jun 2022 08:35:15 GMT",
         "content_type": "application/octet-stream",
         "blob_type": "BlockBlob",
@@ -304,7 +328,11 @@ Example output:
       "tags": []
     }
   ],
-  "blobs_with_delimiter_match": []
+  "blobs_with_delimiter_match": [
+    "example_bob",
+    "blob_named_bob",
+    "random123bob"
+  ]
 }
 ```
 
@@ -398,7 +426,7 @@ A blob name must conforming to the following naming rules:
 |timeout|integer|30|False|Maximum time to wait for server response in seconds, not larger than 10 minutes per megabyte|None|14|
 |blob_type|string|PageBlob|False|Specifies the type of blob to create - block blob, page blob, or append blob|['BlockBlob', 'PageBlob', 'AppendBlob']|BlockBlob|
 |blob_content|string|None|False|Content of the new blob. This field is allowed only for BlockBlob type|None|hello world|
-|blob_content_length|bytes|None|False|Required for page blobs. This header specifies the maximum size for the page blob, up to 8 TiB. The page blob size must be aligned to a 512-byte boundary|None|512|
+|blob_content_length|integer|None|False|Required for page blobs. This header specifies the maximum size for the page blob, up to 8 TiB. The page blob size must be aligned to a 512-byte boundary|None|512|
 
 Example input:
 

@@ -85,7 +85,7 @@ class GetBlobOutput(insightconnect_plugin_runtime.Output):
       "type": "string",
       "title": "Data",
       "displayType": "bytes",
-      "description": "Blob byte data",
+      "description": "Base64 encoded Blob data",
       "format": "bytes",
       "order": 1
     }

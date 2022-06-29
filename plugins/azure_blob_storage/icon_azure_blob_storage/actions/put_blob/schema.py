@@ -56,11 +56,9 @@ class PutBlobInput(insightconnect_plugin_runtime.Input):
       "order": 5
     },
     "blob_content_length": {
-      "type": "string",
+      "type": "integer",
       "title": "Blob Content Length",
-      "displayType": "bytes",
       "description": "Required for page blobs. This header specifies the maximum size for the page blob, up to 8 TiB. The page blob size must be aligned to a 512-byte boundary",
-      "format": "bytes",
       "order": 7
     },
     "blob_name": {
