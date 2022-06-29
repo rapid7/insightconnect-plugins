@@ -25,7 +25,7 @@ class GetCompleteAlertById(insightconnect_plugin_runtime.Action):
                 Output.FOUND_DATE: response.get("FoundDate"),
                 Output.UPDATE_DATE: response.get("UpdateDate"),
                 Output.TAKEDOWN_STATUS: response.get("TakedownStatus"),
-                Output.IS_CLOSED: response.get("IsClosed", False),
+                Output.IS_CLOSED: response.get("Closed").get("IsClosed", False),
                 Output.IS_FLAGGED: response.get("IsFlagged", False),
                 Output.LEAK_NAME: response.get("LeakName"),
             }
