@@ -191,8 +191,8 @@ This action is used to the Get Blob action reads or downloads a blob from the sy
 |blob_name|string|None|True|Name of the blob to retrieve|None|my_new_blob|
 |byte_to_string|boolean|None|False|Whether output data should be converte from bytes to string or not|None|True|
 |container_name|string|None|True|Name of the container|None|example_container_name|
-|snapshot_id|string|None|False|The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to delete|None|2022-05-24 15:22:30.161683|
-|version_id|string|None|False|The versionid parameter is an opaque DateTime value that, when present, specifies the Version of the blob to delete|None|2022-05-20 15:38:24.824024|
+|snapshot_id|string|None|False|The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot|None|2022-05-24 15:22:30.161683|
+|version_id|string|None|False|The versionid parameter is an opaque DateTime value that, when present, specifies the Version of the blob|None|2022-05-20 15:38:24.824024|
 
 Example input:
 

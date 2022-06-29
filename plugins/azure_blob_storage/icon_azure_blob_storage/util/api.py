@@ -245,8 +245,14 @@ class AzureBlobStorageAPI:
                     assistance="Please verify inputs and if the issue persists, contact support.",
                     data=xml_to_json(response.text),
                 )
-            if response.status_code in [401, 403]:
-                raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
+            if response.status_code == 401:
+                raise PluginException(preset=PluginException.Preset.API_KEY, data=xml_to_json(response.text))
+            if response.status_code == 403:
+                raise PluginException(
+                    cause="Operation is not allowed.",
+                    assistance="Please verify inputs and if the issue persists, contact support.",
+                    data=xml_to_json(response.text),
+                )
             if response.status_code == 404:
                 raise PluginException(
                     cause="Resource not found.",
@@ -262,10 +268,10 @@ class AzureBlobStorageAPI:
             if 400 <= response.status_code < 500:
                 raise PluginException(
                     preset=PluginException.Preset.UNKNOWN,
-                    data=response.text,
+                    data=xml_to_json(response.text),
                 )
             if response.status_code >= 500:
-                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
+                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=xml_to_json(response.text))
 
             if 200 <= response.status_code < 300:
                 return response

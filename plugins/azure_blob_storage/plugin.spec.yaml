@@ -486,13 +486,13 @@ actions:
         example: my_new_blob
       snapshot_id:
         title: Snapshot ID
-        description: The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to delete
+        description: The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot
         type: string
         required: false
         example: 2022-05-24T15:22:30.1616830Z
       version_id:
         title: Version ID
-        description: The versionid parameter is an opaque DateTime value that, when present, specifies the Version of the blob to delete
+        description: The versionid parameter is an opaque DateTime value that, when present, specifies the Version of the blob
         type: string
         required: false
         example: 2022-05-20T15:38:24.8240240Z

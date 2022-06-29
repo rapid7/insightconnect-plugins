@@ -54,13 +54,13 @@ class GetBlobInput(insightconnect_plugin_runtime.Input):
     "snapshot_id": {
       "type": "string",
       "title": "Snapshot ID",
-      "description": "The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot to delete",
+      "description": "The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot",
       "order": 3
     },
     "version_id": {
       "type": "string",
       "title": "Version ID",
-      "description": "The versionid parameter is an opaque DateTime value that, when present, specifies the Version of the blob to delete",
+      "description": "The versionid parameter is an opaque DateTime value that, when present, specifies the Version of the blob",
       "order": 4
     }
   },
