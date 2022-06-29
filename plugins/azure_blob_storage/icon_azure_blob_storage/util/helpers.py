@@ -7,7 +7,7 @@ def xml_to_json(xml_string: str) -> str:
         return ""
     try:
         return json.dumps(xmltodict.parse(xml_string), indent=2)
-    except:
+    except xmltodict.expat.ExpatError:
         return xml_string
 
 
