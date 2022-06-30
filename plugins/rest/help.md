@@ -13,7 +13,7 @@ This plugin is often used to integrate with ad-hoc 3rd party API's in a workflow
 
 # Supported Product Versions
 
-* 2022-02-22
+* 2022-06-15
 
 # Documentation
 
@@ -40,15 +40,16 @@ Example input:
   "authentication_type": "Basic Auth",
   "base_url": "https://httpbin.org",
   "basic_auth_credentials": {
-    "username": "user@example.com",
+    "username": "user@example.com", 
     "password": "mypassword"
   },
   "default_headers": {
-    "User-Agent": "Rapid7 InsightConnect"
+    "User-Agent": "Rapid7 InsightConnect" 
   },
   "fail_on_http_errors": true,
   "ssl_verify": true
 }
+
 ```
 
 Example input (with Custom header auth):
@@ -249,6 +250,7 @@ This action is used to make a PATCH request.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |body|object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "user@example.com"}|
+|body_as_an_array|[]object|None|False|Payload (Array) to submit to the server when making the HTTP Request call|None|[{"user": "user@example.com"}]|
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
 
@@ -259,6 +261,9 @@ Example input:
   "body": {
     "user": "user@example.com"
   },
+  "body_as_an_array": [{
+    "user": "user@example.com"
+  }],
   "headers": {
     "Host": "rapid7.com"
   },
@@ -453,6 +458,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
+* 5.0.3 - POST supports x-www-form-urlencoded | PATCH to now take in an array of objects
 * 5.0.2 - Fix issue with JSON data parser for PATCH request
 * 5.0.1 - Update to make 'No Authentication' the default connection type
 * 5.0.0 - Add ability for user to choose if the plugin should fail on standard HTTP error codes (4xx-5xx) | Add 'No Authentication' as another authentication type

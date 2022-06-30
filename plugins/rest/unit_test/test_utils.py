@@ -8,12 +8,17 @@ sys.path.append(os.path.abspath("../"))
 import logging
 from unittest import TestCase, mock
 
+from parameterized import parameterized
+
+STUB_DATA = "client_id=12345&client_secret=passwd"
+
 
 class MockResponse:
-    def __init__(self, json_data, status_code):
+    def __init__(self, json_data, status_code, data):
         self.json_data = json_data
         self.status_code = status_code
         self.text = "This is some error text"
+        self.data = data
 
     def json(self):
         if self.status_code == 418:
@@ -24,17 +29,19 @@ class MockResponse:
 # This method will be used by the mock to replace requests.get
 def mocked_requests_get(*args, **kwargs):
     payload = [{"key": "value"}]
-
+    data = STUB_DATA
     if args[0] == "get":
         if args[1] == "www.google.com/":
-            return MockResponse(payload, 200)
+            return MockResponse(payload, 200, data=None)
         if args[1] == "www.401.com/":
-            return MockResponse(payload, 401)
+            return MockResponse(payload, 401, data=None)
         if args[1] == "www.418.com/":
-            return MockResponse(payload, 418)
+            return MockResponse(payload, 418, data=None)
+        if args[1] == "www.httpbin.org/":
+            return MockResponse(None, 200, data)
 
     print(f"mocked_requests_get failed looking for: {args[0]}")
-    return MockResponse(None, 404)
+    return MockResponse(None, 404, None)
 
 
 class TestUtil(TestCase):
@@ -50,7 +57,7 @@ class TestUtil(TestCase):
     def test_body_object(self):
         common = Common()
 
-        test_response = MockResponse([{"key": "value"}], 200)
+        test_response = MockResponse([{"key": "value"}], 200, data=None)
         actual = common.body_object(test_response)
         expected = {"object": [{"key": "value"}]}
 
@@ -110,6 +117,23 @@ class TestUtil(TestCase):
             api.call_api("get", "/", None, None, None)
 
         self.assertIn("I am a teapot", e.exception.data.msg)
+
+    """
+    Tests the call_api function for data string
+    """
+
+    @parameterized.expand(
+        [
+            ("get", "/", STUB_DATA, None, {"Content-Type": "application/x-www-form-urlencoded"}, STUB_DATA),
+            ("get", "/", STUB_DATA, None, {"Content-Type": "application/json"}, STUB_DATA),
+        ]
+    )
+    @mock.patch("requests.request", side_effect=mocked_requests_get)
+    def test_data_string(self, method, route, data, json_data, headers, mock_expected, mock_get):
+        api = RestAPI("www.httpbin.org", None, True, {})
+        result = api.call_api(method, route, data, json_data, headers)
+        result = result.data
+        self.assertEqual(result, mock_expected)
 
     """
     Tests the with_credentials function
