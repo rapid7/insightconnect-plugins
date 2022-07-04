@@ -189,7 +189,7 @@ This action is used to the Get Blob action reads or downloads a blob from the sy
 |----|----|-------|--------|-----------|----|-------|
 |additional_headers|object|{}|False|Additional headers to pass to the API request|None|{"x-ms-client-request-id":"some_request_id"}|
 |blob_name|string|None|True|Name of the blob to retrieve|None|my_new_blob|
-|byte_to_string|boolean|None|False|Whether output data should be converte from bytes to string or not|None|True|
+|byte_to_string|boolean|False|False|Whether output data should be converted from bytes to string or not|None|True|
 |container_name|string|None|True|Name of the container|None|example_container_name|
 |snapshot_id|string|None|False|The snapshot parameter is an opaque DateTime value that, when present, specifies the blob snapshot|None|2022-05-24 15:22:30.161683|
 |version_id|string|None|False|The versionid parameter is an opaque DateTime value that, when present, specifies the Version of the blob|None|2022-05-20 15:38:24.824024|
@@ -438,7 +438,6 @@ Example input:
     "x-ms-lease-id":"some_123_id"
   },
   "blob_content": "hello world",
-  "blob_content_length": 512,
   "blob_name": "my_new_blob",
   "blob_type": "BlockBlob",
   "container_name": "example_container_name",
@@ -514,7 +513,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.0 - Initial plugin
+* 1.0.0 - Initial plugin - Create actions: `Create Container`, `Delete Blob`, `Delete Container`, `Get Blob`, `List Blobs`, `List Containers`, `Put Blob`
 
 # Links
 

@@ -498,10 +498,11 @@ actions:
         example: 2022-05-20T15:38:24.8240240Z
       byte_to_string:
         title: Byte to String
-        description: Whether output data should be converte from bytes to string or not
+        description: Whether output data should be converted from bytes to string or not
         type: boolean
         required: false
         example: true
+        default: false
       additional_headers:
         title: Additional Headers
         description: Additional headers to pass to the API request

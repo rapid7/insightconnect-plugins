@@ -42,7 +42,8 @@ class GetBlobInput(insightconnect_plugin_runtime.Input):
     "byte_to_string": {
       "type": "boolean",
       "title": "Byte to String",
-      "description": "Whether output data should be converte from bytes to string or not",
+      "description": "Whether output data should be converted from bytes to string or not",
+      "default": false,
       "order": 5
     },
     "container_name": {
