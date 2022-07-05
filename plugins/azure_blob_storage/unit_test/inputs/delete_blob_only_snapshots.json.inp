@@ -1,0 +1,6 @@
+{
+  "blob_name": "delete_blob_only_snapshots",
+  "container_name": "valid-container-name",
+  "snapshots": "only",
+  "version_id": "2022-05-23T11:06:05.8071297Z"
+}

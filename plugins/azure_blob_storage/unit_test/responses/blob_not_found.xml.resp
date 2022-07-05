@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Error>
+    <Code>BlobNotFound</Code>
+    <Message>The specified blob does not exist.
+        RequestId:e00c62c4-601e-00a5-560c-861d7d000000
+        Time:2022-06-22T07:49:10.8118525Z
+    </Message>
+</Error>

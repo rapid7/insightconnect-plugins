@@ -1,0 +1,10 @@
+{
+  "access_tier": "Hot",
+  "blob_content_length": 512,
+  "blob_content": "hh world",
+  "blob_name": "block_blob",
+  "blob_type": "BlockBlob",
+  "container_name": "valid-container-name",
+  "timeout": 42,
+  "additional_headers": {}
+}

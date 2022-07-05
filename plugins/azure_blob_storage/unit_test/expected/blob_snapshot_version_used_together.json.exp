@@ -1,0 +1,8 @@
+{
+  "Error": {
+    "Code": "MutuallyExclusiveQueryParameters",
+    "Message": "Mutually exclusive query parameters may not be simultaneously present.\n        RequestId: 0768257c-701e-002f-320d-8646cc000000\n        Time: 2022-06-22T07: 53: 53.1519927Z",
+    "QueryParameterName": "versionid",
+    "QueryParameterValue": "2022-05-23T11: 06: 05.8071297Z"
+  }
+}

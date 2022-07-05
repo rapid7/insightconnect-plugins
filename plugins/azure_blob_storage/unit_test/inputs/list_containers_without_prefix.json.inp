@@ -1,0 +1,12 @@
+{
+  "include": [
+    "metadata",
+    "system",
+    "deleted"
+  ],
+  "max_results": 21,
+  "timeout": 66,
+  "additional_headers": {
+    "x-ms-client-request-id": "some_request_id"
+  }
+}

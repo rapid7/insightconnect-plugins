@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EnumerationResults ServiceEndpoint="https://example.blob.core.windows.net/"
+                    ContainerName="name">
+    <Prefix>my</Prefix>
+    <MaxResults>20</MaxResults>
+    <Delimiter>plugin</Delimiter>
+    <Blobs>
+        <Blob>
+            <Name>mybb2</Name>
+            <Properties>
+                <Creation-Time>Fri, 20 May 2022 15:42:23 GMT</Creation-Time>
+                <Last-Modified>Fri, 20 May 2022 15:42:23 GMT</Last-Modified>
+                <Etag>0x8DA3A77554265C1</Etag>
+                <Content-Length>0</Content-Length>
+                <Content-Type>application/octet-stream</Content-Type>
+                <Content-Encoding/>
+                <Content-Language/>
+                <Content-CRC64/>
+                <Content-MD5>1B2M2Y8AsgTpgAmY7PhCfg==</Content-MD5>
+                <Cache-Control/>
+                <Content-Disposition/>
+                <BlobType>BlockBlob</BlobType>
+                <AccessTier>Hot</AccessTier>
+                <AccessTierInferred>true</AccessTierInferred>
+                <LeaseStatus>unlocked</LeaseStatus>
+                <LeaseState>available</LeaseState>
+                <ServerEncrypted>true</ServerEncrypted>
+            </Properties>
+            <OrMetadata/>
+        </Blob>
+        <Blob>
+            <Name>myblob2</Name>
+            <VersionId>2022-06-15T08:35:15.4662051Z</VersionId>
+            <IsCurrentVersion>true</IsCurrentVersion>
+            <Properties>
+                <Creation-Time>Wed, 15 Jun 2022 08:35:15 GMT</Creation-Time>
+                <Last-Modified>Wed, 15 Jun 2022 08:35:15 GMT</Last-Modified>
+                <Etag>0x8DA4EA9F8A9C6A3</Etag>
+                <Content-Length>0</Content-Length>
+                <Content-Type>application/octet-stream</Content-Type>
+                <Content-Encoding/>
+                <Content-Language/>
+                <Content-CRC64/>
+                <Content-MD5>1B2M2Y8AsgTpgAmY7PhCfg==</Content-MD5>
+                <Cache-Control/>
+                <Content-Disposition/>
+                <BlobType>BlockBlob</BlobType>
+                <AccessTier>Hot</AccessTier>
+                <AccessTierInferred>true</AccessTierInferred>
+                <LeaseStatus>unlocked</LeaseStatus>
+                <LeaseState>available</LeaseState>
+                <ServerEncrypted>true</ServerEncrypted>
+            </Properties>
+            <OrMetadata/>
+        </Blob>
+    </Blobs>
+    <NextMarker/>
+</EnumerationResults>

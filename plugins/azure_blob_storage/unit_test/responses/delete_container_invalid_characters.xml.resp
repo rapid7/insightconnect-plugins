@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Error>
+    <Code>InvalidResourceName</Code>
+    <Message>The specifed resource name contains invalid characters.
+        RequestId:f802c229-b01e-0020-3d3b-8530a0000000
+        Time:2022-06-21T06:49:40.7813726Z
+    </Message>
+</Error>
