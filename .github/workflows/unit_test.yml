@@ -2,6 +2,9 @@ name: UnitTest
 
 on: [push]
 
+env:
+  COVERAGE_THRESHOLD: 60
+
 jobs:
   build:
 
@@ -27,15 +30,21 @@ jobs:
     - name: Show coverage 
       run: |
         cd plugins
-        array=()
+        coverage_data_files=()
         while IFS=  read -r -d $'\0'; do
-         array+=("$REPLY")
+         coverage_data_files+=("$REPLY")
         done < <(find "." -maxdepth 1 -iname '*\.coverage' -print0)
-        if [ ${#array[@]} -eq 0 ]; then
+        if [ ${#coverage_data_files[@]} -eq 0 ]; then
             echo "No coverage data."
         else
-            for i in "${array[@]}"
+            for data_file in "${coverage_data_files[@]}"
             do
-              python -m coverage report --data-file=$i
+                python -m coverage report --data-file=$data_file
+                percentage=$(python -m coverage report --data-file=$data_file | grep TOTAL | awk '{print $NF}')
+                number=$(echo $percentage |  sed -r 's/[%]+//g')
+                if [ $COVERAGE_THRESHOLD -gt "$number" ]; then
+                    echo "Unit test coverage of $percentage is below the required threshold $COVERAGE_THRESHOLD for $data_file"
+                    exit 1
+                fi
             done
         fi
