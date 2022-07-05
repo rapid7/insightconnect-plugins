@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Error>
+    <Code>AccessTierNotSupportedForBlobType</Code>
+    <Message>The access tier is not supported for this blob type.
+        RequestId:1877577d-701e-002f-0d5e-8546cc000000
+        Time:2022-06-21T11:00:04.6821942Z
+    </Message>
+</Error>

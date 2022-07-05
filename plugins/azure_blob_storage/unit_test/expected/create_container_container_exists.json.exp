@@ -1,0 +1,6 @@
+{
+  "Error": {
+    "Code": "ContainerAlreadyExists",
+    "Message": "The specified container already exists.\n        RequestId:7c04c61f-601e-001c-228f-841967000000\n        Time:2022-06-20T10:24:15.5687891Z"
+  }
+}
