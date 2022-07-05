@@ -5,6 +5,7 @@ import sys
 
 import boto3
 import botocore.exceptions
+# from botocore.stub import Stubber
 
 sys.path.append(os.path.abspath("../"))
 from insightconnect_plugin_runtime import Action
@@ -25,6 +26,8 @@ class Util:
                 Input.REGION: "us-east-1",
             }
         )
+        # stubber = Stubber(default_connection.client.client)
+        # stubber.activate()
         action.connection = default_connection
         action.logger = logging.getLogger("action logger")
         return action
@@ -56,7 +59,12 @@ class Util:
     @staticmethod
     def mock_request_exception_handling(*args, **kwargs):
         if args[0] == "Scan" and args[1].get("TableName") == "wrong_table_name":
-            raise boto3.client(SERVICE_NAME, region_name=DEFAULT_REGION).exceptions.ResourceNotFoundException(
+            client = boto3.client(
+                SERVICE_NAME, aws_access_key_id="123", aws_secret_access_key="123", region_name=DEFAULT_REGION
+            )
+            # stubber = Stubber(client)
+            # stubber.activate()
+            raise client.exceptions.ResourceNotFoundException(
                 Util.load_json("payloads/wrong_table_name.json.resp"), "Scan"
             )
         elif args[0] == "Scan" and args[1].get("TableName") == "wrong_credentials":

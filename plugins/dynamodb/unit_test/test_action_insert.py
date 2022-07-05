@@ -10,6 +10,8 @@ from komand_dynamodb.actions import Insert
 from komand_dynamodb.actions.insert.schema import Input
 from unit_test.util import Util
 
+import boto3; print(boto3.__name__, " version: ", boto3.__version__)
+import botocore; print(botocore.__name__, " version: ", botocore.__version__)
 
 @patch("botocore.client.BaseClient._make_api_call", side_effect=Util.mocked_request)
 class TestActionInsrt(TestCase):
