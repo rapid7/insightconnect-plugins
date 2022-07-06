@@ -1,0 +1,76 @@
+{
+  "parameters": [
+    [
+      "incident",
+      "I2210526_000001",
+      "1",
+      "111",
+      "MGTRDF",
+      "10564S",
+      "SQL-RDB_IT",
+      "1",
+      "KD78QGJYU",
+      "Updated via InsightConnect",
+      "CP01",
+      "Example description",
+      "external_ref_test",
+      "1",
+      "1",
+      "EUR",
+      "1",
+      "16",
+      "Desktop USA",
+      "1",
+      "EUR",
+      "Email",
+      "11111111",
+      "33",
+      "25/05/2022 2:00:00 pm",
+      "Supervisor",
+      "Updated Title",
+      "2",
+      {
+        "result": {
+          "href_hyperlink": "https://example.easyvista.com/api/v1/50004/requests/I2210526_000001",
+          "reference_number": "I2210526_000001"
+        }
+      }
+    ],
+    [
+      "with_empty_strings",
+      "I2210526_000001",
+      "",
+      "111",
+      "MGTRDF",
+      "10564S",
+      "SQL-RDB_IT",
+      "",
+      "",
+      "Updated via InsightConnect",
+      "",
+      "Example description",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "Updated Title",
+      "",
+      {
+        "result": {
+          "href_hyperlink": "https://example.easyvista.com/api/v1/50004/requests/I2210526_000001",
+          "reference_number": "I2210526_000001"
+        }
+      }
+    ]
+  ]
+}

@@ -31,6 +31,12 @@ class EasyVistaApi:
             )
         if 400 <= response.status_code < 500:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+        if response.status_code == 590:
+            raise PluginException(
+                cause="Incorrect input was provided.",
+                assistance="Please provide valid inputs and try again.",
+                data=response.text,
+            )
         if response.status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
         try:
@@ -62,5 +68,5 @@ class EasyVistaApi:
 
     @staticmethod
     def split_url(url: str) -> str:
-        scheme, netloc, paths, queries, fragments = urlsplit(url.strip())
+        scheme, netloc, paths, queries, fragments = urlsplit(url.strip())  # pylint: disable=unused-variable
         return f"{scheme}://{netloc}"

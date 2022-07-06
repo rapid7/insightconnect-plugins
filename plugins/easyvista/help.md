@@ -11,6 +11,10 @@ EasyVista Service Manager platform supports even the most complex requirements, 
 * EasyVista Service Manager username and password
 * EasyVista Service Manager server URL and account
 
+# Supported Product Versions
+
+* EasyVista API v1 2022-05-25
+
 # Documentation
 
 ## Setup
@@ -201,14 +205,14 @@ This action is used to update an EasyVista ticket.
 |asset_serial|string|None|False|Serial number of the asset|None|MXRADF|
 |asset_tag|string|None|False|Tag of the asset|None|10564S|
 |ci|string|None|False|Name of the Configuration Item|None|SQL-RDB_IT|
-|ci_id|integer|None|False|Identifier of the Configuration Item|None|1|
+|ci_id|string|None|False|Identifier of the Configuration Item|None|1|
 |ci_serial|string|None|False|Serial number of the Configuration Item|None|KD78QGJYU|
 |comment|string|None|False|Comment that explains the reason for the update|None|Comment updated via InsightConnect|
 |continuity_plan_id|string|None|False|Continuity plan ID or code|None|CP01|
 |description|string|None|False|Description of the ticket|None|Example description|
 |external_reference|string|None|False|Identifier of the object used by an external application|None|external_ref_example|
-|impact_id|integer|None|False|Identifier of the impact level|None|2|
-|known_problems_id|integer|None|False|Identifier of the known problems|None|1|
+|impact_id|string|None|False|Identifier of the impact level|None|2|
+|known_problems_id|string|None|False|Identifier of the known problems|None|1|
 |net_price_cur_id|string|None|False|Price currency or currency ID|None|EUR|
 |origin_tool_id|string|None|False|Identifier of the origin tool|None|1|
 |owner_id|string|None|False|Identifier of the owner (Employee ID or name)|None|16|
@@ -222,7 +226,7 @@ This action is used to update an EasyVista ticket.
 |submit_date_ut|string|None|False|Creation date of the ticket|None|4/12/2021 2:00:00 pm|
 |system_id|string|None|False|System ID or name|None|Supervisor|
 |title|string|None|False|Title of the ticket|None|Example ticket title|
-|urgency_id|integer|None|False|Identifier of the urgency level|None|1|
+|urgency_id|string|None|False|Identifier of the urgency level|None|1|
 
 Example input:
 
@@ -294,7 +298,7 @@ This action is used to create a new EasyVista ticket. The only required input pa
 |department_id|string|None|False|Department ID of the requestor|None|1|
 |description|string|None|False|Description of the ticket|None|Example ticket description|
 |external_reference|string|None|False|Identifier of the object attributed by an external application|None|external_ref_example|
-|impact_id|integer|None|False|Identifier of the impact level|None|2|
+|impact_id|string|None|False|Identifier of the impact level|None|2|
 |location_code|string|None|False|Location code of the requestor|None|LOC01|
 |location_id|string|None|False|Location ID of the requestor|None|10|
 |origin|string|None|False|Identifier of the origin|None|Email|
@@ -307,10 +311,10 @@ This action is used to create a new EasyVista ticket. The only required input pa
 |requestor_identification|string|None|False|Employee number of the requestor|None|12345|
 |requestor_mail|string|None|False|Email address of the requestor|None|user@example.com|
 |requestor_name|string|None|False|Name of the requestor|None|Example Requestor|
-|severity_id|integer|None|False|Identifier of the severity level|None|1|
+|severity_id|string|None|False|Identifier of the severity level|None|1|
 |submit_date|string|None|False|Creation date of the ticket|None|04/12/2021 2:00:00 pm|
 |title|string|None|False|Title of the ticket|None|Example ticket title|
-|urgency_id|integer|None|False|Identifier of the urgency level|None|1|
+|urgency_id|string|None|False|Identifier of the urgency level|None|1|
 
 Example input:
 
@@ -479,6 +483,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.0 - Fix issue where Create Ticket and Update Ticket actions did not work if `impact_id`, `severity_id` and `urgent_id` were given as `0` | Add error handling for invalid inputs
 * 1.0.1 - Fix issue where connection test was failing
 * 1.0.0 - Initial plugin
 

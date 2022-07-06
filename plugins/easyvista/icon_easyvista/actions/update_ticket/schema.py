@@ -78,7 +78,7 @@ class UpdateTicketInput(insightconnect_plugin_runtime.Input):
       "order": 6
     },
     "ci_id": {
-      "type": "integer",
+      "type": "string",
       "title": "CI ID",
       "description": "Identifier of the Configuration Item",
       "order": 7
@@ -114,13 +114,13 @@ class UpdateTicketInput(insightconnect_plugin_runtime.Input):
       "order": 12
     },
     "impact_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Impact ID",
       "description": "Identifier of the impact level",
       "order": 13
     },
     "known_problems_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Known Problems ID",
       "description": "Identifier of the known problems",
       "order": 14
@@ -204,7 +204,7 @@ class UpdateTicketInput(insightconnect_plugin_runtime.Input):
       "order": 26
     },
     "urgency_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Urgency ID",
       "description": "Identifier of the urgency level",
       "order": 27

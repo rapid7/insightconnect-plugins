@@ -1,0 +1,6 @@
+{
+  "message": "{"error": "The INSERT statement conflicted with the FOREIGN KEY constraint "FK_SD_REQUEST_SD_URGENCY". The conflict occurred in database "EXAMPLE", table "40000.SD_URGENCY", column 'URGENCY_ID'"} (2013-11111)",
+  "correlationId": "11111",
+  "dataError": "",
+  "exception": []
+}
