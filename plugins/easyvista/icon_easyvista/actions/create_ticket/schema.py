@@ -115,7 +115,7 @@ class CreateTicketInput(insightconnect_plugin_runtime.Input):
       "order": 12
     },
     "impact_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Impact ID",
       "description": "Identifier of the impact level",
       "order": 11
@@ -193,7 +193,7 @@ class CreateTicketInput(insightconnect_plugin_runtime.Input):
       "order": 24
     },
     "severity_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Severity ID",
       "description": "Identifier of the severity level",
       "order": 25
@@ -211,7 +211,7 @@ class CreateTicketInput(insightconnect_plugin_runtime.Input):
       "order": 27
     },
     "urgency_id": {
-      "type": "integer",
+      "type": "string",
       "title": "Urgency ID",
       "description": "Identifier of the urgency level",
       "order": 28

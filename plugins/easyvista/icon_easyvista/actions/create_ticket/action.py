@@ -49,4 +49,8 @@ class CreateTicket(insightconnect_plugin_runtime.Action):
             data.update({"catalog_guid": catalog})
         else:
             data.update({"catalog_code": catalog})
-        return {Output.RESULT: self.connection.client.ticket_action("POST", {"requests": [data]})}
+        return {
+            Output.RESULT: self.connection.client.ticket_action(
+                "POST", {"requests": [insightconnect_plugin_runtime.helper.clean_dict(data)]}
+            )
+        }

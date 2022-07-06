@@ -14,4 +14,8 @@ class UpdateTicket(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {Output.RESULT: self.connection.client.ticket_action("PUT", params, params.get(Input.RFC_NUMBER))}
+        return {
+            Output.RESULT: self.connection.client.ticket_action(
+                "PUT", insightconnect_plugin_runtime.helper.clean_dict(params), params.get(Input.RFC_NUMBER)
+            )
+        }

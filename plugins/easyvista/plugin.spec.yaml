@@ -4,7 +4,8 @@ products: ["insightconnect"]
 name: easyvista
 title: EasyVista
 description: EasyVista Service Manager platform supports even the most complex requirements, while bringing a new level of simplicity, agility, and mobility required to make cloud based IT Service Management (ITSM) software easy to use and easy to deliver. Using the EasyVista plugin for Rapid7 InsightConnect, users can manage the creation, update, search and closure of incident, service request, problem or event tickets
-version: 1.0.1
+version: 2.0.0
+supported_versions: ["EasyVista API v1 2022-05-25"]
 vendor: rapid7
 support: rapid7
 status: []
@@ -385,7 +386,7 @@ actions:
       impact_id:
         title: Impact ID
         description: Identifier of the impact level
-        type: integer
+        type: string
         required: false
         example: 2
       external_reference:
@@ -469,7 +470,7 @@ actions:
       severity_id:
         title: Severity ID
         description: Identifier of the severity level
-        type: integer
+        type: string
         required: false
         example: 1
       submit_date:
@@ -487,7 +488,7 @@ actions:
       urgency_id:
         title: Urgency ID
         description: Identifier of the urgency level
-        type: integer
+        type: string
         required: false
         example: 1
     output:
@@ -539,7 +540,7 @@ actions:
       ci_id:
         title: CI ID
         description: Identifier of the Configuration Item
-        type: integer
+        type: string
         required: false
         example: 1
       ci_serial:
@@ -575,13 +576,13 @@ actions:
       impact_id:
         title: Impact ID
         description: Identifier of the impact level
-        type: integer
+        type: string
         required: false
         example: 2
       known_problems_id:
         title: Known Problems ID
         description: Identifier of the known problems
-        type: integer
+        type: string
         required: false
         example: 1
       net_price_cur_id:
@@ -659,7 +660,7 @@ actions:
       urgency_id:
         title: Urgency ID
         description: Identifier of the urgency level
-        type: integer
+        type: string
         required: false
         example: 1
     output:
