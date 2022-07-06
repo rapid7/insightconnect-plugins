@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: extractit
 title: ExtractIt
 description: The ExtractIt plugin has a collection of actions used to extract various information from text. These include URLs, domains, emails, IPs, and more
-version: 3.0.1
+version: 3.0.3
 vendor: rapid7
 support: rapid7
 status: []
@@ -262,7 +262,6 @@ actions:
         enum:
           - dd/mm/yyyy
           - mm/dd/yyyy
-          - dd/mm/yyyy
           - dd\mm\yyyy
           - dd.mm.yyyy
           - dd-mm-yyyy
@@ -270,7 +269,6 @@ actions:
           - dd-mm-yy
           - dd/mm/yy
           - dd\mm\yy
-          - mm/dd/yyyy
           - mm\dd\yyyy
           - mm.dd.yyyy
           - mm-dd-yyyy
@@ -487,7 +485,6 @@ actions:
         enum:
           - dd/mm/yyyy
           - mm/dd/yyyy
-          - dd/mm/yyyy
           - dd\mm\yyyy
           - dd.mm.yyyy
           - dd-mm-yyyy
@@ -495,7 +492,6 @@ actions:
           - dd-mm-yy
           - dd/mm/yy
           - dd\mm\yy
-          - mm/dd/yyyy
           - mm\dd\yyyy
           - mm.dd.yyyy
           - mm-dd-yyyy

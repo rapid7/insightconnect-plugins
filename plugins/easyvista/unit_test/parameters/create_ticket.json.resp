@@ -1,0 +1,115 @@
+{
+  "parameters": [
+    [
+      "incident",
+      "44D88612-FEA8-A8F3-6DE8-2E1278ABB02F",
+      "12345",
+      "Example Asset",
+      "10564S",
+      "1",
+      "AD1",
+      "Example CI",
+      "1",
+      "IT",
+      "Example description",
+      "1",
+      null,
+      "1",
+      "EUR_UK",
+      "Email",
+      "3",
+      "11111111",
+      "1",
+      "12345",
+      "user@example.com",
+      "Example Recipient",
+      "34567",
+      "user1@example.com",
+      "Example Requestor",
+      "2",
+      "25/05/2022 2:00:00 pm",
+      "Example Incident",
+      "1",
+      {
+        "result": {
+          "href_hyperlink": "https://example.easyvista.com/api/v1/50004/requests/I2210526_000001",
+          "reference_number": "I2210526_000001"
+        }
+      }
+    ],
+    [
+      "parameters_as_empty_strings",
+      "44D88612-FEA8-A8F3-6DE8-2E1278ABB02F",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      {
+        "result": {
+          "href_hyperlink": "https://example.easyvista.com/api/v1/50004/requests/I2210526_000002",
+          "reference_number": "I2210526_000002"
+        }
+      }
+    ],
+    [
+      "parameters_as_nulls",
+      "44D88612-FEA8-A8F3-6DE8-2E1278ABB02F",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      {
+        "result": {
+          "href_hyperlink": "https://example.easyvista.com/api/v1/50004/requests/I2210526_000002",
+          "reference_number": "I2210526_000002"
+        }
+      }
+    ]
+  ]
+}

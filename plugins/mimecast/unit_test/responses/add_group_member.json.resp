@@ -1,0 +1,14 @@
+{
+    "meta": {
+        "status": 200
+    },
+    "data": [
+        {
+            "id": "eNoVzsEKgjAAgOF32dUgM7UMOrQGYtSKrJHSJeZCcW41nTqjd8_O_-H7P6BmVCtWZGAFWuOEZJPuBDnRl4T22aQYEhIfk67tO51wZUEr9ue-F4q2uU-FwdVe9Doq8zcyQ0MHpJIw6K0IXy-PfJ5wqW5Uo4WJDp6GSB-I4zLI3mEp12ACqK4bWTFFZcZGfhtjNNssAs8dW8tUXUgBVrMJeEqeMcULUf43l77tBt8fFoA99w",
+            "folderId": "eNoVzrsOgjAUANB_uaskgoFgSRwsGoMBVFB8xEXoRdBilVJ8xX9X9zOcN0jMVI0lAwfyfVclYXSb2-LeI16yK142Laf6NkyTlsTuya86VjD21iaNhk-xOR47nowJ9y-r5bg_8wvMp6bbzMXknChZ3qnBt5zO0icWapH2mBe0j1sbLiR9yAFowNnhCk5-4BI1yJRsRIV1Jhj-Lm4cjoyhTSzzB1usZSku4Bga5IIzrP9fS9eJ-fkCsJk_yA",
+            "emailAddress": "test4@rapid7.com",
+            "internal": true
+        }
+    ],
+    "fail": []
+}

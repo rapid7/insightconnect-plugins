@@ -1,31 +1,21 @@
-import komand
-from .schema import CreateBlockedSenderPolicyInput, CreateBlockedSenderPolicyOutput, Input, Output
+import insightconnect_plugin_runtime
+from .schema import CreateBlockedSenderPolicyInput, CreateBlockedSenderPolicyOutput, Input, Output, Component
 
 # Custom imports below
-from komand_mimecast.util import util
+from komand_mimecast.util.util import Utils
+from komand_mimecast.util.constants import DATA_FIELD
 
 
-class CreateBlockedSenderPolicy(komand.Action):
-
-    # URI for create blocked sender policy
-    _URI = "/api/policy/blockedsenders/create-policy"
-
+class CreateBlockedSenderPolicy(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_blocked_sender_policy",
-            description="Creates a blocked sender policy",
+            description=Component.DESCRIPTION,
             input=CreateBlockedSenderPolicyInput(),
             output=CreateBlockedSenderPolicyOutput(),
         )
 
     def run(self, params={}):
-        # Import variables from connection
-        url = self.connection.url
-        access_key = self.connection.access_key
-        secret_key = self.connection.secret_key
-        app_id = self.connection.app_id
-        app_key = self.connection.app_key
-
         source_ips = params.get(Input.SOURCE_IPS)
         option = params.get(Input.OPTION)
 
@@ -34,7 +24,7 @@ class CreateBlockedSenderPolicy(komand.Action):
         # Generate policy dictionary
         policy = {}
         for key, value in params.items():
-            temp = util.normalize(key, value)
+            temp = Utils.normalize(key, value)
             policy.update(temp)
 
         # Remove source_ips and option from policy as they should not be directly in that dictionary
@@ -53,16 +43,4 @@ class CreateBlockedSenderPolicy(komand.Action):
         # Add policy to data
         data["policy"] = policy
 
-        # Mimecast request
-        mimecast_request = util.MimecastRequests()
-        response = mimecast_request.mimecast_post(
-            url=url,
-            uri=CreateBlockedSenderPolicy._URI,
-            access_key=access_key,
-            secret_key=secret_key,
-            app_id=app_id,
-            app_key=app_key,
-            data=data,
-        )
-
-        return {Output.SENDER_POLICY: response["data"]}
+        return {Output.SENDER_POLICY: self.connection.client.create_blocked_sender_policy(data).get(DATA_FIELD)}

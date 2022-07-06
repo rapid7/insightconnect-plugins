@@ -1,0 +1,64 @@
+{
+  "max_results": "20",
+  "containers": [
+    {
+      "name": "$logs",
+      "properties": {
+        "last_modified": "Fri, 22 Apr 2022 18:30:26 GMT",
+        "etag": "\"0x8DA248E2C0BCC79\""
+      },
+      "metadata": {}
+    },
+    {
+      "name": "one",
+      "properties": {
+        "last_modified": "Thu, 09 Jun 2022 13:32:36 GMT",
+        "etag": "\"0x8DA4A1C8463336C\""
+      },
+      "metadata": {}
+    },
+    {
+      "name": "two",
+      "properties": {
+        "last_modified": "Thu, 09 Jun 2022 10:38:01 GMT",
+        "etag": "\"0x8DA4A0420AB592F\""
+      },
+      "metadata": {}
+    },
+    {
+      "name": "three",
+      "properties": {
+        "last_modified": "Wed, 08 Jun 2022 12:48:16 GMT",
+        "public_access": "blob",
+        "etag": "\"0x8DA494D2826EA21\""
+      },
+      "metadata": {}
+    },
+    {
+      "name": "four",
+      "properties": {
+        "last_modified": "Wed, 08 Jun 2022 12:44:35 GMT",
+        "etag": "\"0x8DA494CA481C42D\""
+      },
+      "metadata": {}
+    },
+    {
+      "name": "rest-api",
+      "properties": {
+        "last_modified": "Mon, 23 May 2022 16:50:24 GMT",
+        "etag": "\"0x8DA3CDC550C9BCE\""
+      },
+      "metadata": {
+        "f": "a"
+      }
+    },
+    {
+      "name": "unittest",
+      "properties": {
+        "last_modified": "Mon, 20 Jun 2022 09:56:12 GMT",
+        "etag": "\"0x8DA52A31BAD6C30\""
+      },
+      "metadata": {}
+    }
+  ]
+}

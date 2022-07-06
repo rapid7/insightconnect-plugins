@@ -1,0 +1,8 @@
+{
+  "Content-Length": "0",
+  "Server": "Windows-Azure-Blob/1.0 Microsoft-HTTPAPI/2.0",
+  "x-ms-request-id": "4f5f078b-101e-0080-5c3c-86b401000000",
+  "x-ms-version": "2021-04-10",
+  "x-ms-delete-type-permanent": "false",
+  "Date": "Wed, 22 Jun 2022 13:32:14 GMT"
+}

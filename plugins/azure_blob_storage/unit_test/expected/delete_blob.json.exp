@@ -1,0 +1,5 @@
+{
+  "success": true,
+  "message": "Blob deletion was successfully submitted.",
+  "delete_type": "soft"
+}

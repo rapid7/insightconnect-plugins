@@ -7,7 +7,6 @@ from unit_test.common import MockConnection
 from unit_test.common import default_connector
 from komand_active_directory_ldap.connection import Connection
 import logging
-import json
 
 
 class TestActionUnlockUser(TestCase):

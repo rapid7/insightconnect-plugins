@@ -138,11 +138,14 @@ def clear_domains(matches: list) -> list:
         # Here we remove the path, this solution allows to prevent the situation where the file names from the URL will
         # be extracted as domains, e.g. www.example.com/test.html
         split_match = match[1].split("/")[0]
+        # Here we remove the port number, if present, which could prevent a legitimate domain name match.
+        # Ex. ssh.example.com:22 becomes ssh.example.com
+        split_match = split_match.split(":")[0]
         # Here we eliminate all domains that end with = or @. This avoids extracting two domains from an email address,
         # e.g. user.test@example.com, or extracting field names from an EML file as domains, e.g. two domains would be
         # extracted from "header.from=example.com"
         if not split_match.endswith("@") and not split_match.endswith("="):
-            new_matches.append(split_match)
+            new_matches.append(split_match.lower())
     return list(dict.fromkeys(new_matches))
 
 

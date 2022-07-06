@@ -1,0 +1,38 @@
+{
+  "prefix": "my",
+  "delimiter": "plugin",
+  "max_results": "20",
+  "blobs": [
+    {
+      "name": "mybb2",
+      "properties": {
+        "creation_time": "Fri, 20 May 2022 15:42:23 GMT",
+        "server_encrypted": "true",
+        "last_modified": "Fri, 20 May 2022 15:42:23 GMT",
+        "content_type": "application/octet-stream",
+        "blob_type": "BlockBlob",
+        "access_tier": "Hot",
+        "etag": "0x8DA3A77554265C1"
+      },
+      "metadata": {},
+      "tags": []
+    },
+    {
+      "name": "myblob2",
+      "version_id": "2022-06-15T08:35:15.4662051Z",
+      "is_current_version": "true",
+      "properties": {
+        "creation_time": "Wed, 15 Jun 2022 08:35:15 GMT",
+        "server_encrypted": "true",
+        "last_modified": "Wed, 15 Jun 2022 08:35:15 GMT",
+        "content_type": "application/octet-stream",
+        "blob_type": "BlockBlob",
+        "access_tier": "Hot",
+        "etag": "0x8DA4EA9F8A9C6A3"
+      },
+      "metadata": {},
+      "tags": []
+    }
+  ],
+  "blobs_with_delimiter_match": []
+}

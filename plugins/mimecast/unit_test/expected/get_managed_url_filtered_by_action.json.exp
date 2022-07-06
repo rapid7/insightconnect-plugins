@@ -1,0 +1,102 @@
+{
+    "response": [
+        {
+            "id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLhjMg10nypvPqTB5X5oQtdKJE4fK5qJ4OSQkl51X5Ue_U",
+            "scheme": "https",
+            "domain": "www.testset3444412312.net",
+            "port": -1,
+            "path": "/",
+            "queryString": "",
+            "matchType": "explicit",
+            "action": "block",
+            "comment": "",
+            "disableUserAwareness": false,
+            "disableRewrite": false,
+            "disableLogClick": false
+        },
+        {
+            "id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLhZvnEtat8zG8JEnCa0rEi47Azkwxs-tsSYYC9J6jbu1g",
+            "scheme": "https",
+            "domain": "www.morele3444.net",
+            "port": -1,
+            "path": "/",
+            "queryString": "",
+            "matchType": "explicit",
+            "action": "block",
+            "comment": "",
+            "disableUserAwareness": false,
+            "disableRewrite": false,
+            "disableLogClick": false
+        },
+        {
+            "id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLh7o24J3RfAT36bEMMeVMBuUN_02viWZ18lQtt1W9WKfY",
+            "scheme": "https",
+            "domain": "www.morele3.net",
+            "port": -1,
+            "path": "/",
+            "queryString": "",
+            "matchType": "explicit",
+            "action": "block",
+            "comment": "",
+            "disableUserAwareness": false,
+            "disableRewrite": false,
+            "disableLogClick": false
+        },
+        {
+            "id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLhKeiV_jMEqfOk252_uTo9j4yGTXgoY2T3ahzU8Hj89ag",
+            "scheme": "https",
+            "domain": "www.morele2.net",
+            "port": -1,
+            "path": "/",
+            "queryString": "",
+            "matchType": "explicit",
+            "action": "block",
+            "comment": "",
+            "disableUserAwareness": false,
+            "disableRewrite": false,
+            "disableLogClick": false
+        },
+        {
+            "id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLhjYf0T4z0usFJO_qtqDPKv3j-kJSpvkUi5YT2T6UHmAw",
+            "scheme": "https",
+            "domain": "www.morele1.net",
+            "port": -1,
+            "path": "/",
+            "queryString": "",
+            "matchType": "explicit",
+            "action": "block",
+            "comment": "",
+            "disableUserAwareness": false,
+            "disableRewrite": false,
+            "disableLogClick": false
+        },
+        {
+            "id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLh57bBti0RSgeBgPwqiLBJ4Nlka1xxRTCaPHWCN77UKxE",
+            "scheme": "http",
+            "domain": "aadroid.net",
+            "port": -1,
+            "path": "/",
+            "queryString": "",
+            "matchType": "explicit",
+            "action": "block",
+            "comment": "",
+            "disableUserAwareness": false,
+            "disableRewrite": false,
+            "disableLogClick": false
+        },
+        {
+            "id": "wOi3MCwjYFYhZfkYlp2RMAhvN30QSmqOT7D-I9Abwlmy7ZH7eCwvY3ImP7QVjTLhMlVR5p5NhTOlw4hrUdeqvtc0CbwX9wB3s7em6Hsp-Eo",
+            "scheme": "http",
+            "domain": "aadroid.net",
+            "port": -1,
+            "path": "",
+            "queryString": "",
+            "matchType": "explicit",
+            "action": "block",
+            "comment": "Blocked by @jmontero from Slack!",
+            "disableUserAwareness": false,
+            "disableRewrite": false,
+            "disableLogClick": false
+        }
+    ]
+}

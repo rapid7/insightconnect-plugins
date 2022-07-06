@@ -1,63 +1,102 @@
 import sys
 import os
+from unittest import TestCase
+from unittest.mock import patch
+
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-from komand_recorded_future.connection.connection import Connection
+from unit_test.util import Util
+from parameterized import parameterized
 from komand_recorded_future.actions.lookup_domain import LookupDomain
-import json
-import logging
+from komand_recorded_future.connection.schema import Input
 
 
 class TestLookupDomain(TestCase):
-    # def test_integration_lookup_domain(self):
-    #      log = logging.getLogger("Test")
-    #     test_conn = Connection()
-    #     test_action = LookupDomain()
-    #
-    #     test_conn.logger = log
-    #     test_action.logger = log
-    #
-    #     try:
-    #         with open("../tests/lookup_domain.json") as file:
-    #             test_json = json.loads(file.read()).get("body")
-    #             connection_params = test_json.get("connection")
-    #             action_params = test_json.get("input")
-    #     except Exception as e:
-    #         message = """
-    #         Could not find or read sample tests from /tests directory
-    #
-    #         An exception here likely means you didn't fill out your samples correctly in the /tests directory
-    #         Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-    #         """
-    #         self.fail(message)
-    #
-    #     test_conn.connect(connection_params)
-    #     test_action.connection = test_conn
-    #     results = test_action.run(action_params)
-    #
-    #     self.assertIsNotNone(results)
-    #     self.assertTrue("entity" in results.keys())
-    #     self.assertTrue("analystNotes" in results.keys())
-    #     self.assertTrue("metrics" in results.keys())
-    #     self.assertTrue("risk" in results.keys())
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.action = Util.default_connector(LookupDomain())
 
-    def test_get_domain(self):
-        log = logging.getLogger("Test")
-        test_action = LookupDomain()
+    @parameterized.expand(
+        [
+            [
+                Util.read_file_to_dict("inputs/lookup_domain_found.json.resp"),
+                Util.read_file_to_dict("expected/lookup_domain_found.json.resp"),
+            ],
+            [
+                Util.read_file_to_dict("inputs/lookup_domain_found_with_http.json.resp"),
+                Util.read_file_to_dict("expected/lookup_domain_found.json.resp"),
+            ],
+            [
+                Util.read_file_to_dict("inputs/lookup_domain_not_found.json.resp"),
+                Util.read_file_to_dict("expected/lookup_domain_not_found.json.resp"),
+            ],
+            [
+                Util.read_file_to_dict("inputs/lookup_domain_invalid_domain_not_found.json.resp"),
+                Util.read_file_to_dict("expected/lookup_domain_not_found.json.resp"),
+            ],
+        ]
+    )
+    @patch("requests.request", side_effect=Util.mock_request)
+    def test_lookup_domain(self, input_parameters, expected, mock_request):
+        actual = self.action.run(input_parameters)
+        self.assertEqual(expected, actual)
 
-        actual = test_action.get_domain("www.google.com")
-        self.assertEquals(actual, "www.google.com")
+    @parameterized.expand(
+        (
+            [
+                ["www.google.com", "www.google.com"],
+                ["google.gs", "google.gs"],
+                ["http://google.gs", "google.gs"],
+                ["https://google.gs", "google.gs"],
+                ["https://www.example.com/path/to/file", "www.example.com"],
+            ]
+        )
+    )
+    def test_get_domain(self, input_url, expected_url):
+        actual = self.action.get_domain(input_url)
+        self.assertEqual(actual, expected_url)
 
-        actual = test_action.get_domain("google.gs")
-        self.assertEquals(actual, "google.gs")
+    @parameterized.expand(
+        [
+            [
+                "bad_api_key",
+                Util.read_file_to_dict("inputs/lookup_domain_found.json.resp"),
+                PluginException.causes.get(PluginException.Preset.API_KEY),
+                PluginException.assistances.get(PluginException.Preset.API_KEY),
+            ],
+            [
+                "unauthorized",
+                Util.read_file_to_dict("inputs/lookup_domain_found.json.resp"),
+                PluginException.causes.get(PluginException.Preset.UNAUTHORIZED),
+                PluginException.assistances.get(PluginException.Preset.UNAUTHORIZED),
+            ],
+            [
+                "unknown",
+                Util.read_file_to_dict("inputs/lookup_domain_found.json.resp"),
+                PluginException.causes.get(PluginException.Preset.UNKNOWN),
+                PluginException.assistances.get(PluginException.Preset.UNKNOWN),
+            ],
+            [
+                "server_error",
+                Util.read_file_to_dict("inputs/lookup_domain_found.json.resp"),
+                PluginException.causes.get(PluginException.Preset.SERVER_ERROR),
+                PluginException.assistances.get(PluginException.Preset.SERVER_ERROR),
+            ],
+            [
+                "invalid_json",
+                Util.read_file_to_dict("inputs/lookup_domain_found.json.resp"),
+                PluginException.causes.get(PluginException.Preset.INVALID_JSON),
+                PluginException.assistances.get(PluginException.Preset.INVALID_JSON),
+            ],
+        ]
+    )
+    @patch("requests.request", side_effect=Util.mock_request)
+    def test_lookup_domain_raise_exception(self, token, input_parameters, cause, assistance, mock_request):
+        action = Util.default_connector(LookupDomain(), {Input.API_KEY: {"secretKey": token}})
+        with self.assertRaises(PluginException) as e:
+            action.run(input_parameters)
 
-        actual = test_action.get_domain("http://google.gs")
-        self.assertEquals(actual, "google.gs")
-
-        actual = test_action.get_domain("https://www.google.gs")
-        self.assertEquals(actual, "www.google.gs")
-
-        actual = test_action.get_domain("https://www.example.com/path/to/file")
-        self.assertEquals(actual, "www.example.com")
+        self.assertEqual(e.exception.cause, cause)
+        self.assertEqual(e.exception.assistance, assistance)

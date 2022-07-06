@@ -1,0 +1,34 @@
+{
+  "parameters": [
+    [
+      "found",
+      "I2210526_000001",
+      "44D88612-FEA8-A8F3-6DE8-2E1278ABB02F",
+      "Example comment",
+      false,
+      "04/20/2021 12:00:00",
+      "DC97DD1D-0F35-4153-B0E1-0F2E0155365D",
+      {
+        "result": {
+          "href_hyperlink": "https://example.easyvista.com/api/v1/50004/requests/I2210526_000001",
+          "reference_number": "I2210526_000001"
+        }
+      }
+    ],
+    [
+      "only_rfc_number",
+      "I2210526_000001",
+      "",
+      "",
+      false,
+      "",
+      "",
+      {
+        "result": {
+          "href_hyperlink": "https://example.easyvista.com/api/v1/50004/requests/I2210526_000001",
+          "reference_number": "I2210526_000001"
+        }
+      }
+    ]
+  ]
+}

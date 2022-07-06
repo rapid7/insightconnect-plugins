@@ -1,0 +1,86 @@
+{
+  "data": {
+    "analystNotes": [],
+    "enterpriseLists": [],
+    "timestamps": {
+      "lastSeen": "2022-02-03T23:59:59.000Z",
+      "firstSeen": "2022-02-03T00:00:00.000Z"
+    },
+    "risk": {
+      "criticalityLabel": "None",
+      "riskString": "0/28",
+      "rules": 0,
+      "criticality": 0,
+      "riskSummary": "No Risk Rules are currently observed.",
+      "score": 0,
+      "evidenceDetails": [
+        {
+          "mitigationString": "",
+          "evidenceString": "1 sighting on 1 source: External Sensor Data Analysis. No risk observed from an endpoint agent via global telemetry. Last checked: Feb 3, 2022.",
+          "rule": "No Risk Observed",
+          "criticality": 0,
+          "timestamp": "2022-02-03T21:32:02.386Z",
+          "criticalityLabel": "None"
+        }
+      ]
+    },
+    "sightings": [],
+    "entity": {
+      "id": "url:https://bbc.com",
+      "name": "https://bbc.com",
+      "type": "URL"
+    },
+    "relatedEntities": [],
+    "counts": [],
+    "metrics": [
+      {
+        "type": "oneDayHits",
+        "value": 0
+      },
+      {
+        "type": "totalHits",
+        "value": 0
+      },
+      {
+        "type": "phishingSubscore",
+        "value": 0
+      },
+      {
+        "type": "noKnownRisk",
+        "value": 1
+      },
+      {
+        "type": "mitigatedCount",
+        "value": 0
+      },
+      {
+        "type": "criticality",
+        "value": 0
+      },
+      {
+        "type": "sevenDaysHits",
+        "value": 0
+      },
+      {
+        "type": "whitlistedCount",
+        "value": 0
+      },
+      {
+        "type": "noKnownRiskSightings",
+        "value": 1
+      },
+      {
+        "type": "publicSubscore",
+        "value": 0
+      },
+      {
+        "type": "malwareSubscore",
+        "value": 0
+      },
+      {
+        "type": "sixtyDaysHits",
+        "value": 0
+      }
+    ]
+  }
+}

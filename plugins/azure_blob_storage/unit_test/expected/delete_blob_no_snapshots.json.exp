@@ -1,0 +1,6 @@
+{
+  "Error": {
+    "Code": "SnapshotsPresent",
+    "Message": "This operation is not permitted because the blob has snapshots.\n        RequestId:95787227-a01e-0003-4e3b-86aa63000000\n        Time:2022-06-22T13:27:52.0837422Z"
+  }
+}

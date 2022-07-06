@@ -11,6 +11,7 @@ class Input:
     ORDERBY = "orderBy"
     RESOURCEGROUPNAME = "resourceGroupName"
     SUBSCRIPTIONID = "subscriptionId"
+    TOP = "top"
     WORKSPACENAME = "workspaceName"
     
 
@@ -41,6 +42,12 @@ class ListIncidentsInput(insightconnect_plugin_runtime.Input):
       "title": "Subscription ID",
       "description": "Azure subscription ID",
       "order": 2
+    },
+    "top": {
+      "type": "integer",
+      "title": "Top",
+      "description": "Return top N elements from the collection",
+      "order": 5
     },
     "workspaceName": {
       "type": "string",
@@ -473,6 +480,7 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
                   "title": "Created By Type",
                   "description": "The type of identity that created the resource",
                   "enum": [
+                    "",
                     "Application",
                     "Key",
                     "ManagedIdentity",
@@ -499,6 +507,7 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
                   "title": "Last Modified By Type",
                   "description": "The type of identity that last modified the resource",
                   "enum": [
+                    "",
                     "Application",
                     "Key",
                     "ManagedIdentity",
@@ -533,6 +542,7 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
               "title": "Created By Type",
               "description": "The type of identity that created the resource",
               "enum": [
+                "",
                 "Application",
                 "Key",
                 "ManagedIdentity",
@@ -559,6 +569,7 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
               "title": "Last Modified By Type",
               "description": "The type of identity that last modified the resource",
               "enum": [
+                "",
                 "Application",
                 "Key",
                 "ManagedIdentity",
@@ -929,6 +940,7 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
               "title": "Created By Type",
               "description": "The type of identity that created the resource",
               "enum": [
+                "",
                 "Application",
                 "Key",
                 "ManagedIdentity",
@@ -955,6 +967,7 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
               "title": "Last Modified By Type",
               "description": "The type of identity that last modified the resource",
               "enum": [
+                "",
                 "Application",
                 "Key",
                 "ManagedIdentity",
@@ -989,6 +1002,7 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
           "title": "Created By Type",
           "description": "The type of identity that created the resource",
           "enum": [
+            "",
             "Application",
             "Key",
             "ManagedIdentity",
@@ -1015,6 +1029,7 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
           "title": "Last Modified By Type",
           "description": "The type of identity that last modified the resource",
           "enum": [
+            "",
             "Application",
             "Key",
             "ManagedIdentity",

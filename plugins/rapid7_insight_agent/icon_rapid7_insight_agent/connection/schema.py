@@ -27,6 +27,8 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "default": "United States",
       "enum": [
         "United States",
+        "United States 2",
+        "United States 3",
         "Europe",
         "Canada",
         "Australia",

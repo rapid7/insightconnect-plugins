@@ -1,13 +1,14 @@
 import json
+import sys
 from typing import Any, Dict, List, Tuple, Optional, Union
 import urllib.parse
-from pathlib import PosixPath
 
 import requests
 from icon_azure_sentinel.util.tools import return_non_empty
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from .endpoints import Endpoint
+from .tools import request_execution_time
 
 
 class AzureClient:
@@ -128,14 +129,17 @@ class AzureSentinelClient(AzureClient):
         """
         final_uri = uri
         filters = {f"${key}": filters[key] for key in filters}
+        N = filters.pop("$top", sys.maxsize)
         _, objects = self._call_api(method, final_uri, self.headers, params=filters)
         results = objects.get(type_, [])
         nextLink = objects.get("nextLink", None)
-        while nextLink:
+        while nextLink and len(results) < N:
             _, return_object = self._call_api(method, nextLink, self.headers)
             results += return_object.get(type_, [])
             nextLink = return_object.get("nextLink", None)
-        return results
+            if len(results) > N:
+                return results[:N]
+        return results[:N]
 
     def get_incident(
         self,
@@ -177,6 +181,7 @@ class AzureSentinelClient(AzureClient):
         _, results = self._call_api("PUT", final_uri, self.headers, payload=kwargs)
         return results
 
+    @request_execution_time
     def list_incident(
         self,
         resource_group_name: str,
@@ -329,7 +334,7 @@ class AzureSentinelClient(AzureClient):
         kwargs = return_non_empty(kwargs)
         data = kwargs
         _, result = self._call_api("PUT", final_uri, headers=self.headers, payload=data)
-        return result
+        return return_non_empty(result)
 
     def delete_comment(
         self,

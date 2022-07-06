@@ -1,11 +1,16 @@
 import json
 from logging import Logger
-from urllib.parse import urlparse, urlsplit, urlunsplit
+
+from urllib.parse import urlparse, urlsplit, urlunsplit, urlencode
+from typing import Dict, Any, Union
 
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 from requests import Response
 from requests.auth import HTTPBasicAuth, HTTPDigestAuth
+
+MESSAGE_CAUSE_BOTH_INPUTS = "You cannot send both inputs"
+MESSAGE_ASSISTANCE_BOTH_INPUTS = "Try sending data either as an array OR an object, not both."
 
 
 class Common:
@@ -59,6 +64,32 @@ def url_path_join(*parts):
 
 def first(sequence, default=""):
     return next((x for x in sequence if x), default)
+
+
+def check_headers_for_urlencoded(headers: Union[Dict[str, str], None]) -> bool:
+    """
+    This method will check the headers for 'content-type' == 'application/x-www-form-urlencoded'
+    :param headers: Headers dict to read
+    :return: Boolean value indicating if the conditional is present
+    """
+    if headers is None:
+        headers = {}
+    for key, value in headers.items():
+        if key.lower() == "content-type" and value.lower() == "application/x-www-form-urlencoded":
+            return True
+    return False
+
+
+def convert_body_for_urlencoded(headers: Dict[str, str], body: Dict[str, Any]) -> Union[Dict[str, Any], str]:
+    """
+    This method will encode the body if the headers == x-www-form-urlencoded
+    :param headers: Headers dict to read for conditional
+    :param body: Body dict to convert to string with encoding
+    :return: Body as an encoded string value
+    """
+    if check_headers_for_urlencoded(headers):
+        body = urlencode(body)
+    return body
 
 
 class RestAPI(object):
@@ -121,10 +152,24 @@ class RestAPI(object):
             self.default_headers = new_headers
 
     def call_api(
-        self, method: str, path: str, data: str = None, json_data: dict = None, headers: dict = None
+        self,
+        method: str,
+        path: str,
+        data: str = None,
+        json_data: dict = None,
+        headers: dict = None,
     ) -> Response:
         try:
-            data_string = json.dumps(data) if data else None
+            # IF data exists - check the headers
+            # IF urlencoded is in headers, send data as it is
+            # ELSE run json.dumps(data)
+            # ELSE data == None
+            data_string = None
+            if data and check_headers_for_urlencoded(headers):
+                data_string = data
+            elif data:
+                data_string = json.dumps(data)
+
             response = requests.request(
                 method,
                 url_path_join(self.url, path),
@@ -134,7 +179,6 @@ class RestAPI(object):
                 auth=self.auth,
                 verify=self.ssl_verify,
             )
-
             if not self.fail_on_error:
                 return response
 

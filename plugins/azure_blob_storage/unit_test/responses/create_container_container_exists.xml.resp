@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Error>
+    <Code>ContainerAlreadyExists</Code>
+    <Message>The specified container already exists.
+        RequestId:7c04c61f-601e-001c-228f-841967000000
+        Time:2022-06-20T10:24:15.5687891Z
+    </Message>
+</Error>

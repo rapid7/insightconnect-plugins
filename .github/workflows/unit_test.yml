@@ -2,6 +2,9 @@ name: UnitTest
 
 on: [push]
 
+env:
+  COVERAGE_THRESHOLD: 60
+
 jobs:
   build:
 
@@ -23,4 +26,25 @@ jobs:
         python -m pip install --user icon-integrations-ci --no-cache-dir --no-warn-script-location
         python -m pip install --user insightconnect_plugin_runtime --no-cache-dir --no-warn-script-location
         cd plugins
-        /home/runner/.local/bin/icon-ci run_unit_tests
+        /home/runner/.local/bin/icon-ci run_unit_tests --generate_coverage
+    - name: Show coverage 
+      run: |
+        cd plugins
+        coverage_data_files=()
+        while IFS=  read -r -d $'\0'; do
+         coverage_data_files+=("$REPLY")
+        done < <(find "." -maxdepth 1 -iname '*\.coverage' -print0)
+        if [ ${#coverage_data_files[@]} -eq 0 ]; then
+            echo "No coverage data."
+        else
+            for data_file in "${coverage_data_files[@]}"
+            do
+                python -m coverage report --data-file=$data_file
+                percentage=$(python -m coverage report --data-file=$data_file | grep TOTAL | awk '{print $NF}')
+                number=$(echo $percentage |  sed -r 's/[%]+//g')
+                if [ $COVERAGE_THRESHOLD -gt "$number" ]; then
+                    echo "Unit test coverage of $percentage is below the required threshold $COVERAGE_THRESHOLD for $data_file"
+                    exit 1
+                fi
+            done
+        fi
