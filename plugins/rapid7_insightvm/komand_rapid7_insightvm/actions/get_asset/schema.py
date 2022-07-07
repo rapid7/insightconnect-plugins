@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    ID = "id"
+    ASSET_ID = "asset_id"
     
 
 class Output:
@@ -21,15 +21,15 @@ class GetAssetInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "id": {
+    "asset_id": {
       "type": "integer",
-      "title": "ID",
-      "description": "Get an asset by ID",
+      "title": "Asset ID",
+      "description": "Identifier of asset",
       "order": 1
     }
   },
   "required": [
-    "id"
+    "asset_id"
   ]
 }
     """)

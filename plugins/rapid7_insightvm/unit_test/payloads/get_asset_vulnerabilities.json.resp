@@ -1,0 +1,33 @@
+{
+  "resources": [
+    {
+      "id": "certificate-common-name-mismatch",
+      "instances": 1,
+      "links": [
+      ],
+      "results": [
+        {
+          "port": 443,
+          "proof": "<p><p>The subject common name found in the X.509 certificate does not seem to match the scan target:<ul><li>Subject CN observium does not match target name specified in the site.</li><li>Subject CN observium does not match DNS name specified in the site.</li><li>Subject CN observium could not be resolved to an IP address via DNS lookup</li><li>Subject Alternative Name observium does not match target name specified in the site.</li><li>Subject Alternative Name observium does not match DNS name specified in the site.</li></ul></p></p>",
+          "protocol": "tcp",
+          "since": "2020-08-18T20:39:17.369Z",
+          "status": "vulnerable"
+        }
+      ],
+      "since": "2020-08-18T20:39:17.369Z",
+      "status": "vulnerable"
+    }
+  ],
+  "page": {
+    "number": 0,
+    "size": 500,
+    "totalResources": 8,
+    "totalPages": 1
+  },
+  "links": [
+    {
+      "href": "https://example.com/api/3/assets/41/vulnerabilities?page=0&size=500&sort=id,asc",
+      "rel": "self"
+    }
+  ]
+}
