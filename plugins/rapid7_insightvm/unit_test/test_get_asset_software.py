@@ -55,8 +55,8 @@ class TestGetAssetSoftware(TestCase):
         ]
     )
     def test_get_asset_software_bad(self, mock_get, name, asset_id, cause, assistance, data):
-        with self.assertRaises(PluginException) as e:
+        with self.assertRaises(PluginException) as error:
             self.action.run({Input.ASSET_ID: asset_id})
-        self.assertEqual(e.exception.cause, cause)
-        self.assertEqual(e.exception.assistance, assistance)
-        self.assertEqual(e.exception.data, data)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)
+        self.assertEqual(error.exception.data, data)
