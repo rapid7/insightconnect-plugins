@@ -584,8 +584,8 @@ This action is used to create a group in Azure and enable it for Microsoft Teams
 |group_name|string|None|True|Team name|None|test_group|
 |mail_enabled|boolean|None|True|Should e-mail should be enabled for this group|None|True|
 |mail_nickname|string|None|True|The nickname for the email address of this group in Outlook|None|TestGroup|
-|members|string[]|None|False|A list of usernames to set as members|None|["user@example.com"]|
-|owners|string[]|None|False|A list of usernames to set as owners|None|["user@example.com"]|
+|members|[]string|None|False|A list of usernames to set as members|None|["user@example.com"]|
+|owners|[]string|None|False|A list of usernames to set as owners|None|["user@example.com"]|
 
 Example input:
 
@@ -879,6 +879,7 @@ If there is more than one team with the same name in your organization, the olde
 
 # Version History
 
+* 4.0.0 - Fix issue with Create Teams Enabled Group action's members, and owners input field types
 * 3.2.0 - Send Message Action is updated to support chat messages via chat_id parameter, team_name is set to optional. | Update SDK to latest version.
 * 3.1.5 - Add `microsoft_teams` and `office365` keywords | Removed `microsoft, teams, office 365` keywords
 * 3.1.4 - Update help.md to include troubleshooting message about team names

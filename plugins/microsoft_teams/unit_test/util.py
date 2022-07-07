@@ -64,8 +64,16 @@ class Util:
             return MockResponse("get_channels", 200)
         if args[0] == "https://graph.microsoft.com/beta/teams/12345/channels/56789/messages":
             return MockResponse("send_message_channel", 200)
+        if args[0] == "https://graph.microsoft.com/beta/teams/12345/channels/56789/members/":
+            return MockResponse("get_members", 201)
         if args[0] == "https://graph.microsoft.com/beta/teams/12345/channels/56789/messages/1636037542013/replies":
             return MockResponse("send_message_thread", 200)
         if args[0] == "https://graph.microsoft.com/beta/chats/19:10000_20000@unq.gbl.spaces/messages":
             return MockResponse("send_message_chat", 200)
+        if args[0] == "https://graph.microsoft.com/v1.0/1/users?$filter=userPrincipalName eq 'test'":
+            return MockResponse("get_user_info", 200)
+        if args[0] == "https://graph.microsoft.com/v1.0/1/groups?$filter=displayName eq 'test'":
+            return MockResponse("get_group_id_from_name", 200)
+        if args[0] == "https://graph.microsoft.com/beta/groups/12345/owners/$ref":
+            return MockResponse("no_content", 204)
         raise Exception("Not implemented")
