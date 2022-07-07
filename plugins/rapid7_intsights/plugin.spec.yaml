@@ -528,6 +528,7 @@ actions:
         type: '[]string'
         required: false
         example: ["InProgress", "Pending"]
+
       source_date_from:
         title: Source Date From
         description: Start date (when the event occurred) to fetch from in Unix Millisecond Timestamp
@@ -914,6 +915,17 @@ triggers:
         type: '[]string'
         required: false
         example: ["InProgress", "Pending"]
+      source_date_from_enum:
+        title: Source date from when
+        descripton: Fill in properly later
+        type: string
+        required: false
+        example: Past Hour
+        enum:
+          - Hour
+          - Day
+          - Week
+          - ""
       source_date_from:
         title: Source Date From
         description: Start date (when the event occured) to fetch from in Unix Millisecond Timestamp

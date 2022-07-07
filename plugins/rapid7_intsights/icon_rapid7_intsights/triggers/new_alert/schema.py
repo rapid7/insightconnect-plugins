@@ -22,6 +22,7 @@ class Input:
     REMEDIATION_STATUS = "remediation_status"
     SEVERITY = "severity"
     SOURCE_DATE_FROM = "source_date_from"
+    SOURCE_DATE_FROM_ENUM = "source_date_from_enum"
     SOURCE_DATE_TO = "source_date_to"
     SOURCE_TYPE = "source_type"
     
@@ -55,32 +56,32 @@ class NewAlertInput(insightconnect_plugin_runtime.Input):
         "Unassigned",
         ""
       ],
-      "order": 11
+      "order": 12
     },
     "found_date_from": {
       "type": "string",
       "title": "Found Date From",
       "description": "Start date (when alert found event) to fetch from in Unix Millisecond Timestamp",
-      "order": 9
+      "order": 10
     },
     "found_date_to": {
       "type": "string",
       "title": "Found Date To",
       "description": "End date (when alert found event) to fetch to in Unix Millisecond Timestamp",
-      "order": 10
+      "order": 11
     },
     "frequency": {
       "type": "integer",
       "title": "Frequency",
       "description": "Poll frequency in seconds",
       "default": 60,
-      "order": 15
+      "order": 16
     },
     "has_indicators": {
       "type": "boolean",
       "title": "Has Indicators",
       "description": "Shows alerts with IOC results",
-      "order": 14
+      "order": 15
     },
     "is_closed": {
       "type": "string",
@@ -91,7 +92,7 @@ class NewAlertInput(insightconnect_plugin_runtime.Input):
         "Open",
         ""
       ],
-      "order": 13
+      "order": 14
     },
     "is_flagged": {
       "type": "string",
@@ -102,7 +103,7 @@ class NewAlertInput(insightconnect_plugin_runtime.Input):
         "Unflagged",
         ""
       ],
-      "order": 12
+      "order": 13
     },
     "matched_asset_value": {
       "type": "array",
@@ -144,13 +145,24 @@ class NewAlertInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Source Date From",
       "description": "Start date (when the event occured) to fetch from in Unix Millisecond Timestamp",
+      "order": 8
+    },
+    "source_date_from_enum": {
+      "type": "string",
+      "title": "Source date from when",
+      "enum": [
+        "Hour",
+        "Day",
+        "Week",
+        ""
+      ],
       "order": 7
     },
     "source_date_to": {
       "type": "string",
       "title": "Source Date To",
       "description": "End date (when the event occured) to fetch to in Unix Millisecond Timestamp",
-      "order": 8
+      "order": 9
     },
     "source_type": {
       "type": "array",
