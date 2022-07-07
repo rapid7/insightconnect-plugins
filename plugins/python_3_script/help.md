@@ -11,7 +11,7 @@
 
 The Python 3 Script plugin also allows you to load custom modules via its connection parameters.
 
-Also, this plugin allows you to you provide additional credentials in ther connection such as username, password, secret_key available in the script as Python variables (`username`, `password`, `secret_key`). 
+Also, this plugin allows you to provide additional credentials in the connection such as username, password, secret_key available in the script as Python variables (`username`, `password`, `secret_key`). 
 
 # Key Features
 
