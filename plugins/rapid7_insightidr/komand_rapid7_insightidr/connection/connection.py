@@ -21,6 +21,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         self.session = requests.session()
         self.session.headers["X-Api-Key"] = api_key
+        self.session.headers["Accept-version"] = "investigations-preview"
         try:
             self.session.headers["User-Agent"] = f"r7:insightconnect-insightidr-plugin/{self.meta.version}"
         except AttributeError:

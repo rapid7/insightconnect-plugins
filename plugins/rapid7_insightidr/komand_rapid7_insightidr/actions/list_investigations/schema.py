@@ -8,9 +8,12 @@ class Component:
 
 
 class Input:
+    EMAIL = "email"
     END_TIME = "end_time"
     INDEX = "index"
+    PRIORITIES = "priorities"
     SIZE = "size"
+    SORT = "sort"
     START_TIME = "start_time"
     STATUSES = "statuses"
     
@@ -26,6 +29,12 @@ class ListInvestigationsInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "email": {
+      "type": "string",
+      "title": "Email",
+      "description": "A user's email address, where only investigations assigned to that user will be included",
+      "order": 6
+    },
     "end_time": {
       "type": "string",
       "title": "End Time",
@@ -41,12 +50,36 @@ class ListInvestigationsInput(insightconnect_plugin_runtime.Input):
       "default": 0,
       "order": 5
     },
+    "priorities": {
+      "type": "array",
+      "title": "Priorities",
+      "description": "A comma-separated list of investigation priorities to include in the result, where possible values are UNSPECIFIED, LOW, MEDIUM, HIGH, CRITICAL",
+      "items": {
+        "type": "string"
+      },
+      "order": 7
+    },
     "size": {
       "type": "integer",
       "title": "Size",
-      "description": "The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 1000. Default value is 1000",
-      "default": 1000,
+      "description": "The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 100. Default value is 100",
+      "default": 100,
       "order": 4
+    },
+    "sort": {
+      "type": "string",
+      "title": "Sort",
+      "description": "A field for investigations to be sorted",
+      "enum": [
+        "",
+        "Create time Ascending",
+        "Create time Descending",
+        "Priority Ascending",
+        "Priority Descending",
+        "Last alert time Ascending",
+        "Last alert time Descending"
+      ],
+      "order": 8
     },
     "start_time": {
       "type": "string",
@@ -108,30 +141,6 @@ class ListInvestigationsOutput(insightconnect_plugin_runtime.Output):
     "metadata"
   ],
   "definitions": {
-    "alerts": {
-      "type": "object",
-      "title": "alerts",
-      "properties": {
-        "first_event_time": {
-          "type": "string",
-          "title": "First Event Time",
-          "description": "The time the first event involved in this alert occurred",
-          "order": 1
-        },
-        "type": {
-          "type": "string",
-          "title": "Type",
-          "description": "Alert type",
-          "order": 2
-        },
-        "type_description": {
-          "type": "string",
-          "title": "Type Description",
-          "description": "An optional description of this type of alert",
-          "order": 3
-        }
-      }
-    },
     "assignee": {
       "type": "object",
       "title": "assignee",
@@ -154,15 +163,6 @@ class ListInvestigationsOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "investigation",
       "properties": {
-        "alerts": {
-          "type": "array",
-          "title": "Alerts",
-          "description": "The alerts involved in this investigation, if any",
-          "items": {
-            "$ref": "#/definitions/alerts"
-          },
-          "order": 2
-        },
         "assignee": {
           "$ref": "#/definitions/assignee",
           "title": "Assignee",
@@ -173,58 +173,81 @@ class ListInvestigationsOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Created Time",
           "description": "The time the investigation was created as an ISO formatted timestamp",
+          "order": 2
+        },
+        "disposition": {
+          "type": "string",
+          "title": "Disposition",
+          "description": "The disposition of this investigation, where possible values are BENIGN, MALICIOUS, NOT_APPLICABLE, and UNSPECIFIED",
           "order": 3
         },
-        "id": {
+        "first_alert_time": {
           "type": "string",
-          "title": "ID",
-          "description": "The ID of the investigation",
+          "title": "First Alert Time",
+          "description": "The create time of the first alert belonging to this investigation",
           "order": 4
+        },
+        "last_accessed": {
+          "type": "string",
+          "title": "Last Accessed",
+          "description": "The time investigation was last viewed or modified",
+          "order": 5
+        },
+        "latest_alert_time": {
+          "type": "string",
+          "title": "Latest Alert Time",
+          "description": "The create time of the most recent alert belonging to this investigation",
+          "order": 6
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "Organization ID",
+          "description": "The id of the organization that owns this investigation",
+          "order": 7
+        },
+        "priority": {
+          "type": "string",
+          "title": "Priority",
+          "description": "The investigations priority, where possible values are CRITICAL, HIGH, MEDIUM, LOW, and UNSPECIFIED",
+          "order": 8
+        },
+        "rrn": {
+          "type": "string",
+          "title": "RRN",
+          "description": "The RRN of the investigation",
+          "order": 9
         },
         "source": {
           "type": "string",
           "title": "Source",
           "description": "The source of this investigation",
-          "order": 5
+          "order": 10
         },
         "status": {
           "type": "string",
           "title": "Status",
           "description": "The status of the investigation",
-          "order": 6
+          "order": 11
         },
         "title": {
           "type": "string",
           "title": "Title",
           "description": "Investigation title",
-          "order": 7
+          "order": 12
         }
       },
+      "required": [
+        "created_time",
+        "disposition",
+        "last_accessed",
+        "organization_id",
+        "priority",
+        "rrn",
+        "source",
+        "status",
+        "title"
+      ],
       "definitions": {
-        "alerts": {
-          "type": "object",
-          "title": "alerts",
-          "properties": {
-            "first_event_time": {
-              "type": "string",
-              "title": "First Event Time",
-              "description": "The time the first event involved in this alert occurred",
-              "order": 1
-            },
-            "type": {
-              "type": "string",
-              "title": "Type",
-              "description": "Alert type",
-              "order": 2
-            },
-            "type_description": {
-              "type": "string",
-              "title": "Type Description",
-              "description": "An optional description of this type of alert",
-              "order": 3
-            }
-          }
-        },
         "assignee": {
           "type": "object",
           "title": "assignee",

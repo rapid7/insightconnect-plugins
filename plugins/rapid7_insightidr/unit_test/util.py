@@ -1,7 +1,9 @@
-import asyncio
 import json
 import logging
 import os
+import sys
+
+sys.path.append(os.path.abspath("../"))
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightidr.connection import Connection

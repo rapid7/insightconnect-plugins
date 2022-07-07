@@ -1,0 +1,31 @@
+import sys
+import os
+
+sys.path.append(os.path.abspath("../"))
+
+from unittest import TestCase
+
+from parameterized import parameterized
+
+from komand_rapid7_insightidr.util.resource_helper import get_sort_param, get_priorities_param
+
+
+class TestUtils(TestCase):
+    @parameterized.expand(
+        [
+            ("Create time Ascending", "create_time,ASC"),
+            ("Create time Descending", "create_time,DESC"),
+            ("Priority Ascending", "priority,ASC"),
+            ("Priority Descending", "priority,DESC"),
+            ("Last alert time Ascending", "last_alert_time,ASC"),
+            ("Last alert time Descending", "last_alert_time,DESC"),
+        ]
+    )
+    def test_get_sort_param(self, input_sort_str, expected_result):
+        result = get_sort_param(input_sort_str)
+        self.assertEqual(expected_result, result)
+
+    @parameterized.expand([(["LOW"], "LOW"), (["LOW", "MEDIUM", "HIGH"], "LOW,MEDIUM,HIGH")])
+    def test_get_priorities_param(self, input_list_of_str, expected_result):
+        result = get_priorities_param(input_list_of_str)
+        self.assertEqual(expected_result, result)

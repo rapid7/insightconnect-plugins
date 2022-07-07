@@ -3,14 +3,80 @@ class Investigations:
     # Methods to populate Investigation endpoints
 
     @staticmethod
-    def list_investigations(console_url: str):
+    def list_investigations(console_url: str) -> str:
         """
         URI for listing investigations
         :param console_url: URL to the InsightIDR console
-        :return: pre-populated /idr/v1/investigations/
+        :return: pre-populated /idr/v2/investigations/
         """
 
-        return f"{console_url}idr/v1/investigations"
+        return f"{console_url}idr/v2/investigations"
+
+    @staticmethod
+    def create_investigation(console_url: str) -> str:
+        """
+        URI for creating investigation
+        :param console_url: URL to the InsightIDR console
+        :return: pre-populated /idr/v2/investigations/
+        """
+
+        return f"{console_url}idr/v2/investigations"
+
+    @staticmethod
+    def search_investigation(console_url: str) -> str:
+        """
+        URI for searching investigation
+        :param console_url: URL to the InsightIDR console
+        :return: pre-populated /idr/v2/investigations/
+        """
+
+        return f"{console_url}idr/v2/investigations/_search"
+
+    @staticmethod
+    def update_or_get_investigation(console_url: str, identifier: str) -> str:
+        """
+        URI for updating investigation
+        :param console_url: URL to the InsightIDR console
+        :param identifier: The ID or RRN of investigation
+        :return: pre-populated /idr/v2/investigations/
+        """
+
+        return f"{console_url}idr/v2/investigations/{identifier}"
+
+    @staticmethod
+    def set_the_priority_of_an_investigation(console_url: str, identifier: str, priority: str) -> str:
+        """
+        URI for setting the status of an investigation
+        :param console_url: URL to the InsightIDR console
+        :param identifier: the ID or RRN of the investigation
+        :param priority: The priority to change the investigation to
+        :return: pre-populated /idr/v1/investigations/{identifier}/priority/{priority}
+        """
+
+        return f"{console_url}idr/v2/investigations/{identifier}/priority/{priority}"
+
+    @staticmethod
+    def set_the_disposition_of_an_investigation(console_url: str, identifier: str, disposition: str) -> str:
+        """
+        URI for setting the status of an investigation
+        :param console_url: URL to the InsightIDR console
+        :param identifier: the ID or RRN of the investigation
+        :param disposition: The disposition to change the investigation to
+        :return: pre-populated /idr/v1/investigations/{identifier}/disposition/{disposition}
+        """
+
+        return f"{console_url}idr/v2/investigations/{identifier}/disposition/{disposition}"
+
+    @staticmethod
+    def list_alerts_for_investigation(console_url: str, identifier: str) -> str:
+        """
+        URI for setting the status of an investigation
+        :param console_url: URL to the InsightIDR console
+        :param identifier: the ID or RRN of the investigation
+        :return: pre-populated /idr/v1/investigations/{identifier}/alerts
+        """
+
+        return f"{console_url}idr/v2/investigations/{identifier}/alerts"
 
     @staticmethod
     def close_investigations_in_bulk(console_url: str):
@@ -23,20 +89,20 @@ class Investigations:
         return f"{console_url}idr/v1/investigations/bulk_close"
 
     @staticmethod
-    def set_the_status_of_an_investigation(console_url: str, idr_id: str, status: str):
+    def set_the_status_of_an_investigation(console_url: str, identifier: str, status: str):
         """
         URI for setting the status of an investigation
         :param console_url: URL to the InsightIDR console
-        :param idr_id: the ID of the investigation
+        :param identifier: the ID of the investigation
         :param status: The status to change the investigation to
         :return: pre-populated /idr/v1/investigations/{id}/status/{status}
         """
 
-        return f"{console_url}idr/v1/investigations/{idr_id}/status/{status}"
+        return f"{console_url}idr/v2/investigations/{identifier}/status/{status}"
 
     @staticmethod
     def set_user_for_investigation(base_url: str, investigation_id: str) -> str:
-        return f"{base_url}idr/v1/investigations/{investigation_id}/assignee"
+        return f"{base_url}idr/v2/investigations/{investigation_id}/assignee"
 
 
 class Threats:
