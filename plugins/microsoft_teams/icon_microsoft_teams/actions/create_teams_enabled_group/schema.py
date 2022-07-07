@@ -51,15 +51,21 @@ class CreateTeamsEnabledGroupInput(insightconnect_plugin_runtime.Input):
       "order": 3
     },
     "members": {
-      "type": "string",
+      "type": "array",
       "title": "Members",
       "description": "A list of usernames to set as members",
+      "items": {
+        "type": "string"
+      },
       "order": 6
     },
     "owners": {
-      "type": "string",
+      "type": "array",
       "title": "Owners",
       "description": "A list of usernames to set as owners",
+      "items": {
+        "type": "string"
+      },
       "order": 5
     }
   },
