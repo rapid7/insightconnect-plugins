@@ -27,8 +27,8 @@ The connection configuration accepts the following parameters:
 |credentials|credential_username_password|None|False|Username and password|None|{"username": "user", "password": "mypassword"}|
 |kerberos|kerberos|None|False|Connection information required for Kerberos|None| {"kdc": "10.0.1.11", "domain": "EXAMPLE.domain"}|
 |port|integer|5986|False|Port number, defaults are 5986 for SSL and 5985 for unencrypted|None|5986|
-|script_secret_key|credential_secret_key|None|False|Credential secret key available in script as powershell variable (`$secret_key`)|None|{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}|
-|script_username_and_password|credential_username_password|None|False|Username and password available in script as powershell variables (`$username`, `$password`)|None|{"username": "user", "password": "mypassword"}|
+|script_secret_key|credential_secret_key|None|False|Credential secret key available in script as PowerShell variable (`$secret_key`)|None|{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}|
+|script_username_and_password|credential_username_password|None|False|Username and password available in script as PowerShell variables (`$username`, `$password`)|None|{"username": "user", "password": "mypassword"}|
 
 Example input:
 

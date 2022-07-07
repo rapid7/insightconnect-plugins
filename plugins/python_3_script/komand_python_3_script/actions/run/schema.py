@@ -27,7 +27,7 @@ class RunInput(komand.Input):
       "type": "string",
       "title": "Function",
       "displayType": "python",
-      "description": "Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` if defined in connection",
+      "description": "Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` variables if defined in connection",
       "default": "def run(params={}):\\\\n    return {}",
       "format": "python",
       "order": 1
