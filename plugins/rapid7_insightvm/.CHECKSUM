@@ -1,7 +1,7 @@
 {
-	"spec": "896bed8a75691e7d6f4e49e349ead4a2",
-	"manifest": "b096ea79dfff01bcf792179ceac75353",
-	"setup": "38efc26d64ac89fc85ee517206350f82",
+	"spec": "eeaa663d820ef433d71f05999f9b491f",
+	"manifest": "6082c7c4e00032ab66b480688efa207f",
+	"setup": "363288e12cede27992f9d7ef4ab710f9",
 	"schemas": [
 		{
 			"identifier": "add_scan_engine_pool_engine/schema.py",
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "asset_vulnerability_solution/schema.py",
-			"hash": "5ae2202b33b66ec147a0033b78bf0569"
+			"hash": "7a789e0b1682910486c4f180a8bee983"
 		},
 		{
 			"identifier": "create_asset_group/schema.py",
@@ -105,7 +105,7 @@
 		},
 		{
 			"identifier": "get_asset/schema.py",
-			"hash": "76477ea46278b21c015886d6fc5b778a"
+			"hash": "360ceba6a8bf2ef6f98f2951dfa2b8d4"
 		},
 		{
 			"identifier": "get_asset_group/schema.py",
@@ -121,7 +121,7 @@
 		},
 		{
 			"identifier": "get_asset_software/schema.py",
-			"hash": "330b22d82a384886834452b4101e4da3"
+			"hash": "625301ffd22597dff7d8665e4753b631"
 		},
 		{
 			"identifier": "get_asset_tags/schema.py",
@@ -129,7 +129,7 @@
 		},
 		{
 			"identifier": "get_asset_vulnerabilities/schema.py",
-			"hash": "aef30c6698a25e93875fb2e26ee5b4ae"
+			"hash": "252860b202fa81722c24534f5675c049"
 		},
 		{
 			"identifier": "get_authentication_source/schema.py",
