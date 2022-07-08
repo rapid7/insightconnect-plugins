@@ -915,7 +915,7 @@ triggers:
         required: false
         example: ["InProgress", "Pending"]
       source_date_from_enum:
-        title: Source Date From Enum
+        title: Source Date Start Enum
         descripton: Start date to fetch from with options
         type: string
         required: false
