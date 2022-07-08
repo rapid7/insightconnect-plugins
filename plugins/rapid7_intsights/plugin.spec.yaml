@@ -528,7 +528,6 @@ actions:
         type: '[]string'
         required: false
         example: ["InProgress", "Pending"]
-
       source_date_from:
         title: Source Date From
         description: Start date (when the event occurred) to fetch from in Unix Millisecond Timestamp
