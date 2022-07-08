@@ -4,28 +4,8 @@ from .schema import NewAlertInput, NewAlertOutput, Input, Output, Component
 
 # Custom imports below
 from icon_rapid7_intsights.util.api import AlertParams
-
-
-def current_milli_time():
-    return round(time.time() * 1000)
-
-
-def subtract_day(time: int):
-    day_in_milliseconds = 86400 * 1000
-    minus_day_in_milliseconds = time - day_in_milliseconds
-    return minus_day_in_milliseconds
-
-
-def subtract_hour(time: int):
-    hour_in_milliseconds = 3600 * 1000
-    minus_hour_in_milliseconds = time - hour_in_milliseconds
-    return minus_hour_in_milliseconds
-
-
-def subtract_week(time: int):
-    week_in_milliseconds = 604800 * 1000
-    minus_week_in_milliseconds = time - week_in_milliseconds
-    return minus_week_in_milliseconds
+from icon_rapid7_intsights.util.api import current_milli_time, subtract_day, subtract_hour, subtract_week
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class NewAlert(insightconnect_plugin_runtime.Trigger):
@@ -39,15 +19,28 @@ class NewAlert(insightconnect_plugin_runtime.Trigger):
 
     def run(self, params={}):
 
-        SOURCE_FROM = params.get(Input.SOURCE_DATE_FROM_ENUM)
-        if SOURCE_FROM == 'Hour':
-            new_variable = subtract_hour(current_milli_time())
-        elif SOURCE_FROM == 'Day':
-            new_variable = subtract_day(current_milli_time())
-        elif SOURCE_FROM == 'Week':
-            new_variable = subtract_week(current_milli_time())
-        else:
-            new_variable = ""
+        SOURCE_FROM_ENUM = params.get(Input.SOURCE_DATE_FROM_ENUM, "")
+        SOURCE_FROM_STRING = params.get(Input.SOURCE_DATE_FROM, "")
+        source_date = ""
+
+        # If both are present - throw error
+        if SOURCE_FROM_STRING and SOURCE_FROM_ENUM:
+            raise PluginException(
+                cause="You cannot have both enum and string.", assistance="Ensure only enum or string is selected"
+            )
+
+        # If source date normal is empty - use enum
+        if SOURCE_FROM_ENUM:
+            if SOURCE_FROM_ENUM == "Hour":
+                source_date = subtract_hour(current_milli_time())
+            elif SOURCE_FROM_ENUM == "Day":
+                source_date = subtract_day(current_milli_time())
+            elif SOURCE_FROM_ENUM == "Week":
+                source_date = subtract_week(current_milli_time())
+
+        # If source date from enum empty - use regular one
+        if SOURCE_FROM_STRING:
+            source_date = SOURCE_FROM_STRING
 
         alert_params = AlertParams(
             alert_type=params.get(Input.ALERT_TYPE),
@@ -56,7 +49,7 @@ class NewAlert(insightconnect_plugin_runtime.Trigger):
             network_type=params.get(Input.NETWORK_TYPE),
             matched_asset_value=params.get(Input.MATCHED_ASSET_VALUE),
             remediation_status=params.get(Input.REMEDIATION_STATUS),
-            source_date_from=new_variable,
+            source_date_from=source_date,
             source_date_to=params.get(Input.SOURCE_DATE_TO),
             found_date_from=params.get(Input.FOUND_DATE_FROM),
             found_date_to=params.get(Input.FOUND_DATE_TO),

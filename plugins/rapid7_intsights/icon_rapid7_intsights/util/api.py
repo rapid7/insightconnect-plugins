@@ -98,6 +98,28 @@ class ManualAlertParams:
         )
 
 
+def current_milli_time():
+    return round(time.time() * 1000)
+
+
+def subtract_day(time: int):
+    day_in_milliseconds = 86400 * 1000
+    minus_day_in_milliseconds = time - day_in_milliseconds
+    return minus_day_in_milliseconds
+
+
+def subtract_hour(time: int):
+    hour_in_milliseconds = 3600 * 1000
+    minus_hour_in_milliseconds = time - hour_in_milliseconds
+    return minus_hour_in_milliseconds
+
+
+def subtract_week(time: int):
+    week_in_milliseconds = 604800 * 1000
+    minus_week_in_milliseconds = time - week_in_milliseconds
+    return minus_week_in_milliseconds
+
+
 class IntSightsAPI:
     def __init__(self, account_id: str, api_key: str, logger: Logger):
         self.account_id = account_id

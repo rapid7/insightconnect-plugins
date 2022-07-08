@@ -916,11 +916,11 @@ triggers:
         required: false
         example: ["InProgress", "Pending"]
       source_date_from_enum:
-        title: Source date from when
-        descripton: Fill in properly later
+        title: Source Date From Enum
+        descripton: Start date to fetch from with options
         type: string
         required: false
-        example: Past Hour
+        example: Hour
         enum:
           - Hour
           - Day

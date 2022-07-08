@@ -152,7 +152,12 @@ Example input:
 {
   "description": "Suspicious addresses",
   "found_date": "2020-01-01",
-  "images": "[{\"Type\": \"jpeg\",\"Data\": \"UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==\"}]",
+  "images": [
+     {
+        "Type": "jpeg",
+        "Data": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="
+      }
+  ],  
   "severity": "Medium",
   "source_date": "2020-02-01",
   "source_network_type": "DarkWeb",
@@ -289,7 +294,7 @@ This action is used to force an indicator scan in Intsights TIP system.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|indicator_file_hash|string|None|True|IOC value in type file hash|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
+|indicator_file_hash|string|None|True|IOC value in type file hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
 
 Example input:
 
@@ -818,6 +823,11 @@ This action is used to add CVEs to account.
 Example input:
 
 ```
+{
+  "cve_id": [
+    "CVE-2020-0711"
+  ]
+}
 ```
 
 ##### Output
@@ -903,7 +913,7 @@ This trigger will run when a new alert that matches the given criteria is create
 |remediation_status|[]string|None|False|List of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed|None|["InProgress", "Pending"]|
 |severity|[]string|None|False|List of alerts severity. Allowed values: High, Medium, Low|None|["Low"]|
 |source_date_from|string|None|False|Start date (when the event occured) to fetch from in Unix Millisecond Timestamp|None|1633047083142|
-|source_date_from_enum|string|None|False||['Hour', 'Day', 'Week', '']|Past Hour|
+|source_date_from_enum|string|None|False||['Hour', 'Day', 'Week', '']|Hour|
 |source_date_to|string|None|False|End date (when the event occured) to fetch to in Unix Millisecond Timestamp|None|1633047102456|
 |source_type|[]string|None|False|List of alert's source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other|None|["Application Store"]|
 
@@ -935,7 +945,7 @@ Example input:
     "Low"
   ],
   "source_date_from": 1633047083142,
-  "source_date_from_enum": "Past Hour",
+  "source_date_from_enum": "Hour",
   "source_date_to": 1633047102456,
   "source_type": [
     "Application Store"
