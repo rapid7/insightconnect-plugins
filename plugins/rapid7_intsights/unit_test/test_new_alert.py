@@ -6,7 +6,7 @@ from icon_rapid7_intsights.triggers.new_alert.schema import Input
 from unit_test.util import Util
 from unittest import TestCase
 from unittest.mock import patch
-
+from parameterized import parameterized
 sys.path.append(os.path.abspath("../"))
 
 actual = None
@@ -98,3 +98,77 @@ class TestNewAlert(TestCase):
             }
         )
         self.action.run()
+
+
+    @timeout_pass(error_callback=ErrorChecker.check_error)
+    @timeout_decorator.timeout(2)
+    @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=MockTrigger.send)
+    @patch("requests.request", side_effect=Util.mock_request)
+    @parameterized.expand([
+        ("Hour",),
+        ("Day",),
+        ("Week",),
+    ])
+    def test_trigger_with_enum_input(self, make_request, ss, time_value):
+        ErrorChecker.set_expected(
+            {
+                "alert_ids": [
+                    "7cafac7ec5adaebf62257a4c",
+                    "7cafac7ec5adaebf62257a4d",
+                    "7cafac7ec5adaebf62257a4e",
+                    "7cafac7ec5adaebf62257a4f",
+                ]
+            }
+        )
+        self.action.run({Input.SOURCE_DATE_FROM_ENUM: time_value})
+
+    # @timeout_pass(error_callback=ErrorChecker.check_error)
+    # @timeout_decorator.timeout(2)
+    # @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=MockTrigger.send)
+    # @patch("requests.request", side_effect=Util.mock_request)
+    # def test_trigger_with_enum_input_hour(self, make_request, ss):
+    #     ErrorChecker.set_expected(
+    #         {
+    #             "alert_ids": [
+    #                 "7cafac7ec5adaebf62257a4c",
+    #                 "7cafac7ec5adaebf62257a4d",
+    #                 "7cafac7ec5adaebf62257a4e",
+    #                 "7cafac7ec5adaebf62257a4f",
+    #             ]
+    #         }
+    #     )
+    #     self.action.run({Input.SOURCE_DATE_FROM_ENUM: "Hour"})
+    #
+    # @timeout_pass(error_callback=ErrorChecker.check_error)
+    # @timeout_decorator.timeout(2)
+    # @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=MockTrigger.send)
+    # @patch("requests.request", side_effect=Util.mock_request)
+    # def test_trigger_with_enum_input_day(self, make_request, ss):
+    #     ErrorChecker.set_expected(
+    #         {
+    #             "alert_ids": [
+    #                 "7cafac7ec5adaebf62257a4c",
+    #                 "7cafac7ec5adaebf62257a4d",
+    #                 "7cafac7ec5adaebf62257a4e",
+    #                 "7cafac7ec5adaebf62257a4f",
+    #             ]
+    #         }
+    #     )
+    #     self.action.run({Input.SOURCE_DATE_FROM_ENUM: "Day"})
+    #
+    # @timeout_pass(error_callback=ErrorChecker.check_error)
+    # @timeout_decorator.timeout(2)
+    # @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=MockTrigger.send)
+    # @patch("requests.request", side_effect=Util.mock_request)
+    # def test_trigger_with_enum_input_week(self, make_request, ss):
+    #     ErrorChecker.set_expected(
+    #         {
+    #             "alert_ids": [
+    #                 "7cafac7ec5adaebf62257a4c",
+    #                 "7cafac7ec5adaebf62257a4d",
+    #                 "7cafac7ec5adaebf62257a4e",
+    #                 "7cafac7ec5adaebf62257a4f",
+    #             ]
+    #         }
+    #     )
+    #     self.action.run({Input.SOURCE_DATE_FROM_ENUM: "Week"})
