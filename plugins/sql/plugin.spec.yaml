@@ -4,8 +4,8 @@ products: [insightconnect]
 name: sql
 title: SQL
 description: The SQL plugin allows you to run SQL queries
-version: 3.0.4
-supported_versions: ["MySQL 8.0.21", "MSSQL 2019 15.0.2000.5", "PostgresSQL 13.0"]
+version: 3.0.5
+supported_versions: ["MySQL 8.0.21", "MSSQL 2019 15.0.4223.1", "PostgresSQL 13.0"]
 vendor: rapid7
 support: community
 status: []
