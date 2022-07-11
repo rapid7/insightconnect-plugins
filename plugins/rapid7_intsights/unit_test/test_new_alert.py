@@ -6,7 +6,8 @@ from icon_rapid7_intsights.triggers.new_alert.schema import Input
 from unit_test.util import Util
 from unittest import TestCase
 from unittest.mock import patch
-from parameterized import parameterized, parameterized_class
+from parameterized import parameterized_class
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
@@ -123,4 +124,44 @@ class TestNewAlert(TestCase):
                 ]
             }
         )
+
         self.action.run({Input.SOURCE_DATE_FROM_ENUM: self.time_value})
+
+    @timeout_pass(error_callback=ErrorChecker.check_error)
+    @timeout_decorator.timeout(2)
+    @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=MockTrigger.send)
+    @patch("requests.request", side_effect=Util.mock_request)
+    def test_trigger_with_string_input(self, make_request, ss):
+        ErrorChecker.set_expected(
+            {
+                "alert_ids": [
+                    "7cafac7ec5adaebf62257a4c",
+                    "7cafac7ec5adaebf62257a4d",
+                    "7cafac7ec5adaebf62257a4e",
+                    "7cafac7ec5adaebf62257a4f",
+                ]
+            }
+        )
+
+        self.action.run({Input.SOURCE_DATE_FROM: "1633047083142"})
+
+    # Write this so that it compares result to PluginException
+    @timeout_pass(error_callback=ErrorChecker.check_error)
+    @timeout_decorator.timeout(2)
+    @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=MockTrigger.send)
+    @patch("requests.request", side_effect=Util.mock_request)
+    def test_trigger_with_enum_and_string_input(self, make_request, ss):
+        ErrorChecker.set_expected(
+            {
+                "alert_ids": [
+                    "7cafac7ec5adaebf62257a4c",
+                    "7cafac7ec5adaebf62257a4d",
+                    "7cafac7ec5adaebf62257a4e",
+                    "7cafac7ec5adaebf62257a4f",
+                ]
+            }
+        )
+        exception = "You cannot have both enum and string."
+        with self.assertRaises(PluginException) as context:
+            self.action.run({Input.SOURCE_DATE_FROM_ENUM: "Hour", Input.SOURCE_DATE_FROM: "1633047083142"})
+        self.assertEqual(context.exception.cause, exception)
