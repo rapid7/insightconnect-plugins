@@ -82,7 +82,7 @@ class GetUserInfoOutput(insightconnect_plugin_runtime.Output):
           "title": "Assigned Licenses",
           "description": "Assigned Licenses",
           "items": {
-            "type": "string"
+            "type": "object"
           },
           "order": 53
         },
@@ -91,7 +91,7 @@ class GetUserInfoOutput(insightconnect_plugin_runtime.Output):
           "title": "Assigned Plans",
           "description": "Assigned Plans",
           "items": {
-            "type": "string"
+            "type": "object"
           },
           "order": 54
         },
@@ -267,7 +267,7 @@ class GetUserInfoOutput(insightconnect_plugin_runtime.Output):
           "order": 24
         },
         "mobilePhone": {
-          "type": "integer",
+          "type": "string",
           "title": "Mobile Phone",
           "description": "Mobile Phone",
           "order": 25
@@ -332,7 +332,7 @@ class GetUserInfoOutput(insightconnect_plugin_runtime.Output):
           "order": 30
         },
         "onPremisesSyncEnabled": {
-          "type": "string",
+          "type": "boolean",
           "title": "On Premises Sync Enabled",
           "description": "On Premises Sync Enabled",
           "order": 32
@@ -381,7 +381,7 @@ class GetUserInfoOutput(insightconnect_plugin_runtime.Output):
           "title": "Provisioned Plans",
           "description": "Provisioned Plans",
           "items": {
-            "type": "string"
+            "type": "object"
           },
           "order": 59
         },
@@ -574,7 +574,7 @@ class GetUserInfoOutput(insightconnect_plugin_runtime.Output):
               "title": "Assigned Licenses",
               "description": "Assigned Licenses",
               "items": {
-                "type": "string"
+                "type": "object"
               },
               "order": 53
             },
@@ -583,7 +583,7 @@ class GetUserInfoOutput(insightconnect_plugin_runtime.Output):
               "title": "Assigned Plans",
               "description": "Assigned Plans",
               "items": {
-                "type": "string"
+                "type": "object"
               },
               "order": 54
             },
@@ -759,7 +759,7 @@ class GetUserInfoOutput(insightconnect_plugin_runtime.Output):
               "order": 24
             },
             "mobilePhone": {
-              "type": "integer",
+              "type": "string",
               "title": "Mobile Phone",
               "description": "Mobile Phone",
               "order": 25
@@ -824,7 +824,7 @@ class GetUserInfoOutput(insightconnect_plugin_runtime.Output):
               "order": 30
             },
             "onPremisesSyncEnabled": {
-              "type": "string",
+              "type": "boolean",
               "title": "On Premises Sync Enabled",
               "description": "On Premises Sync Enabled",
               "order": 32
@@ -873,7 +873,7 @@ class GetUserInfoOutput(insightconnect_plugin_runtime.Output):
               "title": "Provisioned Plans",
               "description": "Provisioned Plans",
               "items": {
-                "type": "string"
+                "type": "object"
               },
               "order": 59
             },
