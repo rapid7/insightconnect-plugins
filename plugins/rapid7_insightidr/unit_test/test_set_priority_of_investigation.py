@@ -23,7 +23,7 @@ class TestSetPriorityOfInvestigation(TestCase):
             "invalid_query_id": "0000000-000-9ee-000-00000000000",
         }
         self.connection_params = {
-            ConnectionInput.URL: "https://us.rest.logs.insight.rapid7.com",
+            ConnectionInput.REGION: "United States 1",
             ConnectionInput.API_KEY: {"secretKey": "api_key"},
         }
 

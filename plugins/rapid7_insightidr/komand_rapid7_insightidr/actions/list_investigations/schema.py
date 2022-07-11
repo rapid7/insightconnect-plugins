@@ -39,14 +39,14 @@ class ListInvestigationsInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "End Time",
       "displayType": "date",
-      "description": "An optional-ISO formatted timestamp. Only investigations whose createTime is before this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned",
+      "description": "An optional-ISO formatted timestamp, where only investigations whose createTime is before this date will be returned",
       "format": "date-time",
       "order": 3
     },
     "index": {
       "type": "integer",
       "title": "Index",
-      "description": "The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0",
+      "description": "Zero-based index of the page to retrieve, where value must be greater than or equal to 0",
       "default": 0,
       "order": 5
     },
@@ -62,7 +62,7 @@ class ListInvestigationsInput(insightconnect_plugin_runtime.Input):
     "size": {
       "type": "integer",
       "title": "Size",
-      "description": "The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 100. Default value is 100",
+      "description": "Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100",
       "default": 100,
       "order": 4
     },
@@ -77,7 +77,13 @@ class ListInvestigationsInput(insightconnect_plugin_runtime.Input):
         "Priority Ascending",
         "Priority Descending",
         "Last alert time Ascending",
-        "Last alert time Descending"
+        "Last alert time Descending",
+        "RRN Ascending",
+        "RRN Descending",
+        "Alerts most recent created time Ascending",
+        "Alerts most recent created time Descending",
+        "Alerts most recent detection created time Ascending",
+        "Alerts most recent detection created time Descending"
       ],
       "order": 8
     },
@@ -85,14 +91,14 @@ class ListInvestigationsInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Start Time",
       "displayType": "date",
-      "description": "An optional ISO-formatted timestamp. Only investigations whose createTime is after this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned",
+      "description": "An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned",
       "format": "date-time",
       "order": 2
     },
     "statuses": {
       "type": "string",
       "title": "Statuses",
-      "description": "An optional-comma separated set of investigation statuses. Only the investigation whose status matches one of the entries in the list will be returned. If this parameter is omitted investigations with any status may be returned",
+      "description": "Only investigations whose status matches one of the entries in the list will be returned",
       "default": "CLOSED",
       "enum": [
         "OPEN",
@@ -208,7 +214,7 @@ class ListInvestigationsOutput(insightconnect_plugin_runtime.Output):
         "priority": {
           "type": "string",
           "title": "Priority",
-          "description": "The investigations priority, where possible values are CRITICAL, HIGH, MEDIUM, LOW, and UNSPECIFIED",
+          "description": "The investigations priority, where possible values are CRITICAL, HIGH, MEDIUM, LOW, and UNKNOWN",
           "order": 8
         },
         "rrn": {

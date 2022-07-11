@@ -1,6 +1,6 @@
 {
-	"spec": "d8407554b063cc28e0799bded90fd2b2",
-	"manifest": "c9bd390e187ccb0117dbf1208930e45b",
+	"spec": "314c8271bea462fcee5643f57b0e4565",
+	"manifest": "66a6aeb2dabc6740a4935d3b0f6b038a",
 	"setup": "11e30d38ce98dc35ca19afff71bd68c6",
 	"schemas": [
 		{
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "assign_user_to_investigation/schema.py",
-			"hash": "ced209dd9271e771df652760c40e3980"
+			"hash": "a9fc0ac4cd44bd370e86af7f596b78d1"
 		},
 		{
 			"identifier": "close_investigations_in_bulk/schema.py",
@@ -25,7 +25,7 @@
 		},
 		{
 			"identifier": "create_investigation/schema.py",
-			"hash": "c1a2cb8868c8f0d189d63bae3c73bdfa"
+			"hash": "977a2845d11ea53ba0ff72c8abab49c7"
 		},
 		{
 			"identifier": "create_threat/schema.py",
@@ -49,43 +49,43 @@
 		},
 		{
 			"identifier": "get_investigation/schema.py",
-			"hash": "34cf450273896c0a7c835efb3435124a"
+			"hash": "149d9658fdc93d51dff4694e1882a3a4"
 		},
 		{
 			"identifier": "list_alerts_for_investigation/schema.py",
-			"hash": "c5da51e11be2e6166174dfb5dcb9221c"
+			"hash": "78332eae881b0c36901dfacf9a8f1e67"
 		},
 		{
 			"identifier": "list_investigations/schema.py",
-			"hash": "801b92aa3c8cf044f185d97139dfe131"
+			"hash": "efa3be4670ed2165c8bceee7f5c3841c"
 		},
 		{
 			"identifier": "query/schema.py",
 			"hash": "98d2987b09ac8bed0e928cd36f417c53"
 		},
 		{
-			"identifier": "search_investigation/schema.py",
-			"hash": "6c221885d2d2e83a0769cb44ffd36a96"
+			"identifier": "search_investigations/schema.py",
+			"hash": "f59c4a599a8f5e6a563b643c39dd4b02"
 		},
 		{
 			"identifier": "set_disposition_of_investigation/schema.py",
-			"hash": "2bcb790b63eb43bf7d280b1bc9e57bfb"
+			"hash": "bc77b3c868db9ac71222c90d30e69687"
 		},
 		{
 			"identifier": "set_priority_of_investigation/schema.py",
-			"hash": "dc860cd749d58c001e6aaaa36ecfe7d0"
+			"hash": "e3f81370defcb8f4a8a9bfaa3ab3d758"
 		},
 		{
 			"identifier": "set_status_of_investigation_action/schema.py",
-			"hash": "e0d8a05b58b25f434c56f16a24501c36"
+			"hash": "0a050c11b3cd4e57cbd6147414a27dda"
 		},
 		{
 			"identifier": "update_investigation/schema.py",
-			"hash": "dfdf96b9cd2b4dbb61311bab02a45a47"
+			"hash": "519b1375887a53891489c2e2c294d961"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "6ae70a484be0ea84cbcb8a196b9db88a"
+			"hash": "1c1fe91f956e8be3a7bec1575f4f1e27"
 		}
 	]
 }

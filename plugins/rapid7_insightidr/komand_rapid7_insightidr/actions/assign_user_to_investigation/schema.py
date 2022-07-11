@@ -138,7 +138,7 @@ class AssignUserToInvestigationOutput(insightconnect_plugin_runtime.Output):
         "priority": {
           "type": "string",
           "title": "Priority",
-          "description": "The investigations priority, where possible values are CRITICAL, HIGH, MEDIUM, LOW, and UNSPECIFIED",
+          "description": "The investigations priority, where possible values are CRITICAL, HIGH, MEDIUM, LOW, and UNKNOWN",
           "order": 8
         },
         "rrn": {

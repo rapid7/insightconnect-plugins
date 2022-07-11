@@ -32,20 +32,98 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|InsightIDR API key|None|4472f2g7-991z-4w70-li11-7552w8qm0266|
-|url|string|https://example.com|True|The URL endpoint for InsightIDR. e.g. https://<REGION_CODE>.api.insight.rapid7.com|None|https://example.com|
+|region|string|United States 1|True|The region for InsightIDR|['United States 1', 'United States 2', 'United States 3', 'Europe', 'Canada', 'Australia', 'Japan']|United States 1|
 
 Example input:
 
 ```
 {
   "api_key": "4472f2g7-991z-4w70-li11-7552w8qm0266",
-  "url": "https://us.api.insight.rapid7.com"
+  "region": "United States 1"
 }
 ```
 
 ## Technical Details
 
 ### Actions
+
+#### Search Investigations
+
+This action allows to search for investigations that match the given criteria.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|end_time|date|None|False|The ending time when investigations were created|None|2020-09-06 12:07:55.136667|
+|index|integer|0|True|Zero-based index of the page to retrieve, where value must be greater than or equal to 0|None|1|
+|search|[]object|None|False|The criteria for which entities to return|None|[{"field": "Example Field", "operator": "EQUALS", "value": "Test"}]|
+|size|integer|100|True|Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100|None|100|
+|sort|[]object|None|False|The sorting information, where possible field values are RRN, PRIORITY, CREATED TIME, and order values are ASC, DESC|None|[{"field": "Example Field", "order": "ASC"}]|
+|start_time|date|None|False|The starting time from when investigations were created|None|2020-09-06 12:07:55.136667|
+
+Example input:
+
+```
+{
+  "end_time": "2020-09-06T12:07:55.1366667Z",
+  "index": 1,
+  "search": [
+    {
+      "field": "Example Field",
+      "operator": "EQUALS",
+      "value": "Test"
+    }
+  ],
+  "size": 100,
+  "sort": [
+    {
+      "field": "Example Field",
+      "order": "ASC"
+    }
+  ],
+  "start_time": "2020-09-06T12:07:55.1366667Z"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|investigations|[]investigation|True|A list of found investigations|
+|metadata|investigation_metadata|True|The pagination parameters used to generate this page result|
+
+Example output:
+
+```
+{
+  "investigations": [
+    {
+      "assignee": {
+        "email": "user@example.com",
+        "name": "Ellen Example"
+      },
+      "created_time": "2018-06-06T16:56:42Z",
+      "disposition": "BENIGN",
+      "first_alert_time": "2018-06-06T16:56:42Z",
+      "last_accessed": "2018-06-06T16:56:42Z",
+      "latest_alert_time": "2018-06-06T16:56:42Z",
+      "organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06",
+      "priority": "CRITICAL",
+      "rrn": "rrn:example",
+      "source": "ALERT",
+      "status": "OPEN",
+      "title": "Example Title"
+    }
+  ],
+  "metadata": {
+    "index": 0,
+    "size": 1,
+    "total_data": 1,
+    "total_pages": 1
+  }
+}
+```
 
 #### List Alerts for Investigation
 
@@ -55,7 +133,7 @@ This action is used to retrieve a page of alerts associated with the specified i
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|The ID or RRN of the investigation|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|
+|id|string|None|True|The identifier of investigation (ID or RRN)|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|
 |index|integer|0|True|The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0|None|1|
 |size|integer|100|True|The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 100. Default value is 100|None|100|
 
@@ -220,7 +298,7 @@ This action allows to get existing investigation by ID or RRN.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|The ID or RRN of the investigation|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|
+|id|string|None|True|The identifier of investigation (ID or RRN)|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|
 
 Example input:
 
@@ -270,7 +348,7 @@ This action allows to update existing investigation.
 |----|----|-------|--------|-----------|----|-------|
 |disposition|string|None|False|Investigation's disposition|['', 'BENIGN', 'MALICIOUS', 'NOT_APPLICABLE']|BENIGN|
 |email|string|None|False|A user's email address for investigation to be assigned|None|user@example.com|
-|id|string|None|True|The identifier of Investigation to be update (ID or RRN)|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|
+|id|string|None|True|The identifier of investigation to be update (ID or RRN)|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|
 |priority|string|None|False|Investigation's priority|['', 'UNSPECIFIED', 'LOW', 'MEDIUM', 'HIGH', 'CRITICAL']|LOW|
 |status|string|None|False|Investigation's status|['', 'OPEN', 'INVESTIGATING', 'CLOSED']|OPEN|
 |title|string|None|False|Investigation's title|None|Example Title|
@@ -314,84 +392,6 @@ Example output:
     "source": "ALERT",
     "status": "OPEN",
     "title": "Example Title"
-  }
-}
-```
-
-#### Search Investigation
-
-This action allows to search for investigations that match the given criteria.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|end_time|date|None|False|The ending time when investigations were created|None|2020-09-06 12:07:55.136667|
-|index|integer|0|True|The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0|None|1|
-|search|[]object|None|False|The criteria for which entities to return|None|[{"field": "Example Field", "operator": "EQUALS", "value": "Test"}]|
-|size|integer|100|True|The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 100. Default value is 100|None|100|
-|sort|[]object|None|False|The sorting information, where possible field values are RRN, PRIORITY, CREATED TIME, and order values are ASC, DESC|None|[{"field": "Example Field", "order": "ASC"}]|
-|start_time|date|None|False|The starting time from when investigations were created|None|2020-09-06 12:07:55.136667|
-
-Example input:
-
-```
-{
-  "end_time": "2020-09-06T12:07:55.1366667Z",
-  "index": 1,
-  "search": [
-    {
-      "field": "Example Field",
-      "operator": "EQUALS",
-      "value": "Test"
-    }
-  ],
-  "size": 100,
-  "sort": [
-    {
-      "field": "Example Field",
-      "order": "ASC"
-    }
-  ],
-  "start_time": "2020-09-06T12:07:55.1366667Z"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|investigations|[]investigation|True|A list of found investigations|
-|metadata|investigation_metadata|True|The pagination parameters used to generate this page result|
-
-Example output:
-
-```
-{
-  "investigations": [
-    {
-      "assignee": {
-        "email": "user@example.com",
-        "name": "Ellen Example"
-      },
-      "created_time": "2018-06-06T16:56:42Z",
-      "disposition": "BENIGN",
-      "first_alert_time": "2018-06-06T16:56:42Z",
-      "last_accessed": "2018-06-06T16:56:42Z",
-      "latest_alert_time": "2018-06-06T16:56:42Z",
-      "organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06",
-      "priority": "CRITICAL",
-      "rrn": "rrn:example",
-      "source": "ALERT",
-      "status": "OPEN",
-      "title": "Example Title"
-    }
-  ],
-  "metadata": {
-    "index": 0,
-    "size": 1,
-    "total_data": 1,
-    "total_pages": 1
   }
 }
 ```
@@ -1234,13 +1234,13 @@ This action is used to retrieve a page of investigations matching the given requ
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |email|string|None|False|A user's email address, where only investigations assigned to that user will be included|None|user@example.com|
-|end_time|date|None|False|An optional-ISO formatted timestamp. Only investigations whose createTime is before this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned|None|2020-06-01T12:11:13+05:30|
-|index|integer|0|True|The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0|None|1|
+|end_time|date|None|False|An optional-ISO formatted timestamp, where only investigations whose createTime is before this date will be returned|None|2020-06-01T12:11:13+05:30|
+|index|integer|0|True|Zero-based index of the page to retrieve, where value must be greater than or equal to 0|None|1|
 |priorities|[]string|None|False|A comma-separated list of investigation priorities to include in the result, where possible values are UNSPECIFIED, LOW, MEDIUM, HIGH, CRITICAL|None|["UNSPECIFIED, LOW, MEDIUM, HIGH, CRITICAL"]|
-|size|integer|100|True|The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 100. Default value is 100|None|100|
-|sort|string|None|False|A field for investigations to be sorted|['', 'Create time Ascending', 'Create time Descending', 'Priority Ascending', 'Priority Descending', 'Last alert time Ascending', 'Last alert time Descending']|Create time Ascending|
-|start_time|date|None|False|An optional ISO-formatted timestamp. Only investigations whose createTime is after this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned|None|2020-06-01T12:11:13+05:30|
-|statuses|string|CLOSED|True|An optional-comma separated set of investigation statuses. Only the investigation whose status matches one of the entries in the list will be returned. If this parameter is omitted investigations with any status may be returned|['OPEN', 'CLOSED', 'EITHER']|CLOSED|
+|size|integer|100|True|Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100|None|100|
+|sort|string|None|False|A field for investigations to be sorted|['', 'Create time Ascending', 'Create time Descending', 'Priority Ascending', 'Priority Descending', 'Last alert time Ascending', 'Last alert time Descending', 'RRN Ascending', 'RRN Descending', 'Alerts most recent created time Ascending', 'Alerts most recent created time Descending', 'Alerts most recent detection created time Ascending', 'Alerts most recent detection created time Descending']|Create time Ascending|
+|start_time|date|None|False|An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned|None|2020-06-01T12:11:13+05:30|
+|statuses|string|CLOSED|True|Only investigations whose status matches one of the entries in the list will be returned|['OPEN', 'CLOSED', 'EITHER']|CLOSED|
 
 Example input:
 

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Allows to update existing investigation"
+    DESCRIPTION = "Allows to update existing investigation by ID or RRN"
 
 
 class Input:
@@ -46,8 +46,8 @@ class UpdateInvestigationInput(insightconnect_plugin_runtime.Input):
     },
     "id": {
       "type": "string",
-      "title": "ID",
-      "description": "The identifier of Investigation to be update (ID or RRN)",
+      "title": "ID or RRN",
+      "description": "The identifier of investigation to be update (ID or RRN)",
       "order": 1
     },
     "priority": {
@@ -177,7 +177,7 @@ class UpdateInvestigationOutput(insightconnect_plugin_runtime.Output):
         "priority": {
           "type": "string",
           "title": "Priority",
-          "description": "The investigations priority, where possible values are CRITICAL, HIGH, MEDIUM, LOW, and UNSPECIFIED",
+          "description": "The investigations priority, where possible values are CRITICAL, HIGH, MEDIUM, LOW, and UNKNOWN",
           "order": 8
         },
         "rrn": {

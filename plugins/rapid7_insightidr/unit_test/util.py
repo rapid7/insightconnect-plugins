@@ -16,6 +16,8 @@ class Meta:
 
 
 class Util:
+    STUB_URL = "https://us.api.insight.rapid7.com"
+
     @staticmethod
     def default_connector(action, connect_params: object = None):
         default_connection = Connection()
@@ -25,7 +27,7 @@ class Util:
             params = connect_params
         else:
             params = {
-                Input.URL: "https://rapid7.com",
+                Input.REGION: "United States 1",
                 Input.API_KEY: {"secretKey": "4472f2g7-991z-4w70-li11-7552w8qm0266"},
             }
         default_connection.connect(params)
@@ -68,11 +70,11 @@ class Util:
                     )
                 )
 
-        if args[0] == "https://rapid7.com/log_search/management/labels/00000000-0000-0000-0000-000000000006":
+        if args[0] == f"{Util.STUB_URL}/log_search/management/labels/00000000-0000-0000-0000-000000000006":
             return MockResponse("label_006", 200)
-        elif args[0] == "https://rapid7.com/log_search/management/labels/00000000-0000-0000-0000-000000000007":
+        elif args[0] == f"{Util.STUB_URL}/log_search/management/labels/00000000-0000-0000-0000-000000000007":
             return MockResponse("label_007", 200)
-        elif args[0] == "https://rapid7.com/log_search/management/labels/not exist label - 404":
+        elif args[0] == f"{Util.STUB_URL}/log_search/management/labels/not exist label - 404":
             return MockResponse("label_404", 404)
 
         raise Exception("Not implemented")
@@ -101,29 +103,29 @@ class Util:
                     )
                 )
 
-        if args[0] == "https://rapid7.com/log_search/management/logs":
+        if args[0] == f"{Util.STUB_URL}/log_search/management/logs":
             return MockResponse("logs", 200)
         elif (
-            args[0] == "https://rapid7.com/log_search/query/logs/log_id"
-            or args[0] == "https://rapid7.com/log_search/query/logsets/log_id"
+            args[0] == f"{Util.STUB_URL}/log_search/query/logs/log_id"
+            or args[0] == f"{Util.STUB_URL}/log_search/query/logsets/log_id"
         ):
             return MockResponse("log_id", 200)
         elif (
-            args[0] == "https://rapid7.com/log_search/query/logs/log_id2"
-            or args[0] == "https://rapid7.com/log_search/query/logsets/log_id2"
+            args[0] == f"{Util.STUB_URL}/log_search/query/logs/log_id2"
+            or args[0] == f"{Util.STUB_URL}/log_search/query/logsets/log_id2"
         ):
             return MockResponse("log_id2", 200)
         elif (
-            args[0] == "https://rapid7.com/log_search/query/logs/log_id3"
-            or args[0] == "https://rapid7.com/log_search/query/logsets/log_id3"
+            args[0] == f"{Util.STUB_URL}/log_search/query/logs/log_id3"
+            or args[0] == f"{Util.STUB_URL}/log_search/query/logsets/log_id3"
         ):
             return MockResponse("log_id3", 200)
         elif (
-            args[0] == "https://rapid7.com/log_search/query/logs/log_id4"
-            or args[0] == "https://rapid7.com/log_search/query/logsets/log_id4"
+            args[0] == f"{Util.STUB_URL}/log_search/query/logs/log_id4"
+            or args[0] == f"{Util.STUB_URL}/log_search/query/logsets/log_id4"
         ):
             return MockResponse("log_id4", 200)
-        elif args[0] == "https://rapid7.com/log_search/management/logsets":
+        elif args[0] == f"{Util.STUB_URL}/log_search/management/logsets":
             return MockResponse("logsets", 200)
 
         raise Exception("Not implemented")

@@ -11,7 +11,6 @@ REQUEST_PUT = "put"
 STUB_INVESTIGATION_IDENTIFIER = "rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111"
 STUB_QUERY_ID = "00000000-0000-1eec-0000-000000000000"
 STUB_QUERY_ID_NOT_FOUND = "00000000-0000-8eec-0000-000000000000"
-STUB_URL = "https://rapid7.com"
 STUB_API_KEY = "j5740ps1cbukyk3t8kib3wa36aq2v3da"
 STUB_CONNECTION = {"api_key": {"secretKey": STUB_API_KEY}, "url": STUB_API_KEY}
 
@@ -53,42 +52,42 @@ class MockResponse:
 
 
 def mock_request_post(url: str) -> MockResponse:
-    if url == f"{STUB_URL}/query/saved_queries/{STUB_QUERY_ID}":
+    if url == f"{Util.STUB_URL}/query/saved_queries/{STUB_QUERY_ID}":
         return MockResponse("get_a_saved_query", 200)
-    if url == f"{STUB_URL}/idr/v2/investigations":
+    if url == f"{Util.STUB_URL}/idr/v2/investigations":
         return MockResponse("create_investigation", 201)
-    if url == f"{STUB_URL}/idr/v2/investigations/_search":
-        return MockResponse("search_investigation", 200)
+    if url == f"{Util.STUB_URL}/idr/v2/investigations/_search":
+        return MockResponse("search_investigations", 200)
 
 
 def mock_request_get(url: str) -> MockResponse:
-    if url == f"{STUB_URL}/query/saved_queries":
+    if url == f"{Util.STUB_URL}/query/saved_queries":
         return MockResponse("get_all_saved_queries", 200)
-    if url == f"{STUB_URL}/query/saved_queries/{STUB_QUERY_ID}":
+    if url == f"{Util.STUB_URL}/query/saved_queries/{STUB_QUERY_ID}":
         return MockResponse("get_a_saved_query", 200)
-    if url == f"{STUB_URL}/query/saved_queries/{STUB_QUERY_ID_NOT_FOUND}":
+    if url == f"{Util.STUB_URL}/query/saved_queries/{STUB_QUERY_ID_NOT_FOUND}":
         return MockResponse("get_a_saved_query_404", 404)
-    if url == f"{STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}":
+    if url == f"{Util.STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}":
         return MockResponse("get_investigation", 200)
-    if url == f"{STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/alerts":
+    if url == f"{Util.STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/alerts":
         return MockResponse("list_alerts_for_investigation", 200)
     if "investigations" in url:
         return MockResponse("list_investigations", 200)
 
 
 def mock_request_patch(url: str) -> MockResponse:
-    if url == f"{STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}":
+    if url == f"{Util.STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}":
         return MockResponse("update_investigation", 200)
 
 
 def mock_request_put(url: str) -> MockResponse:
-    if url == f"{STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/priority/{STUB_PRIORITY}":
+    if url == f"{Util.STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/priority/{STUB_PRIORITY}":
         return MockResponse("update_investigation", 200)
-    if url == f"{STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/status/{STUB_STATUS}":
+    if url == f"{Util.STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/status/{STUB_STATUS}":
         return MockResponse("update_investigation", 200)
-    if url == f"{STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/disposition/{STUB_DISPOSITION}":
+    if url == f"{Util.STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/disposition/{STUB_DISPOSITION}":
         return MockResponse("update_investigation", 200)
-    if url == f"{STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/assignee":
+    if url == f"{Util.STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/assignee":
         return MockResponse("update_investigation", 200)
 
 

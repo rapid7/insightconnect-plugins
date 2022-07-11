@@ -5,6 +5,7 @@ from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 # Custom imports below
 import requests
 from typing import Optional
+from komand_rapid7_insightidr.util.endpoints import Investigations
 
 
 class Connection(insightconnect_plugin_runtime.Connection):
@@ -15,7 +16,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params={}):
         api_key = params.get(Input.API_KEY).get("secretKey")
-        self.url = params.get(Input.URL)
+        self.url = Investigations.connection_api_url(params.get(Input.REGION))
         if not self.url.endswith("/"):
             self.url = f"{self.url}/"
 

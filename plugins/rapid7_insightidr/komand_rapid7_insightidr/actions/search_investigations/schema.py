@@ -21,7 +21,7 @@ class Output:
     METADATA = "metadata"
     
 
-class SearchInvestigationInput(insightconnect_plugin_runtime.Input):
+class SearchInvestigationsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
@@ -38,7 +38,7 @@ class SearchInvestigationInput(insightconnect_plugin_runtime.Input):
     "index": {
       "type": "integer",
       "title": "Index",
-      "description": "The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0",
+      "description": "Zero-based index of the page to retrieve, where value must be greater than or equal to 0",
       "default": 0,
       "order": 6
     },
@@ -54,7 +54,7 @@ class SearchInvestigationInput(insightconnect_plugin_runtime.Input):
     "size": {
       "type": "integer",
       "title": "Size",
-      "description": "The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 100. Default value is 100",
+      "description": "Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100",
       "default": 100,
       "order": 5
     },
@@ -87,7 +87,7 @@ class SearchInvestigationInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class SearchInvestigationOutput(insightconnect_plugin_runtime.Output):
+class SearchInvestigationsOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
@@ -181,7 +181,7 @@ class SearchInvestigationOutput(insightconnect_plugin_runtime.Output):
         "priority": {
           "type": "string",
           "title": "Priority",
-          "description": "The investigations priority, where possible values are CRITICAL, HIGH, MEDIUM, LOW, and UNSPECIFIED",
+          "description": "The investigations priority, where possible values are CRITICAL, HIGH, MEDIUM, LOW, and UNKNOWN",
           "order": 8
         },
         "rrn": {

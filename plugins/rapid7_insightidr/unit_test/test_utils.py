@@ -19,6 +19,12 @@ class TestUtils(TestCase):
             ("Priority Descending", "priority,DESC"),
             ("Last alert time Ascending", "last_alert_time,ASC"),
             ("Last alert time Descending", "last_alert_time,DESC"),
+            ("RRN Ascending", "rrn,ASC"),
+            ("RRN Descending", "rrn,DESC"),
+            ("Alerts most recent created time Ascending", "alerts_most_recent_created_time,ASC"),
+            ("Alerts most recent created time Descending", "alerts_most_recent_created_time,DESC"),
+            ("Alerts most recent detection created time Ascending", "alerts_most_recent_detection_created_time,ASC"),
+            ("Alerts most recent detection created time Descending", "alerts_most_recent_detection_created_time,DESC"),
         ]
     )
     def test_get_sort_param(self, input_sort_str, expected_result):

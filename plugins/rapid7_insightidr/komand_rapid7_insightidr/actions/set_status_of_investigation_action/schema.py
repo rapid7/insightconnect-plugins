@@ -24,7 +24,7 @@ class SetStatusOfInvestigationActionInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "id": {
       "type": "string",
-      "title": "ID",
+      "title": "ID or RRN",
       "description": "The ID of the investigation to change the status of",
       "order": 1
     },
@@ -135,7 +135,7 @@ class SetStatusOfInvestigationActionOutput(insightconnect_plugin_runtime.Output)
         "priority": {
           "type": "string",
           "title": "Priority",
-          "description": "The investigations priority, where possible values are CRITICAL, HIGH, MEDIUM, LOW, and UNSPECIFIED",
+          "description": "The investigations priority, where possible values are CRITICAL, HIGH, MEDIUM, LOW, and UNKNOWN",
           "order": 8
         },
         "rrn": {

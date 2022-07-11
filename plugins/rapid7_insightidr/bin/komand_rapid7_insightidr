@@ -64,7 +64,7 @@ def main():
 
             self.add_action(actions.Query())
 
-            self.add_action(actions.SearchInvestigation())
+            self.add_action(actions.SearchInvestigations())
 
             self.add_action(actions.SetDispositionOfInvestigation())
 

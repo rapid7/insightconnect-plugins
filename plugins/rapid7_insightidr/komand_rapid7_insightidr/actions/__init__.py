@@ -14,7 +14,7 @@ from .get_investigation.action import GetInvestigation
 from .list_alerts_for_investigation.action import ListAlertsForInvestigation
 from .list_investigations.action import ListInvestigations
 from .query.action import Query
-from .search_investigation.action import SearchInvestigation
+from .search_investigations.action import SearchInvestigations
 from .set_disposition_of_investigation.action import SetDispositionOfInvestigation
 from .set_priority_of_investigation.action import SetPriorityOfInvestigation
 from .set_status_of_investigation_action.action import SetStatusOfInvestigationAction

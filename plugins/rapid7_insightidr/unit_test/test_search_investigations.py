@@ -6,8 +6,8 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from unittest.mock import patch
 
-from komand_rapid7_insightidr.actions.search_investigation import SearchInvestigation
-from komand_rapid7_insightidr.actions.search_investigation.schema import Input
+from komand_rapid7_insightidr.actions.search_investigations import SearchInvestigations
+from komand_rapid7_insightidr.actions.search_investigations.schema import Input
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
 from unit_test.mock import mock_post_request
@@ -23,16 +23,16 @@ class TestSearchInvestigation(TestCase):
             "invalid_query_id": "0000000-000-9ee-000-00000000000",
         }
         self.connection_params = {
-            ConnectionInput.URL: "https://us.rest.logs.insight.rapid7.com",
+            ConnectionInput.REGION: "United States 1",
             ConnectionInput.API_KEY: {"secretKey": "api_key"},
         }
 
     def setUp(self) -> None:
-        self.action = Util.default_connector(SearchInvestigation())
+        self.action = Util.default_connector(SearchInvestigations())
         self.connection = self.action.connection
 
     @patch("requests.Session.post", side_effect=mock_post_request)
-    def test_search_investigation(self, _mock_req):
+    def test_search_investigations(self, _mock_req):
         actual = self.action.run(
             {
                 Input.INDEX: 0,

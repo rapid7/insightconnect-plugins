@@ -26,8 +26,8 @@ class ListAlertsForInvestigationInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "id": {
       "type": "string",
-      "title": "ID",
-      "description": "The ID or RRN of the investigation",
+      "title": "ID or RRN",
+      "description": "The identifier of investigation (ID or RRN)",
       "order": 1
     },
     "index": {

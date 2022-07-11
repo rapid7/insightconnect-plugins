@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import SearchInvestigationInput, SearchInvestigationOutput, Input, Output, Component
+from .schema import SearchInvestigationsInput, SearchInvestigationsOutput, Input, Output, Component
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -10,25 +10,29 @@ import json
 import datetime
 
 
-class SearchInvestigation(insightconnect_plugin_runtime.Action):
+class SearchInvestigations(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-            name="search_investigation",
+            name="search_investigations",
             description=Component.DESCRIPTION,
-            input=SearchInvestigationInput(),
-            output=SearchInvestigationOutput(),
+            input=SearchInvestigationsInput(),
+            output=SearchInvestigationsOutput(),
         )
 
     def run(self, params={}):
         search = params.get(Input.SEARCH)
         sort = params.get(Input.SORT)
         start_time = (
-            datetime.datetime.fromisoformat(params.get(Input.START_TIME)).replace(tzinfo=None).isoformat()
+            datetime.datetime.fromisoformat(params.get(Input.START_TIME))
+            .astimezone(datetime.timezone.utc)
+            .strftime("%Y-%m-%dT%H:%M:%SZ")
             if params.get(Input.START_TIME)
             else None
         )
         end_time = (
-            datetime.datetime.fromisoformat(params.get(Input.END_TIME)).replace(tzinfo=None).isoformat()
+            datetime.datetime.fromisoformat(params.get(Input.END_TIME))
+            .astimezone(datetime.timezone.utc)
+            .strftime("%Y-%m-%dT%H:%M:%SZ")
             if params.get(Input.END_TIME)
             else None
         )

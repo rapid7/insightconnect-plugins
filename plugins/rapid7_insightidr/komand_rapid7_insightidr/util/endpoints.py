@@ -3,6 +3,25 @@ class Investigations:
     # Methods to populate Investigation endpoints
 
     @staticmethod
+    def connection_api_url(region_code: str) -> str:
+        """
+        URI for listing investigations
+        :param region_code: URL to the InsightIDR console
+        :return: pre-populated /idr/v2/investigations/
+        """
+        region_map = {
+            "United States 1": "us",
+            "United States 2": "us2",
+            "United States 3": "us3",
+            "Europe": "eu",
+            "Canada": "ca",
+            "Australia": "au",
+            "Japan": "ap",
+        }
+
+        return f"https://{region_map.get(region_code)}.api.insight.rapid7.com/"
+
+    @staticmethod
     def list_investigations(console_url: str) -> str:
         """
         URI for listing investigations

@@ -168,7 +168,7 @@ types:
       required: true
     priority:
       title: Priority
-      description: The investigations priority, where possible values are CRITICAL, HIGH, MEDIUM, LOW, and UNSPECIFIED
+      description: The investigations priority, where possible values are CRITICAL, HIGH, MEDIUM, LOW, and UNKNOWN
       type: string
       required: true
     rrn:
@@ -492,13 +492,21 @@ connection:
     type: credential_secret_key
     required: true
     example: 4472f2g7-991z-4w70-li11-7552w8qm0266
-  url:
-    title: URL
-    description: The URL endpoint for InsightIDR. e.g. https://<REGION_CODE>.api.insight.rapid7.com
+  region:
+    title: Region
+    description: The region for InsightIDR
     type: string
+    enum:
+      - United States 1
+      - United States 2
+      - United States 3
+      - Europe
+      - Canada
+      - Australia
+      - Japan
     required: true
-    default: https://us.api.insight.rapid7.com
-    example: https://us.api.insight.rapid7.com
+    default: United States 1
+    example: United States 1
 actions:
   list_investigations:
     title: List Investigations
@@ -506,7 +514,7 @@ actions:
     input:
       statuses:
         title: Statuses
-        description: An optional-comma separated set of investigation statuses. Only the investigation whose status matches one of the entries in the list will be returned. If this parameter is omitted investigations with any status may be returned
+        description: Only investigations whose status matches one of the entries in the list will be returned
         type: string
         required: true
         default: CLOSED
@@ -517,26 +525,26 @@ actions:
         - EITHER
       start_time:
         title: Start Time
-        description: An optional ISO-formatted timestamp. Only investigations whose createTime is after this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned
+        description: An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned
         type: date
         required: false
         example: "2020-06-01T12:11:13+05:30"
       end_time:
         title: End Time
-        description: An optional-ISO formatted timestamp. Only investigations whose createTime is before this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned
+        description: An optional-ISO formatted timestamp, where only investigations whose createTime is before this date will be returned
         type: date
         required: false
         example: "2020-06-01T12:11:13+05:30"
       size:
         title: Size
-        description: The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 100. Default value is 100
+        description: Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100
         type: integer
         required: true
         default: 100
         example: 100
       index:
         title: Index
-        description: The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0
+        description: Zero-based index of the page to retrieve, where value must be greater than or equal to 0
         type: integer
         required: true
         default: 0
@@ -565,6 +573,12 @@ actions:
           - Priority Descending
           - Last alert time Ascending
           - Last alert time Descending
+          - RRN Ascending
+          - RRN Descending
+          - Alerts most recent created time Ascending
+          - Alerts most recent created time Descending
+          - Alerts most recent detection created time Ascending
+          - Alerts most recent detection created time Descending
         required: false
         example: Create time Ascending
     output:
@@ -633,8 +647,8 @@ actions:
         description: The body of the specified investigation
         type: investigation
         required: true
-  search_investigation:
-      title: Search Investigation
+  search_investigations:
+      title: Search Investigations
       description: Allows to search for investigations that match the given criteria
       input:
         search:
@@ -663,14 +677,14 @@ actions:
           example: 2020-09-06T12:07:55.1366667Z
         size:
           title: Size
-          description: The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 100. Default value is 100
+          description: Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100
           type: integer
           required: true
           default: 100
           example: 100
         index:
           title: Index
-          description: The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0
+          description: Zero-based index of the page to retrieve, where value must be greater than or equal to 0
           type: integer
           required: true
           default: 0
@@ -688,11 +702,11 @@ actions:
           required: true
   update_investigation:
     title: Update Investigation
-    description: Allows to update existing investigation
+    description: Allows to update existing investigation by ID or RRN
     input:
       id:
-        title: ID
-        description: The identifier of Investigation to be update (ID or RRN)
+        title: ID or RRN
+        description: The identifier of investigation to be update (ID or RRN)
         type: string
         required: true
         example: rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111
@@ -754,8 +768,8 @@ actions:
     description: Allows to get existing investigation by ID or RRN
     input:
       id:
-        title: ID
-        description: The ID or RRN of the investigation
+        title: ID or RRN
+        description: The identifier of investigation (ID or RRN)
         type: string
         required: true
         example: rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111
@@ -770,7 +784,7 @@ actions:
     description: Allows to change the priority of the investigation with the given ID or RRN
     input:
       id:
-        title: ID
+        title: ID or RRN
         description: The ID or RNN of the investigation to change the priority of
         type: string
         required: true
@@ -824,7 +838,7 @@ actions:
     description: Set the status of the investigation with the given ID
     input:
       id:
-        title: ID
+        title: ID or RRN
         description: The ID of the investigation to change the status of
         type: string
         required: true
@@ -850,8 +864,8 @@ actions:
     description: Retrieve a page of alerts associated with the specified investigation
     input:
       id:
-        title: ID
-        description: The ID or RRN of the investigation
+        title: ID or RRN
+        description: The identifier of investigation (ID or RRN)
         type: string
         required: true
         example: rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111

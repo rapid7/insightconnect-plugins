@@ -42,7 +42,7 @@ class TestParseDates(TestCase):
         time_rel = "Absolute Time To"
 
         res1, _ = parse_dates(time_test1, time_test1, time_rel)
-        self.assertEquals(res1, 1130778669000)
+        self.assertEqual(res1, 1130778669000)
 
         time_rel = "Last 5 Minutes"
         res1, _ = parse_dates(time_test1, "", time_rel)

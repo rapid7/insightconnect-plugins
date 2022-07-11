@@ -5,7 +5,7 @@ import json
 
 class Input:
     API_KEY = "api_key"
-    URL = "url"
+    REGION = "region"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -20,17 +20,26 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "InsightIDR API key",
       "order": 1
     },
-    "url": {
+    "region": {
       "type": "string",
-      "title": "URL",
-      "description": "The URL endpoint for InsightIDR. e.g. https://\\u003cREGION_CODE\\u003e.api.insight.rapid7.com",
-      "default": "https://us.api.insight.rapid7.com",
+      "title": "Region",
+      "description": "The region for InsightIDR",
+      "default": "United States 1",
+      "enum": [
+        "United States 1",
+        "United States 2",
+        "United States 3",
+        "Europe",
+        "Canada",
+        "Australia",
+        "Japan"
+      ],
       "order": 2
     }
   },
   "required": [
     "api_key",
-    "url"
+    "region"
   ],
   "definitions": {
     "credential_secret_key": {
