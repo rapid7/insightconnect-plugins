@@ -5,7 +5,7 @@ from unittest.mock import patch
 from parameterized import parameterized, param
 
 sys.path.append(os.path.abspath("../"))
-from komand_dynamodb.actions.scan.extra_schema import exclusive_start_key_schema
+from komand_dynamodb.util.extra_schemas.scan import exclusive_start_key_schema
 from komand_dynamodb.util.validation import additional_argument_validator
 from insightconnect_plugin_runtime.exceptions import PluginException
 

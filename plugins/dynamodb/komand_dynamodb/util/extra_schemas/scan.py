@@ -1,6 +1,7 @@
 import json
 
-exclusive_start_key_schema = json.loads("""
+exclusive_start_key_schema = json.loads(
+    """
 {
   "type": "object",
   "patternProperties": {
@@ -61,4 +62,5 @@ exclusive_start_key_schema = json.loads("""
     }
   }
 }
-""")
+"""
+)

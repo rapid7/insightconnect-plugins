@@ -3,9 +3,9 @@ import copy
 
 import insightconnect_plugin_runtime
 from .schema import ScanInput, ScanOutput, Output, Component, Input
-from .extra_schema import exclusive_start_key_schema
 from komand_dynamodb.util.constants import AWS_NONE_VALUE
 from komand_dynamodb.util.validation import additional_argument_validator
+from komand_dynamodb.util.extra_schemas.scan import exclusive_start_key_schema
 
 
 class Scan(insightconnect_plugin_runtime.Action):

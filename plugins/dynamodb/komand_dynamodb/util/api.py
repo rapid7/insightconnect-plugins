@@ -5,6 +5,7 @@ import boto3
 import botocore.exceptions
 
 from insightconnect_plugin_runtime.exceptions import PluginException
+from urllib3.util import timeout
 from komand_dynamodb.util import constants
 from komand_dynamodb.util.utils import Utils
 
