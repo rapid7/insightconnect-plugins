@@ -1,0 +1,14 @@
+{
+"@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams/members",
+"@odata.count": 1,
+"value": [
+        {
+            "@odata.type": "#microsoft.graph.aadUserConversationMember",
+            "id": "MmFiOWM3OTYtMjkwMi00NWY4LWI3MTItN2M1YTYzY2Y0MWM0IyNlZWY5Y2IzNi0wNmRlLTQ2OWItODdjZC03MGY0Y2JlMzJkMTQ=",
+            "roles": [],
+            "displayName": "Jane Doe",
+            "userId": "eef9cb36-06de-469b-87cd-70f4cbe32d14",
+            "email": "jdoe@teamsip.onmicrosoft.com"
+        }
+    ]
+}

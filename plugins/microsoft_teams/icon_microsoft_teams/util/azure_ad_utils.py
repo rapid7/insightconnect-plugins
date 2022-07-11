@@ -161,10 +161,10 @@ def create_group(
     }
 
     if owners:
-        owners_payload = create_user_paylaod(logger, connection, owners)
+        owners_payload = create_user_payload(logger, connection, owners)
         payload["owners@odata.bind"] = owners_payload
     if members:
-        members_payload = create_user_paylaod(logger, connection, members)
+        members_payload = create_user_payload(logger, connection, members)
         payload["members@odata.bind"] = members_payload
 
     logger.info(f"Creating group with: {endpoint}")
@@ -189,7 +189,7 @@ def create_group(
     )
 
 
-def create_user_paylaod(logger: Logger, connection: insightconnect_plugin_runtime.connection, group_list: list) -> list:
+def create_user_payload(logger: Logger, connection: insightconnect_plugin_runtime.connection, group_list: list) -> list:
     """
     This takes a list of user names, gets their IDs, then returns a list of odata objects that can
     be fed into create group

@@ -17,7 +17,7 @@ This plugin allows users to run and execute queries against a SQL database.
 # Supported Product Versions
 
 * MySQL 8.0.21
-* MSSQL 2019 15.0.2000.5
+* MSSQL 2019 15.0.4223.1
 * PostgresSQL 13.0
 
 # Documentation
@@ -119,6 +119,7 @@ For the SQL query action, be sure that your query is valid SQL.
 
 # Version History
 
+* 3.0.5 - Update pymssql version library to support latest MSSQL update 2019 15.0.4223.1
 * 3.0.4 - Fix issue with get method's keyword argument in Query action
 * 3.0.3 - Change example input Port in Connection | Update file util.py to Python3
 * 3.0.2 - Add default PORT for MSSQL and MySQL connection

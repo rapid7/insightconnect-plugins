@@ -1,7 +1,7 @@
 {
-	"spec": "1ced7369d7bfef6425bdfb6bdf31c41c",
-	"manifest": "4e9319ac259185d214bfed03b8c1e145",
-	"setup": "9703029e776defad301b404eae979326",
+	"spec": "fcd364909c756df3ce5310e523099126",
+	"manifest": "163e3ac07b4cf134ca27a52fb33bd630",
+	"setup": "5dfdfec720bca50f4d7272ee3e376ce4",
 	"schemas": [
 		{
 			"identifier": "add_channel_to_team/schema.py",
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "create_teams_enabled_group/schema.py",
-			"hash": "1f0eb370a90fad1f443b7021c3b2b49f"
+			"hash": "d8544bf830118c309e9982399fe451c8"
 		},
 		{
 			"identifier": "delete_team/schema.py",

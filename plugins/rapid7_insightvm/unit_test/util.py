@@ -26,6 +26,10 @@ class Util:
             return my_file.read()
 
     @staticmethod
+    def read_file_to_dict(filename):
+        return json.loads(Util.read_file_to_string(os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)))
+
+    @staticmethod
     def mocked_requests(*args, **kwargs):
         class MockResponse:
             def __init__(self, filename, status_code):
@@ -59,6 +63,14 @@ class Util:
             return MockResponse("delete_asset", 200)
         if kwargs.get("url") == "https://example.com/api/3/assets/4":
             return MockResponse("delete_asset_invalid_id", 404)
+        if kwargs.get("url") == "https://example.com/api/3/assets/5/software":
+            return MockResponse("get_asset_software", 200)
+        if kwargs.get("url") == "https://example.com/api/3/assets/6/software":
+            return MockResponse("get_asset_software_invalid_id", 404)
+        if kwargs.get("url") == "https://example.com/api/3/assets/7/vulnerabilities":
+            return MockResponse("get_asset_vulnerabilities", 200)
+        if kwargs.get("url") == "https://example.com/api/3/assets/8/vulnerabilities":
+            return MockResponse("get_asset_vulnerabilities_invalid_id", 404)
         if kwargs.get("url") == "https://example.com/api/3/sites/1/excluded_targets":
             return MockResponse("get_site_excluded_targets", 200)
         if kwargs.get("url") == "https://example.com/api/3/sites/1/included_targets":
@@ -108,3 +120,32 @@ class Util:
             return MockResponse("get_expiring_vulnerability_exceptions", 200)
 
         raise Exception("Not implemented")
+
+    @staticmethod
+    async def mocked_async_requests(*args, **kwargs):
+        class MockAsyncResponse:
+            def __init__(self, filename, status_code):
+                self.filename = filename
+                self.status = status_code
+                self.response_text = ""
+
+            async def text(self):
+                self.response_text = self.load_data()
+                return self.response_text
+
+            def load_data(self):
+                return Util.read_file_to_string(
+                    os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{self.filename}.json.resp")
+                )
+
+            async def json(self):
+                return json.loads(self.response_text)
+
+        if kwargs.get("url") == "https://example.com/api/3/assets/9/vulnerabilities/ssl-cve-2011-3389-beast/solution":
+            return MockAsyncResponse("asset_vulnerability_solution", 200)
+        if kwargs.get("url") == "https://example.com/api/3/assets/10/vulnerabilities/sl-ve-211-339-beast/solution":
+            return MockAsyncResponse("asset_vulnerability_solution_invalid_vulnerability_id", 404)
+        if kwargs.get("url") == "https://example.com/api/3/assets/11/vulnerabilities/ssl-cve-2011-3389-beast/solution":
+            return MockAsyncResponse("asset_vulnerability_solution_invalid_asset_id", 404)
+        if kwargs.get("url") == "https://example.com/api/3/vulnerabilities/certificate-common-name-mismatch":
+            return MockAsyncResponse("get_asset_vulnerabilities_with_risk_score", 200)
