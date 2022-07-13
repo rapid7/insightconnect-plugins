@@ -4,7 +4,7 @@ products: [insightconnect]
 name: azure_ad_admin
 title: Azure AD Admin
 description: Perform administrative operations in Azure AD
-version: 2.2.6
+version: 3.0.0
 vendor: rapid7
 support: community
 supported_versions: [2022-05-30]
@@ -146,7 +146,7 @@ types:
       required: false
     mobilePhone:
       title: Mobile Phone
-      type: integer
+      type: string
       description: Mobile Phone
       required: false
     onPremisesDistinguishedName:
@@ -181,7 +181,7 @@ types:
       required: false
     onPremisesSyncEnabled:
       title: On Premises Sync Enabled
-      type: string
+      type: boolean
       description: On Premises Sync Enabled
       required: false
     onPremisesUserPrincipalName:
@@ -286,12 +286,12 @@ types:
       required: false
     assignedLicenses:
       title: Assigned Licenses
-      type: "[]string"
+      type: "[]object"
       description: Assigned Licenses
       required: false
     assignedPlans:
       title: Assigned Plans
-      type: "[]string"
+      type: "[]object"
       description: Assigned Plans
       required: false
     identities:
@@ -316,7 +316,7 @@ types:
       required: false
     provisionedPlans:
       title: Provisioned Plans
-      type: "[]string"
+      type: "[]object"
       description: Provisioned Plans
       required: false
   user_information:
