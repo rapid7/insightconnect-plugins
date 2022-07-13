@@ -45,7 +45,7 @@ class ScanInput(insightconnect_plugin_runtime.Input):
     "exclusive_start_key": {
       "type": "object",
       "title": "Exclusive Start Key",
-      "description": "The primary key of the first item that this operation will evaluate",
+      "description": "The primary key of the first item that this operation will evaluate. Follows AttributeValue formatting, please refer to https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html#DynamoDB.Client.scan",
       "order": 5
     },
     "expression_attribute_names": {
