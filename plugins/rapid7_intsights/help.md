@@ -991,7 +991,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.2.0 - Fix is_closed bug in trigger | Add new input `source_date_from_enum` in trigger
+* 3.2.0 - Fix is_closed bug in trigger | Add new input `source_date_from_enum` in trigger which allows user to specifiy Source Date From using ENUM rather than timestamp/string
 * 3.1.0 - Add new actions Add CVEs, Delete CVEs and Get CVE List
 * 3.0.1 - Fix issue where New Alert trigger sends empty list when there are no new alerts
 * 3.0.0 - Add `assets` custom output type in Add Manual Alert action | Fix missing URL bug in DarkWeb Webmail alerts in Add Manual Alert action

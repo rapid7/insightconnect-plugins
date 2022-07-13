@@ -916,7 +916,7 @@ triggers:
         example: ["InProgress", "Pending"]
       source_date_from_enum:
         title: Source Date Start Enum
-        description: Start date to fetch from with options
+        description: Start date to fetch from with options, such as choose Hour to pull alerts in the last hour
         type: string
         required: false
         example: Hour

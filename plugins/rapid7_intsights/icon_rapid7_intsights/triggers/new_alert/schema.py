@@ -150,7 +150,7 @@ class NewAlertInput(insightconnect_plugin_runtime.Input):
     "source_date_from_enum": {
       "type": "string",
       "title": "Source Date Start Enum",
-      "description": "Start date to fetch from with options",
+      "description": "Start date to fetch from with options, such as choose Hour to pull alerts in the last hour",
       "enum": [
         "Hour",
         "Day",
