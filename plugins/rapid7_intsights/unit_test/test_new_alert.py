@@ -54,11 +54,15 @@ class ErrorChecker:
 
 
 @parameterized_class(
-    ("time_value",),
+    (
+        "input_source",
+        "time_value",
+    ),
     [
-        ("Hour",),
-        ("Day",),
-        ("Week",),
+        (Input.SOURCE_DATE_FROM_ENUM, "Hour"),
+        (Input.SOURCE_DATE_FROM_ENUM, "Week"),
+        (Input.SOURCE_DATE_FROM_ENUM, "Day"),
+        (Input.SOURCE_DATE_FROM, "1633047083142"),
     ],
 )
 class TestNewAlert(TestCase):
@@ -113,7 +117,7 @@ class TestNewAlert(TestCase):
     @timeout_decorator.timeout(2)
     @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=MockTrigger.send)
     @patch("requests.request", side_effect=Util.mock_request)
-    def test_trigger_with_enum_input(self, make_request, ss):
+    def test_trigger_with_source_date_from_input(self, make_request, ss):
         ErrorChecker.set_expected(
             {
                 "alert_ids": [
@@ -125,27 +129,8 @@ class TestNewAlert(TestCase):
             }
         )
 
-        self.action.run({Input.SOURCE_DATE_FROM_ENUM: self.time_value})
+        self.action.run({self.input_source: self.time_value})
 
-    @timeout_pass(error_callback=ErrorChecker.check_error)
-    @timeout_decorator.timeout(2)
-    @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=MockTrigger.send)
-    @patch("requests.request", side_effect=Util.mock_request)
-    def test_trigger_with_string_input(self, make_request, ss):
-        ErrorChecker.set_expected(
-            {
-                "alert_ids": [
-                    "7cafac7ec5adaebf62257a4c",
-                    "7cafac7ec5adaebf62257a4d",
-                    "7cafac7ec5adaebf62257a4e",
-                    "7cafac7ec5adaebf62257a4f",
-                ]
-            }
-        )
-
-        self.action.run({Input.SOURCE_DATE_FROM: "1633047083142"})
-
-    # Write this so that it compares result to PluginException
     @timeout_pass(error_callback=ErrorChecker.check_error)
     @timeout_decorator.timeout(2)
     @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=MockTrigger.send)
