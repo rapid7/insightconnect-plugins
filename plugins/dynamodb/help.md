@@ -188,7 +188,7 @@ It will return the list of objects found, and a count of the records.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |consistent_read|boolean|None|False|Value that determines the read consistency model during the scan|None|False|
-|exclusive_start_key|object|None|False|The primary key of the first item that this operation will evaluate|None|{"email": "user@example.com"}|
+|exclusive_start_key|object|None|False|The primary key of the first item that this operation will evaluate. Follows AttributeValue formatting, please refer to https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/dynamodb.html#DynamoDB.Client.scan|None|{"email": {"S": "user@example.com"}}|
 |expression_attribute_names|object|None|False|One or more substitution tokens for attribute names in an expression|None|{"#P":"Percentile"}|
 |expression_attribute_values|object|None|False|One or more values that can be substituted in an expression|None|{ ":avail":{"S":"Available"}, ":back":{"S":"Backordered"}, ":disc":{"S":"Discontinued"} }|
 |filter_expression|string|None|False|A string that contains conditions that DynamoDB applies after the Scan operation|None|test = :test|
@@ -207,7 +207,7 @@ Example input:
 {
   "consistent_read": false,
   "exclusive_start_key": {
-    "email": "user@example.com"
+    "email": {"S": "user@example.com"}
   },
   "expression_attribute_names": {
     "#P": "Percentile"
@@ -291,6 +291,7 @@ Any situation in which you provide a ConditionExpression and it causes the job t
 
 # Version History
 
+* 3.0.1 - Validate exclusive_start_key parameter for Scan action
 * 3.0.0 - Create separate class for communication with AWS | Refactor all actions | Fix incompatible types in output in Scan action | Update Python SDK version
 * 2.0.0 - Create custom output type for Scan action | Add example inputs and outputs
 * 1.0.3 - Correct spelling in help.md
