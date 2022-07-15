@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "SQL"
 Vendor = "rapid7"
-Version = "3.0.5"
+Version = "3.0.6"
 Description = "The SQL plugin allows you to run SQL queries"
 
 
@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
+    import insightconnect_plugin_runtime
     from komand_sql import connection, actions, triggers
 
-    class ICONSql(komand.Plugin):
+    class ICONSql(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -38,7 +38,7 @@ def main():
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONSql())
+    cli = insightconnect_plugin_runtime.CLI(ICONSql())
     cli.run()
 
 
