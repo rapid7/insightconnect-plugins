@@ -19,10 +19,10 @@ class ModifyObject(insightconnect_plugin_runtime.Action):
         dn = params.get(Input.DISTINGUISHED_NAME)
         attribute = params.get(Input.ATTRIBUTE_TO_MODIFY)
         attribute_value = params.get(Input.ATTRIBUTE_VALUE)
-        dn, search_base = formatter.format_dn(dn)
+        dn, _ = formatter.format_dn(dn)
         self.logger.info(f"Escaped DN {dn}")
 
         dn = formatter.escape_brackets_for_query(dn)
         self.logger.info(dn)
 
-        return {Output.SUCCESS: self.connection.client.modify_object(dn, search_base, attribute, attribute_value)}
+        return {Output.SUCCESS: self.connection.client.modify_object(dn, attribute, attribute_value)}
