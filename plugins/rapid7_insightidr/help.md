@@ -7,6 +7,13 @@ Do more with Investigations in [InsightIDR](https://www.rapid7.com/products/insi
 * Set status of investigation
 * Add indicators
 * List investigations
+* Create investigation
+* Search investigation
+* Set priority of investigation
+* Set disposition of investigation
+* List alert for investigation
+* Update investigation
+* Assign user to investigation
 
 # Requirements
 
@@ -14,7 +21,7 @@ Do more with Investigations in [InsightIDR](https://www.rapid7.com/products/insi
 
 # Supported Product Versions
 
-* Latest release successfully tested on 2022-05-09.
+* Latest release successfully tested on 2022-06-15.
 
 # Documentation
 
@@ -25,20 +32,425 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|InsightIDR API key|None|4472f2g7-991z-4w70-li11-7552w8qm0266|
-|url|string|https://us.api.insight.rapid7.com|True|The URL endpoint for InsightIDR. e.g. https://<REGION_CODE>.api.insight.rapid7.com|None|https://us.api.insight.rapid7.com|
+|region|string|United States 1|True|The region for InsightIDR|['United States 1', 'United States 2', 'United States 3', 'Europe', 'Canada', 'Australia', 'Japan']|United States 1|
 
 Example input:
 
 ```
 {
   "api_key": "4472f2g7-991z-4w70-li11-7552w8qm0266",
-  "url": "https://us.api.insight.rapid7.com"
+  "region": "United States 1"
 }
 ```
 
 ## Technical Details
 
 ### Actions
+
+#### Search Investigations
+
+This action allows to search for investigations that match the given criteria.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|end_time|date|None|False|The ending time when investigations were created|None|2020-09-06 12:07:55.136667|
+|index|integer|0|True|Zero-based index of the page to retrieve, where value must be greater than or equal to 0|None|1|
+|search|[]object|None|False|The criteria for which entities to return|None|[{"field": "Example Field", "operator": "EQUALS", "value": "Test"}]|
+|size|integer|100|True|Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100|None|100|
+|sort|[]object|None|False|The sorting information, where possible field values are RRN, PRIORITY, CREATED TIME, and order values are ASC, DESC|None|[{"field": "Example Field", "order": "ASC"}]|
+|start_time|date|None|False|The starting time from when investigations were created|None|2020-09-06 12:07:55.136667|
+
+Example input:
+
+```
+{
+  "end_time": "2020-09-06T12:07:55.1366667Z",
+  "index": 1,
+  "search": [
+    {
+      "field": "Example Field",
+      "operator": "EQUALS",
+      "value": "Test"
+    }
+  ],
+  "size": 100,
+  "sort": [
+    {
+      "field": "Example Field",
+      "order": "ASC"
+    }
+  ],
+  "start_time": "2020-09-06T12:07:55.1366667Z"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|investigations|[]investigation|True|A list of found investigations|
+|metadata|investigation_metadata|True|The pagination parameters used to generate this page result|
+
+Example output:
+
+```
+{
+  "investigations": [
+    {
+      "assignee": {
+        "email": "user@example.com",
+        "name": "Ellen Example"
+      },
+      "created_time": "2018-06-06T16:56:42Z",
+      "disposition": "BENIGN",
+      "first_alert_time": "2018-06-06T16:56:42Z",
+      "last_accessed": "2018-06-06T16:56:42Z",
+      "latest_alert_time": "2018-06-06T16:56:42Z",
+      "organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06",
+      "priority": "CRITICAL",
+      "rrn": "rrn:example",
+      "source": "ALERT",
+      "status": "OPEN",
+      "title": "Example Title"
+    }
+  ],
+  "metadata": {
+    "index": 0,
+    "size": 1,
+    "total_data": 1,
+    "total_pages": 1
+  }
+}
+```
+
+#### List Alerts for Investigation
+
+This action is used to retrieve a page of alerts associated with the specified investigation.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|The identifier of investigation (ID or RRN)|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|
+|index|integer|0|True|The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0|None|1|
+|size|integer|100|True|The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 100. Default value is 100|None|100|
+
+Example input:
+
+```
+{
+  "id": "rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111",
+  "index": 1,
+  "size": 100
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|alerts|[]alert|True|A list of alerts associated with the investigation|
+|metadata|investigation_metadata|True|The pagination parameters used to generate this page result|
+
+Example output:
+
+```
+{
+  "alerts": [
+    {
+      "alert_type": "Example Type",
+      "alert_type_description": "Example Description",
+      "created_time": "01-01-2020T00:00:00",
+      "detection_rule_rrn": {
+        "rule_name": "Example Rule Name",
+        "rule_rrn": {
+          "organizationId": "11111111-1111-1111-1111-111111111111",
+          "regionCode": "11-101",
+          "resource": "Example Resource",
+          "resourceTypes": [
+            "Example Type"
+          ],
+          "service": "Example Service"
+        }
+      },
+      "first_event_time": "01-01-2020T00:00:00",
+      "id": "11111111-1111-1111-1111-111111111111",
+      "latest_event_time": "01-01-2020T00:00:00",
+      "title": "Example Title"
+    }
+  ],
+  "metadata": {
+    "index": 0,
+    "size": 1,
+    "total_data": 1,
+    "total_pages": 1
+  }
+}
+```
+
+#### Set Priority of Investigation
+
+This action is used to change the priority of the investigation with the given ID or RRN.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|The ID or RNN of the investigation to change the priority of|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|
+|priority|string|None|True|Investigation's priority|['UNSPECIFIED', 'LOW', 'MEDIUM', 'HIGH', 'CRITICAL']|LOW|
+
+Example input:
+
+```
+{
+  "id": "rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111",
+  "priority": "LOW"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|investigation|investigation|True|The investigation for which the priority was set|
+
+Example output:
+
+```
+{
+  "investigation": {
+    "assignee": {
+      "email": "user@example.com",
+      "name": "Ellen Example"
+    },
+    "created_time": "2018-06-06T16:56:42Z",
+    "disposition": "BENIGN",
+    "first_alert_time": "2018-06-06T16:56:42Z",
+    "last_accessed": "2018-06-06T16:56:42Z",
+    "latest_alert_time": "2018-06-06T16:56:42Z",
+    "organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06",
+    "priority": "CRITICAL",
+    "rrn": "rrn:example",
+    "source": "ALERT",
+    "status": "OPEN",
+    "title": "Example Title"
+  }
+}
+```
+
+#### Set Disposition of Investigation
+
+This action is used to change the disposition of the investigation with the given ID or RRN.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|disposition|string|None|True|Investigation's disposition|['BENIGN', 'MALICIOUS', 'NOT_APPLICABLE']|BENIGN|
+|id|string|None|True|The ID or RNN of the investigation to change the disposition of|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|
+
+Example input:
+
+```
+{
+  "disposition": "BENIGN",
+  "id": "rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|investigation|investigation|True|The investigation for which the disposition was set|
+
+Example output:
+
+```
+{
+  "investigation": {
+    "assignee": {
+      "email": "user@example.com",
+      "name": "Ellen Example"
+    },
+    "created_time": "2018-06-06T16:56:42Z",
+    "disposition": "BENIGN",
+    "first_alert_time": "2018-06-06T16:56:42Z",
+    "last_accessed": "2018-06-06T16:56:42Z",
+    "latest_alert_time": "2018-06-06T16:56:42Z",
+    "organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06",
+    "priority": "CRITICAL",
+    "rrn": "rrn:example",
+    "source": "ALERT",
+    "status": "OPEN",
+    "title": "Example Title"
+  }
+}
+```
+
+#### Get Investigation
+
+This action allows to get existing investigation by ID or RRN.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|The identifier of investigation (ID or RRN)|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|
+
+Example input:
+
+```
+{
+  "id": "rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|investigation|investigation|True|The body of the specified investigation|
+
+Example output:
+
+```
+{
+  "investigation": {
+    "assignee": {
+      "email": "user@example.com",
+      "name": "Ellen Example"
+    },
+    "created_time": "2018-06-06T16:56:42Z",
+    "disposition": "BENIGN",
+    "first_alert_time": "2018-06-06T16:56:42Z",
+    "last_accessed": "2018-06-06T16:56:42Z",
+    "latest_alert_time": "2018-06-06T16:56:42Z",
+    "organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06",
+    "priority": "CRITICAL",
+    "rrn": "rrn:example",
+    "source": "ALERT",
+    "status": "OPEN",
+    "title": "Example Title"
+  }
+}
+```
+
+#### Update Investigation
+
+This action allows to update existing investigation.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|disposition|string|None|False|Investigation's disposition|['', 'BENIGN', 'MALICIOUS', 'NOT_APPLICABLE']|BENIGN|
+|email|string|None|False|A user's email address for investigation to be assigned|None|user@example.com|
+|id|string|None|True|The identifier of investigation to be update (ID or RRN)|None|rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111|
+|priority|string|None|False|Investigation's priority|['', 'UNSPECIFIED', 'LOW', 'MEDIUM', 'HIGH', 'CRITICAL']|LOW|
+|status|string|None|False|Investigation's status|['', 'OPEN', 'INVESTIGATING', 'CLOSED']|OPEN|
+|title|string|None|False|Investigation's title|None|Example Title|
+
+Example input:
+
+```
+{
+  "disposition": "BENIGN",
+  "email": "user@example.com",
+  "id": "rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111",
+  "priority": "LOW",
+  "status": "OPEN",
+  "title": "Example Title"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|investigation|investigation|True|The body of the specified investigation|
+
+Example output:
+
+```
+{
+  "investigation": {
+    "assignee": {
+      "email": "user@example.com",
+      "name": "Ellen Example"
+    },
+    "created_time": "2018-06-06T16:56:42Z",
+    "disposition": "BENIGN",
+    "first_alert_time": "2018-06-06T16:56:42Z",
+    "last_accessed": "2018-06-06T16:56:42Z",
+    "latest_alert_time": "2018-06-06T16:56:42Z",
+    "organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06",
+    "priority": "CRITICAL",
+    "rrn": "rrn:example",
+    "source": "ALERT",
+    "status": "OPEN",
+    "title": "Example Title"
+  }
+}
+```
+
+#### Create Investigation
+
+This action allows to create investigation manually.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|disposition|string|None|False|Investigation's disposition|['', 'BENIGN', 'MALICIOUS', 'NOT_APPLICABLE']|BENIGN|
+|email|string|None|False|A user's email address for investigation to be assigned|None|user@example.com|
+|priority|string|None|False|Investigation's priority|['', 'LOW', 'MEDIUM', 'HIGH', 'CRITICAL']|LOW|
+|status|string|None|False|Investigation's status|['', 'OPEN', 'CLOSED']|OPEN|
+|title|string|None|True|Investigation's title|None|Example Title|
+
+Example input:
+
+```
+{
+  "disposition": "BENIGN",
+  "email": "user@example.com",
+  "priority": "LOW",
+  "status": "OPEN",
+  "title": "Example Title"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|investigation|investigation|True|The body of the specified investigation|
+
+Example output:
+
+```
+{
+  "investigation": {
+    "assignee": {
+      "email": "user@example.com",
+      "name": "Ellen Example"
+    },
+    "created_time": "2018-06-06T16:56:42Z",
+    "disposition": "BENIGN",
+    "first_alert_time": "2018-06-06T16:56:42Z",
+    "last_accessed": "2018-06-06T16:56:42Z",
+    "latest_alert_time": "2018-06-06T16:56:42Z",
+    "organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06",
+    "priority": "CRITICAL",
+    "rrn": "rrn:example",
+    "source": "ALERT",
+    "status": "OPEN",
+    "title": "Example Title"
+  }
+}
+```
 
 #### Get All Saved Queries
 
@@ -85,12 +497,6 @@ Retrieve a saved InsightIDR LEQL query by its ID
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |query_id|string|None|True|UUID of saved query|None|00000000-0000-10d0-0000-000000000000|
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|saved_query|query|True|Saved LEQL query|
 
 Example input:
 
@@ -687,16 +1093,21 @@ Example output:
 ```
 {
   "investigation": {
-    "id": "13d353b2-8939-468d-97df-d707d0e262b6",
-    "title": "Test Investigation",
-    "status": "OPEN",
-    "source": "MANUAL",
     "assignee": {
-      "name": "Example User",
-      "email": "user@example.com"
+      "email": "user@example.com",
+      "name": "Ellen Example"
     },
-    "alerts": [],
-    "created_time": "2020-08-12T13:40:18.718Z"
+    "created_time": "2018-06-06T16:56:42Z",
+    "disposition": "BENIGN",
+    "first_alert_time": "2018-06-06T16:56:42Z",
+    "last_accessed": "2018-06-06T16:56:42Z",
+    "latest_alert_time": "2018-06-06T16:56:42Z",
+    "organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06",
+    "priority": "CRITICAL",
+    "rrn": "rrn:example",
+    "source": "ALERT",
+    "status": "OPEN",
+    "title": "Example Title"
   }
 }
 ```
@@ -709,7 +1120,7 @@ This action is used to assign a user to the specified investigation.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Investigation ID|None|174e4f99-2ac7-4481-9301-4d24c34baf06|
+|id|string|None|True|Investigation ID or RRN|None|174e4f99-2ac7-4481-9301-4d24c34baf06|
 |user_email_address|string|None|True|The email address of the user to assign to this investigation, used to log into the insight platform|None|user@example.com|
 
 Example input:
@@ -732,19 +1143,24 @@ Example output:
 
 ```
 {
-  "success": true,
   "investigation": {
-    "id": "13d353b2-8939-468d-97df-d707d0e262b6",
-    "title": "Test Investigation",
-    "status": "OPEN",
-    "source": "MANUAL",
     "assignee": {
-      "name": "Example User",
-      "email": "user@example.com"
+      "email": "user@example.com",
+      "name": "Ellen Example"
     },
-    "alerts": [],
-    "created_time": "2020-08-12T13:40:18.718Z"
-  }
+    "created_time": "2018-06-06T16:56:42Z",
+    "disposition": "BENIGN",
+    "first_alert_time": "2018-06-06T16:56:42Z",
+    "last_accessed": "2018-06-06T16:56:42Z",
+    "latest_alert_time": "2018-06-06T16:56:42Z",
+    "organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06",
+    "priority": "CRITICAL",
+    "rrn": "rrn:example",
+    "source": "ALERT",
+    "status": "OPEN",
+    "title": "Example Title"
+  },
+  "success": true
 }
 ```
 
@@ -817,19 +1233,31 @@ This action is used to retrieve a page of investigations matching the given requ
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|end_time|date|None|False|An optional-ISO formatted timestamp. Only investigations whose createTime is before this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned|None|2020-06-01T12:11:13+05:30|
-|index|integer|0|True|The optional zero-based index of the page to retrieve. Must be an integer greater than or equal to 0|None|1|
-|size|integer|1000|True|The optional size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 1000. Default value is 1000|None|1000|
-|start_time|date|None|False|An optional ISO-formatted timestamp. Only investigations whose createTime is after this date will be returned by the API. If this parameter is omitted investigations with any create_time may be returned|None|2020-06-01T12:11:13+05:30|
-|statuses|string|CLOSED|True|An optional-comma separated set of investigation statuses. Only the investigation whose status matches one of the entries in the list will be returned. If this parameter is omitted investigations with any status may be returned|['OPEN', 'CLOSED', 'EITHER']|CLOSED|
+|email|string|None|False|A user's email address, where only investigations assigned to that user will be included|None|user@example.com|
+|end_time|date|None|False|An optional-ISO formatted timestamp, where only investigations whose createTime is before this date will be returned|None|2020-06-01T12:11:13+05:30|
+|index|integer|0|True|Zero-based index of the page to retrieve, where value must be greater than or equal to 0|None|1|
+|priorities|[]string|None|False|A comma-separated list of investigation priorities to include in the result, where possible values are UNSPECIFIED, LOW, MEDIUM, HIGH, CRITICAL|None|["UNSPECIFIED, LOW, MEDIUM, HIGH, CRITICAL"]|
+|size|integer|100|True|Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100|None|100|
+|sort|string|None|False|A field for investigations to be sorted|['', 'Create time Ascending', 'Create time Descending', 'Priority Ascending', 'Priority Descending', 'Last alert time Ascending', 'Last alert time Descending', 'RRN Ascending', 'RRN Descending', 'Alerts most recent created time Ascending', 'Alerts most recent created time Descending', 'Alerts most recent detection created time Ascending', 'Alerts most recent detection created time Descending']|Create time Ascending|
+|start_time|date|None|False|An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned|None|2020-06-01T12:11:13+05:30|
+|statuses|string|CLOSED|True|Only investigations whose status matches one of the entries in the list will be returned|['OPEN', 'CLOSED', 'EITHER']|CLOSED|
 
 Example input:
 
 ```
 {
+  "email": "user@example.com",
   "end_time": "2020-06-01T12:11:13+05:30",
   "index": 1,
-  "size": 1000,
+  "priorities": [
+    "UNSPECIFIED",
+    "LOW",
+    "MEDIUM",
+    "HIGH",
+    "CRITICAL"
+  ],
+  "size": 100,
+  "sort": "Create time Ascending",
   "start_time": "2020-06-01T12:11:13+05:30",
   "statuses": "CLOSED"
 }
@@ -848,31 +1276,28 @@ Example output:
 {
   "investigations": [
     {
-      "id": "22b92896-392e-43f6-b595-a6ae58b130ef",
-      "title": "test",
-      "status": "OPEN",
-      "source": "MANUAL",
       "assignee": {
-        "name": "example",
-        "email": "user@example.com"
+        "email": "user@example.com",
+        "name": "Ellen Example"
       },
-      "alerts": [],
-      "created_time": "2019-06-04T15:38:11.358Z"
-    },
-    {
-      "id": "2c6b7745-80c1-487f-a743-8983f78a7f5e",
-      "title": "Test",
-      "status": "CLOSED",
-      "source": "MANUAL",
-      "alerts": [],
-      "created_time": "2019-05-23T19:27:55.813Z"
+      "created_time": "2018-06-06T16:56:42Z",
+      "disposition": "BENIGN",
+      "first_alert_time": "2018-06-06T16:56:42Z",
+      "last_accessed": "2018-06-06T16:56:42Z",
+      "latest_alert_time": "2018-06-06T16:56:42Z",
+      "organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06",
+      "priority": "CRITICAL",
+      "rrn": "rrn:example",
+      "source": "ALERT",
+      "status": "OPEN",
+      "title": "Example Title"
     }
   ],
   "metadata": {
     "index": 0,
-    "size": 20,
-    "total_pages": 1,
-    "total_data": 2
+    "size": 1,
+    "total_data": 1,
+    "total_pages": 1
   }
 }
 ```
@@ -891,6 +1316,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.0.0 - Add new actions Create Investigation, Search Investigations, Update Investigation, Set Investigation Priority, Set Investigation Disposition, and List Alerts for Investigation | Update actions List Investigations, Set Status of Investigation, Assign User to Investigation
 * 3.2.0 - Add new actions Get A Saved Query and Get All Saved Queries
 * 3.1.5 - Patch issue parsing labels in Advanced Query on Log and Advanced Query on Log Set actions
 * 3.1.4 - Add `docs_url` to plugin spec with a link to [InsightIDR plugin setup guide](https://docs.rapid7.com/insightconnect/rapid7-insightidr)
