@@ -951,6 +951,37 @@ Example input:
     "Application Store"
   ]
 }
+{
+  "alert_type": [
+    "Phishing"
+  ],
+  "assigned": "Assigned",
+  "found_date_from": 0,
+  "found_date_to": 1633047102456,
+  "frequency": 60,
+  "has_indicators": false,
+  "is_closed": "Closed",
+  "is_flagged": "Flagged",
+  "matched_asset_value": [
+    "example.com"
+  ],
+  "network_type": [
+    "DarkWeb"
+  ],
+  "remediation_status": [
+    "InProgress",
+    "Pending"
+  ],
+  "severity": [
+    "Low"
+  ],
+  "source_date_from": "",
+  "source_date_from_enum": "Hour",
+  "source_date_to": "",
+  "source_type": [
+    "Application Store"
+  ]
+}
 ```
 
 ##### Output
