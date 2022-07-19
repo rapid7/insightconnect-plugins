@@ -1,0 +1,8 @@
+{
+  "add_to_linked_request": true,
+  "description": "<p>Add request note - request not found</p><h1>Hello</h1>",
+  "mark_first_response": true,
+  "notify_technician": true,
+  "request_id": 404,
+  "show_to_requester": true
+}

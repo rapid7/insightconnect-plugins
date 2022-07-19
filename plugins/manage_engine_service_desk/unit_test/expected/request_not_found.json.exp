@@ -1,0 +1,13 @@
+{
+  "response_status": {
+    "messages": [
+      {
+        "status_code": 4007,
+        "type": "failed",
+        "message": "Invalid URL"
+      }
+    ],
+    "status": "failed",
+    "manage_engine_status_code": 4000
+  }
+}

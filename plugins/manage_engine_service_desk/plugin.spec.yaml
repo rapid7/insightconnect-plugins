@@ -1,0 +1,1345 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: manage_engine_service_desk
+title: Manage Engine Service Desk
+description: ManageEngine's Service Desk has the ability to centralize and capture reported issues, this allows security/IT admin to track and manage all incidents in an easy manner. The numerous help desk tickets raised are organized and tracked in the Requests module. The Requests module enables you to handle tickets promptly, assign tickets to technicians, merge similar requests, and so on
+version: 1.0.0
+supported_versions: ["ServiceDesk Plus 13008"]
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/manage_engine_service_desk
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.manageengine.com/
+tags:
+- Manage Engine
+- Service Desk
+hub_tags:
+  use_cases: [user_management]
+  keywords: [management]
+  features: []
+types:
+  request_type:
+    id:
+      title: ID
+      description: ID of the request type
+      type: integer
+      required: false
+      example: 1
+    name:
+      title: Name
+      description: Name of the request type
+      type: string
+      required: false
+      example: Incident
+  impact:
+    id:
+      title: ID
+      description: ID of the impact
+      type: integer
+      required: false
+      example: 1
+    name:
+      title: Name
+      description: Name impact
+      type: string
+      required: false
+      example: High
+  status:
+    id:
+      title: ID
+      description: ID of the current status
+      type: integer
+      required: false
+      example: 2
+    name:
+      title: Name
+      description: Name of the current status
+      type: string
+      required: false
+      example: Open
+  mode:
+    id:
+      title: ID
+      description: Id of the mode
+      type: integer
+      required: false
+      example: 2
+    name:
+      title: Name
+      description: Name of the mode
+      type: string
+      required: false
+      example: Web Form
+  level:
+    id:
+      title: ID
+      description: Id of the level
+      type: integer
+      required: false
+      example: 4
+    name:
+      title: Name
+      description: Name of the level
+      type: string
+      required: false
+      example: Tier 4
+  urgency:
+    id:
+      title: ID
+      description: Id of the urgency
+      type: integer
+      required: false
+      example: 2
+    name:
+      title: Name
+      description: Name of the urgency
+      type: string
+      required: false
+      example: High
+  priority:
+    id:
+      title: ID
+      description: ID of the priority
+      type: integer
+      required: false
+      example: 4
+    name:
+      title: Name
+      description: Name of the priority
+      type: string
+      required: false
+      example: High
+  service_category:
+    id:
+      title: ID
+      description: ID of the service category
+      type: integer
+      required: false
+      example: 8
+    name:
+      title: Name
+      description: Name of the service category
+      type: string
+      required: false
+      example: User Management
+  user_output:
+    id:
+      title: ID
+      description: User ID
+      type: integer
+      required: false
+      example: 71
+    name:
+      title: Name
+      description: User name
+      type: string
+      required: false
+      example: John
+    is_vipuser:
+      title: Is Vipuser
+      description: Whether the user is a vip user or not
+      type: boolean
+      required: false
+      example: false
+  user_input:
+    id:
+      title: ID
+      description: User ID
+      type: integer
+      required: false
+      example: 71
+    name:
+      title: Name
+      description: User name
+      type: string
+      required: false
+      example: John
+  asset:
+    id:
+      title: ID
+      description: Id of the asset
+      type: integer
+      required: false
+      example: 4541563
+    name:
+      title: Name
+      description: Name of the asset
+      type: string
+      required: false
+      example: Software
+    barcode:
+      title: Barcode
+      description: Barcode of the asset
+      type: string
+      required: false
+      example: test-barcode
+  site:
+    id:
+      title: ID
+      description: Site's id
+      type: integer
+      required: false
+      example: 2235435
+    name:
+      title: Name
+      description: Site's name
+      type: string
+      required: false
+      example: Custom Site
+  group:
+    id:
+      title: ID
+      description: Group's id
+      type: integer
+      required: false
+      example: 2
+    name:
+      title: Name
+      description: Group's name
+      type: string
+      required: false
+      example: Network
+  technician:
+    id:
+      title: ID
+      description: Technician ID
+      type: integer
+      required: false
+      example: 3
+    name:
+      title: Name
+      description: Technician Name
+      type: string
+      required: false
+      example: Samuel
+  category:
+    id:
+      title: ID
+      description: ID of the category
+      type: integer
+      required: false
+      example: 8
+    name:
+      title: Name
+      description: Name of the category
+      type: string
+      required: false
+      example: Operating System
+  subcategory:
+    id:
+      title: ID
+      description: ID of the subcategory
+      type: integer
+      required: false
+      example: 24
+    name:
+      title: Name
+      description: Name of the subcategory
+      type: string
+      required: false
+      example: Mac OS X
+  item:
+    id:
+      title: ID
+      description: ID of the item
+      type: integer
+      required: false
+      example: 1
+    name:
+      title: Name
+      description: Name of the item
+      type: string
+      required: false
+      example: Install
+  request_output:
+    id:
+      title: ID
+      description: Id of the request
+      type: integer
+      required: false
+      example: 92
+    subject:
+      title: Subject
+      description: Subject of this request
+      type: string
+      required: false
+      example: Need a Monitor
+      order: 1
+    requester:
+      title: Requester
+      description: The requester of the request
+      type: user_output
+      required: false
+      example: '{"name": "John", "id": 7, "is_vipuser": true}'
+      order: 2
+    description:
+      title: Description
+      description: Description of this request
+      type: string
+      required: false
+      example: Example description
+    request_type:
+      title: Request Type
+      description: Type of this request
+      type: request_type
+      required: false
+      example: '{"id": 1, "name" "Incident"}'
+    impact:
+      title: Impact
+      description: Impact of this request
+      type: impact
+      required: false
+      example: '{"id": 1, "name": "High"}'
+    status:
+      title: Status
+      description: Indicates the current status of this request
+      type: status
+      required: false
+      example: '{"name": "Open", "id": 2}'
+    mode:
+      title: Mode
+      description: The mode in which this request is created
+      type: mode
+      required: false
+      example: '{"name": "Web Form", "id": 4}'
+    level:
+      title: Level
+      description: Level of the request
+      type: level
+      required: false
+      example: '{"name": "Tier 4", "id": 4}'
+    urgency:
+      title: Urgency
+      description: Urgency of the request
+      type: urgency
+      required: false
+      example: '{"name": "Low", "id": 1}'
+    priority:
+      title: Priority
+      description: Priority of the request
+      type: priority
+      required: false
+      example: '{"name": "High", "id": 4}'
+    service_category:
+      title: Service Category
+      description: Service category to which this request belongs
+      type: service_category
+      required: false
+      example: '{"name": "User Management", "id": 8}'
+    assets:
+      title: Assets
+      description: Array of asset objects associated with this request
+      type: "[]asset"
+      required: false
+      example: ['{"name": "Software", "id": 4541563, "barcode": "test-barcode"}']
+    site:
+      title: Site
+      description: Denotes the site to which this request belongs
+      type: site
+      required: false
+      example: '{"name": "Custom Site", "id": 71}'
+    group:
+      title: Group
+      description: The group to which the request belongs
+      type: group
+      required: false
+      example: '{"name": "Network", "id": 2}'
+    technician:
+      title: Technician
+      description: The technician that was assigned to the request
+      type: technician
+      required: false
+      example: '{"name": "John", "id": 71}'
+    category:
+      title: Category
+      description: Category to which this request belongs
+      type: category
+      required: false
+      example: '{"name": "Operating System", "id": 8}'
+    subcategory:
+      title: Subcategory
+      description: Subcategory to which this request belongs
+      type: subcategory
+      required: false
+      example: '{"name": "Mac OS X", "id": 24}'
+    item:
+      title: Item
+      description: Item of this request
+      type: item
+      required: false
+      example: '{"name": "Install", "id": 1}'
+    email_ids_to_notify:
+      title: Email IDs to Notify
+      description: Array of Email ids, which needs to be notified about the happenings of this request
+      type: "[]string"
+      required: false
+      example: ["user@example.com"]
+    is_fcr:
+      title: Is Fcr
+      description: Boolean value indicating if the request has been marked as First Call Resolution
+      type: boolean
+      required: false
+      example: true
+    is_service_request:
+      title: Is Service Request
+      description: Indicates whether the request is a service request or not
+      type: boolean
+      required: false
+      example: true
+    has_notes:
+      title: Has Notes
+      description: Indicates whether the request has notes
+      type: boolean
+      required: false
+      example: true
+    is_overdue:
+      title: Is Overdue
+      description: Indicates if the request is overdue
+      type: boolean
+      required: false
+      example: true
+    udf_fields:
+      title: Udf Fields
+      description: Holds udf fields values associated with the request
+      type: object
+      required: false
+      example: '{"udf_sline_51":"abc test.com","udf_pick_52":"Tony Stark"}'
+    created_time:
+      title: Created Time
+      description: Time the request was created
+      type: date
+      required: false
+      example: Jul 9, 2022 04:02 AM
+    created_by:
+      title: Created By
+      description: Creator of the request
+      type: user_output
+      required: false
+      example: '{"name": "John", "id": 71}'
+    due_by_time:
+      title: Due By Time
+      description: The due date of the request
+      type: date
+      required: false
+      example: Jul 13, 2022 04:02 AM
+  closure_code:
+    id:
+      title: ID
+      description: Closure Code ID
+      type: integer
+      required: false
+      example: 1
+    name:
+      title: Name
+      description: Closure Code name
+      type: string
+      required: false
+      example: Success
+  last_updated_by:
+    id:
+      title: ID
+      description: Id of the last editor
+      type: integer
+      required: false
+      example: 3
+    name:
+      title: Name
+      description: Name of the last editor
+      type: string
+      required: false
+      example: Samuel
+  added_by:
+    id:
+      title: ID
+      description: Id of the creator
+      type: integer
+      required: false
+      example: 3
+    name:
+      title: Name
+      description: Name of the creator
+      type: string
+      required: false
+      example: Samuel
+  note:
+    id:
+      title: ID
+      description: Note ID
+      type: integer
+      required: false
+      example: 543
+    show_to_requester:
+      title: Show to Requester
+      description: Whether to show the note to requester or not
+      type: boolean
+      required: false
+      example: false
+    last_updated_time:
+      title: Last Updated Time
+      description: The time the request note was updated
+      type: date
+      required: false
+      example: Jul 9, 2022 04:02 AM
+    added_time:
+      title: Added Time
+      description: The time the request note was added
+      type: date
+      required: false
+      example: Jul 8, 2022 02:01 AM
+    last_updated_by:
+      title: Last Updated By
+      description: Last updated by details
+      type: last_updated_by
+      required: false
+      example: '{"name": "John", "id": 71}'
+    added_by:
+      title: Added By
+      description: Added by details
+      type: added_by
+      required: false
+      example: '{"name": "John", "id": 71}'
+
+connection:
+  sdp_base_url:
+    title: Sdp Base URL
+    description: Service Desk Plus Base URL
+    type: string
+    required: true
+    example: http://me-sdeskplus.dev.example.com:8080
+  api_key:
+    title: API Key
+    description: Manage Engine Service Desk Technican's API key
+    type: credential_secret_key
+    required: true
+    example: EXAMPLE1-API2-KEY3-HDFS-48GS24WSA6GE
+
+actions:
+  get_list_request:
+    title: Get List Request
+    description: This operation lets you view the details of all the requests
+    input:
+      start_index:
+        title: Start Index
+        description: Use this to get a list of tasks starting from this index
+        type: integer
+        required: false
+        example: 2
+      page_size:
+        title: Page Size
+        description: By default, will return only the first 10 requests
+        type: integer
+        required: false
+        example: 15
+        default: 10
+      search_fields:
+         title: Search Fields
+         description: The column name and value to be searched
+         type: object
+         required: false
+         example: '{"subject": "test","priority.name": "Low"}'
+      sort_order:
+        title: Sort Order
+        description: Sort order for the results
+        type: string
+        enum:
+          - asc
+          - desc
+          - None
+        required: false
+        example: asc
+        default: asc
+      sort_field:
+        title: Sort Field
+        description: FieldName for sorting
+        type: string
+        required: false
+        example: subject
+        default: subject
+      filter_name:
+        title: Filter Name
+        description: Filter name
+        type: string
+        required: false
+        example: Test
+    output:
+      requests:
+        title: Requests
+        description: List of requests
+        type: "[]request_output"
+        required: false
+        example: ['{"subject": "Install xyz", "requester": {"name": "Mike"}}']
+      status:
+         title: Status
+         description: Status of the request
+         type: string
+         required: true
+         example: success
+  get_request:
+    title: Get Request
+    description: This operation helps you to view the request details by the unique request id
+    input:
+      request_id:
+        title: Request ID
+        description: The request id that should be returned
+        type: integer
+        required: true
+        example: 54
+    output:
+      request:
+        title: Request
+        description: Request
+        type: request_output
+        required: false
+        example: '{"subject": "Install xyz", "requester": {"name": "Mike"}}'
+      status:
+        title: Status
+        description: Status of the request
+        type: string
+        required: true
+        example: success
+      status_code:
+        title: Status Code
+        description: Status code of the request
+        type: integer
+        required: false
+        example: 2000
+  add_request:
+    title: Add Request
+    description: This operation helps you to add new request. Subject and requester parameters are obligatory, others are optional. In every parameter containing `ID` and `Name` fields please provide only one of them
+    input:
+      subject:
+        title: Subject
+        description: Subject of this request
+        type: string
+        required: true
+        example: Need a Monitor
+        order: 1
+      description:
+        title: Description
+        description: Description of this request
+        type: string
+        required: false
+        example: Example description
+        order: 2
+      assets:
+        title: Assets
+        description: Array of asset objects associated with this request
+        type: "[]asset"
+        required: false
+        example: ['{"name": "Software", "id": 4541563, "barcode": "test-barcode"}']
+        order: 3
+      email_ids_to_notify:
+        title: Email IDs to Notify
+        description: Array of Email ids, which needs to be notified about the happenings of this request
+        type: "[]string"
+        required: false
+        example: ["user@example.com"]
+        order: 4
+      is_fcr:
+        title: Is Fcr
+        description: Boolean value indicating if the request has been marked as First Call Resolution
+        type: boolean
+        required: false
+        example: true
+        order: 5
+      requester:
+        title: Requester
+        description: The requester of the request
+        type: user_input
+        required: true
+        example: '{"name": "John", "id": 7}'
+        order: 6
+      request_type:
+        title: Request Type
+        description: Type of this request
+        type: request_type
+        required: false
+        example: '{"id": 1, "name" "Incident"}'
+      impact:
+        title: Impact
+        description: Impact of this request
+        type: impact
+        required: false
+        example: '{"id": 1, "name": "High"}'
+      status:
+        title: Status
+        description: Indicates the current status of this request
+        type: status
+        required: false
+        example: '{"name": "Open", "id": 2}'
+      mode:
+        title: Mode
+        description: The mode in which this request is created
+        type: mode
+        required: false
+        example: '{"name": "Web Form", "id": 4}'
+      level:
+        title: Level
+        description: Level of the request
+        type: level
+        required: false
+        example: '{"name": "Tier 4", "id": 4}'
+      urgency:
+        title: Urgency
+        description: Urgency of the request
+        type: urgency
+        required: false
+        example: '{"name": "Low", "id": 1}'
+      priority:
+        title: Priority
+        description: Priority of the request
+        type: priority
+        required: false
+        example: '{"name": "High", "id": 4}'
+      service_category:
+        title: Service Category
+        description: Service category to which this request belongs
+        type: service_category
+        required: false
+        example: '{"name": "User Management", "id": 8}'
+      site:
+        title: Site
+        description: Denotes the site to which this request belongs
+        type: site
+        required: false
+        example: '{"name": "Custom Site", "id": 71}'
+      group:
+        title: Group
+        description: The group to which the request belongs
+        type: group
+        required: false
+        example: '{"name": "Network", "id": 2}'
+      technician:
+        title: Technician
+        description: The technician that was assigned to the request
+        type: technician
+        required: false
+        example: '{"name": "John", "id": 71}'
+      category:
+        title: Category
+        description: Category to which this request belongs
+        type: category
+        required: false
+        example: '{"name": "Operating System", "id": 8}'
+      subcategory:
+        title: Subcategory
+        description: Subcategory to which this request belongs
+        type: subcategory
+        required: false
+        example: '{"name": "Mac OS X", "id": 24}'
+      item:
+        title: Item
+        description: Item of this request
+        type: item
+        required: false
+        example: '{"name": "Install", "id": 1}'
+    output:
+      request_id:
+        title: Request ID
+        description:  The id of newly created request
+        type: integer
+        required: false
+        example: 55
+      status:
+        title: Status
+        description: Status of the request
+        type: string
+        required: true
+        example: success
+      status_code:
+        title: Status Code
+        description: Status code of the request
+        type: integer
+        required: false
+        example: 2000
+  edit_request:
+    title: Edit Request
+    description: This operation helps you to update the request by using the unique request_id. At least one parameter except Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one of them
+    input:
+      request_id:
+        title: Request ID
+        description: The ID of a request to edit
+        type: integer
+        required: true
+        example: 54
+        order: 1
+      subject:
+        title: Subject
+        description: Subject of this request
+        type: string
+        required: false
+        example: Need a Monitor
+        order: 2
+      description:
+        title: Description
+        description: Description of this request
+        type: string
+        required: false
+        example: Example description
+        order: 3
+      assets:
+        title: Assets
+        description: Array of asset objects associated with this request
+        type: "[]asset"
+        required: false
+        example: ['{"name": "Software", "id": 4541563, "barcode": "test-barcode"}']
+        order: 4
+      email_ids_to_notify:
+        title: Email IDs to Notify
+        description: Array of Email ids, which needs to be notified about the happenings of this request
+        type: "[]string"
+        required: false
+        example: ["user@example.com"]
+        order: 5
+      is_fcr:
+        title: Is Fcr
+        description: Boolean value indicating if the request has been marked as First Call Resolution
+        type: boolean
+        required: false
+        example: true
+        order: 6
+      requester:
+        title: Requester
+        description: The requester of the request
+        type: user_input
+        required: false
+        example: '{"name": "John", "id": 7}'
+        order: 7
+      request_type:
+        title: Request Type
+        description: Type of this request
+        type: request_type
+        required: false
+        example: '{"id": 1, "name" "Incident"}'
+      impact:
+        title: Impact
+        description: Impact of this request
+        type: impact
+        required: false
+        example: '{"id": 1, "name": "High"}'
+      status:
+        title: Status
+        description: Indicates the current status of this request
+        type: status
+        required: false
+        example: '{"name": "Open", "id": 2}'
+      mode:
+        title: Mode
+        description: The mode in which this request is created
+        type: mode
+        required: false
+        example: '{"name": "Web Form", "id": 4}'
+      level:
+        title: Level
+        description: Level of the request
+        type: level
+        required: false
+        example: '{"name": "Tier 4", "id": 4}'
+      urgency:
+        title: Urgency
+        description: Urgency of the request
+        type: urgency
+        required: false
+        example: '{"name": "Low", "id": 1}'
+      priority:
+        title: Priority
+        description: Priority of the request
+        type: priority
+        required: false
+        example: '{"name": "High", "id": 4}'
+      service_category:
+        title: Service Category
+        description: Service category to which this request belongs
+        type: service_category
+        required: false
+        example: '{"name": "User Management", "id": 8}'
+      site:
+        title: Site
+        description: Denotes the site to which this request belongs
+        type: site
+        required: false
+        example: '{"name": "Custom Site", "id": 71}'
+      group:
+        title: Group
+        description: The group to which the request belongs
+        type: group
+        required: false
+        example: '{"name": "Network", "id": 2}'
+      technician:
+        title: Technician
+        description: The technician that was assigned to the request
+        type: technician
+        required: false
+        example: '{"name": "John", "id": 71}'
+      category:
+        title: Category
+        description: Category to which this request belongs
+        type: category
+        required: false
+        example: '{"name": "Operating System", "id": 8}'
+      subcategory:
+        title: Subcategory
+        description: Subcategory to which this request belongs
+        type: subcategory
+        required: false
+        example: '{"name": "Mac OS X", "id": 24}'
+      item:
+        title: Item
+        description: Item of this request
+        type: item
+        required: false
+        example: '{"name": "Install", "id": 1}'
+    output:
+      request_id:
+        title: Request ID
+        description: The id of edited request
+        type: integer
+        required: false
+        example: 54
+      status:
+        title: Status
+        description: Status of the request
+        type: string
+        required: true
+        example: success
+      status_code:
+        title: Status Code
+        description: Status code of the request
+        type: integer
+        required: false
+        example: 2000
+  delete_request:
+    title: Delete Request
+    description: This operation lets you delete (move to trash) request
+    input:
+     request_id:
+       title: Request ID
+       description: The ID of a request to delete
+       type: integer
+       required: true
+       example: 54
+    output:
+      request_id:
+        title: Request ID
+        description: The id of deleted request
+        type: integer
+        required: false
+        example: 54
+      status:
+        title: Status
+        description: Status of the request
+        type: string
+        required: true
+        example: success
+      status_code:
+        title: Status Code
+        description: Status code of the request
+        type: integer
+        required: false
+        example: 2000
+  close_request:
+    title: Close Request
+    description: This operation allows you to close single or multiple requests
+    input:
+      request_id:
+        title: Request ID
+        description: The request id that should be closed
+        type: integer
+        required: true
+        example: 54
+        order: 1
+      closure_comments:
+        title: Closure Comments
+        description: The comments that should be added when closing the request
+        type: string
+        required: false
+        example: Reset the password solved the issue
+        order: 2
+      requester_ack_comments:
+        title: Requester Ack Comments
+        description: The requester comments
+        type: string
+        required: false
+        example: Mail fetching is up and running now
+        order: 3
+      requester_ack_resolution:
+        title: Requester Ack Resolution
+        description: The requester resolution
+        type: boolean
+        required: false
+        example: true
+        order: 4
+      closure_code:
+        title: Closure Code
+        description: Closure code to add to the request
+        type: closure_code
+        required: false
+        example: '{"name": "Success", "id": 1}'
+    output:
+      request_id:
+        title: Request ID
+        description: The id of the closed request
+        type: integer
+        required: false
+        example: 54
+      status:
+        title: Status
+        description: Status of the request
+        type: string
+        required: true
+        example: success
+      status_code:
+        title: Status Code
+        description: Status code of the request
+        type: integer
+        required: false
+        example: 2000
+  assign_request:
+    title: Assign Request
+    description: This Operation allows you to assign a request to a technician or group. At least one input parameter (except Request ID) is required - Group or Technician. In every parameter containing `ID` and `Name` fields please provide only one of them
+    input:
+      request_id:
+        title: Request ID
+        description: The request id that should be assigned
+        type: integer
+        required: true
+        example: 27
+      group:
+        title: Group
+        description: The group to which the request belongs
+        type: group
+        required: false
+        example: '{"name": "Network", "id": 2}'
+      technician:
+        title: Technician
+        description: The technician that was assigned to the request
+        type: technician
+        required: false
+        example: '{"name": "John", "id": 71}'
+    output:
+      request_id:
+        title: Request ID
+        description: The id of the assigned request
+        type: integer
+        required: false
+        example: 27
+      status:
+        title: Status
+        description: Status of the request
+        type: string
+        required: true
+        example: success
+      status_code:
+        title: Status Code
+        description: Status code of the request
+        type: integer
+        required: false
+        example: 2000
+  pickup_request:
+    title: Pickup Request
+    description: This Operation allows you to add/update a resolution of the request
+    input:
+      request_id:
+        title: Request ID
+        description: The request id that should be assigned
+        type: integer
+        required: true
+        example: 27
+    output:
+      request_id:
+        title: Request ID
+        description: The id of the picked up request
+        type: integer
+        required: false
+        example: 27
+      status:
+        title: Status
+        description: Status of the request
+        type: string
+        required: true
+        example: success
+      status_code:
+        title: Status Code
+        description: Status code of the request
+        type: integer
+        required: false
+        example: 2000
+  add_resolution:
+    title: Add Resolution
+    description: This Operation allows you to add/update a resolution of the request
+    input:
+      request_id:
+        title: Request ID
+        description: The id of the request
+        type: integer
+        required: true
+        example: 27
+      content:
+        title: Content
+        description: Resolution content
+        type: string
+        required: true
+        example: Sample resolution
+      add_to_linked_requests:
+        title: Add to Linked Requests
+        description: Whether the resolution should be added to linked requests
+        type: boolean
+        required: true
+        example: true
+    output:
+      request_id:
+        title: Request ID
+        description: The id of the request
+        type: integer
+        required: false
+        example: 27
+      status:
+        title: Status
+        description: Status of the request
+        type: string
+        required: true
+        example: success
+      status_code:
+        title: Status Code
+        description: Status code of the request
+        type: integer
+        required: false
+        example: 2000
+  get_resolution:
+    title: Get Resolution
+    description: This Operation allows you to get a resolution of the request
+    input:
+      request_id:
+        title: Request ID
+        description: The id of the request
+        type: integer
+        required: true
+        example: 27
+    output:
+      request_id:
+        title: Request ID
+        description: The id of the request
+        type: integer
+        required: false
+        example: 27
+      content:
+        title: Content
+        description: Resolution content
+        type: string
+        required: false
+        example: Sample resolution
+      status:
+        title: Status
+        description: Status of the request
+        type: string
+        required: true
+        example: success
+      status_code:
+        title: Status Code
+        description: Status code of the request
+        type: integer
+        required: false
+        example: 2000
+  add_request_note:
+    title: Add Request Note
+    description: This operation helps you add a note
+    input:
+      request_id:
+        title: Request ID
+        description: The id of the request
+        type: integer
+        required: true
+        example: 55
+      description:
+        title: Description
+        description: Note description in HTML format
+        type: string
+        required: true
+        example: Need help
+      show_to_requester:
+        title: Show to Requester
+        description: Whether to show the note to requester or not
+        type: boolean
+        required: false
+        example: false
+      notify_technician:
+        title: Notify Technician
+        description: Whether to notify the technician or not
+        type: boolean
+        required: false
+        example: true
+      mark_first_response:
+        title: Mark First Response
+        description: Whether to set the responded date of the request/ticket
+        type: boolean
+        required: false
+        example: true
+      add_to_linked_request:
+        title: Add to Linked Request
+        description: Whether to add the note to the linked requests
+        type: boolean
+        required: false
+        example: false
+    output:
+      request_id:
+        title: Request ID
+        description: The id of the request
+        type: integer
+        required: false
+        example: 55
+      request_note_id:
+        title: Request Note ID
+        description: The id of the request note
+        type: integer
+        required: false
+        example: 209
+      status:
+        title: Status
+        description: Status of the request
+        type: string
+        required: true
+        example: success
+      status_code:
+        title: Status Code
+        description: Status code of the request
+        type: integer
+        required: false
+        example: 2000
+  edit_request_note:
+    title: Edit Request Note
+    description: This operation helps you update a note. At least one parameter except Request ID and Note ID is required
+    input:
+      request_id:
+        title: Request ID
+        description: The id of the request
+        type: integer
+        required: true
+        example: 55
+      request_note_id:
+        title: Request Note ID
+        description: The id of the request note
+        type: integer
+        required: true
+        example: 209
+      description:
+        title: Description
+        description: Note description in HTML format
+        type: string
+        required: false
+        example: Need help
+      show_to_requester:
+        title: Show to Requester
+        description: Whether to show the note to requester or not
+        type: boolean
+        required: false
+        example: false
+      notify_technician:
+        title: Notify Technician
+        description: Whether to notify the technician or not
+        type: boolean
+        required: false
+        example: true
+      mark_first_response:
+        title: Mark First Response
+        description: Whether to set the responded date of the request/ticket
+        type: boolean
+        required: false
+        example: true
+      add_to_linked_request:
+        title: Add to Linked Request
+        description: Whether to add the note to the linked requests
+        type: boolean
+        required: false
+        example: false
+    output:
+      request_id:
+        title: Request ID
+        description: The id of the request
+        type: integer
+        required: false
+        example: 55
+      status:
+        title: Status
+        description: Status of the request
+        type: string
+        required: true
+        example: success
+      status_code:
+        title: Status Code
+        description: Status code of the request
+        type: integer
+        required: false
+        example: 2000
+  delete_request_note:
+    title: Delete Request Note
+    description: This operation helps you delete a note
+    input:
+      request_id:
+        title: Request ID
+        description: The id of the request
+        type: integer
+        required: true
+        example: 55
+      request_note_id:
+        title: Request Note ID
+        description: The id of the request note to delete
+        type: integer
+        required: true
+        example: 208
+    output:
+      request_id:
+        title: Request ID
+        description: The id of the request
+        type: integer
+        required: false
+        example: 55
+      status:
+        title: Status
+        description: Status of the request
+        type: string
+        required: true
+        example: success
+      status_code:
+        title: Status Code
+        description: Status code of the request
+        type: integer
+        required: false
+        example: 2000
+  get_list_request_notes:
+    title: Get List Request Notes
+    description: This operation helps you get all the notes
+    input:
+      request_id:
+        title: Request ID
+        description: The id of the request
+        type: integer
+        required: true
+        example: 55
+    output:
+      request_id:
+        title: Request ID
+        description: The id of the request
+        type: integer
+        required: true
+        example: 55
+      notes:
+        title: Notes
+        description:  Notes assigned to the request
+        type: "[]note"
+        required: false
+        example: ['{"note_id": "312", "added_time": "Jul 8, 2022 02:02 AM", "added_by": {"name": "John", "id": "71"}}']
+      status:
+        title: Status
+        description: Status of the request
+        type: string
+        required: true
+        example: success
+      status_code:
+        title: Status Code
+        description: Status code of the request
+        type: integer
+        required: false
+        example: 2000

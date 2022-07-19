@@ -1,0 +1,9 @@
+{
+  "add_to_linked_request": false,
+  "description": "New description edited",
+  "request_note_id": 201,
+  "mark_first_response": true,
+  "notify_technician": true,
+  "request_id": 200,
+  "show_to_requester": true
+}

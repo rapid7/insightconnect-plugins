@@ -1,0 +1,13 @@
+{
+  "response_status": {
+    "status_code": 4000,
+    "messages": [
+      {
+        "status_code": 4016,
+        "type": "failed",
+        "message": "Already in trash"
+      }
+    ],
+    "status": "failed"
+  }
+}
