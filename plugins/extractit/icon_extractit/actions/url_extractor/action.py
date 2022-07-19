@@ -3,7 +3,7 @@ from .schema import UrlExtractorInput, UrlExtractorOutput, Input, Output, Compon
 
 # Custom imports below
 from icon_extractit.util.util import Regex
-from icon_extractit.util.extractor import extract, clear_urls
+from icon_extractit.util.extractor import extract, clear_urls, remove_extracted_urls_from_links
 
 
 class UrlExtractor(insightconnect_plugin_runtime.Action):
@@ -18,6 +18,10 @@ class UrlExtractor(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         return {
             Output.URLS: clear_urls(
-                extract(Regex.URL, params.get(Input.STR), params.get(Input.FILE), params.get(Input.KEEP_ORIGINAL_URLS))
+                remove_extracted_urls_from_links(
+                    extract(
+                        Regex.URL, params.get(Input.STR), params.get(Input.FILE), params.get(Input.KEEP_ORIGINAL_URLS)
+                    )
+                )
             )
         }
