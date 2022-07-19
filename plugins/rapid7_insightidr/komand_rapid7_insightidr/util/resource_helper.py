@@ -4,7 +4,7 @@ import requests
 import aiohttp
 import asyncio
 import json
-from typing import Optional
+from typing import List
 
 from komand_rapid7_insightidr.connection import Connection
 
@@ -28,6 +28,32 @@ async def get_label_for_id(label_id: str, url: str, session: aiohttp.ClientSessi
             return {}
 
     return {}
+
+
+def get_sort_param(input_string: str) -> str:
+    """
+    Converts input_string to the sort parameters according to the API docs
+    :param input_string: Input string that contains parameter name and sort order i.e. Created Time Ascending
+    :return: Str ready to be added as a query parameter
+    """
+    sort_directions = {"ascending": "ASC", "descending": "DESC"}
+    splitted_input_string = input_string.lower().split(" ")
+    direction = splitted_input_string.pop()
+    output_string = "_".join(splitted_input_string)
+    for key, value in sort_directions.items():
+        if key == direction:
+            output_string += f",{value}"
+            break
+    return output_string
+
+
+def get_priorities_param(input_list_of_priorities: List[str]) -> str:
+    """
+    Converts list of str that contains priority names into str with those names separated by comma
+    :param input_list_of_priorities: List of str containing priority names
+    :return: str containing priority names separated by comma
+    """
+    return ",".join(input_list_of_priorities)
 
 
 class ResourceHelper(object):
@@ -74,8 +100,8 @@ class ResourceHelper(object):
                 response = request_method(url=endpoint, params=params, verify=False)
             else:
                 response = request_method(url=endpoint, params=params, json=payload, verify=False)
-        except requests.RequestException as e:
-            self.logger.error(e)
+        except requests.RequestException as error:
+            self.logger.error(error)
             raise
 
         if response.status_code in range(200, 299):

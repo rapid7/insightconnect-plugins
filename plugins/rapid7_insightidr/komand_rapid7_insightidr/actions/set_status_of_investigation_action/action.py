@@ -7,6 +7,7 @@ from .schema import (
     Output,
 )
 from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.helper import clean
 
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Investigations
@@ -26,6 +27,7 @@ class SetStatusOfInvestigationAction(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         idr_id = params.get(Input.ID)
         status = params.get(Input.STATUS)
+
         request = ResourceHelper(self.connection.session, self.logger)
 
         endpoint = Investigations.set_the_status_of_an_investigation(self.connection.url, idr_id, status)
@@ -40,7 +42,7 @@ class SetStatusOfInvestigationAction(insightconnect_plugin_runtime.Action):
                 assistance="Contact support for help. See log for more details",
             )
         try:
-            return {Output.INVESTIGATION: result}
+            return {Output.INVESTIGATION: clean(result)}
         except KeyError:
             self.logger.error(result)
             raise PluginException(
