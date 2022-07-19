@@ -2,10 +2,11 @@ import insightconnect_plugin_runtime
 
 from .schema import ListInvestigationsInput, ListInvestigationsOutput, Component, Output, Input
 from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.helper import clean
 
 # Custom imports below
 from komand_rapid7_insightidr.util.endpoints import Investigations
-from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
+from komand_rapid7_insightidr.util.resource_helper import ResourceHelper, get_sort_param, get_priorities_param
 import json
 import datetime
 
@@ -21,8 +22,11 @@ class ListInvestigations(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         rest_params = {}
-        start_time = params.get(Input.START_TIME, None)
-        end_time = params.get(Input.END_TIME, None)
+        start_time = params.get(Input.START_TIME)
+        end_time = params.get(Input.END_TIME)
+        email = params.get(Input.EMAIL)
+        sort = params.get(Input.SORT)
+        priorities = params.get(Input.PRIORITIES)
 
         for key in params:
             if params[key]:
@@ -44,13 +48,22 @@ class ListInvestigations(insightconnect_plugin_runtime.Action):
             end_time_parsed = datetime.datetime.fromisoformat(end_time)
             rest_params["end_time"] = end_time_parsed.astimezone(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
+        if email:
+            rest_params["assignee.email"] = email
+
+        if sort:
+            rest_params[Input.SORT] = get_sort_param(sort)
+
+        if priorities:
+            rest_params[Input.PRIORITIES] = get_priorities_param(priorities)
+
         request = ResourceHelper(self.connection.session, self.logger)
 
         endpoint = Investigations.list_investigations(self.connection.url)
         response = request.resource_request(endpoint, "get", params=rest_params)
 
         try:
-            result = json.loads(response["resource"])
+            result = json.loads(response.get("resource"))
         except json.decoder.JSONDecodeError:
             self.logger.error(f"InsightIDR response: {response}")
             raise PluginException(
@@ -58,8 +71,8 @@ class ListInvestigations(insightconnect_plugin_runtime.Action):
                 assistance="Contact support for help. See log for more details",
             )
         try:
-            investigations = result["data"]
-            metadata = result["metadata"]
+            investigations = clean(result.get("data", {}))
+            metadata = result.get("metadata", {})
             return {Output.INVESTIGATIONS: investigations, Output.METADATA: metadata}
         except KeyError:
             self.logger.error(result)

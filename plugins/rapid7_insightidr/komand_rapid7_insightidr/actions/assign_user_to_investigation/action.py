@@ -9,8 +9,10 @@ from .schema import (
 
 # Custom imports below
 import json
+from insightconnect_plugin_runtime.helper import clean
 from komand_rapid7_insightidr.util.endpoints import Investigations
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 
 
 class AssignUserToInvestigation(insightconnect_plugin_runtime.Action):
@@ -26,27 +28,26 @@ class AssignUserToInvestigation(insightconnect_plugin_runtime.Action):
         investigation_id = params.get(Input.ID)
         user_email = params.get(Input.USER_EMAIL_ADDRESS)
 
-        endpoint = Investigations.set_user_for_investigation(self.connection.url, investigation_id)
         payload = {"user_email_address": user_email}
 
-        response = self.connection.session.put(endpoint, json=payload)
-        try:
-            response.raise_for_status()
-        except Exception:
-            raise PluginException(
-                cause="The IDR API returned an error.",
-                assistance="Usually this is the result of an invalid user email or investigation ID. Please see the following for more information:\n",
-                data=response.text,
-            )
+        request = ResourceHelper(self.connection.session, self.logger)
+
+        endpoint = Investigations.set_user_for_investigation(self.connection.url, investigation_id)
+        response = request.resource_request(endpoint, "put", payload=payload)
 
         try:
-            result = response.json()
+            result = json.loads(response.get("resource"))
         except json.decoder.JSONDecodeError:
             self.logger.error(f"InsightIDR response: {response}")
             raise PluginException(
                 cause="The response from InsightIDR was not in the correct format.",
                 assistance="Contact support for help. See log for more details",
-                data=response,
             )
-
-        return {Output.SUCCESS: True, Output.INVESTIGATION: result}
+        try:
+            return {Output.SUCCESS: True, Output.INVESTIGATION: clean(result)}
+        except KeyError:
+            self.logger.error(result)
+            raise PluginException(
+                cause="The response from InsightIDR was not in the correct format.",
+                assistance="Contact support for help. See log for more details",
+            )
