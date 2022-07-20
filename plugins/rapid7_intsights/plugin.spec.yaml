@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_intsights
 title: Rapid7 IntSights
 description: Rapid7 IntSights is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
-version: 3.1.0
+version: 3.2.0
 supported_versions: ["2.4.0"]
 vendor: rapid7
 support: rapid7
@@ -914,6 +914,17 @@ triggers:
         type: '[]string'
         required: false
         example: ["InProgress", "Pending"]
+      source_date_from_enum:
+        title: Source Date Start Enum
+        description: Start date to fetch from with options, such as choose Hour to pull alerts in the last hour
+        type: string
+        required: false
+        example: Hour
+        enum:
+          - Hour
+          - Day
+          - Week
+          - ""
       source_date_from:
         title: Source Date From
         description: Start date (when the event occured) to fetch from in Unix Millisecond Timestamp
