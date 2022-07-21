@@ -17,6 +17,11 @@ This plugin utilizes the SentinelOne API, the documentation is located in the Se
 
 * Sentinel one API administrative credentials
 
+# Supported Product Versions
+
+* 2.0.0
+* 2.1.0
+
 # Documentation
 
 ## Setup
@@ -25,14 +30,18 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Username and password|None|{"username": "user@example.com", "password": "mypassword"}|
-|url|string|None|True|SentinelOne Console URL|None|https://example.sentinelone.com|
+|api_key|credential_secret_key|None|False|Credential secret API key. Provide if you choose API Token Auth type|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|authentication_type|string|Basic Auth|True|Type of authentication|['Basic Auth', 'API Token Auth']|Basic Auth|
+|basic_auth_credentials|credential_username_password|None|False|Username and password. Provide if you choose Basic Auth type|None|{"username": "user@example.com", "password": "mypassword"}|
+|url|string|None|True|SentinelOne Console URL|None|https://example.com|
 
 Example input:
 
 ```
 {
-  "credentials": {
+  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "authentication_type": "Basic Auth",
+  "basic_auth_credentials": {
     "username": "user@example.com",
     "password": "mypassword"
   },
@@ -43,6 +52,84 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Update Incident Status
+
+This action is used to update incident status.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|incident_ids|[]string|None|True|A list of alert or threat IDs to update the incident status on|None|["1118189762920424575", "1118189762920424576"]|
+|incident_status|string|None|True|Incident status|['unresolved', 'in progress', 'resolved']|resolved|
+|type|string|None|True|Type of incidents|['threats', 'alerts']|threats|
+
+Example input:
+
+```
+{
+  "incident_ids": [
+    "1118189762920424575",
+    "1118189762920424576"
+  ],
+  "incident_status": "resolved",
+  "type": "threats"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|False|Number of entities affected by the requested operation|
+
+Example output:
+
+```
+{
+  "affected": 2
+}
+```
+
+#### Update Analyst Verdict
+
+This action is used to update analyst verdict.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|analyst_verdict|string|None|True|Analyst verdict|['true positive', 'suspicious', 'false positive', 'undefined']|true positive|
+|incident_ids|[]string|None|True|A list of alert or threat IDs on which we may update the analyst verdict|None|["1118189762920424575", "1118189762920424576"]|
+|type|string|None|True|Type of incidents|['threats', 'alerts']|threats|
+
+Example input:
+
+```
+{
+  "analyst_verdict": "true positive",
+  "incident_ids": [
+    "1118189762920424575",
+    "1118189762920424576"
+  ],
+  "type": "threats"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|False|Number of entities affected by the requested operation|
+
+Example output:
+
+```
+{
+  "affected": 2
+}
+```
 
 #### Get Events by Type
 
@@ -823,7 +910,8 @@ Example input:
     "ids": [
       "1000000000000000000"
     ]
-  }
+  },
+  "module": "monitor"
 }
 ```
 
@@ -966,8 +1054,6 @@ Example input:
 
 ```
 {
-  "blacklist_state": true,
-  "description": "Hash Blacklisted from InsightConnect",
   "hash": "3395856ce81f2b7382dee72602f798b642f14140"
 }
 ```
@@ -1908,6 +1994,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 7.0.0 - Add new actions Update Analyst Verdict and Update Incident Status | Fix Get Agent Details and Search Agents actions to handle more response scenarios | Add option to authentication with API key
 * 6.2.0 - New actions Create Query, Get Query Status, Cancel Running Query, Get Events, Get Events By Type
 * 6.1.0 - Add new actions Disable Agent and Enable Agent
 * 6.0.0 - Add `operational_state` field to input of Get Agent Details and Search Agent actions | Update schema to return new outputs such as Active Directory, firewall, location, and quarantine information for Get Agent Details and Search Agent actions | Use API version 2.1 | Update capitalization according to style in Activities List action for Created Than Date and Less Than Dates inputs to Greater than Date and Less than Date
