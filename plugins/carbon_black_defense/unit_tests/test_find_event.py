@@ -95,7 +95,6 @@ class TestFindEvent(TestCase):
                 FindEventSchemaInput.PROCESS_NAME: self.params.get("process_name"),
             }
         )
-        print(actual)
         expected = {
             "success": True,
             "results": [
