@@ -25,19 +25,19 @@ class Connection(insightconnect_plugin_runtime.Connection):
         url = "https://api.abuseipdb.com/api/v2/check"
         params = {"ipAddress": "127.0.0.0"}
         try:
-            r = requests.get(url, params=params, headers=self.headers)
-            json_ = r.json()
+            response = requests.get(url, params=params, headers=self.headers)
+            json_ = response.json()
         except json.decoder.JSONDecodeError:
             raise ConnectionTestException(
                 cause="Received an unexpected response from AbuseIPDB.",
-                assistance=f"(non-JSON or no response" f" was received). Response was: {r.text}",
+                assistance=f"(non-JSON or no response" f" was received). Response was: {response.text}",
             )
-        except Exception as e:
-            self.logger.error(e)
+        except Exception as error:
+            self.logger.error(error)
             raise
-        if r.status_code not in range(200, 299):
+        if response.status_code not in range(200, 299):
             raise ConnectionTestException(
                 cause="Received an unexpected response from AbuseIPDB.",
-                assistance=f"(unexpected response was received). Response was: {r.text}; Status Code was: {r.status_code}",
+                assistance=f"(unexpected response was received). Response was: {response.text}; Status Code was: {response.status_code}",
             )
         return json_
