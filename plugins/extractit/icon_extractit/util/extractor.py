@@ -149,6 +149,22 @@ def clear_domains(matches: list) -> list:
     return list(dict.fromkeys(new_matches))
 
 
+def remove_extracted_urls_from_links(input_list: list) -> list:
+    """
+    remove_extracted_urls_from_links This function allows to remove extracted links from URLs
+    :param input_list: List of extracted URLs
+    :return: List without additionally extracted URLs from link params
+    """
+    output_list = input_list.copy()
+    for url in input_list:
+        temporary_list = input_list.copy()
+        temp_url = f"={temporary_list.pop(temporary_list.index(url))}"
+        for url_check in temporary_list:
+            if temp_url.replace("&amp", "") in url_check:
+                output_list.pop(output_list.index(temp_url[1:]))
+    return output_list
+
+
 def clear_urls(matches: list) -> list:
     new_matches = []
     for match in enumerate(matches):
