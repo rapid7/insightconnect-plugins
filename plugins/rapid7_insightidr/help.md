@@ -21,7 +21,7 @@ Do more with Investigations in [InsightIDR](https://www.rapid7.com/products/insi
 
 # Supported Product Versions
 
-* Latest release successfully tested on 2022-06-15.
+* Latest release successfully tested on 2022-07-20.
 
 # Documentation
 

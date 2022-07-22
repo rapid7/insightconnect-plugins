@@ -19,7 +19,7 @@ class Investigations:
             "Japan": "ap",
         }
 
-        return f"https://{region_map.get(region_code)}.api.insight.rapid7.com/"
+        return f"https://{region_map.get(region_code, 'us')}.api.insight.rapid7.com/"
 
     @staticmethod
     def list_investigations(console_url: str) -> str:

@@ -7,8 +7,6 @@ LABEL sdk=python
 # Add any custom package dependencies here
 # NOTE: Add pip packages to requirements.txt
 
-RUN apk add gcc musl-dev
-
 # End package dependencies
 
 # Add source code
