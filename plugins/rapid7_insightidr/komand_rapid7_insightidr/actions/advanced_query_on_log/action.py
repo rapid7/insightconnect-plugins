@@ -53,31 +53,7 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
         self.logger.info("Sending results to orchestrator.")
         return {Output.RESULTS: log_entries, Output.COUNT: len(log_entries)}
 
-    def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:
-        """
-        Get log entries from a callback URL
-
-        @param callback_url: str
-        @return: list of log entries
-        """
-        self.logger.info(f"Trying to get results from callback URL: {callback_url}")
-        response = self.connection.session.get(callback_url)
-        try:
-            response.raise_for_status()
-        except Exception:
-            raise PluginException(
-                cause="Failed to get logs from InsightIDR",
-                assistance=f"Could not get logs from: {callback_url}",
-                data=response.text,
-            )
-        results_object = response.json()
-        log_entries = results_object.get("events")
-
-        if results_object.get("links"):
-            callback_url = results_object.get("links")[0].get("href")
-        else:
-            callback_url = ""
-
+    def repeat_requests_on_timeout(self, callback_url: str, timeout: int, results_object: dict) -> [object]:
         counter = timeout
         while callback_url:
             counter -= 1
@@ -104,7 +80,7 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
                 )
 
             results_object = response.json()
-            log_entries = results_object.get("events")
+            log_entries = results_object.get("events", [])
             if not log_entries:
                 try:
                     callback_url = results_object.get("links")[0].get("href")
@@ -113,6 +89,34 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
                     return []
             else:
                 return log_entries
+
+    def get_results_from_callback(self, callback_url: str, timeout: int) -> [object]:
+        """
+        Get log entries from a callback URL
+
+        @param callback_url: str
+        @return: list of log entries
+        """
+        self.logger.info(f"Trying to get results from callback URL: {callback_url}")
+        response = self.connection.session.get(callback_url)
+        try:
+            response.raise_for_status()
+        except Exception:
+            raise PluginException(
+                cause="Failed to get logs from InsightIDR",
+                assistance=f"Could not get logs from: {callback_url}",
+                data=response.text,
+            )
+        results_object = response.json()
+        log_entries = results_object.get("events", [])
+
+        if results_object.get("links"):
+            callback_url = results_object.get("links")[0].get("href")
+        else:
+            callback_url = ""
+
+        if callback_url:
+            log_entries = self.repeat_requests_on_timeout(callback_url, timeout, results_object)
 
         return log_entries
 
@@ -148,7 +152,7 @@ class AdvancedQueryOnLog(insightconnect_plugin_runtime.Action):
             )
 
         results_object = response.json()
-        potential_results = results_object.get("events")
+        potential_results = results_object.get("events", [])
         if potential_results:
             self.logger.info("Got results immediately, returning.")
             return None, potential_results
