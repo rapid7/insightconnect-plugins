@@ -4,9 +4,10 @@ products: [insightconnect]
 name: abuseipdb
 title: AbuseIPDB
 description: Enables the look up of IP reports, provides list and details of blacklisted IPs, and submissions of abusive IPs
-version: 5.0.8
+version: 5.0.9
 vendor: rapid7
 support: community
+supported_versions: ["2022-07-21"]
 cloud_ready: false
 status: []
 resources:
