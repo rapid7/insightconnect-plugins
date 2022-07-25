@@ -14,6 +14,10 @@ This plugin utilizes the [AbuseIPDB API v2](https://docs.abuseipdb.com) to looku
 
 * Requires a [free AbuseIPDB account](https://www.abuseipdb.com/register) and accompanying API Key
 
+# Supported Product Versions
+
+* 2022-07-21
+
 # Documentation
 
 ## Setup
@@ -337,6 +341,7 @@ There's a rate limit on the free API service. The following error messages `429 
 
 # Version History
 
+* 5.0.9 - Fix incorrect status code for failed connection test
 * 5.0.8 - Set cloud_ready flag to false | Changed description for output 'found'
 * 5.0.7 - Fix error message in IPv4 search
 * 5.0.6 - Fix none type error in Check CIDR action
