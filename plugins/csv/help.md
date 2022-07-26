@@ -164,7 +164,7 @@ Field numbers (e.g. `f1`) and a range of fields (e.g. `f5-7`) are used to define
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|csv|string|None|True|CSV string|None|column1, column2, column3\nvalue1, value2, value3|
+|csv|string|None|True|CSV string|None|column1, column2\nvalue1, value2|
 |fields|string|None|True|Fields to filter|None|f1, f2-f3|
 
 Example input:
