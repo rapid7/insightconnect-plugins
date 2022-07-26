@@ -1,7 +1,7 @@
 {
-	"spec": "0c9fc01bd008c16f89cd50646aee165e",
-	"manifest": "9e3873faf8f9c3a2e13c2a675465fb79",
-	"setup": "5447b9b73e7ca2db4cf6c06d7c7a2205",
+	"spec": "d62281011455bd445d8f930af6079780",
+	"manifest": "66a6aeb2dabc6740a4935d3b0f6b038a",
+	"setup": "11e30d38ce98dc35ca19afff71bd68c6",
 	"schemas": [
 		{
 			"identifier": "add_indicators_to_a_threat/schema.py",
@@ -17,11 +17,15 @@
 		},
 		{
 			"identifier": "assign_user_to_investigation/schema.py",
-			"hash": "b7257552de969988de5af4793b00e516"
+			"hash": "a9fc0ac4cd44bd370e86af7f596b78d1"
 		},
 		{
 			"identifier": "close_investigations_in_bulk/schema.py",
 			"hash": "e28a786869a719ea9ca96e123903afc0"
+		},
+		{
+			"identifier": "create_investigation/schema.py",
+			"hash": "977a2845d11ea53ba0ff72c8abab49c7"
 		},
 		{
 			"identifier": "create_threat/schema.py",
@@ -44,20 +48,44 @@
 			"hash": "69e619f2f61842cbc3ae75edab42ea40"
 		},
 		{
+			"identifier": "get_investigation/schema.py",
+			"hash": "149d9658fdc93d51dff4694e1882a3a4"
+		},
+		{
+			"identifier": "list_alerts_for_investigation/schema.py",
+			"hash": "78332eae881b0c36901dfacf9a8f1e67"
+		},
+		{
 			"identifier": "list_investigations/schema.py",
-			"hash": "6c73f15b0f1f8000f8b3ff85275a4fdb"
+			"hash": "efa3be4670ed2165c8bceee7f5c3841c"
 		},
 		{
 			"identifier": "query/schema.py",
 			"hash": "98d2987b09ac8bed0e928cd36f417c53"
 		},
 		{
+			"identifier": "search_investigations/schema.py",
+			"hash": "f59c4a599a8f5e6a563b643c39dd4b02"
+		},
+		{
+			"identifier": "set_disposition_of_investigation/schema.py",
+			"hash": "bc77b3c868db9ac71222c90d30e69687"
+		},
+		{
+			"identifier": "set_priority_of_investigation/schema.py",
+			"hash": "e3f81370defcb8f4a8a9bfaa3ab3d758"
+		},
+		{
 			"identifier": "set_status_of_investigation_action/schema.py",
-			"hash": "8cee9d2dbdecf7acf15f3bd15e5ce883"
+			"hash": "0a050c11b3cd4e57cbd6147414a27dda"
+		},
+		{
+			"identifier": "update_investigation/schema.py",
+			"hash": "519b1375887a53891489c2e2c294d961"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "6ae70a484be0ea84cbcb8a196b9db88a"
+			"hash": "1c1fe91f956e8be3a7bec1575f4f1e27"
 		}
 	]
 }
