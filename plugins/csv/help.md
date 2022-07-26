@@ -128,7 +128,7 @@ For example, to extract fields 1, 2, 4, 5, 6 the following fields value can be u
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |csv|bytes|None|True|Base64 encoded CSV file|None|ZmllbGQxLCBmaWVsZDIKdmFsdWUxLCB2YWx1ZTIK|
-|fields|string|None|True|Fields to filter|None|f1, f2, f3-f6|
+|fields|string|None|True|Fields to filter|None|f1, f2|
 
 Example input:
 
@@ -165,7 +165,7 @@ Field numbers (e.g. `f1`) and a range of fields (e.g. `f5-7`) are used to define
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |csv|string|None|True|CSV string|None|column1, column2\nvalue1, value2|
-|fields|string|None|True|Fields to filter|None|f1, f2, f3-f6|
+|fields|string|None|True|Fields to filter|None|f1, f2-f3|
 
 Example input:
 
