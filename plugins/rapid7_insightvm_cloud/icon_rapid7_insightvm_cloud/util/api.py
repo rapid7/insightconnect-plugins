@@ -33,13 +33,19 @@ class IVM_Cloud:
                 data=json.dumps(body),
             )
             if response.status_code not in [200, 201, 202]:
+                data = json.loads(response.text)
+                message = data.get("message", "")
+                if response.status_code == 400:
+                    raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=data)
                 raise PluginException(
                     cause=f"Failed to get a valid response from InsightVM at endpoint '{api_url}'",
-                    assistance=f"Response was {response.request.body}.",
-                    data=response.status_code,
+                    assistance=message,
+                    data=data,
                 )
             if response.text != "":
-                return response.json()
+                response_json = response.json()
+                response_json["status_code"] = response.status_code
+                return response_json
 
         except HTTPError as httpError:
             raise PluginException(

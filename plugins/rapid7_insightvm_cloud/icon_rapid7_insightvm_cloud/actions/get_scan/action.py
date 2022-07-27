@@ -22,7 +22,7 @@ class GetScan(insightconnect_plugin_runtime.Action):
             raise PluginException(
                 cause=f"Failed to get a valid response from InsightVM with given scan ID '{scan_id}'.",
                 assistance="Please try a different scan ID.",
-                data=400,
+                data=response,
             )
         else:
             if response.get("finished") is None:
