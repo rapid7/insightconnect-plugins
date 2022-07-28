@@ -36,5 +36,19 @@
         }
     ],
     "total_vulnerabilities": 6,
-    "unique_identifiers": []
+    "unique_identifiers": [],
+    "same": [
+        {
+            "first_found": "2000-01-01T00:00:00Z",
+            "key": "9de5069c5afe602b2ea0a04b66beb2c0",
+            "last_found": "2000-01-01T00:00:00Z",
+            "proof": "<p><p>OpenBSD OpenSSH 4.3 on Linux</p></p>",
+            "solution_fix": "Download and apply the patch from example.com",
+            "solution_id": "abcd-ab1234567-a12bcdef-a123-1abc-a1b2-a1234567bcd8",
+            "solution_summary": "2000-01 Example Update for Example System",
+            "solution_type": "PATCH",
+            "status": "vulnerable",
+            "vulnerability_id": "abcd-abc-1234-1234"
+        }
+    ]
 }

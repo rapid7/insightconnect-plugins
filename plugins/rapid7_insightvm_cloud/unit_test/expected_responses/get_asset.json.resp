@@ -14,7 +14,7 @@
         "malware_kits": 0,
         "moderate_vulnerabilities": 1,
         "new": [],
-        "os_architecture": "",
+        "os_architecture": "64",
         "os_description": "Linux 3.0",
         "os_family": "Linux",
         "os_name": "Linux",
@@ -38,6 +38,5 @@
         ],
         "total_vulnerabilities": 6,
         "unique_identifiers": []
-    },
-    "vulnerabilities": null
+    }
 }
