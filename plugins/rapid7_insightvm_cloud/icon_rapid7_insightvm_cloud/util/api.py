@@ -1,6 +1,6 @@
 import json
 
-from requests import request
+import requests
 from logging import Logger
 
 import insightconnect_plugin_runtime
@@ -23,9 +23,8 @@ class IVM_Cloud:
 
         api_url = self.base_url + path
         headers = {"x-api-key": self.token, "content-type": "application/json"}
-
         try:
-            response = request(
+            response = requests.request(
                 request_type,
                 self.base_url + path,
                 params=insightconnect_plugin_runtime.helper.clean(params),
@@ -59,7 +58,7 @@ class IVM_Cloud:
         headers = {"x-api-key": self.token}
 
         try:
-            response = request(
+            response = requests.request(
                 "POST", api_url, params=insightconnect_plugin_runtime.helper.clean(params), headers=headers
             )
             response.raise_for_status()

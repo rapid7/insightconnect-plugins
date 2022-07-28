@@ -1,6 +1,6 @@
 import json
 import os
-
+import logging
 from unit_test.utils import Utils
 
 STUB_ASSET_ID = "5058b0b4-701a-414e-9630-430d2cddbf4d"
@@ -27,8 +27,7 @@ class MockResponse:
             self.text = ""
 
     def json(self):
-        data = json.loads(self.text)
-        return data.get("actual", data)
+        return json.loads(self.text)
 
 
 def mock_request_post(url):
