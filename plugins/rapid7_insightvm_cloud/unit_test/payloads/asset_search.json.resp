@@ -1,0 +1,95 @@
+{
+  "data": [
+    {
+      "assessed_for_policies": false,
+      "assessed_for_vulnerabilities": true,
+      "credential_assessments": [],
+      "critical_vulnerabilities": 0,
+      "exploits": 0,
+      "id": "5058b0b4-701a-414e-9630-430d2cddbf4d",
+      "ip": "1.1.1.1",
+      "last_assessed_for_vulnerabilities": "2000-01-01T00:00:00.000Z",
+      "last_scan_end": "2000-01-01T00:00:00.000Z",
+      "last_scan_start": "2000-01-01T00:00:00.000Z",
+      "mac": "01:01:01:A0:1A:11",
+      "malware_kits": 0,
+      "moderate_vulnerabilities": 1,
+      "os_architecture": "64",
+      "os_description": "Linux 3.0",
+      "os_family": "Linux",
+      "os_name": "Linux",
+      "os_system_name": "Linux",
+      "os_type": "General",
+      "os_vendor": "Linux",
+      "os_version": "3.0",
+      "risk_score": 1234.12345,
+      "severe_vulnerabilities": 5,
+      "tags": [
+        {
+          "name": "TestTag1",
+          "type": "CUSTOM"
+        },
+        {
+          "name": "TestTag2",
+          "type": "SITE"
+        }
+      ],
+      "total_vulnerabilities": 6,
+      "unique_identifiers": [],
+      "new": [],
+      "remediated": []
+    },
+    {
+      "assessed_for_policies": false,
+      "assessed_for_vulnerabilities": true,
+      "credential_assessments": [],
+      "critical_vulnerabilities": 0,
+      "exploits": 0,
+      "id": "5058b0b4-701a-414e-9630-430d2cddbf4d",
+      "ip": "1.1.1.1",
+      "last_assessed_for_vulnerabilities": "2000-01-01T00:00:00.000Z",
+      "last_scan_end": "2000-01-01T00:00:00.000Z",
+      "last_scan_start": "2000-01-01T00:00:00.000Z",
+      "mac": "01:01:01:A0:1A:11",
+      "malware_kits": 0,
+      "moderate_vulnerabilities": 1,
+      "os_architecture": "64",
+      "os_description": "Linux 3.0",
+      "os_family": "Linux",
+      "os_name": "Linux",
+      "os_system_name": "Linux",
+      "os_type": "General",
+      "os_vendor": "Linux",
+      "os_version": "3.0",
+      "risk_score": 1234.12345,
+      "severe_vulnerabilities": 5,
+      "tags": [
+        {
+          "name": "TestTag1",
+          "type": "CUSTOM"
+        },
+        {
+          "name": "TestTag2",
+          "type": "SITE"
+        }
+      ],
+      "total_vulnerabilities": 6,
+      "unique_identifiers": [],
+      "new": [],
+      "remediated": []
+    }
+  ],
+  "metadata": {
+    "number": 0,
+    "size": 100,
+    "totalResources": 10,
+    "totalPages": 1,
+    "cursor": "0123456789:::_S:::5058b0b4-701a-414e-9630-430d2cddbf4d"
+  },
+  "links": [
+    {
+      "href": "https://us.api.insight.rapid7.com:443/vm/v4/integration/assets?asset_criteria=last_scan_end+%3E+2000-01-01T00%3A00%3A00.000Z&sort_criteria=risk-score&sort_criteria=criticality-tag&vuln_criteria=severity+IN+%5B%27Critical%27%2C+%27Severe%27%5D&page=0&size=10&sort=id,asc",
+      "rel": "self"
+    }
+  ]
+}

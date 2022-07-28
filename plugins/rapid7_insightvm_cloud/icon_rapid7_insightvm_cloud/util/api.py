@@ -6,7 +6,6 @@ from logging import Logger
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 from requests.exceptions import HTTPError
-from typing import Optional
 
 
 class IVM_Cloud:
@@ -31,6 +30,7 @@ class IVM_Cloud:
                 headers=headers,
                 data=json.dumps(body),
             )
+            self.logger.info(response.json())
             if response.status_code not in [200, 201, 202]:
                 data = json.loads(response.text)
                 message = data.get("message", "")
