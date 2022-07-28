@@ -18,6 +18,10 @@ class GetScan(insightconnect_plugin_runtime.Action):
         scan_id = params.get(Input.SCAN_ID)
 
         response = self.connection.ivm_cloud_api.call_api("scan/" + scan_id, "GET")
+        if response is None:
+            raise PluginException(
+                cause
+            )
         if response.get("id") is None:
             raise PluginException(
                 cause=f"Failed to get a valid response from InsightVM with given scan ID '{scan_id}'.",
@@ -25,6 +29,5 @@ class GetScan(insightconnect_plugin_runtime.Action):
                 data=response,
             )
         else:
-            if response.get("finished") is None:
-                del response["finished"]
+            response = insightconnect_plugin_runtime.helper.clean(response)
             return response

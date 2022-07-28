@@ -56,6 +56,10 @@ def mock_request_get(url, params, headers, data):
         return MockResponse("get_asset", 200)
     if url == f"https://{STUB_REGION}.api.insight.rapid7.com/vm/v4/integration/assets/{STUB_BAD_ASSET_ID}":
         return MockResponse("get_asset_404", 404)
+    if url == f"https://{STUB_REGION}.api.insight.rapid7.com/vm/v4/integration/scan/{STUB_SCAN_ID}":
+        return MockResponse("get_scan", 200)
+    if url == f"https://{STUB_REGION}.api.insight.rapid7.com/vm/v4/integration/scan/{STUB_BAD_SCAN_ID}":
+        return MockResponse("get_scan_invalid_scan_id", 200)
 
     raise Exception("Response has been not implemented")
 

@@ -84,9 +84,8 @@ class TestAssetSearch(TestCase):
         self.assertEqual(assistance, context.exception.assistance)
         self.assertEqual(data, context.exception.data)
 
-
     @patch("requests.request", side_effect=mock_request)
-    def test_get_asset_invalid_secret_key(self, _mock_req):
+    def test_asset_search_invalid_secret_key(self, _mock_req):
         self.connection, self.action = Utils.default_connector(AssetSearch(),
             {
                 ConnectionInput.REGION: "us",

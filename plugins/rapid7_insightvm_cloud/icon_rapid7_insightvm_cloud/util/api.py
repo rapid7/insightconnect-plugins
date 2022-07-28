@@ -30,7 +30,6 @@ class IVM_Cloud:
                 headers=headers,
                 data=json.dumps(body),
             )
-            self.logger.info(response.json())
             if response.status_code not in [200, 201, 202]:
                 data = json.loads(response.text)
                 message = data.get("message", "")
@@ -41,10 +40,11 @@ class IVM_Cloud:
                     assistance=message,
                     data=data,
                 )
+            response_json = {}
             if response.text != "":
                 response_json = response.json()
-                response_json["status_code"] = response.status_code
-                return response_json
+            response_json["status_code"] = response.status_code
+            return response_json
 
         except HTTPError as httpError:
             raise PluginException(
