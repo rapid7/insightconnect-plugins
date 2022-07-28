@@ -10,6 +10,7 @@ from icon_rapid7_insightvm_cloud.actions.get_asset import GetAsset
 from icon_rapid7_insightvm_cloud.actions.get_asset.schema import Input
 from icon_rapid7_insightvm_cloud.connection.schema import Input as ConnectionInput
 from unittest.mock import patch
+import json
 from unit_test.utils import Utils
 from unit_test.mock import (
     mock_request,
@@ -17,6 +18,18 @@ from unit_test.mock import (
 
 
 class TestGetAsset(TestCase):
+
+    @staticmethod
+    def read_file_to_dict(filename):
+        with open(filename, "rt", encoding="utf8"):
+            return json.loads(
+                Utils.read_file_to_string(os.path.join(os.path.dirname(os.path.realpath(__file__)), filename))
+            )
+
+    @staticmethod
+    def read_file_to_string(filename):
+        with open(filename, "rt", encoding="utf8") as my_file:
+            return my_file.read()
 
     @classmethod
     def setUpClass(self) -> None:
@@ -37,7 +50,7 @@ class TestGetAsset(TestCase):
             Input.ID: self.params.get("asset_id"),
             Input.INCLUDE_VULNS: self.params.get("include_vulns_false")
         })
-        expected = Utils.read_file_to_dict("expected_responses/get_asset.json.resp")
+        expected = self.read_file_to_dict("expected_responses/get_asset.json.resp")
         self.assertEqual(expected, actual)
 
     # test finding event via all inputs
@@ -47,7 +60,7 @@ class TestGetAsset(TestCase):
             Input.ID: self.params.get("asset_id"),
             Input.INCLUDE_VULNS: self.params.get("include_vulns_true")
         })
-        expected = Utils.read_file_to_dict("expected_responses/get_asset_include_vulns.json.resp")
+        expected = self.read_file_to_dict("expected_responses/get_asset_include_vulns.json.resp")
         self.assertEqual(expected, actual)
 
     # test finding event via all inputs
