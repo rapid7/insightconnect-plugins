@@ -1,6 +1,5 @@
 import json
 import os
-from unit_test.utils import Utils
 
 STUB_ASSET_ID = "5058b0b4-701a-414e-9630-430d2cddbf4d"
 STUB_BAD_ASSET_ID = "5058b0b4-701a-414e-9630-430d2cddbf4e"
@@ -26,11 +25,13 @@ def mock_request(*args, **_kwarg):
 
 class MockResponse:
     def __init__(self, filename: str, status_code: int) -> None:
+        self.filename = filename
         self.status_code = status_code
         if filename:
-            self.text = Utils.read_file_to_string(
+            with open(
                 os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{filename}.json.resp")
-            )
+            ) as file:
+                self.text = file.read()
         else:
             self.text = ""
 

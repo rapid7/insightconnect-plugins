@@ -41,9 +41,9 @@ class IVM_Cloud:
                     data=data,
                 )
             response_json = {}
-            response_json["status_code"] = response.status_code
             if response.text != "":
                 response_json = response.json()
+            response_json["status_code"] = response.status_code
             return response_json
 
         except HTTPError as httpError:

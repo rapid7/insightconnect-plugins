@@ -33,7 +33,7 @@ class StartScan(insightconnect_plugin_runtime.Action):
         body = {"asset_ids": asset_ids, "name": name}
 
         response = self.connection.ivm_cloud_api.call_api("scan", "POST", None, body)
-
+        del response["status_code"]
         try:
             scans = response.get("scans")
             scan_ids = []
