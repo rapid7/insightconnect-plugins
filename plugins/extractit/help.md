@@ -360,7 +360,7 @@ Example output:
 ```
 {
   "iocs": [
-    "example.cop
+    "example.cop",
     "user@example.com",
     "198.51.100.100",
     "44d88612fea8a8f36de82e1278abb02f"
