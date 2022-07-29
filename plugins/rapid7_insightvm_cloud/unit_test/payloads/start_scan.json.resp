@@ -1,0 +1,18 @@
+ {
+  "scans": [
+    {
+      "engine_id": "5058b0b4-701a-414e-9630-430d2cddbf4d",
+      "id": "5058b0b4-701a-414e-9630-430d2cddbf4d",
+      "name": "TestScan",
+      "asset_ids": [
+        "5058b0b4-701a-414e-9630-430d2cddbf4d"
+      ]
+    }
+  ],
+  "unscanned_assets": [
+    {
+      "id": "5058b0b4-701a-414e-9630-430d2cddbf4d",
+      "reason": "Asset has never been scanned with an InsightVM Platform registered engine."
+    }
+  ]
+}

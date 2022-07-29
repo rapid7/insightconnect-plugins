@@ -42,12 +42,19 @@ class StartScan(insightconnect_plugin_runtime.Action):
                 scan_ids.append(scan.get("id"))
                 for asset_id in scan.get("asset_ids"):
                     asset_ids.append(asset_id)
-            return {Output.DATA: response, Output.IDS: scan_ids, Output.ASSET_IDS: asset_ids}
+            return_data = insightconnect_plugin_runtime.helper.clean(
+                {
+                    Output.DATA: response,
+                    Output.IDS: scan_ids,
+                    Output.ASSET_IDS: asset_ids
+                }
+            )
+            return return_data
         except IndexError as error:
             raise PluginException(
                 cause=f"Failed to get a valid response from InsightVM for a scan call.",
                 assistance=f"Response was {error}.",
-                data=error,
+                data=str(error),
             )
 
 
@@ -56,10 +63,17 @@ def _format_body(hostnames: [str], ips: [str]) -> object:
     for hostname in hostnames:
         asset_body = asset_body + "asset.name STARTS WITH '" + hostname + "' || "
     for ip in ips:
-        if type(ip_address(ip)) is IPv4Address:
-            asset_body = asset_body + "asset.ipv4 = " + ip + " || "
-        if type(ip_address(ip)) is IPv6Address:
-            asset_body = asset_body + "asset.ipv6 = " + ip + " || "
+        try:
+            if type(ip_address(ip)) is IPv4Address:
+                asset_body = asset_body + "asset.ipv4 = " + ip + " || "
+            if type(ip_address(ip)) is IPv6Address:
+                asset_body = asset_body + "asset.ipv6 = " + ip + " || "
+        except ValueError as error:
+            raise PluginException(
+                cause="Invalid IP address provided.",
+                assistance="Please enter only valid IP addresses.",
+                data=str(error)
+            )
     if asset_body[len(asset_body) - 2] == "|":
         asset_body = asset_body[: len(asset_body) - 4]
     body_object = {"asset": asset_body}

@@ -1,0 +1,7 @@
+{
+    "_type": "com.rapid7.spring.rest.error.resource.ErrorResource",
+    "localized_message": null,
+    "message": "Your scan start request has 1 error: Did not find any platform registered engines from assets in scope. No scans will be performed.",
+    "status": 400,
+    "throwable": null
+}

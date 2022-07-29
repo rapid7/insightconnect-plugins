@@ -100,3 +100,20 @@ class TestAssetSearch(TestCase):
         assistance = "Unauthorized"
         self.assertEqual(cause, context.exception.cause)
         self.assertEqual(assistance, context.exception.assistance)
+
+    @patch("requests.request", side_effect=mock_request)
+    def test_asset_search_server_error(self, _mock_req):
+        self.connection, self.action = Utils.default_connector(AssetSearch(),
+            {
+                ConnectionInput.REGION: "us",
+                ConnectionInput.CREDENTIALS: {
+                    "secretKey": "secret_key_server_error"
+                }
+            }
+        )
+        with self.assertRaises(PluginException) as context:
+            self.action.run()
+        cause = "Failed to get a valid response from InsightVM at endpoint 'https://us.api.insight.rapid7.com/vm/v4/integration/assets'"
+        assistance = "An unexpected error occurred. Please contact Rapid7 support."
+        self.assertEqual(cause, context.exception.cause)
+        self.assertEqual(assistance, context.exception.assistance)
