@@ -16,15 +16,16 @@ class AnyRunAPI:
         return self._call_api("GET", self.url + task_id)
 
     def run_analysis(self, json_data, files):
-        return self._call_api("POST", self.url, files=files, json_data=json_data)
+        return self._call_api("POST", self.url, files=files, data=json_data)
 
-    def _call_api(self, method, url, params=None, json_data=None, files=None):
+    def _call_api(self, method, url, params=None, json_data=None, data=None, files=None):
         response = {"text": ""}
         try:
             response = requests.request(
                 method,
                 url,
                 files=files,
+                data=data,
                 json=json_data,
                 params=params,
                 headers=self.authentication_header,
