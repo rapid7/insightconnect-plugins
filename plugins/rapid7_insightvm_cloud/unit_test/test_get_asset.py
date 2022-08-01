@@ -35,7 +35,7 @@ class TestGetAsset(TestCase):
         actual = self.action.run(
             {Input.ID: self.params.get("asset_id"), Input.INCLUDE_VULNS: self.params.get("include_vulns_false")}
         )
-        expected = Utils.read_file_to_dict("expected_responses/get_asset.json.resp")
+        expected = Utils.read_file_to_dict("get_asset")
         self.assertEqual(expected, actual)
 
     # test finding event via all inputs
@@ -44,7 +44,7 @@ class TestGetAsset(TestCase):
         actual = self.action.run(
             {Input.ID: self.params.get("asset_id"), Input.INCLUDE_VULNS: self.params.get("include_vulns_true")}
         )
-        expected = Utils.read_file_to_dict("expected_responses/get_asset_include_vulns.json.resp")
+        expected = Utils.read_file_to_dict("get_asset_include_vulns")
         self.assertEqual(expected, actual)
 
     # test finding event via all inputs

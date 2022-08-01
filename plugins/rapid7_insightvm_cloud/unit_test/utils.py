@@ -1,12 +1,9 @@
 import logging
-import sys
 import os
 import json
 
 from icon_rapid7_insightvm_cloud.connection.connection import Connection
 from icon_rapid7_insightvm_cloud.connection.schema import Input
-
-sys.path.append(os.path.abspath("../"))
 
 
 class Utils:
@@ -14,7 +11,7 @@ class Utils:
     def read_file_to_dict(filename):
         with open(filename, "rt", encoding="utf8"):
             return json.loads(
-                Utils.read_file_to_string(os.path.join(os.path.dirname(os.path.realpath(__file__)), filename))
+                Utils.read_file_to_string(os.path.join(os.path.dirname(os.path.realpath(__file__)), f"expected_responses/{filename}.json.resp"))
             )
 
     @staticmethod
