@@ -47,7 +47,7 @@ class TestStartScan(TestCase):
                 Input.HOSTNAMES: self.params.get("hostnames"),
             }
         )
-        expected = Utils.read_file_to_dict("unit_test/expected_responses/start_scan.json.resp")
+        expected = Utils.read_file_to_dict("expected_responses/start_scan.json.resp")
         self.assertEqual(expected, actual)
 
     @patch("requests.request", side_effect=mock_request)
@@ -61,7 +61,7 @@ class TestStartScan(TestCase):
             )
         assistance = "Verify your plugin input is correct and not malformed and try again. If the issue persists, please contact support."
         cause = "The server is unable to process the request."
-        data = Utils.read_file_to_dict("unit_test/expected_responses/start_scan_invalid_asset_ids.json.resp")
+        data = Utils.read_file_to_dict("expected_responses/start_scan_invalid_asset_ids.json.resp")
         self.assertEqual(assistance, context.exception.assistance)
         self.assertEqual(cause, context.exception.cause)
         self.assertEqual(data, context.exception.data)
@@ -79,7 +79,7 @@ class TestStartScan(TestCase):
             )
         assistance = "Verify your plugin input is correct and not malformed and try again. If the issue persists, please contact support."
         cause = "The server is unable to process the request."
-        data = Utils.read_file_to_dict("unit_test/responses/start_scan_invalid_asset_ids.json.resp")
+        data = Utils.read_file_to_dict("expected_responses/start_scan_invalid_asset_ids.json.resp")
         self.assertEqual(assistance, context.exception.assistance)
         self.assertEqual(cause, context.exception.cause)
         self.assertEqual(data, context.exception.data)

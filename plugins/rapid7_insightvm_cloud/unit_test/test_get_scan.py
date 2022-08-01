@@ -31,7 +31,7 @@ class TestGetScan(TestCase):
     @patch("requests.request", side_effect=mock_request)
     def test_get_scan(self, _mock_req):
         actual = self.action.run({Input.SCAN_ID: self.params.get("scan_id")})
-        expected = Utils.read_file_to_dict("unit_test/expected_responses/get_scan.json.resp")
+        expected = Utils.read_file_to_dict("expected_responses/get_scan.json.resp")
         self.assertEqual(expected, actual)
 
     # test finding event via all inputs

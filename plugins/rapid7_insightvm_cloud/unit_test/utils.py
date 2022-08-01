@@ -1,9 +1,12 @@
 import logging
+import sys
 import os
 import json
 
 from icon_rapid7_insightvm_cloud.connection.connection import Connection
 from icon_rapid7_insightvm_cloud.connection.schema import Input
+
+sys.path.append(os.path.abspath("../"))
 
 
 class Utils:
