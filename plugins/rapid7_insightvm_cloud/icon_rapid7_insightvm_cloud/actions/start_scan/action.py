@@ -48,7 +48,7 @@ class StartScan(insightconnect_plugin_runtime.Action):
             return return_data
         except IndexError as error:
             raise PluginException(
-                cause=f"Failed to get a valid response from InsightVM for a scan call.",
+                cause="Failed to get a valid response from InsightVM for a scan call.",
                 assistance=f"Response was {error}.",
                 data=str(error),
             )
@@ -60,9 +60,9 @@ def _format_body(hostnames: [str], ips: [str]) -> object:
         asset_body = asset_body + "asset.name STARTS WITH '" + hostname + "' || "
     for ip in ips:
         try:
-            if type(ip_address(ip)) is IPv4Address:
+            if isinstance(ip_address(ip), IPv4Address):
                 asset_body = asset_body + "asset.ipv4 = " + ip + " || "
-            if type(ip_address(ip)) is IPv6Address:
+            if isinstance(ip_address(ip), IPv6Address):
                 asset_body = asset_body + "asset.ipv6 = " + ip + " || "
         except ValueError as error:
             raise PluginException(
