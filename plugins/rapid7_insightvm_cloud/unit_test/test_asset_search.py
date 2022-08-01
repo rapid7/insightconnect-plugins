@@ -3,7 +3,7 @@ import os
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from icon_rapid7_insightvm_cloud.actions.asset_search import AssetSearch
@@ -25,7 +25,7 @@ class TestAssetSearch(TestCase):
             "size": 10,
             "sort_criteria": {"risk-score": "asc", "criticality-tag": "desc"},
             "vuln_criteria": "severity IN ['Critical', 'Severe']",
-            "vuln_criteria_invalid": "invalid vuln criteria"
+            "vuln_criteria_invalid": "invalid vuln criteria",
         }
 
     def setUp(self) -> None:
@@ -34,12 +34,14 @@ class TestAssetSearch(TestCase):
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
     def test_asset_search_all_inputs(self, _mock_req):
-        actual = self.action.run({
-            Input.ASSET_CRITERIA: self.params.get("asset_criteria"),
-            Input.SIZE: self.params.get("size"),
-            Input.SORT_CRITERIA: self.params.get("sort_criteria"),
-            Input.VULN_CRITERIA: self.params.get("vuln_criteria")
-        })
+        actual = self.action.run(
+            {
+                Input.ASSET_CRITERIA: self.params.get("asset_criteria"),
+                Input.SIZE: self.params.get("size"),
+                Input.SORT_CRITERIA: self.params.get("sort_criteria"),
+                Input.VULN_CRITERIA: self.params.get("vuln_criteria"),
+            }
+        )
         expected = Utils.read_file_to_dict("expected_responses/asset_search.json.resp")
         self.assertEqual(expected, actual)
 
@@ -54,12 +56,14 @@ class TestAssetSearch(TestCase):
     @patch("requests.request", side_effect=mock_request)
     def test_asset_invalid_asset_criteria(self, _mock_req):
         with self.assertRaises(PluginException) as context:
-            self.action.run({
-                Input.ASSET_CRITERIA: self.params.get("asset_criteria_invalid"),
-                Input.SIZE: self.params.get("size"),
-                Input.SORT_CRITERIA: self.params.get("sort_criteria"),
-                Input.VULN_CRITERIA: self.params.get("vuln_criteria")
-            })
+            self.action.run(
+                {
+                    Input.ASSET_CRITERIA: self.params.get("asset_criteria_invalid"),
+                    Input.SIZE: self.params.get("size"),
+                    Input.SORT_CRITERIA: self.params.get("sort_criteria"),
+                    Input.VULN_CRITERIA: self.params.get("vuln_criteria"),
+                }
+            )
         cause = "The server is unable to process the request."
         assistance = "Verify your plugin input is correct and not malformed and try again. If the issue persists, please contact support."
         data = Utils.read_file_to_dict("expected_responses/asset_search_invalid_asset_criteria.json.resp")
@@ -71,12 +75,14 @@ class TestAssetSearch(TestCase):
     @patch("requests.request", side_effect=mock_request)
     def test_asset_vuln_criteria_invalid(self, _mock_req):
         with self.assertRaises(PluginException) as context:
-            self.action.run({
-                Input.ASSET_CRITERIA: self.params.get("asset_criteria"),
-                Input.SIZE: self.params.get("size"),
-                Input.SORT_CRITERIA: self.params.get("sort_criteria"),
-                Input.VULN_CRITERIA: self.params.get("vuln_criteria_invalid")
-            })
+            self.action.run(
+                {
+                    Input.ASSET_CRITERIA: self.params.get("asset_criteria"),
+                    Input.SIZE: self.params.get("size"),
+                    Input.SORT_CRITERIA: self.params.get("sort_criteria"),
+                    Input.VULN_CRITERIA: self.params.get("vuln_criteria_invalid"),
+                }
+            )
         cause = "The server is unable to process the request."
         assistance = "Verify your plugin input is correct and not malformed and try again. If the issue persists, please contact support."
         data = Utils.read_file_to_dict("expected_responses/asset_search_invalid_vuln_criteria.json.resp")
@@ -86,13 +92,9 @@ class TestAssetSearch(TestCase):
 
     @patch("requests.request", side_effect=mock_request)
     def test_asset_search_invalid_secret_key(self, _mock_req):
-        self.connection, self.action = Utils.default_connector(AssetSearch(),
-            {
-                ConnectionInput.REGION: "us",
-                ConnectionInput.CREDENTIALS: {
-                    "secretKey": "secret_key_invalid"
-                }
-            }
+        self.connection, self.action = Utils.default_connector(
+            AssetSearch(),
+            {ConnectionInput.REGION: "us", ConnectionInput.CREDENTIALS: {"secretKey": "secret_key_invalid"}},
         )
         with self.assertRaises(PluginException) as context:
             self.action.run()
@@ -103,13 +105,9 @@ class TestAssetSearch(TestCase):
 
     @patch("requests.request", side_effect=mock_request)
     def test_asset_search_server_error(self, _mock_req):
-        self.connection, self.action = Utils.default_connector(AssetSearch(),
-            {
-                ConnectionInput.REGION: "us",
-                ConnectionInput.CREDENTIALS: {
-                    "secretKey": "secret_key_server_error"
-                }
-            }
+        self.connection, self.action = Utils.default_connector(
+            AssetSearch(),
+            {ConnectionInput.REGION: "us", ConnectionInput.CREDENTIALS: {"secretKey": "secret_key_server_error"}},
         )
         with self.assertRaises(PluginException) as context:
             self.action.run()

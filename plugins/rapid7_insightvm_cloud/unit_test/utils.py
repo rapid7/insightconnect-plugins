@@ -28,9 +28,7 @@ class Utils:
         else:
             params = {
                 Input.REGION: "us",
-                Input.CREDENTIALS: {
-                    "secretKey": "secret_key"
-                },
+                Input.CREDENTIALS: {"secretKey": "secret_key"},
             }
         default_connection.connect(params)
         action.connection = default_connection

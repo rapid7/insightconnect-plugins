@@ -43,11 +43,7 @@ class StartScan(insightconnect_plugin_runtime.Action):
                 for asset_id in scan.get("asset_ids"):
                     asset_ids.append(asset_id)
             return_data = insightconnect_plugin_runtime.helper.clean(
-                {
-                    Output.DATA: response,
-                    Output.IDS: scan_ids,
-                    Output.ASSET_IDS: asset_ids
-                }
+                {Output.DATA: response, Output.IDS: scan_ids, Output.ASSET_IDS: asset_ids}
             )
             return return_data
         except IndexError as error:
@@ -72,7 +68,7 @@ def _format_body(hostnames: [str], ips: [str]) -> object:
             raise PluginException(
                 cause="Invalid IP address provided.",
                 assistance="Please enter only valid IP addresses.",
-                data=str(error)
+                data=str(error),
             )
     if asset_body[len(asset_body) - 2] == "|":
         asset_body = asset_body[: len(asset_body) - 4]

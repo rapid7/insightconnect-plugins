@@ -3,7 +3,7 @@ import os
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from icon_rapid7_insightvm_cloud.actions.get_scan import GetScan
@@ -30,9 +30,7 @@ class TestGetScan(TestCase):
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
     def test_get_scan(self, _mock_req):
-        actual = self.action.run({
-            Input.SCAN_ID: self.params.get("scan_id")
-        })
+        actual = self.action.run({Input.SCAN_ID: self.params.get("scan_id")})
         expected = Utils.read_file_to_dict("expected_responses/get_scan.json.resp")
         self.assertEqual(expected, actual)
 
@@ -40,10 +38,10 @@ class TestGetScan(TestCase):
     @patch("requests.request", side_effect=mock_request)
     def test_get_scan_invalid_scan_id(self, _mock_req):
         with self.assertRaises(PluginException) as context:
-            self.action.run({
-                Input.SCAN_ID: self.params.get("scan_id_invalid")
-            })
-        cause = f"Failed to get a valid response from InsightVM with given scan ID '{self.params.get('scan_id_invalid')}'."
+            self.action.run({Input.SCAN_ID: self.params.get("scan_id_invalid")})
+        cause = (
+            f"Failed to get a valid response from InsightVM with given scan ID '{self.params.get('scan_id_invalid')}'."
+        )
         assistance = "Please try a different scan ID."
         data = ""
         self.assertEqual(cause, context.exception.cause)
@@ -52,20 +50,11 @@ class TestGetScan(TestCase):
 
     @patch("requests.request", side_effect=mock_request)
     def test_get_scan_invalid_secret_key(self, _mock_req):
-        self.connection, self.action = Utils.default_connector(GetScan(),
-            {
-                ConnectionInput.REGION: "us",
-                ConnectionInput.CREDENTIALS: {
-                    "secretKey": "secret_key_invalid"
-                }
-            }
+        self.connection, self.action = Utils.default_connector(
+            GetScan(), {ConnectionInput.REGION: "us", ConnectionInput.CREDENTIALS: {"secretKey": "secret_key_invalid"}}
         )
         with self.assertRaises(PluginException) as context:
-            self.action.run(
-                {
-                    Input.SCAN_ID: self.params.get("scan_id")
-                }
-            )
+            self.action.run({Input.SCAN_ID: self.params.get("scan_id")})
         cause = f"Failed to get a valid response from InsightVM at endpoint 'https://us.api.insight.rapid7.com/vm/v4/integration/scan/{self.params.get('scan_id')}'"
         assistance = "Unauthorized"
         self.assertEqual(cause, context.exception.cause)
@@ -73,18 +62,12 @@ class TestGetScan(TestCase):
 
     @patch("requests.request", side_effect=mock_request)
     def test_asset_search_server_error(self, _mock_req):
-        self.connection, self.action = Utils.default_connector(GetScan(),
-            {
-                ConnectionInput.REGION: "us",
-                ConnectionInput.CREDENTIALS: {
-                    "secretKey": "secret_key_server_error"
-                }
-            }
+        self.connection, self.action = Utils.default_connector(
+            GetScan(),
+            {ConnectionInput.REGION: "us", ConnectionInput.CREDENTIALS: {"secretKey": "secret_key_server_error"}},
         )
         with self.assertRaises(PluginException) as context:
-            self.action.run({
-                Input.SCAN_ID: self.params.get("scan_id")
-            })
+            self.action.run({Input.SCAN_ID: self.params.get("scan_id")})
         cause = f"Failed to get a valid response from InsightVM at endpoint 'https://us.api.insight.rapid7.com/vm/v4/integration/scan/{self.params.get('scan_id')}'"
         assistance = "An unexpected error occurred. Please contact Rapid7 support."
         self.assertEqual(cause, context.exception.cause)

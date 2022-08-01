@@ -20,7 +20,9 @@ REQUEST_POST = "POST"
 
 # Define and return mock API responses based on request type and endpoint
 def mock_request(*args, **_kwarg):
-    return mock_request_selection(args[0], args[1], _kwarg.get("params"), _kwarg.get("headers"), json.loads(_kwarg.get("data")) )
+    return mock_request_selection(
+        args[0], args[1], _kwarg.get("params"), _kwarg.get("headers"), json.loads(_kwarg.get("data"))
+    )
 
 
 class MockResponse:
@@ -48,7 +50,7 @@ def mock_request_post(url, params, headers, data):
         if data.get("asset") == STUB_BAD_ASSET_CRITERIA:
             return MockResponse("asset_search_invalid_asset_criteria", 400)
         if data.get("vulnerability") == STUB_BAD_VULN_CRITERIA:
-            return MockResponse("asset_search_invalid_vuln_criteria",400)
+            return MockResponse("asset_search_invalid_vuln_criteria", 400)
         return MockResponse("asset_search", 200)
     if url == f"https://{STUB_REGION}.api.insight.rapid7.com/vm/v4/integration/scan/{STUB_SCAN_ID}/stop":
         return MockResponse("stop_scan", 202)
