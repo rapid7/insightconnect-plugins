@@ -32,14 +32,14 @@ class TestStopScan(TestCase):
     @patch("requests.request", side_effect=mock_request)
     def test_stop_scan(self, _mock_req):
         actual = self.action.run({Input.ID: self.params.get("scan_id")})
-        expected = Utils.read_file_to_dict("expected_responses/stop_scan.json.resp")
+        expected = Utils.read_file_to_dict("unit_test/responses/stop_scan.json.resp")
         self.assertEqual(expected, actual)
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
     def test_stop_scan_invalid_scan_id(self, _mock_req):
         actual = self.action.run({Input.ID: self.params.get("scan_id_invalid")})
-        expected = Utils.read_file_to_dict("expected_responses/stop_scan_invalid_scan_id.json.resp")
+        expected = Utils.read_file_to_dict("unit_test/expected_responses/stop_scan_invalid_scan_id.json.resp")
         self.assertEqual(expected, actual)
 
     @patch("requests.request", side_effect=mock_request)
