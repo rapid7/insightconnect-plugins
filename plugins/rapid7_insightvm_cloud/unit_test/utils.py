@@ -9,15 +9,12 @@ from icon_rapid7_insightvm_cloud.connection.schema import Input
 class Utils:
     @staticmethod
     def read_file_to_dict(filename):
-        with open(filename, "rt", encoding="utf8"):
-            return json.loads(
-                Utils.read_file_to_string(os.path.join(os.path.dirname(os.path.realpath(__file__)), f"expected_responses/{filename}.json.resp"))
-            )
+        with open(
+            os.path.join(os.path.dirname(os.path.realpath(__file__)), filename)
+        ) as file:
+            text = file.read()
+            return json.loads(text)
 
-    @staticmethod
-    def read_file_to_string(filename):
-        with open(filename, "rt", encoding="utf8") as my_file:
-            return my_file.read()
 
     @staticmethod
     def default_connector(action, connect_params: object = None):
