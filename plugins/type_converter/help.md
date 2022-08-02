@@ -447,13 +447,13 @@ This action converts a string to a boolean. Case-insensitive true -> True, else 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|input|string|None|True|Input variable|None|true|
+|input|string|None|True|Input variable|None|True|
 
 Example input:
 
 ```
 {
-  "input": "true"
+  "input": "True"
 }
 ```
 
@@ -546,14 +546,14 @@ This action converts a string to a list of strings.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |delimiter|string|None|False|Character used to split the string into slices for the list. Default is a newline, if not provided by user|None||
-|input|string|None|True|Type converted input|None|Rapid7 Insightconnect|
+|input|string|None|True|Type converted input|None|Rapid7 InsightConnect|
 
 Example input:
 
 ```
 {
   "delimiter": "",
-  "input": "Rapid7 Insightconnect"
+  "input": "Rapid7 InsightConnect"
 }
 ```
 
