@@ -28,7 +28,7 @@ class IVM_Cloud:
                 self.base_url + path,
                 params=insightconnect_plugin_runtime.helper.clean(params),
                 headers=headers,
-                data=json.dumps(body),
+                data=json.dumps(insightconnect_plugin_runtime.helper.clean(body)),
             )
             if response.status_code not in [200, 201, 202]:
                 data = json.loads(response.text)
