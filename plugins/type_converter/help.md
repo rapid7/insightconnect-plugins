@@ -11,6 +11,10 @@ for enabling input interoperability between certain plugins.
 
 _This plugin does not contain any requirements._
 
+# Supported Product Versions
+
+_There are no supported product versions listed._
+
 # Documentation
 
 ## Setup
@@ -622,6 +626,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.8.2 - Updated error handling for string_to_int & string_to_float
 * 1.8.1 - Help.md input examples updated
 * 1.8.0 - New action Array Match
 * 1.7.0 - New action Array Diff
