@@ -447,13 +447,13 @@ This action converts a string to a boolean. Case-insensitive true -> True, else 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|input|string|None|True|Input variable|None|True|
+|input|string|None|True|Input variable|None|true|
 
 Example input:
 
 ```
 {
-  "input": "True"
+  "input": "true"
 }
 ```
 
