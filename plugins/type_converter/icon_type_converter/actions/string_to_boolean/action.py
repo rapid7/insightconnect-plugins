@@ -15,7 +15,14 @@ class StringToBoolean(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        try:
-            return {Output.OUTPUT: params.get(Input.INPUT).lower() == "true"}
-        except Exception as error:
-            raise PluginException(cause="Converting error.", assistance="Check input", data=error)
+        value = params.get(Input.INPUT).lower()
+        if value == 'true':
+            return {Output.OUTPUT: True}
+        elif value == 'false':
+            return {Output.OUTPUT: False}
+        else:
+            raise PluginException(cause="Invalid input", assistance="Check input is true or false")
+        # try:
+        #     return {Output.OUTPUT: params.get(Input.INPUT).lower() == "true"}
+        # except Exception as error:
+        #     raise PluginException(cause="Converting error.", assistance="Check input", data=error)
