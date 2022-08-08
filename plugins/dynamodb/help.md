@@ -291,6 +291,8 @@ Any situation in which you provide a ConditionExpression and it causes the job t
 
 # Version History
 
+* 3.0.2 - Fix number should be a string for boto3 input bug
+* 3.0.1 - Validate exclusive_start_key parameter for Scan action
 * 3.0.0 - Create separate class for communication with AWS | Refactor all actions | Fix incompatible types in output in Scan action | Update Python SDK version
 * 2.0.0 - Create custom output type for Scan action | Add example inputs and outputs
 * 1.0.3 - Correct spelling in help.md
