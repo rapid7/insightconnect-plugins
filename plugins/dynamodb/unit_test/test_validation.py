@@ -25,7 +25,7 @@ class TestValidation(TestCase):
                 {KEY_NAME: {"AccountID": {"S": "123456"}}},
                 {KEY_NAME: {"AccountID": {"S": "123456"}}},
             ),
-            ({KEY_NAME: {"AccountID": {"N": 2}}}, {KEY_NAME: {"AccountID": {"N": 2}}}),
+            ({KEY_NAME: {"AccountID": {"N": "2"}}}, {KEY_NAME: {"AccountID": {"N": "2"}}}),
             (
                 {KEY_NAME: {"AccountID": {"BOOL": True}}},
                 {KEY_NAME: {"AccountID": {"BOOL": True}}},

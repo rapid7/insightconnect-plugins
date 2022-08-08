@@ -43,7 +43,7 @@ exclusive_start_key_schema = json.loads(
         },
         "N": {
           "title": "N",
-          "anyOf": [{ "type": "number" }, { "type": "integer" }]
+          "type": "string"
         },
         "NS": {
           "title": "Ns",
