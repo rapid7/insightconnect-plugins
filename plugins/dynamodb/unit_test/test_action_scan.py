@@ -1,7 +1,6 @@
 import os
 import sys
 from unittest import TestCase
-from unittest.mock import patch
 
 sys.path.append(os.path.abspath("../"))
 from komand_dynamodb.actions import Scan
