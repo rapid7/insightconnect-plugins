@@ -4,8 +4,9 @@ products: [insightconnect]
 name: azure_ad_admin
 title: Azure AD Admin
 description: Perform administrative operations in Azure AD
-version: 3.0.0
+version: 3.0.1
 vendor: rapid7
+cloud_ready: true
 support: community
 supported_versions: [2022-05-30]
 status: []
@@ -20,7 +21,7 @@ tags:
   - Administration
 hub_tags:
   use_cases: [threat_detection_and_response, user_management]
-  keywords: [azure, microsoft, active directory, administration]
+  keywords: [azure, microsoft, active directory, administration, cloud_enabled]
   features: []
 types:
   manager:
