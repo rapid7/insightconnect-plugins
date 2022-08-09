@@ -17,5 +17,5 @@ class StringToFloat(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         try:
             return {Output.OUTPUT: float(params.get(Input.INPUT))}
-        except Exception as e:
-            raise PluginException(cause="Converting error.", assistance="Check input", data=e)
+        except Exception as error:
+            raise PluginException(cause="Converting error.", assistance="Check input", data=str(error))

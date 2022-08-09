@@ -21,5 +21,5 @@ class StringToList(insightconnect_plugin_runtime.Action):
 
         try:
             return {Output.OUTPUT: params.get(Input.INPUT).split(delimiter)}
-        except Exception as e:
-            raise PluginException(cause="Converting error.", assistance="Check input", data=e)
+        except Exception as error:
+            raise PluginException(cause="Converting error.", assistance="Check input", data=error)
