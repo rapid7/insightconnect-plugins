@@ -11,6 +11,10 @@ for enabling input interoperability between certain plugins.
 
 _This plugin does not contain any requirements._
 
+# Supported Product Versions
+
+_There are no supported product versions listed._
+
 # Documentation
 
 ## Setup
@@ -542,14 +546,14 @@ This action converts a string to a list of strings.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |delimiter|string|None|False|Character used to split the string into slices for the list. Default is a newline, if not provided by user|None||
-|input|string|None|True|Type converted input|None|Rapid7 Insightconnect|
+|input|string|None|True|Type converted input|None|Rapid7 InsightConnect|
 
 Example input:
 
 ```
 {
   "delimiter": "",
-  "input": "Rapid7 Insightconnect"
+  "input": "Rapid7 InsightConnect"
 }
 ```
 
@@ -622,6 +626,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.8.2 - Updated error handling for string_to_int & string_to_float
 * 1.8.1 - Help.md input examples updated
 * 1.8.0 - New action Array Match
 * 1.7.0 - New action Array Diff
