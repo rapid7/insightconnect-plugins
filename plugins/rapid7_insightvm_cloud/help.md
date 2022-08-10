@@ -16,7 +16,7 @@ InsightVM is a powerful vulnerability management tool which finds, prioritizes, 
 # Supported Product Versions
 
 * InsightVM Cloud Integration API v4
-* 2022-07-29
+* 2022-08-10
 
 # Documentation
 
@@ -1003,7 +1003,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.0.1 - Updated exception information and error handling | Made status code output for Stop Scan and Get Scan actions more exact | Fix bug relating to empty inputs being passed in request body
+* 3.1.0 - Add Cloud enablement to plugin | Updated exception information and error handling | Made status code output for Stop Scan and Get Scan actions more exact | Fix bug relating to empty inputs being passed in request body
 * 3.0.0 - Changed output of Get Asset action to include vulnerabilities properly
 * 2.2.0 - Added ability to include vulnerabilities on Get Asset action | API call update
 * 2.1.0 - Added scanned asset_ids as an output of start_scan

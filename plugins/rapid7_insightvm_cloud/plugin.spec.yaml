@@ -4,11 +4,12 @@ products: [insightconnect]
 name: rapid7_insightvm_cloud
 title: Rapid7 InsightVM Cloud
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the InsightVM Cloud Integrations API to view assets and start scans
-version: 3.0.1
+version: 3.1.0
 vendor: rapid7
 support: rapid7
-supported_versions: ["InsightVM Cloud Integration API v4", "2022-07-29"]
+supported_versions: ["InsightVM Cloud Integration API v4", "2022-08-10"]
 status: []
+cloud_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insightvm_cloud
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -19,7 +20,7 @@ tags:
 - vulnerability
 hub_tags:
   use_cases: [asset_inventory, vulnerability_management]
-  keywords: [insightvm, rapid7, cloud]
+  keywords: [insightvm, rapid7, cloud, cloud_enabled]
   features: []
 
 types:
