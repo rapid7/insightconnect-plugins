@@ -16,7 +16,7 @@ def main():
             with open(os.environ.get("GUNICORN_CONFIG_FILE")) as gf:
                 gunicorn_cfg = json.load(gf)
                 if gunicorn_cfg.get("worker_class", "sync") == "gevent":
-                    from gevent import monkey
+                    from gevent import monkeygit
                     monkey.patch_all()
         elif 'gevent' in argv:
             from gevent import monkey
