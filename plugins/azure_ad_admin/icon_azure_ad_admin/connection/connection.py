@@ -89,3 +89,5 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 "to the Microsoft Graph API. Please contact your "
                 "Azure administrator.",
             )
+        else:
+            return {"success": True}
