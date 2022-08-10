@@ -3,7 +3,7 @@ from .schema import UrlExtractorInput, UrlExtractorOutput, Input, Output, Compon
 
 # Custom imports below
 from icon_extractit.util.util import Regex
-from icon_extractit.util.extractor import extract, clear_urls
+from icon_extractit.util.extractor import extract, clear_urls, remove_extracted_urls_from_links
 
 
 class UrlExtractor(insightconnect_plugin_runtime.Action):
@@ -16,28 +16,12 @@ class UrlExtractor(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        clear_urls = extract(Regex.URL, params.get(Input.STR), params.get(Input.FILE), params.get(Input.KEEP_ORIGINAL_URLS))
-        clear_urls = self.balance_parentheses(clear_urls)
-
         return {
-            Output.URLS: clear_urls
+            Output.URLS: clear_urls(
+                remove_extracted_urls_from_links(
+                    extract(
+                        Regex.URL, params.get(Input.STR), params.get(Input.FILE), params.get(Input.KEEP_ORIGINAL_URLS)
+                    )
+                )
+            )
         }
-
-    def balance_parentheses(self, clear_urls):
-        check = []
-        for url in clear_urls:
-            for i in range(len(url)):
-                if url[i] in ('(', '[', '{'):
-                    check.append(i)
-                elif url[i] in (')', ']', '{'):
-                    if len(check) != 0:
-                        check.pop()
-                    else:
-                        new_url = url[:i] + url[i+1:]
-                        clear_urls = list(map(lambda x: x.replace(url, new_url), clear_urls))
-            if len(check) != 0:
-                for i in check:
-                    new_url = url[:i] + url[i+1:]
-                    clear_urls = list(map(lambda x: x.replace(url, new_url), clear_urls))
-            check.clear()
-        return clear_urls

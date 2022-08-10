@@ -11,13 +11,12 @@ from komand_dynamodb.actions.update.schema import Input
 from unit_test.util import Util
 
 
-@patch("botocore.client.BaseClient._make_api_call", side_effect=Util.mocked_request)
 class TestActionUpdate(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.action = Util.default_connection(Update())
 
-    def test_update(self, mock_request):
+    def test_update(self):
         actual = self.action.run(
             {
                 Input.CONDITION_EXPRESSION: "",
@@ -34,7 +33,7 @@ class TestActionUpdate(TestCase):
         expect = {"success": True}
         self.assertEqual(expect, actual)
 
-    def test_bad_update_not_valid_key(self, mock_request):
+    def test_bad_update_not_valid_key(self):
         with self.assertRaises(PluginException) as context:
             self.action.run(
                 {

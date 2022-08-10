@@ -631,10 +631,12 @@ This trigger provides a list of both user and sign-in linked risk detections and
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
+Trigger `risk_detection` needs Application permission to set as `IdentityRiskEvent.Read.All` 
 
 # Version History
 
+* 3.0.1 - Enable cloud orchestrator
+* 3.0.0 - Fix issue with incorrect data validation in Get User Info action
 * 2.2.6 - Update SDK runtime | Adding additional manager response to Get User Info action
 * 2.2.5 - Correct spelling in help.md
 * 2.2.4 - Fix issue where Get User Info would fail on a disabled account

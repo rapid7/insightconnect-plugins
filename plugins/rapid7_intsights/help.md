@@ -913,6 +913,7 @@ This trigger will run when a new alert that matches the given criteria is create
 |remediation_status|[]string|None|False|List of remediation statuses. Allowed values: InProgress, Pending, CancellationInProgress, Cancelled, CompletedSuccessfully, Failed|None|["InProgress", "Pending"]|
 |severity|[]string|None|False|List of alerts severity. Allowed values: High, Medium, Low|None|["Low"]|
 |source_date_from|string|None|False|Start date (when the event occured) to fetch from in Unix Millisecond Timestamp|None|1633047083142|
+|source_date_from_enum|string|None|False|Start date to fetch from with options, such as choose Hour to pull alerts in the last hour|['Hour', 'Day', 'Week', '']|Hour|
 |source_date_to|string|None|False|End date (when the event occured) to fetch to in Unix Millisecond Timestamp|None|1633047102456|
 |source_type|[]string|None|False|List of alert's source type. Allowed values: Application Store, Cyber Security Blog, Hacking News, Cyber Crime Forum, Hacktivism Forum, Social Media, Facebook, Twitter, LinkedIn, Google Plus, VK, Vimeo, YouTube, IRC Channel, IOC Block List, Credit Card Black Market, Paste Site, Data Leakage Website, Leaked Database, File Sharing Website, Gray Hat Website, Black Market, WHOIS servers, Company Website, Wikileaks, Pinterest, Tumblr, Instagram, Telegram, Webmail, Malware Analysis, Firehol, VRA, Other|None|["Application Store"]|
 
@@ -944,7 +945,39 @@ Example input:
     "Low"
   ],
   "source_date_from": 1633047083142,
+  "source_date_from_enum": "Hour",
   "source_date_to": 1633047102456,
+  "source_type": [
+    "Application Store"
+  ]
+}
+{
+  "alert_type": [
+    "Phishing"
+  ],
+  "assigned": "Assigned",
+  "found_date_from": 0,
+  "found_date_to": 1633047102456,
+  "frequency": 60,
+  "has_indicators": false,
+  "is_closed": "Closed",
+  "is_flagged": "Flagged",
+  "matched_asset_value": [
+    "example.com"
+  ],
+  "network_type": [
+    "DarkWeb"
+  ],
+  "remediation_status": [
+    "InProgress",
+    "Pending"
+  ],
+  "severity": [
+    "Low"
+  ],
+  "source_date_from": "",
+  "source_date_from_enum": "Hour",
+  "source_date_to": "",
   "source_type": [
     "Application Store"
   ]
@@ -989,6 +1022,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.2.0 - Fix is_closed bug in trigger | Add new input `source_date_from_enum` in trigger which allows user to specifiy Source Date From using ENUM rather than timestamp/string
 * 3.1.0 - Add new actions Add CVEs, Delete CVEs and Get CVE List
 * 3.0.1 - Fix issue where New Alert trigger sends empty list when there are no new alerts
 * 3.0.0 - Add `assets` custom output type in Add Manual Alert action | Fix missing URL bug in DarkWeb Webmail alerts in Add Manual Alert action

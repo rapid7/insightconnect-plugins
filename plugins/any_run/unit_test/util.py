@@ -68,8 +68,8 @@ class Util:
             return MockResponse("not_found", 404)
         if kwargs.get("files") == {"file": ("file.txt", b"Rapid7 InsightConnect\n")}:
             return MockResponse("run_analysis", 201)
-        if kwargs.get("json", {}).get("obj_url") == "http://example.com":
+        if kwargs.get("data", {}).get("obj_url") == "http://example.com":
             return MockResponse("run_analysis", 201)
-        if kwargs.get("json", {}).get("obj_url") == "https://upload.example.com/test.png":
+        if kwargs.get("data", {}).get("obj_url") == "https://upload.example.com/test.png":
             return MockResponse("run_analysis", 201)
         raise Exception("Not implemented")
