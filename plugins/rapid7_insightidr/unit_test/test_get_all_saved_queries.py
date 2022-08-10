@@ -19,7 +19,7 @@ class TestGetAllSavedQueries(TestCase):
     @classmethod
     def setUpClass(self) -> None:
         self.connection_params = {
-            ConnectionInput.URL: "https://us.rest.logs.insight.rapid7.com",
+            ConnectionInput.REGION: "United States 1",
             ConnectionInput.API_KEY: {"secretKey": "api_key"},
         }
 

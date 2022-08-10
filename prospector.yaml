@@ -16,3 +16,7 @@ pylint:
 pyflakes:
   disable:
     - F401
+
+mccabe:
+  options:
+    max-complexity: 10

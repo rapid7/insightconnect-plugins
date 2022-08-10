@@ -25,7 +25,9 @@ class Util:
         else:
             params = {
                 Input.URL: "https://rapid7.com",
-                Input.CREDENTIALS: {"username": "username", "password": "password"},
+                Input.AUTHENTICATION_TYPE: "Basic Auth",
+                Input.BASIC_AUTH_CREDENTIALS: {"username": "username", "password": "password"},
+                Input.API_KEY: {"secretKey": "test"},
             }
         default_connection.connect(params)
         action.connection = default_connection
@@ -127,6 +129,57 @@ class Util:
             return MockResponse("restrictions", 200)
         elif args[1] == "https://rapid7.com/web/api/v2.1/private/accounts/name-available":
             return MockResponse("name_available", 200)
+        elif args[1] == "https://rapid7.com/web/api/v2.1/threats" and kwargs.get("params", {}).get("ids") == [
+            "same_status_threat_id_1"
+        ]:
+            return MockResponse("threats_same_status", 200)
+        elif args[1] == "https://rapid7.com/web/api/v2.1/cloud-detection/alerts" and kwargs.get("params", {}).get(
+            "ids"
+        ) == ["same_status_alert_id_1"]:
+            return MockResponse("alerts_same_status", 200)
+        elif args[1] == "https://rapid7.com/web/api/v2.1/threats" and kwargs.get("params", {}).get("ids") == [
+            "non_existing_threat_id_1"
+        ]:
+            return MockResponse("threats_non_existing", 200)
+        elif args[1] == "https://rapid7.com/web/api/v2.1/cloud-detection/alerts" and kwargs.get("params", {}).get(
+            "ids"
+        ) == ["non_existing_alert_id_1"]:
+            return MockResponse("alerts_non_existing", 200)
+        elif args[1] == "https://rapid7.com/web/api/v2.1/threats" and kwargs.get("params", {}).get("ids") in [
+            ["valid_threat_id_1"],
+            ["valid_threat_id_2"],
+        ]:
+            return MockResponse("threats", 200)
+        elif args[1] == "https://rapid7.com/web/api/v2.1/cloud-detection/alerts" and kwargs.get("params", {}).get(
+            "ids"
+        ) in [["valid_alert_id_1"], ["valid_alert_id_2"]]:
+            return MockResponse("alerts", 200)
+        elif args[1] == "https://rapid7.com/web/api/v2.1/threats/analyst-verdict" and sorted(
+            kwargs.get("json", {}).get("filter", {}).get("ids")
+        ) == ["valid_threat_id_1", "valid_threat_id_2"]:
+            return MockResponse("affected_2", 200)
+        elif args[1] == "https://rapid7.com/web/api/v2.1/cloud-detection/alerts/analyst-verdict" and sorted(
+            kwargs.get("json", {}).get("filter", {}).get("ids")
+        ) == ["valid_alert_id_1", "valid_alert_id_2"]:
+            return MockResponse("affected_2", 200)
+        elif (
+            args[1] == "https://rapid7.com/web/api/v2.1/threats/analyst-verdict"
+            or args[1] == "https://rapid7.com/web/api/v2.1/cloud-detection/alerts/analyst-verdict"
+        ):
+            return MockResponse("affected_1", 200)
+        elif args[1] == "https://rapid7.com/web/api/v2.1/threats/incident" and sorted(
+            kwargs.get("json", {}).get("filter", {}).get("ids")
+        ) == ["valid_threat_id_1", "valid_threat_id_2"]:
+            return MockResponse("affected_2", 200)
+        elif args[1] == "https://rapid7.com/web/api/v2.1/cloud-detection/alerts/incident" and sorted(
+            kwargs.get("json", {}).get("filter", {}).get("ids")
+        ) == ["valid_alert_id_1", "valid_alert_id_2"]:
+            return MockResponse("affected_2", 200)
+        elif (
+            args[1] == "https://rapid7.com/web/api/v2.1/threats/incident"
+            or args[1] == "https://rapid7.com/web/api/v2.1/cloud-detection/alerts/incident"
+        ):
+            return MockResponse("affected_1", 200)
         elif args[1] == "https://rapid7.com/web/api/v2.0/threats":
             return MockResponse("threats", 200)
         return MockResponse("error", 404)

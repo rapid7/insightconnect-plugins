@@ -4,7 +4,9 @@ import json
 
 
 class Input:
-    CREDENTIALS = "credentials"
+    API_KEY = "api_key"
+    AUTHENTICATION_TYPE = "authentication_type"
+    BASIC_AUTH_CREDENTIALS = "basic_auth_credentials"
     URL = "url"
     
 
@@ -14,24 +16,59 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "credentials": {
-      "$ref": "#/definitions/credential_username_password",
-      "title": "Credentials",
-      "description": "Username and password",
+    "api_key": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "API Key",
+      "description": "Credential secret API key. Provide if you choose API Token Auth type",
+      "order": 3
+    },
+    "authentication_type": {
+      "type": "string",
+      "title": "Authentication Type",
+      "description": "Type of authentication",
+      "default": "Basic Auth",
+      "enum": [
+        "Basic Auth",
+        "API Token Auth"
+      ],
       "order": 1
+    },
+    "basic_auth_credentials": {
+      "$ref": "#/definitions/credential_username_password",
+      "title": "Basic Auth Credentials",
+      "description": "Username and password. Provide if you choose Basic Auth type",
+      "order": 2
     },
     "url": {
       "type": "string",
       "title": "URL",
       "description": "SentinelOne Console URL",
-      "order": 2
+      "order": 4
     }
   },
   "required": [
-    "credentials",
+    "authentication_type",
     "url"
   ],
   "definitions": {
+    "credential_secret_key": {
+      "id": "credential_secret_key",
+      "type": "object",
+      "title": "Credential: Secret Key",
+      "description": "A shared secret key",
+      "properties": {
+        "secretKey": {
+          "type": "string",
+          "title": "Secret Key",
+          "displayType": "password",
+          "description": "The shared secret key",
+          "format": "password"
+        }
+      },
+      "required": [
+        "secretKey"
+      ]
+    },
     "credential_username_password": {
       "id": "credential_username_password",
       "type": "object",

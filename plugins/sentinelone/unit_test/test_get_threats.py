@@ -1,6 +1,9 @@
 import sys
 import os
 import timeout_decorator
+
+sys.path.append(os.path.abspath("../"))
+
 from komand_sentinelone.triggers import GetThreats
 from komand_sentinelone.triggers.get_threats.schema import Input
 from unit_test.util import Util

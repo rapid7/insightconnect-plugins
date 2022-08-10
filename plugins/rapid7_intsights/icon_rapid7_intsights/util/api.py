@@ -38,10 +38,10 @@ class AlertParams:
                 "sourceDateTo": int(self.source_date_to) if self.source_date_to else None,
                 "foundDateFrom": int(self.found_date_from) if self.found_date_from else None,
                 "foundDateTo": int(self.found_date_to) if self.found_date_to else None,
-                "assigned": self.assigned == "Assigned" if self.assigned else None,
-                "isFlagged": self.is_flagged == "Flagged" if self.is_flagged else None,
-                "isClosed": self.is_closed == "Closed" if self.is_closed else None,
-                "hasIoc": self.has_ioc,
+                "assigned": json.dumps(self.assigned == "Assigned" if self.assigned else None),
+                "isFlagged": json.dumps(self.is_flagged == "Flagged" if self.is_flagged else None),
+                "isClosed": json.dumps(self.is_closed == "Closed" if self.is_closed else None),
+                "hasIoc": json.dumps(self.has_ioc if self.has_ioc else None),
             }
         )
 
@@ -96,6 +96,28 @@ class ManualAlertParams:
                 },
             }
         )
+
+
+def current_milli_time():
+    return round(time.time() * 1000)
+
+
+def subtract_day(time: int):
+    day_in_milliseconds = 86400 * 1000
+    minus_day_in_milliseconds = time - day_in_milliseconds
+    return minus_day_in_milliseconds
+
+
+def subtract_hour(time: int):
+    hour_in_milliseconds = 3600 * 1000
+    minus_hour_in_milliseconds = time - hour_in_milliseconds
+    return minus_hour_in_milliseconds
+
+
+def subtract_week(time: int):
+    week_in_milliseconds = 604800 * 1000
+    minus_week_in_milliseconds = time - week_in_milliseconds
+    return minus_week_in_milliseconds
 
 
 class IntSightsAPI:

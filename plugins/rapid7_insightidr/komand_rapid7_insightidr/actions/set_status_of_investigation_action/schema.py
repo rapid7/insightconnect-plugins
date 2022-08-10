@@ -24,7 +24,7 @@ class SetStatusOfInvestigationActionInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "id": {
       "type": "string",
-      "title": "ID",
+      "title": "ID or RRN",
       "description": "The ID of the investigation to change the status of",
       "order": 1
     },
@@ -59,7 +59,7 @@ class SetStatusOfInvestigationActionOutput(insightconnect_plugin_runtime.Output)
   "properties": {
     "investigation": {
       "$ref": "#/definitions/investigation",
-      "title": "Investigations",
+      "title": "Investigation",
       "description": "The investigation for which the status was set",
       "order": 1
     }
@@ -68,30 +68,6 @@ class SetStatusOfInvestigationActionOutput(insightconnect_plugin_runtime.Output)
     "investigation"
   ],
   "definitions": {
-    "alerts": {
-      "type": "object",
-      "title": "alerts",
-      "properties": {
-        "first_event_time": {
-          "type": "string",
-          "title": "First Event Time",
-          "description": "The time the first event involved in this alert occurred",
-          "order": 1
-        },
-        "type": {
-          "type": "string",
-          "title": "Type",
-          "description": "Alert type",
-          "order": 2
-        },
-        "type_description": {
-          "type": "string",
-          "title": "Type Description",
-          "description": "An optional description of this type of alert",
-          "order": 3
-        }
-      }
-    },
     "assignee": {
       "type": "object",
       "title": "assignee",
@@ -114,15 +90,6 @@ class SetStatusOfInvestigationActionOutput(insightconnect_plugin_runtime.Output)
       "type": "object",
       "title": "investigation",
       "properties": {
-        "alerts": {
-          "type": "array",
-          "title": "Alerts",
-          "description": "The alerts involved in this investigation, if any",
-          "items": {
-            "$ref": "#/definitions/alerts"
-          },
-          "order": 2
-        },
         "assignee": {
           "$ref": "#/definitions/assignee",
           "title": "Assignee",
@@ -133,58 +100,81 @@ class SetStatusOfInvestigationActionOutput(insightconnect_plugin_runtime.Output)
           "type": "string",
           "title": "Created Time",
           "description": "The time the investigation was created as an ISO formatted timestamp",
+          "order": 2
+        },
+        "disposition": {
+          "type": "string",
+          "title": "Disposition",
+          "description": "The disposition of this investigation, where possible values are BENIGN, MALICIOUS, NOT_APPLICABLE, and UNSPECIFIED",
           "order": 3
         },
-        "id": {
+        "first_alert_time": {
           "type": "string",
-          "title": "ID",
-          "description": "The ID of the investigation",
+          "title": "First Alert Time",
+          "description": "The create time of the first alert belonging to this investigation",
           "order": 4
+        },
+        "last_accessed": {
+          "type": "string",
+          "title": "Last Accessed",
+          "description": "The time investigation was last viewed or modified",
+          "order": 5
+        },
+        "latest_alert_time": {
+          "type": "string",
+          "title": "Latest Alert Time",
+          "description": "The create time of the most recent alert belonging to this investigation",
+          "order": 6
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "Organization ID",
+          "description": "The id of the organization that owns this investigation",
+          "order": 7
+        },
+        "priority": {
+          "type": "string",
+          "title": "Priority",
+          "description": "The investigations priority, where possible values are CRITICAL, HIGH, MEDIUM, LOW, and UNKNOWN",
+          "order": 8
+        },
+        "rrn": {
+          "type": "string",
+          "title": "RRN",
+          "description": "The RRN of the investigation",
+          "order": 9
         },
         "source": {
           "type": "string",
           "title": "Source",
           "description": "The source of this investigation",
-          "order": 5
+          "order": 10
         },
         "status": {
           "type": "string",
           "title": "Status",
           "description": "The status of the investigation",
-          "order": 6
+          "order": 11
         },
         "title": {
           "type": "string",
           "title": "Title",
           "description": "Investigation title",
-          "order": 7
+          "order": 12
         }
       },
+      "required": [
+        "created_time",
+        "disposition",
+        "last_accessed",
+        "organization_id",
+        "priority",
+        "rrn",
+        "source",
+        "status",
+        "title"
+      ],
       "definitions": {
-        "alerts": {
-          "type": "object",
-          "title": "alerts",
-          "properties": {
-            "first_event_time": {
-              "type": "string",
-              "title": "First Event Time",
-              "description": "The time the first event involved in this alert occurred",
-              "order": 1
-            },
-            "type": {
-              "type": "string",
-              "title": "Type",
-              "description": "Alert type",
-              "order": 2
-            },
-            "type_description": {
-              "type": "string",
-              "title": "Type Description",
-              "description": "An optional description of this type of alert",
-              "order": 3
-            }
-          }
-        },
         "assignee": {
           "type": "object",
           "title": "assignee",

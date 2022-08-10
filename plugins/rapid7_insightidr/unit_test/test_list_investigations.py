@@ -1,72 +1,56 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from komand_rapid7_insightidr.connection.connection import Connection
+from unittest.mock import patch
+
 from komand_rapid7_insightidr.actions.list_investigations import ListInvestigations
-import json
-import logging
+from komand_rapid7_insightidr.actions.list_investigations.schema import Input
+from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
+
+from unit_test.mock import mock_get_request
+from unit_test.util import Util
 
 
 class TestListInvestigations(TestCase):
-    def test_integration_list_investigations(self):
-        """
-        TODO: Implement assertions at the end of this test case
+    @classmethod
+    def setUpClass(self) -> None:
+        self.params = {
+            "query_id": "00000000-0000-1eec-0000-000000000000",
+            "not_found_query_id": "00000000-0000-8eec-0000-000000000000",
+            "invalid_query_id": "0000000-000-9ee-000-00000000000",
+        }
+        self.connection_params = {
+            ConnectionInput.REGION: "United States 1",
+            ConnectionInput.API_KEY: {"secretKey": "api_key"},
+        }
 
-        This is an integration test that will connect to the services your plugin uses. It should be used
-        as the basis for tests below that can run independent of a "live" connection.
+    def setUp(self) -> None:
+        self.action = Util.default_connector(ListInvestigations())
+        self.connection = self.action.connection
 
-        This test assumes a normal plugin structure with a /tests directory. In that /tests directory should
-        be json samples that contain all the data needed to run this test. To generate samples run:
-
-        icon-plugin generate samples
-
-        """
-
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = ListInvestigations()
-
-        test_conn.logger = log
-        test_action.logger = log
-
-        try:
-            with open("../tests/list_investigations.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        # TODO: Remove this line
-        self.fail("Unimplemented test case")
-
-        # TODO: The following assert should be updated to look for data from your action
-        # For example: self.assertEquals({"success": True}, results)
-        self.assertEquals({}, results)
-
-    def test_list_investigations(self):
-        """
-        TODO: Implement test cases here
-
-        Here you can mock the connection with data returned from the above integration test.
-        For information on mocking and unit testing please go here:
-
-        https://docs.google.com/document/d/1PifePDG1-mBcmNYE8dULwGxJimiRBrax5BIDG_0TFQI/edit?usp=sharing
-
-        You can either create a formal Mock for this, or you can create a fake connection class to pass to your
-        action for testing.
-        """
-        self.fail("Unimplemented Test Case")
+    @patch("requests.Session.get", side_effect=mock_get_request)
+    def test_list_investigations(self, _mock_req):
+        actual = self.action.run({Input.INDEX: 0, Input.SIZE: 1, Input.STATUSES: "OPEN"})
+        expected = {
+            "investigations": [
+                {
+                    "assignee": {"email": "example@test.com", "name": "Ellen Example"},
+                    "created_time": "2018-06-06T16:56:42Z",
+                    "disposition": "BENIGN",
+                    "first_alert_time": "2018-06-06T16:56:42Z",
+                    "last_accessed": "2018-06-06T16:56:42Z",
+                    "latest_alert_time": "2018-06-06T16:56:42Z",
+                    "organization_id": "174e4f99-2ac7-4481-9301-4d24c34baf06",
+                    "priority": "CRITICAL",
+                    "rrn": "rrn:example",
+                    "source": "ALERT",
+                    "status": "OPEN",
+                    "title": "Example Title",
+                }
+            ],
+            "metadata": {"index": 0, "size": 1, "total_data": 1, "total_pages": 1},
+        }
+        self.assertEqual(actual, expected)

@@ -1,4 +1,4 @@
-import komand
+import insightconnect_plugin_runtime
 
 from komand_sql.connection import connection
 
@@ -8,7 +8,7 @@ from komand_sql.util.util import generate_results
 from .schema import Input, Output, QueryInput, QueryOutput
 
 
-class Query(komand.Action):
+class Query(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="query", description="SQL query", input=QueryInput(), output=QueryOutput()

@@ -966,6 +966,7 @@ When configuring the connection, only one authentication method can be supplied.
 
 # Version History
 
+* 1.1.2 - Fix issue with file defaulting to Windows 7 32-Bit
 * 1.1.1 - Fix issue with invalid inputs in Run Analysis action | Fix issue where Run Analysis action fails if optional inputs are provided as empty strings | Fix issue where Get Report action fails when fields in output contain `None` value | Improve error handling
 * 1.1.0 - Allow user agent input when using URL type in Run Analysis action
 * 1.0.0 - Initial plugin
