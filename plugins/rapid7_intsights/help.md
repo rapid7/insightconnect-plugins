@@ -1,6 +1,6 @@
 # Description
 
-[IntSights](https://intsights.com/) is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
+[Threat Command](https://intsights.com/) is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
 
 # Key Features
 
@@ -185,7 +185,7 @@ Example output:
 
 #### Takedown Request
 
-Request a takedown for a given alert in IntSights
+Request a takedown for a given alert in Threat Command
 
 ##### Input
 
@@ -207,7 +207,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|boolean|True|Status from IntSights|
+|status|boolean|True|Status from Threat Command|
 
 Example output:
 
@@ -430,7 +430,7 @@ Example output:
 
 #### Enrich Indicator
 
-This action is used to submit an indicator to IntSights for investigation and return the results.
+This action is used to submit an indicator to Threat Command for investigation and return the results.
 
 ##### Input
 
@@ -894,7 +894,7 @@ Example output:
 
 #### New Alert
 
-This trigger will run when a new alert that matches the given criteria is created in IntSights.
+This trigger will run when a new alert that matches the given criteria is created in Threat Command.
 
 ##### Input
 
@@ -1022,6 +1022,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.2.1 - Rename Plugin to Threat Command | Update descriptions to Threat Command
 * 3.2.0 - Fix is_closed bug in trigger | Add new input `source_date_from_enum` in trigger which allows user to specifiy Source Date From using ENUM rather than timestamp/string
 * 3.1.0 - Add new actions Add CVEs, Delete CVEs and Get CVE List
 * 3.0.1 - Fix issue where New Alert trigger sends empty list when there are no new alerts
@@ -1033,4 +1034,4 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [IntSights](https://intsights.com/)
+* [Threat Command](https://intsights.com/threat-command)

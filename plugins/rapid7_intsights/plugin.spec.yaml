@@ -2,9 +2,9 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: rapid7_intsights
-title: Rapid7 IntSights
-description: Rapid7 IntSights is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
-version: 3.2.0
+title: Threat Command
+description: Threat Command is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
+version: 3.2.1
 supported_versions: ["2.4.0"]
 vendor: rapid7
 support: rapid7
@@ -422,7 +422,7 @@ actions:
         required: true
   enrich_indicator:
     title: Enrich Indicator
-    description: Submit an indicator to IntSights for investigation and return the results
+    description: Submit an indicator to Threat Command for investigation and return the results
     input:
       indicator_value:
         title: Indicator Value
@@ -657,7 +657,7 @@ actions:
         required: false
   takedown_request:
     title: Takedown Request
-    description: Request a takedown for a given alert in IntSights
+    description: Request a takedown for a given alert in Threat Command
     input:
       alert_id:
         title: Alert ID
@@ -678,7 +678,7 @@ actions:
     output:
       status:
         title: Status
-        description: Status from IntSights
+        description: Status from Threat Command
         type: boolean
         required: true
   add_manual_alert:
@@ -876,7 +876,7 @@ actions:
 triggers:
   new_alert:
     title: New Alert
-    description: Triggers when a new alert that matches the given criteria is created in IntSights
+    description: Triggers when a new alert that matches the given criteria is created in Threat Command
     input:
       alert_type:
         title: Alert Type
