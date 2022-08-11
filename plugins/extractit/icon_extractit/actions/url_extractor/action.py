@@ -35,8 +35,7 @@ class UrlExtractor(insightconnect_plugin_runtime.Action):
             params.get(Input.STR), params.get(Input.FILE), params.get(Input.KEEP_ORIGINAL_URLS)
         )
 
-        for i in range(len(urls)):
-            url = urls[i]
+        for i, url in enumerate(urls):
             if url[len(url) - 1] == ")":
                 if input_str[(input_str.find(url) - 1)] == "(":
                     urls[i] = url[: len(url) - 1]
