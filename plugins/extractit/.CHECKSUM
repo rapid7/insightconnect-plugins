@@ -2,7 +2,7 @@
 	"spec": "fac7d48439b5bee8d49efc3a40d06873",
 	"manifest": "b16b0811c871a7e60d240a4504469670",
 	"setup": "6d277d16060a0986dfc1e9bc3a0fbd27",
-		"schemas": [
+	"schemas": [
 		{
 			"identifier": "cve_extractor/schema.py",
 			"hash": "4a359c8f3fcc19bc3c5987278bc319ea"
@@ -25,7 +25,24 @@
 		},
 		{
 			"identifier": "filepath_extractor/schema.py",
-	@@ -46,26 +46,26 @@
+			"hash": "3ac3bc48034ec0126767c70ce22cb127"
+		},
+		{
+			"identifier": "ioc_extractor/schema.py",
+			"hash": "9d2ea928802632199693ec3db2d4c1f2"
+		},
+		{
+			"identifier": "ip_extractor/schema.py",
+			"hash": "c9d74918603e95ff49093365af13914c"
+		},
+		{
+			"identifier": "mac_extractor/schema.py",
+			"hash": "b8f24fc1bf73eeb401b46e2b235b1512"
+		},
+		{
+			"identifier": "md5_extractor/schema.py",
+			"hash": "bd2c64b58f4e1c78c6e20a54f1e8c897"
+		},
 		{
 			"identifier": "sha1_extractor/schema.py",
 			"hash": "012a0774fb80ff252d53b3e087402c7c"
