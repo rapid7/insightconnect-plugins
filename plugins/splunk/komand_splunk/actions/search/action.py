@@ -19,6 +19,7 @@ class Search(komand.Action):
 
     def run(self, params={}):
         search_timeframe = params.get(Input.SEARCH_TIMEFRAME)
+        self.logger.info(f"Input parameters for oneshot query: {params}")
         if search_timeframe:
             parse_search = self.parse_search_timeframe(search_timeframe)
             result = self.connection.client.jobs.oneshot(
@@ -46,14 +47,14 @@ class Search(komand.Action):
         split_search_timeframe = search_timeframe.split("-")
         if not split_search_timeframe[0].isdigit():
             raise PluginException(
-                cause="Invalid search start timestamp.",
+                cause=f"Invalid search start timestamp - {split_search_timeframe[0]}",
                 assistance="Start time should only be a number.",
             )
         start_time = datetime.fromtimestamp(int(split_search_timeframe[0])).strftime(datetime_format)
         if len(split_search_timeframe) > 1:
             if not split_search_timeframe[1].isdigit():
                 raise PluginException(
-                    cause="Invalid search end timestamp.",
+                    cause=f"Invalid search end timestamp - {split_search_timeframe[1]}",
                     assistance="End time should only be a number.",
                 )
             end_time = datetime.fromtimestamp(int(split_search_timeframe[1])).strftime(datetime_format)
