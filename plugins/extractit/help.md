@@ -227,7 +227,7 @@ This action extracts all domain names from a string or file.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|ZXhhbXBsZS5jb20gaXMgYW4gZXhhbXBsZSBkb21haW4=|
+|file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODF, TXT, ZIP|None|ZXhhbXBsZS5jb20gaXMgYW4gZXhhbXBsZSBkb21haW4=|
 |str|string|None|False|Input string|None|example.com is an example domain|
 |subdomain|bool|None|True|Include subdomain in result|None|False|
 
@@ -637,6 +637,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.0.5 - Updated error message in extractor.py | Updated help.md description
 * 3.0.4 - Fix issue with extracting URLs from link query parameters
 * 3.0.3 - Remove duplicate date formats from action inputs
 * 3.0.2 - Fix issue where domains and URLs were not parsed correctly if top level domain contained uppercase | Fix issue where parts of URL were incorrectly recognized as domains if URL contained port
