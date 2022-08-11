@@ -109,7 +109,7 @@ def extract_content_from_file(provided_file: bytes) -> str:
             except PDFSyntaxError:
                 raise PluginException(
                     cause="The type of the provided file is not supported.",
-                    assistance="Supported file types: PDF, DOCX, PPTX, XLSX, ODT, ODP, ODF",
+                    assistance="Supported file types are text/binary, such as: PDF, DOCX, PPTX, XLSX, ODF, .txt, .zip",
                 )
 
 

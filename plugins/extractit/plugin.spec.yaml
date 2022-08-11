@@ -213,7 +213,7 @@ actions:
         example: example.com is an example domain
       file:
         title: File
-        description: Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
+        description: Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODF, TXT, ZIP
         type: bytes
         required: false
         example: ZXhhbXBsZS5jb20gaXMgYW4gZXhhbXBsZSBkb21haW4=
