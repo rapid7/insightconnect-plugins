@@ -322,7 +322,7 @@ Example output:
 
 #### Get Indicator Scan Status
 
-This action is used to get the scan status of an indicator in Insights TIP system.
+This action is used to get the scan status of an indicator in Threat Command TIP system.
 
 ##### Input
 

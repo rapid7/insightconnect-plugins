@@ -15,7 +15,6 @@ resources:
   vendor_url: https://intsights.com/
 tags:
 - rapid7
-- intsights
 - darkweb
 - threatintelligence
 hub_tags:
@@ -336,7 +335,7 @@ connection:
 actions:
   get_indicator_by_value:
     title: Get Indicator by Value
-    description: Search indicators in IntSights TIP
+    description: Search indicators in Threat Command TIP
     input:
       indicator_value:
         title: Indicator Value
@@ -448,7 +447,7 @@ actions:
         required: false
   rescan_indicator:
     title: Rescan Indicator
-    description: Force an indicator scan in IntSights TIP system
+    description: Force an indicator scan in Threat Command TIP system
     input:
       indicator_file_hash:
         title: Indicator File Hash
@@ -469,7 +468,7 @@ actions:
         required: false
   get_indicator_scan_status:
     title: Get Indicator Scan Status
-    description: Get the scan status of an indicator in the IntSights TIP system
+    description: Get the scan status of an indicator in the Threat Command TIP system
     input:
       task_id:
         title: Task ID
