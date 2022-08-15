@@ -29,12 +29,12 @@ actions:
         type: string
         description: CSV string
         required: true
-        example: column1, column2\nvalue1, value2
+        example: column1, column2, column3\nvalue1, value2, value3
       fields:
         type: string
         description: Fields to filter
         required: true
-        example: f1, f2, f3-f6
+        example: f1, f2-f3
     output:
       string:
         type: string
@@ -53,7 +53,7 @@ actions:
         type: string
         description: Fields to filter
         required: true
-        example: f1, f2, f3-f6
+        example: f1, f2
     output:
       filtered:
         type: bytes
