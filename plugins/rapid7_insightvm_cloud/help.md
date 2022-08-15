@@ -13,6 +13,11 @@ InsightVM is a powerful vulnerability management tool which finds, prioritizes, 
 * Requires an InsightVM API Key
 * InsightVM Scan Engine(s) paired to the Insight Platform
 
+# Supported Product Versions
+
+* InsightVM Cloud Integration API v4
+* 2022-08-10
+
 # Documentation
 
 ## Setup
@@ -998,6 +1003,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.0 - Add Cloud enablement to plugin | Updated exception information and error handling | Made status code output for Stop Scan and Get Scan actions more exact | Fix bug relating to empty inputs being passed in request body
 * 3.0.0 - Changed output of Get Asset action to include vulnerabilities properly
 * 2.2.0 - Added ability to include vulnerabilities on Get Asset action | API call update
 * 2.1.0 - Added scanned asset_ids as an output of start_scan
@@ -1009,4 +1015,5 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [InsightVM Cloud API](https://help.rapid7.com/insightvm/en-us/api/integrations.html)
+* [Managing Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys)
 * [Scan Engine Pairing](https://docs.rapid7.com/insightvm/scan-engine-management-on-the-insight-platform/#how-to-pair-your-scan-engines-to-the-insight-platform)

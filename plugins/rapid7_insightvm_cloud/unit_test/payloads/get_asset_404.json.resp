@@ -1,0 +1,7 @@
+{
+   "_type":"com.rapid7.spring.rest.error.resource.ErrorResource",
+   "status":404,
+   "localized_message":null,
+   "message":"The requested resource does not exist.",
+   "throwable":null
+}

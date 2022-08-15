@@ -1,0 +1,42 @@
+{
+    "asset": {
+        "assessed_for_policies": false,
+        "assessed_for_vulnerabilities": true,
+        "credential_assessments": [],
+        "critical_vulnerabilities": 0,
+        "exploits": 0,
+        "host_name": "test.test.test.test",
+        "id": "5058b0b4-701a-414e-9630-430d2cddbf4d",
+        "ip": "1.1.1.1",
+        "last_assessed_for_vulnerabilities": "2000-01-01T00:00:00.000Z",
+        "last_scan_end": "2000-01-01T00:00:00.000Z",
+        "last_scan_start": "2000-01-01T00:00:00.000Z",
+        "malware_kits": 0,
+        "moderate_vulnerabilities": 1,
+        "new": [],
+        "os_architecture": "64",
+        "os_description": "Linux 3.0",
+        "os_family": "Linux",
+        "os_name": "Linux",
+        "os_system_name": "Linux",
+        "os_type": "General",
+        "os_vendor": "Linux",
+        "os_version": "3.0",
+        "remediated": [],
+        "risk_score": 1234.12345,
+        "severe_vulnerabilities": 5,
+        "status_code": 200,
+        "tags": [
+            {
+                "name": "TestTag1",
+                "type": "CUSTOM"
+            },
+            {
+                "name": "TestTag2",
+                "type": "SITE"
+            }
+        ],
+        "total_vulnerabilities": 6,
+        "unique_identifiers": []
+    }
+}
