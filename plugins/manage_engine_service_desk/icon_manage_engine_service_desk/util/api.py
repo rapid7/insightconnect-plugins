@@ -4,9 +4,19 @@ from logging import Logger
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-import icon_manage_engine_service_desk.util.helpers as helpers
+from icon_manage_engine_service_desk.util import helpers
 from icon_manage_engine_service_desk.util.constants import Request
-from icon_manage_engine_service_desk.util.endpoints import *
+from icon_manage_engine_service_desk.util.endpoints import (
+    REQUESTS_ENDPOINT,
+    REQUEST_ENDPOINT,
+    DELETE_REQUEST_ENDPOINT,
+    CLOSE_REQUEST_ENDPOINT,
+    ASSIGN_REQUEST_ENDPOINT,
+    PICKUP_REQUEST_ENDPOINT,
+    REQUEST_RESOLUTIONS_ENDPOINT,
+    REQUEST_NOTES_ENDPOINT,
+    REQUEST_NOTE_ENDPOINT,
+)
 
 
 class ManageEngineServiceDeskAPI:
@@ -54,7 +64,7 @@ class ManageEngineServiceDeskAPI:
         )
 
     def add_request(self, request_parameters: dict) -> dict:
-        self._logger.info(f"Adding a request...")
+        self._logger.info("Adding a request...")
         cleaned_request_parameters = helpers.clean_dict(request_parameters)
         if not cleaned_request_parameters.get(Request.REQUESTER):
             raise PluginException(

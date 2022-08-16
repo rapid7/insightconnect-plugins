@@ -2,7 +2,7 @@ class Item:
     ID = "id"
 
     def get_all_attributes(self):
-        return [self.__getattribute__(name) for name in dir(self) if not name.startswith("_")]
+        return [getattr(self, name) for name in dir(self) if not name.startswith("_")]
 
 
 class Response(Item):

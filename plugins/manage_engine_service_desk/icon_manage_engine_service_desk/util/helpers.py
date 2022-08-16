@@ -14,9 +14,8 @@ def replace_status_code(response: dict) -> dict:
         response[Response.RESPONSE_STATUS]["manage_engine_status_code"] = response.get(
             Response.RESPONSE_STATUS, {}
         ).pop(ResponseStatus.STATUS_CODE)
+        return response
     except KeyError:
-        pass
-    finally:
         return response
 
 
