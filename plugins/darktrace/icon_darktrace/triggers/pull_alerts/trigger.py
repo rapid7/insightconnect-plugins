@@ -44,10 +44,10 @@ class PullAlerts(insightconnect_plugin_runtime.Trigger):
                         "uuid": params.get(Input.UUID),
                     }
                 )
-            except PluginException as e:
-                self.logger.info(f"{e.cause} {e.assistance} {e.data}")
-            except Exception as e:
-                self.logger.info(f"{e}")
+            except PluginException as error:
+                self.logger.info(f"{error.cause} {error.assistance} {error.data}")
+            except Exception as error:
+                self.logger.info(f"{error}")
 
             if data:
                 if isinstance(data, dict):
