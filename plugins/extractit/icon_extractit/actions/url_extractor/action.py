@@ -57,7 +57,7 @@ class UrlExtractor(insightconnect_plugin_runtime.Action):
                     provided_file = urllib.parse.unquote(
                         base64.b64decode(provided_file.encode(DEFAULT_ENCODING)).decode(DEFAULT_ENCODING)
                     )
-                return provided_file0
+                return provided_file
             except UnicodeDecodeError:
                 file_content = extract_content_from_file(base64.b64decode(provided_file))
                 return file_content
