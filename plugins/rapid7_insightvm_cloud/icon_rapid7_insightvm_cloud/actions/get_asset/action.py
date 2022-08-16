@@ -21,7 +21,9 @@ class GetAsset(insightconnect_plugin_runtime.Action):
         if include_vulns:
             params = {"includeSame": True}
             response = self.connection.ivm_cloud_api.call_api("assets/" + asset_id, "GET", params)
+            response = insightconnect_plugin_runtime.helper.clean(response)
             return {Output.ASSET: response, Output.VULNERABILITIES: response.get("same")}
         else:
             response = self.connection.ivm_cloud_api.call_api("assets/" + asset_id, "GET")
+            response = insightconnect_plugin_runtime.helper.clean(response)
             return {Output.ASSET: response}

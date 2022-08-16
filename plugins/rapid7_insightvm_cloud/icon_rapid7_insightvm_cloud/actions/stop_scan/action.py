@@ -27,6 +27,6 @@ class StopScan(insightconnect_plugin_runtime.Action):
         else:
             return {
                 Output.SUCCESS: False,
-                Output.STATUS_CODE: 400,
+                Output.STATUS_CODE: response.get("status_code"),
                 Output.MESSAGE: f"Failed to stop scan with ID '{scan_id}'. Status of scan is {response.get('status')}",
             }

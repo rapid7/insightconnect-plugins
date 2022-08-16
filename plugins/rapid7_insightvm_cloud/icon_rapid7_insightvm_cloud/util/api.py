@@ -1,12 +1,11 @@
 import json
 
-from requests import request
+import requests
 from logging import Logger
 
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 from requests.exceptions import HTTPError
-from typing import Optional
 
 
 class IVM_Cloud:
@@ -23,23 +22,29 @@ class IVM_Cloud:
 
         api_url = self.base_url + path
         headers = {"x-api-key": self.token, "content-type": "application/json"}
-
         try:
-            response = request(
+            response = requests.request(
                 request_type,
                 self.base_url + path,
                 params=insightconnect_plugin_runtime.helper.clean(params),
                 headers=headers,
-                data=json.dumps(body),
+                data=json.dumps(insightconnect_plugin_runtime.helper.clean(body)),
             )
             if response.status_code not in [200, 201, 202]:
+                data = json.loads(response.text)
+                message = data.get("message", "")
+                if response.status_code == 400:
+                    raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=data)
                 raise PluginException(
                     cause=f"Failed to get a valid response from InsightVM at endpoint '{api_url}'",
-                    assistance=f"Response was {response.request.body}.",
-                    data=response.status_code,
+                    assistance=message,
+                    data=data,
                 )
+            response_json = {}
             if response.text != "":
-                return response.json()
+                response_json = response.json()
+            response_json["status_code"] = response.status_code
+            return response_json
 
         except HTTPError as httpError:
             raise PluginException(
@@ -53,7 +58,7 @@ class IVM_Cloud:
         headers = {"x-api-key": self.token}
 
         try:
-            response = request(
+            response = requests.request(
                 "POST", api_url, params=insightconnect_plugin_runtime.helper.clean(params), headers=headers
             )
             response.raise_for_status()

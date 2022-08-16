@@ -68,7 +68,7 @@ Example output:
 
 ```
 {
-  "csv": "column1,column2,column3\r\nvalue1,value2,value3\r\nvalue4,value5,value6\r\n"
+  "csv_string": "column1,column2,column3\r\nvalue1,value2,value3\r\nvalue4,value5,value6\r\n"
 }
 ```
 
@@ -111,7 +111,7 @@ Example output:
 
 ```
 {
-  "csv": "Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMNCnZhbHVlMSx2YWx1ZTIsdmFsdWUzDQp2YWx1ZTQsdmFs\ndWU1LHZhbHVlNg0K\n"
+  "csv_bytes": "Y29sdW1uMSxjb2x1bW4yLGNvbHVtbjMNCnZhbHVlMSx2YWx1ZTIsdmFsdWUzDQp2YWx1ZTQsdmFs\ndWU1LHZhbHVlNg0K\n"
 }
 ```
 
@@ -128,14 +128,14 @@ For example, to extract fields 1, 2, 4, 5, 6 the following fields value can be u
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |csv|bytes|None|True|Base64 encoded CSV file|None|ZmllbGQxLCBmaWVsZDIKdmFsdWUxLCB2YWx1ZTIK|
-|fields|string|None|True|Fields to filter|None|f1, f2, f3-f6|
+|fields|string|None|True|Fields to filter|None|f1, f2|
 
 Example input:
 
 ```
 {
   "csv": "ZmllbGQxLCBmaWVsZDIKdmFsdWUxLCB2YWx1ZTIK",
-  "fields": "f1, f2, f3-f6"
+  "fields": "f1, f2"
 }
 ```
 
@@ -149,7 +149,7 @@ Example output:
 
 ```
 {
-  "filtered": "ZmllbGQxLCBmaWVsZDIKdmFsdWUxLCB2YWx1ZTI="
+  "filtered": "ZmllbGQxLGZpZWxkMgp2YWx1ZTEsdmFsdWUy"
 }
 ```
 
@@ -164,15 +164,15 @@ Field numbers (e.g. `f1`) and a range of fields (e.g. `f5-7`) are used to define
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|csv|string|None|True|CSV string|None|column1, column2\nvalue1, value2|
-|fields|string|None|True|Fields to filter|None|f1, f2, f3-f6|
+|csv|string|None|True|CSV string|None|column1, column2, column3\nvalue1, value2, value3|
+|fields|string|None|True|Fields to filter|None|f1, f2-f3|
 
 Example input:
 
 ```
 {
-  "csv": "column1, column2\\nvalue1, value2",
-  "fields": "f1, f2, f3-f6"
+  "csv": "column1, column2, column3\\nvalue1, value2, value3",
+  "fields": "f1, f2-f3"
 }
 ```
 
@@ -186,7 +186,7 @@ Example output:
 
 ```
 {
-  "string": "field1\nvalue1\nvalue1-1"
+  "string": "column1,column2,column3\\nvalue1"
 }
 ```
 
@@ -219,24 +219,14 @@ Example input:
 Example output:
 
 ```
-
 {
   "json": [
     {
-      "Asset OS Family": "Microsoft Windows",
-      "Asset OS Name": "Microsoft Windows 7 Enterprise Edition",
-      "Asset OS Version": "SP1",
-      "Asset IP Address": "192.168.1.2"
-    },
-    {
-      "Asset OS Family": "Microsoft Windows",
-      "Asset OS Name": "Microsoft Windows Server 2012",
-      "Asset OS Version": "SP2",
-      "Asset IP Address": "192.168.1.3"
+      "field1": "value1",
+      "field2": "value2"
     }
   ]
 }
-
 ```
 
 ### Triggers
