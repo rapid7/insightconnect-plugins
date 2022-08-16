@@ -17,11 +17,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
             params.get(Input.URL),
             params.get(Input.API_PUBLIC_TOKEN).get("secretKey"),
             params.get(Input.API_PRIVATE_TOKEN).get("secretKey"),
+            params.get(Input.SSL_VERIFICATION),
             self.logger,
         )
 
     def test(self):
         try:
             return {"success": self.client.get_status() != {}}
-        except PluginException as e:
-            raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e.data)
+        except PluginException as error:
+            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data)
