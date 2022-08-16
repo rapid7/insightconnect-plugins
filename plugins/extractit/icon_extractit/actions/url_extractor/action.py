@@ -53,12 +53,11 @@ class UrlExtractor(insightconnect_plugin_runtime.Action):
             try:
                 if keep_original_url:
                     provided_file = base64.b64decode(provided_file.encode(DEFAULT_ENCODING)).decode(DEFAULT_ENCODING)
-                    return provided_file
                 else:
                     provided_file = urllib.parse.unquote(
-                        base64.b64decode(provided_file.encode(DEFAULT_ENCODING)).decode(DEFAULT_ENCODING)
+base64.b64decode(provided_file.encode(DEFAULT_ENCODING)).decode(DEFAULT_ENCODING)
                     )
-                    return provided_file
+                return provided_file0
             except UnicodeDecodeError:
                 file_content = extract_content_from_file(base64.b64decode(provided_file))
                 return file_content
