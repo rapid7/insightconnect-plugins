@@ -10,6 +10,10 @@ Powered by Cyber AI, [Darktrace’s Enterprise Immune System](https://www.darktr
 
 * Requires a public and private API token
 
+# Supported Product Versions
+
+* 2022-08-08
+
 # Documentation
 
 ## Setup
@@ -20,14 +24,17 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |api_private_token|credential_secret_key|None|True|Enter API private token|None|1452d258-7c12-7c12-7c12-1452d25874c2|
 |api_public_token|credential_secret_key|None|True|Enter API public token|None|1452d258-7c12-7c12-7c12-1452d25874c2|
-|url|string|None|True|API URL|None|None|
+|ssl_verification|boolean|True|True|Indicates whether to verify SSL certificate or not|None|True|
+|url|string|None|True|API URL|None|https://example.com|
 
 Example input:
 
 ```
 {
   "api_private_token": "1452d258-7c12-7c12-7c12-1452d25874c2",
-  "api_public_token": "1452d258-7c12-7c12-7c12-1452d25874c2"
+  "api_public_token": "1452d258-7c12-7c12-7c12-1452d25874c2",
+  "ssl_verification": true,
+  "url": "https://example.com"
 }
 ```
 
@@ -93,7 +100,7 @@ This trigger is used to trigger workflows on model breach alerts and logs.
 |----|----|-------|--------|-----------|----|-------|
 |did|integer|None|False|ID of device modelled in the Darktrace system|None|1|
 |frequency|integer|300|False|Poll frequency in seconds|None|300|
-|minscore|integer|None|False|Return only breaches with a minimum score. Valid values are 0-100.|None|10|
+|minscore|integer|None|False|Return only breaches with a minimum score. Valid values are 0-100|None|10|
 |pbid|integer|None|False|Only return the model breach with the specified policy breach ID|None|300|
 |pid|integer|None|False|Only return model breaches for the specified model|None|300|
 |uuid|string|None|False|Only return model breaches for the specified model|None|fc707223-d2d2-475c-b09b-dec4e800eb2e|
@@ -279,6 +286,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.0 - Added verify SSL certificate boolean field to the plugin connection
 * 2.0.1 - Updated help.md file
 * 2.0.0 - Fix input `0` for parameters DID, PBID, Min Score and PID in trigger Get Alerts | Create new custom type for trigger Get Alerts | Change type of input parameter Min Score to integer in trigger Get Alerts
 * 1.1.0 - Add new trigger Pull Alerts
