@@ -107,7 +107,7 @@ class ManageEngineServiceDeskAPI:
             method="PUT",
             url=CLOSE_REQUEST_ENDPOINT.format(request_id=request_id, sdp_base_url=self._sdp_base_url),
             headers=self._get_headers(),
-            data=helpers.prepare_input_data({"request": {"closure_info": closure_parameters}}),
+            data=helpers.prepare_input_data({"request": {"closure_info": helpers.clean_dict(closure_parameters)}}),
         )
 
     def assign_request(self, request_id: int, group: dict = None, technician: dict = None) -> dict:
