@@ -1,0 +1,24 @@
+import sys
+import os
+
+sys.path.append(os.path.abspath("../"))
+
+from unittest import TestCase
+from icon_orca_security.actions.delete_user import DeleteUser
+from icon_orca_security.actions.delete_user.schema import Input
+from unit_test.util import Util
+from unittest.mock import patch
+from parameterized import parameterized
+from insightconnect_plugin_runtime.exceptions import PluginException
+
+
+@patch("requests.request", side_effect=Util.mocked_requests)
+class TestDeleteUser(TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.action = Util.default_connector(DeleteUser())
+
+    @parameterized.expand(Util.load_parameters("delete_user").get("parameters"))
+    def test_delete_user(self, mock_request, name, email, expected):
+        actual = self.action.run({Input.DELETE_INVITE_EMAIL: email})
+        self.assertEqual(actual, expected)
