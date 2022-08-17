@@ -24,3 +24,4 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def test(self):
         self.api_url = f"https://{self.region}.api.insight.rapid7.com/validate"
         self.ivm_cloud_api.test_api(self.api_url)
+        return {"success": True}
