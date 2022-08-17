@@ -4,7 +4,7 @@ import requests
 from logging import Logger
 
 import insightconnect_plugin_runtime
-from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 from requests.exceptions import HTTPError
 
 
@@ -64,7 +64,7 @@ class IVM_Cloud:
             response.raise_for_status()
             return insightconnect_plugin_runtime.helper.clean(response.json())
         except HTTPError as httpError:
-            raise PluginException(
+            raise ConnectionTestException(
                 cause=f"Failed to get a valid response from InsightVM at endpoint '{api_url}'",
                 assistance=f"Response was {httpError.response.text}.",
                 data=httpError,
