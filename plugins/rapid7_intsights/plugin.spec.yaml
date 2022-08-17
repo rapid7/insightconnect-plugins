@@ -12,7 +12,7 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_intsights
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-  vendor_url: https://intsights.com/
+  vendor_url: https://www.rapid7.com/products/threat-command
 tags:
 - rapid7
 - darkweb
@@ -322,13 +322,13 @@ types:
 connection:
   account_id:
     title: Account ID
-    description: Account ID for IntSights
+    description: Account ID for Threat Command
     type: string
     required: true
     example: 9de5069c5afe602b2ea0a04b
   api_key:
     title: API Key
-    description: API key for IntSights
+    description: API key for Threat Command
     type: credential_secret_key
     required: true
     example: cc805d5fab1fd71a4ab352a9c533e65fb2d5b885518f4e565e68847223b8e6b85cb48f3afad842726d99239c9e36505c64b0dc9a061d9e507d833277ada336ab

@@ -17,13 +17,13 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "account_id": {
       "type": "string",
       "title": "Account ID",
-      "description": "Account ID for IntSights",
+      "description": "Account ID for Threat Command",
       "order": 1
     },
     "api_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
-      "description": "API key for IntSights",
+      "description": "API key for Threat Command",
       "order": 2
     }
   },

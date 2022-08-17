@@ -16,8 +16,8 @@
 
 # Requirements
 
-* Requires an Account ID for IntSights
-* Requires API key for IntSights
+* Requires an Account ID for Threat Command
+* Requires API key for Threat Command
 
 # Supported Product Versions
 
@@ -31,8 +31,8 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|account_id|string|None|True|Account ID for IntSights|None|9de5069c5afe602b2ea0a04b|
-|api_key|credential_secret_key|None|True|API key for IntSights|None|bffce7a2e653eb3e499b69238c6ed672727a642e6f07c19fe19b4d59c7a2d2a61078d1601ded75bac3859fc5c204279402ccf141e1999edf9deb47951f96f4c1|
+|account_id|string|None|True|Account ID for Threat Command|None|9de5069c5afe602b2ea0a04b|
+|api_key|credential_secret_key|None|True|API key for Threat Command|None|bffce7a2e653eb3e499b69238c6ed672727a642e6f07c19fe19b4d59c7a2d2a61078d1601ded75bac3859fc5c204279402ccf141e1999edf9deb47951f96f4c1|
 
 Example input:
 
@@ -288,7 +288,7 @@ Example output:
 
 #### Rescan Indicator
 
-This action is used to force an indicator scan in Intsights TIP system.
+This action is used to force an indicator scan in Threat Command TIP system.
 
 ##### Input
 
@@ -659,7 +659,7 @@ Example output:
 
 #### Get Indicator by Value
 
-This action will search indicators in IntSights TIP.
+This action will search indicators in Threat Command TIP.
 
 ##### Input
 
@@ -1034,4 +1034,4 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [Threat Command](https://intsights.com/threat-command)
+* [Threat Command](https://www.rapid7.com/products/threat-command)
