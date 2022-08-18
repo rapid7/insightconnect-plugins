@@ -93,7 +93,7 @@ class OrcaSecurityAPI:
             path=ORGANIZATION_USERS_ENDPOINT, method="DELETE", data=data, headers=self.get_headers()
         )
 
-    def make_request(
+    def make_request(  # noqa: C901
         self,
         path: str,
         method: str = "GET",

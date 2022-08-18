@@ -30,21 +30,21 @@ class NewAlert(insightconnect_plugin_runtime.Trigger):
     @staticmethod
     def validate_filters(filters: list) -> list:
         new_filters = []
-        for filter in filters:
-            field = filter.get("field")
-            includes = filter.get("includes")
-            excludes = filter.get("excludes")
+        for provided_filter in filters:
+            field = provided_filter.get("field")
+            includes = provided_filter.get("includes")
+            excludes = provided_filter.get("excludes")
             if not field:
                 raise PluginException(
                     cause=f"The name of the field against which the alerts should be filtered was not specified in the "
-                    f"filter: {filter}.",
+                    f"filter: {provided_filter}.",
                     assistance="Please provide a field name and try again.",
                 )
             if not includes and not excludes:
                 raise PluginException(
-                    cause=f"No values were given for the field to include or exclude in the filter: {filter}.",
+                    cause=f"No values were given for the field to include or exclude in the filter: {provided_filter}.",
                     assistance="Please provide 'includes' or 'excludes' fields and try again.",
                 )
             if field != "state.created_at":
-                new_filters.append(filter)
+                new_filters.append(provided_filter)
         return new_filters
