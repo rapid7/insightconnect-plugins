@@ -13,6 +13,7 @@ resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/manage_engine_service_desk
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.manageengine.com/
+  docs_url: https://www.manageengine.com/products/service-desk/sdpod-v3-api
 tags:
 - Manage Engine
 - Service Desk
@@ -519,7 +520,7 @@ connection:
 actions:
   get_list_request:
     title: Get List Request
-    description: This operation lets you view the details of all the requests
+    description: View the details of all the requests
     input:
       start_index:
         title: Start Index
@@ -558,12 +559,6 @@ actions:
         required: false
         example: subject
         default: subject
-      filter_name:
-        title: Filter Name
-        description: Filter name
-        type: string
-        required: false
-        example: Test
     output:
       requests:
         title: Requests
@@ -579,7 +574,7 @@ actions:
          example: success
   get_request:
     title: Get Request
-    description: This operation helps you to view the request details by the unique request id
+    description: View the request details by the unique request id
     input:
       request_id:
         title: Request ID
@@ -608,7 +603,7 @@ actions:
         example: 2000
   add_request:
     title: Add Request
-    description: This operation helps you to add new request. Subject and requester parameters are obligatory, others are optional. In every parameter containing `ID` and `Name` fields please provide only one of them
+    description: Add a new request. Subject and requester parameters are obligatory, others are optional. In every parameter containing `ID` and `Name` fields please provide only one of them
     input:
       subject:
         title: Subject
@@ -757,7 +752,7 @@ actions:
         example: 2000
   edit_request:
     title: Edit Request
-    description: This operation helps you to update the request by using the unique request_id. At least one parameter except Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one of them
+    description: Update the request by using the unique request ID. At least one parameter except Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one of them
     input:
       request_id:
         title: Request ID
@@ -913,7 +908,7 @@ actions:
         example: 2000
   delete_request:
     title: Delete Request
-    description: This operation lets you delete (move to trash) request
+    description: Delete (move to trash) a request
     input:
      request_id:
        title: Request ID
@@ -942,7 +937,7 @@ actions:
         example: 2000
   close_request:
     title: Close Request
-    description: This operation allows you to close single or multiple requests
+    description: Close a request
     input:
       request_id:
         title: Request ID
@@ -999,7 +994,7 @@ actions:
         example: 2000
   assign_request:
     title: Assign Request
-    description: This Operation allows you to assign a request to a technician or group. At least one input parameter (except Request ID) is required - Group or Technician. In every parameter containing `ID` and `Name` fields please provide only one of them
+    description: Assign a request to a technician or group. At least one input parameter (except Request ID) is required - Group or Technician. In every parameter containing `ID` and `Name` fields please provide only one of them
     input:
       request_id:
         title: Request ID
@@ -1040,7 +1035,7 @@ actions:
         example: 2000
   pickup_request:
     title: Pickup Request
-    description: This Operation allows you to add/update a resolution of the request
+    description: Pick up a request in your name as a technician
     input:
       request_id:
         title: Request ID
@@ -1069,7 +1064,7 @@ actions:
         example: 2000
   add_resolution:
     title: Add Resolution
-    description: This Operation allows you to add/update a resolution of the request
+    description: Add/update a resolution of the request
     input:
       request_id:
         title: Request ID
@@ -1110,7 +1105,7 @@ actions:
         example: 2000
   get_resolution:
     title: Get Resolution
-    description: This Operation allows you to get a resolution of the request
+    description: Get a resolution of the request
     input:
       request_id:
         title: Request ID
@@ -1145,7 +1140,7 @@ actions:
         example: 2000
   add_request_note:
     title: Add Request Note
-    description: This operation helps you add a note
+    description: Add a request note
     input:
       request_id:
         title: Request ID
@@ -1210,7 +1205,7 @@ actions:
         example: 2000
   edit_request_note:
     title: Edit Request Note
-    description: This operation helps you update a note. At least one parameter except Request ID and Note ID is required
+    description: Update a request note. At least one parameter except Request ID and Note ID is required
     input:
       request_id:
         title: Request ID
@@ -1275,7 +1270,7 @@ actions:
         example: 2000
   delete_request_note:
     title: Delete Request Note
-    description: This operation helps you delete a note
+    description: Delete a request note
     input:
       request_id:
         title: Request ID
@@ -1310,7 +1305,7 @@ actions:
         example: 2000
   get_list_request_notes:
     title: Get List Request Notes
-    description: This operation helps you get all the notes
+    description: Get all the request notes
     input:
       request_id:
         title: Request ID

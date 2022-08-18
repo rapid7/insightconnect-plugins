@@ -4,11 +4,10 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This operation lets you view the details of all the requests"
+    DESCRIPTION = "View the details of all the requests"
 
 
 class Input:
-    FILTER_NAME = "filter_name"
     PAGE_SIZE = "page_size"
     SEARCH_FIELDS = "search_fields"
     SORT_FIELD = "sort_field"
@@ -27,12 +26,6 @@ class GetListRequestInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "filter_name": {
-      "type": "string",
-      "title": "Filter Name",
-      "description": "Filter name",
-      "order": 6
-    },
     "page_size": {
       "type": "integer",
       "title": "Page Size",

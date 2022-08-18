@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This operation helps you to view the request details by the unique request id"
+    DESCRIPTION = "View the request details by the unique request id"
 
 
 class Input:

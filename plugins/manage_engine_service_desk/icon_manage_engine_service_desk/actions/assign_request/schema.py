@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This Operation allows you to assign a request to a technician or group. At least one input parameter (except Request ID) is required - Group or Technician. In every parameter containing `ID` and `Name` fields please provide only one of them"
+    DESCRIPTION = "Assign a request to a technician or group. At least one input parameter (except Request ID) is required - Group or Technician. In every parameter containing `ID` and `Name` fields please provide only one of them"
 
 
 class Input:

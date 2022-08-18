@@ -73,8 +73,8 @@ class Util:
                 return MockResponse(200, "edit_request.json.resp")
 
         if kwargs.get("url") == "http://me-sdeskplus.example.com:8080/api/v3/requests" and kwargs.get("params"):
-            if "not_existing_filter" in kwargs.get("params", {}).get("input_data"):
-                return MockResponse(400, "get_list_request_invalid_filter.json.resp")
+            if "not_existing_sort_field" in kwargs.get("params", {}).get("input_data"):
+                return MockResponse(400, "get_list_request_invalid_sort_field.json.resp")
             return MockResponse(200, "get_list_request.json.resp")
 
         if kwargs.get("url") == "http://me-sdeskplus.example.com:8080/api/v3/requests/200/move_to_trash":

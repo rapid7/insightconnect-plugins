@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This operation allows you to close single or multiple requests"
+    DESCRIPTION = "Close a request"
 
 
 class Input:

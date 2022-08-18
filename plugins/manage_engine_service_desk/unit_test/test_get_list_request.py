@@ -35,11 +35,11 @@ class TestGetListRequest(TestCase):
     @parameterized.expand(
         [
             [
-                "invalid_filter",
-                Util.read_file_to_dict("inputs/get_list_request_invalid_filter.json.inp"),
+                "invalid_sort_field",
+                Util.read_file_to_dict("inputs/get_list_request_invalid_sort_field.json.inp"),
                 PluginException.causes[PluginException.Preset.BAD_REQUEST],
                 PluginException.assistances[PluginException.Preset.BAD_REQUEST],
-                Util.read_file_to_dict("expected/get_list_request_invalid_filter.json.exp"),
+                Util.read_file_to_dict("expected/get_list_request_invalid_sort_field.json.exp"),
             ]
         ],
     )

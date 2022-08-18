@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This operation helps you update a note. At least one parameter except Request ID and Note ID is required"
+    DESCRIPTION = "Update a request note. At least one parameter except Request ID and Note ID is required"
 
 
 class Input:

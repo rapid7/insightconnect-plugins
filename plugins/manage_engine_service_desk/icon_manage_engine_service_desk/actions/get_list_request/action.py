@@ -34,7 +34,6 @@ class GetListRequest(insightconnect_plugin_runtime.Action):
             search_fields=params.get(Input.SEARCH_FIELDS),
             sort_order=sort_order,
             sort_field=params.get(Input.SORT_FIELD),
-            filter_name=params.get(Input.FILTER_NAME),
         )
 
         requests = []

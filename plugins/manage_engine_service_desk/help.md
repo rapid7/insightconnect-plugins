@@ -46,7 +46,7 @@ Example input:
 
 #### Add Request
 
-This action this operation helps you to add new request. Subject and requester parameters are obligatory, others are optional. In every parameter containing `ID` and `Name` fields please provide only one of them.
+This action allows you to add new a request. Subject and requester parameters are obligatory, others are optional. In every parameter containing `ID` and `Name` fields please provide only one of them.
 
 ##### Input
 
@@ -71,7 +71,6 @@ This action this operation helps you to add new request. Subject and requester p
 |subcategory|subcategory|None|False|Subcategory to which this request belongs|None|{"name": "Mac OS X", "id": 24}|
 |subject|string|None|True|Subject of this request|None|Need a Monitor|
 |technician|technician|None|False|The technician that was assigned to the request|None|{"name": "John", "id": 71}|
-|udf_fields|object|None|False|Holds udf fields values associated with the request|None|{"udf_sline_51":"abc1","udf_pick_52":"Tony Stark"}|
 |urgency|urgency|None|False|Urgency of the request|None|{"name": "Low", "id": 1}|
 
 Example input:
@@ -106,7 +105,7 @@ Example output:
 
 #### Add Request Note
 
-This action this operation helps you add a note.
+This action allows you to add a request note.
 
 ##### Input
 
@@ -154,7 +153,7 @@ Example output:
 
 #### Add Resolution
 
-This action this Operation allows you to add/update a resolution of the request.
+This action allows you to add/update a resolution of the request.
 
 ##### Input
 
@@ -194,7 +193,7 @@ Example output:
 
 #### Assign Request
 
-This action this Operation allows you to assign a request to a technician or group. At least one input parameter (except Request ID) is required - Group or Technician. In every parameter containing `ID` and `Name` fields please provide only one of them.
+This action allows you to assign a request to a technician or group. At least one input parameter (except Request ID) is required - Group or Technician. In every parameter containing `ID` and `Name` fields please provide only one of them.
 
 ##### Input
 
@@ -240,7 +239,7 @@ Example output:
 
 #### Close Request
 
-This action this operation allows you to close single or multiple requests.
+This action allows you to close a request.
 
 ##### Input
 
@@ -287,7 +286,7 @@ Example output:
 
 #### Delete Request
 
-This action this operation lets you delete (move to trash) request.
+This action lets you delete (move to trash) a request.
 
 ##### Input
 
@@ -323,7 +322,7 @@ Example output:
 
 #### Delete Request Note
 
-This action this operation helps you delete a note.
+This action allows you to delete a request note.
 
 ##### Input
 
@@ -361,7 +360,7 @@ Example output:
 
 #### Edit Request
 
-This action this operation helps you to update the request by using the unique request_id. At least one parameter except Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one of them.
+This action allows you to update the request by using the unique request ID. At least one parameter except Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one of them.
 
 ##### Input
 
@@ -387,7 +386,6 @@ This action this operation helps you to update the request by using the unique r
 |subcategory|subcategory|None|False|Subcategory to which this request belongs|None|{"name": "Mac OS X", "id": 24}|
 |subject|string|None|False|Subject of this request|None|Need a Monitor|
 |technician|technician|None|False|The technician that was assigned to the request|None|{"name": "John", "id": 71}|
-|udf_fields|object|None|False|Holds udf fields values associated with the request|None|{"udf_sline_51":"abc1","udf_pick_52":"Tony Stark"}|
 |urgency|urgency|None|False|Urgency of the request|None|{"name": "Low", "id": 1}|
 
 Example input:
@@ -424,7 +422,7 @@ Example output:
 
 #### Edit Request Note
 
-This action this operation helps you update a note.
+This action allows you to update a note. At least one parameter except Request ID and Note ID is required.
 
 ##### Input
 
@@ -472,13 +470,12 @@ Example output:
 
 #### Get List Request
 
-This action this operation lets you view the details of all the requests.
+This action lets you view the details of all the requests.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|filter_name|string|None|False|Filter name|None|Test|
 |page_size|integer|10|False|By default, will return only the first 10 requests|None|15|
 |search_fields|object|None|False|The column name and value to be searched|None|{"subject": "test","priority.name": "Low"}|
 |sort_field|string|subject|False|FieldName for sorting|None|subject|
@@ -489,7 +486,6 @@ Example input:
 
 ```
 {
-  "filter_name": "Test",
   "page_size": 15,
   "search_fields": {
     "subject": "test",
@@ -660,7 +656,7 @@ Example output:
 
 #### Get List Request Notes
 
-This action this operation helps you get all the notes.
+This action allows you to get all the notes.
 
 ##### Input
 
@@ -725,7 +721,7 @@ Example output:
 
 #### Get Request
 
-This action this operation helps you to view the request details by the unique request id.
+This action allows you to view the request details by the unique request id.
 
 ##### Input
 
@@ -838,7 +834,7 @@ Example output:
 
 #### Get Resolution
 
-This action this Operation allows you to get a resolution of the request.
+This action allows you to get a resolution of the request.
 
 ##### Input
 
@@ -876,7 +872,7 @@ Example output:
 
 #### Pickup Request
 
-This action this Operation allows you to add/update a resolution of the request.
+This action allows you to pick up a request in your name as a technician.
 
 ##### Input
 

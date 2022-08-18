@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This operation helps you to add new request. Subject and requester parameters are obligatory, others are optional. In every parameter containing `ID` and `Name` fields please provide only one of them"
+    DESCRIPTION = "Add a new request. Subject and requester parameters are obligatory, others are optional. In every parameter containing `ID` and `Name` fields please provide only one of them"
 
 
 class Input:

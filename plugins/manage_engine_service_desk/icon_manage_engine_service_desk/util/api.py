@@ -35,7 +35,6 @@ class ManageEngineServiceDeskAPI:
         search_fields: dict = None,
         sort_order: str = None,
         sort_field: str = None,
-        filter_name: str = None,
     ) -> dict:
         self._logger.info("Getting list of requests...")
         list_parameters = helpers.clean_dict(
@@ -45,7 +44,6 @@ class ManageEngineServiceDeskAPI:
                 "search_fields": search_fields,
                 "sort_order": sort_order,
                 "sort_field": sort_field,
-                "filter_by": {"name": filter_name},
             }
         )
         return self.make_json_request(

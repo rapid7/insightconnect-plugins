@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "This operation helps you get all the notes"
+    DESCRIPTION = "Get all the request notes"
 
 
 class Input:
