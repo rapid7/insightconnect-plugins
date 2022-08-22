@@ -4,11 +4,12 @@ products: ["insightconnect"]
 name: servicenow
 title: ServiceNow
 description: ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for Rapid7 InsightConnect, users can manage all aspects of incidents including creation, search, updates, as well as monitor them for changes
-version: 6.0.1
+version: 7.0.0
 supported_versions: ["2020-03-11 Orlando"]
 vendor: rapid7
 support: rapid7
 status: []
+cloud_ready: true
 resources:
   vendor_url: https://www.servicenow.com/
   docs_url: https://docs.rapid7.com/insightconnect/servicenow
@@ -19,9 +20,8 @@ tags:
 - tables
 hub_tags:
   use_cases: [remediation_management, asset_inventory]
-  keywords: [servicenow, incidents, cmdb]
+  keywords: [servicenow, incidents, cmdb, cloud_enabled]
   features: []
-
 types:
   comments_worknotes:
     sys_id:
@@ -81,12 +81,12 @@ types:
       type: string
       required: false
 connection:
-  url:
-    title: ServiceNow URL
-    description: The full URL for your instance of ServiceNow, e.g. https://instance.servicenow.com
+  instance:
+    title: ServiceNow Instance
+    description: The instance of ServiceNow from the URL, e.g. https://{instance}.service-now.com
     type: string
     required: true
-    example: https://instance.servicenow.com
+    example: instance
   client_login:
     title: Client Login Information
     description: The ServiceNow username and password for basic authentication API interaction

@@ -5,8 +5,8 @@ import json
 
 class Input:
     CLIENT_LOGIN = "client_login"
+    INSTANCE = "instance"
     TIMEOUT = "timeout"
-    URL = "url"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -21,23 +21,23 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "The ServiceNow username and password for basic authentication API interaction",
       "order": 2
     },
+    "instance": {
+      "type": "string",
+      "title": "ServiceNow Instance",
+      "description": "The instance of ServiceNow from the URL, e.g. https://{instance}.service-now.com",
+      "order": 1
+    },
     "timeout": {
       "type": "integer",
       "title": "Timeout",
       "description": "The interval in seconds before abandoning an attempt to access ServiceNow",
       "default": 30,
       "order": 3
-    },
-    "url": {
-      "type": "string",
-      "title": "ServiceNow URL",
-      "description": "The full URL for your instance of ServiceNow, e.g. https://instance.servicenow.com",
-      "order": 1
     }
   },
   "required": [
     "client_login",
-    "url"
+    "instance"
   ],
   "definitions": {
     "credential_username_password": {
