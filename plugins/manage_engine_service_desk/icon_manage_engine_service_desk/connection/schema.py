@@ -6,6 +6,7 @@ import json
 class Input:
     API_KEY = "api_key"
     SDP_BASE_URL = "sdp_base_url"
+    SSL_VERIFY = "ssl_verify"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -25,11 +26,19 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "Sdp Base URL",
       "description": "Service Desk Plus Base URL",
       "order": 1
+    },
+    "ssl_verify": {
+      "type": "boolean",
+      "title": "SSL Verify",
+      "description": "SSL verify",
+      "default": false,
+      "order": 3
     }
   },
   "required": [
     "api_key",
-    "sdp_base_url"
+    "sdp_base_url",
+    "ssl_verify"
   ],
   "definitions": {
     "credential_secret_key": {

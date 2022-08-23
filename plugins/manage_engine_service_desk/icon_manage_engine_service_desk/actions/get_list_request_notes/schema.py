@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get all the request notes"
+    DESCRIPTION = "Get the list of all notes associated with the given request"
 
 
 class Input:

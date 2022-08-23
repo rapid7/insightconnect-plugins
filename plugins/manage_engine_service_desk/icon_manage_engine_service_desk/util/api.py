@@ -20,9 +20,10 @@ from icon_manage_engine_service_desk.util.endpoints import (
 
 
 class ManageEngineServiceDeskAPI:
-    def __init__(self, api_key: str, sdp_base_url: str, logger: Logger):
+    def __init__(self, api_key: str, sdp_base_url: str, ssl_verify: bool, logger: Logger):
         self._api_key = api_key
         self._sdp_base_url = sdp_base_url if not sdp_base_url.endswith("/") else sdp_base_url[:-1]
+        self.ssl_verify = ssl_verify
         self._logger = logger
 
     def _get_headers(self) -> dict:
@@ -238,7 +239,9 @@ class ManageEngineServiceDeskAPI:
         self, method: str, url: str, headers: dict, params: dict = None, data: dict = None
     ) -> requests.Response:
         try:
-            response = requests.request(method=method, url=url, headers=headers, params=params, data=data)
+            response = requests.request(
+                method=method, url=url, verify=self.ssl_verify, headers=headers, params=params, data=data
+            )
 
             if response.status_code == 400:
                 raise PluginException(

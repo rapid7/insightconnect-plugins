@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get a resolution of the request"
+    DESCRIPTION = "Get the resolution of the given request"
 
 
 class Input:

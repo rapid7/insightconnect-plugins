@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Close a request"
+    DESCRIPTION = "Close the given request"
 
 
 class Input:

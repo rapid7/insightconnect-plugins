@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Delete a request note"
+    DESCRIPTION = "Delete a given request note on a specific request"
 
 
 class Input:

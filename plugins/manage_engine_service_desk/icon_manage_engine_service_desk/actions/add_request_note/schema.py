@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Add a request note"
+    DESCRIPTION = "Add a note to an existing request"
 
 
 class Input:
@@ -38,7 +38,7 @@ class AddRequestNoteInput(insightconnect_plugin_runtime.Input):
     "description": {
       "type": "string",
       "title": "Description",
-      "description": "Note description in HTML format",
+      "description": "Note description (the content of the note) in HTML format",
       "order": 2
     },
     "mark_first_response": {

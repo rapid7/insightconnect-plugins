@@ -1,6 +1,6 @@
 # Description
 
-ManageEngine's Service Desk has the ability to centralize and capture reported issues, this allows security/IT admin to track and manage all incidents in an easy manner. The numerous help desk tickets raised are organized and tracked in the Requests module. The Requests module enables you to handle tickets promptly, assign tickets to technicians, merge similar requests, and so on
+ManageEngine's Service Desk has the ability to centralize and capture reported issues, allowing security and IT administrators to track and manage all incidents in an easy manner. The numerous help desk tickets raised are organized and tracked in the Requests module. The Requests module enables you to handle tickets promptly, assign tickets to technicians, merge similar requests, and so on.
 
 # Key Features
 
@@ -30,13 +30,15 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|Manage Engine Service Desk Technican's API key|None|EXAMPLE1-API2-KEY3-HDFS-48GS24WSA6GE|
 |sdp_base_url|string|None|True|Service Desk Plus Base URL|None|https://example.com|
+|ssl_verify|boolean|False|True|SSL verify|None|False|
 
 Example input:
 
 ```
 {
   "api_key": "EXAMPLE1-API2-KEY3-HDFS-48GS24WSA6GE",
-  "sdp_base_url": "http://me-sdeskplus.dev.example.com:8080"
+  "sdp_base_url": "http://me-sdeskplus.dev.example.com:8080",
+  "ssl_verify": false
 }
 ```
 
@@ -46,43 +48,42 @@ Example input:
 
 #### Add Request
 
-This action allows you to add new a request. Subject and requester parameters are obligatory, others are optional. In every parameter containing `ID` and `Name` fields please provide only one of them.
+This action allows you to add new a request. Subject and requester parameters are required, others are optional. In every parameter containing `ID` and `Name` fields please provide only one of them.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|assets|[]asset|None|False|Array of asset objects associated with this request|None|["{"name": "Software", "id": 4541563, "barcode": "test-barcode"}"]|
-|category|category|None|False|Category to which this request belongs|None|{"name": "Operating System", "id": 8}|
+|assets|[]asset|None|False|Array of asset objects associated with this request|None|["{"name": "Software", "barcode": "test-barcode"}"]|
+|category|category|None|False|Category to which this request belongs|None|{"name": "Operating System"}|
 |description|string|None|False|Description of this request|None|Example description|
 |email_ids_to_notify|[]string|None|False|Array of Email ids, which needs to be notified about the happenings of this request|None|["user@example.com"]|
-|group|group|None|False|The group to which the request belongs|None|{"name": "Network", "id": 2}|
-|impact|impact|None|False|Impact of this request|None|{"id": 1, "name": "High"}|
+|group|group|None|False|The group to which the request belongs|None|{"name": "Network"}|
+|impact|impact|None|False|Impact of this request|None|{"name": "High"}|
 |is_fcr|boolean|None|False|Boolean value indicating if the request has been marked as First Call Resolution|None|True|
-|item|item|None|False|Item of this request|None|{"name": "Install", "id": 1}|
-|level|level|None|False|Level of the request|None|{"name": "Tier 4", "id": 4}|
-|mode|mode|None|False|The mode in which this request is created|None|{"name": "Web Form", "id": 4}|
-|priority|priority|None|False|Priority of the request|None|{"name": "High", "id": 4}|
-|request_type|request_type|None|False|Type of this request|None|{"id": 1, "name" "Incident"}|
-|requester|user_input|None|True|The requester of the request|None|{"name": "John", "id": 7}|
-|service_category|service_category|None|False|Service category to which this request belongs|None|{"name": "User Management", "id": 8}|
-|site|site|None|False|Denotes the site to which this request belongs|None|{"name": "Custom Site", "id": 71}|
-|status|status|None|False|Indicates the current status of this request|None|{"name": "Open", "id": 2}|
-|subcategory|subcategory|None|False|Subcategory to which this request belongs|None|{"name": "Mac OS X", "id": 24}|
+|item|item|None|False|Item of this request|None|{"name": "Install"}|
+|level|level|None|False|Level of the request|None|{"name": "Tier 4"}|
+|mode|mode|None|False|The mode in which this request is created|None|{"name": "Web Form"}|
+|priority|priority|None|False|Priority of the request|None|{"name": "High"}|
+|request_type|request_type|None|False|Type of this request|None|{"name" "Incident"}|
+|requester|user_input|None|True|The requester of the request|None|{"name": "John"}|
+|service_category|service_category|None|False|Service category to which this request belongs|None|{"name": "User Management"}|
+|site|site|None|False|Denotes the site to which this request belongs|None|{"name": "Custom Site"}|
+|status|status|None|False|Indicates the current status of this request|None|{"name": "Open"}|
+|subcategory|subcategory|None|False|Subcategory to which this request belongs|None|{"name": "Mac OS X"}|
 |subject|string|None|True|Subject of this request|None|Need a Monitor|
-|technician|technician|None|False|The technician that was assigned to the request|None|{"name": "John", "id": 71}|
-|urgency|urgency|None|False|Urgency of the request|None|{"name": "Low", "id": 1}|
+|technician|technician|None|False|The technician that was assigned to the request|None|{"name": "John"}|
+|urgency|urgency|None|False|Urgency of the request|None|{"name": "Low"}|
 
 Example input:
 
 ```
 {
-  "request_parameters": {
-    "subject": "Install xyz",
-    "requester": {
-      "name": Mike"
-    }
+  "subject": "Install xyz",
+  "requester": {
+    "name": Mike"
   }
+}
 ```
 
 ##### Output
@@ -105,14 +106,14 @@ Example output:
 
 #### Add Request Note
 
-This action allows you to add a request note.
+Add a note to an existing request.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |add_to_linked_request|boolean|None|False|Whether to add the note to the linked requests|None|False|
-|description|string|None|True|Note description in HTML format|None|Need help|
+|description|string|None|True|Note description (the content of the note) in HTML format|None|Additional information required...|
 |mark_first_response|boolean|None|False|Whether to set the responded date of the request/ticket|None|True|
 |notify_technician|boolean|None|False|Whether to notify the technician or not|None|True|
 |request_id|integer|None|True|The id of the request|None|55|
@@ -123,7 +124,7 @@ Example input:
 ```
 {
   "add_to_linked_request": false,
-  "description": "Need help",
+  "description": "Additional information required...",
   "mark_first_response": true,
   "notify_technician": true,
   "request_id": 55,
@@ -153,7 +154,7 @@ Example output:
 
 #### Add Resolution
 
-This action allows you to add/update a resolution of the request.
+Add or update the resolution of a request.
 
 ##### Input
 
@@ -193,28 +194,26 @@ Example output:
 
 #### Assign Request
 
-This action allows you to assign a request to a technician or group. At least one input parameter (except Request ID) is required - Group or Technician. In every parameter containing `ID` and `Name` fields please provide only one of them.
+This action allows you to assign a request to a technician or group. Request ID is required, as well as at least one of Group or Technician. In every parameter containing `ID` and `Name` fields please provide only one or the other.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|group|group|None|False|The group to which the request belongs|None|{"name": "Network", "id": 2}|
+|group|group|None|False|The group to which the request belongs|None|{"name": "Network"}|
 |request_id|integer|None|True|The request id that should be assigned|None|27|
-|technician|technician|None|False|The technician that was assigned to the request|None|{"name": "John", "id": 71}|
+|technician|technician|None|False|The technician that was assigned to the request|None|{"name": "John"}|
 
 Example input:
 
 ```
 {
   "group": {
-    "name": "Network",
-    "id": 2
+    "name": "Network"
   },
   "request_id": 27,
   "technician": {
-    "name": "John",
-    "id": 71
+    "name": "John"
   }
 }
 ```
@@ -239,13 +238,13 @@ Example output:
 
 #### Close Request
 
-This action allows you to close a request.
+Close the given request.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|closure_code|closure_code|None|False|Closure code to add to the request|None|{"name": "Success", "id": 1}|
+|closure_code|closure_code|None|False|Closure code to add to the request|None|{"name": "Success"}|
 |closure_comments|string|None|False|The comments that should be added when closing the request|None|Reset the password solved the issue|
 |request_id|integer|None|True|The request id that should be closed|None|54|
 |requester_ack_comments|string|None|False|The requester comments|None|Mail fetching is up and running now|
@@ -256,8 +255,7 @@ Example input:
 ```
 {
   "closure_code": {
-    "name": "Success",
-    "id": 1
+    "name": "Success"
   },
   "closure_comments": "Reset the password solved the issue",
   "request_id": 54,
@@ -286,7 +284,7 @@ Example output:
 
 #### Delete Request
 
-This action lets you delete (move to trash) a request.
+Delete the given request (move it to the trash).
 
 ##### Input
 
@@ -322,7 +320,7 @@ Example output:
 
 #### Delete Request Note
 
-This action allows you to delete a request note.
+Delete a given request note on a specific request.
 
 ##### Input
 
@@ -360,44 +358,42 @@ Example output:
 
 #### Edit Request
 
-This action allows you to update the request by using the unique request ID. At least one parameter except Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one of them.
+This action allows you to update the request by using the unique request ID. At least one parameter other than Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one or the other.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|request_id|integer|None|True|The ID of a request to edit|None|54|
-|assets|[]asset|None|False|Array of asset objects associated with this request|None|["{"name": "Software", "id": 4541563, "barcode": "test-barcode"}"]|
-|category|category|None|False|Category to which this request belongs|None|{"name": "Operating System", "id": 8}|
+|assets|[]asset|None|False|Array of asset objects associated with this request|None|["{"name": "Software", "barcode": "test-barcode"}"]|
+|category|category|None|False|Category to which this request belongs|None|{"name": "Operating System"}|
 |description|string|None|False|Description of this request|None|Example description|
 |email_ids_to_notify|[]string|None|False|Array of Email ids, which needs to be notified about the happenings of this request|None|["user@example.com"]|
-|group|group|None|False|The group to which the request belongs|None|{"name": "Network", "id": 2}|
-|impact|impact|None|False|Impact of this request|None|{"id": 1, "name": "High"}|
+|group|group|None|False|The group to which the request belongs|None|{"name": "Network"}|
+|impact|impact|None|False|Impact of this request|None|{"name": "High"}|
 |is_fcr|boolean|None|False|Boolean value indicating if the request has been marked as First Call Resolution|None|True|
-|item|item|None|False|Item of this request|None|{"name": "Install", "id": 1}|
-|level|level|None|False|Level of the request|None|{"name": "Tier 4", "id": 4}|
-|mode|mode|None|False|The mode in which this request is created|None|{"name": "Web Form", "id": 4}|
-|priority|priority|None|False|Priority of the request|None|{"name": "High", "id": 4}|
-|request_type|request_type|None|False|Type of this request|None|{"id": 1, "name" "Incident"}|
-|requester|user_input|None|False|The requester of the request|None|{"name": "John", "id": 7}|
-|service_category|service_category|None|False|Service category to which this request belongs|None|{"name": "User Management", "id": 8}|
-|site|site|None|False|Denotes the site to which this request belongs|None|{"name": "Custom Site", "id": 71}|
-|status|status|None|False|Indicates the current status of this request|None|{"name": "Open", "id": 2}|
-|subcategory|subcategory|None|False|Subcategory to which this request belongs|None|{"name": "Mac OS X", "id": 24}|
+|item|item|None|False|Item of this request|None|{"name": "Install"}|
+|level|level|None|False|Level of the request|None|{"name": "Tier 4"}|
+|mode|mode|None|False|The mode in which this request is created|None|{"name": "Web Form"}|
+|priority|priority|None|False|Priority of the request|None|{"name": "High"}|
+|request_id|integer|None|True|The ID of a request to edit|None|54|
+|request_type|request_type|None|False|Type of this request|None|{"name" "Incident"}|
+|requester|user_input|None|False|The requester of the request|None|{"name": "John"}|
+|service_category|service_category|None|False|Service category to which this request belongs|None|{"name": "User Management"}|
+|site|site|None|False|Denotes the site to which this request belongs|None|{"name": "Custom Site"}|
+|status|status|None|False|Indicates the current status of this request|None|{"name": "Open"}|
+|subcategory|subcategory|None|False|Subcategory to which this request belongs|None|{"name": "Mac OS X"}|
 |subject|string|None|False|Subject of this request|None|Need a Monitor|
-|technician|technician|None|False|The technician that was assigned to the request|None|{"name": "John", "id": 71}|
-|urgency|urgency|None|False|Urgency of the request|None|{"name": "Low", "id": 1}|
+|technician|technician|None|False|The technician that was assigned to the request|None|{"name": "John"}|
+|urgency|urgency|None|False|Urgency of the request|None|{"name": "Low"}|
 
 Example input:
 
 ```
 {
   "request_id": 54,
-  "request_parameters": {
-    "subject": "Install xyz",
-    "requester": {
-      "name": Mike"
-    }
+  "subject": "Install xyz",
+  "requester": {
+    "name": Mike"
   }
 }
 ```
@@ -422,7 +418,7 @@ Example output:
 
 #### Edit Request Note
 
-This action allows you to update a note. At least one parameter except Request ID and Note ID is required.
+Update a note on the given request. At least one parameter other than Request ID and Note ID is required.
 
 ##### Input
 
@@ -470,7 +466,7 @@ Example output:
 
 #### Get List Request
 
-This action lets you view the details of all the requests.
+View the details of a list of requests matching a search.
 
 ##### Input
 
@@ -656,7 +652,7 @@ Example output:
 
 #### Get List Request Notes
 
-This action allows you to get all the notes.
+Get the list of all notes associated with the given request.
 
 ##### Input
 
@@ -721,7 +717,7 @@ Example output:
 
 #### Get Request
 
-This action allows you to view the request details by the unique request id.
+View the details of a request given the request id.
 
 ##### Input
 
@@ -834,7 +830,7 @@ Example output:
 
 #### Get Resolution
 
-This action allows you to get a resolution of the request.
+Get the resolution of the given request.
 
 ##### Input
 

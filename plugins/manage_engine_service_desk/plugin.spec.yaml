@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: manage_engine_service_desk
 title: Manage Engine Service Desk
-description: ManageEngine's Service Desk has the ability to centralize and capture reported issues, this allows security/IT admin to track and manage all incidents in an easy manner. The numerous help desk tickets raised are organized and tracked in the Requests module. The Requests module enables you to handle tickets promptly, assign tickets to technicians, merge similar requests, and so on
+description: ManageEngine's Service Desk has the ability to centralize and capture reported issues, allowing security and IT administrators to track and manage all incidents in an easy manner. The numerous help desk tickets raised are organized and tracked in the Requests module. The Requests module enables you to handle tickets promptly, assign tickets to technicians, merge similar requests, and so on
 version: 1.0.0
 supported_versions: ["ServiceDesk Plus 13008"]
 vendor: rapid7
@@ -516,11 +516,18 @@ connection:
     type: credential_secret_key
     required: true
     example: EXAMPLE1-API2-KEY3-HDFS-48GS24WSA6GE
+  ssl_verify:
+    title: SSL Verify
+    description: SSL verify
+    type: boolean
+    required: true
+    default: false
+    example: false
 
 actions:
   get_list_request:
     title: Get List Request
-    description: View the details of all the requests
+    description: View the details of a list of requests matching a search
     input:
       start_index:
         title: Start Index
@@ -574,7 +581,7 @@ actions:
          example: success
   get_request:
     title: Get Request
-    description: View the request details by the unique request id
+    description: View the details of a request given the request ID
     input:
       request_id:
         title: Request ID
@@ -603,7 +610,7 @@ actions:
         example: 2000
   add_request:
     title: Add Request
-    description: Add a new request. Subject and requester parameters are obligatory, others are optional. In every parameter containing `ID` and `Name` fields please provide only one of them
+    description: Add a new request. Subject and requester parameters are required, others are optional. In every parameter containing `ID` and `Name` fields please provide only one of them
     input:
       subject:
         title: Subject
@@ -624,7 +631,7 @@ actions:
         description: Array of asset objects associated with this request
         type: "[]asset"
         required: false
-        example: ['{"name": "Software", "id": 4541563, "barcode": "test-barcode"}']
+        example: ['{"name": "Software", "barcode": "test-barcode"}']
         order: 3
       email_ids_to_notify:
         title: Email IDs to Notify
@@ -645,92 +652,92 @@ actions:
         description: The requester of the request
         type: user_input
         required: true
-        example: '{"name": "John", "id": 7}'
+        example: '{"name": "John"}'
         order: 6
       request_type:
         title: Request Type
         description: Type of this request
         type: request_type
         required: false
-        example: '{"id": 1, "name" "Incident"}'
+        example: '{"name" "Incident"}'
       impact:
         title: Impact
         description: Impact of this request
         type: impact
         required: false
-        example: '{"id": 1, "name": "High"}'
+        example: '{"name": "High"}'
       status:
         title: Status
         description: Indicates the current status of this request
         type: status
         required: false
-        example: '{"name": "Open", "id": 2}'
+        example: '{"name": "Open"}'
       mode:
         title: Mode
         description: The mode in which this request is created
         type: mode
         required: false
-        example: '{"name": "Web Form", "id": 4}'
+        example: '{"name": "Web Form"}'
       level:
         title: Level
         description: Level of the request
         type: level
         required: false
-        example: '{"name": "Tier 4", "id": 4}'
+        example: '{"name": "Tier 4"}'
       urgency:
         title: Urgency
         description: Urgency of the request
         type: urgency
         required: false
-        example: '{"name": "Low", "id": 1}'
+        example: '{"name": "Low"}'
       priority:
         title: Priority
         description: Priority of the request
         type: priority
         required: false
-        example: '{"name": "High", "id": 4}'
+        example: '{"name": "High"}'
       service_category:
         title: Service Category
         description: Service category to which this request belongs
         type: service_category
         required: false
-        example: '{"name": "User Management", "id": 8}'
+        example: '{"name": "User Management"}'
       site:
         title: Site
         description: Denotes the site to which this request belongs
         type: site
         required: false
-        example: '{"name": "Custom Site", "id": 71}'
+        example: '{"name": "Custom Site"}'
       group:
         title: Group
         description: The group to which the request belongs
         type: group
         required: false
-        example: '{"name": "Network", "id": 2}'
+        example: '{"name": "Network"}'
       technician:
         title: Technician
         description: The technician that was assigned to the request
         type: technician
         required: false
-        example: '{"name": "John", "id": 71}'
+        example: '{"name": "John"}'
       category:
         title: Category
         description: Category to which this request belongs
         type: category
         required: false
-        example: '{"name": "Operating System", "id": 8}'
+        example: '{"name": "Operating System"}'
       subcategory:
         title: Subcategory
         description: Subcategory to which this request belongs
         type: subcategory
         required: false
-        example: '{"name": "Mac OS X", "id": 24}'
+        example: '{"name": "Mac OS X"}'
       item:
         title: Item
         description: Item of this request
         type: item
         required: false
-        example: '{"name": "Install", "id": 1}'
+        example: '{"name": "Install"}'
     output:
       request_id:
         title: Request ID
@@ -752,7 +759,7 @@ actions:
         example: 2000
   edit_request:
     title: Edit Request
-    description: Update the request by using the unique request ID. At least one parameter except Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one of them
+    description: Update the request by using the unique request ID. At least one parameter other than Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one or the other
     input:
       request_id:
         title: Request ID
@@ -780,7 +787,7 @@ actions:
         description: Array of asset objects associated with this request
         type: "[]asset"
         required: false
-        example: ['{"name": "Software", "id": 4541563, "barcode": "test-barcode"}']
+        example: ['{"name": "Software", "barcode": "test-barcode"}']
         order: 4
       email_ids_to_notify:
         title: Email IDs to Notify
@@ -801,92 +808,92 @@ actions:
         description: The requester of the request
         type: user_input
         required: false
-        example: '{"name": "John", "id": 7}'
+        example: '{"name": "John"}'
         order: 7
       request_type:
         title: Request Type
         description: Type of this request
         type: request_type
         required: false
-        example: '{"id": 1, "name" "Incident"}'
+        example: '{"name" "Incident"}'
       impact:
         title: Impact
         description: Impact of this request
         type: impact
         required: false
-        example: '{"id": 1, "name": "High"}'
+        example: '{"name": "High"}'
       status:
         title: Status
         description: Indicates the current status of this request
         type: status
         required: false
-        example: '{"name": "Open", "id": 2}'
+        example: '{"name": "Open"}'
       mode:
         title: Mode
         description: The mode in which this request is created
         type: mode
         required: false
-        example: '{"name": "Web Form", "id": 4}'
+        example: '{"name": "Web Form"}'
       level:
         title: Level
         description: Level of the request
         type: level
         required: false
-        example: '{"name": "Tier 4", "id": 4}'
+        example: '{"name": "Tier 4"}'
       urgency:
         title: Urgency
         description: Urgency of the request
         type: urgency
         required: false
-        example: '{"name": "Low", "id": 1}'
+        example: '{"name": "Low"}'
       priority:
         title: Priority
         description: Priority of the request
         type: priority
         required: false
-        example: '{"name": "High", "id": 4}'
+        example: '{"name": "High"}'
       service_category:
         title: Service Category
         description: Service category to which this request belongs
         type: service_category
         required: false
-        example: '{"name": "User Management", "id": 8}'
+        example: '{"name": "User Management"}'
       site:
         title: Site
         description: Denotes the site to which this request belongs
         type: site
         required: false
-        example: '{"name": "Custom Site", "id": 71}'
+        example: '{"name": "Custom Site"}'
       group:
         title: Group
         description: The group to which the request belongs
         type: group
         required: false
-        example: '{"name": "Network", "id": 2}'
+        example: '{"name": "Network"}'
       technician:
         title: Technician
         description: The technician that was assigned to the request
         type: technician
         required: false
-        example: '{"name": "John", "id": 71}'
+        example: '{"name": "John"}'
       category:
         title: Category
         description: Category to which this request belongs
         type: category
         required: false
-        example: '{"name": "Operating System", "id": 8}'
+        example: '{"name": "Operating System"}'
       subcategory:
         title: Subcategory
         description: Subcategory to which this request belongs
         type: subcategory
         required: false
-        example: '{"name": "Mac OS X", "id": 24}'
+        example: '{"name": "Mac OS X"}'
       item:
         title: Item
         description: Item of this request
         type: item
         required: false
-        example: '{"name": "Install", "id": 1}'
+        example: '{"name": "Install"}'
     output:
       request_id:
         title: Request ID
@@ -908,7 +915,7 @@ actions:
         example: 2000
   delete_request:
     title: Delete Request
-    description: Delete (move to trash) a request
+    description: Delete the given request (move it to the trash)
     input:
      request_id:
        title: Request ID
@@ -937,7 +944,7 @@ actions:
         example: 2000
   close_request:
     title: Close Request
-    description: Close a request
+    description: Close the given request
     input:
       request_id:
         title: Request ID
@@ -972,7 +979,7 @@ actions:
         description: Closure code to add to the request
         type: closure_code
         required: false
-        example: '{"name": "Success", "id": 1}'
+        example: '{"name": "Success"}'
     output:
       request_id:
         title: Request ID
@@ -994,7 +1001,7 @@ actions:
         example: 2000
   assign_request:
     title: Assign Request
-    description: Assign a request to a technician or group. At least one input parameter (except Request ID) is required - Group or Technician. In every parameter containing `ID` and `Name` fields please provide only one of them
+    description: Assign a request to a technician or group. Request ID is required, as well as at least one of Group or Technician. In every parameter containing `ID` and `Name` fields please provide only one or the other
     input:
       request_id:
         title: Request ID
@@ -1007,13 +1014,13 @@ actions:
         description: The group to which the request belongs
         type: group
         required: false
-        example: '{"name": "Network", "id": 2}'
+        example: '{"name": "Network"}'
       technician:
         title: Technician
         description: The technician that was assigned to the request
         type: technician
         required: false
-        example: '{"name": "John", "id": 71}'
+        example: '{"name": "John"}'
     output:
       request_id:
         title: Request ID
@@ -1064,7 +1071,7 @@ actions:
         example: 2000
   add_resolution:
     title: Add Resolution
-    description: Add/update a resolution of the request
+    description: Add or update the resolution of a request
     input:
       request_id:
         title: Request ID
@@ -1105,7 +1112,7 @@ actions:
         example: 2000
   get_resolution:
     title: Get Resolution
-    description: Get a resolution of the request
+    description: Get the resolution of the given request
     input:
       request_id:
         title: Request ID
@@ -1140,7 +1147,7 @@ actions:
         example: 2000
   add_request_note:
     title: Add Request Note
-    description: Add a request note
+    description: Add a note to an existing request
     input:
       request_id:
         title: Request ID
@@ -1150,10 +1157,10 @@ actions:
         example: 55
       description:
         title: Description
-        description: Note description in HTML format
+        description: Note description (the content of the note) in HTML format
         type: string
         required: true
-        example: Need help
+        example: Additional information required...
       show_to_requester:
         title: Show to Requester
         description: Whether to show the note to requester or not
@@ -1205,7 +1212,7 @@ actions:
         example: 2000
   edit_request_note:
     title: Edit Request Note
-    description: Update a request note. At least one parameter except Request ID and Note ID is required
+    description: Update a note on the given request. At least one parameter other than Request ID and Note ID is required
     input:
       request_id:
         title: Request ID
@@ -1270,7 +1277,7 @@ actions:
         example: 2000
   delete_request_note:
     title: Delete Request Note
-    description: Delete a request note
+    description: Delete a given request note on a specific request
     input:
       request_id:
         title: Request ID
@@ -1305,7 +1312,7 @@ actions:
         example: 2000
   get_list_request_notes:
     title: Get List Request Notes
-    description: Get all the request notes
+    description: Get the list of all notes associated with the given request
     input:
       request_id:
         title: Request ID
@@ -1325,7 +1332,7 @@ actions:
         description:  Notes assigned to the request
         type: "[]note"
         required: false
-        example: ['{"note_id": "312", "added_time": "Jul 8, 2022 02:02 AM", "added_by": {"name": "John", "id": "71"}}']
+        example: ['{"note_id": "312", "added_time": "Jul 8, 2022 02:02 AM", "added_by": {"name": "John"}']
       status:
         title: Status
         description: Status of the request

@@ -18,6 +18,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.api_client = ManageEngineServiceDeskAPI(
             api_key=params.get(Input.API_KEY).get("secretKey"),
             sdp_base_url=params.get(Input.SDP_BASE_URL),
+            ssl_verify=params.get(Input.SSL_VERIFY),
             logger=self.logger,
         )
 

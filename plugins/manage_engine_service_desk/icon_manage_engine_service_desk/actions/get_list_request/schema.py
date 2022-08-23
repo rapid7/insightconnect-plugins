@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "View the details of all the requests"
+    DESCRIPTION = "View the details of a list of requests matching a search"
 
 
 class Input:

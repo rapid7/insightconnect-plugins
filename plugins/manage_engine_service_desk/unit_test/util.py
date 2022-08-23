@@ -17,6 +17,7 @@ class Util:
         params = {
             Input.API_KEY: {"secretKey": "valid_api_key"},
             Input.SDP_BASE_URL: "http://me-sdeskplus.example.com:8080",
+            Input.SSL_VERIFY: True,
         }
         action.connection = Connection()
         action.connection.meta = "{}"
