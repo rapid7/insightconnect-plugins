@@ -338,7 +338,7 @@ This action extracts all Indicators of Compromise from a string or file.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |file|bytes|None|False|Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS|None|dXNlckBleGFtcGxlLmNvbSwgMTk4LjUxLjEwMC4xMDAgYW5kIDQ0ZDg4NjEyZmVhOGE4ZjM2ZGU4MmUxMjc4YWJiMDJmIGFyZSBJT0MgZXhhbXBsZXM=|
-|str|string|None|False|Input string|None|user@example.com, 198.51.100.100 and 44d88612fea8a8f36de82e1278abb02f are IOC examples||
+|str|string|None|False|Input string|None|user@example.com, 198.51.100.100 and 44d88612fea8a8f36de82e1278abb02f are IOC examples|
 
 Example input:
 
