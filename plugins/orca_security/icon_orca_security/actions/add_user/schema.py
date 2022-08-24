@@ -11,7 +11,7 @@ class Input:
     ALL_CLOUD_ACCOUNTS = "all_cloud_accounts"
     CLOUD_ACCOUNTS = "cloud_accounts"
     INVITE_USER_EMAIL = "invite_user_email"
-    ROLE_ID = "role_id"
+    ROLE = "role"
     SHOULD_SEND_EMAIL = "should_send_email"
     
 
@@ -46,10 +46,10 @@ class AddUserInput(insightconnect_plugin_runtime.Input):
       "description": "Email address of the user for whom the invitation will be created",
       "order": 1
     },
-    "role_id": {
+    "role": {
       "type": "string",
-      "title": "Role ID",
-      "description": "Role ID",
+      "title": "Role",
+      "description": "Role name or ID",
       "order": 2
     },
     "should_send_email": {
@@ -62,7 +62,7 @@ class AddUserInput(insightconnect_plugin_runtime.Input):
   "required": [
     "all_cloud_accounts",
     "invite_user_email",
-    "role_id",
+    "role",
     "should_send_email"
   ]
 }

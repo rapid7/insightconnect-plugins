@@ -22,3 +22,11 @@ class TestGetAlerts(TestCase):
     def test_get_alerts(self, mock_request, name, filters, limit, expected):
         actual = self.action.run({Input.FILTERS: filters, Input.LIMIT: limit})
         self.assertEqual(actual, expected)
+
+    @parameterized.expand(Util.load_parameters("get_alerts_bad").get("parameters"))
+    def test_get_alerts_bad(self, mock_request, name, filters, limit, cause, assistance, data):
+        with self.assertRaises(PluginException) as error:
+            self.action.run({Input.FILTERS: filters, Input.LIMIT: limit})
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)
+        self.assertEqual(error.exception.data, data)

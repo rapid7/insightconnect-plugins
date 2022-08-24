@@ -20,15 +20,32 @@ class TestAddUser(TestCase):
 
     @parameterized.expand(Util.load_parameters("add_user").get("parameters"))
     def test_add_user(
-        self, mock_request, name, email, role_id, all_cloud_accounts, cloud_accounts, should_send_email, expected
+        self, mock_request, name, email, role, all_cloud_accounts, cloud_accounts, should_send_email, expected
     ):
         actual = self.action.run(
             {
                 Input.INVITE_USER_EMAIL: email,
-                Input.ROLE_ID: role_id,
+                Input.ROLE: role,
                 Input.ALL_CLOUD_ACCOUNTS: all_cloud_accounts,
                 Input.CLOUD_ACCOUNTS: cloud_accounts,
                 Input.SHOULD_SEND_EMAIL: should_send_email,
             }
         )
         self.assertEqual(actual, expected)
+
+    @parameterized.expand(Util.load_parameters("add_user_bad").get("parameters"))
+    def test_add_user_bad(
+        self, mock_request, name, email, role, all_cloud_accounts, cloud_accounts, should_send_email, cause, assistance
+    ):
+        with self.assertRaises(PluginException) as error:
+            self.action.run(
+                {
+                    Input.INVITE_USER_EMAIL: email,
+                    Input.ROLE: role,
+                    Input.ALL_CLOUD_ACCOUNTS: all_cloud_accounts,
+                    Input.CLOUD_ACCOUNTS: cloud_accounts,
+                    Input.SHOULD_SEND_EMAIL: should_send_email,
+                }
+            )
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)

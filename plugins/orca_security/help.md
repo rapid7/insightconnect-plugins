@@ -86,7 +86,7 @@ This action is used to create an invitation to the organization for the specifie
 |all_cloud_accounts|boolean|None|True|Whether the user will have access to all cloud accounts|None|False|
 |cloud_accounts|[]string|None|False|A list of cloud accounts to which the user will have access|None|["test-account"]|
 |invite_user_email|string|None|True|Email address of the user for whom the invitation will be created|None|user@example.com|
-|role_id|string|None|True|Role ID|None|44d88612-fea8-a8f3-6de8-2e1278abb02f|
+|role|string|None|True|Role name or ID|None|44d88612-fea8-a8f3-6de8-2e1278abb02f|
 |should_send_email|boolean|None|True|Whether the email should be sent|None|True|
 
 Example input:
@@ -98,7 +98,7 @@ Example input:
     "test-account"
   ],
   "invite_user_email": "user@example.com",
-  "role_id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+  "role": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
   "should_send_email": true
 }
 ```

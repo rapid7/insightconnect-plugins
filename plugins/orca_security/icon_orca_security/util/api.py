@@ -14,6 +14,8 @@ from icon_orca_security.util.endpoints import (
     DOWNLOAD_MALICIOUS_FILE_ENDPOINT,
     ORGANIZATION_USERS_ENDPOINT,
     QUERY_ALERTS_ENDPOINT,
+    RBAC_ROLE_ENDPOINT,
+    RBAC_ROLES_ENDPOINT,
     UPDATE_ALERT_SEVERITY_ENDPOINT,
     UPDATE_ALERT_STATUS_ENDPOINT,
     USER_SESSION_ENDPOINT,
@@ -92,6 +94,12 @@ class OrcaSecurityAPI:
         return self.make_request(
             path=ORGANIZATION_USERS_ENDPOINT, method="DELETE", data=data, headers=self.get_headers()
         )
+
+    def get_roles(self, parameters: dict) -> dict:
+        return self.make_request(path=RBAC_ROLES_ENDPOINT, params=parameters, headers=self.get_headers())
+
+    def get_role_by_id(self, role_id: dict) -> dict:
+        return self.make_request(path=RBAC_ROLE_ENDPOINT.format(role_id=role_id), headers=self.get_headers())
 
     def make_request(  # noqa: C901
         self,

@@ -22,3 +22,11 @@ class TestDeleteUser(TestCase):
     def test_delete_user(self, mock_request, name, email, expected):
         actual = self.action.run({Input.DELETE_INVITE_EMAIL: email})
         self.assertEqual(actual, expected)
+
+    @parameterized.expand(Util.load_parameters("delete_user_bad").get("parameters"))
+    def test_delete_user_bad(self, mock_request, name, email, cause, assistance, data):
+        with self.assertRaises(PluginException) as error:
+            self.action.run({Input.DELETE_INVITE_EMAIL: email})
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)
+        self.assertEqual(error.exception.data, data)

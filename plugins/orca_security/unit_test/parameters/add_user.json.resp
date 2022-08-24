@@ -21,6 +21,17 @@
       {
         "status": "success"
       }
+    ],
+    [
+      "success3",
+      "user@example.com",
+      "viewer",
+      true,
+      [],
+      true,
+      {
+        "status": "success"
+      }
     ]
   ]
 }

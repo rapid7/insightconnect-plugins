@@ -26,8 +26,8 @@ class TestDownloadMaliciousFile(TestCase):
 
     @parameterized.expand(Util.load_parameters("download_malicious_file_bad").get("parameters"))
     def test_download_malicious_file_bad(self, mock_request, mock_get, name, alert_id, cause, assistance, data):
-        with self.assertRaises(PluginException) as e:
+        with self.assertRaises(PluginException) as error:
             self.action.run({Input.ALERT_ID: alert_id})
-        self.assertEqual(e.exception.cause, cause)
-        self.assertEqual(e.exception.assistance, assistance)
-        self.assertEqual(e.exception.data, data)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)
+        self.assertEqual(error.exception.data, data)

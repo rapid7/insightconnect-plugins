@@ -44,6 +44,12 @@ class Util:
                 self.status_code = status_code
                 self.text = ""
                 self.content = ""
+                if self.filename == "invalid_field":
+                    self.text = "severity field does not exist"
+                if self.filename == "invalid_email":
+                    self.text = "invalid user email"
+                if self.filename == "invitation_not_found":
+                    self.text = "there is not pending invite for user id invalid_user@example.com"
                 if self.filename == "not_found":
                     self.text = "alert_id orca-002 does not exist"
                 if self.filename == "asset_not_found":
@@ -62,6 +68,18 @@ class Util:
                     )
                 )
 
+        if kwargs.get("data") == {
+            "invite_user_email": "user",
+            "all_cloud_accounts": True,
+            "cloud_accounts": [],
+            "should_send_email": True,
+            "role_id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+        }:
+            return MockResponse("invalid_email", 400)
+        if kwargs.get("data") == {"delete_invite_email": "user"}:
+            return MockResponse("invalid_email", 400)
+        if kwargs.get("data") == {"delete_invite_email": "invalid_user@example.com"}:
+            return MockResponse("invitation_not_found", 400)
         if kwargs.get("url") == "https://example.com/api/user/session":
             return MockResponse("get_access_token", 200)
         if kwargs.get("url") == "https://example.com/api/alerts/orca-001/status/close":
@@ -114,6 +132,12 @@ class Util:
             return MockResponse("not_found", 404)
         if kwargs.get("url") == "https://example.com/api/alerts/orca-003/download_malicious_file":
             return MockResponse("file_not_found", 404)
+        if kwargs.get("url") == "https://example.com/api/rbac/roles/44d88612-fea8-a8f3-6de8-2e1278abb02f":
+            return MockResponse("get_role", 200)
+        if kwargs.get("url") == "https://example.com/api/rbac/roles/44d88612-fea8-a8f3-6de8-2e1278abb02e":
+            return MockResponse("get_role", 404)
+        if kwargs.get("url") == "https://example.com/api/rbac/roles":
+            return MockResponse("get_roles", 200)
         if kwargs.get("params") == {"state.severity": "hazardous", "limit": 1}:
             return MockResponse("get_alerts", 200)
         if kwargs.get("params") == {"state.severity": "hazardous", "limit": 20}:
@@ -122,6 +146,8 @@ class Util:
             return MockResponse("get_alerts", 200)
         if kwargs.get("params") == {"alert_labels": "empty", "limit": 1}:
             return MockResponse("get_alerts_empty", 200)
+        if kwargs.get("params") == {"severity": "hazardous", "limit": 20}:
+            return MockResponse("invalid_field", 400)
         if args and args[0] == "https://example.com/file":
             return MockResponse("file_content", 200)
         raise Exception("Not implemented")

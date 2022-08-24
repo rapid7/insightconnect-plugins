@@ -2,6 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import GetAssetsInput, GetAssetsOutput, Input, Output, Component
 
 # Custom imports below
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class GetAssets(insightconnect_plugin_runtime.Action):
@@ -12,6 +13,12 @@ class GetAssets(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         score = params.get("state_score")
+        internet_facing = params.get("internet_facing").lower()
+        if internet_facing and internet_facing not in ["true", "false"]:
+            raise PluginException(
+                cause=f"Invalid value '{internet_facing}' has been provided for the Internet Facing input.",
+                assistance="Acceptable values for this input are 'true' or 'false'.",
+            )
         parameters = {
             "asset_unique_id": params.get("asset_unique_id"),
             "asset_labels": params.get("asset_labels"),
@@ -20,7 +27,7 @@ class GetAssets(insightconnect_plugin_runtime.Action):
             "cloud_provider_id": params.get("cloud_provider_id"),
             "compute.regions": params.get("compute_regions"),
             "compute.vpcs": params.get("compute_vpcs"),
-            "internet_facing": params.get("internet_facing"),
+            "internet_facing": internet_facing,
             "state.score": score if score else "",
             "state.severity": params.get("state_severity"),
         }
