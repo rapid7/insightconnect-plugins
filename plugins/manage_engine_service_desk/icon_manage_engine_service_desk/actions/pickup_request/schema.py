@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Pick up a request in your name as a technician"
+    DESCRIPTION = "Pick up (assign) a given request in your name as a technician"
 
 
 class Input:

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Update the request by using the unique request ID. At least one parameter other than Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one or the other"
+    DESCRIPTION = "Update the given request. At least one parameter other than Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one or the other"
 
 
 class Input:

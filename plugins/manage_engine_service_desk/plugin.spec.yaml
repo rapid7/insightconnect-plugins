@@ -759,7 +759,7 @@ actions:
         example: 2000
   edit_request:
     title: Edit Request
-    description: Update the request by using the unique request ID. At least one parameter other than Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one or the other
+    description: Update the given request. At least one parameter other than Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one or the other
     input:
       request_id:
         title: Request ID
@@ -1042,7 +1042,7 @@ actions:
         example: 2000
   pickup_request:
     title: Pickup Request
-    description: Pick up a request in your name as a technician
+    description: Pick up (assign) a given request in your name as a technician
     input:
       request_id:
         title: Request ID

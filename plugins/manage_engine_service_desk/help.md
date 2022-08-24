@@ -48,7 +48,7 @@ Example input:
 
 #### Add Request
 
-This action allows you to add new a request. Subject and requester parameters are required, others are optional. In every parameter containing `ID` and `Name` fields please provide only one of them.
+Add new a request. Subject and requester parameters are required, others are optional. In every parameter containing `ID` and `Name` fields please provide only one of them.
 
 ##### Input
 
@@ -194,7 +194,7 @@ Example output:
 
 #### Assign Request
 
-This action allows you to assign a request to a technician or group. Request ID is required, as well as at least one of Group or Technician. In every parameter containing `ID` and `Name` fields please provide only one or the other.
+Assign a request to a technician or group. Request ID is required, as well as at least one of Group or Technician. In every parameter containing `ID` and `Name` fields please provide only one or the other.
 
 ##### Input
 
@@ -358,7 +358,7 @@ Example output:
 
 #### Edit Request
 
-This action allows you to update the request by using the unique request ID. At least one parameter other than Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one or the other.
+Update the given request. At least one parameter other than Request ID is required. In every parameter containing `ID` and `Name` fields please provide only one or the other.
 
 ##### Input
 
@@ -868,7 +868,7 @@ Example output:
 
 #### Pickup Request
 
-This action allows you to pick up a request in your name as a technician.
+Pick up (assign) a given request in your name as a technician.
 
 ##### Input
 
