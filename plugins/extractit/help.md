@@ -637,7 +637,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.0.5 - Updated error message in extractor.py | Updated help.md description | Updated URL extraction
+* 3.0.5 - Updated error message in extractor.py | Updated help.md description | Updated URL extraction | Fix issue with extracting dates from `.XLSX` files
 * 3.0.4 - Fix issue with extracting URLs from link query parameters
 * 3.0.3 - Remove duplicate date formats from action inputs
 * 3.0.2 - Fix issue where domains and URLs were not parsed correctly if top level domain contained uppercase | Fix issue where parts of URL were incorrectly recognized as domains if URL contained port
