@@ -30,7 +30,7 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|Manage Engine Service Desk Technican's API key|None|EXAMPLE1-API2-KEY3-HDFS-48GS24WSA6GE|
 |sdp_base_url|string|None|True|Service Desk Plus Base URL|None|https://example.com|
-|ssl_verify|boolean|False|True|SSL verify|None|False|
+|ssl_verify|boolean|True|True|SSL verify|None|True|
 
 Example input:
 
@@ -38,7 +38,7 @@ Example input:
 {
   "api_key": "EXAMPLE1-API2-KEY3-HDFS-48GS24WSA6GE",
   "sdp_base_url": "http://me-sdeskplus.dev.example.com:8080",
-  "ssl_verify": false
+  "ssl_verify": true
 }
 ```
 
@@ -48,7 +48,7 @@ Example input:
 
 #### Add Request
 
-Add new a request. Subject and requester parameters are required, others are optional. In every parameter containing `ID` and `Name` fields please provide only one of them.
+Add new a request. Subject and requester parameters are required, others are optional. In every parameter containing `ID` and `Name` fields please provide at least one of them.
 
 ##### Input
 

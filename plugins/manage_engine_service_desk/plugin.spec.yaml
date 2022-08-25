@@ -521,8 +521,8 @@ connection:
     description: SSL verify
     type: boolean
     required: true
-    default: false
-    example: false
+    default: true
+    example: true
 
 actions:
   get_list_request:
@@ -610,7 +610,7 @@ actions:
         example: 2000
   add_request:
     title: Add Request
-    description: Add a new request. Subject and requester parameters are required, others are optional. In every parameter containing `ID` and `Name` fields please provide only one of them
+    description: Add a new request. Subject and requester parameters are required, others are optional. In every parameter containing `ID` and `Name` fields please provide at least one of them
     input:
       subject:
         title: Subject
