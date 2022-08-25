@@ -1,0 +1,23 @@
+{
+  "response_status": {
+    "status_code": 2000,
+    "status": "success"
+  },
+  "resolution": {
+    "submitted_on": {
+      "display_value": "Aug 10, 2022 12:03 AM",
+      "value": "1660115008022"
+    },
+    "submitted_by": {
+      "email_id": null,
+      "phone": "1234455",
+      "name": "administrator",
+      "mobile": "1234567890",
+      "is_vipuser": false,
+      "id": "4",
+      "department": null
+    },
+    "resolution_attachments": [],
+    "content": "Get resolution"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "add_to_linked_request": true,
+  "description": "<p>Add request note</p><h1>Hello</h1>",
+  "mark_first_response": true,
+  "notify_technician": true,
+  "request_id": 200,
+  "show_to_requester": true
+}

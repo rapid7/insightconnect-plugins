@@ -1,0 +1,68 @@
+{
+  "request_id": 404,
+  "request_parameters": {
+    "subject": "Edit request",
+    "requester": {
+      "id": 4,
+      "is_vipuser": true,
+      "name": "John"
+    },
+    "assets": [
+      {
+        "name": "keyboardMC",
+        "id": 301
+      }
+    ],
+    "category": {
+      "id": 0,
+      "name": "Software"
+    },
+    "description": "dessssc",
+    "email_ids_to_notify": [
+      "test@example.com"
+    ],
+    "impact": {
+      "id": 2,
+      "name": "test-impact"
+    },
+    "is_fcr": false,
+    "level": {
+      "id": 0,
+      "name": "Tier 4"
+    },
+    "mode": {
+      "name": "Web Form"
+    },
+    "priority": {
+      "id": 1,
+      "name": ""
+    },
+    "request_type": {
+      "id": 0,
+      "name": "Incident"
+    },
+    "service_category": {
+      "id": 0,
+      "name": "User Management"
+    },
+    "site": {
+      "id": 0,
+      "name": "Test Site"
+    },
+    "status": {
+      "id": 2,
+      "name": ""
+    },
+    "subcategory": {
+      "id": 1,
+      "name": "MS Office"
+    },
+    "technician": {
+      "name": "administrator"
+    },
+    "urgency": {
+      "id": 0,
+      "name": "Urgent"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "closure_code": {
+    "id": 1,
+    "name": "failure"
+  },
+  "closure_comments": "Closing",
+  "request_id": 404,
+  "requester_ack_comments": "Request not found",
+  "requester_ack_resolution": true
+}
