@@ -1,0 +1,43 @@
+{
+  "note": {
+    "request": {
+      "subject": "Hejj",
+      "id": "200"
+    },
+    "last_updated_by": {
+      "email_id": null,
+      "phone": "1234455",
+      "name": "administrator",
+      "mobile": "1234567890",
+      "is_vipuser": false,
+      "id": "4",
+      "department": null
+    },
+    "added_time": {
+      "display_value": "Aug 9, 2022 08:07 AM",
+      "value": "1660057676069"
+    },
+    "has_attachments": false,
+    "attachments": [],
+    "last_updated_time": {
+      "display_value": "Aug 9, 2022 08:07 AM",
+      "value": "1660057676069"
+    },
+    "added_by": {
+      "email_id": null,
+      "phone": "1234455",
+      "name": "administrator",
+      "mobile": "1234567890",
+      "is_vipuser": false,
+      "id": "4",
+      "department": null
+    },
+    "show_to_requester": true,
+    "description": "<p>Add request note</p><h1>Hello</h1>",
+    "id": "337"
+  },
+  "response_status": {
+    "status_code": 2000,
+    "status": "success"
+  }
+}
