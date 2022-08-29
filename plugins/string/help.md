@@ -260,7 +260,7 @@ Example output:
 
 ```
 {
-  "lower": "lowercase this string"
+  "lower": "LOWERCASE THIS STRING"
 }
 ```
 
