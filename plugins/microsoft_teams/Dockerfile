@@ -31,6 +31,6 @@ RUN python setup.py build && python setup.py install
 
 # User to run plugin code. The two supported users are: root, nobody
 # Need root for CA bundle  
-USER root
+USER nobody
 
 ENTRYPOINT ["/usr/local/bin/icon_microsoft_teams"]
