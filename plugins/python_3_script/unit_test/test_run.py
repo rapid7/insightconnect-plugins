@@ -3,7 +3,7 @@ import os
 from unittest import TestCase
 from unittest.mock import patch
 
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
