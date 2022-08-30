@@ -23,7 +23,7 @@ def main():
             monkey.patch_all()
 
     import insightconnect_plugin_runtime
-    from komand_python_3_script import connection, actions, triggers
+    from icon_python_3_script import connection, actions, triggers
 
     class ICONPython3Script(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
@@ -38,7 +38,7 @@ def main():
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONPython3Script())
+    cli = insightconnect_plugin_runtime.CLI(ICONPython3Script())
     cli.run()
 
 
