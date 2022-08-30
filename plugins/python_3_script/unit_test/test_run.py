@@ -9,7 +9,7 @@ from parameterized import parameterized
 sys.path.append(os.path.abspath("../"))
 
 from unit_test.util import Util
-from komand_python_3_script.actions.run import Run
+from icon_python_3_script.actions.run import Run
 
 
 @patch.object(Run, "_exec_python_function", side_effect=Util.mock_exec_python_function)

@@ -1,5 +1,5 @@
-FROM komand/python-3-37-plugin:3
-LABEL organization=komand
+FROM rapid7/insightconnect-python-3-38-plugin:4
+LABEL organization=rapid7
 LABEL sdk=python
 LABEL type=plugin
 
@@ -26,4 +26,4 @@ RUN python setup.py build && python setup.py install
 # User to run plugin code. The two supported users are: root, nobody
 USER nobody
 
-ENTRYPOINT ["/usr/local/bin/komand_python_3_script"]
+ENTRYPOINT ["/usr/local/bin/icon_python_3_script"]

@@ -2,8 +2,8 @@ import json
 import logging
 import os
 
-from komand_python_3_script.connection import Connection
-from komand_python_3_script.actions.run.schema import Input
+from icon_python_3_script.connection import Connection
+from icon_python_3_script.actions.run.schema import Input
 
 
 class Util:
