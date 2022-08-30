@@ -18,10 +18,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         api_route = "api/now/"
         incident_table = "incident"
 
-        self.base_url = params.get(Input.URL, "")
-
-        if not self.base_url.endswith("/"):
-            self.base_url = f"{self.base_url}/"
+        self.base_url = f"https://{params.get(Input.INSTANCE, '')}.service-now.com/"
 
         username = params[Input.CLIENT_LOGIN].get("username", "")
         password = params[Input.CLIENT_LOGIN].get("password", "")
