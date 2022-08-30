@@ -133,6 +133,7 @@ If installation fails, try increasing the `Timeout` connection input to `900` (1
 # Version History
 
 * 4.0.0 - Add custom script credentials in Connection
+* 3.0.0 - Add custom credentials in Run action
 * 2.0.4 - Update help documentation for installing third-party modules
 * 2.0.3 - Update `docs_url` in plugin spec with a new link to [plugin setup guide](https://docs.rapid7.com/insightconnect/python-2-or-3-script/)
 * 2.0.2 - Add `docs_url` to plugin spec with link to [plugin setup guide](https://insightconnect.help.rapid7.com/docs/python-2-or-3-script)
