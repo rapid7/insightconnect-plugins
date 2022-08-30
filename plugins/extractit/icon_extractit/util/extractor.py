@@ -68,7 +68,7 @@ def _extract_dates_from_xlsx(input_file: Any) -> str:
     :param input_file: Opened in buffer xlsx file
     :type input_file: Any
 
-    :return: Str containing all the ęxtracted date and time values separated by space character
+    :return: Str containing all the extracted date and time values separated by space character
     :rtype: str
     """
 
