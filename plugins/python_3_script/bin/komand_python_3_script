@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
+    import insightconnect_plugin_runtime
     from komand_python_3_script import connection, actions, triggers
 
-    class ICONPython3Script(komand.Plugin):
+    class ICONPython3Script(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
