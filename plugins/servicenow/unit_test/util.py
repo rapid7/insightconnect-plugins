@@ -14,7 +14,7 @@ class Util:
             params = connect_params
         else:
             params = {
-                Input.URL: "https://rapid7.com",
+                Input.INSTANCE: "rapid7",
                 Input.CLIENT_LOGIN: {"username": "user1", "password": "mypassword"},
             }
         default_connection.connect(params)
@@ -49,24 +49,24 @@ class Util:
                 return json.loads(self.text)
 
         if kwargs["url"] in [
-            "https://rapid7.com/api/now/attachment/b259f4062d9f78f9ffdd6efd05c492c7/file",
-            "https://rapid7.com/api/now/attachment/52e4a8abb1b66fc04ba11001955e7dcb/file",
-            "https://rapid7.com/api/now/attachment/53e4a8abb1b66fc04ba11001955e7dcb/file",
+            "https://rapid7.service-now.com/api/now/attachment/b259f4062d9f78f9ffdd6efd05c492c7/file",
+            "https://rapid7.service-now.com/api/now/attachment/52e4a8abb1b66fc04ba11001955e7dcb/file",
+            "https://rapid7.service-now.com/api/now/attachment/53e4a8abb1b66fc04ba11001955e7dcb/file",
         ]:
             return MockResponse("get_attachment_file", 200, {})
         elif (
             kwargs["url"]
-            == "https://rapid7.com/api/now/attachment?sysparm_query=table_sys_id=3072d01d07a552f6d0ea83ef29c936be"
+            == "https://rapid7.service-now.com/api/now/attachment?sysparm_query=table_sys_id=3072d01d07a552f6d0ea83ef29c936be"
         ):
             return MockResponse("get_attachment_by_table_sys_id.json", 200)
         elif (
             kwargs["url"]
-            == "https://rapid7.com/api/now/attachment?sysparm_query=table_sys_id=51e4a8abb1b66fc04ba11001955e7dcb"
+            == "https://rapid7.service-now.com/api/now/attachment?sysparm_query=table_sys_id=51e4a8abb1b66fc04ba11001955e7dcb"
         ):
             return MockResponse("get_attachment_by_table_sys_id_many.json", 200)
         elif (
             kwargs["url"]
-            == "https://rapid7.com/api/now/attachment?sysparm_query=table_sys_id=c1565da4456c2df374793d471d6ae8dd"
+            == "https://rapid7.service-now.com/api/now/attachment?sysparm_query=table_sys_id=c1565da4456c2df374793d471d6ae8dd"
         ):
             return MockResponse("get_attachment_by_table_sys_id_empty.json", 200)
 
