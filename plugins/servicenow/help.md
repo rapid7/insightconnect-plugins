@@ -13,7 +13,7 @@ Note: This plugin affects only the underlying tables in a ServiceNow instance, n
 # Requirements
 
 * ServiceNow username and password
-* ServiceNow instance URL
+* ServiceNow instance name
 
 # Supported Product Versions
 
@@ -28,8 +28,8 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |client_login|credential_username_password|None|True|The ServiceNow username and password for basic authentication API interaction|None|{"username":"user1", "password":"mypassword"}|
+|instance|string|None|True|The instance of ServiceNow from the URL, e.g. https://{instance}.service-now.com|None|instance|
 |timeout|integer|30|False|The interval in seconds before abandoning an attempt to access ServiceNow|None|30|
-|url|string|None|True|The full URL for your instance of ServiceNow, e.g. https://instance.servicenow.com|None|https://instance.servicenow.com|
 
 Example input:
 
@@ -39,8 +39,8 @@ Example input:
     "username": "user1",
     "password": "mypassword"
   },
-  "timeout": 30,
-  "url": "https://instance.servicenow.com"
+  "instance": "instance",
+  "timeout": 30
 }
 ```
 
@@ -154,7 +154,9 @@ Example input:
 
 ```
 {
-  "additional_fields": "{"description": "incident description"}",
+  "additional_fields": {
+    "description": "incident description"
+  },
   "assigned_to": "user",
   "assignment_group": "Team Development Code Reviewers",
   "business_service": "All",
@@ -235,7 +237,7 @@ Example input:
 
 ```
 {
-  "system_id": "9de5069c5afe602b2ea0a04b66beb2c0"
+  "attachment_id": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 
@@ -670,7 +672,9 @@ Example input:
 
 ```
 {
-  "additional_fields": "{"description": "incident description"}",
+  "additional_fields": {
+    "description": "incident description"
+  },
   "assigned_to": "user",
   "assignment_group": "Recommendation Admin",
   "business_service": "All",
@@ -865,6 +869,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 7.0.0 - Cloud enabled | Changed connection input `URL` to `instance`
 * 6.0.1 - Fix base64 decoding in Put Incident Attachment action
 * 6.0.0 - Add additional file information in output for Get Attachments for an Incident
 * 5.2.0 - Add new action Get Attachments for an Incident | Add unit test for action Get Attachments for an Incident and Get Incident Attachment
