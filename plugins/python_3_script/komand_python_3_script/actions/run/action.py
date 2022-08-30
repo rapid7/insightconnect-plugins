@@ -18,7 +18,7 @@ class Run(komand.Action):
         self.logger.info(f"Input: (below)\n\n{params.get(Input.INPUT)}\n")
         func = params.get(Input.FUNCTION)
         self.logger.info(f"Function: (below)\n\n{func}\n")
-        func = self._add_credentials_to_function(func, params)
+        func = self._add_credentials_to_function(func)
 
         try:
             out = self._exec_python_function(func=func, params=params)
@@ -42,13 +42,18 @@ class Run(komand.Action):
         out = locals()[funcname](params.get(Input.INPUT))
         return out
 
-    @staticmethod
-    def _add_credentials_to_function(func: str, params: dict):
-        credentials_definition = [
-            f"\tusername='{params.get(Input.USERNAME_AND_PASSWORD).get('username')}'",
-            f"\tpassword='{params.get(Input.USERNAME_AND_PASSWORD).get('password')}'",
-            f"\tsecret_key='{params.get(Input.SECRET_KEY).get('secretKey')}'",
-        ]
+    def _add_credentials_to_function(self, func: str) -> str:
+        credentials_definition = []
+        username = self.connection.script_credentials.get("username")
+        password = self.connection.script_credentials.get("password")
+        secret_key = self.connection.script_credentials.get("secret_key")
+
+        if username:
+            credentials_definition.append(f"\tusername='{username}'")
+        if password:
+            credentials_definition.append(f"\tpassword='{password}'")
+        if secret_key:
+            credentials_definition.append(f"\tsecret_key='{secret_key}'")
 
         func_lines = func.split("\n")
         func_lines = [func_lines[0]] + credentials_definition + func_lines[1:]
