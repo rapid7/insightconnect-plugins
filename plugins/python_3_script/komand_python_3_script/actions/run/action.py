@@ -1,14 +1,14 @@
 import sys
 
-import komand
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 from .schema import RunOutput, RunInput, Component, Input
 
 sys.path.append("/var/cache/python_dependencies/lib/python3.7/site-packages")
 
 
-class Run(komand.Action):
+class Run(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="run", description=Component.DESCRIPTION, input=RunInput(), output=RunOutput()
