@@ -1,15 +1,15 @@
-import komand
-from .schema import PowershellStringInput, PowershellStringOutput, Input
+import insightconnect_plugin_runtime
+from .schema import PowershellStringInput, PowershellStringOutput, Input, Component
 
 # Custom imports below
-from komand_powershell.util import util
+from icon_powershell.util import util
 
 
-class PowershellString(komand.Action):
+class PowershellString(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="powershell_string",
-            description="Execute PowerShell script on a remote host or locally",
+            description=Component.DESCRIPTION,
             input=PowershellStringInput(),
             output=PowershellStringOutput(),
         )
