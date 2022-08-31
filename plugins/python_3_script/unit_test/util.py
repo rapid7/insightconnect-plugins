@@ -2,8 +2,8 @@ import json
 import logging
 import os
 
-from komand_python_3_script.connection import Connection
-from komand_python_3_script.actions.run.schema import Input
+from icon_python_3_script.connection import Connection
+from icon_python_3_script.actions.run.schema import Input
 
 
 class Util:
@@ -32,7 +32,10 @@ class Util:
 
     @staticmethod
     def mock_exec_python_function(*args, **kwargs):
-        function = kwargs.get("params", dict()).get(Input.FUNCTION, "").split("\n")
-        if "return {" in function[-1]:
-            return Util.read_file_to_dict(f"payloads/run.json.resp")
-        return None
+        if kwargs.get("params", {}).get("input") == {"some_input": "bad"}:
+            return None
+        if "username" in kwargs.get("func", ""):
+            return Util.read_file_to_dict(f"payloads/run_with_credentials.json.exp")
+        if "username" not in kwargs.get("func", ""):
+            return Util.read_file_to_dict(f"payloads/run_no_credentials.json.exp")
+        raise NotImplemented
