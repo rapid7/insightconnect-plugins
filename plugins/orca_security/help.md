@@ -28,14 +28,14 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|Orca Security API key|None|44d88612fea8a8f36de82e1278abb02f|
-|url|string|None|True|Orca Security URL|None|https://example.com|
+|region|string|US|True|The region for Orca Security|['US', 'EU', 'AU']|US|
 
 Example input:
 
 ```
 {
   "api_key": "44d88612fea8a8f36de82e1278abb02f",
-  "url": "https://example.com"
+  "region": "US"
 }
 ```
 

@@ -5,7 +5,7 @@ import json
 
 class Input:
     API_KEY = "api_key"
-    URL = "url"
+    REGION = "region"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -20,16 +20,22 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "Orca Security API key",
       "order": 2
     },
-    "url": {
+    "region": {
       "type": "string",
-      "title": "URL",
-      "description": "Orca Security URL",
+      "title": "Region",
+      "description": "The region for Orca Security",
+      "default": "US",
+      "enum": [
+        "US",
+        "EU",
+        "AU"
+      ],
       "order": 1
     }
   },
   "required": [
     "api_key",
-    "url"
+    "region"
   ],
   "definitions": {
     "credential_secret_key": {

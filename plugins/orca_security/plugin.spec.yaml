@@ -761,12 +761,17 @@ types:
       required: false
 
 connection:
-  url:
-    title: URL
-    description: Orca Security URL
+  region:
+    title: Region
+    description: The region for Orca Security
     type: string
+    enum:
+      - US
+      - EU
+      - AU
     required: true
-    example: "https://example.com"
+    default: US
+    example: US
   api_key:
     title: API Key
     type: credential_secret_key

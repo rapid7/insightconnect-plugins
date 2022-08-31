@@ -16,7 +16,7 @@ class Util:
         default_connection.logger = logging.getLogger("connection logger")
         params = {
             Input.API_KEY: {"secretKey": "api_key"},
-            Input.URL: "https://example.com",
+            Input.REGION: "EU",
         }
         default_connection.connect(params)
         action.connection = default_connection
@@ -80,63 +80,69 @@ class Util:
             return MockResponse("invalid_email", 400)
         if kwargs.get("data") == {"delete_invite_email": "invalid_user@example.com"}:
             return MockResponse("invitation_not_found", 400)
-        if kwargs.get("url") == "https://example.com/api/user/session":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/user/session":
             return MockResponse("get_access_token", 200)
-        if kwargs.get("url") == "https://example.com/api/alerts/orca-001/status/close":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/alerts/orca-001/status/close":
             return MockResponse("update_alert_status_close", 200)
-        if kwargs.get("url") == "https://example.com/api/alerts/orca-001/status/in_progress":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/alerts/orca-001/status/in_progress":
             return MockResponse("update_alert_status_in_progress", 200)
-        if kwargs.get("url") == "https://example.com/api/alerts/orca-001/status/dismiss":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/alerts/orca-001/status/dismiss":
             return MockResponse("update_alert_status_dismiss", 200)
-        if kwargs.get("url") == "https://example.com/api/alerts/orca-001/status/open":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/alerts/orca-001/status/open":
             return MockResponse("update_alert_status_open", 200)
-        if kwargs.get("url") == "https://example.com/api/alerts/orca-002/status/close":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/alerts/orca-002/status/close":
             return MockResponse("not_found", 500)
-        if kwargs.get("url") == "https://example.com/api/alerts/orca-001/severity":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/alerts/orca-001/severity":
             return MockResponse("update_alert_severity", 200)
-        if kwargs.get("url") == "https://example.com/api/alerts/orca-002/severity":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/alerts/orca-002/severity":
             return MockResponse("not_found", 400)
-        if kwargs.get("url") == "https://example.com/api/alerts/orca-001":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/alerts/orca-001":
             return MockResponse("get_alert", 200)
-        if kwargs.get("url") == "https://example.com/api/alerts/orca-002":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/alerts/orca-002":
             return MockResponse("not_found", 400)
-        if kwargs.get("url") == "https://example.com/api/assets/test-asset-123":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/assets/test-asset-123":
             return MockResponse("get_asset", 200)
-        if kwargs.get("url") == "https://example.com/api/assets/invalid_asset_id":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/assets/invalid_asset_id":
             return MockResponse("asset_not_found", 400)
-        if kwargs.get("url") == "https://example.com/api/assets" and not kwargs.get("params"):
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/assets" and not kwargs.get("params"):
             return MockResponse("get_assets", 200)
-        if kwargs.get("url") == "https://example.com/api/assets" and kwargs.get("params") == {
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/assets" and kwargs.get("params") == {
             "asset_unique_id": "invalid_asset_id"
         }:
             return MockResponse("get_assets_empty", 200)
-        if kwargs.get("url") == "https://example.com/api/assets" and kwargs.get("params"):
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/assets" and kwargs.get("params"):
             return MockResponse("get_assets", 200)
-        if kwargs.get("url") == "https://example.com/api/organization/users" and kwargs.get("method") == "POST":
+        if (
+            kwargs.get("url") == "https://app.eu.orcasecurity.io/api/organization/users"
+            and kwargs.get("method") == "POST"
+        ):
             return MockResponse("add_user", 200)
-        if kwargs.get("url") == "https://example.com/api/organization/users" and kwargs.get("method") == "DELETE":
+        if (
+            kwargs.get("url") == "https://app.eu.orcasecurity.io/api/organization/users"
+            and kwargs.get("method") == "DELETE"
+        ):
             return MockResponse("add_user", 200)
-        if kwargs.get("url") == "https://example.com/api/organization/users":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/organization/users":
             return MockResponse("get_users", 200)
-        if kwargs.get("url") == "https://example.com/api/alerts/orca-001/verify":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/alerts/orca-001/verify":
             return MockResponse("verify_alert", 200)
-        if kwargs.get("url") == "https://example.com/api/alerts/orca-002/verify":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/alerts/orca-002/verify":
             return MockResponse("not_found", 400)
-        if kwargs.get("url") == "https://example.com/api/query/alerts":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/query/alerts":
             return MockResponse("get_alerts", 200)
-        if kwargs.get("url") == "https://example.com/api/alerts/orca-001/download_malicious_file":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/alerts/orca-001/download_malicious_file":
             return MockResponse("download_malicious_file", 200)
-        if kwargs.get("url") == "https://example.com/api/alerts/orca-001/download_malicious_file":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/alerts/orca-001/download_malicious_file":
             return MockResponse("download_malicious_file", 200)
-        if kwargs.get("url") == "https://example.com/api/alerts/orca-002/download_malicious_file":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/alerts/orca-002/download_malicious_file":
             return MockResponse("not_found", 404)
-        if kwargs.get("url") == "https://example.com/api/alerts/orca-003/download_malicious_file":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/alerts/orca-003/download_malicious_file":
             return MockResponse("file_not_found", 404)
-        if kwargs.get("url") == "https://example.com/api/rbac/roles/44d88612-fea8-a8f3-6de8-2e1278abb02f":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/rbac/roles/44d88612-fea8-a8f3-6de8-2e1278abb02f":
             return MockResponse("get_role", 200)
-        if kwargs.get("url") == "https://example.com/api/rbac/roles/44d88612-fea8-a8f3-6de8-2e1278abb02e":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/rbac/roles/44d88612-fea8-a8f3-6de8-2e1278abb02e":
             return MockResponse("get_role", 404)
-        if kwargs.get("url") == "https://example.com/api/rbac/roles":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/rbac/roles":
             return MockResponse("get_roles", 200)
         if kwargs.get("params") == {"state.severity": "hazardous", "limit": 1}:
             return MockResponse("get_alerts", 200)
