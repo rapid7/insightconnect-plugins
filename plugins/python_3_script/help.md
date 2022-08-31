@@ -11,6 +11,8 @@
 
 The Python 3 Script plugin also allows you to load custom modules via its connection parameters.
 
+Also, this plugin allows you to provide additional credentials in the connection such as username, password, secret_key available in the script as Python variables (`username`, `password`, `secret_key`). 
+
 # Key Features
 
 * Run a Python 3 Script to securely orchestrate, automate, and respond to (almost) anything
@@ -32,6 +34,8 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |modules|[]string|None|False|List of third-party modules to install for use in the supplied Python script|None|["pandas", "numpy"]|
+|script_secret_key|credential_secret_key|None|False|Credential secret key available in script as python variable (`secret_key`)|None|{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}|
+|script_username_and_password|credential_username_password|None|False|Username and password available in script as python variables (`username`, `password`)|None|{"username": "user", "password": "mypassword"}|
 |timeout|integer|60|True|Timeout (in seconds) for installing third-party modules|None|120|
 
 Example input:
@@ -42,6 +46,13 @@ Example input:
     "pandas",
     "numpy"
   ],
+  "script_secret_key": {
+    "secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"
+  },
+  "script_username_and_password": {
+    "username": "user", 
+    "password": "mypassword"
+  }
   "timeout": 120
 }
 ```
@@ -70,10 +81,8 @@ This returns a string with key `hello` on the output object accessible at `{{Ste
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|----------------------------------------------------------------------------------------------|
-|function|python|def run(params={}):\n    return {}|True|Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output|None|def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username, password)\n\treturn {}|
+|function|python|def run(params={}):\n    return {}|True|Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` variables if defined in connection|None|def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username, password)\n\treturn {}|
 |input|object|None|False|Input object to be passed as `params={}` to the `run` function|None|{"some_input": "example input"}|
-|secret_key|credential_secret_key|None|False|Credential secret key available in script as python variable (`secret_key`)|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|username_and_password|credential_username_password|None|False|Username and password available in script as python variables (`username`, `password`)|None|{"username": "user", "password": "mypassword"}|
 
 Example input:
 
@@ -82,13 +91,6 @@ Example input:
   "function": "def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username, password)\n\treturn {'result1': 'example output 1', 'result2': 'example output 2'}",
   "input": {
     "some_input": "example input"
-  },
-  "secret_key": {
-    "secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"
-  },
-  "username_and_password": {
-    "username": "user", 
-    "password": "mypassword"
   }
 }
 ```
@@ -130,6 +132,7 @@ If installation fails, try increasing the `Timeout` connection input to `900` (1
 
 # Version History
 
+* 4.0.0 - Add custom script credentials in Connection
 * 3.0.0 - Add custom credentials in Run action
 * 2.0.4 - Update help documentation for installing third-party modules
 * 2.0.3 - Update `docs_url` in plugin spec with a new link to [plugin setup guide](https://docs.rapid7.com/insightconnect/python-2-or-3-script/)

@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Python 3 Script"
 Vendor = "rapid7"
-Version = "3.0.0"
+Version = "4.0.0"
 Description = "Run a Python 3 script"
 
 
@@ -22,10 +22,10 @@ def main():
             from gevent import monkey
             monkey.patch_all()
 
-    import komand
-    from komand_python_3_script import connection, actions, triggers
+    import insightconnect_plugin_runtime
+    from icon_python_3_script import connection, actions, triggers
 
-    class ICONPython3Script(komand.Plugin):
+    class ICONPython3Script(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
                 name=Name,
@@ -38,7 +38,7 @@ def main():
 
 
     """Run plugin"""
-    cli = komand.CLI(ICONPython3Script())
+    cli = insightconnect_plugin_runtime.CLI(ICONPython3Script())
     cli.run()
 
 
