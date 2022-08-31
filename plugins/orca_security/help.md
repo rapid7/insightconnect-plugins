@@ -798,6 +798,26 @@ Example input:
 }
 ```
 
+```
+{
+  "filters": {
+    "state.status": "open",
+    "alert_labels": "mitre: discovery"
+  },
+  "limit": 20
+}
+```
+
+```
+{
+  "filters": {
+    "data.title": "Classic Load Balancer (ELB) with public access",
+    "type": "aws_elb_with_public_access"
+  },
+  "limit": 20
+}
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -1285,7 +1305,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.0 - Initial plugin
+* 1.0.0 - Initial plugin | Add Get Assets, Get Asset by ID, Get Alerts, Get Alert by ID, Update Alert Severity, Update Alert Status, Verify Alert, Download Malicious File, Get Users, Add User and Delete User actions | Add New Alert trigger
 
 # Links
 
