@@ -4,8 +4,8 @@ import os
 
 from unittest.mock import Mock
 
-from komand_powershell.connection import Connection
-from komand_powershell.actions.execute_script.schema import Output
+from icon_powershell.connection import Connection
+from icon_powershell.actions.execute_script.schema import Output
 
 
 class Util:

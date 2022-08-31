@@ -1,17 +1,17 @@
 import base64
 
-import komand
+import insightconnect_plugin_runtime
 
-from .schema import ExecuteScriptInput, ExecuteScriptOutput, Input
-from komand_powershell.util import util
-from komand.exceptions import PluginException
+from .schema import Component, ExecuteScriptInput, ExecuteScriptOutput, Input
+from icon_powershell.util import util
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class ExecuteScript(komand.Action):
+class ExecuteScript(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="execute_script",
-            description="Execute PowerShell script on a remote host or locally",
+            description=Component.DESCRIPTION,
             input=ExecuteScriptInput(),
             output=ExecuteScriptOutput(),
         )

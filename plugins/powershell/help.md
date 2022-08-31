@@ -187,7 +187,7 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 
 # Version History
 
-* 3.0.0 - Move custom script credentials to Connection
+* 3.0.0 - Move custom script credentials to Connection | Update runtime to insightconnect_plugin_runtime
 * 2.2.0 - Add custom credentials in Execute Script and PowerShell String actions | Update plugin to allow unencrypted connections when connection is targeting port 5985
 * 2.1.4 - Update `docs_url` in plugin spec with a new link to [plugin setup guide](https://docs.rapid7.com/insightconnect/mass-delete-with-powershell/)
 * 2.1.3 - Correct spelling in help.md
