@@ -3,12 +3,12 @@ from setuptools import setup, find_packages
 
 
 setup(name="powershell-rapid7-plugin",
-      version="2.2.0",
+      version="3.0.0",
       description="Run a PowerShell script",
       author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
-      install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
-      scripts=['bin/komand_powershell']
+      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
+      scripts=['bin/icon_powershell']
       )
