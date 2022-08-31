@@ -4,7 +4,7 @@ products: [insightconnect]
 name: powershell
 title: PowerShell
 description: Run a PowerShell script
-version: 2.2.0
+version: 3.0.0
 supported_versions: ["PowerShell 6.1.2"]
 vendor: rapid7
 support: community
@@ -69,6 +69,18 @@ connection:
     type: kerberos
     required: false
     example: '{"kdc": "10.0.1.11", "domain": "EXAMPLE.domain"}'
+  script_secret_key:
+    title: Script Secret Key
+    description: Credential secret key available in script as powershell variable (`$secret_key`)
+    type: credential_secret_key
+    required: false
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
+  script_username_and_password:
+    title: Script Username and Password
+    description: Username and password available in script as powershell variables (`$username`, `$password`)
+    type: credential_username_password
+    required: false
+    example: '{"username": "user", "password": "mypassword"}'
 actions:
   execute_script:
     title: Execute Script
@@ -76,7 +88,7 @@ actions:
     input:
       script:
         title: Script
-        description: PowerShell script as base64
+        description: PowerShell script as base64. In this action you can use `$username`, `$password`, `$secret_key` variables if defined in connection
         type: bytes
         required: true
         example: R2V0LURhdGU=
@@ -94,18 +106,6 @@ actions:
         type: string
         required: false
         example: windows
-      secret_key:
-        title: Secret Key
-        description: Credential secret key available in script as PowerShell variable (`$secret_key`)
-        type: credential_secret_key
-        required: false
-        example: '{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}'
-      username_and_password:
-        title: Username and Password
-        description: Username and password available in script as PowerShell variables (`$username`, `$password`)
-        type: credential_username_password
-        required: false
-        example: '{"username": "user", "password": "mypassword"}'
     output:
       stdout:
         title: PowerShell Standard Output
@@ -118,14 +118,14 @@ actions:
         description: PowerShell standard error
         type: string
         required: false
-        example: #< CLIXML\r\n<Objs Version=\"1.1.0.1\" xmlns=\"http://schemas.microsoft.com/powershell/2004/04\"><Obj S=\"progress\" RefId=\"0\"><TN RefId=\"0\"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S=\"progress\" RefId=\"1\"><TNRef RefId=\"0\" /><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+        example: "Fatal error." 
   powershell_string:
     title: PowerShell String
     description: Execute PowerShell script in the form of a string
     input:
       script:
         title: Script
-        description: PowerShell script as a string
+        description: PowerShell script as a string. In this action you can use `$username`, `$password`, `$secret_key` variables if defined in connection
         type: string
         required: true
         example: Get-Date
@@ -143,18 +143,6 @@ actions:
         type: string
         required: false
         example: windows
-      secret_key:
-        title: Secret Key
-        description: Credential secret key available in script as PowerShell variable (`$secret_key`)
-        type: credential_secret_key
-        required: false
-        example: '{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}'
-      username_and_password:
-        title: Username and Password
-        description: Username and password available in script as PowerShell variables (`$username`, `$password`)
-        type: credential_username_password
-        required: false
-        example: '{"username": "user", "password": "mypassword"}'
     output:
       stdout:
         title: PowerShell Standard Output
@@ -167,5 +155,4 @@ actions:
         description: PowerShell standard error
         type: string
         required: false
-        example: #< CLIXML\r\n<Objs Version=\"1.1.0.1\" xmlns=\"http://schemas.microsoft.com/powershell/2004/04\"><Obj S=\"progress\" RefId=\"0\"><TN RefId=\"0\"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S=\"progress\" RefId=\"1\"><TNRef RefId=\"0\" /><MS><I64 N=\"SourceId\">1</I64><PR N=\"Record\"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
-
+        example: "Fatal error."

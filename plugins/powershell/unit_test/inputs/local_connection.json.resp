@@ -1,12 +1,15 @@
 {
-  "credentials": {
-    "username": "user",
-    "password": "passw"
-  },
   "auth": "None",
   "port": "",
   "kerberos": {
     "domain_name": "",
     "kdc": ""
+  },
+  "script_username_and_password": {
+    "password": "example_password",
+    "username": "example_user"
+  },
+  "script_secret_key": {
+    "secretKey": "s1e2c3r4e5t67k8e9y"
   }
 }
