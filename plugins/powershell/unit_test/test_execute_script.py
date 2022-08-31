@@ -14,13 +14,7 @@ from komand_powershell.actions.execute_script import ExecuteScript
 class TestExecuteScript(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.params = {
-            "address": "10.0.1.11",
-            "username_and_password": {"password": "example_password", "username": "example_user"},
-            "host_name": "windows",
-            "script": "R2V0LURhdGU=",
-            "secret_key": {"secretKey": "s1e2c3r4e5t67k8e9y"},
-        }
+        cls.params = {"address": "10.0.1.11", "host_name": "windows", "script": "R2V0LURhdGU="}
 
     @parameterized.expand(
         [
