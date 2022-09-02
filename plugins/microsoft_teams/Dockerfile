@@ -7,15 +7,9 @@ LABEL sdk=python
 # Add any custom package dependencies here
 # NOTE: Add pip packages to requirements.txt
 
-# Need gcc for maya
-RUN apk add --no-cache --virtual .build-deps \
-                                        make \
-                                        gcc \
-                                        libc-dev \
-                                        libffi-dev \
-                                        openssl-dev \
-                                        libxml2-dev \
-                                        libxslt-dev
+# Add any custom package dependencies here. Can not be included for cloud plugins
+# NOTE: Add pip packages to requirements.txt
+
 # End package dependencies
 
 # Add source code
