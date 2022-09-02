@@ -24,20 +24,13 @@ from icon_orca_security.util.endpoints import (
 
 
 class OrcaSecurityAPI:
-    def __init__(self, url: str, api_key: str, logger):
+    def __init__(self, url: str, api_token: str, logger):
         self.base_url = f"{self.split_url(url)}/api"
-        self.api_key = api_key
+        self._api_token = api_token
         self.logger = logger
 
-    def get_access_token(self) -> str:
-        return (
-            self.make_request(path=USER_SESSION_ENDPOINT, method="POST", data={"security_token": self.api_key})
-            .get("jwt", {})
-            .get("access")
-        )
-
     def get_headers(self) -> dict:
-        return {"accept": "application/json", "Authorization": f"Bearer {self.get_access_token()}"}
+        return {"accept": "application/json", "Authorization": f"Token {self._api_token}"}
 
     def get_asset_by_id(self, asset_id: str) -> dict:
         return self.make_request(path=ASSET_ENDPOINT.format(asset_id=asset_id), headers=self.get_headers())
@@ -109,7 +102,7 @@ class OrcaSecurityAPI:
         json_data: dict = None,
         data: dict = None,
         headers: dict = None,
-    ) -> requests.Response:
+    ) -> dict:
         try:
             response = requests.request(
                 method=method.upper(),

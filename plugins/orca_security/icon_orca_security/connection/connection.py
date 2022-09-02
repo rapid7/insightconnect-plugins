@@ -14,7 +14,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
         base_url = f"https://app.{params.get(Input.REGION).lower()}.orcasecurity.io"
-        self.api = OrcaSecurityAPI(base_url, params.get(Input.API_KEY).get("secretKey"), self.logger)
+        self.api = OrcaSecurityAPI(base_url, params.get(Input.API_TOKEN).get("secretKey"), self.logger)
 
     def test(self):
         try:

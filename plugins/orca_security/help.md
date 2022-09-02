@@ -12,7 +12,7 @@ Orca's agentless, cloud-native security and compliance platform detects, monitor
 
 # Requirements
 
-* Orca Security API Key
+* Orca Security API Token generated using [this instruction](https://docs.orcasecurity.io/docs/create-a-token-for-api-usage)
 * Administrator privileges to use Get Users, Add User and Delete User actions
 
 # Supported Product Versions
@@ -27,14 +27,14 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|Orca Security API key|None|44d88612fea8a8f36de82e1278abb02f|
+|api_token|credential_secret_key|None|True|Orca Security API Token|None|44d88612fea8a8f36de82e1278abb02f|
 |region|string|US|True|The region for Orca Security|['US', 'EU', 'AU']|US|
 
 Example input:
 
 ```
 {
-  "api_key": "44d88612fea8a8f36de82e1278abb02f",
+  "api_token": "44d88612fea8a8f36de82e1278abb02f",
   "region": "US"
 }
 ```

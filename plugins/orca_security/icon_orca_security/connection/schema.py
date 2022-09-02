@@ -4,7 +4,7 @@ import json
 
 
 class Input:
-    API_KEY = "api_key"
+    API_TOKEN = "api_token"
     REGION = "region"
     
 
@@ -14,10 +14,10 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "api_key": {
+    "api_token": {
       "$ref": "#/definitions/credential_secret_key",
-      "title": "API Key",
-      "description": "Orca Security API key",
+      "title": "API Token",
+      "description": "Orca Security API Token",
       "order": 2
     },
     "region": {
@@ -34,7 +34,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "api_key",
+    "api_token",
     "region"
   ],
   "definitions": {

@@ -15,7 +15,7 @@ class Util:
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
         params = {
-            Input.API_KEY: {"secretKey": "api_key"},
+            Input.API_TOKEN: {"secretKey": "api_token"},
             Input.REGION: "EU",
         }
         default_connection.connect(params)

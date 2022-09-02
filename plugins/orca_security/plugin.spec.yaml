@@ -772,10 +772,10 @@ connection:
     required: true
     default: US
     example: US
-  api_key:
-    title: API Key
+  api_token:
+    title: API Token
     type: credential_secret_key
-    description: Orca Security API key
+    description: Orca Security API Token
     required: true
     example: 44d88612fea8a8f36de82e1278abb02f
 
