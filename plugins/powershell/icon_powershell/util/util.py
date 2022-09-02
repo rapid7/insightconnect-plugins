@@ -2,8 +2,9 @@ import winrm
 import base64
 import subprocess  # noqa: B404
 
-import komand
-from komand.exceptions import PluginException
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+from icon_powershell.actions.powershell_string.schema import Input
 
 DECODING_TYPE = "utf-8"
 
@@ -19,7 +20,7 @@ class FixWinrmSession(winrm.Session):
 
 def run_powershell_script(
     auth: str,
-    action: komand.Action,
+    action: insightconnect_plugin_runtime.Action,
     host_ip: str,
     kdc: str,
     domain: str,
@@ -82,7 +83,7 @@ def run_powershell_script(
     return {"stdout": stdout, "stderr": stderr}
 
 
-def run_script_locally(action: komand.Action, powershell_script: str) -> dict:
+def run_script_locally(action: insightconnect_plugin_runtime.Action, powershell_script: str) -> dict:
     action.logger.info("Running on local VM")
     action.logger.debug("PowerShell script: " + powershell_script)
     with subprocess.Popen(
@@ -106,15 +107,20 @@ def run_script_locally(action: komand.Action, powershell_script: str) -> dict:
 
 
 def run_script_using_ntlm(
-    action: komand.Action, host_ip: str, powershell_script: str, username: str, password: str, port: int
+    action: insightconnect_plugin_runtime.Action,
+    host_ip: str,
+    powershell_script: str,
+    username: str,
+    password: str,
+    port: int,
 ) -> dict:
     # Adds needed https and port number to host IP
     action.logger.info("Running a NTLM connection")
     host_connection = f"https://{host_ip}:{port}/wsman"
     action.logger.debug("Host Connection: " + host_connection)
     action.logger.debug("PowerShell script: " + powershell_script)
-
     powershell_session = FixWinrmSession(host_connection, auth=(username, password), transport="ntlm")
+
     # Forces the Protocol to not fail with self signed certs
     powershell_session.protocol = winrm.Protocol(
         endpoint=host_connection,
@@ -131,8 +137,14 @@ def run_script_using_ntlm(
 
 
 def run_script_using_credssp(
-    action: komand.Action, host_ip: str, powershell_script: str, username: str, password: str, port: int
+    action: insightconnect_plugin_runtime.Action,
+    host_ip: str,
+    powershell_script: str,
+    username: str,
+    password: str,
+    port: int,
 ) -> dict:
+
     # Adds needed https and port number to host IP
     action.logger.info("Running a CredSSP connection")
     host_connection = f"https://{host_ip}:{port}/wsman"
@@ -140,6 +152,7 @@ def run_script_using_credssp(
     action.logger.debug("PowerShell script: " + powershell_script)
 
     powershell_session = FixWinrmSession(host_connection, auth=(username, password), transport="credssp")
+
     # Forces the Protocol to not fail with self signed certs
     powershell_session.protocol = winrm.Protocol(
         endpoint=host_connection,
@@ -156,7 +169,7 @@ def run_script_using_credssp(
 
 
 def run_script_using_kerberos(
-    action: komand.Action,
+    action: insightconnect_plugin_runtime.Action,
     host_ip: str,
     kdc: str,
     domain: str,
@@ -190,7 +203,7 @@ def run_script_using_kerberos(
 
 
 def configure_machine_for_kerberos_connection(
-    action: komand.Action,
+    action: insightconnect_plugin_runtime.Action,
     domain: str,
     host_ip: str,
     host_name: str,
@@ -242,7 +255,6 @@ def configure_machine_for_kerberos_connection(
     # DNS info so the plugin knows where to find the domain
     with open("/etc/resolv.conf", "w", encoding="utf-8") as f:
         f.write(dns)
-    # Joins Komand to domain
     realm = f"""echo '{password}' | realm --install=/ join --user={username} {domain}"""
     response = subprocess.Popen(realm, shell="true", stdout=subprocess.PIPE, stderr=subprocess.PIPE)  # noqa: B602
     (stdout, stderr) = response.communicate()
@@ -255,7 +267,9 @@ def configure_machine_for_kerberos_connection(
         f.write("\r\n" + host_ip + " " + host_name)
 
 
-def run_powershell_session(action: komand.Action, powershell_script: str, powershell_session: winrm.Session) -> tuple:
+def run_powershell_session(
+    action: insightconnect_plugin_runtime.Action, powershell_script: str, powershell_session: winrm.Session
+) -> tuple:
     run_script = powershell_session.run_ps(powershell_script)
     exit_code = run_script.status_code
     error_value = run_script.std_err
@@ -273,10 +287,17 @@ def run_powershell_session(action: komand.Action, powershell_script: str, powers
     return error_value, output
 
 
-def add_credentials_to_script(powershell_script: str, params: dict) -> dict:
-    powershell_credentials = (
-        f"$username = '{params.get('username_and_password', {}).get('username')}'\n"
-        f"$password = '{params.get('username_and_password', {}).get('password')}' | ConvertTo-SecureString -asPlainText -Force\n"
-        f"$secret_key = '{params.get('secret_key', {}).get('secretKey')}'\n"
-    )
-    return powershell_credentials + powershell_script
+def add_credentials_to_script(powershell_script: str, credentials: dict) -> str:
+    credentials_definition = ""
+    username = credentials.get("username")
+    password = credentials.get("password")
+    secret_key = credentials.get("secret_key")
+
+    if username:
+        credentials_definition += f"$username = '{username}'\n"
+    if password:
+        credentials_definition += f"$password = '{password}' | ConvertTo-SecureString -asPlainText -Force\n"
+    if secret_key:
+        credentials_definition += f"$secret_key = '{secret_key}'\n"
+
+    return credentials_definition + powershell_script
