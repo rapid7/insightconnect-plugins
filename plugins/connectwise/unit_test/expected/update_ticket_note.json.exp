@@ -1,0 +1,28 @@
+{
+  "ticket_note": {
+    "id": 2000,
+    "ticketId": 200,
+    "text": "update ticket note",
+    "detailDescriptionFlag": false,
+    "internalAnalysisFlag": true,
+    "resolutionFlag": false,
+    "issueFlag": false,
+    "member": {
+      "id": 637,
+      "identifier": "user",
+      "name": "user",
+      "_info": {
+        "member_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/637",
+        "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/637/image?lm=2022-08-03T19:37:23Z"
+      }
+    },
+    "dateCreated": "2022-09-01T08:59:27Z",
+    "createdBy": "user",
+    "internalFlag": true,
+    "externalFlag": true,
+    "_info": {
+      "lastUpdated": "2022-09-20T07:20:16Z",
+      "updatedBy": "user"
+    }
+  }
+}
