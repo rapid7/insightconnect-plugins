@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "HTTP Requests"
 Vendor = "rapid7"
-Version = "5.0.3"
+Version = "5.1.0"
 Description = "The HTTP Requests plugin to make it easy to integrate with RESTful services"
 
 

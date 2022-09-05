@@ -4,10 +4,10 @@ products: [insightconnect]
 name: rest
 title: HTTP Requests
 description: The HTTP Requests plugin to make it easy to integrate with RESTful services
-version: 5.0.3
+version: 5.1.0
 vendor: rapid7
 support: community
-supported_versions: ["2022-06-15"]
+supported_versions: ["2022-09-05"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rest
@@ -97,6 +97,12 @@ actions:
         type: object
         required: false
         example: '{"Host": "rapid7.com"}'
+      body:
+        title: Body
+        description: Value to be used in the GET request body
+        type: object
+        required: false
+        example: '{"foo": "bar"}'
     output:
       body_object:
         title: Body Object

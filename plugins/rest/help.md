@@ -13,7 +13,7 @@ This plugin is often used to integrate with ad-hoc 3rd party API's in a workflow
 
 # Supported Product Versions
 
-* 2022-06-15
+* 2022-09-05
 
 # Documentation
 
@@ -327,6 +327,7 @@ This action is used to make a GET request.
 |----|----|-------|--------|-----------|----|-------|
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
+|body|object|None|False|Value to be used in the GET request body|None|{"foo": "bar"}|
 
 Example input:
 
@@ -334,6 +335,9 @@ Example input:
 {
   "headers": {
     "Host": "rapid7.com"
+  },
+  "body: {
+    "foo": "bar"
   },
   "route": "/org/users"
 }
@@ -458,6 +462,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
+* 5.1.0 - A support for Get with Body | Add SSL Support | Add Microsoft Graph API Support
 * 5.0.3 - POST supports x-www-form-urlencoded | PATCH to now take in an array of objects
 * 5.0.2 - Fix issue with JSON data parser for PATCH request
 * 5.0.1 - Update to make 'No Authentication' the default connection type

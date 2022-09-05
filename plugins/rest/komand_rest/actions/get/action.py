@@ -13,7 +13,10 @@ class Get(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         response = self.connection.api.call_api(
-            method="GET", path=params.get(Input.ROUTE), headers=params.get(Input.HEADERS, {})
+            method="GET",
+            path=params.get(Input.ROUTE),
+            headers=params.get(Input.HEADERS, {}),
+            data=params.get(Input.BODY)
         )
 
         return {
