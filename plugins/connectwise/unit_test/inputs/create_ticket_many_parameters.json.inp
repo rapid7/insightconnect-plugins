@@ -1,0 +1,65 @@
+{
+  "summary": "create_ticket_many_parameters",
+  "initialDescription": "Some initial description",
+  "board": {
+    "name": "Network Security - South"
+  },
+  "company_id": 19298,
+  "department": {
+    "name": "Engineering"
+  },
+  "location": {
+    "id": 11
+  },
+  "status": {
+    "name": "In Progress"
+  },
+  "priority": {
+    "name": "Priority 3 - Medium"
+  },
+  "severity": "Medium",
+  "impact": "Low",
+  "team": {
+    "name": "Network Security"
+  },
+  "type": {
+    "id": 248
+  },
+  "subtype": {
+    "name": "Active Directory"
+  },
+  "contact": {
+    "id": 17754
+  },
+  "site": {
+    "name": "Main - Catchall"
+  },
+  "addressLine1": "address line 1",
+  "addressLine2": "address line 2",
+  "city": "London",
+  "zip": "111111",
+  "country": {
+    "name": "Great Britain"
+  },
+  "owner": {
+    "id": 638
+  },
+  "estimatedStartDate": "2022-09-01T08:51:01Z",
+  "requiredDate": "2022-09-30T08:51:01Z",
+  "agreement": {
+    "name": "Internal"
+  },
+  "serviceLocation": {
+    "id": 4
+  },
+  "source": {
+    "name": "Automate"
+  },
+  "budgetHours": 10.5,
+  "automaticEmailContactFlag": true,
+  "automaticEmailResourceFlag": true,
+  "automaticEmailCcFlag": true,
+  "automaticEmailCc": "user@example.com",
+  "predecessorType": "Ticket",
+  "predecessorId": 945312
+}
