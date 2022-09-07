@@ -1,10 +1,13 @@
 import json
+import os.path
 from logging import Logger
 
 from urllib.parse import urlparse, urlsplit, urlunsplit, urlencode
 from typing import Dict, Any, Union
+import base64
 
 import requests
+import tempfile
 from insightconnect_plugin_runtime.exceptions import PluginException
 from requests import Response
 from requests.auth import HTTPBasicAuth, HTTPDigestAuth
@@ -96,14 +99,23 @@ class RestAPI(object):
     CUSTOM_SECRET_INPUT = "CUSTOM_SECRET_INPUT"  # noqa: B105
 
     def __init__(
-        self, url: str, logger: Logger, ssl_verify: bool, default_headers: dict = None, fail_on_error: bool = True
+        self,
+        url: str,
+        logger: Logger,
+        ssl_verify: bool,
+        default_headers: dict = None,
+        fail_on_error: bool = True,
+        certificate = None,
+        key = None,
     ):
         self.url = url
         self.logger = logger
         self.ssl_verify = ssl_verify
         self.auth = None
         self.default_headers = default_headers
-        self.fail_on_error = fail_on_error
+        self.fail_on_error = fail_on_error,
+        self.certificate = certificate
+        self.key = key
 
     def with_credentials(
         self, authentication_type: str, username: str = None, password: str = None, secret_key: str = None
@@ -170,15 +182,28 @@ class RestAPI(object):
             elif data:
                 data_string = json.dumps(data)
 
-            response = requests.request(
-                method,
-                url_path_join(self.url, path),
-                data=data_string,
-                json=json_data,
-                headers=Common.merge_dicts(self.default_headers, headers or {}),
-                auth=self.auth,
-                verify=self.ssl_verify,
-            )
+            request_params = {
+                "method": method,
+                "url": url_path_join(self.url, path),
+                "data": data_string,
+                "json": json_data,
+                "headers": Common.merge_dicts(self.default_headers, headers or {}),
+                "auth": self.auth,
+                "verify": self.ssl_verify,
+            }
+
+            if self.certificate and self.key:
+                file_path = tempfile.mkdtemp() + "/"
+                for file in [self.certificate, self.key]:
+                    with open(file_path + file.get("filename"), "wb") as new_file:
+                        base64_decoded = base64.b64decode(file.get("content"))
+                        new_file.write(base64_decoded)
+                request_params["cert"] = (
+                    file_path + self.certificate.get("filename"),
+                    file_path + self.key.get("filename")
+                )
+
+            response = requests.request(**request_params)
             if not self.fail_on_error:
                 return response
 

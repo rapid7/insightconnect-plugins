@@ -7,8 +7,10 @@ class Input:
     AUTHENTICATION_TYPE = "authentication_type"
     BASE_URL = "base_url"
     BASIC_AUTH_CREDENTIALS = "basic_auth_credentials"
+    CERTIFICATE = "certificate"
     DEFAULT_HEADERS = "default_headers"
     FAIL_ON_HTTP_ERRORS = "fail_on_http_errors"
+    KEY = "key"
     SECRET = "secret"
     SSL_VERIFY = "ssl_verify"
     
@@ -46,6 +48,12 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "$ref": "#/definitions/credential_username_password",
       "title": "Basic Auth Credentials",
       "description": "Username and password. Provide if you choose Basic Auth or Digest Auth authentication type",
+      "order": 8
+    },
+    "certificate": {
+      "$ref": "#/definitions/file",
+      "title": "Certificate",
+      "description": "Certificate for mutual TLS",
       "order": 6
     },
     "default_headers": {
@@ -59,6 +67,12 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "Fail on HTTP Errors",
       "description": "Indicates whether the plugin should fail on standard HTTP errors (4xx-5xx)",
       "default": true,
+      "order": 9
+    },
+    "key": {
+      "$ref": "#/definitions/file",
+      "title": "Key",
+      "description": "Private key for mutual TLS",
       "order": 7
     },
     "secret": {
@@ -123,6 +137,25 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
         "username",
         "password"
       ]
+    },
+    "file": {
+      "id": "file",
+      "type": "object",
+      "title": "File",
+      "description": "File Object",
+      "properties": {
+        "content": {
+          "type": "string",
+          "title": "Content",
+          "description": "File contents",
+          "format": "bytes"
+        },
+        "filename": {
+          "type": "string",
+          "title": "Filename",
+          "description": "Name of file"
+        }
+      }
     }
   }
 }
