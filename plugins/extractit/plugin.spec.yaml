@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: extractit
 title: ExtractIt
 description: The ExtractIt plugin has a collection of actions used to extract various information from text. These include URLs, domains, emails, IPs, and more
-version: 3.0.4
+version: 3.0.5
 vendor: rapid7
 support: rapid7
 supported_versions: ["07-07-2022"]
@@ -213,7 +213,7 @@ actions:
         example: example.com is an example domain
       file:
         title: File
-        description: Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODT, ODP, ODS
+        description: Input file as bytes, supports text and binary file types such as PDF, DOCX, XLSX, PPTX, ODF, TXT, ZIP
         type: bytes
         required: false
         example: ZXhhbXBsZS5jb20gaXMgYW4gZXhhbXBsZSBkb21haW4=

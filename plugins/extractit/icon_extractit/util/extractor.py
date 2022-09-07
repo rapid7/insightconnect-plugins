@@ -1,4 +1,5 @@
 import logging
+from typing import List, Any
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 import regex
@@ -12,11 +13,83 @@ import io
 import zipfile
 import pdfplumber
 from pdfminer.pdfparser import PDFSyntaxError
+import openpyxl
+from openpyxl.workbook.workbook import Worksheet
 
 DEFAULT_ENCODING = "utf-8"
 
 
-def extract(provided_regex: str, provided_string: str, provided_file: str, keep_original_url: bool = False) -> list:
+def _get_cell_number_format(cell_number_format: str) -> str:
+    """The function reformats obtained cell number format, formatted for datetime strftime() method and returns it
+
+    :param cell_number_format: Cell number format obtained from openpyxl
+    :type cell_number_format: str
+
+    :return: Returns formatted for datetime cell number format
+    :rtype: str
+    """
+
+    return (
+        cell_number_format.replace("mm", "%m")
+        .replace("dd", "%d")
+        .replace("yyyy", "%Y")
+        .replace("yy", "%y")
+        .replace('"', "")
+        .lstrip("0")
+    )
+
+
+def _extract_dates_from_cells(input_sheet: Worksheet) -> List[str]:
+    """Extracts the dates from all non empty cells that are formatted as Date and Time cells
+    with the date format defined in the xlsx sheet
+
+    :param input_sheet: Object of the worksheet from where the data will be obtained
+    :type input_sheet: Worksheet
+
+    :return: Returns list containing Date Time values from the input cells
+    :rtype: List[str]
+    """
+
+    output_dates = []
+    for row in input_sheet.iter_rows():
+        for cell in row:
+            if cell.value and isinstance(cell.value, datetime):
+                strf_date = cell.value.strftime(_get_cell_number_format(cell.number_format))
+                strf_date = strf_date.replace("m", "%m") if strf_date.count("m") == 1 else strf_date
+                strf_date = strf_date.replace("d", "%d") if strf_date.count("d") == 1 else strf_date
+                strf_date = cell.value.strftime(strf_date)
+                output_dates.append(strf_date)
+    return output_dates
+
+
+def _extract_dates_from_xlsx(input_file: Any) -> str:
+    """Extracts all the dates from .xlsx file
+
+    :param input_file: Opened in buffer xlsx file
+    :type input_file: Any
+
+    :return: Str containing all the extracted date and time values separated by space character
+    :rtype: str
+    """
+
+    try:
+        workbook = openpyxl.load_workbook(input_file)
+        sheet_names = workbook.sheetnames
+        output_list_of_dates = []
+        for sheet_name in sheet_names:
+            sheet = workbook[sheet_name]
+            output_list_of_dates += _extract_dates_from_cells(sheet)
+        return " ".join(output_list_of_dates)
+    except Exception:
+        return ""
+
+
+def extract(
+    provided_regex: str,
+    provided_string: str,
+    provided_file: str,
+    keep_original_url: bool = False,
+) -> list:
     matches = []
     if provided_string:
         if keep_original_url:
@@ -57,7 +130,7 @@ def extract_all_date_formats(provided_string: str, provided_file: str) -> list:
                 provided_file = regex.sub(regex_pattern, "", provided_file)
         except UnicodeDecodeError:
             file_content = extract_content_from_file(base64.b64decode(provided_file))
-            for regex_pattern in Regex.HumanToRegexPatterns.items():
+            for regex_pattern in Regex.HumanToRegexPatterns.values():
                 matches += regex.findall(regex_pattern, file_content)
                 file_content = regex.sub(regex_pattern, "", file_content)
     return list(dict.fromkeys(matches))
@@ -93,8 +166,13 @@ def extract_content_from_file(provided_file: bytes) -> str:
                     # After unpacking, may contain images for which the decoding will fail
                     except UnicodeDecodeError:
                         continue
+                # check if file is xlsx
+                xlsx_output = _extract_dates_from_xlsx(f)
             # remove xml tags from files content
-            return regex.sub(r"<[\p{L}\p{N}\p{Lo}\p{So} :\/.\"=_%,(){}+#&;?-]*>", " ", files_content)
+            content_without_xml_tags = regex.sub(
+                r"<[\p{L}\p{N}\p{Lo}\p{So} :\/.\"=_%,(){}+#&;?-]*>", " ", files_content
+            )
+            return " ".join([content_without_xml_tags.replace("\r", ""), xlsx_output])
         except zipfile.BadZipFile:
             try:
                 logging.getLogger("pdfminer").setLevel(logging.WARNING)
@@ -109,7 +187,7 @@ def extract_content_from_file(provided_file: bytes) -> str:
             except PDFSyntaxError:
                 raise PluginException(
                     cause="The type of the provided file is not supported.",
-                    assistance="Supported file types: PDF, DOCX, PPTX, XLSX, ODT, ODP, ODF",
+                    assistance="Supported file types are text/binary, such as: PDF, DOCX, PPTX, XLSX, ODT, ODP, ODF, TXT, ZIP",
                 )
 
 
