@@ -2,8 +2,9 @@ import insightconnect_plugin_runtime
 from .schema import AddUserInput, AddUserOutput, Input, Output, Component
 
 # Custom imports below
-from insightconnect_plugin_runtime.exceptions import PluginException
 import validators
+
+from icon_orca_security.util.helpers import get_role_id
 
 
 class AddUser(insightconnect_plugin_runtime.Action):
@@ -26,17 +27,6 @@ class AddUser(insightconnect_plugin_runtime.Action):
                 parameters["role_id"] = role
         else:
             roles = self.connection.api.get_roles({"search": role}).get("data")
-            parameters["role_id"] = self.get_role_id(role, roles)
+            parameters["role_id"] = get_role_id(role, roles)
 
         return {Output.STATUS: self.connection.api.add_user(parameters).get("status")}
-
-    @staticmethod
-    def get_role_id(role_name: str, roles: list) -> str:
-        for role in roles:
-            if role_name.lower() == role.get("name").lower():
-                role_id = role.get("id")
-                if role_id:
-                    return role_id
-        raise PluginException(
-            cause=f"Role {role_name} not found.", assistance="Please check that provided role is correct and try again."
-        )

@@ -1,6 +1,5 @@
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
-from urllib.parse import urlsplit
 import requests
 import json
 import base64
@@ -18,14 +17,15 @@ from icon_orca_security.util.endpoints import (
     RBAC_ROLES_ENDPOINT,
     UPDATE_ALERT_SEVERITY_ENDPOINT,
     UPDATE_ALERT_STATUS_ENDPOINT,
-    USER_SESSION_ENDPOINT,
     VERIFY_ALERT_ENDPOINT,
 )
+
+from icon_orca_security.util.helpers import split_url
 
 
 class OrcaSecurityAPI:
     def __init__(self, url: str, api_token: str, logger):
-        self.base_url = f"{self.split_url(url)}/api"
+        self.base_url = f"{split_url(url)}/api"
         self._api_token = api_token
         self.logger = logger
 
@@ -140,8 +140,3 @@ class OrcaSecurityAPI:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
         except requests.exceptions.HTTPError as error:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
-
-    @staticmethod
-    def split_url(url: str) -> str:
-        scheme, netloc, paths, queries, fragments = urlsplit(url.strip())  # pylint: disable=unused-variable
-        return f"{scheme}://{netloc}"
