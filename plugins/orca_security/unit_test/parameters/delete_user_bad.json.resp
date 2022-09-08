@@ -1,0 +1,18 @@
+{
+  "parameters": [
+    [
+      "invalid_email",
+      "user",
+      "The server is unable to process the request.",
+      "Verify your plugin input is correct and not malformed and try again. If the issue persists, please contact support.",
+      "invalid user email"
+    ],
+    [
+      "invitation_not_found",
+      "invalid_user@example.com",
+      "The server is unable to process the request.",
+      "Verify your plugin input is correct and not malformed and try again. If the issue persists, please contact support.",
+      "there is not pending invite for user id invalid_user@example.com"
+    ]
+  ]
+}

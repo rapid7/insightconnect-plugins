@@ -1,0 +1,18 @@
+{
+  "parameters": [
+    [
+      "alert_not_found",
+      "orca-002",
+      "Resource not found.",
+      "Verify your input is correct and not malformed and try again. If the issue persists, please contact support.",
+      "alert_id orca-002 does not exist"
+    ],
+    [
+      "file_not_found",
+      "orca-003",
+      "Resource not found.",
+      "Verify your input is correct and not malformed and try again. If the issue persists, please contact support.",
+      "no associated files"
+    ]
+  ]
+}

@@ -1,0 +1,59 @@
+{
+	"spec": "c482fda51edea694c70099034657450b",
+	"manifest": "e645ba21f8e272fdbb1fb3e7bd76f0f2",
+	"setup": "54cd8b848241a653d3f638ed521fc6b3",
+	"schemas": [
+		{
+			"identifier": "add_user/schema.py",
+			"hash": "783074a007783a348cdf7196168dfc00"
+		},
+		{
+			"identifier": "delete_user/schema.py",
+			"hash": "a113969d6725459fecea5554c666102c"
+		},
+		{
+			"identifier": "download_malicious_file/schema.py",
+			"hash": "ba87eee4b5b45d1ac2d46ec6e9907178"
+		},
+		{
+			"identifier": "get_alert_by_id/schema.py",
+			"hash": "51bfec7d1278f653891c3d8f47b1ce7e"
+		},
+		{
+			"identifier": "get_alerts/schema.py",
+			"hash": "db8f9a0edb29485200bddfeba5da5118"
+		},
+		{
+			"identifier": "get_asset_by_id/schema.py",
+			"hash": "0e36c4a950d6eae4b21067af6ae8afb6"
+		},
+		{
+			"identifier": "get_assets/schema.py",
+			"hash": "08450bce738e43db2a9194d964876930"
+		},
+		{
+			"identifier": "get_users/schema.py",
+			"hash": "0b678f21bfe5e83bd4389f4048603bc0"
+		},
+		{
+			"identifier": "update_alert_severity/schema.py",
+			"hash": "f75f1d20d1c788172cdcce28f7bb3aa8"
+		},
+		{
+			"identifier": "update_alert_status/schema.py",
+			"hash": "2f784295607abfaad7608b5e5a63329f"
+		},
+		{
+			"identifier": "verify_alert/schema.py",
+			"hash": "cdc5ac95e01f007ca96b51bdbb05e58e"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "4aefb21370fa6ed0e2df9f45ce601657"
+		},
+		{
+			"identifier": "new_alert/schema.py",
+			"hash": "29920f00d7831cd3aa4d71a45c8efb5a"
+		}
+	]
+}
