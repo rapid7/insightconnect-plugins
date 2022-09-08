@@ -1,0 +1,19 @@
+{
+  "parameters": [
+    [
+      "found",
+      "test-asset-123",
+      "9876543210",
+      "asg",
+      "running",
+      "brute-force_attempts",
+      "Test",
+      "us-east-1",
+      "vpc-123456789",
+      4,
+      "informational",
+      "Invalid value 'test' has been provided for the Internet Facing input.",
+      "Acceptable values for this input are 'true' or 'false'."
+    ]
+  ]
+}
