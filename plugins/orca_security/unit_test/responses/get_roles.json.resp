@@ -1,0 +1,15 @@
+{
+  "total_items": 1,
+  "data": [
+    {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Viewer",
+      "permission_groups": [],
+      "expiration_date": null,
+      "description": "Read permissions for Risks and Assets permission groups",
+      "is_custom": false,
+      "created_by": null
+    }
+  ],
+  "status": "success"
+}

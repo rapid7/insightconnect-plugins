@@ -1,0 +1,12 @@
+{
+  "parameters": [
+    [
+      "invalid_field",
+      {"severity": "hazardous"},
+      20,
+      "The server is unable to process the request.",
+      "Verify your plugin input is correct and not malformed and try again. If the issue persists, please contact support.",
+      "severity field does not exist"
+    ]
+  ]
+}
