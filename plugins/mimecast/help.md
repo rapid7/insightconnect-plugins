@@ -34,7 +34,7 @@ The connection configuration accepts the following parameters:
 |access_key|credential_secret_key|None|True|The application access key|None|eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi|
 |app_id|string|None|True|Application ID|None|78d2e4b1-8cc2-4806-nt79-6ef332a47374|
 |app_key|credential_secret_key|None|True|The application key|None|475x54c6-4f61-4fab-8be7-a0710f3859e3|
-|region|string|EU|True|The region for the Mimecast server|['EU', 'DE', 'US', 'CA', 'ZA', 'AU', 'Offshore']|EU|
+|region|string|EU|True|The region for the Mimecast server|['EU', 'DE', 'US', 'CA', 'ZA', 'AU', 'Offshore', 'Sandbox']|EU|
 |secret_key|credential_secret_key|None|True|The application secret key|None|FgHrtydiP4TynI+rTZF42Qu0FtGuhJtuNM5bDh82goJQHed9kJZ5t/ORwGnI5r2hkl/bzCosZ+KVapJFeaf3Yw==|
 
 Example input:
@@ -128,11 +128,11 @@ This action is used to create a managed URL.
 |----|----|-------|--------|-----------|----|-------|
 |action|string|block|True|Set to 'block' to blacklist the URL, 'permit' to whitelist it|['block', 'permit']|block|
 |comment|string|None|False|A comment about the why the URL is managed; for tracking purposes|None|Deemed malicious by VirusTotal|
-|disable_log_click|boolean|None|True|Disable logging of user clicks on the URL|None|Flase|
+|disable_log_click|boolean|None|True|Disable logging of user clicks on the URL|None|False|
 |disable_rewrite|boolean|None|True|Disable rewriting of this URL in emails. Applies only if action = 'permit'|None|True|
 |disable_user_awareness|boolean|None|True|Disable User Awareness challenges for this URL. Applies only if action = 'permit'|None|False|
 |match_type|string|explicit|True|Set to 'explicit' to block or permit only instances of the full URL. Set to 'domain' to block or permit any URL with the same domain|['explicit', 'domain']|explicit|
-|url|string|None|True|The URL to block or permit. Do not include a fragment|None|https://rapid7.com|
+|url|string|None|True|The URL to block or permit. Do not include a fragment|None|https://example.com|
 
 Example input:
 
@@ -140,11 +140,11 @@ Example input:
 {
   "action": "block",
   "comment": "Deemed malicious by VirusTotal",
-  "disable_log_click": "Flase",
+  "disable_log_click": false,
   "disable_rewrite": true,
   "disable_user_awareness": false,
   "match_type": "explicit",
-  "url": "https://rapid7.com"
+  "url": "https://example.com"
 }
 ```
 
@@ -186,11 +186,11 @@ This action is used to get information on a managed URL.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |action|string|none|False|Filter on whether or not the action is 'block' or 'permit'|['none', 'block', 'permit']|block|
-|disable_log_click|string|none|False|Filter on whether or not clicks are logged for this URL|['None', 'False', 'True']|True|
-|disable_rewrite|string|none|False|Filter on whether or not rewriting of this URL in emails is enabled|['None', 'False', 'True']|False|
-|disable_user_awareness|string|none|False|Filter on whether or not User Awareness challenges for this URL|['None', 'False', 'True']|False|
-|domain|string|None|False|The managed domain|None|rapid7.com|
-|domainOrUrl|string|None|False|A domain or URL to filter results|None|example.com|
+|disable_log_click|string|None|False|Filter on whether or not clicks are logged for this URL|['None', 'False', 'True']|True|
+|disable_rewrite|string|None|False|Filter on whether or not rewriting of this URL in emails is enabled|['None', 'False', 'True']|False|
+|disable_user_awareness|string|None|False|Filter on whether or not User Awareness challenges for this URL|['None', 'False', 'True']|False|
+|domain|string|None|False|The managed domain|None|https://example.com|
+|domainOrUrl|string|None|False|A domain or URL to filter results|None|https://example.com|
 |exactMatch|boolean|False|False|If true, the domainOrUrl value to act as an exact match value. If false, any partial matches will be returned|None|False|
 |id|string|None|False|Filter on the Mimecast secure ID of the managed URL|None|wOi3MCwjYFYhZfkYlp2RMAhwOgsDZixCK43rDjLP0YPWrtBgqVtVbzzFK8SjGLNE4|
 |match_type|string|none|False|Filter on whether or not the match type is 'explicit' or 'domain'|['none', 'explicit', 'domain']|domain|
@@ -204,8 +204,8 @@ Example input:
   "disable_log_click": true,
   "disable_rewrite": false,
   "disable_user_awareness": false,
-  "domain": "rapid7.com",
-  "domainOrUrl": "example.com",
+  "domain": "https://example.com",
+  "domainOrUrl": "https://example.com",
   "exactMatch": false,
   "id": "wOi3MCwjYFYhZfkYlp2RMAhwOgsDZixCK43rDjLP0YPWrtBgqVtVbzzFK8SjGLNE4",
   "match_type": "domain",
@@ -403,7 +403,7 @@ This action is used to add an email address or domain to a group.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|domain|string|None|False|A domain to add to a group. Use either email address or domain|None|rapid7.com|
+|domain|string|None|False|A domain to add to a group. Use either email address or domain|None|https://example.com|
 |email_address|string|None|False|The email address of a user to add to a group. Use either email address or domain|None|user@example.com|
 |id|string|None|True|The Mimecast ID of the group to add to|None|eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA|
 
@@ -411,7 +411,7 @@ Example input:
 
 ```
 {
-  "domain": "rapid7.com",
+  "domain": "https://example.com",
   "email_address": "user@example.com",
   "id": "eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA"
 }
@@ -446,7 +446,7 @@ Delete on an email or domain that does not exist will result in no operation per
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|domain|string|None|False|A domain to remove from group. Use either email address or domain|None|rapid7.com|
+|domain|string|None|False|A domain to remove from group. Use either email address or domain|None|example.com|
 |email_address|string|None|False|The email address to remove from group. Use either email address or domain|None|user@example.com|
 |id|string|None|True|The Mimecast ID of the group to remove from|None|eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA|
 
@@ -454,7 +454,7 @@ Example input:
 
 ```
 {
-  "domain": "rapid7.com",
+  "domain": "example.com",
   "email_address": "user@example.com",
   "id": "eNoVzssKgkAUgOF3OWuhvDHlTjMqgjIilWgzN0UdHZnjBBK9e7b_-fg_gJJbIxsBEdB2Dl-r1HDCMLeHuufXTZyt8_Gou3l_i21JWeK3TOgJizrBvFM0ez5EaDwcytO5AAeUoCNEFVUoHeAWJ91Lw7WQi7-7X1I3JtswWMK3NNjoASLXgUorIc3_ISA-8b4_Gl8xjA"
 }
@@ -602,7 +602,7 @@ Example output:
   [
     {
        "userEmailAddress": "user@example.com",
-       "url": "https://www.dummy-mimecast-blacklist.com",
+       "url": "https://example.com",
        "ttpDefinition": "Default URL Protection Definition",
        "action": "warn",
        "adminOverride": "N/A",
@@ -708,6 +708,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 
 # Version History
 
+* 5.0.1 - Add Sandbox availability in region
 * 5.0.0 - Update SDK version | Add new action Get Audit Events | Add unit tests for all actions | Update error handling for all action | Create separate class for API communication | Add base URL of API for plugin
 * 4.1.2 - Fix bug in connection test where it could succeed when an empty response was returned
 * 4.1.1 - Fix bug where the connection test would sometimes pass even with invalid credentials
