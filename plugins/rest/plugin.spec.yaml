@@ -72,13 +72,11 @@ connection:
     description: Certificate for mutual TLS
     type: file
     required: false
-    example:
   key:
     title: Key
     description: Private key for mutual TLS
     type: file
     required: false
-    example:
   basic_auth_credentials:
     title: Basic Auth Credentials
     description: Username and password. Provide if you choose Basic Auth or Digest Auth authentication type
