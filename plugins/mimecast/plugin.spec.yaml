@@ -5,7 +5,7 @@ name: mimecast
 title: Mimecast
 description: Services for email security, archiving and continuity. Protect, manage
   and archive without compromise
-version: 5.0.0
+version: 5.0.1
 supported_versions: ["Mimecast API 2022-04-22"]
 vendor: rapid7
 support: rapid7
@@ -752,6 +752,7 @@ connection:
       - ZA
       - AU
       - Offshore
+      - Sandbox
     required: true
     example: EU
     default: EU
@@ -789,7 +790,7 @@ actions:
         title: URL
         description: The URL to block or permit. Do not include a fragment
         type: string
-        example: https://rapid7.com
+        example: https://example.com
         required: true
       comment:
         title: Comment
@@ -815,7 +816,7 @@ actions:
         title: Disable Log Click
         description: Disable logging of user clicks on the URL
         type: boolean
-        example: Flase
+        example: False
         required: true
       action:
         title: Action
@@ -869,7 +870,7 @@ actions:
         description: A domain or URL to filter results
         type: string
         required: false
-        example: example.com
+        example: https://example.com
       exactMatch:
         title: Exact Match
         description: If true, the domainOrUrl value to act as an exact match value. If false, any partial matches will be returned
@@ -881,7 +882,7 @@ actions:
         title: Domain
         description: The managed domain
         type: string
-        example: rapid7.com
+        example: https://example.com
         required: false
       disable_user_awareness:
         title: 'Filter: User Awareness'
@@ -889,7 +890,7 @@ actions:
         type: string
         example: false
         required: false
-        default: none
+        default: None
         enum:
           - 'None'
           - 'False'
@@ -900,7 +901,7 @@ actions:
         type: string
         required: false
         example: true
-        default: none
+        default: None
         enum:
           - 'None'
           - 'False'
@@ -939,7 +940,7 @@ actions:
         type: string
         example: false
         required: false
-        default: none
+        default: None
         enum:
           - 'None'
           - 'False'
@@ -1104,7 +1105,7 @@ actions:
         title: Domain
         description: A domain to add to a group. Use either email address or domain
         type: string
-        example: rapid7.com
+        example: https://example.com
         required: false
     output:
       folder_id:
@@ -1146,7 +1147,7 @@ actions:
       domain:
         title: Domain
         description: A domain to remove from group. Use either email address or domain
-        example: rapid7.com
+        example: example.com
         type: string
         required: false
     output:
