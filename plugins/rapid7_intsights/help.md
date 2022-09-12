@@ -1,6 +1,6 @@
 # Description
 
-[IntSights](https://intsights.com/) is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
+[Threat Command](https://intsights.com/) by Rapid7 is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
 
 # Key Features
 
@@ -16,8 +16,8 @@
 
 # Requirements
 
-* Requires an Account ID for IntSights
-* Requires API key for IntSights
+* Requires an Account ID for Threat Command
+* Requires API key for Threat Command
 
 # Supported Product Versions
 
@@ -31,8 +31,8 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|account_id|string|None|True|Account ID for IntSights|None|9de5069c5afe602b2ea0a04b|
-|api_key|credential_secret_key|None|True|API key for IntSights|None|bffce7a2e653eb3e499b69238c6ed672727a642e6f07c19fe19b4d59c7a2d2a61078d1601ded75bac3859fc5c204279402ccf141e1999edf9deb47951f96f4c1|
+|account_id|string|None|True|Account ID for Threat Command|None|9de5069c5afe602b2ea0a04b|
+|api_key|credential_secret_key|None|True|API key for Threat Command|None|bffce7a2e653eb3e499b69238c6ed672727a642e6f07c19fe19b4d59c7a2d2a61078d1601ded75bac3859fc5c204279402ccf141e1999edf9deb47951f96f4c1|
 
 Example input:
 
@@ -185,7 +185,7 @@ Example output:
 
 #### Takedown Request
 
-Request a takedown for a given alert in IntSights
+Request a takedown for a given alert in Threat Command
 
 ##### Input
 
@@ -207,7 +207,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|boolean|True|Status from IntSights|
+|status|boolean|True|Status from Threat Command|
 
 Example output:
 
@@ -288,7 +288,7 @@ Example output:
 
 #### Rescan Indicator
 
-This action is used to force an indicator scan in Intsights TIP system.
+This action is used to force an indicator scan in Threat Command TIP system.
 
 ##### Input
 
@@ -322,7 +322,7 @@ Example output:
 
 #### Get Indicator Scan Status
 
-This action is used to get the scan status of an indicator in Insights TIP system.
+This action is used to get the scan status of an indicator in Threat Command TIP system.
 
 ##### Input
 
@@ -430,7 +430,7 @@ Example output:
 
 #### Enrich Indicator
 
-This action is used to submit an indicator to IntSights for investigation and return the results.
+This action is used to submit an indicator to Threat Command for investigation and return the results.
 
 ##### Input
 
@@ -659,7 +659,7 @@ Example output:
 
 #### Get Indicator by Value
 
-This action will search indicators in IntSights TIP.
+This action will search indicators in Threat Command TIP.
 
 ##### Input
 
@@ -894,7 +894,7 @@ Example output:
 
 #### New Alert
 
-This trigger will run when a new alert that matches the given criteria is created in IntSights.
+This trigger will run when a new alert that matches the given criteria is created in Threat Command.
 
 ##### Input
 
@@ -1022,6 +1022,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.2.1 - Rename Plugin to Threat Command | Update descriptions to Threat Command
 * 3.2.0 - Fix is_closed bug in trigger | Add new input `source_date_from_enum` in trigger which allows user to specifiy Source Date From using ENUM rather than timestamp/string
 * 3.1.0 - Add new actions Add CVEs, Delete CVEs and Get CVE List
 * 3.0.1 - Fix issue where New Alert trigger sends empty list when there are no new alerts
@@ -1033,4 +1034,4 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [IntSights](https://intsights.com/)
+* [Threat Command](https://www.rapid7.com/products/threat-command)
