@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Threat Command"
 Vendor = "rapid7"
-Version = "4.0.0"
+Version = "3.2.1"
 Description = "Threat Command by Rapid7 is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy"
 
 

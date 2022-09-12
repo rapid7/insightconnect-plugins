@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Lock the user's computer by its ID"
+    DESCRIPTION = "Get the scan status of an indicator in the Threat Command TIP system"
 
 
 class Input:

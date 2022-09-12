@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Erase the user's computer by its ID"
+    DESCRIPTION = "Force an indicator scan in Threat Command TIP system"
 
 
 class Input:

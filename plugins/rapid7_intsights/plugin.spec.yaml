@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_intsights
 title: Threat Command
 description: Threat Command by Rapid7 is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
-version: 4.0.0
+version: 3.2.1
 supported_versions: ["2.4.0"]
 vendor: rapid7
 support: rapid7
@@ -470,6 +470,48 @@ actions:
         title: Data
         description: Data
         type: object
+        required: false
+  rescan_indicator:
+    title: Rescan Indicator
+    description: Force an indicator scan in Threat Command TIP system
+    input:
+      indicator_file_hash:
+        title: Indicator File Hash
+        description: IOC value in type file hash
+        type: string
+        required: true
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+    output:
+      task_id:
+        title: Task ID
+        description: Task ID
+        type: string
+        required: false
+      status:
+        title: Status
+        description: Status
+        type: string
+        required: false
+  get_indicator_scan_status:
+    title: Get Indicator Scan Status
+    description: Get the scan status of an indicator in the Threat Command TIP system
+    input:
+      task_id:
+        title: Task ID
+        description: A string representing the request ID
+        type: string
+        required: true
+        example: 123
+    output:
+      task_id:
+        title: Task ID
+        description: Task ID
+        type: string
+        required: false
+      status:
+        title: Status
+        description: Status
+        type: string
         required: false
   get_alerts:
     title: Get Alerts

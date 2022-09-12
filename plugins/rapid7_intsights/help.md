@@ -284,6 +284,74 @@ Example output:
 }
 ```
 
+#### Rescan Indicator
+
+This action is used to force an indicator scan in Threat Command TIP system.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|indicator_file_hash|string|None|True|IOC value in type file hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
+
+Example input:
+
+```
+{
+  "indicator_file_hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|status|string|False|Status|
+|task_id|string|False|Task ID|
+
+Example output:
+
+```
+{
+  "status": "Queued",
+  "task_id": "615658811baf672bdaeb8e5c"
+}
+```
+
+#### Get Indicator Scan Status
+
+This action is used to get the scan status of an indicator in Threat Command TIP system.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|task_id|string|None|True|A string representing the request ID|None|123|
+
+Example input:
+
+```
+{
+  "task_id": 123
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|status|string|False|Status|
+|task_id|string|False|Task ID|
+
+Example output:
+
+```
+{
+  "status": "Done",
+  "task_id": "61563eb2118b97e8e388e9db"
+}
+```
+
 #### Get Alerts
 
 This action is used to search Alerts based on criteria.
@@ -967,7 +1035,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 4.0.0 - Rename Plugin to Threat Command | Update descriptions to Threat Command | Update Get Indicator By Value to use API V3 | Remove Rescan Indicator and Get Indicator Scan Status | Update Get CVE List to request one page of results only
+* 3.2.1 - Rename Plugin to Threat Command | Update descriptions to Threat Command
 * 3.2.0 - Fix is_closed bug in trigger | Add new input `source_date_from_enum` in trigger which allows user to specifiy Source Date From using ENUM rather than timestamp/string
 * 3.1.0 - Add new actions Add CVEs, Delete CVEs and Get CVE List
 * 3.0.1 - Fix issue where New Alert trigger sends empty list when there are no new alerts
