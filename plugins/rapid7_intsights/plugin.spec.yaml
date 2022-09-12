@@ -2,9 +2,9 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: rapid7_intsights
-title: Rapid7 IntSights
-description: Rapid7 IntSights is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
-version: 3.2.0
+title: Threat Command
+description: Threat Command by Rapid7 is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
+version: 3.2.1
 supported_versions: ["2.4.0"]
 vendor: rapid7
 support: rapid7
@@ -12,10 +12,9 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_intsights
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-  vendor_url: https://intsights.com/
+  vendor_url: https://www.rapid7.com/products/threat-command
 tags:
 - rapid7
-- intsights
 - darkweb
 - threatintelligence
 hub_tags:
@@ -323,20 +322,20 @@ types:
 connection:
   account_id:
     title: Account ID
-    description: Account ID for IntSights
+    description: Account ID for Threat Command
     type: string
     required: true
     example: 9de5069c5afe602b2ea0a04b
   api_key:
     title: API Key
-    description: API key for IntSights
+    description: API key for Threat Command
     type: credential_secret_key
     required: true
     example: cc805d5fab1fd71a4ab352a9c533e65fb2d5b885518f4e565e68847223b8e6b85cb48f3afad842726d99239c9e36505c64b0dc9a061d9e507d833277ada336ab
 actions:
   get_indicator_by_value:
     title: Get Indicator by Value
-    description: Search indicators in IntSights TIP
+    description: Search indicators in Threat Command TIP
     input:
       indicator_value:
         title: Indicator Value
@@ -422,7 +421,7 @@ actions:
         required: true
   enrich_indicator:
     title: Enrich Indicator
-    description: Submit an indicator to IntSights for investigation and return the results
+    description: Submit an indicator to Threat Command for investigation and return the results
     input:
       indicator_value:
         title: Indicator Value
@@ -448,7 +447,7 @@ actions:
         required: false
   rescan_indicator:
     title: Rescan Indicator
-    description: Force an indicator scan in IntSights TIP system
+    description: Force an indicator scan in Threat Command TIP system
     input:
       indicator_file_hash:
         title: Indicator File Hash
@@ -469,7 +468,7 @@ actions:
         required: false
   get_indicator_scan_status:
     title: Get Indicator Scan Status
-    description: Get the scan status of an indicator in the IntSights TIP system
+    description: Get the scan status of an indicator in the Threat Command TIP system
     input:
       task_id:
         title: Task ID
@@ -657,7 +656,7 @@ actions:
         required: false
   takedown_request:
     title: Takedown Request
-    description: Request a takedown for a given alert in IntSights
+    description: Request a takedown for a given alert in Threat Command
     input:
       alert_id:
         title: Alert ID
@@ -678,7 +677,7 @@ actions:
     output:
       status:
         title: Status
-        description: Status from IntSights
+        description: Status from Threat Command
         type: boolean
         required: true
   add_manual_alert:
@@ -876,7 +875,7 @@ actions:
 triggers:
   new_alert:
     title: New Alert
-    description: Triggers when a new alert that matches the given criteria is created in IntSights
+    description: Triggers when a new alert that matches the given criteria is created in Threat Command
     input:
       alert_type:
         title: Alert Type
