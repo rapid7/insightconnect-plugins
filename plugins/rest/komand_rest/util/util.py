@@ -126,7 +126,7 @@ class RestAPI(object):
         self.ssl_verify = ssl_verify
         self.auth = None
         self.default_headers = default_headers
-        self.fail_on_error = fail_on_error,
+        self.fail_on_error = fail_on_error
         self.certificate = certificate
         self.key = key
 
@@ -176,6 +176,26 @@ class RestAPI(object):
                     new_headers[key] = value
             self.default_headers = new_headers
 
+
+    def response_handler(self, response: Response) -> Response:
+        if response.status_code == 401:
+            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
+        if response.status_code == 403:
+            raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
+        if response.status_code == 404:
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
+        if 400 <= response.status_code < 500:
+            raise PluginException(
+                preset=PluginException.Preset.UNKNOWN,
+                data=response.json().get("message", response.text),
+            )
+        if response.status_code >= 500:
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
+        if 200 <= response.status_code < 300:
+            return response
+        raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+
+
     def call_api(
         self,
         method: str,
@@ -219,25 +239,7 @@ class RestAPI(object):
             response = requests.request(**request_params)
             if not self.fail_on_error:
                 return response
-
-            if response.status_code == 401:
-                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
-            if response.status_code == 403:
-                raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
-            if response.status_code == 404:
-                raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
-            if 400 <= response.status_code < 500:
-                raise PluginException(
-                    preset=PluginException.Preset.UNKNOWN,
-                    data=response.json().get("message", response.text),
-                )
-            if response.status_code >= 500:
-                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
-
-            if 200 <= response.status_code < 300:
-                return response
-
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+            return self.response_handler(response)
         except json.decoder.JSONDecodeError as e:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
         except requests.exceptions.HTTPError as e:
