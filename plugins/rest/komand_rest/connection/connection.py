@@ -25,8 +25,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
             params.get(Input.SSL_VERIFY, True),
             default_headers,
             params.get(Input.FAIL_ON_HTTP_ERRORS, True),
-            params.get(Input.CERTIFICATE),
-            params.get(Input.KEY),
+            params.get(Input.CLIENT_CERTIFICATE),
+            params.get(Input.PRIVATE_KEY),
         )
 
         if self.authentication_type and self.authentication_type != "No Authentication":

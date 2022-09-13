@@ -7,10 +7,10 @@ class Input:
     AUTHENTICATION_TYPE = "authentication_type"
     BASE_URL = "base_url"
     BASIC_AUTH_CREDENTIALS = "basic_auth_credentials"
-    CERTIFICATE = "certificate"
+    CLIENT_CERTIFICATE = "client_certificate"
     DEFAULT_HEADERS = "default_headers"
     FAIL_ON_HTTP_ERRORS = "fail_on_http_errors"
-    KEY = "key"
+    PRIVATE_KEY = "private_key"
     SECRET = "secret"
     SSL_VERIFY = "ssl_verify"
     
@@ -50,10 +50,10 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "Username and password. Provide if you choose Basic Auth or Digest Auth authentication type",
       "order": 8
     },
-    "certificate": {
+    "client_certificate": {
       "$ref": "#/definitions/file",
-      "title": "Certificate",
-      "description": "Certificate for mutual TLS",
+      "title": "Client Certificate",
+      "description": "Client certificate for mutual TLS",
       "order": 6
     },
     "default_headers": {
@@ -69,9 +69,9 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "default": true,
       "order": 9
     },
-    "key": {
+    "private_key": {
       "$ref": "#/definitions/file",
-      "title": "Key",
+      "title": "Private Key",
       "description": "Private key for mutual TLS",
       "order": 7
     },

@@ -105,8 +105,8 @@ class RestAPI(object):
         ssl_verify: bool,
         default_headers: dict = None,
         fail_on_error: bool = True,
-        certificate = None,
-        key = None,
+        certificate=None,
+        key=None,
     ):
         self.url = url
         self.logger = logger
@@ -163,6 +163,12 @@ class RestAPI(object):
                     new_headers[key] = value
             self.default_headers = new_headers
 
+    def write_to_file(self, file: dict, file_path: str) -> str:
+        with open(file_path + file.get("filename"), "wb") as new_file:
+            base64_decoded = base64.b64decode(file.get("content"))
+            new_file.write(base64_decoded)
+        return file_path + file.get("filename")
+
     def call_api(
         self,
         method: str,
@@ -192,15 +198,15 @@ class RestAPI(object):
                 "verify": self.ssl_verify,
             }
 
-            if self.certificate and self.key:
-                file_path = tempfile.mkdtemp() + "/"
-                for file in [self.certificate, self.key]:
-                    with open(file_path + file.get("filename"), "wb") as new_file:
-                        base64_decoded = base64.b64decode(file.get("content"))
-                        new_file.write(base64_decoded)
+            file_path = tempfile.mkdtemp() + "/"
+            if self.certificate:
+                certificate_path = self.write_to_file(self.certificate, file_path)
+                request_params["cert"] = certificate_path
+            if self.key and self.certificate:
+                key_path = self.write_to_file(self.key, file_path)
                 request_params["cert"] = (
-                    file_path + self.certificate.get("filename"),
-                    file_path + self.key.get("filename")
+                    certificate_path,
+                    key_path
                 )
 
             response = requests.request(**request_params)

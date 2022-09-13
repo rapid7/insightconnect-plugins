@@ -32,9 +32,9 @@ The connection configuration accepts the following parameters:
 |fail_on_http_errors|boolean|True|False|Indicates whether the plugin should fail on standard HTTP errors (4xx-5xx)|None|True|
 |secret|credential_secret_key|None|False|Credential secret key. Provide a Bearer Token, Rapid7 Insight, OpsGenie, Pendo or using "CUSTOM_SECRET_INPUT" in the Default Headers field for Custom authentication type|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |ssl_verify|boolean|True|True|Verify TLS/SSL certificate|None|True|
-|certificate|file|None|True|Certificate for mutual TLS|None|certificate.pem|
-|key|file|None|True|Private key for mutual TLSNone|key.pem|
-
+|client_certificate|file|None|True|Client certificate for mutual TLS|None|certificate.pem|
+|client_key|file|None|True|Private key for mutual TLSNone|key.pem|
+client_
 Example input:
 
 ```

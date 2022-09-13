@@ -29,7 +29,7 @@ class GetInput(insightconnect_plugin_runtime.Input):
     "body": {
       "type": "object",
       "title": "Body",
-      "description": "Value to be used in the GET request body",
+      "description": "Data to submit to the server when making the HTTP Request call",
       "order": 3
     },
     "headers": {
