@@ -95,6 +95,19 @@ def convert_body_for_urlencoded(headers: Dict[str, str], body: Dict[str, Any]) -
     return body
 
 
+def write_to_file(file: dict, file_path: str) -> str:
+    """
+    This method will write an input file as bytes and return the file path
+    :param file: The file object containing content and filename
+    :file_path: the file path to be used
+    :return: the location of the written file
+    """
+    with open(file_path + file.get("filename"), "wb") as new_file:
+        base64_decoded = base64.b64decode(file.get("content"))
+        new_file.write(base64_decoded)
+    return file_path + file.get("filename")
+
+
 class RestAPI(object):
     CUSTOM_SECRET_INPUT = "CUSTOM_SECRET_INPUT"  # noqa: B105
 
@@ -163,12 +176,6 @@ class RestAPI(object):
                     new_headers[key] = value
             self.default_headers = new_headers
 
-    def write_to_file(self, file: dict, file_path: str) -> str:
-        with open(file_path + file.get("filename"), "wb") as new_file:
-            base64_decoded = base64.b64decode(file.get("content"))
-            new_file.write(base64_decoded)
-        return file_path + file.get("filename")
-
     def call_api(
         self,
         method: str,
@@ -200,10 +207,10 @@ class RestAPI(object):
 
             file_path = tempfile.mkdtemp() + "/"
             if self.certificate:
-                certificate_path = self.write_to_file(self.certificate, file_path)
+                certificate_path = write_to_file(self.certificate, file_path)
                 request_params["cert"] = certificate_path
             if self.key and self.certificate:
-                key_path = self.write_to_file(self.key, file_path)
+                key_path = write_to_file(self.key, file_path)
                 request_params["cert"] = (
                     certificate_path,
                     key_path
