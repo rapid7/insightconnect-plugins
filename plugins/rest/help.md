@@ -32,6 +32,8 @@ The connection configuration accepts the following parameters:
 |fail_on_http_errors|boolean|True|False|Indicates whether the plugin should fail on standard HTTP errors (4xx-5xx)|None|True|
 |secret|credential_secret_key|None|False|Credential secret key. Provide a Bearer Token, Rapid7 Insight, OpsGenie, Pendo or using "CUSTOM_SECRET_INPUT" in the Default Headers field for Custom authentication type|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |ssl_verify|boolean|True|True|Verify TLS/SSL certificate|None|True|
+|certificate|file|None|True|Certificate for mutual TLS|None|certificate.pem|
+|key|file|None|True|Private key for mutual TLSNone|key.pem|
 
 Example input:
 
@@ -327,7 +329,7 @@ This action is used to make a GET request.
 |----|----|-------|--------|-----------|----|-------|
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
-|body|object|None|False|Value to be used in the GET request body|None|{"foo": "bar"}|
+|body|object|None|False|Data to submit to the server when making the HTTP Request call|None|{"foo": "bar"}|
 
 Example input:
 

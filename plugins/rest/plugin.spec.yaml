@@ -109,7 +109,7 @@ actions:
         example: '{"Host": "rapid7.com"}'
       body:
         title: Body
-        description: Value to be used in the GET request body
+        description: Data to submit to the server when making the HTTP Request call
         type: object
         required: false
         example: '{"foo": "bar"}'
