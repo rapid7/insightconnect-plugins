@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import GetGroupDetailInput, GetGroupDetailOutput, Input, Output, Component
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 
 
-class GetGroupDetail(komand.Action):
+class GetGroupDetail(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_group_detail",
@@ -16,16 +16,6 @@ class GetGroupDetail(komand.Action):
         )
 
     def run(self, params={}):
-        base_url = self.connection.base_url
-        id_ = params.get(Input.ID)
-        endpoint = f"/JSSResource/mobiledevicegroups/id/{id_}"
-        url = f"{base_url}/{endpoint}"
-
-        result = self.connection.session.get(url)
-
-        try:
-            json_ = result.json()
-        except json.decoder.JSONDecodeError:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=result.text)
-
-        return {Output.GROUP_DETAIL: json_}
+        identifier = params.get(Input.ID)
+        response = self.connection.client.get_group_detail(identifier)
+        return {Output.GROUP_DETAIL: response.get("mobile_device_group", {})}

@@ -13,32 +13,58 @@
 * Username and Password, or
 * API Key
 
+# Supported Product Versions
+
+* Plugin successfully tested at 2022-08-26
+
 # Documentation
 
 ## Setup
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|client_login|credential_username_password|None|True|The Jamf username and password for basic authentication API interaction|None|
-|timeout|integer|30|False|The interval in seconds before abandoning an attempt to access Jamf|None|
-|url|string|None|True|The full URL for your instance of Jamf, e.g. https://instance.jamfcloud.com|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|client_login|credential_username_password|None|True|The Jamf username and password for basic authentication API interaction|None|{"username": "Example User", "password": "Example Password"}|
+|timeout|integer|30|False|The interval in seconds before abandoning an attempt to access Jamf|None|30|
+|url|string|None|True|The full URL for your Jamf instance|None|https://{instance}.jamfcloud.com|
+
+Example input:
+
+```
+{
+  "client_login": {
+    "username": "Example User",
+    "password": "Example Password"
+  },
+  "timeout": 30,
+  "url": "https://{instance}.jamfcloud.com"
+}
+```
 
 ## Technical Details
 
 ### Actions
 
-#### Add Computer To A Group
+#### Add Computer to a Group
 
-This action is used to add a computer to a group.
+This action is used to add computer to a group.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|ID|integer|None|True|Group ID|None|
-|computer_ids|[]integer|None|True|Computer IDs|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ID|integer|None|True|Group ID|None|1|
+|computer_ids|[]integer|None|True|Computer IDs|None|[1, 2, 3]|
+
+Example input:
+
+```
+{
+  "ID": 1,
+  "computer_ids": "[1, 2, 3]"
+}
+```
 
 ##### Output
 
@@ -54,15 +80,91 @@ Example output:
 }
 ```
 
+#### Erase Computer
+
+This action is used to erase the user's computer by its ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ID|string|None|True|Identifier of the computer|None|134|
+|passcode|string|None|True|The passcode of the computer|None|123456|
+
+Example input:
+
+```
+{
+  "ID": 134,
+  "passcode": 123456
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|status|boolean|True|Status|
+
+Example output:
+
+```
+{
+  "status": 201
+}
+```
+
+#### Lock Computer
+
+This action is used to test.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ID|string|None|True|Identifier of the computer|None|134|
+|passcode|string|None|True|The passcode of the computer|None|123456|
+
+Example input:
+
+```
+{
+  "ID": 134,
+  "passcode": 123456
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|status|boolean|True|Status|
+
+Example output:
+
+```
+{
+  "status": 201
+}
+```
+
 #### Get Device Groups
 
 This action gets a list of all groups a device is a member of.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|ID|integer|None|True|Device ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ID|integer|None|True|Device ID|None|1|
+
+Example input:
+
+```
+{
+  "ID": 1
+}
+```
 
 ##### Output
 
@@ -93,9 +195,17 @@ This action is used to get a list of a user's device names and IDs.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|name|string|None|True|User name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|name|string|None|True|User name|None|Example Name|
+
+Example input:
+
+```
+{
+  "name": "Example Name"
+}
+```
 
 ##### Output
 
@@ -128,9 +238,17 @@ This action is used to get group details.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|id|integer|None|True|Group ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|integer|None|True|Group ID|None|1|
+
+Example input:
+
+```
+{
+  "id": 1
+}
+```
 
 ##### Output
 
@@ -201,15 +319,23 @@ This action is used to lock mobile devices.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|devices_id|[]string|None|True|List of devices IDs|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|devices_id|[]string|None|True|List of devices IDs|None|["1", "2"]|
+
+Example input:
+
+```
+{
+  "devices_id": ["1", "2"]
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|integer|True|None|
+|status|integer|True|Status|
 
 Example output:
 
@@ -225,15 +351,23 @@ This action is used to get user location details by device ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|ID|string|None|True|Device ID|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ID|string|None|True|Device ID|None|1|
+
+Example input:
+
+```
+{
+  "ID": 1
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|user_location_detail|user_location_detail|False|User location details|
+|user_location_detail|user_location_detail|True|User location details|
 
 Example output:
 
@@ -242,7 +376,7 @@ Example output:
   "user_location_detail": {
     "building": "",
     "department": "",
-    "email_address": "Jon_schipp@domain.com",
+    "email_address": "user@example.com",
     "phone": "999-999-9999",
     "position": "Director",
     "real_name": "Jonathan Schipp",
@@ -266,6 +400,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.0 - Added new actions Lock Computer, and Erase Computer | Updated plugin SDK to 4 | Added unittests
 * 1.1.1 - New spec and help.md format for the Extension Library
 * 1.1.0 - Add action to get user location details by device ID
 * 1.0.0 - Initial plugin
