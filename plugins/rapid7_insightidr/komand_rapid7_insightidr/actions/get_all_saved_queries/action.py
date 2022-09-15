@@ -17,7 +17,7 @@ class GetAllSavedQueries(insightconnect_plugin_runtime.Action):
 
     def run(self):
         request = ResourceHelper(self.connection.session, self.logger)
-        response = request.resource_request(Queries.get_all_queries(self.connection.url), "get")
+        response = request.resource_request(Queries.get_all_queries(self.connection.region), "get")
         try:
             result = json.loads(response["resource"])
             saved_queries = insightconnect_plugin_runtime.helper.clean(result.get("saved_queries"))

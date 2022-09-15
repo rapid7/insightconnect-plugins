@@ -1316,6 +1316,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.0.1 - Fix issue with `Get Query Results` and `Get All Saved Queries` actions
 * 4.0.0 - Add new actions Create Investigation, Search Investigations, Update Investigation, Set Investigation Priority, Set Investigation Disposition, and List Alerts for Investigation | Update actions List Investigations, Set Status of Investigation, Assign User to Investigation | Enabled cloud 
 * 3.2.0 - Add new actions Get A Saved Query and Get All Saved Queries
 * 3.1.5 - Patch issue parsing labels in Advanced Query on Log and Advanced Query on Log Set actions
