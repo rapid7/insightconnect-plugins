@@ -1,0 +1,60 @@
+{
+  "alert": {
+    "data": {
+      "recommendation": "It is recommended to associate {AwsEc2Elb} Classic Load Balancer with security groups that allow inbound traffic only from authorized IP addresses, for more details follow the link https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-groups.html.",
+      "details": "Classic Load Balancer (ELB) provides basic load balancing across multiple Amazon EC2 instances and operates at both the request level and connection level. The load balancer {AwsEc2Elb} was discovered to be associated with a security group {AwsEc2Elb.SecurityGroups} that allows public ingress access without IP filtering (0.0.0.0/0). Load balancer configured with public access opens the application hosted behind the load balancer to attacks from malicious entities on the Internet.",
+      "title": "Classic Load Balancer (ELB) with public access",
+      "remediation_console": [
+        ">1. Sign in to the AWS Management Console and open the **[EC2 console](https://console.aws.amazon.com/ec2)**.",
+        ">2. In the navigation pane, under **Load Balancing**, choose **Load Balancers**.",
+        ">3. Select the desired load balancer.",
+        ">4. Under **Actions** choose **Edit security groups**.",
+        ">5. Uncheck the boxes of the inbound permissive security groups.",
+        ">6. Check the boxes of a more explicit inbound security groups.",
+        ">7. Choose **Save**."
+      ]
+    },
+    "alert_labels": [
+      "mitre: discovery"
+    ],
+    "configuration": {
+      "user_status": "open",
+      "user_score": 3
+    },
+    "is_compliance": false,
+    "description": "Classic Load Balancer (ELB) with public access",
+    "recommendation": "It is recommended to associate 44d88612fea8a8f36de82e1278abb02f Classic Load Balancer with security groups that allow inbound traffic only from authorized IP addresses, for more details follow the link https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-security-groups.html.",
+    "type": "aws_elb_with_public_access",
+    "type_string": "Classic Load Balancer (ELB) with public access",
+    "details": "Classic Load Balancer (ELB) provides basic load balancing across multiple Amazon EC2 instances and operates at both the request level and connection level. The load balancer a51a26a188ddb415d87d7f96b3c4a128 was discovered to be associated with a security group k8s-elb-a51a26a188ddb415d87d7f96b3c4a128 that allows public ingress access without IP filtering (0.0.0.0/0). Load balancer configured with public access opens the application hosted behind the load balancer to attacks from malicious entities on the Internet.",
+    "state": {
+      "severity": "hazardous",
+      "last_updated": "2022-08-10T16:28:51+00:00",
+      "last_seen": "2022-08-07T21:06:47+00:00",
+      "in_verification": true,
+      "created_at": "2022-03-19T16:55:08+00:00",
+      "verification_status": "scan_initiated",
+      "score": 3,
+      "orca_score": 3,
+      "alert_id": "orca-001",
+      "high_since": "2022-08-10T16:28:51+00:00",
+      "status_time": "2022-08-10T16:17:43+00:00",
+      "status": "open"
+    },
+    "rule_query": "AwsEc2Elb with (Scheme = 'internet-facing') and SecurityGroups with SgIpPermissions with (IpRanges containing '0.0.0.0/0' or IpRanges containing '::/0') and not egress",
+    "subject_type": "AwsEc2Elb",
+    "tags_info_list": [
+      "kubernetes.io/service-name|istio-system/istio-ingressgateway",
+      "kubernetes.io/cluster/Omikron|owned"
+    ],
+    "is_rule": true,
+    "type_key": "44d88612fea8a8f36de82e1278abb02f",
+    "rule_id": "r27471a255e",
+    "asset_state": "enabled",
+    "asset_tags_info_list": [
+      "kubernetes.io/service-name|istio-system/istio-ingressgateway",
+      "kubernetes.io/cluster/Omikron|owned"
+    ],
+    "category": "Network misconfigurations"
+  }
+}

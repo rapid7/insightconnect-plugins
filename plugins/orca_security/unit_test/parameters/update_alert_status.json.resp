@@ -1,0 +1,92 @@
+{
+  "parameters": [
+    [
+      "close",
+      "orca-001",
+      "close",
+      {
+        "response": {
+          "unique_id": "None",
+          "user_email": "user@example.com",
+          "user_name": "Example User",
+          "alert_id": "orca-001",
+          "asset_unique_id": "asset-1",
+          "create_time": "2022-08-10T15:25:50+00:00",
+          "type": "set_status",
+          "sub_type": "closed",
+          "details": {
+            "description": "Alert status changed",
+            "from": "open",
+            "to": "closed"
+          }
+        }
+      }
+    ],
+    [
+      "in_progress",
+      "orca-001",
+      "in_progress",
+      {
+        "response": {
+          "unique_id": "None",
+          "user_email": "user@example.com",
+          "user_name": "Example User",
+          "alert_id": "orca-001",
+          "asset_unique_id": "asset-1",
+          "create_time": "2022-08-10T15:25:50+00:00",
+          "type": "set_status",
+          "sub_type": "in_progress",
+          "details": {
+            "description": "Alert status changed",
+            "from": "open",
+            "to": "in_progress"
+          }
+        }
+      }
+    ],
+    [
+      "dismiss",
+      "orca-001",
+      "dismiss",
+      {
+        "response": {
+          "unique_id": "None",
+          "user_email": "user@example.com",
+          "user_name": "Example User",
+          "alert_id": "orca-001",
+          "asset_unique_id": "asset-1",
+          "create_time": "2022-08-10T15:25:50+00:00",
+          "type": "set_status",
+          "sub_type": "dismiss",
+          "details": {
+            "description": "Alert status changed",
+            "from": "open",
+            "to": "dismiss"
+          }
+        }
+      }
+    ],
+    [
+      "open",
+      "orca-001",
+      "open",
+      {
+        "response": {
+          "unique_id": "None",
+          "user_email": "user@example.com",
+          "user_name": "Example User",
+          "alert_id": "orca-001",
+          "asset_unique_id": "asset-1",
+          "create_time": "2022-08-10T15:25:50+00:00",
+          "type": "set_status",
+          "sub_type": "open",
+          "details": {
+            "description": "Alert status changed",
+            "from": "close",
+            "to": "open"
+          }
+        }
+      }
+    ]
+  ]
+}

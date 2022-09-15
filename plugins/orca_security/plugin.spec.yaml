@@ -1,0 +1,1102 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: orca_security
+title: "Orca Security"
+description: Orca's agentless, cloud-native security and compliance platform detects, monitors, and prioritizes the most critical cloud security risks for AWS, Azure, and Google Cloud estates
+version: 1.0.0
+supported_versions: ["Orca Security API 2022-08-15"]
+vendor: rapid7
+support: rapid7
+status: []
+cloud_ready: true
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/orca_security
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://orca.security
+tags: ["orca", "security"]
+hub_tags: 
+  use_cases: [threat_detection_and_response, alerting_and_notifications]
+  keywords: [orca, security, cloud_enabled]
+  features: []
+
+types:
+  alert_data:
+    headline:
+      title: Headline
+      description: Headline
+      type: string
+      required: false
+    more_details:
+      title: More Details
+      description: More details
+      type: "[]string"
+      required: false
+    mitre_category:
+      title: Mitre Category
+      description: Mitre category
+      type: string
+      required: false
+    details:
+      title: Details
+      description: Details
+      type: string
+      required: false
+    recommendation:
+      title: Recommendation
+      description: Recommendation
+      type: string
+      required: false
+    title:
+      title: Title
+      description: Title
+      type: string
+      required: false
+    remediation_actions:
+      title: Remediation Actions
+      description: Remediation actions
+      type: "[]string"
+      required: false
+    remediation_console:
+      title: Remediation Console
+      description: Remediation console
+      type: "[]string"
+      required: false
+    remediation_cli:
+      title: Remediation CLI
+      description: Remediation CLI
+      type: "[]string"
+      required: false
+    time_series_field:
+      title: Time Series Field
+      description: Time series field
+      type: string
+      required: false
+  configuration:
+    user_status:
+      title: User Status
+      description: User status
+      type: string
+      required: false
+    snooze_until:
+      title: Snooze Until
+      description: Snooze until
+      type: string
+      required: false
+    user_score:
+      title: User Score
+      description: User score
+      type: integer
+      required: false
+    jira_issue:
+      title: Jira Issue
+      description: Jira issue
+      type: string
+      required: false
+    jira_issue_link:
+      title: Jira Issue Link
+      description: Jira issue link
+      type: string
+      required: false
+    comments_count:
+      title: Comments Count
+      description: Comments count
+      type: integer
+      required: false
+    last_verified_event:
+      title: Last Verified Event
+      description: Last verified event
+      type: string
+      required: false
+  priv:
+    key:
+      title: Key
+      description: Key
+      type: string
+      required: false
+    score:
+      title: Score
+      description: Score
+      type: integer
+      required: false
+    orig_score:
+      title: Original Score
+      description: Original score
+      type: integer
+      required: false
+    full_scan_time:
+      title: Full Scan Time
+      description: Full scan time
+      type: string
+      required: false
+    alert_id:
+      title: Alert ID
+      description: Alert ID
+      type: string
+      required: false
+  state:
+    alert_id:
+      title: Alert ID
+      description: Alert ID
+      type: string
+      required: false
+    status:
+      title: Status
+      description: Status
+      type: string
+      required: false
+    status_time:
+      title: Status Time
+      description: Status time
+      type: string
+      required: false
+    score:
+      title: Score
+      description: Score
+      type: integer
+      required: false
+    severity:
+      title: Severity
+      description: Severity
+      type: string
+      required: false
+    created_at:
+      title: Created At
+      description: Created at
+      type: string
+      required: false
+    last_seen:
+      title: Last Seen
+      description: Last seen
+      type: string
+      required: false
+    low_since:
+      title: Low Since
+      description: Low since
+      type: string
+      required: false
+    high_since:
+      title: High Since
+      description: High since
+      type: string
+      required: false
+    in_verification:
+      title: In Verification
+      description: In verification
+      type: boolean
+      required: false
+    verification_status:
+      title: Verification Status
+      description: Verification status
+      type: string
+      required: false
+    closed_reason:
+      title: Closed Reason
+      description: Closed reason
+      type: string
+      required: false
+    last_updated:
+      title: Last Updated
+      description: Last updated
+      type: string
+      required: false
+  alert:
+    alert_labels:
+      title: Alert Labels
+      description: Alert labels
+      type: "[]string"
+      required: false
+    asset_auto_updates:
+      title: Asset Auto Updates
+      description: Asset auto updates
+      type: string
+      required: false
+    asset_availability_zones:
+      title: Asset Availability Zones
+      description: Asset availability zones
+      type: "[]string"
+      required: false
+    asset_distribution_major_version:
+      title: Asset Distribution Major Version
+      description: Asset distribution major version
+      type: string
+      required: false
+    asset_distribution_name:
+      title: Asset Distribution Name
+      description: Asset distribution name
+      type: string
+      required: false
+    asset_distribution_version:
+      title: Asset Distribution Version
+      description: Asset distribution version
+      type: string
+      required: false
+    asset_extra_data:
+      title: Asset Extra Data
+      description: Asset extra data
+      type: object
+      required: false
+    asset_first_private_dnss:
+      title: Asset First Private DNSs
+      description: Asset first private DNSs
+      type: "[]string"
+      required: false
+    asset_first_private_ips:
+      title: Asset First Private IPs
+      description: Asset first private IPs
+      type: "[]string"
+      required: false
+    asset_first_public_dnss:
+      title: Asset First Public DNSs
+      description: Asset first public DNSs
+      type: "[]string"
+      required: false
+    asset_first_public_ips:
+      title: Asset First Public IPs
+      description: Asset first public IPs
+      type: "[]string"
+      required: false
+    asset_info:
+      title: Asset Info
+      description: Asset info
+      type: object
+      required: false
+    asset_image_id:
+      title: Asset Image ID
+      description: Asset image ID
+      type: string
+      required: false
+    asset_ingress_ports:
+      title: Asset Ingress Ports
+      description: Asset ingress ports
+      type: "[]string"
+      required: false
+    asset_num_private_dnss:
+      title: Asset Num Private DNSs
+      description: Asset num private DNSs
+      type: integer
+      required: false
+    asset_num_private_ips:
+      title: Asset Num Private IPs
+      description: Asset num private IPs
+      type: integer
+      required: false
+    asset_num_public_dnss:
+      title: Asset Num Public DNSs
+      description: Asset num public DNSs
+      type: integer
+      required: false
+    asset_num_public_ips:
+      title: Asset Num Public IPs
+      description: Asset Num public IPs
+      type: integer
+      required: false
+    asset_regions:
+      title: Asset Regions
+      description: Asset regions
+      type: "[]string"
+      required: false
+    asset_regions_names:
+      title: Asset Regions Names
+      description: Asset regions names
+      type: "[]string"
+      required: false
+    asset_role_names:
+      title: Asset Role Names
+      description: Asset role names
+      type: "[]string"
+      required: false
+    asset_state:
+      title: Asset State
+      description: Asset state
+      type: string
+      required: false
+    asset_stopped:
+      title: Asset Stopped
+      description: Asset stopped
+      type: boolean
+      required: false
+    asset_tags_info_list:
+      title: Asset Tags Info List
+      description: Asset tags info list
+      type: "[]string"
+      required: false
+    asset_vpcs:
+      title: Asset VPCs
+      description: Asset VPCs
+      type: "[]string"
+      required: false
+    category:
+      title: Category
+      description: Category
+      type: string
+      required: false
+    configuration:
+      title: Configuration
+      description: Configuration
+      type: configuration
+      required: false
+    container_k8s_pod_namespace:
+      title: Container K8s Pod Namespace
+      description: Container K8s pod namespace
+      type: string
+      required: false
+    container_image_name:
+      title: Container Image Name
+      description: Container image name
+      type: string
+      required: false
+    container_service_name:
+      title: Container Service Name
+      description: Container service name
+      type: string
+      required: false
+    cve_list:
+      title: CVE List
+      description: CVE list
+      type: "[]string"
+      required: false
+    data:
+      title: Data
+      description: Data
+      type: alert_data
+      required: false
+    description:
+      title: Description
+      description: Description
+      type: string
+      required: false
+    details:
+      title: Details
+      description: Details
+      type: string
+      required: false
+    finding_schema:
+      title: Finding Schema
+      description: Finding schema
+      type: object
+      required: false
+    git_repo_sensitive_data_rules:
+      title: Git Repo Sensitive Data Rules
+      description: Git repo sensitive data rules
+      type: "[]string"
+      required: false
+    git_repo_sensitive_data_tags:
+      title: Git Repo Sensitive Data Tags
+      description: Git repo sensitive data tags
+      type: "[]string"
+      required: false
+    is_compliance:
+      title: Is Compliance
+      description: Is compliance
+      type: boolean
+      required: false
+    is_rule:
+      title: Is Rule
+      description: Is rule
+      type: boolean
+      required: false
+    num_children_unique_ids:
+      title: Num Children Unique IDs
+      description: Num children unique IDs
+      type: integer
+      required: false
+    priv:
+      title: Priv
+      description: Priv
+      type: priv
+      required: false
+    recommendation:
+      title: Recommendation
+      description: Recommendation
+      type: string
+      required: false
+    rule_id:
+      title: Rule ID
+      description: Rule ID
+      type: string
+      required: false
+    rule_query:
+      title: Rule Query
+      description: Rule query
+      type: string
+      required: false
+    severity_contributing_factors:
+      title: Severity Contributing Factors
+      description: Severity contributing factors
+      type: "[]string"
+      required: false
+    severity_reducing_factors:
+      title: Severity Reducing Factors
+      description: Severity reducing factors
+      type: "[]string"
+      required: false
+    state:
+      title: State
+      description: State
+      type: state
+      required: false
+    subject_type:
+      title: Subject Type
+      description: Subject type
+      type: string
+      required: false
+    tags_info_list:
+      title: Tags Info List
+      description: Tags info list
+      type: "[]string"
+      required: false
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+    type_key:
+      title: Type Key
+      description: Type key
+      type: string
+      required: false
+    type_string:
+      title: Type String
+      description: Type string
+      type: string
+      required: false
+    user_defined:
+      title: User Defined
+      description: User defined
+      type: boolean
+      required: false
+  asset:
+    account_name:
+      title: Account Name
+      description: Account name
+      type: string
+      required: false
+    asset_category:
+      title: Asset Category
+      description: Asset category
+      type: string
+      required: false
+    asset_name:
+      title: Asset Name
+      description: Asset name
+      type: string
+      required: false
+    asset_state:
+      title: Asset State
+      description: Asset state
+      type: string
+      required: false
+    asset_subcategory:
+      title: Asset Subcategory
+      description: Asset subcategory
+      type: string
+      required: false
+    asset_type_string:
+      title: Asset Type String
+      description: Asset type string
+      type: string
+      required: false
+    asset_unique_id:
+      title: Asset Unique ID
+      description: Asset unique ID
+      type: string
+      required: false
+    asset_vendor_id:
+      title: Asset Vendor ID
+      description: Asset vendor ID
+      type: string
+      required: false
+    cloud_account_id:
+      title: Cloud Account ID
+      description: Cloud account ID
+      type: string
+      required: false
+    cloud_provider:
+      title: Cloud Provider
+      description: Cloud provider
+      type: string
+      required: false
+    cloud_provider_id:
+      title: Cloud Provider ID
+      description: Cloud provider ID
+      type: string
+      required: false
+    cloud_vendor_id:
+      title: Cloud Vendor ID
+      description: Cloud vendor ID
+      type: string
+      required: false
+    cluster_name:
+      title: Cluster Name
+      description: Cluster name
+      type: string
+      required: false
+    configuration:
+      title: Configuration
+      description: Configuration
+      type: object
+      required: false
+    group_name:
+      title: Group Name
+      description: Group name
+      type: string
+      required: false
+    group_unique_id:
+      title: Group Unique ID
+      description: Group unique ID
+      type: string
+      required: false
+    group_val:
+      title: Group Value
+      description: Group value
+      type: string
+      required: false
+    model:
+      title: Model
+      description: Model
+      type: object
+      required: false
+    organization_id:
+      title: Organization ID
+      description: Organization ID
+      type: string
+      required: false
+    organization_name:
+      title: Organization Name
+      description: Organization name
+      type: string
+      required: false
+    state:
+      title: State
+      description: State
+      type: object
+      required: false
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+  update_alert_details:
+    description:
+      title: Description
+      description: Description
+      type: string
+      required: false
+    from:
+      title: From
+      description: From
+      type: string
+      required: false
+    to:
+      title: To
+      description: To
+      type: string
+      required: false
+  update_alert_status_response:
+    unique_id:
+      title: Unique ID
+      description: Unique ID
+      type: string
+      required: false
+    user_email:
+      title: User Email
+      description: User email
+      type: string
+      required: false
+    user_name:
+      title: User Name
+      description: User name
+      type: string
+      required: false
+    alert_id:
+      title: Alert ID
+      description: Alert ID
+      type: string
+      required: false
+    asset_unique_id:
+      title: Asset Unique ID
+      description: Asset Unique ID
+      type: string
+      required: false
+    create_time:
+      title: Create Time
+      description: Create time
+      type: string
+      required: false
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+    sub_type:
+      title: Subtype
+      description: Subtype
+      type: string
+      required: false
+    details:
+      title: Details
+      description: Details
+      type: update_alert_details
+      required: false
+  update_severity_details:
+    description:
+      title: Description
+      description: Description
+      type: string
+      required: false
+    severity:
+      title: Severity
+      description: Severity
+      type: string
+      required: false
+  update_alert_severity_response:
+    unique_id:
+      title: Unique ID
+      description: Unique ID
+      type: string
+      required: false
+    user_email:
+      title: User Email
+      description: User email
+      type: string
+      required: false
+    user_name:
+      title: User Name
+      description: User name
+      type: string
+      required: false
+    alert_id:
+      title: Alert ID
+      description: Alert ID
+      type: string
+      required: false
+    asset_unique_id:
+      title: Asset Unique ID
+      description: Asset unique ID
+      type: string
+      required: false
+    create_time:
+      title: Create Time
+      description: Create time
+      type: string
+      required: false
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+    details:
+      title: Details
+      description: Details
+      type: update_severity_details
+      required: false
+  user:
+    name:
+      title: User ID
+      description: User ID
+      type: string
+      required: false
+    email:
+      title: Email
+      description: Email
+      type: string
+      required: false
+    first:
+      title: First Name
+      description: First name
+      type: string
+      required: false
+    last:
+      title: Last Name
+      description: Last name
+      type: string
+      required: false
+  invitation:
+    id:
+      title: ID
+      description: ID
+      type: string
+      required: false
+    email:
+      title: Email
+      description: Email
+      type: string
+      required: false
+    invite_email_sent_at:
+      title: Invite Email Sent At
+      description: Invite email sent at
+      type: string
+      required: false
+    role:
+      title: Role
+      description: Role
+      type: string
+      required: false
+    all_cloud_account:
+      title: All Cloud Account
+      description: All cloud account
+      type: boolean
+      required: false
+    cloud_accounts:
+      title: Cloud Accounts
+      description: Cloud accounts
+      type: "[]string"
+      required: false
+  get_users_response:
+    name:
+      title: Organization Name
+      description: Organization name
+      type: string
+      required: false
+    users:
+      title: Users
+      description: Users
+      type: "[]user"
+      required: false
+    pending_invites:
+      title: Pending Invites
+      description: Pending invites
+      type: "[]invitation"
+      required: false
+
+connection:
+  region:
+    title: Region
+    description: The region for Orca Security
+    type: string
+    enum:
+      - US
+      - EU
+      - AU
+    required: true
+    default: US
+    example: US
+  api_token:
+    title: API Token
+    type: credential_secret_key
+    description: Orca Security API Token
+    required: true
+    example: 44d88612fea8a8f36de82e1278abb02f
+
+triggers:
+  new_alert:
+    title: New Alert
+    description: Indicate that a new alert has occurred
+    input:
+      interval:
+        title: Interval
+        description: Interval between next poll in seconds, default value set to 60 seconds
+        type: integer
+        required: true
+        example: 60
+        default: 60
+      filters:
+        title: Filters
+        description: The list of objects containing fields against which new alerts will be filtered
+        type: "[]object"
+        required: false
+        example: '[{"field": "state.severity", "includes": ["hazardous"]}]'
+    output:
+      alert:
+        title: Alert
+        description: Information about a new alert
+        type: alert
+        required: false
+actions:
+  get_assets:
+    title: Get Assets
+    description: Get assets that match the specified filter criteria. If no inputs are given, all assets will be returned
+    input:
+      asset_unique_id:
+        title: Asset Unique ID
+        description: Unique ID of the asset for which information will be obtained
+        type: string
+        required: false
+        example: example-asset-123
+      cloud_provider_id:
+        title: Cloud Provider ID
+        description: ID of the cloud provider for which the assets will be returned
+        type: string
+        required: false
+        example: 123456789
+      asset_type:
+        title: Asset Type
+        description: The type of the asset
+        type: string
+        required: false
+        example: container
+      asset_state:
+        title: Asset State
+        description: The state of the asset
+        type: string
+        required: false
+        example: running
+      asset_labels:
+        title: Asset Label
+        description: The label of the asset
+        type: string
+        required: false
+        example: internet_facing
+      internet_facing:
+        title: Internet Facing
+        description: Whether asset is accessible from the internet
+        type: string
+        required: false
+        example: true
+      compute_regions:
+        title: Region
+        description: The region for which the assets will be returned
+        type: string
+        required: false
+        example: us-east-1
+      compute_vpcs:
+        title: VPC
+        description: The virtual private cloud
+        type: string
+        required: false
+        example: vpc-1234567890
+      state_score:
+        title: Score
+        description: The score of the asset
+        type: string
+        required: false
+        example: 4
+      state_severity:
+        title: Severity
+        description: The severity of the asset
+        type: string
+        required: false
+        example: informational
+    output:
+      assets:
+        title: Assets
+        description: Results containing information about assets
+        type: "[]asset"
+        required: false
+      total_items:
+        title: Total Items
+        description: Total number of assets
+        type: integer
+        required: true
+      total_ungrouped_items:
+        title: Total Ungrouped Items
+        description: Total number of ungrouped assets
+        type: integer
+        required: false
+      total_supported_items:
+        title: Total Supported Items
+        description: Total number of supported assets
+        type: integer
+        required: false
+  get_asset_by_id:
+    title: Get Asset by ID
+    description: Get asset information by providing asset unique ID
+    input:
+      asset_unique_id:
+        title: Asset Unique ID
+        description: Unique ID of the asset for which information will be obtained
+        type: string
+        required: true
+        example: example-asset
+    output:
+      asset:
+        title: Asset
+        description: Information about the asset with the given unique ID
+        type: asset
+        required: true
+  get_alerts:
+    title: Get Alerts
+    description: Get alerts that match the specified filter criteria. If no filters are given, all alerts will be returned
+    input:
+      filters:
+        title: Filters
+        description: The object containing the fields against which the alerts will be filtered
+        type: object
+        required: false
+        example: '{"state.severity": "hazardous"}'
+      limit:
+        title: Limit
+        description: "Maximum number of alerts returned (max value: 1000)"
+        type: integer
+        required: false
+        default: 20
+        example: 20
+    output:
+      alerts:
+        title: Alerts
+        description: Results containing information about alerts
+        type: "[]alert"
+        required: false
+  get_alert_by_id:
+    title: Get Alert by ID
+    description: Get alert information for given alert ID
+    input:
+      alert_id:
+        title: Alert ID
+        description: ID of the alert for which information will be obtained
+        type: string
+        required: true
+        example: orca-111
+    output:
+      alert:
+        title: Alert
+        description: Information about the alert with the given ID
+        type: alert
+        required: true
+  update_alert_status:
+    title: Update Alert Status
+    description: Update the status for the given alert ID
+    input:
+      alert_id:
+        title: Alert ID
+        description: ID of the alert for which the status will be updated
+        type: string
+        required: true
+        example: orca-111
+      status:
+        title: Status
+        description: The status of the alert to which it will be changed
+        type: string
+        enum:
+        - in_progress
+        - open
+        - close
+        - dismiss
+        required: true
+        example: close
+    output:
+      response:
+        title: Response
+        description: A response with information about the update
+        type: update_alert_status_response
+        required: false
+  update_alert_severity:
+    title: Update Alert Severity
+    description: Update the severity for the given alert ID
+    input:
+      alert_id:
+        title: Alert ID
+        description: ID of the alert for which the severity will be updated
+        type: string
+        required: true
+        example: orca-111
+      severity:
+        title: Severity
+        description: The severity of the alert to which it will be changed
+        type: string
+        required: true
+        example: hazardous
+    output:
+      response:
+        title: Response
+        description: A response with information about the update
+        type: update_alert_severity_response
+        required: false
+  download_malicious_file:
+    title: Download Malicious File
+    description: Download the malicious file for the given alert ID
+    input:
+      alert_id:
+        title: Alert ID
+        description: ID of the alert for which the file will be downloaded
+        type: string
+        required: true
+        example: orca-111
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+      content:
+        title: Content
+        description: Content of the file
+        type: bytes
+        required: false
+  verify_alert:
+    title: Verify Alert
+    description: Initiate verification for a given alert ID to check if it is resolved
+    input:
+      alert_id:
+        title: Alert ID
+        description: ID of the alert that will be verified
+        type: string
+        required: true
+        example: orca-111
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+      status:
+        title: Status
+        description: Current verification status
+        type: string
+        required: false
+  get_users:
+    title: Get Users
+    description: Get organization users information. Administrator privileges are required to perform this action
+    output:
+      users:
+        title: Users
+        description: A response containing information about users
+        type: get_users_response
+        required: true
+  add_user:
+    title: Add User
+    description: Create an invitation to the organization for the specified user. Administrator privileges are required to perform this action
+    input:
+      invite_user_email:
+        title: User Email
+        description: Email address of the user for whom the invitation will be created
+        type: string
+        required: true
+        example: user@example.com
+      role:
+        title: Role
+        description: Role name or ID
+        type: string
+        required: true
+        example: 44d88612-fea8-a8f3-6de8-2e1278abb02f
+      all_cloud_accounts:
+        title: All Cloud Accounts
+        description: Whether the user will have access to all cloud accounts
+        type: boolean
+        required: true
+        example: false
+      cloud_accounts:
+        title: Cloud Accounts
+        description: A list of cloud accounts to which the user will have access
+        type: "[]string"
+        required: false
+        example: '["test-account"]'
+      should_send_email:
+        title: Should Send Email
+        description: Whether the email should be sent
+        type: boolean
+        required: true
+        example: true
+    output:
+      status:
+        title: Status
+        description: Status of the action performed
+        type: string
+        required: true
+  delete_user:
+    title: Delete User
+    description: Delete an invitation to the organization for the specified user. Administrator privileges are required to perform this action
+    input:
+      delete_invite_email:
+        title: User Email
+        description: Email address of the user for whom the invitation will be deleted
+        type: string
+        required: true
+        example: user@example.com
+    output:
+      status:
+        title: Status
+        description: Status of the action performed
+        type: string
+        required: true
