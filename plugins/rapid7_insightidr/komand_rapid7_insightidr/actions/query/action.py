@@ -26,7 +26,7 @@ class Query(insightconnect_plugin_runtime.Action):
         three_months_seconds = 7776000
         request_params = {"from": (time_now - three_months_seconds) * 1000, "to": time_now * 1000}
         response = request.resource_request(
-            QueryLogs.get_query_logs(self.connection.url, params.get(Input.ID)),
+            QueryLogs.get_query_logs(self.connection.region, params.get(Input.ID)),
             "get",
             params=request_params,
         )
