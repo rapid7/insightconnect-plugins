@@ -16,7 +16,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params={}):
         api_key = params.get(Input.API_KEY).get("secretKey")
-        self.url = Investigations.connection_api_url(params.get(Input.REGION))
+        self.region = params.get(Input.REGION)
+        self.url = Investigations.connection_api_url(self.region)
         if not self.url.endswith("/"):
             self.url = f"{self.url}/"
 
