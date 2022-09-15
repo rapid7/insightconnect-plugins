@@ -1,13 +1,10 @@
-class Investigations:
-
-    # Methods to populate Investigation endpoints
-
+class Util:
     @staticmethod
-    def connection_api_url(region_code: str) -> str:
+    def map_region(region: str) -> str:
         """
         URI for listing investigations
-        :param region_code: URL to the InsightIDR console
-        :return: pre-populated /idr/v2/investigations/
+        :param region: The region code for the InsightIDR API to be mapped
+        :return: Region-code
         """
         region_map = {
             "United States 1": "us",
@@ -18,8 +15,21 @@ class Investigations:
             "Australia": "au",
             "Japan": "ap",
         }
+        return region_map.get(region, "us")
 
-        return f"https://{region_map.get(region_code, 'us')}.api.insight.rapid7.com/"
+
+class Investigations:
+
+    # Methods to populate Investigation endpoints
+
+    @staticmethod
+    def connection_api_url(region_code: str) -> str:
+        """
+        URI for listing investigations
+        :param region_code: The region code for the InsightIDR API to be mapped
+        :return: pre-populated /idr/v2/investigations/
+        """
+        return f"https://{Util.map_region(region_code)}.api.insight.rapid7.com/"
 
     @staticmethod
     def list_investigations(console_url: str) -> str:
@@ -149,26 +159,26 @@ class Threats:
 
 class QueryLogs:
     @staticmethod
-    def get_query_logs(console_url: str, log_id: str):
+    def get_query_logs(region_code: str, log_id: str):
         """
         URI for adding get_query_logs
-        :param console_url: URL to the InsightIDR console
+        :param region_code: The region code for the InsightIDR API to be mapped
         :param log_id: The ID of a log for which the indicators are going to be added
         :return: pre-populated /query/logs/{log_id}
         """
 
-        return f"{console_url}query/logs/{log_id}"
+        return f"https://{Util.map_region(region_code)}.rest.logs.insight.rapid7.com/query/logs/{log_id}"
 
 
 class Queries:
     @staticmethod
-    def get_all_queries(console_url: str):
+    def get_all_queries(region_code: str):
         """
         URI for retrieving all saved queries
-        :param console_url: URL to the InsightIDR console
+        :param region_code: The region code for the InsightIDR API to be mapped
         :return: pre-populated /query/saved_queries
         """
-        return f"{console_url}query/saved_queries"
+        return f"https://{Util.map_region(region_code)}.rest.logs.insight.rapid7.com/query/saved_queries"
 
     @staticmethod
     def get_query_by_id(console_url: str, query_id: str):
