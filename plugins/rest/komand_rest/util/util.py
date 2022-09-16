@@ -147,6 +147,21 @@ class RestAPI(object):
                     assistance="Please complete the connection with a secret key or change the authentication type.",
                 )
 
+    def create_headers_for_custom_auth(self, headers: dict, secret_key ) -> dict:
+        new_headers = {}
+        for key, value in self.default_headers.items():
+            if value == self.CUSTOM_SECRET_INPUT:
+                if not secret_key:
+                    raise PluginException(
+                        cause="'CUSTOM_SECRET_INPUT' used in authentication header, but no secret provided.",
+                        assistance="When using 'CUSTOM_SECRET_INPUT' as a value in authentication headers the"
+                                   " 'secret_key' field is required.",
+                    )
+                new_headers[key] = secret_key
+            else:
+                new_headers[key] = value
+        return new_headers
+
     def with_credentials(
         self, authentication_type: str, username: str = None, password: str = None, secret_key: str = None
     ):
@@ -167,19 +182,7 @@ class RestAPI(object):
                 self.default_headers, {"content-type": "application/json", "x-pendo-integration-key": secret_key}
             )
         elif authentication_type == "Custom":
-            new_headers = {}
-            for key, value in self.default_headers.items():
-                if value == self.CUSTOM_SECRET_INPUT:
-                    if not secret_key:
-                        raise PluginException(
-                            cause="'CUSTOM_SECRET_INPUT' used in authentication header, but no secret provided.",
-                            assistance="When using 'CUSTOM_SECRET_INPUT' as a value in authentication headers the"
-                            " 'secret_key' field is required.",
-                        )
-                    new_headers[key] = secret_key
-                else:
-                    new_headers[key] = value
-            self.default_headers = new_headers
+            self.default_headers = self.create_headers_for_custom_auth(self.default_headers, secret_key)
 
     def response_handler(self, response: Response) -> Response:
         if response.status_code == 401:
