@@ -5,6 +5,7 @@ from .schema import GetInput, GetOutput, Component, Input, Output
 from komand_rest.util.util import Common
 from komand_rest.util.util import convert_body_for_urlencoded, check_headers_for_urlencoded
 
+
 class Get(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(

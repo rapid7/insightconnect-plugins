@@ -30,7 +30,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         )
 
         if self.authentication_type and self.authentication_type != "No Authentication":
-            if self.authentication_type in ('Basic Auth', 'Digest Auth'):
+            if self.authentication_type in ("Basic Auth", "Digest Auth"):
                 username = params.get(Input.BASIC_AUTH_CREDENTIALS).get("username")
                 password = params.get(Input.BASIC_AUTH_CREDENTIALS).get("password")
             else:

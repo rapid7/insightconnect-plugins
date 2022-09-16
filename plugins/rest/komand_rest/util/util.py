@@ -130,7 +130,7 @@ class RestAPI(object):
         self.certificate = certificate
         self.key = key
 
-    def with_credentials(
+    def check_auth_type_validity(
         self, authentication_type: str, username: str = None, password: str = None, secret_key: str = None
     ):
         if authentication_type in ("Basic Auth", "Digest Auth"):
@@ -146,6 +146,11 @@ class RestAPI(object):
                     cause="An authentication type was selected that requires a secret key.",
                     assistance="Please complete the connection with a secret key or change the authentication type.",
                 )
+
+    def with_credentials(
+        self, authentication_type: str, username: str = None, password: str = None, secret_key: str = None
+    ):
+        self.check_auth_type_validity(authentication_type, username, password, secret_key)
 
         if authentication_type == "Basic Auth":
             self.auth = HTTPBasicAuth(username, password)
@@ -176,7 +181,6 @@ class RestAPI(object):
                     new_headers[key] = value
             self.default_headers = new_headers
 
-
     def response_handler(self, response: Response) -> Response:
         if response.status_code == 401:
             raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
@@ -194,7 +198,6 @@ class RestAPI(object):
         if 200 <= response.status_code < 300:
             return response
         raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-
 
     def call_api(
         self,
@@ -231,10 +234,7 @@ class RestAPI(object):
                 request_params["cert"] = certificate_path
             if self.key and self.certificate:
                 key_path = write_to_file(self.key, file_path)
-                request_params["cert"] = (
-                    certificate_path,
-                    key_path
-                )
+                request_params["cert"] = (certificate_path, key_path)
 
             response = requests.request(**request_params)
             if not self.fail_on_error:
