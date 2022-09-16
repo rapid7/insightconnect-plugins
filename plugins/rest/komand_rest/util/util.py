@@ -147,15 +147,15 @@ class RestAPI(object):
                     assistance="Please complete the connection with a secret key or change the authentication type.",
                 )
 
-    def create_headers_for_custom_auth(self, headers: dict, secret_key ) -> dict:
+    def create_headers_for_custom_auth(self, headers: dict, secret_key) -> dict:
         new_headers = {}
-        for key, value in self.default_headers.items():
+        for key, value in headers.items():
             if value == self.CUSTOM_SECRET_INPUT:
                 if not secret_key:
                     raise PluginException(
                         cause="'CUSTOM_SECRET_INPUT' used in authentication header, but no secret provided.",
                         assistance="When using 'CUSTOM_SECRET_INPUT' as a value in authentication headers the"
-                                   " 'secret_key' field is required.",
+                        " 'secret_key' field is required.",
                     )
                 new_headers[key] = secret_key
             else:
