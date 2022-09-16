@@ -1,5 +1,4 @@
 import json
-import os.path
 from logging import Logger
 
 from urllib.parse import urlparse, urlsplit, urlunsplit, urlencode

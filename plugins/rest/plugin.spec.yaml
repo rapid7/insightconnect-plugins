@@ -69,12 +69,12 @@ connection:
     example: true
   client_certificate:
     title: Client Certificate
-    description: Client certificate for mutual TLS
+    description: Client certificate for mutual TLS (Certificate or Certificate/Key combination)
     type: file
     required: false
   private_key:
     title: Private Key
-    description: Private key for mutual TLS
+    description: Private key for mutual TLS (requires Client Certificate)
     type: file
     required: false
   basic_auth_credentials:
