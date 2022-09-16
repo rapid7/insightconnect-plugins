@@ -53,7 +53,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "client_certificate": {
       "$ref": "#/definitions/file",
       "title": "Client Certificate",
-      "description": "Client certificate for mutual TLS",
+      "description": "Client certificate for mutual TLS (Certificate or Certificate/Key combination)",
       "order": 6
     },
     "default_headers": {
@@ -72,7 +72,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "private_key": {
       "$ref": "#/definitions/file",
       "title": "Private Key",
-      "description": "Private key for mutual TLS",
+      "description": "Private key for mutual TLS (requires Client Certificate)",
       "order": 7
     },
     "secret": {
