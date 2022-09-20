@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 # Custom imports below
 
@@ -12,6 +13,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params):
         self.token = params["cred_token"]["secretKey"]
 
-    def test(self, params):
+    def test(self):
         # TODO - Implement connection test
         return {"success": True}
