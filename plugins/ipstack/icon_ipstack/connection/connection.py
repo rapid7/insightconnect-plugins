@@ -11,3 +11,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params):
         self.token = params["cred_token"]["secretKey"]
+
+    def test(self, params):
+        # TODO - Implement connection test
+        return {"success": True}
