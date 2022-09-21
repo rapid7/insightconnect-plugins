@@ -4,9 +4,10 @@ products: [insightconnect]
 name: jamf
 title: Jamf
 description: Jamf is a popular product for managing iPads, iPhones, Macs, and Apple TVs for schools and businesses
-version: 1.1.1
+version: 1.2.0
 vendor: rapid7
 support: community
+supported_versions: ["Plugin successfully tested at 2022-08-26"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/jamf
@@ -131,7 +132,7 @@ types:
       title: Criteria
       description: Criteria
       type: '[]search_criteria'
-      requierd: false
+      required: false
     site:
       title: Site
       description: Site
@@ -186,20 +187,23 @@ types:
 connection:
   url:
     title: Jamf URL
-    description: The full URL for your Jamf instance, e.g. https://instance.jamfcloud.com
+    description: The full URL for your Jamf instance
     type: string
     required: true
+    example: https://{instance}.jamfcloud.com
   client_login:
     title: Client Login Information
     description: The Jamf username and password for basic authentication API interaction
     type: credential_username_password
     required: true
+    example: '{"username": "Example User", "password": "Example Password"}'
   timeout:
     title: Timeout
     description: The interval in seconds before abandoning an attempt to access Jamf
     type: integer
     required: false
     default: 30
+    example: 30
 actions:
   get_group_detail:
     title: Get Group Details
@@ -210,6 +214,7 @@ actions:
         description: Group ID
         type: integer
         required: true
+        example: 1
     output:
       group_detail:
         title: Group Detail
@@ -225,6 +230,7 @@ actions:
         description: User name
         type: string
         required: true
+        example: Example Name
     output:
       device_detail:
         title: Device Detail
@@ -240,6 +246,7 @@ actions:
         description: Device ID
         type: integer
         required: true
+        example: 1
     output:
       device_groups:
         title: Device Groups
@@ -255,6 +262,7 @@ actions:
         description: List of devices IDs
         type: '[]string'
         required: true
+        example: '["1", "2"]'
     output:
       status:
         title: Status
@@ -262,7 +270,7 @@ actions:
         type: integer
         required: true
   add_computer_to_group:
-    title: Add Computer To A Group
+    title: Add Computer to a Group
     description: Add computer to a group
     input:
       ID:
@@ -270,11 +278,13 @@ actions:
         description: Group ID
         type: integer
         required: true
+        example: 1
       computer_ids:
         title: Computer IDs
         description: Computer IDs
         type: '[]integer'
         required: true
+        example: '[1, 2, 3]'
     output:
       status:
         title: Status
@@ -290,9 +300,54 @@ actions:
         description: Device ID
         type: string
         required: true
+        example: 1
     output:
       user_location_detail:
         title: User Location Details
         description: User location details
         type: user_location_detail
+        required: true
+  lock_computer:
+    title: Lock Computer
+    description: Lock the user's computer by its ID
+    input:
+      ID:
+        title: Computer ID
+        description: Identifier of the computer
+        type: string
+        required: true
+        example: 134
+      passcode:
+        title: Computer Passcode
+        description: The passcode of the computer
+        type: string
+        required: true
+        example: 123456
+    output:
+      status:
+        title: Status
+        description: Status
+        type: boolean
+        required: true
+  erase_computer:
+    title: Erase Computer
+    description: Erase the user's computer by its ID
+    input:
+      ID:
+        title: Computer ID
+        description: Identifier of the computer
+        type: string
+        required: true
+        example: 134
+      passcode:
+        title: Computer Passcode
+        description: The passcode of the computer
+        type: string
+        required: true
+        example: 123456
+    output:
+      status:
+        title: Status
+        description: Status
+        type: boolean
         required: true

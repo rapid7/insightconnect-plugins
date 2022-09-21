@@ -1,0 +1,24 @@
+{
+  "mobile_device": {
+    "location": {
+      "username": "Example Name",
+      "real_name": "Example Name",
+      "email_address": "user@example.com",
+      "position": "Example Position",
+      "phone": "111222333",
+      "department": "Example Department",
+      "building": "Example Building",
+      "room": "Example Room"
+    },
+    "mobile_device_groups": [
+      {
+        "id": 1,
+        "name": "Example Name 1"
+      },
+      {
+        "id": 2,
+        "name": "Example Name 2"
+      }
+    ]
+  }
+}
