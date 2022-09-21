@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 # Custom imports below
 import json
