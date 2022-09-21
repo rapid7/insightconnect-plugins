@@ -47,7 +47,8 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
         "CA",
         "ZA",
         "AU",
-        "Offshore"
+        "Offshore",
+        "Sandbox"
       ],
       "order": 1
     },

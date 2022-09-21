@@ -1,0 +1,37 @@
+{
+  "parameters": [
+    [
+      "success",
+      "user@example.com",
+      "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      true,
+      [],
+      false,
+      {
+        "status": "success"
+      }
+    ],
+    [
+      "success2",
+      "user@example.com",
+      "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      false,
+      ["test-account"],
+      true,
+      {
+        "status": "success"
+      }
+    ],
+    [
+      "success3",
+      "user@example.com",
+      "viewer",
+      true,
+      [],
+      true,
+      {
+        "status": "success"
+      }
+    ]
+  ]
+}

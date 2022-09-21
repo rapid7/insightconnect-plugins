@@ -1,0 +1,5 @@
+{
+  "jwt": {
+    "access": "access_token"
+  }
+}

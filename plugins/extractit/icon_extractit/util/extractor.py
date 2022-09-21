@@ -68,7 +68,7 @@ def _extract_dates_from_xlsx(input_file: Any) -> str:
     :param input_file: Opened in buffer xlsx file
     :type input_file: Any
 
-    :return: Str containing all the ęxtracted date and time values separated by space character
+    :return: Str containing all the extracted date and time values separated by space character
     :rtype: str
     """
 
@@ -187,7 +187,7 @@ def extract_content_from_file(provided_file: bytes) -> str:
             except PDFSyntaxError:
                 raise PluginException(
                     cause="The type of the provided file is not supported.",
-                    assistance="Supported file types are text/binary, such as: PDF, DOCX, PPTX, XLSX, ODF, .txt, .zip",
+                    assistance="Supported file types are text/binary, such as: PDF, DOCX, PPTX, XLSX, ODT, ODP, ODF, TXT, ZIP",
                 )
 
 
