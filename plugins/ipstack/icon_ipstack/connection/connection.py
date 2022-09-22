@@ -24,8 +24,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
         )
         try:
             resp = insightconnect_plugin_runtime.helper.open_url(url)
-        except Exception as e:
+        except Exception as error:
             raise ConnectionTestException(
-                cause="Failed to get URL", assistance="Please check your API key is valid and try again"
+                cause=f"Failed to get URL, API error {error}",
+                assistance="Please check your API key is valid and try again",
             )
         return {"success": True}
