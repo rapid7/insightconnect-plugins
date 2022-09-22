@@ -23,7 +23,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             + "&output=json"
         )
         try:
-            resp = insightconnect_plugin_runtime.helper.open_url(url)
+            insightconnect_plugin_runtime.helper.open_url(url)
         except Exception as error:
             raise ConnectionTestException(
                 cause=f"Failed to get URL, API error {error}",
