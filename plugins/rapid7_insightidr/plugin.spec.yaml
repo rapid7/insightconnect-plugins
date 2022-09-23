@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 4.0.1
+version: 4.1.0
 supported_versions: ["Latest release successfully tested on 2022-07-20."]
 vendor: rapid7
 cloud_ready: true
@@ -485,6 +485,89 @@ types:
       title: Logs
       type: "[]string"
       description: Query logs
+      required: false
+  creator:
+    name:
+      title: Name
+      description: The name of who or what created a resource
+      type: string
+      required: false
+    type:
+      title: Type
+      description: A type that denotes who or what created a resource
+      type: string
+      required: false
+  attachment:
+    created_time:
+      title: Created Time
+      description: The time the attachment was created as an ISO formatted timestamp
+      type: date
+      required: false
+    rrn:
+      title: RRN
+      description: The RRN of the attachment
+      type: string
+      required: false
+    creator:
+      title: Creator
+      description: Who or what created the attachment
+      type: creator
+      required: false
+    file_name:
+      title: File Name
+      description: The original filename of the uploaded attachment
+      type: string
+      required: false
+    mime_type:
+      title: MIME Type
+      description: The MIME type of the attachment
+      type: string
+      required: false
+    scan_status:
+      title: Scan Status
+      description: The scan status of the attachment, indicating whether the attachment has been scanned and, if so, the result. INFECTED or PENDING attachments may not be downloaded
+      type: string
+      required: false
+    size:
+      title: Size
+      description: The size in bytes of the attachment
+      type: integer
+      required: false
+  comment:
+    created_time:
+      title: Created Time
+      description: The time the comment was created as an ISO formatted timestamp
+      type: date
+      required: false
+    rrn:
+      title: RRN
+      description: The RRN of the comment
+      type: string
+      required: false
+    target:
+      title: Target
+      description: The target where the comment belongs to
+      type: string
+      required: false
+    creator:
+      title: Creator
+      description: Who or what created the comment
+      type: creator
+      required: false
+    body:
+      title: Body
+      description: The body of the comment
+      type: string
+      required: false
+    visibility:
+      title: Visibility
+      description: Who can view the comment
+      type: string
+      required: false
+    attachments:
+      title: Attachments
+      description: List of attachments associated with this comment
+      type: "[]attachment"
       required: false
 connection:
   api_key:
@@ -1281,4 +1364,208 @@ actions:
         title: Saved Query
         description: Saved LEQL query
         type: query
+        required: true
+  list_comments:
+    title: List Comments
+    description: List all comments on an investigation by passing an investigation's RRN as the target value
+    input:
+      target:
+        title: Target
+        description: The target of the comment, which determines where it will appear within InsightIDR
+        type: string
+        required: true
+        example: "rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210"
+      index:
+        title: Index
+        description: The optional 0 based index of the page to retrieve. Must be an integer greater than or equal to 0. Default value set to 0
+        type: integer
+        required: false
+        default: 0
+        example: 3
+      size:
+        title: Size
+        description: Size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 100. Default value set to 20
+        type: integer
+        required: false
+        default: 20
+        example: 100
+    output:
+      comments:
+        title: Comments
+        description: List of comments
+        type: "[]comment"
+        required: false
+      success:
+        title: Success
+        description: Whether the action was successful or not
+        type: boolean
+        required: true
+  create_comment:
+    title: Create Comment
+    description: Create a comment for a particular target. The target determines where the comment will appear within InsightIDR. Only certain types of RRNs are permitted as targets, such as investigation RRNs
+    input:
+      target:
+        title: Target
+        description: The target of the comment, which determines where it will appear within InsightIDR
+        type: string
+        required: true
+        example: "rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210"
+      body:
+        title: Body
+        description: The body of the comment
+        type: string
+        required: false
+        example: Example comment
+      attachments:
+        title: Attachments
+        description: An array of attachment RRNs to associate with the comment
+        type: "[]string"
+        required: false
+        example: ["rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210"]
+    output:
+      comment:
+        title: Comment
+        description: Newly created comment
+        type: comment
+        required: false
+      success:
+        title: Success
+        description: Whether the action was successful or not
+        type: boolean
+        required: true
+  delete_comment:
+    title: Delete Comment
+    description: Delete a comment by using an RRN. The RRN determines which comment will be deleted
+    input:
+      comment_rrn:
+        title: Comment RRN
+        description: The RRN of the comment
+        type: string
+        required: true
+        example: "rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:comment:ABCDEF543210"
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful or not
+        type: boolean
+        required: true
+  list_attachments:
+    title: List Attachments
+    description: Retrieves attachments matching the given request parameters
+    input:
+      target:
+        title: Target
+        description: The RRN of the target, for which attachments will be returned
+        type: string
+        required: true
+        example: "rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210"
+      index:
+        title: Index
+        description: The optional 0 based index of the page to retrieve. Must be an integer greater than or equal to 0. Default value set to 0
+        type: integer
+        required: false
+        default: 0
+        example: 3
+      size:
+        title: Size
+        description: Size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 100. Default value set to 20
+        type: integer
+        required: false
+        default: 20
+        example: 100
+    output:
+      attachments:
+        title: Attachments
+        description: List of attachments
+        type: "[]attachment"
+        required: false
+      success:
+        title: Success
+        description: Whether the action was successful or not
+        type: boolean
+        required: true
+  upload_attachment:
+    title: Upload Attachment
+    description: Upload an attachment
+    input:
+      filename:
+        title: Filename
+        description: Name of the file, which should contain the file extension
+        type: string
+        required: true
+        example: test.txt
+      file_content:
+        title: File Content
+        description: Base64 encoded content of the file
+        type: bytes
+        required: true
+        example: dGVzdA==
+    output:
+      attachment:
+        title: Attachment
+        description: Attachment details
+        type: "[]attachment"
+        required: false
+      success:
+        title: Success
+        description: Whether the action was successful or not
+        type: boolean
+        required: true
+  get_attachment_information:
+    title: Get Attachment Information
+    description: Get information from an attachment by RRN. The RRN determines which attachment information is retrieved from
+    input:
+      attachment_rrn:
+        title: Attachment RRN
+        description: The RRN of the attachment
+        type: string
+        required: true
+        example: "rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210"
+    output:
+      attachment:
+        title: Attachment
+        description: Attachment details
+        type: attachment
+        required: false
+      success:
+        title: Success
+        description: Whether the action was successful or not
+        type: boolean
+        required: true
+  delete_attachment:
+    title: Delete Attachment
+    description: Delete an attachment with the given RRN
+    input:
+      attachment_rrn:
+        title: Attachment RRN
+        description: The RRN of the attachment
+        type: string
+        required: true
+        example: "rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210"
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful or not
+        type: boolean
+        required: true
+  download_attachment:
+    title: Download Attachment
+    description: Download an attachment by RRN. The RRN determines which attachment is downloaded
+    input:
+      attachment_rrn:
+        title: Attachment RRN
+        description: The RRN of the attachment
+        type: string
+        required: true
+        example: "rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210"
+    output:
+      attachment_content:
+        title: Attachment Content
+        description: The base64 encoded content of the attachment
+        type: bytes
+        required: false
+      success:
+        title: Success
+        description: Whether the action was successful or not
+        type: boolean
         required: true

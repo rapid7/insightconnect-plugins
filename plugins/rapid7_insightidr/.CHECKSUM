@@ -1,7 +1,7 @@
 {
-	"spec": "0fccd6e571e7920d1e047bb71236c1ce",
-	"manifest": "57732748bc02de982621105668ee651d",
-	"setup": "4112d40d20eb9c14b1a88060b250d921",
+	"spec": "17d10d04b192283de3e80a5b91fc751c",
+	"manifest": "87a86577df0900babc7932d39dce3b55",
+	"setup": "a051d659d695714a8dd1a98c171bc07a",
 	"schemas": [
 		{
 			"identifier": "add_indicators_to_a_threat/schema.py",
@@ -24,12 +24,28 @@
 			"hash": "e28a786869a719ea9ca96e123903afc0"
 		},
 		{
+			"identifier": "create_comment/schema.py",
+			"hash": "9cbdfb584a334772150f9004be9a43a7"
+		},
+		{
 			"identifier": "create_investigation/schema.py",
 			"hash": "977a2845d11ea53ba0ff72c8abab49c7"
 		},
 		{
 			"identifier": "create_threat/schema.py",
 			"hash": "99b153b82f67160e3b61b4ee550910f5"
+		},
+		{
+			"identifier": "delete_attachment/schema.py",
+			"hash": "678c10ef18b02f8a11f06c434107f4d3"
+		},
+		{
+			"identifier": "delete_comment/schema.py",
+			"hash": "7cfe4047114ef4337650b701936b8765"
+		},
+		{
+			"identifier": "download_attachment/schema.py",
+			"hash": "d080fb76788bdeb4daf3c577f5b9aa31"
 		},
 		{
 			"identifier": "get_a_log/schema.py",
@@ -48,12 +64,24 @@
 			"hash": "69e619f2f61842cbc3ae75edab42ea40"
 		},
 		{
+			"identifier": "get_attachment_information/schema.py",
+			"hash": "24118b3714f6746cadf273f74e8f84f4"
+		},
+		{
 			"identifier": "get_investigation/schema.py",
 			"hash": "149d9658fdc93d51dff4694e1882a3a4"
 		},
 		{
 			"identifier": "list_alerts_for_investigation/schema.py",
 			"hash": "78332eae881b0c36901dfacf9a8f1e67"
+		},
+		{
+			"identifier": "list_attachments/schema.py",
+			"hash": "d4404add7f2008a9d40839413bc880d7"
+		},
+		{
+			"identifier": "list_comments/schema.py",
+			"hash": "55813007d97cf69c079a7aef0dbd7b9c"
 		},
 		{
 			"identifier": "list_investigations/schema.py",
@@ -82,6 +110,10 @@
 		{
 			"identifier": "update_investigation/schema.py",
 			"hash": "519b1375887a53891489c2e2c294d961"
+		},
+		{
+			"identifier": "upload_attachment/schema.py",
+			"hash": "bebd0944f3a7528aae6a3298e5e42b33"
 		},
 		{
 			"identifier": "connection/schema.py",
