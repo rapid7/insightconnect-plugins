@@ -14,19 +14,5 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params):
         self.token = params.get(Input.CRED_TOKEN).get("secretKey")
 
-    def test(self, params):
-        url = (
-            "http://api.ipstack.com/"
-            + "check"
-            + "?access_key="
-            + params.get(Input.CRED_TOKEN).get("secretKey")
-            + "&output=json"
-        )
-        try:
-            insightconnect_plugin_runtime.helper.open_url(url)
-        except Exception as error:
-            raise ConnectionTestException(
-                cause=f"Failed to get URL, API error {error}",
-                assistance="Please check your API key is valid and try again",
-            )
+    def test(self):
         return {"success": True}
