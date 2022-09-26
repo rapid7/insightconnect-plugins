@@ -4,32 +4,40 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Gets a list of user's devices names and IDs"
+    DESCRIPTION = "Erase the user's computer by its ID"
 
 
 class Input:
-    NAME = "name"
+    ID = "ID"
+    PASSCODE = "passcode"
     
 
 class Output:
-    DEVICE_DETAIL = "device_detail"
+    STATUS = "status"
     
 
-class GetDevicesNameIdInput(insightconnect_plugin_runtime.Input):
+class EraseComputerInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "name": {
+    "ID": {
       "type": "string",
-      "title": "User Name",
-      "description": "User name",
+      "title": "Computer ID",
+      "description": "Identifier of the computer",
       "order": 1
+    },
+    "passcode": {
+      "type": "string",
+      "title": "Computer Passcode",
+      "description": "The passcode of the computer",
+      "order": 2
     }
   },
   "required": [
-    "name"
+    "ID",
+    "passcode"
   ]
 }
     """)
@@ -38,21 +46,21 @@ class GetDevicesNameIdInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class GetDevicesNameIdOutput(insightconnect_plugin_runtime.Output):
+class EraseComputerOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "device_detail": {
-      "type": "object",
-      "title": "Device Detail",
-      "description": "Device detail",
+    "status": {
+      "type": "boolean",
+      "title": "Status",
+      "description": "Status",
       "order": 1
     }
   },
   "required": [
-    "device_detail"
+    "status"
   ]
 }
     """)

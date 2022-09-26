@@ -1,0 +1,10 @@
+class Endpoint:
+    ADD_COMPUTER_TO_GROUP = "JSSResource/computergroups/id/{}"
+    ERASE_COMPUTER = "JSSResource/computercommands/command/EraseDevice/passcode/{}/id/{}"
+    GET_DEVICE_GROUPS = "JSSResource/mobiledevices/id/{}"
+    GET_DEVICES_NAME_ID = "JSSResource/users/name/{}"
+    GET_GROUP_DETAIL = "JSSResource/mobiledevicegroups/id/{}"
+    GET_USER_LOCATION = "JSSResource/mobiledevices/id/{}"
+    LOCK_COMPUTER = "JSSResource/computercommands/command/DeviceLock/passcode/{}/id/{}"
+    LOCK_MOBILE_DEVICES = "JSSResource/mobiledevicecommands/command/DeviceLock/id/{}"
+    USERS = "JSSResource/users"

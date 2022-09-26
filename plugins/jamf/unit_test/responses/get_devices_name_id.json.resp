@@ -1,0 +1,23 @@
+{
+  "user": {
+    "links": {
+      "computers": {
+        "id": 1,
+        "name": "Example Name"
+      },
+      "peripherals": {
+        "id": 1,
+        "name": "Example Name"
+      },
+      "mobile_devices": {
+        "id": 1,
+        "name": "Example Name"
+      },
+      "vpp_assignments": {
+        "id": 1,
+        "name": "Example Name"
+      },
+      "total_vpp_code_count": 1
+    }
+  }
+}
