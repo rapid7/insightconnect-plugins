@@ -466,7 +466,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
-* 5.1.0 - A support for Get with Body | Add SSL Support | Add Microsoft Graph API Support
+* 5.1.0 - Add support for Get with Body with new Body input of type object | Add support for TLS by providing new inputs for the connection, Client Certificate and Private Key of type file
 * 5.0.3 - POST supports x-www-form-urlencoded | PATCH to now take in an array of objects
 * 5.0.2 - Fix issue with JSON data parser for PATCH request
 * 5.0.1 - Update to make 'No Authentication' the default connection type
