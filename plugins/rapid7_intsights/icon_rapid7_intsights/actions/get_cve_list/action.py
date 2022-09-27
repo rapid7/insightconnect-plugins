@@ -10,5 +10,5 @@ class GetCveList(insightconnect_plugin_runtime.Action):
             name="get_cve_list", description=Component.DESCRIPTION, input=GetCveListInput(), output=GetCveListOutput()
         )
 
-    def run(self):
-        return clean({Output.CONTENT: self.connection.client.get_cve([])})
+    def run(self, params={}):
+        return clean(self.connection.client.get_cve([], params.get(Input.OFFSET)))

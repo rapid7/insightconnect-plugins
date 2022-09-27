@@ -128,7 +128,7 @@ class IntSightsAPI:
         self.logger = logger
 
     def get_indicator_by_value(self, ioc_value: str) -> dict:
-        return self.make_json_request("GET", f"public/v2/iocs/ioc-by-value?iocValue={ioc_value}")
+        return self.make_json_request("GET", f"public/v3/iocs/ioc-by-value?iocValue={ioc_value}")
 
     def enrich_indicator(self, ioc_value: str) -> dict:
         response = {}
@@ -167,22 +167,15 @@ class IntSightsAPI:
     def add_manual_alert(self, manual_alert_params: ManualAlertParams) -> str:
         return self.make_request("PUT", "public/v1/data/alerts/add-alert", json_data=manual_alert_params.to_dict()).text
 
-    def get_cve(self, cve_ids: [str]) -> list:
-        content = []
+    def get_cve(self, cve_ids: [str], offset: str = None) -> dict:
         path = "public/v1/cves/get-cves-list"
         query_params = {}
-        for _ in range(0, 9999):
-            if cve_ids:
-                query_params["cveId[]"] = cve_ids
-
-            response_cve_list = self.make_json_request("GET", path, params=query_params)
-            content.extend(response_cve_list.get("content", []))
-
-            query_params["offset"] = response_cve_list.get("nextOffset", "")
-            if not query_params["offset"]:
-                break
-
-        return content
+        if offset:
+            query_params["offset"] = offset
+        if cve_ids:
+            query_params["cveId[]"] = cve_ids
+        response_cve_list = self.make_json_request("GET", path, params=query_params)
+        return {"content": response_cve_list.get("content", []), "next_offset": response_cve_list.get("nextOffset", "")}
 
     def add_cve(self, cve_ids: [str]) -> dict:
         path = "public/v1/cves/add-cves"

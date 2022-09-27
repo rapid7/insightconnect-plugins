@@ -56,7 +56,7 @@ class Util:
             return MockResponse(401)
         elif kwargs.get("url") == "https://api.intsights.com/public/v1/test-credentials":
             return MockResponse(200)
-        elif kwargs.get("url") == "https://api.intsights.com/public/v2/iocs/ioc-by-value?iocValue=rapid7.com":
+        elif kwargs.get("url") == "https://api.intsights.com/public/v3/iocs/ioc-by-value?iocValue=rapid7.com":
             return MockResponse(200, "iocs_ioc-by-value")
         elif (
             kwargs.get("url") == "https://api.intsights.com/public/v1/iocs/enrich/rapid7.com"
@@ -66,7 +66,7 @@ class Util:
             return MockResponse(200, "enrich_indicator-in_progress")
         elif kwargs.get("url") == "https://api.intsights.com/public/v1/iocs/enrich/rapid7.com":
             return MockResponse(200, "enrich_indicator")
-        elif kwargs.get("url") == "https://api.intsights.com/public/v2/iocs/ioc-by-value?iocValue=empty":
+        elif kwargs.get("url") == "https://api.intsights.com/public/v3/iocs/ioc-by-value?iocValue=empty":
             return MockResponse(204)
         elif kwargs.get("url") == "https://api.intsights.com/public/v1/data/alerts/add-alert":
             return MockResponse(200, "add_manual_alert")
@@ -95,6 +95,11 @@ class Util:
             return MockResponse(200, "get_indicator_scan_status.bad")
         elif kwargs.get("url") == "https://api.intsights.com/public/v1/iocs/rescan":
             return MockResponse(200, "rescan_indicator")
+        elif (
+            kwargs.get("url") == "https://api.intsights.com/public/v1/cves/get-cves-list"
+            and kwargs.get("params").get("offset") == "2000-00-00T00:00:00.000Z::614b8972da44a60005036b01"
+        ):
+            return MockResponse(200, "get_cve_list")
         elif kwargs.get("url") == "https://api.intsights.com/public/v1/cves/get-cves-list" and kwargs.get("params").get(
             "cveId[]"
         ) == ["CVE-2020-7064"]:
