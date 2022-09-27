@@ -4,19 +4,32 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get a list of all CVEs from an account"
+    DESCRIPTION = "Get a partial list of all CVEs from an account"
 
 
 class Input:
-    pass
+    OFFSET = "offset"
+    
 
 class Output:
     CONTENT = "content"
+    NEXT_OFFSET = "next_offset"
     
 
 class GetCveListInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "offset": {
+      "type": "string",
+      "title": "Offset",
+      "description": "Offset value for pagination, if empty the first page of results will be returned",
+      "order": 1
+    }
+  }
+}
     """)
 
     def __init__(self):
@@ -37,11 +50,14 @@ class GetCveListOutput(insightconnect_plugin_runtime.Output):
         "$ref": "#/definitions/content"
       },
       "order": 1
+    },
+    "next_offset": {
+      "type": "string",
+      "title": "Next Offset",
+      "description": "Next offset value for pagination",
+      "order": 2
     }
   },
-  "required": [
-    "content"
-  ],
   "definitions": {
     "content": {
       "type": "object",

@@ -4,33 +4,40 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Force an indicator scan in IntSights TIP system"
+    DESCRIPTION = "Lock the user's computer by its ID"
 
 
 class Input:
-    INDICATOR_FILE_HASH = "indicator_file_hash"
+    ID = "ID"
+    PASSCODE = "passcode"
     
 
 class Output:
     STATUS = "status"
-    TASK_ID = "task_id"
     
 
-class RescanIndicatorInput(insightconnect_plugin_runtime.Input):
+class LockComputerInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "indicator_file_hash": {
+    "ID": {
       "type": "string",
-      "title": "Indicator File Hash",
-      "description": "IOC value in type file hash",
+      "title": "Computer ID",
+      "description": "Identifier of the computer",
       "order": 1
+    },
+    "passcode": {
+      "type": "string",
+      "title": "Computer Passcode",
+      "description": "The passcode of the computer",
+      "order": 2
     }
   },
   "required": [
-    "indicator_file_hash"
+    "ID",
+    "passcode"
   ]
 }
     """)
@@ -39,25 +46,22 @@ class RescanIndicatorInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class RescanIndicatorOutput(insightconnect_plugin_runtime.Output):
+class LockComputerOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
     "status": {
-      "type": "string",
+      "type": "boolean",
       "title": "Status",
       "description": "Status",
-      "order": 2
-    },
-    "task_id": {
-      "type": "string",
-      "title": "Task ID",
-      "description": "Task ID",
       "order": 1
     }
-  }
+  },
+  "required": [
+    "status"
+  ]
 }
     """)
 

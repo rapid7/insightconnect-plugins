@@ -34,9 +34,10 @@ class TestGetIndicatorByValue(TestCase):
             "tags": ["MyTag_1"],
             "type": "Domains",
             "value": "rapid7.com",
-            "whitelist": "false",
+            "whitelist": False,
+            "reported_feeds": [{"ID": "SampleID", "ConfidenceLevel": 3, "Name": "AlienVault OTX"}],
         }
-        self.assertEqual(expected, actual)
+        self.assertEqual(actual, expected)
 
     @patch("requests.request", side_effect=Util.mock_request)
     def test_get_indicator_by_value_should_success_when_empty(self, make_request):
@@ -50,5 +51,6 @@ class TestGetIndicatorByValue(TestCase):
             "system_tags": [],
             "tags": [],
             "whitelist": False,
+            "reported_feeds": [],
         }
-        self.assertEqual(expected, actual)
+        self.assertEqual(actual, expected)

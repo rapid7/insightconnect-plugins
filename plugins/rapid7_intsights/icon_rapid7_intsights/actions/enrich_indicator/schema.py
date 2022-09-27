@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Submit an indicator to IntSights for investigation and return the results"
+    DESCRIPTION = "Submit an indicator to Threat Command for investigation and return the results"
 
 
 class Input:
