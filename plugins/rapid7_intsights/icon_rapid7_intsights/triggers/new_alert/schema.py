@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Triggers when a new alert that matches the given criteria is created in IntSights"
+    DESCRIPTION = "Triggers when a new alert that matches the given criteria is created in Threat Command"
 
 
 class Input:

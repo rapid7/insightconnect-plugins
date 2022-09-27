@@ -1,33 +1,40 @@
 {
-  "Value": "rapid7.com",
-  "Type": "Domains",
-  "Severity": "High",
-  "Score": 100,
-  "Whitelist": "false",
-  "FirstSeen": "2020-01-01T20:01:27.344Z",
-  "LastSeen": "2020-01-30T16:18:51.148Z",
-  "LastUpdate": "2020-02-21T23:00:51.268Z",
+  "value": "rapid7.com",
+  "type": "Domains",
+  "severity": "High",
+  "score": 100,
+  "whitelist": "false",
+  "firstSeen": "2020-01-01T20:01:27.344Z",
+  "lastSeen": "2020-01-30T16:18:51.148Z",
+  "lastUpdateDate": "2020-02-21T23:00:51.268Z",
   "Geolocation": "US",
-  "Sources": [
+  "sources": [
     {
       "Name": "AlienVault OTX",
       "ConfidenceLevel": 3
     }
   ],
-  "Tags": [
+  "tags": [
     "MyTag_1"
   ],
   "SystemTags": [
     "Phishing"
   ],
-  "RelatedMalware": [
+  "relatedMalware": [
     "doppeldridex",
     "dridex"
   ],
-  "RelatedCampaigns": [
+  "relatedCampaigns": [
     "SolarWinds"
   ],
-  "RelatedThreatActors": [
+  "relatedThreatActors": [
     "doppelspider"
+  ],
+  "reportedFeeds": [
+    {
+      "ID": "SampleID",
+      "Name": "AlienVault OTX",
+      "ConfidenceLevel": 3
+    }
   ]
 }

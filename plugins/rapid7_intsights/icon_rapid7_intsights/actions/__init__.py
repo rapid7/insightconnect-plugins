@@ -8,6 +8,4 @@ from .get_complete_alert_by_id.action import GetCompleteAlertById
 from .get_cve_by_id.action import GetCveById
 from .get_cve_list.action import GetCveList
 from .get_indicator_by_value.action import GetIndicatorByValue
-from .get_indicator_scan_status.action import GetIndicatorScanStatus
-from .rescan_indicator.action import RescanIndicator
 from .takedown_request.action import TakedownRequest
