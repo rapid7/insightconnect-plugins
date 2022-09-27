@@ -6,13 +6,14 @@
 
 * Get Indicator by Value
 * Enrich Indicator
-* Rescan Indicator
-* Get Indicator Scan Status
 * Get Alerts
 * Get Complete Alert by ID
 * Takedown Request
 * Add Manual Alert
 * Get CVE by ID
+* Get CVE List
+* Delete CVE
+* Add CVE
 
 # Requirements
 
@@ -71,58 +72,55 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|content|[]content|True|Response content|
+|content|[]content|False|Response content|
 
 Example output:
 
 ```
 {
-  "content": {
-    "content": [
-      {
-        "cveId": "CVE-2020-7064",
-        "cpe": [
-          {
-            "Value": "cpe:2.3:a:php:php:*:*:*:*:*:*:*:*",
-            "Range": {
-              "VersionStartIncluding": "7.2.0",
-              "VersionEndIncluding": "",
-              "VersionStartExcluding": "",
-              "VersionEndExcluding": "7.2.9"
-            },
-            "Title": "Php",
-            "VendorProduct": "Php Php"
-          }
-        ],
-        "publishedDate": "2020-04-01T04:15:00.000Z",
-        "updateDate": "2021-10-25T10:14:52.978Z",
-        "severity": "Low",
-        "intsightsScore": 36,
-        "cvssScore": 5.4,
-        "mentionsAmount": 39,
-        "mentionsPerSource": {
-          "PasteSite": 0,
-          "HackingForum": 0,
-          "InstantMessage": 0,
-          "DarkWeb": 0,
-          "ClearWebCyberBlogs": 0,
-          "CodeRepositories": 9,
-          "Exploit": 0,
-          "SocialMedia": 30
-        },
-        "firstMentionDate": "2020-03-19T15:09:00.000Z",
-        "lastMentionDate": "2021-07-22T20:41:00.000Z",
-        "exploitAvailability": false,
-        "vulnerabilityOrigin": [
-          "API"
-        ],
-        "relatedThreatActors": [],
-        "relatedMalware": [],
-        "relatedCampaigns": []
-      }
-    ],
-    "nextOffset": null
-  }
+  "content": [
+    {
+      "cveId": "CVE-2020-7064",
+      "cpe": [
+        {
+          "Value": "cpe:2.3:a:php:php:*:*:*:*:*:*:*:*",
+          "Range": {
+            "VersionStartIncluding": "7.2.0",
+            "VersionEndIncluding": "",
+            "VersionStartExcluding": "",
+            "VersionEndExcluding": "7.2.9"
+          },
+          "Title": "Php",
+          "VendorProduct": "Php Php"
+        }
+      ],
+      "publishedDate": "2020-04-01T04:15:00.000Z",
+      "updateDate": "2021-10-25T10:14:52.978Z",
+      "severity": "Low",
+      "intsightsScore": 36,
+      "cvssScore": 5.4,
+      "mentionsAmount": 39,
+      "mentionsPerSource": {
+        "PasteSite": 0,
+        "HackingForum": 0,
+        "InstantMessage": 0,
+        "DarkWeb": 0,
+        "ClearWebCyberBlogs": 0,
+        "CodeRepositories": 9,
+        "Exploit": 0,
+        "SocialMedia": 30
+      },
+      "firstMentionDate": "2020-03-19T15:09:00.000Z",
+      "lastMentionDate": "2021-07-22T20:41:00.000Z",
+      "exploitAvailability": false,
+      "vulnerabilityOrigin": [
+        "API"
+      ],
+      "relatedThreatActors": [],
+      "relatedMalware": [],
+      "relatedCampaigns": []
+    }
+  ],
 }
 ```
 
@@ -283,74 +281,6 @@ Example output:
   "is_flagged": false,
   "takedown_status": "NotSent",
   "update_date": "https://example.com"
-}
-```
-
-#### Rescan Indicator
-
-This action is used to force an indicator scan in Threat Command TIP system.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|indicator_file_hash|string|None|True|IOC value in type file hash|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
-
-Example input:
-
-```
-{
-  "indicator_file_hash": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|status|string|False|Status|
-|task_id|string|False|Task ID|
-
-Example output:
-
-```
-{
-  "status": "Queued",
-  "task_id": "615658811baf672bdaeb8e5c"
-}
-```
-
-#### Get Indicator Scan Status
-
-This action is used to get the scan status of an indicator in Threat Command TIP system.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|task_id|string|None|True|A string representing the request ID|None|123|
-
-Example input:
-
-```
-{
-  "task_id": 123
-}
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|status|string|False|Status|
-|task_id|string|False|Task ID|
-
-Example output:
-
-```
-{
-  "status": "Done",
-  "task_id": "61563eb2118b97e8e388e9db"
 }
 ```
 
@@ -683,17 +613,20 @@ Example input:
 |geo_location|string|False|Geographic location|
 |last_seen|string|False|Last seen|
 |last_update|string|False|Last update|
-|related_campaigns|[]string|True|Related campaigns|
-|related_malware|[]string|True|Related malware|
-|related_threat_actors|[]string|True|Related threat actors|
-|score|float|True|Score|
+|related_campaigns|[]string|False|Related campaigns|
+|related_malware|[]string|False|Related malware|
+|related_threat_actors|[]string|False|Related threat actors|
+|score|float|False|Score|
 |severity|string|False|Severity|
-|sources|[]source|True|Sources|
-|system_tags|[]string|True|System tags|
-|tags|[]string|True|Tags|
+|sources|[]source|False|Sources|
+|system_tags|[]string|False|System tags|
+|tags|[]string|False|Tags|
 |type|string|False|Type|
 |value|string|False|Indicator value|
-|whitelist|boolean|True|Whitelist|
+|whitelist|boolean|False|Whitelist|
+|status|string|False|Status|
+|reported_feeds|[]reported_feed|False|Reported Feeds|
+
 
 Example output:
 
@@ -723,17 +656,28 @@ Example output:
 
 #### Get CVE List
 
-This action is used to get a list of all CVEs from an account.
+This action is used to get a partial list of all CVEs from an account
 
 ##### Input
 
-_This action does not contain any inputs._
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|offset|string|None|False|Offset value for pagination, if empty the first page of results will be returned|None|2000-00-00T00:00:00.000Z::614b8972da44a60005036b01|
+
+Example input:
+
+```
+{
+  "offset": "2000-00-00T00:00:00.000Z::614b8972da44a60005036b01"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|content|[]content|True|Response content|
+|content|[]content|False|Response content|
+|next_offset|string|False|Next offset value for pagination|
 
 Example output:
 
@@ -806,7 +750,8 @@ Example output:
         "API"
       ]
     }
-  ]
+  ],
+  "next_offset": "2000-00-00T00:00:00.000Z::614b8972da44a60005036b01",
 }
 ```
 
@@ -1022,7 +967,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.2.1 - Rename Plugin to Threat Command | Update descriptions to Threat Command
+* 4.0.0 - Rename Plugin to Threat Command | Update descriptions to Threat Command | Update Get Indicator By Value to use API V3 | Remove Rescan Indicator and Get Indicator Scan Status | Update Get CVE List to request one page of results only
 * 3.2.0 - Fix is_closed bug in trigger | Add new input `source_date_from_enum` in trigger which allows user to specifiy Source Date From using ENUM rather than timestamp/string
 * 3.1.0 - Add new actions Add CVEs, Delete CVEs and Get CVE List
 * 3.0.1 - Fix issue where New Alert trigger sends empty list when there are no new alerts

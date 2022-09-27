@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_intsights
 title: Threat Command
 description: Threat Command by Rapid7 is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
-version: 3.2.1
+version: 4.0.0
 supported_versions: ["2.4.0"]
 vendor: rapid7
 support: rapid7
@@ -33,6 +33,22 @@ types:
       description: Level of confidence
       type: integer
       required: true
+  reported_feed:
+    id:
+      title: ID
+      description: ID
+      type: string
+      required: false
+    Name:
+      title: Name
+      description: Name
+      type: string
+      required: false
+    ConfidenceLevel:
+      title: Confidence Level
+      description: Level of confidence
+      type: integer
+      required: false
   image:
     type:
       title: Type
@@ -363,12 +379,12 @@ actions:
         title: Score
         description: Score
         type: float
-        required: true
+        required: false
       whitelist:
         title: Whitelist
         description: Whitelist
         type: boolean
-        required: true
+        required: false
       first_seen:
         title: First Seen
         description: First seen
@@ -393,32 +409,42 @@ actions:
         title: Sources
         description: Sources
         type: '[]source'
-        required: true
+        required: false
       tags:
         title: Tags
         description: Tags
         type: '[]string'
-        required: true
+        required: false
       system_tags:
         title: System Tags
         description: System tags
         type: '[]string'
-        required: true
+        required: false
       related_malware:
         title: Related Malware
         description: Related malware
         type: '[]string'
-        required: true
+        required: false
       related_campaigns:
         title: Related Campaigns
         description: Related campaigns
         type: '[]string'
-        required: true
+        required: false
       related_threat_actors:
         title: Related Threat Actors
         description: Related threat actors
         type: '[]string'
-        required: true
+        required: false
+      status:
+        title: Status
+        description: Status
+        type: string
+        required: false
+      reported_feeds:
+        title: Reported Feeds
+        description: Reported Feeds
+        type: '[]reported_feed'
+        required: false
   enrich_indicator:
     title: Enrich Indicator
     description: Submit an indicator to Threat Command for investigation and return the results
@@ -444,48 +470,6 @@ actions:
         title: Data
         description: Data
         type: object
-        required: false
-  rescan_indicator:
-    title: Rescan Indicator
-    description: Force an indicator scan in Threat Command TIP system
-    input:
-      indicator_file_hash:
-        title: Indicator File Hash
-        description: IOC value in type file hash
-        type: string
-        required: true
-        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
-    output:
-      task_id:
-        title: Task ID
-        description: Task ID
-        type: string
-        required: false
-      status:
-        title: Status
-        description: Status
-        type: string
-        required: false
-  get_indicator_scan_status:
-    title: Get Indicator Scan Status
-    description: Get the scan status of an indicator in the Threat Command TIP system
-    input:
-      task_id:
-        title: Task ID
-        description: A string representing the request ID
-        type: string
-        required: true
-        example: 123
-    output:
-      task_id:
-        title: Task ID
-        description: Task ID
-        type: string
-        required: false
-      status:
-        title: Status
-        description: Status
-        type: string
         required: false
   get_alerts:
     title: Get Alerts
@@ -819,16 +803,28 @@ actions:
         title: Content
         description: Response content
         type: '[]content'
-        required: true
+        required: false
   get_cve_list:
     title: Get CVE List
-    description: Get a list of all CVEs from an account
+    description: Get a partial list of all CVEs from an account
+    input:
+      offset:
+        title: Offset
+        description: Offset value for pagination, if empty the first page of results will be returned
+        type: string
+        required: false
+        example: "2000-00-00T00:00:00.000Z::614b8972da44a60005036b01"
     output:
       content:
         title: Content
         description: Response content
         type: '[]content'
-        required: true
+        required: false
+      next_offset:
+        title: Next Offset
+        description: Next offset value for pagination
+        type: string
+        required: false
   add_cve:
     title: Add CVEs
     description: Add CVEs to account

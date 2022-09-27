@@ -54,9 +54,6 @@ class GetCveByIdOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
-  "required": [
-    "content"
-  ],
   "definitions": {
     "content": {
       "type": "object",
