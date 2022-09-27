@@ -1,5 +1,7 @@
 from datetime import datetime
 
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 
 def clean_dict(dictionary: dict) -> dict:
     cleaned_dict = dictionary.copy()
@@ -19,5 +21,7 @@ def iso8601_to_utc_date(iso_date: str) -> str:
             datetime.fromisoformat(iso_date)
             return f"{iso_date.split('+')[0]}Z"
         return iso_date
-    except Exception as e:
-        raise
+    except ValueError as error:
+        raise PluginException(
+            "Invalid date format", "Please provide date in proper format as described in documentation", error
+        )

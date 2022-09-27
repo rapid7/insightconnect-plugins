@@ -20,7 +20,9 @@ class CreateTicket(insightconnect_plugin_runtime.Action):
 
     def run(self, params: dict = None) -> dict:
         ticket_parameters = params.copy()
-        ticket_parameters[Ticket.ESTIMATED_START_DATE] = iso8601_to_utc_date(ticket_parameters.get(Ticket.ESTIMATED_START_DATE, ""))
+        ticket_parameters[Ticket.ESTIMATED_START_DATE] = iso8601_to_utc_date(
+            ticket_parameters.get(Ticket.ESTIMATED_START_DATE, "")
+        )
         ticket_parameters[Ticket.REQUIRED_DATE] = iso8601_to_utc_date(ticket_parameters.get(Ticket.REQUIRED_DATE, ""))
         ticket_parameters[Ticket.COMPANY] = {"id": ticket_parameters.pop(Input.COMPANY_ID)}
         return {Output.TICKET: clean(self.connection.api_client.create_ticket(ticket_parameters))}
