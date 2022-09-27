@@ -20,7 +20,9 @@ class UpdateTicket(insightconnect_plugin_runtime.Action):
     def run(self, params: dict = None):
         ticket_parameters = params.copy()
         ticket_id = ticket_parameters.pop(Input.TICKET_ID)
-        ticket_parameters[Ticket.ESTIMATED_START_DATE] = iso8601_to_utc_date(ticket_parameters.get(Ticket.ESTIMATED_START_DATE, ""))
+        ticket_parameters[Ticket.ESTIMATED_START_DATE] = iso8601_to_utc_date(
+            ticket_parameters.get(Ticket.ESTIMATED_START_DATE, "")
+        )
         ticket_parameters[Ticket.REQUIRED_DATE] = iso8601_to_utc_date(ticket_parameters.get(Ticket.REQUIRED_DATE, ""))
         ticket_parameters[Ticket.COMPANY] = {"id": ticket_parameters.pop(Input.COMPANY_ID, None)}
         ticket_parameters[Ticket.PRIORITY] = {"id": ticket_parameters.pop(Input.PRIORITY_ID, None)}

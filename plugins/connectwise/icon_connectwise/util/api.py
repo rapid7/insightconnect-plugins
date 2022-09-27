@@ -34,11 +34,13 @@ class ConnectWiseAPI:
             method="GET",
             url=SERVICE_TICKETS_ENDPOINT,
             headers=self._get_headers(),
-            params=clean_dict({
-                SearchParameters.PAGE_SIZE: page_size,
-                SearchParameters.PAGE: page,
-                SearchParameters.CONDITIONS: conditions,
-            }),
+            params=clean_dict(
+                {
+                    SearchParameters.PAGE_SIZE: page_size,
+                    SearchParameters.PAGE: page,
+                    SearchParameters.CONDITIONS: conditions,
+                }
+            ),
         )
 
     def get_ticket_by_id(self, ticket_id: int) -> dict:
@@ -53,11 +55,13 @@ class ConnectWiseAPI:
             method="GET",
             url=SERVICE_NOTES_ENDPOINT.format(ticket_id=ticket_id),
             headers=self._get_headers(),
-            params=clean_dict({
-                SearchParameters.PAGE_SIZE: page_size,
-                SearchParameters.PAGE: page,
-                SearchParameters.CONDITIONS: conditions,
-            }),
+            params=clean_dict(
+                {
+                    SearchParameters.PAGE_SIZE: page_size,
+                    SearchParameters.PAGE: page,
+                    SearchParameters.CONDITIONS: conditions,
+                }
+            ),
         )
 
     def create_ticket(self, ticket_parameters: dict) -> dict:
@@ -70,7 +74,10 @@ class ConnectWiseAPI:
 
     def update_ticket(self, ticket_id: int, ticket_parameters: dict) -> dict:
         clean_ticket_parameters = clean_dict(ticket_parameters)
-        required_parameters = {key: clean_ticket_parameters.get(key) for key in [Ticket.STATUS, Ticket.BOARD, Ticket.IMPACT, Ticket.PRIORITY, Ticket.TEAM]}
+        required_parameters = {
+            key: clean_ticket_parameters.get(key)
+            for key in [Ticket.STATUS, Ticket.BOARD, Ticket.IMPACT, Ticket.PRIORITY, Ticket.TEAM]
+        }
         not_provided = {key: value for key, value in required_parameters.items() if not value}
         if not_provided:
             raise PluginException(

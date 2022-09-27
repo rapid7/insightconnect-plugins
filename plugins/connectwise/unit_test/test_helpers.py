@@ -2,6 +2,7 @@ import os
 import sys
 from unittest import TestCase
 
+from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
@@ -53,11 +54,7 @@ class TestUpdateTicket(TestCase):
                 "",
                 "",
             ],
-            [
-                "iso_date",
-                "2022-09-23T01:00:00+02:00",
-                "2022-09-23T01:00:00Z"
-            ],
+            ["iso_date", "2022-09-23T01:00:00+02:00", "2022-09-23T01:00:00Z"],
             [
                 "utc_date",
                 "2022-09-01T08:51:01Z",
@@ -73,3 +70,17 @@ class TestUpdateTicket(TestCase):
     def test_iso8601_to_utc_date(self, test_name, date_string, expected):
         actual = iso8601_to_utc_date(date_string)
         self.assertEqual(actual, expected)
+
+    @parameterized.expand(
+        [
+            [
+                "invalid_iso_format",
+                "2022-09-01T08:51:01+XY",
+                "Invalid date format",
+            ]
+        ]
+    )
+    def test_iso8601_to_utc_date_raise_exception(self, test_name, date_string, cause):
+        with self.assertRaises(PluginException) as error:
+            iso8601_to_utc_date(date_string)
+        self.assertEqual(error.exception.cause, cause)
