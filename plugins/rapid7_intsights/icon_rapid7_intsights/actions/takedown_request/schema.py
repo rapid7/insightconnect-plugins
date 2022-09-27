@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Request a takedown for a given alert in IntSights"
+    DESCRIPTION = "Request a takedown for a given alert in Threat Command"
 
 
 class Input:
@@ -60,7 +60,7 @@ class TakedownRequestOutput(insightconnect_plugin_runtime.Output):
     "status": {
       "type": "boolean",
       "title": "Status",
-      "description": "Status from IntSights",
+      "description": "Status from Threat Command",
       "order": 1
     }
   },

@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Search indicators in IntSights TIP"
+    DESCRIPTION = "Search indicators in Threat Command TIP"
 
 
 class Input:
