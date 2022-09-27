@@ -35,13 +35,7 @@ class TestGetIndicatorByValue(TestCase):
             "type": "Domains",
             "value": "rapid7.com",
             "whitelist": False,
-            "reported_feeds": [
-                {
-                    'ID': 'SampleID',
-                    'ConfidenceLevel': 3,
-                    'Name': 'AlienVault OTX'
-                 }
-            ],
+            "reported_feeds": [{"ID": "SampleID", "ConfidenceLevel": 3, "Name": "AlienVault OTX"}],
         }
         self.assertEqual(actual, expected)
 
