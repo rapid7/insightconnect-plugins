@@ -116,6 +116,7 @@ class Util:
                         os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{self.filename}.json.resp")
                     )
                 )
+
         if kwargs.get("params") == {
             "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
             "index": 0,

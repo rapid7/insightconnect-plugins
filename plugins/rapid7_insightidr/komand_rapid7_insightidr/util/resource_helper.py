@@ -119,7 +119,7 @@ class ResourceHelper(object):
             self.logger.error(f"{status_code_message} ({response.status_code}): {error}")
             raise PluginException(f"InsightIDR returned a status code of {response.status_code}: {status_code_message}")
 
-    def make_request(
+    def make_request(  # noqa: C901
         self, path: str, method: str = "GET", params: dict = None, json_data: dict = None, files: dict = None
     ):
         try:

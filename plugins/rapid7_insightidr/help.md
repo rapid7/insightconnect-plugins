@@ -56,7 +56,7 @@ This action is used to upload an attachment.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |file_content|bytes|None|True|Base64 encoded content of the file|None|dGVzdA==|
-|filename|string|None|True|Name of the file, which should contain the file extension|None|https://example.com|
+|filename|string|None|True|Name of the file, which should contain the file extension|None|test.txt|
 
 Example input:
 
