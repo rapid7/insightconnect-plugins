@@ -6,6 +6,7 @@ import json
 class Input:
     API_PRIVATE_TOKEN = "api_private_token"
     API_PUBLIC_TOKEN = "api_public_token"
+    SSL_VERIFICATION = "ssl_verification"
     URL = "url"
     
 
@@ -19,12 +20,19 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Private Token",
       "description": "Enter API private token",
-      "order": 3
+      "order": 4
     },
     "api_public_token": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Public Token",
       "description": "Enter API public token",
+      "order": 3
+    },
+    "ssl_verification": {
+      "type": "boolean",
+      "title": "Verify SSL Certificate",
+      "description": "Indicates whether to verify SSL certificate or not",
+      "default": true,
       "order": 2
     },
     "url": {
@@ -37,6 +45,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "required": [
     "api_private_token",
     "api_public_token",
+    "ssl_verification",
     "url"
   ],
   "definitions": {
