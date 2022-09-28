@@ -1166,7 +1166,7 @@ actions:
         description: Estimated start date for the ticket
         type: date
         required: false
-        example: 22022-09-23T00:00:00+02:00
+        example: 2022-09-23T00:00:00+02:00
         order: 6
       requiredDate:
         title: Due Date

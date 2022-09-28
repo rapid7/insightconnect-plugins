@@ -130,7 +130,7 @@ This action is used to update an existing ticket.
 |automaticEmailResourceFlag|boolean|None|False|Whether to send an email to the specified resource when a note to the ticket is added|None|True|
 |board|details_input|None|True|Name or ID of the board|None|{"name": "Network Security"}|
 |budgetHours|float|None|False|Budget hours for the ticket|None|8.5|
-|company_id|integer|None|True|Company ID|None|23|
+|company_id|integer|None|True|Company Rec ID. This ID can be found in `Share` link on the company page|None|23|
 |contact|details_input|None|False|Name or ID of the contact|None|{"id": 144}|
 |department|details_input|None|False|Name or ID of the department|None|{"name": "Engineering"}|
 |estimatedStartDate|date|None|False|Estimated start date for the ticket|None|2022-09-23T00:00:00+02:00|
@@ -139,7 +139,8 @@ This action is used to update an existing ticket.
 |owner|details_input|None|False|Name or ID of the ticket owner|None|{"id": 11}|
 |predecessorId|integer|None|False|ID of the ticket predecessor|None|1234|
 |predecessortype|string|None|False|Type of the ticket predecessor|None|Ticket|
-|priority_id|details_input|None|True|ID of the priority|None|7|
+|priority_id|integer|None|True|ID of the priority|None|7|
+|type|details_input|None|False|Name or ID of the type|None|{"name": "Testing"}|
 |requiredDate|date|None|False|Due date for the ticket|None|2022-09-26T00:00:00+02:00|
 |serviceLocation|details_input|None|False|Name or ID of the service location|None|{"name": "Remote"}|
 |severity|string|None|True|Severity of the ticket|None|Medium|
@@ -150,7 +151,7 @@ This action is used to update an existing ticket.
 |summary|string|None|True|Summary of the ticket|None|example summary|
 |team|details_input|None|True|Name or ID of the team|None|{"id": 10}|
 |ticket_id|integer|None|True|ID of the ticket which will be updated|None|1122|
-|type|details_input_input|None|False|Name or ID of the type|None|{"name": "Testing"}|
+|type|details_input|None|False|Name or ID of the type|None|{"name": "Testing"}|
 
 Example input:
 
@@ -985,7 +986,7 @@ This action is used to get information for the given company ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|company_id|integer|None|True|ID of the company|None|4321|
+|company_id|integer|None|True|Company Rec ID. This ID can be found in `Share` link on the company page|None|4321|
 
 Example input:
 
@@ -1389,7 +1390,7 @@ This action is used to create a new ticket.
 |automaticEmailResourceFlag|boolean|None|False|Whether to send an email to the specified resource when a note to the ticket is added|None|True|
 |board|details_input|None|False|Name or ID of the board|None|{"name": "Network Security"}|
 |budgetHours|float|None|False|Budget hours for the ticket|None|8.5|
-|company_id|integer|None|True|Company ID|None|23|
+|company_id|integer|None|True|Company Rec ID. This ID can be found in `Share` link on the company page|None|23|
 |contact|details_input|None|False|Name or ID of the contact|None|{"id": 144}|
 |department|details_input|None|False|Name or ID of the department|None|{"name": "Engineering"}|
 |estimatedStartDate|date|None|False|Estimated start date for the ticket|None|2022-09-23T00:00:00+02:00|
