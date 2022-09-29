@@ -118,8 +118,7 @@ class TestUtil(TestCase):
         api = RestAPI("www.418.com", log, False, {})
         with self.assertRaises(PluginException) as e:
             api.call_api("get", "/", None, None, None)
-
-        self.assertIn("I am a teapot", e.exception.data.msg)
+            self.assertIn("I am a teapot", e.exception.data.msg)
 
     """
     Tests the call_api function for data string
