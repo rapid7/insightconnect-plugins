@@ -116,7 +116,8 @@ def run_script_using_ntlm(
 ) -> dict:
     # Adds needed https and port number to host IP
     action.logger.info("Running a NTLM connection")
-    host_connection = f"https://{host_ip}:{port}/wsman"
+    prefix = "http" if port == 5985 else "https"
+    host_connection = f"{prefix}://{host_ip}:{port}/wsman"
     action.logger.debug("Host Connection: " + host_connection)
     action.logger.debug("PowerShell script: " + powershell_script)
     powershell_session = FixWinrmSession(host_connection, auth=(username, password), transport="ntlm")
@@ -181,7 +182,8 @@ def run_script_using_kerberos(
 ) -> dict:
     action.logger.info("Running Kerberos connection")
     # Adds needed https and port number to host IP
-    host_address = f"https://{host_ip}:{port}/wsman"
+    prefix = "http" if port == 5985 else "https"
+    host_address = f"{prefix}://{host_ip}:{port}/wsman"
     configure_machine_for_kerberos_connection(
         action, domain, host_ip, host_name, kdc, password, powershell_script, username
     )
