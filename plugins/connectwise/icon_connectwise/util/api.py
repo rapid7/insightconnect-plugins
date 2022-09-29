@@ -144,23 +144,23 @@ class ConnectWiseAPI:
             )
 
             if response.status_code == 400:
-                raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.json())
+                raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
             if response.status_code == 403:
                 raise PluginException(
                     cause="Operation is not allowed.",
                     assistance="Please verify inputs and if the issue persists, contact support.",
-                    data=response.json(),
+                    data=response.text,
                 )
             if response.status_code == 404:
                 raise PluginException(
                     cause="Resource not found.",
                     assistance="Please verify inputs and if the issue persists, contact support.",
-                    data=response.json(),
+                    data=response.text,
                 )
             if 400 <= response.status_code < 500:
                 raise PluginException(
                     preset=PluginException.Preset.UNKNOWN,
-                    data=response.json(),
+                    data=response.text,
                 )
             if response.status_code >= 500:
                 raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)

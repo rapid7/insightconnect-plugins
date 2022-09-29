@@ -29,7 +29,7 @@ class TestGetCompany(TestCase):
     )
     def test_get_company(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
-        self.assertDictEqual(actual, expected)
+        self.assertEqual(actual, expected)
 
     @parameterized.expand(
         [
@@ -38,7 +38,7 @@ class TestGetCompany(TestCase):
                 Util.read_file_to_dict("inputs/get_company_company_not_found.json.inp"),
                 "Resource not found.",
                 "Please verify inputs and if the issue persists, contact support.",
-                Util.read_file_to_dict("expected/company_not_found.json.exp"),
+                Util.read_file_to_string("expected/company_not_found.json.exp"),
             ]
         ]
     )
@@ -47,4 +47,4 @@ class TestGetCompany(TestCase):
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)
         self.assertEqual(error.exception.assistance, assistance)
-        self.assertDictEqual(error.exception.data, data)
+        self.assertEqual(error.exception.data, data)

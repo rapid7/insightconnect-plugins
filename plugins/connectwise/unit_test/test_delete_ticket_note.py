@@ -29,7 +29,7 @@ class TestDeleteTicketNote(TestCase):
     )
     def test_delete_ticket_note(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
-        self.assertDictEqual(actual, expected)
+        self.assertEqual(actual, expected)
 
     @parameterized.expand(
         [
@@ -38,14 +38,14 @@ class TestDeleteTicketNote(TestCase):
                 Util.read_file_to_dict("inputs/delete_ticket_note_ticket_not_found.json.inp"),
                 "Resource not found.",
                 "Please verify inputs and if the issue persists, contact support.",
-                Util.read_file_to_dict("expected/ticket_not_found.json.exp"),
+                Util.read_file_to_string("expected/ticket_not_found.json.exp"),
             ],
             [
                 "note_not_found",
                 Util.read_file_to_dict("inputs/delete_ticket_note_note_not_found.json.inp"),
                 "Resource not found.",
                 "Please verify inputs and if the issue persists, contact support.",
-                Util.read_file_to_dict("expected/note_not_found.json.exp"),
+                Util.read_file_to_string("expected/note_not_found.json.exp"),
             ],
         ]
     )
@@ -56,4 +56,4 @@ class TestDeleteTicketNote(TestCase):
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)
         self.assertEqual(error.exception.assistance, assistance)
-        self.assertDictEqual(error.exception.data, data)
+        self.assertEqual(error.exception.data, data)

@@ -34,7 +34,7 @@ class TestGetTicketNotes(TestCase):
     )
     def test_get_ticket_notes(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
-        self.assertDictEqual(actual, expected)
+        self.assertEqual(actual, expected)
 
     @parameterized.expand(
         [
@@ -43,14 +43,14 @@ class TestGetTicketNotes(TestCase):
                 Util.read_file_to_dict("inputs/get_ticket_notes_ticket_not_found.json.inp"),
                 "Resource not found.",
                 "Please verify inputs and if the issue persists, contact support.",
-                Util.read_file_to_dict("expected/ticket_not_found.json.exp"),
+                Util.read_file_to_string("expected/ticket_not_found.json.exp"),
             ],
             [
                 "invalid_conditions",
                 Util.read_file_to_dict("inputs/get_ticket_notes_invalid_conditions.json.inp"),
                 PluginException.causes[PluginException.Preset.BAD_REQUEST],
                 PluginException.assistances[PluginException.Preset.BAD_REQUEST],
-                Util.read_file_to_dict("expected/get_ticket_notes_invalid_conditions.json.exp"),
+                Util.read_file_to_string("expected/get_ticket_notes_invalid_conditions.json.exp"),
             ],
         ]
     )
@@ -59,4 +59,4 @@ class TestGetTicketNotes(TestCase):
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)
         self.assertEqual(error.exception.assistance, assistance)
-        self.assertDictEqual(error.exception.data, data)
+        self.assertEqual(error.exception.data, data)

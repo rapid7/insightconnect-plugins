@@ -34,7 +34,7 @@ class TestGetTickets(TestCase):
     )
     def test_get_tickets(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
-        self.assertDictEqual(actual, expected)
+        self.assertEqual(actual, expected)
 
     @parameterized.expand(
         [
@@ -43,7 +43,7 @@ class TestGetTickets(TestCase):
                 Util.read_file_to_dict("inputs/get_tickets_invalid_conditions.json.inp"),
                 PluginException.causes[PluginException.Preset.BAD_REQUEST],
                 PluginException.assistances[PluginException.Preset.BAD_REQUEST],
-                Util.read_file_to_dict("expected/get_tickets_invalid_conditions.json.exp"),
+                Util.read_file_to_string("expected/get_tickets_invalid_conditions.json.exp"),
             ]
         ]
     )
@@ -52,4 +52,4 @@ class TestGetTickets(TestCase):
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)
         self.assertEqual(error.exception.assistance, assistance)
-        self.assertDictEqual(error.exception.data, data)
+        self.assertEqual(error.exception.data, data)

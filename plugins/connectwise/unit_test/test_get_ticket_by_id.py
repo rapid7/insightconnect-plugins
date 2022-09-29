@@ -29,7 +29,7 @@ class TestGetTicketById(TestCase):
     )
     def test_get_ticket_by_id(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
-        self.assertDictEqual(actual, expected)
+        self.assertEqual(actual, expected)
 
     @parameterized.expand(
         [
@@ -38,7 +38,7 @@ class TestGetTicketById(TestCase):
                 Util.read_file_to_dict("inputs/get_ticket_by_id_ticket_not_found.json.inp"),
                 "Resource not found.",
                 "Please verify inputs and if the issue persists, contact support.",
-                Util.read_file_to_dict("expected/ticket_not_found.json.exp"),
+                Util.read_file_to_string("expected/ticket_not_found.json.exp"),
             ]
         ]
     )
@@ -47,4 +47,4 @@ class TestGetTicketById(TestCase):
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)
         self.assertEqual(error.exception.assistance, assistance)
-        self.assertDictEqual(error.exception.data, data)
+        self.assertEqual(error.exception.data, data)

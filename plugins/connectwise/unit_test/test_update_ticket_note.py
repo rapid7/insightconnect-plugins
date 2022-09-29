@@ -29,7 +29,7 @@ class TestUpdateTicketNote(TestCase):
     )
     def test_update_ticket_note(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
-        self.assertDictEqual(actual, expected)
+        self.assertEqual(actual, expected)
 
     @parameterized.expand(
         [
