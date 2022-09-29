@@ -1,5 +1,9 @@
 import insightconnect_plugin_runtime
+<<<<<<< HEAD
 from .schema import ConnectionSchema
+=======
+from .schema import ConnectionSchema, Input
+>>>>>>> 09d942e46 (Changed thing to true (#1438))
 
 # Custom imports below
 
@@ -10,4 +14,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.token = None
 
     def connect(self, params):
-        self.token = params["cred_token"]["secretKey"]
+        self.token = params.get(Input.CRED_TOKEN).get("secretKey")
+
+    def test(self):
+        return {"success": True}
+
