@@ -8,6 +8,7 @@ class Component:
 
 
 class Input:
+    BODY = "body"
     HEADERS = "headers"
     ROUTE = "route"
     
@@ -25,6 +26,12 @@ class GetInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "body": {
+      "type": "object",
+      "title": "Body",
+      "description": "Data to submit to the server when making the HTTP Request call",
+      "order": 3
+    },
     "headers": {
       "type": "object",
       "title": "Headers",
