@@ -84,6 +84,9 @@ class Utils(object):
             url,
             timeout=timeout,
             verify=is_verify,
+            If_None_Match=headers.get("etag", ""),
+            If_Modified_Since=headers.get("last-modified", ""),
+            User_Agent=user_agent,
         )
         return url_object, meta
 
