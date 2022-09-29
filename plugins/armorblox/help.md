@@ -1,10 +1,11 @@
 # Description
 
-Armorblox secures enterprise communications over email and other cloud office applications with the power of Natural Language Understanding. The Armorblox platform connects over APIs and analyzes thousands of signals to understand the context of communications and protect people and data from compromise. Over 56,000 organizations use Armorblox to stop BEC and targeted phishing attacks, protect sensitive PII and PCI, and automate remediation of user-reported email threats. Armorblox was featured in the 2019 Forbes AI 50 list and was named a 2020 Gartner Cool Vendor in Cloud Office Security. Founded in 2017, Armorblox is headquartered in Sunnyvale, CA and backed by General Catalyst and Next47.
+Armorblox secures enterprise communications over email and other cloud office applications with the power of Natural Language Understanding. The Armorblox platform connects over APIs and analyzes thousands of signals to understand the context of communications and protect people and data from compromise. Over 56,000 organizations use Armorblox to stop BEC and targeted phishing attacks, protect sensitive PII and PCI, and automate remediation of user-reported email threats. Armorblox was featured in the 2019 Forbes AI 50 list and was named a 2020 Gartner Cool Vendor in Cloud Office Security. Founded in 2017, Armorblox is headquartered in Sunnyvale, CA and backed by General Catalyst and Next47
 
 # Key Features
 
-Identify key features of plugin.
+* Fetches armorblox detected incidents for the input tenant.
+* Retrieves the remedation action for a given incident.
 
 # Requirements
 
@@ -13,7 +14,7 @@ Identify key features of plugin.
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* 1.0.0
 
 # Documentation
 
@@ -61,7 +62,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|remediation_details|string|True|Remediation Action of the requested threat identified by Armorblox|
+|remediation_details|string|True|Remediation Action of the requested incident identified by Armorblox|
 
 Example output:
 
@@ -72,24 +73,27 @@ Example output:
 
 #### Get Incidents
 
-This trigger is used to get a list of up to 100 incidents identified by Armorblox, if no input filter dates are provided, it will return up to 100 latest results.
+This trigger is used to get a list of incidents identified by Armorblox, by default it starts polling all the incidents since last day.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|interval|integer|600|False|Polling inteval in seconds|None|None|
+|interval|integer|600|False|Polling inteval in seconds|None|600|
 
 Example input:
 
 ```
+{
+  "interval": 600
+}
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|incidents|[]incident|True|A list of 100 incidents identified by Armorblox|
+|incidents|[]incident|True|A list of incidents identified by Armorblox|
 
 Example output:
 
@@ -123,7 +127,7 @@ Example output:
 |external users|[]user|False|List of external users|
 |Detection tags|[]final_detection_tag|False|Detection Tags|
 |Folder category|[]string|False|Folder category|
-|Incident ID|integer|False|Incident ID|
+|Incident ID|string|False|Incident ID|
 |Incident Type|string|False|Incident Type|
 |Object Type|string|False|Object Type|
 |policy_names|[]string|False|List of policies|
@@ -133,6 +137,7 @@ Example output:
 |resolution_state|string|False|Resolution State|
 |SCL Score|integer|False|None|
 |Is email tagged|boolean|False|Is email tagged|
+|title|string|False|title|
 |users|[]user|False|List of users|
 
 #### user
@@ -140,7 +145,7 @@ Example output:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |user email|string|False|User email|
-|Is User VIP|string|False|Is User VIP|
+|Is User VIP|boolean|False|Is User VIP|
 |user name|string|False|User name|
 
 
