@@ -45,7 +45,7 @@ class TestUpdateTicket(TestCase):
     )
     def test_clean_dict(self, test_name, input_params, expected):
         actual = clean_dict(input_params)
-        self.assertEqual(actual, expected)
+        self.assertDictEqual(actual, expected)
 
     @parameterized.expand(
         [

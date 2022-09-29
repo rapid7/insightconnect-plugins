@@ -34,7 +34,7 @@ class TestUpdateTicket(TestCase):
     )
     def test_update_ticket(self, mock_request, test_name, input_params, expected):
         actual = self.action.run(input_params)
-        self.assertEqual(actual, expected)
+        self.assertDictEqual(actual, expected)
 
     @parameterized.expand(
         [
@@ -52,4 +52,4 @@ class TestUpdateTicket(TestCase):
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)
         self.assertEqual(error.exception.assistance, assistance)
-        self.assertEqual(error.exception.data, data)
+        self.assertDictEqual(error.exception.data, data)
