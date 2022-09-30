@@ -25,7 +25,7 @@ class TestCreateComment(TestCase):
 
     @parameterized.expand(Util.load_parameters("create_comment_bad").get("parameters"))
     def test_create_comment_bad(self, mock_request, name, target, body, attachments, cause, assistance):
-        with self.assertRaises(PluginException) as e:
+        with self.assertRaises(PluginException) as error:
             self.action.run({Input.TARGET: target, Input.BODY: body, Input.ATTACHMENTS: attachments})
-        self.assertEqual(e.exception.cause, cause)
-        self.assertEqual(e.exception.assistance, assistance)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)

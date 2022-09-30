@@ -25,7 +25,7 @@ class TestDownloadAttachment(TestCase):
 
     @parameterized.expand(Util.load_parameters("download_attachment_bad").get("parameters"))
     def test_download_attachment_bad(self, mock_request, name, attachment_rrn, cause, assistance):
-        with self.assertRaises(PluginException) as e:
+        with self.assertRaises(PluginException) as error:
             self.action.run({Input.ATTACHMENT_RRN: attachment_rrn})
-        self.assertEqual(e.exception.cause, cause)
-        self.assertEqual(e.exception.assistance, assistance)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)

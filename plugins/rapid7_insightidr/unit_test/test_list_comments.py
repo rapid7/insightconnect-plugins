@@ -25,7 +25,7 @@ class TestListComments(TestCase):
 
     @parameterized.expand(Util.load_parameters("list_comments_bad").get("parameters"))
     def test_list_comments_bad(self, mock_request, name, target, index, size, cause, assistance):
-        with self.assertRaises(PluginException) as e:
+        with self.assertRaises(PluginException) as error:
             self.action.run({Input.TARGET: target, Input.INDEX: index, Input.SIZE: size})
-        self.assertEqual(e.exception.cause, cause)
-        self.assertEqual(e.exception.assistance, assistance)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)

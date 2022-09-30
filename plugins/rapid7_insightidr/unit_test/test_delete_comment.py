@@ -25,7 +25,7 @@ class TestDeleteComment(TestCase):
 
     @parameterized.expand(Util.load_parameters("delete_comment_bad").get("parameters"))
     def test_delete_comment_bad(self, mock_request, name, comment_rrn, cause, assistance):
-        with self.assertRaises(PluginException) as e:
+        with self.assertRaises(PluginException) as error:
             self.action.run({Input.COMMENT_RRN: comment_rrn})
-        self.assertEqual(e.exception.cause, cause)
-        self.assertEqual(e.exception.assistance, assistance)
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)
