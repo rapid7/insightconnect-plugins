@@ -1,15 +1,15 @@
 {
-	"spec": "af534d87cf905fd364252657092e0597",
+	"spec": "bcf083076e91e4e53d7bff0862dcf38b",
 	"manifest": "71973e11303abf14c04058526b64d7a2",
 	"setup": "eecc14b044d57eafea7b6db65cbb8b42",
 	"schemas": [
 		{
 			"identifier": "create_ticket/schema.py",
-			"hash": "621f95f7dfcdfff48d49bd2ac3a1d867"
+			"hash": "a975fc28dccff3c9768a586ee1060ad7"
 		},
 		{
 			"identifier": "create_ticket_note/schema.py",
-			"hash": "27232a774b0b7dd0375e68cde39d32b3"
+			"hash": "320cdb19019a89a9ae7cf0cba01b1cb1"
 		},
 		{
 			"identifier": "delete_ticket/schema.py",
@@ -21,27 +21,27 @@
 		},
 		{
 			"identifier": "get_company/schema.py",
-			"hash": "7c88f8a43dd0c51f4dd2bb02568f3b21"
+			"hash": "7ed5e49cc45747f1c09da8b9e1b03a7a"
 		},
 		{
 			"identifier": "get_ticket_by_id/schema.py",
-			"hash": "ffb020b960a391059741760e0a9f27e6"
+			"hash": "fa6f7c3ab6570a4889282e522a3a249f"
 		},
 		{
 			"identifier": "get_ticket_notes/schema.py",
-			"hash": "0afcffe4b472e04b0a76233c5c42d233"
+			"hash": "32628cebd91c635e831573f20ba2532e"
 		},
 		{
 			"identifier": "get_tickets/schema.py",
-			"hash": "186e11f235de8bbdb969992ec096f502"
+			"hash": "7106e2191eb81e46c2710d7f6c28e9e8"
 		},
 		{
 			"identifier": "update_ticket/schema.py",
-			"hash": "f3cc64902e38328f291363c0fe3c0707"
+			"hash": "ba14ea09161423f4ccbad01e81ad70f5"
 		},
 		{
 			"identifier": "update_ticket_note/schema.py",
-			"hash": "833a4282b809a8e0dc6f514ead8887e4"
+			"hash": "951452bdeb7e0a423ffb76987ce7044a"
 		},
 		{
 			"identifier": "connection/schema.py",

@@ -25,3 +25,17 @@ def iso8601_to_utc_date(iso_date: str) -> str:
         raise PluginException(
             "Invalid date format", "Please provide date in proper format as described in documentation", error
         )
+
+
+def rename_keys(response: dict, rename_from: str, rename_to: str) -> dict:
+    response_copy = response.copy()
+    if isinstance(response_copy, list):
+        response_copy = [rename_keys(element, rename_from, rename_to) for element in response_copy]
+    if not isinstance(response_copy, dict):
+        return response_copy
+    for key, value in response.items():
+        if key == rename_from:
+            response_copy[rename_to] = response_copy.pop(rename_from, None)
+        elif isinstance(value, (dict, list)):
+            response_copy[key] = rename_keys(value, rename_from, rename_to)
+    return response_copy

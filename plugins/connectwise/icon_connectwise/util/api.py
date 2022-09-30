@@ -6,7 +6,7 @@ import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_connectwise.util.constants import SearchParameters, Ticket
-from icon_connectwise.util.helpers import clean_dict
+from icon_connectwise.util.helpers import clean_dict, rename_keys
 from icon_connectwise.util.endpoints import (
     SERVICE_TICKETS_ENDPOINT,
     SERVICE_TICKET_ENDPOINT,
@@ -185,6 +185,6 @@ class ConnectWiseAPI:
             response = self.make_request(
                 method=method, url=url, params=params, data=data, headers=headers, json_data=json_data
             )
-            return response.json()
+            return rename_keys(response.json(), "_info", "info")
         except json.decoder.JSONDecodeError as e:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)

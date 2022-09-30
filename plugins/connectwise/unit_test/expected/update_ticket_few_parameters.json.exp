@@ -6,14 +6,14 @@
     "board": {
       "id": 30,
       "name": "Network Security - South",
-      "_info": {
+      "info": {
         "board_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30"
       }
     },
     "status": {
       "id": 550,
       "name": "In Progress",
-      "_info": {
+      "info": {
         "status_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/statuses/550"
       }
     },
@@ -21,7 +21,7 @@
       "id": 19298,
       "identifier": "Example",
       "name": "Example Company",
-      "_info": {
+      "info": {
         "company_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/19298",
         "mobileGuid": "5ec92caf-0922-4120-9268-21580dbbcef8"
       }
@@ -29,7 +29,7 @@
     "team": {
       "id": 10,
       "name": "Network Security",
-      "_info": {
+      "info": {
         "team_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/teams/10"
       }
     },
@@ -37,7 +37,7 @@
       "id": 8,
       "name": "Priority 4 - Low",
       "sort": 4,
-      "_info": {
+      "info": {
         "priority_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/priorities/8",
         "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/priorities/8/image?lm=2020-05-27T21:17:07Z"
       }
@@ -74,7 +74,7 @@
     "location": {
       "id": 11,
       "name": "Example Location",
-      "_info": {
+      "info": {
         "location_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/locations/11"
       }
     },
@@ -82,7 +82,7 @@
       "id": 5,
       "identifier": "Engineering",
       "name": "Engineering",
-      "_info": {
+      "info": {
         "department_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/departments/5"
       }
     },
@@ -90,7 +90,7 @@
     "sla": {
       "id": 3,
       "name": "Example Standard SLA",
-      "_info": {
+      "info": {
         "sla_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/SLAs/3"
       }
     },
@@ -108,11 +108,11 @@
       "displayIdFlag": false,
       "rightAlign": false,
       "name": "US Dollars",
-      "_info": {
+      "info": {
         "currency_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//finance/currencies/7"
       }
     },
-    "_info": {
+    "info": {
       "lastUpdated": "2022-09-15T08:30:12Z",
       "updatedBy": "user",
       "dateEntered": "2022-09-07T09:46:58Z",

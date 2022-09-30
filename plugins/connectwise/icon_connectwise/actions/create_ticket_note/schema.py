@@ -85,17 +85,17 @@ class CreateTicketNoteOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "details",
       "properties": {
-        "_info": {
-          "type": "object",
-          "title": "Info",
-          "description": "Additional information",
-          "order": 3
-        },
         "id": {
           "type": "integer",
           "title": "ID",
           "description": "ID",
           "order": 1
+        },
+        "info": {
+          "type": "object",
+          "title": "Info",
+          "description": "Additional information",
+          "order": 3
         },
         "name": {
           "type": "string",
@@ -109,12 +109,6 @@ class CreateTicketNoteOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "more_details",
       "properties": {
-        "_info": {
-          "type": "object",
-          "title": "Info",
-          "description": "Additional information",
-          "order": 4
-        },
         "id": {
           "type": "integer",
           "title": "ID",
@@ -126,6 +120,12 @@ class CreateTicketNoteOutput(insightconnect_plugin_runtime.Output):
           "title": "Identifier",
           "description": "Identifier",
           "order": 2
+        },
+        "info": {
+          "type": "object",
+          "title": "Info",
+          "description": "Additional information",
+          "order": 4
         },
         "name": {
           "type": "string",
@@ -139,12 +139,6 @@ class CreateTicketNoteOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "ticket_note",
       "properties": {
-        "_info": {
-          "type": "object",
-          "title": "Info",
-          "description": "Info",
-          "order": 16
-        },
         "contact": {
           "$ref": "#/definitions/details",
           "title": "Contact",
@@ -186,6 +180,12 @@ class CreateTicketNoteOutput(insightconnect_plugin_runtime.Output):
           "title": "ID",
           "description": "ID",
           "order": 1
+        },
+        "info": {
+          "type": "object",
+          "title": "Info",
+          "description": "Info",
+          "order": 16
         },
         "internalAnalysisFlag": {
           "type": "boolean",
@@ -241,17 +241,17 @@ class CreateTicketNoteOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "details",
           "properties": {
-            "_info": {
-              "type": "object",
-              "title": "Info",
-              "description": "Additional information",
-              "order": 3
-            },
             "id": {
               "type": "integer",
               "title": "ID",
               "description": "ID",
               "order": 1
+            },
+            "info": {
+              "type": "object",
+              "title": "Info",
+              "description": "Additional information",
+              "order": 3
             },
             "name": {
               "type": "string",
@@ -265,12 +265,6 @@ class CreateTicketNoteOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "more_details",
           "properties": {
-            "_info": {
-              "type": "object",
-              "title": "Info",
-              "description": "Additional information",
-              "order": 4
-            },
             "id": {
               "type": "integer",
               "title": "ID",
@@ -282,6 +276,12 @@ class CreateTicketNoteOutput(insightconnect_plugin_runtime.Output):
               "title": "Identifier",
               "description": "Identifier",
               "order": 2
+            },
+            "info": {
+              "type": "object",
+              "title": "Info",
+              "description": "Additional information",
+              "order": 4
             },
             "name": {
               "type": "string",

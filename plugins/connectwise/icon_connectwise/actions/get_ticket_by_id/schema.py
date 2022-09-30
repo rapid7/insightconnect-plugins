@@ -56,17 +56,17 @@ class GetTicketByIdOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "agreement_details",
       "properties": {
-        "_info": {
-          "type": "object",
-          "title": "Info",
-          "description": "Additional information",
-          "order": 4
-        },
         "id": {
           "type": "integer",
           "title": "ID",
           "description": "ID",
           "order": 1
+        },
+        "info": {
+          "type": "object",
+          "title": "Info",
+          "description": "Additional information",
+          "order": 4
         },
         "name": {
           "type": "string",
@@ -86,12 +86,6 @@ class GetTicketByIdOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "currency_details",
       "properties": {
-        "_info": {
-          "type": "object",
-          "title": "Info",
-          "description": "Additional information",
-          "order": 12
-        },
         "currencyCode": {
           "type": "string",
           "title": "Currency Code",
@@ -121,6 +115,12 @@ class GetTicketByIdOutput(insightconnect_plugin_runtime.Output):
           "title": "ID",
           "description": "ID",
           "order": 1
+        },
+        "info": {
+          "type": "object",
+          "title": "Info",
+          "description": "Additional information",
+          "order": 12
         },
         "name": {
           "type": "string",
@@ -164,17 +164,17 @@ class GetTicketByIdOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "details",
       "properties": {
-        "_info": {
-          "type": "object",
-          "title": "Info",
-          "description": "Additional information",
-          "order": 3
-        },
         "id": {
           "type": "integer",
           "title": "ID",
           "description": "ID",
           "order": 1
+        },
+        "info": {
+          "type": "object",
+          "title": "Info",
+          "description": "Additional information",
+          "order": 3
         },
         "name": {
           "type": "string",
@@ -188,17 +188,17 @@ class GetTicketByIdOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "merged_parent_ticket_details",
       "properties": {
-        "_info": {
-          "type": "object",
-          "title": "Info",
-          "description": "Additional information",
-          "order": 3
-        },
         "id": {
           "type": "integer",
           "title": "ID",
           "description": "ID",
           "order": 1
+        },
+        "info": {
+          "type": "object",
+          "title": "Info",
+          "description": "Additional information",
+          "order": 3
         },
         "summary": {
           "type": "string",
@@ -212,12 +212,6 @@ class GetTicketByIdOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "more_details",
       "properties": {
-        "_info": {
-          "type": "object",
-          "title": "Info",
-          "description": "Additional information",
-          "order": 4
-        },
         "id": {
           "type": "integer",
           "title": "ID",
@@ -229,6 +223,12 @@ class GetTicketByIdOutput(insightconnect_plugin_runtime.Output):
           "title": "Identifier",
           "description": "Identifier",
           "order": 2
+        },
+        "info": {
+          "type": "object",
+          "title": "Info",
+          "description": "Additional information",
+          "order": 4
         },
         "name": {
           "type": "string",
@@ -242,12 +242,6 @@ class GetTicketByIdOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "ticket",
       "properties": {
-        "_info": {
-          "type": "object",
-          "title": "Info",
-          "description": "Info",
-          "order": 100
-        },
         "actualHours": {
           "type": "number",
           "title": "Actual Hours",
@@ -550,6 +544,12 @@ class GetTicketByIdOutput(insightconnect_plugin_runtime.Output):
           "title": "Impact",
           "description": "Impact",
           "order": 35
+        },
+        "info": {
+          "type": "object",
+          "title": "Info",
+          "description": "Info",
+          "order": 100
         },
         "initialDescription": {
           "type": "string",
@@ -860,17 +860,17 @@ class GetTicketByIdOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "agreement_details",
           "properties": {
-            "_info": {
-              "type": "object",
-              "title": "Info",
-              "description": "Additional information",
-              "order": 4
-            },
             "id": {
               "type": "integer",
               "title": "ID",
               "description": "ID",
               "order": 1
+            },
+            "info": {
+              "type": "object",
+              "title": "Info",
+              "description": "Additional information",
+              "order": 4
             },
             "name": {
               "type": "string",
@@ -890,12 +890,6 @@ class GetTicketByIdOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "currency_details",
           "properties": {
-            "_info": {
-              "type": "object",
-              "title": "Info",
-              "description": "Additional information",
-              "order": 12
-            },
             "currencyCode": {
               "type": "string",
               "title": "Currency Code",
@@ -925,6 +919,12 @@ class GetTicketByIdOutput(insightconnect_plugin_runtime.Output):
               "title": "ID",
               "description": "ID",
               "order": 1
+            },
+            "info": {
+              "type": "object",
+              "title": "Info",
+              "description": "Additional information",
+              "order": 12
             },
             "name": {
               "type": "string",
@@ -968,17 +968,17 @@ class GetTicketByIdOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "details",
           "properties": {
-            "_info": {
-              "type": "object",
-              "title": "Info",
-              "description": "Additional information",
-              "order": 3
-            },
             "id": {
               "type": "integer",
               "title": "ID",
               "description": "ID",
               "order": 1
+            },
+            "info": {
+              "type": "object",
+              "title": "Info",
+              "description": "Additional information",
+              "order": 3
             },
             "name": {
               "type": "string",
@@ -992,17 +992,17 @@ class GetTicketByIdOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "merged_parent_ticket_details",
           "properties": {
-            "_info": {
-              "type": "object",
-              "title": "Info",
-              "description": "Additional information",
-              "order": 3
-            },
             "id": {
               "type": "integer",
               "title": "ID",
               "description": "ID",
               "order": 1
+            },
+            "info": {
+              "type": "object",
+              "title": "Info",
+              "description": "Additional information",
+              "order": 3
             },
             "summary": {
               "type": "string",
@@ -1016,12 +1016,6 @@ class GetTicketByIdOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "more_details",
           "properties": {
-            "_info": {
-              "type": "object",
-              "title": "Info",
-              "description": "Additional information",
-              "order": 4
-            },
             "id": {
               "type": "integer",
               "title": "ID",
@@ -1033,6 +1027,12 @@ class GetTicketByIdOutput(insightconnect_plugin_runtime.Output):
               "title": "Identifier",
               "description": "Identifier",
               "order": 2
+            },
+            "info": {
+              "type": "object",
+              "title": "Info",
+              "description": "Additional information",
+              "order": 4
             },
             "name": {
               "type": "string",

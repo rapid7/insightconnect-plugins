@@ -98,7 +98,7 @@ Example output:
       "id": 637,
       "identifier": "user",
       "name": "user",
-      "_info": {
+      "info": {
         "member_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/637",
         "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/637/image?lm=2022-08-03T19:37:23Z"
       }
@@ -107,7 +107,7 @@ Example output:
     "createdBy": "user",
     "internalFlag": true,
     "externalFlag": true,
-    "_info": {
+    "info": {
       "lastUpdated": "2022-09-20T07:20:16Z",
       "updatedBy": "user"
     }
@@ -231,14 +231,14 @@ Example output:
     "board": {
       "id": 30,
       "name": "Network Security",
-      "_info": {
+      "info": {
         "board_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30"
       }
     },
     "status": {
       "id": 550,
       "name": "In Progress",
-      "_info": {
+      "info": {
         "status_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/statuses/550"
       }
     },
@@ -246,7 +246,7 @@ Example output:
       "id": 23,
       "identifier": "Example",
       "name": "Example Company",
-      "_info": {
+      "info": {
         "company_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/19298",
         "mobileGuid": "5ec92caf-0922-4120-9268-21580dbbcef8"
       }
@@ -254,7 +254,7 @@ Example output:
     "team": {
       "id": 10,
       "name": "Network Security",
-      "_info": {
+      "info": {
         "team_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/teams/10"
       }
     },
@@ -262,7 +262,7 @@ Example output:
       "id": 8,
       "name": "Priority 4 - Low",
       "sort": 4,
-      "_info": {
+      "info": {
         "priority_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/priorities/8",
         "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/priorities/8/image?lm=2020-05-27T21:17:07Z"
       }
@@ -299,7 +299,7 @@ Example output:
     "location": {
       "id": 11,
       "name": "Example South",
-      "_info": {
+      "info": {
         "location_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/locations/11"
       }
     },
@@ -307,7 +307,7 @@ Example output:
       "id": 5,
       "identifier": "Engineering",
       "name": "Engineering",
-      "_info": {
+      "info": {
         "department_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/departments/5"
       }
     },
@@ -315,7 +315,7 @@ Example output:
     "sla": {
       "id": 3,
       "name": "Example Standard SLA",
-      "_info": {
+      "info": {
         "sla_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/SLAs/3"
       }
     },
@@ -333,11 +333,11 @@ Example output:
       "displayIdFlag": false,
       "rightAlign": false,
       "name": "US Dollars",
-      "_info": {
+      "info": {
         "currency_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//finance/currencies/7"
       }
     },
-    "_info": {
+    "info": {
       "lastUpdated": "2022-09-15T08:30:12Z",
       "updatedBy": "user",
       "dateEntered": "2022-09-07T09:46:58Z",
@@ -424,14 +424,14 @@ Example output:
       "board": {
         "id": 30,
         "name": "Network Security - South",
-        "_info": {
+        "info": {
           "board_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30"
         }
       },
       "status": {
         "id": 562,
         "name": ">Closed",
-        "_info": {
+        "info": {
           "status_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/statuses/562"
         }
       },
@@ -439,7 +439,7 @@ Example output:
         "id": 19298,
         "identifier": "Example",
         "name": "Example Company",
-        "_info": {
+        "info": {
           "company_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/19298",
           "mobileGuid": "5ec92caf-0922-4120-9268-21580dbbcef8"
         }
@@ -447,7 +447,7 @@ Example output:
       "site": {
         "id": 1000,
         "name": "Main",
-        "_info": {
+        "info": {
           "site_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/19298/sites/1000",
           "mobileGuid": "9e51ad16-7cc3-41f0-ab02-ef332ff30024"
         }
@@ -461,7 +461,7 @@ Example output:
       "country": {
         "id": 1,
         "name": "United States",
-        "_info": {
+        "info": {
           "country_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/countries/1"
         }
       },
@@ -469,14 +469,14 @@ Example output:
       "type": {
         "id": 250,
         "name": "Reports",
-        "_info": {
+        "info": {
           "type_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/types/250"
         }
       },
       "team": {
         "id": 10,
         "name": "Network Security",
-        "_info": {
+        "info": {
           "team_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/teams/10"
         }
       },
@@ -484,7 +484,7 @@ Example output:
         "id": 244,
         "identifier": "User",
         "name": "Example User",
-        "_info": {
+        "info": {
           "member_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/244",
           "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/244/image?lm=2019-07-12T19:54:26Z"
         }
@@ -493,7 +493,7 @@ Example output:
         "id": 12,
         "name": "Priority 5 - Service Request",
         "sort": 5,
-        "_info": {
+        "info": {
           "priority_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/priorities/12",
           "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/priorities/12/image?lm=2020-05-29T13:25:15Z"
         }
@@ -501,14 +501,14 @@ Example output:
       "serviceLocation": {
         "id": 4,
         "name": "Remote",
-        "_info": {
+        "info": {
           "location_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/locations/4"
         }
       },
       "source": {
         "id": 3,
         "name": "Internal",
-        "_info": {
+        "info": {
           "source_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/sources/3"
         }
       },
@@ -548,7 +548,7 @@ Example output:
       "location": {
         "id": 11,
         "name": "Example South",
-        "_info": {
+        "info": {
           "location_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/locations/11"
         }
       },
@@ -556,7 +556,7 @@ Example output:
         "id": 5,
         "identifier": "Engineering",
         "name": "Engineering",
-        "_info": {
+        "info": {
           "department_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/departments/5"
         }
       },
@@ -564,7 +564,7 @@ Example output:
       "sla": {
         "id": 6,
         "name": "No SLA",
-        "_info": {
+        "info": {
           "sla_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/SLAs/6"
         }
       },
@@ -583,11 +583,11 @@ Example output:
         "displayIdFlag": false,
         "rightAlign": false,
         "name": "US Dollars",
-        "_info": {
+        "info": {
           "currency_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//finance/currencies/7"
         }
       },
-      "_info": {
+      "info": {
         "lastUpdated": "2018-11-09T21:19:07Z",
         "updatedBy": "User",
         "dateEntered": "2018-08-09T15:22:36Z",
@@ -682,7 +682,7 @@ Example output:
         "id": 637,
         "identifier": "user",
         "name": "user",
-        "_info": {
+        "info": {
           "member_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/637",
           "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/637/image?lm=2022-08-03T19:37:23Z"
         }
@@ -691,7 +691,7 @@ Example output:
       "createdBy": "user",
       "internalFlag": true,
       "externalFlag": true,
-      "_info": {
+      "info": {
         "lastUpdated": "2022-09-01T08:46:36Z",
         "updatedBy": "user"
       }
@@ -708,7 +708,7 @@ Example output:
         "id": 637,
         "identifier": "user",
         "name": "user",
-        "_info": {
+        "info": {
           "member_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/637",
           "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/637/image?lm=2022-08-03T19:37:23Z"
         }
@@ -717,7 +717,7 @@ Example output:
       "createdBy": "user",
       "internalFlag": true,
       "externalFlag": true,
-      "_info": {
+      "info": {
         "lastUpdated": "2022-09-01T08:46:38Z",
         "updatedBy": "user"
       }
@@ -761,14 +761,14 @@ Example output:
     "board": {
       "id": 30,
       "name": "Network Security - South",
-      "_info": {
+      "info": {
         "board_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30"
       }
     },
     "status": {
       "id": 550,
       "name": "In Progress",
-      "_info": {
+      "info": {
         "status_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/statuses/550"
       }
     },
@@ -776,7 +776,7 @@ Example output:
       "id": 19298,
       "identifier": "Example",
       "name": "Example Company",
-      "_info": {
+      "info": {
         "company_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/19298",
         "mobileGuid": "5ec92caf-0922-4120-9268-21580dbbcef8"
       }
@@ -789,7 +789,7 @@ Example output:
     "contact": {
       "id": 17754,
       "name": "Test Contact",
-      "_info": {
+      "info": {
         "mobileGuid": "1cf867f4-6198-40fe-8f28-91a644f08f3f",
         "contact_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/contacts/17754"
       }
@@ -798,21 +798,21 @@ Example output:
     "type": {
       "id": 248,
       "name": "Testing",
-      "_info": {
+      "info": {
         "type_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/types/248"
       }
     },
     "subType": {
       "id": 701,
       "name": "Active Directory",
-      "_info": {
+      "info": {
         "subType_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/subtypes/701"
       }
     },
     "team": {
       "id": 10,
       "name": "Network Security",
-      "_info": {
+      "info": {
         "team_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/teams/10"
       }
     },
@@ -820,7 +820,7 @@ Example output:
       "id": 638,
       "identifier": "userint",
       "name": "user integration",
-      "_info": {
+      "info": {
         "member_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/638",
         "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/638/image?lm=2022-08-03T19:50:33Z"
       }
@@ -829,7 +829,7 @@ Example output:
       "id": 8,
       "name": "Priority 4 - Low",
       "sort": 4,
-      "_info": {
+      "info": {
         "priority_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/priorities/8",
         "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/priorities/8/image?lm=2020-05-27T21:17:07Z"
       }
@@ -837,14 +837,14 @@ Example output:
     "serviceLocation": {
       "id": 4,
       "name": "Remote",
-      "_info": {
+      "info": {
         "location_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/locations/4"
       }
     },
     "source": {
       "id": 11,
       "name": "Automate",
-      "_info": {
+      "info": {
         "source_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/sources/11"
       }
     },
@@ -853,7 +853,7 @@ Example output:
     "agreement": {
       "id": 249,
       "name": "Example Internal",
-      "_info": {
+      "info": {
         "agreement_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//finance/agreements/249"
       }
     },
@@ -892,7 +892,7 @@ Example output:
     "location": {
       "id": 11,
       "name": "Example South",
-      "_info": {
+      "info": {
         "location_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/locations/11"
       }
     },
@@ -900,7 +900,7 @@ Example output:
       "id": 5,
       "identifier": "Engineering",
       "name": "Engineering",
-      "_info": {
+      "info": {
         "department_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/departments/5"
       }
     },
@@ -908,7 +908,7 @@ Example output:
     "sla": {
       "id": 3,
       "name": "Example Standard SLA",
-      "_info": {
+      "info": {
         "sla_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/SLAs/3"
       }
     },
@@ -927,11 +927,11 @@ Example output:
       "displayIdFlag": false,
       "rightAlign": false,
       "name": "US Dollars",
-      "_info": {
+      "info": {
         "currency_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//finance/currencies/7"
       }
     },
-    "_info": {
+    "info": {
       "lastUpdated": "2022-09-02T08:29:34Z",
       "updatedBy": "user",
       "dateEntered": "2022-09-02T08:29:33Z",
@@ -1013,7 +1013,7 @@ Example output:
     "status": {
       "id": 1,
       "name": "Active",
-      "_info": {
+      "info": {
         "status_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/statuses/1"
       }
     },
@@ -1025,7 +1025,7 @@ Example output:
     "country": {
       "id": 1,
       "name": "United States",
-      "_info": {
+      "info": {
         "country_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/countries/1"
       }
     },
@@ -1033,7 +1033,7 @@ Example output:
     "territory": {
       "id": 2,
       "name": "Example Company",
-      "_info": {
+      "info": {
         "location_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/locations/2"
       }
     },
@@ -1046,7 +1046,7 @@ Example output:
     "timeZoneSetup": {
       "id": 1,
       "name": "GMT-5/Eastern Time: US & Canada",
-      "_info": {
+      "info": {
         "timeZoneSetup_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/timeZoneSetups/1"
       }
     },
@@ -1056,7 +1056,7 @@ Example output:
     "taxCode": {
       "id": 8,
       "name": "Tax-State",
-      "_info": {
+      "info": {
         "taxCode_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//finance/taxCodes/8"
       }
     },
@@ -1068,7 +1068,7 @@ Example output:
       "id": 250,
       "identifier": "ExampleCommunications",
       "name": "Example Company",
-      "_info": {
+      "info": {
         "company_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/250"
       }
     },
@@ -1093,7 +1093,7 @@ Example output:
       "displayIdFlag": false,
       "rightAlign": false,
       "name": "US Dollars",
-      "_info": {
+      "info": {
         "currency_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//finance/currencies/7"
       }
     },
@@ -1102,7 +1102,7 @@ Example output:
       {
         "id": 1,
         "name": "Client",
-        "_info": {
+        "info": {
           "type_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/types/1"
         }
       }
@@ -1110,11 +1110,11 @@ Example output:
     "site": {
       "id": 5353,
       "name": "Plano Office",
-      "_info": {
+      "info": {
         "site_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/250/sites/5353"
       }
     },
-    "_info": {
+    "info": {
       "lastUpdated": "2019-06-13T15:27:10Z",
       "updatedBy": "user",
       "dateEntered": "2006-06-21T16:04:59Z",
@@ -1358,7 +1358,7 @@ Example output:
       "id": 637,
       "identifier": "user",
       "name": "user",
-      "_info": {
+      "info": {
         "member_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/637",
         "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/637/image?lm=2022-08-03T19:37:23Z"
       }
@@ -1367,7 +1367,7 @@ Example output:
     "createdBy": "user",
     "internalFlag": true,
     "externalFlag": true,
-    "_info": {
+    "info": {
       "lastUpdated": "2022-09-15T09:41:06Z",
       "updatedBy": "user"
     }
@@ -1492,14 +1492,14 @@ Example output:
     "board": {
       "id": 30,
       "name": "Network Security",
-      "_info": {
+      "info": {
         "board_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30"
       }
     },
     "status": {
       "id": 550,
       "name": "In Progress",
-      "_info": {
+      "info": {
         "status_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/statuses/550"
       }
     },
@@ -1507,7 +1507,7 @@ Example output:
       "id": 23,
       "identifier": "Example",
       "name": "Example Company",
-      "_info": {
+      "info": {
         "company_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/19298",
         "mobileGuid": "5ec92caf-0922-4120-9268-21580dbbcef8"
       }
@@ -1515,7 +1515,7 @@ Example output:
     "team": {
       "id": 10,
       "name": "Network Security",
-      "_info": {
+      "info": {
         "team_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/teams/10"
       }
     },
@@ -1523,7 +1523,7 @@ Example output:
       "id": 8,
       "name": "Priority 4 - Low",
       "sort": 4,
-      "_info": {
+      "info": {
         "priority_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/priorities/8",
         "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/priorities/8/image?lm=2020-05-27T21:17:07Z"
       }
@@ -1560,7 +1560,7 @@ Example output:
     "location": {
       "id": 11,
       "name": "Example South",
-      "_info": {
+      "info": {
         "location_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/locations/11"
       }
     },
@@ -1568,7 +1568,7 @@ Example output:
       "id": 5,
       "identifier": "Engineering",
       "name": "Engineering",
-      "_info": {
+      "info": {
         "department_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/departments/5"
       }
     },
@@ -1576,7 +1576,7 @@ Example output:
     "sla": {
       "id": 3,
       "name": "Example Standard SLA",
-      "_info": {
+      "info": {
         "sla_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/SLAs/3"
       }
     },
@@ -1594,11 +1594,11 @@ Example output:
       "displayIdFlag": false,
       "rightAlign": false,
       "name": "US Dollars",
-      "_info": {
+      "info": {
         "currency_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//finance/currencies/7"
       }
     },
-    "_info": {
+    "info": {
       "lastUpdated": "2022-09-15T08:30:12Z",
       "updatedBy": "user",
       "dateEntered": "2022-09-07T09:46:58Z",

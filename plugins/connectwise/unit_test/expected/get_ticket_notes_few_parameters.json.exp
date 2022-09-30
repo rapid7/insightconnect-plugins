@@ -12,7 +12,7 @@
         "id": 637,
         "identifier": "user",
         "name": "user",
-        "_info": {
+        "info": {
           "member_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/637",
           "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/637/image?lm=2022-08-03T19:37:23Z"
         }
@@ -21,7 +21,7 @@
       "createdBy": "user",
       "internalFlag": true,
       "externalFlag": true,
-      "_info": {
+      "info": {
         "lastUpdated": "2022-09-01T08:45:10Z",
         "updatedBy": "user"
       }
@@ -38,7 +38,7 @@
         "id": 637,
         "identifier": "user",
         "name": "user",
-        "_info": {
+        "info": {
           "member_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/637",
           "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/637/image?lm=2022-08-03T19:37:23Z"
         }
@@ -47,7 +47,7 @@
       "createdBy": "user",
       "internalFlag": true,
       "externalFlag": true,
-      "_info": {
+      "info": {
         "lastUpdated": "2022-09-01T08:45:49Z",
         "updatedBy": "user"
       }

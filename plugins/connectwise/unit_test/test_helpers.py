@@ -5,9 +5,11 @@ from unittest import TestCase
 from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
 
+from unit_test.util import Util
+
 sys.path.append(os.path.abspath("../"))
 
-from icon_connectwise.util.helpers import clean_dict, iso8601_to_utc_date
+from icon_connectwise.util.helpers import clean_dict, iso8601_to_utc_date, rename_keys
 
 
 class TestUpdateTicket(TestCase):
@@ -84,3 +86,33 @@ class TestUpdateTicket(TestCase):
         with self.assertRaises(PluginException) as error:
             iso8601_to_utc_date(date_string)
         self.assertEqual(error.exception.cause, cause)
+
+    @parameterized.expand(
+        [
+            [
+                "empty_dict",
+                {},
+                "xyz",
+                "zyx",
+                {},
+            ],
+            [
+                "list_of_dicts",
+                Util.read_file_to_dict("responses/create_ticket_few_parameters.json.resp"),
+                "_info",
+                "info",
+                Util.read_file_to_dict("expected/create_ticket_few_parameters.json.exp").get("ticket"),
+            ],
+            [
+                "list_of_dicts_2",
+                Util.read_file_to_dict("responses/get_ticket_notes_many_parameters.json.resp"),
+                "_info",
+                "info",
+                Util.read_file_to_dict("expected/get_ticket_notes_many_parameters.json.exp").get("ticket_notes"),
+            ],
+            ["nothing_to_rename", {"key": "repl"}, "replace", "replaced", {"key": "repl"}],
+        ]
+    )
+    def test_rename_keys(self, test_name, response, rename_from, rename_to, expected):
+        actual = rename_keys(response, rename_from, rename_to)
+        self.assertEqual(actual, expected)

@@ -6,7 +6,7 @@
     "status": {
       "id": 1,
       "name": "Active",
-      "_info": {
+      "info": {
         "status_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/statuses/1"
       }
     },
@@ -18,7 +18,7 @@
     "country": {
       "id": 1,
       "name": "United States",
-      "_info": {
+      "info": {
         "country_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/countries/1"
       }
     },
@@ -26,7 +26,7 @@
     "territory": {
       "id": 2,
       "name": "Example Company",
-      "_info": {
+      "info": {
         "location_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/locations/2"
       }
     },
@@ -39,7 +39,7 @@
     "timeZoneSetup": {
       "id": 1,
       "name": "GMT-5/Eastern Time: US & Canada",
-      "_info": {
+      "info": {
         "timeZoneSetup_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/timeZoneSetups/1"
       }
     },
@@ -49,7 +49,7 @@
     "taxCode": {
       "id": 8,
       "name": "Tax-State",
-      "_info": {
+      "info": {
         "taxCode_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//finance/taxCodes/8"
       }
     },
@@ -61,7 +61,7 @@
       "id": 250,
       "identifier": "example",
       "name": "Example Company",
-      "_info": {
+      "info": {
         "company_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/250"
       }
     },
@@ -86,7 +86,7 @@
       "displayIdFlag": false,
       "rightAlign": false,
       "name": "US Dollars",
-      "_info": {
+      "info": {
         "currency_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//finance/currencies/7"
       }
     },
@@ -95,7 +95,7 @@
       {
         "id": 1,
         "name": "Client",
-        "_info": {
+        "info": {
           "type_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/types/1"
         }
       }
@@ -103,11 +103,11 @@
     "site": {
       "id": 5353,
       "name": "Plano Office",
-      "_info": {
+      "info": {
         "site_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/250/sites/5353"
       }
     },
-    "_info": {
+    "info": {
       "lastUpdated": "2019-06-13T15:27:10Z",
       "updatedBy": "user",
       "dateEntered": "2006-06-21T16:04:59Z",
