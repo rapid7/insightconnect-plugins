@@ -1,9 +1,5 @@
 import insightconnect_plugin_runtime
-<<<<<<< HEAD
-from .schema import ConnectionSchema
-=======
 from .schema import ConnectionSchema, Input
->>>>>>> 09d942e46 (Changed thing to true (#1438))
 
 # Custom imports below
 
