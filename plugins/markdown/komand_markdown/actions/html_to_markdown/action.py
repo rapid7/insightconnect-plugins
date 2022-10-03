@@ -1,6 +1,6 @@
 import insightconnect_plugin_runtime
 from komand_markdown.util import utils
-from .schema import HtmlToMarkdownInput, HtmlToMarkdownOutput
+from .schema import HtmlToMarkdownInput, HtmlToMarkdownOutput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 
@@ -14,8 +14,8 @@ class HtmlToMarkdown(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        inbytes = params.get("html")
-        instr = params.get("html_string")
+        inbytes = params.get(Input.HTML)
+        instr = params.get(Input.HTML_STRING)
         if not (((instr is None) ^ (inbytes is None)) or ((instr == "") ^ (inbytes == ""))):
             raise PluginException(
                 cause="Input error",
@@ -29,4 +29,4 @@ class HtmlToMarkdown(insightconnect_plugin_runtime.Action):
         else:
             markdown_string = utils.convert(utils.from_bytes(inbytes), "html", "md")
             markdown_b64 = utils.to_bytes(markdown_string)
-        return {"markdown_string": markdown_string, "markdown": markdown_b64}
+        return {Output.MARKDOWN_STRING: markdown_string, Output.MARKDOWN: markdown_b64}
