@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Rapid7 InsightIDR"
 Vendor = "rapid7"
-Version = "4.0.1"
+Version = "4.1.0"
 Description = "This plugin allows you to add indicators to a threat and see the status of investigations"
 
 
@@ -44,9 +44,17 @@ def main():
 
             self.add_action(actions.CloseInvestigationsInBulk())
 
+            self.add_action(actions.CreateComment())
+
             self.add_action(actions.CreateInvestigation())
 
             self.add_action(actions.CreateThreat())
+
+            self.add_action(actions.DeleteAttachment())
+
+            self.add_action(actions.DeleteComment())
+
+            self.add_action(actions.DownloadAttachment())
 
             self.add_action(actions.GetALog())
 
@@ -56,9 +64,15 @@ def main():
 
             self.add_action(actions.GetAllSavedQueries())
 
+            self.add_action(actions.GetAttachmentInformation())
+
             self.add_action(actions.GetInvestigation())
 
             self.add_action(actions.ListAlertsForInvestigation())
+
+            self.add_action(actions.ListAttachments())
+
+            self.add_action(actions.ListComments())
 
             self.add_action(actions.ListInvestigations())
 
@@ -73,6 +87,8 @@ def main():
             self.add_action(actions.SetStatusOfInvestigationAction())
 
             self.add_action(actions.UpdateInvestigation())
+
+            self.add_action(actions.UploadAttachment())
 
 
     """Run plugin"""
