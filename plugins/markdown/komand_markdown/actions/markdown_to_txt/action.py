@@ -33,7 +33,7 @@ class MarkdownToTxt(insightconnect_plugin_runtime.Action):
         if inbytes is not None:
             try:
                 markdown = utils.from_bytes(inbytes)
-            except binascii.Error as _:
+            except binascii.Error:
                 bytes_len = len(inbytes)
                 markdown = utils.from_bytes(inbytes[: bytes_len - (bytes_len % 4)])
         else:
