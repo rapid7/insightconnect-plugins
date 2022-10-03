@@ -1,6 +1,8 @@
 import insightconnect_plugin_runtime
 from .schema import MarkdownToTxtInput, MarkdownToTxtOutput, Input, Output, Component
 from komand_markdown.util import utils
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 
 # Custom imports below
 from bs4 import BeautifulSoup
@@ -17,22 +19,25 @@ class MarkdownToTxt(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        markdown_bytes = params.get(Input.MARKDOWN)
-        markdown_string = params.get(Input.MARKDOWN_STRING)
+        inbytes = params.get(Input.MARKDOWN)
+        instr = params.get(Input.MARKDOWN_STRING)
 
-        if not (
-            ((markdown_string is None) ^ (markdown_bytes is None)) or ((markdown_string == "") ^ (markdown_bytes == ""))
-        ):
-            raise Exception("You must define one of Markdown or Markdown String")
+        if not (((instr is None) ^ (inbytes is None)) or ((instr == "") ^ (inbytes == ""))):
+            raise PluginException(
+                cause="Input Error",
+                assistance="Only one of Markdown or Markdown String can be defined"
+                if instr != inbytes
+                else "You must define one of Markdown or Markdown String.",
+            )
 
-        if markdown_bytes is not None:
+        if inbytes is not None:
             try:
-                markdown = utils.from_bytes(markdown_bytes)
+                markdown = utils.from_bytes(inbytes)
             except binascii.Error as _:
-                bytes_len = len(markdown_bytes)
-                markdown = utils.from_bytes(markdown_bytes[: bytes_len - (bytes_len % 4)])
+                bytes_len = len(inbytes)
+                markdown = utils.from_bytes(inbytes[: bytes_len - (bytes_len % 4)])
         else:
-            markdown = markdown_string
+            markdown = instr
 
         soup = BeautifulSoup(utils.convert(markdown, "md", "html"), features="html.parser")
         for script in soup(["script", "style"]):
