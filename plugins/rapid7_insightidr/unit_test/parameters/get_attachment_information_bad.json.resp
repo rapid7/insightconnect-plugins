@@ -1,0 +1,10 @@
+{
+  "parameters": [
+    [
+      "not_found",
+      "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:123456789",
+      "Resource not found.",
+      "Verify your input is correct and not malformed and try again. If the issue persists, please contact support."
+    ]
+  ]
+}
