@@ -47,6 +47,363 @@ Example input:
 
 ### Actions
 
+#### Upload Attachment
+
+This action is used to upload an attachment.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|file_content|bytes|None|True|Base64 encoded content of the file|None|dGVzdA==|
+|filename|string|None|True|Name of the file, which should contain the file extension|None|test.txt|
+
+Example input:
+
+```
+{
+  "file_content": "dGVzdA==",
+  "filename": "test.txt"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|attachment|[]attachment|False|Attachment details|
+|success|boolean|True|Whether the action was successful or not|
+
+Example output:
+
+```
+{
+  "attachment": [
+    {
+      "rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890",
+      "creator": {
+        "type": "USER",
+        "name": "Example User"
+      },
+      "created_time": "2022-08-19T13:00:58.645Z",
+      "file_name": "test.txt",
+      "mime_type": "text/plain",
+      "size": 4,
+      "scan_status": "CLEAN"
+    }
+  ],
+  "success": true
+}
+```
+
+#### Download Attachment
+
+This action is used to download an attachment by RRN. The RRN determines which attachment is downloaded.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|attachment_rrn|string|None|True|The RRN of the attachment|None|rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210|
+
+Example input:
+
+```
+{
+  "attachment_rrn": "rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|attachment_content|bytes|False|The base64 encoded content of the attachment|
+|success|boolean|True|Whether the action was successful or not|
+
+Example output:
+
+```
+{
+  "attachment_content": "dGVzdA==",
+  "success": true
+}
+```
+
+#### Delete Attachment
+
+This action is used to delete an attachment with the given RRN.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|attachment_rrn|string|None|True|The RRN of the attachment|None|rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210|
+
+Example input:
+
+```
+{
+  "attachment_rrn": "rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Whether the action was successful or not|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Get Attachment Information
+
+This action is used to get information from an attachment by RRN. The RRN determines which attachment information is retrieved from.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|attachment_rrn|string|None|True|The RRN of the attachment|None|rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210|
+
+Example input:
+
+```
+{
+  "attachment_rrn": "rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|attachment|attachment|False|Attachment details|
+|success|boolean|True|Whether the action was successful or not|
+
+Example output:
+
+```
+{
+  "attachment": {
+    "rrn": "rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210",
+    "creator": {
+      "type": "USER",
+      "name": "Example User"
+    },
+    "created_time": "2022-09-20T13:54:28.246Z",
+    "file_name": "test.txt",
+    "mime_type": "text/plain",
+    "size": 4,
+    "scan_status": "CLEAN"
+  },
+  "success": true
+}
+```
+
+#### List Attachments
+
+This action retrieves attachments matching the given request parameters.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|index|integer|0|False|The optional 0 based index of the page to retrieve. Must be an integer greater than or equal to 0. Default value set to 0|None|3|
+|size|integer|20|False|Size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 100. Default value set to 20|None|100|
+|target|string|None|True|The RRN of the target, for which attachments will be returned|None|rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210|
+
+Example input:
+
+```
+{
+  "index": 3,
+  "size": 100,
+  "target": "rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|attachments|[]attachment|False|List of attachments|
+|success|boolean|True|Whether the action was successful or not|
+
+Example output:
+
+```
+{
+  "attachments": [
+    {
+      "rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890",
+      "creator": {
+        "type": "USER",
+        "name": "Example User"
+      },
+      "created_time": "2022-08-19T13:00:58.645Z",
+      "file_name": "test.txt",
+      "mime_type": "text/plain",
+      "size": 4,
+      "scan_status": "CLEAN"
+    }
+  ],
+  "success": true
+}
+```
+
+#### Delete Comment
+
+This action is used to delete a comment by using an RRN. The RRN determines which comment will be deleted.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment_rrn|string|None|True|The RRN of the comment|None|rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:comment:ABCDEF543210|
+
+Example input:
+
+```
+{
+  "comment_rrn": "rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:comment:ABCDEF543210"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Whether the action was successful or not|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Create Comment
+
+This action is used to create a comment for a particular target. The target determines where the comment will appear within InsightIDR. Only certain types of RRNs are permitted as targets, such as investigation RRNs.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|attachments|[]string|None|False|An array of attachment RRNs to associate with the comment|None|["rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210"]|
+|body|string|None|False|The body of the comment|None|Example comment|
+|target|string|None|True|The target of the comment, which determines where it will appear within InsightIDR|None|rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210|
+
+Example input:
+
+```
+{
+  "attachments": [
+    "rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210"
+  ],
+  "body": "Example comment",
+  "target": "rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|comment|comment|False|Newly created comment|
+|success|boolean|True|Whether the action was successful or not|
+
+Example output:
+
+```
+{
+  "comment": {
+    "created_time": "2022-09-22T08:38:13.962Z",
+    "rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:comment:1234567890",
+    "target": "rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210",
+    "creator": {
+      "type": "USER",
+      "name": "Example User"
+    },
+    "body": "test",
+    "visibility": "PUBLIC",
+    "attachments": [
+      {
+        "rrn": "rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210",
+        "creator": {
+          "type": "USER",
+          "name": "Example User"
+        },
+        "created_time": "2022-09-20T13:54:28.246Z",
+        "file_name": "test.txt",
+        "mime_type": "text/plain",
+        "size": 4,
+        "scan_status": "CLEAN"
+      }
+    ]
+  },
+  "success": true
+}
+```
+
+#### List Comments
+
+This action is used to list all comments on an investigation by passing an investigation's RRN as the target value.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|index|integer|0|False|The optional 0 based index of the page to retrieve. Must be an integer greater than or equal to 0. Default value set to 0|None|3|
+|size|integer|20|False|Size of the page to retrieve. Must be an integer greater than 0 or less than or equal to 100. Default value set to 20|None|100|
+|target|string|None|True|The target of the comment, which determines where it will appear within InsightIDR|None|rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210|
+
+Example input:
+
+```
+{
+  "index": 3,
+  "size": 100,
+  "target": "rrn:investigation:us:01234567-89ab-cdef-0000-123123123123:investigation:ABCDEF543210"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|comments|[]comment|False|List of comments|
+|success|boolean|True|Whether the action was successful or not|
+
+Example output:
+
+```
+{
+  "comments": [
+    {
+      "created_time": "2022-08-18T12:53:26.676Z",
+      "rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:comment:1234567890",
+      "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
+      "creator": {
+        "type": "USER",
+        "name": "Example User"
+      },
+      "body": "test",
+      "visibility": "PUBLIC"
+    }
+  ],
+  "success": true
+}
+```
+
 #### Search Investigations
 
 This action allows to search for investigations that match the given criteria.
@@ -1316,6 +1673,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.1.0 - Add new actions `List Comments`, `Create Comment`, `Delete Comment`, `List Attachments`, `Upload Attachment`, `Download Attachment`, `Delete Attachment`, `Get Attachment Information`
 * 4.0.1 - Fix issue with `Get Query Results` and `Get All Saved Queries` actions
 * 4.0.0 - Add new actions Create Investigation, Search Investigations, Update Investigation, Set Investigation Priority, Set Investigation Disposition, and List Alerts for Investigation | Update actions List Investigations, Set Status of Investigation, Assign User to Investigation | Enabled cloud 
 * 3.2.0 - Add new actions Get A Saved Query and Get All Saved Queries

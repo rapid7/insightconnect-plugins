@@ -81,12 +81,25 @@ class Util:
         raise Exception("Not implemented")
 
     @staticmethod
+    def load_parameters(filename):
+        return json.loads(
+            Util.read_file_to_string(
+                os.path.join(os.path.dirname(os.path.realpath(__file__)), f"parameters/{filename}.json.resp")
+            )
+        )
+
+    @staticmethod
     def mocked_requests(*args, **kwargs):
         class MockResponse:
             def __init__(self, filename, status_code):
                 self.filename = filename
                 self.status_code = status_code
                 self.text = "This is some error text"
+                self.content = None
+                if self.filename == "not_found":
+                    self.text = "Not found."
+                if self.filename == "download_attachment":
+                    self.content = b"test"
 
             def raise_for_status(self):
                 if self.status_code == 404:
@@ -104,6 +117,92 @@ class Util:
                     )
                 )
 
+        if kwargs.get("params") == {
+            "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
+            "index": 0,
+            "size": 0,
+        }:
+            return MockResponse("invalid_size", 400)
+        if kwargs.get("params") == {
+            "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
+            "index": 0,
+            "size": 1,
+        }:
+            return MockResponse("list_comments", 200)
+        if kwargs.get("params") == {
+            "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567899",
+            "index": 0,
+            "size": 1,
+        }:
+            return MockResponse("list_attachments", 200)
+        if kwargs.get("params") == {
+            "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:9876543210",
+            "index": 0,
+            "size": 1,
+        }:
+            return MockResponse("list_empty", 200)
+        if (
+            kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/v1/attachments/rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890/metadata"
+        ):
+            return MockResponse("get_attachment_information", 200)
+        if (
+            kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/v1/attachments/rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:123456789/metadata"
+        ):
+            return MockResponse("get_attachment_information", 404)
+        if kwargs.get("json") == {
+            "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
+            "body": "test",
+            "attachments": ["rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890"],
+        }:
+            return MockResponse("create_comment", 200)
+        if kwargs.get("json") == {
+            "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
+            "body": "test",
+            "attachments": [],
+        }:
+            return MockResponse("create_comment_without_attachment", 200)
+        if kwargs.get("json") == {
+            "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
+            "body": "",
+            "attachments": ["rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890"],
+        }:
+            return MockResponse("create_comment_without_body", 200)
+        if kwargs.get("json") == {
+            "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:not_found",
+            "body": "test",
+            "attachments": ["rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890"],
+        }:
+            return MockResponse("create_comment", 404)
+        if (
+            kwargs.get("method") == "DELETE"
+            and kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/v1/comments/rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:comment:not_found"
+        ):
+            return MockResponse("not_found", 404)
+        if (
+            kwargs.get("method") == "DELETE"
+            and kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/v1/attachments/rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:comment:not_found"
+        ):
+            return MockResponse("not_found", 404)
+        if kwargs.get("method") == "DELETE":
+            return MockResponse("success", 204)
+        if (
+            kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/v1/attachments/rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890"
+        ):
+            return MockResponse("download_attachment", 200)
+        if (
+            kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/v1/attachments/rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:not_found"
+        ):
+            return MockResponse("not_found", 404)
+        if kwargs.get("files") == {"filedata": ("test.txt", b"test", "text/plain")}:
+            return MockResponse("upload_attachment", 200)
+        if kwargs.get("files") == {"filedata": ("test", b"test", "text/plain")}:
+            return MockResponse("upload_attachment_without_file_extension", 200)
         if args[0] == f"{Util.STUB_URL_API}/log_search/management/logs":
             return MockResponse("logs", 200)
         elif (

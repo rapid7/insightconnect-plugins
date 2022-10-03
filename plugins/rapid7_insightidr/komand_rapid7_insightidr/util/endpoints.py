@@ -212,3 +212,27 @@ class Logs:
         """
 
         return f"{console_url}log_search/management/logs"
+
+
+class Comments:
+    @staticmethod
+    def comments(console_url: str) -> str:
+        return f"{console_url}idr/v1/comments"
+
+    @staticmethod
+    def delete_comment(console_url: str, comment_rrn: str) -> str:
+        return f"{console_url}idr/v1/comments/{comment_rrn}"
+
+
+class Attachments:
+    @staticmethod
+    def attachment(console_url: str, attachment_rrn: str) -> str:
+        return f"{console_url}idr/v1/attachments/{attachment_rrn}"
+
+    @staticmethod
+    def attachments(console_url: str) -> str:
+        return f"{console_url}idr/v1/attachments"
+
+    @staticmethod
+    def get_attachment_information(console_url: str, attachment_rrn: str) -> str:
+        return f"{console_url}idr/v1/attachments/{attachment_rrn}/metadata"
