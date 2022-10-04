@@ -1,5 +1,5 @@
-FROM rapid7/insightconnect-python-3-38-slim-plugin:4
-LABEL organization=komand
+FROM rapid7/insightconnect-python-3-38-plugin:4
+LABEL organization=rapid7
 LABEL sdk=python
 LABEL type=plugin
 

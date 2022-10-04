@@ -1206,6 +1206,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 6.2.1 - Fix issue in Find Issues action where normalize_user has an attribute error for labels | Changed Dockerfile to don't use slim version
 * 6.2.0 - Fix issue in Get Comments actions where normalize_user is missing the is_cloud argument from client connection
 * 6.1.1 - Fix issue where attachments added in tickets were empty
 * 6.1.0 - Add Monitor Issues trigger | Update New Issue trigger to only trigger in case of recently created tickets | Change `required` property to false for `project` input in New Issue trigger | Fix issue in New Issue trigger to include all results that match JQL | Fix issue in New Issue trigger with retrieving attachments
