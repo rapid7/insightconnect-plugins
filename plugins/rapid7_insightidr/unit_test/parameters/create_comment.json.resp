@@ -1,0 +1,95 @@
+{
+  "parameters": [
+    [
+      "with_body_and_attachment",
+      "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
+      "test",
+      [
+        "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890"
+      ],
+      {
+        "comment": {
+          "created_time": "2022-09-22T08:38:13.962Z",
+          "rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:comment:1234567890",
+          "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
+          "creator": {
+            "type": "USER",
+            "name": "Example User"
+          },
+          "body": "test",
+          "visibility": "PUBLIC",
+          "attachments": [
+            {
+              "rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890",
+              "creator": {
+                "type": "USER",
+                "name": "Example User"
+              },
+              "created_time": "2022-09-20T13:54:28.246Z",
+              "file_name": "test.txt",
+              "mime_type": "text/plain",
+              "size": 4,
+              "scan_status": "CLEAN"
+            }
+          ]
+        },
+        "success": true
+      }
+    ],
+    [
+      "without_attachment",
+      "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
+      "test",
+      [],
+      {
+        "comment": {
+          "created_time": "2022-09-22T08:38:13.962Z",
+          "rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:comment:1234567890",
+          "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
+          "creator": {
+            "type": "USER",
+            "name": "Example User"
+          },
+          "body": "test",
+          "visibility": "PUBLIC"
+        },
+        "success": true
+      }
+    ],
+    [
+      "without_body",
+      "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
+      "",
+      [
+        "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890"
+      ],
+      {
+        "comment": {
+          "created_time": "2022-09-22T08:38:13.962Z",
+          "rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:comment:1234567890",
+          "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
+          "creator": {
+            "type": "USER",
+            "name": "Example User"
+          },
+          "attachments": [
+            {
+              "rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890",
+              "creator": {
+                "type": "USER",
+                "name": "Example User"
+              },
+              "created_time": "2022-09-20T13:54:28.246Z",
+              "file_name": "test.txt",
+              "mime_type": "text/plain",
+              "size": 4,
+              "scan_status": "CLEAN"
+            }
+          ],
+          "visibility": "PUBLIC"
+        },
+        "success": true
+      }
+    ]
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "parameters": [
+    [
+      "invalid_size",
+      "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
+      0,
+      0,
+      "The server is unable to process the request.",
+      "Verify your plugin input is correct and not malformed and try again. If the issue persists, please contact support."
+    ]
+  ]
+}

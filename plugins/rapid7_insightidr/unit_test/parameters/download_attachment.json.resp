@@ -1,0 +1,12 @@
+{
+  "parameters": [
+    [
+      "success",
+      "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890",
+      {
+        "attachment_content": "dGVzdA==",
+        "success": true
+      }
+    ]
+  ]
+}
