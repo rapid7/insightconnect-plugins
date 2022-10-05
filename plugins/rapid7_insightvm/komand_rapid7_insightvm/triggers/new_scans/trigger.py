@@ -66,22 +66,7 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
 
                     # Get scan details
                     endpoint = endpoints.Scan.scans(self.connection.console_url, scan["scan_id"])
-
-                    response = self.connection.session.get(url=endpoint, verify=False)
-                    if response.status_code in [200, 201]:  # 200 is documented, 201 is undocumented
-                        try:
-                            scan_details = response.json()
-                        except json.decoder.JSONDecodeError as e:
-                            raise PluginException(
-                                cause=f"Error: Failed to parse response while retrieving scan "
-                                f"details for scan ID {scan['scan_id']}.",
-                                assistance=f"Exception returned was {e}",
-                            )
-                    else:
-                        raise PluginException(
-                            cause=f"ERROR: Failed to retrieve scan ID {scan['scan_id']}.",
-                            assistance=f"Status code returned was {response.status_code}",
-                        )
+                    scan_details = NewScans.get_scan_details(self, endpoint, scan)
 
                     # Add site name and id; not provided by endpoint
                     scan_details["siteId"] = scan.get("site_id")
@@ -117,6 +102,24 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
             f"WHERE dss.description IN ({','.join(scan_statuses)})"
             f"AND dsite.site_id IN ({','.join(site_ids)})"
         )
+
+    def get_scan_details(self, endpoint: str, scan: dict):
+        response = self.connection.session.get(url=endpoint, verify=False)
+        if response.status_code in [200, 201]:  # 200 is documented, 201 is undocumented
+            try:
+                scan_details = response.json()
+            except json.decoder.JSONDecodeError as e:
+                raise PluginException(
+                    cause=f"Error: Failed to parse response while retrieving scan "
+                          f"details for scan ID {scan['scan_id']}.",
+                    assistance=f"Exception returned was {e}",
+                )
+        else:
+            raise PluginException(
+                cause=f"ERROR: Failed to retrieve scan ID {scan['scan_id']}.",
+                assistance=f"Status code returned was {response.status_code}",
+            )
+        return scan_details
 
     def get_sites_within_scope(self, site_regex):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
