@@ -32,9 +32,7 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
         site_scans = NewScans.get_site_scans(self, params)
 
         # Track site and scan IDs
-        track_site_scans = {}
-        for site_id, scan_details in site_scans.items():
-            track_site_scans[site_id] = [scan["scan_id"] for scan in scan_details]
+        track_site_scans = NewScans.get_track_site_scans(self, site_scans)
 
         self.logger.info(
             f"Writing state of site scans during initialization of trigger (Site regex: "
@@ -106,6 +104,12 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
             return json.loads(util.read_from_cache(self.CACHE_FILE_NAME))
         except ValueError as e:
             raise PluginException(cause="Failed to load cache file", assistance=f"Exception returned was {e}")
+
+    def get_track_site_scans(self, site_scans):
+        track_site_scans = {}
+        for site_id, scan_details in site_scans.items():
+            track_site_scans[site_id] = [scan["scan_id"] for scan in scan_details]
+        return track_site_scans
 
     def get_scan_details(self, endpoint: str, scan: dict):
         response = self.connection.session.get(url=endpoint, verify=False)
