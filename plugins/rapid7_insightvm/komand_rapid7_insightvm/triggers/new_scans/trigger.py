@@ -115,7 +115,7 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
             except json.decoder.JSONDecodeError as e:
                 raise PluginException(
                     cause=f"Error: Failed to parse response while retrieving scan "
-                          f"details for scan ID {scan['scan_id']}.",
+                    f"details for scan ID {scan['scan_id']}.",
                     assistance=f"Exception returned was {e}",
                 )
         else:
