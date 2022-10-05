@@ -52,10 +52,7 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
                     site_scans[site_id] = [max_scan_by_id]
 
             # Open cache to only process previously undiscovered scan IDs
-            try:
-                cache_site_scans = json.loads(util.read_from_cache(self.CACHE_FILE_NAME))
-            except ValueError as e:
-                raise PluginException(cause="Failed to load cache file", assistance=f"Exception returned was {e}")
+            cache_site_scans = NewScans.get_cache_site_scans(self)
 
             # Send scans based on configuration
             for site_id, scans in site_scans.items():
@@ -78,6 +75,8 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
 
                     # Update cache
                     cache_site_scans[site_id] = cache_site_scans.get(site_id, [])
+                    if cache_site_scans.get(site_id) is None:
+                        cache_site_scans[site_id] = []
                     cache_site_scans[site_id].append(scan.get("scan_id"))
 
             # Update cache file
@@ -101,6 +100,12 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
             f"WHERE dss.description IN ({','.join(scan_statuses)})"
             f"AND dsite.site_id IN ({','.join(site_ids)})"
         )
+
+    def get_cache_site_scans(self):
+        try:
+            return json.loads(util.read_from_cache(self.CACHE_FILE_NAME))
+        except ValueError as e:
+            raise PluginException(cause="Failed to load cache file", assistance=f"Exception returned was {e}")
 
     def get_scan_details(self, endpoint: str, scan: dict):
         response = self.connection.session.get(url=endpoint, verify=False)
