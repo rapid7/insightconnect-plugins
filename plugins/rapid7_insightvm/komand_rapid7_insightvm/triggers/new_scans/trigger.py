@@ -61,7 +61,7 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
             for site_id, scans in site_scans.items():
                 for scan in scans:
                     # Only process scan IDs not previously cached
-                    if scan.get("scan_id") in cache_site_scans.get(site_id):
+                    if scan.get("scan_id") in cache_site_scans.get(site_id, []):
                         continue
 
                     # Get scan details
@@ -92,6 +92,8 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
                     self.send({Output.SCAN: scan_details})
 
                     # Update cache
+                    if cache_site_scans.get(site_id) is None:
+                        cache_site_scans[site_id] = []
                     cache_site_scans[site_id].append(scan.get("scan_id"))
 
             # Update cache file

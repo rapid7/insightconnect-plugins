@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Rapid7 InsightVM Console"
 Vendor = "rapid7"
-Version = "5.0.0"
+Version = "5.0.1"
 Description = "InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations, scan results and start scans"
 
 
