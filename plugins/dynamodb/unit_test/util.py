@@ -22,6 +22,10 @@ class Util:
         return Util.load_json("payloads/action_scan.json.exp")
 
     @staticmethod
+    def _get_item_side_effect(*args, **kwargs):
+        return Util.load_json("payloads/action_get_item.json.exp")
+
+    @staticmethod
     def _insert_side_effect(*args, **kwargs):
         if kwargs["params"]["item"].get("wrong_key", ""):
             raise PluginException(
@@ -45,6 +49,7 @@ class Util:
         client.configure_mock(**{"insert_data.side_effect": Util._insert_side_effect})
         client.configure_mock(**{"scan_table.side_effect": Util._scan_side_effect})
         client.configure_mock(**{"update_data.side_effect": Util._update_side_effect})
+        client.configure_mock(**{"get_item.side_effect": Util._get_item_side_effect})
         return client
 
     @staticmethod

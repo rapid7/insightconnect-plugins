@@ -44,8 +44,13 @@ class AWSCommunicationAPI:
 
     @prepare_input_and_output
     def scan_table(self, input_schema: dict, params: dict) -> dict:  # pylint: disable=unused-argument
-        self.logger.info("Start scan")
+        self.logger.info("start scan")
         return self._handle_rest_call(self._get_function_from_client(name=constants.SCAN_COMMAND), params)
+
+    @prepare_input_and_output
+    def get_item(self, input_schema: dict, params: dict) -> dict:  # pylint: disable=unused-argument
+        self.logger.info("Get item")
+        return self._handle_rest_call(self._get_function_from_client(name=constants.GET_ITEM_COMMAND), params)
 
     def test_connection(self):
         return self.client.list_tables()
