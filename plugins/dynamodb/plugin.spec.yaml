@@ -8,7 +8,7 @@ support: community
 status: []
 description: "Dynamo DB is a key/value store powered by Amazon available for members of AWS. Users can manage their data
 using the DynamoDB plugin for Rapid7 InsightConnect"
-version: 3.0.2
+version: 3.1.0
 supported_versions: ['Amazon DynamoDB 2022-03-11']
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/dynamodb
@@ -104,6 +104,58 @@ connection:
     example: us-east-1
     default: us-east-1
 actions:
+  get_item:
+    title: GetItem
+    description: The GetItem operation returns a set of attributes for the item with the given primary key
+    input:
+      table_name:
+        title: Table Name
+        description: The table name to search
+        type: string
+        required: true
+        example: Table-name
+      key:
+        title: Key 
+        description: A map of attribute names to AttributeValue objects, representing the primary key of the item to retrieve
+        type: object
+        required: true
+        example: '{"CustomerID": {"S":"12345"}}'
+      consistent_read:
+        title: Consistent Read
+        description: Determines the read consistency model; If set to true, then the operation uses strongly consistent reads; otherwise, the operation uses eventually consistent reads
+        type: boolean
+        required: false
+        example: true
+      return_consumed_capacity:
+        title: Return Consumed Capacity
+        description: Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response
+        type: string
+        enum:
+          - NONE
+          - INDEXES
+          - TOTAL
+        required: false
+        example: TOTAL
+        default: TOTAL
+      projection_expression:
+        title: Projection Expression
+        description: A string that identifies one or more attributes to retrieve from the specified table or index
+        type: string
+        required: false
+        example: Description
+      expression_attribute_names:
+        title: Expression Attribute Names
+        description: One or more substitution tokens for attribute names in an expression
+        type: object
+        required: false
+        example: '{"#P":"Percentile"}'
+    output:
+      item:
+        title: Item
+        description: Output item
+        type: object
+        required: true
+        example: '{"ClientID": {"S": "2"}}'
   scan:
     title: Scan
     description: Scan Dynamo and return any objects found

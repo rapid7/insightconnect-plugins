@@ -9,6 +9,8 @@ from unit_test.util import Util
 
 
 class TestActionScan(TestCase):
+    """TestActionScan."""
+
     @classmethod
     def setUpClass(cls) -> None:
         cls.action = Util.default_connection(Scan())
