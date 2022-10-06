@@ -37,10 +37,7 @@ Example input:
   "application_id": "63a0cad6-ac64-435c-a221-5d37c97b763e",
   "application_secret": "aMeCAEYdOLlK+qRcD9AjdyxLkCaqZH1UPm7adjJQ5Og=",
   "directory_id": "9e538ff5-dcb2-46a9-9a28-f93b8250deb0",
-  "username_password": {
-    "username": "user",
-    "password": "mypassword"
-  }
+  "username_password": "{ \"username\": \"user\", \"password\": \"mypassword\" }"
 }
 ```
 
@@ -58,7 +55,7 @@ This action is used to add a conversation member to a channel. This operation is
 |----|----|-------|--------|-----------|----|-------|
 |channel_name|string|None|True|Name of the channel to which the member is to be added|None|InsightConnect Channel|
 |group_name|string|None|True|Name of the group in which the channel is located|None|InsightConnect Team|
-|member_login|string|None|True|The login of the group member to be added to a channel|None|user@example.com|
+|member_login|string|None|True|The login of the group member to be added to a channel|None|https://example.com|
 
 Example input:
 
@@ -93,7 +90,7 @@ This action is used to add a user to a group's list of owners. The owners are a 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |group_name|string|None|True|Name of the group or team to which the member is to be added as the owner|None|InsightConnect Team|
-|member_login|string|None|True|The login of the group member to be added as the owner|None|user@example.com|
+|member_login|string|None|True|The login of the group member to be added as the owner|None|https://example.com|
 
 Example input:
 
@@ -129,7 +126,7 @@ Regular expressions used by this action are Python specific.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |channel_name|string|None|False|Channel|None|InsightConnect Channel|
-|chat_id|string|None|False|The ID of the chat|None|19:209856c0f3f847a28431deb8eb300807_thread.v2|
+|chat_id|string|None|False|The ID of the chat|None|https://example.com|
 |message|string|None|True|Message to send|None|Hello!|
 |team_name|string|None|False|Team name|None|InsightConnect Team|
 |thread_id|string|None|False|To post in a thread, select parent message ID|None|1595889908700|
@@ -201,7 +198,7 @@ Example input:
 ```
 {
   "channel_name": "InsightConnect Channel",
-  "message_content": "<b>Hello!</b>",
+  "message_content": "\u003cb\u003eHello!\u003c/b\u003e",
   "team_name": "InsightConnect Team",
   "thread_id": 1595889908700
 }
@@ -261,10 +258,10 @@ Example input:
 
 ```
 {
-  "channel_name": "InsightConnect Channel",
+  "channel_guid": "xxxxx-xxxxx-xxxx-xxxx",
+  "is_html": true,
   "message": "Hello!",
-  "team_name": "InsightConnect Team",
-  "thread_id": 1595889908700
+  "team_guid": "xxxxx-xxxxx-xxxx-xxxx"
 }
 ```
 
@@ -442,7 +439,7 @@ This action is used to add a member to a team.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|member_login|string|None|True|Member login e.g. user@example.com|None|user@example.com|
+|member_login|string|None|True|Member login e.g. user@example.com|None|https://example.com|
 |team_name|string|None|True|Team name|None|InsightConnect Team|
 
 Example input:
@@ -546,7 +543,7 @@ This action is used to remove a member from a team.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|member_login|string|None|True|Member Login e.g. user@example.com|None|user@example.com|
+|member_login|string|None|True|Member Login e.g. user@example.com|None|https://example.com|
 |team_name|string|None|True|Team name|None|InsightConnect Team|
 
 Example input:
@@ -584,8 +581,8 @@ This action is used to create a group in Azure and enable it for Microsoft Teams
 |group_name|string|None|True|Team name|None|test_group|
 |mail_enabled|boolean|None|True|Should e-mail should be enabled for this group|None|True|
 |mail_nickname|string|None|True|The nickname for the email address of this group in Outlook|None|TestGroup|
-|members|[]string|None|False|A list of usernames to set as members|None|["user@example.com"]|
-|owners|[]string|None|False|A list of usernames to set as owners|None|["user@example.com"]|
+|members|[]string|None|False|A list of usernames to set as members|None|["https://example.com"]|
+|owners|[]string|None|False|A list of usernames to set as owners|None|["https://example.com"]|
 
 Example input:
 
@@ -879,7 +876,7 @@ If there is more than one team with the same name in your organization, the olde
 
 # Version History
 
-* 4.1.0 - Cloud enabled
+* 4.0.1 - Cloud enabled
 * 4.0.0 - Fix issue with Create Teams Enabled Group action's members, and owners input field types
 * 3.2.0 - Send Message Action is updated to support chat messages via chat_id parameter, team_name is set to optional. | Update SDK to latest version.
 * 3.1.5 - Add `microsoft_teams` and `office365` keywords | Removed `microsoft, teams, office 365` keywords
