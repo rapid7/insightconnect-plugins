@@ -33,3 +33,15 @@ class TestMarkdownToTxt(TestCase):
         action.logger = log
         expected = {'txt_string': 'Rapid7 InsightConnect\n', 'txt': 'UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=='}
         self.assertEqual(results, expected)
+
+    def test_markdown_to_txt_invalid_both(self):
+        action = MarkdownToTxt()
+        input_params = {"markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=", "markdown_string": "# Rapid7 InsightConnect"}
+        results = action.run(input_params)
+
+        log = logging.getLogger("Test")
+        action.logger = log
+
+        expected = "Input Error Only one of Markdown or Markdown String can be defined"
+
+        self.assertRaises()
