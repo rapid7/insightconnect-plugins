@@ -1,7 +1,7 @@
 import sys
 import os
 
-sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath("../"))
 from parameterized import parameterized
 from unittest import TestCase
 from komand_markdown.actions.markdown_to_txt import MarkdownToTxt
@@ -21,7 +21,7 @@ class TestMarkdownToTxt(TestCase):
 
         log = logging.getLogger("Test")
         action.logger = log
-        expected = {'txt_string': 'Rapid7 InsightConnect\n', 'txt': 'UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=='}
+        expected = {"txt_string": "Rapid7 InsightConnect\n", "txt": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}
         self.assertEqual(results, expected)
 
     def test_markdown_to_txt_valid_markdown_string(self):
@@ -31,7 +31,7 @@ class TestMarkdownToTxt(TestCase):
 
         log = logging.getLogger("Test")
         action.logger = log
-        expected = {'txt_string': 'Rapid7 InsightConnect\n', 'txt': 'UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=='}
+        expected = {"txt_string": "Rapid7 InsightConnect\n", "txt": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg=="}
         self.assertEqual(results, expected)
 
     def test_markdown_to_txt_invalid_both(self):
