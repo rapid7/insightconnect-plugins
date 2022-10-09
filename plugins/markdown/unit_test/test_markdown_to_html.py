@@ -2,41 +2,42 @@ import sys
 import os
 
 sys.path.append(os.path.abspath("../"))
-
+from parameterized import parameterized
 from unittest import TestCase
 from komand_markdown.actions.markdown_to_html import MarkdownToHtml
-import logging
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class TestMarkdownToHtml(TestCase):
-    def test_markdown_to_html_valid_markdown(self):
-        action = MarkdownToHtml()
-        input_params = {"markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q="}
-        results = action.run(input_params)
+    expected_result = {
+        "html_string": '<h1 id="rapid7-insightconnect">Rapid7 InsightConnect</h1>\n',
+        "html": "PGgxIGlkPSJyYXBpZDctaW5zaWdodGNvbm5lY3QiPlJhcGlkNyBJbnNpZ2h0Q29ubmVjdDwvaDE+Cg==",
+    }
+    expected_error = "Input error"
 
-        log = logging.getLogger("Test")
-        action.logger = log
-        expected = {}
+    def setUp(self) -> None:
+        self.action = MarkdownToHtml()
+
+    @parameterized.expand(
+        [
+            ({"markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q="}, expected_result),
+            ({"markdown_string": "# Rapid7 InsightConnect"}, expected_result),
+        ]
+    )
+    def test_markdown_to_html_valid_markdown(self, input_params, expected):
+        results = self.action.run(input_params)
         self.assertEqual(results, expected)
 
-    def test_markdown_to_html_valid_markdown_string(self):
-        action = MarkdownToHtml()
-        input_params = {"markdown_string": "# Rapid7 InsightConnect"}
-        results = action.run(input_params)
-
-        log = logging.getLogger("Test")
-        action.logger = log
-        expected = {}
-        self.assertEqual(results, expected)
-
-    def test_markdown_to_html_invalid(self):
-        action = MarkdownToHtml()
-        input_params = {"markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=", "markdown_string": "# Rapid7 InsightConnect"}
-        results = action.run(input_params)
-
-        log = logging.getLogger("Test")
-        action.logger = log
-
-        expected = "Input Error Only one of Markdown or Markdown String can be defined"
-
-        self.assertRaises()
+    @parameterized.expand(
+        [
+            (
+                {"markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q=", "markdown_string": "# Rapid7 InsightConnect"},
+                expected_error,
+            ),
+            ({"markdown": "", "markdown_string": ""}, expected_error),
+        ]
+    )
+    def test_markdown_to_html_invalid(self, input_params, exception):
+        with self.assertRaises(PluginException) as context:
+            self.action.run(input_params)
+        self.assertEqual(context.exception.cause, exception)
