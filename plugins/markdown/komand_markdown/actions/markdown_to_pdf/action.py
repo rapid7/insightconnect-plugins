@@ -10,7 +10,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 def makePDF(html: str, path: str) -> str:
     infile = path + "str.html"
     outfile = path + "tmp.pdf"
-    with open(infile, "w") as f:
+    with open(infile, "w", encoding="utf-8") as f:
         f.write(html)
     pdfkit.from_file(infile, outfile)
     with open(outfile, "rb") as f:
