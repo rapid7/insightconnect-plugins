@@ -30,6 +30,7 @@ class MarkdownToPdf(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         inbytes = params.get(Input.MARKDOWN)
         instr = params.get(Input.MARKDOWN_STRING)
+
         if not (((instr is None) ^ (inbytes is None)) or ((instr == "") ^ (inbytes == ""))):
             raise PluginException(
                 cause="Input error",
