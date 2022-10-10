@@ -1,8 +1,12 @@
 {
-	"spec": "2ccdc1d3e4c16dea641d60a9f2bc5c0d",
-	"manifest": "cf4eb0bd5fad2581228598de5a028f02",
-	"setup": "c87f2f8ef34f6425c6f17c79a517a08f",
+	"spec": "1e5c82210b9a18b9edabfb16e84d7378",
+	"manifest": "9d7393af99a670cd862ccde7771731a9",
+	"setup": "36f604b9535da509228a4933cfadd7b1",
 	"schemas": [
+		{
+			"identifier": "create_change_request/schema.py",
+			"hash": "bec2b277cc58d44d1a1d16d0d49fff37"
+		},
 		{
 			"identifier": "create_ci/schema.py",
 			"hash": "2e7ad4d05c2bd4da0eec90ea0440273a"

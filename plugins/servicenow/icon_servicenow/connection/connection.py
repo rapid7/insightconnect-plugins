@@ -30,6 +30,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.table_url = f"{self.base_url}{api_route}table/"
         self.incident_url = f"{self.table_url}{incident_table}"
         self.attachment_url = f"{self.base_url}{api_route}attachment"
+        self.change_request_url = f"{self.base_url}api/sn_chg_rest/v1/change"
         self.timeout = params.get("timeout", 30)
 
     def test(self):

@@ -3,3 +3,4 @@
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 pytz~=2020.1
 datetime~=4.3
+parameterized==0.8.1
