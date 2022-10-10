@@ -19,10 +19,12 @@ class TestMarkdownToPdf(TestCase):
     def setUp(self) -> None:
         self.action = MarkdownToPdf()
 
-    @parameterized.expand([
-        ({"markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q="}, expected_result),
-        ({"markdown_string": "# Rapid7 InsightConnect"}, expected_result)
-    ])
+    @parameterized.expand(
+        [
+            ({"markdown": "IyBSYXBpZDcgSW5zaWdodENvbm5lY3Q="}, expected_result),
+            ({"markdown_string": "# Rapid7 InsightConnect"}, expected_result),
+        ]
+    )
     def test_markdown_to_pdf_valid(self, input_params, expected):
         results = self.action.run(input_params)
         self.assertEqual(results, expected)
