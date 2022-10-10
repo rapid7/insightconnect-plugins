@@ -24,9 +24,10 @@ class ArmorbloxAPI(Client):
         except Exception as credentials_exp:
             print('Exception has occurred for incorrect credentials. ' + str(credentials_exp))
 
-    def get_incidents(self, from_date: str = None):
+    def get_incidents(self, from_date: str = None, to_date: str = None):
         params = {
             "from_date": from_date,
+            "to_date": to_date,
             "orderBy": "ASC"
         }
         self.process_incidents(params)

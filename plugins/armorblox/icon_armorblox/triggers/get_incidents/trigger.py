@@ -6,6 +6,7 @@ from .schema import GetIncidentsInput, GetIncidentsOutput, Input, Output, Compon
 # Custom imports below
 
 ARMORBLOX_INCIDENT_API_TIME_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
+ARMORBLOX_INCIDENT_API_TIME_DELTA_IN_DAYS = 1
 
 class GetIncidents(insightconnect_plugin_runtime.Trigger):
 
@@ -19,14 +20,13 @@ class GetIncidents(insightconnect_plugin_runtime.Trigger):
     def run(self, params={}):
         """Run the trigger"""
         fetch_interval = int(params.get(Input.INTERVAL))
-        last_fetch_time = datetime.today() - timedelta(days=1)        
-        last_fetch_time = last_fetch_time.strftime(ARMORBLOX_INCIDENT_API_TIME_FORMAT)                                                           
+        # First fetch
+        last_fetch_time = (datetime.utcnow() - timedelta(days=ARMORBLOX_INCIDENT_API_TIME_DELTA_IN_DAYS)).strftime(
+            ARMORBLOX_INCIDENT_API_TIME_FORMAT)
         while True:
-            events = self.connection.api.get_incidents(last_fetch_time)
-            if len(events) != 0:
-                last_fetch_time = datetime.strptime(events[-1]['date'], ARMORBLOX_INCIDENT_API_TIME_FORMAT)
-                # Adding 1 second to avoid the dupliaction of last fetched incident
-                last_fetch_time = (last_fetch_time + timedelta(seconds=1)).strftime(ARMORBLOX_INCIDENT_API_TIME_FORMAT)
+            current_time = datetime.utcnow().replace(second=0).strftime(ARMORBLOX_INCIDENT_API_TIME_FORMAT)
+            events = self.connection.api.get_incidents(from_date=last_fetch_time, to_date=current_time)
             self.send({Output.INCIDENTS: events})
+            last_fetch_time = current_time
             time.sleep(fetch_interval)
 
