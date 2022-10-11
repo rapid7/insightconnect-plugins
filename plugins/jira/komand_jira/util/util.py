@@ -13,30 +13,16 @@ def normalize_comment(source, is_cloud=False, logger=logging.getLogger()):
 def normalize_issue(issue, get_attachments=False, include_raw_fields=False, logger=logging.getLogger()):
     url = issue.permalink().split(" - ", 1)[0]
 
-    if issue.fields.resolution:
-        resolution = issue.fields.resolution.name
-    else:
-        resolution = ""
+    resolution = issue.fields.resolution.name if issue.fields.resolution else ""
+    reporter = issue.fields.reporter.displayName if issue.fields.reporter else ""
+    assignee = issue.fields.assignee.displayName if issue.fields.assignee else ""
+    resolution_date = issue.fields.resolutiondate if issue.fields.resolutiondate else ""
+    description = issue.fields.description if issue.fields.description else ""
 
-    if issue.fields.reporter:
-        reporter = issue.fields.reporter.displayName
-    else:
-        reporter = ""
-
-    if issue.fields.assignee:
-        assignee = issue.fields.assignee.displayName
-    else:
-        assignee = ""
-
-    if issue.fields.resolutiondate:
-        resolution_date = issue.fields.resolutiondate
-    else:
-        resolution_date = ""
-
-    if issue.fields.description:
-        description = issue.fields.description
-    else:
-        description = ""
+    try:
+        labels = issue.fields.labels
+    except AttributeError:
+        labels = []
 
     fields = {}
     if include_raw_fields:
@@ -44,10 +30,14 @@ def normalize_issue(issue, get_attachments=False, include_raw_fields=False, logg
 
     attachment = []
     if get_attachments:
-        for a in issue.fields.attachment:
+        try:
+            attachments = issue.fields.attachment
+        except AttributeError:
+            attachments = []
+        for file in attachments:
             single_attachment = {
-                "filename": a.filename,
-                "content": base64.standard_b64encode(a.get()).decode(),
+                "filename": file.filename,
+                "content": base64.standard_b64encode(file.get()).decode(),
             }
             attachment.append(single_attachment)
 
@@ -67,7 +57,7 @@ def normalize_issue(issue, get_attachments=False, include_raw_fields=False, logg
         "created_at": issue.fields.created,
         "updated_at": issue.fields.updated,
         "resolved_at": resolution_date,
-        "labels": issue.fields.labels or [],
+        "labels": labels,
         "fields": fields,
     }
 
@@ -94,8 +84,7 @@ def normalize_user(user, is_cloud=False, logger=logging.getLogger()):
 
 def look_up_project(_id, client, logger=logging.getLogger()):
     project_detail = client.projects()
-    project_id_name = list(filter(lambda x: x.name == _id or x.key == _id, project_detail))
-
+    project_id_name = list(filter(lambda x: _id in [x.name, x.key], project_detail))
     if project_id_name:
         logger.debug("Project %s exists", project_id_name)
         return True
