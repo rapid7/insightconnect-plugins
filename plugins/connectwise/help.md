@@ -133,7 +133,7 @@ This action is used to update an existing ticket.
 |company_id|integer|None|True|Company Rec ID. This ID can be found in `Share` link on the company page|None|23|
 |contact|details_input|None|False|Name or ID of the contact|None|{"id": 144}|
 |department|details_input|None|False|Name or ID of the department|None|{"name": "Engineering"}|
-|estimatedStartDate|date|None|False|Estimated start date for the ticket|None|2022-09-23T00:00:00+02:00|
+|estimatedStartDate|date|None|False|Estimated start date for the ticket|None|2022-09-22 22:00:00|
 |impact|string|None|True|Impact of the ticket|None|Medium|
 |location|details_input|None|False|Name or ID of the location|None|{"id": 11}|
 |owner|details_input|None|False|Name or ID of the ticket owner|None|{"id": 11}|
@@ -141,7 +141,7 @@ This action is used to update an existing ticket.
 |predecessortype|string|None|False|Type of the ticket predecessor|None|Ticket|
 |priority_id|integer|None|True|ID of the priority|None|7|
 |type|details_input|None|False|Name or ID of the type|None|{"name": "Testing"}|
-|requiredDate|date|None|False|Due date for the ticket|None|2022-09-26T00:00:00+02:00|
+|requiredDate|date|None|False|Due date for the ticket|None|2022-09-25 22:00:00|
 |serviceLocation|details_input|None|False|Name or ID of the service location|None|{"name": "Remote"}|
 |severity|string|None|True|Severity of the ticket|None|Medium|
 |site|details_input|None|False|Name or ID of the site|None|{"id": 1}|
@@ -1393,7 +1393,7 @@ This action is used to create a new ticket.
 |company_id|integer|None|True|Company Rec ID. This ID can be found in `Share` link on the company page|None|23|
 |contact|details_input|None|False|Name or ID of the contact|None|{"id": 144}|
 |department|details_input|None|False|Name or ID of the department|None|{"name": "Engineering"}|
-|estimatedStartDate|date|None|False|Estimated start date for the ticket|None|2022-09-23T00:00:00+02:00|
+|estimatedStartDate|date|None|False|Estimated start date for the ticket|None|2022-09-22 22:00:00|
 |impact|string|None|False|Impact of the ticket|None|Medium|
 |initialDescription|string|None|False|Initial description|None|example description|
 |location|details_input|None|False|Name or ID of the location|None|{"id": 11}|
@@ -1401,7 +1401,7 @@ This action is used to create a new ticket.
 |predecessorId|integer|None|False|ID of the ticket predecessor|None|1234|
 |predecessortype|string|None|False|Type of the ticket predecessor|None|Ticket|
 |priority|details_input|None|False|Name or ID of the priority|None|{"id": 7}|
-|requiredDate|date|None|False|Due date for the ticket|None|2022-09-26T00:00:00+02:00|
+|requiredDate|date|None|False|Due date for the ticket|None|2022-09-25 22:00:00|
 |serviceLocation|details_input|None|False|Name or ID of the service location|None|{"name": "Remote"}|
 |severity|string|None|False|Severity of the ticket|None|Medium|
 |site|details_input|None|False|Name or ID of the site|None|{"id": 1}|

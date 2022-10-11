@@ -18,7 +18,7 @@ tags:
   - ticketing
 hub_tags:
   use_cases: [reporting_and_analytics]
-  keywords: [ticketing, connectwise]
+  keywords: [ticketing]
   features: []
 types:
   more_details:
