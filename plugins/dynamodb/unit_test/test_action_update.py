@@ -52,4 +52,6 @@ class TestActionUpdate(TestCase):
         self.assertEqual(
             "Check client connection keys and input arguments and try again.", context.exception.assistance
         )
-        self.assertEqual(Util.load_json("payloads/action_bad_update_validation_exception.exp"), context.exception.data)
+        self.assertEqual(
+            str(Util.load_json("payloads/action_bad_update_validation_exception.exp")), str(context.exception.data)
+        )

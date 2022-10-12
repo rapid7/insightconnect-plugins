@@ -1,12 +1,13 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
+import json
+import logging
+
 from icon_palo_alto_cortex_xdr.connection.connection import Connection
 from icon_palo_alto_cortex_xdr.connection.schema import Input
-import logging
-import json
 
 
 class MockTrigger:

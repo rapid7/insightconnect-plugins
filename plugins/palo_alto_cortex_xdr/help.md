@@ -31,7 +31,6 @@ The API Key ID is the value from the ID column.
 To get the API URL, right click on your API key and pick generate examples. The generated example is a URL that should look similar to "https://api-yourorg.xdr.us.paloaltonetworks.com/api_keys/validate/".
 In our example the API URL is "https://api-yourorg.xdr.us.paloaltonetworks.com" and should be copied.
 
-
 The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -330,6 +329,44 @@ Example output:
 ```
 
 ### Triggers
+
+#### Get Query Results
+
+This trigger runs the XQL and returns the output data results.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|frequency|integer|5|True|Poll frequency in seconds|None|5|
+|limit|integer|20|False|Integer representing the maximum number of results to return, defaults to 20, max value 1000|None|100|
+|query|string|None|True|String of the XQL query|None|dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3|
+|tenants|[]string|None|True|String that represents additional information regarding the action|None|["tenantID", "tenantID"]|
+
+Example input:
+
+```
+{
+  "frequency": 5,
+  "limit": 100,
+  "query": "dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3",
+  "tenants": [
+    "tenantID",
+    "tenantID"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|reply|reply|True|Was the operation successful|
+
+Example output:
+
+```
+```
 
 #### Get Alerts
 
@@ -661,37 +698,227 @@ Example output:
 
 ### Custom Output Types
 
+#### alert
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Action|string|False|Action|
+|Action Pretty|string|False|Action pretty|
+|Agent Data Collection Status|boolean|False|Agent data collection status|
+|Agent Device Domain|string|False|Agent device domain|
+|Agent FQDN|string|False|Agent FQDN|
+|Agent OS Sub Type|string|False|Agent OS sub type|
+|Agent OS Type|string|False|Agent OS type|
+|Agent Version|string|False|Agent version|
+|Alert ID|string|False|Alert ID|
+|Attempt Counter|string|False|Attempt counter|
+|BIOC Category Enum Key|string|False|BIOC category enum key|
+|BIOC Indicator|string|False|BIOC indicator|
+|Category|string|False|Category|
+|Deduplicate Tokens|string|False|Deduplicate tokens|
+|Description|string|False|Description|
+|Detection Timestamp|integer|False|Detection timestamp|
+|End Match Attempt TS|string|False|End match attempt TS|
+|Endpoint ID|string|False|Endpoint ID|
+|Events|[]event|False|Events|
+|External ID|string|False|External ID|
+|Filter Rule ID|string|False|Filter rule ID|
+|Host IP|[]string|False|Host IP|
+|Host Name|string|False|Host name|
+|Is Whitelisted|boolean|False|Is whitelisted|
+|Local Insert TS|integer|False|Local insert TS|
+|MAC|string|False|MAC|
+|MAC Addresses|[]string|False|MAC addresses|
+|Matching Service Rule ID|string|False|Matching service rule ID|
+|Matching Status|string|False|Matching status|
+|MITRE Tactic ID And Name|[]string|False|MITRE tactic ID and name|
+|MITRE Technique ID And Name|[]string|False|MITRE technique ID and name|
+|Name|string|False|Name|
+|Severity|string|False|Severity|
+|Source|string|False|Source|
+|Starred|boolean|False|Starred|
+
+#### endpoint
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Alias|string|False|Alias|
+|Content Version|string|False|Content version|
+|Domain|string|False|Domain|
+|Endpoint ID|string|False|Endpoint ID|
+|Endpoint Name|string|False|Endpoint name|
+|Endpoint Status|string|False|Endpoint status|
+|Endpoint Type|string|False|Endpoint type|
+|Endpoint Version|string|False|Endpoint version|
+|First Seen|integer|False|First seen|
+|Install Date|integer|False|Install date|
+|Installation Package|string|False|Installation package|
+|IP|[]string|False|IP|
+|Is Isolated|string|False|Is isolated|
+|Last Seen|integer|False|Last seen|
+|Operational Status|string|False|Operational status|
+|Operational Status Description|string|False|Operational status description|
+|OS Type|string|False|OS type|
+|Scan Status|string|False|Scan status|
+|Users|[]string|False|Users|
+
+#### event
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Action Country|string|False|Action country|
+|Action External Hostname|string|False|Action external hostname|
+|Action File Macro SHA256|string|False|Action file macro SHA256|
+|Action File MD5|string|False|Action file MD5|
+|Action File Name|string|False|Action file name|
+|Action File Path|string|False|Action file path|
+|Action File SHA256|string|False|Action file SHA256|
+|Action Local IP|string|False|Action local IP|
+|Action Local Port|string|False|Action local port|
+|Action Process Causality ID|string|False|Action process causality ID|
+|Action Process Image Command Line|string|False|Action process image command line|
+|Action Process Image Name|string|False|Action process image name|
+|Action Process Image SHA256|string|False|Action process image SHA256|
+|Action Process Instance ID|string|False|Action process instance ID|
+|Action Process Signature Status|string|False|Action process signature status|
+|Action Process Signature Vendor|string|False|Action process signature vendor|
+|Action Registry Data|string|False|Action registry data|
+|Action Registry Full Key|string|False|Action registry full key|
+|Action Registry Key Name|string|False|Action registry key name|
+|Action Registry Value Name|string|False|Action registry value name|
+|Action Remote IP|string|False|Action remote IP|
+|Action Remote Port|string|False|Action remote port|
+|Actor Causality ID|string|False|Actor causality ID|
+|Actor Process Causality ID|string|False|Actor process causality ID|
+|Actor Process Command Line|string|False|Actor process command line|
+|Actor Process Image MD5|string|False|Actor process image MD5|
+|Actor Process Image Name|string|False|Actor process image name|
+|Actor Process Image Path|string|False|Actor process image path|
+|Actor Process Image SHA256|string|False|Actor process image SHA256|
+|Actor Process Instance ID|string|False|Actor process instance ID|
+|Actor Process OS PID|integer|False|Actor process OS PID|
+|Actor Process Signature Status|string|False|Actor process signature status|
+|Actor Process Signature Vendor|string|False|Actor process signature vendor|
+|Actor Thread Thread ID|string|False|Actor thread thread ID|
+|Agent Host Boot Time|string|False|Agent host boot time|
+|Agent Install Type|string|False|Agent install type|
+|Association Strength|string|False|Association strength|
+|Causality Actor Causality ID|string|False|Causality actor causality ID|
+|Causality Actor Process Command Line|string|False|Causality actor process command line|
+|Causality Actor Process Execution Time|string|False|Causality actor process execution time|
+|Causality Actor Process Image MD5|string|False|Causality actor process image MD5|
+|Causality Actor Process Image Name|string|False|Causality actor process image name|
+|Causality Actor Process Image Path|string|False|Causality actor process image path|
+|Causality Actor Process Image SHA256|string|False|Causality actor process image SHA256|
+|Causality Actor Process Signature Status|string|False|Causality actor process signature status|
+|Causality Actor Process Signature Vendor|string|False|Causality actor process signature vendor|
+|Cluster Name|string|False|Cluster name|
+|Container ID|string|False|Container ID|
+|Contains Featured Host|string|False|Contains featured host|
+|Contains Featured IP|string|False|Contains featured IP|
+|Contains Featured User|string|False|Contains featured user|
+|DNS Query Name|string|False|DNS query name|
+|DST Action Country|string|False|DST action country|
+|DST Action External Hostname|string|False|DST action external hostname|
+|DST Action External Port|string|False|DST action external port|
+|DST Agent ID|string|False|DST agent ID|
+|DST Association Strength|string|False|DST association strength|
+|DST Causality Actor Process Execution Time|string|False|DST causality actor process execution time|
+|Event ID|string|False|Event ID|
+|Event Sub Type|string|False|Event sub type|
+|Event Timestamp|integer|False|Event timestamp|
+|Event Type|string|False|Event type|
+|FW App Category|string|False|FW app category|
+|FW App ID|string|False|FW app ID|
+|FW App Subcategory|string|False|FW app subcategory|
+|FW App Technology|string|False|FW app technology|
+|FW Device Name|string|False|FW device name|
+|FW Email Recipient|string|False|FW email recipient|
+|FW Email Sender|string|False|FW email sender|
+|FW Email Subject|string|False|FW email subject|
+|FW Interface From|string|False|FW interface from|
+|FW Interface To|string|False|FW interface to|
+|FW Is Phishing|string|False|FW is phishing|
+|FW Misc|string|False|FW misc|
+|FW Rule|string|False|FW rule|
+|FW Rule ID|string|False|FW rule ID|
+|FW Serial Number|string|False|FW serial number|
+|FW URL Domain|string|False|FW URL domain|
+|FW VSYS|string|False|FW VSYS|
+|FW XFF|string|False|FW XFF|
+|Image Name|string|False|Image name|
+|Module ID|string|False|Module ID|
+|OS Actor Causality ID|string|False|OS actor causality ID|
+|OS Actor Effective Username|string|False|OS actor effective username|
+|OS Actor Process Causality ID|string|False|OS actor process causality ID|
+|OS Actor Process Command Line|string|False|OS actor process command line|
+|OS Actor Process Image Name|string|False|OS actor process image name|
+|OS Actor Process Image Path|string|False|OS actor process image path|
+|OS Actor Process Image SHA256|string|False|OS actor process image SHA256|
+|OS Actor Process Instance ID|string|False|OS actor process instance ID|
+|OS Actor Process OS PID|string|False|OS actor process OS PID|
+|OS Actor Process Signature Status|string|False|OS actor process signature status|
+|OS Actor Process Signature Vendor|string|False|OS actor process signature vendor|
+|OS Actor Thread Thread ID|string|False|OS actor thread thread ID|
+|Story ID|string|False|Story ID|
+|User Name|string|False|User name|
+
 #### incident
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Alert Count|integer|False|Alert Count|
-|Assigned User Mail|string|False|Assigned User Mail|
-|Assigned User Pretty Name|string|False|Assigned User Pretty Name|
-|Creation Time|integer|False|Creation Time|
+|Alert Count|integer|False|Alert count|
+|Assigned User Mail|string|False|Assigned user mail|
+|Assigned User Pretty Name|string|False|Assigned user pretty name|
+|Creation Time|integer|False|Creation time|
 |Description|string|False|Description|
-|Detection Time|integer|False|Detection Time|
-|High Severity Alert Count|integer|False|High Severity Alert Count|
-|Host Count|integer|False|Host Count|
+|Detection Time|string|False|Detection time|
+|High Severity Alert Count|integer|False|High severity alert count|
+|Host Count|integer|False|Host count|
 |Hosts|[]string|False|Hosts|
 |Incident ID|string|False|Incident ID|
-|Incident Name|string|False|Incident Name|
-|Incident Sources|[]string|False|Incident Sources|
-|Low Severity Alert Count|integer|False|Low Severity Alert Count|
-|Manual Description|string|False|Manual Description|
-|Manual Score|integer|False|Manual Score|
-|Manual Severity|string|False|Manual Severity|
-|Med Severity Alert Count|integer|False|Med Severity Alert Count|
-|Modification Time|integer|False|Modification Time|
+|Incident Name|string|False|Incident name|
+|Incident Sources|[]string|False|Incident sources|
+|Low Severity Alert Count|integer|False|Low severity alert count|
+|Manual Description|string|False|Manual description|
+|Manual Score|string|False|Manual score|
+|Manual Severity|string|False|Manual severity|
+|Med Severity Alert Count|integer|False|Med severity alert count|
+|Modification Time|integer|False|Modification time|
 |Notes|string|False|Notes|
-|Resolve Comment|string|False|Resolve Comment|
-|Rule Based Score|integer|False|Rule Based Score|
+|Resolve Comment|string|False|Resolve comment|
+|Rule Based Score|string|False|Rule based score|
 |Severity|string|False|Severity|
 |Starred|boolean|False|Starred|
 |Status|string|False|Status|
-|User Count|integer|False|User Count|
+|User Count|integer|False|User count|
 |Users|[]string|False|Users|
 |XDR URL|string|False|XDR URL|
+
+#### isolation_result
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Action ID|integer|False|Action ID|
+|Endpoints Count|integer|False|Endpoints count|
+|Status|string|False|Status|
+
+#### reply
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Number of Results|integer|False|Integer representing the number of results returned|
+|Query Cost|object|False|Float representing the number of query units collected for this API|
+|Remaining Quota|float|False|Float representing the number of query units available for you to use|
+|Results|xql_query_result|False|API results according to defined format field|
+|Status|string|False|API call status: 'SUCCESS', 'FAIL', 'PENDING', 'PARTIAL_SUCCESS'|
+
+#### xql_query_result
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Data|[]object|False|List of obtained data results|
+|Event Subtype|string|False|String representing a unique ID of more than 1000 number of results|
 
 
 ## Troubleshooting
@@ -700,6 +927,7 @@ Example output:
 
 # Version History
 
+* 2.3.0 - Add types `xql_query_result` to `Get XQL Query Results` action's response | Add new trigger `Get Query Results` 
 * 2.2.1 - Fix issue in Get Incidents trigger where fields with null values were causing trigger to fail
 * 2.2.0 - New action Get XQL Query Results | Update SDK to insightconnect-python-3-38-slim-plugin:4
 * 2.1.1 - Fix issue in Monitor Incident Events task where fields with null values aren't removed from incidents leading to validation errors

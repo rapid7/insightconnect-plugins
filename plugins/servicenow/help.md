@@ -48,6 +48,32 @@ Example input:
 
 ### Actions
 
+#### Create Change Request
+
+This action creates a change request record based on the default change request record.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|additional_fields|object|None|False|JSON object containing name-value pairs for the field(s) to update in the associated change request|None|{"short_description": "My example short description"}|
+
+Example input:
+
+```
+{
+  "additional_fields": {
+    "short_description": "My example short description"
+  }
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Indicates whether the change request has been created|
+
 #### Get Attachments for an Incident
 
 This action is used to search for attachments for a given incident ID.
@@ -869,6 +895,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 7.1.0 - Add new action Create Change Request
 * 7.0.0 - Cloud enabled | Changed connection input `URL` to `instance`
 * 6.0.1 - Fix base64 decoding in Put Incident Attachment action
 * 6.0.0 - Add additional file information in output for Get Attachments for an Incident

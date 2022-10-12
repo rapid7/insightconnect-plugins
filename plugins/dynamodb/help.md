@@ -46,6 +46,56 @@ Example input:
 
 ### Actions
 
+#### GetItem
+
+This action is used to the GetItem operation returns a set of attributes for the item with the given primary key.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|consistent_read|boolean|None|False|Determines the read consistency model; If set to true, then the operation uses strongly consistent reads; otherwise, the operation uses eventually consistent reads|None|True|
+|expression_attribute_names|object|None|False|One or more substitution tokens for attribute names in an expression|None|{"#P":"Percentile"}|
+|key|object|None|True|A map of attribute names to AttributeValue objects, representing the primary key of the item to retrieve|None|{"CustomerID": {"S":"12345"}}|
+|projection_expression|string|None|False|A string that identifies one or more attributes to retrieve from the specified table or index|None|Description|
+|return_consumed_capacity|string|TOTAL|False|Determines the level of detail about either provisioned or on-demand throughput consumption that is returned in the response|['NONE', 'INDEXES', 'TOTAL']|TOTAL|
+|table_name|string|None|True|The table name to search|None|Table-name|
+
+Example input:
+
+```
+{
+  "consistent_read":true,
+  "expression_attribute_names":{
+    "#P":"Percentile"
+  },
+  "key":{
+    "CustomerID":{
+      "S":"12345"
+    }
+  },
+  "projection_expression":"Description",
+  "return_consumed_capacity":"TOTAL",
+  "table_name":"Table-name"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|item|object|True|Output item|
+
+Example output:
+```
+{
+  "item": {
+    "ClientID" : {
+      "S": "1234"
+    }
+  }
+}
+```
 #### Insert
 
 This action will insert the provided data into the specified table.
@@ -291,6 +341,7 @@ Any situation in which you provide a ConditionExpression and it causes the job t
 
 # Version History
 
+* 3.1.0 - Add Get Item action 
 * 3.0.2 - Fix number should be a string for boto3 input bug
 * 3.0.1 - Validate exclusive_start_key parameter for Scan action
 * 3.0.0 - Create separate class for communication with AWS | Refactor all actions | Fix incompatible types in output in Scan action | Update Python SDK version
@@ -308,4 +359,4 @@ Any situation in which you provide a ConditionExpression and it causes the job t
 ## References
 
 * [Dynamo Developer Resources](https://aws.amazon.com/dynamodb/developer-resources/)
-* [Dynamo Condition Expression Guide](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html#ConditionExpressionReference)
+* [Dynamo Condition Expression Guide](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html#ConditionExpressionReferenIce)

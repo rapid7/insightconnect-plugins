@@ -4,51 +4,47 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Start an XQL query and retrieve the query results"
+    DESCRIPTION = "Runs the XQL and returns the output data results"
 
 
 class Input:
-    END_TIME = "end_time"
+    
+    FREQUENCY = "frequency"
     LIMIT = "limit"
     QUERY = "query"
-    START_TIME = "start_time"
     TENANTS = "tenants"
     
 
 class Output:
+    
     REPLY = "reply"
     
 
-class GetXqlQueryResultsInput(insightconnect_plugin_runtime.Input):
+class GetQueryResultsInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "end_time": {
+    "frequency": {
       "type": "integer",
-      "title": "End Time",
-      "description": "Integer in timestamp epoch milliseconds for end of the time range, Cortex XDR calls by default the last 24 hours if both 'Start Time' and 'End Time' values are not present",
-      "order": 3
+      "title": "Frequency",
+      "description": "Poll frequency in seconds",
+      "default": 5,
+      "order": 1
     },
     "limit": {
       "type": "integer",
       "title": "Limit",
       "description": "Integer representing the maximum number of results to return, defaults to 20, max value 1000",
       "default": 20,
-      "order": 5
+      "order": 4
     },
     "query": {
       "type": "string",
       "title": "Query",
       "description": "String of the XQL query",
-      "order": 1
-    },
-    "start_time": {
-      "type": "integer",
-      "title": "Start Time",
-      "description": "Integer in timestamp epoch milliseconds for start of the time range, Cortex XDR calls by default the last 24 hours if both 'Start Time' and 'End Time' values are not present",
-      "order": 4
+      "order": 2
     },
     "tenants": {
       "type": "array",
@@ -57,10 +53,11 @@ class GetXqlQueryResultsInput(insightconnect_plugin_runtime.Input):
       "items": {
         "type": "string"
       },
-      "order": 2
+      "order": 3
     }
   },
   "required": [
+    "frequency",
     "query",
     "tenants"
   ]
@@ -71,7 +68,7 @@ class GetXqlQueryResultsInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class GetXqlQueryResultsOutput(insightconnect_plugin_runtime.Output):
+class GetQueryResultsOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
@@ -84,6 +81,9 @@ class GetXqlQueryResultsOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
+  "required": [
+    "reply"
+  ],
   "definitions": {
     "reply": {
       "type": "object",

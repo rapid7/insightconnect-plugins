@@ -1,4 +1,5 @@
 SCAN_COMMAND = "scan"
+GET_ITEM_COMMAND = "get_item"
 INSERT_COMMAND = "put_item"
 UPDATE_COMMAND = "update_item"
 LIST_TABLES = "list_tables"

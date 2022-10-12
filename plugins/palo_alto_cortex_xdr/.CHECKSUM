@@ -1,7 +1,7 @@
 {
-	"spec": "64596d614e64bb91b3d043e0001d428d",
-	"manifest": "3a8422f1e2ffe0eda6a01b2d247a39b6",
-	"setup": "b7529fdb5c0591ad10439e9c3492586f",
+	"spec": "5960a593e203f1324a96121927a9fa5d",
+	"manifest": "4d8aab3cd9c79a15b24ffc7b1a534190",
+	"setup": "55e82ab05d9fc240f8cd57557b3a00c6",
 	"schemas": [
 		{
 			"identifier": "allow_file/schema.py",
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "get_xql_query_results/schema.py",
-			"hash": "c0b607f55fd662bbc38229c4b9bb1e65"
+			"hash": "1a16a3da160b2810b9a1e1dfa1c9fc79"
 		},
 		{
 			"identifier": "isolate_endpoint/schema.py",
@@ -42,6 +42,10 @@
 		{
 			"identifier": "get_incidents/schema.py",
 			"hash": "38f5d9b30888f3917d3c0ae6768753fc"
+		},
+		{
+			"identifier": "get_query_results/schema.py",
+			"hash": "1243637c330c289efec3cf709a4cf83a"
 		}
 	]
 }
