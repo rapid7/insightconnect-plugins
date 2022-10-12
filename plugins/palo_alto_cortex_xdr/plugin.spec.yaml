@@ -4,7 +4,7 @@ products: [insightconnect]
 name: palo_alto_cortex_xdr
 title: Palo Alto Cortex XDR
 description: Stop modern attacks with the industry's first extended detection and response platform that spans your endpoints, network and cloud data
-version: 2.2.1
+version: 2.3.0
 supported_versions: ["2022-03-28 Palo Alto Cortex XDR API v1"]
 vendor: rapid7
 support: rapid7
@@ -22,7 +22,6 @@ hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [cortex, endpoint, detection]
   features: []
-
 types:
   event:
     action_country:
@@ -929,6 +928,53 @@ types:
         type: "[]string"
         description: Users
         required: false
+  xql_query_result_data:
+    event_id:
+      title: Event ID
+      type: string
+      description: String representing the event identifier
+      required: false
+    _vendor:
+      title: Vendor Name
+      type: string
+      description: The name of a vendor
+      required: false
+    _product:
+      title: Product
+      type: string
+      description: Name of a product
+      required: false
+    insert_timestamp:
+      title: Insertion timestamp
+      type: integer
+      description: Integer representing insertion timestamp as epoch in ms
+      required: false
+    _time:
+      title: Time
+      type: integer
+      description: Integer representing the event time as epoch in ms
+      required: false
+    event_type:
+      title: Event Type
+      type: string
+      description: The type of event
+      required: false
+    event_sub_type:
+      title: Event Subtype
+      type: string
+      description: String representing the subtype of an event
+      required: false
+  xql_query_result:
+    data:
+      title: Data
+      type: "[]xql_query_result_data"
+      description: List of obtained data results
+      required: false
+    stream_id:
+      title: Event Subtype
+      type: string
+      description: String representing a unique ID of more than 1000 number of results
+      required: false
   reply:
     status:
       title: Status
@@ -952,10 +998,8 @@ types:
       required: false
     results:
       title: Results
-      type: object
-      description: "Displays the API response in either of the following fields according to the number of results:
-        data: API results according to defined format field
-        stream: id String representing a unique ID of more than 1000 number of results"
+      type: xql_query_result
+      description: API results according to defined format field
       required: false
 connection:
   url:
@@ -986,7 +1030,6 @@ connection:
     enum:
       - Advanced
       - Standard
-
 actions:
   get_file_quarantine_status:
     title: Get File Quarantine Status
@@ -1202,7 +1245,42 @@ triggers:
         description: Alert
         type: alert
         required: false
-
+  get_query_results:
+    title: Get Query Results
+    description: Runs the XQL and returns the output data results
+    input:
+      frequency:
+        title: Frequency
+        description: Poll frequency in seconds
+        type: integer
+        required: true
+        default: 5
+        example: 5
+      query:
+        title: Query
+        description: String of the XQL query
+        type: string
+        required: true
+        example: dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3
+      tenants:
+        title: Tenants
+        description: String that represents additional information regarding the action
+        type: "[]string"
+        required: true
+        example: [ "tenantID", "tenantID" ]
+      limit:
+        title: Limit
+        description: Integer representing the maximum number of results to return, defaults to 20, max value 1000
+        type: integer
+        required: false
+        example: 100
+        default: 20
+    output:
+      reply:
+        title: Reply
+        description: Was the operation successful
+        type: reply
+        required: true
 tasks:
   monitor_incident_events:
     title: Monitor Incident Events

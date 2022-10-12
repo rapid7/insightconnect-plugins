@@ -1,27 +1,28 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 import logging
 import time
-
-from parameterized import parameterized
 from unittest import TestCase
 from unittest.mock import patch
-from icon_palo_alto_cortex_xdr.actions.get_xql_query_results.schema import Input
+
 from icon_palo_alto_cortex_xdr.actions.get_xql_query_results import GetXqlQueryResults
+from icon_palo_alto_cortex_xdr.actions.get_xql_query_results.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
-from unit_test.util import Util
+from parameterized import parameterized
+
 from unit_test.mock import (
     mock_request_200,
-    mock_request_403,
+    mock_request_400,
     mock_request_401,
     mock_request_402,
-    mock_request_400,
+    mock_request_403,
     mock_request_404,
     mocked_request,
 )
+from unit_test.util import Util
 
 
 class TestGetEndpointDetails(TestCase):
