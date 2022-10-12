@@ -1,7 +1,12 @@
+import os
+import sys
 from unittest import TestCase
-from icon_palo_alto_cortex_xdr.util.api import CortexXdrAPI
+
+sys.path.append(os.path.abspath("../"))
 
 import logging
+
+from icon_palo_alto_cortex_xdr.util.api import CortexXdrAPI
 
 
 class TestAPI(TestCase):
