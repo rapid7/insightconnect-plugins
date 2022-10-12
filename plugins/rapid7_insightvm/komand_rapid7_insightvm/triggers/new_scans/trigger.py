@@ -81,7 +81,9 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
             try:
                 util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(cache_site_scans))  # noqa: B608
             except TypeError as error:
-                raise PluginException(cause="Failed to save cache to file", assistance=f"Exception returned was {error}")
+                raise PluginException(
+                    cause="Failed to save cache to file", assistance=f"Exception returned was {error}"
+                )
 
             # Sleep for configured frequency in minutes
             time.sleep(params.get(Input.FREQUENCY, 5) * 60)
