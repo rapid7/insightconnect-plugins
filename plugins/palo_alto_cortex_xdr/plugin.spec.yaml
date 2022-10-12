@@ -928,46 +928,10 @@ types:
         type: "[]string"
         description: Users
         required: false
-  xql_query_result_data:
-    event_id:
-      title: Event ID
-      type: string
-      description: String representing the event identifier
-      required: false
-    _vendor:
-      title: Vendor Name
-      type: string
-      description: The name of a vendor
-      required: false
-    _product:
-      title: Product
-      type: string
-      description: Name of a product
-      required: false
-    insert_timestamp:
-      title: Insertion timestamp
-      type: integer
-      description: Integer representing insertion timestamp as epoch in ms
-      required: false
-    _time:
-      title: Time
-      type: integer
-      description: Integer representing the event time as epoch in ms
-      required: false
-    event_type:
-      title: Event Type
-      type: string
-      description: The type of event
-      required: false
-    event_sub_type:
-      title: Event Subtype
-      type: string
-      description: String representing the subtype of an event
-      required: false
   xql_query_result:
     data:
       title: Data
-      type: "[]xql_query_result_data"
+      type: "[]object"
       description: List of obtained data results
       required: false
     stream_id:

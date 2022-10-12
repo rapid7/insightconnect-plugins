@@ -917,20 +917,8 @@ Example output:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Data|[]xql_query_result_data|False|List of obtained data results|
+|Data|[]object|False|List of obtained data results|
 |Event Subtype|string|False|String representing a unique ID of more than 1000 number of results|
-
-#### xql_query_result_data
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Product|string|False|Name of a product|
-|Time|integer|False|Integer representing the event time as epoch in ms|
-|Vendor Name|string|False|The name of a vendor|
-|Event ID|string|False|String representing the event identifier|
-|Event Subtype|string|False|String representing the subtype of an event|
-|Event Type|string|False|The type of event|
-|Insertion timestamp|integer|False|Integer representing insertion timestamp as epoch in ms|
 
 
 ## Troubleshooting
@@ -939,7 +927,7 @@ Example output:
 
 # Version History
 
-* 2.3.0 - Add types `xql_query_result`, `xql_query_result_data` to `Get XQL Query Results` action's response | Add new trigger `Get Query Results` 
+* 2.3.0 - Add types `xql_query_result` to `Get XQL Query Results` action's response | Add new trigger `Get Query Results` 
 * 2.2.1 - Fix issue in Get Incidents trigger where fields with null values were causing trigger to fail
 * 2.2.0 - New action Get XQL Query Results | Update SDK to insightconnect-python-3-38-slim-plugin:4
 * 2.1.1 - Fix issue in Monitor Incident Events task where fields with null values aren't removed from incidents leading to validation errors

@@ -130,7 +130,7 @@ class GetQueryResultsOutput(insightconnect_plugin_runtime.Output):
               "title": "Data",
               "description": "List of obtained data results",
               "items": {
-                "$ref": "#/definitions/xql_query_result_data"
+                "type": "object"
               },
               "order": 1
             },
@@ -139,104 +139,6 @@ class GetQueryResultsOutput(insightconnect_plugin_runtime.Output):
               "title": "Event Subtype",
               "description": "String representing a unique ID of more than 1000 number of results",
               "order": 2
-            }
-          },
-          "definitions": {
-            "xql_query_result_data": {
-              "type": "object",
-              "title": "xql_query_result_data",
-              "properties": {
-                "_product": {
-                  "type": "string",
-                  "title": "Product",
-                  "description": "Name of a product",
-                  "order": 3
-                },
-                "_time": {
-                  "type": "integer",
-                  "title": "Time",
-                  "description": "Integer representing the event time as epoch in ms",
-                  "order": 5
-                },
-                "_vendor": {
-                  "type": "string",
-                  "title": "Vendor Name",
-                  "description": "The name of a vendor",
-                  "order": 2
-                },
-                "event_id": {
-                  "type": "string",
-                  "title": "Event ID",
-                  "description": "String representing the event identifier",
-                  "order": 1
-                },
-                "event_sub_type": {
-                  "type": "string",
-                  "title": "Event Subtype",
-                  "description": "String representing the subtype of an event",
-                  "order": 7
-                },
-                "event_type": {
-                  "type": "string",
-                  "title": "Event Type",
-                  "description": "The type of event",
-                  "order": 6
-                },
-                "insert_timestamp": {
-                  "type": "integer",
-                  "title": "Insertion timestamp",
-                  "description": "Integer representing insertion timestamp as epoch in ms",
-                  "order": 4
-                }
-              }
-            }
-          }
-        },
-        "xql_query_result_data": {
-          "type": "object",
-          "title": "xql_query_result_data",
-          "properties": {
-            "_product": {
-              "type": "string",
-              "title": "Product",
-              "description": "Name of a product",
-              "order": 3
-            },
-            "_time": {
-              "type": "integer",
-              "title": "Time",
-              "description": "Integer representing the event time as epoch in ms",
-              "order": 5
-            },
-            "_vendor": {
-              "type": "string",
-              "title": "Vendor Name",
-              "description": "The name of a vendor",
-              "order": 2
-            },
-            "event_id": {
-              "type": "string",
-              "title": "Event ID",
-              "description": "String representing the event identifier",
-              "order": 1
-            },
-            "event_sub_type": {
-              "type": "string",
-              "title": "Event Subtype",
-              "description": "String representing the subtype of an event",
-              "order": 7
-            },
-            "event_type": {
-              "type": "string",
-              "title": "Event Type",
-              "description": "The type of event",
-              "order": 6
-            },
-            "insert_timestamp": {
-              "type": "integer",
-              "title": "Insertion timestamp",
-              "description": "Integer representing insertion timestamp as epoch in ms",
-              "order": 4
             }
           }
         }
@@ -251,7 +153,7 @@ class GetQueryResultsOutput(insightconnect_plugin_runtime.Output):
           "title": "Data",
           "description": "List of obtained data results",
           "items": {
-            "$ref": "#/definitions/xql_query_result_data"
+            "type": "object"
           },
           "order": 1
         },
@@ -260,104 +162,6 @@ class GetQueryResultsOutput(insightconnect_plugin_runtime.Output):
           "title": "Event Subtype",
           "description": "String representing a unique ID of more than 1000 number of results",
           "order": 2
-        }
-      },
-      "definitions": {
-        "xql_query_result_data": {
-          "type": "object",
-          "title": "xql_query_result_data",
-          "properties": {
-            "_product": {
-              "type": "string",
-              "title": "Product",
-              "description": "Name of a product",
-              "order": 3
-            },
-            "_time": {
-              "type": "integer",
-              "title": "Time",
-              "description": "Integer representing the event time as epoch in ms",
-              "order": 5
-            },
-            "_vendor": {
-              "type": "string",
-              "title": "Vendor Name",
-              "description": "The name of a vendor",
-              "order": 2
-            },
-            "event_id": {
-              "type": "string",
-              "title": "Event ID",
-              "description": "String representing the event identifier",
-              "order": 1
-            },
-            "event_sub_type": {
-              "type": "string",
-              "title": "Event Subtype",
-              "description": "String representing the subtype of an event",
-              "order": 7
-            },
-            "event_type": {
-              "type": "string",
-              "title": "Event Type",
-              "description": "The type of event",
-              "order": 6
-            },
-            "insert_timestamp": {
-              "type": "integer",
-              "title": "Insertion timestamp",
-              "description": "Integer representing insertion timestamp as epoch in ms",
-              "order": 4
-            }
-          }
-        }
-      }
-    },
-    "xql_query_result_data": {
-      "type": "object",
-      "title": "xql_query_result_data",
-      "properties": {
-        "_product": {
-          "type": "string",
-          "title": "Product",
-          "description": "Name of a product",
-          "order": 3
-        },
-        "_time": {
-          "type": "integer",
-          "title": "Time",
-          "description": "Integer representing the event time as epoch in ms",
-          "order": 5
-        },
-        "_vendor": {
-          "type": "string",
-          "title": "Vendor Name",
-          "description": "The name of a vendor",
-          "order": 2
-        },
-        "event_id": {
-          "type": "string",
-          "title": "Event ID",
-          "description": "String representing the event identifier",
-          "order": 1
-        },
-        "event_sub_type": {
-          "type": "string",
-          "title": "Event Subtype",
-          "description": "String representing the subtype of an event",
-          "order": 7
-        },
-        "event_type": {
-          "type": "string",
-          "title": "Event Type",
-          "description": "The type of event",
-          "order": 6
-        },
-        "insert_timestamp": {
-          "type": "integer",
-          "title": "Insertion timestamp",
-          "description": "Integer representing insertion timestamp as epoch in ms",
-          "order": 4
         }
       }
     }
