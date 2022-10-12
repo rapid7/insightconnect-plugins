@@ -80,8 +80,8 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
             self.logger.info("Writing to " + self.CACHE_FILE_NAME)
             try:
                 util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(cache_site_scans))  # noqa: B608
-            except TypeError as e:
-                raise PluginException(cause="Failed to save cache to file", assistance=f"Exception returned was {e}")
+            except TypeError as error:
+                raise PluginException(cause="Failed to save cache to file", assistance=f"Exception returned was {error}")
 
             # Sleep for configured frequency in minutes
             time.sleep(params.get(Input.FREQUENCY, 5) * 60)
@@ -101,8 +101,8 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
     def get_cache_site_scans(self):
         try:
             return json.loads(util.read_from_cache(self.CACHE_FILE_NAME))
-        except ValueError as e:
-            raise PluginException(cause="Failed to load cache file", assistance=f"Exception returned was {e}")
+        except ValueError as error:
+            raise PluginException(cause="Failed to load cache file", assistance=f"Exception returned was {error}")
 
     def get_track_site_scans(self, site_scans):
         track_site_scans = {}
@@ -115,11 +115,11 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
         if response.status_code in [200, 201]:  # 200 is documented, 201 is undocumented
             try:
                 scan_details = response.json()
-            except json.decoder.JSONDecodeError as e:
+            except json.decoder.JSONDecodeError as error:
                 raise PluginException(
                     cause=f"Error: Failed to parse response while retrieving scan "
                     f"details for scan ID {scan['scan_id']}.",
-                    assistance=f"Exception returned was {e}",
+                    assistance=f"Exception returned was {error}",
                 )
         else:
             raise PluginException(
