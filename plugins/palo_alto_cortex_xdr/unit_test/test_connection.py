@@ -1,4 +1,9 @@
+import os
+import sys
 from unittest import TestCase
+
+sys.path.append(os.path.abspath("../"))
+
 from icon_palo_alto_cortex_xdr.connection import Connection
 
 
