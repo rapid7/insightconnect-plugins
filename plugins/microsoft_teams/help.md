@@ -879,7 +879,7 @@ If there is more than one team with the same name in your organization, the olde
 
 # Version History
 
-* 4.1.0 - Cloud enabled
+* 4.0.1 - Cloud enabled
 * 4.0.0 - Fix issue with Create Teams Enabled Group action's members, and owners input field types
 * 3.2.0 - Send Message Action is updated to support chat messages via chat_id parameter, team_name is set to optional. | Update SDK to latest version.
 * 3.1.5 - Add `microsoft_teams` and `office365` keywords | Removed `microsoft, teams, office 365` keywords
