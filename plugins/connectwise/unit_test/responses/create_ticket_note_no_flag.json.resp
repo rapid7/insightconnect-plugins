@@ -1,0 +1,12 @@
+{
+  "code": "InvalidObject",
+  "message": "serviceNote object is invalid",
+  "errors": [
+    {
+      "code": "ServiceNote",
+      "message": "Please choose where to display the notes in order to save this record.",
+      "resource": "serviceNote",
+      "field": "detailDescriptionFlag, internalAnalysisFlag, resolutionFlag"
+    }
+  ]
+}

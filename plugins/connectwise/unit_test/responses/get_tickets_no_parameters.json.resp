@@ -1,0 +1,430 @@
+[
+  {
+    "id": 3186,
+    "summary": "Daily Tenable Reports",
+    "recordType": "ServiceTicket",
+    "board": {
+      "id": 30,
+      "name": "Network Security - South",
+      "_info": {
+        "board_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30"
+      }
+    },
+    "status": {
+      "id": 562,
+      "name": ">Closed",
+      "_info": {
+        "status_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/statuses/562"
+      }
+    },
+    "company": {
+      "id": 19298,
+      "identifier": "Example",
+      "name": "Example Company",
+      "_info": {
+        "company_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/19298",
+        "mobileGuid": "5ec92caf-0922-4120-9268-21580dbbcef8"
+      }
+    },
+    "site": {
+      "id": 1000,
+      "name": "Main",
+      "_info": {
+        "site_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/19298/sites/1000",
+        "mobileGuid": "9e51ad16-7cc3-41f0-ab02-ef332ff30024"
+      }
+    },
+    "siteName": "Main",
+    "addressLine1": "6505 Windcrest Dr",
+    "addressLine2": "Suite 200",
+    "city": "Plano",
+    "stateIdentifier": "TX",
+    "zip": "75024",
+    "country": {
+      "id": 1,
+      "name": "United States",
+      "_info": {
+        "country_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/countries/1"
+      }
+    },
+    "contactName": "",
+    "contactPhoneNumber": "9729056500",
+    "type": {
+      "id": 250,
+      "name": "Reports",
+      "_info": {
+        "type_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/types/250"
+      }
+    },
+    "team": {
+      "id": 10,
+      "name": "Network Security",
+      "_info": {
+        "team_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/teams/10"
+      }
+    },
+    "owner": {
+      "id": 244,
+      "identifier": "User",
+      "name": "User",
+      "_info": {
+        "member_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/244",
+        "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/244/image?lm=2019-07-12T19:54:26Z"
+      }
+    },
+    "priority": {
+      "id": 12,
+      "name": "Priority 5 - Service Request",
+      "sort": 5,
+      "_info": {
+        "priority_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/priorities/12",
+        "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/priorities/12/image?lm=2020-05-29T13:25:15Z"
+      }
+    },
+    "serviceLocation": {
+      "id": 4,
+      "name": "Remote",
+      "_info": {
+        "location_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/locations/4"
+      }
+    },
+    "source": {
+      "id": 3,
+      "name": "Internal",
+      "_info": {
+        "source_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/sources/3"
+      }
+    },
+    "severity": "Low",
+    "impact": "Low",
+    "allowAllClientsPortalView": false,
+    "customerUpdatedFlag": false,
+    "automaticEmailContactFlag": false,
+    "automaticEmailResourceFlag": false,
+    "automaticEmailCcFlag": false,
+    "closedDate": "2018-08-10T17:39:20Z",
+    "closedBy": "User",
+    "closedFlag": true,
+    "actualHours": 1.07,
+    "approved": true,
+    "estimatedExpenseCost": 0.00,
+    "estimatedExpenseRevenue": 0.00,
+    "estimatedProductCost": 0.00,
+    "estimatedProductRevenue": 0.00,
+    "estimatedTimeCost": 0.00,
+    "estimatedTimeRevenue": 0.00,
+    "billingMethod": "ActualRates",
+    "subBillingMethod": "ActualRates",
+    "dateResolved": "2018-08-10T17:39:12Z",
+    "dateResplan": "2018-08-09T15:22:30Z",
+    "dateResponded": "2018-08-09T15:22:30Z",
+    "resolveMinutes": 306,
+    "resPlanMinutes": 0,
+    "respondMinutes": 0,
+    "isInSla": true,
+    "resources": "User",
+    "hasChildTicket": false,
+    "hasMergedChildTicketFlag": false,
+    "billTime": "NoDefault",
+    "billExpenses": "NoDefault",
+    "billProducts": "NoDefault",
+    "location": {
+      "id": 11,
+      "name": "Example Location",
+      "_info": {
+        "location_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/locations/11"
+      }
+    },
+    "department": {
+      "id": 5,
+      "identifier": "Engineering",
+      "name": "Engineering",
+      "_info": {
+        "department_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/departments/5"
+      }
+    },
+    "mobileGuid": "b7fd8e26-fcad-4ade-ba53-c0772dcd7913",
+    "sla": {
+      "id": 6,
+      "name": "No SLA",
+      "_info": {
+        "sla_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/SLAs/6"
+      }
+    },
+    "slaStatus": "Resolved",
+    "requestForChangeFlag": false,
+    "currency": {
+      "id": 7,
+      "symbol": "$",
+      "currencyCode": "USD",
+      "decimalSeparator": ".",
+      "numberOfDecimals": 2,
+      "thousandsSeparator": ",",
+      "negativeParenthesesFlag": false,
+      "displaySymbolFlag": true,
+      "currencyIdentifier": "USD",
+      "displayIdFlag": false,
+      "rightAlign": false,
+      "name": "US Dollars",
+      "_info": {
+        "currency_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//finance/currencies/7"
+      }
+    },
+    "_info": {
+      "lastUpdated": "2018-11-09T21:19:07Z",
+      "updatedBy": "User",
+      "dateEntered": "2018-08-09T15:22:36Z",
+      "enteredBy": "User",
+      "activities_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//sales/activities?conditions=ticket/id=3186",
+      "scheduleentries_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//schedule/entries?conditions=type/id=4 AND objectId=3186",
+      "documents_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/documents?recordType=Ticket&recordId=3186",
+      "configurations_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/tickets/3186/configurations",
+      "tasks_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/tickets/3186/tasks",
+      "notes_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/tickets/3186/notes",
+      "products_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//procurement/products?conditions=chargeToType='Ticket' AND chargeToId=3186",
+      "timeentries_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//time/entries?conditions=(chargeToType='ServiceTicket' OR chargeToType='ProjectTicket') AND chargeToId=3186",
+      "expenseEntries_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//expense/entries?conditions=(chargeToType='ServiceTicket' OR chargeToType='ProjectTicket') AND chargeToId=3186"
+    },
+    "escalationStartDateUTC": "2018-08-10T17:39:19Z",
+    "escalationLevel": 15,
+    "minutesBeforeWaiting": 0,
+    "respondedSkippedMinutes": 0,
+    "resplanSkippedMinutes": 0,
+    "customFields": [
+      {
+        "id": 7,
+        "caption": "Dispatch Billing Required",
+        "type": "Text",
+        "entryMethod": "List",
+        "numberOfDecimals": 0
+      },
+      {
+        "id": 36,
+        "caption": "Business App assigned ",
+        "type": "Date",
+        "entryMethod": "EntryField",
+        "numberOfDecimals": 0
+      },
+      {
+        "id": 37,
+        "caption": "T&M Billing Required",
+        "type": "Checkbox",
+        "entryMethod": "EntryField",
+        "numberOfDecimals": 0
+      }
+    ]
+  },
+  {
+    "id": 3204,
+    "summary": "Add Sys Admin to portal",
+    "recordType": "ServiceTicket",
+    "board": {
+      "id": 30,
+      "name": "Network Security - South",
+      "_info": {
+        "board_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30"
+      }
+    },
+    "status": {
+      "id": 562,
+      "name": ">Closed",
+      "_info": {
+        "status_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/statuses/562"
+      }
+    },
+    "company": {
+      "id": 20051,
+      "identifier": "14773",
+      "name": "HH Global (formerly Innerworkings)",
+      "_info": {
+        "company_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/20051",
+        "mobileGuid": "8a311768-11ad-4bed-a921-5b179ba56b24"
+      }
+    },
+    "site": {
+      "id": 1772,
+      "name": "",
+      "_info": {
+        "site_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/20051/sites/1772",
+        "mobileGuid": "e93b17fd-0b9c-46c6-a933-d6898c122dc5"
+      }
+    },
+    "addressLine1": "600 West Chicago Avenue",
+    "city": "CHICAGO",
+    "stateIdentifier": "IL",
+    "zip": "60654",
+    "contactName": "",
+    "contactPhoneNumber": "3126045455",
+    "type": {
+      "id": 247,
+      "name": "Configuration",
+      "_info": {
+        "type_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/types/247"
+      }
+    },
+    "subType": {
+      "id": 88,
+      "name": "Antivirus - DO NOT USE",
+      "_info": {
+        "subType_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/subtypes/88"
+      }
+    },
+    "team": {
+      "id": 10,
+      "name": "Network Security",
+      "_info": {
+        "team_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/teams/10"
+      }
+    },
+    "owner": {
+      "id": 244,
+      "identifier": "User",
+      "name": "User",
+      "_info": {
+        "member_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/244",
+        "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/244/image?lm=2019-07-12T19:54:26Z"
+      }
+    },
+    "priority": {
+      "id": 12,
+      "name": "Priority 5 - Service Request",
+      "sort": 5,
+      "_info": {
+        "priority_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/priorities/12",
+        "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/priorities/12/image?lm=2020-05-29T13:25:15Z"
+      }
+    },
+    "serviceLocation": {
+      "id": 4,
+      "name": "Remote",
+      "_info": {
+        "location_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/locations/4"
+      }
+    },
+    "source": {
+      "id": 3,
+      "name": "Internal",
+      "_info": {
+        "source_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/sources/3"
+      }
+    },
+    "severity": "Low",
+    "impact": "Low",
+    "allowAllClientsPortalView": false,
+    "customerUpdatedFlag": false,
+    "automaticEmailContactFlag": false,
+    "automaticEmailResourceFlag": false,
+    "automaticEmailCcFlag": false,
+    "closedDate": "2018-08-13T12:56:47Z",
+    "closedBy": "Jleopard",
+    "closedFlag": true,
+    "actualHours": 0.27,
+    "approved": true,
+    "estimatedExpenseCost": 0.00,
+    "estimatedExpenseRevenue": 0.00,
+    "estimatedProductCost": 0.00,
+    "estimatedProductRevenue": 0.00,
+    "estimatedTimeCost": 0.00,
+    "estimatedTimeRevenue": 0.00,
+    "billingMethod": "ActualRates",
+    "subBillingMethod": "ActualRates",
+    "dateResolved": "2018-08-13T12:56:34Z",
+    "dateResplan": "2018-08-09T18:30:41Z",
+    "dateResponded": "2018-08-09T18:30:41Z",
+    "resolveMinutes": 119,
+    "resPlanMinutes": 141,
+    "respondMinutes": 0,
+    "isInSla": true,
+    "resources": "JFontenot, User",
+    "hasChildTicket": false,
+    "hasMergedChildTicketFlag": false,
+    "billTime": "NoDefault",
+    "billExpenses": "NoDefault",
+    "billProducts": "NoDefault",
+    "location": {
+      "id": 11,
+      "name": "Example Location",
+      "_info": {
+        "location_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/locations/11"
+      }
+    },
+    "department": {
+      "id": 5,
+      "identifier": "Engineering",
+      "name": "Engineering",
+      "_info": {
+        "department_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/departments/5"
+      }
+    },
+    "mobileGuid": "012ef36f-64d3-4d34-a1c1-10346c045b68",
+    "sla": {
+      "id": 6,
+      "name": "No SLA",
+      "_info": {
+        "sla_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/SLAs/6"
+      }
+    },
+    "slaStatus": "Resolved",
+    "requestForChangeFlag": false,
+    "currency": {
+      "id": 7,
+      "symbol": "$",
+      "currencyCode": "USD",
+      "decimalSeparator": ".",
+      "numberOfDecimals": 2,
+      "thousandsSeparator": ",",
+      "negativeParenthesesFlag": false,
+      "displaySymbolFlag": true,
+      "currencyIdentifier": "USD",
+      "displayIdFlag": false,
+      "rightAlign": false,
+      "name": "US Dollars",
+      "_info": {
+        "currency_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//finance/currencies/7"
+      }
+    },
+    "_info": {
+      "lastUpdated": "2018-08-13T12:56:47Z",
+      "updatedBy": "Jleopard",
+      "dateEntered": "2018-08-09T16:09:55Z",
+      "enteredBy": "RTimberlake",
+      "activities_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//sales/activities?conditions=ticket/id=3204",
+      "scheduleentries_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//schedule/entries?conditions=type/id=4 AND objectId=3204",
+      "documents_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/documents?recordType=Ticket&recordId=3204",
+      "configurations_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/tickets/3204/configurations",
+      "tasks_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/tickets/3204/tasks",
+      "notes_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/tickets/3204/notes",
+      "products_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//procurement/products?conditions=chargeToType='Ticket' AND chargeToId=3204",
+      "timeentries_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//time/entries?conditions=(chargeToType='ServiceTicket' OR chargeToType='ProjectTicket') AND chargeToId=3204",
+      "expenseEntries_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//expense/entries?conditions=(chargeToType='ServiceTicket' OR chargeToType='ProjectTicket') AND chargeToId=3204"
+    },
+    "escalationStartDateUTC": "2018-08-13T12:56:47Z",
+    "escalationLevel": 15,
+    "minutesBeforeWaiting": 0,
+    "respondedSkippedMinutes": 141,
+    "resplanSkippedMinutes": 0,
+    "customFields": [
+      {
+        "id": 7,
+        "caption": "Dispatch Billing Required",
+        "type": "Text",
+        "entryMethod": "List",
+        "numberOfDecimals": 0
+      },
+      {
+        "id": 36,
+        "caption": "Business App assigned ",
+        "type": "Date",
+        "entryMethod": "EntryField",
+        "numberOfDecimals": 0
+      },
+      {
+        "id": 37,
+        "caption": "T&M Billing Required",
+        "type": "Checkbox",
+        "entryMethod": "EntryField",
+        "numberOfDecimals": 0
+      }
+    ]
+  }
+]

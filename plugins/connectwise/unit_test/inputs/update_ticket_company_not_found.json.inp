@@ -1,0 +1,17 @@
+{
+  "ticket_id": 945370,
+  "summary": "update_ticket_company_not_found",
+  "company_id": 404,
+  "status": {
+    "name": "In Progress"
+  },
+  "board": {
+    "id": 30
+  },
+  "priority_id": 8,
+  "severity": "Medium",
+  "impact": "Low",
+  "team": {
+    "name": "Network Security"
+  }
+}
