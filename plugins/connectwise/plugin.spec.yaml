@@ -1,0 +1,1690 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: connectwise
+title: ConnectWise
+description: Use the ConnectWise Manage help desk software to effectively oversee your service tickets and resolve client issues with ease
+version: 1.0.0
+supported_versions: ["ConnectWise Manage API v4.6"]
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/connectwise
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.connectwise.com/
+tags:
+  - connectwise
+  - ticketing
+hub_tags:
+  use_cases: [reporting_and_analytics]
+  keywords: [ticketing]
+  features: []
+types:
+  more_details:
+   id:
+     title: ID
+     description: ID
+     type: integer
+     required: false
+   identifier:
+     title: Identifier
+     description: Identifier
+     type: string
+     required: false
+   name:
+     title: Name
+     description: Name
+     type: string
+     required: false
+   info:
+     title: Info
+     description: Additional information
+     type: object
+     required: false
+  agreement_details:
+   id:
+     title: ID
+     description: ID
+     type: integer
+     required: false
+   name:
+     title: Name
+     description: Name
+     type: string
+     required: false
+   type:
+     title: Type
+     description: Type
+     type: string
+     required: false
+   info:
+     title: Info
+     description: Additional information
+     type: object
+     required: false
+  currency_details:
+   id:
+     title: ID
+     description: ID
+     type: integer
+     required: false
+   symbol:
+     title: Symbol
+     description: Symbol
+     type: string
+     required: false
+   currencyCode:
+     title: Currency Code
+     description: Currency code
+     type: string
+     required: false
+   numberOfDecimals:
+     title: Number Of Decimals
+     description: Number of decimals
+     type: integer
+     required: false
+   thousandsSeparator:
+     title: Thousands Separator
+     description: Thousands Separator
+     type: string
+     required: false
+   negativeParenthesesFlag:
+     title: Negative Parentheses Flag
+     description: Negative parentheses flag
+     type: boolean
+     required: false
+   displaySymbolFlag:
+     title: Display Symbol Flag
+     description: Display symbol flag
+     type: boolean
+     required: false
+   currencyIdentifier:
+     title: Currency Identifier
+     description: Currency identifier
+     type: string
+     required: false
+   displayIdFlag:
+     title: Display ID Flag
+     description: Display ID flag
+     type: boolean
+     required: false
+   rightAlign:
+     title: Right Align
+     description: Right align
+     type: boolean
+     required: false
+   name:
+     title: Name
+     description: Name
+     type: string
+     required: false
+   info:
+     title: Info
+     description: Additional information
+     type: object
+     required: false
+  merged_parent_ticket_details:
+   id:
+     title: ID
+     description: ID
+     type: integer
+     required: false
+   summary:
+     title: Summary
+     description: Summary
+     type: string
+     required: false
+   info:
+     title: Info
+     description: Additional information
+     type: object
+     required: false
+  details:
+   id:
+     title: ID
+     description: ID
+     type: integer
+     required: false
+   name:
+     title: Name
+     description: Name
+     type: string
+     required: false
+   info:
+     title: Info
+     description: Additional information
+     type: object
+     required: false
+  details_input:
+   id:
+     title: ID
+     description: ID
+     type: integer
+     required: false
+   name:
+     title: Name
+     description: Name
+     type: string
+     required: false
+  company:
+   id:
+     title: ID
+     description: ID
+     type: integer
+     required: false
+   identifier:
+     title: Identifier
+     description: Identifier
+     type: string
+     required: false
+   name:
+     title: Name
+     description: Name
+     type: string
+     required: false
+   status:
+     title: Status
+     description: Status
+     type: details
+     required: false
+   addressLine1:
+     title: Address Line
+     description: First line of the address
+     type: string
+     required: false
+   addressLine2:
+     title: Second Address Line
+     description: Second line of the address
+     type: string
+     required: false
+   city:
+     title: City
+     description: City
+     type: string
+     required: false
+   state:
+     title: State
+     description: State
+     type: string
+     required: false
+   zip:
+     title: ZIP
+     description: ZIP code
+     type: string
+     required: false
+   country:
+     title: Country
+     description: Country
+     type: more_details
+     required: false
+   phoneNumber:
+     title: Phone Number
+     description: Phone number
+     type: string
+     required: false
+   faxNumber:
+     title: Fax Number
+     description: Fax number
+     type: string
+     required: false
+   website:
+     title: Website
+     description: Website
+     type: string
+     required: false
+   territory:
+     title: Territory
+     description: Territory
+     type: details
+     required: false
+   market:
+     title: Market
+     description: Market
+     type: details
+     required: false
+   accountNumber:
+     title: Account Number
+     description: Account number
+     type: string
+     required: false
+   defaultContact:
+     title: Default Contact
+     description: Default contact
+     type: details
+     required: false
+   dateAcquired:
+     title: Date Acquired
+     description: Date acquired
+     type: string
+     required: false
+   sicCode:
+     title: Sic Code
+     description: Sic code
+     type: details
+     required: false
+   parentCompany:
+     title: Parent Company
+     description: Parent company
+     type: more_details
+     required: false
+   annualRevenue:
+     title: Annual Revenue
+     description: Annual revenue
+     type: float
+     required: false
+   numberOfEmployees:
+     title: Number of Employees
+     description: Number of employees
+     type: integer
+     required: false
+   yearEstablished:
+     title: Year Established
+     description: Year established
+     type: integer
+     required: false
+   revenueYear:
+     title: Revenue Year
+     description: Revenue year
+     type: integer
+     required: false
+   ownershipType:
+     title: Ownership Type
+     description: Ownership type
+     type: details
+     required: false
+   timeZoneSetup:
+     title: Timezone Setup
+     description: Timezone setup
+     type: details
+     required: false
+   leadSource:
+     title: Lead Source
+     description: Lead source
+     type: string
+     required: false
+   leadFlag:
+     title: Lead Flag
+     description: Lead flag
+     type: boolean
+     required: false
+   unsubscribeFlag:
+     title: Unsubscribe Flag
+     description: Unsubscribe flag
+     type: boolean
+     required: false
+   calendar:
+     title: Calendar
+     description: Calendar
+     type: details
+     required: false
+   vendorIdentifier:
+     title: Vendor Identifier
+     description: Vendor identifier
+     type: string
+     required: false
+   taxIdentifier:
+     title: Tax Identifier
+     description: Tax identifier
+     type: string
+     required: false
+   taxCode:
+     title: Tax Code
+     description: Tax code
+     type: details
+     required: false
+   billingTerms:
+     title: Billing Terms
+     description: Billing terms
+     type: details
+     required: false
+   invoiceTemplate:
+     title: Invoice Template
+     description: Invoice template
+     type: details
+     required: false
+   pricingSchedule:
+     title: Pricing Schedule
+     description: Pricing schedule
+     type: details
+     required: false
+   companyEntityType:
+     title: Company Entity Type
+     description: Company entity type
+     type: details
+     required: false
+   billToCompany:
+     title: Bill to Company
+     description: Bill to company
+     type: more_details
+     required: false
+   billingSite:
+     title: Billing Site
+     description: Billing site
+     type: details
+     required: false
+   billingContact:
+     title: Billing Contact
+     description: Billing contact
+     type: details
+     required: false
+   invoiceDeliveryMethod:
+     title: Invoice Delivery Method
+     description: Invoice delivery method
+     type: details
+     required: false
+   invoiceToEmailAddress:
+     title: Invoice to Email Address
+     description: Invoice to email address
+     type: string
+     required: false
+   invoiceCCEmailAddress:
+     title: Invoice CC Email Address
+     description: Invoice CC email address
+     type: string
+     required: false
+   deletedFlag:
+     title: Deleted Flag
+     description: Deleted flag
+     type: boolean
+     required: false
+   dateDeleted:
+     title: Date Deleted
+     description: Date deleted
+     type: string
+     required: false
+   deletedBy:
+     title: Deleted By
+     description: Deleted by
+     type: string
+     required: false
+   mobileGuid:
+     title: Mobile GUID
+     description: Mobile GUID
+     type: string
+     required: false
+   facebookUrl:
+     title: Facebook URL
+     description: Facebook URL
+     type: string
+     required: false
+   twitterUrl:
+     title: Twitter URL
+     description: Twitter URL
+     type: string
+     required: false
+   linkedInUrl:
+     title: LinkedIn URL
+     description: LinkedIn URL
+     type: string
+     required: false
+   currency:
+     title: Currency
+     description: Currency
+     type: currency_details
+     required: false
+   territoryManager:
+     title: Territory Manager
+     description: Territory manager
+     type: more_details
+     required: false
+   resellerIdentifier:
+     title: Reseller Identifier
+     description: Reseller identifier
+     type: string
+     required: false
+   isVendorFlag:
+     title: Is Vendor Flag
+     description: Is vendor flag
+     type: boolean
+     required: false
+   types:
+     title: Types
+     description: Types
+     type: '[]details'
+     required: false
+   site:
+     title: Site
+     description: Site
+     type: details
+     required: false
+   integratorTags:
+     title: Integrator Tags
+     description: Integrator tags
+     type: '[]string'
+     required: false
+   info:
+     title: Info
+     description: Info
+     type: object
+     required: false
+   customFields:
+     title: Custom Fields
+     description: Custom fields
+     type: '[]object'
+     required: false
+  ticket:
+   id:
+     title: ID
+     description: Ticket ID
+     type: integer
+     required: false
+   summary:
+     title: Summary
+     description: Ticket summary
+     type: string
+     required: false
+   recordType:
+     title: Record Type
+     description: Type of the record
+     type: string
+     required: false
+   board:
+     title: Board
+     description: Board
+     type: details
+     required: false
+   status:
+     title: Status
+     description: Status
+     type: agreement_details
+     required: false
+   workRole:
+     title: Work Role
+     description: Work role
+     type: details
+     required: false
+   workType:
+     title: Work Type
+     description: Work type
+     type: details
+     required: false
+   company:
+     title: Company
+     description: Company
+     type: more_details
+     required: false
+   site:
+     title: Site
+     description: Site
+     type: details
+     required: false
+   siteName:
+     title: Site Name
+     description: Site name
+     type: string
+     required: false
+   addressLine1:
+     title: Address Line
+     description: First line of the address
+     type: string
+     required: false
+   addressLine2:
+     title: Second Address Line
+     description: Second line of the address
+     type: string
+     required: false
+   city:
+     title: City
+     description: City
+     type: string
+     required: false
+   stateIdentifier:
+     title: State Identifier
+     description: State identifier
+     type: string
+     required: false
+   zip:
+     title: ZIP
+     description: ZIP code
+     type: string
+     required: false
+   country:
+     title: Country
+     description: Country
+     type: more_details
+     required: false
+   contact:
+     title: Contact
+     description: Contact
+     type: details
+     required: false
+   contactName:
+     title: Contact Name
+     description: Contact name
+     type: string
+     required: false
+   contactPhoneNumber:
+     title: Contact Phone Number
+     description: Contact phone number
+     type: string
+     required: false
+   contactPhoneExtension:
+     title: Contact Phone Extension
+     description: Contact phone extension
+     type: string
+     required: false
+   contactEmailAddress:
+     title: Contact Email Address
+     description: Contact email address
+     type: string
+     required: false
+   type:
+     title: Type
+     description: Type
+     type: details
+     required: false
+   subType:
+     title: Subtype
+     description: Subtype
+     type: details
+     required: false
+   item:
+     title: Item
+     description: Item
+     type: details
+     required: false
+   team:
+     title: Team
+     description: Team
+     type: details
+     required: false
+   owner:
+     title: Owner
+     description: Owner
+     type: more_details
+     required: false
+   priority:
+     title: Priority
+     description: Priority
+     type: details
+     required: false
+   serviceLocation:
+     title: Service Location
+     description: Service location
+     type: details
+     required: false
+   source:
+     title: Source
+     description: Source
+     type: details
+     required: false
+   requiredDate:
+     title: Required Date
+     description: Required date
+     type: string
+     required: false
+   budgetHours:
+     title: Budget Hours
+     description: Budget hours
+     type: float
+     required: false
+   opportunity:
+     title: Opportunity
+     description: Opportunity
+     type: details
+     required: false
+   agreement:
+     title: Agreement
+     description: Agreement
+     type: agreement_details
+     required: false
+   severity:
+     title: Severity
+     description: Severity
+     type: string
+     required: false
+   impact:
+     title: Impact
+     description: Impact
+     type: string
+     required: false
+   externalXRef:
+     title: External Reference
+     description: External reference
+     type: string
+     required: false
+   knowledgeBaseCategoryId:
+     title: Knowledge Base Category ID
+     description: Knowledge base category ID
+     type: integer
+     required: false
+   knowledgeBaseSubCategoryId:
+     title: Knowledge Base Subcategory ID
+     description: Knowledge base subcategory ID
+     type: integer
+     required: false
+   allowAllClientPortalView:
+     title: Allow All Client Portal View
+     description: Allow all client portal view
+     type: boolean
+     required: false
+   customerUpdateFlag:
+     title: Customer Update Flag
+     description: Customer update flag
+     type: boolean
+     required: false
+   automaticEmailContactFlag:
+     title: Automatic Email Contact Flag
+     description: Automatic email contact flag
+     type: boolean
+     required: false
+   automaticEmailResourceFlag:
+     title: Automatic Email Resource Flag
+     description: Automatic email resource flag
+     type: boolean
+     required: false
+   automaticEmailCcFlag:
+     title: Automatic Email CC Flag
+     description: Automatic email CC flag
+     type: boolean
+     required: false
+   automaticEmailCc:
+     title: Automatic Email CC
+     description: Automatic email CC
+     type: string
+     required: false
+   initialDescription:
+     title: Initial Description
+     description: Initial description
+     type: string
+     required: false
+   initialInternalAnalysis:
+     title: Initial Internal Analysis
+     description: Initial internal analysis
+     type: string
+     required: false
+   initialResolution:
+     title: Initial Resolution
+     description: Initial resolution
+     type: string
+     required: false
+   initialDescriptionFrom:
+     title: Initial Description From
+     description: Initial description from
+     type: string
+     required: false
+   contactEmailLookup:
+     title: Contact Email Lookup
+     description: Contact Email Lookup
+     type: string
+     required: false
+   processNotifications:
+     title: Process Notifications
+     description: Process notifications
+     type: boolean
+     required: false
+   skipCallback:
+     title: Skip Callback
+     description: Skip callback
+     type: boolean
+     required: false
+   closedDate:
+     title: Closed Date
+     description: Closed date
+     type: string
+     required: false
+   closedBy:
+     title: Closed By
+     description: Closed by
+     type: string
+     required: false
+   closedFlag:
+     title: Closed Flag
+     description: Closed flag
+     type: boolean
+     required: false
+   actualHours:
+     title: Actual Hours
+     description: Actual hours
+     type: float
+     required: false
+   approved:
+     title: Approved
+     description: Approved
+     type: boolean
+     required: false
+   estimatedExpenseCost:
+     title: Estimated Expense Cost
+     description: Estimated expense cost
+     type: float
+     required: false
+   estimatedExpenseRevenue:
+     title: Estimated Expense Revenue
+     description: Estimated expense revenue
+     type: float
+     required: false
+   estimatedProductCost:
+     title: Estimated Product Cost
+     description: Estimated product cost
+     type: float
+     required: false
+   estimatedProductRevenue:
+     title: Estimated Product Revenue
+     description: Estimated product revenue
+     type: float
+     required: false
+   estimatedTimeCost:
+     title: Estimated Time Cost
+     description: Estimated time cost
+     type: float
+     required: false
+   estimatedTimeRevenue:
+     title: Estimated Time Revenue
+     description: Estimated time revenue
+     type: float
+     required: false
+   billingMethod:
+     title: Billing Method
+     description: Billing method
+     type: string
+     required: false
+   billingAmount:
+     title: Billing Amount
+     description: Billing amount
+     type: float
+     required: false
+   hourlyRate:
+     title: Hourly Rate
+     description: Hourly rate
+     type: float
+     required: false
+   subBillingMethod:
+     title: Sub Billing Method
+     description: Sub billing method
+     type: string
+     required: false
+   subBillingAmount:
+     title: Sub Billing Amount
+     description: Sub billing amount
+     type: float
+     required: false
+   subDateAccepted:
+     title: Sub Date Accepted
+     description: Sub date accepted
+     type: string
+     required: false
+   dateResolved:
+     title: Date Resolved
+     description: Date resolved
+     type: string
+     required: false
+   dateResplan:
+     title: Date Resplan
+     description: Date resplan
+     type: string
+     required: false
+   dateResponded:
+     title: Date Responded
+     description: Date responded
+     type: string
+     required: false
+   resolveMinutes:
+     title: Resolve Minutes
+     description: Resolve minutes
+     type: integer
+     required: false
+   resPlanMinutes:
+     title: Resolve Plan Minutes
+     description: Resolve plan minutes
+     type: integer
+     required: false
+   respondMinutes:
+     title: Respond Minutes
+     description: Respond minutes
+     type: integer
+     required: false
+   isInSla:
+     title: Is In SLA
+     description: Is in SLA
+     type: boolean
+     required: false
+   knowledgeBaseLinkId:
+     title: Knowledge Base Link ID
+     description: Knowledge base link ID
+     type: integer
+     required: false
+   resources:
+     title: Resources
+     description: Resources
+     type: string
+     required: false
+   parentTicketId:
+     title: Parent Ticket ID
+     description: Parent ticket ID
+     type: integer
+     required: false
+   hasChildTicket:
+     title: Has Child Ticket
+     description: Has child ticket
+     type: boolean
+     required: false
+   hasMergedChildTicketFlag:
+     title: Has Merged Child Ticket Flag
+     description: Has merged child ticket flag
+     type: boolean
+     required: false
+   knowledgeBaseLinkType:
+     title: Knowledge Base Link Type
+     description: Knowledge base link type
+     type: string
+     required: false
+   billTime:
+     title: Bill Time
+     description: Bill time
+     type: string
+     required: false
+   billExpenses:
+     title: Bill Expenses
+     description: Bill expenses
+     type: string
+     required: false
+   billProducts:
+     title: Bill Products
+     description: Bill products
+     type: string
+     required: false
+   predecessorType:
+     title: Predecessor Type
+     description: Predecessor type
+     type: string
+     required: false
+   predecessorId:
+     title: Predecessor ID
+     description: Predecessor ID
+     type: integer
+     required: false
+   predecessorClosedFlag:
+     title: Predecessor Closed Flag
+     description: Predecessor closed flag
+     type: boolean
+     required: false
+   lagDays:
+     title: Lag Days
+     description: Lag days
+     type: integer
+     required: false
+   lagNonworkingDaysFlag:
+     title: Lag Non Working Days Flag
+     description: Lag non working days flag
+     type: boolean
+     required: false
+   estimatedStartDate:
+     title: Estimated Start Date
+     description: Estimated start date
+     type: string
+     required: false
+   duration:
+     title: Duration
+     description: Duration
+     type: integer
+     required: false
+   location:
+     title: Location
+     description: Location
+     type: details
+     required: false
+   department:
+     title: Department
+     description: Department
+     type: more_details
+     required: false
+   mobileGuid:
+     title: Mobile GUID
+     description: Mobile GUID
+     type: string
+     required: false
+   sla:
+     title: SLA
+     description: SLA
+     type: details
+     required: false
+   slaStatus:
+     title: SLA Status
+     description: SLA status
+     type: string
+     required: false
+   currency:
+     title: Currency
+     description: Currency
+     type: currency_details
+     required: false
+   mergedParentTicket:
+     title: Merged Parent Ticket
+     description: Merget parent ticket
+     type: merged_parent_ticket_details
+     required: false
+   integratorTags:
+     title: Integrator Tags
+     description: Integrator tags
+     type: '[]string'
+     required: false
+   info:
+     title: Info
+     description: Info
+     type: object
+     required: false
+   customFields:
+     title: Custom Fields
+     description: Custom fields
+     type: '[]object'
+     required: false
+  ticket_note:
+   id:
+     title: ID
+     description: ID
+     type: integer
+     required: false
+   ticket_Id:
+     title: Ticket ID
+     description: Ticket ID
+     type: integer
+     required: false
+   text:
+     title: Text
+     description: Text
+     type: string
+     required: false
+   detailDescriptionFlag:
+     title: Detail Description Flag
+     description: Detail description flag
+     type: boolean
+     required: false
+   internalAnalysisFlag:
+     title: Internal Analysis Flag
+     description: Internal analysis flag
+     type: boolean
+     required: false
+   resolutionFlag:
+     title: Resolution Flag
+     description: Resolution flag
+     type: boolean
+     required: false
+   issueFlag:
+     title: Issue Flag
+     description: Issue flag
+     type: boolean
+     required: false
+   member:
+     title: Member
+     description: Member
+     type: more_details
+     required: false
+   contact:
+     title: Contact
+     description: Contact
+     type: details
+     required: false
+   customerUpdatedFlag:
+     title: Customer Updated Flag
+     description: Customer updated flag
+     type: boolean
+     required: false
+   processNotifications:
+     title: Process Notifications
+     description: Process notifications
+     type: boolean
+     required: false
+   dateCreated:
+     title: Date Created
+     description: Date created
+     type: string
+     required: false
+   createdBy:
+     title: Created By
+     description: Created by
+     type: string
+     required: false
+   internalFlag:
+     title: Internal Flag
+     description: Internal flag
+     type: boolean
+     required: false
+   externalFlag:
+     title: External Flag
+     description: External flag
+     type: boolean
+     required: false
+   info:
+     title: Info
+     description: Info
+     type: object
+     required: false
+connection:
+  public_key:
+    title: Public Key
+    description: API public key
+    type: string
+    required: true
+    example: ExAmPl3PubLiCkEy3
+  private_key:
+    title: Private Key
+    description: API private key
+    type: credential_secret_key
+    required: true
+    example: ExAmPl3PriVat3kEy
+  company:
+    title: Company
+    description: Name of the company
+    type: string
+    required: true
+    example: example_cs1
+  client_id:
+    title: Client ID
+    description: Client ID
+    type: credential_secret_key
+    required: true
+    example: c163eff0-d1a1-4618-ee2a-453534f43cee21
+actions:
+  get_tickets:
+    title: Get Tickets
+    description: Get a list of tickets
+    input:
+      conditions:
+        title: Conditions
+        description: Search results based on the provided fields. Supported operators are =, !=, <, <=, >, >=, contains, like, in, not
+        type: string
+        required: false
+        example: impact='Medium' or summary contains 'https://example.com'
+      page:
+        title: Page
+        description: Number of the page
+        type: integer
+        required: false
+        example: 1
+      pageSize:
+        title: Page Size
+        description: Number of results returned per page (Defaults to 25)
+        type: integer
+        required: false
+        example: 10
+    output:
+      tickets:
+        title: Tickets
+        description: Results containing information about tickets
+        type: '[]ticket'
+        required: false
+        example: []
+  get_ticket_by_id:
+    title: Get Ticket by ID
+    description: Get ticket information for given ticket ID
+    input:
+      ticket_id:
+        title: Ticket ID
+        description: ID of the ticket for which information will be obtained
+        type: integer
+        required: true
+        example: 254
+    output:
+      ticket:
+        title: Ticket
+        description: Information about the ticket with the given ID
+        type: ticket
+        required: false
+        example: {}
+  create_ticket:
+    title: Create Ticket
+    description: Create a new ticket
+    input:
+      summary:
+        title: Summary
+        description: Summary of the ticket
+        type: string
+        required: true
+        example: example summary
+        order: 1
+      initialDescription:
+        title: Initial Description
+        description: Initial description
+        type: string
+        required: false
+        example: example description
+        order: 2
+      company_id:
+        title: Company ID
+        description: Company Rec ID. This ID can be found in `Share` link on the company page
+        type: integer
+        required: true
+        example: 23
+        order: 3
+      impact:
+        title: Impact
+        description: Impact of the ticket
+        type: string
+        required: false
+        example: Medium
+        order: 4
+      severity:
+        title: Severity
+        description: Severity of the ticket
+        type: string
+        required: false
+        example: Medium
+        order: 5
+      estimatedStartDate:
+        title: Estimated Start Date
+        description: Estimated start date for the ticket
+        type: date
+        required: false
+        example: 2022-09-23T00:00:00+02:00
+        order: 6
+      requiredDate:
+        title: Due Date
+        description: Due date for the ticket
+        type: date
+        required: false
+        example: 2022-09-26T00:00:00+02:00
+        order: 7
+      predecessortype:
+        title: Predecessor Type
+        description: Type of the ticket predecessor
+        type: string
+        required: false
+        example: Ticket
+        order: 8
+      predecessorId:
+        title: Predecessor ID
+        description: ID of the ticket predecessor
+        type: integer
+        required: false
+        example: 1234
+        order: 9
+      budgetHours:
+        title: Budget Hours
+        description: Budget hours for the ticket
+        type: float
+        required: false
+        example: 8.5
+        order: 10
+      automaticEmailContactFlag:
+        title: Send Notes to Contact
+        description: Whether to send an email to the specified contact when a note to the ticket is added
+        type: boolean
+        required: false
+        example: True
+        order: 11
+      automaticEmailResourceFlag:
+        title: Send Notes to Resource
+        description: Whether to send an email to the specified resource when a note to the ticket is added
+        type: boolean
+        required: false
+        example: True
+        order: 12
+      automaticEmailCcFlag:
+        title: Send Notes to CC
+        description: Whether to send an email to the specified email address in CC when a note to the ticket is added
+        type: boolean
+        required: false
+        example: True
+        order: 13
+      automaticEmailCc:
+        title: CC Email
+        description: Address to which the email will be sent with information about the added note
+        type: string
+        required: false
+        example: user@example.com
+        order: 14
+      board:
+        title: Board
+        description: Name or ID of the board
+        type: details_input
+        required: false
+        example: '{"name": "Network Security"}'
+      priority:
+        title: Priority
+        description: Name or ID of the priority
+        type: details_input
+        required: false
+        example: '{"id": 7}'
+      status:
+        title: Status
+        description: Name or ID of the ticket status
+        type: details_input
+        required: true
+        example: '{"name": "In Progress"}'
+      team:
+        title: Team
+        description: Name or ID of the team
+        type: details_input
+        required: false
+        example: '{"id": 10}'
+      location:
+        title: Location
+        description: Name or ID of the location
+        type: details_input
+        required: false
+        example: '{"id": 11}'
+      department:
+        title: Department
+        description: Name or ID of the department
+        type: details_input
+        required: false
+        example: '{"name": "Engineering"}'
+      contact:
+        title: Contact
+        description: Name or ID of the contact
+        type: details_input
+        required: false
+        example: '{"id": 144}'
+      site:
+        title: Site
+        description: Name or ID of the site
+        type: details_input
+        required: false
+        example: '{"id": 1}'
+      owner:
+        title: Owner
+        description: Name or ID of the ticket owner
+        type: details_input
+        required: false
+        example: '{"id": 11}'
+      agreement:
+        title: Agreement
+        description: Name or ID of the agreement
+        type: details_input
+        required: false
+        example: '{"id": 19}'
+      type:
+        title: Ticket Type
+        description: Name or ID of the type
+        type: details_input
+        required: false
+        example: '{"name": "Testing"}'
+      subtype:
+        title: Ticket Subtype
+        description: Name or ID of the subtype
+        type: details_input
+        required: false
+        example: '{"name": "Active Directory"}'
+      source:
+        title: Source
+        description: Name or ID of the source
+        type: details_input
+        required: false
+        example: '{"name": "Call"}'
+      serviceLocation:
+        title: Service Location
+        description: Name or ID of the service location
+        type: details_input
+        required: false
+        example: '{"name": "Remote"}'
+    output:
+      ticket:
+        title: Ticket
+        description: Information about the ticket with the given ID
+        type: ticket
+        required: false
+        example: {}
+  update_ticket:
+    title: Update Ticket
+    description: Update an existing ticket
+    input:
+      ticket_id:
+        title: Ticket ID
+        description: ID of the ticket which will be updated
+        type: integer
+        required: true
+        example: 1122
+        order: 1
+      summary:
+        title: Summary
+        description: Summary of the ticket
+        type: string
+        required: true
+        example: example summary
+        order: 2
+      company_id:
+        title: Company ID
+        description: Company Rec ID. This ID can be found in `Share` link on the company page
+        type: integer
+        required: true
+        example: 23
+        order: 3
+      impact:
+        title: Impact
+        description: Impact of the ticket
+        type: string
+        required: true
+        example: Medium
+        order: 4
+      severity:
+        title: Severity
+        description: Severity of the ticket
+        type: string
+        required: true
+        example: Medium
+        order: 5
+      estimatedStartDate:
+        title: Estimated Start Date
+        description: Estimated start date for the ticket
+        type: date
+        required: false
+        example: 2022-09-23T00:00:00+02:00
+        order: 6
+      requiredDate:
+        title: Due Date
+        description: Due date for the ticket
+        type: date
+        required: false
+        example: 2022-09-26T00:00:00+02:00
+        order: 7
+      predecessortype:
+        title: Predecessor Type
+        description: Type of the ticket predecessor
+        type: string
+        required: false
+        example: Ticket
+        order: 8
+      predecessorId:
+        title: Predecessor ID
+        description: ID of the ticket predecessor
+        type: integer
+        required: false
+        example: 1234
+        order: 9
+      budgetHours:
+        title: Budget Hours
+        description: Budget hours for the ticket
+        type: float
+        required: false
+        example: 8.5
+        order: 10
+      automaticEmailContactFlag:
+        title: Send Notes to Contact
+        description: Whether to send an email to the specified contact when a note to the ticket is added
+        type: boolean
+        required: false
+        example: True
+        order: 11
+      automaticEmailResourceFlag:
+        title: Send Notes to Resource
+        description: Whether to send an email to the specified resource when a note to the ticket is added
+        type: boolean
+        required: false
+        example: True
+        order: 12
+      automaticEmailCcFlag:
+        title: Send Notes to CC
+        description: Whether to send an email to the specified email address in CC when a note to the ticket is added
+        type: boolean
+        required: false
+        example: True
+        order: 13
+      automaticEmailCc:
+        title: CC Email
+        description: Address to which the email will be sent with information about the added note
+        type: string
+        required: false
+        example: user@example.com
+        order: 14
+      board:
+        title: Board
+        description: Name or ID of the board
+        type: details_input
+        required: true
+        example: '{"name": "Network Security"}'
+      priority_id:
+        title: Priority ID
+        description: ID of the priority
+        type: integer
+        required: true
+        example: 7
+      status:
+        title: Status
+        description: Name or ID of the ticket status
+        type: details_input
+        required: true
+        example: '{"name": "In Progress"}'
+      team:
+        title: Team
+        description: Name or ID of the team
+        type: details_input
+        required: true
+        example: '{"id": 10}'
+      location:
+        title: Location
+        description: Name or ID of the location
+        type: details_input
+        required: false
+        example: '{"id": 11}'
+      department:
+        title: Department
+        description: Name or ID of the department
+        type: details_input
+        required: false
+        example: '{"name": "Engineering"}'
+      contact:
+        title: Contact
+        description: Name or ID of the contact
+        type: details_input
+        required: false
+        example: '{"id": 144}'
+      site:
+        title: Site
+        description: Name or ID of the site
+        type: details_input
+        required: false
+        example: '{"id": 1}'
+      owner:
+        title: Owner
+        description: Name or ID of the ticket owner
+        type: details_input
+        required: false
+        example: '{"id": 11}'
+      agreement:
+        title: Agreement
+        description: Name or ID of the agreement
+        type: details_input
+        required: false
+        example: '{"id": 19}'
+      type:
+        title: Ticket Type
+        description: Name or ID of the type
+        type: details_input
+        required: false
+        example: '{"name": "Testing"}'
+      subtype:
+        title: Ticket Subtype
+        description: Name or ID of the subtype
+        type: details_input
+        required: false
+        example: '{"name": "Active Directory"}'
+      source:
+        title: Source
+        description: Name or ID of the source
+        type: details_input
+        required: false
+        example: '{"name": "Call"}'
+      serviceLocation:
+        title: Service Location
+        description: Name or ID of the service location
+        type: details_input
+        required: false
+        example: '{"name": "Remote"}'
+    output:
+      ticket:
+        title: Ticket
+        description: Information about the ticket with the given ID
+        type: ticket
+        required: false
+        example: {}
+  delete_ticket:
+    title: Delete Ticket
+    description: Delete the given ticket
+    input:
+      ticket_id:
+        title: Ticket ID
+        description: ID of the ticket which will be deleted
+        type: integer
+        required: true
+        example: 112
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+        example: true
+  get_ticket_notes:
+    title: Get Ticket Notes
+    description: Get a list of notes for the given ticket
+    input:
+      ticket_id:
+        title: Ticket ID
+        description: ID of the ticket for which notes will be obtained
+        type: integer
+        required: true
+        example: 532
+      conditions:
+        title: Conditions
+        description: Search results based on the provided fields. Supported operators are =, !=, <, <=, >, >=, contains, like, in, not
+        type: string
+        required: false
+        example: text contains 'test'
+      page:
+        title: Page
+        description: Number of the page
+        type: integer
+        required: false
+        example: 11
+      pageSize:
+        title: Page Size
+        description: Number of results returned per page (Defaults to 25)
+        type: integer
+        required: false
+        example: 32
+    output:
+      ticket_notes:
+        title: Ticket Notes
+        description: List of notes for the given ticket
+        type: '[]ticket_note'
+        required: false
+        example: []
+  create_ticket_note:
+    title: Create Ticket Note
+    description: Create a note for the specified ticket
+    input:
+      ticket_id:
+        title: Ticket ID
+        description: ID of the ticket for which a new note will be created
+        type: integer
+        required: true
+        example: 332
+      text:
+        title: Text
+        description: Ticket's note text
+        type: string
+        required: true
+        example: note text
+      detailDescriptionFlag:
+        title: Discussion Flag
+        description: Discussion flag
+        type: boolean
+        required: false
+        example: True
+      internalAnalysisFlag:
+        title: Internal Analysis Flag
+        description: Internal analysis flag
+        type: boolean
+        required: false
+        example: True
+      resolutionFlag:
+        title: Resolution Flag
+        description: Resolution flag
+        type: boolean
+        required: false
+        example: False
+    output:
+      ticket_note:
+        title: Ticket Note
+        description: Information about the created note for the specified ticket
+        type: ticket_note
+        required: false
+        example: {}
+  update_ticket_note:
+    title: Update Ticket Note
+    description: Update the given note for the specified ticket
+    input:
+      ticket_id:
+        title: Ticket ID
+        description: ID of the ticket for which a new note will be updated
+        type: integer
+        required: true
+        example: 112
+      note_id:
+        title: Note ID
+        description: ID of the note which will be updated
+        type: integer
+        required: true
+        example: 33213
+      text:
+        title: Text
+        description: Ticket's note text
+        type: string
+        required: false
+        example: note text
+      detailDescriptionFlag:
+        title: Discussion Flag
+        description: Discussion flag
+        type: boolean
+        required: false
+        example: True
+      internalAnalysisFlag:
+        title: Internal Analysis Flag
+        description: Internal analysis flag
+        type: boolean
+        required: false
+        example: False
+      resolutionFlag:
+        title: Resolution Flag
+        description: Resolution flag
+        type: boolean
+        required: false
+        example: True
+    output:
+      ticket_note:
+        title: Ticket Note
+        description: Information about the updated note for the specified ticket
+        type: ticket_note
+        required: false
+        example: {}
+  delete_ticket_note:
+    title: Delete Ticket Note
+    description: Delete the given note for the specified ticket
+    input:
+      ticket_id:
+        title: Ticket ID
+        description: ID of the ticket for which a note will be updated
+        type: integer
+        required: true
+        example: 65
+      note_id:
+        title: Note ID
+        description: ID of the note which will be updated
+        type: integer
+        required: true
+        example: 44321
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+        example: true
+  get_company:
+    title: Get Company
+    description: Get information for the given company ID
+    input:
+      company_id:
+        title: Company ID
+        description: Company Rec ID. This ID can be found in `Share` link on the company page
+        type: integer
+        required: true
+        example: 4321
+    output:
+      company:
+        title: Company
+        description: Information about the company
+        type: company
+        required: true
+        example: {}

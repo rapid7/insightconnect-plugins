@@ -1,0 +1,8 @@
+{
+  "summary": "create_ticket_company_not_found",
+  "initialDescription": "Some initial description",
+  "company_id": 404,
+  "status": {
+    "name": "In Progress"
+  }
+}

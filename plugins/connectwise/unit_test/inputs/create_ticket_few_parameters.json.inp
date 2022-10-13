@@ -1,0 +1,8 @@
+{
+  "summary": "create_ticket_few_parameters",
+  "initialDescription": "Some initial description",
+  "company_id": 19298,
+  "status": {
+    "name": "In Progress"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "ticket_note": {
+    "id": 1546048,
+    "ticketId": 945315,
+    "text": "rest api note internal",
+    "detailDescriptionFlag": true,
+    "internalAnalysisFlag": true,
+    "resolutionFlag": true,
+    "issueFlag": false,
+    "member": {
+      "id": 637,
+      "identifier": "user",
+      "name": "user",
+      "info": {
+        "member_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/637",
+        "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/637/image?lm=2022-08-03T19:37:23Z"
+      }
+    },
+    "dateCreated": "2022-09-15T09:41:06Z",
+    "createdBy": "user",
+    "internalFlag": true,
+    "externalFlag": true,
+    "info": {
+      "lastUpdated": "2022-09-15T09:41:06Z",
+      "updatedBy": "user"
+    }
+  }
+}
