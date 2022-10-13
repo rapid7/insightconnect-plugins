@@ -85,7 +85,6 @@ def normalize_user(user, is_cloud=False, logger=logging.getLogger()):
 def look_up_project(_id, client, logger=logging.getLogger()):
     project_detail = client.projects()
     project_id_name = list(filter(lambda x: _id in [x.name, x.key], project_detail))
-
     if project_id_name:
         logger.debug("Project %s exists", project_id_name)
         return True
