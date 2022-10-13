@@ -1,0 +1,17 @@
+{
+  "ticket_id": 945370,
+  "summary": "update_ticket_few_parameters",
+  "company_id": 19298,
+  "status": {
+    "name": "In Progress"
+  },
+  "board": {
+    "id": 30
+  },
+  "priority_id": 8,
+  "severity": "Medium",
+  "impact": "Low",
+  "team": {
+    "name": "Network Security"
+  }
+}

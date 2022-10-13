@@ -1,0 +1,234 @@
+{
+  "ticket": {
+    "id": 945370,
+    "summary": "update_ticket_many_parameters",
+    "recordType": "ServiceTicket",
+    "board": {
+      "id": 30,
+      "name": "Network Security - South",
+      "info": {
+        "board_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30"
+      }
+    },
+    "status": {
+      "id": 550,
+      "name": "In Progress",
+      "info": {
+        "status_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/statuses/550"
+      }
+    },
+    "company": {
+      "id": 19298,
+      "identifier": "Example",
+      "name": "Example Company",
+      "info": {
+        "company_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/19298",
+        "mobileGuid": "5ec92caf-0922-4120-9268-21580dbbcef8"
+      }
+    },
+    "addressLine1": "address line 1",
+    "addressLine2": "address line 2",
+    "city": "London",
+    "zip": "111111",
+    "country": {
+      "id": 4,
+      "name": "Great Britain",
+      "info": {
+        "country_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/countries/4"
+      }
+    },
+    "contact": {
+      "id": 17754,
+      "name": "Test Contact",
+      "info": {
+        "mobileGuid": "1cf867f4-6198-40fe-8f28-91a644f08f3f",
+        "contact_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/contacts/17754"
+      }
+    },
+    "contactName": "Test Contact",
+    "type": {
+      "id": 248,
+      "name": "Testing",
+      "info": {
+        "type_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/types/248"
+      }
+    },
+    "subType": {
+      "id": 701,
+      "name": "Active Directory",
+      "info": {
+        "subType_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/subtypes/701"
+      }
+    },
+    "team": {
+      "id": 10,
+      "name": "Network Security",
+      "info": {
+        "team_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/boards/30/teams/10"
+      }
+    },
+    "owner": {
+      "id": 638,
+      "identifier": "userint",
+      "name": "user integration",
+      "info": {
+        "member_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/638",
+        "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/members/638/image?lm=2022-08-03T19:50:33Z"
+      }
+    },
+    "priority": {
+      "id": 6,
+      "name": "Priority 1 - Critical",
+      "sort": 1,
+      "info": {
+        "priority_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/priorities/6",
+        "image_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/priorities/6/image?lm=2020-05-27T21:16:39Z"
+      }
+    },
+    "serviceLocation": {
+      "id": 4,
+      "name": "Remote",
+      "info": {
+        "location_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/locations/4"
+      }
+    },
+    "source": {
+      "id": 11,
+      "name": "Automate",
+      "info": {
+        "source_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/sources/11"
+      }
+    },
+    "requiredDate": "2022-09-30T00:00:00Z",
+    "budgetHours": 10.5,
+    "agreement": {
+      "id": 249,
+      "name": "Internal",
+      "info": {
+        "agreement_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//finance/agreements/249"
+      }
+    },
+    "severity": "Medium",
+    "impact": "Medium",
+    "allowAllClientsPortalView": false,
+    "customerUpdatedFlag": false,
+    "automaticEmailContactFlag": true,
+    "automaticEmailResourceFlag": true,
+    "automaticEmailCcFlag": true,
+    "automaticEmailCc": "user@example.com;",
+    "closedFlag": false,
+    "approved": true,
+    "estimatedExpenseCost": 0.0,
+    "estimatedExpenseRevenue": 0.0,
+    "estimatedProductCost": 0.0,
+    "estimatedProductRevenue": 0.0,
+    "estimatedTimeCost": 0.0,
+    "estimatedTimeRevenue": 0.0,
+    "billingMethod": "ActualRates",
+    "subBillingMethod": "ActualRates",
+    "dateResplan": "2022-09-07T09:46:59Z",
+    "dateResponded": "2022-09-07T09:46:59Z",
+    "resolveMinutes": 0,
+    "resPlanMinutes": 0,
+    "respondMinutes": 0,
+    "isInSla": true,
+    "resources": "userint",
+    "hasChildTicket": false,
+    "hasMergedChildTicketFlag": false,
+    "billTime": "NoDefault",
+    "billExpenses": "NoDefault",
+    "billProducts": "NoDefault",
+    "predecessorType": "Ticket",
+    "predecessorId": 945371,
+    "predecessorClosedFlag": false,
+    "lagDays": 0,
+    "lagNonworkingDaysFlag": false,
+    "estimatedStartDate": "2022-09-01T00:00:00Z",
+    "duration": 22,
+    "location": {
+      "id": 11,
+      "name": "Example Location",
+      "info": {
+        "location_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/locations/11"
+      }
+    },
+    "department": {
+      "id": 5,
+      "identifier": "Engineering",
+      "name": "Engineering",
+      "info": {
+        "department_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/departments/5"
+      }
+    },
+    "mobileGuid": "40ddd5b7-f6f1-4679-9bc9-f80db3fc3daf",
+    "sla": {
+      "id": 3,
+      "name": "Example Standard SLA",
+      "info": {
+        "sla_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/SLAs/3"
+      }
+    },
+    "slaStatus": "Resolve by Fri 09/30 3:00 AM UTC-05",
+    "requestForChangeFlag": false,
+    "currency": {
+      "id": 7,
+      "symbol": "$",
+      "currencyCode": "USD",
+      "decimalSeparator": ".",
+      "numberOfDecimals": 2,
+      "thousandsSeparator": ",",
+      "negativeParenthesesFlag": false,
+      "displaySymbolFlag": true,
+      "currencyIdentifier": "USD",
+      "displayIdFlag": false,
+      "rightAlign": false,
+      "name": "US Dollars",
+      "info": {
+        "currency_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//finance/currencies/7"
+      }
+    },
+    "info": {
+      "lastUpdated": "2022-09-15T08:32:00Z",
+      "updatedBy": "user",
+      "dateEntered": "2022-09-07T09:46:58Z",
+      "enteredBy": "user",
+      "activities_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//sales/activities?conditions=ticket/id=945370",
+      "scheduleentries_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//schedule/entries?conditions=type/id=4 AND objectId=945370",
+      "documents_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/documents?recordType=Ticket&recordId=945370",
+      "configurations_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/tickets/945370/configurations",
+      "tasks_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/tickets/945370/tasks",
+      "notes_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/tickets/945370/notes",
+      "products_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//procurement/products?conditions=chargeToType='Ticket' AND chargeToId=945370",
+      "timeentries_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//time/entries?conditions=(chargeToType='ServiceTicket' OR chargeToType='ProjectTicket') AND chargeToId=945370",
+      "expenseEntries_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//expense/entries?conditions=(chargeToType='ServiceTicket' OR chargeToType='ProjectTicket') AND chargeToId=945370"
+    },
+    "escalationStartDateUTC": "2022-09-30T04:00:00Z",
+    "escalationLevel": 10,
+    "minutesBeforeWaiting": 0,
+    "respondedSkippedMinutes": 0,
+    "resplanSkippedMinutes": 0,
+    "customFields": [
+      {
+        "id": 7,
+        "caption": "Dispatch Billing Required",
+        "type": "Text",
+        "entryMethod": "List",
+        "numberOfDecimals": 0
+      },
+      {
+        "id": 36,
+        "caption": "Business App assigned ",
+        "type": "Date",
+        "entryMethod": "EntryField",
+        "numberOfDecimals": 0
+      },
+      {
+        "id": 37,
+        "caption": "T&M Billing Required",
+        "type": "Checkbox",
+        "entryMethod": "EntryField",
+        "numberOfDecimals": 0
+      }
+    ]
+  }
+}

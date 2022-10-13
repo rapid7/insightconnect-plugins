@@ -1,0 +1,12 @@
+{
+  "code": "InvalidObject",
+  "message": "ticket object is invalid",
+  "errors": [
+    {
+      "code": "NotFound",
+      "message": "company 19299 not found",
+      "resource": "ticket",
+      "field": "company/id"
+    }
+  ]
+}

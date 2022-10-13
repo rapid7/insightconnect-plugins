@@ -1,0 +1,237 @@
+{
+  "company": {
+    "id": 200,
+    "identifier": "example",
+    "name": "Example Company",
+    "status": {
+      "id": 1,
+      "name": "Active",
+      "info": {
+        "status_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/statuses/1"
+      }
+    },
+    "addressLine1": "6505 Windcrest Dr",
+    "addressLine2": "Suite 200",
+    "city": "Plano",
+    "state": "TX",
+    "zip": "75024",
+    "country": {
+      "id": 1,
+      "name": "United States",
+      "info": {
+        "country_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/countries/1"
+      }
+    },
+    "website": "www.example.com",
+    "territory": {
+      "id": 2,
+      "name": "Example Company",
+      "info": {
+        "location_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/locations/2"
+      }
+    },
+    "dateAcquired": "2006-06-21T04:00:00Z",
+    "sicCode": {
+      "id": 1209,
+      "name": "5734 - Computer and software stores"
+    },
+    "annualRevenue": 0.0,
+    "timeZoneSetup": {
+      "id": 1,
+      "name": "GMT-5/Eastern Time: US & Canada",
+      "info": {
+        "timeZoneSetup_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/timeZoneSetups/1"
+      }
+    },
+    "leadFlag": false,
+    "unsubscribeFlag": false,
+    "userDefinedField5": "1",
+    "taxCode": {
+      "id": 8,
+      "name": "Tax-State",
+      "info": {
+        "taxCode_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//finance/taxCodes/8"
+      }
+    },
+    "billingTerms": {
+      "id": 1,
+      "name": "Net 30 days"
+    },
+    "billToCompany": {
+      "id": 250,
+      "identifier": "example",
+      "name": "Example Company",
+      "info": {
+        "company_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/250"
+      }
+    },
+    "invoiceDeliveryMethod": {
+      "id": 1,
+      "name": "Mail"
+    },
+    "deletedFlag": true,
+    "dateDeleted": "2018-11-09T21:19:15Z",
+    "deletedBy": "User",
+    "mobileGuid": "1df91371-6d7a-4778-ab81-f3e7761f5211",
+    "currency": {
+      "id": 7,
+      "symbol": "$",
+      "currencyCode": "USD",
+      "decimalSeparator": ".",
+      "numberOfDecimals": 2,
+      "thousandsSeparator": ",",
+      "negativeParenthesesFlag": false,
+      "displaySymbolFlag": true,
+      "currencyIdentifier": "USD",
+      "displayIdFlag": false,
+      "rightAlign": false,
+      "name": "US Dollars",
+      "info": {
+        "currency_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//finance/currencies/7"
+      }
+    },
+    "isVendorFlag": false,
+    "types": [
+      {
+        "id": 1,
+        "name": "Client",
+        "info": {
+          "type_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/types/1"
+        }
+      }
+    ],
+    "site": {
+      "id": 5353,
+      "name": "Plano Office",
+      "info": {
+        "site_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/250/sites/5353"
+      }
+    },
+    "info": {
+      "lastUpdated": "2019-06-13T15:27:10Z",
+      "updatedBy": "user",
+      "dateEntered": "2006-06-21T16:04:59Z",
+      "enteredBy": "CONVERSION",
+      "contacts_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/contacts?conditions=company/id=250",
+      "agreements_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//finance/agreements?conditions=company/id=250",
+      "tickets_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//service/tickets?conditions=company/id=250",
+      "opportunities_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//sales/opportunities?conditions=company/id=250",
+      "activities_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//sales/activities?conditions=company/id=250",
+      "projects_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//project/projects?conditions=company/id=250",
+      "configurations_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/configurations?conditions=company/id=250",
+      "orders_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//sales/orders?conditions=company/id=250",
+      "documents_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//system/documents?recordType=Company&recordId=250",
+      "sites_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/250/sites",
+      "teams_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/250/teams",
+      "reports_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/250/managementSummaryReports",
+      "notes_href": "https://sandbox-na.myconnectwise.net/v4_6_release/apis/3.0//company/companies/250/notes"
+    },
+    "customFields": [
+      {
+        "id": 2,
+        "caption": "Parent Company",
+        "type": "Text",
+        "entryMethod": "List",
+        "numberOfDecimals": 0
+      },
+      {
+        "id": 13,
+        "caption": "Disconnect Date",
+        "type": "Date",
+        "entryMethod": "EntryField",
+        "numberOfDecimals": 0
+      },
+      {
+        "id": 14,
+        "caption": "Transition Date",
+        "type": "Date",
+        "entryMethod": "EntryField",
+        "numberOfDecimals": 0
+      },
+      {
+        "id": 15,
+        "caption": "Partner ID",
+        "type": "Text",
+        "entryMethod": "EntryField",
+        "numberOfDecimals": 0
+      },
+      {
+        "id": 17,
+        "caption": "Customer Activation Date",
+        "type": "Date",
+        "entryMethod": "EntryField",
+        "numberOfDecimals": 0
+      },
+      {
+        "id": 19,
+        "caption": "TTMS Monitoring",
+        "type": "Checkbox",
+        "entryMethod": "EntryField",
+        "numberOfDecimals": 0
+      },
+      {
+        "id": 20,
+        "caption": "Channel Partner Type",
+        "type": "Text",
+        "entryMethod": "List",
+        "numberOfDecimals": 0
+      },
+      {
+        "id": 24,
+        "caption": "Partner Name",
+        "type": "Text",
+        "entryMethod": "EntryField",
+        "numberOfDecimals": 0
+      },
+      {
+        "id": 25,
+        "caption": "Key Count",
+        "type": "Number",
+        "entryMethod": "EntryField",
+        "numberOfDecimals": 0
+      },
+      {
+        "id": 26,
+        "caption": "Region",
+        "type": "Text",
+        "entryMethod": "EntryField",
+        "numberOfDecimals": 0
+      },
+      {
+        "id": 27,
+        "caption": "Brand",
+        "type": "Text",
+        "entryMethod": "EntryField",
+        "numberOfDecimals": 0
+      },
+      {
+        "id": 28,
+        "caption": "Owner",
+        "type": "Text",
+        "entryMethod": "EntryField",
+        "numberOfDecimals": 0
+      },
+      {
+        "id": 29,
+        "caption": "Company Property Code",
+        "type": "Text",
+        "entryMethod": "EntryField",
+        "numberOfDecimals": 0
+      },
+      {
+        "id": 30,
+        "caption": "Brand Property Code",
+        "type": "Text",
+        "entryMethod": "EntryField",
+        "numberOfDecimals": 0
+      },
+      {
+        "id": 31,
+        "caption": "Customer Acquired Date",
+        "type": "Date",
+        "entryMethod": "EntryField",
+        "numberOfDecimals": 0
+      }
+    ]
+  }
+}
