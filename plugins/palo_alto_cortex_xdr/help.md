@@ -63,11 +63,11 @@ This action is used to start an XQL query and retrieve the query results.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|start_time|integer|None|False|Integer in timestamp epoch milliseconds for start of the time range, Cortex XDR calls by default the last 24 hours if both 'Start Time' and 'End Time' values are not present|None|1599080399000|
-|limit|integer|20|False|Integer representing the maximum number of results to return, defaults to 20, max value 1000|None|100|
-|query|string|None|True|String of the XQL query|None|dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3|
-|tenants|[]string|None|True|String that represents additional information regarding the action|None|["tenantID", "tenantID"]|
 |end_time|integer|None|False|Integer in timestamp epoch milliseconds for end of the time range, Cortex XDR calls by default the last 24 hours if both 'Start Time' and 'End Time' values are not present|None|1598907600000|
+|limit|integer|20|False|Integer representing the maximum number of results to return, defaults to 20, max value 1000|None|100|
+|query|string|None|True|String of the XQL query|None|dataset=xdr_data I fields event_id, event_type, event_sub_type I limit 3|
+|start_time|integer|None|False|Integer in timestamp epoch milliseconds for start of the time range, Cortex XDR calls by default the last 24 hours if both 'Start Time' and 'End Time' values are not present|None|1599080399000|
+|tenants|[]string|None|True|List of strings used when querying tenants managed by Managed Security Services Providers (MSSP)|None|["tenantID", "tenantID"]|
 
 Example input:
 
@@ -88,7 +88,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|reply|reply|False|Was the operation successful|
+|reply|reply|False|Object containing the query data results|
 
 Example output:
 
@@ -340,8 +340,8 @@ This trigger runs the XQL and returns the output data results.
 |----|----|-------|--------|-----------|----|-------|
 |frequency|integer|5|True|Poll frequency in seconds|None|5|
 |limit|integer|20|False|Integer representing the maximum number of results to return, defaults to 20, max value 1000|None|100|
-|query|string|None|True|String of the XQL query|None|dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3|
-|tenants|[]string|None|True|String that represents additional information regarding the action|None|["tenantID", "tenantID"]|
+|query|string|None|True|String of the XQL query|None|dataset=xdr_data I fields event_id, event_type, event_sub_type I limit 3|
+|tenants|[]string|None|True|List of strings used when querying tenants managed by Managed Security Services Providers (MSSP)|None|["tenantID", "tenantID"]|
 
 Example input:
 
@@ -361,11 +361,33 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|reply|reply|True|Was the operation successful|
+|reply|reply|True|Object containing the query data results|
 
 Example output:
 
 ```
+{
+  "reply": {
+    "number_of_results": 1,
+    "query_cost": {
+      "1098781949": 0.0007469444444444444
+    },
+    "remaining_quota": 4.999253055555555,
+    "results": {
+      "data": [
+        {
+          "event_id": "eventID1",
+          "_vendor": "PANW",
+          "_product": "Fusion",
+          "insert_timestamp": 1621541825324,
+          "_time": 1621541523000,
+          "event_type": "STORY",
+          "event_sub_type": "NULL"
+        }
+      ]
+    }
+  }
+}
 ```
 
 #### Get Alerts

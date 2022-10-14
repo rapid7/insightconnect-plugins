@@ -1,5 +1,5 @@
 {
-	"spec": "5960a593e203f1324a96121927a9fa5d",
+	"spec": "f739ef6ff102709efc166470273612b7",
 	"manifest": "4d8aab3cd9c79a15b24ffc7b1a534190",
 	"setup": "55e82ab05d9fc240f8cd57557b3a00c6",
 	"schemas": [
@@ -21,7 +21,7 @@
 		},
 		{
 			"identifier": "get_xql_query_results/schema.py",
-			"hash": "1a16a3da160b2810b9a1e1dfa1c9fc79"
+			"hash": "2e57469ed28bb6f09a2b676abe129242"
 		},
 		{
 			"identifier": "isolate_endpoint/schema.py",
@@ -45,7 +45,7 @@
 		},
 		{
 			"identifier": "get_query_results/schema.py",
-			"hash": "1243637c330c289efec3cf709a4cf83a"
+			"hash": "7f8d7c06b9b5e264f042b889505aa254"
 		}
 	]
 }

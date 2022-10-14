@@ -1144,10 +1144,10 @@ actions:
         description: String of the XQL query
         type: string
         required: true
-        example: dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3
+        example: dataset=xdr_data I fields event_id, event_type, event_sub_type I limit 3
       tenants:
         title: Tenants
-        description: String that represents additional information regarding the action
+        description: List of strings used when querying tenants managed by Managed Security Services Providers (MSSP)
         type: "[]string"
         required: true
         example: ["tenantID", "tenantID"]
@@ -1173,7 +1173,7 @@ actions:
     output:
       reply:
         title: Reply
-        description: Was the operation successful
+        description: Object containing the query data results
         type: reply
         required: false
 triggers:
@@ -1225,13 +1225,13 @@ triggers:
         description: String of the XQL query
         type: string
         required: true
-        example: dataset=xdr_data | fields event_id, event_type, event_sub_type | limit 3
+        example: dataset=xdr_data I fields event_id, event_type, event_sub_type I limit 3
       tenants:
         title: Tenants
-        description: String that represents additional information regarding the action
+        description: List of strings used when querying tenants managed by Managed Security Services Providers (MSSP)
         type: "[]string"
         required: true
-        example: [ "tenantID", "tenantID" ]
+        example: ["tenantID", "tenantID"]
       limit:
         title: Limit
         description: Integer representing the maximum number of results to return, defaults to 20, max value 1000
@@ -1242,7 +1242,7 @@ triggers:
     output:
       reply:
         title: Reply
-        description: Was the operation successful
+        description: Object containing the query data results
         type: reply
         required: true
 tasks:

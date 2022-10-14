@@ -53,7 +53,7 @@ class GetXqlQueryResultsInput(insightconnect_plugin_runtime.Input):
     "tenants": {
       "type": "array",
       "title": "Tenants",
-      "description": "String that represents additional information regarding the action",
+      "description": "List of strings used when querying tenants managed by Managed Security Services Providers (MSSP)",
       "items": {
         "type": "string"
       },
@@ -80,7 +80,7 @@ class GetXqlQueryResultsOutput(insightconnect_plugin_runtime.Output):
     "reply": {
       "$ref": "#/definitions/reply",
       "title": "Reply",
-      "description": "Was the operation successful",
+      "description": "Object containing the query data results",
       "order": 1
     }
   },
