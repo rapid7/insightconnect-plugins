@@ -30,7 +30,7 @@ class MarkdownToTxt(insightconnect_plugin_runtime.Action):
                 else "You must define one of Markdown or Markdown String.",
             )
 
-        if inbytes is not None:
+        if inbytes != "":
             try:
                 markdown = utils.from_bytes(inbytes)
             except binascii.Error:
