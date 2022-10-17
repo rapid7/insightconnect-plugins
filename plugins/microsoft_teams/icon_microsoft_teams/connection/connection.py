@@ -86,15 +86,17 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return headers
 
     def test(self):
-        try:
-            self.check_and_refresh_api_token()
-        except PluginException as e:
-            raise ConnectionTestException(
-                cause="Unable to get authentication token.",
-                assistance="Please check your connection settings.",
-            ) from e
         if not self.api_token:
             raise ConnectionTestException(
                 cause="No authentication token found.",
                 assistance="Please check your connection settings.",
             )
+        else:
+            try:
+                self.check_and_refresh_api_token()
+                return {"success": True}
+            except PluginException as error:
+                raise ConnectionTestException(
+                    cause="Unable to get authentication token.",
+                    assistance="Please check your connection settings.",
+                ) from error
