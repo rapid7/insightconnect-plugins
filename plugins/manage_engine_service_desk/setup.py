@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="manage_engine_service_desk-rapid7-plugin",
-      version="1.0.0",
+      version="1.0.1",
       description="ManageEngine's Service Desk has the ability to centralize and capture reported issues, allowing security and IT administrators to track and manage all incidents in an easy manner. The numerous help desk tickets raised are organized and tracked in the Requests module. The Requests module enables you to handle tickets promptly, assign tickets to technicians, merge similar requests, and so on",
       author="rapid7",
       author_email="",

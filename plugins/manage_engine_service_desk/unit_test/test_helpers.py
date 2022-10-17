@@ -105,6 +105,19 @@ class TestHelpers(TestCase):
                 },
             ],
             [
+                "with_string_id",
+                {
+                    "key": "value",
+                    "next": {"key_in_value": [9, 8, 7, 6, 5, 4], "request_id": "random_string", "none": None},
+                    Response.RESPONSE_STATUS: {},
+                },
+                {
+                    "key": "value",
+                    "next": {"key_in_value": [9, 8, 7, 6, 5, 4], "request_id": "random_string", "none": None},
+                    Response.RESPONSE_STATUS: {},
+                },
+            ],
+            [
                 "without_id",
                 {
                     "key": "value",

@@ -54,4 +54,4 @@ class TestCloseRequest(TestCase):
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)
         self.assertEqual(error.exception.assistance, assistance)
-        self.assertEqual(error.exception.data, data)
+        self.assertEqual(error.exception.data, str(data))
