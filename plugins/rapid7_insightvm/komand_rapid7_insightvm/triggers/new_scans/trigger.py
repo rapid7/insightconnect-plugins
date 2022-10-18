@@ -100,19 +100,19 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
             f"AND dsite.site_id IN ({','.join(site_ids)})"
         )
 
-    def get_cache_site_scans(self):
+    def get_cache_site_scans(self) -> dict:
         try:
             return json.loads(util.read_from_cache(self.CACHE_FILE_NAME))
         except ValueError as error:
             raise PluginException(cause="Failed to load cache file", assistance=f"Exception returned was {error}")
 
-    def get_track_site_scans(self, site_scans):
+    def get_track_site_scans(self, site_scans: dict) -> dict:
         track_site_scans = {}
         for site_id, scan_details in site_scans.items():
             track_site_scans[site_id] = [scan["scan_id"] for scan in scan_details]
         return track_site_scans
 
-    def get_scan_details(self, endpoint: str, scan: dict):
+    def get_scan_details(self, endpoint: str, scan: dict) -> dict:
         response = self.connection.session.get(url=endpoint, verify=False)
         if response.status_code in [200, 201]:  # 200 is documented, 201 is undocumented
             try:
