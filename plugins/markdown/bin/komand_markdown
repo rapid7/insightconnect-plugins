@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Markdown"
 Vendor = "rapid7"
-Version = "3.1.1"
+Version = "3.1.2"
 Description = "Convert markdown to and from various popular formats"
 
 
