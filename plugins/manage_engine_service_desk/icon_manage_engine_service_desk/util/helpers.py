@@ -29,7 +29,10 @@ def map_ids_to_integer(response: dict) -> dict:
         if isinstance(value, list):
             mapped_response[key] = [map_ids_to_integer(element) for element in value]
         if key.endswith("id") and isinstance(value, str):
-            mapped_response[key] = int(value)
+            try:
+                mapped_response[key] = int(value)
+            except ValueError:
+                continue
     return mapped_response
 
 
