@@ -29,7 +29,4 @@ class MarkdownToHtml(insightconnect_plugin_runtime.Action):
         else:
             html_string = utils.convert(utils.from_bytes(inbytes), "md", "html")
             html_b64 = utils.to_bytes(html_string)
-        return {"html_string": html_string, "html": html_b64}
-
-    def test(self):
-        return {}
+        return {Output.HTML_STRING: html_string, Output.HTML: html_b64}
