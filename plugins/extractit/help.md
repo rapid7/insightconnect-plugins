@@ -23,7 +23,7 @@ _This plugin does not contain any requirements._
 
 # Supported Product Versions
 
-* 07-07-2022
+* 2022-10-19
 
 # Documentation
 
@@ -637,6 +637,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.0.6 - Resolved issue where users experienced a `Not in list` value error when submitted multiple URLs with the same linked URL in the URL Extractor action
 * 3.0.5 - Updated error message in extractor.py | Updated help.md description | Updated URL extraction | Fix issue with extracting dates from `.XLSX` files
 * 3.0.4 - Fix issue with extracting URLs from link query parameters
 * 3.0.3 - Remove duplicate date formats from action inputs
