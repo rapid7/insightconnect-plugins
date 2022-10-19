@@ -1,7 +1,7 @@
 import sys
 import os
 from unittest import TestCase
-from unittest.mock import patch
+from unittest.mock import patch, Mock
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
@@ -10,6 +10,7 @@ sys.path.append(os.path.abspath("../"))
 
 from unit_test.util import Util
 from icon_python_3_script.actions.run import Run
+from typing import Dict, Any
 
 
 @patch.object(Run, "_exec_python_function", side_effect=Util.mock_exec_python_function)
@@ -28,17 +29,21 @@ class TestRun(TestCase):
             ],
         ]
     )
-    def test_run(self, mock_exec_python_function, connection_params, action_params, expected):
+    def test_run(
+        self,
+        mock_exec_python_function: Mock,
+        connection_params: Dict[str, Any],
+        action_params: Dict[str, Any],
+        expected: Dict[str, Any],
+    ) -> None:
         action = Util.default_connector(Run(), connection_params)
         actual = action.run(params=action_params)
-
         self.assertEqual(actual, expected)
 
-    def test_run_return_none(self, mock_exec_python_function):
+    def test_run_return_none(self, mock_exec_python_function: Mock) -> None:
         params = Util.read_file_to_dict(f"inputs/run.bad.json.inp")
         action = Util.default_connector(Run())
-        with self.assertRaises(PluginException) as e:
+        with self.assertRaises(PluginException) as error:
             action.run(params=params)
-
-        self.assertEqual(e.exception.cause, "Output type was None")
-        self.assertEqual(e.exception.assistance, "Ensure that output has a non-None data type")
+        self.assertEqual(error.exception.cause, "Output type was None")
+        self.assertEqual(error.exception.assistance, "Ensure that output has a non-None data type")
