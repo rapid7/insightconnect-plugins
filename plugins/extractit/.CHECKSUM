@@ -1,72 +1,8 @@
 {
-	"spec": "5ce443f68e65a49eb5f80f9922640c0f",
-	"manifest": "3213fdbc85ae2cd64a3d0f34fa82ecf7",
-	"setup": "5b26cc3763f2c27ceb87a8b03b216f72",
+	"spec": "542956d541741c2afdcae8b3949a88b2",
+	"manifest": "b16b0811c871a7e60d240a4504469670",
+	"setup": "6d277d16060a0986dfc1e9bc3a0fbd27",
 	"schemas": [
-		{
-			"identifier": "cve_extractor/schema.py",
-			"hash": "39edc52185f3d38e3b356b47e92964b7"
-		},
-		{
-			"identifier": "date_extractor/schema.py",
-			"hash": "3c32e14b9d16f2408593f992168d5c37"
-		},
-		{
-			"identifier": "domain_extractor/schema.py",
-			"hash": "ac7d42fbd32a3aeb4c0f9510a2c25620"
-		},
-		{
-			"identifier": "email_extractor/schema.py",
-			"hash": "0edb413c727a0909c151eb665aa24322"
-		},
-		{
-			"identifier": "extract_all/schema.py",
-			"hash": "99876c3600840b553bfa81da2f86d525"
-		},
-		{
-			"identifier": "filepath_extractor/schema.py",
-			"hash": "3eae428bb92a0aa0cfc7b60854af9ac1"
-		},
-		{
-			"identifier": "ioc_extractor/schema.py",
-			"hash": "2cce8cb5d87d320547fbb5d282136f02"
-		},
-		{
-			"identifier": "ip_extractor/schema.py",
-			"hash": "512ba27f014d7d84c253c177d2fb9840"
-		},
-		{
-			"identifier": "mac_extractor/schema.py",
-			"hash": "f9af919723d50d92f70cdd5f3187b222"
-		},
-		{
-			"identifier": "md5_extractor/schema.py",
-			"hash": "65c9eb3161d7ba98f823a8234477027a"
-		},
-		{
-			"identifier": "sha1_extractor/schema.py",
-			"hash": "8c474dc400c76eadfd94e65ab4ca6edf"
-		},
-		{
-			"identifier": "sha256_extractor/schema.py",
-			"hash": "5b44760b5d0dc1cabff9bfb47ddc2c28"
-		},
-		{
-			"identifier": "sha512_extractor/schema.py",
-			"hash": "537755277be43f383dbbdd060a491a41"
-		},
-		{
-			"identifier": "url_extractor/schema.py",
-			"hash": "97465235c7b664f0acbec82c8e05278b"
-		},
-		{
-			"identifier": "uuid_extractor/schema.py",
-			"hash": "5f0b0c7f765d65de8f5fb316c02c05fb"
-		},
-		{
-			"identifier": "connection/schema.py",
-			"hash": "9d48eac9e9c489dbd77132ce1378f009"
-		},
 		{
 			"identifier": "cve_extractor/schema.py",
 			"hash": "4a359c8f3fcc19bc3c5987278bc319ea"
