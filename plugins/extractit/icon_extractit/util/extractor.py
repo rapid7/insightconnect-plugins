@@ -240,6 +240,7 @@ def remove_extracted_urls_from_links(input_list: list) -> list:
         for url_check in temporary_list:
             if temp_url.replace("&amp", "") in url_check:
                 output_list.pop(output_list.index(temp_url[1:]))
+                break
     return output_list
 
 
