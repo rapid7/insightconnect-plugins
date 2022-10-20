@@ -10,11 +10,11 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 def makePDF(html: str, path: str) -> str:
     infile = path + "str.html"
     outfile = path + "tmp.pdf"
-    with open(infile, "w") as f:
-        f.write(html)
+    with open(infile, "w", encoding="utf-8") as file:
+        file.write(html)
     pdfkit.from_file(infile, outfile)
-    with open(outfile, "rb") as f:
-        out_bytes = f.read().decode("UTF-8", errors="replace")
+    with open(outfile, "rb") as file:
+        out_bytes = file.read().decode("UTF-8", errors="replace")
     return out_bytes
 
 
@@ -30,6 +30,7 @@ class MarkdownToPdf(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         inbytes = params.get(Input.MARKDOWN)
         instr = params.get(Input.MARKDOWN_STRING)
+
         if not (((instr is None) ^ (inbytes is None)) or ((instr == "") ^ (inbytes == ""))):
             raise PluginException(
                 cause="Input error",
