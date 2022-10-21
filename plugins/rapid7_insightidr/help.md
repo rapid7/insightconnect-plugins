@@ -1673,7 +1673,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 4.1.1 - Fix issue with endpoint agent enum 
+* 4.1.1 - Advanced Query on Log Set Action: Updated EndPoint Agent enum to Endpoint Agent in log_set
 * 4.1.0 - Add new actions `List Comments`, `Create Comment`, `Delete Comment`, `List Attachments`, `Upload Attachment`, `Download Attachment`, `Delete Attachment`, `Get Attachment Information`
 * 4.0.1 - Fix issue with `Get Query Results` and `Get All Saved Queries` actions
 * 4.0.0 - Add new actions Create Investigation, Search Investigations, Update Investigation, Set Investigation Priority, Set Investigation Disposition, and List Alerts for Investigation | Update actions List Investigations, Set Status of Investigation, Assign User to Investigation | Enabled cloud 
