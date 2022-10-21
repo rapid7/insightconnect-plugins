@@ -23,7 +23,7 @@ _This plugin does not contain any requirements._
 
 # Supported Product Versions
 
-* Python 3.7.2
+* Python 3.8.1
 
 # Documentation
 
@@ -34,7 +34,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |modules|[]string|None|False|List of third-party modules to install for use in the supplied Python script|None|["pandas", "numpy"]|
-|script_secret_key|credential_secret_key|None|False|Credential secret key available in script as python variable (`secret_key`)|None|{"secretKey": "9de5069c5afe602b2ea0a04b66beb2c0"}|
+|script_secret_key|credential_secret_key|None|False|Credential secret key available in script as python variable (`secret_key`)|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |script_username_and_password|credential_username_password|None|False|Username and password available in script as python variables (`username`, `password`)|None|{"username": "user", "password": "mypassword"}|
 |timeout|integer|60|True|Timeout (in seconds) for installing third-party modules|None|120|
 
@@ -80,7 +80,7 @@ def run(params={}):
 This returns a string with key `hello` on the output object accessible at `{{Step.hello}}`.
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|----------------------------------------------------------------------------------------------|
+|----|----|-------|--------|-----------|----|-------|
 |function|python|def run(params={}):\n    return {}|True|Function definition. Must be named `run`. Accepts the `input` object as params. Returns the dict as output. In this action you can use `username`, `password`, `secret_key` variables if defined in connection|None|def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username, password)\n\treturn {}|
 |input|object|None|False|Input object to be passed as `params={}` to the `run` function|None|{"some_input": "example input"}|
 
@@ -132,6 +132,7 @@ If installation fails, try increasing the `Timeout` connection input to `900` (1
 
 # Version History
 
+* 4.0.1 - Resolve issue where users experience issues with installing Python packages, and indentation for input function 
 * 4.0.0 - Add custom script credentials in Connection
 * 3.0.0 - Add custom credentials in Run action
 * 2.0.4 - Update help documentation for installing third-party modules

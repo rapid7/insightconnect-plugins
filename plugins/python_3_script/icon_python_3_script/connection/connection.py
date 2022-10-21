@@ -1,7 +1,7 @@
 import os
-import insightconnect_plugin_runtime
+from subprocess import CalledProcessError, TimeoutExpired, check_output, run  # noqa: B404
 
-from subprocess import run, check_output, TimeoutExpired, CalledProcessError  # noqa: B404
+import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 from .schema import ConnectionSchema, Input
@@ -23,8 +23,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
         }
 
     def test(self):
-        self.logger.info("[*] Performing Python version check...\n")
+        connection_test_output = {"success": True}
 
+        self.logger.info("[*] Performing Python version check...")
         check = str(check_output(["python", "--version"]), "utf-8")  # noqa: B607,B603
         self.logger.info(check)
 
@@ -32,11 +33,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
             raise ConnectionTestException(cause="[-] Python 3 is not installed correctly")
 
         if not self.dependencies:
-            return {}
+            return connection_test_output
 
-        self.logger.info(f"[*] Installing user-specified dependencies ({self.dependencies})...\n")
+        self.logger.info(f"[*] Installing user-specified dependencies ({self.dependencies})...")
         self.install_dependencies()
         self.logger.info("[*] Dependencies installed!\n")
+        return connection_test_output
 
     @staticmethod
     def _set_pythonuserbase():
@@ -54,7 +56,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             raise ConnectionTestException(
                 cause="Error: Installing Python dependencies exceeded timeout", assistance="Consider increasing timeout"
             )
-        except CalledProcessError as e:
+        except CalledProcessError as error:
             raise ConnectionTestException(
-                cause=f"Error: Non-zero exit code returned. Message: {e.output.decode('UTF8')}"
+                cause=f"Error: Non-zero exit code returned. Message: {error.output.decode('UTF8')}"
             )
