@@ -32,9 +32,7 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
         site_scans = NewScans.get_site_scans(self, params)
 
         # Track site and scan IDs
-        track_site_scans = {}
-        for site_id, scan_details in site_scans.items():
-            track_site_scans[site_id] = [scan["scan_id"] for scan in scan_details]
+        track_site_scans = NewScans.get_track_site_scans(self, site_scans)
 
         self.logger.info(
             f"Writing state of site scans during initialization of trigger (Site regex: "
@@ -52,36 +50,18 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
                     site_scans[site_id] = [max_scan_by_id]
 
             # Open cache to only process previously undiscovered scan IDs
-            try:
-                cache_site_scans = json.loads(util.read_from_cache(self.CACHE_FILE_NAME))
-            except ValueError as e:
-                raise PluginException(cause="Failed to load cache file", assistance=f"Exception returned was {e}")
+            cache_site_scans = NewScans.get_cache_site_scans(self)
 
             # Send scans based on configuration
             for site_id, scans in site_scans.items():
                 for scan in scans:
                     # Only process scan IDs not previously cached
-                    if scan.get("scan_id") in cache_site_scans.get(site_id):
+                    if scan.get("scan_id") in cache_site_scans.get(site_id, []):
                         continue
 
                     # Get scan details
                     endpoint = endpoints.Scan.scans(self.connection.console_url, scan["scan_id"])
-
-                    response = self.connection.session.get(url=endpoint, verify=False)
-                    if response.status_code in [200, 201]:  # 200 is documented, 201 is undocumented
-                        try:
-                            scan_details = response.json()
-                        except json.decoder.JSONDecodeError as e:
-                            raise PluginException(
-                                cause=f"Error: Failed to parse response while retrieving scan "
-                                f"details for scan ID {scan['scan_id']}.",
-                                assistance=f"Exception returned was {e}",
-                            )
-                    else:
-                        raise PluginException(
-                            cause=f"ERROR: Failed to retrieve scan ID {scan['scan_id']}.",
-                            assistance=f"Status code returned was {response.status_code}",
-                        )
+                    scan_details = NewScans.get_scan_details(self, endpoint, scan)
 
                     # Add site name and id; not provided by endpoint
                     scan_details["siteId"] = scan.get("site_id")
@@ -92,14 +72,18 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
                     self.send({Output.SCAN: scan_details})
 
                     # Update cache
+                    if cache_site_scans.get(site_id) is None:
+                        cache_site_scans[site_id] = []
                     cache_site_scans[site_id].append(scan.get("scan_id"))
 
             # Update cache file
             self.logger.info("Writing to " + self.CACHE_FILE_NAME)
             try:
                 util.write_to_cache(self.CACHE_FILE_NAME, json.dumps(cache_site_scans))  # noqa: B608
-            except TypeError as e:
-                raise PluginException(cause="Failed to save cache to file", assistance=f"Exception returned was {e}")
+            except TypeError as error:
+                raise PluginException(
+                    cause="Failed to save cache to file", assistance=f"Exception returned was {error}"
+                )
 
             # Sleep for configured frequency in minutes
             time.sleep(params.get(Input.FREQUENCY, 5) * 60)
@@ -115,6 +99,36 @@ class NewScans(insightconnect_plugin_runtime.Trigger):
             f"WHERE dss.description IN ({','.join(scan_statuses)})"
             f"AND dsite.site_id IN ({','.join(site_ids)})"
         )
+
+    def get_cache_site_scans(self) -> dict:
+        try:
+            return json.loads(util.read_from_cache(self.CACHE_FILE_NAME))
+        except ValueError as error:
+            raise PluginException(cause="Failed to load cache file", assistance=f"Exception returned was {error}")
+
+    def get_track_site_scans(self, site_scans: dict) -> dict:
+        track_site_scans = {}
+        for site_id, scan_details in site_scans.items():
+            track_site_scans[site_id] = [scan["scan_id"] for scan in scan_details]
+        return track_site_scans
+
+    def get_scan_details(self, endpoint: str, scan: dict) -> dict:
+        response = self.connection.session.get(url=endpoint, verify=False)
+        if response.status_code in [200, 201]:  # 200 is documented, 201 is undocumented
+            try:
+                scan_details = response.json()
+            except json.decoder.JSONDecodeError as error:
+                raise PluginException(
+                    cause=f"Error: Failed to parse response while retrieving scan "
+                    f"details for scan ID {scan['scan_id']}.",
+                    assistance=f"Exception returned was {error}",
+                )
+        else:
+            raise PluginException(
+                cause=f"ERROR: Failed to retrieve scan ID {scan['scan_id']}.",
+                assistance=f"Status code returned was {response.status_code}",
+            )
+        return scan_details
 
     def get_sites_within_scope(self, site_regex):
         resource_helper = ResourceRequests(self.connection.session, self.logger)

@@ -5662,6 +5662,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 5.0.1 - Fix issue in New Scans trigger where an exception was thrown if no scan IDs were previously cached for that site
 * 5.0.0 - Fix parameters type, input examples and description for `Get Asset Vulnerability Solutions`, `Get Asset Vulnerabilities`, `Get Asset Software` and `Get Asset` actions
 * 4.10.0 - Add new action Tag Assets
 * 4.9.2 - Add expiration date conversion to ISO8601 in Create Vulnerability Exception Submission and Update Vulnerability Exception Expiration Date actions | Fix issue with incorrect expiration date format in Get Expiring Vulnerability Exceptions action | Fix issue in List Reports action where first page of reports was not included | Fix issue in List Reports action where `found` output was returned as false even though list of reports was returned | Updated plugin SDK to latest version
