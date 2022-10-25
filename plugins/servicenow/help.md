@@ -895,6 +895,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 7.1.1 - Create Incident: Resolved issue when nothing was passed to `additional_fields` input field 
 * 7.1.0 - Add new action Create Change Request
 * 7.0.0 - Cloud enabled | Changed connection input `URL` to `instance`
 * 6.0.1 - Fix base64 decoding in Put Incident Attachment action
