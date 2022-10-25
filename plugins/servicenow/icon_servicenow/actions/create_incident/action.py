@@ -33,7 +33,7 @@ class CreateIncident(insightconnect_plugin_runtime.Action):
             "description": params.get(Input.DESCRIPTION),
         }
 
-        data.update(params.get(Input.ADDITIONAL_FIELDS))
+        data.update(params.get(Input.ADDITIONAL_FIELDS, {}))
 
         response = self.connection.request.make_request(
             endpoint=self.connection.incident_url, method="post", payload=data
