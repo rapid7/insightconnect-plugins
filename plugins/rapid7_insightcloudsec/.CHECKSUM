@@ -1,0 +1,43 @@
+{
+	"spec": "8c076ba6a8491e4d7ccd3304c5ee9280",
+	"manifest": "e4082c45ad189c11ee6075021418f9dd",
+	"setup": "a923750347c7eda5f8917d97a27d1bf5",
+	"schemas": [
+		{
+			"identifier": "create_exemption/schema.py",
+			"hash": "bcda5a9ab14266190aaca3d8be7ad355"
+		},
+		{
+			"identifier": "detach_policy/schema.py",
+			"hash": "788320f49c50b21f81cd48828edfd861"
+		},
+		{
+			"identifier": "get_account_details/schema.py",
+			"hash": "0405e8179367cf7f2280fe250efde2e5"
+		},
+		{
+			"identifier": "get_resource_details/schema.py",
+			"hash": "c7b82d8ca707b30a801b0d6e18472b04"
+		},
+		{
+			"identifier": "list_resource_tags/schema.py",
+			"hash": "448fae1060cd068c4992025060c1eb6f"
+		},
+		{
+			"identifier": "remove_exemption/schema.py",
+			"hash": "ef26efbc0faa51b3d25014d47a688dc6"
+		},
+		{
+			"identifier": "run_bot_on_demand/schema.py",
+			"hash": "1c50c447837e520d402ae5f45587d269"
+		},
+		{
+			"identifier": "switch_organization/schema.py",
+			"hash": "68f82d9ea5cbc1b8f25fff4628827b6f"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "001784c82b7803529a16b13e539d64d9"
+		}
+	]
+}

@@ -1,0 +1,28 @@
+[
+  {
+    "account": null,
+    "account_id": null,
+    "approver": "user@example.com",
+    "bot_id": null,
+    "bot_name": null,
+    "cloud_type_id": null,
+    "create_date": "2022-10-02T13:17:16",
+    "creator_id": 123,
+    "creator_name": null,
+    "enabled": true,
+    "exemption_id": 100,
+    "expiration_date": "2022-10-04T00:00:00",
+    "insight_id": 12345,
+    "insight_name": null,
+    "insight_source": "backoffice",
+    "notes": "example note",
+    "organization_id": 1,
+    "provider_id": null,
+    "resource_id": "storagecontainer:123:us-east-1:123456789:",
+    "resource_ids": null,
+    "resource_name": null,
+    "resource_type": "storagecontainer",
+    "resource_type_label": null,
+    "start_date": "2022-10-03T00:00:00"
+  }
+]

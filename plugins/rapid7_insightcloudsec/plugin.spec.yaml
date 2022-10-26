@@ -1,0 +1,399 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: rapid7_insightcloudsec
+title: Rapid7 InsightCloudSec
+description: InsightCloudSec by Rapid7 (formerly DivvyCloud) is a Cloud-Native Security Platform that provides real-time analysis and automated remediation for continuous security and compliance for your multi-cloud environment
+version: 1.0.0
+supported_versions: ["22.10.19"]
+vendor: rapid7
+cloud_ready: true
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insightcloudsec
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.rapid7.com
+tags: ["rapid7", "insightcloudsec"]
+support: rapid7
+status: []
+hub_tags:
+  use_cases: [remediation_management, reporting_and_analytics]
+  keywords: [rapid7, insightcloudsec, cloud_enabled]
+  features: []
+types:
+  accountDetails:
+    accountId:
+      title: Account ID
+      description: ID of the cloud account
+      type: string
+      required: false
+    cloudTypeId:
+      title: Cloud Type ID
+      description: ID of the cloud type
+      type: string
+      required: false
+    joinedTimestamp:
+      title: Joined Timestamp
+      description: When the account was joined
+      type: string
+      required: false
+    name:
+      title: Name
+      description: Name of the account
+      type: string
+      required: false
+    payerAccountId:
+      title: Payer Account ID
+      description: ID of the payer account
+      type: string
+      required: false
+    resourceId:
+      title: Resource ID
+      description: Resource ID for the account
+      type: string
+      required: false
+    status:
+      title: Status
+      description: Status of the account
+      type: string
+      required: false
+  exemption:
+    account:
+      title: Account
+      description: Name of the account
+      type: string
+      required: false
+    accountId:
+      title: Account ID
+      description: ID of the account
+      type: integer
+      required: false
+    approver:
+      title: Approver
+      description: The exemption approver
+      type: string
+      required: false
+    botId:
+      title: Bot ID
+      description: ID of the bot
+      type: string
+      required: false
+    botName:
+      title: Bot Name
+      description: Name of the bot
+      type: string
+      required: false
+    cloudTypeId:
+      title: Cloud Type ID
+      description: ID of the cloud type
+      type: integer
+      required: false
+    createDate:
+      title: Create Date
+      description: When the exemption was created
+      type: string
+      required: false
+    creatorId:
+      title: Creator ID
+      description: ID of the creator of the exemption
+      type: integer
+      required: false
+    creatorName:
+      title: Creator Name
+      description: Name of the creator of the exemption
+      type: string
+      required: false
+    enabled:
+      title: Enabled
+      description: Whether the exemption is enabled
+      type: boolean
+      required: false
+    exemptionId:
+      title: Exemption ID
+      description: ID of the exemption
+      type: integer
+      required: false
+    expirationDate:
+      title: Expiration Date
+      description: When the exemption expires
+      type: string
+      required: false
+    insightId:
+      title: Insight ID
+      description: ID of the Insight associated with the exemption
+      type: integer
+      required: false
+    insightName:
+      title: Insight Name
+      description: Name of the Insight associated with the exemption
+      type: string
+      required: false
+    insightSource:
+      title: Insight Source
+      description: Source for the Insight associated with the exemption
+      type: string
+      required: false
+    notes:
+      title: Notes
+      description: Notes
+      type: string
+      required: false
+    organizationId:
+      title: Organization ID
+      description: ID of the organization
+      type: integer
+      required: false
+    providerId:
+      title: Provider ID
+      description: ID of the provider
+      type: integer
+      required: false
+    resourceId:
+      title: Resource ID
+      description: ID of the resource that was exempted
+      type: string
+      required: false
+    resourceIds:
+      title: ResourceIds
+      description: List of resource IDs that have been exempted from the given Insight
+      type: "[]string"
+      required: false
+    resourceName:
+      title: Resource Name
+      description: Name of the resource
+      type: string
+      required: false
+    resourceType:
+      title: Resource Type
+      description: Type of the resource
+      type: string
+      required: false
+    resourceTypeLabel:
+      title: Resource Type Label
+      description: Label of the resource type
+      type: string
+      required: false
+    startDate:
+      title: Start Date
+      description: When the exemption starts
+      type: string
+      required: false
+  resourceDetails:
+    dependencies:
+      title: Dependencies
+      description: Dependencies for the provided resource ID
+      type: object
+      required: false
+    details:
+      title: Details
+      description: Details for the provided resource ID
+      type: object
+      required: false
+    relatedResources:
+      title: Related Resources
+      description: Related resources with the provided resource ID
+      type: object
+      required: false
+  resourceTag:
+    key:
+      title: Key
+      description: Key of the resource tag
+      type: string
+      required: false
+    value:
+      title: Value
+      description: Value of the resource tag
+      type: string
+      required: false
+connection:
+  apiKey:
+    title: API Key
+    description: InsightCloudSec API key
+    type: credential_secret_key
+    required: true
+    example: 3395856ce81f2b7382dee72602f798b642f14140
+  url:
+    title: URL
+    description: InsightCloudSec URL
+    type: string
+    required: true
+    example: https://example.com
+actions:
+  get_account_details:
+    title: Get Account Details
+    description: Get account details based on provided account ID
+    input:
+      accountId:
+        title: Account ID
+        description: ID of the cloud account
+        type: string
+        required: true
+        example: 123456789012
+    output:
+      accountDetails:
+        title: Account Details
+        description: Information about the cloud account for the provided ID
+        type: accountDetails
+        required: false
+  get_resource_details:
+    title: Get Resource Details
+    description: Get all of the details about a resource based on provided resource ID
+    input:
+      resourceId:
+        title: Resource ID
+        description: ID of the resource
+        type: string
+        required: true
+        example: "serviceuser:1:ABC1234567890:"
+    output:
+      resourceDetails:
+        title: Resource Details
+        description: Information about the resource for the provided ID
+        type: resourceDetails
+        required: false
+  list_resource_tags:
+    title: List Resource Tags
+    description: List resource tags based on provided resource ID
+    input:
+      resourceId:
+        title: Resource ID
+        description: ID of the resource
+        type: string
+        required: true
+        example: "instance:123:example:i-1234567890:"
+    output:
+      resourceTags:
+        title: Resource Tags
+        description: Resource tags for the provided ID
+        type: "[]resourceTag"
+        required: false
+  run_bot_on_demand:
+    title: Run Bot on Demand
+    description: Run a bot on demand, which will apply the filters and actions to all resources within the scope of the bot
+    input:
+      botId:
+        title: Bot ID
+        description: ID of the bot
+        type: string
+        required: true
+        example: "examplebot:11:1234"
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+  detach_policy:
+    title: Detach Policy
+    description: Detach a policy from a service user, group, or role
+    input:
+      resourceId:
+        title: Resource ID
+        description: ID of the service user, group, or role
+        type: string
+        required: true
+        example: "servicegroup:123:1234567890:"
+      policyResourceId:
+        title: Policy Resource ID
+        description: ID of the policy
+        type: string
+        required: true
+        example: "servicepolicy:123:1234567890:"
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+  create_exemption:
+    title: Create Exemption
+    description: Create an exemption
+    input:
+      approver:
+        title: Approver
+        description: The exemption approver
+        type: string
+        required: true
+        example: user@example.com
+      insightId:
+        title: Insight ID
+        description: ID for the Insight associated with the exemption
+        type: integer
+        required: true
+        example: 12345
+      insightSource:
+        title: Insight Source
+        description: Source for the Insight associated with the exemption
+        type: string
+        enum:
+        - backoffice
+        - custom
+        required: true
+        example: backoffice
+      resourceIds:
+        title: Resource IDs
+        description: List of IDs for the resources to be exempted from the given Insight
+        type: "[]string"
+        required: true
+        example: ["storagecontainer:123:us-east-1:123456789:"]
+      resourceType:
+        title: Resource Type
+        description: The type of resource being exempted
+        type: string
+        required: true
+        example: storagecontainer
+      startDate:
+        title: Start Date
+        description: Date the exemption begins, e.g. 2022-10-20T00:00:00Z
+        type: date
+        required: true
+        example: 2022-10-20T00:00:00Z
+      expirationDate:
+        title: Expiration Date
+        description: Date the exemption ends, e.g. 2022-10-21T00:00:00Z. If none is provided, the default is no expiration
+        type: date
+        required: false
+        example: 2022-10-21T00:00:00Z
+      notes:
+        title: Notes
+        description: Any notes or documentation for the exemption
+        type: string
+        required: false
+        example: example note
+    output:
+      exemption:
+        title: Exemption
+        description: Information about a created exemption
+        type: "[]exemption"
+        required: false
+  remove_exemption:
+    title: Remove Exemption
+    description: Delete exemptions for provided IDs
+    input:
+      exemptionIds:
+        title: Exemption IDs
+        description: List of exemption IDs to delete
+        type: "[]integer"
+        required: true
+        example: [111, 222]
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+  switch_organization:
+    title: Switch Organization
+    description: Change the organization for which all future API requests will be made
+    input:
+      organizationName:
+        title: Organization Name
+        description: Name of the organization
+        type: string
+        required: true
+        example: Example Organization
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
