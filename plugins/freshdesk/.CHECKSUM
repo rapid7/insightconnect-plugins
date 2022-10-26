@@ -1,0 +1,27 @@
+{
+	"spec": "83193eb79796b58026d5b915863b9adf",
+	"manifest": "49a3601b166b96339778726e1bb55e66",
+	"setup": "edc4b643b2795c7cd597da7c9f1b7b96",
+	"schemas": [
+		{
+			"identifier": "createTicket/schema.py",
+			"hash": "a90589b4c5ab927b15b856e935d698d6"
+		},
+		{
+			"identifier": "getTicketById/schema.py",
+			"hash": "cd480d49efc5aadf17d9d95d0b03efcd"
+		},
+		{
+			"identifier": "getTickets/schema.py",
+			"hash": "8863278d3e7ebb026f4138b275c49202"
+		},
+		{
+			"identifier": "updateTicket/schema.py",
+			"hash": "4bd310b930cce57e6e765bd5e961f21b"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "7b7eec21bfb8c8f330130693eff7c86f"
+		}
+	]
+}
