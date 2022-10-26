@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 4.1.0
+version: 4.1.1
 supported_versions: ["Latest release successfully tested on 2022-07-20."]
 vendor: rapid7
 cloud_ready: true
@@ -1230,7 +1230,7 @@ actions:
           - Cloud Service Activity
           - DNS Query
           - Endpoint Activity
-          - EndPoint Agent
+          - Endpoint Agent
           - Exploit Mitigation Alert
           - File Access Activity
           - File Modification Activity

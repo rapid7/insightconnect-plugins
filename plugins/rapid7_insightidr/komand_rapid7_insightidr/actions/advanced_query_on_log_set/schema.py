@@ -39,7 +39,7 @@ class AdvancedQueryOnLogSetInput(insightconnect_plugin_runtime.Input):
         "Cloud Service Activity",
         "DNS Query",
         "Endpoint Activity",
-        "EndPoint Agent",
+        "Endpoint Agent",
         "Exploit Mitigation Alert",
         "File Access Activity",
         "File Modification Activity",
