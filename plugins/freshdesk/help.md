@@ -63,8 +63,8 @@ This action is used to create a FreshDesk ticket. At least one of those paramete
 |internalGroupId|integer|None|False|ID of the internal group to which the ticket should be assigned with|None|103000096140|
 |name|string|None|False|Name of the requester|None|Example Requester|
 |parentId|integer|None|False|ID of the parent ticket under which the child ticket needs to be created|None|11|
-|phone|string|None|False|Phone number of the requester. If no contact exists with this phone number in Freshdesk, it will be added as a new contact. If the phone number is set and the email address is not, then the name attribute is mandatory|None|611800861902|
-|email|string|None|False|Email address of the requester. If no contact exists with this email address in Freshdesk, it will be added as a new contact|None|user@example.com|
+|phone|string|None|False|Phone number of the requester. If no contact exists with this phone number in FreshDesk, it will be added as a new contact. If the phone number is set and the email address is not, then the name attribute is mandatory|None|611800861902|
+|email|string|None|False|Email address of the requester. If no contact exists with this email address in FreshDesk, it will be added as a new contact|None|user@example.com|
 |priority|string|None|True|Priority of the ticket|None|High|
 |productId|integer|None|False|ID of the product to which the ticket is associated. It will be ignored if the emailConfigId attribute is set in the request|None|103000000638|
 |relatedTicketIds|[]integer|None|False|List of Ticket IDs which needs to be linked to the Tracker being created|None|[21, 43]|
@@ -73,9 +73,9 @@ This action is used to create a FreshDesk ticket. At least one of those paramete
 |status|string|None|True|Status of the ticket|None|Open|
 |subject|string|None|True|Subject of the ticket|None|Example Subject|
 |tags|[]string|None|False|Tags that have been associated with the ticket|None|["my_tag", "second_tag"]|
-|twitterId|string|None|False|Twitter handle of the requester. If no contact exists with this handle in Freshdesk, it will be added as a new contact|None|123654789|
+|twitterId|string|None|False|Twitter handle of the requester. If no contact exists with this handle in FreshDesk, it will be added as a new contact|None|123654789|
 |type|string|None|False|Helps categorize the ticket according to the different kinds of issues your support team deals with|None|Incident|
-|uniqueExternalId|string|None|False|External ID of the requester. If no contact exists with this external ID in Freshdesk, they will be added as a new contact|None|my_example_id|
+|uniqueExternalId|string|None|False|External ID of the requester. If no contact exists with this external ID in FreshDesk, they will be added as a new contact|None|my_example_id|
 
 Example input:
 
@@ -417,7 +417,7 @@ This action is used to update a FreshDesk ticket.
 |companyId|integer|None|False|Company ID of the requester. This attribute can only be set if the Multiple Companies feature is enabled (Estate plan and above)|None|103000179654|
 |customFields|object|None|False|Key value pairs containing the names and values of custom fields. Read more at https://support.freshdesk.com/support/solutions/articles/216548|None|{"my_key": "my_value"}|
 |description|string|None|False|HTML content of the ticket|None|My new ticket|
-|email|string|None|False|Email address of the requester. If no contact exists with this email address in Freshdesk, it will be added as a new contact|None|user@example.com|
+|email|string|None|False|Email address of the requester. If no contact exists with this email address in FreshDesk, it will be added as a new contact|None|user@example.com|
 |dueBy|date|None|False|Timestamp that denotes when the ticket is due to be resolved|None|2023-12-24 12:56:15+05:00|
 |emailConfigId|integer|None|False|ID of email config which is used for this ticket. (i.e., support@yourcompany.com/sales@yourcompany.com). If productId is given and emailConfigId is not given, product's primary emailConfigId will be set|None|103000032123|
 |frDueBy|date|None|False|Timestamp that denotes when the first response is due|None|2023-12-21 12:56:15+05:00|
@@ -425,7 +425,7 @@ This action is used to update a FreshDesk ticket.
 |internalAgentId|integer|None|False|ID of the internal agent which the ticket should be assigned with|None|103018312012|
 |internalGroupId|integer|None|False|ID of the internal group to which the ticket should be assigned with|None|103000096140|
 |name|string|None|False|Name of the requester|None|Example Requester|
-|phone|string|None|False|Phone number of the requester. If no contact exists with this phone number in Freshdesk, it will be added as a new contact. If the phone number is set and the email address is not, then the name attribute is mandatory|None|611800861902|
+|phone|string|None|False|Phone number of the requester. If no contact exists with this phone number in FreshDesk, it will be added as a new contact. If the phone number is set and the email address is not, then the name attribute is mandatory|None|611800861902|
 |priority|string|None|False|Priority of the ticket|None|High|
 |productId|integer|None|False|ID of the product to which the ticket is associated. It will be ignored if the emailConfigId attribute is set in the request|None|103000000638|
 |relatedTicketIds|[]integer|None|False|List of Ticket IDs which needs to be linked to the Tracker being created|None|[21, 43]|
@@ -435,9 +435,9 @@ This action is used to update a FreshDesk ticket.
 |subject|string|None|False|Subject of the ticket|None|Example Subject|
 |tags|[]string|None|False|Tags that have been associated with the ticket|None|["my_tag", "second_tag"]|
 |ticketId|integer|None|True|ID of the Ticket|None|178|
-|twitterId|string|None|False|Twitter handle of the requester. If no contact exists with this handle in Freshdesk, it will be added as a new contact|None|123654789|
+|twitterId|string|None|False|Twitter handle of the requester. If no contact exists with this handle in FreshDesk, it will be added as a new contact|None|123654789|
 |type|string|None|False|Helps categorize the ticket according to the different kinds of issues your support team deals with|None|Incident|
-|uniqueExternalId|string|None|False|External ID of the requester. If no contact exists with this external ID in Freshdesk, they will be added as a new contact|None|my_example_id|
+|uniqueExternalId|string|None|False|External ID of the requester. If no contact exists with this external ID in FreshDesk, they will be added as a new contact|None|my_example_id|
 
 Example input:
 

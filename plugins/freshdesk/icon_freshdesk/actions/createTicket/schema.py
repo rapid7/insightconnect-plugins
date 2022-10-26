@@ -93,7 +93,7 @@ class CreateTicketInput(insightconnect_plugin_runtime.Input):
     "email": {
       "type": "string",
       "title": "Email",
-      "description": "Email address of the requester. If no contact exists with this email address in Freshdesk, it will be added as a new contact",
+      "description": "Email address of the requester. If no contact exists with this email address in FreshDesk, it will be added as a new contact",
       "order": 3
     },
     "emailConfigId": {
@@ -143,7 +143,7 @@ class CreateTicketInput(insightconnect_plugin_runtime.Input):
     "phone": {
       "type": "string",
       "title": "Phone",
-      "description": "Phone number of the requester. If no contact exists with this phone number in Freshdesk, it will be added as a new contact. If the phone number is set and the email address is not, then the name attribute is mandatory",
+      "description": "Phone number of the requester. If no contact exists with this phone number in FreshDesk, it will be added as a new contact. If the phone number is set and the email address is not, then the name attribute is mandatory",
       "order": 4
     },
     "priority": {
@@ -203,7 +203,7 @@ class CreateTicketInput(insightconnect_plugin_runtime.Input):
     "twitterId": {
       "type": "string",
       "title": "Twitter ID",
-      "description": "Twitter handle of the requester. If no contact exists with this handle in Freshdesk, it will be added as a new contact",
+      "description": "Twitter handle of the requester. If no contact exists with this handle in FreshDesk, it will be added as a new contact",
       "order": 5
     },
     "type": {
@@ -215,7 +215,7 @@ class CreateTicketInput(insightconnect_plugin_runtime.Input):
     "uniqueExternalId": {
       "type": "string",
       "title": "Unique External ID",
-      "description": "External ID of the requester. If no contact exists with this external ID in Freshdesk, they will be added as a new contact",
+      "description": "External ID of the requester. If no contact exists with this external ID in FreshDesk, they will be added as a new contact",
       "order": 6
     }
   },
