@@ -322,6 +322,12 @@ types:
       type: integer
       required: false
       example: 103021764889
+    responderId:
+      title: Responder ID
+      description: ID of the agent to whom the ticket has been assigned
+      type: integer
+      required: false
+      example: 103021764889
     email:
       title: Email
       description: Email address of the requester
@@ -375,16 +381,40 @@ types:
       description: HTML content of the ticket
       type: string
       required: false
+      example: <div>My new ticket</div>
+    description_text:
+      title: Description Text
+      description: Content of the ticket in plain text
+      type: string
+      required: false
       example: My new ticket
     attachments:
       title: Attachments
       description: Ticket attachments. The total size of these attachments cannot exceed 20MB
       type: "[]attachmentOutput"
       required: false
-      example: []
+      example: '[]'
     ccEmails:
       title: CC Emails
       description: Email address added in the 'CC' field of the incoming ticket email
+      type: "[]string"
+      required: false
+      example: '["user@example.com"]'
+    toEmails:
+      title: To Emails
+      description: Email addresses to which the ticket was originally sent
+      type: "[]string"
+      required: false
+      example: '["user@example.com"]'
+    replyCcEmails:
+      title: Reply CC Emails
+      description: Email address added while replying to a ticket
+      type: "[]string"
+      required: false
+      example: '["user@example.com"]'
+    fwdEmails:
+      title: Forward Emails
+      description: Email address added while forwarding a ticket
       type: "[]string"
       required: false
       example: '["user@example.com"]'
@@ -412,6 +442,24 @@ types:
       type: date
       required: false
       example: 2023-12-21T12:56:15+05:00
+    createdAt:
+      title: Created At
+      description: Ticket creation timestamp
+      type: date
+      required: false
+      example: 2023-12-21T12:56:15+05:00
+    updatedAt:
+      title: Updated At
+      description: Ticket updated timestamp
+      type: date
+      required: false
+      example: 2023-12-21T12:56:15+05:00
+    frEscalated:
+      title: First Response Escalated
+      description: Set to true if the ticket has been escalated as the result of first response time being breached
+      type: boolean
+      required: false
+      example: true
     groupId:
       title: Group ID
       description: ID of the group to which the ticket has been assigned
@@ -454,15 +502,21 @@ types:
       type: integer
       required: false
       example: 103000096140
-    relatedTicketIds:
-      title: Related Ticket IDs
-      description: List of Ticket IDs which needs to be linked to the Tracker being created
+    associatedTicketsList:
+      title: Associated Tickets List
+      description: List of Ticket IDs which are linked to this ticket
       type: "[]integer"
       required: false
       example: '[21, 43]'
+    associationType:
+      title: Association Type
+      description: Association type, where 1 - Parent, 2 - Child, 3 - Tracker, 4 - Related
+      type: integer
+      required: false
+      example: 3
     parentId:
       title: Parent ID
-      description: ID of the parent ticket under which the child ticket needs to be created. List of Ticket IDs which needs to be linked to the Tracker being created
+      description: ID of the parent ticket under which the child ticket was created
       type: integer
       required: false
       example: 12
@@ -471,25 +525,43 @@ types:
       description: Ticket stats
       type: stats
       required: false
-      example: {}
+      example: { }
     company:
       title: Company
       description: Company details
       type: company
       required: false
-      example: {}
+      example: { }
     requester:
       title: Requester
       description: Requester details
       type: requester
       required: false
-      example: {}
+      example: { }
     conversations:
       title: Conversations
       description: Ticket conversations
       type: '[]conversation'
       required: false
-      example: []
+      example: [ ]
+    spam:
+      title: Spam
+      description: Set to true if the ticket has been marked as spam
+      type: boolean
+      required: false
+      example: false
+    deleted:
+      title: Deleted
+      description: Set to true if the ticket has been deleted/trashed. Deleted tickets will not be displayed in any views except the `deleted` filter
+      type: boolean
+      required: false
+      example: false
+    isEscalated:
+      title: Is Escalated
+      description: Set to true if the ticket has been escalated for any reason
+      type: boolean
+      required: false
+      example: false
   ticketsFilter:
     requesterId:
       title: Requester ID

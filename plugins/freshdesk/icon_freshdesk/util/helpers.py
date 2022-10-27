@@ -26,7 +26,13 @@ def create_attachments_form(attachments: list) -> list:
     form_data = []
     for attachment in attachments:
         name = attachment.get(Attachment.NAME)
-        content = base64.b64decode(attachment.get(Attachment.CONTENT))
+        try:
+            content = base64.b64decode(attachment.get(Attachment.CONTENT))
+        except Exception as error:
+            raise PluginException(
+                cause="Byte conversion issue.",
+                assistance="Please provide valid attachment content and try again. If the issue persists, please contact support.",
+            )
         if not name or not content:
             continue
         mime_type = magic.from_buffer(content, mime=True)

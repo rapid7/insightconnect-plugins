@@ -642,36 +642,48 @@ _This plugin does not contain any triggers._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
+|Associated Tickets List|[]integer|False|List of Ticket IDs which are linked to this ticket|
+|Association Type|integer|False|Association type, where 1 - Parent, 2 - Child, 3 - Tracker, 4 - Related|
 |Attachments|[]attachmentOutput|False|Ticket attachments. The total size of these attachments cannot exceed 20MB|
 |CC Emails|[]string|False|Email address added in the 'CC' field of the incoming ticket email|
 |Company|company|False|Company details|
 |Company ID|integer|False|Company ID of the requester|
 |Conversations|[]conversation|False|Ticket conversations|
+|Created At|date|False|Ticket creation timestamp|
 |Custom Fields|object|False|Key value pairs containing the names and values of custom fields. Read more at https://support.freshdesk.com/support/solutions/articles/216548|
+|Deleted|boolean|False|Set to true if the ticket has been deleted/trashed. Deleted tickets will not be displayed in any views except the "deleted" filter|
 |Description|string|False|HTML content of the ticket|
+|Description Text|string|False|Content of the ticket in plain text|
 |Due By|string|False|Timestamp that denotes when the ticket is due to be resolved|
 |Email|string|False|Email address of the requester|
 |Email Config ID|integer|False|ID of email config which is used for this ticket|
 |First Response Due By|date|False|Timestamp that denotes when the first response is due|
+|First Response Escalated|boolean|False|Set to true if the ticket has been escalated as the result of first response time being breached|
+|Forward Emails|[]string|False|Email address added while forwarding a ticket|
 |Group ID|integer|False|ID of the group to which the ticket has been assigned|
 |Internal Agent ID|integer|False|ID of the internal agent which the ticket should be assigned with|
 |Internal Group ID|integer|False|ID of the internal group to which the ticket should be assigned with|
+|Is Escalated|boolean|False|Set to true if the ticket has been escalated for any reason|
 |Name|string|False|Name of the requester|
-|Parent ID|integer|False|ID of the parent ticket under which the child ticket needs to be created|
+|Parent ID|integer|False|ID of the parent ticket under which the child ticket was created|
 |Phone|string|False|Phone number of the requester|
 |Priority|string|False|Priority of the ticket|
 |Product ID|integer|False|ID of the product to which the ticket is associated|
-|Related Ticket IDs|[]integer|False|List of Ticket IDs which needs to be linked to the Tracker being created|
+|Reply CC Emails|[]string|False|Email address added while replying to a ticket|
 |Requester|requester|False|Requester details|
 |Requester ID|integer|False|User ID of the requester|
+|Responder ID|integer|False|ID of the agent to whom the ticket has been assigned|
 |Source|string|False|The channel through which the ticket was created|
+|Spam|boolean|False|Set to true if the ticket has been marked as spam|
 |Stats|stats|False|Ticket stats|
 |Status|string|False|Status of the ticket|
-|Subject|string|False|Subject of the ticket. The default Value is null|
+|Subject|string|False|Subject of the ticket|
 |Tags|[]string|False|Tags that have been associated with the ticket|
-|Twitter ID|integer|False|Twitter handle of the requester|
+|To Emails|[]string|False|Email addresses to which the ticket was originally sent|
+|Twitter ID|string|False|Twitter handle of the requester|
 |Type|string|False|Helps categorize the ticket according to the different kinds of issues your support team deals with|
 |Unique External ID|string|False|External ID of the requester|
+|Updated At|date|False|Ticket updated timestamp|
 
 #### ticketsFilter
 
@@ -693,6 +705,8 @@ _This plugin does not contain any troubleshooting information._
 * 1.0.0 - Initial plugin - Actions: `Create Ticket`, `Update Ticket`, `Get TIckets`, `Get Ticket by ID`
 
 # Links
+
+* [FreshDesk](https://freshdesk.com/)
 
 ## References
 

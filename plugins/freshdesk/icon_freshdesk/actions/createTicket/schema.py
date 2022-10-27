@@ -639,6 +639,21 @@ class CreateTicketOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "ticket",
       "properties": {
+        "associatedTicketsList": {
+          "type": "array",
+          "title": "Associated Tickets List",
+          "description": "List of Ticket IDs which are linked to this ticket",
+          "items": {
+            "type": "integer"
+          },
+          "order": 33
+        },
+        "associationType": {
+          "type": "integer",
+          "title": "Association Type",
+          "description": "Association type, where 1 - Parent, 2 - Child, 3 - Tracker, 4 - Related",
+          "order": 34
+        },
         "attachments": {
           "type": "array",
           "title": "Attachments",
@@ -646,7 +661,7 @@ class CreateTicketOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "$ref": "#/definitions/attachmentOutput"
           },
-          "order": 12
+          "order": 14
         },
         "ccEmails": {
           "type": "array",
@@ -655,19 +670,19 @@ class CreateTicketOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "string"
           },
-          "order": 13
+          "order": 15
         },
         "company": {
           "$ref": "#/definitions/company",
           "title": "Company",
           "description": "Company details",
-          "order": 28
+          "order": 37
         },
         "companyId": {
           "type": "integer",
           "title": "Company ID",
           "description": "Company ID of the requester",
-          "order": 22
+          "order": 30
         },
         "conversations": {
           "type": "array",
@@ -676,37 +691,57 @@ class CreateTicketOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "$ref": "#/definitions/conversation"
           },
-          "order": 30
+          "order": 39
+        },
+        "createdAt": {
+          "type": "string",
+          "title": "Created At",
+          "displayType": "date",
+          "description": "Ticket creation timestamp",
+          "format": "date-time",
+          "order": 23
         },
         "customFields": {
           "type": "object",
           "title": "Custom Fields",
           "description": "Key value pairs containing the names and values of custom fields. Read more at https://support.freshdesk.com/support/solutions/articles/216548",
-          "order": 14
+          "order": 19
+        },
+        "deleted": {
+          "type": "boolean",
+          "title": "Deleted",
+          "description": "Set to true if the ticket has been deleted/trashed. Deleted tickets will not be displayed in any views except the `deleted` filter",
+          "order": 41
         },
         "description": {
           "type": "string",
           "title": "Description",
           "description": "HTML content of the ticket",
-          "order": 11
+          "order": 12
+        },
+        "description_text": {
+          "type": "string",
+          "title": "Description Text",
+          "description": "Content of the ticket in plain text",
+          "order": 13
         },
         "dueBy": {
           "type": "string",
           "title": "Due By",
           "description": "Timestamp that denotes when the ticket is due to be resolved",
-          "order": 15
+          "order": 20
         },
         "email": {
           "type": "string",
           "title": "Email",
           "description": "Email address of the requester",
-          "order": 3
+          "order": 4
         },
         "emailConfigId": {
           "type": "integer",
           "title": "Email Config ID",
           "description": "ID of email config which is used for this ticket",
-          "order": 16
+          "order": 21
         },
         "frDueBy": {
           "type": "string",
@@ -714,25 +749,46 @@ class CreateTicketOutput(insightconnect_plugin_runtime.Output):
           "displayType": "date",
           "description": "Timestamp that denotes when the first response is due",
           "format": "date-time",
-          "order": 17
+          "order": 22
+        },
+        "frEscalated": {
+          "type": "boolean",
+          "title": "First Response Escalated",
+          "description": "Set to true if the ticket has been escalated as the result of first response time being breached",
+          "order": 25
+        },
+        "fwdEmails": {
+          "type": "array",
+          "title": "Forward Emails",
+          "description": "Email address added while forwarding a ticket",
+          "items": {
+            "type": "string"
+          },
+          "order": 18
         },
         "groupId": {
           "type": "integer",
           "title": "Group ID",
           "description": "ID of the group to which the ticket has been assigned",
-          "order": 18
+          "order": 26
         },
         "internalAgentId": {
           "type": "integer",
           "title": "Internal Agent ID",
           "description": "ID of the internal agent which the ticket should be assigned with",
-          "order": 23
+          "order": 31
         },
         "internalGroupId": {
           "type": "integer",
           "title": "Internal Group ID",
           "description": "ID of the internal group to which the ticket should be assigned with",
-          "order": 24
+          "order": 32
+        },
+        "isEscalated": {
+          "type": "boolean",
+          "title": "Is Escalated",
+          "description": "Set to true if the ticket has been escalated for any reason",
+          "order": 42
         },
         "name": {
           "type": "string",
@@ -743,41 +799,41 @@ class CreateTicketOutput(insightconnect_plugin_runtime.Output):
         "parentId": {
           "type": "integer",
           "title": "Parent ID",
-          "description": "ID of the parent ticket under which the child ticket needs to be created. List of Ticket IDs which needs to be linked to the Tracker being created",
-          "order": 26
+          "description": "ID of the parent ticket under which the child ticket was created",
+          "order": 35
         },
         "phone": {
           "type": "string",
           "title": "Phone",
           "description": "Phone number of the requester",
-          "order": 4
+          "order": 5
         },
         "priority": {
           "type": "string",
           "title": "Priority",
           "description": "Priority of the ticket",
-          "order": 10
+          "order": 11
         },
         "productId": {
           "type": "integer",
           "title": "Product ID",
           "description": "ID of the product to which the ticket is associated",
-          "order": 19
+          "order": 27
         },
-        "relatedTicketIds": {
+        "replyCcEmails": {
           "type": "array",
-          "title": "Related Ticket IDs",
-          "description": "List of Ticket IDs which needs to be linked to the Tracker being created",
+          "title": "Reply CC Emails",
+          "description": "Email address added while replying to a ticket",
           "items": {
-            "type": "integer"
+            "type": "string"
           },
-          "order": 25
+          "order": 17
         },
         "requester": {
           "$ref": "#/definitions/requester",
           "title": "Requester",
           "description": "Requester details",
-          "order": 29
+          "order": 38
         },
         "requesterId": {
           "type": "integer",
@@ -785,29 +841,41 @@ class CreateTicketOutput(insightconnect_plugin_runtime.Output):
           "description": "User ID of the requester",
           "order": 2
         },
+        "responderId": {
+          "type": "integer",
+          "title": "Responder ID",
+          "description": "ID of the agent to whom the ticket has been assigned",
+          "order": 3
+        },
         "source": {
           "type": "string",
           "title": "Source",
           "description": "The channel through which the ticket was created",
-          "order": 20
+          "order": 28
+        },
+        "spam": {
+          "type": "boolean",
+          "title": "Spam",
+          "description": "Set to true if the ticket has been marked as spam",
+          "order": 40
         },
         "stats": {
           "$ref": "#/definitions/stats",
           "title": "Stats",
           "description": "Ticket stats",
-          "order": 27
+          "order": 36
         },
         "status": {
           "type": "string",
           "title": "Status",
           "description": "Status of the ticket",
-          "order": 9
+          "order": 10
         },
         "subject": {
           "type": "string",
           "title": "Subject",
           "description": "Subject of the ticket",
-          "order": 7
+          "order": 8
         },
         "tags": {
           "type": "array",
@@ -816,25 +884,42 @@ class CreateTicketOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "string"
           },
-          "order": 21
+          "order": 29
+        },
+        "toEmails": {
+          "type": "array",
+          "title": "To Emails",
+          "description": "Email addresses to which the ticket was originally sent",
+          "items": {
+            "type": "string"
+          },
+          "order": 16
         },
         "twitterId": {
           "type": "string",
           "title": "Twitter ID",
           "description": "Twitter handle of the requester",
-          "order": 5
+          "order": 6
         },
         "type": {
           "type": "string",
           "title": "Type",
           "description": "Helps categorize the ticket according to the different kinds of issues your support team deals with",
-          "order": 8
+          "order": 9
         },
         "uniqueExternalId": {
           "type": "string",
           "title": "Unique External ID",
           "description": "External ID of the requester",
-          "order": 6
+          "order": 7
+        },
+        "updatedAt": {
+          "type": "string",
+          "title": "Updated At",
+          "displayType": "date",
+          "description": "Ticket updated timestamp",
+          "format": "date-time",
+          "order": 24
         }
       },
       "definitions": {
