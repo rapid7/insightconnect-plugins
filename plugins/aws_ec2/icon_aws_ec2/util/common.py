@@ -6,6 +6,8 @@ import datetime
 import re
 import requests
 
+from typing import Dict, Callable
+
 from insightconnect_plugin_runtime.action import Action
 from insightconnect_plugin_runtime.exceptions import PluginException
 
@@ -32,20 +34,7 @@ class AWSAction(Action):
         self.aws_command = aws_command
         self.pagination_helper = pagination_helper
 
-    def handle_rest_call(self, client_function, params):
-
-        helper = self.connection.helper
-
-        # Format the input parameters for the botocall call
-        self.logger.error(params)
-        try:
-            params = helper.format_input(params)
-        except Exception:
-            self.logger.error("Unable to format input parameters")
-            raise PluginException(cause="Unable to format input")
-
-        # Execute the botocore function
-        self.logger.info(params)
+    def _handle_botocore_function(self, client_function: Callable, params: Dict) -> Dict:
         try:
             response = client_function(**params)
         except botocore.exceptions.EndpointConnectionError:
@@ -74,7 +63,9 @@ class AWSAction(Action):
         except Exception:
             self.logger.error("Error occurred when invoking the aws-cli.")
             raise PluginException(cause="Error occurred when invoking the aws-cli.")
-        # Format the output parameters for the komand action output schema
+        return response
+
+    def _handle_format_output(self, response: Dict, helper) -> Dict:
         try:
             if "properties" in self.output.schema:
                 response = helper.format_output(self.output.schema, response)
@@ -83,6 +74,25 @@ class AWSAction(Action):
         except Exception:
             self.logger.error("Unable to format output parameters")
             raise PluginException(cause="Error occurred when invoking the aws-cli.")
+        return response
+
+    def handle_rest_call(self, client_function: Callable, params: Dict) -> Dict:
+        helper = self.connection.helper
+
+        # Format the input parameters for the botocall call
+        self.logger.info(params)
+        try:
+            params = helper.format_input(params)
+        except Exception:
+            self.logger.error("Unable to format input parameters")
+            raise PluginException(cause="Unable to format input")
+
+        # Execute the botocore function
+        self.logger.info(params)
+        response = self._handle_botocore_function(client_function, params)
+
+        # Format the output parameters for the komand action output schema
+        response = self._handle_format_output(response, helper)
         return response
 
     def run(self, params={}):
@@ -99,6 +109,9 @@ class AWSAction(Action):
         :param params: The input parameters, which adhere to the input schema
         :return: the output parameters, which adhere to the output schema
         """
+        # Try to assume role...
+        self.connection.try_to_assume_role(params)
+
         client = self.connection.client
         # There exists a function for each command in the service client
         # object.
@@ -225,7 +238,7 @@ class ActionHelper:
         empty_output["response_metadata"] = {"request_id": "", "http_status_code": 0}
         return empty_output
 
-    def fix_output_types(self, output):
+    def fix_output_types(self, output):  # noqa: C901
         """
         Formats the output of a botocore call to be correct types.
 
