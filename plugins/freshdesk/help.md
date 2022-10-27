@@ -221,17 +221,14 @@ Example output:
 {
   "ticket": {
     "ccEmails": [
-      "sample_email@domain.com",
-      "user_email@domain.com"
+      "user@example.com"
     ],
     "fwdEmails": [],
     "replyCcEmails": [
-      "sample_email@domain.com",
-      "user_email@domain.com"
+      "user@example.com"
     ],
     "ticketCcEmails": [
-      "sample_email@domain.com",
-      "user_email@domain.com"
+      "user@example.com"
     ],
     "frEscalated": false,
     "spam": false,
