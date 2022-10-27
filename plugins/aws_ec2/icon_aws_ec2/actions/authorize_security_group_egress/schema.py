@@ -10,10 +10,12 @@ class Component:
 class Input:
     CIDR_IP = "cidr_ip"
     DRY_RUN = "dry_run"
+    EXTERNAL_ID = "external_id"
     FROM_PORT = "from_port"
     GROUP_ID = "group_id"
     IP_PERMISSIONS = "ip_permissions"
     IP_PROTOCOL = "ip_protocol"
+    ROLE_ARN = "role_arn"
     SOURCE_SECURITY_GROUP_NAME = "source_security_group_name"
     SOURCE_SECURITY_GROUP_OWNER_ID = "source_security_group_owner_id"
     TO_PORT = "to_port"
@@ -41,6 +43,12 @@ class AuthorizeSecurityGroupEgressInput(insightconnect_plugin_runtime.Input):
       "description": "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response",
       "order": 1
     },
+    "external_id": {
+      "type": "string",
+      "title": "External ID",
+      "description": "External ID given during role creation",
+      "order": 11
+    },
     "from_port": {
       "type": "integer",
       "title": "From Port",
@@ -67,6 +75,12 @@ class AuthorizeSecurityGroupEgressInput(insightconnect_plugin_runtime.Input):
       "title": "IP Protocol",
       "description": "Not supported",
       "order": 6
+    },
+    "role_arn": {
+      "type": "string",
+      "title": "Role ARN",
+      "description": "AWS IAM role ARN to assume",
+      "order": 10
     },
     "source_security_group_name": {
       "type": "string",

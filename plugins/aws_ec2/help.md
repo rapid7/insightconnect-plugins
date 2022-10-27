@@ -61,6 +61,8 @@ Example input:
 |source_security_group_name|string|None|False|Not supported|None|launch-wizard-1|
 |source_security_group_owner_id|string|None|False|Not supported|None|otheraccountgroup|
 |to_port|integer|None|False|Not supported|None|8900|
+|role_arn|string|None|False|AWS IAM role ARN to assume|None|arn:aws:iam::123456781111:role/ExampleRole|
+|external_id|string|None|False|External ID given during role creation|None|exampleexternalid|
 
 Example input:
 
@@ -114,6 +116,8 @@ Adds one or more ingress rules to a security group. See [http://docs.aws.amazon.
 |source_security_group_name|string|None|False|[EC2-Classic, default VPC] The name of the source security group|None|group_name|
 |source_security_group_owner_id|string|None|False|[EC2-Classic] The AWS account ID for the source security group, if the source security group is in a different account|None|otheraccount|
 |to_port|integer|None|False|The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code number|None|8900|
+|role_arn|string|None|False|AWS IAM role ARN to assume|None|arn:aws:iam::123456781111:role/ExampleRole|
+|external_id|string|None|False|External ID given during role creation|None|exampleexternalid|
 
 Example input:
 
@@ -161,6 +165,8 @@ Describes one or more of your instances. See [http://docs.aws.amazon.com/AWSEC2/
 |dry_run|boolean|None|False|Checks whether you have the required permissions for the action, without actually making the request, and provides an error response|None|False|
 |filters|[]filter|None|False|One or more filters|None|{'name': 'instance-type', 'values': ['t2.micro', 't3.micro']}|
 |instance_ids|[]string|None|False|One or more instance IDs|None|["i-0dd117dc6df90be2e"]|
+|role_arn|string|None|False|AWS IAM role ARN to assume|None|arn:aws:iam::123456781111:role/ExampleRole|
+|external_id|string|None|False|External ID given during role creation|None|exampleexternalid|
 
 Example input:
 
@@ -199,6 +205,8 @@ Describes one or more of your security groups. See [http://docs.aws.amazon.com/A
 |filters|[]filter|None|False|One or more filters|None|["{"name": "ip-permission.from-port", "values": [80]}"]|
 |group_ids|[]string|None|False|One or more security group IDs|None|["sg-123456"]|
 |group_names|[]string|None|False|[EC2-Classic and default VPC only] One or more security group names|None|["groupname"]|
+|role_arn|string|None|False|AWS IAM role ARN to assume|None|arn:aws:iam::123456781111:role/ExampleRole|
+|external_id|string|None|False|External ID given during role creation|None|exampleexternalid|
 
 Example input:
 
@@ -246,6 +254,8 @@ Example input:
 |source_security_group_name|string|None|False|Not supported|None|sourcegroup|
 |source_security_group_owner_id|string|None|False|Not supported|None|ownergroup|
 |to_port|integer|None|False|Not supported|None|9000|
+|role_arn|string|None|False|AWS IAM role ARN to assume|None|arn:aws:iam::123456781111:role/ExampleRole|
+|external_id|string|None|False|External ID given during role creation|None|exampleexternalid|
 
 Example input:
 
@@ -299,6 +309,8 @@ Removes one or more ingress rules from a security group. See [http://docs.aws.am
 |source_security_group_name|string|None|False|[EC2-Classic, default VPC] The name of the source security group|None|name|
 |source_security_group_owner_id|string|None|False|[EC2-Classic] The AWS account ID of the source security group, if the source security group is in a different account|None|ownername|
 |to_port|integer|None|False|The end of port range for the TCP and UDP protocols, or an ICMP code number|None|9000|
+|role_arn|string|None|False|AWS IAM role ARN to assume|None|arn:aws:iam::123456781111:role/ExampleRole|
+|external_id|string|None|False|External ID given during role creation|None|exampleexternalid|
 
 Example input:
 
@@ -346,6 +358,8 @@ Example input:
 |group_id|string|None|False|The ID of the security group|None|sg-123456|
 |group_name|string|None|False|[Default VPC] The name of the security group|None|groupname|
 |ip_permissions|[]ip_permission|None|True|The IP permissions for the security group rule|None|["{ "from_port": 8080, "ip_protocol": "tcp", "ip_ranges" : [{ "cidr_ip": "10.20.0.0/27", "description": "Blah" }], "to_port": 8090}"]|
+|role_arn|string|None|False|AWS IAM role ARN to assume|None|arn:aws:iam::123456781111:role/ExampleRole|
+|external_id|string|None|False|External ID given during role creation|None|exampleexternalid|
 
 Example input:
 
@@ -389,6 +403,8 @@ Updates the description of an ingress (inbound) security group rule. See [http:/
 |group_id|string|None|False|The ID of the security group|None|sg-123456|
 |group_name|string|None|False|[EC2-Classic, default VPC] The name of the security group|None|groupname|
 |ip_permissions|[]ip_permission|None|True|The IP permissions for the security group rule|None|["{ "from_port": 8080, "ip_protocol": "tcp", "ip_ranges" : [{ "cidr_ip": "10.20.0.0/27", "description": "Blah" }], "to_port": 8090}"]|
+|role_arn|string|None|False|AWS IAM role ARN to assume|None|arn:aws:iam::123456781111:role/ExampleRole|
+|external_id|string|None|False|External ID given during role creation|None|exampleexternalid|
 
 Example input:
 
@@ -427,6 +443,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.2.0 - Updated Connect and Action inputs to include Role ARN and External ID to provide support for AWS Assume Role functionality at both an Action and a Connection level
 * 1.1.0 - Update plugin runtime to InsightConnect 
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
