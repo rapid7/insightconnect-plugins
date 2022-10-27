@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get tickets list"
+    DESCRIPTION = "Get tickets list. In `filterBy` input you can use only one of `requester` type inputs - `Requester ID`, `Requester Email` or `Requester Unique External ID`"
 
 
 class Input:
@@ -623,7 +623,7 @@ class GetTicketsOutput(insightconnect_plugin_runtime.Output):
         "parentId": {
           "type": "integer",
           "title": "Parent ID",
-          "description": "ID of the parent ticket under which the child ticket needs to be created",
+          "description": "ID of the parent ticket under which the child ticket needs to be created. List of Ticket IDs which needs to be linked to the Tracker being created",
           "order": 26
         },
         "phone": {

@@ -99,7 +99,7 @@ class CreateTicketInput(insightconnect_plugin_runtime.Input):
     "emailConfigId": {
       "type": "integer",
       "title": "Email Config ID",
-      "description": "ID of email config which is used for this ticket. (i.e., support@yourcompany.com/sales@yourcompany.com). If productId is given and emailConfigId is not given, product's primary emailConfigId will be set",
+      "description": "ID of email config which is used for this ticket. If productId is given and emailConfigId is not given, product's primary emailConfigId will be set",
       "order": 16
     },
     "frDueBy": {
@@ -119,13 +119,13 @@ class CreateTicketInput(insightconnect_plugin_runtime.Input):
     "internalAgentId": {
       "type": "integer",
       "title": "Internal Agent ID",
-      "description": "ID of the internal agent which the ticket should be assigned with",
+      "description": "ID of the internal agent which the ticket should be assigned with. To use this parameter you have to enable `Shared ownership` in Admin \\u003e Advanced Ticketing menu",
       "order": 23
     },
     "internalGroupId": {
       "type": "integer",
       "title": "Internal Group ID",
-      "description": "ID of the internal group to which the ticket should be assigned with",
+      "description": "ID of the internal group to which the ticket should be assigned with. To use this parameter you have to enable `Shared ownership` in Admin \\u003e Advanced Ticketing menu",
       "order": 24
     },
     "name": {
@@ -137,7 +137,7 @@ class CreateTicketInput(insightconnect_plugin_runtime.Input):
     "parentId": {
       "type": "integer",
       "title": "Parent ID",
-      "description": "ID of the parent ticket under which the child ticket needs to be created",
+      "description": "ID of the parent ticket under which the child ticket needs to be created. To use this parameter you have to enable `Parent-child ticketing` in Admin \\u003e Advanced Ticketing menu",
       "order": 26
     },
     "phone": {
@@ -161,7 +161,7 @@ class CreateTicketInput(insightconnect_plugin_runtime.Input):
     "relatedTicketIds": {
       "type": "array",
       "title": "Related Ticket IDs",
-      "description": "List of Ticket IDs which needs to be linked to the Tracker being created",
+      "description": "List of Ticket IDs which needs to be linked to the Tracker being created. To use this parameter you have to enable `Linked tickets` in Admin \\u003e Advanced Ticketing menu",
       "items": {
         "type": "integer"
       },
@@ -743,7 +743,7 @@ class CreateTicketOutput(insightconnect_plugin_runtime.Output):
         "parentId": {
           "type": "integer",
           "title": "Parent ID",
-          "description": "ID of the parent ticket under which the child ticket needs to be created",
+          "description": "ID of the parent ticket under which the child ticket needs to be created. List of Ticket IDs which needs to be linked to the Tracker being created",
           "order": 26
         },
         "phone": {

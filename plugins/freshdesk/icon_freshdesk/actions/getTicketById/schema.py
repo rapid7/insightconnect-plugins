@@ -539,7 +539,7 @@ class GetTicketByIdOutput(insightconnect_plugin_runtime.Output):
         "parentId": {
           "type": "integer",
           "title": "Parent ID",
-          "description": "ID of the parent ticket under which the child ticket needs to be created",
+          "description": "ID of the parent ticket under which the child ticket needs to be created. List of Ticket IDs which needs to be linked to the Tracker being created",
           "order": 26
         },
         "phone": {

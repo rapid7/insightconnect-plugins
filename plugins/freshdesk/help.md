@@ -51,23 +51,23 @@ This action is used to create a FreshDesk ticket. At least one of those paramete
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |attachments|[]attachmentInput|None|False|Ticket attachments. The total size of these attachments cannot exceed 20MB|None|[{"name": "new_file.png", "content": "aGVsbG8gd29ybGQ="}]|
-|ccEmails|[]string|None|False|Email address added in the 'CC' field of the incoming ticket email|None|["user@example.com", "user3@example.com"]|
+|ccEmails|[]string|None|False|Email address added in the 'CC' field of the incoming ticket email|None|["user@example.com"]|
 |companyId|integer|None|False|Company ID of the requester. This attribute can only be set if the Multiple Companies feature is enabled (Estate plan and above)|None|103000179654|
 |customFields|object|None|False|Key value pairs containing the names and values of custom fields. Read more at https://support.freshdesk.com/support/solutions/articles/216548|None|{"my_key": "my_value"}|
 |description|string|None|True|HTML content of the ticket|None|My new ticket|
 |dueBy|date|None|False|Timestamp that denotes when the ticket is due to be resolved|None|2023-12-24 12:56:15+05:00|
-|emailConfigId|integer|None|False|ID of email config which is used for this ticket. (i.e., support@yourcompany.com/sales@yourcompany.com). If productId is given and emailConfigId is not given, product's primary emailConfigId will be set|None|103000032123|
+|emailConfigId|integer|None|False|ID of email config which is used for this ticket. If productId is given and emailConfigId is not given, product's primary emailConfigId will be set|None|103000032123|
 |frDueBy|date|None|False|Timestamp that denotes when the first response is due|None|2023-12-21 12:56:15+05:00|
 |groupId|integer|None|False|ID of the group to which the ticket has been assigned. The default value is the ID of the group that is associated with the given emailConfigId|None|103000085325|
-|internalAgentId|integer|None|False|ID of the internal agent which the ticket should be assigned with|None|103018312012|
-|internalGroupId|integer|None|False|ID of the internal group to which the ticket should be assigned with|None|103000096140|
+|internalAgentId|integer|None|False|ID of the internal agent which the ticket should be assigned with. To use this parameter you have to enable `Shared ownership` in Admin > Advanced Ticketing menu|None|103018312012|
+|internalGroupId|integer|None|False|ID of the internal group to which the ticket should be assigned with. To use this parameter you have to enable `Shared ownership` in Admin > Advanced Ticketing menu|None|103000096140|
 |name|string|None|False|Name of the requester|None|Example Requester|
-|parentId|integer|None|False|ID of the parent ticket under which the child ticket needs to be created|None|11|
+|parentId|integer|None|False|ID of the parent ticket under which the child ticket needs to be created. To use this parameter you have to enable `Parent-child ticketing` in Admin > Advanced Ticketing menu|None|11|
 |phone|string|None|False|Phone number of the requester. If no contact exists with this phone number in FreshDesk, it will be added as a new contact. If the phone number is set and the email address is not, then the name attribute is mandatory|None|611800861902|
 |email|string|None|False|Email address of the requester. If no contact exists with this email address in FreshDesk, it will be added as a new contact|None|user@example.com|
 |priority|string|None|True|Priority of the ticket|None|High|
 |productId|integer|None|False|ID of the product to which the ticket is associated. It will be ignored if the emailConfigId attribute is set in the request|None|103000000638|
-|relatedTicketIds|[]integer|None|False|List of Ticket IDs which needs to be linked to the Tracker being created|None|[21, 43]|
+|relatedTicketIds|[]integer|None|False|List of Ticket IDs which needs to be linked to the Tracker being created. To use this parameter you have to enable `Linked tickets` in Admin > Advanced Ticketing menu|None|[21, 43]|
 |requesterId|integer|None|False|User ID of the requester. For existing contacts, the requesterId can be passed instead of the requester's email|None|103021764889|
 |source|string|None|False|The channel through which the ticket was created|None|Portal|
 |status|string|None|True|Status of the ticket|None|Open|
@@ -287,7 +287,7 @@ Example output:
 
 #### Get Tickets List
 
-This action is used to get tickets list.
+This action is used to get tickets list. In `filterBy` input you can use only one of `requester` type inputs - `Requester ID`, `Requester Email` or `Requester Unique External ID`
 
 ##### Input
 
@@ -419,16 +419,16 @@ This action is used to update a FreshDesk ticket.
 |description|string|None|False|HTML content of the ticket|None|My new ticket|
 |email|string|None|False|Email address of the requester. If no contact exists with this email address in FreshDesk, it will be added as a new contact|None|user@example.com|
 |dueBy|date|None|False|Timestamp that denotes when the ticket is due to be resolved|None|2023-12-24 12:56:15+05:00|
-|emailConfigId|integer|None|False|ID of email config which is used for this ticket. (i.e., support@yourcompany.com/sales@yourcompany.com). If productId is given and emailConfigId is not given, product's primary emailConfigId will be set|None|103000032123|
+|emailConfigId|integer|None|False|ID of email config which is used for this ticket. If productId is given and emailConfigId is not given, product's primary emailConfigId will be set|None|103000032123|
 |frDueBy|date|None|False|Timestamp that denotes when the first response is due|None|2023-12-21 12:56:15+05:00|
 |groupId|integer|None|False|ID of the group to which the ticket has been assigned. The default value is the ID of the group that is associated with the given emailConfigId|None|103000085325|
-|internalAgentId|integer|None|False|ID of the internal agent which the ticket should be assigned with|None|103018312012|
-|internalGroupId|integer|None|False|ID of the internal group to which the ticket should be assigned with|None|103000096140|
+|internalAgentId|integer|None|False|ID of the internal agent which the ticket should be assigned with. To use this parameter you have to enable `Shared ownership` in Admin > Advanced Ticketing menu|None|103018312012|
+|internalGroupId|integer|None|False|ID of the internal group to which the ticket should be assigned with. To use this parameter you have to enable `Shared ownership` in Admin > Advanced Ticketing menu|None|103000096140|
 |name|string|None|False|Name of the requester|None|Example Requester|
 |phone|string|None|False|Phone number of the requester. If no contact exists with this phone number in FreshDesk, it will be added as a new contact. If the phone number is set and the email address is not, then the name attribute is mandatory|None|611800861902|
 |priority|string|None|False|Priority of the ticket|None|High|
 |productId|integer|None|False|ID of the product to which the ticket is associated. It will be ignored if the emailConfigId attribute is set in the request|None|103000000638|
-|relatedTicketIds|[]integer|None|False|List of Ticket IDs which needs to be linked to the Tracker being created|None|[21, 43]|
+|relatedTicketIds|[]integer|None|False|List of Ticket IDs which needs to be linked to the Tracker being created. To use this parameter you have to enable `Linked tickets` in Admin > Advanced Ticketing menu|None|[21, 43]|
 |requesterId|integer|None|False|User ID of the requester. For existing contacts, the requesterId can be passed instead of the requester's email|None|103021764889|
 |source|string|None|False|The channel through which the ticket was created|None|Portal|
 |status|string|None|False|Status of the ticket|None|Open|
@@ -489,6 +489,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|------|
 |ticket|ticket|True|Ticket details|{}|
+
 Example output:
 
 ```

@@ -387,7 +387,7 @@ types:
       description: Email address added in the 'CC' field of the incoming ticket email
       type: "[]string"
       required: false
-      example: sample_email@domain.com', 'user_email@domain.com']
+      example: '["user@example.com"]'
     customFields:
       title: Custom Fields
       description: Key value pairs containing the names and values of custom fields. Read more at https://support.freshdesk.com/support/solutions/articles/216548
@@ -462,7 +462,7 @@ types:
       example: '[21, 43]'
     parentId:
       title: Parent ID
-      description: ID of the parent ticket under which the child ticket needs to be created
+      description: ID of the parent ticket under which the child ticket needs to be created. List of Ticket IDs which needs to be linked to the Tracker being created
       type: integer
       required: false
       example: 12
@@ -616,7 +616,7 @@ actions:
         description: Email address added in the 'CC' field of the incoming ticket email
         type: "[]string"
         required: false
-        example: '["user@example.com", "user3@example.com"]'
+        example: '["user@example.com"]'
       customFields:
         title: Custom Fields
         description: Key value pairs containing the names and values of custom fields. Read more at https://support.freshdesk.com/support/solutions/articles/216548
@@ -631,7 +631,7 @@ actions:
         example: 2023-12-24T12:56:15+05:00
       emailConfigId:
         title: Email Config ID
-        description: ID of email config which is used for this ticket. (i.e., support@yourcompany.com/sales@yourcompany.com). If productId is given and emailConfigId is not given, product's primary emailConfigId will be set
+        description: ID of email config which is used for this ticket. If productId is given and emailConfigId is not given, product's primary emailConfigId will be set
         type: integer
         required: false
         example: 103000032123
@@ -673,25 +673,25 @@ actions:
         example: 103000179654
       internalAgentId:
         title: Internal Agent ID
-        description: ID of the internal agent which the ticket should be assigned with
+        description: ID of the internal agent which the ticket should be assigned with. To use this parameter you have to enable `Shared ownership` in Admin > Advanced Ticketing menu
         type: integer
         required: false
         example: 103018312012
       internalGroupId:
         title: Internal Group ID
-        description: ID of the internal group to which the ticket should be assigned with
+        description: ID of the internal group to which the ticket should be assigned with. To use this parameter you have to enable `Shared ownership` in Admin > Advanced Ticketing menu
         type: integer
         required: false
         example: 103000096140
       relatedTicketIds:
         title: Related Ticket IDs
-        description: List of Ticket IDs which needs to be linked to the Tracker being created
+        description: List of Ticket IDs which needs to be linked to the Tracker being created. To use this parameter you have to enable `Linked tickets` in Admin > Advanced Ticketing menu
         type: "[]integer"
         required: false
         example: '[21, 43]'
       parentId:
         title: Parent ID
-        description: ID of the parent ticket under which the child ticket needs to be created
+        description: ID of the parent ticket under which the child ticket needs to be created. To use this parameter you have to enable `Parent-child ticketing` in Admin > Advanced Ticketing menu
         type: integer
         required: false
         example: 11
@@ -798,7 +798,7 @@ actions:
         example: 2023-12-24T12:56:15+05:00
       emailConfigId:
         title: Email Config ID
-        description: ID of email config which is used for this ticket. (i.e., support@yourcompany.com/sales@yourcompany.com). If productId is given and emailConfigId is not given, product's primary emailConfigId will be set
+        description: ID of email config which is used for this ticket. If productId is given and emailConfigId is not given, product's primary emailConfigId will be set
         type: integer
         required: false
         example: 103000032123
@@ -840,19 +840,19 @@ actions:
         example: 103000179654
       internalAgentId:
         title: Internal Agent ID
-        description: ID of the internal agent which the ticket should be assigned with
+        description: ID of the internal agent which the ticket should be assigned with. To use this parameter you have to enable `Shared ownership` in Admin > Advanced Ticketing menu
         type: integer
         required: false
         example: 103018312012
       internalGroupId:
         title: Internal Group ID
-        description: ID of the internal group to which the ticket should be assigned with
+        description: ID of the internal group to which the ticket should be assigned with. To use this parameter you have to enable `Shared ownership` in Admin > Advanced Ticketing menu
         type: integer
         required: false
         example: 103000096140
       relatedTicketIds:
         title: Related Ticket IDs
-        description: List of Ticket IDs which needs to be linked to the Tracker being created
+        description: List of Ticket IDs which needs to be linked to the Tracker being created. To use this parameter you have to enable `Linked tickets` in Admin > Advanced Ticketing menu
         type: "[]integer"
         required: false
         example: '[21, 43]'
@@ -894,7 +894,7 @@ actions:
         example: '{}'
   getTickets:
     title: Get Tickets List
-    description: Get tickets list
+    description: Get tickets list. In `filterBy` input you can use only one of `requester` type inputs - `Requester ID`, `Requester Email` or `Requester Unique External ID`
     input:
       predefinedFilter:
         title: Predefined Filter
