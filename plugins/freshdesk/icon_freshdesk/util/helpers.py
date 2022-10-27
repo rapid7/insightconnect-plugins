@@ -32,6 +32,7 @@ def create_attachments_form(attachments: list) -> list:
             raise PluginException(
                 cause="Byte conversion issue.",
                 assistance="Please provide valid attachment content and try again. If the issue persists, please contact support.",
+                data=error,
             )
         if not name or not content:
             continue

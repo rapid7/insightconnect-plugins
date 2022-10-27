@@ -88,8 +88,7 @@ Example input:
     }
   ],
   "ccEmails": [
-    "user@example.com",
-    "user3@example.com"
+    "user@example.com"
   ],
   "customFields": {
     "my_key": "my_value"
@@ -134,17 +133,14 @@ Example output:
 {
   "ticket": {
     "ccEmails": [
-      "user@example.com",
-      "user3@example.com"
+      "user@example.com"
     ],
     "fwdEmails": [],
     "replyCcEmails": [
-      "user@example.com",
-      "user3@example.com"
+      "user@example.com"
     ],
     "ticketCcEmails": [
-      "user@example.com",
-      "user3@example.com"
+      "user@example.com"
     ],
     "spam": false,
     "emailConfigId": 103000032123,
@@ -496,17 +492,14 @@ Example output:
 {
   "ticket": {
     "ccEmails": [
-      "user@example.com",
-      "user3@example.com"
+      "user@example.com"
     ],
     "fwdEmails": [],
     "replyCcEmails": [
-      "user@example.com",
-      "user3@example.com"
+      "user@example.com"
     ],
     "ticketCcEmails": [
-      "user@example.com",
-      "user3@example.com"
+      "user@example.com"
     ],
     "spam": false,
     "emailConfigId": 103000032123,
