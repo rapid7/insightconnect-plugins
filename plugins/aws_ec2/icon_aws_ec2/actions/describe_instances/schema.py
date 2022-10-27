@@ -9,8 +9,10 @@ class Component:
 
 class Input:
     DRY_RUN = "dry_run"
+    EXTERNAL_ID = "external_id"
     FILTERS = "filters"
     INSTANCE_IDS = "instance_ids"
+    ROLE_ARN = "role_arn"
     
 
 class Output:
@@ -30,6 +32,12 @@ class DescribeInstancesInput(insightconnect_plugin_runtime.Input):
       "description": "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response",
       "order": 3
     },
+    "external_id": {
+      "type": "string",
+      "title": "External ID",
+      "description": "External ID given during role creation",
+      "order": 5
+    },
     "filters": {
       "type": "array",
       "title": "Filters",
@@ -47,6 +55,12 @@ class DescribeInstancesInput(insightconnect_plugin_runtime.Input):
         "type": "string"
       },
       "order": 2
+    },
+    "role_arn": {
+      "type": "string",
+      "title": "Role ARN",
+      "description": "AWS IAM role ARN to assume",
+      "order": 4
     }
   },
   "definitions": {
