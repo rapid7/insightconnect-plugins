@@ -676,6 +676,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 5.3.5 - Fix issue where JSON Marshaling error was raised when receiving unexpected API response in the Force Password Reset action
 * 5.3.4 - Fix issue with space character in DN in modify object action | Enhanced LDAP logging | Fix issue with variable error when connection fails 
 * 5.3.3 - Fix issue with escaping brackets in Query action
 * 5.3.2 - Improve LDAP connection handling
