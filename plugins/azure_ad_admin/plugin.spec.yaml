@@ -232,12 +232,12 @@ types:
       required: false
     isResourceAccount:
       title: Is Resource Account
-      type: string
+      type: boolean
       description: Is Resource Account
       required: false
     showInAddressList:
       title: Show In Address List
-      type: string
+      type: boolean
       description: Show In Address List
       required: false
     signInSessionsValidFromDateTime:
