@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 7.0.0
+version: 8.0.0
 supported_versions: ["2.0.0", "2.1.0"]
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
@@ -2113,6 +2113,11 @@ actions:
         description: Return true if blacklist item was created or deleted
         type: boolean
         required: true
+      message:
+        title: Message
+        description: Return details about action results
+        type: string
+        required: true
   threats_fetch_file:
     title: Fetch Threats File
     description: Fetch a file associated with the threat that matches the filter. Your user role must have permissions to Fetch Threat File - Admin, IR Team, SOC
@@ -2617,13 +2622,13 @@ actions:
         required: false
   update_analyst_verdict:
     title: Update Analyst Verdict
-    description: Updates an analyst verdict for each incident ID provided
+    description: Updates an analyst verdict for incident ID provided
     input:
-      incident_ids:
-        title: Incident IDs
-        description: A list of alert or threat IDs on which we may update the analyst verdict
-        type: "[]string"
-        example: ["1118189762920424575", "1118189762920424576"]
+      threat_id:
+        title: Threat ID
+        description: ID of a threat
+        type: "string"
+        example: "1118189762920424575"
         required: true
       analyst_verdict:
         title: Analyst Verdict
@@ -2638,12 +2643,12 @@ actions:
         required: true
       type:
         title: Type
-        description: Type of incidents
+        description: Type of incident
         type: string
         enum:
-          - threats
-          - alerts
-        example: threats
+          - threat
+          - alert
+        example: threat
         required: true
     output:
       affected:
@@ -2653,13 +2658,13 @@ actions:
         required: false
   update_incident_status:
     title: Update Incident Status
-    description: Updates an incident status for each incident ID provided
+    description: Updates an incident status for incident ID provided
     input:
-      incident_ids:
-        title: Incident IDs
-        description: A list of alert or threat IDs to update the incident status on
-        type: "[]string"
-        example: ["1118189762920424575", "1118189762920424576"]
+      threat_id:
+        title: Threat ID
+        description:  ID of a threat
+        type: "string"
+        example: "1118189762920424575"
         required: true
       incident_status:
         title: Incident Status
@@ -2673,12 +2678,12 @@ actions:
         required: true
       type:
         title: Type
-        description: Type of incidents
+        description: Type of incident
         type: string
         enum:
-          - threats
-          - alerts
-        example: threats
+          - threat
+          - alert
+        example: threat
         required: true
     output:
       affected:

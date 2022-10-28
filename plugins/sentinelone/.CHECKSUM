@@ -1,7 +1,7 @@
 {
-	"spec": "261444b1e56692fec559b4b22fee2940",
-	"manifest": "c3fd9ba8e03ba2d3b5053b445d5cea06",
-	"setup": "08cc10bde04b4cc896e96e0450d9001e",
+	"spec": "5c36793285b9f044ff41177874fef3d7",
+	"manifest": "58bf11ebfb7f850d98049269400de8c1",
+	"setup": "f8cde65d20d275f743809a7f8bffcdae",
 	"schemas": [
 		{
 			"identifier": "activities_list/schema.py",
@@ -29,7 +29,7 @@
 		},
 		{
 			"identifier": "blacklist/schema.py",
-			"hash": "c6ffebf6aa51317ef0df89844b6e2d74"
+			"hash": "eee49108f67a93973575f26805ad4860"
 		},
 		{
 			"identifier": "blacklist_by_content_hash/schema.py",
@@ -105,11 +105,11 @@
 		},
 		{
 			"identifier": "update_analyst_verdict/schema.py",
-			"hash": "7314acbe634d3d365a140ee254367547"
+			"hash": "a81e2f8c2713a525fdd1421a0dc81148"
 		},
 		{
 			"identifier": "update_incident_status/schema.py",
-			"hash": "bf7e8fa3a099c80f3772b72515d7a84e"
+			"hash": "860558dfedae61412612d81b82232e7f"
 		},
 		{
 			"identifier": "connection/schema.py",

@@ -4,12 +4,12 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Updates an analyst verdict for each incident ID provided"
+    DESCRIPTION = "Updates an analyst verdict for incident ID provided"
 
 
 class Input:
     ANALYST_VERDICT = "analyst_verdict"
-    INCIDENT_IDS = "incident_ids"
+    THREAT_ID = "threat_id"
     TYPE = "type"
     
 
@@ -35,29 +35,26 @@ class UpdateAnalystVerdictInput(insightconnect_plugin_runtime.Input):
       ],
       "order": 2
     },
-    "incident_ids": {
-      "type": "array",
-      "title": "Incident IDs",
-      "description": "A list of alert or threat IDs on which we may update the analyst verdict",
-      "items": {
-        "type": "string"
-      },
+    "threat_id": {
+      "type": "string",
+      "title": "Threat ID",
+      "description": "ID of a threat",
       "order": 1
     },
     "type": {
       "type": "string",
       "title": "Type",
-      "description": "Type of incidents",
+      "description": "Type of incident",
       "enum": [
-        "threats",
-        "alerts"
+        "threat",
+        "alert"
       ],
       "order": 3
     }
   },
   "required": [
     "analyst_verdict",
-    "incident_ids",
+    "threat_id",
     "type"
   ]
 }
