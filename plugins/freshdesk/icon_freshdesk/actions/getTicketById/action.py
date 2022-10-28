@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.helper import clean
 
 from icon_freshdesk.util.helpers import convert_dict_keys_case, replace_ticket_fields_id_to_name
-from icon_freshdesk.util.constants import Include, Ticket
+from icon_freshdesk.util.constants import Include, Ticket, TextCase
 from .schema import GetTicketByIdInput, GetTicketByIdOutput, Input, Output, Component
 
 
@@ -27,7 +27,7 @@ class GetTicketById(insightconnect_plugin_runtime.Action):
             {
                 Output.TICKET: convert_dict_keys_case(
                     replace_ticket_fields_id_to_name(ticket, Ticket.FIELDS_TO_NAME_ID_CONVERSION, ticket_fields),
-                    "camel_case",
+                    TextCase.CAMEL_CASE,
                 )
             }
         )

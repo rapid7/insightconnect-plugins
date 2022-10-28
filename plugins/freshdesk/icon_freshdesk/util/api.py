@@ -29,26 +29,26 @@ class FreshDeskAPI:
     def update_ticket(self, ticket_id: int, ticket_parameters: dict = None, attachments: list = None) -> dict:
         response_json = {}
         if ticket_parameters:
-            self._logger.info("Updating a ticket...")
+            self._logger.info(f"Updating a ticket (id={ticket_id})...")
             response_json = self.make_json_request(
                 method="PUT",
                 url=TICKET_ENDPOINT.format(domain=self._domain, ticket_id=ticket_id),
                 json_data=ticket_parameters,
             )
-            self._logger.info("Ticket updated successfully.")
+            self._logger.info(f"Ticket (id={ticket_id}) updated successfully.")
         if attachments:
-            self._logger.info("Updating a ticket attachments...")
+            self._logger.info(f"Updating a ticket (id={ticket_id}) attachments...")
             ticket_form_data = create_attachments_form(attachments)
             response_json = self.make_json_request(
                 method="PUT",
                 url=TICKET_ENDPOINT.format(domain=self._domain, ticket_id=ticket_id),
                 files=ticket_form_data,
             )
-            self._logger.info("Ticket attachments updated successfully.")
+            self._logger.info(f"Ticket (id={ticket_id}) attachments updated successfully.")
         return response_json
 
     def get_ticket_by_id(self, ticket_id: int, include: str = None) -> dict:
-        self._logger.info(f"Getting a ticket by id ({ticket_id})...")
+        self._logger.info(f"Getting a ticket by id (id={ticket_id})...")
         response_json = self.make_json_request(
             method="GET",
             url=TICKET_ENDPOINT.format(domain=self._domain, ticket_id=ticket_id),

@@ -28,3 +28,8 @@ class Include:
     @classmethod
     def get_include_parameters_list(cls):
         return [cls.STATS, cls.CONVERSATIONS, cls.COMPANY, cls.REQUESTER]
+
+
+class TextCase:
+    SNAKE_CASE = "snake_case"
+    CAMEL_CASE = "camel_case"

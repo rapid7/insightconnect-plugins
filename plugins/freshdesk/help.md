@@ -692,7 +692,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.0 - Initial plugin - Actions: `Create Ticket`, `Update Ticket`, `Get TIckets`, `Get Ticket by ID`
+* 1.0.0 - Initial plugin - Actions: `Create Ticket`, `Update Ticket`, `Get Tickets`, `Get Ticket by ID`
 
 # Links
 

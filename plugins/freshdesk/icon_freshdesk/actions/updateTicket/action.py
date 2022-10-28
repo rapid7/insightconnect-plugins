@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.helper import clean
 
-from icon_freshdesk.util.constants import Ticket
+from icon_freshdesk.util.constants import Ticket, TextCase
 from icon_freshdesk.util.helpers import (
     convert_dict_keys_case,
     add_keys_prefix,
@@ -27,7 +27,7 @@ class UpdateTicket(insightconnect_plugin_runtime.Action):
         ticket_id = params_copy.pop(Input.TICKETID)
 
         ticket_fields = self.connection.api_client.get_ticket_fields()
-        ticket_parameters = convert_dict_keys_case(params_copy, "snake_case")
+        ticket_parameters = convert_dict_keys_case(params_copy, TextCase.SNAKE_CASE)
         attachments = ticket_parameters.pop(Ticket.ATTACHMENTS, [])
         ticket_parameters[Ticket.CUSTOM_FIELDS] = add_keys_prefix(
             ticket_parameters.get(Ticket.CUSTOM_FIELDS, {}), "cf_"
@@ -41,7 +41,7 @@ class UpdateTicket(insightconnect_plugin_runtime.Action):
             {
                 Output.TICKET: convert_dict_keys_case(
                     replace_ticket_fields_id_to_name(ticket, Ticket.FIELDS_TO_NAME_ID_CONVERSION, ticket_fields),
-                    "camel_case",
+                    TextCase.CAMEL_CASE,
                 )
             }
         )

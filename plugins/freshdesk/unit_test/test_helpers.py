@@ -6,7 +6,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
 from parameterized import parameterized
 
-from icon_freshdesk.util.constants import Ticket
+from icon_freshdesk.util.constants import Ticket, TextCase
 from unit_test.util import Util
 
 sys.path.append(os.path.abspath("../"))
@@ -137,7 +137,8 @@ class TestHelpers(TestCase):
     ):
         actual = clean(
             convert_dict_keys_case(
-                replace_ticket_fields_id_to_name(dict_to_modify, fields_to_update, all_ticket_fields), "camel_case"
+                replace_ticket_fields_id_to_name(dict_to_modify, fields_to_update, all_ticket_fields),
+                TextCase.CAMEL_CASE,
             )
         )
         self.assertEqual(actual, expected)
@@ -164,7 +165,7 @@ class TestHelpers(TestCase):
         self, test_name, dict_to_modify, fields_to_update, all_ticket_fields, expected
     ):
         actual = replace_ticket_fields_name_to_id(dict_to_modify, fields_to_update, all_ticket_fields)
-        self.assertEqual(actual, clean(convert_dict_keys_case(expected, "camel_case")))
+        self.assertEqual(actual, clean(convert_dict_keys_case(expected, TextCase.CAMEL_CASE)))
 
     @parameterized.expand(
         [
@@ -190,10 +191,10 @@ class TestHelpers(TestCase):
 
     @parameterized.expand(
         [
-            ["dict_to_camel", {"snake_key": 4}, "camel_case", {"snakeKey": 4}],
-            ["list_to_camel", [{"snake_key": 4}], "camel_case", [{"snakeKey": 4}]],
-            ["dict_to_snake", {"CamelCase": 4}, "snake_case", {"camel_case": 4}],
-            ["list_to_snake", [{"camelCase": 4}], "snake_case", [{"camel_case": 4}]],
+            ["dict_to_camel", {"snake_key": 4}, TextCase.CAMEL_CASE, {"snakeKey": 4}],
+            ["list_to_camel", [{"snake_key": 4}], TextCase.CAMEL_CASE, [{"snakeKey": 4}]],
+            ["dict_to_snake", {"CamelCase": 4}, TextCase.SNAKE_CASE, {"camel_case": 4}],
+            ["list_to_snake", [{"camelCase": 4}], TextCase.SNAKE_CASE, [{"camel_case": 4}]],
         ]
     )
     def test_convert_dict_keys_case(self, test_name, to_modify, case_type, expected):

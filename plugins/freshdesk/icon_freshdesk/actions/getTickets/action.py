@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.helper import clean
 
 from icon_freshdesk.util.helpers import convert_dict_keys_case, replace_ticket_fields_id_to_name
-from icon_freshdesk.util.constants import Include, Ticket
+from icon_freshdesk.util.constants import Include, Ticket, TextCase
 from .schema import GetTicketsInput, GetTicketsOutput, Input, Output, Component
 
 
@@ -22,7 +22,7 @@ class GetTickets(insightconnect_plugin_runtime.Action):
             predefined_filter=params.get(Input.PREDEFINEDFILTER),
             include=include,
             order_by=params.get(Input.ORDERBY),
-            filter_by=convert_dict_keys_case(params.get(Input.FILTERBY, {}), "snake_case"),
+            filter_by=convert_dict_keys_case(params.get(Input.FILTERBY, {}), TextCase.SNAKE_CASE),
             order_type=params.get(Input.ORDERTYPE),
             per_page=params.get(Input.PERPAGE),
             page=params.get(Input.PAGE),
@@ -35,7 +35,7 @@ class GetTickets(insightconnect_plugin_runtime.Action):
                         replace_ticket_fields_id_to_name(ticket, Ticket.FIELDS_TO_NAME_ID_CONVERSION, ticket_fields)
                         for ticket in tickets
                     ],
-                    "camel_case",
+                    TextCase.CAMEL_CASE,
                 )
             }
         )

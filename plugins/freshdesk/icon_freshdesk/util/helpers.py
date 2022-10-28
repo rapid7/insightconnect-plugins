@@ -4,7 +4,7 @@ from typing import Union
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from icon_freshdesk.util.constants import Attachment, Ticket, TicketField
+from icon_freshdesk.util.constants import Attachment, Ticket, TicketField, TextCase
 import magic
 
 
@@ -101,9 +101,9 @@ def snake_to_camel_case(s):
 
 
 def convert_dict_keys_case(to_modify: Union[dict, list], case_type: str) -> Union[dict, list]:
-    if case_type == "camel_case":
+    if case_type == TextCase.CAMEL_CASE:
         case_method = snake_to_camel_case
-    elif case_type == "snake_case":
+    elif case_type == TextCase.SNAKE_CASE:
         case_method = camel_to_snake_case
     else:
         return to_modify
