@@ -19,12 +19,11 @@ RUN apt-get update && \
 ENV PYTHONUSERBASE=/var/cache/python_dependencies \
 		PYTHONPATH=/var/cache/python_dependencies
 
-RUN mkdir $PYTHONUSERBASE && chown nobody: $PYTHONUSERBASE && chmod u+w $PYTHONUSERBASE
 # End package dependencies
 RUN if [ -f requirements.txt ]; then pip install --no-cache-dir -r requirements.txt; fi
 RUN python setup.py build && python setup.py install
 
 # User to run plugin code. The two supported users are: root, nobody
-USER nobody
+USER root
 
 ENTRYPOINT ["/usr/local/bin/icon_python_3_script"]
