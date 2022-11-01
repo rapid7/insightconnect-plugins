@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    NAME = "name"
+    FULL_NAME = "full_name"
     
 
 class Output:
@@ -21,15 +21,15 @@ class GetUserContactByNameInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "name": {
+    "full_name": {
       "type": "string",
-      "title": "User's Name",
+      "title": "User's Full Name",
       "description": "Full name of user",
       "order": 1
     }
   },
   "required": [
-    "name"
+    "full_name"
   ]
 }
     """)

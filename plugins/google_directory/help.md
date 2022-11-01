@@ -69,13 +69,13 @@ This action retrieves all contact information from a specific user in the domain
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name|string|None|True|Full name of user|None|Example User|
+|full_name|string|None|True|Full name of user|None|Example User|
 
 Example input:
 
 ```
 {
-  "name": "Example User"
+  "full_name": "Example User"
 }
 ```
 

@@ -177,8 +177,8 @@ actions:
     title: Get User's Contact Information By Name
     description: Retrieves all contact information from a specific user in the domain by name
     input:
-      name:
-        title: User's Name
+      full_name:
+        title: User's Full Name
         description: Full name of user
         type: string
         required: true

@@ -17,9 +17,13 @@ class GetUserContactByName(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        full_name = params.get(Input.NAME)
+        full_name = params.get(Input.FULL_NAME)
+        print(full_name)
         try:
-            response = self.connection.service.users().get(userKey=full_name).execute()
+            #  response = self.connection.service.users().list(query=f'name:{full_name}').execute()
+            response = self.connection.service.users().list(orderBy='email').execute()
+            # Error here
+            #
             if response:
                 return {Output.CONTACT: return_contact_informations(response)}
         except Exception:
