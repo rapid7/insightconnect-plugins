@@ -20,8 +20,7 @@ class GetUserContactByName(insightconnect_plugin_runtime.Action):
         full_name = params.get(Input.FULL_NAME)
         print(full_name)
         try:
-            #  response = self.connection.service.users().list(query=f'name:{full_name}').execute()
-            response = self.connection.service.users().list(orderBy='email').execute()
+            response = self.connection.service.users().list(query=f"name='{full_name}'").execute()
             # Error here
             #
             if response:
