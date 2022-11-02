@@ -1,9 +1,12 @@
-import insightconnect_plugin_runtime
-from .schema import BlacklistInput, BlacklistOutput, Input, Output, Component
-from insightconnect_plugin_runtime.exceptions import PluginException
-
 # Custom imports below
 import re
+
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+from typing import List
+
+from ...util.helper import BlacklistMessage
+from .schema import BlacklistInput, BlacklistOutput, Component, Input, Output
 
 
 class Blacklist(insightconnect_plugin_runtime.Action):
@@ -28,9 +31,11 @@ class Blacklist(insightconnect_plugin_runtime.Action):
                 params.get(Input.HASH),
                 params.get(Input.DESCRIPTION, "Hash Blacklisted from InsightConnect"),
             )
+            message = BlacklistMessage.blocked
         else:
             item_ids = self.connection.get_item_ids_by_hash(params.get(Input.HASH))
             errors = self.connection.delete_blacklist_item_by_hash(item_ids)
+            message = self._get_message(item_ids)
 
         if len(errors) == 0:
             success_result = True
@@ -41,4 +46,9 @@ class Blacklist(insightconnect_plugin_runtime.Action):
                 data=errors,
             )
 
-        return {Output.SUCCESS: success_result}
+        return {Output.SUCCESS: success_result, Output.MESSAGE: message}
+
+    def _get_message(self, item_ids: List[str]) -> str:
+        if len(item_ids) == 0:
+            return BlacklistMessage.not_exists
+        return BlacklistMessage.unblocked

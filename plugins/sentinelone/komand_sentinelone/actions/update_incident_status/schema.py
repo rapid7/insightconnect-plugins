@@ -4,12 +4,12 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Updates an incident status for each incident ID provided"
+    DESCRIPTION = "Updates an incident status for incident ID provided"
 
 
 class Input:
-    INCIDENT_IDS = "incident_ids"
     INCIDENT_STATUS = "incident_status"
+    THREAT_ID = "threat_id"
     TYPE = "type"
     
 
@@ -23,15 +23,6 @@ class UpdateIncidentStatusInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "incident_ids": {
-      "type": "array",
-      "title": "Incident IDs",
-      "description": "A list of alert or threat IDs to update the incident status on",
-      "items": {
-        "type": "string"
-      },
-      "order": 1
-    },
     "incident_status": {
       "type": "string",
       "title": "Incident Status",
@@ -43,20 +34,26 @@ class UpdateIncidentStatusInput(insightconnect_plugin_runtime.Input):
       ],
       "order": 2
     },
+    "threat_id": {
+      "type": "string",
+      "title": "Threat ID",
+      "description": "ID of a threat",
+      "order": 1
+    },
     "type": {
       "type": "string",
       "title": "Type",
-      "description": "Type of incidents",
+      "description": "Type of incident",
       "enum": [
-        "threats",
-        "alerts"
+        "threat",
+        "alert"
       ],
       "order": 3
     }
   },
   "required": [
-    "incident_ids",
     "incident_status",
+    "threat_id",
     "type"
   ]
 }
