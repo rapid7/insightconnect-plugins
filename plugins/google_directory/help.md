@@ -76,7 +76,7 @@ Example input:
 
 ```
 {
-  "email": "user@example.com"
+  "full_name": "Example User"
 }
 ```
 
