@@ -25,7 +25,7 @@ def return_contact_informations(input_dict: dict) -> dict:
 
 
 def return_contact_informations_name(input_dict: dict) -> dict:
-    for user in input_dict.get('users'):
+    for user in input_dict.get("users"):
         addresses_list = user.get("addresses", [])
         phones_list = [element.get("value") for element in user.get("phones", [])]
         emails_list = [element.get("address") for element in user.get("emails", [])]
