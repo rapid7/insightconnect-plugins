@@ -6,7 +6,7 @@ import zipfile
 import insightconnect_plugin_runtime
 import requests
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
-from typing import Union, Tuple
+from typing import Tuple
 
 from komand_sentinelone.util.api import SentineloneAPI
 from komand_sentinelone.util.helper import Helper
@@ -343,7 +343,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return set(existing_os_types) == {"linux", "windows", "macos"}
 
     def get_item_ids_by_hash(self, blacklist_hash: str):
-        response = self._call_api("GET", "restrictions", params={"type": "black_hash", "value": blacklist_hash})
+        response = self._call_api(
+            "GET",
+            "restrictions",
+            params={"type": "black_hash", "includeChildren": True, "includeParents": True, "value": blacklist_hash},
+        )
 
         if len(response.get("errors", [])) == 0:
             ids = []
@@ -392,8 +396,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         return insightconnect_plugin_runtime.helper.clean(self._call_api("GET", endpoint, params=params))
 
-    def update_analyst_verdict(self, incident_ids: list, analyst_verdict: str, _type: str) -> dict:
-        if _type == "threats":
+    def update_analyst_verdict(self, incident_id: str, analyst_verdict: str, _type: str) -> dict:
+        if _type == "threat":
             endpoint = "threats/analyst-verdict"
         else:
             endpoint = "cloud-detection/alerts/analyst-verdict"
@@ -401,11 +405,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return self._call_api(
             "POST",
             endpoint,
-            {"filter": {"ids": incident_ids}, "data": {"analystVerdict": analyst_verdict}},
+            {"filter": {"ids": [incident_id]}, "data": {"analystVerdict": analyst_verdict}},
         )
 
-    def update_incident_status(self, incident_ids: list, incident_status: str, _type: str) -> dict:
-        if _type == "threats":
+    def update_incident_status(self, incident_id: str, incident_status: str, _type: str) -> dict:
+        if _type == "threat":
             endpoint = "threats/incident"
         else:
             endpoint = "cloud-detection/alerts/incident"
@@ -413,72 +417,67 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return self._call_api(
             "POST",
             endpoint,
-            {"filter": {"ids": incident_ids}, "data": {"incidentStatus": incident_status}},
+            {"filter": {"ids": [incident_id]}, "data": {"incidentStatus": incident_status}},
         )
 
-    def remove_non_existing_incidents(self, incident_ids: list, _type: str) -> list:
+    def check_if_incident_exist(self, incident_id: str, _type: str) -> None:
         """
-        This function checks each incident ID in the provided list
-        of incident IDs, against the SentinelOne instance, to see
-        if they exist. Only incident IDs that do exist within that
+        This function checks incident ID, against the SentinelOne instance, to see
+        if existed. Only incident ID that do exist within that
         instance are returned.
 
-        @param incident_ids: list of incidents IDs to check if they
+        @param incident_id: incident ID to check if they
         exist in the SentinelOne instance
-        @param _type: type of the incident - either 'threats' or
-        'alerts'
-        @return: returns a list of incident IDs that exist in the
-        SentinelOne instance
+        @param _type: type of the incident - either 'threat' or
+        'alert'
+        @return: if not exist raise exception
         """
-        incident_ids_copy = incident_ids.copy()
-        for incident_id in incident_ids:
-            response_data = self.get_incident(incident_id, _type).get("data")
-            if isinstance(response_data, list) and len(response_data) == 0:
-                self.logger.info(f"Incident {incident_id} was not found.")
-                incident_ids_copy.remove(incident_id)
+        response_data = self.get_incident(incident_id, _type).get("data")
+        if isinstance(response_data, list) and len(response_data) == 0:
+            self.logger.info(f"Incident {incident_id} was not found.")
+            raise PluginException(
+                cause=f"No {_type} to update in SentinelOne.",
+                assistance=f"Please verify the log, the {_type} are do not exist in SentinelOne.",
+            )
 
-        return incident_ids_copy
-
-    def validate_incident_state(self, incident_ids: list, _type: str, new_state: str, attribute: str) -> list:
+    def validate_incident_state(self, incident_id: str, _type: str, new_state: str, attribute: str) -> None:
         """
-        This function checks each incident ID in the provided list
-        of incident IDs, against the SentinelOne instance, validating
+        This function checks incident ID, against the SentinelOne instance, validating
         that the current value of a certain attribute (either
         'analystVerdict' or 'incidentStatus') of the incident is
-        different to the 'new_state' attribute. Only incident IDs that
+        different to the 'new_state' attribute. Only incident ID that
         have different status are returned.
 
-        @param incident_ids: list of incidents IDs to validate the
+        @param incident_id: incident ID to validate the
         status of in the SentinelOne instance
-        @param _type: type of the incident - either 'threats' or
-        'alerts'
+        @param _type: type of the incident - either 'threat' or
+        'alert'
         @param new_state: the new state of the incident we wish to
         update the incident status on
         @param attribute: attribute to update, either 'analystVerdict'
         or 'incidentStatus'
-        @return: returns a list of incidents that have different status
-        compared to the `new_state` argument
+        @return: if incident are already set to the new analyst verdict raise exception
         """
-        for incident_id in incident_ids:
-            response_data = self.get_incident(incident_id, _type).get("data")
-            for incident in response_data:
-                if _type == "threats":
-                    object_name = "threatInfo"
-                    resp_incident_id = incident.get("id")
-                else:
-                    object_name = "alertInfo"
-                    resp_incident_id = incident.get(object_name, {}).get("alertId")
+        response_data = self.get_incident(incident_id, _type).get("data")
+        for incident in response_data:
+            if _type == "threat":
+                object_name = "threatInfo"
+                resp_incident_id = incident.get("id")
+            else:
+                object_name = "alertInfo"
+                resp_incident_id = incident.get(object_name, {}).get("alertId")
 
-                attribute_name = "analystVerdict" if attribute == "analystVerdict" else "incidentStatus"
-                if resp_incident_id == incident_id and incident.get(object_name, {}).get(attribute_name) == new_state:
-                    self.logger.info(f"Incident {incident_id} has the {attribute_name} already set to {new_state}.")
-                    incident_ids.remove(incident_id)
-
-        return incident_ids
+            attribute_name = "analystVerdict" if attribute == "analystVerdict" else "incidentStatus"
+            if resp_incident_id == incident_id and incident.get(object_name, {}).get(attribute_name) == new_state:
+                self.logger.info(f"Incident {incident_id} has the {attribute_name} already set to {new_state}.")
+                raise PluginException(
+                    cause=f"No {_type} to update in SentinelOne.",
+                    assistance=f"Please verify the log, the {_type} are already set to the new analyst verdict",
+                )
 
     def get_incident(self, incident_id: str, _type: str) -> dict:
         params = {"ids": [incident_id]}
-        if _type == "threats":
+        if _type == "threat":
             response = self.get_threats(params, api_version="2.1")
         else:
             response = self.get_alerts(params)
