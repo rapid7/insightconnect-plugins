@@ -62,7 +62,7 @@ Example input:
 
 ### Actions
 
-#### Get User's Contact Information By Name
+#### Get User's Contact Information by Name
 
 This action retrieves all contact information from a specific user in the domain by name.
 
@@ -76,7 +76,7 @@ Example input:
 
 ```
 {
-  "full_name": "Example User"
+  "email": "user@example.com"
 }
 ```
 
@@ -89,39 +89,6 @@ Example input:
 Example output:
 
 ```
-{
-  "contact": {
-    "addresses": [
-      {
-        "country": "England",
-        "street": "1 Test street"
-      },
-      {
-        "country": "England",
-        "postal_code": "31-222"
-      },
-      {
-        "country": "England",
-        "postal_code": "31-111",
-        "street": "3 Test street"
-      },
-      {
-        "postal_code": "31-333",
-        "street": "4 Test street"
-      }
-    ],
-    "phone_numbers": [
-      "111111111",
-      "222222222",
-      "333333333"
-    ],
-    "email_addresses": [
-      "user@example.com",
-      "user2@example.com",
-      "user3@example.com"
-    ]
-  }
-}
 ```
 
 #### Get User's Contact Information
