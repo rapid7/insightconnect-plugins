@@ -1,8 +1,7 @@
 {
-  "data": [
-  ],
+  "data": [],
   "pagination": {
     "nextCursor": null,
-    "totalItems": 1
+    "totalItems": 0
   }
 }
