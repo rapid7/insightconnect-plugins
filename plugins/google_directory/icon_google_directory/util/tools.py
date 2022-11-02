@@ -22,3 +22,16 @@ def return_contact_informations(input_dict: dict) -> dict:
         if "postalCode" in address:
             address["postal_code"] = address.pop("postalCode")
     return {"addresses": addresses_list, "phone_numbers": phones_list, "email_addresses": emails_list}
+
+
+def return_contact_informations_name(input_dict: dict) -> dict:
+    for user in input_dict.get('users'):
+        addresses_list = user.get("addresses", [])
+        phones_list = [element.get("value") for element in user.get("phones", [])]
+        emails_list = [element.get("address") for element in user.get("emails", [])]
+        for address in addresses_list:
+            if "streetAddress" in address:
+                address["street"] = address.pop("streetAddress")
+            if "postalCode" in address:
+                address["postal_code"] = address.pop("postalCode")
+        return {"addresses": addresses_list, "phone_numbers": phones_list, "email_addresses": emails_list}
