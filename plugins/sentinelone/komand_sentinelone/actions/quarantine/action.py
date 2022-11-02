@@ -1,4 +1,6 @@
 import insightconnect_plugin_runtime
+from typing import List
+
 from .schema import QuarantineInput, QuarantineOutput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
 
@@ -20,7 +22,7 @@ class Quarantine(insightconnect_plugin_runtime.Action):
         agents = self.connection.client.search_agents(agent, case_sensitive=case_sensitive, results_length=2)
         whitelist = params.get(Input.WHITELIST, None)
 
-        not_affected = {"response": {"data": {"affected": 0}}}
+        not_affected = {"data": {"affected": 0}}
 
         if self.__check_agents_found(agents):
             self.logger.info(f"No agents found using the host information: {agent}.")
@@ -57,23 +59,20 @@ class Quarantine(insightconnect_plugin_runtime.Action):
             return True
         return False
 
-    @staticmethod
-    def __find_in_whitelist(agent_obj: dict, whitelist: list):
+    def __find_in_whitelist(self, agent_obj: dict, whitelist: list):
         for key, value in agent_obj.items():
             if key in ["externalIp", "computerName", "id", "uuid"]:
-                if value in whitelist:
-                    raise PluginException(
-                        cause="Agent found in the whitelist.",
-                        assistance=f"If you would like to block this host, remove {value} from the whitelist and try again.",
-                    )
+                self.__raise_when_value_in_whitelist(value, whitelist)
             if key == "networkInterfaces":
                 network_dict = value[0]
                 for network_key, network_val in network_dict.items():
                     if network_key in ["inet", "inet6"]:
                         for ip_address in network_val:
-                            if ip_address in whitelist:
-                                raise PluginException(
-                                    cause="Agent found in the whitelist.",
-                                    assistance=f"If you would like to block this host, remove {ip_address} from the whitelist and try again.",
-                                )
-        return
+                            self.__raise_when_value_in_whitelist(ip_address, whitelist)
+
+    def __raise_when_value_in_whitelist(self, value: str, whitelist: List[str]):
+        if value in whitelist:
+            raise PluginException(
+                cause="Agent found in the whitelist.",
+                assistance=f"If you would like to block this host, remove {value} from the whitelist and try again.",
+            )
