@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Google Directory"
 Vendor = "rapid7"
-Version = "2.1.0"
+Version = "2.2.0"
 Description = "Uses the Google Directory plugin to manage members, users, and user aliases"
 
 
