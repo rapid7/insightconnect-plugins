@@ -1,6 +1,7 @@
 # Description
 
-Google Directory lets you perform administrative operations on users, groups, organizational units, and devices in your account.
+Google Directory lets you perform administrative operations on users, groups, organizational units, and devices in your
+account.
 The Google Directory plugin allows you to list all users, suspend and unsuspend users.
 
 # Key Features
@@ -88,6 +89,39 @@ Example input:
 Example output:
 
 ```
+{
+  "contact": {
+    "addresses": [
+      {
+        "country": "England",
+        "street": "1 Test street"
+      },
+      {
+        "country": "England",
+        "postal_code": "31-222"
+      },
+      {
+        "country": "England",
+        "postal_code": "31-111",
+        "street": "3 Test street"
+      },
+      {
+        "postal_code": "31-333",
+        "street": "4 Test street"
+      }
+    ],
+    "phone_numbers": [
+      "111111111",
+      "222222222",
+      "333333333"
+    ],
+    "email_addresses": [
+      "user@example.com",
+      "user2@example.com",
+      "user3@example.com"
+    ]
+  }
+}
 ```
 
 #### Get User's Contact Information
@@ -301,14 +335,13 @@ _This plugin does not contain any triggers._
 |Email|string|True|Email address|
 |Full Name|string|False|Full name of the user|
 
-
 ## Troubleshooting
 
 This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 2.2.0 - Add new action Get User's Contact By Name
+* 2.2.0 - Add new action Get User's Contact by Name
 * 2.1.0 - Add new action Get User's Contact Information
 * 2.0.2 - Add required OAuth scope for actions in help.md | Code refactor | Add input examples
 * 2.0.1 - New spec and help.md format for the Extension Library
