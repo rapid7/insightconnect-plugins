@@ -1,2 +1,0 @@
-icon_google_directory
-unit_test
