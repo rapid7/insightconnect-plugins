@@ -4,7 +4,8 @@ class Message:
 
 
 def return_contact_informations(input_dict: dict) -> dict:
-    """return_contact_informations. Function allows to map data that contains contact informations retrieved from Google API users().get()
+    """return_contact_informations. Function allows to map data that contains contact informations retrieved from
+    Google API users().get()
 
     :param input_dict: Input dict as a response got from Google API
     :type input_dict: dict
@@ -25,6 +26,15 @@ def return_contact_informations(input_dict: dict) -> dict:
 
 
 def return_contact_informations_name(input_dict: dict) -> dict:
+    """return_contact_informations. Function allows to map data that contains contact informations retrieved from
+    Google API users().list()
+
+    :param input_dict: Input dict as a response got from Google API
+    :type input_dict: dict
+
+    :returns: Mapped dictionary that contains keys such as 'addresses', 'phones', and 'emails'
+    :rtype: dict
+    """
     for user in input_dict.get("users"):
         addresses_list = user.get("addresses", [])
         phones_list = [element.get("value") for element in user.get("phones", [])]
