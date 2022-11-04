@@ -55,9 +55,9 @@ This action is used to create a FreshDesk ticket. At least one of those paramete
 |companyId|integer|None|False|Company ID of the requester. This attribute can only be set if the Multiple Companies feature is enabled (Estate plan and above)|None|103000179654|
 |customFields|object|None|False|Key value pairs containing the names and values of custom fields. Read more at https://support.freshdesk.com/support/solutions/articles/216548|None|{"my_key": "my_value"}|
 |description|string|None|True|HTML content of the ticket|None|My new ticket|
-|dueBy|date|None|False|Timestamp that denotes when the ticket is due to be resolved|None|2023-12-24 12:56:15+05:00|
+|dueBy|date|None|False|Timestamp that denotes when the ticket is due to be resolved|None|2023-12-24T12:56:15+05:00|
 |emailConfigId|integer|None|False|ID of email config which is used for this ticket. If productId is given and emailConfigId is not given, product's primary emailConfigId will be set|None|103000032123|
-|frDueBy|date|None|False|Timestamp that denotes when the first response is due|None|2023-12-21 12:56:15+05:00|
+|frDueBy|date|None|False|Timestamp that denotes when the first response is due|None|2023-12-21T12:56:15+05:00|
 |groupId|integer|None|False|ID of the group to which the ticket has been assigned. The default value is the ID of the group that is associated with the given emailConfigId|None|103000085325|
 |internalAgentId|integer|None|False|ID of the internal agent which the ticket should be assigned with. To use this parameter you have to enable `Shared ownership` in Admin > Advanced Ticketing menu|None|103018312012|
 |internalGroupId|integer|None|False|ID of the internal group to which the ticket should be assigned with. To use this parameter you have to enable `Shared ownership` in Admin > Advanced Ticketing menu|None|103000096140|
@@ -411,9 +411,9 @@ This action is used to update a FreshDesk ticket.
 |customFields|object|None|False|Key value pairs containing the names and values of custom fields. Read more at https://support.freshdesk.com/support/solutions/articles/216548|None|{"my_key": "my_value"}|
 |description|string|None|False|HTML content of the ticket|None|My new ticket|
 |email|string|None|False|Email address of the requester. If no contact exists with this email address in FreshDesk, it will be added as a new contact|None|user@example.com|
-|dueBy|date|None|False|Timestamp that denotes when the ticket is due to be resolved|None|2023-12-24 12:56:15+05:00|
+|dueBy|date|None|False|Timestamp that denotes when the ticket is due to be resolved|None|2023-12-24T12:56:15+05:00|
 |emailConfigId|integer|None|False|ID of email config which is used for this ticket. If productId is given and emailConfigId is not given, product's primary emailConfigId will be set|None|103000032123|
-|frDueBy|date|None|False|Timestamp that denotes when the first response is due|None|2023-12-21 12:56:15+05:00|
+|frDueBy|date|None|False|Timestamp that denotes when the first response is due|None|2023-12-21T12:56:15+05:00|
 |groupId|integer|None|False|ID of the group to which the ticket has been assigned. The default value is the ID of the group that is associated with the given emailConfigId|None|103000085325|
 |internalAgentId|integer|None|False|ID of the internal agent which the ticket should be assigned with. To use this parameter you have to enable `Shared ownership` in Admin > Advanced Ticketing menu|None|103018312012|
 |internalGroupId|integer|None|False|ID of the internal group to which the ticket should be assigned with. To use this parameter you have to enable `Shared ownership` in Admin > Advanced Ticketing menu|None|103000096140|
