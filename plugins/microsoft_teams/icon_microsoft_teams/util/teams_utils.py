@@ -5,7 +5,7 @@ from logging import Logger
 import insightconnect_plugin_runtime.connection
 
 
-def get_teams_from_microsoft(
+def get_teams_from_microsoft(  # noqa: C901
     logger: Logger, connection: insightconnect_plugin_runtime.connection, team_name=None, explicit=True
 ) -> list:
     """
@@ -71,7 +71,7 @@ def get_teams_from_microsoft(
     return teams
 
 
-def get_channels_from_microsoft(
+def get_channels_from_microsoft(  # noqa: C901
     logger: Logger,
     connection: insightconnect_plugin_runtime.connection,
     team_id: str,
@@ -224,6 +224,7 @@ def create_channel(
     team_id: str,
     channel_name: str,
     description: str,
+    channel_type: str,
 ) -> bool:
     """
     Creates a channel for a given team
@@ -233,21 +234,26 @@ def create_channel(
     :param team_id: String
     :param channel_name: String
     :param description: String
+    :param channel_type: String
     :return: boolean
     """
 
     create_channel_endpoint = f"https://graph.microsoft.com/beta/teams/{team_id}/channels"
-    create_channel_paylaod = {"description": description, "displayName": channel_name}
+    create_channel_payload = {
+        "description": description,
+        "displayName": channel_name,
+        "membershipType": channel_type.lower(),
+    }
 
     headers = connection.get_headers()
 
-    logger.info(f"Creating channel with: {create_channel_endpoint}")
-    result = requests.post(create_channel_endpoint, json=create_channel_paylaod, headers=headers)
+    logger.info(f"Creating {channel_type} channel with: {create_channel_endpoint}")
+    result = requests.post(create_channel_endpoint, json=create_channel_payload, headers=headers)
 
     try:
         result.raise_for_status()
-    except Exception as e:
-        raise PluginException(cause=f"Create channel {channel_name} failed.", assistance=result.text) from e
+    except Exception as error:
+        raise PluginException(cause=f"Create channel {channel_name} failed.", assistance=result.text) from error
 
     if not result.status_code == 201:
         raise PluginException(cause="Create channel returned an unexpected result.", assistance=result.text)
