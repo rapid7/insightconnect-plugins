@@ -1,11 +1,11 @@
 {
-	"spec": "675f9acf65c0288a25b21732250314d3",
-	"manifest": "a5bacb84c40053d447b77927d44ef8c0",
-	"setup": "94737c0ba5fc68c63db07d2299e471ad",
+	"spec": "5049affc39347f0e9f4ec99b2231eef8",
+	"manifest": "c2d96f27acc701fdc4b47f8800800b6d",
+	"setup": "eab5b3ebc2a2432ba3223114d267c560",
 	"schemas": [
 		{
 			"identifier": "add_channel_to_team/schema.py",
-			"hash": "f13f28cb78529289b0972ea8502b060d"
+			"hash": "ac30b52813d35adbd2bef699e0ee02c4"
 		},
 		{
 			"identifier": "add_group_owner/schema.py",
