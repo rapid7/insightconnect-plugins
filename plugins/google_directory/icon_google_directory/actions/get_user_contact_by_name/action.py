@@ -22,8 +22,6 @@ class GetUserContactByName(insightconnect_plugin_runtime.Action):
             response = (
                 self.connection.service.users().list(customer="my_customer", query=f"name:'{full_name}'").execute()
             )
-            # Error here
-            #
             if response:
                 return {Output.CONTACT: return_contact_informations_name(response)}
         except Exception:
