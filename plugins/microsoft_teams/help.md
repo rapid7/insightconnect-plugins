@@ -478,6 +478,7 @@ This action is used to add a channel to a team.
 |----|----|-------|--------|-----------|----|-------|
 |channel_description|string|None|True|Channel description|None|This is a test channel.|
 |channel_name|string|None|True|Channel name|None|InsightConnect Channel|
+|channel_type|string|None|True|Type of channel to be added|['Standard', 'Private']|Standard|
 |team_name|string|None|True|Team name|None|InsightConnect Team|
 
 Example input:
@@ -486,6 +487,7 @@ Example input:
 {
   "channel_description": "This is a test channel.",
   "channel_name": "InsightConnect Channel",
+  "channel_type": "Standard",
   "team_name": "InsightConnect Team"
 }
 ```
@@ -879,6 +881,7 @@ If there is more than one team with the same name in your organization, the olde
 
 # Version History
 
+* 4.1.0 - Add Channel to Team: The user has the option to select the type of channel to be created. The available types are `Standard`, and `Private` 
 * 4.0.1 - Cloud enabled
 * 4.0.0 - Fix issue with Create Teams Enabled Group action's members, and owners input field types
 * 3.2.0 - Send Message Action is updated to support chat messages via chat_id parameter, team_name is set to optional. | Update SDK to latest version.
