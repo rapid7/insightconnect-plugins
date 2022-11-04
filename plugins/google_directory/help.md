@@ -42,8 +42,7 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
-
-{
+{   
   "admin_user": "user@example.com",
   "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
@@ -56,7 +55,6 @@ Example input:
   "project_id": "test_project",
   "token_uri": "https://oauth2.googleapis.com/token"
 }
-
 ```
 
 ## Technical Details
@@ -76,11 +74,9 @@ This action retrieves all contact information from a specific user in the domain
 Example input:
 
 ```
-
 {
   "full_name": "Example User"
 }
-
 ```
 
 ##### Output
@@ -92,7 +88,6 @@ Example input:
 Example output:
 
 ```
-
 {
   "contact": {
     "addresses": [
@@ -126,7 +121,6 @@ Example output:
     ]
   }
 }
-
 ```
 
 #### Get User's Contact Information
@@ -142,11 +136,9 @@ This action retrieves all contact information from a specific user in the domain
 Example input:
 
 ```
-
 {
-"email": "user@example.com"
+  "email": "user@example.com"
 }
-
 ```
 
 ##### Output
@@ -158,41 +150,39 @@ Example input:
 Example output:
 
 ```
-
 {
-  "contact": {
-    "addresses": [
-      {
-        "country": "England",
-        "street": "1 Test street"
-      },
-      {
-        "country": "England",
-        "postal_code": "31-222"
-      },
-      {
-        "country": "England",
-        "postal_code": "31-111",
-        "street": "3 Test street"
-      },
-      {
-        "postal_code": "31-333",
-        "street": "4 Test street"
-      }
-    ],
-    "phone_numbers": [
-      "111111111",
-      "222222222",
-      "333333333"
-    ],
-    "email_addresses": [
-      "user@example.com",
-      "user2@example.com",
-      "user3@example.com"
-    ]
-  }
+   "contact":{
+      "addresses":[
+         {
+            "country":"England",
+            "street":"1 Test street"
+         },
+         {
+            "country":"England",
+            "postal_code":"31-222"
+         },
+         {
+            "country":"England",
+            "postal_code":"31-111",
+            "street":"3 Test street"
+         },
+         {
+            "postal_code":"31-333",
+            "street":"4 Test street"
+         }
+      ],
+      "phone_numbers":[
+         "111111111",
+         "222222222",
+         "333333333"
+      ],
+      "email_addresses":[
+         "user@example.com",
+         "user2@example.com",
+         "user3@example.com"
+      ]
+   }
 }
-
 ```
 
 #### Get All Domain Users
@@ -212,11 +202,9 @@ Requires the following OAuth scope:
 Example input:
 
 ```
-
 {
-"domain": "example.com"
+   "domain": "example.com"
 }
-
 ```
 
 ##### Output
@@ -228,17 +216,18 @@ Example input:
 Example output:
 
 ```
-
 {
-"users": [{
-"email": "user@example.com",
-"name": "Joe Tester"
-}, {
-"email": "user@example.com",
-"name": "Bob Testerson"
-}]
+   "users":[
+      {
+         "email":"user@example.com",
+         "name":"Joe Tester"
+      },
+      {
+         "email":"user@example.com",
+         "name":"Bob Testerson"
+      }
+   ]
 }
-
 ```
 
 #### Suspend User
@@ -258,11 +247,9 @@ Requires the following OAuth scope:
 Example input:
 
 ```
-
 {
-"email": "user@example.com"
+   "email": "user@example.com"
 }
-
 ```
 
 ##### Output
@@ -274,11 +261,9 @@ Example input:
 Example output:
 
 ```
-
 {
-"success": true
+   "success": true
 }
-
 ```
 
 #### Unsuspend User
@@ -298,11 +283,9 @@ Requires the following OAuth scope:
 Example input:
 
 ```
-
 {
-"email": "user@example.com"
+   "email": "user@example.com"
 }
-
 ```
 
 ##### Output
@@ -314,11 +297,9 @@ Example input:
 Example output:
 
 ```
-
 {
-"success": true
+   "success": true
 }
-
 ```
 
 ### Triggers
