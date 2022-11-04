@@ -62,6 +62,8 @@ class Util:
             return MockResponse("get_teams", 200)
         if args[0] == "https://graph.microsoft.com/beta/1/teams/12345/channels":
             return MockResponse("get_channels", 200)
+        if args[0] == "https://graph.microsoft.com/beta/teams/12345/channels":
+            return MockResponse("add_channel_to_team", 201)
         if args[0] == "https://graph.microsoft.com/beta/teams/12345/channels/56789/messages":
             return MockResponse("send_message_channel", 200)
         if args[0] == "https://graph.microsoft.com/beta/teams/12345/channels/56789/members/":
