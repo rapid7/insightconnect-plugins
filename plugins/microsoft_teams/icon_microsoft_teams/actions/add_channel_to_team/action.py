@@ -18,10 +18,11 @@ class AddChannelToTeam(insightconnect_plugin_runtime.Action):
         team_name = params.get(Input.TEAM_NAME)
         channel_name = params.get(Input.CHANNEL_NAME)
         channel_description = params.get(Input.CHANNEL_DESCRIPTION)
+        channel_type = params.get(Input.CHANNEL_TYPE)
 
         teams = get_teams_from_microsoft(self.logger, self.connection, team_name)
         team_id = teams[0].get("id")
 
-        success = create_channel(self.logger, self.connection, team_id, channel_name, channel_description)
+        success = create_channel(self.logger, self.connection, team_id, channel_name, channel_description, channel_type)
 
         return {Output.SUCCESS: success}
