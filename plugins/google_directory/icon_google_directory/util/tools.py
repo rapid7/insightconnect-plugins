@@ -35,6 +35,8 @@ def return_contact_informations_name(input_dict: dict) -> dict:
     :returns: Mapped dictionary that contains keys such as 'addresses', 'phones', and 'emails'
     :rtype: dict
     """
+    if input_dict.get("users") is None:
+        return {"addresses": [], "phone_numbers": [], "email_addresses": []}
     for user in input_dict.get("users"):
         addresses_list = user.get("addresses", [])
         phones_list = [element.get("value") for element in user.get("phones", [])]
