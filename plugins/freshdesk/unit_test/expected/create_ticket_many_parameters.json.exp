@@ -1,0 +1,59 @@
+{
+  "ticket": {
+    "ccEmails": [
+      "user@example.com",
+      "user3@example.com"
+    ],
+    "fwdEmails": [],
+    "replyCcEmails": [
+      "user@example.com",
+      "user3@example.com"
+    ],
+    "ticketCcEmails": [
+      "user@example.com",
+      "user3@example.com"
+    ],
+    "spam": false,
+    "emailConfigId": 103000032123,
+    "frEscalated": false,
+    "groupId": 103000085325,
+    "priority": "High",
+    "requesterId": 103021871212,
+    "source": "Portal",
+    "status": "Open",
+    "subject": "Example Subject",
+    "customFields": {
+      "cf_my_key": "my_value"
+    },
+    "description": "<div>My new ticket</div>",
+    "descriptionText": "My new ticket",
+    "id": 130,
+    "type": "Incident",
+    "productId": 103000000638,
+    "attachments": [
+      {
+        "id": 103002381111,
+        "contentType": "application/octet-stream",
+        "size": 11,
+        "name": "create.png",
+        "attachmentUrl": "https://example.storage.com/euc-cdn.freshdesk.com/data/helpdesk/attachments/production/103002381111/original/new_file.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAS6FNSMY2XLZULJPI%2F20221026%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20221026T065754Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=261db9dcdb4c9829037f193058649f027322ecb44106c9b8294790e683fe30dd",
+        "createdAt": "2022-10-26T06:57:54Z",
+        "updatedAt": "2022-10-26T06:57:54Z"
+      }
+    ],
+    "isEscalated": false,
+    "tags": [
+      "my_tag",
+      "second_tag"
+    ],
+    "nrEscalated": false,
+    "createdAt": "2022-10-26T06:57:52Z",
+    "updatedAt": "2022-10-26T06:57:52Z",
+    "dueBy": "2023-12-24T07:56:15Z",
+    "frDueBy": "2023-12-21T07:56:15Z",
+    "formId": 103000025687,
+    "associatedTicketsList": [
+      122
+    ]
+  }
+}

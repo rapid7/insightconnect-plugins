@@ -1,0 +1,86 @@
+{
+  "cc_emails": [
+    "sample_email@domain.com",
+    "user_email@domain.com"
+  ],
+  "fwd_emails": [],
+  "reply_cc_emails": [
+    "sample_email@domain.com",
+    "user_email@domain.com"
+  ],
+  "ticket_cc_emails": [
+    "sample_email@domain.com",
+    "user_email@domain.com"
+  ],
+  "spam": false,
+  "email_config_id": 103000032123,
+  "fr_escalated": false,
+  "group_id": 103000085325,
+  "priority": 3,
+  "requester_id": 103026389207,
+  "responder_id": null,
+  "source": 6,
+  "status": 8,
+  "subject": "update ticket many parameters",
+  "company_id": null,
+  "custom_fields": {
+    "cf_test_key": 4444748,
+    "cf_new_field": "124.0",
+    "cf_multi_custom": null,
+    "cf_xyz": "new choice",
+    "cf_my_key": null
+  },
+  "description": "its my description",
+  "description_text": "its my description",
+  "id": 54,
+  "type": "Incident",
+  "support_email": null,
+  "to_emails": null,
+  "product_id": 103000000638,
+  "internal_group_id": 103000096140,
+  "internal_agent_id": 103018312012,
+  "association_type": 2,
+  "associated_tickets_list": [
+    22
+  ],
+  "attachments": [
+    {
+      "id": 103002037168,
+      "content_type": "image/png",
+      "size": 169199,
+      "name": "new_file.png",
+      "attachment_url": "https://example-storage.com/euc-cdn.freshdesk.com/data/helpdesk/attachments/production/103002037168/original/new_file.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAS6FNSMY2XLZULJPI%2F20221026%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20221026T074907Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=d45430758d117a7dc62d6c411009d23690d572f819a966feb42bc0b9d85b6c42",
+      "created_at": "2022-10-19T08:19:40Z",
+      "updated_at": "2022-10-19T08:19:40Z"
+    },
+    {
+      "id": 103002385054,
+      "content_type": "application/octet-stream",
+      "size": 11,
+      "name": "new_file.png",
+      "attachment_url": "https://example-storage.com/euc-cdn.freshdesk.com/data/helpdesk/attachments/production/103002385054/original/new_file.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAS6FNSMY2XLZULJPI%2F20221026%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20221026T074907Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=5996c53dabacac5873f08e526697651215212837512f581fd5f45e9def48f0c6",
+      "created_at": "2022-10-26T07:47:36Z",
+      "updated_at": "2022-10-26T07:47:36Z"
+    },
+    {
+      "id": 103002385206,
+      "content_type": "application/octet-stream",
+      "size": 11,
+      "name": "update.png",
+      "attachment_url": "https://example-storage.com/euc-cdn.freshdesk.com/data/helpdesk/attachments/production/103002385206/original/update.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAS6FNSMY2XLZULJPI%2F20221026%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20221026T074907Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=911440719d5238879ba32a4962fff3f4d81adf8b386f72f712c8746a77015cbb",
+      "created_at": "2022-10-26T07:49:07Z",
+      "updated_at": "2022-10-26T07:49:07Z"
+    }
+  ],
+  "is_escalated": false,
+  "tags": [
+    "plugin",
+    "MC"
+  ],
+  "nr_escalated": false,
+  "created_at": "2022-10-19T08:19:40Z",
+  "updated_at": "2022-10-26T07:49:05Z",
+  "due_by": "2022-11-26T23:00:00Z",
+  "fr_due_by": "2022-11-22T23:00:00Z",
+  "nr_due_by": null
+}
