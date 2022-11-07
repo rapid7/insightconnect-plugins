@@ -1,0 +1,59 @@
+{
+  "cc_emails": [
+    "user@example.com",
+    "user3@example.com"
+  ],
+  "fwd_emails": [],
+  "reply_cc_emails": [
+    "user@example.com",
+    "user3@example.com"
+  ],
+  "ticket_cc_emails": [
+    "user@example.com",
+    "user3@example.com"
+  ],
+  "fr_escalated": false,
+  "spam": false,
+  "email_config_id": 103000032123,
+  "group_id": 103000085325,
+  "priority": 3,
+  "requester_id": 103021871212,
+  "responder_id": null,
+  "source": 2,
+  "company_id": null,
+  "status": 2,
+  "subject": "Example Subject",
+  "support_email": null,
+  "to_emails": null,
+  "product_id": 103000000638,
+  "id": 129,
+  "type": "Incident",
+  "due_by": "2023-12-24T07:56:15Z",
+  "fr_due_by": "2023-12-21T07:56:15Z",
+  "is_escalated": false,
+  "description": "<div>My new ticket</div>",
+  "description_text": "My new ticket",
+  "custom_fields": {
+    "cf_test_key": null,
+    "cf_new_field": null,
+    "cf_multi_custom": null,
+    "cf_xyz": null,
+    "cf_my_key": "my_value"
+  },
+  "created_at": "2022-10-26T06:43:54Z",
+  "updated_at": "2022-10-26T06:43:54Z",
+  "tags": [
+    "my_tag",
+    "second_tag"
+  ],
+  "attachments": [],
+  "internal_agent_id": null,
+  "internal_group_id": null,
+  "association_type": 3,
+  "associated_tickets_list": [
+    122
+  ],
+  "form_id": 103000025687,
+  "nr_due_by": null,
+  "nr_escalated": false
+}

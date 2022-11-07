@@ -1,0 +1,61 @@
+{
+  "ticket": {
+    "ccEmails": [
+      "sample_email@domain.com",
+      "user_email@domain.com"
+    ],
+    "fwdEmails": [],
+    "replyCcEmails": [
+      "sample_email@domain.com",
+      "user_email@domain.com"
+    ],
+    "ticketCcEmails": [
+      "sample_email@domain.com",
+      "user_email@domain.com"
+    ],
+    "frEscalated": false,
+    "spam": false,
+    "emailConfigId": 103000032123,
+    "groupId": 103000085325,
+    "priority": "Low",
+    "requesterId": 103021764887,
+    "source": "Phone",
+    "status": "xyz test status",
+    "subject": "API Ticket",
+    "associationType": 3,
+    "productId": 103000000638,
+    "id": 113,
+    "type": "Incident",
+    "dueBy": "2023-12-24T07:26:15Z",
+    "frDueBy": "2023-12-21T07:26:15Z",
+    "isEscalated": false,
+    "description": "<div>Ticket detail</div>",
+    "descriptionText": "Ticket detail",
+    "customFields": {
+      "cf_test_key": 4444748,
+      "cf_new_field": "124.0"
+    },
+    "createdAt": "2022-10-25T07:57:19Z",
+    "updatedAt": "2022-10-25T07:57:19Z",
+    "tags": [
+      "mc_tag",
+      "tag2"
+    ],
+    "attachments": [
+      {
+        "id": 103002319445,
+        "contentType": "image/png",
+        "size": 169199,
+        "name": "first_plugin_attachment.png",
+        "attachmentUrl": "https://example-storage.com/euc-cdn.freshdesk.com/data/helpdesk/attachments/production/103002319445/original/first_plugin_attachment.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAS6FNSMY2XLZULJPI%2F20221026%2Feu-central-1%2Fs3%2Faws4_request&X-Amz-Date=20221026T082652Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=af654b75cfff781b94c968b55164e23aef42f0652a5ee664eabb0a7a28542a31",
+        "createdAt": "2022-10-25T08:05:25Z",
+        "updatedAt": "2022-10-25T08:05:25Z"
+      }
+    ],
+    "associatedTicketsList": [
+      1
+    ],
+    "conversations": [],
+    "nrEscalated": false
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "description": "My new ticket",
+  "name": "Example Requester",
+  "phone": "611800861902",
+  "priority": "High",
+  "requesterId": 103021764889,
+  "source": "Portal",
+  "status": "Open",
+  "subject": "Create ticket few parameters",
+  "type": "Incident"
+}

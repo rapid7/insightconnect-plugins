@@ -1,0 +1,39 @@
+{
+  "attachments": [
+    {
+      "name": "create.png",
+      "content": "aGVsbG8gd29ybGQ="
+    }
+  ],
+  "ccEmails": [
+    "user@example.com",
+    "user3@example.com"
+  ],
+  "customFields": {
+    "my_key": "my_value"
+  },
+  "description": "My new ticket",
+  "dueBy": "2023-12-24T12:56:15+05:00",
+  "email": "user@example.com",
+  "emailConfigId": 103000032123,
+  "frDueBy": "2023-12-21T12:56:15+05:00",
+  "groupId": 103000085325,
+  "name": "Example Requester",
+  "phone": "611800861902",
+  "priority": "High",
+  "productId": 103000000638,
+  "relatedTicketIds": [
+    122
+  ],
+  "requesterId": 103021764889,
+  "source": "Portal",
+  "status": "Open",
+  "subject": "Create ticket many parameters",
+  "tags": [
+    "my_tag",
+    "second_tag"
+  ],
+  "twitterId": "123654789",
+  "type": "Incident",
+  "uniqueExternalId": "my_example_id"
+}
