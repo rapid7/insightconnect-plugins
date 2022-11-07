@@ -1,0 +1,688 @@
+{
+  "tickets": [
+    {
+      "ccEmails": [
+        "user@example.com",
+        "user3@example.com"
+      ],
+      "fwdEmails": [],
+      "replyCcEmails": [
+        "user@example.com",
+        "user3@example.com"
+      ],
+      "ticketCcEmails": [
+        "user@example.com",
+        "user3@example.com"
+      ],
+      "frEscalated": false,
+      "spam": false,
+      "emailConfigId": 103000032123,
+      "groupId": 103000085325,
+      "priority": "High",
+      "requesterId": 103021871212,
+      "source": "Portal",
+      "status": "Open",
+      "subject": "Example Subject",
+      "associationType": 3,
+      "productId": 103000000638,
+      "id": 116,
+      "type": "Incident",
+      "dueBy": "2023-12-24T07:56:15Z",
+      "frDueBy": "2023-12-21T07:56:15Z",
+      "isEscalated": false,
+      "customFields": {},
+      "createdAt": "2022-10-25T08:26:04Z",
+      "updatedAt": "2022-10-25T08:26:04Z",
+      "associatedTicketsCount": 1,
+      "tags": [
+        "my_tag",
+        "second_tag"
+      ],
+      "formId": 103000025687,
+      "nrEscalated": false
+    },
+    {
+      "ccEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "fwdEmails": [],
+      "replyCcEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "ticketCcEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "frEscalated": false,
+      "spam": false,
+      "emailConfigId": 103000032123,
+      "groupId": 103000085325,
+      "priority": "Low",
+      "requesterId": 103021764887,
+      "source": "Phone",
+      "status": "xyz test status",
+      "subject": "API Ticket",
+      "associationType": 3,
+      "productId": 103000000638,
+      "id": 115,
+      "type": "Incident",
+      "dueBy": "2023-12-24T07:26:15Z",
+      "frDueBy": "2023-12-21T07:26:15Z",
+      "isEscalated": false,
+      "customFields": {
+        "cf_test_key": 4444748,
+        "cf_new_field": "124.0"
+      },
+      "createdAt": "2022-10-25T08:25:39Z",
+      "updatedAt": "2022-10-25T08:25:39Z",
+      "associatedTicketsCount": 1,
+      "tags": [
+        "mc_tag",
+        "tag2"
+      ],
+      "nrEscalated": false
+    },
+    {
+      "ccEmails": [
+        "user@example.com",
+        "user3@example.com"
+      ],
+      "fwdEmails": [],
+      "replyCcEmails": [
+        "user@example.com",
+        "user3@example.com"
+      ],
+      "ticketCcEmails": [
+        "user@example.com",
+        "user3@example.com"
+      ],
+      "frEscalated": false,
+      "spam": false,
+      "emailConfigId": 103000032123,
+      "groupId": 103000085325,
+      "priority": "High",
+      "requesterId": 103021871212,
+      "source": "Portal",
+      "status": "Open",
+      "subject": "Example Subject",
+      "associationType": 3,
+      "productId": 103000000638,
+      "id": 114,
+      "type": "Incident",
+      "dueBy": "2023-12-24T07:56:15Z",
+      "frDueBy": "2023-12-21T07:56:15Z",
+      "isEscalated": false,
+      "customFields": {},
+      "createdAt": "2022-10-25T08:22:13Z",
+      "updatedAt": "2022-10-25T08:22:13Z",
+      "associatedTicketsCount": 1,
+      "tags": [
+        "my_tag",
+        "second_tag"
+      ],
+      "formId": 103000025687,
+      "nrEscalated": false
+    },
+    {
+      "ccEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "fwdEmails": [],
+      "replyCcEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "ticketCcEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "frEscalated": false,
+      "spam": false,
+      "emailConfigId": 103000032123,
+      "groupId": 103000085325,
+      "priority": "Low",
+      "requesterId": 103021764887,
+      "source": "Phone",
+      "status": "xyz test status",
+      "subject": "API Ticket",
+      "associationType": 3,
+      "productId": 103000000638,
+      "id": 113,
+      "type": "Incident",
+      "dueBy": "2023-12-24T07:26:15Z",
+      "frDueBy": "2023-12-21T07:26:15Z",
+      "isEscalated": false,
+      "customFields": {
+        "cf_test_key": 4444748,
+        "cf_new_field": "124.0"
+      },
+      "createdAt": "2022-10-25T07:57:19Z",
+      "updatedAt": "2022-10-25T07:57:19Z",
+      "associatedTicketsCount": 1,
+      "tags": [
+        "mc_tag",
+        "tag2"
+      ],
+      "nrEscalated": false
+    },
+    {
+      "ccEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "fwdEmails": [],
+      "replyCcEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "ticketCcEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "frEscalated": true,
+      "spam": false,
+      "groupId": 103000085326,
+      "priority": "Medium",
+      "requesterId": 103020425472,
+      "source": "Portal",
+      "status": "Open",
+      "subject": "Ticket Title",
+      "id": 112,
+      "dueBy": "2022-10-26T12:00:00Z",
+      "frDueBy": "2022-10-25T20:00:00Z",
+      "isEscalated": false,
+      "customFields": {},
+      "createdAt": "2022-10-25T07:55:29Z",
+      "updatedAt": "2022-10-25T23:01:34Z",
+      "tags": [],
+      "formId": 103000025687,
+      "nrEscalated": false
+    },
+    {
+      "ccEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "fwdEmails": [],
+      "replyCcEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "ticketCcEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "frEscalated": true,
+      "spam": false,
+      "groupId": 103000085326,
+      "priority": "Medium",
+      "requesterId": 103020425472,
+      "source": "Portal",
+      "status": "Open",
+      "subject": "Ticket Title",
+      "id": 111,
+      "dueBy": "2022-10-26T12:00:00Z",
+      "frDueBy": "2022-10-25T20:00:00Z",
+      "isEscalated": false,
+      "customFields": {},
+      "createdAt": "2022-10-25T07:38:42Z",
+      "updatedAt": "2022-10-25T23:01:34Z",
+      "tags": [],
+      "formId": 103000025687,
+      "nrEscalated": false
+    },
+    {
+      "ccEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "fwdEmails": [],
+      "replyCcEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "ticketCcEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "frEscalated": false,
+      "spam": false,
+      "emailConfigId": 103000032123,
+      "groupId": 103000085325,
+      "priority": "High",
+      "requesterId": 103026389207,
+      "source": "Email",
+      "status": "xyz test status",
+      "subject": "action Ticket",
+      "associationType": 2,
+      "productId": 103000000638,
+      "id": 110,
+      "type": "Incident",
+      "dueBy": "2022-11-26T23:00:00Z",
+      "frDueBy": "2022-11-22T23:00:00Z",
+      "isEscalated": false,
+      "customFields": {
+        "cf_test_key": 4444748,
+        "cf_new_field": "124.0",
+        "cf_xyz": "new choice"
+      },
+      "createdAt": "2022-10-25T06:28:56Z",
+      "updatedAt": "2022-10-25T06:28:56Z",
+      "tags": [
+        "plugin",
+        "MC"
+      ],
+      "internalAgentId": 103018312012,
+      "internalGroupId": 103000096140,
+      "nrEscalated": false
+    },
+    {
+      "ccEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "fwdEmails": [],
+      "replyCcEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "ticketCcEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "frEscalated": false,
+      "spam": false,
+      "emailConfigId": 103000032123,
+      "groupId": 103000085325,
+      "priority": "High",
+      "requesterId": 103027869908,
+      "source": "Email",
+      "status": "xyz test status",
+      "subject": "action Ticket",
+      "associationType": 2,
+      "productId": 103000000638,
+      "id": 109,
+      "type": "Incident",
+      "dueBy": "2022-11-26T23:00:00Z",
+      "frDueBy": "2022-11-22T23:00:00Z",
+      "isEscalated": false,
+      "customFields": {
+        "cf_test_key": 4444748,
+        "cf_new_field": "124.0",
+        "cf_xyz": "new choice"
+      },
+      "createdAt": "2022-10-24T14:03:46Z",
+      "updatedAt": "2022-10-24T14:03:46Z",
+      "tags": [
+        "plugin",
+        "MC"
+      ],
+      "internalAgentId": 103018312012,
+      "internalGroupId": 103000096140,
+      "nrEscalated": false
+    },
+    {
+      "ccEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "fwdEmails": [],
+      "replyCcEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "ticketCcEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "frEscalated": false,
+      "spam": false,
+      "emailConfigId": 103000032123,
+      "groupId": 103000085325,
+      "priority": "High",
+      "requesterId": 103027869908,
+      "source": "Email",
+      "status": "xyz test status",
+      "subject": "action Ticket",
+      "associationType": 2,
+      "productId": 103000000638,
+      "id": 108,
+      "type": "Incident",
+      "dueBy": "2022-11-26T23:00:00Z",
+      "frDueBy": "2022-11-22T23:00:00Z",
+      "isEscalated": false,
+      "customFields": {
+        "cf_test_key": 4444748,
+        "cf_new_field": "124.0",
+        "cf_xyz": "new choice"
+      },
+      "createdAt": "2022-10-24T14:03:11Z",
+      "updatedAt": "2022-10-24T14:03:11Z",
+      "tags": [
+        "plugin",
+        "MC"
+      ],
+      "internalAgentId": 103018312012,
+      "internalGroupId": 103000096140,
+      "nrEscalated": false
+    },
+    {
+      "ccEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "fwdEmails": [],
+      "replyCcEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "ticketCcEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "frEscalated": false,
+      "spam": false,
+      "emailConfigId": 103000032123,
+      "groupId": 103000085325,
+      "priority": "High",
+      "requesterId": 103027869908,
+      "source": "Email",
+      "status": "xyz test status",
+      "subject": "action Ticket",
+      "associationType": 2,
+      "productId": 103000000638,
+      "id": 107,
+      "type": "Incident",
+      "dueBy": "2022-11-26T23:00:00Z",
+      "frDueBy": "2022-11-22T23:00:00Z",
+      "isEscalated": false,
+      "customFields": {
+        "cf_test_key": 4444748,
+        "cf_new_field": "124.0",
+        "cf_xyz": "new choice"
+      },
+      "createdAt": "2022-10-24T14:01:59Z",
+      "updatedAt": "2022-10-24T14:01:59Z",
+      "tags": [
+        "plugin",
+        "MC"
+      ],
+      "internalAgentId": 103018312012,
+      "internalGroupId": 103000096140,
+      "nrEscalated": false
+    },
+    {
+      "ccEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "fwdEmails": [],
+      "replyCcEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "ticketCcEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "frEscalated": false,
+      "spam": false,
+      "emailConfigId": 103000032123,
+      "groupId": 103000085325,
+      "priority": "High",
+      "requesterId": 103027869908,
+      "source": "Email",
+      "status": "xyz test status",
+      "subject": "action Ticket",
+      "associationType": 2,
+      "productId": 103000000638,
+      "id": 106,
+      "type": "Incident",
+      "dueBy": "2022-11-26T23:00:00Z",
+      "frDueBy": "2022-11-22T23:00:00Z",
+      "isEscalated": false,
+      "customFields": {
+        "cf_test_key": 4444748,
+        "cf_new_field": "124.0",
+        "cf_xyz": "new choice"
+      },
+      "createdAt": "2022-10-24T13:56:39Z",
+      "updatedAt": "2022-10-24T13:56:39Z",
+      "tags": [
+        "plugin",
+        "MC"
+      ],
+      "internalAgentId": 103018312012,
+      "internalGroupId": 103000096140,
+      "nrEscalated": false
+    },
+    {
+      "ccEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "fwdEmails": [],
+      "replyCcEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "ticketCcEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "frEscalated": false,
+      "spam": false,
+      "emailConfigId": 103000032123,
+      "groupId": 103000085325,
+      "priority": "High",
+      "requesterId": 103027869908,
+      "source": "Email",
+      "status": "xyz test status",
+      "subject": "action Ticket",
+      "associationType": 2,
+      "productId": 103000000638,
+      "id": 105,
+      "type": "Incident",
+      "dueBy": "2022-11-26T23:00:00Z",
+      "frDueBy": "2022-11-22T23:00:00Z",
+      "isEscalated": false,
+      "customFields": {
+        "cf_test_key": 4444748,
+        "cf_new_field": "124.0",
+        "cf_xyz": "new choice"
+      },
+      "createdAt": "2022-10-24T13:53:04Z",
+      "updatedAt": "2022-10-24T13:53:04Z",
+      "tags": [
+        "plugin",
+        "MC"
+      ],
+      "internalAgentId": 103018312012,
+      "internalGroupId": 103000096140,
+      "nrEscalated": false
+    },
+    {
+      "ccEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "fwdEmails": [],
+      "replyCcEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "ticketCcEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "frEscalated": false,
+      "spam": false,
+      "emailConfigId": 103000032123,
+      "groupId": 103000085325,
+      "priority": "High",
+      "requesterId": 103027869908,
+      "source": "Email",
+      "status": "xyz test status",
+      "subject": "action Ticket",
+      "associationType": 2,
+      "productId": 103000000638,
+      "id": 104,
+      "type": "Incident",
+      "dueBy": "2022-11-26T23:00:00Z",
+      "frDueBy": "2022-11-22T23:00:00Z",
+      "isEscalated": false,
+      "customFields": {
+        "cf_test_key": 4444748,
+        "cf_new_field": "124.0",
+        "cf_xyz": "new choice"
+      },
+      "createdAt": "2022-10-24T12:45:20Z",
+      "updatedAt": "2022-10-24T12:45:20Z",
+      "tags": [
+        "plugin",
+        "MC"
+      ],
+      "internalAgentId": 103018312012,
+      "internalGroupId": 103000096140,
+      "nrEscalated": false
+    },
+    {
+      "ccEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "fwdEmails": [],
+      "replyCcEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "ticketCcEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "frEscalated": false,
+      "spam": false,
+      "emailConfigId": 103000032123,
+      "groupId": 103000085325,
+      "priority": "High",
+      "requesterId": 103027869908,
+      "source": "Email",
+      "status": "xyz test status",
+      "subject": "action Ticket",
+      "associationType": 2,
+      "productId": 103000000638,
+      "id": 103,
+      "type": "Incident",
+      "dueBy": "2022-11-26T23:00:00Z",
+      "frDueBy": "2022-11-22T23:00:00Z",
+      "isEscalated": false,
+      "customFields": {
+        "cf_test_key": 4444748,
+        "cf_new_field": "124.0",
+        "cf_xyz": "new choice"
+      },
+      "createdAt": "2022-10-24T12:42:10Z",
+      "updatedAt": "2022-10-24T12:42:10Z",
+      "tags": [
+        "plugin",
+        "MC"
+      ],
+      "internalAgentId": 103018312012,
+      "internalGroupId": 103000096140,
+      "nrEscalated": false
+    },
+    {
+      "ccEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "fwdEmails": [],
+      "replyCcEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "ticketCcEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "frEscalated": false,
+      "spam": false,
+      "emailConfigId": 103000032123,
+      "groupId": 103000085325,
+      "priority": "High",
+      "requesterId": 103027869908,
+      "source": "Email",
+      "status": "xyz test status",
+      "subject": "action Ticket",
+      "associationType": 2,
+      "productId": 103000000638,
+      "id": 102,
+      "type": "Incident",
+      "dueBy": "2022-11-26T23:00:00Z",
+      "frDueBy": "2022-11-22T23:00:00Z",
+      "isEscalated": false,
+      "customFields": {
+        "cf_test_key": 4444748,
+        "cf_new_field": "124.0",
+        "cf_xyz": "new choice"
+      },
+      "createdAt": "2022-10-24T12:41:46Z",
+      "updatedAt": "2022-10-24T12:41:46Z",
+      "tags": [
+        "plugin",
+        "MC"
+      ],
+      "internalAgentId": 103018312012,
+      "internalGroupId": 103000096140,
+      "nrEscalated": false
+    },
+    {
+      "ccEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "fwdEmails": [],
+      "replyCcEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "ticketCcEmails": [
+        "edwarg@mail.com",
+        "henryk@gmail.com"
+      ],
+      "frEscalated": false,
+      "spam": false,
+      "emailConfigId": 103000032123,
+      "groupId": 103000085325,
+      "priority": "High",
+      "requesterId": 103026389207,
+      "source": "Email",
+      "status": "xyz test status",
+      "subject": "action Ticket",
+      "associationType": 2,
+      "productId": 103000000638,
+      "id": 101,
+      "type": "Incident",
+      "dueBy": "2022-11-26T23:00:00Z",
+      "frDueBy": "2022-11-22T23:00:00Z",
+      "isEscalated": false,
+      "customFields": {
+        "cf_test_key": 4444748,
+        "cf_new_field": "124.0",
+        "cf_xyz": "new choice"
+      },
+      "createdAt": "2022-10-24T12:41:41Z",
+      "updatedAt": "2022-10-24T12:41:41Z",
+      "tags": [
+        "plugin",
+        "MC"
+      ],
+      "internalAgentId": 103018312012,
+      "internalGroupId": 103000096140,
+      "nrEscalated": false
+    }
+  ]
+}
