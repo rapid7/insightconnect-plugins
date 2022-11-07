@@ -1,0 +1,29 @@
+{
+  "ticket": {
+    "ccEmails": [],
+    "fwdEmails": [],
+    "replyCcEmails": [],
+    "ticketCcEmails": [],
+    "frEscalated": false,
+    "spam": false,
+    "priority": "High",
+    "requesterId": 103028899369,
+    "source": "Portal",
+    "status": "Open",
+    "subject": "Create ticket few parameters",
+    "id": 128,
+    "type": "Incident",
+    "dueBy": "2022-10-27T15:00:00Z",
+    "frDueBy": "2022-10-26T16:00:00Z",
+    "isEscalated": false,
+    "description": "<div>My new ticket</div>",
+    "descriptionText": "My new ticket",
+    "customFields": {},
+    "createdAt": "2022-10-26T06:41:43Z",
+    "updatedAt": "2022-10-26T06:41:43Z",
+    "tags": [],
+    "attachments": [],
+    "formId": 103000025687,
+    "nrEscalated": false
+  }
+}
