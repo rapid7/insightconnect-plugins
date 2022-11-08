@@ -9,6 +9,7 @@ from requests.exceptions import HTTPError
 import json
 import logging
 
+from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_sentinelone.connection.schema import Input
 
 
@@ -144,8 +145,9 @@ class Util:
             "ids"
         ) == ["non_existing_alert_id_1"]:
             return MockResponse("alerts_non_existing", 200)
-        elif args[1] == "https://rapid7.com/web/api/v2.1/threats" and kwargs.get("params", {}).get("ids") == [
-            "valid_threat_id_1"
+        elif args[1] == "https://rapid7.com/web/api/v2.1/threats" and kwargs.get("params", {}).get("ids") in [
+            ["valid_threat_id_1"],
+            ["valid_threat_id_2"],
         ]:
             return MockResponse("threats", 200)
         elif args[1] == "https://rapid7.com/web/api/v2.1/cloud-detection/alerts" and kwargs.get("params", {}).get(

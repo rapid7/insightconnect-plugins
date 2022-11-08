@@ -61,17 +61,20 @@ This action is used to update incident status.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|incident_ids|[]string|None|True|A list of alert or threat IDs to update the incident status on|None|["1118189762920424575", "1118189762920424576"]|
 |incident_status|string|None|True|Incident status|['unresolved', 'in progress', 'resolved']|resolved|
-|threat_id|string|None|True|ID of a threat|None|1118189762920424575|
-|type|string|None|True|Type of incident|['threat', 'alert']|threat|
+|type|string|None|True|Type of incidents|['threats', 'alerts']|threats|
 
 Example input:
 
 ```
 {
+  "incident_ids": [
+    "1118189762920424575",
+    "1118189762920424576"
+  ],
   "incident_status": "resolved",
-  "threat_id": "1118189762920424575",
-  "type": "threat"
+  "type": "threats"
 }
 ```
 
@@ -98,16 +101,19 @@ This action is used to update analyst verdict.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |analyst_verdict|string|None|True|Analyst verdict|['true positive', 'suspicious', 'false positive', 'undefined']|true positive|
-|threat_id|string|None|True|ID of a threat|None|1118189762920424575|
-|type|string|None|True|Type of incident|['threat', 'alert']|threat|
+|incident_ids|[]string|None|True|A list of alert or threat IDs on which we may update the analyst verdict|None|["1118189762920424575", "1118189762920424576"]|
+|type|string|None|True|Type of incidents|['threats', 'alerts']|threats|
 
 Example input:
 
 ```
 {
   "analyst_verdict": "true positive",
-  "threat_id": "1118189762920424575",
-  "type": "threat"
+  "incident_ids": [
+    "1118189762920424575",
+    "1118189762920424576"
+  ],
+  "type": "threats"
 }
 ```
 
@@ -1986,11 +1992,11 @@ Example output:
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
+To convert `threat` into an array use Type Converter Plugin
 
 # Version History
 
-* 8.0.0 - Update for Blacklist action: Fix for unblocked action | Update for Update Analyst Verdict and Update Incident Status actions: Accepting only single thread ID in order to standardize inputs | Update for Quarantine action: unification of the output data when action fails   
+* 7.1.0 - Update for Blacklist action: Fix for unblocked action | Update for Quarantine action: unification of the output data when action fails | Add troubleshooting information about use Type Converter | Mark as Benign action: update description 
 * 7.0.0 - Add new actions Update Analyst Verdict and Update Incident Status | Fix Get Agent Details and Search Agents actions to handle more response scenarios | Add option to authentication with API key
 * 6.2.0 - New actions Create Query, Get Query Status, Cancel Running Query, Get Events, Get Events By Type
 * 6.1.0 - Add new actions Disable Agent and Enable Agent
