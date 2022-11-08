@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.helper import clean
 
 # Custom imports below
 from .schema import AddGroupMemberInput, AddGroupMemberOutput, Input, Output, Component
@@ -18,6 +19,7 @@ class AddGroupMember(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         email = params.get(Input.EMAIL_ADDRESS)
         domain = params.get(Input.DOMAIN)
+
         if not email and not domain:
             raise PluginException(
                 cause="Invalid input.",
@@ -35,9 +37,11 @@ class AddGroupMember(insightconnect_plugin_runtime.Action):
             data = {ID_FIELD: params.get(Input.ID), DOMAIN_FIELD: domain}
 
         response = self.connection.client.add_group_member(data).get(DATA_FIELD)[0]
-        return {
-            Output.ID: response.get(ID_FIELD),
-            Output.FOLDER_ID: response.get("folderId"),
-            Output.EMAIL_ADDRESS: response.get(EMAIL_FIELD),
-            Output.INTERNAL: response.get("internal"),
-        }
+        return clean(
+            {
+                Output.ID: response.get(ID_FIELD),
+                Output.FOLDER_ID: response.get("folderId"),
+                Output.EMAIL_ADDRESS: response.get(EMAIL_FIELD, ""),
+                Output.INTERNAL: response.get("internal"),
+            }
+        )
