@@ -564,6 +564,7 @@ actions:
           - Standard
           - Private
         example: Standard
+        default: Standard
     output:
       success:
         title: Success

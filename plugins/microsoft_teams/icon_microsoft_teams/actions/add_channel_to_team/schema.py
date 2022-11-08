@@ -40,6 +40,7 @@ class AddChannelToTeamInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Channel Type",
       "description": "Type of channel to be added",
+      "default": "Standard",
       "enum": [
         "Standard",
         "Private"
