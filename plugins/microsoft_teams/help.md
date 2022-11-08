@@ -478,7 +478,7 @@ This action is used to add a channel to a team.
 |----|----|-------|--------|-----------|----|-------|
 |channel_description|string|None|True|Channel description|None|This is a test channel.|
 |channel_name|string|None|True|Channel name|None|InsightConnect Channel|
-|channel_type|string|None|True|Type of channel to be added|['Standard', 'Private']|Standard|
+|channel_type|string|Standard|True|Type of channel to be added|['Standard', 'Private']|Standard|
 |team_name|string|None|True|Team name|None|InsightConnect Team|
 
 Example input:
