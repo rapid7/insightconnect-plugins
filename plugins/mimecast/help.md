@@ -19,7 +19,7 @@ This plugin utilizes the [Mimecast API](https://www.mimecast.com/developer/docum
 
 # Supported Product Versions
 
-* Mimecast API 2022-04-22
+* Mimecast API 2022-11-07
 
 # Documentation
 
@@ -708,6 +708,7 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 
 # Version History
 
+* 5.0.2 - Add Group Member: Fix issue when users were running into email validation error when they add a domain, and leave the email address blank on the input section. 
 * 5.0.1 - Add Sandbox availability in region
 * 5.0.0 - Update SDK version | Add new action Get Audit Events | Add unit tests for all actions | Update error handling for all action | Create separate class for API communication | Add base URL of API for plugin
 * 4.1.2 - Fix bug in connection test where it could succeed when an empty response was returned
