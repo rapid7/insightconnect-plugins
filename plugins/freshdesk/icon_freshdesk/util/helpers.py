@@ -5,7 +5,7 @@ from typing import Union
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_freshdesk.util.constants import Attachment, Ticket, TicketField, TextCase
-import magic
+import mimetypes
 
 
 def clean_dict(dict_to_clean: dict) -> dict:
@@ -36,7 +36,8 @@ def create_attachments_form(attachments: list) -> list:
             )
         if not name or not content:
             continue
-        mime_type = magic.from_buffer(content, mime=True)
+
+        mime_type = mimetypes.guess_type(name)[0]
         if not mime_type:
             mime_type = "text/plain"
         form_data.append(("attachments[]", (name, content, mime_type)))
