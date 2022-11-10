@@ -6,7 +6,7 @@ import zipfile
 import insightconnect_plugin_runtime
 import requests
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
-from typing import Union, Tuple
+from typing import Tuple
 
 from komand_sentinelone.util.api import SentineloneAPI
 from komand_sentinelone.util.helper import Helper
@@ -343,7 +343,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return set(existing_os_types) == {"linux", "windows", "macos"}
 
     def get_item_ids_by_hash(self, blacklist_hash: str):
-        response = self._call_api("GET", "restrictions", params={"type": "black_hash", "value": blacklist_hash})
+        response = self._call_api(
+            "GET",
+            "restrictions",
+            params={"type": "black_hash", "includeChildren": True, "includeParents": True, "value": blacklist_hash},
+        )
 
         if len(response.get("errors", [])) == 0:
             ids = []
@@ -422,7 +426,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         of incident IDs, against the SentinelOne instance, to see
         if they exist. Only incident IDs that do exist within that
         instance are returned.
-
         @param incident_ids: list of incidents IDs to check if they
         exist in the SentinelOne instance
         @param _type: type of the incident - either 'threats' or
@@ -447,7 +450,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         'analystVerdict' or 'incidentStatus') of the incident is
         different to the 'new_state' attribute. Only incident IDs that
         have different status are returned.
-
         @param incident_ids: list of incidents IDs to validate the
         status of in the SentinelOne instance
         @param _type: type of the incident - either 'threats' or

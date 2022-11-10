@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Mark a threat as resolved"
+    DESCRIPTION = "Mark a threat as resolved and adds the IOC's to global allow list"
 
 
 class Input:

@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 7.0.0
+version: 7.1.0
 supported_versions: ["2.0.0", "2.1.0"]
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
@@ -1593,7 +1593,7 @@ actions:
         required: false
   mark_as_benign:
     title: Mark as Benign
-    description: Mark a threat as resolved
+    description: Mark a threat as resolved and adds the IOC's to global allow list
     input:
       threat_id:
         title: Threat ID
@@ -2113,6 +2113,11 @@ actions:
         description: Return true if blacklist item was created or deleted
         type: boolean
         required: true
+      message:
+        title: Message
+        description: Return details about action results
+        type: string
+        required: true
   threats_fetch_file:
     title: Fetch Threats File
     description: Fetch a file associated with the threat that matches the filter. Your user role must have permissions to Fetch Threat File - Admin, IR Team, SOC
@@ -2623,7 +2628,7 @@ actions:
         title: Incident IDs
         description: A list of alert or threat IDs on which we may update the analyst verdict
         type: "[]string"
-        example: ["1118189762920424575", "1118189762920424576"]
+        example: [ "1118189762920424575", "1118189762920424576" ]
         required: true
       analyst_verdict:
         title: Analyst Verdict

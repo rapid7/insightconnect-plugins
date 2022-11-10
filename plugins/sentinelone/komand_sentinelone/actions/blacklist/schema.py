@@ -14,6 +14,7 @@ class Input:
     
 
 class Output:
+    MESSAGE = "message"
     SUCCESS = "success"
     
 
@@ -61,6 +62,12 @@ class BlacklistOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "message": {
+      "type": "string",
+      "title": "Message",
+      "description": "Return details about action results",
+      "order": 2
+    },
     "success": {
       "type": "boolean",
       "title": "Success",
@@ -69,6 +76,7 @@ class BlacklistOutput(insightconnect_plugin_runtime.Output):
     }
   },
   "required": [
+    "message",
     "success"
   ]
 }
