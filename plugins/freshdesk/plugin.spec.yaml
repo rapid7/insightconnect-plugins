@@ -19,7 +19,7 @@ tags:
   - ticketing
 hub_tags:
   use_cases: [reporting_and_analytics]
-  keywords: [ticketing, freshdesk]
+  keywords: [ticketing, freshdesk, cloud_enabled]
   features: []
 types:
   attachmentInput:
