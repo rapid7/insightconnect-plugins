@@ -66,13 +66,13 @@ class TestHelpers(TestCase):
                 "many_attachments",
                 [
                     {"name": "create.txt", "content": "aGVsbG8gd29ybGQ="},
-                    {"name": "unit.txt", "content": "ZGZmZmRnZmRiZGpuaXVoZmRpeWVyd2ZnaWhyZmdk="},
-                    {"name": "world.txt", "content": "aGVsbyB1bml0IHRzdHk="},
+                    {"name": "unit.png", "content": "ZGZmZmRnZmRiZGpuaXVoZmRpeWVyd2ZnaWhyZmdk="},
+                    {"name": "world.py", "content": "aGVsbyB1bml0IHRzdHk="},
                 ],
                 [
                     ("attachments[]", ("create.txt", b"hello world", "text/plain")),
-                    ("attachments[]", ("unit.txt", b"dfffdgfdbdjniuhfdiyerwfgihrfgd", "text/plain")),
-                    ("attachments[]", ("world.txt", b"helo unit tsty", "text/plain")),
+                    ("attachments[]", ("unit.png", b"dfffdgfdbdjniuhfdiyerwfgihrfgd", "image/png")),
+                    ("attachments[]", ("world.py", b"helo unit tsty", "text/x-python")),
                 ],
             ],
             [

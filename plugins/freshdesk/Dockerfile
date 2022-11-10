@@ -6,8 +6,6 @@ LABEL sdk=python
 
 # Add any custom package dependencies here
 # NOTE: Add pip packages to requirements.txt
-RUN apt-get update
-RUN apt-get install -y libmagic-dev
 
 # End package dependencies
 
