@@ -1,11 +1,14 @@
-import requests
-from insightconnect_plugin_runtime.exceptions import PluginException
 import json
 import time
+from logging import Logger
+
+import requests
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class ThreadCrowdAPI:
-    def __init__(self, logger):
+    def __init__(self, ssl_verification: bool = True, logger: Logger = None):
+        self.ssl_verification = ssl_verification
         self.logger = logger
         self.url = "https://www.threatcrowd.org/searchApi/v2"
 
@@ -32,20 +35,19 @@ class ThreadCrowdAPI:
             "GET", "https://www.threatcrowd.org/vote.php", params={"vote": vote, "value": entity}, full_response=True
         )
 
-    def _call_api(self, method, url, params=None, json_data=None, full_response: bool = False):
+    def _call_api(self, method, url, params=None, json_data=None, full_response: bool = False):  # noqa: C901
         response = {"text": ""}
         seconds_to_wait = 5
         try:
             i = 0
             while i < 10:
-                response = requests.request(method, url, json=json_data, params=params)
+                response = requests.request(method, url, json=json_data, params=params, verify=self.ssl_verification)
                 i += 1
                 if 200 <= response.status_code < 300 and "Too many connections" in response.text:
                     self.logger.info(f"Too many connections to ThreatCrowd. Waiting {seconds_to_wait} seconds.")
                     time.sleep(seconds_to_wait)
                 else:
                     break
-
             if response.status_code == 404 or (200 <= response.status_code < 300 and not response.text):
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND)
             if response.status_code == 500:
@@ -54,7 +56,7 @@ class ThreadCrowdAPI:
                 raise PluginException(preset=PluginException.Preset.SERVICE_UNAVAILABLE)
             if response.status_code >= 400:
                 response_data = response.json()
-                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response_data.message)
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response_data.get("message", ""))
 
             if 200 <= response.status_code < 300:
                 if "Too many connections" in response.text:
@@ -68,11 +70,11 @@ class ThreadCrowdAPI:
                 return response.json()
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        except json.decoder.JSONDecodeError as e:
-            self.logger.info(f"Invalid JSON: {e}")
+        except json.decoder.JSONDecodeError as error:
+            self.logger.info(f"Invalid JSON: {error}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
-        except requests.exceptions.HTTPError as e:
-            self.logger.info(f"Call to Thread Crowd failed: {e}")
+        except requests.exceptions.HTTPError as error:
+            self.logger.info(f"Call to Thread Crowd failed: {error}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
 
     @staticmethod
