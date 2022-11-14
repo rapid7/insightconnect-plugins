@@ -132,6 +132,7 @@ If installation fails, try increasing the `Timeout` connection input to `900` (1
 
 # Version History
 
+* 4.0.2 - Run: Fix issue with indentation where users have non-empty credentials for input function
 * 4.0.1 - Resolve issue where users experience issues with installing Python packages, and indentation for input function 
 * 4.0.0 - Add custom script credentials in Connection
 * 3.0.0 - Add custom credentials in Run action
