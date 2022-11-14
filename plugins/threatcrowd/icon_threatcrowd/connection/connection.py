@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import ConnectionSchema
+from .schema import ConnectionSchema, Input
 
 # Custom imports below
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException
@@ -12,8 +12,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.client = None
 
     def connect(self, params={}):
-        self.client = ThreadCrowdAPI(self.logger)
-        pass
+        self.ssl_verification = params.get(Input.SSL_VERIFICATION, True)
+        self.client = ThreadCrowdAPI(self.ssl_verification, self.logger)
 
     def test(self):
         try:
