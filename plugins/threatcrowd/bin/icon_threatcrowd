@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Threat Crowd"
 Vendor = "rapid7"
-Version = "3.0.3"
+Version = "4.0.0"
 Description = "Threat Crowd is an open source search engine for threats. Using the Threat Crowd plugin for Rapid7 InsightConnect, users can search by domain, IP address, email address, and other information to discover threats"
 
 
