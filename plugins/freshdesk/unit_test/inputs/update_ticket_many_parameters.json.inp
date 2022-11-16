@@ -1,0 +1,34 @@
+{
+  "ticketId": 54,
+  "attachments": [
+    {
+      "name": "update.png",
+      "content": "aGVsbG8gd29ybGQ="
+    }
+  ],
+  "custom_fields": {
+    "new_field": 124,
+    "test_key": 4444748,
+    "xyz": "new choice"
+  },
+  "description": "its my description",
+  "dueBy": "2022-11-27T01:00:00+02:00",
+  "email": "mar312@mail.com",
+  "emailConfigId": 103000032123,
+  "frDueBy": "2022-11-23T01:00:00+02:00",
+  "groupId": 103000085325,
+  "internalGroupId": 103000096140,
+  "name": "marDev",
+  "phone": "+61180033861423423",
+  "priority": "High",
+  "productId": 103000000638,
+  "status": "xyz test status",
+  "subject": "update ticket many parameters",
+  "tags": [
+    "plugin",
+    "MC"
+  ],
+  "twitterId": "4353453213",
+  "type": "Incident",
+  "uniqueExternalId": "my_extID"
+}

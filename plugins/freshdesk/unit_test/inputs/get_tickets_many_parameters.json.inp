@@ -1,0 +1,11 @@
+{
+  "filterBy": {
+    "companyId": "103000179654"
+  },
+  "include": "stats",
+  "orderBy": "created_at",
+  "orderType": "asc",
+  "predefinedFilter": "",
+  "perPage": 3,
+  "page": 1
+}

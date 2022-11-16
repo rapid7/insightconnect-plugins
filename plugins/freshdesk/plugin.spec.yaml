@@ -1,0 +1,1033 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: freshdesk
+title: FreshDesk
+description: FreshDesk is an online cloud-based customer service software providing help desk support with all smart automations to get things done faster
+version: 1.0.0
+supported_versions: ["FreshDesk API v2"]
+vendor: rapid7
+support: rapid7
+status: []
+cloud_ready: true
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/freshdesk
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.freshdesk.com/
+tags:
+  - freshdesk
+  - ticketing
+hub_tags:
+  use_cases: [reporting_and_analytics]
+  keywords: [ticketing, freshdesk, cloud_enabled]
+  features: []
+types:
+  attachmentInput:
+    name:
+      title: Name
+      description: Attachment name
+      type: string
+      required: true
+      example: 'my_new_file.png'
+    content:
+      title: Content
+      description: Base64 encoded content of the attachment
+      type: string
+      required: true
+      example: 'aGVsbG8gd29ybGQ='
+  attachmentOutput:
+    name:
+      title: Name
+      description: Attachment name
+      type: string
+      required: false
+      example: 'my_new_file.png'
+    attachmentUrl:
+      title: Attachment URL
+      description: URL of the attachment
+      type: string
+      required: false
+      example: 'https://example_storage/my_new23_file.txt'
+    contentType:
+      title: Content Type
+      description: Content type of the attachment
+      type: string
+      required: false
+      example: 'text/plain'
+    createdAt:
+      title: Created At
+      description: Date of the attachment creation
+      type: string
+      required: false
+      example: '2022-10-20T08:12:16Z'
+    updatedAt:
+      title: Updated At
+      description: Date of the attachment update
+      type: string
+      required: false
+      example: '2022-10-21T08:12:16Z'
+    id:
+      title: ID
+      description: ID of the attachment
+      type: integer
+      required: false
+      example: 12365432314
+    size:
+      title: Size
+      description: Size of the attachment
+      type: integer
+      required: false
+      example: 169199
+  stats:
+    agentRespondedAt:
+      title: Agent Responded At
+      description: Agent responded at
+      type: string
+      required: false
+      example: 2022-10-20T16:06:56Z
+    requesterRespondedAt:
+      title: Requester Responded At
+      description: Requester responded at
+      type: string
+      required: false
+      example: 2022-10-20T16:06:56Z
+    firstRespondedAt:
+      title: First Responded At
+      description: First responded at
+      type: string
+      required: false
+      example: 2022-10-20T16:06:56Z
+    statusUpdatedAt:
+      title: Status Updated At
+      description: Status updated at
+      type: string
+      required: false
+      example: 2022-10-20T16:06:56Z
+    reopeneddAt:
+      title: Reopened At
+      description: Reopened at
+      type: string
+      required: false
+      example: 2022-10-20T16:06:56Z
+    resolvedAt:
+      title: Resolved At
+      description: Resolved at
+      type: string
+      required: false
+      example: 2022-10-20T16:06:56Z
+    closedAt:
+      title: Closed At
+      description: Closed at
+      type: string
+      required: false
+      example: 2022-10-20T16:06:56Z
+    pendingSince:
+      title: Pending Since
+      description: Pending since
+      type: string
+      required: false
+      example: 2022-10-20T16:06:56Z
+  company:
+    id:
+      title: ID
+      description: Company ID
+      type: integer
+      required: false
+      example: 123455641568
+    name:
+      title: Name
+      description: Company name
+      type: string
+      required: false
+      example: my-comp-any
+  requester:
+    id:
+      title: ID
+      description: Requester ID
+      type: integer
+      required: false
+      example: 123455641568
+    name:
+      title: Name
+      description: Requester name
+      type: string
+      required: false
+      example: my-comp-any
+    email:
+      title: Email
+      description: Requester email
+      type: string
+      required: false
+      example: user@example.com
+    mobile:
+      title: Mobile
+      description: Requester mobile
+      type: string
+      required: false
+      example: +611800338619023
+    phone:
+      title: Phone
+      description: Requester phone
+      type: string
+      required: false
+      example: +481129338619029
+  conversation:
+    body:
+      title: Body
+      description: Conversation body
+      type: string
+      required: false
+      example: <div style="font-family:-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif; font-size:14px"><div dir="ltr">Hello conversation</div></div>
+    body_text:
+      title: Body Text
+      description: Conversation body text
+      type: string
+      required: false
+      example: Hello conversation
+    id:
+      title: ID
+      description: Conversation ID
+      type: integer
+      required: false
+      example: 4156415341451
+    incoming:
+      title: Incoming
+      description: Incoming conversation
+      type: boolean
+      required: false
+      example: true
+    private:
+      title: Private
+      description: Private conversation
+      type: boolean
+      required: false
+      example: true
+    userId:
+      title: User ID
+      description: Conversation user ID
+      type: integer
+      required: false
+      example: 57564184515
+    supportEmail:
+      title: Support Email
+      description: Support email
+      type: string
+      required: false
+      example: user@example.com
+    toEmails:
+      title: To Emails
+      description: To emails
+      type: '[]string'
+      required: false
+      example: '["user@example.com"]'
+    fromEmail:
+      title: From Email
+      description: From email
+      type: string
+      required: false
+      example: user@example.com
+    ccEmails:
+      title: CC Emails
+      description: CC emails
+      type: '[]string'
+      required: false
+      example: '["user@example.com"]'
+    bccEmails:
+      title: BCC Emails
+      description: BCC emails
+      type: '[]string'
+      required: false
+      example: '["user@example.com"]'
+    emailFailureCount:
+      title: Email Failure Count
+      description: Email failure count
+      type: integer
+      required: false
+      example: 1
+    threadId:
+      title: Thread ID
+      description: Thread ID
+      type: integer
+      required: false
+      example: 13435435435
+    threadMessageId:
+      title: Thread Message ID
+      description: Thread message ID
+      type: integer
+      required: false
+      example: 1344235435435
+    createdAt:
+      title: Created At
+      description: Date of the conversation creation
+      type: string
+      required: false
+      example: '2022-10-20T08:12:16Z'
+    updatedAt:
+      title: Updated At
+      description: Date of the conversation update
+      type: string
+      required: false
+      example: '2022-10-21T08:12:16Z'
+    lastEditedAt:
+      title: Last Edited At
+      description: Date of the last conversation edit
+      type: string
+      required: false
+      example: '2022-10-20T08:12:16Z'
+    lastEditedUserId:
+      title: Last Edited User ID
+      description: Last edited user ID
+      type: integer
+      required: false
+      example: 345435563465
+    attachments:
+      title: Attachments
+      description: Conversation attachments
+      type: '[]attachmentOutput'
+      required: false
+      example: {}
+    automationId:
+      title: Automation ID
+      description: Automation ID
+      type: integer
+      required: false
+      example: 2147834253
+    automationTypeId:
+      title: Automation Type ID
+      description: Automation type ID
+      type: integer
+      required: false
+      example: 435434253
+    autoResponse:
+      title: Auto Response
+      description: Auto response
+      type: boolean
+      required: false
+      example: true
+    ticketId:
+      title: Ticket ID
+      description: Ticket ID
+      type: integer
+      required: false
+      example: 325
+  ticket:
+    name:
+      title: Name
+      description: Name of the requester
+      type: string
+      required: false
+      example: Example Requester
+    requesterId:
+      title: Requester ID
+      description: User ID of the requester
+      type: integer
+      required: false
+      example: 103021764889
+    responderId:
+      title: Responder ID
+      description: ID of the agent to whom the ticket has been assigned
+      type: integer
+      required: false
+      example: 103021764889
+    email:
+      title: Email
+      description: Email address of the requester
+      type: string
+      required: false
+      example: user@example.com
+    phone:
+      title: Phone
+      description: Phone number of the requester
+      type: string
+      required: false
+      example: 611800861902
+    twitterId:
+      title: Twitter ID
+      description: Twitter handle of the requester
+      type: string
+      required: false
+      example: 123654789
+    uniqueExternalId:
+      title: Unique External ID
+      description: External ID of the requester
+      type: string
+      required: false
+      example: my_example_id
+    subject:
+      title: Subject
+      description: Subject of the ticket
+      type: string
+      required: false
+      example: Example Subject
+    type:
+      title: Type
+      description: Helps categorize the ticket according to the different kinds of issues your support team deals with
+      type: string
+      required: false
+      example: Incident
+    status:
+      title: Status
+      description: Status of the ticket
+      type: string
+      required: false
+      example: Open
+    priority:
+      title: Priority
+      description: Priority of the ticket
+      type: string
+      required: false
+      example: High
+    description:
+      title: Description
+      description: HTML content of the ticket
+      type: string
+      required: false
+      example: <div>My new ticket</div>
+    description_text:
+      title: Description Text
+      description: Content of the ticket in plain text
+      type: string
+      required: false
+      example: My new ticket
+    attachments:
+      title: Attachments
+      description: Ticket attachments. The total size of these attachments cannot exceed 20MB
+      type: "[]attachmentOutput"
+      required: false
+      example: '[]'
+    ccEmails:
+      title: CC Emails
+      description: Email address added in the 'CC' field of the incoming ticket email
+      type: "[]string"
+      required: false
+      example: '["user@example.com"]'
+    toEmails:
+      title: To Emails
+      description: Email addresses to which the ticket was originally sent
+      type: "[]string"
+      required: false
+      example: '["user@example.com"]'
+    replyCcEmails:
+      title: Reply CC Emails
+      description: Email address added while replying to a ticket
+      type: "[]string"
+      required: false
+      example: '["user@example.com"]'
+    fwdEmails:
+      title: Forward Emails
+      description: Email address added while forwarding a ticket
+      type: "[]string"
+      required: false
+      example: '["user@example.com"]'
+    customFields:
+      title: Custom Fields
+      description: Key value pairs containing the names and values of custom fields. Read more at https://support.freshdesk.com/support/solutions/articles/216548
+      type: object
+      required: false
+      example: '{"my_key": "my_value"}'
+    dueBy:
+      title: Due By
+      description: Timestamp that denotes when the ticket is due to be resolved
+      type: string
+      required: false
+      example: 2023-12-24T12:56:15+05:00
+    emailConfigId:
+      title: Email Config ID
+      description: ID of email config which is used for this ticket
+      type: integer
+      required: false
+      example: 103000032123
+    frDueBy:
+      title: First Response Due By
+      description: Timestamp that denotes when the first response is due
+      type: date
+      required: false
+      example: 2023-12-21T12:56:15+05:00
+    createdAt:
+      title: Created At
+      description: Ticket creation timestamp
+      type: date
+      required: false
+      example: 2023-12-21T12:56:15+05:00
+    updatedAt:
+      title: Updated At
+      description: Ticket updated timestamp
+      type: date
+      required: false
+      example: 2023-12-21T12:56:15+05:00
+    frEscalated:
+      title: First Response Escalated
+      description: Set to true if the ticket has been escalated as the result of first response time being breached
+      type: boolean
+      required: false
+      example: true
+    groupId:
+      title: Group ID
+      description: ID of the group to which the ticket has been assigned
+      type: integer
+      required: false
+      example: 103000085325
+    productId:
+      title: Product ID
+      description: ID of the product to which the ticket is associated
+      type: integer
+      required: false
+      example: 103000000638
+    source:
+      title: Source
+      description: The channel through which the ticket was created
+      type: string
+      required: false
+      example: Portal
+    tags:
+      title: Tags
+      description: Tags that have been associated with the ticket
+      type: "[]string"
+      required: false
+      example: '["my_tag", "second_tag"]'
+    companyId:
+      title: Company ID
+      description: Company ID of the requester
+      type: integer
+      required: false
+      example: 103000179654
+    internalAgentId:
+      title: Internal Agent ID
+      description: ID of the internal agent which the ticket should be assigned with
+      type: integer
+      required: false
+      example: 103018312012
+    internalGroupId:
+      title: Internal Group ID
+      description: ID of the internal group to which the ticket should be assigned with
+      type: integer
+      required: false
+      example: 103000096140
+    associatedTicketsList:
+      title: Associated Tickets List
+      description: List of Ticket IDs which are linked to this ticket
+      type: "[]integer"
+      required: false
+      example: '[21, 43]'
+    associationType:
+      title: Association Type
+      description: Association type, where 1 - Parent, 2 - Child, 3 - Tracker, 4 - Related
+      type: integer
+      required: false
+      example: 3
+    parentId:
+      title: Parent ID
+      description: ID of the parent ticket under which the child ticket was created
+      type: integer
+      required: false
+      example: 12
+    stats:
+      title: Stats
+      description: Ticket stats
+      type: stats
+      required: false
+      example: { }
+    company:
+      title: Company
+      description: Company details
+      type: company
+      required: false
+      example: { }
+    requester:
+      title: Requester
+      description: Requester details
+      type: requester
+      required: false
+      example: { }
+    conversations:
+      title: Conversations
+      description: Ticket conversations
+      type: '[]conversation'
+      required: false
+      example: [ ]
+    spam:
+      title: Spam
+      description: Set to true if the ticket has been marked as spam
+      type: boolean
+      required: false
+      example: false
+    deleted:
+      title: Deleted
+      description: Set to true if the ticket has been deleted/trashed. Deleted tickets will not be displayed in any views except the `deleted` filter
+      type: boolean
+      required: false
+      example: false
+    isEscalated:
+      title: Is Escalated
+      description: Set to true if the ticket has been escalated for any reason
+      type: boolean
+      required: false
+      example: false
+  ticketsFilter:
+    requesterId:
+      title: Requester ID
+      description: ID of the requester
+      type: integer
+      required: false
+      example: 54332121123
+    email:
+      title: Requester Email
+      description: Email of the requester
+      type: string
+      required: false
+      example: user@example.com
+    uniqueExternalId:
+      title: Requester Unique External ID
+      description: External ID of the requester
+      type: string
+      required: false
+      example: my_example_id
+    companyId:
+      title: Company ID
+      description: Company ID of the requester
+      type: integer
+      required: false
+      example: 103000179654
+    updatedSince:
+      title: Updated Since
+      description: Tickets updated since specified date
+      type: date
+      required: false
+      example: 2023-12-24T12:56:15+05:00
+connection:
+  domainName:
+    title: Domain Name
+    description: Name of your FreshDesk domain
+    type: string
+    required: true
+    example: rapid7
+  apiKey:
+    title: API Key
+    description: API key
+    type: credential_secret_key
+    required: true
+    example: eXaMpl3APIK3Y
+actions:
+  createTicket:
+    title: Create Ticket
+    description: Create a FreshDesk ticket. At least one of those parameters must be provided - 'requesterId', 'email', 'phone', 'twitterId', 'uniqueExternalId'
+    input:
+      name:
+        title: Name
+        description: Name of the requester
+        type: string
+        required: false
+        example: Example Requester
+      requesterId:
+        title: Requester ID
+        description: User ID of the requester. For existing contacts, the requesterId can be passed instead of the requester's email
+        type: integer
+        required: false
+        example: 103021764889
+      email:
+        title: Email
+        description: Email address of the requester. If no contact exists with this email address in FreshDesk, it will be added as a new contact
+        type: string
+        required: false
+        example: user@example.com
+      phone:
+        title: Phone
+        description: Phone number of the requester. If no contact exists with this phone number in FreshDesk, it will be added as a new contact. If the phone number is set and the email address is not, then the name attribute is mandatory
+        type: string
+        required: false
+        example: 611800861902
+      twitterId:
+        title: Twitter ID
+        description: Twitter handle of the requester. If no contact exists with this handle in FreshDesk, it will be added as a new contact
+        type: string
+        required: false
+        example: 123654789
+      uniqueExternalId:
+        title: Unique External ID
+        description: External ID of the requester. If no contact exists with this external ID in FreshDesk, they will be added as a new contact
+        type: string
+        required: false
+        example: my_example_id
+      subject:
+        title: Subject
+        description: Subject of the ticket
+        type: string
+        required: true
+        example: Example Subject
+      type:
+        title: Type
+        description: Helps categorize the ticket according to the different kinds of issues your support team deals with
+        type: string
+        required: false
+        example: Incident
+      status:
+        title: Status
+        description: Status of the ticket
+        type: string
+        required: true
+        example: Open
+      priority:
+        title: Priority
+        description: Priority of the ticket
+        type: string
+        required: true
+        example: High
+      description:
+        title: Description
+        description: HTML content of the ticket
+        type: string
+        required: true
+        example: My new ticket
+      attachments:
+        title: Attachments
+        description: Ticket attachments. The total size of these attachments cannot exceed 20MB
+        type: "[]attachmentInput"
+        required: false
+        example: '[{"name": "new_file.png", "content": "aGVsbG8gd29ybGQ="}]'
+      ccEmails:
+        title: CC Emails
+        description: Email address added in the 'CC' field of the incoming ticket email
+        type: "[]string"
+        required: false
+        example: '["user@example.com"]'
+      customFields:
+        title: Custom Fields
+        description: Key value pairs containing the names and values of custom fields. Read more at https://support.freshdesk.com/support/solutions/articles/216548
+        type: object
+        required: false
+        example: '{"my_key": "my_value"}'
+      dueBy:
+        title: Due By
+        description: Timestamp that denotes when the ticket is due to be resolved
+        type: date
+        required: false
+        example: 2023-12-24T12:56:15+05:00
+      emailConfigId:
+        title: Email Config ID
+        description: ID of email config which is used for this ticket. If productId is given and emailConfigId is not given, product's primary emailConfigId will be set
+        type: integer
+        required: false
+        example: 103000032123
+      frDueBy:
+        title: First Response Due By
+        description: Timestamp that denotes when the first response is due
+        type: date
+        required: false
+        example: 2023-12-21T12:56:15+05:00
+      groupId:
+        title: Group ID
+        description: ID of the group to which the ticket has been assigned. The default value is the ID of the group that is associated with the given emailConfigId
+        type: integer
+        required: false
+        example: 103000085325
+      productId:
+        title: Product ID
+        description: ID of the product to which the ticket is associated. It will be ignored if the emailConfigId attribute is set in the request
+        type: integer
+        required: false
+        example: 103000000638
+      source:
+        title: Source
+        description: The channel through which the ticket was created
+        type: string
+        required: false
+        example: Portal
+      tags:
+        title: Tags
+        description: Tags that have been associated with the ticket
+        type: "[]string"
+        required: false
+        example: '["my_tag", "second_tag"]'
+      companyId:
+        title: Company ID
+        description: Company ID of the requester. This attribute can only be set if the Multiple Companies feature is enabled (Estate plan and above)
+        type: integer
+        required: false
+        example: 103000179654
+      internalAgentId:
+        title: Internal Agent ID
+        description: ID of the internal agent which the ticket should be assigned with. To use this parameter you have to enable `Shared ownership` in Admin > Advanced Ticketing menu
+        type: integer
+        required: false
+        example: 103018312012
+      internalGroupId:
+        title: Internal Group ID
+        description: ID of the internal group to which the ticket should be assigned with. To use this parameter you have to enable `Shared ownership` in Admin > Advanced Ticketing menu
+        type: integer
+        required: false
+        example: 103000096140
+      relatedTicketIds:
+        title: Related Ticket IDs
+        description: List of Ticket IDs which needs to be linked to the Tracker being created. To use this parameter you have to enable `Linked tickets` in Admin > Advanced Ticketing menu
+        type: "[]integer"
+        required: false
+        example: '[21, 43]'
+      parentId:
+        title: Parent ID
+        description: ID of the parent ticket under which the child ticket needs to be created. To use this parameter you have to enable `Parent-child ticketing` in Admin > Advanced Ticketing menu
+        type: integer
+        required: false
+        example: 11
+    output:
+      ticket:
+        title: Ticket
+        description: Ticket details
+        type: ticket
+        required: true
+        example: {}
+  updateTicket:
+    title: Update Ticket
+    description: Update a FreshDesk ticket
+    input:
+      ticketId:
+        title: Ticket ID
+        description: ID of the Ticket
+        type: integer
+        required: true
+        example: 178
+      name:
+        title: Name
+        description: Name of the requester
+        type: string
+        required: false
+        example: Example Requester
+      requesterId:
+        title: Requester ID
+        description: User ID of the requester. For existing contacts, the requesterId can be passed instead of the requester's email
+        type: integer
+        required: false
+        example: 103021764889
+      email:
+        title: Email
+        description: Email address of the requester. If no contact exists with this email address in FreshDesk, it will be added as a new contact
+        type: string
+        required: false
+        example: user@example.com
+      phone:
+        title: Phone
+        description: Phone number of the requester. If no contact exists with this phone number in FreshDesk, it will be added as a new contact. If the phone number is set and the email address is not, then the name attribute is mandatory
+        type: string
+        required: false
+        example: 611800861902
+      twitterId:
+        title: Twitter ID
+        description: Twitter handle of the requester. If no contact exists with this handle in FreshDesk, it will be added as a new contact
+        type: string
+        required: false
+        example: 123654789
+      uniqueExternalId:
+        title: Unique External ID
+        description: External ID of the requester. If no contact exists with this external ID in FreshDesk, they will be added as a new contact
+        type: string
+        required: false
+        example: my_example_id
+      subject:
+        title: Subject
+        description: Subject of the ticket
+        type: string
+        required: false
+        example: Example Subject
+      type:
+        title: Type
+        description: Helps categorize the ticket according to the different kinds of issues your support team deals with
+        type: string
+        required: false
+        example: Incident
+      status:
+        title: Status
+        description: Status of the ticket
+        type: string
+        required: false
+        example: Open
+      priority:
+        title: Priority
+        description: Priority of the ticket
+        type: string
+        required: false
+        example: High
+      description:
+        title: Description
+        description: HTML content of the ticket
+        type: string
+        required: false
+        example: My new ticket
+      attachments:
+        title: Attachments
+        description: Ticket attachments. The total size of these attachments cannot exceed 20MB
+        type: "[]attachmentInput"
+        required: false
+        example: '[{"name": "new_file.png", "content": "aGVsbG8gd29ybGQ="}]'
+      customFields:
+        title: Custom Fields
+        description: Key value pairs containing the names and values of custom fields. Read more at https://support.freshdesk.com/support/solutions/articles/216548
+        type: object
+        required: false
+        example: '{"my_key": "my_value"}'
+      dueBy:
+        title: Due By
+        description: Timestamp that denotes when the ticket is due to be resolved
+        type: date
+        required: false
+        example: 2023-12-24T12:56:15+05:00
+      emailConfigId:
+        title: Email Config ID
+        description: ID of email config which is used for this ticket. If productId is given and emailConfigId is not given, product's primary emailConfigId will be set
+        type: integer
+        required: false
+        example: 103000032123
+      frDueBy:
+        title: First Response Due By
+        description: Timestamp that denotes when the first response is due
+        type: date
+        required: false
+        example: 2023-12-21T12:56:15+05:00
+      groupId:
+        title: Group ID
+        description: ID of the group to which the ticket has been assigned. The default value is the ID of the group that is associated with the given emailConfigId
+        type: integer
+        required: false
+        example: 103000085325
+      productId:
+        title: Product ID
+        description: ID of the product to which the ticket is associated. It will be ignored if the emailConfigId attribute is set in the request
+        type: integer
+        required: false
+        example: 103000000638
+      source:
+        title: Source
+        description: The channel through which the ticket was created
+        type: string
+        required: false
+        example: Portal
+      tags:
+        title: Tags
+        description: Tags that have been associated with the ticket
+        type: "[]string"
+        required: false
+        example: '["my_tag", "second_tag"]'
+      companyId:
+        title: Company ID
+        description: Company ID of the requester. This attribute can only be set if the Multiple Companies feature is enabled (Estate plan and above)
+        type: integer
+        required: false
+        example: 103000179654
+      internalAgentId:
+        title: Internal Agent ID
+        description: ID of the internal agent which the ticket should be assigned with. To use this parameter you have to enable `Shared ownership` in Admin > Advanced Ticketing menu
+        type: integer
+        required: false
+        example: 103018312012
+      internalGroupId:
+        title: Internal Group ID
+        description: ID of the internal group to which the ticket should be assigned with. To use this parameter you have to enable `Shared ownership` in Admin > Advanced Ticketing menu
+        type: integer
+        required: false
+        example: 103000096140
+      relatedTicketIds:
+        title: Related Ticket IDs
+        description: List of Ticket IDs which needs to be linked to the Tracker being created. To use this parameter you have to enable `Linked tickets` in Admin > Advanced Ticketing menu
+        type: "[]integer"
+        required: false
+        example: '[21, 43]'
+    output:
+      ticket:
+        title: Ticket
+        description: Ticket details
+        type: ticket
+        required: true
+        example: '{}'
+  getTicketById:
+    title: Get Ticket by ID
+    description: Get ticket details
+    input:
+      ticketId:
+        title: Ticket ID
+        description: ID of the Ticket
+        type: integer
+        required: true
+        example: 178
+      include:
+        title: Include
+        description: Include additional ticket informations
+        type: string
+        required: false
+        example: company
+        enum:
+          - conversations
+          - requester
+          - company
+          - stats
+          - None
+    output:
+      ticket:
+        title: Ticket
+        description: Ticket details
+        type: ticket
+        required: true
+        example: '{}'
+  getTickets:
+    title: Get Tickets List
+    description: Get tickets list. In `filterBy` input you can use only one of `requester` type inputs - `Requester ID`, `Requester Email` or `Requester Unique External ID`
+    input:
+      predefinedFilter:
+        title: Predefined Filter
+        description: The various filters available are new_and_my_open, watching, spam, deleted
+        type: string
+        required: false
+        example: new_and_my_open
+      include:
+        title: Include
+        description: Include additional ticket informations
+        type: string
+        required: false
+        example: company
+        enum:
+          - requester
+          - company
+          - stats
+          - None
+      filterBy:
+        title: Filter By
+        description: Filter tickets by a specific fields
+        type: ticketsFilter
+        required: false
+        example: '{"requesterId": 54332121123}'
+      orderBy:
+        title: Order By
+        description: Order tickets by specific field
+        type: string
+        required: false
+        example: status
+        enum: 
+          - created_at
+          - due_by
+          - updated_at
+          - status
+      orderType:
+        title: Order Type
+        description: Type of the order
+        type: string
+        required: false
+        example: asc
+        enum: 
+          - asc
+          - desc
+      perPage:
+        title: Per Page
+        description: Results per page. Less or equal to 100
+        type: integer
+        required: false
+        example: 12
+      page:
+        title: Page
+        description: Page number
+        type: integer
+        required: false
+        example: 3
+    output:
+      tickets:
+        title: Tickets
+        description: List of tickets
+        type: '[]ticket'
+        required: true
+        example: '[]'
