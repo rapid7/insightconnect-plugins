@@ -9,7 +9,7 @@ from .schema import Component, Input, RunInput, RunOutput
 
 sys.path.append("/var/cache/python_dependencies/lib/python3.8/site-packages")
 
-INDENTATION_CHARACTER = " "
+INDENTATION_CHARACTER = " " * 4
 
 
 class Run(insightconnect_plugin_runtime.Action):
@@ -19,8 +19,8 @@ class Run(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        function_ = params.get(Input.FUNCTION, "").replace("\t", INDENTATION_CHARACTER)
-        function_ = self._add_credentials_to_function(function_)
+        function_ = params.get(Input.FUNCTION, "")
+        function_ = self._add_credentials_to_function(function_, self._check_indentation_character(function_))
 
         self.logger.info(f"Input: (below)\n\n{params.get(Input.INPUT)}\n")
         self.logger.info(f"Function: (below)\n\n{function_}\n")
@@ -78,3 +78,21 @@ class Run(insightconnect_plugin_runtime.Action):
         function_lines = function_.split("\n")
         function_lines = [function_lines[0]] + credentials_definition + function_lines[1:]
         return "\n".join(function_lines)
+
+    @staticmethod
+    def _check_indentation_character(function_: str) -> str:
+        """
+        This function returns the indentation character that is used in the input python's function
+        :param function_: Python script function
+        :type: str
+        :return: Indentation character that is used
+        :rtype: str
+        """
+
+        indentation_character = ""
+        first_new_line_index = function_.index("\n")
+        for character in function_[first_new_line_index + 1 :]:
+            if character in ("\t", " "):
+                indentation_character += character
+            else:
+                return indentation_character

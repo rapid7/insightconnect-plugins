@@ -47,3 +47,19 @@ class TestRun(TestCase):
             action.run(params=params)
         self.assertEqual(error.exception.cause, "Output type was None")
         self.assertEqual(error.exception.assistance, "Ensure that output has a non-None data type")
+
+    @parameterized.expand(
+        [
+            ["def run(params={}):\n\treturn {'username': username}", "\t"],
+            ["def run(params={}):\n\t\treturn {'username': username}", "\t\t"],
+            ["def run(params={}):\n\t return {'username': username}", "\t "],
+            ["def run(params={}):\n return {'username': username}", " "],
+            ["def run(params={}):\n  return {'username': username}", "  "],
+            ["def run(params={}):\n   return {'username': username}", "   "],
+            ["def run(params={}):\n    return {'username': username}", "    "],
+        ]
+    )
+    def test_check_indentation_character(self, mock_exec_python_function: Mock, function_: str, expected: str) -> None:
+        action = Util.default_connector(Run())
+        response = action._check_indentation_character(function_)
+        self.assertEqual(response, expected)
