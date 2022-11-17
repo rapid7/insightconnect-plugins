@@ -61,7 +61,7 @@ class InsightCloudSecAPI:
         return True
 
     def detach_policy(self, resource_id: str, policy_resource_id: str) -> bool:
-        self.make_json_request(
+        self.make_request(
             path=DETACH_POLICY_ENDPOINT.format(resource_id=resource_id, policy_id=policy_resource_id),
             method="POST",
             headers=self.get_headers(),
