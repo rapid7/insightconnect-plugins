@@ -54,9 +54,10 @@ def return_contact_information_name(input_dict: dict) -> dict:
     :returns: Mapped dictionary that contains keys such as 'addresses', 'phones', and 'emails'
     :rtype: dict
     """
-    # if input_dict.get("users") is None:
-    #     return {"addresses": [], "phone_numbers": [], "email_addresses": []}
+    if input_dict.get("users") is None:
+        return {"name": None}
     for user in input_dict.get("users"):
+        name = user.get("name").get("fullName")
         addresses_list = user.get("addresses", [])
         phones_list = [element.get("value") for element in user.get("phones", [])]
         emails_list = [element.get("address") for element in user.get("emails", [])]
@@ -65,11 +66,12 @@ def return_contact_information_name(input_dict: dict) -> dict:
                 address["street"] = address.pop("streetAddress")
             if "postalCode" in address:
                 address["postal_code"] = address.pop("postalCode")
-        return {"addresses": addresses_list, "phone_numbers": phones_list, "email_addresses": emails_list}
+        return {"name": name, "addresses": addresses_list, "phone_numbers": phones_list, "email_addresses": emails_list}
 
 
 def handle_service_error(error) -> dict:
-    if "'NoneType' object is not iterable" in error:
+    if error:
+        logging.info("Hey hephzi this is what you're looking for" + str(error))
         message = {"cause": "User was not found",
                    "assistance": "A user was not found with the passed search parameters",
                    "data": error}
