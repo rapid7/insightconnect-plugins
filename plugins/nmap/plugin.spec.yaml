@@ -245,21 +245,25 @@ actions:
         type: string
         description: Host(s) to scan in Nmap-allowed formats
         required: true
+        example: "examplehost"
       ports:
         title: Ports
         type: string
         description: Port(s) to scan in Nmap-allowed formats
         required: false
+        example: "8080"
       arguments:
         title: Arguments
         type: string
         description: Arguments to supply to the Nmap command
         required: false
+        example: "-A"
       sudo:
         title: Sudo
         type: boolean
         description: Whether or not to use superuser privileges for scan
         required: true
+        example: true
         default: false
     output:
       result:
