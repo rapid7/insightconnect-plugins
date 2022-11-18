@@ -13,6 +13,10 @@ The Nmap plugin runs `nmap` directly and returns the results.
 
 _This plugin does not contain any requirements._
 
+# Supported Product Versions
+
+* 2022-11-18
+
 # Documentation
 
 ## Setup
@@ -105,6 +109,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.3 - Fixed issue with sudo = True not working
 * 1.0.2 - New spec and help.md format for the Extension Library
 * 1.0.1 - Support web server mode
 * 1.0.0 - Overhaul with additional inputs and typed output
