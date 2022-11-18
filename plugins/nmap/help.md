@@ -35,19 +35,19 @@ This action is used to run an Nmap scan.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|arguments|string|None|False|Arguments to supply to the Nmap command|None|None|
-|hosts|string|None|True|Host(s) to scan in Nmap-allowed formats|None|None|
-|ports|string|None|False|Port(s) to scan in Nmap-allowed formats|None|None|
-|sudo|boolean|False|True|Whether or not to use superuser privileges for scan|None|None|
+|arguments|string|None|False|Arguments to supply to the Nmap command|None|-A|
+|hosts|string|None|True|Host(s) to scan in Nmap-allowed formats|None|examplehost|
+|ports|string|None|False|Port(s) to scan in Nmap-allowed formats|None|8080|
+|sudo|boolean|False|True|Whether or not to use superuser privileges for scan|None|True|
 
 Example input:
 
 ```
 {
   "arguments": "-A",
-  "hosts": "exampleHost",
+  "hosts": "examplehost",
   "ports": "8080",
-  "sudo": false
+  "sudo": true
 }
 ```
 
