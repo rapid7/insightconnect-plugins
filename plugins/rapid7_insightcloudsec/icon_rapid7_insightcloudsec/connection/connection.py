@@ -13,7 +13,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
-        self.api = InsightCloudSecAPI(params.get(Input.URL), params.get(Input.APIKEY).get("secretKey"), self.logger)
+        self.api = InsightCloudSecAPI(
+            params.get(Input.URL), params.get(Input.APIKEY).get("secretKey"), params.get(Input.SSLVERIFY), self.logger
+        )
 
     def test(self):
         try:

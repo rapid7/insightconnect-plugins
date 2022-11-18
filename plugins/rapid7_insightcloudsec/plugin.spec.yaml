@@ -7,7 +7,6 @@ description: InsightCloudSec by Rapid7 (formerly DivvyCloud) is a Cloud-Native S
 version: 1.0.0
 supported_versions: ["22.10.19"]
 vendor: rapid7
-cloud_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_insightcloudsec
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -17,7 +16,7 @@ support: rapid7
 status: []
 hub_tags:
   use_cases: [remediation_management, reporting_and_analytics]
-  keywords: [rapid7, insightcloudsec, cloud_enabled]
+  keywords: [rapid7, insightcloudsec]
   features: []
 types:
   accountDetails:
@@ -217,6 +216,13 @@ connection:
     type: string
     required: true
     example: https://example.com
+  sslVerify:
+    title: SSL Verify
+    description: SSL verify
+    type: boolean
+    required: true
+    default: true
+    example: true
 actions:
   get_account_details:
     title: Get Account Details
@@ -346,13 +352,13 @@ actions:
         description: Date the exemption begins, e.g. 2022-10-20T00:00:00Z
         type: date
         required: true
-        example: 2022-10-20T00:00:00Z
+        example: 2022-10-20T12:00:00+02:00
       expirationDate:
         title: Expiration Date
         description: Date the exemption ends, e.g. 2022-10-21T00:00:00Z. If none is provided, the default is no expiration
         type: date
         required: false
-        example: 2022-10-21T00:00:00Z
+        example: 2022-10-21T12:00:00+02:00
       notes:
         title: Notes
         description: Any notes or documentation for the exemption

@@ -17,9 +17,10 @@ from icon_rapid7_insightcloudsec.util.endpoints import (
 
 
 class InsightCloudSecAPI:
-    def __init__(self, url: str, api_key: str, logger):
+    def __init__(self, url: str, api_key: str, ssl_verify: bool, logger):
         self.base_url = url
         self._api_key = api_key
+        self.ssl_verify = ssl_verify
         self.logger = logger
 
     def get_headers(self) -> dict:
@@ -98,6 +99,7 @@ class InsightCloudSecAPI:
             response = requests.request(
                 method=method.upper(),
                 url=f"{self.base_url}/v2{path}",
+                verify=self.ssl_verify,
                 json=json_data,
                 params=params,
                 data=data,

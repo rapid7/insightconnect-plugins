@@ -5,6 +5,7 @@ import json
 
 class Input:
     APIKEY = "apiKey"
+    SSLVERIFY = "sslVerify"
     URL = "url"
     
 
@@ -20,6 +21,13 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "InsightCloudSec API key",
       "order": 1
     },
+    "sslVerify": {
+      "type": "boolean",
+      "title": "SSL Verify",
+      "description": "SSL verify",
+      "default": true,
+      "order": 3
+    },
     "url": {
       "type": "string",
       "title": "URL",
@@ -29,6 +37,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   },
   "required": [
     "apiKey",
+    "sslVerify",
     "url"
   ],
   "definitions": {

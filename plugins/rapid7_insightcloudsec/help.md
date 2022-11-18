@@ -29,6 +29,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |apiKey|credential_secret_key|None|True|InsightCloudSec API key|None|02699626f388ed830012e5b787640e71c56d42d8|
+|sslVerify|boolean|True|True|SSL verify|None|True|
 |url|string|None|True|InsightCloudSec URL|None|https://example.com|
 
 Example input:
@@ -36,6 +37,7 @@ Example input:
 ```
 {
   "apiKey": "3395856ce81f2b7382dee72602f798b642f14140",
+  "sslVerify": true,
   "url": "https://example.com"
 }
 ```
@@ -120,20 +122,20 @@ This action is used to create an exemption.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |approver|string|None|True|The exemption approver|None|user@example.com|
-|expirationDate|date|None|False|Date the exemption ends, e.g. 2022-10-21T00:00:00Z. If none is provided, the default is no expiration|None|2022-10-21T00:00:00Z|
+|expirationDate|date|None|False|Date the exemption ends, e.g. 2022-10-21T00:00:00Z. If none is provided, the default is no expiration|None|2022-10-21T12:00:00+02:00|
 |insightId|integer|None|True|ID for the Insight associated with the exemption|None|12345|
 |insightSource|string|None|True|Source for the Insight associated with the exemption|['backoffice', 'custom']|backoffice|
 |notes|string|None|False|Any notes or documentation for the exemption|None|example note|
 |resourceIds|[]string|None|True|List of IDs for the resources to be exempted from the given Insight|None|["storagecontainer:123:us-east-1:123456789:"]|
 |resourceType|string|None|True|The type of resource being exempted|None|storagecontainer|
-|startDate|date|None|True|Date the exemption begins, e.g. 2022-10-20T00:00:00Z|None|2022-10-20T00:00:00Z|
+|startDate|date|None|True|Date the exemption begins, e.g. 2022-10-20T00:00:00Z|None|2022-10-20T12:00:00+02:00|
 
 Example input:
 
 ```
 {
   "approver": "user@example.com",
-  "expirationDate": "2022-10-21T00:00:00Z",
+  "expirationDate": "2022-10-21T12:00:00+02:00",
   "insightId": 12345,
   "insightSource": "backoffice",
   "notes": "example note",
@@ -141,7 +143,7 @@ Example input:
     "storagecontainer:123:us-east-1:123456789:"
   ],
   "resourceType": "storagecontainer",
-  "startDate": "2022-10-20T00:00:00Z"
+  "startDate": "2022-10-20T12:00:00+02:00"
 }
 ```
 

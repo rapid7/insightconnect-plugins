@@ -17,6 +17,7 @@ class Util:
         params = {
             Input.APIKEY: {"secretKey": "api_key"},
             Input.URL: "https://example.com",
+            Input.SSLVERIFY: True,
         }
         default_connection.connect(params)
         action.connection = default_connection
