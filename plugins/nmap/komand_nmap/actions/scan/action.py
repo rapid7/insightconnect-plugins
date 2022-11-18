@@ -18,16 +18,16 @@ class Scan(insightconnect_plugin_runtime.Action):
         nmap_args = params.get("arguments")
         sudo = params.get("sudo")  # defaulted to False
 
-        if not len(ports_to_scan):
+        if not ports_to_scan:
             ports_to_scan = None
-        if not len(nmap_args):
+        if not nmap_args:
             nmap_args = None
 
         scanner = PortScanner()
         try:
             scanner.scan(hosts=hosts_to_scan, ports=ports_to_scan, arguments=nmap_args, sudo=sudo)
-        except PortScannerError as e:
-            self.logger.error("An error occurred: %s" % e)
+        except PortScannerError as error:
+            self.logger.error(f"An error occurred: {error}")
         else:
             scanned_hosts = scanner.all_hosts()  # grab hosts that were scanned
             results = list(map(lambda host: scanner[host], scanned_hosts))  # create list of scan results
