@@ -466,6 +466,7 @@ Any issues connecting to the remote service should be present in the log of the 
 
 # Version History
 
+* 5.1.1 - Get: Fix issue where requests were failing when certificate file input field was empty
 * 5.1.0 - Add support for Get with Body with new Body input of type object | Add support for TLS by providing new inputs for the connection, Client Certificate and Private Key of type file
 * 5.0.3 - POST supports x-www-form-urlencoded | PATCH to now take in an array of objects
 * 5.0.2 - Fix issue with JSON data parser for PATCH request
