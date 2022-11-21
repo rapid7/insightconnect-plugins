@@ -4,9 +4,10 @@ products: [insightconnect]
 name: threatcrowd
 title: Threat Crowd
 description: Threat Crowd is an open source search engine for threats. Using the Threat Crowd plugin for Rapid7 InsightConnect, users can search by domain, IP address, email address, and other information to discover threats
-version: 3.0.3
+version: 3.1.0
 vendor: rapid7
 support: rapid7
+supported_versions: ["Threatcrowd API 2022-11-02"]
 status: []
 cloud_ready: true
 resources:
@@ -55,6 +56,14 @@ types:
       description: SHA1 hash value
       type: string
       required: true
+connection:
+  ssl_verification:
+    title: Verify SSL Certificate
+    description: Indicates whether to verify SSL certificate or not
+    type: boolean
+    required: true
+    default: true
+    example: true
 actions:
   domain:
     title: Domain Lookup
