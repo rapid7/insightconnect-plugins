@@ -68,16 +68,18 @@ def return_contact_information_name(input_dict: dict) -> dict:
                 address["postal_code"] = address.pop("postalCode")
         return {"name": name, "addresses": addresses_list, "phone_numbers": phones_list, "email_addresses": emails_list}
 
-
-def handle_service_error(error) -> dict:
-    if error:
-        logging.info("Hey hephzi this is what you're looking for" + str(error))
-        message = {"cause": "User was not found",
-                   "assistance": "A user was not found with the passed search parameters",
-                   "data": error}
-    else:
-        message = {"cause": "Something went wrong",
-                   "assistance": "Please check the logs for further information and contact the Insight Connect team "
-                                 "if the error persists",
-                   "data": error}
-    return message
+#
+# def handle_service_error(error) -> dict:
+#     print(type(error))
+#     message = {}
+#     if error:
+#         logging.info("HI HEPHZI, THIS IS THE BIT WHERE THE THINGY IS MADE" + str(error))
+#         message = {"cause": "User was not found",
+#                    "assistance": "A user was not found with the passed search parameters",
+#                    "data": error}
+#     # else:
+#     #     message = {"cause": "Something went wrong",
+#     #                "assistance": "Please check the logs for further information and contact the Insight Connect team "
+#     #                              "if the error persists",
+#     #                "data": error}
+#     return message
