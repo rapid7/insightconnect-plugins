@@ -165,6 +165,7 @@ Multiple records can be returned by the server, this plugin currently only retur
 
 # Version History
 
+* 3.1.0 - Add support for `.monster` and `.nl` domains
 * 3.0.3 - Add PluginException in Domain and Address action when response is empty
 * 3.0.2 - Support non-UTF-8 responses in the Address action
 * 3.0.1 - Clean up help.md formatting
