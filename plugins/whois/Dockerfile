@@ -14,10 +14,13 @@ ADD . /python/src
 WORKDIR /python/src
 # Add any package dependencies here
 RUN apt-get update && apt-get install -y whois git
-RUN pip install git+https://github.com/komand/python-whois.git@0.6.13
+RUN pip install git+https://github.com/komand/python-whois.git@0.7.0
 
 # End package dependencies
 RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 RUN python setup.py build && python setup.py install
+
+# User to run plugin code. The two supported users are: root, nobody
+USER nobody
 
 ENTRYPOINT ["/usr/local/bin/komand_whois"]

@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "WHOIS"
 Vendor = "rapid7"
-Version = "3.0.3"
+Version = "3.1.0"
 Description = "The WHOIS plugin enables address and domain lookups in the WHOIS databases"
 
 
