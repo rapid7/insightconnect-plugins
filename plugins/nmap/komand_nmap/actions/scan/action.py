@@ -18,7 +18,7 @@ class Scan(insightconnect_plugin_runtime.Action):
         nmap_args = params.get("arguments")
         sudo = params.get("sudo")  # defaulted to False
 
-        if ports_to_scan == "":
+        if not ports_to_scan:
             ports_to_scan = None
 
         scanner = PortScanner()
