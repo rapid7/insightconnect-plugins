@@ -39,18 +39,20 @@ class GetUserContactByName(insightconnect_plugin_runtime.Action):
             #     raise PluginException(cause=Message.USER_CONTACT_CAUSE_USER_NOT_FOUND,
             #                           assistance=Message.USER_CONTACT_ASSISTANCE_USER_NOT_FOUND)
             else:
+                print('2.1')
                 print(response)
-                raise PluginException(data=response)
+                raise Exception('User not found')
 
         # Handles all errors
         except Exception as error:
             print('5')
             print("THIS IS THE SECOND EXCEPT EXCEPTION AS ERROR")
-            print(error)
-            print(type(error))
-            print(len(str(error)))
+            print(f"ERROR: {error}")
+            print(f"TYPE OF ERROR: {type(error)}")
+            print(f"LEN STR ERROR: {len(str(error))}")
             # If error is 400
             # if '400' in str(error):
+            print(f"Plugin exception hit, here is the error {error}")
             raise PluginException(cause=Message.USER_CONTACT_CAUSE_USER_NOT_FOUND,
                                   assistance=Message.USER_CONTACT_ASSISTANCE_USER_NOT_FOUND, data=error)
 
