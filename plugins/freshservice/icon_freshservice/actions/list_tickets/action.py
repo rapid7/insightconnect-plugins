@@ -12,20 +12,20 @@ class ListTickets(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        filter = params.get(Input.FILTER)
+        predefined_filter = params.get(Input.FILTER)
         requester_id = params.get(Input.REQUESTERID)
         email = params.get(Input.EMAIL)
         updated_since = params.get(Input.UPDATEDSINCE)
-        type = params.get(Input.TYPE)
+        ticket_type = params.get(Input.TYPE)
         order_type = params.get(Input.ORDERTYPE)
         page = params.get(Input.PAGE)
         per_page = params.get(Input.PERPAGE)
         parameters = {
-            "filter": filter if filter else None,
+            "filter": predefined_filter if predefined_filter else None,
             "requester_id": requester_id if requester_id else None,
             "email": email if email else None,
             "updated_since": updated_since if updated_since else None,
-            "type": type if type != "All" else None,
+            "type": ticket_type if ticket_type != "All" else None,
             "order_type": order_type,
             "page": page if page else None,
             "per_page": per_page if 0 < per_page <= 100 else 100,

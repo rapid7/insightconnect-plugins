@@ -14,5 +14,5 @@ class ListAllGroups(insightconnect_plugin_runtime.Action):
             output=ListAllGroupsOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}):  # pylint: disable=unused-argument
         return {Output.GROUPS: process_list(self.connection.api.list_all_groups().get("groups", []))}
