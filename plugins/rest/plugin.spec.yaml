@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rest
 title: HTTP Requests
 description: The HTTP Requests plugin to make it easy to integrate with RESTful services
-version: 5.1.0
+version: 5.1.1
 vendor: rapid7
 support: community
 supported_versions: ["2022-09-05"]

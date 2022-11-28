@@ -117,7 +117,7 @@ class RestAPI(object):
         ssl_verify: bool,
         default_headers: dict = None,
         fail_on_error: bool = True,
-        certificate=None,
+        certificate={},
         key=None,
     ):
         self.url = url
@@ -231,10 +231,10 @@ class RestAPI(object):
             }
 
             file_path = tempfile.mkdtemp() + "/"
-            if self.certificate:
+            if all((self.certificate.get("content"), self.certificate.get("filename"))):
                 certificate_path = write_to_file(self.certificate, file_path)
                 request_params["cert"] = certificate_path
-            if self.key and self.certificate:
+            if self.key and all((self.certificate.get("content"), self.certificate.get("filename"))):
                 key_path = write_to_file(self.key, file_path)
                 request_params["cert"] = (certificate_path, key_path)
 
