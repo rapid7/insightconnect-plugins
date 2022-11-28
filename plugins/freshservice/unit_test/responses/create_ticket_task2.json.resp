@@ -1,0 +1,16 @@
+{
+  "task": {
+    "id": 2,
+    "agent_id": null,
+    "status": 2,
+    "due_date": "2022-12-14T00:00:00Z",
+    "notify_before": 0,
+    "title": "Example task 2",
+    "description": null,
+    "created_at": "2022-11-24T09:55:44Z",
+    "updated_at": "2022-11-24T09:55:44Z",
+    "closed_at": null,
+    "group_id": null,
+    "deleted": false
+  }
+}

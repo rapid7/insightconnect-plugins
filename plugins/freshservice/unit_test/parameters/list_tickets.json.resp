@@ -1,0 +1,193 @@
+{
+  "parameters": [
+    [
+      "found",
+      "new_and_my_open",
+      987654321,
+      null,
+      "2022-11-24T10:00:00Z",
+      "All",
+      "asc",
+      1,
+      20,
+      {
+        "tickets": [
+          {
+            "subject": "Example Ticket",
+            "groupId": 123456789,
+            "departmentId": 987654321,
+            "category": "Hardware",
+            "subCategory": "Computer",
+            "itemCategory": "PC",
+            "requesterId": 987654321,
+            "responderId": 123456789,
+            "dueBy": "2022-12-20T12:00:00Z",
+            "frEscalated": false,
+            "deleted": false,
+            "spam": false,
+            "fwdEmails": [],
+            "replyCcEmails": [],
+            "ccEmails": [],
+            "isEscalated": false,
+            "frDueBy": "2022-12-15T12:00:00Z",
+            "id": 16,
+            "priority": 2,
+            "status": 2,
+            "source": 4,
+            "createdAt": "2022-11-23T11:55:41Z",
+            "updatedAt": "2022-11-24T12:04:00Z",
+            "requestedForId": 987654321,
+            "type": "Incident",
+            "description": "Example description",
+            "descriptionText": "Example description",
+            "customFields": {
+              "testField": "example value"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      "found2",
+      "watching",
+      123456789,
+      "user@example.com",
+      null,
+      "Incident",
+      "desc",
+      0,
+      1000,
+      {
+        "tickets": [
+          {
+            "subject": "Example ticket 2",
+            "groupId": 123459876,
+            "departmentId": 987651234,
+            "category": "Software",
+            "subCategory": "Windows",
+            "requesterId": 123456789,
+            "responderId": 112233445,
+            "dueBy": "2022-12-24T16:00:00Z",
+            "frEscalated": true,
+            "deleted": false,
+            "spam": false,
+            "fwdEmails": [],
+            "replyCcEmails": [],
+            "ccEmails": [
+              "user@example.com"
+            ],
+            "isEscalated": false,
+            "frDueBy": "2022-11-23T17:00:00Z",
+            "id": 15,
+            "priority": 3,
+            "status": 2,
+            "source": 4,
+            "createdAt": "2022-11-23T11:41:12Z",
+            "updatedAt": "2022-11-23T11:41:12Z",
+            "requestedForId": 123456789,
+            "type": "Incident",
+            "description": "<div>example description</div>",
+            "descriptionText": "example description",
+            "customFields": {
+              "testField": "Test"
+            }
+          }
+        ]
+      }
+    ],
+    [
+      "not_found",
+      "deleted",
+      null,
+      null,
+      null,
+      "Service Request",
+      null,
+      1,
+      100,
+      {
+        "tickets": []
+      }
+    ],
+    [
+      "found",
+      "new_and_my_open",
+      987654321,
+      "user@example.com",
+      "2022-11-24T10:00:00Z",
+      "All",
+      "asc",
+      1,
+      20,
+      {
+        "tickets": [
+          {
+            "subject": "Example Ticket",
+            "groupId": 123456789,
+            "departmentId": 987654321,
+            "category": "Hardware",
+            "subCategory": "Computer",
+            "itemCategory": "PC",
+            "requesterId": 987654321,
+            "responderId": 123456789,
+            "dueBy": "2022-12-20T12:00:00Z",
+            "frEscalated": false,
+            "deleted": false,
+            "spam": false,
+            "fwdEmails": [],
+            "replyCcEmails": [],
+            "ccEmails": [],
+            "isEscalated": false,
+            "frDueBy": "2022-12-15T12:00:00Z",
+            "id": 16,
+            "priority": 2,
+            "status": 2,
+            "source": 4,
+            "createdAt": "2022-11-23T11:55:41Z",
+            "updatedAt": "2022-11-24T12:04:00Z",
+            "requestedForId": 987654321,
+            "type": "Incident",
+            "description": "Example description",
+            "descriptionText": "Example description",
+            "customFields": {
+              "testField": "example value"
+            }
+          },
+          {
+            "subject": "Example ticket 2",
+            "groupId": 123459876,
+            "departmentId": 987651234,
+            "category": "Software",
+            "subCategory": "Windows",
+            "requesterId": 123456789,
+            "responderId": 112233445,
+            "dueBy": "2022-12-24T16:00:00Z",
+            "frEscalated": true,
+            "deleted": false,
+            "spam": false,
+            "fwdEmails": [],
+            "replyCcEmails": [],
+            "ccEmails": [
+              "user@example.com"
+            ],
+            "isEscalated": false,
+            "frDueBy": "2022-11-23T17:00:00Z",
+            "id": 15,
+            "priority": 3,
+            "status": 2,
+            "source": 4,
+            "createdAt": "2022-11-23T11:41:12Z",
+            "updatedAt": "2022-11-23T11:41:12Z",
+            "requestedForId": 123456789,
+            "type": "Incident",
+            "description": "<div>example description</div>",
+            "descriptionText": "example description",
+            "customFields": {
+              "testField": "Test"
+            }
+          }
+        ]
+      }
+    ]
+  ]
+}

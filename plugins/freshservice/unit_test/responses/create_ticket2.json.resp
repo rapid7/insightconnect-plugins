@@ -1,0 +1,73 @@
+{
+  "ticket": {
+    "cc_emails": [
+      "user@example.com"
+    ],
+    "fwd_emails": [],
+    "reply_cc_emails": [
+      "user@example.com"
+    ],
+    "fr_escalated": false,
+    "spam": false,
+    "email_config_id": null,
+    "group_id": 111111111,
+    "priority": 2,
+    "requester_id": 123456789,
+    "requested_for_id": 123456789,
+    "responder_id": 987654321,
+    "source": 2,
+    "status": 2,
+    "subject": "New Ticket",
+    "to_emails": null,
+    "department_id": 22222222,
+    "id": 19,
+    "type": "Incident",
+    "due_by": "2022-12-20T12:00:00Z",
+    "fr_due_by": "2022-12-10T12:00:00Z",
+    "is_escalated": false,
+    "description": "<div>Example description</div>",
+    "description_text": "Example description",
+    "category": "Hardware",
+    "sub_category": "Computer",
+    "item_category": "PC",
+    "custom_fields": {
+      "test_field": "Test"
+    },
+    "created_at": "2022-11-24T17:31:33Z",
+    "updated_at": "2022-11-24T17:31:33Z",
+    "tags": [
+      "tag1",
+      "tag2"
+    ],
+    "attachments": [
+      {
+        "id": 123,
+        "content_type": "text/plain",
+        "size": 4,
+        "name": "test.txt",
+        "attachment_url": "https://example.com",
+        "created_at": "2022-11-24T17:37:50Z",
+        "updated_at": "2022-11-24T17:37:50Z"
+      }
+    ],
+    "assets": [
+      {
+        "name": "Dell Monitor",
+        "description": null,
+        "ci_type_id": 1122334455,
+        "impact": 1,
+        "created": "2022-11-17T16:14:17Z",
+        "updated": "2022-11-17T16:14:17Z",
+        "user_id": null,
+        "department_id": null,
+        "assigned_on": null,
+        "agent_id": null,
+        "author_id": 6677889900,
+        "author_type": "User",
+        "deleted": false,
+        "display_id": 2,
+        "salvage": null
+      }
+    ]
+  }
+}

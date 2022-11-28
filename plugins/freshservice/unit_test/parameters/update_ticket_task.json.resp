@@ -1,0 +1,55 @@
+{
+  "parameters": [
+    [
+      "success",
+      1,
+      1,
+      "Updated task",
+      "Updated description",
+      "In Progress",
+      "2022-12-14T00:00:00Z",
+      0,
+      987654321,
+      {
+        "task": {
+          "id": 1,
+          "status": 1,
+          "dueDate": "2022-12-14T00:00:00Z",
+          "notifyBefore": 0,
+          "title": "Updated task",
+          "description": "Updated description",
+          "createdAt": "2022-11-24T09:55:44Z",
+          "updatedAt": "2022-11-24T10:55:44Z",
+          "groupId": 987654321,
+          "deleted": false
+        }
+      }
+    ],
+    [
+      "success2",
+      1,
+      2,
+      null,
+      null,
+      "Completed",
+      null,
+      null,
+      null,
+      {
+        "task": {
+          "id": 2,
+          "status": 3,
+          "dueDate": "2022-12-14T00:00:00Z",
+          "notifyBefore": 0,
+          "title": "Updated task",
+          "description": "Updated description",
+          "createdAt": "2022-11-24T09:55:44Z",
+          "updatedAt": "2022-11-24T10:55:44Z",
+          "closedAt": "2022-11-24T10:55:44Z",
+          "groupId": 987654321,
+          "deleted": false
+        }
+      }
+    ]
+  ]
+}
