@@ -4,7 +4,7 @@ products: [insightconnect]
 name: azure_ad_admin
 title: Azure AD Admin
 description: Perform administrative operations in Azure AD
-version: 3.0.1
+version: 4.0.0
 vendor: rapid7
 cloud_ready: true
 support: community
@@ -726,6 +726,28 @@ actions:
         description: User ID to password change
         required: true
         example: user@example.com
+    output:
+      success:
+        title: Success
+        description: Was operation successful
+        type: boolean
+        required: true
+  change_user_password:
+    title: Change User Password
+    description: Change a user password by an administrator with appropriate permissions
+    input:
+      user_id:
+        title: User ID
+        type: string
+        description: User ID to password change
+        required: true
+        example: user@example.com
+      new_password:
+        title: New Password
+        type: password
+        description: The new password
+        required: true
+        example: newPassword
     output:
       success:
         title: Success

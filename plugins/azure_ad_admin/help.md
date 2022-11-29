@@ -17,6 +17,7 @@ the [Microsoft Graph API](https://docs.microsoft.com/en-us/graph/overview?view=g
   * Directory.AccessAsUser.All
   * Directory.ReadWrite.All
   * User.ReadWrite.All
+  * IdentityRiskEvent.Read.All (Types: Delegated, Application)
 * The application will need to be added to the Global Administrator role. This can be done in `Roles and administrators` in Azure Active directory via the Azure Portal.
 
 # Supported Product Versions
@@ -49,6 +50,40 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Change User Password
+
+This action is used to change a user password by an administrator with appropriate permissions.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|new_password|password|None|True|The new password|None|newPassword|
+|user_id|string|None|True|User ID to password change|None|user@example.com|
+
+Example input:
+
+```
+{
+  "new_password": "newPassword",
+  "user_id": "user@example.com"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Was operation successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### Revoke Sign-In Sessions
 
@@ -635,6 +670,7 @@ Trigger `risk_detection` needs Application permission to set as `IdentityRiskEve
 
 # Version History
 
+* 4.0.0 - Get User Info action: fix data validation | New action: Change User Password
 * 3.0.1 - Enable cloud orchestrator
 * 3.0.0 - Fix issue with incorrect data validation in Get User Info action
 * 2.2.6 - Update SDK runtime | Adding additional manager response to Get User Info action
