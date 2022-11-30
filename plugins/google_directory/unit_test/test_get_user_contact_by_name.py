@@ -33,5 +33,4 @@ class TestGetUserContactByName(TestCase):
     @parameterized.expand([["Example User", STUB_ACTION_OUTPUT]])
     def test_get_user_contact_by_name(self, full_name, expected):
         response = self.action.run({Input.FULL_NAME: full_name})
-        logging.info(response)
         self.assertEqual(response, expected)
