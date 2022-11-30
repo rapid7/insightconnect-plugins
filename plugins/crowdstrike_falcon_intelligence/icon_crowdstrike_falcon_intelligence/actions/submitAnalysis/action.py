@@ -39,6 +39,4 @@ class SubmitAnalysis(insightconnect_plugin_runtime.Action):
             self.connection.api_client.submit_analysis(analysis_parameters), TextCase.CAMEL_CASE
         )
         submission.get("sandbox", [{}])[0].pop("documentPassword", None)
-        return {
-            Output.SUBMISSION: submission
-        }
+        return {Output.SUBMISSION: submission}

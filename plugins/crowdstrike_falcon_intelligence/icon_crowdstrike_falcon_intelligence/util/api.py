@@ -6,7 +6,15 @@ import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from icon_crowdstrike_falcon_intelligence.util.helpers import clean_dict
-from icon_crowdstrike_falcon_intelligence.util.endpoints import *
+from icon_crowdstrike_falcon_intelligence.util.endpoints import (
+    AUTHENTICATION_ENDPOINT,
+    ARTIFACTS_ENDPOINT,
+    REPORTS_ENDPOINT,
+    REPORTS_QUERY_ENDPOINT,
+    REPORT_SUMMARIES_ENDPOINT,
+    SUBMISSIONS_ENDPOINT,
+    SUBMISSIONS_QUERY_ENDPOINT,
+)
 
 
 class CrowdStrikeAPI:
@@ -80,21 +88,21 @@ class CrowdStrikeAPI:
         return response_json
 
     def submit_analysis(self, analysis_parameters: dict) -> dict:
-        self._logger.info(f"Submitting analysis...")
+        self._logger.info("Submitting analysis...")
         return self.make_json_request(
             method="POST", url=self._base_url + SUBMISSIONS_ENDPOINT, json_data={"sandbox": [analysis_parameters]}
         ).get("resources")[0]
 
-    def get_reports_ids(self, offset: int, limit: int, filter_query: str) -> list:
-        self._logger.info(f"Getting a list of sandbox report IDs...")
+    def get_reports_ids(self, offset: int = None, limit: int = None, filter_query: str = None) -> list:
+        self._logger.info("Getting a list of sandbox report IDs...")
         return self.make_json_request(
             method="GET",
             url=self._base_url + REPORTS_QUERY_ENDPOINT,
             params={"limit": limit, "offset": offset, "filter": filter_query},
         ).get("resources")
 
-    def get_submissions_ids(self, offset: int, limit: int, filter_query: str) -> list:
-        self._logger.info(f"Getting a list of submission IDs...")
+    def get_submissions_ids(self, offset: int = None, limit: int = None, filter_query: str = None) -> list:
+        self._logger.info("Getting a list of submission IDs...")
         return self.make_json_request(
             method="GET",
             url=self._base_url + SUBMISSIONS_QUERY_ENDPOINT,

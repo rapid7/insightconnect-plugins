@@ -438,7 +438,7 @@ This action is used to submit an uploaded file or a URL for sandbox analysis. Ti
 |documentPassword|password|None|False|Auto-filled for Adobe or Office files that prompt for a password. Max length is 32 characters|None|3xamp13Pa55w0rd|
 |environmentId|integer|None|True|Specifies the sandbox environment used for analysis. Example values 300 - Linux Ubuntu 16.04, 64-bit; 200 - Android (static analysis); 160 - Windows 10, 64-bit; 110 - Windows 7, 64-bit; 100 - Windows 7, 32-bit|[100, 110, 160, 200, 300]|110|
 |networkSettings|string|None|False|Specifies the sandbox network_settings used for analysis|['default', 'tor', 'simulated', 'offline', '']|tor|
-|sha256|string|None|False|ID of the sample, which is a SHA256 hash value. Find a sample ID from the response when uploading a malware sample or search with `Get Submissions IDs` action. The `url` parameter must be unset if `sha256` is used|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
+|sha256|string|None|False|ID of the sample, which is a SHA256 hash value. Find a sample ID from the response when uploading a malware sample or search with `Get Submissions IDs` action. The `url` parameter must be unset if `sha256` is used|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
 |submitName|string|None|False|Name of the malware sample that's used for file type detection and analysis|None|my_sample|
 |systemDateTime|date|None|False|System date and time|None|2022-11-01T00:00:00+02:00|
 |url|string|None|False|A web page or file URL. It can be HTTP(S) or FTP. The `SHA256` parameter must be unset if `url` is used|None|https://example.com|
@@ -712,7 +712,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.0.0 - Initial plugin | Check Analysis Status, Download Artifact, Get Full Report, Get Reports IDs, Get Short Report, Get Submissions IDs, Submit Analysis,
+* 1.0.0 - Initial plugin | Check Analysis Status, Download Artifact, Get Full Report, Get Reports IDs, Get Short Report, Get Submissions IDs, Submit Analysis
 
 # Links
 

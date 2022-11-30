@@ -39,7 +39,7 @@ class Util:
         return json.loads(Util.read_file_to_string(filename))
 
     @staticmethod
-    def mock_request(*args, **kwargs):
+    def mock_request(**kwargs):
         class MockResponse:
             def __init__(self, status_code: int, filename: str = None):
                 self.status_code = status_code
@@ -52,7 +52,6 @@ class Util:
 
         method = kwargs.get("method")
         url = kwargs.get("url")
-        json_data = kwargs.get("json", {})
         params = kwargs.get("params", {})
 
         if url == "https://crowdstrike_url/oauth2/token":
