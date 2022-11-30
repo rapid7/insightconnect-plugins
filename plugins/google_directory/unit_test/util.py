@@ -26,11 +26,6 @@ class MockClient:
             self.filename = "get_contact_user_by_name"
         return self
 
-    # # # Hephzi's list
-    # def listy(self, customer, query):
-    #     self.filename = "get_contact_user_by_name"
-    #     return self
-
     def list_next(self, request, result):
         return None
 
