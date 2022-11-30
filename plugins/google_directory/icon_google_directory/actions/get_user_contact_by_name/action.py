@@ -22,7 +22,6 @@ class GetUserContactByName(insightconnect_plugin_runtime.Action):
             response = (
                 self.connection.service.users().list(customer="my_customer", query=f"name:'{full_name}'").execute()
             )
-            print(response)
             if "users" in response.keys():
                 return {Output.CONTACT: return_contact_information_name(response)}
             else:
