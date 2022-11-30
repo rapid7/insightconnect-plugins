@@ -22,12 +22,14 @@ class GetUserContactByName(insightconnect_plugin_runtime.Action):
             response = (
                 self.connection.service.users().list(customer="my_customer", query=f"name:'{full_name}'").execute()
             )
-            if 'users' in response.keys():
+            print(response)
+            if "users" in response.keys():
                 return {Output.CONTACT: return_contact_information_name(response)}
             else:
-                raise Exception('User not found')
+                raise Exception("User not found")
 
         # Handles all errors
         except Exception as error:
-            raise PluginException(cause=Message.USER_CONTACT_CAUSE,
-                                  assistance=Message.USER_CONTACT_ASSISTANCE, data=error)
+            raise PluginException(
+                cause=Message.USER_CONTACT_CAUSE, assistance=Message.USER_CONTACT_ASSISTANCE, data=error
+            )

@@ -25,7 +25,7 @@ def return_contact_information(input_dict: dict) -> dict:
 
 
 def return_contact_information_name(input_dict: dict) -> dict:
-    """return_contact_informations. Function allows to map data that contains contact informations retrieved from
+    """return_contact_informations. Function allows to map data that contains contact information retrieved from
     Google API users().list()
 
     :param input_dict: Input dict as a response got from Google API
