@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ScanInput, ScanOutput
 
 # Custom imports below
 from nmap import PortScanner, PortScannerError
-import komand.helper
+import insightconnect_plugin_runtime.helper
 
 
-class Scan(komand.Action):
+class Scan(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="scan", description="Run nmap scan", input=ScanInput(), output=ScanOutput()
@@ -18,23 +18,18 @@ class Scan(komand.Action):
         nmap_args = params.get("arguments")
         sudo = params.get("sudo")  # defaulted to False
 
-        if not len(ports_to_scan):
+        if not ports_to_scan:
             ports_to_scan = None
 
-        if not len(nmap_args):
-            nmap_args = None
-
         scanner = PortScanner()
-
         try:
             scanner.scan(hosts=hosts_to_scan, ports=ports_to_scan, arguments=nmap_args, sudo=sudo)
-        except PortScannerError as e:
-            self.logger.error("An error occurred: %s" % e)
+        except PortScannerError as error:
+            self.logger.error(f"An error occurred: {error}")
         else:
             scanned_hosts = scanner.all_hosts()  # grab hosts that were scanned
             results = list(map(lambda host: scanner[host], scanned_hosts))  # create list of scan results
-
-            results = komand.helper.clean(results)
+            results = insightconnect_plugin_runtime.helper.clean(results)
 
             return {"result": results}
 
