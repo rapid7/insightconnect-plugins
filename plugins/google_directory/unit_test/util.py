@@ -17,12 +17,19 @@ class MockClient:
     def users(self):
         return self
 
-    def list(self, domain, orderBy):
+    def list(self, domain=None, orderBy=None, customer=None, query=None):
         if domain == "example.com":
             self.filename = "get_users"
         if domain == "empty_list":
             self.filename = "get_users_empty_list"
+        if query:
+            self.filename = "get_contact_user_by_name"
         return self
+
+    # # # Hephzi's list
+    # def listy(self, customer, query):
+    #     self.filename = "get_contact_user_by_name"
+    #     return self
 
     def list_next(self, request, result):
         return None
