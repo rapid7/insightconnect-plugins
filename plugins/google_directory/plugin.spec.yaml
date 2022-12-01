@@ -157,6 +157,7 @@ actions:
         description: Users in the domain
         required: true
         type: '[]user'
+        example: '[{"email":"user@example.com","name":"Joe Tester"},{"email":"user@example.com","name":"Bob Testerson"}]'
   get_user_contact:
     title: Get User's Contact Information
     description: Retrieves all contact information from a specific user in the domain by email
@@ -173,6 +174,7 @@ actions:
         description: User's contact information
         required: true
         type: contact
+        example: '{ "addresses":[ { "country":"England", "street":"1 Test street" }, { "country":"England", "postal_code":"31-222" }, { "country":"England", "postal_code":"31-111", "street":"3 Test street" }, { "postal_code":"31-333", "street":"4 Test street" } ], "phone_numbers":[ "111111111", "222222222", "333333333" ], "email_addresses":[ "user@example.com", "user2@example.com", "user3@example.com" ] } }'
   get_user_contact_by_name:
     title: Get User's Contact Information by Name
     description: Retrieves all contact information from a specific user in the domain by name
@@ -187,7 +189,9 @@ actions:
       contact:
         title: Contact
         description: User's contact information
+        required: true
         type: contact
+        example: '{ "addresses":[ { "country":"England", "street":"1 Test street" }, { "country":"England", "postal_code":"31-222" }, { "country":"England", "postal_code":"31-111", "street":"3 Test street" }, { "postal_code":"31-333", "street":"4 Test street" } ], "phone_numbers":[ "111111111", "222222222", "333333333" ], "email_addresses":[ "user@example.com", "user2@example.com", "user3@example.com" ] }'
   suspend_user:
     title: Suspend User
     description: Suspends a user account
@@ -204,6 +208,7 @@ actions:
         description: Whether or not the suspend was successful
         required: true
         type: boolean
+        example: '{"success": true}'
   unsuspend_user:
     title: Unsuspend User
     description: Unsuspends a user account
@@ -220,3 +225,4 @@ actions:
         description: Whether or not the unsuspend was successful
         required: true
         type: boolean
+        example: '{"success": true}'

@@ -151,37 +151,37 @@ Example output:
 
 ```
 {
-   "contact":{
-      "addresses":[
-         {
-            "country":"England",
-            "street":"1 Test street"
-         },
-         {
-            "country":"England",
-            "postal_code":"31-222"
-         },
-         {
-            "country":"England",
-            "postal_code":"31-111",
-            "street":"3 Test street"
-         },
-         {
-            "postal_code":"31-333",
-            "street":"4 Test street"
-         }
-      ],
-      "phone_numbers":[
-         "111111111",
-         "222222222",
-         "333333333"
-      ],
-      "email_addresses":[
-         "user@example.com",
-         "user2@example.com",
-         "user3@example.com"
-      ]
-   }
+  "contact":{
+    "addresses":[
+       {
+          "country":"England",
+          "street":"1 Test street"
+       },
+       {
+          "country":"England",
+          "postal_code":"31-222"
+       },
+       {
+          "country":"England",
+          "postal_code":"31-111",
+          "street":"3 Test street"
+       },
+       {
+          "postal_code":"31-333",
+          "street":"4 Test street"
+       }
+    ],
+    "phone_numbers":[
+       "111111111",
+       "222222222",
+       "333333333"
+    ],
+    "email_addresses":[
+       "user@example.com",
+       "user2@example.com",
+       "user3@example.com"
+    ]
+  }
 }
 ```
 
@@ -203,7 +203,7 @@ Example input:
 
 ```
 {
-   "domain": "example.com"
+  "domain": "example.com"
 }
 ```
 
@@ -217,16 +217,16 @@ Example output:
 
 ```
 {
-   "users":[
-      {
-         "email":"user@example.com",
-         "name":"Joe Tester"
-      },
-      {
-         "email":"user@example.com",
-         "name":"Bob Testerson"
-      }
-   ]
+  "users":[
+    {
+      "email":"user@example.com",
+      "name":"Joe Tester"
+    },
+    {
+      "email":"user@example.com",
+      "name":"Bob Testerson"
+    }
+  ]
 }
 ```
 
@@ -248,7 +248,7 @@ Example input:
 
 ```
 {
-   "email": "user@example.com"
+  "email": "user@example.com"
 }
 ```
 
@@ -262,7 +262,7 @@ Example output:
 
 ```
 {
-   "success": true
+  "success": true
 }
 ```
 
@@ -284,7 +284,7 @@ Example input:
 
 ```
 {
-   "email": "user@example.com"
+  "email": "user@example.com"
 }
 ```
 
@@ -297,8 +297,8 @@ Example input:
 Example output:
 
 ```
-{
-   "success": true
+{ 
+  "success": true
 }
 ```
 
@@ -348,6 +348,8 @@ This plugin does not contain any troubleshooting information.
 * 1.0.0 - Initial plugin
 
 # Links
+
+[Google Directory API](https://developers.google.com/admin-sdk/directory)
 
 ## References
 
