@@ -11,6 +11,7 @@ class Input:
     CHANNEL_NAME = "channel_name"
     GROUP_NAME = "group_name"
     MEMBER_LOGIN = "member_login"
+    ROLE = "role"
     
 
 class Output:
@@ -40,6 +41,16 @@ class AddMemberToChannelInput(insightconnect_plugin_runtime.Input):
       "title": "Member Login",
       "description": "The login of the group member to be added to a channel",
       "order": 1
+    },
+    "role": {
+      "type": "string",
+      "title": "Member Role",
+      "description": "Role of the member to add",
+      "enum": [
+        "Owner",
+        "Member"
+      ],
+      "order": 4
     }
   },
   "required": [
