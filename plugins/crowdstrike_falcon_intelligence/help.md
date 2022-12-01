@@ -309,7 +309,7 @@ This action is used to get a full sandbox report.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|ids|[]string|None|True|List of summary IDs. Find a summary ID from the response when submitting a malware sample or search with `Get Reports IDs` action|None|["9de5069c5afe602b2ea0a04b66beb2c0_9de5069c5afe602b2ea0a04b66beb2c0"]|
+|ids|[]string|None|True|List of summary IDs. Find a summary ID from the response when submitting a malware sample or search with `Get Reports IDs` action|None|["9de5069c5afe602b2ea0a11b66beb2c0_9aa5069c5afe602b2ea0a04b66beb2c0"]|
 
 Example input:
 
@@ -333,36 +333,27 @@ Example output:
 {
   "reports": [
     {
-      "cid": "9de5069c5afe602b2ea0a11b66beb2c0",
-      "createdTimestamp": "2022-08-30T10:08:49Z",
       "id": "9de5069c5afe602b2ea0a11b66beb2c0_9aa5069c5afe602b2ea0a04b66beb2c0",
-      "iocReportBroadCsvArtifactId": "30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
-      "iocReportBroadJsonArtifactId": "30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
-      "iocReportBroadMaecArtifactId": "30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
-      "iocReportBroadStixArtifactId": "30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
-      "iocReportStrictCsvArtifactId": "30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
-      "iocReportStrictJsonArtifactId": "30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
-      "iocReportStrictMaecArtifactId": "30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
-      "iocReportStrictStixArtifactId": "30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050",
-      "origin": "uiproxy",
+      "cid": "9de5069c5afe602b2ea0a11b66beb2c0",
+      "created_timestamp": "2022-11-30T14:09:35Z",
+      "origin": "apigateway",
+      "verdict": "whitelisted",
       "sandbox": [
         {
-          "environmentDescription": "Windows 7 32 bit",
-          "environmentId": 100,
-          "fileType": "PDF document, version https://example.com",
-          "networkSettings": "default",
-          "sampleFlags": [
-            "Extracted Files"
-          ],
           "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
-          "submissionType": "file",
-          "submitName": "https://example.com",
-          "verdict": "no specific threat"
+          "environment_id": 100,
+          "environment_description": "Windows 7 32 bit",
+          "file_type": "data",
+          "file_type_short": [
+            "data"
+          ],
+          "submit_name": "Test Analysis",
+          "submission_type": "file",
+          "error_message": "File \"Test Analysis\" was detected as \"raw data\", this format is not supported on WINDOWS",
+          "error_type": "FILE_TYPE_BAD_ERROR",
+          "error_origin": "CLIENT"
         }
-      ],
-      "userId": "9de5069c5afe602b2ea0a04b66beb2c0",
-      "userName": "https://example.com",
-      "verdict": "no specific threat"
+      ]
     }
   ]
 }
@@ -376,7 +367,7 @@ This action is used to get a short summary version of a sandbox report.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|ids|[]string|None|True|List of summary IDs. Find a summary ID from the response when submitting a malware sample or search with `Get Reports IDs` action|None|["9de5069c5afe602b2ea0a04b66beb2c0_9de5069c5afe602b2ea0a04b66beb2c0"]|
+|ids|[]string|None|True|List of summary IDs. Find a summary ID from the response when submitting a malware sample or search with `Get Reports IDs` action|None|["9382986b58cb4bb4935e7eba079842f3_d1ce821d74484545897f2fd5db40d0a7"]|
 
 Example input:
 
@@ -438,11 +429,10 @@ This action is used to submit an uploaded file or a URL for sandbox analysis. Ti
 |documentPassword|password|None|False|Auto-filled for Adobe or Office files that prompt for a password. Max length is 32 characters|None|3xamp13Pa55w0rd|
 |environmentId|integer|None|True|Specifies the sandbox environment used for analysis. Example values 300 - Linux Ubuntu 16.04, 64-bit; 200 - Android (static analysis); 160 - Windows 10, 64-bit; 110 - Windows 7, 64-bit; 100 - Windows 7, 32-bit|[100, 110, 160, 200, 300]|110|
 |networkSettings|string|None|False|Specifies the sandbox network_settings used for analysis|['default', 'tor', 'simulated', 'offline', '']|tor|
-|sha256|string|None|False|ID of the sample, which is a SHA256 hash value. Find a sample ID from the response when uploading a malware sample or search with `Get Submissions IDs` action. The `url` parameter must be unset if `sha256` is used|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
 |submitName|string|None|False|Name of the malware sample that's used for file type detection and analysis|None|my_sample|
-|systemDateTime|date|None|False|System date and time|None|2022-11-01T00:00:00+02:00|
-|url|string|None|False|A web page or file URL. It can be HTTP(S) or FTP. The `SHA256` parameter must be unset if `url` is used|None|https://example.com|
-
+|sha256|string|None|False|ID of the sample, which is a SHA256 hash value. Find a sample ID from the response when uploading a malware sample or search with `Get Submissions IDs` action. The `url` parameter must be unset if `sha256` is used|None|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
+|url|string|None|False|A web page or file URL. It can be HTTP(S) or FTP. The `SHA256` parameter must be unset if `url` is used|None|https://www.example.com/images/default/sample.pdf|
+|systemDateTime|date|None|False|System date and time|None|2022-11-01 00:00:00+02:00|
 
 Example input:
 

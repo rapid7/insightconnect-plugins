@@ -14,12 +14,13 @@ class GetReportsIDs(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params: dict = None):
-        if params.get(Input.LIMIT) > 5000:
+        limit = params.get(Input.LIMIT, 5000)
+        if limit > 5000:
             self.logger.warning(
                 "Provided limit value is larger than 5000 but this action will return up to 5000 results."
             )
         return {
             Output.REPORTIDS: self.connection.api_client.get_reports_ids(
-                offset=params.get(Input.OFFSET), limit=params.get(Input.LIMIT), filter_query=params.get(Input.FILTER)
+                offset=params.get(Input.OFFSET), limit=limit, filter_query=params.get(Input.FILTER)
             )
         }
