@@ -28,7 +28,9 @@ class TestAddMemberToChannel(TestCase):
             Input.ROLE: STUB_MEMBER_ROLE,
         }
 
-    def test_add_member_to_channel(self) -> None:
+    @mock.patch("requests.get", side_effect=Util.mocked_requests)
+    @mock.patch("requests.post", side_effect=Util.mocked_requests)
+    def test_add_member_to_channel(self, mock_requests_get, mock_requests_post) -> None:
         response = self.action.run(self.payload)
         expected_response = STUB_EXAMPLE_ACTION_RESPONSE
         self.assertEqual(response, expected_response)
