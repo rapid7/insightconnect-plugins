@@ -1,0 +1,146 @@
+{
+  "parameters": [
+    [
+      "for_one_resource",
+      "user@example.com",
+      12345,
+      "backoffice",
+      [
+        "storagecontainer:123:us-east-1:123456789:"
+      ],
+      "storagecontainer",
+      "2022-10-03",
+      "2022-10-04",
+      "example note",
+      {
+        "exemption": [
+          {
+            "approver": "user@example.com",
+            "createDate": "2022-10-02T13:17:16",
+            "creatorId": 123,
+            "enabled": true,
+            "exemptionId": 100,
+            "expirationDate": "2022-10-04T00:00:00",
+            "insightId": 12345,
+            "insightSource": "backoffice",
+            "notes": "example note",
+            "organizationId": 1,
+            "resourceId": "storagecontainer:123:us-east-1:123456789:",
+            "resourceType": "storagecontainer",
+            "startDate": "2022-10-03T00:00:00"
+          }
+        ]
+      }
+    ],
+    [
+      "for_few_resources",
+      "user@example.com",
+      12345,
+      "backoffice",
+      [
+        "storagecontainer:123:us-east-1:123456789:",
+        "storagecontainer:123:us-east-1:987654321:"
+      ],
+      "storagecontainer",
+      "2022-10-03",
+      "2022-10-04",
+      "example note",
+      {
+        "exemption": [
+          {
+            "approver": "user@example.com",
+            "createDate": "2022-10-02T13:17:16",
+            "creatorId": 123,
+            "enabled": true,
+            "exemptionId": 101,
+            "expirationDate": "2022-10-04T00:00:00",
+            "insightId": 12345,
+            "insightSource": "backoffice",
+            "notes": "example note",
+            "organizationId": 1,
+            "resourceId": "storagecontainer:123:us-east-1:123456789:",
+            "resourceType": "storagecontainer",
+            "startDate": "2022-10-03T00:00:00"
+          },
+          {
+            "approver": "user@example.com",
+            "createDate": "2022-10-02T13:17:16",
+            "creatorId": 123,
+            "enabled": true,
+            "exemptionId": 102,
+            "expirationDate": "2022-10-04T00:00:00",
+            "insightId": 12345,
+            "insightSource": "backoffice",
+            "notes": "example note",
+            "organizationId": 1,
+            "resourceId": "storagecontainer:123:us-east-1:987654321:",
+            "resourceType": "storagecontainer",
+            "startDate": "2022-10-03T00:00:00"
+          }
+        ]
+      }
+    ],
+    [
+      "for_one_resource_2",
+      "user@example.com",
+      12345,
+      "backoffice",
+      [
+        "storagecontainer:123:us-east-1:123456789:"
+      ],
+      "storagecontainer",
+      "2022-10-03T00:00:00Z",
+      "2022-10-04T00:00:00+02:00",
+      "example note",
+      {
+        "exemption": [
+          {
+            "approver": "user@example.com",
+            "createDate": "2022-10-02T13:17:16",
+            "creatorId": 123,
+            "enabled": true,
+            "exemptionId": 100,
+            "expirationDate": "2022-10-04T00:00:00",
+            "insightId": 12345,
+            "insightSource": "backoffice",
+            "notes": "example note",
+            "organizationId": 1,
+            "resourceId": "storagecontainer:123:us-east-1:123456789:",
+            "resourceType": "storagecontainer",
+            "startDate": "2022-10-03T00:00:00"
+          }
+        ]
+      }
+    ],
+    [
+      "without_expiration_date_and_notes",
+      "user@example.com",
+      12345,
+      "backoffice",
+      [
+        "storagecontainer:123:us-east-1:111111111:"
+      ],
+      "storagecontainer",
+      "2022-10-03T00:00:00Z",
+      null,
+      null,
+      {
+        "exemption": [
+          {
+            "approver": "user@example.com",
+            "createDate": "2022-10-02T13:17:16",
+            "creatorId": 123,
+            "enabled": true,
+            "exemptionId": 100,
+            "insightId": 12345,
+            "insightSource": "backoffice",
+            "organizationId": 1,
+            "resourceId": "storagecontainer:123:us-east-1:123456789:",
+            "resourceType": "storagecontainer",
+            "startDate": "2022-10-03T00:00:00"
+          }
+        ]
+      }
+    ]
+  ]
+}
