@@ -237,7 +237,7 @@ class GetUserInfoOutput(insightconnect_plugin_runtime.Output):
           "order": 41
         },
         "isResourceAccount": {
-          "type": "string",
+          "type": "boolean",
           "title": "Is Resource Account",
           "description": "Is Resource Account",
           "order": 42
@@ -403,7 +403,7 @@ class GetUserInfoOutput(insightconnect_plugin_runtime.Output):
           "order": 40
         },
         "showInAddressList": {
-          "type": "string",
+          "type": "boolean",
           "title": "Show In Address List",
           "description": "Show In Address List",
           "order": 43
@@ -729,7 +729,7 @@ class GetUserInfoOutput(insightconnect_plugin_runtime.Output):
               "order": 41
             },
             "isResourceAccount": {
-              "type": "string",
+              "type": "boolean",
               "title": "Is Resource Account",
               "description": "Is Resource Account",
               "order": 42
@@ -895,7 +895,7 @@ class GetUserInfoOutput(insightconnect_plugin_runtime.Output):
               "order": 40
             },
             "showInAddressList": {
-              "type": "string",
+              "type": "boolean",
               "title": "Show In Address List",
               "description": "Show In Address List",
               "order": 43
