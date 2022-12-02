@@ -1,0 +1,75 @@
+{
+  "parameters": [
+    [
+      "found",
+      "serviceuser:1:ABC1234567890:",
+      {
+        "resourceDetails": {
+          "dependencies": {
+            "serviceaccesskey": [
+              {
+                "id": "ABC123456790",
+                "name": "ABC123456790",
+                "resourceId": "serviceaccesskey:1:ABC123456790:",
+                "type": "serviceaccesskey"
+              }
+            ],
+            "servicepolicy": [
+              {
+                "id": "ABC0987654321",
+                "name": "Example-Policy",
+                "resourceId": "servicepolicy:1:ABC0987654321:",
+                "type": "servicepolicy"
+              }
+            ]
+          },
+          "details": {
+            "resourceType": "serviceuser",
+            "serviceuser": {
+              "actionCount": 0,
+              "activeApiKeys": 1,
+              "ageInDays": 10,
+              "common": {
+                "account": "Test",
+                "accountId": "123456789098",
+                "accountStatus": "DEFAULT",
+                "cloud": "AWS",
+                "creationTimestamp": "2022-10-20 11:16:57",
+                "directLink": "https://example.com",
+                "discoveredTimestamp": "2022-10-20 11:33:49",
+                "documents": {},
+                "lastHarvestedTimestamp": "2022-10-21T08:02:52",
+                "modifiedTimestamp": "2022-10-21 06:03:03",
+                "namespaceId": "arn:aws:iam::123456789098:user/Example-User",
+                "noncompliance": [],
+                "organizationServiceId": 1,
+                "properties": {
+                  "propertyList": []
+                },
+                "resourceId": "serviceuser:1:ABC1234567890:",
+                "resourceName": "Example-User",
+                "resourceType": "serviceuser"
+              },
+              "createDate": "2022-10-20 11:16:57",
+              "disabled": false,
+              "inactiveApiKeys": 0,
+              "inlinePolicies": 0,
+              "lastActivity": "2022-10-21 05:46:00",
+              "loginProfile": false,
+              "managedPolicyCount": 0,
+              "passwordLastChanged": "None",
+              "passwordLastUsed": "None",
+              "path": "/",
+              "policyCount": 1,
+              "serviceCount": 0,
+              "twoFactorEnabled": false,
+              "userId": "ABC1234567890",
+              "userName": "Example-User",
+              "wildcardServiceCount": 0
+            }
+          }
+        }
+      }
+    ]
+  ]
+}
