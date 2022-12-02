@@ -1,0 +1,65 @@
+{
+  "dependencies": {
+    "serviceaccesskey": [
+      {
+        "id": "ABC123456790",
+        "name": "ABC123456790",
+        "resource_id": "serviceaccesskey:1:ABC123456790:",
+        "type": "serviceaccesskey"
+      }
+    ],
+    "servicepolicy": [
+      {
+        "id": "ABC0987654321",
+        "name": "Example-Policy",
+        "resource_id": "servicepolicy:1:ABC0987654321:",
+        "type": "servicepolicy"
+      }
+    ]
+  },
+  "details": {
+    "resource_type": "serviceuser",
+    "serviceuser": {
+      "action_count": 0,
+      "active_api_keys": 1,
+      "age_in_days": 10,
+      "common": {
+        "account": "Test",
+        "account_id": "123456789098",
+        "account_status": "DEFAULT",
+        "cloud": "AWS",
+        "creation_timestamp": "2022-10-20 11:16:57",
+        "direct_link": "https://example.com",
+        "discovered_timestamp": "2022-10-20 11:33:49",
+        "documents": {},
+        "last_harvested_timestamp": "2022-10-21T08:02:52",
+        "modified_timestamp": "2022-10-21 06:03:03",
+        "namespace_id": "arn:aws:iam::123456789098:user/Example-User",
+        "noncompliance": [],
+        "organization_service_id": 1,
+        "properties": {
+          "property_list": []
+        },
+        "resource_id": "serviceuser:1:ABC1234567890:",
+        "resource_name": "Example-User",
+        "resource_type": "serviceuser"
+      },
+      "create_date": "2022-10-20 11:16:57",
+      "disabled": false,
+      "inactive_api_keys": 0,
+      "inline_policies": 0,
+      "last_activity": "2022-10-21 05:46:00",
+      "login_profile": false,
+      "managed_policy_count": 0,
+      "password_last_changed": "None",
+      "password_last_used": "None",
+      "path": "/",
+      "policy_count": 1,
+      "service_count": 0,
+      "two_factor_enabled": false,
+      "user_id": "ABC1234567890",
+      "user_name": "Example-User",
+      "wildcard_service_count": 0
+    }
+  }
+}

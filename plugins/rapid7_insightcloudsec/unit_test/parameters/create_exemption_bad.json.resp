@@ -1,0 +1,19 @@
+{
+  "parameters": [
+    [
+      "for_one_resource",
+      "user@example.com",
+      98765,
+      "backoffice",
+      [
+        "storagecontainer:123:us-east-1:123456789:"
+      ],
+      "storagecontainer",
+      "2022-10-03",
+      "2022-10-04",
+      "example note",
+      "Server error occurred.",
+      "Verify your plugin connection and action inputs are correct and not malformed and try again. If the issue persists, please contact support."
+    ]
+  ]
+}
