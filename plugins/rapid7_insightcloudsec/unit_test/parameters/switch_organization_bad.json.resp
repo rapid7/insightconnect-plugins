@@ -1,0 +1,10 @@
+{
+  "parameters": [
+    [
+      "not_found",
+      "Invalid Organization",
+      "Server error occurred.",
+      "Verify your plugin connection and action inputs are correct and not malformed and try again. If the issue persists, please contact support."
+    ]
+  ]
+}
