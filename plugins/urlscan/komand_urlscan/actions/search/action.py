@@ -21,6 +21,8 @@ class Search(insightconnect_plugin_runtime.Action):
         input_type = params.get(Input.INPUT_TYPE, "Custom")
         query = params.get(Input.Q)
         sort = params.get(Input.SORT, "_score")
+        if query.startswith("https://"):
+            query = query.replace("https://", "")
         if input_type == "Custom":
             search_query = query
         elif input_type == "URL":
@@ -56,8 +58,8 @@ class Search(insightconnect_plugin_runtime.Action):
 
             try:
                 response = requests.get(url, headers=self.connection.headers)
-            except Exception as e:
-                raise PluginException(cause="Something went wrong during the request.", assistance=e)
+            except Exception as error:
+                raise PluginException(cause="Something went wrong during the request.", assistance=error)
 
             try:
                 responses = response.json()
