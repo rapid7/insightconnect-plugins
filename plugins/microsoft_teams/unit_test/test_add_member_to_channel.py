@@ -1,14 +1,15 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
+
+from unittest import TestCase, mock
 
 from icon_microsoft_teams.actions.add_member_to_channel.action import AddMemberToChannel
 from icon_microsoft_teams.actions.add_member_to_channel.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from util import Util
-from unittest import TestCase, mock
 
 STUB_GROUP_NAME = "test"
 STUB_MEMBER_LOGIN = "test"
