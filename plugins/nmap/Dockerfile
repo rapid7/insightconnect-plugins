@@ -1,4 +1,4 @@
-FROM komand/python-3-plugin:2
+FROM rapid7/insightconnect-python-3-38-plugin:4
 # The three supported python parent images are:
 # - komand/python-2-plugin
 # - komand/python-3-plugin
@@ -10,7 +10,7 @@ FROM komand/python-3-plugin:2
 # NOTE: Add pip packages to requirements.txt
 
 # End package dependencies
-RUN apt-get update && apt-get install -y nmap=6.47-3+deb8u2
+RUN apt-get update && apt-get install -y python-nmap && apt-get install -y sudo
 
 # Add source code
 WORKDIR /python/src
@@ -22,5 +22,7 @@ RUN if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
 # Install plugin
 RUN python setup.py build && python setup.py install
+
+USER root
 
 ENTRYPOINT ["/usr/local/bin/komand_nmap"]
