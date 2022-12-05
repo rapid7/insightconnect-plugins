@@ -19,7 +19,7 @@ def format_query(query: str, input_type: str) -> str:
     :type input_type: str
 
     :return search_query: Formatted query used in URL scanning
-    :rtype str:
+    :rtype: str
     """
 
     # Handle any query searches beginning with https://
