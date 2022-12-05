@@ -44,8 +44,8 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
         # Get our most recent message date:
         try:
             last_time_we_checked = maya.parse(sorted_messages[0].get("createdDateTime"))
-        except Exception as e:
-            raise PluginException(PluginException.Preset.INVALID_JSON) from e
+        except Exception as error:
+            raise PluginException(PluginException.Preset.INVALID_JSON) from error
 
         time.sleep(1)  # Make sure we don't kill the API. It's limited to 3 calls a second
 
@@ -115,11 +115,11 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
         if message_content:
             try:
                 compiled_message_content = re.compile(message_content)
-            except Exception as e:
+            except Exception as error:
                 raise PluginException(
                     cause=f"Invalid regular expression: {message_content}",
                     assistance=f"Please correct {message_content}",
-                ) from e
+                ) from error
         return compiled_message_content
 
     def get_sorted_messages(self, messages_endpoint: str) -> list:
@@ -144,12 +144,12 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
             messages_result = requests.get(messages_endpoint, headers=headers)
             try:
                 messages_result.raise_for_status()
-            except Exception as e:
+            except Exception as error:
                 raise PluginException(
                     cause=f"Could not get messages from Microsoft Graph API."
                     f"Get messages result code: {messages_result.status_code}",
                     assistance=messages_result.text,
-                ) from e
+                ) from error
 
         sorted_messages = self.sort_messages_from_request(messages_result.json())
         return sorted_messages
@@ -276,17 +276,16 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
 
     @staticmethod
     def extract_urls(msg: str) -> list:
+        cleaned_message = re.sub(r"\"font-size\s*?:.*?(;|(?=\"\"|'|>))", '""', msg)
         urls = re.findall(
             r"(?m)\b(?:http(?:s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+\b",
-            msg.lower(),
+            cleaned_message.lower(),
         )
         normalized_urls = []
         for url in urls:
             if "@" in url or validators.ipv6(url) or validators.ipv4(url):
                 continue
-
             normalized_urls.append(url)
-
         return normalized_urls
 
     @staticmethod
