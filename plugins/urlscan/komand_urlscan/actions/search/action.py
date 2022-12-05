@@ -8,6 +8,52 @@ import json
 import validators
 
 
+def format_query(query: str, input_type: str) -> str:
+    """
+    A function to handle properly format the query after
+    determining the input type
+
+    :param query: Query to be formatted
+    :type query: str
+    :param input_type: URL/Domain/Custom
+    :type input_type: str
+
+    :return search_query: Formatted query used in URL scanning
+    :rtype str:
+    """
+
+    # Handle any query searches beginning with https://
+    # (It breaks the search if this is inputted)
+    if query.startswith("https://"):
+        query = query.replace("https://", "")
+
+    # If input_type is Custom
+    if input_type == "Custom":
+        search_query = query
+
+    # If input_type is URL, determine if the query is a valid URL
+    # then append page.url: to the query
+    elif input_type == "URL":
+        if not validators.url(query):
+            raise PluginException(
+                cause="URL entered as input type, but not provided in query.",
+                assistance="Please check URL and try again.",
+            )
+        search_query = f'page.url: "{query}"'
+
+    # Handle other types, check if it is a valid URL.
+    # then append page.domain: to the query
+    else:
+        if not validators.domain(query):
+            raise PluginException(
+                cause="Domain entered as input type, but not provided in query.",
+                assistance="Please check domain address and try again.",
+            )
+        search_query = f'page.domain:"{query}"'
+
+    return search_query
+
+
 class Search(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -21,24 +67,8 @@ class Search(insightconnect_plugin_runtime.Action):
         input_type = params.get(Input.INPUT_TYPE, "Custom")
         query = params.get(Input.Q)
         sort = params.get(Input.SORT, "_score")
-        if query.startswith("https://"):
-            query = query.replace("https://", "")
-        if input_type == "Custom":
-            search_query = query
-        elif input_type == "URL":
-            if not validators.url(query):
-                raise PluginException(
-                    cause="URL entered as input type, but not provided in query.",
-                    assistance="Please check URL and try again.",
-                )
-            search_query = f'page.url: "{query}"'
-        else:
-            if not validators.domain(query):
-                raise PluginException(
-                    cause="Domain entered as input type, but not provided in query.",
-                    assistance="Please check domain address and try again.",
-                )
-            search_query = f'page.domain:"{query}"'
+
+        search_query = format_query(query=query, input_type=input_type)
 
         search_after = None
         results = []
