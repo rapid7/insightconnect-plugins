@@ -1,4 +1,7 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
+from icon_crowdstrike_falcon_intelligence.util.constants import FilterParameters
 from .schema import GetSubmissionsIDsInput, GetSubmissionsIDsOutput, Input, Output, Component
 
 # Custom imports below
@@ -14,10 +17,11 @@ class GetSubmissionsIDs(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params: dict = None):
-        limit = params.get(Input.LIMIT, 5000)
-        if limit > 5000:
-            self.logger.warning(
-                "Provided limit value is larger than 5000 but this action will return up to 5000 results."
+        limit = params.get(Input.LIMIT, FilterParameters.MAX_RESULTS)
+        if limit > FilterParameters.MAX_RESULTS:
+            raise PluginException(
+                cause=f"Limit value is larger than {FilterParameters.MAX_RESULTS}.",
+                assistance=f"Please provide `Limit` value less or equal to {FilterParameters.MAX_RESULTS}",
             )
         return {
             Output.SUBMISSIONIDS: self.connection.api_client.get_submissions_ids(

@@ -151,8 +151,8 @@ class CrowdStrikeAPI:
                 return response
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        except requests.exceptions.HTTPError as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+        except requests.exceptions.HTTPError as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def make_json_request(
         self, method: str, url: str, params: dict = None, json_data: dict = None
@@ -160,5 +160,5 @@ class CrowdStrikeAPI:
         try:
             response = self.make_request(method=method, url=url, params=params, json_data=json_data)
             return response.json()
-        except json.decoder.JSONDecodeError as e:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
+        except json.decoder.JSONDecodeError as error:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
