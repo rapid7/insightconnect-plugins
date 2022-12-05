@@ -22,8 +22,11 @@ class MockClient:
             self.filename = "get_users"
         if domain == "empty_list":
             self.filename = "get_users_empty_list"
-        if query:
+        if query == "name:'Example User'":
             self.filename = "get_contact_user_by_name"
+        if query == "name: 'Wrong User'":
+            self.filename = "get_contact_user_by_name_not_found"
+
         return self
 
     def list_next(self, request, result):
