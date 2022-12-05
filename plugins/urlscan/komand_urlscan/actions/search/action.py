@@ -23,7 +23,7 @@ def format_query(query: str, input_type: str) -> str:
     """
 
     # Handle any query searches beginning with https://
-    # (It breaks the search if this is inputted)
+    # (It breaks in certain scenarios if this is inputted)
     if query.startswith("https://"):
         query = query.replace("https://", "")
 
