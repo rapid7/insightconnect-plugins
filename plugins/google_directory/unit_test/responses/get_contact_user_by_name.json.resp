@@ -1,0 +1,87 @@
+{
+   "kind":"admin#directory#users",
+   "etag":"1111111111",
+   "users":[
+      {
+         "kind":"admin#directory#user",
+         "id":"1",
+         "etag":"1111111111",
+         "primaryEmail":"user@example.com",
+         "name":{
+            "givenName":"Example",
+            "familyName":"User",
+            "fullName":"Example User"
+         },
+         "isAdmin":false,
+         "isDelegatedAdmin":false,
+         "lastLoginTime":"2022-04-15T11:49:26.000Z",
+         "creationTime":"2022-04-14T14:43:12.000Z",
+         "agreedToTerms":true,
+         "suspended":false,
+         "archived":false,
+         "changePasswordAtNextLogin":false,
+         "ipWhitelisted":false,
+         "emails":[
+            {
+               "address":"user@example.com",
+               "type":"work"
+            },
+            {
+               "address":"user2@example.com",
+               "primary":true
+            },
+            {
+               "address":"user@example2.com"
+            }
+         ],
+         "addresses": [
+              {
+                "country": "England",
+                "streetAddress": "1 Test street"
+              },
+              {
+                "country": "England",
+                "postalCode": "31-222"
+              },
+              {
+                "country": "England",
+                "postalCode": "31-111",
+                "streetAddress": "3 Test street"
+              },
+              {
+                "postalCode": "31-333",
+                "streetAddress": "4 Test street"
+              }
+            ],
+         "phones":[
+            {
+               "value":"111111111",
+               "type":"work"
+            },
+            {
+               "value":"222222222",
+               "type":"work"
+            },
+            {
+               "value":"333333333",
+               "type":"work"
+            }
+         ],
+         "languages":[
+            {
+               "languageCode":"en",
+               "preference":"preferred"
+            }
+         ],
+         "nonEditableAliases":[
+            "user@example.com"
+         ],
+         "customerId":"1",
+         "orgUnitPath":"/",
+         "isMailboxSetup":true,
+         "isEnrolledIn2Sv":false,
+         "isEnforcedIn2Sv":false,
+         "includeInGlobalAddressList":true
+      }
+   ]
+}
