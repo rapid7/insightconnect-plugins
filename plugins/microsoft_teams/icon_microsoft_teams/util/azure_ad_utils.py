@@ -406,7 +406,7 @@ def add_user_to_channel(
         endpoint,
         json={
             "@odata.type": "#microsoft.graph.aadUserConversationMember",
-            "roles": [{role}],
+            "roles": [role],
             "user@odata.bind": f"https://graph.microsoft.com/beta/users/{user_id}",
         },
         headers=connection.get_headers(),
