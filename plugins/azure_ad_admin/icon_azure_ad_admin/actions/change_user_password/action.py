@@ -3,7 +3,7 @@ import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from .schema import ChangeUserPasswordInput, ChangeUserPasswordOutput, Input, Output, Component
-from ...util.constans import Endpoint
+from ...util.constants import Endpoint
 
 
 class ChangeUserPassword(insightconnect_plugin_runtime.Action):
