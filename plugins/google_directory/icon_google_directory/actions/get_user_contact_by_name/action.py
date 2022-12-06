@@ -25,7 +25,7 @@ class GetUserContactByName(insightconnect_plugin_runtime.Action):
             if "users" in response.keys():
                 return {Output.CONTACT: return_contact_information_name(response)}
             else:
-                raise Exception("User not found")
+                raise PluginException("User not found")
 
         # Handles all errors
         except Exception as error:
