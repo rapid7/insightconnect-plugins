@@ -3,7 +3,7 @@ import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from .schema import ChangeUserPasswordInput, ChangeUserPasswordOutput, Input, Output, Component
-from ...util.constans import Endpoint
+from ...util.constants import Endpoint
 
 
 class ChangeUserPassword(insightconnect_plugin_runtime.Action):
@@ -28,7 +28,7 @@ class ChangeUserPassword(insightconnect_plugin_runtime.Action):
 
         if not result.status_code == 204:
             raise PluginException(
-                cause="Change User Password failed. Check your permission.",
+                cause="Change User Password failed. Check your permissions.",
                 assistance="Unexpected return code from server.",
                 data=result.text,
             )
