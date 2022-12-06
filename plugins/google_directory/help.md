@@ -1,6 +1,7 @@
 # Description
 
-Google Directory lets you perform administrative operations on users, groups, organizational units, and devices in your account.
+Google Directory lets you perform administrative operations on users, groups, organizational units, and devices in your
+account.
 The Google Directory plugin allows you to list all users, suspend and unsuspend users.
 
 # Key Features
