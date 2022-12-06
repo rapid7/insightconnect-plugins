@@ -59,7 +59,7 @@ This action is used to add a conversation member to a channel. This operation is
 |channel_name|string|None|True|Name of the channel to which the member is to be added|None|InsightConnect Channel|
 |group_name|string|None|True|Name of the group in which the channel is located|None|InsightConnect Team|
 |member_login|string|None|True|The login of the group member to be added to a channel|None|user@example.com|
-|role|string|None|False|Role of the member to add|['Owner', 'Member']|Owner|
+|role|string|Member|True|Role of the member to add|['Owner', 'Member']|Owner|
 
 Example input:
 
@@ -263,10 +263,10 @@ Example input:
 
 ```
 {
-  "channel_name": "InsightConnect Channel",
+  "channel_guid": "xxxxx-xxxxx-xxxx-xxxx",
+  "is_html": false,
   "message": "Hello!",
-  "team_name": "InsightConnect Team",
-  "thread_id": 1595889908700
+  "team_guid": "xxxxx-xxxxx-xxxx-xxxx"
 }
 ```
 
