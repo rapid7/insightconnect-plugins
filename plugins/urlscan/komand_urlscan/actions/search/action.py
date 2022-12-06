@@ -6,6 +6,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 import requests
 import json
 import validators
+from urllib.parse import urlparse
 
 
 def format_query(query: str, input_type: str) -> str:
@@ -22,14 +23,16 @@ def format_query(query: str, input_type: str) -> str:
     :rtype: str
     """
 
-    # Handle any query searches beginning with https://
-    # (It breaks in certain scenarios if this is inputted)
-    if query.startswith("https://"):
-        query = query.replace("https://", "")
-
-    # If input_type is Custom
+    # If input_type is Custom, handle prefixes
     if input_type == "Custom":
-        search_query = query
+        parsed_url = urlparse(query)
+        if parsed_url.scheme:
+            raise PluginException(
+                cause="Prefix in URL found for type custom.",
+                assistance="Please select URL or domain input type for URLs containing a scheme.",
+            )
+        else:
+            search_query = query
 
     # If input_type is URL, determine if the query is a valid URL
     # then append page.url: to the query
