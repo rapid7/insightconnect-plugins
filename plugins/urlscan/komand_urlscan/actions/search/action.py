@@ -29,7 +29,7 @@ def format_query(query: str, input_type: str) -> str:
         if parsed_url.scheme:
             raise PluginException(
                 cause="Prefix in URL found for type custom.",
-                assistance="Please select URL or domain input type for URLs containing a scheme.",
+                assistance="Please select URL input type for URLs containing a scheme.",
             )
         else:
             search_query = query
