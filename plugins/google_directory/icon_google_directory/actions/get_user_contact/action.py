@@ -4,7 +4,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import GetUserContactInput, GetUserContactOutput, Input, Output, Component
 
 # Custom imports below
-from icon_google_directory.util.tools import Message, return_contact_informations
+from icon_google_directory.util.tools import Message, return_contact_information
 
 
 class GetUserContact(insightconnect_plugin_runtime.Action):
@@ -21,6 +21,6 @@ class GetUserContact(insightconnect_plugin_runtime.Action):
         try:
             response = self.connection.service.users().get(userKey=email).execute()
             if response:
-                return {Output.CONTACT: return_contact_informations(response)}
+                return {Output.CONTACT: return_contact_information(response)}
         except Exception:
             raise PluginException(cause=Message.USER_CONTACT_CAUSE, assistance=Message.USER_CONTACT_ASSISTANCE)
