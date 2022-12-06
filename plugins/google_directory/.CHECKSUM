@@ -1,7 +1,7 @@
 {
-	"spec": "9e5e4e0be9b2af7ca5b5f82ea9be348e",
-	"manifest": "ea5bd445af32dc62dfff1a4818974e5d",
-	"setup": "a4fd0c33054f4a774beda31f27f60849",
+	"spec": "96623b7b64030ee0d9d1fc89ff72ab8a",
+	"manifest": "b349736390ca1beceb6d2983045f5ede",
+	"setup": "57b2691ff6aeb565f1144f96803b88a1",
 	"schemas": [
 		{
 			"identifier": "get_all_domain_users/schema.py",
@@ -10,6 +10,10 @@
 		{
 			"identifier": "get_user_contact/schema.py",
 			"hash": "ae83aa9ac0aca15f83b19a30792de086"
+		},
+		{
+			"identifier": "get_user_contact_by_name/schema.py",
+			"hash": "7a841c708986e13a1f1161af03329b07"
 		},
 		{
 			"identifier": "suspend_user/schema.py",
