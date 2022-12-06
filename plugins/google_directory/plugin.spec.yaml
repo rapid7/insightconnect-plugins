@@ -4,8 +4,8 @@ products: [insightconnect]
 name: google_directory
 title: Google Directory
 description: Uses the Google Directory plugin to manage members, users, and user aliases
-version: 2.1.0
-supported_versions: ["Google Directory API v1 2022-03-29T12:00:00Z"]
+version: 2.2.0
+supported_versions: ["Google Directory API v1 2022-11-04T12:00:00Z"]
 vendor: rapid7
 support: community
 status: []
@@ -14,9 +14,9 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.google.com/
 tags:
-- google
-- admin
-- directory
+  - google
+  - admin
+  - directory
 hub_tags:
   use_cases: [user_management]
   keywords: [google, directory]
@@ -137,8 +137,8 @@ connection:
     default: https://www.googleapis.com/auth/admin.directory.user
     required: true
     enum:
-    - https://www.googleapis.com/auth/admin.directory.user
-    - https://www.googleapis.com/auth/admin.directory.user.readonly
+      - https://www.googleapis.com/auth/admin.directory.user
+      - https://www.googleapis.com/auth/admin.directory.user.readonly
     example: https://www.googleapis.com/auth/admin.directory.user
 actions:
   get_all_domain_users:
@@ -157,6 +157,7 @@ actions:
         description: Users in the domain
         required: true
         type: '[]user'
+        example: '[{"email":"user@example.com","name":"Joe Tester"},{"email":"user@example.com","name":"Bob Testerson"}]'
   get_user_contact:
     title: Get User's Contact Information
     description: Retrieves all contact information from a specific user in the domain by email
@@ -173,6 +174,24 @@ actions:
         description: User's contact information
         required: true
         type: contact
+        example: '{"addresses":[{"country":"England", "street":"1 Test street"}, {"country":"England", "postal_code":"31-222"}, {"country":"England", "postal_code":"31-111", "street":"3 Test street"}, {"postal_code":"31-333", "street":"4 Test street"}], "phone_numbers":["111111111", "222222222", "333333333"], "email_addresses":["user@example.com", "user2@example.com", "user3@example.com"]}}'
+  get_user_contact_by_name:
+    title: Get User's Contact Information by Name
+    description: Retrieves all contact information from a specific user in the domain by name
+    input:
+      full_name:
+        title: User's Full Name
+        description: Full name of user
+        type: string
+        required: true
+        example: Example User
+    output:
+      contact:
+        title: Contact
+        description: User's contact information
+        required: true
+        type: contact
+        example: '{"addresses":[{"country":"England", "street":"1 Test street"}, {"country":"England", "postal_code":"31-222"}, {"country":"England", "postal_code":"31-111", "street":"3 Test street"}, {"postal_code":"31-333", "street":"4 Test street"}], "phone_numbers":["111111111", "222222222", "333333333"], "email_addresses":["user@example.com", "user2@example.com", "user3@example.com"]}'
   suspend_user:
     title: Suspend User
     description: Suspends a user account
@@ -189,6 +208,7 @@ actions:
         description: Whether or not the suspend was successful
         required: true
         type: boolean
+        example: '{"success": true}'
   unsuspend_user:
     title: Unsuspend User
     description: Unsuspends a user account
@@ -205,3 +225,4 @@ actions:
         description: Whether or not the unsuspend was successful
         required: true
         type: boolean
+        example: '{"success": true}'
