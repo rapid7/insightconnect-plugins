@@ -6,7 +6,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 import requests
 import json
 import validators
-from urllib.parse import urlparse
 
 
 def format_query(query: str, input_type: str) -> str:
@@ -25,14 +24,7 @@ def format_query(query: str, input_type: str) -> str:
 
     # If input_type is Custom, handle prefixes
     if input_type == "Custom":
-        parsed_url = urlparse(query)
-        if parsed_url.scheme:
-            raise PluginException(
-                cause="Prefix in URL found for type custom.",
-                assistance="Please select URL input type for URLs containing a scheme.",
-            )
-        else:
-            search_query = query
+        search_query = query
 
     # If input_type is URL, determine if the query is a valid URL
     # then append page.url: to the query
@@ -89,10 +81,12 @@ class Search(insightconnect_plugin_runtime.Action):
             url = f'{self.connection.server}/search/?{"&".join(query_params)}'
             self.logger.info(url)
 
-            try:
-                response = requests.get(url, headers=self.connection.headers)
-            except Exception as error:
-                raise PluginException(cause="Something went wrong during the request.", assistance=error)
+            response = requests.get(url, headers=self.connection.headers)
+            json_response = json.loads(response.text)
+            if json_response.get("status") == 400:
+                raise PluginException(
+                    cause="400 Error - Invalid request.", assistance=f"{json_response.get('message')}"
+                )
 
             try:
                 responses = response.json()
