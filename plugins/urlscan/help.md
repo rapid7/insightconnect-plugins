@@ -826,7 +826,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 4.1.1 - Fix issue: Search - Add PluginException for users inputting scheme in custom type
+* 4.1.1 - Fix issue: Search - Add PluginException for 400 response code
 * 4.1.0 - Cloud enabled
 * 4.0.2 - Fix error handling while submit URL which is in blacklist of URLScan API | Update SDK to version 4
 * 4.0.1 - Fix issue with not compatible types in custom output type for Get Scan Result action | Add unit tests for Get Scan Result | Refactor existing unit tests
