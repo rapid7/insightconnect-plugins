@@ -96,4 +96,4 @@ class TestTransitionIssue(TestCase):
         with self.assertRaises(PluginException) as e:
             self.test_action.run(action_params)
 
-        self.assertIn("Invalid input.", e.exception.cause)
+        self.assertIn("Key error", e.exception.cause)
