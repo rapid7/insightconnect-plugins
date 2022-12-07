@@ -46,6 +46,7 @@ class AddMemberToChannelInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Member Role",
       "description": "Role of the member to add",
+      "default": "Member",
       "enum": [
         "Owner",
         "Member"
@@ -56,7 +57,8 @@ class AddMemberToChannelInput(insightconnect_plugin_runtime.Input):
   "required": [
     "channel_name",
     "group_name",
-    "member_login"
+    "member_login",
+    "role"
   ]
 }
     """)

@@ -714,8 +714,9 @@ actions:
         enum:
           - Owner
           - Member
-        required: false
+        required: true
         example: Owner
+        default: Member
     output:
       success:
         title: Success
