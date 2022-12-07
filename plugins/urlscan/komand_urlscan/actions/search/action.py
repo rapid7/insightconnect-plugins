@@ -81,12 +81,17 @@ class Search(insightconnect_plugin_runtime.Action):
             url = f'{self.connection.server}/search/?{"&".join(query_params)}'
             self.logger.info(url)
 
-            response = requests.get(url, headers=self.connection.headers)
-            json_response = json.loads(response.text)
-            if json_response.get("status") == 400:
-                raise PluginException(
-                    cause="400 Error - Invalid request.", assistance=f"{json_response.get('message')}"
-                )
+            try:
+                response = requests.get(url, headers=self.connection.headers)
+                response.raise_for_status()
+            except requests.exceptions.HTTPError as error:
+                status_code = error.response.status_code
+                if status_code == 400:
+                    raise PluginException(
+                        preset=PluginException.Preset.BAD_REQUEST, data=response.text
+                    )
+            except Exception as error:
+                raise PluginException(cause="Something went wrong during the request.", assistance=error)
 
             try:
                 responses = response.json()

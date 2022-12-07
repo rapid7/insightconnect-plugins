@@ -855,3 +855,4 @@ _This plugin does not contain any troubleshooting information._
 
 * [Urlscan.io](https://urlscan.io/)
 * [Urlscan API](https://urlscan.io/about-api/)
+* [Urlscan Search API](https://urlscan.io/docs/search/)
