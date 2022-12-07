@@ -707,6 +707,16 @@ actions:
         type: string
         required: true
         example: InsightConnect Channel
+      role:
+        title: Member Role
+        description: Role of the member to add
+        type: string
+        enum:
+          - Owner
+          - Member
+        required: true
+        example: Owner
+        default: Member
     output:
       success:
         title: Success
