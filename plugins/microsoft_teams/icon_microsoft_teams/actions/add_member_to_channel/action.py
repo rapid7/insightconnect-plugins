@@ -24,6 +24,7 @@ class AddMemberToChannel(insightconnect_plugin_runtime.Action):
         group_id = get_group_id_from_name(self.logger, self.connection, params.get(Input.GROUP_NAME))
         channels = get_channels_from_microsoft(self.logger, self.connection, group_id, params.get(Input.CHANNEL_NAME))
         user_id = get_user_info(self.logger, self.connection, params.get(Input.MEMBER_LOGIN))
+        role = params.get(Input.ROLE, "Member").lower()
         try:
             channel_id = channels[0].get("id")
             user_id = user_id.get("id")
@@ -43,4 +44,4 @@ class AddMemberToChannel(insightconnect_plugin_runtime.Action):
                 assistance="If the issue persists please contact support.",
                 data=e,
             )
-        return {Output.SUCCESS: add_user_to_channel(self.logger, self.connection, group_id, channel_id, user_id)}
+        return {Output.SUCCESS: add_user_to_channel(self.logger, self.connection, group_id, channel_id, user_id, role)}
