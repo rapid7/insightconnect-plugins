@@ -58,13 +58,15 @@ class Search(insightconnect_plugin_runtime.Action):
             output=SearchOutput(),
         )
 
-    def run(self, params={}):
-        input_type = params.get(Input.INPUT_TYPE, "Custom")
-        query = params.get(Input.Q)
-        sort = params.get(Input.SORT, "_score")
+    def get_results(self, search_query: str, sort: str):
+        """
+        This function is used to make the requests needed to return the results
+        from the urlscan API.
 
-        search_query = format_query(query=query, input_type=input_type)
-
+        :param search_query: Query to be search / appended to URL
+        :param sort: The users inputted sort method
+        :return:
+        """
         search_after = None
         results = []
         size = 10000
@@ -87,9 +89,7 @@ class Search(insightconnect_plugin_runtime.Action):
             except requests.exceptions.HTTPError as error:
                 status_code = error.response.status_code
                 if status_code == 400:
-                    raise PluginException(
-                        preset=PluginException.Preset.BAD_REQUEST, data=response.text
-                    )
+                    raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
             except Exception as error:
                 raise PluginException(cause="Something went wrong during the request.", assistance=error)
 
@@ -115,5 +115,16 @@ class Search(insightconnect_plugin_runtime.Action):
                     cause="Received an unexpected response from the Urlscan API. ",
                     assistance=f"(non-JSON or no response was received). Response was: {response.text}",
                 )
+
+            return results, has_more
+
+    def run(self, params={}):
+        input_type = params.get(Input.INPUT_TYPE, "Custom")
+        query = params.get(Input.Q)
+        sort = params.get(Input.SORT, "_score")
+
+        search_query = format_query(query=query, input_type=input_type)
+
+        results, has_more = self.get_results(search_query=search_query, sort=sort)
 
         return {Output.RESULTS: results, Output.TOTAL: len(results), Output.HAS_MORE: has_more}
