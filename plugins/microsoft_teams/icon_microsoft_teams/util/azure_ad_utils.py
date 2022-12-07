@@ -397,6 +397,7 @@ def add_user_to_channel(
     group_id: str,
     channel_id: str,
     user_id: str,
+    role: str,
 ) -> bool:
     endpoint = f"https://graph.microsoft.com/beta/teams/{group_id}/channels/{channel_id}/members/"
     logger.info(f"Adding user to channel with: {endpoint}")
@@ -405,7 +406,7 @@ def add_user_to_channel(
         endpoint,
         json={
             "@odata.type": "#microsoft.graph.aadUserConversationMember",
-            "roles": [],
+            "roles": [role],
             "user@odata.bind": f"https://graph.microsoft.com/beta/users/{user_id}",
         },
         headers=connection.get_headers(),
