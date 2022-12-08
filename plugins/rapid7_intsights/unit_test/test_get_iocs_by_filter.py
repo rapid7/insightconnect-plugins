@@ -1,5 +1,6 @@
 import sys
 import os
+
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
@@ -44,21 +45,25 @@ class TestGetIocsByFilter(TestCase):
             ["below_limit", {Input.LAST_UPDATED_FROM: "2000-12-31T00:00:00Z", Input.LIMIT: 0}, None],
             ["above_limit", {Input.LAST_UPDATED_FROM: "2000-12-31T00:00:00Z", Input.LIMIT: 1001}, None],
             ["single_input", {Input.LAST_UPDATED_FROM: "2000-12-31T00:00:00Z", Input.LIMIT: None}, None],
-            ["all_inputs", {
-                Input.LAST_UPDATED_FROM: "2000-12-31T00:00:00Z",
-                Input.LIMIT: 1000,
-                Input.TYPE: ["Domains"],
-                Input.LAST_UPDATED_TO: "2000-12-31T00:00:00Z",
-                Input.LAST_SEEN_FROM: "2000-12-31T00:00:00Z",
-                Input.LAST_SEEN_TO: "2000-12-31T00:00:00Z",
-                Input.FIRST_SEEN_FROM: "2000-12-31T00:00:00Z",
-                Input.FIRST_SEEN_TO: "2000-12-31T00:00:00Z",
-                Input.STATUS: "Active",
-                Input.SEVERITY: ["High", "Low"],
-                Input.SOURCE_IDS: ["123450000012345000001233"],
-                Input.KILL_CHAIN_PHASES: ["Exploitation", "Installation"],
-                Input.OFFSET: "2022-11-18T16:59:01.626Z",
-            }, None],
+            [
+                "all_inputs",
+                {
+                    Input.LAST_UPDATED_FROM: "2000-12-31T00:00:00Z",
+                    Input.LIMIT: 1000,
+                    Input.TYPE: ["Domains"],
+                    Input.LAST_UPDATED_TO: "2000-12-31T00:00:00Z",
+                    Input.LAST_SEEN_FROM: "2000-12-31T00:00:00Z",
+                    Input.LAST_SEEN_TO: "2000-12-31T00:00:00Z",
+                    Input.FIRST_SEEN_FROM: "2000-12-31T00:00:00Z",
+                    Input.FIRST_SEEN_TO: "2000-12-31T00:00:00Z",
+                    Input.STATUS: "Active",
+                    Input.SEVERITY: ["High", "Low"],
+                    Input.SOURCE_IDS: ["123450000012345000001233"],
+                    Input.KILL_CHAIN_PHASES: ["Exploitation", "Installation"],
+                    Input.OFFSET: "2022-11-18T16:59:01.626Z",
+                },
+                None,
+            ],
             ["no_results", {Input.LAST_UPDATED_FROM: "2000-12-30T00:00:00Z", Input.LIMIT: None}, {"content": []}],
         ]
     )
