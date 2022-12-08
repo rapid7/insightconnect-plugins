@@ -1,0 +1,7 @@
+AUTHENTICATION_ENDPOINT = "/oauth2/token"
+ARTIFACTS_ENDPOINT = "/falconx/entities/artifacts/v1"
+REPORT_SUMMARIES_ENDPOINT = "/falconx/entities/report-summaries/v1"
+REPORTS_ENDPOINT = "/falconx/entities/reports/v1"
+SUBMISSIONS_ENDPOINT = "/falconx/entities/submissions/v1"
+REPORTS_QUERY_ENDPOINT = "/falconx/queries/reports/v1"
+SUBMISSIONS_QUERY_ENDPOINT = "/falconx/queries/submissions/v1"
