@@ -150,5 +150,11 @@ class Util:
             and kwargs.get("json").get("cveIds") == []
         ):
             return MockResponse(200, "delete_cve_empty")
+        elif (
+            kwargs.get("url") == "https://api.intsights.com/public/v3/iocs"
+        ):
+            if (kwargs.get("params").get("lastUpdatedFrom") == "2000-12-30T00:00:00Z"):
+                return MockResponse(200, "get_iocs_by_filter_empty")
+            return MockResponse(200, "get_iocs_by_filter")
         else:
             raise NotImplementedError("Not implemented", kwargs)

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_intsights
 title: Threat Command
 description: Threat Command by Rapid7 is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
-version: 4.0.0
+version: 4.1.0
 supported_versions: ["2.4.0"]
 vendor: rapid7
 support: rapid7
@@ -334,6 +334,87 @@ types:
       description: Fail reason
       type: string
       required: true
+  ioc_content:
+    value:
+      title: Indicator Value
+      description: Indicator value
+      type: string
+      required: false
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+    severity:
+      title: Severity
+      description: Severity
+      type: string
+      required: false
+    score:
+      title: Score
+      description: Score
+      type: float
+      required: false
+    whitelisted:
+      title: Whitelisted
+      description: Whitelisted
+      type: boolean
+      required: false
+    firstSeen:
+      title: First Seen
+      description: First seen
+      type: string
+      required: false
+    lastSeen:
+      title: Last Seen
+      description: Last seen
+      type: string
+      required: false
+    lastUpdateDate:
+      title: Last Update Date
+      description: Last update date
+      type: string
+      required: false
+    geoLocation:
+      title: Geographic Location
+      description: Geographic location
+      type: string
+      required: false
+    sources:
+      title: Sources
+      description: Sources
+      type: '[]source'
+      required: false
+    tags:
+      title: Tags
+      description: Tags
+      type: '[]string'
+      required: false
+    relatedMalware:
+      title: Related Malware
+      description: Related malware
+      type: '[]string'
+      required: false
+    relatedCampaigns:
+      title: Related Campaigns
+      description: Related campaigns
+      type: '[]string'
+      required: false
+    relatedThreatActors:
+      title: Related Threat Actors
+      description: Related threat actors
+      type: '[]string'
+      required: false
+    status:
+      title: Status
+      description: Status
+      type: string
+      required: false
+    reportedFeeds:
+      title: Reported Feeds
+      description: Reported Feeds
+      type: '[]reported_feed'
+      required: false
 
 connection:
   account_id:
@@ -365,86 +446,103 @@ actions:
         description: Indicator value
         type: string
         required: false
+        example: example.com
       type:
         title: Type
         description: Type
         type: string
         required: false
+        example: Domains
       severity:
         title: Severity
         description: Severity
         type: string
         required: false
+        example: Low
       score:
         title: Score
         description: Score
         type: float
         required: false
+        example: 10
       whitelist:
         title: Whitelist
         description: Whitelist
         type: boolean
         required: false
+        example: true
       first_seen:
         title: First Seen
         description: First seen
         type: string
         required: false
+        example: 2020-01-01T20:01:27.344Z
       last_seen:
         title: Last Seen
         description: Last seen
         type: string
         required: false
+        example: 2020-01-01T20:01:27.344Z
       last_update:
         title: Last Update
         description: Last update
         type: string
         required: false
+        example: 2020-01-01T20:01:27.344Z
       geo_location:
         title: Geographic Location
         description: Geographic location
         type: string
         required: false
+        example: US
       sources:
         title: Sources
         description: Sources
         type: '[]source'
         required: false
+        example: '[ { "ConfidenceLevel": 2, "Name": "Cyber Threat Alliance" } ]'
       tags:
         title: Tags
         description: Tags
         type: '[]string'
         required: false
+        example: '["MyTag_1"]'
       system_tags:
         title: System Tags
         description: System tags
         type: '[]string'
         required: false
+        example: '["MyTag_1"]'
       related_malware:
         title: Related Malware
         description: Related malware
         type: '[]string'
         required: false
+        example: example.com
       related_campaigns:
         title: Related Campaigns
         description: Related campaigns
         type: '[]string'
         required: false
+        example: ["doppeldridex","dridex"]
       related_threat_actors:
         title: Related Threat Actors
         description: Related threat actors
         type: '[]string'
         required: false
+        example: ["doppelspider"]
       status:
         title: Status
         description: Status
         type: string
         required: false
+        example: Active
       reported_feeds:
         title: Reported Feeds
         description: Reported Feeds
         type: '[]reported_feed'
         required: false
+        example: '[ { "ID": "SampleID", "Name": "AlienVault OTX", "ConfidenceLevel": 3 } ]'
   enrich_indicator:
     title: Enrich Indicator
     description: Submit an indicator to Threat Command for investigation and return the results
@@ -461,16 +559,19 @@ actions:
         description: Original value
         type: string
         required: true
+        example: "apple.com"
       status:
         title: Status
         description: Status
         type: string
         required: true
+        example: "Done"
       data:
         title: Data
         description: Data
         type: object
         required: false
+        example: '{ "Subdomains": [ "itunes", "apps" ], "Tags": [], "Type": "Domains", "Value": "apple.com", "Whitelisted": true, "IsKnownIoc": false, "RelatedHashes": { "downloaded": [ "5d8c914e53bf34fdeac7441b99fe412240a1211fe2e074dfb2...", "7d2970c279d399214f83f140bb509441e9ae7262f98e8ae41f..." ], "referencing": [ "004b5bb9d28f03397ab3462863cd5902", "00f44bc82df0e8808b70abad0993bdb3" ], "communicating": [ "03b0f52b4d517d2a4f8a7994acd26adb77b8c7d9b25ef37c9a...", "09277de376a14f6475a242ca9ad4743dc81bd951853228d625..." ] }, "RelatedThreatActors": [], "Sources": [], "Whois": { "Current": { "RegistrantDetails": [ { "City": "Cupertino", "Country": "UNITED STATES", "CountryCode": "US", "PostalCode": "95014", "Telephone": "14089961010", "State": "", "Address": "One Apple Park Way", "Email": "user@example.com", "Fax": "14089741560", "Name": "Apple Inc.", "Organization": "Apple Inc." } ], "RegistrationDetails": { "CreatedDate": "1987-02-19T00:00:00.000Z", "ExpiresDate": "2022-02-20T05:00:00.000Z", "NameServers": [ "b.ns.apple.com", "a.ns.apple.com" ], "Statuses": [ "clientTransferProhibited", "serverDeleteProhibited" ], "UpdatedDate": "2021-02-16T01:26:20.000Z" } }, "History": [ { "RegistrantDetails": [ { "Address": "1 Infinite Loop", "Country": "UNITED STATES", "Fax": "14089741560", "Name": "Domain Administrator", "Telephone": "14089961010", "State": "CA", "City": "Cupertino", "CountryCode": "", "Email": "user@example.com", "Organization": "Apple Inc.", "PostalCode": "95014" }, { "Address": "1 Infinite Loop", "CountryCode": "", "Email": "user@example.com", "Fax": "14089741560", "Organization": "Apple Inc.", "Telephone": "14089961010", "City": "Cupertino", "Country": "UNITED STATES", "Name": "Domain Administrator", "PostalCode": "95014", "State": "CA" } ], "RegistrationDetails": { "CreatedDate": "1987-02-19T01:27:12.000Z", "ExpiresDate": "2021-02-20T01:27:12.000Z", "NameServers": [ "ADNS1.APPLE.COM", "ADNS2.APPLE.COM" ], "Statuses": [ "clientTransferProhibited" ], "UpdatedDate": "2012-12-04T01:27:12.000Z" } }, { "RegistrantDetails": [ { "City": "Cupertino", "CountryCode": "", "Email": "user@example.com", "Fax": "", "Name": "Domain Administrator", "State": "CA", "Telephone": "14089961010", "Address": "1 Infinite Loop", "Organization": "Apple Inc.", "PostalCode": "95014", "Country": "UNITED STATES" }, { "Address": "1 Infinite Loop", "City": "Cupertino", "Fax": "", "PostalCode": "95014", "State": "CA", "Telephone": "14089961010", "Country": "UNITED STATES", "CountryCode": "", "Email": "user@example.com", "Name": "Domain Administrator", "Organization": "Apple Inc." } ], "RegistrationDetails": { "UpdatedDate": "2012-12-04T13:10:47.000Z", "CreatedDate": "1987-02-19T13:10:47.000Z", "ExpiresDate": "2021-02-20T13:10:47.000Z", "NameServers": [ "ADNS1.APPLE.COM", "ADNS2.APPLE.COM" ], "Statuses": [ "clientTransferProhibited" ] } } ] }, "DnsRecords": [ { "Type": "NS", "Value": "a.ns.apple.com.", "Count": 123, "FirstResolved": null, "LastResolved": null }, { "FirstResolved": null, "LastResolved": null, "Type": "NS", "Value": "b.ns.apple.com.", "Count": 123 } ], "RelatedMalwares": [], "Resolutions": [ { "ResolvedIpAddress": "17.253.144.10", "ASN": 714, "FirstResolved": "2020-10-09T02:47:17.000Z", "LastResolved": "2021-09-18T13:35:55.000Z", "Location": "US", "Operator": "Apple Inc.", "ReportingSources": [ "Farsight", "VirusTotal" ] }, { "ResolvedIpAddress": "17.142.160.59", "ASN": 714, "FirstResolved": "2014-07-09T16:35:28.000Z", "LastResolved": "2020-10-09T03:00:19.000Z", "Location": "US", "Operator": "Apple Inc.", "ReportingSources": [ "Farsight", "VirusTotal" ] } ], "SystemTags": [], "RelatedCampaigns": [], "Severity": { "Score": 0, "Value": "Low" } }'
   get_alerts:
     title: Get Alerts
     description: Search alerts based on criteria
@@ -577,6 +678,7 @@ actions:
         description: List of alert IDs
         type: "[]string"
         required: true
+        example: '["6155f7b7c6e9d40008b4bb0d","6155f801186a050007745d29"]'
   get_complete_alert_by_id:
     title: Get Complete Alert by ID
     description: Get an alert's complete details for a given alert ID
@@ -593,51 +695,61 @@ actions:
         description: Alert ID
         type: string
         required: false
+        example: 6156118e186a05000774ee46
       assets:
         title: Assets
         description: List of assets
         type: "[]asset"
         required: true
+        example: '[ { "Type": "Domain", "Value": "https://example.com" } ]'
       assignees:
         title: Assignees
         description: List of assignees
         type: "[]string"
         required: true
+        example: []
       details:
         title: Details
         description: Alert details
         type: alert_details
         required: true
+        example: '{ "Description": "APIDescription", "Images": [ "61efc2286b02dcd558929918" ], "Severity": "High", "Source": { "NetworkType": "ClearWeb", "Type": "Application Store", "URL": "https://example.com" }, "SubType": "SuspiciousEmailAddress", "Tags": [], "Title": "Alerttest3", "Type": "Phishing" }'
       found_date:
         title: Found Date
         description: Alert found date
         type: date
         required: false
+        example: 2018-01-01T20:01:27.344Z
       update_date:
         title: Found Date
         description: Alert update date
         type: date
         required: false
+        example: 2018-01-01T20:01:27.344Z
       takedown_status:
         title: Takedown Status
         description: Alert remediation status
         type: string
         required: false
+        example: NotSent
       is_closed:
         title: Is Closed
         description: Is alert closed
         type: boolean
         required: true
+        example: false
       is_flagged:
         title: Is Flagged
         description: Is alert flagged
         type: boolean
         required: true
+        example: false
       leak_name:
         title: Leak Name
         description: Name of the leak DBs in data leakage alerts
         type: string
         required: false
+        example: example.com
   takedown_request:
     title: Takedown Request
     description: Request a takedown for a given alert in Threat Command
@@ -664,6 +776,7 @@ actions:
         description: Status from Threat Command
         type: boolean
         required: true
+        example: true
   add_manual_alert:
     title: Add Manual Alert
     description: Create a manual alert with the provided parameters
@@ -788,6 +901,7 @@ actions:
         description: New created alert ID
         type: string
         required: true
+        example: 6156586e8eadf90008176450
   get_cve_by_id:
     title: Get CVE by ID
     description: Get a list of CVE's with a list of IDs from an account
@@ -804,6 +918,7 @@ actions:
         description: Response content
         type: '[]content'
         required: false
+        example: '{ "content": [ { "cveId": "CVE-2020-7064", "cpe": [ { "Value": "cpe:2.3:a:php:php:*:*:*:*:*:*:*:*", "Range": { "VersionStartIncluding": "7.2.0", "VersionEndIncluding": "", "VersionStartExcluding": "", "VersionEndExcluding": "7.2.9" }, "Title": "Php", "VendorProduct": "Php Php" } ], "publishedDate": "2020-04-01T04:15:00.000Z", "updateDate": "2021-10-25T10:14:52.978Z", "severity": "Low", "intsightsScore": 36, "cvssScore": 5.4, "mentionsAmount": 39, "mentionsPerSource": { "PasteSite": 0, "HackingForum": 0, "InstantMessage": 0, "DarkWeb": 0, "ClearWebCyberBlogs": 0, "CodeRepositories": 9, "Exploit": 0, "SocialMedia": 30 }, "firstMentionDate": "2020-03-19T15:09:00.000Z", "lastMentionDate": "2021-07-22T20:41:00.000Z", "exploitAvailability": false, "vulnerabilityOrigin": [ "API" ], "relatedThreatActors": [], "relatedMalware": [], "relatedCampaigns": [] } ], }'
   get_cve_list:
     title: Get CVE List
     description: Get a partial list of all CVEs from an account
@@ -820,11 +935,13 @@ actions:
         description: Response content
         type: '[]content'
         required: false
+        example: '[ { "cpe": [], "cveId": "CVE-2020-20795", "exploitAvailability": false, "firstMentionDate": "https://example.com", "intsightsScore": 1, "lastMentionDate": "https://example.com", "mentionsAmount": 1, "mentionsPerSource": { "ClearWebCyberBlogs": 0, "CodeRepositories": 0, "DarkWeb": 0, "Exploit": 0, "HackingForum": 0, "InstantMessage": 0, "PasteSite": 0, "SocialMedia": 1 }, "publishedDate": "https://example.com", "relatedCampaigns": [], "relatedMalware": [], "relatedThreatActors": [], "severity": "Low", "updateDate": "https://example.com", "vulnerabilityOrigin": [ "API" ] }, { "cpe": [ { "Range": { "VersionEndExcluding": "2017-08-25" }, "Title": "Voten", "Value": "https://example.com*:*:*:*:*:*:*:*", "VendorProduct": "Voten Voten" } ], "cveId": "CVE-2018-7663", "cvssScore": "https://example.com", "exploitAvailability": false, "firstMentionDate": "https://example.com", "intsightsScore": 28, "lastMentionDate": "https://example.com", "mentionsAmount": 20, "mentionsPerSource": { "ClearWebCyberBlogs": 0, "CodeRepositories": 1, "DarkWeb": 0, "Exploit": 0, "HackingForum": 0, "InstantMessage": 0, "PasteSite": 0, "SocialMedia": 19 }, "publishedDate": "https://example.com", "relatedCampaigns": [], "relatedMalware": [], "relatedThreatActors": [], "severity": "Low", "updateDate": "https://example.com", "vulnerabilityOrigin": [ "API" ] } ]'
       next_offset:
         title: Next Offset
         description: Next offset value for pagination
         type: string
         required: false
+        example: 2000-00-00T00:00:00.000Z::614b8972da44a60005036b01
   add_cve:
     title: Add CVEs
     description: Add CVEs to account
@@ -841,11 +958,13 @@ actions:
           description: Amount of successfully added CVEs
           type: integer
           required: true
+          example: 2
       failure:
         title: Failure
         description: Failure details
         type: "[]cve_failure_type"
         required: true
+        example: '[ { "cveId": "CVE-1999-003", "failReason": "Invalid CVE format" } ]'
   delete_cve:
     title: Delete CVEs
     description: Delete CVEs from account
@@ -862,11 +981,113 @@ actions:
           description: Amount of successfully deleted CVEs
           type: integer
           required: true
+          example: 3
       failure:
         title: Failure
         description: Failure details
         type: "[]cve_failure_type"
         required: true
+        example: []
+  get_iocs_by_filter:
+    title: Get IOCs by Filter
+    description: Get Indicators of Compromise by Filter
+    input:
+      last_updated_from:
+        title: Last Updated From
+        description: Filter by last update date (IOC update date is greater than)
+        type: date
+        required: true
+        example: "2000-12-31T00:00:00Z"
+      last_updated_to:
+        title: Last Updated To
+        description: Filter by last update date (IOC update date is less than)
+        type: date
+        required: false
+        example: "2000-12-31T00:00:00Z"
+      last_seen_from:
+        title: Last Seen From
+        description: Filter by last seen date (IOC last-seen date is greater than)
+        type: date
+        required: false
+        example: "2000-12-31T00:00:00Z"
+      last_seen_to:
+        title: Last Seen To
+        description: Filter by last seen date (IOC last-seen date is less than)
+        type: date
+        required: false
+        example: "2000-12-31T00:00:00Z"
+      first_seen_from:
+        title: First Seen From
+        description: Filter by first seen date (IOC first-seen date is greater than)
+        type: date
+        required: false
+        example: "2000-12-31T00:00:00Z"
+      first_seen_to:
+        title: First Seen To
+        description: Filter by first seen date (IOC first-seen date is less than)
+        type: date
+        required: false
+        example: "2000-12-31T00:00:00Z"
+      status:
+        title: Status
+        description: Filter by IOC status
+        type: string
+        enum:
+          - ""
+          - Active
+          - Retired
+        required: false
+        example: Active
+      type:
+        title: Type
+        description: Filter by IOC type (Allowed values, IpAddresses, Urls, Domainds, Hashes, Emails)
+        type: "[]string"
+        required: false
+        example: ["IpAddresses"]
+      severity:
+        title: Status
+        description: Filter by IOC severity (Allowed values, High, Medium, Low)
+        type: "[]string"
+        required: false
+        example: ["High"]
+      source_ids:
+        title: Source IDs
+        description: Filter by source IDs
+        type: "[]string"
+        required: false
+        example: ["123450000012345000001233"]
+      kill_chain_phases:
+        title: Kill Chain Phases
+        description: Filter by source IDs (Allowed values, Reconnaissance, Weaponization, Delivery, Exploitation, Installation, Command and Control, Actions on Objective)
+        type: "[]string"
+        required: false
+        example: ["Command and Control"]
+      limit:
+        title: Limit
+        description: Limit the results amount per page (1-1000)
+        type: integer
+        default: 1000
+        required: false
+        example: 1000
+      offset:
+        title: Offset
+        description: Getting the next page of IOCs from offset
+        type: string
+        required: false
+        example: "2020-01-01T20:01:27.344Z"
+    output:
+      content:
+        title: Content
+        description: List of IOCs that match filters
+        type: "[]ioc_content"
+        required: false
+        example: '{ "content": [ { "value": "rapid7.com", "type": "Domains", "severity": "High", "score": 100, "whitelisted": false, "firstSeen": "2020-01-01T20:01:27.344Z", "lastSeen": "2020-01-30T16:18:51.148Z", "lastUpdateDate": "2020-02-21T23:00:51.268Z", "geoLocation": "US", "sources": [ { "Name": "AlienVault OTX", "ConfidenceLevel": 3 } ], "tags": [ "MyTag_1" ], "relatedMalware": [ "doppeldridex", "dridex" ], "relatedCampaigns": [ "SolarWinds" ], "relatedThreatActors": [ "doppelspider" ], "reportedFeeds": [ { "ID": "SampleID", "Name": "AlienVault OTX", "ConfidenceLevel": 3 } ] } ], "nextOffset": "2022-11-18T16:59:01.626Z" }'
+      nextOffset:
+        title: Next Offset
+        description: The offset to the next page of IOCs
+        type: string
+        required: false
+        example: "2020-01-01T20:01:27.344Z"
 
 triggers:
   new_alert:
@@ -993,3 +1214,4 @@ triggers:
         description: List of alert IDs
         type: "[]string"
         required: true
+        example: '["618305318f3b3c0007d2cac0"]'

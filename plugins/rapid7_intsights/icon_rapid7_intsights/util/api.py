@@ -97,6 +97,48 @@ class ManualAlertParams:
             }
         )
 
+@dataclass
+class IOCParams:
+    last_updated_from: str
+    last_updated_to: str
+    last_seen_from: str
+    last_seen_to: str
+    first_seen_from: str
+    first_seen_to: str
+    status: str
+    type: [str]
+    severity: [str]
+    source_ids: [str]
+    kill_chain_phases: [str]
+    limit: int
+    offset: str
+
+    OFFSET_MINIMUM = 1
+    OFFSET_MAXIMUM = 1000
+    OFFSET_DEFAULT = 1000
+
+    def limit_range(self, number: int, _min: int, _max: int) -> int:
+        return max(min(_max, number), _min)
+
+    def to_dict(self) -> dict:
+        return clean(
+            {
+                "lastUpdatedFrom": self.last_updated_from if self.last_updated_from else None,
+                "lastUpdatedTo": self.last_updated_to if self.last_updated_to else None,
+                "lastSeenFrom": self.last_seen_from if self.last_seen_from else None,
+                "lastSeenTo": self.last_seen_to if self.last_seen_to else None,
+                "firstSeenFrom": self.first_seen_from if self.first_seen_from else None,
+                "firstSeenTo": self.first_seen_to if self.first_seen_to else None,
+                "status": self.status if self.status else None,
+                "type[]": list(self.type) if self.type else None,
+                "severity[]": list(self.severity) if self.severity else None,
+                "sourceIds[]": list(self.source_ids) if self.source_ids else None,
+                "killChainPhases[]": list(self.kill_chain_phases) if self.kill_chain_phases else None,
+                "limit": self.limit_range(self.limit, self.OFFSET_MINIMUM, self.OFFSET_MAXIMUM) if self.limit else self.OFFSET_DEFAULT,
+                "offset": self.offset if self.offset else None,
+            }
+        )
+
 
 def current_milli_time():
     return round(time.time() * 1000)
@@ -129,6 +171,9 @@ class IntSightsAPI:
 
     def get_indicator_by_value(self, ioc_value: str) -> dict:
         return self.make_json_request("GET", f"public/v3/iocs/ioc-by-value?iocValue={ioc_value}")
+
+    def get_indicators_by_filter(self, query_params: IOCParams) -> dict:
+        return self.make_json_request("GET", f"public/v3/iocs", params=query_params.to_dict())
 
     def enrich_indicator(self, ioc_value: str) -> dict:
         response = {}
