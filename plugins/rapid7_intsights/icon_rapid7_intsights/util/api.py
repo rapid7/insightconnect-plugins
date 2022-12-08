@@ -176,7 +176,7 @@ class IntSightsAPI:
         return self.make_json_request("GET", f"public/v3/iocs/ioc-by-value?iocValue={ioc_value}")
 
     def get_indicators_by_filter(self, query_params: IOCParams) -> dict:
-        return self.make_json_request("GET", f"public/v3/iocs", params=query_params.to_dict())
+        return self.make_json_request("GET", "public/v3/iocs", params=query_params.to_dict())
 
     def enrich_indicator(self, ioc_value: str) -> dict:
         response = {}
