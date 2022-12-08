@@ -1,6 +1,5 @@
 import sys
 import os
-
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
@@ -8,6 +7,7 @@ from unittest.mock import patch
 from unit_test.util import Util
 from icon_rapid7_intsights.actions.get_iocs_by_filter import GetIocsByFilter
 from icon_rapid7_intsights.actions.get_iocs_by_filter.schema import Input
+from parameterized import parameterized
 
 
 class TestGetIocsByFilter(TestCase):
@@ -38,15 +38,13 @@ class TestGetIocsByFilter(TestCase):
         }
         cls.action = Util.default_connector(GetIocsByFilter())
 
-    @patch("requests.request", side_effect=Util.mock_request)
-    def test_get_indicator_by_filter_should_success(self, make_request):
-        actual = self.action.run({Input.LAST_UPDATED_FROM: "2000-12-31T00:00:00Z"})
-        self.assertEqual(self.expected, actual)
-
-    @patch("requests.request", side_effect=Util.mock_request)
-    def test_get_indicator_by_filter_should_success_all_inputs(self, make_request):
-        actual = self.action.run(
-            {
+    @parameterized.expand(
+        [
+            ["lower_limit", {Input.LAST_UPDATED_FROM: "2000-12-31T00:00:00Z", Input.LIMIT: 1}, None],
+            ["below_limit", {Input.LAST_UPDATED_FROM: "2000-12-31T00:00:00Z", Input.LIMIT: 0}, None],
+            ["above_limit", {Input.LAST_UPDATED_FROM: "2000-12-31T00:00:00Z", Input.LIMIT: 1001}, None],
+            ["single_input", {Input.LAST_UPDATED_FROM: "2000-12-31T00:00:00Z", Input.LIMIT: None}, None],
+            ["all_inputs", {
                 Input.LAST_UPDATED_FROM: "2000-12-31T00:00:00Z",
                 Input.LIMIT: 1000,
                 Input.TYPE: ["Domains"],
@@ -60,27 +58,13 @@ class TestGetIocsByFilter(TestCase):
                 Input.SOURCE_IDS: ["123450000012345000001233"],
                 Input.KILL_CHAIN_PHASES: ["Exploitation", "Installation"],
                 Input.OFFSET: "2022-11-18T16:59:01.626Z",
-            }
-        )
-        self.assertEqual(self.expected, actual)
-
+            }, None],
+            ["no_results", {Input.LAST_UPDATED_FROM: "2000-12-30T00:00:00Z", Input.LIMIT: None}, {"content": []}],
+        ]
+    )
     @patch("requests.request", side_effect=Util.mock_request)
-    def test_get_indicator_by_filter_should_success_when_empty(self, make_request):
-        actual = self.action.run({Input.LAST_UPDATED_FROM: "2000-12-30T00:00:00Z"})
-        expected = {"content": []}
+    def test_get_indicator_by_filter_limit(self, test_name, input, expected, make_request):
+        if expected is None:
+            expected = self.expected
+        actual = self.action.run(input)
         self.assertEqual(expected, actual)
-
-    @patch("requests.request", side_effect=Util.mock_request)
-    def test_get_indicator_by_filter_should_success_when_limit_changed(self, make_request):
-        actual = self.action.run({Input.LAST_UPDATED_FROM: "2000-12-31T00:00:00Z", Input.LIMIT: 1})
-        self.assertEqual(self.expected, actual)
-
-    @patch("requests.request", side_effect=Util.mock_request)
-    def test_get_indicator_by_filter_should_success_when_limit_lower(self, make_request):
-        actual = self.action.run({Input.LAST_UPDATED_FROM: "2000-12-31T00:00:00Z", Input.LIMIT: 0})
-        self.assertEqual(self.expected, actual)
-
-    @patch("requests.request", side_effect=Util.mock_request)
-    def test_get_indicator_by_filter_should_success_when_limit_higher(self, make_request):
-        actual = self.action.run({Input.LAST_UPDATED_FROM: "2000-12-31T00:00:00Z", Input.LIMIT: 1001})
-        self.assertEqual(self.expected, actual)
