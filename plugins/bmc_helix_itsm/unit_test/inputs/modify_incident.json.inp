@@ -1,0 +1,7 @@
+{
+  "description": "Modify Incident Unit Test",
+  "incidentNumber": "INC00002",
+  "resolutionNote": "Resolve through Rest API",
+  "status": "Resolved",
+  "statusReason": "Monitoring Incident"
+}

@@ -1,0 +1,35 @@
+{
+	"spec": "e252b6fe591a5c1c52c157871698a146",
+	"manifest": "23f91b7961bcbb60e14072e1341a9c77",
+	"setup": "5378f9a023315ba7b33e4b71fcd61cb8",
+	"schemas": [
+		{
+			"identifier": "createIncident/schema.py",
+			"hash": "26e0d7edd72acd89e29c950a653ea2ff"
+		},
+		{
+			"identifier": "createProblemInvestigation/schema.py",
+			"hash": "2b52a8a8cedb3de832ba5e9f67542cd2"
+		},
+		{
+			"identifier": "createTask/schema.py",
+			"hash": "f304bebdbf833c7171afa87a22f959f7"
+		},
+		{
+			"identifier": "getIncident/schema.py",
+			"hash": "84d020d5d04ba71ad618c2187c9dfba6"
+		},
+		{
+			"identifier": "getIncidentWorkInformation/schema.py",
+			"hash": "53c61fa0c08f301c184006bc8594f540"
+		},
+		{
+			"identifier": "modifyIncident/schema.py",
+			"hash": "5952539ed0ac7d49400675f6bd6b8bb4"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "1d7589e7e722c5d3f454ae571cb9a91d"
+		}
+	]
+}
