@@ -1,0 +1,124 @@
+{
+  "meta": {
+    "query_time": 0.038435557,
+    "powered_by": "falconx-api",
+    "trace_id": "f644a5c4-f0fe-4009-ba46-0764007a6599",
+    "quota": {
+      "total": 100,
+      "used": 37,
+      "in_progress": 0
+    }
+  },
+  "resources": [
+    {
+      "id": "9382986b58cb4b44935e7eba079842f3_18a6d0ec35e44182a0b55b6a2ec16592",
+      "cid": "9382986b58cb4b44935e7eba079842f3",
+      "created_timestamp": "2022-08-30T09:17:31Z",
+      "origin": "uiproxy",
+      "user_id": "3e7da174cb6944e8a4cd8a5a59a76727",
+      "user_name": "user@example.com",
+      "sandbox": [
+        {
+          "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+          "environment_id": 100,
+          "environment_description": "Windows 7 32 bit",
+          "submit_name": "VirusTotal_IP_Error.png",
+          "submission_type": "file",
+          "file_type": "PNG image data, 1682 x 1068, 8-bit/color RGBA, non-interlaced",
+          "error_message": "File \"VirusTotal_IP_Error.png\" was detected as \"image\", this format is not supported on WINDOWS",
+          "error_type": "FILE_TYPE_BAD_ERROR",
+          "error_origin": "CLIENT"
+        }
+      ],
+      "verdict": "no verdict"
+    },
+    {
+      "id": "9382986b58cb4b44935e7eba079842f3_4c95cb1fc7314509a5b9054752e9c4ff",
+      "cid": "9382986b58cb4b44935e7eba079842f3",
+      "created_timestamp": "2022-08-30T10:08:49Z",
+      "origin": "uiproxy",
+      "user_id": "6f888e357b5043c6906c51b204c4091b",
+      "user_name": "user@example.com",
+      "sandbox": [
+        {
+          "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+          "environment_id": 100,
+          "environment_description": "Windows 7 32 bit",
+          "submit_name": "test.pdf",
+          "submission_type": "file",
+          "verdict": "no specific threat",
+          "file_type": "PDF document, version 1.5",
+          "sample_flags": [
+            "Extracted Files"
+          ],
+          "network_settings": "default"
+        }
+      ],
+      "verdict": "no specific threat",
+      "ioc_report_strict_csv_artifact_id": "800c46247e66da1cec722880b2ed412498ddc8d739e010cf28652839ffbac33e",
+      "ioc_report_broad_csv_artifact_id": "800c46247e66da1cec722880b2ed412498ddc8d739e010cf28652839ffbac33e",
+      "ioc_report_strict_json_artifact_id": "1248b73905ba1b8ef5fdca2d3604e41a331b2b8f4c89ccfc714467153c706d00",
+      "ioc_report_broad_json_artifact_id": "1248b73905ba1b8ef5fdca2d3604e41a331b2b8f4c89ccfc714467153c706d00",
+      "ioc_report_strict_stix_artifact_id": "1f7dda003e8c61d1509aa77ded1dc4d6b758324913fc5ccb56322206278642fa",
+      "ioc_report_broad_stix_artifact_id": "1f7dda003e8c61d1509aa77ded1dc4d6b758324913fc5ccb56322206278642fa",
+      "ioc_report_strict_maec_artifact_id": "10a13c1729dde89ef436465af0a7f03348bd9c884723f4b1642770806fa2bef6",
+      "ioc_report_broad_maec_artifact_id": "10a13c1729dde89ef436465af0a7f03348bd9c884723f4b1642770806fa2bef6"
+    },
+    {
+      "id": "9382986b58cb4b44935e7eba079842f3_305b3129e8a643f4bb7d6b166867fa13",
+      "cid": "9382986b58cb4b44935e7eba079842f3",
+      "created_timestamp": "2022-09-28T07:45:34Z",
+      "origin": "uiproxy",
+      "user_id": "68ffc9dcf90b4ac5856a0d8f2af810a9",
+      "user_name": "user@example.com",
+      "sandbox": [
+        {
+          "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+          "environment_id": 100,
+          "environment_description": "Windows 7 32 bit",
+          "submit_name": "Dockerfile",
+          "submission_type": "file",
+          "file_type": "ASCII text",
+          "error_message": "The file \"Dockerfile\" has the file format \"text\", which is not supported",
+          "error_type": "FILE_TYPE_BAD_ERROR",
+          "error_origin": "CLIENT"
+        }
+      ],
+      "verdict": "no verdict"
+    },
+    {
+      "id": "9382986b58cb4b44935e7eba079842f3_92c8b7525e2b4888bd9e2fe7391c7104",
+      "cid": "9382986b58cb4b44935e7eba079842f3",
+      "created_timestamp": "2022-11-07T14:14:18Z",
+      "origin": "apigateway",
+      "sandbox": [
+        {
+          "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+          "environment_id": 100,
+          "environment_description": "Windows 7 32 bit",
+          "submit_name": "my_submit_name",
+          "submission_type": "file",
+          "verdict": "no specific threat",
+          "file_type": "PDF document, version 1.3",
+          "sample_flags": [
+            "Extracted Files"
+          ],
+          "network_settings": "default"
+        }
+      ],
+      "user_tags": [
+        "example"
+      ],
+      "verdict": "whitelisted",
+      "ioc_report_strict_csv_artifact_id": "6fea35833e8419f847d2f5f21e322ae4b0e6e7a27a04151a8fd34144270768c4",
+      "ioc_report_broad_csv_artifact_id": "6fea35833e8419f847d2f5f21e322ae4b0e6e7a27a04151a8fd34144270768c4",
+      "ioc_report_strict_json_artifact_id": "6d936ea006e3e290c1e530254a37bc2063536caf732159e4bcd6692ca9c483a8",
+      "ioc_report_broad_json_artifact_id": "6d936ea006e3e290c1e530254a37bc2063536caf732159e4bcd6692ca9c483a8",
+      "ioc_report_strict_stix_artifact_id": "20c2b7d225014eff60080fb7a5d97682daffb9a7f3cbc2e909d27cd20f51fdcb",
+      "ioc_report_broad_stix_artifact_id": "20c2b7d225014eff60080fb7a5d97682daffb9a7f3cbc2e909d27cd20f51fdcb",
+      "ioc_report_strict_maec_artifact_id": "6160988cf579c1e54f12f3b511715c642a30f7efcf92535840fd82dd9cc649ff",
+      "ioc_report_broad_maec_artifact_id": "6160988cf579c1e54f12f3b511715c642a30f7efcf92535840fd82dd9cc649ff"
+    }
+  ],
+  "errors": []
+}

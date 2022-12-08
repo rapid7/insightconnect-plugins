@@ -1,0 +1,1091 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: crowdstrike_falcon_intelligence
+title: CrowdStrike Falcon Intelligence
+description: CrowdStrike Falcon Intelligence is used to automatically investigate incidents and accelerate alert triage and response. Built into the Falcon Platform, it is operational in seconds
+version: 1.0.0
+supported_versions: ["2022-11-28 Crowdstrike API v2"]
+vendor: rapid7
+support: rapid7
+status: []
+cloud_ready: true
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/crowdstrike_falcon_intelligence
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.crowdstrike.com/
+tags: [crowdstrike, falcon, antivirus]
+hub_tags:
+  use_cases: [threat_detection_and_response]
+  keywords: [antivirus, cloud_enabled]
+  features: []
+  
+types:
+  extractedInterestingStrings:
+    value:
+      title: Value
+      description: Value
+      type: string
+      required: false
+      example: '%GUID:"Computer"%'
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+      example: Ansi
+    source:
+      title: Source
+      description: Source
+      type: string
+      required: false
+      example: Runtime Data
+    process:
+      title: Process
+      description: Process
+      type: string
+      required: false
+      example: AcroRd32.exe
+  extractedFiles:
+    filePath:
+      title: File Path
+      description: File path
+      type: string
+      required: false
+      example: '%APPDATA%\Adobe\Acrobat\DC\Security\CRLCache\0FDED5CEB68C302B1CDB2BDDD9D0000E76539CB0.crl'
+    fileSize:
+      title: File Size
+      description: File size
+      type: integer
+      required: false
+      example: 637
+    sha256:
+      title: SHA256
+      description: SHA256
+      type: string
+      required: false
+      example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+    md5:
+      title: MD5
+      description: MD5
+      type: string
+      required: false
+      example: 44d88612fea8a8f36de82e1278abb02f
+    sha1:
+      title: SHA1
+      description: SHA1
+      type: string
+      required: false
+      example: 3395856ce81f2b7382dee72602f798b642f14140
+    runtimeProcess:
+      title: Runtime Process
+      description: Runtime process
+      type: string
+      required: false
+      example: 'AcroRd32.exe (PID: 2464)'
+    typeTags:
+      title: Type Tags
+      description: Type tags
+      type: '[]string'
+      required: false
+      example: '["data"]'
+    threatLevelReadable:
+      title: Threat Level Readable
+      description: Threat level readable
+      type: string
+      required: false
+      example: no specific threat
+    description:
+      title: Description
+      description: Description
+      type: string
+      required: false
+      example: data
+  fileAccess:
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+      example: CREATE
+    path:
+      title: Path
+      description: Path
+      type: string
+      required: false
+      example: '\DEVICE\NETBT_TCPIP_{E29AC6C2-7037-11DE-816D-806E6F6E6963}'
+    mask:
+      title: Mask
+      description: Mask
+      type: string
+      required: false
+      example: FILE_READ_DATA
+  handle:
+    id:
+      title: ID
+      description: ID
+      type: integer
+      required: false
+      example: 1
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+      example: KeyHandle
+    path:
+      title: Path
+      description: Path
+      type: string
+      required: false
+      example: 'HKCU\Software\Adobe\CommonFiles\Usage\Reader DC'
+  registry:
+    operation:
+      title: Operation
+      description: Operation
+      type: string
+      required: false
+      example: Query
+    path:
+      title: Path
+      description: Path
+      type: string
+      required: false
+      example: 'HKLM/SOFTWARE/MICROSOFT/WINDOWS NT/CURRENTVERSION/IMAGE FILE EXECUTION OPTIONS/ACRORD32.EXE/DEBUGPROCESSHEAPONLY'
+    key:
+      title: Key
+      description: Key
+      type: string
+      required: false
+      example: DEBUGPROCESSHEAPONLY
+    status:
+      title: Status
+      description: Status
+      type: string
+      required: false
+      example: c0000034
+    statusHumanReadable:
+      title: Status Human Readable
+      description: Status human readable
+      type: string
+      required: false
+      example: STATUS_OBJECT_NAME_NOT_FOUND
+  process:
+    uid:
+      title: UID
+      description: UID
+      type: string
+      required: false
+      example: 00000000-00002464
+    normalizedPath:
+      title: Normalized Path
+      description: Normalized path
+      type: string
+      required: false
+      example: '%PROGRAMFILES%/Adobe/Acrobat Reader DC/Reader/AcroRd32.exe/'
+    commandLine:
+      title: Command Line
+      description: Command line
+      type: string
+      required: false
+      example: 'C:/test.pdf'
+    sha256:
+      title: SHA256
+      description: SHA256
+      type: string
+      required: false
+      example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+    pid:
+      title: PID
+      description: PID
+      type: integer
+      required: false
+      example: 2464
+    iconArtifactId:
+      title: Icon Artifact ID
+      description: Icon artifact ID
+      type: string
+      required: false
+      example: fb3d245e52890c452df97787e773961f60a1d0a2449a3cac6b259df43adda88a
+    registry:
+      title: Registry
+      description: Registry
+      type: '[]registry'
+      required: false
+      example: '[]'
+    mutants:
+      title: Mutants
+      description: Mutants
+      type: '[]string'
+      required: false
+      example: '["/Sessions/1/BaseNamedObjects/Local/Acrobat Instance Mutex", "/Session/s1/BaseNamedObjects/DBWinMutex", "DBWinMutex", "Local/Acrobat Instance Mutex"]'
+    handles:
+      title: Handles
+      description: Handles
+      type: '[]handle'
+      required: false
+      example: '[]'
+    fileAccesses:
+      title: File Accesses
+      description: File accesses
+      type: '[]fileAccess'
+      required: false
+      example: '[]'
+  signature:
+    threatLevelHuman:
+      title: Threat Level Human
+      description: Threat level human
+      type: string
+      required: false
+      example: informative
+    category:
+      title: Category
+      description: Category
+      type: string
+      required: false
+      example: General
+    identifier:
+      title: Identifier
+      description: Identifier
+      type: string
+      required: false
+      example: target-25
+    type:
+      title: Type
+      description: Type
+      type: integer
+      required: false
+      example: 9
+    relevance:
+      title: Relevance
+      description: Relevance
+      type: integer
+      required: false
+      example: 3
+    description:
+      title: Description
+      description: Description
+      type: string
+      required: false
+      example: 'Spawned process "RdrCEF.exe" with commandline "--backgroundcolor=16448250"(UID: 00000000-00003660)\n Spawned process "RdrCEF.exe" with commandline "--type=renderer --primordial-pipe-token=9C6380B3089134F0668BD8E2 ..." (UID: 00000000-00003632)\n Spawned process "RdrCEF.exe" with commandline "--type=renderer\--primordial-pipe-token=2A1B0CA713F65BDBBEF8417F ..."'
+    origin:
+      title: Origin
+      description: Origin
+      type: string
+      required: false
+      example: Monitored Target
+  sandbox:
+    sha256:
+      title: SHA256
+      description: SHA256
+      type: string
+      required: false
+      example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+    environmentId:
+      title: Environment ID
+      description: Environment ID
+      type: integer
+      required: false
+      example: 100
+    environmentDescription:
+      title: Environment Description
+      description: Environment description
+      type: string
+      required: false
+      example: Windows 7 32 bit
+    fileSize:
+      title: File Size
+      description: File size
+      type: integer
+      required: false
+      example: 15007
+    fileType:
+      title: File Type
+      description: File type
+      type: string
+      required: false
+      example: PDF document, version 1.5
+    fileTypeShort:
+      title: File Type Short
+      description: File type short
+      type: '[]string'
+      required: false
+      example: '["pdf"]'
+    submitName:
+      title: Submit Name
+      description: Submit name
+      type: string
+      required: false
+      example: test.pdf
+    submitUrl:
+      title: Submit URL
+      description: Submit URL
+      type: string
+      required: false
+      example: https://example.com/test.pdf
+    submissionType:
+      title: Submission Type
+      description: Submission type
+      type: string
+      required: false
+      example: file
+    verdict:
+      title: Verdict
+      description: Verdict
+      type: string
+      required: false
+      example: no specific threat
+    windowsVersionName:
+      title: Windows Version Name
+      description: Windows version name
+      type: string
+      required: false
+      example: Windows 7
+    windowsVersionEdition:
+      title: Windows Version Edition
+      description: Windows version edition
+      type: string
+      required: false
+      example: Professional
+    windowsVersionServicePack:
+      title: Windows Version Service Pack
+      description: Windows version service pack
+      type: string
+      required: false
+      example: Service Pack 1
+    windowsVersionVersion:
+      title: Windows Version Version
+      description: Windows version version
+      type: string
+      required: false
+      example: 6.1 (build 7601)
+    windowsVersionBitness:
+      title: Windows Version Bitness
+      description: Windows version bitness
+      type: integer
+      required: false
+      example: 32
+    extractedFiles:
+      title: Extracted Files
+      description: Extracted files
+      type: '[]extractedFiles'
+      required: false
+      example: '[]'
+    extractedInterestingStrings:
+      title: Extracted Interesting Strings
+      description: Extracted interesting strings
+      type: '[]extractedInterestingStrings'
+      required: false
+      example: '[]'
+    signatures:
+      title: Signatures
+      description: Signatures
+      type: '[]signature'
+      required: false
+      example: '[]'
+    processes:
+      title: Processes
+      description: Processes
+      type: '[]process'
+      required: false
+      example: '[]'
+    screenshotsArtifactIds:
+      title: Screenshots Artifact IDs
+      description: Screenshots artifact IDs
+      type: '[]string'
+      required: false
+      example: '["22782c460dc9e2662ae9c5420142c1ecdf84c122745ab0b61780f1685a2e8751","d7e025e31e87ddffb56f6203f5e69acc639c423ce9128068186071d1b94bcae3"]'
+    architecture:
+      title: Architecture
+      description: Architecture
+      type: string
+      required: false
+      example: WINDOWS
+    sampleFlags:
+      title: Sample Flags
+      description: Sample flags
+      type: '[]string'
+      required: false
+      example: '["Extracted Files"]'
+    pcapReportArtifactId:
+      title: PCAP Report Artifact ID
+      description: PCAP report artifact ID
+      type: string
+      required: false
+      example: 31481ec4027e67cf7acf76d56ccebbbf133bb7b36dea1c750c1699f53abe6403
+    memoryStringsArtifactId:
+      title: Memory Strings Artifact ID
+      description: Memory strings artifact ID
+      type: string
+      required: false
+      example: b588943e02558755f0c4c84adc5b42ff6642f216313c78b70ff02231ff129f9e
+    memoryDumpsArtifactId:
+      title: Memory Dumps Artifact ID
+      description: Memory dumps artifact ID
+      type: string
+      required: false
+      example: 774fb1bb4d52bd1de58385abbef347ed0a557bbaef1f2330520da1e5d96ad26b
+    networkSettings:
+      title: Network Settings
+      description: Network settings
+      type: string
+      required: false
+      example: default
+    errorMessage:
+      title: Error Message
+      description: Error message
+      type: string
+      required: false
+      example: 'The file "Dockerfile" has the file format "text", which is not supported'
+    errorType:
+      title: Error Type
+      description: Error type
+      type: string
+      required: false
+      example: FILE_TYPE_BAD_ERROR
+    errorOrigin:
+      title: Error Origin
+      description: Error origin
+      type: string
+      required: false
+      example: CLIENT
+  sandboxShort:
+    sha256:
+      title: SHA256
+      description: SHA256
+      type: string
+      required: false
+      example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+    submitUrl:
+      title: Submit URL
+      description: Submit URL
+      type: string
+      required: false
+      example: https://example.com/test.pdf
+    url:
+      title: URL
+      description: URL
+      type: string
+      required: false
+      example: https://example.com/test.pdf
+    actionScript:
+      title: Action Script
+      description: Action script
+      type: string
+      required: false
+      example: default_randomfiles
+    systemDate:
+      title: System Date
+      description: System date
+      type: string
+      required: false
+      example: 2022-09-22 00:00:00
+    systemTime:
+      title: System Time
+      description: System time
+      type: string
+      required: false
+      example: '!!python/object/apply:datetime.time !!binary | DDcAAAAA'
+    networkSettings:
+      title: Network Settings
+      description: Network settings
+      type: string
+      required: false
+      example: default
+    environmentId:
+      title: Environment ID
+      description: Environment ID
+      type: integer
+      required: false
+      example: 100
+    environmentDescription:
+      title: Environment Description
+      description: Environment description
+      type: string
+      required: false
+      example: Windows 7 32 bit
+    fileType:
+      title: File Type
+      description: File type
+      type: string
+      required: false
+      example: PDF document, version 1.5
+    submitName:
+      title: Submit Name
+      description: Submit name
+      type: string
+      required: false
+      example: test.pdf
+    submissionType:
+      title: Submission Type
+      description: Submission type
+      type: string
+      required: false
+      example: file
+    verdict:
+      title: Verdict
+      description: Verdict
+      type: string
+      required: false
+      example: no specific threat
+    sampleFlags:
+      title: Sample Flags
+      description: Sample flags
+      type: '[]string'
+      required: false
+      example: '["Extracted Files"]'
+    errorMessage:
+      title: Error Message
+      description: Error message
+      type: string
+      required: false
+      example: 'The file "Dockerfile" has the file format "text", which is not supported'
+    errorType:
+      title: Error Type
+      description: Error type
+      type: string
+      required: false
+      example: FILE_TYPE_BAD_ERROR
+    errorOrigin:
+      title: Error Origin
+      description: Error origin
+      type: string
+      required: false
+      example: CLIENT
+  submission:
+    id:
+      title: ID
+      description: ID
+      type: string
+      required: false
+      example: 9382986b58cb4b44935e7eba079842f3_a345bda609ba46d3a6df3dcf38e30145
+    cid:
+      title: Cid
+      description: Cid
+      type: string
+      required: false
+      example: 9382986b58cb4b44935e7eba079842f3
+    userId:
+      title: User ID
+      description: User ID
+      type: string
+      required: false
+      example: 6f888e357b5043c6906c51b204c4091b
+    userName:
+      title: User Name
+      description: User name
+      type: string
+      required: false
+      example: mike_rinehart@rapid7.com
+    userUuid:
+      title: User UUID
+      description: User UUID
+      type: string
+      required: false
+      example: a149764d-21ee-42af-ac9f-023f5d23ab81
+    origin:
+      title: Origin
+      description: Origin
+      type: string
+      required: false
+      example: uiproxy
+    state:
+      title: State
+      description: State
+      type: string
+      required: false
+      example: success
+    createdTimestamp:
+      title: Created Timestamp
+      description: Created timestamp
+      type: string
+      required: false
+      example: '2022-08-30T10:09:18Z'
+    sandbox:
+      title: Sandbox
+      description: Sandbox
+      type: '[]sandboxShort'
+      required: false
+      example: '[]'
+    userTags:
+      title: User Tags
+      description: User tags
+      type: '[]string'
+      required: false
+      example: '["my_tag"]'
+  artifact:
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+      example: md5
+    source:
+      title: Source
+      description: Source
+      type: string
+      required: false
+      example: extracted
+    ioc:
+      title: IOC
+      description: IOC
+      type: string
+      required: false
+      example: 974e8536b8767ac5be204f35d16f73e8
+  malquery:
+    verdict:
+      title: Verdict
+      description: Verdict
+      type: string
+      required: false
+      example: unknown
+    input:
+      title: Input
+      description: Input
+      type: string
+      required: false
+      example: 53d23839e0f75e7772d1c4ea9e7384f5468ba911c7a6ff16c83e077aa53959d7
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+      example: sha256
+  reportShort:
+    id:
+      title: ID
+      description: ID of the report
+      type: string
+      required: false
+      example: 9382986b58cb4b44447ereba079842f3_4c95cb1fc7314509a5b9012352e9c4ff
+    cid:
+      title: CID
+      description: CID of the report
+      type: string
+      required: false
+      example: 9382986b58cb4b44447ereba079842f3
+    createdTimestamp:
+      title: Created Timestamp
+      description: Time when the report was created
+      type: date
+      required: false
+      example: '2022-08-30T10:08:49Z'
+    origin:
+      title: Origin
+      description: Origin
+      type: string
+      required: false
+      example: uiproxy
+    userId:
+      title: User ID
+      description: ID of the user
+      type: string
+      required: false
+      example: 6f998e327b5043c6906c51b204p4091b
+    userName:
+      title: User Name
+      description: Name of the user
+      type: string
+      required: false
+      example: user@example.com
+    verdict:
+      title: Verdict
+      description: Verdict of the report
+      type: string
+      required: false
+      example: no specific threat
+    iocReportStrictCsvArtifactId:
+      title: IOC Report Strict CSV Artifact ID
+      description: IOC report strict CSV artifact ID
+      type: string
+      required: false
+      example: 1248b73905ba1b8ef5fdca2d3604e41a331bhy43659ccfc714467153c706d00
+    iocReportBroadCsvArtifactId:
+      title: IOC Report Broad CSV Artifact ID
+      description: IOC report broad CSV artifact ID
+      type: string
+      required: false
+      example: 1248b73905ba1b8ef5fdca2d3604e41a331bhy43659ccfc714467153c706d00
+    iocReportStrictJsonArtifactId:
+      title: IOC Report Strict JSON Artifact ID
+      description: IOC report strict JSON artifact ID
+      type: string
+      required: false
+      example: 1248b73905ba1b8ef5fdca2d3604e41a331bhy43659ccfc714467153c706d00
+    iocReportBroadJsonArtifactId:
+      title: IOC Report Broad JSON Artifact ID
+      description: IOC report broad JSON artifact ID
+      type: string
+      required: false
+      example: 1248b73905ba1b8ef5fdca2d3604e41a331bhy43659ccfc714467153c706d00
+    iocReportStrictStixArtifactId:
+      title: IOC Report Strict STIX Artifact ID
+      description: IOC report strict STIX artifact ID
+      type: string
+      required: false
+      example: 1248b73905ba1b8ef5fdca2d3604e41a331bhy43659ccfc714467153c706d00
+    iocReportBroadStixArtifactId:
+      title: IOC Report Broad STIX Artifact ID
+      description: IOC report broad STIX artifact ID
+      type: string
+      required: false
+      example: 1248b73905ba1b8ef5fdca2d3604e41a331bhy43659ccfc714467153c706d00
+    iocReportStrictMaecArtifactId:
+      title: IOC Report Strict Maec Artifact ID
+      description: IOC report strict maec artifact ID
+      type: string
+      required: false
+      example: 1248b73905ba1b8ef5fdca2d3604e41a331bhy43659ccfc714467153c706d00
+    iocReportBroadMaecArtifactId:
+      title: IOC Report Broad Maec Artifact ID
+      description: IOC report broad maec artifact ID
+      type: string
+      required: false
+      example: 1248b73905ba1b8ef5fdca2d3604e41a331bhy43659ccfc714467153c706d00
+    sandbox:
+      title: Sandbox
+      description: Sandbox details
+      type: '[]sandboxShort'
+      required: false
+      example: '[]'
+  report:
+    id:
+      title: ID
+      description: ID of the report
+      type: string
+      required: false
+      example: 9382986b58cb4b44447ereba079842f3_4c95cb1fc7314509a5b9012352e9c4ff
+    cid:
+      title: CID
+      description: CID of the report
+      type: string
+      required: false
+      example: 9382986b58cb4b44447ereba079842f3
+    createdTimestamp:
+      title: Created Timestamp
+      description: Time when the report was created
+      type: date
+      required: false
+      example: '2022-08-30T10:08:49Z'
+    origin:
+      title: Origin
+      description: Origin
+      type: string
+      required: false
+      example: uiproxy
+    userId:
+      title: User ID
+      description: ID of the user
+      type: string
+      required: false
+      example: 6f998e327b5043c6906c51b204p4091b
+    userName:
+      title: User Name
+      description: Name of the user
+      type: string
+      required: false
+      example: user@example.com
+    userUuid:
+      title: User UUID
+      description: UUID of the user
+      type: string
+      required: false
+      example: a149114d-21ee-42af-ac9f-04kf5d23ab81
+    verdict:
+      title: Verdict
+      description: Verdict of the report
+      type: string
+      required: false
+      example: no specific threat
+    iocReportStrictCsvArtifactId:
+      title: IOC Report Strict CSV Artifact ID
+      description: IOC report strict CSV artifact ID
+      type: string
+      required: false
+      example: 1248b73905ba1b8ef5fdca2d3604e41a331bhy43659ccfc714467153c706d00
+    iocReportBroadCsvArtifactId:
+      title: IOC Report Broad CSV Artifact ID
+      description: IOC report broad CSV artifact ID
+      type: string
+      required: false
+      example: 1248b73905ba1b8ef5fdca2d3604e41a331bhy43659ccfc714467153c706d00
+    iocReportStrictJsonArtifactId:
+      title: IOC Report Strict JSON Artifact ID
+      description: IOC report strict JSON artifact ID
+      type: string
+      required: false
+      example: 1248b73905ba1b8ef5fdca2d3604e41a331bhy43659ccfc714467153c706d00
+    iocReportBroadJsonArtifactId:
+      title: IOC Report Broad JSON Artifact ID
+      description: IOC report broad JSON artifact ID
+      type: string
+      required: false
+      example: 1248b73905ba1b8ef5fdca2d3604e41a331bhy43659ccfc714467153c706d00
+    iocReportStrictStixArtifactId:
+      title: IOC Report Strict STIX Artifact ID
+      description: IOC report strict STIX artifact ID
+      type: string
+      required: false
+      example: 1248b73905ba1b8ef5fdca2d3604e41a331bhy43659ccfc714467153c706d00
+    iocReportBroadStixArtifactId:
+      title: IOC Report Broad STIX Artifact ID
+      description: IOC report broad STIX artifact ID
+      type: string
+      required: false
+      example: 1248b73905ba1b8ef5fdca2d3604e41a331bhy43659ccfc714467153c706d00
+    iocReportStrictMaecArtifactId:
+      title: IOC Report Strict Maec Artifact ID
+      description: IOC report strict maec artifact ID
+      type: string
+      required: false
+      example: 1248b73905ba1b8ef5fdca2d3604e41a331bhy43659ccfc714467153c706d00
+    iocReportBroadMaecArtifactId:
+      title: IOC Report Broad Maec Artifact ID
+      description: IOC report broad maec artifact ID
+      type: string
+      required: false
+      example: 1248b73905ba1b8ef5fdca2d3604e41a331bhy43659ccfc714467153c706d00
+    sandbox:
+      title: Sandbox
+      description: Sandbox details
+      type: '[]sandbox'
+      required: false
+      example: '[]'
+    malquery:
+      title: Malquery
+      description: Malquery
+      type: '[]malquery'
+      required: false
+      example: '[]'
+
+connection:
+  clientSecret:
+    title: Client Secret
+    description: CrowdStrike Secret Key
+    type: credential_secret_key
+    required: true
+    example: eXaMpl3S3cr3tK3Y
+  clientId:
+    title: Client ID
+    description: CrowdStrike Client ID
+    type: string
+    required: true
+    example: eXaMpl3Cli3ntID
+  baseUrl:
+    title: Base URL
+    description: The Base URL provided in the API Clients and Keys settings
+    type: string
+    required: true
+    example: https://api.crowdstrike.com
+    default: https://api.crowdstrike.com
+actions:
+  downloadArtifact:
+    title: Download Artifact
+    description: Download IOC packs, PCAP files, memory dumps, and other analysis artifacts
+    input:
+      id:
+        title: ID
+        description: ID of an JSON artifact, such as an IOC pack, PCAP file, memory dump, or actor image. Find an artifact ID with `Get Full Report` action
+        type: string
+        required: true
+        example: Md29sKvzxiddHJ0k3qnC8iDyhfZ3UZrFqOSSdKn3NhLrQR4eCsvQvOesmuXX5pra
+    output:
+      artifacts:
+        title: Artifacts
+        description: List of artifacts
+        type: '[]artifact'
+        required: true
+        example: '[]'
+  getShortReport:
+    title: Get Short Report
+    description: Get a short summary version of a sandbox report
+    input:
+      ids:
+        title: IDs
+        description: List of summary IDs. Find a summary ID from the response when submitting a malware sample or search with `Get Reports IDs` action
+        type: '[]string'
+        required: true
+        example: '["9382986b58cb4bb4935e7eba079842f3_d1ce821d74484545897f2fd5db40d0a7"]'
+    output:
+      reports:
+        title: Reports
+        description: List of short sandbox reports
+        type: '[]reportShort'
+        required: true
+        example: '[]'
+  getFullReport:
+    title: Get Full Report
+    description: Get a full sandbox report
+    input:
+      ids:
+        title: IDs
+        description: List of summary IDs. Find a summary ID from the response when submitting a malware sample or search with `Get Reports IDs` action
+        type: '[]string'
+        required: true
+        example: '["9de5069c5afe602b2ea0a11b66beb2c0_9aa5069c5afe602b2ea0a04b66beb2c0"]'
+    output:
+      reports:
+        title: Reports
+        description: List of sandbox reports
+        type: '[]report'
+        required: true
+        example: '[]'
+  checkAnalysisStatus:
+    title: Check Analysis Status
+    description: Check the status of a sandbox analysis. Time required for analysis varies but is usually less than 15 minutes
+    input:
+      ids:
+        title: IDs
+        description: List of submitted malware samples ids. Find a submission ID from the response when submitting a malware sample or search with `Get Submissions IDs` action
+        type: '[]string'
+        required: true
+        example: Md29sKvzxiddHJ0k3qnC8iDyhfZ3UZrFqOSSdKn3NhLrQR4eCsvQvOesmuXX5pra
+    output:
+      submissions:
+        title: Submissions
+        description: List of submissions
+        type: '[]submission'
+        required: true
+        example: '[]'
+  submitAnalysis:
+    title: Submit Analysis
+    description: Submit an uploaded file or a URL for sandbox analysis. Time required for analysis varies but is usually less than 15 minutes
+    input:
+      environmentId:
+        title: Environment ID
+        description: Specifies the sandbox environment used for analysis. Example values 300 - Linux Ubuntu 16.04, 64-bit; 200 - Android (static analysis); 160 - Windows 10, 64-bit; 110 - Windows 7, 64-bit; 100 - Windows 7, 32-bit
+        type: integer
+        required: true
+        example: 110
+        enum:
+        - 100
+        - 110
+        - 160
+        - 200
+        - 300
+      sha256:
+        title: SHA256
+        description: ID of the sample, which is a SHA256 hash value. Find a sample ID from the response when uploading a malware sample or search with `Get Submissions IDs` action. The `url` parameter must be unset if `sha256` is used
+        type: string
+        required: false
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
+      url:
+        title: URL
+        description: A web page or file URL. It can be HTTP(S) or FTP. The `SHA256` parameter must be unset if `url` is used
+        type: string
+        required: false
+        example: https://www.example.com/images/default/sample.pdf
+      actionScript:
+        title: Action Script
+        description: Runtime script for sandbox analysis
+        type: string
+        required: false
+        example: default_openie
+        enum:
+        - default
+        - default_maxantievasion
+        - default_randomfiles
+        - default_randomtheme
+        - default_openie
+        - ''
+      commandLine:
+        title: Command Line
+        description: Command line script passed to the submitted file at runtime. Max length is 2048 characters
+        type: string
+        required: false
+        example: /example /command
+      documentPassword:
+        title: Document Password
+        description: Auto-filled for Adobe or Office files that prompt for a password. Max length is 32 characters
+        type: password
+        required: false
+        example: 3xamp13Pa55w0rd
+      networkSettings:
+        title: Network Settings
+        description: Specifies the sandbox network_settings used for analysis
+        type: string
+        required: false
+        example: tor
+        enum:
+        - default
+        - tor
+        - simulated
+        - offline
+        - ''
+      submitName:
+        title: Submit Name
+        description: Name of the malware sample that's used for file type detection and analysis
+        type: string
+        required: false
+        example: my_sample
+      systemDateTime:
+        title: System Date Time
+        description: System date and time
+        type: date
+        required: false
+        example: 2022-11-01T00:00:00+02:00
+    output:
+      submission:
+        title: Submission
+        description: Submission
+        type: 'submission'
+        required: true
+        example: '{}'
+  getReportsIDs:
+    title: Get Reports IDs
+    description: Find sandbox reports by providing an FQL filter and paging details. Returns a set of report IDs that match your criteria
+    input:
+      filter:
+        title: Filter
+        description: Filter and sort criteria in the form of an FQL query. For more information about FQL queries, see https://falcon.crowdstrike.com/documentation/45/falcon-query-language-fql
+        type: string
+        required: false
+        example: "verdict: 'no verdict'"
+      offset:
+        title: Offset
+        description: The offset to start retrieving reports from
+        type: integer
+        required: false
+        example: 5
+      limit:
+        title: Limit
+        description:  Maximum number of report IDs to return - less or equal to 5000
+        type: integer
+        required: false
+        example: 324
+    output:
+      reportIds:
+        title: Report IDs
+        description: List of report IDs
+        type: '[]string'
+        required: true
+        example: '["9382986b58cb4b44935e7eba071142f3_92c8b7525e2b4888bd9e2jj7391c7104"]'
+  getSubmissionsIDs:
+    title: Get Submissions IDs
+    description: Find submissions IDs for uploaded files by providing an FQL filter and paging details. Returns a set of submission IDs that match your criteria
+    input:
+      filter:
+        title: Filter
+        description: Filter and sort criteria in the form of an FQL query. For more information about FQL queries, see https://falcon.crowdstrike.com/documentation/45/falcon-query-language-fql
+        type: string
+        required: false
+        example: "state: 'running'"
+      offset:
+        title: Offset
+        description: The offset to start retrieving reports from
+        type: integer
+        required: false
+        example: 5
+      limit:
+        title: Limit
+        description:  Maximum number of report IDs to return - less or equal to 5000
+        type: integer
+        required: false
+        example: 324
+    output:
+      submissionIds:
+        title: Submission IDs
+        description: List of submission IDs
+        type: '[]string'
+        required: true
+        example: ['9382986b58cb4b44935e7eba071142f3_92c8b7525e2b4888bd9e2jj7391c7104']
