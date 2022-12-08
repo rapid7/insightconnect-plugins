@@ -1,0 +1,16 @@
+{
+  "parameters": [
+    [
+      "ticket_not_found",
+      3,
+      "Example task",
+      "Example description",
+      "Open",
+      "2022-12-14T00:00:00Z",
+      3600,
+      123456789,
+      "Resource not found.",
+      "Verify your input is correct and not malformed and try again. If the issue persists, please contact support."
+    ]
+  ]
+}

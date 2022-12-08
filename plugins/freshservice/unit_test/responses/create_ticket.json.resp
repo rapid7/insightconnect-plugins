@@ -1,0 +1,37 @@
+{
+  "ticket": {
+    "cc_emails": [],
+    "fwd_emails": [],
+    "reply_cc_emails": [],
+    "fr_escalated": false,
+    "spam": false,
+    "email_config_id": null,
+    "group_id": null,
+    "priority": 1,
+    "requester_id": 987654321,
+    "requested_for_id": 987654321,
+    "responder_id": null,
+    "source": 2,
+    "status": 2,
+    "subject": "New Ticket",
+    "to_emails": null,
+    "department_id": null,
+    "id": 1,
+    "type": "Incident",
+    "due_by": "2022-12-06T14:16:40Z",
+    "fr_due_by": "2022-11-28T20:16:40Z",
+    "is_escalated": false,
+    "description": "<div>Example description</div>",
+    "description_text": "Example description",
+    "category": null,
+    "sub_category": null,
+    "item_category": null,
+    "custom_fields": {
+      "test_field": null
+    },
+    "created_at": "2022-11-24T14:16:40Z",
+    "updated_at": "2022-11-24T14:16:40Z",
+    "tags": [],
+    "attachments": []
+  }
+}

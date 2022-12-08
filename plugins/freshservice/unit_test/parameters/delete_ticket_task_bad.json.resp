@@ -1,0 +1,18 @@
+{
+  "parameters": [
+    [
+      "ticket_not_found",
+      2,
+      1,
+      "Resource not found.",
+      "Verify your input is correct and not malformed and try again. If the issue persists, please contact support."
+    ],
+    [
+      "task_not_found",
+      1,
+      2,
+      "Resource not found.",
+      "Verify your input is correct and not malformed and try again. If the issue persists, please contact support."
+    ]
+  ]
+}

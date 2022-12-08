@@ -1,0 +1,47 @@
+{
+	"spec": "47501579d4f3ddf8cfd8b2651875111a",
+	"manifest": "807a10280b2cee2a7b890d78e6204add",
+	"setup": "edcd466123269cbbf362e4ef405342a9",
+	"schemas": [
+		{
+			"identifier": "create_ticket/schema.py",
+			"hash": "836fb65ad762d5ee051b3c259c7c197d"
+		},
+		{
+			"identifier": "create_ticket_task/schema.py",
+			"hash": "b7dd0d40a573bdaaf12de71cd2372f32"
+		},
+		{
+			"identifier": "delete_ticket/schema.py",
+			"hash": "508dc3b18c23818fcfec28077d7f4259"
+		},
+		{
+			"identifier": "delete_ticket_task/schema.py",
+			"hash": "0818dba179198622412b3a3b3da027e0"
+		},
+		{
+			"identifier": "list_all_agents/schema.py",
+			"hash": "e1aadf3e7138703683478098f243fecf"
+		},
+		{
+			"identifier": "list_all_groups/schema.py",
+			"hash": "8ef59df3c364f49742abe94577123d7a"
+		},
+		{
+			"identifier": "list_tickets/schema.py",
+			"hash": "58f189a133c5e8bb9addc2cb9661bbf2"
+		},
+		{
+			"identifier": "update_ticket/schema.py",
+			"hash": "b695e6cbb056ff15bbc7422acda4ecfe"
+		},
+		{
+			"identifier": "update_ticket_task/schema.py",
+			"hash": "f61c62df2b8e39a03f5088344995e97f"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "1eedf0282c870df872d623f9a6a46080"
+		}
+	]
+}

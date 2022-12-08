@@ -1,0 +1,121 @@
+{
+  "agents": [
+    {
+      "active": false,
+      "address": null,
+      "auto_assign_status_changed_at": null,
+      "auto_assign_tickets": true,
+      "background_information": null,
+      "can_see_all_tickets_from_associated_departments": false,
+      "created_at": "2022-11-17T16:13:30Z",
+      "custom_fields": {},
+      "department_ids": [],
+      "department_names": null,
+      "email": "user@example.com",
+      "external_id": null,
+      "first_name": "User",
+      "has_logged_in": false,
+      "id": 1234567890,
+      "job_title": null,
+      "language": "en",
+      "last_active_at": null,
+      "last_login_at": null,
+      "last_name": null,
+      "location_id": null,
+      "location_name": null,
+      "mobile_phone_number": null,
+      "occasional": false,
+      "reporting_manager_id": null,
+      "role_ids": [
+        987654321
+      ],
+      "roles": [
+        {
+          "role_id": 987654321,
+          "assignment_scope": "entire_helpdesk",
+          "groups": []
+        }
+      ],
+      "scopes": {
+        "ticket": null,
+        "problem": null,
+        "change": null,
+        "asset": null,
+        "solution": null,
+        "contract": null
+      },
+      "scoreboard_level_id": null,
+      "scoreboard_points": null,
+      "signature": null,
+      "time_format": "12h",
+      "time_zone": "Eastern Time (US & Canada)",
+      "updated_at": "2022-11-17T16:13:30Z",
+      "vip_user": false,
+      "work_phone_number": "11111111",
+      "group_ids": [],
+      "member_of": [],
+      "observer_of": [],
+      "member_of_pending_approval": [],
+      "observer_of_pending_approval": []
+    },
+    {
+      "active": true,
+      "address": null,
+      "auto_assign_status_changed_at": null,
+      "auto_assign_tickets": true,
+      "background_information": null,
+      "can_see_all_tickets_from_associated_departments": false,
+      "created_at": "2022-11-17T16:13:28Z",
+      "custom_fields": {},
+      "department_ids": [],
+      "department_names": null,
+      "email": "user2@example.com",
+      "external_id": null,
+      "first_name": "User2",
+      "has_logged_in": true,
+      "id": 1234567891,
+      "job_title": null,
+      "language": "en",
+      "last_active_at": "2022-11-23T11:40:30Z",
+      "last_login_at": "2022-11-17T16:13:37Z",
+      "last_name": "Example",
+      "location_id": null,
+      "location_name": null,
+      "mobile_phone_number": "22222222",
+      "occasional": false,
+      "reporting_manager_id": null,
+      "role_ids": [
+        987654321
+      ],
+      "roles": [
+        {
+          "role_id": 987654321,
+          "assignment_scope": "entire_helpdesk",
+          "groups": []
+        }
+      ],
+      "scopes": {
+        "ticket": null,
+        "problem": null,
+        "change": null,
+        "release": null,
+        "asset": null,
+        "solution": null,
+        "contract": null
+      },
+      "scoreboard_level_id": null,
+      "scoreboard_points": null,
+      "signature": "<p><br></p>\n",
+      "time_format": "12h",
+      "time_zone": "Eastern Time (US & Canada)",
+      "updated_at": "2022-11-22T10:48:16Z",
+      "vip_user": false,
+      "work_phone_number": null,
+      "group_ids": [],
+      "member_of": [],
+      "observer_of": [],
+      "member_of_pending_approval": [],
+      "observer_of_pending_approval": []
+    }
+  ]
+}

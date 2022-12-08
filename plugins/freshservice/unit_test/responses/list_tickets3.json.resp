@@ -1,0 +1,38 @@
+{
+  "tickets": [
+    {
+      "subject": "Example ticket 2",
+      "group_id": 123459876,
+      "department_id": 987651234,
+      "category": "Software",
+      "sub_category": "Windows",
+      "item_category": null,
+      "requester_id": 123456789,
+      "responder_id": 112233445,
+      "due_by": "2022-12-24T16:00:00Z",
+      "fr_escalated": true,
+      "deleted": false,
+      "spam": false,
+      "email_config_id": null,
+      "fwd_emails": [],
+      "reply_cc_emails": [],
+      "cc_emails": ["user@example.com"],
+      "is_escalated": false,
+      "fr_due_by": "2022-11-23T17:00:00Z",
+      "id": 15,
+      "priority": 3,
+      "status": 2,
+      "source": 4,
+      "created_at": "2022-11-23T11:41:12Z",
+      "updated_at": "2022-11-23T11:41:12Z",
+      "requested_for_id": 123456789,
+      "to_emails": null,
+      "type": "Incident",
+      "description": "<div>example description</div>",
+      "description_text": "example description",
+      "custom_fields": {
+        "test_field": "Test"
+      }
+    }
+  ]
+}
