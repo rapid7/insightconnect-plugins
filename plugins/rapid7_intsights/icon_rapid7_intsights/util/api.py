@@ -97,6 +97,7 @@ class ManualAlertParams:
             }
         )
 
+
 @dataclass
 class IOCParams:
     last_updated_from: str
@@ -134,7 +135,9 @@ class IOCParams:
                 "severity[]": list(self.severity) if self.severity else None,
                 "sourceIds[]": list(self.source_ids) if self.source_ids else None,
                 "killChainPhases[]": list(self.kill_chain_phases) if self.kill_chain_phases else None,
-                "limit": self.limit_range(self.limit, self.OFFSET_MINIMUM, self.OFFSET_MAXIMUM) if self.limit else self.OFFSET_DEFAULT,
+                "limit": self.limit_range(self.limit, self.OFFSET_MINIMUM, self.OFFSET_MAXIMUM)
+                if self.limit
+                else self.OFFSET_DEFAULT,
                 "offset": self.offset if self.offset else None,
             }
         )

@@ -5,14 +5,15 @@ from .schema import GetIocsByFilterInput, GetIocsByFilterOutput, Input, Output, 
 from icon_rapid7_intsights.util.api import IOCParams
 from insightconnect_plugin_runtime.helper import clean
 
-class GetIocsByFilter(insightconnect_plugin_runtime.Action):
 
+class GetIocsByFilter(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='get_iocs_by_filter',
-                description=Component.DESCRIPTION,
-                input=GetIocsByFilterInput(),
-                output=GetIocsByFilterOutput())
+            name="get_iocs_by_filter",
+            description=Component.DESCRIPTION,
+            input=GetIocsByFilterInput(),
+            output=GetIocsByFilterOutput(),
+        )
 
     def run(self, params={}):
         ioc_params = IOCParams(
