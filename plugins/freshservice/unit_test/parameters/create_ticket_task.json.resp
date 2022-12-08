@@ -1,0 +1,50 @@
+{
+  "parameters": [
+    [
+      "success",
+      1,
+      "Example task",
+      "Example description",
+      "Open",
+      "2022-12-14T00:00:00Z",
+      3600,
+      123456789,
+      {
+        "task": {
+          "id": 1,
+          "status": 1,
+          "dueDate": "2022-12-14T00:00:00Z",
+          "notifyBefore": 3600,
+          "title": "Example task",
+          "description": "Example description",
+          "createdAt": "2022-11-24T09:55:44Z",
+          "updatedAt": "2022-11-24T09:55:44Z",
+          "groupId": 123456789,
+          "deleted": false
+        }
+      }
+    ],
+    [
+      "success2",
+      2,
+      "Example task 2",
+      null,
+      "In Progress",
+      "2022-12-14T00:00:00Z",
+      0,
+      null,
+      {
+        "task": {
+          "id": 2,
+          "status": 2,
+          "dueDate": "2022-12-14T00:00:00Z",
+          "notifyBefore": 0,
+          "title": "Example task 2",
+          "createdAt": "2022-11-24T09:55:44Z",
+          "updatedAt": "2022-11-24T09:55:44Z",
+          "deleted": false
+        }
+      }
+    ]
+  ]
+}

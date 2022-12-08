@@ -1,0 +1,221 @@
+{
+  "parameters": [
+    [
+      "success",
+      1,
+      "Updated Ticket",
+      "Updated description",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      {
+        "ticket": {
+          "ccEmails": [],
+          "fwdEmails": [],
+          "replyCcEmails": [],
+          "frEscalated": false,
+          "spam": false,
+          "priority": 1,
+          "requesterId": 987654321,
+          "requestedForId": 987654321,
+          "source": 2,
+          "status": 2,
+          "subject": "Updated Ticket",
+          "id": 1,
+          "type": "Incident",
+          "dueBy": "2022-12-06T14:16:40Z",
+          "frDueBy": "2022-11-28T20:16:40Z",
+          "isEscalated": false,
+          "description": "<div>Updated description</div>",
+          "descriptionText": "Updated description",
+          "customFields": {},
+          "createdAt": "2022-11-24T14:16:40Z",
+          "updatedAt": "2022-11-24T14:16:40Z",
+          "tags": [],
+          "attachments": []
+        }
+      }
+    ],
+    [
+      "success2",
+      1,
+      "Updated Ticket",
+      "Updated description",
+      0,
+      "",
+      0,
+      "",
+      "",
+      0,
+      0,
+      0,
+      "",
+      0,
+      "",
+      "",
+      0,
+      0,
+      [],
+      [],
+      0,
+      "",
+      "",
+      "",
+      [],
+      {},
+      {
+        "ticket": {
+          "ccEmails": [],
+          "fwdEmails": [],
+          "replyCcEmails": [],
+          "frEscalated": false,
+          "spam": false,
+          "priority": 1,
+          "requesterId": 987654321,
+          "requestedForId": 987654321,
+          "source": 2,
+          "status": 2,
+          "subject": "Updated Ticket",
+          "id": 1,
+          "type": "Incident",
+          "dueBy": "2022-12-06T14:16:40Z",
+          "frDueBy": "2022-11-28T20:16:40Z",
+          "isEscalated": false,
+          "description": "<div>Updated description</div>",
+          "descriptionText": "Updated description",
+          "customFields": {},
+          "createdAt": "2022-11-24T14:16:40Z",
+          "updatedAt": "2022-11-24T14:16:40Z",
+          "tags": [],
+          "attachments": []
+        }
+      }
+    ],
+    [
+      "success3",
+      2,
+      "Updated Ticket",
+      "Updated description",
+      2,
+      "Example User",
+      0,
+      "",
+      "11111111",
+      1,
+      2,
+      2,
+      "Incident",
+      987654321,
+      "2022-12-20T12:00:00Z",
+      "2022-12-10T12:00:00Z",
+      111111111,
+      2,
+      [
+        {
+          "name": "test.txt",
+          "content": "dGVzdA=="
+        }
+      ],
+      [
+        "tag1",
+        "tag2"
+      ],
+      222222222,
+      "Hardware",
+      "Computer",
+      "PC",
+      [
+        {
+          "display_id": 2
+        }
+      ],
+      {
+        "test_field": "Test"
+      },
+      {
+        "ticket": {
+          "ccEmails": [
+            "user@example.com"
+          ],
+          "fwdEmails": [],
+          "replyCcEmails": [
+            "user@example.com"
+          ],
+          "frEscalated": false,
+          "spam": false,
+          "groupId": 111111111,
+          "priority": 2,
+          "requesterId": 123456789,
+          "requestedForId": 123456789,
+          "responderId": 987654321,
+          "source": 2,
+          "status": 2,
+          "subject": "Updated Ticket",
+          "departmentId": 22222222,
+          "id": 2,
+          "type": "Incident",
+          "dueBy": "2022-12-20T12:00:00Z",
+          "frDueBy": "2022-12-10T12:00:00Z",
+          "isEscalated": false,
+          "description": "<div>Updated description</div>",
+          "descriptionText": "Updated description",
+          "category": "Hardware",
+          "subCategory": "Computer",
+          "itemCategory": "PC",
+          "customFields": {
+            "testField": "Test"
+          },
+          "createdAt": "2022-11-24T17:31:33Z",
+          "updatedAt": "2022-11-24T17:31:33Z",
+          "tags": [
+            "tag1",
+            "tag2"
+          ],
+          "attachments": [
+            {
+              "id": 123,
+              "contentType": "text/plain",
+              "size": 4,
+              "name": "test.txt",
+              "attachmentUrl": "https://example.com",
+              "createdAt": "2022-11-24T17:37:50Z",
+              "updatedAt": "2022-11-24T17:37:50Z"
+            }
+          ],
+          "assets": [
+            {
+              "name": "Dell Monitor",
+              "ciTypeId": 1122334455,
+              "impact": 1,
+              "created": "2022-11-17T16:14:17Z",
+              "updated": "2022-11-17T16:14:17Z",
+              "authorId": 6677889900,
+              "authorType": "User",
+              "deleted": false,
+              "displayId": 2
+            }
+          ]
+        }
+      }
+    ]
+  ]
+}

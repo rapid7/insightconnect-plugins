@@ -1,0 +1,1312 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: freshservice
+title: FreshService
+description: Freshservice is a cloud-based IT Service Management solution that was designed using ITIL best practices. Freshservice helps IT organizations streamline their service delivery processes with a strong focus on user experience and employee happiness
+version: 1.0.0
+supported_versions: ["FreshService API v2 2022-11-14"]
+vendor: rapid7
+cloud_ready: true
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/freshservice
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://freshservice.com
+tags: ["freshservice", "ticketing"]
+support: rapid7
+status: []
+hub_tags:
+  use_cases: [reporting_and_analytics]
+  keywords: [freshservice, ticketing, cloud_enabled]
+  features: []
+types:
+  role:
+    roleId:
+      title: Role ID
+      description: Unique ID of the role assigned
+      type: integer
+      required: false
+    assigmentScope:
+      title: Assignment Scope
+      description: The scope in which the agent can use the permissions granted by this role
+      type: string
+      required: false
+    groups:
+      title: Groups
+      description: Unique IDs of Groups in which the permissions granted by the role applies
+      type: "[]integer"
+      required: false
+  scope:
+    ticket:
+      title: Ticket
+      description: Ticket scope of the agent
+      type: string
+      required: false
+    problem:
+      title: Problem
+      description: Problem scope of the agent
+      type: string
+      required: false
+    change:
+      title: Change
+      description: Change scope of the agent
+      type: string
+      required: false
+    release:
+      title: Release
+      description: Release scope of the agent
+      type: string
+      required: false
+    asset:
+      title: Asset
+      description: Asset scope of the agent
+      type: string
+      required: false
+    solution:
+      title: Solution
+      description: Solution scope of the agent
+      type: string
+      required: false
+    contract:
+      title: Contract
+      description: Contract scope of the agent
+      type: string
+      required: false
+  agent:
+    id:
+      title: ID
+      description: User ID of the agent
+      type: integer
+      required: false
+    firstName:
+      title: First Name
+      description: First name of the agent
+      type: string
+      required: false
+    lastName:
+      title: Last Name
+      description: Last name of the agent
+      type: string
+      required: false
+    occasional:
+      title: Occasional
+      description: True if the agent is an occasional agent, and false if full-time agent
+      type: boolean
+      required: false
+    jobTitle:
+      title: Job Title
+      description: Job title of the agent
+      type: string
+      required: false
+    email:
+      title: Email
+      description: Email address of the agent
+      type: string
+      required: false
+    workPhoneNumber:
+      title: Work Phone Number
+      description: Work phone number of the agent
+      type: string
+      required: false
+    mobilePhoneNumber:
+      title: Mobile Phone Number
+      description: Mobile phone number of the agent
+      type: string
+      required: false
+    departmentIds:
+      title: Department IDs
+      description: Unique IDs of the departments associated with the agent
+      type: "[]string"
+      required: false
+    canSeeAllTicketsFromAssociatedDepartments:
+      title: Can See All Tickets from Associated Departments
+      description: Set to true if the agent must be allowed to view tickets filed by other members of the department, and false otherwise
+      type: boolean
+      required: false
+    reportingManagerId:
+      title: Reporting Manager ID
+      description: User ID of the agent's reporting manager
+      type: integer
+      required: false
+    address:
+      title: Address
+      description: Address of the agent
+      type: string
+      required: false
+    timeZone:
+      title: Time Zone
+      description: Time zone of the agent
+      type: string
+      required: false
+    timeFormat:
+      title: Time Format
+      description: Time format for the agent
+      type: string
+      required: false
+    language:
+      title: Language
+      description: Language used by the agent
+      type: string
+      required: false
+    locationId:
+      title: Location ID
+      description: Unique ID of the location associated with the agent
+      type: integer
+      required: false
+    backgroundInformation:
+      title: Background Information
+      description: Background information of the agent
+      type: string
+      required: false
+    scoreboardLevelId:
+      title: Scoreboard Level ID
+      description: Unique ID of the level of the agent in the Arcade
+      type: integer
+      required: false
+    ticketScope:
+      title: Ticket Scope
+      description: Ticket scope of the agent
+      type: string
+      required: false
+    memberOf:
+      title: Member Of
+      description: Unique IDs of the groups that the agent is a member of
+      type: "[]integer"
+      required: false
+    observerOf:
+      title: Observer Of
+      description: Unique IDs of the groups that the agent is an observer of
+      type: "[]integer"
+      required: false
+    memberOfPendingApproval:
+      title: Member Of Pending Approval
+      description: Unique IDs of the restricted groups to which the agent's addition as a member is pending approval
+      type: "[]integer"
+      required: false
+    observerOfPendingApproval:
+      title: Observer Of Pending Approval
+      description: Unique IDs of the restricted groups to which the agent's addition as an observer is pending approval
+      type: "[]integer"
+      required: false
+    roles:
+      title: Roles
+      description: Roles that are granted to the agent
+      type: "[]role"
+      required: false
+    scopes:
+      title: Scopes
+      description: Scopes of the agent
+      type: scope
+      required: false
+    lastLoginAt:
+      title: Last Login At
+      description: Timestamp of the agent's last successful login
+      type: string
+      required: false
+    lastActiveAt:
+      title: Last Active At
+      description: Timestamp of the agent's recent activity
+      type: string
+      required: false
+    customFields:
+      title: Custom Fields
+      description: Key-value pair containing the names and values of the (custom) agent fields
+      type: object
+      required: false
+    hasLoggedIn:
+      title: Has Logged In
+      description: Set to true if the user has logged in to FreshService at least once, and false otherwise
+      type: boolean
+      required: false
+    active:
+      title: Active
+      description: True if the agent is active, false if the agent has been deactivated
+      type: boolean
+      required: false
+    createdAt:
+      title: Created At
+      description: Date and time when the agent was created
+      type: string
+      required: false
+    updatedAt:
+      title: Updated At
+      description: Date and time when the agent was last updated
+      type: string
+      required: false
+  asset:
+    name:
+      title: Name
+      description: Name of the asset
+      type: string
+      required: false
+    description:
+      title: Description
+      description: Description of the asset
+      type: string
+      required: false
+    ciTypeId:
+      title: CI Type ID
+      description: ID of the configuration item type
+      type: integer
+      required: false
+    impact:
+      title: Impact
+      description: Impact
+      type: integer
+      required: false
+    created:
+      title: Created
+      description: Date and time when the asset was created
+      type: string
+      required: false
+    updated:
+      title: Updated
+      description: Date and time when the asset was updated
+      type: string
+      required: false
+    userId:
+      title: User ID
+      description: ID of the user
+      type: integer
+      required: false
+    departmentId:
+      title: Department ID
+      description: ID of the department
+      type: integer
+      required: false
+    assignedOn:
+      title: Assigned On
+      description: Assigned on
+      type: string
+      required: false
+    agentId:
+      title: Agent ID
+      description: ID of the agent
+      type: integer
+      required: false
+    authorId:
+      title: Author ID
+      description: ID of the author
+      type: integer
+      required: false
+    authorType:
+      title: Author Type
+      description: Type of the author
+      type: string
+      required: false
+    deleted:
+      title: Deleted
+      description: Whether the asset has been deleted
+      type: boolean
+      required: false
+    displayId:
+      title: Display ID
+      description: Display ID of the asset
+      type: integer
+      required: false
+  assetInput:
+    display_id:
+      title: Display ID
+      description: Display ID of the asset
+      type: integer
+      required: false
+  attachment:
+    id:
+      title: ID
+      description: ID of the attachment
+      type: integer
+      required: false
+    contentType:
+      title: Content Type
+      description: Content type of the attachment
+      type: string
+      required: false
+    size:
+      title: Size
+      description: Size of the attachment
+      type: integer
+      required: false
+    name:
+      title: Name
+      description: Size of the attachment
+      type: string
+      required: false
+    attachmentUrl:
+      title: Attachment URL
+      description: Attachment URL
+      type: string
+      required: false
+    createdAt:
+      title: Created At
+      description: Date and time when the attachment was created
+      type: string
+      required: false
+  attachmentInput:
+    name:
+      title: Name
+      description: Name of the attachment
+      type: string
+      required: false
+    content:
+      title: Content
+      description: Base64 encoded content of the attachment
+      type: bytes
+      required: false
+  group:
+    id:
+      title: ID
+      description: ID of the group
+      type: integer
+      required: false
+    name:
+      title: Name
+      description: Name of the group
+      type: string
+      required: false
+    description:
+      title: Description
+      description: Description of the group
+      type: string
+      required: false
+    businessHoursId:
+      title: Business Hours ID
+      description: Unique ID of the business hours configuration associated with the group
+      type: integer
+      required: false
+    unassignedFor:
+      title: Unassigned For
+      description: The time after which an escalation email is sent if a ticket in the group remains unassigned
+      type: string
+      required: false
+    escalateTo:
+      title: Escalate To
+      description: The Unique ID of the user to whom an escalation email is sent if a ticket in this group is unassigned
+      type: integer
+      required: false
+    agentIds:
+      title: Agent IDs
+      description: List of agent user IDs separated by commas
+      type: "[]integer"
+      required: false
+    members:
+      title: Members
+      description: A comma separated list of user IDs of agents who are members of this group
+      type: "[]integer"
+      required: false
+    observers:
+      title: Observers
+      description: A comma separated list of user IDs of agents who are observers of this group
+      type: "[]integer"
+      required: false
+    restricted:
+      title: Restricted
+      description: Whether a group is marked as restricted
+      type: boolean
+      required: false
+    leaders:
+      title: Leaders
+      description: A comma separated list of user IDs of agents who are leaders of this group
+      type: "[]integer"
+      required: false
+    membersPendingApproval:
+      title: Members Pending Approval
+      description: A comma-separated list of user IDs of agents whose member access to the group is pending approval by a group leader
+      type: "[]integer"
+      required: false
+    observersPendingApproval:
+      title: Observers Pending Approval
+      description: A comma-separated list of user IDs of agents whose observer access to the group is pending approval by a group leader
+      type: "[]integer"
+      required: false
+    leadersPendingApproval:
+      title: Leaders Pending Approval
+      description: A comma-separated list of user IDs of agents whose leader access to the group is pending approval by an existing group leader
+      type: "[]integer"
+      required: false
+    approvalRequired:
+      title: Approval Required
+      description: Whether the restricted group requires approvals for membership changes
+      type: boolean
+      required: false
+    autoTicketAssign:
+      title: Auto Ticket Assign
+      description: Describes the automatic ticket assignment type
+      type: boolean
+      required: false
+    createdAt:
+      title: Created At
+      description: Date and time when the agent group was created
+      type: string
+      required: false
+    updatedAt:
+      title: Updated At
+      description: Date and time when the agent group was last updated
+      type: string
+      required: false
+  task:
+    id:
+      title: ID
+      description: Unique ID of the task
+      type: integer
+      required: false
+    agentId:
+      title: Agent ID
+      description: ID of the agent to whom the task is assigned
+      type: integer
+      required: false
+    status:
+      title: Status
+      description: Status of the task
+      type: integer
+      required: false
+    dueDate:
+      title: Due Date
+      description: Due date of the task
+      type: string
+      required: false
+    notifyBefore:
+      title: Notify Before
+      description: Time in seconds before which notification is sent prior to due date
+      type: integer
+      required: false
+    title:
+      title: Title
+      description: Title of the task
+      type: string
+      required: false
+    description:
+      title: Description
+      description: Description of the task
+      type: string
+      required: false
+    createdAt:
+      title: Created At
+      description: Timestamp at which the task was created
+      type: string
+      required: false
+    updatedAt:
+      title: Updated At
+      description: Timestamp at which the task was updated
+      type: string
+      required: false
+    closedAt:
+      title: Closed AT
+      description: Timestamp at which the task was closed
+      type: string
+      required: false
+    groupId:
+      title: Group ID
+      description: Unique ID of the group to which the task is assigned
+      type: integer
+      required: false
+  ticket:
+    assets:
+      title: Assets
+      description: Assets associated with the ticket
+      type: "[]asset"
+      required: false
+    attachments:
+      title: Attachments
+      description: Ticket attachments
+      type: "[]attachment"
+      required: false
+    ccEmails:
+      title: CC Emails
+      description: Email addresses added in the 'cc' field of the incoming ticket email
+      type: "[]string"
+      required: false
+    departmentId:
+      title: Department ID
+      description: ID of the department to which this ticket belongs
+      type: integer
+      required: false
+    customFields:
+      title: Custom Fields
+      description: Key value pairs containing the names and values of custom fields
+      type: object
+      required: false
+    deleted:
+      title: Deleted
+      description: Whether the ticket has been deleted
+      type: boolean
+      required: false
+    description:
+      title: Description
+      description: HTML content of the ticket
+      type: string
+      required: false
+    descriptionText:
+      title: Description Text
+      description: Content of the ticket in plain text
+      type: string
+      required: false
+    dueBy:
+      title: Due By
+      description: Timestamp that denotes when the ticket is due to be resolved
+      type: string
+      required: false
+    email:
+      title: Email
+      description: Email address of the requester
+      type: string
+      required: false
+    emailConfigId:
+      title: Email Config ID
+      description: ID of email config which is used for this ticket
+      type: integer
+      required: false
+    frDueBy:
+      title: First Response Due By
+      description: Timestamp that denotes when the first response is due
+      type: string
+      required: false
+    frEscalated:
+      title: First Response Escalated
+      description: Set to true if the ticket has been escalated as a result of the first response time being breached
+      type: boolean
+      required: false
+    fwdEmails:
+      title: Fwd Emails
+      description: Email addresses added while forwarding a ticket
+      type: "[]string"
+      required: false
+    groupId:
+      title: Group ID
+      description: ID of the group to which the ticket has been assigned
+      type: integer
+      required: false
+    id:
+      title: ID
+      description: Unique ID of the ticket
+      type: integer
+      required: false
+    isEscalated:
+      title: Is Escalated
+      description: Set to true if the ticket has been escalated for any reason
+      type: boolean
+      required: false
+    name:
+      title: Name
+      description: Name of the requester
+      type: string
+      required: false
+    phone:
+      title: Phone
+      description: Phone number of the requester
+      type: string
+      required: false
+    priority:
+      title: Priority
+      description: Priority of the ticket
+      type: integer
+      required: false
+    category:
+      title: Category
+      description: Ticket category
+      type: string
+      required: false
+    subCategory:
+      title: Sub Category
+      description: Ticket sub category
+      type: string
+      required: false
+    itemCategory:
+      title: Item Category
+      description: Ticket item category
+      type: string
+      required: false
+    replyCcEmails:
+      title: Reply CC Emails
+      description: Email addresses added while replying to a ticket
+      type: "[]string"
+      required: false
+    requesterId:
+      title: Requester ID
+      description: User ID of the requester
+      type: integer
+      required: false
+    responderId:
+      title: Responder ID
+      description: ID of the agent to whom the ticket has been assigned
+      type: integer
+      required: false
+    source:
+      title: Source
+      description: The channel through which the ticket was created
+      type: integer
+      required: false
+    spam:
+      title: Spam
+      description: Set to true if the ticket has been marked as spam
+      type: boolean
+      required: false
+    status:
+      title: Status
+      description: Status of the ticket
+      type: integer
+      required: false
+    subject:
+      title: Subject
+      description: Subject of the ticket
+      type: string
+      required: false
+    tags:
+      title: Tags
+      description: Tags that have been associated with the ticket
+      type: "[]string"
+      required: false
+    toEmails:
+      title: To Emails
+      description: Email addresses to which the ticket was originally sent
+      type: "[]string"
+      required: false
+    type:
+      title: Type
+      description: Type of the ticket
+      type: string
+      required: false
+    createdAt:
+      title: Created At
+      description: Ticket creation timestamp
+      type: string
+      required: false
+    updatedAt:
+      title: Updated At
+      description: Ticket updated timestamp
+      type: string
+      required: false
+    urgency:
+      title: Urgency
+      description: Ticket urgency
+      type: integer
+      required: false
+    impact:
+      title: Impact
+      description: Impact
+      type: integer
+      required: false
+connection:
+  apiKey:
+    title: API Key
+    description: FreshService API key
+    type: credential_secret_key
+    required: true
+    example: 44d88612fea8a8f36de82e1278abb02f
+  subdomain:
+    title: Subdomain
+    description: Subdomain from your FreshService URL, for example "example-company" from "https://example-company.freshservice.com"
+    type: string
+    required: true
+    example: example-company
+actions:
+  create_ticket:
+    title: Create Ticket
+    description: Create a new ticket in your service desk
+    input:
+      subject:
+        title: Subject
+        description: Subject of the ticket
+        type: string
+        required: true
+        example: Example Subject
+      description:
+        title: Description
+        description: HTML content of the ticket
+        type: string
+        required: true
+        example: Example description
+      status:
+        title: Status
+        description: Status
+        type: integer
+        required: true
+        example: 2
+      name:
+        title: Name
+        description: Name of the requester
+        type: string
+        required: false
+        example: Example Requester
+      requesterId:
+        title: Requester ID
+        description: ID of the requester
+        type: integer
+        required: false
+        example: 123456789
+      email:
+        title: Email
+        description: Email address of the requester. If no contact exists with this email address in FreshService, it will be added as a new contact
+        type: string
+        required: false
+        example: user@example.com
+      phone:
+        title: Phone
+        description: Phone number of the requester. If no contact exists with this phone number in FreshService, it will be added as a new contact. If the phone number is set and the email address is not, then the name attribute is mandatory
+        type: string
+        required: false
+        example: 11111111
+      priority:
+        title: Priority
+        description: Priority of the ticket
+        type: integer
+        required: true
+        default: 1
+        example: 1
+      impact:
+        title: Impact
+        description: Impact of the ticket
+        type: integer
+        required: false
+        default: 1
+        example: 1
+      urgency:
+        title: Urgency
+        description: Urgency
+        type: integer
+        required: false
+        default: 1
+        example: 2
+      type:
+        title: Type
+        description: Type of the ticket
+        type: string
+        required: false
+        example: Incident
+      responderId:
+        title: Responder ID
+        description: ID of the agent to whom the ticket has been assigned
+        type: integer
+        required: false
+        example: 987654321
+      ccEmails:
+        title: CC Emails
+        description: Email addresses added in the 'cc' field of the incoming ticket email
+        type: "[]string"
+        required: false
+        example: ["user@example.com"]
+      dueBy:
+        title: Due By
+        description: Timestamp that denotes when the ticket is due to be resolved
+        type: date
+        required: false
+        example: 2022-11-30T12:00:00Z
+      frDueBy:
+        title: First Response Due By
+        description: Timestamp that denotes when the first response is due
+        type: date
+        required: false
+        example: 2022-11-30T12:00:00Z
+      groupId:
+        title: Group ID
+        description: ID of the group to which the ticket has been assigned
+        type: integer
+        required: false
+        example: 123456789
+      source:
+        title: Source
+        description: The channel through which the ticket was created
+        type: integer
+        required: false
+        example: 2
+      attachments:
+        title: Attachments
+        description: Ticket attachments. The total size of these attachments cannot exceed 15MB
+        type: "[]attachmentInput"
+        required: false
+        example: '[{"name": "test.txt", "content": "dGVzdA=="}]'
+      tags:
+        title: Tags
+        description: Tags that have been associated with the ticket
+        type: "[]string"
+        required: false
+        example: ["tag1", "tag2"]
+      departmentId:
+        title: Department ID
+        description: Department ID of the requester
+        type: integer
+        required: false
+        example: 123456789
+      category:
+        title: Category
+        description: Ticket category
+        type: string
+        required: false
+        example: Hardware
+      subCategory:
+        title: Sub Category
+        description: Ticket sub category
+        type: string
+        required: false
+        example: Computer
+      itemCategory:
+        title: Item Category
+        description: Ticket item category
+        type: string
+        required: false
+        example: PC
+      assets:
+        title: Assets
+        description: Assets that have to be associated with the ticket
+        type: "[]assetInput"
+        required: false
+        example: '{"displayId": 2}'
+      customFields:
+        title: Custom Fields
+        description: Key value pairs containing the names and values of custom fields
+        type: object
+        required: false
+        example: '{"key": "value"}'
+    output:
+      ticket:
+        title: Ticket
+        description: Information about created ticket
+        type: ticket
+        required: false
+  update_ticket:
+    title: Update Ticket
+    description: Update an existing ticket in your service desk
+    input:
+      ticketId:
+        title: Ticket ID
+        description: ID of the ticket which will be updated
+        type: integer
+        required: true
+        example: 10
+      subject:
+        title: Subject
+        description: Subject of the ticket
+        type: string
+        required: false
+        example: Example Subject
+      description:
+        title: Description
+        description: HTML content of the ticket
+        type: string
+        required: false
+        example: Example description
+      status:
+        title: Status
+        description: Status
+        type: integer
+        required: false
+        example: 2
+      name:
+        title: Name
+        description: Name of the requester
+        type: string
+        required: false
+        example: Example Requester
+      requesterId:
+        title: Requester ID
+        description: ID of the requester
+        type: integer
+        required: false
+        example: 123456789
+      email:
+        title: Email
+        description: Email address of the requester. If no contact exists with this email address in FreshService, it will be added as a new contact
+        type: string
+        required: false
+        example: user@example.com
+      phone:
+        title: Phone
+        description: Phone number of the requester. If no contact exists with this phone number in FreshService, it will be added as a new contact. If the phone number is set and the email address is not, then the name attribute is mandatory
+        type: string
+        required: false
+        example: 11111111
+      priority:
+        title: Priority
+        description: Priority of the ticket
+        type: integer
+        required: false
+        default: 1
+        example: 1
+      impact:
+        title: Impact
+        description: Impact of the ticket
+        type: integer
+        required: false
+        default: 1
+        example: 1
+      urgency:
+        title: Urgency
+        description: Urgency
+        type: integer
+        required: false
+        default: 1
+        example: 2
+      type:
+        title: Type
+        description: Type of the ticket
+        type: string
+        required: false
+        example: Incident
+      responderId:
+        title: Responder ID
+        description: ID of the agent to whom the ticket has been assigned
+        type: integer
+        required: false
+        example: 987654321
+      dueBy:
+        title: Due By
+        description: Timestamp that denotes when the ticket is due to be resolved
+        type: date
+        required: false
+        example: 2022-11-30T12:00:00Z
+      frDueBy:
+        title: First Response Due By
+        description: Timestamp that denotes when the first response is due
+        type: date
+        required: false
+        example: 2022-11-30T12:00:00Z
+      groupId:
+        title: Group ID
+        description: ID of the group to which the ticket has been assigned
+        type: integer
+        required: false
+        example: 123456789
+      source:
+        title: Source
+        description: The channel through which the ticket was created
+        type: integer
+        required: false
+        example: 2
+      attachments:
+        title: Attachments
+        description: Ticket attachments. The total size of these attachments cannot exceed 15MB
+        type: "[]attachmentInput"
+        required: false
+        example: '[{"name": "test.txt", "content": "dGVzdA=="}]'
+      tags:
+        title: Tags
+        description: Tags that have been associated with the ticket
+        type: "[]string"
+        required: false
+        example: [ "tag1", "tag2" ]
+      departmentId:
+        title: Department ID
+        description: Department ID of the requester
+        type: integer
+        required: false
+        example: 123456789
+      category:
+        title: Category
+        description: Ticket category
+        type: string
+        required: false
+        example: Hardware
+      subCategory:
+        title: Sub Category
+        description: Ticket sub category
+        type: string
+        required: false
+        example: Computer
+      itemCategory:
+        title: Item Category
+        description: Ticket item category
+        type: string
+        required: false
+        example: PC
+      assets:
+        title: Assets
+        description: Assets that have to be associated with the ticket
+        type: "[]assetInput"
+        required: false
+        example: '{"displayId": 2}'
+      customFields:
+        title: Custom Fields
+        description: Key value pairs containing the names and values of custom fields
+        type: object
+        required: false
+        example: '{"key": "value"}'
+    output:
+      ticket:
+        title: Ticket
+        description: Information about updated ticket
+        type: ticket
+        required: false
+  list_tickets:
+    title: List Tickets
+    description: List all tickets for the given filters
+    input:
+      filter:
+        title: Predefined Filters
+        description: Filter tickets using predefined filters. The filters available are new_and_my_open, watching, spam, deleted
+        type: string
+        required: false
+        example: watching
+      requesterId:
+        title: Requester ID
+        description: Filter tickets by requester ID
+        type: integer
+        required: false
+        example: 123456789
+      email:
+        title: Requester Email
+        description: Filter tickets by requester email
+        type: string
+        required: false
+        example: user@example.com
+      updatedSince:
+        title: Update Since
+        description: Filter tickets by update date
+        type: date
+        required: false
+        example: 2022-11-14T00:00:00Z
+      type:
+        title: Type
+        description: Filter tickets by type
+        type: string
+        enum:
+        - Incident
+        - Service Request
+        - All
+        required: false
+        example: All
+        default: All
+      orderType:
+        title: Order Type
+        description: Type of the order
+        type: string
+        enum:
+        - asc
+        - desc
+        required: false
+        example: desc
+        default: desc
+      page:
+        title: Page
+        description: The number of the results page to be returned
+        type: integer
+        required: false
+        example: 1
+      perPage:
+        title: Page Size
+        description: The number of results per page
+        type: integer
+        required: false
+        example: 20
+        default: 20
+    output:
+      tickets:
+        title: Tickets
+        description: Information about all tickets obtained using the given filters
+        type: "[]ticket"
+        required: false
+  delete_ticket:
+    title: Delete Ticket
+    description: Delete the given ticket
+    input:
+      ticketId:
+        title: Ticket ID
+        description: ID of the ticket which will be deleted
+        type: integer
+        required: true
+        example: 20
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+  create_ticket_task:
+    title: Create Ticket Task
+    description: Create a new task on a ticket request
+    input:
+      ticketId:
+        title: Ticket ID
+        description: ID of the ticket for which the task will be created
+        type: integer
+        required: true
+        example: 20
+      title:
+        title: Title
+        description: Title of the task
+        type: string
+        required: true
+        example: Task
+      description:
+        title: Description
+        description: Description of the task
+        type: string
+        required: false
+        example: Example description
+      status:
+        title: Status
+        description: Status of the task
+        type: string
+        enum:
+        - Open
+        - In Progress
+        - Completed
+        required: false
+        example: Open
+        default: Open
+      dueDate:
+        title: Due Date
+        description: Due date of the task
+        type: date
+        required: false
+        example: 2022-11-14T00:00:00Z
+      notifyBefore:
+        title: Notify Before
+        description: Time in seconds before which notification is sent prior to due date
+        type: integer
+        required: false
+        example: 3600
+      groupId:
+        title: Group ID
+        description: Unique ID of the group to which the task will be  assigned
+        type: integer
+        required: false
+        example: 123456789
+    output:
+      task:
+        title: Task
+        description: Information about the created task for the provided ticket
+        type: task
+        required: false
+  update_ticket_task:
+    title: Update Ticket Task
+    description: Update an existing task on a ticket request
+    input:
+      ticketId:
+        title: Ticket ID
+        description: ID of the ticket for which the task will be updated
+        type: integer
+        required: true
+        example: 20
+      taskId:
+        title: Task ID
+        description: ID of the task which will be updated
+        type: integer
+        required: true
+        example: 10
+      title:
+        title: Title
+        description: Title of the task
+        type: string
+        required: false
+        example: Task
+      description:
+        title: Description
+        description: Description of the task
+        type: string
+        required: false
+        example: Example description
+      status:
+        title: Status
+        description: Status of the task
+        type: string
+        enum:
+          - Open
+          - In Progress
+          - Completed
+        required: false
+        example: Open
+        default: Open
+      dueDate:
+        title: Due Date
+        description: Due date of the task
+        type: date
+        required: false
+        example: 2022-11-14T00:00:00Z
+      notifyBefore:
+        title: Notify Before
+        description: Time in seconds before which notification is sent prior to due date
+        type: integer
+        required: false
+        example: 3600
+      groupId:
+        title: Group ID
+        description: Unique ID of the group to which the task will be  assigned
+        type: integer
+        required: false
+        example: 123456789
+    output:
+      task:
+        title: Task
+        description: Information about the created task for the provided ticket
+        type: task
+        required: false
+  delete_ticket_task:
+    title: Delete Ticket Task
+    description: Delete a task on a ticket request
+    input:
+      ticketId:
+        title: Ticket ID
+        description: ID of the ticket for which the task will be deleted
+        type: integer
+        required: true
+        example: 20
+      taskId:
+        title: Task ID
+        description: ID of the task which will be deleted
+        type: integer
+        required: true
+        example: 10
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+  list_all_groups:
+    title: List All Groups
+    description: View information about all groups in the account
+    output:
+      groups:
+        title: Groups
+        description: Information about all groups in the account
+        type: "[]group"
+        required: false
+  list_all_agents:
+    title: List All Agents
+    description: View information about all agents in the account. Use filters to view only specific agents (those who match the criteria that you choose)
+    input:
+      email:
+        title: Email
+        description: Email address of the agent based on which the results will be filtered
+        type: string
+        required: false
+        example: user@example.com
+      mobilePhoneNumber:
+        title: Mobile Phone Number
+        description: Mobile phone number of the agent based on which the results will be filtered
+        type: string
+        required: false
+        example: "664345"
+      workPhoneNumber:
+        title: Work Phone Number
+        description: Work phone number of the agent based on which the results will be filtered
+        type: string
+        required: false
+        example: "5564435"
+      state:
+        title: State
+        description: Return fulltime, occasional or all agents
+        type: string
+        enum:
+        - fulltime
+        - occasional
+        - all
+        required: false
+        example: all
+        default: all
+      active:
+        title: Active
+        description: Return active, deactivated or all agents
+        type: string
+        enum:
+        - "true"
+        - "false"
+        - "all"
+        required: false
+        example: all
+        default: all
+    output:
+      agents:
+        title: Agents
+        description: Information about agents in the account
+        type: "[]agent"
+        required: false
