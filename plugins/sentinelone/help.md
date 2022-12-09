@@ -19,7 +19,6 @@ This plugin utilizes the SentinelOne API, the documentation is located in the Se
 
 # Supported Product Versions
 
-* 2.0.0
 * 2.1.0
 
 # Documentation
@@ -30,9 +29,8 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|False|Credential secret API key. Provide if you choose API Token Auth type|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|authentication_type|string|Basic Auth|True|Type of authentication|['Basic Auth', 'API Token Auth']|Basic Auth|
-|basic_auth_credentials|credential_username_password|None|False|Username and password. Provide if you choose Basic Auth type|None|{"username": "user@example.com", "password": "mypassword"}|
+|api_key|credential_secret_key|None|False|Credential secret API key|
+|role|string|User role|True|Role of user|['User role', 'Service role']|User role|
 |url|string|None|True|SentinelOne Console URL|None|https://example.com|
 
 Example input:
@@ -40,11 +38,7 @@ Example input:
 ```
 {
   "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
-  "authentication_type": "Basic Auth",
-  "basic_auth_credentials": {
-    "username": "user@example.com",
-    "password": "mypassword"
-  },
+  "role": "User role",
   "url": "https://example.sentinelone.com"
 }
 ```
