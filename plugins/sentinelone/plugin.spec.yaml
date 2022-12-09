@@ -1457,27 +1457,21 @@ types:
       required: false
 
 connection:
-  authentication_type:
-    title: Authentication Type
-    description: Type of authentication
+  role:
+    title: Role
+    description: Role of user
     type: string
     required: true
     enum:
-      - Basic Auth
-      - API Token Auth
-    default: Basic Auth
-    example: Basic Auth
-  basic_auth_credentials:
-    title: Basic Auth Credentials
-    type: credential_username_password
-    description: Username and password. Provide if you choose Basic Auth type
-    required: false
-    example: '{"username": "user@example.com", "password": "mypassword"}'
+      - User role
+      - Service role
+    example: User role
+    default: User role
   api_key:
     title: API Key
-    description: Credential secret API key. Provide if you choose API Token Auth type
+    description: Credential secret API key
     type: credential_secret_key
-    required: false
+    required: true
     example: 9de5069c5afe602b2ea0a04b66beb2c0
   url:
     title: URL
