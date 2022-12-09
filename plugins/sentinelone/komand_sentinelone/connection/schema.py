@@ -5,9 +5,8 @@ import json
 
 class Input:
     API_KEY = "api_key"
-    AUTHENTICATION_TYPE = "authentication_type"
-    BASIC_AUTH_CREDENTIALS = "basic_auth_credentials"
     URL = "url"
+    ROLE = "role"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -19,36 +18,31 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "api_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
-      "description": "Credential secret API key. Provide if you choose API Token Auth type",
-      "order": 3
-    },
-    "authentication_type": {
-      "type": "string",
-      "title": "Authentication Type",
-      "description": "Type of authentication",
-      "default": "Basic Auth",
-      "enum": [
-        "Basic Auth",
-        "API Token Auth"
-      ],
-      "order": 1
-    },
-    "basic_auth_credentials": {
-      "$ref": "#/definitions/credential_username_password",
-      "title": "Basic Auth Credentials",
-      "description": "Username and password. Provide if you choose Basic Auth type",
+      "description": "Credential secret API key",
       "order": 2
     },
     "url": {
       "type": "string",
       "title": "URL",
       "description": "SentinelOne Console URL",
-      "order": 4
+      "order": 3
+    },
+    "role": {
+      "type": "string",
+      "title": "Role",
+      "description": "Type of role",
+      "default": "User role",
+      "enum": [
+        "User role",
+        "Service role"
+      ],
+      "order": 1
     }
   },
   "required": [
-    "authentication_type",
-    "url"
+    "api_key",
+    "url", 
+    "role"
   ],
   "definitions": {
     "credential_secret_key": {
@@ -67,32 +61,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       },
       "required": [
         "secretKey"
-      ]
-    },
-    "credential_username_password": {
-      "id": "credential_username_password",
-      "type": "object",
-      "title": "Credential: Username and Password",
-      "description": "A username and password combination",
-      "properties": {
-        "password": {
-          "type": "string",
-          "title": "Password",
-          "displayType": "password",
-          "description": "The password",
-          "format": "password",
-          "order": 2
-        },
-        "username": {
-          "type": "string",
-          "title": "Username",
-          "description": "The username to log in with",
-          "order": 1
-        }
-      },
-      "required": [
-        "username",
-        "password"
       ]
     }
   }
