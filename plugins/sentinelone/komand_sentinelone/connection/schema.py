@@ -5,8 +5,8 @@ import json
 
 class Input:
     API_KEY = "api_key"
-    URL = "url"
     ROLE = "role"
+    URL = "url"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -21,28 +21,28 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "Credential secret API key",
       "order": 2
     },
-    "url": {
-      "type": "string",
-      "title": "URL",
-      "description": "SentinelOne Console URL",
-      "order": 3
-    },
     "role": {
       "type": "string",
       "title": "Role",
-      "description": "Type of role",
+      "description": "Role of user",
       "default": "User role",
       "enum": [
         "User role",
         "Service role"
       ],
       "order": 1
+    },
+    "url": {
+      "type": "string",
+      "title": "URL",
+      "description": "SentinelOne Console URL",
+      "order": 3
     }
   },
   "required": [
     "api_key",
-    "url", 
-    "role"
+    "role",
+    "url"
   ],
   "definitions": {
     "credential_secret_key": {

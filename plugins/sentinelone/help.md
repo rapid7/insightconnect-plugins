@@ -29,7 +29,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|False|Credential secret API key|
+|api_key|credential_secret_key|None|True|Credential secret API key|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |role|string|User role|True|Role of user|['User role', 'Service role']|User role|
 |url|string|None|True|SentinelOne Console URL|None|https://example.com|
 
@@ -135,7 +135,7 @@ This action is used to get Deep Visibility results from the query that matches t
 |----|----|-------|--------|-----------|----|-------|
 |event_type|string|None|True|Event type for Autocomplete|['Process Exit', 'Process Modification', 'Process Creation', 'Duplicate Process Handle', 'Duplicate Thread Handle', 'Open Remote Process Handle', 'Remote Thread Creation', 'Remote Process Termination', 'Command Script', 'IP Connect', 'IP Listen', 'File Modification', 'File Creation', 'File Scan', 'File Deletion', 'File Rename', 'Pre Execution Detection', 'Login', 'Logout', 'GET', 'OPTIONS', 'POST', 'PUT', 'DELETE', 'CONNECT', 'HEAD', 'DNS Resolved', 'DNS Unresolved', 'Task Register', 'Task Update', 'Task Start', 'Task Trigger', 'Task Delete', 'Registry Key Create', 'Registry Key Rename', 'Registry Key Delete', 'Registry Key Export', 'Registry Key Security Changed', 'Registry Key Import', 'Registry Value Modified', 'Registry Value Create', 'Registry Value Delete', 'Behavioral Indicators', 'Module Load']|Registry Key Create|
 |limit|integer|None|False|Limit number of returned items (1-1000), if no limit is provided returns all the results up to 20,000|None|10|
-|query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|qd94e330ac025d525b5948bdf897b955e|
+|query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|q9de5069c5afe602b2ea0a04b66beb2c0|
 |sub_query|string|None|False|Sub query to run on the data that was already pulled|None|AgentName IS NOT EMPTY|
 
 Example input:
@@ -315,7 +315,7 @@ This action is used to get all Deep Visibility events from a queryId.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |limit|integer|None|False|Limit number of returned items (1-1000), if no limit is provided returns all the results up to 20,000|None|10|
-|query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|qd94e330ac025d525b5948bdf897b955e|
+|query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|q9de5069c5afe602b2ea0a04b66beb2c0|
 |sub_query|string|None|False|Sub query to run on the data that was already pulled|None|AgentName IS NOT EMPTY|
 
 Example input:
@@ -493,7 +493,7 @@ This action is used to stop a Deep Visibility Query by queryId.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|qd94e330ac025d525b5948bdf897b955e|
+|query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|q9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
@@ -527,7 +527,7 @@ This action is used to get that status of a Deep Visibility Query.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|qd94e330ac025d525b5948bdf897b955e|
+|query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|q9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
@@ -565,7 +565,7 @@ This action is used to start a Deep Visibility Query and get the queryId. You ca
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |account_ids|[]string|None|False|List of account IDs to filter by|None|["225494730938491234", "225494730938491235"]|
-|from_date|string|None|True|From date|None|2021-03-01 04:49:26.257525|
+|from_date|string|None|True|From date|None|https://example.com|
 |group_ids|[]string|None|False|List of group IDs to filter by|None|["225494730938491234", "225494730938491235"]|
 |is_verbose|boolean|None|False|Show all fields or just priority fields|None|True|
 |limit|integer|None|False|Limit number of returned items (1-20000)|None|10|
@@ -573,7 +573,7 @@ This action is used to start a Deep Visibility Query and get the queryId. You ca
 |query_type|[]string|None|False|Query search type|None|["events"]|
 |site_ids|[]string|None|False|List of site IDs to filter by|None|["225494730938491234", "225494730938491235"]|
 |tenant|boolean|None|False|Indicates a Global (tenant) scope request|None|True|
-|to_date|string|None|True|Events created before or at this timestamp|None|2021-03-20 04:49:26.257525|
+|to_date|string|None|True|Events created before or at this timestamp|None|https://example.com|
 
 Example input:
 
@@ -630,7 +630,7 @@ This action is used to enable agents that match the filter.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |agent|string|None|False|Agent to perform disable action on. Accepts IP address, MAC address, hostname, UUID or agent ID. Leave empty to perform action on all applicable Agents|None|hostname123|
-|filter|object|None|False|Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents|None|{ "updatedAt__gt": "2019-02-27T04:49:26.257525Z" }|
+|filter|object|None|False|Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents|None|{ "updatedAt__gt": "https://example.com" }|
 |reboot|boolean|None|True|Set true to reboot the endpoint, false to skip rebooting|None|True|
 
 Example input:
@@ -638,9 +638,7 @@ Example input:
 ```
 {
   "agent": "hostname123",
-  "filter": {
-    "updatedAt__gt": "2019-02-27T04:49:26.257525Z"
-  },
+  "filter": "{ \"updatedAt__gt\": \"2019-02-27T04:49:26.257525Z\" }",
   "reboot": true
 }
 ```
@@ -668,9 +666,9 @@ This action is used to disable agents that match the filter.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |agent|string|None|False|Agent to perform disable action on. Accepts IP address, MAC address, hostname, UUID or agent ID. Leave empty to perform action on all applicable Agents|None|hostname123|
-|expiration_time|string|None|False|Agents will be re-enabled after this timestamp|None|2020-02-27 04:49:26.257525|
+|expiration_time|string|None|False|Agents will be re-enabled after this timestamp|None|https://example.com|
 |expiration_timezone|string|Central Standard Time (North America) [CST]|False|Timezone for the expiration timestamp. Set with expiration time|['Australian Central Daylight Saving Time [ACDT]', 'Australian Central Standard Time [ACST]', 'Acre Time [ACT]', 'Atlantic Daylight Time [ADT]', 'Australian Eastern Daylight Saving Time [AEDT]', 'Australian Eastern Standard Time [AEST]', 'Australian Eastern Time [AET]', 'Afghanistan Time [AFT]', 'Alaska Daylight Time [AKDT]', 'Alaska Standard Time [AKST]', 'Alma-Ata Time [ALMT]', 'Amazon Summer Time (Brazil) [AMST]', 'Amazon Time (Brazil) [AMT]', 'Armenia Time [AMT]', 'Anadyr Time [ANAT]', 'Aqtobe Time [AQTT]', 'Argentina Time [ART]', 'Arabia Standard Time [AST]', 'Atlantic Standard Time [AST]', 'Australian Western Standard Time [AWST]', 'Azores Summer Time [AZOST]', 'Azores Standard Time [AZOT]', 'Azerbaijan Time [AZT]', 'Brunei Time [BNT]', 'British Indian Ocean Time [BIOT]', 'Baker Island Time [BIT]', 'Bolivia Time [BOT]', 'Brasilia Summer Time [BRST]', 'Brasilia Time [BRT]', 'Bangladesh Standard Time [BST]', 'Bougainville Standard Time [BST]', 'Bhutan Time [BTT]', 'Central Africa Time [CAT]', 'Cocos Islands Time [CCT]', 'Central Daylight Time (North America) [CDT]', 'Cuba Daylight Time [CDT]', 'Central European Summer Time [CEST]', 'Central European Time [CET]', 'Chatham Daylight Time [CHADT]', 'Chatham Standard Time [CHAST]', 'Choibalsan Standard Time [CHOT]', 'Choibalsan Summer Time [CHOST]', 'Chamorro Standard Time [CHST]', 'Chuuk Time [CHUT]', 'Clipperton Island Standard Time [CIST]', 'Central Indonesia Time [WITA]', 'Cook Island Time [CKT]', 'Chile Summer Time [CLST]', 'Chile Standard Time [CLT]', 'Colombia Summer Time [COST]', 'Colombia Time [COT]', 'Central Standard Time (North America) [CST]', 'China Standard Time [CST]', 'Cuba Standard Time [CST]', 'Central Time [CT]', 'Cape Verde Time [CVT]', 'Christmas Island Time [CXT]', 'Davis Time [DAVT]', 'Dumont dUrville Time [DDUT]', 'AIX-specific equivalent of Central European Time [DFT]', 'Easter Island Summer Time [EASST]', 'Easter Island Standard Time [EAST]', 'East Africa Time [EAT]', 'Ecuador Time [ECT]', 'Eastern Daylight Time (North America) [EDT]', 'Eastern European Summer Time [EEST]', 'Eastern European Time [EET]', 'Eastern Greenland Summer Time [EGST]', 'Eastern Greenland Time [EGT]', 'Eastern Indonesian Time [WIT]', 'Eastern Standard Time (North America) [EST]', 'Further-eastern European Time [FET]', 'Fiji Time [FJT]', 'Falkland Islands Summer Time [FKST]', 'Falkland Islands Time [FKT]', 'Fernando de Noronha Time [FNT]', 'Galapagos Time [GALT]', 'Gambier Islands Time [GAMT]', 'Georgia Standard Time [GET]', 'French Guiana Time [GFT]', 'Gilbert Island Time [GILT]', 'Gambier Island Time [GIT]', 'Greenwich Mean Time [GMT]', 'South Georgia and the South Sandwich Islands Time [GST]', 'Gulf Standard Time [GST]', 'Guyana Time [GYT]', 'Hawaii-Aleutian Daylight Time [HDT]', 'Heure Avancee Europe Centrale French-language name for CEST [HAEC]', 'Hawaii-Aleutian Standard Time [HST]', 'Hong Kong Time [HKT]', 'Heard and McDonald Islands Time [HMT]', 'Hovd Time [HOVT]', 'Indochina Time [ICT]', 'International Day Line West time zone [IDLW]', 'Israel Daylight Time [IDT]', 'Indian Ocean Time [IOT]', 'Iran Daylight Time [IRDT]', 'Irkutsk Time [IRKT]', 'Iran Standard Time [IRST]', 'Indian Standard Time [IST]', 'Irish Standard Time [IST]', 'Israel Standard Time [IST]', 'Japan Standard Time [JST]', 'Kaliningrad Time [KALT]', 'Kyrgyzstan Time [KGT]', 'Kosrae Time [KOST]', 'Krasnoyarsk Time [KRAT]', 'Korea Standard Time [KST]', 'Lord Howe Standard Time [LHST]', 'Lord Howe Summer Time [LHST]', 'Line Islands Time [LINT]', 'Magadan Time [MAGT]', 'Marquesas Islands Time [MART]', 'Mawson Station Time [MAWT]', 'Mountain Daylight Time (North America) [MDT]', 'Middle European Time [MET]', 'Middle European Summer Time [MEST]', 'Marshall Islands Time [MHT]', 'Macquarie Island Station Time [MIST]', 'Marquesas Islands Time [MIT]', 'Myanmar Standard Time [MMT]', 'Moscow Time [MSK]', 'Malaysia Standard Time [MST]', 'Mountain Standard Time (North America) [MST]', 'Mauritius Time [MUT]', 'Maldives Time [MVT]', 'Malaysia Time [MYT]', 'New Caledonia Time [NCT]', 'Newfoundland Daylight Time [NDT]', 'Norfolk Island Time [NFT]', 'Novosibirsk Time [NOVT]', 'Nepal Time [NPT]', 'Newfoundland Standard Time [NST]', 'Newfoundland Time [NT]', 'Niue Time [NUT]', 'New Zealand Daylight Time [NZDT]', 'New Zealand Standard Time [NZST]', 'Omsk Time [OMST]', 'Oral Time [ORAT]', 'Pacific Daylight Time (North America) [PDT]', 'Peru Time [PET]', 'Kamchatka Time [PETT]', 'Papua New Guinea Time [PGT]', 'Phoenix Island Time [PHOT]', 'Philippine Time [PHT]', 'Pakistan Standard Time [PKT]', 'Saint Pierre and Miquelon Daylight Time [PMDT]', 'Saint Pierre and Miquelon Standard Time [PMST]', 'Pohnpei Standard Time [PONT]', 'Pacific Standard Time (North America) [PST]', 'Philippine Standard Time [PST]', 'Palau Time [PWT]', 'Paraguay Summer Time [PYST]', 'Paraguay Time [PYT]', 'Reunion Time [RET]', 'Rothera Research Station Time [ROTT]', 'Sakhalin Island Time [SAKT]', 'Samara Time [SAMT]', 'South African Standard Time [SAST]', 'Solomon Islands Time [SBT]', 'Seychelles Time [SCT]', 'Samoa Daylight Time [SDT]', 'Singapore Time [SGT]', 'Sri Lanka Standard Time [SLST]', 'Srednekolymsk Time [SRET]', 'Suriname Time [SRT]', 'Samoa Standard Time [SST]', 'Singapore Standard Time [SST]', 'Showa Station Time [SYOT]', 'Tahiti Time [TAHT]', 'Thailand Standard Time [THA]', 'French Southern and Antarctic Time [TFT]', 'Tajikistan Time [TJT]', 'Tokelau Time [TKT]', 'Timor Leste Time [TLT]', 'Turkmenistan Time [TMT]', 'Turkey Time [TRT]', 'Tonga Time [TOT]', 'Tuvalu Time [TVT]', 'Ulaanbaatar Summer Time [ULAST]', 'Ulaanbaatar Standard Time [ULAT]', 'Coordinated Universal Time [UTC]', 'Uruguay Summer Time [UYST]', 'Uruguay Standard Time [UYT]', 'Uzbekistan Time [UZT]', 'Venezuelan Standard Time [VET]', 'Vladivostok Time [VLAT]', 'Volgograd Time [VOLT]', 'Vostok Station Time [VOST]', 'Vanuatu Time [VUT]', 'Wake Island Time [WAKT]', 'West Africa Summer Time [WAST]', 'West Africa Time [WAT]', 'Western European Summer Time [WEST]', 'Western European Time [WET]', 'Western Indonesian Time [WIB]', 'West Greenland Summer Time [WGST]', 'West Greenland Time [WGT]', 'Western Standard Time [WST]', 'Yakutsk Time [YAKT]', 'Yekaterinburg Time [YEKT]']|Central Standard Time (North America) [CST]|
-|filter|object|None|False|Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents|None|{ "updatedAt__gt": "2019-02-27T04:49:26.257525Z" }|
+|filter|object|None|False|Filter to apply action on specified agents. Leave empty to perform action on all applicable Agents|None|{ "updatedAt__gt": "https://example.com" }|
 |reboot|boolean|None|True|Set true to reboot the endpoint, false to skip rebooting|None|True|
 
 Example input:
@@ -680,9 +678,7 @@ Example input:
   "agent": "hostname123",
   "expiration_time": "2020-02-27T04:49:26.257525Z",
   "expiration_timezone": "Central Standard Time (North America) [CST]",
-  "filter": {
-    "updatedAt__gt": "2019-02-27T04:49:26.257525Z"
-  },
+  "filter": "{ \"updatedAt__gt\": \"2019-02-27T04:49:26.257525Z\" }",
   "reboot": true
 }
 ```
@@ -717,11 +713,7 @@ Example input:
 ```
 {
   "action": "connect",
-  "filter": {
-    "ids": [
-      "1000000000000000000"
-    ]
-  }
+  "filter": "{\"ids\": [\"1000000000000000000\"]}"
 }
 ```
 
@@ -787,10 +779,10 @@ This action is used to get a list of activities.
 |agent_ids|[]string|None|False|Return activities related to specified agent ids|None|["9000000000000000"]|
 |count_only|boolean|None|False|If true, only total number of items will be returned, without any of the actual objects|None|True|
 |created_at_between|string|None|False|Return activities created within this range (inclusive), example 1514978764288-1514978999999|None|1514978764288-1514978999999|
-|created_at_gt|string|None|False|Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z|None|2020-12-18T18:49:26.257525Z|
-|created_at_gte|string|None|False|Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z|None|2020-12-20T18:49:26.257525Z|
-|created_at_lt|string|None|False|Return activities created before this date in ISO-8601|None|2020-12-20T18:49:26.257525Z|
-|created_at_lte|string|None|False|Return activities created before or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z|None|2020-12-20T18:49:26.257525Z|
+|created_at_gt|string|None|False|Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z|None|https://example.com|
+|created_at_gte|string|None|False|Return activities created after or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z|None|https://example.com|
+|created_at_lt|string|None|False|Return activities created before this date in ISO-8601|None|https://example.com|
+|created_at_lte|string|None|False|Return activities created before or at this date in ISO-8601, example 2020-12-18T18:49:26.257525Z|None|https://example.com|
 |group_ids|[]string|None|False|List of Group IDs|None|["500000000000000000"]|
 |ids|[]string|None|False|List of Activity IDs|None|["800000000000000008"]|
 |include_hidden|boolean|None|False|Include internal activities hidden from display|None|True|
@@ -801,7 +793,7 @@ This action is used to get a list of activities.
 |sort_by|string|createdAt|False|The column to sort the results by|['id', 'activityType', 'createdAt']|createdAt|
 |sort_order|string|asc|False|Sort direction|['asc', 'desc']|asc|
 |threat_ids|[]string|None|False|Return only these activity codes|None|["1"]|
-|user_emails|[]string|None|False|Email of the user who invoked the activity (If applicable)|None|["user@example.com"]|
+|user_emails|[]string|None|False|Email of the user who invoked the activity (If applicable)|None|["https://example.com"]|
 |user_ids|[]string|None|False|The user who invoked the activity (If applicable)|None|["500000000000000003"]|
 
 Example input:
@@ -899,14 +891,6 @@ This action is used to reload an agent module (applies to Windows agents only).
 Example input:
 
 ```
-{
-  "filter": {
-    "ids": [
-      "1000000000000000000"
-    ]
-  },
-  "module": "monitor"
-}
 ```
 
 ##### Output
@@ -1008,7 +992,7 @@ Note that when attempting to unblacklist a SHA1 hash by setting `blacklist_state
 |----|----|-------|--------|-----------|----|-------|
 |blacklist_state|boolean|True|True|True to create blacklist hash, false to unblacklist hash|None|True|
 |description|string|Hash Blacklisted from InsightConnect|False|Description for why the hash is blacklisted|None|Hash Blacklisted from InsightConnect|
-|hash|string|None|True|Create a blacklist item from a SHA1 hash|None|3395856ce81f2b7382dee72602f798b642f14140|
+|hash|string|None|True|Create a blacklist item from a SHA1 hash|None|02699626f388ed830012e5b787640e71c56d42d8|
 
 Example input:
 
@@ -1044,7 +1028,7 @@ This action is used to add hashed content to global blacklist. The input makes u
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|hash|string|None|True|Content hash to add to blacklist|None|3395856ce81f2b7382dee72602f798b642f14140|
+|hash|string|None|True|Content hash to add to blacklist|None|02699626f388ed830012e5b787640e71c56d42d8|
 
 Example input:
 
@@ -1080,7 +1064,7 @@ This action is used to create a threat from an IOC event.
 |----|----|-------|--------|-----------|----|-------|
 |agentId|string|None|True|Agent ID for the slim threat|None|1000000000000000000|
 |groupId|string|None|False|Group ID|None|1000000000000000001|
-|hash|string|None|True|SHA1 hash|None|A94A8FE5CCB19BA61C4C0873D391E987982FBBD3|
+|hash|string|None|True|SHA1 hash|None|9de5069c5afe602b2ea0a04b66beb2c0982FBBD3|
 |note|string|None|False|Note|None|Note|
 |path|string|None|False|Path|None|path|
 
@@ -1487,7 +1471,7 @@ This action is used to isolate (quarantine) endpoint from the network.
 |agent|string|None|True|Agent to perform quarantine action on. Accepts IP address, MAC address, hostname, UUID or agent ID|None|hostname123|
 |case_sensitive|boolean|True|True|Looks up the specified Agent in a case-sensitive manner. Setting this value to false may result in longer run times and unintended results|None|True|
 |quarantine_state|boolean|None|True|True to quarantine host, false to unquarantine host|None|True|
-|whitelist|[]string|None|False|This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs|None|["198.51.100.100", "hostname123", "901345720792880606", "28db47168fa54f89aeed99769ac8d4dc"]|
+|whitelist|[]string|None|False|This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs|None|["https://example.com", "hostname123", "901345720792880606", "9de5069c5afe602b2ea0a04b66beb2c0"]|
 
 Example input:
 
@@ -1989,7 +1973,7 @@ Example output:
 To convert `threat` into an array use Type Converter Plugin
 
 # Version History
-
+* 8.0.0 - Added Service role (API only role) authentication | Removed Basic Authentication
 * 7.1.0 - Update for Blacklist action: Fix for unblocked action | Update for Quarantine action: unification of the output data when action fails | Add troubleshooting information about use Type Converter | Mark as Benign action: update description 
 * 7.0.0 - Add new actions Update Analyst Verdict and Update Incident Status | Fix Get Agent Details and Search Agents actions to handle more response scenarios | Add option to authentication with API key
 * 6.2.0 - New actions Create Query, Get Query Status, Cancel Running Query, Get Events, Get Events By Type
@@ -2016,7 +2000,8 @@ To convert `threat` into an array use Type Converter Plugin
 * 1.0.0 - Initial plugin
 
 # Links
-
+* [SentinelOne Product Page](https://www.sentinelone.com/)
+* 
 ## References
 
 * [SentinelOne Product Page](https://www.sentinelone.com/)
