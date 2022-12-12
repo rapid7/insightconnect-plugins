@@ -1048,4 +1048,38 @@ actions:
         type: string
         example: "The scan could not be stopped"
         required: false
-  
+  vuln_search:
+    title: Vulnerability Search
+    description: Search for vulnerabilities using filtered vulnerability search
+    input:
+      size:
+        title: Size
+        description: The number of vulnerabilities to retrieve. If blank then will default to 200 vulnerabilities returned, the maximum limit is 500 vulnerabilities
+        type: number
+        required: false
+        default: 200
+        example: 100
+      sort_criteria:
+        title: Sort Criteria
+        description: JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)
+        type: object
+        required: false
+        example: "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
+      asset_criteria:
+        title: Asset Criteria
+        description: Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames
+        type: string
+        example: "asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'"
+        required: false
+      vuln_criteria:
+        title: Vulnerability Criteria
+        description: Vulnerability criteria to filter by
+        type: string
+        example: "vulnerability.categories IN ['example']"
+        required: false
+    output:
+      vulnerabilities:
+        title: Vulnerabilities
+        description: Vulnerabilities associated with the asset
+        type: '[]vulnerability'
+        required: true
