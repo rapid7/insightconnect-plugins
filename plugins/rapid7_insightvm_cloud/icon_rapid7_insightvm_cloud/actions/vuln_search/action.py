@@ -6,13 +6,10 @@ from .schema import VulnSearchInput, VulnSearchOutput, Input, Output, Component
 
 
 class VulnSearch(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='vuln_search',
-            description=Component.DESCRIPTION,
-            input=VulnSearchInput(),
-            output=VulnSearchOutput())
+            name="vuln_search", description=Component.DESCRIPTION, input=VulnSearchInput(), output=VulnSearchOutput()
+        )
 
     def run(self, params={}):
         asset_crit = params.get(Input.ASSET_CRITERIA)
