@@ -16,6 +16,7 @@ from komand_sentinelone.util.constants import (
     API_TOKEN_FIELD,
     USER_ROLE_HEADER_TOKEN_FIELD,
     SERVICE_ROLE_HEADER_TOKEN_FIELD,
+    SERVICE_USER_ROLE
 )
 
 
@@ -65,7 +66,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def get_auth_token(self) -> Tuple[str, str]:
         version = "2.1"
-        if self.role == 'Service role':
+        if self.role == SERVICE_USER_ROLE:
             return self.api_key, version
         request_url = self._prepare_auth_url_based_on_version(version)
         request_data = self._prepare_body_for_auth_request()
@@ -122,7 +123,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             )
 
     def make_token_header(self):
-        if self.role == 'Service role':
+        if self.role == SERVICE_USER_ROLE:
             token_field = SERVICE_ROLE_HEADER_TOKEN_FIELD
         else:
             token_field = USER_ROLE_HEADER_TOKEN_FIELD
