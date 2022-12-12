@@ -5,6 +5,9 @@ The [URLScan](https://urlscan.io/) plugin uses URLScan to analyze URLs for malic
 This plugin utilizes the [URLScan API](https://urlscan.io/about-api/) to search for URLs and retrieve reports
 on potential malicous indicators.
 
+For the custom input type within the search action, please refer to the searchable fields within the 
+[Search API](https://urlscan.io/docs/search/)
+
 # Key Features
 
 * Launch a scan on a URL
@@ -823,6 +826,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.1.1 - Fix issue: Search - Add PluginException for 400 response code
 * 4.1.0 - Cloud enabled
 * 4.0.2 - Fix error handling while submit URL which is in blacklist of URLScan API | Update SDK to version 4
 * 4.0.1 - Fix issue with not compatible types in custom output type for Get Scan Result action | Add unit tests for Get Scan Result | Refactor existing unit tests
@@ -851,3 +855,4 @@ _This plugin does not contain any troubleshooting information._
 
 * [Urlscan.io](https://urlscan.io/)
 * [Urlscan API](https://urlscan.io/about-api/)
+* [Urlscan Search API](https://urlscan.io/docs/search/)

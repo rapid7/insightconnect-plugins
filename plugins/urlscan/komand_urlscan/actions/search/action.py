@@ -8,6 +8,70 @@ import json
 import validators
 
 
+def format_query(query: str, input_type: str) -> str:
+    """
+    A function to handle properly format the query after
+    determining the input type
+
+    :param query: Query to be formatted
+    :type query: str
+    :param input_type: URL/Domain/Custom
+    :type input_type: str
+
+    :return search_query: Formatted query used in URL scanning
+    :rtype: str
+    """
+
+    # If input_type is Custom
+    if input_type == "Custom":
+        search_query = query
+
+    # If input_type is URL, determine if the query is a valid URL,
+    # then append page.url: to the query
+    elif input_type == "URL":
+        if not validators.url(query):
+            raise PluginException(
+                cause="URL entered as input type, but not provided in query.",
+                assistance="Please check URL and try again.",
+            )
+        search_query = f'page.url: "{query}"'
+
+    # If input_type is domain, check if it is a valid domain,
+    # then append page.domain: to the query
+    else:
+        if not validators.domain(query):
+            raise PluginException(
+                cause="Domain entered as input type, but not provided in query.",
+                assistance="Please check domain address and try again.",
+            )
+        search_query = f'page.domain:"{query}"'
+
+    return search_query
+
+
+def get_response(url: str, headers: dict) -> requests.models.Response:
+    """
+    This method runs a GET request and returns a response.
+    It also handles all exceptions, and specifically handles 400s
+    to prevent the plugin from returning a successful but empty
+    response.
+    :param url: Input URL for the request
+    :param headers:
+    :return response: The full HTTP response
+    """
+    try:
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()
+    except requests.exceptions.HTTPError as error:
+        status_code = error.response.status_code
+        if status_code == 400:
+            raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
+    except Exception as error:
+        raise PluginException(cause="Something went wrong during the request.", assistance=error)
+
+    return response
+
+
 class Search(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -18,25 +82,12 @@ class Search(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+
         input_type = params.get(Input.INPUT_TYPE, "Custom")
         query = params.get(Input.Q)
         sort = params.get(Input.SORT, "_score")
-        if input_type == "Custom":
-            search_query = query
-        elif input_type == "URL":
-            if not validators.url(query):
-                raise PluginException(
-                    cause="URL entered as input type, but not provided in query.",
-                    assistance="Please check URL and try again.",
-                )
-            search_query = f'page.url: "{query}"'
-        else:
-            if not validators.domain(query):
-                raise PluginException(
-                    cause="Domain entered as input type, but not provided in query.",
-                    assistance="Please check domain address and try again.",
-                )
-            search_query = f'page.domain:"{query}"'
+
+        search_query = format_query(query=query, input_type=input_type)
 
         search_after = None
         results = []
@@ -53,11 +104,10 @@ class Search(insightconnect_plugin_runtime.Action):
 
             url = f'{self.connection.server}/search/?{"&".join(query_params)}'
             self.logger.info(url)
+            headers = self.connection.headers
+            search_query = format_query(query=query, input_type=input_type)
 
-            try:
-                response = requests.get(url, headers=self.connection.headers)
-            except Exception as e:
-                raise PluginException(cause="Something went wrong during the request.", assistance=e)
+            response = get_response(url=url, headers=headers)
 
             try:
                 responses = response.json()
