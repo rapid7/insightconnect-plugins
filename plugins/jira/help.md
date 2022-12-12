@@ -28,9 +28,10 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|Jira API key when connecting to Jira Cloud or Jira user password when connecting to on-prem Jira server|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|url|string|https://example.atlassian.net|False|Jira URL|None|https://example.atlassian.net|
-|user|string|None|True|Jira user email when connecting to Jira Cloud or Jira username when connecting to on-prem Jira server|None|user@example.com|
+|api_key|credential_secret_key|None|False|Jira API key when connecting to Jira Cloud or Jira user password when connecting to on-prem Jira server|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|pat|credential_secret_key|None|False|Jira Personal Access Token, only works with the on-prem Jira Server|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|url|string|https://example.com|False|Jira URL|None|https://example.com|
+|user|string|None|False|Jira user email when connecting to Jira Cloud or Jira username when connecting to on-prem Jira server|None|https://example.com|
 
 Example input:
 
@@ -70,9 +71,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|issues|[]issue|False|The list of found issues|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|issues|[]issue|False|The list of found issues|[{"id": 1}, {"id": 2}]|
 
 Example output:
 
@@ -120,7 +121,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|id|string|False|ID of attachment|
+|id|string|False|ID of attachment|1234-abcd|
 
 Example output:
 
@@ -147,35 +148,18 @@ Example input:
 
 ```
 {
-  "comment": "Transition executed by InsightConnect",
-  "fields": "{ \"fields\": { \"project\": { \"key\": \"TEST\" }, \"summary\": \"Test Ticket\", \"description\": \"Test ticket created from InsightConnect\", \"issuetype\": { \"name\": \"Story\" } } }",
+  "comment": "transition executed by insightconnect",
   "id": 10001,
   "transition": 31
 }
 ```
 
-Example fields input:
-
-```
-{
-  "fields": {
-    "project": {
-      "key": "TEST"
-    },
-    "summary": "Test Ticket",
-    "description": "Test ticket created from InsightConnect",
-    "issuetype": {
-      "name": "Story"
-    }
-  }
-}
-```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|True if successful|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|True if successful|True|
 
 Example output:
 
@@ -207,9 +191,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|True if successful|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|True if successful|True|
 
 Example output:
 
@@ -241,9 +225,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|True if successful|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|True if successful|True|
 
 Example output:
 
@@ -275,36 +259,16 @@ Example input:
 {
   "attachment_bytes": "TVqQAAMAAAAEAAAA//8AALgAAAAAAA...",
   "attachment_filename": "document.pdf",
-  "description": "Successfully connect Jira to InsightConnect to automate ticket management",
-  "fields": "{ \"fields\": { \"project\": { \"key\": \"TEST\" }, \"summary\": \"Test Ticket\", \"description\": \"Test ticket created from InsightConnect\", \"issuetype\": { \"name\": \"Story\" } } }",
-  "project": "TEST",
-  "summary": "Connect Jira to InsightConnect",
-  "type": "Story"
+  "description": "Successfully connect Jira to InsightConnect to automate ticket management"
 }
 ```
 
-Example `fields` input:
-
-```
-{
-  "fields": {
-    "project": {
-      "key": "TEST"
-    },
-    "summary": "Test Ticket",
-    "description": "Test ticket created from InsightConnect",
-    "issuetype": {
-      "name": "Story"
-    }
-  }
-}
-```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|issue|issue|False|Created issue|
+|issue|issue|False|Created issue|{"id": 3}|
 
 Example output:
 
@@ -356,7 +320,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|boolean|False|True if successful|
+|success|boolean|False|True if successful|True|
 
 Example output:
 
@@ -388,9 +352,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|True if successful|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|True if successful|True|
 
 Example output:
 
@@ -422,35 +386,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|users|[]user|False|The list of found users|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|users|[]user|False|The list of found users|[{"id": 1}]|
 
-Example output for on-premise server:
-
-```
-{
-  "users": [{
-      "name": "mrinehart",
-      "email_address": "userexample.com",
-      "display_name": "User1",
-      "active": true
-  }]
-}
-```
-
-Example output for cloud server:
-
-```
-{
-  "users": [{
-    "display_name": "user1",
-    "active": true,
-    "email_address": "user@example.com",
-    "account_id": "5ebaff48acdf9c0b917dac88"
-  }]
-}
-```
 
 Example output:
 
@@ -491,7 +430,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|comment_id|string|False|Comment ID|
+|comment_id|string|False|Comment ID|1234-abcd|
 
 Example output:
 
@@ -525,8 +464,8 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|found|boolean|False|True if found|
-|issue|issue|False|Found issue|
+|found|boolean|False|True if found|True|
+|issue|issue|False|Found issue|{"id": 2}|
 
 Example output:
 
@@ -767,44 +706,46 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|comments|[]comment|False|Comments list|
-|count|integer|False|Count of comments found|
+|comments|[]comment|False|Comments list|[{"id": 1}, {"id": 2}]|
+|count|integer|False|Count of comments found|3|
 
 Example output:
 
 ```
 {
-  "count": 1,
-  "comments": [{
-      "self": "https://example.atlassian.net/rest/api/2/issue/10001/comment/10000",
-      "id": "10000",
-      "author": {
-          "name": "admin",
-          "email_address": "user@example.com",
-          "display_name": "User1",
-          "active": true
+  "count":1,
+  "comments":[
+    {
+      "self":"https://example.atlassian.net/rest/api/2/issue/10001/comment/10000",
+      "id":"10000",
+      "author":{
+        "name":"admin",
+        "email_address":"user@example.com",
+        "display_name":"User1",
+        "active":true
       },
-      "body": "Needs additional testing",
-      "updateAuthor": {
-          "self": "https://example.atlassian.net/rest/api/2/user?username=admin",
-          "name": "admin",
-          "key": "admin",
-          "accountId": "4ac123f3f8412345a10cbaa0",
-          "emailAddress": "user@example.com",
-          "avatarUrls": {
-              "48x48": "",
-              "24x24": "",
-              "16x16": "",
-              "32x32": ""
-          },
-          "displayName": "User1",
-          "active": true,
-          "timeZone": "America/Chicago"
+      "body":"Needs additional testing",
+      "updateAuthor":{
+        "self":"https://example.atlassian.net/rest/api/2/user?username=admin",
+        "name":"admin",
+        "key":"admin",
+        "accountId":"4ac123f3f8412345a10cbaa0",
+        "emailAddress":"user@example.com",
+        "avatarUrls":{
+          "48x48":"",
+          "24x24":"",
+          "16x16":"",
+          "32x32":""
+        },
+        "displayName":"User1",
+        "active":true,
+        "timeZone":"America/Chicago"
       },
-      "created": "2018-10-29T13:06:31.250-0500",
-      "updated": "2018-10-29T13:06:31.250-0500",
-      "jsdPublic": true
-  }]
+      "created":"2018-10-29T13:06:31.250-0500",
+      "updated":"2018-10-29T13:06:31.250-0500",
+      "jsdPublic":true
+    }
+  ]
 }
 ```
 
@@ -824,63 +765,20 @@ For `fields` examples, see https://developer.atlassian.com/server/jira/platform/
 |summary|string|None|False|Summary field on the issue|None|Connect Jira to InsightConnect for Multiple Teams|
 |update|object|None|False|An object that contains update operations to apply, see examples at https://developer.atlassian.com/server/jira/platform/updating-an-issue-via-the-jira-rest-apis-6848604/|None|{ "update": { "labels": [ {"add": "newlabel"} ] } }|
 
-Example input:
-
-Making an update to custom fields in the `fields` parameter:
-
-```
-{
-  "customfield_10200" : {"value" : "Test 1"},
-  "customfield_10201" :{"value" : "Value 1"}
-}
-```
-
-Update the assignee in the `field` parameter
-
-```
-{
-   "assignee":{"name":"harry"}
-}
-```
-
-Using the `update` parameter
-
-```
-{
-  "components" : [{"add" : {"name" : "Engine"}}]
-}
-```
-
-Updating multiple fields with the `update` parameter
-
-```
-{
-  "components" : [{"remove" : {"name" : "Trans/A"}}, {"add" : {"name" : "Trans/M"}}],
-  "assignee" : [{"set" : {"name" : "harry"}}],
-  "summary" : [{"set" : "Big block Chevy"}]
-}
-```
-
-Additional information can be found [here](https://developer.atlassian.com/server/jira/platform/jira-rest-api-example-edit-issues-6291632/)
 
 Example input:
 
 ```
 {
-  "description": "Update ticket with additional Jira information for others teams wanting to leverage InsightConnect",
-  "fields": "{ \"fields\": { \"project\": { \"key\": \"TEST\" }, \"summary\": \"Test Ticket\", \"description\": \"Test ticket created from InsightConnect\", \"issuetype\": { \"name\": \"Story\" } } }",
-  "id": "TEST-1",
-  "notify": true,
-  "summary": "Connect Jira to InsightConnect for Multiple Teams",
-  "update": "{ \"update\": { \"labels\": [ {\"add\": \"newlabel\"} ] } }"
+  "description": "Update ticket with additional Jira information for others teams wanting to leverage InsightConnect"
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|If changes were successful|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|If changes were successful|True|
 
 Example output:
 
@@ -920,7 +818,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|issue|issue|False|New or updated issue|
+|issue|issue|False|New or updated issue|{"id": 5}|
 
 Example output:
 
@@ -977,7 +875,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|issue|issue|False|New issue|
+|issue|issue|False|New issue|{"id": 4}|
 
 Example output:
 
@@ -1206,6 +1104,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 6.3.0 - Add PAT authentication scheme for Jira on-prem
 * 6.2.1 - Fix issue in Find Issues action where normalize_user has an attribute error for labels | Changed Dockerfile to don't use slim version
 * 6.2.0 - Fix issue in Get Comments actions where normalize_user is missing the is_cloud argument from client connection
 * 6.1.1 - Fix issue where attachments added in tickets were empty
@@ -1243,6 +1142,8 @@ _This plugin does not contain any troubleshooting information._
 * 0.1.0 - Initial plugin
 
 # Links
+
+* [Jira](https://www.atlassian.com/software/jira)
 
 ## References
 

@@ -5,6 +5,7 @@ import json
 
 class Input:
     API_KEY = "api_key"
+    PAT = "pat"
     URL = "url"
     USER = "user"
     
@@ -21,6 +22,12 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "Jira API key when connecting to Jira Cloud or Jira user password when connecting to on-prem Jira server",
       "order": 3
     },
+    "pat": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "Personal Access Token",
+      "description": "Jira Personal Access Token, only works with the on-prem Jira Server",
+      "order": 4
+    },
     "url": {
       "type": "string",
       "title": "URL",
@@ -35,10 +42,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "order": 2
     }
   },
-  "required": [
-    "api_key",
-    "user"
-  ],
   "definitions": {
     "credential_secret_key": {
       "id": "credential_secret_key",
