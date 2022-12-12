@@ -42,6 +42,41 @@ Example input:
 
 ### Actions
 
+#### Vulnerability Search
+
+This action is used to search for vulnerabilities using filtered vulnerability search.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|asset_criteria|string|None|False|Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames|None|https://example.com = 2001:db8:1:1:1:1:1:1 || https://example.com STARTS WITH 'example'|
+|size|number|200|False|The number of vulnerabilities to retrieve. If blank then will default to 200 vulnerabilities returned, the maximum limit is 500 vulnerabilities|None|100|
+|sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
+|vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|https://example.com IN ['example']|
+
+Example input:
+
+```
+{
+  "asset_criteria": "asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'",
+  "size": 100,
+  "sort_criteria": "{'risk-score': 'asc', 'criticality-tag': 'desc'}",
+  "vuln_criteria": "vulnerability.categories IN ['example']"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|vulnerabilities|[]vulnerability|True|Vulnerabilities associated with the asset|
+
+Example output:
+
+```
+```
+
 #### Stop Scan
 
 This action is used to stop a scan in progress.
@@ -85,7 +120,7 @@ This action is used to start an InsightVM scan of previously scanned devices.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |asset_ids|[]string|None|False|IDs of the assets to scan|None|["abc978-5678-abc-a5a94a1234b8-asset"]|
-|hostnames|[]string|None|False|List of hostnames to scan|None|["rapid7.com"]|
+|hostnames|[]string|None|False|List of hostnames to scan|None|["https://example.com"]|
 |ips|[]string|None|False|List of IPv4 or IPv6 addresses to scan|None|["2001:db8:1:1:1:1:1:1"]|
 |name|string|None|True|The name of the scan|None|test cloud scan|
 
@@ -141,10 +176,10 @@ This action is used to search for assets using filtered asset search.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_criteria|string|None|False|Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames|None|asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'|
+|asset_criteria|string|None|False|Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames|None|https://example.com = 2001:db8:1:1:1:1:1:1 || https://example.com STARTS WITH 'example'|
 |size|number|200|False|The number of assets to retrieve. If blank then will default to 200 assets returned, the maximum limit is 500 assets|None|100|
 |sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
-|vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|vulnerability.categories IN ['example']|
+|vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|https://example.com IN ['example']|
 
 Example input:
 

@@ -44,6 +44,8 @@ def main():
 
             self.add_action(actions.StopScan())
 
+            self.add_action(actions.VulnSearch())
+
 
     """Run plugin"""
     cli = insightconnect_plugin_runtime.CLI(ICONRapid7InsightvmCloud())

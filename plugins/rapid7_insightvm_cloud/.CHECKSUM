@@ -1,6 +1,6 @@
 {
-	"spec": "8a1dbef4a73fcb545973a9592ea8b29b",
-	"manifest": "1b89058d0e3742caa117d1c715198954",
+	"spec": "b90c00172de7a921c320aaa0050efa2d",
+	"manifest": "84e274c3f57e36e120cb8a6b311ae3f0",
 	"setup": "7fcd5a9f267e8befdd9bd90d2793694d",
 	"schemas": [
 		{
@@ -22,6 +22,10 @@
 		{
 			"identifier": "stop_scan/schema.py",
 			"hash": "67e09984958f9e98d6dfc4656b997ea0"
+		},
+		{
+			"identifier": "vuln_search/schema.py",
+			"hash": "1d4859f2b43bce6aa41e2200c962a375"
 		},
 		{
 			"identifier": "connection/schema.py",
