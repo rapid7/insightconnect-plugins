@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Azure AD Admin"
 Vendor = "rapid7"
-Version = "3.0.1"
+Version = "4.0.0"
 Description = "Perform administrative operations in Azure AD"
 
 
@@ -39,6 +39,8 @@ def main():
             self.add_action(actions.AddUserToGroup())
 
             self.add_action(actions.AddUserToGroupsById())
+
+            self.add_action(actions.ChangeUserPassword())
 
             self.add_action(actions.CreateUser())
 
