@@ -244,7 +244,7 @@ This action is used to start an InsightVM scan of previously scanned devices.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |asset_ids|[]string|None|False|IDs of the assets to scan|None|["abc978-5678-abc-a5a94a1234b8-asset"]|
-|hostnames|[]string|None|False|List of hostnames to scan|None|["https://example.com"]|
+|hostnames|[]string|None|False|List of hostnames to scan|None|["rapid7.com"]|
 |ips|[]string|None|False|List of IPv4 or IPv6 addresses to scan|None|["2001:db8:1:1:1:1:1:1"]|
 |name|string|None|True|The name of the scan|None|test cloud scan|
 
@@ -300,10 +300,10 @@ This action is used to search for assets using filtered asset search.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|asset_criteria|string|None|False|Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames|None|https://example.com = 2001:db8:1:1:1:1:1:1 || https://example.com STARTS WITH 'example'|
+|asset_criteria|string|None|False|Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames|None|asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'|
 |size|number|200|False|The number of assets to retrieve. If blank then will default to 200 assets returned, the maximum limit is 500 assets|None|100|
 |sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
-|vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|https://example.com IN ['example']|
+|vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|vulnerability.categories IN ['example']|
 
 Example input:
 
@@ -1162,6 +1162,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.1 - Add vulnerability search action
 * 3.1.0 - Add Cloud enablement to plugin | Updated exception information and error handling | Made status code output for Stop Scan and Get Scan actions more exact | Fix bug relating to empty inputs being passed in request body
 * 3.0.0 - Changed output of Get Asset action to include vulnerabilities properly
 * 2.2.0 - Added ability to include vulnerabilities on Get Asset action | API call update
