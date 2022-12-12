@@ -111,21 +111,6 @@ Example output:
                     "href": "http://www.example.com",
                     "id": "http://www.example.com",
                     "source": "url"
-                },
-                {
-                    "href": "http://www.example.com",
-                    "id": "12345",
-                    "source": "bid"
-                },
-                {
-                    "href": "http://example.com/CVE-1234-5467",
-                    "id": "CVE-1234-5467",
-                    "source": "cve"
-                },
-                {
-                    "href": "http://www.example.com/thing.pdf",
-                    "id": "http://www.example.com/thing.pdf",
-                    "source": "url"
                 }
             ],
             "malware_kits": [],
@@ -177,11 +162,6 @@ Example output:
                     "href": "http://www.example.com",
                     "id": "http://www.example.com",
                     "source": "url"
-                },
-                {
-                    "href": "http://www.example.com/12345",
-                    "id": "12345",
-                    "source": "bid"
                 }
             ],
             "malware_kits": [],
