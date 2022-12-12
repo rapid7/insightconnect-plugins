@@ -7,7 +7,7 @@ vendor: rapid7
 support: rapid7
 status: []
 description: Automate the creation, search and management of issues, users, and alerting for Jira Software, Jira Server, and Jira ServiceDesk
-version: 6.2.1
+version: 6.3.0
 supported_versions: ["Jira Server 6.0", "Jira (Cloud)", "Jira ServiceDesk (Cloud)"]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/jira
@@ -134,13 +134,19 @@ connection:
     title: User
     type: string
     description: Jira user email when connecting to Jira Cloud or Jira username when connecting to on-prem Jira server
-    required: true
+    required: false
     example: user@example.com
   api_key:
     title: API Key
     type: credential_secret_key
     description: Jira API key when connecting to Jira Cloud or Jira user password when connecting to on-prem Jira server
-    required: true
+    required: false
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
+  pat:
+    title: Personal Access Token
+    type: credential_secret_key
+    description: Jira Personal Access Token, only works with the on-prem Jira Server
+    required: false
     example: 9de5069c5afe602b2ea0a04b66beb2c0
 actions:
   transition_issue:
@@ -178,6 +184,7 @@ actions:
         type: boolean
         description: True if successful
         required: false
+        example: true
   find_issues:
     title: Find Issues
     description: Search for issues
@@ -208,6 +215,7 @@ actions:
         type: '[]issue'
         required: false
         description: The list of found issues
+        example: '[{"id": 1}, {"id": 2}]'
   assign_issue:
     title: Assign Issue
     description: Assign an issue to a user
@@ -230,6 +238,7 @@ actions:
         type: boolean
         description: True if successful
         required: false
+        example: true
   label_issue:
     title: Label Issue
     description: Label issue
@@ -252,6 +261,7 @@ actions:
         type: boolean
         description: True if successful
         required: false
+        example: true
   get_comments:
     title: Get Comments
     description: Retrieve all comments on an issue
@@ -268,11 +278,13 @@ actions:
         type: integer
         description: Count of comments found
         required: false
+        example: 3
       comments:
         title: Comments
         type: '[]comment'
         description: Comments list
         required: false
+        example: '[{"id": 1}, {"id": 2}]'
   comment_issue:
     title: Comment Issue
     description: Comment on an issue
@@ -295,6 +307,7 @@ actions:
         type: string
         description: Comment ID
         required: false
+        example: "1234-abcd"
   get_issue:
     title: Get Issue
     description: Retrieve an issue
@@ -318,11 +331,13 @@ actions:
         type: boolean
         description: True if found
         required: false
+        example: true
       issue:
         title: Issue
         type: issue
         description: Found issue
         required: false
+        example: '{"id": 2}'
   find_users:
     title: Find Users
     description: Search for a set of users
@@ -346,6 +361,7 @@ actions:
         type: '[]user'
         required: false
         description: The list of found users
+        example: '[{"id": 1}]'
   delete_user:
     title: Delete User
     description: Delete a user account
@@ -368,6 +384,7 @@ actions:
         type: boolean
         description: True if successful
         required: false
+        example: true
   create_user:
     title: Create User
     description: Create a user account
@@ -406,6 +423,7 @@ actions:
         type: boolean
         description: True if successful
         required: false
+        example: true
   attach_issue:
     title: Add Attachment to Issue
     description: Add an attachment to an issue in Jira
@@ -434,6 +452,7 @@ actions:
         type: string
         description: ID of attachment
         required: false
+        example: "1234-abcd"
   create_issue:
     title: Create Issue
     description: Create an issue in Jira
@@ -490,6 +509,7 @@ actions:
         type: issue
         description: Created issue
         required: false
+        example: '{"id": 3}'
   edit_issue:
     title: Edit Issue
     description: Edit an issue within Jira
@@ -537,6 +557,7 @@ actions:
         description: If changes were successful
         type: boolean
         required: false
+        example: true
 triggers:
   new_issue:
     title: New Issue
@@ -574,6 +595,7 @@ triggers:
         type: issue
         description: New issue
         required: false
+        example: '{"id": 4}'
   monitor_issues:
     title: Monitor Issues
     description: Watches for newly-created or updated issues
@@ -610,3 +632,4 @@ triggers:
         type: issue
         description: New or updated issue
         required: false
+        example: '{"id": 5}'
