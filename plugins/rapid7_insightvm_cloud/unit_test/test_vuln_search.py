@@ -42,14 +42,14 @@ class TestVulnSearch(TestCase):
                 Input.VULN_CRITERIA: self.params.get("vuln_criteria"),
             }
         )
-        expected = Utils.read_file_to_dict("expected_responses/asset_search.json.resp")
+        expected = Utils.read_file_to_dict("expected_responses/vuln_search.json.resp")
         self.assertEqual(expected, actual)
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
     def test_vuln_search_no_input(self, _mock_req):
         actual = self.action.run()
-        expected = Utils.read_file_to_dict("expected_responses/asset_search.json.resp")
+        expected = Utils.read_file_to_dict("expected_responses/vuln_search.json.resp")
         self.assertEqual(expected, actual)
 
     # test finding event via all inputs
@@ -69,7 +69,7 @@ class TestVulnSearch(TestCase):
         data = Utils.read_file_to_dict("expected_responses/asset_search_invalid_asset_criteria.json.resp")
         self.assertEqual(cause, context.exception.cause)
         self.assertEqual(assistance, context.exception.assistance)
-        self.assertEqual(data, context.exception.data)
+        self.assertEqual(str(data), context.exception.data)
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
@@ -88,7 +88,7 @@ class TestVulnSearch(TestCase):
         data = Utils.read_file_to_dict("expected_responses/asset_search_invalid_vuln_criteria.json.resp")
         self.assertEqual(cause, context.exception.cause)
         self.assertEqual(assistance, context.exception.assistance)
-        self.assertEqual(data, context.exception.data)
+        self.assertEqual(str(data), context.exception.data)
 
     @patch("requests.request", side_effect=mock_request)
     def test_vuln_search_invalid_secret_key(self, _mock_req):
