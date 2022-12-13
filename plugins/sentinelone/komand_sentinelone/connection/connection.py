@@ -16,7 +16,7 @@ from komand_sentinelone.util.constants import (
     API_TOKEN_FIELD,
     CONSOLE_USER_HEADER_TOKEN_FIELD,
     SERVICE_USER_HEADER_TOKEN_FIELD,
-    SERVICE_USER_TYPE
+    SERVICE_USER_TYPE,
 )
 
 
@@ -56,7 +56,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         self.token, self.api_version = self.get_auth_token()
         self.client = SentineloneAPI(self.url, self.make_token_header())
-        self.logger.info("Token: " + "*************" + str(self.token[len(self.token) - 5: len(self.token)]))
+        self.logger.info("Token: " + "*************" + str(self.token[len(self.token) - 5 : len(self.token)]))
 
     @staticmethod
     def _get_start_index(url):
