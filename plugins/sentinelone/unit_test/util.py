@@ -11,6 +11,7 @@ import logging
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_sentinelone.connection.schema import Input
+from komand_sentinelone.util.constants import CONSOLE_USER_TYPE
 
 
 class Util:
@@ -25,8 +26,7 @@ class Util:
         else:
             params = {
                 Input.URL: "https://rapid7.com",
-                Input.AUTHENTICATION_TYPE: "Basic Auth",
-                Input.BASIC_AUTH_CREDENTIALS: {"username": "username", "password": "password"},
+                Input.USER_TYPE: CONSOLE_USER_TYPE,
                 Input.API_KEY: {"secretKey": "test"},
             }
         default_connection.connect(params)
@@ -65,7 +65,7 @@ class Util:
 
                 raise HTTPError("Bad response", response=self)
 
-        if args[0] == "https://rapid7.com/web/api/v2.1/users/login":
+        if args[0] == "https://rapid7.com/web/api/v2.1/users/login/by-api-token":
             return MockResponse("get_token", 200)
         elif args[0] == "https://rapid7.com/web/api/v2.1/agents?networkInterfaceInet__contains=10.10.10.10":
             return MockResponse("none_in_location", 200)
@@ -90,7 +90,7 @@ class Util:
         elif args[0] == "https://rapid7.com/web/api/v2.1/agents?computerName=hostname_disabled_error":
             return MockResponse("get_agent_details_disabled_error", 200)
         elif args[1] == "https://rapid7.com/web/api/v2.1/threats/fetch-file":
-            return MockResponse("activities_list", 200)
+            return MockResponse("threats_fetch_file", 200)
         elif args[1] == "https://rapid7.com/web/api/v2.1/activities":
             return MockResponse("activities_list", 200)
         elif args[1] == "https://rapid7.com/web/api/v2.1/activities/types":

@@ -12,12 +12,11 @@ from komand_sentinelone.util.api import SentineloneAPI
 from komand_sentinelone.util.helper import Helper
 from .schema import ConnectionSchema, Input
 from komand_sentinelone.util.constants import (
-    BASIC_AUTH,
-    API_TOKEN_AUTH,
-    USERNAME_FIELD,
     DATA_FIELD,
-    PASSWORD_FIELD,
     API_TOKEN_FIELD,
+    CONSOLE_USER_HEADER_TOKEN_FIELD,
+    SERVICE_USER_HEADER_TOKEN_FIELD,
+    SERVICE_USER_TYPE,
 )
 
 
@@ -25,13 +24,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.client = None
-        self.username = None
-        self.password = None
         self.url = None
         self.api_version = None
         self.api_key = None
         self.token = None
-        self.authentication_type = None
+        self.user_type = None
+        self.header = None
 
     def connect(self, params={}):
         """
@@ -44,11 +42,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
           blah = self.connection.blah
         """
         self.logger.info("Connect: Connecting...")
-        self.authentication_type = params.get(Input.AUTHENTICATION_TYPE)
-        self.username = params.get(Input.BASIC_AUTH_CREDENTIALS).get("username")
-        self.password = params.get(Input.BASIC_AUTH_CREDENTIALS).get("password")
         self.api_key = params.get(Input.API_KEY).get("secretKey")
         self.url = params.get(Input.URL)
+        self.user_type = params.get(Input.USER_TYPE)
 
         index = self.url.find("/", self._get_start_index(self.url))
         if index >= 0:
@@ -70,6 +66,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def get_auth_token(self) -> Tuple[str, str]:
         version = "2.1"
+        if self.user_type == SERVICE_USER_TYPE:
+            return self.api_key, version
         request_url = self._prepare_auth_url_based_on_version(version)
         request_data = self._prepare_body_for_auth_request()
         self.logger.info(f"Trying to authenticate with API version {version}")
@@ -112,37 +110,28 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def _prepare_auth_url_based_on_version(self, version: str) -> str:
         url = f"{self.url}web/api/v{version}/users/login"
-        if self.authentication_type == BASIC_AUTH:
-            return url
-        elif self.authentication_type == API_TOKEN_AUTH:
-            return f"{url}/by-api-token"
+        return f"{url}/by-api-token"
 
     def _prepare_body_for_auth_request(self):
-        if self.authentication_type == BASIC_AUTH:
-            if self.username and self.password:
-                return {USERNAME_FIELD: self.username, PASSWORD_FIELD: self.password}
-            else:
-                raise PluginException(
-                    cause="Inputs related to basic authentication are invalid.",
-                    assistance="Check username and password inputs and try again. "
-                    "If the problem persists contact with development team.",
-                )
-        elif self.authentication_type == API_TOKEN_AUTH:
-            if self.api_key:
-                return {DATA_FIELD: {API_TOKEN_FIELD: self.api_key}}
-            else:
-                raise PluginException(
-                    cause="Inputs related to API key authentication is invalid.",
-                    assistance="Check API key input and try again. "
-                    "If the problem persists contact with development team.",
-                )
+        if self.api_key:
+            return {DATA_FIELD: {API_TOKEN_FIELD: self.api_key}}
+        else:
+            raise PluginException(
+                cause="Inputs related to API key authentication is invalid.",
+                assistance="Check API key input and try again. "
+                "If the problem persists contact with development team.",
+            )
 
     def make_token_header(self):
+        if self.user_type == SERVICE_USER_TYPE:
+            token_field = SERVICE_USER_HEADER_TOKEN_FIELD
+        else:
+            token_field = CONSOLE_USER_HEADER_TOKEN_FIELD
+
         self.header = {
-            "Authorization": f"Token {self.token}",
+            "Authorization": f"{token_field} {self.token}",
             "Content-Type": "application/json",
         }
-
         return self.header
 
     def activities_list(self, parameters):
