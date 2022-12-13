@@ -19,7 +19,6 @@ This plugin utilizes the SentinelOne API, the documentation is located in the Se
 
 # Supported Product Versions
 
-* 2.0.0
 * 2.1.0
 
 # Documentation
@@ -30,9 +29,8 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|False|Credential secret API key. Provide if you choose API Token Auth type|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|authentication_type|string|Basic Auth|True|Type of authentication|['Basic Auth', 'API Token Auth']|Basic Auth|
-|basic_auth_credentials|credential_username_password|None|False|Username and password. Provide if you choose Basic Auth type|None|{"username": "user@example.com", "password": "mypassword"}|
+|api_key|credential_secret_key|None|True|Credential secret API key|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|user_type|string|Console user|True|Type of user|['Console user', 'Service user']|Console user|
 |url|string|None|True|SentinelOne Console URL|None|https://example.com|
 
 Example input:
@@ -40,11 +38,7 @@ Example input:
 ```
 {
   "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
-  "authentication_type": "Basic Auth",
-  "basic_auth_credentials": {
-    "username": "user@example.com",
-    "password": "mypassword"
-  },
+  "user_type": "Console user",
   "url": "https://example.sentinelone.com"
 }
 ```
@@ -80,9 +74,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|False|Number of entities affected by the requested operation|1|
 
 Example output:
 
@@ -119,9 +113,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|False|Number of entities affected by the requested operation|1|
 
 Example output:
 
@@ -157,9 +151,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|get_events_response|False|SentinelOne API call response data|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|get_events_response|False|SentinelOne API call response data|{ "response": { "data": [ { "agentDomain": "WORKGROUP", "agentGroupId": "123123456712356789", "agentId": "123123456712356789" }}}|
 
 Example output:
 
@@ -336,9 +330,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|get_events_response|False|SentinelOne API call response data|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|get_events_response|False|SentinelOne API call response data|{ "response": { "data": [ { "agentDomain": "WORKGROUP", "agentGroupId": "123123456712356789", "agentId": "123123456712356789" } } }|
 
 Example output:
 
@@ -511,9 +505,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|cancel_query_response|False|SentinelOne API call response data|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|cancel_query_response|False|SentinelOne API call response data|{ "response": { "success": true } }|
 
 Example output:
 
@@ -545,9 +539,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|get_query_status_response|False|SentinelOne API call response data|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|get_query_status_response|False|SentinelOne API call response data|{ "response": { "data": { "progressStatus": 50, "responseState": "RUNNING" } } }|
 
 Example output:
 
@@ -611,9 +605,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|create_query_response|False|SentinelOne API call response data|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|create_query_response|False|SentinelOne API call response data|{ "response": { "data": { "affected": 0 } } }|
 
 Example output:
 
@@ -653,9 +647,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|True|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|True|Number of entities affected by the requested operation|1|
 
 Example output:
 
@@ -695,9 +689,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|True|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|True|Number of entities affected by the requested operation|1|
 
 Example output:
 
@@ -733,9 +727,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|False|Number of entities affected by the requested operation|1|
 
 ```
 {
@@ -765,9 +759,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|file|file|True|Base64 encoded threat file|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|file|file|True|Base64 encoded threat file|{ "file": { "filename": "report.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" } }|
 
 Example output:
 
@@ -859,9 +853,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|data|[]activities_list|True|Result of activities list|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|data|[]activities_list|True|Result of activities list|[{ "agentUpdatedVersion": "2.5.1.1320", "id": "225494730938493804", "createdAt": "2018-02-27T04:49:26.257525Z", "groupId": "225494730938493804", "primaryDescription": "string", "accountName": "string", "description": "string", "osFamily": "windows_legacy", "hash": "string", "secondaryDescription": "string", "comments": "string", "siteId": "225494730938493804", "groupName": "string", "threatId": "225494730938493804", "agentId": "225494730938493804", "data": { "computer_name": "COMP_1234", "username": "my_user" }, "activityType": "integer", "accountId": "225494730938493804", "updatedAt": "2018-02-27T04:49:26.257525Z", "userId": "225494730938493804", "activityUuid": "string", "siteName": "string" }]|
 
 #### Get Activity Types
 
@@ -873,9 +867,9 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|activity_types|[]activities_types|True|Result of activities types|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|activity_types|[]activities_types|True|Result of activities types|[{ "id": 0, "descriptionTemplate": "string", "action": "string" }]|
 
 Example output:
 
@@ -917,9 +911,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|False|Number of entities affected by the requested operation|1|
 
 Example output:
 
@@ -955,14 +949,14 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|decommissioned|integer|False|Number of decommissioned agents|
-|infected|integer|False|Number of agents with at least one active threat|
-|online|integer|False|Number of online agents|
-|out_of_date|integer|False|Number of agents running an older software version|
-|total|integer|False|Number of installed active agents|
-|up_to_date|integer|False|Number of agents with the most up-to-date software version|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|decommissioned|integer|False|Number of decommissioned agents|0|
+|infected|integer|False|Number of agents with at least one active threat|1|
+|online|integer|False|Number of online agents|2|
+|out_of_date|integer|False|Number of agents running an older software version|1|
+|total|integer|False|Number of installed active agents|2|
+|up_to_date|integer|False|Number of agents with the most up-to-date software version|2|
 
 Example output:
 
@@ -999,9 +993,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|data|[]agent_applications|True|List of installed applications|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|data|[]agent_applications|True|List of installed applications|[ { "publisher": "string", "installedDate": "2018-02-27T04:49:26.257525Z", "size": "integer", "name": "string", "version": "string" } ]|
 
 #### Blacklist
 
@@ -1028,10 +1022,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|message|string|True|Return details about action results|
-|success|boolean|True|Return true if blacklist item was created or deleted|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|message|string|True|Return details about action results|The given hash has been blocked|
+|success|boolean|True|Return true if blacklist item was created or deleted|True|
 
 Example output:
 
@@ -1062,9 +1056,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|False|Number of entities affected by the requested operation|1|
 
 Example output:
 
@@ -1104,9 +1098,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|False|Number of entities affected by the requested operation|1|
 
 Example output:
 
@@ -1140,9 +1134,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|agent|agent_data|False|Detailed information about agent found|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|agent|agent_data|False|Detailed information about agent found|{ "agent": { "accountId": "433241117337583618", "accountName": "SentinelOne", "activeDirectory": { "computerDistinguishedName": "None", "computerMemberOf": [], "lastUserDistinguishedName": "None", "lastUserMemberOf": [] }, "activeThreats": 0, "agentVersion": "4.1.4.82", "allowRemoteShell": false, "appsVulnerabilityStatus": "up_to_date", "cloudProviders": {}, "computerName": "so-agent-win12", "consoleMigrationStatus": "N/A", "coreCount": 1, "cpuCount": 1, "cpuId": "Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz", "createdAt": "2020-05-28T14:53:03.014660Z", "domain": "WORKGROUP", "encryptedApplications": false, "externalId": "", "externalIp": "198.51.100.100", "firewallEnabled": true, "groupId": "521580416411822676", "groupIp": "198.51.100.x", "groupName": "Default Group", "id": "901345720792880606", "inRemoteShellSession": false, "infected": false, "installerType": ".exe", "isActive": true, "isDecommissioned": false, "isPendingUninstall": false, "isUninstalled": false, "isUpToDate": true, "lastActiveDate": "2020-06-05T18:32:56.748620Z", "lastIpToMgmt": "10.4.24.55", "lastLoggedInUserName": "", "licenseKey": "", "locationEnabled": true, "locationType": "fallback", "locations": [ { "id": "629380164464502476", "name": "Fallback", "scope": "global" } ], "machineType": "server", "mitigationMode": "protect", "mitigationModeSuspicious": "detect", "modelName": "VMware, Inc. - VMware Virtual Platform", "networkInterfaces": [ { "id": "901345720801269215", "inet": [ "198.51.100.100" ], "inet6": [ "2001:db8:8:4::2" ], "name": "Ethernet", "physical": "00:50:56:94:17:08" } ], "networkQuarantineEnabled": false, "networkStatus": "disconnected", "operationalState": "na", "operationalStateExpiration": "None", "osArch": "64 bit", "osName": "Windows Server 2012 Standard", "osRevision": "9200", "osStartTime": "2020-05-28T14:59:36Z", "osType": "windows", "osUsername": "None", "rangerStatus": "NotApplicable", "rangerVersion": "None", "registeredAt": "2020-05-28T14:53:03.010853Z", "remoteProfilingState": "disabled", "remoteProfilingStateExpiration": "None", "scanAbortedAt": "None", "scanFinishedAt": "2020-05-28T22:24:59.420166Z", "scanStartedAt": "2020-05-28T21:12:58.216807Z", "scanStatus": "finished", "siteId": "521580416395045459", "siteName": "Rapid7", "threatRebootRequired": false, "totalMemory": 1023, "updatedAt": "2020-06-05T15:39:10.754112Z", "userActionsNeeded": [], "uuid": "28db47168fa54f89aeed99769ac8d4dc" } }|
 
 Example output:
 
@@ -1255,11 +1249,11 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|data|[]threat_data|False|Data|
-|errors|[]object|False|Errors|
-|pagination|pagination|False|Pagination|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|data|[]threat_data|False|Data|[ { "agentOsType": "windows", "automaticallyResolved": false } ]|
+|errors|[]object|False|Errors|[{"type": "object"}]|
+|pagination|pagination|False|Pagination|{"totalItems": 1}|
 
 Example output:
 
@@ -1368,9 +1362,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|False|Number of entities affected by the requested operation|1|
 
 Example output:
 
@@ -1404,9 +1398,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|False|Number of entities affected by the requested operation|1|
 
 Example output:
 
@@ -1438,9 +1432,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|False|Number of entities affected by the requested operation|1|
 
 Example output:
 
@@ -1470,9 +1464,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|available|boolean|True|Account Name to validate|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|available|boolean|True|Account Name to validate|True|
 
 Example output:
 
@@ -1513,9 +1507,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|quarantine_response|False|SentinelOne API call response data|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|quarantine_response|False|SentinelOne API call response data|{ "response": { "data": [ { "agentDomain": "WORKGROUP", "agentGroupId": "123123456712356789", "agentId": "123123456712356789" } } }|
 
 Example output:
 
@@ -1558,9 +1552,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|agents|[]agent_data|False|Detailed information about agents found|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|agents|[]agent_data|False|Detailed information about agents found|{ "agents": [ { "accountId": "433241117337583618", "accountName": "SentinelOne", "activeDirectory": { "computerDistinguishedName": "None", "computerMemberOf": [], "lastUserDistinguishedName": "None", "lastUserMemberOf": [] }, "activeThreats": 0, "agentVersion": "4.1.4.82", "allowRemoteShell": false, "appsVulnerabilityStatus": "up_to_date", "cloudProviders": {}, "computerName": "so-agent-win12", "consoleMigrationStatus": "N/A", "coreCount": 1, "cpuCount": 1, "cpuId": "Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz", "createdAt": "2020-05-28T14:53:03.014660Z", "domain": "WORKGROUP", "encryptedApplications": false, "externalId": "", "externalIp": "198.51.100.100", "firewallEnabled": true, "groupId": "521580416411822676", "groupIp": "198.51.100.x", "groupName": "Default Group", "id": "901345720792880606", "inRemoteShellSession": false, "infected": false, "installerType": ".exe", "isActive": true, "isDecommissioned": false, "isPendingUninstall": false, "isUninstalled": false, "isUpToDate": true, "lastActiveDate": "2020-06-05T18:32:56.748620Z", "lastIpToMgmt": "10.4.24.55", "lastLoggedInUserName": "", "licenseKey": "", "locationEnabled": true, "locationType": "fallback", "locations": [ { "id": "629380164464502476", "name": "Fallback", "scope": "global" } ], "machineType": "server", "mitigationMode": "protect", "mitigationModeSuspicious": "detect", "modelName": "VMware, Inc. - VMware Virtual Platform", "networkInterfaces": [ { "id": "901345720801269215", "inet": [ "198.51.100.100" ], "inet6": [ "2001:db8:8:4::2" ], "name": "Ethernet", "physical": "00:50:56:94:17:08" } ], "networkQuarantineEnabled": false, "networkStatus": "disconnected", "operationalState": "na", "operationalStateExpiration": "None", "osArch": "64 bit", "osName": "Windows Server 2012 Standard", "osRevision": "9200", "osStartTime": "2020-05-28T14:59:36Z", "osType": "windows", "osUsername": "None", "rangerStatus": "NotApplicable", "rangerVersion": "None", "registeredAt": "2020-05-28T14:53:03.010853Z", "remoteProfilingState": "disabled", "remoteProfilingStateExpiration": "None", "scanAbortedAt": "None", "scanFinishedAt": "2020-05-28T22:24:59.420166Z", "scanStartedAt": "2020-05-28T21:12:58.216807Z", "scanStatus": "finished", "siteId": "521580416395045459", "siteName": "Rapid7", "threatRebootRequired": false, "totalMemory": 1023, "updatedAt": "2020-06-05T15:39:10.754112Z", "userActionsNeeded": [], "uuid": "28db47168fa54f89aeed99769ac8d4dc" } ] }|
 
 Example output:
 
@@ -1699,10 +1693,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|threat|threat_data|False|Threat|
-
+|Name|Type|Required|Description| Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|----|----|--------|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|threat|threat_data|False|Threat|{ 'threat': { 'agentComputerName':'vagrant-pc', 'agentDomain':'WORKGROUP', 'agentId':'560700200554747611' }}|
 Example output:
 
 ```
@@ -1996,6 +1989,7 @@ To convert `threat` into an array use Type Converter Plugin
 
 # Version History
 
+* 8.0.0 - Connection: Added Service user (API only user type) authentication | Removed Basic Authentication
 * 7.1.0 - Update for Blacklist action: Fix for unblocked action | Update for Quarantine action: unification of the output data when action fails | Add troubleshooting information about use Type Converter | Mark as Benign action: update description 
 * 7.0.0 - Add new actions Update Analyst Verdict and Update Incident Status | Fix Get Agent Details and Search Agents actions to handle more response scenarios | Add option to authentication with API key
 * 6.2.0 - New actions Create Query, Get Query Status, Cancel Running Query, Get Events, Get Events By Type
@@ -2023,6 +2017,8 @@ To convert `threat` into an array use Type Converter Plugin
 
 # Links
 
+* [SentinelOne Product Page](https://www.sentinelone.com/)
+* 
 ## References
 
 * [SentinelOne Product Page](https://www.sentinelone.com/)

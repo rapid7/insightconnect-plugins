@@ -18,8 +18,7 @@ class TestActivitiesList(TestCase):
             ActivitiesList(),
             {
                 "url": "https://rapid7.com",
-                "authentication_type": "Basic Auth",
-                "basic_auth_credentials": {"username": "params", "password": "password"},
+                "user_type": "Console user",
                 "api_key": {"secretKey": "test"},
             },
         )
