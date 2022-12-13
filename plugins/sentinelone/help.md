@@ -30,7 +30,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|Credential secret API key|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|role|string|User role|True|Role of user|['User role', 'Service role']|User role|
+|user_type|string|Console user|True|Type of user|['Console user', 'Service user']|Console user|
 |url|string|None|True|SentinelOne Console URL|None|https://example.com|
 
 Example input:
@@ -38,7 +38,7 @@ Example input:
 ```
 {
   "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
-  "role": "User role",
+  "user_type": "Console user",
   "url": "https://example.sentinelone.com"
 }
 ```
@@ -638,7 +638,9 @@ Example input:
 ```
 {
   "agent": "hostname123",
-  "filter": "{ \"updatedAt__gt\": \"2019-02-27T04:49:26.257525Z\" }",
+  "filter": {
+    "updatedAt__gt": "2019-02-27T04:49:26.257525Z"
+  },
   "reboot": true
 }
 ```
@@ -678,7 +680,9 @@ Example input:
   "agent": "hostname123",
   "expiration_time": "2020-02-27T04:49:26.257525Z",
   "expiration_timezone": "Central Standard Time (North America) [CST]",
-  "filter": "{ \"updatedAt__gt\": \"2019-02-27T04:49:26.257525Z\" }",
+  "filter": {
+    "updatedAt__gt": "2019-02-27T04:49:26.257525Z"
+  },
   "reboot": true
 }
 ```
@@ -713,7 +717,11 @@ Example input:
 ```
 {
   "action": "connect",
-  "filter": "{\"ids\": [\"1000000000000000000\"]}"
+  "filter": {
+    "ids": [
+      "1000000000000000000"
+    ]
+  }
 }
 ```
 
@@ -731,7 +739,7 @@ Example input:
 
 #### Fetch Threats File
 
-This action is used to fetch a file associated with the threat that matches the filter. Your user role must have permissions to Fetch Threat File - Admin, IR Team, SOC.
+This action is used to fetch a file associated with the threat that matches the filter. Your Console user must have permissions to Fetch Threat File - Admin, IR Team, SOC.
 
 ##### Input
 
@@ -891,6 +899,14 @@ This action is used to reload an agent module (applies to Windows agents only).
 Example input:
 
 ```
+{
+  "filter": {
+    "ids": [
+      "1000000000000000000"
+    ]
+  },
+  "module": "monitor"
+}
 ```
 
 ##### Output
@@ -1968,7 +1984,7 @@ To convert `threat` into an array use Type Converter Plugin
 
 # Version History
 
-* 8.0.0 - Added Service role (API only role) authentication | Removed Basic Authentication
+* 8.0.0 - Connection: Added Service user (API only user type) authentication | Removed Basic Authentication
 * 7.1.0 - Update for Blacklist action: Fix for unblocked action | Update for Quarantine action: unification of the output data when action fails | Add troubleshooting information about use Type Converter | Mark as Benign action: update description 
 * 7.0.0 - Add new actions Update Analyst Verdict and Update Incident Status | Fix Get Agent Details and Search Agents actions to handle more response scenarios | Add option to authentication with API key
 * 6.2.0 - New actions Create Query, Get Query Status, Cancel Running Query, Get Events, Get Events By Type

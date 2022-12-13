@@ -1457,16 +1457,16 @@ types:
       required: false
 
 connection:
-  role:
-    title: Role
-    description: Role of user
+  user_type:
+    title: User Type
+    description: Type of user
     type: string
     required: true
     enum:
-      - User role
-      - Service role
-    example: User role
-    default: User role
+      - Console user
+      - Service user
+    example: Console user
+    default: Console user
   api_key:
     title: API Key
     description: Credential secret API key
@@ -2132,7 +2132,7 @@ actions:
         example: 'The given hash has been blocked'
   threats_fetch_file:
     title: Fetch Threats File
-    description: Fetch a file associated with the threat that matches the filter. Your user role must have permissions to Fetch Threat File - Admin, IR Team, SOC
+    description: Fetch a file associated with the threat that matches the filter. Your Console user must have permissions to Fetch Threat File - Admin, IR Team, SOC
     input:
       id:
         title: ID

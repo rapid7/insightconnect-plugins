@@ -18,7 +18,7 @@ class TestActivitiesList(TestCase):
             ActivitiesList(),
             {
                 "url": "https://rapid7.com",
-                "role": "User role",
+                "user_type": "Console user",
                 "api_key": {"secretKey": "test"},
             },
         )

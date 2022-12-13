@@ -25,7 +25,7 @@ class Util:
         else:
             params = {
                 Input.URL: "https://rapid7.com",
-                Input.ROLE: "User role",
+                Input.USER_TYPE: "Console user",
                 Input.API_KEY: {"secretKey": "test"},
             }
         default_connection.connect(params)

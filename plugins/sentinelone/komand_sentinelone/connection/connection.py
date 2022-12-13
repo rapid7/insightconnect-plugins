@@ -14,9 +14,9 @@ from .schema import ConnectionSchema, Input
 from komand_sentinelone.util.constants import (
     DATA_FIELD,
     API_TOKEN_FIELD,
-    USER_ROLE_HEADER_TOKEN_FIELD,
-    SERVICE_ROLE_HEADER_TOKEN_FIELD,
-    SERVICE_USER_ROLE
+    CONSOLE_USER_HEADER_TOKEN_FIELD,
+    SERVICE_USER_HEADER_TOKEN_FIELD,
+    SERVICE_USER_TYPE
 )
 
 
@@ -28,7 +28,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.api_version = None
         self.api_key = None
         self.token = None
-        self.role = None
+        self.user_type = None
         self.header = None
 
     def connect(self, params={}):
@@ -44,7 +44,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Connect: Connecting...")
         self.api_key = params.get(Input.API_KEY).get("secretKey")
         self.url = params.get(Input.URL)
-        self.role = params.get(Input.ROLE)
+        self.user_type = params.get(Input.USER_TYPE)
 
         index = self.url.find("/", self._get_start_index(self.url))
         if index >= 0:
@@ -66,7 +66,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def get_auth_token(self) -> Tuple[str, str]:
         version = "2.1"
-        if self.role == SERVICE_USER_ROLE:
+        if self.user_type == SERVICE_USER_TYPE:
             return self.api_key, version
         request_url = self._prepare_auth_url_based_on_version(version)
         request_data = self._prepare_body_for_auth_request()
@@ -123,10 +123,10 @@ class Connection(insightconnect_plugin_runtime.Connection):
             )
 
     def make_token_header(self):
-        if self.role == SERVICE_USER_ROLE:
-            token_field = SERVICE_ROLE_HEADER_TOKEN_FIELD
+        if self.user_type == SERVICE_USER_TYPE:
+            token_field = SERVICE_USER_HEADER_TOKEN_FIELD
         else:
-            token_field = USER_ROLE_HEADER_TOKEN_FIELD
+            token_field = CONSOLE_USER_HEADER_TOKEN_FIELD
 
         self.header = {
             "Authorization": f"{token_field} {self.token}",

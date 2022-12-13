@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Fetch a file associated with the threat that matches the filter. Your user role must have permissions to Fetch Threat File - Admin, IR Team, SOC"
+    DESCRIPTION = "Fetch a file associated with the threat that matches the filter. Your Console user must have permissions to Fetch Threat File - Admin, IR Team, SOC"
 
 
 class Input:
