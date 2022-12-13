@@ -78,6 +78,8 @@ def main():
 
             self.add_action(actions.Query())
 
+            self.add_action(actions.ReplaceIndicators())
+
             self.add_action(actions.SearchInvestigations())
 
             self.add_action(actions.SetDispositionOfInvestigation())

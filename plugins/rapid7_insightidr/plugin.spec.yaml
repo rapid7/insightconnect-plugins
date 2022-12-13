@@ -592,6 +592,32 @@ connection:
     default: United States 1
     example: United States 1
 actions:
+  replace_indicators:
+    title:
+    description:
+    input:
+      format:
+        title: Format
+        description: fjekdidpe
+        type: string
+        required: true
+        default: JSON
+        example: JSON
+        enum:
+          - JSON
+          - CSV
+          - STIX_XML
+    output:
+      rejected_indicators:
+        title: Rejected Indicators
+        description: The list of indicators that have been rejected during the update
+        type: "[]string"
+        required: false
+      threat:
+        title: Threat
+        description: The information about the threat
+        type: threat
+        required: false
   list_investigations:
     title: List Investigations
     description: Retrieve a page of investigations matching the given request parameters

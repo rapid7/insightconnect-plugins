@@ -147,6 +147,17 @@ class Threats:
         return f"{console_url}idr/v1/customthreats/key/{key}/indicators/add"
 
     @staticmethod
+    def replace_indicators_for_a_threat(console_url: str, key: str):
+        """
+        URI for create custom threat
+        :param console_url: URL to the InsightIDR console
+        :param key: The key of a threat for which the indicators are going to be added
+        :return: pre-populated /idr/v1/customthreats/key/{key}/indicators/replace
+        """
+
+        return f"{console_url}idr/v1/customthreats/key/{key}/indicators/replace"
+
+    @staticmethod
     def create_threat(console_url: str):
         """
         URI for create custom threat
