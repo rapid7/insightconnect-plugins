@@ -2132,7 +2132,7 @@ actions:
         example: 'The given hash has been blocked'
   threats_fetch_file:
     title: Fetch Threats File
-    description: Fetch a file associated with the threat that matches the filter. Your Console user must have permissions to Fetch Threat File - Admin, IR Team, SOC
+    description: Fetch a file associated with the threat that matches the filter. Your user role must have permissions to Fetch Threat File - Admin, IR Team, SOC
     input:
       id:
         title: ID

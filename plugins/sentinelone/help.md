@@ -739,7 +739,7 @@ Example input:
 
 #### Fetch Threats File
 
-This action is used to fetch a file associated with the threat that matches the filter. Your Console user must have permissions to Fetch Threat File - Admin, IR Team, SOC.
+This action is used to fetch a file associated with the threat that matches the filter. Your user role must have permissions to Fetch Threat File - Admin, IR Team, SOC.
 
 ##### Input
 
@@ -1353,6 +1353,11 @@ This action is used to mark a threat as resolved.
 Example input:
 
 ```
+{
+  "target_scope": "site",
+  "threat_id": "1000000000000000000",
+  "whitening_option": "path"
+}
 ```
 
 ##### Output
