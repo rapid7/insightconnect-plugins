@@ -50,7 +50,7 @@ class CreateBlockedSenderPolicyInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "From Type",
       "description": "Can be one of: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address",
-      "default": "everyone",
+      "default": "individual_email_address",
       "enum": [
         "everyone",
         "internal_addresses",
@@ -88,7 +88,7 @@ class CreateBlockedSenderPolicyInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "To Type",
       "description": "Can be one of: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address",
-      "default": "everyone",
+      "default": "individual_email_address",
       "enum": [
         "everyone",
         "internal_addresses",

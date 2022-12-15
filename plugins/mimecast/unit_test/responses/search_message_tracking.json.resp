@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "status": 200,
+    "pagination": {
+      "pageSize": 0
+    }
+  },
+  "data": [
+    {
+      "trackedEmails": [
+        {
+          "detectionLevel": "",
+          "fromEnv": {
+            "emailAddress": "user@example.com"
+          },
+          "fromHdr": {
+            "emailAddress": ""
+          },
+          "id": "123456789",
+          "info": "Envelope Rejected",
+          "received": "2022-12-01T12:49:46+0000",
+          "route": "inbound",
+          "senderIP": "192.168.0.1",
+          "sent": "2022-12-01T12:49:46+0000",
+          "spamScore": 0,
+          "status": "rejected",
+          "subject": "Example Subject",
+          "to": [
+            {
+              "displayableName": "Example User",
+              "emailAddress": "user@example.com"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "fail": []
+}

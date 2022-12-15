@@ -46,6 +46,12 @@ class MimecastAPI:
     def create_blocked_sender_policy(self, data: dict) -> dict:
         return self._handle_rest_call("POST", f"{API}/policy/blockedsenders/create-policy", data=data)
 
+    def delete_blocked_sender_policy(self, data: dict) -> dict:
+        return self._handle_rest_call("POST", f"{API}/policy/blockedsenders/delete-policy", data=data)
+
+    def search_message_finder(self, data: dict) -> dict:
+        return self._handle_rest_call("POST", f"{API}/message-finder/search", data=data)
+
     def create_managed_url(self, data: dict) -> dict:
         return self._handle_rest_call("POST", f"{API}/ttp/url/create-managed-url", data=data)
 
@@ -135,7 +141,7 @@ class MimecastAPI:
                     self.logger.error(response)
                     raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response)
 
-    def _handle_rest_call(
+    def _handle_rest_call(  # noqa: C901
         self,
         method: str,
         uri: str,

@@ -1,7 +1,7 @@
 {
-	"spec": "4104e927530cfd58fd3eb66ee76a30bc",
-	"manifest": "d73d8ddd5624aca18fc58d8fbd7c2267",
-	"setup": "ba639fb3fc7ea68c20e0fe5bc8db4fb6",
+	"spec": "4ac67116b6c2fb0d7ea7e58ee1818771",
+	"manifest": "0d78b348dbb7af854cbc7cefbb957a63",
+	"setup": "ed72caa36f7b2b894978d90312666cf7",
 	"schemas": [
 		{
 			"identifier": "add_group_member/schema.py",
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "create_blocked_sender_policy/schema.py",
-			"hash": "3f385a070d5043f9b1f20aae27dce250"
+			"hash": "e14a4d74f2c40a2624f66de51305cdcd"
 		},
 		{
 			"identifier": "create_managed_url/schema.py",
@@ -18,6 +18,10 @@
 		{
 			"identifier": "decode_url/schema.py",
 			"hash": "9ae045015ab2300c92d697f140d42ca6"
+		},
+		{
+			"identifier": "delete_blocked_sender_policy/schema.py",
+			"hash": "9e2e2fde680f3b14bcd9209351ad6ae2"
 		},
 		{
 			"identifier": "delete_group_member/schema.py",
@@ -46,6 +50,10 @@
 		{
 			"identifier": "permit_or_block_sender/schema.py",
 			"hash": "0d38abe4d7a0124bf889bfd63653fb26"
+		},
+		{
+			"identifier": "track_messages/schema.py",
+			"hash": "6d2d3b007c90f4839c6a7085ad6af7a3"
 		},
 		{
 			"identifier": "connection/schema.py",
