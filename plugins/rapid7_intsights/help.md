@@ -102,7 +102,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|content|[]ioc_content|False|List of IOCs that match filters|{ "content": [ { "value": "rapid7.com", "type": "Domains", "severity": "High", "score": 100, "whitelisted": false, "firstSeen": "2020-01-01T20:01:27.344Z", "lastSeen": "2020-01-30T16:18:51.148Z", "lastUpdateDate": "2020-02-21T23:00:51.268Z", "geoLocation": "US", "sources": [ { "Name": "AlienVault OTX", "ConfidenceLevel": 3 } ], "tags": [ "MyTag_1" ], "relatedMalware": [ "doppeldridex", "dridex" ], "relatedCampaigns": [ "SolarWinds" ], "relatedThreatActors": [ "doppelspider" ], "reportedFeeds": [ { "ID": "SampleID", "Name": "AlienVault OTX", "ConfidenceLevel": 3 } ] } ], "nextOffset": "2022-11-18T16:59:01.626Z" }|
+|content|[]ioc_content|False|List of IOCs that match filters|{ "content": [ { "value": "rapid7.com", "type": "Domains", "severity": "High", "score": 100, "whitelisted": false, "firstSeen": "2020-01-01T20:01:27.344Z", "lastSeen": "2020-01-30T16:18:51.148Z", "lastUpdateDate": "2020-02-21T23:00:51.268Z", "geoLocation": "US", "tags": [ "MyTag_1" ], "relatedMalware": [ "doppeldridex", "dridex" ], "relatedCampaigns": [ "SolarWinds" ], "relatedThreatActors": [ "doppelspider" ], "reportedFeeds": [ { "ID": "SampleID", "Name": "AlienVault OTX", "ConfidenceLevel": 3 } ] } ], "nextOffset": "2022-11-18T16:59:01.626Z" }|
 |nextOffset|string|False|The offset to the next page of IOCs|2020-01-01T20:01:27.344Z|
 
 
@@ -121,12 +121,6 @@ Example output:
       "lastSeen": "2020-01-30T16:18:51.148Z",
       "lastUpdateDate": "2020-02-21T23:00:51.268Z",
       "geoLocation": "US",
-      "sources": [
-        {
-          "Name": "AlienVault OTX",
-          "ConfidenceLevel": 3
-        }
-      ],
       "tags": [
         "MyTag_1"
       ],
@@ -1178,7 +1172,6 @@ Example output:
 |Last Seen|string|False|Last seen|
 |Last Update Date|string|False|Last update date|
 |Geographic Location|string|False|Geographic location|
-|Sources|[]source|False|Name|
 |Tags|[]string|False|Tags|
 |Related Malware|[]string|False|Related malware|
 |Related Campaigns|[]string|False|Related campaigns|
