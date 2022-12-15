@@ -1,5 +1,5 @@
 {
-	"spec": "e8e2a28d072d5322bd509ac95b744332",
+	"spec": "6ec6857fa074a1640af7f59826403cc1",
 	"manifest": "97eec20b4b0819c880e8b1b985e2f00d",
 	"setup": "5bbd6ac196e021edd046590a42cff312",
 	"schemas": [
@@ -41,7 +41,7 @@
 		},
 		{
 			"identifier": "get_iocs_by_filter/schema.py",
-			"hash": "887fd53a3f70a8ef9136aeda7377c69b"
+			"hash": "f12ac20021f7de5c1f04ff1f69f77be0"
 		},
 		{
 			"identifier": "takedown_request/schema.py",

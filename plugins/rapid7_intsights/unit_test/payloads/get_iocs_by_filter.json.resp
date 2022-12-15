@@ -10,12 +10,6 @@
       "lastSeen": "2020-01-30T16:18:51.148Z",
       "lastUpdateDate": "2020-02-21T23:00:51.268Z",
       "geoLocation": "US",
-      "sources": [
-        {
-          "Name": "AlienVault OTX",
-          "ConfidenceLevel": 3
-        }
-      ],
       "tags": [
         "MyTag_1"
       ],

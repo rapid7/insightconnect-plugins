@@ -211,7 +211,7 @@ class GetIocsByFilterOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "string"
           },
-          "order": 13
+          "order": 12
         },
         "relatedMalware": {
           "type": "array",
@@ -220,7 +220,7 @@ class GetIocsByFilterOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "string"
           },
-          "order": 12
+          "order": 11
         },
         "relatedThreatActors": {
           "type": "array",
@@ -229,7 +229,7 @@ class GetIocsByFilterOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "string"
           },
-          "order": 14
+          "order": 13
         },
         "reportedFeeds": {
           "type": "array",
@@ -238,7 +238,7 @@ class GetIocsByFilterOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "$ref": "#/definitions/reported_feed"
           },
-          "order": 16
+          "order": 15
         },
         "score": {
           "type": "number",
@@ -252,20 +252,11 @@ class GetIocsByFilterOutput(insightconnect_plugin_runtime.Output):
           "description": "Severity",
           "order": 3
         },
-        "sources": {
-          "type": "array",
-          "title": "Sources",
-          "description": "Sources",
-          "items": {
-            "$ref": "#/definitions/source"
-          },
-          "order": 10
-        },
         "status": {
           "type": "string",
           "title": "Status",
           "description": "Status",
-          "order": 15
+          "order": 14
         },
         "tags": {
           "type": "array",
@@ -274,7 +265,7 @@ class GetIocsByFilterOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "string"
           },
-          "order": 11
+          "order": 10
         },
         "type": {
           "type": "string",
@@ -319,28 +310,6 @@ class GetIocsByFilterOutput(insightconnect_plugin_runtime.Output):
               "order": 1
             }
           }
-        },
-        "source": {
-          "type": "object",
-          "title": "source",
-          "properties": {
-            "ConfidenceLevel": {
-              "type": "integer",
-              "title": "Confidence Level",
-              "description": "Level of confidence",
-              "order": 2
-            },
-            "Name": {
-              "type": "string",
-              "title": "Name",
-              "description": "Name",
-              "order": 1
-            }
-          },
-          "required": [
-            "ConfidenceLevel",
-            "Name"
-          ]
         }
       }
     },
@@ -367,28 +336,6 @@ class GetIocsByFilterOutput(insightconnect_plugin_runtime.Output):
           "order": 1
         }
       }
-    },
-    "source": {
-      "type": "object",
-      "title": "source",
-      "properties": {
-        "ConfidenceLevel": {
-          "type": "integer",
-          "title": "Confidence Level",
-          "description": "Level of confidence",
-          "order": 2
-        },
-        "Name": {
-          "type": "string",
-          "title": "Name",
-          "description": "Name",
-          "order": 1
-        }
-      },
-      "required": [
-        "ConfidenceLevel",
-        "Name"
-      ]
     }
   }
 }

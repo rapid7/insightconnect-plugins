@@ -27,7 +27,6 @@ class TestGetIocsByFilter(TestCase):
                     "relatedThreatActors": ["doppelspider"],
                     "score": 100,
                     "severity": "High",
-                    "sources": [{"ConfidenceLevel": 3, "Name": "AlienVault OTX"}],
                     "tags": ["MyTag_1"],
                     "type": "Domains",
                     "value": "rapid7.com",
