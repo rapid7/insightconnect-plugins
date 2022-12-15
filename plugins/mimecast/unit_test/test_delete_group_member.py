@@ -5,9 +5,10 @@ from unittest.mock import patch
 
 sys.path.append(os.path.abspath("../"))
 from insightconnect_plugin_runtime.exceptions import PluginException
-from komand_mimecast.util.constants import BASIC_ASSISTANCE_MESSAGE, FOLDER_EMAIL_NOT_FOUND_ERROR, ERROR_CASES
-from unit_test.util import Util
 from komand_mimecast.actions import DeleteGroupMember
+from komand_mimecast.util.constants import BASIC_ASSISTANCE_MESSAGE, ERROR_CASES, FOLDER_EMAIL_NOT_FOUND_ERROR
+
+from unit_test.util import Util
 
 
 @patch("requests.request", side_effect=Util.mocked_request)

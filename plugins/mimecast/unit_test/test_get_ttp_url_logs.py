@@ -5,8 +5,9 @@ from unittest.mock import patch
 
 sys.path.append(os.path.abspath("../"))
 
-from unit_test.util import Util
 from komand_mimecast.actions import GetTtpUrlLogs
+
+from unit_test.util import Util
 
 
 @patch("requests.request", side_effect=Util.mocked_request)

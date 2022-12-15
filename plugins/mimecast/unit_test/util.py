@@ -3,11 +3,10 @@ import logging
 import os.path
 import sys
 
-
 sys.path.append(os.path.abspath("../"))
 from komand_mimecast.connection import Connection
 from komand_mimecast.connection.schema import Input
-from komand_mimecast.util.constants import DEFAULT_REGION, DATA_FIELD
+from komand_mimecast.util.constants import DATA_FIELD, DEFAULT_REGION
 
 
 class Util:
@@ -49,6 +48,13 @@ class Util:
         elif kwargs.get("url") == "https://eu-api.mimecast.com/api/policy/blockedsenders/create-policy":
             if "some test policy" in kwargs.get(DATA_FIELD):
                 return MockResponse("create_blocked_sender_policy.json.resp")
+        elif kwargs.get("url") == "https://eu-api.mimecast.com/api/policy/blockedsenders/delete-policy":
+            if "1234" in kwargs.get(DATA_FIELD):
+                return MockResponse("delete_blocked_sender_policy.json.resp")
+            else:
+                return MockResponse("delete_blocked_sender_policy_bad.json.resp")
+        elif kwargs.get("url") == "https://eu-api.mimecast.com/api/message-finder/search":
+            return MockResponse("search_message_tracking.json.resp")
         elif kwargs.get("url") == "https://eu-api.mimecast.com/api/ttp/url/create-managed-url":
             if "https://www.test.net/" in kwargs.get(DATA_FIELD):
                 return MockResponse("create_managed_url.json.resp")
