@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm_cloud
 title: Rapid7 InsightVM Cloud
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the InsightVM Cloud Integrations API to view assets and start scans
-version: 3.1.1
+version: 3.2.0
 vendor: rapid7
 support: rapid7
 supported_versions: ["InsightVM Cloud Integration API v4", "2022-08-10"]
@@ -963,7 +963,7 @@ actions:
       size:
         title: Size
         description: The number of assets to retrieve. If blank then will default to 200 assets returned, the maximum limit is 500 assets
-        type: number
+        type: integer
         required: false
         default: 200
         example: 100
@@ -1055,7 +1055,7 @@ actions:
       size:
         title: Size
         description: The number of vulnerabilities to retrieve. If blank then will default to 200 vulnerabilities returned, the maximum limit is 500 vulnerabilities
-        type: number
+        type: integer
         required: false
         default: 200
         example: 100

@@ -51,7 +51,7 @@ This action is used to search for vulnerabilities using filtered vulnerability s
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |asset_criteria|string|None|False|Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames|None|asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'|", "|vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|vulnerability.categories IN ['example']|
-|size|number|200|False|The number of vulnerabilities to retrieve. If blank then will default to 200 vulnerabilities returned, the maximum limit is 500 vulnerabilities|None|100|
+|size|integer|200|False|The number of vulnerabilities to retrieve. If blank then will default to 200 vulnerabilities returned, the maximum limit is 500 vulnerabilities|None|100|
 |sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
 |vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|https://example.com IN ['example']|
 
@@ -75,7 +75,8 @@ Example input:
 Example output:
 
 ```
-"vulnerabilities": [
+{
+    "vulnerabilities": [
         {
             "added": "2018-05-16T00:00:00Z",
             "categories": "7-Zip",
@@ -85,8 +86,8 @@ Example output:
             "cvss_v2_authentication": "none",
             "cvss_v2_availability_impact": "complete",
             "cvss_v2_confidentiality_impact": "complete",
-            "cvss_v2_exploit_score": 9.9,
-            "cvss_v2_impact_score": 10.0,
+            "cvss_v2_exploit_score": 9.996799945831299,
+            "cvss_v2_impact_score": 10.000845454680942,
             "cvss_v2_integrity_impact": "complete",
             "cvss_v2_score": 10.0,
             "cvss_v2_vector": "(AV:N/AC:L/Au:N/C:C/I:C/A:C)",
@@ -136,8 +137,8 @@ Example output:
             "cvss_v2_authentication": "none",
             "cvss_v2_availability_impact": "complete",
             "cvss_v2_confidentiality_impact": "complete",
-            "cvss_v2_exploit_score": 8.5,
-            "cvss_v2_impact_score": 10.0,
+            "cvss_v2_exploit_score": 8.588799953460693,
+            "cvss_v2_impact_score": 10.000845454680942,
             "cvss_v2_integrity_impact": "complete",
             "cvss_v2_score": 9.3,
             "cvss_v2_vector": "(AV:N/AC:M/Au:N/C:C/I:C/A:C)",
@@ -145,8 +146,8 @@ Example output:
             "cvss_v3_attack_vector": "local",
             "cvss_v3_availability_impact": "high",
             "cvss_v3_confidentiality_impact": "high",
-            "cvss_v3_exploit_score": 1.8,
-            "cvss_v3_impact_score": 5.8,
+            "cvss_v3_exploit_score": 1.8345765900000002,
+            "cvss_v3_impact_score": 5.873118720000001,
             "cvss_v3_integrity_impact": "high",
             "cvss_v3_privileges_required": "none",
             "cvss_v3_scope": "unchanged",
@@ -177,8 +178,9 @@ Example output:
             "severity": "critical",
             "severity_score": 9,
             "title": "7-Zip: CVE-1234-5678: Heap-based buffer overflow vulnerability"
-        },
-     ]
+        }
+    ]
+}
 ```
 
 #### Stop Scan
@@ -281,7 +283,7 @@ This action is used to search for assets using filtered asset search.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |asset_criteria|string|None|False|Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames|None|asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'|
-|size|number|200|False|The number of assets to retrieve. If blank then will default to 200 assets returned, the maximum limit is 500 assets|None|100|
+|size|integer|200|False|The number of assets to retrieve. If blank then will default to 200 assets returned, the maximum limit is 500 assets|None|100|
 |sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
 |vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|vulnerability.categories IN ['example']|
 
@@ -1142,7 +1144,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 3.1.1 - Add vulnerability search action
+* 3.2.0 - Add vulnerability search action
 * 3.1.0 - Add Cloud enablement to plugin | Updated exception information and error handling | Made status code output for Stop Scan and Get Scan actions more exact | Fix bug relating to empty inputs being passed in request body
 * 3.0.0 - Changed output of Get Asset action to include vulnerabilities properly
 * 2.2.0 - Added ability to include vulnerabilities on Get Asset action | API call update

@@ -31,7 +31,7 @@ class VulnSearchInput(insightconnect_plugin_runtime.Input):
       "order": 3
     },
     "size": {
-      "type": "number",
+      "type": "integer",
       "title": "Size",
       "description": "The number of vulnerabilities to retrieve. If blank then will default to 200 vulnerabilities returned, the maximum limit is 500 vulnerabilities",
       "default": 200,

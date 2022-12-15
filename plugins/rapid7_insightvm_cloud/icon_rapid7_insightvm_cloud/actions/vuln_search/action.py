@@ -1,8 +1,9 @@
 import insightconnect_plugin_runtime
 from .schema import VulnSearchInput, VulnSearchOutput, Input, Output, Component
 
-
-# Custom imports below
+# Constants below
+max_size = 500
+avg_size = 200
 
 
 class VulnSearch(insightconnect_plugin_runtime.Action):
@@ -14,16 +15,16 @@ class VulnSearch(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         asset_crit = params.get(Input.ASSET_CRITERIA)
         vuln_crit = params.get(Input.VULN_CRITERIA)
-        size = params.get(Input.SIZE, 200)
+        size = params.get(Input.SIZE, avg_size)
         sort_criteria = params.get(Input.SORT_CRITERIA, {})
         parameters = []
 
         for key, value in sort_criteria.items():
             parameters.append(("sort", f"{key},{value}"))
 
-        if size > 500:
+        if size > max_size:
             self.logger.info(f"'{size}' too large, set to max size of 500.")
-            size = 500
+            size = max_size
         parameters.append(("size", size))
         if asset_crit or vuln_crit:
             body = {"asset": asset_crit, "vulnerability": vuln_crit}
