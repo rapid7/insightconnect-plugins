@@ -7,9 +7,10 @@ from unittest.mock import patch
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
-from komand_mimecast.util.constants import BASIC_ASSISTANCE_MESSAGE, MANAGED_URL_EXISTS_ERROR, ERROR_CASES
-from unit_test.util import Util
 from komand_mimecast.actions import CreateManagedUrl
+from komand_mimecast.util.constants import BASIC_ASSISTANCE_MESSAGE, ERROR_CASES, MANAGED_URL_EXISTS_ERROR
+
+from unit_test.util import Util
 
 
 @patch("requests.request", side_effect=Util.mocked_request)
