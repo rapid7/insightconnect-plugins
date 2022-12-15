@@ -15,8 +15,8 @@ class VulnSearch(insightconnect_plugin_runtime.Action):
         asset_crit = params.get(Input.ASSET_CRITERIA)
         vuln_crit = params.get(Input.VULN_CRITERIA)
         size = params.get(Input.SIZE, 200)
-        sort_criteria = params.get(Input.SORT_CRITERIA, dict())
-        parameters = list()
+        sort_criteria = params.get(Input.SORT_CRITERIA, {})
+        parameters = []
 
         for key, value in sort_criteria.items():
             parameters.append(("sort", f"{key},{value}"))
