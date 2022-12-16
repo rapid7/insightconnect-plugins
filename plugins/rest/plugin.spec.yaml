@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rest
 title: HTTP Requests
 description: The HTTP Requests plugin to make it easy to integrate with RESTful services
-version: 5.1.1
+version: 5.2.0
 vendor: rapid7
 support: community
 supported_versions: ["2022-09-05"]
@@ -115,6 +115,12 @@ actions:
         type: object
         required: false
         example: '{"foo": "bar"}'
+      body_as_an_array:
+        title: Body
+        description: Payload (Array) to submit to the server when making the HTTP Request call
+        type: '[]object'
+        required: false
+        example: '[{"user": "user@example.com"}]'
     output:
       body_object:
         title: Body Object
@@ -158,6 +164,12 @@ actions:
         type: object
         required: false
         example: '{"user": "user@example.com"}'
+      body_as_an_array:
+        title: Body
+        description: Payload (Array) to submit to the server when making the HTTP Request call
+        type: '[]object'
+        required: false
+        example: '[{"user": "user@example.com"}]'
     output:
       body_object:
         title: Body Object
@@ -201,6 +213,12 @@ actions:
         type: object
         required: false
         example: '{"user": "user@example.com"}'
+      body_as_an_array:
+        title: Body
+        description: Payload (Array) to submit to the server when making the HTTP Request call
+        type: '[]object'
+        required: false
+        example: '[{"user": "user@example.com"}]'
     output:
       body_object:
         title: Body Object
@@ -293,6 +311,12 @@ actions:
         type: object
         required: false
         example: '{"user": "user@example.com"}'
+      body_as_an_array:
+        title: Body
+        description: Payload (Array) to submit to the server when making the HTTP Request call
+        type: '[]object'
+        required: false
+        example: '[{"user": "user@example.com"}]'
     output:
       body_object:
         title: Body Object

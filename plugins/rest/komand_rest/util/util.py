@@ -98,13 +98,36 @@ def write_to_file(file: dict, file_path: str) -> str:
     """
     This method will write an input file as bytes and return the file path
     :param file: The file object containing content and filename
-    :file_path: the file path to be used
+    :param file_path: the file path to be used
     :return: the location of the written file
     """
     with open(file_path + file.get("filename"), "wb") as new_file:
         base64_decoded = base64.b64decode(file.get("content"))
         new_file.write(base64_decoded)
     return file_path + file.get("filename")
+
+
+def determine_body_type(body_non_array: dict, body_array: list) -> Union[list[dict], dict[str]]:
+    """
+    This method is used to determine the body input type,
+    if it is an array or object.
+    This function ensures both inputs together will throw an exception,
+    otherwise, continue assigning either one to a variable.
+
+    :param body_non_array: Body object as object
+    :param body_array: Body object as array
+    :return data: Data variable contain body
+    :rtype: Union[list[dict], dict[str]]
+    """
+    if body_array and body_non_array:
+        raise PluginException(cause=MESSAGE_CAUSE_BOTH_INPUTS, assistance=MESSAGE_ASSISTANCE_BOTH_INPUTS)
+    elif body_array:
+        data = body_array
+    elif body_non_array:
+        data = body_non_array
+    else:
+        data = None
+    return data
 
 
 class RestAPI(object):

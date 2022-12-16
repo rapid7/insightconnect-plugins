@@ -2,7 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import PutInput, PutOutput, Component, Input, Output
 
 # Custom imports below
-from komand_rest.util.util import Common
+from komand_rest.util.util import Common, determine_body_type
 
 
 class Put(insightconnect_plugin_runtime.Action):
@@ -12,10 +12,15 @@ class Put(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        body_non_array = params.get(Input.BODY, {})
+        body_array = params.get(Input.BODY_AS_AN_ARRAY, [])
+
+        data = determine_body_type(body_non_array, body_array)
+
         response = self.connection.api.call_api(
             method="PUT",
             path=params.get(Input.ROUTE),
-            json_data=params.get(Input.BODY, {}),
+            json_data=data,
             headers=params.get(Input.HEADERS, {}),
         )
 

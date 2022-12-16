@@ -2,8 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import PatchInput, PatchOutput, Component, Input, Output
 
 # Custom imports below
-from komand_rest.util.util import Common, MESSAGE_CAUSE_BOTH_INPUTS, MESSAGE_ASSISTANCE_BOTH_INPUTS
-from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_rest.util.util import Common, determine_body_type
 
 
 class Patch(insightconnect_plugin_runtime.Action):
@@ -24,17 +23,7 @@ class Patch(insightconnect_plugin_runtime.Action):
         body_non_array = params.get(Input.BODY, {})
         body_array = params.get(Input.BODY_AS_AN_ARRAY, [])
 
-        if body_array and body_non_array:
-            raise PluginException(
-                cause=MESSAGE_CAUSE_BOTH_INPUTS,
-                assistance=MESSAGE_ASSISTANCE_BOTH_INPUTS,
-            )
-        elif body_array:
-            data = body_array
-        elif body_non_array:
-            data = body_non_array
-        else:
-            data = None
+        data = determine_body_type(body_non_array, body_array)
 
         response = self.connection.api.call_api(
             method="PATCH",
