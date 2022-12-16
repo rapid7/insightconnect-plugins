@@ -189,23 +189,23 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "reported_feed",
       "properties": {
-        "ConfidenceLevel": {
+        "confidenceLevel": {
           "type": "integer",
           "title": "Confidence Level",
           "description": "Level of confidence",
           "order": 3
-        },
-        "Name": {
-          "type": "string",
-          "title": "Name",
-          "description": "Name",
-          "order": 2
         },
         "id": {
           "type": "string",
           "title": "ID",
           "description": "ID",
           "order": 1
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
+          "order": 2
         }
       }
     },
@@ -213,13 +213,13 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "source",
       "properties": {
-        "ConfidenceLevel": {
+        "confidenceLevel": {
           "type": "integer",
           "title": "Confidence Level",
           "description": "Level of confidence",
           "order": 2
         },
-        "Name": {
+        "name": {
           "type": "string",
           "title": "Name",
           "description": "Name",
@@ -227,8 +227,8 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
         }
       },
       "required": [
-        "ConfidenceLevel",
-        "Name"
+        "confidenceLevel",
+        "name"
       ]
     }
   }
