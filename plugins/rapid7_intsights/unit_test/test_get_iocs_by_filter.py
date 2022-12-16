@@ -19,7 +19,7 @@ class TestGetIocsByFilter(TestCase):
             "content": [
                 {
                     "firstSeen": "2020-01-01T20:01:27.344Z",
-                    "geoLocation": "US",
+                    "geolocation": "US",
                     "lastSeen": "2020-01-30T16:18:51.148Z",
                     "lastUpdateDate": "2020-02-21T23:00:51.268Z",
                     "relatedCampaigns": ["SolarWinds"],
@@ -31,7 +31,7 @@ class TestGetIocsByFilter(TestCase):
                     "type": "Domains",
                     "value": "rapid7.com",
                     "whitelisted": "false",
-                    "reportedFeeds": [{"ID": "SampleID", "ConfidenceLevel": 3, "Name": "AlienVault OTX"}],
+                    "reportedFeeds": [{"id": "SampleID", "confidenceLevel": 3, "name": "AlienVault OTX"}],
                 }
             ],
             "nextOffset": "2022-11-18T16:59:01.626Z",

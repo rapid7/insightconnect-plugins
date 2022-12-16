@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_intsights
 title: Threat Command
 description: Threat Command by Rapid7 is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
-version: 4.1.0
+version: 5.0.0
 supported_versions: ["2.4.0"]
 vendor: rapid7
 support: rapid7
@@ -23,12 +23,12 @@ hub_tags:
   features: []
 types:
   source:
-    Name:
+    name:
       title: Name
       description: Name
       type: string
       required: true
-    ConfidenceLevel:
+    confidenceLevel:
       title: Confidence Level
       description: Level of confidence
       type: integer
@@ -39,12 +39,12 @@ types:
       description: ID
       type: string
       required: false
-    Name:
+    name:
       title: Name
       description: Name
       type: string
       required: false
-    ConfidenceLevel:
+    confidenceLevel:
       title: Confidence Level
       description: Level of confidence
       type: integer
@@ -375,7 +375,7 @@ types:
       description: Last update date
       type: string
       required: false
-    geoLocation:
+    geolocation:
       title: Geographic Location
       description: Geographic location
       type: string
@@ -495,7 +495,7 @@ actions:
         description: Sources
         type: '[]source'
         required: false
-        example: '[ { "ConfidenceLevel": 2, "Name": "Cyber Threat Alliance" } ]'
+        example: '[ { "confidenceLevel": 2, "name": "Cyber Threat Alliance" } ]'
       tags:
         title: Tags
         description: Tags
@@ -1076,7 +1076,7 @@ actions:
         description: List of IOCs that match filters
         type: "[]ioc_content"
         required: false
-        example: '{ "content": [ { "value": "rapid7.com", "type": "Domains", "severity": "High", "score": 100, "whitelisted": false, "firstSeen": "2020-01-01T20:01:27.344Z", "lastSeen": "2020-01-30T16:18:51.148Z", "lastUpdateDate": "2020-02-21T23:00:51.268Z", "geoLocation": "US", "tags": [ "MyTag_1" ], "relatedMalware": [ "doppeldridex", "dridex" ], "relatedCampaigns": [ "SolarWinds" ], "relatedThreatActors": [ "doppelspider" ], "reportedFeeds": [ { "ID": "SampleID", "Name": "AlienVault OTX", "ConfidenceLevel": 3 } ] } ], "nextOffset": "2022-11-18T16:59:01.626Z" }'
+        example: '{ "content": [ { "value": "rapid7.com", "type": "Domains", "severity": "High", "score": 100, "whitelisted": false, "firstSeen": "2020-01-01T20:01:27.344Z", "lastSeen": "2020-01-30T16:18:51.148Z", "lastUpdateDate": "2020-02-21T23:00:51.268Z", "geolocation": "US", "tags": [ "MyTag_1" ], "relatedMalware": [ "doppeldridex", "dridex" ], "relatedCampaigns": [ "SolarWinds" ], "relatedThreatActors": [ "doppelspider" ], "reportedFeeds": [ { "ID": "SampleID", "Name": "AlienVault OTX", "ConfidenceLevel": 3 } ] } ], "nextOffset": "2022-11-18T16:59:01.626Z" }'
       nextOffset:
         title: Next Offset
         description: The offset to the next page of IOCs
