@@ -1,7 +1,7 @@
 from .schema import AuthorizeSecurityGroupIngressInput, AuthorizeSecurityGroupIngressOutput, Component
 
 # Custom imports below
-from icon_aws_ec2.util.common import AWSAction
+from insightconnect_plugin_runtime.clients.aws_client import AWSAction
 
 
 class AuthorizeSecurityGroupIngress(AWSAction):
