@@ -26,7 +26,7 @@ class GetIndicatorByValue(insightconnect_plugin_runtime.Action):
                 Output.FIRST_SEEN: response.get("firstSeen"),
                 Output.LAST_SEEN: response.get("lastSeen"),
                 Output.LAST_UPDATE: response.get("lastUpdateDate"),
-                Output.GEO_LOCATION: response.get("Geolocation"),
+                Output.GEO_LOCATION: response.get("geolocation"),
                 Output.SOURCES: response.get("sources", []),
                 Output.TAGS: response.get("tags", []),
                 Output.SYSTEM_TAGS: response.get("SystemTags", []),

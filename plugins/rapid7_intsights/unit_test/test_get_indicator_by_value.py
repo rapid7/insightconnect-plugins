@@ -29,13 +29,13 @@ class TestGetIndicatorByValue(TestCase):
             "related_threat_actors": ["doppelspider"],
             "score": 100,
             "severity": "High",
-            "sources": [{"ConfidenceLevel": 3, "Name": "AlienVault OTX"}],
+            "sources": [{"confidenceLevel": 3, "name": "AlienVault OTX"}],
             "system_tags": ["Phishing"],
             "tags": ["MyTag_1"],
             "type": "Domains",
             "value": "rapid7.com",
             "whitelist": False,
-            "reported_feeds": [{"ID": "SampleID", "ConfidenceLevel": 3, "Name": "AlienVault OTX"}],
+            "reported_feeds": [{"id": "SampleID", "confidenceLevel": 3, "name": "AlienVault OTX"}],
         }
         self.assertEqual(actual, expected)
 

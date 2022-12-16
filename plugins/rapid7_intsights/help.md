@@ -102,7 +102,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|content|[]ioc_content|False|List of IOCs that match filters|{ "content": [ { "value": "rapid7.com", "type": "Domains", "severity": "High", "score": 100, "whitelisted": false, "firstSeen": "2020-01-01T20:01:27.344Z", "lastSeen": "2020-01-30T16:18:51.148Z", "lastUpdateDate": "2020-02-21T23:00:51.268Z", "geoLocation": "US", "tags": [ "MyTag_1" ], "relatedMalware": [ "doppeldridex", "dridex" ], "relatedCampaigns": [ "SolarWinds" ], "relatedThreatActors": [ "doppelspider" ], "reportedFeeds": [ { "ID": "SampleID", "Name": "AlienVault OTX", "ConfidenceLevel": 3 } ] } ], "nextOffset": "2022-11-18T16:59:01.626Z" }|
+|content|[]ioc_content|False|List of IOCs that match filters|{ "content": [ { "value": "rapid7.com", "type": "Domains", "severity": "High", "score": 100, "whitelisted": false, "firstSeen": "2020-01-01T20:01:27.344Z", "lastSeen": "2020-01-30T16:18:51.148Z", "lastUpdateDate": "2020-02-21T23:00:51.268Z", "geolocation": "US", "tags": [ "MyTag_1" ], "relatedMalware": [ "doppeldridex", "dridex" ], "relatedCampaigns": [ "SolarWinds" ], "relatedThreatActors": [ "doppelspider" ], "reportedFeeds": [ { "ID": "SampleID", "Name": "AlienVault OTX", "ConfidenceLevel": 3 } ] } ], "nextOffset": "2022-11-18T16:59:01.626Z" }|
 |nextOffset|string|False|The offset to the next page of IOCs|2020-01-01T20:01:27.344Z|
 
 
@@ -120,7 +120,7 @@ Example output:
       "firstSeen": "2020-01-01T20:01:27.344Z",
       "lastSeen": "2020-01-30T16:18:51.148Z",
       "lastUpdateDate": "2020-02-21T23:00:51.268Z",
-      "geoLocation": "US",
+      "geolocation": "US",
       "tags": [
         "MyTag_1"
       ],
@@ -136,9 +136,9 @@ Example output:
       ],
       "reportedFeeds": [
         {
-          "ID": "SampleID",
-          "Name": "AlienVault OTX",
-          "ConfidenceLevel": 3
+          "id": "SampleID",
+          "name": "AlienVault OTX",
+          "confidenceLevel": 3
         }
       ]
     }
@@ -713,7 +713,7 @@ Example input:
 |related_threat_actors|[]string|False|Related threat actors|["doppelspider"]|
 |score|float|False|Score|10|
 |severity|string|False|Severity|Low|
-|sources|[]source|False|Sources|[ { "ConfidenceLevel": 2, "Name": "Cyber Threat Alliance" } ]|'
+|sources|[]source|False|Sources|[ { "confidenceLevel": 2, "name": "Cyber Threat Alliance" } ]|
 |system_tags|[]string|False|System tags|["MyTag_1"]|
 |tags|[]string|False|Tags|["MyTag_1"]|
 |type|string|False|Type|Domains|
@@ -1185,7 +1185,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 4.1.0 - Add action Get IOCs By Filter which returns a list of paginated IOC data based on input filters applied against IOC properties
+* 5.0.0 - Add action Get IOCs By Filter which returns a list of paginated IOC data based on input filters applied against IOC properties | Fix Bug relating to mismatched property names of output types geolocation, sources, and reported feeds for Get Indicator by Value action
 * 4.0.0 - Rename Plugin to Threat Command | Update descriptions to Threat Command | Update Get Indicator By Value to use API V3 | Remove Rescan Indicator and Get Indicator Scan Status | Update Get CVE List to request one page of results only
 * 3.2.0 - Fix is_closed bug in trigger | Add new input `source_date_from_enum` in trigger which allows user to specifiy Source Date From using ENUM rather than timestamp/string
 * 3.1.0 - Add new actions Add CVEs, Delete CVEs and Get CVE List
