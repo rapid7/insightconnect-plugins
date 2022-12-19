@@ -195,7 +195,7 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
                     normalized_urls.append(f"https://{url}")
 
             for url in normalized_urls:
-                domains.append(url.replace("https://", "").replace("http://", ""))
+                domains.append((url.replace("https://", "").replace("http://", "")).lower())
 
         return {
             "domains": self.remove_duplicates(domains),
