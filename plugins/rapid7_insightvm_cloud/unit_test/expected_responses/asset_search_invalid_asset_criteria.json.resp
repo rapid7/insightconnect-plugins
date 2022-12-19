@@ -1,7 +1,7 @@
 {
-    "_type": "com.rapid7.spring.rest.error.resource.ErrorResource",
-    "localized_message": null,
-    "message": "Your query string format is not valid. It has 1 error: Unable to parse query: invalid asset criteria due to The query invalid asset criteria seems to be invalid format: null",
-    "status": 400,
-    "throwable": null
+   "_type":"com.rapid7.spring.rest.error.resource.ErrorResource",
+   "status":400,
+   "localized_message": null,
+   "message":"Your query string format is not valid. It has 1 error: Unable to parse query: invalid asset criteria due to The query invalid asset criteria seems to be invalid format: null",
+   "throwable": null
 }
