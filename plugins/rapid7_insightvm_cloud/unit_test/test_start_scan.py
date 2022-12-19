@@ -64,7 +64,7 @@ class TestStartScan(TestCase):
         data = Utils.read_file_to_dict("expected_responses/start_scan_invalid_asset_ids.json.resp")
         self.assertEqual(assistance, context.exception.assistance)
         self.assertEqual(cause, context.exception.cause)
-        self.assertEqual(data, context.exception.data)
+        self.assertEqual(str(data), context.exception.data)
 
     @patch("requests.request", side_effect=mock_request)
     def test_start_scan_no_asset_ids(self, _mock_req):
@@ -82,7 +82,7 @@ class TestStartScan(TestCase):
         data = Utils.read_file_to_dict("expected_responses/start_scan_invalid_asset_ids.json.resp")
         self.assertEqual(assistance, context.exception.assistance)
         self.assertEqual(cause, context.exception.cause)
-        self.assertEqual(data, context.exception.data)
+        self.assertEqual(str(data), context.exception.data)
 
     @patch("requests.request", side_effect=mock_request)
     def test_start_scan_invalid_ips(self, _mock_req):
