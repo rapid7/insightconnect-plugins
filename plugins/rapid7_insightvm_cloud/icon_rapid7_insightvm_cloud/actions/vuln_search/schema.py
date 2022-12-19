@@ -77,559 +77,78 @@ class VulnSearchOutput(insightconnect_plugin_runtime.Output):
     "vulnerabilities"
   ],
   "definitions": {
-    "cvss_v2": {
-      "type": "object",
-      "title": "cvss_v2",
-      "properties": {
-        "access_complexity": {
-          "type": "string",
-          "title": "Access Complexity",
-          "description": "CVSSv2 access complexity metric",
-          "order": 1
-        },
-        "access_vector": {
-          "type": "string",
-          "title": "Access Vector",
-          "description": "CVSSv2 access vector metric",
-          "order": 2
-        },
-        "authentication": {
-          "type": "string",
-          "title": "Authentication",
-          "description": "CVSSv2 authentication metric",
-          "order": 3
-        },
-        "availability_impact": {
-          "type": "string",
-          "title": "Availability Impact",
-          "description": "CVSSv2 availability impact metric",
-          "order": 4
-        },
-        "confidentiality_impact": {
-          "type": "string",
-          "title": "Confidentiality Impact",
-          "description": "CVSSv2 confidentiality impact metric",
-          "order": 5
-        },
-        "exploit_score": {
-          "type": "number",
-          "title": "Exploit Score",
-          "description": "CVSSv2 combined exploit metric score (Access Complexity/Access Vector/Authentication)",
-          "order": 6
-        },
-        "impact_score": {
-          "type": "number",
-          "title": "Impact Score",
-          "description": "CVSSv2 combined impact metric score (Confidentiality/Integrity/Availability)",
-          "order": 7
-        },
-        "integrity_impact": {
-          "type": "string",
-          "title": "Integrity Impact",
-          "description": "CVSSv2 integrity impact metric",
-          "order": 8
-        },
-        "score": {
-          "type": "number",
-          "title": "Score",
-          "description": "CVSSv2 score",
-          "order": 9
-        },
-        "vector": {
-          "type": "string",
-          "title": "Vector",
-          "description": "CVSSv2 combined vector string",
-          "order": 10
-        }
-      }
-    },
-    "cvss_v3": {
-      "type": "object",
-      "title": "cvss_v3",
-      "properties": {
-        "attack_complexity": {
-          "type": "string",
-          "title": "Attack Complexity",
-          "description": "CVSSv3 attack complexity metric",
-          "order": 1
-        },
-        "attack_vector": {
-          "type": "string",
-          "title": "Attack Vector",
-          "description": "CVSSv3 attack vector metric",
-          "order": 2
-        },
-        "availability_impact": {
-          "type": "string",
-          "title": "Availability Impact",
-          "description": "CVSSv3 availability impact metric",
-          "order": 3
-        },
-        "confidentiality_impact": {
-          "type": "string",
-          "title": "Confidentiality Impact",
-          "description": "CVSSv3 confidentiality impact metric",
-          "order": 4
-        },
-        "exploit_score": {
-          "type": "number",
-          "title": "Exploit Score",
-          "description": "CVSSv3 combined exploit metric score (Attack Complexity/Attack Vector/Privilege Required/Scope/User Interaction)",
-          "order": 5
-        },
-        "impact_score": {
-          "type": "number",
-          "title": "Impact Score",
-          "description": "CVSSv3 combined impact metric score (Confidentiality/Integrity/Availability)",
-          "order": 6
-        },
-        "integrity_impact": {
-          "type": "string",
-          "title": "Integrity Impact",
-          "description": "CVSSv3 integrity impact metric",
-          "order": 7
-        },
-        "privilege_required": {
-          "type": "string",
-          "title": "Privilege Required",
-          "description": "CVSSv3 privilege required metric",
-          "order": 8
-        },
-        "scope": {
-          "type": "string",
-          "title": "Scope",
-          "description": "CVSSv3 scope metric",
-          "order": 9
-        },
-        "score": {
-          "type": "number",
-          "title": "Score",
-          "description": "CVSSv3 score",
-          "order": 10
-        },
-        "user_interaction": {
-          "type": "string",
-          "title": "User Interaction",
-          "description": "CVSSv3 user interaction metric",
-          "order": 11
-        },
-        "vector": {
-          "type": "string",
-          "title": "Vector",
-          "description": "CVSSv3 combined vector string",
-          "order": 12
-        }
-      }
-    },
-    "link": {
-      "type": "object",
-      "title": "link",
-      "properties": {
-        "href": {
-          "type": "string",
-          "title": "URL",
-          "description": "A hypertext reference, which is either a URI (see RFC 3986) or URI template (see RFC 6570)",
-          "order": 1
-        },
-        "rel": {
-          "type": "string",
-          "title": "Rel",
-          "description": "Link relation type following RFC 5988",
-          "order": 2
-        }
-      }
-    },
-    "pci": {
-      "type": "object",
-      "title": "pci",
-      "properties": {
-        "adjusted_CVSS_score": {
-          "type": "integer",
-          "title": "Adjusted CVSS score",
-          "description": "PCI adjusted CVSS score",
-          "order": 1
-        },
-        "adjusted_severity_score": {
-          "type": "integer",
-          "title": "Adjusted severity score",
-          "description": "PCI adjusted severity score",
-          "order": 2
-        },
-        "fail": {
-          "type": "boolean",
-          "title": "Fail",
-          "description": "Whether this vulnerability results in a PCI assessment failure",
-          "order": 3
-        },
-        "special_notes": {
-          "type": "string",
-          "title": "Special Notes",
-          "description": "PCI special notes",
-          "order": 4
-        },
-        "status": {
-          "type": "string",
-          "title": "Status",
-          "description": "PCI status",
-          "order": 5
-        }
-      }
-    },
     "vulnerability": {
       "type": "object",
       "title": "vulnerability",
       "properties": {
-        "added": {
+        "first_found": {
           "type": "string",
-          "title": "Added",
+          "title": "First Found",
           "displayType": "date",
-          "description": "Date the vulnerability was last added to an asset",
+          "description": "Date the vulnerability was first found in InsightVM",
+          "format": "date-time",
+          "order": 1
+        },
+        "key": {
+          "type": "string",
+          "title": "Vulnerability Key",
+          "description": "The key to identify a specific instance if the type is Instance",
+          "order": 2
+        },
+        "last_found": {
+          "type": "string",
+          "title": "Last Found",
+          "displayType": "date",
+          "description": "Date the vulnerability was last found in InsightVM",
           "format": "date-time",
           "order": 3
         },
-        "categories": {
+        "proof": {
           "type": "string",
-          "title": "Categories",
-          "description": "Labels this vulnerability falls under",
-          "order": 6
-        },
-        "cves": {
-          "type": "string",
-          "title": "CVES",
-          "description": "CVES ID",
-          "order": 7
-        },
-        "cvss_v2": {
-          "$ref": "#/definitions/cvss_v2",
-          "title": "CVSSv2",
-          "description": "information regarding CVSSv2",
-          "order": 8
-        },
-        "cvss_v3": {
-          "$ref": "#/definitions/cvss_v3",
-          "title": "CVSSv3",
-          "description": "information regarding CVSSv3",
-          "order": 9
-        },
-        "denial_of_service": {
-          "type": "boolean",
-          "title": "Denial of Service",
-          "description": "Whether or not this vulnerability is a denial of service attack",
-          "order": 10
-        },
-        "description": {
-          "type": "string",
-          "title": "Description",
-          "description": "Description of the vulnerability",
-          "order": 2
-        },
-        "exploits": {
-          "type": "array",
-          "title": "Exploits",
-          "description": "List of exploits related to the vulnerability",
-          "items": {
-            "type": "string"
-          },
-          "order": 11
-        },
-        "id": {
-          "type": "string",
-          "title": "ID",
-          "description": "ID of the vulnerability",
-          "order": 12
-        },
-        "links": {
-          "type": "array",
-          "title": "Links",
-          "description": "List of links related to the vulnerability",
-          "items": {
-            "$ref": "#/definitions/link"
-          },
-          "order": 13
-        },
-        "malware_kits": {
-          "type": "array",
-          "title": "Malware Kits",
-          "description": "List of malware kits related to the vulnerability",
-          "items": {
-            "type": "string"
-          },
-          "order": 14
-        },
-        "modified": {
-          "type": "string",
-          "title": "Modified",
-          "displayType": "date",
-          "description": "Date the vulnerability was last modified",
-          "format": "date-time",
+          "title": "Proof",
+          "description": "Proof of the vulnerability, i.e. \\u003cp\\u003e\\u003cp\\u003eOpenBSD OpenSSH 4.3 on Linux\\u003c/p\\u003e\\u003c/p\\u003e",
           "order": 4
         },
-        "pci": {
-          "$ref": "#/definitions/pci",
-          "title": "PCI",
-          "description": "information regarding PCI",
-          "order": 15
-        },
-        "published": {
+        "solution_fix": {
           "type": "string",
-          "title": "Published",
-          "displayType": "date",
-          "description": "Date the vulnerability was added to InsightVM",
-          "format": "date-time",
+          "title": "Fix",
+          "description": "The steps that are part of the fix this solution prescribes",
           "order": 5
         },
-        "references": {
+        "solution_id": {
           "type": "string",
-          "title": "References",
-          "description": "Links to information related to the vulnerability",
-          "order": 16
+          "title": "Solution ID",
+          "description": "The identifier of the solution",
+          "order": 6
         },
-        "risk_score": {
-          "type": "number",
-          "title": "Risk Score",
-          "description": "Risk score (with criticality adjustments) of the vulnerability",
-          "order": 17
-        },
-        "severity": {
+        "solution_summary": {
           "type": "string",
-          "title": "Severity",
-          "description": "Severity of the vulnerability",
-          "order": 18
+          "title": "Solution Summary",
+          "description": "Remediation summary",
+          "order": 7
         },
-        "severity_score": {
-          "type": "integer",
-          "title": "Severity Score",
-          "description": "Severity score of the vulnerability",
-          "order": 19
-        },
-        "title": {
+        "solution_type": {
           "type": "string",
-          "title": "Title",
-          "description": "Name of the vulnerability",
-          "order": 1
+          "title": "Solution Type",
+          "description": "Remediation type",
+          "order": 8
+        },
+        "status": {
+          "type": "string",
+          "title": "Status",
+          "description": "Status, i.e. vulnerable",
+          "order": 9
+        },
+        "vulnerability_id": {
+          "type": "string",
+          "title": "Vulnerability ID",
+          "description": "The identifier of the vulnerability",
+          "order": 10
         }
       },
       "required": [
-        "added",
-        "categories",
-        "cves",
-        "cvss_v2",
-        "cvss_v3",
-        "denial_of_service",
-        "description",
-        "exploits",
-        "id",
-        "links",
-        "malware_kits",
-        "modified",
-        "pci",
-        "published",
-        "references",
-        "risk_score",
-        "severity",
-        "severity_score",
-        "title"
-      ],
-      "definitions": {
-        "cvss_v2": {
-          "type": "object",
-          "title": "cvss_v2",
-          "properties": {
-            "access_complexity": {
-              "type": "string",
-              "title": "Access Complexity",
-              "description": "CVSSv2 access complexity metric",
-              "order": 1
-            },
-            "access_vector": {
-              "type": "string",
-              "title": "Access Vector",
-              "description": "CVSSv2 access vector metric",
-              "order": 2
-            },
-            "authentication": {
-              "type": "string",
-              "title": "Authentication",
-              "description": "CVSSv2 authentication metric",
-              "order": 3
-            },
-            "availability_impact": {
-              "type": "string",
-              "title": "Availability Impact",
-              "description": "CVSSv2 availability impact metric",
-              "order": 4
-            },
-            "confidentiality_impact": {
-              "type": "string",
-              "title": "Confidentiality Impact",
-              "description": "CVSSv2 confidentiality impact metric",
-              "order": 5
-            },
-            "exploit_score": {
-              "type": "number",
-              "title": "Exploit Score",
-              "description": "CVSSv2 combined exploit metric score (Access Complexity/Access Vector/Authentication)",
-              "order": 6
-            },
-            "impact_score": {
-              "type": "number",
-              "title": "Impact Score",
-              "description": "CVSSv2 combined impact metric score (Confidentiality/Integrity/Availability)",
-              "order": 7
-            },
-            "integrity_impact": {
-              "type": "string",
-              "title": "Integrity Impact",
-              "description": "CVSSv2 integrity impact metric",
-              "order": 8
-            },
-            "score": {
-              "type": "number",
-              "title": "Score",
-              "description": "CVSSv2 score",
-              "order": 9
-            },
-            "vector": {
-              "type": "string",
-              "title": "Vector",
-              "description": "CVSSv2 combined vector string",
-              "order": 10
-            }
-          }
-        },
-        "cvss_v3": {
-          "type": "object",
-          "title": "cvss_v3",
-          "properties": {
-            "attack_complexity": {
-              "type": "string",
-              "title": "Attack Complexity",
-              "description": "CVSSv3 attack complexity metric",
-              "order": 1
-            },
-            "attack_vector": {
-              "type": "string",
-              "title": "Attack Vector",
-              "description": "CVSSv3 attack vector metric",
-              "order": 2
-            },
-            "availability_impact": {
-              "type": "string",
-              "title": "Availability Impact",
-              "description": "CVSSv3 availability impact metric",
-              "order": 3
-            },
-            "confidentiality_impact": {
-              "type": "string",
-              "title": "Confidentiality Impact",
-              "description": "CVSSv3 confidentiality impact metric",
-              "order": 4
-            },
-            "exploit_score": {
-              "type": "number",
-              "title": "Exploit Score",
-              "description": "CVSSv3 combined exploit metric score (Attack Complexity/Attack Vector/Privilege Required/Scope/User Interaction)",
-              "order": 5
-            },
-            "impact_score": {
-              "type": "number",
-              "title": "Impact Score",
-              "description": "CVSSv3 combined impact metric score (Confidentiality/Integrity/Availability)",
-              "order": 6
-            },
-            "integrity_impact": {
-              "type": "string",
-              "title": "Integrity Impact",
-              "description": "CVSSv3 integrity impact metric",
-              "order": 7
-            },
-            "privilege_required": {
-              "type": "string",
-              "title": "Privilege Required",
-              "description": "CVSSv3 privilege required metric",
-              "order": 8
-            },
-            "scope": {
-              "type": "string",
-              "title": "Scope",
-              "description": "CVSSv3 scope metric",
-              "order": 9
-            },
-            "score": {
-              "type": "number",
-              "title": "Score",
-              "description": "CVSSv3 score",
-              "order": 10
-            },
-            "user_interaction": {
-              "type": "string",
-              "title": "User Interaction",
-              "description": "CVSSv3 user interaction metric",
-              "order": 11
-            },
-            "vector": {
-              "type": "string",
-              "title": "Vector",
-              "description": "CVSSv3 combined vector string",
-              "order": 12
-            }
-          }
-        },
-        "link": {
-          "type": "object",
-          "title": "link",
-          "properties": {
-            "href": {
-              "type": "string",
-              "title": "URL",
-              "description": "A hypertext reference, which is either a URI (see RFC 3986) or URI template (see RFC 6570)",
-              "order": 1
-            },
-            "rel": {
-              "type": "string",
-              "title": "Rel",
-              "description": "Link relation type following RFC 5988",
-              "order": 2
-            }
-          }
-        },
-        "pci": {
-          "type": "object",
-          "title": "pci",
-          "properties": {
-            "adjusted_CVSS_score": {
-              "type": "integer",
-              "title": "Adjusted CVSS score",
-              "description": "PCI adjusted CVSS score",
-              "order": 1
-            },
-            "adjusted_severity_score": {
-              "type": "integer",
-              "title": "Adjusted severity score",
-              "description": "PCI adjusted severity score",
-              "order": 2
-            },
-            "fail": {
-              "type": "boolean",
-              "title": "Fail",
-              "description": "Whether this vulnerability results in a PCI assessment failure",
-              "order": 3
-            },
-            "special_notes": {
-              "type": "string",
-              "title": "Special Notes",
-              "description": "PCI special notes",
-              "order": 4
-            },
-            "status": {
-              "type": "string",
-              "title": "Status",
-              "description": "PCI status",
-              "order": 5
-            }
-          }
-        }
-      }
+        "solution_type"
+      ]
     }
   }
 }
