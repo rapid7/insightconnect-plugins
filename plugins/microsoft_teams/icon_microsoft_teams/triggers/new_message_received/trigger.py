@@ -279,7 +279,7 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
         cleaned_message = re.sub(r"\"font-size\s*?:.*?(;|(?=\"\"|'|>))", '""', msg)
         urls = re.findall(
             r"(?m)\b(?:http(?:s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+\b",
-            cleaned_message.lower(),
+            cleaned_message,
         )
         normalized_urls = []
         for url in urls:
