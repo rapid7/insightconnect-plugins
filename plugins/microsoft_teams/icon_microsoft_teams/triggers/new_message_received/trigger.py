@@ -15,7 +15,7 @@ import re
 import requests
 import maya
 import validators
-
+import logging
 
 class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
@@ -189,11 +189,17 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
 
         if urls:
             for url in urls:
-                if url.startswith("http") or url.startswith("https"):
-                    normalized_urls.append(url)
-                else:
-                    normalized_urls.append(f"https://{url}")
-
+                logging.info(f"URL: {url}")
+                if not url.lower().startswith("http") and not url.lower().startswith("https"):
+                    url = f"https://{url}"
+                # ensure domain, subdomain, and suffix are lower case
+                # path and query params may be upper case
+                split_url = url.split("/")
+                split_url = ["/".join(split_url[i:i + 3]) for i in range(0, len(split_url), 3)]
+                split_url[0] = split_url[0].lower()
+                url = "/".join(split_url)
+                logging.info(f"UPDATED URL: {url}")
+                normalized_urls.append(url)
             for url in normalized_urls:
                 domains.append((url.replace("https://", "").replace("http://", "")).lower())
 
