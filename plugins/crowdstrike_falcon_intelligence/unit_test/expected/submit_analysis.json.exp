@@ -1,0 +1,21 @@
+{
+  "submission": {
+    "id": "9382986b58cb4b44935e7eba079842f3_7bcabfa4d2ef47e3abd98b7957202e4e",
+    "cid": "9382986b58cb4b44935e7eba079842f3",
+    "origin": "apigateway",
+    "state": "created",
+    "createdTimestamp": "2022-11-29T09:43:47Z",
+    "sandbox": [
+      {
+        "sha256": "8decc8571946d4cd70a024949e033a2a2a54377fe9f1c1b944c20f9ee11a9e51",
+        "environmentId": 100,
+        "commandLine": "/my /command",
+        "actionScript": "default_randomfiles",
+        "systemDate": "2022-11-01",
+        "systemTime": "12:33",
+        "networkSettings": "default",
+        "submitName": "my_name"
+      }
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "meta": {
+    "query_time": 0.090100177,
+    "powered_by": "falconx-api",
+    "trace_id": "2243e9ce-764a-43da-8b0e-5303f141f653",
+    "quota": {
+      "total": 100,
+      "used": 37,
+      "in_progress": 0
+    }
+  },
+  "resources": [
+    {
+      "id": "9382986b58cb4b44935e7eba079842f3_16a4193ca8644859a20b25d649d0a0a1",
+      "cid": "9382986b58cb4b44935e7eba079842f3",
+      "user_id": "a40788bfac324a069c2685fa7c970370",
+      "user_name": "user@example.com",
+      "user_uuid": "a149764d-21ee-42af-ac9f-023f5d23ab81",
+      "origin": "uiproxy",
+      "state": "error",
+      "created_timestamp": "2022-11-10T15:15:59Z",
+      "sandbox": [
+        {
+          "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+          "environment_id": 100,
+          "submit_name": "Archive.zip"
+        }
+      ]
+    }
+  ],
+  "errors": []
+}
