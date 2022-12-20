@@ -408,7 +408,7 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |asset|asset|True|Asset details|
-|vulnerabilities|[]vulnerability|False|Vulnerabilities associated with the asset|
+|vulnerabilities|[]asset_vulnerability|False|Vulnerabilities associated with the asset|
 
 Example output:
 
