@@ -194,12 +194,12 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
                 # ensure domain, subdomain, and suffix are lower case
                 # path and query params may be upper case
                 split_url = url.split("/")
-                split_url = ["/".join(split_url[i:i + 3]) for i in range(0, len(split_url), 3)]
+                split_url = ["/".join(split_url[i : i + 3]) for i in range(0, len(split_url), 3)]
                 split_url[0] = split_url[0].lower()
                 url = "/".join(split_url)
                 normalized_urls.append(url)
             for url in normalized_urls:
-                domains.append((url.replace("https://", "").replace("http://", "")).lower())
+                domains.append(url.replace("https://", "").replace("http://", ""))
 
         return {
             "domains": self.remove_duplicates(domains),
