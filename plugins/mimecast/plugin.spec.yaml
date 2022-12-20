@@ -5,7 +5,7 @@ name: mimecast
 title: Mimecast
 description: Services for email security, archiving and continuity. Protect, manage
   and archive without compromise
-version: 5.0.2
+version: 5.1.0
 supported_versions: ["Mimecast API 2022-11-07"]
 vendor: rapid7
 support: rapid7
@@ -739,6 +739,94 @@ types:
       description: Criteria used when the remediation incident was created
       type: "searchCritera"
       required: false
+  sender:
+    emailAddress:
+      title: Email Address
+      description: The email address of the sender
+      type: string
+      required: false
+    displayableName:
+      title: Display Name
+      description: The display name of the sender
+      type: string
+      required: false
+  recipient:
+    emailAddress:
+      title: Email Address
+      description: The email address of the recipient
+      type: string
+      required: false
+    displayableName:
+      title: Display Name
+      description: The display name of the recipient
+      type: string
+      required: false
+  tracked_emails:
+    detectionLevel:
+      title: Detection Level
+      description: The spam scanning level applied to the message
+      type: string
+      required: false
+    status:
+      title: Status
+      description: The status of the message
+      type: string
+      required: false
+    received:
+      title: Received
+      description: The date and time the message was received by Mimecast
+      type: date
+      required: false
+    attachments:
+      title: Attachments
+      description: Indicates whether the message has attachments or not
+      type: boolean
+      required: false
+    route:
+      title: Route
+      description: The route of the message
+      type: string
+      required: false
+    to:
+      title: To
+      description: An array of recipients
+      type: "[]recipient"
+      required: false
+    fromHdr:
+      title: Header From
+      description: An object describing the header from address information of the message
+      type: sender
+      required: false
+    fromEnv:
+      title: Envelope From
+      description: An object describing the envelope from address of the message
+      type: sender
+      required: false
+    senderIP:
+      title: Sender IP Address
+      description: The source IP address of the message
+      type: string
+      required: false
+    id:
+      title: ID
+      description: The Mimecast ID of the message
+      type: string
+      required: false
+    sent:
+      title: Sent
+      description: The date and time that the message was sent / processed by Mimecast
+      type: date
+      required: false
+    subject:
+      title: Subject
+      description: The subject of the message
+      type: string
+      required: false
+    spamScore:
+      title: Spam Score
+      description: The spam score of the received message
+      type: integer
+      required: false
 connection:
   region:
     title: Region
@@ -780,8 +868,88 @@ connection:
     type: credential_secret_key
     example: eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi
     required: true
-
 actions:
+  track_messages:
+    title: Track Messages
+    description: Search for messages processing, and current state using specific message information. Either one of `Send From`, `Send To`, `Subject`, `Sender IP` fields, or `Message ID` must not be empty
+    input:
+      search_reason:
+        title: Search Reason
+        description: Reason for Tracking a email, used for activity tracking purposes
+        type: string
+        example: Example Reason
+        required: false
+      start_date:
+        title: Start Date
+        description: The date and time of the earliest message to track
+        type: date
+        example: Example Reason
+        required: false
+      end_date:
+        title: End Date
+        description: The date and time of the latest message to track
+        type: date
+        example: Example Reason
+        required: false
+      message_id:
+        title: Message ID
+        description: The internet message id of the message to track
+        type: string
+        example: ExampleID
+        required: false
+      routes:
+        title: Routes
+        description: An array of routes to filter by. Possible values are internal, outbound and inbound
+        type: "[]string"
+        example: '["internal", "outbound"]'
+        required: false
+      send_from:
+        title: Send From
+        description: The sending email address or domain of the messages to track
+        type: string
+        example: user@example.com
+        required: false
+      send_to:
+        title: Send To
+        description: The recipient email address or domain of the messages to track
+        type: string
+        example: user@example.com
+        required: false
+      subject:
+        title: Subject
+        description: The subject of the messages to track
+        type: string
+        example: Example Email Subject
+        required: false
+      sender_ip:
+        title: Sender IP
+        description: The source IP address of messages to track
+        type: string
+        example: 192.168.0.1
+        required: false
+    output:
+      tracked_emails:
+        title: Tracked Emails
+        description: An array of found tracked emails
+        type: "[]tracked_emails"
+        required: true
+  delete_blocked_sender_policy:
+    title: Delete Blocked Sender Policy
+    description: Deletes a blocked sender policy
+    input:
+      id:
+        title: ID
+        description: The Mimecast secure ID of an existing policy to be deleted
+        type: string
+        example: eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi
+        required: true
+    output:
+      success:
+        title: Success
+        description: Success status of delete request
+        type: boolean
+        required: true
+        example: true
   create_managed_url:
     title: Create Managed URL
     description: Create a managed URL
@@ -1029,7 +1197,7 @@ actions:
         type: string
         example: internal_addresses
         required: true
-        default: everyone
+        default: individual_email_address
         enum:
         - everyone
         - internal_addresses
@@ -1054,7 +1222,7 @@ actions:
         type: string
         example: everyone
         required: true
-        default: everyone
+        default: individual_email_address
         enum:
         - everyone
         - internal_addresses
