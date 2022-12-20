@@ -200,8 +200,7 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
                 separated_query_params = split_url[0].split("?", 1)
                 separated_query_params[0] = separated_query_params[0].lower()
                 # rejoin query params immediately after suffix
-                if len(separated_query_params) > 1:
-                    split_url[0] = "?".join(separated_query_params)
+                split_url[0] = "?".join(separated_query_params)
                 url = "/".join(split_url)
                 normalized_urls.append(url)
             for url in normalized_urls:
