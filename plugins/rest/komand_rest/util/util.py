@@ -2,7 +2,7 @@ import json
 from logging import Logger
 
 from urllib.parse import urlparse, urlsplit, urlunsplit, urlencode
-from typing import Dict, Any, Union
+from typing import Dict, Any, Union, List
 import base64
 
 import requests
@@ -107,7 +107,7 @@ def write_to_file(file: dict, file_path: str) -> str:
     return file_path + file.get("filename")
 
 
-def determine_body_type(body_non_array: dict, body_array: list) -> Union[list[dict], dict[str]]:
+def determine_body_type(body_non_array: dict, body_array: list) -> Union[List[Dict[str, Any]], Dict[str, Any]]:
     """
     This method is used to determine the body input type,
     if it is an array or object.

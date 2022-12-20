@@ -2,7 +2,8 @@ import insightconnect_plugin_runtime
 from .schema import PatchInput, PatchOutput, Component, Input, Output
 
 # Custom imports below
-from komand_rest.util.util import Common, determine_body_type
+from komand_rest.util.util import Common
+from komand_rest.util.util import determine_body_type
 
 
 class Patch(insightconnect_plugin_runtime.Action):
@@ -15,11 +16,6 @@ class Patch(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        """
-        If both inputs exist throw pluginException
-        Otherwise determine which one is empty
-        Send non-empty data
-        """
         body_non_array = params.get(Input.BODY, {})
         body_array = params.get(Input.BODY_AS_AN_ARRAY, [])
 

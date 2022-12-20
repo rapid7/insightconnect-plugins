@@ -2,7 +2,8 @@ import insightconnect_plugin_runtime
 from .schema import PutInput, PutOutput, Component, Input, Output
 
 # Custom imports below
-from komand_rest.util.util import Common, determine_body_type
+from komand_rest.util.util import Common
+from komand_rest.util.util import determine_body_type
 
 
 class Put(insightconnect_plugin_runtime.Action):
