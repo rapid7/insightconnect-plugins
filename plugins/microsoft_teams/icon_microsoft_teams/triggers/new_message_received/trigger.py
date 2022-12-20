@@ -16,6 +16,7 @@ import requests
 import maya
 import validators
 
+
 class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
         super(self.__class__, self).__init__(
