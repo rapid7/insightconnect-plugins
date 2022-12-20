@@ -9,7 +9,7 @@ supported_versions: ["botocore 1.27.96"]
 status: []
 description: Amazon Elastic Compute Cloud (Amazon EC2) provides resizable computing
   capacity in the Amazon Web Services (AWS) cloud. This plugin allows you to manage your EC2 environment
-version: 1.2.0
+version: 1.2.1
 resources:
   vendor_url: https://www.amazon.com
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/aws_ec2
