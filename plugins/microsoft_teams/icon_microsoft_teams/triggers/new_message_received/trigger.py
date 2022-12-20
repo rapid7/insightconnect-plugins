@@ -193,9 +193,15 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
                     url = f"https://{url}"
                 # ensure domain, subdomain, and suffix are lower case
                 # path and query params may be upper case
+                # split subdomain, domain, and suffix from path and query params
                 split_url = url.split("/")
                 split_url = ["/".join(split_url[i : i + 3]) for i in range(0, len(split_url), 3)]
-                split_url[0] = split_url[0].lower()
+                # separate query params immediately after suffix
+                separated_query_params = split_url[0].split("?", 1)
+                separated_query_params[0] = separated_query_params[0].lower()
+                # rejoin query params immediately after suffix
+                if len(separated_query_params) > 1:
+                    split_url[0] = "?".join(separated_query_params)
                 url = "/".join(split_url)
                 normalized_urls.append(url)
             for url in normalized_urls:
