@@ -19,7 +19,7 @@ class Post(insightconnect_plugin_runtime.Action):
 
         data = determine_body_type(body_non_array, body_as_an_array)
 
-        if type(data) is dict and check_headers_for_urlencoded(headers):
+        if isinstance(data, dict) and check_headers_for_urlencoded(headers):
             body = convert_body_for_urlencoded(headers, data)
             kwargs = {"method": "POST", "path": params.get(Input.ROUTE), "data": body, "headers": headers}
         else:
