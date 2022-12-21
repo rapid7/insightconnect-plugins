@@ -372,6 +372,7 @@ This variable can be used in automated decisions to check if ThreatCrowd has inf
 
 # Version History
 
+* 4.0.0 - Plugin is made Obsolete
 * 3.1.0 - Connection: Add SSL Verification boolean field that indicates whether to verify SSL certificate or not | Add unittests
 * 3.0.3 - Add PluginException for case 'Too many connections' response from server | Change IP address in api.py file
 * 3.0.2 - Add source and license URLs in plugin spec | Set `USER` to `nobody` in Dockerfile
