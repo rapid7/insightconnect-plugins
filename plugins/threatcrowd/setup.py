@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="threatcrowd-rapid7-plugin",
-      version="3.1.0",
+      version="4.0.0",
       description="Threat Crowd is an open source search engine for threats. Using the Threat Crowd plugin for Rapid7 InsightConnect, users can search by domain, IP address, email address, and other information to discover threats",
       author="rapid7",
       author_email="",
