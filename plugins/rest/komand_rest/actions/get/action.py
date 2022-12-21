@@ -19,17 +19,13 @@ class Get(insightconnect_plugin_runtime.Action):
 
         data = determine_body_type(body_non_array, body_as_an_array)
 
-        if type(data) is dict:
-            if data and check_headers_for_urlencoded(headers):
-                body = convert_body_for_urlencoded(headers, data)
-                kwargs = {"method": "GET", "path": params.get(Input.ROUTE), "data": body, "headers": headers}
-            else:
-                kwargs = {"method": "GET", "path": params.get(Input.ROUTE), "json_data": data, "headers": headers}
-
-            response = self.connection.api.call_api(**kwargs)
+        if type(data) is dict and check_headers_for_urlencoded(headers):
+            body = convert_body_for_urlencoded(headers, data)
+            kwargs = {"method": "GET", "path": params.get(Input.ROUTE), "data": body, "headers": headers}
         else:
-            kwargs = {"method": "GET", "path": params.get(Input.ROUTE), "data": data, "headers": headers}
-            response = self.connection.api.call_api(**kwargs)
+            kwargs = {"method": "GET", "path": params.get(Input.ROUTE), "json_data": data, "headers": headers}
+
+        response = self.connection.api.call_api(**kwargs)
 
         return {
             Output.BODY_OBJECT: Common.body_object(response),
