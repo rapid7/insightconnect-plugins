@@ -1,0 +1,25 @@
+{
+  "groups": [
+    {
+      "id": 1234567890,
+      "name": "Incident Team",
+      "description": "Incident Management Team",
+      "escalate_to": null,
+      "unassigned_for": null,
+      "business_hours_id": null,
+      "created_at": "2022-11-17T16:13:29Z",
+      "updated_at": "2022-11-17T16:13:29Z",
+      "auto_ticket_assign": false,
+      "restricted": false,
+      "approval_required": false,
+      "ocs_schedule_id": null,
+      "agent_ids": [],
+      "members": [],
+      "observers": [],
+      "leaders": [],
+      "members_pending_approval": [],
+      "leaders_pending_approval": [],
+      "observers_pending_approval": []
+    }
+  ]
+}

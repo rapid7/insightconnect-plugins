@@ -1,0 +1,28 @@
+{
+  "parameters": [
+    [
+      "found",
+      {
+        "groups": [
+          {
+            "id": 1234567890,
+            "name": "Incident Team",
+            "description": "Incident Management Team",
+            "createdAt": "2022-11-17T16:13:29Z",
+            "updatedAt": "2022-11-17T16:13:29Z",
+            "autoTicketAssign": false,
+            "restricted": false,
+            "approvalRequired": false,
+            "agentIds": [],
+            "members": [],
+            "observers": [],
+            "leaders": [],
+            "membersPendingApproval": [],
+            "leadersPendingApproval": [],
+            "observersPendingApproval": []
+          }
+        ]
+      }
+    ]
+  ]
+}

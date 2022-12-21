@@ -1,0 +1,59 @@
+{
+  "parameters": [
+    [
+      "1",
+      {
+        "example_key": "example_value",
+        "another_example_key": 12345,
+        "key": "value"
+      },
+      {
+        "exampleKey": "example_value",
+        "anotherExampleKey": 12345,
+        "key": "value"
+      }
+    ],
+    [
+      "2",
+      {
+        "example_key": "example_value",
+        "another_example_key": 12345,
+        "key": {
+          "example_key": "example_value"
+        }
+      },
+      {
+        "exampleKey": "example_value",
+        "anotherExampleKey": 12345,
+        "key": {
+          "exampleKey": "example_value"
+        }
+      }
+    ],
+    [
+      "3",
+      {
+        "example_key": [
+          {
+            "test_key": "value"
+          }
+        ],
+        "another_example_key": 12345,
+        "key": {
+          "example_key": "example_value"
+        }
+      },
+      {
+        "exampleKey": [
+          {
+            "testKey": "value"
+          }
+        ],
+        "anotherExampleKey": 12345,
+        "key": {
+          "exampleKey": "example_value"
+        }
+      }
+    ]
+  ]
+}

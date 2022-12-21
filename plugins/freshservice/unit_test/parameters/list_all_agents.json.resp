@@ -1,0 +1,199 @@
+{
+  "parameters": [
+    [
+      "all",
+      null,
+      null,
+      null,
+      "all",
+      "all",
+      {
+        "agents": [
+          {
+            "active": false,
+            "autoAssignTickets": true,
+            "canSeeAllTicketsFromAssociatedDepartments": false,
+            "createdAt": "2022-11-17T16:13:30Z",
+            "customFields": {},
+            "departmentIds": [],
+            "email": "user@example.com",
+            "firstName": "User",
+            "hasLoggedIn": false,
+            "id": 1234567890,
+            "language": "en",
+            "occasional": false,
+            "roleIds": [
+              987654321
+            ],
+            "roles": [
+              {
+                "roleId": 987654321,
+                "assignmentScope": "entire_helpdesk",
+                "groups": []
+              }
+            ],
+            "scopes": {},
+            "timeFormat": "12h",
+            "timeZone": "Eastern Time (US & Canada)",
+            "updatedAt": "2022-11-17T16:13:30Z",
+            "vipUser": false,
+            "workPhoneNumber": "11111111",
+            "groupIds": [],
+            "memberOf": [],
+            "observerOf": [],
+            "memberOfPendingApproval": [],
+            "observerOfPendingApproval": []
+          },
+          {
+            "active": true,
+            "autoAssignTickets": true,
+            "canSeeAllTicketsFromAssociatedDepartments": false,
+            "createdAt": "2022-11-17T16:13:28Z",
+            "customFields": {},
+            "departmentIds": [],
+            "email": "user2@example.com",
+            "firstName": "User2",
+            "hasLoggedIn": true,
+            "id": 1234567891,
+            "language": "en",
+            "lastActiveAt": "2022-11-23T11:40:30Z",
+            "lastLoginAt": "2022-11-17T16:13:37Z",
+            "lastName": "Example",
+            "mobilePhoneNumber": "22222222",
+            "occasional": false,
+            "roleIds": [
+              987654321
+            ],
+            "roles": [
+              {
+                "roleId": 987654321,
+                "assignmentScope": "entire_helpdesk",
+                "groups": []
+              }
+            ],
+            "scopes": {},
+            "signature": "<p><br></p>\n",
+            "timeFormat": "12h",
+            "timeZone": "Eastern Time (US & Canada)",
+            "updatedAt": "2022-11-22T10:48:16Z",
+            "vipUser": false,
+            "groupIds": [],
+            "memberOf": [],
+            "observerOf": [],
+            "memberOfPendingApproval": [],
+            "observerOfPendingApproval": []
+          }
+        ]
+      }
+    ],
+    [
+      "found",
+      "user@example.com",
+      null,
+      "11111111",
+      "fulltime",
+      "false",
+      {
+        "agents": [
+          {
+            "active": false,
+            "autoAssignTickets": true,
+            "canSeeAllTicketsFromAssociatedDepartments": false,
+            "createdAt": "2022-11-17T16:13:30Z",
+            "customFields": {},
+            "departmentIds": [],
+            "email": "user@example.com",
+            "firstName": "User",
+            "hasLoggedIn": false,
+            "id": 1234567890,
+            "language": "en",
+            "occasional": false,
+            "roleIds": [
+              987654321
+            ],
+            "roles": [
+              {
+                "roleId": 987654321,
+                "assignmentScope": "entire_helpdesk",
+                "groups": []
+              }
+            ],
+            "scopes": {},
+            "timeFormat": "12h",
+            "timeZone": "Eastern Time (US & Canada)",
+            "updatedAt": "2022-11-17T16:13:30Z",
+            "vipUser": false,
+            "workPhoneNumber": "11111111",
+            "groupIds": [],
+            "memberOf": [],
+            "observerOf": [],
+            "memberOfPendingApproval": [],
+            "observerOfPendingApproval": []
+          }
+        ]
+      }
+    ],
+    [
+      "found2",
+      "user2@example.com",
+      "22222222",
+      null,
+      "fulltime",
+      "true",
+      {
+        "agents": [
+          {
+            "active": true,
+            "autoAssignTickets": true,
+            "canSeeAllTicketsFromAssociatedDepartments": false,
+            "createdAt": "2022-11-17T16:13:28Z",
+            "customFields": {},
+            "departmentIds": [],
+            "email": "user2@example.com",
+            "firstName": "User2",
+            "hasLoggedIn": true,
+            "id": 1234567891,
+            "language": "en",
+            "lastActiveAt": "2022-11-23T11:40:30Z",
+            "lastLoginAt": "2022-11-17T16:13:37Z",
+            "lastName": "Example",
+            "mobilePhoneNumber": "22222222",
+            "occasional": false,
+            "roleIds": [
+              987654321
+            ],
+            "roles": [
+              {
+                "roleId": 987654321,
+                "assignmentScope": "entire_helpdesk",
+                "groups": []
+              }
+            ],
+            "scopes": {},
+            "signature": "<p><br></p>\n",
+            "timeFormat": "12h",
+            "timeZone": "Eastern Time (US & Canada)",
+            "updatedAt": "2022-11-22T10:48:16Z",
+            "vipUser": false,
+            "groupIds": [],
+            "memberOf": [],
+            "observerOf": [],
+            "memberOfPendingApproval": [],
+            "observerOfPendingApproval": []
+          }
+        ]
+      }
+    ],
+    [
+      "empty",
+      "user@example.com",
+      "22222222",
+      null,
+      "occasional",
+      "all",
+      {
+        "agents": []
+      }
+    ]
+  ]
+}
