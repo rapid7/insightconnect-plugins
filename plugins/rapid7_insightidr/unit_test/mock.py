@@ -58,6 +58,8 @@ def mock_request_post(url: str) -> MockResponse:
         return MockResponse("create_investigation", 201)
     if url == f"{Util.STUB_URL_API}/idr/v2/investigations/_search":
         return MockResponse("search_investigations", 200)
+    if url == f"{Util.STUB_URL_API}/idr/v1/customthreats/key/dcdba462-fcf5-4021-8707-98b14232239b/indicators/replace":
+        return MockResponse("replace_indicators", 200)
 
 
 def mock_request_get(url: str) -> MockResponse:
