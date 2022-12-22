@@ -7,7 +7,7 @@ vendor: rapid7
 support: rapid7
 status: []
 description: Run a Python 3 script
-version: 4.0.2
+version: 4.0.3
 supported_versions: ["Python 3.8.1"]
 enable_cache: true
 resources:
