@@ -322,7 +322,7 @@ This action is used to make a GET request.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|body|object|None|False|Payload to submit to the server when making the HTTP Request call|None|{"user": "user@example.com"}|
+|body|object|None|False|Data to submit to the server when making the HTTP Request call|None|{"user": "user@example.com"}|
 |body_as_an_array|[]object|None|False|Payload (Array) to submit to the server when making the HTTP Request call|None|[{"user": "user@example.com"}]|
 |headers|object|None|False|Headers to use for the request. These will override any default headers|None|{"Host": "rapid7.com"}|
 |route|string|None|True|The route to append to the base URL e.g. /org/users|None|/org/users|
