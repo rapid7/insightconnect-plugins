@@ -38,9 +38,12 @@ class TestReplaceIndicators(TestCase):
         }
         self.assertEqual(actual, expected)
 
-    # @parameterized.expand(Util.load_parameters("create_comment_bad").get("parameters"))
-    # def test_replace_indicators(self, mock_request, name, target, body, attachments, cause, assistance):
-    #     with self.assertRaises(PluginException) as error:
-    #         self.action.run({Input.TARGET: target, Input.BODY: body, Input.ATTACHMENTS: attachments})
-    #     self.assertEqual(error.exception.cause, cause)
-    #     self.assertEqual(error.exception.assistance, assistance)
+    @parameterized.expand([
+        ["dcdba462", "", "", "", "", "The response from InsightIDR was not in the correct format.", "Contact support for help. See log for more details"],
+    ])
+    def test_replace_indicators(self, mock_request, key, domain_names, hashes, ips, urls, cause, assistance):
+        with self.assertRaises(PluginException) as error:
+            actual = self.action.run(
+                {Input.KEY: key, Input.DOMAIN_NAMES: domain_names, Input.HASHES: hashes, Input.IPS: ips, Input.URLS: urls})
+        self.assertEqual(error.exception.cause, cause)
+        self.assertEqual(error.exception.assistance, assistance)
