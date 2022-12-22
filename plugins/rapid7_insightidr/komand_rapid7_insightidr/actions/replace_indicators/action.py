@@ -1,11 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import(
-    ReplaceIndicatorsInput,
-    ReplaceIndicatorsOutput,
-    Input,
-    Output,
-    Component
-)
+from .schema import ReplaceIndicatorsInput, ReplaceIndicatorsOutput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below

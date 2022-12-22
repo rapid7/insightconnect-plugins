@@ -61,7 +61,8 @@ def mock_request_post(url: str) -> MockResponse:
     if url == f"{Util.STUB_URL_API}/idr/v1/customthreats/key/dcdba462-fcf5-4021-8707-98b14232239b/indicators/replace":
         return MockResponse("replace_indicators", 200)
     if url == f"{Util.STUB_URL_API}/idr/v1/customthreats/key/dcdba462/indicators/replace":
-        return MockResponse("replace_indicators_bad", 298)  # This should be a 400, my test requires this to be withing 200-299
+        return MockResponse("replace_indicators_bad", 298)
+        # This should be a 400, my test requires this to be withing 200-299
 
 
 def mock_request_get(url: str) -> MockResponse:
