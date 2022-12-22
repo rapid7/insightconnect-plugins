@@ -76,23 +76,6 @@ Example input (with Custom header auth):
 }
 ```
 
-Example input (with Insight Platform):
-
-```
-{
-  "authentication_type": "Rapid7 Insight",
-  "base_url": "https://us.api.insight.rapid7.com",
-  "secret": {
-    "secretKey": "12341234-1234-1234-1234-123412341234"
-  }
-  "default_headers": {
-    "User-Agent": "Rapid7 InsightConnect"
-  },
-  "fail_on_http_errors": false,
-  "ssl_verify": true
-}
-```
-
 ## Technical Details
 
 ### Actions

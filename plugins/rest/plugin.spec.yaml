@@ -114,7 +114,7 @@ actions:
         description: Data to submit to the server when making the HTTP Request call
         type: object
         required: false
-        example: '{"foo": "bar"}'
+        example: '{"user": "user@example.com"}'
       body_as_an_array:
         title: Body
         description: Payload (Array) to submit to the server when making the HTTP Request call
