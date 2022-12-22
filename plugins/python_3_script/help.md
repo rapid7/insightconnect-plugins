@@ -88,14 +88,14 @@ Example input:
 
 ```
 {
-  "function": "def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username, password)\n\treturn {'result1': 'example output 1', 'result2': 'example output 2'}",
+  "function": "def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username, password, secret_key)\n\treturn {'result1': 'example output 1', 'result2': 'example output 2'}",
   "input": {
     "some_input": "example input"
   }
 }
 ```
 
-Note that `username` and `password` inputs are accessible directly in the script as variable, but arguments from `input` are stored in `params` dictionary.
+Note that `username`, `password`, and `secret_key` inputs are accessible directly in the script as variable, but arguments from `input` are stored in `params` dictionary.
 
 ##### Output
 
@@ -132,6 +132,7 @@ If installation fails, try increasing the `Timeout` connection input to `900` (1
 
 # Version History
 
+* 4.0.3 - Run: Fix logging issue 
 * 4.0.2 - Run: Fix issue with indentation where users have non-empty credentials for input function
 * 4.0.1 - Resolve issue where users experience issues with installing Python packages, and indentation for input function 
 * 4.0.0 - Add custom script credentials in Connection
