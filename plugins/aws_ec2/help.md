@@ -443,6 +443,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.2.1 - Updated Connection and Actions to use related AWS Client in SDK
 * 1.2.0 - Updated Connect and Action inputs to include Role ARN and External ID to provide support for AWS Assume Role functionality at both an Action and a Connection level
 * 1.1.0 - Update plugin runtime to InsightConnect 
 * 1.0.1 - New spec and help.md format for the Extension Library
