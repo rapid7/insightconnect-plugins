@@ -53,8 +53,8 @@ This action is used to replace InsightIDR threat indicators in a threat with the
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum| Example                                                                                 |
-|----|----|-------|--------|-----------|----|-----------------------------------------------------------------------------------------|
+|Name|Type|Default|Required|Description|Enum| Example|
+|----|----|-------|--------|-----------|----|--------|
 |domain_names|[]string|None|False|Domain names to add|None|["rapid7.com", "google.com"]|
 |hashes|[]string|None|False|Process hashes to add|None|["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3", "C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]|
 |ips|[]string|None|False|IP addresses to add|None|["10.0.0.1", "10.0.0.2"]|
@@ -1723,7 +1723,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 4.1.2 - Add new action 'Replace Indicators'
+* 4.2.0 - Add new action 'Replace Indicators'
 * 4.1.1 - Advanced Query on Log Set Action: Updated EndPoint Agent enum to Endpoint Agent in log_set
 * 4.1.0 - Add new actions `List Comments`, `Create Comment`, `Delete Comment`, `List Attachments`, `Upload Attachment`, `Download Attachment`, `Delete Attachment`, `Get Attachment Information`
 * 4.0.1 - Fix issue with `Get Query Results` and `Get All Saved Queries` actions
