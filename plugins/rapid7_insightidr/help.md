@@ -53,13 +53,13 @@ This action is used to replace InsightIDR threat indicators in a threat with the
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|domain_names|[]string|None|False|Domain names to add.|None|["rapid7.com","google.com"]|
-|hashes|[]string|None|False|Process hashes to add.|None|["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]|
-|ips|[]string|None|False|IP addresses to add.|None|["10.0.0.1","10.0.0.2"]|
-|key|string|None|True|The key of a threat for which the indicators are going to be added.|None|c9404e11-b81a-429d-9400-05c531f229c3|
-|urls|[]string|None|False|URLs to add.|None|["https://example.com", "https://test.com"]|
+|Name|Type|Default|Required|Description|Enum| Example                                                                                 |
+|----|----|-------|--------|-----------|----|-----------------------------------------------------------------------------------------|
+|domain_names|[]string|None|False|Domain names to add.|None| ["rapid7.com","google.com"]                                                             |
+|hashes|[]string|None|False|Process hashes to add.|None| ["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"] |
+|ips|[]string|None|False|IP addresses to add.|None| ["10.0.0.1", "10.0.0.2"]                                                                |
+|key|string|None|True|The key of a threat for which the indicators are going to be added.|None| c9404e11-b81a-429d-9400-05c531f229c3                                                    |
+|urls|[]string|None|False|URLs to add.|None| ["https://example.com", "https://test.com"]                                             |
 
 Example input:
 
