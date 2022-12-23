@@ -598,31 +598,31 @@ actions:
     input:
       key:
         title: Key
-        description: The key of a threat for which the indicators are going to be added.
+        description: The key of a threat for which the indicators are going to be added
         type: string
         required: true
         example: c9404e11-b81a-429d-9400-05c531f229c3
       ips:
         title: IP Addresses
-        description: IP addresses to add.
+        description: IP addresses to add
         type: "[]string"
         required: false
         example: [ "10.0.0.1","10.0.0.2" ]
       hashes:
         title: Process Hashes
-        description: Process hashes to add.
+        description: Process hashes to add
         type: "[]string"
         required: false
         example: [ "A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F" ]
       domain_names:
         title: Domain Names
-        description: Domain names to add.
+        description: Domain names to add
         type: "[]string"
         required: false
         example: [ "rapid7.com","google.com" ]
       urls:
         title: URLs
-        description: URLs to add.
+        description: URLs to add
         type: "[]string"
         required: false
         example: [ "https://example.com","https://test.com" ]

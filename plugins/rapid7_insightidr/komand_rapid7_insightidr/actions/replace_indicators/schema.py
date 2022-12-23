@@ -29,7 +29,7 @@ class ReplaceIndicatorsInput(insightconnect_plugin_runtime.Input):
     "domain_names": {
       "type": "array",
       "title": "Domain Names",
-      "description": "Domain names to add.",
+      "description": "Domain names to add",
       "items": {
         "type": "string"
       },
@@ -38,7 +38,7 @@ class ReplaceIndicatorsInput(insightconnect_plugin_runtime.Input):
     "hashes": {
       "type": "array",
       "title": "Process Hashes",
-      "description": "Process hashes to add.",
+      "description": "Process hashes to add",
       "items": {
         "type": "string"
       },
@@ -47,7 +47,7 @@ class ReplaceIndicatorsInput(insightconnect_plugin_runtime.Input):
     "ips": {
       "type": "array",
       "title": "IP Addresses",
-      "description": "IP addresses to add.",
+      "description": "IP addresses to add",
       "items": {
         "type": "string"
       },
@@ -56,13 +56,13 @@ class ReplaceIndicatorsInput(insightconnect_plugin_runtime.Input):
     "key": {
       "type": "string",
       "title": "Key",
-      "description": "The key of a threat for which the indicators are going to be added.",
+      "description": "The key of a threat for which the indicators are going to be added",
       "order": 1
     },
     "urls": {
       "type": "array",
       "title": "URLs",
-      "description": "URLs to add.",
+      "description": "URLs to add",
       "items": {
         "type": "string"
       },
