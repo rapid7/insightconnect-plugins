@@ -2,6 +2,7 @@ import json
 import sys
 from typing import Any, Dict, List, Tuple, Optional, Union
 import urllib.parse
+from oauthlib.oauth2.rfc6749.endpoints import resource
 
 import requests
 from icon_azure_sentinel.util.tools import return_non_empty
@@ -10,8 +11,26 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from .endpoints import Endpoint
 from .tools import request_execution_time
 
+from requests_oauthlib import OAuth2Session
+from oauthlib.oauth2 import BackendApplicationClient
 
-class AzureClient:
+
+class OAuth20ClientCredentialMixin():
+    def __init__(self, client_id, client_secret, token_url, **kwargs):
+        client = BackendApplicationClient(client_id=client_id)
+        self.oauth = OAuth2Session(client=client)
+        self.client_id = client_id
+        self.client_secret = client_secret
+        self.token_url = token_url
+        self.kwargs = kwargs
+        self.token = self.oauth.fetch_token(token_url=token_url, client_id=client_id, client_secret=client_secret, **kwargs)
+
+    @property
+    def auth_token(self):
+        self.token = self.oauth.fetch_token(token_url=self.token_url, client_id=self.client_id, client_secret=self.client_secret, **self.kwargs)
+        return self.token
+
+class AzureClient(OAuth20ClientCredentialMixin):
     def __init__(self, logger: Any, tenant_id: str, client_id: str, client_secret: str):
         self.O365_AUTH_ENDPOINT = "https://login.microsoftonline.com/{}/oauth2/token"
         self.SCOPE = "https://management.azure.com"
@@ -20,47 +39,48 @@ class AzureClient:
         self.client_id = client_id
         self.client_secret = client_secret
         self.logger = logger
+        super().__init__(client_id, client_secret, self.O365_AUTH_ENDPOINT.format(tenant_id), resource=self.SCOPE) 
 
-    @property
-    def auth_token(self):
-        tenant_id = self.tenant_id
-        client_id = self.client_id
-        client_secret = self.client_secret
-
-        self.logger.info("Updating auth token...")
-
-        data = {
-            "grant_type": "client_credentials",
-            "client_id": client_id,
-            "resource": self.SCOPE,
-            "client_secret": client_secret,
-        }
-
-        formatted_endpoint = self.O365_AUTH_ENDPOINT.format(tenant_id)
-        self.logger.info("Getting token from: " + formatted_endpoint)
-
-        request = requests.request("POST", formatted_endpoint, data=data)
-        self.logger.info("Authentication request status: " + str(request.status_code))
-
-        if request.status_code != 200:
-            self.logger.error(request.text)
-            raise PluginException(
-                cause="Unable to authorize against Microsoft graph API.",
-                assistance="The application may not be authorized to connect "
-                "to the Microsoft Graph API. Please verify your connection information is correct and contact your "
-                "Azure administrator.",
-                data=request.text,
-            )
-        token = request.json().get("access_token")
-        self._auth_token = token
-        self.logger.info(f"Authentication Token: ****************{self._auth_token[-5:]}")
-        return token
+#    @property
+#    def auth_token(self):
+#        tenant_id = self.tenant_id
+#        client_id = self.client_id
+#        client_secret = self.client_secret
+#
+#        self.logger.info("Updating auth token...")
+#
+#        data = {
+#            "grant_type": "client_credentials",
+#            "client_id": client_id,
+#            "resource": self.SCOPE,
+#            "client_secret": client_secret,
+#        }
+#
+#        formatted_endpoint = self.O365_AUTH_ENDPOINT.format(tenant_id)
+#        self.logger.info("Getting token from: " + formatted_endpoint)
+#
+#        request = requests.request("POST", formatted_endpoint, data=data)
+#        self.logger.info("Authentication request status: " + str(request.status_code))
+#
+#        if request.status_code != 200:
+#            self.logger.error(request.text)
+#            raise PluginException(
+#                cause="Unable to authorize against Microsoft graph API.",
+#                assistance="The application may not be authorized to connect "
+#                "to the Microsoft Graph API. Please verify your connection information is correct and contact your "
+#                "Azure administrator.",
+#                data=request.text,
+#            )
+#        token = request.json().get("access_token")
+#        self._auth_token = token
+#        self.logger.info(f"Authentication Token: ****************{self._auth_token[-5:]}")
+#        return token
 
 
 class AzureSentinelClient(AzureClient):
     def __init__(self, logger: Any, tenant_id: str, client_id: str, client_secret: str):
         super(AzureSentinelClient, self).__init__(logger, tenant_id, client_id, client_secret)  # noqa
-        self.headers = {"Content-Type": "application/json", "Authorization": f"Bearer {self.auth_token}"}
+        self.headers = {"Content-Type": "application/json" }
 
     def _call_api(
         self, method: str, url: str, headers: dict, payload: Optional[dict] = None, params: Optional[dict] = None
@@ -85,7 +105,7 @@ class AzureSentinelClient(AzureClient):
                 payload_str = urllib.parse.urlencode(params, safe="$")
                 kwargs["params"] = payload_str
 
-            response = requests.request(method, url, **kwargs)
+            response = self.oauth.request(method, url, **kwargs)
             response.raise_for_status()
             if response.headers.get("content-type") == "application/json; charset=utf-8":
                 return response.status_code, response.json()
