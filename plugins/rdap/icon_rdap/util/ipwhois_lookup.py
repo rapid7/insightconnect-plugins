@@ -10,5 +10,5 @@ class IPWhoisLookup:
         try:
             return IPWhois(ip_address).lookup_rdap(depth=1)
         except:
-            self._logger.warning(f"Couldn't find info about ASN for given IP. ASN result is empty.\n")
+            self._logger.warning("Couldn't find info about ASN for given IP. ASN result is empty.\n")
             return {}

@@ -56,11 +56,11 @@ class RdapAPI:
                 self._logger.info(f"[API SUCCESS] Code: {response.status_code}\n")
                 return response
 
-            self._logger.info(f"[API ERROR] PluginException: UNKNOWN\n")
+            self._logger.info("[API ERROR] PluginException: UNKNOWN\n")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
 
         except requests.exceptions.HTTPError as e:
-            self._logger.info(f"[API ERROR] PluginException: UNKNOWN\n")
+            self._logger.info("[API ERROR] PluginException: UNKNOWN\n")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
 
     def make_json_request(self, method: str, url: str, headers: dict = None) -> dict:

@@ -21,7 +21,7 @@ class IpLookup(insightconnect_plugin_runtime.Action):
         if include_asn:
             ipwhois_rdap_result = IPWhoisLookup(logger=self.logger).perform_lookup_rdap(ip_address=ip_input)
             ip_result.update(extract_asn_result(ipwhois_rdap_result))
-            self.logger.info(f"[ACTION LOG] IP result updated with ASN.\n")
+            self.logger.info("[ACTION LOG] IP result updated with ASN.\n")
 
         self.logger.info(f"[ACTION LOG] IP result: {ip_result}\n")
         return {Output.RESULTS: convert_keys_to_camel(ip_result)}
