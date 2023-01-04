@@ -189,13 +189,21 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
 
         if urls:
             for url in urls:
-                if url.startswith("http") or url.startswith("https"):
-                    normalized_urls.append(url)
-                else:
-                    normalized_urls.append(f"https://{url}")
-
-            for url in normalized_urls:
-                domains.append(url.replace("https://", "").replace("http://", ""))
+                if not url.lower().startswith("http") and not url.lower().startswith("https"):
+                    url = f"https://{url}"
+                # ensure domain, subdomain, and suffix are lower case
+                # path and query params may be upper case
+                # split subdomain, domain, and suffix from path and query params
+                split_url = url.split("/")
+                split_url = ["/".join(split_url[i : i + 3]) for i in range(0, len(split_url), 3)]
+                # separate query params immediately after suffix
+                separated_query_params = split_url[0].split("?", 1)
+                separated_query_params[0] = separated_query_params[0].lower()
+                # rejoin query params immediately after suffix
+                split_url[0] = "?".join(separated_query_params)
+                url = "/".join(split_url)
+                normalized_urls.append(url)
+                domains.append(separated_query_params[0].replace("https://", "").replace("http://", ""))
 
         return {
             "domains": self.remove_duplicates(domains),
@@ -279,7 +287,7 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
         cleaned_message = re.sub(r"\"font-size\s*?:.*?(;|(?=\"\"|'|>))", '""', msg)
         urls = re.findall(
             r"(?m)\b(?:http(?:s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+\b",
-            cleaned_message.lower(),
+            cleaned_message,
         )
         normalized_urls = []
         for url in urls:
