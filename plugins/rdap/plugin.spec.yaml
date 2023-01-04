@@ -8,6 +8,7 @@ version: 1.0.0
 vendor: rapid7
 support: rapid7
 status: []
+cloud_ready: true
 supported_versions: ["RDAP 20-12-2022"]
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rdap
@@ -22,7 +23,7 @@ tags:
 - ip
 hub_tags:
   use_cases: [data_utility, reporting_and_analytics]
-  keywords: [rdap, domains, api, search]
+  keywords: [rdap, domains, api, search, cloud_enabled]
   features: []
 types:
   link:
