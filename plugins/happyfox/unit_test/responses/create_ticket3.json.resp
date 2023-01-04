@@ -1,0 +1,156 @@
+{
+  "display_id": "#RS00000055",
+  "first_message": "Example description\n\n",
+  "last_user_reply_at": "2023-01-02 07:37:24",
+  "time_spent": null,
+  "id": 55,
+  "custom_fields": [
+    {
+      "compulsory_on_complete": false,
+      "name": "Test Field",
+      "value": "test value",
+      "value_id": null,
+      "type": "text",
+      "id": 1,
+      "visible_to_staff_only": false
+    },
+    {
+      "compulsory_on_complete": true,
+      "name": "Test Field 2",
+      "value": "test value",
+      "value_id": null,
+      "type": "text",
+      "id": 2,
+      "visible_to_staff_only": false
+    }
+  ],
+  "subject": "New Ticket 3",
+  "category": {
+    "prepopulate_cc": "AR",
+    "description": "Tickets will be created here by default.",
+    "time_spent_mandatory": false,
+    "public": true,
+    "id": 1,
+    "name": "example category"
+  },
+  "attachments_count": 0,
+  "last_updated_at": "2023-01-02 07:37:24",
+  "due_by": null,
+  "priority": {
+    "default": false,
+    "id": 4,
+    "name": "Low",
+    "order": 1
+  },
+  "last_staff_reply_at": null,
+  "messages_count": 1,
+  "sla_breaches": 0,
+  "merged_tickets": [],
+  "status": {
+    "name": "New",
+    "color": "FF9900",
+    "order": 1,
+    "default": true,
+    "behavior": "pending",
+    "id": 1
+  },
+  "due_date": "2023-01-21",
+  "tags": "tag1,tag2",
+  "user": {
+    "name": "Test",
+    "primary_phone": {
+      "type": "m",
+      "number": "111111111",
+      "id": 3
+    },
+    "phones": [
+      {
+        "type": "o",
+        "number": "11111111",
+        "id": 4
+      },
+      {
+        "type": "m",
+        "number": "111111111",
+        "id": 3
+      }
+    ],
+    "created_at": "2022-12-14 11:10:21",
+    "updated_at": "2022-12-14 11:10:21",
+    "pending_tickets_count": 25,
+    "contact_groups": [],
+    "tickets_count": 25,
+    "id": 7,
+    "email": "user@example.com",
+    "custom_fields": []
+  },
+  "subscribers": [],
+  "unresponded": true,
+  "created_at": "2023-01-02 07:37:24",
+  "source": "TKT_CREATION_API",
+  "assigned_to": {
+    "name": "Example User",
+    "is_account_admin": true,
+    "email": "user@example.com",
+    "role": {
+      "name": "Administrator",
+      "id": 1
+    },
+    "active": true,
+    "id": 1,
+    "categories": [
+      1
+    ],
+    "permissions": []
+  },
+  "updates": [
+    {
+      "priority_change": {
+        "new_name": "Low",
+        "new": 4,
+        "old": null,
+        "old_name": null
+      },
+      "category_change": null,
+      "custom_field_change": null,
+      "timestamp": "2023-01-02 07:37:24",
+      "due_date_change": {
+        "new": "2023-01-21",
+        "old": null
+      },
+      "by": {
+        "email": "user@example.com",
+        "type": "user",
+        "id": 7,
+        "name": "Example User"
+      },
+      "time_spent": null,
+      "update_id": 60,
+      "message": {
+        "attachments": [],
+        "bcc_list": "user@example.com",
+        "text": "Example description\n\n",
+        "cc_list": "user@example.com",
+        "customer_updated": false,
+        "html": "<html><head><meta charset=\"utf-8\"></head><body>Example description</body></html>",
+        "forward_list": null,
+        "message_type": null,
+        "subject": ""
+      },
+      "assignee_change": {
+        "new_name": "Example User",
+        "new": 1,
+        "old": null,
+        "old_name": null
+      },
+      "status_change": {
+        "new_name": "New",
+        "new": 1,
+        "old": null,
+        "old_name": null
+      },
+      "satisfaction_survey": null
+    }
+  ],
+  "merged_to": null
+}

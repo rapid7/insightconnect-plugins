@@ -1,0 +1,5 @@
+CREATE_INLINE_ATTACHMENT_ENDPOINT = "/ticket-inline-attachment"
+DELETE_TICKET_ENDPOINT = "/ticket/{ticket_id}/delete"
+TICKETS_ENDPOINT = "/tickets"
+TICKET_CUSTOM_FIELDS_ENDPOINT = "/ticket_custom_fields/"
+USER_CUSTOM_FIELDS_ENDPOINT = "/user_custom_fields/"
