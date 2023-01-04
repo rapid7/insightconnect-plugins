@@ -436,12 +436,24 @@ actions:
         type: string
         required: true
         example: 3-Medium
+        enum:
+          - 1-Critical
+          - 2-High
+          - 3-Medium
+          - 4-Low
+          - ''
       impact:
         title: Impact
         description: Impact
         type: string
         required: true
         example: 3-Moderate/Limited
+        enum:
+          - 1-Extensive/Widespread
+          - 2-Significant/Large
+          - 3-Moderate/Limited
+          - 4-Minor/Localized
+          - ''
       investigationDriver:
         title: Investigation Driver
         description: Investigation driver

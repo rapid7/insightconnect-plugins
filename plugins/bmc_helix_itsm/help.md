@@ -71,13 +71,13 @@ This action is used to create problem investigation.
 |coordinatorSupportOrganization|string|None|True|Coordinator support organization|None|ExampleCompany Support Org|
 |description|string|None|True|Description|None|My problem description|
 |firstName|string|None|True|Requester first name|None|Example|
-|impact|string|None|True|Impact|None|3-Moderate/Limited|
+|impact|string|None|True|Impact|['1-Extensive/Widespread', '2-Significant/Large', '3-Moderate/Limited', '4-Minor/Localized', '']|3-Moderate/Limited|
 |investigationDriver|string|None|False|Investigation driver|None|High Impact Incident|
 |lastName|string|None|True|Requester last name|None|Agent|
 |region|string|None|False|Region|None|Americas|
 |site|string|None|False|Site|None|Houston Support Center|
 |siteGroup|string|None|False|Site group|None|United States|
-|urgency|string|None|True|Urgency|None|3-Medium|
+|urgency|string|None|True|Urgency|['1-Critical', '2-High', '3-Medium', '4-Low', '']|3-Medium|
 
 Example input:
 

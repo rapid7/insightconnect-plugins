@@ -108,6 +108,13 @@ class CreateProblemInvestigationInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Impact",
       "description": "Impact",
+      "enum": [
+        "1-Extensive/Widespread",
+        "2-Significant/Large",
+        "3-Moderate/Limited",
+        "4-Minor/Localized",
+        ""
+      ],
       "order": 9
     },
     "investigationDriver": {
@@ -144,6 +151,13 @@ class CreateProblemInvestigationInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Urgency",
       "description": "Urgency",
+      "enum": [
+        "1-Critical",
+        "2-High",
+        "3-Medium",
+        "4-Low",
+        ""
+      ],
       "order": 8
     }
   },
