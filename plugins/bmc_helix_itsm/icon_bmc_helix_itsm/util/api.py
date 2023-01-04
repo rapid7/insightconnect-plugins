@@ -147,6 +147,7 @@ class BmcHelixItsmApi:
                 headers=self.get_headers(),
                 params=clean_dict(params),
                 json=clean_dict(json_data),
+                verify=self._ssl_verify
             )
 
             if response.status_code == 400:
