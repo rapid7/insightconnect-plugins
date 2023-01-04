@@ -203,8 +203,7 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
                 split_url[0] = "?".join(separated_query_params)
                 url = "/".join(split_url)
                 normalized_urls.append(url)
-            for url in normalized_urls:
-                domains.append(url.replace("https://", "").replace("http://", ""))
+                domains.append(separated_query_params[0].replace("https://", "").replace("http://", ""))
 
         return {
             "domains": self.remove_duplicates(domains),

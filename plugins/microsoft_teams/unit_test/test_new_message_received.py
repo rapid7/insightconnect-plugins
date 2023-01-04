@@ -94,7 +94,7 @@ class TestNewMessageReceived(TestCase):
                 dict(
                     GET_INDICATORS_RESPONSE,
                     **{
-                        "domains": ["example.com/s/?domain=test", "example.com?domain=test", "example.com"],
+                        "domains": ["example.com"],
                         "urls": [
                             "http://example.com/s/?domain=test",
                             "https://example.com?domain=test",
