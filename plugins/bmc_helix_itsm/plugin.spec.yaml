@@ -460,6 +460,12 @@ actions:
         type: string
         required: false
         example: High Impact Incident
+        enum:
+          - High Impact Incident
+          - Non-Routine Incident
+          - Recurring Incidents - Clustering
+          - Other
+          - ''
       coordinatorSupportCompany:
         title: Coordinator Support Company
         description: Coordinator support company

@@ -121,6 +121,13 @@ class CreateProblemInvestigationInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Investigation Driver",
       "description": "Investigation driver",
+      "enum": [
+        "High Impact Incident",
+        "Non-Routine Incident",
+        "Recurring Incidents - Clustering",
+        "Other",
+        ""
+      ],
       "order": 10
     },
     "lastName": {

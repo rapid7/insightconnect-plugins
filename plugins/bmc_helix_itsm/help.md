@@ -72,7 +72,7 @@ This action is used to create problem investigation.
 |description|string|None|True|Description|None|My problem description|
 |firstName|string|None|True|Requester first name|None|Example|
 |impact|string|None|True|Impact|['1-Extensive/Widespread', '2-Significant/Large', '3-Moderate/Limited', '4-Minor/Localized', '']|3-Moderate/Limited|
-|investigationDriver|string|None|False|Investigation driver|None|High Impact Incident|
+|investigationDriver|string|None|False|Investigation driver|['High Impact Incident', 'Non-Routine Incident', 'Recurring Incidents - Clustering', 'Other', '']|High Impact Incident|
 |lastName|string|None|True|Requester last name|None|Agent|
 |region|string|None|False|Region|None|Americas|
 |site|string|None|False|Site|None|Houston Support Center|
