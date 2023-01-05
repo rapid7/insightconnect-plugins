@@ -95,6 +95,15 @@ Example input:
 Example output:
 
 ```
+{
+    'rejected_indicators': [],
+     'threat': {
+        'name': 'bad-virus', 
+        'note': 'test', 
+        'published': False, 
+        'indicator_count': 1
+    }
+}
 ```
 
 #### Upload Attachment
@@ -1723,7 +1732,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 4.2.0 - Add new action 'Replace Indicators'
+* 4.2.0 - New action added: Replace Indicators
 * 4.1.1 - Advanced Query on Log Set Action: Updated EndPoint Agent enum to Endpoint Agent in log_set
 * 4.1.0 - Add new actions `List Comments`, `Create Comment`, `Delete Comment`, `List Attachments`, `Upload Attachment`, `Download Attachment`, `Delete Attachment`, `Get Attachment Information`
 * 4.0.1 - Fix issue with `Get Query Results` and `Get All Saved Queries` actions
