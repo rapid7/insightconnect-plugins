@@ -3,5 +3,5 @@
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 fmcapi==20211214.0
 validators==0.18.2
-pyOpenSSL==21.0.0
+pyOpenSSL==23.0.0
 parameterized==0.8.1
