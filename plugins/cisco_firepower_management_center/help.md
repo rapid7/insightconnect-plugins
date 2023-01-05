@@ -544,7 +544,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.1.0 - Fix issue in Add Address to Group action where Network Groups that had no objects would result in action failure
+* 2.0.1 - Fix issue in Add Address to Group action where Network Groups that had no objects would result in action failure
 * 2.0.0 - Combine Cisco Firepower and Cisco Firepower Management Center plugins
 * 1.2.0 - New actions - Check If Address in Group, Add Address to Group, Remove Address from Group
 * 1.1.0 - New actions - Create Address Object, Delete Address Object
