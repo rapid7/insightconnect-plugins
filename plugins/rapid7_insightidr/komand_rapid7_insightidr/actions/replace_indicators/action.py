@@ -26,12 +26,6 @@ class ReplaceIndicators(insightconnect_plugin_runtime.Action):
         response = request.resource_request(endpoint, "post", params={"format": "json"}, payload=params)
         try:
             result = json.loads(response.get("resource"))
-            print(result)
-            print("!!!!!")
-            logging.info(result)
-            print("!!!!!")
-            print(response.get("resource"))
-            logging.info(response.get("resource"))
         except json.decoder.JSONDecodeError:
             self.logger.error(f"InsightIDR response: {response}")
             raise PluginException(
