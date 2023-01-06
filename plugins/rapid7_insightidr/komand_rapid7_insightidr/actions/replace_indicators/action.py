@@ -1,3 +1,5 @@
+import logging
+
 import insightconnect_plugin_runtime
 from .schema import ReplaceIndicatorsInput, ReplaceIndicatorsOutput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -23,7 +25,13 @@ class ReplaceIndicators(insightconnect_plugin_runtime.Action):
 
         response = request.resource_request(endpoint, "post", params={"format": "json"}, payload=params)
         try:
-            result = json.loads(response["resource"])
+            result = json.loads(response.get("resource"))
+            print(result)
+            print("!!!!!")
+            logging.info(result)
+            print("!!!!!")
+            print(response.get("resource"))
+            logging.info(response.get("resource"))
         except json.decoder.JSONDecodeError:
             self.logger.error(f"InsightIDR response: {response}")
             raise PluginException(
@@ -32,6 +40,6 @@ class ReplaceIndicators(insightconnect_plugin_runtime.Action):
                 data=response,
             )
         return {
-            Output.REJECTED_INDICATORS: result["rejected_indicators"],
-            Output.THREAT: result["threat"],
+            Output.REJECTED_INDICATORS: result.get("rejected_indicators", []),
+            Output.THREAT: result.get("threat", {}),
         }
