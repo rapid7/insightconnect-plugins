@@ -38,8 +38,7 @@ class AddAddressToGroup(insightconnect_plugin_runtime.Action):
         required_field = ["type", "id", "name"]
         for field in required_field:
             new_address_object[field] = address_object.get(field)
-
-        address_group["objects"].append(new_address_object)
+        address_group.setdefault("objects", []).append(new_address_object)
         address_group.pop("links", None)
 
         return address_group
