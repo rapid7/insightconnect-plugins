@@ -20,10 +20,12 @@ class Run(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         function_ = params.get(Input.FUNCTION, "")
-        function_ = self._add_credentials_to_function(function_, self._check_indentation_character(function_))
+        function_ = self._add_credentials_to_function(
+            function_, self.connection.script_credentials, self._check_indentation_character(function_)
+        )
 
         self.logger.info(f"Input: (below)\n\n{params.get(Input.INPUT)}\n")
-        self.logger.info(f"Function: (below)\n\n{function_}\n")
+        self.logger.info(f"Function: (below)\n\n{params.get(Input.FUNCTION)}\n")
 
         try:
             out = self._exec_python_function(function_=function_, params=params)
@@ -57,12 +59,16 @@ class Run(insightconnect_plugin_runtime.Action):
         out = locals()[function_name](params.get(Input.INPUT))
         return out
 
-    def _add_credentials_to_function(self, function_: str, indentation_character: str = INDENTATION_CHARACTER) -> str:
+    def _add_credentials_to_function(
+        self, function_: str, credentials: Dict[str, str], indentation_character: str = INDENTATION_CHARACTER
+    ) -> str:
         """
         This function adds credentials to the function entered by the user. It looks for connection script
         credentials: username, password, secret_key, and adds all of them to variables inside of the function.
         :param function_: Python script function
         :type: str
+        :param credentials: Credentials to be added
+        :type: Dict[str, str]
         :param indentation_character: Indentation character used in function
         :type: str
         :return: Function string appended by the credential variables
@@ -71,8 +77,7 @@ class Run(insightconnect_plugin_runtime.Action):
 
         credentials_definition = []
 
-        for key, value in clean(self.connection.script_credentials).items():
-            self.logger.info(f"{key}={value}")
+        for key, value in clean(credentials).items():
             credentials_definition.append(f'{indentation_character}{key}="{value}"')
 
         function_lines = function_.split("\n")
