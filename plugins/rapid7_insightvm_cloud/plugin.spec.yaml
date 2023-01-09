@@ -423,7 +423,7 @@ types:
       title: Web Applications
       type: '[]web_application'
       required: false
-  vulnerability:
+  asset_vulnerability:
     first_found:
       title: First Found
       description: Date the vulnerability was first found in InsightVM
@@ -840,6 +840,102 @@ types:
       title: Remediated Vulnerabilities
       type: '[]string'
       required: false
+  vulnerability:
+    title:
+      title: Title
+      description: Name of the vulnerability
+      type: string
+      required: true
+    description:
+      title: Description
+      description: Description of the vulnerability
+      type: string
+      required: true
+    added:
+      title: Added
+      description: Date the vulnerability was last added to an asset
+      type: date
+      required: true
+    modified:
+      title: Modified
+      description: Date the vulnerability was last modified
+      type: date
+      required: true
+    published:
+      title: Published
+      description: Date the vulnerability was added to InsightVM
+      type: date
+      required: true
+    categories:
+      title: Categories
+      description: Labels this vulnerability falls under
+      type: string
+      required: true
+    cves:
+      title: CVES
+      description: CVES ID
+      type: string
+      required: true
+    cvss_v2:
+      title: CVSSv2
+      description: information regarding CVSSv2
+      type: cvss_v2
+      required: true
+    cvss_v3:
+      title: CVSSv3
+      description: information regarding CVSSv3
+      type: cvss_v3
+      required: true
+    denial_of_service:
+      title: Denial of Service
+      description: Whether or not this vulnerability is a denial of service attack
+      type: boolean
+      required: true
+    exploits:
+      title: Exploits
+      description: List of exploits related to the vulnerability
+      type: '[]string'
+      required: true
+    id:
+      title: ID
+      description: ID of the vulnerability
+      type: string
+      required: true
+    links:
+      title: Links
+      description: List of links related to the vulnerability
+      type: '[]link'
+      required: true
+    malware_kits:
+      title: Malware Kits
+      description: List of malware kits related to the vulnerability
+      type: '[]string'
+      required: true
+    pci:
+      title: PCI
+      description: information regarding PCI
+      type: pci
+      required: true
+    references:
+      title: References
+      description: Links to information related to the vulnerability
+      type: string
+      required: true
+    risk_score:
+      description: Risk score (with criticality adjustments) of the vulnerability
+      title: Risk Score
+      type: float
+      required: true
+    severity:
+      title: Severity
+      description: Severity of the vulnerability
+      type: string
+      required: true
+    severity_score:
+      title: Severity Score
+      description: Severity score of the vulnerability
+      type: integer
+      required: true
 
   
 connection:
@@ -1017,7 +1113,7 @@ actions:
       vulnerabilities:
         title: Vulnerabilities
         description: Vulnerabilities associated with the asset
-        type: '[]vulnerability'
+        type: '[]asset_vulnerability'
         required: false
   stop_scan:
     title: Stop Scan
