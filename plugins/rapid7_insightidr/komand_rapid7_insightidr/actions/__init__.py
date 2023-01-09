@@ -21,6 +21,7 @@ from .list_attachments.action import ListAttachments
 from .list_comments.action import ListComments
 from .list_investigations.action import ListInvestigations
 from .query.action import Query
+from .replace_indicators.action import ReplaceIndicators
 from .search_investigations.action import SearchInvestigations
 from .set_disposition_of_investigation.action import SetDispositionOfInvestigation
 from .set_priority_of_investigation.action import SetPriorityOfInvestigation
