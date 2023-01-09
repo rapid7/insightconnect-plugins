@@ -1,5 +1,5 @@
 {
-	"spec": "204474540c24a2e0b8fce79f1dcd55e6",
+	"spec": "50d4726d62b03522a8b48065a44411e5",
 	"manifest": "30cfbac4fdf0bc867672cb778907c9f2",
 	"setup": "bd0a1d0eaa5fcbca7616ca273d2b7da0",
 	"schemas": [
@@ -9,7 +9,7 @@
 		},
 		{
 			"identifier": "get_asset/schema.py",
-			"hash": "2a57ceebaad53de6be0a4ce2f38de760"
+			"hash": "5b22eee46330010e6643ed9d53e3e9ba"
 		},
 		{
 			"identifier": "get_scan/schema.py",
@@ -25,7 +25,7 @@
 		},
 		{
 			"identifier": "vuln_search/schema.py",
-			"hash": "85a325a70359d9f2a64bdc55e76c7c8d"
+			"hash": "b674bfcf8828f492fe10aad09dbe4349"
 		},
 		{
 			"identifier": "connection/schema.py",
