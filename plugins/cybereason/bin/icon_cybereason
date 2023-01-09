@@ -36,6 +36,8 @@ def main():
             )
             self.add_action(actions.DeleteRegistryKey())
 
+            self.add_action(actions.GetSensor())
+
             self.add_action(actions.IsolateMachine())
 
             self.add_action(actions.QuarantineFile())
