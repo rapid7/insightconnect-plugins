@@ -64,7 +64,7 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
       "title": "Vulnerabilities",
       "description": "Vulnerabilities associated with the asset",
       "items": {
-        "$ref": "#/definitions/vulnerability"
+        "$ref": "#/definitions/asset_vulnerability"
       },
       "order": 2
     }
@@ -351,51 +351,9 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "creds": {
+    "asset_vulnerability": {
       "type": "object",
-      "title": "creds",
-      "properties": {
-        "port": {
-          "type": "integer",
-          "title": "Port",
-          "description": "The port that is used",
-          "order": 1
-        },
-        "protocol": {
-          "type": "string",
-          "title": "Protocol",
-          "description": "TCP or other",
-          "order": 2
-        },
-        "status": {
-          "type": "string",
-          "title": "Status",
-          "description": "Which creds apply",
-          "order": 3
-        }
-      }
-    },
-    "identifiers": {
-      "type": "object",
-      "title": "identifiers",
-      "properties": {
-        "id": {
-          "type": "string",
-          "title": "ID",
-          "description": "The ID",
-          "order": 2
-        },
-        "source": {
-          "type": "string",
-          "title": "Source",
-          "description": "The source",
-          "order": 1
-        }
-      }
-    },
-    "vulnerability": {
-      "type": "object",
-      "title": "vulnerability",
+      "title": "asset_vulnerability",
       "properties": {
         "first_found": {
           "type": "string",
@@ -465,6 +423,48 @@ class GetAssetOutput(insightconnect_plugin_runtime.Output):
       "required": [
         "solution_type"
       ]
+    },
+    "creds": {
+      "type": "object",
+      "title": "creds",
+      "properties": {
+        "port": {
+          "type": "integer",
+          "title": "Port",
+          "description": "The port that is used",
+          "order": 1
+        },
+        "protocol": {
+          "type": "string",
+          "title": "Protocol",
+          "description": "TCP or other",
+          "order": 2
+        },
+        "status": {
+          "type": "string",
+          "title": "Status",
+          "description": "Which creds apply",
+          "order": 3
+        }
+      }
+    },
+    "identifiers": {
+      "type": "object",
+      "title": "identifiers",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "description": "The ID",
+          "order": 2
+        },
+        "source": {
+          "type": "string",
+          "title": "Source",
+          "description": "The source",
+          "order": 1
+        }
+      }
     }
   }
 }
