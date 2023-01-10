@@ -845,22 +845,22 @@ types:
       title: Title
       description: Name of the vulnerability
       type: string
-      required: true
+      required: false
     description:
       title: Description
       description: Description of the vulnerability
       type: string
-      required: true
+      required: false
     added:
       title: Added
       description: Date the vulnerability was last added to an asset
       type: date
-      required: true
+      required: false
     modified:
       title: Modified
       description: Date the vulnerability was last modified
       type: date
-      required: true
+      required: false
     published:
       title: Published
       description: Date the vulnerability was added to InsightVM
@@ -875,27 +875,27 @@ types:
       title: CVES
       description: CVES ID
       type: string
-      required: true
+      required: false
     cvss_v2:
       title: CVSSv2
       description: information regarding CVSSv2
       type: cvss_v2
-      required: true
+      required: false
     cvss_v3:
       title: CVSSv3
       description: information regarding CVSSv3
       type: cvss_v3
-      required: true
+      required: false
     denial_of_service:
       title: Denial of Service
       description: Whether or not this vulnerability is a denial of service attack
       type: boolean
-      required: true
+      required: false
     exploits:
       title: Exploits
       description: List of exploits related to the vulnerability
       type: '[]string'
-      required: true
+      required: false
     id:
       title: ID
       description: ID of the vulnerability
@@ -905,22 +905,22 @@ types:
       title: Links
       description: List of links related to the vulnerability
       type: '[]link'
-      required: true
+      required: false
     malware_kits:
       title: Malware Kits
       description: List of malware kits related to the vulnerability
       type: '[]string'
-      required: true
+      required: false
     pci:
       title: PCI
       description: information regarding PCI
       type: pci
-      required: true
+      required: false
     references:
       title: References
       description: Links to information related to the vulnerability
       type: string
-      required: true
+      required: false
     risk_score:
       description: Risk score (with criticality adjustments) of the vulnerability
       title: Risk Score
