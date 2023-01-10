@@ -140,6 +140,11 @@ class Util:
             return MockResponse("add_address_to_group", 200)
         if (
             args[1]
+            == "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/networkgroups/00000000-0000-0000-0000-000000000003"
+        ):
+            return MockResponse("add_address_to_group_empty_objects", 200)
+        if (
+            args[1]
             == "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/networkgroups/00000000-0000-0000-0000-000000000002"
         ):
             return MockResponse("remove_address_from_group", 200)
