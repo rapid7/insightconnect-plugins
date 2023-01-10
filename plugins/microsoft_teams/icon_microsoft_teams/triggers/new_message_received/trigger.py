@@ -44,8 +44,8 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
         # Get our most recent message date:
         try:
             last_time_we_checked = maya.parse(sorted_messages[0].get("createdDateTime"))
-        except Exception as e:
-            raise PluginException(PluginException.Preset.INVALID_JSON) from e
+        except Exception as error:
+            raise PluginException(PluginException.Preset.INVALID_JSON) from error
 
         time.sleep(1)  # Make sure we don't kill the API. It's limited to 3 calls a second
 
@@ -115,11 +115,11 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
         if message_content:
             try:
                 compiled_message_content = re.compile(message_content)
-            except Exception as e:
+            except Exception as error:
                 raise PluginException(
                     cause=f"Invalid regular expression: {message_content}",
                     assistance=f"Please correct {message_content}",
-                ) from e
+                ) from error
         return compiled_message_content
 
     def get_sorted_messages(self, messages_endpoint: str) -> list:
@@ -144,12 +144,12 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
             messages_result = requests.get(messages_endpoint, headers=headers)
             try:
                 messages_result.raise_for_status()
-            except Exception as e:
+            except Exception as error:
                 raise PluginException(
                     cause=f"Could not get messages from Microsoft Graph API."
                     f"Get messages result code: {messages_result.status_code}",
                     assistance=messages_result.text,
-                ) from e
+                ) from error
 
         sorted_messages = self.sort_messages_from_request(messages_result.json())
         return sorted_messages
@@ -189,13 +189,21 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
 
         if urls:
             for url in urls:
-                if url.startswith("http") or url.startswith("https"):
-                    normalized_urls.append(url)
-                else:
-                    normalized_urls.append(f"https://{url}")
-
-            for url in normalized_urls:
-                domains.append(url.replace("https://", "").replace("http://", ""))
+                if not url.lower().startswith("http") and not url.lower().startswith("https"):
+                    url = f"https://{url}"
+                # ensure domain, subdomain, and suffix are lower case
+                # path and query params may be upper case
+                # split subdomain, domain, and suffix from path and query params
+                split_url = url.split("/")
+                split_url = ["/".join(split_url[i : i + 3]) for i in range(0, len(split_url), 3)]
+                # separate query params immediately after suffix
+                separated_query_params = split_url[0].split("?", 1)
+                separated_query_params[0] = separated_query_params[0].lower()
+                # rejoin query params immediately after suffix
+                split_url[0] = "?".join(separated_query_params)
+                url = "/".join(split_url)
+                normalized_urls.append(url)
+                domains.append(separated_query_params[0].replace("https://", "").replace("http://", ""))
 
         return {
             "domains": self.remove_duplicates(domains),
@@ -276,17 +284,16 @@ class NewMessageReceived(insightconnect_plugin_runtime.Trigger):
 
     @staticmethod
     def extract_urls(msg: str) -> list:
+        cleaned_message = re.sub(r"\"font-size\s*?:.*?(;|(?=\"\"|'|>))", '""', msg)
         urls = re.findall(
             r"(?m)\b(?:http(?:s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:\/?#[\]@!\$&'\(\)\*\+,;=.]+\b",
-            msg.lower(),
+            cleaned_message,
         )
         normalized_urls = []
         for url in urls:
             if "@" in url or validators.ipv6(url) or validators.ipv4(url):
                 continue
-
             normalized_urls.append(url)
-
         return normalized_urls
 
     @staticmethod
