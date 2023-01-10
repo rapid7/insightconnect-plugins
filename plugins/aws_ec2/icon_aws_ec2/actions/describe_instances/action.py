@@ -1,8 +1,7 @@
 from .schema import DescribeInstancesInput, DescribeInstancesOutput, Component
 
 # Custom imports below
-from icon_aws_ec2.util.common import PaginationHelper
-from insightconnect_plugin_runtime.clients.aws_client import AWSAction
+from insightconnect_plugin_runtime.clients.aws_client import AWSAction, PaginationHelper
 
 
 class DescribeInstances(AWSAction):
