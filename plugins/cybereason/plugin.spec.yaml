@@ -319,9 +319,176 @@ types:
       type: integer
       description: Partial response
       required: false
+  sensorStats:
+    FailedSending:
+      title: Failed Sending
+      type: integer
+      description: Failed sending
+      required: false
+    InvalidState:
+      title: Invalid State
+      type: integer
+      description: Invalid state
+      required: false
+    ProbeRemoved:
+      title: Probe Removed
+      type: integer
+      description: Probe removed
+      required: false
+    TimeoutSending:
+      title: Timeout Sending
+      type: integer
+      description: Timeout sending
+      required: false
+    Pending:
+      title: Pending
+      type: integer
+      description: Pending
+      required: false
+    ChunksRequired:
+      title: Chunks Required
+      type: integer
+      description: Chunks required
+      required: false
+    MsiFileCorrupted:
+      title: MSI File Corrupted
+      type: integer
+      description: MSI file corrupted
+      required: false
+    SendingMsi:
+      title: Sending MSI
+      type: integer
+      description: Sending MSI
+      required: false
+    NewerInstalled:
+      title: Newer Installed
+      type: integer
+      description: Newer installed
+      required: false
+    MsiSendFail:
+      title: MSI Send Fail
+      type: integer
+      description: MSI Send Fail
+      required: false
+    partialResponse:
+      title: Partial Response
+      type: integer
+      description: Partial response
+      required: false
+    EndedWithSensorTimeout:
+      title: Ended With Sensor Timeout
+      type: integer
+      description: Ended with sensor timeout
+      required: false
+    FailedSendingToServer:
+      title: Failed Sending To Server
+      type: integer
+      description: Failed sending to server
+      required: false
+    GettingChunks:
+      title: Getting Chunks
+      type: integer
+      description: Getting chunks
+      required: false
+    Aborted:
+      title: Aborted
+      type: integer
+      description: Aborted
+      required: false
+    Started:
+      title: Started
+      type: integer
+      description: Started
+      required: false
+    InProgress:
+      title: In Progress
+      type: integer
+      description: In progress
+      required: false
+    Disconnected:
+      title: Disconnected
+      type: integer
+      description: Disconnected
+      required: false
+    Failed:
+      title: Failed
+      type: integer
+      description: Failed
+      required: false
+    Timeout:
+      title: Timeout
+      type: integer
+      description: Timeout
+      required: false
+    EndedWithTooManyResults:
+      title: Ended With Too Many Results
+      type: integer
+      description: Ended with too many results
+      required: false
+    AlreadyUpdated:
+      title: Already Updated
+      type: integer
+      description: Already updated
+      required: false
+    EndedWithTooManySearches:
+      title: Ended With Too Many Searches
+      type: integer
+      description: Ended with too many searches
+      required: false
+    Succeeded:
+      title: Succeeded
+      type: integer
+      description: Succeeded
+      required: false
+    NotSupported:
+      title: Not Supported
+      type: integer
+      description: Not supported
+      required: false
+    EndedWithUnknownError:
+      title: Ended With Unknown Error
+      type: integer
+      description: Ended with unknown error
+      required: false
+    None:
+      title: None
+      type: integer
+      description: None
+      required: false
+    Primed:
+      title: Primed
+      type: integer
+      description: Primed
+      required: false
+    EndedWithInvalidParam:
+      title: Ended With Invalid Param
+      type: integer
+      description: Ended with invalid param
+      required: false
+    UnknownProbe:
+      title: Unknown Probe
+      type: integer
+      description: Unknown probe
+      required: false
+    AbortTimeout:
+      title: Abort Timeout
+      type: integer
+      description: Abort timeout
+      required: false
+    UnauthorizedUser:
+      title: Unauthorized User
+      type: integer
+      description: Unauthorized user
+      required: false
   globalStats:
     stats:
       title: Stats
+      type: stats
+      description: Stats
+      required: false
+  globalSensorStats:
+    stats:
+      title: sensorStats
       type: stats
       description: Stats
       required: false
