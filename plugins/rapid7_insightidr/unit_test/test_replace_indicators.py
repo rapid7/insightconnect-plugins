@@ -55,7 +55,7 @@ class TestReplaceIndicators(TestCase):
             ],
         ]
     )
-    def test_replace_indicators_fail(self, mock_request, key, domain_names, hashes, ips, urls, cause, assistance):
+    def test_replace_indicators_invalid(self, mock_request, key, domain_names, hashes, ips, urls, cause, assistance):
         with self.assertRaises(PluginException) as error:
             actual = self.action.run(
                 {
