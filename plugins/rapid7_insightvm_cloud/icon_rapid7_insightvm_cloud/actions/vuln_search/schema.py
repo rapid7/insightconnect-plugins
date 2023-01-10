@@ -410,25 +410,12 @@ class VulnSearchOutput(insightconnect_plugin_runtime.Output):
         }
       },
       "required": [
-        "added",
         "categories",
-        "cves",
-        "cvss_v2",
-        "cvss_v3",
-        "denial_of_service",
-        "description",
-        "exploits",
         "id",
-        "links",
-        "malware_kits",
-        "modified",
-        "pci",
         "published",
-        "references",
         "risk_score",
         "severity",
-        "severity_score",
-        "title"
+        "severity_score"
       ],
       "definitions": {
         "cvss_v2": {
