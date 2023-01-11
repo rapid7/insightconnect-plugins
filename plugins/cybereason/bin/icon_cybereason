@@ -34,6 +34,8 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
+            self.add_action(actions.ArchiveSensor())
+
             self.add_action(actions.DeleteRegistryKey())
 
             self.add_action(actions.GetSensor())
