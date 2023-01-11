@@ -1,0 +1,52 @@
+{
+  "cidr0_cidrs": [
+    {
+      "length": 12,
+      "v4prefix": "2.0.0.0"
+    }
+  ],
+  "country": "FR",
+  "endAddress": "2.15.255.255",
+  "entities": [
+    {
+      "handle": "FT-BRX",
+      "objectClassName": "entity",
+      "roles": [
+        "registrant"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "eventAction": "last changed",
+      "eventDate": "2017-04-10T14:16:37Z"
+    }
+  ],
+  "handle": "2.0.0.0 - 2.15.255.255",
+  "ipVersion": "v4",
+  "links": [
+    {
+      "href": "https://rdap.db.ripe.net/ip/2.2.2.2/32",
+      "rel": "self",
+      "value": "https://rdap.db.ripe.net/ip/2.2.2.2/32"
+    }
+  ],
+  "name": "FR-TELECOM-20100712",
+  "notices": [
+    {
+      "description": [
+        "This output has been filtered."
+      ],
+      "title": "Filtered"
+    }
+  ],
+  "objectClassName": "ip network",
+  "parentHandle": "0.0.0.0 - 255.255.255.255",
+  "port43": "whois.ripe.net",
+  "rdapConformance": [
+    "cidr0",
+    "rdap_level_0"
+  ],
+  "startAddress": "2.0.0.0",
+  "type": "ALLOCATED PA"
+}
