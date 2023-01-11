@@ -1,0 +1,9 @@
+{
+    "threat": {
+        "name": "Threat Command Alert",
+        "note": "This threat will be automatically managed by an InsightConnect workflow",
+        "published": false,
+        "indicator_count": 1
+    },
+    "rejected_indicators": []
+}

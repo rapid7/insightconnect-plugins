@@ -108,7 +108,7 @@ class Investigations:
         return f"{console_url}idr/v2/investigations/{identifier}/alerts"
 
     @staticmethod
-    def close_investigations_in_bulk(console_url: str):
+    def close_investigations_in_bulk(console_url: str) -> str:
         """
         URI for closing investigations in bulk
         :param console_url: URL to the InsightIDR console
@@ -118,7 +118,7 @@ class Investigations:
         return f"{console_url}idr/v1/investigations/bulk_close"
 
     @staticmethod
-    def set_the_status_of_an_investigation(console_url: str, identifier: str, status: str):
+    def set_the_status_of_an_investigation(console_url: str, identifier: str, status: str) -> str:
         """
         URI for setting the status of an investigation
         :param console_url: URL to the InsightIDR console
@@ -136,7 +136,7 @@ class Investigations:
 
 class Threats:
     @staticmethod
-    def add_indicators_to_a_threat(console_url: str, key: str):
+    def add_indicators_to_a_threat(console_url: str, key: str) -> str:
         """
         URI for adding indicators_to_a_threat
         :param console_url: URL to the InsightIDR console
@@ -147,7 +147,18 @@ class Threats:
         return f"{console_url}idr/v1/customthreats/key/{key}/indicators/add"
 
     @staticmethod
-    def create_threat(console_url: str):
+    def replace_indicators(console_url: str, key: str) -> str:
+        """
+        URI for create custom threat
+        :param console_url: URL to the InsightIDR console
+        :param key: The key of a threat for which the indicators are going to be added
+        :return: pre-populated /idr/v1/customthreats/key/{key}/indicators/replace
+        """
+
+        return f"{console_url}idr/v1/customthreats/key/{key}/indicators/replace"
+
+    @staticmethod
+    def create_threat(console_url: str) -> str:
         """
         URI for create custom threat
         :param console_url: URL to the InsightIDR console
@@ -159,7 +170,7 @@ class Threats:
 
 class QueryLogs:
     @staticmethod
-    def get_query_logs(region_code: str, log_id: str):
+    def get_query_logs(region_code: str, log_id: str) -> str:
         """
         URI for adding get_query_logs
         :param region_code: The region code for the InsightIDR API to be mapped
@@ -172,7 +183,7 @@ class QueryLogs:
 
 class Queries:
     @staticmethod
-    def get_all_queries(region_code: str):
+    def get_all_queries(region_code: str) -> str:
         """
         URI for retrieving all saved queries
         :param region_code: The region code for the InsightIDR API to be mapped
@@ -181,7 +192,7 @@ class Queries:
         return f"https://{Util.map_region(region_code)}.rest.logs.insight.rapid7.com/query/saved_queries"
 
     @staticmethod
-    def get_query_by_id(console_url: str, query_id: str):
+    def get_query_by_id(console_url: str, query_id: str) -> str:
         """
         URI for retrieving a query
         :param console_url: URL to the InsightIDR console
@@ -193,7 +204,7 @@ class Queries:
 
 class Logs:
     @staticmethod
-    def get_a_log(console_url: str, log_id: str):
+    def get_a_log(console_url: str, log_id: str) -> str:
         """
         URI for adding get_query_logs
         :param console_url: URL to the InsightIDR console
@@ -204,7 +215,7 @@ class Logs:
         return f"{console_url}log_search/management/logs/{log_id}"
 
     @staticmethod
-    def get_all_logs(console_url: str):
+    def get_all_logs(console_url: str) -> str:
         """
         URI for adding get_query_logs
         :param console_url: URL to the InsightIDR console
