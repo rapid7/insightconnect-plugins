@@ -13,5 +13,9 @@ class ArchiveSensor(insightconnect_plugin_runtime.Action):
                 output=ArchiveSensorOutput())
 
     def run(self, params={}):
-        # TODO: Implement run function
-        return {}
+        return{
+            Output.ARCHIVE_SENSOR_RESPONSE: self.connection.api.archive_sensor(
+                params.get(Input.SENSOR_IDS),
+                params.get(Input.ARGUMENT)
+            )
+        }

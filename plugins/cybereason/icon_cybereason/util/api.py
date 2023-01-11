@@ -85,6 +85,9 @@ class CybereasonAPI:
 
         return sensors.get("sensors")[0]
 
+    def archive_sensor(self, sensor_ids: list, argument: str) -> dict:
+        return self.send_request("POST", "/rest/sensors/action/archive", payload={"sensorsIds": sensor_ids, "argument": argument})
+
     def get_malop(self, malop_guid: str) -> dict:
         try:
             return self.send_request(

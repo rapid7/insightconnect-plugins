@@ -492,6 +492,67 @@ types:
       type: stats
       description: Stats
       required: false
+  archiveSensorResponse:
+    batch_id:
+      title: Batch ID
+      description: The ID for the operation. You may need this number for other operations
+      type: integer
+      required: true
+    action_type:
+      title: Action Type
+      description: The action taken on the sensor
+      type: string
+      required: true
+    action_arguments:
+      title: Action Arguments
+      description: The arguments passed for the operation
+      type: string
+      required: true
+    global_stats:
+      title: Global Stats
+      description: Collection of items about the operation
+      type: globalSensorStats
+      required: true
+    final_state:
+      title: Final State
+      description: Indicates whether the sensor is in the state indicated by the operation
+      type: boolean
+      required: true
+    total_number_of_probes:
+      title: Total Number Of Probes
+      decription: How many sensors were affected by the current operation
+      type: integer
+      required: true
+    initiator_user:
+      title: Initiator User
+      description: The user name of the user who performed this operation
+      type: string
+      required: true
+    start_time:
+      title: Start Time
+      description: The start time of the operation
+      type: string
+      required: true
+    aborter_user:
+      title: Aborter User
+      description: The user name of the user who aborted the operation. This field only exists if the operation was aborted
+      type: string
+      required: false
+    abort_time:
+      title: Abort Time
+      description: The time (in epoch) when the operation was aborted. This field only exists if the operation was aborted
+      type: string
+      required: false
+    abort_timeout:
+      title: Abort Timeout
+      description: Indicates whether there is a timeout value for timing out the request to abort
+      type: boolean
+      required: true
+    abort_http_status_code:
+      title: Abort HTTP Status Code
+      description: The code sent by the server to abort the operation. This field only exists if the operation was aborted
+      type: string
+      required: false
   response:
     globalStats:
       title: Global Stats
@@ -1270,66 +1331,11 @@ actions:
         required: true
         example: "Sensors are no longer in use"
     output:
-      batch_id:
-        title: Batch ID
-        description: The ID for the operation. You may need this number for other operations
-        type: integer
+      archive_sensor_response:
+        title: Archive Sensor Response
+        description: Archive sensor response
+        type: archiveSensorResponse
         required: true
-      action_type:
-        title: Action Type
-        description: The action taken on the sensor
-        type: string
-        required: true
-      action_arguments:
-        title: Action Arguments
-        description: The arguments passed for the operation
-        type: string
-        required: true
-      global_stats:
-        title: Global Stats
-        description: Collection of items about the operation
-        type: globalSensorStats
-        required: true
-      final_state:
-        title: Final State
-        description: Indicates whether the sensor is in the state indicated by the operation
-        type: boolean
-        required: true
-      total_number_of_probes:
-        title: Total Number Of Probes
-        decription: How many sensors were affected by the current operation
-        type: integer
-        required: true
-      initiator_user:
-        title: Initiator User
-        description: The user name of the user who performed this operation
-        type: string
-        required: true
-      start_time:
-        title: Start Time
-        description: The start time of the operation
-        type: string
-        required: true
-      aborter_user:
-        title: Aborter User
-        description: The user name of the user who aborted the operation. This field only exists if the operation was aborted
-        type: string
-        required: false
-      abort_time:
-        title: Abort Time
-        description: The time (in epoch) when the operation was aborted. This field only exists if the operation was aborted
-        type: string
-        required: false
-      abort_timeout:
-        title: Abort Timeout
-        description: Indicates whether there is a timeout value for timing out the request to abort
-        type: boolean
-        required: true
-      abort_http_status_code:
-        title: Abort HTTP Status Code
-        description: The code sent by the server to abort the operation. This field only exists if the operation was aborted
-        type: string
-        required: false
   quarantine_file:
     title: Quarantine File
     description: Quarantine a detected malicious file in a secure location or unquarantine a file
