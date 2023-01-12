@@ -1,0 +1,50 @@
+{
+  "parameters": [
+    [
+      "no_text_and_html",
+      {
+        "name": "Test Contact",
+        "email": "user@example.com",
+        "phone": null,
+        "subject": "New Ticket",
+        "text": "",
+        "html": "",
+        "category": 1,
+        "priority": null,
+        "assignee": null,
+        "tags": null,
+        "cc": null,
+        "bcc": null,
+        "dueDate": null,
+        "visibleOnlyStaff": null,
+        "customFields": null
+      },
+      "Text and HTML field not provided. One of these fields is required to create a ticket.",
+      "Please provide a Text or HTML field and try again."
+    ],
+    [
+      "invalid_custom_field",
+      {
+        "name": "Test Contact",
+        "email": "user@example.com",
+        "phone": null,
+        "subject": "New Ticket",
+        "text": "",
+        "html": "",
+        "category": 1,
+        "priority": null,
+        "assignee": null,
+        "tags": null,
+        "cc": null,
+        "bcc": null,
+        "dueDate": null,
+        "visibleOnlyStaff": null,
+        "customFields": {
+          "t-cf-3": "test"
+        }
+      },
+      "The custom field 't-cf-3' does not exist or is not available for the specified category.",
+      "Custom fields that are available: [{'name': 'Test Field', 'id': 't-cf-1'}, {'name': 'Test Field 2', 'id': 't-cf-2'}, {'name': 'Test Contact Field', 'id': 'c-cf-1'}]"
+    ]
+  ]
+}
