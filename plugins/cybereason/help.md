@@ -45,6 +45,89 @@ Example input:
 
 ### Actions
 
+#### Archive Sensor
+
+This action is used to archive sensor.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|argument|string|None|True|The reason for archiving the sensor or sensors|None|Sensors are no longer in use|
+|sensor_ids|[]string|None|True|The unique identifier of the machine(s) you wish to perform the operation on|None|["58ae74fae4b06dca39c1d4bc:PYLUMCLIENT_ORG1-PROD_WINTEST-PC_005056A104F9"]|
+
+Example input:
+
+```
+{
+  "argument": "Sensors are no longer in use",
+  "sensor_ids": [
+    "58ae74fae4b06dca39c1d4bc:PYLUMCLIENT_ORG1-PROD_WINTEST-PC_005056A104F9"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|archive_sensor_response|archiveSensorResponse|True|Archive sensor response|
+
+Example output:
+
+```
+{
+    "batchId": 605064018,
+    "actionType": "Archive",
+    "actionArguments": null,
+    "globalStats": {
+        "stats": {
+            "FailedSending": 0,
+            "InvalidState": 0,
+            "ProbeRemoved": 0,
+            "TimeoutSending": 0,
+            "Pending": 0,
+            "ChunksRequired": 0,
+            "MsiFileCorrupted": 0,
+            "SendingMsi": 0,
+            "NewerInstalled": 0,
+            "MsiSendFail": 0,
+            "partialResponse": 0,
+            "EndedWithSensorTimeout": 0,
+            "FailedSendingToServer": 0,
+            "GettingChunks": 0,
+            "Aborted": 0,
+            "Started": 0,
+            "InProgress": 0,
+            "Disconnected": 0,
+            "Failed": 0,
+            "Timeout": 0,
+            "EndedWithTooManyResults": 0,
+            "AlreadyUpdated": 0,
+            "EndedWithTooManySearches": 0,
+            "Succeeded": 0,
+            "NotSupported": 0,
+            "EndedWithUnknownError": 0,
+            "None": 1,
+            "Primed": 0,
+            "EndedWithInvalidParam": 0,
+            "UnknownProbe": 0,
+            "AbortTimeout": 0,
+            "UnauthorizedUser": 0
+        }
+    },
+    "finalState": false,
+    "totalNumberOfProbes": 1,
+    "initiatorUser": "admin@myserver.com",
+    "startTime": 1523875125179,
+    "aborterUser": null,
+    "abortTime": 0,
+    "abortTimeout": false,
+    "abortHttpStatusCode": null
+}
+
+```
+
 #### Get Sensor
 
 This action is used to get sensor.
