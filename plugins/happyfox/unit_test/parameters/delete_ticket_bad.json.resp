@@ -1,0 +1,13 @@
+{
+  "parameters": [
+    [
+      "ticket_not_found",
+      {
+        "ticketId": 20,
+        "staffId": 1
+      },
+      "The server is unable to process the request.",
+      "Verify your plugin input is correct and not malformed and try again. If the issue persists, please contact support."
+    ]
+  ]
+}

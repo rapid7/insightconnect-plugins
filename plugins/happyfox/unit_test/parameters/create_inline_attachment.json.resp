@@ -1,0 +1,16 @@
+{
+  "parameters": [
+    [
+      "success",
+      {
+        "file": {
+          "content": "dGVzdA==",
+          "filename": "text.png"
+        }
+      },
+      {
+        "url": "https://example.com"
+      }
+    ]
+  ]
+}
