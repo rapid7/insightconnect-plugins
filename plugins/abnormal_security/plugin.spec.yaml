@@ -256,7 +256,7 @@ actions:
         description: This input enables you to filter your results to a certain date, the date has to be in ISO 8601 format - YYYY-MM-DDTHH:MM:SSZ
         type: string
         required: false
-        example: 2021-03-01T21:11:38Z
+        example: 2021-03-11T21:11:38Z
     output:
       threats:
         title: Threats
@@ -294,7 +294,7 @@ actions:
         description: This input enables you to filter your results to a certain date, the date has to be in ISO 8601 format - YYYY-MM-DDTHH:MM:SSZ
         type: string
         required: false
-        example: 2021-03-01T21:11:38Z
+        example: 2021-03-11T21:11:38Z
     output:
       cases:
         title: Cases
