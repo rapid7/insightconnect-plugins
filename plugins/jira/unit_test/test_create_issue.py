@@ -80,12 +80,6 @@ class MockClient:
     def create_issue(self, fields):
         return MockIssue()
 
-    def issue_type_by_name(self, issue_type):
-        if issue_type:
-            pass
-        else:
-            raise KeyError("Issue type was not provided")
-
     def issue_types(self):
         issue_type = {
             "raw": {"name": "Task", "scope": {"type": "PROJECT", "project": {"id": "10000"}}, "id": "10001"},
