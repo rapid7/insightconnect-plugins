@@ -250,13 +250,13 @@ actions:
         description: This input enables you to filter your results from a certain date, the date has to be in ISO 8601 format - YYYY-MM-DDTHH:MM:SSZ
         type: string
         required: false
-        example: 2021-03-01T21:11:38Z
+        example: 2021-03-11 21:11:38
       to_date:
         title: To Date
         description: This input enables you to filter your results to a certain date, the date has to be in ISO 8601 format - YYYY-MM-DDTHH:MM:SSZ
         type: string
         required: false
-        example: 2021-03-11T21:11:38Z
+        example: 2021-03-11 21:11:38
     output:
       threats:
         title: Threats
@@ -288,13 +288,13 @@ actions:
         description: This input enables you to filter your results from a certain date, the date has to be in ISO 8601 format - YYYY-MM-DDTHH:MM:SSZ
         type: string
         required: false
-        example: 2021-03-01T21:11:38Z
+        example: 2021-03-11 21:11:38
       to_date:
         title: To Date
         description: This input enables you to filter your results to a certain date, the date has to be in ISO 8601 format - YYYY-MM-DDTHH:MM:SSZ
         type: string
         required: false
-        example: 2021-03-11T21:11:38Z
+        example: 2021-03-11 21:11:38
     output:
       cases:
         title: Cases
