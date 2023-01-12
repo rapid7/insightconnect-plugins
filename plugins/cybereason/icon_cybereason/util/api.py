@@ -86,7 +86,9 @@ class CybereasonAPI:
         return sensors.get("sensors")[0]
 
     def archive_sensor(self, sensor_ids: list, argument: str) -> dict:
-        return self.send_request("POST", "/rest/sensors/action/archive", payload={"sensorsIds": sensor_ids, "argument": argument})
+        return self.send_request(
+            "POST", "/rest/sensors/action/archive", payload={"sensorsIds": sensor_ids, "argument": argument}
+        )
 
     def get_malop(self, malop_guid: str) -> dict:
         try:
@@ -155,6 +157,27 @@ class CybereasonAPI:
                 assistance="No Visual Search results returned for the provided filter.",
             )
 
+    def check_status_codes(self, status_code: int, response):
+        if status_code == 401:
+            return PluginException.Preset.USERNAME_PASSWORD
+        if status_code == 403:
+            return PluginException.Preset.API_KEY
+        if status_code == 404:
+            return PluginException.Preset.NOT_FOUND
+        if status_code >= 500:
+            return PluginException.Preset.SERVER_ERROR
+        if 200 <= status_code < 300:
+            # Cybereason will return a Login page with a 200 status code if creds are incorrect
+            # Therefore, check if the response is JSON-decodable (login page is not JSON)
+            try:
+                json_response = response.json()
+            except json.decoder.JSONDecodeError:
+                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
+
+            return insightconnect_plugin_runtime.helper.clean(json_response)
+        else:
+            return PluginException.Preset.UNKNOWN
+
     def send_request(self, method: str, path: str, params: dict = None, payload: dict = None) -> dict:
         try:
             response = self.session.request(
@@ -164,36 +187,15 @@ class CybereasonAPI:
                 json=payload,
                 headers=self.headers,
             )
-
-            if response.status_code == 401:
-                raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.text)
-            if response.status_code == 403:
-                raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
-            if response.status_code == 404:
-                raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
-            if 400 <= response.status_code < 500:
-                raise PluginException(
-                    preset=PluginException.Preset.UNKNOWN,
-                    data=response.text,
-                )
-            if response.status_code >= 500:
-                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
-
-            if 200 <= response.status_code < 300:
-                # Cybereason will return a Login page with a 200 status code if creds are incorrect
-                # Therefore, check if the response is JSON-decodable (login page is not JSON)
-                try:
-                    json_response = response.json()
-                except json.decoder.JSONDecodeError:
-                    raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
-
-                return insightconnect_plugin_runtime.helper.clean(json_response)
+            if response.status_code:
+                preset = self.check_status_codes(response.status_code, response)
+                raise PluginException(preset=preset, data=response.text)
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        except json.decoder.JSONDecodeError as e:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
-        except requests.exceptions.HTTPError as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+        except json.decoder.JSONDecodeError as error:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
+        except requests.exceptions.HTTPError as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     @staticmethod
     def parse_server_filter(server_filter: Optional[str] = None):
