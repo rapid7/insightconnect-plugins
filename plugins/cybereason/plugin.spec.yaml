@@ -719,14 +719,14 @@ types:
       required: false
       example: "win10-edlab-aiq1"
     internalIpAddress:
-      title: Internal Ip Address
-      description: The machine’s internal IP address as identified by the sensor
+      title: Internal IP Address
+      description: The machine's internal IP address as identified by the sensor
       type: string
       required: false
       example: "111.11.133.21"
     externalIpAddress:
-      title: External Ip Address
-      description: The machine’s external IP address for the local network
+      title: External IP Address
+      description: The machine's external IP address for the local network
       type: string
       required: false
       example: "2.16.258.145"
@@ -738,7 +738,7 @@ types:
       example: "Primary"
     siteId:
       title: Machine Name
-      description: The identifier for the sensor’s site
+      description: The identifier for the sensor's site
       type: integer
       required: false
       example: 46210509
@@ -1005,7 +1005,7 @@ types:
       description: The model added for a device in the allowed devices section of the Endpoint Controls settings
       type: string
       required: false
-      example: "Intel(R) Core(TM) i9-9880H CPU @ 2.30GHz"
+      example: "Intel(R) Core(TM) i9-9880H CPU 2.30GHz"
     organizationalUnit:
       title: Organizational Unit
       description: The name of the organization unit taken from the Active Directory on the machine on which the sensor is installed
