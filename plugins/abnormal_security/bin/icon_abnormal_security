@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Abnormal Security"
 Vendor = "rapid7"
-Version = "1.2.0"
+Version = "1.2.1"
 Description = "Protect your Microsoft Office 365 and G-Suite environments with next-generation email security that uses the most advanced AI detection techniques to stop targeted phishing attacks"
 
 
