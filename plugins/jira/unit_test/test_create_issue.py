@@ -88,14 +88,10 @@ class MockClient:
 
     def issue_types(self):
         issue_type = {
-            "raw": {
-                "name": "Task",
-                "scope": {"type": "PROJECT", "project": {"id": "10000"}},
-                "id": "10001"
-            },
+            "raw": {"name": "Task", "scope": {"type": "PROJECT", "project": {"id": "10000"}}, "id": "10001"},
             "name": "Task",
             "scope": {"type": "PROJECT", "project": {"id": "10000"}},
-            "id": "10001"
+            "id": "10001",
         }
         issue_type_object = namedtuple("IssueType", issue_type.keys())(*issue_type.values())
         return [issue_type_object]
@@ -290,8 +286,6 @@ class TestCreateIssue(TestCase):
         self.test_action.connection = MockConnection()
         with self.assertRaises(PluginException):
             self.test_action.run(action_params)
-
-
 
     # Leave this here, it comes in handy for debugging.
 
