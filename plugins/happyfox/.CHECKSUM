@@ -1,0 +1,31 @@
+{
+	"spec": "e3caacd442f4fe531a7488e5c086014d",
+	"manifest": "3fa4224886a0a06cd61ed42bef103f3a",
+	"setup": "b5ed54a12dfdaf15991a83d9d1a891ea",
+	"schemas": [
+		{
+			"identifier": "create_inline_attachment/schema.py",
+			"hash": "5c05d064d5e3f2fcebc44f3440c5d6ff"
+		},
+		{
+			"identifier": "create_ticket/schema.py",
+			"hash": "d9432342faa64817348bbcd6b13cba2e"
+		},
+		{
+			"identifier": "create_ticket_with_attachments/schema.py",
+			"hash": "a2216d193b6d7f942c288641e1725bd3"
+		},
+		{
+			"identifier": "delete_ticket/schema.py",
+			"hash": "f0884d3bd86f17702211492adf5541a0"
+		},
+		{
+			"identifier": "list_tickets/schema.py",
+			"hash": "08681076f2fd47a0c4c3dfab3db1a218"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "2c3148b48e5b1b390e1e398e0e9ef9ba"
+		}
+	]
+}

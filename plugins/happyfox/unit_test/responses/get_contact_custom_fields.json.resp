@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Test Contact Field",
+    "depends_on_choice": null,
+    "required": false,
+    "id": 1,
+    "choices": null,
+    "type": "text",
+    "order": 1,
+    "visible_to_staff_only": false
+  }
+]
