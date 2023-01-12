@@ -1,0 +1,7 @@
+{
+  "description": "my updated description plugin action",
+  "incidentNumber": "INC00fake404",
+  "resolutionNote": "Resolve through Rest API",
+  "status": "Resolved",
+  "statusReason": "Monitoring Incident"
+}
