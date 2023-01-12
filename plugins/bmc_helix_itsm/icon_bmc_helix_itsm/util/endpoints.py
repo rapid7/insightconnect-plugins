@@ -1,0 +1,8 @@
+AUTHENTICATION_ENDPOINT = "/api/jwt/login"
+API_ENDPOINT = "/api/arsys/v1/entry/"
+GET_INCIDENT_ENDPOINT = API_ENDPOINT + "HPD:Help Desk/{incident_entry_id}"
+INCIDENT_QUERY_ENDPOINT = API_ENDPOINT + "HPD:Help Desk"
+CREATE_INCIDENT_ENDPOINT = API_ENDPOINT + "HPD:IncidentInterface_Create"
+MODIFY_INCIDENT_ENDPOINT = API_ENDPOINT + "HPD:IncidentInterface/{incident_entry_id}|{incident_entry_id}"
+CREATE_TASK_ENDPOINT = API_ENDPOINT + "TMS:Task"
+CREATE_PROBLEM_ENDPOINT = API_ENDPOINT + "PBM:ProblemInterface_Create"
