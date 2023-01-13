@@ -54,11 +54,21 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.client = client
         self.rest_client = JiraApi(self.client, self.is_cloud, self.logger)
 
-    def test(self):
+    def test_pat(self):
+        headers = {"Authorization": f"Bearer {self.pat}", "Content-Type": "application/json"}
+        response = requests.get(self.url, headers=headers)
+        return response
+
+    def test_basic_auth(self):
         auth = HTTPBasicAuth(username=self.username, password=self.password)
-
         response = requests.get(self.url, auth=auth)
+        return response
 
+    def test(self):
+        if self.pat:
+            response = self.test_pat()
+        else:
+            response = self.test_basic_auth()
         # https://developer.atlassian.com/cloud/jira/platform/rest/v2/?utm_source=%2Fcloud%2Fjira%2Fplatform%2Frest%2F&utm_medium=302#error-responses
         if response.status_code == 200:
             return True
