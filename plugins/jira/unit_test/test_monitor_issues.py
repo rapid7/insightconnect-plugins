@@ -43,7 +43,7 @@ class TestMonitorIssues(TestCase):
             "jql": "reporter='Bob Smith'",
             "interval": 60,
             "projects": ["projectName", "projectName"],
-            "include_fields": True
+            "include_fields": True,
         }
         self.action.run(action_params)
 
@@ -56,7 +56,7 @@ class TestMonitorIssues(TestCase):
             "jql": "reporter='Bob Smith'",
             "interval": 60,
             "projects": ["projectName", "projectName"],
-            "include_fields": False
+            "include_fields": False,
         }
         self.action.run(action_params)
 

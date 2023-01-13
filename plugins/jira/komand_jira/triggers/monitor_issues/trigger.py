@@ -31,7 +31,7 @@ class MonitorIssues(insightconnect_plugin_runtime.Trigger):
                     issue,
                     get_attachments=self.get_attachments,
                     include_raw_fields=self.include_fields,
-                    logger=self.logger
+                    logger=self.logger,
                 )
                 self.issues[issue.id] = datetime.datetime.now()
                 self.logger.debug(f"Found: {output}")
