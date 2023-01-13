@@ -31,8 +31,22 @@ def timeout_pass(error_callback: Optional[Callable] = None):
 # Test class
 class TestNewIssue(TestCase):
     @classmethod
-    def setUpClass(cls) -> None:
+    def setUp(cls) -> None:
         cls.action = util.Util.default_connector(NewIssue())
+
+
+    @timeout_pass(error_callback=util.Util.check_error_with_fields)
+    @timeout_decorator.timeout(2)
+    @patch("insightconnect_plugin_runtime.Trigger.send", side_effect=util.MockTrigger.send)
+    def test_new_issue_with_fields(self, mock_send):
+        action_params = {
+            "get_attachments": False,
+            "jql": "reporter='Bob Smith'",
+            "interval": 60,
+            "projects": ["projectName", "projectName"],
+            "include_fields": True
+        }
+        self.action.run(action_params)
 
     @timeout_pass(error_callback=util.Util.check_error)
     @timeout_decorator.timeout(2)
@@ -43,6 +57,7 @@ class TestNewIssue(TestCase):
             "jql": "project=projectName",
             "poll_timeout": 60,
             "project": "projectName",
+            "include_fields": False
         }
         self.action.run(action_params)
 

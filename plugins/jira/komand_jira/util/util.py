@@ -57,8 +57,10 @@ def normalize_issue(issue, get_attachments=False, include_raw_fields=False, logg
         "updated_at": issue.fields.updated,
         "resolved_at": resolution_date,
         "labels": labels,
-        "fields": fields,
     }
+
+    if fields:
+        output["fields"] = fields
 
     logger.debug("Result issue: %s", output)
 

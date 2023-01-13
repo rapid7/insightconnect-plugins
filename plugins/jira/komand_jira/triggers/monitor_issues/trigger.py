@@ -21,6 +21,7 @@ class MonitorIssues(insightconnect_plugin_runtime.Trigger):
         self.jql = ""
         self.issues = {}
         self.minutes = 20
+        self.include_fields = False
 
     def poll(self):
         new_issues = self.connection.client.search_issues(self.jql, startAt=0, maxResults=False, fields="*all")
@@ -29,7 +30,7 @@ class MonitorIssues(insightconnect_plugin_runtime.Trigger):
                 output = normalize_issue(
                     issue,
                     get_attachments=self.get_attachments,
-                    include_raw_fields=True,
+                    include_raw_fields=self.include_fields,
                     logger=self.logger
                 )
                 self.issues[issue.id] = datetime.datetime.now()
@@ -63,6 +64,7 @@ class MonitorIssues(insightconnect_plugin_runtime.Trigger):
         self.jql = params.get(Input.JQL)
         self.projects = params.get(Input.PROJECTS)
         self.get_attachments = params.get(Input.GET_ATTACHMENTS, False)
+        self.include_fields = params.get(Input.INCLUDE_FIELDS, False)
 
         jql = f"(created>=-{self.minutes}m or updated>=-{self.minutes}m)"
         if self.projects:

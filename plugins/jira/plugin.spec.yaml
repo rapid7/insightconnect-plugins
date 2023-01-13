@@ -589,6 +589,13 @@ triggers:
         type: integer
         default: 60
         example: 60
+      include_fields:
+        title: Include Fields
+        description: Whether returned Issues should include fields
+        required: false
+        type: boolean
+        default: False
+        example: True
     output:
       issue:
         title: Issue
@@ -626,6 +633,13 @@ triggers:
         type: integer
         default: 60
         example: 60
+      include_fields:
+        title: Include Fields
+        description: Whether returned Issues should include fields
+        required: false
+        type: boolean
+        default: False
+        example: True
     output:
       issue:
         title: Issue

@@ -92,7 +92,31 @@ class Util:
                 "updated_at": "15 minutes ago",
                 "resolved_at": "No idea what this is",
                 "labels": ["blocked"],
-                "fields": 'something',
+            }
+        }
+        if MockTrigger.actual == expected:
+            return True
+
+        TestCase.assertDictEqual(TestCase(), MockTrigger.actual, expected)
+
+    def check_error_with_fields():
+        expected = {
+            "issue": {
+                "attachments": [],
+                "id": "12345",
+                "key": "12345",
+                "url": "https://example-demo.atlassian.net/browse/ISSUE-ID-1234",
+                "summary": "A summary",
+                "description": "A description",
+                "status": ["In Progress"],
+                "resolution": ["new years"],
+                "reporter": ["Bob Smith"],
+                "assignee": ["Bob Smith"],
+                "created_at": "15 minutes ago",
+                "updated_at": "15 minutes ago",
+                "resolved_at": "No idea what this is",
+                "labels": ["blocked"],
+                "fields": "something"
             }
         }
         if MockTrigger.actual == expected:
