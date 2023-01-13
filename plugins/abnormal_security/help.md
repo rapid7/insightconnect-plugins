@@ -435,7 +435,6 @@ _This plugin does not contain any triggers._
 |Messages|[]message|False|List of messages|
 |Threat ID|string|False|Threat ID|
 
-
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
