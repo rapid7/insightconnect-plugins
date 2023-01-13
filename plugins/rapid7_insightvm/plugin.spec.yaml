@@ -1732,14 +1732,160 @@ types:
       required: true
   vulnerability_solution:
     links:
-      description: Hypermedia links to corresponding or related resources
       title: Links
+      description: Hypermedia links to corresponding or related resources
       type: '[]link'
       required: false
     resources:
       title: Solutions
       description: Solutions to vulnerabilities
       type: '[]resources'
+      required: false
+  account:
+    authentication_type:
+      title: Authentication Type
+      description: The authentication protocols available to use in SNMP v3
+      type: string
+      required: false
+      enum:
+        - no-authentication
+        - md5
+        - sha
+    community_name:
+      title: Community Name
+      description: The community name that will be used for authenticating
+      type: string
+      required: false
+    database:
+      title: Database
+      description: The name of the database. If not specified, a default database name will be used during authentication
+      type: string
+      required: false
+    domain:
+      title: Domain
+      description: The address of the domain. This property cannot be specified unless property useWindowsAuthentication is set to true
+      type: string
+      required: false
+    enumerate_sids:
+      title: Enumerate SIDs
+      description: Boolean flag instructing the scan engine to attempt to enumerate SIDs from your environment. If set to true, set the Oracle Net Listener password in property oracleListenerPassword
+      type: string
+      required: false
+    notes_id_password:
+      title: Notes ID Password
+      description: The password for the account that will be used for authenticating
+      type: string
+      required: false
+    ntlm_hash:
+      title: NTLM Hash
+      description: The NTLM password hash
+      type: string
+      required: false
+    oracle_listener_password:
+      title: Oracle Listener Password
+      description: The Oracle Net Listener password. Used to enumerate SIDs from your environment
+      type: string
+      required: false
+    password:
+      title: Password
+      description: The password for the account that will be used for authenticating
+      type: string
+      required: false
+    pem_key:
+      title: PEM Key
+      description: The PEM-format private key
+      type: string
+      required: false
+    permission_elevation:
+      title: Permission Evaluation
+      description: Elevate scan engine permissions to administrative or root access, which is necessary to obtain certain data during the scan. Defaults to "none" if not specified
+      type: string
+      required: false
+      enum:
+        - none
+        - sudo
+        - sudosu
+        - su
+        - pbrun
+        - privileged-exec
+    permission_elevation_password:
+      title: Permission Elevation Password
+      description: The password for the account with elevated permissions. This property must not be specified when the property permissionElevation is set to either "none" or "pbrun"; otherwise the property is required
+      type: string
+      required: false
+    permission_elevation_username:
+      title: Permission Elevation Username
+      description: The user name for the account with elevated permissions. This property must not be specified when the property permissionElevation is set to either "none" or "pbrun"; otherwise the property is required.
+      type: string
+      required: false
+    privacy_password:
+      title: Privacy Password
+      description: The privacy password for the account that will be used for authenticating. Is required when the property authenticationType is set to valid value other than "no-authentication" and when the privacyType is set to a valid value other than code>"no-privacy"
+      type: string
+      required: false
+    privacy_type:
+      title: Privacy Type
+      description: The privacy protocols available to use in SNMP v3
+      type: string
+      required: false
+      enum:
+        - no-privacy
+        - des
+        - aes-128
+        - aes-192
+        - aes-192-with-3-des-key-extension
+        - aes-256
+        - aes-265-with-3-des-key-extension
+    private_key_password:
+      title: Private Pey Password
+      description: The password for private key
+      type: string
+      required: false
+    realm:
+      title: Realm
+      description: The realm
+      type: string
+      required: false
+    service:
+      title: Service
+      description: Specify the type of service to authenticate
+      type: string
+      required: true
+      enum:
+        - as400
+        - cifs
+        - cifshash
+        - cvs
+        - db2
+        - ftp
+        - http
+        - ms-sql
+        - mysql
+        - notes
+        - oracle
+        - pop
+        - postgresql
+        - remote-exec
+        - snmp
+        - snmpv3
+        - ssh
+        - ssh-key
+        - sybase
+        - telnet
+    sid:
+      title: SID
+      description: The name of the database. If not specified, a default database name will be used during authentication
+      type: string
+      required: false
+    use_windows_authentication:
+      title: Use Windows Authentication
+      description: Boolean flag signaling whether to connect to the database using Windows authentication. When set to true, Windows authentication is attempted; when set to false, SQL authentication is attempted
+      type: boolean
+      required: false
+    username:
+      title: Username
+      description: The user name for the account that will be used for authenticating
+      type: string
       required: false
 
 connection:
@@ -4062,6 +4208,88 @@ actions:
         description: Highest-superceding rollup solutions for a vulnerabilities on an asset
         type: "[]vulnerability_solution"
         required: true
+  update_shared_credential:
+    title: Update Shared Credentials
+    description: Update shared credentials
+    input:
+      account:
+        title: Account
+        description: Specify the type of service to authenticate as well as all of the information required by that service
+        type: account
+        required: true
+        example: {
+          "authenticationType": "",
+          "communityName": "",
+          "database": "",
+          "domain": "rapid7.com",
+          "enumerateSids": false,
+          "notesIDPassword": "",
+          "ntlmHash": "",
+          "oracleListenerPassword": "",
+          "password": "password",
+          "pemKey": "",
+          "permissionElevation": "",
+          "permissionElevationPassword": "",
+          "permissionElevationUserName": "",
+          "privacyPassword": "",
+          "privacyType": "",
+          "privateKeyPassword": "",
+          "realm": "",
+          "service": "",
+          "sid": "",
+          "useWindowsAuthentication": false,
+          "username": "username"
+        }
+      description:
+        title: Description
+        description: The description of the credential
+        type: string
+        required: false
+        example: credentials for as400
+      host_restriction:
+        title: Host Restriction
+        description: The host name or IP address that you want to restrict the credentials to
+        type: string
+        required: false
+        example: my-macbook-name
+      id:
+        title: ID
+        description: The identifier of the credential
+        type: integer
+        required: false
+        example: 12345678 # check
+      name:
+        title: Name
+        description: The name of the credential
+        type: string
+        required: true
+        example: my-AS400-credentials
+      port_restriction:
+        title: Port Restriction
+        description: Further restricts the credential to attempt to authenticate on a specific port. The port can only be restricted if the property hostRestriction is specified
+        type: string
+        required: false
+        example: 8888
+      site_assignment:
+        title: Site Assignment
+        description: Assigns the shared scan credential either to be available to all sites or to a specific list of sites. All sites - The shared scan credential is assigned to all current and future sites. specific-sites - The shared scan credential is assigned to zero sites by default. Administrators must explicitly assign sites to the shared credential. Shared scan credentials assigned to a site can disabled within the site configuration, if needed
+        type: string
+        required: true
+        example: "all-sites"
+        enum:
+          - all-sites
+          - specific-sites
+      sites:
+        title: Sites
+        description: List of site identifiers. These sites are explicitly assigned access to the shared scan credential, allowing the site to use the credential for authentication during a scan. This property can only be set if the value of property siteAssignment is set to "specific-sites". When the property siteAssignment is set to "all-sites", this property will be null
+        type: '[]integer'
+        required: false
+        example: [ ]
+    output:
+      links:
+        title: Links
+        description: Hypermedia links to corresponding or related resources
+        type: '[]link'
 
 triggers:
   new_scans:

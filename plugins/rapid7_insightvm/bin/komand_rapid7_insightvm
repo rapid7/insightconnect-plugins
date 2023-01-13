@@ -190,6 +190,8 @@ def main():
 
             self.add_action(actions.UpdateScanStatus())
 
+            self.add_action(actions.UpdateSharedCredential())
+
             self.add_action(actions.UpdateSite())
 
             self.add_action(actions.UpdateSiteExcludedAssetGroups())

@@ -1,4 +1,4 @@
-# Description
+ # Description
 
 Automate your vulnerability management operations with the combined power of [InsightVM](https://www.rapid7.com/products/insightvm/) and InsightConnect by using this plugin. Simplify getting data in and data out of InsightVM. As a Security Admin your time is valuable - save time by orchestrating site administration, user management, asset tagging, asset scanning and much much more!
 
@@ -41,6 +41,58 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Update Shared Credentials
+
+This action is used to update shared credentials.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|account|account|None|True|Specify the type of service to authenticate as well as all of the information required by that service|None|None|
+|description|string|None|False|The description of the credential|None|credentials for as400|
+|host_restriction|string|None|False|The host name or IP address that you want to restrict the credentials to|None|my-macbook-name|
+|id|integer|None|False|The identifier of the credential|None|12345678|
+|name|string|None|True|The name of the credential|None|my-AS400-credentials|
+|port_restriction|string|None|False|Further restricts the credential to attempt to authenticate on a specific port. The port can only be restricted if the property hostRestriction is specified|None|8888|
+|site_assignment|string|None|True|Assigns the shared scan credential either to be available to all sites or to a specific list of sites. All sites - The shared scan credential is assigned to all current and future sites. specific-sites - The shared scan credential is assigned to zero sites by default. Administrators must explicitly assign sites to the shared credential. Shared scan credentials assigned to a site can disabled within the site configuration, if needed|['all-sites', 'specific-sites']|all-sites|
+|sites|[]integer|None|False|List of site identifiers. These sites are explicitly assigned access to the shared scan credential, allowing the site to use the credential for authentication during a scan. This property can only be set if the value of property siteAssignment is set to "specific-sites". When the property siteAssignment is set to "all-sites", this property will be null|None|[]|
+
+Example input:
+
+```
+{
+    "authenticationType": "",
+    "communityName": "",
+    "database": "",
+    "domain": "rapid7.com",
+    "enumerateSids": false,
+    "notesIDPassword": "",
+    "ntlmHash": "",
+    "oracleListenerPassword": "",
+    "password": "password",
+    "pemKey": "",
+    "permissionElevation": "",
+    "permissionElevationPassword": "",
+    "permissionElevationUserName": "",
+    "privacyPassword": "",
+    "privacyType": "",
+    "privateKeyPassword": "",
+    "realm": "",
+    "service": "",
+    "sid": "",
+    "useWindowsAuthentication": false,
+    "username": "username"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|links|[]link|False|Hypermedia links to corresponding or related resources|
+
 
 #### Get Asset Vulnerability Solutions
 
