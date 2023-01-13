@@ -92,7 +92,7 @@ class Util:
                 "updated_at": "15 minutes ago",
                 "resolved_at": "No idea what this is",
                 "labels": ["blocked"],
-                "fields": {},
+                "fields": 'something',
             }
         }
         if MockTrigger.actual == expected:

@@ -26,7 +26,12 @@ class MonitorIssues(insightconnect_plugin_runtime.Trigger):
         new_issues = self.connection.client.search_issues(self.jql, startAt=0, maxResults=False, fields="*all")
         for issue in new_issues:
             if issue.id and issue.id not in self.issues:
-                output = normalize_issue(issue, get_attachments=self.get_attachments, logger=self.logger)
+                output = normalize_issue(
+                    issue,
+                    get_attachments=self.get_attachments,
+                    include_raw_fields=True,
+                    logger=self.logger
+                )
                 self.issues[issue.id] = datetime.datetime.now()
                 self.logger.debug(f"Found: {output}")
                 self.send({Output.ISSUE: output})
