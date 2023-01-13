@@ -145,7 +145,6 @@ class TestCreateIssue(TestCase):
                 "updated_at": "Yesterday",
                 "resolved_at": "No idea what this is",
                 "labels": ["blocked"],
-                "fields": {},
             }
         }
 
