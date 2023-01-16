@@ -1,0 +1,20 @@
+{
+  "assignee": "007 Agent",
+  "assigneeGroup": "MyCompany Support Group1",
+  "assigneeSupportCompany": "MyCompany",
+  "assigneeSupportOrganization": "MyCompany Support Org",
+  "company": "MyCompany",
+  "coordinator": "007 Agent",
+  "coordinatorGroup": "MyCompany Support Group1",
+  "coordinatorSupportCompany": "MyCompany",
+  "coordinatorSupportOrganization": "MyCompany Support Org",
+  "description": "Create Problem Investigation Unit Test",
+  "firstName": "007",
+  "impact": "3-Moderate/Limited",
+  "investigationDriver": "High Impact Incident",
+  "lastName": "Agent",
+  "region": "Americas",
+  "site": "Houston Support Center",
+  "siteGroup": "United States",
+  "urgency": "3-Medium"
+}
