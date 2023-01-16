@@ -1,0 +1,20 @@
+{
+  "parameters": [
+    [
+      "1",
+      {
+        "key1": 0,
+        "key2": "",
+        "key3": false,
+        "key4": null,
+        "key5": {},
+        "key6": [],
+        "key7": "test value"
+      },
+      {
+        "key3": false,
+        "key7": "test value"
+      }
+    ]
+  ]
+}
