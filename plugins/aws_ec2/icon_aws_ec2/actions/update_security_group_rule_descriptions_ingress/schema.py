@@ -8,12 +8,11 @@ class Component:
 
 
 class Input:
+    ASSUME_ROLE_PARAMS = "assume_role_params"
     DRY_RUN = "dry_run"
-    EXTERNAL_ID = "external_id"
     GROUP_ID = "group_id"
     GROUP_NAME = "group_name"
     IP_PERMISSIONS = "ip_permissions"
-    ROLE_ARN = "role_arn"
     
 
 class Output:
@@ -27,17 +26,17 @@ class UpdateSecurityGroupRuleDescriptionsIngressInput(insightconnect_plugin_runt
   "type": "object",
   "title": "Variables",
   "properties": {
+    "assume_role_params": {
+      "$ref": "#/definitions/assume_role_params",
+      "title": "Assume Role Parameters",
+      "description": "Parameters that allows to assume IAM role",
+      "order": 5
+    },
     "dry_run": {
       "type": "boolean",
       "title": "Dry Run",
       "description": "Checks whether you have the required permissions for the action, without actually making the request, and provides an error response",
       "order": 1
-    },
-    "external_id": {
-      "type": "string",
-      "title": "External ID",
-      "description": "External ID given during role creation",
-      "order": 6
     },
     "group_id": {
       "type": "string",
@@ -59,18 +58,36 @@ class UpdateSecurityGroupRuleDescriptionsIngressInput(insightconnect_plugin_runt
         "$ref": "#/definitions/ip_permission"
       },
       "order": 4
-    },
-    "role_arn": {
-      "type": "string",
-      "title": "Role ARN",
-      "description": "AWS IAM role ARN to assume",
-      "order": 5
     }
   },
   "required": [
     "ip_permissions"
   ],
   "definitions": {
+    "assume_role_params": {
+      "type": "object",
+      "title": "assume_role_params",
+      "properties": {
+        "external_id": {
+          "type": "string",
+          "title": "External ID",
+          "description": "External ID given during role creation",
+          "order": 3
+        },
+        "region": {
+          "type": "string",
+          "title": "Region",
+          "description": "Which section of the AWS cloud is being inspected",
+          "order": 1
+        },
+        "role_arn": {
+          "type": "string",
+          "title": "Role ARN",
+          "description": "AWS IAM role ARN to assume",
+          "order": 2
+        }
+      }
+    },
     "ip_permission": {
       "type": "object",
       "title": "ip_permission",
