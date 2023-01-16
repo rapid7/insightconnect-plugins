@@ -1,0 +1,25 @@
+{
+  "incident": {
+    "description": "Create Incident Unit test",
+    "impact": "4-Minor/Localized",
+    "incidentNumber": "INC00002",
+    "lastModifiedBy": "007 Agent",
+    "priority": "Medium",
+    "reportedDate": "2023-01-02T09:35:02.000+0000",
+    "reportedSource": "Direct Input",
+    "status": "Assigned",
+    "statusHistory": {
+      "new": {
+        "user": "007 Agent",
+        "timestamp": "2023-01-02T09:35:02.000+0000"
+      },
+      "assigned": {
+        "user": "007 Agent",
+        "timestamp": "2023-01-02T09:35:02.000+0000"
+      }
+    },
+    "submitter": "007 Agent",
+    "timeZone": "(GMT-06:00) Central Time (US & Canada)",
+    "urgency": "2-High"
+  }
+}

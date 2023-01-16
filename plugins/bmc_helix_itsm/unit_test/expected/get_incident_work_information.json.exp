@@ -1,0 +1,21 @@
+{
+  "worklogs": [
+    {
+      "assignWorklogFlag": "No",
+      "description": "Assignment Change",
+      "incidentNumber": "INC00002",
+      "lastModifiedBy": "Remedy Application Service",
+      "lastModifiedDate": "2022-12-23T08:47:50.000+0000",
+      "secureWorkLog": "Yes",
+      "status": "Enabled",
+      "submitter": "Remedy Application Service",
+      "submitDate": "2022-12-23T08:47:50.000+0000",
+      "viewAccess": "Internal",
+      "workLogDate": "2022-12-23T08:47:50.000+0000",
+      "workLogId": "WLG00002",
+      "workLogSubmitter": "Remedy Application Service",
+      "workLogSubmitDate": "2022-12-23T08:47:50.000+0000",
+      "workLogType": "Assignment Change"
+    }
+  ]
+}
