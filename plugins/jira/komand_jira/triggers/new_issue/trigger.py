@@ -22,12 +22,18 @@ class NewIssue(insightconnect_plugin_runtime.Trigger):
         self.jql = ""
         self.max = 10
         self.found = {}
+        self.include_fields = False
 
     def poll(self):
         new_issues = self.connection.client.search_issues(self.jql, startAt=0, maxResults=False, fields="*all")
         for issue in new_issues:
             if issue.id not in self.found:
-                output = normalize_issue(issue, get_attachments=self.get_attachments, logger=self.logger)
+                output = normalize_issue(
+                    issue,
+                    get_attachments=self.get_attachments,
+                    include_raw_fields=self.include_fields,
+                    logger=self.logger,
+                )
                 self.found[issue.id] = True
                 self.logger.debug(f"Found: {output}")
                 self.send({Output.ISSUE: output})
@@ -37,6 +43,7 @@ class NewIssue(insightconnect_plugin_runtime.Trigger):
         self.jql = params.get(Input.JQL)
         self.get_attachments = params.get(Input.GET_ATTACHMENTS, False)
         self.project = params.get(Input.PROJECT)
+        self.include_fields = params.get(Input.INCLUDE_FIELDS, False)
 
         valid_project = look_up_project(self.project, self.connection.client)
         if not valid_project and self.project:

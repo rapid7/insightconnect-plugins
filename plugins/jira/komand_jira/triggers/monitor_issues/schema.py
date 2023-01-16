@@ -10,6 +10,7 @@ class Component:
 class Input:
     
     GET_ATTACHMENTS = "get_attachments"
+    INCLUDE_FIELDS = "include_fields"
     INTERVAL = "interval"
     JQL = "jql"
     PROJECTS = "projects"
@@ -32,6 +33,13 @@ class MonitorIssuesInput(insightconnect_plugin_runtime.Input):
       "description": "Get attachments from issue",
       "default": false,
       "order": 3
+    },
+    "include_fields": {
+      "type": "boolean",
+      "title": "Include Fields",
+      "description": "Whether returned Issues should include fields",
+      "default": false,
+      "order": 5
     },
     "interval": {
       "type": "integer",

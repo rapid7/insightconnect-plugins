@@ -802,6 +802,7 @@ This trigger watches for newly-created or updated issues.
 |interval|integer|60|False|Interval between next poll in seconds, default is 60 seconds|None|60|
 |jql|string|None|False|JQL search string to use|None|reporter='Example User'|
 |projects|[]string|None|False|List of Project IDs or names|None|TEST|
+|include_fields|boolean|False|False|Whether returned Issues should include fields|None|True|
 
 Example input:
 
@@ -810,7 +811,8 @@ Example input:
   "get_attachments": true,
   "interval": 60,
   "jql": "reporter='Example User'",
-  "projects": "TEST"
+  "projects": "TEST",
+  "include_fields": "true
 }
 ```
 
@@ -859,6 +861,7 @@ This trigger is used to trigger which indicates that a new issue has been create
 |jql|string|None|False|JQL search string to use|None|project = 'TEST'|
 |poll_timeout|integer|60|False|Timeout between next poll, default 60|None|60|
 |project|string|None|False|Project ID or name|None|TEST|
+|include_fields|boolean|False|False|Whether returned Issues should include fields|None|True|
 
 Example input:
 
@@ -867,7 +870,8 @@ Example input:
   "get_attachments": true,
   "jql": "project = 'TEST'",
   "poll_timeout": 60,
-  "project": "TEST"
+  "project": "TEST",
+  "include_fields": "true
 }
 ```
 
@@ -1104,7 +1108,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 6.3.1 - Fix Issue Where Create Issue failed when multiple versions of the input Issue Type exists in Jira | Fix failed connection test response for PAT based connection
+* 6.4.0 - Fix Issue Where Create Issue failed when multiple versions of the input Issue Type exists in Jira | Fix failed connection test response for PAT based connection | Include Fields input added to New Issue and Monitor Issues triggers, to specify whether to return Issue fields in the output | Removed empty Fields output from returned Issues when not requested or available
 * 6.3.0 - Add PAT authentication scheme for Jira on-prem
 * 6.2.1 - Fix issue in Find Issues action where normalize_user has an attribute error for labels | Changed Dockerfile to don't use slim version
 * 6.2.0 - Fix issue in Get Comments actions where normalize_user is missing the is_cloud argument from client connection

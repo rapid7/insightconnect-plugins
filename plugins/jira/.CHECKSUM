@@ -1,7 +1,7 @@
 {
-	"spec": "2ec7f27be9297ed44674311c47661f0f",
-	"manifest": "b1c0f6d7eeef9e571dd22c0f53772948",
-	"setup": "dd9374f70a49ecbb4109f132c068e4f3",
+	"spec": "0ad7c587f98e9ec9682f905a479b689e",
+	"manifest": "68db9a47b3c66891492badae084a4a49",
+	"setup": "8cdfacf85b3afac31d306ec033325011",
 	"schemas": [
 		{
 			"identifier": "assign_issue/schema.py",
@@ -61,11 +61,11 @@
 		},
 		{
 			"identifier": "monitor_issues/schema.py",
-			"hash": "29a0a27ec3f4c7d91891e08b20858ab4"
+			"hash": "622d19c71dfb082371b18f9f888101f4"
 		},
 		{
 			"identifier": "new_issue/schema.py",
-			"hash": "abd9453e998f2cc3d37dbf172322e552"
+			"hash": "1d153084a9774d5f3e750e576ba0861a"
 		}
 	]
 }
