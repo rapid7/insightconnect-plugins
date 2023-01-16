@@ -1,0 +1,53 @@
+[
+  {
+    "name": "Test Field",
+    "depends_on_choice": null,
+    "required": false,
+    "compulsory_on_completed": false,
+    "choices": null,
+    "compulsory_on_move": false,
+    "type": "text",
+    "id": 1,
+    "categories": [
+      {
+        "category": 1,
+        "order": 1
+      }
+    ],
+    "visible_to_staff_only": false
+  },
+  {
+    "name": "Test Field 2",
+    "depends_on_choice": null,
+    "required": false,
+    "compulsory_on_completed": true,
+    "choices": null,
+    "compulsory_on_move": false,
+    "type": "text",
+    "id": 2,
+    "categories": [
+      {
+        "category": 1,
+        "order": 2
+      }
+    ],
+    "visible_to_staff_only": false
+  },
+  {
+    "name": "Test Field 3",
+    "depends_on_choice": null,
+    "required": false,
+    "compulsory_on_completed": false,
+    "choices": null,
+    "compulsory_on_move": false,
+    "type": "text",
+    "id": 5,
+    "categories": [
+      {
+        "category": 2,
+        "order": 1
+      }
+    ],
+    "visible_to_staff_only": false
+  }
+]
