@@ -3,7 +3,7 @@ from .schema import CreateIssueInput, CreateIssueOutput, Input, Output, Componen
 
 # Custom imports below
 from komand_jira.util.util import look_up_project, normalize_issue
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class CreateIssue(insightconnect_plugin_runtime.Action):
@@ -15,6 +15,32 @@ class CreateIssue(insightconnect_plugin_runtime.Action):
             output=CreateIssueOutput(),
         )
 
+    def check_issue_type_exists(self, issue_type: str):
+        try:
+            issue_types = self.connection.client.issue_types()
+            issue_type_exists = False
+            for retrieved_issue_type in issue_types:
+                if retrieved_issue_type.raw.get("name") == issue_type:
+                    issue_type_exists = True
+                    break
+            if issue_type_exists is False:
+                raise Exception
+        except Exception as exception:
+            raise PluginException(
+                cause="Issue type not known or user doesn't have permissions.",
+                assistance="Talk to your Jira administrator to add the type or delegate necessary permissions, "
+                "or choose an available type.",
+                data=exception,
+            )
+
+    def check_project_is_valid(self, project: str):
+        valid_project = look_up_project(project, self.connection.client)
+        if not valid_project:
+            raise PluginException(
+                cause=f"Project {project} does not exist or user don't have permission to access the project.",
+                assistance="Please provide a valid project ID/name or make sure project is accessible to user.",
+            )
+
     def run(self, params={}):
         """Run action"""
         project = params.get(Input.PROJECT)
@@ -24,12 +50,8 @@ class CreateIssue(insightconnect_plugin_runtime.Action):
         description = params.get(Input.DESCRIPTION, " ")
         fields = params.get(Input.FIELDS, {})
 
-        valid_project = look_up_project(project, self.connection.client)
-        if not valid_project:
-            raise PluginException(
-                cause=f"Project {project} does not exist or user don't have permission to access the project.",
-                assistance="Please provide a valid project ID/name or make sure project is accessible to user.",
-            )
+        self.check_project_is_valid(project)
+        self.check_issue_type_exists(issue_type)
 
         self.logger.debug("Create issue with: %s", params)
 
@@ -37,22 +59,6 @@ class CreateIssue(insightconnect_plugin_runtime.Action):
         fields["summary"] = summary
         fields["description"] = description
         fields["issuetype"] = {"name": issue_type}
-
-        # Check that the type is available in Jira before creating the ticket
-        # This is not a perfect check though (see below)
-        try:
-            # This seems to work for some cases e.g. 'Blah' but not others 'Task' (Task is found below) depending on the Jira installation
-            self.connection.client.issue_type_by_name(issue_type)
-            # All types can be retrieved with scope via: self.connection.client.issue_types()
-            # A future improvement may be able to validate the scope before continuing
-            # However, this call doesn't return JSON :'( it returns this stupid thing:
-            # [<JIRA IssueType: name='Bug', id='10004'>, <JIRA IssueType: name='Epic', scope={'type': 'PROJECT', 'project': {'id': '10008'} ]
-        except KeyError:
-            raise PluginException(
-                cause="Issue type not known or user doesn't have permissions.",
-                assistance="Talk to your Jira administrator to add the type or delegate necessary permissions, "
-                "or choose an available type.",
-            )
 
         for client_field in self.connection.client.fields():
             if client_field["name"] in fields:

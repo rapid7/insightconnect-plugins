@@ -1,6 +1,5 @@
 import logging
 import base64
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 def normalize_comment(source, is_cloud=False, logger=logging.getLogger()):
@@ -58,8 +57,10 @@ def normalize_issue(issue, get_attachments=False, include_raw_fields=False, logg
         "updated_at": issue.fields.updated,
         "resolved_at": resolution_date,
         "labels": labels,
-        "fields": fields,
     }
+
+    if fields:
+        output["fields"] = fields
 
     logger.debug("Result issue: %s", output)
 
