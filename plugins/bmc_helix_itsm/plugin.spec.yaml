@@ -1,0 +1,644 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: bmc_helix_itsm
+title: BMC Helix ITSM
+description: BMC Helix IT Service Management is a cloud-native SaaS solution leveraging AI and automation to accelerate IT team results
+version: 1.0.0
+supported_versions: ["BMC Helix ITSM 21.30.00"]
+vendor: rapid7
+support: rapid7
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/bmc_helix_itsm
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.bmc.com/it-solutions/bmc-helix-itsm
+tags:
+  - bmc_helix_itsm
+  - ticketing
+hub_tags:
+  use_cases: [reporting_and_analytics]
+  keywords: [ticketing, bmc_helix_itsm]
+  features: []
+types:
+  incident:
+    entryId:
+      title: Entry ID
+      description: Entry ID
+      type: string
+      required: false
+    submitter:
+      title: Submitter
+      description: Submitter
+      type: string
+      required: false
+    submitDate:
+      title: Submit Date
+      description: Submit date
+      type: string
+      required: false
+    assignee:
+      title: Assignee
+      description: Assignee
+      type: string
+      required: false
+    lastModifiedBy:
+      title: Last Modified By
+      description: Last modified by
+      type: string
+      required: false
+      example: Randy Agent
+    lastModifiedDate:
+      title: Last Modified Date
+      description: Last modified date
+      type: string
+      required: false
+    status:
+      title: Status
+      description: Status
+      type: string
+      required: false
+    statusReason:
+      title: Status Reason
+      description: Status reaspm
+      type: string
+      required: false
+    statusHistory:
+      title: Status History
+      description: Status history
+      type: '[]object'
+      required: false
+    description:
+      title: Description
+      description: Description
+      type: string
+      required: false
+    resolution:
+      title: Resolution
+      description: Resolution
+      type: string
+      required: false
+      example: 'null'
+    incidentNumber:
+      title: Incident Number
+      description: Incident number
+      type: string
+      required: false
+    urgency:
+      title: Urgency
+      description: Urgency
+      type: string
+      required: false
+    impact:
+      title: Impact
+      description: Impact
+      type: string
+      required: false
+    priority:
+      title: Priority
+      description: Priority
+      type: string
+      required: false
+    reportedSource:
+      title: Reported Source
+      description: Reported source
+      type: string
+      required: false
+    timeZone:
+      title: Time Zone
+      description: Time zone
+      type: string
+      required: false
+    reportedDate:
+      title: Reported Date
+      description: Reported date
+      type: string
+      required: false
+  worklog:
+    workLogId:
+      title: Work Log ID
+      description: Work log ID
+      type: string
+      required: false
+    submitter:
+      title: Submitter
+      description: Submitter
+      type: string
+      required: false
+    submitDate:
+      title: Submit Date
+      description: Submit date
+      type: string
+      required: false
+    assignedTo:
+      title: Assigned To
+      description: Assigned to
+      type: string
+      required: false
+    lastModifiedBy:
+      title: Last Modified By
+      description: Last modified by
+      type: string
+      required: false
+    lastModifiedDate:
+      title: Last Modified Date
+      description: Last modified date
+      type: string
+      required: false
+    status:
+      title: Status
+      description: Status
+      type: string
+      required: false
+    description:
+      title: Description
+      description: Description
+      type: string
+      required: false
+    workLogSubmitDate:
+      title: Work Log Submit Date
+      description: Work log submit date
+      type: string
+      required: false
+    workLogSubmitter:
+      title: Work Log Submitter
+      description: Work log submitter
+      type: string
+      required: false
+    incidentNumber:
+      title: Incident Number
+      description: Incident number
+      type: string
+      required: false
+    workLogType:
+      title: Work Log Type
+      description: Work log type
+      type: string
+      required: false
+    viewAccess:
+      title: View Access
+      description: View access
+      type: string
+      required: false
+    secureWorkLog:
+      title: Secure Work Log
+      description: Secure work log
+      type: string
+      required: false
+    workLogDate:
+      title: Work Log Date
+      description: Work log date
+      type: string
+      required: false
+    worklogActionStatus:
+      title: Worklog Action Status
+      description: Worklog action status
+      type: string
+      required: false
+    assignWorklogFlag:
+      title: Assign Worklog Flag
+      description: Assign worklog flag
+      type: string
+      required: false
+    worklogActionCompleted:
+      title: Worklog Action Completed
+      description: Worklog action completed
+      type: string
+      required: false
+connection:
+  baseUrl:
+    title: Base URL
+    description: Base URL of your BMC Helix ITSM instance
+    type: string
+    required: true
+    example: https://example.com
+  usernamePassword:
+    title: Username and Password
+    description: BMC Helix ITSM username and password
+    type: credential_username_password
+    required: true
+    example: '{"password": "my_password", "username": "example_username"}'
+  sslVerify:
+    title: Verify SSL Cerificate
+    description: Indicates whether to verify SSL certificate or not
+    type: boolean
+    required: true
+    example: true
+actions:
+  getIncident:
+    title: Get Incident
+    description: Get detailed information about an BMC Helix ITSM incident
+    input:
+      incidentNumber:
+        title: Incident Number
+        description: Number of the incident
+        type: string
+        required: true
+        example: INC000000000435
+    output:
+      incident:
+        title: Incident
+        description: Details about the incident
+        type: incident
+        required: true
+        example: {}
+  createIncident:
+    title: Create Incident
+    description: Create an BMC Helix ITSM incident
+    input:
+      firstName:
+        title: First Name
+        description: First name of the incident creator
+        type: string
+        required: true
+        example: Example
+      lastName:
+        title: Last Name
+        description: Last name of the incident creator
+        type: string
+        required: true
+        example: User
+      description:
+        title: Description
+        description: Description of the incident
+        type: string
+        required: true
+        example: My incident description
+      impact:
+        title: Impact
+        description: Incident impact
+        type: string
+        required: false
+        example: 1-Extensive/Widespread
+        enum:
+          - 1-Extensive/Widespread
+          - 2-Significant/Large
+          - 3-Moderate/Limited
+          - 4-Minor/Localized
+          - ''
+      urgency:
+        title: Urgency
+        description: Incident urgency
+        type: string
+        required: false
+        example: 1-Critical
+        enum:
+          - 1-Critical
+          - 2-High
+          - 3-Medium
+          - 4-Low
+          - ''
+      status:
+        title: Status
+        description: Incident status
+        type: string
+        required: false
+        example: Assigned
+        enum:
+          - New
+          - Assigned
+          - In Progress
+          - Pending
+          - Resolved
+          - Closed
+          - Cancelled
+          - ''
+      statusReason:
+        title: Status Reason
+        description: Status reason of the incident
+        type: string
+        required: false
+        example: Client Hold
+        enum:
+          - Automated Resolution Reported
+          - Client Action Required
+          - Client Hold
+          - Future Enhancement
+          - Infrastructure Change
+          - Local Site Action Required
+          - Monitoring Incident
+          - Purchase Order Approval
+          - Registration Approval
+          - Request
+          - Supplier Delivery
+          - Support Contract Hold
+          - Third Party Vendor Action Reqd
+          - Customer Follow-Up Required
+          - No Further Action Required
+          - Temporary Corrective Action
+          - Infrastructure Change Created
+          - ''
+      reportedSource:
+        title: Reported Source
+        description: Incident reported source
+        type: string
+        required: true
+        example: Direct Input
+        enum:
+          - Direct Input
+          - Email
+          - External Escalation
+          - Fax
+          - Self Service
+          - Systems Management
+          - Phone
+          - Voice Mail
+          - Walk In
+          - Web
+          - Other
+          - BMC Impact Manager Event
+          - Chat
+      serviceType:
+        title: Service Type
+        description: Incident service type
+        type: string
+        required: true
+        example: User Service Restoration
+        enum:
+          - User Service Restoration
+          - User Service Request
+          - Infrastructure Restoration
+          - Infrastructure Event
+          - Security Incident
+    output:
+      incidentNumber:
+        title: Incident Number
+        description: Number of newly created incident
+        type: string
+        required: true
+        example: INC000000000491
+  getIncidentWorkInformation:
+    title: Get Incident Work Information
+    description: Get incident work information
+    input:
+      incidentNumber:
+        title: Incident Number
+        description: Incident number
+        type: string
+        required: true
+        example: INC000000000435
+    output:
+      worklogs:
+        title: Worklogs
+        description: Worklogs of the incident
+        type: '[]worklog'
+        required: true
+        example: []
+  createProblemInvestigation:
+    title: Create Problem Investigation
+    description: Create problem investigation
+    input:
+      siteGroup:
+        title: Site Group
+        description: Site group
+        type: string
+        required: false
+        example: United States
+      region:
+        title: Region
+        description: Region
+        type: string
+        required: false
+        example: Americas
+      site:
+        title: Site
+        description: Site
+        type: string
+        required: false
+        example: Houston Support Center
+      description:
+        title: Description
+        description: Description
+        type: string
+        required: true
+        example: My problem description
+      company:
+        title: Company
+        description: Company
+        type: string
+        required: true
+        example: ExampleCompany
+      lastName:
+        title: Last Name
+        description: Requester last name
+        type: string
+        required: true
+        example: Agent
+      firstName:
+        title: First Name
+        description: Requester first name
+        type: string
+        required: true
+        example: Example
+      urgency:
+        title: Urgency
+        description: Urgency
+        type: string
+        required: true
+        example: 3-Medium
+        enum:
+          - 1-Critical
+          - 2-High
+          - 3-Medium
+          - 4-Low
+          - ''
+      impact:
+        title: Impact
+        description: Impact
+        type: string
+        required: true
+        example: 3-Moderate/Limited
+        enum:
+          - 1-Extensive/Widespread
+          - 2-Significant/Large
+          - 3-Moderate/Limited
+          - 4-Minor/Localized
+          - ''
+      investigationDriver:
+        title: Investigation Driver
+        description: Investigation driver
+        type: string
+        required: false
+        example: High Impact Incident
+        enum:
+          - High Impact Incident
+          - Non-Routine Incident
+          - Recurring Incidents - Clustering
+          - Other
+          - ''
+      coordinatorSupportCompany:
+        title: Coordinator Support Company
+        description: Coordinator support company
+        type: string
+        required: true
+        example: ExampleCompany
+      coordinatorSupportOrganization:
+        title: Coordinator Support Organization
+        description: Coordinator support organization
+        type: string
+        required: true
+        example: ExampleCompany Support Org
+      coordinatorGroup:
+        title: Coordinator Group
+        description: Coordinator group
+        type: string
+        required: true
+        example: ExampleCompany Support Group1
+      coordinator:
+        title: Coordinator
+        description: Problem coordinator
+        type: string
+        required: false
+        example: Example Agent
+      assigneeSupportCompany:
+        title: Assigned Support Company
+        description: Assignee support company
+        type: string
+        required: true
+        example: ExampleCompany
+      assigneeSupportOrganization:
+        title: Assignee Support Organization
+        description: Assignee support organization
+        type: string
+        required: true
+        example: ExampleCompany Support Org
+      assigneeGroup:
+        title: Assignee Group
+        description: Assignee group
+        type: string
+        required: true
+        example: ExampleCompany Support Group1
+      assignee:
+        title: Assignee
+        description: Assignee
+        type: string
+        required: false
+        example: Example Agent
+    output:
+      problemInvestigationNumber:
+        title: Problem Investigation Number
+        description: Problem investigation number
+        type: string
+        required: true
+        example: PBI000000000117
+  modifyIncident:
+    title: Modify Incident
+    description: Modify incident
+    input:
+      incidentNumber:
+        title: Incident Number
+        description: Number of the incident to update
+        type: string
+        required: true
+        example: INC000000000509
+      description:
+        title: Description
+        description: Description of the incident
+        type: string
+        required: false
+        example: My modify description
+      status:
+        title: Status
+        description: Status of the incident
+        type: string
+        required: false
+        example: Pending
+        enum:
+          - New
+          - Assigned
+          - In Progress
+          - Pending
+          - Resolved
+          - Closed
+          - Cancelled
+          - ''
+      statusReason:
+        title: Status Reason
+        description: Status reason of the incident
+        type: string
+        required: false
+        example: Client Hold
+        enum:
+          - Automated Resolution Reported
+          - Client Action Required
+          - Client Hold
+          - Future Enhancement
+          - Infrastructure Change
+          - Local Site Action Required
+          - Monitoring Incident
+          - Purchase Order Approval
+          - Registration Approval
+          - Request
+          - Supplier Delivery
+          - Support Contract Hold
+          - Third Party Vendor Action Reqd
+          - Customer Follow-Up Required
+          - No Further Action Required
+          - Temporary Corrective Action
+          - Infrastructure Change Created
+          - ''
+      resolutionNote:
+        title: Resolution Note
+        description: Resolution note of the incident
+        type: string
+        required: false
+        example: My resolution message
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful or not
+        type: boolean
+        required: true
+        example: true
+  createTask:
+    title: Create Task
+    description: Create a task related to an incident
+    input:
+      summary:
+        title: Summary
+        description: Summary of the task
+        type: string
+        required: true
+        example: Task summary
+      incidentNumber:
+        title: Incident Number
+        description: Incident number to which the task will be added
+        type: string
+        required: true
+        example: INC000000000448
+      notes:
+        title: Notes
+        description: Task notes
+        type: string
+        required: false
+        example: Example task note
+      taskName:
+        title: Task Name
+        description: Name of the task
+        type: string
+        required: true
+        example: My task 2
+      priority:
+        title: Priority
+        description: Priority of the task
+        type: string
+        required: true
+        example: Medium
+        enum:
+          - Low
+          - Medium
+          - High
+          - Critical
+      locationCompany:
+        title: Location Company
+        description: Location company
+        type: string
+        required: true
+        example: ExampleCompany
+    output:
+      taskId:
+        title: Task ID
+        description: ID of the newly created task
+        type: string
+        required: true
+        example: TAS000000000026

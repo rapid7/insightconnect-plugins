@@ -63,6 +63,18 @@ class ApiConnection:
 
         :return: boolean
         """
+
+        # Check if agent with ID exists
+        payload = {
+            "query": "query( $orgID: String! $agentID: String! ) { assets( orgId: $orgID ids: [$agentID] ){ agent { id quarantineState{ currentState } agentStatus } } }",
+            "variables": {"orgID": self.org_key, "agentID": agent_id},
+        }
+        results_object = self._post_payload(payload)
+        agent = results_object.get("data").get("assets")[0].get("agent")
+        if not agent:
+            return False
+
+        # if exists then unquarantine it
         unquarantine_payload = {
             "query": "mutation( $orgID:String! $agentID:String!) { unquarantineAssets( orgId:$orgID assetIds: [$agentID] ) { results { assetId failed } } }",
             "variables": {"orgID": self.org_key, "agentID": agent_id},
@@ -272,7 +284,7 @@ class ApiConnection:
 
         return has_next_page, results_object, next_agents
 
-    def _find_agent_in_agents(self, agents: [dict], agent_input: str, agent_type: str) -> Optional[dict]:
+    def _find_agent_in_agents(self, agents: [dict], agent_input: str, agent_type: str) -> Optional[dict]:  # noqa: C901
         """
         Given a list of agent objects, find the agent that matches our input.
 

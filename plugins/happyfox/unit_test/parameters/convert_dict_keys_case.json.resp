@@ -1,0 +1,126 @@
+{
+  "parameters": [
+    [
+      "1",
+      {
+        "example_key": "example_value",
+        "another_example_key": 12345,
+        "key": "value"
+      },
+      "camel_case",
+      {
+        "exampleKey": "example_value",
+        "anotherExampleKey": 12345,
+        "key": "value"
+      }
+    ],
+    [
+      "2",
+      {
+        "example_key": "example_value",
+        "another_example_key": 12345,
+        "key": {
+          "example_key": "example_value"
+        }
+      },
+      "camel_case",
+      {
+        "exampleKey": "example_value",
+        "anotherExampleKey": 12345,
+        "key": {
+          "exampleKey": "example_value"
+        }
+      }
+    ],
+    [
+      "3",
+      {
+        "example_key": [
+          {
+            "test_key": "value"
+          }
+        ],
+        "another_example_key": 12345,
+        "key": {
+          "example_key": "example_value"
+        }
+      },
+      "camel_case",
+      {
+        "exampleKey": [
+          {
+            "testKey": "value"
+          }
+        ],
+        "anotherExampleKey": 12345,
+        "key": {
+          "exampleKey": "example_value"
+        }
+      }
+    ],
+    [
+      "4",
+      [
+        {
+          "example_key": "example_value",
+          "another_example_key": 12345,
+          "key": "value"
+        },
+        {
+          "example_key": [
+            {
+              "test_key": "value"
+            }
+          ],
+          "another_example_key": 12345,
+          "key": {
+            "example_key": "example_value"
+          }
+        }
+      ],
+      "camel_case",
+      [
+        {
+          "exampleKey": "example_value",
+          "anotherExampleKey": 12345,
+          "key": "value"
+        },
+        {
+          "exampleKey": [
+            {
+              "testKey": "value"
+            }
+          ],
+          "anotherExampleKey": 12345,
+          "key": {
+            "exampleKey": "example_value"
+          }
+        }
+      ]
+    ],
+    [
+      "5",
+      {
+        "exampleKey": "example_value",
+        "anotherExampleKey": 12345,
+        "key": "value",
+        "exampleList": [
+          {
+            "testKey": "test value"
+          }
+        ]
+      },
+      "snake_case",
+      {
+        "example_key": "example_value",
+        "another_example_key": 12345,
+        "key": "value",
+        "example_list": [
+          {
+            "test_key": "test value"
+          }
+        ]
+      }
+    ]
+  ]
+}

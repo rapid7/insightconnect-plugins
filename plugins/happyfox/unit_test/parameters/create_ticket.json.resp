@@ -1,0 +1,418 @@
+{
+  "parameters": [
+    [
+      "success",
+      {
+        "name": "Test Contact",
+        "email": "user@example.com",
+        "phone": null,
+        "subject": "New Ticket",
+        "text": "Example description",
+        "html": null,
+        "category": 1,
+        "priority": null,
+        "assignee": null,
+        "tags": null,
+        "cc": null,
+        "bcc": null,
+        "dueDate": null,
+        "visibleOnlyStaff": null,
+        "customFields": null
+      },
+      {
+        "ticket": {
+          "displayId": "#RS00000061",
+          "firstMessage": "Example description\n\n",
+          "lastUserReplyAt": "2023-01-02 08:32:27",
+          "id": 61,
+          "customFields": [
+            {
+              "compulsoryOnComplete": false,
+              "name": "Test Field",
+              "type": "text",
+              "id": 1,
+              "visibleToStaffOnly": false
+            },
+            {
+              "compulsoryOnComplete": true,
+              "name": "Test Field 2",
+              "type": "text",
+              "id": 2,
+              "visibleToStaffOnly": false
+            }
+          ],
+          "subject": "New Ticket",
+          "category": {
+            "prepopulateCc": "AR",
+            "description": "Tickets will be created here by default.",
+            "timeSpentMandatory": false,
+            "public": true,
+            "id": 1,
+            "name": "example category"
+          },
+          "attachmentsCount": 0,
+          "lastUpdatedAt": "2023-01-02 08:32:27",
+          "priority": {
+            "default": true,
+            "id": 1,
+            "name": "Medium",
+            "order": 2
+          },
+          "messagesCount": 1,
+          "slaBreaches": 0,
+          "mergedTickets": [],
+          "status": {
+            "name": "New",
+            "color": "FF9900",
+            "order": 1,
+            "default": true,
+            "behavior": "pending",
+            "id": 1
+          },
+          "user": {
+            "name": "Test",
+            "createdAt": "2022-12-14 11:10:21",
+            "updatedAt": "2022-12-14 11:10:21",
+            "pendingTicketsCount": 27,
+            "contactGroups": [],
+            "ticketsCount": 27,
+            "id": 7,
+            "email": "user@example.com",
+            "customFields": []
+          },
+          "subscribers": [],
+          "unresponded": true,
+          "createdAt": "2023-01-02 08:32:27",
+          "source": "TKT_CREATION_API",
+          "updates": [
+            {
+              "priorityChange": {
+                "newName": "Medium",
+                "new": 1
+              },
+              "timestamp": "2023-01-02 08:32:27",
+              "by": {
+                "email": "user@example.com",
+                "type": "user",
+                "id": 7,
+                "name": "Test"
+              },
+              "updateId": 67,
+              "message": {
+                "attachments": [],
+                "text": "Example description\n\n",
+                "customerUpdated": false,
+                "html": "<html><head><meta charset=\"utf-8\"></head><body>Example description</body></html>"
+              },
+              "statusChange": {
+                "newName": "New",
+                "new": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    [
+      "success2",
+      {
+        "name": "Test Contact",
+        "email": "user@example.com",
+        "phone": "111111111",
+        "subject": "New Ticket 2",
+        "text": "",
+        "html": "<strong>Example description</strong>",
+        "category": 1,
+        "priority": 4,
+        "assignee": 0,
+        "tags": "tag1,tag2",
+        "cc": "user@example.com",
+        "bcc": "user@example.com",
+        "dueDate": "2023-01-21T00:00:00Z",
+        "visibleOnlyStaff": true,
+        "customFields": {
+          "t-cf-1": "test value"
+        }
+      },
+      {
+        "ticket": {
+          "displayId": "#RS00000057",
+          "firstMessage": "**Example description**\n\n",
+          "lastUserReplyAt": "2023-01-02 08:13:02",
+          "id": 57,
+          "customFields": [
+            {
+              "compulsoryOnComplete": false,
+              "name": "Test Field",
+              "value": "test value",
+              "type": "text",
+              "id": 1,
+              "visibleToStaffOnly": false
+            },
+            {
+              "compulsoryOnComplete": true,
+              "name": "Test Field 2",
+              "type": "text",
+              "id": 2,
+              "visibleToStaffOnly": false
+            }
+          ],
+          "subject": "New Ticket 2",
+          "category": {
+            "prepopulateCc": "AR",
+            "description": "Tickets will be created here by default.",
+            "timeSpentMandatory": false,
+            "public": true,
+            "id": 1,
+            "name": "example category"
+          },
+          "attachmentsCount": 0,
+          "lastUpdatedAt": "2023-01-02 08:13:02",
+          "priority": {
+            "default": false,
+            "id": 4,
+            "name": "Low",
+            "order": 1
+          },
+          "messagesCount": 1,
+          "slaBreaches": 0,
+          "mergedTickets": [],
+          "status": {
+            "name": "New",
+            "color": "FF9900",
+            "order": 1,
+            "default": true,
+            "behavior": "pending",
+            "id": 1
+          },
+          "dueDate": "2023-01-21",
+          "tags": "tag1,tag2",
+          "user": {
+            "name": "Test",
+            "primaryPhone": {
+              "type": "m",
+              "number": "111111111",
+              "id": 3
+            },
+            "phones": [
+              {
+                "type": "o",
+                "number": "11111111",
+                "id": 4
+              },
+              {
+                "type": "m",
+                "number": "111111111",
+                "id": 3
+              }
+            ],
+            "createdAt": "2022-12-14 11:10:21",
+            "updatedAt": "2022-12-14 11:10:21",
+            "pendingTicketsCount": 26,
+            "contactGroups": [],
+            "ticketsCount": 26,
+            "id": 7,
+            "email": "user@example.com",
+            "customFields": []
+          },
+          "subscribers": [],
+          "unresponded": true,
+          "createdAt": "2023-01-02 08:13:02",
+          "source": "TKT_CREATION_API",
+          "updates": [
+            {
+              "priorityChange": {
+                "newName": "Low",
+                "new": 4
+              },
+              "timestamp": "2023-01-02 08:13:02",
+              "dueDateChange": {
+                "new": "2023-01-21"
+              },
+              "by": {
+                "email": "user@example.com",
+                "type": "user",
+                "id": 7,
+                "name": "Test"
+              },
+              "updateId": 63,
+              "message": {
+                "attachments": [],
+                "bccList": "user@example.com",
+                "text": "**Example description**\n\n",
+                "ccList": "user@example.com",
+                "customerUpdated": false,
+                "html": "<html><head><meta charset=\"utf-8\"></head><body><strong>Example description</strong></body></html>"
+              },
+              "statusChange": {
+                "newName": "New",
+                "new": 1
+              }
+            }
+          ]
+        }
+      }
+    ],
+    [
+      "success3",
+      {
+        "name": "Test Contact",
+        "email": "user@example.com",
+        "phone": "111111111",
+        "subject": "New Ticket 3",
+        "text": "Example description",
+        "html": "",
+        "category": 1,
+        "priority": 4,
+        "assignee": 1,
+        "tags": "tag1,tag2",
+        "cc": "user@example.com",
+        "bcc": "user@example.com",
+        "dueDate": "2023-01-21T00:00:00Z",
+        "visibleOnlyStaff": false,
+        "customFields": {
+          "t-cf-1": "test value",
+          "t-cf-2": "test value"
+        }
+      },
+      {
+        "ticket": {
+          "displayId": "#RS00000055",
+          "firstMessage": "Example description\n\n",
+          "lastUserReplyAt": "2023-01-02 07:37:24",
+          "id": 55,
+          "customFields": [
+            {
+              "compulsoryOnComplete": false,
+              "name": "Test Field",
+              "value": "test value",
+              "type": "text",
+              "id": 1,
+              "visibleToStaffOnly": false
+            },
+            {
+              "compulsoryOnComplete": true,
+              "name": "Test Field 2",
+              "value": "test value",
+              "type": "text",
+              "id": 2,
+              "visibleToStaffOnly": false
+            }
+          ],
+          "subject": "New Ticket 3",
+          "category": {
+            "prepopulateCc": "AR",
+            "description": "Tickets will be created here by default.",
+            "timeSpentMandatory": false,
+            "public": true,
+            "id": 1,
+            "name": "example category"
+          },
+          "attachmentsCount": 0,
+          "lastUpdatedAt": "2023-01-02 07:37:24",
+          "priority": {
+            "default": false,
+            "id": 4,
+            "name": "Low",
+            "order": 1
+          },
+          "messagesCount": 1,
+          "slaBreaches": 0,
+          "mergedTickets": [],
+          "status": {
+            "name": "New",
+            "color": "FF9900",
+            "order": 1,
+            "default": true,
+            "behavior": "pending",
+            "id": 1
+          },
+          "dueDate": "2023-01-21",
+          "tags": "tag1,tag2",
+          "user": {
+            "name": "Test",
+            "primaryPhone": {
+              "type": "m",
+              "number": "111111111",
+              "id": 3
+            },
+            "phones": [
+              {
+                "type": "o",
+                "number": "11111111",
+                "id": 4
+              },
+              {
+                "type": "m",
+                "number": "111111111",
+                "id": 3
+              }
+            ],
+            "createdAt": "2022-12-14 11:10:21",
+            "updatedAt": "2022-12-14 11:10:21",
+            "pendingTicketsCount": 25,
+            "contactGroups": [],
+            "ticketsCount": 25,
+            "id": 7,
+            "email": "user@example.com",
+            "customFields": []
+          },
+          "subscribers": [],
+          "unresponded": true,
+          "createdAt": "2023-01-02 07:37:24",
+          "source": "TKT_CREATION_API",
+          "assignedTo": {
+            "name": "Example User",
+            "isAccountAdmin": true,
+            "email": "user@example.com",
+            "role": {
+              "name": "Administrator",
+              "id": 1
+            },
+            "active": true,
+            "id": 1,
+            "categories": [
+              1
+            ],
+            "permissions": []
+          },
+          "updates": [
+            {
+              "priorityChange": {
+                "newName": "Low",
+                "new": 4
+              },
+              "timestamp": "2023-01-02 07:37:24",
+              "dueDateChange": {
+                "new": "2023-01-21"
+              },
+              "by": {
+                "email": "user@example.com",
+                "type": "user",
+                "id": 7,
+                "name": "Example User"
+              },
+              "updateId": 60,
+              "message": {
+                "attachments": [],
+                "bccList": "user@example.com",
+                "text": "Example description\n\n",
+                "ccList": "user@example.com",
+                "customerUpdated": false,
+                "html": "<html><head><meta charset=\"utf-8\"></head><body>Example description</body></html>"
+              },
+              "assigneeChange": {
+                "newName": "Example User",
+                "new": 1
+              },
+              "statusChange": {
+                "newName": "New",
+                "new": 1
+              }
+            }
+          ]
+        }
+      }
+    ]
+  ]
+}

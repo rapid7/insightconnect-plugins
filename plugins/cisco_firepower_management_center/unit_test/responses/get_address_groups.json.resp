@@ -83,6 +83,27 @@
           "type": "Domain"
         }
       }
+    },
+    {
+      "links": {
+        "self": "https://example.com/api/fmc_config/v1/domain/44d88612-fea8-a8f3-6de8-2e1278abb02f/object/networkgroups/00000000-0000-0000-0000-000000000003"
+      },
+      "type": "NetworkGroup",
+      "overridable": "False",
+      "description": " ",
+      "name": "Test_Group_Empty",
+      "id": "00000000-0000-0000-0000-000000000003",
+      "metadata": {
+        "timestamp": 1645465669233,
+        "lastUser": {
+          "name": "admin"
+        },
+        "domain": {
+          "name": "Global",
+          "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+          "type": "Domain"
+        }
+      }
     }
   ],
   "paging": {

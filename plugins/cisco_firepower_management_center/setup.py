@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="cisco_firepower_management_center-rapid7-plugin",
-      version="2.0.0",
+      version="2.0.1",
       description="This plugin utilizes Cisco Firepower Management Center to create URL block policies and manage address objects to block hosts",
       author="rapid7",
       author_email="",
