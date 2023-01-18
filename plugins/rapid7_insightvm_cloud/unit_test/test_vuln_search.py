@@ -45,14 +45,14 @@ class TestVulnSearch(TestCase):
         expected = Utils.read_file_to_dict("expected_responses/vuln_search.json.resp")
         self.assertEqual(expected, actual)
 
-    # test finding event via all inputs
+    # test finding event with no inputs
     @patch("requests.request", side_effect=mock_request)
     def test_vuln_search_no_input(self, _mock_req):
         actual = self.action.run()
         expected = Utils.read_file_to_dict("expected_responses/vuln_search.json.resp")
         self.assertEqual(expected, actual)
 
-    # test finding event via all inputs
+    # test finding event with bad asset criteria
     @patch("requests.request", side_effect=mock_request)
     def test_vuln_invalid_asset_criteria(self, _mock_req):
         with self.assertRaises(PluginException) as context:
@@ -71,7 +71,7 @@ class TestVulnSearch(TestCase):
         self.assertEqual(assistance, context.exception.assistance)
         self.assertEqual(str(data), context.exception.data)
 
-    # test finding event via all inputs
+    # test finding event with bad vuln criteria
     @patch("requests.request", side_effect=mock_request)
     def test_asset_vuln_criteria_invalid(self, _mock_req):
         with self.assertRaises(PluginException) as context:
@@ -90,6 +90,7 @@ class TestVulnSearch(TestCase):
         self.assertEqual(assistance, context.exception.assistance)
         self.assertEqual(str(data), context.exception.data)
 
+    # test finding event with bad secret key
     @patch("requests.request", side_effect=mock_request)
     def test_vuln_search_invalid_secret_key(self, _mock_req):
         self.connection, self.action = Utils.default_connector(
@@ -103,6 +104,7 @@ class TestVulnSearch(TestCase):
         self.assertEqual(cause, context.exception.cause)
         self.assertEqual(assistance, context.exception.assistance)
 
+    # test finding event with server error
     @patch("requests.request", side_effect=mock_request)
     def test_vuln_search_server_error(self, _mock_req):
         self.connection, self.action = Utils.default_connector(
