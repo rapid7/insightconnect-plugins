@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="abnormal_security-rapid7-plugin",
-      version="1.3.0",
+      version="1.2.0",
       description="Protect your Microsoft Office 365 and G-Suite environments with next-generation email security that uses the most advanced AI detection techniques to stop targeted phishing attacks",
       author="rapid7",
       author_email="",
