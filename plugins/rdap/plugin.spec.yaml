@@ -1,0 +1,663 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: rdap
+title: RDAP
+description: "The Registration Data Access Protocol (RDAP) is the successor to WHOIS. Like WHOIS, RDAP provides access to information about Internet resources (domain names, autonomous system numbers, and IP addresses)"
+version: 1.0.0
+vendor: rapid7
+support: rapid7
+status: []
+cloud_ready: true
+supported_versions: ["RDAP 20-12-2022"]
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rdap
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://rdap.org
+tags:
+- domain
+- lookup
+- rdap
+- api
+- search
+- ip
+hub_tags:
+  use_cases: [data_utility, reporting_and_analytics]
+  keywords: [rdap, domains, api, search, cloud_enabled]
+  features: []
+types:
+  link:
+    value:
+      title: Value
+      description: Value
+      type: string
+      required: false
+    rel:
+      title: Rel
+      description: Rel
+      type: string
+      required: false
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+    href:
+      title: Href
+      description: Href
+      type: string
+      required: false
+  notice:
+    title:
+      title: Title
+      description: Title
+      type: string
+      required: false
+    description:
+      title: Description
+      description: Description
+      type: '[]string'
+      required: false
+    links:
+      title: Links
+      description: Links
+      type: '[]link'
+      required: false
+  variantName:
+    ldhName:
+      title: LDH Name
+      description: The LDH name of the domain
+      type: string
+      required: false
+    unicodeName:
+      title: Unicode Name
+      description: The unicode name of the domain
+      type: string
+      required: false
+  variant:
+    relation:
+      title: Relation
+      description: The relationship between the variants and the containing domain object
+      type: '[]string'
+      required: false
+    idnTable:
+      title: IDN Table
+      description: The Internationalized Domain Name (IDN) table that has been registered in the IANA Repository of IDN Practices
+      type: string
+      required: false
+    variantName:
+      title: Variant Names
+      description: List of variant names
+      type: '[]variantName'
+      required: false
+  ipAddresses:
+    v6:
+      title: IPv6
+      description: IPv6 addresses of the nameserver
+      type: '[]string'
+      required: false
+    v4:
+      title: IPv4
+      description: IPv4 addresses of the nameserver
+      type: '[]string'
+      required: false
+  event:
+    eventAction:
+      title: Event Action
+      description: The reason for the event
+      type: string
+      required: false
+    eventActor:
+      title: Event Actor
+      description: The actor responsible for the event
+      type: string
+      required: false
+    eventDate:
+      title: Event Date
+      description: The time and date the event occurred
+      type: string
+      required: false
+  publicId:
+    type:
+      title: Type
+      description: The type of public identifier
+      type: string
+      required: false
+    identifier:
+      title: Identifier
+      description: The public identifier of the type related to 'type'
+      type: string
+      required: false
+  asEventActor:
+    eventAction:
+      title: Event Action
+      description: The reason for the event
+      type: string
+      required: false
+    eventDate:
+      title: Event Date
+      description: The time and date the event occurred
+      type: string
+      required: false
+  entity:
+    objectClassName:
+      title: Object Class Name
+      description: The type of object being processed
+      type: string
+      required: false
+    handle:
+      title: Handle
+      description: The registry-unique identifier of the entity
+      type: string
+      required: false
+    roles:
+      title: Roles
+      description: List of roles
+      type: '[]string'
+      required: false
+    publicIds:
+      title: Public IDs
+      description: List of public IDs
+      type: '[]publicId'
+      required: false
+    entities:
+      title: Entities
+      description: Entities
+      type: '[]object'
+      required: false
+    remarks:
+      title: Remarks
+      description: Information about the object class
+      type: '[]notice'
+      required: false
+    links:
+      title: Links
+      description: Links
+      type: '[]link'
+      required: false
+    events:
+      title: Events
+      description: Events
+      type: '[]event'
+      required: false
+    asEventActor:
+      title: As Event Actor
+      description: As event actor
+      type: '[]asEventActor'
+      required: false
+    status:
+      title: Status
+      description: The state of the entity
+      type: '[]string'
+      required: false
+    port43:
+      title: Port 43
+      description: The fully qualified host name or IP address of the WHOIS server where the containing object instance may be found
+      type: string
+      required: false
+  nameserver:
+    handle:
+      title: Handle
+      description: The registry-unique identifier of the nameserver
+      type: string
+      required: false
+    ldhName:
+      title: LDH Name
+      description: The LDH name of the nameserver
+      type: string
+      required: false
+    unicodeName:
+      title: Unicode Name
+      description: The DNS Unicode name of the nameserver
+      type: string
+      required: false
+    ipAddresses:
+      title: IP Addresses
+      description: IP addresses
+      type: ipAddresses
+      required: false
+    remarks:
+      title: Remarks
+      description: Information about the object class
+      type: '[]notice'
+      required: false
+    events:
+      title: Events
+      description: List of events that have occurred
+      type: '[]event'
+      required: false
+    links:
+      title: Links
+      description: Links
+      type: '[]link'
+      required: false
+    entities:
+      title: Entities
+      description: Information of organizations, corporations, governments, non-profits, clubs, individual persons, and informal groups of people
+      type: '[]entity'
+      required: false
+    port43:
+      title: Port 43
+      description: The fully qualified host name or IP address of the WHOIS server where the containing object instance may be found
+      type: string
+      required: false
+    status:
+      title: Status
+      description: The state of the nameserver
+      type: '[]string'
+      required: false
+    objectClassName:
+      title: Object Class Name
+      description: The type of object being processed
+      type: string
+      required: false
+  dsData:
+    key_tag:
+      title: Key Tag
+      description: The key tag field of a DNS DS record
+      type: integer
+      required: false
+    algorithm:
+      title: Algorithm
+      description: The algorithm field of a DNS DS record
+      type: integer
+      required: false
+    digest:
+      title: Digest
+      description: The digest field of a DNS DS record
+      type: string
+      required: false
+    digestType:
+      title: Digest Type
+      description: The digest type field of a DNS DS record
+      type: integer
+      required: false
+    events:
+      title: Events
+      description: Events
+      type: '[]event'
+      required: false
+    links:
+      title: Links
+      description: Links
+      type: '[]link'
+      required: false
+  keyData:
+    flags:
+      title: Flags
+      description: The flags field value in the DNSKEY record
+      type: integer
+      required: false
+    protocol:
+      title: Protocol
+      description: The protocol field value of the DNSKEY record
+      type: integer
+      required: false
+    publicKey:
+      title: Public Key
+      description: The public key in the DNSKEY record
+      type: string
+      required: false
+    algorithm:
+      title: Algorithm
+      description: The algorithm field of a DNSKEY record
+      type: integer
+      required: false
+    events:
+      title: Events
+      description: Events
+      type: '[]event'
+      required: false
+    links:
+      title: Links
+      description: Links
+      type: '[]link'
+      required: false
+  secureDns:
+    zoneSigned:
+      title: Zone Signed
+      description: Whether the zone has been signed
+      type: boolean
+      required: false
+    delegationSigned:
+      title: Delegation Signed
+      description: Whether there are DS records in the parent
+      type: boolean
+      required: false
+    dsData:
+      title: DS Data
+      description: DS Data
+      type: '[]dsData'
+      required: false
+    keyData:
+      title: Key Data
+      description: Key Data
+      type: '[]keyData'
+      required: false
+  ipAddressObject:
+    asn:
+      title: ASN
+      description: ASN
+      type: string
+      required: false
+    asnCidr:
+      title: ASN CIDR
+      description: ASN CIDR
+      type: string
+      required: false
+    ansCountryCode:
+      title: ASN Country Code
+      description: ASN country code
+      type: string
+      required: false
+    asnDate:
+      title: ASN Date
+      description: ASN date
+      type: string
+      required: false
+    asnDescription:
+      title: ASN Description
+      description: ASN description
+      type: string
+      required: false
+    ansRegistry:
+      title: ASN Registry
+      description: ASN registry
+      type: string
+      required: false
+    rdapConformance:
+      title: RDAP Conformance
+      description: RDAP conformance
+      type: '[]string'
+      required: false
+    notices:
+      title: Notices
+      description: Information about the service providing RDAP information and/or information about the entire response
+      type: '[]notice'
+      required: false
+    handle:
+      title: Handle
+      description: The RIR-unique identifier of the network registration
+      type: string
+      required: false
+    startAddress:
+      title: Start Address
+      description: The starting IP address of the network, either IPv4 or IPv6
+      type: string
+      required: false
+    endAddress:
+      title: End Address
+      description: The ending IP address of the network, either IPv4 or IPv6
+      type: string
+      required: false
+    ipVersion:
+      title: IP Version
+      description: The IP protocol version of the network, 'v4' signifies an IPv4 network, and 'v6' signifies an IPv6 network
+      type: string
+      required: false
+    name:
+      title: Name
+      description: The identifier assigned to the network registration by the registration holder
+      type: string
+      required: false
+    type:
+      title: Type
+      description: The RIR-specific classification of the network per that RIR's registration model
+      type: string
+      required: false
+    country:
+      title: Country
+      description: The two-character country code of the network
+      type: string
+      required: false
+    parentHandle:
+      title: Parent Handle
+      description: The RIR-unique identifier of the parent network of this network registration
+      type: string
+      required: false
+    remarks:
+      title: Remarks
+      description: Information about the object class
+      type: '[]notice'
+      required: false
+    events:
+      title: Events
+      description: List of events that have occurred
+      type: '[]event'
+      required: false
+    links:
+      title: Links
+      description: Links
+      type: '[]link'
+      required: false
+    entities:
+      title: Entities
+      description: Information of organizations, corporations, governments, non-profits, clubs, individual persons, and informal groups of people
+      type: '[]entity'
+      required: false
+    port43:
+      title: Port 43
+      description: The fully qualified host name or IP address of the WHOIS server where the containing object instance may be found
+      type: string
+      required: false
+    status:
+      title: Status
+      description: The state of the IP network
+      type: '[]string'
+      required: false
+    objectClassName:
+      title: Object Class Name
+      description: The type of object being processed
+      type: string
+      required: false
+  domainObject:
+    rdapConformance:
+      title: RDAP Conformance
+      description: RDAP conformance
+      type: '[]string'
+      required: false
+    notices:
+      title: Notices
+      description: Information about the service providing RDAP information and/or information about the entire response
+      type: '[]notice'
+      required: false
+    handle:
+      title: Handle
+      description: The registry-unique identifier of the domain object instance
+      type: string
+      required: false
+    ldhName:
+      title: LDH Name
+      description: The LDH name of the domain
+      type: string
+      required: false
+    unicodeName:
+      title: Unicode Name
+      description: The unicode name of the domain
+      type: string
+      required: false
+    variants:
+      title: Variants
+      description: List of variants
+      type: '[]variant'
+      required: false
+    nameservers:
+      title: Nameservers
+      description: List of nameservers
+      type: '[]nameserver'
+      required: false
+    secureDns:
+      title: Secure DNS
+      description: Secure DNS
+      type: secureDns
+      required: false
+    remarks:
+      title: Remarks
+      description: Information about the object class
+      type: '[]notice'
+      required: false
+    events:
+      title: Events
+      description: List of events that have occurred
+      type: '[]event'
+      required: false
+    links:
+      title: Links
+      description: Links
+      type: '[]link'
+      required: false
+    entities:
+      title: Entities
+      description: Information of organizations, corporations, governments, non-profits, clubs, individual persons, and informal groups of people
+      type: '[]entity'
+      required: false
+    port43:
+      title: Port 43
+      description: The fully qualified host name or IP address of the WHOIS server where the containing object instance may be found
+      type: string
+      required: false
+    status:
+      title: Status
+      description: The state of the IP network
+      type: '[]string'
+      required: false
+    publicIds:
+      title: Public IDs
+      description: List of public IDs
+      type: '[]publicId'
+      required: false
+    network:
+      title: Network
+      description: Network
+      type: '[]ipAddressObject'
+      required: false
+    objectClassName:
+      title: Object Class Name
+      description: The type of object being processed
+      type: string
+      required: false
+  asnObject:
+    handle:
+      title: Handle
+      description: The RIR-unique identifier of the autnum registration
+      type: string
+      required: false
+    startAutnum:
+      title: StartAutnum
+      description: The starting number in the block of Autonomous System numbers
+      type: integer
+      required: false
+    endAutnum:
+      title: End Autnum
+      description: The ending number in the block of Autonomous System numbers
+      type: integer
+      required: false
+    name:
+      title: Name
+      description: The identifier assigned to the autnum registration by the registration holder
+      type: string
+      required: false
+    type:
+      title: Type
+      description: The RIR-specific classification of the autnum per that RIR's registration model
+      type: string
+      required: false
+    country:
+      title: Country
+      description: The two-character country code of the autnum
+      type: string
+      required: false
+    remarks:
+      title: Remarks
+      description: Information about the object class
+      type: "[]notice"
+      required: false
+    events:
+      title: Events
+      description: List of events that have occurred
+      type: "[]event"
+      required: false
+    links:
+      title: Links
+      description: Links
+      type: "[]link"
+      required: false
+    entities:
+      title: Entities
+      description: Information of organizations, corporations, governments, non-profits, clubs, individual persons, and informal groups of people
+      type: "[]entity"
+      required: false
+    port43:
+      title: Port 43
+      description: The fully qualified host name or IP address of the WHOIS server where the containing object instance may be found
+      type: string
+      required: false
+    status:
+      title: Status
+      description: The state of the autnum
+      type: "[]string"
+      required: false
+    objectClassName:
+      title: Object Class Name
+      description: The type of object being processed
+      type: string
+      required: false
+
+actions:
+  domainLookup:
+    title: Domain Lookup
+    description: Perform a domain lookup
+    input:
+      domain:
+        title: Domain
+        description: Domain for which information will be searched
+        type: string
+        required: true
+        example: "example.com"
+    output:
+      results:
+        title: Results
+        description: Results containing information about the given domain
+        type: domainObject
+        required: false
+        example: {}
+  asnLookup:
+    title: ASN Lookup
+    description: Perform an ASN (autonomous system number) lookup
+    input:
+      asn:
+        title: ASN
+        description: Autonomous system number for which information will be searched
+        type: integer
+        required: true
+        example: 12345
+    output:
+      results:
+        title: Results
+        description: Results containing information about the given ASN
+        type: asnObject
+        required: false
+        example: {}
+  ipLookup:
+    title: IP Address Lookup
+    description: Perform an IP address lookup
+    input:
+      ipAddress:
+        title: IP Address
+        description: IP address for which information will be searched
+        type: string
+        required: true
+        example: '1.1.1.1'
+      getAsn:
+        title: Get ASN
+        description: Whether to return ASN information
+        type: boolean
+        required: true
+        example: true
+    output:
+      results:
+        title: Results
+        description: Results containing information about the given IP address
+        type: ipAddressObject
+        required: false
+        example: {}

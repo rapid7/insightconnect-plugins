@@ -52,6 +52,12 @@ def mock_request_post(url, params, headers, data):
         if data.get("vulnerability") == STUB_BAD_VULN_CRITERIA:
             return MockResponse("asset_search_invalid_vuln_criteria", 400)
         return MockResponse("asset_search", 200)
+    if url == f"https://{STUB_REGION}.api.insight.rapid7.com/vm/v4/integration/vulnerabilities":
+        if data.get("asset") == STUB_BAD_ASSET_CRITERIA:
+            return MockResponse("asset_search_invalid_asset_criteria", 400)
+        if data.get("vulnerability") == STUB_BAD_VULN_CRITERIA:
+            return MockResponse("asset_search_invalid_vuln_criteria", 400)
+        return MockResponse("vuln_search", 200)
     if url == f"https://{STUB_REGION}.api.insight.rapid7.com/vm/v4/integration/scan/{STUB_SCAN_ID}/stop":
         return MockResponse("stop_scan", 202)
     if url == f"https://{STUB_REGION}.api.insight.rapid7.com/vm/v4/integration/scan/{STUB_BAD_SCAN_ID}/stop":
