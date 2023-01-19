@@ -35,7 +35,7 @@ class CreateInvestigation(insightconnect_plugin_runtime.Action):
         )
 
         if email:
-            data["assignee"][Input.EMAIL] = email
+            data.update({"assignee": {Input.EMAIL: email}})
 
         request = ResourceHelper(self.connection.session, self.logger)
 
