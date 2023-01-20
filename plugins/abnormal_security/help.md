@@ -442,6 +442,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.3.0 - New logo and requirements update
 * 1.2.0 - New actions Manage Case and Manage Threat
 * 1.1.0 - New actions Get Cases and Get Case Details
 * 1.0.0 - Initial plugin
