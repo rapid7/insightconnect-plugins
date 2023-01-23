@@ -10,7 +10,7 @@ from komand_rapid7_insightidr.actions.update_investigation import UpdateInvestig
 from komand_rapid7_insightidr.actions.update_investigation.schema import Input
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
-from unit_test.mock import mock_patch_request, STUB_INVESTIGATION_IDENTIFIER
+from unit_test.mock import mock_patch_request, STUB_INVESTIGATION_IDENTIFIER, STUB_USER_EMAIL
 from unit_test.util import Util
 
 
@@ -33,7 +33,9 @@ class TestCreateInvestigation(TestCase):
 
     @patch("requests.Session.patch", side_effect=mock_patch_request)
     def test_update_investigations(self, _mock_req):
-        actual = self.action.run({Input.TITLE: "Example Title", Input.ID: STUB_INVESTIGATION_IDENTIFIER})
+        actual = self.action.run(
+            {Input.TITLE: "Example Title", Input.ID: STUB_INVESTIGATION_IDENTIFIER, Input.EMAIL: STUB_USER_EMAIL}
+        )
         expected = {
             "investigation": {
                 "assignee": {"email": "user@example.com", "name": "Ellen Example"},
