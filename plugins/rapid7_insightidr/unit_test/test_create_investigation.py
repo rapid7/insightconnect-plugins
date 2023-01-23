@@ -10,7 +10,7 @@ from komand_rapid7_insightidr.actions.create_investigation import CreateInvestig
 from komand_rapid7_insightidr.actions.create_investigation.schema import Input
 from komand_rapid7_insightidr.connection.schema import Input as ConnectionInput
 
-from unit_test.mock import mock_post_request
+from unit_test.mock import mock_post_request, STUB_USER_EMAIL
 from unit_test.util import Util
 
 
@@ -33,7 +33,7 @@ class TestCreateInvestigation(TestCase):
 
     @patch("requests.Session.post", side_effect=mock_post_request)
     def test_create_investigation(self, _mock_req):
-        actual = self.action.run({Input.TITLE: "Example Title"})
+        actual = self.action.run({Input.TITLE: "Example Title", Input.EMAIL: STUB_USER_EMAIL})
         expected = {
             "investigation": {
                 "assignee": {"email": "user@example.com", "name": "Ellen Example"},
