@@ -12,10 +12,13 @@ class RequestHelper(object):
         :param logger: Logger object available to Komand actions/triggers, usually self.logger
         :return: RequestHelper object
         """
+
         self.logger = logger
         self.session = session
 
-    def make_request(self, endpoint, method, payload=None, params=None, data=None, content_type="application/json"):
+    def make_request(  # noqa: C901
+        self, endpoint, method, payload=None, params=None, data=None, content_type="application/json"
+    ):
         try:
             request_method = getattr(self.session, method.lower())
 
@@ -26,8 +29,8 @@ class RequestHelper(object):
             response = request_method(
                 url=endpoint, headers=headers, params=params, json=payload, data=data, verify=False
             )
-        except requests.RequestException as e:
-            self.logger.error(e)
+        except requests.RequestException as error:
+            self.logger.error(error)
             raise
 
         if response.status_code in range(200, 299):
