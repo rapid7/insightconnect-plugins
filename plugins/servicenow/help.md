@@ -160,7 +160,7 @@ This action is used to create a new ServiceNow Incident record.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|additional_fields|object|None|False|JSON object containing the additional fields and values to create incident |None|{"description": "incident description"}|
+|additional_fields|object|None|False|JSON object containing the additional fields and values to create incident|None|{"description": "incident description"}|
 |assigned_to|string|None|False|User ID of person assigned to the incident |None|user|
 |assignment_group|string|None|False|Assignment group name of the incident|None|Team Development Code Reviewers|
 |business_service|string|None|False|Name of business service|None|All|
