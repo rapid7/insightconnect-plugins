@@ -35,10 +35,7 @@ Example input:
 
 ```
 {
-  "client_login": {
-    "username": "user1",
-    "password": "mypassword"
-  },
+  "client_login": "{\"username\":\"user1\", \"password\":\"mypassword\"}",
   "instance": "instance",
   "timeout": 30
 }
@@ -62,9 +59,7 @@ Example input:
 
 ```
 {
-  "additional_fields": {
-    "short_description": "My example short description"
-  }
+  "additional_fields": "{\"short_description\": \"My example short description\"}"
 }
 ```
 
@@ -129,11 +124,7 @@ Example input:
 
 ```
 {
-  "create_data": {
-    "Description": "Bug report",
-    "ID": "58",
-    "date": "2021-08-20 18:12:00"
-  },
+  "create_data": "{\"Description\": \"Bug report\", \"ID\": \"58\", \"date\": \"2021-08-20 18:12:00\"}",
   "table": "catalog_category_request"
 }
 ```
@@ -169,7 +160,7 @@ This action is used to create a new ServiceNow Incident record.
 |configuration_item|string|None|False|Configuration item code of the incident|None|int-jenkins|
 |contact_type|string|None|False|Contact type of the incident|None|email|
 |description|string|None|False|Full description of incident|None|Full details about new employee hire|
-|impact|string|None|False|Impact of the indicent|None|Medium|
+|impact|string|None|False|Impact of the incident|None|Medium|
 |priority|string|None|False|Priority of the incident|None|Planning|
 |short_description|string|None|False|Short description of incident|None|New employee hire|
 |state|string|None|False|State name of the incident|None|In Progress|
@@ -180,9 +171,7 @@ Example input:
 
 ```
 {
-  "additional_fields": {
-    "description": "incident description"
-  },
+  "additional_fields": "{\"description\": \"incident description\"}",
   "assigned_to": "user",
   "assignment_group": "Team Development Code Reviewers",
   "business_service": "All",
@@ -263,7 +252,7 @@ Example input:
 
 ```
 {
-  "attachment_id": "9de5069c5afe602b2ea0a04b66beb2c0"
+  "system_id": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 
@@ -648,10 +637,7 @@ Example input:
 {
   "system_id": "9de5069c5afe602b2ea0a04b66beb2c0",
   "table": "catalog_category_request",
-  "update_data": {
-    "Description": "Bug report",
-    "ID": "58"
-  }
+  "update_data": "{\"Description\": \"Bug report\", \"ID\": \"58\"}"
 }
 ```
 
@@ -691,16 +677,14 @@ This action is used to update a ServiceNow Incident with the given data.
 |short_description|string|None|False|Short description of incident|None|New employee hire update|
 |state|string|None|False|State name of the incident|None|On Hold|
 |subcategory|string|None|False|Subcategory code of incident (available values depends on the `Category` field)|None|monitor|
-|system_id|string|None|True|System ID of the Incident record to update|None|ee7e6b24dbf4e450e9faa5730596192b|
+|system_id|string|None|True|System ID of the Incident record to update|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |urgency|string|None|False|Urgency of the incident|None|Medium|
 
 Example input:
 
 ```
 {
-  "additional_fields": {
-    "description": "incident description"
-  },
+  "additional_fields": "{\"description\": \"incident description\"}",
   "assigned_to": "user",
   "assignment_group": "Recommendation Admin",
   "business_service": "All",
@@ -895,7 +879,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 7.1.2 - Search Incident, Search Incident Attachment: Fix issue where the action were failing on bigger results
+* 7.1.2 - Search Incident, Search Incident Attachment: Fix issue where the action were failing on bigger results. Update Incident: Ensure non updated fields are not reset during update.
 * 7.1.1 - Create Incident: Resolved issue when nothing was passed to `additional_fields` input field 
 * 7.1.0 - Add new action Create Change Request
 * 7.0.0 - Cloud enabled | Changed connection input `URL` to `instance`
@@ -924,7 +908,8 @@ _This plugin does not contain any troubleshooting information._
 * 0.1.0 - Initial plugin
 
 # Links
-
+* [ServiceNow](https://www.servicenow.com/)
+* 
 ## References
 
 * [ServiceNow](https://www.servicenow.com/)
