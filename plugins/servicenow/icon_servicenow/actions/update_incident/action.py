@@ -16,23 +16,31 @@ class UpdateIncident(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        data = {
-            "caller_id": params.get(Input.CALLER),
-            "category": params.get(Input.CATEGORY),
-            "subcategory": params.get(Input.SUBCATEGORY),
-            "business_service": params.get(Input.BUSINESS_SERVICE),
-            "cmdb_ci": params.get(Input.CONFIGURATION_ITEM),
-            "contact_type": params.get(Input.CONTACT_TYPE),
-            "state": params.get(Input.STATE),
-            "impact": params.get(Input.IMPACT),
-            "urgency": params.get(Input.URGENCY),
-            "priority": params.get(Input.PRIORITY),
-            "assignment_group": params.get(Input.ASSIGNMENT_GROUP),
-            "assigned_to": params.get(Input.ASSIGNED_TO),
-            "short_description": params.get(Input.SHORT_DESCRIPTION),
-            "description": params.get(Input.DESCRIPTION),
+        data = {}
+        data_fields = {
+            "caller_id": Input.CALLER,
+            "category": Input.CATEGORY,
+            "subcategory": Input.SUBCATEGORY,
+            "business_service": Input.BUSINESS_SERVICE,
+            "cmdb_ci": Input.CONFIGURATION_ITEM,
+            "contact_type": Input.CONTACT_TYPE,
+            "state": Input.STATE,
+            "impact": Input.IMPACT,
+            "urgency": Input.URGENCY,
+            "priority": Input.PRIORITY,
+            "assignment_group": Input.ASSIGNMENT_GROUP,
+            "assigned_to": Input.ASSIGNED_TO,
+            "short_description": Input.SHORT_DESCRIPTION,
+            "description": Input.DESCRIPTION,
         }
 
+        # Only update fields which have a valid value to avoid causing previously populated fields to reset to defaults
+        for field, value in data_fields.items():
+            update_value = params.get(value)
+            if update_value:
+                data[field] = update_value
+
+        # Additional fields are an optional dictionary of key/value pairs and may include fields not specified above
         data.update(params.get(Input.ADDITIONAL_FIELDS))
 
         response = self.connection.request.make_request(
