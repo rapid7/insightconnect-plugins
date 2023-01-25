@@ -161,7 +161,7 @@ This action is used to create a new ServiceNow Incident record.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |additional_fields|object|None|False|JSON object containing the additional fields and values to create incident|None|{"description": "incident description"}|
-|assigned_to|string|None|False|User ID of person assigned to the incident |None|user|
+|assigned_to|string|None|False|User ID of person assigned to the incident|None|user|
 |assignment_group|string|None|False|Assignment group name of the incident|None|Team Development Code Reviewers|
 |business_service|string|None|False|Name of business service|None|All|
 |caller|string|None|False|User ID of incident caller|None|user|
@@ -173,7 +173,7 @@ This action is used to create a new ServiceNow Incident record.
 |priority|string|None|False|Priority of the incident|None|Planning|
 |short_description|string|None|False|Short description of incident|None|New employee hire|
 |state|string|None|False|State name of the incident|None|In Progress|
-|subcategory|string|None|False|Subcategory code of incident (available values depends on the `Category` field) |None|email|
+|subcategory|string|None|False|Subcategory code of incident (available values depends on the `Category` field)|None|email|
 |urgency|string|None|False|Urgency of the incident|None|Medium|
 
 Example input:
@@ -676,13 +676,13 @@ This action is used to update a ServiceNow Incident with the given data.
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|------------|----|-------|
+|----|----|-------|--------|-----------|----|-------|
 |additional_fields|object|None|False|JSON object containing the additional fields and values to update incident|None|{"description": "incident description"}|
 |assigned_to|string|None|False|User ID of person assigned to the incident|None|user|
 |assignment_group|string|None|False|Assignment group name of the incident|None|Recommendation Admin|
 |business_service|string|None|False|Name of business service|None|All|
 |caller|string|None|False|User ID of incident caller|None|user|
-|category|string|None|False| Category code of incident|None|hardware|
+|category|string|None|False|Category code of incident|None|hardware|
 |configuration_item|string|None|False|Configuration item code of the incident|None|int-jenkins|
 |contact_type|string|None|False|Contact type of the incident|None|phone|
 |description|string|None|False|Full description of incident|None|Full details about new employee hire update|
@@ -690,7 +690,7 @@ This action is used to update a ServiceNow Incident with the given data.
 |priority|string|None|False|Priority of the incident|None|Planning|
 |short_description|string|None|False|Short description of incident|None|New employee hire update|
 |state|string|None|False|State name of the incident|None|On Hold|
-|subcategory|string|None|False|Subcategory code of incident (available values depends on the `Category` field) |None|monitor|
+|subcategory|string|None|False|Subcategory code of incident (available values depends on the `Category` field)|None|monitor|
 |system_id|string|None|True|System ID of the Incident record to update|None|ee7e6b24dbf4e450e9faa5730596192b|
 |urgency|string|None|False|Urgency of the incident|None|Medium|
 
