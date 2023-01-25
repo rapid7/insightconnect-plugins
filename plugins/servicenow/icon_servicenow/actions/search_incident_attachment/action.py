@@ -29,9 +29,8 @@ class SearchIncidentAttachment(insightconnect_plugin_runtime.Action):
 
         try:
             results = response["resource"].get("result")
-        except KeyError as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text) from e
-
-        attachment_ids = [result.get("sys_id") for result in results]
+            attachment_ids = [result.get("sys_id") for result in results if isinstance(result, dict)]
+        except Exception as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
         return {Output.ATTACHMENT_IDS: attachment_ids}
