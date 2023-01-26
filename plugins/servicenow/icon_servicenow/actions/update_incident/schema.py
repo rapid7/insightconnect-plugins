@@ -93,7 +93,7 @@ class UpdateIncidentInput(insightconnect_plugin_runtime.Input):
     "impact": {
       "type": "string",
       "title": "Impact",
-      "description": "Impact of the indicent",
+      "description": "Impact of the incident",
       "order": 9
     },
     "priority": {
