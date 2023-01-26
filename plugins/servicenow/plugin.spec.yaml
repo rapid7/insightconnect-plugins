@@ -165,7 +165,7 @@ actions:
         example: In Progress
       impact:
         title: Impact
-        description: Impact of the indicent
+        description: Impact of the incident
         type: string
         required: false
         example: Medium
@@ -321,7 +321,7 @@ actions:
         example: On Hold
       impact:
         title: Impact
-        description: Impact of the indicent
+        description: Impact of the incident
         type: string
         required: false
         example: Medium
