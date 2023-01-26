@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm_cloud
 title: Rapid7 InsightVM Cloud
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the InsightVM Cloud Integrations API to view assets and start scans
-version: 3.1.0
+version: 3.2.0
 vendor: rapid7
 support: rapid7
 supported_versions: ["InsightVM Cloud Integration API v4", "2022-08-10"]
@@ -423,7 +423,7 @@ types:
       title: Web Applications
       type: '[]web_application'
       required: false
-  vulnerability:
+  asset_vulnerability:
     first_found:
       title: First Found
       description: Date the vulnerability was first found in InsightVM
@@ -840,6 +840,102 @@ types:
       title: Remediated Vulnerabilities
       type: '[]string'
       required: false
+  vulnerability:
+    title:
+      title: Title
+      description: Name of the vulnerability
+      type: string
+      required: false
+    description:
+      title: Description
+      description: Description of the vulnerability
+      type: string
+      required: false
+    added:
+      title: Added
+      description: Date the vulnerability was last added to an asset
+      type: date
+      required: false
+    modified:
+      title: Modified
+      description: Date the vulnerability was last modified
+      type: date
+      required: false
+    published:
+      title: Published
+      description: Date the vulnerability was added to InsightVM
+      type: date
+      required: true
+    categories:
+      title: Categories
+      description: Labels this vulnerability falls under
+      type: string
+      required: true
+    cves:
+      title: CVES
+      description: CVES ID
+      type: string
+      required: false
+    cvss_v2:
+      title: CVSSv2
+      description: information regarding CVSSv2
+      type: cvss_v2
+      required: false
+    cvss_v3:
+      title: CVSSv3
+      description: information regarding CVSSv3
+      type: cvss_v3
+      required: false
+    denial_of_service:
+      title: Denial of Service
+      description: Whether or not this vulnerability is a denial of service attack
+      type: boolean
+      required: false
+    exploits:
+      title: Exploits
+      description: List of exploits related to the vulnerability
+      type: '[]string'
+      required: false
+    id:
+      title: ID
+      description: ID of the vulnerability
+      type: string
+      required: true
+    links:
+      title: Links
+      description: List of links related to the vulnerability
+      type: '[]link'
+      required: false
+    malware_kits:
+      title: Malware Kits
+      description: List of malware kits related to the vulnerability
+      type: '[]string'
+      required: false
+    pci:
+      title: PCI
+      description: information regarding PCI
+      type: pci
+      required: false
+    references:
+      title: References
+      description: Links to information related to the vulnerability
+      type: string
+      required: false
+    risk_score:
+      description: Risk score (with criticality adjustments) of the vulnerability
+      title: Risk Score
+      type: float
+      required: true
+    severity:
+      title: Severity
+      description: Severity of the vulnerability
+      type: string
+      required: true
+    severity_score:
+      title: Severity Score
+      description: Severity score of the vulnerability
+      type: integer
+      required: true
 
   
 connection:
@@ -963,7 +1059,7 @@ actions:
       size:
         title: Size
         description: The number of assets to retrieve. If blank then will default to 200 assets returned, the maximum limit is 500 assets
-        type: number
+        type: integer
         required: false
         default: 200
         example: 100
@@ -1017,7 +1113,7 @@ actions:
       vulnerabilities:
         title: Vulnerabilities
         description: Vulnerabilities associated with the asset
-        type: '[]vulnerability'
+        type: '[]asset_vulnerability'
         required: false
   stop_scan:
     title: Stop Scan
@@ -1048,4 +1144,38 @@ actions:
         type: string
         example: "The scan could not be stopped"
         required: false
-  
+  vuln_search:
+    title: Vulnerability Search
+    description: Search for vulnerabilities using filtered vulnerability search
+    input:
+      size:
+        title: Size
+        description: The number of vulnerabilities to retrieve. If blank then will default to 200 vulnerabilities returned, the maximum limit is 500 vulnerabilities
+        type: integer
+        required: false
+        default: 200
+        example: 100
+      sort_criteria:
+        title: Sort Criteria
+        description: JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)
+        type: object
+        required: false
+        example: "{'risk-score': 'asc', 'criticality-tag': 'desc'}"
+      asset_criteria:
+        title: Asset Criteria
+        description: Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames
+        type: string
+        example: "asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'"
+        required: false
+      vuln_criteria:
+        title: Vulnerability Criteria
+        description: Vulnerability criteria to filter by
+        type: string
+        example: "vulnerability.categories IN ['example']"
+        required: false
+    output:
+      vulnerabilities:
+        title: Vulnerabilities
+        description: Vulnerabilities associated with the asset
+        type: '[]vulnerability'
+        required: true

@@ -42,6 +42,147 @@ Example input:
 
 ### Actions
 
+#### Vulnerability Search
+
+This action is used to search for vulnerabilities using filtered vulnerability search.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|asset_criteria|string|None|False|Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames|None|asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'|", "|vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|vulnerability.categories IN ['example']|
+|size|integer|200|False|The number of vulnerabilities to retrieve. If blank then will default to 200 vulnerabilities returned, the maximum limit is 500 vulnerabilities|None|100|
+|sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
+|vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|https://example.com IN ['example']|
+
+Example input:
+
+```
+{
+  "asset_criteria": "asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'",
+  "size": 100,
+  "sort_criteria": "{'risk-score': 'asc', 'criticality-tag': 'desc'}",
+  "vuln_criteria": "vulnerability.categories IN ['example']"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|vulnerabilities|[]vulnerability|True|Vulnerabilities associated with the asset|
+
+Example output:
+
+```
+{
+  "vulnerabilities": [
+    {
+      "added": "2018-05-16T00:00:00Z",
+      "categories": "7-Zip",
+      "cves": "CVE-1234-5678",
+      "cvss_v2_access_complexity": "low",
+      "cvss_v2_access_vector": "network",
+      "cvss_v2_authentication": "none",
+      "cvss_v2_availability_impact": "complete",
+      "cvss_v2_confidentiality_impact": "complete",
+      "cvss_v2_exploit_score": 9.996799945831299,
+      "cvss_v2_impact_score": 10.000845454680942,
+      "cvss_v2_integrity_impact": "complete",
+      "cvss_v2_score": 10.0,
+      "cvss_v2_vector": "(AV:N/AC:L/Au:N/C:C/I:C/A:C)",
+      "cvss_v3_attack_complexity": null,
+      "cvss_v3_attack_vector": null,
+      "cvss_v3_availability_impact": null,
+      "cvss_v3_confidentiality_impact": null,
+      "cvss_v3_exploit_score": 0.0,
+      "cvss_v3_impact_score": null,
+      "cvss_v3_integrity_impact": null,
+      "cvss_v3_privileges_required": null,
+      "cvss_v3_scope": null,
+      "cvss_v3_score": 0.0,
+      "cvss_v3_user_interaction": null,
+      "cvss_v3_vector": null,
+      "denial_of_service": false,
+      "description": "Unspecified vulnerability in 7-zip before 4.5.7 has unknown impact and remote attack vectors, as demonstrated by the PROTOS GENOME test suite for Archive Formats (c10).",
+      "exploits": [],
+      "id": "7-zip-cve-1234-5678",
+      "links": [
+        {
+          "href": "http://www.example.com",
+          "id": "http://www.example.com",
+          "source": "url"
+        }
+      ],
+      "malware_kits": [],
+      "modified": "2018-06-08T00:00:00Z",
+      "pci_cvss_score": 10.0,
+      "pci_fail": true,
+      "pci_severity_score": 5,
+      "pci_special_notes": "",
+      "pci_status": "fail",
+      "published": "2009-03-29T00:00:00Z",
+      "references": "http://www.example.com",
+      "risk_score": 898.76,
+      "severity": "critical",
+      "severity_score": 10,
+      "title": "7-Zip: CVE-1234-5678: Unspecified vulnerability in 7-zip before 4.5.7"
+    },
+    {
+      "added": "2018-05-16T00:00:00Z",
+      "categories": "7-Zip,Remote Execution",
+      "cves": "CVE-1234-5678",
+      "cvss_v2_access_complexity": "medium",
+      "cvss_v2_access_vector": "network",
+      "cvss_v2_authentication": "none",
+      "cvss_v2_availability_impact": "complete",
+      "cvss_v2_confidentiality_impact": "complete",
+      "cvss_v2_exploit_score": 8.588799953460693,
+      "cvss_v2_impact_score": 10.000845454680942,
+      "cvss_v2_integrity_impact": "complete",
+      "cvss_v2_score": 9.3,
+      "cvss_v2_vector": "(AV:N/AC:M/Au:N/C:C/I:C/A:C)",
+      "cvss_v3_attack_complexity": "low",
+      "cvss_v3_attack_vector": "local",
+      "cvss_v3_availability_impact": "high",
+      "cvss_v3_confidentiality_impact": "high",
+      "cvss_v3_exploit_score": 1.8345765900000002,
+      "cvss_v3_impact_score": 5.873118720000001,
+      "cvss_v3_integrity_impact": "high",
+      "cvss_v3_privileges_required": "none",
+      "cvss_v3_scope": "unchanged",
+      "cvss_v3_score": 7.8,
+      "cvss_v3_user_interaction": "required",
+      "cvss_v3_vector": "CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
+      "denial_of_service": false,
+      "description": "Heap-based buffer overflow in the NArchive::NHfs::CHandler::ExtractZlibFile method in 7zip before 16.00 and p7zip allows remote attackers to execute arbitrary code via a crafted HFS+ image.",
+      "exploits": [],
+      "id": "7-zip-cve-1234-5678",
+      "links": [
+        {
+          "href": "http://www.example.com",
+          "id": "http://www.example.com",
+          "source": "url"
+        }
+      ],
+      "malware_kits": [],
+      "modified": "2018-06-08T00:00:00Z",
+      "pci_cvss_score": 9.3,
+      "pci_fail": true,
+      "pci_severity_score": 5,
+      "pci_special_notes": "",
+      "pci_status": "fail",
+      "published": "2016-12-13T00:00:00Z",
+      "references": "http://www.example.com",
+      "risk_score": 718.8,
+      "severity": "critical",
+      "severity_score": 9,
+      "title": "7-Zip: CVE-1234-5678: Heap-based buffer overflow vulnerability"
+    }
+  ]
+}
+```
+
 #### Stop Scan
 
 This action is used to stop a scan in progress.
@@ -142,7 +283,7 @@ This action is used to search for assets using filtered asset search.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |asset_criteria|string|None|False|Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames|None|asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'|
-|size|number|200|False|The number of assets to retrieve. If blank then will default to 200 assets returned, the maximum limit is 500 assets|None|100|
+|size|integer|200|False|The number of assets to retrieve. If blank then will default to 200 assets returned, the maximum limit is 500 assets|None|100|
 |sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
 |vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|vulnerability.categories IN ['example']|
 
@@ -267,7 +408,7 @@ Example input:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |asset|asset|True|Asset details|
-|vulnerabilities|[]vulnerability|False|Vulnerabilities associated with the asset|
+|vulnerabilities|[]asset_vulnerability|False|Vulnerabilities associated with the asset|
 
 Example output:
 
@@ -1003,6 +1144,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.2.0 - Add vulnerability search action
 * 3.1.0 - Add Cloud enablement to plugin | Updated exception information and error handling | Made status code output for Stop Scan and Get Scan actions more exact | Fix bug relating to empty inputs being passed in request body
 * 3.0.0 - Changed output of Get Asset action to include vulnerabilities properly
 * 2.2.0 - Added ability to include vulnerabilities on Get Asset action | API call update
