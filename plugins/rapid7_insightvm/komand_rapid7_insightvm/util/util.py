@@ -91,3 +91,38 @@ def read_from_cache(filename):
         contents = cache_file.read()
 
         return contents
+
+
+def check_not_null(value):
+    if value is None:
+        value_name = [i for i, a in locals().items() if a == value][0]
+        raise PluginException(
+            cause=f"{value_name} has not been entered",
+            assistance=f"enter valid {value_name}"
+        )
+    else:
+        return value
+
+
+def check_in_enum(value: str, possible_enums: list):
+    if value.lower() not in possible_enums:
+        value_name = [i for i, a in locals().items() if a == value][0]
+        raise PluginException(
+            cause=f"{value_name} is not a valid input",
+            assistance=f"enter one of the following: {possible_enums}."
+        )
+
+
+def make_payload(account_input: dict, description: str, host_restriction: str, id_: int, name: str,
+                 port_restriction: int, site_assignment: str, sites: []):
+    payload = {
+        "account": account_input,
+        "description": description,
+        "hostRestriction": host_restriction,
+        "id": id_,
+        "name": name,
+        "portRestriction": port_restriction,
+        "siteAssignment": site_assignment,
+        "sites": sites
+    }
+    return payload
