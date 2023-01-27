@@ -1,11 +1,11 @@
 plugin_spec_version: v2
 extension: plugin
-products: [ insightconnect ]
+products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
 version: 4.3.1
-supported_versions: [ "Latest release successfully tested on 2022-07-20." ]
+supported_versions: ["Latest release successfully tested on 2022-07-20."]
 vendor: rapid7
 cloud_ready: true
 resources:
@@ -15,11 +15,11 @@ resources:
   docs_url: https://docs.rapid7.com/insightconnect/rapid7-insightidr
 tags: [ "IDR", "SIEM" ]
 support: rapid7
-status: [ ]
+status: []
 hub_tags:
-  use_cases: [ threat_detection_and_response ]
-  keywords: [ siem, rapid7, cloud_enabled ]
-  features: [ ]
+  use_cases: [threat_detection_and_response]
+  keywords: [siem, rapid7, cloud_enabled]
+  features: []
 types:
   investigation_metadata:
     index:
@@ -649,9 +649,9 @@ actions:
         default: CLOSED
         example: CLOSED
         enum:
-          - OPEN
-          - CLOSED
-          - EITHER
+        - OPEN
+        - CLOSED
+        - EITHER
       start_time:
         title: Start Time
         description: An optional ISO-formatted timestamp, where only investigations whose createTime is after this date will be returned
@@ -777,58 +777,58 @@ actions:
         type: investigation
         required: true
   search_investigations:
-    title: Search Investigations
-    description: Allows to search for investigations that match the given criteria
-    input:
-      search:
-        title: Search
-        description: The criteria for which entities to return
-        type: "[]object"
-        required: false
-        example: '[{"field": "Example Field", "operator": "EQUALS", "value": "Test"}]'
-      sort:
-        title: Sort
-        description: The sorting information, where possible field values are RRN, PRIORITY, CREATED TIME, and order values are ASC, DESC
-        type: "[]object"
-        required: false
-        example: '[{"field": "Example Field", "order": "ASC"}]'
-      start_time:
-        title: Start Time
-        description: The starting time from when investigations were created
-        type: date
-        required: false
-        example: 2020-09-06T12:07:55.1366667Z
-      end_time:
-        title: End Time
-        description: The ending time when investigations were created
-        type: date
-        required: false
-        example: 2020-09-06T12:07:55.1366667Z
-      size:
-        title: Size
-        description: Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100
-        type: integer
-        required: true
-        default: 100
-        example: 100
-      index:
-        title: Index
-        description: Zero-based index of the page to retrieve, where value must be greater than or equal to 0
-        type: integer
-        required: true
-        default: 0
-        example: 1
-    output:
-      investigations:
-        title: Investigations
-        description: A list of found investigations
-        type: "[]investigation"
-        required: true
-      metadata:
-        title: Metadata
-        description: The pagination parameters used to generate this page result
-        type: investigation_metadata
-        required: true
+      title: Search Investigations
+      description: Allows to search for investigations that match the given criteria
+      input:
+        search:
+          title: Search
+          description: The criteria for which entities to return
+          type: "[]object"
+          required: false
+          example: '[{"field": "Example Field", "operator": "EQUALS", "value": "Test"}]'
+        sort:
+          title: Sort
+          description: The sorting information, where possible field values are RRN, PRIORITY, CREATED TIME, and order values are ASC, DESC
+          type: "[]object"
+          required: false
+          example: '[{"field": "Example Field", "order": "ASC"}]'
+        start_time:
+          title: Start Time
+          description: The starting time from when investigations were created
+          type: date
+          required: false
+          example: 2020-09-06T12:07:55.1366667Z
+        end_time:
+          title: End Time
+          description: The ending time when investigations were created
+          type: date
+          required: false
+          example: 2020-09-06T12:07:55.1366667Z
+        size:
+          title: Size
+          description: Amount of data for a page to retrieve, where its value must be greater than 0 or less than or equal to 100
+          type: integer
+          required: true
+          default: 100
+          example: 100
+        index:
+          title: Index
+          description: Zero-based index of the page to retrieve, where value must be greater than or equal to 0
+          type: integer
+          required: true
+          default: 0
+          example: 1
+      output:
+        investigations:
+          title: Investigations
+          description: A list of found investigations
+          type: "[]investigation"
+          required: true
+        metadata:
+          title: Metadata
+          description: The pagination parameters used to generate this page result
+          type: investigation_metadata
+          required: true
   update_investigation:
     title: Update Investigation
     description: Allows to update existing investigation by ID or RRN
@@ -980,8 +980,8 @@ actions:
         default: CLOSED
         example: CLOSED
         enum:
-          - OPEN
-          - CLOSED
+        - OPEN
+        - CLOSED
     output:
       investigation:
         title: Investigation
@@ -1038,25 +1038,25 @@ actions:
         description: IP addresses to add. e.g. ["10.0.0.1","10.0.0.2"]
         type: "[]string"
         required: false
-        example: [ "10.0.0.1","10.0.0.2" ]
+        example: ["10.0.0.1","10.0.0.2"]
       hashes:
         title: Process Hashes
         description: Process hashes to add. e.g. ["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]
         type: "[]string"
         required: false
-        example: [ "A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F" ]
+        example: ["A94A8FE5CCB19BA61C4C0873D391E987982FBBD3","C3499C2729730A7F807EFB8676A92DCB6F8A3F8F"]
       domain_names:
         title: Domain Names
         description: Domain names to add. e.g. ["rapid7.com","google.com"]
         type: "[]string"
         required: false
-        example: [ "rapid7.com","google.com" ]
+        example: ["rapid7.com","google.com"]
       urls:
         title: URLs
         description: URLs to add. e.g. ["https://example.com","https://test.com"]
         type: "[]string"
         required: false
-        example: [ "https://example.com","https://test.com" ]
+        example: ["https://example.com","https://test.com"]
     output:
       rejected_indicators:
         title: Rejected Indicators
@@ -1378,7 +1378,7 @@ actions:
         description: Add indicators to new threat in InsightIDR. Accept IP addresses, process hashes (SHA1, MD5, SHA256), domain names, URLs
         type: '[]string'
         required: true
-        example: [ "example.com", "10.0.0.1" ]
+        example: ["example.com", "10.0.0.1"]
     output:
       rejected_indicators:
         title: Rejected Indicators
@@ -1471,7 +1471,7 @@ actions:
         description: An array of attachment RRNs to associate with the comment
         type: "[]string"
         required: false
-        example: [ "rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210" ]
+        example: ["rrn:collaboration:us:01234567-89ab-cdef-0000-123123123123:attachment:ABCDEF543210"]
     output:
       comment:
         title: Comment
