@@ -9,6 +9,47 @@ from ...util.resource_requests import ResourceRequests
 from ...util.util import check_not_null, check_in_enum, make_payload
 
 
+def as400_cifs_cvs(account: dict):
+    service = account.get("service")
+    domain = account.get("domain", "")
+    username = check_not_null(account.get("username"))
+    password = check_not_null(account.get("password"))
+    return {"service": service, "domain": domain, "username": username, "password": password}
+
+
+def cifs_hash(account: dict):
+    service = account.get("service")
+    domain = account.get("domain", "")
+    username = check_not_null(account.get("username"))
+    ntlm_hash = check_not_null(account.get("ntlm_hash"))
+    return {"service": "cifsHash", "domain": domain, "username": username, "ntlmHash": ntlm_hash}
+
+
+def ftp_pop_remote_exec_telnet(account: dict):
+    service = account.get("service")
+    username = check_not_null(account.get("username"))
+    password = check_not_null(account.get("password"))
+    return {"service": service, "username": username, "password": password}
+
+
+def snmp(account: dict):
+    community_name = check_not_null(account.get("community_name"))
+    return {"service": "snmp", "communityName": community_name}
+
+
+def ssh_key(account: dict):
+    username = check_not_null(account.get("username"))
+    private_key_password = check_not_null(account.get("private_key_password"))
+    pem_key = check_not_null(account.get("pem_key"))
+    permission_elevation = account.get("permission_elevation", "none")
+    check_in_enum(permission_elevation, ["none", "sudo", "sudosu", "su", "pbrun", "privileged-exec"])
+    permission_elevation_username = account.get("permission_elevation_username")
+    permission_elevation_password = account.get("permission_elevation_password")
+    return {"service": "sshKey", "username": username, "privateKeyPassword": private_key_password, "pemKey": pem_key,
+            "permissionElevation": permission_elevation, "permissionElevationUsername": permission_elevation_username,
+            "permissionElevationPassword": permission_elevation_password}
+
+
 class UpdateSharedCredential(insightconnect_plugin_runtime.Action):
 
     def __init__(self):
@@ -21,7 +62,7 @@ class UpdateSharedCredential(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
         endpoint = endpoints.Site.site_excluded_asset_groups(self.connection.console_url, params.get(Input.ID))
-
+        print(f"THis is the Endpoint: {endpoint}!!!!!!!!!!!!!!!!!!!!")
         account = params.get("account")
         # check that account is in a json format
         try:
@@ -31,7 +72,7 @@ class UpdateSharedCredential(insightconnect_plugin_runtime.Action):
 
         description = params.get("description", "")
         host_restriction = params.get("host_restriction", None)
-        id = params.get("id", None)
+        id_ = params.get("id", None)
         name = check_not_null(params.get("name"))
         port_restriction = params.get("port_restriction", None)
         site_assignment = params.get("site_assignment", "")
@@ -44,25 +85,23 @@ class UpdateSharedCredential(insightconnect_plugin_runtime.Action):
 
         account_input = {}
         service = check_not_null(account.get("service"))
-        if service in ("as400", "cifs", "cvs"):
-            domain = account.get("domain", "")
-            username = check_not_null(account.get("username"))
-            password = check_not_null(account.get("password"))
-            account_input = {"domain": domain, "username": username, "password": password}
-        elif service == "cifshash":
-            domain = account.get("domain", "")
-            username = check_not_null(account.get("username"))
-            ntlm_hash = check_not_null(account.get("ntlm_hash"))
-            account_input = {"domain": domain, "username": username, "ntlmHash": ntlm_hash}
-        elif service in ("db2", "mysql", "postgresql"):
+
+        service_dict = {"as400": as400_cifs_cvs(account), "cifs": as400_cifs_cvs(account),
+                        "cvs": as400_cifs_cvs(account), "cifs_hash": cifs_hash(account),
+                        "ftp": ftp_pop_remote_exec_telnet(account), "pop": ftp_pop_remote_exec_telnet(account),
+                        "remote-exec": ftp_pop_remote_exec_telnet(account),
+                        "telnet": ftp_pop_remote_exec_telnet(account),
+                        "sshKey": ssh_key(account)}
+        for x, y in service_dict.items():
+            if x == service:
+                account_input = y
+
+        if service in ("db2", "mysql", "postgresql"):
             database = account.get("database", "")
             username = check_not_null(account.get("username"))
             password = check_not_null(account.get("password"))
             account_input = {"database": database, "username": username, "password": password}
-        elif service in ("ftp", "pop", "remote-exec", "telnet"):
-            username = check_not_null(account.get("username"))
-            password = check_not_null(account.get("password"))
-            account_input = {"username": username, "password": password}
+
         elif service == "http":
             realm = account.get("realm", "")
             username = check_not_null(account.get("username"))
@@ -89,9 +128,6 @@ class UpdateSharedCredential(insightconnect_plugin_runtime.Action):
             oracle_listener_password = account.get("oracle_listener_password", "")
             account_input = {"sid": sid, "enumerateSids": enumerate_sids, "username": username, "password": password,
                              "oracleListenerPassword": oracle_listener_password}
-        elif service == "snmp":
-            community_name = check_not_null(account.get("community_name"))
-            account_input = {"communityName": community_name}
         elif service == "snmpv3":
             authentication_type = check_not_null(account.get("authentication_type"))
             check_in_enum(authentication_type, ["no-authentication", "md5", "sha"])
@@ -121,20 +157,7 @@ class UpdateSharedCredential(insightconnect_plugin_runtime.Action):
                              "permissionElevationUsername": permission_elevation_username,
                              "permissionElevationPassword": permission_elevation_password}
 
-        elif service == "ssh-key":
-            username = check_not_null(account.get("username"))
-            private_key_password = check_not_null(account.get("private_key_password"))
-            pem_key = check_not_null(account.get("pem_key"))
-            permission_elevation = account.get("permission_elevation", "none")
-            check_in_enum(permission_elevation, ["none", "sudo", "sudosu", "su", "pbrun", "privileged-exec"])
-            permission_elevation_username = account.get("permission_elevation_username")
-            permission_elevation_password = account.get("permission_elevation_password")
-            account_input = {"username": username, "privateKeyPassword": private_key_password, "pemKey": pem_key,
-                             "permissionElevation": permission_elevation,
-                             "permissionElevationUsername": permission_elevation_username,
-                             "permissionElevationPassword": permission_elevation_password}
-
-        payload = make_payload(account_input, description, host_restriction, id, name, port_restriction,
+        payload = make_payload(account_input, description, host_restriction, id_, name, port_restriction,
                                site_assignment, sites)
         response = resource_helper.resource_request(endpoint=endpoint, method="put", payload=payload)
 
