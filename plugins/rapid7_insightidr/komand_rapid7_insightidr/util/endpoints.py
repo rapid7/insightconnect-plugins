@@ -170,15 +170,16 @@ class Threats:
 
 class QueryLogs:
     @staticmethod
-    def get_query_logs(region_code: str, log_id: str) -> str:
+    def get_query_logs(region_code: str, log_id: str, most_recent_first: bool) -> str:
         """
         URI for adding get_query_logs
         :param region_code: The region code for the InsightIDR API to be mapped
         :param log_id: The ID of a log for which the indicators are going to be added
+        :param most_recent_first: Whether to order by most recent first:
         :return: pre-populated /query/logs/{log_id}
         """
 
-        return f"https://{Util.map_region(region_code)}.rest.logs.insight.rapid7.com/query/logs/{log_id}"
+        return f"https://{Util.map_region(region_code)}.rest.logs.insight.rapid7.com/query/logs/{log_id}?most_recent_first={most_recent_first}"
 
 
 class Queries:

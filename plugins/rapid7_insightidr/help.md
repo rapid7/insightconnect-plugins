@@ -1428,14 +1428,16 @@ This action is used to get query results for a LEQL query by query ID.
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+|----|----|-----|--------|----------|----|-------|
 |id|string|None|True|Query ID|None|174e4f99-2ac7-4481-9301-4d24c34baf06|
+ |most_recent_first|boolean|False|Order most recent first|None| true|
 
 Example input:
 
 ```
 {
-  "id": "174e4f99-2ac7-4481-9301-4d24c34baf06"
+  "id": "174e4f99-2ac7-4481-9301-4d24c34baf06",
+  "most_recent_first": true
 }
 ```
 
@@ -1732,6 +1734,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.3.1 - Add new parameter to Query : most_recent_first
 * 4.2.1 - `Create Investigation`, `Update Investigation`: Fix issue where action fails when email address field is not empty
 * 4.2.0 - New action added: Replace Indicators
 * 4.1.1 - Advanced Query on Log Set Action: Updated EndPoint Agent enum to Endpoint Agent in log_set
