@@ -97,8 +97,8 @@ def check_not_null(value):
     if value is None:
         value_name = [i for i, a in locals().items() if a == value][0]
         raise PluginException(
-            cause=f"{value_name} has not been entered",
-            assistance=f"enter valid {value_name}"
+            cause=f"{value_name} has not been entered.",
+            assistance=f"Enter valid {value_name}"
         )
     else:
         return value

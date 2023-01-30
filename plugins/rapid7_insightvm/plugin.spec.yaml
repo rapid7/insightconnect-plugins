@@ -1887,7 +1887,6 @@ types:
       description: The user name for the account that will be used for authenticating
       type: string
       required: false
-
 connection:
   url:
     title: URL

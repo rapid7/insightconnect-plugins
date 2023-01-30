@@ -1,6 +1,3 @@
-import json
-from json import JSONDecodeError
-
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import UpdateSharedCredentialInput, UpdateSharedCredentialOutput, Input, Output, Component
@@ -18,11 +15,18 @@ def as400_cifs_cvs(account: dict):
 
 
 def cifs_hash(account: dict):
-    service = account.get("service")
     domain = account.get("domain", "")
     username = check_not_null(account.get("username"))
     ntlm_hash = check_not_null(account.get("ntlm_hash"))
     return {"service": "cifsHash", "domain": domain, "username": username, "ntlmHash": ntlm_hash}
+
+
+def db2_mysql_postgresql(account: dict):
+    service = account.get("service")
+    database = account.get("database", "")
+    username = check_not_null(account.get("username"))
+    password = check_not_null(account.get("password"))
+    return {"service": service, "database": database, "username": username, "password": password}
 
 
 def ftp_pop_remote_exec_telnet(account: dict):
@@ -32,19 +36,91 @@ def ftp_pop_remote_exec_telnet(account: dict):
     return {"service": service, "username": username, "password": password}
 
 
+def http(account: dict):
+    realm = account.get("realm", "")
+    username = check_not_null(account.get("username"))
+    password = check_not_null(account.get("password"))
+    return {"service": "http", "realm": realm, "username": username, "password": password}
+
+
+def ms_sql_sybase(account: dict):
+    service = account.get("service")
+    database = account.get("database", "")
+    username = check_not_null(account.get("username"))
+    password = check_not_null(account.get("password"))
+    use_windows_authentication = account.get("use_windows_authentication", False)
+    if use_windows_authentication:
+        domain = check_not_null(account.get("domain"))
+        return {"service": service, "database": database, "domain": domain, "username": username, "password": password}
+    else:
+        return {"service": service, "database": database, "username": username, "password": password}
+
+
+def notes(account: dict):
+    notes_id_password = check_not_null(account.get("notes_id_password"))
+    return {"service": "notes", "notesIDPassword": notes_id_password}
+
+
+def oracle(account: dict):
+    sid = account.get("sid", "")
+    username = check_not_null(account.get("username"))
+    password = check_not_null(account.get("password"))
+    enumerate_sids = account.get("enumerate_sids", False)
+    oracle_listener_password = account.get("oracle_listener_password", "")
+    return {"service": "oracle", "sid": sid, "enumerateSids": enumerate_sids, "username": username,
+            "password": password, "oracleListenerPassword": oracle_listener_password}
+
+
 def snmp(account: dict):
     community_name = check_not_null(account.get("community_name"))
     return {"service": "snmp", "communityName": community_name}
+
+
+def snmpv3(account: dict):
+    authentication_type = check_not_null(account.get("authentication_type"))
+    check_in_enum(authentication_type, ["no-authentication", "md5", "sha"])
+    username = check_not_null(account.get("username"))
+    password = check_not_null(account.get("password"))
+    privacy_type = account.get("privacy_type", "")
+    if privacy_type != "":
+        check_in_enum(privacy_type, ["no-privacy", "des", "aes-128", "aes-192", "aes-192-with-3-des-key-extension",
+                                     "aes-256", "aes-265-with-3-des-key-extension"])
+    privacy_password = account.get("privacy_password", "")
+    if authentication_type == "no-authentication" and privacy_type == "no-privacy" and privacy_password == "":
+        raise PluginException(
+            cause="Privacy_password is required when authentication_type is no-authentication and privacy_type is no-privacy.",
+            assistance="Enter privacy_password"
+        )
+    return {"service": "snmpv3", "authenticationType": authentication_type, "privacyType": privacy_type,
+            "username": username, "password": password}
+
+
+def ssh_setup(account: dict, ):
+    permission_elevation = account.get("permission_elevation", "none")
+    check_in_enum(permission_elevation, ["none", "sudo", "sudosu", "su", "pbrun", "privileged-exec"])
+    if permission_elevation not in ("none", "pbrun"):
+        permission_elevation_username = account.get("permission_elevation_username")
+        permission_elevation_password = account.get("permission_elevation_password")
+    else:
+        permission_elevation_username = ""
+        permission_elevation_password = ""
+    return permission_elevation, permission_elevation_username, permission_elevation_password
+
+
+def ssh(account: dict):
+    username = check_not_null(account.get("username"))
+    password = check_not_null(account.get("password"))
+    permission_elevation, permission_elevation_username, permission_elevation_password = ssh_setup(account)
+    return {"service": "ssh", "username": username, "password": password, "permissionElevation": permission_elevation,
+            "permissionElevationUsername": permission_elevation_username,
+            "permissionElevationPassword": permission_elevation_password}
 
 
 def ssh_key(account: dict):
     username = check_not_null(account.get("username"))
     private_key_password = check_not_null(account.get("private_key_password"))
     pem_key = check_not_null(account.get("pem_key"))
-    permission_elevation = account.get("permission_elevation", "none")
-    check_in_enum(permission_elevation, ["none", "sudo", "sudosu", "su", "pbrun", "privileged-exec"])
-    permission_elevation_username = account.get("permission_elevation_username")
-    permission_elevation_password = account.get("permission_elevation_password")
+    permission_elevation, permission_elevation_username, permission_elevation_password = ssh_setup(account)
     return {"service": "sshKey", "username": username, "privateKeyPassword": private_key_password, "pemKey": pem_key,
             "permissionElevation": permission_elevation, "permissionElevationUsername": permission_elevation_username,
             "permissionElevationPassword": permission_elevation_password}
@@ -61,101 +137,32 @@ class UpdateSharedCredential(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         resource_helper = ResourceRequests(self.connection.session, self.logger)
-        endpoint = endpoints.Site.site_excluded_asset_groups(self.connection.console_url, params.get(Input.ID))
-        print(f"THis is the Endpoint: {endpoint}!!!!!!!!!!!!!!!!!!!!")
+        endpoint = endpoints.SharedCredential.update_shared_credential(self.connection.console_url,
+                                                                       params.get(Input.ID))
         account = params.get("account")
-        # check that account is in a json format
-        try:
-            account = json.loads(account)
-        except JSONDecodeError:
-            print("Please confirm that the account input is in a correct json format")
-
         description = params.get("description", "")
-        host_restriction = params.get("host_restriction", None)
-        id_ = params.get("id", None)
+        host_restriction = params.get("host_restriction", "")
+        id_ = check_not_null(params.get("id"))
         name = check_not_null(params.get("name"))
-        port_restriction = params.get("port_restriction", None)
-        site_assignment = params.get("site_assignment", "")
+        port_restriction = params.get("port_restriction", "")
+        site_assignment = check_not_null(params.get("site_assignment"))
         check_in_enum(site_assignment, ["all-sites", "specific-sites"])
 
-        if site_assignment is "all-sites":
+        if site_assignment == "all-sites":
             sites = None
         else:
             sites = check_not_null(params.get("sites"))
 
-        account_input = {}
         service = check_not_null(account.get("service"))
 
-        service_dict = {"as400": as400_cifs_cvs(account), "cifs": as400_cifs_cvs(account),
-                        "cvs": as400_cifs_cvs(account), "cifs_hash": cifs_hash(account),
-                        "ftp": ftp_pop_remote_exec_telnet(account), "pop": ftp_pop_remote_exec_telnet(account),
-                        "remote-exec": ftp_pop_remote_exec_telnet(account),
-                        "telnet": ftp_pop_remote_exec_telnet(account),
-                        "sshKey": ssh_key(account)}
-        for x, y in service_dict.items():
-            if x == service:
-                account_input = y
+        service_dict = {"as400": as400_cifs_cvs, "cifs": as400_cifs_cvs, "cvs": as400_cifs_cvs, "cifs_hash": cifs_hash,
+                        "ftp": ftp_pop_remote_exec_telnet, "pop": ftp_pop_remote_exec_telnet,
+                        "db2": db2_mysql_postgresql, "mysql": db2_mysql_postgresql, "postgresql": db2_mysql_postgresql,
+                        "remote-exec": ftp_pop_remote_exec_telnet, "telnet": ftp_pop_remote_exec_telnet, "snmp": snmp,
+                        "http": http, "ms-sql": ms_sql_sybase, "sybase": ms_sql_sybase, "notes": notes,
+                        "snmpv3": snmpv3, "ssh": ssh, "sshKey": ssh_key}
 
-        if service in ("db2", "mysql", "postgresql"):
-            database = account.get("database", "")
-            username = check_not_null(account.get("username"))
-            password = check_not_null(account.get("password"))
-            account_input = {"database": database, "username": username, "password": password}
-
-        elif service == "http":
-            realm = account.get("realm", "")
-            username = check_not_null(account.get("username"))
-            password = check_not_null(account.get("password"))
-            account_input = {"realm": realm, "username": username, "password": password}
-        elif service in ("ms-sql", "sybase"):
-            database = account.get("database", "")
-            username = check_not_null(account.get("username"))
-            password = check_not_null(account.get("password"))
-            use_windows_authentication = account.get("use_windows_authentication", False)
-            if use_windows_authentication is True:
-                domain = check_not_null(account.get("domain"))
-                account_input = {"database": database, "domain": domain, "username": username, "password": password}
-            else:
-                account_input = {"database": database, "username": username, "password": password}
-        elif service == "notes":
-            notes_id_password = check_not_null(account.get("notes_id_password"))
-            account_input = {"notesIDPassword": notes_id_password}
-        elif service == "oracle":
-            sid = account.get("sid", "")
-            username = check_not_null(account.get("username"))
-            password = check_not_null(account.get("password"))
-            enumerate_sids = account.get("enumerate_sids", False)
-            oracle_listener_password = account.get("oracle_listener_password", "")
-            account_input = {"sid": sid, "enumerateSids": enumerate_sids, "username": username, "password": password,
-                             "oracleListenerPassword": oracle_listener_password}
-        elif service == "snmpv3":
-            authentication_type = check_not_null(account.get("authentication_type"))
-            check_in_enum(authentication_type, ["no-authentication", "md5", "sha"])
-            username = check_not_null(account.get("username"))
-            password = check_not_null(account.get("password"))
-            privacy_type = account.get("privacy_type", "")
-            if privacy_type not in ("", None):
-                check_in_enum(privacy_type,
-                              ["no-privacy", "des", "aes-128", "aes-192", "aes-192-with-3-des-key-extension",
-                               "aes-256", "aes-265-with-3-des-key-extension"])
-            privacy_password = account.get("privacy_password", "")
-            if authentication_type is "no-authentication" and privacy_type is "no-privacy" and privacy_password is "":
-                raise PluginException(
-                    cause="privacy_password is required when authentication_type is no-authentication and privacy_type is no-privacy",
-                    assistance="enter privacy_password"
-                )
-            account_input = {"authenticationType": authentication_type, "privacyType": privacy_type,
-                             "username": username, "password": password}
-        elif service == "ssh":
-            username = check_not_null(account.get("username"))
-            password = check_not_null(account.get("password"))
-            permission_elevation = account.get("permission_elevation", "none")
-            check_in_enum(permission_elevation, ["none", "sudo", "sudosu", "su", "pbrun", "privileged-exec"])
-            permission_elevation_username = account.get("permission_elevation_username")
-            permission_elevation_password = account.get("permission_elevation_password")
-            account_input = {"username": username, "password": password, "permissionElevation": permission_elevation,
-                             "permissionElevationUsername": permission_elevation_username,
-                             "permissionElevationPassword": permission_elevation_password}
+        account_input = service_dict[service](account)
 
         payload = make_payload(account_input, description, host_restriction, id_, name, port_restriction,
                                site_assignment, sites)
