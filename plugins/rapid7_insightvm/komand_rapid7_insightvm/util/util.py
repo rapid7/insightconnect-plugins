@@ -93,12 +93,12 @@ def read_from_cache(filename):
         return contents
 
 
-def check_not_null(value):
-    if value is None:
-        value_name = [i for i, a in locals().items() if a == value][0]
+def check_not_null(account: dict, var_name):
+    value = account.get(var_name)
+    if value in (None, ""):
         raise PluginException(
-            cause=f"{value_name} has not been entered.",
-            assistance=f"Enter valid {value_name}"
+            cause=f"{var_name} has not been entered.",
+            assistance=f"Enter valid {var_name}"
         )
     else:
         return value
