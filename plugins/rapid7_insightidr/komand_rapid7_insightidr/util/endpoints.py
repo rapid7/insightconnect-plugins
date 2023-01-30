@@ -179,7 +179,7 @@ class QueryLogs:
         :return: pre-populated /query/logs/{log_id}
         """
 
-        return f"https://{Util.map_region(region_code)}.rest.logs.insight.rapid7.com/query/logs/{log_id}?most_recent_first={most_recent_first}"
+        return f"https://{Util.map_region(region_code)}.rest.logs.insight.rapid7.com/query/logs/{log_id}"
 
 
 class Queries:
