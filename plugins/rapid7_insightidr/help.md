@@ -1430,7 +1430,7 @@ This action is used to get query results for a LEQL query by query ID.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-----|--------|----------|----|-------|
 |id|string|None|True|Query ID|None|174e4f99-2ac7-4481-9301-4d24c34baf06|
- |most_recent_first|boolean|False|Order most recent first|None| true|
+|most_recent_first|boolean|False|Order most recent first|None| true|
 
 Example input:
 
@@ -1734,7 +1734,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 4.3.1 - Add new parameter to Query : most_recent_first
+* 4.3.0 - `Query`: Add new parameter `most_recent_first`
 * 4.2.1 - `Create Investigation`, `Update Investigation`: Fix issue where action fails when email address field is not empty
 * 4.2.0 - New action added: Replace Indicators
 * 4.1.1 - Advanced Query on Log Set Action: Updated EndPoint Agent enum to Endpoint Agent in log_set

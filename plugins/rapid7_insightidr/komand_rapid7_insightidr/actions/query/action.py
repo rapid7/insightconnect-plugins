@@ -19,23 +19,28 @@ class Query(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        most_recent_first = params.get(Input.MOST_RECENT_FIRST)
         time_now = int(time.time())
         request = ResourceHelper(self.connection.session, self.logger)
         # 7776000 - is for three months from now.
         # It is here because InsightDR keep logs for three months in hot storage
         three_months_seconds = 7776000
-        request_params = {"from": (time_now - three_months_seconds) * 1000, "to": time_now * 1000}
+        request_params = {"from": (time_now - three_months_seconds) * 1000, "to": time_now * 1000,
+                          "most_recent_first": most_recent_first}
+        print(f"\nREQUEST PARAMS: {request_params}\n")
         response = request.resource_request(
-            QueryLogs.get_query_logs(self.connection.region, params.get(Input.ID), params.get(Input.MOST_RECENT_FIRST)),
+            QueryLogs.get_query_logs(self.connection.region, params.get(Input.ID)),
             "get",
             params=request_params,
         )
+        print(f"\nRESPONSE: {response}\n")
 
         try:
             result = json.loads(response["resource"])
             if response["status"] == 202:
                 response = request.resource_request(result["links"][0]["href"], "get", params=request_params)
                 result = json.loads(response["resource"])
+                print(f"\nRESULT: {result}\n")
         except (json.decoder.JSONDecodeError, IndexError, KeyError):
             self.logger.error(f"InsightIDR response: {response}")
             raise PluginException(
