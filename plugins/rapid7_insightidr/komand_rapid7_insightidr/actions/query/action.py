@@ -22,10 +22,18 @@ class Query(insightconnect_plugin_runtime.Action):
         most_recent_first = params.get(Input.MOST_RECENT_FIRST)
         time_now = int(time.time())
         request = ResourceHelper(self.connection.session, self.logger)
+
         # 7776000 - is for three months from now.
         # It is here because InsightDR keep logs for three months in hot storage
         three_months_seconds = 7776000
-        request_params = {"from": (time_now - three_months_seconds) * 1000, "to": time_now * 1000,
+        # The way data indexing works changed on the 24/11/2022.
+        # For any search with most_recent_first=true 'from' must not be older than 24/11/2022
+        twenty_fourth_november = 1669248000
+        if (time_now - three_months_seconds) > twenty_fourth_november:
+            from_var = (time_now - three_months_seconds)
+        else:
+            from_var = twenty_fourth_november
+        request_params = {"from": from_var * 1000, "to": time_now * 1000,
                           "most_recent_first": most_recent_first}
         print(f"\nREQUEST PARAMS: {request_params}\n")
         response = request.resource_request(
@@ -33,14 +41,12 @@ class Query(insightconnect_plugin_runtime.Action):
             "get",
             params=request_params,
         )
-        print(f"\nRESPONSE: {response}\n")
 
         try:
             result = json.loads(response["resource"])
             if response["status"] == 202:
                 response = request.resource_request(result["links"][0]["href"], "get", params=request_params)
                 result = json.loads(response["resource"])
-                print(f"\nRESULT: {result}\n")
         except (json.decoder.JSONDecodeError, IndexError, KeyError):
             self.logger.error(f"InsightIDR response: {response}")
             raise PluginException(
