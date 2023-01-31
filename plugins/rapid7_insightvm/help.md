@@ -80,7 +80,7 @@ Example input:
     "privacyType": "",
     "privateKeyPassword": "",
     "realm": "",
-    "service": "",
+    "service": "cvs",
     "sid": "",
     "useWindowsAuthentication": false,
     "username": "username"
@@ -93,6 +93,18 @@ Example input:
 |----|----|--------|-----------|
 |links|[]link|False|Hypermedia links to corresponding or related resources|
 
+Example output:
+
+```
+{
+  "links": [
+    {
+      "href": "https://hostname:3780/api/3/...",
+      "rel": "self"
+    }
+  ]
+}
+```
 
 #### Get Asset Vulnerability Solutions
 

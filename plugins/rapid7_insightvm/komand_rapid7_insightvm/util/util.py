@@ -4,6 +4,7 @@ import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 import time
 from dateutil.parser import parse
+from typing import Union
 
 
 def convert_date_to_iso8601(date: str) -> str:
@@ -93,7 +94,13 @@ def read_from_cache(filename):
         return contents
 
 
-def check_not_null(account: dict, var_name):
+def check_not_null(account: dict, var_name: str) -> Union[str, PluginException]:
+    """
+    Checks that a required value is inputted
+    :param account: user input
+    :param var_name: name of variable we check
+    :return: value or PluginException
+    """
     value = account.get(var_name)
     if value in (None, ""):
         raise PluginException(
@@ -104,17 +111,16 @@ def check_not_null(account: dict, var_name):
         return value
 
 
-def check_in_enum(value: str, possible_enums: list):
+def check_in_enum(value: str, var_name: str, possible_enums: list) -> None:
     if value.lower() not in possible_enums:
-        value_name = [i for i, a in locals().items() if a == value][0]
         raise PluginException(
-            cause=f"{value_name} is not a valid input",
+            cause=f"{var_name} is not a valid input",
             assistance=f"enter one of the following: {possible_enums}."
         )
 
 
 def make_payload(account_input: dict, description: str, host_restriction: str, id_: int, name: str,
-                 port_restriction: int, site_assignment: str, sites: []):
+                 port_restriction: int, site_assignment: str, sites: []) -> dict:
     payload = {
         "account": account_input,
         "description": description,
