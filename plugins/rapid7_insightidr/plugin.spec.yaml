@@ -1109,6 +1109,7 @@ actions:
         title: Most Recent First
         description: Order most recent first
         type: boolean
+        example: true
         required: false
     output:
       events:
