@@ -1419,7 +1419,7 @@ Example output:
   ],
   "num_closed": 1
 }
-``
+```
 
 #### Get Query Results
 
