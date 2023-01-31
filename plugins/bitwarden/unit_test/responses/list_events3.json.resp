@@ -1,0 +1,19 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "object": "event",
+      "type": 1100,
+      "itemId": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "collectionId": null,
+      "groupId": null,
+      "policyId": null,
+      "memberId": null,
+      "actingUserId": "539a36c5-e0d2-4cf9-979e-51ecf5cf6593",
+      "installationId": null,
+      "date": "2023-01-16T11:59:07.6144531Z",
+      "device": 9,
+      "ipAddress": "198.51.100.1"
+    }
+  ]
+}

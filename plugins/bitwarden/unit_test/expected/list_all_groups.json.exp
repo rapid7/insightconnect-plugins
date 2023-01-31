@@ -1,0 +1,16 @@
+{
+  "groups": [
+    {
+      "object": "group",
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Test Group 1",
+      "accessAll": false
+    },
+    {
+      "object": "group",
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Test Group 2",
+      "accessAll": true
+    }
+  ]
+}
