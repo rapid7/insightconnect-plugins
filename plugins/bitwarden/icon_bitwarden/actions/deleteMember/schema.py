@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Permanently deletes a member from the organization. This cannot be undone. The user account will still remain. The user is only removed from the organization"
+    DESCRIPTION = "Permanently delete a member from the organization. This cannot be undone. The user account will still remain. The user is only removed from the organization"
 
 
 class Input:

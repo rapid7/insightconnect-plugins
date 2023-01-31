@@ -3,6 +3,7 @@ from .schema import ConnectionSchema, Input
 
 # Custom imports below
 from icon_bitwarden.util.api import BitwardenAPI
+from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 
 
 class Connection(insightconnect_plugin_runtime.Connection):

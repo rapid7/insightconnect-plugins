@@ -1,4 +1,4 @@
-TOKEN_ENDPOINT = "https://identity.bitwarden.com/connect/token"
+TOKEN_ENDPOINT = "https://identity.bitwarden.com/connect/token"  # nosec B105
 
 BASE_URL = "https://api.bitwarden.com"
 

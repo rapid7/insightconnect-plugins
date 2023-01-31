@@ -215,7 +215,7 @@ Example output:
 
 #### Delete a Member
 
-This action is used to permanently deletes a member from the organization. This cannot be undone. The user account will still remain. The user is only removed from the organization.
+This action is used to permanently delete a member from the organization. This cannot be undone. The user account will still remain. The user is only removed from the organization.
 
 ##### Input
 
@@ -478,11 +478,10 @@ Example input:
 
 ```
 {
-  "accessAll": true,
-  "collections": [],
-  "externalId": "external_id_123456",
-  "id": "539a36c5-e0d2-4cf9-979e-51ecf5cf6593",
-  "type": "0-Owner"
+  "groupIds": [
+    "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  ],
+  "id": "539a36c5-e0d2-4cf9-979e-51ecf5cf6593"
 }
 ```
 

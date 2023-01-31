@@ -312,7 +312,7 @@ actions:
         example: {}
   deleteMember:
     title: Delete a Member
-    description: Permanently deletes a member from the organization. This cannot be undone. The user account will still remain. The user is only removed from the organization
+    description: Permanently delete a member from the organization. This cannot be undone. The user account will still remain. The user is only removed from the organization
     input:
       id:
         title: Id
