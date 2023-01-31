@@ -1,0 +1,6 @@
+{
+  "fields": "id,groupName",
+  "pageSize": 10,
+  "query": "groupName=='Test Group'",
+  "start": 0
+}

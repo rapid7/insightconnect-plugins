@@ -1,0 +1,127 @@
+{
+  "incident": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "status": "secondLine",
+    "number": "I 2301 111",
+    "request": "27-01-2023 18:10 [GMT +0:00] Example Operator: \nExample request\n\n25-01-2023 14:40 [GMT +0:00] Example Operator: \nTest request",
+    "requests": "/tas/api/incidents/id/44d88612-fea8-a8f3-6de8-2e1278abb02f/requests",
+    "action": "/tas/api/incidents/id/44d88612-fea8-a8f3-6de8-2e1278abb02f/actions",
+    "attachments": "/tas/api/incidents/id/44d88612-fea8-a8f3-6de8-2e1278abb02f/attachments",
+    "caller": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "dynamicName": "Example User",
+      "phoneNumber": "2222222",
+      "mobileNumber": "1111111",
+      "email": "user@example.com",
+      "branch": {
+        "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+        "name": "Example branch",
+        "timeZone": "Europe/Berlin"
+      }
+    },
+    "callerBranch": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Example branch",
+      "timeZone": "Europe/Berlin"
+    },
+    "callerLocation": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Example location"
+    },
+    "briefDescription": "Brief description",
+    "externalNumber": "1234567",
+    "category": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Hardware"
+    },
+    "subcategory": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Monitor"
+    },
+    "callType": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Failure"
+    },
+    "entryType": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Chat"
+    },
+    "object": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "OBJ001"
+    },
+    "asset": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f"
+    },
+    "impact": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Person"
+    },
+    "urgency": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Low"
+    },
+    "priority": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "P1"
+    },
+    "duration": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "30 minutes"
+    },
+    "targetDate": "2023-02-10T12:00:00.000+0000",
+    "onHold": false,
+    "operator": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "status": "operator",
+      "name": "Example Operator"
+    },
+    "operatorGroup": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Application management"
+    },
+    "supplier": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "DELL",
+      "forFirstLine": true,
+      "forSecondLine": true
+    },
+    "processingStatus": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Registered"
+    },
+    "responded": false,
+    "completed": false,
+    "closed": false,
+    "costs": 249.9900,
+    "callDate": "2023-01-24T12:00:00.000+0000",
+    "creator": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Example Operator"
+    },
+    "creationDate": "2023-01-25T14:40:46.000+0000",
+    "modifier": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Example Operator"
+    },
+    "modificationDate": "2023-01-27T18:37:16.000+0000",
+    "majorCall": true,
+    "publishToSsd": false,
+    "monitored": false,
+    "expectedTimeSpent": 120,
+    "optionalFields1": {
+      "boolean1": false,
+      "boolean2": false,
+      "boolean3": false,
+      "boolean4": false,
+      "boolean5": false
+    },
+    "optionalFields2": {
+      "boolean1": false,
+      "boolean2": false,
+      "boolean3": false,
+      "boolean4": false,
+      "boolean5": false
+    }
+  }
+}

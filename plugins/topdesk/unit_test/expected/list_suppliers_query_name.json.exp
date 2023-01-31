@@ -1,0 +1,13 @@
+{
+  "suppliers": [
+    {
+      "id": "acdbfe31-9aa0-42ab-9fbf-46f39c54beae",
+      "name": "Name 9",
+      "forFirstLine": false,
+      "forSecondLine": false,
+      "forService": false,
+      "forOperationalActivity": false,
+      "forChangeManagement": false
+    }
+  ]
+}
