@@ -49,11 +49,11 @@ This action is used to update shared credentials.
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|account|account|None|True|Specify the type of service to authenticate as well as all of the information required by that service|None|None|
+|----|----|-------|--------|-----------|----|---|
+|account|account|None|True|Specify the type of service to authenticate as well as all of the information required by that service|None|{ "authentication_type": "no-authentication", "community_name": "rapid community", "database": "rapid7_database", "domain": "rapid7.com", "enumerate_sids": false, "notes_id_password": "notes_id_password", "ntlm_hash": "86956E15C7F452086BEEB6BB005E0388", "oracle_listener_password": "oracle_listener_password", "password": "password", "pem_key": "-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEA3Tz2mr7SZiAMfQyuvBj...", "permission_elevation": "sudo", "permission_elevation_password": "permission_elevation_password", "permission_elevation_username": "permission_elevation_username", "privacy_password": "privacy_password", "privacy_type": "no-privacy", "private_key_password": "private_key_password", "realm": "realm0", "service": "telnet", "sid": "rapid7_database2", "use_windows_authentication": false, "username": "username" }|
 |description|string|None|False|The description of the credential|None|credentials for as400|
 |host_restriction|string|None|False|The host name or IP address that you want to restrict the credentials to|None|my-macbook-name|
-|id|integer|None|False|The identifier of the credential|None|12345678|
+|id|integer|None|False|The identifier of the credential|None|123|
 |name|string|None|True|The name of the credential|None|my-AS400-credentials|
 |port_restriction|string|None|False|Further restricts the credential to attempt to authenticate on a specific port. The port can only be restricted if the property hostRestriction is specified|None|8888|
 |site_assignment|string|None|True|Assigns the shared scan credential either to be available to all sites or to a specific list of sites. All sites - The shared scan credential is assigned to all current and future sites. specific-sites - The shared scan credential is assigned to zero sites by default. Administrators must explicitly assign sites to the shared credential. Shared scan credentials assigned to a site can disabled within the site configuration, if needed|['all-sites', 'specific-sites']|all-sites|
@@ -63,26 +63,26 @@ Example input:
 
 ```
 {
-    "authenticationType": "",
-    "communityName": "",
-    "database": "",
+    "authentication_type": "no-authentication",
+    "community_name": "rapid community",
+    "database": "rapid7_database",
     "domain": "rapid7.com",
-    "enumerateSids": false,
-    "notesIDPassword": "",
-    "ntlmHash": "",
-    "oracleListenerPassword": "",
+    "enumerate_sids": false,
+    "notes_id_password": "notes_id_password",
+    "ntlm_hash": "86956E15C7F452086BEEB6BB005E0388",
+    "oracle_listener_password": "oracle_listener_password",
     "password": "password",
-    "pemKey": "",
-    "permissionElevation": "",
-    "permissionElevationPassword": "",
-    "permissionElevationUserName": "",
-    "privacyPassword": "",
-    "privacyType": "",
-    "privateKeyPassword": "",
-    "realm": "",
-    "service": "cvs",
-    "sid": "",
-    "useWindowsAuthentication": false,
+    "pem_key": "-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEA3Tz2mr7SZiAMfQyuvBj...",
+    "permission_elevation": "sudo",
+    "permission_elevation_password": "permission_elevation_password",
+    "permission_elevation_username": "permission_elevation_username",
+    "privacy_password": "privacy_password",
+    "privacy_type": "no-privacy",
+    "private_key_password": "private_key_password",
+    "realm": "realm0",
+    "service": "telnet",
+    "sid": "rapid7_database2",
+    "use_windows_authentication": false,
     "username": "username"
 }
 ```

@@ -15,7 +15,7 @@ def ssh_setup(account: dict) -> tuple[str, str, str]:
         permission_elevation_password = check_not_null(account, "permission_elevation_password")
     else:
         permission_elevation_username = ""
-        permission_elevation_password = "" # nosec
+        permission_elevation_password = ""  # nosec
     return permission_elevation, permission_elevation_username, permission_elevation_password
 
 
@@ -118,7 +118,7 @@ def snmpv3(account: dict, service: str) -> dict:
             ],
         )
     privacy_password = account.get("privacy_password", "")
-    if authentication_type == "no-authentication" and privacy_type == "no-privacy" and privacy_password == "": # nosec
+    if authentication_type == "no-authentication" and privacy_type == "no-privacy" and privacy_password == "":  # nosec
         raise PluginException(
             cause="Privacy_password is required when authentication_type is no-authentication and privacy_type is no-privacy.",
             assistance="Enter privacy_password",

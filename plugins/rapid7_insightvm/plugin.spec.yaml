@@ -4217,25 +4217,25 @@ actions:
         type: account
         required: true
         example: {
-          "authentication_type": "",
-          "community_name": "",
-          "database": "",
+          "authentication_type": "no-authentication",
+          "community_name": "rapid community",
+          "database": "rapid7_database",
           "domain": "rapid7.com",
           "enumerate_sids": false,
-          "notes_id_password": "",
-          "ntlm_hash": "",
-          "oracle_listener_password": "",
+          "notes_id_password": "notes_id_password",
+          "ntlm_hash": "86956E15C7F452086BEEB6BB005E0388",
+          "oracle_listener_password": "oracle_listener_password",
           "password": "password",
-          "pem_key": "",
-          "permission-elevation": "",
-          "permission-elevation_password": "",
-          "permission-elevation_username": "",
-          "privacy_password": "",
-          "privacy_type": "",
-          "private_key_password": "",
-          "realm": "",
+          "pem_key": "-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEA3Tz2mr7SZiAMfQyuvBj...",
+          "permission_elevation": "sudo",
+          "permission_elevation_password": "permission_elevation_password",
+          "permission_elevation_username": "permission_elevation_username",
+          "privacy_password": "privacy_password",
+          "privacy_type": "no-privacy",
+          "private_key_password": "private_key_password",
+          "realm": "realm0",
           "service": "telnet",
-          "sid": "",
+          "sid": "rapid7_database2",
           "use_windows_authentication": false,
           "username": "username"
         }
@@ -4256,7 +4256,7 @@ actions:
         description: The identifier of the credential
         type: integer
         required: false
-        example: 12345678 # check
+        example: 123
       name:
         title: Name
         description: The name of the credential
