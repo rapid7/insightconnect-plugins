@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import AssignIncidentInput, AssignIncidentOutput
 
 # Custom imports below
 
 
-class AssignIncident(komand.Action):
+class AssignIncident(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="assign_incident",
