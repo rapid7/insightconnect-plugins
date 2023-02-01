@@ -1,9 +1,11 @@
+from typing import Union
+
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from komand_rapid7_insightvm.util.util import check_in_enum, check_not_null
 
 
-def ssh_setup(account: dict):
+def ssh_setup(account: dict) -> tuple[str, str, str]:
     permission_elevation = account.get("permission_elevation", "none")
     check_in_enum(permission_elevation, "permission_elevation",
                   ["none", "sudo", "sudosu", "su", "pbrun", "privileged-exec"])
@@ -26,7 +28,7 @@ def as400_cifs_cvs(account: dict, service: str) -> dict:
     return {"service": service, "domain": domain, "username": username, "password": password}
 
 
-def cifs_hash(account: dict, service: str) -> dict:
+def cifshash(account: dict, service: str) -> dict:
     domain = account.get("domain", "")
     username = check_not_null(account, "username")
     ntlm_hash = check_not_null(account, "ntlm_hash")
@@ -50,7 +52,7 @@ def http(account: dict, service: str) -> dict:
     return {"service": service, "realm": realm, "username": username, "password": password}
 
 
-def ms_sql_sybase(account: dict, service: str) -> dict:
+def ms_sql_sybase(account: dict, service: str) -> Union[dict, dict]:
     database = account.get("database", "")
     username, password = usr_and_pass(account)
     use_windows_authentication = account.get("use_windows_authentication", False)
@@ -70,9 +72,13 @@ def oracle(account: dict, service: str) -> dict:
     sid = account.get("sid", "")
     username, password = usr_and_pass(account)
     enumerate_sids = account.get("enumerate_sids", False)
-    oracle_listener_password = account.get("oracle_listener_password", "")
-    return {"service": service, "sid": sid, "enumerateSids": enumerate_sids, "username": username,
-            "password": password, "oracleListenerPassword": oracle_listener_password}
+    if enumerate_sids:
+        oracle_listener_password = account.get("oracle_listener_password", "")
+        return {"service": service, "sid": sid, "enumerateSids": enumerate_sids, "username": username,
+                "password": password, "oracleListenerPassword": oracle_listener_password}
+    else:
+        return {"service": service, "sid": sid, "enumerateSids": enumerate_sids, "username": username,
+                "password": password, }
 
 
 def snmp(account: dict, service: str) -> dict:

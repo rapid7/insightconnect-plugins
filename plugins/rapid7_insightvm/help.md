@@ -1,4 +1,4 @@
- # Description
+# Description
 
 Automate your vulnerability management operations with the combined power of [InsightVM](https://www.rapid7.com/products/insightvm/) and InsightConnect by using this plugin. Simplify getting data in and data out of InsightVM. As a Security Admin your time is valuable - save time by orchestrating site administration, user management, asset tagging, asset scanning and much much more!
 

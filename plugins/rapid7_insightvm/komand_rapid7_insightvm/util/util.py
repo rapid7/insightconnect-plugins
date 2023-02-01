@@ -112,10 +112,17 @@ def check_not_null(account: dict, var_name: str) -> Union[str, PluginException]:
 
 
 def check_in_enum(value: str, var_name: str, possible_enums: list) -> None:
+    """
+    Checks that value is one of the enums
+    :param value: user input
+    :param var_name: name of variable we check
+    :param possible_enums: list of all the valid enums
+    :return: value or PluginException
+    """
     if value.lower() not in possible_enums:
         raise PluginException(
-            cause=f"{var_name} is not a valid input",
-            assistance=f"enter one of the following: {possible_enums}."
+            cause=f"{var_name} is not a valid input.",
+            assistance=f"Enter one of the following: {possible_enums}."
         )
 
 

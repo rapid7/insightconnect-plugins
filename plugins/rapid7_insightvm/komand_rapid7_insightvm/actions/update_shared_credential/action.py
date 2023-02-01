@@ -33,12 +33,12 @@ class UpdateSharedCredential(insightconnect_plugin_runtime.Action):
             sites = check_not_null(params, "sites")
 
         service = check_not_null(account, "service")
-        service_dict = {"as400": as400_cifs_cvs, "cifs": as400_cifs_cvs, "cvs": as400_cifs_cvs, "cifs_hash": cifs_hash,
-                        "ftp": ftp_pop_remote_exec_telnet, "pop": ftp_pop_remote_exec_telnet,
+        service_dict = {"as400": as400_cifs_cvs, "cifs": as400_cifs_cvs, "cvs": as400_cifs_cvs, "cifshash": cifshash,
+                        "ftp": ftp_pop_remote_exec_telnet, "pop": ftp_pop_remote_exec_telnet, "oracle": oracle,
                         "db2": db2_mysql_postgresql, "mysql": db2_mysql_postgresql, "postgresql": db2_mysql_postgresql,
                         "remote-exec": ftp_pop_remote_exec_telnet, "telnet": ftp_pop_remote_exec_telnet, "snmp": snmp,
                         "http": http, "ms-sql": ms_sql_sybase, "sybase": ms_sql_sybase, "notes": notes,
-                        "snmpv3": snmpv3, "ssh": ssh, "sshKey": ssh_key}
+                        "snmpv3": snmpv3, "ssh": ssh, "ssh-key": ssh_key}
 
         account_input = service_dict[service](account, service)
         payload = make_payload(account_input, description, host_restriction, id_, name, port_restriction,
