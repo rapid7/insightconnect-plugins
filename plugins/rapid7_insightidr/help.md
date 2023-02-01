@@ -1429,8 +1429,8 @@ This action is used to get query results for a LEQL query by query ID.
 
 |Name|Type| Default |Required| Description |Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string| None  |True| Query ID  |None|174e4f99-2ac7-4481-9301-4d24c34baf06|
-|most_recent_first|boolean| False |Order most recent first| None      | true|
+|id|string|None|True|Query ID|None|174e4f99-2ac7-4481-9301-4d24c34baf06|
+|most_recent_first|boolean|None|False|Order most recent first|None|True|
 
 Example input:
 
