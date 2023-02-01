@@ -6,6 +6,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightidr.util.endpoints import QueryLogs
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
 from komand_rapid7_insightidr.util.formatting import refactor_message
+from komand_rapid7_insightidr.util.constants import three_months_seconds, twenty_fourth_november
 import json
 import time
 
@@ -23,16 +24,14 @@ class Query(insightconnect_plugin_runtime.Action):
         most_recent_first = params.get(Input.MOST_RECENT_FIRST)
         time_now = int(time.time())
         request = ResourceHelper(self.connection.session, self.logger)
-        # 7776000 - is for three months from now.
-        # It is here because InsightDR keep logs for three months in hot storage
-        three_months_seconds = 7776000
-        # The way data indexing works changed on the 24/11/2022.
-        # For any search with most_recent_first=true 'from' must not be older than 24/11/2022
-        twenty_fourth_november = 1669248000
-        if (time_now - three_months_seconds) > twenty_fourth_november:
-            from_var = time_now - three_months_seconds
+        if most_recent_first:
+            if (time_now - three_months_seconds) < twenty_fourth_november:
+                from_var = twenty_fourth_november
+            else:
+                from_var = time_now - three_months_seconds
         else:
-            from_var = twenty_fourth_november
+            from_var = time_now - three_months_seconds
+
         request_params = {"from": from_var * 1000, "to": time_now * 1000, "most_recent_first": most_recent_first}
         response = request.resource_request(
             QueryLogs.get_query_logs(self.connection.region, params.get(Input.ID)), "get", params=request_params
