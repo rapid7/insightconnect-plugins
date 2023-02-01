@@ -22,7 +22,6 @@ class Query(insightconnect_plugin_runtime.Action):
         most_recent_first = params.get(Input.MOST_RECENT_FIRST)
         time_now = int(time.time())
         request = ResourceHelper(self.connection.session, self.logger)
-
         # 7776000 - is for three months from now.
         # It is here because InsightDR keep logs for three months in hot storage
         three_months_seconds = 7776000
@@ -35,11 +34,10 @@ class Query(insightconnect_plugin_runtime.Action):
             from_var = twenty_fourth_november
         request_params = {"from": from_var * 1000, "to": time_now * 1000,
                           "most_recent_first": most_recent_first}
-        print(f"\nREQUEST PARAMS: {request_params}\n")
         response = request.resource_request(
             QueryLogs.get_query_logs(self.connection.region, params.get(Input.ID)),
             "get",
-            params=request_params,
+            params=request_params
         )
 
         try:
@@ -51,7 +49,7 @@ class Query(insightconnect_plugin_runtime.Action):
             self.logger.error(f"InsightIDR response: {response}")
             raise PluginException(
                 cause="The response from InsightIDR was not in the correct format.",
-                assistance="Contact support for help. See log for more details.",
+                assistance="Contact support for help. See log for more details."
             )
 
         try:
@@ -59,7 +57,9 @@ class Query(insightconnect_plugin_runtime.Action):
             events = result.get("events", [])
             if events:
                 for event in events:
-                    event["message"] = json.loads(event["message"].replace("\n", "\\n"))
+                    print(json.loads(event["message"].replace("\n", "\\n")))
+                    # event["message"] = json.loads(event["message"].replace("\n", "\\n"))
+                    event["message"] = json.loads(json.dumps(event["message"]).replace("\n", "\\n"))
                     result_response.append(event)
 
             return {Output.EVENTS: result_response}
@@ -67,5 +67,5 @@ class Query(insightconnect_plugin_runtime.Action):
             self.logger.error(result)
             raise PluginException(
                 cause="The response from InsightIDR was not in the correct format.",
-                assistance="Contact support for help. See log for more details.",
+                assistance="Contact support for help. See log for more details."
             )
