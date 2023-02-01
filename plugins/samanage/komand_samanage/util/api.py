@@ -4,8 +4,8 @@ import shutil
 from tempfile import mkdtemp
 from base64 import b64decode
 from requests import request, HTTPError
-import komand
-from komand.exceptions import ConnectionTestException
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 
 
 class SamanageAPI:
@@ -59,7 +59,7 @@ class SamanageAPI:
                 "category": {"name": category_name} if category_name else None,
             }
         }
-        json = komand.helper.clean(json)
+        json = insightconnect_plugin_runtime.helper.clean(json)
 
         return self._call_api("POST", url, json=json, params={"layout": "long", "audit_archive": True})
 
@@ -106,7 +106,7 @@ class SamanageAPI:
                 '-H "Content-Type: multipart/form-data" --insecure '
                 "-X POST {}attachments.json"
             ).format(self.token, incident_id, file_path, self.api_url)
-            result = komand.helper.exec_command(curl_command)
+            result = insightconnect_plugin_runtime.helper.exec_command(curl_command)
 
             shutil.rmtree(temp_dir)
         except Exception as e:
@@ -135,7 +135,7 @@ class SamanageAPI:
                 "department": {"name": department} if department else None,
             }
         }
-        json = komand.helper.clean(json)
+        json = insightconnect_plugin_runtime.helper.clean(json)
 
         return self._call_api("POST", "users", json=json)
 
@@ -169,4 +169,4 @@ class SamanageAPI:
                     raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
             raise Exception("API returned an error: {} {}".format(response.status_code, response.content))
 
-        return komand.helper.clean(response.json())
+        return insightconnect_plugin_runtime.helper.clean(response.json())

@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ConnectionSchema
 
 # Custom imports below
-from komand.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 from komand_samanage.util.api import SamanageAPI
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 

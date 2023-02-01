@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 import time
 from .schema import NewIncidentsInput, NewIncidentsOutput
 
 # Custom imports below
 
 
-class NewIncidents(komand.Trigger):
+class NewIncidents(insightconnect_plugin_runtime.Trigger):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="new_incidents",
@@ -18,7 +18,7 @@ class NewIncidents(komand.Trigger):
         frequency = params.get("frequency", 10)
         cache_file_name = "cached_incidents_ids"
 
-        with komand.helper.open_cachefile(cache_file_name) as cache_file:
+        with insightconnect_plugin_runtime.helper.open_cachefile(cache_file_name) as cache_file:
             self.logger.info("Found or created cache file: {}".format(cache_file_name))
             cached_ids = {l.strip() for l in cache_file.readlines()}
             self.logger.info("Cached IDs: {}".format(cached_ids))
@@ -37,7 +37,7 @@ class NewIncidents(komand.Trigger):
                         self.logger.info("New incident found: {}".format(incident_id))
                         self.send({"incident": incident})
 
-                with komand.helper.open_cachefile(cache_file_name, append=True) as cache_file:
+                with insightconnect_plugin_runtime.helper.open_cachefile(cache_file_name, append=True) as cache_file:
                     for incident_id in new_ids:
                         self.logger.info("Writing incident {} to cache file".format(incident_id))
                         cache_file.write(incident_id)
