@@ -293,6 +293,9 @@ class UpdateSharedCredentialOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
+  "required": [
+    "links"
+  ],
   "definitions": {
     "link": {
       "type": "object",

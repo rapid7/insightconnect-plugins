@@ -4289,6 +4289,7 @@ actions:
         title: Links
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
+        required: true
 
 triggers:
   new_scans:

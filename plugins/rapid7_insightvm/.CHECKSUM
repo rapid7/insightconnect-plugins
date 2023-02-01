@@ -1,5 +1,5 @@
 {
-	"spec": "87f32d7472e223574dcf9d21175cdf7a",
+	"spec": "017086962a86e96da6c269ccc0d37c16",
 	"manifest": "d5b31624661d9a9280929ec98eeb66ac",
 	"setup": "71d1855deedd16af487f49003a054976",
 	"schemas": [
@@ -309,7 +309,7 @@
 		},
 		{
 			"identifier": "update_shared_credential/schema.py",
-			"hash": "bce0597401b3a62b0f12bfd20edd8f6f"
+			"hash": "60d48a4d0c42f759e6bd25bc61f8fee8"
 		},
 		{
 			"identifier": "update_site/schema.py",

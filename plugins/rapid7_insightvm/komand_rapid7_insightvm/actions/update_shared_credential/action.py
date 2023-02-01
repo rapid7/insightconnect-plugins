@@ -2,8 +2,8 @@ import insightconnect_plugin_runtime
 from .schema import UpdateSharedCredentialInput, UpdateSharedCredentialOutput, Input, Output, Component
 from ...util import endpoints
 from ...util.resource_requests import ResourceRequests
-from ...util.update_shared_credential_util import *
-from ...util.util import check_not_null, check_in_enum
+from ...util.update_shared_credential_util import make_payload, get_account_input
+from ...util.util import check_not_null
 
 
 class UpdateSharedCredential(insightconnect_plugin_runtime.Action):

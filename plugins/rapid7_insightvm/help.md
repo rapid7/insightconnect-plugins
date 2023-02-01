@@ -91,7 +91,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|links|[]link|False|Hypermedia links to corresponding or related resources|
+|links|[]link|True|Hypermedia links to corresponding or related resources|
 
 Example output:
 
