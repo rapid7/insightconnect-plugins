@@ -97,7 +97,10 @@ def mock_request_put(url: str) -> MockResponse:
         return MockResponse("update_investigation", 200)
     if url == f"{Util.STUB_URL_API}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/status/{STUB_STATUS}":
         return MockResponse("update_investigation", 200)
-    if url == f"{Util.STUB_URL_API}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/disposition/{STUB_DISPOSITION}":
+    if (
+        url
+        == f"{Util.STUB_URL_API}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/disposition/{STUB_DISPOSITION}"
+    ):
         return MockResponse("update_investigation", 200)
     if url == f"{Util.STUB_URL_API}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/assignee":
         return MockResponse("update_investigation", 200)

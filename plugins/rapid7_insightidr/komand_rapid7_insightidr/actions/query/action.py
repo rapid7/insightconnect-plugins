@@ -30,15 +30,12 @@ class Query(insightconnect_plugin_runtime.Action):
         # For any search with most_recent_first=true 'from' must not be older than 24/11/2022
         twenty_fourth_november = 1669248000
         if (time_now - three_months_seconds) > twenty_fourth_november:
-            from_var = (time_now - three_months_seconds)
+            from_var = time_now - three_months_seconds
         else:
             from_var = twenty_fourth_november
-        request_params = {"from": from_var * 1000, "to": time_now * 1000,
-                          "most_recent_first": most_recent_first}
+        request_params = {"from": from_var * 1000, "to": time_now * 1000, "most_recent_first": most_recent_first}
         response = request.resource_request(
-            QueryLogs.get_query_logs(self.connection.region, params.get(Input.ID)),
-            "get",
-            params=request_params
+            QueryLogs.get_query_logs(self.connection.region, params.get(Input.ID)), "get", params=request_params
         )
 
         try:
@@ -50,7 +47,7 @@ class Query(insightconnect_plugin_runtime.Action):
             self.logger.error(f"InsightIDR response: {response}")
             raise PluginException(
                 cause="The response from InsightIDR was not in the correct format.",
-                assistance="Contact support for help. See log for more details."
+                assistance="Contact support for help. See log for more details.",
             )
 
         try:
@@ -58,7 +55,6 @@ class Query(insightconnect_plugin_runtime.Action):
             events = result.get("events", [])
             if events:
                 for event in events:
-                    # event["message"] = json.loads(str(event["message"]).replace("\n", "\\n").replace("'", '"'))
                     event["message"] = refactor_message(event["message"])
                     result_response.append(event)
 
@@ -67,5 +63,5 @@ class Query(insightconnect_plugin_runtime.Action):
             self.logger.error(result)
             raise PluginException(
                 cause="The response from InsightIDR was not in the correct format.",
-                assistance="Contact support for help. See log for more details."
+                assistance="Contact support for help. See log for more details.",
             )
