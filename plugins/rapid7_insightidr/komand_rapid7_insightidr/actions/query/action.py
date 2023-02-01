@@ -57,9 +57,7 @@ class Query(insightconnect_plugin_runtime.Action):
             events = result.get("events", [])
             if events:
                 for event in events:
-                    print(json.loads(event["message"].replace("\n", "\\n")))
-                    # event["message"] = json.loads(event["message"].replace("\n", "\\n"))
-                    event["message"] = json.loads(json.dumps(event["message"]).replace("\n", "\\n"))
+                    event["message"] = json.loads(str(event["message"]).replace("\n", "\\n").replace("'", '"'))
                     result_response.append(event)
 
             return {Output.EVENTS: result_response}
