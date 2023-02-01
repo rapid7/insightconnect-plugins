@@ -124,18 +124,3 @@ def check_in_enum(value: str, var_name: str, possible_enums: list) -> None:
             cause=f"{var_name} is not a valid input.",
             assistance=f"Enter one of the following: {possible_enums}."
         )
-
-
-def make_payload(account_input: dict, description: str, host_restriction: str, id_: int, name: str,
-                 port_restriction: int, site_assignment: str, sites: []) -> dict:
-    payload = {
-        "account": account_input,
-        "description": description,
-        "hostRestriction": host_restriction,
-        "id": id_,
-        "name": name,
-        "portRestriction": port_restriction,
-        "siteAssignment": site_assignment,
-        "sites": sites
-    }
-    return payload

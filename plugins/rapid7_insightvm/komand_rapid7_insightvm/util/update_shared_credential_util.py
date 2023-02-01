@@ -121,3 +121,31 @@ def ssh_key(account: dict, service: str) -> dict:
     return {"service": service, "username": username, "privateKeyPassword": private_key_password, "pemKey": pem_key,
             "permissionElevation": permission_elevation, "permissionElevationUsername": permission_elevation_username,
             "permissionElevationPassword": permission_elevation_password}
+
+def get_account_input(account: dict, service: str):
+    service_dict = {"as400": as400_cifs_cvs, "cifs": as400_cifs_cvs, "cvs": as400_cifs_cvs, "cifshash": cifshash,
+                    "ftp": ftp_pop_remote_exec_telnet, "pop": ftp_pop_remote_exec_telnet, "oracle": oracle,
+                    "db2": db2_mysql_postgresql, "mysql": db2_mysql_postgresql, "postgresql": db2_mysql_postgresql,
+                    "remote-exec": ftp_pop_remote_exec_telnet, "telnet": ftp_pop_remote_exec_telnet, "snmp": snmp,
+                    "http": http, "ms-sql": ms_sql_sybase, "sybase": ms_sql_sybase, "notes": notes,
+                    "snmpv3": snmpv3, "ssh": ssh, "ssh-key": ssh_key}
+    return service_dict[service](account, service)
+
+def make_payload(params: dict, account_input: dict) -> dict:
+    site_assignment = params.get(check_not_null(params, "site_assignment"))
+    check_in_enum(site_assignment, "site_assignment", ["all-sites", "specific-sites"])
+    if site_assignment == "all-sites":
+        sites = None
+    else:
+        sites = check_not_null(params, "sites")
+    payload = {
+        "account": account_input,
+        "description": params.get("description", ""),
+        "hostRestriction":  params.get("host_restriction", ""),
+        "id":  check_not_null(params, "id"),
+        "name":  check_not_null(params, "name"),
+        "portRestriction":  params.get("port_restriction", ""),
+        "siteAssignment": site_assignment,
+        "sites": sites
+    }
+    return payload
