@@ -103,10 +103,7 @@ def check_not_null(account: dict, var_name: str) -> Union[str, PluginException]:
     """
     value = account.get(var_name)
     if value in (None, ""):
-        raise PluginException(
-            cause=f"{var_name} has not been entered.",
-            assistance=f"Enter valid {var_name}"
-        )
+        raise PluginException(cause=f"{var_name} has not been entered.", assistance=f"Enter valid {var_name}")
     else:
         return value
 
@@ -121,6 +118,5 @@ def check_in_enum(value: str, var_name: str, possible_enums: list) -> None:
     """
     if value.lower() not in possible_enums:
         raise PluginException(
-            cause=f"{var_name} is not a valid input.",
-            assistance=f"Enter one of the following: {possible_enums}."
+            cause=f"{var_name} is not a valid input.", assistance=f"Enter one of the following: {possible_enums}."
         )

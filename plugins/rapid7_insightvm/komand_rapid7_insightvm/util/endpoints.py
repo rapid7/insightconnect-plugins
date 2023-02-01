@@ -317,9 +317,8 @@ class Site:
 
 
 class SharedCredential:
-
     @staticmethod
-    def update_shared_credential(console_url, cred_id):
+    def update_shared_credential(console_url: str, cred_id: int) -> str:
         """
         Updates credential
         :param console_url: URL to the InsightVM console

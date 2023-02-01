@@ -20,20 +20,11 @@ class TestUpdateSharedCredential(TestCase):
     def setUpClass(cls) -> None:
         cls.action = Util.default_connector(UpdateSharedCredential())
 
-        # make connector in util
-        # rename to USC
-        # add parameterized test for each service
-
     @parameterized.expand(
         [
             [
                 "as400 service test",
-                {
-                    "service": "as400",
-                    "domain": "rapid7.com",
-                    "username": "username",
-                    "password": "password"
-                },
+                {"service": "as400", "domain": "rapid7.com", "username": "username", "password": "password"},
                 "test for as400 service",
                 "",
                 1,
@@ -45,19 +36,14 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "cifs service test",
-                {
-                    "service": "cifs",
-                    "domain": "rapid7.com",
-                    "username": "username",
-                    "password": "password"
-                },
+                {"service": "cifs", "domain": "rapid7.com", "username": "username", "password": "password"},
                 "test for cifs service",
                 "",
                 1,
@@ -69,19 +55,14 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "cifshash service test",
-                {
-                    "service": "cifshash",
-                    "domain": "rapid7.com",
-                    "username": "username",
-                    "ntlm_hash": "ntlm_hash"
-                },
+                {"service": "cifshash", "domain": "rapid7.com", "username": "username", "ntlm_hash": "ntlm_hash"},
                 "test for cifshash service",
                 "",
                 1,
@@ -93,19 +74,14 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "cvs service test",
-                {
-                    "service": "cvs",
-                    "domain": "rapid7.com",
-                    "username": "username",
-                    "password": "password"
-                },
+                {"service": "cvs", "domain": "rapid7.com", "username": "username", "password": "password"},
                 "test for cvs service",
                 "",
                 1,
@@ -117,19 +93,14 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "db2 service test",
-                {
-                    "service": "db2",
-                    "database": "rapid7_database",
-                    "username": "username",
-                    "password": "password"
-                },
+                {"service": "db2", "database": "rapid7_database", "username": "username", "password": "password"},
                 "test for db2 service",
                 "",
                 1,
@@ -141,18 +112,14 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "ftp service test",
-                {
-                    "service": "ftp",
-                    "username": "username",
-                    "password": "password"
-                },
+                {"service": "ftp", "username": "username", "password": "password"},
                 "test for ftp service",
                 "",
                 1,
@@ -164,19 +131,14 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "http service test",
-                {
-                    "service": "http",
-                    "realm": "realm",
-                    "username": "username",
-                    "password": "password"
-                },
+                {"service": "http", "realm": "realm", "username": "username", "password": "password"},
                 "test for http service",
                 "",
                 1,
@@ -188,10 +150,10 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "ms-sql service test - Windows Auth true",
@@ -201,7 +163,7 @@ class TestUpdateSharedCredential(TestCase):
                     "use_windows_authentication": True,
                     "domain": "rapid7.com",
                     "username": "username",
-                    "password": "password"
+                    "password": "password",
                 },
                 "test for ms-sql service, windows auth true",
                 "",
@@ -214,10 +176,10 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "ms-sql service test - Windows Auth false",
@@ -226,7 +188,7 @@ class TestUpdateSharedCredential(TestCase):
                     "database": "rapid7_database",
                     "use_windows_authentication": False,
                     "username": "username",
-                    "password": "password"
+                    "password": "password",
                 },
                 "test for ms-sql service, windows auth false",
                 "",
@@ -239,19 +201,14 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "mysql service test",
-                {
-                    "service": "mysql",
-                    "database": "rapid7_database",
-                    "username": "username",
-                    "password": "password"
-                },
+                {"service": "mysql", "database": "rapid7_database", "username": "username", "password": "password"},
                 "test for mysql service",
                 "",
                 1,
@@ -263,17 +220,14 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "notes service test",
-                {
-                    "service": "notes",
-                    "notes_id_password": "password"
-                },
+                {"service": "notes", "notes_id_password": "password"},
                 "test for mysql service",
                 "",
                 1,
@@ -285,19 +239,14 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "oracle service test sids false",
-                {
-                    "service": "oracle",
-                    "username": "username",
-                    "password": "password",
-                    "enumerate_sids": False
-                },
+                {"service": "oracle", "username": "username", "password": "password", "enumerate_sids": False},
                 "test for oracle service without using oracle listener password",
                 "",
                 1,
@@ -309,10 +258,10 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "oracle service test sids true",
@@ -321,7 +270,7 @@ class TestUpdateSharedCredential(TestCase):
                     "username": "username",
                     "password": "password",
                     "enumerate_sids": True,
-                    "oracle_listener_password": "password"
+                    "oracle_listener_password": "password",
                 },
                 "test for oracle service using oracle listener password",
                 "",
@@ -334,10 +283,10 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "pop service test",
@@ -357,10 +306,10 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "postgresql service test",
@@ -381,18 +330,14 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "remote-exec service test",
-                {
-                    "service": "remote-exec",
-                    "username": "username",
-                    "password": "password"
-                },
+                {"service": "remote-exec", "username": "username", "password": "password"},
                 "test for remote-exec service",
                 "",
                 1,
@@ -404,17 +349,14 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "snmp service test",
-                {
-                    "service": "snmp",
-                    "community_name": "community_name"
-                },
+                {"service": "snmp", "community_name": "community_name"},
                 "test for snmp service",
                 "",
                 1,
@@ -426,10 +368,10 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "snmpv3 service private password test",
@@ -452,10 +394,10 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "snmpv3 service sha test",
@@ -477,10 +419,10 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "ssh service no elevation test",
@@ -501,10 +443,10 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "ssh service sudo elevation test",
@@ -527,10 +469,10 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "ssh-key service test",
@@ -554,10 +496,10 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "sybase service windows auth true test",
@@ -580,10 +522,10 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "sybase service windows auth false test",
@@ -605,18 +547,14 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
             [
                 "telnet service windows auth false test",
-                {
-                    "service": "telnet",
-                    "username": "username",
-                    "password": "password"
-                },
+                {"service": "telnet", "username": "username", "password": "password"},
                 "test for telnet service",
                 "",
                 1,
@@ -628,19 +566,38 @@ class TestUpdateSharedCredential(TestCase):
                     "links": [
                         {
                             "href": "https://ivm-console-test.vuln.lax.rapid7.com:3780/api/3/shared_credentials/1",
-                            "rel": "self"
+                            "rel": "self",
                         }
                     ]
-                }
+                },
             ],
         ]
     )
-    def test_update_shared_credentials_valid(self, mock_put, test_name, account, description, host_restrictions, id_, name,
-                                             port_restrictions, site_assignment, sites, expected):
+    def test_update_shared_credentials_valid(
+        self,
+        mock_put,
+        test_name,
+        account,
+        description,
+        host_restrictions,
+        id_,
+        name,
+        port_restrictions,
+        site_assignment,
+        sites,
+        expected,
+    ):
         actual = self.action.run(
-            {Input.ACCOUNT: account, Input.DESCRIPTION: description, Input.HOST_RESTRICTION: host_restrictions,
-             Input.ID: id_, Input.NAME: name, Input.PORT_RESTRICTION: port_restrictions,
-             Input.SITE_ASSIGNMENT: site_assignment, Input.SITES: sites}
+            {
+                Input.ACCOUNT: account,
+                Input.DESCRIPTION: description,
+                Input.HOST_RESTRICTION: host_restrictions,
+                Input.ID: id_,
+                Input.NAME: name,
+                Input.PORT_RESTRICTION: port_restrictions,
+                Input.SITE_ASSIGNMENT: site_assignment,
+                Input.SITES: sites,
+            }
         )
         self.assertEqual(actual, expected)
 
@@ -663,7 +620,7 @@ class TestUpdateSharedCredential(TestCase):
                 "",
                 "all-sites",
                 [],
-                "Privacy_password is required when authentication_type is no-authentication and privacy_type is no-privacy."
+                "Privacy_password is required when authentication_type is no-authentication and privacy_type is no-privacy.",
             ],
             [
                 "check_in_enum test",
@@ -682,7 +639,7 @@ class TestUpdateSharedCredential(TestCase):
                 "",
                 "all-sites",
                 [],
-                "authentication_type is not a valid input."
+                "authentication_type is not a valid input.",
             ],
             [
                 "check_not_null test",
@@ -701,16 +658,35 @@ class TestUpdateSharedCredential(TestCase):
                 "",
                 "all-sites",
                 [],
-                "service has not been entered."
+                "service has not been entered.",
             ],
         ]
     )
-    def test_update_shared_credentials_error(self, mock_put, test_name, account, description, host_restrictions, id_, name,
-                                             port_restrictions, site_assignment, sites, expected):
+    def test_update_shared_credentials_error(
+        self,
+        mock_put,
+        test_name,
+        account,
+        description,
+        host_restrictions,
+        id_,
+        name,
+        port_restrictions,
+        site_assignment,
+        sites,
+        expected,
+    ):
         with self.assertRaises(PluginException) as context:
-            actual = self.action.run(
-                {Input.ACCOUNT: account, Input.DESCRIPTION: description, Input.HOST_RESTRICTION: host_restrictions,
-                 Input.ID: id_, Input.NAME: name, Input.PORT_RESTRICTION: port_restrictions,
-                 Input.SITE_ASSIGNMENT: site_assignment, Input.SITES: sites}
+            self.action.run(
+                {
+                    Input.ACCOUNT: account,
+                    Input.DESCRIPTION: description,
+                    Input.HOST_RESTRICTION: host_restrictions,
+                    Input.ID: id_,
+                    Input.NAME: name,
+                    Input.PORT_RESTRICTION: port_restrictions,
+                    Input.SITE_ASSIGNMENT: site_assignment,
+                    Input.SITES: sites,
+                }
             )
         self.assertEqual(context.exception.cause, expected)
