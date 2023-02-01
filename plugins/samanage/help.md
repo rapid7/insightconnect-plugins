@@ -50,16 +50,16 @@ This action is used to assign a person to an incident.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|------|
-|assignee|string|None|True|Email of the new assignee|None|example@example.com|
+|Name|Type|Default|Required|Description|Enum| Example|
+|----|----|-------|--------|-----------|----|--------|
+|assignee|string|None|True|Email of the new assignee|None|user@example.com|
 |incident_id|integer|None|True|ID of an incident to assign a person to|None|1234|
 
 Example input:
 
 ```
 {
-  "assignee": "example@example.com",
+  "assignee": "user@example.com",
   "incident_id": 1234
 }
 ```
@@ -170,9 +170,9 @@ This action is used to create a new incident.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|---|
-|assignee|string|None|False|Email of the assignee|None|example@example.com|
+|Name|Type|Default|Required|Description|Enum| Example    |
+|----|----|-------|--------|-----------|----|------------|
+|assignee|string|None|False|Email of the assignee|None|user@example.com|
 |category_name|string|None|False|Name of the category for the new incident|None|test|
 |description|string|None|False|Description|None|Description example|
 |due_at|date|None|False|Due at|None|02-02-2022|
@@ -180,14 +180,14 @@ This action is used to create a new incident.
 |name|string|None|True|Name|None|Example name|
 |priority|string|None|True|Priority|['None', 'Low', 'Medium', 'High', 'Critical']|Low|
 |problem|integer|None|False|Number of a problem associated with the new incident|None|1234|
-|requester|string|None|True|Email of the requester|None|example@example.com|
+|requester|string|None|True|Email of the requester|None|user@example.com|
 |solutions|[]integer|None|False|List of numbers of solutions associated with the new incident|None|[123, 456]|
 
 Example input:
 
 ```
 {
-  "assignee": "example@example.com",
+  "assignee": "user@example.com",
   "category_name": "test",
   "description": "Description example",
   "due_at": "02-02-2022",
@@ -198,7 +198,7 @@ Example input:
   "name": "Example name",
   "priority": "Low",
   "problem": 1234,
-  "requester": "example@example.com",
+  "requester": "user@example.com",
   "solutions": [
     123,
     456
@@ -966,10 +966,10 @@ This action is used to create a new user.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |department|string|None|False|Department|['', 'Facilities', 'Finance', 'Human Resources', 'Information Technology', 'Marketing']|Marketing|
-|email|string|None|True|Email address|None|example@example.com|
+|email|string|None|True|Email address|None|user@example.com|
 |mobile_phone|string|None|False|Mobile phone number|None|+10000000|
 |name|string|None|False|User name|None|Example User|
-|phone|string|None|False|Phone number|None|10000000|
+|phone|string|None|False|Phone number|None|+10000000|
 |role|string|None|False|Role|["", 'Administrator', 'Facilities Service Desk User', 'Human Resources Service Desk User', 'Read Only', 'Requester', 'Service Agent User', 'Service Task User', "User's Own Site"]|Administrator|
 
 Example input:
@@ -977,7 +977,7 @@ Example input:
 ```
 {
   "department": "Marketing",
-  "email": "example@example.com",
+  "email": "user@example.com",
   "mobile_phone": "+10000000",
   "name": "Example User",
   "phone": 10000000,

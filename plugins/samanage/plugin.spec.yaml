@@ -342,7 +342,7 @@ actions:
         description: Email of the requester
         type: string
         required: true
-        example: example@example.com
+        example: user@example.com
       priority:
         title: Priority
         description: Priority
@@ -372,7 +372,7 @@ actions:
         description: Email of the assignee
         type: string
         required: false
-        example: example@example.com
+        example: user@example.com
       incidents:
         title: Incidents
         description: List of numbers of incidents associated with the new incident
@@ -466,7 +466,7 @@ actions:
         description: Email of the new assignee
         type: string
         required: true
-        example: example@example.com
+        example: user@example.com
     output:
       incident:
         title: Incident
@@ -551,7 +551,7 @@ actions:
         description: Email address
         type: string
         required: true
-        example: example@example.com
+        example: user@example.com
       name:
         title: Name
         description: User name
