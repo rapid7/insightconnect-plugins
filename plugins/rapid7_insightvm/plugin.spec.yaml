@@ -4244,7 +4244,7 @@ actions:
         description: The description of the credential
         type: string
         required: false
-        example: credentials for as400
+        example: example input with every field filled. Note real input will only have specific fields filled
       host_restriction:
         title: Host Restriction
         description: The host name or IP address that you want to restrict the credentials to

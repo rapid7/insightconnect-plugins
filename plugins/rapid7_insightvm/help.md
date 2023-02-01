@@ -51,7 +51,7 @@ This action is used to update shared credentials.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|---|
 |account|account|None|True|Specify the type of service to authenticate as well as all of the information required by that service|None|{ "authentication_type": "no-authentication", "community_name": "rapid community", "database": "rapid7_database", "domain": "rapid7.com", "enumerate_sids": false, "notes_id_password": "notes_id_password", "ntlm_hash": "86956E15C7F452086BEEB6BB005E0388", "oracle_listener_password": "oracle_listener_password", "password": "password", "pem_key": "-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEA3Tz2mr7SZiAMfQyuvBj...", "permission_elevation": "sudo", "permission_elevation_password": "permission_elevation_password", "permission_elevation_username": "permission_elevation_username", "privacy_password": "privacy_password", "privacy_type": "no-privacy", "private_key_password": "private_key_password", "realm": "realm0", "service": "telnet", "sid": "rapid7_database2", "use_windows_authentication": false, "username": "username" }|
-|description|string|None|False|The description of the credential|None|credentials for as400|
+|description|string|None|False|The description of the credential|None|example input with every field filled. Note real input will only have specific fields filled|
 |host_restriction|string|None|False|The host name or IP address that you want to restrict the credentials to|None|my-macbook-name|
 |id|integer|None|False|The identifier of the credential|None|123|
 |name|string|None|True|The name of the credential|None|my-AS400-credentials|
@@ -63,28 +63,38 @@ Example input:
 
 ```
 {
-    "authentication_type": "no-authentication",
-    "community_name": "rapid community",
-    "database": "rapid7_database",
-    "domain": "rapid7.com",
-    "enumerate_sids": false,
-    "notes_id_password": "notes_id_password",
-    "ntlm_hash": "86956E15C7F452086BEEB6BB005E0388",
-    "oracle_listener_password": "oracle_listener_password",
-    "password": "password",
-    "pem_key": "-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEA3Tz2mr7SZiAMfQyuvBj...",
-    "permission_elevation": "sudo",
-    "permission_elevation_password": "permission_elevation_password",
-    "permission_elevation_username": "permission_elevation_username",
-    "privacy_password": "privacy_password",
-    "privacy_type": "no-privacy",
-    "private_key_password": "private_key_password",
-    "realm": "realm0",
-    "service": "telnet",
-    "sid": "rapid7_database2",
-    "use_windows_authentication": false,
-    "username": "username"
+    "account":{
+        "authentication_type": "no-authentication",
+        "community_name": "rapid community",
+        "database": "rapid7_database",
+        "domain": "rapid7.com",
+        "enumerate_sids": false,
+        "notes_id_password": "notes_id_password",
+        "ntlm_hash": "86956E15C7F452086BEEB6BB005E0388",
+        "oracle_listener_password": "oracle_listener_password",
+        "password": "password",
+        "pem_key": "-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEA3Tz2mr7SZiAMfQyuvBj...",
+        "permission_elevation": "sudo",
+        "permission_elevation_password": "permission_elevation_password",
+        "permission_elevation_username": "permission_elevation_username",
+        "privacy_password": "privacy_password",
+        "privacy_type": "no-privacy",
+        "private_key_password": "private_key_password",
+        "realm": "realm0",
+        "service": "telnet",
+        "sid": "rapid7_database2",
+        "use_windows_authentication": false,
+        "username": "username"
+    }
+    "description": "example input with every field filled. Note real input will only have specific fields filled",
+    "hostRestriction": "my-macbook-name",
+    "id": "123",
+    "name": "my-AS400-credentials",
+    "portRestriction": "8888",
+    "siteAssignment": "all-sites",
+    "sites": []
 }
+
 ```
 
 ##### Output
