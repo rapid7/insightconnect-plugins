@@ -5,6 +5,7 @@ from .schema import QueryInput, QueryOutput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
 from komand_rapid7_insightidr.util.endpoints import QueryLogs
 from komand_rapid7_insightidr.util.resource_helper import ResourceHelper
+from komand_rapid7_insightidr.util.formatting import refactor_message
 import json
 import time
 
@@ -57,7 +58,8 @@ class Query(insightconnect_plugin_runtime.Action):
             events = result.get("events", [])
             if events:
                 for event in events:
-                    event["message"] = json.loads(str(event["message"]).replace("\n", "\\n").replace("'", '"'))
+                    # event["message"] = json.loads(str(event["message"]).replace("\n", "\\n").replace("'", '"'))
+                    event["message"] = refactor_message(event["message"])
                     result_response.append(event)
 
             return {Output.EVENTS: result_response}
