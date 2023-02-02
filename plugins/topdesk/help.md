@@ -419,16 +419,16 @@ This action updates an incident by number. It doesn't reset fields that are not 
 |actionInvisibleForCaller|boolean|None|False|Whether the initial action is invisible for callers|None|False|
 |branch|string|None|False|Branch identifier for location. For partial incidents, this field is determined by the main incident and will give an error if provided|None|44d88612-fea8-a8f3-6de8-2e1278abb02f|
 |briefDescription|string|None|False|Brief description of the incident. For partials, if not provided, will be automatically copied from the main incident|None|Example description|
-|callDate|date|None|False|The date when this call was registered|None|2022-11-15T14:00:00.000+0200|
+|callDate|date|None|False|The date when this call was registered|None|2022-11-15T14:00:00+0200|
 |callType|string|None|False|The type of the call. Cannot be provided for partials as its automatically copied from the main incident|None|Failure|
 |caller|callerInput|None|False|The caller contact details for this incident. Is filled in automatically for persons and when the callerLookup parameter is provided|None|{"branch": "44d88612-fea8-a8f3-6de8-2e1278abb02f", "budgetHolder": "Management"," department": "Management", "dynamicName": "Example User", "email": "user@example.com", "location": "44d88612-fea8-a8f3-6de8-2e1278abb02f", "mobileNumber": "1111111", "phoneNumber": "2222222"}|
 |callerLookup|string|None|False|Caller email for filling in a registered caller's contact details|None|user@example.com|
 |category|string|None|False|The name of the category. For partials, if not provided, will be automatically copied from the main incident|None|Hardware|
 |closed|boolean|None|False|Whether the incident is closed|None|False|
-|closedDate|date|None|False|Closed date|None|2022-11-15T14:00:00.000+0200|
+|closedDate|date|None|False|Closed date|None|2022-11-15T14:00:00+0200|
 |closureCode|string|None|False|Name of the closure code|None|Manual|
 |completed|boolean|None|False|Whether the incident is completed|None|False|
-|completedDate|date|None|False|Completed date|None|2022-11-15T14:00:00.000+0200|
+|completedDate|date|None|False|Completed date|None|2022-11-15T14:00:00+0200|
 |costs|float|None|False|Costs|None|12.5|
 |duration|string|None|False|Duration name|None|1 week|
 |entryType|string|None|False|The type of the entry|None|Chat|
@@ -444,18 +444,18 @@ This action updates an incident by number. It doesn't reset fields that are not 
 |onHold|boolean|None|False|Whether incident is on hold|None|False|
 |operator|string|None|False|Operator identifier. For partials, if not provided, will be automatically copied from the main incident|None|44d88612-fea8-a8f3-6de8-2e1278abb02f|
 |operatorGroup|string|None|False|Operator group identifier. For partials, if not provided, will be automatically copied from the main incident|None|44d88612-fea8-a8f3-6de8-2e1278abb02f|
-|optionalFields1|object|None|False|Optional Fields 1|None|{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00.000+0200"}|
-|optionalFields2|object|None|False|Optional Fields 2|None|{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00.000+0200"}|
+|optionalFields1|object|None|False|Optional Fields 1|None|{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00+0200"}|
+|optionalFields2|object|None|False|Optional Fields 2|None|{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00+0200"}|
 |priority|string|None|False|Name of the priority. Cannot be provided for partials as it is automatically copied from the main incident. Will be automatically filled in if you provide impact and/or urgency leading to a unique priority according to your priority matrix, and don't provide a priority. For incidents with a linked SLA, if the priority provided cannot be found in the Service Level Priority List, the duration field of the incident will be emptied|None|P1|
 |processingStatus|string|None|False|Processing status name|None|Registered|
 |publishToSsd|boolean|None|False|Whether the incident should be published in the Self Service Desk. Only major incidents can be published|None|False|
 |request|string|None|False|Initial request that caused the incident|None|<b>example request</b>|
 |responded|boolean|None|False|Whether the incident is responded|None|False|
-|responseDate|date|None|False|Response date. Will automatically be set to current date if left out and 'responded' is set to 'true'|None|2022-11-15T14:00:00.000+0200|
+|responseDate|date|None|False|Response date. Will automatically be set to current date if left out and 'responded' is set to 'true'|None|2022-11-15T14:00:00+0200|
 |sla|string|None|False|SLA identifier|None|44d88612-fea8-a8f3-6de8-2e1278abb02f|
 |subcategory|string|None|False|The name of the subcategory. For partials, if not provided, will be automatically copied from the main incident. If a subcategory is provided without a category, the corresponding category will be filled in automatically, unless there are multiple matching categories, in which case the action will fail|None|Laptop|
 |supplier|string|None|False|Supplier identifier|None|44d88612-fea8-a8f3-6de8-2e1278abb02f|
-|targetDate|date|None|False|Target date|None|2022-11-15T14:00:00.000+0200|
+|targetDate|date|None|False|Target date|None|2022-11-15T14:00:00+0200|
 |urgency|string|None|False|Name of the urgency. Cannot be provided for partials as its automatically copied from the main incident|None|Normal|
 
 Example input:
@@ -466,7 +466,7 @@ Example input:
   "actionInvisibleForCaller": false,
   "branch": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
   "briefDescription": "Example description",
-  "callDate": "2022-11-15T14:00:00.000+0200",
+  "callDate": "2022-11-15T14:00:00+0200",
   "callType": "Failure",
   "caller": {
     "branch": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
@@ -480,10 +480,8 @@ Example input:
   "callerLookup": "user@example.com",
   "category": "Hardware",
   "closed": false,
-  "closedDate": "2022-11-15T14:00:00.000+0200",
   "closureCode": "Manual",
   "completed": false,
-  "completedDate": "2022-11-15T14:00:00.000+0200",
   "costs": 12.5,
   "duration": "1 week",
   "entryType": "Chat",
@@ -502,23 +500,22 @@ Example input:
   "optionalFields1": {
     "boolean1": true,
     "text1": "example value",
-    "date1": "2022-11-15T14:00:00.000+0200"
+    "date1": "2022-11-15T14:00:00+0200"
   },
   "optionalFields2": {
     "boolean1": true,
     "text1": "example value",
-    "date1": "2022-11-15T14:00:00.000+0200"
+    "date1": "2022-11-15T14:00:00+0200"
   },
   "priority": "P1",
   "processingStatus": "Registered",
   "publishToSsd": false,
   "request": "Example request",
   "responded": false,
-  "responseDate": "2022-11-15T14:00:00.000+0200",
   "sla": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
   "subcategory": "Monitor",
   "supplier": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
-  "targetDate": "2022-11-15T14:00:00.000+0200",
+  "targetDate": "2022-11-15T14:00:00+0200",
   "urgency": "Normal"
 }
 ```
@@ -677,16 +674,16 @@ This action updates an incident by identifier. It doesn't reset fields that are 
 |actionInvisibleForCaller|boolean|None|False|Whether the initial action is invisible for callers|None|False|
 |branch|string|None|False|Branch identifier for location. For partial incidents, this field is determined by the main incident and will give an error if provided|None|44d88612-fea8-a8f3-6de8-2e1278abb02f|
 |briefDescription|string|None|False|Brief description of the incident. For partials, if not provided, will be automatically copied from the main incident|None|Example description|
-|callDate|date|None|False|The date when this call was registered|None|2022-11-15T14:00:00.000+0200|
+|callDate|date|None|False|The date when this call was registered|None|2022-11-15T14:00:00+0200|
 |callType|string|None|False|The type of the call. Cannot be provided for partials as its automatically copied from the main incident|None|Failure|
 |caller|callerInput|None|False|The caller contact details for this incident. Is filled in automatically for persons and when the callerLookup parameter is provided|None|{"branch": "44d88612-fea8-a8f3-6de8-2e1278abb02f", "budgetHolder": "Management"," department": "Management", "dynamicName": "Example User", "email": "user@example.com", "location": "44d88612-fea8-a8f3-6de8-2e1278abb02f", "mobileNumber": "1111111", "phoneNumber": "2222222"}|
 |callerLookup|string|None|False|Caller email for filling in a registered caller's contact details|None|user@example.com|
 |category|string|None|False|The name of the category. For partials, if not provided, will be automatically copied from the main incident|None|Hardware|
 |closed|boolean|None|False|Whether the incident is closed|None|False|
-|closedDate|date|None|False|Closed date|None|2022-11-15T14:00:00.000+0200|
+|closedDate|date|None|False|Closed date|None|2022-11-15T14:00:00+0200|
 |closureCode|string|None|False|Name of the closure code|None|Manual|
 |completed|boolean|None|False|Whether the incident is completed|None|False|
-|completedDate|date|None|False|Completed date|None|2022-11-15T14:00:00.000+0200|
+|completedDate|date|None|False|Completed date|None|2022-11-15T14:00:00+0200|
 |costs|float|None|False|Costs|None|12.5|
 |duration|string|None|False|Duration name|None|1 week|
 |entryType|string|None|False|The type of the entry|None|Chat|
@@ -702,18 +699,18 @@ This action updates an incident by identifier. It doesn't reset fields that are 
 |onHold|boolean|None|False|Whether incident is on hold|None|False|
 |operator|string|None|False|Operator identifier. For partials, if not provided, will be automatically copied from the main incident|None|44d88612-fea8-a8f3-6de8-2e1278abb02f|
 |operatorGroup|string|None|False|Operator group identifier. For partials, if not provided, will be automatically copied from the main incident|None|44d88612-fea8-a8f3-6de8-2e1278abb02f|
-|optionalFields1|object|None|False|Optional Fields 1|None|{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00.000+0200"}|
-|optionalFields2|object|None|False|Optional Fields 2|None|{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00.000+0200"}|
+|optionalFields1|object|None|False|Optional Fields 1|None|{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00+0200"}|
+|optionalFields2|object|None|False|Optional Fields 2|None|{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00+0200"}|
 |priority|string|None|False|Name of the priority. Cannot be provided for partials as it is automatically copied from the main incident. Will be automatically filled in if you provide impact and/or urgency leading to a unique priority according to your priority matrix, and don't provide a priority. For incidents with a linked SLA, if the priority provided cannot be found in the Service Level Priority List, the duration field of the incident will be emptied|None|P1|
 |processingStatus|string|None|False|Processing status name|None|Registered|
 |publishToSsd|boolean|None|False|Whether the incident should be published in the Self Service Desk. Only major incidents can be published|None|False|
 |request|string|None|False|Initial request that caused the incident|None|<b>example request</b>|
 |responded|boolean|None|False|Whether the incident is responded|None|False|
-|responseDate|date|None|False|Response date. Will automatically be set to current date if left out and 'responded' is set to 'true'|None|2022-11-15T14:00:00.000+0200|
+|responseDate|date|None|False|Response date. Will automatically be set to current date if left out and 'responded' is set to 'true'|None|2022-11-15T14:00:00+0200|
 |sla|string|None|False|SLA identifier|None|44d88612-fea8-a8f3-6de8-2e1278abb02f|
 |subcategory|string|None|False|The name of the subcategory. For partials, if not provided, will be automatically copied from the main incident. If a subcategory is provided without a category, the corresponding category will be filled in automatically, unless there are multiple matching categories, in which case the action will fail|None|Laptop|
 |supplier|string|None|False|Supplier identifier|None|44d88612-fea8-a8f3-6de8-2e1278abb02f|
-|targetDate|date|None|False|Target date|None|2022-11-15T14:00:00.000+0200|
+|targetDate|date|None|False|Target date|None|2022-11-15T14:00:00+0200|
 |urgency|string|None|False|Name of the urgency. Cannot be provided for partials as its automatically copied from the main incident|None|Normal|
 
 Example input:
@@ -724,7 +721,7 @@ Example input:
   "actionInvisibleForCaller": false,
   "branch": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
   "briefDescription": "Example description",
-  "callDate": "2022-11-15T14:00:00.000+0200",
+  "callDate": "2022-11-15T14:00:00+0200",
   "callType": "Failure",
   "caller": {
     "branch": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
@@ -738,10 +735,8 @@ Example input:
   "callerLookup": "user@example.com",
   "category": "Hardware",
   "closed": false,
-  "closedDate": "2022-11-15T14:00:00.000+0200",
   "closureCode": "Manual",
   "completed": false,
-  "completedDate": "2022-11-15T14:00:00.000+0200",
   "costs": 12.5,
   "duration": "1 week",
   "entryType": "Chat",
@@ -760,23 +755,22 @@ Example input:
   "optionalFields1": {
     "boolean1": true,
     "text1": "example value",
-    "date1": "2022-11-15T14:00:00.000+0200"
+    "date1": "2022-11-15T14:00:00+0200"
   },
   "optionalFields2": {
     "boolean1": true,
     "text1": "example value",
-    "date1": "2022-11-15T14:00:00.000+0200"
+    "date1": "2022-11-15T14:00:00+0200"
   },
   "priority": "P1",
   "processingStatus": "Registered",
   "publishToSsd": false,
   "request": "Example request",
   "responded": false,
-  "responseDate": "2022-11-15T14:00:00.000+0200",
   "sla": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
   "subcategory": "Monitor",
   "supplier": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
-  "targetDate": "2022-11-15T14:00:00.000+0200",
+  "targetDate": "2022-11-15T14:00:00+0200",
   "urgency": "Normal"
 }
 ```
@@ -1407,10 +1401,10 @@ This action creates an incident.
 |callerLookup|string|None|False|Caller email for filling in a registered caller's contact details|None|user@example.com|
 |category|string|None|False|The name of the category. For partials, if not provided, will be automatically copied from the main incident|None|Hardware|
 |closed|boolean|None|False|Whether the incident is closed|None|False|
-|closedDate|date|None|False|Closed date|None|2022-11-15T14:00:00.000+0200|
+|closedDate|date|None|False|Closed date|None|2022-11-15T14:00:00+0200|
 |closureCode|string|None|False|The name of the closure code|None|Manual|
 |completed|boolean|None|False|Whether the incident is completed|None|False|
-|completedDate|date|None|False|Completed date|None|2022-11-15T14:00:00.000+0200|
+|completedDate|date|None|False|Completed date|None|2022-11-15T14:00:00+0200|
 |costs|float|None|False|Costs|None|12.5|
 |duration|string|None|False|Duration name|None|1 week|
 |entryType|string|None|False|The type of the entry|None|Chat|
@@ -1426,19 +1420,19 @@ This action creates an incident.
 |onHold|boolean|None|False|Whether incident is on hold|None|False|
 |operator|string|None|False|Operator identifier. For partials, if not provided, will be automatically copied from the main incident|None|44d88612-fea8-a8f3-6de8-2e1278abb02f|
 |operatorGroup|string|None|False|Operator group identifier. For partials, if not provided, will be automatically copied from the main incident|None|44d88612-fea8-a8f3-6de8-2e1278abb02f|
-|optionalFields1|object|None|False|Optional Fields 1|None|{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00.000+0200"}|
-|optionalFields2|object|None|False|Optional Fields 2|None|{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00.000+0200"}|
+|optionalFields1|object|None|False|Optional Fields 1|None|{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00+0200"}|
+|optionalFields2|object|None|False|Optional Fields 2|None|{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00+0200"}|
 |priority|string|None|False|The name of the priority. Cannot be provided for partials as it is automatically copied from the main incident. Will be automatically filled in if you provide impact and/or urgency leading to a unique priority according to your priority matrix, and don't provide a priority. For incidents with a linked SLA, if the priority provided cannot be found in the Service Level Priority List, the duration field of the incident will be emptied|None|P1|
 |processingStatus|string|None|False|Processing status name|None|Registered|
 |publishToSsd|boolean|None|False|Whether the incident should be published in the Self Service Desk. Only major incidents can be published|None|False|
 |request|string|None|False|Initial request that caused the incident|None|<b>example request</b>|
 |responded|boolean|None|False|Whether the incident is responded|None|False|
-|responseDate|date|None|False|Response date. Will automatically be set to current date if left out and 'responded' is set to 'true'|None|2022-11-15T14:00:00.000+0200|
+|responseDate|date|None|False|Response date. Will automatically be set to current date if left out and 'responded' is set to 'true'|None|2022-11-15T14:00:00+0200|
 |sla|string|None|False|SLA identifier|None|44d88612-fea8-a8f3-6de8-2e1278abb02f|
 |status|string|None|True|Status of the incident|['First Line Incident', 'Second Line Incident', 'Partial Incident']|First Line Incident|
 |subcategory|string|None|False|The name of the subcategory. For partials, if not provided, will be automatically copied from the main incident. If a subcategory is provided without a category, the corresponding category will be filled in automatically, unless there are multiple matching categories, in which case the action will fail|None|Laptop|
 |supplier|string|None|False|Supplier identifier|None|44d88612-fea8-a8f3-6de8-2e1278abb02f|
-|targetDate|date|None|False|Target date|None|2022-11-15T14:00:00.000+0200|
+|targetDate|date|None|False|Target date|None|2022-11-15T14:00:00+0200|
 |urgency|string|None|False|The name of the urgency. Cannot be provided for partials as its automatically copied from the main incident|None|Normal|
 
 Example input:
@@ -1478,12 +1472,12 @@ Example input:
   "optionalFields1": {
     "boolean1": true,
     "text1": "example value",
-    "date1": "2022-11-15T14:00:00.000+0200"
+    "date1": "2022-11-15T14:00:00+0200"
   },
   "optionalFields2": {
     "boolean1": true,
     "text1": "example value",
-    "date1": "2022-11-15T14:00:00.000+0200"
+    "date1": "2022-11-15T14:00:00+0200"
   },
   "priority": "P1",
   "processingStatus": "Registered",
@@ -1494,7 +1488,7 @@ Example input:
   "status": "First Line Incident",
   "subcategory": "Laptop",
   "supplier": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
-  "targetDate": "2022-11-15T14:00:00.000+0200",
+  "targetDate": "2022-11-15T14:00:00+0200",
   "urgency": "Normal"
 }
 ```

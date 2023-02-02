@@ -1727,7 +1727,7 @@ actions:
         description: Target date
         type: date
         required: false
-        example: '2022-11-15T14:00:00.000+0200'
+        example: '2022-11-15T14:00:00+0200'
       sla:
         title: SLA
         description: SLA identifier
@@ -1775,7 +1775,7 @@ actions:
         description: Response date. Will automatically be set to current date if left out and 'responded' is set to 'true'
         type: date
         required: false
-        example: '2022-11-15T14:00:00.000+0200'
+        example: '2022-11-15T14:00:00+0200'
       completed:
         title: Completed
         description: Whether the incident is completed
@@ -1787,7 +1787,7 @@ actions:
         description: Completed date
         type: date
         required: false
-        example: '2022-11-15T14:00:00.000+0200'
+        example: '2022-11-15T14:00:00+0200'
       closed:
         title: Closed
         description: Whether the incident is closed
@@ -1799,7 +1799,7 @@ actions:
         description: Closed date
         type: date
         required: false
-        example: '2022-11-15T14:00:00.000+0200'
+        example: '2022-11-15T14:00:00+0200'
       closureCode:
         title: Closure Code
         description: The name of the closure code
@@ -1847,13 +1847,13 @@ actions:
         description: Optional Fields 1
         type: object
         required: false
-        example: '{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00.000+0200"}'
+        example: '{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00+0200"}'
       optionalFields2:
         title: Optional Fields 2
         description: Optional Fields 2
         type: object
         required: false
-        example: '{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00.000+0200"}'
+        example: '{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00+0200"}'
     output:
       incident:
         title: Incident
@@ -1958,7 +1958,7 @@ actions:
         description: The date when this call was registered
         type: date
         required: false
-        example: '2022-11-15T14:00:00.000+0200'
+        example: '2022-11-15T14:00:00+0200'
       category:
         title: Category
         description: The name of the category. For partials, if not provided, will be automatically copied from the main incident
@@ -2024,7 +2024,7 @@ actions:
         description: Target date
         type: date
         required: false
-        example: '2022-11-15T14:00:00.000+0200'
+        example: '2022-11-15T14:00:00+0200'
       sla:
         title: SLA
         description: SLA identifier
@@ -2072,7 +2072,7 @@ actions:
         description: Response date. Will automatically be set to current date if left out and 'responded' is set to 'true'
         type: date
         required: false
-        example: '2022-11-15T14:00:00.000+0200'
+        example: '2022-11-15T14:00:00+0200'
       completed:
         title: Completed
         description: Whether the incident is completed
@@ -2084,7 +2084,7 @@ actions:
         description: Completed date
         type: date
         required: false
-        example: '2022-11-15T14:00:00.000+0200'
+        example: '2022-11-15T14:00:00+0200'
       closed:
         title: Closed
         description: Whether the incident is closed
@@ -2096,7 +2096,7 @@ actions:
         description: Closed date
         type: date
         required: false
-        example: '2022-11-15T14:00:00.000+0200'
+        example: '2022-11-15T14:00:00+0200'
       closureCode:
         title: Closure Code
         description: Name of the closure code
@@ -2144,13 +2144,13 @@ actions:
         description: Optional Fields 1
         type: object
         required: false
-        example: '{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00.000+0200"}'
+        example: '{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00+0200"}'
       optionalFields2:
         title: Optional Fields 2
         description: Optional Fields 2
         type: object
         required: false
-        example: '{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00.000+0200"}'
+        example: '{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00+0200"}'
     output:
       incident:
         title: Incident
@@ -2221,7 +2221,7 @@ actions:
         description: The date when this call was registered
         type: date
         required: false
-        example: '2022-11-15T14:00:00.000+0200'
+        example: '2022-11-15T14:00:00+0200'
       category:
         title: Category
         description: The name of the category. For partials, if not provided, will be automatically copied from the main incident
@@ -2287,7 +2287,7 @@ actions:
         description: Target date
         type: date
         required: false
-        example: '2022-11-15T14:00:00.000+0200'
+        example: '2022-11-15T14:00:00+0200'
       sla:
         title: SLA
         description: SLA identifier
@@ -2335,7 +2335,7 @@ actions:
         description: Response date. Will automatically be set to current date if left out and 'responded' is set to 'true'
         type: date
         required: false
-        example: '2022-11-15T14:00:00.000+0200'
+        example: '2022-11-15T14:00:00+0200'
       completed:
         title: Completed
         description: Whether the incident is completed
@@ -2347,7 +2347,7 @@ actions:
         description: Completed date
         type: date
         required: false
-        example: '2022-11-15T14:00:00.000+0200'
+        example: '2022-11-15T14:00:00+0200'
       closed:
         title: Closed
         description: Whether the incident is closed
@@ -2359,7 +2359,7 @@ actions:
         description: Closed date
         type: date
         required: false
-        example: '2022-11-15T14:00:00.000+0200'
+        example: '2022-11-15T14:00:00+0200'
       closureCode:
         title: Closure Code
         description: Name of the closure code
@@ -2407,13 +2407,13 @@ actions:
         description: Optional Fields 1
         type: object
         required: false
-        example: '{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00.000+0200"}'
+        example: '{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00+0200"}'
       optionalFields2:
         title: Optional Fields 2
         description: Optional Fields 2
         type: object
         required: false
-        example: '{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00.000+0200"}'
+        example: '{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00+0200"}'
     output:
       incident:
         title: Incident
