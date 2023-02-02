@@ -44,7 +44,7 @@ class NewIncidents(insightconnect_plugin_runtime.Trigger):
 
                 time.sleep(frequency)
             except Exception as e:
-                raise Exception("An error occurred while reading incidents: {}".format(e))
+                raise PluginException("An error occurred while reading incidents: {}".format(e))
 
     def test(self):
         self.connection.api.list_incidents()
