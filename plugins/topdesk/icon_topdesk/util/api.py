@@ -144,8 +144,8 @@ class TopDeskAPI:
                 return response
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        except requests.exceptions.HTTPError as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+        except requests.exceptions.HTTPError as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def make_json_request(
         self,
@@ -160,5 +160,5 @@ class TopDeskAPI:
             if response.status_code == 204:
                 return []
             return clean(response.json())
-        except json.decoder.JSONDecodeError as e:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
+        except json.decoder.JSONDecodeError as error:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
