@@ -5,7 +5,7 @@ from tempfile import mkdtemp
 from base64 import b64decode
 from requests import request, HTTPError
 import insightconnect_plugin_runtime
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 
 
 class SamanageAPI:
@@ -110,7 +110,8 @@ class SamanageAPI:
 
             shutil.rmtree(temp_dir)
         except Exception as e:
-            raise Exception("Failed create a temp file: {}".format(e))
+            raise PluginException(cause="Failed creating a temporary file: {}".format(e),
+                                  assistance="Check if a temporary file can be created")
 
         if result["rcode"] != 0:
             raise Exception("Failed run cURL: {}".format(result["stderr"]))
