@@ -1433,7 +1433,7 @@ This action creates an incident.
 |publishToSsd|boolean|None|False|Whether the incident should be published in the Self Service Desk. Only major incidents can be published|None|False|
 |request|string|None|False|Initial request that caused the incident|None|<b>example request</b>|
 |responded|boolean|None|False|Whether the incident is responded|None|False|
-|responseDate|date|None|False|Response date. Will automatically be set to current date if left out and 'responded' is set to 'true'|None|https://example.com|
+|responseDate|date|None|False|Response date. Will automatically be set to current date if left out and 'responded' is set to 'true'|None|2022-11-15T14:00:00.000+0200|
 |sla|string|None|False|SLA identifier|None|44d88612-fea8-a8f3-6de8-2e1278abb02f|
 |status|string|None|True|Status of the incident|['First Line Incident', 'Second Line Incident', 'Partial Incident']|First Line Incident|
 |subcategory|string|None|False|The name of the subcategory. For partials, if not provided, will be automatically copied from the main incident. If a subcategory is provided without a category, the corresponding category will be filled in automatically, unless there are multiple matching categories, in which case the action will fail|None|Laptop|
