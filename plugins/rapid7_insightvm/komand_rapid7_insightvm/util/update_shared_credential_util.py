@@ -8,8 +8,8 @@ from komand_rapid7_insightvm.util.util import check_not_null
 def ssh_setup(account: Dict[str, any]) -> Tuple[str, str, str]:
     """
     checks permission elevation to see if permission_elevation_username and password is needed
-    @param account: user input
-    @return: permission_elevation, permission_elevation_username, permission_elevation_password
+    :param account: user input
+    :return: permission_elevation, permission_elevation_username, permission_elevation_password
     """
     permission_elevation = account.get("permission_elevation", "none")
 
@@ -25,8 +25,8 @@ def ssh_setup(account: Dict[str, any]) -> Tuple[str, str, str]:
 def usr_and_pass(account: Dict[str, any]) -> Tuple[str, str]:
     """
     gets username and password from account
-    @param account: where username and password is stored
-    @return: username and password
+    :param account: where username and password is stored
+    :return: username and password
     """
     return check_not_null(account, "username"), check_not_null(account, "password")
 
@@ -34,9 +34,9 @@ def usr_and_pass(account: Dict[str, any]) -> Tuple[str, str]:
 def as400_cifs_cvs(account: Dict[str, any], service: str) -> Dict[str, str]:
     """
     Gets inputs required for the as400, cifs, or cvs services
-    @param account: where all potential inputs are stored
-    @param service: service
-    @return: dictionary of all required variables for the as400, cifs, or cvs services
+    :param account: where all potential inputs are stored
+    :param service: service
+    :return: dictionary of all required variables for the as400, cifs, or cvs services
     """
     domain = account.get("domain", "")
     username, password = usr_and_pass(account)
@@ -46,9 +46,9 @@ def as400_cifs_cvs(account: Dict[str, any], service: str) -> Dict[str, str]:
 def cifshash(account: Dict[str, any], service: str) -> Dict[str, str]:
     """
     Gets inputs required for cifshash service
-    @param account: where all potential inputs are stored
-    @param service: service
-    @return: dictionary of all required variables for cifshash
+    :param account: where all potential inputs are stored
+    :param service: service
+    :return: dictionary of all required variables for cifshash
     """
     domain = account.get("domain", "")
     username = check_not_null(account, "username")
@@ -59,9 +59,9 @@ def cifshash(account: Dict[str, any], service: str) -> Dict[str, str]:
 def db2_mysql_postgresql(account: Dict[str, any], service: str) -> Dict[str, str]:
     """
     Gets inputs required for the db2, mysql, or postgresql services
-    @param account: where all potential inputs are stored
-    @param service: service
-    @return: dictionary of all required variables the db2, mysql, or postgresql services
+    :param account: where all potential inputs are stored
+    :param service: service
+    :return: dictionary of all required variables the db2, mysql, or postgresql services
     """
     database = account.get("database", "")
     username, password = usr_and_pass(account)
@@ -71,9 +71,9 @@ def db2_mysql_postgresql(account: Dict[str, any], service: str) -> Dict[str, str
 def ftp_pop_remote_exec_telnet(account: Dict[str, any], service: str) -> Dict[str, str]:
     """
     Gets inputs required for the ftp, pop, remote-exec or telnet services
-    @param account: where all potential inputs are stored
-    @param service: service
-    @return: dictionary of all required variables for the ftp, pop, remote-exec or telnet service
+    :param account: where all potential inputs are stored
+    :param service: service
+    :return: dictionary of all required variables for the ftp, pop, remote-exec or telnet service
     """
     username, password = usr_and_pass(account)
     return {"service": service, "username": username, "password": password}
@@ -82,9 +82,9 @@ def ftp_pop_remote_exec_telnet(account: Dict[str, any], service: str) -> Dict[st
 def http(account: Dict[str, any], service: str) -> Dict[str, str]:
     """
     Gets inputs required for http service
-    @param account: where all potential inputs are stored
-    @param service: service
-    @return: dictionary of all required variables for http
+    :param account: where all potential inputs are stored
+    :param service: service
+    :return: dictionary of all required variables for http
     """
     realm = account.get("realm", "")
     username, password = usr_and_pass(account)
@@ -94,9 +94,9 @@ def http(account: Dict[str, any], service: str) -> Dict[str, str]:
 def ms_sql_sybase(account: Dict[str, any], service: str) -> Union[Dict[str, any], Dict[str, any]]:
     """
     Gets inputs required for the ms-sql or sybase service
-    @param account: where all potential inputs are stored
-    @param service: service
-    @return: dictionary of all required variables for the ms-sql or sybase service
+    :param account: where all potential inputs are stored
+    :param service: service
+    :return: dictionary of all required variables for the ms-sql or sybase service
     """
     database = account.get("database", "")
     username, password = usr_and_pass(account)
@@ -124,9 +124,9 @@ def ms_sql_sybase(account: Dict[str, any], service: str) -> Union[Dict[str, any]
 def notes(account: Dict[str, any], service: str) -> Dict[str, str]:
     """
     Gets inputs required for notes service
-    @param account: where all potential inputs are stored
-    @param service: service
-    @return: dictionary of all required variables for notes
+    :param account: where all potential inputs are stored
+    :param service: service
+    :return: dictionary of all required variables for notes
     """
     notes_id_password = check_not_null(account, "notes_id_password")
     return {"service": service, "notesIDPassword": notes_id_password}
@@ -135,9 +135,9 @@ def notes(account: Dict[str, any], service: str) -> Dict[str, str]:
 def oracle(account: Dict[str, any], service: str) -> Union[Dict[str, any], Dict[str, any]]:
     """
     Gets inputs required for oracle service
-    @param account: where all potential inputs are stored
-    @param service: service
-    @return: dictionary of all required variables for oracle
+    :param account: where all potential inputs are stored
+    :param service: service
+    :return: dictionary of all required variables for oracle
     """
     sid = account.get("sid", "")
     username, password = usr_and_pass(account)
@@ -165,9 +165,9 @@ def oracle(account: Dict[str, any], service: str) -> Union[Dict[str, any], Dict[
 def snmp(account: Dict[str, any], service: str) -> Dict[str, str]:
     """
     Gets inputs required for snmp service
-    @param account: where all potential inputs are stored
-    @param service: service
-    @return: dictionary of all required variables for snmp
+    :param account: where all potential inputs are stored
+    :param service: service
+    :return: dictionary of all required variables for snmp
     """
     community_name = check_not_null(account, "community_name")
     return {"service": service, "communityName": community_name}
@@ -176,9 +176,9 @@ def snmp(account: Dict[str, any], service: str) -> Dict[str, str]:
 def snmpv3(account: Dict[str, any], service: str) -> Dict[str, str]:
     """
     Gets inputs required for snmpv3 service
-    @param account: where all potential inputs are stored
-    @param service: service
-    @return: dictionary of all required variables for snmpv3
+    :param account: where all potential inputs are stored
+    :param service: service
+    :return: dictionary of all required variables for snmpv3
     """
     authentication_type = check_not_null(account, "authentication_type")
     username, password = usr_and_pass(account)
@@ -201,9 +201,9 @@ def snmpv3(account: Dict[str, any], service: str) -> Dict[str, str]:
 def ssh(account: Dict[str, any], service: str) -> Dict[str, str]:
     """
     Gets inputs required for ssh service
-    @param account: where all potential inputs are stored
-    @param service: service
-    @return: dictionary of all required variables for ssh
+    :param account: where all potential inputs are stored
+    :param service: service
+    :return: dictionary of all required variables for ssh
     """
     username, password = usr_and_pass(account)
     permission_elevation, permission_elevation_username, permission_elevation_password = ssh_setup(account)
@@ -220,9 +220,9 @@ def ssh(account: Dict[str, any], service: str) -> Dict[str, str]:
 def ssh_key(account: Dict[str, any], service: str) -> Dict[str, any]:
     """
     Gets inputs required for ssh-key service
-    @param account: where all potential inputs are stored
-    @param service: service
-    @return: dictionary of all required variables for ssh-key
+    :param account: where all potential inputs are stored
+    :param service: service
+    :return: dictionary of all required variables for ssh-key
     """
     username = check_not_null(account, "username")
     private_key_password = check_not_null(account, "private_key_password")
@@ -242,8 +242,8 @@ def ssh_key(account: Dict[str, any], service: str) -> Dict[str, any]:
 def get_account_input(account: Dict[str, any]):
     """
     finds which service user wants to use and runs function specific to that service
-    @param account: account input
-    @return: returns the output of a function that takes variables from account depending on the service chosen
+    :param account: account input
+    :return: returns the output of a function that takes variables from account depending on the service chosen
     """
     service = check_not_null(account, "service")
     service_dict = {
@@ -274,9 +274,9 @@ def get_account_input(account: Dict[str, any]):
 def make_payload(params: Dict[str, any], account_input: Dict[str, any]) -> Dict[str, any]:
     """
     creates a payload for the put request
-    @param params: user input
-    @param account_input: required variables collected from user input
-    @return: dictionary of entire payload that will be sent to the api
+    :param params: user input
+    :param account_input: required variables collected from user input
+    :return: dictionary of entire payload that will be sent to the api
     """
     site_assignment = params.get(check_not_null(params, "site_assignment"))
     if site_assignment == "all-sites":
