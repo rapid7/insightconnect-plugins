@@ -80,7 +80,6 @@ def mock_request_get(url: str) -> MockResponse:
         return MockResponse("query_202_error", 202)
     if url == f"{Util.STUB_URL_REST}/query/logs/{STUB_ID_NOT_FOUND}":
         return MockResponse("query_404", 404)
-
     if url == f"{Util.STUB_URL_REST}/query/logs/{STUB_ID_KEY_ERROR}":
         return MockResponse("query_key_error", 200)
     if url == f"{Util.STUB_URL_REST}/query/saved_queries":
