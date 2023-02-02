@@ -271,7 +271,7 @@ def get_account_input(account: Dict[str, any]):
     return service_dict[service](account, service)
 
 
-def make_payload(params: Dict[str, any], account_input: Dict[str, any]) -> dict[str, any]:
+def make_payload(params: Dict[str, any], account_input: Dict[str, any]) -> Dict[str, any]:
     """
     creates a payload for the put request
     @param params: user input
