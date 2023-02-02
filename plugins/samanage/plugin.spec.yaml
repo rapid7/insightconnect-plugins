@@ -531,7 +531,7 @@ actions:
         description: Newly created attachment
         type: samanage_attachment
         required: true
-        example: { "id": 27211951,"content_type": "text/plain", "size": 12, "filename": "Hello.txt", "url": "https://s3.amazonaws.com/Production/1234/attachments/Hello.txt","shared_attachment": False,"attachable_id": 31851783,"attachable_type": "Incident","attachment_type": "attachment"}
+        example: { "id": 27211951,"content_type": "text/plain", "size": 12, "filename": "Hello.txt", "url": "https://example.com","shared_attachment": False,"attachable_id": 31851783,"attachable_type": "Incident","attachment_type": "attachment"}
   list_users:
     title: List Users
     description: List all users
