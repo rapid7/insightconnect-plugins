@@ -24,13 +24,9 @@ class Query(insightconnect_plugin_runtime.Action):
         most_recent_first = params.get(Input.MOST_RECENT_FIRST)
         time_now = int(time.time())
         request = ResourceHelper(self.connection.session, self.logger)
-        if most_recent_first:
-            if (time_now - three_months_seconds) < twenty_fourth_november:
-                from_var = twenty_fourth_november
-            else:
-                from_var = time_now - three_months_seconds
-        else:
-            from_var = time_now - three_months_seconds
+        from_var = time_now - three_months_seconds
+        if most_recent_first and (time_now - three_months_seconds) < twenty_fourth_november:
+            from_var = twenty_fourth_november
 
         request_params = {"from": from_var * 1000, "to": time_now * 1000, "most_recent_first": most_recent_first}
         response = request.resource_request(
