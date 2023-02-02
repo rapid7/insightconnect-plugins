@@ -114,13 +114,14 @@ class SamanageAPI:
                                   assistance="Check if a temporary file can be created")
 
         if result["rcode"] != 0:
-            raise Exception("Failed run cURL: {}".format(result["stderr"]))
+            raise PluginException(cause="Failure running curl command while attaching file: {}".format(result["stderr"]),
+                                  assistance="Check if there are sufficient permissions for the curl command to run")
 
         try:
             attachment = json.loads(result["stdout"])
             return attachment
         except json.JSONDecodeError:
-            raise Exception("Failed to attach a file: {}".format(result["stdout"]))
+            raise PluginException("Failed to attach a file: {}".format(result["stdout"]))
 
     def list_users(self):
         return self._call_api("GET", "users")
@@ -168,6 +169,6 @@ class SamanageAPI:
                 # Auth failure returns: HTTP/1.1" 401 None b''
                 if not response.content:
                     raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
-            raise Exception("API returned an error: {} {}".format(response.status_code, response.content))
+            raise PluginException("API returned an error: {} {}".format(response.status_code, response.content))
 
         return insightconnect_plugin_runtime.helper.clean(response.json())

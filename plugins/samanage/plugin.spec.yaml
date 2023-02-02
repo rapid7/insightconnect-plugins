@@ -541,7 +541,7 @@ actions:
         description: A list of all users
         type: '[]samanage_user'
         required: true
-        example: [{"id": "10000","name": "John Doe","title": "Support Agent","disabled": false,"email": "john.doe@email.com","created_at": "2030-01-01T00:00:00.000+00:00","phone": "+10000000","mobile_phone": "+10000000"}]
+        example: [{"id": "10000","name": "Example User","title": "Support Agent","disabled": false,"email": "user@example.com","created_at": "2030-01-01T00:00:00.000+00:00","phone": "(800) 555-0100","mobile_phone": "(800) 555-0100"}]
   create_user:
     title: Create User
     description: Create a new user
@@ -563,13 +563,13 @@ actions:
         description: Phone number
         type: string
         required: false
-        example: +10000000
+        example: (800) 555-0100
       mobile_phone:
         title: Mobile Phone
         description: Mobile phone number
         type: string
         required: false
-        example: "+10000000"
+        example: (800) 555-0100
       role:
         title: Role
         description: Role
@@ -605,7 +605,7 @@ actions:
         description: Newly created user
         type: samanage_user
         required: true
-        example: { "id": "10000","name": "John Doe","title": "Support Agent","disabled": false,"email": "john.doe@email.com","created_at": "2030-01-01T00:00:00.000+00:00","phone": "+10000000","mobile_phone": "+10000000" }
+        example: { "id": "10000","name": "Example User","title": "Support Agent","disabled": false,"email": "user@example.com","created_at": "2030-01-01T00:00:00.000+00:00","phone": "(800) 555-0100","mobile_phone": "(800) 555-0100" }
   delete_user:
     title: Delete User
     description: Delete a user

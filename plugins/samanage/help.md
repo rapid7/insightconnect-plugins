@@ -567,7 +567,7 @@ Example output:
         "id": 4204395,
         "account_id": 63582,
         "user_id": 4238379,
-        "email": "wwww@service.hmail.eu",
+        "email": "user@example.com",
         "name": "WW WW",
         "disabled": false,
         "has_gravatar": false,
@@ -577,7 +577,6 @@ Example output:
           "initials": "WW"
         }
       },
-      "href": "https://api.samanage.com/incidents/31851784-set-up-your-new-service-desk.json",
       "cc": [],
       "custom_fields_values": [],
       "incidents": [],
@@ -604,10 +603,10 @@ Example output:
         "id": 4238379,
         "name": "WW WW",
         "disabled": false,
-        "email": "wwww@service.hmail.eu",
+        "email": "user@example.com",
         "created_at": "2018-11-20T05:29:00.000-05:00",
         "last_login": "2018-11-20T05:33:33.000-05:00",
-        "phone": "+37254312367",
+        "phone": "(800) 555-0100",
         "role": {
           "id": 461178,
           "name": "Administrator",
@@ -692,8 +691,7 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|users|[]samanage_user|True|A list of all users|[{"id": "10000", "name": "John Doe", "title": "Support Agent", "disabled": False, "email": "john.doe@email.com", "created_at": "2030-01-01T00:00:00.000+00:00", "phone": "+10000000", "mobile_phone": "+10000000"}]|
-
+|users|[]samanage_user|True|A list of all users|[{"id": "10000", "name": "Example User", "title": "Support Agent", "disabled": False, "email": "user@example.com", "created_at": "2030-01-01T00:00:00.000+00:00", "phone": "(800) 555-0100", "mobile_phone": "(800) 555-0100"}]|
 Example output:
 
 ```
@@ -959,9 +957,9 @@ This action is used to create a new user.
 |----|----|-------|--------|-----------|----|-------|
 |department|string|None|False|Department|['', 'Facilities', 'Finance', 'Human Resources', 'Information Technology', 'Marketing']|Marketing|
 |email|string|None|True|Email address|None|user@example.com|
-|mobile_phone|string|None|False|Mobile phone number|None|+10000000|
+|mobile_phone|string|None|False|Mobile phone number|None|(800) 555-0100|
 |name|string|None|False|User name|None|Example User|
-|phone|string|None|False|Phone number|None|10000000|
+|phone|string|None|False|Phone number|None|(800) 555-0100|
 |role|string|None|False|Role|['', 'Administrator', 'Facilities Service Desk User', 'Human Resources Service Desk User', 'Read Only', 'Requester', 'Service Agent User', 'Service Task User', 'Users Own Site']|Administrator|
 
 Example input:
@@ -981,8 +979,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|user|samanage_user|True|Newly created user|{'id': '10000', 'name': 'John Doe', 'title': 'Support Agent', 'disabled': False, 'email': 'john.doe@email.com', 'created_at': '2030-01-01T00:00:00.000+00:00', 'phone': '+10000000', 'mobile_phone': '+10000000'}|
-
+|user|samanage_user|True|Newly created user|{'id': '10000', 'name': 'Example User', 'title': 'Support Agent', 'disabled': False, 'email': 'user@example.com', 'created_at': '2030-01-01T00:00:00.000+00:00', 'phone': '(800) 555-0100', 'mobile_phone': '(800) 555-0100'}|
 Example output:
 
 ```
