@@ -10,8 +10,9 @@ REQUEST_PUT = "put"
 
 STUB_ID = "1b1a111d-d1fb-1a12-1651-eb1ff61a651a"
 STUB_ID_NOT_FOUND = "22b2b22b-222b-222b-2222-b2bb2bbb2b2b"
-STUB_ID_202 = "33b3b3b-333b-333b-3333-b3bb3bbb3b3b"
+STUB_ID_202_ERROR = "33b3b3b-333b-333b-3333-b3bb3bbb3b3b"
 STUB_ID_KEY_ERROR = "44b4b4b-444b-4444-b4bb4bbb4b4b"
+STUB_ID_202 = "55b5b5b-555b-5555-b5bb5bbb5b5b"
 STUB_INVESTIGATION_IDENTIFIER = "rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111"
 STUB_QUERY_ID = "00000000-0000-1eec-0000-000000000000"
 STUB_QUERY_ID_NOT_FOUND = "00000000-0000-8eec-0000-000000000000"
@@ -75,8 +76,11 @@ def mock_request_get(url: str) -> MockResponse:
         return MockResponse("query", 200)
     if url == f"{Util.STUB_URL_REST}/query/logs/{STUB_ID_202}":
         return MockResponse("query_202", 202)
+    if url == f"{Util.STUB_URL_REST}/query/logs/{STUB_ID_202_ERROR}":
+        return MockResponse("query_202_error", 202)
     if url == f"{Util.STUB_URL_REST}/query/logs/{STUB_ID_NOT_FOUND}":
         return MockResponse("query_404", 404)
+
     if url == f"{Util.STUB_URL_REST}/query/logs/{STUB_ID_KEY_ERROR}":
         return MockResponse("query_key_error", 200)
     if url == f"{Util.STUB_URL_REST}/query/saved_queries":
@@ -104,8 +108,8 @@ def mock_request_put(url: str) -> MockResponse:
     if url == f"{Util.STUB_URL_API}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/status/{STUB_STATUS}":
         return MockResponse("update_investigation", 200)
     if (
-            url
-            == f"{Util.STUB_URL_API}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/disposition/{STUB_DISPOSITION}"
+        url
+        == f"{Util.STUB_URL_API}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/disposition/{STUB_DISPOSITION}"
     ):
         return MockResponse("update_investigation", 200)
     if url == f"{Util.STUB_URL_API}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/assignee":
