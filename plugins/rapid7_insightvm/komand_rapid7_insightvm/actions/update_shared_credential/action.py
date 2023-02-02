@@ -21,9 +21,8 @@ class UpdateSharedCredential(insightconnect_plugin_runtime.Action):
             self.connection.console_url, params.get(Input.ID)
         )
         account = params.get("account")
-        service = check_not_null(account, "service")
-        account_input = get_account_input(account, service)
+        account_input = get_account_input(account)
         payload = make_payload(params, account_input)
         response = resource_helper.resource_request(endpoint=endpoint, method="put", payload=payload)
 
-        return {"links": response["links"]}
+        return {Output.LINKS: response.get("links")}

@@ -4,7 +4,7 @@ import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 import time
 from dateutil.parser import parse
-from typing import Union
+from typing import Union, Dict
 
 
 def convert_date_to_iso8601(date: str) -> str:
@@ -94,7 +94,7 @@ def read_from_cache(filename):
         return contents
 
 
-def check_not_null(account: dict, var_name: str) -> Union[str, PluginException]:
+def check_not_null(account: Dict[str, any], var_name: str) -> str:
     """
     Checks that a required value is inputted
     :param account: user input
@@ -106,17 +106,3 @@ def check_not_null(account: dict, var_name: str) -> Union[str, PluginException]:
         raise PluginException(cause=f"{var_name} has not been entered.", assistance=f"Enter valid {var_name}")
     else:
         return value
-
-
-def check_in_enum(value: str, var_name: str, possible_enums: list) -> None:
-    """
-    Checks that value is one of the enums
-    :param value: user input
-    :param var_name: name of variable we check
-    :param possible_enums: list of all the valid enums
-    :return: value or PluginException
-    """
-    if value.lower() not in possible_enums:
-        raise PluginException(
-            cause=f"{var_name} is not a valid input.", assistance=f"Enter one of the following: {possible_enums}."
-        )

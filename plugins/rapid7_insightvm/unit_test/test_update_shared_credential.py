@@ -623,25 +623,6 @@ class TestUpdateSharedCredential(TestCase):
                 "Privacy_password is required when authentication_type is no-authentication and privacy_type is no-privacy.",
             ],
             [
-                "check_in_enum test",
-                {
-                    "service": "snmpv3",
-                    "authentication_type": "fake enum",
-                    "username": "username",
-                    "password": "password",
-                    "privacy_type": "no-privacy",
-                    "privacy_password": "password",
-                },
-                "test for check_in_enum",
-                "",
-                2,
-                "snmp_test_invalid",
-                "",
-                "all-sites",
-                [],
-                "authentication_type is not a valid input.",
-            ],
-            [
                 "check_not_null test",
                 {
                     "service": "",

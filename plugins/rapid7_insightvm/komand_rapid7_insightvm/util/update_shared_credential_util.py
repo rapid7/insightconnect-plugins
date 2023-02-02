@@ -1,15 +1,18 @@
-from typing import Union
+from typing import Union, Tuple, Dict
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-from komand_rapid7_insightvm.util.util import check_in_enum, check_not_null
+from komand_rapid7_insightvm.util.util import check_not_null
 
 
-def ssh_setup(account: dict) -> tuple[str, str, str]:
+def ssh_setup(account: Dict[str, any]) -> Tuple[str, str, str]:
+    """
+    checks permission elevation to see if permission_elevation_username and password is needed
+    @param account: user input
+    @return: permission_elevation, permission_elevation_username, permission_elevation_password
+    """
     permission_elevation = account.get("permission_elevation", "none")
-    check_in_enum(
-        permission_elevation, "permission_elevation", ["none", "sudo", "sudosu", "su", "pbrun", "privileged-exec"]
-    )
+
     if permission_elevation not in ("none", "pbrun"):
         permission_elevation_username = check_not_null(account, "permission_elevation_username")
         permission_elevation_password = check_not_null(account, "permission_elevation_password")
@@ -19,57 +22,123 @@ def ssh_setup(account: dict) -> tuple[str, str, str]:
     return permission_elevation, permission_elevation_username, permission_elevation_password
 
 
-def usr_and_pass(account: dict):
+def usr_and_pass(account: Dict[str, any]) -> Tuple[str, str]:
+    """
+    gets username and password from account
+    @param account: where username and password is stored
+    @return: username and password
+    """
     return check_not_null(account, "username"), check_not_null(account, "password")
 
 
-def as400_cifs_cvs(account: dict, service: str) -> dict:
+def as400_cifs_cvs(account: Dict[str, any], service: str) -> Dict[str, str]:
+    """
+    Gets inputs required for the as400, cifs, or cvs services
+    @param account: where all potential inputs are stored
+    @param service: service
+    @return: dictionary of all required variables for the as400, cifs, or cvs services
+    """
     domain = account.get("domain", "")
     username, password = usr_and_pass(account)
     return {"service": service, "domain": domain, "username": username, "password": password}
 
 
-def cifshash(account: dict, service: str) -> dict:
+def cifshash(account: Dict[str, any], service: str) -> Dict[str, str]:
+    """
+    Gets inputs required for cifshash service
+    @param account: where all potential inputs are stored
+    @param service: service
+    @return: dictionary of all required variables for cifshash
+    """
     domain = account.get("domain", "")
     username = check_not_null(account, "username")
     ntlm_hash = check_not_null(account, "ntlm_hash")
     return {"service": service, "domain": domain, "username": username, "ntlmHash": ntlm_hash}
 
 
-def db2_mysql_postgresql(account: dict, service: str) -> dict:
+def db2_mysql_postgresql(account: Dict[str, any], service: str) -> Dict[str, str]:
+    """
+    Gets inputs required for the db2, mysql, or postgresql services
+    @param account: where all potential inputs are stored
+    @param service: service
+    @return: dictionary of all required variables the db2, mysql, or postgresql services
+    """
     database = account.get("database", "")
     username, password = usr_and_pass(account)
     return {"service": service, "database": database, "username": username, "password": password}
 
 
-def ftp_pop_remote_exec_telnet(account: dict, service: str) -> dict:
+def ftp_pop_remote_exec_telnet(account: Dict[str, any], service: str) -> Dict[str, str]:
+    """
+    Gets inputs required for the ftp, pop, remote-exec or telnet services
+    @param account: where all potential inputs are stored
+    @param service: service
+    @return: dictionary of all required variables for the ftp, pop, remote-exec or telnet service
+    """
     username, password = usr_and_pass(account)
     return {"service": service, "username": username, "password": password}
 
 
-def http(account: dict, service: str) -> dict:
+def http(account: Dict[str, any], service: str) -> Dict[str, str]:
+    """
+    Gets inputs required for http service
+    @param account: where all potential inputs are stored
+    @param service: service
+    @return: dictionary of all required variables for http
+    """
     realm = account.get("realm", "")
     username, password = usr_and_pass(account)
     return {"service": service, "realm": realm, "username": username, "password": password}
 
 
-def ms_sql_sybase(account: dict, service: str) -> Union[dict, dict]:
+def ms_sql_sybase(account: Dict[str, any], service: str) -> Union[Dict[str, any], Dict[str, any]]:
+    """
+    Gets inputs required for the ms-sql or sybase service
+    @param account: where all potential inputs are stored
+    @param service: service
+    @return: dictionary of all required variables for the ms-sql or sybase service
+    """
     database = account.get("database", "")
     username, password = usr_and_pass(account)
     use_windows_authentication = account.get("use_windows_authentication", False)
     if use_windows_authentication:
         domain = check_not_null(account, "domain")
-        return {"service": service, "database": database, "domain": domain, "username": username, "password": password}
+        return {
+            "service": service,
+            "database": database,
+            "useWindowsAuthentication": use_windows_authentication,
+            "domain": domain,
+            "username": username,
+            "password": password,
+        }
     else:
-        return {"service": service, "database": database, "username": username, "password": password}
+        return {
+            "service": service,
+            "database": database,
+            "useWindowsAuthentication": use_windows_authentication,
+            "username": username,
+            "password": password,
+        }
 
 
-def notes(account: dict, service: str) -> dict:
+def notes(account: Dict[str, any], service: str) -> Dict[str, str]:
+    """
+    Gets inputs required for notes service
+    @param account: where all potential inputs are stored
+    @param service: service
+    @return: dictionary of all required variables for notes
+    """
     notes_id_password = check_not_null(account, "notes_id_password")
     return {"service": service, "notesIDPassword": notes_id_password}
 
 
-def oracle(account: dict, service: str) -> dict:
+def oracle(account: Dict[str, any], service: str) -> Union[Dict[str, any], Dict[str, any]]:
+    """
+    Gets inputs required for oracle service
+    @param account: where all potential inputs are stored
+    @param service: service
+    @return: dictionary of all required variables for oracle
+    """
     sid = account.get("sid", "")
     username, password = usr_and_pass(account)
     enumerate_sids = account.get("enumerate_sids", False)
@@ -93,30 +162,27 @@ def oracle(account: dict, service: str) -> dict:
         }
 
 
-def snmp(account: dict, service: str) -> dict:
+def snmp(account: Dict[str, any], service: str) -> Dict[str, str]:
+    """
+    Gets inputs required for snmp service
+    @param account: where all potential inputs are stored
+    @param service: service
+    @return: dictionary of all required variables for snmp
+    """
     community_name = check_not_null(account, "community_name")
     return {"service": service, "communityName": community_name}
 
 
-def snmpv3(account: dict, service: str) -> dict:
+def snmpv3(account: Dict[str, any], service: str) -> Dict[str, str]:
+    """
+    Gets inputs required for snmpv3 service
+    @param account: where all potential inputs are stored
+    @param service: service
+    @return: dictionary of all required variables for snmpv3
+    """
     authentication_type = check_not_null(account, "authentication_type")
-    check_in_enum(authentication_type, "authentication_type", ["no-authentication", "md5", "sha"])
     username, password = usr_and_pass(account)
-    privacy_type = account.get("privacy_type", "")
-    if privacy_type != "":
-        check_in_enum(
-            privacy_type,
-            "privacy_type",
-            [
-                "no-privacy",
-                "des",
-                "aes-128",
-                "aes-192",
-                "aes-192-with-3-des-key-extension",
-                "aes-256",
-                "aes-265-with-3-des-key-extension",
-            ],
-        )
+    privacy_type = account.get("privacy_type", "no-privacy")
     privacy_password = account.get("privacy_password", "")
     if authentication_type == "no-authentication" and privacy_type == "no-privacy" and privacy_password == "":  # nosec
         raise PluginException(
@@ -132,7 +198,13 @@ def snmpv3(account: dict, service: str) -> dict:
     }
 
 
-def ssh(account: dict, service: str) -> dict:
+def ssh(account: Dict[str, any], service: str) -> Dict[str, str]:
+    """
+    Gets inputs required for ssh service
+    @param account: where all potential inputs are stored
+    @param service: service
+    @return: dictionary of all required variables for ssh
+    """
     username, password = usr_and_pass(account)
     permission_elevation, permission_elevation_username, permission_elevation_password = ssh_setup(account)
     return {
@@ -145,7 +217,13 @@ def ssh(account: dict, service: str) -> dict:
     }
 
 
-def ssh_key(account: dict, service: str) -> dict:
+def ssh_key(account: Dict[str, any], service: str) -> Dict[str, any]:
+    """
+    Gets inputs required for ssh-key service
+    @param account: where all potential inputs are stored
+    @param service: service
+    @return: dictionary of all required variables for ssh-key
+    """
     username = check_not_null(account, "username")
     private_key_password = check_not_null(account, "private_key_password")
     pem_key = check_not_null(account, "pem_key")
@@ -161,7 +239,13 @@ def ssh_key(account: dict, service: str) -> dict:
     }
 
 
-def get_account_input(account: dict, service: str):
+def get_account_input(account: Dict[str, any]):
+    """
+    finds which service user wants to use and runs function specific to that service
+    @param account: account input
+    @return: returns the output of a function that takes variables from account depending on the service chosen
+    """
+    service = check_not_null(account, "service")
     service_dict = {
         "as400": as400_cifs_cvs,
         "cifs": as400_cifs_cvs,
@@ -187,9 +271,14 @@ def get_account_input(account: dict, service: str):
     return service_dict[service](account, service)
 
 
-def make_payload(params: dict, account_input: dict) -> dict:
+def make_payload(params: Dict[str, any], account_input: Dict[str, any]) -> dict[str, any]:
+    """
+    creates a payload for the put request
+    @param params: user input
+    @param account_input: required variables collected from user input
+    @return: dictionary of entire payload that will be sent to the api
+    """
     site_assignment = params.get(check_not_null(params, "site_assignment"))
-    check_in_enum(site_assignment, "site_assignment", ["all-sites", "specific-sites"])
     if site_assignment == "all-sites":
         sites = None
     else:
