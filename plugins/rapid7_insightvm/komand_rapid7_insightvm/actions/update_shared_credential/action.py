@@ -3,7 +3,6 @@ from .schema import UpdateSharedCredentialInput, UpdateSharedCredentialOutput, I
 from ...util import endpoints
 from ...util.resource_requests import ResourceRequests
 from ...util.update_shared_credential_util import make_payload, get_account_input
-from ...util.util import check_not_null
 
 
 class UpdateSharedCredential(insightconnect_plugin_runtime.Action):
