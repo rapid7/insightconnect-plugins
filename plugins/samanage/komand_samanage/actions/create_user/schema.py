@@ -77,7 +77,7 @@ class CreateUserInput(insightconnect_plugin_runtime.Input):
         "Requester",
         "Service Agent User",
         "Service Task User",
-        "User's Own Site"
+        "Users Own Site"
       ],
       "order": 5
     }

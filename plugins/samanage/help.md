@@ -969,8 +969,8 @@ This action is used to create a new user.
 |email|string|None|True|Email address|None|user@example.com|
 |mobile_phone|string|None|False|Mobile phone number|None|+10000000|
 |name|string|None|False|User name|None|Example User|
-|phone|string|None|False|Phone number|None|+10000000|
-|role|string|None|False|Role|["", 'Administrator', 'Facilities Service Desk User', 'Human Resources Service Desk User', 'Read Only', 'Requester', 'Service Agent User', 'Service Task User', "User's Own Site"]|Administrator|
+|phone|string|None|False|Phone number|None|10000000|
+|role|string|None|False|Role|['', 'Administrator', 'Facilities Service Desk User', 'Human Resources Service Desk User', 'Read Only', 'Requester', 'Service Agent User', 'Service Task User', 'Users Own Site']|Administrator|
 
 Example input:
 

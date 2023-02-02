@@ -584,7 +584,7 @@ actions:
         - Requester
         - Service Agent User
         - Service Task User
-        - User's Own Site
+        - Users Own Site
         example: Administrator
       department:
         title: Department
