@@ -88,7 +88,7 @@ Example output:
       "id": 4238379,
       "name": "WW WW",
       "disabled": false,
-      "email": "wwww@service.hmail.eu",
+      "email": "user@example.com",
       "created_at": "2018-11-20T05:29:00.000-05:00",
       "last_login": "2018-11-20T05:33:33.000-05:00",
       "phone": "+37254312367",
@@ -116,7 +116,7 @@ Example output:
       "id": 4204395,
       "account_id": 63582,
       "user_id": 4238379,
-      "email": "wwww@service.hmail.eu",
+      "email": "user@example.com",
       "name": "WW WW",
       "disabled": false,
       "has_gravatar": false,
@@ -137,7 +137,7 @@ Example output:
       "id": 4204395,
       "account_id": 63582,
       "user_id": 4238379,
-      "email": "wwww@service.hmail.eu",
+      "email": "user@example.com",
       "name": "WW WW",
       "disabled": false,
       "has_gravatar": false,
@@ -255,7 +255,7 @@ Example output:
       "id": 4238379,
       "name": "WW WW",
       "disabled": false,
-      "email": "wwww@service.hmail.eu",
+      "email": "user@example.com",
       "created_at": "2018-11-20T05:29:00.000-05:00",
       "last_login": "2018-11-21T17:20:46.000-05:00",
       "phone": "+37254312367",
@@ -283,7 +283,7 @@ Example output:
       "id": 4204395,
       "account_id": 63582,
       "user_id": 4238379,
-      "email": "wwww@service.hmail.eu",
+      "email": "user@example.com",
       "name": "WW WW",
       "disabled": false,
       "has_gravatar": false,
@@ -304,7 +304,7 @@ Example output:
       "id": 4204395,
       "account_id": 63582,
       "user_id": 4238379,
-      "email": "wwww@service.hmail.eu",
+      "email": "user@example.com",
       "name": "WW WW",
       "disabled": false,
       "has_gravatar": false,
@@ -409,7 +409,7 @@ Example output:
       "id": 4238379,
       "name": "WW WW",
       "disabled": false,
-      "email": "wwww@service.hmail.eu",
+      "email": "user@example.com",
       "created_at": "2018-11-20T05:29:00.000-05:00",
       "last_login": "2018-11-20T05:33:33.000-05:00",
       "phone": "+37254312367",
@@ -437,7 +437,7 @@ Example output:
       "id": 4204395,
       "account_id": 63582,
       "user_id": 4238379,
-      "email": "wwww@service.hmail.eu",
+      "email": "user@example.com",
       "name": "WW WW",
       "disabled": false,
       "has_gravatar": false,
@@ -458,7 +458,7 @@ Example output:
       "id": 4204395,
       "account_id": 63582,
       "user_id": 4238379,
-      "email": "wwww@service.hmail.eu",
+      "email": "user@example.com",
       "name": "WW WW",
       "disabled": false,
       "has_gravatar": false,
@@ -518,7 +518,7 @@ Example output:
         "id": 4238379,
         "name": "WW WW",
         "disabled": false,
-        "email": "wwww@service.hmail.eu",
+        "email": "user@example.com",
         "created_at": "2018-11-20T05:29:00.000-05:00",
         "last_login": "2018-11-20T05:33:33.000-05:00",
         "phone": "+37254312367",
@@ -546,7 +546,7 @@ Example output:
         "id": 4204395,
         "account_id": 63582,
         "user_id": 4238379,
-        "email": "wwww@service.hmail.eu",
+        "email": "user@example.com",
         "name": "WW WW",
         "disabled": false,
         "has_gravatar": false,
@@ -595,8 +595,7 @@ Example output:
       "id": 31851783,
       "number": 4,
       "name": "Import contracts and software licenses",
-      "description": "<p><a href=\"https://wwwwSerivice.samanage.com/contracts?import=True\">https://wwwwSerivice.samanage.com/contracts?import=True</a></p>",
-      "description_no_html": "https://wwwwSerivice.samanage.com/contracts?import=True",
+      "description": "Example description",
       "state": "Assigned",
       "priority": "Medium",
       "assignee": {
@@ -664,7 +663,6 @@ Example output:
           "initials": "WW"
         }
       },
-      "href": "https://api.samanage.com/incidents/31851783-import-contracts-and-software-licenses.json",
       "cc": [],
       "custom_fields_values": [],
       "incidents": [],
@@ -763,10 +761,6 @@ Example output:
         "name": "Helpdesk",
         "disabled": false,
         "is_user": false,
-        "reports_to": {
-          "id": -1,
-          "href": "https://api.samanage.com/groups/-1.json"
-        },
         "avatar": {
           "type": "group",
           "color": "#0bc46f"
@@ -839,8 +833,7 @@ Example output:
     "id": 31851783,
     "number": 4,
     "name": "Import contracts and software licenses",
-    "description": "<p><a href=\"https://wwwwSerivice.samanage.com/contracts?import=True\">https://wwwwSerivice.samanage.com/contracts?import=True</a></p>",
-    "description_no_html": "https://wwwwSerivice.samanage.com/contracts?import=True",
+    "description": "Example description",
     "state": "Assigned",
     "priority": "Medium",
     "assignee": {
@@ -908,7 +901,6 @@ Example output:
         "initials": "WW"
       }
     },
-    "href": "https://api.samanage.com/incidents/31851783-import-contracts-and-software-licenses.json",
     "cc": [],
     "custom_fields_values": [],
     "incidents": [],
@@ -1177,7 +1169,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|attachment|samanage_attachment|True|Newly created attachment|{'id': 27211951, 'content_type': 'text/plain', 'size': 12, 'filename': 'Hello.txt', 'url': 'https://s3.amazonaws.com/Production/1234/attachments/Hello.txt', 'shared_attachment': False, 'attachable_id': 31851783, 'attachable_type': 'Incident', 'attachment_type': 'attachment'}|
+|attachment|samanage_attachment|True|Newly created attachment|{'id': 27211951, 'content_type': 'text/plain', 'size': 12, 'filename': 'Hello.txt', 'url': 'https://example.com', 'shared_attachment': False, 'attachable_id': 31851783, 'attachable_type': 'Incident', 'attachment_type': 'attachment'}|
 
 Example output:
 
@@ -1188,7 +1180,7 @@ Example output:
     "content_type": "text/plain",
     "size": 12,
     "filename": "Hello.txt",
-    "url": "https://s3.amazonaws.com/Production_CustomerData/attachments/3e696549fd7763d9ca28/Hello.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJVLMJ2APFKWLI5KA%2F20181122%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20181122T192713Z&X-Amz-Expires=600&X-Amz-SignedHeaders=host&X-Amz-Signature=443e9699312d3ce11e8910b0dd2def736b76846e72b9cd8f241481ddfad6536e",
+    "url": "https://example.com",
     "shared_attachment": false,
     "attachable_id": 31851783,
     "attachable_type": "Incident",
@@ -1314,8 +1306,7 @@ Example output:
     "id": 31851783,
     "number": 4,
     "name": "Import contracts and software licenses",
-    "description": "<p><a href=\"https://wwwwSerivice.samanage.com/contracts?import=True\">https://wwwwSerivice.samanage.com/contracts?import=True</a></p>",
-    "description_no_html": "https://wwwwSerivice.samanage.com/contracts?import=True",
+    "description": "Example description",
     "state": "Assigned",
     "priority": "Medium",
     "assignee": {
@@ -1383,7 +1374,6 @@ Example output:
         "initials": "WW"
       }
     },
-    "href": "https://api.samanage.com/incidents/31851783-import-contracts-and-software-licenses.json",
     "cc": [],
     "custom_fields_values": [],
     "incidents": [],
@@ -1434,8 +1424,7 @@ Example output:
     "id": 31851783,
     "number": 4,
     "name": "Import contracts and software licenses",
-    "description": "<p><a href=\"https://wwwwSerivice.samanage.com/contracts?import=True\">https://wwwwSerivice.samanage.com/contracts?import=True</a></p>",
-    "description_no_html": "https://wwwwSerivice.samanage.com/contracts?import=True",
+    "description": "Example Description",
     "state": "Assigned",
     "priority": "Medium",
     "assignee": {
@@ -1444,7 +1433,7 @@ Example output:
       "id": 4238379,
       "name": "WW WW",
       "disabled": false,
-      "email": "wwww@service.hmail.eu",
+      "email": "user@example.com",
       "created_at": "2018-11-20T05:29:00.000-05:00",
       "last_login": "2018-11-20T05:33:33.000-05:00",
       "phone": "+37254312367",
@@ -1503,7 +1492,6 @@ Example output:
         "initials": "WW"
       }
     },
-    "href": "https://api.samanage.com/incidents/31851783-import-contracts-and-software-licenses.json",
     "cc": [],
     "custom_fields_values": [],
     "incidents": [],
