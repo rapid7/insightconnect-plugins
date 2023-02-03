@@ -25,13 +25,13 @@ class DownloadReportInput(insightconnect_plugin_runtime.Input):
     "id": {
       "type": "integer",
       "title": "Report ID",
-      "description": "Identifier of the report to download e.g. 265",
+      "description": "Identifier of the report to download",
       "order": 1
     },
     "instance": {
       "type": "string",
       "title": "Instance",
-      "description": "The identifier of the report instance, 'latest' or ID e.g. 100",
+      "description": "The identifier of the report instance, 'latest' or ID",
       "order": 2
     }
   },

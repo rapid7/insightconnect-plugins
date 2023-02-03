@@ -1890,7 +1890,7 @@ types:
 connection:
   url:
     title: URL
-    description: URL to your InsightVM console, without trailing slashes, e.g. https://insightvm.example.com:3780
+    description: URL to your InsightVM console, without trailing slashes
     type: string
     required: true
     example: https://insightvm.example.com:3780
@@ -2072,13 +2072,13 @@ actions:
     input:
       id:
         title: Report ID
-        description: Identifier of the report to download e.g. 265
+        description: Identifier of the report to download
         type: integer
         example: 1234
         required: true
       instance:
         title: Instance
-        description: The identifier of the report instance, 'latest' or ID e.g. 100
+        description: The identifier of the report instance, 'latest' or ID
         type: string
         example: "latest"
         required: true
@@ -2121,7 +2121,7 @@ actions:
     input:
       vulnerability_id:
         title: Vulnerability ID
-        description: The identifier of the vulnerability e.g. jre-vuln-cve-2013-2471
+        description: The identifier of the vulnerability
         type: string
         example: "jre-vuln-cve-2013-2471"
         required: true
@@ -2235,7 +2235,7 @@ actions:
     input:
       id:
         title: ID
-        description: Tag ID, e.g. 1
+        description: Tag ID
         type: integer
         example: 1234
         required: true
@@ -3021,7 +3021,7 @@ actions:
     input:
       cve_id:
         title: CVE ID
-        description: Common Vulnerabilities and Exposures ID, e.g. CVE-2018-12345
+        description: Common Vulnerabilities and Exposures ID
         type: string
         example: "CVE-2018-12345"
         required: true
@@ -3408,7 +3408,7 @@ actions:
     input:
       id:
         title: ID
-        description: Role ID, e.g 'global-admin'
+        description: Role ID
         type: string
         example: "global-admin"
         required: true
@@ -3524,8 +3524,7 @@ actions:
         default: false
       role_id:
         title: Role ID
-        description: The identifier of the role to which the user should be assigned,
-          e.g 'global-admin'
+        description: The identifier of the role to which the user should be assigned
         type: string
         example: "global-admin"
         required: true
@@ -3614,8 +3613,7 @@ actions:
         default: false
       role_id:
         title: Role ID
-        description: The identifier of the role to which the user should be assigned,
-          e.g 'global-admin'
+        description: The identifier of the role to which the user should be assigned
         type: string
         example: "global-admin"
         required: true
@@ -3699,8 +3697,7 @@ actions:
         default: false
       role_id:
         title: Role ID
-        description: The identifier of the role to which the user should be assigned,
-          e.g 'global-admin'
+        description: The identifier of the role to which the user should be assigned
         type: string
         example: "global-admin"
         required: true
@@ -3864,7 +3861,7 @@ actions:
           - 100
       scope:
         title: Scope
-        description: Scope context for generated report; if set remediations will be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID
+        description: Scope context for generated report; if set remediations will be scoped by each in scope ID
         type: string
         required: true
         default: none
@@ -4022,7 +4019,7 @@ actions:
         required: false
       expiration:
         title: Expiration
-        description: The date the vulnerability exception expires e.g 2021-12-30T00:00:00Z
+        description: The date the vulnerability exception expires
         type: date
         example: 2021-12-30 00:00:00
         required: false
@@ -4174,7 +4171,7 @@ actions:
         example: 42
       date:
         title: Date
-        description: Expiration date. e.g. 2020-02-24T06:59:59.999Z
+        description: Expiration date
         type: string
         required: true
         example: "2020-02-24T06:59:59.999Z"
@@ -4290,7 +4287,6 @@ actions:
         description: Hypermedia links to corresponding or related resources
         type: '[]link'
         required: true
-
 triggers:
   new_scans:
     title: New Scans

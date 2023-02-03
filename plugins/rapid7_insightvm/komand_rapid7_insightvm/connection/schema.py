@@ -23,7 +23,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "url": {
       "type": "string",
       "title": "URL",
-      "description": "URL to your InsightVM console, without trailing slashes, e.g. https://insightvm.example.com:3780",
+      "description": "URL to your InsightVM console, without trailing slashes",
       "order": 1
     }
   },
