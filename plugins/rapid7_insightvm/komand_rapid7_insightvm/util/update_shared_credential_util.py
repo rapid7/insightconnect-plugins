@@ -1,11 +1,11 @@
-from typing import Union, Tuple, Dict
+from typing import Union, Tuple, Dict, Any
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from komand_rapid7_insightvm.util.util import check_not_null
 
 
-def ssh_setup(account: Dict[str, any]) -> Tuple[str, str, str]:
+def ssh_setup(account: Dict[str, Any]) -> Tuple[str, str, str]:
     """
     checks permission elevation to see if permission_elevation_username and password is needed
     :param account: user input
@@ -22,7 +22,7 @@ def ssh_setup(account: Dict[str, any]) -> Tuple[str, str, str]:
     return permission_elevation, permission_elevation_username, permission_elevation_password
 
 
-def usr_and_pass(account: Dict[str, any]) -> Tuple[str, str]:
+def usr_and_pass(account: Dict[str, Any]) -> Tuple[str, str]:
     """
     gets username and password from account
     :param account: where username and password is stored
@@ -31,7 +31,7 @@ def usr_and_pass(account: Dict[str, any]) -> Tuple[str, str]:
     return check_not_null(account, "username"), check_not_null(account, "password")
 
 
-def as400_cifs_cvs(account: Dict[str, any], service: str) -> Dict[str, str]:
+def as400_cifs_cvs(account: Dict[str, Any], service: str) -> Dict[str, str]:
     """
     Gets inputs required for the as400, cifs, or cvs services
     :param account: where all potential inputs are stored
@@ -43,7 +43,7 @@ def as400_cifs_cvs(account: Dict[str, any], service: str) -> Dict[str, str]:
     return {"service": service, "domain": domain, "username": username, "password": password}
 
 
-def cifshash(account: Dict[str, any], service: str) -> Dict[str, str]:
+def cifshash(account: Dict[str, Any], service: str) -> Dict[str, str]:
     """
     Gets inputs required for cifshash service
     :param account: where all potential inputs are stored
@@ -56,7 +56,7 @@ def cifshash(account: Dict[str, any], service: str) -> Dict[str, str]:
     return {"service": service, "domain": domain, "username": username, "ntlmHash": ntlm_hash}
 
 
-def db2_mysql_postgresql(account: Dict[str, any], service: str) -> Dict[str, str]:
+def db2_mysql_postgresql(account: Dict[str, Any], service: str) -> Dict[str, str]:
     """
     Gets inputs required for the db2, mysql, or postgresql services
     :param account: where all potential inputs are stored
@@ -68,7 +68,7 @@ def db2_mysql_postgresql(account: Dict[str, any], service: str) -> Dict[str, str
     return {"service": service, "database": database, "username": username, "password": password}
 
 
-def ftp_pop_remote_exec_telnet(account: Dict[str, any], service: str) -> Dict[str, str]:
+def ftp_pop_remote_exec_telnet(account: Dict[str, Any], service: str) -> Dict[str, str]:
     """
     Gets inputs required for the ftp, pop, remote-exec or telnet services
     :param account: where all potential inputs are stored
@@ -79,7 +79,7 @@ def ftp_pop_remote_exec_telnet(account: Dict[str, any], service: str) -> Dict[st
     return {"service": service, "username": username, "password": password}
 
 
-def http(account: Dict[str, any], service: str) -> Dict[str, str]:
+def http(account: Dict[str, Any], service: str) -> Dict[str, str]:
     """
     Gets inputs required for http service
     :param account: where all potential inputs are stored
@@ -91,7 +91,7 @@ def http(account: Dict[str, any], service: str) -> Dict[str, str]:
     return {"service": service, "realm": realm, "username": username, "password": password}
 
 
-def ms_sql_sybase(account: Dict[str, any], service: str) -> Union[Dict[str, any], Dict[str, any]]:
+def ms_sql_sybase(account: Dict[str, Any], service: str) -> Union[Dict[str, Any], Dict[str, Any]]:
     """
     Gets inputs required for the ms-sql or sybase service
     :param account: where all potential inputs are stored
@@ -121,7 +121,7 @@ def ms_sql_sybase(account: Dict[str, any], service: str) -> Union[Dict[str, any]
         }
 
 
-def notes(account: Dict[str, any], service: str) -> Dict[str, str]:
+def notes(account: Dict[str, Any], service: str) -> Dict[str, str]:
     """
     Gets inputs required for notes service
     :param account: where all potential inputs are stored
@@ -132,7 +132,7 @@ def notes(account: Dict[str, any], service: str) -> Dict[str, str]:
     return {"service": service, "notesIDPassword": notes_id_password}
 
 
-def oracle(account: Dict[str, any], service: str) -> Union[Dict[str, any], Dict[str, any]]:
+def oracle(account: Dict[str, Any], service: str) -> Union[Dict[str, Any], Dict[str, Any]]:
     """
     Gets inputs required for oracle service
     :param account: where all potential inputs are stored
@@ -162,7 +162,7 @@ def oracle(account: Dict[str, any], service: str) -> Union[Dict[str, any], Dict[
         }
 
 
-def snmp(account: Dict[str, any], service: str) -> Dict[str, str]:
+def snmp(account: Dict[str, Any], service: str) -> Dict[str, str]:
     """
     Gets inputs required for snmp service
     :param account: where all potential inputs are stored
@@ -173,7 +173,7 @@ def snmp(account: Dict[str, any], service: str) -> Dict[str, str]:
     return {"service": service, "communityName": community_name}
 
 
-def snmpv3(account: Dict[str, any], service: str) -> Dict[str, str]:
+def snmpv3(account: Dict[str, Any], service: str) -> Dict[str, str]:
     """
     Gets inputs required for snmpv3 service
     :param account: where all potential inputs are stored
@@ -198,7 +198,7 @@ def snmpv3(account: Dict[str, any], service: str) -> Dict[str, str]:
     }
 
 
-def ssh(account: Dict[str, any], service: str) -> Dict[str, str]:
+def ssh(account: Dict[str, Any], service: str) -> Dict[str, str]:
     """
     Gets inputs required for ssh service
     :param account: where all potential inputs are stored
@@ -217,7 +217,7 @@ def ssh(account: Dict[str, any], service: str) -> Dict[str, str]:
     }
 
 
-def ssh_key(account: Dict[str, any], service: str) -> Dict[str, any]:
+def ssh_key(account: Dict[str, Any], service: str) -> Dict[str, Any]:
     """
     Gets inputs required for ssh-key service
     :param account: where all potential inputs are stored
@@ -239,7 +239,7 @@ def ssh_key(account: Dict[str, any], service: str) -> Dict[str, any]:
     }
 
 
-def get_account_input(account: Dict[str, any]):
+def get_account_input(account: Dict[str, Any]):
     """
     finds which service user wants to use and runs function specific to that service
     :param account: account input
@@ -271,7 +271,7 @@ def get_account_input(account: Dict[str, any]):
     return service_dict[service](account, service)
 
 
-def make_payload(params: Dict[str, any], account_input: Dict[str, any]) -> Dict[str, any]:
+def make_payload(params: Dict[str, Any], account_input: Dict[str, Any]) -> Dict[str, Any]:
     """
     creates a payload for the put request
     :param params: user input

@@ -4,7 +4,7 @@ import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 import time
 from dateutil.parser import parse
-from typing import Union, Dict
+from typing import Dict, Any
 
 
 def convert_date_to_iso8601(date: str) -> str:
@@ -94,7 +94,7 @@ def read_from_cache(filename):
         return contents
 
 
-def check_not_null(account: Dict[str, any], var_name: str) -> str:
+def check_not_null(account: Dict[str, Any], var_name: str) -> str:
     """
     Checks that a required value is inputted
     :param account: user input
