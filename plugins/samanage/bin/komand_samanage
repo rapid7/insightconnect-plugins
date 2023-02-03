@@ -4,10 +4,10 @@ import os
 import json
 from sys import argv
 
-Name = "Samanage"
+Name = "Solarwinds"
 Vendor = "rapid7"
 Version = "2.0.0"
-Description = "The Samanage plugin allows you to start workflows on new incidents, manage incidents, and manage users"
+Description = "The Solarwinds plugin allows you to start workflows on new incidents, manage incidents, and manage users"
 
 
 def main():

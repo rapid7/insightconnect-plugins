@@ -17,7 +17,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         if not token:
             raise ConnectionTestException(
                 cause="Missing API key from Connection. This is a required field.",
-                assistance="The API authentication token can be obtained from your Samanage account.",
+                assistance="The API authentication token can be obtained from your Solarwinds account.",
             )
 
         self.logger.info("Connect: Connecting...")

@@ -34,7 +34,7 @@ class ListUsersOutput(insightconnect_plugin_runtime.Output):
       "title": "Users",
       "description": "A list of all users",
       "items": {
-        "$ref": "#/definitions/samanage_user"
+        "$ref": "#/definitions/solarwinds_user"
       },
       "order": 1
     }
@@ -43,9 +43,9 @@ class ListUsersOutput(insightconnect_plugin_runtime.Output):
     "users"
   ],
   "definitions": {
-    "samanage_field": {
+    "solarwinds_field": {
       "type": "object",
-      "title": "samanage_field",
+      "title": "solarwinds_field",
       "properties": {
         "name": {
           "type": "string",
@@ -61,9 +61,9 @@ class ListUsersOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "samanage_name": {
+    "solarwinds_name": {
       "type": "object",
-      "title": "samanage_name",
+      "title": "solarwinds_name",
       "properties": {
         "name": {
           "type": "string",
@@ -73,9 +73,9 @@ class ListUsersOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "samanage_user": {
+    "solarwinds_user": {
       "type": "object",
-      "title": "samanage_user",
+      "title": "solarwinds_user",
       "properties": {
         "created_at": {
           "type": "string",
@@ -90,12 +90,12 @@ class ListUsersOutput(insightconnect_plugin_runtime.Output):
           "title": "Custom Fields Values",
           "description": "Custom fields values",
           "items": {
-            "$ref": "#/definitions/samanage_field"
+            "$ref": "#/definitions/solarwinds_field"
           },
           "order": 12
         },
         "department": {
-          "$ref": "#/definitions/samanage_name",
+          "$ref": "#/definitions/solarwinds_name",
           "title": "Department",
           "description": "Department name",
           "order": 10
@@ -137,28 +137,28 @@ class ListUsersOutput(insightconnect_plugin_runtime.Output):
           "order": 6
         },
         "reports_to": {
-          "$ref": "#/definitions/samanage_name",
+          "$ref": "#/definitions/solarwinds_name",
           "title": "Reports To",
           "description": "Who the user reports to",
           "order": 11
         },
         "role": {
-          "$ref": "#/definitions/samanage_name",
+          "$ref": "#/definitions/solarwinds_name",
           "title": "Role",
           "description": "Role",
           "order": 8
         },
         "site": {
-          "$ref": "#/definitions/samanage_name",
+          "$ref": "#/definitions/solarwinds_name",
           "title": "Site",
           "description": "Site name",
           "order": 9
         }
       },
       "definitions": {
-        "samanage_field": {
+        "solarwinds_field": {
           "type": "object",
-          "title": "samanage_field",
+          "title": "solarwinds_field",
           "properties": {
             "name": {
               "type": "string",
@@ -174,9 +174,9 @@ class ListUsersOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "samanage_name": {
+        "solarwinds_name": {
           "type": "object",
-          "title": "samanage_name",
+          "title": "solarwinds_name",
           "properties": {
             "name": {
               "type": "string",

@@ -49,7 +49,7 @@ class GetCommentsOutput(insightconnect_plugin_runtime.Output):
       "title": "Comments",
       "description": "All comments of an incident",
       "items": {
-        "$ref": "#/definitions/samanage_comment"
+        "$ref": "#/definitions/solarwinds_comment"
       },
       "order": 1
     }
@@ -58,9 +58,9 @@ class GetCommentsOutput(insightconnect_plugin_runtime.Output):
     "comments"
   ],
   "definitions": {
-    "samanage_comment": {
+    "solarwinds_comment": {
       "type": "object",
-      "title": "samanage_comment",
+      "title": "solarwinds_comment",
       "properties": {
         "body": {
           "type": "string",

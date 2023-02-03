@@ -62,7 +62,7 @@ class CommentIncidentOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "comment": {
-      "$ref": "#/definitions/samanage_comment",
+      "$ref": "#/definitions/solarwinds_comment",
       "title": "Comment",
       "description": "Newly created comment",
       "order": 1
@@ -72,9 +72,9 @@ class CommentIncidentOutput(insightconnect_plugin_runtime.Output):
     "comment"
   ],
   "definitions": {
-    "samanage_comment": {
+    "solarwinds_comment": {
       "type": "object",
-      "title": "samanage_comment",
+      "title": "solarwinds_comment",
       "properties": {
         "body": {
           "type": "string",

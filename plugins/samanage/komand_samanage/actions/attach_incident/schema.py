@@ -63,7 +63,7 @@ class AttachIncidentOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "attachment": {
-      "$ref": "#/definitions/samanage_attachment",
+      "$ref": "#/definitions/solarwinds_attachment",
       "title": "Attachment",
       "description": "Newly created attachment",
       "order": 1
@@ -73,9 +73,9 @@ class AttachIncidentOutput(insightconnect_plugin_runtime.Output):
     "attachment"
   ],
   "definitions": {
-    "samanage_attachment": {
+    "solarwinds_attachment": {
       "type": "object",
-      "title": "samanage_attachment",
+      "title": "solarwinds_attachment",
       "properties": {
         "attachable_id": {
           "type": "integer",

@@ -72,18 +72,18 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
           "title": "Assets",
           "description": "Assets",
           "items": {
-            "$ref": "#/definitions/samanage_id"
+            "$ref": "#/definitions/solarwinds_id"
           },
           "order": 13
         },
         "assignee": {
-          "$ref": "#/definitions/samanage_email",
+          "$ref": "#/definitions/solarwinds_email",
           "title": "Assignee",
           "description": "Assignee",
           "order": 10
         },
         "category": {
-          "$ref": "#/definitions/samanage_name",
+          "$ref": "#/definitions/solarwinds_name",
           "title": "Category",
           "description": "Category",
           "order": 6
@@ -93,7 +93,7 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
           "title": "Changes",
           "description": "Changes",
           "items": {
-            "$ref": "#/definitions/samanage_number"
+            "$ref": "#/definitions/solarwinds_number"
           },
           "order": 12
         },
@@ -102,7 +102,7 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
           "title": "Configuration Items",
           "description": "Configuration items",
           "items": {
-            "$ref": "#/definitions/samanage_id"
+            "$ref": "#/definitions/solarwinds_id"
           },
           "order": 15
         },
@@ -111,7 +111,7 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
           "title": "Custom Fields Values",
           "description": "Custom fields values",
           "items": {
-            "$ref": "#/definitions/samanage_field"
+            "$ref": "#/definitions/solarwinds_field"
           },
           "order": 18
         },
@@ -138,7 +138,7 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
           "title": "Incidents",
           "description": "Incidents",
           "items": {
-            "$ref": "#/definitions/samanage_number"
+            "$ref": "#/definitions/solarwinds_number"
           },
           "order": 16
         },
@@ -147,7 +147,7 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
           "title": "Mobiles",
           "description": "Mobiles",
           "items": {
-            "$ref": "#/definitions/samanage_id"
+            "$ref": "#/definitions/solarwinds_id"
           },
           "order": 14
         },
@@ -168,12 +168,12 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
           "title": "Problem",
           "description": "Problem",
           "items": {
-            "$ref": "#/definitions/samanage_problem"
+            "$ref": "#/definitions/solarwinds_problem"
           },
           "order": 11
         },
         "requester": {
-          "$ref": "#/definitions/samanage_email",
+          "$ref": "#/definitions/solarwinds_email",
           "title": "Requester",
           "description": "Requester",
           "order": 8
@@ -183,7 +183,7 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
           "title": "Solutions",
           "description": "Solutions",
           "items": {
-            "$ref": "#/definitions/samanage_number"
+            "$ref": "#/definitions/solarwinds_number"
           },
           "order": 17
         },
@@ -194,7 +194,7 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
           "order": 3
         },
         "subcategory": {
-          "$ref": "#/definitions/samanage_name",
+          "$ref": "#/definitions/solarwinds_name",
           "title": "Subcategory",
           "description": "Subcategory",
           "order": 7
@@ -204,15 +204,15 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
           "title": "Tags",
           "description": "Tags",
           "items": {
-            "$ref": "#/definitions/samanage_tag"
+            "$ref": "#/definitions/solarwinds_tag"
           },
           "order": 19
         }
       },
       "definitions": {
-        "samanage_email": {
+        "solarwinds_email": {
           "type": "object",
-          "title": "samanage_email",
+          "title": "solarwinds_email",
           "properties": {
             "email": {
               "type": "string",
@@ -222,9 +222,9 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "samanage_field": {
+        "solarwinds_field": {
           "type": "object",
-          "title": "samanage_field",
+          "title": "solarwinds_field",
           "properties": {
             "name": {
               "type": "string",
@@ -240,9 +240,9 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "samanage_id": {
+        "solarwinds_id": {
           "type": "object",
-          "title": "samanage_id",
+          "title": "solarwinds_id",
           "properties": {
             "id": {
               "type": "string",
@@ -252,9 +252,9 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "samanage_name": {
+        "solarwinds_name": {
           "type": "object",
-          "title": "samanage_name",
+          "title": "solarwinds_name",
           "properties": {
             "name": {
               "type": "string",
@@ -264,9 +264,9 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "samanage_number": {
+        "solarwinds_number": {
           "type": "object",
-          "title": "samanage_number",
+          "title": "solarwinds_number",
           "properties": {
             "number": {
               "type": "string",
@@ -276,9 +276,9 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "samanage_problem": {
+        "solarwinds_problem": {
           "type": "object",
-          "title": "samanage_problem",
+          "title": "solarwinds_problem",
           "properties": {
             "id": {
               "type": "integer",
@@ -300,9 +300,9 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "samanage_tag": {
+        "solarwinds_tag": {
           "type": "object",
-          "title": "samanage_tag",
+          "title": "solarwinds_tag",
           "properties": {
             "id": {
               "type": "integer",
@@ -326,9 +326,9 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "samanage_email": {
+    "solarwinds_email": {
       "type": "object",
-      "title": "samanage_email",
+      "title": "solarwinds_email",
       "properties": {
         "email": {
           "type": "string",
@@ -338,9 +338,9 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "samanage_field": {
+    "solarwinds_field": {
       "type": "object",
-      "title": "samanage_field",
+      "title": "solarwinds_field",
       "properties": {
         "name": {
           "type": "string",
@@ -356,9 +356,9 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "samanage_id": {
+    "solarwinds_id": {
       "type": "object",
-      "title": "samanage_id",
+      "title": "solarwinds_id",
       "properties": {
         "id": {
           "type": "string",
@@ -368,9 +368,9 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "samanage_name": {
+    "solarwinds_name": {
       "type": "object",
-      "title": "samanage_name",
+      "title": "solarwinds_name",
       "properties": {
         "name": {
           "type": "string",
@@ -380,9 +380,9 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "samanage_number": {
+    "solarwinds_number": {
       "type": "object",
-      "title": "samanage_number",
+      "title": "solarwinds_number",
       "properties": {
         "number": {
           "type": "string",
@@ -392,9 +392,9 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "samanage_problem": {
+    "solarwinds_problem": {
       "type": "object",
-      "title": "samanage_problem",
+      "title": "solarwinds_problem",
       "properties": {
         "id": {
           "type": "integer",
@@ -416,9 +416,9 @@ class AssignIncidentOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "samanage_tag": {
+    "solarwinds_tag": {
       "type": "object",
-      "title": "samanage_tag",
+      "title": "solarwinds_tag",
       "properties": {
         "id": {
           "type": "integer",

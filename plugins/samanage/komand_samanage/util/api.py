@@ -169,6 +169,7 @@ class SamanageAPI:
                 # Auth failure returns: HTTP/1.1" 401 None b''
                 if not response.content:
                     raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
-            raise PluginException("API returned an error: {} {}".format(response.status_code, response.content))
+            raise PluginException(cause="API returned an error: {} {}".format(response.status_code, response.content),
+                                  assistance="Check input and retry. If this error continues contact support")
 
         return insightconnect_plugin_runtime.helper.clean(response.json())

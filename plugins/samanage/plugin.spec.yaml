@@ -2,8 +2,8 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: samanage
-title: Samanage
-description: The Samanage plugin allows you to start workflows on new incidents, manage incidents, and manage users
+title: Solarwinds
+description: The Solarwinds plugin allows you to start workflows on new incidents, manage incidents, and manage users
 version: 2.0.0
 vendor: rapid7
 support: community
@@ -12,16 +12,17 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/samanage
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-  vendor_url: https://www.samanage.com/
+  vendor_url: https://www.solarwinds.com/service-desk
 tags:
 - incidents
 - management
+- solarwinds
 hub_tags:
   use_cases: [threat_detection_and_response, remediation_management, user_management]
-  keywords: [incidents, management]
+  keywords: [incidents, management, solarwinds]
   features: []
 types:
-  samanage_comment:
+  solarwinds_comment:
     body:
       title: Body
       description: The contents of the comment
@@ -30,7 +31,7 @@ types:
       title: Is Private
       description: Is the comment private or public?
       type: boolean
-  samanage_tag:
+  solarwinds_tag:
     tagging_count:
       title: Tagging Count
       description: Tagging count
@@ -43,7 +44,7 @@ types:
       title: ID
       description: ID
       type: integer
-  samanage_problem:
+  solarwinds_problem:
     number:
       title: Number
       description: Number
@@ -56,27 +57,27 @@ types:
       title: ID
       description: ID
       type: integer
-  samanage_number:
+  solarwinds_number:
     number:
       title: Number
       description: Number
       type: string
-  samanage_name:
+  solarwinds_name:
     name:
       title: Name
       description: Name
       type: string
-  samanage_email:
+  solarwinds_email:
     email:
       title: Email
       description: Email
       type: string
-  samanage_id:
+  solarwinds_id:
     id:
       title: ID
       description: ID
       type: string
-  samanage_field:
+  solarwinds_field:
     name:
       title: Name
       description: Name
@@ -85,21 +86,21 @@ types:
       title: Value
       description: Value
       type: string
-  samanage_incidents:
+  solarwinds_incidents:
     incident:
       title: Incident
       description: Incident
-      type: '[]samanage_number'
-  samanage_solutions:
+      type: '[]solarwinds_number'
+  solarwinds_solutions:
     solution:
       title: Solution
       description: Solution
-      type: '[]samanage_number'
-  samanage_custom_fields_values:
+      type: '[]solarwinds_number'
+  solarwinds_custom_fields_values:
     custom_fields_value:
       title: Custom Fields Value
       description: Custom fields value
-      type: '[]samanage_field'
+      type: '[]solarwinds_field'
   incident:
     id:
       title: ID
@@ -124,15 +125,15 @@ types:
     category:
       title: Category
       description: Category
-      type: samanage_name
+      type: solarwinds_name
     subcategory:
       title: Subcategory
       description: Subcategory
-      type: samanage_name
+      type: solarwinds_name
     requester:
       title: Requester
       description: Requester
-      type: samanage_email
+      type: solarwinds_email
     due_at:
       title: Due At
       description: Due at
@@ -140,44 +141,44 @@ types:
     assignee:
       title: Assignee
       description: Assignee
-      type: samanage_email
+      type: solarwinds_email
     problem:
       title: Problem
       description: Problem
-      type: '[]samanage_problem'
+      type: '[]solarwinds_problem'
     changes:
       title: Changes
       description: Changes
-      type: '[]samanage_number'
+      type: '[]solarwinds_number'
     assets:
       title: Assets
       description: Assets
-      type: '[]samanage_id'
+      type: '[]solarwinds_id'
     mobiles:
       title: Mobiles
       description: Mobiles
-      type: '[]samanage_id'
+      type: '[]solarwinds_id'
     configuration_items:
       title: Configuration Items
       description: Configuration items
-      type: '[]samanage_id'
+      type: '[]solarwinds_id'
     incidents:
       title: Incidents
       description: Incidents
-      type: '[]samanage_number'
+      type: '[]solarwinds_number'
     solutions:
       title: Solutions
       description: Solutions
-      type: '[]samanage_number'
+      type: '[]solarwinds_number'
     custom_fields_values:
       title: Custom Fields Values
       description: Custom fields values
-      type: '[]samanage_field'
+      type: '[]solarwinds_field'
     tags:
       title: Tags
       description: Tags
-      type: '[]samanage_tag'
-  samanage_user:
+      type: '[]solarwinds_tag'
+  solarwinds_user:
     id:
       title: ID
       description: ID
@@ -209,24 +210,24 @@ types:
     role:
       title: Role
       description: Role
-      type: samanage_name
+      type: solarwinds_name
     site:
       title: Site
       description: Site name
-      type: samanage_name
+      type: solarwinds_name
     department:
       title: Department
       description: Department name
-      type: samanage_name
+      type: solarwinds_name
     reports_to:
       title: Reports To
       description: Who the user reports to
-      type: samanage_name
+      type: solarwinds_name
     custom_fields_values:
       title: Custom Fields Values
       description: Custom fields values
-      type: '[]samanage_field'
-  samanage_attachment:
+      type: '[]solarwinds_field'
+  solarwinds_attachment:
     id:
       title: ID
       description: ID of the attachment
@@ -246,7 +247,7 @@ types:
 connection:
   token:
     title: Token
-    description: API Token generated by Samanage admin
+    description: API Token generated by Solarwinds admin
     type: credential_secret_key
     required: true
     example: 1234556345467677684059043567
@@ -431,7 +432,7 @@ actions:
       comment:
         title: Comment
         description: Newly created comment
-        type: samanage_comment
+        type: solarwinds_comment
         required: true
         example: { "id": "1","body": "Comment body","is_private": "true","created_at": "2025-01-01T00:00:00.000+01:00","updated_at": "2025-01-01T00:00:00.000+01:00","user": { },"commenter_id": "1","commenter_type": "Incident" }
   get_comments:
@@ -448,7 +449,7 @@ actions:
       comments:
         title: Comments
         description: All comments of an incident
-        type: '[]samanage_comment'
+        type: '[]solarwinds_comment'
         required: true
         example: [{"id": "1","body": "Comment body","is_private": "true","created_at": "2025-01-01T00:00:00.000+01:00","updated_at": "2025-01-01T00:00:00.000+01:00","user": {},"commenter_id": "1","commenter_type": "Incident"}]
   assign_incident:
@@ -529,7 +530,7 @@ actions:
       attachment:
         title: Attachment
         description: Newly created attachment
-        type: samanage_attachment
+        type: solarwinds_attachment
         required: true
         example: { "id": 27211951,"content_type": "text/plain", "size": 12, "filename": "Hello.txt", "url": "https://example.com","shared_attachment": False,"attachable_id": 31851783,"attachable_type": "Incident","attachment_type": "attachment"}
   list_users:
@@ -539,7 +540,7 @@ actions:
       users:
         title: Users
         description: A list of all users
-        type: '[]samanage_user'
+        type: '[]solarwinds_user'
         required: true
         example: [{"id": "10000","name": "Example User","title": "Support Agent","disabled": false,"email": "user@example.com","created_at": "2030-01-01T00:00:00.000+00:00","phone": "(800) 555-0100","mobile_phone": "(800) 555-0100"}]
   create_user:
@@ -603,7 +604,7 @@ actions:
       user:
         title: User
         description: Newly created user
-        type: samanage_user
+        type: solarwinds_user
         required: true
         example: { "id": "10000","name": "Example User","title": "Support Agent","disabled": false,"email": "user@example.com","created_at": "2030-01-01T00:00:00.000+00:00","phone": "(800) 555-0100","mobile_phone": "(800) 555-0100" }
   delete_user:
