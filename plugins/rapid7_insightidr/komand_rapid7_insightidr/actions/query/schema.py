@@ -9,6 +9,7 @@ class Component:
 
 class Input:
     ID = "id"
+    MOST_RECENT_FIRST = "most_recent_first"
     
 
 class Output:
@@ -26,6 +27,12 @@ class QueryInput(insightconnect_plugin_runtime.Input):
       "title": "ID",
       "description": "Query ID",
       "order": 1
+    },
+    "most_recent_first": {
+      "type": "boolean",
+      "title": "Most Recent First",
+      "description": "Order most recent first",
+      "order": 2
     }
   },
   "required": [
