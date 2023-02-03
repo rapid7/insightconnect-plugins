@@ -236,9 +236,12 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "order": 4
         },
         "problem": {
-          "$ref": "#/definitions/samanage_problem",
+          "type": "array",
           "title": "Problem",
           "description": "Problem",
+          "items": {
+            "$ref": "#/definitions/samanage_problem"
+          },
           "order": 11
         },
         "requester": {

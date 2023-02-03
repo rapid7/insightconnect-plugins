@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Samanage"
 Vendor = "rapid7"
-Version = "1.2.0"
+Version = "2.0.0"
 Description = "The Samanage plugin allows you to start workflows on new incidents, manage incidents, and manage users"
 
 
