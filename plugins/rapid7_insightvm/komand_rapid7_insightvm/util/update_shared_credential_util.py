@@ -278,7 +278,7 @@ def make_payload(params: Dict[str, Any], account_input: Dict[str, Any]) -> Dict[
     :param account_input: required variables collected from user input
     :return: dictionary of entire payload that will be sent to the api
     """
-    site_assignment = params.get(check_not_null(params, "site_assignment"))
+    site_assignment = check_not_null(params, "site_assignment")
     if site_assignment == "all-sites":
         sites = None
     else:
