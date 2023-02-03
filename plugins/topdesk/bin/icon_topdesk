@@ -7,7 +7,7 @@ from sys import argv
 Name = "TopDesk"
 Vendor = "rapid7"
 Version = "1.0.0"
-Description = "TopDesk is a cloud/on-premise ticketing system that focuses on ease of use and extensibility"
+Description = "TopDesk is a cloud ticketing system that focuses on ease of use and extensibility"
 
 
 def main():

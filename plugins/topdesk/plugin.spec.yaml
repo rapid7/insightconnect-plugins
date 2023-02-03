@@ -3,11 +3,12 @@ extension: plugin
 products: [insightconnect]
 name: topdesk
 title: TopDesk
-description: TopDesk is a cloud/on-premise ticketing system that focuses on ease of use and extensibility
+description: TopDesk is a cloud ticketing system that focuses on ease of use and extensibility
 version: 1.0.0
 supported_versions: ["TopDesk API v3.8.5"]
 vendor: rapid7
 support: rapid7
+cloud_ready: true
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/topdesk
@@ -18,7 +19,7 @@ tags:
   - ticketing
 hub_tags:
   use_cases: [reporting_and_analytics]
-  keywords: [ticketing, topdesk]
+  keywords: [ticketing, topdesk, cloud_enabled]
   features: []
 
 types:

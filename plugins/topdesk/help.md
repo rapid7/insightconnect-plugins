@@ -1,6 +1,6 @@
 # Description
 
-TopDesk is a cloud/on-premise ticketing system that focuses on ease of use and extensibility
+TopDesk is a cloud ticketing system that focuses on ease of use and extensibility
 
 # Key Features
 
