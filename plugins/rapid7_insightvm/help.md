@@ -221,7 +221,7 @@ This action is used to update vulnerability exception expiration dates.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|date|string|None|True|Expiration date. e.g. 2020-02-24T06:59:59.999Z|None|2020-02-24T06:59:59.999Z|
+|date|string|None|True|Expiration date|None|2020-02-24T06:59:59.999Z|
 |id|integer|None|True|Asset ID|None|42|
 
 Example input:
@@ -1189,7 +1189,7 @@ This action is used to return the contents of a generated report.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|integer|None|True|Identifier of the report to download e.g. 265|None|1234|
-|instance|string|None|True|The identifier of the report instance, 'latest' or ID e.g. 100|None|latest|
+|instance|string|None|True|The identifier of the report instance, 'latest' or ID|None|latest|
 
 Example input:
 
@@ -1271,7 +1271,7 @@ This action is used to get the assets affected by the vulnerability.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|vulnerability_id|string|None|True|The identifier of the vulnerability e.g. jre-vuln-cve-2013-2471|None|jre-vuln-cve-2013-2471|
+|vulnerability_id|string|None|True|The identifier of the vulnerability|None|jre-vuln-cve-2013-2471|
 
 Example input:
 
@@ -1572,7 +1572,7 @@ This action is used to get tag details by tag ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Tag ID, e.g. 1|None|1234|
+|id|integer|None|True|Tag ID|None|1234|
 
 Example input:
 
@@ -3160,7 +3160,7 @@ This action is used to get vulnerability details associated with a CVE.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|cve_id|string|None|True|Common Vulnerabilities and Exposures ID, e.g. CVE-2018-12345|None|CVE-2018-12345|
+|cve_id|string|None|True|Common Vulnerabilities and Exposures ID|None|CVE-2018-12345|
 
 Example input:
 
@@ -4225,7 +4225,7 @@ This action is used to create a vulnerability exception submission.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|Exception created with InsightConnect|True|Comment to include in the vulnerability exception submission|None|example comment|
-|expiration|date|None|False|The date the vulnerability exception expires e.g 2021-12-30T00:00:00Z|None|2021-12-30 00:00:00|
+|expiration|date|None|False|The date the vulnerability exception expires|None|2021-12-30 00:00:00|
 |key|string|None|False|The key to identify a specific instance if the type is Instance|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |port|integer|None|False|The port the vulnerability appears on if the type is Instance|None|40000|
 |reason|string|None|True|Reason for the exception|['False Positive', 'Compensating Control', 'Acceptable Use', 'Acceptable Risk', 'Other']|False Positive|
@@ -4661,7 +4661,7 @@ This action is used to get role details by ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Role ID, e.g 'global-admin'|None|global-admin|
+|id|string|None|True|Role ID|None|global-admin|
 
 Example input:
 
@@ -5008,7 +5008,7 @@ This action is used to create a new user account (limited to external authentica
 |enabled|boolean|True|True|Whether the user account is enabled|None|True|
 |login|string|None|True|The login name of the user|None|jdoe24|
 |name|string|None|True|The full name of the user|None|John Doe|
-|role_id|string|None|True|The identifier of the role to which the user should be assigned, e.g 'global-admin'|None|global-admin|
+|role_id|string|None|True|The identifier of the role to which the user should be assigned|None|global-admin|
 
 Example input:
 
@@ -5068,7 +5068,7 @@ This action is used to update the configuration of an existing user account.
 |id|integer|None|True|The identifier of the user|None|1234|
 |login|string|None|True|The login name of the user|None|jdoe24|
 |name|string|None|True|The full name of the user|None|John Doe|
-|role_id|string|None|True|The identifier of the role to which the user should be assigned, e.g 'global-admin'|None|global-admin|
+|role_id|string|None|True|The identifier of the role to which the user should be assigned|None|global-admin|
 
 Example input:
 
@@ -5227,7 +5227,7 @@ This action is used to update the role associated with an user account.
 |----|----|-------|--------|-----------|----|-------|
 |access_all_asset_groups|boolean|False|True|Whether to grant the user access to all asset groups|None|False|
 |access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|False|
-|role_id|string|None|True|The identifier of the role to which the user should be assigned, e.g 'global-admin'|None|global-admin|
+|role_id|string|None|True|The identifier of the role to which the user should be assigned|None|global-admin|
 |user_id|integer|None|True|The identifier of the user account|None|1234|
 
 Example input:
@@ -5521,7 +5521,7 @@ This action is used to generate results for the top remediations based on a defi
 |----|----|-------|--------|-----------|----|-------|
 |asset_limit|integer|None|False|The amount of assets to be returned with each top remediation; this can be used to reduce message size and processing time|None|4|
 |limit|integer|25|True|Number of remediations for which tickets should be generated|[10, 25, 50, 100]|10|
-|scope|string|none|True|Scope context for generated report; if set remediations will be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID|['none', 'assets', 'assetGroups', 'sites', 'tags', 'scan']|none|
+|scope|string|none|True|Scope context for generated report; if set remediations will be scoped by each in scope ID|['none', 'assets', 'assetGroups', 'sites', 'tags', 'scan']|none|
 |scope_ids|[]integer|[]|False|Scope IDs for which tickets should be generated, by default all are included|None|[1234, 45]|
 |vulnerability_limit|integer|None|False|The amount of vulnerabilities to be returned with each top remediation; this can be used to reduce message size and processing time|None|2|
 
