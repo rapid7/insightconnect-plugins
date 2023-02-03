@@ -20,18 +20,24 @@ resources:
 enable_cache: false
 
 connection:
-  api_key:
-    title: API Key
-    description: JWT API Key
+  client_id:
+    title: Client ID
+    description: Zoom app client ID
     type: credential_secret_key
     required: true
-    example: 'abcdefgABCDEFG12345678'
-  secret:
-    title: Secret
-    description: JWT Secret
+    example: '41tCqP_VZ5jLeaPcBmIrN'
+  client_secret:
+    title: Client Secret
+    description: Zoom app client secret
     type: credential_secret_key
     required: true
-    example: 'abcdefgABCDEFG123456789abcdefgABCDEF'
+    example: 'GTSBw49TzhYMwmVIzO19TciwnM8qqPfz'
+  account_id:
+    title: Account ID
+    description: Zoom app account ID
+    type: credential_secret_key
+    required: true
+    example: 'dBs0x4Kf7HuIK0LLbzMduW'
 
 types:
   user_activity:
@@ -355,3 +361,38 @@ triggers:
         description: User Activity
         type: user_activity
         required: false
+
+tasks:
+  monitor_sign_in_out_activity:
+    title: Monitor Sign In and Out Activity
+    description: Monitor sign in and out activity
+    input:
+      start_date:
+        title: Start Date
+        description: Earliest date to get activity from
+        type: string
+        required: true
+      end_date:
+        title: End Date
+        description: Latest date to get activity from, maximum of one month from start date
+        type: string
+        required: true
+    output:
+      activity_logs:
+        title: Activity Logs
+        description: All activity logs within the specified time range
+        type: "[]incident"
+        required: false
+    schedule:
+      title: Schedule for Retrieving Events
+      type: string
+      enum:
+        - "cron"
+        - "minutes"
+      default: minutes
+    state:
+      last_event_time:
+        title: Last Event Time
+        description: The datetime of the last retrieved incident event
+        type: string
+
