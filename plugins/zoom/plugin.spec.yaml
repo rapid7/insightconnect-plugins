@@ -383,13 +383,6 @@ tasks:
         description: All activity logs within the specified time range
         type: "[]incident"
         required: false
-    schedule:
-      title: Schedule for Retrieving Events
-      type: string
-      enum:
-        - "cron"
-        - "minutes"
-      default: minutes
     state:
       last_event_time:
         title: Last Event Time
