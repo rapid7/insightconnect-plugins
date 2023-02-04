@@ -1,27 +1,87 @@
-import requests
-from insightconnect_plugin_runtime.exceptions import PluginException
 import json
+import datetime
+import time
+from logging import Logger
+from typing import Optional
+
+import requests
+
+from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_zoom.util.util import generate_jwt_token
 
 
 class ZoomAPI:
-    def __init__(self, api_key, secret, logger):
-        self.url = "https://api.zoom.us/v2"
-        self.api_key = api_key
-        self.secret = secret
+
+    def __init__(self, account_id: str, client_id: str, client_secret: str, logger: Logger):
+        self.api_url = "https://api.zoom.us/v2"
+        self.oauth_url = "https://zoom.us/oauth/token"
+        self.account_id = account_id
+        self.client_id = client_id
+        self.client_secret = client_secret
         self.logger = logger
 
-    def get_user(self, user_id):
-        return self._call_api("GET", f"{self.url}/users/{user_id}")
+        self.oauth_token: Optional[str] = None
+        self.oauth_last_refresh_timestamp: float = 0
 
-    def create_user(self, payload):
-        return self._call_api("POST", f"{self.url}/users", json_data=payload)
+    def refresh_oauth_token_if_needed(self) -> None:
+        """
+        Refreshes OAuth token if needed.
+        :return: None
+        """
+        if not self._should_refresh_oauth_token(last_refresh_timestamp=self.oauth_last_refresh_timestamp):
+            return
 
-    def delete_user(self, user_id, params):
-        return self._call_api("DELETE", f"{self.url}/users/{user_id}", params=params)
+        # Refresh should happen, so do the refresh.
+        try:
+            oauth_token = self.get_oauth_token()
+            now_timestamp = self._get_current_time_epoch()
+        except Exception as error:
+            raise PluginException(cause=f"Unable to refresh OAuth token: {error}.",
+                                  assistance="Ensure connection credentials are correct.",
+                                  data=error)
 
-    def get_user_activity_events(self, start_date=None, end_date=None, page_size=None, next_page_token=None):
-        activities_url = f"{self.url}/report/activities"
+        self.oauth_token = oauth_token
+        self.oauth_last_refresh_timestamp = now_timestamp
+
+    def get_oauth_token(self) -> str:
+        """
+        Retrieves a server-to-server OAuth token from Zoom
+        :return: OAuth token
+        """
+        auth_headers = {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Host": "zoom.us"
+        }
+
+        params = {
+            "grant_type": "account_credentials",
+            "account_id": self.account_id
+        }
+
+        response = self._call_api(method="POST", url=self.oauth_url, params=params, additional_headers=auth_headers)
+        try:
+            access_token = response["access_token"]
+        except KeyError:
+            raise PluginException(cause=f"Unable to get access token: {response.get('reason', '')}.",
+                                  assistance="Ensure your connection configuration is using correct credentials.")
+
+        return access_token
+
+    def get_user(self, user_id: str) -> Optional[dict]:
+        return self._call_api("GET", f"{self.api_url}/users/{user_id}")
+
+    def create_user(self, payload: dict) -> Optional[dict]:
+        return self._call_api("POST", f"{self.api_url}/users", json_data=payload)
+
+    def delete_user(self, user_id: str, params: dict) -> Optional[dict]:
+        return self._call_api("DELETE", f"{self.api_url}/users/{user_id}", params=params)
+
+    def get_user_activity_events(self,
+                                 start_date: str = None,
+                                 end_date: str = None,
+                                 page_size: int = None,
+                                 next_page_token: str = None) -> [dict]:
+        activities_url = f"{self.api_url}/report/activities"
 
         events = []
         params = {
@@ -41,8 +101,15 @@ class ZoomAPI:
             else:
                 return events
 
-    def _call_api(self, method, url, params=None, json_data=None, allow_404=False):
-        token = generate_jwt_token(self.api_key, self.secret)
+    def _call_api(self,
+                  method: str,
+                  url: str,
+                  params: dict = None,
+                  json_data: dict = None,
+                  allow_404: bool = False,
+                  override_headers: dict = None) -> Optional[dict]:
+        self.refresh_oauth_token_if_needed()
+
         headers = {"authorization": f"Bearer {token}", "content-type": "application/json"}
 
         try:
@@ -76,3 +143,34 @@ class ZoomAPI:
         except requests.exceptions.HTTPError as e:
             self.logger.info(f"Request to f{url} failed: {e}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
+
+    @staticmethod
+    def _get_current_time_epoch() -> float:
+        """
+        Gets the current epoch time
+        :return: Current time in unix epoch
+        """
+        now = datetime.datetime.now()
+        now_millis = time.mktime(now.timetuple())
+
+        return now_millis
+
+    @staticmethod
+    def _should_refresh_oauth_token(last_refresh_timestamp: float) -> bool:
+        """
+        Determines whether or not the OAuth token should be refreshed.
+        Calculated differences >=55 minutes will return True.
+        :param last_refresh_timestamp: Unix epoch timestamp representing last time the OAuth token was refreshed
+        :return: Boolean, True if a token refresh should happen, False otherwise
+        """
+        # 55 minutes in seconds. Zoom API refresh is 60 minutes, but we'll use 55 minutes for headroom.
+        fifty_five_minutes = 3300
+
+        now = ZoomAPI._get_current_time_epoch()
+        previous_time = last_refresh_timestamp
+
+        time_difference = now - previous_time
+        return time_difference >= fifty_five_minutes
+
+
+
