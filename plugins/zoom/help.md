@@ -25,20 +25,19 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|JWT API Key|None|abcdefgABCDEFG12345678|
-|secret|credential_secret_key|None|True|JWT Secret|None|abcdefgABCDEFG123456789abcdefgABCDEF|
+|account_id|credential_secret_key|None|True|Zoom app account ID|None|dBs0x4Kf7HuIK0LLbzMduW|
+|client_id|credential_secret_key|None|True|Zoom app client ID|None|41tCqP_VZ5jLeaPcBmIrN|
+|client_secret|credential_secret_key|None|True|Zoom app client secret|None|GTSBw49TzhYMwmVIzO19TciwnM8qqPfz|
 
 Example input:
 
 ```
 {
-  "api_key": "abcdefgABCDEFG12345678",
-  "secret": "abcdefgABCDEFG123456789abcdefgABCDEF"
+  "account_id": "dBs0x4Kf7HuIK0LLbzMduW",
+  "client_id": "41tCqP_VZ5jLeaPcBmIrN",
+  "client_secret": "GTSBw49TzhYMwmVIzO19TciwnM8qqPfz"
 }
 ```
-
-See the Zoom [Create a JWT App](https://marketplace.zoom.us/docs/guides/build/jwt-app) documentation for generating a 
-JWT App and obtaining your API key and secret.
 
 ## Technical Details
 
@@ -53,7 +52,7 @@ This action is used to create user associated to account.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |action|string|create|True|Specify how to create the new user|['create', 'autoCreate', 'custCreate', 'ssoCreate']|create|
-|email|string|None|True|Email address of user|None|user@example.com|
+|email|string|None|True|Email address of user|None|https://example.com|
 |first_name|string|None|False|First name of user|None|John|
 |last_name|string|None|True|Last name of user|None|Smith|
 |type|string|None|True|User type|['Basic', 'Licensed', 'On-prem']|Basic|
@@ -101,8 +100,8 @@ This action is used to delete or disassociate user from account.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |action|string|None|True|Specify how to delete the user. To delete pending user, use disassocaite|['delete', 'disassociate']|delete|
-|id|string|None|True|The user identifier or email address|None|user@example.com|
-|transfer_email|string|None|False|Email to transfer meetings, webinars, or recordings|None|user@example.com|
+|id|string|None|True|The user identifier or email address|None|https://example.com|
+|transfer_email|string|None|False|Email to transfer meetings, webinars, or recordings|None|https://example.com|
 |transfer_meetings|boolean|False|False|Whether to transfer meetings to defined transfer email|None|False|
 |transfer_recordings|boolean|False|False|Whether to transfer recordings to defined transfer email|None|False|
 |transfer_webinars|boolean|False|False|Whether to transfer webinars to defined transfer email|None|False|
@@ -142,7 +141,7 @@ This action is used to get user in Zoom account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|user_id|string|None|True|The user identifier or email address|None|user@example.com|
+|user_id|string|None|True|The user identifier or email address|None|https://example.com|
 
 Example input:
 
@@ -220,6 +219,38 @@ Example output:
     "version": "-"
   }
 }
+```
+
+### Tasks
+
+#### Monitor Sign In and Out Activity
+
+This task is used to monitor sign in and out activity.
+
+Supported schedule types for this task include:
+None
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|end_date|string|None|True|Latest date to get activity from, maximum of one month from start date|None|None|
+|start_date|string|None|True|Earliest date to get activity from|None|None|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|activity_logs|[]user_activity|True|All activity logs within the specified time range|
+
+Example output:
+
+```
 ```
 
 ### Custom Output Types
