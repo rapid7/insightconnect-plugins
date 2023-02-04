@@ -381,11 +381,5 @@ tasks:
       activity_logs:
         title: Activity Logs
         description: All activity logs within the specified time range
-        type: "[]incident"
-        required: false
-    state:
-      last_event_time:
-        title: Last Event Time
-        description: The datetime of the last retrieved incident event
-        type: string
-
+        type: "[]user_activity"
+        required: true
