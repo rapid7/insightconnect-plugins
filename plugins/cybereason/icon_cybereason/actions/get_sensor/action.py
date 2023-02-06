@@ -1,8 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import GetSensorInput, GetSensorOutput, Input, Output, Component
 
-# Custom imports below
-
 
 class GetSensor(insightconnect_plugin_runtime.Action):
     def __init__(self):

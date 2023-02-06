@@ -4,7 +4,7 @@ products: [insightconnect]
 name: cybereason
 title: Cybereason
 description: The Cybereason platform provides military-grade cyber security with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin
-version: 2.1.0
+version: 2.2.0
 supported_versions: ["All"]
 vendor: rapid7
 support: rapid7
@@ -493,62 +493,62 @@ types:
       description: Stats
       required: false
   archiveSensorResponse:
-    batch_id:
+    batchId:
       title: Batch ID
       description: The ID for the operation. You may need this number for other operations
       type: integer
       required: true
-    action_type:
+    actionType:
       title: Action Type
       description: The action taken on the sensor
       type: string
       required: true
-    action_arguments:
+    actionArguments:
       title: Action Arguments
       description: The arguments passed for the operation
       type: string
-      required: true
-    global_stats:
+      required: false
+    globalStats:
       title: Global Stats
       description: Collection of items about the operation
       type: globalSensorStats
       required: true
-    final_state:
+    finalState:
       title: Final State
       description: Indicates whether the sensor is in the state indicated by the operation
       type: boolean
       required: true
-    total_number_of_probes:
+    totalNumberOfProbes:
       title: Total Number Of Probes
       decription: How many sensors were affected by the current operation
       type: integer
       required: true
-    initiator_user:
+    initiatorUser:
       title: Initiator User
       description: The user name of the user who performed this operation
       type: string
       required: true
-    start_time:
+    startTime:
       title: Start Time
       description: The start time of the operation
-      type: string
+      type: integer
       required: true
-    aborter_user:
+    aborterUser:
       title: Aborter User
       description: The user name of the user who aborted the operation. This field only exists if the operation was aborted
       type: string
       required: false
-    abort_time:
+    abortTime:
       title: Abort Time
       description: The time (in epoch) when the operation was aborted. This field only exists if the operation was aborted
-      type: string
+      type: integer
       required: false
-    abort_timeout:
+    abortTimeout:
       title: Abort Timeout
       description: Indicates whether there is a timeout value for timing out the request to abort
       type: boolean
       required: true
-    abort_http_status_code:
+    abortHttpStatusCode:
       title: Abort HTTP Status Code
       description: The code sent by the server to abort the operation. This field only exists if the operation was aborted
       type: string
@@ -766,18 +766,6 @@ types:
       type: string
       required: false
       example: "1628068498840"
-    #    lastPylumInfoMsgUpdateTime:
-    #      title: holder
-    #      description: holder
-    #      type: string
-    #      required: false
-    #      example: "1628068444513"
-    #    lastPylumUpdateTimestampMs:
-    #      title: holder
-    #      description: holder
-    #      type: string
-    #      required: false
-    #      example: "holder"
     status:
       title: Status
       description: The status of the sensor
@@ -897,7 +885,7 @@ types:
       description: The version for the console for your Cybereason environment
       type: string
       required: false
-      example: null # find acc example
+      example: 20.1
     firstSeenTime:
       title: First Seen Time
       description: The first time the machine was recognized. Timestamp values are returned in epoch
@@ -949,7 +937,7 @@ types:
     avDbLastUpdateTime:
       title: AV DB Last Update Time
       description: The time when the Anti-Malware Signatures database on the machine where the sensor is installed was last updated
-      type: integer #check
+      type: integer
       required: false
       example: 1627468314000
     powerShellStatus:
@@ -999,7 +987,7 @@ types:
       description: The serial number added for a device in the allowed devices section of the Endpoint Controls settings
       type: string
       required: false
-      example: "" # find value
+      example: "1234567"
     deviceModel:
       title: Device Model
       description: The model added for a device in the allowed devices section of the Endpoint Controls settings
@@ -1017,7 +1005,7 @@ types:
       description: The Anti-Malware prevention mode for the sensor
       type: string
       required: false
-      example: "AM_ENABLED" #check
+      example: "AM_ENABLED"
     antiMalwareModeOrigin:
       title: Anti Malware Mode Origin
       description: The source of the value for the Anti-Malware setting
@@ -1035,13 +1023,13 @@ types:
       description: The address for the Proxy server used by this sensor
       type: string
       required: false
-      example: "" #check
+      example: ""
     preventionError:
       title: Prevention Error
       description: The error received for prevention by the sensor
       type: string
       required: false
-      example: "" #check
+      example: ""
     exitReason:
       title: Exit Reason
       description: The reason the sensor service (minionhost.exe) stopped
@@ -1119,7 +1107,7 @@ types:
       description: The source of the value for the Artificial Intelligence Detect mode setting
       type: string
       required: false
-      example: null #check
+      example: null
     staticAnalysisPreventMode:
       title: Static Analysis Prevent Mode
       description: The value for the Artificial Intelligence Prevent Mode in the Anti-Malware settings
@@ -1264,6 +1252,7 @@ actions:
         description: Search file response
         type: response
         required: true
+        example:
   isolate_machine:
     title: Isolate Machine
     description: Isolate or un-isolate a machine
@@ -1307,7 +1296,7 @@ actions:
         description: The unique identifier of the machine you wish to perform the operation on, this can be an internal IPv4 address, hostname or sensor GUID
         type: string
         required: true
-        example: 1
+        example: 104.31.2.164
     output:
       sensor:
         title: Sensor

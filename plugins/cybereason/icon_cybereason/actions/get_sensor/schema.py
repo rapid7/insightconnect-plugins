@@ -223,8 +223,8 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
         },
         "externalIpAddress": {
           "type": "string",
-          "title": "External Ip Address",
-          "description": "The machine’s external IP address for the local network",
+          "title": "External IP Address",
+          "description": "The machine's external IP address for the local network",
           "order": 7
         },
         "firstSeenTime": {
@@ -283,8 +283,8 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
         },
         "internalIpAddress": {
           "type": "string",
-          "title": "Internal Ip Address",
-          "description": "The machine’s internal IP address as identified by the sensor",
+          "title": "Internal IP Address",
+          "description": "The machine's internal IP address as identified by the sensor",
           "order": 6
         },
         "isolated": {
@@ -512,7 +512,7 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
         "siteId": {
           "type": "integer",
           "title": "Machine Name",
-          "description": "The identifier for the sensor’s site",
+          "description": "The identifier for the sensor's site",
           "order": 9
         },
         "siteName": {

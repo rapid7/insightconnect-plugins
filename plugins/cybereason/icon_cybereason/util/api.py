@@ -5,7 +5,7 @@ import re
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 import json
 from logging import Logger
-from typing import Optional
+from typing import Optional, Dict, Any
 from urllib.parse import urljoin
 
 
@@ -31,21 +31,21 @@ class CybereasonAPI:
                 data="There is a problem connecting to Cybereason. Please check your credentials and permissions.",
             )
 
-    def isolate_machines(self, pylum_ids: [str], malop_id: str = None) -> dict:
+    def isolate_machines(self, pylum_ids: [str], malop_id: str = None) -> Dict[str, Any]:
         return self.send_request(
             "POST",
             "/rest/monitor/global/commands/isolate",
             payload={"malopId": malop_id, "pylumIds": pylum_ids},
         )
 
-    def un_isolate_machines(self, pylum_ids: [str], malop_id: str = None) -> dict:
+    def un_isolate_machines(self, pylum_ids: [str], malop_id: str = None) -> Dict[str, Any]:
         return self.send_request(
             "POST",
             "/rest/monitor/global/commands/un-isolate",
             payload={"malopId": malop_id, "pylumIds": pylum_ids},
         )
 
-    def remediate(self, initiator_user_name: str, actions_by_machine: dict, malop_id: str = None) -> dict:
+    def remediate(self, initiator_user_name: str, actions_by_machine: Dict, malop_id: str = None) -> Dict[str, Any]:
         payload = {
             "initiatorUserName": initiator_user_name,
             "actionsByMachine": actions_by_machine,
@@ -59,7 +59,7 @@ class CybereasonAPI:
             payload=payload,
         )
 
-    def file_search(self, server_filter: dict, file_filter: dict) -> dict:
+    def file_search(self, server_filter: Dict, file_filter: Dict) -> Dict[str, Any]:
         if not file_filter:
             raise PluginException(cause="File filter shouldn't be empty.", assistance="Please check this input.")
 
@@ -69,7 +69,19 @@ class CybereasonAPI:
             payload={"filters": server_filter, "fileFilters": file_filter},
         )
 
-    def get_sensor_details(self, identifier: str) -> dict:
+    def get_sensors(self, identifier: str) -> Dict[str, Any]:
+        field_name = self.which_filter(identifier)
+        return self.send_request(
+            "POST",
+            "/rest/sensors/query",
+            payload={
+                "limit": 1,
+                "offset": 0,
+                "filters": [{"fieldName": field_name, "operator": "ContainsIgnoreCase", "values": [identifier]}],
+            },
+        )
+
+    def get_sensor_details(self, identifier: str) -> Dict[str, Any]:
         sensors = self.send_request("POST", "/rest/sensors/query", payload=self.generate_sensor_filter(identifier))
 
         if sensors.get("totalResults") == 0:
@@ -85,12 +97,12 @@ class CybereasonAPI:
 
         return sensors.get("sensors")[0]
 
-    def archive_sensor(self, sensor_ids: list, argument: str) -> dict:
+    def archive_sensor(self, sensor_ids: list, argument: str) -> Dict[str, Any]:
         return self.send_request(
             "POST", "/rest/sensors/action/archive", payload={"sensorsIds": sensor_ids, "argument": argument}
         )
 
-    def get_malop(self, malop_guid: str) -> dict:
+    def get_malop(self, malop_guid: str) -> Dict[str, Any]:
         try:
             return self.send_request(
                 "POST",
@@ -108,7 +120,7 @@ class CybereasonAPI:
                 assistance="Please ensure that provided Malop GUID is valid and try again.",
             )
 
-    def get_malop_feature_details(self, malop_guid: str, feature_name: str) -> dict:
+    def get_malop_feature_details(self, malop_guid: str, feature_name: str) -> Dict[str, Any]:
         response = self.send_request(
             "POST",
             "/rest/visualsearch/query/simple",
@@ -136,7 +148,7 @@ class CybereasonAPI:
                 assistance="Please ensure that provided Malop ID is valid and try again.",
             )
 
-    def get_visual_search(self, requestedType: str, filters: list, customFields: list) -> dict:
+    def get_visual_search(self, requestedType: str, filters: list, customFields: list) -> Dict[str, Any]:
         try:
             return self.send_request(
                 "POST",
@@ -157,7 +169,7 @@ class CybereasonAPI:
                 assistance="No Visual Search results returned for the provided filter.",
             )
 
-    def check_status_codes(self, status_code: int, response):
+    def check_status_codes(self, status_code: int, response) -> Dict[str, Any]:
         if status_code == 401:
             return PluginException.Preset.USERNAME_PASSWORD
         if status_code == 403:
@@ -178,24 +190,16 @@ class CybereasonAPI:
         else:
             return PluginException.Preset.UNKNOWN
 
-    def send_request(self, method: str, path: str, params: dict = None, payload: dict = None) -> dict:
-        try:
-            response = self.session.request(
-                method.upper(),
-                urljoin(self.base_url, path),
-                params=params,
-                json=payload,
-                headers=self.headers,
-            )
-            if response.status_code:
-                preset = self.check_status_codes(response.status_code, response)
-                raise PluginException(preset=preset, data=response.text)
-
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        except json.decoder.JSONDecodeError as error:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
-        except requests.exceptions.HTTPError as error:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+    def send_request(self, method: str, path: str, params: Dict = None, payload: Dict = None) -> Dict[str, Any]:
+        response = self.session.request(
+            method.upper(),
+            urljoin(self.base_url, path),
+            params=params,
+            json=payload,
+            headers=self.headers,
+        )
+        final_response = self.check_status_codes(response.status_code, response)
+        return final_response
 
     @staticmethod
     def parse_server_filter(server_filter: Optional[str] = None):
@@ -224,7 +228,16 @@ class CybereasonAPI:
         return [{"fieldName": file_name, "operator": operator, "values": value[file_filter[0]]}]
 
     @staticmethod
-    def generate_sensor_filter(identifier: str) -> dict:
+    def which_filter(identifier: str) -> str:
+        if validators.ipv4(identifier):
+            return "internalIpAddress"
+        elif re.match(r"^(-?\d{9,10}\.-?\d{19})$", identifier):
+            return "guid"
+        else:
+            return "machineName"
+
+    @staticmethod
+    def generate_sensor_filter(identifier: str) -> Dict[str, str]:
         sensor_filter = {"filters": [{"operator": "ContainsIgnoreCase", "values": [identifier]}]}
 
         if validators.ipv4(identifier):

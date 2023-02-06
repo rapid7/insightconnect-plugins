@@ -70,88 +70,87 @@ class ArchiveSensorOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "archiveSensorResponse",
       "properties": {
-        "abort_http_status_code": {
+        "abortHttpStatusCode": {
           "type": "string",
           "title": "Abort HTTP Status Code",
           "description": "The code sent by the server to abort the operation. This field only exists if the operation was aborted",
           "order": 12
         },
-        "abort_time": {
-          "type": "string",
+        "abortTime": {
+          "type": "integer",
           "title": "Abort Time",
           "description": "The time (in epoch) when the operation was aborted. This field only exists if the operation was aborted",
           "order": 10
         },
-        "abort_timeout": {
+        "abortTimeout": {
           "type": "boolean",
           "title": "Abort Timeout",
           "description": "Indicates whether there is a timeout value for timing out the request to abort",
           "order": 11
         },
-        "aborter_user": {
+        "aborterUser": {
           "type": "string",
           "title": "Aborter User",
           "description": "The user name of the user who aborted the operation. This field only exists if the operation was aborted",
           "order": 9
         },
-        "action_arguments": {
+        "actionArguments": {
           "type": "string",
           "title": "Action Arguments",
           "description": "The arguments passed for the operation",
           "order": 3
         },
-        "action_type": {
+        "actionType": {
           "type": "string",
           "title": "Action Type",
           "description": "The action taken on the sensor",
           "order": 2
         },
-        "batch_id": {
+        "batchId": {
           "type": "integer",
           "title": "Batch ID",
           "description": "The ID for the operation. You may need this number for other operations",
           "order": 1
         },
-        "final_state": {
+        "finalState": {
           "type": "boolean",
           "title": "Final State",
           "description": "Indicates whether the sensor is in the state indicated by the operation",
           "order": 5
         },
-        "global_stats": {
+        "globalStats": {
           "$ref": "#/definitions/globalSensorStats",
           "title": "Global Stats",
           "description": "Collection of items about the operation",
           "order": 4
         },
-        "initiator_user": {
+        "initiatorUser": {
           "type": "string",
           "title": "Initiator User",
           "description": "The user name of the user who performed this operation",
           "order": 7
         },
-        "start_time": {
-          "type": "string",
+        "startTime": {
+          "type": "integer",
           "title": "Start Time",
           "description": "The start time of the operation",
           "order": 8
         },
-        "total_number_of_probes": {
+        "totalNumberOfProbes": {
           "type": "integer",
           "title": "Total Number Of Probes",
           "order": 6
         }
       },
       "required": [
-        "abort_timeout",
-        "action_arguments",
-        "action_type",
-        "batch_id",
-        "final_state",
-        "global_stats",
-        "initiator_user",
-        "start_time",
-        "total_number_of_probes"
+        "abortTimeout",
+        "actionType",
+        "batchId",
+        "finalState",
+        "globalStats",
+        "initiatorUser",
+        "startTime",
+        "totalNumberOfProbes"
       ],
       "definitions": {
         "globalSensorStats": {
