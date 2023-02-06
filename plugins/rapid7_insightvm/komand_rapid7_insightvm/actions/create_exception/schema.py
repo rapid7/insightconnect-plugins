@@ -40,7 +40,7 @@ class CreateExceptionInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Expiration",
       "displayType": "date",
-      "description": "The date the vulnerability exception expires e.g 2021-12-30T00:00:00Z",
+      "description": "The date the vulnerability exception expires",
       "format": "date-time",
       "order": 4
     },

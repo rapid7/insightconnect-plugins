@@ -4,6 +4,7 @@ import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 import time
 from dateutil.parser import parse
+from typing import Dict, Any
 
 
 def convert_date_to_iso8601(date: str) -> str:
@@ -91,3 +92,17 @@ def read_from_cache(filename):
         contents = cache_file.read()
 
         return contents
+
+
+def check_not_null(account: Dict[str, Any], var_name: str) -> str:
+    """
+    Checks that a required value is inputted
+    :param account: user input
+    :param var_name: name of variable we check
+    :return: value or PluginException
+    """
+    value = account.get(var_name)
+    if value in (None, ""):
+        raise PluginException(cause=f"{var_name} has not been entered.", assistance=f"Enter valid {var_name}")
+    else:
+        return value

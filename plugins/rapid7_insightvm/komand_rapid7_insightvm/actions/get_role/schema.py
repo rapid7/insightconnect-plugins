@@ -24,7 +24,7 @@ class GetRoleInput(insightconnect_plugin_runtime.Input):
     "id": {
       "type": "string",
       "title": "ID",
-      "description": "Role ID, e.g 'global-admin'",
+      "description": "Role ID",
       "order": 1
     }
   },
