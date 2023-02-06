@@ -1188,7 +1188,7 @@ This action is used to return the contents of a generated report.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Identifier of the report to download e.g. 265|None|1234|
+|id|integer|None|True|Identifier of the report to download|None|1234|
 |instance|string|None|True|The identifier of the report instance, 'latest' or ID|None|latest|
 
 Example input:
