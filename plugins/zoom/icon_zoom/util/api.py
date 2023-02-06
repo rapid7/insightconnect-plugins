@@ -5,9 +5,23 @@ from logging import Logger
 from typing import Optional
 
 import requests
+from requests.auth import HTTPBasicAuth
+from requests.auth import AuthBase
 
 from insightconnect_plugin_runtime.exceptions import PluginException
-from icon_zoom.util.util import generate_jwt_token
+
+
+class BearerAuth(AuthBase):
+    """
+    Authentication class for Bearer auth
+    """
+
+    def __init__(self, access_token: str):
+        self.access_token = access_token
+
+    def __call__(self, r):
+        r.headers["Authorization"] = f"Bearer {self.access_token}"
+        return r
 
 
 class ZoomAPI:
@@ -48,17 +62,15 @@ class ZoomAPI:
         Retrieves a server-to-server OAuth token from Zoom
         :return: OAuth token
         """
-        auth_headers = {
-            "Content-Type": "application/x-www-form-urlencoded",
-            "Host": "zoom.us"
-        }
 
         params = {
             "grant_type": "account_credentials",
             "account_id": self.account_id
         }
 
-        response = self._call_api(method="POST", url=self.oauth_url, params=params, additional_headers=auth_headers)
+        auth = HTTPBasicAuth(self.client_id, self.client_secret)
+
+        response = self._call_api(method="POST", url=self.oauth_url, params=params, auth=auth)
         try:
             access_token = response["access_token"]
         except KeyError:
@@ -107,19 +119,22 @@ class ZoomAPI:
                   params: dict = None,
                   json_data: dict = None,
                   allow_404: bool = False,
-                  override_headers: dict = None) -> Optional[dict]:
+                  auth: AuthBase = None) -> Optional[dict]:
         self.refresh_oauth_token_if_needed()
 
-        headers = {"authorization": f"Bearer {token}", "content-type": "application/json"}
+        # If HTTPBasicAuth isn't provided (for calls to get OAuth token), then
+        # use BearerAuth since we have a token already
+        if not auth:
+            auth = BearerAuth(access_token=self.oauth_token)
 
         try:
-            response = requests.request(method, url, json=json_data, params=params, headers=headers)
+            response = requests.request(method, url, json=json_data, params=params, auth=auth)
 
             if response.status_code == 401:
                 resp = json.loads(response.text)
                 raise PluginException(
                     cause=resp.get("message"),
-                    assistance="Verify your JWT App API key and Secret configured in your " "connection is correct.",
+                    assistance="Verify that the credentials configured within the Zoom plugin connection are correct.",
                 )
             if response.status_code == 404:
                 resp = json.loads(response.text)
