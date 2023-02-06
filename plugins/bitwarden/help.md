@@ -29,7 +29,7 @@ Access to the Bitwarden Public API is available to customers on the Enterprise o
 
 # Supported Product Versions
 
-* Bitwarden 2023-01-10
+* Cloud-hosted Bitwarden instance 2023.1.1
 
 # Documentation
 
