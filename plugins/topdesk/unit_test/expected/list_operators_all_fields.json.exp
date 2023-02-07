@@ -1,0 +1,103 @@
+{
+  "operators": [
+    {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "principalId": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "status": "operator",
+      "accountType": "regular",
+      "surName": "User",
+      "firstName": "Test",
+      "dynamicName": "Test User",
+      "initials": "T.",
+      "title": "Mrs",
+      "gender": "FEMALE",
+      "language": {
+        "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+        "name": "English"
+      },
+      "branch": {
+        "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+        "name": "Example branch",
+        "timeZone": "Europe/Dublin"
+      },
+      "location": {
+        "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+        "branch": {
+          "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+          "name": "Example branch",
+          "timeZone": "Europe/Dublin"
+        },
+        "name": "Example location",
+        "room": "Test room"
+      },
+      "telephone": "111111111",
+      "email": "user@example.com",
+      "exchangeAccount": "user@example.com",
+      "loginName": "TEST",
+      "loginPermission": true,
+      "jobTitle": "Application Manager",
+      "department": {
+        "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+        "name": "IT"
+      },
+      "hasAttention": false,
+      "installer": true,
+      "firstLineCallOperator": true,
+      "secondLineCallOperator": true,
+      "problemManager": true,
+      "problemOperator": true,
+      "changeCoordinator": true,
+      "changeActivitiesOperator": true,
+      "requestForChangeOperator": true,
+      "extensiveChangeOperator": true,
+      "simpleChangeOperator": true,
+      "scenarioManager": true,
+      "planningActivityManager": true,
+      "projectCoordinator": true,
+      "projectActiviesOperator": true,
+      "stockManager": true,
+      "reservationsOperator": true,
+      "serviceOperator": true,
+      "externalHelpDeskParty": true,
+      "contractManager": true,
+      "operationsOperator": true,
+      "operationsManager": true,
+      "knowledgeBaseManager": true,
+      "accountManager": false,
+      "creationDate": "2020-09-29T21:08:30.000+0000",
+      "creator": {
+        "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+        "name": "Admin"
+      },
+      "modificationDate": "2023-01-18T04:20:14.000+0000",
+      "modifier": {
+        "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+        "name": "SUPPORT"
+      },
+      "accessRoles": [
+        {
+          "href": "https://example.com",
+          "type": "application/json"
+        },
+        {
+          "href": "https://example.com",
+          "type": "application/json"
+        }
+      ],
+      "optionalFields1": {
+        "boolean1": false,
+        "boolean2": false,
+        "boolean3": false,
+        "boolean4": false,
+        "boolean5": false
+      },
+      "optionalFields2": {
+        "boolean1": false,
+        "boolean2": false,
+        "boolean3": false,
+        "boolean4": false,
+        "boolean5": false
+      }
+    }
+  ]
+}

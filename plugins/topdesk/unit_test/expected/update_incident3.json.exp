@@ -1,0 +1,126 @@
+{
+  "incident": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "status": "firstLine",
+    "number": "I 2301 110",
+    "request": "25-01-2023 13:42 [GMT +0:00] Example Operator: \nTest request",
+    "requests": "/tas/api/incidents/id/44d88612-fea8-a8f3-6de8-2e1278abb02f/requests",
+    "action": "/tas/api/incidents/id/44d88612-fea8-a8f3-6de8-2e1278abb02f/actions",
+    "attachments": "/tas/api/incidents/id/44d88612-fea8-a8f3-6de8-2e1278abb02f/attachments",
+    "caller": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "dynamicName": "Example User",
+      "phoneNumber": "11111111",
+      "mobileNumber": "22222222",
+      "email": "user@example.com",
+      "branch": {
+        "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+        "name": "Example branch",
+        "timeZone": "Europe/Dublin"
+      }
+    },
+    "callerBranch": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Example branch",
+      "timeZone": "Europe/Dublin"
+    },
+    "callerLocation": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Example location"
+    },
+    "briefDescription": "Test Incident",
+    "callType": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Failure"
+    },
+    "entryType": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Telephone"
+    },
+    "branch": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Example location",
+      "timeZone": "Europe/Berlin"
+    },
+    "location": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "branch": {
+        "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+        "name": "Example branch",
+        "timeZone": "Europe/Berlin"
+      },
+      "name": "Example location",
+      "room": "01"
+    },
+    "duration": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "8 hours"
+    },
+    "targetDate": "2023-01-26T13:12:00.000+0000",
+    "onHold": false,
+    "feedbackMessage": "Great job!",
+    "feedbackRating": 5,
+    "operator": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "status": "operator",
+      "name": "Example Operator"
+    },
+    "operatorGroup": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Application management"
+    },
+    "supplier": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "DELL",
+      "forFirstLine": true,
+      "forSecondLine": true
+    },
+    "processingStatus": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Registered"
+    },
+    "responded": false,
+    "completed": true,
+    "completedDate": "2023-01-25T19:33:43.000+0000",
+    "closed": true,
+    "closedDate": "2023-01-26T12:00:00.000+0000",
+    "closureCode": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Manual"
+    },
+    "callDate": "2023-01-25T13:42:49.000+0000",
+    "creator": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Example Operator"
+    },
+    "creationDate": "2023-01-25T13:42:49.000+0000",
+    "modifier": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Example Operator"
+    },
+    "modificationDate": "2023-01-29T19:16:20.000+0000",
+    "majorCall": false,
+    "majorCallObject": {
+      "name": "I 2301 147",
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "status": 1,
+      "majorIncident": true
+    },
+    "publishToSsd": false,
+    "monitored": false,
+    "optionalFields1": {
+      "boolean1": false,
+      "boolean2": false,
+      "boolean3": false,
+      "boolean4": false,
+      "boolean5": false
+    },
+    "optionalFields2": {
+      "boolean1": false,
+      "boolean2": false,
+      "boolean3": false,
+      "boolean4": false,
+      "boolean5": false
+    }
+  }
+}
