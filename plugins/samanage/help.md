@@ -162,37 +162,37 @@ Example output:
     "incidents": [
       {
         "id": "100",
-        "href": "https://example.com/incidents/100"
+        "href": "https://example.com"
       }
     ],
     "problems": [
       {
         "id": "100",
-        "href": "https://example.com/problems/100"
+        "href": "https://example.com"
       }
     ],
     "changes": [
       {
         "id": "100",
-        "href": "https://example.com/changes/100"
+        "href": "https://example.com"
       }
     ],
     "solutions": [
       {
         "id": "100",
-        "href": "https://example.com/solutions/100"
+        "href": "https://example.com"
       }
     ],
     "releases": [
       {
         "id": "100",
-        "href": "https://example.com/releases/100"
+        "href": "https://example.com"
       }
     ],
     "configuration_items": [
       {
         "id": "100",
-        "href": "https://example.com/configuration_items/100"
+        "href": "https://example.com"
       }
     ],
     "is_service_request": false,
@@ -344,37 +344,37 @@ Example output:
     "incidents": [
       {
         "id": "100",
-        "href": "https://example.com/incidents/100"
+        "href": "https://example.com"
       }
     ],
     "problems": [
       {
         "id": "100",
-        "href": "https://example.com/problems/100"
+        "href": "https://example.com"
       }
     ],
     "changes": [
       {
         "id": "100",
-        "href": "https://example.com/changes/100"
+        "href": "https://example.com"
       }
     ],
     "solutions": [
       {
         "id": "100",
-        "href": "https://example.com/solutions/100"
+        "href": "https://example.com"
       }
     ],
     "releases": [
       {
         "id": "100",
-        "href": "https://example.com/releases/100"
+        "href": "https://example.com"
       }
     ],
     "configuration_items": [
       {
         "id": "100",
-        "href": "https://example.com/configuration_items/100"
+        "href": "https://example.com"
       }
     ],
     "is_service_request": false,
@@ -538,37 +538,37 @@ Example output:
     "incidents": [
       {
         "id": "100",
-        "href": "https://example.com/incidents/100"
+        "href": "https://example.com"
       }
     ],
     "problems": [
       {
         "id": "100",
-        "href": "https://example.com/problems/100"
+        "href": "https://example.com"
       }
     ],
     "changes": [
       {
         "id": "100",
-        "href": "https://example.com/changes/100"
+        "href": "https://example.com"
       }
     ],
     "solutions": [
       {
         "id": "100",
-        "href": "https://example.com/solutions/100"
+        "href": "https://example.com"
       }
     ],
     "releases": [
       {
         "id": "100",
-        "href": "https://example.com/releases/100"
+        "href": "https://example.com"
       }
     ],
     "configuration_items": [
       {
         "id": "100",
-        "href": "https://example.com/configuration_items/100"
+        "href": "https://example.com"
       }
     ],
     "is_service_request": false,
@@ -689,37 +689,37 @@ Example output:
     "incidents": [
       {
         "id": "100",
-        "href": "https://example.com/incidents/100"
+        "href": "https://example.com"
       }
     ],
     "problems": [
       {
         "id": "100",
-        "href": "https://example.com/problems/100"
+        "href": "https://example.com"
       }
     ],
     "changes": [
       {
         "id": "100",
-        "href": "https://example.com/changes/100"
+        "href": "https://example.com"
       }
     ],
     "solutions": [
       {
         "id": "100",
-        "href": "https://example.com/solutions/100"
+        "href": "https://example.com"
       }
     ],
     "releases": [
       {
         "id": "100",
-        "href": "https://example.com/releases/100"
+        "href": "https://example.com"
       }
     ],
     "configuration_items": [
       {
         "id": "100",
-        "href": "https://example.com/configuration_items/100"
+        "href": "https://example.com"
       }
     ],
     "is_service_request": false,
@@ -970,37 +970,37 @@ Example output:
     "incidents": [
       {
         "id": "100",
-        "href": "https://example.com/incidents/100"
+        "href": "https://example.com"
       }
     ],
     "problems": [
       {
         "id": "100",
-        "href": "https://example.com/problems/100"
+        "href": "https://example.com"
       }
     ],
     "changes": [
       {
         "id": "100",
-        "href": "https://example.com/changes/100"
+        "href": "https://example.com"
       }
     ],
     "solutions": [
       {
         "id": "100",
-        "href": "https://example.com/solutions/100"
+        "href": "https://example.com"
       }
     ],
     "releases": [
       {
         "id": "100",
-        "href": "https://example.com/releases/100"
+        "href": "https://example.com"
       }
     ],
     "configuration_items": [
       {
         "id": "100",
-        "href": "https://example.com/configuration_items/100"
+        "href": "https://example.com"
       }
     ],
     "is_service_request": false,
@@ -1462,37 +1462,37 @@ Example output:
     "incidents": [
       {
         "id": "100",
-        "href": "https://example.com/incidents/100"
+        "href": "https://example.com"
       }
     ],
     "problems": [
       {
         "id": "100",
-        "href": "https://example.com/problems/100"
+        "href": "https://example.com"
       }
     ],
     "changes": [
       {
         "id": "100",
-        "href": "https://example.com/changes/100"
+        "href": "https://example.com"
       }
     ],
     "solutions": [
       {
         "id": "100",
-        "href": "https://example.com/solutions/100"
+        "href": "https://example.com"
       }
     ],
     "releases": [
       {
         "id": "100",
-        "href": "https://example.com/releases/100"
+        "href": "https://example.com"
       }
     ],
     "configuration_items": [
       {
         "id": "100",
-        "href": "https://example.com/configuration_items/100"
+        "href": "https://example.com"
       }
     ],
     "is_service_request": false,
@@ -1622,37 +1622,37 @@ Example output:
     "incidents": [
       {
         "id": "100",
-        "href": "https://example.com/incidents/100"
+        "href": "https://example.com"
       }
     ],
     "problems": [
       {
         "id": "100",
-        "href": "https://example.com/problems/100"
+        "href": "https://example.com"
       }
     ],
     "changes": [
       {
         "id": "100",
-        "href": "https://example.com/changes/100"
+        "href": "https://example.com"
       }
     ],
     "solutions": [
       {
         "id": "100",
-        "href": "https://example.com/solutions/100"
+        "href": "https://example.com"
       }
     ],
     "releases": [
       {
         "id": "100",
-        "href": "https://example.com/releases/100"
+        "href": "https://example.com"
       }
     ],
     "configuration_items": [
       {
         "id": "100",
-        "href": "https://example.com/configuration_items/100"
+        "href": "https://example.com"
       }
     ],
     "is_service_request": false,
