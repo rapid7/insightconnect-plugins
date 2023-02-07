@@ -1,4 +1,3 @@
-import logging
 from json import dumps, loads
 from re import match
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -53,13 +52,13 @@ class SentineloneAPI:
         self.token_header = make_token_header
 
     def search_agents(
-            self,
-            agent_details: str,
-            agent_active: bool = True,
-            case_sensitive: bool = True,
-            operational_state: str = None,
-            results_length: int = 0,
-            api_version: str = "2.0",
+        self,
+        agent_details: str,
+        agent_active: bool = True,
+        case_sensitive: bool = True,
+        operational_state: str = None,
+        results_length: int = 0,
+        api_version: str = "2.0",
     ) -> list:
         results = []
         if agent_details:

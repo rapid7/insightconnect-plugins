@@ -2019,7 +2019,7 @@ To convert `threat` into an array use Type Converter Plugin
 # Links
 
 * [SentinelOne Product Page](https://www.sentinelone.com/)
-* 
+
 ## References
 
 * [SentinelOne Product Page](https://www.sentinelone.com/)
