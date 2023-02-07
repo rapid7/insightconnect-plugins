@@ -605,7 +605,7 @@ actions:
         description: Site
         type: string
         required: false
-        example: Marketing
+        example: Boston
     output:
       user:
         title: User
