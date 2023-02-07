@@ -12,9 +12,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.zoom_api = None
 
     def connect(self, params):
-        account_id = params[Input.ACCOUNT_ID]
-        client_id = params[Input.CLIENT_ID]
-        client_secret = params[Input.CLIENT_SECRET]
+        SECRETKEY = "secretKey"
+
+        account_id = params[Input.ACCOUNT_ID][SECRETKEY]
+        client_id = params[Input.CLIENT_ID][SECRETKEY]
+        client_secret = params[Input.CLIENT_SECRET][SECRETKEY]
 
         self.zoom_api = ZoomAPI(account_id=account_id,
                                 client_id=client_id,
