@@ -980,14 +980,16 @@ This action is used to create a new user.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+|Name|Type|Default|Required|Description|Enum| Example|
+|----|----|-------|--------|-----------|----|------|
 |department|string|None|False|Department|None|Marketing|
 |email|string|None|True|Email address|None|user@example.com|
 |mobile_phone|string|None|False|Mobile phone number|None|(800) 555-0100|
 |name|string|None|True|User name|None|Example User|
 |phone|string|None|False|Phone number|None|(800) 555-0100|
 |role|string|None|False|Role|None|Requester|
+|site|string|None|False|Site|None|Boston|
+
 Example input:
 
 ```
