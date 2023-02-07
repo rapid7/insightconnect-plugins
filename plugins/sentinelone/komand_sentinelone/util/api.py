@@ -46,19 +46,28 @@ def clean(obj):
     return cleaned
 
 
+def set_agents_array(search, agent_details, agents):
+    # Normalize casing if specified
+    if search == "computerName":
+        agents = [agent_details.lower(), agent_details.upper()]
+    if search == "uuid":
+        agents = [agent_details.lower()]
+    return agents
+
+
 class SentineloneAPI:
     def __init__(self, url, make_token_header):
         self.url = url
         self.token_header = make_token_header
 
     def search_agents(
-        self,
-        agent_details: str,
-        agent_active: bool = True,
-        case_sensitive: bool = True,
-        operational_state: str = None,
-        results_length: int = 0,
-        api_version: str = "2.0",
+            self,
+            agent_details: str,
+            agent_active: bool = True,
+            case_sensitive: bool = True,
+            operational_state: str = None,
+            results_length: int = 0,
+            api_version: str = "2.0",
     ) -> list:
         results = []
         if agent_details:
@@ -67,10 +76,7 @@ class SentineloneAPI:
 
                 # Normalize casing if specified
                 if not case_sensitive:
-                    if search == "computerName":
-                        agents = [agent_details.lower(), agent_details.upper()]
-                    if search == "uuid":
-                        agents = [agent_details.lower()]
+                    agents = set_agents_array(search, agent_details, agents)
 
                 for agent in agents:
                     endpoint = f"{self.url}web/api/v{api_version}/agents?{search}={agent}"
