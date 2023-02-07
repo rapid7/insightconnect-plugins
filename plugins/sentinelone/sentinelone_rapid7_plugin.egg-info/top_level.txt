@@ -1,0 +1,2 @@
+komand_sentinelone
+unit_test

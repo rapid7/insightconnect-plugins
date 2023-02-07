@@ -1,10 +1,10 @@
+import logging
 from json import dumps, loads
 from re import match
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean_list, clean_dict
 
 import requests
-
 
 default_array = [
     "computerMemberOf",
@@ -53,19 +53,18 @@ class SentineloneAPI:
         self.token_header = make_token_header
 
     def search_agents(
-        self,
-        agent_details: str,
-        agent_active: bool = True,
-        case_sensitive: bool = True,
-        operational_state: str = None,
-        results_length: int = 0,
-        api_version: str = "2.0",
+            self,
+            agent_details: str,
+            agent_active: bool = True,
+            case_sensitive: bool = True,
+            operational_state: str = None,
+            results_length: int = 0,
+            api_version: str = "2.0",
     ) -> list:
         results = []
         if agent_details:
             for search in self.__get_searches(agent_details):
                 agents = [agent_details]
-
                 # Normalize casing if specified
                 if not case_sensitive:
                     if search == "computerName":
@@ -80,7 +79,8 @@ class SentineloneAPI:
                     if output.status_code == 200 and output.json().get("pagination", {}).get("totalItems", 0) >= 1:
                         agents_data = output.json().get("data", [])
                         if agents_data:
-                            results.append(agents_data[0])
+                            if agents_data[0] not in results:
+                                results.append(agents_data[0])
 
                 if results_length:
                     if len(results) >= results_length:
