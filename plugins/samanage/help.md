@@ -71,93 +71,134 @@ Example input:
 |incident|incident|True|Updated incident|{'id': '10000', 'number': '1000', 'name': 'Incident Name', 'description': 'description', 'state': 'New'}|
 
 Example output:
-
 ```
 {
   "incident": {
-    "id": 31851783,
-    "number": 4,
-    "name": "Import contracts and software licenses",
-    "description": "Test Description",
-    "state": "Assigned",
-    "priority": "Medium",
+    "id": "10000",
+    "number": "1000",
+    "name": "Incident Example Name",
+    "description": "Example incident description",
+    "state": "New",
+    "site": {
+      "id": "1",
+      "name": "Austin TX, USA",
+      "location": "AUS",
+      "description": "",
+      "time_zone": ""
+    },
+    "department": {
+      "id": "1",
+      "name": "Support",
+      "description": "",
+      "default_assignee_id": "1"
+    },
+    "category": {
+      "id": "10000",
+      "name": "Facilities",
+      "default_tags": "tagA, tagB",
+      "parent_id": "null",
+      "default_assignee_id": "1"
+    },
+    "subcategory": {
+      "id": "1000",
+      "name": "Equipment",
+      "default_tags": "",
+      "parent_id": "10000",
+      "default_assignee_id": "1"
+    },
+    "priority": "High",
     "assignee": {
-      "group_id": 4485265,
-      "is_user": true,
-      "id": 4238379,
+      "group_id": "1",
+      "is_user": "true",
+      "id": "1",
       "name": "Example User",
-      "disabled": false,
       "email": "user@example.com",
-      "created_at": "2018-11-20T05:29:00.000-05:00",
-      "last_login": "2018-11-20T05:33:33.000-05:00",
-      "phone": "(800) 555-0100",
-      "role": {
-        "id": 461178,
-        "name": "Administrator",
-        "description": "This is the all powerful administrator user!",
-        "portal": false,
-        "show_my_tasks": false
-      },
-      "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
-      "group_ids": [
-        4485265,
-        4485266
-      ],
-      "custom_fields_values": [],
       "avatar": {
         "type": "initials",
-        "color": "#dfcd00",
-        "initials": "WW"
-      },
-      "mfa_enabled": false
+        "color": "#fd4165",
+        "initials": "UE"
+      }
     },
     "requester": {
-      "id": 4204395,
-      "account_id": 63582,
-      "user_id": 4238379,
+      "id": "1",
+      "account_id": "1",
+      "user_id": "1",
       "email": "user@example.com",
       "name": "Example User",
       "disabled": false,
-      "has_gravatar": false,
       "avatar": {
         "type": "initials",
-        "color": "#dfcd00",
-        "initials": "WW"
+        "color": "#fd4165",
+        "initials": "UE"
       }
     },
-    "created_at": "2018-11-20T05:29:03.000-05:00",
-    "updated_at": "2018-11-21T12:17:59.000-05:00",
-    "due_at": "2018-11-21T05:29:02.000-05:00",
-    "sla_violations": [],
-    "number_of_comments": 0,
-    "user_saw_all_comments": true,
+    "custom_fields_values": [
+      {
+        "id": "10",
+        "custom_field_id": "1",
+        "name": "Text custom field",
+        "value": "content",
+        "options": "",
+        "type_name": "Text"
+      },
+      {
+        "id": "100",
+        "custom_field_id": "2",
+        "name": "User custom field",
+        "value": "1",
+        "options": "",
+        "type_name": "User",
+        "user": {
+          "group_id": 1,
+          "is_user": true,
+          "id": 1,
+          "name": "Example User",
+          "email": "user@example.com"
+        }
+      }
+    ],
+    "due_at": "2025-01-01T00:00:00.000+01:00",
+    "origin": "api",
+    "incidents": [
+      {
+        "id": "100",
+        "href": "https://example.com/incidents/100"
+      }
+    ],
+    "problems": [
+      {
+        "id": "100",
+        "href": "https://example.com/problems/100"
+      }
+    ],
+    "changes": [
+      {
+        "id": "100",
+        "href": "https://example.com/changes/100"
+      }
+    ],
+    "solutions": [
+      {
+        "id": "100",
+        "href": "https://example.com/solutions/100"
+      }
+    ],
+    "releases": [
+      {
+        "id": "100",
+        "href": "https://example.com/releases/100"
+      }
+    ],
+    "configuration_items": [
+      {
+        "id": "100",
+        "href": "https://example.com/configuration_items/100"
+      }
+    ],
     "is_service_request": false,
-    "created_by": {
-      "id": 4204395,
-      "account_id": 63582,
-      "user_id": 4238379,
-      "email": "user@example.com",
-      "name": "Example User",
-      "disabled": false,
-      "has_gravatar": false,
-      "avatar": {
-        "type": "initials",
-        "color": "#dfcd00",
-        "initials": "WW"
-      }
-    },
-    "cc": [],
-    "custom_fields_values": [],
-    "incidents": [],
-    "changes": [],
-    "tasks": [],
-    "time_tracks": [],
-    "solutions": [],
-    "assets": [],
-    "mobiles": [],
-    "other_assets": [],
-    "configuration_items": [],
-    "purchase_orders": []
+    "cc": [
+      "user1@example.com"
+    ]
   }
 }
 ```
@@ -215,147 +256,131 @@ Example output:
 ```
 {
   "incident": {
-    "id": 31931440,
-    "number": 14,
-    "name": "An incident",
-    "description": "More text",
-    "description_no_html": "More text",
+    "id": "10000",
+    "number": "1000",
+    "name": "Incident Example Name",
+    "description": "Example incident description",
     "state": "New",
-    "priority": "Medium",
-    "category": {
-      "id": 875706,
-      "name": "Hardware",
-      "default_tags": "hardware",
-      "children": [
-        {
-          "id": 875708,
-          "name": "Desktop",
-          "default_tags": "desktop",
-          "parent_id": 875706
-        },
-        {
-          "id": 875707,
-          "name": "Laptop",
-          "default_tags": "laptop",
-          "parent_id": 875706
-        },
-        {
-          "id": 875709,
-          "name": "Peripherals",
-          "default_tags": "peripherals",
-          "parent_id": 875706
-        }
-      ]
+    "site": {
+      "id": "1",
+      "name": "Austin TX, USA",
+      "location": "AUS",
+      "description": "",
+      "time_zone": ""
     },
+    "department": {
+      "id": "1",
+      "name": "Support",
+      "description": "",
+      "default_assignee_id": "1"
+    },
+    "category": {
+      "id": "10000",
+      "name": "Facilities",
+      "default_tags": "tagA, tagB",
+      "parent_id": "null",
+      "default_assignee_id": "1"
+    },
+    "subcategory": {
+      "id": "1000",
+      "name": "Equipment",
+      "default_tags": "",
+      "parent_id": "10000",
+      "default_assignee_id": "1"
+    },
+    "priority": "High",
     "assignee": {
-      "group_id": 4485265,
-      "is_user": true,
-      "id": 4238379,
+      "group_id": "1",
+      "is_user": "true",
+      "id": "1",
       "name": "Example User",
-      "disabled": false,
       "email": "user@example.com",
-      "created_at": "2018-11-20T05:29:00.000-05:00",
-      "last_login": "2018-11-21T17:20:46.000-05:00",
-      "phone": "(800) 555-0100",
-      "role": {
-        "id": 461178,
-        "name": "Administrator",
-        "description": "This is the all powerful administrator user!",
-        "portal": false,
-        "show_my_tasks": false
-      },
-      "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
-      "group_ids": [
-        4485265,
-        4485266
-      ],
-      "custom_fields_values": [],
       "avatar": {
         "type": "initials",
-        "color": "#dfcd00",
-        "initials": "WW"
-      },
-      "mfa_enabled": false
+        "color": "#fd4165",
+        "initials": "UE"
+      }
     },
     "requester": {
-      "id": 4204395,
-      "account_id": 63582,
-      "user_id": 4238379,
+      "id": "1",
+      "account_id": "1",
+      "user_id": "1",
       "email": "user@example.com",
       "name": "Example User",
       "disabled": false,
-      "has_gravatar": false,
       "avatar": {
         "type": "initials",
-        "color": "#dfcd00",
-        "initials": "WW"
+        "color": "#fd4165",
+        "initials": "UE"
       }
     },
-    "created_at": "2018-11-21T17:28:30.393-05:00",
-    "updated_at": "2018-11-21T17:28:30.393-05:00",
-    "due_at": "2022-11-11T00:00:00.000-05:00",
-    "sla_violations": [],
-    "number_of_comments": 0,
-    "user_saw_all_comments": true,
-    "is_service_request": false,
-    "created_by": {
-      "id": 4204395,
-      "account_id": 63582,
-      "user_id": 4238379,
-      "email": "user@example.com",
-      "name": "Example User",
-      "disabled": false,
-      "has_gravatar": false,
-      "avatar": {
-        "type": "initials",
-        "color": "#dfcd00",
-        "initials": "WW"
-      }
-    },
-    "cc": [],
-    "custom_fields_values": [],
-    "comments": [],
-    "attachments": [],
-    "statistics": [
+    "custom_fields_values": [
       {
-        "statistic_type": "State Changed",
-        "time": "00:01",
-        "time_elapsed": "00:01",
-        "business_time_elapsed": "00:01",
-        "value": "2018-11-21 22:28:30 UTC"
+        "id": "10",
+        "custom_field_id": "1",
+        "name": "Text custom field",
+        "value": "content",
+        "options": "",
+        "type_name": "Text"
+      },
+      {
+        "id": "100",
+        "custom_field_id": "2",
+        "name": "User custom field",
+        "value": "1",
+        "options": "",
+        "type_name": "User",
+        "user": {
+          "group_id": 1,
+          "is_user": true,
+          "id": 1,
+          "name": "Example User",
+          "email": "user@example.com"
+        }
       }
     ],
-    "tags": [
-      {
-        "id": 18482,
-        "name": "hardware",
-        "taggings_count": 337059
-      }
-    ],
+    "due_at": "2025-01-01T00:00:00.000+01:00",
+    "origin": "api",
     "incidents": [
       {
-        "id": 31851783,
-        "href": "https://api.samanage.com/incidents/31851783.json"
+        "id": "100",
+        "href": "https://example.com/incidents/100"
       }
     ],
-    "changes": [],
+    "problems": [
+      {
+        "id": "100",
+        "href": "https://example.com/problems/100"
+      }
+    ],
+    "changes": [
+      {
+        "id": "100",
+        "href": "https://example.com/changes/100"
+      }
+    ],
     "solutions": [
       {
-        "id": 795104,
-        "href": "https://api.samanage.com/solutions/795104.json"
+        "id": "100",
+        "href": "https://example.com/solutions/100"
       }
     ],
-    "associated_sla_names": [],
-    "total_time_spent": 0,
-    "tasks": [],
-    "time_tracks": [],
-    "assets": [],
-    "mobiles": [],
-    "other_assets": [],
-    "configuration_items": [],
-    "purchase_orders": [],
-    "audits": [],
-    "request_variables": []
+    "releases": [
+      {
+        "id": "100",
+        "href": "https://example.com/releases/100"
+      }
+    ],
+    "configuration_items": [
+      {
+        "id": "100",
+        "href": "https://example.com/configuration_items/100"
+      }
+    ],
+    "is_service_request": false,
+    "cc": [
+      "user1@example.com"
+    ]
   }
 }
 ```
@@ -425,89 +450,131 @@ Example output:
 ```
 {
   "incident": {
-    "id": 31851783,
-    "number": 4,
-    "name": "Import contracts and software licenses",
-    "description": "Example description",
-    "state": "Assigned",
-    "priority": "Medium",
+    "id": "10000",
+    "number": "1000",
+    "name": "Incident Example Name",
+    "description": "Example incident description",
+    "state": "New",
+    "site": {
+      "id": "1",
+      "name": "Austin TX, USA",
+      "location": "AUS",
+      "description": "",
+      "time_zone": ""
+    },
+    "department": {
+      "id": "1",
+      "name": "Support",
+      "description": "",
+      "default_assignee_id": "1"
+    },
+    "category": {
+      "id": "10000",
+      "name": "Facilities",
+      "default_tags": "tagA, tagB",
+      "parent_id": "null",
+      "default_assignee_id": "1"
+    },
+    "subcategory": {
+      "id": "1000",
+      "name": "Equipment",
+      "default_tags": "",
+      "parent_id": "10000",
+      "default_assignee_id": "1"
+    },
+    "priority": "High",
     "assignee": {
-      "group_id": 4485265,
-      "is_user": true,
-      "id": 4238379,
+      "group_id": "1",
+      "is_user": "true",
+      "id": "1",
       "name": "Example User",
-      "disabled": false,
       "email": "user@example.com",
-      "created_at": "2018-11-20T05:29:00.000-05:00",
-      "last_login": "2018-11-20T05:33:33.000-05:00",
-      "phone": "(800) 555-0100",
-      "role": {
-        "id": 461178,
-        "name": "Administrator",
-        "description": "This is the all powerful administrator user!",
-        "portal": false,
-        "show_my_tasks": false
-      },
-      "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
-      "group_ids": [
-        4485265,
-        4485266
-      ],
-      "custom_fields_values": [],
       "avatar": {
         "type": "initials",
-        "color": "#dfcd00",
-        "initials": "WW"
-      },
-      "mfa_enabled": false
+        "color": "#fd4165",
+        "initials": "UE"
+      }
     },
     "requester": {
-      "id": 4204395,
-      "account_id": 63582,
-      "user_id": 4238379,
+      "id": "1",
+      "account_id": "1",
+      "user_id": "1",
       "email": "user@example.com",
       "name": "Example User",
       "disabled": false,
-      "has_gravatar": false,
       "avatar": {
         "type": "initials",
-        "color": "#dfcd00",
-        "initials": "WW"
+        "color": "#fd4165",
+        "initials": "UE"
       }
     },
-    "created_at": "2018-11-20T05:29:03.000-05:00",
-    "updated_at": "2018-11-21T12:17:59.000-05:00",
-    "due_at": "2018-11-21T05:29:02.000-05:00",
-    "sla_violations": [],
-    "number_of_comments": 0,
-    "user_saw_all_comments": true,
+    "custom_fields_values": [
+      {
+        "id": "10",
+        "custom_field_id": "1",
+        "name": "Text custom field",
+        "value": "content",
+        "options": "",
+        "type_name": "Text"
+      },
+      {
+        "id": "100",
+        "custom_field_id": "2",
+        "name": "User custom field",
+        "value": "1",
+        "options": "",
+        "type_name": "User",
+        "user": {
+          "group_id": 1,
+          "is_user": true,
+          "id": 1,
+          "name": "Example User",
+          "email": "user@example.com"
+        }
+      }
+    ],
+    "due_at": "2025-01-01T00:00:00.000+01:00",
+    "origin": "api",
+    "incidents": [
+      {
+        "id": "100",
+        "href": "https://example.com/incidents/100"
+      }
+    ],
+    "problems": [
+      {
+        "id": "100",
+        "href": "https://example.com/problems/100"
+      }
+    ],
+    "changes": [
+      {
+        "id": "100",
+        "href": "https://example.com/changes/100"
+      }
+    ],
+    "solutions": [
+      {
+        "id": "100",
+        "href": "https://example.com/solutions/100"
+      }
+    ],
+    "releases": [
+      {
+        "id": "100",
+        "href": "https://example.com/releases/100"
+      }
+    ],
+    "configuration_items": [
+      {
+        "id": "100",
+        "href": "https://example.com/configuration_items/100"
+      }
+    ],
     "is_service_request": false,
-    "created_by": {
-      "id": 4204395,
-      "account_id": 63582,
-      "user_id": 4238379,
-      "email": "user@example.com",
-      "name": "Example User",
-      "disabled": false,
-      "has_gravatar": false,
-      "avatar": {
-        "type": "initials",
-        "color": "#dfcd00",
-        "initials": "WW"
-      }
-    },
-    "cc": [],
-    "custom_fields_values": [],
-    "incidents": [],
-    "changes": [],
-    "tasks": [],
-    "time_tracks": [],
-    "solutions": [],
-    "assets": [],
-    "mobiles": [],
-    "other_assets": [],
-    "configuration_items": [],
-    "purchase_orders": []
+    "cc": [
+      "user1@example.com"
+    ]
   }
 }
 ```
@@ -531,177 +598,134 @@ Example output:
 ```
 {
   "incidents": [
-    {
-      "id": 31851784,
-      "number": 5,
-      "name": "Set up your new service desk",
-      "description": "Service desk",
-      "description_no_html": "Service desk",
-      "state": "Assigned",
-      "priority": "Medium",
-      "assignee": {
-        "group_id": 4485265,
-        "is_user": true,
-        "id": 4238379,
-        "name": "Example User",
-        "disabled": false,
-        "email": "user@example.com",
-        "created_at": "2018-11-20T05:29:00.000-05:00",
-        "last_login": "2018-11-20T05:33:33.000-05:00",
-        "phone": "(800) 555-0100",
-        "role": {
-          "id": 461178,
-          "name": "Administrator",
-          "description": "This is the all powerful administrator user!",
-          "portal": false,
-          "show_my_tasks": false
-        },
-        "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
-        "group_ids": [
-          4485265,
-          4485266
-        ],
-        "custom_fields_values": [],
-        "avatar": {
-          "type": "initials",
-          "color": "#dfcd00",
-          "initials": "WW"
-        },
-        "mfa_enabled": false
-      },
-      "requester": {
-        "id": 4204395,
-        "account_id": 63582,
-        "user_id": 4238379,
-        "email": "user@example.com",
-        "name": "Example User",
-        "disabled": false,
-        "has_gravatar": false,
-        "avatar": {
-          "type": "initials",
-          "color": "#dfcd00",
-          "initials": "WW"
-        }
-      },
-      "created_at": "2018-11-20T05:29:03.000-05:00",
-      "updated_at": "2018-11-21T10:26:43.000-05:00",
-      "due_at": "2018-11-22T05:29:02.000-05:00",
-      "sla_violations": [],
-      "number_of_comments": 0,
-      "user_saw_all_comments": true,
-      "is_service_request": false,
-      "created_by": {
-        "id": 4204395,
-        "account_id": 63582,
-        "user_id": 4238379,
-        "email": "user@example.com",
-        "name": "Example User",
-        "disabled": false,
-        "has_gravatar": false,
-        "avatar": {
-          "type": "initials",
-          "color": "#dfcd00",
-          "initials": "WW"
-        }
-      },
-      "cc": [],
-      "custom_fields_values": [],
-      "incidents": [],
-      "changes": [],
-      "tasks": [],
-      "time_tracks": [],
-      "solutions": [],
-      "assets": [],
-      "mobiles": [],
-      "other_assets": [],
-      "configuration_items": [],
-      "purchase_orders": []
+    ```
+{
+  "incident": {
+    "id": "10000",
+    "number": "1000",
+    "name": "Incident Example Name",
+    "description": "Example incident description",
+    "state": "New",
+    "site": {
+      "id": "1",
+      "name": "Austin TX, USA",
+      "location": "AUS",
+      "description": "",
+      "time_zone": ""
     },
-    {
-      "id": 31851783,
-      "number": 4,
-      "name": "Import contracts and software licenses",
-      "description": "Example description",
-      "state": "Assigned",
-      "priority": "Medium",
-      "assignee": {
-        "group_id": 4485265,
-        "is_user": true,
-        "id": 4238379,
-        "name": "Example User",
-        "disabled": false,
-        "email": "user@example.com",
-        "created_at": "2018-11-20T05:29:00.000-05:00",
-        "last_login": "2018-11-20T05:33:33.000-05:00",
-        "phone": "(800) 555-0100",
-        "role": {
-          "id": 461178,
-          "name": "Administrator",
-          "description": "This is the all powerful administrator user!",
-          "portal": false,
-          "show_my_tasks": false
-        },
-        "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
-        "group_ids": [
-          4485265,
-          4485266
-        ],
-        "custom_fields_values": [],
-        "avatar": {
-          "type": "initials",
-          "color": "#dfcd00",
-          "initials": "WW"
-        },
-        "mfa_enabled": false
+    "department": {
+      "id": "1",
+      "name": "Support",
+      "description": "",
+      "default_assignee_id": "1"
+    },
+    "category": {
+      "id": "10000",
+      "name": "Facilities",
+      "default_tags": "tagA, tagB",
+      "parent_id": "null",
+      "default_assignee_id": "1"
+    },
+    "subcategory": {
+      "id": "1000",
+      "name": "Equipment",
+      "default_tags": "",
+      "parent_id": "10000",
+      "default_assignee_id": "1"
+    },
+    "priority": "High",
+    "assignee": {
+      "group_id": "1",
+      "is_user": "true",
+      "id": "1",
+      "name": "Example User",
+      "email": "user@example.com",
+      "avatar": {
+        "type": "initials",
+        "color": "#fd4165",
+        "initials": "UE"
+      }
+    },
+    "requester": {
+      "id": "1",
+      "account_id": "1",
+      "user_id": "1",
+      "email": "user@example.com",
+      "name": "Example User",
+      "disabled": false,
+      "avatar": {
+        "type": "initials",
+        "color": "#fd4165",
+        "initials": "UE"
+      }
+    },
+    "custom_fields_values": [
+      {
+        "id": "10",
+        "custom_field_id": "1",
+        "name": "Text custom field",
+        "value": "content",
+        "options": "",
+        "type_name": "Text"
       },
-      "requester": {
-        "id": 4204395,
-        "account_id": 63582,
-        "user_id": 4238379,
-        "email": "user@example.com",
-        "name": "Example User",
-        "disabled": false,
-        "has_gravatar": false,
-        "avatar": {
-          "type": "initials",
-          "color": "#dfcd00",
-          "initials": "WW"
+      {
+        "id": "100",
+        "custom_field_id": "2",
+        "name": "User custom field",
+        "value": "1",
+        "options": "",
+        "type_name": "User",
+        "user": {
+          "group_id": 1,
+          "is_user": true,
+          "id": 1,
+          "name": "Example User",
+          "email": "user@example.com"
         }
-      },
-      "created_at": "2018-11-20T05:29:03.000-05:00",
-      "updated_at": "2018-11-21T12:17:59.000-05:00",
-      "due_at": "2018-11-21T05:29:02.000-05:00",
-      "sla_violations": [],
-      "number_of_comments": 0,
-      "user_saw_all_comments": true,
-      "is_service_request": false,
-      "created_by": {
-        "id": 4204395,
-        "account_id": 63582,
-        "user_id": 4238379,
-        "email": "user@example.com",
-        "name": "Example User",
-        "disabled": false,
-        "has_gravatar": false,
-        "avatar": {
-          "type": "initials",
-          "color": "#dfcd00",
-          "initials": "WW"
-        }
-      },
-      "cc": [],
-      "custom_fields_values": [],
-      "incidents": [],
-      "changes": [],
-      "tasks": [],
-      "time_tracks": [],
-      "solutions": [],
-      "assets": [],
-      "mobiles": [],
-      "other_assets": [],
-      "configuration_items": [],
-      "purchase_orders": []
-    }
+      }
+    ],
+    "due_at": "2025-01-01T00:00:00.000+01:00",
+    "origin": "api",
+    "incidents": [
+      {
+        "id": "100",
+        "href": "https://example.com/incidents/100"
+      }
+    ],
+    "problems": [
+      {
+        "id": "100",
+        "href": "https://example.com/problems/100"
+      }
+    ],
+    "changes": [
+      {
+        "id": "100",
+        "href": "https://example.com/changes/100"
+      }
+    ],
+    "solutions": [
+      {
+        "id": "100",
+        "href": "https://example.com/solutions/100"
+      }
+    ],
+    "releases": [
+      {
+        "id": "100",
+        "href": "https://example.com/releases/100"
+      }
+    ],
+    "configuration_items": [
+      {
+        "id": "100",
+        "href": "https://example.com/configuration_items/100"
+      }
+    ],
+    "is_service_request": false,
+    "cc": [
+      "user1@example.com"
+    ]
   ]
 }
 ```
@@ -842,6 +866,9 @@ This action is used to get incident details.
 Example input:
 
 ```
+{
+  "incident_id": 12345
+}
 ```
 
 ##### Output
@@ -855,89 +882,131 @@ Example output:
 ```
 {
   "incident": {
-    "id": 31851783,
-    "number": 4,
-    "name": "Import contracts and software licenses",
-    "description": "Example description",
-    "state": "Assigned",
-    "priority": "Medium",
+    "id": "10000",
+    "number": "1000",
+    "name": "Incident Example Name",
+    "description": "Example incident description",
+    "state": "New",
+    "site": {
+      "id": "1",
+      "name": "Austin TX, USA",
+      "location": "AUS",
+      "description": "",
+      "time_zone": ""
+    },
+    "department": {
+      "id": "1",
+      "name": "Support",
+      "description": "",
+      "default_assignee_id": "1"
+    },
+    "category": {
+      "id": "10000",
+      "name": "Facilities",
+      "default_tags": "tagA, tagB",
+      "parent_id": "null",
+      "default_assignee_id": "1"
+    },
+    "subcategory": {
+      "id": "1000",
+      "name": "Equipment",
+      "default_tags": "",
+      "parent_id": "10000",
+      "default_assignee_id": "1"
+    },
+    "priority": "High",
     "assignee": {
-      "group_id": 4485265,
-      "is_user": true,
-      "id": 4238379,
+      "group_id": "1",
+      "is_user": "true",
+      "id": "1",
       "name": "Example User",
-      "disabled": false,
       "email": "user@example.com",
-      "created_at": "2018-11-20T05:29:00.000-05:00",
-      "last_login": "2018-11-20T05:33:33.000-05:00",
-      "phone": "(800) 555-0100",
-      "role": {
-        "id": 461178,
-        "name": "Administrator",
-        "description": "This is the all powerful administrator user!",
-        "portal": false,
-        "show_my_tasks": false
-      },
-      "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
-      "group_ids": [
-        4485265,
-        4485266
-      ],
-      "custom_fields_values": [],
       "avatar": {
         "type": "initials",
-        "color": "#dfcd00",
-        "initials": "WW"
-      },
-      "mfa_enabled": false
+        "color": "#fd4165",
+        "initials": "UE"
+      }
     },
     "requester": {
-      "id": 4204395,
-      "account_id": 63582,
-      "user_id": 4238379,
-      "email": "user@example.com"
-      "name": "Example User",
-      "disabled": false,
-      "has_gravatar": false,
-      "avatar": {
-        "type": "initials",
-        "color": "#dfcd00",
-        "initials": "WW"
-      }
-    },
-    "created_at": "2018-11-20T05:29:03.000-05:00",
-    "updated_at": "2018-11-21T12:17:59.000-05:00",
-    "due_at": "2018-11-21T05:29:02.000-05:00",
-    "sla_violations": [],
-    "number_of_comments": 0,
-    "user_saw_all_comments": true,
-    "is_service_request": false,
-    "created_by": {
-      "id": 4204395,
-      "account_id": 63582,
-      "user_id": 4238379,
+      "id": "1",
+      "account_id": "1",
+      "user_id": "1",
       "email": "user@example.com",
       "name": "Example User",
       "disabled": false,
-      "has_gravatar": false,
       "avatar": {
         "type": "initials",
-        "color": "#dfcd00",
-        "initials": "WW"
+        "color": "#fd4165",
+        "initials": "UE"
       }
     },
-    "cc": [],
-    "custom_fields_values": [],
-    "incidents": [],
-    "changes": [],
-    "tasks": [],
-    "time_tracks": [],
-    "solutions": [],
-    "assets": [],
-    "mobiles": [],
-    "other_assets": [],
-    "configuration_items": [],
-    "purchase_orders": []
+    "custom_fields_values": [
+      {
+        "id": "10",
+        "custom_field_id": "1",
+        "name": "Text custom field",
+        "value": "content",
+        "options": "",
+        "type_name": "Text"
+      },
+      {
+        "id": "100",
+        "custom_field_id": "2",
+        "name": "User custom field",
+        "value": "1",
+        "options": "",
+        "type_name": "User",
+        "user": {
+          "group_id": 1,
+          "is_user": true,
+          "id": 1,
+          "name": "Example User",
+          "email": "user@example.com"
+        }
+      }
+    ],
+    "due_at": "2025-01-01T00:00:00.000+01:00",
+    "origin": "api",
+    "incidents": [
+      {
+        "id": "100",
+        "href": "https://example.com/incidents/100"
+      }
+    ],
+    "problems": [
+      {
+        "id": "100",
+        "href": "https://example.com/problems/100"
+      }
+    ],
+    "changes": [
+      {
+        "id": "100",
+        "href": "https://example.com/changes/100"
+      }
+    ],
+    "solutions": [
+      {
+        "id": "100",
+        "href": "https://example.com/solutions/100"
+      }
+    ],
+    "releases": [
+      {
+        "id": "100",
+        "href": "https://example.com/releases/100"
+      }
+    ],
+    "configuration_items": [
+      {
+        "id": "100",
+        "href": "https://example.com/configuration_items/100"
+      }
+    ],
+    "is_service_request": false,
+    "cc": [
+      "user1@example.com"
+    ]
   }
 }
 ```
@@ -1250,48 +1319,25 @@ Example output:
 ```
 {
   "comment": {
-    "id": 39646858,
-    "body": "A comment",
+    "id": "1",
+    "body": "Comment body",
+    "is_private": "true",
+    "created_at": "2025-01-01T00:00:00.000+01:00",
+    "updated_at": "2025-01-01T00:00:00.000+01:00",
     "user": {
-      "id": 4238379,
+      "id": "1",
+      "account_id": "1",
+      "user_id": "1",
+      "email": "user@example.com",
       "name": "Example User",
       "disabled": false,
-      "email": "user@example.com",
-      "created_at": "2018-11-20T05:29:00.000-05:00",
-      "last_login": "2018-11-21T17:20:46.000-05:00",
-      "phone": "(800) 555-0100",
-      "role": {
-        "id": 461178,
-        "name": "Administrator",
-        "description": "This is the all powerful administrator user!",
-        "portal": false,
-        "show_my_tasks": false
-      },
-      "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
-      "group_ids": [
-        4485265,
-        4485266
-      ],
-      "custom_fields_values": [],
       "avatar": {
         "type": "initials",
-        "color": "#dfcd00",
-        "initials": "WW"
-      },
-      "mfa_enabled": false
+        "color": "#1000",
+        "initials": "EU"
+      }
     },
-    "created_at": "2018-11-21T18:20:36.501-05:00",
-    "updated_at": "2018-11-21T18:20:36.501-05:00",
-    "attachments": [],
-    "inline_attachments": [],
-    "shared_attachments": [],
-    "is_private": true,
-    "seen_by": [
-      4238379
-    ],
-    "isTask": false,
-    "task_info": {},
-    "commenter_id": 31851783,
+    "commenter_id": "1",
     "commenter_type": "Incident"
   }
 }
@@ -1328,89 +1374,131 @@ Example output:
 ```
 {
   "incident": {
-    "id": 31851783,
-    "number": 4,
-    "name": "Import contracts and software licenses",
-    "description": "Example description",
-    "state": "Assigned",
-    "priority": "Medium",
+    "id": "10000",
+    "number": "1000",
+    "name": "Incident Example Name",
+    "description": "Example incident description",
+    "state": "New",
+    "site": {
+      "id": "1",
+      "name": "Austin TX, USA",
+      "location": "AUS",
+      "description": "",
+      "time_zone": ""
+    },
+    "department": {
+      "id": "1",
+      "name": "Support",
+      "description": "",
+      "default_assignee_id": "1"
+    },
+    "category": {
+      "id": "10000",
+      "name": "Facilities",
+      "default_tags": "tagA, tagB",
+      "parent_id": "null",
+      "default_assignee_id": "1"
+    },
+    "subcategory": {
+      "id": "1000",
+      "name": "Equipment",
+      "default_tags": "",
+      "parent_id": "10000",
+      "default_assignee_id": "1"
+    },
+    "priority": "High",
     "assignee": {
-      "group_id": 4485265,
-      "is_user": true,
-      "id": 4238379,
+      "group_id": "1",
+      "is_user": "true",
+      "id": "1",
       "name": "Example User",
-      "disabled": false,
       "email": "user@example.com",
-      "created_at": "2018-11-20T05:29:00.000-05:00",
-      "last_login": "2018-11-20T05:33:33.000-05:00",
-      "phone": "(800) 555-0100",
-      "role": {
-        "id": 461178,
-        "name": "Administrator",
-        "description": "This is the all powerful administrator user!",
-        "portal": false,
-        "show_my_tasks": false
-      },
-      "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
-      "group_ids": [
-        4485265,
-        4485266
-      ],
-      "custom_fields_values": [],
       "avatar": {
         "type": "initials",
-        "color": "#dfcd00",
-        "initials": "WW"
-      },
-      "mfa_enabled": false
+        "color": "#fd4165",
+        "initials": "UE"
+      }
     },
     "requester": {
-      "id": 4204395,
-      "account_id": 63582,
-      "user_id": 4238379,
+      "id": "1",
+      "account_id": "1",
+      "user_id": "1",
       "email": "user@example.com",
       "name": "Example User",
       "disabled": false,
-      "has_gravatar": false,
       "avatar": {
         "type": "initials",
-        "color": "#dfcd00",
-        "initials": "WW"
+        "color": "#fd4165",
+        "initials": "UE"
       }
     },
-    "created_at": "2018-11-20T05:29:03.000-05:00",
-    "updated_at": "2018-11-21T12:17:59.000-05:00",
-    "due_at": "2018-11-21T05:29:02.000-05:00",
-    "sla_violations": [],
-    "number_of_comments": 0,
-    "user_saw_all_comments": true,
+    "custom_fields_values": [
+      {
+        "id": "10",
+        "custom_field_id": "1",
+        "name": "Text custom field",
+        "value": "content",
+        "options": "",
+        "type_name": "Text"
+      },
+      {
+        "id": "100",
+        "custom_field_id": "2",
+        "name": "User custom field",
+        "value": "1",
+        "options": "",
+        "type_name": "User",
+        "user": {
+          "group_id": 1,
+          "is_user": true,
+          "id": 1,
+          "name": "Example User",
+          "email": "user@example.com"
+        }
+      }
+    ],
+    "due_at": "2025-01-01T00:00:00.000+01:00",
+    "origin": "api",
+    "incidents": [
+      {
+        "id": "100",
+        "href": "https://example.com/incidents/100"
+      }
+    ],
+    "problems": [
+      {
+        "id": "100",
+        "href": "https://example.com/problems/100"
+      }
+    ],
+    "changes": [
+      {
+        "id": "100",
+        "href": "https://example.com/changes/100"
+      }
+    ],
+    "solutions": [
+      {
+        "id": "100",
+        "href": "https://example.com/solutions/100"
+      }
+    ],
+    "releases": [
+      {
+        "id": "100",
+        "href": "https://example.com/releases/100"
+      }
+    ],
+    "configuration_items": [
+      {
+        "id": "100",
+        "href": "https://example.com/configuration_items/100"
+      }
+    ],
     "is_service_request": false,
-    "created_by": {
-      "id": 4204395,
-      "account_id": 63582,
-      "user_id": 4238379,
-      "email": "user@example.com",
-      "name": "Example User",
-      "disabled": false,
-      "has_gravatar": false,
-      "avatar": {
-        "type": "initials",
-        "color": "#dfcd00",
-        "initials": "WW"
-      }
-    },
-    "cc": [],
-    "custom_fields_values": [],
-    "incidents": [],
-    "changes": [],
-    "tasks": [],
-    "time_tracks": [],
-    "solutions": [],
-    "assets": [],
-    "mobiles": [],
-    "other_assets": [],
-    "configuration_items": [],
-    "purchase_orders": []
+    "cc": [
+      "user1@example.com"
+    ]
   }
 }
 ```
@@ -1446,89 +1534,131 @@ Example output:
 ```
 {
   "incident": {
-    "id": 31851783,
-    "number": 4,
-    "name": "Import contracts and software licenses",
-    "description": "Example Description",
-    "state": "Assigned",
-    "priority": "Medium",
+    "id": "10000",
+    "number": "1000",
+    "name": "Incident Example Name",
+    "description": "Example incident description",
+    "state": "New",
+    "site": {
+      "id": "1",
+      "name": "Austin TX, USA",
+      "location": "AUS",
+      "description": "",
+      "time_zone": ""
+    },
+    "department": {
+      "id": "1",
+      "name": "Support",
+      "description": "",
+      "default_assignee_id": "1"
+    },
+    "category": {
+      "id": "10000",
+      "name": "Facilities",
+      "default_tags": "tagA, tagB",
+      "parent_id": "null",
+      "default_assignee_id": "1"
+    },
+    "subcategory": {
+      "id": "1000",
+      "name": "Equipment",
+      "default_tags": "",
+      "parent_id": "10000",
+      "default_assignee_id": "1"
+    },
+    "priority": "High",
     "assignee": {
-      "group_id": 4485265,
-      "is_user": true,
-      "id": 4238379,
+      "group_id": "1",
+      "is_user": "true",
+      "id": "1",
       "name": "Example User",
-      "disabled": false,
       "email": "user@example.com",
-      "created_at": "2018-11-20T05:29:00.000-05:00",
-      "last_login": "2018-11-20T05:33:33.000-05:00",
-      "phone": "(800) 555-0100",
-      "role": {
-        "id": 461178,
-        "name": "Administrator",
-        "description": "This is the all powerful administrator user!",
-        "portal": false,
-        "show_my_tasks": false
-      },
-      "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
-      "group_ids": [
-        4485265,
-        4485266
-      ],
-      "custom_fields_values": [],
       "avatar": {
         "type": "initials",
-        "color": "#dfcd00",
-        "initials": "WW"
-      },
-      "mfa_enabled": false
+        "color": "#fd4165",
+        "initials": "UE"
+      }
     },
     "requester": {
-      "id": 4204395,
-      "account_id": 63582,
-      "user_id": 4238379,
+      "id": "1",
+      "account_id": "1",
+      "user_id": "1",
       "email": "user@example.com",
       "name": "Example User",
       "disabled": false,
-      "has_gravatar": false,
       "avatar": {
         "type": "initials",
-        "color": "#dfcd00",
-        "initials": "WW"
+        "color": "#fd4165",
+        "initials": "UE"
       }
     },
-    "created_at": "2018-11-20T05:29:03.000-05:00",
-    "updated_at": "2018-11-21T12:17:59.000-05:00",
-    "due_at": "2018-11-21T05:29:02.000-05:00",
-    "sla_violations": [],
-    "number_of_comments": 0,
-    "user_saw_all_comments": true,
+    "custom_fields_values": [
+      {
+        "id": "10",
+        "custom_field_id": "1",
+        "name": "Text custom field",
+        "value": "content",
+        "options": "",
+        "type_name": "Text"
+      },
+      {
+        "id": "100",
+        "custom_field_id": "2",
+        "name": "User custom field",
+        "value": "1",
+        "options": "",
+        "type_name": "User",
+        "user": {
+          "group_id": 1,
+          "is_user": true,
+          "id": 1,
+          "name": "Example User",
+          "email": "user@example.com"
+        }
+      }
+    ],
+    "due_at": "2025-01-01T00:00:00.000+01:00",
+    "origin": "api",
+    "incidents": [
+      {
+        "id": "100",
+        "href": "https://example.com/incidents/100"
+      }
+    ],
+    "problems": [
+      {
+        "id": "100",
+        "href": "https://example.com/problems/100"
+      }
+    ],
+    "changes": [
+      {
+        "id": "100",
+        "href": "https://example.com/changes/100"
+      }
+    ],
+    "solutions": [
+      {
+        "id": "100",
+        "href": "https://example.com/solutions/100"
+      }
+    ],
+    "releases": [
+      {
+        "id": "100",
+        "href": "https://example.com/releases/100"
+      }
+    ],
+    "configuration_items": [
+      {
+        "id": "100",
+        "href": "https://example.com/configuration_items/100"
+      }
+    ],
     "is_service_request": false,
-    "created_by": {
-      "id": 4204395,
-      "account_id": 63582,
-      "user_id": 4238379,
-      "email": "user@example.com",
-      "name": "Example User",
-      "disabled": false,
-      "has_gravatar": false,
-      "avatar": {
-        "type": "initials",
-        "color": "#dfcd00",
-        "initials": "WW"
-      }
-    },
-    "cc": [],
-    "custom_fields_values": [],
-    "incidents": [],
-    "changes": [],
-    "tasks": [],
-    "time_tracks": [],
-    "solutions": [],
-    "assets": [],
-    "mobiles": [],
-    "other_assets": [],
-    "configuration_items": [],
-    "purchase_orders": []
+    "cc": [
+      "user1@example.com"
+    ]
   }
 }
 ```
