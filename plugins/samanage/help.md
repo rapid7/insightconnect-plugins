@@ -18,7 +18,7 @@ This plugin utilizes the [Solarwinds Service desk API](https://www.samanage.com/
 
 # Supported Product Versions
 
-* All
+* Solarwinds Service Desk with API version 2.1
 
 # Documentation
 
