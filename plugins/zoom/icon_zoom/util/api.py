@@ -35,18 +35,20 @@ class ZoomAPI:
         self.logger = logger
 
         self.oauth_token: Optional[str] = None
-        self.oauth_last_refresh_timestamp: float = 0
+        self.oauth_last_refresh_timestamp: Optional[float] = None
 
     def refresh_oauth_token_if_needed(self) -> None:
         """
         Refreshes OAuth token if needed.
         :return: None
         """
-        if not self._should_refresh_oauth_token(last_refresh_timestamp=self.oauth_last_refresh_timestamp):
+        if self.oauth_last_refresh_timestamp and \
+                not self._should_refresh_oauth_token(last_refresh_timestamp=self.oauth_last_refresh_timestamp):
             return
 
         # Refresh should happen, so do the refresh.
         try:
+            self.logger.info("Making call to get new OAuth token")
             oauth_token = self.get_oauth_token()
             now_timestamp = self._get_current_time_epoch()
         except Exception as error:
@@ -70,6 +72,7 @@ class ZoomAPI:
 
         auth = HTTPBasicAuth(self.client_id, self.client_secret)
 
+        self.logger.info(f"Requesting new OAuth token from Zoom...")
         response = self._call_api(method="POST", url=self.oauth_url, params=params, auth=auth)
         try:
             access_token = response["access_token"]
@@ -77,6 +80,7 @@ class ZoomAPI:
             raise PluginException(cause=f"Unable to get access token: {response.get('reason', '')}.",
                                   assistance="Ensure your connection configuration is using correct credentials.")
 
+        self.logger.info("Request for new OAuth token was successful!")
         return access_token
 
     def get_user(self, user_id: str) -> Optional[dict]:
@@ -120,7 +124,9 @@ class ZoomAPI:
                   json_data: dict = None,
                   allow_404: bool = False,
                   auth: AuthBase = None) -> Optional[dict]:
-        self.refresh_oauth_token_if_needed()
+
+        if not isinstance(auth, HTTPBasicAuth):
+            self.refresh_oauth_token_if_needed()
 
         # If HTTPBasicAuth isn't provided (for calls to get OAuth token), then
         # use BearerAuth since we have a token already
@@ -128,7 +134,9 @@ class ZoomAPI:
             auth = BearerAuth(access_token=self.oauth_token)
 
         try:
+            self.logger.info(f"Calling {method} {url}")
             response = requests.request(method, url, json=json_data, params=params, auth=auth)
+            self.logger.info(f"Got response status code: {response.status_code}")
 
             if response.status_code == 401:
                 resp = json.loads(response.text)
@@ -170,8 +178,7 @@ class ZoomAPI:
 
         return now_millis
 
-    @staticmethod
-    def _should_refresh_oauth_token(last_refresh_timestamp: float) -> bool:
+    def _should_refresh_oauth_token(self, last_refresh_timestamp: float) -> bool:
         """
         Determines whether or not the OAuth token should be refreshed.
         Calculated differences >=55 minutes will return True.
@@ -183,9 +190,9 @@ class ZoomAPI:
 
         now = ZoomAPI._get_current_time_epoch()
         previous_time = last_refresh_timestamp
+        self.logger.info(f"Calculating OAuth token refresh, last refreshed at {previous_time}, current time {now}")
 
         time_difference = now - previous_time
-        return time_difference >= fifty_five_minutes
+        should_refresh = time_difference >= fifty_five_minutes
 
-
-
+        return should_refresh
