@@ -1,0 +1,218 @@
+{
+  "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+  "status": "secondLine",
+  "number": "I 2301 111",
+  "request": "27-01-2023 18:10 [GMT +0:00] Example Operator: \nExample request\n\n25-01-2023 14:40 [GMT +0:00] Example Operator: \nTest request",
+  "requests": "/tas/api/incidents/id/44d88612-fea8-a8f3-6de8-2e1278abb02f/requests",
+  "action": "/tas/api/incidents/id/44d88612-fea8-a8f3-6de8-2e1278abb02f/actions",
+  "attachments": "/tas/api/incidents/id/44d88612-fea8-a8f3-6de8-2e1278abb02f/attachments",
+  "caller": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "dynamicName": "Example User",
+    "phoneNumber": "2222222",
+    "mobileNumber": "1111111",
+    "email": "user@example.com",
+    "branch": {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "Example branch",
+      "clientReferenceNumber": "",
+      "timeZone": "Europe/Berlin",
+      "extraA": null,
+      "extraB": null
+    }
+  },
+  "callerBranch": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "name": "Example branch",
+    "clientReferenceNumber": "",
+    "timeZone": "Europe/Berlin",
+    "extraA": null,
+    "extraB": null
+  },
+  "callerLocation": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "name": "Example location"
+  },
+  "branchExtraFieldA": null,
+  "branchExtraFieldB": null,
+  "briefDescription": "Brief description",
+  "externalNumber": "1234567",
+  "category": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "name": "Hardware"
+  },
+  "subcategory": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "name": "Monitor"
+  },
+  "callType": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "name": "Failure"
+  },
+  "entryType": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "name": "Chat"
+  },
+  "object": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "name": "OBJ001",
+    "type": null,
+    "make": null,
+    "model": null,
+    "branch": null,
+    "location": null,
+    "specification": "",
+    "serialNumber": ""
+  },
+  "asset": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f"
+  },
+  "branch": null,
+  "location": null,
+  "impact": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "name": "Person"
+  },
+  "urgency": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "name": "Low"
+  },
+  "priority": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "name": "P1"
+  },
+  "duration": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "name": "30 minutes"
+  },
+  "actualDuration": 0,
+  "targetDate": "2023-02-10T12:00:00.000+0000",
+  "sla": null,
+  "onHold": false,
+  "onHoldDate": null,
+  "onHoldDuration": 0,
+  "feedbackMessage": null,
+  "feedbackRating": null,
+  "operator": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "status": "operator",
+    "name": "Example Operator"
+  },
+  "operatorGroup": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "name": "Application management"
+  },
+  "supplier": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "name": "DELL",
+    "forFirstLine": true,
+    "forSecondLine": true
+  },
+  "processingStatus": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "name": "Registered"
+  },
+  "responded": false,
+  "responseDate": null,
+  "completed": false,
+  "completedDate": null,
+  "closed": false,
+  "closedDate": null,
+  "closureCode": {},
+  "timeSpent": 0,
+  "timeSpentFirstLine": 0,
+  "timeSpentSecondLine": 0,
+  "timeSpentPartial": 0,
+  "timeSpentLinkedPartials": 0,
+  "timeSpentSecondLineAndPartials": 0,
+  "itemCosts": null,
+  "objectCosts": null,
+  "costs": 249.9900,
+  "escalationStatus": null,
+  "escalationReason": null,
+  "escalationOperator": null,
+  "callDate": "2023-01-24T12:00:00.000+0000",
+  "creator": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "name": "Example Operator"
+  },
+  "creationDate": "2023-01-25T14:40:46.000+0000",
+  "modifier": {
+    "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+    "name": "Example Operator"
+  },
+  "modificationDate": "2023-01-27T18:37:16.000+0000",
+  "majorCall": true,
+  "majorCallObject": null,
+  "publishToSsd": false,
+  "monitored": false,
+  "expectedTimeSpent": 120,
+  "archivingReason": null,
+  "mainIncident": null,
+  "partialIncidents": [],
+  "optionalFields1": {
+    "boolean1": false,
+    "boolean2": false,
+    "boolean3": false,
+    "boolean4": false,
+    "boolean5": false,
+    "number1": 0.0,
+    "number2": 0.0,
+    "number3": 0.0,
+    "number4": 0.0,
+    "number5": 0.0,
+    "date1": null,
+    "date2": null,
+    "date3": null,
+    "date4": null,
+    "date5": null,
+    "text1": "",
+    "text2": "",
+    "text3": "",
+    "text4": "",
+    "text5": "",
+    "memo1": null,
+    "memo2": null,
+    "memo3": null,
+    "memo4": null,
+    "memo5": null,
+    "searchlist1": null,
+    "searchlist2": null,
+    "searchlist3": null,
+    "searchlist4": null,
+    "searchlist5": null
+  },
+  "optionalFields2": {
+    "boolean1": false,
+    "boolean2": false,
+    "boolean3": false,
+    "boolean4": false,
+    "boolean5": false,
+    "number1": 0.0,
+    "number2": 0.0,
+    "number3": 0.0,
+    "number4": 0.0,
+    "number5": 0.0,
+    "date1": null,
+    "date2": null,
+    "date3": null,
+    "date4": null,
+    "date5": null,
+    "text1": "",
+    "text2": "",
+    "text3": "",
+    "text4": "",
+    "text5": "",
+    "memo1": null,
+    "memo2": null,
+    "memo3": null,
+    "memo4": null,
+    "memo5": null,
+    "searchlist1": null,
+    "searchlist2": null,
+    "searchlist3": null,
+    "searchlist4": null,
+    "searchlist5": null
+  },
+  "externalLinks": []
+}

@@ -1,0 +1,49 @@
+{
+  "suppliers": [
+    {
+      "id": "4f53f0fd-4390-4130-ae6a-f08ca45d6652",
+      "name": "Name 2",
+      "forFirstLine": false,
+      "forSecondLine": true,
+      "forService": false,
+      "forOperationalActivity": false,
+      "forChangeManagement": false
+    },
+    {
+      "id": "cbd4ade3-3756-4b97-b6a1-81a201f6626f",
+      "name": "Name 3",
+      "forFirstLine": false,
+      "forSecondLine": false,
+      "forService": true,
+      "forOperationalActivity": false,
+      "forChangeManagement": false
+    },
+    {
+      "id": "70a40f89-1924-4164-b0e1-76917d20abe3",
+      "name": "Name 4",
+      "forFirstLine": false,
+      "forSecondLine": false,
+      "forService": false,
+      "forOperationalActivity": true,
+      "forChangeManagement": false
+    },
+    {
+      "id": "e8165c34-57e0-4925-81fd-3e15238abc78",
+      "name": "Name 5",
+      "forFirstLine": false,
+      "forSecondLine": false,
+      "forService": false,
+      "forOperationalActivity": false,
+      "forChangeManagement": true
+    },
+    {
+      "id": "1bb445c8-4064-4632-a531-bf32827488bc",
+      "name": "Name 6",
+      "forFirstLine": false,
+      "forSecondLine": true,
+      "forService": false,
+      "forOperationalActivity": false,
+      "forChangeManagement": false
+    }
+  ]
+}
