@@ -57,6 +57,44 @@ types:
       title: ID
       description: ID
       type: integer
+  solarwinds_avatar:
+    type:
+      title: Avatar type
+      description: Type of Avatar
+      type: string
+    color:
+      title: Avatar color
+      description: Color of Avatar
+      type: string
+    initials:
+      title: Avatar initials
+      description: Initials of Avatar
+      type: string
+  solarwinds_assignee:
+    group_id:
+      title: Group Id
+      description: Group ID
+      type: string
+    is_user:
+      title: Is user
+      description: If the assignee is a user
+      type: boolean
+    name:
+      title: Name
+      description: Name
+      type: string
+    id:
+      title: ID
+      description: ID
+      type: integer
+    email:
+      title: Email
+      description: Email of assignee
+      type: string
+    avatar:
+      title: Avatar
+      description: Avatar
+      type: solarwinds_avatar
   solarwinds_number:
     number:
       title: Number
@@ -141,7 +179,7 @@ types:
     assignee:
       title: Assignee
       description: Assignee
-      type: solarwinds_email
+      type: solarwinds_assignee
     problem:
       title: Problem
       description: Problem

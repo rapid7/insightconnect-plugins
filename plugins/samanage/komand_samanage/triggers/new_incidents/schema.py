@@ -69,7 +69,7 @@ class NewIncidentsOutput(insightconnect_plugin_runtime.Output):
           "order": 13
         },
         "assignee": {
-          "$ref": "#/definitions/solarwinds_email",
+          "$ref": "#/definitions/solarwinds_assignee",
           "title": "Assignee",
           "description": "Assignee",
           "order": 10
@@ -202,6 +202,98 @@ class NewIncidentsOutput(insightconnect_plugin_runtime.Output):
         }
       },
       "definitions": {
+        "solarwinds_assignee": {
+          "type": "object",
+          "title": "solarwinds_assignee",
+          "properties": {
+            "avatar": {
+              "$ref": "#/definitions/solarwinds_avatar",
+              "title": "Avatar",
+              "description": "Avatar",
+              "order": 6
+            },
+            "email": {
+              "type": "string",
+              "title": "Email",
+              "description": "Email of assignee",
+              "order": 5
+            },
+            "group_id": {
+              "type": "string",
+              "title": "Group Id",
+              "description": "Group ID",
+              "order": 1
+            },
+            "id": {
+              "type": "integer",
+              "title": "ID",
+              "description": "ID",
+              "order": 4
+            },
+            "is_user": {
+              "type": "boolean",
+              "title": "Is user",
+              "description": "If the assignee is a user",
+              "order": 2
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "Name",
+              "order": 3
+            }
+          },
+          "definitions": {
+            "solarwinds_avatar": {
+              "type": "object",
+              "title": "solarwinds_avatar",
+              "properties": {
+                "color": {
+                  "type": "string",
+                  "title": "Avatar color",
+                  "description": "Color of Avatar",
+                  "order": 2
+                },
+                "initials": {
+                  "type": "string",
+                  "title": "Avatar initials",
+                  "description": "Initials of Avatar",
+                  "order": 3
+                },
+                "type": {
+                  "type": "string",
+                  "title": "Avatar type",
+                  "description": "Type of Avatar",
+                  "order": 1
+                }
+              }
+            }
+          }
+        },
+        "solarwinds_avatar": {
+          "type": "object",
+          "title": "solarwinds_avatar",
+          "properties": {
+            "color": {
+              "type": "string",
+              "title": "Avatar color",
+              "description": "Color of Avatar",
+              "order": 2
+            },
+            "initials": {
+              "type": "string",
+              "title": "Avatar initials",
+              "description": "Initials of Avatar",
+              "order": 3
+            },
+            "type": {
+              "type": "string",
+              "title": "Avatar type",
+              "description": "Type of Avatar",
+              "order": 1
+            }
+          }
+        },
         "solarwinds_email": {
           "type": "object",
           "title": "solarwinds_email",
@@ -315,6 +407,98 @@ class NewIncidentsOutput(insightconnect_plugin_runtime.Output):
               "order": 1
             }
           }
+        }
+      }
+    },
+    "solarwinds_assignee": {
+      "type": "object",
+      "title": "solarwinds_assignee",
+      "properties": {
+        "avatar": {
+          "$ref": "#/definitions/solarwinds_avatar",
+          "title": "Avatar",
+          "description": "Avatar",
+          "order": 6
+        },
+        "email": {
+          "type": "string",
+          "title": "Email",
+          "description": "Email of assignee",
+          "order": 5
+        },
+        "group_id": {
+          "type": "string",
+          "title": "Group Id",
+          "description": "Group ID",
+          "order": 1
+        },
+        "id": {
+          "type": "integer",
+          "title": "ID",
+          "description": "ID",
+          "order": 4
+        },
+        "is_user": {
+          "type": "boolean",
+          "title": "Is user",
+          "description": "If the assignee is a user",
+          "order": 2
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
+          "order": 3
+        }
+      },
+      "definitions": {
+        "solarwinds_avatar": {
+          "type": "object",
+          "title": "solarwinds_avatar",
+          "properties": {
+            "color": {
+              "type": "string",
+              "title": "Avatar color",
+              "description": "Color of Avatar",
+              "order": 2
+            },
+            "initials": {
+              "type": "string",
+              "title": "Avatar initials",
+              "description": "Initials of Avatar",
+              "order": 3
+            },
+            "type": {
+              "type": "string",
+              "title": "Avatar type",
+              "description": "Type of Avatar",
+              "order": 1
+            }
+          }
+        }
+      }
+    },
+    "solarwinds_avatar": {
+      "type": "object",
+      "title": "solarwinds_avatar",
+      "properties": {
+        "color": {
+          "type": "string",
+          "title": "Avatar color",
+          "description": "Color of Avatar",
+          "order": 2
+        },
+        "initials": {
+          "type": "string",
+          "title": "Avatar initials",
+          "description": "Initials of Avatar",
+          "order": 3
+        },
+        "type": {
+          "type": "string",
+          "title": "Avatar type",
+          "description": "Type of Avatar",
+          "order": 1
         }
       }
     },
