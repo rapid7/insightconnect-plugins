@@ -63,6 +63,10 @@ class SamanageAPI:
 
         return self._call_api("POST", url, json=json, params={"layout": "long", "audit_archive": True})
 
+    def delete_incident(self, incident_id):
+        url = "incidents/{}".format(incident_id)
+        return self._call_api("DELETE", url)
+
     def comment_incident(self, incident_id, body, is_private):
         url = "incidents/{}/comments".format(incident_id)
         json = {"comment": {"body": body, "is_private": is_private}}

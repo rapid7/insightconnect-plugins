@@ -14,6 +14,7 @@ class Input:
     NAME = "name"
     PHONE = "phone"
     ROLE = "role"
+    SITE = "site"
     
 
 class Output:
@@ -30,14 +31,6 @@ class CreateUserInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Department",
       "description": "Department",
-      "enum": [
-        "",
-        "Facilities",
-        "Finance",
-        "Human Resources",
-        "Information Technology",
-        "Marketing"
-      ],
       "order": 6
     },
     "email": {
@@ -68,22 +61,18 @@ class CreateUserInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Role",
       "description": "Role",
-      "enum": [
-        "",
-        "Administrator",
-        "Facilities Service Desk User",
-        "Human Resources Service Desk User",
-        "Read Only",
-        "Requester",
-        "Service Agent User",
-        "Service Task User",
-        "Users Own Site"
-      ],
       "order": 5
+    },
+    "site": {
+      "type": "string",
+      "title": "Site",
+      "description": "Site",
+      "order": 7
     }
   },
   "required": [
-    "email"
+    "email",
+    "name"
   ]
 }
     """)

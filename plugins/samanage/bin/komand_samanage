@@ -48,6 +48,8 @@ def main():
 
             self.add_action(actions.CreateUser())
 
+            self.add_action(actions.DeleteIncident())
+
             self.add_action(actions.DeleteUser())
 
             self.add_action(actions.GetComments())

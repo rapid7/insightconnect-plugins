@@ -360,6 +360,38 @@ Example output:
 }
 ```
 
+#### Delete Incident
+
+This action is used to delete an incident.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|incident_id|integer|None|True|The ID of an incident to delete|None|1234|
+
+Example input:
+
+```
+{
+  "incident_id": 1234
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|Was the operation successful?|True|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
 #### Tag Incident
 
 This action is used to add tags to an incident.
@@ -950,13 +982,12 @@ This action is used to create a new user.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|department|string|None|False|Department|['', 'Facilities', 'Finance', 'Human Resources', 'Information Technology', 'Marketing']|Marketing|
+|department|string|None|False|Department|None|Marketing|
 |email|string|None|True|Email address|None|user@example.com|
 |mobile_phone|string|None|False|Mobile phone number|None|(800) 555-0100|
-|name|string|None|False|User name|None|Example User|
+|name|string|None|True|User name|None|Example User|
 |phone|string|None|False|Phone number|None|(800) 555-0100|
-|role|string|None|False|Role|['', 'Administrator', 'Facilities Service Desk User', 'Human Resources Service Desk User', 'Read Only', 'Requester', 'Service Agent User', 'Service Task User', 'Users Own Site']|Administrator|
-
+|role|string|None|False|Role|None|Requester|
 Example input:
 
 ```
