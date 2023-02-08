@@ -1,0 +1,6 @@
+{
+  "type": "2-User",
+  "accessAll": false,
+  "collections": ["string"],
+  "email": "user@example.com"
+}
