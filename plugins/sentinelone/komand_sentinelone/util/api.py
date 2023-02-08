@@ -98,13 +98,13 @@ class SentineloneAPI:
                 results.append(agents_data[0])
 
     def search_agents(
-            self,
-            agent_details: str,
-            agent_active: bool = True,
-            case_sensitive: bool = True,
-            operational_state: str = None,
-            results_length: int = 0,
-            api_version: str = "2.0",
+        self,
+        agent_details: str,
+        agent_active: bool = True,
+        case_sensitive: bool = True,
+        operational_state: str = None,
+        results_length: int = 0,
+        api_version: str = "2.0",
     ) -> List[Dict[str, Any]]:
         """
         Searches for agents
