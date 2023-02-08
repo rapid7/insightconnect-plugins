@@ -1,0 +1,16 @@
+{
+  "members": [
+    {
+      "object": "member",
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "userId": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "name": "User",
+      "email": "user@example.com",
+      "twoFactorEnabled": false,
+      "status": "2-Confirmed",
+      "type": "0-Owner",
+      "accessAll": true,
+      "resetPasswordEnrolled": false
+    }
+  ]
+}
