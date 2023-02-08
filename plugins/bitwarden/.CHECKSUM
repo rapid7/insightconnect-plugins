@@ -1,0 +1,55 @@
+{
+	"spec": "82ae7e7f539902705231ef60297cfb4b",
+	"manifest": "eca110375bcb7d7558052d245c822c6c",
+	"setup": "58ac1e6ceb3c7f4da49bc88339cf3174",
+	"schemas": [
+		{
+			"identifier": "createMember/schema.py",
+			"hash": "cc7444ea248b8afa103fa8e2a25a886f"
+		},
+		{
+			"identifier": "deleteMember/schema.py",
+			"hash": "6577c19296547b8ea08b1b3250c68547"
+		},
+		{
+			"identifier": "listAllCollections/schema.py",
+			"hash": "eae5dcb071aba5e706a343d9a167fa28"
+		},
+		{
+			"identifier": "listAllGroups/schema.py",
+			"hash": "ae2edb08588037673630b2a94a3d0103"
+		},
+		{
+			"identifier": "listAllMembers/schema.py",
+			"hash": "86c2422fac6429952ec0fc4d8e4f6429"
+		},
+		{
+			"identifier": "listEvents/schema.py",
+			"hash": "7ed9f15763132c5bddea32d5d7f55a6f"
+		},
+		{
+			"identifier": "reinviteMember/schema.py",
+			"hash": "115efc561b9919820866279c1c8fb5df"
+		},
+		{
+			"identifier": "retrieveMember/schema.py",
+			"hash": "93f9235a7493880cfb3dddca480dea8f"
+		},
+		{
+			"identifier": "retrieveMembersGroupIds/schema.py",
+			"hash": "e763119272210bb667eb1b3dee594361"
+		},
+		{
+			"identifier": "updateMember/schema.py",
+			"hash": "c1c9f78f0283a34d0d258112552ef6b0"
+		},
+		{
+			"identifier": "updateMembersGroups/schema.py",
+			"hash": "3448b20abb85633d5ddb1ee0da4858b6"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "a059af832a41c5d26c6e6f690ff5cb3a"
+		}
+	]
+}

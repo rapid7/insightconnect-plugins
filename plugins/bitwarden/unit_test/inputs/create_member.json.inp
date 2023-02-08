@@ -1,0 +1,6 @@
+{
+  "type": "1-Admin",
+  "accessAll": false,
+  "collections": [],
+  "email": "user@example.com"
+}
