@@ -1,0 +1,11 @@
+{
+  "type": "3-Manager",
+  "accessAll": true,
+  "collections": [
+    {
+      "id": "aa8e96ad-11c1-44d8-a628-cdc986b79c5d",
+      "readOnly": false
+    }
+  ],
+  "email": "user@example.com"
+}

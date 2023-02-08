@@ -1,0 +1,14 @@
+{
+  "object": "member",
+  "id": "1abc0498-20d4-4536-9a8e-66dc99da1dd97",
+  "userId": null,
+  "name": null,
+  "email": "user@example.com",
+  "twoFactorEnabled": false,
+  "status": 0,
+  "collections": [],
+  "type": 1,
+  "accessAll": false,
+  "externalId": null,
+  "resetPasswordEnrolled": false
+}
