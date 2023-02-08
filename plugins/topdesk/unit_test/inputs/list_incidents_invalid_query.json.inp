@@ -1,0 +1,8 @@
+{
+      "all": true,
+      "fields": "",
+      "pageSize": 2,
+      "pageStart": 3,
+      "query": "status==invalidStatus",
+      "sort": "number:desc"
+}
