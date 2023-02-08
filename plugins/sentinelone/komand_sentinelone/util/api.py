@@ -74,12 +74,9 @@ class SentineloneAPI:
             agents = [agent_details.lower()]
         return agents
 
-    def get_agents_data(self, agent: str, api_version: str, search: str):
+    def get_agents_data(self, agent: str, api_version: str, search: str) -> List[Dict[str, Any]]:
         """
         Gets agents Data
-        :param self: Self
-        :type: str
-
         :param agent: Agent to get details for
         :type: str
 
@@ -89,7 +86,6 @@ class SentineloneAPI:
         :param search: String that will be searched for
         :type: str
         """
-
         results = []
         endpoint = f"{self.url}web/api/v{api_version}/agents?{search}={agent}"
         output = requests.get(endpoint, headers=self.token_header)
@@ -100,13 +96,13 @@ class SentineloneAPI:
         return results
 
     def search_agents(
-        self,
-        agent_details: str,
-        agent_active: bool = True,
-        case_sensitive: bool = True,
-        operational_state: str = None,
-        results_length: int = 0,
-        api_version: str = "2.0",
+            self,
+            agent_details: str,
+            agent_active: bool = True,
+            case_sensitive: bool = True,
+            operational_state: str = None,
+            results_length: int = 0,
+            api_version: str = "2.0",
     ) -> List[Dict[str, Any]]:
         """
         Searches for agents
@@ -141,7 +137,7 @@ class SentineloneAPI:
                     agents = self.set_agents_array(search, agent_details, agents)
 
                 for agent in agents:
-                    results = self.get_agents_data(agent, api_version, search, results)
+                    results = self.get_agents_data(agent, api_version, search)
 
                 if results_length:
                     if len(results) >= results_length:
