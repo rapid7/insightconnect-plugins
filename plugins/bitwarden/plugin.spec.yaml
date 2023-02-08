@@ -1,0 +1,498 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: bitwarden
+title: Bitwarden
+description: Bitwarden is an integrated open source password management solution for individuals, teams, and business organizations
+version: 1.0.0
+vendor: rapid7
+support: rapid7
+cloud_ready: true
+status: []
+supported_versions: ["Cloud-hosted Bitwarden instance 2023.1.1"]
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/bitwarden
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://bitwarden.com/
+tags:
+- bitwarden
+- api
+- access control
+- password
+hub_tags:
+  use_cases: [credential_management, data_utility]
+  keywords: [bitwarden, api, access_control, password, cloud_enabled]
+  features: []
+
+types:
+  group:
+    name:
+      title: Name
+      description: The name of the group
+      type: string
+      required: false
+      example: Development Team
+    accessAll:
+      title: Access All
+      description: Determines if this group can access all collections within the organization, or only the associated collections. If set to 'true', this option overrides any collection assignments
+      type: boolean
+      required: false
+      example: true
+    externalId:
+      title: External ID
+      description: External identifier for reference or linking this group to another system, such as a user director
+      type: string
+      required: false
+      example: external_id_123456
+    id:
+      title: ID
+      description: The group's unique identifier
+      type: string
+      required: false
+      example: 539a36c5-e0d2-4cf9-979e-51ecf5cf6593
+  collection:
+    id:
+      title: ID
+      description: The associated object's unique identifier
+      type: string
+      required: false
+      example: bfbc8338-e329-4dc0-b0c9-317c2ebf1a09
+    readOnly:
+      title: Read Only
+      description: When true, the read only permission will not allow the user or group to make changes to items
+      type: boolean
+      required: false
+      example: true
+  collectionObject:
+    externalId:
+      title: External ID
+      description: External identifier for reference or linking this collection to another system
+      type: string
+      required: false
+      example: external_id_123456
+    object:
+      title: Object
+      description: String representing the object's type. Objects of the same type share the same properties
+      type: string
+      required: false
+      example: collection
+    id:
+      title: ID
+      description: The collection's unique identifier
+      type: string
+      required: false
+      example: 539a36c5-e0d2-4cf9-979e-51ecf5cf6593
+  member:
+    type:
+      title: Type
+      description: Organization user type
+      type: string
+      required: false
+      example: 0-Owner
+      enum:
+        - 0-Owner
+        - 1-Admin
+        - 2-User
+        - 3-Manager
+    accessAll:
+      title: Access All
+      description: Determines if this member can access all collections within the organization, or only the associated collections. If set to 'true', this option overrides any collection assignments
+      type: boolean
+      required: false
+      example: true
+    externalId:
+      title: External ID
+      description: External identifier for reference or linking this member to another system, such as a user directory
+      type: string
+      required: false
+      example: external_id_123456
+    resetPasswordEnrolled:
+      title: Reset Password Enrolled
+      description: Returns 'true' if the member has enrolled in Password Reset assistance within the organization
+      type: boolean
+      required: false
+      example: true
+    object:
+      title: Object
+      description: String representing the object's type. Objects of the same type share the same properties
+      type: string
+      required: false
+      example: member
+    id:
+      title: ID
+      description: The member's unique identifier within the organization
+      type: string
+      required: false
+      example: 539a36c5-e0d2-4cf9-979e-51ecf5cf6593
+    userId:
+      title: User ID
+      description: The member's unique identifier across Bitwarden
+      type: string
+      required: false
+      example: 48b47ee1-493e-4c67-aef7-014996c40eca
+    name:
+      title: Name
+      description: The member's name, set from their user account profile
+      type: string
+      required: false
+      example: John Smith
+    email:
+      title: Email
+      description: The member's email address
+      type: string
+      required: false
+      example: user@example.com
+    twoFactorEnabled:
+      title: Two Factor Enabled
+      description: Returns 'true' if the member has a two-step login method enabled on their user account
+      type: boolean
+      required: false
+      example: true
+    status:
+      title: Status
+      description: Organization user status type
+      type: string
+      required: false
+      example: 0-Invited
+      enum:
+        - -1-Revoked
+        - 0-Invited
+        - 1-Accepted
+        - 2-Confirmed
+    collections:
+      title: Collections
+      description: The associated collections that this member can access
+      type: "[]collection"
+      required: false
+      example: []
+  event:
+    object:
+      title: Object
+      description: The type of the object
+      type: string
+      required: false
+      example: event
+    type:
+      title: Type
+      description: The type of the event
+      type: integer
+      required: false
+      example: 1000
+    itemId:
+      title: Item ID
+      description: The unique identifier of the related item that the event describes
+      type: string
+      required: false
+      example: 44d88612-fea8-a8f3-6de8-2e1278abb02f
+    collectionId:
+      title: Collection ID
+      description: The unique identifier of the related collection that the event describes
+      type: string
+      required: false
+      example: bce212a4-25f3-4888-8a0a-4c5736d851e0
+    groupId:
+      title: Group ID
+      description: The unique identifier of the related group that the event describes
+      type: string
+      required: false
+      example: f29a2515-91d2-4452-b49b-5e8040e6b0f4
+    policyId:
+      title: Policy ID
+      description: The unique identifier of the related policy that the event describes
+      type: string
+      required: false
+      example: f29a2515-91d2-4452-b49b-5e8040e6b0f4
+    memberId:
+      title: Member ID
+      description: The unique identifier of the related member that the event describes
+      type: string
+      required: false
+      example: e68b8629-85eb-4929-92c0-b84464976ba4
+    actingUserId:
+      title: Acting User ID
+      description: The unique identifier of the user that performed the event
+      type: string
+      required: false
+      example: 539a36c5-e0d2-4cf9-979e-51ecf5cf6593
+    date:
+      title: Date
+      description: The timestamp when the event occurred
+      type: string
+      required: false
+      example: 2023-01-11T00:00:00Z
+    device:
+      title: Device
+      description: The type of the device
+      type: integer
+      required: false
+      example: 1
+    ipAddress:
+      title: IP Address
+      description: The IP address of the acting user
+      type: string
+      required: false
+      example: 198.51.100.1
+
+connection:
+  clientId:
+    title: Client ID
+    description: Client ID of the organization
+    type: string
+    required: true
+    example: organization.u8iid299-888p-12sp-1234-es123456s987
+  clientSecret:
+    title: Client Secret
+    description: Client secret
+    type: credential_secret_key
+    required: true
+    example: KuHDkd3Pfhe4Scms6kEHdPPA5dAJDX
+
+actions:
+  retrieveMember:
+    title: Retrieve a Member
+    description: Retrieves the details of an existing member of the organization. You need only supply the unique member identifier that was returned upon member creation
+    input:
+      id:
+        title: Id
+        description: The identifier of the member to be retrieved
+        type: string
+        required: true
+        example: 539a36c5-e0d2-4cf9-979e-51ecf5cf6593
+    output:
+      member:
+        title: Member
+        description: An organization member
+        type: member
+        required: false
+        example: {}
+  updateMember:
+    title: Update a Member
+    description: Updates the specified member object. If a property is not provided, the value of the existing property will be reset
+    input:
+      id:
+        title: Id
+        description: The identifier of the member to be updated
+        type: string
+        required: true
+        example: 539a36c5-e0d2-4cf9-979e-51ecf5cf6593
+      type:
+        title: Type
+        description: Organization user type
+        type: string
+        required: true
+        example: 0-Owner
+        enum:
+          - 0-Owner
+          - 1-Admin
+          - 2-User
+          - 3-Manager
+      accessAll:
+        title: Access All
+        description: Determines if this member can access all collections within the organization, or only the associated collections. If set to 'true', this option overrides any collection assignments
+        type: boolean
+        required: true
+        example: true
+      externalId:
+        title: External Id
+        description: External identifier for reference or linking this member to another system, such as a user directory
+        type: string
+        required: false
+        example: external_id_123456
+      collections:
+        title: Collections
+        description: The associated collections that this member can access
+        type: "[]collection"
+        required: false
+        example: [ ]
+    output:
+      member:
+        title: Member
+        description: An organization member
+        type: member
+        required: false
+        example: {}
+  deleteMember:
+    title: Delete a Member
+    description: Permanently delete a member from the organization. This cannot be undone. The user account will still remain. The user is only removed from the organization
+    input:
+      id:
+        title: Id
+        description: The identifier of the member to be deleted
+        type: string
+        required: true
+        example: 539a36c5-e0d2-4cf9-979e-51ecf5cf6593
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+        example: true
+  retrieveMembersGroupIds:
+    title: Retrieve a Member's Group Ids
+    description: Retrieves the unique identifiers for all groups that are associated with this member. You need only supply the unique member identifier that was returned upon member creation
+    input:
+      id:
+        title: ID
+        description: The identifier of the member to be retrieved
+        type: string
+        required: true
+        example: 539a36c5-e0d2-4cf9-979e-51ecf5cf6593
+    output:
+      membersGroupIds:
+        title: Member's Group IDs
+        description: Member's group IDs
+        type: "[]string"
+        required: false
+        example: ["3fa85f64-5717-4562-b3fc-2c963f66afa6"]
+  updateMembersGroups:
+    title: Update a Member's Groups
+    description: Update the specified member's group associations
+    input:
+      id:
+        title: ID
+        description: The identifier of the member to be updated
+        type: string
+        required: true
+        example: 539a36c5-e0d2-4cf9-979e-51ecf5cf6593
+      groupIds:
+        title: Group IDs
+        description: The associated group IDs that this object can access
+        type: "[]string"
+        required: true
+        example: ["3fa85f64-5717-4562-b3fc-2c963f66afa6"]
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+        example: true
+  listAllMembers:
+    title: List All Members
+    description: Return a list of your organization's members. Member objects listed in this call do not include information about their associated collections
+    output:
+      members:
+        title: Members
+        description: List of members
+        type: "[]member"
+        required: false
+        example: []
+  createMember:
+    title: Create a Member
+    description: Creates a new member object by inviting a user to the organization
+    input:
+      type:
+        title: Type
+        description: Organization user type
+        type: string
+        required: true
+        example: 0-Owner
+        enum:
+          - 0-Owner
+          - 1-Admin
+          - 2-User
+          - 3-Manager
+      accessAll:
+        title: Access All
+        description: Determines if this member can access all collections within the organization, or only the associated collections. If set to 'true', this option overrides any collection assignments
+        type: boolean
+        required: true
+        example: true
+      externalId:
+        title: External Id
+        description: External identifier for reference or linking this member to another system, such as a user directory
+        type: string
+        required: false
+        example: external_id_123456
+      collections:
+        title: Collections
+        description: The associated collections that this member can access
+        type: "[]collection"
+        required: false
+        example: [ ]
+      email:
+        title: Email
+        description: The member's email address
+        type: string
+        required: true
+        example: user@example.com
+    output:
+      member:
+        title: Member
+        description: An organization member
+        type: member
+        required: false
+        example: { }
+  reinviteMember:
+    title: Re-invite a Member
+    description: Re-send the invitation email to an organization member
+    input:
+      id:
+        title: ID
+        description: The identifier of the member to re-invite
+        type: string
+        required: true
+        example: 539a36c5-e0d2-4cf9-979e-51ecf5cf6593
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+        example: true
+  listAllGroups:
+    title: List All Groups
+    description: Return a list of your organization's groups. Group objects listed in this call do not include information about their associated collections
+    output:
+      groups:
+        title: Groups
+        description: List of groups
+        type: "[]group"
+        required: false
+        example: []
+  listAllCollections:
+    title: List All Collections
+    description: Returns a list of your organization's collections. Collection objects listed in this call do not include information about their associated groups
+    output:
+      collections:
+        title: Collections
+        description: List of collections
+        type: "[]collectionObject"
+        required: false
+        example: [ ]
+  listEvents:
+    title: List Events
+    description: Return a filtered list of your organization's event logs. If no filters are provided, it will return the last 30 days of event for the organization
+    input:
+      start:
+        title: Start Date
+        description: The start date. Must be less than the end date
+        type: date
+        required: false
+        example: 2023-01-10T00:00:00Z
+      end:
+        title: End Date
+        description: The end date. Must be greater than the start date
+        type: date
+        required: false
+        example: 2023-01-12T00:00:00Z
+      actingUserId:
+        title: Acting User ID
+        description: The unique identifier of the user that performed the event
+        type: string
+        required: false
+        example: 539a36c5-e0d2-4cf9-979e-51ecf5cf6593
+      itemId:
+        title: Item ID
+        description: The unique identifier of the related item that the event describes
+        type: string
+        required: false
+        example: 44d88612-fea8-a8f3-6de8-2e1278abb02f
+    output:
+      events:
+        title: Events
+        description: The filtered list of your organization's event logs
+        type: "[]event"
+        required: false
+        example: []

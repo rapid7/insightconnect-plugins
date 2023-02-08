@@ -1,0 +1,19 @@
+{
+  "type": 1,
+  "accessAll": false,
+  "externalId": "external_id_123456",
+  "resetPasswordEnrolled": false,
+  "object": "member",
+  "id": "6a47f057-a57c-421f-9a28-5957c990ad90",
+  "userId": null,
+  "name": null,
+  "email": "user@example.com",
+  "twoFactorEnabled": false,
+  "status": 2,
+  "collections": [
+    {
+      "id": "f5399356-8ccf-4f88-9636-4483062d0370",
+      "readOnly": true
+    }
+  ]
+}

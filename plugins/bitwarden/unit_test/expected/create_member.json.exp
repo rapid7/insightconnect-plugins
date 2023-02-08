@@ -1,0 +1,12 @@
+{
+  "member": {
+    "object": "member",
+    "id": "1abc0498-20d4-4536-9a8e-66dc99da1dd97",
+    "email": "user@example.com",
+    "twoFactorEnabled": false,
+    "status": "0-Invited",
+    "type": "1-Admin",
+    "accessAll": false,
+    "resetPasswordEnrolled": false
+  }
+}
