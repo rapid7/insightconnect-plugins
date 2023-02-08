@@ -46,7 +46,14 @@ def clean(obj):
     return cleaned
 
 
-def set_agents_array(search, agent_details, agents):
+def set_agents_array(search: str, agent_details: str, agents: list) -> list:
+    """
+    Checks Search and assigns agents appropriate values
+    :param search: String that will be searched for
+    :param agent_details: Details of agent
+    :param agents: List of agents
+    :returns agents: List of agents
+    """
     # Normalize casing if specified
     if search == "computerName":
         agents = [agent_details.lower(), agent_details.upper()]
@@ -55,7 +62,15 @@ def set_agents_array(search, agent_details, agents):
     return agents
 
 
-def get_agents_data(self, agent, api_version, search, results):
+def get_agents_data(self, agent: str, api_version: str, search: str, results: list):
+    """
+    Gets agents Data
+    :param self: Self
+    :param agent: Agent to get details for
+    :param api_version: Version of API
+    :param search: String that will be searched for
+    :param results: Resulting list of agent details
+    """
     endpoint = f"{self.url}web/api/v{api_version}/agents?{search}={agent}"
     output = requests.get(endpoint, headers=self.token_header)
     if output.status_code == 200 and output.json().get("pagination", {}).get("totalItems", 0) >= 1:
