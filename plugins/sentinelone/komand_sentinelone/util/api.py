@@ -74,7 +74,7 @@ class SentineloneAPI:
             agents = [agent_details.lower()]
         return agents
 
-    def get_agents_data(self, agent: str, api_version: str, search: str) -> List[Dict[str, Any]]:
+    def get_agents_data(self, agent: str, api_version: str, search: str, results: List[Dict[str, Any]]) -> None:
         """
         Gets agents Data
         :param agent: Agent to get details for
@@ -85,15 +85,17 @@ class SentineloneAPI:
 
         :param search: String that will be searched for
         :type: str
+
+        :param results: Array containing agent results
+        :type: List[Dict[str, Any]]
         """
-        results = []
+
         endpoint = f"{self.url}web/api/v{api_version}/agents?{search}={agent}"
         output = requests.get(endpoint, headers=self.token_header)
         if output.status_code == 200 and output.json().get("pagination", {}).get("totalItems", 0) >= 1:
             agents_data = output.json().get("data", [])
             if agents_data and agents_data[0] not in results:
                 results.append(agents_data[0])
-        return results
 
     def search_agents(
             self,
@@ -137,7 +139,7 @@ class SentineloneAPI:
                     agents = self.set_agents_array(search, agent_details, agents)
 
                 for agent in agents:
-                    results = self.get_agents_data(agent, api_version, search)
+                    self.get_agents_data(agent, api_version, search, results)
 
                 if results_length:
                     if len(results) >= results_length:
@@ -206,7 +208,7 @@ class SentineloneAPI:
         return clean(loads(dumps(results).replace("null", '"None"')))
 
     @staticmethod
-    def __check_agents_found(agents: List[str]) -> bool:
+    def __check_agents_found(agents: List[Dict[str, Any]]) -> bool:
         """
         Checks if Agents are found
         :param agents: List of Agents
