@@ -55,6 +55,15 @@ def set_agents_array(search, agent_details, agents):
     return agents
 
 
+def get_agents_data(self, agent, api_version, search, results):
+    endpoint = f"{self.url}web/api/v{api_version}/agents?{search}={agent}"
+    output = requests.get(endpoint, headers=self.token_header)
+    if output.status_code == 200 and output.json().get("pagination", {}).get("totalItems", 0) >= 1:
+        agents_data = output.json().get("data", [])
+        if agents_data and agents_data[0] not in results:
+            results.append(agents_data[0])
+
+
 class SentineloneAPI:
     def __init__(self, url, make_token_header):
         self.url = url
@@ -79,13 +88,7 @@ class SentineloneAPI:
                     agents = set_agents_array(search, agent_details, agents)
 
                 for agent in agents:
-                    endpoint = f"{self.url}web/api/v{api_version}/agents?{search}={agent}"
-                    output = requests.get(endpoint, headers=self.token_header)
-
-                    if output.status_code == 200 and output.json().get("pagination", {}).get("totalItems", 0) >= 1:
-                        agents_data = output.json().get("data", [])
-                        if agents_data and agents_data[0] not in results:
-                            results.append(agents_data[0])
+                    get_agents_data(self, agent, api_version, search, results)
 
                 if results_length:
                     if len(results) >= results_length:
