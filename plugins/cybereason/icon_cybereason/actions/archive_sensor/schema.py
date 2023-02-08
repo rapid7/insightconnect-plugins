@@ -158,480 +158,408 @@ class ArchiveSensorOutput(insightconnect_plugin_runtime.Output):
           "title": "globalSensorStats",
           "properties": {
             "stats": {
-              "$ref": "#/definitions/stats",
+              "$ref": "#/definitions/sensorStats",
               "title": "sensorStats",
               "description": "Stats",
               "order": 1
             }
           },
           "definitions": {
-            "stats": {
+            "sensorStats": {
               "type": "object",
-              "title": "stats",
+              "title": "sensorStats",
               "properties": {
                 "AbortTimeout": {
                   "type": "integer",
                   "title": "Abort Timeout",
                   "description": "Abort timeout",
-                  "order": 34
+                  "order": 31
                 },
                 "Aborted": {
                   "type": "integer",
                   "title": "Aborted",
                   "description": "Aborted",
-                  "order": 17
-                },
-                "Aborting": {
-                  "type": "integer",
-                  "title": "Aborting",
-                  "description": "Aborting",
-                  "order": 1
+                  "order": 15
                 },
                 "AlreadyUpdated": {
                   "type": "integer",
                   "title": "Already Updated",
                   "description": "Already updated",
-                  "order": 3
-                },
-                "BadArgument": {
-                  "type": "integer",
-                  "title": "Bad Argument",
-                  "description": "Bad argument",
-                  "order": 19
+                  "order": 22
                 },
                 "ChunksRequired": {
                   "type": "integer",
                   "title": "Chunks Required",
                   "description": "Chunks required",
-                  "order": 28
+                  "order": 6
                 },
                 "Disconnected": {
                   "type": "integer",
                   "title": "Disconnected",
                   "description": "Disconnected",
-                  "order": 24
+                  "order": 18
                 },
                 "EndedWithInvalidParam": {
                   "type": "integer",
                   "title": "Ended With Invalid Param",
                   "description": "Ended with invalid param",
-                  "order": 9
-                },
-                "EndedWithNoValidFolder": {
-                  "type": "integer",
-                  "title": "Ended With No Valid Folder",
-                  "description": "Ended with no valid folder",
-                  "order": 20
+                  "order": 29
                 },
                 "EndedWithSensorTimeout": {
                   "type": "integer",
                   "title": "Ended With Sensor Timeout",
                   "description": "Ended with sensor timeout",
-                  "order": 30
+                  "order": 12
                 },
                 "EndedWithTooManyResults": {
                   "type": "integer",
                   "title": "Ended With Too Many Results",
                   "description": "Ended with too many results",
-                  "order": 4
+                  "order": 21
                 },
                 "EndedWithTooManySearches": {
                   "type": "integer",
                   "title": "Ended With Too Many Searches",
                   "description": "Ended with too many searches",
-                  "order": 26
+                  "order": 23
                 },
                 "EndedWithUnknownError": {
                   "type": "integer",
                   "title": "Ended With Unknown Error",
                   "description": "Ended with unknown error",
-                  "order": 12
-                },
-                "EndedWithUnsupportedFilter": {
-                  "type": "integer",
-                  "title": "Ended With Unsupported Filter",
-                  "description": "Ended with unsupported filter",
-                  "order": 7
-                },
-                "EndedWithYaraCompileError": {
-                  "type": "integer",
-                  "title": "Ended With Yara Compile Error",
-                  "description": "Ended with yara compile error",
-                  "order": 2
+                  "order": 26
                 },
                 "Failed": {
                   "type": "integer",
                   "title": "Failed",
                   "description": "Failed",
-                  "order": 6
+                  "order": 19
                 },
                 "FailedSending": {
                   "type": "integer",
                   "title": "Failed Sending",
                   "description": "Failed sending",
-                  "order": 27
+                  "order": 1
                 },
                 "FailedSendingToServer": {
                   "type": "integer",
                   "title": "Failed Sending To Server",
                   "description": "Failed sending to server",
-                  "order": 37
+                  "order": 13
                 },
                 "GettingChunks": {
                   "type": "integer",
                   "title": "Getting Chunks",
                   "description": "Getting chunks",
-                  "order": 16
+                  "order": 14
                 },
                 "InProgress": {
                   "type": "integer",
                   "title": "In Progress",
                   "description": "In progress",
-                  "order": 10
+                  "order": 17
                 },
                 "InvalidState": {
                   "type": "integer",
                   "title": "Invalid State",
                   "description": "Invalid state",
-                  "order": 18
+                  "order": 2
                 },
                 "MsiFileCorrupted": {
                   "type": "integer",
                   "title": "MSI File Corrupted",
                   "description": "MSI file corrupted",
-                  "order": 13
+                  "order": 7
                 },
                 "MsiSendFail": {
                   "type": "integer",
                   "title": "MSI Send Fail",
                   "description": "MSI Send Fail",
-                  "order": 21
+                  "order": 10
                 },
                 "NewerInstalled": {
                   "type": "integer",
                   "title": "Newer Installed",
                   "description": "Newer installed",
-                  "order": 22
+                  "order": 9
                 },
                 "None": {
                   "type": "integer",
                   "title": "None",
                   "description": "None",
-                  "order": 23
+                  "order": 27
                 },
                 "NotSupported": {
                   "type": "integer",
                   "title": "Not Supported",
                   "description": "Not supported",
-                  "order": 32
+                  "order": 25
                 },
                 "Pending": {
                   "type": "integer",
                   "title": "Pending",
                   "description": "Pending",
-                  "order": 11
+                  "order": 5
                 },
                 "Primed": {
                   "type": "integer",
                   "title": "Primed",
                   "description": "Primed",
-                  "order": 36
+                  "order": 28
                 },
                 "ProbeRemoved": {
                   "type": "integer",
                   "title": "Probe Removed",
                   "description": "Probe removed",
-                  "order": 8
+                  "order": 3
                 },
                 "SendingMsi": {
                   "type": "integer",
                   "title": "Sending MSI",
                   "description": "Sending MSI",
-                  "order": 15
-                },
-                "SendingPlatform": {
-                  "type": "integer",
-                  "title": "Sending Platform",
-                  "description": "Sending platform",
-                  "order": 35
+                  "order": 8
                 },
                 "Started": {
                   "type": "integer",
                   "title": "Started",
                   "description": "Started",
-                  "order": 14
+                  "order": 16
                 },
                 "Succeeded": {
                   "type": "integer",
                   "title": "Succeeded",
                   "description": "Succeeded",
-                  "order": 25
+                  "order": 24
                 },
                 "Timeout": {
                   "type": "integer",
                   "title": "Timeout",
                   "description": "Timeout",
-                  "order": 29
+                  "order": 20
                 },
                 "TimeoutSending": {
                   "type": "integer",
                   "title": "Timeout Sending",
                   "description": "Timeout sending",
-                  "order": 33
+                  "order": 4
                 },
                 "UnauthorizedUser": {
                   "type": "integer",
                   "title": "Unauthorized User",
                   "description": "Unauthorized user",
-                  "order": 31
+                  "order": 32
                 },
                 "UnknownProbe": {
                   "type": "integer",
                   "title": "Unknown Probe",
                   "description": "Unknown probe",
-                  "order": 5
+                  "order": 30
                 },
                 "partialResponse": {
                   "type": "integer",
                   "title": "Partial Response",
                   "description": "Partial response",
-                  "order": 38
+                  "order": 11
                 }
               }
             }
           }
         },
-        "stats": {
+        "sensorStats": {
           "type": "object",
-          "title": "stats",
+          "title": "sensorStats",
           "properties": {
             "AbortTimeout": {
               "type": "integer",
               "title": "Abort Timeout",
               "description": "Abort timeout",
-              "order": 34
+              "order": 31
             },
             "Aborted": {
               "type": "integer",
               "title": "Aborted",
               "description": "Aborted",
-              "order": 17
-            },
-            "Aborting": {
-              "type": "integer",
-              "title": "Aborting",
-              "description": "Aborting",
-              "order": 1
+              "order": 15
             },
             "AlreadyUpdated": {
               "type": "integer",
               "title": "Already Updated",
               "description": "Already updated",
-              "order": 3
-            },
-            "BadArgument": {
-              "type": "integer",
-              "title": "Bad Argument",
-              "description": "Bad argument",
-              "order": 19
+              "order": 22
             },
             "ChunksRequired": {
               "type": "integer",
               "title": "Chunks Required",
               "description": "Chunks required",
-              "order": 28
+              "order": 6
             },
             "Disconnected": {
               "type": "integer",
               "title": "Disconnected",
               "description": "Disconnected",
-              "order": 24
+              "order": 18
             },
             "EndedWithInvalidParam": {
               "type": "integer",
               "title": "Ended With Invalid Param",
               "description": "Ended with invalid param",
-              "order": 9
-            },
-            "EndedWithNoValidFolder": {
-              "type": "integer",
-              "title": "Ended With No Valid Folder",
-              "description": "Ended with no valid folder",
-              "order": 20
+              "order": 29
             },
             "EndedWithSensorTimeout": {
               "type": "integer",
               "title": "Ended With Sensor Timeout",
               "description": "Ended with sensor timeout",
-              "order": 30
+              "order": 12
             },
             "EndedWithTooManyResults": {
               "type": "integer",
               "title": "Ended With Too Many Results",
               "description": "Ended with too many results",
-              "order": 4
+              "order": 21
             },
             "EndedWithTooManySearches": {
               "type": "integer",
               "title": "Ended With Too Many Searches",
               "description": "Ended with too many searches",
-              "order": 26
+              "order": 23
             },
             "EndedWithUnknownError": {
               "type": "integer",
               "title": "Ended With Unknown Error",
               "description": "Ended with unknown error",
-              "order": 12
-            },
-            "EndedWithUnsupportedFilter": {
-              "type": "integer",
-              "title": "Ended With Unsupported Filter",
-              "description": "Ended with unsupported filter",
-              "order": 7
-            },
-            "EndedWithYaraCompileError": {
-              "type": "integer",
-              "title": "Ended With Yara Compile Error",
-              "description": "Ended with yara compile error",
-              "order": 2
+              "order": 26
             },
             "Failed": {
               "type": "integer",
               "title": "Failed",
               "description": "Failed",
-              "order": 6
+              "order": 19
             },
             "FailedSending": {
               "type": "integer",
               "title": "Failed Sending",
               "description": "Failed sending",
-              "order": 27
+              "order": 1
             },
             "FailedSendingToServer": {
               "type": "integer",
               "title": "Failed Sending To Server",
               "description": "Failed sending to server",
-              "order": 37
+              "order": 13
             },
             "GettingChunks": {
               "type": "integer",
               "title": "Getting Chunks",
               "description": "Getting chunks",
-              "order": 16
+              "order": 14
             },
             "InProgress": {
               "type": "integer",
               "title": "In Progress",
               "description": "In progress",
-              "order": 10
+              "order": 17
             },
             "InvalidState": {
               "type": "integer",
               "title": "Invalid State",
               "description": "Invalid state",
-              "order": 18
+              "order": 2
             },
             "MsiFileCorrupted": {
               "type": "integer",
               "title": "MSI File Corrupted",
               "description": "MSI file corrupted",
-              "order": 13
+              "order": 7
             },
             "MsiSendFail": {
               "type": "integer",
               "title": "MSI Send Fail",
               "description": "MSI Send Fail",
-              "order": 21
+              "order": 10
             },
             "NewerInstalled": {
               "type": "integer",
               "title": "Newer Installed",
               "description": "Newer installed",
-              "order": 22
+              "order": 9
             },
             "None": {
               "type": "integer",
               "title": "None",
               "description": "None",
-              "order": 23
+              "order": 27
             },
             "NotSupported": {
               "type": "integer",
               "title": "Not Supported",
               "description": "Not supported",
-              "order": 32
+              "order": 25
             },
             "Pending": {
               "type": "integer",
               "title": "Pending",
               "description": "Pending",
-              "order": 11
+              "order": 5
             },
             "Primed": {
               "type": "integer",
               "title": "Primed",
               "description": "Primed",
-              "order": 36
+              "order": 28
             },
             "ProbeRemoved": {
               "type": "integer",
               "title": "Probe Removed",
               "description": "Probe removed",
-              "order": 8
+              "order": 3
             },
             "SendingMsi": {
               "type": "integer",
               "title": "Sending MSI",
               "description": "Sending MSI",
-              "order": 15
-            },
-            "SendingPlatform": {
-              "type": "integer",
-              "title": "Sending Platform",
-              "description": "Sending platform",
-              "order": 35
+              "order": 8
             },
             "Started": {
               "type": "integer",
               "title": "Started",
               "description": "Started",
-              "order": 14
+              "order": 16
             },
             "Succeeded": {
               "type": "integer",
               "title": "Succeeded",
               "description": "Succeeded",
-              "order": 25
+              "order": 24
             },
             "Timeout": {
               "type": "integer",
               "title": "Timeout",
               "description": "Timeout",
-              "order": 29
+              "order": 20
             },
             "TimeoutSending": {
               "type": "integer",
               "title": "Timeout Sending",
               "description": "Timeout sending",
-              "order": 33
+              "order": 4
             },
             "UnauthorizedUser": {
               "type": "integer",
               "title": "Unauthorized User",
               "description": "Unauthorized user",
-              "order": 31
+              "order": 32
             },
             "UnknownProbe": {
               "type": "integer",
               "title": "Unknown Probe",
               "description": "Unknown probe",
-              "order": 5
+              "order": 30
             },
             "partialResponse": {
               "type": "integer",
               "title": "Partial Response",
               "description": "Partial response",
-              "order": 38
+              "order": 11
             }
           }
         }
@@ -642,480 +570,408 @@ class ArchiveSensorOutput(insightconnect_plugin_runtime.Output):
       "title": "globalSensorStats",
       "properties": {
         "stats": {
-          "$ref": "#/definitions/stats",
+          "$ref": "#/definitions/sensorStats",
           "title": "sensorStats",
           "description": "Stats",
           "order": 1
         }
       },
       "definitions": {
-        "stats": {
+        "sensorStats": {
           "type": "object",
-          "title": "stats",
+          "title": "sensorStats",
           "properties": {
             "AbortTimeout": {
               "type": "integer",
               "title": "Abort Timeout",
               "description": "Abort timeout",
-              "order": 34
+              "order": 31
             },
             "Aborted": {
               "type": "integer",
               "title": "Aborted",
               "description": "Aborted",
-              "order": 17
-            },
-            "Aborting": {
-              "type": "integer",
-              "title": "Aborting",
-              "description": "Aborting",
-              "order": 1
+              "order": 15
             },
             "AlreadyUpdated": {
               "type": "integer",
               "title": "Already Updated",
               "description": "Already updated",
-              "order": 3
-            },
-            "BadArgument": {
-              "type": "integer",
-              "title": "Bad Argument",
-              "description": "Bad argument",
-              "order": 19
+              "order": 22
             },
             "ChunksRequired": {
               "type": "integer",
               "title": "Chunks Required",
               "description": "Chunks required",
-              "order": 28
+              "order": 6
             },
             "Disconnected": {
               "type": "integer",
               "title": "Disconnected",
               "description": "Disconnected",
-              "order": 24
+              "order": 18
             },
             "EndedWithInvalidParam": {
               "type": "integer",
               "title": "Ended With Invalid Param",
               "description": "Ended with invalid param",
-              "order": 9
-            },
-            "EndedWithNoValidFolder": {
-              "type": "integer",
-              "title": "Ended With No Valid Folder",
-              "description": "Ended with no valid folder",
-              "order": 20
+              "order": 29
             },
             "EndedWithSensorTimeout": {
               "type": "integer",
               "title": "Ended With Sensor Timeout",
               "description": "Ended with sensor timeout",
-              "order": 30
+              "order": 12
             },
             "EndedWithTooManyResults": {
               "type": "integer",
               "title": "Ended With Too Many Results",
               "description": "Ended with too many results",
-              "order": 4
+              "order": 21
             },
             "EndedWithTooManySearches": {
               "type": "integer",
               "title": "Ended With Too Many Searches",
               "description": "Ended with too many searches",
-              "order": 26
+              "order": 23
             },
             "EndedWithUnknownError": {
               "type": "integer",
               "title": "Ended With Unknown Error",
               "description": "Ended with unknown error",
-              "order": 12
-            },
-            "EndedWithUnsupportedFilter": {
-              "type": "integer",
-              "title": "Ended With Unsupported Filter",
-              "description": "Ended with unsupported filter",
-              "order": 7
-            },
-            "EndedWithYaraCompileError": {
-              "type": "integer",
-              "title": "Ended With Yara Compile Error",
-              "description": "Ended with yara compile error",
-              "order": 2
+              "order": 26
             },
             "Failed": {
               "type": "integer",
               "title": "Failed",
               "description": "Failed",
-              "order": 6
+              "order": 19
             },
             "FailedSending": {
               "type": "integer",
               "title": "Failed Sending",
               "description": "Failed sending",
-              "order": 27
+              "order": 1
             },
             "FailedSendingToServer": {
               "type": "integer",
               "title": "Failed Sending To Server",
               "description": "Failed sending to server",
-              "order": 37
+              "order": 13
             },
             "GettingChunks": {
               "type": "integer",
               "title": "Getting Chunks",
               "description": "Getting chunks",
-              "order": 16
+              "order": 14
             },
             "InProgress": {
               "type": "integer",
               "title": "In Progress",
               "description": "In progress",
-              "order": 10
+              "order": 17
             },
             "InvalidState": {
               "type": "integer",
               "title": "Invalid State",
               "description": "Invalid state",
-              "order": 18
+              "order": 2
             },
             "MsiFileCorrupted": {
               "type": "integer",
               "title": "MSI File Corrupted",
               "description": "MSI file corrupted",
-              "order": 13
+              "order": 7
             },
             "MsiSendFail": {
               "type": "integer",
               "title": "MSI Send Fail",
               "description": "MSI Send Fail",
-              "order": 21
+              "order": 10
             },
             "NewerInstalled": {
               "type": "integer",
               "title": "Newer Installed",
               "description": "Newer installed",
-              "order": 22
+              "order": 9
             },
             "None": {
               "type": "integer",
               "title": "None",
               "description": "None",
-              "order": 23
+              "order": 27
             },
             "NotSupported": {
               "type": "integer",
               "title": "Not Supported",
               "description": "Not supported",
-              "order": 32
+              "order": 25
             },
             "Pending": {
               "type": "integer",
               "title": "Pending",
               "description": "Pending",
-              "order": 11
+              "order": 5
             },
             "Primed": {
               "type": "integer",
               "title": "Primed",
               "description": "Primed",
-              "order": 36
+              "order": 28
             },
             "ProbeRemoved": {
               "type": "integer",
               "title": "Probe Removed",
               "description": "Probe removed",
-              "order": 8
+              "order": 3
             },
             "SendingMsi": {
               "type": "integer",
               "title": "Sending MSI",
               "description": "Sending MSI",
-              "order": 15
-            },
-            "SendingPlatform": {
-              "type": "integer",
-              "title": "Sending Platform",
-              "description": "Sending platform",
-              "order": 35
+              "order": 8
             },
             "Started": {
               "type": "integer",
               "title": "Started",
               "description": "Started",
-              "order": 14
+              "order": 16
             },
             "Succeeded": {
               "type": "integer",
               "title": "Succeeded",
               "description": "Succeeded",
-              "order": 25
+              "order": 24
             },
             "Timeout": {
               "type": "integer",
               "title": "Timeout",
               "description": "Timeout",
-              "order": 29
+              "order": 20
             },
             "TimeoutSending": {
               "type": "integer",
               "title": "Timeout Sending",
               "description": "Timeout sending",
-              "order": 33
+              "order": 4
             },
             "UnauthorizedUser": {
               "type": "integer",
               "title": "Unauthorized User",
               "description": "Unauthorized user",
-              "order": 31
+              "order": 32
             },
             "UnknownProbe": {
               "type": "integer",
               "title": "Unknown Probe",
               "description": "Unknown probe",
-              "order": 5
+              "order": 30
             },
             "partialResponse": {
               "type": "integer",
               "title": "Partial Response",
               "description": "Partial response",
-              "order": 38
+              "order": 11
             }
           }
         }
       }
     },
-    "stats": {
+    "sensorStats": {
       "type": "object",
-      "title": "stats",
+      "title": "sensorStats",
       "properties": {
         "AbortTimeout": {
           "type": "integer",
           "title": "Abort Timeout",
           "description": "Abort timeout",
-          "order": 34
+          "order": 31
         },
         "Aborted": {
           "type": "integer",
           "title": "Aborted",
           "description": "Aborted",
-          "order": 17
-        },
-        "Aborting": {
-          "type": "integer",
-          "title": "Aborting",
-          "description": "Aborting",
-          "order": 1
+          "order": 15
         },
         "AlreadyUpdated": {
           "type": "integer",
           "title": "Already Updated",
           "description": "Already updated",
-          "order": 3
-        },
-        "BadArgument": {
-          "type": "integer",
-          "title": "Bad Argument",
-          "description": "Bad argument",
-          "order": 19
+          "order": 22
         },
         "ChunksRequired": {
           "type": "integer",
           "title": "Chunks Required",
           "description": "Chunks required",
-          "order": 28
+          "order": 6
         },
         "Disconnected": {
           "type": "integer",
           "title": "Disconnected",
           "description": "Disconnected",
-          "order": 24
+          "order": 18
         },
         "EndedWithInvalidParam": {
           "type": "integer",
           "title": "Ended With Invalid Param",
           "description": "Ended with invalid param",
-          "order": 9
-        },
-        "EndedWithNoValidFolder": {
-          "type": "integer",
-          "title": "Ended With No Valid Folder",
-          "description": "Ended with no valid folder",
-          "order": 20
+          "order": 29
         },
         "EndedWithSensorTimeout": {
           "type": "integer",
           "title": "Ended With Sensor Timeout",
           "description": "Ended with sensor timeout",
-          "order": 30
+          "order": 12
         },
         "EndedWithTooManyResults": {
           "type": "integer",
           "title": "Ended With Too Many Results",
           "description": "Ended with too many results",
-          "order": 4
+          "order": 21
         },
         "EndedWithTooManySearches": {
           "type": "integer",
           "title": "Ended With Too Many Searches",
           "description": "Ended with too many searches",
-          "order": 26
+          "order": 23
         },
         "EndedWithUnknownError": {
           "type": "integer",
           "title": "Ended With Unknown Error",
           "description": "Ended with unknown error",
-          "order": 12
-        },
-        "EndedWithUnsupportedFilter": {
-          "type": "integer",
-          "title": "Ended With Unsupported Filter",
-          "description": "Ended with unsupported filter",
-          "order": 7
-        },
-        "EndedWithYaraCompileError": {
-          "type": "integer",
-          "title": "Ended With Yara Compile Error",
-          "description": "Ended with yara compile error",
-          "order": 2
+          "order": 26
         },
         "Failed": {
           "type": "integer",
           "title": "Failed",
           "description": "Failed",
-          "order": 6
+          "order": 19
         },
         "FailedSending": {
           "type": "integer",
           "title": "Failed Sending",
           "description": "Failed sending",
-          "order": 27
+          "order": 1
         },
         "FailedSendingToServer": {
           "type": "integer",
           "title": "Failed Sending To Server",
           "description": "Failed sending to server",
-          "order": 37
+          "order": 13
         },
         "GettingChunks": {
           "type": "integer",
           "title": "Getting Chunks",
           "description": "Getting chunks",
-          "order": 16
+          "order": 14
         },
         "InProgress": {
           "type": "integer",
           "title": "In Progress",
           "description": "In progress",
-          "order": 10
+          "order": 17
         },
         "InvalidState": {
           "type": "integer",
           "title": "Invalid State",
           "description": "Invalid state",
-          "order": 18
+          "order": 2
         },
         "MsiFileCorrupted": {
           "type": "integer",
           "title": "MSI File Corrupted",
           "description": "MSI file corrupted",
-          "order": 13
+          "order": 7
         },
         "MsiSendFail": {
           "type": "integer",
           "title": "MSI Send Fail",
           "description": "MSI Send Fail",
-          "order": 21
+          "order": 10
         },
         "NewerInstalled": {
           "type": "integer",
           "title": "Newer Installed",
           "description": "Newer installed",
-          "order": 22
+          "order": 9
         },
         "None": {
           "type": "integer",
           "title": "None",
           "description": "None",
-          "order": 23
+          "order": 27
         },
         "NotSupported": {
           "type": "integer",
           "title": "Not Supported",
           "description": "Not supported",
-          "order": 32
+          "order": 25
         },
         "Pending": {
           "type": "integer",
           "title": "Pending",
           "description": "Pending",
-          "order": 11
+          "order": 5
         },
         "Primed": {
           "type": "integer",
           "title": "Primed",
           "description": "Primed",
-          "order": 36
+          "order": 28
         },
         "ProbeRemoved": {
           "type": "integer",
           "title": "Probe Removed",
           "description": "Probe removed",
-          "order": 8
+          "order": 3
         },
         "SendingMsi": {
           "type": "integer",
           "title": "Sending MSI",
           "description": "Sending MSI",
-          "order": 15
-        },
-        "SendingPlatform": {
-          "type": "integer",
-          "title": "Sending Platform",
-          "description": "Sending platform",
-          "order": 35
+          "order": 8
         },
         "Started": {
           "type": "integer",
           "title": "Started",
           "description": "Started",
-          "order": 14
+          "order": 16
         },
         "Succeeded": {
           "type": "integer",
           "title": "Succeeded",
           "description": "Succeeded",
-          "order": 25
+          "order": 24
         },
         "Timeout": {
           "type": "integer",
           "title": "Timeout",
           "description": "Timeout",
-          "order": 29
+          "order": 20
         },
         "TimeoutSending": {
           "type": "integer",
           "title": "Timeout Sending",
           "description": "Timeout sending",
-          "order": 33
+          "order": 4
         },
         "UnauthorizedUser": {
           "type": "integer",
           "title": "Unauthorized User",
           "description": "Unauthorized user",
-          "order": 31
+          "order": 32
         },
         "UnknownProbe": {
           "type": "integer",
           "title": "Unknown Probe",
           "description": "Unknown probe",
-          "order": 5
+          "order": 30
         },
         "partialResponse": {
           "type": "integer",
           "title": "Partial Response",
           "description": "Partial response",
-          "order": 38
+          "order": 11
         }
       }
     }

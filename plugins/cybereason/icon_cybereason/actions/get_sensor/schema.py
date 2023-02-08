@@ -96,7 +96,7 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "order": 53
         },
         "archiveTimeMs": {
-          "type": "string",
+          "type": "integer",
           "title": "Archive Time MS",
           "description": "The time (in epoch) when the sensor was archived",
           "order": 19
@@ -120,9 +120,12 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "order": 41
         },
         "collectionComponents": {
-          "type": "string",
+          "type": "array",
           "title": "Collection Components",
           "description": "Any special collections enabled on the server and/or sensor",
+          "items": {
+            "type": "string"
+          },
           "order": 73
         },
         "collectionStatus": {
@@ -168,7 +171,7 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "order": 66
         },
         "deliveryTime": {
-          "type": "string",
+          "type": "integer",
           "title": "Delivery Time",
           "description": "The time (in epoch) when the last policy update was delivered to the sensor",
           "order": 80
@@ -198,7 +201,7 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "order": 68
         },
         "disconnectionTime": {
-          "type": "string",
+          "type": "integer",
           "title": "Disconnection Time",
           "description": "Time the machine was disconnected. Returns 0 if this is the first connection time. After the first connection, this is the time it was last connected",
           "order": 13
@@ -228,7 +231,7 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "order": 7
         },
         "firstSeenTime": {
-          "type": "string",
+          "type": "integer",
           "title": "First Seen Time",
           "description": "The first time the machine was recognized. Timestamp values are returned in epoch",
           "order": 34
@@ -294,13 +297,13 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "order": 12
         },
         "lastFullScheduleScanSuccessTime": {
-          "type": "string",
+          "type": "integer",
           "title": "Last Full Schedule Scan Success Time",
           "description": "The time (in epoch) that the sensor last did a successful full scan",
           "order": 77
         },
         "lastQuickScheduleScanSuccessTime": {
-          "type": "string",
+          "type": "integer",
           "title": "Last Quick Schedule Scan Success Time",
           "description": "The time (in epoch) that the sensor last did a successful quick scan",
           "order": 78
@@ -318,9 +321,12 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "order": 61
         },
         "lastUpgradeSteps": {
-          "type": "string",
+          "type": "array",
           "title": "Last Upgrade Steps",
           "description": "A list of step taken in the upgrade process. If there is a failure to upgrade the sensor, this list shows the failure",
+          "items": {
+            "type": "string"
+          },
           "order": 67
         },
         "location": {
@@ -342,13 +348,13 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "order": 37
         },
         "offlineTimeMS": {
-          "type": "string",
+          "type": "integer",
           "title": "Offline Time MS",
           "description": "he last time (in epoch) that the sensor was offline",
           "order": 17
         },
         "onlineTimeMS": {
-          "type": "string",
+          "type": "integer",
           "title": "Online Time MS",
           "description": "The last time the sensor was seen online",
           "order": 16
@@ -384,9 +390,12 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "order": 38
         },
         "pendingActions": {
-          "type": "string",
+          "type": "array",
           "title": "Pending Actions",
           "description": "An array containing batch numbers for actions pending to run on the sensor",
+          "items": {
+            "type": "integer"
+          },
           "order": 60
         },
         "policyId": {
@@ -468,7 +477,7 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "order": 23
         },
         "sensorLastUpdate": {
-          "type": "string",
+          "type": "integer",
           "title": "Sensor Last Update",
           "description": "The last time (in epoch) that the sensor was updated",
           "order": 74
@@ -522,7 +531,7 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "order": 8
         },
         "staleTimeMS": {
-          "type": "string",
+          "type": "integer",
           "title": "Stale Time MS",
           "description": "The time (in epoch) when the Sensor was classified as Stale",
           "order": 18
@@ -558,13 +567,13 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "order": 14
         },
         "statusTimeMS": {
-          "type": "string",
+          "type": "integer",
           "title": "Status Time MS",
           "description": "The last time (in epoch) when the sensor sent a status",
           "order": 20
         },
         "upTime": {
-          "type": "string",
+          "type": "integer",
           "title": "Up Time",
           "description": "The time the sensors have been in the UP state",
           "order": 35

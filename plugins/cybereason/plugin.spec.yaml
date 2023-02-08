@@ -489,7 +489,7 @@ types:
   globalSensorStats:
     stats:
       title: sensorStats
-      type: stats
+      type: sensorStats
       description: Stats
       required: false
   archiveSensorResponse:
@@ -763,7 +763,7 @@ types:
     disconnectionTime:
       title: Disconnection Time
       description: Time the machine was disconnected. Returns 0 if this is the first connection time. After the first connection, this is the time it was last connected
-      type: string
+      type: integer
       required: false
       example: "1628068498840"
     status:
@@ -781,31 +781,31 @@ types:
     onlineTimeMS:
       title: Online Time MS
       description: The last time the sensor was seen online
-      type: string
+      type: integer
       required: false
       example: "0"
     offlineTimeMS:
       title: Offline Time MS
       description: he last time (in epoch) that the sensor was offline
-      type: string
+      type: integer
       required: false
       example: "0"
     staleTimeMS:
       title: Stale Time MS
       description: The time (in epoch) when the Sensor was classified as Stale
-      type: string
+      type: integer
       required: false
       example: "0"
     archiveTimeMs:
       title: Archive Time MS
       description: The time (in epoch) when the sensor was archived
-      type: string
+      type: integer
       required: false
       example: "1635854400487"
     statusTimeMS:
       title: Status Time MS
       description: The last time (in epoch) when the sensor sent a status
-      type: string
+      type: integer
       required: false
       example: "0"
     lastStatusAction:
@@ -889,13 +889,13 @@ types:
     firstSeenTime:
       title: First Seen Time
       description: The first time the machine was recognized. Timestamp values are returned in epoch
-      type: string
+      type: integer
       required: false
       example: "1627316564474"
     upTime:
       title: Up Time
       description: The time the sensors have been in the UP state
-      type: string
+      type: integer
       required: false
       example: "695032210"
     cpuUsage:
@@ -927,7 +927,7 @@ types:
       description: The source of the value for the Anti-Malware Signatures mode setting
       type: string
       required: false
-      example: null # check
+      example: null
     avDbVersion:
       title: AV DB Version
       description: The version of the Anti-Malware Signatures database on the machine where the sensor is installed
@@ -999,7 +999,7 @@ types:
       description: The name of the organization unit taken from the Active Directory on the machine on which the sensor is installed
       type: string
       required: false
-      example: "" # check
+      example: ""
     antiMalwareStatus:
       title: Anti Malware Status
       description: The Anti-Malware prevention mode for the sensor
@@ -1011,7 +1011,7 @@ types:
       description: The source of the value for the Anti-Malware setting
       type: string
       required: false
-      example: null # check
+      example: null
     organization:
       title: Organization
       description: The organization name for the machine on which the sensor is installed
@@ -1039,13 +1039,13 @@ types:
     actionsInProgress:
       title: Actions In Progress
       description: The number of actions in progress (i.e. Not Resolved) on the machine
-      type: int
+      type: integer
       required: false
       example: 0
     pendingActions:
       title: Pending Actions
       description: An array containing batch numbers for actions pending to run on the sensor
-      type: string
+      type: "[]integer"
       required: false
       example: []
     lastUpgradeResult:
@@ -1087,7 +1087,7 @@ types:
     lastUpgradeSteps:
       title: Last Upgrade Steps
       description: A list of step taken in the upgrade process. If there is a failure to upgrade the sensor, this list shows the failure
-      type: string
+      type: "[]string"
       required: false
       example: []
     disconnected:
@@ -1123,13 +1123,13 @@ types:
     collectionComponents:
       title: Collection Components
       description: Any special collections enabled on the server and/or sensor
-      type: string
+      type: "[]string"
       required: false
       example: "DPI"
     sensorLastUpdate:
       title: Sensor Last Update
       description: The last time (in epoch) that the sensor was updated
-      type: string
+      type: integer
       required: false
       example: 0
     fullScanStatus:
@@ -1147,13 +1147,13 @@ types:
     lastFullScheduleScanSuccessTime:
       title: Last Full Schedule Scan Success Time
       description: The time (in epoch) that the sensor last did a successful full scan
-      type: string
+      type: integer
       required: false
       example: "0"
     lastQuickScheduleScanSuccessTime:
       title: Last Quick Schedule Scan Success Time
       description: The time (in epoch) that the sensor last did a successful quick scan
-      type: string
+      type: integer
       required: false
       example: "0"
     policyName:
@@ -1165,7 +1165,7 @@ types:
     deliveryTime:
       title: Delivery Time
       description: The time (in epoch) when the last policy update was delivered to the sensor
-      type: string
+      type: integer
       required: false
       example: "1627328611652"
     policyId:
@@ -1252,7 +1252,6 @@ actions:
         description: Search file response
         type: response
         required: true
-        example:
   isolate_machine:
     title: Isolate Machine
     description: Isolate or un-isolate a machine
