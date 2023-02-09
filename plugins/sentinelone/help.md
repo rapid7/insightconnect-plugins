@@ -1989,6 +1989,7 @@ To convert `threat` into an array use Type Converter Plugin
 
 # Version History
 
+* 8.0.1 - Search Agents: Remove duplicate results when Case Sensitive is false
 * 8.0.0 - Connection: Added Service user (API only user type) authentication | Removed Basic Authentication
 * 7.1.0 - Update for Blacklist action: Fix for unblocked action | Update for Quarantine action: unification of the output data when action fails | Add troubleshooting information about use Type Converter | Mark as Benign action: update description 
 * 7.0.0 - Add new actions Update Analyst Verdict and Update Incident Status | Fix Get Agent Details and Search Agents actions to handle more response scenarios | Add option to authentication with API key
@@ -2018,7 +2019,7 @@ To convert `threat` into an array use Type Converter Plugin
 # Links
 
 * [SentinelOne Product Page](https://www.sentinelone.com/)
-* 
+
 ## References
 
 * [SentinelOne Product Page](https://www.sentinelone.com/)
