@@ -11,4 +11,4 @@ class GetUsers(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):  # pylint: disable=unused-argument
-        return {Output.USERS: self.connection.api.get_users().get("data")}
+        return {Output.USERS: self.connection.api.get_users().get("data", [])}

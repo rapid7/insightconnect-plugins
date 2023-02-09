@@ -122,7 +122,7 @@ class Util:
             and kwargs.get("method") == "DELETE"
         ):
             return MockResponse("add_user", 200)
-        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/organization/users":
+        if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/rbac/access/user":
             return MockResponse("get_users", 200)
         if kwargs.get("url") == "https://app.eu.orcasecurity.io/api/alerts/orca-001/verify":
             return MockResponse("verify_alert", 200)
