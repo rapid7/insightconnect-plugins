@@ -1,12 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import ConnectionSchema
 
 # Custom imports below
-from komand.exceptions import ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException
 from komand_samanage.util.api import SamanageAPI
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
 
@@ -17,7 +17,7 @@ class Connection(komand.Connection):
         if not token:
             raise ConnectionTestException(
                 cause="Missing API key from Connection. This is a required field.",
-                assistance="The API authentication token can be obtained from your Samanage account.",
+                assistance="The API authentication token can be obtained from your Solarwinds account.",
             )
 
         self.logger.info("Connect: Connecting...")
