@@ -4,8 +4,8 @@ import shutil
 from tempfile import mkdtemp
 from base64 import b64decode
 from requests import request, HTTPError
-import komand
-from komand.exceptions import ConnectionTestException
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 
 
 class SamanageAPI:
@@ -59,9 +59,13 @@ class SamanageAPI:
                 "category": {"name": category_name} if category_name else None,
             }
         }
-        json = komand.helper.clean(json)
+        json = insightconnect_plugin_runtime.helper.clean(json)
 
         return self._call_api("POST", url, json=json, params={"layout": "long", "audit_archive": True})
+
+    def delete_incident(self, incident_id):
+        url = "incidents/{}".format(incident_id)
+        return self._call_api("DELETE", url)
 
     def comment_incident(self, incident_id, body, is_private):
         url = "incidents/{}/comments".format(incident_id)
@@ -106,20 +110,26 @@ class SamanageAPI:
                 '-H "Content-Type: multipart/form-data" --insecure '
                 "-X POST {}attachments.json"
             ).format(self.token, incident_id, file_path, self.api_url)
-            result = komand.helper.exec_command(curl_command)
+            result = insightconnect_plugin_runtime.helper.exec_command(curl_command)
 
             shutil.rmtree(temp_dir)
         except Exception as e:
-            raise Exception("Failed create a temp file: {}".format(e))
+            raise PluginException(
+                cause="Failed creating a temporary file: {}".format(e),
+                assistance="Check if a temporary file can be created",
+            )
 
         if result["rcode"] != 0:
-            raise Exception("Failed run cURL: {}".format(result["stderr"]))
+            raise PluginException(
+                cause="Failure running curl command while attaching file: {}".format(result["stderr"]),
+                assistance="Check if there are sufficient permissions for the curl command to run",
+            )
 
         try:
             attachment = json.loads(result["stdout"])
             return attachment
         except json.JSONDecodeError:
-            raise Exception("Failed to attach a file: {}".format(result["stdout"]))
+            raise PluginException("Failed to attach a file: {}".format(result["stdout"]))
 
     def list_users(self):
         return self._call_api("GET", "users")
@@ -135,7 +145,7 @@ class SamanageAPI:
                 "department": {"name": department} if department else None,
             }
         }
-        json = komand.helper.clean(json)
+        json = insightconnect_plugin_runtime.helper.clean(json)
 
         return self._call_api("POST", "users", json=json)
 
@@ -167,6 +177,9 @@ class SamanageAPI:
                 # Auth failure returns: HTTP/1.1" 401 None b''
                 if not response.content:
                     raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
-            raise Exception("API returned an error: {} {}".format(response.status_code, response.content))
+            raise PluginException(
+                cause="API returned an error: {} {}".format(response.status_code, response.content),
+                assistance="Check input and retry. If this error continues contact support",
+            )
 
-        return komand.helper.clean(response.json())
+        return insightconnect_plugin_runtime.helper.clean(response.json())

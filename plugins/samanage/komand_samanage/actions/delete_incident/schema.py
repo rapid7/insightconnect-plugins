@@ -4,32 +4,32 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Delete a user"
+    DESCRIPTION = "Delete an incident"
 
 
 class Input:
-    USER_ID = "user_id"
+    INCIDENT_ID = "incident_id"
     
 
 class Output:
     SUCCESS = "success"
     
 
-class DeleteUserInput(insightconnect_plugin_runtime.Input):
+class DeleteIncidentInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "user_id": {
+    "incident_id": {
       "type": "integer",
-      "title": "User ID",
-      "description": "The ID of a user to delete",
+      "title": "Incident ID",
+      "description": "The ID of an incident to delete",
       "order": 1
     }
   },
   "required": [
-    "user_id"
+    "incident_id"
   ]
 }
     """)
@@ -38,7 +38,7 @@ class DeleteUserInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class DeleteUserOutput(insightconnect_plugin_runtime.Output):
+class DeleteIncidentOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
