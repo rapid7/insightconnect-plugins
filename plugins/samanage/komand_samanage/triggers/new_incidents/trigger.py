@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 import time
 from .schema import NewIncidentsInput, NewIncidentsOutput
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 
