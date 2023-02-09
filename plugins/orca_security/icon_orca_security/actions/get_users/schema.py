@@ -30,9 +30,12 @@ class GetUsersOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "users": {
-      "$ref": "#/definitions/get_users_response",
+      "type": "array",
       "title": "Users",
       "description": "A response containing information about users",
+      "items": {
+        "$ref": "#/definitions/get_users_response"
+      },
       "order": 1
     }
   },
@@ -40,78 +43,114 @@ class GetUsersOutput(insightconnect_plugin_runtime.Output):
     "users"
   ],
   "definitions": {
+    "cloud_accounts": {
+      "type": "object",
+      "title": "cloud_accounts",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "Cloud Account ID",
+          "description": "ID of cloud account",
+          "order": 1
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "The cloud account display name",
+          "order": 2
+        }
+      }
+    },
     "get_users_response": {
       "type": "object",
       "title": "get_users_response",
       "properties": {
-        "name": {
-          "type": "string",
-          "title": "Organization Name",
-          "description": "Organization name",
-          "order": 1
-        },
-        "pending_invites": {
-          "type": "array",
-          "title": "Pending Invites",
-          "description": "Pending invites",
-          "items": {
-            "$ref": "#/definitions/invitation"
-          },
+        "all_cloud_accounts": {
+          "type": "boolean",
+          "title": "All Cloud Accounts",
+          "description": "All cloud accounts",
           "order": 3
         },
-        "users": {
+        "cloud_accounts": {
           "type": "array",
-          "title": "Users",
-          "description": "Users",
+          "title": "Cloud Accounts",
+          "description": "List of cloud accounts",
           "items": {
-            "$ref": "#/definitions/user"
+            "$ref": "#/definitions/cloud_accounts"
           },
+          "order": 4
+        },
+        "id": {
+          "type": "string",
+          "title": "User Access Role ID",
+          "description": "ID of user access role",
+          "order": 1
+        },
+        "role": {
+          "$ref": "#/definitions/role",
+          "title": "User Role Details",
+          "description": "Details of the role assigned to the user",
+          "order": 5
+        },
+        "shiftleft_projects": {
+          "type": "array",
+          "title": "Shift left projects",
+          "description": "List of user shift left projects",
+          "items": {
+            "type": "string"
+          },
+          "order": 7
+        },
+        "user": {
+          "$ref": "#/definitions/user",
+          "title": "User Details",
+          "description": "User object containing the details",
           "order": 2
+        },
+        "user_filters": {
+          "type": "array",
+          "title": "User Filters",
+          "description": "List of user filter IDs",
+          "items": {
+            "type": "string"
+          },
+          "order": 6
         }
       },
       "definitions": {
-        "invitation": {
+        "cloud_accounts": {
           "type": "object",
-          "title": "invitation",
+          "title": "cloud_accounts",
           "properties": {
-            "all_cloud_account": {
-              "type": "boolean",
-              "title": "All Cloud Account",
-              "description": "All cloud account",
-              "order": 5
-            },
-            "cloud_accounts": {
-              "type": "array",
-              "title": "Cloud Accounts",
-              "description": "Cloud accounts",
-              "items": {
-                "type": "string"
-              },
-              "order": 6
-            },
-            "email": {
-              "type": "string",
-              "title": "Email",
-              "description": "Email",
-              "order": 2
-            },
             "id": {
               "type": "string",
-              "title": "ID",
-              "description": "ID",
+              "title": "Cloud Account ID",
+              "description": "ID of cloud account",
               "order": 1
             },
-            "invite_email_sent_at": {
+            "name": {
               "type": "string",
-              "title": "Invite Email Sent At",
-              "description": "Invite email sent at",
-              "order": 3
+              "title": "Name",
+              "description": "The cloud account display name",
+              "order": 2
+            }
+          }
+        },
+        "role": {
+          "type": "object",
+          "title": "role",
+          "properties": {
+            "id": {
+              "type": "string",
+              "title": "User Role ID",
+              "description": "ID of the user role",
+              "order": 1
             },
-            "role": {
+            "name": {
               "type": "string",
-              "title": "Role",
-              "description": "Role",
-              "order": 4
+              "title": "Name",
+              "description": "User role name",
+              "order": 2
             }
           }
         },
@@ -125,70 +164,49 @@ class GetUsersOutput(insightconnect_plugin_runtime.Output):
               "description": "Email",
               "order": 2
             },
-            "first": {
+            "first_name": {
               "type": "string",
               "title": "First Name",
               "description": "First name",
               "order": 3
             },
-            "last": {
+            "id": {
+              "type": "string",
+              "title": "User ID",
+              "description": "User ID",
+              "order": 1
+            },
+            "last_name": {
               "type": "string",
               "title": "Last Name",
               "description": "Last name",
               "order": 4
             },
-            "name": {
+            "type": {
               "type": "string",
-              "title": "User ID",
-              "description": "User ID",
-              "order": 1
+              "title": "Type",
+              "description": "User's account type",
+              "order": 5
             }
           }
         }
       }
     },
-    "invitation": {
+    "role": {
       "type": "object",
-      "title": "invitation",
+      "title": "role",
       "properties": {
-        "all_cloud_account": {
-          "type": "boolean",
-          "title": "All Cloud Account",
-          "description": "All cloud account",
-          "order": 5
-        },
-        "cloud_accounts": {
-          "type": "array",
-          "title": "Cloud Accounts",
-          "description": "Cloud accounts",
-          "items": {
-            "type": "string"
-          },
-          "order": 6
-        },
-        "email": {
-          "type": "string",
-          "title": "Email",
-          "description": "Email",
-          "order": 2
-        },
         "id": {
           "type": "string",
-          "title": "ID",
-          "description": "ID",
+          "title": "User Role ID",
+          "description": "ID of the user role",
           "order": 1
         },
-        "invite_email_sent_at": {
+        "name": {
           "type": "string",
-          "title": "Invite Email Sent At",
-          "description": "Invite email sent at",
-          "order": 3
-        },
-        "role": {
-          "type": "string",
-          "title": "Role",
-          "description": "Role",
-          "order": 4
+          "title": "Name",
+          "description": "User role name",
+          "order": 2
         }
       }
     },
@@ -202,23 +220,29 @@ class GetUsersOutput(insightconnect_plugin_runtime.Output):
           "description": "Email",
           "order": 2
         },
-        "first": {
+        "first_name": {
           "type": "string",
           "title": "First Name",
           "description": "First name",
           "order": 3
         },
-        "last": {
+        "id": {
+          "type": "string",
+          "title": "User ID",
+          "description": "User ID",
+          "order": 1
+        },
+        "last_name": {
           "type": "string",
           "title": "Last Name",
           "description": "Last name",
           "order": 4
         },
-        "name": {
+        "type": {
           "type": "string",
-          "title": "User ID",
-          "description": "User ID",
-          "order": 1
+          "title": "Type",
+          "description": "User's account type",
+          "order": 5
         }
       }
     }

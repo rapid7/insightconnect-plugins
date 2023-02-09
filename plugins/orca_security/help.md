@@ -27,7 +27,7 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_token|credential_secret_key|None|True|Orca Security API Token|None|44d88612fea8a8f36de82e1278abb02f|
+|api_token|credential_secret_key|None|True|Orca Security API Token|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |region|string|US|True|The region for Orca Security|['US', 'EU', 'AU']|US|
 
 Example input:
@@ -406,33 +406,32 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|users|get_users_response|True|A response containing information about users|
+|users|[]get_users_response|True|A response containing information about users|
 
 Example output:
 
 ```
 {
-  "users": {
-    "name": "Test",
-    "users": [
-      {
-        "user_id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+  "users": [
+    {
+      "id": "1111111-1111-1111-1111-11111111111",
+      "all_cloud_accounts": true,
+      "cloud_accounts": [],
+      "role": {
+        "id": "1111111-1111-1111-1111-11111111111",
+        "name": "Test"
+      },
+      "user": {
+        "id": "1111111-1111-1111-1111-11111111111",
         "email": "user@example.com",
-        "first": "Example",
-        "last": "User"
-      }
-    ],
-    "pending_invites": [
-      {
-        "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
-        "email": "user2@example.com",
-        "invite_email_sent_at": "2022-05-03T00:00:00+00:00",
-        "role": "Editor",
-        "all_cloud_account": true,
-        "cloud_accounts": []
-      }
-    ]
-  }
+        "first_name": "User",
+        "last_name": "Test",
+        "type": "normal"
+      },
+      "user_filters": [],
+      "shiftleft_projects": []
+    }
+  ]
 }
 ```
 
@@ -449,9 +448,6 @@ This action is used to initiate verification for a given alert ID to check if it
 Example input:
 
 ```
-{
-  "alert_id": "orca-111"
-}
 ```
 
 ##### Output
@@ -1003,13 +999,6 @@ Example input:
       "includes": [
         "hazardous"
       ]
-    },
-    {
-      "field": "alert_labels",
-      "excludes": [
-        "label1",
-        "label2
-      ]
     }
   ],
   "interval": 60
@@ -1305,6 +1294,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.0 - Get Users: Updated the API endpoint to return an array of users
 * 1.0.0 - Initial plugin | Add Get Assets, Get Asset by ID, Get Alerts, Get Alert by ID, Update Alert Severity, Update Alert Status, Verify Alert, Download Malicious File, Get Users, Add User and Delete User actions | Add New Alert trigger
 
 # Links
