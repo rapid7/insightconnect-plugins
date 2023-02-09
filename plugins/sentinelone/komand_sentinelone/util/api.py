@@ -2,9 +2,8 @@ from json import dumps, loads
 from re import match
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean_list, clean_dict
-
+from typing import List, Any, Dict
 import requests
-
 
 default_array = [
     "computerMemberOf",
@@ -52,6 +51,52 @@ class SentineloneAPI:
         self.url = url
         self.token_header = make_token_header
 
+    @staticmethod
+    def set_agents_array(search: str, agent_details: str, agents: List[str]) -> List[str]:
+        """
+        Checks Search and assigns agents appropriate values
+        :param search: String that will be searched for
+        :type: str
+
+        :param agent_details: Details of agent
+        :type: str
+
+        :param agents: List of agents
+        :type: List[str]
+
+        :returns agents: List of agents
+        :rtype: List[str]
+        """
+        # Normalize casing if specified
+        if search == "computerName":
+            agents = [agent_details.lower(), agent_details.upper()]
+        if search == "uuid":
+            agents = [agent_details.lower()]
+        return agents
+
+    def get_agents_data(self, agent: str, api_version: str, search: str, results: List[Dict[str, Any]]) -> None:
+        """
+        Gets agents Data
+        :param agent: Agent to get details for
+        :type: str
+
+        :param api_version: Version of API
+        :type: str
+
+        :param search: String that will be searched for
+        :type: str
+
+        :param results: Array containing agent results
+        :type: List[Dict[str, Any]]
+        """
+
+        endpoint = f"{self.url}web/api/v{api_version}/agents?{search}={agent}"
+        output = requests.get(endpoint, headers=self.token_header)
+        if output.status_code == 200 and output.json().get("pagination", {}).get("totalItems", 0) >= 1:
+            agents_data = output.json().get("data", [])
+            if agents_data and agents_data[0] not in results:
+                results.append(agents_data[0])
+
     def search_agents(
         self,
         agent_details: str,
@@ -60,7 +105,30 @@ class SentineloneAPI:
         operational_state: str = None,
         results_length: int = 0,
         api_version: str = "2.0",
-    ) -> list:
+    ) -> List[Dict[str, Any]]:
+        """
+        Searches for agents
+        :param agent_details: Details of agent
+        :type: str
+
+        :param agent_active: If the Agent is Active
+        :type: bool
+
+        :param case_sensitive: If the search is case_sensitive
+        :type: bool
+
+        :param operational_state: If in Operational states
+        :type: bool
+
+        :param results_length: Length of result
+        :type: int
+
+        :param api_version: API Version
+        :type: str
+
+        :return: self.clean_results(results)
+        :rtype: List[Dict[str, Any]]
+        """
         results = []
         if agent_details:
             for search in self.__get_searches(agent_details):
@@ -68,19 +136,10 @@ class SentineloneAPI:
 
                 # Normalize casing if specified
                 if not case_sensitive:
-                    if search == "computerName":
-                        agents = [agent_details.lower(), agent_details.upper()]
-                    if search == "uuid":
-                        agents = [agent_details.lower()]
+                    agents = self.set_agents_array(search, agent_details, agents)
 
                 for agent in agents:
-                    endpoint = f"{self.url}web/api/v{api_version}/agents?{search}={agent}"
-                    output = requests.get(endpoint, headers=self.token_header)
-
-                    if output.status_code == 200 and output.json().get("pagination", {}).get("totalItems", 0) >= 1:
-                        agents_data = output.json().get("data", [])
-                        if agents_data:
-                            results.append(agents_data[0])
+                    self.get_agents_data(agent, api_version, search, results)
 
                 if results_length:
                     if len(results) >= results_length:
@@ -99,7 +158,15 @@ class SentineloneAPI:
 
         return self.clean_results(results)
 
-    def get_agent_uuid(self, agent):
+    def get_agent_uuid(self, agent: str) -> str:
+        """
+        Get Agent UUID
+        :param agent: The Agent
+        :type: str
+
+        :return agent_uuid: The agent UUID
+        :rtype: str
+        """
         agents = self.search_agents(agent)
         if self.__check_agents_found(agents):
             raise PluginException(
@@ -110,7 +177,15 @@ class SentineloneAPI:
         return agent_uuid
 
     @staticmethod
-    def __get_searches(agent_details: str) -> list:
+    def __get_searches(agent_details: str) -> List[str]:
+        """
+        Get Search Type
+        :param agent_details:
+        :type: str
+
+        :return: String containing Search Type
+        :rtype: List[str]
+        """
         if len(agent_details) == 18 and agent_details.isdigit():
             return ["ids"]
         if match(r"^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$", agent_details):
@@ -121,11 +196,27 @@ class SentineloneAPI:
             return ["computerName"]
 
     @staticmethod
-    def clean_results(results):
+    def clean_results(results: List) -> List[Dict[str, Any]]:
+        """
+        Cleans Results
+        :param results: List of results
+        :type: List
+
+        :return: clean(loads(dumps(results).replace("null", '"None"')))
+        :rtype: List[Dict[str, Any]]
+        """
         return clean(loads(dumps(results).replace("null", '"None"')))
 
     @staticmethod
-    def __check_agents_found(agents: list) -> bool:
+    def __check_agents_found(agents: List[Dict[str, Any]]) -> bool:
+        """
+        Checks if Agents are found
+        :param agents: List of Agents
+        :type: List[str]
+
+        :return: True or False
+        :type: bool
+        """
         if len(agents) > 1:
             raise PluginException(
                 cause="Multiple agents found.",
