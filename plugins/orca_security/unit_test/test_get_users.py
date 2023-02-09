@@ -5,11 +5,9 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from icon_orca_security.actions.get_users import GetUsers
-from icon_orca_security.actions.get_users.schema import Input
 from unit_test.util import Util
 from unittest.mock import patch
 from parameterized import parameterized
-from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 @patch("requests.request", side_effect=Util.mocked_requests)
