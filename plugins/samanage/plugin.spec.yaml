@@ -2,25 +2,27 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: samanage
-title: Samanage
-description: The Samanage plugin allows you to start workflows on new incidents, manage incidents, and manage users
-version: 1.0.1
+title: Solarwinds
+description: The Solarwinds plugin allows you to start workflows on new incidents, manage incidents, and manage users
+version: 2.0.0
 vendor: rapid7
 support: community
+supported_versions: ["API version 2.1"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/samanage
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-  vendor_url: https://www.samanage.com/
+  vendor_url: https://www.solarwinds.com/service-desk
 tags:
 - incidents
 - management
+- solarwinds
 hub_tags:
   use_cases: [threat_detection_and_response, remediation_management, user_management]
-  keywords: [incidents, management]
+  keywords: [incidents, management, solarwinds]
   features: []
 types:
-  samanage_comment:
+  solarwinds_comment:
     body:
       title: Body
       description: The contents of the comment
@@ -29,7 +31,7 @@ types:
       title: Is Private
       description: Is the comment private or public?
       type: boolean
-  samanage_tag:
+  solarwinds_tag:
     tagging_count:
       title: Tagging Count
       description: Tagging count
@@ -42,7 +44,7 @@ types:
       title: ID
       description: ID
       type: integer
-  samanage_problem:
+  solarwinds_problem:
     number:
       title: Number
       description: Number
@@ -55,27 +57,65 @@ types:
       title: ID
       description: ID
       type: integer
-  samanage_number:
-    number:
-      title: Number
-      description: Number
+  solarwinds_avatar:
+    type:
+      title: Avatar type
+      description: Type of Avatar
       type: string
-  samanage_name:
+    color:
+      title: Avatar color
+      description: Color of Avatar
+      type: string
+    initials:
+      title: Avatar initials
+      description: Initials of Avatar
+      type: string
+  solarwinds_assignee:
+    group_id:
+      title: Group Id
+      description: Group ID
+      type: string
+    is_user:
+      title: Is user
+      description: If the assignee is a user
+      type: boolean
     name:
       title: Name
       description: Name
       type: string
-  samanage_email:
+    id:
+      title: ID
+      description: ID
+      type: integer
+    email:
+      title: Email
+      description: Email of assignee
+      type: string
+    avatar:
+      title: Avatar
+      description: Avatar
+      type: solarwinds_avatar
+  solarwinds_number:
+    number:
+      title: Number
+      description: Number
+      type: string
+  solarwinds_name:
+    name:
+      title: Name
+      description: Name
+      type: string
+  solarwinds_email:
     email:
       title: Email
       description: Email
       type: string
-  samanage_id:
+  solarwinds_id:
     id:
       title: ID
       description: ID
       type: string
-  samanage_field:
+  solarwinds_field:
     name:
       title: Name
       description: Name
@@ -84,21 +124,21 @@ types:
       title: Value
       description: Value
       type: string
-  samanage_incidents:
+  solarwinds_incidents:
     incident:
       title: Incident
       description: Incident
-      type: '[]samanage_number'
-  samanage_solutions:
+      type: '[]solarwinds_number'
+  solarwinds_solutions:
     solution:
       title: Solution
       description: Solution
-      type: '[]samanage_number'
-  samanage_custom_fields_values:
+      type: '[]solarwinds_number'
+  solarwinds_custom_fields_values:
     custom_fields_value:
       title: Custom Fields Value
       description: Custom fields value
-      type: '[]samanage_field'
+      type: '[]solarwinds_field'
   incident:
     id:
       title: ID
@@ -123,15 +163,15 @@ types:
     category:
       title: Category
       description: Category
-      type: samanage_name
+      type: solarwinds_name
     subcategory:
       title: Subcategory
       description: Subcategory
-      type: samanage_name
+      type: solarwinds_name
     requester:
       title: Requester
       description: Requester
-      type: samanage_email
+      type: solarwinds_email
     due_at:
       title: Due At
       description: Due at
@@ -139,44 +179,44 @@ types:
     assignee:
       title: Assignee
       description: Assignee
-      type: samanage_email
+      type: solarwinds_assignee
     problem:
       title: Problem
       description: Problem
-      type: samanage_problem
+      type: '[]solarwinds_problem'
     changes:
       title: Changes
       description: Changes
-      type: '[]samanage_number'
+      type: '[]solarwinds_number'
     assets:
       title: Assets
       description: Assets
-      type: '[]samanage_id'
+      type: '[]solarwinds_id'
     mobiles:
       title: Mobiles
       description: Mobiles
-      type: '[]samanage_id'
+      type: '[]solarwinds_id'
     configuration_items:
       title: Configuration Items
       description: Configuration items
-      type: '[]samanage_id'
+      type: '[]solarwinds_id'
     incidents:
       title: Incidents
       description: Incidents
-      type: '[]samanage_number'
+      type: '[]solarwinds_number'
     solutions:
       title: Solutions
       description: Solutions
-      type: '[]samanage_number'
+      type: '[]solarwinds_number'
     custom_fields_values:
       title: Custom Fields Values
       description: Custom fields values
-      type: '[]samanage_field'
+      type: '[]solarwinds_field'
     tags:
       title: Tags
       description: Tags
-      type: '[]samanage_tag'
-  samanage_user:
+      type: '[]solarwinds_tag'
+  solarwinds_user:
     id:
       title: ID
       description: ID
@@ -208,24 +248,24 @@ types:
     role:
       title: Role
       description: Role
-      type: samanage_name
+      type: solarwinds_name
     site:
       title: Site
       description: Site name
-      type: samanage_name
+      type: solarwinds_name
     department:
       title: Department
       description: Department name
-      type: samanage_name
+      type: solarwinds_name
     reports_to:
       title: Reports To
       description: Who the user reports to
-      type: samanage_name
+      type: solarwinds_name
     custom_fields_values:
       title: Custom Fields Values
       description: Custom fields values
-      type: '[]samanage_field'
-  samanage_attachment:
+      type: '[]solarwinds_field'
+  solarwinds_attachment:
     id:
       title: ID
       description: ID of the attachment
@@ -245,15 +285,17 @@ types:
 connection:
   token:
     title: Token
-    description: API Token generated by Samanage admin
+    description: API Token generated by Solarwinds admin
     type: credential_secret_key
     required: true
+    example: 1234556345467677684059043567
   eu_customer:
     title: EU Customer
     description: Is the customer based in Europe?
     required: true
     type: boolean
     default: false
+    example: false
 triggers:
   new_incidents:
     title: New Incidents
@@ -265,12 +307,14 @@ triggers:
         type: integer
         required: true
         default: 10
+        example: 60
     output:
       incident:
         description: Incident
         title: Incident
         type: incident
         required: false
+        example: {"id": "10000","number": "1000","name": "Incident Name","description": "description","state": "New"}
 actions:
   list_incidents:
     title: List Incidents
@@ -281,6 +325,7 @@ actions:
         description: List of all incidents
         type: '[]incident'
         required: true
+        example: [{"id": "10000","number": "1000","name": "Incident Name","description": "description","state": "New"}]
   get_incident:
     title: Get Incident
     description: Get incident details
@@ -290,12 +335,14 @@ actions:
         description: Incident ID
         type: integer
         required: true
+        example: 12345
     output:
       incident:
         title: Incident
         description: Details of an incident with the given ID
         type: incident
         required: true
+        example: {"id": "10000","number": "1000","name": "Incident Name","description": "description","state": "New"}
   tag_incident:
     title: Tag Incident
     description: Add tags to an incident
@@ -305,17 +352,20 @@ actions:
         description: Incident ID
         type: integer
         required: true
+        example: 12345
       tags:
         title: Tags
         description: Tags to add to the incident
         required: true
         type: '[]string'
+        example: ['tag1']
     output:
       incident:
         title: Incident
         description: Incident with new tags
         type: incident
         required: true
+        example: {"id": "10000","number": "1000","name": "Incident Name","description": "description","state": "New", "tag_list": "tag1"}
   create_incident:
     title: Create Incident
     description: Create a new incident
@@ -325,11 +375,13 @@ actions:
         description: Name
         type: string
         required: true
+        example: Example name
       requester:
         title: Requester
         description: Email of the requester
         type: string
         required: true
+        example: user@example.com
       priority:
         title: Priority
         description: Priority
@@ -341,47 +393,73 @@ actions:
         - Medium
         - High
         - Critical
+        example: Low
       description:
         title: Description
         description: Description
         type: string
         required: false
+        example: Description example
       due_at:
         title: Due At
         description: Due at
         type: date
         required: false
+        example: 02-02-2022
       assignee:
         title: Assignee
         description: Email of the assignee
         type: string
         required: false
+        example: user@example.com
       incidents:
         title: Incidents
         description: List of numbers of incidents associated with the new incident
         type: '[]integer'
         required: false
+        example: [123, 456]
       problem:
         title: Problem
         description: Number of a problem associated with the new incident
         type: integer
         required: false
+        example: 1234
       solutions:
         title: Solutions
         description: List of numbers of solutions associated with the new incident
         type: '[]integer'
         required: false
+        example: [123, 456]
       category_name:
         title: Category Name
         description: Name of the category for the new incident
         type: string
         required: false
+        example: test
     output:
       incident:
         title: Incident
         description: Newly created incident
         type: incident
         required: true
+        example: {"id": "10000","number": "1000","name": "Incident Name","description": "description","state": "New"}
+  delete_incident:
+    title: Delete Incident
+    description: Delete an incident
+    input:
+      incident_id:
+        title: Incident ID
+        description: The ID of an incident to delete
+        type: integer
+        required: true
+        example: 1234
+    output:
+      success:
+        title: Success
+        description: Was the operation successful?
+        type: boolean
+        required: true
+        example: true
   comment_incident:
     title: Comment Incident
     description: Add a comment to an incident
@@ -391,23 +469,27 @@ actions:
         description: ID of an incident to add the comment to
         type: integer
         required: true
+        example: 12345
       body:
         title: Body
         description: The contents of the comment
         type: string
         required: true
+        example: Example comment
       is_private:
         title: Is Private
         description: Is the comment private or public?
         type: boolean
         required: true
         default: true
+        example: true
     output:
       comment:
         title: Comment
         description: Newly created comment
-        type: samanage_comment
+        type: solarwinds_comment
         required: true
+        example: { "id": "1","body": "Comment body","is_private": "true","created_at": "2025-01-01T00:00:00.000+01:00","updated_at": "2025-01-01T00:00:00.000+01:00","user": { },"commenter_id": "1","commenter_type": "Incident" }
   get_comments:
     title: Get Comments
     description: Get all comments of an incident
@@ -417,12 +499,14 @@ actions:
         description: ID of an incident to get the comments from
         type: integer
         required: true
+        example: 12345
     output:
       comments:
         title: Comments
         description: All comments of an incident
-        type: '[]samanage_comment'
+        type: '[]solarwinds_comment'
         required: true
+        example: [{"id": "1","body": "Comment body","is_private": "true","created_at": "2025-01-01T00:00:00.000+01:00","updated_at": "2025-01-01T00:00:00.000+01:00","user": {},"commenter_id": "1","commenter_type": "Incident"}]
   assign_incident:
     title: Assign Incident
     description: Assign a person to an incident
@@ -432,17 +516,20 @@ actions:
         description: ID of an incident to assign a person to
         type: integer
         required: true
+        example: 1234
       assignee:
         title: Assignee
         description: Email of the new assignee
         type: string
         required: true
+        example: user@example.com
     output:
       incident:
         title: Incident
         description: Updated incident
         type: incident
         required: true
+        example: {"id": "10000","number": "1000","name": "Incident Name","description": "description","state": "New"}
   change_incident_state:
     title: Change Incident State
     description: Update the state of an incident
@@ -452,6 +539,7 @@ actions:
         description: ID of an incident to update
         type: integer
         required: true
+        example: 1234
       state:
         title: State
         description: New state of an incident
@@ -463,12 +551,14 @@ actions:
         - Awaiting Input
         - On Hold
         - Resolved
+        example: New
     output:
       incident:
         title: Incident
         description: Updated incident
         type: incident
         required: true
+        example: {"id": "10000","number": "1000","name": "Incident Name","description": "description","state": "Assigned"}
   attach_incident:
     title: Attach Incident
     description: Attach a file to an incident
@@ -478,22 +568,26 @@ actions:
         description: ID of an incident to attach the file to
         type: integer
         required: true
+        example: 1234
       attachment_bytes:
         title: Attachment Bytes
         type: bytes
         description: Contents of the attachment
         required: true
+        example: 0
       attachment_name:
         title: Attachment Name
         type: string
         description: Name of the attachment
         required: true
+        example: Example name
     output:
       attachment:
         title: Attachment
         description: Newly created attachment
-        type: samanage_attachment
+        type: solarwinds_attachment
         required: true
+        example: { "id": 27211951,"content_type": "text/plain", "size": 12, "filename": "Hello.txt", "url": "https://example.com","shared_attachment": False,"attachable_id": 31851783,"attachable_type": "Incident","attachment_type": "attachment"}
   list_users:
     title: List Users
     description: List all users
@@ -501,8 +595,9 @@ actions:
       users:
         title: Users
         description: A list of all users
-        type: '[]samanage_user'
+        type: '[]solarwinds_user'
         required: true
+        example: [{"id": "10000","name": "Example User","title": "Support Agent","disabled": false,"email": "user@example.com","created_at": "2030-01-01T00:00:00.000+00:00","phone": "(800) 555-0100","mobile_phone": "(800) 555-0100"}]
   create_user:
     title: Create User
     description: Create a new user
@@ -512,54 +607,50 @@ actions:
         description: Email address
         type: string
         required: true
+        example: user@example.com
       name:
         title: Name
         description: User name
         type: string
-        required: false
+        required: true
+        example: Example User
       phone:
         title: Phone
         description: Phone number
         type: string
         required: false
+        example: (800) 555-0100
       mobile_phone:
         title: Mobile Phone
         description: Mobile phone number
         type: string
         required: false
+        example: (800) 555-0100
       role:
         title: Role
         description: Role
         type: string
         required: false
-        enum:
-        - ''
-        - Administrator
-        - Facilities Service Desk User
-        - Human Resources Service Desk User
-        - Read Only
-        - Requester
-        - Service Agent User
-        - Service Task User
-        - User's Own Site
+        example: Requester
       department:
         title: Department
         description: Department
         type: string
         required: false
-        enum:
-        - ''
-        - Facilities
-        - Finance
-        - Human Resources
-        - Information Technology
-        - Marketing
+        example: Marketing
+      site:
+        title: Site
+        description: Site
+        type: string
+        required: false
+        example: Boston
     output:
       user:
         title: User
         description: Newly created user
-        type: samanage_user
+        type: solarwinds_user
         required: true
+        example: { "id": "10000","name": "Example User","title": "Support Agent","disabled": false,"email": "user@example.com","created_at": "2030-01-01T00:00:00.000+00:00","phone": "(800) 555-0100","mobile_phone": "(800) 555-0100" }
   delete_user:
     title: Delete User
     description: Delete a user
@@ -569,9 +660,11 @@ actions:
         description: The ID of a user to delete
         type: integer
         required: true
+        example: 1112222
     output:
       success:
         title: Success
         description: Was the operation successful?
         type: boolean
         required: true
+        example: true
