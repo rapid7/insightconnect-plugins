@@ -114,12 +114,16 @@ class SamanageAPI:
 
             shutil.rmtree(temp_dir)
         except Exception as e:
-            raise PluginException(cause="Failed creating a temporary file: {}".format(e),
-                                  assistance="Check if a temporary file can be created")
+            raise PluginException(
+                cause="Failed creating a temporary file: {}".format(e),
+                assistance="Check if a temporary file can be created",
+            )
 
         if result["rcode"] != 0:
-            raise PluginException(cause="Failure running curl command while attaching file: {}".format(result["stderr"]),
-                                  assistance="Check if there are sufficient permissions for the curl command to run")
+            raise PluginException(
+                cause="Failure running curl command while attaching file: {}".format(result["stderr"]),
+                assistance="Check if there are sufficient permissions for the curl command to run",
+            )
 
         try:
             attachment = json.loads(result["stdout"])
@@ -173,7 +177,9 @@ class SamanageAPI:
                 # Auth failure returns: HTTP/1.1" 401 None b''
                 if not response.content:
                     raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
-            raise PluginException(cause="API returned an error: {} {}".format(response.status_code, response.content),
-                                  assistance="Check input and retry. If this error continues contact support")
+            raise PluginException(
+                cause="API returned an error: {} {}".format(response.status_code, response.content),
+                assistance="Check input and retry. If this error continues contact support",
+            )
 
         return insightconnect_plugin_runtime.helper.clean(response.json())
