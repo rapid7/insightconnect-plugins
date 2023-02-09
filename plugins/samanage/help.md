@@ -50,8 +50,8 @@ This action is used to assign a person to an incident.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum| Example|
-|----|----|-------|--------|-----------|----|--------|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
 |assignee|string|None|True|Email of the new assignee|None|user@example.com|
 |incident_id|integer|None|True|ID of an incident to assign a person to|None|1234|
 
