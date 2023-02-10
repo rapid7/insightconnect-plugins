@@ -366,17 +366,7 @@ tasks:
   monitor_sign_in_out_activity:
     title: Monitor Sign In and Out Activity
     description: Monitor sign in and out activity
-    input:
-      start_date:
-        title: Start Date
-        description: Earliest date to get activity from
-        type: string
-        required: true
-      end_date:
-        title: End Date
-        description: Latest date to get activity from, maximum of one month from start date
-        type: string
-        required: true
+    
     output:
       activity_logs:
         title: Activity Logs
