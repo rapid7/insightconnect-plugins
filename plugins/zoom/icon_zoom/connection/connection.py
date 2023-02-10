@@ -27,7 +27,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         try:
             # Return self to confirm API and key is working
             self.zoom_api.get_user("me")
+            return {"success": True}
         except PluginException as e:
             raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e)
 
-        return {}
