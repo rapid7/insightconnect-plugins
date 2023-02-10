@@ -17,6 +17,10 @@ Business, or Enterprise plan.
 * Must have Zoom Pro, Business, or Enterprise plan to support REST API
 * Requires JWT credentials from Zoom App marketplace
 
+# Supported Product Versions
+
+_There are no supported product versions listed._
+
 # Documentation
 
 ## Setup
@@ -232,10 +236,7 @@ None
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|end_date|string|None|True|Latest date to get activity from, maximum of one month from start date|None|None|
-|start_date|string|None|True|Earliest date to get activity from|None|None|
+_This task does not contain any inputs._
 
 Example input:
 
