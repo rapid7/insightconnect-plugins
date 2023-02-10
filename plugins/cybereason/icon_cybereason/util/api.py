@@ -60,9 +60,6 @@ class CybereasonAPI:
         )
 
     def file_search(self, server_filter: Dict, file_filter: Dict) -> Dict[str, Any]:
-        if not file_filter:
-            raise PluginException(cause="File filter shouldn't be empty.", assistance="Please check this input.")
-
         return self.send_request(
             "POST",
             "/rest/sensors/action/fileSearch",
@@ -148,19 +145,19 @@ class CybereasonAPI:
                 assistance="Please ensure that provided Malop ID is valid and try again.",
             )
 
-    def get_visual_search(self, requestedType: str, filters: list, customFields: list) -> Dict[str, Any]:
+    def get_visual_search(self, requested_type: str, filters: list, custom_fields: list) -> Dict[str, Any]:
         try:
             return self.send_request(
                 "POST",
                 "/rest/visualsearch/query/simple",
                 payload={
-                    "queryPath": [{"requestedType": requestedType, "filters": filters, "isResult": True}],
+                    "queryPath": [{"requestedType": requested_type, "filters": filters, "isResult": True}],
                     "totalResultLimit": 1000,
                     "perGroupLimit": 100,
                     "perFeatureLimit": 100,
                     "templateContext": "SPECIFIC",
                     "queryTimeout": 120000,
-                    "customFields": customFields,
+                    "customFields": custom_fields,
                 },
             )["data"]["resultIdToElementDataMap"]
         except KeyError:
@@ -169,7 +166,8 @@ class CybereasonAPI:
                 assistance="No Visual Search results returned for the provided filter.",
             )
 
-    def check_status_codes(self, status_code: int, response) -> Dict[str, Any]:
+    @staticmethod
+    def check_status_codes(status_code: int, response) -> Dict[str, Any]:
         if status_code == 401:
             return PluginException.Preset.USERNAME_PASSWORD
         if status_code == 403:
@@ -270,3 +268,84 @@ class CybereasonAPI:
             )
 
         return target_ids
+
+    def get_file_guids(self, files: list, machine_name: str, quarantine: bool) -> list:
+        filters = [
+            {"facetName": "elementDisplayName", "filterType": "ContainsIgnoreCase", "values": files},
+            {"facetName": "ownerMachine", "filterType": "ContainsIgnoreCase", "values": [machine_name]},
+        ]
+
+        if quarantine:
+            results = self.get_visual_search(requested_type="File", filters=filters, custom_fields=["ownerMachine"])
+        else:
+            results = self.get_visual_search(
+                requested_type="QuarantineFile", filters=filters, custom_fields=["quarantineFile"]
+            )
+
+        if quarantine:
+            return [k for k in results.keys()]
+
+        quarantined_file_guids = []
+        for key in results.keys():
+            try:
+                quarantined_files = results[key]["elementValues"]["quarantineFile"]["elementValues"]
+            except KeyError:
+                continue
+            for f in quarantined_files:
+                quarantined_file_guids.append(f.get("guid"))
+
+        return quarantined_file_guids
+
+    @staticmethod
+    def get_files_in_malop(malop_data: Dict[str, Any]) -> list:
+        try:
+            element_values = malop_data["elementValues"]["primaryRootCauseElements"]["elementValues"]
+        except KeyError:
+            raise PluginException(
+                cause="No root cause elements found for this Malop.",
+                assistance="Please provide a Malop GUID of a Malop that has files involved.",
+            )
+
+        file_names = [e.get("name") for e in element_values if e.get("elementType") == "File"]
+
+        if file_names:
+            return file_names
+
+        raise PluginException(
+            cause="No files related to this Malop found.",
+            assistance="Please provide a Malop GUID of a Malop that has files involved.",
+        )
+
+    @staticmethod
+    def check_machine_in_malop(malop_data: dict, machine_guid: str, malop_id: str):
+        try:
+            element_values = malop_data["elementValues"]["affectedMachines"]["elementValues"]
+        except KeyError:
+            raise PluginException(
+                cause="No affected machines found for this Malop.",
+                assistance="Please provide a Malop GUID of a Malop that has machines involved.",
+            )
+
+        if not [m for m in element_values if m.get("guid") == machine_guid]:
+            raise PluginException(
+                cause="Sensor provided is not related to the Malop ID Provided.",
+                assistance=f"Make sure the provided sensor is involved in the Malop: {malop_id}.",
+            )
+
+    @staticmethod
+    def get_list_of_actions(quarantine: bool, file_guids: list) -> list:
+        if quarantine:
+            action_type = "QUARANTINE_FILE"
+        else:
+            action_type = "UNQUARANTINE_FILE"
+
+        actions = []
+        for guid in file_guids:
+            actions.append({"targetId": guid, "actionType": action_type})
+
+        if not actions:
+            raise PluginException(
+                cause="No actions to perform.",
+                assistance="This can happen because there are no quarantined files in the provided Malop.",
+            )
+        return actions

@@ -1,0 +1,49 @@
+{
+  "malops":[
+            {
+              "guid":"11.7498520112250262440",
+              "status":"Active",
+              "displayName":"83714d9c0ef6b8901fe7dfeffce7c451.xlsx",
+              "rootCauseElementType":"File",
+              "rootCauseElementNamesCount":1,
+              "detectionEngines":["EDR"],
+              "detectionTypes":["Process opened a malicious file"],
+              "malopDetectionType":"MALICIOUS_PROCESS",
+              "machines":[
+                          {
+                            "guid":"-576002811.1198775089551518743",
+                            "displayName":"a07-b37",
+                            "osType":"WINDOWS",
+                            "connected":true,
+                            "isolated":false,
+                            "lastConnected":1567254569103
+                          }
+                         ],
+              "users": [
+                        {
+                          "guid":"0.2548072792133848559",
+                          "displayName":"a07-b37\\admin",
+                          "admin":true,
+                          "localSystem":false,
+                          "domainUser":false
+                        }
+                       ],
+              "creationTime":1566356476000,
+              "lastUpdateTime":1566356481000,
+              "labels":["new malop"],
+              "iconBase64":null,
+              "priority":null,
+              "decisionStatuses":null,
+              "severity":"High",
+              "edr":true,
+              "escalated":false
+            }
+           ],
+  "machineCounterModel": {
+                          "totalMachines":104,
+                          "onlineInfectedCount":32,
+                          "onlineCleanCount":34,
+                          "offlineInfectedCount":13,
+                          "offlineCleanCount":25
+                         }
+}

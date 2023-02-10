@@ -449,8 +449,8 @@ Example input:
 
 ```
 {
-  "file_filter": "fileName Equals: [\"sample.py\"]",
-  "server_filter": "machineName: [\"rapid7-windows\"]"
+  "file_filter": "fileName Equals: ["sample.py"]",
+  "server_filter": "machineName: ["rapid7-windows"]"
 }
 ```
 

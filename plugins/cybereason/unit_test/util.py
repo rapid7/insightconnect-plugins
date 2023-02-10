@@ -54,17 +54,30 @@ class Util:
                         os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/{self.filename}.json.resp")
                     )
                 )
-
+        print(f"args: {args}")
         if "/login.html" in args[0]:
             return MockResponse("empty", 200)
         elif "/rest/sensors/query" in args[1]:
+            _filter = kwargs["json"]["filters"]
+            if _filter == [{'fieldName': 'internalIpAddress', 'operator': 'ContainsIgnoreCase', 'values': ['10.100.229.174']}]:
+                return MockResponse("get_sensor", 200)
             return MockResponse("sensor_details", 200)
+        elif "/rest/crimes/unified" and "/rest/sensors/query" and "/rest/remediate" in args[1]:
+            print("GODDARN IT ACC WORKED")
+            return None
+        elif "/rest/crimes/unified" in args[1]:
+            return MockResponse("malop_data", 200)
         elif "/rest/monitor/global/commands/isolate" in args[1]:
             return MockResponse("isolate_machine", 200)
         elif "/rest/monitor/global/commands/un-isolate" in args[1]:
             return MockResponse("isolate_machine", 200)
         elif "/rest/remediate" in args[1]:
+            print(f"kwargs: {kwargs}")
+            if kwargs["json"] == "":
+                return MockResponse("quarantine_file", 200)
             return MockResponse("remediate_items", 200)
+        elif "/rest/sensors/action/fileSearch" in args[1]:
+            return MockResponse("search_for_files", 200)
         elif "/rest/visualsearch/query/simple" in args[1]:
             payload_malop = kwargs["json"]["queryPath"][0]["guidList"]
             if payload_malop == ["11.2189746432167327222"]:
@@ -73,3 +86,5 @@ class Util:
                 return MockResponse("malop_details_bad_malop", 200)
             elif payload_malop == ["malop_without_machine"]:
                 return MockResponse("malop_details_bad_machine", 200)
+        elif "/rest/sensors/action/archive" in args[1]:
+            return MockResponse("archive_sensor", 200)

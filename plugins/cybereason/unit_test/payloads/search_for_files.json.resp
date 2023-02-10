@@ -1,0 +1,83 @@
+{
+  "response": {
+    "abortTime": 0,
+    "abortTimeout": false,
+    "actionArguments": {
+      "@class": "com.cybereason.configuration.models.filesearch.FileSearchParameters",
+      "fileSearchRequestConfiguration": {
+        "cpuTrackingWindowMilli": 1000,
+        "diskRateBytesPerMilli": 5120,
+        "maxConcurrentFileSearches": 10,
+        "maxDiskIOWindowMilli": 10000,
+        "maxReadBytesPerFile": 110100480,
+        "maxResults": 20,
+        "maxYaraTimeouts": 10,
+        "minFileReadPriceMilli": 1,
+        "minThrottleAmountMilli": 5,
+        "searchTimeoutDataScanSec": 200000,
+        "searchTimeoutSec": 1200,
+        "shouldUseNewAPI": false,
+        "targetCpuPercentage": 20,
+        "timoutPerFileScan": 9
+      },
+      "filters": [
+        {
+          "fieldName": "fileName",
+          "operator": "ContainsIgnoreCase",
+          "values": [
+            "setup.exe"
+          ]
+        }
+      ],
+      "machines": []
+    },
+    "actionType": "FileSearchStart",
+    "batchId": 111,
+    "finalState": false,
+    "globalStats": {
+      "stats": {
+        "AbortTimeout": 0,
+        "Aborted": 0,
+        "Aborting": 0,
+        "AlreadyUpdated": 0,
+        "BadArgument": 0,
+        "ChunksRequired": 0,
+        "Disconnected": 0,
+        "EndedWithInvalidParam": 0,
+        "EndedWithNoValidFolder": 0,
+        "EndedWithSensorTimeout": 0,
+        "EndedWithTooManyResults": 0,
+        "EndedWithTooManySearches": 0,
+        "EndedWithUnknownError": 0,
+        "EndedWithUnsupportedFilter": 0,
+        "EndedWithYaraCompileError": 0,
+        "Failed": 0,
+        "FailedSending": 0,
+        "FailedSendingToServer": 0,
+        "GettingChunks": 0,
+        "InProgress": 0,
+        "InvalidState": 0,
+        "MsiFileCorrupted": 0,
+        "MsiSendFail": 0,
+        "NewerInstalled": 0,
+        "None": 1,
+        "NotSupported": 0,
+        "Pending": 0,
+        "Primed": 0,
+        "ProbeRemoved": 0,
+        "SendingMsi": 0,
+        "SendingPlatform": 0,
+        "Started": 0,
+        "Succeeded": 0,
+        "Timeout": 0,
+        "TimeoutSending": 0,
+        "UnauthorizedUser": 0,
+        "UnknownProbe": 0,
+        "partialResponse": 0
+      }
+    },
+    "initiatorUser": "user@example.com",
+    "startTime": 1614481205231,
+    "totalNumberOfProbes": 1
+  }
+}
