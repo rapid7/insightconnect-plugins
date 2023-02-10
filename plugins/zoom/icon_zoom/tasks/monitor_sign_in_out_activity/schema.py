@@ -8,9 +8,7 @@ class Component:
 
 
 class Input:
-    END_DATE = "end_date"
-    START_DATE = "start_date"
-    
+    pass
 
 class State:
     pass
@@ -21,28 +19,7 @@ class Output:
 
 class MonitorSignInOutActivityInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
-   {
-  "type": "object",
-  "title": "Variables",
-  "properties": {
-    "end_date": {
-      "type": "string",
-      "title": "End Date",
-      "description": "Latest date to get activity from, maximum of one month from start date",
-      "order": 2
-    },
-    "start_date": {
-      "type": "string",
-      "title": "Start Date",
-      "description": "Earliest date to get activity from",
-      "order": 1
-    }
-  },
-  "required": [
-    "end_date",
-    "start_date"
-  ]
-}
+   {}
     """)
 
     def __init__(self):
