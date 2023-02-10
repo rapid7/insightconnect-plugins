@@ -3,11 +3,23 @@ from .schema import MonitorSignInOutActivityInput, MonitorSignInOutActivityOutpu
 # Custom imports below
 from datetime import datetime, timedelta
 
+"""
+Task logic:
+- First run? Start time will be "now - 24 hours". End time will be current time at start of run.
+  Store most recent event time in state.
+    
+- Subsequent run? Start time is the most recent events publish time and the End time will be "now"
+  Duplicates can occur on time boundaries, eg from=0 to=10, next run is from=10 and to=20 due to lack of ms precision
+  Solve by hashing events and removing previously seen hashes from list
+"""
+
 
 class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
     LAST_EVENT_TIME = "last_event_time"
     PREVIOUS_EVENTS = "previous_events"
+
+    ZOOM_TIME_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -18,16 +30,8 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 state=MonitorSignInOutActivityState())
 
     def run(self, params={}, state={}):
-        # Logic rules:
-        # First run? Start time will be "now - 24 hours". End time will be current time at start of run.
-        # Store most recent event time in state.
-        #
-        # Subsequent run? Start time is the most recent events publish time and the End time will be "now"
-        # Duplicates can occur on time boundaries, eg from=0 and to=10,
-        # next run is from=10 and to=20 due to lack of ms precision
-        # Solve by hashing events and removing previously seen hashes from list
 
-        # check if a first run
+        # Check if first run
         if not state.get(self.LAST_EVENT_TIME):
             output, new_state = self.first_run(state=state)
         else:
@@ -47,7 +51,12 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
         # TODO: Making an assumption that the LAST event is the latest time.
         # TODO: Need a larger sample size to verify this. Even then, we may want to sort anyway to ensure consistency
-        new_latest_event_time = new_events[-1:]["time"]
+        try:
+            new_latest_event_time = new_events[-1:]["time"]
+        except KeyError as err:
+            # TODO: How do we want to handle semi-critical failures like this?
+            self.logger.info("Unable to get latest event time!")
+            raise err
 
         # Convert lists of event dicts to sets of Event to de-dupe
         new_events: {Event} = {Event(**e) for e in new_events}
@@ -77,7 +86,12 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
         # TODO: Making an assumption that the LAST event is the latest time.
         # TODO: Need a larger sample size to verify this. Even then, we may want to sort anyway to ensure consistency
-        new_latest_event_time = new_events[-1:]["time"]
+        try:
+            new_latest_event_time = new_events[-1:]["time"]
+        except KeyError as err:
+            # TODO: How do we want to handle semi-critical failures like this?
+            self.logger.info("Unable to get latest event time!")
+            raise err
 
         # update state
         state[self.PREVIOUS_EVENTS] = new_events
@@ -85,9 +99,8 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
         return new_events, state
 
-    @staticmethod
-    def _get_datetime_from_zoom_timestamp(ts: str) -> datetime:
-        dt = datetime.strptime(ts, "%Y-%m-%dT%H:%M:%SZ")
+    def _get_datetime_from_zoom_timestamp(self, ts: str) -> datetime:
+        dt = datetime.strptime(ts, self.ZOOM_TIME_FORMAT)
 
         return dt
 
@@ -104,9 +117,8 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
         return last_24
 
-    @staticmethod
-    def _format_datetime_for_zoom(dt: datetime) -> str:
-        formatted = dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+    def _format_datetime_for_zoom(self, dt: datetime) -> str:
+        formatted = dt.strftime(self.ZOOM_TIME_FORMAT)
         return formatted
 
 
