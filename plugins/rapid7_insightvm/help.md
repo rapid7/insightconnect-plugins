@@ -42,6 +42,80 @@ Example input:
 
 ### Actions
 
+#### Update Shared Credentials
+
+This action is used to update shared credentials.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|---|
+|account|account|None|True|Specify the type of service to authenticate as well as all of the information required by that service|None|{'authentication_type': 'no-authentication', 'community_name': 'rapid community', 'database': 'rapid7_database', 'domain': 'rapid7.com', 'enumerate_sids': False, 'notes_id_password': 'notes_id_password', 'ntlm_hash': '86956E15C7F452086BEEB6BB005E0388', 'oracle_listener_password': 'oracle_listener_password', 'password': 'password', 'pem_key': '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEA3Tz2mr7SZiAMfQyuvBj...', 'permission_elevation': 'sudo', 'permission_elevation_password': 'permission_elevation_password', 'permission_elevation_username': 'permission_elevation_username', 'privacy_password': 'privacy_password', 'privacy_type': 'no-privacy', 'private_key_password': 'private_key_password', 'realm': 'realm0', 'service': 'telnet', 'sid': 'rapid7_database2', 'use_windows_authentication': False, 'username': 'username'}|
+|description|string|None|False|The description of the credential|None|example input with every field filled. Note real input will only have specific fields filled|
+|host_restriction|string|None|False|The host name or IP address that you want to restrict the credentials to|None|my-macbook-name|
+|id|integer|None|False|The identifier of the credential|None|123|
+|name|string|None|True|The name of the credential|None|my-AS400-credentials|
+|port_restriction|string|None|False|Further restricts the credential to attempt to authenticate on a specific port. The port can only be restricted if the property hostRestriction is specified|None|8888|
+|site_assignment|string|None|True|Assigns the shared scan credential either to be available to all sites or to a specific list of sites. All sites - The shared scan credential is assigned to all current and future sites. specific-sites - The shared scan credential is assigned to zero sites by default. Administrators must explicitly assign sites to the shared credential. Shared scan credentials assigned to a site can disabled within the site configuration, if needed|['all-sites', 'specific-sites']|all-sites|
+|sites|[]integer|None|False|List of site identifiers. These sites are explicitly assigned access to the shared scan credential, allowing the site to use the credential for authentication during a scan. This property can only be set if the value of property siteAssignment is set to "specific-sites". When the property siteAssignment is set to "all-sites", this property will be null|None|[]|
+
+Example input:
+
+```
+{
+    "account":{
+        "authentication_type": "no-authentication",
+        "community_name": "rapid community",
+        "database": "rapid7_database",
+        "domain": "rapid7.com",
+        "enumerate_sids": false,
+        "notes_id_password": "notes_id_password",
+        "ntlm_hash": "86956E15C7F452086BEEB6BB005E0388",
+        "oracle_listener_password": "oracle_listener_password",
+        "password": "password",
+        "pem_key": "-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEA3Tz2mr7SZiAMfQyuvBj...",
+        "permission_elevation": "sudo",
+        "permission_elevation_password": "permission_elevation_password",
+        "permission_elevation_username": "permission_elevation_username",
+        "privacy_password": "privacy_password",
+        "privacy_type": "no-privacy",
+        "private_key_password": "private_key_password",
+        "realm": "realm0",
+        "service": "telnet",
+        "sid": "rapid7_database2",
+        "use_windows_authentication": false,
+        "username": "username"
+    }
+    "description": "example input with every field filled. Note real input will only have specific fields filled",
+    "hostRestriction": "my-macbook-name",
+    "id": "123",
+    "name": "my-AS400-credentials",
+    "portRestriction": "8888",
+    "siteAssignment": "all-sites",
+    "sites": []
+}
+
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|links|[]link|True|Hypermedia links to corresponding or related resources|
+
+Example output:
+
+```
+{
+  "links": [
+    {
+      "href": "https://hostname:3780/api/3/...",
+      "rel": "self"
+    }
+  ]
+}
+```
+
 #### Get Asset Vulnerability Solutions
 
 This action returns the highest-superceding rollup solutions for a list of vulnerabilities on an asset.
@@ -147,7 +221,7 @@ This action is used to update vulnerability exception expiration dates.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|date|string|None|True|Expiration date. e.g. 2020-02-24T06:59:59.999Z|None|2020-02-24T06:59:59.999Z|
+|date|string|None|True|Expiration date|None|2020-02-24T06:59:59.999Z|
 |id|integer|None|True|Asset ID|None|42|
 
 Example input:
@@ -1114,8 +1188,8 @@ This action is used to return the contents of a generated report.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Identifier of the report to download e.g. 265|None|1234|
-|instance|string|None|True|The identifier of the report instance, 'latest' or ID e.g. 100|None|latest|
+|id|integer|None|True|Identifier of the report to download|None|1234|
+|instance|string|None|True|The identifier of the report instance, 'latest' or ID|None|latest|
 
 Example input:
 
@@ -1197,7 +1271,7 @@ This action is used to get the assets affected by the vulnerability.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|vulnerability_id|string|None|True|The identifier of the vulnerability e.g. jre-vuln-cve-2013-2471|None|jre-vuln-cve-2013-2471|
+|vulnerability_id|string|None|True|The identifier of the vulnerability|None|jre-vuln-cve-2013-2471|
 
 Example input:
 
@@ -1498,7 +1572,7 @@ This action is used to get tag details by tag ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|integer|None|True|Tag ID, e.g. 1|None|1234|
+|id|integer|None|True|Tag ID|None|1234|
 
 Example input:
 
@@ -3086,7 +3160,7 @@ This action is used to get vulnerability details associated with a CVE.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|cve_id|string|None|True|Common Vulnerabilities and Exposures ID, e.g. CVE-2018-12345|None|CVE-2018-12345|
+|cve_id|string|None|True|Common Vulnerabilities and Exposures ID|None|CVE-2018-12345|
 
 Example input:
 
@@ -4151,7 +4225,7 @@ This action is used to create a vulnerability exception submission.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|Exception created with InsightConnect|True|Comment to include in the vulnerability exception submission|None|example comment|
-|expiration|date|None|False|The date the vulnerability exception expires e.g 2021-12-30T00:00:00Z|None|2021-12-30 00:00:00|
+|expiration|date|None|False|The date the vulnerability exception expires|None|2021-12-30 00:00:00|
 |key|string|None|False|The key to identify a specific instance if the type is Instance|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |port|integer|None|False|The port the vulnerability appears on if the type is Instance|None|40000|
 |reason|string|None|True|Reason for the exception|['False Positive', 'Compensating Control', 'Acceptable Use', 'Acceptable Risk', 'Other']|False Positive|
@@ -4587,7 +4661,7 @@ This action is used to get role details by ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Role ID, e.g 'global-admin'|None|global-admin|
+|id|string|None|True|Role ID|None|global-admin|
 
 Example input:
 
@@ -4934,7 +5008,7 @@ This action is used to create a new user account (limited to external authentica
 |enabled|boolean|True|True|Whether the user account is enabled|None|True|
 |login|string|None|True|The login name of the user|None|jdoe24|
 |name|string|None|True|The full name of the user|None|John Doe|
-|role_id|string|None|True|The identifier of the role to which the user should be assigned, e.g 'global-admin'|None|global-admin|
+|role_id|string|None|True|The identifier of the role to which the user should be assigned|None|global-admin|
 
 Example input:
 
@@ -4994,7 +5068,7 @@ This action is used to update the configuration of an existing user account.
 |id|integer|None|True|The identifier of the user|None|1234|
 |login|string|None|True|The login name of the user|None|jdoe24|
 |name|string|None|True|The full name of the user|None|John Doe|
-|role_id|string|None|True|The identifier of the role to which the user should be assigned, e.g 'global-admin'|None|global-admin|
+|role_id|string|None|True|The identifier of the role to which the user should be assigned|None|global-admin|
 
 Example input:
 
@@ -5153,7 +5227,7 @@ This action is used to update the role associated with an user account.
 |----|----|-------|--------|-----------|----|-------|
 |access_all_asset_groups|boolean|False|True|Whether to grant the user access to all asset groups|None|False|
 |access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|False|
-|role_id|string|None|True|The identifier of the role to which the user should be assigned, e.g 'global-admin'|None|global-admin|
+|role_id|string|None|True|The identifier of the role to which the user should be assigned|None|global-admin|
 |user_id|integer|None|True|The identifier of the user account|None|1234|
 
 Example input:
@@ -5447,7 +5521,7 @@ This action is used to generate results for the top remediations based on a defi
 |----|----|-------|--------|-----------|----|-------|
 |asset_limit|integer|None|False|The amount of assets to be returned with each top remediation; this can be used to reduce message size and processing time|None|4|
 |limit|integer|25|True|Number of remediations for which tickets should be generated|[10, 25, 50, 100]|10|
-|scope|string|none|True|Scope context for generated report; if set remediations will be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID|['none', 'assets', 'assetGroups', 'sites', 'tags', 'scan']|none|
+|scope|string|none|True|Scope context for generated report; if set remediations will be scoped by each in scope ID|['none', 'assets', 'assetGroups', 'sites', 'tags', 'scan']|none|
 |scope_ids|[]integer|[]|False|Scope IDs for which tickets should be generated, by default all are included|None|[1234, 45]|
 |vulnerability_limit|integer|None|False|The amount of vulnerabilities to be returned with each top remediation; this can be used to reduce message size and processing time|None|2|
 
@@ -5662,6 +5736,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 5.1.0 - Add new action update shared credential
 * 5.0.1 - Fix issue in New Scans trigger where an exception was thrown if no scan IDs were previously cached for that site
 * 5.0.0 - Fix parameters type, input examples and description for `Get Asset Vulnerability Solutions`, `Get Asset Vulnerabilities`, `Get Asset Software` and `Get Asset` actions
 * 4.10.0 - Add new action Tag Assets

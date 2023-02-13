@@ -316,6 +316,18 @@ class Site:
         return f"{console_url}/api/3/sites/{site_id}/excluded_asset_groups"
 
 
+class SharedCredential:
+    @staticmethod
+    def update_shared_credential(console_url: str, cred_id: int) -> str:
+        """
+        Updates credential
+        :param console_url: URL to the InsightVM console
+        :param cred_id: ID of the credential you want to update
+        :return: pre-populated /api/3/shared_credentials/{cred_id}
+        """
+        return f"{console_url}/api/3/shared_credentials/{cred_id}"
+
+
 class Tag:
     @staticmethod
     def tags(console_url, tag_id=None):

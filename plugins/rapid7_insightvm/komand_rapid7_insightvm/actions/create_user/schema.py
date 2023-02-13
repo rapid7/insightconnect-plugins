@@ -90,7 +90,7 @@ class CreateUserInput(insightconnect_plugin_runtime.Input):
     "role_id": {
       "type": "string",
       "title": "Role ID",
-      "description": "The identifier of the role to which the user should be assigned, e.g 'global-admin'",
+      "description": "The identifier of the role to which the user should be assigned",
       "order": 9
     }
   },
