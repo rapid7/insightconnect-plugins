@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="orca_security-rapid7-plugin",
-      version="1.0.0",
+      version="2.0.0",
       description="Orca's agentless, cloud-native security and compliance platform detects, monitors, and prioritizes the most critical cloud security risks for AWS, Azure, and Google Cloud estates",
       author="rapid7",
       author_email="",
