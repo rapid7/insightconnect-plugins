@@ -48,7 +48,7 @@ types:
       required: true
     time:
       title: Time
-      description: Time during which the activity occurred
+      description: Time during which the activity occurred in 'yyyy-mm-ddThh:mm:ssZ' format
       type: string
       required: true
     type:
@@ -366,7 +366,7 @@ tasks:
   monitor_sign_in_out_activity:
     title: Monitor Sign In and Out Activity
     description: Monitor sign in and out activity
-    
+
     output:
       activity_logs:
         title: Activity Logs
