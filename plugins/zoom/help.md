@@ -30,16 +30,16 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |account_id|credential_secret_key|None|True|Zoom app account ID|None|dBs0x4Kf7HuIK0LLbzMduW|
-|client_id|credential_secret_key|None|True|Zoom app client ID|None|41tCqP_VZ5jLeaPcBmIrN|
-|client_secret|credential_secret_key|None|True|Zoom app client secret|None|GTSBw49TzhYMwmVIzO19TciwnM8qqPfz|
+|client_id|credential_secret_key|None|True|Zoom app client ID|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|client_secret|credential_secret_key|None|True|Zoom app client secret|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
 ```
 {
   "account_id": "dBs0x4Kf7HuIK0LLbzMduW",
-  "client_id": "41tCqP_VZ5jLeaPcBmIrN",
-  "client_secret": "GTSBw49TzhYMwmVIzO19TciwnM8qqPfz"
+  "client_id": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "client_secret": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 
