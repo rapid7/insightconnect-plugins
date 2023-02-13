@@ -98,6 +98,7 @@ class UpdateSharedCredentialInput(insightconnect_plugin_runtime.Input):
           "type": "string",
           "title": "Authentication Type",
           "description": "The authentication protocols available to use in SNMP v3",
+          "default": "no-authentication",
           "enum": [
             "no-authentication",
             "md5",
@@ -163,6 +164,7 @@ class UpdateSharedCredentialInput(insightconnect_plugin_runtime.Input):
           "type": "string",
           "title": "Permission Evaluation",
           "description": "Elevate scan engine permissions to administrative or root access, which is necessary to obtain certain data during the scan. Defaults to \\"none\\" if not specified",
+          "default": "none",
           "enum": [
             "none",
             "sudo",
@@ -195,6 +197,7 @@ class UpdateSharedCredentialInput(insightconnect_plugin_runtime.Input):
           "type": "string",
           "title": "Privacy Type",
           "description": "The privacy protocols available to use in SNMP v3",
+          "default": "no-privacy",
           "enum": [
             "no-privacy",
             "des",
