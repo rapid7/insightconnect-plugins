@@ -103,9 +103,9 @@ This action is used to execute PowerShell script encoded as a base64 file on a r
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|script|bytes|None|True|PowerShell script as base64. In this action you can use `$username`, `$password`, `$secret_key` variables if defined in connection|None|R2V0LURhdGU=|
 |address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|10.0.1.15|
 |host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|windows|
+|script|bytes|None|True|PowerShell script as base64. In this action you can use `$username`, `$password`, `$secret_key` variables if defined in connection|None|R2V0LURhdGU=|
 
 Example input:
 
@@ -119,10 +119,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|--------|
-|stderr|string|False|PowerShell standard error|Fatal error.|
-|stdout|string|False|PowerShell standard output|Tuesday, January 11, 2022 5:05:42 AM|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|stderr|string|False|PowerShell standard error|
+|stdout|string|False|PowerShell standard output|
 
 Example output:
 
