@@ -252,6 +252,16 @@ Example input:
 Example output:
 
 ```
+[
+  {
+    "client_type": "Browser",
+    "email": "jchill@example.com",
+    "ip_address": "192.0.2.1",
+    "time": "2019-09-15T19:13:41Z",
+    "type": "Sign out",
+    "version": "5.9.1.2581"
+  }
+]
 ```
 
 ### Custom Output Types
