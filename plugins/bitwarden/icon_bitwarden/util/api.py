@@ -26,8 +26,6 @@ class BitwardenAPI:
 
     @property
     def auth_token(self) -> str:
-        if self._auth_token:
-            return self._auth_token
         self._logger.info("[API] Getting authentication token...")
         response = requests.request(
             method="POST",
@@ -123,8 +121,8 @@ class BitwardenAPI:
                 return response
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        except requests.exceptions.HTTPError as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+        except requests.exceptions.HTTPError as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
     def make_json_request(
         self, method: str, url: str, json_data: dict = None, params: dict = None
@@ -132,5 +130,5 @@ class BitwardenAPI:
         try:
             response = self.make_request(method=method, url=url, json_data=json_data, params=params)
             return clean(response.json())
-        except json.decoder.JSONDecodeError as e:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
+        except json.decoder.JSONDecodeError as error:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
