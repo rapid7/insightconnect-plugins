@@ -25,13 +25,13 @@ connection:
     description: Zoom app client ID
     type: credential_secret_key
     required: true
-    example: '41tCqP_VZ5jLeaPcBmIrN'
+    example: "9de5069c5afe602b2ea0a04b66beb2c0"
   client_secret:
     title: Client Secret
     description: Zoom app client secret
     type: credential_secret_key
     required: true
-    example: 'GTSBw49TzhYMwmVIzO19TciwnM8qqPfz'
+    example: "9de5069c5afe602b2ea0a04b66beb2c0"
   account_id:
     title: Account ID
     description: Zoom app account ID
