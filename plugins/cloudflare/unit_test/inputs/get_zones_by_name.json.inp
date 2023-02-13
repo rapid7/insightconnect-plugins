@@ -1,0 +1,11 @@
+{
+  "match": "all",
+  "name": "example.com",
+  "accountName": "Example Account",
+  "accountId": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "status": "pending",
+  "page": 1,
+  "perPage": 20,
+  "order": "account name",
+  "direction": "asc"
+}

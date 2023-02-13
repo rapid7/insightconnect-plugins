@@ -1,0 +1,35 @@
+{
+	"spec": "fe53c542f3b291d041d4a252ce4094ee",
+	"manifest": "1121dcc90662f0aa4d35713f5748ff87",
+	"setup": "ed76788111135900c021c6676b2d4785",
+	"schemas": [
+		{
+			"identifier": "createZoneAccessRule/schema.py",
+			"hash": "e659fecf60f6568eef94a6eeb5d2d2af"
+		},
+		{
+			"identifier": "deleteZoneAccessRule/schema.py",
+			"hash": "b3ca7e6fda35f9155f052491b6637b82"
+		},
+		{
+			"identifier": "getAccounts/schema.py",
+			"hash": "42d2852c752661b498fbe4e58c5d815f"
+		},
+		{
+			"identifier": "getLists/schema.py",
+			"hash": "655aadce3b13eca92e61e63f572d3f7b"
+		},
+		{
+			"identifier": "getZoneAccessRules/schema.py",
+			"hash": "e55a70ab8e16ed8d37f2d8d97af64369"
+		},
+		{
+			"identifier": "getZones/schema.py",
+			"hash": "a4440f0524b6d4582986fc0580e95faf"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "922e1bccbfd76e8eb2367ae1b18c51d2"
+		}
+	]
+}
