@@ -1747,6 +1747,7 @@ types:
       description: The authentication protocols available to use in SNMP v3
       type: string
       required: false
+      default: no-authentication
       enum:
         - no-authentication
         - md5
@@ -1801,6 +1802,7 @@ types:
       description: Elevate scan engine permissions to administrative or root access, which is necessary to obtain certain data during the scan. Defaults to "none" if not specified
       type: string
       required: false
+      default: none
       enum:
         - none
         - sudo
@@ -1828,6 +1830,7 @@ types:
       description: The privacy protocols available to use in SNMP v3
       type: string
       required: false
+      default: no-privacy
       enum:
         - no-privacy
         - des
