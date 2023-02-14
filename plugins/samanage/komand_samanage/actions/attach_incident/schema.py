@@ -78,7 +78,7 @@ class AttachIncidentOutput(insightconnect_plugin_runtime.Output):
       "title": "solarwinds_attachment",
       "properties": {
         "attachable_id": {
-          "type": "integer",
+          "type": "string",
           "title": "Attachable ID",
           "description": "ID of the item this attachment belongs to",
           "order": 3
@@ -96,7 +96,7 @@ class AttachIncidentOutput(insightconnect_plugin_runtime.Output):
           "order": 2
         },
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID of the attachment",
           "order": 1
