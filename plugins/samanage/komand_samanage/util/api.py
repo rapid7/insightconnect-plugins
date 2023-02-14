@@ -24,7 +24,6 @@ def update_id_values_to_strings(data):
     In order to ensure consistency and allow output checking, convert all ids to be strings
     """
     for key, value in data.items():
-        print(str(key) + '->' + str(value))
         if isinstance(value, dict):
             # Item is a dict - recursive use of function
             update_id_values_to_strings(value)
