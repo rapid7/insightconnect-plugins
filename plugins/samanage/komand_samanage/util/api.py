@@ -18,7 +18,7 @@ def is_key_field(key_to_check):
         return False
 
 
-def update_id_values_to_strings(data):
+def update_id_values_to_integers(data):
     """
     According to the Solarwinds (Samanage) API, Ids can be returned as either integers or strings
     In order to ensure consistency and allow output checking, convert all ids to be strings
@@ -26,19 +26,19 @@ def update_id_values_to_strings(data):
     for key, value in data.items():
         if isinstance(value, dict):
             # Item is a dict - recursive use of function
-            update_id_values_to_strings(value)
+            update_id_values_to_integers(value)
         elif isinstance(value, list):
             # Item is a list - recursive use of function if dict else update any id fields
             for i in range(0, len(value)):
                 if isinstance(value[i], dict):
-                    update_id_values_to_strings(value[i])
+                    update_id_values_to_integers(value[i])
                 elif is_key_field(key):
-                    value[i] = str(value[i])
+                    value[i] = int(value[i])
 
         else:
             if is_key_field(key):
                 # Item is a key field - update
-                data[key] = str(value)
+                data[key] = int(value)
 
 
 class SamanageAPI:
@@ -58,7 +58,7 @@ class SamanageAPI:
         response = self._call_api("GET", "incidents")
         # Update response data to change ids to strings if necessary
         for item in response:
-            update_id_values_to_strings(item)
+            update_id_values_to_integers(item)
         return response
 
     def get_incident(self, incident_id):
@@ -66,7 +66,7 @@ class SamanageAPI:
 
         response = self._call_api("GET", url, params={"layout": "long", "audit_archive": True})
         # Update response data to change ids to strings if necessary
-        update_id_values_to_strings(response)
+        update_id_values_to_integers(response)
         return response
 
     def add_tags_to_incident(self, incident_id, tags):
@@ -74,7 +74,7 @@ class SamanageAPI:
         json = {"incident": {"add_to_tag_list": ", ".join(tags)}}
         response = self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
         # Update response data to change ids to strings if necessary
-        update_id_values_to_strings(response)
+        update_id_values_to_integers(response)
         return response
 
     def create_incident(
@@ -109,7 +109,7 @@ class SamanageAPI:
         json = insightconnect_plugin_runtime.helper.clean(json)
         response = self._call_api("POST", url, json=json, params={"layout": "long", "audit_archive": True})
         # Update response data to change ids to strings if necessary
-        update_id_values_to_strings(response)
+        update_id_values_to_integers(response)
         return response
 
     def delete_incident(self, incident_id):
@@ -122,7 +122,7 @@ class SamanageAPI:
 
         response = self._call_api("POST", url, json=json)
         # Update response data to change ids to strings if necessary
-        update_id_values_to_strings(response)
+        update_id_values_to_integers(response)
         return response
 
     def get_comments(self, incident_id):
@@ -132,7 +132,7 @@ class SamanageAPI:
 
         # Update response data to change ids to strings if necessary
         for value in response:
-            update_id_values_to_strings(value)
+            update_id_values_to_integers(value)
         return response
 
     def assign_incident(self, incident_id, assignee):
@@ -141,7 +141,7 @@ class SamanageAPI:
         json = {"incident": {"assignee": {"email": assignee}}}
         response = self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
         # Update response data to change ids to strings if necessary
-        update_id_values_to_strings(response)
+        update_id_values_to_integers(response)
         return response
 
     def change_incident_state(self, incident_id, state):
@@ -150,7 +150,7 @@ class SamanageAPI:
         json = {"incident": {"state": state}}
         response = self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
         # Update response data to change ids to strings if necessary
-        update_id_values_to_strings(response)
+        update_id_values_to_integers(response)
         return response
 
     def attach_file_to_incident(self, incident_id, attachment_bytes, attachment_name):
@@ -188,7 +188,7 @@ class SamanageAPI:
 
         try:
             attachment = json.loads(result["stdout"])
-            update_id_values_to_strings(attachment)
+            update_id_values_to_integers(attachment)
             return attachment
         except json.JSONDecodeError:
             raise PluginException(
@@ -200,7 +200,7 @@ class SamanageAPI:
         response = self._call_api("GET", "users")
         # Update response data to change ids to strings if necessary
         for item in response:
-            update_id_values_to_strings(item)
+            update_id_values_to_integers(item)
         return response
 
     def create_user(self, email, name=None, phone=None, mobile_phone=None, role=None, department=None):
@@ -217,7 +217,7 @@ class SamanageAPI:
         json = insightconnect_plugin_runtime.helper.clean(json)
         response = self._call_api("POST", "users", json=json)
         # Update response data to change ids to strings if necessary
-        update_id_values_to_strings(response)
+        update_id_values_to_integers(response)
         return response
 
     def delete_user(self, user_id):
