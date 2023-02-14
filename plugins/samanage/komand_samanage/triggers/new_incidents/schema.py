@@ -120,7 +120,7 @@ class NewIncidentsOutput(insightconnect_plugin_runtime.Output):
           "order": 9
         },
         "id": {
-          "type": "string",
+          "type": "integer",
           "title": "ID",
           "description": "ID",
           "order": 1
@@ -219,13 +219,13 @@ class NewIncidentsOutput(insightconnect_plugin_runtime.Output):
               "order": 5
             },
             "group_id": {
-              "type": "string",
+              "type": "integer",
               "title": "Group Id",
               "description": "Group ID",
               "order": 1
             },
             "id": {
-              "type": "string",
+              "type": "integer",
               "title": "ID",
               "description": "ID",
               "order": 4
@@ -329,7 +329,7 @@ class NewIncidentsOutput(insightconnect_plugin_runtime.Output):
           "title": "solarwinds_id",
           "properties": {
             "id": {
-              "type": "string",
+              "type": "integer",
               "title": "ID",
               "description": "ID",
               "order": 1
@@ -365,7 +365,7 @@ class NewIncidentsOutput(insightconnect_plugin_runtime.Output):
           "title": "solarwinds_problem",
           "properties": {
             "id": {
-              "type": "string",
+              "type": "integer",
               "title": "ID",
               "description": "ID",
               "order": 3
@@ -427,13 +427,13 @@ class NewIncidentsOutput(insightconnect_plugin_runtime.Output):
           "order": 5
         },
         "group_id": {
-          "type": "string",
+          "type": "integer",
           "title": "Group Id",
           "description": "Group ID",
           "order": 1
         },
         "id": {
-          "type": "string",
+          "type": "integer",
           "title": "ID",
           "description": "ID",
           "order": 4
@@ -537,7 +537,7 @@ class NewIncidentsOutput(insightconnect_plugin_runtime.Output):
       "title": "solarwinds_id",
       "properties": {
         "id": {
-          "type": "string",
+          "type": "integer",
           "title": "ID",
           "description": "ID",
           "order": 1
@@ -573,7 +573,7 @@ class NewIncidentsOutput(insightconnect_plugin_runtime.Output):
       "title": "solarwinds_problem",
       "properties": {
         "id": {
-          "type": "string",
+          "type": "integer",
           "title": "ID",
           "description": "ID",
           "order": 3
