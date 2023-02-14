@@ -1263,8 +1263,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|attachment|solarwinds_attachment|True|Newly created attachment|{'id': 27211951, 'content_type': 'text/plain', 'size': 12, 'filename': 'Hello.txt', 'url': 'https://example.com', 'shared_attachment': False, 'attachable_id': 31851783, 'attachable_type': 'Incident', 'attachment_type': 'attachment'}|
-
+|attachment|solarwinds_attachment|True|Newly created attachment|{'id': '27211951', 'content_type': 'text/plain', 'size': 12, 'filename': 'Hello.txt', 'url': 'https://example.com', 'shared_attachment': False, 'attachable_id': 31851783, 'attachable_type': 'Incident', 'attachment_type': 'attachment'}|
 Example output:
 
 ```
