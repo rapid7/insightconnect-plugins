@@ -18,7 +18,7 @@ This plugin utilizes the [Solarwinds Service desk API](https://www.samanage.com/
 
 # Supported Product Versions
 
-* Solarwinds Service Desk with API version 2.1
+* API version 2.1
 
 # Documentation
 
@@ -66,51 +66,51 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|incident|incident|True|Updated incident|{'id': '10000', 'number': '1000', 'name': 'Incident Name', 'description': 'description', 'state': 'New'}|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|incident|incident|True|Updated incident|{'id': 10000, 'number': '1000', 'name': 'Incident Name', 'description': 'description', 'state': 'New'}|
 
 Example output:
 ```
 {
   "incident": {
-    "id": "10000",
+    "id": 10000,
     "number": "1000",
     "name": "Incident Example Name",
     "description": "Example incident description",
     "state": "New",
     "site": {
-      "id": "1",
+      "id": 1,
       "name": "Austin TX, USA",
       "location": "AUS",
       "description": "",
       "time_zone": ""
     },
     "department": {
-      "id": "1",
+      "id": 1,
       "name": "Support",
       "description": "",
-      "default_assignee_id": "1"
+      "default_assignee_id": 1
     },
     "category": {
-      "id": "10000",
+      "id": 10000,
       "name": "Facilities",
       "default_tags": "tagA, tagB",
       "parent_id": "null",
-      "default_assignee_id": "1"
+      "default_assignee_id": 1
     },
     "subcategory": {
-      "id": "1000",
+      "id": 1000,
       "name": "Equipment",
       "default_tags": "",
       "parent_id": "10000",
-      "default_assignee_id": "1"
+      "default_assignee_id": 1
     },
     "priority": "High",
     "assignee": {
-      "group_id": "1",
+      "group_id": 1,
       "is_user": "true",
-      "id": "1",
+      "id": 1,
       "name": "Example User",
       "email": "user@example.com",
       "avatar": {
@@ -120,9 +120,9 @@ Example output:
       }
     },
     "requester": {
-      "id": "1",
-      "account_id": "1",
-      "user_id": "1",
+      "id": 1,
+      "account_id": 1,
+      "user_id": 1,
       "email": "user@example.com",
       "name": "Example User",
       "disabled": false,
@@ -134,16 +134,16 @@ Example output:
     },
     "custom_fields_values": [
       {
-        "id": "10",
-        "custom_field_id": "1",
+        "id": 10,
+        "custom_field_id": 1,
         "name": "Text custom field",
         "value": "content",
         "options": "",
         "type_name": "Text"
       },
       {
-        "id": "100",
-        "custom_field_id": "2",
+        "id": 100,
+        "custom_field_id": 2,
         "name": "User custom field",
         "value": "1",
         "options": "",
@@ -161,37 +161,37 @@ Example output:
     "origin": "api",
     "incidents": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "problems": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "changes": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "solutions": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "releases": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "configuration_items": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
@@ -211,7 +211,7 @@ This action is used to create a new incident.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|assignee|string|None|False|Email of the assignee|None|user@example.com|
+|assignee|string|None|False|Email of the assignee|None|https://example.com|
 |category_name|string|None|False|Name of the category for the new incident|None|test|
 |description|string|None|False|Description|None|Description example|
 |due_at|date|None|False|Due at|None|02-02-2022|
@@ -219,7 +219,7 @@ This action is used to create a new incident.
 |name|string|None|True|Name|None|Example name|
 |priority|string|None|True|Priority|['None', 'Low', 'Medium', 'High', 'Critical']|Low|
 |problem|integer|None|False|Number of a problem associated with the new incident|None|1234|
-|requester|string|None|True|Email of the requester|None|user@example.com|
+|requester|string|None|True|Email of the requester|None|user@example.com|', '|assignee|string|None|False|Email of the assignee|None|user@example.com|
 |solutions|[]integer|None|False|List of numbers of solutions associated with the new incident|None|[123, 456]|
 
 Example input:
@@ -247,52 +247,52 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|incident|incident|True|Newly created incident|{'id': '10000', 'number': '1000', 'name': 'Incident Name', 'description': 'description', 'state': 'New'}|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|incident|incident|True|Newly created incident|{'id': 10000, 'number': '1000', 'name': 'Incident Name', 'description': 'description', 'state': 'New'}|
 
 Example output:
 
 ```
 {
   "incident": {
-    "id": "10000",
+    "id": 10000,
     "number": "1000",
     "name": "Incident Example Name",
     "description": "Example incident description",
     "state": "New",
     "site": {
-      "id": "1",
+      "id": 1,
       "name": "Austin TX, USA",
       "location": "AUS",
       "description": "",
       "time_zone": ""
     },
     "department": {
-      "id": "1",
+      "id": 1,
       "name": "Support",
       "description": "",
-      "default_assignee_id": "1"
+      "default_assignee_id": 1
     },
     "category": {
-      "id": "10000",
+      "id": 10000,
       "name": "Facilities",
       "default_tags": "tagA, tagB",
       "parent_id": "null",
-      "default_assignee_id": "1"
+      "default_assignee_id": 1
     },
     "subcategory": {
-      "id": "1000",
+      "id": 1000,
       "name": "Equipment",
       "default_tags": "",
-      "parent_id": "10000",
-      "default_assignee_id": "1"
+      "parent_id": 10000,
+      "default_assignee_id": 1
     },
     "priority": "High",
     "assignee": {
-      "group_id": "1",
+      "group_id": 1,
       "is_user": "true",
-      "id": "1",
+      "id": 1,
       "name": "Example User",
       "email": "user@example.com",
       "avatar": {
@@ -302,9 +302,9 @@ Example output:
       }
     },
     "requester": {
-      "id": "1",
-      "account_id": "1",
-      "user_id": "1",
+      "id": 1,
+      "account_id": 1,
+      "user_id": 1,
       "email": "user@example.com",
       "name": "Example User",
       "disabled": false,
@@ -316,16 +316,16 @@ Example output:
     },
     "custom_fields_values": [
       {
-        "id": "10",
-        "custom_field_id": "1",
+        "id": 10,
+        "custom_field_id": 1,
         "name": "Text custom field",
         "value": "content",
         "options": "",
         "type_name": "Text"
       },
       {
-        "id": "100",
-        "custom_field_id": "2",
+        "id": 100,
+        "custom_field_id": 2,
         "name": "User custom field",
         "value": "1",
         "options": "",
@@ -343,37 +343,37 @@ Example output:
     "origin": "api",
     "incidents": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "problems": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "changes": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "solutions": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "releases": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "configuration_items": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
@@ -405,8 +405,8 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
 |success|boolean|True|Was the operation successful?|True|
 
 Example output:
@@ -441,52 +441,52 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|incident|incident|True|Incident with new tags|{'id': '10000', 'number': '1000', 'name': 'Incident Name', 'description': 'description', 'state': 'New', 'tag_list': 'tag1'}|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|incident|incident|True|Incident with new tags|{'id': 10000, 'number': '1000', 'name': 'Incident Name', 'description': 'description', 'state': 'New', 'tag_list': 'tag1'}|
 
 Example output:
 
 ```
 {
   "incident": {
-    "id": "10000",
+    "id": 10000,
     "number": "1000",
     "name": "Incident Example Name",
     "description": "Example incident description",
     "state": "New",
     "site": {
-      "id": "1",
+      "id": 1,
       "name": "Austin TX, USA",
       "location": "AUS",
       "description": "",
       "time_zone": ""
     },
     "department": {
-      "id": "1",
+      "id": 1,
       "name": "Support",
       "description": "",
-      "default_assignee_id": "1"
+      "default_assignee_id": 1
     },
     "category": {
-      "id": "10000",
+      "id": 10000,
       "name": "Facilities",
       "default_tags": "tagA, tagB",
       "parent_id": "null",
-      "default_assignee_id": "1"
+      "default_assignee_id": 1
     },
     "subcategory": {
-      "id": "1000",
+      "id": 1000,
       "name": "Equipment",
       "default_tags": "",
-      "parent_id": "10000",
-      "default_assignee_id": "1"
+      "parent_id": 10000,
+      "default_assignee_id": 1
     },
     "priority": "High",
     "assignee": {
-      "group_id": "1",
+      "group_id": 1,
       "is_user": "true",
-      "id": "1",
+      "id": 1,
       "name": "Example User",
       "email": "user@example.com",
       "avatar": {
@@ -496,9 +496,9 @@ Example output:
       }
     },
     "requester": {
-      "id": "1",
-      "account_id": "1",
-      "user_id": "1",
+      "id": 1,
+      "account_id": 1,
+      "user_id": 1,
       "email": "user@example.com",
       "name": "Example User",
       "disabled": false,
@@ -510,16 +510,16 @@ Example output:
     },
     "custom_fields_values": [
       {
-        "id": "10",
-        "custom_field_id": "1",
+        "id": 10,
+        "custom_field_id": 1,
         "name": "Text custom field",
         "value": "content",
         "options": "",
         "type_name": "Text"
       },
       {
-        "id": "100",
-        "custom_field_id": "2",
+        "id": 100,
+        "custom_field_id": 2,
         "name": "User custom field",
         "value": "1",
         "options": "",
@@ -537,37 +537,37 @@ Example output:
     "origin": "api",
     "incidents": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "problems": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "changes": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "solutions": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "releases": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "configuration_items": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
@@ -589,9 +589,9 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|incidents|[]incident|True|List of all incidents|[{"id": "10000", "number": "1000", "name": "Incident Name", "description": "description", "state": "New"}]|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|incidents|[]incident|True|List of all incidents|[{"id": 10000, "number": "1000", "name": "Incident Name", "description": "description", "state": "New"}]|
 
 Example output:
 
@@ -601,43 +601,43 @@ Example output:
     ```
 {
   "incident": {
-    "id": "10000",
+    "id": 10000,
     "number": "1000",
     "name": "Incident Example Name",
     "description": "Example incident description",
     "state": "New",
     "site": {
-      "id": "1",
+      "id": 1,
       "name": "Austin TX, USA",
       "location": "AUS",
       "description": "",
       "time_zone": ""
     },
     "department": {
-      "id": "1",
+      "id": 1,
       "name": "Support",
       "description": "",
-      "default_assignee_id": "1"
+      "default_assignee_id": 1
     },
     "category": {
-      "id": "10000",
+      "id": 10000,
       "name": "Facilities",
       "default_tags": "tagA, tagB",
       "parent_id": "null",
-      "default_assignee_id": "1"
+      "default_assignee_id": 1
     },
     "subcategory": {
       "id": "1000",
       "name": "Equipment",
       "default_tags": "",
-      "parent_id": "10000",
-      "default_assignee_id": "1"
+      "parent_id": 10000,
+      "default_assignee_id": 1
     },
     "priority": "High",
     "assignee": {
-      "group_id": "1",
+      "group_id": 1,
       "is_user": "true",
-      "id": "1",
+      "id": 1,
       "name": "Example User",
       "email": "user@example.com",
       "avatar": {
@@ -647,9 +647,9 @@ Example output:
       }
     },
     "requester": {
-      "id": "1",
-      "account_id": "1",
-      "user_id": "1",
+      "id": 1,
+      "account_id": 1,
+      "user_id": 1,
       "email": "user@example.com",
       "name": "Example User",
       "disabled": false,
@@ -661,16 +661,16 @@ Example output:
     },
     "custom_fields_values": [
       {
-        "id": "10",
-        "custom_field_id": "1",
+        "id": 10,
+        "custom_field_id": 1,
         "name": "Text custom field",
         "value": "content",
         "options": "",
         "type_name": "Text"
       },
       {
-        "id": "100",
-        "custom_field_id": "2",
+        "id": 100,
+        "custom_field_id": 2,
         "name": "User custom field",
         "value": "1",
         "options": "",
@@ -688,37 +688,37 @@ Example output:
     "origin": "api",
     "incidents": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "problems": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "changes": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "solutions": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "releases": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "configuration_items": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
@@ -740,22 +740,21 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|users|[]solarwinds_user|True|A list of all users|[{"id": "10000", "name": "Example User", "title": "Support Agent", "disabled": False, "email": "user@example.com", "created_at": "2030-01-01T00:00:00.000+00:00", "phone": "(800) 555-0100", "mobile_phone": "(800) 555-0100"}]|
-Example output:
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|users|[]solarwinds_user|True|A list of all users|[{"id": 10000, "name": "Example User", "title": "Support Agent", "disabled": False, "email": "user@example.com", "created_at": "2030-01-01T00:00:00.000+00:00", "phone": "(800) 555-0100", "mobile_phone": "(800) 555-0100"}]|
 
 ```
 {
   "users": [
     {
-      "id": "4245115",
+      "id": 4245115,
       "name": "Example User",
       "disabled": false,
       "email": "user@example.com",
       "created_at": "2018-11-22T08:13:00.000-05:00",
       "role": {
-        "id": "461180",
+        "id": 461180,
         "name": "Requester",
         "description": "Requester role to view and submit service request.",
         "portal": true,
@@ -763,7 +762,7 @@ Example output:
       },
       "salt": "04f20390ecf0c97571167c6c3350782663b6a7e0",
       "group_ids": [
-        "4492327"
+        4492327
       ],
       "custom_fields_values": [],
       "avatar": {
@@ -783,12 +782,12 @@ Example output:
       "phone": "12345678",
       "mobile_phone": "87654321",
       "department": {
-        "id": "133361",
+        "id": 133361,
         "name": "Information Technology",
         "default_assignee_id": "4485265"
       },
       "role": {
-        "id": "461179",
+        "id": 461179,
         "name": "Service Agent User",
         "description": "Almost like an administrator but no access to setup.",
         "portal": false,
@@ -796,7 +795,7 @@ Example output:
       },
       "salt": "b3e360e65de5b592ce1ff92e1d90acedbaddbcf7",
       "group_ids": [
-        "4491226"
+        4491226
       ],
       "custom_fields_values": [],
       "avatar": {
@@ -806,7 +805,7 @@ Example output:
       },
       "mfa_enabled": false,
       "reports_to": {
-        "id": "4485266",
+        "id": 4485266,
         "name": "Helpdesk",
         "disabled": false,
         "is_user": false,
@@ -816,13 +815,13 @@ Example output:
         }
       },
       "site": {
-        "id": "96691",
+        "id": 96691,
         "name": "Headquarters",
         "location": "Main Office"
       }
     },
     {
-      "id": "4238379",
+      "id": 4238379,
       "name": "Example User",
       "disabled": false,
       "email": "user@example.com",
@@ -830,7 +829,7 @@ Example output:
       "last_login": "2018-11-21T17:20:46.000-05:00",
       "phone": "(800) 555-0100",
       "role": {
-        "id": "461178",
+        "id": 461178,
         "name": "Administrator",
         "description": "This is the all powerful administrator user!",
         "portal": false,
@@ -838,8 +837,8 @@ Example output:
       },
       "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
       "group_ids": [
-        "4485265",
-        "4485266"
+        4485265,
+        4485266
       ],
       "custom_fields_values": [],
       "avatar": {
@@ -873,52 +872,52 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|incident|incident|True|Details of an incident with the given ID|{'id': '10000', 'number': '1000', 'name': 'Incident Name', 'description': 'description', 'state': 'New'}|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|incident|incident|True|Details of an incident with the given ID|{'id': 10000, 'number': '1000', 'name': 'Incident Name', 'description': 'description', 'state': 'New'}|
 
 Example output:
 
 ```
 {
   "incident": {
-    "id": "10000",
+    "id": 10000,
     "number": "1000",
     "name": "Incident Example Name",
     "description": "Example incident description",
     "state": "New",
     "site": {
-      "id": "1",
+      "id": 1,
       "name": "Austin TX, USA",
       "location": "AUS",
       "description": "",
       "time_zone": ""
     },
     "department": {
-      "id": "1",
+      "id": 1,
       "name": "Support",
       "description": "",
-      "default_assignee_id": "1"
+      "default_assignee_id": 1
     },
     "category": {
-      "id": "10000",
+      "id": 10000,
       "name": "Facilities",
       "default_tags": "tagA, tagB",
       "parent_id": "null",
-      "default_assignee_id": "1"
+      "default_assignee_id": 1
     },
     "subcategory": {
-      "id": "1000",
+      "id": 1000,
       "name": "Equipment",
       "default_tags": "",
-      "parent_id": "10000",
-      "default_assignee_id": "1"
+      "parent_id": 10000,
+      "default_assignee_id": 1
     },
     "priority": "High",
     "assignee": {
-      "group_id": "1",
+      "group_id": 1,
       "is_user": "true",
-      "id": "1",
+      "id": 1,
       "name": "Example User",
       "email": "user@example.com",
       "avatar": {
@@ -928,9 +927,9 @@ Example output:
       }
     },
     "requester": {
-      "id": "1",
-      "account_id": "1",
-      "user_id": "1",
+      "id": 1,
+      "account_id": 1,
+      "user_id": 1,
       "email": "user@example.com",
       "name": "Example User",
       "disabled": false,
@@ -942,16 +941,16 @@ Example output:
     },
     "custom_fields_values": [
       {
-        "id": "10",
-        "custom_field_id": "1",
+        "id": 10,
+        "custom_field_id": 1,
         "name": "Text custom field",
         "value": "content",
         "options": "",
         "type_name": "Text"
       },
       {
-        "id": "100",
-        "custom_field_id": "2",
+        "id": 100,
+        "custom_field_id": 2,
         "name": "User custom field",
         "value": "1",
         "options": "",
@@ -969,37 +968,37 @@ Example output:
     "origin": "api",
     "incidents": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "problems": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "changes": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "solutions": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "releases": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "configuration_items": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
@@ -1031,8 +1030,8 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
 |success|boolean|True|Was the operation successful?|True|
 
 Example output:
@@ -1050,7 +1049,7 @@ This action is used to create a new user.
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|------|
+|----|----|-------|--------|-----------|----|-------|
 |department|string|None|False|Department|None|Marketing|
 |email|string|None|True|Email address|None|user@example.com|
 |mobile_phone|string|None|False|Mobile phone number|None|(800) 555-0100|
@@ -1065,19 +1064,19 @@ Example input:
 {
   "department": "Marketing",
   "email": "user@example.com",
-  "mobile_phone": "+10000000",
+  "mobile_phone": "(800) 555-0100",
   "name": "Example User",
-  "phone": 10000000,
-  "role": "Administrator"
+  "phone": "(800) 555-0100",
+  "role": "Requester",
+  "site": "Boston"
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|user|solarwinds_user|True|Newly created user|{'id': '10000', 'name': 'Example User', 'title': 'Support Agent', 'disabled': False, 'email': 'user@example.com', 'created_at': '2030-01-01T00:00:00.000+00:00', 'phone': '(800) 555-0100', 'mobile_phone': '(800) 555-0100'}|
-Example output:
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|user|solarwinds_user|True|Newly created user|{'id': 10000, 'name': 'Example User', 'title': 'Support Agent', 'disabled': False, 'email': 'user@example.com', 'created_at': '2030-01-01T00:00:00.000+00:00', 'phone': '(800) 555-0100', 'mobile_phone': '(800) 555-0100'}|
 
 ```
 {
@@ -1090,18 +1089,18 @@ Example output:
     "phone": "123456",
     "mobile_phone": "0012345",
     "department": {
-      "id": "133365",
+      "id": 133365,
       "name": "Marketing"
     },
     "role": {
-      "id": "461182",
+      "id": 461182,
       "name": "Read Only",
       "portal": false,
       "show_my_tasks": false
     },
     "salt": "fc136bca03c6361bf1e564e18d70cc421b1fc582",
     "group_ids": [
-      "4492546"
+      4492546
     ],
     "custom_fields_values": [],
     "avatar": {
@@ -1134,9 +1133,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|comments|[]solarwinds_comment|True|All comments of an incident|[{"id": "1", "body": "Comment body", "is_private": "true", "created_at": "2025-01-01T00:00:00.000+01:00", "updated_at": "2025-01-01T00:00:00.000+01:00", "user": {}, "commenter_id": "1", "commenter_type": "Incident"}]|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|comments|[]solarwinds_comment|True|All comments of an incident|[{"id": 1, "body": "Comment body", "is_private": "true", "created_at": "2025-01-01T00:00:00.000+01:00", "updated_at": "2025-01-01T00:00:00.000+01:00", "user": {}, "commenter_id": 1, "commenter_type": "Incident"}]|
 
 Example output:
 
@@ -1147,7 +1146,7 @@ Example output:
       "id": 39639360,
       "body": "<p>Comment comment comment</p>",
       "user": {
-        "id": "423837",
+        "id": 423837,
         "name": "Example User",
         "disabled": false,
         "email": "user@example.com",
@@ -1155,7 +1154,7 @@ Example output:
         "last_login": "2018-11-21T17:20:46.000-05:00",
         "phone": "(800) 555-0100",
         "role": {
-          "id": "461178",
+          "id": 461178,
           "name": "Administrator",
           "description": "Test description",
           "portal": false,
@@ -1163,8 +1162,8 @@ Example output:
         },
         "salt": "9de5069c5afe602b2ea0a04b66beb2c0",
         "group_ids": [
-          "4485265",
-          "4485266"
+          4485265,
+          4485266
         ],
         "custom_fields_values": [],
         "avatar": {
@@ -1185,14 +1184,14 @@ Example output:
       ],
       "isTask": false,
       "task_info": {},
-      "commenter_id": "31851783",
+      "commenter_id": 3185178,
       "commenter_type": "Incident"
     },
     {
-      "id": "39646936",
+      "id": 39646936,
       "body": "A comment",
       "user": {
-        "id": "4238379",
+        "id": 4238379,
         "name": "Example User",
         "disabled": false,
         "email": "user@example.com",
@@ -1200,7 +1199,7 @@ Example output:
         "last_login": "2018-11-21T17:20:46.000-05:00",
         "phone": "(800) 555-0100",
         "role": {
-          "id": "461178",
+          "id": 461178,
           "name": "Administrator",
           "description": "Test Description",
           "portal": false,
@@ -1208,8 +1207,8 @@ Example output:
         },
         "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
         "group_ids": [
-          "4485265",
-          "4485266"
+          4485265,
+          4485266
         ],
         "custom_fields_values": [],
         "avatar": {
@@ -1230,7 +1229,7 @@ Example output:
       ],
       "isTask": false,
       "task_info": {},
-      "commenter_id": "31851783",
+      "commenter_id": 31851783,
       "commenter_type": "Incident"
     }
   ]
@@ -1261,10 +1260,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|attachment|solarwinds_attachment|True|Newly created attachment|{'id': '27211951', 'content_type': 'text/plain', 'size': 12, 'filename': 'Hello.txt', 'url': 'https://example.com', 'shared_attachment': False, 'attachable_id': 31851783, 'attachable_type': 'Incident', 'attachment_type': 'attachment'}|
-Example output:
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|attachment|solarwinds_attachment|True|Newly created attachment|{'id': 27211951, 'content_type': 'text/plain', 'size': 12, 'filename': 'Hello.txt', 'url': 'https://example.com', 'shared_attachment': False, 'attachable_id': 31851783, 'attachable_type': 'Incident', 'attachment_type': 'attachment'}|
 
 ```
 {
@@ -1309,24 +1307,24 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|comment|solarwinds_comment|True|Newly created comment|{'id': '1', 'body': 'Comment body', 'is_private': 'true', 'created_at': '2025-01-01T00:00:00.000+01:00', 'updated_at': '2025-01-01T00:00:00.000+01:00', 'user': {}, 'commenter_id': '1', 'commenter_type': 'Incident'}|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|comment|solarwinds_comment|True|Newly created comment|{'id': 1, 'body': 'Comment body', 'is_private': 'true', 'created_at': '2025-01-01T00:00:00.000+01:00', 'updated_at': '2025-01-01T00:00:00.000+01:00', 'user': {}, 'commenter_id': 1, 'commenter_type': 'Incident'}|
 
 Example output:
 
 ```
 {
   "comment": {
-    "id": "1",
+    "id": 1,
     "body": "Comment body",
     "is_private": "true",
     "created_at": "2025-01-01T00:00:00.000+01:00",
     "updated_at": "2025-01-01T00:00:00.000+01:00",
     "user": {
-      "id": "1",
-      "account_id": "1",
-      "user_id": "1",
+      "id": 1,
+      "account_id": 1,
+      "user_id": 1,
       "email": "user@example.com",
       "name": "Example User",
       "disabled": false,
@@ -1336,7 +1334,7 @@ Example output:
         "initials": "EU"
       }
     },
-    "commenter_id": "1",
+    "commenter_id": 1,
     "commenter_type": "Incident"
   }
 }
@@ -1364,52 +1362,52 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|incident|incident|True|Updated incident|{'id': '10000', 'number': '1000', 'name': 'Incident Name', 'description': 'description', 'state': 'Assigned'}|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|incident|incident|True|Updated incident|{'id': 10000, 'number': '1000', 'name': 'Incident Name', 'description': 'description', 'state': 'Assigned'}|
 
 Example output:
 
 ```
 {
   "incident": {
-    "id": "10000",
+    "id": 10000,
     "number": "1000",
     "name": "Incident Example Name",
     "description": "Example incident description",
     "state": "New",
     "site": {
-      "id": "1",
+      "id": 1,
       "name": "Austin TX, USA",
       "location": "AUS",
       "description": "",
       "time_zone": ""
     },
     "department": {
-      "id": "1",
+      "id": 1,
       "name": "Support",
       "description": "",
-      "default_assignee_id": "1"
+      "default_assignee_id": 1
     },
     "category": {
-      "id": "10000",
+      "id": 10000,
       "name": "Facilities",
       "default_tags": "tagA, tagB",
       "parent_id": "null",
-      "default_assignee_id": "1"
+      "default_assignee_id": 1
     },
     "subcategory": {
-      "id": "1000",
+      "id": 1000,
       "name": "Equipment",
       "default_tags": "",
-      "parent_id": "10000",
-      "default_assignee_id": "1"
+      "parent_id": 10000,
+      "default_assignee_id": 1
     },
     "priority": "High",
     "assignee": {
-      "group_id": "1",
+      "group_id": 1,
       "is_user": "true",
-      "id": "1",
+      "id": 1,
       "name": "Example User",
       "email": "user@example.com",
       "avatar": {
@@ -1419,9 +1417,9 @@ Example output:
       }
     },
     "requester": {
-      "id": "1",
-      "account_id": "1",
-      "user_id": "1",
+      "id": 1,
+      "account_id": 1,
+      "user_id": 1,
       "email": "user@example.com",
       "name": "Example User",
       "disabled": false,
@@ -1433,16 +1431,16 @@ Example output:
     },
     "custom_fields_values": [
       {
-        "id": "10",
-        "custom_field_id": "1",
+        "id": 10,
+        "custom_field_id": 1,
         "name": "Text custom field",
         "value": "content",
         "options": "",
         "type_name": "Text"
       },
       {
-        "id": "100",
-        "custom_field_id": "2",
+        "id": 100,
+        "custom_field_id": 2,
         "name": "User custom field",
         "value": "1",
         "options": "",
@@ -1460,37 +1458,37 @@ Example output:
     "origin": "api",
     "incidents": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "problems": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "changes": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "solutions": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "releases": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "configuration_items": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
@@ -1524,52 +1522,52 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|incident|incident|False|Incident|{'id': '10000', 'number': '1000', 'name': 'Incident Name', 'description': 'description', 'state': 'New'}|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|incident|incident|False|Incident|{'id': 10000, 'number': '1000', 'name': 'Incident Name', 'description': 'description', 'state': 'New'}|
 
 Example output:
 
 ```
 {
   "incident": {
-    "id": "10000",
+    "id": 10000,
     "number": "1000",
     "name": "Incident Example Name",
     "description": "Example incident description",
     "state": "New",
     "site": {
-      "id": "1",
+      "id": 1,
       "name": "Austin TX, USA",
       "location": "AUS",
       "description": "",
       "time_zone": ""
     },
     "department": {
-      "id": "1",
+      "id": 1,
       "name": "Support",
       "description": "",
-      "default_assignee_id": "1"
+      "default_assignee_id": 1
     },
     "category": {
-      "id": "10000",
+      "id": 10000,
       "name": "Facilities",
       "default_tags": "tagA, tagB",
       "parent_id": "null",
-      "default_assignee_id": "1"
+      "default_assignee_id": 1
     },
     "subcategory": {
-      "id": "1000",
+      "id": 1000,
       "name": "Equipment",
       "default_tags": "",
-      "parent_id": "10000",
-      "default_assignee_id": "1"
+      "parent_id": 10000,
+      "default_assignee_id": 1
     },
     "priority": "High",
     "assignee": {
-      "group_id": "1",
+      "group_id": 1,
       "is_user": "true",
-      "id": "1",
+      "id": 1,
       "name": "Example User",
       "email": "user@example.com",
       "avatar": {
@@ -1579,9 +1577,9 @@ Example output:
       }
     },
     "requester": {
-      "id": "1",
-      "account_id": "1",
-      "user_id": "1",
+      "id": 1,
+      "account_id": 1,
+      "user_id": 1,
       "email": "user@example.com",
       "name": "Example User",
       "disabled": false,
@@ -1593,16 +1591,16 @@ Example output:
     },
     "custom_fields_values": [
       {
-        "id": "10",
-        "custom_field_id": "1",
+        "id": 10,
+        "custom_field_id": 1,
         "name": "Text custom field",
         "value": "content",
         "options": "",
         "type_name": "Text"
       },
       {
-        "id": "100",
-        "custom_field_id": "2",
+        "id": 100,
+        "custom_field_id": 2,
         "name": "User custom field",
         "value": "1",
         "options": "",
@@ -1620,37 +1618,37 @@ Example output:
     "origin": "api",
     "incidents": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "problems": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "changes": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "solutions": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "releases": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],
     "configuration_items": [
       {
-        "id": "100",
+        "id": 100,
         "href": "https://example.com"
       }
     ],

@@ -56,7 +56,7 @@ types:
     id:
       title: ID
       description: ID
-      type: string
+      type: integer
   solarwinds_avatar:
     type:
       title: Avatar type
@@ -74,7 +74,7 @@ types:
     group_id:
       title: Group Id
       description: Group ID
-      type: string
+      type: integer
       required: false
     is_user:
       title: Is user
@@ -87,7 +87,7 @@ types:
     id:
       title: ID
       description: ID
-      type: string
+      type: integer
     email:
       title: Email
       description: Email of assignee
@@ -115,7 +115,7 @@ types:
     id:
       title: ID
       description: ID
-      type: string
+      type: integer
   solarwinds_field:
     name:
       title: Name
@@ -144,7 +144,7 @@ types:
     id:
       title: ID
       description: ID
-      type: string
+      type: integer
     name:
       title: Name
       description: Name
@@ -221,7 +221,7 @@ types:
     id:
       title: ID
       description: ID
-      type: string
+      type: integer
     name:
       title: Name
       description: Name of the user
@@ -270,7 +270,7 @@ types:
     id:
       title: ID
       description: ID of the attachment
-      type: string
+      type: integer
     filename:
       title: Filename
       description: Name of the attachment
@@ -278,7 +278,7 @@ types:
     attachable_id:
       title: Attachable ID
       description: ID of the item this attachment belongs to
-      type: string
+      type: integer
     attachable_type:
       title: Attachable Type
       description: Type of the item this attachment belongs to
@@ -315,7 +315,7 @@ triggers:
         title: Incident
         type: incident
         required: false
-        example: {"id": "10000","number": "1000","name": "Incident Name","description": "description","state": "New"}
+        example: {"id": 10000,"number": "1000","name": "Incident Name","description": "description","state": "New"}
 actions:
   list_incidents:
     title: List Incidents
@@ -326,7 +326,7 @@ actions:
         description: List of all incidents
         type: '[]incident'
         required: true
-        example: [{"id": "10000","number": "1000","name": "Incident Name","description": "description","state": "New"}]
+        example: [{"id": 10000,"number": "1000","name": "Incident Name","description": "description","state": "New"}]
   get_incident:
     title: Get Incident
     description: Get incident details
@@ -343,7 +343,7 @@ actions:
         description: Details of an incident with the given ID
         type: incident
         required: true
-        example: {"id": "10000","number": "1000","name": "Incident Name","description": "description","state": "New"}
+        example: {"id": 10000,"number": "1000","name": "Incident Name","description": "description","state": "New"}
   tag_incident:
     title: Tag Incident
     description: Add tags to an incident
@@ -366,7 +366,7 @@ actions:
         description: Incident with new tags
         type: incident
         required: true
-        example: {"id": "10000","number": "1000","name": "Incident Name","description": "description","state": "New", "tag_list": "tag1"}
+        example: {"id": 10000,"number": "1000","name": "Incident Name","description": "description","state": "New", "tag_list": "tag1"}
   create_incident:
     title: Create Incident
     description: Create a new incident
@@ -443,7 +443,7 @@ actions:
         description: Newly created incident
         type: incident
         required: true
-        example: {"id": "10000","number": "1000","name": "Incident Name","description": "description","state": "New"}
+        example: {"id": 10000,"number": "1000","name": "Incident Name","description": "description","state": "New"}
   delete_incident:
     title: Delete Incident
     description: Delete an incident
@@ -490,7 +490,7 @@ actions:
         description: Newly created comment
         type: solarwinds_comment
         required: true
-        example: { "id": "1","body": "Comment body","is_private": "true","created_at": "2025-01-01T00:00:00.000+01:00","updated_at": "2025-01-01T00:00:00.000+01:00","user": { },"commenter_id": "1","commenter_type": "Incident" }
+        example: { "id": 1,"body": "Comment body","is_private": "true","created_at": "2025-01-01T00:00:00.000+01:00","updated_at": "2025-01-01T00:00:00.000+01:00","user": { },"commenter_id": 1,"commenter_type": "Incident" }
   get_comments:
     title: Get Comments
     description: Get all comments of an incident
@@ -507,7 +507,7 @@ actions:
         description: All comments of an incident
         type: '[]solarwinds_comment'
         required: true
-        example: [{"id": "1","body": "Comment body","is_private": "true","created_at": "2025-01-01T00:00:00.000+01:00","updated_at": "2025-01-01T00:00:00.000+01:00","user": {},"commenter_id": "1","commenter_type": "Incident"}]
+        example: [{"id": 1,"body": "Comment body","is_private": "true","created_at": "2025-01-01T00:00:00.000+01:00","updated_at": "2025-01-01T00:00:00.000+01:00","user": {},"commenter_id": 1,"commenter_type": "Incident"}]
   assign_incident:
     title: Assign Incident
     description: Assign a person to an incident
@@ -530,7 +530,7 @@ actions:
         description: Updated incident
         type: incident
         required: true
-        example: {"id": "10000","number": "1000","name": "Incident Name","description": "description","state": "New"}
+        example: {"id": 10000,"number": "1000","name": "Incident Name","description": "description","state": "New"}
   change_incident_state:
     title: Change Incident State
     description: Update the state of an incident
@@ -559,7 +559,7 @@ actions:
         description: Updated incident
         type: incident
         required: true
-        example: {"id": "10000","number": "1000","name": "Incident Name","description": "description","state": "Assigned"}
+        example: {"id": 10000,"number": "1000","name": "Incident Name","description": "description","state": "Assigned"}
   attach_incident:
     title: Attach Incident
     description: Attach a file to an incident
@@ -588,7 +588,7 @@ actions:
         description: Newly created attachment
         type: solarwinds_attachment
         required: true
-        example: { "id": "27211951","content_type": "text/plain", "size": 12, "filename": "Hello.txt", "url": "https://example.com","shared_attachment": False,"attachable_id": 31851783,"attachable_type": "Incident","attachment_type": "attachment"}
+        example: { "id": 27211951,"content_type": "text/plain", "size": 12, "filename": "Hello.txt", "url": "https://example.com","shared_attachment": False,"attachable_id": 31851783,"attachable_type": "Incident","attachment_type": "attachment"}
   list_users:
     title: List Users
     description: List all users
@@ -598,7 +598,7 @@ actions:
         description: A list of all users
         type: '[]solarwinds_user'
         required: true
-        example: [{"id": "10000","name": "Example User","title": "Support Agent","disabled": false,"email": "user@example.com","created_at": "2030-01-01T00:00:00.000+00:00","phone": "(800) 555-0100","mobile_phone": "(800) 555-0100"}]
+        example: [{"id": 10000,"name": "Example User","title": "Support Agent","disabled": false,"email": "user@example.com","created_at": "2030-01-01T00:00:00.000+00:00","phone": "(800) 555-0100","mobile_phone": "(800) 555-0100"}]
   create_user:
     title: Create User
     description: Create a new user
@@ -651,7 +651,7 @@ actions:
         description: Newly created user
         type: solarwinds_user
         required: true
-        example: { "id": "10000","name": "Example User","title": "Support Agent","disabled": false,"email": "user@example.com","created_at": "2030-01-01T00:00:00.000+00:00","phone": "(800) 555-0100","mobile_phone": "(800) 555-0100" }
+        example: { "id": 10000,"name": "Example User","title": "Support Agent","disabled": false,"email": "user@example.com","created_at": "2030-01-01T00:00:00.000+00:00","phone": "(800) 555-0100","mobile_phone": "(800) 555-0100" }
   delete_user:
     title: Delete User
     description: Delete a user
