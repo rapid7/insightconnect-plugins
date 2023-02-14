@@ -131,7 +131,7 @@ class TagIncidentOutput(insightconnect_plugin_runtime.Output):
           "order": 9
         },
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID",
           "order": 1
@@ -236,7 +236,7 @@ class TagIncidentOutput(insightconnect_plugin_runtime.Output):
               "order": 1
             },
             "id": {
-              "type": "integer",
+              "type": "string",
               "title": "ID",
               "description": "ID",
               "order": 4
@@ -376,7 +376,7 @@ class TagIncidentOutput(insightconnect_plugin_runtime.Output):
           "title": "solarwinds_problem",
           "properties": {
             "id": {
-              "type": "integer",
+              "type": "string",
               "title": "ID",
               "description": "ID",
               "order": 3
@@ -444,7 +444,7 @@ class TagIncidentOutput(insightconnect_plugin_runtime.Output):
           "order": 1
         },
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID",
           "order": 4
@@ -584,7 +584,7 @@ class TagIncidentOutput(insightconnect_plugin_runtime.Output):
       "title": "solarwinds_problem",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID",
           "order": 3
