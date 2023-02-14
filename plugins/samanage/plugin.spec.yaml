@@ -43,7 +43,7 @@ types:
     id:
       title: ID
       description: ID
-      type: integer
+      type: string
   solarwinds_problem:
     number:
       title: Number
@@ -56,7 +56,7 @@ types:
     id:
       title: ID
       description: ID
-      type: integer
+      type: string
   solarwinds_avatar:
     type:
       title: Avatar type
@@ -75,6 +75,7 @@ types:
       title: Group Id
       description: Group ID
       type: string
+      required: false
     is_user:
       title: Is user
       description: If the assignee is a user
@@ -86,7 +87,7 @@ types:
     id:
       title: ID
       description: ID
-      type: integer
+      type: string
     email:
       title: Email
       description: Email of assignee
@@ -143,7 +144,7 @@ types:
     id:
       title: ID
       description: ID
-      type: integer
+      type: string
     name:
       title: Name
       description: Name
@@ -220,7 +221,7 @@ types:
     id:
       title: ID
       description: ID
-      type: integer
+      type: string
     name:
       title: Name
       description: Name of the user
@@ -269,7 +270,7 @@ types:
     id:
       title: ID
       description: ID of the attachment
-      type: integer
+      type: string
     filename:
       title: Filename
       description: Name of the attachment
@@ -277,7 +278,7 @@ types:
     attachable_id:
       title: Attachable ID
       description: ID of the item this attachment belongs to
-      type: integer
+      type: string
     attachable_type:
       title: Attachable Type
       description: Type of the item this attachment belongs to
@@ -587,7 +588,7 @@ actions:
         description: Newly created attachment
         type: solarwinds_attachment
         required: true
-        example: { "id": 27211951,"content_type": "text/plain", "size": 12, "filename": "Hello.txt", "url": "https://example.com","shared_attachment": False,"attachable_id": 31851783,"attachable_type": "Incident","attachment_type": "attachment"}
+        example: { "id": "27211951","content_type": "text/plain", "size": 12, "filename": "Hello.txt", "url": "https://example.com","shared_attachment": False,"attachable_id": 31851783,"attachable_type": "Incident","attachment_type": "attachment"}
   list_users:
     title: List Users
     description: List all users

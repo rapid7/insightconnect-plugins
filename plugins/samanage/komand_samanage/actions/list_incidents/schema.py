@@ -108,7 +108,7 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
           "order": 9
         },
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID",
           "order": 1
@@ -213,7 +213,7 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
               "order": 1
             },
             "id": {
-              "type": "integer",
+              "type": "string",
               "title": "ID",
               "description": "ID",
               "order": 4
@@ -353,7 +353,7 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
           "title": "solarwinds_problem",
           "properties": {
             "id": {
-              "type": "integer",
+              "type": "string",
               "title": "ID",
               "description": "ID",
               "order": 3
@@ -377,7 +377,7 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
           "title": "solarwinds_tag",
           "properties": {
             "id": {
-              "type": "integer",
+              "type": "string",
               "title": "ID",
               "description": "ID",
               "order": 3
@@ -421,7 +421,7 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
           "order": 1
         },
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID",
           "order": 4
@@ -561,7 +561,7 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
       "title": "solarwinds_problem",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID",
           "order": 3
@@ -585,7 +585,7 @@ class ListIncidentsOutput(insightconnect_plugin_runtime.Output):
       "title": "solarwinds_tag",
       "properties": {
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID",
           "order": 3
