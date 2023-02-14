@@ -65,9 +65,9 @@ This action is used to execute PowerShell script in the form of a string.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|script|string|None|True|PowerShell script as a string. In this action you can use `$username`, `$password`, `$secret_key` variables if defined in connection|None|Get-Date|
 |address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|10.0.1.17|
 |host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|windows|
-|script|string|None|True|PowerShell script as a string. In this action you can use `$username`, `$password`, `$secret_key` variables if defined in connection|None|Get-Date|
 
 Example input:
 
@@ -103,9 +103,9 @@ This action is used to execute PowerShell script encoded as a base64 file on a r
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|script|bytes|None|True|PowerShell script as base64. In this action you can use `$username`, `$password`, `$secret_key` variables if defined in connection|None|R2V0LURhdGU=|
 |address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|10.0.1.15|
 |host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|windows|
-|script|bytes|None|True|PowerShell script as base64. In this action you can use `$username`, `$password`, `$secret_key` variables if defined in connection|None|R2V0LURhdGU=|
 
 Example input:
 
