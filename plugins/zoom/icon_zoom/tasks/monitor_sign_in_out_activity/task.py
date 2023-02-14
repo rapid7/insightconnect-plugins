@@ -33,9 +33,11 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
         # Check if first run
         if not state.get(self.LAST_EVENT_TIME):
+            self.logger.info("First run")
             output, new_state = self.first_run(state=state)
         else:
             # Subsequent run
+            self.logger.info("Subsequent run")
             output, new_state = self.subsequent_run(state=state)
 
         return output, new_state
@@ -49,14 +51,15 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             end_date=now_for_zoom
         )
 
-        # TODO: Making an assumption that the LAST event is the latest time.
-        # TODO: Need a larger sample size to verify this. Even then, we may want to sort anyway to ensure consistency
         try:
-            new_latest_event_time = new_events[-1:]["time"]
-        except KeyError as err:
-            # TODO: How do we want to handle semi-critical failures like this?
-            self.logger.info("Unable to get latest event time!")
-            raise err
+            new_latest_event_time = new_events[0]["time"]
+            self.logger.info(f"Latest event time is: {new_latest_event_time}")
+        except IndexError:
+            self.logger.info("Unable to get latest event time, no new events found!")
+            return [], {
+                self.PREVIOUS_EVENTS: [],
+                self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now())
+            }
 
         # Convert lists of event dicts to sets of Event to de-dupe
         new_events: {Event} = {Event(**e) for e in new_events}
@@ -78,24 +81,28 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         last_24_hours = self._get_datetime_last_24_hours()
         now_for_zoom = self._format_datetime_for_zoom(dt=now)
         last_24_hours_for_zoom = self._format_datetime_for_zoom(dt=last_24_hours)
+        self.logger.info("Got times!")
 
         new_events: [dict] = self.connection.zoom_api.get_user_activity_events(
             start_date=last_24_hours_for_zoom,
             end_date=now_for_zoom
         )
+        self.logger.info(f"Got events: {new_events}")
 
-        # TODO: Making an assumption that the LAST event is the latest time.
-        # TODO: Need a larger sample size to verify this. Even then, we may want to sort anyway to ensure consistency
         try:
-            new_latest_event_time = new_events[-1:]["time"]
-        except KeyError as err:
-            # TODO: How do we want to handle semi-critical failures like this?
-            self.logger.info("Unable to get latest event time!")
-            raise err
+            new_latest_event_time = new_events[0]["time"]
+            self.logger.info(f"Latest event time is: {new_latest_event_time}")
+        except IndexError:
+            self.logger.info("Unable to get latest event time, no new events found!")
+            return [], {
+                self.PREVIOUS_EVENTS: [],
+                self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now())
+            }
 
         # update state
         state[self.PREVIOUS_EVENTS] = new_events
         state[self.LAST_EVENT_TIME] = new_latest_event_time
+        self.logger.info(f"Updated state, state is now: {state}")
 
         return new_events, state
 
