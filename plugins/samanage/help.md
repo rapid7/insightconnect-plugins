@@ -749,13 +749,13 @@ Example output:
 {
   "users": [
     {
-      "id": 4245115,
-      "name": "Anon",
+      "id": "4245115",
+      "name": "Example User",
       "disabled": false,
       "email": "user@example.com",
       "created_at": "2018-11-22T08:13:00.000-05:00",
       "role": {
-        "id": 461180,
+        "id": "461180",
         "name": "Requester",
         "description": "Requester role to view and submit service request.",
         "portal": true,
@@ -763,7 +763,7 @@ Example output:
       },
       "salt": "04f20390ecf0c97571167c6c3350782663b6a7e0",
       "group_ids": [
-        4492327
+        "4492327"
       ],
       "custom_fields_values": [],
       "avatar": {
@@ -775,20 +775,20 @@ Example output:
     },
     {
       "id": 4244043,
-      "name": "Tom",
+      "name": "Example User",
       "disabled": false,
-      "title": "Panic",
+      "title": "Example Title",
       "email": "user@example.com",
       "created_at": "2018-11-21T12:28:31.000-05:00",
       "phone": "12345678",
       "mobile_phone": "87654321",
       "department": {
-        "id": 133361,
+        "id": "133361",
         "name": "Information Technology",
-        "default_assignee_id": 4485265
+        "default_assignee_id": "4485265"
       },
       "role": {
-        "id": 461179,
+        "id": "461179",
         "name": "Service Agent User",
         "description": "Almost like an administrator but no access to setup.",
         "portal": false,
@@ -796,7 +796,7 @@ Example output:
       },
       "salt": "b3e360e65de5b592ce1ff92e1d90acedbaddbcf7",
       "group_ids": [
-        4491226
+        "4491226"
       ],
       "custom_fields_values": [],
       "avatar": {
@@ -806,7 +806,7 @@ Example output:
       },
       "mfa_enabled": false,
       "reports_to": {
-        "id": 4485266,
+        "id": "4485266",
         "name": "Helpdesk",
         "disabled": false,
         "is_user": false,
@@ -816,13 +816,13 @@ Example output:
         }
       },
       "site": {
-        "id": 96691,
+        "id": "96691",
         "name": "Headquarters",
         "location": "Main Office"
       }
     },
     {
-      "id": 4238379,
+      "id": "4238379",
       "name": "Example User",
       "disabled": false,
       "email": "user@example.com",
@@ -830,7 +830,7 @@ Example output:
       "last_login": "2018-11-21T17:20:46.000-05:00",
       "phone": "(800) 555-0100",
       "role": {
-        "id": 461178,
+        "id": "461178",
         "name": "Administrator",
         "description": "This is the all powerful administrator user!",
         "portal": false,
@@ -838,8 +838,8 @@ Example output:
       },
       "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
       "group_ids": [
-        4485265,
-        4485266
+        "4485265",
+        "4485266"
       ],
       "custom_fields_values": [],
       "avatar": {
@@ -1083,25 +1083,25 @@ Example output:
 {
   "user": {
     "id": 4245316,
-    "name": "John Snow",
+    "name": "Example User",
     "disabled": false,
     "email": "user@example.com",
     "created_at": "2018-11-22T15:18:53.337-05:00",
     "phone": "123456",
     "mobile_phone": "0012345",
     "department": {
-      "id": 133365,
+      "id": "133365",
       "name": "Marketing"
     },
     "role": {
-      "id": 461182,
+      "id": "461182",
       "name": "Read Only",
       "portal": false,
       "show_my_tasks": false
     },
     "salt": "fc136bca03c6361bf1e564e18d70cc421b1fc582",
     "group_ids": [
-      4492546
+      "4492546"
     ],
     "custom_fields_values": [],
     "avatar": {
@@ -1147,7 +1147,7 @@ Example output:
       "id": 39639360,
       "body": "<p>Comment comment comment</p>",
       "user": {
-        "id": 4238379,
+        "id": "423837",
         "name": "Example User",
         "disabled": false,
         "email": "user@example.com",
@@ -1155,7 +1155,7 @@ Example output:
         "last_login": "2018-11-21T17:20:46.000-05:00",
         "phone": "(800) 555-0100",
         "role": {
-          "id": 461178,
+          "id": "461178",
           "name": "Administrator",
           "description": "Test description",
           "portal": false,
@@ -1163,8 +1163,8 @@ Example output:
         },
         "salt": "9de5069c5afe602b2ea0a04b66beb2c0",
         "group_ids": [
-          4485265,
-          4485266
+          "4485265",
+          "4485266"
         ],
         "custom_fields_values": [],
         "avatar": {
@@ -1185,14 +1185,14 @@ Example output:
       ],
       "isTask": false,
       "task_info": {},
-      "commenter_id": 31851783,
+      "commenter_id": "31851783",
       "commenter_type": "Incident"
     },
     {
-      "id": 39646936,
+      "id": "39646936",
       "body": "A comment",
       "user": {
-        "id": 4238379,
+        "id": "4238379",
         "name": "Example User",
         "disabled": false,
         "email": "user@example.com",
@@ -1200,7 +1200,7 @@ Example output:
         "last_login": "2018-11-21T17:20:46.000-05:00",
         "phone": "(800) 555-0100",
         "role": {
-          "id": 461178,
+          "id": "461178",
           "name": "Administrator",
           "description": "Test Description",
           "portal": false,
@@ -1208,8 +1208,8 @@ Example output:
         },
         "salt": "7e2c35f51cc6ccdf727f7e48bc42403adbf6534d",
         "group_ids": [
-          4485265,
-          4485266
+          "4485265",
+          "4485266"
         ],
         "custom_fields_values": [],
         "avatar": {
@@ -1230,7 +1230,7 @@ Example output:
       ],
       "isTask": false,
       "task_info": {},
-      "commenter_id": 31851783,
+      "commenter_id": "31851783",
       "commenter_type": "Incident"
     }
   ]
@@ -1281,7 +1281,7 @@ Example output:
     "attachment_type": "attachment",
     "thumb_url": "/attachments/3e696549fd7763d9ca28/hello-txt.plain?thumb=true",
     "secure_url": "/attachments/3e696549fd7763d9ca28/hello-txt.plain",
-    "uuid": "3e696549fd7763d9ca28"
+    "uuid": "3e696549fd7123456"
   }
 }
 ```
