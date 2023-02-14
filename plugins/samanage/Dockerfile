@@ -6,6 +6,7 @@ LABEL type=plugin
 
 
 # Add any custom package dependencies here
+RUN apt-get update && apt-get install curl -y
 # NOTE: Add pip packages to requirements.txt
 
 # End package dependencies
