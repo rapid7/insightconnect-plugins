@@ -6,9 +6,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from parameterized import parameterized
 
-# from unit_test.util import Util
 from icon_powershell.util.util import add_credentials_to_script
-# from icon_powershell.actions.powershell_string.schema import Input
 
 
 class TestUtil(TestCase):
