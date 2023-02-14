@@ -27,8 +27,8 @@ The connection configuration accepts the following parameters. SSL is enforced f
 |credentials|credential_username_password|None|False|Username and password|None|{"username": "user", "password": "mypassword"}|
 |kerberos|kerberos|None|False|Connection information required for Kerberos|None| {"kdc": "10.0.1.11", "domain": "EXAMPLE.domain"}|
 |port|integer|5986|False|Port number, defaults are 5986 for SSL and 5985 for unencrypted|None|5986|
-|script_secret_key|credential_secret_key|None|False|Credential secret key available in script as powershell variable (`$secret_key`)|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|script_username_and_password|credential_username_password|None|False|Username and password available in script as powershell variables (`$username`, `$password`)|None|{"username": "user", "password": "mypassword"}|
+|script_secret_key|credential_secret_key|None|False|Credential secret key available in script as PowerShell variable (`$secretKey`)|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|script_username_and_password|credential_username_password|None|False|Username and password available in script as PowerShell variables (`$username`, `$password`)|None|{"username": "user", "password": "mypassword"}||script_username_and_password|credential_username_password|None|False|Username and password available in script as PowerShell variables |None|{"username": "user", "password": "mypassword"}|
 
 Example input:
 
@@ -65,9 +65,9 @@ This action is used to execute PowerShell script in the form of a string.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|script|string|None|True|PowerShell script as a string. In this action you can use `$username`, `$password`, `$secret_key` variables if defined in connection|None|Get-Date|
 |address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|10.0.1.17|
 |host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|windows|
-|script|string|None|True|PowerShell script as a string. In this action you can use `$username`, `$password`, `$secret_key` variables if defined in connection|None|Get-Date|
 
 Example input:
 
@@ -103,9 +103,9 @@ This action is used to execute PowerShell script encoded as a base64 file on a r
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|script|bytes|None|True|PowerShell script as base64. In this action you can use `$username`, `$password`, `$secret_key` variables if defined in connection|None|R2V0LURhdGU=|
 |address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|10.0.1.15|
 |host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|windows|
-|script|bytes|None|True|PowerShell script as base64. In this action you can use `$username`, `$password`, `$secret_key` variables if defined in connection|None|R2V0LURhdGU=|
 
 Example input:
 
