@@ -66,8 +66,8 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
 |incident|incident|True|Updated incident|{'id': 10000, 'number': '1000', 'name': 'Incident Name', 'description': 'description', 'state': 'New'}|
 
 Example output:
@@ -211,7 +211,7 @@ This action is used to create a new incident.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|assignee|string|None|False|Email of the assignee|None|https://example.com|
+|assignee|string|None|False|Email of the assignee|None|user@example.com|
 |category_name|string|None|False|Name of the category for the new incident|None|test|
 |description|string|None|False|Description|None|Description example|
 |due_at|date|None|False|Due at|None|02-02-2022|
@@ -219,7 +219,8 @@ This action is used to create a new incident.
 |name|string|None|True|Name|None|Example name|
 |priority|string|None|True|Priority|['None', 'Low', 'Medium', 'High', 'Critical']|Low|
 |problem|integer|None|False|Number of a problem associated with the new incident|None|1234|
-|requester|string|None|True|Email of the requester|None|user@example.com|', '|assignee|string|None|False|Email of the assignee|None|user@example.com|
+|requester|string|None|True|Email of the requester|None|user@example.com| 
+|assignee|string|None|False|Email of the assignee|None|user@example.com|
 |solutions|[]integer|None|False|List of numbers of solutions associated with the new incident|None|[123, 456]|
 
 Example input:
@@ -247,8 +248,8 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
 |incident|incident|True|Newly created incident|{'id': 10000, 'number': '1000', 'name': 'Incident Name', 'description': 'description', 'state': 'New'}|
 
 Example output:
@@ -405,8 +406,8 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
 |success|boolean|True|Was the operation successful?|True|
 
 Example output:
@@ -441,8 +442,8 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
 |incident|incident|True|Incident with new tags|{'id': 10000, 'number': '1000', 'name': 'Incident Name', 'description': 'description', 'state': 'New', 'tag_list': 'tag1'}|
 
 Example output:
@@ -589,8 +590,8 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
 |incidents|[]incident|True|List of all incidents|[{"id": 10000, "number": "1000", "name": "Incident Name", "description": "description", "state": "New"}]|
 
 Example output:
@@ -740,8 +741,8 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
 |users|[]solarwinds_user|True|A list of all users|[{"id": 10000, "name": "Example User", "title": "Support Agent", "disabled": False, "email": "user@example.com", "created_at": "2030-01-01T00:00:00.000+00:00", "phone": "(800) 555-0100", "mobile_phone": "(800) 555-0100"}]|
 
 ```
@@ -872,8 +873,8 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
 |incident|incident|True|Details of an incident with the given ID|{'id': 10000, 'number': '1000', 'name': 'Incident Name', 'description': 'description', 'state': 'New'}|
 
 Example output:
@@ -1030,8 +1031,8 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
 |success|boolean|True|Was the operation successful?|True|
 
 Example output:
@@ -1074,8 +1075,8 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
 |user|solarwinds_user|True|Newly created user|{'id': 10000, 'name': 'Example User', 'title': 'Support Agent', 'disabled': False, 'email': 'user@example.com', 'created_at': '2030-01-01T00:00:00.000+00:00', 'phone': '(800) 555-0100', 'mobile_phone': '(800) 555-0100'}|
 
 ```
@@ -1133,8 +1134,8 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
 |comments|[]solarwinds_comment|True|All comments of an incident|[{"id": 1, "body": "Comment body", "is_private": "true", "created_at": "2025-01-01T00:00:00.000+01:00", "updated_at": "2025-01-01T00:00:00.000+01:00", "user": {}, "commenter_id": 1, "commenter_type": "Incident"}]|
 
 Example output:
@@ -1260,8 +1261,8 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
 |attachment|solarwinds_attachment|True|Newly created attachment|{'id': 27211951, 'content_type': 'text/plain', 'size': 12, 'filename': 'Hello.txt', 'url': 'https://example.com', 'shared_attachment': False, 'attachable_id': 31851783, 'attachable_type': 'Incident', 'attachment_type': 'attachment'}|
 
 ```
@@ -1307,8 +1308,8 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
 |comment|solarwinds_comment|True|Newly created comment|{'id': 1, 'body': 'Comment body', 'is_private': 'true', 'created_at': '2025-01-01T00:00:00.000+01:00', 'updated_at': '2025-01-01T00:00:00.000+01:00', 'user': {}, 'commenter_id': 1, 'commenter_type': 'Incident'}|
 
 Example output:
@@ -1362,8 +1363,8 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
 |incident|incident|True|Updated incident|{'id': 10000, 'number': '1000', 'name': 'Incident Name', 'description': 'description', 'state': 'Assigned'}|
 
 Example output:
@@ -1522,8 +1523,8 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
 |incident|incident|False|Incident|{'id': 10000, 'number': '1000', 'name': 'Incident Name', 'description': 'description', 'state': 'New'}|
 
 Example output:
