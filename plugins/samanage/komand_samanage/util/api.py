@@ -8,27 +8,74 @@ import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 
 
+def is_key_field(key_to_check):
+    """
+    Check if the key passed in matches oen of the known key type fields
+    """
+    if key_to_check == "id" or key_to_check.endswith("_id") or key_to_check.endswith("_ids"):
+        return True
+    else:
+        return False
+
+
+def update_id_values_to_strings(data):
+    """
+    According to the Solarwinds (Samanage) API, Ids can be returned as either integers or strings
+    In order to ensure consistency and allow output checking, convert all ids to be strings
+    """
+    for key, value in data.items():
+        if isinstance(value, dict):
+            # Item is a dict - recursive use of function
+            update_id_values_to_strings(value)
+        elif isinstance(value, list):
+            # Item is a list - recursive use of function if dict else update any id fields
+            for i in range(0, len(value)):
+                if isinstance(value[i], dict):
+                    update_id_values_to_strings(value[i])
+                elif is_key_field(key):
+                    value[i] = str(value[i])
+
+        else:
+            if is_key_field(key):
+                # Item is a key field - update
+                data[key] = str(value)
+
+
 class SamanageAPI:
     def __init__(self, token, is_eu_customer, logger):
         self.token = token
         self.logger = logger
         self.api_url = "https://apieu.samanage.com/" if is_eu_customer else "https://api.samanage.com/"
         # Test the connection
-        self.list_incidents()
+        self.list_incidents_check()
+
+    def list_incidents_check(self):
+        # This function is to check that an API call can be successfully made  - no cleaning of the output is required
+        response = self._call_api("GET", "incidents")
+        return response
 
     def list_incidents(self):
-        return self._call_api("GET", "incidents")
+        response = self._call_api("GET", "incidents")
+        # Update response data to change ids to strings if necessary
+        for item in response:
+            update_id_values_to_strings(item)
+        return response
 
     def get_incident(self, incident_id):
         url = "incidents/{}".format(incident_id)
 
-        return self._call_api("GET", url, params={"layout": "long", "audit_archive": True})
+        response = self._call_api("GET", url, params={"layout": "long", "audit_archive": True})
+        # Update response data to change ids to strings if necessary
+        update_id_values_to_strings(response)
+        return response
 
     def add_tags_to_incident(self, incident_id, tags):
         url = "incidents/{}".format(incident_id)
         json = {"incident": {"add_to_tag_list": ", ".join(tags)}}
-
-        return self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
+        response = self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
+        # Update response data to change ids to strings if necessary
+        update_id_values_to_strings(response)
+        return response
 
     def create_incident(
         self,
@@ -60,8 +107,10 @@ class SamanageAPI:
             }
         }
         json = insightconnect_plugin_runtime.helper.clean(json)
-
-        return self._call_api("POST", url, json=json, params={"layout": "long", "audit_archive": True})
+        response = self._call_api("POST", url, json=json, params={"layout": "long", "audit_archive": True})
+        # Update response data to change ids to strings if necessary
+        update_id_values_to_strings(response)
+        return response
 
     def delete_incident(self, incident_id):
         url = "incidents/{}".format(incident_id)
@@ -71,26 +120,38 @@ class SamanageAPI:
         url = "incidents/{}/comments".format(incident_id)
         json = {"comment": {"body": body, "is_private": is_private}}
 
-        return self._call_api("POST", url, json=json)
+        response = self._call_api("POST", url, json=json)
+        # Update response data to change ids to strings if necessary
+        update_id_values_to_strings(response)
+        return response
 
     def get_comments(self, incident_id):
         url = "incidents/{}/comments".format(incident_id)
 
-        return self._call_api("GET", url)
+        response = self._call_api("GET", url)
+
+        # Update response data to change ids to strings if necessary
+        for value in response:
+            update_id_values_to_strings(value)
+        return response
 
     def assign_incident(self, incident_id, assignee):
         url = "incidents/{}".format(incident_id)
 
         json = {"incident": {"assignee": {"email": assignee}}}
-
-        return self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
+        response = self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
+        # Update response data to change ids to strings if necessary
+        update_id_values_to_strings(response)
+        return response
 
     def change_incident_state(self, incident_id, state):
         url = "incidents/{}".format(incident_id)
 
         json = {"incident": {"state": state}}
-
-        return self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
+        response = self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
+        # Update response data to change ids to strings if necessary
+        update_id_values_to_strings(response)
+        return response
 
     def attach_file_to_incident(self, incident_id, attachment_bytes, attachment_name):
         self.logger.info("Attaching a file to an incident {}".format(incident_id))
@@ -127,12 +188,20 @@ class SamanageAPI:
 
         try:
             attachment = json.loads(result["stdout"])
+            update_id_values_to_strings(attachment)
             return attachment
         except json.JSONDecodeError:
-            raise PluginException("Failed to attach a file: {}".format(result["stdout"]))
+            raise PluginException(
+                cause="Failure in return response while attaching file: {}".format(result["stdout"]),
+                assistance="Check if there are sufficient permissions for file attachment",
+            )
 
     def list_users(self):
-        return self._call_api("GET", "users")
+        response = self._call_api("GET", "users")
+        # Update response data to change ids to strings if necessary
+        for item in response:
+            update_id_values_to_strings(item)
+        return response
 
     def create_user(self, email, name=None, phone=None, mobile_phone=None, role=None, department=None):
         json = {
@@ -146,8 +215,10 @@ class SamanageAPI:
             }
         }
         json = insightconnect_plugin_runtime.helper.clean(json)
-
-        return self._call_api("POST", "users", json=json)
+        response = self._call_api("POST", "users", json=json)
+        # Update response data to change ids to strings if necessary
+        update_id_values_to_strings(response)
+        return response
 
     def delete_user(self, user_id):
         url = "users/{}".format(user_id)
@@ -155,7 +226,6 @@ class SamanageAPI:
 
     def _call_api(self, method, url, params=None, json=None, data=None, files=None):
         api_url = "{}{}.json".format(self.api_url, url)
-
         self.logger.info("Calling API URL {}".format(api_url))
 
         try:
@@ -181,5 +251,4 @@ class SamanageAPI:
                 cause="API returned an error: {} {}".format(response.status_code, response.content),
                 assistance="Check input and retry. If this error continues contact support",
             )
-
         return insightconnect_plugin_runtime.helper.clean(response.json())
