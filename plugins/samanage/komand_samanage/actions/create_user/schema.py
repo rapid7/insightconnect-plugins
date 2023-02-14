@@ -168,7 +168,7 @@ class CreateUserOutput(insightconnect_plugin_runtime.Output):
           "order": 3
         },
         "id": {
-          "type": "integer",
+          "type": "string",
           "title": "ID",
           "description": "ID",
           "order": 1
