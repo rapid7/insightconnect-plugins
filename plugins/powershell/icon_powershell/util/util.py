@@ -79,11 +79,6 @@ def run_powershell_script(
         stdout = action.safe_encode(stdout)
     if stderr:
         stderr = action.safe_encode(stderr)
-    if "ParserError" in stderr:
-        raise PluginException(
-            cause="Error parsing script.",
-            assistance="Refer to help.md. Ensure you are not using special characters such as quotes in your password.",
-        )
     return {"stdout": stdout, "stderr": stderr}
 
 
