@@ -101,16 +101,20 @@ class ApiClient:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
 
     def _retry_request(self, request_id: str, max_tries: int) -> str:
-        request_response = self._get_request_status(request_id)
-        attempts_counter, delay = 0, 0
-        while not request_response.get("data").get("alertId", "") and attempts_counter < max_tries:
+        request_response = {}
+        attempts_counter, delay = -1, 0
+        while not request_response.get("data", {}).get("alertId", "") and attempts_counter < max_tries:
             time.sleep(delay)
-            request_response = self._get_request_status(request_id)
-            attempts_counter += 1
-            delay = 2 ** (attempts_counter * 0.6)
-            self.logger.info(
-                GET_REQUEST_ID_RETRY_MESSAGE.format(delay=delay, attempts_counter=attempts_counter, max_tries=max_tries)
-            )
+            try:
+                request_response = self._get_request_status(request_id)
+            except PluginException:
+                attempts_counter += 1
+                delay = 2 ** (attempts_counter * 0.6)
+                self.logger.info(
+                    GET_REQUEST_ID_RETRY_MESSAGE.format(
+                        delay=delay, attempts_counter=attempts_counter, max_tries=max_tries
+                    )
+                )
         alert_id = request_response.get("data").get("alertId")
         if alert_id:
             return alert_id
