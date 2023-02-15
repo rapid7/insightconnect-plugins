@@ -62,7 +62,7 @@ class Util:
                 return json.loads(
                     Util.read_file_to_string(
                         os.path.join(
-                            os.path.dirname(os.path.realpath(__file__)), f"parameters/{self.filename}.json.resp"
+                            os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json.resp"
                         )
                     )
                 )
@@ -72,7 +72,7 @@ class Util:
 
         print("DLDEBUG In mocked requests function: kwards{}".format(kwargs))
         if kwargs.get("url") == "https://api.samanage.com/incidents.json":
-            return MockResponse("get_ticket_custom_fields", 200)
+            return MockResponse("list_incidents", 200)
         if kwargs.get("url") == "https://example.happyfox.com/api/1.1/json/ticket_custom_fields/":
             return MockResponse("get_ticket_custom_fields", 200)
         if kwargs.get("url") == "https://example.happyfox.com/api/1.1/json/user_custom_fields/":
@@ -154,4 +154,5 @@ class Util:
 
 
 def mock_request_200(*args, **kwargs):
+    breakpoint()
     return Util.mocked_requests(url=args[1], status_code=200)

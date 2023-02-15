@@ -15,18 +15,13 @@ from parameterized import parameterized
 
 
 
+@patch('komand_samanage.util.api.request', side_effect=mock_request_200)
 class TestListIncidents(TestCase):
     def setUp(self) -> None:
-        # cls.action = Util.default_connector(ListIncidents())
         self.action = Util.default_connector(ListIncidents())
 
-
-    #@parameterized.expand(Util.load_parameters("list_incidents").get("parameters"))
-    #@patch('requests.request', side_effect=Util.mocked_requests)
-    @patch('komand_samanage.util.api.request', side_effect=mock_request_200)
-    #def test_list_incidents(self, mock_request, name, inputs, expected):
-    def test_list_incidents(self, mock_request):
-        print("Before actual")
+    @parameterized.expand(Util.load_parameters("list_incidents").get("parameters"))
+    def test_list_incidents(self, mock_request, expected):
         params = {
             "phone": "12345",
             "mobile_phone": "1234567",
@@ -38,5 +33,4 @@ class TestListIncidents(TestCase):
 
         }
         actual = self.action.run(params)
-        print("actual : {}".format(actual))
-        self.assertEqual(actual, "expected")
+        self.assertEqual(actual, expected)
