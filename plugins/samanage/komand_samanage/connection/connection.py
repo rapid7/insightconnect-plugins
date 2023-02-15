@@ -24,3 +24,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.api = SamanageAPI(token, is_eu_customer, self.logger)
 
         self.logger.info("Connect: Connection successful")
+
+    def test(self):
+        self.api.list_incidents_check()

@@ -47,7 +47,7 @@ class SamanageAPI:
         self.logger = logger
         self.api_url = "https://apieu.samanage.com/" if is_eu_customer else "https://api.samanage.com/"
         # Test the connection
-        self.list_incidents_check()
+        # self.list_incidents_check()
 
     def list_incidents_check(self):
         # This function is to check that an API call can be successfully made  - no cleaning of the output is required
