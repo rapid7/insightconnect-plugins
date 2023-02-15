@@ -1,24 +1,23 @@
 import sys
 import os
+import json
+import logging
 sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase
 from komand_samanage.connection.connection import Connection
 from komand_samanage.actions.list_users import ListUsers
-import json
-import logging
+from unit_test.util import Util, mock_request_200
+from unittest.mock import patch
+from parameterized import parameterized
 
 
+@patch('komand_samanage.util.api.request', side_effect=mock_request_200)
 class TestListUsers(TestCase):
-    def test_list_users(self):
-        """
-        DO NOT USE PRODUCTION/SENSITIVE DATA FOR UNIT TESTS
+    def setUp(self) -> None:
+        self.action = Util.default_connector(ListUsers())
 
-        TODO: Implement test cases here
-
-        For information on mocking and unit testing please go here:
-
-        https://docs.google.com/document/d/1PifePDG1-mBcmNYE8dULwGxJimiRBrax5BIDG_0TFQI/edit?usp=sharing
-        """
-
-        self.fail("Unimplemented Test Case")
+    @parameterized.expand(Util.load_parameters("list_users").get("parameters"))
+    def test_list_users(self, mock_request, expected):
+        actual = self.action.run()
+        self.assertEqual(actual, expected)

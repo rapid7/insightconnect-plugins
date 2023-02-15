@@ -10,9 +10,7 @@ from komand_samanage.actions.list_incidents import ListIncidents
 from unit_test.util import Util, mock_request_200
 from unittest.mock import patch
 from komand_samanage.connection.schema import Input
-
 from parameterized import parameterized
-
 
 
 @patch('komand_samanage.util.api.request', side_effect=mock_request_200)
@@ -22,15 +20,6 @@ class TestListIncidents(TestCase):
 
     @parameterized.expand(Util.load_parameters("list_incidents").get("parameters"))
     def test_list_incidents(self, mock_request, expected):
-        params = {
-            "phone": "12345",
-            "mobile_phone": "1234567",
-            "name": "ExampleUser",
-            "token": {"secretKey": "Examplesecretkey"},
-            "email": "example@user.com",
-            "role": "Example role",
-            "department": "Example department",
 
-        }
-        actual = self.action.run(params)
+        actual = self.action.run()
         self.assertEqual(actual, expected)

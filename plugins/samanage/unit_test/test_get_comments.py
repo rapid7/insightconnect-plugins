@@ -1,24 +1,23 @@
 import sys
 import os
+import json
+import logging
 sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase
 from komand_samanage.connection.connection import Connection
 from komand_samanage.actions.get_comments import GetComments
-import json
-import logging
+from unit_test.util import Util, mock_request_200
+from unittest.mock import patch
+from parameterized import parameterized
 
 
+@patch('komand_samanage.util.api.request', side_effect=mock_request_200)
 class TestGetComments(TestCase):
-    def test_get_comments(self):
-        """
-        DO NOT USE PRODUCTION/SENSITIVE DATA FOR UNIT TESTS
+    def setUp(self) -> None:
+        self.action = Util.default_connector(GetComments())
 
-        TODO: Implement test cases here
-
-        For information on mocking and unit testing please go here:
-
-        https://docs.google.com/document/d/1PifePDG1-mBcmNYE8dULwGxJimiRBrax5BIDG_0TFQI/edit?usp=sharing
-        """
-
-        self.fail("Unimplemented Test Case")
+    @parameterized.expand(Util.load_parameters("get_comments").get("parameters"))
+    def test_get_comments(self, mock_request, incident_id, expected):
+        actual = self.action.run({"incident_id": incident_id})
+        self.assertEqual(actual, expected)

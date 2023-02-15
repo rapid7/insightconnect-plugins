@@ -1,24 +1,25 @@
 import sys
 import os
+import json
+import logging
 sys.path.append(os.path.abspath('../'))
 
 from unittest import TestCase
 from komand_samanage.connection.connection import Connection
 from komand_samanage.actions.get_incident import GetIncident
-import json
-import logging
+from unit_test.util import Util, mock_request_200
+from unittest.mock import patch
+from parameterized import parameterized
 
 
+
+@patch('komand_samanage.util.api.request', side_effect=mock_request_200)
 class TestGetIncident(TestCase):
-    def test_get_incident(self):
-        """
-        DO NOT USE PRODUCTION/SENSITIVE DATA FOR UNIT TESTS
+    def setUp(self) -> None:
+        self.action = Util.default_connector(GetIncident())
 
-        TODO: Implement test cases here
+    @parameterized.expand(Util.load_parameters("get_incident").get("parameters"))
+    def test_get_incident(self, mock_request, incident_id, expected):
 
-        For information on mocking and unit testing please go here:
-
-        https://docs.google.com/document/d/1PifePDG1-mBcmNYE8dULwGxJimiRBrax5BIDG_0TFQI/edit?usp=sharing
-        """
-
-        self.fail("Unimplemented Test Case")
+        actual = self.action.run({"incident_id": incident_id})
+        self.assertEqual(actual, expected)
