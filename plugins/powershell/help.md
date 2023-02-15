@@ -10,6 +10,7 @@
 
 * For local Orchestrator execution, ensure connectivity to any network resources the script will use
 * For remote server execution, a PowerShell-enabled server and administrative credentials
+* When adding a password for the script, try to avoid special or escape characters such as single or double quotes
 
 # Supported Product Versions
 
@@ -65,9 +66,9 @@ This action is used to execute PowerShell script in the form of a string.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|script|string|None|True|PowerShell script as a string. In this action you can use `$username`, `$password`, `$secret_key` variables if defined in connection|None|Get-Date|
 |address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|10.0.1.17|
 |host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|windows|
+|script|string|None|True|PowerShell script as a string. In this action you can use `$username`, `$password`, `$secret_key` variables if defined in connection|None|Get-Date|
 
 Example input:
 
@@ -103,9 +104,9 @@ This action is used to execute PowerShell script encoded as a base64 file on a r
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|script|bytes|None|True|PowerShell script as base64. In this action you can use `$username`, `$password`, `$secret_key` variables if defined in connection|None|R2V0LURhdGU=|
 |address|string|None|False|IP address of the remote host e.g. 192.168.1.1. If address is left blank PowerShell will run locally|None|10.0.1.15|
 |host_name|string|None|False|Case-sensitive name of the remote host, eg. MyComputer for Kerberos connection only|None|windows|
+|script|bytes|None|True|PowerShell script as base64. In this action you can use `$username`, `$password`, `$secret_key` variables if defined in connection|None|R2V0LURhdGU=|
 
 Example input:
 
@@ -187,6 +188,7 @@ Invoke-Expression ((New-Object System.Net.Webclient).DownloadString('https://raw
 
 # Version History
 
+* 3.0.1 - Bug fix - Fix issue where single quotes in password causes parsing error
 * 3.0.0 - Move custom script credentials to Connection | Update runtime to insightconnect_plugin_runtime
 * 2.2.0 - Add custom credentials in Execute Script and PowerShell String actions | Update plugin to allow unencrypted connections when connection is targeting port 5985
 * 2.1.4 - Update `docs_url` in plugin spec with a new link to [plugin setup guide](https://docs.rapid7.com/insightconnect/mass-delete-with-powershell/)
