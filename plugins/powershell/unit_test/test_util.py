@@ -18,9 +18,7 @@ class TestUtil(TestCase):
                 "new_username",
                 "new_password",
                 "new_secret_key",
-                "$username = 'new_username'"
-                + '\n$password = "new_password"'
-                + " | ConvertTo-SecureString -asPlainText -Force\n$secret_key = 'new_secret_key'\nfirst line\nsecond line",
+                "$username = 'new_username'\n$password = 'new_password' | ConvertTo-SecureString -asPlainText -Force\n$secret_key = 'new_secret_key'\nfirst line\nsecond line",
             ),
         ]
     )
