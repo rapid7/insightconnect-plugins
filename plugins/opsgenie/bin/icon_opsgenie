@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Opsgenie"
 Vendor = "rapid7"
-Version = "1.1.0"
+Version = "1.1.1"
 Description = "Notify the right people, reduce response time, and avoid alert fatigue with Opsgenie"
 
 
