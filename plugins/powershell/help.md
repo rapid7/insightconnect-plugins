@@ -10,6 +10,7 @@
 
 * For local Orchestrator execution, ensure connectivity to any network resources the script will use
 * For remote server execution, a PowerShell-enabled server and administrative credentials
+* When adding a password for the script, try to avoid special or escape characters such as single or double quotes
 
 # Supported Product Versions
 
