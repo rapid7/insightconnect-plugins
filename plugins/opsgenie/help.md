@@ -355,6 +355,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.1 - Create Alert: fixed not found error after creating an alert
 * 1.1.0 - Added Alert ID field to the Create Alert action output
 * 1.0.0 - Initial plugin (Actions: Create Alert, Close Alert, Get Alert, Get On-Calls)
 
