@@ -302,7 +302,7 @@ def add_credentials_to_script(powershell_script: str, credentials: dict) -> str:
     if username:
         credentials_definition += f"$username = '{username}'\n"
     if password:
-        credentials_definition += f'$password = "{password}" | ConvertTo-SecureString -asPlainText -Force\n'
+        credentials_definition += f"$password = '{password}' | ConvertTo-SecureString -asPlainText -Force\n"
     if secret_key:
         credentials_definition += f"$secret_key = '{secret_key}'\n"
 
