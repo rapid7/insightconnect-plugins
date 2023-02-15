@@ -136,12 +136,16 @@ This action is used to get sensor.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|limit|integer|None|True|The number of sensors to which to send the request|None|1|
+|offset|integer|None|True|Set to 0 to receive the first limit set of sensors|None|0|
 |indicator|string|None|True|The unique identifier of the machine you wish to perform the operation on, this can be an internal IPv4 address, hostname or sensor GUID|None|104.31.2.164|
 
 Example input:
 
 ```
 {
+  "limit": 1,
+  "offset": 0,
   "indicator": "104.31.2.164"
 }
 ```

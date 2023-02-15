@@ -1,0 +1,10 @@
+{
+    "data": {
+        "resultIdToElementDataMap":
+            {
+                "guid1": "example",
+                "guid2": "example",
+                "guid3": "example"
+            }
+    }
+}

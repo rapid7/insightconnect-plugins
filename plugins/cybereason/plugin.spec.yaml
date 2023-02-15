@@ -1290,6 +1290,18 @@ actions:
     title: Get Sensor
     description: Get sensor
     input:
+      limit:
+        title: Limit
+        description: The number of sensors to which to send the request
+        type: integer
+        required: true
+        example: 1
+      offset:
+        title: Offset
+        description: Set to 0 to receive the first limit set of sensors
+        type: integer
+        required: true
+        example: 0
       indicator:
         title: Indicator
         description: The unique identifier of the machine you wish to perform the operation on, this can be an internal IPv4 address, hostname or sensor GUID

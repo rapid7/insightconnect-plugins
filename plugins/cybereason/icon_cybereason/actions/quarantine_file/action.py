@@ -25,7 +25,7 @@ class QuarantineFile(insightconnect_plugin_runtime.Action):
         CybereasonAPI.check_machine_in_malop(malop_data, sensor_guid, malop_id)
 
         files_in_malop = CybereasonAPI.get_files_in_malop(malop_data)
-        file_guids = CybereasonAPI.get_file_guids(files_in_malop, sensor_machine_name, quarantine)
+        file_guids = self.connection.api.get_file_guids(files_in_malop, sensor_machine_name, quarantine)
         actions = CybereasonAPI.get_list_of_actions(quarantine, file_guids)
         return {
             Output.REMEDIATE_ITEMS_RESPONSE: self.connection.api.remediate(

@@ -22,10 +22,10 @@ class TestGetSensor(TestCase):
     def test_get_sensor(self, mock_request):
         actual = self.action.run(
             {
+                Input.LIMIT: 1,
+                Input.OFFSET: 0,
                 Input.INDICATOR: "10.100.229.174",
             }
         )
         expected = '"sensorId": "valid_sensor_Id"'
         assert json.dumps(actual).__contains__(expected)
-
-# add test that get different status codes

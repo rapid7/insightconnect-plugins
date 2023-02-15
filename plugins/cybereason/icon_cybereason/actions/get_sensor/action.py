@@ -12,4 +12,8 @@ class GetSensor(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return {Output.SENSOR: self.connection.api.get_sensors(params.get(Input.INDICATOR))}
+        return {
+            Output.SENSOR: self.connection.api.get_sensors(
+                params.get(Input.LIMIT), params.get(Input.OFFSET), params.get(Input.INDICATOR)
+            )
+        }

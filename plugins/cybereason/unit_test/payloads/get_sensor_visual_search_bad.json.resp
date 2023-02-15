@@ -19,7 +19,7 @@
          "pylumId":"valid_pylum_Id",
          "guid":"guid",
          "fqdn":"abc-def-12345",
-         "machineName":"machineName",
+         "machineName":"Machine_name_visual_search",
          "internalIpAddress":"10.100.100.100",
          "externalIpAddress":"200.12.200.100",
          "siteName":"Default",

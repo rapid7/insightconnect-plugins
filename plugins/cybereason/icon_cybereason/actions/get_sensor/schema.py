@@ -9,6 +9,8 @@ class Component:
 
 class Input:
     INDICATOR = "indicator"
+    LIMIT = "limit"
+    OFFSET = "offset"
     
 
 class Output:
@@ -25,11 +27,25 @@ class GetSensorInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Indicator",
       "description": "The unique identifier of the machine you wish to perform the operation on, this can be an internal IPv4 address, hostname or sensor GUID",
+      "order": 3
+    },
+    "limit": {
+      "type": "integer",
+      "title": "Limit",
+      "description": "The number of sensors to which to send the request",
       "order": 1
+    },
+    "offset": {
+      "type": "integer",
+      "title": "Offset",
+      "description": "Set to 0 to receive the first limit set of sensors",
+      "order": 2
     }
   },
   "required": [
-    "indicator"
+    "indicator",
+    "limit",
+    "offset"
   ]
 }
     """)

@@ -5,7 +5,7 @@ import re
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 import json
 from logging import Logger
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 from urllib.parse import urljoin
 
 
@@ -59,28 +59,27 @@ class CybereasonAPI:
             payload=payload,
         )
 
-    def file_search(self, server_filter: Dict, file_filter: Dict) -> Dict[str, Any]:
+    def file_search(self, server_filter: Dict[str, Any], file_filter: Dict[str, Any]) -> Dict[str, Any]:
         return self.send_request(
             "POST",
             "/rest/sensors/action/fileSearch",
             payload={"filters": server_filter, "fileFilters": file_filter},
         )
 
-    def get_sensors(self, identifier: str) -> Dict[str, Any]:
+    def get_sensors(self, limit: int, offset: int, identifier: str) -> Dict[str, Any]:
         field_name = self.which_filter(identifier)
         return self.send_request(
             "POST",
             "/rest/sensors/query",
             payload={
-                "limit": 1,
-                "offset": 0,
+                "limit": limit,
+                "offset": offset,
                 "filters": [{"fieldName": field_name, "operator": "ContainsIgnoreCase", "values": [identifier]}],
             },
         )
 
     def get_sensor_details(self, identifier: str) -> Dict[str, Any]:
         sensors = self.send_request("POST", "/rest/sensors/query", payload=self.generate_sensor_filter(identifier))
-
         if sensors.get("totalResults") == 0:
             raise PluginException(
                 cause=f"No sensors found using identifier: {identifier}.",
@@ -91,7 +90,6 @@ class CybereasonAPI:
                 cause=f"Multiple sensors found using identifier: {identifier}.",
                 assistance="Please provide a unique identifier and try again.",
             )
-
         return sensors.get("sensors")[0]
 
     def archive_sensor(self, sensor_ids: list, argument: str) -> Dict[str, Any]:
@@ -137,6 +135,7 @@ class CybereasonAPI:
             },
         )
         try:
+            print(f'\n\n{response["data"]["resultIdToElementDataMap"]}\n\n')
             return response["data"]["resultIdToElementDataMap"]
 
         except KeyError:
@@ -248,7 +247,7 @@ class CybereasonAPI:
         return sensor_filter
 
     @staticmethod
-    def get_machine_targets(results: str, machine_guid: str) -> list:
+    def get_machine_targets(results: Dict[str, Any], machine_guid: str) -> list:
         target_ids = []
 
         for key, value in results.items():
@@ -317,7 +316,7 @@ class CybereasonAPI:
         )
 
     @staticmethod
-    def check_machine_in_malop(malop_data: dict, machine_guid: str, malop_id: str):
+    def check_machine_in_malop(malop_data: Dict[str, Any], machine_guid: str, malop_id: str):
         try:
             element_values = malop_data["elementValues"]["affectedMachines"]["elementValues"]
         except KeyError:
@@ -338,7 +337,6 @@ class CybereasonAPI:
             action_type = "QUARANTINE_FILE"
         else:
             action_type = "UNQUARANTINE_FILE"
-
         actions = []
         for guid in file_guids:
             actions.append({"targetId": guid, "actionType": action_type})
