@@ -20,7 +20,7 @@ class Cisco_Api(object):
     def get(self, uri, params={}):
         """A generic method to make GET requests to the OpenDNS Enforcement API on the given URI."""
         params["customerKey"] = self.customer_key
-        return requests.get(urljoin(Cisco_Api.BASE_URL, uri), params=params, headers={}, proxies={})
+        return requests.get(urljoin(Cisco_Api.BASE_URL, uri), params=params, headers={}, proxies={}, verify=False)
 
     def post(self, uri, params={}, data={}):
         """A generic method to make POST requests to the OpenDNS Enforcement API on the given URI."""
@@ -30,12 +30,13 @@ class Cisco_Api(object):
             params=params,
             data=data,
             headers={"Content-Type": "application/json"},
+            verify=False,
         )
 
     def delete(self, uri, params={}):
         """A generic method to make DELETE requests to the OpenDNS Enforcement API on the given URI."""
         params["customerKey"] = self.customer_key
-        return requests.delete(urljoin(Cisco_Api.BASE_URL, uri), params=params, headers={}, proxies={})
+        return requests.delete(urljoin(Cisco_Api.BASE_URL, uri), params=params, headers={}, proxies={}, verify=False)
 
     def _request_parse(self, method, *args):
         r = method(*args)
@@ -52,36 +53,36 @@ class Cisco_Api(object):
             raise
         return r.json()
 
-    def get_parse(self, uri, params={}):
+    def get_parse(self, uri, params={}, verify=False):
         """Convenience method to call get() on an arbitrary URI and parse the response
         into a JSON object. Raises an error on non-200 response status.
         """
-        return self._request_parse(self.get, uri, params)
+        return self._request_parse(self.get, uri, params, verify)
 
-    def post_parse(self, uri, params={}, data={}):
+    def post_parse(self, uri, params={}, data={}, verify=False):
         """Convenience method to call post() on an arbitrary URI and parse the response
         into a JSON object. Raises an error on non-200 response status.
         """
-        return self._request_parse(self.post, uri, params, data)
+        return self._request_parse(self.post, uri, params, data, verify)
 
-    def delete_parse(self, uri, params={}):
+    def delete_parse(self, uri, params={}, verify=False):
         """Convenience method to call post() on an arbitrary URI and parse the response
         into a JSON object. Raises an error on non-200 response status.
         """
-        r = self.delete(uri, params)
+        r = self.delete(uri, params, verify)
         return r.status_code
 
     def add_event(self, event):
         if type(event) is list:
-            return self.post_parse(self._uris["events"], {}, json.dumps(event))
+            return self.post_parse(self._uris["events"], {}, json.dumps(event), verify=False)
         else:
             raise Cisco_Api.EVENT_ERR
 
     def get_domains(self):
-        return self.get_parse(self._uris["domains"], {})
+        return self.get_parse(self._uris["domains"], {}, verify=False)
 
     def delete_domains_by_name(self, name):
-        return self.delete_parse(self._uris["domains"], {"where[name]": name})
+        return self.delete_parse(self._uris["domains"], {"where[name]": name}, verify=False)
 
     def delete_domains_by_id(self, id):
-        return self.delete_parse(self._uris["domains"] + "/" + str(id), {})
+        return self.delete_parse(self._uris["domains"] + "/" + str(id), {}, verify=False)

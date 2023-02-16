@@ -14,6 +14,10 @@ This plugin utilizes the [Cisco Umbrella Enforcement API](https://enforcement-ap
 
 * Cisco Umbrella Enforcement API key
 
+# Supported Product Versions
+
+_There are no supported product versions listed._
+
 # Documentation
 
 ## Setup
@@ -106,9 +110,9 @@ It accepts an array of JSON objects of the [Generic Event Format](https://docs.u
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|events|array|None|True|Array of JSON objects in generic event format. More info at https://docs.umbrella.com/developer/enforcement-api/generic-event-format2/|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|events|[]event|None|True|Generic event format field. More info at https://docs.umbrella.com/developer/enforcement-api/generic-event-format2/|None|None|
 
 Example input:
 
@@ -150,7 +154,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|id|string|True|Id of created event|
+|ID|[]string|True|List of added IDs|
 
 Example output:
 
@@ -193,7 +197,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -205,6 +209,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.0.2 - Bug fix: Fix 'Key not found' by setting SSL certificate verify to False 
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 0.1.1 - SSL bug fix in SDK

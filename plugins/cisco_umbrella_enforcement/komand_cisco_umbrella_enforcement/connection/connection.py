@@ -27,7 +27,7 @@ class Connection(komand.Connection):
         self.api = Cisco_Api(key)
         self.testConnection()
 
-    def testConnection(self):
+    def test_connection(self):
         try:
             self.api.get_domains()
         except Exception:
