@@ -16,11 +16,6 @@ class Util:
     def default_connector(action: insightconnect_plugin_runtime.Action):
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
-        # params = {
-        #     Input.APIKEY: {"secretKey": "api_key"},
-        #     Input.AUTHCODE: {"secretKey": "auth_code"},
-        #     Input.SUBDOMAIN: "example",
-        # }
         params = {
             "phone": "12345",
             "mobile_phone": "1234567",
@@ -29,7 +24,6 @@ class Util:
             "email": "example@user.com",
             "role": "Example role",
             "department": "Example department",
-
         }
         default_connection.connect(params)
         action.connection = default_connection
@@ -53,7 +47,6 @@ class Util:
     def mocked_requests(*args, **kwargs):
         class MockResponse:
             def __init__(self, filename: str, status_code: int):
-                print("DL DEBUG Mock requests init")
                 self.filename = filename
                 self.status_code = status_code
                 self.text = None
@@ -70,18 +63,52 @@ class Util:
             def raise_for_status(self):
                 pass
 
-        print("DLDEBUG In mocked requests function: kwards{}".format(kwargs))
-        if kwargs.get("url") == "https://api.samanage.com/incidents.json":
-            return MockResponse("list_incidents", 200)
+        if kwargs.get("url") == "https://api.samanage.com/users.json" and kwargs.get("verb") == "POST":
+            return MockResponse("create_user", 200)
+        if kwargs.get("url") == "https://api.samanage.com/users/5353.json" and kwargs.get("verb") == "DELETE":
+            return MockResponse("delete_user", 200)
         if kwargs.get("url") == "https://api.samanage.com/users.json":
             return MockResponse("list_users", 200)
+        if kwargs.get("url") == "https://api.samanage.com/attachments.json":
+            return MockResponse("attach_incident", 200)
+        if kwargs.get("url") == "https://api.samanage.com/incidents/11111.json":
+            return MockResponse("assign_incident", 200)
+        if kwargs.get("url") == "https://api.samanage.com/incidents.json" and kwargs.get("verb") == "POST":
+            return MockResponse("create_incident", 200)
+        if kwargs.get("url") == "https://api.samanage.com/incidents.json":
+            return MockResponse("list_incidents", 200)
+        if kwargs.get("url") == "https://api.samanage.com/incidents/55555.json":
+            return MockResponse("tag_incident", 200)
+        if kwargs.get("url") == "https://api.samanage.com/incidents/77777.json":
+            return MockResponse("change_incident_state", 200)
         if kwargs.get("url") == "https://api.samanage.com/incidents/12345.json":
             return MockResponse("get_incident", 200)
+        if (
+            kwargs.get("url") == "https://api.samanage.com/incidents/676767/comments.json"
+            and kwargs.get("verb") == "POST"
+        ):
+            return MockResponse("comment_incident", 200)
+        if kwargs.get("url") == "https://api.samanage.com/incidents/121212.json" and kwargs.get("verb") == "DELETE":
+            return MockResponse("delete_incident", 200)
         if kwargs.get("url") == "https://api.samanage.com/incidents/6789/comments.json":
             return MockResponse("get_comments", 200)
+
         raise Exception("Not implemented")
 
 
 def mock_request_200(*args, **kwargs):
+    # breakpoint()
+    return Util.mocked_requests(verb=args[0], url=args[1], status_code=200)
+
+
+def mock_request_curl(*args, **kwargs):
     breakpoint()
-    return Util.mocked_requests(url=args[1], status_code=200)
+    # return MockResponse("attach_incident", 200)
+    # return Util.mocked_requests(url="https://api.samanage.com/attachments.json", status_code=200)
+    response = json.loads(
+        Util.read_file_to_string(
+            os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/attach_incident.json.resp")
+        )
+    )
+
+    return response

@@ -1,24 +1,24 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+import json
+import logging
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_samanage.connection.connection import Connection
 from komand_samanage.actions.comment_incident import CommentIncident
-import json
-import logging
+from unit_test.util import Util, mock_request_200
+from unittest.mock import patch
+from parameterized import parameterized
 
 
+@patch("komand_samanage.util.api.request", side_effect=mock_request_200)
 class TestCommentIncident(TestCase):
-    def test_comment_incident(self):
-        """
-        DO NOT USE PRODUCTION/SENSITIVE DATA FOR UNIT TESTS
+    def setUp(self) -> None:
+        self.action = Util.default_connector(CommentIncident())
 
-        TODO: Implement test cases here
-
-        For information on mocking and unit testing please go here:
-
-        https://docs.google.com/document/d/1PifePDG1-mBcmNYE8dULwGxJimiRBrax5BIDG_0TFQI/edit?usp=sharing
-        """
-
-        self.fail("Unimplemented Test Case")
+    @parameterized.expand(Util.load_parameters("comment_incident").get("parameters"))
+    def test_change_incident_state(self, mock_request, incident_id, body, is_private, expected):
+        actual = self.action.run({"incident_id": incident_id, "body": body, "is_private": is_private})
+        self.assertEqual(actual, expected)

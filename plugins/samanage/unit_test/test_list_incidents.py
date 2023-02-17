@@ -13,13 +13,12 @@ from komand_samanage.connection.schema import Input
 from parameterized import parameterized
 
 
-@patch('komand_samanage.util.api.request', side_effect=mock_request_200)
+@patch("komand_samanage.util.api.request", side_effect=mock_request_200)
 class TestListIncidents(TestCase):
     def setUp(self) -> None:
         self.action = Util.default_connector(ListIncidents())
 
     @parameterized.expand(Util.load_parameters("list_incidents").get("parameters"))
     def test_list_incidents(self, mock_request, expected):
-
         actual = self.action.run()
         self.assertEqual(actual, expected)

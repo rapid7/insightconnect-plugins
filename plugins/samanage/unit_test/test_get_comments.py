@@ -2,7 +2,8 @@ import sys
 import os
 import json
 import logging
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_samanage.connection.connection import Connection
@@ -12,7 +13,7 @@ from unittest.mock import patch
 from parameterized import parameterized
 
 
-@patch('komand_samanage.util.api.request', side_effect=mock_request_200)
+@patch("komand_samanage.util.api.request", side_effect=mock_request_200)
 class TestGetComments(TestCase):
     def setUp(self) -> None:
         self.action = Util.default_connector(GetComments())
