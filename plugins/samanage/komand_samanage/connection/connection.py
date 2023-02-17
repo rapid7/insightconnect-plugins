@@ -26,4 +26,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Connect: Connection successful")
 
     def test(self):
-        self.api.list_incidents_check()
+        try:
+            self.api.list_incidents_check()
+            return {"success": True}
+        except Exception as error:
+            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data)
