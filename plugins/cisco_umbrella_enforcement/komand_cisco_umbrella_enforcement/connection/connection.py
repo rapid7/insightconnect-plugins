@@ -1,35 +1,38 @@
-import komand
-from .schema import ConnectionSchema
+import insightconnect_plugin_runtime
+import requests.exceptions
+
+from .schema import ConnectionSchema, Input
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
-from ..api import *
+import re
+from ..util.api import CiscoUmbrellaEnforcementAPI
 
 
-class Connection(komand.Connection):
+class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
+        self.client = None
 
     def connect(self, params={}):
         self.logger.info("Connect: Connecting..")
 
-        key = params.get("api_key").get("secretKey")
-        if not key:
-            self.logger.error("Connection: connect: Empty key")
-            raise Exception("Connection: connect: Empty key")
+        key = params.get(Input.API_KEY).get("secretKey")
 
-        key = key.lower()
+        # Do we really need this?
         p = re.compile("[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}")
         m = p.match(key)
         if not m:
-            self.logger.error("Connection: connect: Wrong key")
-            raise Exception("Connection: connect: Wrong key")
+            self.logger.error("Invalid Key")
+            raise PluginException(cause="Invalid key.", assistance="Key did not match the correct format.")
 
-        self.api = Cisco_Api(key)
-        self.testConnection()
+        ssl_verify = params.get(Input.SSL_VERIFY)
+
+        self.client = CiscoUmbrellaEnforcementAPI(key, ssl_verify)
 
     def test_connection(self):
         try:
-            self.api.get_domains()
-        except Exception:
-            self.logger.error("Connection: connect: Wrong key")
-            raise Exception("Connection: connect: Wrong key")
+            self.client.get_domains()
+            return {"success": True}
+        except requests.exceptions.SSLError as error:
+            raise PluginException(cause=error, assistance="Set SSL verify to False or provide a valid certificate.")

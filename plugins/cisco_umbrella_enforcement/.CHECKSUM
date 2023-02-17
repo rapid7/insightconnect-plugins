@@ -1,27 +1,63 @@
 {
-	"spec": "f23e4286db0638ed5bbf1154de19942d",
-	"manifest": "3095e2998ee6c7b163329fd0a5354826",
-	"setup": "e94556070c72878153d56676d9e06db3",
+	"spec": "6533244f359e85e8f1d81eec1be6561f",
+	"manifest": "82366f770fb615a259bf534fc6c92e66",
+	"setup": "5578149691a0835246da519eb9a01818",
 	"schemas": [
 		{
 			"identifier": "add_event/schema.py",
-			"hash": "158e2d76bb0af89d327957ee880b12d4"
+			"hash": "4df0783a71ee32c661a316fd329badda"
 		},
 		{
 			"identifier": "delete_domain_by_id/schema.py",
-			"hash": "864a658253e6978f5cf8ce39fa00a98e"
+			"hash": "fc6a3bee0e798e0c3f6d2111e72a9eb0"
 		},
 		{
 			"identifier": "delete_domain_by_name/schema.py",
-			"hash": "8fa1e43343389cb11bc2f0fd26795c40"
+			"hash": "d8031df764a8e19f2cf923b01e7fe6a3"
 		},
 		{
 			"identifier": "domains/schema.py",
-			"hash": "a4142bba80d7ce153fa69e2ca4e880c8"
+			"hash": "f6840c2cd169403726174aa7755ade75"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "bc1f9bcd1c75c53f576552c10c9b91cf"
+			"hash": "6257e56bfbb4ff716f15107670da078b"
+		},
+		{
+			"identifier": "insightconnect_plugin_runtime/schema.py",
+			"hash": "98e2cf8bf394d0b6f97cdfeb657ea71b"
+		},
+		{
+			"identifier": "marshmallow/schema.py",
+			"hash": "7c9fc22caa77ab8be9957e79867f426a"
+		},
+		{
+			"identifier": "hello/schema.py",
+			"hash": "92ec4b966e523fe43b8d3e1589ecd235"
+		},
+		{
+			"identifier": "return_bad_json/schema.py",
+			"hash": "bb41c13e9e71e212c1545150a16f8b73"
+		},
+		{
+			"identifier": "throw_exception/schema.py",
+			"hash": "7cdacec63e0eaeefc7f0adc5ebbae8ce"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "f1bf7d508c81c245888665a322d984e8"
+		},
+		{
+			"identifier": "hello_trigger/schema.py",
+			"hash": "6fda62f9b28a899e2ecb7aab1311bbb2"
+		},
+		{
+			"identifier": "return_bad_json_trigger/schema.py",
+			"hash": "9a207816ba5b0ab0f9e4f40d86c4cc3e"
+		},
+		{
+			"identifier": "throw_exception_trigger/schema.py",
+			"hash": "23e4aee31e1c532d9ed50830efad1b8d"
 		}
 	]
 }

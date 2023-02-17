@@ -145,6 +145,12 @@ connection:
     type: credential_secret_key
     description: Enter API key e.g. 1111-2222-3333-4444
     required: true
+  ssl_verify:
+    title: SSL Verify
+    description: Boolean value to indicate whether to add SSL verify to requests
+    type: boolean
+    required: True
+    default: False
 actions:
   add_event:
     title: Add Event

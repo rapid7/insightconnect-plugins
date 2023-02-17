@@ -24,11 +24,15 @@ _There are no supported product versions listed._
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|Enter API key e.g. 1111-2222-3333-4444|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|True|Enter API key e.g. 1111-2222-3333-4444|None|None|
+|ssl_verify|boolean|False|True|Boolean value to indicate whether to add SSL verify to requests|None|None|
 
-The API key is a UUID-v4 [Customer key](https://docs.umbrella.com/developer/enforcement-api/authentication-and-versioning/).
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -46,8 +50,8 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|meta|meta|True|The meta array shows which page of results is available, the number of results and next and previous available pages to query|
 |data|[]data|True|The data array contains the domains in the domain list, along with a unique ID number for each domain|
+|meta|meta|True|The meta array shows which page of results is available, the number of results and next and previous available pages to query|
 
 Example output:
 
@@ -83,15 +87,20 @@ The delete comand should include the numerical identifier (ID) as specified in t
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|domain|string|None|True|Domain name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|domain|string|None|True|Domain name|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|True|Action status [success \| error]|
+|status|string|True|Action status [success | error]|
 
 Example output:
 
@@ -117,37 +126,6 @@ It accepts an array of JSON objects of the [Generic Event Format](https://docs.u
 Example input:
 
 ```
-
-[{
-    "dstURL": "http://internetbadguys.bad-v5.com/a-bad-url-v1",
-    "alertTime": "2013-02-09T11:14:26.0Z",
-    "ID": "ba6a59f4-e692-4724-ba36-c28132c761de",
-    "deviceVersion": "13.7a",
-    "dstDomain": "internetbadguys.bad-v5.com",
-    "eventTime": "2013-02-09T09:30:26.0Z",
-    "protocolVersion": "1.0a",
-    "providerName": "Security Platform",
-    "disableDstSafeguards": true,
-    "eventHash": "e88b372b1f98882dca933fa8a2589670",
-    "fileName": "https://www.fuw.edu.pl/~rwys/pk/notatki_cl.txt",
-    "fileHash": "da89127fbe1d78313dbfff610b59ff24874bb983",
-    "externalURL": "https://www.fuw.edu.pl/~rwys/pk/notatki_cl.txt",
-    "src": "192.168.0.1",
-    "eventSeverity": "severe",
-    "eventType": "severe",
-    "eventDescription": "Some another threat"
-  },
-  {
-    "dstURL": "http://internetbadguys.bad-v6.com/a-bad-url-v2",
-    "alertTime": "2013-02-10T11:14:26.0Z",
-    "ID": "ba6a59f4-e692-4724-ba36-c28132c761de",
-    "deviceVersion": "13.7a",
-    "dstDomain": "internetbadguys.bad-v6.com",
-    "eventTime": "2013-02-10T09:30:26.0Z",
-    "protocolVersion": "1.0a",
-    "providerName": "Security Platform"
- }]
-
 ```
 
 ##### Output
@@ -175,15 +153,20 @@ The delete comand should include the numerical identifier (ID) as specified in t
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|ID|integer|None|True|Unique ID number of domain|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ID|integer|None|True|Unique ID number of domain|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|True|Action status [success \| error]|
+|status|string|True|Action status [success | error]|
 
 Example output:
 
