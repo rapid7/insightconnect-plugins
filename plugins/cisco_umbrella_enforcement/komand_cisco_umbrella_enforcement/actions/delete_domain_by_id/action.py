@@ -17,7 +17,7 @@ class DeleteDomainById(insightconnect_plugin_runtime.Action):
         ID = params.get("ID")
 
         try:
-            status_code = self.connection.api.delete_domains_by_id(ID)
+            status_code = self.connection.client.delete_domains_by_id(ID)
             self.logger.info(status_code)
         except Exception:
             self.logger.error("DeleteDomainById: run: Problem with request")

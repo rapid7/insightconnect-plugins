@@ -29,7 +29,7 @@ class AddEvent(insightconnect_plugin_runtime.Action):
             events.append(event)
 
         try:
-            dictIds = self.connection.api.add_event(events)
+            dictIds = self.connection.client.add_event(events)
         except Exception:
             self.logger.error("AddEvent: run: Problem with request")
             raise Exception("AddEvent: run: Problem with request")
