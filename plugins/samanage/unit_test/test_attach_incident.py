@@ -8,7 +8,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase
 from komand_samanage.connection.connection import Connection
 from komand_samanage.actions.attach_incident import AttachIncident
-from unit_test.util import Util, mock_request_200, mock_request_curl
+from unit_test.util import Util, mock_request_200
 from unittest.mock import patch, Mock
 from parameterized import parameterized
 

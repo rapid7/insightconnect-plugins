@@ -97,18 +97,5 @@ class Util:
 
 
 def mock_request_200(*args, **kwargs):
-    # breakpoint()
     return Util.mocked_requests(verb=args[0], url=args[1], status_code=200)
 
-
-def mock_request_curl(*args, **kwargs):
-    breakpoint()
-    # return MockResponse("attach_incident", 200)
-    # return Util.mocked_requests(url="https://api.samanage.com/attachments.json", status_code=200)
-    response = json.loads(
-        Util.read_file_to_string(
-            os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/attach_incident.json.resp")
-        )
-    )
-
-    return response
