@@ -98,4 +98,3 @@ class Util:
 
 def mock_request_200(*args, **kwargs):
     return Util.mocked_requests(verb=args[0], url=args[1], status_code=200)
-
