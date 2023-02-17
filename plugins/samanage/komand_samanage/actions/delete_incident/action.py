@@ -24,6 +24,3 @@ class DeleteIncident(insightconnect_plugin_runtime.Action):
             success = False
 
         return {"success": success}
-
-    def test(self):
-        return {"success": True}

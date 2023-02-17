@@ -46,8 +46,6 @@ class SamanageAPI:
         self.token = token
         self.logger = logger
         self.api_url = "https://apieu.samanage.com/" if is_eu_customer else "https://api.samanage.com/"
-        # Test the connection
-        self.list_incidents_check()
 
     def list_incidents_check(self):
         # This function is to check that an API call can be successfully made  - no cleaning of the output is required
@@ -56,7 +54,7 @@ class SamanageAPI:
 
     def list_incidents(self):
         response = self._call_api("GET", "incidents")
-        # Update response data to change ids to strings if necessary
+        # Update response data to change ids to integers if necessary
         for item in response:
             update_id_values_to_integers(item)
         return response
@@ -65,7 +63,7 @@ class SamanageAPI:
         url = "incidents/{}".format(incident_id)
 
         response = self._call_api("GET", url, params={"layout": "long", "audit_archive": True})
-        # Update response data to change ids to strings if necessary
+        # Update response data to change ids to integers if necessary
         update_id_values_to_integers(response)
         return response
 
@@ -73,7 +71,7 @@ class SamanageAPI:
         url = "incidents/{}".format(incident_id)
         json = {"incident": {"add_to_tag_list": ", ".join(tags)}}
         response = self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
-        # Update response data to change ids to strings if necessary
+        # Update response data to change ids to integers if necessary
         update_id_values_to_integers(response)
         return response
 
@@ -108,7 +106,7 @@ class SamanageAPI:
         }
         json = insightconnect_plugin_runtime.helper.clean(json)
         response = self._call_api("POST", url, json=json, params={"layout": "long", "audit_archive": True})
-        # Update response data to change ids to strings if necessary
+        # Update response data to change ids to integers if necessary
         update_id_values_to_integers(response)
         return response
 
@@ -121,7 +119,7 @@ class SamanageAPI:
         json = {"comment": {"body": body, "is_private": is_private}}
 
         response = self._call_api("POST", url, json=json)
-        # Update response data to change ids to strings if necessary
+        # Update response data to change ids to integers if necessary
         update_id_values_to_integers(response)
         return response
 
@@ -129,8 +127,7 @@ class SamanageAPI:
         url = "incidents/{}/comments".format(incident_id)
 
         response = self._call_api("GET", url)
-
-        # Update response data to change ids to strings if necessary
+        # Update response data to change ids to integers if necessary
         for value in response:
             update_id_values_to_integers(value)
         return response
@@ -140,7 +137,7 @@ class SamanageAPI:
 
         json = {"incident": {"assignee": {"email": assignee}}}
         response = self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
-        # Update response data to change ids to strings if necessary
+        # Update response data to change ids to integers if necessary
         update_id_values_to_integers(response)
         return response
 
@@ -149,7 +146,7 @@ class SamanageAPI:
 
         json = {"incident": {"state": state}}
         response = self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
-        # Update response data to change ids to strings if necessary
+        # Update response data to change ids to integers if necessary
         update_id_values_to_integers(response)
         return response
 
@@ -172,7 +169,6 @@ class SamanageAPI:
                 "-X POST {}attachments.json"
             ).format(self.token, incident_id, file_path, self.api_url)
             result = insightconnect_plugin_runtime.helper.exec_command(curl_command)
-
             shutil.rmtree(temp_dir)
         except Exception as e:
             raise PluginException(
@@ -198,7 +194,7 @@ class SamanageAPI:
 
     def list_users(self):
         response = self._call_api("GET", "users")
-        # Update response data to change ids to strings if necessary
+        # Update response data to change ids to integers if necessary
         for item in response:
             update_id_values_to_integers(item)
         return response
@@ -216,7 +212,7 @@ class SamanageAPI:
         }
         json = insightconnect_plugin_runtime.helper.clean(json)
         response = self._call_api("POST", "users", json=json)
-        # Update response data to change ids to strings if necessary
+        # Update response data to change ids to integers if necessary
         update_id_values_to_integers(response)
         return response
 
