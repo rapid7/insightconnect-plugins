@@ -5,8 +5,6 @@ import logging
 
 sys.path.append(os.path.abspath("../"))
 
-sys.path.append(os.path.abspath("../"))
-
 from unittest import TestCase
 from komand_samanage.connection.connection import Connection
 from komand_samanage.actions.create_user import CreateUser
