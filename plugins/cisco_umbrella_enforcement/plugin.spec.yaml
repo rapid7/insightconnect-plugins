@@ -183,7 +183,7 @@ actions:
       ID:
         title: ID List
         description: List of added IDs
-        type: '[]string'
+        type: object
         required: true
   domains:
     title: List Domains

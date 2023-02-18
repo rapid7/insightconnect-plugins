@@ -174,12 +174,9 @@ class AddEventOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "ID": {
-      "type": "array",
+      "type": "object",
       "title": "ID List",
       "description": "List of added IDs",
-      "items": {
-        "type": "string"
-      },
       "order": 1
     }
   },

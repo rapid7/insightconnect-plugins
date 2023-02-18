@@ -16,11 +16,6 @@ class AddEvent(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         domains = params.get(Input.EVENTS)
 
-
         response = self.connection.client.add_event(domains)
-        print(f"DICT IDS: {response}")
-        ids = []
-        for key, value in response.items():
-            ids.append(value)
-        print(f"IDS: {ids}")
-        return {Output.ID: ids}
+
+        return {Output.ID: response}

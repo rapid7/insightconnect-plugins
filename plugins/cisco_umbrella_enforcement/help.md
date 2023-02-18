@@ -134,7 +134,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|ID|[]string|True|List of added IDs|
+|ID|object|True|List of added IDs|
 
 Example output:
 

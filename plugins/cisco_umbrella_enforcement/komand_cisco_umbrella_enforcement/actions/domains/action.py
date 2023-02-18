@@ -16,4 +16,5 @@ class Domains(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
 
         domains = self.connection.client.get_domains()
+
         return {Output.DOMAINS: domains}
