@@ -17,7 +17,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "api_key": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "API Key",
-      "description": "Enter API key e.g. 1111-2222-3333-4444",
+      "description": "Cisco Umbrella Management API key",
       "order": 1
     },
     "ssl_verify": {

@@ -8,7 +8,7 @@ class Component:
 
 
 class Input:
-    DOMAIN = "domain"
+    NAME = "name"
     
 
 class Output:
@@ -21,7 +21,7 @@ class DeleteDomainByNameInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "domain": {
+    "name": {
       "type": "string",
       "title": "Domain",
       "description": "Domain name",
@@ -29,7 +29,7 @@ class DeleteDomainByNameInput(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "domain"
+    "name"
   ]
 }
     """)

@@ -26,12 +26,15 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|Enter API key e.g. 1111-2222-3333-4444|None|None|
+|api_key|credential_secret_key|None|True|Cisco Umbrella Management API key|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |ssl_verify|boolean|False|True|Boolean value to indicate whether to add SSL verify to requests|None|None|
 
 Example input:
 
 ```
+{
+  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0"
+}
 ```
 
 ## Technical Details
@@ -50,8 +53,7 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|data|[]data|True|The data array contains the domains in the domain list, along with a unique ID number for each domain|
-|meta|meta|True|The meta array shows which page of results is available, the number of results and next and previous available pages to query|
+|domains|domains|True|Array containing domains in the domain list|
 
 Example output:
 
@@ -89,7 +91,7 @@ The delete comand should include the numerical identifier (ID) as specified in t
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|domain|string|None|True|Domain name|None|None|
+|name|string|None|True|Domain name|None|None|
 
 Example input:
 

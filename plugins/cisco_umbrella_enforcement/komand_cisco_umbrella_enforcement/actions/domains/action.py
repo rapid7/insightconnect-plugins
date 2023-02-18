@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import DomainsInput, DomainsOutput
+from .schema import DomainsInput, DomainsOutput, Input, Output
 
 # Custom imports below
 
@@ -14,22 +14,19 @@ class Domains(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        try:
-            requestDomains = self.connection.client.get_domains()
-        except Exception:
-            self.logger.error("Domains: run: Problem with request")
-            raise Exception("Domains: run: Problem with request")
-        datas = requestDomains.get("data")
-        meta = requestDomains.get("meta")
+        request_domains = self.connection.client.get_domains()
+
+        datas = request_domains.get("data")
+        meta = request_domains.get("meta")
         domains = {"meta": {}, "data": []}
 
         domains["meta"]["limit"] = meta.get("limit")
         domains["meta"]["page"] = meta.get("page")
 
-        if meta.get("next") == False:
+        if not meta.get("next"):
             meta["next"] = "false"
 
-        if meta.get("prev") == False:
+        if not meta.get("prev"):
             meta["prev"] = "false"
 
         domains["meta"] = meta
@@ -43,7 +40,4 @@ class Domains(insightconnect_plugin_runtime.Action):
                 }
             )
 
-        return domains
-
-    def test(self):
-        return {"meta": {"next": "", "prev": "", "limit": 0, "page": 0}, "data": []}
+        return {Output.DOMAINS: domains}

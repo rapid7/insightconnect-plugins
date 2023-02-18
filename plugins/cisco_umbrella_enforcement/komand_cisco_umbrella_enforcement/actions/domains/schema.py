@@ -11,8 +11,7 @@ class Input:
     pass
 
 class Output:
-    DATA = "data"
-    META = "meta"
+    DOMAINS = "domains"
     
 
 class DomainsInput(insightconnect_plugin_runtime.Input):
@@ -30,25 +29,15 @@ class DomainsOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "data": {
-      "type": "array",
+    "domains": {
+      "$ref": "#/definitions/domains",
       "title": "Domain List Query Results",
-      "description": "The data array contains the domains in the domain list, along with a unique ID number for each domain",
-      "items": {
-        "$ref": "#/definitions/data"
-      },
-      "order": 2
-    },
-    "meta": {
-      "$ref": "#/definitions/meta",
-      "title": "Meta",
-      "description": "The meta array shows which page of results is available, the number of results and next and previous available pages to query",
+      "description": "Array containing domains in the domain list",
       "order": 1
     }
   },
   "required": [
-    "data",
-    "meta"
+    "domains"
   ],
   "definitions": {
     "data": {
@@ -62,7 +51,7 @@ class DomainsOutput(insightconnect_plugin_runtime.Output):
           "order": 1
         },
         "lastSeenAt": {
-          "type": "string",
+          "type": "integer",
           "title": "Last seen malware",
           "description": "Unix timestamp last seen",
           "order": 3
@@ -79,6 +68,98 @@ class DomainsOutput(insightconnect_plugin_runtime.Output):
         "lastSeenAt",
         "name"
       ]
+    },
+    "domains": {
+      "type": "object",
+      "title": "domains",
+      "properties": {
+        "data": {
+          "type": "array",
+          "title": "Data",
+          "description": "List of domains",
+          "items": {
+            "$ref": "#/definitions/data"
+          },
+          "order": 1
+        },
+        "meta": {
+          "$ref": "#/definitions/meta",
+          "title": "Meta",
+          "description": "Meta Data",
+          "order": 2
+        }
+      },
+      "required": [
+        "data",
+        "meta"
+      ],
+      "definitions": {
+        "data": {
+          "type": "object",
+          "title": "data",
+          "properties": {
+            "ID": {
+              "type": "integer",
+              "title": "ID",
+              "description": "Unique ID number",
+              "order": 1
+            },
+            "lastSeenAt": {
+              "type": "integer",
+              "title": "Last seen malware",
+              "description": "Unix timestamp last seen",
+              "order": 3
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "Domain name",
+              "order": 2
+            }
+          },
+          "required": [
+            "ID",
+            "lastSeenAt",
+            "name"
+          ]
+        },
+        "meta": {
+          "type": "object",
+          "title": "meta",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "title": "Limit",
+              "description": "The number of results",
+              "order": 2
+            },
+            "next": {
+              "type": "string",
+              "title": "Next",
+              "description": "If next is false, this is the last available page of results. Otherwise, it will provide a query formatted to show the next set of results",
+              "order": 4
+            },
+            "page": {
+              "type": "integer",
+              "title": "Page",
+              "description": "The page of results is available",
+              "order": 1
+            },
+            "prev": {
+              "type": "string",
+              "title": "Prev",
+              "description": "If prev is false, this is the first available page of results. Otherwise, it will provide a query formatted to show the next set of results",
+              "order": 3
+            }
+          },
+          "required": [
+            "limit",
+            "next",
+            "page",
+            "prev"
+          ]
+        }
+      }
     },
     "meta": {
       "type": "object",

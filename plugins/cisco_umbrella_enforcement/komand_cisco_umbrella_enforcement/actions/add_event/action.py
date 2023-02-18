@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import AddEventInput, AddEventOutput
+from .schema import AddEventInput, AddEventOutput, Input, Output
 
 # Custom imports below
 
@@ -14,7 +14,7 @@ class AddEvent(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        domains = params.get("events")
+        domains = params.get(Input.EVENTS)
         events = []
 
         for event in domains:
@@ -38,7 +38,4 @@ class AddEvent(insightconnect_plugin_runtime.Action):
         for key, value in dictIds.items():
             ids.append(value)
 
-        return {"ID": ids}
-
-    def test(self):
-        return {"ID": []}
+        return {Output.ID: ids}
