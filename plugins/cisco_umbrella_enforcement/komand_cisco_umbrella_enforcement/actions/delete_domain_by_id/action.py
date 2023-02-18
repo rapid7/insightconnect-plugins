@@ -1,6 +1,5 @@
 import insightconnect_plugin_runtime
 from .schema import DeleteDomainByIdInput, DeleteDomainByIdOutput, Input, Output
-from insightconnect_plugin_runtime.helper import clean
 
 # Custom imports below
 
@@ -18,6 +17,4 @@ class DeleteDomainById(insightconnect_plugin_runtime.Action):
         ID = params.get(Input.ID)
 
         result = self.connection.client.delete_event(domain_id=ID)
-        result = clean(result)
-
         return {Output.STATUS: result}

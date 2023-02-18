@@ -7,9 +7,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 class CiscoUmbrellaEnforcementAPI:
     VERSION = "1.0"
 
-    EVENT_ERR = ValueError("Event must be list")
-    REQUIRED_ERR = ValueError("Some required values are missing")
-
     def __init__(self, customer_key, verify):
         self._uris = {"events": "events", "domains": "domains"}
         self.verify = verify
@@ -36,7 +33,7 @@ class CiscoUmbrellaEnforcementAPI:
         Method to make a DELETE request to delete a domain either by name or ID.
         :param name: Name of the domain
         :param domain_id: ID for the domain
-        :return:
+        :return: Status code
         """
         if name and domain_id:
             raise PluginException(
@@ -78,50 +75,10 @@ class CiscoUmbrellaEnforcementAPI:
             raise PluginException(preset=PluginException.Preset.NOT_FOUND)
         if response.status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR)
-        if 200 <= response.status_code < 300:
-            return response.json()
-
-    # def post(self, uri, params={}, data={}):
-    #     """A generic method to make POST requests to the OpenDNS Enforcement API on the given URI."""
-    #     params["customerKey"] = self.customer_key
-    #     return requests.post(
-    #         urljoin(self.url, uri),
-    #         params=params,
-    #         data=data,
-    #         headers={"Content-Type": "application/json"},
-    #         verify=self.verify,
-    #     )
-
-    # def _request_parse(self, method, *args):
-    #     r = method(*args)
-    #     try:
-    #         r.raise_for_status()
-    #     except Exception as err:
-    #         err.args = (
-    #             re.sub(
-    #                 r"customerKey=[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}",
-    #                 "customerKey=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-    #                 err.args[0],
-    #             ),
-    #         )
-    #         raise
-    #     return r.json()
-
-    # def post_parse(self, uri, params={}, data={}):
-    #     """Convenience method to call post() on an arbitrary URI and parse the response
-    #     into a JSON object. Raises an error on non-200 response status.
-    #     """
-    #     return self._request_parse(self.post, uri, params, data)
-    #
-    # def delete_parse(self, uri, params={}):
-    #     """Convenience method to call post() on an arbitrary URI and parse the response
-    #     into a JSON object. Raises an error on non-200 response status.
-    #     """
-    #     r = self.delete(uri, params)
-    #     return r.status_code
-
-    # def add_event(self, event):
-    #     if type(event) is list:
-    #         return self.post_parse(self._uris["events"], {}, json.dumps(event))
-    #     else:
-    #         raise CiscoUmbrellaEnforcementAPI.EVENT_ERR
+        # The try/except is to handle calls for the delete methods, since they return
+        # 204 status code with no data, which fails on response.json()
+        try:
+            if 200 <= response.status_code < 300:
+                return response.json()
+        except json.decoder.JSONDecodeError:
+            return response.text

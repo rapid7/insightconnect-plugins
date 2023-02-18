@@ -5,7 +5,6 @@ from .schema import ConnectionSchema, Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
-import re
 from ..util.api import CiscoUmbrellaEnforcementAPI
 
 
