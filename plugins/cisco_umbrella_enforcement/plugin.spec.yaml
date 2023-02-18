@@ -167,8 +167,8 @@ connection:
     title: SSL Verify
     description: Boolean value to indicate whether to add SSL verify to requests
     type: boolean
-    required: True
-    default: False
+    required: true
+    default: true
 actions:
   add_event:
     title: Add Event
@@ -203,6 +203,7 @@ actions:
         type: integer
         title: ID
         description: Unique ID number of domain
+        example: 1234567
         required: true
     output:
       status:
@@ -218,6 +219,7 @@ actions:
         type: string
         title: Domain
         description: Domain name
+        example: internetbadguys.bad-v5.com
         required: true
     output:
       status:

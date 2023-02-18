@@ -24,7 +24,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "boolean",
       "title": "SSL Verify",
       "description": "Boolean value to indicate whether to add SSL verify to requests",
-      "default": false,
+      "default": true,
       "order": 2
     }
   },
