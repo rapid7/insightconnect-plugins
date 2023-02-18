@@ -36,19 +36,16 @@ class DomainsOutput(insightconnect_plugin_runtime.Output):
       "order": 1
     }
   },
-  "required": [
-    "domains"
-  ],
   "definitions": {
     "data": {
       "type": "object",
       "title": "data",
       "properties": {
-        "ID": {
+        "id": {
           "type": "integer",
-          "title": "ID",
+          "title": "Id",
           "description": "Unique ID number",
-          "order": 1
+          "order": 2
         },
         "lastSeenAt": {
           "type": "integer",
@@ -56,18 +53,62 @@ class DomainsOutput(insightconnect_plugin_runtime.Output):
           "description": "Unix timestamp last seen",
           "order": 3
         },
+        "meta": {
+          "$ref": "#/definitions/meta",
+          "title": "Meta",
+          "description": "ejejeje",
+          "order": 4
+        },
         "name": {
           "type": "string",
           "title": "Name",
           "description": "Domain name",
-          "order": 2
+          "order": 1
         }
       },
       "required": [
-        "ID",
+        "id",
         "lastSeenAt",
         "name"
-      ]
+      ],
+      "definitions": {
+        "meta": {
+          "type": "object",
+          "title": "meta",
+          "properties": {
+            "limit": {
+              "type": "integer",
+              "title": "Limit",
+              "description": "The number of results",
+              "order": 2
+            },
+            "next": {
+              "type": "boolean",
+              "title": "Next",
+              "description": "If next is false, this is the last available page of results. Otherwise, it will provide a query formatted to show the next set of results",
+              "order": 4
+            },
+            "page": {
+              "type": "integer",
+              "title": "Page",
+              "description": "The page of results is available",
+              "order": 1
+            },
+            "prev": {
+              "type": "boolean",
+              "title": "Prev",
+              "description": "If prev is false, this is the first available page of results. Otherwise, it will provide a query formatted to show the next set of results",
+              "order": 3
+            }
+          },
+          "required": [
+            "limit",
+            "next",
+            "page",
+            "prev"
+          ]
+        }
+      }
     },
     "domains": {
       "type": "object",
@@ -80,13 +121,13 @@ class DomainsOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "$ref": "#/definitions/data"
           },
-          "order": 1
+          "order": 2
         },
         "meta": {
           "$ref": "#/definitions/meta",
           "title": "Meta",
           "description": "Meta Data",
-          "order": 2
+          "order": 1
         }
       },
       "required": [
@@ -98,11 +139,11 @@ class DomainsOutput(insightconnect_plugin_runtime.Output):
           "type": "object",
           "title": "data",
           "properties": {
-            "ID": {
+            "id": {
               "type": "integer",
-              "title": "ID",
+              "title": "Id",
               "description": "Unique ID number",
-              "order": 1
+              "order": 2
             },
             "lastSeenAt": {
               "type": "integer",
@@ -110,18 +151,62 @@ class DomainsOutput(insightconnect_plugin_runtime.Output):
               "description": "Unix timestamp last seen",
               "order": 3
             },
+            "meta": {
+              "$ref": "#/definitions/meta",
+              "title": "Meta",
+              "description": "ejejeje",
+              "order": 4
+            },
             "name": {
               "type": "string",
               "title": "Name",
               "description": "Domain name",
-              "order": 2
+              "order": 1
             }
           },
           "required": [
-            "ID",
+            "id",
             "lastSeenAt",
             "name"
-          ]
+          ],
+          "definitions": {
+            "meta": {
+              "type": "object",
+              "title": "meta",
+              "properties": {
+                "limit": {
+                  "type": "integer",
+                  "title": "Limit",
+                  "description": "The number of results",
+                  "order": 2
+                },
+                "next": {
+                  "type": "boolean",
+                  "title": "Next",
+                  "description": "If next is false, this is the last available page of results. Otherwise, it will provide a query formatted to show the next set of results",
+                  "order": 4
+                },
+                "page": {
+                  "type": "integer",
+                  "title": "Page",
+                  "description": "The page of results is available",
+                  "order": 1
+                },
+                "prev": {
+                  "type": "boolean",
+                  "title": "Prev",
+                  "description": "If prev is false, this is the first available page of results. Otherwise, it will provide a query formatted to show the next set of results",
+                  "order": 3
+                }
+              },
+              "required": [
+                "limit",
+                "next",
+                "page",
+                "prev"
+              ]
+            }
+          }
         },
         "meta": {
           "type": "object",
@@ -134,7 +219,7 @@ class DomainsOutput(insightconnect_plugin_runtime.Output):
               "order": 2
             },
             "next": {
-              "type": "string",
+              "type": "boolean",
               "title": "Next",
               "description": "If next is false, this is the last available page of results. Otherwise, it will provide a query formatted to show the next set of results",
               "order": 4
@@ -146,7 +231,7 @@ class DomainsOutput(insightconnect_plugin_runtime.Output):
               "order": 1
             },
             "prev": {
-              "type": "string",
+              "type": "boolean",
               "title": "Prev",
               "description": "If prev is false, this is the first available page of results. Otherwise, it will provide a query formatted to show the next set of results",
               "order": 3
@@ -172,7 +257,7 @@ class DomainsOutput(insightconnect_plugin_runtime.Output):
           "order": 2
         },
         "next": {
-          "type": "string",
+          "type": "boolean",
           "title": "Next",
           "description": "If next is false, this is the last available page of results. Otherwise, it will provide a query formatted to show the next set of results",
           "order": 4
@@ -184,7 +269,7 @@ class DomainsOutput(insightconnect_plugin_runtime.Output):
           "order": 1
         },
         "prev": {
-          "type": "string",
+          "type": "boolean",
           "title": "Prev",
           "description": "If prev is false, this is the first available page of results. Otherwise, it will provide a query formatted to show the next set of results",
           "order": 3

@@ -53,7 +53,7 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|domains|domains|True|Array containing domains in the domain list|
+|domains|domains|False|Array containing domains in the domain list|
 
 Example output:
 

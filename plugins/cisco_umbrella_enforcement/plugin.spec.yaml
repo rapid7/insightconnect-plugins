@@ -116,37 +116,41 @@ types:
       description: The number of results
       required: true
     prev:
-      type: string
+      type: boolean
       description: If prev is false, this is the first available page of results.
         Otherwise, it will provide a query formatted to show the next set of results
       required: true
     next:
-      type: string
+      type: boolean
       description: If next is false, this is the last available page of results. Otherwise,
         it will provide a query formatted to show the next set of results
       required: true
   data:
-    ID:
-      type: integer
-      description: Unique ID number
-      required: true
     name:
       type: string
       description: Domain name
+      required: true
+    id:
+      type: integer
+      description: Unique ID number
       required: true
     lastSeenAt:
       type: integer
       title: Last seen malware
       description: Unix timestamp last seen
       required: true
+    meta:
+      type: meta
+      description: ejejeje
+      required: false
   domains:
-    data:
-      type: '[]data'
-      description: List of domains
-      required: true
     meta:
       type: meta
       description: Meta Data
+      required: true
+    data:
+      type: '[]data'
+      description: List of domains
       required: true
 connection:
   api_key:
@@ -186,7 +190,7 @@ actions:
         title: Domain List Query Results
         description: Array containing domains in the domain list
         type: domains
-        required: true
+        required: false
   delete_domain_by_id:
     title: Delete Domain by ID
     description: Delete domain from user domain list by ID

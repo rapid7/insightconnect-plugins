@@ -28,14 +28,10 @@ class AddEvent(insightconnect_plugin_runtime.Action):
 
             events.append(event)
 
-        try:
-            dictIds = self.connection.client.add_event(events)
-        except Exception:
-            self.logger.error("AddEvent: run: Problem with request")
-            raise Exception("AddEvent: run: Problem with request")
+        dict_ids = self.connection.client.add_event(events)
 
         ids = []
-        for key, value in dictIds.items():
+        for key, value in dict_ids.items():
             ids.append(value)
 
         return {Output.ID: ids}

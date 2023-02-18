@@ -14,30 +14,30 @@ class Domains(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        request_domains = self.connection.client.get_domains()
+        domains = self.connection.client.get_domains()
 
-        datas = request_domains.get("data")
-        meta = request_domains.get("meta")
-        domains = {"meta": {}, "data": []}
-
-        domains["meta"]["limit"] = meta.get("limit")
-        domains["meta"]["page"] = meta.get("page")
-
-        if not meta.get("next"):
-            meta["next"] = "false"
-
-        if not meta.get("prev"):
-            meta["prev"] = "false"
-
-        domains["meta"] = meta
-
-        for data in datas:
-            domains["data"].append(
-                {
-                    "ID": data.get("id"),
-                    "name": data.get("name"),
-                    "lastSeenAt": data.get("lastSeenAt"),
-                }
-            )
-
+        data = domains.get("data")
+        meta = domains.get("meta")
+        # domains = {"meta": {}, "data": []}
+        #
+        # domains["meta"]["limit"] = meta.get("limit")
+        # domains["meta"]["page"] = meta.get("page")
+        #
+        # if not meta.get("next"):
+        #     meta["next"] = "false"
+        #
+        # if not meta.get("prev"):
+        #     meta["prev"] = "false"
+        #
+        # domains["meta"] = meta
+        #
+        # for data in datas:
+        #     domains["data"].append(
+        #         {
+        #             "ID": data.get("id"),
+        #             "name": data.get("name"),
+        #             "lastSeenAt": data.get("lastSeenAt"),
+        #         }
+        #     )
+        print(f"DOMAINS: {domains}")
         return {Output.DOMAINS: domains}
