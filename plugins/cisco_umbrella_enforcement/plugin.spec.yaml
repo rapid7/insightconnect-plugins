@@ -168,6 +168,7 @@ connection:
     description: Boolean value to indicate whether to add SSL verify to requests
     type: boolean
     required: true
+    example: true
     default: true
 actions:
   add_event:

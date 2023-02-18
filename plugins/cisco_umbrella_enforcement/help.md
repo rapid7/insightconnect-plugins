@@ -27,9 +27,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|Cisco Umbrella Management API key|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|ssl_verify|boolean|True|True|Boolean value to indicate whether to add SSL verify to requests|None|None|
-
-The API key is a UUID-v4 [Customer key](https://docs.umbrella.com/developer/enforcement-api/authentication-and-versioning/).
+|ssl_verify|boolean|True|True|Boolean value to indicate whether to add SSL verify to requests|None|True|
 
 Example input:
 
