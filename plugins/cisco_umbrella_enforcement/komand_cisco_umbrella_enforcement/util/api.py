@@ -1,7 +1,5 @@
 import json
-import re
 import requests
-from urllib.parse import urljoin
 from typing import Optional
 from insightconnect_plugin_runtime.exceptions import PluginException
 
@@ -94,11 +92,6 @@ class CiscoUmbrellaEnforcementAPI:
     #         verify=self.verify,
     #     )
 
-    # def delete(self, uri, params={}):
-    #     """A generic method to make DELETE requests to the OpenDNS Enforcement API on the given URI."""
-    #     params["customerKey"] = self.customer_key
-    #     return requests.delete(urljoin(self.url, uri), params=params, headers={}, proxies={}, verify=self.verify)
-
     # def _request_parse(self, method, *args):
     #     r = method(*args)
     #     try:
@@ -132,9 +125,3 @@ class CiscoUmbrellaEnforcementAPI:
     #         return self.post_parse(self._uris["events"], {}, json.dumps(event))
     #     else:
     #         raise CiscoUmbrellaEnforcementAPI.EVENT_ERR
-
-    # def delete_domains_by_name(self, name):
-    #     return self.delete_parse(self._uris["domains"], {"where[name]": name})
-    #
-    # def delete_domains_by_id(self, id):
-    #     return self.delete_parse(self._uris["domains"] + "/" + str(id), {})
