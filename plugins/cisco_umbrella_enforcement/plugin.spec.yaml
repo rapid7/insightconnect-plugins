@@ -25,7 +25,7 @@ hub_tags:
 language: python
 types:
   event:
-    ID:
+    deviceId:
       type: string
       description: The ID of the device sending the event
       required: true
@@ -35,23 +35,25 @@ types:
       required: true
     eventTime:
       type: string
-      description: Time event was detected, must match the following style 2013-02-08T09:30:26Z
+      description: Time event was detected
+      example: 2013-02-08T09:30:26Z
       required: true
     alertTime:
       type: string
       description: Time event was sent to Umbrella must match the following style
-        2013-02-08T09:30:26Z
+      example: 2013-02-08T09:30:26Z
       required: true
     dstDomain:
       type: string
       description: The destination domain, specified following RFC3986 encoding guidelines
-        and without the protocol included. An example would be www.internetbadguys.com
+        and without the protocol included.
+      example: www.internetbadguys.com
       required: true
-    dstURL:
+    dstUrl:
       type: string
       description: The destination URL encoded using standard percent-encoding following
-        RFC3986](http://www.ietf.org/rfc/rfc3986.txt) encoding guidelines. An example
-        would be http://internetbadguys.com/security?foo=there%20are%20spaces%20here
+        RFC3986](http://www.ietf.org/rfc/rfc3986.txt) encoding guidelines
+      example: http://internetbadguys.com/security?foo=there%20are%20spaces%20here
       required: true
     protocolVersion:
       type: string
@@ -92,11 +94,13 @@ types:
     dstIP:
       type: string
       description: The destination IP of the domain, specified in IPv4 dotted-decimal
-        notation. An example would be 8.8.8.8
+        notation
+      example: 8.8.8.8
       required: false
     eventSeverity:
       type: string
-      description: 'The parter threat level or rating, eg: severe, bad, high, etc'
+      description: The parter threat level or rating
+      example: severe, bad, high, etc
       required: false
     eventType:
       type: string

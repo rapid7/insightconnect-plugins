@@ -15,23 +15,12 @@ class AddEvent(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         domains = params.get(Input.EVENTS)
-        events = []
 
-        for event in domains:
-            dstUrl = event.get("dstURL")
-            event["dstUrl"] = dstUrl
-            del event["dstURL"]
 
-            ID = event.get("ID")
-            event["deviceId"] = ID
-            del event["ID"]
-
-            events.append(event)
-
-        dict_ids = self.connection.client.add_event(events)
-
+        response = self.connection.client.add_event(domains)
+        print(f"DICT IDS: {response}")
         ids = []
-        for key, value in dict_ids.items():
+        for key, value in response.items():
             ids.append(value)
-
+        print(f"IDS: {ids}")
         return {Output.ID: ids}

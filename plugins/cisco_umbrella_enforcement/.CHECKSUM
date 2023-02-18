@@ -1,11 +1,11 @@
 {
-	"spec": "79bd1b262a39dd2fb716ea48afd31bcd",
+	"spec": "9f651044f590160f2f51d830d5c47981",
 	"manifest": "b0b7af8a7e8be5fecd7aca82d3c30850",
 	"setup": "73c09241cce8de6065e8b8731f66ad6d",
 	"schemas": [
 		{
 			"identifier": "add_event/schema.py",
-			"hash": "4df0783a71ee32c661a316fd329badda"
+			"hash": "42b2135860f9ff37272c10b485c8d2d9"
 		},
 		{
 			"identifier": "delete_domain_by_id/schema.py",

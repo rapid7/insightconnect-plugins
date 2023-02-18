@@ -39,17 +39,17 @@ class AddEventInput(insightconnect_plugin_runtime.Input):
       "type": "object",
       "title": "event",
       "properties": {
-        "ID": {
-          "type": "string",
-          "title": "ID",
-          "description": "The ID of the device sending the event",
-          "order": 1
-        },
         "alertTime": {
           "type": "string",
           "title": "AlertTime",
-          "description": "Time event was sent to Umbrella must match the following style 2013-02-08T09:30:26Z",
+          "description": "Time event was sent to Umbrella must match the following style",
           "order": 4
+        },
+        "deviceId": {
+          "type": "string",
+          "title": "DeviceId",
+          "description": "The ID of the device sending the event",
+          "order": 1
         },
         "deviceVersion": {
           "type": "string",
@@ -66,19 +66,19 @@ class AddEventInput(insightconnect_plugin_runtime.Input):
         "dstDomain": {
           "type": "string",
           "title": "DstDomain",
-          "description": "The destination domain, specified following RFC3986 encoding guidelines and without the protocol included. An example would be www.internetbadguys.com",
+          "description": "The destination domain, specified following RFC3986 encoding guidelines and without the protocol included.",
           "order": 5
         },
         "dstIP": {
           "type": "string",
           "title": "DstIP",
-          "description": "The destination IP of the domain, specified in IPv4 dotted-decimal notation. An example would be 8.8.8.8",
+          "description": "The destination IP of the domain, specified in IPv4 dotted-decimal notation",
           "order": 15
         },
-        "dstURL": {
+        "dstUrl": {
           "type": "string",
-          "title": "DstURL",
-          "description": "The destination URL encoded using standard percent-encoding following RFC3986](http://www.ietf.org/rfc/rfc3986.txt) encoding guidelines. An example would be http://internetbadguys.com/security?foo=there%20are%20spaces%20here",
+          "title": "DstUrl",
+          "description": "The destination URL encoded using standard percent-encoding following RFC3986](http://www.ietf.org/rfc/rfc3986.txt) encoding guidelines",
           "order": 6
         },
         "eventDescription": {
@@ -96,13 +96,13 @@ class AddEventInput(insightconnect_plugin_runtime.Input):
         "eventSeverity": {
           "type": "string",
           "title": "EventSeverity",
-          "description": "The parter threat level or rating, eg: severe, bad, high, etc",
+          "description": "The parter threat level or rating",
           "order": 16
         },
         "eventTime": {
           "type": "string",
           "title": "EventTime",
-          "description": "Time event was detected, must match the following style 2013-02-08T09:30:26Z",
+          "description": "Time event was detected",
           "order": 3
         },
         "eventType": {
@@ -149,11 +149,11 @@ class AddEventInput(insightconnect_plugin_runtime.Input):
         }
       },
       "required": [
-        "ID",
         "alertTime",
+        "deviceId",
         "deviceVersion",
         "dstDomain",
-        "dstURL",
+        "dstUrl",
         "eventTime",
         "protocolVersion",
         "providerName"
