@@ -27,13 +27,16 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|Cisco Umbrella Management API key|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|ssl_verify|boolean|False|True|Boolean value to indicate whether to add SSL verify to requests|None|None|
+|ssl_verify|boolean|True|True|Boolean value to indicate whether to add SSL verify to requests|None|None|
+
+The API key is a UUID-v4 [Customer key](https://docs.umbrella.com/developer/enforcement-api/authentication-and-versioning/).
 
 Example input:
 
 ```
 {
-  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0"
+  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "ssl_verify": true
 }
 ```
 
@@ -91,11 +94,14 @@ The delete comand should include the numerical identifier (ID) as specified in t
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|name|string|None|True|Domain name|None|None|
+|name|string|None|True|Domain name|None|internetbadguys.bad-v5.com|
 
 Example input:
 
 ```
+{
+  "name": "internetbadguys.bad-v5.com"
+}
 ```
 
 ##### Output
@@ -128,6 +134,35 @@ It accepts an array of JSON objects of the [Generic Event Format](https://docs.u
 Example input:
 
 ```
+[{	
+    "dstUrl": "http://internetbadguys.bad-v5.com/a-bad-url-v1",	
+    "alertTime": "2013-02-09T11:14:26.0Z",	
+    "deviceId": "ba6a59f4-e692-4724-ba36-c28132c761de",	
+    "deviceVersion": "13.7a",	
+    "dstDomain": "internetbadguys.bad-v5.com",	
+    "eventTime": "2013-02-09T09:30:26.0Z",	
+    "protocolVersion": "1.0a",	
+    "providerName": "Security Platform",	
+    "disableDstSafeguards": true,	
+    "eventHash": "e88b372b1f98882dca933fa8a2589670",	
+    "fileName": "https://www.fuw.edu.pl/~rwys/pk/notatki_cl.txt",	
+    "fileHash": "da89127fbe1d78313dbfff610b59ff24874bb983",	
+    "externalURL": "https://www.fuw.edu.pl/~rwys/pk/notatki_cl.txt",	
+    "src": "192.168.0.1",	
+    "eventSeverity": "severe",	
+    "eventType": "severe",	
+    "eventDescription": "Some another threat"	
+  },	
+  {	
+    "dstUrl": "http://internetbadguys.bad-v6.com/a-bad-url-v2",	
+    "alertTime": "2013-02-10T11:14:26.0Z",	
+    "deviceId": "ba6a59f4-e692-4724-ba36-c28132c761de",	
+    "deviceVersion": "13.7a",	
+    "dstDomain": "internetbadguys.bad-v6.com",	
+    "eventTime": "2013-02-10T09:30:26.0Z",	
+    "protocolVersion": "1.0a",	
+    "providerName": "Security Platform"	
+ }]
 ```
 
 ##### Output
@@ -139,29 +174,28 @@ Example input:
 Example output:
 
 ```
-
 {
-  "ID": [
-    "42216a75,da20,4a1e,93bc-b07edfacc1f3"
-  ]
+  'ID': {'id': '5a050d19,1d08,4dd0,b8b4-6b34da9e4135'}
 }
-
 ```
 
 #### Delete Domain by ID
 
 This action is used to delete domain from user domain list by ID.
-The delete comand should include the numerical identifier (ID) as specified in the LIST endpoint or the actual domain name you'd like to delete.
+The delete command should include the numerical identifier (ID) as specified in the LIST endpoint or the actual domain name you'd like to delete.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|ID|integer|None|True|Unique ID number of domain|None|None|
+|ID|integer|None|True|Unique ID number of domain|None|1234567|
 
 Example input:
 
 ```
+{
+  "ID": 1234567
+}
 ```
 
 ##### Output
@@ -194,7 +228,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.0.2 - Bug fix: Fix 'Key not found' by setting SSL certificate verify to False 
+* 1.1.0 - Action - Add event: Renamed inputs `DstURL` to `DstUrl` and `ID` to `deviceId` | Actions - Delete domains: Updated to return `{'success': True}` | Refactored all the code to improve quality | Upgraded from `komand` to `insight-connect` | New feature: Added option to toggle SSL verify
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 0.1.1 - SSL bug fix in SDK
