@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import DeleteDomainByIdInput, DeleteDomainByIdOutput, Input, Output
+from insightconnect_plugin_runtime.helper import clean
 
 # Custom imports below
 
@@ -16,11 +17,6 @@ class DeleteDomainById(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         ID = params.get(Input.ID)
 
-        try:
-            status_code = self.connection.client.delete_domains_by_id(ID)
-            self.logger.info(status_code)
-        except Exception:
-            self.logger.error("DeleteDomainById: run: Problem with request")
-            raise Exception("DeleteDomainById: run: Problem with request")
-
-        return {Output.STATUS: "success"}
+        result = self.connection.client.delete_event(domain_id=ID)
+        result = clean(result)
+        return {Output.STATUS: result}

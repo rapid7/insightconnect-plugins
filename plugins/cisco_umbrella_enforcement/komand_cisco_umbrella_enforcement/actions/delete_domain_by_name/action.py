@@ -16,10 +16,6 @@ class DeleteDomainByName(insightconnect_plugin_runtime.Action):
     def run(self, params={}):
         domain_name = params.get(Input.NAME)
 
-        try:
-            self.connection.client.delete_domains_by_name(domain_name)
-        except Exception:
-            self.logger.error("DeleteDomainByName: run: Problem with request")
-            raise Exception("DeleteDomainByName: run: Problem with request")
+        result = self.connection.client.delete_event(name=domain_name)
 
-        return {Output.STATUS: "success"}
+        return {Output.STATUS: result}
