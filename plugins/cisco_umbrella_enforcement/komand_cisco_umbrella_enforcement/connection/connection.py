@@ -1,8 +1,7 @@
 import insightconnect_plugin_runtime
-import requests.exceptions
 
 from .schema import ConnectionSchema, Input
-from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 
 # Custom imports below
 from ..util.api import CiscoUmbrellaEnforcementAPI
@@ -25,5 +24,5 @@ class Connection(insightconnect_plugin_runtime.Connection):
         try:
             self.client.get_domains()
             return {"success": True}
-        except requests.exceptions.SSLError as error:
-            raise PluginException(cause=error, assistance="Set SSL verify to False or provide a valid certificate.")
+        except PluginException as error:
+            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data)

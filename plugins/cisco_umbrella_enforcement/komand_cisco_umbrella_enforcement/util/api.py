@@ -69,16 +69,16 @@ class CiscoUmbrellaEnforcementAPI:
         # Error handling
         if response.status_code == 400:
             raise PluginException(cause="Invalid request.")
-        if 401 <= response.status_code <= 403:
+        if response.status_code == 401:
+            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
+        if response.status_code == 403:
             raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
         if response.status_code == 404:
             raise PluginException(preset=PluginException.Preset.NOT_FOUND)
         if response.status_code >= 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR)
-        # The try/except is to handle calls for the delete methods, since they return
-        # 204 status code with no data, which fails on response.json()
-        try:
-            if 200 <= response.status_code < 300:
-                return response.json()
-        except json.decoder.JSONDecodeError:
+        if 200 <= response.status_code <= 202:
+            return response.json()
+        # DELETE returns nothing, so breaks with .json(), so handle seperately.
+        if response.status_code == 204:
             return response.text
