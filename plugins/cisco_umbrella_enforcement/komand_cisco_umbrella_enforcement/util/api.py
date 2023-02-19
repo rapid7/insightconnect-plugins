@@ -8,7 +8,6 @@ class CiscoUmbrellaEnforcementAPI:
     VERSION = "1.0"
 
     def __init__(self, customer_key, verify):
-        self._uris = {"events": "events", "domains": "domains"}
         self.verify = verify
         self.url = f"https://s-platform.api.opendns.com/{CiscoUmbrellaEnforcementAPI.VERSION}"
         self.params = {"customerKey": customer_key}

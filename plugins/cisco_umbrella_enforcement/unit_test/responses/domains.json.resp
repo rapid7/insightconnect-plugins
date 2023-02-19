@@ -1,0 +1,17 @@
+{
+   "domains":{
+      "meta":{
+         "page":1,
+         "limit":200,
+         "prev":false,
+         "next":false
+      },
+      "data":[
+         {
+            "id":28699717,
+            "name":"internetbadguys.bad-v6.com",
+            "lastSeenAt":1676845563
+         }
+      ]
+   }
+}

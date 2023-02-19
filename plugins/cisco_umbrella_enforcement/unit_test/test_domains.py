@@ -35,8 +35,15 @@ class TestDomains(TestCase):
     @mock.patch("requests.request", side_effect=mock_request_200)
     def test_domains_success(self, mock_get):
         response = self.action.run()
-        # TODO
-        expected_response = []
+
+        expected_response = {
+            "domains": {
+                "domains": {
+                    "meta": {"page": 1, "limit": 200, "prev": False, "next": False},
+                    "data": [{"id": 28699717, "name": "internetbadguys.bad-v6.com", "lastSeenAt": 1676845563}],
+                }
+            }
+        }
 
         self.assertEqual(response, expected_response)
 

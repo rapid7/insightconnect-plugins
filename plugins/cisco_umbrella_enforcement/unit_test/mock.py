@@ -36,7 +36,7 @@ def mocked_request(side_effect: Callable) -> None:
 def mock_conditions(method: str, url: str, status_code: int, domain_id_name: Optional[str] = None) -> MockResponse:
     if url == BASE_URL + "/domains":
         if method == "GET":
-            return MockResponse("add_event", status_code)
+            return MockResponse("domains", status_code)
         if method == "DELETE":
             if domain_id_name == "name":
                 return MockResponse("delete_domain_by_name", status_code)
@@ -57,11 +57,11 @@ def mock_conditions_connection(url: str, status_code: int) -> MockResponse:
 
 
 def mock_request_200(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 200, args[2])
+    return mock_conditions(args[0], args[1], 200)
 
 
 def mock_request_202(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 202, args[2])
+    return mock_conditions(args[0], args[1], 202)
 
 
 def mock_request_204(*args, **kwargs) -> MockResponse:
@@ -69,23 +69,23 @@ def mock_request_204(*args, **kwargs) -> MockResponse:
 
 
 def mock_request_400(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 400, args[2])
+    return mock_conditions(args[0], args[1], 400)
 
 
 def mock_request_401(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 401, args[2])
+    return mock_conditions(args[0], args[1], 401)
 
 
 def mock_request_403(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 403, args[2])
+    return mock_conditions(args[0], args[1], 403)
 
 
 def mock_request_404(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 404, args[2])
+    return mock_conditions(args[0], args[1], 404)
 
 
 def mock_request_500(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 500, args[2])
+    return mock_conditions(args[0], args[1], 500)
 
 
 def mock_request_200_connection(*args, **kwargs) -> MockResponse:
