@@ -6,6 +6,7 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase, mock
 from komand_cisco_umbrella_enforcement.connection.connection import Connection
 from komand_cisco_umbrella_enforcement.actions.delete_domain_by_id import DeleteDomainById
+from komand_cisco_umbrella_enforcement.actions.delete_domain_by_id.schema import Input
 from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
 import logging
@@ -18,6 +19,7 @@ from unit_test.mock import (
     mock_request_404,
     mock_request_500,
     mocked_request,
+    STUB_ID,
 )
 
 
@@ -31,10 +33,12 @@ class TestDeleteDomainById(TestCase):
         self.action.connection = self.connection
         self.action.logger = logging.getLogger("Action logger")
 
+        self.params = {Input.ID: STUB_ID}
+
     @mock.patch("requests.request", side_effect=mock_request_204)
     def test_delete_domain_by_id_success(self, mock_delete):
-        response = self.action.run(domain_id)
-        expected_response = []
+        response = self.action.run(self.params)
+        expected_response = {"success": ""}
 
         self.assertEqual(response, expected_response)
 

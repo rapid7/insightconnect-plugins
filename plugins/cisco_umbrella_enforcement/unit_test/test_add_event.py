@@ -6,6 +6,8 @@ sys.path.append(os.path.abspath("../"))
 from unittest import TestCase, mock
 from komand_cisco_umbrella_enforcement.connection.connection import Connection
 from komand_cisco_umbrella_enforcement.actions.add_event import AddEvent
+from komand_cisco_umbrella_enforcement.actions.add_event.schema import Input
+from insightconnect_plugin_runtime.exceptions import PluginException
 from parameterized import parameterized
 import logging
 from unit_test.mock import (
@@ -17,6 +19,7 @@ from unit_test.mock import (
     mock_request_404,
     mock_request_500,
     mocked_request,
+    STUB_EVENT_INPUT,
 )
 
 
@@ -30,10 +33,12 @@ class TestAddEvent(TestCase):
         self.action.connection = self.connection
         self.action.logger = logging.getLogger("Action logger")
 
+        self.params = {Input.EVENTS: STUB_EVENT_INPUT}
+
     @mock.patch("requests.request", side_effect=mock_request_202)
     def test_add_event(self, mock_post):
-        response = self.action.run(events)
-        expected_response = []
+        response = self.action.run(self.params)
+        expected_response = {"ID": {"ID": {"id": "12345678,1234,1234,1234-123456789123"}}}
 
         self.assertEqual(response, expected_response)
 
@@ -50,5 +55,5 @@ class TestAddEvent(TestCase):
         mocked_request(mock_request)
 
         with self.assertRaises(PluginException) as context:
-            self.action.run(domain_id)
+            self.action.run(self.params)
         self.assertEqual(context.exception.cause, exception)
