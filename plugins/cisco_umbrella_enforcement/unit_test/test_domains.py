@@ -18,7 +18,7 @@ from unit_test.mock import (
     mock_request_403,
     mock_request_404,
     mock_request_500,
-    mocked_request
+    mocked_request,
 )
 
 
@@ -35,6 +35,7 @@ class TestDomains(TestCase):
     @mock.patch("requests.request", side_effect=mock_request_200)
     def test_domains_success(self, mock_get):
         response = self.action.run()
+        # TODO
         expected_response = []
 
         self.assertEqual(response, expected_response)
@@ -45,7 +46,7 @@ class TestDomains(TestCase):
             (mock_request_401, PluginException.causes[PluginException.Preset.USERNAME_PASSWORD]),
             (mock_request_403, PluginException.causes[PluginException.Preset.UNAUTHORIZED]),
             (mock_request_404, PluginException.causes[PluginException.Preset.NOT_FOUND]),
-            (mock_request_500, PluginException.causes[PluginException.Preset.SERVER_ERROR])
+            (mock_request_500, PluginException.causes[PluginException.Preset.SERVER_ERROR]),
         ],
     )
     def test_not_ok(self, mock_request, exception):

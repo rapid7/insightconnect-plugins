@@ -86,3 +86,15 @@ def mock_request_404(*args, **kwargs) -> MockResponse:
 
 def mock_request_500(*args, **kwargs) -> MockResponse:
     return mock_conditions(args[0], args[1], 500, args[2])
+
+
+def mock_request_200_connection(*args, **kwargs) -> MockResponse:
+    return mock_conditions_connection(args[1], 200)
+
+
+def mock_request_403_connection(*args, **kwargs) -> MockResponse:
+    return mock_conditions_connection(args[1], 403)
+
+
+def mock_request_500_connection(*args, **kwargs) -> MockResponse:
+    return mock_conditions_connection(args[1], 500)

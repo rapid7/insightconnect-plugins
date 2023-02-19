@@ -20,7 +20,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         self.client = CiscoUmbrellaEnforcementAPI(key, ssl_verify)
 
-    def test_connection(self):
+    def test(self):
         try:
             self.client.get_domains()
             return {"success": True}
