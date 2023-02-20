@@ -1,12 +1,12 @@
-FROM komand/python-3-plugin:2
-# The three supported python parent images are:
-# - komand/python-2-plugin
-# - komand/python-3-plugin
-# - komand/python-pypy3-plugin
-#
-LABEL organization=komand
+FROM rapid7/insightconnect-python-3-38-plugin:4
+
+LABEL organization=rapid7
+LABEL sdk=python
+LABEL type=plugin
+
 
 # Add any custom package dependencies here
+RUN apt-get update && apt-get install curl -y
 # NOTE: Add pip packages to requirements.txt
 
 # End package dependencies
