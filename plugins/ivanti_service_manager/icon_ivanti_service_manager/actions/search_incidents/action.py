@@ -15,17 +15,12 @@ class SearchIncidents(insightconnect_plugin_runtime.Action):
             output=SearchIncidentsOutput())
 
     def run(self, params={}):
-        object_type = params.get(Input.OBJECT_TYPE)
-        text = params.get(Input.TEXT)
-        top = params.get(Input.TOP)
-        skip = params.get(Input.SKIP)
-
         payload = {
-            "Text": text,
-            "ObjectType": object_type,
-            "Top": top,
-            "Skip": skip
+            "Text": params.get(Input.TEXT),
+            "ObjectType": params.get(Input.OBJECT_TYPE),
+            "Top": params.get(Input.TOP),
+            "Skip": params.get(Input.SKIP)
         }
 
-        data = self.connection.ivanti_service_manager_api.search_incident(text, payload)
+        data = self.connection.ivanti_service_manager_api.search_incident(params.get(Input.TEXT), payload)
         return {Output.DATA: data}
