@@ -55,7 +55,6 @@ def mocked_request(side_effect: Callable) -> None:
 
 
 def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
-    # breakpoint()
 
     if url == BASE_URL + "/domains":
         return MockResponse("domains", status_code)
@@ -66,7 +65,7 @@ def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
 
 
 def mock_conditions_connection(url: str, status_code: int) -> MockResponse:
-    if url == BASE_URL:
+    if url == BASE_URL + "/domains":
         if status_code == 200:
             return MockResponse("test_connection_ok", status_code)
         elif status_code >= 400:

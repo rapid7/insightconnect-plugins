@@ -6,6 +6,7 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from komand_cisco_umbrella_enforcement.connection.connection import Connection
+from komand_cisco_umbrella_enforcement.connection.schema import Input
 import logging
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 from unit_test.mock import (
@@ -23,10 +24,12 @@ class TestConnection(TestCase):
         self.connection.logger = logging.getLogger("connection logger")
         self.connection.connect(STUB_CONNECTION)
 
+        self.params = STUB_CONNECTION
+
     def test_connection_ok(self):
         mocked_request(mock_request_200_connection)
-        response = self.connection.test()
-        expected_response = {"success": True}
+        response = self.connection.connect(self.params)
+        expected_response = None
         self.assertEqual(response, expected_response)
 
     @parameterized.expand(
