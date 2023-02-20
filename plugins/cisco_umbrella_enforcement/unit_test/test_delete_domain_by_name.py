@@ -37,7 +37,7 @@ class TestDeleteDomainByName(TestCase):
     @mock.patch("requests.request", side_effect=mock_request_204)
     def test_delete_domain_by_name_success(self, mock_delete):
         response = self.action.run(self.params)
-        expected_response = {'status': ""}
+        expected_response = {"status": ""}
 
         self.assertEqual(response, expected_response)
 
