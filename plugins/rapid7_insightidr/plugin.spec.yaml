@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightidr
 title: "Rapid7 InsightIDR"
 description: "This plugin allows you to add indicators to a threat and see the status of investigations"
-version: 4.3.0
+version: 4.4.0
 supported_versions: ["Latest release successfully tested on 2022-07-20."]
 vendor: rapid7
 cloud_ready: true
@@ -42,43 +42,6 @@ types:
       description: The total number of pages available with the given filter parameters
       type: integer
       required: false
-  rule_rrn:
-    organizationId:
-      title: Organization ID
-      description: The identifier of the organization
-      type: string
-      required: true
-    regionCode:
-      title: Region Code
-      description: The region code of the RRN
-      type: string
-      required: true
-    resource:
-      title: Resource
-      description: The resource of the RRN
-      type: string
-      required: true
-    resourceTypes:
-      title: Resource Types
-      description: The resource types of the RRN
-      type: "[]string"
-      required: true
-    service:
-      title: Service
-      description: The service of the RRN
-      type: string
-      required: true
-  detection_rule_rrn:
-    rule_name:
-      title: Rule Name
-      description: Name of the rule
-      type: string
-      required: true
-    rule_rrn:
-      title: Rule RRN
-      description: The RRN rule
-      type: rule_rrn
-      required: true
   alert:
     alert_type:
       title: Alert Type
@@ -98,7 +61,7 @@ types:
     detection_rule_rrn:
       title: Detection Rule RRN
       description: The time when the alert was created
-      type: detection_rule_rrn
+      type: string
       required: false
     first_event_time:
       title: First Event Time
