@@ -34,11 +34,6 @@ class CiscoUmbrellaEnforcementAPI:
         :param domain_id: ID for the domain
         :return: Status code
         """
-        if name and domain_id:
-            raise PluginException(
-                cause="Only one input for delete can be provided.",
-                assistance="Either choose name or domain_id, but not both.",
-            )
 
         if name:
             return self._call_api("DELETE", f"/domains/{name}")
@@ -78,6 +73,6 @@ class CiscoUmbrellaEnforcementAPI:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR)
         if 200 <= response.status_code <= 202:
             return response.json()
-        # DELETE returns nothing, so breaks with .json(), so handle seperately.
+        # DELETE returns nothing, so breaks with .json(), so handle separately.
         if response.status_code == 204:
             return response.text

@@ -6,6 +6,8 @@ from parameterized import parameterized
 from unittest import TestCase, mock
 from komand_cisco_umbrella_enforcement.connection.connection import Connection
 from komand_cisco_umbrella_enforcement.actions.delete_domain_by_name import DeleteDomainByName
+from komand_cisco_umbrella_enforcement.actions.delete_domain_by_name.schema import Input
+from insightconnect_plugin_runtime.exceptions import PluginException
 import logging
 from unit_test.mock import (
     STUB_CONNECTION,
@@ -16,6 +18,7 @@ from unit_test.mock import (
     mock_request_404,
     mock_request_500,
     mocked_request,
+    STUB_NAME
 )
 
 
@@ -29,9 +32,11 @@ class TestDeleteDomainByName(TestCase):
         self.action.connection = self.connection
         self.action.logger = logging.getLogger("Action logger")
 
+        self.params = {Input.NAME: STUB_NAME}
+
     @mock.patch("requests.request", side_effect=mock_request_204)
     def test_delete_domain_by_name_success(self):
-        response = self.action.run(domain_name)
+        response = self.action.run(self.params)
         expected_response = []
 
         self.assertEqual(response, expected_response)
@@ -49,5 +54,5 @@ class TestDeleteDomainByName(TestCase):
         mocked_request(mock_request)
 
         with self.assertRaises(PluginException) as context:
-            self.action.run(domain_id)
+            self.action.run(self.params)
         self.assertEqual(context.exception.cause, exception)

@@ -55,5 +55,5 @@ class TestDeleteDomainById(TestCase):
         mocked_request(mock_request)
 
         with self.assertRaises(PluginException) as context:
-            self.action.run(domain_id)
+            self.action.run(self.params)
         self.assertEqual(context.exception.cause, exception)

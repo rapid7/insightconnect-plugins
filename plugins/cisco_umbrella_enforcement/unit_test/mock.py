@@ -14,6 +14,7 @@ STUB_CONNECTION = {
     Input.SSL_VERIFY: STUB_SSL_VERIFY,
 }
 STUB_ID = 1234567
+STUB_NAME = 'https://example.com'
 STUB_EVENT_INPUT = {
     "dstUrl": "http://google.com",
     "alertTime": "2013-02-09T11:14:26.0Z",
@@ -53,15 +54,12 @@ def mocked_request(side_effect: Callable) -> None:
     mock_function.request = mock.Mock(side_effect=side_effect)
 
 
-def mock_conditions(method: str, url: str, status_code: int, domain_id_name: Optional[str] = None) -> MockResponse:
+def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
     if url == BASE_URL + "/domains":
         if method == "GET":
             return MockResponse("domains", status_code)
         if method == "DELETE":
-            if domain_id_name == "name":
-                return MockResponse("delete_domain_by_name", status_code)
-            if domain_id_name == "domain_id":
-                return MockResponse("delete_domain_by_id", status_code)
+            return MockResponse("delete_domain", status_code)
     if url == BASE_URL + f"/events":
         return MockResponse("add_event", status_code)
 
@@ -85,7 +83,7 @@ def mock_request_202(*args, **kwargs) -> MockResponse:
 
 
 def mock_request_204(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 204, args[2])
+    return mock_conditions(args[0], args[1], 204)
 
 
 def mock_request_400(*args, **kwargs) -> MockResponse:
