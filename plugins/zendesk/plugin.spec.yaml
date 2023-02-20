@@ -4,7 +4,7 @@ products: [insightconnect]
 name: zendesk
 title: Zendesk
 description: Regulate customer communications by managing tickets and users in Zendesk data
-version: 4.0.0
+version: 4.0.1
 supported_versions: ["2022-01-28"]
 vendor: rapid7
 support: community
@@ -347,6 +347,37 @@ types:
       description: Verified
       type: boolean
       required: false
+  organization_memberships:
+    id:
+      title: ID
+      description: ID
+      type: integer
+      required: false
+    user_id:
+      title: User ID
+      type: integer
+      description: ID of user
+      required: false
+    organization_id:
+      title: Organization ID
+      description: Organization ID
+      type: integer
+      required: false
+    default:
+      title: Default
+      description: Indicates weather it's default organization membership or not for a user
+      type: boolean
+      required: false
+    created_at:
+      title: Created At
+      description: Created at
+      type: date
+      required: false
+    updated_at:
+      title: Updated At
+      description: Updated at
+      type: date
+      required: false
 connection:
   credentials:
     title: Email and Password
@@ -464,7 +495,7 @@ actions:
     output:
       memberships:
         title: Memberships
-        type: '[]object'
+        type: '[]organization_memberships'
         description: Members data
         required: true
   delete_membership:

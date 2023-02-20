@@ -2,8 +2,6 @@ import insightconnect_plugin_runtime
 from .schema import DeleteTicketInput, DeleteTicketOutput, Input, Output
 
 # Custom imports below
-import json
-import zenpy
 
 
 class DeleteTicket(insightconnect_plugin_runtime.Action):
@@ -16,11 +14,12 @@ class DeleteTicket(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        identifier = params.get(Input.TICKET_ID)
+
         try:
-            client = self.connection.client
-            ticket = client.tickets(id=params.get(Input.TICKET_ID))
-            client.tickets.delete(ticket)
+            ticket = self.connection.client.tickets(id=identifier)
+            self.connection.client.tickets.delete(ticket)
             return {Output.STATUS: True}
-        except zenpy.lib.exception.APIException as e:
-            self.logger.debug(e)
+        except Exception as error:
+            self.logger.debug(error)
             return {Output.STATUS: False}

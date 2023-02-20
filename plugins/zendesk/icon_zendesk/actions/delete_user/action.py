@@ -2,8 +2,6 @@ import insightconnect_plugin_runtime
 from .schema import DeleteUserInput, DeleteUserOutput, Input, Output
 
 # Custom imports below
-import json
-import zenpy
 
 
 class DeleteUser(insightconnect_plugin_runtime.Action):
@@ -16,10 +14,12 @@ class DeleteUser(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        identifier = params.get(Input.USER_ID)
+
         try:
-            user = self.connection.client.users(id=params.get(Input.USER_ID))
+            user = self.connection.client.users(id=identifier)
             self.connection.client.users.delete(user)
             return {Output.STATUS: True}
-        except zenpy.lib.exception.APIException as e:
-            self.logger.debug(e)
+        except Exception as error:
+            self.logger.debug(error)
             return {Output.STATUS: False}
