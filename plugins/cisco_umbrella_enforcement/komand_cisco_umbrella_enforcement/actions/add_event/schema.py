@@ -8,7 +8,24 @@ class Component:
 
 
 class Input:
-    EVENTS = "events"
+    ALERTTIME = "alertTime"
+    DEVICEID = "deviceId"
+    DEVICEVERSION = "deviceVersion"
+    DISABLEDSTSAFEGUARDS = "disableDstSafeguards"
+    DSTDOMAIN = "dstDomain"
+    DSTIP = "dstIP"
+    DSTURL = "dstUrl"
+    EVENTDESCRIPTION = "eventDescription"
+    EVENTHASH = "eventHash"
+    EVENTSEVERITY = "eventSeverity"
+    EVENTTIME = "eventTime"
+    EVENTTYPE = "eventType"
+    EXTERNALURL = "externalURL"
+    FILEHASH = "fileHash"
+    FILENAME = "fileName"
+    PROTOCOLVERSION = "protocolVersion"
+    PROVIDERNAME = "providerName"
+    SRC = "src"
     
 
 class Output:
@@ -21,145 +38,128 @@ class AddEventInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "events": {
-      "type": "array",
-      "title": "Events",
-      "description": "Generic event format field. More info at https://docs.umbrella.com/developer/enforcement-api/generic-event-format2/",
-      "items": {
-        "$ref": "#/definitions/event"
-      },
+    "alertTime": {
+      "type": "string",
+      "title": "Alert Time",
+      "description": "The time the event was sent to Umbrella",
       "order": 1
+    },
+    "deviceId": {
+      "type": "string",
+      "title": "Device ID",
+      "description": "The ID of the device sending the event",
+      "order": 2
+    },
+    "deviceVersion": {
+      "type": "string",
+      "title": "Device Version",
+      "description": "The version of the device sending the event",
+      "order": 3
+    },
+    "disableDstSafeguards": {
+      "type": "boolean",
+      "title": "Disable Destination Safeguards",
+      "description": "True bypasses validations normally performed against submitted events",
+      "default": false,
+      "order": 18
+    },
+    "dstDomain": {
+      "type": "string",
+      "title": "Destination Domain",
+      "description": "The destination domain specified following RFC 3986 encoding guidelines",
+      "order": 4
+    },
+    "dstIP": {
+      "type": "string",
+      "title": "Destination IP",
+      "description": "The destination UP of the domain, specified in IPv4 dotted-decimal notation",
+      "order": 5
+    },
+    "dstUrl": {
+      "type": "string",
+      "title": "Destination URL",
+      "description": "The destination URL specified following RFC 3986 encoding guidelines",
+      "order": 6
+    },
+    "eventDescription": {
+      "type": "string",
+      "title": "Event Description",
+      "description": "Variant or other descriptior of event type",
+      "order": 7
+    },
+    "eventHash": {
+      "type": "string",
+      "title": "Event Hash",
+      "description": "A unique hash of the event",
+      "order": 8
+    },
+    "eventSeverity": {
+      "type": "string",
+      "title": "Event Severity",
+      "description": "The partner threat level or rating",
+      "order": 9
+    },
+    "eventTime": {
+      "type": "string",
+      "title": "Event Time",
+      "description": "The time the event was detected",
+      "order": 10
+    },
+    "eventType": {
+      "type": "string",
+      "title": "Event Type",
+      "description": "Common name or classification of threat",
+      "order": 11
+    },
+    "externalURL": {
+      "type": "string",
+      "title": "External URL",
+      "description": "External page containing additional information about event",
+      "order": 12
+    },
+    "fileHash": {
+      "type": "string",
+      "title": "File Hash",
+      "description": "SHA-1 of file reported by appliance",
+      "order": 13
+    },
+    "fileName": {
+      "type": "string",
+      "title": "File Name",
+      "description": "Path to file exhibiting malicious behaviour",
+      "order": 14
+    },
+    "protocolVersion": {
+      "type": "string",
+      "title": "Protocol Version",
+      "description": "The version of the protocol for the API",
+      "default": "1.0a",
+      "order": 15
+    },
+    "providerName": {
+      "type": "string",
+      "title": "Provider Name",
+      "description": "The provider name for the API",
+      "default": "Security Platform",
+      "order": 16
+    },
+    "src": {
+      "type": "string",
+      "title": "Src",
+      "description": "The first IP or hostname associated with the infected device",
+      "order": 17
     }
   },
   "required": [
-    "events"
-  ],
-  "definitions": {
-    "event": {
-      "type": "object",
-      "title": "event",
-      "properties": {
-        "alertTime": {
-          "type": "string",
-          "title": "AlertTime",
-          "description": "Time event was sent to Umbrella must match the following style",
-          "order": 4
-        },
-        "deviceId": {
-          "type": "string",
-          "title": "DeviceId",
-          "description": "The ID of the device sending the event",
-          "order": 1
-        },
-        "deviceVersion": {
-          "type": "string",
-          "title": "DeviceVersion",
-          "description": "Version of device sending the event",
-          "order": 2
-        },
-        "disableDstSafeguards": {
-          "type": "boolean",
-          "title": "DisableDstSafeguards",
-          "description": "A value of 'true' will bypass validations normally performed against submitted events before adding them to any of the domain lists in Umbrella",
-          "order": 9
-        },
-        "dstDomain": {
-          "type": "string",
-          "title": "DstDomain",
-          "description": "The destination domain, specified following RFC3986 encoding guidelines and without the protocol included.",
-          "order": 5
-        },
-        "dstIP": {
-          "type": "string",
-          "title": "DstIP",
-          "description": "The destination IP of the domain, specified in IPv4 dotted-decimal notation",
-          "order": 15
-        },
-        "dstUrl": {
-          "type": "string",
-          "title": "DstUrl",
-          "description": "The destination URL encoded using standard percent-encoding following RFC3986](http://www.ietf.org/rfc/rfc3986.txt) encoding guidelines",
-          "order": 6
-        },
-        "eventDescription": {
-          "type": "string",
-          "title": "EventDescription",
-          "description": "Variant or other descriptor of event type",
-          "order": 18
-        },
-        "eventHash": {
-          "type": "string",
-          "title": "EventHash",
-          "description": "A unique hash of the event",
-          "order": 10
-        },
-        "eventSeverity": {
-          "type": "string",
-          "title": "EventSeverity",
-          "description": "The parter threat level or rating",
-          "order": 16
-        },
-        "eventTime": {
-          "type": "string",
-          "title": "EventTime",
-          "description": "Time event was detected",
-          "order": 3
-        },
-        "eventType": {
-          "type": "string",
-          "title": "EventType",
-          "description": "Common name or classification of threat",
-          "order": 17
-        },
-        "externalURL": {
-          "type": "string",
-          "title": "ExternalURL",
-          "description": "External page containing additional information about event",
-          "order": 13
-        },
-        "fileHash": {
-          "type": "string",
-          "title": "FileHash",
-          "description": "SHA-1 of file reported by appliance",
-          "order": 12
-        },
-        "fileName": {
-          "type": "string",
-          "title": "FileName",
-          "description": "Path to file exhibiting malicious behavior",
-          "order": 11
-        },
-        "protocolVersion": {
-          "type": "string",
-          "title": "ProtocolVersion",
-          "description": "The version of the protocol for the API. Value should always be 1.0a",
-          "order": 7
-        },
-        "providerName": {
-          "type": "string",
-          "title": "ProviderName",
-          "description": "The provider name for the API. Value should always be Security Platform",
-          "order": 8
-        },
-        "src": {
-          "type": "string",
-          "title": "Src",
-          "description": "IP/Host of the infected computer/device that was patient 0 for the event",
-          "order": 14
-        }
-      },
-      "required": [
-        "alertTime",
-        "deviceId",
-        "deviceVersion",
-        "dstDomain",
-        "dstUrl",
-        "eventTime",
-        "protocolVersion",
-        "providerName"
-      ]
-    }
-  }
+    "alertTime",
+    "deviceId",
+    "deviceVersion",
+    "dstDomain",
+    "dstUrl",
+    "eventTime",
+    "protocolVersion",
+    "providerName"
+  ]
 }
     """)
 

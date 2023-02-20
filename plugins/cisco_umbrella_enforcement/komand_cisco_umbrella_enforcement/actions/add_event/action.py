@@ -14,8 +14,30 @@ class AddEvent(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        domains = params.get(Input.EVENTS)
 
-        response = self.connection.client.add_event(domains)
+        data = [
+            {
+                "alertTime": params.get(Input.ALERTTIME),
+                "deviceId": params.get(Input.DEVICEID),
+                "deviceVersion": params.get(Input.DEVICEVERSION),
+                "dstDomain": params.get(Input.DSTDOMAIN),
+                "dstIP": params.get(Input.DSTIP),
+                "dstUrl": params.get(Input.DSTURL),
+                "eventDescription": params.get(Input.EVENTDESCRIPTION),
+                "eventHash": params.get(Input.EVENTHASH),
+                "eventSeverity": params.get(Input.EVENTSEVERITY),
+                "eventTime": params.get(Input.EVENTTIME),
+                "eventType": params.get(Input.EVENTTYPE),
+                "externalURL": params.get(Input.EXTERNALURL),
+                "fileHash": params.get(Input.FILEHASH),
+                "fileName": params.get(Input.FILENAME),
+                "protocolVersion": params.get(Input.PROTOCOLVERSION),
+                "providerName": params.get(Input.PROVIDERNAME),
+                "src": params.get(Input.SRC),
+                "disableDstSafeguards": params.get(Input.DISABLEDSTSAFEGUARDS)
+             }
+        ]
+
+        response = self.connection.client.add_event(data)
 
         return {Output.ID: response}

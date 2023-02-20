@@ -127,40 +127,45 @@ It accepts an array of JSON objects of the [Generic Event Format](https://docs.u
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|events|[]event|None|True|Generic event format field. More info at https://docs.umbrella.com/developer/enforcement-api/generic-event-format2/|None|None|
+|alertTime|string|None|True|The time the event was sent to Umbrella|None|2013-02-08T09:30:26Z|
+|deviceId|string|None|True|The ID of the device sending the event|None|12345678-1234-1234-1234-123456789123|
+|deviceVersion|string|None|True|The version of the device sending the event|None|https://example.com|
+|disableDstSafeguards|boolean|False|False|True bypasses validations normally performed against submitted events|None|False|
+|dstDomain|string|None|True|The destination domain specified following RFC 3986 encoding guidelines|None|https://example.com|
+|dstIP|string|None|False|The destination UP of the domain, specified in IPv4 dotted-decimal notation|None|https://example.com|
+|dstUrl|string|None|True|The destination URL specified following RFC 3986 encoding guidelines|None|https://example.com|
+|eventDescription|string|None|False|Variant or other descriptior of event type|None|None|
+|eventHash|string|None|False|A unique hash of the event|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|eventSeverity|string|None|False|The partner threat level or rating|None|severe, bad, high|
+|eventTime|string|None|True|The time the event was detected|None|2013-02-08T09:30:26Z|
+|eventType|string|None|False|Common name or classification of threat|None|severe|
+|externalURL|string|None|False|External page containing additional information about event|None|None|
+|fileHash|string|None|False|SHA-1 of file reported by appliance|None|02699626f388ed830012e5b787640e71c56d42d8|
+|fileName|string|None|False|Path to file exhibiting malicious behaviour|None|/path/to/file|
+|protocolVersion|string|https://example.com|True|The version of the protocol for the API|None|https://example.com|
+|providerName|string|Security Platform|True|The provider name for the API|None|Security Platform|
+|src|string|None|False|The first IP or hostname associated with the infected device|None|None|
 
 Example input:
 
 ```
-[{	
-    "dstUrl": "http://internetbadguys.bad-v5.com/a-bad-url-v1",	
-    "alertTime": "2013-02-09T11:14:26.0Z",	
-    "deviceId": "ba6a59f4-e692-4724-ba36-c28132c761de",	
-    "deviceVersion": "13.7a",	
-    "dstDomain": "internetbadguys.bad-v5.com",	
-    "eventTime": "2013-02-09T09:30:26.0Z",	
-    "protocolVersion": "1.0a",	
-    "providerName": "Security Platform",	
-    "disableDstSafeguards": true,	
-    "eventHash": "e88b372b1f98882dca933fa8a2589670",	
-    "fileName": "https://www.fuw.edu.pl/~rwys/pk/notatki_cl.txt",	
-    "fileHash": "da89127fbe1d78313dbfff610b59ff24874bb983",	
-    "externalURL": "https://www.fuw.edu.pl/~rwys/pk/notatki_cl.txt",	
-    "src": "192.168.0.1",	
-    "eventSeverity": "severe",	
-    "eventType": "severe",	
-    "eventDescription": "Some another threat"	
-  },	
-  {	
-    "dstUrl": "http://internetbadguys.bad-v6.com/a-bad-url-v2",	
-    "alertTime": "2013-02-10T11:14:26.0Z",	
-    "deviceId": "ba6a59f4-e692-4724-ba36-c28132c761de",	
-    "deviceVersion": "13.7a",	
-    "dstDomain": "internetbadguys.bad-v6.com",	
-    "eventTime": "2013-02-10T09:30:26.0Z",	
-    "protocolVersion": "1.0a",	
-    "providerName": "Security Platform"	
- }]
+{
+  "alertTime": "2013-02-08T09:30:26Z",
+  "deviceId": "12345678-1234-1234-1234-123456789123",
+  "deviceVersion": "1.0a",
+  "disableDstSafeguards": false,
+  "dstDomain": "www.internetbadguys.com",
+  "dstIP": "8.8.8.8",
+  "dstUrl": "http://internetbadguys.com/security?foo=there%20are%20spaces%20here",
+  "eventHash": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "eventSeverity": "severe, bad, high",
+  "eventTime": "2013-02-08T09:30:26Z",
+  "eventType": "severe",
+  "fileHash": "02699626f388ed830012e5b787640e71c56d42d8",
+  "fileName": "/path/to/file",
+  "protocolVersion": "1.0a",
+  "providerName": "Security Platform"
+}
 ```
 
 ##### Output
@@ -226,7 +231,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 1.1.0 - Action - Add event: Renamed inputs `DstURL` to `DstUrl` and `ID` to `deviceId` | Actions - Delete domains: Updated to return `{'success': True}` | Refactored all the code to improve quality | Upgraded from `komand` to `insight-connect` | New feature: Added option to toggle SSL verify
+* 2.0.0 - Action - Add event: Renamed inputs `DstURL` to `DstUrl` and `ID` to `deviceId` | Actions - Delete domains: Updated to return `{'success': True}` | Action - Add Event: Changed input from one object to multiple individual inputs | Refactored all the code to improve quality | Upgraded from `komand` to `insight-connect` | New feature: Added option to toggle SSL verify
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 0.1.1 - SSL bug fix in SDK

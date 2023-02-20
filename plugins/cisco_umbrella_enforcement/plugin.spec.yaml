@@ -9,7 +9,7 @@ status: []
 description: This plugin utilizes Cisco Umbrella Enforcement to inherit the ability to send
   security events from platform/service/appliance within a customer environment
   to the Cisco security cloud for enforcement
-version: 1.1.0
+version: 2.0.0
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/cisco_umbrella_enforcement
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -24,92 +24,6 @@ hub_tags:
   features: []
 language: python
 types:
-  event:
-    deviceId:
-      type: string
-      description: The ID of the device sending the event
-      required: true
-    deviceVersion:
-      type: string
-      description: Version of device sending the event
-      required: true
-    eventTime:
-      type: string
-      description: Time event was detected
-      example: 2013-02-08T09:30:26Z
-      required: true
-    alertTime:
-      type: string
-      description: Time event was sent to Umbrella must match the following style
-      example: 2013-02-08T09:30:26Z
-      required: true
-    dstDomain:
-      type: string
-      description: The destination domain, specified following RFC3986 encoding guidelines
-        and without the protocol included.
-      example: www.internetbadguys.com
-      required: true
-    dstUrl:
-      type: string
-      description: The destination URL encoded using standard percent-encoding following
-        RFC3986](http://www.ietf.org/rfc/rfc3986.txt) encoding guidelines
-      example: http://internetbadguys.com/security?foo=there%20are%20spaces%20here
-      required: true
-    protocolVersion:
-      type: string
-      description: The version of the protocol for the API. Value should always be
-        1.0a
-      required: true
-    providerName:
-      type: string
-      description: The provider name for the API. Value should always be Security
-        Platform
-      required: true
-    disableDstSafeguards:
-      type: boolean
-      description: A value of 'true' will bypass validations normally performed against
-        submitted events before adding them to any of the domain lists in Umbrella
-      required: false
-    eventHash:
-      type: string
-      description: A unique hash of the event
-      required: false
-    fileName:
-      type: string
-      description: Path to file exhibiting malicious behavior
-      required: false
-    fileHash:
-      type: string
-      description: SHA-1 of file reported by appliance
-      required: false
-    externalURL:
-      type: string
-      description: External page containing additional information about event
-      required: false
-    src:
-      type: string
-      description: IP/Host of the infected computer/device that was patient 0 for
-        the event
-      required: false
-    dstIP:
-      type: string
-      description: The destination IP of the domain, specified in IPv4 dotted-decimal
-        notation
-      example: 8.8.8.8
-      required: false
-    eventSeverity:
-      type: string
-      description: The parter threat level or rating
-      example: severe, bad, high, etc
-      required: false
-    eventType:
-      type: string
-      description: Common name or classification of threat
-      required: false
-    eventDescription:
-      type: string
-      description: Variant or other descriptor of event type
-      required: false
   meta:
     page:
       type: integer
@@ -176,10 +90,114 @@ actions:
     description: Posts a malware event for processing and optionally adds it to the
       customer's domain list
     input:
-      events:
-        type: '[]event'
-        description: Generic event format field. More info at https://docs.umbrella.com/developer/enforcement-api/generic-event-format2/
+      alertTime:
+        title: Alert Time
+        description: The time the event was sent to Umbrella
+        type: string
+        example: 2013-02-08T09:30:26Z
         required: true
+      deviceId:
+        title: Device ID
+        description: The ID of the device sending the event
+        type: string
+        example: 12345678-1234-1234-1234-123456789123
+        required: true
+      deviceVersion:
+        title: Device Version
+        description: The version of the device sending the event
+        type: string
+        example: 1.0a
+        required: true
+      dstDomain:
+        title: Destination Domain
+        description: The destination domain specified following RFC 3986 encoding guidelines
+        type: string
+        example: www.internetbadguys.com
+        required: true
+      dstIP:
+        title: Destination IP
+        description: The destination UP of the domain, specified in IPv4 dotted-decimal notation
+        type: string
+        example: 8.8.8.8
+        required: false
+      dstUrl:
+        title: Destination URL
+        description: The destination URL specified following RFC 3986 encoding guidelines
+        type: string
+        example: http://internetbadguys.com/security?foo=there%20are%20spaces%20here
+        required: true
+      eventDescription:
+        title: Event Description
+        description: Variant or other descriptior of event type
+        type: string
+        required: false
+      eventHash:
+        title: Event Hash
+        description: A unique hash of the event
+        type: string
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+        required: false
+      eventSeverity:
+        title: Event Severity
+        description: The partner threat level or rating
+        type: string
+        example: severe, bad, high
+        required: false
+      eventTime:
+        title: Event Time
+        description: The time the event was detected
+        type: string
+        example: 2013-02-08T09:30:26Z
+        required: true
+      eventType:
+        title: Event Type
+        description: Common name or classification of threat
+        type: string
+        example: severe
+        required: false
+      externalURL:
+        title: External URL
+        description: External page containing additional information about event
+        type: string
+        required: false
+      fileHash:
+        title: File Hash
+        description: SHA-1 of file reported by appliance
+        type: string
+        example: 02699626f388ed830012e5b787640e71c56d42d8
+        required: false
+      fileName:
+        title: File Name
+        description: Path to file exhibiting malicious behaviour
+        type: string
+        example: /path/to/file
+        required: false
+      protocolVersion:
+        title: Protocol Version
+        description: The version of the protocol for the API
+        type: string
+        example: 1.0a
+        default: 1.0a
+        required: true
+      providerName:
+        title: Provider Name
+        description: The provider name for the API
+        type: string
+        example: Security Platform
+        default: Security Platform
+        required: true
+      src:
+        title: Src
+        description: The first IP or hostname associated with the infected device
+        type: string
+        required: false
+      disableDstSafeguards:
+        title: Disable Destination Safeguards
+        description: True bypasses validations normally performed against submitted events
+        type: boolean
+        example: false
+        default: false
+        required: false
     output:
       ID:
         title: ID List
