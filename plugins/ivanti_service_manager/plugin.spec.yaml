@@ -4,7 +4,7 @@ products: [insightconnect]
 name: ivanti_service_manager
 title: Ivanti Service Manager
 description: Ivanti Service Manager is a flexible and complete cloud-optimized, easily scalable and adaptable ITSM solution used for managing and automating ITSM processes
-version: 1.1.0
+version: 1.2.0
 vendor: rapid7
 support: community
 status: []
@@ -1760,4 +1760,41 @@ actions:
         title: Service Request
         description: Newly created service request
         type: service_request
+        required: true
+  search_incidents:
+    title: Search Incidents
+    description: Search Incidents using a Keyword
+    input:
+      text:
+        title: Text
+        description: Keyword to search for
+        type: string
+        required: true
+        example: Phone
+      object_type:
+        title: Object Type
+        description: Business Object to search for
+        type: string
+        required: true
+        default: Incident
+        example: Incident
+      top:
+        title: Top
+        description: Number of results to show
+        type: integer
+        required: false
+        default: 20
+        example: 20
+      skip:
+        title: Skip
+        description: Skip
+        type: integer
+        required: false
+        default: 20
+        example: 20
+    output:
+      data:
+        title: Data
+        description: List of results
+        type: array
         required: true
