@@ -34,11 +34,13 @@ class TestDeleteDomainById(TestCase):
         self.action.logger = logging.getLogger("Action logger")
 
         self.params = {Input.ID: STUB_ID}
+        self.logger = logging
 
     @mock.patch("requests.request", side_effect=mock_request_204)
     def test_delete_domain_by_id_success(self, mock_delete):
+
         response = self.action.run(self.params)
-        expected_response = {"success": ""}
+        expected_response = {"status": ""}
 
         self.assertEqual(response, expected_response)
 

@@ -13,8 +13,8 @@ STUB_CONNECTION = {
     Input.API_KEY: {"secretKey": STUB_API_KEY},
     Input.SSL_VERIFY: STUB_SSL_VERIFY,
 }
-STUB_ID = 1234567
-STUB_NAME = 'https://example.com'
+STUB_ID = 12345678
+STUB_NAME = "https://example.com"
 STUB_EVENT_INPUT = {
     "dstUrl": "http://google.com",
     "alertTime": "2013-02-09T11:14:26.0Z",
@@ -55,11 +55,12 @@ def mocked_request(side_effect: Callable) -> None:
 
 
 def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
+    # breakpoint()
+
     if url == BASE_URL + "/domains":
-        if method == "GET":
-            return MockResponse("domains", status_code)
-        if method == "DELETE":
-            return MockResponse("delete_domain", status_code)
+        return MockResponse("domains", status_code)
+    if url == BASE_URL + f"/domains/{STUB_ID}" or url == BASE_URL + f"/domains/{STUB_NAME}":
+        return MockResponse("delete_domain", status_code)
     if url == BASE_URL + f"/events":
         return MockResponse("add_event", status_code)
 

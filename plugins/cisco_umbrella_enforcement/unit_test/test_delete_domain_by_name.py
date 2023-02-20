@@ -18,7 +18,7 @@ from unit_test.mock import (
     mock_request_404,
     mock_request_500,
     mocked_request,
-    STUB_NAME
+    STUB_NAME,
 )
 
 
@@ -35,9 +35,9 @@ class TestDeleteDomainByName(TestCase):
         self.params = {Input.NAME: STUB_NAME}
 
     @mock.patch("requests.request", side_effect=mock_request_204)
-    def test_delete_domain_by_name_success(self):
+    def test_delete_domain_by_name_success(self, mock_delete):
         response = self.action.run(self.params)
-        expected_response = []
+        expected_response = {'status': ""}
 
         self.assertEqual(response, expected_response)
 
