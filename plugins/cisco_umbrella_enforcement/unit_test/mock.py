@@ -14,27 +14,25 @@ STUB_CONNECTION = {
     Input.SSL_VERIFY: STUB_SSL_VERIFY,
 }
 STUB_ID = 1234567
-STUB_EVENT_INPUT = [
-    {
-        "dstUrl": "http://google.com",
-        "alertTime": "2013-02-09T11:14:26.0Z",
-        "deviceId": "12345678-1234-1234-1234-12345678912",
-        "deviceVersion": "11.1a",
-        "dstDomain": "http://google.com",
-        "eventTime": "2013-02-09T09:30:26.0Z",
-        "protocolVersion": "1.0a",
-        "providerName": "Security Platform",
-        "disableDstSafeguards": True,
-        "eventHash": "e88b372b1f98882dca933fa8a2589670",
-        "fileName": "https://www.fuw.edu.pl/~rwys/pk/notatki_cl.txt",
-        "fileHash": "da89127fbe1d78313dbfff610b59ff24874bb983",
-        "externalURL": "https://www.fuw.edu.pl/~rwys/pk/notatki_cl.txt",
-        "src": "8.8.8.8",
-        "eventSeverity": "severe",
-        "eventType": "severe",
-        "eventDescription": "Some another threat",
-    }
-]
+STUB_EVENT_INPUT = {
+    "dstUrl": "http://google.com",
+    "alertTime": "2013-02-09T11:14:26.0Z",
+    "deviceId": "12345678-1234-1234-1234-12345678912",
+    "deviceVersion": "11.1a",
+    "dstDomain": "http://google.com",
+    "eventTime": "2013-02-09T09:30:26.0Z",
+    "protocolVersion": "1.0a",
+    "providerName": "Security Platform",
+    "disableDstSafeguards": True,
+    "eventHash": "e88b372b1f98882dca933fa8a2589670",
+    "fileName": "https://www.fuw.edu.pl/~rwys/pk/notatki_cl.txt",
+    "fileHash": "da89127fbe1d78313dbfff610b59ff24874bb983",
+    "externalURL": "https://www.fuw.edu.pl/~rwys/pk/notatki_cl.txt",
+    "src": "8.8.8.8",
+    "eventSeverity": "severe",
+    "eventType": "severe",
+    "eventDescription": "Some another threat",
+}
 
 
 class MockResponse:

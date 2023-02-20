@@ -34,8 +34,8 @@ class AddEvent(insightconnect_plugin_runtime.Action):
                 "protocolVersion": params.get(Input.PROTOCOLVERSION),
                 "providerName": params.get(Input.PROVIDERNAME),
                 "src": params.get(Input.SRC),
-                "disableDstSafeguards": params.get(Input.DISABLEDSTSAFEGUARDS)
-             }
+                "disableDstSafeguards": params.get(Input.DISABLEDSTSAFEGUARDS),
+            }
         ]
 
         response = self.connection.client.add_event(data)
