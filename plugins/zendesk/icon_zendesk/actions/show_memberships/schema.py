@@ -49,14 +49,62 @@ class ShowMembershipsOutput(insightconnect_plugin_runtime.Output):
       "title": "Memberships",
       "description": "Members data",
       "items": {
-        "type": "object"
+        "$ref": "#/definitions/organization_memberships"
       },
       "order": 1
     }
   },
   "required": [
     "memberships"
-  ]
+  ],
+  "definitions": {
+    "organization_memberships": {
+      "type": "object",
+      "title": "organization_memberships",
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "title": "Created At",
+          "displayType": "date",
+          "description": "Created at",
+          "format": "date-time",
+          "order": 5
+        },
+        "default": {
+          "type": "boolean",
+          "title": "Default",
+          "description": "Indicates weather it's default organization membership or not for a user",
+          "order": 4
+        },
+        "id": {
+          "type": "integer",
+          "title": "ID",
+          "description": "ID",
+          "order": 1
+        },
+        "organization_id": {
+          "type": "integer",
+          "title": "Organization ID",
+          "description": "Organization ID",
+          "order": 3
+        },
+        "updated_at": {
+          "type": "string",
+          "title": "Updated At",
+          "displayType": "date",
+          "description": "Updated at",
+          "format": "date-time",
+          "order": 6
+        },
+        "user_id": {
+          "type": "integer",
+          "title": "User ID",
+          "description": "ID of user",
+          "order": 2
+        }
+      }
+    }
+  }
 }
     """)
 
