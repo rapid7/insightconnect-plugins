@@ -3,6 +3,8 @@ from .schema import UpdateTicketInput, UpdateTicketOutput, Input, Output
 
 # Custom imports below
 import datetime
+from icon_zendesk.util.objects import Objects
+from icon_zendesk.util.exceptions import detect_type_exception
 
 
 class UpdateTicket(insightconnect_plugin_runtime.Action):
@@ -14,107 +16,82 @@ class UpdateTicket(insightconnect_plugin_runtime.Action):
             output=UpdateTicketOutput(),
         )
 
-    def run(self, params={}):
-        client = self.connection.client
+    def run(self, params={}):  # noqa: C901
+        ticket_id = params.get(Input.TICKET_ID)
+        assignee_id = params.get(Input.ASSIGNEE_ID)
+        collaborator_ids = params.get(Input.COLLABORATOR_IDS)
+        due_at = params.get(Input.DUE_AT)
+        external_id = params.get(Input.EXTERNAL_ID)
+        group_id = params.get(Input.GROUP_ID)
+        problem_id = params.get(Input.PROBLEM_ID)
+        recipient = params.get(Input.RECIPIENT)
+        requester_id = params.get(Input.REQUESTER_ID)
+        subject = params.get(Input.SUBJECT)
+        tags = params.get(Input.TAGS)
+        ticket_type = params.get(Input.TYPE, "").lower()
+        status = params.get(Input.STATUS, "").lower()
+        priority = params.get(Input.PRIORITY, "").lower()
+        comment = params.get(Input.COMMENT)
 
-        ticket = client.tickets(id=params.get(Input.TICKET_ID))
+        try:
+            ticket = self.connection.client.tickets(id=ticket_id)
+        except Exception as error:
+            self.logger.debug(error)
+            detect_type_exception(error)
 
         # I am aware that the below code is gross- I considered doing a loop over the params passed in
         # with values. But to do that we'd have to map them 1:1 to the zenpy params and I don't want to be locked into
         # that type of situation
 
-        ticket.assignee_id = (
-            ticket.assignee_id if params.get(Input.ASSIGNEE_ID) is None else params.get(Input.ASSIGNEE_ID)
-        )
-        ticket.collaborator_ids = (
-            ticket.collaborator_ids
-            if params.get(Input.COLLABORATOR_IDS) is None
-            else params.get(Input.COLLABORATOR_IDS)
-        )
-        ticket.due_at = ticket.due_at if params.get(Input.DUE_AT) is None else params.get(Input.DUE_AT)
-        ticket.external_id = (
-            ticket.external_id if params.get(Input.EXTERNAL_ID) is None else params.get(Input.EXTERNAL_ID)
-        )
-        ticket.group_id = ticket.group_id if params.get(Input.GROUP_ID) is None else params.get(Input.GROUP_ID)
-        ticket.problem_id = ticket.problem_id if params.get(Input.PROBLEM_ID) is None else params.get(Input.PROBLEM_ID)
-        ticket.recipient = ticket.recipient if params.get(Input.RECIPIENT) is None else params.get(Input.RECIPIENT)
-        ticket.requester_id = (
-            ticket.requester_id if params.get(Input.REQUESTER_ID) is None else params.get(Input.REQUESTER_ID)
-        )
-        ticket.subject = ticket.subject if params.get(Input.SUBJECT) is None else params.get(Input.SUBJECT)
-        ticket.tags = ticket.tags if params.get(Input.TAGS) is None else params.get(Input.TAGS)
-        ticket.type = (
-            ticket.type
-            if (params.get(Input.TYPE)) is None or params.get(Input.TYPE) == ""
-            else params.get(Input.TYPE).lower()
-        )
-        ticket.status = (
-            ticket.status
-            if (params.get(Input.STATUS)) is None or params.get(Input.STATUS) == ""
-            else params.get(Input.STATUS).lower()
-        )
-        ticket.priority = (
-            ticket.priority
-            if (params.get(Input.PRIORITY)) is None or params.get(Input.PRIORITY) == ""
-            else params.get(Input.PRIORITY).lower()
-        )
+        ticket.assignee_id = ticket.assignee_id if not ticket_id else assignee_id
+        ticket.collaborator_ids = ticket.collaborator_ids if not collaborator_ids else collaborator_ids
+        ticket.due_at = ticket.due_at if not due_at else due_at
+        ticket.external_id = ticket.external_id if not external_id else external_id
+        ticket.group_id = ticket.group_id if not group_id else group_id
+        ticket.problem_id = ticket.problem_id if not problem_id else problem_id
+        ticket.recipient = ticket.recipient if not recipient else recipient
+        ticket.requester_id = ticket.requester_id if not requester_id else requester_id
+        ticket.subject = ticket.subject if not subject else subject
+        ticket.tags = ticket.tags if not tags else tags
+        ticket.type = ticket.type if not ticket_type else ticket_type
+        ticket.status = ticket.status if not status else status
+        ticket.priority = ticket.priority if priority else priority
 
-        if params.get(Input.COMMENT) is not None:
-            ticket.comment = params.get(Input.COMMENT)
+        if comment:
+            ticket.comment = comment
             if ticket.comment.get("author_id") == "":
                 # Avoid bad request error from Zendesk for empty author_id
                 del ticket.comment["author_id"]
 
-        client.tickets.update(ticket)
+        try:
+            self.connection.client.tickets.update(ticket)
+        except Exception as error:
+            self.logger.debug(error)
+            detect_type_exception(error)
+
         ticket.priority = None if ticket.priority is None else ticket.priority.capitalize()
         ticket.status = None if ticket.status is None else ticket.status.capitalize()
         ticket.type = None if ticket.type is None else ticket.type.capitalize()
 
-        ticket_obj = {
-            "assignee_id": ticket.assignee_id,
-            "brand_id": ticket.brand_id,
-            "collaborator_ids": ticket.collaborator_ids,
-            "created_at": ticket.created_at,
-            "due_at": ticket.due_at,
-            "external_id": ticket.external_id,
-            "forum_topic_id": ticket.forum_topic_id,
-            "group_id": ticket.group_id,
-            "has_incidents": ticket.has_incidents,
-            "id": ticket.id,
-            "organization_id": ticket.organization_id,
-            "priority": ticket.priority,
-            "problem_id": ticket.problem_id,
-            "raw_subject": ticket.raw_subject,
-            "recipient": ticket.recipient,
-            "requester_id": ticket.requester_id,
-            "sharing_agreement_ids": ticket.sharing_agreement_ids,
-            "status": ticket.status,
-            "subject": ticket.subject,
-            "submitter_id": ticket.submitter_id,
-            "tags": ticket.tags,
-            "type": ticket.type,
-            "updated_at": ticket.updated_at,
-            "url": ticket.url,
-        }
+        ticket_object = Objects.create_ticket_object(ticket)
 
-        if params.get(Input.COMMENT) is not None:
-            ticket_obj["comment"] = ticket.comment
+        if comment:
+            ticket_object["comment"] = ticket.comment
 
         # I believe this section is for filling out blank properties that ARE blank in the ticket but we need to
         # then conform to our schema still (e.g. None is not string errors)
         output = dict(UpdateTicketOutput().schema)["definitions"]["ticket"]["properties"]
-        for key in ticket_obj:  # pylint: disable=consider-using-dict-items
-            if ticket_obj[key] is None:
+        for key in ticket_object:  # pylint: disable=consider-using-dict-items
+            if ticket_object[key] is None:
                 if key in output.keys():
                     if output[key]["type"] == "string":
-                        ticket_obj[key] = ""
+                        ticket_object[key] = ""
                     elif "[]" in output[key]["type"]:
-                        ticket_obj[key] = []
+                        ticket_object[key] = []
                     elif output[key]["type"] == "file":
-                        ticket_obj[key] = {"filename": "", "content": ""}
+                        ticket_object[key] = {"filename": "", "content": ""}
                     elif output[key]["type"] == "date":
-                        ticket_obj[key] = datetime.datetime.now()
+                        ticket_object[key] = datetime.datetime.now()
 
-        ticket_obj = insightconnect_plugin_runtime.helper.clean_dict(ticket_obj)
-
-        return {Output.TICKET: ticket_obj}
+        ticket_object = insightconnect_plugin_runtime.helper.clean_dict(ticket_object)
+        return {Output.TICKET: ticket_object}
