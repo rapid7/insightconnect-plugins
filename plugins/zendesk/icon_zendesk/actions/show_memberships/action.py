@@ -1,8 +1,10 @@
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import ShowMembershipsInput, ShowMembershipsOutput, Input, Output
 
 # Custom imports below
-import json
+from icon_zendesk.util.objects import Objects
+from icon_zendesk.util.exceptions import detect_type_exception
 
 
 class ShowMemberships(insightconnect_plugin_runtime.Action):
@@ -15,15 +17,17 @@ class ShowMemberships(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        mem_array = []
-        for org_memb in self.connection.client.users.organization_memberships(user=params.get(Input.USER_ID)):
-            memb_obj = {
-                "id": org_memb.id,
-                "user_id": org_memb.user_id,
-                "organization_id": org_memb.organization_id,
-                "default": org_memb.default,
-                "created_at": org_memb.created_at,
-                "updated_at": org_memb.updated_at,
-            }
-            mem_array.append(memb_obj)
-        return {Output.MEMBERSHIPS: mem_array}
+        user_id = params.get(Input.USER_ID)
+
+        try:
+            organization_memberships = self.connection.client.users.organization_memberships(user=user_id)
+        except Exception as error:
+            self.logger.debug(error)
+            detect_type_exception(error)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+
+        memberships_array = []
+        for organization_membership in organization_memberships:
+            membership_object = Objects.create_membership_object(organization_membership)
+            memberships_array.append(membership_object)
+        return {Output.MEMBERSHIPS: memberships_array}
