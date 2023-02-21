@@ -131,10 +131,10 @@ It accepts an array of JSON objects of the [Generic Event Format](https://docs.u
 |deviceId|string|None|True|The ID of the device sending the event|None|12345678-1234-1234-1234-123456789123|
 |deviceVersion|string|None|True|The version of the device sending the event|None|https://example.com|
 |disableDstSafeguards|boolean|False|False|True bypasses validations normally performed against submitted events|None|False|
-|dstDomain|string|None|True|The destination domain specified following RFC 3986 encoding guidelines|None|https://example.com|
+|dstDomain|string|None|True|The destination domain specified (follow RFC 3986 encoding guidelines)|None|https://example.com|
 |dstIP|string|None|False|The destination UP of the domain, specified in IPv4 dotted-decimal notation|None|https://example.com|
-|dstUrl|string|None|True|The destination URL specified following RFC 3986 encoding guidelines|None|https://example.com|
-|eventDescription|string|None|False|Variant or other descriptior of event type|None|None|
+|dstUrl|string|None|True|The destination URL specified (follow RFC 3986 encoding guidelines)|None|https://example.com|
+|eventDescription|string|None|False|Variant or other descriptor of event type|None|None|
 |eventHash|string|None|False|A unique hash of the event|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |eventSeverity|string|None|False|The partner threat level or rating|None|severe, bad, high|
 |eventTime|string|None|True|The time the event was detected|None|2013-02-08T09:30:26Z|
@@ -178,7 +178,7 @@ Example output:
 
 ```
 {
-  'ID': {'id': '5a050d19,1d08,4dd0,b8b4-6b34da9e4135'}
+  'ID': '5a050d19,1d08,4dd0,b8b4-6b34da9e4135'
 }
 ```
 

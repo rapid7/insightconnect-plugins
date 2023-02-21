@@ -110,7 +110,7 @@ actions:
         required: true
       dstDomain:
         title: Destination Domain
-        description: The destination domain specified following RFC 3986 encoding guidelines
+        description: The destination domain specified (follow RFC 3986 encoding guidelines)
         type: string
         example: www.internetbadguys.com
         required: true
@@ -122,13 +122,13 @@ actions:
         required: false
       dstUrl:
         title: Destination URL
-        description: The destination URL specified following RFC 3986 encoding guidelines
+        description: The destination URL specified (follow RFC 3986 encoding guidelines)
         type: string
         example: http://internetbadguys.com/security?foo=there%20are%20spaces%20here
         required: true
       eventDescription:
         title: Event Description
-        description: Variant or other descriptior of event type
+        description: Variant or other descriptor of event type
         type: string
         required: false
       eventHash:

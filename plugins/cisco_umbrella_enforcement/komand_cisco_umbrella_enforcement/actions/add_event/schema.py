@@ -66,7 +66,7 @@ class AddEventInput(insightconnect_plugin_runtime.Input):
     "dstDomain": {
       "type": "string",
       "title": "Destination Domain",
-      "description": "The destination domain specified following RFC 3986 encoding guidelines",
+      "description": "The destination domain specified (follow RFC 3986 encoding guidelines)",
       "order": 4
     },
     "dstIP": {
@@ -78,13 +78,13 @@ class AddEventInput(insightconnect_plugin_runtime.Input):
     "dstUrl": {
       "type": "string",
       "title": "Destination URL",
-      "description": "The destination URL specified following RFC 3986 encoding guidelines",
+      "description": "The destination URL specified (follow RFC 3986 encoding guidelines)",
       "order": 6
     },
     "eventDescription": {
       "type": "string",
       "title": "Event Description",
-      "description": "Variant or other descriptior of event type",
+      "description": "Variant or other descriptor of event type",
       "order": 7
     },
     "eventHash": {
