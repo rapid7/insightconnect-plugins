@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Nmap"
 Vendor = "rapid7"
-Version = "1.0.3"
+Version = "1.0.4"
 Description = "Open source utility for network discovery and security auditing"
 
 
