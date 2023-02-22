@@ -2,6 +2,7 @@ import insightconnect_plugin_runtime
 from .schema import MonitorSignInOutActivityInput, MonitorSignInOutActivityOutput, MonitorSignInOutActivityState, Input, Output, Component, State
 # Custom imports below
 from datetime import datetime, timedelta
+from icon_zoom.util.event import Event
 
 """
 Task logic:
@@ -17,7 +18,7 @@ Task logic:
 class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
     LAST_EVENT_TIME = "last_event_time"
-    PREVIOUS_EVENTS = "previous_events"
+    BOUNDARY_EVENTS = "boundary_events"
 
     ZOOM_TIME_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
@@ -43,68 +44,90 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         return output, new_state
 
     def subsequent_run(self, state: dict) -> ([dict], dict):
+        # Get time boundaries for new event set retrieval
         now = self._get_datetime_now()
         now_for_zoom = self._format_datetime_for_zoom(dt=now)
 
+        # Get fully consumed paginated event set, using previous run latest event time
         new_events: [dict] = self.connection.zoom_api.get_user_activity_events(
             start_date=state.get(self.LAST_EVENT_TIME),
-            end_date=now_for_zoom
+            end_date=now_for_zoom,
+            page_size=1000
         )
+        new_events = [Event(**e) for e in new_events]
 
+        # Get latest event time, to be used for determining boundary event hashes
         try:
-            new_latest_event_time = new_events[0]["time"]
+            new_latest_event_time = new_events[0].time
             self.logger.info(f"Latest event time is: {new_latest_event_time}")
         except IndexError:
             self.logger.info("Unable to get latest event time, no new events found!")
             return [], {
-                self.PREVIOUS_EVENTS: [],
+                self.BOUNDARY_EVENTS: [],
                 self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now())
             }
 
-        # Convert lists of event dicts to sets of Event to de-dupe
-        new_events: {Event} = {Event(**e) for e in new_events}
-        previous_events = state.get(self.PREVIOUS_EVENTS, [])
-        previous_events: {Event} = {Event(**e) for e in previous_events}
+        # De-dupe events using boundary event hashes from previous run
+        deduped_events = self._dedupe_events(boundary_event_hashes=state[self.BOUNDARY_EVENTS], new_events=new_events)
 
-        # remove duplicates
-        unique_events: {Event} = new_events - previous_events
-        unique_events = [e.__dict__ for e in unique_events]
+        # Determine new boundary event hashes using latest time from newly retrieved event set and latest event time
+        # from the new set.
+        boundary_event_hashes = self._get_boundary_event_hashes(latest_event_time=new_latest_event_time,
+                                                                events=deduped_events)
 
         # update state
-        state[self.PREVIOUS_EVENTS] = unique_events
+        state[self.BOUNDARY_EVENTS] = boundary_event_hashes
         state[self.LAST_EVENT_TIME] = new_latest_event_time
 
-        return unique_events, state
+        return deduped_events, state
 
     def first_run(self, state: dict) -> ([dict], dict):
+        # Get time boundaries for first event set
         now = self._get_datetime_now()
         last_24_hours = self._get_datetime_last_24_hours()
         now_for_zoom = self._format_datetime_for_zoom(dt=now)
         last_24_hours_for_zoom = self._format_datetime_for_zoom(dt=last_24_hours)
         self.logger.info("Got times!")
 
+        # Get first set of events, fully consumed pagination
         new_events: [dict] = self.connection.zoom_api.get_user_activity_events(
             start_date=last_24_hours_for_zoom,
-            end_date=now_for_zoom
+            end_date=now_for_zoom,
+            page_size=1000
         )
-        self.logger.info(f"Got events: {new_events}")
+        new_events = [Event(**e) for e in new_events]
 
+        # Get latest event time as well as boundary hashes. These are to be used for de-duping future event sets
         try:
-            new_latest_event_time = new_events[0]["time"]
+            new_latest_event_time = new_events[0].time
             self.logger.info(f"Latest event time is: {new_latest_event_time}")
+            boundary_event_hashes: [str] = self._get_boundary_event_hashes(latest_event_time=new_latest_event_time,
+                                                                           events=new_events)
         except IndexError:
             self.logger.info("Unable to get latest event time, no new events found!")
             return [], {
-                self.PREVIOUS_EVENTS: [],
+                self.BOUNDARY_EVENTS: [],
                 self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now())
             }
 
         # update state
-        state[self.PREVIOUS_EVENTS] = new_events
+        state[self.BOUNDARY_EVENTS] = boundary_event_hashes
         state[self.LAST_EVENT_TIME] = new_latest_event_time
         self.logger.info(f"Updated state, state is now: {state}")
 
         return new_events, state
+
+    def _dedupe_events(self, boundary_event_hashes: [str], new_events: [Event]) -> [Event]:
+        boundary_event_hashes = set(boundary_event_hashes)
+        new_events: [Event] = {e for e in new_events if e.__hash__() not in boundary_event_hashes}
+
+        return new_events
+
+    def _get_boundary_event_hashes(self, latest_event_time: str, events: [Event]) -> [str]:
+        # Hashes for events that can land on a time boundary
+        hashes = [e.__hash__() for e in events if e.time == latest_event_time]
+
+        return hashes
 
     def _get_datetime_from_zoom_timestamp(self, ts: str) -> datetime:
         dt = datetime.strptime(ts, self.ZOOM_TIME_FORMAT)
@@ -129,20 +152,3 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         return formatted
 
 
-class Event:
-
-    def __init__(self, client_type: str, email: str, ip_address: str, time: str, type_: str, version: str):
-        self.client_type = client_type
-        self.email = email
-        self.ip_address = ip_address
-        self.time = time
-        self.type_ = type_
-        self.version = version
-
-    def __eq__(self, other):
-        return self.client_type == other.client_type \
-               and self.email == other.email \
-               and self.ip_address == other.ip_address \
-               and self.time == other.time \
-               and self.type_ == other.type_ \
-               and self.version == other.version
