@@ -1,12 +1,12 @@
 class Cause:
     INVALID_TARGET = "Invalid target was provided: {target}."
-    INVALID_TOKEN = "Invalid API token was provided."
+    INVALID_TOKEN = "Invalid API token was provided."  # nosec B105
     NOT_FOUND = "Resource not found."
 
 
 class Assistance:
     INVALID_TARGET = "Only IPv4, IPv6, IP range, AS number and two-letter ISO-3166-1 alpha-2 country code are supported. For IP ranges, you can only use prefix lengths /16 and /24 for IPv4 ranges, and prefix lengths /32, /48, and /64 for IPv6 ranges."
-    INVALID_TOKEN = "Verify your API token configured in your connection is correct or the required permissions have been granted for the given token and try again."
+    INVALID_TOKEN = "Verify your API token configured in your connection is correct or the required permissions have been granted for the given token and try again."  # nosec B105
     NOT_FOUND = (
         "Verify your input is correct and not malformed and try again. If the issue persists, please contact support."
     )
