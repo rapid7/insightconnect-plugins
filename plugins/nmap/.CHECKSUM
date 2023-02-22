@@ -10,10 +10,6 @@
 		{
 			"identifier": "connection/schema.py",
 			"hash": "da5382221ca2a33a2f854e17b068d502"
-		},
-		{
-			"identifier": "marshmallow/schema.py",
-			"hash": "7c9fc22caa77ab8be9957e79867f426a"
 		}
 	]
 }
