@@ -7,11 +7,9 @@ import requests
 
 STUB_VERSION_NUMBER = "1.0"
 STUB_API_KEY = "9de5069c5afe602b2ea0a04b66beb2c0"
-STUB_SSL_VERIFY = True
 BASE_URL = f"https://s-platform.api.opendns.com/{STUB_VERSION_NUMBER}"
 STUB_CONNECTION = {
     Input.API_KEY: {"secretKey": STUB_API_KEY},
-    Input.SSL_VERIFY: STUB_SSL_VERIFY,
 }
 STUB_ID = 12345678
 STUB_NAME = "https://example.com"
