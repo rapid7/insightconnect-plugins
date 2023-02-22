@@ -41,6 +41,8 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             self.logger.info("Subsequent run")
             output, new_state = self.subsequent_run(state=state)
 
+        # Turn events list back into a list of dicts
+        output = [e.__dict__ for e in output]
         return output, new_state
 
     def subsequent_run(self, state: dict) -> ([dict], dict):
@@ -96,6 +98,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             page_size=1000
         )
         new_events = [Event(**e) for e in new_events]
+        self.logger.info(f"Got {len(new_events)} events!")
 
         # Get latest event time as well as boundary hashes. These are to be used for de-duping future event sets
         try:
@@ -150,5 +153,3 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
     def _format_datetime_for_zoom(self, dt: datetime) -> str:
         formatted = dt.strftime(self.ZOOM_TIME_FORMAT)
         return formatted
-
-
