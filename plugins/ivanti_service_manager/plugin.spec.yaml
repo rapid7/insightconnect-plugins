@@ -1457,6 +1457,27 @@ connection:
     required: false
     example: true
 
+triggers:
+  new_incident:
+    title: New incident
+    description: Check for new incident
+    input:
+      frequency:
+        title: Frequency
+        description: How often the trigger should check for new detections in seconds
+        type: integer
+        default: 10
+        required: true
+        example: 60
+    output:
+      incident:
+        title: Incident
+        description: New Incident
+        type: incident
+        required: true
+        example: {"FILL IN EXAMPLE HERE"}
+
+
 actions:
   create_incident:
     title: Create Incident

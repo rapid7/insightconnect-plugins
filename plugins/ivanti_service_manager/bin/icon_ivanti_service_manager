@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Ivanti Service Manager"
 Vendor = "rapid7"
-Version = "1.1.0"
+Version = "1.2.0"
 Description = "Ivanti Service Manager is a flexible and complete cloud-optimized, easily scalable and adaptable ITSM solution used for managing and automating ITSM processes"
 
 
@@ -34,6 +34,8 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
+            self.add_trigger(triggers.NewIncident())
+
             self.add_action(actions.AddNote())
 
             self.add_action(actions.CreateIncident())

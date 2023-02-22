@@ -77,6 +77,9 @@ class IvantiServiceManagerAPI:
     def search_incident(self, text: str, payload: dict) -> dict:
         return clean(self._call_api("POST", f"rest/search/{text}", json_data=payload))
 
+    def get_all_incidents(self):
+        return clean(self._call_api("GET", "odata/businessobject/incidents"))
+
     def post_journal_note(self, payload: dict) -> dict:
         return clean(self._call_api("POST", "odata/businessobject/journal__Notess", json_data=payload))
 

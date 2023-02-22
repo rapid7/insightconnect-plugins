@@ -1,7 +1,7 @@
 {
-	"spec": "62a49c419b49f6fde89757087632c923",
-	"manifest": "b8b06592b13440d3ba9bbd1d06b73a2d",
-	"setup": "e2a653c36eb779f41a14d133b07bd66c",
+	"spec": "d1a09bbaea32dd3c568c1c1634cf2367",
+	"manifest": "cf417af354a4a81312939fc1502e24d0",
+	"setup": "dcff36b12457629cc159d9a85b927604",
 	"schemas": [
 		{
 			"identifier": "add_note/schema.py",
@@ -30,6 +30,10 @@
 		{
 			"identifier": "connection/schema.py",
 			"hash": "fb830bf2c2fd0f2d772a8254b51e3e9f"
+		},
+		{
+			"identifier": "new_incident/schema.py",
+			"hash": "fbfe65511acc3ed50121a1272dd1041b"
 		},
 		{
 			"identifier": "insightconnect_plugin_runtime/schema.py",
