@@ -15,7 +15,7 @@ _This plugin does not contain any requirements._
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* 2022-11-18
 
 # Documentation
 
