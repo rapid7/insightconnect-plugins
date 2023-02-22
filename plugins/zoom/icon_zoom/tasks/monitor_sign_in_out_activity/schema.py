@@ -38,22 +38,12 @@ class MonitorSignInOutActivityState(insightconnect_plugin_runtime.State):
 class MonitorSignInOutActivityOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
-  "type": "object",
-  "title": "Variables",
-  "properties": {
-    "activity_logs": {
-      "type": "array",
-      "title": "Activity Logs",
-      "description": "All activity logs within the specified time range",
-      "items": {
-        "$ref": "#/definitions/user_activity"
-      },
-      "order": 1
-    }
+    "type": "array",
+    "title": "Activity Logs",
+    "description": "All activity logs within the specified time range",
+    "items": {
+    "$ref": "#/definitions/user_activity"
   },
-  "required": [
-    "activity_logs"
-  ],
   "definitions": {
     "user_activity": {
       "type": "object",
