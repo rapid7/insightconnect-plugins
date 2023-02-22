@@ -56,7 +56,7 @@ class DomainsOutput(insightconnect_plugin_runtime.Output):
         "meta": {
           "$ref": "#/definitions/meta",
           "title": "Meta",
-          "description": "ejejeje",
+          "description": "meta data",
           "order": 4
         },
         "name": {
@@ -154,7 +154,7 @@ class DomainsOutput(insightconnect_plugin_runtime.Output):
             "meta": {
               "$ref": "#/definitions/meta",
               "title": "Meta",
-              "description": "ejejeje",
+              "description": "meta data",
               "order": 4
             },
             "name": {

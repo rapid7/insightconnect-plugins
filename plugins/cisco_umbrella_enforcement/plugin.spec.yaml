@@ -59,7 +59,7 @@ types:
       required: true
     meta:
       type: meta
-      description: ejejeje
+      description: meta data
       required: false
   domains:
     meta:
