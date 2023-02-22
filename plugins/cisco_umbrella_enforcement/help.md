@@ -232,7 +232,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 2.0.0 - Action - Add event: Renamed inputs `DstURL` to `DstUrl` and `ID` to `deviceId` | Actions - Delete domains: Updated to return `{'success': True}` | Action - Add Event: Changed input from one object to multiple individual inputs | Refactored all the code to improve quality | Upgraded from `komand` to `insight-connect` | New feature: Added option to toggle SSL verify
+* 2.0.0 - Action - Delete domains: Updated to return `{'success': True}` | Action - Add Event: Changed input from one object to multiple inputs | Refactored all the code to improve quality | Upgraded from `komand` to `insight-connect` | Bug fix - Fixed `wrong key` error on failed SSL cert validation
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 0.1.1 - SSL bug fix in SDK
