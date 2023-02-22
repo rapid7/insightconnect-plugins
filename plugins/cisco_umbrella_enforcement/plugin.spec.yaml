@@ -77,13 +77,6 @@ connection:
     description: Cisco Umbrella Management API key
     example: 9de5069c5afe602b2ea0a04b66beb2c0
     required: true
-  ssl_verify:
-    title: SSL Verify
-    description: Boolean value to indicate whether to add SSL verify to requests
-    type: boolean
-    required: true
-    example: true
-    default: true
 actions:
   add_event:
     title: Add Event
@@ -130,6 +123,7 @@ actions:
         title: Event Description
         description: Variant or other descriptor of event type
         type: string
+        example: some other threat
         required: false
       eventHash:
         title: Event Hash
@@ -159,6 +153,7 @@ actions:
         title: External URL
         description: External page containing additional information about event
         type: string
+        example: https://link-to-external-page.txt
         required: false
       fileHash:
         title: File Hash
@@ -190,6 +185,7 @@ actions:
         title: Src
         description: The first IP or hostname associated with the infected device
         type: string
+        example: 192.168.0.1
         required: false
       disableDstSafeguards:
         title: Disable Destination Safeguards
@@ -201,7 +197,7 @@ actions:
     output:
       ID:
         title: ID List
-        description: List of added IDs
+        description: Object containing added IDs
         type: object
         required: true
   domains:
@@ -225,10 +221,10 @@ actions:
         example: 1234567
         required: true
     output:
-      status:
-        title: Status
+      success:
+        title: Success
         description: Action status [success | error]
-        type: string
+        type: boolean
         required: true
   delete_domain_by_name:
     title: Delete Domain by Name
@@ -241,8 +237,8 @@ actions:
         example: internetbadguys.bad-v5.com
         required: true
     output:
-      status:
-        title: Status
+      success:
+        title: Success
         description: Action status [success | error]
-        type: string
+        type: boolean
         required: true

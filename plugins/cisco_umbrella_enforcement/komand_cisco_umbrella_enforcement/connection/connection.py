@@ -16,9 +16,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Connect: Connecting..")
 
         key = params.get(Input.API_KEY).get("secretKey")
-        ssl_verify = params.get(Input.SSL_VERIFY)
 
-        self.client = CiscoUmbrellaEnforcementAPI(key, ssl_verify)
+        self.client = CiscoUmbrellaEnforcementAPI(key)
 
     def test(self):
         try:

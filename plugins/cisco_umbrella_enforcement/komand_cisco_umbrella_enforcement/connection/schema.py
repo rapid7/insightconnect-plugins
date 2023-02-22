@@ -5,7 +5,6 @@ import json
 
 class Input:
     API_KEY = "api_key"
-    SSL_VERIFY = "ssl_verify"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -19,18 +18,10 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "API Key",
       "description": "Cisco Umbrella Management API key",
       "order": 1
-    },
-    "ssl_verify": {
-      "type": "boolean",
-      "title": "SSL Verify",
-      "description": "Boolean value to indicate whether to add SSL verify to requests",
-      "default": true,
-      "order": 2
     }
   },
   "required": [
-    "api_key",
-    "ssl_verify"
+    "api_key"
   ],
   "definitions": {
     "credential_secret_key": {

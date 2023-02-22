@@ -27,14 +27,12 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|Cisco Umbrella Management API key|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|ssl_verify|boolean|True|True|Boolean value to indicate whether to add SSL verify to requests|None|True|
 
 Example input:
 
 ```
 {
-  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
-  "ssl_verify": true
+  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 
@@ -106,7 +104,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|True|Action status [success | error]|
+|success|boolean|True|Action status [success | error]|
 
 Example output:
 
@@ -134,17 +132,17 @@ It accepts an array of JSON objects of the [Generic Event Format](https://docs.u
 |dstDomain|string|None|True|The destination domain specified (follow RFC 3986 encoding guidelines)|None|https://example.com|
 |dstIP|string|None|False|The destination UP of the domain, specified in IPv4 dotted-decimal notation|None|https://example.com|
 |dstUrl|string|None|True|The destination URL specified (follow RFC 3986 encoding guidelines)|None|https://example.com|
-|eventDescription|string|None|False|Variant or other descriptor of event type|None|None|
+|eventDescription|string|None|False|Variant or other descriptor of event type|None|some other threat|
 |eventHash|string|None|False|A unique hash of the event|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |eventSeverity|string|None|False|The partner threat level or rating|None|severe, bad, high|
 |eventTime|string|None|True|The time the event was detected|None|2013-02-08T09:30:26Z|
 |eventType|string|None|False|Common name or classification of threat|None|severe|
-|externalURL|string|None|False|External page containing additional information about event|None|None|
+|externalURL|string|None|False|External page containing additional information about event|None|https://link-to-external-page.txt|
 |fileHash|string|None|False|SHA-1 of file reported by appliance|None|02699626f388ed830012e5b787640e71c56d42d8|
 |fileName|string|None|False|Path to file exhibiting malicious behaviour|None|/path/to/file|
 |protocolVersion|string|https://example.com|True|The version of the protocol for the API|None|https://example.com|
 |providerName|string|Security Platform|True|The provider name for the API|None|Security Platform|
-|src|string|None|False|The first IP or hostname associated with the infected device|None|None|
+|src|string|None|False|The first IP or hostname associated with the infected device|None|192.168.0.1|
 
 Example input:
 
@@ -157,14 +155,17 @@ Example input:
   "dstDomain": "www.internetbadguys.com",
   "dstIP": "8.8.8.8",
   "dstUrl": "http://internetbadguys.com/security?foo=there%20are%20spaces%20here",
+  "eventDescription": "some other threat",
   "eventHash": "9de5069c5afe602b2ea0a04b66beb2c0",
   "eventSeverity": "severe, bad, high",
   "eventTime": "2013-02-08T09:30:26Z",
   "eventType": "severe",
+  "externalURL": "https://link-to-external-page.txt",
   "fileHash": "02699626f388ed830012e5b787640e71c56d42d8",
   "fileName": "/path/to/file",
   "protocolVersion": "1.0a",
-  "providerName": "Security Platform"
+  "providerName": "Security Platform",
+  "src": "192.168.0.1"
 }
 ```
 
@@ -172,7 +173,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|ID|object|True|List of added IDs|
+|ID|object|True|Object containing added IDs|
 
 Example output:
 
@@ -205,7 +206,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|True|Action status [success | error]|
+|success|boolean|True|Action status [success | error]|
 
 Example output:
 

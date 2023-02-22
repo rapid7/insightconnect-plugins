@@ -12,7 +12,7 @@ class Input:
     
 
 class Output:
-    STATUS = "status"
+    SUCCESS = "success"
     
 
 class DeleteDomainByNameInput(insightconnect_plugin_runtime.Input):
@@ -44,15 +44,15 @@ class DeleteDomainByNameOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "status": {
-      "type": "string",
-      "title": "Status",
+    "success": {
+      "type": "boolean",
+      "title": "Success",
       "description": "Action status [success | error]",
       "order": 1
     }
   },
   "required": [
-    "status"
+    "success"
   ]
 }
     """)

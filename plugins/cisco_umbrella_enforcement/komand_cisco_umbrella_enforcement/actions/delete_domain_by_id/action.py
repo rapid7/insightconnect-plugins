@@ -18,4 +18,5 @@ class DeleteDomainById(insightconnect_plugin_runtime.Action):
 
         result = self.connection.client.delete_event(domain_id=ID)
 
-        return {Output.STATUS: result}
+        if result == "":
+            return {Output.SUCCESS: True}

@@ -176,7 +176,7 @@ class AddEventOutput(insightconnect_plugin_runtime.Output):
     "ID": {
       "type": "object",
       "title": "ID List",
-      "description": "List of added IDs",
+      "description": "Object containing added IDs",
       "order": 1
     }
   },

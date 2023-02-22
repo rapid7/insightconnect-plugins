@@ -7,8 +7,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 class CiscoUmbrellaEnforcementAPI:
     VERSION = "1.0"
 
-    def __init__(self, customer_key, verify):
-        self.verify = verify
+    def __init__(self, customer_key):
         self.url = f"https://s-platform.api.opendns.com/{CiscoUmbrellaEnforcementAPI.VERSION}"
         self.params = {"customerKey": customer_key}
 
@@ -56,9 +55,7 @@ class CiscoUmbrellaEnforcementAPI:
             "Accept": "application/json",
         }
 
-        response = requests.request(
-            method, self.url + path, params=self.params, data=json.dumps(data), headers=headers, verify=self.verify
-        )
+        response = requests.request(method, self.url + path, params=self.params, data=json.dumps(data), headers=headers)
 
         # Error handling
         if response.status_code == 400:
