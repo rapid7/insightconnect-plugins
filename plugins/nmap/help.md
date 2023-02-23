@@ -120,6 +120,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.4 - Action - Scan: Fix validation error for returned results. Changed array to object
 * 1.0.3 - Scan: Fixed issue where `sudo` == True caused an error | Fixed issue where inputting 'nmap_args' as an empty string caused an error
 * 1.0.2 - New spec and help.md format for the Extension Library
 * 1.0.1 - Support web server mode
