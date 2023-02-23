@@ -3,5 +3,6 @@ from .add_note.action import AddNote
 from .create_incident.action import CreateIncident
 from .create_service_request.action import CreateServiceRequest
 from .delete_incident.action import DeleteIncident
+from .get_incident.action import GetIncident
 from .search_incidents.action import SearchIncidents
 from .update_incident.action import UpdateIncident

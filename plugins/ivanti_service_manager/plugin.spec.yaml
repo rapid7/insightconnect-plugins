@@ -152,7 +152,6 @@ types:
       title: Profile Link Category
       description: Profile link category
       type: string
-      required: false
     ProfileLink_RecID:
       title: Profile Link Rec ID
       description: Profile link Rec ID
@@ -1477,7 +1476,6 @@ triggers:
         required: true
         example: {"FILL IN EXAMPLE HERE"}
 
-
 actions:
   create_incident:
     title: Create Incident
@@ -1808,14 +1806,30 @@ actions:
         example: 20
       skip:
         title: Skip
-        description: Skip
+        description: Number of results to skip
         type: integer
         required: false
-        default: 20
+        default: 0
         example: 20
     output:
       data:
         title: Data
         description: List of results
-        type: array
+        type: "[]incident"
+        required: true
+  get_incident:
+    title: Get Incident
+    description: Get Incident by Incident Number
+    input:
+      incident_number:
+        title: Incident Number
+        description: Incident Number of Incident to get
+        type: integer
+        required: true
+        example: 12345
+    output:
+      incident:
+        title: Incident
+        description: Incident requested
+        type: incident
         required: true

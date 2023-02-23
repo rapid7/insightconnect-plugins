@@ -4,57 +4,32 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Search Incidents using a Keyword"
+    DESCRIPTION = "Get Incident by Incident Number"
 
 
 class Input:
-    OBJECT_TYPE = "object_type"
-    SKIP = "skip"
-    TEXT = "text"
-    TOP = "top"
+    INCIDENT_NUMBER = "incident_number"
     
 
 class Output:
-    DATA = "data"
+    INCIDENT = "incident"
     
 
-class SearchIncidentsInput(insightconnect_plugin_runtime.Input):
+class GetIncidentInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "object_type": {
-      "type": "string",
-      "title": "Object Type",
-      "description": "Business Object to search for",
-      "default": "Incident",
-      "order": 2
-    },
-    "skip": {
+    "incident_number": {
       "type": "integer",
-      "title": "Skip",
-      "description": "Number of results to skip",
-      "default": 0,
-      "order": 4
-    },
-    "text": {
-      "type": "string",
-      "title": "Text",
-      "description": "Keyword to search for",
+      "title": "Incident Number",
+      "description": "Incident Number of Incident to get",
       "order": 1
-    },
-    "top": {
-      "type": "integer",
-      "title": "Top",
-      "description": "Number of results to show",
-      "default": 20,
-      "order": 3
     }
   },
   "required": [
-    "object_type",
-    "text"
+    "incident_number"
   ]
 }
     """)
@@ -63,24 +38,21 @@ class SearchIncidentsInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class SearchIncidentsOutput(insightconnect_plugin_runtime.Output):
+class GetIncidentOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "data": {
-      "type": "array",
-      "title": "Data",
-      "description": "List of results",
-      "items": {
-        "$ref": "#/definitions/incident"
-      },
+    "incident": {
+      "$ref": "#/definitions/incident",
+      "title": "Incident",
+      "description": "Incident requested",
       "order": 1
     }
   },
   "required": [
-    "data"
+    "incident"
   ],
   "definitions": {
     "incident": {

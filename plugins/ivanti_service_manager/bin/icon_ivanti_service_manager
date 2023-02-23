@@ -44,6 +44,8 @@ def main():
 
             self.add_action(actions.DeleteIncident())
 
+            self.add_action(actions.GetIncident())
+
             self.add_action(actions.SearchIncidents())
 
             self.add_action(actions.UpdateIncident())

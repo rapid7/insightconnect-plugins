@@ -29,7 +29,7 @@ class NewIncident(insightconnect_plugin_runtime.Trigger):
                 new_ids = set()
 
                 for incident in incidents:
-                    incident_id = str(incident["id"])
+                    incident_id = str(incident["IncidentNumber"])
                     # if it's new use self.send(info)
                     if incident_id not in cached_ids:
                         # record current info
@@ -41,5 +41,5 @@ class NewIncident(insightconnect_plugin_runtime.Trigger):
                 # sleep for frequency amount of time
                 time.sleep(frequency)
             # add wee exception bit outside the while loop incase it dies
-            except Exception as e:
-                raise PluginException("An error occurred while reading incidents: {}".format(e))
+            except Exception as error:
+                raise PluginException(f"An error occurred while reading incidents: {error}")
