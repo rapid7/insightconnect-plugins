@@ -14,17 +14,27 @@ This plugin utilizes the [Cisco Umbrella Enforcement API](https://enforcement-ap
 
 * Cisco Umbrella Enforcement API key
 
+# Supported Product Versions
+
+_There are no supported product versions listed._
+
 # Documentation
 
 ## Setup
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|api_key|credential_secret_key|None|True|Enter API key e.g. 1111-2222-3333-4444|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|True|Cisco Umbrella Management API key|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
-The API key is a UUID-v4 [Customer key](https://docs.umbrella.com/developer/enforcement-api/authentication-and-versioning/).
+Example input:
+
+```
+{
+  "api_key": "9de5069c5afe602b2ea0a04b66beb2c0"
+}
+```
 
 ## Technical Details
 
@@ -42,8 +52,7 @@ _This action does not contain any inputs._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|meta|meta|True|The meta array shows which page of results is available, the number of results and next and previous available pages to query|
-|data|[]data|True|The data array contains the domains in the domain list, along with a unique ID number for each domain|
+|domains|domains|False|Array containing domains in the domain list|
 
 Example output:
 
@@ -79,15 +88,23 @@ The delete comand should include the numerical identifier (ID) as specified in t
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|domain|string|None|True|Domain name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|name|string|None|True|Domain name|None|internetbadguys.bad-v5.com|
+
+Example input:
+
+```
+{
+  "name": "internetbadguys.bad-v5.com"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|True|Action status [success \| error]|
+|success|boolean|True|Action status [success | error]|
 
 Example output:
 
@@ -106,80 +123,90 @@ It accepts an array of JSON objects of the [Generic Event Format](https://docs.u
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|events|array|None|True|Array of JSON objects in generic event format. More info at https://docs.umbrella.com/developer/enforcement-api/generic-event-format2/|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|alertTime|string|None|True|The time the event was sent to Umbrella|None|2013-02-08 09:30:26|
+|deviceId|string|None|True|The ID of the device sending the event|None|12345678-1234-1234-1234-123456789123|
+|deviceVersion|string|None|True|The version of the device sending the event|None|1.0a|
+|disableDstSafeguards|boolean|False|False|True bypasses validations normally performed against submitted events|None|False|
+|dstDomain|string|None|True|The destination domain specified (follow RFC 3986 encoding guidelines)|None|www.internetbadguys.com|
+|dstIP|string|None|False|The destination UP of the domain, specified in IPv4 dotted-decimal notation|None|8.8.8.8|
+|dstUrl|string|None|True|The destination URL specified (follow RFC 3986 encoding guidelines)|None|http://internetbadguys.com/security?foo=there%20are%20spaces%20here|
+|eventDescription|string|None|False|Variant or other descriptor of event type|None|some other threat|
+|eventHash|string|None|False|A unique hash of the event|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|eventSeverity|string|None|False|The partner threat level or rating|None|severe, bad, high|
+|eventTime|string|None|True|The time the event was detected|None|2013-02-08 09:30:26|
+|eventType|string|None|False|Common name or classification of threat|None|severe|
+|externalURL|string|None|False|External page containing additional information about event|None|https://link-to-external-page.txt|
+|fileHash|string|None|False|SHA-1 of file reported by appliance|None|02699626f388ed830012e5b787640e71c56d42d8|
+|fileName|string|None|False|Path to file exhibiting malicious behaviour|None|/path/to/file|
+|protocolVersion|string|1.0a|True|The version of the protocol for the API|None|1.0a|
+|providerName|string|Security Platform|True|The provider name for the API|None|Security Platform|
+|src|string|None|False|The first IP or hostname associated with the infected device|None|192.168.0.1|
 
 Example input:
 
 ```
-
-[{
-    "dstURL": "http://internetbadguys.bad-v5.com/a-bad-url-v1",
-    "alertTime": "2013-02-09T11:14:26.0Z",
-    "ID": "ba6a59f4-e692-4724-ba36-c28132c761de",
-    "deviceVersion": "13.7a",
-    "dstDomain": "internetbadguys.bad-v5.com",
-    "eventTime": "2013-02-09T09:30:26.0Z",
-    "protocolVersion": "1.0a",
-    "providerName": "Security Platform",
-    "disableDstSafeguards": true,
-    "eventHash": "e88b372b1f98882dca933fa8a2589670",
-    "fileName": "https://www.fuw.edu.pl/~rwys/pk/notatki_cl.txt",
-    "fileHash": "da89127fbe1d78313dbfff610b59ff24874bb983",
-    "externalURL": "https://www.fuw.edu.pl/~rwys/pk/notatki_cl.txt",
-    "src": "192.168.0.1",
-    "eventSeverity": "severe",
-    "eventType": "severe",
-    "eventDescription": "Some another threat"
-  },
-  {
-    "dstURL": "http://internetbadguys.bad-v6.com/a-bad-url-v2",
-    "alertTime": "2013-02-10T11:14:26.0Z",
-    "ID": "ba6a59f4-e692-4724-ba36-c28132c761de",
-    "deviceVersion": "13.7a",
-    "dstDomain": "internetbadguys.bad-v6.com",
-    "eventTime": "2013-02-10T09:30:26.0Z",
-    "protocolVersion": "1.0a",
-    "providerName": "Security Platform"
- }]
-
+{
+  "alertTime": "2013-02-08T09:30:26Z",
+  "deviceId": "12345678-1234-1234-1234-123456789123",
+  "deviceVersion": "1.0a",
+  "disableDstSafeguards": false,
+  "dstDomain": "www.internetbadguys.com",
+  "dstIP": "8.8.8.8",
+  "dstUrl": "http://internetbadguys.com/security?foo=there%20are%20spaces%20here",
+  "eventDescription": "some other threat",
+  "eventHash": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "eventSeverity": "severe, bad, high",
+  "eventTime": "2013-02-08T09:30:26Z",
+  "eventType": "severe",
+  "externalURL": "https://link-to-external-page.txt",
+  "fileHash": "02699626f388ed830012e5b787640e71c56d42d8",
+  "fileName": "/path/to/file",
+  "protocolVersion": "1.0a",
+  "providerName": "Security Platform",
+  "src": "192.168.0.1"
+}
 ```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|id|string|True|Id of created event|
+|ID|object|True|Object containing added IDs|
 
 Example output:
 
 ```
-
 {
-  "ID": [
-    "42216a75,da20,4a1e,93bc-b07edfacc1f3"
-  ]
+  'ID': '5a050d19,1d08,4dd0,b8b4-6b34da9e4135'
 }
-
 ```
 
 #### Delete Domain by ID
 
 This action is used to delete domain from user domain list by ID.
-The delete comand should include the numerical identifier (ID) as specified in the LIST endpoint or the actual domain name you'd like to delete.
+The delete command should include the numerical identifier (ID) as specified in the LIST endpoint or the actual domain name you'd like to delete.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|ID|integer|None|True|Unique ID number of domain|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ID|integer|None|True|Unique ID number of domain|None|1234567|
+
+Example input:
+
+```
+{
+  "ID": 1234567
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|status|string|True|Action status [success \| error]|
+|success|boolean|True|Action status [success | error]|
 
 Example output:
 
@@ -193,7 +220,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -205,6 +232,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.0.0 - Action - Delete domains: Updated to return `{'success': True}` | Action - Add Event: Changed input from one object to multiple inputs | Refactored all the code to improve quality | Upgraded from `komand` to `insight-connect` | Bug fix - Fixed `wrong key` error on failed SSL cert validation
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 0.1.1 - SSL bug fix in SDK

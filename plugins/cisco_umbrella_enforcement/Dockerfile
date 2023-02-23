@@ -1,7 +1,6 @@
-FROM komand/python-pypy3-plugin:2
-LABEL organization=komand
+FROM rapid7/insightconnect-python-3-38-plugin:4
+LABEL organization=rapid7
 LABEL sdk=python
-LABEL type=plugin
 
 ENV SSL_CERT_FILE /etc/ssl/certs/ca-certificates.crt
 ENV SSL_CERT_DIR /etc/ssl/certs
