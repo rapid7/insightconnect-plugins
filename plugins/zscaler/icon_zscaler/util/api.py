@@ -101,7 +101,7 @@ class ZscalerAPI:
             },
         )
 
-    def _call_api(
+    def _call_api(  # noqa: C901
         self, method: str, path: str, params: dict = {}, data: str = None, json_data: dict = None, headers: dict = None
     ) -> Response:
         try:
