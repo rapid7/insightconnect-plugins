@@ -106,6 +106,48 @@ class TestGetUserActivityEvents(unittest.TestCase):
 
         self.assertEqual(expected, got)
 
+    def test_dedupe_events_no_dupes(self):
+        samples = [{
+            "client_type": "mac",
+            "email": "test@test.com",
+            "ip_address": "11.11.11.11",
+            "time": "2023-02-22T21:44:44Z",
+            "type": "Sign in",
+            "version": "5.13.7.15481"
+        }, {
+            "client_type": "windows",
+            "email": "test2@test.com",
+            "ip_address": "192.168.1.1",
+            "time": "2023-02-22T21:44:44Z",
+            "type": "Sign in",
+            "version": "5.13.7.15481"
+        }, {
+            "client_type": "mac",
+            "email": "test@test.com",
+            "ip_address": "11.11.11.11",
+            "time": "2023-02-22T21:41:41Z",
+            "type": "Sign out",
+            "version": "5.13.7.15481"
+        }, {
+            "client_type": "mac",
+            "email": "test@test.com",
+            "ip_address": "11.11.11.11",
+            "time": "2023-02-22T21:40:41Z",
+            "type": "Sign out",
+            "version": "5.13.7.15481"
+        }]
+
+        all_events = [Event(**s) for s in samples]
+        boundary_hashes = [
+            "197f96ef45ad08592bfea604f60b6abcfc7d4bfc",
+            "8c68922ce0e81f42e4db701317aa7f219049b146"
+        ]
+
+        task = MonitorSignInOutActivity()
+        got = task._dedupe_events(boundary_event_hashes=boundary_hashes, new_events=all_events)
+
+        self.assertEqual(all_events, got)
+
 
 if __name__ == '__main__':
     unittest.main()
