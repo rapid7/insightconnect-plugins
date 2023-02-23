@@ -1,0 +1,24 @@
+{
+  "id": 123456789,
+  "name": "Sample user",
+  "email": "user@example.com",
+  "groups": [
+    {
+      "id": 123456789,
+      "name": "Test Group",
+      "idpId": 123456789,
+      "comments": "Sample comment"
+    }
+  ],
+  "department": {
+    "id": 123456789,
+    "name": "Test Department",
+    "idpId": 123456789,
+    "comments": "Sample comment",
+    "deleted": false
+  },
+  "comments": "Sample comment",
+  "tempAuthEmail": "user@example.com",
+  "password": "randomPW129",
+  "adminUser": false
+}

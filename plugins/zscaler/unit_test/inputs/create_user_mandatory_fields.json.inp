@@ -1,0 +1,9 @@
+{
+  "departmentName": "Test Department",
+  "email": "user@example.com",
+  "groupNames": [
+    "Test Group"
+  ],
+  "name": "Mandatory fields",
+  "password": "randomPW129"
+}

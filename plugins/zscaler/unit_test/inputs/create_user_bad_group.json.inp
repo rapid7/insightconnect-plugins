@@ -1,0 +1,11 @@
+{
+  "comments": "Invalid group",
+  "departmentName": "Test Department",
+  "email": "user@example.com",
+  "groupNames": [
+    "Not exist"
+  ],
+  "name": "Sample user",
+  "password": "randomPW129",
+  "tempAuthEmail": "user@example.com"
+}

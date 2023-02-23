@@ -1,0 +1,7 @@
+{
+  "department": "Test Department",
+  "group": "Test Group",
+  "name": "Sample user",
+  "page": 1,
+  "pageSize": 100
+}
