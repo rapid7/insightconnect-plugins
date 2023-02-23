@@ -21,7 +21,7 @@ class IvantiServiceManagerAPI:
             raise PluginException(
                 cause="Multiple employees found.",
                 assistance=f"Search for {identifier} returned more than 1 result. "
-                "Please provide a unique identifier.",
+                           "Please provide a unique identifier.",
             )
 
         if employees:
