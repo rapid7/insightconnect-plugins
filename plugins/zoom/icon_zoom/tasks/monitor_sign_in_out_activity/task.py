@@ -120,15 +120,16 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
         return new_events, state
 
-    def _dedupe_events(self, boundary_event_hashes: [str], new_events: [Event]) -> [Event]:
-        boundary_event_hashes = set(boundary_event_hashes)
-        new_events: [Event] = {e for e in new_events if e.__hash__() not in boundary_event_hashes}
+    @staticmethod
+    def _dedupe_events(boundary_event_hashes: [str], new_events: [Event]) -> [Event]:
+        new_events: [Event] = [e for e in new_events if e.sha1() not in boundary_event_hashes]
 
         return new_events
 
-    def _get_boundary_event_hashes(self, latest_event_time: str, events: [Event]) -> [str]:
+    @staticmethod
+    def _get_boundary_event_hashes(latest_event_time: str, events: [Event]) -> [str]:
         # Hashes for events that can land on a time boundary
-        hashes = [e.__hash__() for e in events if e.time == latest_event_time]
+        hashes = [e.sha1() for e in events if e.time == latest_event_time]
 
         return hashes
 
