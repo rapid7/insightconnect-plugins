@@ -119,4 +119,4 @@ class TestUpdateExternalDynamicList(TestCase):
             self.action.run({Input.INDICATOR: indicator, Input.LIST_NAME: list_name, Input.OPERATION: operation})
         self.assertEqual(e.exception.cause, cause)
         self.assertEqual(e.exception.assistance, assistance)
-        self.assertEqual(e.exception.data, data)
+        self.assertEqual(e.exception.data, str(data))

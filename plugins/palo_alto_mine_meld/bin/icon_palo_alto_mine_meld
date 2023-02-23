@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Palo Alto MineMeld"
 Vendor = "rapid7"
-Version = "1.0.1"
+Version = "1.0.2"
 Description = "Palo Alto MineMeld is an open-source application that streamlines the aggregation, enforcement and sharing of threat intelligence"
 
 
