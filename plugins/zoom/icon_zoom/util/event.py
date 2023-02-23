@@ -16,10 +16,10 @@ class Event(object):
                and self.email == other.email \
                and self.ip_address == other.ip_address \
                and self.time == other.time \
-               and self.type == other.type_ \
+               and self.type == other.type \
                and self.version == other.version
 
-    def __hash__(self):
+    def sha1(self):
         m = sha1()
         for k, v in self.__dict__.items():
             m.update(f"{k}{v}".encode("utf-8"))
