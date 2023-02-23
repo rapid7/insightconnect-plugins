@@ -73,6 +73,10 @@ class UpdateExternalDynamicList(insightconnect_plugin_runtime.Action):
             return "IPv4"
         elif validators.ipv6(indicator):
             return "IPv6"
+        elif validators.ipv4_cidr(indicator):
+            return "IPv4 CIDR"
+        elif validators.ipv6_cidr(indicator):
+            return "IPv6 CIDR"
         elif validators.url(indicator):
             return "URL"
         elif validators.domain(indicator):
