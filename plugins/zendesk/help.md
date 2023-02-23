@@ -78,7 +78,6 @@ Example input:
 Example output:
 
 ```
-
 {
   "users": [
     {
@@ -142,7 +141,6 @@ Example output:
     }
   ]
 }
-
 ```
 
 #### Delete Ticket
@@ -402,38 +400,40 @@ Example output:
 
 ```
 {
-  "assignee_id": 361738647591,
-  "brand_id": 1500182396435,
-  "collaborator_ids": [
-    361738647591,
-    361738647672
-  ],
-  "created_at": "2021-03-28T20:05:16Z",
-  "description": "Example description",
-  "due_at": 2021-04-10T12:00:00Z,
-  "external_id": "10",
-  "forum_topic_id": null,
-  "group_id": 1400012453812,
-  "has_incidents": false,
-  "id": 15,
-  "organization_id": 1500075172832,
-  "priority": "high",
-  "problem_id": 25,
-  "raw_subject": "New Subject",
-  "recipient": 352083642834,
-  "requester_id": 361738647672,
-  "sharing_agreement_ids": [],
-  "status": "open",
-  "subject": "New Subject",
-  "submitter_id": 1503798876742,
-  "tags": [
-    "example",
-    "tag",
-    "ticket"
-  ],
-  "type": "problem",
-  "updated_at": "2021-03-28T20:05:16Z",
-  "url": "https:/zendesk.com/api/v2/tickets/15.json"
+  "ticket": {
+    "assignee_id": 361738647591,
+    "brand_id": 1500182396435,
+    "collaborator_ids": [
+      361738647591,
+      361738647672
+    ],
+    "created_at": "2021-03-28T20:05:16Z",
+    "description": "Example description",
+    "due_at": "2021-04-10T12:00:00Z",
+    "external_id": "10",
+    "forum_topic_id": null,
+    "group_id": 1400012453812,
+    "has_incidents": false,
+    "id": 15,
+    "organization_id": 1500075172832,
+    "priority": "high",
+    "problem_id": 25,
+    "raw_subject": "New Subject",
+    "recipient": 352083642834,
+    "requester_id": 361738647672,
+    "sharing_agreement_ids": [],
+    "status": "open",
+    "subject": "New Subject",
+    "submitter_id": 1503798876742,
+    "tags": [
+      "example",
+      "tag",
+      "ticket"
+    ],
+    "type": "problem",
+    "updated_at": "2021-03-28T20:05:16Z",
+    "url": "https:/zendesk.com/api/v2/tickets/15.json"
+  }
 }
 ```
 
@@ -538,9 +538,9 @@ Example output:
     "url": "https://zendesk.com/api/v2/tickets/12.json",
     "comment": {
       "author_id": "361738647591",
-      "body":"Test comment",
-      "html_body":"<u>Test Underlined comment</u>",
-      "public":true
+      "body": "Test comment",
+      "html_body": "<u>Test Underlined comment</u>",
+      "public": true
     }
   }
 }

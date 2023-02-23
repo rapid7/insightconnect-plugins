@@ -19,6 +19,8 @@ def detect_type_exception(error: Union[ZenpyException, APIException]) -> None:
         detect_zenpy_exception(error)
     elif issubclass(type(error), APIException):
         detect_api_exception(error)
+    else:
+        raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
 
 def detect_zenpy_exception(error: ZenpyException) -> None:
