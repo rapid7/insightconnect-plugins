@@ -131,21 +131,15 @@ class ScanOutput(insightconnect_plugin_runtime.Output):
           "order": 4
         },
         "tcp": {
-          "type": "array",
+          "$ref": "#/definitions/tcp",
           "title": "TCP",
           "description": "TCP ports",
-          "items": {
-            "$ref": "#/definitions/tcp"
-          },
           "order": 5
         },
         "udp": {
-          "type": "array",
+          "$ref": "#/definitions/udp",
           "title": "UDP",
           "description": "UDP ports",
-          "items": {
-            "$ref": "#/definitions/udp"
-          },
           "order": 6
         },
         "vendor": {
