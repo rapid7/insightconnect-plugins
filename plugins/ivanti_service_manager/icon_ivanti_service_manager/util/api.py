@@ -110,9 +110,9 @@ class IvantiServiceManagerAPI:
                 return response.json()
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        except json.decoder.JSONDecodeError as e:
-            self.logger.info(f"Invalid JSON: {e}")
+        except json.decoder.JSONDecodeError as error:
+            self.logger.info(f"Invalid JSON: {error}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
-        except requests.exceptions.HTTPError as e:
-            self.logger.info(f"Call to Ivanti Service Manager API failed: {e}")
+        except requests.exceptions.HTTPError as error:
+            self.logger.info(f"Call to Ivanti Service Manager API failed: {error}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)

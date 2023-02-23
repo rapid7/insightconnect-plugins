@@ -27,7 +27,7 @@ class MockResponse:
         return json.loads(self.text)
 
 
-def mock_request(url: str) -> MockResponse:
+def mock_request(method, url, json, params, headers, verify) -> MockResponse:
     if url == f"odata/businessobject/incidents?$filter=IncidentNumber eq {STUB_INCIDENT_NUMBER_GOOD}":
         return MockResponse("delete_incident_good", 200)
     if url == f"odata/businessobject/incidents?$filter=IncidentNumber eq {STUB_INCIDENT_NUMBER_GOOD}":

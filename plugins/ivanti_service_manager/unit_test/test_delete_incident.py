@@ -7,7 +7,7 @@ from unittest import TestCase
 from unittest.mock import patch
 from icon_ivanti_service_manager.actions.delete_incident import DeleteIncident
 from icon_ivanti_service_manager.actions.delete_incident.schema import Input
-from icon_ivanti_service_manager.connection import connection
+import icon_ivanti_service_manager.connection
 from insightconnect_plugin_runtime.exceptions import PluginException
 from unit_test.util import Util
 from unit_test.mock import mock_request
@@ -26,8 +26,9 @@ class TestDeleteIncident(TestCase):
         self.connection = self.action.connection
 
     # change to call api and sort out side_effect
-    @patch("connection.connection.ivanti_service_manager_api.IvantiServiceManagerApi._call_api", side_effect=mock_request)
-    def test_delete_incident_success(self, _mock_req):
+    @patch("requests.Session.request", side_effect=mock_request)
+    @patch("requests.Session.request", side_effect=mock_request)
+    def test_delete_incident_success(self, _mock_req, _mock_req_2):
         actual = self.action.run({Input.INCIDENT_NUMBER: self.params.get("good_id")})
         expected = {"success": "true"}
         self.assertEqual(actual, expected)
