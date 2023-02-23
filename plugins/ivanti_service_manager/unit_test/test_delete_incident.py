@@ -25,18 +25,16 @@ class TestDeleteIncident(TestCase):
         self.action = Util.default_connector(DeleteIncident())
         self.connection = self.action.connection
 
-    # change to call api and sort out side_effect
     @patch("requests.Session.request", side_effect=mock_request)
-    @patch("requests.Session.request", side_effect=mock_request)
-    def test_delete_incident_success(self, _mock_req, _mock_req_2):
+    def test_delete_incident_success(self, _mock_req):
         actual = self.action.run({Input.INCIDENT_NUMBER: self.params.get("good_id")})
         expected = {"success": "true"}
         self.assertEqual(actual, expected)
 
-    # # change to call api and sort out side_effect
-    # @patch("api._call_api", side_effect=mock_request)
-    # def test_delete_incident_fail(self, _mock_req):
-    #     with self.assertRaises(PluginException) as exception:
-    #         self.action.run({Input.INCIDENT_NUMBER: self.params.get("bad_id")})
-    #     cause = "No incidents found."
-    #     self.assertEqual(exception.exception.cause, cause)
+    # This code below is grand :thumbs up:
+    @patch("requests.Session.request", side_effect=mock_request)
+    def test_delete_incident_fail(self, _mock_req):
+        with self.assertRaises(PluginException) as exception:
+            self.action.run({Input.INCIDENT_NUMBER: self.params.get("bad_id")})
+        cause = "No incidents found."
+        self.assertEqual(exception.exception.cause, cause)
