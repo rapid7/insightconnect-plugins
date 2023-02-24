@@ -11,8 +11,10 @@ REQUEST_DELETE = "delete"
 
 STUB_INCIDENT_NUMBER_GOOD = 12345
 STUB_INCIDENT_NUMBER_BAD = 54321
+STUB_INCIDENT_NUMBER_ODD = 15243
 
 STUB_REC_ID_GOOD = "085867F47547496783005D95CB82D557"
+STUB_REC_ID_ODD = "00000000000000000000000000000000"
 
 
 class MockResponse:
@@ -29,14 +31,14 @@ class MockResponse:
         return json.loads(self.text)
 
 
-
-# The issue here is that my urls are messed up amongst other things
 def mock_request(method, url, json, params, headers, verify) -> MockResponse:
     if str(STUB_REC_ID_GOOD) in url:
         return MockResponse("delete_incident_good", 200)
-    if url == f"odata/businessobject/incidents('{STUB_INCIDENT_NUMBER_BAD}')":
+    if str(STUB_INCIDENT_NUMBER_BAD) in url:
         return MockResponse("delete_incident_bad", 400)
+    if str(STUB_REC_ID_ODD) in url:
+        return MockResponse("delete_incident_odd", 200)
+    if str(STUB_INCIDENT_NUMBER_ODD) in url:
+        return MockResponse("get_incident_odd", 200)
     if str(STUB_INCIDENT_NUMBER_GOOD) in url:
         return MockResponse("get_incident_good", 200)
-    else:
-        return MockResponse("delete_incident_bad", 200)
