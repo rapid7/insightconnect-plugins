@@ -15,11 +15,7 @@ from unit_test.mock import mock_request
 class TestDeleteIncident(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.params = {
-            "good_id": 12345,
-            "bad_id": 54321,
-            "odd_id": 15243
-        }
+        cls.params = {"good_id": 12345, "bad_id": 54321, "odd_id": 15243}
 
     def setUp(self) -> None:
         self.action = Util.default_connector(DeleteIncident())

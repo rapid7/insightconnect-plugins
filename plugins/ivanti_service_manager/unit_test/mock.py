@@ -16,6 +16,9 @@ STUB_INCIDENT_NUMBER_ODD = 15243
 STUB_REC_ID_GOOD = "085867F47547496783005D95CB82D557"
 STUB_REC_ID_ODD = "00000000000000000000000000000000"
 
+STUB_ASSIGNEE = "John Doe"
+STUB_CUSTOMER = "user@example.com"
+
 
 class MockResponse:
     def __init__(self, filename: str, status_code: int) -> None:
@@ -32,13 +35,22 @@ class MockResponse:
 
 
 def mock_request(method, url, json, params, headers, verify) -> MockResponse:
-    if str(STUB_REC_ID_GOOD) in url:
+    if url == f"/api/odata/businessobject/incidents('{STUB_REC_ID_GOOD}')" and method == "DELETE":
         return MockResponse("delete_incident_good", 200)
-    if str(STUB_INCIDENT_NUMBER_BAD) in url:
-        return MockResponse("delete_incident_bad", 400)
-    if str(STUB_REC_ID_ODD) in url:
+    if url == f"/api/odata/businessobject/incidents('{STUB_REC_ID_ODD}')" and method == "DELETE":
         return MockResponse("delete_incident_odd", 200)
-    if str(STUB_INCIDENT_NUMBER_ODD) in url:
+
+    if url == f"/api/odata/businessobject/incidents?$filter=IncidentNumber eq {STUB_INCIDENT_NUMBER_ODD}":
         return MockResponse("get_incident_odd", 200)
-    if str(STUB_INCIDENT_NUMBER_GOOD) in url:
+    if url == f"/api/odata/businessobject/incidents?$filter=IncidentNumber eq {STUB_INCIDENT_NUMBER_GOOD}":
         return MockResponse("get_incident_good", 200)
+    if url == f"/api/odata/businessobject/incidents?$filter=IncidentNumber eq {STUB_INCIDENT_NUMBER_BAD}":
+        return MockResponse("get_incident_bad", 400)
+
+    if url == f"/api/odata/businessobject/incidents('{STUB_INCIDENT_NUMBER_GOOD}')" and method == "PUT":
+        return MockResponse("update_incident_good", 200)
+    if url == f"/api/odata/businessobject/incidents('{STUB_INCIDENT_NUMBER_BAD}')" and method == "PUT":
+        return MockResponse("update_incident_bad", 400)
+    else:
+        return MockResponse("update_incident_good", 200)
+
