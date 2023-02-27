@@ -3,12 +3,12 @@ from setuptools import setup, find_packages
 
 
 setup(name="google_web_risk-rapid7-plugin",
-      version="2.0.1",
+      version="2.1.0",
       description="Check URLs against the Google Web Risk service",
       author="rapid7",
       author_email="",
       url="",
       packages=find_packages(),
-      install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
+      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/icon_google_web_risk']
       )
