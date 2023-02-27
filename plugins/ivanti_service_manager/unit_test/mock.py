@@ -51,6 +51,7 @@ def mock_request(method, url, json, params, headers, verify) -> MockResponse:
         return MockResponse("update_incident_good", 200)
     if url == f"/api/odata/businessobject/incidents('{STUB_INCIDENT_NUMBER_BAD}')" and method == "PUT":
         return MockResponse("update_incident_bad", 400)
-    else:
-        return MockResponse("update_incident_good", 200)
+
+    if url == "/api/odata/businessobject/journal__Notess" and method == "POST":
+        return MockResponse("add_note_good", 200)
 
