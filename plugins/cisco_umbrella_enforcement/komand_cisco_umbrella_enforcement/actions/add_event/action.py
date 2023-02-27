@@ -1,10 +1,10 @@
-import komand
-from .schema import AddEventInput, AddEventOutput
+import insightconnect_plugin_runtime
+from .schema import AddEventInput, AddEventOutput, Input, Output
 
 # Custom imports below
 
 
-class AddEvent(komand.Action):
+class AddEvent(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="add_event",
@@ -14,31 +14,30 @@ class AddEvent(komand.Action):
         )
 
     def run(self, params={}):
-        domains = params.get("events")
-        events = []
 
-        for event in domains:
-            dstUrl = event.get("dstURL")
-            event["dstUrl"] = dstUrl
-            del event["dstURL"]
+        data = [
+            {
+                "alertTime": params.get(Input.ALERTTIME),
+                "deviceId": params.get(Input.DEVICEID),
+                "deviceVersion": params.get(Input.DEVICEVERSION),
+                "dstDomain": params.get(Input.DSTDOMAIN),
+                "dstIP": params.get(Input.DSTIP),
+                "dstUrl": params.get(Input.DSTURL),
+                "eventDescription": params.get(Input.EVENTDESCRIPTION),
+                "eventHash": params.get(Input.EVENTHASH),
+                "eventSeverity": params.get(Input.EVENTSEVERITY),
+                "eventTime": params.get(Input.EVENTTIME),
+                "eventType": params.get(Input.EVENTTYPE),
+                "externalURL": params.get(Input.EXTERNALURL),
+                "fileHash": params.get(Input.FILEHASH),
+                "fileName": params.get(Input.FILENAME),
+                "protocolVersion": params.get(Input.PROTOCOLVERSION),
+                "providerName": params.get(Input.PROVIDERNAME),
+                "src": params.get(Input.SRC),
+                "disableDstSafeguards": params.get(Input.DISABLEDSTSAFEGUARDS),
+            }
+        ]
 
-            ID = event.get("ID")
-            event["deviceId"] = ID
-            del event["ID"]
+        response = self.connection.client.add_event(data)
 
-            events.append(event)
-
-        try:
-            dictIds = self.connection.api.add_event(events)
-        except Exception:
-            self.logger.error("AddEvent: run: Problem with request")
-            raise Exception("AddEvent: run: Problem with request")
-
-        ids = []
-        for key, value in dictIds.items():
-            ids.append(value)
-
-        return {"ID": ids}
-
-    def test(self):
-        return {"ID": []}
+        return {Output.ID: response}

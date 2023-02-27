@@ -1,10 +1,10 @@
-import komand
-from .schema import DeleteDomainByNameInput, DeleteDomainByNameOutput
+import insightconnect_plugin_runtime
+from .schema import DeleteDomainByNameInput, DeleteDomainByNameOutput, Input, Output
 
 # Custom imports
 
 
-class DeleteDomainByName(komand.Action):
+class DeleteDomainByName(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="delete_domain_by_name",
@@ -14,15 +14,9 @@ class DeleteDomainByName(komand.Action):
         )
 
     def run(self, params={}):
-        domainName = params.get("domain")
+        domain_name = params.get(Input.NAME)
 
-        try:
-            self.connection.api.delete_domains_by_name(domainName)
-        except Exception:
-            self.logger.error("DeleteDomainByName: run: Problem with request")
-            raise Exception("DeleteDomainByName: run: Problem with request")
+        result = self.connection.client.delete_event(name=domain_name)
 
-        return {"status": "success"}
-
-    def test(self):
-        return {"status": "success"}
+        if result == "":
+            return {Output.SUCCESS: True}
