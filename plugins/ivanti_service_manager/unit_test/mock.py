@@ -16,8 +16,7 @@ STUB_INCIDENT_NUMBER_ODD = 15243
 STUB_REC_ID_GOOD = "085867F47547496783005D95CB82D557"
 STUB_REC_ID_ODD = "00000000000000000000000000000000"
 
-STUB_ASSIGNEE = "John Doe"
-STUB_CUSTOMER = "user@example.com"
+STUB_IDENTIFIER = "identifier"
 
 
 class MockResponse:
@@ -47,6 +46,9 @@ def mock_request(method, url, json, params, headers, verify) -> MockResponse:
     if url == f"/api/odata/businessobject/incidents?$filter=IncidentNumber eq {STUB_INCIDENT_NUMBER_BAD}":
         return MockResponse("get_incident_bad", 400)
 
+    # WORKING ON THIS HEPHZI, SORT THIS OUT FIRST WHEN YOU GET BACK
+    if url == f"odata/businessobject/employees?$search={STUB_IDENTIFIER}":
+        pass
     if url == f"/api/odata/businessobject/incidents('{STUB_INCIDENT_NUMBER_GOOD}')" and method == "PUT":
         return MockResponse("update_incident_good", 200)
     if url == f"/api/odata/businessobject/incidents('{STUB_INCIDENT_NUMBER_BAD}')" and method == "PUT":
@@ -55,3 +57,5 @@ def mock_request(method, url, json, params, headers, verify) -> MockResponse:
     if url == "/api/odata/businessobject/journal__Notess" and method == "POST":
         return MockResponse("add_note_good", 200)
 
+    if url == "/api/odata/businessobject/incidents" and method == "POST":
+        return MockResponse("create_incident_good", 200)

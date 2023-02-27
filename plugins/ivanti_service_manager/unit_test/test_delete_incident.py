@@ -23,7 +23,7 @@ class TestDeleteIncident(TestCase):
 
     @patch("requests.Session.request", side_effect=mock_request)
     def test_delete_incident_success(self, _mock_req):
-        actual = self.action.run({Inpust.INCIDENT_NUMBER: self.params.get("good_id")})
+        actual = self.action.run({Input.INCIDENT_NUMBER: self.params.get("good_id")})
         expected = {"success": True}
         self.assertEqual(actual, expected)
 
