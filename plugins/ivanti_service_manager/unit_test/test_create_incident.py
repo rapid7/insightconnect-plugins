@@ -9,24 +9,26 @@ from unittest.mock import patch
 from unit_test.util import Util
 from unit_test.mock import mock_request
 from icon_ivanti_service_manager.actions.create_incident.schema import Input
-from icon_ivanti_service_manager.connection.connection import Connection
 from icon_ivanti_service_manager.actions.create_incident import CreateIncident
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class TestCreateIncident(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.params = {
-            "assignee": "assignee",
+            "assignee": "identifier",
             "category": "category",
-            "customer": "customer",
+            "customer": "identifier",
+            "customer_not_unique": "identifier_not_unique",
+            "no_customer": "no_identifier",
             "description": "description",
             "impact": "impact",
             "source": "source",
             "status": "status",
             "summary": "summary",
             "type": "type",
-            "urgency": "urgency"
+            "urgency": "urgency",
         }
 
     def setUp(self) -> None:
@@ -46,18 +48,54 @@ class TestCreateIncident(TestCase):
                 Input.STATUS: self.params.get("status"),
                 Input.SUMMARY: self.params.get("summary"),
                 Input.TYPE: self.params.get("type"),
-                Input.URGENCY: self.params.get("urgency")
+                Input.URGENCY: self.params.get("urgency"),
             }
         )
         expected = json.loads(
             Util.read_file_to_string(
-                os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                             f"payloads/expected_create_incident_good.json.resp")
+                os.path.join(
+                    os.path.dirname(os.path.realpath(__file__)), f"payloads/expected_create_incident_good.json.resp"
+                )
             )
         )
         self.assertEqual(actual, expected)
 
-    # def test_create_incident_fail(self):
-    #     actual = "Insert here"
-    #     expected = "Insert here"
-    #     self.assertEqual(actual, expected)
+    @patch("requests.Session.request", side_effect=mock_request)
+    def test_create_incident_not_unique_customer(self, _mock_req):
+        with self.assertRaises(PluginException) as exception:
+            self.action.run(
+                {
+                    Input.ASSIGNEE: self.params.get("assignee"),
+                    Input.CATEGORY: self.params.get("category"),
+                    Input.CUSTOMER: self.params.get("customer_not_unique"),
+                    Input.DESCRIPTION: self.params.get("description"),
+                    Input.IMPACT: self.params.get("impact"),
+                    Input.SOURCE: self.params.get("source"),
+                    Input.STATUS: self.params.get("status"),
+                    Input.SUMMARY: self.params.get("summary"),
+                    Input.TYPE: self.params.get("type"),
+                    Input.URGENCY: self.params.get("urgency"),
+                }
+            )
+        cause = "Multiple employees found."
+        self.assertEqual(exception.exception.cause, cause)
+
+    @patch("requests.Session.request", side_effect=mock_request)
+    def test_create_incident_no_customer(self, _mock_req):
+        with self.assertRaises(PluginException) as exception:
+            self.action.run(
+                {
+                    Input.ASSIGNEE: self.params.get("assignee"),
+                    Input.CATEGORY: self.params.get("category"),
+                    Input.CUSTOMER: self.params.get("no_customer"),
+                    Input.DESCRIPTION: self.params.get("description"),
+                    Input.IMPACT: self.params.get("impact"),
+                    Input.SOURCE: self.params.get("source"),
+                    Input.STATUS: self.params.get("status"),
+                    Input.SUMMARY: self.params.get("summary"),
+                    Input.TYPE: self.params.get("type"),
+                    Input.URGENCY: self.params.get("urgency"),
+                }
+            )
+        cause = "No employees found."
+        self.assertEqual(exception.exception.cause, cause)
