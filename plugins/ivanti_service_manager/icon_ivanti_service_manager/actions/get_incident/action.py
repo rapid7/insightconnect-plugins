@@ -19,11 +19,9 @@ class GetIncident(insightconnect_plugin_runtime.Action):
         try:
             response = self.connection.ivanti_service_manager_api.get_incident_by_number(
                 params.get(Input.INCIDENT_NUMBER))
-            if "incident" in response.keys():
-                return {Output.INCIDENT: response}
-            else:
-                raise PluginException("No incident could be found with that Incident Number")
+            return {Output.INCIDENT: response}
+
         except Exception as error:
             raise PluginException(
-                cause="Something went wrong", assistance="Something went wrong", data= error
+                cause="Something went wrong", assistance="Something went wrong", data=error
             )
