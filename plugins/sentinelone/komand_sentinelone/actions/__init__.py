@@ -12,6 +12,7 @@ from .create_ioc_threat.action import CreateIocThreat
 from .create_query.action import CreateQuery
 from .disable_agent.action import DisableAgent
 from .enable_agent.action import EnableAgent
+from .fetch_file_by_agent_id.action import FetchFileByAgentId
 from .get_agent_details.action import GetAgentDetails
 from .get_events.action import GetEvents
 from .get_events_by_type.action import GetEventsByType
