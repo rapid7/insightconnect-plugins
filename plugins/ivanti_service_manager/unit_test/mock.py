@@ -55,13 +55,23 @@ def mock_request(method, url, json, params, headers, verify) -> MockResponse:
     if url == f"/api/odata/businessobject/employees?$search={STUB_IDENTIFIER_NONE}" and method == "GET":
         return MockResponse("search_employees_none", 200)
 
-    if url == f"/api/odata/businessobject/incidents('{STUB_INCIDENT_NUMBER_GOOD}')" and method == "PUT":
+    if url == f"/api/odata/businessobject/servicereqtemplates?$search={STUB_IDENTIFIER}" and method == "GET":
+        return MockResponse("search_employees_good", 200)
+    if url == f"/api/odata/businessobject/servicereqtemplates?$search={STUB_IDENTIFIER_NOT_UNIQUE}" and method == "GET":
+        return MockResponse("search_employees_not_unique", 200)
+    if url == f"/api/odata/businessobject/servicereqtemplates?$search={STUB_IDENTIFIER_NONE}" and method == "GET":
+        return MockResponse("search_employees_none", 200)
+
+    if url == f"/api/odata/businessobject/incidents('{STUB_REC_ID_GOOD}')" and method == "PUT":
         return MockResponse("update_incident_good", 200)
-    if url == f"/api/odata/businessobject/incidents('{STUB_INCIDENT_NUMBER_BAD}')" and method == "PUT":
-        return MockResponse("update_incident_bad", 400)
 
     if url == "/api/odata/businessobject/journal__Notess" and method == "POST":
         return MockResponse("add_note_good", 200)
 
     if url == "/api/odata/businessobject/incidents" and method == "POST":
         return MockResponse("create_incident_good", 200)
+
+    if url == "/api/odata/businessobject/servicereqs" and method == "POST":
+        return MockResponse("create_service_request_good", 200)
+
+

@@ -50,7 +50,7 @@ class IvantiServiceManagerAPI:
 
         if template and len(template) > 1:
             raise PluginException(
-                cause="Multiple employees found.",
+                cause="Multiple service request templates found.",
                 assistance=f"Search for {template} returned more than 1 result. Please provide a unique identifier.",
             )
 
