@@ -21,7 +21,7 @@ class Event(object):
         )
 
     def sha1(self):
-        m = sha1()
+        m = sha1()  # nosec B303
         for k, v in self.__dict__.items():
             m.update(f"{k}{v}".encode("utf-8"))
 
