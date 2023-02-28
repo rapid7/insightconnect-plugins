@@ -23,7 +23,7 @@ class TestCreateServiceRequest(TestCase):
             "service_request_template_not_unique": "identifier_not_unique",
             "service_request_template_none": "no_identifier",
             "status": "status",
-            "urgency": "urgency"
+            "urgency": "urgency",
         }
 
     def setUp(self) -> None:
@@ -38,12 +38,16 @@ class TestCreateServiceRequest(TestCase):
                 Input.DESCRIPTION: self.params.get("description"),
                 Input.SERVICE_REQUEST_TEMPLATE: self.params.get("service_request_template"),
                 Input.STATUS: self.params.get("status"),
-                Input.URGENCY: self.params.get("urgency")
+                Input.URGENCY: self.params.get("urgency"),
             }
         )
-        expected = json.loads(Util.read_file_to_string(
-            os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                         f"payloads/expected_create_service_request.json.resp")))
+        expected = json.loads(
+            Util.read_file_to_string(
+                os.path.join(
+                    os.path.dirname(os.path.realpath(__file__)), f"payloads/expected_create_service_request.json.resp"
+                )
+            )
+        )
         self.assertEqual(actual, expected)
 
     @patch("requests.Session.request", side_effect=mock_request)
@@ -55,8 +59,9 @@ class TestCreateServiceRequest(TestCase):
                     Input.DESCRIPTION: self.params.get("description"),
                     Input.SERVICE_REQUEST_TEMPLATE: self.params.get("service_request_template_not_unique"),
                     Input.STATUS: self.params.get("status"),
-                    Input.URGENCY: self.params.get("urgency")
-                })
+                    Input.URGENCY: self.params.get("urgency"),
+                }
+            )
             cause = "Multiple service request templates found."
             self.assertEqual(exception.exception.cause, cause)
 
@@ -69,7 +74,8 @@ class TestCreateServiceRequest(TestCase):
                     Input.DESCRIPTION: self.params.get("description"),
                     Input.SERVICE_REQUEST_TEMPLATE: self.params.get("service_request_template_none"),
                     Input.STATUS: self.params.get("status"),
-                    Input.URGENCY: self.params.get("urgency")
-                })
+                    Input.URGENCY: self.params.get("urgency"),
+                }
+            )
             cause = "No service request templates found."
             self.assertEqual(exception.exception.cause, cause)

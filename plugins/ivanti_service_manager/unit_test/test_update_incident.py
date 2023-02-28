@@ -24,7 +24,7 @@ class TestUpdateIncident(TestCase):
             "cause_code": "Software",
             "resolution": "This incident was resolved by InsightConnect",
             "incident_number_good": 12345,
-            "incident_number_bad": 54321
+            "incident_number_bad": 54321,
         }
 
     def setUp(self) -> None:
@@ -41,9 +41,13 @@ class TestUpdateIncident(TestCase):
                 Input.INCIDENT_NUMBER: self.params.get("incident_number_good"),
             }
         )
-        expected = json.loads(Util.read_file_to_string(
-            os.path.join(os.path.dirname(os.path.realpath(__file__)),
-                         f"payloads/expected_update_incident_good.json.resp")))
+        expected = json.loads(
+            Util.read_file_to_string(
+                os.path.join(
+                    os.path.dirname(os.path.realpath(__file__)), f"payloads/expected_update_incident_good.json.resp"
+                )
+            )
+        )
         self.assertEqual(actual, expected)
 
     @patch("requests.Session.request", side_effect=mock_request)

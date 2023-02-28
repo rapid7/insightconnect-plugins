@@ -27,5 +27,3 @@ class SearchIncidents(insightconnect_plugin_runtime.Action):
             return {Output.DATA: response.get("value")}
         else:
             raise PluginException(cause="No incidents found.")
-
-

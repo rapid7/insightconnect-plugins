@@ -2,7 +2,7 @@ import sys
 import os
 import json
 
-sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath("../"))
 
 from unittest.mock import patch
 from unittest import TestCase
@@ -14,7 +14,6 @@ from unit_test.mock import mock_request
 
 
 class TestGetIncident(TestCase):
-
     @classmethod
     def setUpClass(cls) -> None:
         cls.params = {"good_id": 12345, "bad_id": 54321}
@@ -28,7 +27,9 @@ class TestGetIncident(TestCase):
         actual = self.action.run({Input.INCIDENT_NUMBER: self.params.get("good_id")})
         expected = json.loads(
             Util.read_file_to_string(
-                os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/expected_get_incident_good.json.resp")
+                os.path.join(
+                    os.path.dirname(os.path.realpath(__file__)), f"payloads/expected_get_incident_good.json.resp"
+                )
             )
         )
         self.assertEqual(actual, expected)

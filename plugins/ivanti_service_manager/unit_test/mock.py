@@ -23,6 +23,7 @@ STUB_IDENTIFIER_NONE = "no_identifier"
 STUB_TEXT_GOOD = "text"
 STUB_TEXT_BAD = "bad text"
 
+
 class MockResponse:
     def __init__(self, filename: str, status_code: int) -> None:
         self.status_code = status_code

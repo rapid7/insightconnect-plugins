@@ -24,8 +24,9 @@ class Util:
         default_connection.meta = Meta()
         default_connection.logger = logging.getLogger("connection logger")
         params = {
-            Input.CREDENTIALS: {"secretKey": "4472f2g7-991z-4w70-li11-7552w8qm0266"}, Input.SSL_VERIFY: "false",
-            Input.URL: ""
+            Input.CREDENTIALS: {"secretKey": "4472f2g7-991z-4w70-li11-7552w8qm0266"},
+            Input.SSL_VERIFY: "false",
+            Input.URL: "",
         }
         default_connection.connect(params)
         action.connection = default_connection
