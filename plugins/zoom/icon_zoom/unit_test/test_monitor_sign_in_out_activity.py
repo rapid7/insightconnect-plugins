@@ -1,6 +1,6 @@
 import logging
 import unittest
-from unittest.mock import Mock
+import datetime
 from unittest.mock import patch
 
 from icon_zoom.util.event import Event
@@ -13,6 +13,7 @@ from icon_zoom.unit_test.mock import (
 )
 
 GET_USER_ACTIVITY_EVENTS_PATH = "icon_zoom.util.api.ZoomAPI.get_user_activity_events"
+GET_DATETIME_NOW_PATH = "icon_zoom.tasks.monitor_sign_in_out_activity.task.MonitorSignInOutActivity._get_datetime_now"
 
 
 class TestGetUserActivityEvents(unittest.TestCase):
@@ -219,6 +220,21 @@ class TestGetUserActivityEvents(unittest.TestCase):
         output, state = self.action.run(state=state)  # Using state from first run to trigger subsequent run
         self.assertDictEqual(state, second_expected_state)
         self.assertListEqual(output, second_expected_output)
+
+    @patch(GET_DATETIME_NOW_PATH)
+    @patch(GET_USER_ACTIVITY_EVENTS_PATH)
+    def test_api_output_changed_error_catch(self, mock_call, mock_datetime):
+        mock_call.return_value = [{"test": "value"}]
+        mock_datetime.return_value = datetime.datetime(2000, 1, 1)
+        output, state = self.action.run(state={})
+
+        expected_state = {
+            "boundary_events": [],
+            "last_event_time": "2000-01-01T00:00:00Z"
+        }
+        expected_output = []
+        self.assertDictEqual(state, expected_state)
+        self.assertListEqual(output, expected_output)
 
     def test_get_boundary_hashes_two_same_time(self):
         samples = [{
