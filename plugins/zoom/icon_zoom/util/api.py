@@ -71,7 +71,7 @@ class ZoomAPI:
 
         auth = HTTPBasicAuth(self.client_id, self.client_secret)
 
-        self.logger.info(f"Requesting new OAuth token from Zoom...")
+        self.logger.info("Requesting new OAuth token from Zoom...")
         response = self._call_api(method="POST", url=self.oauth_url, params=params, auth=auth)
         try:
             access_token = response["access_token"]
