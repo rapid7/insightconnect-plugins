@@ -163,6 +163,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def agents_action(self, action: str, agents_filter: str):
         return self._call_api("POST", f"agents/actions/{action}", {"filter": agents_filter})
 
+    def agents_action(self, action: str, agents_filter: str):
+        return self._call_api("POST", f"agents/actions/{action}", {"filter": agents_filter})
+
+    def fetch_file_by_agent_id(self, agent_id: str, file_path: str, password: str):
+        return self._call_api("POST", f"agents/{agent_id}/actions/fetch-files", {"data": {"password": password, "files":[file_path]}})
+
     def download_file(self, agent_filter: dict, password: str):
         self.get_auth_token()
         agent_filter["activityTypes"] = 86
@@ -177,6 +183,34 @@ class Connection(insightconnect_plugin_runtime.Connection):
         response = self._call_api("GET", activities["data"][0]["data"]["filePath"][1:], full_response=True)
         try:
             file_name = activities["data"][-1]["data"]["fileDisplayName"]
+            with zipfile.ZipFile(io.BytesIO(response.content)) as downloaded_zipfile:
+                downloaded_zipfile.setpassword(password.encode("UTF-8"))
+
+                return {
+                    "filename": file_name,
+                    "content": base64.b64encode(downloaded_zipfile.read(downloaded_zipfile.infolist()[-1])).decode(
+                        "utf-8"
+                    ),
+                }
+        except KeyError:
+            raise PluginException(
+                cause="An error occurred when trying to download file.",
+                assistance="Please contact support or try again later.",
+            )
+
+    def download_fetched_file(self, agent_id: str, password: str):
+        self.get_auth_token()
+        agent_filter = {"activityTypes": 80, "sortBy": "createdAt", "sortOrder": "desc", "agentIds": agent_id}
+        activities = self.activities_list(agent_filter)
+        while not activities["data"]:
+            self.logger.info("Waiting 5 seconds for successful fetch file upload...")
+            time.sleep(5)
+            activities = self.activities_list(agent_filter)
+        self.get_auth_token()
+        print("DL DEBUG activities[data]:{}".format(activities["data"]))
+        response = self._call_api("GET", activities["data"][0]["data"]["filePath"][1:], full_response=True)
+        try:
+            file_name = activities["data"][-1]["data"]["uploadedFilename"]
             with zipfile.ZipFile(io.BytesIO(response.content)) as downloaded_zipfile:
                 downloaded_zipfile.setpassword(password.encode("UTF-8"))
 

@@ -1844,6 +1844,35 @@ actions:
         type: '[]agent_applications'
         required: true
         example: '[ { "publisher": "string", "installedDate": "2018-02-27T04:49:26.257525Z", "size": "integer", "name": "string", "version": "string" } ]'
+  fetch_file_by_agent_id:
+    title: Fetch File
+    description: Fetch file for a specific agent id
+    input:
+      agent_id:
+        title: Agent ID
+        description: Agent ID
+        type: 'string'
+        required: true
+        example: "1000000000000000000"
+      file_path:
+        title: File path
+        description: List of files paths of files to fetch. Any files retrieved will be uploaded to the SentinelOne console for download.
+        type: string
+        required: true
+        example: "C:/windows/system32/winevt/logs/application.evtx"
+      password:
+        title: Password
+        description: Password to encrypt retrieved files with. Must be entered when files are downloaded on SentinelOne console. File encryption password, min. length 10 characters and cannot contain whitespace.
+        type: 'string'
+        required: true
+        example: "MySecretPass123!"
+    output:
+      file:
+        title: File
+        description: Base64 encoded file
+        type: file
+        required: true
+        example: '{ "file": { "filename": "report.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" } }'
   agents_summary:
     title: Count Summary
     description: Summary of agents by numbers
