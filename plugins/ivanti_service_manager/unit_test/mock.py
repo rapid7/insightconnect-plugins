@@ -20,6 +20,8 @@ STUB_IDENTIFIER = "identifier"
 STUB_IDENTIFIER_NOT_UNIQUE = "identifier_not_unique"
 STUB_IDENTIFIER_NONE = "no_identifier"
 
+STUB_TEXT_GOOD = "text"
+STUB_TEXT_BAD = "bad text"
 
 class MockResponse:
     def __init__(self, filename: str, status_code: int) -> None:
@@ -74,4 +76,7 @@ def mock_request(method, url, json, params, headers, verify) -> MockResponse:
     if url == "/api/odata/businessobject/servicereqs" and method == "POST":
         return MockResponse("create_service_request_good", 200)
 
-
+    if url == f"/api/rest/search/{STUB_TEXT_GOOD}" and method == "POST":
+        return MockResponse("search_incidents_good", 200)
+    if url == f"/api/rest/search/{STUB_TEXT_BAD}" and method == "POST":
+        return MockResponse("search_incidents_bad", 200)

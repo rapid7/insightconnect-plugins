@@ -22,14 +22,10 @@ class SearchIncidents(insightconnect_plugin_runtime.Action):
             "Top": params.get(Input.TOP),
             "Skip": params.get(Input.SKIP),
         }
-        try:
-            response = self.connection.ivanti_service_manager_api.search_incident(params.get(Input.TEXT), payload)
-            if "data" in response.keys():
-                return {Output.DATA: response}
-            else:
-                raise PluginException("No incidents found")
+        response = self.connection.ivanti_service_manager_api.search_incident(params.get(Input.TEXT), payload)
+        if "value" in response.keys():
+            return {Output.DATA: response.get("value")}
+        else:
+            raise PluginException(cause="No incidents found.")
 
-        except Exception as error:
-            raise PluginException(
-                cause="Something went wrong", assistance="Something went wrong", data= error
-            )
+
