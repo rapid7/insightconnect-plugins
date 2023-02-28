@@ -25,7 +25,6 @@ class BearerAuth(AuthBase):
 
 
 class ZoomAPI:
-
     def __init__(self, account_id: str, client_id: str, client_secret: str, logger: Logger):
         self.api_url = "https://api.zoom.us/v2"
         self.oauth_url = "https://zoom.us/oauth/token"
@@ -42,8 +41,9 @@ class ZoomAPI:
         Refreshes OAuth token if needed.
         :return: None
         """
-        if self.oauth_last_refresh_timestamp and \
-                not self._should_refresh_oauth_token(last_refresh_timestamp=self.oauth_last_refresh_timestamp):
+        if self.oauth_last_refresh_timestamp and not self._should_refresh_oauth_token(
+            last_refresh_timestamp=self.oauth_last_refresh_timestamp
+        ):
             return
 
         # Refresh should happen, so do the refresh.
@@ -52,9 +52,11 @@ class ZoomAPI:
             oauth_token = self.get_oauth_token()
             now_timestamp = self._get_current_time_epoch()
         except Exception as error:
-            raise PluginException(cause=f"Unable to refresh OAuth token: {error}.",
-                                  assistance="Ensure connection credentials are correct.",
-                                  data=error)
+            raise PluginException(
+                cause=f"Unable to refresh OAuth token: {error}.",
+                assistance="Ensure connection credentials are correct.",
+                data=error,
+            )
 
         self.oauth_token = oauth_token
         self.oauth_last_refresh_timestamp = now_timestamp
@@ -65,10 +67,7 @@ class ZoomAPI:
         :return: OAuth token
         """
 
-        params = {
-            "grant_type": "account_credentials",
-            "account_id": self.account_id
-        }
+        params = {"grant_type": "account_credentials", "account_id": self.account_id}
 
         auth = HTTPBasicAuth(self.client_id, self.client_secret)
 
@@ -77,8 +76,10 @@ class ZoomAPI:
         try:
             access_token = response["access_token"]
         except KeyError:
-            raise PluginException(cause=f"Unable to get access token: {response.get('reason', '')}.",
-                                  assistance="Ensure your connection configuration is using correct credentials.")
+            raise PluginException(
+                cause=f"Unable to get access token: {response.get('reason', '')}.",
+                assistance="Ensure your connection configuration is using correct credentials.",
+            )
 
         self.logger.info("Request for new OAuth token was successful!")
         return access_token
@@ -92,11 +93,9 @@ class ZoomAPI:
     def delete_user(self, user_id: str, params: dict) -> Optional[dict]:
         return self._call_api("DELETE", f"{self.api_url}/users/{user_id}", params=params)
 
-    def get_user_activity_events(self,
-                                 start_date: str = None,
-                                 end_date: str = None,
-                                 page_size: int = None,
-                                 next_page_token: str = None) -> [dict]:
+    def get_user_activity_events(
+        self, start_date: str = None, end_date: str = None, page_size: int = None, next_page_token: str = None
+    ) -> [dict]:
         activities_url = f"{self.api_url}/report/activities"
 
         events = []
@@ -117,13 +116,15 @@ class ZoomAPI:
             else:
                 return events
 
-    def _call_api(self,
-                  method: str,
-                  url: str,
-                  params: dict = None,
-                  json_data: dict = None,
-                  allow_404: bool = False,
-                  auth: AuthBase = None) -> Optional[dict]:
+    def _call_api(
+        self,
+        method: str,
+        url: str,
+        params: dict = None,
+        json_data: dict = None,
+        allow_404: bool = False,
+        auth: AuthBase = None,
+    ) -> Optional[dict]:
 
         if not isinstance(auth, HTTPBasicAuth):
             self.refresh_oauth_token_if_needed()

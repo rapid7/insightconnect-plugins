@@ -18,10 +18,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
         client_id = params[Input.CLIENT_ID][SECRETKEY]
         client_secret = params[Input.CLIENT_SECRET][SECRETKEY]
 
-        self.zoom_api = ZoomAPI(account_id=account_id,
-                                client_id=client_id,
-                                client_secret=client_secret,
-                                logger=self.logger)
+        self.zoom_api = ZoomAPI(
+            account_id=account_id, client_id=client_id, client_secret=client_secret, logger=self.logger
+        )
 
     def test(self):
         try:
@@ -30,4 +29,3 @@ class Connection(insightconnect_plugin_runtime.Connection):
             return {"success": True}
         except PluginException as e:
             raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e)
-
