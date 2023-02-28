@@ -56,7 +56,14 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             end_date=now_for_zoom,
             page_size=1000
         )
-        new_events = [Event(**e) for e in new_events]
+        try:
+            new_events = [Event(**e) for e in new_events]
+        except TypeError as e:
+            self.logger.error(f"Zoom API endpoint output has changed, unable to parse events: {e}")
+            return [], {
+                self.BOUNDARY_EVENTS: [],
+                self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now())
+            }
 
         # Get latest event time, to be used for determining boundary event hashes
         try:
@@ -97,7 +104,16 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             end_date=now_for_zoom,
             page_size=1000
         )
-        new_events = [Event(**e) for e in new_events]
+
+        try:
+            new_events = [Event(**e) for e in new_events]
+        except TypeError as e:
+            self.logger.error(f"Zoom API endpoint output has changed, unable to parse events: {e}")
+            return [], {
+                self.BOUNDARY_EVENTS: [],
+                self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now())
+            }
+
         self.logger.info(f"Got {len(new_events)} events!")
 
         # Get latest event time as well as boundary hashes. These are to be used for de-duping future event sets
