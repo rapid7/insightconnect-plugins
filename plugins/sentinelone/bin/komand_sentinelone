@@ -62,6 +62,8 @@ def main():
 
             self.add_action(actions.EnableAgent())
 
+            self.add_action(actions.FetchFileByAgentId())
+
             self.add_action(actions.GetAgentDetails())
 
             self.add_action(actions.GetEvents())
