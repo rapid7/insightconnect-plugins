@@ -17,7 +17,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install prospector[with_bandit]==1.6.0
+          pip install prospector[with_bandit]==1.9.0
 
       - name: Prospector
         run: |
@@ -46,7 +46,7 @@ jobs:
           if ! [[ ${#CHANGED_FILES[*]} == 0 ]]
           then
             echo "Running Prospector on: "${CHANGED_FILES[*]}
-            prospector --profile prospector.yaml ${CHANGED_FILES[*]} --tool bandit --tool mccabe --tool pyflakes
+            prospector --profile prospector.yaml ${CHANGED_FILES[*]} --tool bandit --tool mccabe --tool pylint --tool pyflakes
           else
             echo "No python files changed, so prospector was not run. Differences from Master branch found in: "${OUTPUT[*]}
           fi
