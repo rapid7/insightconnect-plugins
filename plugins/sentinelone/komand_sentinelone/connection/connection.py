@@ -7,6 +7,7 @@ import insightconnect_plugin_runtime
 import requests
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 from typing import Tuple
+from datetime import datetime, timedelta, timezone
 
 from komand_sentinelone.util.api import SentineloneAPI
 from komand_sentinelone.util.helper import Helper
@@ -56,7 +57,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         self.token, self.api_version = self.get_auth_token()
         self.client = SentineloneAPI(self.url, self.make_token_header())
-        self.logger.info("Token: " + "*************" + str(self.token[len(self.token) - 5 : len(self.token)]))
+        self.logger.info("Token: " + "*************" + str(self.token[len(self.token) - 5: len(self.token)]))
 
     @staticmethod
     def _get_start_index(url):
@@ -88,8 +89,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 raise ConnectionTestException(
                     cause=f"Could not authorize with SentinelOne instance at: {self.url}.",
                     assistance="An attempt was made to connect using a version of the API 2.0 and 2.1. "
-                    "Check the inputs params and try again. "
-                    "If the problem persists contact with development team.",
+                               "Check the inputs params and try again. "
+                               "If the problem persists contact with development team.",
                 )
 
         return token, version
@@ -119,7 +120,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             raise PluginException(
                 cause="Inputs related to API key authentication is invalid.",
                 assistance="Check API key input and try again. "
-                "If the problem persists contact with development team.",
+                           "If the problem persists contact with development team.",
             )
 
     def make_token_header(self):
@@ -167,7 +168,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return self._call_api("POST", f"agents/actions/{action}", {"filter": agents_filter})
 
     def fetch_file_by_agent_id(self, agent_id: str, file_path: str, password: str):
-        return self._call_api("POST", f"agents/{agent_id}/actions/fetch-files", {"data": {"password": password, "files":[file_path]}})
+        return self._call_api("POST", f"agents/{agent_id}/actions/fetch-files", {"data": {"password": password,
+                                                                                          "files": [file_path]}})
 
     def download_file(self, agent_filter: dict, password: str):
         self.get_auth_token()
@@ -200,17 +202,26 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def download_fetched_file(self, agent_id: str, password: str):
         self.get_auth_token()
-        agent_filter = {"activityTypes": 80, "sortBy": "createdAt", "sortOrder": "desc", "agentIds": agent_id}
+        time_after = datetime.now(timezone.utc) - timedelta(seconds=60)
+        agent_filter = {"activityTypes": 80, "sortBy": "createdAt", "sortOrder": "desc",
+                        "createdAt__gte": time_after, "agentIds": agent_id}
         activities = self.activities_list(agent_filter)
+        count = 0
         while not activities["data"]:
+            if count == 6:
+                raise PluginException(
+                    cause="An error occurred when trying to download the file.",
+                    assistance="Please contact support or try again later.",
+                )
             self.logger.info("Waiting 5 seconds for successful fetch file upload...")
             time.sleep(5)
+            count += 1
             activities = self.activities_list(agent_filter)
         self.get_auth_token()
         print("DL DEBUG activities[data]:{}".format(activities["data"]))
         response = self._call_api("GET", activities["data"][0]["data"]["filePath"][1:], full_response=True)
         try:
-            file_name = activities["data"][-1]["data"]["uploadedFilename"]
+            file_name = activities["data"][0]["data"]["uploadedFilename"]
             with zipfile.ZipFile(io.BytesIO(response.content)) as downloaded_zipfile:
                 downloaded_zipfile.setpassword(password.encode("UTF-8"))
 
@@ -511,11 +522,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return response
 
     def get_all_paginated_results(
-        self,
-        endpoint: str,
-        limit: int = 1000,
-        json: dict = None,
-        params: dict = None,
+            self,
+            endpoint: str,
+            limit: int = 1000,
+            json: dict = None,
+            params: dict = None,
     ) -> dict:
         first_endpoint_page = f"{endpoint}?limit={limit}"
         results = self._call_api("GET", first_endpoint_page, json, params)
@@ -538,13 +549,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return results
 
     def _call_api(
-        self,
-        method,
-        endpoint,
-        json=None,
-        params=None,
-        full_response: bool = False,
-        override_api_version: str = "",
+            self,
+            method,
+            endpoint,
+            json=None,
+            params=None,
+            full_response: bool = False,
+            override_api_version: str = "",
     ):
 
         # We prefer to use the same api version from the token creation,
