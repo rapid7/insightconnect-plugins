@@ -1,0 +1,44 @@
+{
+  "locationsAndBranches":[
+    {
+      "id":"44d88612-fea8-a8f3-6de8-2e1278abb021",
+      "name":"1st Floor",
+      "branch":{
+        "id":"44d88612-fea8-a8f3-6de8-2e1278abb021",
+        "name":"TOPdesk1"
+      }
+    },
+    {
+      "id":"44d88612-fea8-a8f3-6de8-2e1278abb022",
+      "name":"2.08",
+      "branch":{
+        "id":"44d88612-fea8-a8f3-6de8-2e1278abb022",
+        "name":"TOPdesk2"
+      }
+    },
+    {
+      "id":"44d88612-fea8-a8f3-6de8-2e1278abb023",
+      "name":"2.09",
+      "branch":{
+        "id":"44d88612-fea8-a8f3-6de8-2e1278abb023",
+        "name":"TOPdesk3"
+      }
+    },
+    {
+      "id":"44d88612-fea8-a8f3-6de8-2e1278abb024",
+      "name":"2nd Floor",
+      "branch":{
+        "id":"44d88612-fea8-a8f3-6de8-2e1278abb024",
+        "name":"TOPdesk4"
+      }
+    },
+    {
+      "id":"44d88612-fea8-a8f3-6de8-2e1278abb025",
+      "name":"3.02",
+      "branch":{
+        "id":"44d88612-fea8-a8f3-6de8-2e1278abb025",
+        "name":"TOPdesk5"
+      }
+    }
+  ]
+}

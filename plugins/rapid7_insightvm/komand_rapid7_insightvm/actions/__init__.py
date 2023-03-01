@@ -75,6 +75,7 @@ from .tag_site.action import TagSite
 from .top_remediations.action import TopRemediations
 from .update_asset_group_search_criteria.action import UpdateAssetGroupSearchCriteria
 from .update_scan_status.action import UpdateScanStatus
+from .update_shared_credential.action import UpdateSharedCredential
 from .update_site.action import UpdateSite
 from .update_site_excluded_asset_groups.action import UpdateSiteExcludedAssetGroups
 from .update_site_excluded_targets.action import UpdateSiteExcludedTargets

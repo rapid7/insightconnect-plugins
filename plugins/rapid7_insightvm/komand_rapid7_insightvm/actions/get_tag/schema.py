@@ -24,7 +24,7 @@ class GetTagInput(insightconnect_plugin_runtime.Input):
     "id": {
       "type": "integer",
       "title": "ID",
-      "description": "Tag ID, e.g. 1",
+      "description": "Tag ID",
       "order": 1
     }
   },

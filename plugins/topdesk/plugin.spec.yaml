@@ -1,0 +1,2546 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: topdesk
+title: TopDesk
+description: TopDesk is a cloud ticketing system that focuses on ease of use and extensibility
+version: 1.0.0
+supported_versions: ["TopDesk API v3.8.5"]
+vendor: rapid7
+support: rapid7
+cloud_ready: true
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/topdesk
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.topdesk.com
+tags:
+  - topdesk
+  - ticketing
+hub_tags:
+  use_cases: [reporting_and_analytics]
+  keywords: [ticketing, topdesk, cloud_enabled]
+  features: []
+
+types:
+  fieldObject:
+    id:
+      title: ID
+      description: The identifier of the field
+      type: string
+      required: false
+      example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+    name:
+      title: Name
+      description: Name of the field
+      type: string
+      required: false
+      example: 'Example name'
+  branch:
+    clientReferenceNumber:
+      title: Client Reference Number
+      description: Client reference number
+      type: string
+      required: false
+      example: 'example'
+    timeZone:
+      title: Time Zone
+      description: Time zone of the branch
+      type: string
+      required: false
+      example: 'example'
+    extraA:
+      title: Extra Field A
+      description: Extra field A
+      type: fieldObject
+      required: false
+      example: {}
+    extraB:
+      title: Extra Field B
+      description: Extra field B
+      type: fieldObject
+      required: false
+      example: {}
+    id:
+      title: ID
+      description: Caller identifier
+      type: string
+      required: false
+      example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+    name:
+      title: Name
+      description: Branch name
+      type: string
+      required: false
+      example: 'Example branch name'
+  caller:
+    id:
+      title: ID
+      description: Caller identifier
+      type: string
+      required: false
+      example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+    dynamicName:
+      title: Dynamic Name
+      description: Caller dynamic name
+      type: string
+      required: false
+      example: 'Example User'
+    email:
+      title: Email
+      description: Email address of the caller
+      type: string
+      required: false
+      example: 'user@example.com'
+    mobileNumber:
+      title: Mobile Number
+      description: Mobile number of the caller
+      type: string
+      required: false
+      example: '123123123'
+    phoneNumber:
+      title: Phone Number
+      description: Phone number of the caller
+      type: string
+      required: false
+      example: '123123123'
+    branch:
+      title: Branch
+      description: Branch of the caller
+      type: branch
+      required: false
+      example: {}
+    department:
+      title: Department
+      description: Department of the caller
+      type: fieldObject
+      required: false
+      example: {}
+    budgetHolder:
+      title: Budget Holder
+      description: Budget holder of the caller
+      type: fieldObject
+      required: false
+      example: {}
+  incidentObject:
+    id:
+      title: ID
+      description: Object identifier
+      type: string
+      required: false
+      example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+    name:
+      title: Name
+      description: Object name
+      type: string
+      required: false
+      example: 'Example Object Name'
+    type:
+      title: Type
+      description: Object type
+      type: fieldObject
+      required: false
+      example: {}
+    make:
+      title: Make
+      description: Make
+      type: fieldObject
+      required: false
+      example: {}
+    model:
+      title: Model
+      description: Object model
+      type: fieldObject
+      required: false
+      example: {}
+    branch:
+      title: Branch
+      description: Object branch
+      type: fieldObject
+      required: false
+      example: {}
+    location:
+      title: Location
+      description: Object location
+      type: fieldObject
+      required: false
+      example: {}
+    specification:
+      title: Specification
+      description: Object specification
+      type: string
+      required: false
+      example: 'Example specification'
+    serialNumber:
+      title: Serial Number
+      description: Object serial number
+      type: string
+      required: false
+      example: 'OBJ123456'
+  asset:
+    id:
+      title: ID
+      description: Asset identifier
+      type: string
+      required: false
+      example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+  location:
+    id:
+      title: ID
+      description: Location identifier
+      type: string
+      required: false
+      example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+    branch:
+      title: Branch
+      description: Location branch
+      type: branch
+      required: false
+      example: {}
+    name:
+      title: Name
+      description: Location name
+      type: string
+      required: false
+      example: 'Example Location'
+    room:
+      title: Room
+      description: Location room
+      type: string
+      required: false
+      example: 'Room 01'
+  slaObject:
+    id:
+      title: ID
+      description: SLA identifier
+      type: string
+      required: false
+      example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+    responseTargetDate:
+      title: Response Target Date
+      description: Response target date
+      type: string
+      required: false
+      example: '2022-11-15T14:00:00.000+0200'
+    targetDate:
+      title: Target Date
+      description: Target date
+      type: string
+      required: false
+      example: '2022-11-15T14:00:00.000+0200'
+  operator:
+    id:
+      title: ID
+      description: Operator identifier
+      type: string
+      required: false
+      example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+    status:
+      title: Status
+      description: Operator status
+      type: string
+      required: false
+      example: 'operator'
+    name:
+      title: Name
+      description: Operator name
+      type: string
+      required: false
+      example: 'Example Operator'
+  supplier:
+    id:
+      title: ID
+      description: Supplier identifier
+      type: string
+      required: false
+      example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+    name:
+      title: Name
+      description: Supplier name
+      type: string
+      required: false
+      example: 'Example Supplier'
+    forFirstLine:
+      title: For First Line
+      description: Whether the supplier is for first line
+      type: boolean
+      required: false
+      example: false
+    forSecondLine:
+      title: For Second Line
+      description: Whether the supplier is for second line
+      type: boolean
+      required: false
+      example: false
+  processingStatus:
+    id:
+      title: ID
+      description: Processing status identifier
+      type: string
+      required: false
+      example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+    name:
+      title: Name
+      description: Processing status name
+      type: string
+      required: false
+      example: 'Registered'
+  majorCallObject:
+    id:
+      title: ID
+      description: Major call ID
+      type: string
+      required: false
+      example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+    name:
+      title: Name
+      description: Major call name
+      type: string
+      required: false
+      example: 'example'
+    status:
+      title: Status
+      description: Major call status
+      type: integer
+      required: false
+      example: 2
+    majorIncident:
+      title: Major Incident
+      description: Whether the incident is major
+      type: boolean
+      required: false
+      example: false
+  externalLink:
+    id:
+      title: ID
+      description: The identifier of the field
+      type: string
+      required: false
+      example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+    type:
+      title: Type
+      description: Number to identify the external system by
+      type: string
+      required: false
+      example: '11'
+    date:
+      title: Date
+      description: Date of the last synchronization
+      type: string
+      required: false
+      example: '2022-11-15T14:00:00.000+0200'
+  link:
+    link:
+      title: Link
+      description: Link
+      type: string
+      required: false
+      example: '/tas/api/incidents/id/44d88612-fea8-a8f3-6de8-2e1278abb02f'
+  incident:
+    id:
+      title: ID
+      description: The identifier of the incident
+      type: string
+      required: false
+      example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+    status:
+      title: Status
+      description: Status of the incident
+      type: string
+      required: false
+      example: 'firstLine'
+    number:
+      title: Number
+      description: Incident number
+      type: string
+      required: false
+      example: 'I 2301 004'
+    request:
+      title: Request
+      description: The request text that caused the incident without any formatting
+      type: string
+      required: false
+      example: '<b>example request</b>'
+    requests:
+      title: Requests
+      description: The list endpoint where the separate request entries can be retrieved with HTML formatting
+      type: string
+      required: false
+      example: '/tas/api/incidents/id/44d88612-fea8-a8f3-6de8-2e1278abb02f/requests'
+    action:
+      title: Action
+      description: The list endpoint where the separate action entries can be retrieved with HTML formatting
+      type: string
+      required: false
+      example: '<b>example action</b>'
+    attachments:
+      title: Attachments
+      description: The list endpoint where the attachments can be retrieved
+      type: string
+      required: false
+      example: '/tas/api/incidents/id/44d88612-fea8-a8f3-6de8-2e1278abb02f/attachments'
+    caller:
+      title: Caller
+      description: Caller
+      type: caller
+      required: false
+      example: {}
+    callerBranch:
+      title: Caller Branch
+      description: The branch of the caller
+      type: branch
+      required: false
+      example: {}
+    callerLocation:
+      title: Caller Location
+      description: The location of the caller
+      type: fieldObject
+      required: false
+      example: {}
+    branchExtraFieldA:
+      title: Branch Extra Field A
+      description: The extraA field of the caller branch
+      type: fieldObject
+      required: false
+      example: {}
+    branchExtraFieldB:
+      title: Branch Extra Field B
+      description: The extraA field of the caller branch
+      type: fieldObject
+      required: false
+      example: {}
+    briefDescription:
+      title: Brief Description
+      description: Brief description
+      type: string
+      required: false
+      example: 'Example description'
+    externalNumber:
+      title: External Number
+      description: External number
+      type: string
+      required: false
+      example: 'test_123'
+    category:
+      title: Category
+      description: Category
+      type: fieldObject
+      required: false
+      example: {}
+    subcategory:
+      title: Subcategory
+      description: Subcategory name or identifier
+      type: fieldObject
+      required: false
+      example: {}
+    callType:
+      title: Call Type
+      description: Call type
+      type: fieldObject
+      required: false
+      example: {}
+    entryType:
+      title: Entry Type
+      description: Entry type
+      type: fieldObject
+      required: false
+      example: {}
+    object:
+      title: Object
+      description: Object name or identifier
+      type: incidentObject
+      required: false
+      example: {}
+    asset:
+      title: Asset
+      description: Asset
+      type: asset
+      required: false
+      example: {}
+    branch:
+      title: Branch
+      description: Branch for location
+      type: branch
+      required: false
+      example: {}
+    location:
+      title: Location
+      description: Location of the incident
+      type: location
+      required: false
+      example: {}
+    impact:
+      title: Impact
+      description: Impact identifier or name
+      type: fieldObject
+      required: false
+      example: {}
+    urgency:
+      title: Urgency
+      description: Urgency identifier or name
+      type: fieldObject
+      required: false
+      example: {}
+    priority:
+      title: Priority
+      description: Priority identifier or name
+      type: fieldObject
+      required: false
+      example: {}
+    duration:
+      title: Duration
+      description: Duration identifier or name
+      type: fieldObject
+      required: false
+      example: {}
+    actualDuration:
+      title: Actual Duration
+      description: Actual duration of the incident in minutes
+      type: integer
+      required: false
+      example: 2
+    targetDate:
+      title: Target Date
+      description: Target date
+      type: string
+      required: false
+      example: '2022-11-15T14:00:00.000+0200'
+    sla:
+      title: SLA
+      description: SLA identifier
+      type: slaObject
+      required: false
+      example: {}
+    responseDate:
+      title: Response Date
+      description: Response date
+      type: string
+      required: false
+      example: '2022-11-15T14:00:00.000+0200'
+    onHold:
+      title: On Hold
+      description: Whether incident is on hold
+      type: boolean
+      required: false
+      example: false
+    onHoldDate:
+      title: On Hold Date
+      description: Date when incident was set as on hold
+      type: string
+      required: false
+      example: '2022-11-15T14:00:00.000+0200'
+    onHoldDuration:
+      title: On Hold Duration
+      description: Time registered on this incident since it was set to on hold
+      type: integer
+      required: false
+      example: 1
+    feedbackRating:
+      title: Feedback Rating
+      description: Rate incident
+      type: integer
+      required: false
+      example: 5
+    feedbackMessage:
+      title: Feedback Message
+      description: Feedback message of the incident
+      type: string
+      required: false
+      example: 'Great job!'
+    operator:
+      title: Operator
+      description: Operator of the incident
+      type: operator
+      required: false
+      example: {}
+    operatorGroup:
+      title: Operator Group
+      description: Operator group of the object
+      type: fieldObject
+      required: false
+      example: {}
+    supplier:
+      title: Supplier
+      description: Supplier of the incident
+      type: supplier
+      required: false
+      example: {}
+    processingStatus:
+      title: Processing Status
+      description: Processing status of the incident
+      type: processingStatus
+      required: false
+      example: {}
+    completed:
+      title: Completed
+      description: Whether the incident is completed
+      type: boolean
+      required: false
+      example: false
+    completedDate:
+      title: Completed Date
+      description: Date when incident was completed
+      type: string
+      required: false
+      example: '2022-11-15T14:00:00.000+0200'
+    closed:
+      title: Closed
+      description: Whether the incident is closed
+      type: boolean
+      required: false
+      example: false
+    closedDate:
+      title: Closed Date
+      description: Date when incident was closed
+      type: string
+      required: false
+      example: '2022-11-15T14:00:00.000+0200'
+    closureCode:
+      title: Closure Code
+      description: Closure code of the incident
+      type: fieldObject
+      required: false
+      example: {}
+    timeSpent:
+      title: Time Spent
+      description: The total time registered on this incident in minutes
+      type: integer
+      required: false
+      example: 2
+    timeSpentFirstLine:
+      title: Time Spent First Line
+      description: Time registered on this incident while it was a 1st line incident in minutes
+      type: integer
+      required: false
+      example: 2
+    timeSpentSecondLine:
+      title: Time Spent Second Line
+      description: Time registered on this incident while it was a 2nd line incident in minutes
+      type: integer
+      required: false
+      example: 2
+    timeSpentPartial:
+      title: Time Spent Partial
+      description: Time registered on this incident while it was a partial incident in minutes
+      type: integer
+      required: false
+      example: 2
+    timeSpentLinkedPartials:
+      title: Time Spent Linked Partials
+      description: Time registered on partials belonging to this incident in minutes
+      type: integer
+      required: false
+      example: 2
+    itemCosts:
+      title: Item Costs
+      description: Item costs
+      type: float
+      required: false
+      example: 12.50
+    objectCosts:
+      title: Object Costs
+      description: Object costs
+      type: float
+      required: false
+      example: 12.50
+    costs:
+      title: Costs
+      description: Costs
+      type: float
+      required: false
+      example: 12.50
+    escalationStatus:
+      title: Escalation Status
+      description: Escalation status
+      type: string
+      required: false
+      example: 'Escalated'
+    escalationReason:
+      title: Escalation Reason
+      description: Escalation reason of the incident
+      type: fieldObject
+      required: false
+      example: {}
+    escalationOperator:
+      title: Escalation Operator
+      description: Escalation operator of the incident
+      type: fieldObject
+      required: false
+      example: {}
+    callDate:
+      title: Call Date
+      description: Call date of the incident
+      type: string
+      required: false
+      example: '2022-11-15T14:00:00.000+0200'
+    creator:
+      title: Creator
+      description: Incident creator
+      type: fieldObject
+      required: false
+      example: {}
+    creationDate:
+      title: Creation Date
+      description: Creation date
+      type: string
+      required: false
+      example: '2022-11-15T14:00:00.000+0200'
+    modifier:
+      title: Modifier
+      description: Modifier
+      type: fieldObject
+      required: false
+      example: {}
+    modificationDate:
+      title: Modification Date
+      description: Date of last modification
+      type: string
+      required: false
+      example: '2022-11-15T14:00:00.000+0200'
+    archivingReason:
+      title: Archiving Reason
+      description: Reason for archiving the incident
+      type: fieldObject
+      required: false
+      example: {}
+    majorCall:
+      title: Major Call
+      description: Whether the incident is a major call
+      type: boolean
+      required: false
+      example: true
+    majorCallObject:
+      title: Major Call Object
+      description: Major call object
+      type: majorCallObject
+      required: false
+      example: {}
+    publishToSsd:
+      title: Publish to Self Service Desk
+      description: Whether the incident should be published to the Self Service Desk
+      type: boolean
+      required: false
+      example: false
+    monitored:
+      title: Monitored
+      description: Whether the incident is monitored
+      type: boolean
+      required: false
+      example: false
+    responded:
+      title: Responded
+      description: Whether the incident is responded
+      type: boolean
+      required: false
+      example: false
+    expectedTimeSpent:
+      title: Expected Time Spent
+      description: Expected time spent on the incident
+      type: integer
+      required: false
+      example: 2
+    mainIncident:
+      title: Main Incident
+      description: The identifier or name of the main incident
+      type: fieldObject
+      required: false
+      example: {}
+    partialIncidents:
+      title: Partial Incidents
+      description: Array of links to the partial incidents
+      type: '[]link'
+      required: false
+      example: []
+    optionalFields1:
+      title: Optional Fields 1
+      description: Optional fields 1
+      type: object
+      required: false
+      example: {}
+    optionalFields2:
+      title: Optional Fields 2
+      description: Optional fields 2
+      type: object
+      required: false
+      example: {}
+    externalLinks:
+      title: External Links
+      description: Array of links to an external systems
+      type: '[]externalLink'
+      required: false
+      example: []
+  supplierOutput:
+    id:
+      title: ID
+      description: Supplier identifier
+      type: string
+      required: false
+      example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+    name:
+      title: Name
+      description: Supplier name
+      type: string
+      required: false
+      example: 'Example Supplier'
+    forFirstLine:
+      title: For First Line
+      description: Whether the supplier is for first line
+      type: boolean
+      required: false
+      example: false
+    forSecondLine:
+      title: For Second Line
+      description: Whether the supplier is for second line
+      type: boolean
+      required: false
+      example: false
+    forService:
+      title: For Service
+      description: Whether the supplier is for service
+      type: boolean
+      required: false
+      example: false
+    forOperationalActivity:
+      title: For Operational Activity
+      description: Whether the supplier is for operational activity
+      type: boolean
+      required: false
+      example: false
+    forChangeManagement:
+      title: For Change Management
+      description: Whether the supplier is for change management
+      type: boolean
+      required: false
+      example: false
+  callerInput:
+    dynamicName:
+      title: Caller Name
+      description: Name of the caller. Can only be changed for unregistered callers
+      type: string
+      required: false
+      example: 'Maxine Rogers'
+    email:
+      title: Caller Email
+      description: Email address of the caller
+      type: string
+      required: false
+      example: 'user@example.com'
+    phoneNumber:
+      title: Caller Phone Number
+      description: Phone number of the caller
+      type: string
+      required: false
+      example: '123123123'
+    mobileNumber:
+      title: Caller Phone Number
+      description: Mobile phone number of the caller
+      type: string
+      required: false
+      example: '123123123'
+    branch:
+      title: Caller Branch
+      description: Branch identifier of the caller
+      type: string
+      required: false
+      example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+    department:
+      title: Caller Department
+      description: Department name of the caller
+      type: string
+      required: false
+      example: 'Management'
+    location:
+      title: Caller Location
+      description: Location identifier of the caller
+      type: string
+      required: false
+      example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+    budgetHolder:
+      title: Caller Budget Holder
+      description: Budget holder name of the caller
+      type: string
+      required: false
+      example: 'IT'
+    personExtraFieldA:
+      title: Caller Extra Field A
+      description: Caller extra field A of the caller by name
+      type: string
+      required: false
+      example: 'Internal application'
+    personExtraFieldB:
+      title: Caller Extra Field B
+      description: Caller extra field B of the caller by name
+      type: string
+      required: false
+      example: 'Hired'
+  accessRole:
+    href:
+      title: HREF
+      description: HREF
+      type: string
+      required: false
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+  optionalField:
+    boolean1:
+      title: Boolean 1
+      description: Optional boolean field
+      type: boolean
+      required: false
+    boolean2:
+      title: Boolean 2
+      description: Optional boolean field
+      type: boolean
+      required: false
+    boolean3:
+      title: Boolean 3
+      description: Optional boolean field
+      type: boolean
+      required: false
+    boolean4:
+      title: Boolean 4
+      description: Optional boolean field
+      type: boolean
+      required: false
+    boolean5:
+      title: Boolean 5
+      description: Optional boolean field
+      type: boolean
+      required: false
+    number1:
+      title: Number 1
+      description: Optional number field
+      type: integer
+      required: false
+    number2:
+      title: Number 2
+      description: Optional number field
+      type: integer
+      required: false
+    number3:
+      title: Number 3
+      description: Optional number field
+      type: integer
+      required: false
+    number4:
+      title: Number 4
+      description: Optional number field
+      type: integer
+      required: false
+    number5:
+      title: Number 5
+      description: Optional number field
+      type: integer
+      required: false
+    date1:
+      title: Date 1
+      description: Optional date field
+      type: string
+      required: false
+    date2:
+      title: Date 2
+      description: Optional date field
+      type: string
+      required: false
+    date3:
+      title: Date 3
+      description: Optional date field
+      type: string
+      required: false
+    date4:
+      title: Date 4
+      description: Optional date field
+      type: string
+      required: false
+    date5:
+      title: Date 5
+      description: Optional date field
+      type: string
+      required: false
+    text1:
+      title: Text 1
+      description: Optional text field
+      type: string
+      required: false
+    text2:
+      title: Text 2
+      description: Optional text field
+      type: string
+      required: false
+    text3:
+      title: Text 3
+      description: Optional text field
+      type: string
+      required: false
+    text4:
+      title: Text 4
+      description: Optional text field
+      type: string
+      required: false
+    text5:
+      title: Text 5
+      description: Optional text field
+      type: string
+      required: false
+    memo1:
+      title: Memo 1
+      description: Optional memo field
+      type: string
+      required: false
+    memo2:
+      title: Memo 2
+      description: Optional memo field
+      type: string
+      required: false
+    memo3:
+      title: Memo 3
+      description: Optional memo field
+      type: string
+      required: false
+    memo4:
+      title: Memo 4
+      description: Optional memo field
+      type: string
+      required: false
+    memo5:
+      title: Memo 5
+      description: Optional memo field
+      type: string
+      required: false
+    searchlist1:
+      title: Search List 1
+      description: Optional search list field
+      type: string
+      required: false
+    searchlist2:
+      title: Search List 2
+      description: Optional search list field
+      type: string
+      required: false
+    searchlist3:
+      title: Search List 3
+      description: Optional search list field
+      type: string
+      required: false
+    searchlist4:
+      title: Search List 4
+      description: Optional search list field
+      type: string
+      required: false
+    searchlist5:
+      title: Search List 5
+      description: Optional search list field
+      type: string
+      required: false
+  operatorOutput:
+    id:
+      title: ID
+      description: Operator identifier
+      type: string
+      required: false
+    principalId:
+      title: Principal ID
+      description: Principal identifier
+      type: string
+      required: false
+    status:
+      title: Status
+      description: Status
+      type: string
+      required: false
+    accountType:
+      title: Account Type
+      description: Account type
+      type: string
+      required: false
+    surName:
+      title: Surname
+      description: Surname
+      type: string
+      required: false
+    firstName:
+      title: Firstname
+      description: Firstname
+      type: string
+      required: false
+    dynamicName:
+      title: Dynamic Name
+      description: Dynamic name
+      type: string
+      required: false
+    initials:
+      title: Initials
+      description: Initials
+      type: string
+      required: false
+    prefixes:
+      title: Prefixes
+      description: Prefixes
+      type: string
+      required: false
+    birthName:
+      title: Birth Name
+      description: Birth name
+      type: string
+      required: false
+    title:
+      Title: Title
+      description: Title
+      type: string
+      required: false
+    gender:
+      title: Gender
+      description: Gender
+      type: string
+      required: false
+    language:
+      title: Language
+      description: Language
+      type: fieldObject
+      required: false
+    branch:
+      title: Branch
+      description: Branch
+      type: branch
+      required: false
+    location:
+      title: Location
+      description: Location
+      type: location
+      required: false
+    telephone:
+      title: Telephone
+      description: Telephone
+      type: string
+      required: false
+    mobileNumber:
+      title: Mobile Number
+      description: Mobile number
+      type: string
+      required: false
+    email:
+      title: Email
+      description: Email
+      type: string
+      required: false
+    exchangeAccount:
+      title: Exchange Account
+      description: Exchange account
+      type: string
+      required: false
+    loginName:
+      title: Login Name
+      description: Login name
+      type: string
+      required: false
+    loginPermission:
+      title: Login Permission
+      description: Login permission
+      type: boolean
+      required: false
+    jobTitle:
+      title: Job Title
+      description: Job title
+      type: string
+      required: false
+    department:
+      title: Department
+      description: Department
+      type: fieldObject
+      required: false
+    budgetHolder:
+      title: Budget Holder
+      description: Budget holder
+      type: fieldObject
+      required: false
+    employeeNumber:
+      title: Employee Number
+      description: Employee number
+      type: string
+      required: false
+    hourlyRate:
+      title: Hourly Rate
+      description: Hourly rate
+      type: integer
+      required: false
+    networkLoginName:
+      title: Network Login Name
+      description: Network login name
+      type: string
+      required: false
+    mainframeLoginName:
+      title: Mainframe Login Name
+      description: Mainframe login name
+      type: string
+      required: false
+    hasAttention:
+      title: Has Attention
+      description: Has attention
+      type: boolean
+      required: false
+    attention:
+      title: Attention
+      description: Attention
+      type: fieldObject
+      required: false
+    comments:
+      title: Comments
+      description: Comments
+      type: string
+      required: false
+    installer:
+      title: Installer
+      description: Installer
+      type: boolean
+      required: false
+    firstLaneCallOperator:
+      title: First Lane Call Operator
+      description: First lane call operator
+      type: boolean
+      required: false
+    secondLaneCallOperator:
+      title: Second Lane Call Operator
+      description: Second lane call operator
+      type: boolean
+      required: false
+    problemManager:
+      title: Problem Manager
+      description: Problem manager
+      type: boolean
+      required: false
+    problemOperator:
+      title: Problem Operator
+      description: Problem operator
+      type: boolean
+      required: false
+    changeCoordinator:
+      title: Change Coordinator
+      description: Change coordinator
+      type: boolean
+      required: false
+    changeActivitiesOperator:
+      title: Change Activities Operator
+      description: Change Activities operator
+      type: boolean
+      required: false
+    requestForChangeOperator:
+      title: Request for Change Operator
+      description: Request for change operator
+      type: boolean
+      required: false
+    extensiveChangeOperator:
+      title: Extensive Change Operator
+      description: Extensive change operator
+      type: boolean
+      required: false
+    scenarioManager:
+      title: Scenario Manager
+      description: Scenario manager
+      type: boolean
+      required: false
+    planningActivityManager:
+      title: Planning Activity Manager
+      description: Planning activity manager
+      type: boolean
+      required: false
+    projectCoordinator:
+      title: Project Coordinator
+      description: Project coordinator
+      type: boolean
+      required: false
+    projectActiviesOperator:
+      title: Project Activities Operator
+      description: Project activities operator
+      type: boolean
+      required: false
+    stockManager:
+      title: Stock Manager
+      description: Stock manager
+      type: boolean
+      required: false
+    reservationsOperator:
+      title: Reservations Operator
+      description: Reservations operator
+      type: boolean
+      required: false
+    serviceOperator:
+      title: Service Operator
+      description: Service operator
+      type: boolean
+      required: false
+    externalHelpDeskParty:
+      title: External HelpDesk party
+      description: External helpdesk party
+      type: boolean
+      required: false
+    contractManager:
+      title: Contract Manager
+      description: Contract manager
+      type: boolean
+      required: false
+    operationsOperator:
+      title: Operations Operator
+      description: Operations operator
+      type: boolean
+      required: false
+    operationsManager:
+      title: Operations Manager
+      description: Operations manager
+      type: boolean
+      required: false
+    knowledgeBaseManager:
+      title: Knowledge Base Manager
+      description: Knowledge base manager
+      type: boolean
+      required: false
+    accountManager:
+      title: Account Manager
+      description: Account manager
+      type: boolean
+      required: false
+    creationDate:
+      title: Creation Date
+      description: Creation date
+      type: string
+      required: false
+    creator:
+      title: Creator
+      description: Creator
+      type: fieldObject
+      required: false
+    modificationDate:
+      title: Modification Date
+      description: Modification date
+      type: string
+      required: false
+    modifier:
+      title: Modifier
+      description: Modifier
+      type: fieldObject
+      required: false
+    accessRoles:
+      title: Access Roles
+      description: Access roles
+      type: "[]accessRole"
+      required: false
+    optionalField1:
+      title: Optional Field 1
+      description: Optional field 1
+      type: optionalField
+      required: false
+    optionalField2:
+      title: Optional Field 2
+      description: Optional field 2
+      type: optionalField
+      required: false
+  operatorGroup:
+    id:
+      title: ID
+      description: Operator group identifier
+      type: string
+      required: false
+    status:
+      title: Status
+      description: Operator group status
+      type: string
+      required: false
+    groupName:
+      title: Group Name
+      description: Operator group name
+      type: string
+      required: false
+    preset:
+      title: Preset
+      description: Preset
+      type: string
+      required: false
+    branch:
+      title: Branch
+      description: Branch
+      type: branch
+      required: false
+    location:
+      title: Location
+      description: Location
+      type: location
+      required: false
+    budgetHolder:
+      title: Budget Holder
+      description: Budget holder
+      type: fieldObject
+      required: false
+    hourlyRate:
+      title: Hourly Rate
+      description: Hourly rate
+      type: integer
+      required: false
+    contact:
+      title: Contact
+      description: Contact
+      type: operatorOutput
+      required: false
+    installer:
+      title: Installer
+      description: Installer
+      type: boolean
+      required: false
+    firstLaneCallOperator:
+      title: First Lane Call Operator
+      description: First lane call operator
+      type: boolean
+      required: false
+    secondLaneCallOperator:
+      title: Second Lane Call Operator
+      description: Second lane call operator
+      type: boolean
+      required: false
+    problemManager:
+      title: Problem Manager
+      description: Problem manager
+      type: boolean
+      required: false
+    problemOperator:
+      title: Problem Operator
+      description: Problem operator
+      type: boolean
+      required: false
+    changeCoordinator:
+      title: Change Coordinator
+      description: Change coordinator
+      type: boolean
+      required: false
+    changeActivitiesOperator:
+      title: Change Activities Operator
+      description: Change Activities operator
+      type: boolean
+      required: false
+    requestForChangeOperator:
+      title: Request for Change Operator
+      description: Request for change operator
+      type: boolean
+      required: false
+    extensiveChangeOperator:
+      title: Extensive Change Operator
+      description: Extensive change operator
+      type: boolean
+      required: false
+    scenarioManager:
+      title: Scenario Manager
+      description: Scenario manager
+      type: boolean
+      required: false
+    planningActivityManager:
+      title: Planning Activity Manager
+      description: Planning activity manager
+      type: boolean
+      required: false
+    projectCoordinator:
+      title: Project Coordinator
+      description: Project coordinator
+      type: boolean
+      required: false
+    projectActiviesOperator:
+      title: Project Activities Operator
+      description: Project activities operator
+      type: boolean
+      required: false
+    stockManager:
+      title: Stock Manager
+      description: Stock manager
+      type: boolean
+      required: false
+    reservationsOperator:
+      title: Reservations Operator
+      description: Reservations operator
+      type: boolean
+      required: false
+    serviceOperator:
+      title: Service Operator
+      description: Service operator
+      type: boolean
+      required: false
+    externalHelpDeskParty:
+      title: External HelpDesk party
+      description: External helpdesk party
+      type: boolean
+      required: false
+    contractManager:
+      title: Contract Manager
+      description: Contract manager
+      type: boolean
+      required: false
+    operationsOperator:
+      title: Operations Operator
+      description: Operations operator
+      type: boolean
+      required: false
+    operationsManager:
+      title: Operations Manager
+      description: Operations manager
+      type: boolean
+      required: false
+    knowledgeBaseManager:
+      title: Knowledge Base Manager
+      description: Knowledge base manager
+      type: boolean
+      required: false
+    accountManager:
+      title: Account Manager
+      description: Account manager
+      type: boolean
+      required: false
+    creationDate:
+      title: Creation Date
+      description: Creation date
+      type: string
+      required: false
+    creator:
+      title: Creator
+      description: Creator
+      type: fieldObject
+      required: false
+    modificationDate:
+      title: Modification Date
+      description: Modification date
+      type: string
+      required: false
+    modifier:
+      title: Modifier
+      description: Modifier
+      type: fieldObject
+      required: false
+    accessRoles:
+      title: Access Roles
+      description: Access roles
+      type: "[]accessRole"
+      required: false
+    principalId:
+      title: Principal ID
+      description: Principal identifier
+      type: string
+      required: false
+    optionalField1:
+      title: Optional Field 1
+      description: Optional field 1
+      type: optionalField
+      required: false
+    optionalField2:
+      title: Optional Field 2
+      description: Optional field 2
+      type: optionalField
+      required: false
+
+connection:
+  domain:
+    title: Domain
+    description: Domain
+    type: string
+    required: true
+    example: rapid7
+  credentials:
+    title: Credentials
+    description: TopDesk username used for login and password generated in the 'Application passwords' section
+    type: credential_username_password
+    required: true
+    example: '{"username": "user", "password": "44d88612-fea8-a8f3-6de8-2e1278abb02f"}'
+
+actions:
+  listIncidents:
+    title: List Incidents
+    description: Returns a list of incidents
+    input:
+      pageStart:
+        title: Page Start
+        description: The offset to start at. Default is 0
+        type: integer
+        required: false
+        example: 2
+      pageSize:
+        title: Page Size
+        description: How many incidents should be returned max. Default is 10. Should be between 1 and 1000
+        type: integer
+        required: false
+        example: 5
+      sort:
+        title: Sort
+        description: The sort order of the returned incidents
+        type: string
+        required: false
+        example: 'status:asc,creationDate:desc'
+      query:
+        title: Query
+        description: A FIQL string to select which incidents should be returned
+        type: string
+        required: false
+        example: 'status==secondLine;priority.name==P1'
+      fields:
+        title: Fields
+        description: A comma-separated list of which fields should be returned. By default all fields will be returned
+        type: string
+        required: false
+        example: 'id,targetDate'
+      all:
+        title: All
+        description: Whether to return partial and archived incidents
+        type: boolean
+        required: false
+        example: True
+    output:
+      incidents:
+        title: Incidents
+        description: List of the incidents
+        type: '[]incident'
+        required: false
+        example: []
+  createIncident:
+    title: Create Incident
+    description: Creates an incident
+    input:
+      status:
+        title: Status
+        description: Status of the incident
+        type: string
+        required: true
+        enum:
+          - First Line Incident
+          - Second Line Incident
+          - Partial Incident
+        example: First Line Incident
+      mainIncident:
+        title: Main Incident
+        description: Main incident number, required for creating a partial incident. This must be an open, unarchived second line incident and visible to the operator
+        type: string
+        required: false
+        example: 'I 1000 123'
+      callerLookup:
+        title: Caller Lookup
+        description: Caller email for filling in a registered caller's contact details
+        type: string
+        required: false
+        example: 'user@example.com'
+      caller:
+        title: Caller
+        description: The caller contact details for this incident. Is filled in automatically for persons and when the callerLookup parameter is provided
+        type: callerInput
+        required: false
+        example: '{"branch": "44d88612-fea8-a8f3-6de8-2e1278abb02f", "budgetHolder": "Management"," department": "Management", "dynamicName": "Example User", "email": "user@example.com", "location": "44d88612-fea8-a8f3-6de8-2e1278abb02f", "mobileNumber": "1111111", "phoneNumber": "2222222"}'
+      briefDescription:
+        title: Brief Description
+        description: Brief description of the incident. For partials, if not provided, will be automatically copied from the main incident
+        type: string
+        required: false
+        example: 'Example description'
+      request:
+        title: Request
+        description: Initial request that caused the incident
+        type: string
+        required: false
+        example: '<b>example request</b>'
+      action:
+        title: Action
+        description: Initial action
+        type: string
+        required: false
+        example: '<b>example action</b>'
+      actionInvisibleForCaller:
+        title: Action Invisible for Caller
+        description: Whether the initial action is invisible for callers
+        type: boolean
+        required: false
+        example: False
+      entryType:
+        title: Entry Type
+        description: The type of the entry
+        type: string
+        required: false
+        example: 'Chat'
+      callType:
+        title: Call Type
+        description: The type of the call. Cannot be provided for partials as its automatically copied from the main incident
+        type: string
+        required: false
+        example: 'Failure'
+      category:
+        title: Category
+        description: The name of the category. For partials, if not provided, will be automatically copied from the main incident
+        type: string
+        required: false
+        example: 'Hardware'
+      subcategory:
+        title: Subcategory
+        description: The name of the subcategory. For partials, if not provided, will be automatically copied from the main incident. If a subcategory is provided without a category, the corresponding category will be filled in automatically, unless there are multiple matching categories, in which case the action will fail
+        type: string
+        required: false
+        example: 'Laptop'
+      externalNumber:
+        title: External Number
+        description: External number. For partials, if not provided, will be automatically copied from the main incident
+        type: string
+        required: false
+        example: 'test_123'
+      object:
+        title: Object
+        description: The name of the object. For partial incidents, this field is determined by the main incident and will give an error if provided. If both object and location are given, object is set and location is ignored
+        type: string
+        required: false
+        example: 'OBJ001'
+      location:
+        title: Location
+        description: Location identifier. For partial incidents, this field is determined by the main incident and will give an error if provided
+        type: string
+        required: false
+        example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+      branch:
+        title: Branch
+        description: Branch identifier for location. For partial incidents, this field is determined by the main incident and will give an error if provided
+        type: string
+        required: false
+        example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+      impact:
+        title: Impact
+        description: The name of the impact. Cannot be provided for partials as its automatically copied from the main incident
+        type: string
+        required: false
+        example: 'Person'
+      urgency:
+        title: Urgency
+        description: The name of the urgency. Cannot be provided for partials as its automatically copied from the main incident
+        type: string
+        required: false
+        example: 'Normal'
+      priority:
+        title: Priority
+        description: The name of the priority. Cannot be provided for partials as it is automatically copied from the main incident. Will be automatically filled in if you provide impact and/or urgency leading to a unique priority according to your priority matrix, and don't provide a priority. For incidents with a linked SLA, if the priority provided cannot be found in the Service Level Priority List, the duration field of the incident will be emptied
+        type: string
+        required: false
+        example: 'P1'
+      duration:
+        title: Duration
+        description: Duration name
+        type: string
+        required: false
+        example: '1 week'
+      targetDate:
+        title: Target Date
+        description: Target date
+        type: date
+        required: false
+        example: '2022-11-15T14:00:00+0200'
+      sla:
+        title: SLA
+        description: SLA identifier
+        type: string
+        required: false
+        example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+      onHold:
+        title: On Hold
+        description: Whether incident is on hold
+        type: boolean
+        required: false
+        example: false
+      operator:
+        title: Operator
+        description: Operator identifier. For partials, if not provided, will be automatically copied from the main incident
+        type: string
+        required: false
+        example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+      operatorGroup:
+        title: Operator Group
+        description: Operator group identifier. For partials, if not provided, will be automatically copied from the main incident
+        type: string
+        required: false
+        example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+      supplier:
+        title: Supplier
+        description: Supplier identifier
+        type: string
+        required: false
+        example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+      processingStatus:
+        title: Processing Status
+        description: Processing status name
+        type: string
+        required: false
+        example: 'Registered'
+      responded:
+        title: Responded
+        description: Whether the incident is responded
+        type: boolean
+        required: false
+        example: false
+      responseDate:
+        title: Response Date
+        description: Response date. Will automatically be set to current date if left out and 'responded' is set to 'true'
+        type: date
+        required: false
+        example: '2022-11-15T14:00:00+0200'
+      completed:
+        title: Completed
+        description: Whether the incident is completed
+        type: boolean
+        required: false
+        example: false
+      completedDate:
+        title: Completed Date
+        description: Completed date
+        type: date
+        required: false
+        example: '2022-11-15T14:00:00+0200'
+      closed:
+        title: Closed
+        description: Whether the incident is closed
+        type: boolean
+        required: false
+        example: false
+      closedDate:
+        title: Closed Date
+        description: Closed date
+        type: date
+        required: false
+        example: '2022-11-15T14:00:00+0200'
+      closureCode:
+        title: Closure Code
+        description: The name of the closure code
+        type: string
+        required: false
+        example: 'Manual'
+      costs:
+        title: Costs
+        description: Costs
+        type: float
+        required: false
+        example: 12.50
+      feedbackRating:
+        title: Feedback Rating
+        description: Rate incident, only available for closed incidents
+        type: integer
+        required: false
+        example: 5
+      feedbackMessage:
+        title: Feedback Message
+        description: Feedback message of the incident, only available for closed incidents
+        type: string
+        required: false
+        example: 'Great job!'
+      majorCall:
+        title: Major Call
+        description: Whether the incident is a major call
+        type: boolean
+        required: false
+        example: true
+      majorCallObject:
+        title: Major Call Object
+        description: Number of the major call incident to which you want to link the created incident
+        type: string
+        required: false
+        example: 'I 2301 104'
+      publishToSsd:
+        title: Publish to Self Service Desk
+        description: Whether the incident should be published in the Self Service Desk. Only major incidents can be published
+        type: boolean
+        required: false
+        example: false
+      optionalFields1:
+        title: Optional Fields 1
+        description: Optional Fields 1
+        type: object
+        required: false
+        example: '{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00+0200"}'
+      optionalFields2:
+        title: Optional Fields 2
+        description: Optional Fields 2
+        type: object
+        required: false
+        example: '{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00+0200"}'
+    output:
+      incident:
+        title: Incident
+        description: Information about the created incident
+        type: incident
+        required: false
+        example: {}
+  getIncidentById:
+    title: Get Incident by ID
+    description: Returns an incident by ID
+    input:
+      id:
+        title: ID
+        description: The identifier of the incident to be returned
+        type: string
+        required: true
+        example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+    output:
+      incident:
+        title: Incident
+        description: Information about the given incident
+        type: incident
+        required: false
+        example: {}
+  getIncidentByNumber:
+    title: Get Incident by Number
+    description: Returns an incident by number
+    input:
+      incidentNumber:
+        title: Incident Number
+        description: Number of the incident
+        type: string
+        required: true
+        example: 'I 2301 004'
+    output:
+      incident:
+        title: Incident
+        description: Information about the given incident
+        type: incident
+        required: false
+        example: {}
+  updateIncidentById:
+    title: Update Incident by ID
+    description: Updates an incident by identifier. It doesn't reset fields that are not included in input
+    input:
+      id:
+        title: ID
+        description: Identifier of the incident
+        type: string
+        required: true
+        example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+      callerLookup:
+        title: Caller Lookup
+        description: Caller email for filling in a registered caller's contact details
+        type: string
+        required: false
+        example: 'user@example.com'
+      caller:
+        title: Caller
+        description: The caller contact details for this incident. Is filled in automatically for persons and when the callerLookup parameter is provided
+        type: callerInput
+        required: false
+        example: '{"branch": "44d88612-fea8-a8f3-6de8-2e1278abb02f", "budgetHolder": "Management"," department": "Management", "dynamicName": "Example User", "email": "user@example.com", "location": "44d88612-fea8-a8f3-6de8-2e1278abb02f", "mobileNumber": "1111111", "phoneNumber": "2222222"}'
+      briefDescription:
+        title: Brief Description
+        description: Brief description of the incident. For partials, if not provided, will be automatically copied from the main incident
+        type: string
+        required: false
+        example: 'Example description'
+      request:
+        title: Request
+        description: Initial request that caused the incident
+        type: string
+        required: false
+        example: '<b>example request</b>'
+      action:
+        title: Action
+        description: Initial action
+        type: string
+        required: false
+        example: '<b>example action</b>'
+      actionInvisibleForCaller:
+        title: Action Invisible for Caller
+        description: Whether the initial action is invisible for callers
+        type: boolean
+        required: false
+        example: false
+      entryType:
+        title: Entry Type
+        description: The type of the entry
+        type: string
+        required: false
+        example: 'Chat'
+      callType:
+        title: Call Type
+        description: The type of the call. Cannot be provided for partials as its automatically copied from the main incident
+        type: string
+        required: false
+        example: 'Failure'
+      callDate:
+        title: Call Date
+        description: The date when this call was registered
+        type: date
+        required: false
+        example: '2022-11-15T14:00:00+0200'
+      category:
+        title: Category
+        description: The name of the category. For partials, if not provided, will be automatically copied from the main incident
+        type: string
+        required: false
+        example: 'Hardware'
+      subcategory:
+        title: Subcategory
+        description: The name of the subcategory. For partials, if not provided, will be automatically copied from the main incident. If a subcategory is provided without a category, the corresponding category will be filled in automatically, unless there are multiple matching categories, in which case the action will fail
+        type: string
+        required: false
+        example: 'Laptop'
+      externalNumber:
+        title: External Number
+        description: External number. For partials, if not provided, will be automatically copied from the main incident
+        type: string
+        required: false
+        example: 'test_123'
+      object:
+        title: Object
+        description: Name of the object. For partial incidents, this field is determined by the main incident and will give an error if provided. If both object and location are given, object is set and location is ignored
+        type: string
+        required: false
+        example: 'OBJ001'
+      location:
+        title: Location
+        description: Location identifier. For partial incidents, this field is determined by the main incident and will give an error if provided
+        type: string
+        required: false
+        example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+      branch:
+        title: Branch
+        description: Branch identifier for location. For partial incidents, this field is determined by the main incident and will give an error if provided
+        type: string
+        required: false
+        example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+      impact:
+        title: Impact
+        description: Name of the impact. Cannot be provided for partials as its automatically copied from the main incident
+        type: string
+        required: false
+        example: 'Person'
+      urgency:
+        title: Urgency
+        description: Name of the urgency. Cannot be provided for partials as its automatically copied from the main incident
+        type: string
+        required: false
+        example: 'Normal'
+      priority:
+        title: Priority
+        description: Name of the priority. Cannot be provided for partials as it is automatically copied from the main incident. Will be automatically filled in if you provide impact and/or urgency leading to a unique priority according to your priority matrix, and don't provide a priority. For incidents with a linked SLA, if the priority provided cannot be found in the Service Level Priority List, the duration field of the incident will be emptied
+        type: string
+        required: false
+        example: 'P1'
+      duration:
+        title: Duration
+        description: Duration name
+        type: string
+        required: false
+        example: '1 week'
+      targetDate:
+        title: Target Date
+        description: Target date
+        type: date
+        required: false
+        example: '2022-11-15T14:00:00+0200'
+      sla:
+        title: SLA
+        description: SLA identifier
+        type: string
+        required: false
+        example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+      onHold:
+        title: On Hold
+        description: Whether incident is on hold
+        type: boolean
+        required: false
+        example: false
+      operator:
+        title: Operator
+        description: Operator identifier. For partials, if not provided, will be automatically copied from the main incident
+        type: string
+        required: false
+        example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+      operatorGroup:
+        title: Operator Group
+        description: Operator group identifier. For partials, if not provided, will be automatically copied from the main incident
+        type: string
+        required: false
+        example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+      supplier:
+        title: Supplier
+        description: Supplier identifier
+        type: string
+        required: false
+        example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+      processingStatus:
+        title: Processing Status
+        description: Processing status name
+        type: string
+        required: false
+        example: 'Registered'
+      responded:
+        title: Responded
+        description: Whether the incident is responded
+        type: boolean
+        required: false
+        example: false
+      responseDate:
+        title: Response Date
+        description: Response date. Will automatically be set to current date if left out and 'responded' is set to 'true'
+        type: date
+        required: false
+        example: '2022-11-15T14:00:00+0200'
+      completed:
+        title: Completed
+        description: Whether the incident is completed
+        type: boolean
+        required: false
+        example: False
+      completedDate:
+        title: Completed Date
+        description: Completed date
+        type: date
+        required: false
+        example: '2022-11-15T14:00:00+0200'
+      closed:
+        title: Closed
+        description: Whether the incident is closed
+        type: boolean
+        required: false
+        example: False
+      closedDate:
+        title: Closed Date
+        description: Closed date
+        type: date
+        required: false
+        example: '2022-11-15T14:00:00+0200'
+      closureCode:
+        title: Closure Code
+        description: Name of the closure code
+        type: string
+        required: false
+        example: 'Manual'
+      costs:
+        title: Costs
+        description: Costs
+        type: float
+        required: false
+        example: 12.50
+      feedbackRating:
+        title: Feedback Rating
+        description: Rate incident, only available for closed incidents
+        type: integer
+        required: false
+        example: 5
+      feedbackMessage:
+        title: Feedback Message
+        description: Feedback message of the incident, only available for closed incidents
+        type: string
+        required: false
+        example: 'Great job!'
+      majorCall:
+        title: Major Call
+        description: Whether the incident is a major call
+        type: boolean
+        required: false
+        example: true
+      majorCallObject:
+        title: Major Call Object
+        description: Number of the major call incident to which you want to link the updated incident
+        type: string
+        required: false
+        example: 'I 2301 104'
+      publishToSsd:
+        title: Publish to Self Service Desk
+        description: Whether the incident should be published in the Self Service Desk. Only major incidents can be published
+        type: boolean
+        required: false
+        example: false
+      optionalFields1:
+        title: Optional Fields 1
+        description: Optional Fields 1
+        type: object
+        required: false
+        example: '{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00+0200"}'
+      optionalFields2:
+        title: Optional Fields 2
+        description: Optional Fields 2
+        type: object
+        required: false
+        example: '{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00+0200"}'
+    output:
+      incident:
+        title: Incident
+        description: Information about the updated incident
+        type: incident
+        required: false
+        example: {}
+  updateIncidentByNumber:
+    title: Update Incident by Number
+    description: Updates an incident by number. It doesn't reset fields that are not included in input
+    input:
+      number:
+        title: Incident Number
+        description: Number of the incident
+        type: string
+        required: true
+        example: 'I 2301 004'
+      callerLookup:
+        title: Caller Lookup
+        description: Caller email for filling in a registered caller's contact details
+        type: string
+        required: false
+        example: 'user@example.com'
+      caller:
+        title: Caller
+        description: The caller contact details for this incident. Is filled in automatically for persons and when the callerLookup parameter is provided
+        type: callerInput
+        required: false
+        example: '{"branch": "44d88612-fea8-a8f3-6de8-2e1278abb02f", "budgetHolder": "Management"," department": "Management", "dynamicName": "Example User", "email": "user@example.com", "location": "44d88612-fea8-a8f3-6de8-2e1278abb02f", "mobileNumber": "1111111", "phoneNumber": "2222222"}'
+      briefDescription:
+        title: Brief Description
+        description: Brief description of the incident. For partials, if not provided, will be automatically copied from the main incident
+        type: string
+        required: false
+        example: 'Example description'
+      request:
+        title: Request
+        description: Initial request that caused the incident
+        type: string
+        required: false
+        example: '<b>example request</b>'
+      action:
+        title: Action
+        description: Initial action
+        type: string
+        required: false
+        example: '<b>example action</b>'
+      actionInvisibleForCaller:
+        title: Action Invisible for Caller
+        description: Whether the initial action is invisible for callers
+        type: boolean
+        required: false
+        example: false
+      entryType:
+        title: Entry Type
+        description: The type of the entry
+        type: string
+        required: false
+        example: 'Chat'
+      callType:
+        title: Call Type
+        description: The type of the call. Cannot be provided for partials as its automatically copied from the main incident
+        type: string
+        required: false
+        example: 'Failure'
+      callDate:
+        title: Call Date
+        description: The date when this call was registered
+        type: date
+        required: false
+        example: '2022-11-15T14:00:00+0200'
+      category:
+        title: Category
+        description: The name of the category. For partials, if not provided, will be automatically copied from the main incident
+        type: string
+        required: false
+        example: 'Hardware'
+      subcategory:
+        title: Subcategory
+        description: The name of the subcategory. For partials, if not provided, will be automatically copied from the main incident. If a subcategory is provided without a category, the corresponding category will be filled in automatically, unless there are multiple matching categories, in which case the action will fail
+        type: string
+        required: false
+        example: 'Laptop'
+      externalNumber:
+        title: External Number
+        description: External number. For partials, if not provided, will be automatically copied from the main incident
+        type: string
+        required: false
+        example: 'test_123'
+      object:
+        title: Object
+        description: Name of the object. For partial incidents, this field is determined by the main incident and will give an error if provided. If both object and location are given, object is set and location is ignored
+        type: string
+        required: false
+        example: 'OBJ001'
+      location:
+        title: Location
+        description: Location identifier. For partial incidents, this field is determined by the main incident and will give an error if provided
+        type: string
+        required: false
+        example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+      branch:
+        title: Branch
+        description: Branch identifier for location. For partial incidents, this field is determined by the main incident and will give an error if provided
+        type: string
+        required: false
+        example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+      impact:
+        title: Impact
+        description: Name of the impact. Cannot be provided for partials as its automatically copied from the main incident
+        type: string
+        required: false
+        example: 'Person'
+      urgency:
+        title: Urgency
+        description: Name of the urgency. Cannot be provided for partials as its automatically copied from the main incident
+        type: string
+        required: false
+        example: 'Normal'
+      priority:
+        title: Priority
+        description: Name of the priority. Cannot be provided for partials as it is automatically copied from the main incident. Will be automatically filled in if you provide impact and/or urgency leading to a unique priority according to your priority matrix, and don't provide a priority. For incidents with a linked SLA, if the priority provided cannot be found in the Service Level Priority List, the duration field of the incident will be emptied
+        type: string
+        required: false
+        example: 'P1'
+      duration:
+        title: Duration
+        description: Duration name
+        type: string
+        required: false
+        example: '1 week'
+      targetDate:
+        title: Target Date
+        description: Target date
+        type: date
+        required: false
+        example: '2022-11-15T14:00:00+0200'
+      sla:
+        title: SLA
+        description: SLA identifier
+        type: string
+        required: false
+        example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+      onHold:
+        title: On Hold
+        description: Whether incident is on hold
+        type: boolean
+        required: false
+        example: false
+      operator:
+        title: Operator
+        description: Operator identifier. For partials, if not provided, will be automatically copied from the main incident
+        type: string
+        required: false
+        example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+      operatorGroup:
+        title: Operator Group
+        description: Operator group identifier. For partials, if not provided, will be automatically copied from the main incident
+        type: string
+        required: false
+        example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+      supplier:
+        title: Supplier
+        description: Supplier identifier
+        type: string
+        required: false
+        example: '44d88612-fea8-a8f3-6de8-2e1278abb02f'
+      processingStatus:
+        title: Processing Status
+        description: Processing status name
+        type: string
+        required: false
+        example: 'Registered'
+      responded:
+        title: Responded
+        description: Whether the incident is responded
+        type: boolean
+        required: false
+        example: false
+      responseDate:
+        title: Response Date
+        description: Response date. Will automatically be set to current date if left out and 'responded' is set to 'true'
+        type: date
+        required: false
+        example: '2022-11-15T14:00:00+0200'
+      completed:
+        title: Completed
+        description: Whether the incident is completed
+        type: boolean
+        required: false
+        example: False
+      completedDate:
+        title: Completed Date
+        description: Completed date
+        type: date
+        required: false
+        example: '2022-11-15T14:00:00+0200'
+      closed:
+        title: Closed
+        description: Whether the incident is closed
+        type: boolean
+        required: false
+        example: False
+      closedDate:
+        title: Closed Date
+        description: Closed date
+        type: date
+        required: false
+        example: '2022-11-15T14:00:00+0200'
+      closureCode:
+        title: Closure Code
+        description: Name of the closure code
+        type: string
+        required: false
+        example: 'Manual'
+      costs:
+        title: Costs
+        description: Costs
+        type: float
+        required: false
+        example: 12.50
+      feedbackRating:
+        title: Feedback Rating
+        description: Rate incident, only available for closed incidents
+        type: integer
+        required: false
+        example: 5
+      feedbackMessage:
+        title: Feedback Message
+        description: Feedback message of the incident, only available for closed incidents
+        type: string
+        required: false
+        example: 'Great job!'
+      majorCall:
+        title: Major Call
+        description: Whether the incident is a major call
+        type: boolean
+        required: false
+        example: true
+      majorCallObject:
+        title: Major Call Object
+        description: Number of the major call incident to which you want to link the updated incident
+        type: string
+        required: false
+        example: 'I 2301 104'
+      publishToSsd:
+        title: Publish to Self Service Desk
+        description: Whether the incident should be published in the Self Service Desk. Only major incidents can be published
+        type: boolean
+        required: false
+        example: false
+      optionalFields1:
+        title: Optional Fields 1
+        description: Optional Fields 1
+        type: object
+        required: false
+        example: '{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00+0200"}'
+      optionalFields2:
+        title: Optional Fields 2
+        description: Optional Fields 2
+        type: object
+        required: false
+        example: '{"boolean1": true, "text1": "example value", "date1": "2022-11-15T14:00:00+0200"}'
+    output:
+      incident:
+        title: Incident
+        description: Information about the updated incident
+        type: incident
+        required: false
+        example: {}
+  listOperators:
+    title: List Operators
+    description: Get a list of operators
+    input:
+      start:
+        title: Start
+        description: The offset at which to start listing the operators at. Must be greater or equal to 0
+        type: integer
+        required: false
+        example: 0
+      pageSize:
+        title: Page Size
+        description: The amount of operators to be returned per page. Must be between 1 and 100
+        type: integer
+        required: false
+        example: 100
+      query:
+        title: Query
+        description: A FIQL search expression to filter the result
+        type: string
+        required: false
+        example: "dynamicName=='Test User'"
+      fields:
+        title: Fields
+        description: Only include these specific fields in the response. The default is that all fields are included
+        type: string
+        required: false
+        example: "id,dynamicName"
+    output:
+      operators:
+        title: Operators
+        description: List of the operators
+        type: "[]operatorOutput"
+        required: false
+        example: []
+  listOperatorGroups:
+    title: List Operator Groups
+    description: Get a list of operator groups
+    input:
+      start:
+        title: Start
+        description: The offset at which to start listing the operator groups at. Must be greater or equal to 0
+        type: integer
+        required: false
+        example: 0
+      pageSize:
+        title: Page Size
+        description: The amount of operator groups to be returned per page. Must be between 1 and 100
+        type: integer
+        required: false
+        example: 100
+      query:
+        title: Query
+        description: A FIQL search expression to filter the result
+        type: string
+        required: false
+        example: "groupName=='Test Group'"
+      fields:
+        title: Fields
+        description: Only include these specific fields in the response. The default is that all fields are included
+        type: string
+        required: false
+        example: "id,groupName"
+    output:
+      operatorGroups:
+        title: Operator Groups
+        description: List of the operator groups
+        type: "[]operatorGroup"
+        required: false
+        example: []
+  listSuppliers:
+    title: List Suppliers
+    description: Get a list of suppliers
+    input:
+      start:
+        title: Start
+        description: The offset at which to start listing the suppliers at. Must be greater or equal to 0
+        type: integer
+        required: false
+        example: 0
+      pageSize:
+        title: Page Size
+        description: The amount of suppliers to be returned per request. Must be between 1 and 100
+        type: integer
+        required: false
+        example: 100
+      query:
+        title: Query
+        description: A FIQL search expression to filter the result
+        type: string
+        required: false
+        example: "name=='Example Supplier'"
+    output:
+      suppliers:
+        title: Suppliers
+        description: List of the suppliers
+        type: '[]supplierOutput'
+        required: false
+        example: []
+  listLocationsAndBranches:
+    title: List Locations and Branches
+    description: Get a list of locations with branches
+    input:
+      pageSize:
+        title: Page Size
+        description: The maximum number of locations to be returned. Default is unlimited
+        type: integer
+        required: false
+        example: 100
+      query:
+        title: Query
+        description: A FIQL search expression to filter the result
+        type: string
+        required: false
+        example: "branch.name=='Example Branch'"
+    output:
+      locationsAndBranches:
+        title: Locations and Branches
+        description: List of the locations with branches
+        type: '[]location'
+        required: false
+        example: []

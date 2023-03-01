@@ -47,7 +47,7 @@ class TopRemediationsInput(insightconnect_plugin_runtime.Input):
     "scope": {
       "type": "string",
       "title": "Scope",
-      "description": "Scope context for generated report; if set remediations will be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID",
+      "description": "Scope context for generated report; if set remediations will be scoped by each in scope ID",
       "default": "none",
       "enum": [
         "none",

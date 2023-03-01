@@ -1,7 +1,7 @@
 {
-	"spec": "fa548eab056a4e881b382f46972f2b9e",
-	"manifest": "0e630cbaa482b3bdbc213b8de723e603",
-	"setup": "e868590a3fa42cd31b2b12fa8150d954",
+	"spec": "9bd78b1fa0df237eefef65564faf1297",
+	"manifest": "4541f0f3ea6746c66ce236ed93e9958d",
+	"setup": "f82a26e09f97475cf7e675b492cb28a0",
 	"schemas": [
 		{
 			"identifier": "create_ticket/schema.py",
@@ -25,7 +25,7 @@
 		},
 		{
 			"identifier": "show_memberships/schema.py",
-			"hash": "043cc230b3507b59b16cc97e42d4c36f"
+			"hash": "70cb40ae6ff48435b10eb478ea914b2c"
 		},
 		{
 			"identifier": "show_user/schema.py",

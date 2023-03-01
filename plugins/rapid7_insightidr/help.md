@@ -579,18 +579,7 @@ Example output:
       "alert_type": "Example Type",
       "alert_type_description": "Example Description",
       "created_time": "01-01-2020T00:00:00",
-      "detection_rule_rrn": {
-        "rule_name": "Example Rule Name",
-        "rule_rrn": {
-          "organizationId": "11111111-1111-1111-1111-111111111111",
-          "regionCode": "11-101",
-          "resource": "Example Resource",
-          "resourceTypes": [
-            "Example Type"
-          ],
-          "service": "Example Service"
-        }
-      },
+      "detection_rule_rrn": "rrn:example",
       "first_event_time": "01-01-2020T00:00:00",
       "id": "11111111-1111-1111-1111-111111111111",
       "latest_event_time": "01-01-2020T00:00:00",
@@ -1734,6 +1723,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.4.0 - `List Alerts for Investigation`: changed schema output for `detection_rule_rrn` 
 * 4.3.0 - `Query`: Add new parameter `most_recent_first`
 * 4.2.1 - `Create Investigation`, `Update Investigation`: Fix issue where action fails when email address field is not empty
 * 4.2.0 - New action added: Replace Indicators

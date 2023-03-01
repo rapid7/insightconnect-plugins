@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 8.0.0
+version: 8.0.1
 supported_versions: ["2.1.0"]
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7

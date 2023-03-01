@@ -4,7 +4,7 @@ products: [insightconnect]
 name: nmap
 title: Nmap
 description: Open source utility for network discovery and security auditing
-version: 1.0.3
+version: 1.0.4
 vendor: rapid7
 support: community
 status: []
@@ -223,12 +223,12 @@ types:
     tcp:
       description: TCP ports
       title: TCP
-      type: '[]tcp'
+      type: tcp
       required: false
     udp:
       description: UDP ports
       title: UDP
-      type: '[]udp'
+      type: udp
       required: false
     vendor:
       description: Vendor

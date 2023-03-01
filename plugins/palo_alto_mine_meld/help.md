@@ -103,6 +103,7 @@ Custom prototype can also be used when creating new nodes. To create a new custo
 
 # Version History
 
+* 1.0.2 - Action: Update External Dynamic List - Added extra validators to handle CIDR IP addresses
 * 1.0.1 - Improve error messaging
 * 1.0.0 - Initial plugin
 

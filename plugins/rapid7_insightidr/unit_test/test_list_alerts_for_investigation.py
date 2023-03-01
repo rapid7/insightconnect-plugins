@@ -41,16 +41,7 @@ class TestCreateInvestigation(TestCase):
                     "alert_type": "Example Type",
                     "alert_type_description": "Example Description",
                     "created_time": "01-01-2020T00:00:00",
-                    "detection_rule_rrn": {
-                        "rule_name": "Example Rule Name",
-                        "rule_rrn": {
-                            "organizationId": "11111111-1111-1111-1111-111111111111",
-                            "regionCode": "11-101",
-                            "resource": "Example Resource",
-                            "resourceTypes": ["Example Type"],
-                            "service": "Example Service",
-                        },
-                    },
+                    "detection_rule_rrn": "rrn:example",
                     "first_event_time": "01-01-2020T00:00:00",
                     "id": "11111111-1111-1111-1111-111111111111",
                     "latest_event_time": "01-01-2020T00:00:00",

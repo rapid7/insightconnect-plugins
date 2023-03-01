@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm
 title: Rapid7 InsightVM Console
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations, scan results and start scans
-version: 5.0.1
+version: 5.1.0
 supported_versions: ["Rapid7 InsightVM API v3 2022-05-25"]
 vendor: rapid7
 support: rapid7
@@ -1732,8 +1732,8 @@ types:
       required: true
   vulnerability_solution:
     links:
-      description: Hypermedia links to corresponding or related resources
       title: Links
+      description: Hypermedia links to corresponding or related resources
       type: '[]link'
       required: false
     resources:
@@ -1741,11 +1741,159 @@ types:
       description: Solutions to vulnerabilities
       type: '[]resources'
       required: false
-
+  account:
+    authentication_type:
+      title: Authentication Type
+      description: The authentication protocols available to use in SNMP v3
+      type: string
+      required: false
+      default: no-authentication
+      enum:
+        - no-authentication
+        - md5
+        - sha
+    community_name:
+      title: Community Name
+      description: The community name that will be used for authenticating
+      type: string
+      required: false
+    database:
+      title: Database
+      description: The name of the database. If not specified, a default database name will be used during authentication
+      type: string
+      required: false
+    domain:
+      title: Domain
+      description: The address of the domain. This property cannot be specified unless property useWindowsAuthentication is set to true
+      type: string
+      required: false
+    enumerate_sids:
+      title: Enumerate SIDs
+      description: Boolean flag instructing the scan engine to attempt to enumerate SIDs from your environment. If set to true, set the Oracle Net Listener password in property oracleListenerPassword
+      type: string
+      required: false
+    notes_id_password:
+      title: Notes ID Password
+      description: The password for the account that will be used for authenticating
+      type: string
+      required: false
+    ntlm_hash:
+      title: NTLM Hash
+      description: The NTLM password hash
+      type: string
+      required: false
+    oracle_listener_password:
+      title: Oracle Listener Password
+      description: The Oracle Net Listener password. Used to enumerate SIDs from your environment
+      type: string
+      required: false
+    password:
+      title: Password
+      description: The password for the account that will be used for authenticating
+      type: string
+      required: false
+    pem_key:
+      title: PEM Key
+      description: The PEM-format private key
+      type: string
+      required: false
+    permission_elevation:
+      title: Permission Evaluation
+      description: Elevate scan engine permissions to administrative or root access, which is necessary to obtain certain data during the scan. Defaults to "none" if not specified
+      type: string
+      required: false
+      default: none
+      enum:
+        - none
+        - sudo
+        - sudosu
+        - su
+        - pbrun
+        - privileged-exec
+    permission_elevation_password:
+      title: Permission Elevation Password
+      description: The password for the account with elevated permissions. This property must not be specified when the property permissionElevation is set to either "none" or "pbrun"; otherwise the property is required
+      type: string
+      required: false
+    permission_elevation_username:
+      title: Permission Elevation Username
+      description: The user name for the account with elevated permissions. This property must not be specified when the property permissionElevation is set to either "none" or "pbrun"; otherwise the property is required.
+      type: string
+      required: false
+    privacy_password:
+      title: Privacy Password
+      description: The privacy password for the account that will be used for authenticating. Is required when the property authenticationType is set to valid value other than "no-authentication" and when the privacyType is set to a valid value other than code>"no-privacy"
+      type: string
+      required: false
+    privacy_type:
+      title: Privacy Type
+      description: The privacy protocols available to use in SNMP v3
+      type: string
+      required: false
+      default: no-privacy
+      enum:
+        - no-privacy
+        - des
+        - aes-128
+        - aes-192
+        - aes-192-with-3-des-key-extension
+        - aes-256
+        - aes-265-with-3-des-key-extension
+    private_key_password:
+      title: Private Pey Password
+      description: The password for private key
+      type: string
+      required: false
+    realm:
+      title: Realm
+      description: The realm
+      type: string
+      required: false
+    service:
+      title: Service
+      description: Specify the type of service to authenticate
+      type: string
+      required: true
+      enum:
+        - as400
+        - cifs
+        - cifshash
+        - cvs
+        - db2
+        - ftp
+        - http
+        - ms-sql
+        - mysql
+        - notes
+        - oracle
+        - pop
+        - postgresql
+        - remote-exec
+        - snmp
+        - snmpv3
+        - ssh
+        - ssh-key
+        - sybase
+        - telnet
+    sid:
+      title: SID
+      description: The name of the database. If not specified, a default database name will be used during authentication
+      type: string
+      required: false
+    use_windows_authentication:
+      title: Use Windows Authentication
+      description: Boolean flag signaling whether to connect to the database using Windows authentication. When set to true, Windows authentication is attempted; when set to false, SQL authentication is attempted
+      type: boolean
+      required: false
+    username:
+      title: Username
+      description: The user name for the account that will be used for authenticating
+      type: string
+      required: false
 connection:
   url:
     title: URL
-    description: URL to your InsightVM console, without trailing slashes, e.g. https://insightvm.example.com:3780
+    description: URL to your InsightVM console, without trailing slashes
     type: string
     required: true
     example: https://insightvm.example.com:3780
@@ -1927,13 +2075,13 @@ actions:
     input:
       id:
         title: Report ID
-        description: Identifier of the report to download e.g. 265
+        description: Identifier of the report to download
         type: integer
         example: 1234
         required: true
       instance:
         title: Instance
-        description: The identifier of the report instance, 'latest' or ID e.g. 100
+        description: The identifier of the report instance, 'latest' or ID
         type: string
         example: "latest"
         required: true
@@ -1976,7 +2124,7 @@ actions:
     input:
       vulnerability_id:
         title: Vulnerability ID
-        description: The identifier of the vulnerability e.g. jre-vuln-cve-2013-2471
+        description: The identifier of the vulnerability
         type: string
         example: "jre-vuln-cve-2013-2471"
         required: true
@@ -2090,7 +2238,7 @@ actions:
     input:
       id:
         title: ID
-        description: Tag ID, e.g. 1
+        description: Tag ID
         type: integer
         example: 1234
         required: true
@@ -2876,7 +3024,7 @@ actions:
     input:
       cve_id:
         title: CVE ID
-        description: Common Vulnerabilities and Exposures ID, e.g. CVE-2018-12345
+        description: Common Vulnerabilities and Exposures ID
         type: string
         example: "CVE-2018-12345"
         required: true
@@ -3263,7 +3411,7 @@ actions:
     input:
       id:
         title: ID
-        description: Role ID, e.g 'global-admin'
+        description: Role ID
         type: string
         example: "global-admin"
         required: true
@@ -3379,8 +3527,7 @@ actions:
         default: false
       role_id:
         title: Role ID
-        description: The identifier of the role to which the user should be assigned,
-          e.g 'global-admin'
+        description: The identifier of the role to which the user should be assigned
         type: string
         example: "global-admin"
         required: true
@@ -3469,8 +3616,7 @@ actions:
         default: false
       role_id:
         title: Role ID
-        description: The identifier of the role to which the user should be assigned,
-          e.g 'global-admin'
+        description: The identifier of the role to which the user should be assigned
         type: string
         example: "global-admin"
         required: true
@@ -3554,8 +3700,7 @@ actions:
         default: false
       role_id:
         title: Role ID
-        description: The identifier of the role to which the user should be assigned,
-          e.g 'global-admin'
+        description: The identifier of the role to which the user should be assigned
         type: string
         example: "global-admin"
         required: true
@@ -3719,7 +3864,7 @@ actions:
           - 100
       scope:
         title: Scope
-        description: Scope context for generated report; if set remediations will be scoped by each in scope ID, e.g Site ID, Tag ID, Asset Group ID
+        description: Scope context for generated report; if set remediations will be scoped by each in scope ID
         type: string
         required: true
         default: none
@@ -3877,7 +4022,7 @@ actions:
         required: false
       expiration:
         title: Expiration
-        description: The date the vulnerability exception expires e.g 2021-12-30T00:00:00Z
+        description: The date the vulnerability exception expires
         type: date
         example: 2021-12-30 00:00:00
         required: false
@@ -4029,7 +4174,7 @@ actions:
         example: 42
       date:
         title: Date
-        description: Expiration date. e.g. 2020-02-24T06:59:59.999Z
+        description: Expiration date
         type: string
         required: true
         example: "2020-02-24T06:59:59.999Z"
@@ -4062,7 +4207,89 @@ actions:
         description: Highest-superceding rollup solutions for a vulnerabilities on an asset
         type: "[]vulnerability_solution"
         required: true
-
+  update_shared_credential:
+    title: Update Shared Credentials
+    description: Update shared credentials
+    input:
+      account:
+        title: Account
+        description: Specify the type of service to authenticate as well as all of the information required by that service
+        type: account
+        required: true
+        example: {
+          "authentication_type": "no-authentication",
+          "community_name": "rapid community",
+          "database": "rapid7_database",
+          "domain": "rapid7.com",
+          "enumerate_sids": false,
+          "notes_id_password": "notes_id_password",
+          "ntlm_hash": "86956E15C7F452086BEEB6BB005E0388",
+          "oracle_listener_password": "oracle_listener_password",
+          "password": "password",
+          "pem_key": "-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEA3Tz2mr7SZiAMfQyuvBj...",
+          "permission_elevation": "sudo",
+          "permission_elevation_password": "permission_elevation_password",
+          "permission_elevation_username": "permission_elevation_username",
+          "privacy_password": "privacy_password",
+          "privacy_type": "no-privacy",
+          "private_key_password": "private_key_password",
+          "realm": "realm0",
+          "service": "telnet",
+          "sid": "rapid7_database2",
+          "use_windows_authentication": false,
+          "username": "username"
+        }
+      description:
+        title: Description
+        description: The description of the credential
+        type: string
+        required: false
+        example: example input with every field filled. Note real input will only have specific fields filled
+      host_restriction:
+        title: Host Restriction
+        description: The host name or IP address that you want to restrict the credentials to
+        type: string
+        required: false
+        example: my-macbook-name
+      id:
+        title: ID
+        description: The identifier of the credential
+        type: integer
+        required: false
+        example: 123
+      name:
+        title: Name
+        description: The name of the credential
+        type: string
+        required: true
+        example: my-AS400-credentials
+      port_restriction:
+        title: Port Restriction
+        description: Further restricts the credential to attempt to authenticate on a specific port. The port can only be restricted if the property hostRestriction is specified
+        type: string
+        required: false
+        example: 8888
+      site_assignment:
+        title: Site Assignment
+        description: Assigns the shared scan credential either to be available to all sites or to a specific list of sites. All sites - The shared scan credential is assigned to all current and future sites. specific-sites - The shared scan credential is assigned to zero sites by default. Administrators must explicitly assign sites to the shared credential. Shared scan credentials assigned to a site can disabled within the site configuration, if needed
+        type: string
+        required: true
+        example: "all-sites"
+        enum:
+          - all-sites
+          - specific-sites
+      sites:
+        title: Sites
+        description: List of site identifiers. These sites are explicitly assigned access to the shared scan credential, allowing the site to use the credential for authentication during a scan. This property can only be set if the value of property siteAssignment is set to "specific-sites". When the property siteAssignment is set to "all-sites", this property will be null
+        type: '[]integer'
+        required: false
+        example: [ ]
+    output:
+      links:
+        title: Links
+        description: Hypermedia links to corresponding or related resources
+        type: '[]link'
+        required: true
 triggers:
   new_scans:
     title: New Scans

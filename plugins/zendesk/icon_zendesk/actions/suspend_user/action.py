@@ -2,7 +2,6 @@ import insightconnect_plugin_runtime
 from .schema import SuspendUserInput, SuspendUserOutput, Input, Output
 
 # Custom imports below
-import zenpy
 
 
 class SuspendUser(insightconnect_plugin_runtime.Action):
@@ -15,16 +14,15 @@ class SuspendUser(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        client = self.connection.client
+        user_id = params.get(Input.USER_ID)
+
+        status = False
         try:
-            user = client.users(id=params.get(Input.USER_ID))
+            user = self.connection.client.users(id=user_id)
             user.suspended = "true"
-            suspend = client.users.update(user)
+            suspend = self.connection.client.users.update(user)
+            status = True if suspend.suspended else False
             self.logger.debug(suspend.suspended)
-            if suspend.suspended:
-                return {Output.STATUS: True}
-            else:
-                return {Output.STATUS: False}
-        except zenpy.lib.exception.APIException as e:
-            self.logger.debug(e)
-            return {Output.STATUS: False}
+        except Exception as error:
+            self.logger.debug(error)
+        return {Output.STATUS: status}

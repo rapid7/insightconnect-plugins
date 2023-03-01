@@ -1,10 +1,10 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CreateUserInput, CreateUserOutput
 
 # Custom imports below
 
 
-class CreateUser(komand.Action):
+class CreateUser(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_user",
@@ -24,28 +24,3 @@ class CreateUser(komand.Action):
         user = self.connection.api.create_user(email, name, phone, mobile_phone, role, department)
 
         return {"user": user}
-
-    def test(self):
-        return {
-            "user": {
-                "id": 4245316,
-                "name": "John Snow",
-                "disabled": False,
-                "email": "abc@example.com",
-                "created_at": "2018-11-22T15:18:53.337-05:00",
-                "phone": "123456",
-                "mobile_phone": "0012345",
-                "department": {"id": 133365, "name": "Marketing"},
-                "role": {
-                    "id": 461182,
-                    "name": "Read Only",
-                    "portal": False,
-                    "show_my_tasks": False,
-                },
-                "salt": "fc136bca03c6361bf1e564e18d70cc421b1fc582",
-                "group_ids": [4492546],
-                "custom_fields_values": [],
-                "avatar": {"type": "initials", "color": "#fa7911", "initials": "JS"},
-                "mfa_enabled": False,
-            }
-        }

@@ -1,10 +1,10 @@
-import komand
-from .schema import DomainsInput, DomainsOutput
+import insightconnect_plugin_runtime
+from .schema import DomainsInput, DomainsOutput, Input, Output
 
 # Custom imports below
 
 
-class Domains(komand.Action):
+class Domains(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="domains",
@@ -14,36 +14,7 @@ class Domains(komand.Action):
         )
 
     def run(self, params={}):
-        try:
-            requestDomains = self.connection.api.get_domains()
-        except Exception:
-            self.logger.error("Domains: run: Problem with request")
-            raise Exception("Domains: run: Problem with request")
-        datas = requestDomains.get("data")
-        meta = requestDomains.get("meta")
-        domains = {"meta": {}, "data": []}
 
-        domains["meta"]["limit"] = meta.get("limit")
-        domains["meta"]["page"] = meta.get("page")
+        domains = self.connection.client.get_domains()
 
-        if meta.get("next") == False:
-            meta["next"] = "false"
-
-        if meta.get("prev") == False:
-            meta["prev"] = "false"
-
-        domains["meta"] = meta
-
-        for data in datas:
-            domains["data"].append(
-                {
-                    "ID": data.get("id"),
-                    "name": data.get("name"),
-                    "lastSeenAt": data.get("lastSeenAt"),
-                }
-            )
-
-        return domains
-
-    def test(self):
-        return {"meta": {"next": "", "prev": "", "limit": 0, "page": 0}, "data": []}
+        return {Output.DOMAINS: domains}

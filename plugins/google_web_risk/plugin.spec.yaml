@@ -4,7 +4,7 @@ products: [insightconnect]
 name: google_web_risk
 title: Google Web Risk
 description: Check URLs against the Google Web Risk service
-version: 2.0.1
+version: 2.1.0
 vendor: rapid7
 support: community
 status: []
@@ -29,6 +29,7 @@ connection:
     description: API token
     type: credential_secret_key
     required: true
+    example: 9de5069c5afe602b2ea0a04b66beb2c0
 actions:
   lookup:
     title: Lookup URL
@@ -39,24 +40,28 @@ actions:
         description: URL to lookup
         type: string
         required: true
+        example: https://example.com
       threat_type_malware:
         title: 'Threat Type: Malware'
         type: boolean
         description: Check if URL is of 'malware' threat
         required: false
         default: true
+        example: true
       threat_type_social:
         title: 'Threat Type: Social'
         type: boolean
         description: Check if URL is of 'social engineering/phishing' threat
         required: false
         default: true
+        example: true
       threat_type_unwanted:
         type: boolean
         title: 'Threat type: Unwanted Software'
         description: Check if URL is of 'unwanted software' threat
         required: false
         default: true
+        example: true
     output:
       threatTypes:
         title: Threat Types

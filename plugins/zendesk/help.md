@@ -78,7 +78,6 @@ Example input:
 Example output:
 
 ```
-
 {
   "users": [
     {
@@ -142,7 +141,6 @@ Example output:
     }
   ]
 }
-
 ```
 
 #### Delete Ticket
@@ -402,38 +400,40 @@ Example output:
 
 ```
 {
-  "assignee_id": 361738647591,
-  "brand_id": 1500182396435,
-  "collaborator_ids": [
-    361738647591,
-    361738647672
-  ],
-  "created_at": "2021-03-28T20:05:16Z",
-  "description": "Example description",
-  "due_at": 2021-04-10T12:00:00Z,
-  "external_id": "10",
-  "forum_topic_id": null,
-  "group_id": 1400012453812,
-  "has_incidents": false,
-  "id": 15,
-  "organization_id": 1500075172832,
-  "priority": "high",
-  "problem_id": 25,
-  "raw_subject": "New Subject",
-  "recipient": 352083642834,
-  "requester_id": 361738647672,
-  "sharing_agreement_ids": [],
-  "status": "open",
-  "subject": "New Subject",
-  "submitter_id": 1503798876742,
-  "tags": [
-    "example",
-    "tag",
-    "ticket"
-  ],
-  "type": "problem",
-  "updated_at": "2021-03-28T20:05:16Z",
-  "url": "https:/zendesk.com/api/v2/tickets/15.json"
+  "ticket": {
+    "assignee_id": 361738647591,
+    "brand_id": 1500182396435,
+    "collaborator_ids": [
+      361738647591,
+      361738647672
+    ],
+    "created_at": "2021-03-28T20:05:16Z",
+    "description": "Example description",
+    "due_at": "2021-04-10T12:00:00Z",
+    "external_id": "10",
+    "forum_topic_id": null,
+    "group_id": 1400012453812,
+    "has_incidents": false,
+    "id": 15,
+    "organization_id": 1500075172832,
+    "priority": "high",
+    "problem_id": 25,
+    "raw_subject": "New Subject",
+    "recipient": 352083642834,
+    "requester_id": 361738647672,
+    "sharing_agreement_ids": [],
+    "status": "open",
+    "subject": "New Subject",
+    "submitter_id": 1503798876742,
+    "tags": [
+      "example",
+      "tag",
+      "ticket"
+    ],
+    "type": "problem",
+    "updated_at": "2021-03-28T20:05:16Z",
+    "url": "https:/zendesk.com/api/v2/tickets/15.json"
+  }
 }
 ```
 
@@ -538,9 +538,9 @@ Example output:
     "url": "https://zendesk.com/api/v2/tickets/12.json",
     "comment": {
       "author_id": "361738647591",
-      "body":"Test comment",
-      "html_body":"<u>Test Underlined comment</u>",
-      "public":true
+      "body": "Test comment",
+      "html_body": "<u>Test Underlined comment</u>",
+      "public": true
     }
   }
 }
@@ -568,7 +568,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|memberships|[]object|True|Members data|
+|memberships|[]organization_memberships|True|Members data|
 
 Example input:
 
@@ -609,8 +609,8 @@ _This plugin does not contain any triggers._
 |Created At|date|False|Created at|
 |Details|string|False|Details|
 |External ID|string|False|External ID|
-|Group ID|string|False|Group ID|
-|ID|string|False|ID|
+|Group ID|integer|False|Group ID|
+|ID|integer|False|ID|
 |Name|string|False|Name|
 |Notes|string|False|Notes|
 |Shared Comments|boolean|False|Shared comments|
@@ -619,23 +619,34 @@ _This plugin does not contain any triggers._
 |Updated At|string|False|Updated at|
 |URL|string|False|URL|
 
+#### organization_memberships
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Created At|date|False|Created at|
+|Default|boolean|False|Indicates weather it's default organization membership or not for a user|
+|ID|integer|False|ID|
+|Organization ID|integer|False|Organization ID|
+|Updated At|date|False|Updated at|
+|User ID|integer|False|ID of user|
+
 #### ticket
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Assignee ID|string|False|Assignee ID|
+|Assignee ID|integer|False|Assignee ID|
 |Attachment|file|False|Attachment|
-|Collaborator IDs|[]string|False|Collaborator IDs|
+|Collaborator IDs|[]integer|False|Collaborator IDs|
 |Comment|comment|False|Comment|
 |Description|string|False|Description|
 |Due At|date|False|Due at|
 |External ID|string|False|External ID|
-|Group ID|string|False|Group ID|
+|Group ID|integer|False|Group ID|
 |ID|integer|False|ID|
 |Priority|string|False|Priority|
-|Problem ID|string|False|Problem ID|
+|Problem ID|integer|False|Problem ID|
 |Recipient ID|string|False|Recipient ID|
-|Requester ID|string|False|Requester ID|
+|Requester ID|integer|False|Requester ID|
 |Status|string|False|Status|
 |Subject|string|False|Subject|
 |Tags|[]string|False|Tags|
@@ -649,11 +660,11 @@ _This plugin does not contain any triggers._
 |Alias|string|False|Alias|
 |Chat Only|boolean|False|Chat only|
 |Created At|date|False|Created at|
-|Custom Role ID|string|False|Custom role ID|
+|Custom Role ID|integer|False|Custom role ID|
 |Details|string|False|Details|
 |Email|string|False|Email|
 |External ID|string|False|External ID|
-|ID|string|False|ID|
+|ID|integer|False|ID|
 |Last Login At|date|False|Last login at|
 |Locale|string|False|Locale|
 |Locale ID|integer|False|Locale ID|
@@ -661,7 +672,7 @@ _This plugin does not contain any triggers._
 |Name|string|False|Name|
 |Notes|string|False|Notes|
 |Only Private Comments|boolean|False|Only private comments|
-|Organization ID|string|False|Organization ID|
+|Organization ID|integer|False|Organization ID|
 |Phone|string|False|Phone|
 |Photo|object|False|Photo|
 |Restricted Agent|boolean|False|Restricted agent|
@@ -678,12 +689,14 @@ _This plugin does not contain any triggers._
 |URL|string|False|URL|
 |Verified|boolean|False|Verified|
 
+
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.0.1 - Updated the exceptions for all the actions | Show Organization Memberships: Added types to the actions output
 * 4.0.0 - Change ID parameter types into integer | Update dependency version
 * 3.0.0 - Add custom output types in Search action | Add conversion of IDs to string in Search action to allow reuse search data in other actions | Add action input and output examples to the documentation
 * 2.0.1 - Change custom output type `group_id` from integer to string | Change `group_id` input type from integer to string in Create Ticket action
