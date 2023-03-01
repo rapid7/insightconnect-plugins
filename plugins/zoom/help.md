@@ -2,7 +2,7 @@
 
 [Zoom](https://zoom.us) is a cloud platform for video and audio conferencing, chat, and webinars. The Zoom plugin allows 
 you to add and remove users as part of of workflow, while also providing the ability to trigger workflows on new user 
-sign-in and sign-out activity events.
+sign-in and sign-out activity events. 
 
 This plugin uses the [Zoom API](https://marketplace.zoom.us/docs/api-reference/introduction) and requires a Pro, 
 Business, or Enterprise plan.
