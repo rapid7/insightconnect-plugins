@@ -116,7 +116,7 @@ class ZoomAPI:
             else:
                 return events
 
-    # noqa: C901
+    # noqa: MC0001
     def _call_api(
         self,
         method: str,
