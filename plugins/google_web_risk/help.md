@@ -10,15 +10,27 @@
 
 * WebRisk API token
 
+# Supported Product Versions
+
+_There are no supported product versions listed._
+
 # Documentation
 
 ## Setup
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_secret_key|None|True|API token|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|credentials|credential_secret_key|None|True|API token|None|9de5069c5afe602b2ea0a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "credentials": "9de5069c5afe602b2ea0a04b66beb2c0"
+}
+```
 
 ## Technical Details
 
@@ -30,12 +42,23 @@ This action is used to lookup a URL in Web Risk Service.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|threat_type_malware|boolean|True|False|Check if URL is of 'malware' threat|None|
-|threat_type_social|boolean|True|False|Check if URL is of 'social engineering/phishing' threat|None|
-|threat_type_unwanted|boolean|True|False|Check if URL is of 'unwanted software' threat|None|
-|url|string|None|True|URL to lookup|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|threat_type_malware|boolean|True|False|Check if URL is of 'malware' threat|None|True|
+|threat_type_social|boolean|True|False|Check if URL is of 'social engineering/phishing' threat|None|True|
+|threat_type_unwanted|boolean|True|False|Check if URL is of 'unwanted software' threat|None|True|
+|url|string|None|True|URL to lookup|None|https://example.com|
+
+Example input:
+
+```
+{
+  "threat_type_malware": true,
+  "threat_type_social": true,
+  "threat_type_unwanted": true,
+  "url": "https://example.com"
+}
+```
 
 ##### Output
 
@@ -52,7 +75,6 @@ Example output:
   "threatTypes": [
      "MALWARE"
   ]
-  }
 }
 ```
 
@@ -70,6 +92,7 @@ Google's Web Risk API requires an API key for use. Sign up for the beta [here](h
 
 # Version History
 
+* 2.1.0 - Update SDK runtime | Look up URL action: fix building threat types | Add unit tests
 * 2.0.1 - New spec and help.md format for the Extension Library
 * 2.0.0 - New inputs for lookup action
 * 1.0.0 - Initial plugin
