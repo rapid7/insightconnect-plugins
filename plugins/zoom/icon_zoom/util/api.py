@@ -165,7 +165,8 @@ class ZoomAPI:
             else:
                 raise PluginException(
                     cause=resp.get("message"),
-                    assistance=f"The object at {response.url} does not exist. Verify the ID and fields " f"used are valid.",
+                    assistance=f"The object at {response.url} does not exist. Verify the ID and fields "
+                    f"used are valid.",
                 )
         # Success; no content
         if response.status_code == 204:
