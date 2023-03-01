@@ -1223,6 +1223,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 4.8.1 - Fixed a problem where some actions could not find the machine
 * 4.8.0 - Add Evidence output for Get Alerts trigger and Get Alert Matching Key trigger
 * 4.7.1 - Fix bug in Get Alerts trigger which caused trigger to crash
 * 4.7.0 - Add new action Collect Investigation Package

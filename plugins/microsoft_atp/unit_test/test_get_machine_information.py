@@ -1,40 +1,77 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from komand_microsoft_atp.connection.connection import Connection
+from unittest.mock import Mock, patch
+
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 from komand_microsoft_atp.actions.get_machine_information import GetMachineInformation
-import json
-import logging
+from komand_microsoft_atp.actions.get_machine_information.schema import Input, Output
+from parameterized import parameterized
+
+from unit_test.util import (
+    Util,
+    mock_request_200,
+    mock_request_201_invalid_json,
+    mock_request_401,
+    mock_request_403,
+    mock_request_404,
+    mock_request_500,
+    mocked_request,
+)
 
 
 class TestGetMachineInformation(TestCase):
-    def test_integration_get_machine_information(self):
-        log = logging.getLogger("Test")
-        test_conn = Connection()
-        test_action = GetMachineInformation()
+    @classmethod
+    @patch("requests.request", side_effect=mock_request_200)
+    def setUpClass(cls, mock_get: Mock) -> None:
+        cls.action = Util.default_connector(GetMachineInformation())
 
-        test_conn.logger = log
-        test_action.logger = log
+    @parameterized.expand([("my-hostname",), ("192.168.0.5",)])
+    @patch("requests.request", side_effect=mock_request_200)
+    def test_get_machine_information(self, input_machine: str, mock_get: Mock) -> None:
+        response = self.action.run({Input.MACHINE: input_machine})
+        expected = {
+            Output.MACHINE: {
+                "@odata.context": "https://api.securitycenter.microsoft.com/api/$metadata#Machines",
+                "id": "1234",
+                "computerDnsName": "my-hostname",
+                "firstSeen": "2018-08-02T14:55:03.7791856Z",
+                "lastSeen": "2018-08-02T14:55:03.7791856Z",
+                "osPlatform": "Windows10",
+                "version": "1709",
+                "osProcessor": "x64",
+                "lastIpAddress": "192.168.0.5",
+                "lastExternalIpAddress": "0.0.0.0",
+                "osBuild": 18209,
+                "healthStatus": "Active",
+                "rbacGroupId": 140,
+                "rbacGroupName": "ExampleGroup",
+                "riskScore": "Low",
+                "exposureLevel": "Medium",
+                "isAadJoined": True,
+                "aadDeviceId": "1111111",
+                "machineTags": ["ExampleTag1", "ExampleTag2"],
+            }
+        }
+        self.assertEqual(response, expected)
 
-        try:
-            with open("../tests/get_machine_information.json") as file:
-                test_json = json.loads(file.read()).get("body")
-                connection_params = test_json.get("connection")
-                action_params = test_json.get("input")
-        except Exception as e:
-            message = """
-            Could not find or read sample tests from /tests directory
-            
-            An exception here likely means you didn't fill out your samples correctly in the /tests directory 
-            Please use 'icon-plugin generate samples', and fill out the resulting test files in the /tests directory
-            """
-            self.fail(message)
-
-        test_conn.connect(connection_params)
-        test_action.connection = test_conn
-        results = test_action.run(action_params)
-
-        self.assertTrue("machine" in results.keys())
+    @parameterized.expand(
+        [
+            (mock_request_201_invalid_json, PluginException.causes[PluginException.Preset.INVALID_JSON]),
+            (mock_request_401, PluginException.causes[PluginException.Preset.USERNAME_PASSWORD]),
+            (mock_request_403, PluginException.causes[PluginException.Preset.API_KEY]),
+            (mock_request_404, PluginException.causes[PluginException.Preset.NOT_FOUND]),
+            (mock_request_500, PluginException.causes[PluginException.Preset.UNKNOWN]),
+        ],
+    )
+    def test_get_machine_information_exception(self, mock_request: Mock, exception: str) -> None:
+        mocked_request(mock_request)
+        with self.assertRaises(ConnectionTestException) as context:
+            self.action.run({Input.MACHINE: "my-hostname"})
+        self.assertEqual(
+            context.exception.cause,
+            exception,
+        )
