@@ -2,7 +2,7 @@
 
 [Zoom](https://zoom.us) is a cloud platform for video and audio conferencing, chat, and webinars. The Zoom plugin allows 
 you to add and remove users as part of of workflow, while also providing the ability to trigger workflows on new user 
-sign-in and sign-out activity events.
+sign-in and sign-out activity events. 
 
 This plugin uses the [Zoom API](https://marketplace.zoom.us/docs/api-reference/introduction) and requires a Pro, 
 Business, or Enterprise plan.
@@ -15,7 +15,12 @@ Business, or Enterprise plan.
 # Requirements
 
 * Must have Zoom Pro, Business, or Enterprise plan to support REST API
-* Requires JWT credentials from Zoom App marketplace
+* Requires account ID as well as client ID and secret from a Server-to-Server OAuth app in the Zoom Marketplace
+* Server-to-Server OAuth app has the `report:read:admin` scope enabled
+
+# Supported Product Versions
+
+_There are no supported product versions listed._
 
 # Documentation
 
@@ -25,20 +30,19 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|JWT API Key|None|abcdefgABCDEFG12345678|
-|secret|credential_secret_key|None|True|JWT Secret|None|abcdefgABCDEFG123456789abcdefgABCDEF|
+|account_id|credential_secret_key|None|True|Zoom app account ID|None|dBs0x4Kf7HuIK0LLbzMduW|
+|client_id|credential_secret_key|None|True|Zoom app client ID|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|client_secret|credential_secret_key|None|True|Zoom app client secret|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
 ```
 {
-  "api_key": "abcdefgABCDEFG12345678",
-  "secret": "abcdefgABCDEFG123456789abcdefgABCDEF"
+  "account_id": "dBs0x4Kf7HuIK0LLbzMduW",
+  "client_id": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "client_secret": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
-
-See the Zoom [Create a JWT App](https://marketplace.zoom.us/docs/guides/build/jwt-app) documentation for generating a 
-JWT App and obtaining your API key and secret.
 
 ## Technical Details
 
@@ -101,7 +105,7 @@ This action is used to delete or disassociate user from account.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |action|string|None|True|Specify how to delete the user. To delete pending user, use disassocaite|['delete', 'disassociate']|delete|
-|id|string|None|True|The user identifier or email address|None|user@example.com|
+|id|string|None|True|The user identifier or email address|None|https://example.com|
 |transfer_email|string|None|False|Email to transfer meetings, webinars, or recordings|None|user@example.com|
 |transfer_meetings|boolean|False|False|Whether to transfer meetings to defined transfer email|None|False|
 |transfer_recordings|boolean|False|False|Whether to transfer recordings to defined transfer email|None|False|
@@ -220,6 +224,45 @@ Example output:
     "version": "-"
   }
 }
+```
+
+### Tasks
+
+#### Monitor Sign In and Out Activity
+
+This task is used to monitor sign in and out activity.
+
+Supported schedule types for this task include:
+None
+
+##### Input
+
+_This task does not contain any inputs._
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|activity_logs|[]user_activity|True|All activity logs within the specified time range|
+
+Example output:
+
+```
+[
+  {
+    "client_type": "Browser",
+    "email": "jchill@example.com",
+    "ip_address": "192.0.2.1",
+    "time": "2019-09-15T19:13:41Z",
+    "type": "Sign out",
+    "version": "5.9.1.2581"
+  }
+]
 ```
 
 ### Custom Output Types
