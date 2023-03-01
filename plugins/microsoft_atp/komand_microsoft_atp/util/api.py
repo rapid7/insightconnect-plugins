@@ -1,16 +1,19 @@
-import requests
-from insightconnect_plugin_runtime.exceptions import PluginException
 import json
+import re
+import socket
 import time
 from logging import Logger
-import re
+from typing import Any, Dict, List, Union
+
+import requests
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class WindwosDefenderATP_API:
     def __init__(self, app_id: str, app_secret: str, tenant: str, logger: Logger):
         self.session = requests.Session()
         self.resource_url = "https://api.securitycenter.windows.com"
-        self.api_token = ""
+        self.api_token = None
         self.time_ago = 0  # Jan 1, 1970
         self.time_now = time.time()  # More than 1 hour since 1978
 
@@ -68,21 +71,76 @@ class WindwosDefenderATP_API:
     def get_machine_action(self, action_id: str) -> dict:
         return self._make_request("GET", f"machineactions/{action_id}")
 
-    def find_first_machine(self, machine_identification: str) -> dict:
-        if re.match(r"^[a-z0-9]{40}$", machine_identification.lower()):
-            return self.get_machine_information(machine_identification)
+    @staticmethod
+    def _validate_ip_address(ip_address: str) -> bool:
+        """
+        Validates the IP address. Returns True if the entered string is an IP address, otherwise False.
 
-        machines = self.get_machines()
-        for machine in machines.get("value"):
+        :param ip_address: String to check if it's an IP address.
+        :type: str
+
+        :return: Value indicates whether the given string is an IP address or not.
+        :rtype: bool
+        """
+
+        try:
+            socket.inet_aton(ip_address)
+            return True
+        except Exception:
+            return False
+
+    @staticmethod
+    def _look_for_machine(machines: List[Dict[str, Any]], machine_identification: str) -> Union[Dict[str, Any], None]:
+        """
+        Returns machine details that match the given identification string from computerDnsName, lastIpAddress or lastExternalIpAddress. If the machine is not found, the method returns None.        :param machines:
+
+        :param machines: List of existing machines.
+        :type: List[Dict[str, Any]]
+
+        :param machine_identification: Machine identification string, this can be computerDnsName or IP address..
+        :type: str
+
+        :return: Machine that match given identification string
+        :rtype: Dict[str, Any] | None
+        """
+
+        for machine in machines:
             for key in ["computerDnsName", "lastIpAddress", "lastExternalIpAddress"]:
                 if machine.get(key) == machine_identification:
                     return machine
+        return None
+
+    def find_first_machine(self, machine_identification: str, return_identifier: bool = False) -> dict:
+        # If the input is a machine ID, pass it directly to the Get Machine Information endpoint
+        if re.match(r"^[a-z0-9]{40}$", machine_identification.lower()):
+            return (
+                self.get_machine_information(machine_identification)
+                if not return_identifier
+                else machine_identification
+            )
+
+        # Look for a machine in a list of machines (first 10,000 records)
+        odata_query = {"$top": 10000}
+        machine = self._look_for_machine(self.get_machines(odata_query).get("value"), machine_identification)
+        if machine:
+            return machine
+
+        # Retry with OData queries if machine is not in the list (if more than 10,000 machines assigned...)
+        if self._validate_ip_address(machine_identification):
+            odata_query.update({"$filter": f"lastIpAddress eq '{machine_identification}'"})
+        else:
+            odata_query.update({"$filter": f"computerDnsName eq '{machine_identification}'"})
+
+        self.logger.info("Attempting to search for machine using OData query")
+        machine = self._look_for_machine(self.get_machines(odata_query).get("value"), machine_identification)
+        if machine:
+            return machine
 
         self.logger.error(f"Machine {machine_identification} not found")
         raise PluginException(preset=PluginException.Preset.NOT_FOUND)
 
-    def get_machines(self) -> dict:
-        return self._make_request("GET", "machines")
+    def get_machines(self, odata_queries: dict = None) -> dict:
+        return self._make_request("GET", "machines", params=odata_queries)
 
     def get_machine_information(self, machine_id: str) -> dict:
         return self._make_request("GET", f"machines/{machine_id}")
@@ -157,15 +215,11 @@ class WindwosDefenderATP_API:
         )
 
     def find_machine_id(self, machine_identification: str) -> str:
-        if re.match(r"^[a-z0-9]{40}$", machine_identification.lower()):
-            return machine_identification
-        machines = self.get_machines()
-        for machine in machines.get("value"):
-            for key in ["computerDnsName", "lastIpAddress", "lastExternalIpAddress"]:
-                if machine.get(key) == machine_identification:
-                    return machine.get("id")
+        return self.find_first_machine(machine_identification, return_identifier=True).get("id", "")
 
-    def _make_request(self, method: str, path: str, json_data: dict = None, allow_empty: bool = False) -> dict:
+    def _make_request(
+        self, method: str, path: str, json_data: dict = None, allow_empty: bool = False, params: dict = None
+    ) -> dict:
         self.check_and_refresh_api_token()
         return self._call_api(
             method,
@@ -173,9 +227,10 @@ class WindwosDefenderATP_API:
             json_data=json_data,
             headers=self.get_session_headers(),
             allow_empty=allow_empty,
+            params=params,
         )
 
-    def _call_api(
+    def _call_api(  # noqa: C901
         self,
         method: str,
         url: str,
@@ -208,7 +263,7 @@ class WindwosDefenderATP_API:
                 return {}
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        except json.decoder.JSONDecodeError as e:
+        except json.decoder.JSONDecodeError:
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
-        except requests.exceptions.HTTPError as e:
+        except requests.exceptions.HTTPError:
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
