@@ -12,17 +12,20 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.zoom_api = None
 
     def connect(self, params):
-        self.logger.info("Connect: Connecting...")
-        api_key = params.get(Input.API_KEY).get("secretKey")
-        secret = params.get(Input.SECRET).get("secretKey")
+        SECRETKEY = "secretKey"
 
-        self.zoom_api = ZoomAPI(api_key, secret, self.logger)
+        account_id = params[Input.ACCOUNT_ID][SECRETKEY]
+        client_id = params[Input.CLIENT_ID][SECRETKEY]
+        client_secret = params[Input.CLIENT_SECRET][SECRETKEY]
+
+        self.zoom_api = ZoomAPI(
+            account_id=account_id, client_id=client_id, client_secret=client_secret, logger=self.logger
+        )
 
     def test(self):
         try:
             # Return self to confirm API and key is working
             self.zoom_api.get_user("me")
+            return {"success": True}
         except PluginException as e:
             raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e)
-
-        return {}
