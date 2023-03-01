@@ -116,7 +116,6 @@ class ZoomAPI:
             else:
                 return events
 
-    # noqa: MC0001
     def _call_api(
         self,
         method: str,
@@ -125,7 +124,7 @@ class ZoomAPI:
         json_data: dict = None,
         allow_404: bool = False,
         auth: AuthBase = None,
-    ) -> Optional[dict]:
+    ) -> Optional[dict]:  # noqa: MC0001
 
         if not isinstance(auth, HTTPBasicAuth):
             self.refresh_oauth_token_if_needed()
