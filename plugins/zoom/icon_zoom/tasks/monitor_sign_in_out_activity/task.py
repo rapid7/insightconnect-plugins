@@ -3,25 +3,12 @@ from .schema import (
     MonitorSignInOutActivityInput,
     MonitorSignInOutActivityOutput,
     MonitorSignInOutActivityState,
-    Input,
-    Output,
     Component,
-    State,
 )
 
 # Custom imports below
 from datetime import datetime, timedelta
 from icon_zoom.util.event import Event
-
-"""
-Task logic:
-- First run? Start time will be "now - 24 hours". End time will be current time at start of run.
-  Store most recent event time in state.
-    
-- Subsequent run? Start time is the most recent events publish time and the End time will be "now"
-  Duplicates can occur on time boundaries, eg from=0 to=10, next run is from=10 and to=20 due to lack of ms precision
-  Solve by hashing events and removing previously seen hashes from list
-"""
 
 
 class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
@@ -40,6 +27,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             state=MonitorSignInOutActivityState(),
         )
 
+    # pylint: disable=unused-argument
     def run(self, params={}, state={}):
 
         # Check if first run
