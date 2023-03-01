@@ -366,7 +366,7 @@ tasks:
   monitor_sign_in_out_activity:
     title: Monitor Sign In and Out Activity
     description: Monitor sign in and out activity
-
+    input: null
     output:
       title: Activity Logs
       description: All activity logs within the specified time range
