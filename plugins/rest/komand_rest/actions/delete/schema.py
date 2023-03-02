@@ -30,7 +30,7 @@ class DeleteInput(insightconnect_plugin_runtime.Input):
     "body_any": {
       "type": "string",
       "title": "Body (Any)",
-      "description": "Payload (non-dictionary) to submit to the server when making the HTTP Request call",
+      "description": "Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc",
       "order": 4
     },
     "body_object": {
