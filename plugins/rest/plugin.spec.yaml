@@ -110,13 +110,13 @@ actions:
         required: false
         example: '{"Host": "rapid7.com"}'
       body_object:
-        title: Body
+        title: Body (Object)
         description: Data to submit to the server when making the HTTP Request call
         type: object
         required: false
         example: '{"user": "user@example.com"}'
       body_any:
-        title: Body
+        title: Body (Any)
         description: Payload (non-dictionary) to submit to the server when making the HTTP Request call
         type: string
         required: false
@@ -159,13 +159,13 @@ actions:
         required: false
         example: '{"Host": "rapid7.com"}'
       body_object:
-        title: Body
+        title: Body (Object)
         description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
         example: '{"user": "user@example.com"}'
       body_any:
-        title: Body
+        title: Body (Any)
         description: Payload (non-dictionary) to submit to the server when making the HTTP Request call
         type: string
         required: false
@@ -208,13 +208,13 @@ actions:
         required: false
         example: '{"Host": "rapid7.com"}'
       body_object:
-        title: Body
+        title: Body (Object)
         description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
         example: '{"user": "user@example.com"}'
       body_any:
-        title: Body
+        title: Body (Any)
         description: Payload (non-dictionary) to submit to the server when making the HTTP Request call
         type: string
         required: false
@@ -257,13 +257,13 @@ actions:
         required: false
         example: '{"Host": "rapid7.com"}'
       body_object:
-        title: Body
+        title: Body (Object)
         description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
         example: '{"user": "user@example.com"}'
       body_any:
-        title: Body
+        title: Body (Any)
         description: Payload (non-dictionary) to submit to the server when making the HTTP Request call
         type: string
         required: false
@@ -306,13 +306,13 @@ actions:
         required: false
         example: '{"Host": "rapid7.com"}'
       body_object:
-        title: Body
+        title: Body (Object)
         description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
         example: '{"user": "user@example.com"}'
       body_any:
-        title: Body
+        title: Body (Any)
         description: Payload (non-dictionary) to submit to the server when making the HTTP Request call
         type: string
         required: false

@@ -29,13 +29,13 @@ class PostInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "body_any": {
       "type": "string",
-      "title": "Body",
+      "title": "Body (Any)",
       "description": "Payload (non-dictionary) to submit to the server when making the HTTP Request call",
       "order": 4
     },
     "body_object": {
       "type": "object",
-      "title": "Body",
+      "title": "Body (Object)",
       "description": "Payload to submit to the server when making the HTTP Request call",
       "order": 3
     },
