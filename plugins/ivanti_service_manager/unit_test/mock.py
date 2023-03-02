@@ -81,3 +81,6 @@ def mock_request(method, url, json, params, headers, verify) -> MockResponse:
         return MockResponse("search_incidents_good", 200)
     if url == f"/api/rest/search/{STUB_TEXT_BAD}" and method == "POST":
         return MockResponse("search_incidents_bad", 200)
+
+    if url == "/api/odata/businessobject/incidents" and method == "GET":
+        return MockResponse("get_all_incidents", 200)

@@ -25,7 +25,7 @@ class NewIncident(insightconnect_plugin_runtime.Trigger):
         while True:
             try:
                 # check the thing against what you have already
-                incidents = self.connection.ivanti_service_manager_api.get_all_incidents()
+                incidents = self.connection.ivanti_service_manager_api.get_all_incidents().get("value")
                 new_ids = set()
 
                 for incident in incidents:
