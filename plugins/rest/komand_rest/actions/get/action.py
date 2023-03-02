@@ -14,18 +14,13 @@ class Get(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         headers = params.get(Input.HEADERS, {})
-        body_non_array = params.get(Input.BODY)
-        body_as_an_array = params.get(Input.BODY_AS_AN_ARRAY)
+        path = params.get(Input.ROUTE, "")
+        body_dict = params.get(Input.BODY_OBJECT, {})
+        body_non_dict = params.get(Input.BODY_ANY, "")
 
-        data = determine_body_type(body_non_array, body_as_an_array)
+        data = determine_body_type(body_dict, body_non_dict)
 
-        if isinstance(data, dict) and check_headers_for_urlencoded(headers):
-            body = convert_body_for_urlencoded(headers, data)
-            kwargs = {"method": "GET", "path": params.get(Input.ROUTE), "data": body, "headers": headers}
-        else:
-            kwargs = {"method": "GET", "path": params.get(Input.ROUTE), "json_data": data, "headers": headers}
-
-        response = self.connection.api.call_api(**kwargs)
+        response = self.connection.api.call_api(method="GET", path=path, data=data, headers=headers)
 
         return {
             Output.BODY_OBJECT: Common.body_object(response),

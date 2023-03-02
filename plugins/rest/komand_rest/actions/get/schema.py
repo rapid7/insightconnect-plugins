@@ -8,8 +8,8 @@ class Component:
 
 
 class Input:
-    BODY = "body"
-    BODY_AS_AN_ARRAY = "body_as_an_array"
+    BODY_ANY = "body_any"
+    BODY_OBJECT = "body_object"
     HEADERS = "headers"
     ROUTE = "route"
     
@@ -27,20 +27,17 @@ class GetInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "body": {
+    "body_any": {
+      "type": "string",
+      "title": "Body",
+      "description": "Payload (non-dictionary) to submit to the server when making the HTTP Request call",
+      "order": 4
+    },
+    "body_object": {
       "type": "object",
       "title": "Body",
       "description": "Data to submit to the server when making the HTTP Request call",
       "order": 3
-    },
-    "body_as_an_array": {
-      "type": "array",
-      "title": "Body",
-      "description": "Payload (Array) to submit to the server when making the HTTP Request call",
-      "items": {
-        "type": "object"
-      },
-      "order": 4
     },
     "headers": {
       "type": "object",
