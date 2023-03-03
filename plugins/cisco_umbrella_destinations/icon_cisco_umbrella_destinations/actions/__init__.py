@@ -6,4 +6,5 @@ from .dlCreate.action import DlCreate
 from .dlDelete.action import DlDelete
 from .dlGet.action import DlGet
 from .dlGetAll.action import DlGetAll
+from .dlGetByName.action import DlGetByName
 from .dlPatch.action import DlPatch

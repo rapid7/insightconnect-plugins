@@ -48,6 +48,8 @@ def main():
 
             self.add_action(actions.DlGetAll())
 
+            self.add_action(actions.DlGetByName())
+
             self.add_action(actions.DlPatch())
 
 

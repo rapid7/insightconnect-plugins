@@ -3,8 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: cisco_umbrella_destinations
 title: Cisco Umbrella Destinations
-version: 3.0.1
-supported_versions: ["2023-03-06"]
+version: 3.1.0
+supported_versions: ["2022-03-08"]
 description: Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization
 vendor: rapid7
 support: rapid7
@@ -330,6 +330,22 @@ actions:
         description: Unique ID for destination list
         type: integer
         example: 12345678
+        required: true
+    output:
+      success:
+        title: Success
+        description: Successful returned value
+        type: destinationList
+        required: true
+  dlGetByName:
+    title: Get Destination List by Name
+    description: Get destination list by name
+    input:
+      name:
+        title: Name
+        description: Title for the destination list
+        type: string
+        example: new list
         required: true
     output:
       success:

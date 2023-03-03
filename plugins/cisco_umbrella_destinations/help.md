@@ -183,6 +183,47 @@ Example output:
 ]
 ```
 
+
+#### Get Destination List by Name
+Get destination list by name
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|name|string|None|True|Title for the destination list|None|new list|
+
+Example input:
+
+```
+{
+  "name": "new list"
+}
+```
+##### Output
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|success|destinationList|None|True|Successful returned value|None|None|
+
+Example output:
+
+```
+{
+  "success": {
+    "Access": "allow",
+    "Created At": "2018-07-23 19:36:45",
+    "ID": 12345,
+    "Is Global": true,
+    "Is MSP Default": true,
+    "Marked For Deletion": true,
+    "Modified At": "2018-07-23 19:36:45",
+    "Name": "new list",
+    "Organization ID": 12345,
+    "Third Party Category ID": 12345
+  }
+}
+```
+
 #### Create Destination List
 
 This action is used to create a destination list.
