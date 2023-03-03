@@ -2,10 +2,10 @@
 from setuptools import setup, find_packages
 
 
-setup(name="sentinelone-rapid7-plugin",
-      version="8.0.1",
+setup(name="sentinelone-test-plugin",
+      version="8.1.0",
       description="The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne",
-      author="rapid7",
+      author="test",
       author_email="",
       url="",
       packages=find_packages(),

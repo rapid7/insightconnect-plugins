@@ -107,7 +107,7 @@ class RunRemoteScriptOutput(insightconnect_plugin_runtime.Output):
     "affected": {
       "type": "integer",
       "title": "Affected",
-      "description": "Number of entities affected by requested operation",
+      "description": "Number of entities affected by requested operation. For detailed output from running the script, log onto the SentinelOne console. Note this may be lower than the number of agent ids submitted if the script cannot be run on a particular agent e.g. due to OS type.",
       "order": 1
     }
   },
