@@ -47,6 +47,75 @@ Example input:
 
 ### Actions
 
+#### Run Remote Script
+
+This action is used to run a remote script.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ids|[]string|None|False|IDs of the agents to execute the script on. If no IDs provided, the script will run on ALL applicable agents. This id can be retrieved by using the get agent details action if neccessary|None|None|
+|input_parameters|string|None|False|Parameters which will be passed to the remote script (may or may not be required, depending on script)|None|None|
+|output_destination|string|None|True|Output destination of any script output|['Local', 'None', 'SentinelCloud']|None|
+|output_directory|string|None|False|Output Directory (Only relevant if Local is selected for Output Destination)|None|None|
+|password|string|None|False|Password (Only relevant if SentinelCloud is selected for Output Destination)|None|None|
+|script_id|string|None|True|ID of the script to run (select the ID of a SentinelOne or user script from SentinelOne console)|None|None|
+|task_description|string|None|True|Task Description|None|None|
+|timeout|integer|3600|False|Script runtime timeout (in seconds) for current execution (Value between 60 and 172800 seconds)|None|None|
+
+Example input:
+
+```
+{
+  "output_destination": "None"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|True|Number of entities affected by requested operation|
+
+Example output:
+
+```
+```
+
+#### Fetch File
+
+This action is used to fetch file for a specific agent id.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent_id|string|None|True|Agent ID|None|1000000000000000000|
+|file_path|string|None|True|List of files paths of files to fetch. Any files retrieved will be uploaded to the SentinelOne console for download.|None|C:/windows/system32/winevt/logs/https://example.com|
+|password|string|None|True|Password to encrypt retrieved files with. Must be entered when files are downloaded on SentinelOne console. File encryption password, min. length 10 characters and cannot contain whitespace.|None|MySecretPass123!|
+
+Example input:
+
+```
+{
+  "agent_id": "1000000000000000000",
+  "file_path": "C:/windows/system32/winevt/logs/application.evtx",
+  "password": "MySecretPass123!"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|file|file|True|Base64 encoded file|
+
+Example output:
+
+```
+```
+
 #### Update Incident Status
 
 This action is used to update incident status.
