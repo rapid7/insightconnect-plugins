@@ -1,6 +1,6 @@
 {
-	"spec": "8634d012458a29c0d4abdb6830fa66a1",
-	"manifest": "264f9c78b76f21d8df9fd5b8ac0876fd",
+	"spec": "fb0afaa8e3e2d8c76486a312bc34668d",
+	"manifest": "78f2a6910c8e2d0b0221b2984111d5f1",
 	"setup": "5179e83577bd7fb1746bdf7d83984902",
 	"schemas": [
 		{
@@ -57,7 +57,7 @@
 		},
 		{
 			"identifier": "fetch_file_by_agent_id/schema.py",
-			"hash": "11977f6b6b960cfea4f523e40d741e8c"
+			"hash": "fa91823fc11bc2346faa398915a0bd78"
 		},
 		{
 			"identifier": "get_agent_details/schema.py",
@@ -101,7 +101,7 @@
 		},
 		{
 			"identifier": "run_remote_script/schema.py",
-			"hash": "afaa63896ee0ab7096fc177efd636a1d"
+			"hash": "9c1378ff7b9f34ec0f8a9f77444416b8"
 		},
 		{
 			"identifier": "search_agents/schema.py",
@@ -126,18 +126,6 @@
 		{
 			"identifier": "get_threats/schema.py",
 			"hash": "49e661c98f96cc6530676b0421ecfb33"
-		},
-		{
-			"identifier": "decode/schema.py",
-			"hash": "3f5345ce8f9a6051508dbed3444c83e2"
-		},
-		{
-			"identifier": "encode/schema.py",
-			"hash": "81fe698fb58cb1c0d2752db42aff82ae"
-		},
-		{
-			"identifier": "connection/schema.py",
-			"hash": "0d37ecad8d408635f66b40f605f56da5"
 		}
 	]
 }

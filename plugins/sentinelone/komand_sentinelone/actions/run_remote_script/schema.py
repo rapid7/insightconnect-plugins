@@ -39,7 +39,7 @@ class RunRemoteScriptInput(insightconnect_plugin_runtime.Input):
     },
     "input_parameters": {
       "type": "string",
-      "title": "Input script parameters",
+      "title": "Input Script Parameters",
       "description": "Parameters which will be passed to the remote script (may or may not be required, depending on script)",
       "order": 7
     },
@@ -63,7 +63,7 @@ class RunRemoteScriptInput(insightconnect_plugin_runtime.Input):
     "password": {
       "type": "string",
       "title": "Password",
-      "description": "Password (Only relevant if SentinelCloud is selected for Output Destination)",
+      "description": "Password (Only relevant if SentinelCloud is selected for Output Destination). At least 10 characters and no whitespace",
       "order": 6
     },
     "script_id": {
@@ -107,7 +107,7 @@ class RunRemoteScriptOutput(insightconnect_plugin_runtime.Output):
     "affected": {
       "type": "integer",
       "title": "Affected",
-      "description": "Number of entities affected by requested operation. For detailed output from running the script, log onto the SentinelOne console. Note this may be lower than the number of agent ids submitted if the script cannot be run on a particular agent e.g. due to OS type.",
+      "description": "Number of entities affected by requested operation. For detailed output from running the script, log onto the SentinelOne console. Note this may be lower than the number of agent ids submitted if the script cannot be run on a particular agent e.g. due to OS type",
       "order": 1
     }
   },

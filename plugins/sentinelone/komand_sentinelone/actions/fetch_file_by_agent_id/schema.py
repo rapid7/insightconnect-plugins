@@ -31,14 +31,14 @@ class FetchFileByAgentIdInput(insightconnect_plugin_runtime.Input):
     },
     "file_path": {
       "type": "string",
-      "title": "File path",
-      "description": "List of files paths of files to fetch. Any files retrieved will be uploaded to the SentinelOne console for download.",
+      "title": "File Path",
+      "description": "List of files paths of files to fetch. Any files retrieved will be uploaded to the SentinelOne console for download",
       "order": 2
     },
     "password": {
       "type": "string",
       "title": "Password",
-      "description": "Password to encrypt retrieved files with. Must be entered when files are downloaded on SentinelOne console. File encryption password, min. length 10 characters and cannot contain whitespace.",
+      "description": "Password to encrypt retrieved files with. Must be entered when files are downloaded on SentinelOne console. File encryption password, min. length 10 characters and cannot contain whitespace",
       "order": 3
     }
   },
