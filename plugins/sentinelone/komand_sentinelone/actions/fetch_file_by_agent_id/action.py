@@ -1,16 +1,17 @@
 import insightconnect_plugin_runtime
 from .schema import FetchFileByAgentIdInput, FetchFileByAgentIdOutput, Input, Output, Component
+
 # Custom imports below
 
 
 class FetchFileByAgentId(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-                name='fetch_file_by_agent_id',
-                description=Component.DESCRIPTION,
-                input=FetchFileByAgentIdInput(),
-                output=FetchFileByAgentIdOutput())
+            name="fetch_file_by_agent_id",
+            description=Component.DESCRIPTION,
+            input=FetchFileByAgentIdInput(),
+            output=FetchFileByAgentIdOutput(),
+        )
 
     def run(self, params={}):
         agent_id = params.get(Input.AGENT_ID, None)
