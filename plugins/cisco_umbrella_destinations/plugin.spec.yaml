@@ -337,6 +337,22 @@ actions:
         description: Successful returned value
         type: destinationList
         required: true
+  dlGetByName:
+    title: Get Destination List by Name
+    description: Get destination list by name
+    input:
+      name:
+        title: Name
+        description: Title for the destination list
+        type: string
+        example: new list
+        required: true
+    output:
+      success:
+        title: Success
+        description: Successful returned value
+        type: destinationList
+        required: true
   dGet:
     title: Get Destinations
     description: Get a list of destinations related to a destination list

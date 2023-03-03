@@ -311,6 +311,46 @@ Example output:
 }
 ```
 
+#### Get Destination List by Name
+Get destination list by name
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|name|string|None|True|Title for the destination list|None|new list|
+  
+Example input:
+
+```
+{
+  "name": "new list"
+}
+```
+##### Output
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|success|destinationList|None|True|Successful returned value|None|None|
+  
+Example output:
+
+```
+{
+  "success": {
+    "Access": "allow",
+    "Created At": "2018-07-23 19:36:45",
+    "ID": 0,
+    "Is Global": true,
+    "Is MSP Default": {},
+    "Marked For Deletion": {},
+    "Modified At": {},
+    "Name": {},
+    "Organization ID": {},
+    "Third Party Category ID": {}
+  }
+}
+```
+
 #### Get All Destination Lists
 
 This action is used to retrieve all destination lists of organization.
@@ -474,6 +514,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.0 - Updated dlGetAll to add filters and added dlGetbyName action
 * 3.0.0 - Updated output for 'typeOf' to reflect update to Cisco API
 * 2.0.0 - Updated output for dAdd & dDelete - Removed data element in the response
 * 1.0.0 - Initial plugin includes create and modify destination lists
