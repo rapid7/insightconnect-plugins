@@ -23,6 +23,7 @@ from .mark_as_threat.action import MarkAsThreat
 from .mitigate_threat.action import MitigateThreat
 from .name_available.action import NameAvailable
 from .quarantine.action import Quarantine
+from .run_remote_script.action import RunRemoteScript
 from .search_agents.action import SearchAgents
 from .threats_fetch_file.action import ThreatsFetchFile
 from .update_analyst_verdict.action import UpdateAnalystVerdict

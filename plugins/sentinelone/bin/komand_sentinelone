@@ -84,6 +84,8 @@ def main():
 
             self.add_action(actions.Quarantine())
 
+            self.add_action(actions.RunRemoteScript())
+
             self.add_action(actions.SearchAgents())
 
             self.add_action(actions.ThreatsFetchFile())

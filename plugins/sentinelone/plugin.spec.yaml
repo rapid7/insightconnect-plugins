@@ -3,11 +3,11 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 8.0.1
+version: 8.1.0
 supported_versions: ["2.1.0"]
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
-vendor: rapid7
-support: rapid7
+vendor: test
+support: test
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/sentinelone
@@ -2742,6 +2742,61 @@ actions:
         type: integer
         required: false
         example: 1
+  run_remote_script:
+    title: Run Remote Script
+    description: Run a remote script
+    input:
+      ids:
+        title: IDs
+        description: IDs of the agents to execute the script on. If no IDs provided, the script will run on ALL applicable agents. This id can be retrieved by using the get agent details action if neccessary
+        type: '[]string'
+        required: false
+      script_id:
+        title: Script ID
+        description: ID of the script to run (select the ID of a SentinelOne or user script from SentinelOne console)
+        type: string
+        required: true
+      task_description:
+        title: Task Description
+        description: Task Description
+        type: string
+        required: true
+      output_destination:
+        title: Output Destination
+        description: Output destination of any script output
+        type: string
+        enum:
+          - Local
+          - None
+          - SentinelCloud
+        example: None
+        required: true
+      output_directory:
+        title: Output Directory
+        description: Output Directory (Only relevant if Local is selected for Output Destination)
+        type: string
+        required: false
+      password:
+        title: Password
+        description: Password (Only relevant if SentinelCloud is selected for Output Destination)
+        type: string
+        required: false
+      input_parameters:
+        title: Input script parameters
+        description: Parameters which will be passed to the remote script (may or may not be required, depending on script)
+        type: string
+        required: false
+      timeout:
+        title: Script Execution Timeout
+        description: Script runtime timeout (in seconds) for current execution (Value between 60 and 172800 seconds)
+        type: integer
+        required: false
+        default: 3600
+    output:
+      affected:
+        description: Number of entities affected by requested operation. For detailed output from running the script, log onto the SentinelOne console. Note this may be lower than the number of agent ids submitted if the script cannot be run on a particular agent e.g. due to OS type.
+        type: integer
+        required: true
 triggers:
   get_threats:
     title: Get Threats
