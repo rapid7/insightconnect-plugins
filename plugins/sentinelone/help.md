@@ -78,7 +78,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|affected|integer|True|Number of entities affected by requested operation|
+|affected|integer|True|Number of entities affected by requested operation. For detailed output from running the script, log onto the SentinelOne console. Note this may be lower than the number of agent ids submitted if the script cannot be run on a particular agent e.g. due to OS type|2|
 
 Example output:
 
