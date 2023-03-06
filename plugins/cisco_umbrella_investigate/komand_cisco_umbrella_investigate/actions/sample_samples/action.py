@@ -1,11 +1,11 @@
-import komand
-from .schema import SampleSamplesInput, SampleSamplesOutput
+import insightconnect_plugin_runtime
+from .schema import SampleSamplesInput, SampleSamplesOutput, Input, Output
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class SampleSamples(komand.Action):
+class SampleSamples(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="sample_samples",
@@ -15,9 +15,9 @@ class SampleSamples(komand.Action):
         )
 
     def run(self, params={}):
-        hash = params.get("hash")
-        limit = params.get("limit", None)
-        offset = params.get("offset", None)
+        hash_ = params.get(Input.HASH)
+        limit = params.get(Input.LIMIT)
+        offset = params.get(Input.OFFSET)
 
         if not limit or limit == 0:
             limit = 10
@@ -26,9 +26,9 @@ class SampleSamples(komand.Action):
             offset = 0
 
         try:
-            sample_samples = self.connection.investigate.sample_samples(hash, limit=limit, offset=offset)
-        except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+            sample_samples = self.connection.investigate.sample_samples(hash_, limit=limit, offset=offset)
+        except Exception as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
         if "error" in sample_samples:
             raise PluginException(
@@ -37,6 +37,3 @@ class SampleSamples(komand.Action):
             )
 
         return sample_samples
-
-    def test(self):
-        return {"samples": []}
