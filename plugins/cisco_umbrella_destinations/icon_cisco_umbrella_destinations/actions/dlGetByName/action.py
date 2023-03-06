@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import DlGetByNameInput, DlGetByNameOutput, Input, Output, Component
-
-# Custom imports below
+from insightconnect_plugin_runtime.helper import clean
+from typing import Any, Dict
 
 
 class DlGetByName(insightconnect_plugin_runtime.Action):
@@ -14,9 +14,12 @@ class DlGetByName(insightconnect_plugin_runtime.Action):
         destination_list_name = params.get(Input.NAME)
         result = self.connection.client.get_destination_lists().get("data", [])
         result = clean(result)
+
+        # Filter through list
         result_list = []
         for destination_list in result:
             if destination_list.get("name") == destination_list_name:
-                result_list += destination_list
+                result_list.append(destination_list)
 
-        return {Output.DATA: result_list}
+        return {Output.SUCCESS: result_list}
+

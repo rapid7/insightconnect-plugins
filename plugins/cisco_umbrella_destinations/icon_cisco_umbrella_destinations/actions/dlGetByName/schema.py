@@ -45,9 +45,12 @@ class DlGetByNameOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "success": {
-      "$ref": "#/definitions/destinationList",
+      "type": "array",
       "title": "Success",
       "description": "Successful returned value",
+      "items": {
+        "$ref": "#/definitions/destinationList"
+      },
       "order": 1
     }
   },

@@ -351,7 +351,7 @@ actions:
       success:
         title: Success
         description: Successful returned value
-        type: destinationList
+        type: "[]destinationList"
         required: true
   dGet:
     title: Get Destinations
