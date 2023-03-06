@@ -50,7 +50,7 @@ class ActivitiesTypesOutput(insightconnect_plugin_runtime.Output):
         "action": {
           "type": "string",
           "title": "Action",
-          "description": "Action descripted in the activity",
+          "description": "Action described in the activity",
           "order": 3
         },
         "descriptionTemplate": {

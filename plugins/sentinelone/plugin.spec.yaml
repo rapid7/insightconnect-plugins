@@ -35,7 +35,7 @@ types:
       required: false
     action:
       title: Action
-      description: Action descripted in the activity
+      description: Action described in the activity
       type: string
       required: false
   activities_list:
