@@ -224,6 +224,34 @@ actions:
   dlGetAll:
     title: Get All Destination Lists
     description: Retrieve all destination lists of organization
+    input:
+      access:
+        title: Access
+        description: Can be allow or block
+        example: allow
+        type: string
+        enum:
+          - allow
+          - block
+        required: false
+      isGlobal:
+        title: Is Global
+        description: Boolean value indicating global state
+        example: true
+        type: boolean
+        required: false
+      isMSPDefault:
+        title: Is MSP Default
+        description: Boolean value indicating if MSP Default
+        example: true
+        type: boolean
+        required: false
+      markedForDeletion:
+        title: Marked For Deletion
+        description: Boolean value indicating if marked for deletion
+        example: true
+        type: boolean
+        required: false
     output:
       data:
         title: Data
