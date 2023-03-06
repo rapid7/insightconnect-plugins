@@ -16,17 +16,14 @@ class Patch(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        body_non_array = params.get(Input.BODY, {})
-        body_array = params.get(Input.BODY_AS_AN_ARRAY, [])
+        headers = params.get(Input.HEADERS, {})
+        path = params.get(Input.ROUTE, "")
+        body_dict = params.get(Input.BODY_OBJECT, {})
+        body_non_dict = params.get(Input.BODY_ANY, "")
 
-        data = determine_body_type(body_non_array, body_array)
+        data = determine_body_type(body_dict, body_non_dict)
 
-        response = self.connection.api.call_api(
-            method="PATCH",
-            path=params.get(Input.ROUTE),
-            json_data=data,
-            headers=params.get(Input.HEADERS, {}),
-        )
+        response = self.connection.api.call_api(method="PATCH", path=path, data=data, headers=headers)
 
         return {
             Output.BODY_OBJECT: Common.body_object(response),

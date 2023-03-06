@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rest
 title: HTTP Requests
 description: The HTTP Requests plugin to make it easy to integrate with RESTful services
-version: 5.2.0
+version: 6.0.0
 vendor: rapid7
 support: community
 supported_versions: ["2022-09-05"]
@@ -109,18 +109,18 @@ actions:
         type: object
         required: false
         example: '{"Host": "rapid7.com"}'
-      body:
-        title: Body
-        description: Data to submit to the server when making the HTTP Request call
+      body_object:
+        title: Body (Object)
+        description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
         example: '{"user": "user@example.com"}'
-      body_as_an_array:
-        title: Body
-        description: Payload (Array) to submit to the server when making the HTTP Request call
-        type: '[]object'
+      body_any:
+        title: Body (Any)
+        description: Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc
+        type: string
         required: false
-        example: '[{"user": "user@example.com"}]'
+        example: 'test data'
     output:
       body_object:
         title: Body Object
@@ -158,18 +158,18 @@ actions:
         type: object
         required: false
         example: '{"Host": "rapid7.com"}'
-      body:
-        title: Body
+      body_object:
+        title: Body (Object)
         description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
         example: '{"user": "user@example.com"}'
-      body_as_an_array:
-        title: Body
-        description: Payload (Array) to submit to the server when making the HTTP Request call
-        type: '[]object'
+      body_any:
+        title: Body (Any)
+        description: Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc
+        type: string
         required: false
-        example: '[{"user": "user@example.com"}]'
+        example: 'test data'
     output:
       body_object:
         title: Body Object
@@ -207,18 +207,18 @@ actions:
         type: object
         required: false
         example: '{"Host": "rapid7.com"}'
-      body:
-        title: Body
+      body_object:
+        title: Body (Object)
         description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
         example: '{"user": "user@example.com"}'
-      body_as_an_array:
-        title: Body
-        description: Payload (Array) to submit to the server when making the HTTP Request call
-        type: '[]object'
+      body_any:
+        title: Body (Any)
+        description: Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc
+        type: string
         required: false
-        example: '[{"user": "user@example.com"}]'
+        example: 'test data'
     output:
       body_object:
         title: Body Object
@@ -256,18 +256,18 @@ actions:
         type: object
         required: false
         example: '{"Host": "rapid7.com"}'
-      body:
-        title: Body
+      body_object:
+        title: Body (Object)
         description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
         example: '{"user": "user@example.com"}'
-      body_as_an_array:
-        title: Body
-        description: Payload (Array) to submit to the server when making the HTTP Request call
-        type: '[]object'
+      body_any:
+        title: Body (Any)
+        description: Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc
+        type: string
         required: false
-        example: '[{"user": "user@example.com"}]'
+        example: 'test data'
     output:
       body_object:
         title: Body Object
@@ -305,18 +305,18 @@ actions:
         type: object
         required: false
         example: '{"Host": "rapid7.com"}'
-      body:
-        title: Body
+      body_object:
+        title: Body (Object)
         description: Payload to submit to the server when making the HTTP Request call
         type: object
         required: false
         example: '{"user": "user@example.com"}'
-      body_as_an_array:
-        title: Body
-        description: Payload (Array) to submit to the server when making the HTTP Request call
-        type: '[]object'
+      body_any:
+        title: Body (Any)
+        description: Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc
+        type: string
         required: false
-        example: '[{"user": "user@example.com"}]'
+        example: 'test data'
     output:
       body_object:
         title: Body Object
