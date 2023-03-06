@@ -75,23 +75,21 @@ def check_headers_for_urlencoded(headers: Union[Dict[str, str], None]) -> bool:
     :return: Boolean value indicating if the conditional is present
     """
     if headers is None:
-        headers = {}
+        return False
     for key, value in headers.items():
         if key.lower() == "content-type" and value.lower() == "application/x-www-form-urlencoded":
             return True
     return False
 
 
-def convert_body_for_urlencoded(headers: Dict[str, str], body: Dict[str, Any]) -> Union[Dict[str, Any], str]:
+def convert_body_for_urlencoded(body: Dict[str, Any]) -> Union[Dict[str, Any], str]:
     """
     This method will encode the body if the headers == x-www-form-urlencoded
-    :param headers: Headers dict to read for conditional
     :param body: Body dict to convert to string with encoding
     :return: Body as an encoded string value
     """
-    if check_headers_for_urlencoded(headers):
-        body = urlencode(body)
-    return body
+
+    return urlencode(body)
 
 
 def write_to_file(file: dict, file_path: str) -> str:
@@ -107,27 +105,42 @@ def write_to_file(file: dict, file_path: str) -> str:
     return file_path + file.get("filename")
 
 
-def determine_body_type(body_non_array: dict, body_array: list) -> Union[List[Dict[str, Any]], Dict[str, Any]]:
+def determine_body_type(body_dict: dict, body_non_dict: str) -> Union[str, Dict[str, Any]]:
     """
     This method is used to determine the body input type,
-    if it is an array or object.
+    if it is a string or an object.
     This function ensures both inputs together will throw an exception,
     otherwise, continue assigning either one to a variable.
 
-    :param body_non_array: Body object as object
-    :param body_array: Body object as array
+    :param body_dict: Body object as dictionary
+    :param body_non_dict: Body object as string
     :return data: Data variable contain body
     :rtype: Union[list[dict], dict[str]]
     """
-    if body_array and body_non_array:
+    if body_non_dict and body_dict:
         raise PluginException(cause=MESSAGE_CAUSE_BOTH_INPUTS, assistance=MESSAGE_ASSISTANCE_BOTH_INPUTS)
-    elif body_array:
-        data = body_array
-    elif body_non_array:
-        data = body_non_array
+    elif body_non_dict:
+        data = body_non_dict
+    elif body_dict:
+        data = body_dict
     else:
         data = None
     return data
+
+
+def urlencoded_data(data: Union[dict, str], headers: dict) -> str:
+    """
+    A method to url-encode data if it is of type dict and headers contain
+    x-www-form-urlencoded.
+    :param data: The body for the request
+    :param headers: A dict/object containing request headers
+    """
+    newData = None
+    if isinstance(data, dict) and check_headers_for_urlencoded(headers):
+        newData = convert_body_for_urlencoded(data)
+    elif data:
+        newData = json.dumps(data)
+    return newData
 
 
 class RestAPI(object):
@@ -233,20 +246,15 @@ class RestAPI(object):
         headers: dict = None,
     ) -> Response:
         try:
-            # IF data exists - check the headers
-            # IF urlencoded is in headers, send data as it is
-            # ELSE run json.dumps(data)
-            # ELSE data == None
-            data_string = None
-            if data and check_headers_for_urlencoded(headers):
-                data_string = data
-            elif data:
-                data_string = json.dumps(data)
+            # Check for urlencoded in headers
+            # Convert to urlencoded if type(data) is dict
+            # else run json.dumps(data)
+            urlencoded_data(data, headers)
 
             request_params = {
                 "method": method,
                 "url": url_path_join(self.url, path),
-                "data": data_string,
+                "data": data,
                 "json": json_data,
                 "headers": Common.merge_dicts(self.default_headers, headers or {}),
                 "auth": self.auth,
