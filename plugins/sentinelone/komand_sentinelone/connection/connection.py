@@ -177,7 +177,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
         errors = "\n".join(response.get("errors"))
         raise PluginException(
             cause="An error occurred when trying to fetch file.",
-            assistance=f"The following error(s) occurred: {errors}",
+            assistance=f"Check the error information and adjust inputs accordingly",
+            data=errors
         )
 
     def run_remote_script(self, user_filter: dict, data: dict) -> dict:
@@ -196,8 +197,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
         errors = "\n".join(response.get("errors"))
         raise PluginException(
-            cause="An error occurred when trying to run remote script.",
-            assistance=f"The following error(s) occurred: {errors}",
+            cause="An error occurred when trying to fetch file.",
+            assistance=f"Check the error information and adjust inputs accordingly",
+            data=errors
         )
 
     def download_file(self, agent_filter: dict, password: str):
