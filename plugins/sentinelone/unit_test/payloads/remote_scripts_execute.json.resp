@@ -1,0 +1,12 @@
+{
+  "errors": [
+    		{
+			"code": 5000010,
+			"detail": "Server could not process the request.",
+			"title": "Internal server error"
+		}
+  ],
+  "data": {
+    "affected": 1
+  }
+}
