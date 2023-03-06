@@ -94,8 +94,9 @@ This action is used to fetch file for a specific agent id.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |agent_id|string|None|True|Agent ID|None|1000000000000000000|
-|file_path|string|None|True|List of files paths of files to fetch. Any files retrieved will be uploaded to the SentinelOne console for download|None|C:/windows/system32/winevt/logs/application.evtx|
-|password|string|None|True|Password to encrypt retrieved files with. Must be entered when files are downloaded on SentinelOne console. File encryption password, min. length 10 characters and cannot contain whitespace|None|MySecretPass123!|
+|file_path|string|None|True|File path of file to fetch. If a file can be fetched, it will be uploaded to the SentinelOne console for download|None|C:/windows/system32/winevt/logs/application.evtx|
+|password|string|None|True|File encryption password, min. length 10 characters and cannot contain whitespace|None|MySecretPass123!|
+
 Example input:
 
 ```
@@ -110,12 +111,12 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|file|file|True|Base64 encoded file|{ "file": { "filename": "report.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" } }|
+|success|boolean|True|File fetch response status|True|
 
 Example output:
 
 ```
-{ "file": { "filename": "report.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" } }
+{ "success": True }
 ```
 
 #### Update Incident Status
@@ -2059,7 +2060,8 @@ Example output:
 To convert `threat` into an array use Type Converter Plugin
 
 # Version History
-* 8.1.0 - New actions: Fetch file. Run remote script
+
+* 8.1.0 - New actions: Fetch file for agent id. Run remote script
 * 8.0.1 - Search Agents: Remove duplicate results when Case Sensitive is false
 * 8.0.0 - Connection: Added Service user (API only user type) authentication | Removed Basic Authentication
 * 7.1.0 - Update for Blacklist action: Fix for unblocked action | Update for Quarantine action: unification of the output data when action fails | Add troubleshooting information about use Type Converter | Mark as Benign action: update description 

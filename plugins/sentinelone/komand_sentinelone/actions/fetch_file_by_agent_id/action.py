@@ -24,6 +24,6 @@ class FetchFileByAgentId(insightconnect_plugin_runtime.Action):
                 assistance="Password must have more than 10 characters and cannot contain whitespace.",
             )
 
-        self.connection.fetch_file_by_agent_id(agent_id, file_path, password)
+        response = self.connection.fetch_file_by_agent_id(agent_id, file_path, password)
 
-        return {Output.FILE: self.connection.download_fetched_file(agent_id, password)}
+        return {Output.SUCCESS: response}

@@ -168,8 +168,16 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return self._call_api("POST", f"agents/actions/{action}", {"filter": agents_filter})
 
     def fetch_file_by_agent_id(self, agent_id: str, file_path: str, password: str):
-        return self._call_api(
+        response =  self._call_api(
             "POST", f"agents/{agent_id}/actions/fetch-files", {"data": {"password": password, "files": [file_path]}}
+        )
+        if len(response.get("errors", [])) == 0:
+            return True
+
+        errors = "\n".join(response.get("errors"))
+        raise PluginException(
+            cause="An error occurred when trying to fetch file.",
+            assistance=f"The following error(s) occurred: {errors}",
         )
 
     def run_remote_script(self, user_filter: dict, data: dict) -> dict:
@@ -206,48 +214,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         response = self._call_api("GET", activities["data"][0]["data"]["filePath"][1:], full_response=True)
         try:
             file_name = activities["data"][-1]["data"]["fileDisplayName"]
-            with zipfile.ZipFile(io.BytesIO(response.content)) as downloaded_zipfile:
-                downloaded_zipfile.setpassword(password.encode("UTF-8"))
-
-                return {
-                    "filename": file_name,
-                    "content": base64.b64encode(downloaded_zipfile.read(downloaded_zipfile.infolist()[-1])).decode(
-                        "utf-8"
-                    ),
-                }
-        except KeyError:
-            raise PluginException(
-                cause="An error occurred when trying to download file.",
-                assistance="Please contact support or try again later.",
-            )
-
-    def download_fetched_file(self, agent_id: str, password: str):
-        self.get_auth_token()
-        time_after = datetime.now(timezone.utc) - timedelta(seconds=60)
-        agent_filter = {
-            "activityTypes": 80,
-            "sortBy": "createdAt",
-            "sortOrder": "desc",
-            "createdAt__gte": time_after,
-            "agentIds": agent_id,
-        }
-        activities = self.activities_list(agent_filter)
-        count = 0
-        while not activities["data"]:
-            if count == 6:
-                raise PluginException(
-                    cause="An error occurred when trying to download the file.",
-                    assistance="Please contact support or try again later.",
-                )
-            self.logger.info("Waiting 5 seconds for successful fetch file upload...")
-            time.sleep(5)
-            count += 1
-            activities = self.activities_list(agent_filter)
-        self.get_auth_token()
-        print("DL DEBUG activities[data]:{}".format(activities["data"]))
-        response = self._call_api("GET", activities["data"][0]["data"]["filePath"][1:], full_response=True)
-        try:
-            file_name = activities["data"][0]["data"]["uploadedFilename"]
             with zipfile.ZipFile(io.BytesIO(response.content)) as downloaded_zipfile:
                 downloaded_zipfile.setpassword(password.encode("UTF-8"))
 

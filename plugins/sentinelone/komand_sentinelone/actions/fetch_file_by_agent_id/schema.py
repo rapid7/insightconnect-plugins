@@ -14,7 +14,7 @@ class Input:
     
 
 class Output:
-    FILE = "file"
+    SUCCESS = "success"
     
 
 class FetchFileByAgentIdInput(insightconnect_plugin_runtime.Input):
@@ -32,13 +32,13 @@ class FetchFileByAgentIdInput(insightconnect_plugin_runtime.Input):
     "file_path": {
       "type": "string",
       "title": "File Path",
-      "description": "List of files paths of files to fetch. Any files retrieved will be uploaded to the SentinelOne console for download",
+      "description": "File path of file to fetch. If a file can be fetched, it will be uploaded to the SentinelOne console for download",
       "order": 2
     },
     "password": {
       "type": "string",
       "title": "Password",
-      "description": "Password to encrypt retrieved files with. Must be entered when files are downloaded on SentinelOne console. File encryption password, min. length 10 characters and cannot contain whitespace",
+      "description": "File encryption password, min. length 10 characters and cannot contain whitespace",
       "order": 3
     }
   },
@@ -60,37 +60,16 @@ class FetchFileByAgentIdOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "file": {
-      "$ref": "#/definitions/file",
-      "title": "File",
-      "description": "Base64 encoded file",
+    "success": {
+      "type": "boolean",
+      "title": "Success",
+      "description": "File fetch response status",
       "order": 1
     }
   },
   "required": [
-    "file"
-  ],
-  "definitions": {
-    "file": {
-      "id": "file",
-      "type": "object",
-      "title": "File",
-      "description": "File Object",
-      "properties": {
-        "content": {
-          "type": "string",
-          "title": "Content",
-          "description": "File contents",
-          "format": "bytes"
-        },
-        "filename": {
-          "type": "string",
-          "title": "Filename",
-          "description": "Name of file"
-        }
-      }
-    }
-  }
+    "success"
+  ]
 }
     """)
 

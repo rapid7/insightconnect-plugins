@@ -6,8 +6,8 @@ title: SentinelOne
 version: 8.1.0
 supported_versions: ["2.1.0"]
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
-vendor: test
-support: test
+vendor: rapid7
+support: rapid7
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/sentinelone
@@ -1856,23 +1856,23 @@ actions:
         example: "1000000000000000000"
       file_path:
         title: File Path
-        description: List of files paths of files to fetch. Any files retrieved will be uploaded to the SentinelOne console for download
+        description: File path of file to fetch. If a file can be fetched, it will be uploaded to the SentinelOne console for download
         type: string
         required: true
         example: "C:/windows/system32/winevt/logs/application.evtx"
       password:
         title: Password
-        description: Password to encrypt retrieved files with. Must be entered when files are downloaded on SentinelOne console. File encryption password, min. length 10 characters and cannot contain whitespace
+        description: File encryption password, min. length 10 characters and cannot contain whitespace
         type: 'string'
         required: true
         example: "MySecretPass123!"
     output:
-      file:
-        title: File
-        description: Base64 encoded file
-        type: file
+      success:
+        title: Success
+        description: File fetch response status
+        type: boolean
         required: true
-        example: '{ "file": { "filename": "report.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" } }'
+        example: true
   agents_summary:
     title: Count Summary
     description: Summary of agents by numbers
@@ -1973,7 +1973,7 @@ actions:
         example: 1
   agents_action:
     title: Run Agent Action
-    description: Perform actions relating to your SentinelOne agents. This will help manage your assets connected to your SentinelOne console. Documentation for these actions can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions
+    description: Perform actions relating to your SentinelOne agents. Initiate/Abort scan, connect/disconnect, decommission, restart/shutdown, fetch logs. Documentation for these actions can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions
     input:
       filter:
         title: Filter JSON
