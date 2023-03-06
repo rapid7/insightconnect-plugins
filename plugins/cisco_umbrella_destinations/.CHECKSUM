@@ -1,7 +1,7 @@
 {
-	"spec": "0e4dea036f502d8f9c965cc77fdbfca7",
-	"manifest": "47424e3213c75eda1bb92723a20a23b7",
-	"setup": "baad5615695b876209c4156e65e6de23",
+	"spec": "4cf203a105cac74ce386f472c43c98e0",
+	"manifest": "791ba9e23a1a12235b806b742c5cf326",
+	"setup": "fe4bd61e00b040d3508d1ceb03f25c24",
 	"schemas": [
 		{
 			"identifier": "dAdd/schema.py",
