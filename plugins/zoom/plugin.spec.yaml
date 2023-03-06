@@ -367,7 +367,8 @@ tasks:
     title: Monitor Sign In and Out Activity
     description: Monitor sign in and out activity
     output:
-      title: Activity Logs
-      description: All activity logs within the specified time range
-      type: "[]user_activity"
-      required: true
+      activity_logs:
+        title: Activity Logs
+        description: All activity logs within the specified time range
+        type: "[]user_activity"
+        required: true
