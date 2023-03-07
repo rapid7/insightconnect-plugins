@@ -232,17 +232,9 @@ Example output:
 
 This task is used to monitor sign in and out activity.
 
-Supported schedule types for this task include:
-None
-
 ##### Input
 
 _This task does not contain any inputs._
-
-Example input:
-
-```
-```
 
 ##### Output
 
