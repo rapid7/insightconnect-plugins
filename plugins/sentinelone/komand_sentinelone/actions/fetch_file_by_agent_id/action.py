@@ -16,9 +16,9 @@ class FetchFileByAgentId(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        agent_id = params.get(Input.AGENT_ID, None)
-        password = params.get(Input.PASSWORD)
-        file_path = params.get(Input.FILE_PATH)
+        agent_id = params.get(Input.AGENT_ID)
+        password = params.get(Input.PASSWORD, "")
+        file_path = params.get(Input.FILE_PATH, "")
 
         if password:
             check_password_meets_requirements(password)
