@@ -57,7 +57,7 @@ This action is used to create user associated to account.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |action|string|create|True|Specify how to create the new user|['create', 'autoCreate', 'custCreate', 'ssoCreate']|create|
-|email|string|None|True|Email address of user|None|user@example.com|
+|email|string|None|True|Email address of user|None|https://example.com|
 |first_name|string|None|False|First name of user|None|John|
 |last_name|string|None|True|Last name of user|None|Smith|
 |type|string|None|True|User type|['Basic', 'Licensed', 'On-prem']|Basic|
@@ -106,7 +106,7 @@ This action is used to delete or disassociate user from account.
 |----|----|-------|--------|-----------|----|-------|
 |action|string|None|True|Specify how to delete the user. To delete pending user, use disassocaite|['delete', 'disassociate']|delete|
 |id|string|None|True|The user identifier or email address|None|https://example.com|
-|transfer_email|string|None|False|Email to transfer meetings, webinars, or recordings|None|user@example.com|
+|transfer_email|string|None|False|Email to transfer meetings, webinars, or recordings|None|https://example.com|
 |transfer_meetings|boolean|False|False|Whether to transfer meetings to defined transfer email|None|False|
 |transfer_recordings|boolean|False|False|Whether to transfer recordings to defined transfer email|None|False|
 |transfer_webinars|boolean|False|False|Whether to transfer webinars to defined transfer email|None|False|
@@ -146,7 +146,7 @@ This action is used to get user in Zoom account.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|user_id|string|None|True|The user identifier or email address|None|user@example.com|
+|user_id|string|None|True|The user identifier or email address|None|https://example.com|
 
 Example input:
 

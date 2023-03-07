@@ -4,7 +4,7 @@ products: [insightconnect]
 name: zoom
 title: Zoom
 description: Trigger workflows on user activity while also managing your users with the Zoom plugin
-version: 1.0.0
+version: 2.0.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -363,6 +363,7 @@ triggers:
         required: false
 
 tasks:
+
   monitor_sign_in_out_activity:
     title: Monitor Sign In and Out Activity
     description: Monitor sign in and out activity
