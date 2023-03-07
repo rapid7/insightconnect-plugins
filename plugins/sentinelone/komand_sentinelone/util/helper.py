@@ -2,6 +2,7 @@ from komand_sentinelone.util.constants import MIN_PASSWORD_LENGTH
 from insightconnect_plugin_runtime.exceptions import PluginException
 from typing import Union
 
+
 class Helper:
     @staticmethod
     def join_or_empty(joined_array):
