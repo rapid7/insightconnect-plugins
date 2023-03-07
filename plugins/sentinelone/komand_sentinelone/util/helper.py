@@ -1,4 +1,5 @@
 from komand_sentinelone.util.constants import MIN_PASSWORD_LENGTH
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class Helper:
