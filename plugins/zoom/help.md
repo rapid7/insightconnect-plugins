@@ -312,6 +312,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.0 - Update connection for latest Zoom API authentication | Add Monitor Sign In and Out Activity task
 * 1.0.0 - Initial plugin
 
 # Links
@@ -320,4 +321,3 @@ _This plugin does not contain any troubleshooting information._
 
 * [Zoom](https://zoom.us/)
 * [Zoom API Documentation](https://marketplace.zoom.us/docs/api-reference/introduction)
-* [Zoom JWT Auth Documentation](https://marketplace.zoom.us/docs/guides/auth/jwt)
