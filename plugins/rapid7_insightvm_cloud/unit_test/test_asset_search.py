@@ -26,6 +26,8 @@ class TestAssetSearch(TestCase):
             "sort_criteria": {"risk-score": "asc", "criticality-tag": "desc"},
             "vuln_criteria": "severity IN ['Critical', 'Severe']",
             "vuln_criteria_invalid": "invalid vuln criteria",
+            "comparison_time": "2000-01-01T00:00:00.000Z",
+            "current_time": "2000-01-01T00:00:00.000Z",
         }
 
     def setUp(self) -> None:
