@@ -1,7 +1,7 @@
 {
-	"spec": "714a605c9930bb3a147cdb1effc07d47",
-	"manifest": "639e6a2f2860bfd111b39c16c77f7b21",
-	"setup": "b967d2799d6599d155337ddffdac4952",
+	"spec": "d5397d1b94af079c9d5615828f0c67a3",
+	"manifest": "09d6849d63e1498f55adb4c07281eb79",
+	"setup": "ab07d9773a525dbf74c6fc70e910645f",
 	"schemas": [
 		{
 			"identifier": "get_domain_visits/schema.py",

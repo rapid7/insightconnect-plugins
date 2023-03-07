@@ -9,7 +9,7 @@ This plugin utilizes Cisco Umbrella to get the most complete view of the relatio
 
 # Requirements
 
-* Requires an API Key and Secret from Cisco Umbrella
+* Requires an API Key and Secret from Cisco Umbrella (Legacy API Key) - In the links section it's described how to create/refresh/delete it)
 * Requires Cisco Umbrella organization ID
 
 # Documentation
@@ -23,6 +23,10 @@ The connection configuration accepts the following parameters:
 |api_key|credential_secret_key|None|True|Cisco Umbrella API key|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |api_secret|credential_secret_key|None|True|Cisco Umbrella API secret key|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |organization_id|string|None|True|ID of your Cisco Umbrella organization|None|2961483|
+
+The API key is a UUID-v4.
+
+*Note this plugin uses v1 of the Cisco API and therefore a legacy API key should be used ([Documentation #5](https://support.umbrella.com/hc/en-us/articles/8989122216340-Introducing-the-new-Cisco-Umbrella-Open-API)). To create/refresh/delete legacy keys please refer to this documentation ([Creating/Refreshing/Deleting legacy Umbrella API Keys](https://developer.cisco.com/docs/cloud-security/#!umbrella-legacy-authentication/prerequisites)). A future plugin update will move to using v2 of the Cisco API.*
 
 Example input:
 
@@ -115,6 +119,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.1 - Docs - Update help.md to include information about legacy keys
 * 1.0.0 - Initial plugin
 
 # Links
@@ -124,3 +129,4 @@ _This plugin does not contain any troubleshooting information._
 * [Cisco Umbrella](https://umbrella.cisco.com/)
 * [Cisco Umbrella Docs](https://docs.umbrella.com/)
 * [Cisco Umbrella Reporting](https://docs.umbrella.com/deployment-umbrella/docs/getting-started-learning-to-use-reports-and-exporting-reports)
+* [Creating/Refreshing/Deleting legacy Umbrella API Keys](https://developer.cisco.com/docs/cloud-security/#!umbrella-legacy-authentication/prerequisites)
