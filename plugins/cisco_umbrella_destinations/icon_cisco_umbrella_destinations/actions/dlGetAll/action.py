@@ -1,8 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import DlGetAllInput, DlGetAllOutput, Input, Output, Component
-from typing import Any, Dict
 from insightconnect_plugin_runtime.helper import clean
-import logging
 
 
 class DlGetAll(insightconnect_plugin_runtime.Action):
