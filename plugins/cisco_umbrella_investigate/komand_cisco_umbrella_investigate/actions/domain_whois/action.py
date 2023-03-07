@@ -1,11 +1,11 @@
-import komand
-from .schema import DomainWhoisInput, DomainWhoisOutput
+import insightconnect_plugin_runtime
+from .schema import DomainWhoisInput, DomainWhoisOutput, Input, Output
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class DomainWhois(komand.Action):
+class DomainWhois(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="domain_whois",
@@ -15,13 +15,10 @@ class DomainWhois(komand.Action):
         )
 
     def run(self, params={}):
-        domain = params.get("domain")
+        domain = params.get(Input.DOMAIN)
         try:
             domain_whois = self.connection.investigate.domain_whois(domain)
-        except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+        except Exception as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
-        return {"whois": [domain_whois]}
-
-    def test(self):
-        return {"whois": []}
+        return {Output.WHOIS: [domain_whois]}

@@ -1,11 +1,11 @@
-import komand
-from .schema import DomainTagsInput, DomainTagsOutput
+import insightconnect_plugin_runtime
+from .schema import DomainTagsInput, DomainTagsOutput, Input, Output
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class DomainTags(komand.Action):
+class DomainTags(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="domain_tags",
@@ -15,11 +15,11 @@ class DomainTags(komand.Action):
         )
 
     def run(self, params={}):
-        domain = params.get("domain")
+        domain = params.get(Input.DOMAIN)
         try:
             domain_tags = self.connection.investigate.domain_tags(domain)
-        except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+        except Exception as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
         if not domain_tags:
             self.logger.info("DomainTags: Run: No results")
@@ -38,7 +38,4 @@ class DomainTags(komand.Action):
                     "url": url,
                 }
             )
-        return {"domain_tags": domains}
-
-    def test(self):
-        return {"domain_tags": []}
+        return {Output.DOMAIN_TAGS: domains}

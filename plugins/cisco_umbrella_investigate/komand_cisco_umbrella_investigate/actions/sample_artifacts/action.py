@@ -1,11 +1,11 @@
-import komand
-from .schema import SampleArtifactsInput, SampleArtifactsOutput
+import insightconnect_plugin_runtime
+from .schema import SampleArtifactsInput, SampleArtifactsOutput, Input, Output
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class SampleArtifacts(komand.Action):
+class SampleArtifacts(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="sample_artifacts",
@@ -15,9 +15,9 @@ class SampleArtifacts(komand.Action):
         )
 
     def run(self, params={}):
-        hash = params.get("hash")
-        limit = params.get("limit", None)
-        offset = params.get("offset", None)
+        hash_ = params.get(Input.HASH)
+        limit = params.get(Input.LIMIT)
+        offset = params.get(Input.OFFSET)
 
         if not limit or limit == 0:
             limit = 10
@@ -26,9 +26,9 @@ class SampleArtifacts(komand.Action):
             offset = 0
 
         try:
-            sample_artifacts = self.connection.investigate.sample_artifacts(hash, limit=limit, offset=offset)
-        except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+            sample_artifacts = self.connection.investigate.sample_artifacts(hash_, limit=limit, offset=offset)
+        except Exception as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
         if "error" in sample_artifacts:
             raise PluginException(
@@ -37,6 +37,3 @@ class SampleArtifacts(komand.Action):
             )
 
         return sample_artifacts
-
-    def test(self):
-        return {"artifacts": []}

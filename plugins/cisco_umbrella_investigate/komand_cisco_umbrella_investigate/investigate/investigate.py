@@ -1,11 +1,12 @@
+import datetime
 import json
 import re
-import requests
-from urllib.parse import urljoin
-import urllib
-import datetime
 import time
-from komand.exceptions import PluginException
+import urllib
+from urllib.parse import urljoin
+
+import requests
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class Investigate(object):
@@ -25,7 +26,7 @@ class Investigate(object):
 
     DOMAIN_ERR = "Domains must be a string or a list of strings"
     IP_ERR = "Invalid IP address"
-    UNSUPPORTED_DNS_QUERY = "Supported query types are: {}".format(SUPPORTED_DNS_TYPES)
+    UNSUPPORTED_DNS_QUERY = f"Supported query types are: {SUPPORTED_DNS_TYPES}"
     SEARCH_ERR = "Start argument must be a datetime or a timedelta"
 
     def __init__(self, api_key, logger, proxies={}):
@@ -119,11 +120,11 @@ class Investigate(object):
                 return response.json()
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        except json.decoder.JSONDecodeError as e:
-            self.logger.info(f"Invalid json: {e}")
+        except json.decoder.JSONDecodeError as error:
+            self.logger.info(f"Invalid json: {error}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
-        except requests.exceptions.HTTPError as e:
-            self.logger.info(f"Call to Cisco Umbrella Investigate failed: {e}")
+        except requests.exceptions.HTTPError as error:
+            self.logger.info(f"Call to Cisco Umbrella Investigate failed: {error}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
 
     def get_parse(self, uri, params={}):
@@ -154,9 +155,9 @@ class Investigate(object):
         form.
         For more detail, see https://sgraph.opendns.com/docs/api#categorization
         """
-        if type(domains) is str:
+        if isinstance(domains, str):
             return self._get_categorization(domains, labels)
-        elif type(domains) is list:
+        elif isinstance(domains, list):
             return self._post_categorization(domains, labels)
         else:
             raise PluginException(cause="Unable to retrieve domain information.", assistance=Investigate.DOMAIN_ERR)
@@ -242,7 +243,7 @@ class Investigate(object):
     def domain_whois_history(self, domain, limit=None):
         """Gets whois history for a domain"""
 
-        params = dict()
+        params = {}
         if limit is not None:
             params["limit"] = limit
 
@@ -290,7 +291,7 @@ class Investigate(object):
     def search(self, pattern, start=None, limit=None, include_category=None):
         """Searches for domains that match a given pattern"""
 
-        params = dict()
+        params = {}
 
         if start is None:
             start = datetime.timedelta(days=30)
@@ -319,37 +320,37 @@ class Investigate(object):
 
         return self.get_parse(uri, params)
 
-    def sample(self, hash, limit=None, offset=None):
+    def sample(self, hash_, limit=None, offset=None):
         """Return an object representing the sample identified by the input hash, or an empty object if that sample is not found"""
 
-        uri = self._uris["sample"].format(hash)
+        uri = self._uris["sample"].format(hash_)
         params = {"limit": limit, "offset": offset}
 
         return self.get_parse(uri, params)
 
-    def sample_artifacts(self, hash, limit=None, offset=None):
+    def sample_artifacts(self, hash_, limit=None, offset=None):
         """
         Return an object representing artifacts associated with an input hash
         NOTE: Only available to Threat Grid customers
         """
 
-        uri = self._uris["sample_artifacts"].format(hash)
+        uri = self._uris["sample_artifacts"].format(hash_)
         params = {"limit": limit, "offset": offset}
 
         return self.get_parse(uri, params)
 
-    def sample_connections(self, hash, limit=None, offset=None):
+    def sample_connections(self, hash_, limit=None, offset=None):
         """Return an object representing network connections associated with an input hash"""
 
-        uri = self._uris["sample_connections"].format(hash)
+        uri = self._uris["sample_connections"].format(hash_)
         params = {"limit": limit, "offset": offset}
 
         return self.get_parse(uri, params)
 
-    def sample_samples(self, hash, limit=None, offset=None):
+    def sample_samples(self, hash_, limit=None, offset=None):
         """Return an object representing samples associated with an input hash"""
 
-        uri = self._uris["sample_samples"].format(hash)
+        uri = self._uris["sample_samples"].format(hash_)
         params = {"limit": limit, "offset": offset}
 
         return self.get_parse(uri, params)

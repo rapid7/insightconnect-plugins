@@ -1,12 +1,12 @@
-import komand
-from .schema import EmailWhoisInput, EmailWhoisOutput
+import insightconnect_plugin_runtime
+from .schema import EmailWhoisInput, EmailWhoisOutput, Input, Output
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from validate_email import validate_email
 
 
-class EmailWhois(komand.Action):
+class EmailWhois(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="email_whois",
@@ -16,15 +16,15 @@ class EmailWhois(komand.Action):
         )
 
     def run(self, params={}):
-        email = params.get("email")
+        email = params.get(Input.EMAIL)
         is_valid = validate_email(email)
         if not is_valid:
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
         try:
             email_whois = self.connection.investigate.email_whois(email)
-        except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+        except Exception as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
         one_email_whois = email_whois.get(email)
         if not one_email_whois:
@@ -34,7 +34,7 @@ class EmailWhois(komand.Action):
             )
 
         return {
-            "email_whois": [
+            Output.EMAIL_WHOIS: [
                 {
                     "more_data_available": one_email_whois.get("moreDataAvailable"),
                     "limit": one_email_whois.get("limit"),
@@ -43,6 +43,3 @@ class EmailWhois(komand.Action):
                 }
             ]
         }
-
-    def test(self):
-        return {"email_whois": []}
