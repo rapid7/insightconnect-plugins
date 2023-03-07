@@ -15,7 +15,6 @@ class RunRemoteScript(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        print("DLDEBUG params:{}".format(params))
         agent_ids = params.get(Input.IDS)
         script_id = params.get(Input.SCRIPT_ID)
         if not script_id:
@@ -37,11 +36,8 @@ class RunRemoteScript(insightconnect_plugin_runtime.Action):
 
         input_params = params.get(Input.INPUT_PARAMETERS, "")
         password = params.get(Input.PASSWORD, "")
-        print("DLDEBUG: password:{}".format(password))
         if password:
-            print("DLDEBUG: password is picked up:{}".format(password))
             if len(password) <= 10 or " " in password:
-                print("DLDEBUG: password doesn't meet criteria:{}".format(password))
                 raise PluginException(
                     cause="Invalid password.",
                     assistance="Password must have more than 10 characters and cannot contain whitespace.",
@@ -56,10 +52,8 @@ class RunRemoteScript(insightconnect_plugin_runtime.Action):
             )
 
         user_filter = {}
-        print("DLDEBUG: agent_ids {}".format(agent_ids))
         if agent_ids:
             user_filter = {"ids": agent_ids}
-        print("DLDEBUG: user_filter {}".format(user_filter))
         data = {
             "scriptRuntimeTimeoutSeconds": script_timeout,
             "scriptId": script_id,
@@ -69,7 +63,7 @@ class RunRemoteScript(insightconnect_plugin_runtime.Action):
             "outputDirectory": output_dir,
             "password": password,
         }
-        print("DLDEBUG: data {}".format(data))
+
         affected = self.connection.run_remote_script(user_filter, data)
 
         return {Output.AFFECTED: affected}

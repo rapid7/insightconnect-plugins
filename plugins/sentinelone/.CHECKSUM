@@ -1,7 +1,7 @@
 {
-	"spec": "fb0afaa8e3e2d8c76486a312bc34668d",
-	"manifest": "78f2a6910c8e2d0b0221b2984111d5f1",
-	"setup": "5179e83577bd7fb1746bdf7d83984902",
+	"spec": "e11f48695757cbe5baea690dab4bd410",
+	"manifest": "95e7567d224e0330006c817ebd9ad6df",
+	"setup": "ab1a8d52a10a5304ede6877740364166",
 	"schemas": [
 		{
 			"identifier": "activities_list/schema.py",
@@ -9,11 +9,11 @@
 		},
 		{
 			"identifier": "activities_types/schema.py",
-			"hash": "d990386bc2687a38b4deeaca3e31ab66"
+			"hash": "a7909502f3b3b35ea2deb9885adf5809"
 		},
 		{
 			"identifier": "agents_action/schema.py",
-			"hash": "5ce7d3640f846b778ca50b7d0097e147"
+			"hash": "e58aebdaefdb6610c8a7550f7f16a967"
 		},
 		{
 			"identifier": "agents_reload/schema.py",
@@ -57,7 +57,7 @@
 		},
 		{
 			"identifier": "fetch_file_by_agent_id/schema.py",
-			"hash": "fa91823fc11bc2346faa398915a0bd78"
+			"hash": "53cbaea2ad5b577a80ebddb22b2c26b6"
 		},
 		{
 			"identifier": "get_agent_details/schema.py",
