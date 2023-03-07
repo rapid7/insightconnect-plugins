@@ -4,9 +4,7 @@ import datetime
 from unittest.mock import patch
 
 from icon_zoom.util.event import Event
-from icon_zoom.util.api import ZoomAPI
 from icon_zoom.tasks.monitor_sign_in_out_activity.task import MonitorSignInOutActivity
-from icon_zoom.tasks.monitor_sign_in_out_activity.schema import Input
 from icon_zoom.connection.connection import Connection
 from icon_zoom.unit_test.mock import STUB_CONNECTION
 
