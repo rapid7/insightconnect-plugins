@@ -746,7 +746,6 @@ This action is used to disable agents that match the filter.
 |reboot|boolean|None|True|Set true to reboot the endpoint, false to skip rebooting|None|True|
 
 Example input:
-
 ```
 {
   "agent": "hostname123",
@@ -785,7 +784,6 @@ This action is used to perform actions relating to your SentinelOne agents. This
 |filter|object|{}|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents. Note - decommission, disconnect, restart-machine, shutdown and uninstall actions require that one of the following filter arguments be supplied - ids, groupIds, or filterId|None|{"ids": ["1000000000000000000"]}|
 
 Example input:
-
 ```
 {
   "action": "connect",
@@ -821,7 +819,6 @@ This action is used to fetch a file associated with the threat that matches the 
 |password|password|None|True|File encryption password, min. length 10 characters and cannot contain whitespace|None|Rapid7 Insightconnect|
 
 Example input:
-
 ```
 {
   "id": "939039647215561624",
