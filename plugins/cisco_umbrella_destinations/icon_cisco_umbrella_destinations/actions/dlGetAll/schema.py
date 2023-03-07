@@ -12,11 +12,11 @@ class Input:
     ISGLOBAL = "isGlobal"
     ISMSPDEFAULT = "isMSPDefault"
     MARKEDFORDELETION = "markedForDeletion"
-    
+
 
 class Output:
     DATA = "data"
-    
+
 
 class DlGetAllInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
