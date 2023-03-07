@@ -22,4 +22,3 @@ class DlGetByName(insightconnect_plugin_runtime.Action):
                 result_list.append(destination_list)
 
         return {Output.SUCCESS: result_list}
-
