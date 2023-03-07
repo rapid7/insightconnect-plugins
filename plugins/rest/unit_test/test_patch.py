@@ -76,11 +76,11 @@ class TestPatch(TestCase):
 
     @parameterized.expand(
         [
-            ("https://www.google.com", {}, [{"action": "jumps"}, {"over": "dog"}, {"ip": "192.168.0.1"}], {}),
+            ("https://www.google.com", {}, "test data", {}),
             ("https://www.google.com", {}, [], {"client_id": "name", "client_secret": "passwd"}),
         ]
     )
-    def test_patch_with_either_value(self, route, headers, body_as_an_array, body):
+    def test_patch_with_either_value(self, route, headers, body_any, body_object):
         test_conn = MockConnection()
         test_action = Patch()
 
@@ -88,8 +88,8 @@ class TestPatch(TestCase):
         action_params = {
             "route": route,
             "headers": headers,
-            "body_as_an_array": body_as_an_array,
-            "body": body,
+            "body_any": body_any,
+            "body_object": body_object,
         }
 
         results = test_action.run(action_params)
@@ -104,8 +104,8 @@ class TestPatch(TestCase):
             action_params = {
                 "route": "https://www.google.com",
                 "headers": {},
-                "body_as_an_array": [{"action": "jumps"}, {"over": "dog"}, {"ip": "192.168.0.1"}],
-                "body": {"key": "value"},
+                "body_any": "test data",
+                "body_object": {"key": "value"},
             }
 
             test_action.run(action_params)
