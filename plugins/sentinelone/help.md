@@ -2035,7 +2035,7 @@ To convert `threat` into an array use Type Converter Plugin
 
 # Version History
 
-* 8.1.0 - New actions: Fetch file for agent id. Run remote script
+* 8.1.0 - Added New actions: Fetch file for agent ID and Run remote script
 * 8.0.1 - Search Agents: Remove duplicate results when Case Sensitive is false
 * 8.0.0 - Connection: Added Service user (API only user type) authentication | Removed Basic Authentication
 * 7.1.0 - Update for Blacklist action: Fix for unblocked action | Update for Quarantine action: unification of the output data when action fails | Add troubleshooting information about use Type Converter | Mark as Benign action: update description 
