@@ -1,8 +1,9 @@
+from typing import Dict, Any
+
 import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.helper import clean
+
 from .schema import AssetSearchInput, AssetSearchOutput, Input, Output, Component
-
-
-# Custom imports below
 
 
 class AssetSearch(insightconnect_plugin_runtime.Action):
@@ -12,25 +13,26 @@ class AssetSearch(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        asset_crit = params.get(Input.ASSET_CRITERIA)
-        vuln_crit = params.get(Input.VULN_CRITERIA)
+        body = clean(
+            {"asset": params.pop(Input.ASSET_CRITERIA, None), "vulnerability": params.pop(Input.VULN_CRITERIA, None)}
+        )
+        parameters = {
+            Input.SIZE: self._get_size(params),
+            "currentTime": params.get(Input.CURRENT_TIME),
+            "comparisonTime": params.get(Input.COMPARISON_TIME),
+        }
+        for key, value in params.get("sort_criteria", {}).items():
+            parameters["sort"] = f"{key},{value}"
+
+        parameters = clean(parameters)
+        resources = self.connection.ivm_cloud_api.call_api("assets", "POST", parameters, body)
+
+        assets = resources.get("data", [])
+        return {Output.ASSETS: assets}
+
+    def _get_size(self, params: Dict[str, Any]) -> int:
         size = params.get(Input.SIZE, 200)
-        sort_criteria = params.get(Input.SORT_CRITERIA, dict())
-        parameters = list()
-
-        for key, value in sort_criteria.items():
-            parameters.append(("sort", f"{key},{value}"))
-
         if size > 500:
             self.logger.info(f"'{size}' too large, set to max size of 500.")
             size = 500
-        parameters.append(("size", size))
-        if asset_crit or vuln_crit:
-            body = {"asset": asset_crit, "vulnerability": vuln_crit}
-            resources = self.connection.ivm_cloud_api.call_api("assets", "POST", params, body)
-        else:
-            resources = self.connection.ivm_cloud_api.call_api("assets", "POST", parameters)
-
-        assets = resources.get("data")
-
-        return {Output.ASSETS: assets}
+        return size
