@@ -1,0 +1,9 @@
+{
+  "example.com": {
+    "status": 1,
+    "security_categories": [],
+    "content_categories": [
+      "23"
+    ]
+  }
+}

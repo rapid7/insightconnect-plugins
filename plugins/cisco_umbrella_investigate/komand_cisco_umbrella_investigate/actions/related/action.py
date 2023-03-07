@@ -1,11 +1,11 @@
-import komand
-from .schema import RelatedInput, RelatedOutput
+import insightconnect_plugin_runtime
+from .schema import RelatedInput, RelatedOutput, Input, Output
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class Related(komand.Action):
+class Related(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="related",
@@ -15,17 +15,14 @@ class Related(komand.Action):
         )
 
     def run(self, params={}):
-        domain = params.get("domain")
+        domain = params.get(Input.DOMAIN)
         try:
             related = self.connection.investigate.related(domain)
-        except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+        except Exception as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
         founded = related.get("found")
         if founded:
             return {"related": related.get("tb1")}
 
         self.logger.info("No results found")
-        return {"related": []}
-
-    def test(self):
-        return {"related": []}
+        return {Output.RELATED: []}
