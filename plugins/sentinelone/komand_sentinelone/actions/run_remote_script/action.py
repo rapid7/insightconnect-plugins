@@ -28,18 +28,6 @@ class RunRemoteScript(insightconnect_plugin_runtime.Action):
         input_params = params.get(Input.INPUT_PARAMETERS, "")
         password = params.get(Input.PASSWORD, "")
 
-        if not script_id:
-            raise PluginException(
-                cause="No script id provided to execute.",
-                assistance="Please select a script to execute from the SentinelOne console.",
-            )
-
-        if not task_description:
-            raise PluginException(
-                cause="No task description provided.",
-                assistance="Please provide a task description for the script.",
-            )
-
         if script_timeout < SCRIPT_TIMEOUT_LOWER_LIMIT or script_timeout > SCRIPT_TIMEOUT_UPPER_LIMIT:
             # Timeout outside of allowed parameters - use default value instead
             script_timeout = SCRIPT_TIMEOUT_DEFAULT
