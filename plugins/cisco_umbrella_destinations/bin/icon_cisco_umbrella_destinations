@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Cisco Umbrella Destinations"
 Vendor = "rapid7"
-Version = "3.0.0"
+Version = "3.0.1"
 Description = "Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization"
 
 

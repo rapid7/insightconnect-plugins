@@ -9,12 +9,12 @@ Cisco Umbrella Destinations allows users to manage, block, and allow network des
 
 # Requirements
 
-* API Key and Secret Key from Cisco Umbrella 
+* Cisco Umbrella Investigate API key and Secret key (Legacy API Key - Refer to Links section for API Key management)
 * Cisco Umbrella organization ID
 
 # Supported Product Versions
 
-* 2022-03-08
+* 2023-03-06
 
 # Documentation
 
@@ -474,6 +474,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.0.1 - Update help notes for API Key management
 * 3.0.0 - Updated output for 'typeOf' to reflect update to Cisco API
 * 2.0.0 - Updated output for dAdd & dDelete - Removed data element in the response
 * 1.0.0 - Initial plugin includes create and modify destination lists
@@ -484,3 +485,4 @@ _This plugin does not contain any troubleshooting information._
 
 * [Cisco Umbrella](https://umbrella.cisco.com/)
 * [Cisco Umbrella Destinations Docs](https://developer.cisco.com/docs/cloud-security/#!destination-lists-introduction-overview)
+* [Creating/Refreshing/Deleting legacy Umbrella API Keys](https://developer.cisco.com/docs/cloud-security/#!umbrella-legacy-authentication/prerequisites)
