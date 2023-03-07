@@ -168,7 +168,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return self._call_api("POST", f"agents/actions/{action}", {"filter": agents_filter})
 
     def fetch_file_by_agent_id(self, agent_id: str, file_path: str, password: str):
-        response =  self._call_api(
+        response = self._call_api(
             "POST", f"agents/{agent_id}/actions/fetch-files", {"data": {"password": password, "files": [file_path]}}
         )
         if len(response.get("errors", [])) == 0:
@@ -178,7 +178,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         raise PluginException(
             cause="An error occurred when trying to fetch file.",
             assistance=f"Check the error information and adjust inputs accordingly",
-            data=errors
+            data=errors,
         )
 
     def run_remote_script(self, user_filter: dict, data: dict) -> dict:
@@ -199,7 +199,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         raise PluginException(
             cause="An error occurred when trying to fetch file.",
             assistance=f"Check the error information and adjust inputs accordingly",
-            data=errors
+            data=errors,
         )
 
     def download_file(self, agent_filter: dict, password: str):

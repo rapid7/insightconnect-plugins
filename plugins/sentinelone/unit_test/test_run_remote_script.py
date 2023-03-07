@@ -1,6 +1,7 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest.mock import patch
 from unit_test.util import Util
@@ -21,6 +22,11 @@ class TestRunRemoteScript(TestCase):
     @patch("requests.request", side_effect=Util.mocked_requests_get)
     def test_should_success(self, mock_request):
         expected = {"affected": 1}
-        actual = self.action.run({Input.IDS: ["1470609440131178177"], Input.SCRIPT_ID:"100000000000",
-                                  Input.TASK_DESCRIPTION:"Test task description"})
+        actual = self.action.run(
+            {
+                Input.IDS: ["1470609440131178177"],
+                Input.SCRIPT_ID: "100000000000",
+                Input.TASK_DESCRIPTION: "Test task description",
+            }
+        )
         self.assertEqual(expected, actual)
