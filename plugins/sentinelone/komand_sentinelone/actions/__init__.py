@@ -12,6 +12,7 @@ from .create_ioc_threat.action import CreateIocThreat
 from .create_query.action import CreateQuery
 from .disable_agent.action import DisableAgent
 from .enable_agent.action import EnableAgent
+from .fetch_file_by_agent_id.action import FetchFileByAgentId
 from .get_agent_details.action import GetAgentDetails
 from .get_events.action import GetEvents
 from .get_events_by_type.action import GetEventsByType
@@ -22,6 +23,7 @@ from .mark_as_threat.action import MarkAsThreat
 from .mitigate_threat.action import MitigateThreat
 from .name_available.action import NameAvailable
 from .quarantine.action import Quarantine
+from .run_remote_script.action import RunRemoteScript
 from .search_agents.action import SearchAgents
 from .threats_fetch_file.action import ThreatsFetchFile
 from .update_analyst_verdict.action import UpdateAnalystVerdict

@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 8.0.1
+version: 8.1.0
 supported_versions: ["2.1.0"]
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
@@ -35,7 +35,7 @@ types:
       required: false
     action:
       title: Action
-      description: Action descripted in the activity
+      description: Action described in the activity
       type: string
       required: false
   activities_list:
@@ -1570,7 +1570,7 @@ actions:
         description: ID of a threat
         type: string
         required: true
-        example: 1000000000000000000
+        example: "1000000000000000000"
       action:
         title: Action
         description: Mitigation action
@@ -1844,6 +1844,35 @@ actions:
         type: '[]agent_applications'
         required: true
         example: '[ { "publisher": "string", "installedDate": "2018-02-27T04:49:26.257525Z", "size": "integer", "name": "string", "version": "string" } ]'
+  fetch_file_by_agent_id:
+    title: Fetch File
+    description: Fetch file for a specific agent id
+    input:
+      agent_id:
+        title: Agent ID
+        description: Agent ID
+        type: 'string'
+        required: true
+        example: "1000000000000000000"
+      file_path:
+        title: File Path
+        description: File path of file to fetch. If a file can be fetched, it will be uploaded to the SentinelOne console for download
+        type: string
+        required: true
+        example: "C:/windows/system32/winevt/logs/application.evtx"
+      password:
+        title: Password
+        description: File encryption password, min. length 10 characters and cannot contain whitespace
+        type: 'string'
+        required: true
+        example: "MySecretPass123!"
+    output:
+      success:
+        title: Success
+        description: File fetch response status
+        type: boolean
+        required: true
+        example: true
   agents_summary:
     title: Count Summary
     description: Summary of agents by numbers
@@ -1944,7 +1973,7 @@ actions:
         example: 1
   agents_action:
     title: Run Agent Action
-    description: Perform actions relating to your SentinelOne agents. This will help manage your assets connected to your SentinelOne console. Documentation for these actions can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions
+    description: Perform actions relating to your SentinelOne agents. Initiate/Abort scan, connect/disconnect, decommission, restart/shutdown, fetch logs. Documentation for these actions can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions
     input:
       filter:
         title: Filter JSON
@@ -2713,6 +2742,69 @@ actions:
         type: integer
         required: false
         example: 1
+  run_remote_script:
+    title: Run Remote Script
+    description: Run a remote script
+    input:
+      ids:
+        title: IDs
+        description: IDs of the agents to execute the script on. If no IDs provided, the script will run on ALL applicable agents. This id can be retrieved by using the get agent details action if neccessary
+        type: '[]string'
+        required: false
+        example: '["100000000000000000"]'
+      script_id:
+        title: Script ID
+        description: ID of the script to run (select the ID of a SentinelOne or user script from SentinelOne console)
+        type: string
+        required: true
+        example: "1234567891234"
+      task_description:
+        title: Task Description
+        description: Task Description
+        type: string
+        required: true
+        example: "Task Description"
+      output_destination:
+        title: Output Destination
+        description: Output destination of any script output
+        type: string
+        enum:
+          - Local
+          - None
+          - SentinelCloud
+        example: SentinelCloud
+        required: true
+      output_directory:
+        title: Output Directory
+        description: Output Directory (Only relevant if Local is selected for Output Destination)
+        type: string
+        required: false
+        example: "/tmp/script_output"
+      password:
+        title: Password
+        description: Password (Only relevant if SentinelCloud is selected for Output Destination). At least 10 characters and no whitespace
+        type: string
+        required: false
+        example: "Password123??"
+      input_parameters:
+        title: Input Script Parameters
+        description: Parameters which will be passed to the remote script (may or may not be required, depending on script)
+        type: string
+        required: false
+        example: "input_parameter1"
+      timeout:
+        title: Script Execution Timeout
+        description: Script runtime timeout (in seconds) for current execution (Value between 60 and 172800 seconds)
+        type: integer
+        required: false
+        default: 3600
+        example: 3600
+    output:
+      affected:
+        description: Number of entities affected by requested operation. For detailed output from running the script, log onto the SentinelOne console. Note this may be lower than the number of agent ids submitted if the script cannot be run on a particular agent e.g. due to OS type
+        type: integer
+        required: true
+        example: 2
 triggers:
   get_threats:
     title: Get Threats

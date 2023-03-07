@@ -34,7 +34,6 @@ The connection configuration accepts the following parameters:
 |url|string|None|True|SentinelOne Console URL|None|https://example.com|
 
 Example input:
-
 ```
 {
   "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
@@ -46,6 +45,79 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Run Remote Script
+
+This action is used to run a remote script.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ids|[]string|None|False|IDs of the agents to execute the script on. If no IDs provided, the script will run on ALL applicable agents. This id can be retrieved by using the get agent details action if neccessary|None|["100000000000000000"]|
+|script_id|string|None|True|ID of the script to run (select the ID of a SentinelOne or user script from SentinelOne console)|None|1234567891234|
+|task_description|string|None|True|Task Description|None|Task Description|
+|output_destination|string|None|True|Output destination of any script output|['Local', 'None', 'SentinelCloud']|SentinelCloud|
+|input_parameters|string|None|False|Parameters which will be passed to the remote script (may or may not be required, depending on script)|None|input_parameter1|
+|output_directory|string|None|False|Output Directory (Only relevant if Local is selected for Output Destination)|None|/tmp/script_output|
+|password|string|None|False|Password (Only relevant if SentinelCloud is selected for Output Destination). At least 10 characters and no whitespace|None|Password123??|
+|script_id|string|None|True|ID of the script to run (select the ID of a SentinelOne or user script from SentinelOne console)|None|None|
+|task_description|string|None|True|Task Description|None|None|
+|timeout|integer|3600|False|Script runtime timeout (in seconds) for current execution (Value between 60 and 172800 seconds)|None|3600|
+
+Example input:
+```
+{
+  "output_destination": "None"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|True|Number of entities affected by requested operation. For detailed output from running the script, log onto the SentinelOne console. Note this may be lower than the number of agent ids submitted if the script cannot be run on a particular agent e.g. due to OS type|2|
+
+Example output:
+
+```
+{
+  "affected": 2
+}
+```
+
+#### Fetch File
+
+This action is used to fetch file for a specific agent id.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent_id|string|None|True|Agent ID|None|1000000000000000000|
+|file_path|string|None|True|File path of file to fetch. If a file can be fetched, it will be uploaded to the SentinelOne console for download|None|C:/windows/system32/winevt/logs/application.evtx|
+|password|string|None|True|File encryption password, min. length 10 characters and cannot contain whitespace|None|MySecretPass123!|
+
+Example input:
+```
+{
+  "agent_id": "1000000000000000000",
+  "file_path": "C:/windows/system32/winevt/logs/application.evtx",
+  "password": "MySecretPass123!"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|File fetch response status|True|
+
+Example output:
+
+```
+{ "success": True }
+```
 
 #### Update Incident Status
 
@@ -60,7 +132,6 @@ This action is used to update incident status.
 |type|string|None|True|Type of incidents|['threats', 'alerts']|threats|
 
 Example input:
-
 ```
 {
   "incident_ids": [
@@ -99,7 +170,6 @@ This action is used to update analyst verdict.
 |type|string|None|True|Type of incidents|['threats', 'alerts']|threats|
 
 Example input:
-
 ```
 {
   "analyst_verdict": "true positive",
@@ -139,7 +209,6 @@ This action is used to get Deep Visibility results from the query that matches t
 |sub_query|string|None|False|Sub query to run on the data that was already pulled|None|AgentName IS NOT EMPTY|
 
 Example input:
-
 ```
 {
   "event_type": "Registry Key Create",
@@ -319,7 +388,6 @@ This action is used to get all Deep Visibility events from a queryId.
 |sub_query|string|None|False|Sub query to run on the data that was already pulled|None|AgentName IS NOT EMPTY|
 
 Example input:
-
 ```
 {
   "limit": 10,
@@ -496,7 +564,6 @@ This action is used to stop a Deep Visibility Query by queryId.
 |query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|qd94e330ac025d525b5948bdf897b955e|
 
 Example input:
-
 ```
 {
   "query_id": "qd94e330ac025d525b5948bdf897b955e"
@@ -530,7 +597,6 @@ This action is used to get that status of a Deep Visibility Query.
 |query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|qd94e330ac025d525b5948bdf897b955e|
 
 Example input:
-
 ```
 {
   "query_id": "qd94e330ac025d525b5948bdf897b955e"
@@ -576,7 +642,6 @@ This action is used to start a Deep Visibility Query and get the queryId. You ca
 |to_date|string|None|True|Events created before or at this timestamp|None|2021-03-20 04:49:26.257525|
 
 Example input:
-
 ```
 {
   "account_ids": [
@@ -634,7 +699,6 @@ This action is used to enable agents that match the filter.
 |reboot|boolean|None|True|Set true to reboot the endpoint, false to skip rebooting|None|True|
 
 Example input:
-
 ```
 {
   "agent": "hostname123",
@@ -674,7 +738,6 @@ This action is used to disable agents that match the filter.
 |reboot|boolean|None|True|Set true to reboot the endpoint, false to skip rebooting|None|True|
 
 Example input:
-
 ```
 {
   "agent": "hostname123",
@@ -713,7 +776,6 @@ This action is used to perform actions relating to your SentinelOne agents. This
 |filter|object|{}|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents. Note - decommission, disconnect, restart-machine, shutdown and uninstall actions require that one of the following filter arguments be supplied - ids, groupIds, or filterId|None|{"ids": ["1000000000000000000"]}|
 
 Example input:
-
 ```
 {
   "action": "connect",
@@ -749,7 +811,6 @@ This action is used to fetch a file associated with the threat that matches the 
 |password|password|None|True|File encryption password, min. length 10 characters and cannot contain whitespace|None|Rapid7 Insightconnect|
 
 Example input:
-
 ```
 {
   "id": "939039647215561624",
@@ -805,7 +866,6 @@ This action is used to get a list of activities.
 |user_ids|[]string|None|False|The user who invoked the activity (If applicable)|None|["500000000000000003"]|
 
 Example input:
-
 ```
 {
   "account_ids": [
@@ -897,7 +957,6 @@ This action is used to reload an agent module (applies to Windows agents only).
 |module|string|None|True|Agent module to reload|['monitor', 'static', 'agent', 'log']|monitor|
 
 Example input:
-
 ```
 {
   "filter": {
@@ -935,7 +994,6 @@ This action is used to summary of agents by numbers.
 |site_ids|[]string|None|False|List of Site IDs to filter by|None|["500000000000000000"]|
 
 Example input:
-
 ```
 {
   "account_ids": [
@@ -982,7 +1040,6 @@ This action is used to retrieve running applications for a specific agent.
 |ids|[]string|None|True|Agent ID list|None|["1000000000000000000"]|
 
 Example input:
-
 ```
 {
   "ids": [
@@ -1011,7 +1068,6 @@ Note that when attempting to unblacklist a SHA1 hash by setting `blacklist_state
 |hash|string|None|True|Create a blacklist item from a SHA1 hash|None|3395856ce81f2b7382dee72602f798b642f14140|
 
 Example input:
-
 ```
 {
   "blacklist_state": true,
@@ -1047,7 +1103,6 @@ This action is used to add hashed content to global blacklist. The input makes u
 |hash|string|None|True|Content hash to add to blacklist|None|3395856ce81f2b7382dee72602f798b642f14140|
 
 Example input:
-
 ```
 {
   "hash": "3395856ce81f2b7382dee72602f798b642f14140"
@@ -1085,7 +1140,6 @@ This action is used to create a threat from an IOC event.
 |path|string|None|False|Path|None|path|
 
 Example input:
-
 ```
 {
   "agentId": "1000000000000000000",
@@ -1123,7 +1177,6 @@ This action is used to retrieve agent details.
 |operational_state|string|Any|False|Agent operational state|['Any', 'na', 'fully_disabled', 'partially_disabled', 'disabled_error']|na|
 
 Example input:
-
 ```
 {
   "agent": "hostname123",
@@ -1351,7 +1404,6 @@ This action is used to mark a threat as resolved.
 |whitening_option|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|path|
 
 Example input:
-
 ```
 {
   "target_scope": "site",
@@ -1387,7 +1439,6 @@ This action is used to mark a suspicious threat as a threat.
 |whitening_option|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|path|
 
 Example input:
-
 ```
 {
   "target_scope": "site",
@@ -1422,7 +1473,6 @@ This action is used to apply a mitigation action to a threat.
 |threat_id|string|None|True|ID of a threat|None|1000000000000000000|
 
 Example input:
-
 ```
 {
   "action": "quarantine",
@@ -1455,7 +1505,6 @@ This action is the account name available for this account.
 |name|string|None|True|Account Name to validate|None|example|
 
 Example input:
-
 ```
 {
   "name": "example"
@@ -1490,7 +1539,6 @@ This action is used to isolate (quarantine) endpoint from the network.
 |whitelist|[]string|None|False|This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs|None|["198.51.100.100", "hostname123", "901345720792880606", "28db47168fa54f89aeed99769ac8d4dc"]|
 
 Example input:
-
 ```
 {
   "agent": "hostname123",
@@ -1540,7 +1588,6 @@ Note that retrieving all active agents can return a very large amount of data de
 |operational_state|string|Any|False|Agent operational state|['Any', 'na', 'fully_disabled', 'partially_disabled', 'disabled_error']|na|
 
 Example input:
-
 ```
 {
   "agent": "hostname123",
@@ -1676,7 +1723,6 @@ This trigger is used to get threats.
 |resolved|boolean|None|False|Include resolved threats|None|True|
 
 Example input:
-
 ```
 {
   "agent_is_active": true,
@@ -1989,6 +2035,7 @@ To convert `threat` into an array use Type Converter Plugin
 
 # Version History
 
+* 8.1.0 - Added New actions: Fetch file for agent ID and Run remote script
 * 8.0.1 - Search Agents: Remove duplicate results when Case Sensitive is false
 * 8.0.0 - Connection: Added Service user (API only user type) authentication | Removed Basic Authentication
 * 7.1.0 - Update for Blacklist action: Fix for unblocked action | Update for Quarantine action: unification of the output data when action fails | Add troubleshooting information about use Type Converter | Mark as Benign action: update description 
