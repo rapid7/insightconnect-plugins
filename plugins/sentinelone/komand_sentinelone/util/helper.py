@@ -17,7 +17,7 @@ class BlacklistMessage:
     not_exists = "The given hash does not exist"
 
 
-def check_password_meets_requirements(password:str) -> Union[None, PluginException]:
+def check_password_meets_requirements(password: str) -> Union[None, PluginException]:
     """
     A method to determine if password meets required format (minimum length and no whitespace)
     :param password: The password to check
