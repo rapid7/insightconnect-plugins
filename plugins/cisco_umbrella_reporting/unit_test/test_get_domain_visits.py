@@ -33,7 +33,7 @@ class TestGetDomainVisits(TestCase):
     @mock.patch("requests.request", side_effect=mock_request_200)
     def test_get_domain_visits(self, other_arg):
         response = self.action.run()
-        expected_response = {'domain_visits': []}
+        expected_response = {"domain_visits": []}
 
         self.assertEqual(response, expected_response)
 
