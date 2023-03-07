@@ -1,15 +1,15 @@
 {
-	"spec": "108072484d2d9cfff1b9a8ca2085b2ab",
-	"manifest": "d5208774f593a202d8baaedeee09a504",
-	"setup": "baddfd804e48d37b36c5cf9dc1b9d7d1",
+	"spec": "4cf203a105cac74ce386f472c43c98e0",
+	"manifest": "791ba9e23a1a12235b806b742c5cf326",
+	"setup": "fe4bd61e00b040d3508d1ceb03f25c24",
 	"schemas": [
 		{
 			"identifier": "dAdd/schema.py",
-			"hash": "ed3988c3070feb1d0d286c3bb35655a2"
+			"hash": "757efd2dfe7390c28ed659265324d48e"
 		},
 		{
 			"identifier": "dDelete/schema.py",
-			"hash": "6c97137984c977e43413460370aa00b6"
+			"hash": "0ef3981a395a15481a9ab0a96fc8510b"
 		},
 		{
 			"identifier": "dGet/schema.py",
@@ -17,31 +17,23 @@
 		},
 		{
 			"identifier": "dlCreate/schema.py",
-			"hash": "584a5a2009b4b96a16a88f5a618d44b0"
+			"hash": "ed5875f06260d30b1057fc1dc885ce1f"
 		},
 		{
 			"identifier": "dlDelete/schema.py",
 			"hash": "49c85c9eb1464be559ef5510f16d6183"
 		},
 		{
-			"identifier": "dlFilterAll/schema.py",
-			"hash": "9abcdf1754e29f1b51aea8950ff4213a"
-		},
-		{
 			"identifier": "dlGet/schema.py",
-			"hash": "90af2d552c4d665b720b266a04b2df5c"
+			"hash": "c8069e82f762e70535ea68029706af00"
 		},
 		{
 			"identifier": "dlGetAll/schema.py",
-			"hash": "ee9f54f3019063f917f1bf873dd729da"
-		},
-		{
-			"identifier": "dlGetByName/schema.py",
-			"hash": "f7d1cdbc71d5df84bd90cfadaaa0e7c7"
+			"hash": "8dfe022c7dfd86cb7ada9f42e32ca346"
 		},
 		{
 			"identifier": "dlPatch/schema.py",
-			"hash": "81536a3345455730da1c76c169eeeb74"
+			"hash": "3b61bcc9cea579d4ff952a2845498d40"
 		},
 		{
 			"identifier": "connection/schema.py",
