@@ -81,6 +81,9 @@ Example input:
 Example output:
 
 ```
+{
+  "affected": 2
+}
 ```
 
 #### Fetch File
