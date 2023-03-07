@@ -23,8 +23,8 @@ def check_password_meets_requirements(password: str) -> Union[None, PluginExcept
     A method to determine if password meets required format (minimum length and no whitespace)
     :param password: The password to check
     """
-    if len(password) <= 10 or " " in password:
+    if len(password) <= MIN_PASSWORD_LENGTH or " " in password:
         raise PluginException(
             cause="Invalid password.",
-            assistance="Password must have more than 10 characters and cannot contain whitespace.",
+            assistance=f"Password must have more than {MIN_PASSWORD_LENGTH} characters and cannot contain whitespace.",
         )
