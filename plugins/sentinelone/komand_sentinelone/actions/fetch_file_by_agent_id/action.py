@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from .schema import FetchFileByAgentIdInput, FetchFileByAgentIdOutput, Input, Output, Component
 from insightconnect_plugin_runtime.exceptions import PluginException
+from komand_sentinelone.util.helper import check_password_meets_requirements
 
 # Custom imports below
 
@@ -19,11 +20,8 @@ class FetchFileByAgentId(insightconnect_plugin_runtime.Action):
         password = params.get(Input.PASSWORD)
         file_path = params.get(Input.FILE_PATH)
 
-        if len(password) <= 10 or " " in password:
-            raise PluginException(
-                cause="Invalid password.",
-                assistance="Password must have more than 10 characters and cannot contain whitespace.",
-            )
+        if password:
+            check_password_meets_requirements(password)
 
         response = self.connection.fetch_file_by_agent_id(agent_id, file_path, password)
 

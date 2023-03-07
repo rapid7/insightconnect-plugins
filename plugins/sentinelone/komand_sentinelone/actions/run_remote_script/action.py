@@ -1,6 +1,12 @@
 import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import RunRemoteScriptInput, RunRemoteScriptOutput, Input, Output, Component
+from komand_sentinelone.util.constants import (
+    SCRIPT_TIMEOUT_LOWER_LIMIT,
+    SCRIPT_TIMEOUT_UPPER_LIMIT,
+    SCRIPT_TIMEOUT_DEFAULT,
+)
+from komand_sentinelone.util.helper import check_password_meets_requirements
 
 # Custom imports below
 
@@ -29,19 +35,15 @@ class RunRemoteScript(insightconnect_plugin_runtime.Action):
                 assistance="Please provide a task description for the script.",
             )
 
-        script_timeout = params.get(Input.TIMEOUT, 3600)
-        if script_timeout < 60 or script_timeout > 172800:
+        script_timeout = params.get(Input.TIMEOUT, SCRIPT_TIMEOUT_DEFAULT)
+        if script_timeout < SCRIPT_TIMEOUT_LOWER_LIMIT or script_timeout > SCRIPT_TIMEOUT_UPPER_LIMIT:
             # Timeout outside of allowed parameters - use default value instead
-            script_timeout = 3600
+            script_timeout = SCRIPT_TIMEOUT_DEFAULT
 
         input_params = params.get(Input.INPUT_PARAMETERS, "")
         password = params.get(Input.PASSWORD, "")
         if password:
-            if len(password) <= 10 or " " in password:
-                raise PluginException(
-                    cause="Invalid password.",
-                    assistance="Password must have more than 10 characters and cannot contain whitespace.",
-                )
+            check_password_meets_requirements(password)
 
         output_dest = params.get(Input.OUTPUT_DESTINATION, "")
         output_dir = params.get(Input.OUTPUT_DIRECTORY, "")
