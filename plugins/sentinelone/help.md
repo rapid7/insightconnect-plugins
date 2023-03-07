@@ -34,7 +34,6 @@ The connection configuration accepts the following parameters:
 |url|string|None|True|SentinelOne Console URL|None|https://example.com|
 
 Example input:
-
 ```
 {
   "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
@@ -67,7 +66,6 @@ This action is used to run a remote script.
 |timeout|integer|3600|False|Script runtime timeout (in seconds) for current execution (Value between 60 and 172800 seconds)|None|3600|
 
 Example input:
-
 ```
 {
   "output_destination": "None"
@@ -98,7 +96,6 @@ This action is used to fetch file for a specific agent id.
 |password|string|None|True|File encryption password, min. length 10 characters and cannot contain whitespace|None|MySecretPass123!|
 
 Example input:
-
 ```
 {
   "agent_id": "1000000000000000000",
@@ -132,7 +129,6 @@ This action is used to update incident status.
 |type|string|None|True|Type of incidents|['threats', 'alerts']|threats|
 
 Example input:
-
 ```
 {
   "incident_ids": [
@@ -171,7 +167,6 @@ This action is used to update analyst verdict.
 |type|string|None|True|Type of incidents|['threats', 'alerts']|threats|
 
 Example input:
-
 ```
 {
   "analyst_verdict": "true positive",
@@ -211,7 +206,6 @@ This action is used to get Deep Visibility results from the query that matches t
 |sub_query|string|None|False|Sub query to run on the data that was already pulled|None|AgentName IS NOT EMPTY|
 
 Example input:
-
 ```
 {
   "event_type": "Registry Key Create",
@@ -391,7 +385,6 @@ This action is used to get all Deep Visibility events from a queryId.
 |sub_query|string|None|False|Sub query to run on the data that was already pulled|None|AgentName IS NOT EMPTY|
 
 Example input:
-
 ```
 {
   "limit": 10,
@@ -568,7 +561,6 @@ This action is used to stop a Deep Visibility Query by queryId.
 |query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|qd94e330ac025d525b5948bdf897b955e|
 
 Example input:
-
 ```
 {
   "query_id": "qd94e330ac025d525b5948bdf897b955e"
@@ -602,7 +594,6 @@ This action is used to get that status of a Deep Visibility Query.
 |query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|qd94e330ac025d525b5948bdf897b955e|
 
 Example input:
-
 ```
 {
   "query_id": "qd94e330ac025d525b5948bdf897b955e"
@@ -648,7 +639,6 @@ This action is used to start a Deep Visibility Query and get the queryId. You ca
 |to_date|string|None|True|Events created before or at this timestamp|None|2021-03-20 04:49:26.257525|
 
 Example input:
-
 ```
 {
   "account_ids": [
@@ -706,7 +696,6 @@ This action is used to enable agents that match the filter.
 |reboot|boolean|None|True|Set true to reboot the endpoint, false to skip rebooting|None|True|
 
 Example input:
-
 ```
 {
   "agent": "hostname123",
@@ -874,7 +863,6 @@ This action is used to get a list of activities.
 |user_ids|[]string|None|False|The user who invoked the activity (If applicable)|None|["500000000000000003"]|
 
 Example input:
-
 ```
 {
   "account_ids": [
@@ -966,7 +954,6 @@ This action is used to reload an agent module (applies to Windows agents only).
 |module|string|None|True|Agent module to reload|['monitor', 'static', 'agent', 'log']|monitor|
 
 Example input:
-
 ```
 {
   "filter": {
@@ -1004,7 +991,6 @@ This action is used to summary of agents by numbers.
 |site_ids|[]string|None|False|List of Site IDs to filter by|None|["500000000000000000"]|
 
 Example input:
-
 ```
 {
   "account_ids": [
@@ -1051,7 +1037,6 @@ This action is used to retrieve running applications for a specific agent.
 |ids|[]string|None|True|Agent ID list|None|["1000000000000000000"]|
 
 Example input:
-
 ```
 {
   "ids": [
@@ -1080,7 +1065,6 @@ Note that when attempting to unblacklist a SHA1 hash by setting `blacklist_state
 |hash|string|None|True|Create a blacklist item from a SHA1 hash|None|3395856ce81f2b7382dee72602f798b642f14140|
 
 Example input:
-
 ```
 {
   "blacklist_state": true,
@@ -1116,7 +1100,6 @@ This action is used to add hashed content to global blacklist. The input makes u
 |hash|string|None|True|Content hash to add to blacklist|None|3395856ce81f2b7382dee72602f798b642f14140|
 
 Example input:
-
 ```
 {
   "hash": "3395856ce81f2b7382dee72602f798b642f14140"
@@ -1154,7 +1137,6 @@ This action is used to create a threat from an IOC event.
 |path|string|None|False|Path|None|path|
 
 Example input:
-
 ```
 {
   "agentId": "1000000000000000000",
@@ -1192,7 +1174,6 @@ This action is used to retrieve agent details.
 |operational_state|string|Any|False|Agent operational state|['Any', 'na', 'fully_disabled', 'partially_disabled', 'disabled_error']|na|
 
 Example input:
-
 ```
 {
   "agent": "hostname123",
@@ -1420,7 +1401,6 @@ This action is used to mark a threat as resolved.
 |whitening_option|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|path|
 
 Example input:
-
 ```
 {
   "target_scope": "site",
@@ -1456,7 +1436,6 @@ This action is used to mark a suspicious threat as a threat.
 |whitening_option|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|path|
 
 Example input:
-
 ```
 {
   "target_scope": "site",
@@ -1491,7 +1470,6 @@ This action is used to apply a mitigation action to a threat.
 |threat_id|string|None|True|ID of a threat|None|1000000000000000000|
 
 Example input:
-
 ```
 {
   "action": "quarantine",
@@ -1524,7 +1502,6 @@ This action is the account name available for this account.
 |name|string|None|True|Account Name to validate|None|example|
 
 Example input:
-
 ```
 {
   "name": "example"
@@ -1559,7 +1536,6 @@ This action is used to isolate (quarantine) endpoint from the network.
 |whitelist|[]string|None|False|This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs|None|["198.51.100.100", "hostname123", "901345720792880606", "28db47168fa54f89aeed99769ac8d4dc"]|
 
 Example input:
-
 ```
 {
   "agent": "hostname123",
@@ -1609,7 +1585,6 @@ Note that retrieving all active agents can return a very large amount of data de
 |operational_state|string|Any|False|Agent operational state|['Any', 'na', 'fully_disabled', 'partially_disabled', 'disabled_error']|na|
 
 Example input:
-
 ```
 {
   "agent": "hostname123",
@@ -1745,7 +1720,6 @@ This trigger is used to get threats.
 |resolved|boolean|None|False|Include resolved threats|None|True|
 
 Example input:
-
 ```
 {
   "agent_is_active": true,
