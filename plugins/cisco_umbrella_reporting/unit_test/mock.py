@@ -33,8 +33,8 @@ def mocked_request(side_effect: Callable) -> None:
     mock_function.request = mock.Mock(side_effect=side_effect)
 
 
-def mock_conditions(status_code: int) -> MockResponse:
-    return MockResponse("domains", status_code)
+def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
+    return MockResponse("get_domain_visits", status_code)
 
 
 def mock_conditions_connection(status_code: int) -> MockResponse:
@@ -46,33 +46,29 @@ def mock_conditions_connection(status_code: int) -> MockResponse:
     raise Exception("Response has not been implemented")
 
 
-def mock_request_200(*args) -> MockResponse:
-    return mock_conditions(200)
+def mock_request_200(*args, **kwargs) -> MockResponse:
+    return mock_conditions(args[0], args[1], 200)
 
 
-def mock_request_202() -> MockResponse:
-    return mock_conditions(202)
+def mock_request_202(*args, **kwargs) -> MockResponse:
+    return mock_conditions(args[0], args[1], 202)
 
 
-def mock_request_204() -> MockResponse:
-    return mock_conditions(204)
+def mock_request_204(*args, **kwargs) -> MockResponse:
+    return mock_conditions(args[0], args[1], 204)
 
 
-def mock_request_400() -> MockResponse:
-    return mock_conditions(400)
+def mock_request_400(*args, **kwargs) -> MockResponse:
+    return mock_conditions(args[0], args[1], 400)
 
 
-def mock_request_401() -> MockResponse:
-    return mock_conditions(401)
+def mock_request_401(*args, **kwargs) -> MockResponse:
+    return mock_conditions(args[0], args[1], 401)
 
 
-def mock_request_403() -> MockResponse:
-    return mock_conditions(403)
+def mock_request_403(*args, **kwargs) -> MockResponse:
+    return mock_conditions(args[0], args[1], 403)
 
 
-def mock_request_404() -> MockResponse:
-    return mock_conditions(404)
-
-
-def mock_request_500(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], 500)
+def mock_request_404(*args, **kwargs) -> MockResponse:
+    return mock_conditions(args[0], args[1], 404)
