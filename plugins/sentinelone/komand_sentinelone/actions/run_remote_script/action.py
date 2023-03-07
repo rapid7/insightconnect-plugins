@@ -19,14 +19,14 @@ class RunRemoteScript(insightconnect_plugin_runtime.Action):
         script_id = params.get(Input.SCRIPT_ID)
         if not script_id:
             raise PluginException(
-                cause=f"No script id provided to execute.",
-                assistance=f"Please select a script to execute from the SentinelOne console.",
+                cause="No script id provided to execute.",
+                assistance="Please select a script to execute from the SentinelOne console.",
             )
         task_description = params.get(Input.TASK_DESCRIPTION)
         if not task_description:
             raise PluginException(
-                cause=f"No task description provided.",
-                assistance=f"Please provide a task description for the script.",
+                cause="No task description provided.",
+                assistance="Please provide a task description for the script.",
             )
 
         script_timeout = params.get(Input.TIMEOUT, 3600)
@@ -47,8 +47,8 @@ class RunRemoteScript(insightconnect_plugin_runtime.Action):
         output_dir = params.get(Input.OUTPUT_DIRECTORY, "")
         if output_dest == "Local" and not output_dir:
             raise PluginException(
-                cause=f"Local output destination selected but no output directory provided.",
-                assistance=f"Please provide an output directory.",
+                cause="Local output destination selected but no output directory provided.",
+                assistance="Please provide an output directory.",
             )
 
         user_filter = {}
