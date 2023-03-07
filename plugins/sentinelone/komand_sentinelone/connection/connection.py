@@ -168,7 +168,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         response = self._call_api(
             "POST", f"agents/{agent_id}/actions/fetch-files", {"data": {"password": password, "files": [file_path]}}
         )
-        if len(response.get("errors", [])) == 0:
+        if not len(response.get("errors", [])):
             return True
 
         errors = "\n".join(response.get("errors"))
@@ -186,7 +186,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             {"filter": user_filter, "data": data},
         )
         affected = 0
-        if len(response.get("errors", [])) == 0:
+        if not len(response.get("errors", [])):
             returned_data = response.get("data", [])
             if returned_data:
                 affected = returned_data["affected"]
