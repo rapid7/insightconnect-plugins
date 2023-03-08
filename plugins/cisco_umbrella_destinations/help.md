@@ -266,8 +266,8 @@ Example input:
 ##### Output
 
 |Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|success|destinationList|None|True|Successful returned value|None|None|
+|----|----|-------|--------|-----------|----|-------|
+| success | destinationList | None  | True   | Successful returned value | None | None  |
 
 Example output:
 
@@ -469,6 +469,10 @@ This action is used to rename a destination list.
 Example input:
 
 ```
+{
+  "destinationListId": 12345678,
+  "name": "New list"
+}
 ```
 
 ##### Output
