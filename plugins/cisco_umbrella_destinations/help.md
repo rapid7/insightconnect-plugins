@@ -1,7 +1,6 @@
 # Description
 
-Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their
-organization.
+Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization.
 
 # Key Features
 
@@ -15,7 +14,7 @@ organization.
 
 # Supported Product Versions
 
-* 2022-03-08
+* 2023-03-06
 
 # Documentation
 
