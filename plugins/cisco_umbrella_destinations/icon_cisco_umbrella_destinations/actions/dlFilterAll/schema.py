@@ -48,7 +48,7 @@ class DlFilterAllInput(insightconnect_plugin_runtime.Input):
     },
     "markedForDeletion": {
       "type": "boolean",
-      "title": "Marked For Deletion",
+      "title": "Marked for Deletion",
       "description": "Boolean value indicating if marked for deletion",
       "order": 4
     }
