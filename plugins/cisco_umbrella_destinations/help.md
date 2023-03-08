@@ -1,6 +1,7 @@
 # Description
 
-Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization.
+Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their
+organization.
 
 # Key Features
 
@@ -41,6 +42,61 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Filter Through All Destination Lists
+
+This action is used to filter and Retrieve all destination lists of organization.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|access|string|None|False|Can be allow or block|['allow', 'block']|allow|
+|isGlobal|boolean|None|False|Boolean value indicating global state|None|True|
+|isMSPDefault|boolean|None|False|Boolean value indicating if MSP Default|None|True|
+|markedForDeletion|boolean|None|False|Boolean value indicating if marked for deletion|None|True|
+
+Example input:
+
+```
+{
+  "access": "allow",
+  "isGlobal": true,
+  "isMSPDefault": true,
+  "markedForDeletion": true
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|data|[]dlCollection|False|List of all destination lists|
+
+Example output:
+
+```
+{
+    "access": "allow",
+    "bundleTypeId": 1,
+    "createdAt": "2021-12-06T16:03:49+0000",
+    "id": 15609742,
+    "isGlobal": false,
+    "isMspDefault": false,
+    "markedForDeletion": false,
+    "meta": {
+      "applicationCount": 0,
+      "destinationCount": 4,
+      "domainCount": 3,
+      "ipv4Count": 1,
+      "urlCount": 0
+    },
+    "modifiedAt": "2022-01-14T15:09:24+0000",
+    "name": "ABCList",
+    "organizationId": 2372338,
+    "thirdpartyCategoryId": null
+}
+```
 
 #### Add Destination to Destination List
 
@@ -183,13 +239,14 @@ Example output:
 ]
 ```
 
-
 #### Get Destination List by Name
+
 Get destination list by name
+
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|----|----|-------|--------|-----------|----|-------|
 |name|string|None|True|Title for the destination list|None|new list|
 
 Example input:
@@ -199,6 +256,7 @@ Example input:
   "name": "new list"
 }
 ```
+
 ##### Output
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -508,13 +566,13 @@ _This plugin does not contain any triggers._
 |Ipv4Count|integer|False|Total number of IP's in a destination list|
 |UrlCount|integer|False|Total number of URLs in a destination list|
 
-
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.1.0 - Added dlGetByName and dlFilterAll action
 * 3.0.1 - Update help notes for API Key management
 * 3.0.0 - Updated output for 'typeOf' to reflect update to Cisco API
 * 2.0.0 - Updated output for dAdd & dDelete - Removed data element in the response

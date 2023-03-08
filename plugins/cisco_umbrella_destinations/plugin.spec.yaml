@@ -113,7 +113,7 @@ types:
       type: boolean
       required: false
     markedForDeletion:
-      title: Marked For Deletion
+      title: Marked for Deletion
       description: Whether or not destination list is marked for deletion
       example: false
       type: boolean

@@ -78,7 +78,7 @@ class DlGetAllOutput(insightconnect_plugin_runtime.Output):
         },
         "markedForDeletion": {
           "type": "boolean",
-          "title": "Marked For Deletion",
+          "title": "Marked for Deletion",
           "description": "Whether or not destination list is marked for deletion",
           "order": 10
         },

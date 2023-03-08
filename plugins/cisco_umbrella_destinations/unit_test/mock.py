@@ -49,7 +49,7 @@ class MockResponse:
 
     def json(self):
         with open(
-                os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json.resp")
+            os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json.resp")
         ) as file:
             return json.load(file)
 

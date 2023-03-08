@@ -41,7 +41,7 @@ class TestDlFilterAll(TestCase):
             Input.ACCESS: STUB_ACCESS,
             Input.ISMSPDEFAULT: STUB_MSP_DEFAULT,
             Input.ISGLOBAL: STUB_IS_GLOBAL,
-            Input.MARKEDFORDELETION: STUB_DELETION
+            Input.MARKEDFORDELETION: STUB_DELETION,
         }
 
     @mock.patch("requests.request", side_effect=mock_request_200)
