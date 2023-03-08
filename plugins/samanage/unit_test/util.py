@@ -22,7 +22,6 @@ class Util:
             "token": {"secretKey": "Examplesecretkey"},
             "ssl_verify": ssl_verify,
         }
-        breakpoint()
         default_connection.connect(params)
         action.connection = default_connection
         action.logger = logging.getLogger("action logger")
@@ -60,7 +59,7 @@ class Util:
 
             def raise_for_status(self):
                 pass
-        breakpoint()
+
         if kwargs.get("url") == "https://api.samanage.com/users.json" and kwargs.get("verb") == "POST":
             return MockResponse("create_user", 200)
         if kwargs.get("url") == "https://api.samanage.com/users/5353.json" and kwargs.get("verb") == "DELETE":
@@ -73,6 +72,8 @@ class Util:
             return MockResponse("assign_incident", 200)
         if kwargs.get("url") == "https://api.samanage.com/incidents.json" and kwargs.get("verb") == "POST":
             return MockResponse("create_incident", 200)
+        if kwargs.get("url") == "https://api.samanage.com/incidents.json" and kwargs.get("ssl_verify") == False:
+            return MockResponse("list_incidents", 200)
         if kwargs.get("url") == "https://api.samanage.com/incidents.json":
             return MockResponse("list_incidents", 200)
         if kwargs.get("url") == "https://api.samanage.com/incidents/55555.json":
@@ -95,4 +96,4 @@ class Util:
 
 
 def mock_request_200(*args, **kwargs):
-    return Util.mocked_requests(verb=args[0], url=args[1], status_code=200)
+    return Util.mocked_requests(verb=args[0], url=args[1], ssl_verify= kwargs.get("verify"), status_code=200)

@@ -175,9 +175,7 @@ class SamanageAPI:
                 '-H "Content-Type: multipart/form-data" {} '
                 "-X POST {}attachments.json"
             ).format(self.token, incident_id, file_path, ssl_verify_option, self.api_url)
-            breakpoint()
             result = insightconnect_plugin_runtime.helper.exec_command(curl_command)
-            breakpoint()
             shutil.rmtree(temp_dir)
         except Exception as e:
             raise PluginException(
