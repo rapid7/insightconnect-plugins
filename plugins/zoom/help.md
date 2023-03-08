@@ -228,7 +228,7 @@ Example output:
 
 ### Tasks
 
-#### Monitor Sign In and Out Activity
+#### Monitor Sign in and out Activity
 
 This task is used to monitor sign in and out activity.
 
@@ -308,6 +308,8 @@ _This plugin does not contain any troubleshooting information._
 * 1.0.0 - Initial plugin
 
 # Links
+
+* [Zoom](https://zoom.us/)
 
 ## References
 

@@ -366,7 +366,7 @@ triggers:
 
 tasks:
   monitor_sign_in_out_activity:
-    title: Monitor Sign In and Out Activity
+    title: Monitor Sign in and out Activity
     description: Monitor sign in and out activity
     input: null
     output:
