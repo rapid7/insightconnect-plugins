@@ -1,11 +1,11 @@
-import komand
-from .schema import CategorizationInput, CategorizationOutput
+import insightconnect_plugin_runtime
+from .schema import CategorizationInput, CategorizationOutput, Input, Output
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class Categorization(komand.Action):
+class Categorization(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="categorization",
@@ -16,14 +16,14 @@ class Categorization(komand.Action):
 
     def run(self, params={}):
 
-        domains = params.get("domains")
+        domains = params.get(Input.DOMAINS)
         if len(domains) == 1:
             domains = str(domains[0])
 
         try:
             remoteCategories = self.connection.investigate.categorization(domains, labels=True)
-        except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+        except Exception as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
         categories = []
         for key, value in remoteCategories.items():
@@ -36,7 +36,4 @@ class Categorization(komand.Action):
                 }
             )
 
-        return {"categories": categories}
-
-    def test(self):
-        return {"categories": []}
+        return {Output.CATEGORIES: categories}

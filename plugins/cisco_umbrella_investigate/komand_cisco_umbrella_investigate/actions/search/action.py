@@ -1,13 +1,13 @@
-import komand
-from .schema import SearchInput, SearchOutput
+import insightconnect_plugin_runtime
+from .schema import SearchInput, SearchOutput, Input, Output
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 import re
 import datetime
 
 
-class Search(komand.Action):
+class Search(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="search",
@@ -17,10 +17,10 @@ class Search(komand.Action):
         )
 
     def run(self, params={}):
-        expression = params.get("expression")
-        start = params.get("start")
-        limit = params.get("limit", None)
-        include_category = params.get("include_category", False)
+        expression = params.get(Input.EXPRESSION)
+        start = params.get(Input.START)
+        limit = params.get(Input.LIMIT)
+        include_category = params.get(Input.INCLUDE_CATEGORY)
 
         if not limit or limit == 0:
             limit = 1000
@@ -50,15 +50,6 @@ class Search(komand.Action):
             search = self.connection.investigate.search(
                 expression, start=start, limit=limit, include_category=include_category
             )
-        except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+        except Exception as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
         return search
-
-    def test(self):
-        return {
-            "expression": "",
-            "limit": 0,
-            "matches": [],
-            "moreDataAvailable": False,
-            "totalResults": 0,
-        }

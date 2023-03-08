@@ -13,7 +13,7 @@ This plugin utilizes the [Python OpenDNS Investigate](https://github.com/opendns
 
 # Requirements
 
-* Cisco Umbrella Investigate API key
+* Cisco Umbrella Investigate API key (There is a link in the Links section that describes how to create an Investigate API Key)
 
 # Documentation
 
@@ -25,7 +25,9 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|Enter API key e.g. 1452d258-7c12-7c12-7c12-1452d25874c2|None|1452d258-7c12-7c12-7c12-1452d25874c2|
 
-The API key is a UUID-v4 [customer key](https://docs.umbrella.com/developer/enforcement-api/authentication-and-versioning/).
+The API key is a UUID-v4.
+
+*Note that this plugin uses the Investigate API key. There is a link [Create Investigate API Key](https://developer.cisco.com/docs/cloud-security/#!investigate-authentication/prerequisites) that describes how to create an Investigate API token.*
 
 Example input:
 
@@ -1438,6 +1440,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.1.4 - Updated the documentation and connection test
 * 3.1.3 - Fix invalid character in description
 * 3.1.2 - Replace python2 code to python3 in investigate.py file
 * 3.1.1 - Return information from API when a PluginException has occurred to improve error messaging
@@ -1457,3 +1460,4 @@ This plugin does not contain any troubleshooting information.
 * [Cisco Umbrella Investigate](https://learn-umbrella.cisco.com/threat-intelligence/cisco-umbrella-investigate-overview)
 * [Python OpenDNS Investigate](https://github.com/opendns/pyinvestigate)
 * [Authentication](https://docs.umbrella.com/developer/enforcement-api/authentication-and-versioning/)
+* [Create Investigate API Key](https://developer.cisco.com/docs/cloud-security/#!investigate-authentication/prerequisites)
