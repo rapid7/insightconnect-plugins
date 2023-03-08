@@ -30,7 +30,7 @@ def update_id_values_to_integers(data):
                 if isinstance(value[index], dict):
                     update_id_values_to_integers(value[index])
                 elif is_key_field(key):
-                    value[index] = int(value[index])
+                    value[index] = int(element)
 
         else:
             if is_key_field(key):
