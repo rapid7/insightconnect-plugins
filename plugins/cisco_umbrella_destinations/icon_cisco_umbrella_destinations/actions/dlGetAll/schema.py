@@ -8,52 +8,15 @@ class Component:
 
 
 class Input:
-    ACCESS = "access"
-    ISGLOBAL = "isGlobal"
-    ISMSPDEFAULT = "isMSPDefault"
-    MARKEDFORDELETION = "markedForDeletion"
-
+    pass
 
 class Output:
     DATA = "data"
-
+    
 
 class DlGetAllInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
-   {
-  "type": "object",
-  "title": "Variables",
-  "properties": {
-    "access": {
-      "type": "string",
-      "title": "Access",
-      "description": "Can be allow or block",
-      "enum": [
-        "allow",
-        "block"
-      ],
-      "order": 1
-    },
-    "isGlobal": {
-      "type": "boolean",
-      "title": "Is Global",
-      "description": "Boolean value indicating global state",
-      "order": 2
-    },
-    "isMSPDefault": {
-      "type": "boolean",
-      "title": "Is MSP Default",
-      "description": "Boolean value indicating if MSP Default",
-      "order": 3
-    },
-    "markedForDeletion": {
-      "type": "boolean",
-      "title": "Marked For Deletion",
-      "description": "Boolean value indicating if marked for deletion",
-      "order": 4
-    }
-  }
-}
+   {}
     """)
 
     def __init__(self):
