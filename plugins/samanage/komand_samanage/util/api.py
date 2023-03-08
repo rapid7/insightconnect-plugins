@@ -26,11 +26,11 @@ def update_id_values_to_integers(data):
             update_id_values_to_integers(value)
         elif isinstance(value, list):
             # Item is a list - recursive use of function if dict else update any id fields
-            for i in range(0, len(value)):
-                if isinstance(value[i], dict):
-                    update_id_values_to_integers(value[i])
+            for index, element in enumerate(value):
+                if isinstance(value[index], dict):
+                    update_id_values_to_integers(value[index])
                 elif is_key_field(key):
-                    value[i] = int(value[i])
+                    value[index] = int(value[index])
 
         else:
             if is_key_field(key):
@@ -238,7 +238,7 @@ class SamanageAPI:
                 files=files,
                 verify=self.ssl_verify,
                 headers={
-                    f"X-Samanage-Authorization": "Bearer {self.token}",
+                    "X-Samanage-Authorization": f"Bearer {self.token}",
                     "Accept": "application/vnd.samanage.v2.1+json",
                 },
             )
