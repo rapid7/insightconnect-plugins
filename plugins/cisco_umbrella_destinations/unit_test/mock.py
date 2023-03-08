@@ -10,6 +10,10 @@ STUB_ORG_ID = "1234567"
 STUB_API_KEY = "9de5069c5afe602b2ea0a04b66beb2c0"
 STUB_DESTINATION_LIST_ID = "12345678"
 STUB_NAME = "Block For All"
+STUB_ACCESS = "block"
+STUB_IS_GLOBAL = False
+STUB_MSP_DEFAULT = False
+STUB_DELETION = False
 STUB_CONNECTION = {
     Input.API_KEY: {"secretKey": STUB_API_KEY},
     Input.API_SECRET: {"secretKey": STUB_API_KEY},
@@ -45,7 +49,7 @@ class MockResponse:
 
     def json(self):
         with open(
-            os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json.resp")
+                os.path.join(os.path.dirname(os.path.realpath(__file__)), f"responses/{self.filename}.json.resp")
         ) as file:
             return json.load(file)
 
