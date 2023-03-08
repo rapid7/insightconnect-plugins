@@ -17,7 +17,6 @@ class Util:
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
         params = {
-
             "eu_customer": False,
             "token": {"secretKey": "Examplesecretkey"},
             "ssl_verify": ssl_verify,
@@ -96,4 +95,4 @@ class Util:
 
 
 def mock_request_200(*args, **kwargs):
-    return Util.mocked_requests(verb=args[0], url=args[1], ssl_verify= kwargs.get("verify"), status_code=200)
+    return Util.mocked_requests(verb=args[0], url=args[1], ssl_verify=kwargs.get("verify"), status_code=200)

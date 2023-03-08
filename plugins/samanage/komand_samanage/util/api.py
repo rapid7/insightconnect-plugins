@@ -12,10 +12,7 @@ def is_key_field(key_to_check):
     """
     Check if the key passed in matches oen of the known key type fields
     """
-    if key_to_check == "id" or key_to_check.endswith("_id") or key_to_check.endswith("_ids"):
-        return True
-    else:
-        return False
+    return bool(key_to_check == "id" or key_to_check.endswith("_id") or key_to_check.endswith("_ids"))
 
 
 def update_id_values_to_integers(data):
@@ -61,7 +58,7 @@ class SamanageAPI:
         return response
 
     def get_incident(self, incident_id):
-        url = "incidents/{}".format(incident_id)
+        url = f"incidents/{incident_id}"
 
         response = self._call_api("GET", url, params={"layout": "long", "audit_archive": True})
         # Update response data to change ids to integers if necessary
