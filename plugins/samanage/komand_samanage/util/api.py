@@ -66,7 +66,7 @@ class SamanageAPI:
         return response
 
     def add_tags_to_incident(self, incident_id, tags):
-        url = "incidents/{}".format(incident_id)
+        url = f"incidents/{incident_id}"
         json = {"incident": {"add_to_tag_list": ", ".join(tags)}}
         response = self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
         # Update response data to change ids to integers if necessary
@@ -109,11 +109,11 @@ class SamanageAPI:
         return response
 
     def delete_incident(self, incident_id):
-        url = "incidents/{}".format(incident_id)
+        url = f"incidents/{incident_id}"
         return self._call_api("DELETE", url)
 
     def comment_incident(self, incident_id, body, is_private):
-        url = "incidents/{}/comments".format(incident_id)
+        url = f"incidents/{incident_id}/comments"
         json = {"comment": {"body": body, "is_private": is_private}}
 
         response = self._call_api("POST", url, json=json)
@@ -122,7 +122,7 @@ class SamanageAPI:
         return response
 
     def get_comments(self, incident_id):
-        url = "incidents/{}/comments".format(incident_id)
+        url = f"incidents/{incident_id}/comments"
 
         response = self._call_api("GET", url)
         # Update response data to change ids to integers if necessary
@@ -131,7 +131,7 @@ class SamanageAPI:
         return response
 
     def assign_incident(self, incident_id, assignee):
-        url = "incidents/{}".format(incident_id)
+        url = f"incidents/{incident_id}"
 
         json = {"incident": {"assignee": {"email": assignee}}}
         response = self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
@@ -140,7 +140,7 @@ class SamanageAPI:
         return response
 
     def change_incident_state(self, incident_id, state):
-        url = "incidents/{}".format(incident_id)
+        url = f"incidents/{incident_id}"
 
         json = {"incident": {"state": state}}
         response = self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
@@ -149,7 +149,7 @@ class SamanageAPI:
         return response
 
     def attach_file_to_incident(self, incident_id, attachment_bytes, attachment_name):
-        self.logger.info("Attaching a file to an incident {}".format(incident_id))
+        self.logger.info(f"Attaching a file to an incident {incident_id}")
         try:
             temp_dir = mkdtemp()
             file_path = os.path.join(temp_dir, attachment_name)
@@ -164,25 +164,25 @@ class SamanageAPI:
                 ssl_verify_option = "--insecure"
 
             curl_command = (
-                'curl -H "X-Samanage-Authorization: Bearer {}" '
+                f'curl -H "X-Samanage-Authorization: Bearer {self.token}" '
                 '-F "file[attachable_type]=Incident" '
-                '-F "file[attachable_id]={}" '
-                '-F "file[attachment]=@{}" '
+                f'-F "file[attachable_id]={incident_id}" '
+                '-F "file[attachment]=@{file_path}" '
                 '-H "Accept: application/vnd.samanage.v2.1+json" '
-                '-H "Content-Type: multipart/form-data" {} '
-                "-X POST {}attachments.json"
-            ).format(self.token, incident_id, file_path, ssl_verify_option, self.api_url)
+                f'-H "Content-Type: multipart/form-data" {ssl_verify_option} '
+                "-X POST {self.api_url}attachments.json"
+            )
             result = insightconnect_plugin_runtime.helper.exec_command(curl_command)
             shutil.rmtree(temp_dir)
-        except Exception as e:
+        except Exception as error:
             raise PluginException(
-                cause="Failed creating a temporary file: {}".format(e),
+                cause=f"Failed creating a temporary file: {error}",
                 assistance="Check if a temporary file can be created",
             )
 
         if result["rcode"] != 0:
             raise PluginException(
-                cause="Failure running curl command while attaching file: {}".format(result["stderr"]),
+                cause=f'Failure running curl command while attaching file: {result["stderr"]}',
                 assistance="Check if there are sufficient permissions for the curl command to run",
             )
 
@@ -192,7 +192,7 @@ class SamanageAPI:
             return attachment
         except json.JSONDecodeError:
             raise PluginException(
-                cause="Failure in return response while attaching file: {}".format(result["stdout"]),
+                cause=f'Failure in return response while attaching file: {result["stdout"]}',
                 assistance="Check if there are sufficient permissions for file attachment",
             )
 
@@ -221,12 +221,12 @@ class SamanageAPI:
         return response
 
     def delete_user(self, user_id):
-        url = "users/{}".format(user_id)
+        url = f"users/{user_id}"
         return self._call_api("DELETE", url)
 
     def _call_api(self, method, url, params=None, json=None, data=None, files=None):
-        api_url = "{}{}.json".format(self.api_url, url)
-        self.logger.info("Calling API URL {}".format(api_url))
+        api_url = f"{self.api_url}{url}.json"
+        self.logger.info(f"Calling API URL {api_url}")
 
         try:
             response = request(
@@ -238,7 +238,7 @@ class SamanageAPI:
                 files=files,
                 verify=self.ssl_verify,
                 headers={
-                    "X-Samanage-Authorization": "Bearer {}".format(self.token),
+                    f"X-Samanage-Authorization": "Bearer {self.token}",
                     "Accept": "application/vnd.samanage.v2.1+json",
                 },
             )
@@ -249,7 +249,7 @@ class SamanageAPI:
                 if not response.content:
                     raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
             raise PluginException(
-                cause="API returned an error: {} {}".format(response.status_code, response.content),
+                cause=f"API returned an error: {response.status_code} {response.content}",
                 assistance="Check input and retry. If this error continues contact support",
             )
         return insightconnect_plugin_runtime.helper.clean(response.json())
