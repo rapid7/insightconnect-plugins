@@ -42,10 +42,11 @@ def update_id_values_to_integers(data):
 
 
 class SamanageAPI:
-    def __init__(self, token, is_eu_customer, logger):
+    def __init__(self, token, is_eu_customer, ssl_verify, logger):
         self.token = token
         self.logger = logger
         self.api_url = "https://apieu.samanage.com/" if is_eu_customer else "https://api.samanage.com/"
+        self.ssl_verify = ssl_verify
 
     def list_incidents_check(self):
         # This function is to check that an API call can be successfully made  - no cleaning of the output is required
@@ -159,16 +160,24 @@ class SamanageAPI:
             with open(file_path, "w+b") as temp_file:
                 temp_file.write(b64decode(attachment_bytes))
 
+            # Use the --insecure option if ssl verification is false
+            if self.ssl_verify:
+                ssl_verify_option = ""
+            else:
+                ssl_verify_option = "--insecure"
+
             curl_command = (
                 'curl -H "X-Samanage-Authorization: Bearer {}" '
                 '-F "file[attachable_type]=Incident" '
                 '-F "file[attachable_id]={}" '
                 '-F "file[attachment]=@{}" '
                 '-H "Accept: application/vnd.samanage.v2.1+json" '
-                '-H "Content-Type: multipart/form-data" --insecure '
+                '-H "Content-Type: multipart/form-data" {} '
                 "-X POST {}attachments.json"
-            ).format(self.token, incident_id, file_path, self.api_url)
+            ).format(self.token, incident_id, file_path, ssl_verify_option, self.api_url)
+            breakpoint()
             result = insightconnect_plugin_runtime.helper.exec_command(curl_command)
+            breakpoint()
             shutil.rmtree(temp_dir)
         except Exception as e:
             raise PluginException(
@@ -232,6 +241,7 @@ class SamanageAPI:
                 data=data,
                 json=json,
                 files=files,
+                verify=self.ssl_verify,
                 headers={
                     "X-Samanage-Authorization": "Bearer {}".format(self.token),
                     "Accept": "application/vnd.samanage.v2.1+json",

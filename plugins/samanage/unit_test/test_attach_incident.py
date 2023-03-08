@@ -25,19 +25,18 @@ att = {
     "attachment_type": "attachment",
 }
 test_attachment = {"rcode": 0, "stdout": json.dumps(att)}
-
+expected_parameters = 'curl -H "X-Samanage-Authorization: Bearer Examplesecretkey" -F "file[attachable_type]=Incident" -F "file[attachable_id]=2134" -F "file[attachment]=@/var/folders/nz/ztdg17xn40b96w6l0yjydry40000gq/T/tmplwafpeig/Example attachment name" -H "Accept: application/vnd.samanage.v2.1+json" -H "Content-Type: multipart/form-data"  -X POST https://api.samanage.com/attachments.json'
 
 class TestAttachIncident(TestCase):
     def setUp(self) -> None:
         self.action = Util.default_connector(AttachIncident())
-
-    @patch("insightconnect_plugin_runtime.helper.exec_command", return_value=test_attachment)
     @patch("shutil.rmtree")
-    def test_attach_incident(self, plugin_mock, rm_mock):
+    @patch("insightconnect_plugin_runtime.helper.exec_command", return_value=test_attachment)
+    def test_attach_incident(self, plugin_mock, rm_mock ):
         response = self.action.run(
             {"incident_id": 2134, "attachment_bytes": "ABCD", "attachment_name": "Example attachment name"}
         )
-        plugin_mock.assert_called()
+        plugin_mock.assert_called_with(expected_parameters)
         rm_mock.assert_called()
         expected = {"attachment": att}
         self.assertEqual(response, expected)

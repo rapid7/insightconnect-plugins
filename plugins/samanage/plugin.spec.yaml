@@ -4,7 +4,7 @@ products: [insightconnect]
 name: samanage
 title: Solarwinds
 description: The Solarwinds plugin allows you to start workflows on new incidents, manage incidents, and manage users
-version: 2.0.0
+version: 3.0.0
 vendor: rapid7
 support: community
 supported_versions: ["API version 2.1"]
@@ -297,6 +297,13 @@ connection:
     type: boolean
     default: false
     example: false
+  ssl_verify:
+    title: SSL Verify
+    description: Boolean property used to decide whether to verify a TSL or SSL certificate
+    type: boolean
+    required: true
+    default: true
+    example: true
 triggers:
   new_incidents:
     title: New Incidents
