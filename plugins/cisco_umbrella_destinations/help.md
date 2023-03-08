@@ -107,7 +107,7 @@ This action is used to add a destination to the destination list.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|None|False|Information about domain|None|I trust this domain|
-|destination|string|None|True|Title for the destination list|None|https://example.com|
+|destination|string|None|True|Title for the destination list|None|www.example.com|
 |destinationListId|integer|None|True|Unique ID for destination list|None|12345678|
 
 Example input:
@@ -298,7 +298,7 @@ This action is used to create a destination list.
 |----|----|-------|--------|-----------|----|-------|
 |access|string|None|False|Can be allow or block|['allow', 'block']|allow|
 |comment|string|None|False|Information about the destination|None|Suspicious domain|
-|destination|string|None|False|Enter the destination here|None|https://example.com|
+|destination|string|None|False|Enter the destination here|None|www.example.com|
 |isGlobal|boolean|None|False|Boolean value indicating global state|None|True|
 |name|string|None|False|Label for the destination list|None|New list|
 |type|string|None|False|Can be DOMAIN, URL or IPV4|['DOMAIN', 'URL', 'IPV4']|URL|
