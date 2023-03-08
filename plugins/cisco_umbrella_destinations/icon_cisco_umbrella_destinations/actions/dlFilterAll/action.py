@@ -4,13 +4,10 @@ from insightconnect_plugin_runtime.helper import clean
 
 
 class DlFilterAll(insightconnect_plugin_runtime.Action):
-
     def __init__(self):
         super(self.__class__, self).__init__(
-            name='dlFilterAll',
-            description=Component.DESCRIPTION,
-            input=DlFilterAllInput(),
-            output=DlFilterAllOutput())
+            name="dlFilterAll", description=Component.DESCRIPTION, input=DlFilterAllInput(), output=DlFilterAllOutput()
+        )
 
     def run(self, params={}):
         result = self.connection.client.get_destination_lists().get("data", [])
