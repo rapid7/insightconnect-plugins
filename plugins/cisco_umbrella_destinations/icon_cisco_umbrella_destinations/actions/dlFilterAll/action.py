@@ -25,14 +25,14 @@ class DlFilterAll(insightconnect_plugin_runtime.Action):
 
         # Goes through each destination list and checks if all filters match
         for destination_list in result:
-            all_right = False
+            matches_or_empty = False
             for (value, value_name) in zip(values, value_names):
                 if value == destination_list.get(value_name) or value is None:
-                    all_right = True
+                    matches_or_empty = True
                 else:
-                    all_right = False
+                    matches_or_empty = False
                     break
-            if all_right:
+            if matches_or_empty:
                 output.append(destination_list)
 
         return {Output.DATA: output}
