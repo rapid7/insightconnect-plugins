@@ -1,0 +1,21 @@
+{
+  "accounts": [
+    {
+      "id": "9de5069c5afe602b2ea0a04b66beb2c0",
+      "name": "Example Account",
+      "type": "standard",
+      "settings": {
+        "enforceTwofactor": false,
+        "useAccountCustomNsByDefault": false
+      },
+      "legacyFlags": {
+        "enterpriseZoneQuota": {
+          "maximum": 0,
+          "current": 0,
+          "available": 0
+        }
+      },
+      "createdOn": "2023-01-05T22:57:42.821042Z"
+    }
+  ]
+}

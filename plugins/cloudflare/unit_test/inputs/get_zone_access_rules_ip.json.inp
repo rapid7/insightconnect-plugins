@@ -1,0 +1,12 @@
+{
+  "zoneId": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "notes": "Test",
+  "mode": "block",
+  "match": "any",
+  "configurationTarget": "IP address",
+  "configurationValue": "",
+  "page": 1,
+  "perPage": 20,
+  "order": "mode",
+  "direction": "desc"
+}
