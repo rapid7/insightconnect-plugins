@@ -1,0 +1,17 @@
+{
+  "result": [
+    {
+      "id": "9de5069c5afe602b2ea0a04b66beb2c0",
+      "name": "ip_list",
+      "description": "Test ip list",
+      "kind": "ip",
+      "num_items": 1,
+      "num_referencing_filters": 0,
+      "created_on": "2023-02-06T10:22:58Z",
+      "modified_on": "2023-02-06T10:23:34Z"
+    }
+  ],
+  "success": true,
+  "errors": [],
+  "messages": []
+}

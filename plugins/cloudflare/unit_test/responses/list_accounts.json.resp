@@ -1,0 +1,33 @@
+{
+  "result": [
+    {
+      "id": "9de5069c5afe602b2ea0a04b66beb2c0",
+      "name": "Example Account",
+      "type": "standard",
+      "settings": {
+        "enforce_twofactor": false,
+        "api_access_enabled": null,
+        "access_approval_expiry": null,
+        "use_account_custom_ns_by_default": false
+      },
+      "legacy_flags": {
+        "enterprise_zone_quota": {
+          "maximum": 0,
+          "current": 0,
+          "available": 0
+        }
+      },
+      "created_on": "2023-01-05T22:57:42.821042Z"
+    }
+  ],
+  "result_info": {
+    "page": 1,
+    "per_page": 100,
+    "total_pages": 1,
+    "count": 1,
+    "total_count": 1
+  },
+  "success": true,
+  "errors": [],
+  "messages": []
+}

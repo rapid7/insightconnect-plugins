@@ -1,0 +1,6 @@
+{
+  "name": "Example Account",
+  "page": 1,
+  "perPage": 1,
+  "direction": "asc"
+}
