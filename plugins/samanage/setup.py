@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="samanage-rapid7-plugin",
-      version="2.0.0",
+      version="3.0.0",
       description="The Solarwinds plugin allows you to start workflows on new incidents, manage incidents, and manage users",
       author="rapid7",
       author_email="",

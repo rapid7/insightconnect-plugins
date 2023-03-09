@@ -13,6 +13,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params):
         token = params.get("token")["secretKey"]
         is_eu_customer = params.get("eu_customer")
+        ssl_verify = params.get("ssl_verify")
 
         if not token:
             raise ConnectionTestException(
@@ -21,7 +22,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
             )
 
         self.logger.info("Connect: Connecting...")
-        self.api = SamanageAPI(token, is_eu_customer, self.logger)
+        self.api = SamanageAPI(token, is_eu_customer, ssl_verify, self.logger)
 
         self.logger.info("Connect: Connection successful")
 
