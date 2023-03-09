@@ -140,7 +140,7 @@ class ZoomAPI:
             response = requests.request(method, url, json=json_data, params=params, auth=auth)
             self.logger.info(f"Got response status code: {response.status_code}")
 
-            if response.status_code in [401, 404, 204] or (200 <= response.status_code < 300):
+            if response.status_code in [401, 404, 429, 204] or (200 <= response.status_code < 300):
                 return self._handle_response(response=response, allow_404=allow_404)
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
@@ -168,11 +168,31 @@ class ZoomAPI:
                     assistance=f"The object at {response.url} does not exist. Verify the ID and fields "
                     f"used are valid.",
                 )
+        if response.status_code == 429:
+            self._handle_rate_limit_error(response=response)
         # Success; no content
         if response.status_code == 204:
             return None
         if 200 <= response.status_code < 300:
             return response.json()
+
+    @staticmethod
+    def _handle_rate_limit_error(response: Response):
+        rate_limit_type = response.headers.get("X-RateLimit-Type", "")
+        rate_limit_limit = response.headers.get("X-RateLimit-Limit")
+        rate_limit_remaining = response.headers.get("X-RateLimit-Remaining")
+        rate_limit_retry_after = response.headers.get("Retry-After")
+
+        if rate_limit_type == "Light":
+            raise PluginException(cause="Account is rate-limited by the maximum per-second limit for this API.",
+                                  assistance="Try again later.")
+        elif rate_limit_type == "Heavy":
+            raise PluginException(cause=f"Account is rate-limited by the maximum daily limit for this API "
+                                        f"(limit: {rate_limit_limit} calls per day, {rate_limit_remaining} remaining.)",
+                                  assistance=f"Try again after {rate_limit_retry_after}.")
+        else:
+            raise PluginException(cause="Account is rate-limited by an unknown quota.",
+                                  assistance="Try again later.")
 
     @staticmethod
     def _get_current_time_epoch() -> float:
