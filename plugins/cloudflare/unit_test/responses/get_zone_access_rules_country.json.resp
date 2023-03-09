@@ -1,0 +1,38 @@
+{
+  "result": [
+    {
+      "id": "9de5069c5afe602b2ea0a04b66beb2c0",
+      "paused": false,
+      "modified_on": "2023-02-15T13:10:28.008463675Z",
+      "allowed_modes": [
+        "whitelist",
+        "block",
+        "challenge",
+        "js_challenge",
+        "managed_challenge"
+      ],
+      "mode": "challenge",
+      "notes": "",
+      "configuration": {
+        "target": "country",
+        "value": "GB"
+      },
+      "scope": {
+        "id": "9de5069c5afe602b2ea0a04b66beb2c0",
+        "name": "example.com",
+        "type": "zone"
+      },
+      "created_on": "2023-02-15T13:10:28.008463675Z"
+    }
+  ],
+  "success": true,
+  "errors": [],
+  "messages": [],
+  "result_info": {
+    "page": 1,
+    "per_page": 20,
+    "count": 1,
+    "total_count": 1,
+    "total_pages": 1
+  }
+}

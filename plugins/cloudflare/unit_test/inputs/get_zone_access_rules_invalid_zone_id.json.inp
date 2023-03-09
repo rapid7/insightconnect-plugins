@@ -1,0 +1,12 @@
+{
+  "zoneId": "12345",
+  "notes": "",
+  "mode": "all",
+  "match": "any",
+  "configurationTarget": "all",
+  "configurationValue": "",
+  "page": 0,
+  "perPage": 0,
+  "order": "mode",
+  "direction": "desc"
+}
