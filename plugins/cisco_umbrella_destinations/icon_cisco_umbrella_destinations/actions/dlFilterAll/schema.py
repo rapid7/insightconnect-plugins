@@ -27,7 +27,7 @@ class DlFilterAllInput(insightconnect_plugin_runtime.Input):
     "access": {
       "type": "string",
       "title": "Access",
-      "description": "Can be allow or block",
+      "description": "Allow or block access to domain",
       "enum": [
         "allow",
         "block"
@@ -84,7 +84,7 @@ class DlFilterAllOutput(insightconnect_plugin_runtime.Output):
         "access": {
           "type": "string",
           "title": "Access",
-          "description": "Can be allow or block",
+          "description": "Allow or block access to domain",
           "order": 3
         },
         "createdAt": {

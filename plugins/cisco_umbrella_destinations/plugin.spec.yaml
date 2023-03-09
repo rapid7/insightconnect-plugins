@@ -72,7 +72,7 @@ types:
       required: false
     access:
       title: Access
-      description: Can be allow or block
+      description: Allow or block access to domain
       example: allow
       type: string
       required: false
@@ -137,7 +137,7 @@ types:
       required: false
     access:
       title: Access
-      description: Can be allow or block
+      description: Allow or block access to domain
       example: allow
       type: string
       required: false
@@ -236,7 +236,7 @@ actions:
     input:
       access:
         title: Access
-        description: Can be allow or block
+        description: Allow or block access to domain
         example: allow
         type: string
         enum:
@@ -273,7 +273,7 @@ actions:
     input:
       access:
         title: Access
-        description: Can be allow or block
+        description: Allow or block access to domain
         example: allow
         type: string
         enum:

@@ -50,7 +50,7 @@ This action is used to filter and Retrieve all destination lists of organization
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|access|string|None|False|Can be allow or block|['allow', 'block']|allow|
+|access|string|None|False|Allow or block access to domain|['allow', 'block']|allow|
 |isGlobal|boolean|None|False|Boolean value indicating global state|None|True|
 |isMSPDefault|boolean|None|False|Boolean value indicating if MSP Default|None|True|
 |markedForDeletion|boolean|None|False|Boolean value indicating if marked for deletion|None|True|
@@ -295,7 +295,7 @@ This action is used to create a destination list.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|access|string|None|False|Can be allow or block|['allow', 'block']|allow|
+|access|string|None|False|Allow or block access to domain|['allow', 'block']|allow|
 |comment|string|None|False|Information about the destination|None|Suspicious domain|
 |destination|string|None|False|Enter the destination here|None|www.example.com|
 |isGlobal|boolean|None|False|Boolean value indicating global state|None|True|
@@ -511,7 +511,7 @@ _This plugin does not contain any triggers._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Access|string|False|Can be allow or block|
+|Access|string|False|Allow or block access to domain|
 |Created At|date|False|Timestamp for creation of the destination list|
 |ID|integer|False|Unique ID of the destination list.|
 |Is Global|boolean|False|Boolean value indicating global state|
@@ -544,7 +544,7 @@ _This plugin does not contain any triggers._
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Access|string|False|Can be allow or block|
+|Access|string|False|Allow or block access to domain|
 |Created At|date|False|Timestamp for creation of the destination list|
 |ID|integer|False|Unique ID of the destination list|
 |Is Global|boolean|False|Boolean value indicating global state|
