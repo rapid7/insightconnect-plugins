@@ -8,9 +8,9 @@ import insightconnect_plugin_runtime
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 
 
-def is_key_field(key_to_check):
+def is_key_id_field(key_to_check):
     """
-    Check if the key passed in matches oen of the known key type fields
+    Check if the key passed in matches one of the known id key type fields
     """
     return bool(key_to_check == "id" or key_to_check.endswith("_id") or key_to_check.endswith("_ids"))
 
@@ -18,7 +18,7 @@ def is_key_field(key_to_check):
 def update_id_values_to_integers(data):
     """
     According to the Solarwinds (Samanage) API, Ids can be returned as either integers or strings
-    In order to ensure consistency and allow output checking, convert all ids to be strings
+    In order to ensure consistency and allow output checking, convert all ids to be integers
     """
     for key, value in data.items():
         if isinstance(value, dict):
@@ -29,11 +29,11 @@ def update_id_values_to_integers(data):
             for index, element in enumerate(value):
                 if isinstance(value[index], dict):
                     update_id_values_to_integers(value[index])
-                elif is_key_field(key):
+                elif is_key_id_field(key):
                     value[index] = int(element)
 
         else:
-            if is_key_field(key):
+            if is_key_id_field(key):
                 # Item is a key field - update
                 data[key] = int(value)
 
