@@ -27,7 +27,9 @@ class DlFilterAll(insightconnect_plugin_runtime.Action):
         for destination_list in result:
             matches_or_empty = False
             for (value, value_name) in zip(values, value_names):
-                if value == destination_list.get(value_name) or value is None:
+                if value == destination_list.get(value_name) or (
+                    value is None and destination_list.get(value_name) is not None
+                ):
                     matches_or_empty = True
                 else:
                     matches_or_empty = False
