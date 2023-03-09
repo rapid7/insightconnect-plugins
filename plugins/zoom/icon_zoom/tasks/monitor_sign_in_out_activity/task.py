@@ -40,7 +40,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             output, new_state = self.subsequent_run(state=state)
 
         # Turn events list back into a list of dicts
-        output = [e.__dict__ for e in output]
+        output = [event.__dict__ for event in output]
         return output, new_state
 
     def subsequent_run(self, state: dict) -> ([dict], dict):
@@ -53,9 +53,9 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             start_date=state.get(self.LAST_EVENT_TIME), end_date=now_for_zoom, page_size=1000
         )
         try:
-            new_events = [Event(**e) for e in new_events]
-        except TypeError as e:
-            self.logger.error(f"Zoom API endpoint output has changed, unable to parse events: {e}")
+            new_events = [Event(**event) for event in new_events]
+        except TypeError as error:
+            self.logger.error(f"Zoom API endpoint output has changed, unable to parse events: {error}")
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now()),
@@ -101,9 +101,9 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         )
 
         try:
-            new_events = [Event(**e) for e in new_events]
-        except TypeError as e:
-            self.logger.error(f"Zoom API endpoint output has changed, unable to parse events: {e}")
+            new_events = [Event(**event) for event in new_events]
+        except TypeError as error:
+            self.logger.error(f"Zoom API endpoint output has changed, unable to parse events: {error}")
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now()),
@@ -134,14 +134,14 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
     @staticmethod
     def _dedupe_events(boundary_event_hashes: [str], new_events: [Event]) -> [Event]:
-        new_events: [Event] = [e for e in new_events if e.sha1() not in boundary_event_hashes]
+        new_events: [Event] = [event for event in new_events if event.sha1() not in boundary_event_hashes]
 
         return new_events
 
     @staticmethod
     def _get_boundary_event_hashes(latest_event_time: str, events: [Event]) -> [str]:
         # Hashes for events that can land on a time boundary
-        hashes = [e.sha1() for e in events if e.time == latest_event_time]
+        hashes = [event.sha1() for event in events if event.time == latest_event_time]
 
         return hashes
 

@@ -23,8 +23,7 @@ class Event(object):
         )
 
     def sha1(self):
-        m = sha1()  # nosec B303
-        for k, v in self.__dict__.items():
-            m.update(f"{k}{v}".encode("utf-8"))
-
-        return m.hexdigest()
+        hash_ = sha1()  # nosec B303
+        for key, value in self.__dict__.items():
+            hash_.update(f"{key}{value}".encode("utf-8"))
+        return hash_.hexdigest()

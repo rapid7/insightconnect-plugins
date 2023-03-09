@@ -20,9 +20,9 @@ class BearerAuth(AuthBase):
     def __init__(self, access_token: str):
         self.access_token = access_token
 
-    def __call__(self, r):
-        r.headers["Authorization"] = f"Bearer {self.access_token}"
-        return r
+    def __call__(self, request: requests.Request):
+        request.headers["Authorization"] = f"Bearer {self.access_token}"
+        return request
 
 
 class ZoomAPI:
