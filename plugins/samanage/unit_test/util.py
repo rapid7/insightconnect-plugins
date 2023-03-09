@@ -13,17 +13,13 @@ import json
 
 class Util:
     @staticmethod
-    def default_connector(action: insightconnect_plugin_runtime.Action):
+    def default_connector(action: insightconnect_plugin_runtime.Action, ssl_verify=True):
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
         params = {
-            "phone": "12345",
-            "mobile_phone": "1234567",
-            "name": "ExampleUser",
+            "eu_customer": False,
             "token": {"secretKey": "Examplesecretkey"},
-            "email": "example@user.com",
-            "role": "Example role",
-            "department": "Example department",
+            "ssl_verify": ssl_verify,
         }
         default_connection.connect(params)
         action.connection = default_connection
@@ -75,6 +71,8 @@ class Util:
             return MockResponse("assign_incident", 200)
         if kwargs.get("url") == "https://api.samanage.com/incidents.json" and kwargs.get("verb") == "POST":
             return MockResponse("create_incident", 200)
+        if kwargs.get("url") == "https://api.samanage.com/incidents.json" and kwargs.get("ssl_verify") == False:
+            return MockResponse("list_incidents", 200)
         if kwargs.get("url") == "https://api.samanage.com/incidents.json":
             return MockResponse("list_incidents", 200)
         if kwargs.get("url") == "https://api.samanage.com/incidents/55555.json":
@@ -97,4 +95,4 @@ class Util:
 
 
 def mock_request_200(*args, **kwargs):
-    return Util.mocked_requests(verb=args[0], url=args[1], status_code=200)
+    return Util.mocked_requests(verb=args[0], url=args[1], ssl_verify=kwargs.get("verify"), status_code=200)

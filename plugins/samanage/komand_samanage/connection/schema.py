@@ -5,6 +5,7 @@ import json
 
 class Input:
     EU_CUSTOMER = "eu_customer"
+    SSL_VERIFY = "ssl_verify"
     TOKEN = "token"
     
 
@@ -21,6 +22,13 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "default": false,
       "order": 2
     },
+    "ssl_verify": {
+      "type": "boolean",
+      "title": "SSL Verify",
+      "description": "Boolean property used to decide whether to verify a TSL or SSL certificate",
+      "default": true,
+      "order": 3
+    },
     "token": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Token",
@@ -30,6 +38,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   },
   "required": [
     "eu_customer",
+    "ssl_verify",
     "token"
   ],
   "definitions": {
