@@ -167,11 +167,12 @@ class SamanageAPI:
                 f'curl -H "X-Samanage-Authorization: Bearer {self.token}" '
                 '-F "file[attachable_type]=Incident" '
                 f'-F "file[attachable_id]={incident_id}" '
-                '-F "file[attachment]=@{file_path}" '
+                f'-F "file[attachment]=@{file_path}" '
                 '-H "Accept: application/vnd.samanage.v2.1+json" '
                 f'-H "Content-Type: multipart/form-data" {ssl_verify_option} '
-                "-X POST {self.api_url}attachments.json"
+                f'-X POST "{self.api_url}attachments.json" '
             )
+
             result = insightconnect_plugin_runtime.helper.exec_command(curl_command)
             shutil.rmtree(temp_dir)
         except Exception as error:
