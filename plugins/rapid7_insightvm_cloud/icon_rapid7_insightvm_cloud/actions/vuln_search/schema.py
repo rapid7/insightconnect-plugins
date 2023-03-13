@@ -221,6 +221,56 @@ class VulnSearchOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
+    "exploit": {
+      "type": "object",
+      "title": "exploit",
+      "properties": {
+        "description": {
+          "type": "string",
+          "title": "Description",
+          "description": "A verbose description of the exploit",
+          "order": 1
+        },
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "description": "The identifier of the exploit",
+          "order": 2
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "The name of the exploit",
+          "order": 3
+        },
+        "rank": {
+          "type": "string",
+          "title": "Rank",
+          "description": "The exploit rank",
+          "order": 4
+        },
+        "skill_level": {
+          "type": "string",
+          "title": "Skill level",
+          "description": "The level of skill required to use the exploit",
+          "order": 5
+        },
+        "source": {
+          "type": "string",
+          "title": "Source",
+          "description": "Details about where the exploit is defined",
+          "order": 6
+        }
+      },
+      "required": [
+        "description",
+        "id",
+        "name",
+        "rank",
+        "skill_level",
+        "source"
+      ]
+    },
     "link": {
       "type": "object",
       "title": "link",
@@ -328,7 +378,7 @@ class VulnSearchOutput(insightconnect_plugin_runtime.Output):
           "title": "Exploits",
           "description": "List of exploits related to the vulnerability",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/exploit"
           },
           "order": 11
         },
@@ -561,6 +611,56 @@ class VulnSearchOutput(insightconnect_plugin_runtime.Output):
               "order": 12
             }
           }
+        },
+        "exploit": {
+          "type": "object",
+          "title": "exploit",
+          "properties": {
+            "description": {
+              "type": "string",
+              "title": "Description",
+              "description": "A verbose description of the exploit",
+              "order": 1
+            },
+            "id": {
+              "type": "string",
+              "title": "ID",
+              "description": "The identifier of the exploit",
+              "order": 2
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "The name of the exploit",
+              "order": 3
+            },
+            "rank": {
+              "type": "string",
+              "title": "Rank",
+              "description": "The exploit rank",
+              "order": 4
+            },
+            "skill_level": {
+              "type": "string",
+              "title": "Skill level",
+              "description": "The level of skill required to use the exploit",
+              "order": 5
+            },
+            "source": {
+              "type": "string",
+              "title": "Source",
+              "description": "Details about where the exploit is defined",
+              "order": 6
+            }
+          },
+          "required": [
+            "description",
+            "id",
+            "name",
+            "rank",
+            "skill_level",
+            "source"
+          ]
         },
         "link": {
           "type": "object",

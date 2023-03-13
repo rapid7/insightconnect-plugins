@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightvm_cloud
 title: Rapid7 InsightVM Cloud
 description: InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses the InsightVM Cloud Integrations API to view assets and start scans
-version: 3.2.0
+version: 4.0.0
 vendor: rapid7
 support: rapid7
 supported_versions: ["InsightVM Cloud Integration API v4", "2022-08-10"]
@@ -840,6 +840,37 @@ types:
       title: Remediated Vulnerabilities
       type: '[]string'
       required: false
+  exploit:
+    description:
+      title: Description
+      description: A verbose description of the exploit
+      type: string
+      required: true
+    id:
+      title: ID
+      description: The identifier of the exploit
+      type: string
+      required: true
+    name:
+      title: Name
+      description: The name of the exploit
+      type: string
+      required: true
+    rank:
+      title: Rank
+      description: The exploit rank
+      type: string
+      required: true
+    skill_level:
+      title: Skill level
+      description: The level of skill required to use the exploit
+      type: string
+      required: true
+    source:
+      title: Source
+      description: Details about where the exploit is defined
+      type: string
+      required: true
   vulnerability:
     title:
       title: Title
@@ -894,7 +925,7 @@ types:
     exploits:
       title: Exploits
       description: List of exploits related to the vulnerability
-      type: '[]string'
+      type: '[]exploit'
       required: false
     id:
       title: ID
@@ -936,8 +967,6 @@ types:
       description: Severity score of the vulnerability
       type: integer
       required: true
-
-  
 connection:
   credentials:
     title: API Key
@@ -1080,6 +1109,18 @@ actions:
         description: Vulnerability criteria to filter by
         type: string
         example: "vulnerability.categories IN ['example']"
+        required: false
+      current_time:
+        title: Current Time
+        description: The current date and time to compare against the asset state to detect changes
+        type: date
+        example: "2021-04-15T17:56:47Z"
+        required: false
+      comparison_time:
+        title: Comparison Time
+        description: The date and time to compare the asset current state against to detect changes
+        type: date
+        example: "2021-04-15T17:56:47Z"
         required: false
     output:
       assets:

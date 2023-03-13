@@ -28,7 +28,16 @@
             "cvss_v3_vector": null,
             "denial_of_service": false,
             "description": "Unspecified vulnerability in 7-zip before 4.5.7 has unknown impact and remote attack vectors, as demonstrated by the PROTOS GENOME test suite for Archive Formats (c10).",
-            "exploits": [],
+            "exploits": [
+            	{
+            		"description": "test description",
+            		"id": "123",
+            		"name": "ExampleName",
+            		"rank": "average",
+            		"skill_level": "expert",
+            		"source": "exploit"
+            	}
+            ],
             "id": "7-zip-cve-2008-6536",
             "links": [
                 {

@@ -84,7 +84,7 @@ class UserActivityEventOutput(insightconnect_plugin_runtime.Output):
         "time": {
           "type": "string",
           "title": "Time",
-          "description": "Time during which the activity occurred",
+          "description": "Time during which the activity occurred in 'yyyy-mm-ddThh:mm:ssZ' format",
           "order": 2
         },
         "type": {

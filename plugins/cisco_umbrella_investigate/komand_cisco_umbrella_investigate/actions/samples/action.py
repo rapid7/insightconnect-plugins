@@ -1,11 +1,11 @@
-import komand
-from .schema import SamplesInput, SamplesOutput, Input
+import insightconnect_plugin_runtime
+from .schema import SamplesInput, SamplesOutput, Input, Output
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
-class Samples(komand.Action):
+class Samples(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="samples",
@@ -16,9 +16,9 @@ class Samples(komand.Action):
 
     def run(self, params={}):
         URL = params.get(Input.URL)
-        limit = params.get("limit", None)
-        offset = params.get("offset", None)
-        sortby = params.get("sortby", None)
+        limit = params.get(Input.LIMIT)
+        offset = params.get(Input.OFFSET)
+        sortby = params.get(Input.SORTBY)
 
         if not limit or limit == 0:
             limit = 10
@@ -31,16 +31,6 @@ class Samples(komand.Action):
 
         try:
             samples = self.connection.investigate.samples(URL, limit=limit, offset=offset, sortby=sortby)
-        except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+        except Exception as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
         return samples
-
-    def test(self):
-        return {
-            "limit": 1,
-            "moreDataAvailable": False,
-            "offset": 0,
-            "query": "*",
-            "samples": [],
-            "totalResults": 0,
-        }

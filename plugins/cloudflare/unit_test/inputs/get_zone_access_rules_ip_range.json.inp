@@ -1,0 +1,12 @@
+{
+  "zoneId": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "notes": "",
+  "mode": "whitelist",
+  "match": "all",
+  "configurationTarget": "IP range",
+  "configurationValue": "198.51.100.1/16",
+  "page": 0,
+  "perPage": 0,
+  "order": "configuration target",
+  "direction": "asc"
+}

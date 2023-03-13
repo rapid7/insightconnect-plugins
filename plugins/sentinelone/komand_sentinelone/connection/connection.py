@@ -7,6 +7,7 @@ import insightconnect_plugin_runtime
 import requests
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 from typing import Tuple
+from datetime import datetime, timedelta, timezone
 
 from komand_sentinelone.util.api import SentineloneAPI
 from komand_sentinelone.util.helper import Helper
@@ -162,6 +163,41 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def agents_action(self, action: str, agents_filter: str):
         return self._call_api("POST", f"agents/actions/{action}", {"filter": agents_filter})
+
+    def fetch_file_by_agent_id(self, agent_id: str, file_path: str, password: str):
+        response = self._call_api(
+            "POST", f"agents/{agent_id}/actions/fetch-files", {"data": {"password": password, "files": [file_path]}}
+        )
+        if len(response.get("errors", [])) == 0:
+            return True
+
+        errors = "\n".join(response.get("errors"))
+        raise PluginException(
+            cause="An error occurred when trying to fetch file.",
+            assistance="Check the error information and adjust inputs accordingly",
+            data=errors,
+        )
+
+    def run_remote_script(self, user_filter: dict, data: dict) -> dict:
+        endpoint = "remote-scripts/execute"
+        response = self._call_api(
+            "POST",
+            endpoint,
+            {"filter": user_filter, "data": data},
+        )
+        affected = 0
+        if len(response.get("errors", [])) == 0:
+            returned_data = response.get("data", [])
+            if returned_data:
+                affected = returned_data["affected"]
+            return affected
+
+        errors = "\n".join(response.get("errors"))
+        raise PluginException(
+            cause="An error occurred when trying to fetch file.",
+            assistance="Check the error information and adjust inputs accordingly",
+            data=errors,
+        )
 
     def download_file(self, agent_filter: dict, password: str):
         self.get_auth_token()
@@ -512,7 +548,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         full_response: bool = False,
         override_api_version: str = "",
     ):
-
         # We prefer to use the same api version from the token creation,
         # But some actions require 2.0 and not 2.1 (and vice versa), in that case just pass in the right version
         api_version = self.api_version

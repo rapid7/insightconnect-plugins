@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: cisco_umbrella_destinations
 title: Cisco Umbrella Destinations
-version: 3.0.0
+version: 3.1.0
 supported_versions: ["2022-03-08"]
 description: Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization
 vendor: rapid7
@@ -14,9 +14,9 @@ resources:
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
   vendor_url: https://www.cisco.com
 tags:
-- cisco
-- umbrella
-- destinations
+  - cisco
+  - umbrella
+  - destinations
 hub_tags:
   use_cases: [threat_detection_and_response]
   keywords: [cisco, umbrella]
@@ -72,7 +72,7 @@ types:
       required: false
     access:
       title: Access
-      description: Can be allow or block
+      description: Allow or block access to domain
       example: allow
       type: string
       required: false
@@ -113,7 +113,7 @@ types:
       type: boolean
       required: false
     markedForDeletion:
-      title: Marked For Deletion
+      title: Marked for Deletion
       description: Whether or not destination list is marked for deletion
       example: false
       type: boolean
@@ -137,7 +137,7 @@ types:
       required: false
     access:
       title: Access
-      description: Can be allow or block
+      description: Allow or block access to domain
       example: allow
       type: string
       required: false
@@ -178,7 +178,7 @@ types:
       type: boolean
       required: false
     markedForDeletion:
-      title: Marked For Deletion
+      title: Marked for Deletion
       description: Whether or not destination list is marked for deletion
       example: false
       type: boolean
@@ -230,13 +230,50 @@ actions:
         description: List of all destination lists
         type: "[]dlCollection"
         required: false
+  dlFilterAll:
+    title: Filter Through All Destination Lists
+    description: Filter and Retrieve all destination lists of organization
+    input:
+      access:
+        title: Access
+        description: Allow or block access to domain
+        example: allow
+        type: string
+        enum:
+          - allow
+          - block
+        required: false
+      isGlobal:
+        title: Is Global
+        description: Boolean value indicating global state
+        example: true
+        type: boolean
+        required: false
+      isMSPDefault:
+        title: Is MSP Default
+        description: Boolean value indicating if MSP Default
+        example: true
+        type: boolean
+        required: false
+      markedForDeletion:
+        title: Marked for Deletion
+        description: Boolean value indicating if marked for deletion
+        example: true
+        type: boolean
+        required: false
+    output:
+      data:
+        title: Data
+        description: List of all destination lists
+        type: "[]dlCollection"
+        required: false
   dlCreate:
     title: Create Destination List
     description: Create a destination list
     input:
       access:
         title: Access
-        description: Can be allow or block
+        description: Allow or block access to domain
         example: allow
         type: string
         enum:
@@ -336,6 +373,22 @@ actions:
         title: Success
         description: Successful returned value
         type: destinationList
+        required: true
+  dlGetByName:
+    title: Get Destination List by Name
+    description: Get destination list by name
+    input:
+      name:
+        title: Name
+        description: Title for the destination list
+        type: string
+        example: new list
+        required: true
+    output:
+      success:
+        title: Success
+        description: Successful returned value
+        type: "[]destinationList"
         required: true
   dGet:
     title: Get Destinations

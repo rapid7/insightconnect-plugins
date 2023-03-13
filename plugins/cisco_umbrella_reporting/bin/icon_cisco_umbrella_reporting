@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Cisco Umbrella Reporting"
 Vendor = "rapid7"
-Version = "1.0.0"
+Version = "1.0.1"
 Description = "This plugin utilizes Cisco Umbrella to get the most complete view of the relationships and evolution of Internet domains, IP addresses, and autonomous systems to pinpoint attackers infrastructures and predict future threats"
 
 

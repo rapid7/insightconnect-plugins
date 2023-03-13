@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Perform actions relating to your SentinelOne agents. This will help manage your assets connected to your SentinelOne console. Documentation for these actions can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions"
+    DESCRIPTION = "Perform actions relating to your SentinelOne agents. Initiate/Abort scan, connect/disconnect, decommission, restart/shutdown, fetch logs. Documentation for these actions can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions"
 
 
 class Input:

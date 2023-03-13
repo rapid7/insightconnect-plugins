@@ -283,6 +283,8 @@ This action is used to search for assets using filtered asset search.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |asset_criteria|string|None|False|Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames|None|asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'|
+|comparison_time|date|None|False|The date and time to compare the asset current state against to detect changes|None|2021-04-15T17:56:47Z|
+|current_time|date|None|False|The current date and time to compare against the asset state to detect changes|None|2021-04-15T17:56:47Z|
 |size|integer|200|False|The number of assets to retrieve. If blank then will default to 200 assets returned, the maximum limit is 500 assets|None|100|
 |sort_criteria|object|None|False|JSON object for sorting by criteria. Multiple criteria can be specified with an order of 'asc' (ascending) or 'desc' (descending)|None|{'risk-score': 'asc', 'criticality-tag': 'desc'}|
 |vuln_criteria|string|None|False|Vulnerability criteria to filter by|None|vulnerability.categories IN ['example']|
@@ -292,6 +294,8 @@ Example input:
 ```
 {
   "asset_criteria": "asset.ipv4 = 2001:db8:1:1:1:1:1:1 || asset.name STARTS WITH 'example'",
+  "comparison_time": "2021-04-15T17:56:47Z",
+  "current_time": "2021-04-15T17:56:47Z",
   "size": 100,
   "sort_criteria": "{'risk-score': 'asc', 'criticality-tag': 'desc'}",
   "vuln_criteria": "vulnerability.categories IN ['example']"
@@ -1144,6 +1148,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.0.0 - Vulnerability Search: fix schema validation problem for exploits field 
+* 3.3.0 - Asset Search: add filter fields: `current_time`, `comparison_time`
 * 3.2.0 - Add vulnerability search action
 * 3.1.0 - Add Cloud enablement to plugin | Updated exception information and error handling | Made status code output for Stop Scan and Get Scan actions more exact | Fix bug relating to empty inputs being passed in request body
 * 3.0.0 - Changed output of Get Asset action to include vulnerabilities properly

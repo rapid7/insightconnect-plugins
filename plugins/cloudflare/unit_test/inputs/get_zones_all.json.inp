@@ -1,0 +1,11 @@
+{
+  "match": "any",
+  "name": "",
+  "accountName": "",
+  "accountId": "",
+  "status": "all",
+  "page": 1,
+  "perPage": 20,
+  "order": "name",
+  "direction": "asc"
+}

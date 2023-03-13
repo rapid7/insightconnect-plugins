@@ -1,12 +1,12 @@
-import komand
-from .schema import RrHistoryIpInput, RrHistoryIpOutput, Input
+import insightconnect_plugin_runtime
+from .schema import RrHistoryIpInput, RrHistoryIpOutput, Input, Output
 
 # Custom imports below
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
 from IPy import IP as IP_Validate
 
 
-class RrHistoryIp(komand.Action):
+class RrHistoryIp(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="rr_history_ip",
@@ -16,26 +16,23 @@ class RrHistoryIp(komand.Action):
         )
 
     def run(self, params={}):
-        IP = params.get(Input.IP)
+        ip_address = params.get(Input.IP)
         try:
-            IP_Validate(IP)
-        except Exception as e:
+            IP_Validate(ip_address)
+        except Exception as error:
             raise PluginException(
                 cause="Invalid IP provided by user.",
                 assistance="Please try again by submitting a valid IP address.",
-                data=e,
+                data=error,
             )
 
         try:
-            type = params.get("type")
-            if not type:
-                rr_history = self.connection.investigate.rr_history(IP)
+            type_ = params.get(Input.TYPE)
+            if not type_:
+                rr_history = self.connection.investigate.rr_history(ip_address)
             else:
-                rr_history = self.connection.investigate.rr_history(IP, type)
-        except Exception as e:
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+                rr_history = self.connection.investigate.rr_history(ip_address, type_)
+        except Exception as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
-        return {"features": [rr_history.get("features")], "rrs": rr_history.get("rrs")}
-
-    def test(self):
-        return {"features": [], "rrs": []}
+        return {Output.FEATURES: [rr_history.get("features")], Output.RRS: rr_history.get("rrs")}
