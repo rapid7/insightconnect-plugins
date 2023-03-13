@@ -4,59 +4,45 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Poll for user activity events"
+    DESCRIPTION = "Monitor sign in and out activity"
 
 
 class Input:
-    
-    ACTIVITY_TYPE = "activity_type"
-    
+    pass
+
+class State:
+    pass
 
 class Output:
-    
-    USER_ACTIVITY = "user_activity"
+    ACTIVITY_LOGS = "activity_logs"
     
 
-class UserActivityEventInput(insightconnect_plugin_runtime.Input):
+class MonitorSignInOutActivityInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
-   {
-  "type": "object",
-  "title": "Variables",
-  "properties": {
-    "activity_type": {
-      "type": "string",
-      "title": "Activity Type",
-      "description": "Type of user activity to match event",
-      "enum": [
-        "Sign in",
-        "Sign out",
-        "All"
-      ],
-      "order": 1
-    }
-  },
-  "required": [
-    "activity_type"
-  ]
-}
+   {}
     """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
-class UserActivityEventOutput(insightconnect_plugin_runtime.Output):
+class MonitorSignInOutActivityState(insightconnect_plugin_runtime.State):
+    schema = json.loads("""
+   {}
+    """)
+
+    def __init__(self):
+        super(self.__class__, self).__init__(self.schema)
+
+
+class MonitorSignInOutActivityOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
-  "type": "object",
-  "title": "Variables",
-  "properties": {
-    "user_activity": {
-      "$ref": "#/definitions/user_activity",
-      "title": "User Activity",
-      "description": "User Activity",
-      "order": 1
-    }
+    "type": "array",
+    "title": "Activity Logs",
+    "description": "All activity logs within the specified time range",
+    "items": {
+    "$ref": "#/definitions/user_activity"
   },
   "definitions": {
     "user_activity": {

@@ -4,8 +4,9 @@ import json
 
 
 class Input:
-    API_KEY = "api_key"
-    SECRET = "secret"
+    ACCOUNT_ID = "account_id"
+    CLIENT_ID = "client_id"
+    CLIENT_SECRET = "client_secret"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -14,22 +15,29 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "api_key": {
+    "account_id": {
       "$ref": "#/definitions/credential_secret_key",
-      "title": "API Key",
-      "description": "JWT API Key",
+      "title": "Account ID",
+      "description": "Zoom app account ID",
+      "order": 3
+    },
+    "client_id": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "Client ID",
+      "description": "Zoom app client ID",
       "order": 1
     },
-    "secret": {
+    "client_secret": {
       "$ref": "#/definitions/credential_secret_key",
-      "title": "Secret",
-      "description": "JWT Secret",
+      "title": "Client Secret",
+      "description": "Zoom app client secret",
       "order": 2
     }
   },
   "required": [
-    "api_key",
-    "secret"
+    "account_id",
+    "client_id",
+    "client_secret"
   ],
   "definitions": {
     "credential_secret_key": {
