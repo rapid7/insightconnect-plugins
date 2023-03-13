@@ -4,7 +4,7 @@ products: [insightconnect]
 name: zoom
 title: Zoom
 description: Trigger workflows on user activity while also managing your users with the Zoom plugin
-version: 1.0.0
+version: 2.0.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -22,18 +22,24 @@ resources:
 enable_cache: false
 
 connection:
-  api_key:
-    title: API Key
-    description: JWT API Key
+  client_id:
+    title: Client ID
+    description: Zoom app client ID
     type: credential_secret_key
     required: true
-    example: 'abcdefgABCDEFG12345678'
-  secret:
-    title: Secret
-    description: JWT Secret
+    example: "9de5069c5afe602b2ea0a04b66beb2c0"
+  client_secret:
+    title: Client Secret
+    description: Zoom app client secret
     type: credential_secret_key
     required: true
-    example: 'abcdefgABCDEFG123456789abcdefgABCDEF'
+    example: "9de5069c5afe602b2ea0a04b66beb2c0"
+  account_id:
+    title: Account ID
+    description: Zoom app account ID
+    type: credential_secret_key
+    required: true
+    example: 'dBs0x4Kf7HuIK0LLbzMduW'
 
 types:
   user_activity:
@@ -44,7 +50,7 @@ types:
       required: true
     time:
       title: Time
-      description: Time during which the activity occurred
+      description: Time during which the activity occurred in 'yyyy-mm-ddThh:mm:ssZ' format
       type: string
       required: true
     type:
@@ -210,6 +216,7 @@ actions:
         description: User details
         type: user
         required: true
+        example: {}
   create_user:
     title: Create User
     description: Create user associated to account
@@ -357,3 +364,15 @@ triggers:
         description: User Activity
         type: user_activity
         required: false
+
+tasks:
+  monitor_sign_in_out_activity:
+    title: Monitor Sign in and out Activity
+    description: Monitor sign in and out activity
+    input: null
+    output:
+      activity_logs:
+        title: Activity Logs
+        description: All activity logs within the specified time range
+        type: "[]user_activity"
+        required: true
