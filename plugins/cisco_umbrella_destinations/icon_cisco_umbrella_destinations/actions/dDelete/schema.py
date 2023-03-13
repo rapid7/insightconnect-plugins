@@ -70,7 +70,7 @@ class DDeleteOutput(insightconnect_plugin_runtime.Output):
         "access": {
           "type": "string",
           "title": "Access",
-          "description": "Can be allow or block",
+          "description": "Allow or block access to domain",
           "order": 3
         },
         "createdAt": {
@@ -101,7 +101,7 @@ class DDeleteOutput(insightconnect_plugin_runtime.Output):
         },
         "markedForDeletion": {
           "type": "boolean",
-          "title": "Marked For Deletion",
+          "title": "Marked for Deletion",
           "description": "Whether or not destination list is marked for deletion",
           "order": 10
         },

@@ -4,45 +4,63 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieve all destination lists of organization"
+    DESCRIPTION = "Get destination list by name"
 
 
 class Input:
-    pass
-
-class Output:
-    DATA = "data"
+    NAME = "name"
     
 
-class DlGetAllInput(insightconnect_plugin_runtime.Input):
+class Output:
+    SUCCESS = "success"
+    
+
+class DlGetByNameInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "name": {
+      "type": "string",
+      "title": "Name",
+      "description": "Title for the destination list",
+      "order": 1
+    }
+  },
+  "required": [
+    "name"
+  ]
+}
     """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
-class DlGetAllOutput(insightconnect_plugin_runtime.Output):
+class DlGetByNameOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "data": {
+    "success": {
       "type": "array",
-      "title": "Data",
-      "description": "List of all destination lists",
+      "title": "Success",
+      "description": "Successful returned value",
       "items": {
-        "$ref": "#/definitions/dlCollection"
+        "$ref": "#/definitions/destinationList"
       },
       "order": 1
     }
   },
+  "required": [
+    "success"
+  ],
   "definitions": {
-    "dlCollection": {
+    "destinationList": {
       "type": "object",
-      "title": "dlCollection",
+      "title": "destinationList",
       "properties": {
         "access": {
           "type": "string",
@@ -82,12 +100,6 @@ class DlGetAllOutput(insightconnect_plugin_runtime.Output):
           "description": "Whether or not destination list is marked for deletion",
           "order": 10
         },
-        "meta": {
-          "$ref": "#/definitions/meta",
-          "title": "Metadata",
-          "description": "Secondary information",
-          "order": 11
-        },
         "modifiedAt": {
           "type": "string",
           "title": "Modified At",
@@ -113,68 +125,6 @@ class DlGetAllOutput(insightconnect_plugin_runtime.Output):
           "title": "Third Party Category ID",
           "description": "ID, if any, for third parties",
           "order": 6
-        }
-      },
-      "definitions": {
-        "meta": {
-          "type": "object",
-          "title": "meta",
-          "properties": {
-            "destinationCount": {
-              "type": "integer",
-              "title": "DestinationCount",
-              "description": "Total number of destinations in a destination list",
-              "order": 1
-            },
-            "domainCount": {
-              "type": "integer",
-              "title": "DomainCount",
-              "description": "Total number of domains in a destination list",
-              "order": 2
-            },
-            "ipv4Count": {
-              "type": "integer",
-              "title": "Ipv4Count",
-              "description": "Total number of IPs in a destination list",
-              "order": 4
-            },
-            "urlCount": {
-              "type": "integer",
-              "title": "UrlCount",
-              "description": "Total number of URLs in a destination list",
-              "order": 3
-            }
-          }
-        }
-      }
-    },
-    "meta": {
-      "type": "object",
-      "title": "meta",
-      "properties": {
-        "destinationCount": {
-          "type": "integer",
-          "title": "DestinationCount",
-          "description": "Total number of destinations in a destination list",
-          "order": 1
-        },
-        "domainCount": {
-          "type": "integer",
-          "title": "DomainCount",
-          "description": "Total number of domains in a destination list",
-          "order": 2
-        },
-        "ipv4Count": {
-          "type": "integer",
-          "title": "Ipv4Count",
-          "description": "Total number of IPs in a destination list",
-          "order": 4
-        },
-        "urlCount": {
-          "type": "integer",
-          "title": "UrlCount",
-          "description": "Total number of URLs in a destination list",
-          "order": 3
         }
       }
     }
