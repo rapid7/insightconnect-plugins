@@ -4,6 +4,8 @@ from .dDelete.action import DDelete
 from .dGet.action import DGet
 from .dlCreate.action import DlCreate
 from .dlDelete.action import DlDelete
+from .dlFilterAll.action import DlFilterAll
 from .dlGet.action import DlGet
 from .dlGetAll.action import DlGetAll
+from .dlGetByName.action import DlGetByName
 from .dlPatch.action import DlPatch
