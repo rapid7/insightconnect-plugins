@@ -1,5 +1,6 @@
-import sys
 import os
+import sys
+from typing import Any, Dict
 from unittest import TestCase
 from unittest.mock import patch
 
@@ -7,16 +8,19 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 sys.path.append(os.path.abspath("../"))
 
-from unit_test.util import Util
-from parameterized import parameterized
+from unittest.mock import Mock
+
 from icon_rdap.actions.asnLookup import AsnLookup
+from parameterized import parameterized
+
+from unit_test.util import Util
 
 
 @patch("requests.request", side_effect=Util.mock_request)
 class TestAsnLookup(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.action = AsnLookup()
+        cls.action = Util.default_connector(AsnLookup())
 
     @parameterized.expand(
         [
@@ -27,8 +31,11 @@ class TestAsnLookup(TestCase):
             ]
         ]
     )
-    def test_asn_lookup(self, mock_request, test_name, input_params, expected):
+    def test_asn_lookup(
+        self, mock_request: Mock, test_name: str, input_params: Dict[str, Any], expected: Dict[str, Any]
+    ) -> None:
         actual = self.action.run(input_params)
+        print(actual)
         self.assertEqual(actual, expected)
 
     @parameterized.expand(
@@ -41,7 +48,9 @@ class TestAsnLookup(TestCase):
             ]
         ]
     )
-    def test_asn_lookup_raise_exception(self, mock_request, test_name, input_parameters, cause, assistance):
+    def test_asn_lookup_raise_exception(
+        self, mock_request: Mock, test_name: str, input_parameters: Dict[str, Any], cause: str, assistance: str
+    ) -> None:
         with self.assertRaises(PluginException) as error:
             self.action.run(input_parameters)
         self.assertEqual(error.exception.cause, cause)
