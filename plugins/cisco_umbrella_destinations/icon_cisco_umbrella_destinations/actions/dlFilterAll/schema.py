@@ -4,26 +4,63 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Retrieve all destination lists of organization"
+    DESCRIPTION = "Filter and Retrieve all destination lists of organization"
 
 
 class Input:
-    pass
+    ACCESS = "access"
+    ISGLOBAL = "isGlobal"
+    ISMSPDEFAULT = "isMSPDefault"
+    MARKEDFORDELETION = "markedForDeletion"
+    
 
 class Output:
     DATA = "data"
     
 
-class DlGetAllInput(insightconnect_plugin_runtime.Input):
+class DlFilterAllInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "access": {
+      "type": "string",
+      "title": "Access",
+      "description": "Allow or block access to domain",
+      "enum": [
+        "allow",
+        "block"
+      ],
+      "order": 1
+    },
+    "isGlobal": {
+      "type": "boolean",
+      "title": "Is Global",
+      "description": "Boolean value indicating global state",
+      "order": 2
+    },
+    "isMSPDefault": {
+      "type": "boolean",
+      "title": "Is MSP Default",
+      "description": "Boolean value indicating if MSP Default",
+      "order": 3
+    },
+    "markedForDeletion": {
+      "type": "boolean",
+      "title": "Marked for Deletion",
+      "description": "Boolean value indicating if marked for deletion",
+      "order": 4
+    }
+  }
+}
     """)
 
     def __init__(self):
         super(self.__class__, self).__init__(self.schema)
 
 
-class DlGetAllOutput(insightconnect_plugin_runtime.Output):
+class DlFilterAllOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
