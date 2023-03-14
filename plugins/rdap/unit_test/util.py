@@ -1,11 +1,24 @@
 import json
-import sys
+import logging
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
+from icon_rdap.connection import Connection
+from insightconnect_plugin_runtime.action import Action
+
 
 class Util:
+    @staticmethod
+    def default_connector(action: Action) -> Action:
+        default_connection = Connection()
+        default_connection.logger = logging.getLogger("connection logger")
+        default_connection.connect({})
+        action.connection = default_connection
+        action.logger = logging.getLogger("action logger")
+        return action
+
     @staticmethod
     def read_file_to_string(filename: str) -> str:
         with open(

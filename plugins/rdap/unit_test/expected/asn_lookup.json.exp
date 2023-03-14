@@ -1,77 +1,46 @@
 {
-  "results": {
-    "handle": "AS12345",
-    "startAutnum": 12345,
-    "endAutnum": 12345,
-    "name": "AS12345",
-    "entities": [
-      {
-        "handle": "AS12345-MNT",
-        "roles": [
-          "registrant"
-        ],
-        "objectClassName": "entity"
-      },
-      {
-        "handle": "LG1196-ORG",
-        "roles": [
-          "technical",
-          "administrative"
-        ],
-        "objectClassName": "entity"
-      },
-      {
-        "handle": "ORG-GSs1-RIPE",
-        "roles": [
-          "registrant"
-        ],
-        "objectClassName": "entity"
-      },
-      {
-        "handle": "PG12821-RIPE",
-        "roles": [
-          "administrative"
-        ],
-        "objectClassName": "entity"
-      },
-      {
-        "handle": "RIPE-NCC-END-MNT",
-        "roles": [
-          "registrant"
-        ],
-        "objectClassName": "entity"
-      }
-    ],
-    "links": [
-      {
-        "value": "https://rdap.db.ripe.net/autnum/12345",
-        "rel": "self",
-        "href": "https://rdap.db.ripe.net/autnum/12345"
-      }
-    ],
-    "events": [
-      {
-        "eventAction": "last changed",
-        "eventDate": "2020-05-13T13:44:31Z"
-      }
-    ],
-    "notices": [
-      {
-        "title": "Terms and Conditions",
-        "description": [
-          "This is the description..."
-        ],
-        "links": [
-          {
-            "value": "https://rdap.db.ripe.net/autnum/12345",
-            "rel": "terms-of-service",
-            "href": "http://www.ripe.net/db/support/example.pdf",
-            "type": "application/pdf"
-          }
-        ]
-      }
-    ],
-    "port43": "whois.ripe.net",
-    "objectClassName": "autnum"
-  }
+  "handle": "AS12345",
+  "startAutnum": 12345,
+  "endAutnum": 12345,
+  "name": "AS12345",
+  "events": [
+    {
+      "eventAction": "last changed",
+      "eventDate": "2020-05-13T13:44:31Z"
+    }
+  ],
+  "entities": [
+    {
+      "roles": [
+        "registrant"
+      ],
+      "handle": "RIPE-NCC-END-MNT"
+    },
+    {
+      "roles": [
+        "administrative"
+      ],
+      "handle": "PG12821-RIPE"
+    },
+    {
+      "roles": [
+        "registrant"
+      ],
+      "handle": "ORG-GSs1-RIPE"
+    },
+    {
+      "roles": [
+        "technical",
+        "administrative"
+      ],
+      "handle": "LG1196-ORG"
+    },
+    {
+      "roles": [
+        "registrant"
+      ],
+      "handle": "AS12345-MNT"
+    }
+  ],
+  "port43": "whois.ripe.net"
 }
