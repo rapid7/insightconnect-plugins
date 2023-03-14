@@ -1148,6 +1148,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.0.0 - Vulnerability Search: fix schema validation problem for exploits field 
 * 3.3.0 - Asset Search: add filter fields: `current_time`, `comparison_time`
 * 3.2.0 - Add vulnerability search action
 * 3.1.0 - Add Cloud enablement to plugin | Updated exception information and error handling | Made status code output for Stop Scan and Get Scan actions more exact | Fix bug relating to empty inputs being passed in request body
