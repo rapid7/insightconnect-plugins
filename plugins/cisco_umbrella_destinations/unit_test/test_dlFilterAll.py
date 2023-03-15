@@ -74,7 +74,7 @@ class TestDlFilterAll(TestCase):
 
     @parameterized.expand(
         [
-            (mock_request_400, ERROR_MSG),
+            (mock_request_400, PluginException.causes[PluginException.Preset.BAD_REQUEST]),
             (mock_request_401, PluginException.causes[PluginException.Preset.USERNAME_PASSWORD]),
             (mock_request_403, PluginException.causes[PluginException.Preset.UNAUTHORIZED]),
             (mock_request_404, PluginException.causes[PluginException.Preset.NOT_FOUND]),
