@@ -1,0 +1,726 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: cloudflare
+title: Cloudflare
+description: Cloudflare is a global network designed to make everything you connect to the Internet secure, private, fast, and reliable. This plugin allows you to list accounts, zones, zone access rules and lists and create or delete access rules for specific zones
+version: 1.0.0
+supported_versions: ["Cloudflare API v4 2023-02-10"]
+vendor: rapid7
+support: rapid7
+cloud_ready: true
+status: []
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/cloudflare
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://www.cloudflare.com
+tags:
+  - cloudflare
+  - security
+hub_tags:
+  use_cases: [threat_detection_and_response]
+  keywords: [cloudflare, cloud_enabled]
+  features: []
+types:
+  meta:
+    step:
+      title: Step
+      description: Step
+      type: integer
+      required: false
+    customCertificateQuota:
+      title: Custom Certificate Quota
+      description: Custom certificate quota
+      type: integer
+      required: false
+    pageRuleQuota:
+      title: Page Rule Quota
+      description: Page rule quota
+      type: integer
+      required: false
+    phishingDetected:
+      title: Phishing Detected
+      description: Phishing detected
+      type: boolean
+      required: false
+    multipleRailgunsAllowed:
+      title: Multiple Railguns Allowed
+      description: Multiple railguns allowed
+      type: boolean
+      required: false
+  owner:
+    id:
+      title: ID
+      description: ID
+      type: string
+      required: false
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+    email:
+      title: Email
+      description: Email
+      type: string
+      required: false
+  plan:
+    id:
+      title: ID
+      description: ID
+      type: string
+      required: false
+    name:
+      title: Name
+      description: Name
+      type: string
+      required: false
+    price:
+      title: Price
+      description: Price
+      type: integer
+      required: false
+    currency:
+      title: Currency
+      description: Currency
+      type: string
+      required: false
+    frequency:
+      title: Frequency
+      description: Frequency
+      type: string
+      required: false
+    isSubscribed:
+      title: Is Subscribed
+      description: Is subscribed
+      type: boolean
+      required: false
+    canSubscribe:
+      title: Can Subscribe
+      description: Can subscribe
+      type: boolean
+      required: false
+    legacyId:
+      title: Legacy ID
+      description: Legacy ID
+      type: string
+      required: false
+    legacyDiscount:
+      title: Legacy Discount
+      description: Legacy discount
+      type: boolean
+      required: false
+    externallyManaged:
+      title: Externally Managed
+      description: Externally managed
+      type: boolean
+      required: false
+  tenant:
+    id:
+      title: ID
+      description: Identifier
+      type: string
+      required: false
+    name:
+      title: Name
+      description: Name
+      type: string
+      required: false
+  tenantUnit:
+    id:
+      title: ID
+      description: Identifier
+      type: string
+      required: false
+  scope:
+    id:
+      title: ID
+      description: ID
+      type: string
+      required: false
+    name:
+      title: Name
+      description: Name
+      type: string
+      required: false
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+  configuration:
+    target:
+      title: Target
+      description: Target
+      type: string
+      required: false
+    value:
+      title: Value
+      description: Value
+      type: string
+      required: false
+  zoneQuota:
+    maximum:
+      title: Maximum
+      description: Maximum
+      type: integer
+      required: false
+    current:
+      title: Current
+      description: Current
+      type: integer
+      required: false
+    name:
+      title: Available
+      description: Available
+      type: integer
+      required: false
+  legacyFlags:
+    enterpriseZoneQuota:
+      title: Enterprise Zone Quota
+      description: Enterprise Zone Quota
+      type: zoneQuota
+      required: false
+  settings:
+    enforceTwofactor:
+      title: Enforce Two Factor Authentication
+      description: Enforce two factor authentication
+      type: boolean
+      required: false
+    apiAccessEnabled:
+      title: API Access Enabled
+      description: API access enabled
+      type: boolean
+      required: false
+  account:
+    id:
+      title: Account ID
+      description: Identifier of the account
+      type: string
+      required: false
+    name:
+      title: Account Name
+      description: Name of the account
+      type: string
+      required: false
+    type:
+      title: Account Type
+      description: Type of the account
+      type: string
+      required: false
+    settings:
+      title: Settings
+      description: Account settings
+      type: settings
+      required: false
+    legacyFlags:
+      title: Legacy Flags
+      description: Legacy Flags
+      type: legacyFlags
+      required: false
+    createdOn:
+      title: Created On
+      description: Created on
+      type: string
+      required: false
+  accessRule:
+    id:
+      title: Access Rule ID
+      description: Identifier of the access rule
+      type: string
+      required: false
+    paused:
+      title: Paused
+      description: Paused
+      type: boolean
+      required: false
+    modifiedOn:
+      title: Modified On
+      description: Modified on
+      type: string
+      required: false
+    allowedModes:
+      title: Allowed Modes
+      description: Allowed modes
+      type: "[]string"
+      required: false
+    mode:
+      title: Mode
+      description: Mode
+      type: string
+      required: false
+    configuration:
+      title: Configuration
+      description: Configuration
+      type: configuration
+      required: false
+    scope:
+      title: Scope
+      description: Scope
+      type: scope
+      required: false
+    createdOn:
+      title: Created On
+      description: Created on
+      type: string
+      required: false
+  list:
+    id:
+      title: List ID
+      description: Identifier of the list
+      type: string
+      required: false
+    name:
+      title: List Name
+      description: Name of the list
+      type: string
+      required: false
+    description:
+      title: Description
+      description: Description
+      type: string
+      required: false
+    kind:
+      title: Kind
+      description: Kind
+      type: string
+      required: false
+    numItems:
+      title: Num Items
+      description: Number of items
+      type: integer
+      required: false
+    numReferencingFilters:
+      title: Num Referencing Filters
+      description: Number of referencing filters
+      type: integer
+      required: false
+    createdOn:
+      title: Created On
+      description: Created on
+      type: string
+      required: false
+    modifiedOn:
+      title: Modified On
+      description: Modified on
+      type: string
+      required: false
+  zone:
+    id:
+      title: Zone ID
+      description: Identifier of the zone
+      type: string
+      required: false
+    name:
+      title: Zone Name
+      description: Name of the zone
+      type: string
+      required: false
+    status:
+      title: Zone Status
+      description: Status of the zone
+      type: string
+      required: false
+    paused:
+      title: Paused
+      description: Paused
+      type: boolean
+      required: false
+    type:
+      title: Type
+      description: Type of the zone
+      type: string
+      required: false
+    developmentMode:
+      title: Development Mode
+      description: Development mode
+      type: integer
+      required: false
+    nameServers:
+      title: Name Servers
+      description: Name servers
+      type: "[]string"
+      required: false
+    originalNameServers:
+      title: Original Name Servers
+      description: Original name servers
+      type: "[]string"
+      required: false
+    originalRegistrar:
+      title: Original Registrar
+      description: Original registrar
+      type: string
+      required: false
+    originalDnshost:
+      title: Original DNS Host
+      description: Original DNS host
+      type: string
+      required: false
+    createdOn:
+      title: Created On
+      description: Created on
+      type: string
+      required: false
+    modifiedOn:
+      title: Modified On
+      description: Modified on
+      type: string
+      required: false
+    activatedOn:
+      title: Activated On
+      description: Activated on
+      type: string
+      required: false
+    meta:
+      title: Meta
+      description: Meta
+      type: meta
+      required: false
+    owner:
+      title: Owner
+      description: Owner
+      type: owner
+      required: false
+    account:
+      title: Account
+      description: Account
+      type: tenant
+      required: false
+    tenant:
+      title: Tenant
+      description: Tenant
+      type: tenant
+      required: false
+    tenantUnit:
+      title: Tenant Unit
+      description: Tenant unit
+      type: tenantUnit
+      required: false
+    permissions:
+      title: Permissions
+      description: Permissions
+      type: "[]string"
+      required: false
+    plan:
+      title: Plan
+      description: Plan
+      type: plan
+      required: false
+
+connection:
+  apiToken:
+    title: API Token
+    description: A Cloudflare API token with a specific scope and permissions
+    type: credential_secret_key
+    required: true
+    example: '{"secretKey": "ABc123456789s-TeSt987654_3x4mpleTOkeN012"}'
+
+actions:
+  getAccounts:
+    title: Get Accounts
+    description: List all accounts you have ownership or verified access to
+    input:
+      name:
+        title: Name
+        description: Name of the account
+        type: string
+        required: false
+        example: Example Account
+      page:
+        title: Page
+        description: Page number of paginated results
+        type: integer
+        required: false
+        example: 1
+      perPage:
+        title: Per Page
+        description: Maximum number of results per page
+        type: integer
+        required: false
+        example: 10
+      direction:
+        title: Direction
+        description: Direction to order results
+        type: string
+        enum:
+        - desc
+        - asc
+        required: false
+        default: desc
+        example: desc
+    output:
+      accounts:
+        title: Accounts
+        description: List of accounts
+        type: "[]account"
+        required: false
+        example: []
+  getZones:
+    title: Get Zones
+    description: List your zones using different filters
+    input:
+      match:
+        title: Match
+        description: Whether to match all search requirements or at least one (any)
+        type: string
+        enum:
+        - all
+        - any
+        required: false
+        default: all
+        example: all
+      name:
+        title: Name
+        description: Name of the domain
+        type: string
+        required: false
+        example: example.com
+      accountName:
+        title: Account Name
+        description: Name of the account
+        type: string
+        required: false
+        example: Example Account
+      accountId:
+        title: Account ID
+        description: Identifier of the account
+        type: string
+        required: false
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+      status:
+        title: Status
+        description: Status of the zone
+        type: string
+        enum:
+        - all
+        - active
+        - pending
+        - initializing
+        - moved
+        - deleted
+        - deactivated
+        required: false
+        default: all
+        example: all
+      page:
+        title: Page
+        description: Page number of paginated results
+        type: integer
+        required: false
+        example: 1
+      perPage:
+        title: Per Page
+        description: Maximum number of results per page
+        type: integer
+        required: false
+        example: 10
+      order:
+        title: Order
+        description: Field to order zones by
+        type: string
+        enum:
+          - account ID
+          - account name
+          - name
+          - status
+        required: false
+        default: name
+        example: name
+      direction:
+        title: Direction
+        description: Direction to order results
+        type: string
+        enum:
+          - desc
+          - asc
+        required: false
+        default: desc
+        example: desc
+    output:
+      zones:
+        title: Zones
+        description: List of zones for given filters
+        type: "[]zone"
+        required: false
+        example: []
+  getLists:
+    title: Get Lists
+    description: Fetch all lists in the account
+    input:
+      accountId:
+        title: Account ID
+        description: Identifier of the account
+        type: string
+        required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+    output:
+      lists:
+        title: Lists
+        description: Results containing all lists in the account
+        type: "[]list"
+        required: false
+        example: []
+  createZoneAccessRule:
+    title: Create Zone Access Rule
+    description: Creates a new access rule for a zone
+    input:
+      zoneId:
+        title: Zone ID
+        description: ID of the zone for which you want to create an access rule
+        type: string
+        required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+      mode:
+        title: Mode
+        description: The action to apply to a matched request
+        type: string
+        enum:
+        - block
+        - challenge
+        - whitelist
+        - JS challenge
+        - managed challenge
+        required: true
+        default: block
+        example: block
+      target:
+        title: Target
+        description: The configuration target in which you can specify IPv4, IPv6, IP range, AS number or two-letter ISO-3166-1 alpha-2 country code
+        type: string
+        required: true
+        example: 198.51.100.1
+      notes:
+        title: Notes
+        description: An informative summary of the rule, typically used as a reminder or explanation
+        type: string
+        required: false
+        example: This rule is enabled because of an event that occurred on date X
+    output:
+      accessRule:
+        title: Access Rule
+        description: Information about the created access rule
+        type: accessRule
+        required: false
+        example: {}
+  deleteZoneAccessRule:
+    title: Delete Zone Access Rule
+    description: Delete an IP access rule defined at the zone level
+    input:
+      zoneId:
+        title: Zone ID
+        description: ID of the zone for which you want to delete an access rule
+        type: string
+        required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+      ruleId:
+        title: Access Rule ID
+        description: ID of the access rule you want to delete
+        type: string
+        required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+        example: true
+  getZoneAccessRules:
+    title: Get Zone Access Rules
+    description: Fetch IP Access rules of a zone. You can filter the results using several optional parameters
+    input:
+      zoneId:
+        title: Zone ID
+        description: The ID of the zone for which you want to list the access rules
+        type: string
+        required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+      notes:
+        title: Notes
+        description: The string to search for in the notes of existing IP Access rules
+        type: string
+        required: false
+        example: My notes
+      mode:
+        title: Mode
+        description: The action that was applied to a matched request
+        type: string
+        enum:
+          - all
+          - block
+          - challenge
+          - whitelist
+          - JS challenge
+          - managed challenge
+        required: false
+        default: all
+        example: all
+      match:
+        title: Match
+        description: Whether to match all search requirements or at least one (any)
+        type: string
+        enum:
+          - all
+          - any
+        required: false
+        default: all
+        example: all
+      configurationTarget:
+        title: Configuration Target
+        description: The target to search in existing rules
+        type: string
+        enum:
+          - all
+          - IP address
+          - IP range
+          - ASN
+          - country
+        required: false
+        default: all
+        example: IP address
+      configurationValue:
+        title: Configuration Value
+        description: The target value to search for in existing rules
+        type: string
+        required: false
+        example: 198.51.100.1
+      page:
+        title: Page
+        description: Page number of paginated results
+        type: integer
+        required: false
+        example: 1
+      perPage:
+        title: Per Page
+        description: Maximum number of results per page
+        type: integer
+        required: false
+        example: 10
+      order:
+        title: Order
+        description: Field to order zones by
+        type: string
+        enum:
+          - configuration target
+          - configuration value
+          - mode
+        required: false
+        default: mode
+        example: mode
+      direction:
+        title: Direction
+        description: Direction to order results
+        type: string
+        enum:
+          - desc
+          - asc
+        required: false
+        default: desc
+        example: desc
+    output:
+      accessRules:
+        title: Access Rules
+        description: List of zone access rules
+        type: "[]accessRule"
+        required: false
+        example: []
