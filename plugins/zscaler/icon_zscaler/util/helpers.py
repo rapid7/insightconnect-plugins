@@ -1,15 +1,14 @@
 from insightconnect_plugin_runtime.exceptions import PluginException
 from re import sub, match, split
-from typing import Union
+from typing import Union, Any, Dict
 from icon_zscaler.util.constants import Assistance, Cause
 
-_SNAKE_CASE_REGEX = r"\b[a-z0-9]+(_[a-z0-9]+)*\b"
-_CAMEL_CASE_REGEX = r"\b[a-z0-9]+([A-Z][a-z]+[0-9]*)*\b"
-_PASCAL_CASE_REGEX = r"\b[A-Z][a-z]+[0-9]*([A-Z][a-z]+[0-9]*)*\b"
-_CAMEL_CASE_ACRONYM_REGEX = r"\b[a-z0-9]+([A-Z]+[0-9]*)*\b"
+CAMEL_CASE_REGEX = r"\b[a-z0-9]+([A-Z][a-z]+[0-9]*)*\b"
+PASCAL_CASE_REGEX = r"\b[A-Z][a-z]+[0-9]*([A-Z][a-z]+[0-9]*)*\b"
+CAMEL_CASE_ACRONYM_REGEX = r"\b[a-z0-9]+([A-Z]+[0-9]*)*\b"
 
 
-def clean_dict(dictionary: dict) -> dict:
+def clean_dict(dictionary: Dict[str, Any]) -> Dict[str, Any]:
     cleaned_dict = dictionary.copy()
     for key, value in dictionary.items():
         if isinstance(value, dict):
@@ -56,11 +55,11 @@ def prepare_groups(groups_api_result: list, given_groups_names: list) -> list:
 
 
 def to_camel_case(provided_string: str) -> str:
-    if match(_CAMEL_CASE_REGEX, provided_string):
+    if match(CAMEL_CASE_REGEX, provided_string):
         return provided_string
-    if match(_PASCAL_CASE_REGEX, provided_string):
+    if match(PASCAL_CASE_REGEX, provided_string):
         return provided_string[0].lower() + provided_string[1:]
-    if match(_CAMEL_CASE_ACRONYM_REGEX, provided_string):
+    if match(CAMEL_CASE_ACRONYM_REGEX, provided_string):
         words = split(r"(?<=[a-z0-9])(?=[A-Z])|(?<=[A-Z0-9])(?=[a-z])", provided_string)
         result = "".join([w.title() for w in words])
         return result[0].lower() + result[1:]
