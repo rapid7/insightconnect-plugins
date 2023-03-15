@@ -1,0 +1,29 @@
+{
+  "content": {
+    "iocs": [
+      {
+        "Value": "562193c0-d0a0-41c3-9178-8022f2bec6ad",
+        "Type": "Hashes",
+        "Status": "Active",
+        "Severity": "High",
+        "UpdateDate": "2023-02-24T17:03:29.000Z",
+        "Whitelisted": false,
+        "ReportingFeeds": [
+          "Example"
+        ]
+      },
+      {
+        "Value": "562193c0-d0a0-41c3-9178-8022f2bec6ad",
+        "Type": "IpAddresses",
+        "Status": "Active",
+        "Severity": "High",
+        "UpdateDate": "2023-02-24T17:03:29.000Z",
+        "Whitelisted": false,
+        "ReportingFeeds": [
+          "Example"
+        ]
+      }
+    ],
+    "nextOffset": "2023-02-25T16:01:36.425Z"
+  }
+}

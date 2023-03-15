@@ -1,0 +1,7 @@
+{
+  "alertId": "invalid_id",
+  "reason": "False positive",
+  "freeText": "",
+  "isHidden": false,
+  "rate": 0
+}

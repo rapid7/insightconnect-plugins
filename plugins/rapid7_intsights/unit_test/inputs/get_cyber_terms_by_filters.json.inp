@@ -1,0 +1,13 @@
+{
+  "search": "GodFather",
+  "type": ["Malware"],
+  "severity": ["Medium"],
+  "targetSector": ["Financial Services"],
+  "targetCountry": ["United States"],
+  "origin": [],
+  "ttp": ["Command Execution"],
+  "lastUpdatedFrom": "",
+  "lastUpdatedTo": "",
+  "limit": 1,
+  "offset": ""
+}
