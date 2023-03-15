@@ -4,6 +4,7 @@ from typing import Optional, Any, Dict
 import requests
 from requests.auth import HTTPBasicAuth
 from insightconnect_plugin_runtime.exceptions import PluginException
+import logging
 
 ERROR_MSG = "Invalid input data, ensure the input is correct"
 
@@ -142,14 +143,14 @@ class CiscoUmbrellaManagementAPI:
             auth=HTTPBasicAuth(self.api_key, self.api_secret),
         )
         if response.status_code == 400:
-            raise PluginException(cause=ERROR_MSG)
+            raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.json())
         if response.status_code == 401:
-            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
+            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.json())
         if response.status_code == 403:
-            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
+            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response.json())
         if response.status_code == 404:
-            raise PluginException(preset=PluginException.Preset.NOT_FOUND)
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.json())
         if response.status_code >= 500:
-            raise PluginException(preset=PluginException.Preset.SERVER_ERROR)
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.json())
         if 200 <= response.status_code < 300:
             return response.json()
