@@ -4,7 +4,6 @@ from typing import Optional, Any, Dict
 import requests
 from requests.auth import HTTPBasicAuth
 from insightconnect_plugin_runtime.exceptions import PluginException
-import logging
 
 ERROR_MSG = "Invalid input data, ensure the input is correct"
 
