@@ -12,7 +12,16 @@ class Input:
     
 
 class Output:
-    RESULTS = "results"
+    COUNTRY = "country"
+    ENDAUTNUM = "endAutnum"
+    ENTITIES = "entities"
+    EVENTS = "events"
+    HANDLE = "handle"
+    NAME = "name"
+    PORT43 = "port43"
+    STARTAUTNUM = "startAutnum"
+    STATUS = "status"
+    TYPE = "type"
     
 
 class AsnLookupInput(insightconnect_plugin_runtime.Input):
@@ -44,532 +53,122 @@ class AsnLookupOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "results": {
-      "$ref": "#/definitions/asnObject",
-      "title": "Results",
-      "description": "Results containing information about the given ASN",
+    "country": {
+      "type": "string",
+      "title": "Country",
+      "description": "The two-character country code of the autonomous number",
+      "order": 6
+    },
+    "endAutnum": {
+      "type": "integer",
+      "title": "End Autonomous Number",
+      "description": "The ending number in the block of Autonomous System numbers",
+      "order": 3
+    },
+    "entities": {
+      "type": "array",
+      "title": "Entities",
+      "description": "Information of organizations, corporations, governments, non-profits, clubs, individual persons, and informal groups of people",
+      "items": {
+        "$ref": "#/definitions/entity"
+      },
+      "order": 8
+    },
+    "events": {
+      "type": "array",
+      "title": "Events",
+      "description": "List of events that have occurred",
+      "items": {
+        "$ref": "#/definitions/event"
+      },
+      "order": 7
+    },
+    "handle": {
+      "type": "string",
+      "title": "Handle",
+      "description": "The RIR-unique identifier of the autnum registration",
       "order": 1
+    },
+    "name": {
+      "type": "string",
+      "title": "Name",
+      "description": "The identifier assigned to the autonomous number registration by the registration holder",
+      "order": 4
+    },
+    "port43": {
+      "type": "string",
+      "title": "Port 43",
+      "description": "The fully qualified host name or IP address of the WHOIS server where the containing object instance may be found",
+      "order": 9
+    },
+    "startAutnum": {
+      "type": "integer",
+      "title": "Start Autonomous Number",
+      "description": "The starting number in the block of Autonomous System numbers",
+      "order": 2
+    },
+    "status": {
+      "type": "array",
+      "title": "Status",
+      "description": "The state of the autnum",
+      "items": {
+        "type": "string"
+      },
+      "order": 10
+    },
+    "type": {
+      "type": "string",
+      "title": "Type",
+      "description": "The RIR-specific classification of the autonomous number per that RIR's registration model",
+      "order": 5
     }
   },
   "definitions": {
-    "asEventActor": {
+    "address": {
       "type": "object",
-      "title": "asEventActor",
+      "title": "address",
       "properties": {
-        "eventAction": {
+        "countryName": {
           "type": "string",
-          "title": "Event Action",
-          "description": "The reason for the event",
-          "order": 1
-        },
-        "eventDate": {
-          "type": "string",
-          "title": "Event Date",
-          "description": "The time and date the event occurred",
-          "order": 2
-        }
-      }
-    },
-    "asnObject": {
-      "type": "object",
-      "title": "asnObject",
-      "properties": {
-        "country": {
-          "type": "string",
-          "title": "Country",
-          "description": "The two-character country code of the autnum",
-          "order": 6
-        },
-        "endAutnum": {
-          "type": "integer",
-          "title": "End Autnum",
-          "description": "The ending number in the block of Autonomous System numbers",
-          "order": 3
-        },
-        "entities": {
-          "type": "array",
-          "title": "Entities",
-          "description": "Information of organizations, corporations, governments, non-profits, clubs, individual persons, and informal groups of people",
-          "items": {
-            "$ref": "#/definitions/entity"
-          },
-          "order": 10
-        },
-        "events": {
-          "type": "array",
-          "title": "Events",
-          "description": "List of events that have occurred",
-          "items": {
-            "$ref": "#/definitions/event"
-          },
-          "order": 8
-        },
-        "handle": {
-          "type": "string",
-          "title": "Handle",
-          "description": "The RIR-unique identifier of the autnum registration",
-          "order": 1
-        },
-        "links": {
-          "type": "array",
-          "title": "Links",
-          "description": "Links",
-          "items": {
-            "$ref": "#/definitions/link"
-          },
-          "order": 9
-        },
-        "name": {
-          "type": "string",
-          "title": "Name",
-          "description": "The identifier assigned to the autnum registration by the registration holder",
-          "order": 4
-        },
-        "objectClassName": {
-          "type": "string",
-          "title": "Object Class Name",
-          "description": "The type of object being processed",
-          "order": 13
-        },
-        "port43": {
-          "type": "string",
-          "title": "Port 43",
-          "description": "The fully qualified host name or IP address of the WHOIS server where the containing object instance may be found",
-          "order": 11
-        },
-        "remarks": {
-          "type": "array",
-          "title": "Remarks",
-          "description": "Information about the object class",
-          "items": {
-            "$ref": "#/definitions/notice"
-          },
+          "title": "Country Name",
+          "description": "The country name of the entity",
           "order": 7
         },
-        "startAutnum": {
-          "type": "integer",
-          "title": "StartAutnum",
-          "description": "The starting number in the block of Autonomous System numbers",
+        "extendedAddress": {
+          "type": "string",
+          "title": "Extended Address",
+          "description": "The entity extended address",
           "order": 2
         },
-        "status": {
-          "type": "array",
-          "title": "Status",
-          "description": "The state of the autnum",
-          "items": {
-            "type": "string"
-          },
-          "order": 12
-        },
-        "type": {
+        "locality": {
           "type": "string",
-          "title": "Type",
-          "description": "The RIR-specific classification of the autnum per that RIR's registration model",
+          "title": "Locality",
+          "description": "The location of the entity",
+          "order": 4
+        },
+        "postOfficeBox": {
+          "type": "string",
+          "title": "Post Office Box",
+          "description": "The entity post office box",
+          "order": 1
+        },
+        "postalCode": {
+          "type": "string",
+          "title": "Postal Code",
+          "description": "The entity's postal code",
+          "order": 6
+        },
+        "region": {
+          "type": "string",
+          "title": "Region",
+          "description": "The entity's region",
           "order": 5
-        }
-      },
-      "definitions": {
-        "asEventActor": {
-          "type": "object",
-          "title": "asEventActor",
-          "properties": {
-            "eventAction": {
-              "type": "string",
-              "title": "Event Action",
-              "description": "The reason for the event",
-              "order": 1
-            },
-            "eventDate": {
-              "type": "string",
-              "title": "Event Date",
-              "description": "The time and date the event occurred",
-              "order": 2
-            }
-          }
         },
-        "entity": {
-          "type": "object",
-          "title": "entity",
-          "properties": {
-            "asEventActor": {
-              "type": "array",
-              "title": "As Event Actor",
-              "description": "As event actor",
-              "items": {
-                "$ref": "#/definitions/asEventActor"
-              },
-              "order": 9
-            },
-            "entities": {
-              "type": "array",
-              "title": "Entities",
-              "description": "Entities",
-              "items": {
-                "type": "object"
-              },
-              "order": 5
-            },
-            "events": {
-              "type": "array",
-              "title": "Events",
-              "description": "Events",
-              "items": {
-                "$ref": "#/definitions/event"
-              },
-              "order": 8
-            },
-            "handle": {
-              "type": "string",
-              "title": "Handle",
-              "description": "The registry-unique identifier of the entity",
-              "order": 2
-            },
-            "links": {
-              "type": "array",
-              "title": "Links",
-              "description": "Links",
-              "items": {
-                "$ref": "#/definitions/link"
-              },
-              "order": 7
-            },
-            "objectClassName": {
-              "type": "string",
-              "title": "Object Class Name",
-              "description": "The type of object being processed",
-              "order": 1
-            },
-            "port43": {
-              "type": "string",
-              "title": "Port 43",
-              "description": "The fully qualified host name or IP address of the WHOIS server where the containing object instance may be found",
-              "order": 11
-            },
-            "publicIds": {
-              "type": "array",
-              "title": "Public IDs",
-              "description": "List of public IDs",
-              "items": {
-                "$ref": "#/definitions/publicId"
-              },
-              "order": 4
-            },
-            "remarks": {
-              "type": "array",
-              "title": "Remarks",
-              "description": "Information about the object class",
-              "items": {
-                "$ref": "#/definitions/notice"
-              },
-              "order": 6
-            },
-            "roles": {
-              "type": "array",
-              "title": "Roles",
-              "description": "List of roles",
-              "items": {
-                "type": "string"
-              },
-              "order": 3
-            },
-            "status": {
-              "type": "array",
-              "title": "Status",
-              "description": "The state of the entity",
-              "items": {
-                "type": "string"
-              },
-              "order": 10
-            }
-          },
-          "definitions": {
-            "asEventActor": {
-              "type": "object",
-              "title": "asEventActor",
-              "properties": {
-                "eventAction": {
-                  "type": "string",
-                  "title": "Event Action",
-                  "description": "The reason for the event",
-                  "order": 1
-                },
-                "eventDate": {
-                  "type": "string",
-                  "title": "Event Date",
-                  "description": "The time and date the event occurred",
-                  "order": 2
-                }
-              }
-            },
-            "event": {
-              "type": "object",
-              "title": "event",
-              "properties": {
-                "eventAction": {
-                  "type": "string",
-                  "title": "Event Action",
-                  "description": "The reason for the event",
-                  "order": 1
-                },
-                "eventActor": {
-                  "type": "string",
-                  "title": "Event Actor",
-                  "description": "The actor responsible for the event",
-                  "order": 2
-                },
-                "eventDate": {
-                  "type": "string",
-                  "title": "Event Date",
-                  "description": "The time and date the event occurred",
-                  "order": 3
-                }
-              }
-            },
-            "link": {
-              "type": "object",
-              "title": "link",
-              "properties": {
-                "href": {
-                  "type": "string",
-                  "title": "Href",
-                  "description": "Href",
-                  "order": 4
-                },
-                "rel": {
-                  "type": "string",
-                  "title": "Rel",
-                  "description": "Rel",
-                  "order": 2
-                },
-                "type": {
-                  "type": "string",
-                  "title": "Type",
-                  "description": "Type",
-                  "order": 3
-                },
-                "value": {
-                  "type": "string",
-                  "title": "Value",
-                  "description": "Value",
-                  "order": 1
-                }
-              }
-            },
-            "notice": {
-              "type": "object",
-              "title": "notice",
-              "properties": {
-                "description": {
-                  "type": "array",
-                  "title": "Description",
-                  "description": "Description",
-                  "items": {
-                    "type": "string"
-                  },
-                  "order": 2
-                },
-                "links": {
-                  "type": "array",
-                  "title": "Links",
-                  "description": "Links",
-                  "items": {
-                    "$ref": "#/definitions/link"
-                  },
-                  "order": 3
-                },
-                "title": {
-                  "type": "string",
-                  "title": "Title",
-                  "description": "Title",
-                  "order": 1
-                }
-              },
-              "definitions": {
-                "link": {
-                  "type": "object",
-                  "title": "link",
-                  "properties": {
-                    "href": {
-                      "type": "string",
-                      "title": "Href",
-                      "description": "Href",
-                      "order": 4
-                    },
-                    "rel": {
-                      "type": "string",
-                      "title": "Rel",
-                      "description": "Rel",
-                      "order": 2
-                    },
-                    "type": {
-                      "type": "string",
-                      "title": "Type",
-                      "description": "Type",
-                      "order": 3
-                    },
-                    "value": {
-                      "type": "string",
-                      "title": "Value",
-                      "description": "Value",
-                      "order": 1
-                    }
-                  }
-                }
-              }
-            },
-            "publicId": {
-              "type": "object",
-              "title": "publicId",
-              "properties": {
-                "identifier": {
-                  "type": "string",
-                  "title": "Identifier",
-                  "description": "The public identifier of the type related to 'type'",
-                  "order": 2
-                },
-                "type": {
-                  "type": "string",
-                  "title": "Type",
-                  "description": "The type of public identifier",
-                  "order": 1
-                }
-              }
-            }
-          }
-        },
-        "event": {
-          "type": "object",
-          "title": "event",
-          "properties": {
-            "eventAction": {
-              "type": "string",
-              "title": "Event Action",
-              "description": "The reason for the event",
-              "order": 1
-            },
-            "eventActor": {
-              "type": "string",
-              "title": "Event Actor",
-              "description": "The actor responsible for the event",
-              "order": 2
-            },
-            "eventDate": {
-              "type": "string",
-              "title": "Event Date",
-              "description": "The time and date the event occurred",
-              "order": 3
-            }
-          }
-        },
-        "link": {
-          "type": "object",
-          "title": "link",
-          "properties": {
-            "href": {
-              "type": "string",
-              "title": "Href",
-              "description": "Href",
-              "order": 4
-            },
-            "rel": {
-              "type": "string",
-              "title": "Rel",
-              "description": "Rel",
-              "order": 2
-            },
-            "type": {
-              "type": "string",
-              "title": "Type",
-              "description": "Type",
-              "order": 3
-            },
-            "value": {
-              "type": "string",
-              "title": "Value",
-              "description": "Value",
-              "order": 1
-            }
-          }
-        },
-        "notice": {
-          "type": "object",
-          "title": "notice",
-          "properties": {
-            "description": {
-              "type": "array",
-              "title": "Description",
-              "description": "Description",
-              "items": {
-                "type": "string"
-              },
-              "order": 2
-            },
-            "links": {
-              "type": "array",
-              "title": "Links",
-              "description": "Links",
-              "items": {
-                "$ref": "#/definitions/link"
-              },
-              "order": 3
-            },
-            "title": {
-              "type": "string",
-              "title": "Title",
-              "description": "Title",
-              "order": 1
-            }
-          },
-          "definitions": {
-            "link": {
-              "type": "object",
-              "title": "link",
-              "properties": {
-                "href": {
-                  "type": "string",
-                  "title": "Href",
-                  "description": "Href",
-                  "order": 4
-                },
-                "rel": {
-                  "type": "string",
-                  "title": "Rel",
-                  "description": "Rel",
-                  "order": 2
-                },
-                "type": {
-                  "type": "string",
-                  "title": "Type",
-                  "description": "Type",
-                  "order": 3
-                },
-                "value": {
-                  "type": "string",
-                  "title": "Value",
-                  "description": "Value",
-                  "order": 1
-                }
-              }
-            }
-          }
-        },
-        "publicId": {
-          "type": "object",
-          "title": "publicId",
-          "properties": {
-            "identifier": {
-              "type": "string",
-              "title": "Identifier",
-              "description": "The public identifier of the type related to 'type'",
-              "order": 2
-            },
-            "type": {
-              "type": "string",
-              "title": "Type",
-              "description": "The type of public identifier",
-              "order": 1
-            }
-          }
+        "streetAddress": {
+          "type": "string",
+          "title": "Street Address",
+          "description": "The entity's street address",
+          "order": 3
         }
       }
     },
@@ -577,77 +176,52 @@ class AsnLookupOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "entity",
       "properties": {
-        "asEventActor": {
-          "type": "array",
-          "title": "As Event Actor",
-          "description": "As event actor",
-          "items": {
-            "$ref": "#/definitions/asEventActor"
-          },
-          "order": 9
+        "address": {
+          "$ref": "#/definitions/address",
+          "title": "Address",
+          "description": "The address of the entity",
+          "order": 7
         },
-        "entities": {
-          "type": "array",
-          "title": "Entities",
-          "description": "Entities",
-          "items": {
-            "type": "object"
-          },
-          "order": 5
-        },
-        "events": {
-          "type": "array",
-          "title": "Events",
-          "description": "Events",
-          "items": {
-            "$ref": "#/definitions/event"
-          },
-          "order": 8
+        "fullname": {
+          "type": "string",
+          "title": "Fullname",
+          "description": "The entity fullname",
+          "order": 6
         },
         "handle": {
           "type": "string",
           "title": "Handle",
-          "description": "The registry-unique identifier of the entity",
-          "order": 2
-        },
-        "links": {
-          "type": "array",
-          "title": "Links",
-          "description": "Links",
-          "items": {
-            "$ref": "#/definitions/link"
-          },
-          "order": 7
-        },
-        "objectClassName": {
-          "type": "string",
-          "title": "Object Class Name",
-          "description": "The type of object being processed",
+          "description": "The registry-unique identifier of the nameserver",
           "order": 1
         },
-        "port43": {
+        "kind": {
           "type": "string",
-          "title": "Port 43",
-          "description": "The fully qualified host name or IP address of the WHOIS server where the containing object instance may be found",
-          "order": 11
+          "title": "Kind",
+          "order": 3
         },
-        "publicIds": {
-          "type": "array",
-          "title": "Public IDs",
-          "description": "List of public IDs",
-          "items": {
-            "$ref": "#/definitions/publicId"
-          },
-          "order": 4
+        "language": {
+          "type": "string",
+          "title": "Language",
+          "description": "Information about the language of the entity",
+          "order": 10
         },
-        "remarks": {
-          "type": "array",
-          "title": "Remarks",
-          "description": "Information about the object class",
-          "items": {
-            "$ref": "#/definitions/notice"
-          },
-          "order": 6
+        "organization": {
+          "type": "string",
+          "title": "Organization",
+          "description": "Name of the organization",
+          "order": 9
+        },
+        "phone": {
+          "type": "string",
+          "title": "Phone",
+          "description": "The entity phone number",
+          "order": 8
+        },
+        "role": {
+          "type": "string",
+          "title": "Role",
+          "description": "The role of the entity",
+          "order": 5
         },
         "roles": {
           "type": "array",
@@ -656,168 +230,61 @@ class AsnLookupOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "string"
           },
-          "order": 3
+          "order": 2
         },
-        "status": {
-          "type": "array",
-          "title": "Status",
-          "description": "The state of the entity",
-          "items": {
-            "type": "string"
-          },
-          "order": 10
+        "title": {
+          "type": "string",
+          "title": "Title",
+          "description": "The title of the entity",
+          "order": 4
         }
       },
       "definitions": {
-        "asEventActor": {
+        "address": {
           "type": "object",
-          "title": "asEventActor",
+          "title": "address",
           "properties": {
-            "eventAction": {
+            "countryName": {
               "type": "string",
-              "title": "Event Action",
-              "description": "The reason for the event",
-              "order": 1
+              "title": "Country Name",
+              "description": "The country name of the entity",
+              "order": 7
             },
-            "eventDate": {
+            "extendedAddress": {
               "type": "string",
-              "title": "Event Date",
-              "description": "The time and date the event occurred",
-              "order": 2
-            }
-          }
-        },
-        "event": {
-          "type": "object",
-          "title": "event",
-          "properties": {
-            "eventAction": {
-              "type": "string",
-              "title": "Event Action",
-              "description": "The reason for the event",
-              "order": 1
-            },
-            "eventActor": {
-              "type": "string",
-              "title": "Event Actor",
-              "description": "The actor responsible for the event",
+              "title": "Extended Address",
+              "description": "The entity extended address",
               "order": 2
             },
-            "eventDate": {
+            "locality": {
               "type": "string",
-              "title": "Event Date",
-              "description": "The time and date the event occurred",
-              "order": 3
-            }
-          }
-        },
-        "link": {
-          "type": "object",
-          "title": "link",
-          "properties": {
-            "href": {
-              "type": "string",
-              "title": "Href",
-              "description": "Href",
+              "title": "Locality",
+              "description": "The location of the entity",
               "order": 4
             },
-            "rel": {
+            "postOfficeBox": {
               "type": "string",
-              "title": "Rel",
-              "description": "Rel",
-              "order": 2
+              "title": "Post Office Box",
+              "description": "The entity post office box",
+              "order": 1
             },
-            "type": {
+            "postalCode": {
               "type": "string",
-              "title": "Type",
-              "description": "Type",
+              "title": "Postal Code",
+              "description": "The entity's postal code",
+              "order": 6
+            },
+            "region": {
+              "type": "string",
+              "title": "Region",
+              "description": "The entity's region",
+              "order": 5
+            },
+            "streetAddress": {
+              "type": "string",
+              "title": "Street Address",
+              "description": "The entity's street address",
               "order": 3
-            },
-            "value": {
-              "type": "string",
-              "title": "Value",
-              "description": "Value",
-              "order": 1
-            }
-          }
-        },
-        "notice": {
-          "type": "object",
-          "title": "notice",
-          "properties": {
-            "description": {
-              "type": "array",
-              "title": "Description",
-              "description": "Description",
-              "items": {
-                "type": "string"
-              },
-              "order": 2
-            },
-            "links": {
-              "type": "array",
-              "title": "Links",
-              "description": "Links",
-              "items": {
-                "$ref": "#/definitions/link"
-              },
-              "order": 3
-            },
-            "title": {
-              "type": "string",
-              "title": "Title",
-              "description": "Title",
-              "order": 1
-            }
-          },
-          "definitions": {
-            "link": {
-              "type": "object",
-              "title": "link",
-              "properties": {
-                "href": {
-                  "type": "string",
-                  "title": "Href",
-                  "description": "Href",
-                  "order": 4
-                },
-                "rel": {
-                  "type": "string",
-                  "title": "Rel",
-                  "description": "Rel",
-                  "order": 2
-                },
-                "type": {
-                  "type": "string",
-                  "title": "Type",
-                  "description": "Type",
-                  "order": 3
-                },
-                "value": {
-                  "type": "string",
-                  "title": "Value",
-                  "description": "Value",
-                  "order": 1
-                }
-              }
-            }
-          }
-        },
-        "publicId": {
-          "type": "object",
-          "title": "publicId",
-          "properties": {
-            "identifier": {
-              "type": "string",
-              "title": "Identifier",
-              "description": "The public identifier of the type related to 'type'",
-              "order": 2
-            },
-            "type": {
-              "type": "string",
-              "title": "Type",
-              "description": "The type of public identifier",
-              "order": 1
             }
           }
         }
@@ -844,116 +311,6 @@ class AsnLookupOutput(insightconnect_plugin_runtime.Output):
           "title": "Event Date",
           "description": "The time and date the event occurred",
           "order": 3
-        }
-      }
-    },
-    "link": {
-      "type": "object",
-      "title": "link",
-      "properties": {
-        "href": {
-          "type": "string",
-          "title": "Href",
-          "description": "Href",
-          "order": 4
-        },
-        "rel": {
-          "type": "string",
-          "title": "Rel",
-          "description": "Rel",
-          "order": 2
-        },
-        "type": {
-          "type": "string",
-          "title": "Type",
-          "description": "Type",
-          "order": 3
-        },
-        "value": {
-          "type": "string",
-          "title": "Value",
-          "description": "Value",
-          "order": 1
-        }
-      }
-    },
-    "notice": {
-      "type": "object",
-      "title": "notice",
-      "properties": {
-        "description": {
-          "type": "array",
-          "title": "Description",
-          "description": "Description",
-          "items": {
-            "type": "string"
-          },
-          "order": 2
-        },
-        "links": {
-          "type": "array",
-          "title": "Links",
-          "description": "Links",
-          "items": {
-            "$ref": "#/definitions/link"
-          },
-          "order": 3
-        },
-        "title": {
-          "type": "string",
-          "title": "Title",
-          "description": "Title",
-          "order": 1
-        }
-      },
-      "definitions": {
-        "link": {
-          "type": "object",
-          "title": "link",
-          "properties": {
-            "href": {
-              "type": "string",
-              "title": "Href",
-              "description": "Href",
-              "order": 4
-            },
-            "rel": {
-              "type": "string",
-              "title": "Rel",
-              "description": "Rel",
-              "order": 2
-            },
-            "type": {
-              "type": "string",
-              "title": "Type",
-              "description": "Type",
-              "order": 3
-            },
-            "value": {
-              "type": "string",
-              "title": "Value",
-              "description": "Value",
-              "order": 1
-            }
-          }
-        }
-      }
-    },
-    "publicId": {
-      "type": "object",
-      "title": "publicId",
-      "properties": {
-        "identifier": {
-          "type": "string",
-          "title": "Identifier",
-          "description": "The public identifier of the type related to 'type'",
-          "order": 2
-        },
-        "type": {
-          "type": "string",
-          "title": "Type",
-          "description": "The type of public identifier",
-          "order": 1
         }
       }
     }

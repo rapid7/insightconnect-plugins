@@ -4,6 +4,8 @@ import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_rdap.util.endpoints import ASN_ENDPOINT, DOMAIN_LOOKUP_ENDPOINT, IP_ENDPOINT
 
+from icon_rdap.util.helpers import extract_keys_from_dict, parse_entities, extract_nameservers
+
 
 class RdapAPI:
     def __init__(self, logger: Logger):
@@ -11,15 +13,15 @@ class RdapAPI:
         self._logger = logger
 
     def asn_lookup(self, asn: int) -> dict:
-        return self.make_json_request(method="GET", url=ASN_ENDPOINT.format(asn=asn))
+        return self._make_json_request(method="GET", url=ASN_ENDPOINT.format(asn=asn))
 
     def domain_lookup(self, domain: str) -> dict:
-        return self.make_json_request(method="GET", url=DOMAIN_LOOKUP_ENDPOINT.format(domain=domain))
+        return self._make_json_request(method="GET", url=DOMAIN_LOOKUP_ENDPOINT.format(domain=domain))
 
     def ip_lookup(self, ip_address: str) -> dict:
-        return self.make_json_request(method="GET", url=IP_ENDPOINT.format(ip_address=ip_address))
+        return self._make_json_request(method="GET", url=IP_ENDPOINT.format(ip_address=ip_address))
 
-    def make_request(self, method: str, url: str, headers: dict = None) -> requests.Response:
+    def _make_request(self, method: str, url: str, headers: dict = None) -> requests.Response:
         try:
             response = requests.request(method=method, url=url, headers=headers)
 
@@ -59,14 +61,13 @@ class RdapAPI:
             self._logger.info("[API ERROR] PluginException: UNKNOWN\n")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
 
-        except requests.exceptions.HTTPError as e:
+        except requests.exceptions.HTTPError as error:
             self._logger.info("[API ERROR] PluginException: UNKNOWN\n")
-            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=e)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
-    def make_json_request(self, method: str, url: str, headers: dict = None) -> dict:
+    def _make_json_request(self, method: str, url: str, headers: dict = None) -> dict:
         try:
-            response = self.make_request(method=method, url=url, headers=headers)
+            response = self._make_request(method=method, url=url, headers=headers)
             return response.json()
-
-        except json.decoder.JSONDecodeError as e:
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=e)
+        except json.decoder.JSONDecodeError as error:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)

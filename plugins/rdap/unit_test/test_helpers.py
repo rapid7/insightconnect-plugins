@@ -1,12 +1,24 @@
 import os
 import sys
-from unittest import TestCase
-from parameterized import parameterized
-from unit_test.util import Util
 
 sys.path.append(os.path.abspath("../"))
 
-from icon_rdap.util.helpers import to_camel_case, convert_keys_to_camel, extract_keys_from_dict, extract_asn_result
+from typing import Any, Dict, List, Union
+from unittest import TestCase
+
+from icon_rdap.util.helpers import (
+    convert_keys_to_camel,
+    extract_asn_result,
+    extract_keys_from_dict,
+    extract_nameservers,
+    parse_address_information,
+    parse_entities,
+    parse_vcards,
+    to_camel_case,
+)
+from parameterized import parameterized
+
+from unit_test.util import Util
 
 
 class TestHelpers(TestCase):
@@ -72,3 +84,113 @@ class TestHelpers(TestCase):
     def test_prepare_asn_result(self, test_name, asn_result, expected):
         actual = extract_asn_result(asn_result)
         self.assertDictEqual(actual, expected)
+
+    @parameterized.expand(
+        [
+            (
+                Util.read_file_to_dict("responses/helpers_vcards.json.resp").get("vcardArray")[1],
+                {
+                    "kind": "individual",
+                    "language": "en",
+                    "organization": "Example",
+                    "title": "Research Scientist",
+                    "role": "Project Lead",
+                    "email": "joe.user@example.com",
+                    "key": "https://www.example.com/joe.user/joe.asc",
+                    "url": "https://example.org",
+                    "fullname": "Joe User",
+                    "phone": "+1-555-555-1234",
+                    "geolocation": "46.772673,-71.282945",
+                    "timezone": "-05:00",
+                },
+            )
+        ]
+    )
+    def test_parse_vcards(self, vcards_list: List[List[Union[str, Dict[str, Any]]]], expected: Dict[str, Any]) -> None:
+        result = parse_vcards(vcards_list)
+        self.assertEqual(result, expected)
+
+    @parameterized.expand(
+        [
+            (
+                ["Example Office Box", "Test 1234", "Some street", "MyCity", "REGION", "123-123", "MyCountry"],
+                {
+                    "postOfficeBox": "Example Office Box",
+                    "extendedAddress": "Test 1234",
+                    "streetAddress": "Some street",
+                    "locality": "MyCity",
+                    "region": "REGION",
+                    "postalCode": "123-123",
+                    "countryName": "MyCountry",
+                },
+            ),
+            (["", "", "", "", "", "", "MyCountry"], {"countryName": "MyCountry"}),
+        ]
+    )
+    def test_parse_address_information(self, address_rdap_list: List[str], expected: Dict[str, Any]) -> None:
+        result = parse_address_information(address_rdap_list)
+        self.assertEqual(result, expected)
+
+    @parameterized.expand(
+        [
+            (
+                Util.read_file_to_dict("responses/helpers_entities.json.resp").get("entities"),
+                [
+                    {
+                        "roles": ["registrar"],
+                        "kind": "individual",
+                        "title": "Research Scientist",
+                        "role": "Project Lead",
+                        "email": "user@example.com",
+                        "fullname": "Joe User",
+                        "handle": "XXXX",
+                        "address": {
+                            "extendedAddress": "Suite 1234",
+                            "streetAddress": "Somewhere",
+                            "locality": "Sample",
+                            "region": "Other 1",
+                            "postalCode": "Test 1",
+                            "countryName": "Example Country Name 1",
+                        },
+                        "phone": "+1-555-555-1234",
+                        "organization": "Example",
+                        "language": "en",
+                    },
+                    {
+                        "roles": ["abuse"],
+                        "kind": "individual",
+                        "title": "Research Scientist",
+                        "role": "Project Lead",
+                        "email": "user2@example.com",
+                        "fullname": "User 2 ",
+                        "address": {
+                            "extendedAddress": "Suite 1234",
+                            "streetAddress": "Somewhere",
+                            "locality": "Sample",
+                            "region": "Other",
+                            "postalCode": "Test",
+                            "countryName": "Example Country Name 2",
+                        },
+                        "phone": "+1-555-555-1234",
+                        "organization": "Example",
+                        "language": "en",
+                    },
+                ],
+            )
+        ]
+    )
+    def test_parse_entities(self, entity: List[Dict[str, Any]], expected: List[Dict[str, Any]]) -> None:
+        result = parse_entities(entity)
+        self.assertEqual(result, expected)
+
+    @parameterized.expand(
+        [
+            (
+                Util.read_file_to_dict("responses/domain_lookup_found_domain.json.resp").get("nameservers", []),
+                ["A.IANA-SERVERS.NET", "B.IANA-SERVERS.NET"],
+            )
+        ]
+    )
+    def test_extract_nameservers(self, nameserver: List[Dict[str, Any]], expected: List[str]) -> None:
+        results = extract_nameservers(nameserver)
+        self.assertEqual(results, expected)
