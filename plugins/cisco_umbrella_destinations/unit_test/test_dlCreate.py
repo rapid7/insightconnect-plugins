@@ -9,7 +9,6 @@ from unittest import TestCase, mock
 from icon_cisco_umbrella_destinations.connection.connection import Connection
 from icon_cisco_umbrella_destinations.actions.dlCreate import DlCreate
 from icon_cisco_umbrella_destinations.actions.dlCreate.schema import Input
-from icon_cisco_umbrella_destinations.util.api import ERROR_MSG
 from insightconnect_plugin_runtime.exceptions import PluginException
 import logging
 from unit_test.mock import (
@@ -87,7 +86,7 @@ class TestDlCreate(TestCase):
 
     @parameterized.expand(
         [
-            (mock_request_400, ERROR_MSG),
+            (mock_request_400, PluginException.causes[PluginException.Preset.BAD_REQUEST]),
             (mock_request_401, PluginException.causes[PluginException.Preset.USERNAME_PASSWORD]),
             (mock_request_403, PluginException.causes[PluginException.Preset.UNAUTHORIZED]),
             (mock_request_404, PluginException.causes[PluginException.Preset.NOT_FOUND]),
