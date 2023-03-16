@@ -35,10 +35,10 @@ class ZscalerAPI:
     def get_blacklist_url(self) -> str:
         return self.authenticated_call("GET", "security/advanced").json()
 
-    def get_hash_report(self, hash: str):
+    def get_hash_report(self, hash_: str):
         return self.authenticated_call(
             "GET",
-            f"sandbox/report/{hash}?details=full",
+            f"sandbox/report/{hash_}?details=full",
         ).json()
 
     def url_lookup(self, lookup_url: list):
