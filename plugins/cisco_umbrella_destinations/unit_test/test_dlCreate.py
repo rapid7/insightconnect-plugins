@@ -9,7 +9,6 @@ from unittest import TestCase, mock
 from icon_cisco_umbrella_destinations.connection.connection import Connection
 from icon_cisco_umbrella_destinations.actions.dlCreate import DlCreate
 from icon_cisco_umbrella_destinations.actions.dlCreate.schema import Input
-from icon_cisco_umbrella_destinations.util.api import ERROR_MSG
 from insightconnect_plugin_runtime.exceptions import PluginException
 import logging
 from unit_test.mock import (

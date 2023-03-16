@@ -9,7 +9,6 @@ from icon_cisco_umbrella_destinations.connection.connection import Connection
 from icon_cisco_umbrella_destinations.actions.dlFilterAll import DlFilterAll
 from icon_cisco_umbrella_destinations.actions.dlFilterAll.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
-from icon_cisco_umbrella_destinations.util.api import ERROR_MSG
 import logging
 from unit_test.mock import (
     STUB_CONNECTION,
