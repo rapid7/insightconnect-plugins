@@ -5,8 +5,6 @@ import requests
 from requests.auth import HTTPBasicAuth
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-ERROR_MSG = "Invalid input data, ensure the input is correct"
-
 
 class CiscoUmbrellaManagementAPI:
     def __init__(self, api_key: str, api_secret: str, organization_id: int, logger=None):
