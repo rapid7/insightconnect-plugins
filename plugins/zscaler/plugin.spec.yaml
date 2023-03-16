@@ -3,7 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: zscaler
 title: Zscaler
-version: 1.4.0
+version: 1.5.0
+supported_versions: ["Zscaler API 2023-02-20"]
 description: Zscaler is a SaaS security platform that provides fast, secure connections between client applications, regardless of device, location, or network
 vendor: rapid7
 support: rapid7
@@ -194,6 +195,307 @@ types:
       type: FullDetails
       description: Full details
       required: false
+  department:
+    id:
+      title: ID
+      description: Department ID
+      type: integer
+      required: false
+      example: 123456789
+    name:
+      title: Name
+      description: Department name
+      type: string
+      required: false
+      example: Department Name
+    idpId:
+      title: IdpId
+      description: Identity provider (IdP) ID
+      type: integer
+      required: false
+      example: 123456789
+    comments:
+      title: Comments
+      description: Additional information about this department
+      type: string
+      required: false
+      example: Example comment
+    deleted:
+      title: Deleted
+      description: Is department deleted
+      type: boolean
+      required: false
+      example: false
+  group:
+    id:
+      title: ID
+      description: Unique identifier for the group
+      type: integer
+      required: false
+      example: 123456789
+    name:
+      title: Name
+      description: Group name
+      type: string
+      required: false
+      example: Group Name
+    idpId:
+      title: IdpId
+      description: Unique identifier for the identity provider (IdP)
+      type: integer
+      required: false
+      example: 123456789
+    comments:
+      title: Comments
+      description: Additional information about the group
+      type: string
+      required: false
+      example: Example comment
+  user:
+    id:
+      title: ID
+      description: User ID
+      type: integer
+      required: false
+      example: 123456789
+    name:
+      title: Name
+      description: User name
+      type: string
+      required: false
+      example: John
+    email:
+      title: Email
+      description: User email consists of a user name and domain name. It does not have to be a valid email address, but it must be unique and its domain must belong to the organization
+      type: string
+      required: false
+      example: user@example.com
+    groups:
+      title: Groups
+      description: List of groups a user belongs to
+      type: "[]group"
+      required: false
+      example: [ ]
+    department:
+      title: Department
+      description: Department a user belongs to
+      type: department
+      required: false
+      example: { }
+    comments:
+      title: Comments
+      description: Additional information about this user
+      type: string
+      required: false
+      example: Example comment
+    tempAuthEmail:
+      title: Temporary Authentication Email
+      description: If you enabled one-time tokens or links, enter the email address to which the Zscaler service sends the tokens or links. If this is empty, the service sends the email to the User email
+      type: string
+      required: false
+      example: user@example.com
+    adminUser:
+      title: Admin User
+      description: True if this user is an Admin user
+      type: boolean
+      required: false
+      example: false
+    type:
+      title: Type
+      description: User type. Provided only if this user is not an end user
+      type: string
+      required: false
+      example: ADMIN
+    deleted:
+      title: Deleted
+      description: Is user deleted
+      type: boolean
+      required: false
+      example: false
+    isNonEditable:
+      title: Is Non Editable
+      description: Is user non-editable
+      type: boolean
+      required: false
+      example: false
+  urlKeywordCounts:
+    totalUrlCount:
+      title: Total URL Count
+      description: Custom URL count for the category
+      type: integer
+      required: false
+      example: 1
+    retainParentUrlCount:
+      title: Retain Parent URL Count
+      description: Count of URLs with retain parent category
+      type: integer
+      required: false
+      example: 0
+    totalKeywordCount:
+      title: Total Keyword Count
+      description: Total keyword count for the category
+      type: integer
+      required: false
+      example: 1
+    retainParentKeywordCount:
+      title: Retain Parent Keyword Count
+      description: Count of total keywords with retain parent category
+      type: integer
+      required: false
+      example: 0
+  entityReference:
+    id:
+      title: ID
+      description: Identifier that uniquely identifies an entity
+      type: integer
+      required: false
+      example: 12345678
+    name:
+      title: Name
+      description: The configured name of the entity
+      type: string
+      required: false
+      example: Entity Name
+    extensions:
+      title: Extensions
+      description: Extensions
+      type: object
+      required: false
+      example: { }
+  adminScope:
+    scopeGroupMemberEntities:
+      title: Scope Group Member Entities
+      description: List of ID/name pairs of locations within the location group
+      type: "[]entityReference"
+      required: false
+      example: [ ]
+    type:
+      title: Type
+      description: The admin scope type
+      type: string
+      required: false
+      example: ORGANIZATION
+    scopeEntities:
+      title: Scope Entities
+      description: Based on the admin scope type, the entities can be the ID/name pair of departments, locations, or location groups
+      type: "[]entityReference"
+      required: false
+      example: [ ]
+  urlCategory:
+    id:
+      title: ID
+      description: The identifier of the URL category
+      type: string
+      required: false
+      example: CUSTOM_01
+    configuredName:
+      title: Configured Name
+      description: Name of the URL category
+      type: string
+      required: false
+      example: Example Name
+    superCategory:
+      title: Super Category
+      description: Super Category of the URL category
+      type: string
+      required: false
+      example: Games
+    keywords:
+      title: Keywords
+      description: Custom keywords associated with a URL category. Up to 2048 custom keywords can be added per organization across all categories
+      type: "[]string"
+      required: false
+      example: [ ]
+    keywordsRetainingParentCategory:
+      title: Keywords Retaining Parent Category
+      description: Retained custom keywords from the parent URL category that is associated to a URL category. Up to 2048 retained parent keywords can be added per organization across all categories (including bandwidth classes)
+      type: "[]string"
+      required: false
+      example: [ ]
+    urls:
+      title: URLs
+      description: Custom URLs to add to a URL category. Up to 25,000 custom URLs can be added per organization across all categories (including bandwidth classes)
+      type: "[]string"
+      required: false
+      example: [ ]
+    dbCategorizedUrls:
+      title: DB Categorized URLs
+      description: URLs added to a custom URL category are also retained under the original parent URL category (i.e., the predefined category the URL previously belonged to). The URLs entered are covered by policies that reference the original parent URL category as well as those that reference the custom URL category
+      type: "[]string"
+      required: false
+      example: [ ]
+    ipRanges:
+      title: IP Ranges
+      description: Custom IP address ranges associated with a URL category. Up to 2000 custom IP address ranges and retaining parent custom IP address ranges can be added, per organization, across all categories
+      type: "[]string"
+      required: false
+      example: [ ]
+    ipRangesRetainingParentCategory:
+      title: IP Ranges Retaining Parent Category
+      description: The retaining parent custom IP address ranges associated with a URL category. Up to 2000 custom IP ranges and retaining parent custom IP address ranges can be added, per organization, across all categories
+      type: "[]string"
+      required: false
+      example: [ ]
+    customCategory:
+      title: Custom Category
+      description: Whether the URL category is custom. Up to 48 custom URL categories can be added per organization
+      type: boolean
+      required: false
+      example: true
+    scopes:
+      title: Scopes
+      description: Scope of the custom categories
+      type: "[]adminScope"
+      required: false
+      example: [ ]
+    editable:
+      title: Editable
+      description: Value is set to false for custom URL category when due to scope user does not have edit permission
+      type: boolean
+      required: false
+      example: true
+    description:
+      title: Description
+      description: Description of the URL category. Contains tag name and needs to be localized on client side in case of predefined category, else it contains the user-entered description which does not have localization support
+      type: string
+      required: false
+      example: Example description
+    type:
+      title: Type
+      description: Type of the URL category
+      type: string
+      required: false
+      example: URL_CATEGORY
+    urlKeywordCounts:
+      title: URL Keyword Counts
+      description: URL and keyword counts for the URL category
+      type: urlKeywordCounts
+      required: false
+      example: { }
+    customUrlsCount:
+      title: Custom URLs Count
+      description: The number of custom URLs associated to the URL category
+      type: integer
+      required: false
+      example: 1
+    urlsRetainingParentCategoryCount:
+      title: URLs Retaining Parent Category Count
+      description: The number of custom URLs associated to the URL category, that also need to be retained under the original parent category
+      type: integer
+      required: false
+      example: 0
+    customIpRangesCount:
+      title: Custom IP Ranges Count
+      description: The number of custom IP address ranges associated to the URL category
+      type: integer
+      required: false
+      example: 0
+    ipRangesRetainingParentCategoryCount:
+      title: IP Ranges Retaining Parent Category Count
+      description: The number of custom IP address ranges associated to the URL category, that also need to be retained under the original parent category
+      type: integer
+      required: false
+      example: 0
 
 connection:
   url:
@@ -291,3 +593,388 @@ actions:
         description: URLs added to the blacklist
         type: "[]string"
         required: false
+  get_users:
+    title: Get Users
+    description: Gets a list of all users and allows user filtering by name, department, or group. The name search parameter performs a partial match. The dept and group parameters perform a 'starts with' match
+    input:
+      name:
+        title: Name
+        description: Filters by user name
+        type: string
+        required: false
+        example: John
+      department:
+        title: Department
+        description: Filters by department name
+        type: string
+        required: false
+        example: Department Name
+      group:
+        title: Group
+        description: Filters by group name
+        type: string
+        required: false
+        example: Group Name
+      page:
+        title: Page
+        description: Specifies the page offset
+        type: integer
+        required: false
+        example: 1
+      pageSize:
+        title: Page Size
+        description: Specifies the page size
+        type: integer
+        required: false
+        example: 100
+    output:
+      users:
+        title: User
+        description: List of organization users
+        type: "[]user"
+        required: false
+        example: [ ]
+  delete_user:
+    title: Delete User
+    description: Deletes the user for the specified ID
+    input:
+      userId:
+        title: User Id
+        description: The unique identifier for the user
+        type: integer
+        required: true
+        example: 12345678
+    output:
+      success:
+        title: Success
+        description: Whether or not the request succeeded
+        type: boolean
+        required: false
+  create_user:
+    title: Create User
+    description: Adds a new user. A user can belong to multiple groups, but can only belong to one department
+    input:
+      name:
+        title: Name
+        description: User name
+        type: string
+        required: true
+        example: John
+      email:
+        title: Email
+        description: User email consists of a user name and domain name. It does not have to be a valid email address, but it must be unique and its domain must belong to the organization
+        type: string
+        required: true
+        example: user@example.com
+      groupNames:
+        title: Group Names
+        description: List of groups a user belongs to
+        type: "[]string"
+        required: true
+        example: [ 'Group Name' ]
+      departmentName:
+        title: Department Name
+        description: Department a user belongs to
+        type: string
+        required: true
+        example: Department Name
+      comments:
+        title: Comments
+        description: Additional information about this user
+        type: string
+        required: false
+        example: Example comment
+      tempAuthEmail:
+        title: Temporary Authentication Email
+        description: If you enabled one-time tokens or links, enter the email address to which the Zscaler service sends the tokens or links. If this is empty, the service sends the email to the User email
+        type: string
+        required: false
+        example: user@example.com
+      password:
+        title: Password
+        description: User's password. Applicable only when authentication type is Hosted DB. Password strength must follow what is defined in the auth settings
+        type: password
+        required: true
+        example: password12!
+    output:
+      user:
+        title: User
+        description: An organization user
+        type: user
+        required: false
+        example: { }
+  get_url_category_by_name:
+    title: Get URL Category by Name
+    description: Gets the URL category information for the specified name
+    input:
+      urlCategoryName:
+        title: URL Category Name
+        description: Name of the URL category to be returned. This field will be ignored if the 'Custom URL Category Name' input is filled
+        type: string
+        default: "Adult Sex Education"
+        enum:
+          - "Adult Sex Education"
+          - "Adult Themes"
+          - "Advertising"
+          - "Alcohol/Tobacco"
+          - "Alt/New Age"
+          - "Anonymizer"
+          - "Art/Culture"
+          - "Blogs"
+          - "Body Art"
+          - "CDN"
+          - "Classifieds"
+          - "Computer Hacking"
+          - "Continuing Education/Colleges"
+          - "Copyright Infringement"
+          - "Corporate Marketing"
+          - "Cult"
+          - "Custom Encrypted Content"
+          - "DNS Over HTTPS Services"
+          - "Dining/Restaurant"
+          - "Discussion Forum"
+          - "Dynamic DNS Host"
+          - "Entertainment"
+          - "Family Issues"
+          - "FileHost"
+          - "Finance"
+          - "Gambling"
+          - "Government"
+          - "Health"
+          - "History"
+          - "Hobbies/Leisure"
+          - "Image Host"
+          - "Internet Services"
+          - "Job/Employment Search"
+          - "K-12"
+          - "K-12 Sex Education"
+          - "Lifestyle"
+          - "Lingerie/Bikini"
+          - "Marijuana"
+          - "Mature Humor"
+          - "Militancy/Hate and Extremism"
+          - "Military"
+          - "Miscellaneous or Unknown"
+          - "Music and Audio Streaming"
+          - "Newly Registered and Observed Domains"
+          - "Newly Revived Domains"
+          - "News and Media"
+          - "Non Categorizable"
+          - "Nudity"
+          - "Online Auctions"
+          - "Online Chat"
+          - "Online Shopping"
+          - "Online Trading, Brokerage, Insurance"
+          - "Online and Other Games"
+          - "Operating System and Software Updates"
+          - "Other Adult Material"
+          - "Other Business and Economy"
+          - "Other Drugs"
+          - "Other Education"
+          - "Other Entertainment/Recreation"
+          - "Other Government and Politics"
+          - "Other Illegal or Questionable"
+          - "Other Information Technology"
+          - "Other Internet Communication"
+          - "Other Miscellaneous"
+          - "Other Religion"
+          - "Other Security"
+          - "Other Shopping and Auctions"
+          - "Other Social and Family Issues"
+          - "Other Society and Lifestyle"
+          - "Peer-to-Peer Site"
+          - "Politics"
+          - "Pornography"
+          - "Portals"
+          - "Profanity"
+          - "Professional Services"
+          - "Questionable"
+          - "Radio"
+          - "Real Estate"
+          - "Reference Sites"
+          - "Remote Access Tools"
+          - "Safe Search Engine"
+          - "Science/Tech"
+          - "Shareware Download"
+          - "Social Issues"
+          - "Social Networking"
+          - "Social Networking Adult"
+          - "Social Networking Games"
+          - "Special Interests/Social Organizations"
+          - "Sports"
+          - "Spyware/Adware"
+          - "Tasteless"
+          - "Television/Movies"
+          - "Traditional Religion"
+          - "Translators"
+          - "Travel"
+          - "User-Defined"
+          - "Vehicles"
+          - "Video Streaming"
+          - "Violence"
+          - "Weapons/Bomb"
+          - "Web Conferencing"
+          - "Web Host"
+          - "Web Search"
+          - "Webmail"
+          - "Zscaler Proxy IPs"
+        required: false
+        example: Travel
+      customUrlCategoryName:
+        title: Custom URL Category Name
+        description: Name of the custom URL category to be returned. If this field is filled then the 'URL Category Name' input will be ignored
+        type: string
+        required: false
+        example: Custom Category Example
+    output:
+      urlCategory:
+        title: URL Category
+        description: Information about the given URL category
+        type: urlCategory
+        required: false
+        example: { }
+  update_urls_of_url_category:
+    title: Update URLs of URL Category
+    description: Adds or removes URLs for the specified URL category
+    input:
+      urlCategoryName:
+        title: URL Category Name
+        description: Name of the URL category to be returned. This field will be ignored if the 'Custom URL Category Name' input is filled
+        type: string
+        default: "Adult Sex Education"
+        enum:
+          - "Adult Sex Education"
+          - "Adult Themes"
+          - "Advertising"
+          - "Alcohol/Tobacco"
+          - "Alt/New Age"
+          - "Anonymizer"
+          - "Art/Culture"
+          - "Blogs"
+          - "Body Art"
+          - "CDN"
+          - "Classifieds"
+          - "Computer Hacking"
+          - "Continuing Education/Colleges"
+          - "Copyright Infringement"
+          - "Corporate Marketing"
+          - "Cult"
+          - "Custom Encrypted Content"
+          - "DNS Over HTTPS Services"
+          - "Dining/Restaurant"
+          - "Discussion Forum"
+          - "Dynamic DNS Host"
+          - "Entertainment"
+          - "Family Issues"
+          - "FileHost"
+          - "Finance"
+          - "Gambling"
+          - "Government"
+          - "Health"
+          - "History"
+          - "Hobbies/Leisure"
+          - "Image Host"
+          - "Internet Services"
+          - "Job/Employment Search"
+          - "K-12"
+          - "K-12 Sex Education"
+          - "Lifestyle"
+          - "Lingerie/Bikini"
+          - "Marijuana"
+          - "Mature Humor"
+          - "Militancy/Hate and Extremism"
+          - "Military"
+          - "Miscellaneous or Unknown"
+          - "Music and Audio Streaming"
+          - "Newly Registered and Observed Domains"
+          - "Newly Revived Domains"
+          - "News and Media"
+          - "Non Categorizable"
+          - "Nudity"
+          - "Online Auctions"
+          - "Online Chat"
+          - "Online Shopping"
+          - "Online Trading, Brokerage, Insurance"
+          - "Online and Other Games"
+          - "Operating System and Software Updates"
+          - "Other Adult Material"
+          - "Other Business and Economy"
+          - "Other Drugs"
+          - "Other Education"
+          - "Other Entertainment/Recreation"
+          - "Other Government and Politics"
+          - "Other Illegal or Questionable"
+          - "Other Information Technology"
+          - "Other Internet Communication"
+          - "Other Miscellaneous"
+          - "Other Religion"
+          - "Other Security"
+          - "Other Shopping and Auctions"
+          - "Other Social and Family Issues"
+          - "Other Society and Lifestyle"
+          - "Peer-to-Peer Site"
+          - "Politics"
+          - "Pornography"
+          - "Portals"
+          - "Profanity"
+          - "Professional Services"
+          - "Questionable"
+          - "Radio"
+          - "Real Estate"
+          - "Reference Sites"
+          - "Remote Access Tools"
+          - "Safe Search Engine"
+          - "Science/Tech"
+          - "Shareware Download"
+          - "Social Issues"
+          - "Social Networking"
+          - "Social Networking Adult"
+          - "Social Networking Games"
+          - "Special Interests/Social Organizations"
+          - "Sports"
+          - "Spyware/Adware"
+          - "Tasteless"
+          - "Television/Movies"
+          - "Traditional Religion"
+          - "Translators"
+          - "Travel"
+          - "User-Defined"
+          - "Vehicles"
+          - "Video Streaming"
+          - "Violence"
+          - "Weapons/Bomb"
+          - "Web Conferencing"
+          - "Web Host"
+          - "Web Search"
+          - "Webmail"
+          - "Zscaler Proxy IPs"
+        required: false
+        example: Travel
+      customUrlCategoryName:
+        title: Custom URL Category Name
+        description: Name of the custom URL category to be returned. If this field is filled then the 'URL Category Name' input will be ignored
+        type: string
+        required: false
+        example: Custom Category Example
+      action:
+        title: Action
+        description: The action applied to the URLs
+        type: string
+        enum:
+          - "Add to the list"
+          - "Remove from the list"
+        required: true
+        example: Add to the list
+      urlList:
+        title: URL List
+        description: List of the URLs to be updated
+        type: "[]string"
+        required: true
+        example: [ "example.com", "example1.com" ]
+    output:
+      urlCategory:
+        title: URL Category
+        description: Information about the updated URL category
+        type: urlCategory
+        required: false
+        example: { }

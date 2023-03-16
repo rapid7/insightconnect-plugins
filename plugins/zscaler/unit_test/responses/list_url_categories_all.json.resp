@@ -1,0 +1,176 @@
+[
+  {
+    "id":"RADIO_STATIONS",
+    "superCategory":"ENTERTAINMENT_AND_RECREATION",
+    "keywords":[
+      "keyword1"
+    ],
+    "keywordsRetainingParentCategory":[
+      "keyword2"
+    ],
+    "urls":[
+      "example.com"
+    ],
+    "dbCategorizedUrls":[
+
+    ],
+    "ipRanges":[
+
+    ],
+    "ipRangesRetainingParentCategory":[
+
+    ],
+    "customCategory":false,
+    "editable":true,
+    "description":"RADIO_STATIONS_DESC",
+    "type":"URL_CATEGORY",
+    "urlKeywordCounts":{
+      "totalUrlCount":1,
+      "retainParentUrlCount":0,
+      "totalKeywordCount":2,
+      "retainParentKeywordCount":1
+    },
+    "customUrlsCount":1,
+    "urlsRetainingParentCategoryCount":1,
+    "customIpRangesCount":0,
+    "ipRangesRetainingParentCategoryCount":0
+  },
+  {
+    "id":"TRAVEL",
+    "superCategory":"TRAVEL",
+    "keywords":[
+      "keyword1"
+    ],
+    "keywordsRetainingParentCategory":[
+      "keyword2"
+    ],
+    "urls":[
+      "example.com"
+    ],
+    "dbCategorizedUrls":[
+
+    ],
+    "ipRanges":[
+
+    ],
+    "ipRangesRetainingParentCategory":[
+
+    ],
+    "customCategory":false,
+    "editable":true,
+    "description":"TRAVEL_DESC",
+    "type":"URL_CATEGORY",
+    "urlKeywordCounts":{
+      "totalUrlCount":1,
+      "retainParentUrlCount":0,
+      "totalKeywordCount":2,
+      "retainParentKeywordCount":1
+    },
+    "customUrlsCount":1,
+    "urlsRetainingParentCategoryCount":1,
+    "customIpRangesCount":0,
+    "ipRangesRetainingParentCategoryCount":0
+  },
+  {
+    "id":"CUSTOM_01",
+    "configuredName":"Test Category",
+    "superCategory":"USER_DEFINED",
+    "keywords":[
+      "keyword1"
+    ],
+    "keywordsRetainingParentCategory":[
+      "keyword2"
+    ],
+    "urls":[
+      "example.com"
+    ],
+    "dbCategorizedUrls":[
+
+    ],
+    "ipRanges":[
+
+    ],
+    "ipRangesRetainingParentCategory":[
+
+    ],
+    "customCategory":true,
+    "scopes":[
+      {
+        "scopeGroupMemberEntities":[
+          {
+            "id":0,
+            "name":"string",
+            "extensions":{
+              "additionalProp1":"string"
+            }
+          }
+        ],
+        "Type":"LOCATION_GROUP",
+        "ScopeEntities":[
+          {
+            "id":0,
+            "name":"string",
+            "extensions":{
+              "additionalProp1":"string"
+            }
+          }
+        ]
+      }
+    ],
+    "editable":true,
+    "description":"description example",
+    "type":"URL_CATEGORY",
+    "urlKeywordCounts":{
+      "totalUrlCount":1,
+      "retainParentUrlCount":0,
+      "totalKeywordCount":2,
+      "retainParentKeywordCount":1
+    },
+    "customUrlsCount":1,
+    "urlsRetainingParentCategoryCount":1,
+    "customIpRangesCount":0,
+    "ipRangesRetainingParentCategoryCount":0
+  },
+  {
+    "id":"CUSTOM_02",
+    "configuredName":"Category Example",
+    "superCategory":"ENTERTAINMENT_AND_RECREATION",
+    "keywords":[
+      "keyword1"
+    ],
+    "keywordsRetainingParentCategory":[
+      "keyword2"
+    ],
+    "urls":[
+      "example.com"
+    ],
+    "dbCategorizedUrls":[
+
+    ],
+    "ipRanges":[
+
+    ],
+    "ipRangesRetainingParentCategory":[
+
+    ],
+    "customCategory":true,
+    "scopes":[
+      {
+        "Type":"ORGANIZATION"
+      }
+    ],
+    "editable":true,
+    "description":"description example",
+    "type":"URL_CATEGORY",
+    "urlKeywordCounts":{
+      "totalUrlCount":1,
+      "retainParentUrlCount":0,
+      "totalKeywordCount":2,
+      "retainParentKeywordCount":1
+    },
+    "customUrlsCount":1,
+    "urlsRetainingParentCategoryCount":1,
+    "customIpRangesCount":0,
+    "ipRangesRetainingParentCategoryCount":0
+  }
+]

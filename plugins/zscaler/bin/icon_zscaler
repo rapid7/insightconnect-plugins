@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Zscaler"
 Vendor = "rapid7"
-Version = "1.4.0"
+Version = "1.5.0"
 Description = "Zscaler is a SaaS security platform that provides fast, secure connections between client applications, regardless of device, location, or network"
 
 
@@ -36,11 +36,21 @@ def main():
             )
             self.add_action(actions.BlacklistUrl())
 
+            self.add_action(actions.CreateUser())
+
+            self.add_action(actions.DeleteUser())
+
             self.add_action(actions.GetBlacklistUrl())
 
             self.add_action(actions.GetSandboxReportForHash())
 
+            self.add_action(actions.GetUrlCategoryByName())
+
+            self.add_action(actions.GetUsers())
+
             self.add_action(actions.LookupUrl())
+
+            self.add_action(actions.UpdateUrlsOfUrlCategory())
 
 
     """Run plugin"""

@@ -1,0 +1,9 @@
+[
+  {
+    "id": 123456789,
+    "name": "Test Department",
+    "idpId": 123456789,
+    "comments": "Sample comment",
+    "deleted": false
+  }
+]

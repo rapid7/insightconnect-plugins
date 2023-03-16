@@ -1,0 +1,44 @@
+{
+  "urlCategory":{
+    "id":"CUSTOM_02",
+    "configuredName":"Category Example",
+    "superCategory":"ENTERTAINMENT_AND_RECREATION",
+    "keywords":[
+      "keyword1"
+    ],
+    "keywordsRetainingParentCategory":[
+      "keyword2"
+    ],
+    "urls":[
+
+    ],
+    "dbCategorizedUrls":[
+
+    ],
+    "ipRanges":[
+
+    ],
+    "ipRangesRetainingParentCategory":[
+
+    ],
+    "customCategory":true,
+    "scopes":[
+      {
+        "type":"ORGANIZATION"
+      }
+    ],
+    "editable":true,
+    "description":"description example",
+    "type":"URL_CATEGORY",
+    "urlKeywordCounts":{
+      "totalUrlCount":0,
+      "retainParentUrlCount":0,
+      "totalKeywordCount":2,
+      "retainParentKeywordCount":1
+    },
+    "customUrlsCount":0,
+    "urlsRetainingParentCategoryCount":0,
+    "customIpRangesCount":0,
+    "ipRangesRetainingParentCategoryCount":0
+  }
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "id": 123456789,
+    "name": "Sample user",
+    "email": "user@example.com",
+    "groups": [
+      {
+        "id": 123456789,
+        "name": "Test Group"
+      }
+    ],
+    "department": {
+      "id": 123456789,
+      "name": "Test Department"
+    },
+    "adminUser": false,
+    "isNonEditable": false,
+    "deleted": false
+  }
+]

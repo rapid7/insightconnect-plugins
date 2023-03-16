@@ -1,0 +1,64 @@
+{
+  "urlCategory":{
+    "id":"CUSTOM_01",
+    "configuredName":"Test Category",
+    "superCategory":"USER_DEFINED",
+    "keywords":[
+      "keyword1"
+    ],
+    "keywordsRetainingParentCategory":[
+      "keyword2"
+    ],
+    "urls":[
+      "example.com",
+      "example11.com",
+      "example22.com"
+    ],
+    "dbCategorizedUrls":[
+
+    ],
+    "ipRanges":[
+
+    ],
+    "ipRangesRetainingParentCategory":[
+
+    ],
+    "customCategory":true,
+    "scopes":[
+      {
+        "scopeGroupMemberEntities":[
+          {
+            "id":0,
+            "name":"string",
+            "extensions":{
+              "additionalProp1":"string"
+            }
+          }
+        ],
+        "type":"LOCATION_GROUP",
+        "scopeEntities":[
+          {
+            "id":0,
+            "name":"string",
+            "extensions":{
+              "additionalProp1":"string"
+            }
+          }
+        ]
+      }
+    ],
+    "editable":true,
+    "description":"description example",
+    "type":"URL_CATEGORY",
+    "urlKeywordCounts":{
+      "totalUrlCount":3,
+      "retainParentUrlCount":0,
+      "totalKeywordCount":2,
+      "retainParentKeywordCount":1
+    },
+    "customUrlsCount":3,
+    "urlsRetainingParentCategoryCount":1,
+    "customIpRangesCount":0,
+    "ipRangesRetainingParentCategoryCount":0
+  }
+}
