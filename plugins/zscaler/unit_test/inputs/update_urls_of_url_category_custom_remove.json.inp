@@ -1,0 +1,6 @@
+{
+  "action": "Remove from the list",
+  "customUrlCategoryName": "Category Example",
+  "urlCategoryName": "Travel",
+  "urlList": ["example.com"]
+}
