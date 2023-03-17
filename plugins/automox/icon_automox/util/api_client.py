@@ -65,7 +65,7 @@ class ApiClient:
         page_resp = []
 
         while True:
-            resp = self._call_api("get", url, params)
+            resp = self._call_api("GET", url, params)
             if sanitize:
                 resp = self.remove_null_values(resp)
 
@@ -86,7 +86,7 @@ class ApiClient:
         page_resp = []
 
         while True:
-            resp = self._call_api("get", url, params)
+            resp = self._call_api("GET", url, params)
             resp_data = self.remove_null_values(resp.get("data"))
 
             page_resp.extend(resp_data)
@@ -149,7 +149,7 @@ class ApiClient:
         params = self.first_page(self._org_param(org_id))
 
         while True:
-            devices = self._call_api("get", f"{self.endpoint}/servers", params)
+            devices = self._call_api("GET", f"{self.endpoint}/servers", params)
 
             for device in devices:
                 for attr in attributes:
@@ -164,6 +164,8 @@ class ApiClient:
                 break
 
             self.next_page(params)
+        self.logger.info(f"Device {value} not found")
+        return {}
 
     def get_device_software(self, org_id: int, device_id: int) -> Dict:
         return self._page_results(f"{self.endpoint}/servers/{device_id}/packages", self._org_param(org_id))
@@ -291,7 +293,7 @@ class ApiClient:
                     f"{self.endpoint}/orgs/{org_id}/tasks/patch/batches/upload?source={report_source}",
                     files=files,
                     headers=headers,
-                )
+                )  # nosec B113
 
                 if response.status_code == 200:
                     return response.json().get("id")

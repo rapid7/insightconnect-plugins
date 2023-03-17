@@ -1,0 +1,36 @@
+[
+    {
+        "id":1234,
+        "server_id":123456,
+        "package_id":654321,
+        "software_id":1111,
+        "installed":true,
+        "ignored":false,
+        "group_ignored":false,
+        "deferred_until":null,
+        "group_deferred_until":null,
+        "name":"KB1234",
+        "display_name":"Security Update (KB1234)",
+        "version":"1",
+        "repo":"Example",
+        "cves":[
+            "ADV1234"
+        ],
+        "cve_score":null,
+        "agent_severity":null,
+        "severity":null,
+        "package_version_id":123456789,
+        "os_name":"10 Enterprise",
+        "os_version":"10.0.0",
+        "os_version_id":1234,
+        "create_time":"2023-03-01T12:00:00+0000",
+        "requires_reboot":false,
+        "patch_classification_category_id":null,
+        "patch_scope":null,
+        "is_uninstallable":false,
+        "secondary_id":"KB4321",
+        "is_managed":true,
+        "impact":0,
+        "organization_id":1234
+    }
+]

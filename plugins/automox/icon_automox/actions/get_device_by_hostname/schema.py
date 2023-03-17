@@ -99,9 +99,9 @@ class GetDeviceByHostnameOutput(insightconnect_plugin_runtime.Output):
           "description": "Whether a device is deleted",
           "order": 9
         },
-        "details": {
+        "detail": {
           "type": "object",
-          "title": "Details",
+          "title": "Detail",
           "description": "Additional details of a device",
           "order": 17
         },
@@ -289,12 +289,6 @@ class GetDeviceByHostnameOutput(insightconnect_plugin_runtime.Output):
           "order": 8
         }
       },
-      "required": [
-        "id",
-        "name",
-        "organization_id",
-        "server_group_id"
-      ],
       "definitions": {
         "device_policy_status": {
           "type": "object",
