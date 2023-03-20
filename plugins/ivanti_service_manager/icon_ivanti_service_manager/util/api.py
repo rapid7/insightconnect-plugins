@@ -1,4 +1,6 @@
 import json
+import logging
+
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
@@ -38,6 +40,7 @@ class IvantiServiceManagerAPI:
         ).get("value")
 
         if incident:
+            logging.info(str(incident[0]))
             return incident[0]
 
         raise PluginException(
