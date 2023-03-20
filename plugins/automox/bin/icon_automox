@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Automox"
 Vendor = "automox"
-Version = "1.1.1"
+Version = "1.2.0"
 Description = "Automox is modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment"
 
 

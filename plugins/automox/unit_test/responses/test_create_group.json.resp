@@ -1,0 +1,11 @@
+{
+    "name":"example",
+    "parent_server_group_id":1234,
+    "refresh_interval":1440,
+    "ui_color":null,
+    "notes":"",
+    "enable_os_auto_update":null,
+    "organization_id":1234,
+    "id":123,
+    "wsus_config":null
+}
