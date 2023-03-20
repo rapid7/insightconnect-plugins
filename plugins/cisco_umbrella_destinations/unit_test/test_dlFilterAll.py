@@ -6,55 +6,69 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
 from icon_cisco_umbrella_destinations.connection.connection import Connection
-from icon_cisco_umbrella_destinations.actions.dlPatch import DlPatch
-from icon_cisco_umbrella_destinations.actions.dlPatch.schema import Input
+from icon_cisco_umbrella_destinations.actions.dlFilterAll import DlFilterAll
+from icon_cisco_umbrella_destinations.actions.dlFilterAll.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 import logging
 from unit_test.mock import (
     STUB_CONNECTION,
+    STUB_ACCESS,
+    STUB_IS_GLOBAL,
+    STUB_MSP_DEFAULT,
+    STUB_DELETION,
     mock_request_200,
     mock_request_403,
     mock_request_401,
     mock_request_500,
     mock_request_400,
     mock_request_404,
-    STUB_DESTINATION_LIST_ID,
     mocked_request,
-    STUB_RESPONSE,
 )
 
 
-class TestDlPatch(TestCase):
+class TestDlFilterAll(TestCase):
     def setUp(self) -> None:
         self.connection = Connection()
         self.connection.logger = logging.getLogger("Connection logger")
         self.connection.connect(STUB_CONNECTION)
 
-        self.action = DlPatch()
+        self.action = DlFilterAll()
         self.action.connection = self.connection
         self.action.logger = logging.getLogger("Action logger")
 
-        self.params = {Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID, Input.NAME: "CreateListTest"}
-
-    @mock.patch("requests.request", side_effect=mock_request_200)
-    def test_successful(self, mock_patch):
-        response = self.action.run(self.params)
-        expected_response = {
-            "success": {
-                "id": 15755711,
-                "organizationId": 2372338,
-                "access": "allow",
-                "isGlobal": False,
-                "name": "CreateListTest",
-                "createdAt": "2022-01-28T16:03:36+0000",
-                "modifiedAt": "2022-02-09T11:47:00+0000",
-                "isMspDefault": False,
-                "markedForDeletion": False,
-                "bundleTypeId": 1,
-                "meta": {"destinationCount": 5},
-            }
+        self.params = {
+            Input.ACCESS: STUB_ACCESS,
+            Input.ISMSPDEFAULT: STUB_MSP_DEFAULT,
+            Input.ISGLOBAL: STUB_IS_GLOBAL,
+            Input.MARKEDFORDELETION: STUB_DELETION,
         }
 
+    @mock.patch("requests.request", side_effect=mock_request_200)
+    def test_success(self, mock_get):
+        response = self.action.run(self.params)
+        expected_response = {
+            "data": [
+                {
+                    "id": 5798992,
+                    "organizationId": 2303280,
+                    "access": "block",
+                    "isGlobal": False,
+                    "name": "Block For All",
+                    "createdAt": "2020-05-19T20:58:55+0000",
+                    "modifiedAt": "2020-05-19T21:11:15+0000",
+                    "isMspDefault": False,
+                    "markedForDeletion": False,
+                    "bundleTypeId": 1,
+                    "meta": {
+                        "destinationCount": 0,
+                        "domainCount": 0,
+                        "urlCount": 0,
+                        "ipv4Count": 0,
+                        "applicationCount": 0,
+                    },
+                }
+            ]
+        }
         self.assertEqual(response, expected_response)
 
     @parameterized.expand(
@@ -70,5 +84,5 @@ class TestDlPatch(TestCase):
         mocked_request(mock_request)
 
         with self.assertRaises(PluginException) as context:
-            self.action.run(self.params)
+            self.action.run()
         self.assertEqual(context.exception.cause, exception)
