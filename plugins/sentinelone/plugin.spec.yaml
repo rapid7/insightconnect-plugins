@@ -2812,7 +2812,7 @@ triggers:
     input:
       resolved:
         title: Resolved
-        description: Include resolved threats
+        description: Set True to only trigger on resolved threats
         type: boolean
         required: false
         example: true
