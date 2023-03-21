@@ -62,7 +62,7 @@ class GetThreatsInput(insightconnect_plugin_runtime.Input):
     "resolved": {
       "type": "boolean",
       "title": "Resolved",
-      "description": "Include resolved threats",
+      "description": "Set True to only trigger on resolved threats",
       "order": 1
     }
   }

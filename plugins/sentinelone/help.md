@@ -1720,7 +1720,7 @@ This trigger is used to get threats.
 |classifications|[]string|None|False|List of classifications to search|None|[""]|
 |engines|[]string|None|False|Included engines|None|[""]|
 |frequency|integer|5|False|Poll frequency in seconds|None|5|
-|resolved|boolean|None|False|Include resolved threats|None|True|
+|resolved|boolean|None|False|Set True to only trigger on resolved threats|None|True|
 
 Example input:
 ```
@@ -2032,10 +2032,11 @@ Example output:
 ## Troubleshooting
 
 To convert `threat` into an array use Type Converter Plugin
+For the Trigger settings, only set the Resolved field to False if solely resolved threats should be retrieved (i.e. setting to False will not include unresolved threats)
 
 # Version History
 
-* 8.1.0 - Added New actions: Fetch file for agent ID and Run remote script
+* 8.1.0 - Added New actions: Fetch file for agent ID and Run remote script. Updated description for Trigger resolved field
 * 8.0.1 - Search Agents: Remove duplicate results when Case Sensitive is false
 * 8.0.0 - Connection: Added Service user (API only user type) authentication | Removed Basic Authentication
 * 7.1.0 - Update for Blacklist action: Fix for unblocked action | Update for Quarantine action: unification of the output data when action fails | Add troubleshooting information about use Type Converter | Mark as Benign action: update description 
