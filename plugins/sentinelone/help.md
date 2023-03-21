@@ -1720,7 +1720,7 @@ This trigger is used to get threats.
 |classifications|[]string|None|False|List of classifications to search|None|[""]|
 |engines|[]string|None|False|Included engines|None|[""]|
 |frequency|integer|5|False|Poll frequency in seconds|None|5|
-|resolved|boolean|None|False|Include resolved threats|None|True|
+|resolved|boolean|None|False|Set True to only trigger on resolved threats|None|True|
 
 Example input:
 ```
@@ -2032,6 +2032,7 @@ Example output:
 ## Troubleshooting
 
 To convert `threat` into an array use Type Converter Plugin
+For the Trigger settings, only set the Resolved field to False if solely resolved threats should be retrieved (i.e. setting to False will not include unresolved threats)
 
 # Version History
 
