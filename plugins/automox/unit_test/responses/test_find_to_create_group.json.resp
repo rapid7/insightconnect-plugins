@@ -1,0 +1,11 @@
+[
+    {
+        "id":1234,
+        "organization_id":1,
+        "refresh_interval":1440,
+        "parent_server_group_id":1234,
+        "policies":[
+            1111
+        ]
+    }
+]
