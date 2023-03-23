@@ -20,7 +20,7 @@ Business, or Enterprise plan.
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* Zoom API v2.0.0
 
 # Documentation
 
@@ -60,7 +60,7 @@ This action is used to create user associated to account.
 |email|string|None|True|Email address of user|None|user@example.com|
 |first_name|string|None|False|First name of user|None|John|
 |last_name|string|None|True|Last name of user|None|Smith|
-|type|string|None|True|User type|['Basic', 'Licensed', 'On-prem']|Basic|
+|type|string|None|True|User type|['Basic', 'Licensed']|Basic|
 
 Example input:
 
@@ -304,6 +304,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.1 - Create user: Removed redundant enum option from `type` input
 * 2.0.0 - Update connection for latest Zoom API authentication | Add Monitor Sign In and Out Activity task
 * 1.0.0 - Initial plugin
 

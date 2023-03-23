@@ -66,8 +66,7 @@ class CreateUserInput(insightconnect_plugin_runtime.Input):
       "description": "User type",
       "enum": [
         "Basic",
-        "Licensed",
-        "On-prem"
+        "Licensed"
       ],
       "order": 3
     }

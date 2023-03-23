@@ -247,7 +247,6 @@ actions:
         enum:
         - "Basic"
         - "Licensed"
-        - "On-prem"
         example: Basic
       first_name:
         title: First Name
