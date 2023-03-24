@@ -6,6 +6,7 @@ import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
 from requests.auth import HTTPBasicAuth
+from icon_rapid7_intsights.util.constants import Assistance, Cause
 
 
 @dataclass
@@ -113,6 +114,7 @@ class IOCParams:
     kill_chain_phases: [str]
     limit: int
     offset: str
+    enterprise_tactics: [str]
 
     OFFSET_MINIMUM = 1
     OFFSET_MAXIMUM = 1000
@@ -139,6 +141,7 @@ class IOCParams:
                 if self.limit
                 else self.OFFSET_DEFAULT,
                 "offset": self.offset if self.offset else None,
+                "enterpriseTactics[]": list(self.enterprise_tactics) if self.enterprise_tactics else None,
             }
         )
 
@@ -240,6 +243,21 @@ class IntSightsAPI:
     def test_credentials(self) -> bool:
         return self.make_request("HEAD", "public/v1/test-credentials").status_code == 200
 
+    def get_iocs_for_cyber_term(self, cyber_term_id: str, parameters: dict) -> dict:
+        return self.make_json_request(
+            "GET", f"public/v1/threat-library/cyber-terms/{cyber_term_id}/iocs", params=parameters
+        )
+
+    def get_cves_for_cyber_term(self, cyber_term_id: str) -> dict:
+        return self.make_json_request("GET", f"public/v1/threat-library/cyber-terms/{cyber_term_id}/cves")
+
+    def get_cyber_terms_by_filter(self, parameters: dict) -> dict:
+        return self.make_json_request("GET", "public/v1/threat-library/cyber-terms", params=parameters)
+
+    def close_alert(self, alert_id: str, json_data: dict) -> bool:
+        self.make_request("PATCH", f"public/v1/data/alerts/close-alert/{alert_id}", json_data=json_data)
+        return True
+
     def make_json_request(self, method: str, path: str, json_data: dict = None, params: dict = None) -> dict:
         try:
             response = self.make_request(method=method, path=path, json_data=json_data, params=params)
@@ -266,11 +284,18 @@ class IntSightsAPI:
                 json=json_data,
                 auth=HTTPBasicAuth(self.account_id, self.api_key),
             )
-
+            if response.status_code == 400:
+                raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
             if response.status_code in [401, 403]:
                 raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
             if response.status_code == 404:
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
+            if response.status_code == 422:
+                raise PluginException(
+                    cause=Cause.INVALID_DETAILS,
+                    assistance=Assistance.VERIFY_INPUT,
+                    data=response.text,
+                )
             if 400 <= response.status_code < 500:
                 raise PluginException(
                     preset=PluginException.Preset.UNKNOWN,

@@ -30,6 +30,7 @@ class GetIocsByFilter(insightconnect_plugin_runtime.Action):
             kill_chain_phases=params.get(Input.KILL_CHAIN_PHASES),
             limit=params.get(Input.LIMIT),
             offset=params.get(Input.OFFSET),
+            enterprise_tactics=params.get(Input.ENTERPRISE_TACTICS),
         )
         response = self.connection.client.get_indicators_by_filter(ioc_params)
         return clean({Output.CONTENT: response.get("content"), Output.NEXTOFFSET: response.get("nextOffset")})
