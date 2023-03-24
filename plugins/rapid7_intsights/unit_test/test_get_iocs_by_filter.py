@@ -60,6 +60,7 @@ class TestGetIocsByFilter(TestCase):
                     Input.SOURCE_IDS: ["123450000012345000001233"],
                     Input.KILL_CHAIN_PHASES: ["Exploitation", "Installation"],
                     Input.OFFSET: "2022-11-18T16:59:01.626Z",
+                    Input.ENTERPRISE_TACTICS: ["Discovery"],
                 },
                 None,
             ],
