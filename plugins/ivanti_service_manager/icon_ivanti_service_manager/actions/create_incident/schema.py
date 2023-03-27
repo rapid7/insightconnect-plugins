@@ -163,6 +163,12 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
       "type": "object",
       "title": "incident",
       "properties": {
+        "Accuracy": {
+          "type": "string",
+          "title": "Accuracy",
+          "description": "Accuracy",
+          "order": 162
+        },
         "ActualCategory": {
           "type": "string",
           "title": "Actual Category",
@@ -179,13 +185,25 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Actual Service",
           "description": "Actual service",
-          "order": 73
+          "order": 89
         },
         "ActualService_Valid": {
           "type": "string",
           "title": "Actual Service Valid",
           "description": "Actual service valid",
-          "order": 72
+          "order": 88
+        },
+        "AddChatconversationtoActivityHistory": {
+          "type": "boolean",
+          "title": "Add Chat Conversation To Activity History",
+          "description": "Add chat conversation to activity history",
+          "order": 154
+        },
+        "AlternateContactEmail": {
+          "type": "string",
+          "title": "Alternate Contact Email",
+          "description": "Alternate Contact Email",
+          "order": 77
         },
         "AlternateContactLink": {
           "type": "string",
@@ -209,19 +227,25 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Alternate Contact Phone",
           "description": "Altername contact phone number",
-          "order": 69
+          "order": 82
+        },
+        "ApprovalStatus": {
+          "type": "string",
+          "title": "Approval Status",
+          "description": "Approval Status",
+          "order": 127
         },
         "Approver": {
           "type": "string",
           "title": "Approver",
           "description": "Approver",
-          "order": 95
+          "order": 125
         },
         "Approver_Valid": {
           "type": "string",
           "title": "Approver Valid",
           "description": "Approver valid",
-          "order": 94
+          "order": 124
         },
         "Category": {
           "type": "string",
@@ -265,41 +289,59 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "description": "Closed duration",
           "order": 9
         },
+        "ClosingEscLink": {
+          "type": "string",
+          "title": "ClosingEscLink",
+          "description": "ClosingEscLink",
+          "order": 76
+        },
+        "ClosingEscLink_Category": {
+          "type": "string",
+          "title": "ClosingEscLink Category",
+          "description": "ClosingEscLink",
+          "order": 74
+        },
+        "ClosingEscLink_RecID": {
+          "type": "string",
+          "title": "ClosingEscLink RecID",
+          "description": "ClosingEscLink RecID",
+          "order": 75
+        },
         "Cost": {
           "type": "string",
           "title": "Cost",
           "description": "Cost",
-          "order": 92
+          "order": 120
         },
         "CostPerMinute": {
           "type": "string",
           "title": "Cost Per Minute",
           "description": "Cost per minute",
-          "order": 76
+          "order": 92
         },
         "CostPerMinute_Currency": {
           "type": "string",
           "title": "Cost Per Minute Currency",
           "description": "Cost per minute currency",
-          "order": 74
+          "order": 90
         },
         "CostPerMinute_CurrencyValid": {
           "type": "string",
           "title": "Cost Per Minute Currency Valid",
           "description": "Cost per minute currency valid",
-          "order": 75
+          "order": 91
         },
         "Cost_Currency": {
           "type": "string",
           "title": "Cost Currency",
           "description": "Cost currency",
-          "order": 90
+          "order": 118
         },
         "Cost_CurrencyValid": {
           "type": "string",
           "title": "Cost Currency Valid",
           "description": "Cost currency valid",
-          "order": 91
+          "order": 119
         },
         "CreatedBy": {
           "type": "string",
@@ -311,7 +353,7 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Created By Type",
           "description": "Created by type",
-          "order": 88
+          "order": 112
         },
         "CreatedDateTime": {
           "type": "string",
@@ -323,7 +365,7 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Customer Department",
           "description": "Customer department",
-          "order": 71
+          "order": 87
         },
         "CustomerLocation": {
           "type": "string",
@@ -347,25 +389,49 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Entity Link",
           "description": "Entity link",
-          "order": 104
+          "order": 138
         },
         "EntityLink_Category": {
           "type": "string",
           "title": "Entity Link Category",
           "description": "Entity link category",
-          "order": 102
+          "order": 136
         },
         "EntityLink_RecID": {
           "type": "string",
           "title": "Entity Link Rec ID",
           "description": "Entity link rec ID",
-          "order": 103
+          "order": 137
+        },
+        "EventCIRecId": {
+          "type": "string",
+          "title": "Event CI RecId",
+          "description": "Event CI RecId",
+          "order": 139
         },
         "FirstCallResolution": {
           "type": "boolean",
           "title": "First Call Resolution",
           "description": "First call resolution",
           "order": 13
+        },
+        "HRCaseLink": {
+          "type": "string",
+          "title": "HR Case Link",
+          "description": "HR case link",
+          "order": 151
+        },
+        "HRCaseLink_Category": {
+          "type": "string",
+          "title": "HR Case Link Category",
+          "description": "HR case link category",
+          "order": 149
+        },
+        "HRCaseLink_RecID": {
+          "type": "string",
+          "title": "HR Case Link RecID",
+          "description": "HR case link recID",
+          "order": 150
         },
         "HoursOfOperation": {
           "type": "string",
@@ -391,11 +457,23 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "description": "Impact valid",
           "order": 14
         },
+        "IncidentDetailSummary": {
+          "type": "string",
+          "title": "Incident Detail Summary",
+          "description": "Incident detail summary",
+          "order": 122
+        },
+        "IncidentDetailWorkflowTag": {
+          "type": "string",
+          "title": "Incident Detail Workflow Tag",
+          "description": "Incident Detail Workflow Tag",
+          "order": 121
+        },
         "IncidentNetworkUserName": {
           "type": "string",
           "title": "Incident Network User Name",
           "description": "Incident network user name",
-          "order": 100
+          "order": 134
         },
         "IncidentNumber": {
           "type": "integer",
@@ -407,25 +485,25 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "type": "boolean",
           "title": "Is Approval Needed",
           "description": "Is approval needed",
-          "order": 93
+          "order": 123
         },
         "IsDSMTaskExisted": {
           "type": "boolean",
           "title": "Is DSM Task Existed By",
           "description": "Is DSM task existed",
-          "order": 96
+          "order": 126
         },
         "IsInFinalState": {
           "type": "boolean",
           "title": "Is In Final State",
           "description": "Is the incident in its final state",
-          "order": 77
+          "order": 93
         },
         "IsMasterIncident": {
           "type": "boolean",
           "title": "Is Master Incident",
           "description": "Is master incidint",
-          "order": 105
+          "order": 140
         },
         "IsNewRecord": {
           "type": "boolean",
@@ -443,19 +521,25 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "type": "boolean",
           "title": "Is Reclassified For Resolution",
           "description": "Is reclassified for resolution",
-          "order": 78
+          "order": 94
+        },
+        "IsRecommended": {
+          "type": "boolean",
+          "title": "Is Recommended",
+          "description": "Is recommended",
+          "order": 163
         },
         "IsRelatedIncidentResolutionUpdate": {
           "type": "boolean",
           "title": "Is Related Incident Resolution Update",
           "description": "Is related incident resolution update",
-          "order": 109
+          "order": 147
         },
         "IsRelatedIncidentUpdate": {
           "type": "boolean",
           "title": "Is Related Incident Update",
           "description": "Is related incident update",
-          "order": 108
+          "order": 146
         },
         "IsReportedByAlternateContact": {
           "type": "boolean",
@@ -467,13 +551,19 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "type": "boolean",
           "title": "Is Resolved By Master",
           "description": "Is resolved by master",
-          "order": 106
+          "order": 141
+        },
+        "IsRunTicketClassification": {
+          "type": "string",
+          "title": "Is Run Ticket Classification",
+          "description": "Is run ticket classification",
+          "order": 167
         },
         "IsUnRead": {
           "type": "boolean",
           "title": "Is Unread",
           "description": "Is unread",
-          "order": 110
+          "order": 148
         },
         "IsVIP": {
           "type": "boolean",
@@ -491,19 +581,19 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Knowledge Link",
           "description": "Knowledge link",
-          "order": 81
+          "order": 97
         },
         "KnowledgeLink_Category": {
           "type": "string",
           "title": "Knowledge Link Category",
           "description": "Knowledge Link category",
-          "order": 79
+          "order": 95
         },
         "KnowledgeLink_RecID": {
           "type": "string",
           "title": "Knowledge Link Rec ID",
           "description": "Knowledge link rec ID",
-          "order": 80
+          "order": 96
         },
         "LastModBy": {
           "type": "string",
@@ -523,29 +613,53 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "description": "Login ID",
           "order": 45
         },
+        "MasterIncidentLink": {
+          "type": "string",
+          "title": "Master Incident Link",
+          "description": "Master Incident Link",
+          "order": 144
+        },
+        "MasterIncidentLink_Category": {
+          "type": "string",
+          "title": "Master Incident Link Category",
+          "description": "Master Incident Link Category",
+          "order": 142
+        },
+        "MasterIncidentLink_RecID": {
+          "type": "string",
+          "title": "Master Incident Link RecID",
+          "description": "Master Incident Link RecID",
+          "order": 143
+        },
+        "NewNotes": {
+          "type": "string",
+          "title": "New Notes",
+          "description": "New notes",
+          "order": 111
+        },
         "OrgUnitLink": {
           "type": "string",
           "title": "Org Unit Link",
           "description": "Organization unit link",
-          "order": 84
+          "order": 105
         },
         "OrgUnitLink_Category": {
           "type": "string",
           "title": "Org Unit Link Category",
           "description": "Organization unit link category",
-          "order": 82
+          "order": 103
         },
         "OrgUnitLink_RecID": {
           "type": "string",
           "title": "Org Unit Link Rec ID",
           "description": "Organization unit link rec ID",
-          "order": 83
+          "order": 104
         },
         "OrganizationUnitID": {
           "type": "string",
           "title": "Organization Unit ID",
           "description": "Organization unit ID",
-          "order": 65
+          "order": 78
         },
         "Owner": {
           "type": "string",
@@ -599,19 +713,25 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Owning Org Unit ID",
           "description": "Owning org unit ID",
-          "order": 86
+          "order": 107
         },
         "OwningOrgUnitId Valid": {
           "type": "string",
           "title": "Owning Org Unit ID Valid",
           "description": "Owning org unit ID valid",
-          "order": 85
+          "order": 106
         },
         "Phone": {
           "type": "string",
           "title": "Phone",
           "description": "Phone",
           "order": 22
+        },
+        "PreviousState": {
+          "type": "string",
+          "title": "Previous State",
+          "description": "Previous State",
+          "order": 98
         },
         "Priority": {
           "type": "string",
@@ -624,6 +744,24 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "title": "Priority Valid By",
           "description": "Priority valid by",
           "order": 23
+        },
+        "ProblemLink": {
+          "type": "string",
+          "title": "Problem Link",
+          "description": "Problem Link",
+          "order": 86
+        },
+        "ProblemLink_Category": {
+          "type": "string",
+          "title": "Problem Link Category",
+          "description": "Problem Link Category",
+          "order": 84
+        },
+        "ProblemLink_RecID": {
+          "type": "string",
+          "title": "Problem Link RecID",
+          "description": "Problem Link RecID",
+          "order": 85
         },
         "ProfileFullName": {
           "type": "string",
@@ -653,7 +791,13 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Progress Bar Position",
           "description": "Progress bar position",
-          "order": 87
+          "order": 108
+        },
+        "ReadOnly": {
+          "type": "boolean",
+          "title": "Read Only",
+          "description": "Read only",
+          "order": 117
         },
         "RecId": {
           "type": "string",
@@ -661,17 +805,59 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "description": "Rec ID",
           "order": 29
         },
+        "RecomCategory": {
+          "type": "string",
+          "title": "Recom Category",
+          "description": "Recom category",
+          "order": 165
+        },
+        "RecomService": {
+          "type": "string",
+          "title": "Recom Service",
+          "description": "Recom service",
+          "order": 164
+        },
+        "RecomSubCategory": {
+          "type": "string",
+          "title": "Recom SubCategory",
+          "description": "Recom SubCategory",
+          "order": 166
+        },
+        "RecommendedCategory": {
+          "type": "string",
+          "title": "Recommended Category",
+          "description": "Recommended category",
+          "order": 159
+        },
+        "RecommendedService": {
+          "type": "string",
+          "title": "Recommended Service",
+          "description": "Recommended service",
+          "order": 160
+        },
+        "RecommendedSubCategory": {
+          "type": "string",
+          "title": "Recommended SubCategory",
+          "description": "Recommended subcategory",
+          "order": 161
+        },
+        "ReportedBy": {
+          "type": "string",
+          "title": "Reported By",
+          "description": "Reported by",
+          "order": 110
+        },
         "ReportingOrgUnitID": {
           "type": "string",
           "title": "Reporting Org Unit ID",
           "description": "Reporting organization unit ID",
-          "order": 67
+          "order": 80
         },
         "ReportingOrgUnitID_Valid": {
           "type": "string",
           "title": "Reporting Org Unit ID Valid",
           "description": "Reporting organization unit ID valid",
-          "order": 66
+          "order": 79
         },
         "Resolution": {
           "type": "string",
@@ -679,17 +865,77 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "description": "Resolution",
           "order": 30
         },
+        "ResolutionEscLink": {
+          "type": "string",
+          "title": "ResolutionEscLink",
+          "description": "ResolutionEscLink",
+          "order": 67
+        },
+        "ResolutionEscLink_Category": {
+          "type": "string",
+          "title": "ResolutionEscLink Category",
+          "description": "ResolutionEscLink Category",
+          "order": 65
+        },
+        "ResolutionEscLink_RecID": {
+          "type": "string",
+          "title": "ResolutionEscLink Rec ID",
+          "description": "ResolutionEscLink Rec ID",
+          "order": 66
+        },
         "ResolvedBy": {
           "type": "string",
           "title": "Resolved By",
           "description": "Resolved by",
           "order": 56
         },
+        "ResolvedByIncidentNumber": {
+          "type": "string",
+          "title": "Resolved By Incident Number",
+          "description": "Resolved By Incident Number",
+          "order": 99
+        },
+        "ResolvedByType": {
+          "type": "string",
+          "title": "Resolved by Type",
+          "description": "Resolved by type",
+          "order": 109
+        },
         "ResolvedDateTime": {
           "type": "string",
           "title": "Resolved Date Time",
           "description": "Resolved date and time",
           "order": 55
+        },
+        "RespondedBy": {
+          "type": "string",
+          "title": "Responded By",
+          "description": "Responded By",
+          "order": 101
+        },
+        "RespondedDateTime": {
+          "type": "string",
+          "title": "Responded Date Time",
+          "description": "Responded date time",
+          "order": 102
+        },
+        "ResponseEscLink": {
+          "type": "string",
+          "title": "ResponseEscLink",
+          "description": "ResponseEscLink",
+          "order": 70
+        },
+        "ResponseEscLink_RecID": {
+          "type": "string",
+          "title": "ResponseEscLink RecID",
+          "description": "ResponseEscLink RecID",
+          "order": 69
+        },
+        "ResponseEscLink_category": {
+          "type": "string",
+          "title": "ResponseEscLink Category",
+          "description": "ResponseEscLink Category",
+          "order": 68
         },
         "SLA": {
           "type": "string",
@@ -701,7 +947,7 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "SLA Display Text",
           "description": "SLA display text",
-          "order": 89
+          "order": 113
         },
         "SLALink": {
           "type": "string",
@@ -725,7 +971,7 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "type": "boolean",
           "title": "Send Survey Notification",
           "description": "Send survey notification",
-          "order": 101
+          "order": 135
         },
         "Service": {
           "type": "string",
@@ -737,7 +983,25 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Service Owner Email",
           "description": "Service owner email",
-          "order": 107
+          "order": 145
+        },
+        "ServiceReqLink": {
+          "type": "string",
+          "title": "Service ReqLink",
+          "description": "Service ReqLink",
+          "order": 116
+        },
+        "ServiceReqLink_Category": {
+          "type": "string",
+          "title": "Service ReqLink Category",
+          "description": "Service ReqLink category",
+          "order": 114
+        },
+        "ServiceReqLink_RecID": {
+          "type": "string",
+          "title": "Service ReqLink RecID",
+          "description": "Service ReqLink ReqID",
+          "order": 115
         },
         "Service_Valid": {
           "type": "string",
@@ -749,7 +1013,7 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Social Text Header",
           "description": "Social text header",
-          "order": 97
+          "order": 128
         },
         "Source": {
           "type": "string",
@@ -775,6 +1039,18 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "description": "Status valid",
           "order": 39
         },
+        "SubCategory": {
+          "type": "string",
+          "title": "SubCategory",
+          "description": "SubCategory",
+          "order": 130
+        },
+        "SubCategory_Valid": {
+          "type": "string",
+          "title": "SubCategory Valid",
+          "description": "SubCategory Valid",
+          "order": 129
+        },
         "Subject": {
           "type": "string",
           "title": "Subject",
@@ -791,13 +1067,19 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Team Manager Email",
           "description": "Team manager email",
-          "order": 70
+          "order": 83
+        },
+        "TotalTimeSpent": {
+          "type": "integer",
+          "title": "Total Time Spent",
+          "description": "Total time spent",
+          "order": 100
         },
         "TypeOfIncident": {
           "type": "string",
           "title": "Type Of Incident",
           "description": "Type of incident",
-          "order": 68
+          "order": 81
         },
         "Urgency": {
           "type": "string",
@@ -811,17 +1093,77 @@ class CreateIncidentOutput(insightconnect_plugin_runtime.Output):
           "description": "Urgency valid",
           "order": 43
         },
+        "ViewType": {
+          "type": "string",
+          "title": "View Type",
+          "description": "View Type",
+          "order": 133
+        },
+        "VirimaAssetID": {
+          "type": "string",
+          "title": "Virima Asset ID",
+          "description": "Virima asset ID",
+          "order": 158
+        },
+        "WaitingEscLink": {
+          "type": "string",
+          "title": "WaitingEscLink",
+          "description": "WaitingEscLink",
+          "order": 73
+        },
+        "WaitingEscLink_Category": {
+          "type": "string",
+          "title": "WaitingEscLink Category",
+          "description": "WaitingEscLink Category",
+          "order": 71
+        },
+        "WaitingEscLink_RecID": {
+          "type": "string",
+          "title": "WaitingEscLink RecID",
+          "description": "WaitingEscLink RecID",
+          "order": 72
+        },
         "helpdesk_Priority": {
           "type": "string",
           "title": "Helpdesk Priority",
           "description": "Helpdesk priority",
-          "order": 99
+          "order": 132
         },
         "helpdesk_Priority_Valid": {
           "type": "string",
           "title": "Helpdesk Priority Valid",
           "description": "Helpdesk priority valid",
-          "order": 98
+          "order": 131
+        },
+        "ivnt_RequestforInformationorData": {
+          "type": "boolean",
+          "title": "Ivnt Request For Information Or Data",
+          "description": "Ivnt request for information or data",
+          "order": 152
+        },
+        "ivnt_TeamsUserDetailsLink": {
+          "type": "string",
+          "title": "Ivnt Teams User Details Link",
+          "description": "Ivnt teams user details link",
+          "order": 157
+        },
+        "ivnt_TeamsUserDetailsLink_Category": {
+          "type": "string",
+          "title": "Ivnt Teams User Details Link Category",
+          "description": "Ivnt teams user details link category",
+          "order": 155
+        },
+        "ivnt_TeamsUserDetailsLink_RecID": {
+          "type": "string",
+          "title": "Ivnt Teams User Details Link RecID",
+          "description": "Ivnt teams user details link RecID",
+          "order": 156
+        },
+        "ivnt_UpdateRFI": {
+          "type": "string",
+          "title": "Ivnt Update RFI",
+          "description": "Ivnt update RFI",
+          "order": 153
         }
       }
     }

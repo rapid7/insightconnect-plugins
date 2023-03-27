@@ -35,9 +35,9 @@ class IvantiServiceManagerAPI:
         )
 
     def get_incident_by_number(self, incident_number: int) -> str:
-        incident = self._call_api(
+        incident = clean(self._call_api(
             "GET", f"odata/businessobject/incidents?$filter=IncidentNumber eq {incident_number}"
-        ).get("value")
+        ).get("value"))
 
         if incident:
             logging.info(str(incident[0]))
@@ -78,7 +78,7 @@ class IvantiServiceManagerAPI:
         return self._call_api("DELETE", f"odata/businessobject/incidents('{incident_number}')")
 
     def search_incident(self, text: str, payload: dict) -> dict:
-        return clean(self._call_api("POST", f"rest/search/{text}", json_data=payload))
+        return clean(self._call_api("GET", f"rest/businessobject/incidents?$search={text}", json_data=payload))
 
     def get_all_incidents(self):
         return clean(self._call_api("GET", "odata/businessobject/incidents"))

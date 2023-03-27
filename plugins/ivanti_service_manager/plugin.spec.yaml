@@ -520,7 +520,7 @@ types:
     TotalTimeSpent:
       title: Total Time Spent
       description: Total time spent
-      type: Integer
+      type: integer
       required: false
     RespondedBy:
       title: Responded By
