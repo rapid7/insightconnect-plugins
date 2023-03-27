@@ -46,6 +46,163 @@ Example input:
 
 ### Actions
 
+
+#### Search Incidents
+
+This action is used to search Incidents using a Keyword.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|object_type|string|Incident|True|Business Object to search for|None|Incident|
+|skip|integer|0|False|Number of results to skip|None|20|
+|text|string|None|True|Keyword to search for|None|Phone|
+|top|integer|20|False|Number of results to show|None|20|
+
+Example input:
+
+```
+{
+  "object_type": "Incident",
+  "skip": 20,
+  "text": "Phone",
+  "top": 20
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|data|[]incident|True|List of results|
+
+Example output:
+
+```
+```
+
+#### Get Incident
+
+This action is used to get Incident by Incident Number.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|incident_number|integer|None|True|Incident Number of Incident to get|None|12345|
+
+Example input:
+
+```
+{
+  "incident_number": 12345
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|incident|incident|True|Incident requested|
+
+Example output:
+
+```
+{
+  "incident": {
+      "@odata.context": "https://example.com/HEAT/api/odata/$metadata#incidents/$entity",
+      "ClosedDuration": 0,
+      "CreatedBy": "user",
+      "CreatedDateTime": "2020-08-12T16:33:37-07:00",
+      "Email": "user@example.com",
+      "FirstCallResolution": false,
+      "IncidentNumber": 12345,
+      "IsNotification": true,
+      "IsVIP": false,
+      "IsWorkAround": false,
+      "LastModBy": "user",
+      "LastModDateTime": "2020-08-12T16:33:37-07:00",
+      "Phone": "+1 (415) 450 3428",
+      "Priority_Valid": "DA5FF948701D4022927500E08FCF574E",
+      "Priority": "5",
+      "ProfileFullName": "User",
+      "ProfileLink_Category": "Employee",
+      "ProfileLink_RecID": "2F851094BFE5437C97D19871D1C539C7",
+      "ProfileLink": "2F851094BFE5437C97D19871D1C539C7",
+      "RecId": "085867F47547496783005D95CB82D557",
+      "Service_Valid": "A912E98E55844765934A787FF3586F34",
+      "Service": "Service Desk",
+      "Source_Valid": "EF789CE160E742F99623DBB4D29C045C",
+      "Source": "Phone",
+      "Status_Valid": "AB3D0090B6D8471FB0D2720D301A22AF",
+      "Status": "Logged",
+      "Subject": "InsightConnect Test",
+      "Symptom": "Test incident created by InsightConnect",
+      "Urgency_Valid": "320F22CAA2984C87B06AEFD3DE6FFBBF",
+      "Urgency": "Low",
+      "LoginId": "user",
+      "Owner_Valid": "1087342EA6954D7D96140D64B452E597",
+      "Owner": "user",
+      "OwnerTeam_Valid": "2E4BABD54FB9420D94F836F0D9B80C47",
+      "OwnerTeam": "Service Management Team",
+      "OwnerType": "Employee",
+      "IsNewRecord": false,
+      "HoursOfOperation_Valid": "FF57246B2E0047D193C1AEC1011D746B",
+      "HoursOfOperation": "Weekly HOP",
+      "OwnerEmail": "user@example.com",
+      "OwnerTeamEmail": "user@example.com",
+      "OwnershipAssignmentEmail": "user@example.com",
+      "CustomerLocation_Valid": "6E4C36E8140B4BFD8AC4242BD7ED058B",
+      "CustomerLocation": "San Francisco",
+      "IsReportedByAlternateContact": false,
+      "OrganizationUnitID": "Consulting Services",
+      "ReportingOrgUnitID_Valid": "8B38681087C847A287D738621DA6BEE4",
+      "ReportingOrgUnitID": "Consulting Services",
+      "TypeOfIncident": "Request",
+      "TeamManagerEmail": "user@example.com",
+      "CustomerDepartment": "Corporate Services and Training",
+      "ActualService_Valid": "A912E98E55844765934A787FF3586F34",
+      "ActualService": "Service Desk",
+      "CostPerMinute_Currency": "USD",
+      "CostPerMinute": "0.4000",
+      "IsInFinalState": false,
+      "IsReclassifiedForResolution": false,
+      "ResolvedByIncidentNumber": 0,
+      "TotalTimeSpent": 0,
+      "OrgUnitLink_Category": "OrganizationalUnit",
+      "OrgUnitLink_RecID": "8B38681087C847A287D738621DA6BEE4",
+      "OrgUnitLink": "8B38681087C847A287D738621DA6BEE4",
+      "OwningOrgUnitId_Valid": "FA9C9DD75EF9455CBC892F65691A1E7F",
+      "OwningOrgUnitId": "Corporate IT Operations",
+      "ProgressBarPosition": "1",
+      "CreatedByType": "Web Client",
+      "ReadOnly": false,
+      "Cost_Currency": "USD",
+      "Cost": "0.0000",
+      "IsApprovalNeeded": false,
+      "Approver_Valid": "D8E9ECB03001437492B3BE453EDCBEE6",
+      "Approver": "user@example.com",
+      "IsDSMTaskExisted": false,
+      "SocialTextHeader": "Incident 11169: InsightConnect Test",
+      "IncidentNetworkUserName": "user",
+      "SendSurveyNotification": false,
+      "EntityLink_Category": "OrganizationalUnit",
+      "EntityLink_RecID": "8B38681087C847A287D738621DA6BEE4",
+      "EntityLink": "8B38681087C847A287D738621DA6BEE4",
+      "IsMasterIncident": false,
+      "IsResolvedByMaster": false,
+      "ServiceOwnerEmail": "user@example.com",
+      "IsRelatedIncidentUpdate": false,
+      "IsRelatedIncidentResolutionUpdate": false,
+      "IsUnRead": false
+  }
+}
+```
+
+
+
+
 #### Create Service Request
 
 This action is used to create a new Ivanti Service Manager service request.
