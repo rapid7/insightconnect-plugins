@@ -855,7 +855,7 @@ types:
     IsRunTicketClassification:
       title: Is Run Ticket Classification
       description: Is run ticket classification
-      type: string
+      type: boolean
       required: false
   journal_note:
     DisplayText:

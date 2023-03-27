@@ -514,7 +514,7 @@ class UpdateIncidentOutput(insightconnect_plugin_runtime.Output):
           "order": 141
         },
         "IsRunTicketClassification": {
-          "type": "string",
+          "type": "boolean",
           "title": "Is Run Ticket Classification",
           "description": "Is run ticket classification",
           "order": 167

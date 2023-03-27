@@ -1,5 +1,6 @@
 import json
 import logging
+import typing
 
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -23,7 +24,7 @@ class IvantiServiceManagerAPI:
             raise PluginException(
                 cause="Multiple employees found.",
                 assistance=f"Search for {identifier} returned more than 1 result. "
-                "Please provide a unique identifier.",
+                           "Please provide a unique identifier.",
             )
 
         if employees:
@@ -34,13 +35,12 @@ class IvantiServiceManagerAPI:
             assistance=f"No employees found using data provided - {identifier}. Please validate and try again.",
         )
 
-    def get_incident_by_number(self, incident_number: int) -> str:
+    def get_incident_by_number(self, incident_number: int) -> dict:
         incident = clean(self._call_api(
             "GET", f"odata/businessobject/incidents?$filter=IncidentNumber eq {incident_number}"
         ).get("value"))
 
         if incident:
-            logging.info(str(incident[0]))
             return incident[0]
 
         raise PluginException(
