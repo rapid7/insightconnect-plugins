@@ -38,5 +38,5 @@ class TestGetIncident(TestCase):
     def test_get_incident_fail(self, _mock_req):
         with self.assertRaises(PluginException) as exception:
             self.action.run({Input.INCIDENT_NUMBER: self.params.get("bad_id")})
-        cause = "Something went wrong"
+        cause = "Something unexpected occurred."
         self.assertEqual(exception.exception.cause, cause)
