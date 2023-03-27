@@ -1,9 +1,15 @@
 import json
 import os
+import logging
 from typing import Callable
-from unittest import mock
-from icon_zoom.actions.create_user.schema import Input
 import requests
+
+from unittest import mock
+from unittest.mock import MagicMock
+
+from icon_zoom.actions.create_user.schema import Input
+from icon_zoom.connection.connection import Connection
+from insightconnect_plugin_runtime.action import Action
 
 STUB_CONNECTION = {
     "client_id": {"secretKey": "asdf"},
@@ -23,11 +29,24 @@ STUB_CREATE_USER = {
 }
 
 
+class Util:
+    @staticmethod
+    def default_connector(action: Action) -> Action:
+        default_connection = Connection()
+        default_connection.logger = logging.getLogger("connection logger")
+        default_connection.connect(STUB_CONNECTION)
+        action.connection = default_connection
+        action.logger = logging.getLogger("action logger")
+        return action
+
+
 class MockResponse:
-    def __init__(self, filename: str, status_code: int, text: str = "") -> None:
+    def __init__(self, filename: str, status_code: int) -> None:
         self.filename = filename
         self.status_code = status_code
-        self.text = text
+        self.text = json.dumps(self.json())
+        self.request = MagicMock()
+        self.headers = MagicMock()
 
     def json(self):
         with open(
@@ -37,11 +56,14 @@ class MockResponse:
 
 
 def mocked_request(side_effect: Callable) -> None:
-    mock_function = requests
+    mock_function = requests.Session
     mock_function.request = mock.Mock(side_effect=side_effect)
 
 
 def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
+    if method == "POST":
+        if url == STUB_OAUTH_URL and status_code == 201:
+            return MockResponse("oauth2_token", status_code)
     if url == STUB_BASE_URL:
         if method == "GET":
             return MockResponse("get_user", status_code)
@@ -52,7 +74,9 @@ def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
 
 
 def mock_request_201(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 201)
+    method = kwargs.get("method") if not args else args[0]
+    url = kwargs.get("url") if not args else args[1]
+    return mock_conditions(method, url, 201)
 
 
 def mock_request_204(*args, **kwargs) -> MockResponse:
