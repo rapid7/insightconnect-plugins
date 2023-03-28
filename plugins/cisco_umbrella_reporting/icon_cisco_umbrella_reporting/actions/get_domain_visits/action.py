@@ -1,9 +1,11 @@
-import insightconnect_plugin_runtime
-from .schema import GetDomainVisitsInput, GetDomainVisitsOutput, Input, Output, Component
-from insightconnect_plugin_runtime.exceptions import PluginException
-
 # Custom imports below
 from urllib import parse
+
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.helper import clean
+
+from .schema import Component, GetDomainVisitsInput, GetDomainVisitsOutput, Input, Output
+from icon_cisco_umbrella_reporting.util.constants import ORDER_PARAMETER_MAPPING, LIMIT_DEFAULT_VALUE
 
 
 class GetDomainVisits(insightconnect_plugin_runtime.Action):
@@ -16,12 +18,21 @@ class GetDomainVisits(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        address = params.get(Input.ADDRESS)
-        if address:
-            return {
-                Output.DOMAIN_VISITS: self.connection.client.destinations_most_recent_request(
-                    parse.urlparse(address).hostname
-                ).get("requests", [])
+        address = params.get(Input.ADDRESS, "")
+        limit = params.get(Input.LIMIT, LIMIT_DEFAULT_VALUE)
+        from_time = params.get(Input.FROM, "")
+        order = params.get(Input.ORDER, "")
+        verdict = params.get(Input.VERDICT, "")
+        threats = params.get(Input.THREATS, "")
+        threat_types = params.get(Input.THREATTYPES, "")
+        data = clean(
+            {
+                "domains": parse.urlparse(address).hostname,
+                "from": from_time,
+                "order": ORDER_PARAMETER_MAPPING.get(order.lower(), "desc"),
+                "verdict": verdict.lower(),
+                "threats": threats,
+                "threattypes": threat_types,
             }
-
-        return {Output.DOMAIN_VISITS: self.connection.client.security_activity_report().get("requests", [])}
+        )
+        return {Output.DOMAIN_VISITS: self.connection.client.destinations_most_recent_request(data, limit)}
