@@ -45,9 +45,9 @@ class CiscoUmbrellaManagementAPI(OAuth20ClientCredentialMixin):
         return self._call_api(
             "POST",
             "destinationlists",
+            data,
             None,
             None,
-            data=data,
         )
 
     # PATCH (Update) destination list
@@ -56,9 +56,9 @@ class CiscoUmbrellaManagementAPI(OAuth20ClientCredentialMixin):
         return self._call_api(
             "PATCH",
             f"destinationlists/{destination_list_id}",
+            data,
             None,
             None,
-            data=data,
         )
 
     # DELETE destination list
@@ -120,20 +120,13 @@ class CiscoUmbrellaManagementAPI(OAuth20ClientCredentialMixin):
         # data(payload) -> dict in body
         data: Optional = None,
     ) -> dict:
-
         # Prevents json.dumps() on 'None' data
         if not data:
             data_string = None
         else:
             data_string = json.dumps(data)
 
-        response = self.oauth.request(
-            method,
-            self.base_url + path,
-            json=json_data,
-            params=params,
-            data=data_string
-        )
+        response = self.oauth.request(method, self.base_url + path, json=json_data, params=params, data=data_string)
         if response.status_code == 400:
             raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.json())
         if response.status_code == 401:

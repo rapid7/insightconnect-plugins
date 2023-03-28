@@ -21,6 +21,4 @@ class DlGetAll(insightconnect_plugin_runtime.Action):
         print("DLDEBUG result: {}".format(result))
         print("DLDEBUG result.createdAt: {}".format(result[0].get("createdAt")))
 
-
-
         return {Output.DATA: result}
