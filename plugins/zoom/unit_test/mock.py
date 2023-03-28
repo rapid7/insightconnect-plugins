@@ -64,13 +64,13 @@ def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
     if method == "POST":
         if url == STUB_OAUTH_URL and status_code == 201:
             return MockResponse("oauth2_token", status_code)
-    if url == STUB_BASE_URL:
-        if method == "GET":
-            return MockResponse("get_user", status_code)
-        if method == "POST":
+    if method == "GET":
+        return MockResponse("get_user", status_code)
+    if method == "POST":
+        if url != STUB_OAUTH_URL and status_code == 201:
             return MockResponse("create_user", status_code)
-        if method == "DELETE":
-            return MockResponse("delete_user", status_code)
+    if method == "DELETE":
+        return MockResponse("delete_user", status_code)
 
 
 def mock_request_201(*args, **kwargs) -> MockResponse:

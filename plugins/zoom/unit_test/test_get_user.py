@@ -4,17 +4,13 @@ from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
 
-
 from unittest import TestCase, mock
-from icon_zoom.connection.connection import Connection
 from icon_zoom.actions.get_user import GetUser
 from icon_zoom.actions.get_user.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
-import logging
 
 from unit_test.mock import (
     Util,
-    STUB_CONNECTION,
     STUB_USER_ID,
     mock_request_201,
     mock_request_400,
@@ -24,6 +20,7 @@ from unit_test.mock import (
 
 
 class TestGetUser(TestCase):
+    # maxDiff = None
     @mock.patch("requests.Session.request", side_effect=mock_request_201)
     def setUp(self, mock_post) -> None:
         self.action = Util.default_connector(GetUser())
@@ -34,26 +31,49 @@ class TestGetUser(TestCase):
         response = self.action.run(self.params)
         expected_response = {
             "user": {
-                "id": "L7h_1I3YTWmId_E89-_Sbg",
-                "first_name": "",
-                "last_name": "",
-                "display_name": "",
+                "id": "zJKyaiAyTNC-MWjiWC18KQ",
+                "dept": "Developers",
+                "email": "jchill@example.com",
+                "first_name": "Jill",
+                "last_client_version": "5.9.6.4993(mac)",
+                "last_login_time": "2021-05-05T20:40:30Z",
+                "last_name": "Chill",
+                "pmi": 3542471135,
+                "role_name": "Admin",
+                "timezone": "Asia/Shanghai",
                 "type": 1,
-                "role_name": "",
-                "verified": 0,
-                "created_at": "2023-03-23T15:33:52Z",
-                "group_ids": [],
-                "im_group_ids": [],
-                "account_id": "",
-                "language": "",
-                "phone_country": "",
-                "phone_number": "",
+                "use_pmi": False,
+                "display_name": "Jill Chill",
+                "account_id": "q6gBJVO5TzexKYTb_I2rpg",
+                "account_number": 10009239,
+                "cms_user_id": "KDcuGIm1QgePTO8WbOqwIQ",
+                "company": "Jill",
+                "user_created_at": "2018-10-31T04:32:37Z",
+                "custom_attributes": {"key": "cbf_cywdkexrtqc73f97gd4w6g", "name": "A1", "value": "1"},
+                "employee_unique_id": "HqDyI037Qjili1kNsSIrIg",
+                "group_ids": ["RSMaSp8sTEGK0_oamiA2_w"],
+                "im_group_ids": ["t-_-d56CSWG-7BF15LLrOw"],
+                "jid": "jchill@example.com",
+                "job_title": "API Developer",
+                "language": "en-US",
+                "location": "Paris",
+                "login_types": [101],
+                "manager": "thill@example.com",
+                "personal_meeting_url": "example.com",
+                "phone_numbers": [
+                    {"code": "+1", "country": "US", "label": "Mobile", "number": "800000000", "verified": True}
+                ],
+                "pic_url": "example.com",
+                "plan_united_type": "1",
+                "pronouns": "3123",
+                "pronouns_option": 1,
+                "role_id": "0",
                 "status": "pending",
-                "login_types": [],
-                "user_created_at": "2021-10-11T14:02:35Z",
-            },
-            "version": "v1",
-            "type": "action_event",
+                "vanity_url": "example.com",
+                "verified": 1,
+                "cluster": "us04",
+                "zoom_one_type": 4,
+            }
         }
         self.assertEqual(response, expected_response)
 
