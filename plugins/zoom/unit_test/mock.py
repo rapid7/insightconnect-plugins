@@ -80,7 +80,9 @@ def mock_request_201(*args, **kwargs) -> MockResponse:
 
 
 def mock_request_204(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 204)
+    method = kwargs.get("method") if not args else args[0]
+    url = kwargs.get("url") if not args else args[1]
+    return mock_conditions(method, url, 204)
 
 
 def mock_request_400(*args, **kwargs) -> MockResponse:

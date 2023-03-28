@@ -20,7 +20,6 @@ from unit_test.mock import (
 
 
 class TestGetUser(TestCase):
-    # maxDiff = None
     @mock.patch("requests.Session.request", side_effect=mock_request_201)
     def setUp(self, mock_post) -> None:
         self.action = Util.default_connector(GetUser())

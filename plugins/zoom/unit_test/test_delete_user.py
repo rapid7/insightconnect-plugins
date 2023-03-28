@@ -1,25 +1,54 @@
 import sys
 import os
+from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
 
-from unittest import TestCase
-from icon_zoom.connection.connection import Connection
+from unittest import TestCase, mock
 from icon_zoom.actions.delete_user import DeleteUser
-import json
-import logging
+from icon_zoom.actions.delete_user.schema import Input
+from insightconnect_plugin_runtime.exceptions import PluginException
+
+from unit_test.mock import (
+    Util,
+    mock_request_204,
+    mock_request_400,
+    mock_request_404,
+    mocked_request,
+)
+
+STUB_DELETE_USER_QUERY_PARAMS = {
+    Input.ID: "12345",
+    Input.ACTION: "delete",
+    Input.TRANSFER_EMAIL: "user@example.com",
+    Input.TRANSFER_WEBINARS: "",
+    Input.TRANSFER_RECORDINGS: "",
+    Input.TRANSFER_MEETINGS: ""
+}
 
 
 class TestDeleteUser(TestCase):
-    def test_delete_user(self):
-        """
-        DO NOT USE PRODUCTION/SENSITIVE DATA FOR UNIT TESTS
+    @mock.patch("requests.Session.request", side_effect=mock_request_204)
+    def setUp(self, mock_delete) -> None:
+        self.action = Util.default_connector(DeleteUser())
+        self.params = STUB_DELETE_USER_QUERY_PARAMS
 
-        TODO: Implement test cases here
+    def delete_user_success(self):
+        mocked_request(mock_request_204)
+        response = self.action.run(self.params)
+        expected_response = {}
 
-        For information on mocking and unit testing please go here:
+        self.assertEqual(response, expected_response)
 
-        https://docs.google.com/document/d/1PifePDG1-mBcmNYE8dULwGxJimiRBrax5BIDG_0TFQI/edit?usp=sharing
-        """
-
-        self.fail("Unimplemented Test Case")
+    # @parameterized.expand(
+    #     [
+    #         (mock_request_400, PluginException.causes[PluginException.Preset.BAD_REQUEST]),
+    #         (mock_request_404, PluginException.causes[PluginException.Preset.NOT_FOUND])
+    #     ]
+    # )
+    # def test_not_ok(self, mock_request, exception):
+    #     mocked_request(mock_request)
+    #
+    #     with self.assertRaises(PluginException) as context:
+    #         self.action.run()
+    #     self.assertEqual(context.exception.cause, exception)
