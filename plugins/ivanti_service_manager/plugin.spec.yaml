@@ -2069,33 +2069,12 @@ actions:
     title: Search Incidents
     description: Search Incidents using a Keyword
     input:
-      text:
-        title: Text
+      keyword:
+        title: Keyword
         description: Keyword to search for
         type: string
         required: true
         example: Phone
-      object_type:
-        title: Object Type
-        description: Business Object to search for
-        type: string
-        required: true
-        default: Incident
-        example: Incident
-      top:
-        title: Top
-        description: Number of results to show
-        type: integer
-        required: false
-        default: 20
-        example: 20
-      skip:
-        title: Skip
-        description: Number of results to skip
-        type: integer
-        required: false
-        default: 0
-        example: 20
     output:
       data:
         title: Data

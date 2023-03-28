@@ -3,9 +3,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from .schema import SearchIncidentsInput, SearchIncidentsOutput, Input, Output, Component
 
 
-# Custom imports below
-
-# Not Tested Yet
 class SearchIncidents(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -16,11 +13,9 @@ class SearchIncidents(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        payload = {
-            "Text": params.get(Input.TEXT),
-        }
-        response = self.connection.ivanti_service_manager_api.search_incident(params.get(Input.TEXT), payload)
+        response = self.connection.ivanti_service_manager_api.search_incident(params.get(Input.KEYWORD))
         if "value" in response.keys():
             return {Output.DATA: response.get("value")}
         else:
-            raise PluginException(cause="No incidents found.")
+            raise PluginException(cause="No incidents found.",
+                                  assistance="Please try a different keyword")

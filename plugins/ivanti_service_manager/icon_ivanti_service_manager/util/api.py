@@ -77,8 +77,8 @@ class IvantiServiceManagerAPI:
     def delete_incident(self, incident_number: int) -> dict:
         return self._call_api("DELETE", f"odata/businessobject/incidents('{incident_number}')")
 
-    def search_incident(self, text: str, payload: dict) -> dict:
-        return clean(self._call_api("GET", f"rest/businessobject/incidents?$search={text}", json_data=payload))
+    def search_incident(self, keyword: str) -> dict:
+        return clean(self._call_api("GET", f"odata/businessobject/incidents?$search={keyword}"))
 
     def get_all_incidents(self):
         return clean(self._call_api("GET", "odata/businessobject/incidents"))

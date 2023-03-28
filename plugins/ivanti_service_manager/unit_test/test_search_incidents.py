@@ -16,7 +16,7 @@ from unit_test.mock import mock_request
 class TestSearchIncidents(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
-        cls.params = {"object_type": "incident", "skip": 0, "good_text": "text", "bad_text": "bad text", "top": 1}
+        cls.params = {"good_text": "text", "bad_text": "bad text"}
 
     def setUp(self) -> None:
         self.action = Util.default_connector(SearchIncidents())
@@ -26,10 +26,7 @@ class TestSearchIncidents(TestCase):
     def test_search_incidents(self, _mock_req):
         actual = self.action.run(
             {
-                Input.OBJECT_TYPE: self.params.get("object_type"),
-                Input.SKIP: self.params.get("skip"),
-                Input.TEXT: self.params.get("good_text"),
-                Input.TOP: self.params.get("top"),
+                Input.KEYWORD: self.params.get("good_text"),
             }
         )
         expected = {"data": "this is good"}
@@ -40,10 +37,7 @@ class TestSearchIncidents(TestCase):
         with self.assertRaises(PluginException) as exception:
             self.action.run(
                 {
-                    Input.OBJECT_TYPE: self.params.get("object_type"),
-                    Input.SKIP: self.params.get("skip"),
-                    Input.TEXT: self.params.get("bad_text"),
-                    Input.TOP: self.params.get("top"),
+                    Input.KEYWORD: self.params.get("bad_text"),
                 }
             )
         cause = "No incidents found."

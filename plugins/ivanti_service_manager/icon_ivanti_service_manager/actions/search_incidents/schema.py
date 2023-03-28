@@ -8,10 +8,7 @@ class Component:
 
 
 class Input:
-    OBJECT_TYPE = "object_type"
-    SKIP = "skip"
-    TEXT = "text"
-    TOP = "top"
+    KEYWORD = "keyword"
     
 
 class Output:
@@ -24,37 +21,15 @@ class SearchIncidentsInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "object_type": {
+    "keyword": {
       "type": "string",
-      "title": "Object Type",
-      "description": "Business Object to search for",
-      "default": "Incident",
-      "order": 2
-    },
-    "skip": {
-      "type": "integer",
-      "title": "Skip",
-      "description": "Number of results to skip",
-      "default": 0,
-      "order": 4
-    },
-    "text": {
-      "type": "string",
-      "title": "Text",
+      "title": "Keyword",
       "description": "Keyword to search for",
       "order": 1
-    },
-    "top": {
-      "type": "integer",
-      "title": "Top",
-      "description": "Number of results to show",
-      "default": 20,
-      "order": 3
     }
   },
   "required": [
-    "object_type",
-    "text"
+    "keyword"
   ]
 }
     """)
