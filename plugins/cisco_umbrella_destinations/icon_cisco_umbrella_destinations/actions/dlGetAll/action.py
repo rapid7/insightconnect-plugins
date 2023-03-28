@@ -18,4 +18,9 @@ class DlGetAll(insightconnect_plugin_runtime.Action):
     def run(self, _params=None):
         result = self.connection.client.get_destination_lists().get("data", [])
         result = clean(result)
+        print("DLDEBUG result: {}".format(result))
+        print("DLDEBUG result.createdAt: {}".format(result[0].get("createdAt")))
+
+
+
         return {Output.DATA: result}

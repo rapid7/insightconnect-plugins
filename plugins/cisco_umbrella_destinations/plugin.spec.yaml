@@ -3,7 +3,7 @@ extension: plugin
 products: [insightconnect]
 name: cisco_umbrella_destinations
 title: Cisco Umbrella Destinations
-version: 3.1.0
+version: 3.2.0
 supported_versions: ["2022-03-08"]
 description: Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization
 vendor: rapid7
@@ -96,15 +96,15 @@ types:
       required: false
     createdAt:
       title: Created At
-      description: Timestamp for creation of the destination list
-      example: 2018-07-23 19:36:45
-      type: date
+      description: The unix UTC timestamp in milliseconds for creation of the destination list
+      example: 1643385816
+      type: integer
       required: false
     modifiedAt:
       title: Modified At
-      description: Timestamp for modification of the destination list
-      example: 2018-07-23 19:36:45
-      type: date
+      description: The unix UTC timestamp in milliseconds for modification of the destination list
+      example: 1643385816
+      type: integer
       required: false
     isMspDefault:
       title: Is MSP Default
@@ -161,15 +161,15 @@ types:
       required: false
     createdAt:
       title: Created At
-      description: Timestamp for creation of the destination list
-      example: 2018-07-23 19:36:45
-      type: date
+      description: The unix UTC timestamp in milliseconds for creation of the destination list
+      example: 1643385816
+      type: integer
       required: false
     modifiedAt:
       title: Modified At
-      description: Timestamp for modification of the destination list
-      example: 2018-07-23 19:36:45
-      type: date
+      description: The unix UTC timestamp in milliseconds for modification of the destination list
+      example: 1643385816
+      type: integer
       required: false
     isMspDefault:
       title: Is MSP Default
