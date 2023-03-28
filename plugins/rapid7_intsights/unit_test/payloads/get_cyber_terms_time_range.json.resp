@@ -1,0 +1,28 @@
+{
+  "content": [
+    {
+      "ID": "640453685510dca17a983598",
+      "Value": "SCARLETEEL",
+      "Type": "ThreatActor",
+      "Severity": "Medium",
+      "Aliases": [],
+      "Origins": [],
+      "TargetCountries": [],
+      "TargetSectors": [],
+      "CreatedDate": "2023-03-05T08:31:36.357Z",
+      "UpdatedDate": "2023-03-05T09:02:25.425Z",
+      "TTPs": [
+        "Credential-Stealing",
+        "Cryptocurrency Mining",
+        "Security Evasion"
+      ],
+      "Overview": "<div>The SCARLETEEL threat group was first reported by cybersecurity researchers in February 2023. The group targets public-facing web applications that run in Kubernetes containers, with the goal of infiltrating organizations’ cloud services.</div><div><br></div><div>SCARLETEEL gains initial access by exploiting a vulnerable public-facing service in a self-managed Kubernetes container hosted on Amazon Web Services (AWS). Once inside the container, the threat actors download an XMRig cryptominer, enumerate AWS resources, and steal credentials from the Kubernetes pod. Then, they use the stolen credentials to establish persistence using AWS API calls and to move laterally through the AWS cloud service. The threat actors gather information, proprietary software, and additional credentials related to Elastic Compute Cloud (EC2) instances and Identity and Access Management (IAM) users while employing Lambda functions and the continuous integration and continuous deployment (CI/CD) service, Terraform. This attack cycle is then repeated using the newly obtained credentials. To evade detection and minimize its digital footprint, SCARLETEEL disables CloudTrail logs.&nbsp; &nbsp; &nbsp;</div>",
+      "AdditionalInformation": "<div>In one observed case, SCARLETEEL managed to steal 1 TB of data from a targeted organization, including customer scripts, troubleshooting tools, and log files.</div>",
+      "RelatedMalware": [],
+      "RelatedThreatActors": [],
+      "RelatedCampaigns": [],
+      "MitreAttack": []
+    }
+  ],
+  "nextOffset": "2023-03-05T09:02:25.425Z::640453685510dca17a983598"
+}

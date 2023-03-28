@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Threat Command"
 Vendor = "rapid7"
-Version = "5.0.0"
+Version = "5.1.0"
 Description = "Threat Command by Rapid7 is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy"
 
 
@@ -40,6 +40,8 @@ def main():
 
             self.add_action(actions.AddManualAlert())
 
+            self.add_action(actions.CloseAlert())
+
             self.add_action(actions.DeleteCve())
 
             self.add_action(actions.EnrichIndicator())
@@ -52,9 +54,15 @@ def main():
 
             self.add_action(actions.GetCveList())
 
+            self.add_action(actions.GetCvesForCyberTerm())
+
+            self.add_action(actions.GetCyberTermsByFilter())
+
             self.add_action(actions.GetIndicatorByValue())
 
             self.add_action(actions.GetIocsByFilter())
+
+            self.add_action(actions.GetIocsForCyberTerm())
 
             self.add_action(actions.TakedownRequest())
 

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_intsights
 title: Threat Command
 description: Threat Command by Rapid7 is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
-version: 5.0.0
+version: 5.1.0
 supported_versions: ["2.4.0"]
 vendor: rapid7
 support: rapid7
@@ -410,7 +410,197 @@ types:
       description: Reported Feeds
       type: '[]reported_feed'
       required: false
-
+  indicator:
+    value:
+      title: Value
+      description: IOC value
+      type: string
+      required: false
+      example: 198.50.191.194
+    type:
+      title: Type
+      description: IOC type
+      type: string
+      required: false
+      example: IpAddresses
+    updateDate:
+      title: Update Date
+      description: IOC update date
+      type: string
+      required: false
+      example: "2019-12-10T08:13:43.800Z"
+    status:
+      title: Status
+      description: IOC status
+      type: string
+      required: false
+      example: Retired
+    whitelisted:
+      title: Whitelisted
+      description: Whitelisted
+      type: boolean
+      required: false
+      example: true
+    severity:
+      title: Severity
+      description: Severity type
+      type: string
+      required: false
+      example: Low
+    reportingFeeds:
+      title: Reporting Feeds
+      description: Reporting feeds list
+      type: "[]string"
+      required: false
+      example: [ "Example Reporting Feeds" ]
+  cyberTermCve:
+    cveId:
+      title: CVE ID
+      description: The identifier of the CVE
+      type: string
+      required: false
+      example: CVE-2005-11111
+    publishedDate:
+      title: Published Date
+      description: Date when CVE was published
+      type: string
+      required: false
+      example: 2022-09-29T13:45:55.627Z
+    vendorProducts:
+      title: Vendor Products
+      description: Vendor's product list
+      type: '[]string'
+      required: false
+      example: ["Example Product"]
+  technique:
+    name:
+      title: Name
+      description: Name of the technique
+      type: string
+      required: false
+      example: PowerShell
+    url:
+      title: URL
+      description: URL
+      type: string
+      required: false
+      example: https://example.com
+  mitreAttack:
+    tactic:
+      title: Tactic
+      description: MITRE ATT&CK tactic name related to the cyber term
+      type: string
+      required: false
+      example: Execution
+    techniques:
+      title: Techniques
+      description: List of MITRE ATT&CK technique names and URLs of the MITRE description
+      type: "[]technique"
+      required: false
+      example: []
+  cyberTerm:
+    id:
+      title: ID
+      description: ID of the cyber term
+      type: string
+      required: false
+      example: 9de5069c5afe602b2ea0a04b
+    value:
+      title: Value
+      description: Name of the cyber term
+      type: string
+      required: false
+      example: Example Name
+    type:
+      title: Type
+      description: Type of the cyber term
+      type: string
+      required: false
+      example: ThreatActor
+    severity:
+      title: Severity
+      description: Severity of the cyber term
+      type: string
+      required: false
+      example: High
+    aliases:
+      title: Aliases
+      description: Aliases of the cyber term
+      type: "[]string"
+      required: false
+      example: ["Example Alias"]
+    targetCountries:
+      title: Target Countries
+      description: List of targeted countries
+      type: "[]string"
+      required: false
+      example: ["Germany"]
+    targetSectors:
+      title: Target Sectors
+      description: List of targeted sectors
+      type: "[]string"
+      required: false
+      example: ["Computer Software & Services"]
+    origins:
+      title: Origins
+      description: List of origin nationalities
+      type: "[]string"
+      required: false
+      example: ["United States"]
+    createdDate:
+      title: Created Date
+      description: The date the cyber term was first reported
+      type: string
+      required: false
+      example: 2020-07-29T13:36:44.794Z
+    updatedDate:
+      title: Updated Date
+      description: The date the cyber term was last updated
+      type: string
+      required: false
+      example: 2021-04-14T08:21:57.021Z
+    ttps:
+      title: TTPs
+      description: List of TTPs
+      type: "[]string"
+      required: false
+      example: ["Code Execution"]
+    overview:
+      title: Overview
+      description: Overview of the cyber term
+      type: string
+      required: false
+      example: Example overview
+    additionalInformation:
+      title: Additional Information
+      description: Additional information about the cyber term
+      type: string
+      required: false
+      example: Example information
+    relatedMalware:
+      title: Related Malware
+      description: Related malware names
+      type: "[]string"
+      required: false
+      example: ["emotet"]
+    relatedThreatActors:
+      title: Related Threat Actors
+      description: Related threat actor names
+      type: "[]string"
+      required: false
+      example: ["Lazarus"]
+    relatedCampaigns:
+      title: Related Campaigns
+      description: Related campaign names
+      type: "[]string"
+      required: false
+      example: ["SolarWinds"]
+    mitreAttack:
+      title: Mitre Attack
+      description: MITRE ATT&CK tactics and techniques of the cyber term, divided by tactics
+      type: "[]mitreAttack"
+      required: false
+      example: []
 connection:
   account_id:
     title: Account ID
@@ -1035,13 +1225,13 @@ actions:
         example: Active
       type:
         title: Type
-        description: Filter by IOC type (Allowed values, IpAddresses, Urls, Domainds, Hashes, Emails)
+        description: "Filter by IOC type (Allowed values: IpAddresses, Urls, Domains, Hashes, Emails)"
         type: "[]string"
         required: false
         example: ["IpAddresses"]
       severity:
         title: Status
-        description: Filter by IOC severity (Allowed values, High, Medium, Low)
+        description: "Filter by IOC severity (Allowed values: High, Medium, Low)"
         type: "[]string"
         required: false
         example: ["High"]
@@ -1053,7 +1243,7 @@ actions:
         example: ["123450000012345000001233"]
       kill_chain_phases:
         title: Kill Chain Phases
-        description: Filter by source IDs (Allowed values, Reconnaissance, Weaponization, Delivery, Exploitation, Installation, Command and Control, Actions on Objective)
+        description: "Filter by phase of Lockheed-Martin intrusion kill chain (Allowed values: Reconnaissance, Weaponization, Delivery, Exploitation, Installation, Command and Control, Actions on Objective)"
         type: "[]string"
         required: false
         example: ["Command and Control"]
@@ -1070,6 +1260,12 @@ actions:
         type: string
         required: false
         example: "2020-01-01T20:01:27.344Z"
+      enterprise_tactics:
+        title: Enterprise Tactics
+        description: Filter by MITRE ATT&CK Enterprise tactic. Allowed values 'Reconnaissance', 'Resource Development', 'Initial Access', 'Execution', 'Persistence', 'Privilege Escalation', 'Defense Evasion', 'Credential Access', 'Discovery', 'Lateral Movement', 'Collection', 'Command and Control', 'Exfiltration', 'Impact'
+        type: "[]string"
+        required: false
+        example: [ "Reconnaissance" ]
     output:
       content:
         title: Content
@@ -1083,7 +1279,198 @@ actions:
         type: string
         required: false
         example: "2020-01-01T20:01:27.344Z"
-
+  get_iocs_for_cyber_term:
+    title: Get IOCs for Cyber Term
+    description: Gets cyber term IOCs by cyber term ID
+    input:
+      cyberTermId:
+        title: Cyber Term ID
+        description: Cyber term unique ID
+        type: string
+        required: true
+        example: 593e74cfc022ac015814f8d9
+      iocType:
+        title: IOC Type
+        description: IOC types to include. Allowed values "IpAddresses", "Urls", "Domains", "Hashes", "Emails"
+        type: "[]string"
+        required: false
+        example: ["IpAddresses"]
+      limit:
+        title: Limit
+        description: Desired number of results. Default value 100. Size range 1-1000
+        type: integer
+        required: false
+        example: 100
+      offset:
+        title: Offset
+        description: Request the next page of IOCs
+        type: string
+        required: false
+        example: "2020-08-13T12:17:08.755Z"
+    output:
+      iocs:
+        title: IOCs
+        description: List of IOCs
+        type: "[]indicator"
+        required: false
+        example: []
+      nextOffset:
+        title: Next Offset
+        description: Next offset value for pagination
+        type: string
+        required: false
+        example: "2020-08-13T12:17:08.755Z"
+  get_cves_for_cyber_term:
+    title: Get CVEs for Cyber Term
+    description: Get the Common Vulnerabilities and Exposures that are related to a cyber term
+    input:
+      cyberTermId:
+        title: Cyber Term ID
+        description: Cyber term unique ID
+        type: string
+        required: true
+        example: 311g8204kf82mr1234ab987o
+    output:
+      cyberTermCves:
+        title: Cyber Term CVEs
+        description: List of Common Vulnerabilities and Exposures related to the cyber term
+        type: '[]cyberTermCve'
+        required: true
+        example: []
+  get_cyber_terms_by_filter:
+    title: Get Cyber Terms by Filter
+    description: Get cyber terms for given filters
+    input:
+      search:
+        title: Search
+        description: Filter by free text, which can be the cyber term name or ID
+        type: string
+        required: false
+        example: 9de5069c5afe602b2ea0a04b
+      type:
+        title: Type
+        description: "Filter by one or more cyber term types. Allowed values: ThreatActor, Malware, Campaign"
+        type: "[]string"
+        required: false
+        example: ["ThreatActor"]
+      severity:
+        title: Severity
+        description: "Filter by one or more cyber term severities. Allowed values: High, Medium, Low"
+        type: "[]string"
+        required: false
+        example: ["Medium", "High"]
+      targetSector:
+        title: Target Sector
+        description: Filter by one or more targeted sectors
+        type: "[]string"
+        required: false
+        example: ["Electronics"]
+      targetCountry:
+        title: Target Country
+        description: Filter by one or more targeted countries
+        type: "[]string"
+        required: false
+        example: ["United Status"]
+      origin:
+        title: Origin
+        description: Filter by one or more nationalities
+        type: "[]string"
+        required: false
+        example: ["Korea, Republic of"]
+      ttp:
+        title: TTP
+        description: Filter by one or more TTPs
+        type: "[]string"
+        required: false
+        example: ["Code Execution"]
+      lastUpdateFrom:
+        title: Last Updated From
+        description: Filter by last update date is greater than the given value (in ISO 8601 format)
+        type: date
+        required: false
+        example: 2022-09-29T13:45:55.627Z
+      lastUpdateTo:
+        title: Last Updated To
+        description: Filter by last update date is less than the given value (in ISO 8601 format)
+        type: date
+        required: false
+        example: 2022-09-30T13:45:55.627Z
+      limit:
+        title: Limit
+        description: "Limit the results amount per chunk. Default value: 200"
+        type: integer
+        required: false
+        example: 100
+      offset:
+        title: Offset
+        description: Request the next page of cyber terms
+        type: string
+        required: false
+        example: 2022-09-29T13:45:55.627Z::9de5069c5afe602b2ea0a04b66beb2c0
+    output:
+      cyberTerms:
+        title: Cyber Terms
+        description: List of cyber terms that match the given filters
+        type: "[]cyberTerm"
+        required: false
+        example: []
+      nextOffset:
+        title: Next Offset
+        description: Indicator of the next page of cyber terms
+        type: string
+        required: false
+        example: 2022-09-29T13:45:55.627Z::9de5069c5afe602b2ea0a04b66beb2c0
+  close_alert:
+    title: Close Alert
+    description: Close the alert with the given ID
+    input:
+      alertId:
+        title: Alert ID
+        description: Alert's unique ID
+        type: string
+        required: true
+        example: 9de5069c5afe602b2ea0a04b
+      reason:
+        title: Reason
+        description: Alert's closed reason
+        type: string
+        enum:
+        - Problem solved
+        - Informational only
+        - Problem we are already aware of
+        - Company owned domain
+        - Legitimate application/profile
+        - Not related to my company
+        - False positive
+        - Other
+        required: true
+        example: False Positive
+      freeText:
+        title: Comments
+        description: Alert's comments
+        type: string
+        required: false
+        example: Example comment
+      isHidden:
+        title: Is Hidden
+        description: Alert's hidden status. Delete alert from the account instance - only when reason is False Positive
+        type: boolean
+        required: true
+        default: false
+        example: false
+      rate:
+        title: Rate
+        description: Alert's rate
+        type: integer
+        required: false
+        example: 5
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+        example: true
 triggers:
   new_alert:
     title: New Alert

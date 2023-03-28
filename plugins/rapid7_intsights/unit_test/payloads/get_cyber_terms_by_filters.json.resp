@@ -1,0 +1,57 @@
+{
+  "content": [
+    {
+      "ID": "63a42d0cf5255e0da9ccad11",
+      "Value": "GodFather",
+      "Type": "Malware",
+      "Severity": "Medium",
+      "Aliases": [],
+      "Origins": [],
+      "TargetCountries": [
+        "Canada",
+        "France",
+        "Germany",
+        "Guatemala",
+        "Ireland",
+        "Israel",
+        "Italy",
+        "Kuwait",
+        "Netherlands",
+        "Poland",
+        "Portugal",
+        "Spain",
+        "Switzerland",
+        "Turkey",
+        "United Kingdom",
+        "United States"
+      ],
+      "TargetSectors": [
+        "Banking",
+        "Financial Services"
+      ],
+      "CreatedDate": "2022-12-22T10:10:20.081Z",
+      "UpdatedDate": "2022-12-22T12:22:23.383Z",
+      "TTPs": [
+        "Application List Capture",
+        "C&C Infrastructure",
+        "Collect General System and User Information",
+        "Command Execution",
+        "Contact List Capture",
+        "Credential-Stealing",
+        "Decoy",
+        "Keylogging",
+        "Masquerade Legitimate Software/Service",
+        "Overlay Attack",
+        "Screenshot Taking",
+        "SMS Capture",
+        "SMS Management"
+      ],
+      "Overview": "<div>The GodFather Android banking Trojan was first reported by cybersecurity in March 2022. The malware targets the users of banking and cryptocurrency applications in countries such as the United States, Turkey, Spain, Italy, and the United Kingdom.&nbsp;</div><div><br></div><div>GodFather, distributed in a malware-as-a-service (MaaS) model, impersonates legitimate applications such as antivirus scanning and Android settings apps. Once downloaded, the malware imitates the operation of such apps (e.g. AV scanning) and requests access to the Accessibility Service to grant itself various device permissions. Like other banking Trojans, GodFather can collect general device information (phone number, list of installed apps, battery information, etc.), log user keystrokes, access and manage SMS and notifications, record the device’s screen, access the contact list, and even make calls. The malware can also create decoy notifications and overlay web fakes that impersonate the login portals of installed apps to steal user credentials.&nbsp;</div><div><br></div><div><div>GodFather receives its operational commands from a remote command and control (C2) server. It retrieves the C2 address by decrypting Blowfish-encoded descriptions from a dedicated Telegram channel. The malware checks the device’s system language and terminates its operation if the language belongs to one of the countries in the Commonwealth of Independent States (e.g. Russian, Armenian, and Belarusian). This might imply the origin of the malware operators.&nbsp; &nbsp;&nbsp;</div></div>",
+      "AdditionalInformation": "<div>GodFather shares similarities with the Anubis Android banking Trojan (AKA BankBot) and might be based on its source code that was leaked in 2019.&nbsp; &nbsp;&nbsp;</div><div><br></div>",
+      "RelatedMalware": [],
+      "RelatedThreatActors": [],
+      "RelatedCampaigns": [],
+      "MitreAttack": []
+    }
+  ]
+}

@@ -8,6 +8,7 @@ class Component:
 
 
 class Input:
+    ENTERPRISE_TACTICS = "enterprise_tactics"
     FIRST_SEEN_FROM = "first_seen_from"
     FIRST_SEEN_TO = "first_seen_to"
     KILL_CHAIN_PHASES = "kill_chain_phases"
@@ -34,6 +35,15 @@ class GetIocsByFilterInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "enterprise_tactics": {
+      "type": "array",
+      "title": "Enterprise Tactics",
+      "description": "Filter by MITRE ATT\\u0026CK Enterprise tactic. Allowed values 'Reconnaissance', 'Resource Development', 'Initial Access', 'Execution', 'Persistence', 'Privilege Escalation', 'Defense Evasion', 'Credential Access', 'Discovery', 'Lateral Movement', 'Collection', 'Command and Control', 'Exfiltration', 'Impact'",
+      "items": {
+        "type": "string"
+      },
+      "order": 14
+    },
     "first_seen_from": {
       "type": "string",
       "title": "First Seen From",
@@ -53,7 +63,7 @@ class GetIocsByFilterInput(insightconnect_plugin_runtime.Input):
     "kill_chain_phases": {
       "type": "array",
       "title": "Kill Chain Phases",
-      "description": "Filter by source IDs (Allowed values, Reconnaissance, Weaponization, Delivery, Exploitation, Installation, Command and Control, Actions on Objective)",
+      "description": "Filter by phase of Lockheed-Martin intrusion kill chain (Allowed values: Reconnaissance, Weaponization, Delivery, Exploitation, Installation, Command and Control, Actions on Objective)",
       "items": {
         "type": "string"
       },
@@ -107,7 +117,7 @@ class GetIocsByFilterInput(insightconnect_plugin_runtime.Input):
     "severity": {
       "type": "array",
       "title": "Status",
-      "description": "Filter by IOC severity (Allowed values, High, Medium, Low)",
+      "description": "Filter by IOC severity (Allowed values: High, Medium, Low)",
       "items": {
         "type": "string"
       },
@@ -136,7 +146,7 @@ class GetIocsByFilterInput(insightconnect_plugin_runtime.Input):
     "type": {
       "type": "array",
       "title": "Type",
-      "description": "Filter by IOC type (Allowed values, IpAddresses, Urls, Domainds, Hashes, Emails)",
+      "description": "Filter by IOC type (Allowed values: IpAddresses, Urls, Domains, Hashes, Emails)",
       "items": {
         "type": "string"
       },

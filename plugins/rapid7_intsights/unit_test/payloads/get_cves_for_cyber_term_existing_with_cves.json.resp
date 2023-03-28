@@ -1,0 +1,42 @@
+{
+  "content":[
+    {
+      "CveId":"CVE-2005-10000",
+      "PublishedDate":"2005-01-01T01:30:00.000Z",
+      "VendorProducts":[
+        "Vendor1 Example"
+      ]
+    },
+    {
+      "CveId":"CVE-2005-10001",
+      "PublishedDate":"2005-01-02T01:30:00.000Z",
+      "VendorProducts":[
+        "Vendor2 First Example"
+      ]
+    },
+    {
+      "CveId":"CVE-2005-10010",
+      "PublishedDate":"2005-01-03T01:30:00.000Z",
+      "VendorProducts":[
+        "Vendor3 First Example",
+        "Vendor2 Second Example"
+      ]
+    },
+    {
+      "CveId":"CVE-2005-10100",
+      "PublishedDate":"2005-01-04T01:30:00.000Z",
+      "VendorProducts":[
+        "Vendor4 Product"
+      ]
+    },
+    {
+      "CveId":"CVE-2005-11000",
+      "PublishedDate":"2005-01-05T01:30:00.000Z",
+      "VendorProducts":[
+        "Vendor5 Product X",
+        "Vendor5 Product Y",
+        "Vendor5 Product Z"
+      ]
+    }
+  ]
+}

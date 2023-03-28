@@ -1,0 +1,7 @@
+{
+  "alertId": "123456789",
+  "reason": "False positive",
+  "freeText": "",
+  "isHidden": false,
+  "rate": 0
+}
