@@ -6,7 +6,6 @@ import json
 class Input:
     API_KEY = "api_key"
     API_SECRET = "api_secret"
-    ORGANIZATION_ID = "organization_id"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -26,18 +25,11 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "API Secret Key",
       "description": "Cisco Umbrella API secret key",
       "order": 2
-    },
-    "organization_id": {
-      "type": "string",
-      "title": "Organization ID",
-      "description": "ID of your Cisco Umbrella organization",
-      "order": 3
     }
   },
   "required": [
     "api_key",
-    "api_secret",
-    "organization_id"
+    "api_secret"
   ],
   "definitions": {
     "credential_secret_key": {
