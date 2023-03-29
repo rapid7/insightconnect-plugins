@@ -5,6 +5,7 @@ from parameterized import parameterized
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
+from unittest.mock import Mock
 from icon_cisco_umbrella_destinations.connection.connection import Connection
 from icon_cisco_umbrella_destinations.actions.dlGet import DlGet
 from icon_cisco_umbrella_destinations.actions.dlGet.schema import Input
@@ -12,6 +13,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 import logging
 
 from unit_test.mock import (
+    Util,
     STUB_CONNECTION,
     mock_request_200,
     mock_request_403,
@@ -26,24 +28,18 @@ from unit_test.mock import (
 
 
 class TestDlGet(TestCase):
-    def setUp(self) -> None:
-        self.connection = Connection()
-        self.connection.logger = logging.getLogger("Connection logger")
-        self.connection.connect(STUB_CONNECTION)
-
-        self.action = DlGet()
-        self.action.connection = self.connection
-        self.action.logger = logging.getLogger("Action logger")
-
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
+    def setUp(self, mock_post: Mock) -> None:
+        self.action = Util.default_connector(DlGet())
         self.params = {Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID}
 
     @mock.patch("requests.request", side_effect=mock_request_200)
     def test_destination_list_get_success(self, mock_get):
+        mocked_request(mock_get)
         response = self.action.run(self.params)
         expected_response = {
             "success": {
                 "id": 15755711,
-                "organizationId": 2372338,
                 "access": "allow",
                 "isGlobal": False,
                 "name": "CreateListTest",

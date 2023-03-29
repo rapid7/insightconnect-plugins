@@ -34,12 +34,6 @@ connection:
     type: credential_secret_key
     required: true
     example: 9de5069c5afe602b2ea0a04b66beb2c0
-  organization_id:
-    title: Organization ID
-    description: ID for organization
-    type: integer
-    required: true
-    example: 1234567
 types:
   meta:
     destinationCount:
@@ -127,12 +121,6 @@ types:
     id:
       title: ID
       description: Unique ID of the destination list
-      type: integer
-      required: false
-    organizationId:
-      title: Organization ID
-      description: ID of organization
-      example: 1234567
       type: integer
       required: false
     access:

@@ -9,10 +9,9 @@ from icon_cisco_umbrella_destinations.util.endpoints import Endpoints
 
 
 class CiscoUmbrellaManagementAPI(OAuth20ClientCredentialMixin):
-    def __init__(self, api_key: str, api_secret: str, organization_id: str, logger: Logger):
+    def __init__(self, api_key: str, api_secret: str, logger: Logger):
         super().__init__(api_key, api_secret, Endpoints.OAUTH20_TOKEN_URL)
         self.base_url = "https://api.umbrella.com/policies/v2/"
-        self.organization_id = organization_id
         self.logger = logger
 
     # DESTINATIONS LIST API

@@ -66,13 +66,13 @@ class DlGetByNameOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Access",
           "description": "Allow or block access to domain",
-          "order": 3
+          "order": 2
         },
         "createdAt": {
           "type": "integer",
           "title": "Created At",
           "description": "The unix UTC timestamp in milliseconds for creation of the destination list",
-          "order": 7
+          "order": 6
         },
         "id": {
           "type": "integer",
@@ -84,43 +84,37 @@ class DlGetByNameOutput(insightconnect_plugin_runtime.Output):
           "type": "boolean",
           "title": "Is Global",
           "description": "Boolean value indicating global state",
-          "order": 4
+          "order": 3
         },
         "isMspDefault": {
           "type": "boolean",
           "title": "Is MSP Default",
           "description": "Whether or not MSP is default",
-          "order": 9
+          "order": 8
         },
         "markedForDeletion": {
           "type": "boolean",
           "title": "Marked for Deletion",
           "description": "Whether or not destination list is marked for deletion",
-          "order": 10
+          "order": 9
         },
         "modifiedAt": {
           "type": "integer",
           "title": "Modified At",
           "description": "The unix UTC timestamp in milliseconds for modification of the destination list",
-          "order": 8
+          "order": 7
         },
         "name": {
           "type": "string",
           "title": "Name",
           "description": "Title for the destination list",
-          "order": 5
-        },
-        "organizationId": {
-          "type": "integer",
-          "title": "Organization ID",
-          "description": "ID of organization",
-          "order": 2
+          "order": 4
         },
         "thirdpartyCategoryId": {
           "type": "integer",
           "title": "Third Party Category ID",
           "description": "ID, if any, for third parties",
-          "order": 6
+          "order": 5
         }
       }
     }

@@ -18,12 +18,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
         # Gather input variables
         pubKey = params.get(Input.API_KEY).get("secretKey")
         priKey = params.get(Input.API_SECRET).get("secretKey")
-        orgID = params.get(Input.ORGANIZATION_ID)
 
         # Main client function with input variables
-        self.client = CiscoUmbrellaManagementAPI(
-            api_key=pubKey, api_secret=priKey, organization_id=orgID, logger=self.logger
-        )
+        self.client = CiscoUmbrellaManagementAPI(api_key=pubKey, api_secret=priKey, logger=self.logger)
 
     def test(self):
         try:
