@@ -1,6 +1,6 @@
 {
-	"spec": "f8dd0e5d1ad79be9e5700421ec9ea687",
-	"manifest": "ab4a73f004ea7ad2e5488b26d3ba7b64",
+	"spec": "e4b345de44c8dda0d7d02ee36968292f",
+	"manifest": "e2520c54dbfcae5cb4e2fab272464388",
 	"setup": "89ce4be3a2c0b111522525b8fb30f688",
 	"schemas": [
 		{
@@ -29,7 +29,7 @@
 		},
 		{
 			"identifier": "dlGet/schema.py",
-			"hash": "8751b6185545d1f0203c8a931babb016"
+			"hash": "cae624a2c2468539f6cc256df13f698d"
 		},
 		{
 			"identifier": "dlGetAll/schema.py",
@@ -37,7 +37,7 @@
 		},
 		{
 			"identifier": "dlGetByName/schema.py",
-			"hash": "86d89838752f0916d0ab10be8f2d89cb"
+			"hash": "54018c901a2b7b9db3bf713c574bb46d"
 		},
 		{
 			"identifier": "dlPatch/schema.py",
@@ -45,7 +45,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "36c77942e499ae314d8487dbde4e97a3"
+			"hash": "c648a86fc0bd28b8734066262bb1c2af"
 		}
 	]
 }

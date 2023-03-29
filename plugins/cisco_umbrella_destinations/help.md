@@ -14,7 +14,7 @@ Cisco Umbrella Destinations allows users to manage, block, and allow network des
 
 # Supported Product Versions
 
-* 2023-03-06
+* 2023-03-29
 
 # Documentation
 
@@ -26,15 +26,13 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|Cisco Umbrella Management API key|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |api_secret|credential_secret_key|None|True|Cisco Umbrella Management API secret key|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|organization_id|integer|None|True|ID for organization|None|1234567|
 
 Example input:
 
 ```
 {
   "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
-  "api_secret": "9de5069c5afe602b2ea0a04b66beb2c0",
-  "organization_id": 1234567
+  "api_secret": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 
@@ -106,7 +104,7 @@ This action is used to add a destination to the destination list.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |comment|string|None|False|Information about domain|None|I trust this domain|
-|destination|string|None|True|Title for the destination list|None|www.example.com|
+|destination|string|None|True|Title for the destination list|None|https://example.com|
 |destinationListId|integer|None|True|Unique ID for destination list|None|12345678|
 
 Example input:
@@ -248,6 +246,14 @@ Get destination list by name
 |----|----|-------|--------|-----------|----|-------|
 |name|string|None|True|Title for the destination list|None|new list|
 
+Example input:
+
+```
+{
+  "name": "new list"
+}
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -297,7 +303,7 @@ This action is used to create a destination list.
 |----|----|-------|--------|-----------|----|-------|
 |access|string|None|False|Allow or block access to domain|['allow', 'block']|allow|
 |comment|string|None|False|Information about the destination|None|Suspicious domain|
-|destination|string|None|False|Enter the destination here|None|www.example.com|
+|destination|string|None|False|Enter the destination here|None|https://example.com|
 |isGlobal|boolean|None|False|Boolean value indicating global state|None|True|
 |name|string|None|False|Label for the destination list|None|New list|
 |type|string|None|False|Can be DOMAIN, URL or IPV4|['DOMAIN', 'URL', 'IPV4']|URL|
