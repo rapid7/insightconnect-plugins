@@ -9,10 +9,26 @@
 * Antivirus Scan
 * Get agent details
 * Check Tamper Protection status
+* Isolate Endpoint
+* Get Endpoint Groups
+* Add Endpoint Group
+* Get Endpoint Group
+* Add Endpoint to Group
+* Remove Endpoint from Group
+* Get Allowed Items
+* Add Allowed Item
+* Remove Allowed Item
+* Get Blocked Items
+* Add Blocked Item
+* Remove Blocked Item
 
 # Requirements
 
 * Sophos Central API tenant credentials
+
+# Supported Product Versions
+
+* Sophos Central API 2023-03-10
 
 # Documentation
 
@@ -41,6 +57,250 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Remove Endpoint from Group
+
+This action is used to remove endpoints from a group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|groupId|string|None|True|Endpoint group ID|None|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+|ids|[]string|None|True|List of endpoint IDs|None|["9de5069c-5afe-602b-2ea0-a04b66beb2c0"]|
+
+Example input:
+
+```
+{
+  "groupId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+  "ids": [
+    "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|errors|endpointRemovalErrors|False|Information about which endpoints could not be removed from the group|{}|
+|removedEndpoints|[]endpointObject|False|Endpoints removed from a group|[]|
+
+Example output:
+
+```
+{
+  "removedEndpoints": [
+    {
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "hostname": "test"
+    }
+  ],
+  "errors": {}
+}
+```
+
+#### Isolate Endpoint
+
+This action is used to turn on or off endpoint isolation for multiple endpoints.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|None|False|Reason the endpoints should be isolated or not|None|Example comment|
+|enabled|boolean|True|True|Whether the endpoints should be isolated or not|None|True|
+|ids|[]string|None|True|List of endpoints IDs|None|["9de5069c-5afe-602b-2ea0-a04b66beb2c0"]|
+
+Example input:
+
+```
+{
+  "comment": "Example comment",
+  "enabled": true,
+  "ids": [
+    "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|endpoints|[]endpointIsolation|False|List of endpoints for which isolation has been updated|
+
+Example output:
+
+```
+{
+  "endpoints": [
+    {
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "isolation": {
+        "enabled": true,
+        "lastEnabledBy": {
+          "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+        },
+        "comment": "Example comment"
+      }
+    }
+  ]
+}
+
+```
+
+#### Get Endpoint Group
+
+This action is used to get endpoint group by ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|groupId|string|None|True|Endpoint group ID|None|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "groupId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|endpointGroup|endpointGroup|False|Information about the provided endpoint group|{}|
+
+Example output:
+
+```
+{
+  "endpointGroup": {
+    "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+    "name": "Example Group",
+    "description": "Example description",
+    "type": "computer",
+    "endpoints": {
+      "total": 1,
+      "itemsCount": 1,
+      "items": [
+        {
+          "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+          "hostname": "Test"
+        }
+      ]
+    },
+    "tenant": {
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+    },
+    "createdAt": "2023-03-24T07:45:29.813Z"
+  }
+}
+```
+
+#### Add Endpoint to Group
+
+This action is used to add endpoints to your group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|groupId|string|None|True|Endpoint group ID|None|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+|ids|[]string|None|True|List of endpoint IDs|None|["9de5069c-5afe-602b-2ea0-a04b66beb2c0"]|
+
+Example input:
+
+```
+{
+  "groupId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+  "ids": [
+    "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|addedEndpoints|[]endpointObject|False|Endpoints added to the group|[]|
+
+Example output:
+
+```
+{
+  "addedEndpoints": [
+    {
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "hostname": "test"
+    }
+  ]
+}
+```
+
+#### Add Endpoint Group
+
+This action is used to add a new endpoint group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|description|string|None|False|Group description|None|Example description|
+|endpointIds|[]string|None|False|List of endpoint IDs that will be added to the group|None|["9de5069c-5afe-602b-2ea0-a04b66beb2c0"]|
+|name|string|None|True|Endpoint group name|None|Example Group|
+|type|string|computer|True|Group type|['computer', 'server']|computer|
+
+Example input:
+
+```
+{
+  "description": "Example description",
+  "endpointIds": [
+    "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+  ],
+  "name": "Example Group",
+  "type": "computer"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|endpointGroup|endpointGroup|False|Information about the created endpoint group|{}|
+
+Example output:
+
+```
+{
+  "endpointGroup": {
+    "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+    "name": "Example Group",
+    "description": "Example description",
+    "type": "computer",
+    "endpoints": {
+      "total": 1,
+      "itemsCount": 1,
+      "items": [
+        {
+          "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+          "hostname": "Test"
+        }
+      ]
+    },
+    "tenant": {
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+    },
+    "createdAt": "2023-03-24T07:45:29.813Z"
+  }
+}
+```
 
 #### Check Tamper Protection Status
 
@@ -336,7 +596,7 @@ This action is used to get endpoints for a customer based on the parameters prov
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|since|string|None|False|Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01.700Z, -P1D, PT20M, PT4H500S|None|2019-09-23 12:02:01.700000|
+|since|string|None|False|Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01.700Z, -P1D, PT20M, PT4H500S|None|2019-09-23T12:02:01.700Z|
 
 Example input:
 
@@ -419,19 +679,447 @@ Example output:
 }
 ```
 
+#### Add Blocked Item
+
+This action is used to block an item from exoneration.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|None|True|Comment indicating why the item should be blocked|None|Example comment|
+|propertiesCertificateSigner|string|None|False|Properties value saved for the certificateSigner|None|Example signer|
+|propertiesFileName|string|None|False|Properties file name for the application|None|sample.txt|
+|propertiesPath|string|None|False|Properties path for the application|None|$path/sample.txt|
+|propertiesSha256|string|None|True|Properties SHA256 value for the application|None|ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad|
+|type|string|sha256|True|Property by which an item is blocked. The following values are allowed: SHA256|None|sha256|
+
+Example input:
+
+```
+{
+  "comment": "This is comment",
+  "propertiesCertificateSigner": "Example signer",
+  "propertiesFileName": "sample.txt",
+  "propertiesPath": "$path/sample.txt",
+  "propertiesSha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+  "type": "sha256"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|blockedItem|item|False|Blocked item created|{}|
+
+Example output:
+
+```
+{
+  "blockedItem": {
+    "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+    "createdAt": "2023-03-02T13:00:19.494Z",
+    "updatedAt": "2023-03-02T13:00:19.494Z",
+    "properties": {
+      "fileName": "sample.txt",
+      "path": "$path/sample.txt",
+      "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "certificateSigner": "Example signer"
+    },
+    "comment": "Example comment",
+    "type": "sha256",
+    "createdBy": {
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "name": "Example name"
+    },
+    "originPerson": {
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "name": "Example name"
+    },
+    "originEndpoint": {
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c"
+    }
+  }
+}
+```
+
+#### Get Blocked Items
+
+This action is used to get a list of blocked items.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|page|integer|1|False|The page number to fetch, starting with 1|None|1|
+|pageSize|integer|50|False|The size of the page requested|None|50|
+|pageTotal|boolean|False|False|Whether the number of pages should be calculated and returned in the response|None|False|
+
+Example input:
+
+```
+{
+  "page": 1,
+  "pageSize": 50,
+  "pageTotal": false
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|items|[]item|False|List of blocked items|[]|
+|pages|pages|False|Pages details|{}|
+
+Example output:
+
+```
+{
+  "items": [
+    {
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "createdAt": "2023-03-02T13:00:19.494Z",
+      "updatedAt": "2023-03-02T13:00:19.494Z",
+      "properties": {
+        "fileName": "sample.txt",
+        "path": "$path/sample.txt",
+        "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+        "certificateSigner": "Example signer"
+      },
+      "comment": "Example comment",
+      "type": "sha256",
+      "createdBy": {
+        "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+        "name": "Example name"
+      },
+      "originPerson": {
+        "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+        "name": "Example name"
+      },
+      "originEndpoint": {
+        "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c"
+      }
+    }
+  ],
+  "pages": {
+    "current": 1,
+    "size": 50,
+    "total": 1,
+    "items": 2,
+    "maxSize": 100
+  }
+}
+```
+
+#### Remove Blocked Item
+
+This action deletes the specified blocked item.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|blockedItemId|string|None|True|The identifier of the blocked item|None|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "blockedItemId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|Whether the item was deleted. Returns success if can't find item or it has been successfully deleted|True|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+
+#### Remove Allowed Item
+
+This action deletes the specified allowed item.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|allowedItemId|string|None|True|The identifier of the allowed item|None|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "allowedItemId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Whether the action was successful|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Get Endpoint Groups
+
+This action is used to get endpoint groups.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|endpointIds|[]string|None|False|Endpoint IDs. Must contain at most 50 items that must be unique|None|["9de5069c-5afe-602b-2ea0-a04b66beb2c0"]|
+|fields|[]string|None|False|The fields to return in a partial response|None|["name", "createdAt"]|
+|groupType|string|all|False|Endpoint group type. The following values are allowed: all, computer, server|['all', 'computer', 'server']|computer|
+|ids|[]string|None|False|Endpoint group IDs to match. Must contain at most 50 items that must be unique|None|["9de5069c-5afe-602b-2ea0-a04b66beb2c0"]|
+|page|integer|1|False|The page number to fetch|None|5|
+|pageSize|integer|50|False|The size of the page requested|None|10|
+|pageTotal|boolean|None|False|Whether the number of pages should be calculated and returned in the response|None|False|
+|search|string|None|False|Term to search for in the specified search fields|None|Example|
+|searchFields|[]string|None|False|Search your specified fields. The default is to search group names only. The following values are allowed: name, description|None|["description", "name"]|
+|sort|[]string|None|False|Sort criteria for endpoint groups. Valid sort fields are id, name, createdAt, and updatedAt. You can append ':asc' or ':desc' to each field to specify the sort direction. The default sort direction for each field is unspecified|None|["createdAt:desc", "name:asc"]|
+
+Example input:
+
+```
+{
+  "endpointIds": [
+    "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+  ],
+  "fields": [
+    "name",
+    "createdAt"
+  ],
+  "groupType": "computer",
+  "ids": [
+    "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+  ],
+  "page": 5,
+  "pageSize": 10,
+  "pageTotal": false,
+  "search": "Example",
+  "searchFields": [
+    "description",
+    "name"
+  ],
+  "sort": [
+    "createdAt:desc",
+    "name:asc"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|endpointGroups|[]endpointGroup|False|List of endpoint groups|
+|pages|pages|False|Pages details|
+
+Example output:
+
+```
+{
+  "endpointGroups":[
+    {
+      "id":"f8d03561-90d1-4c18-b576-34509e843ee1",
+      "name":"Example Group",
+      "description":"Example description",
+      "type":"computer",
+      "endpoints":{
+        "total":1,
+        "itemsCount":1,
+        "items":[
+          {
+            "id":"f8d03561-90d1-4c18-b576-34509e843ee8",
+            "hostname":"EXAMPLE-HOSTNAME"
+          }
+        ]
+      },
+      "tenant":{
+        "id":"f8d03561-90d1-4c18-b576-34509e843ee8"
+      },
+      "createdAt":"2023-01-01T11:11:11.111Z",
+      "updatedAt":"2023-01-01T11:11:11.111Z"
+    },
+    {
+      "id":"f8d03561-90d1-4c18-b576-34509e843ee3",
+      "name":"Test Group 3",
+      "description":"Example description",
+      "type":"computer",
+      "endpoints":{
+        "total":0,
+        "itemsCount":0,
+        "items":[
+        ]
+      },
+      "tenant":{
+        "id":"f8d03561-90d1-4c18-b576-34509e843ee8"
+      },
+      "createdAt":"2023-01-01T11:11:11.111Z"
+    }
+  ],
+  "pages":{
+    "current":1,
+    "size":50,
+    "maxSize":1000
+  }
+```
+
+#### Get Allowed Items
+
+This action is used to get a list of allowed items.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|page|integer|1|False|The page number to fetch|None|3|
+|pageSize|integer|50|False|The size of the page requested|None|5|
+|pageTotal|boolean|None|False|Whether the number of pages should be calculated and returned in the response|None|False|
+
+Example input:
+
+```
+{
+  "page": 3,
+  "pageSize": 5,
+  "pageTotal": false
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|items|[]item|False|List of allowed items|
+|pages|pages|False|Pages details|
+
+Example output:
+
+```
+{
+  "items":[
+    {
+      "id":"f8d03561-90d1-4c18-b576-34509e843ee1",
+      "createdAt":"2023-01-01T11:11:11.111Z",
+      "updatedAt":"2023-01-01T11:11:11.111Z",
+      "properties":{
+        "path":"$path/sample.txt"
+      },
+      "comment":"Test comment",
+      "type":"path"
+    },
+    {
+      "id":"f8d03561-90d1-4c18-b576-34509e843ee2",
+      "createdAt":"2023-01-01T11:11:11.111Z",
+      "updatedAt":"2023-01-01T11:11:11.111Z",
+      "properties":{
+        "sha256":"ba7816bf8f01cfea414140de5dae2223b10361a396177a9cb410ff61f20015af"
+      },
+      "comment":"Test comment",
+      "type":"sha256"
+    },
+    {
+      "id":"f8d03561-90d1-4c18-b576-34509e843ee3",
+      "createdAt":"2023-01-01T11:11:11.111Z",
+      "updatedAt":"2023-01-01T11:11:11.111Z",
+      "properties":{
+        "certificateSigner":"Example signer"
+      },
+      "comment":"Test comment",
+      "type":"certificateSigner"
+    }
+  ],
+  "pages":{
+    "current":1,
+    "size":3,
+    "maxSize":100
+  }
+}
+```
+
+#### Add Allowed Item
+
+This action is used to exempt an item from conviction.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|comment|string|None|True|Comment indicating why the item should be allowed|None|Example comment|
+|originEndpointId|string|None|False|Endpoint where the item to be allowed was last seen|None|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+|originPersonId|string|None|False|Person associated with the endpoint where the item to be allowed was last seen|None|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+|propertiesCertificateSigner|string|None|False|Properties value saved for the certificateSigner. Required if 'certificateSigner' is selected in the Type input|None|Example signer|
+|propertiesFileName|string|None|False|Properties file name for the application|None|example|
+|propertiesPath|string|None|False|Properties path for the application. Required if 'path' is selected in the Type input|None|$path/example|
+|propertiesSha256|string|None|False|Properties SHA256 value for the application. Required if 'SHA256' is selected in the Type input|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
+|type|string|None|True|Property by which an item is allowed. You need to fill in the input starting with 'properties' for the selected type|['sha256', 'path', 'certificateSigner']|sha256|
+
+Example input:
+
+```
+{
+  "comment": "Example comment",
+  "originEndpointId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+  "originPersonId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+  "propertiesCertificateSigner": "Example signer",
+  "propertiesFileName": "sample.txt",
+  "propertiesPath": "/sample.txt",
+  "propertiesSha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+  "type": "sha256"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|allowedItem|item|False|Allowed item created|
+
+Example output:
+
+```
+{
+  "allowedItem":{
+    "id":"714083d8-18eb-4f7d-b552-8ccd93e4e560",
+    "createdAt":"2023-01-01T11:11:11.111Z",
+    "updatedAt":"2023-01-01T11:11:11.111Z",
+    "properties":{
+      "sha256":"050c194cbbb"
+    },
+    "comment":"Test comment",
+    "type":"sha256",
+      "originEndpointId": {
+        "id": "fde30644-050f-486d-a54e-06210b892dff"
+      }
+  }
+}
+```
+
 ### Triggers
 
 _This plugin does not contain any triggers._
 
 ### Custom Output Types
-
-#### alert_aggregate
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|Has More|boolean|False|None|
-|Items|[]alert_entity|False|None|
-|Next Cursor|string|False|Value of the next cursor. This will be used to make next call of API|
 
 #### alert_entity
 
@@ -451,11 +1139,48 @@ _This plugin does not contain any triggers._
 |Type|string|False|Describes the type of the device on which alert was generated|
 |When|string|False|The date at which the alert was created|
 
+#### assignedProduct
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Code|string|False|Endpoint product. The following values are allowed: coreAgent, interceptX, xdr, endpointProtection, deviceEncryption, mtr, ztna|
+|Status|string|False|Installation status of a product assigned to the endpoint. The following values are allowed: installed, notInstalled|
+|Version|string|False|Version of a product assigned to an endpoint|
+
+#### assigned_product
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Code|string|False|None|
+|Status|string|False|None|
+|Version|string|False|None|
+
+#### associatedPerson
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ID|string|False|Unique ID for the Person|
+|Name|string|False|Person's name|
+|Via Login|string|False|Person's login on the endpoint|
+
+#### check_tamper_protection_status
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Enabled|boolean|True|Return true when tamper protection is enable|
+
 #### chronology
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |Zone|date_time_zone|False|None|
+
+#### cloud
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Instance ID|string|False|Unique ID for the cloud instance|
+|Provider|string|False|Cloud provider in which the endpoint is running. The following values are allowed: aws, azure|
 
 #### core_remedy_item
 
@@ -547,13 +1272,52 @@ _This plugin does not contain any triggers._
 |Fixed|boolean|False|None|
 |Id|string|False|None|
 
+#### encryption
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Volumes|[]volume|False|Endpoint volumes|
+
+#### endpointGroup
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Created At|string|False|When the group was created|
+|Description|string|False|Endpoint group description|
+|Endpoints|endpoints|False|Associated endpoints|
+|ID|string|False|Endpoint group ID|
+|Name|string|False|Endpoint group name|
+|Tenant|objectId|False|Reference to a tenant|
+|Type|string|False|Endpoint group type|
+|Updated At|string|False|When the group was last updated|
+
+#### endpointIsolation
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ID|string|False|Endpoint ID|
+|Isolation|isolation|False|Isolation state of an endpoint|
+
+#### endpointObject
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Hostname|string|False|Endpoint hostname|
+|ID|string|False|Unique endpoint ID|
+
+#### endpointRemovalErrors
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Endpoints Not Found|[]string|False|Endpoints not found|
+
 #### endpoint_entry
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |AdSyncInfo|object|False|None|
 |Alert Status|integer|False|None|
-|AssignedProducts|[]string|False|None|
+|AssignedProducts|[]assigned_product|False|None|
 |AwsInfo|object|False|None|
 |AzureInfo|object|False|None|
 |Beta|boolean|False|None|
@@ -589,14 +1353,13 @@ _This plugin does not contain any triggers._
 |Property|string|False|None|
 |Type|string|False|None|
 
-#### endpoints_response
+#### endpoints
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Filtered|integer|False|None|
-|Items|[]endpoint_entry|False|None|
-|Next Key|string|False|None|
-|Total|integer|False|None|
+|Items|[]endpointObject|False|List of endpoints belonging to the group|
+|Items Count|integer|False|Total number of items in the list|
+|Total|integer|False|Total number of endpoints in this group|
 
 #### event_aggregate
 
@@ -606,11 +1369,26 @@ _This plugin does not contain any triggers._
 |Items|[]legacy_event_entity|False|None|
 |Next Cursor|string|False|Value of the next cursor. This will be used to make next call of API|
 
+#### group
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ID|string|False|Unique ID for endpoint group|
+|Name|string|False|Endpoint group name|
+
 #### hashes_response
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |Hashes|object|False|None|
+
+#### health
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Overall|string|False|Health status of an endpoint or a service running on an endpoint. The following values are allowed: good, suspicious, bad, unknown|
+|Services|services|False|Status of services on the endpoint|
+|Threats|threats|False|Threats on the endpoint|
 
 #### installer_info
 
@@ -627,6 +1405,39 @@ _This plugin does not contain any triggers._
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |Installer Info|[]installer_info|False|None|
+
+#### isolation
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Comment|string|False|Reason endpoint should be isolated or not|
+|Enabled|boolean|False|Whether the endpoint should be isolated or not|
+|Last Disabled At|string|False|When isolation was last disabled for the endpoint|
+|Last Disabled By|user|False|Last disabled by|
+|Last Enabled At|string|False|When isolation was last enabled for the endpoint|
+|Last Enabled By|user|False|Last enabled by|
+
+#### isolationState
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Admin Isolated|boolean|False|Whether isolation was triggered by an admin|
+|Self Isolated|boolean|False|Whether isolation was triggered by the endpoint itself|
+|Status|string|False|Isolation status reported by endpoint. The following values are allowed: isolated, notIsolated|
+
+#### item
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Comment|string|False|Comment indicating why the item was blocked or allowed|
+|Created At|string|False|Date and time (UTC) when the item was created|
+|Created By|userObject|False|Created by|
+|ID|string|False|Item ID|
+|Origin Endpoint|objectId|False|Represents a referenced object|
+|Origin Person|userObject|False|Origin person|
+|Properties|properties|False|Item properties|
+|Type|string|False|Property by which an item is blocked or allowed|
+|Updated At|string|False|Date and time (UTC) when the item was updated|
 
 #### legacy_event_entity
 
@@ -650,6 +1461,19 @@ _This plugin does not contain any triggers._
 |When|string|False|The date at which the event was created|
 |Whitelist Properties|[]endpoint_whitelist_properties|False|The properties by which this event can be whitelisted on an endpoint, if applicable|
 
+#### lockdown
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Status|string|False|Endpoint lockdown status. The following values are allowed: creatingWhitelist, installing, locked, notInstalled, registering, starting, stopping, unavailable, uninstalled, unlocked|
+|Update Status|string|False|Endpoint lockdown update status. The following values are allowed: upToDate, updating, rebootRequired, notInstalled|
+
+#### objectId
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ID|string|False|The ID of the referenced object|
+
 #### object_id
 
 |Name|Type|Required|Description|
@@ -662,12 +1486,56 @@ _This plugin does not contain any triggers._
 |TimeSecond|integer|False|None|
 |Timestamp|integer|False|None|
 
+#### osObject
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Build|integer|False|OS build|
+|Is Server|boolean|False|Whether the OS is a server OS|
+|Major Version|integer|False|OS major version|
+|Minor Version|integer|False|OS minor version|
+|Name|string|False|OS name as reported by the endpoint|
+|Platform|string|False|OS platform type. The following values are allowed: windows, linux, macOS|
+
+#### pages
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Current|integer|False|The 1-based page number being returned|
+|Items|integer|False|The total number of items across all pages, if pageTotal=true was passed into the request|
+|Max Size|integer|False|The maximum page size that can be requested|
+|Size|integer|False|The size of the page being returned|
+|Total|integer|False|The total number of pages that exist, if pageTotal=true in the request|
+
 #### previous_password_entity
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |Invalidated|date|False|None|
 |Password|string|False|None|
+
+#### properties
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Certificate Signer|string|False|Value saved for the certificateSigner|
+|File Name|string|False|File name|
+|Path|string|False|Path for the application|
+|SHA256|string|False|SHA256 value for the application|
+
+#### serviceDetails
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Name|string|False|Service name|
+|Status|string|False|Status of a service on an endpoint. The following values are allowed: running, stopped, missing|
+
+#### services
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Service Details|[]serviceDetails|False|Details of services on the endpoint|
+|Status|string|False|Health status of an endpoint or a service running on an endpoint. The following values are allowed: good, suspicious, bad, unknown|
 
 #### tamper_protection_entity
 
@@ -678,12 +1546,43 @@ _This plugin does not contain any triggers._
 |Password|string|False|None|
 |Previous Passwords|[]previous_password_entity|False|None|
 
+#### threats
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Status|string|False|Health status of an endpoint or a service running on an endpoint. The following values are allowed: good, suspicious, bad, unknown|
+
+#### user
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Account ID|string|False|ID of the account|
+|Account Type|string|False|Type of the account|
+|ID|string|False|Principal email or client ID|
+|Name|string|False|User principal name|
+|Type|string|False|Principal type|
+
+#### userObject
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ID|string|False|Unique ID for the user|
+|Name|string|False|Person's name|
+
+#### volume
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Status|string|False|Endpoint volume encryption status. The following values are allowed: notEncrypted, encrypted, encrypting, notSupported, suspended, unknown|
+|Volume ID|string|False|Endpoint volume ID|
+
 ## Troubleshooting
 
 _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.4.0 - Add new actions: `Isolate Endpoint`, `Get Endpoint Groups`, `Add Endpoint Group`, `Get Endpoint Group`, `Add Endpoint to Group`, `Remove Endpoint from Group`, `Get Allowed Items`, `Add Allowed Item`, `Remove Allowed Item`, `Get Blocked Items`, `Add Blocked Item`, `Remove Blocked Item`
 * 4.3.1 - Add custom User-Agent string to API calls to identify API request
 * 4.3.0 - Add new action Check Tamper Protection Status
 * 4.2.0 - Add new action Get Agent Details
@@ -697,6 +1596,8 @@ _This plugin does not contain any troubleshooting information._
 * 0.1.0 - Initial plugin
 
 # Links
+
+* [Sophos Central](https://www.sophos.com)
 
 ## References
 

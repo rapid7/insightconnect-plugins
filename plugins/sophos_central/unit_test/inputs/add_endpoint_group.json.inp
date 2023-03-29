@@ -1,0 +1,6 @@
+{
+  "name": "Example Group",
+  "type": "server",
+  "description": "Example description",
+  "endpointIds": []
+}

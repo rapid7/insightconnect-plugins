@@ -1,0 +1,10 @@
+{
+  "comment":"Test comment",
+  "originEndpointId":"",
+  "originPersonId":"",
+  "propertiesCertificateSigner":"",
+  "propertiesFileName":"existing_sample.txt",
+  "propertiesPath":"$path/existing_sample.txt",
+  "propertiesSha256":"",
+  "type":"path"
+}

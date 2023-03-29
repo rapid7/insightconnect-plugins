@@ -1,0 +1,22 @@
+{
+   "endpointIds":[
+   ],
+   "fields":[
+      "name",
+      "id",
+      "description",
+      "type"
+   ],
+   "groupType":"",
+   "ids":[
+   ],
+   "page":1,
+   "pageSize":50,
+   "pageTotal":false,
+   "search":"",
+   "searchFields":[
+   ],
+   "sort":[
+      "name:asc"
+   ]
+}

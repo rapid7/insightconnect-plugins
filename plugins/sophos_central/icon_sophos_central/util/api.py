@@ -81,6 +81,47 @@ class SophosCentralAPI:
             params = {"pageKey": page_key}
         return self._make_request("GET", "/endpoint/v1/endpoints", "Tenant", params=params)
 
+    def get_blocked_items(self, params: dict) -> dict:
+        return self._make_request("GET", "/endpoint/v1/settings/blocked-items", "Tenant", params=params)
+
+    def add_blocked_item(self, item_data: dict) -> dict:
+        return self._make_request("POST", "/endpoint/v1/settings/blocked-items", "Tenant", json_data=item_data)
+
+    def remove_blocked_item(self, item_id: str) -> bool:
+        self._make_request("DELETE", f"/endpoint/v1/settings/blocked-items/{item_id}", "Tenant")
+        return True
+
+    def get_endpoint_groups(self, params: dict = {}) -> dict:
+        return self._make_request("GET", "/endpoint/v1/endpoint-groups", "Tenant", params=params)
+
+    def get_allowed_items(self, params: dict = {}) -> dict:
+        return self._make_request("GET", "/endpoint/v1/settings/allowed-items", "Tenant", params=params)
+
+    def add_allowed_item(self, item_data: dict = {}) -> dict:
+        return self._make_request("POST", "/endpoint/v1/settings/allowed-items", "Tenant", json_data=item_data)
+
+    def remove_allowed_item(self, allowed_item_id: str = None) -> dict:
+        return self._make_request("DELETE", f"/endpoint/v1/settings/allowed-items/{allowed_item_id}", "Tenant")
+
+    def isolate_endpoint(self, json_data: dict) -> dict:
+        return self._make_request("POST", "/endpoint/v1/endpoints/isolation", "Tenant", json_data=json_data)
+
+    def add_endpoint_group(self, json_data: dict) -> dict:
+        return self._make_request("POST", "/endpoint/v1/endpoint-groups", "Tenant", json_data=json_data)
+
+    def get_endpoint_group(self, group_id: str) -> dict:
+        return self._make_request("GET", f"/endpoint/v1/endpoint-groups/{group_id}", "Tenant")
+
+    def add_endpoint_to_group(self, group_id: str, json_data: dict) -> dict:
+        return self._make_request(
+            "POST", f"/endpoint/v1/endpoint-groups/{group_id}/endpoints", "Tenant", json_data=json_data
+        )
+
+    def remove_endpoint_from_group(self, group_id: str, parameters: dict) -> dict:
+        return self._make_request(
+            "DELETE", f"/endpoint/v1/endpoint-groups/{group_id}/endpoints", "Tenant", params=parameters
+        )
+
     def whoami(self, access_token):
         return self._call_api(
             "GET",
@@ -160,6 +201,7 @@ class SophosCentralAPI:
                     cause="Conflict.",
                     assistance="Request made conflicts with an existing resource. Please check the API documentation "
                     "or contact Support.",
+                    data=response.text,
                 )
             if response.status_code == 451:
                 raise PluginException(

@@ -1,0 +1,22 @@
+{
+  "endpointGroup": {
+    "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+    "name": "Example Group",
+    "description": "Example description",
+    "type": "computer",
+    "endpoints": {
+      "total": 1,
+      "itemsCount": 1,
+      "items": [
+        {
+          "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+          "hostname": "Test"
+        }
+      ]
+    },
+    "tenant": {
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+    },
+    "createdAt": "2023-03-24T07:45:29.813Z"
+  }
+}
