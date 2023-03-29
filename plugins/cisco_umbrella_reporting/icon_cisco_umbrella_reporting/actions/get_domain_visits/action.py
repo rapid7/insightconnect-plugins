@@ -35,4 +35,5 @@ class GetDomainVisits(insightconnect_plugin_runtime.Action):
                 "threattypes": ",".join(threat_types),
             }
         )
+        self.logger.info(f"Data: {data}")
         return {Output.DOMAIN_VISITS: self.connection.client.destinations_most_recent_request(data, limit)}
