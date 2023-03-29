@@ -96,6 +96,10 @@ def mock_request_get(url: str) -> MockResponse:
         return MockResponse("list_investigations", 200)
 
 
+def mock_request_for_different_rrn_object(*args, **kwargs) -> MockResponse:
+    return MockResponse("list_alerts_for_investigation_rrn_as_object", 200)
+
+
 def mock_request_patch(url: str) -> MockResponse:
     if url == f"{Util.STUB_URL_API}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}":
         return MockResponse("update_investigation", 200)
