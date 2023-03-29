@@ -52,9 +52,9 @@ It accepts the following address types as input: domains, IPs, and URLs. URLs wi
 |from|string|-1days|True|A timestamp or relative time string (for example, '-1days', '-31days') that filters for data appearing after this time, described in ISO 8601 format, where the maximum value is '-31days'|None|-1days|
 |limit|integer|0|True|A timestamp or relative time string (for example, '-1days', '-31days') that filters for data appearing after this time, described in ISO 8601 format, where the maximum value is '-31days'. To search for all records, set the limit to 0|None|100|
 |order|string|Descending|False|Describes how the results obtained should be ordered. Defaults to descending, even if it's empty|['', 'Ascending', 'Descending']|Descending|
-|threatTypes|string|None|False|The type of the threat or comma-delimited list of threat types|None|Malware,Ransomware|
-|threats|string|None|False|The name of the threat or comma-delimited list of threat names|None|Example,OtherExample|
-|verdict|string|None|False|The verdict value for results to be filtered on, where possible values are (Allowed, Blocked, Proxied)|None|allowed,blocked|
+|threatTypes|[]string|None|False|The array of threat types for results to be filtered on|None|["Malware", "Ransomware"]|
+|threats|[]string|None|False|The array of threat names for results to be filtered on|None|["Example", "Example2"]|
+|verdict|[]string|None|False|The array of verdicts for results to be filtered on, where possible values are (Allowed, Blocked, Proxied)|None|["Allowed", "Blocked"]|
 
 Example input:
 
@@ -64,9 +64,18 @@ Example input:
   "from": "-1days",
   "limit": 100,
   "order": "Descending",
-  "threatTypes": "Malware,Ransomware",
-  "threats": "Example,OtherExample",
-  "verdict": "allowed,blocked"
+  "threatTypes": [
+    "Malware",
+    "Ransomware"
+  ],
+  "threats": [
+    "Example",
+    "Example2"
+  ],
+  "verdict": [
+    "Allowed",
+    "Blocked"
+  ]
 }
 ```
 

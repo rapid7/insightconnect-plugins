@@ -60,21 +60,30 @@ class GetDomainVisitsInput(insightconnect_plugin_runtime.Input):
       "order": 4
     },
     "threatTypes": {
-      "type": "string",
+      "type": "array",
       "title": "Threat Types",
-      "description": "The type of the threat or comma-delimited list of threat types",
+      "description": "The array of threat types for results to be filtered on",
+      "items": {
+        "type": "string"
+      },
       "order": 7
     },
     "threats": {
-      "type": "string",
+      "type": "array",
       "title": "Threats",
-      "description": "The name of the threat or comma-delimited list of threat names",
+      "description": "The array of threat names for results to be filtered on",
+      "items": {
+        "type": "string"
+      },
       "order": 6
     },
     "verdict": {
-      "type": "string",
+      "type": "array",
       "title": "Verdict",
-      "description": "The verdict value for results to be filtered on, where possible values are (Allowed, Blocked, Proxied)",
+      "description": "The array of verdicts for results to be filtered on, where possible values are (Allowed, Blocked, Proxied)",
+      "items": {
+        "type": "string"
+      },
       "order": 5
     }
   },

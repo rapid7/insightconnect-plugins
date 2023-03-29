@@ -22,17 +22,18 @@ class GetDomainVisits(insightconnect_plugin_runtime.Action):
         limit = params.get(Input.LIMIT, LIMIT_DEFAULT_VALUE)
         from_time = params.get(Input.FROM, "")
         order = params.get(Input.ORDER, "")
-        verdict = params.get(Input.VERDICT, "")
-        threats = params.get(Input.THREATS, "")
-        threat_types = params.get(Input.THREATTYPES, "")
+        verdict = params.get(Input.VERDICT, [])
+        threats = params.get(Input.THREATS, [])
+        threat_types = params.get(Input.THREATTYPES, [])
         data = clean(
             {
                 "domains": parse.urlparse(address).hostname,
                 "from": from_time,
                 "order": ORDER_PARAMETER_MAPPING.get(order.lower(), "desc"),
-                "verdict": verdict.lower(),
-                "threats": threats,
-                "threattypes": threat_types,
+                "verdict": ",".join(map(str.lower, verdict)),
+                "threats": ",".join(threats),
+                "threattypes": ",".join(threat_types),
             }
         )
+        self.logger.info(f"Data: {data}")
         return {Output.DOMAIN_VISITS: self.connection.client.destinations_most_recent_request(data, limit)}

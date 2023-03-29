@@ -168,22 +168,22 @@ actions:
         default: Descending
       verdict:
         title: Verdict
-        description: The verdict value for results to be filtered on, where possible values are (Allowed, Blocked, Proxied)
-        type: string
+        description: The array of verdicts for results to be filtered on, where possible values are (Allowed, Blocked, Proxied)
+        type: "[]string"
         required: false
-        example: allowed,blocked
+        example: ["Allowed", "Blocked"]
       threats:
         title: Threats
-        description: The name of the threat or comma-delimited list of threat names
-        type: string
+        description: The array of threat names for results to be filtered on
+        type: "[]string"
         required: false
-        example: Example,OtherExample
+        example: ["Example", "Example2"]
       threatTypes:
         title: Threat Types
-        description: The type of the threat or comma-delimited list of threat types
-        type: string
+        description: The array of threat types for results to be filtered on
+        type: "[]string"
         required: false
-        example: Malware,Ransomware
+        example: ["Malware", "Ransomware"]
     output:
       domain_visits:
         title: Domain Visits
