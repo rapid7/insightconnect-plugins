@@ -11,32 +11,28 @@ class NewIncident(insightconnect_plugin_runtime.Trigger):
         )
 
     def run(self, params={}):
-        # Set frequency and file name
-        frequency = params.get("frequency, 10")
-        cache_file_name = "cached_incidents_ids"
-
-        # Record the first set of incidents
-        with insightconnect_plugin_runtime.helper.open_cachefile(cache_file_name) as cache_file:
-            self.logger.info(f"Found or created cache file: {cache_file_name}")
-            cached_ids = {incident_id.strip() for incident_id in cache_file.readlines()}
-            self.logger.info(f"Cached IDs: {cached_ids}")
+        # Set frequency and a list of initial incident numbers
+        frequency = params.get(Input.FREQUENCY)
+        incidents = self.connection.ivanti_service_manager_api.get_all_incidents().get("value")
+        self.logger.info("Initializing trigger")
 
         while True:
             try:
+                # Get a new list of incidents
+                new_incidents = self.connection.ivanti_service_manager_api.get_all_incidents().get("value")
                 # Check the new list of incidents against current list
-                incidents = self.connection.ivanti_service_manager_api.get_all_incidents().get("value")
-                new_ids = set()
-
-                for incident in incidents:
-                    incident_id = str(incident["IncidentNumber"])
-                    if incident_id not in cached_ids:
+                for incident in new_incidents:
+                    if incident not in incidents:
                         # Record new incidents
-                        cached_ids.add(incident_id)
-                        new_ids.add(incident_id)
+                        incidents.append(incident)
                         # Use self.send(Info) to return new information
-                        self.logger.info(f"New incident found: {incident_id}")
-                        self.send({"incident": incident})
+                        self.logger.info(f"New incident found: {str(incident['incident_id'])}")
+                        self.send({Output.INCIDENT: incident})
+
+                # Sleep for frequency amount of time before running the loop again
+                self.logger.info("Sleeping now")
                 time.sleep(frequency)
+
             except Exception as error:
                 raise PluginException(
                     cause=f"An error occurred while reading incidents",
