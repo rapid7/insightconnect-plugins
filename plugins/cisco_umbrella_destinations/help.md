@@ -9,7 +9,7 @@ Cisco Umbrella Destinations allows users to manage, block, and allow network des
 
 # Requirements
 
-* Cisco Umbrella Investigate API key and Secret key (Legacy API Key - Refer to Links section for API Key management)
+* Cisco Umbrella Investigate API key and Secret key (Refer to Links section for API Key management)
 * Cisco Umbrella organization ID
 
 # Supported Product Versions
@@ -579,10 +579,13 @@ _This plugin does not contain any triggers._
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
+Version 3.2.0 uses v2 of the Cisco Umbrella API. The API endpoint for the destinations functionality  is via 
+api.umbrella.com/policies/v2/ . To interact with this version of the API, use the reference in the Links session,
+to ensure an appropriate key and permissions is used for connecting (not a legacy key as this will not work with v2 of the API).
 
 # Version History
 
+* 3.2.0 - Updated to use V2 of the Cisco Umbrella API api.umbrella.com/policies/v2 | Updated to use OAuth2 client credentials flow
 * 3.1.0 - Added dlGetByName and dlFilterAll action | Improved error handling data output
 * 3.0.0 - Updated output for 'typeOf' to reflect update to Cisco API
 * 2.0.0 - Updated output for dAdd & dDelete - Removed data element in the response
@@ -590,8 +593,11 @@ _This plugin does not contain any troubleshooting information._
 
 # Links
 
+* [Cisco Umbrella](https://umbrella.cisco.com/)
+
 ## References
 
 * [Cisco Umbrella](https://umbrella.cisco.com/)
-* [Cisco Umbrella Destinations Docs](https://developer.cisco.com/docs/cloud-security/#!destination-lists-introduction-overview)
-* [Creating/Refreshing/Deleting legacy Umbrella API Keys](https://developer.cisco.com/docs/cloud-security/#!umbrella-legacy-authentication/prerequisites)
+* [Cisco Umbrella API reference](https://developer.cisco.com/docs/cloud-security/#!api-reference-overview)
+* [Cisco Umbrella Destinations Docs](https://developer.cisco.com/docs/cloud-security/#!api-reference-policies-overview)
+* [Creating/Refreshing/Deleting Umbrella API Keys](https://developer.cisco.com/docs/cloud-security/#!authentication)
