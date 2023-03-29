@@ -15,31 +15,31 @@ class NewIncident(insightconnect_plugin_runtime.Trigger):
         frequency = params.get("frequency, 10")
         cache_file_name = "cached_incidents_ids"
 
-        # record the first set of the thing you are checking
+        # Record the first set of incidents
         with insightconnect_plugin_runtime.helper.open_cachefile(cache_file_name) as cache_file:
             self.logger.info(f"Found or created cache file: {cache_file_name}")
-            cached_ids = {id.strip() for id in cache_file.readlines()}
+            cached_ids = {incident_id.strip() for incident_id in cache_file.readlines()}
             self.logger.info(f"Cached IDs: {cached_ids}")
 
-        # Use a while true loop
         while True:
             try:
-                # check the thing against what you have already
+                # Check the new list of incidents against current list
                 incidents = self.connection.ivanti_service_manager_api.get_all_incidents().get("value")
                 new_ids = set()
 
                 for incident in incidents:
                     incident_id = str(incident["IncidentNumber"])
-                    # if it's new use self.send(info)
                     if incident_id not in cached_ids:
-                        # record current info
+                        # Record new incidents
                         cached_ids.add(incident_id)
                         new_ids.add(incident_id)
-                        # Use self.send(Info) to return information
+                        # Use self.send(Info) to return new information
                         self.logger.info(f"New incident found: {incident_id}")
                         self.send({"incident": incident})
-                # sleep for frequency amount of time
                 time.sleep(frequency)
-            # add wee exception bit outside the while loop incase it dies
             except Exception as error:
-                raise PluginException(f"An error occurred while reading incidents: {error}")
+                raise PluginException(
+                    cause=f"An error occurred while reading incidents",
+                    assistance="Please look at log for details",
+                    data=error,
+                )

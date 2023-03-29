@@ -17,5 +17,4 @@ class SearchIncidents(insightconnect_plugin_runtime.Action):
         if "value" in response.keys():
             return {Output.DATA: response.get("value")}
         else:
-            raise PluginException(cause="No incidents found.",
-                                  assistance="Please try a different keyword")
+            raise PluginException(cause="No incidents found.", assistance="Please try a different keyword")

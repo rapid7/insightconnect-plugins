@@ -1743,7 +1743,7 @@ connection:
 
 triggers:
   new_incident:
-    title: New incident
+    title: New Incident
     description: Check for new incident
     input:
       frequency:

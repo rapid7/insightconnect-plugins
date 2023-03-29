@@ -25,7 +25,6 @@ class MockTrigger:
 
 @patch("requests.Session.request", side_effect=mock_request)
 class TestNewIncident(TestCase):
-
     @classmethod
     def setUpClass(cls) -> None:
         cls.params = {"incident_number": 12345}
@@ -42,8 +41,6 @@ class TestNewIncident(TestCase):
             self.trigger.run({Input.FREQUENCY: 10})
         except PluginException:
             # Expect the plugin exception due to enforced timeout to allow exit from waiting for new incidents
-            expected = {
-                "incident": {"incident_number": 12345}
-            }
+            expected = {"incident": {"incident_number": 12345}}
             # Check that the trigger function was called with the correct input
             TestCase.assertEqual(TestCase(), MockTrigger.actual, expected)
