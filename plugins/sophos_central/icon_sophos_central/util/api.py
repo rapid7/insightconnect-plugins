@@ -54,12 +54,12 @@ class SophosCentralAPI:
     def unblacklist(self, uuid: str):
         return self._make_request("DELETE", f"/endpoint/v1/settings/blocked-items/{uuid}", "Tenant")
 
-    def blacklist(self, hash: str, description: str):
+    def blacklist(self, hash_: str, description: str):
         return self._make_request(
             "POST",
             "/endpoint/v1/settings/blocked-items",
             "Tenant",
-            json_data={"comment": description, "properties": {"sha256": hash}, "type": "sha256"},
+            json_data={"comment": description, "properties": {"sha256": hash_}, "type": "sha256"},
         )
 
     def antivirus_scan(self, uuid: str):
@@ -166,7 +166,7 @@ class SophosCentralAPI:
             headers={"Authorization": f"Bearer {access_token}", f"X-{key_type}-ID": id_},
         )
 
-    def _call_api(self, method, url, params=None, json_data=None, data=None, headers=None):
+    def _call_api(self, method, url, params=None, json_data=None, data=None, headers=None):  # noqa: C901
         response = {"text": ""}
         if not headers:
             headers = {}

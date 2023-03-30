@@ -1069,9 +1069,9 @@ This action is used to exempt an item from conviction.
 |originEndpointId|string|None|False|Endpoint where the item to be allowed was last seen|None|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
 |originPersonId|string|None|False|Person associated with the endpoint where the item to be allowed was last seen|None|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
 |propertiesCertificateSigner|string|None|False|Properties value saved for the certificateSigner. Required if 'certificateSigner' is selected in the Type input|None|Example signer|
-|propertiesFileName|string|None|False|Properties file name for the application|None|example|
-|propertiesPath|string|None|False|Properties path for the application. Required if 'path' is selected in the Type input|None|$path/example|
-|propertiesSha256|string|None|False|Properties SHA256 value for the application. Required if 'SHA256' is selected in the Type input|None|30f800f97aeaa8d62bdf3a6fb2b0681179a360c12e127f07038f8521461e5050|
+|propertiesFileName|string|None|False|Properties file name for the application|None|sample.txt|
+|propertiesPath|string|None|False|Properties path for the application. Required if 'path' is selected in the Type input|None|$path/sample.txt|
+|propertiesSha256|string|None|False|Properties SHA256 value for the application. Required if 'SHA256' is selected in the Type input|None|ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad|
 |type|string|None|True|Property by which an item is allowed. You need to fill in the input starting with 'properties' for the selected type|['sha256', 'path', 'certificateSigner']|sha256|
 
 Example input:
