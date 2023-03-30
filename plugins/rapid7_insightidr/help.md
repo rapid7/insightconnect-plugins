@@ -1723,6 +1723,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.4.1 - `List Alerts for Investigation`: fix issue with retrieving `detection_rule_rrn`   
 * 4.4.0 - `List Alerts for Investigation`: changed schema output for `detection_rule_rrn` 
 * 4.3.0 - `Query`: Add new parameter `most_recent_first`
 * 4.2.1 - `Create Investigation`, `Update Investigation`: Fix issue where action fails when email address field is not empty
