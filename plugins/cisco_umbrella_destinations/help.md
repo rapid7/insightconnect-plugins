@@ -585,7 +585,7 @@ to ensure an appropriate key and permissions is used for connecting (not a legac
 
 # Version History
 
-* 3.2.0 - Updated to use V2 of the Cisco Umbrella API api.umbrella.com/policies/v2 | Updated to use OAuth2 client credentials flow
+* 4.0.0 - Updated to use V2 of the Cisco Umbrella API api.umbrella.com/policies/v2 | Updated to use OAuth2 client credentials flow
 * 3.1.0 - Added dlGetByName and dlFilterAll action | Improved error handling data output
 * 3.0.0 - Updated output for 'typeOf' to reflect update to Cisco API
 * 2.0.0 - Updated output for dAdd & dDelete - Removed data element in the response
