@@ -1,0 +1,69 @@
+{
+  "data": [
+    {
+      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+      "app": {
+        "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+      },
+      "rootCause": {
+        "url": "example.com",
+        "parameter": "id",
+        "method": "GET"
+      },
+      "severity": "HIGH",
+      "status": "UNREVIEWED",
+      "firstDiscovered": "2023-03-24T11:25:30.582722",
+      "lastDiscovered": "2023-03-24T11:25:30.582722",
+      "newlyDiscovered": true,
+      "variances": [
+        {
+          "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+          "originalValue": "4",
+          "originalExchange": {
+            "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+            "request": "example",
+            "response": "example"
+          },
+          "module": {
+            "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+          },
+          "attack": {
+            "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+          },
+          "attackValue": "4\"",
+          "proof": "example",
+          "attackExchanges": [
+            {
+              "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+              "request": "GET ...",
+              "response": "HTTP/1.1 200 OK ..."
+            }
+          ]
+        }
+      ],
+      "vectorString": "example",
+      "vulnerabilityScore": 9.8,
+      "insightUiUrl": "example.com",
+      "links": [
+        {
+          "rel": "self",
+          "href": "example.com"
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "index": 0,
+    "size": 50,
+    "sort": "vulnerability.severity,DESC",
+    "totalData": 50,
+    "totalPages": 50,
+    "pageToken": "NDM0NTk0NTIyOjo6X1M6OjpiYW5hbmFz"
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "example.com"
+    }
+  ]
+}

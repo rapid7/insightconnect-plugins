@@ -1,0 +1,12 @@
+{
+  "enabled": true,
+  "firstStart": "2023-04-25T14:15:22Z",
+  "frequency": {
+    "interval": 3,
+    "type": "DAILY"
+  },
+  "lastStart": "2023-05-25T14:15:22Z",
+  "name": "New schedule",
+  "rrule": "",
+  "scanConfigId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+}

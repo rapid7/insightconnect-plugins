@@ -1,11 +1,15 @@
 {
-	"spec": "9bce644e576bf05a535732e3aa369390",
-	"manifest": "91e34bd7c7ff45e268382a007af98707",
-	"setup": "6e68215834dc2e7bc7addc6090b3afab",
+	"spec": "de848e56e536334260504834bdea0315",
+	"manifest": "79a1c6c72a12d671275821b0b62d4961",
+	"setup": "571b230a46f1b420f09540317aaeb84e",
 	"schemas": [
 		{
 			"identifier": "create_scan_config/schema.py",
 			"hash": "bff6210bd1f501117604026154878f92"
+		},
+		{
+			"identifier": "create_schedule/schema.py",
+			"hash": "64054548b2bc62f13d5cff047a9c3381"
 		},
 		{
 			"identifier": "delete_scan/schema.py",
@@ -42,6 +46,22 @@
 		{
 			"identifier": "get_scans/schema.py",
 			"hash": "0f4014ab76a6728415a815b6089545a7"
+		},
+		{
+			"identifier": "get_vulnerabilities/schema.py",
+			"hash": "50869f8c66914edaf0efc03ef92b45ae"
+		},
+		{
+			"identifier": "get_vulnerability/schema.py",
+			"hash": "b668383d451f92b641978b2a06943f3c"
+		},
+		{
+			"identifier": "get_vulnerability_discoveries/schema.py",
+			"hash": "4b76303d0a516407dc65ae4f331eb0e6"
+		},
+		{
+			"identifier": "get_vulnerability_discovery/schema.py",
+			"hash": "7277e815e1dde56e04719e2160abbb12"
 		},
 		{
 			"identifier": "submit_scan/schema.py",
