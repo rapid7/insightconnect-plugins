@@ -22,11 +22,12 @@ class NewIncident(insightconnect_plugin_runtime.Trigger):
                 new_incidents = self.connection.ivanti_service_manager_api.get_all_incidents().get("value")
                 # Check the new list of incidents against current list
                 for incident in new_incidents:
+                    self.logger.info(f"Checking incident {str(incident['IncidentNumber'])}")
                     if incident not in incidents:
                         # Record new incidents
                         incidents.append(incident)
                         # Use self.send(Info) to return new information
-                        self.logger.info(f"New incident found: {str(incident['incident_id'])}")
+                        self.logger.info(f"New incident found: {str(incident['IncidentNumber'])}")
                         self.send({Output.INCIDENT: incident})
 
                 # Sleep for frequency amount of time before running the loop again

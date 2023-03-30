@@ -1,5 +1,4 @@
 import json
-import logging
 
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -63,7 +62,8 @@ class IvantiServiceManagerAPI:
 
         raise PluginException(
             cause="No service request templates found.",
-            assistance=f"No service request templates found using data provided - {identifier}. Please validate and try again.",
+            assistance=f"No service request templates found using data provided - {identifier}. Please validate and "
+                       f"try again.",
         )
 
     def post_service_request(self, payload: dict) -> dict:
@@ -82,7 +82,7 @@ class IvantiServiceManagerAPI:
         return clean(self._call_api("GET", f"odata/businessobject/incidents?$search={keyword}"))
 
     def get_all_incidents(self) -> dict:
-        return clean(self._call_api("GET", "odata/businessobject/incidents"))
+        return clean(self._call_api("GET", "odata/businessobject/incidents?$orderby=IncidentNumber asc"))
 
     def post_journal_note(self, payload: dict) -> dict:
         return clean(self._call_api("POST", "odata/businessobject/journal__Notess", json_data=payload))
