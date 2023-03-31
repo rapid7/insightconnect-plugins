@@ -1,0 +1,28 @@
+[
+  {
+    "query": "example.com",
+    "totalResults": 10,
+    "moreDataAvailable": true,
+    "limit": 10,
+    "offset": 0,
+    "samples": [
+      {
+        "sha256": "sha256",
+        "sha1": "sha1",
+        "md5": "md5",
+        "magicType": "ExampleType",
+        "threatScore": 100,
+        "size": 192512,
+        "firstSeen": "1460108539000",
+        "lastSeen": "1460108539000",
+        "visible": true,
+        "avresults": [
+          {
+            "signature": "Test",
+            "product": "Test"
+          }
+        ]
+      }
+    ]
+  }
+]

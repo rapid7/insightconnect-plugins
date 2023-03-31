@@ -23,6 +23,7 @@ from unit_test.util import (
 )
 
 STUB_PARAMS = {Input.DOMAIN: "example.com"}
+STUB_RESPONSE = Util.read_file_to_dict("expected/test_cooccurrences.json.exp")
 
 
 class TestCategorization(TestCase):
@@ -30,11 +31,10 @@ class TestCategorization(TestCase):
     def setUp(self, mock_connection: Mock) -> None:
         self.action = Util.default_connector(Cooccurrences())
 
-    @parameterized.expand([("example.com", ["download.example.com", "query.example.com"]), ("example", [])])
+    @parameterized.expand([("example.com", STUB_RESPONSE), ("example", {Output.COOCCURRENCES: []})])
     @patch("requests.get", side_effect=mock_request_200)
     def test_categorization_ok(self, domain: str, expected_response: List[str], mock_get: Mock) -> None:
         response = self.action.run({Input.DOMAIN: domain})
-        expected_response = {Output.COOCCURRENCES: expected_response}
         self.assertEqual(response, expected_response)
 
     @parameterized.expand(
@@ -45,9 +45,9 @@ class TestCategorization(TestCase):
             (mock_request_500, PluginException.causes[PluginException.Preset.UNKNOWN]),
         ],
     )
-    def test_connection_exception(self, mock_request: Mock, exception: str) -> None:
+    def test_cooccurrences_exception(self, mock_request: Mock, exception: str) -> None:
         mocked_request(mock_request)
-        with self.assertRaises(ConnectionTestException) as context:
+        with self.assertRaises(PluginException) as context:
             self.action.run(STUB_PARAMS)
         self.assertEqual(
             context.exception.cause,

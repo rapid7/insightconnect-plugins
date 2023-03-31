@@ -1,0 +1,10 @@
+[
+  {
+    "limit": 1000,
+    "domains": [
+      "example.com"
+    ],
+    "more_data_available": false,
+    "total_results": 1
+  }
+]
