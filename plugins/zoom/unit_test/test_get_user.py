@@ -1,6 +1,7 @@
 import sys
 import os
 from parameterized import parameterized
+import logging
 
 sys.path.append(os.path.abspath("../"))
 
@@ -8,25 +9,35 @@ from unittest import TestCase, mock
 from icon_zoom.actions.get_user import GetUser
 from icon_zoom.actions.get_user.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
+from icon_zoom.connection.connection import Connection
 
 from unit_test.mock import (
-    Util,
     STUB_USER_ID,
     mock_request_201,
     mock_request_400,
     mock_request_404,
     mocked_request,
+    STUB_CONNECTION
 )
 
 
 class TestGetUser(TestCase):
-    @mock.patch("requests.Session.request", side_effect=mock_request_201)
-    def setUp(self, mock_post) -> None:
-        self.action = Util.default_connector(GetUser())
+    @mock.patch("requests.request", side_effect=mock_request_201)
+    def setUp(self, mock_request) -> None:
+        mocked_request(mock_request)
+        self.connection = Connection()
+        self.connection.logger = logging.getLogger("Connection logger")
+        self.connection.connect(STUB_CONNECTION)
+
+        self.action = GetUser()
+        self.action.connection = self.connection
+        self.action.logger = logging.getLogger("Action logger")
+
         self.params = {Input.USER_ID: STUB_USER_ID}
 
-    def test_get_user_success(self):
-        mocked_request(mock_request_201)
+    @mock.patch("requests.request", side_effect=mock_request_201)
+    def test_get_user_success(self, mock_get):
+        #mocked_request(mock_request_201)
         response = self.action.run(self.params)
         expected_response = {
             "user": {
@@ -82,7 +93,8 @@ class TestGetUser(TestCase):
             (mock_request_404, PluginException.causes[PluginException.Preset.NOT_FOUND]),
         ],
     )
-    def test_not_ok(self, mock_request, exception):
+    @mock.patch("icon_zoom.util.api.ZoomAPI.refresh_oauth_token_if_needed", return_value=None)
+    def test_not_ok(self, mock_request, exception, mock_refresh):
         mocked_request(mock_request)
         with self.assertRaises(PluginException) as context:
             self.action.run(self.params)

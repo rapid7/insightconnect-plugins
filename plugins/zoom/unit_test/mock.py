@@ -29,24 +29,22 @@ STUB_CREATE_USER = {
 }
 
 
-class Util:
-    @staticmethod
-    def default_connector(action: Action) -> Action:
-        default_connection = Connection()
-        default_connection.logger = logging.getLogger("connection logger")
-        default_connection.connect(STUB_CONNECTION)
-        action.connection = default_connection
-        action.logger = logging.getLogger("action logger")
-        return action
+#class Util:
+#    @staticmethod
+#    def default_connector(action: Action) -> Action:
+#        default_connection = Connection()
+#        default_connection.logger = logging.getLogger("connection logger")
+#        default_connection.connect(STUB_CONNECTION)
+#        action.connection = default_connection
+#        action.logger = logging.getLogger("action logger")
+#        return action
 
 
 class MockResponse:
-    def __init__(self, filename: str, status_code: int) -> None:
+    def __init__(self, filename: str, status_code: int, text: str = "") -> None:
         self.filename = filename
         self.status_code = status_code
-        self.text = json.dumps(self.json())
-        self.request = MagicMock()
-        self.headers = MagicMock()
+        self.text = text
 
     def json(self):
         with open(
@@ -56,13 +54,11 @@ class MockResponse:
 
 
 def mocked_request(side_effect: Callable) -> None:
-    mock_function = requests.Session
+    mock_function = requests
     mock_function.request = mock.Mock(side_effect=side_effect)
-
 
 def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
     print("MOCK CONDITIONS HIT")
-    breakpoint()
     if url == STUB_OAUTH_URL:
         return MockResponse("oauth2_token", status_code)
     if method == "GET":
@@ -72,10 +68,10 @@ def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
             return MockResponse("create_user", status_code)
     if method == "DELETE":
         return MockResponse("delete_user", status_code)
+    raise Exception("Unrecognized endpoint")
 
 
 def mock_request_201(*args, **kwargs) -> MockResponse:
-    breakpoint()
     method = kwargs.get("method") if not args else args[0]
     url = kwargs.get("url") if not args else args[1]
     return mock_conditions(method, url, 201)
@@ -87,15 +83,12 @@ def mock_request_204(*args, **kwargs) -> MockResponse:
     return mock_conditions(method, url, 204)
 
 
+
 def mock_request_400(*args, **kwargs) -> MockResponse:
     return mock_conditions(args[0], args[1], 400)
 
-
 def mock_request_404(*args, **kwargs) -> MockResponse:
-    breakpoint()
-    method = kwargs.get("method") if not args else args[0]
-    url = kwargs.get("url") if not args else args[1]
-    return mock_conditions(method, url, 404)
+    return mock_conditions(args[0], args[1], 404)
 
 
 def mock_request_409(*args, **kwargs) -> MockResponse:
