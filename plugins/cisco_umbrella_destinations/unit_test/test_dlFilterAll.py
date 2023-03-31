@@ -5,12 +5,14 @@ from parameterized import parameterized
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
+from unittest.mock import Mock
 from icon_cisco_umbrella_destinations.connection.connection import Connection
 from icon_cisco_umbrella_destinations.actions.dlFilterAll import DlFilterAll
 from icon_cisco_umbrella_destinations.actions.dlFilterAll.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 import logging
 from unit_test.mock import (
+    Util,
     STUB_CONNECTION,
     STUB_ACCESS,
     STUB_IS_GLOBAL,
@@ -27,15 +29,9 @@ from unit_test.mock import (
 
 
 class TestDlFilterAll(TestCase):
-    def setUp(self) -> None:
-        self.connection = Connection()
-        self.connection.logger = logging.getLogger("Connection logger")
-        self.connection.connect(STUB_CONNECTION)
-
-        self.action = DlFilterAll()
-        self.action.connection = self.connection
-        self.action.logger = logging.getLogger("Action logger")
-
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
+    def setUp(self, mock_post: Mock) -> None:
+        self.action = Util.default_connector(DlFilterAll())
         self.params = {
             Input.ACCESS: STUB_ACCESS,
             Input.ISMSPDEFAULT: STUB_MSP_DEFAULT,
@@ -45,12 +41,12 @@ class TestDlFilterAll(TestCase):
 
     @mock.patch("requests.request", side_effect=mock_request_200)
     def test_success(self, mock_get):
+        mocked_request(mock_get)
         response = self.action.run(self.params)
         expected_response = {
             "data": [
                 {
                     "id": 5798992,
-                    "organizationId": 2303280,
                     "access": "block",
                     "isGlobal": False,
                     "name": "Block For All",
