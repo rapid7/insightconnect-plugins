@@ -5,11 +5,13 @@ from parameterized import parameterized
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
+from unittest.mock import Mock
 from icon_cisco_umbrella_destinations.connection.connection import Connection
 from icon_cisco_umbrella_destinations.actions.dlGetAll import DlGetAll
 from insightconnect_plugin_runtime.exceptions import PluginException
 import logging
 from unit_test.mock import (
+    Util,
     STUB_CONNECTION,
     mock_request_200,
     mock_request_403,
@@ -22,23 +24,18 @@ from unit_test.mock import (
 
 
 class TestDlGetAll(TestCase):
-    def setUp(self) -> None:
-        self.connection = Connection()
-        self.connection.logger = logging.getLogger("Connection logger")
-        self.connection.connect(STUB_CONNECTION)
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
+    def setUp(self, mock_post: Mock) -> None:
+        self.action = Util.default_connector(DlGetAll())
 
-        self.action = DlGetAll()
-        self.action.connection = self.connection
-        self.action.logger = logging.getLogger("Action logger")
-
-    @mock.patch("requests.request", side_effect=mock_request_200)
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     def test_success(self, mock_get):
+        mocked_request(mock_get)
         response = self.action.run()
         expected_response = {
             "data": [
                 {
                     "id": 5798992,
-                    "organizationId": 2303280,
                     "access": "block",
                     "isGlobal": False,
                     "name": "Block For All",
@@ -57,7 +54,6 @@ class TestDlGetAll(TestCase):
                 },
                 {
                     "id": 1912718,
-                    "organizationId": 2372338,
                     "access": "allow",
                     "isGlobal": True,
                     "name": "Global Allow List",
@@ -76,7 +72,6 @@ class TestDlGetAll(TestCase):
                 },
                 {
                     "id": 1912720,
-                    "organizationId": 2372338,
                     "access": "block",
                     "isGlobal": True,
                     "name": "Global Block List",

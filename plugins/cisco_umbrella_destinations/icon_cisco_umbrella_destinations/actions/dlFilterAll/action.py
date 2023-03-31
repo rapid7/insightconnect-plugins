@@ -26,7 +26,7 @@ class DlFilterAll(insightconnect_plugin_runtime.Action):
         # Goes through each destination list and checks if all filters match
         for destination_list in result:
             matches_or_empty = False
-            for (value, value_name) in zip(values, value_names):
+            for value, value_name in zip(values, value_names):
                 if value == destination_list.get(value_name) or (
                     value is None and destination_list.get(value_name) is not None
                 ):

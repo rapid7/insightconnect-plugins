@@ -1,18 +1,20 @@
 import sys
 import os
-from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
 
+from parameterized import parameterized
+from typing import Any, Dict
 from unittest import TestCase, mock
+from unittest.mock import Mock
+
 from icon_cisco_umbrella_destinations.connection.connection import Connection
 from icon_cisco_umbrella_destinations.actions.dAdd import DAdd
 from icon_cisco_umbrella_destinations.actions.dAdd.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
-import logging
 
 from unit_test.mock import (
-    STUB_CONNECTION,
+    Util,
     mock_request_200,
     mock_request_403,
     mock_request_401,
@@ -25,14 +27,9 @@ from unit_test.mock import (
 
 
 class TestDAdd(TestCase):
-    def setUp(self) -> None:
-        self.connection = Connection()
-        self.connection.logger = logging.getLogger("Connection logger")
-        self.connection.connect(STUB_CONNECTION)
-
-        self.action = DAdd()
-        self.action.connection = self.connection
-        self.action.logger = logging.getLogger("Action logger")
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
+    def setUp(self, mock_post: Mock) -> None:
+        self.action = Util.default_connector(DAdd())
 
         self.params = {
             Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID,
@@ -45,13 +42,13 @@ class TestDAdd(TestCase):
             Input.DESTINATION: "dummyDestination",
         }
 
-    @mock.patch("requests.request", side_effect=mock_request_200)
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     def test_if_ok(self, mock_post):
+        mocked_request(mock_post)
         response = self.action.run(self.params)
         expected_response = {
             "success": {
                 "id": 15755711,
-                "organizationId": 2372338,
                 "access": "allow",
                 "isGlobal": False,
                 "name": "CreateListTest",
@@ -65,13 +62,12 @@ class TestDAdd(TestCase):
         }
         self.assertEqual(response, expected_response)
 
-    @mock.patch("requests.request", side_effect=mock_request_200)
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     def test_if_comment_is_none(self, mock_post):
         response = self.action.run(self.params_no_comment)
         expected_response = {
             "success": {
                 "id": 15755711,
-                "organizationId": 2372338,
                 "access": "allow",
                 "isGlobal": False,
                 "name": "CreateListTest",
@@ -96,7 +92,6 @@ class TestDAdd(TestCase):
     )
     def test_not_ok(self, mock_request, exception):
         mocked_request(mock_request)
-
         with self.assertRaises(PluginException) as context:
             self.action.run(self.params)
         self.assertEqual(context.exception.cause, exception)
