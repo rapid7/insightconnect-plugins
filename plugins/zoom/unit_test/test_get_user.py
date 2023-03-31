@@ -12,12 +12,12 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_zoom.connection.connection import Connection
 
 from unit_test.mock import (
+    Util,
     STUB_USER_ID,
     mock_request_201,
     mock_request_400,
     mock_request_404,
     mocked_request,
-    STUB_CONNECTION
 )
 
 
@@ -25,19 +25,11 @@ class TestGetUser(TestCase):
     @mock.patch("requests.request", side_effect=mock_request_201)
     def setUp(self, mock_request) -> None:
         mocked_request(mock_request)
-        self.connection = Connection()
-        self.connection.logger = logging.getLogger("Connection logger")
-        self.connection.connect(STUB_CONNECTION)
-
-        self.action = GetUser()
-        self.action.connection = self.connection
-        self.action.logger = logging.getLogger("Action logger")
-
+        self.action = Util.default_connector(GetUser())
         self.params = {Input.USER_ID: STUB_USER_ID}
 
     @mock.patch("requests.request", side_effect=mock_request_201)
     def test_get_user_success(self, mock_get):
-        #mocked_request(mock_request_201)
         response = self.action.run(self.params)
         expected_response = {
             "user": {

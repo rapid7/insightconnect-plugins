@@ -23,7 +23,7 @@ STUB_DELETE_USER_QUERY_PARAMS = {
     Input.TRANSFER_EMAIL: "user@example.com",
     Input.TRANSFER_WEBINARS: "",
     Input.TRANSFER_RECORDINGS: "",
-    Input.TRANSFER_MEETINGS: ""
+    Input.TRANSFER_MEETINGS: "",
 }
 
 

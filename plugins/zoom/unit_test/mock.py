@@ -29,15 +29,15 @@ STUB_CREATE_USER = {
 }
 
 
-#class Util:
-#    @staticmethod
-#    def default_connector(action: Action) -> Action:
-#        default_connection = Connection()
-#        default_connection.logger = logging.getLogger("connection logger")
-#        default_connection.connect(STUB_CONNECTION)
-#        action.connection = default_connection
-#        action.logger = logging.getLogger("action logger")
-#        return action
+class Util:
+    @staticmethod
+    def default_connector(action: Action) -> Action:
+        default_connection = Connection()
+        default_connection.logger = logging.getLogger("connection logger")
+        default_connection.connect(STUB_CONNECTION)
+        action.connection = default_connection
+        action.logger = logging.getLogger("action logger")
+        return action
 
 
 class MockResponse:
@@ -57,8 +57,8 @@ def mocked_request(side_effect: Callable) -> None:
     mock_function = requests
     mock_function.request = mock.Mock(side_effect=side_effect)
 
+
 def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
-    print("MOCK CONDITIONS HIT")
     if url == STUB_OAUTH_URL:
         return MockResponse("oauth2_token", status_code)
     if method == "GET":
@@ -83,9 +83,9 @@ def mock_request_204(*args, **kwargs) -> MockResponse:
     return mock_conditions(method, url, 204)
 
 
-
 def mock_request_400(*args, **kwargs) -> MockResponse:
     return mock_conditions(args[0], args[1], 400)
+
 
 def mock_request_404(*args, **kwargs) -> MockResponse:
     return mock_conditions(args[0], args[1], 404)
