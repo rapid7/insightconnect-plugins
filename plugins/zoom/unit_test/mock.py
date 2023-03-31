@@ -61,9 +61,10 @@ def mocked_request(side_effect: Callable) -> None:
 
 
 def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
-    if method == "POST":
-        if url == STUB_OAUTH_URL and status_code == 201:
-            return MockResponse("oauth2_token", status_code)
+    print("MOCK CONDITIONS HIT")
+    breakpoint()
+    if url == STUB_OAUTH_URL:
+        return MockResponse("oauth2_token", status_code)
     if method == "GET":
         return MockResponse("get_user", status_code)
     if method == "POST":
@@ -74,6 +75,7 @@ def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
 
 
 def mock_request_201(*args, **kwargs) -> MockResponse:
+    breakpoint()
     method = kwargs.get("method") if not args else args[0]
     url = kwargs.get("url") if not args else args[1]
     return mock_conditions(method, url, 201)
@@ -90,7 +92,10 @@ def mock_request_400(*args, **kwargs) -> MockResponse:
 
 
 def mock_request_404(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 404)
+    breakpoint()
+    method = kwargs.get("method") if not args else args[0]
+    url = kwargs.get("url") if not args else args[1]
+    return mock_conditions(method, url, 404)
 
 
 def mock_request_409(*args, **kwargs) -> MockResponse:

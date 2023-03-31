@@ -36,7 +36,7 @@ class TestDeleteUser(TestCase):
     def delete_user_success(self):
         mocked_request(mock_request_204)
         response = self.action.run(self.params)
-        expected_response = {}
+        expected_response = None
 
         self.assertEqual(response, expected_response)
 

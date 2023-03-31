@@ -76,15 +76,14 @@ class TestGetUser(TestCase):
         }
         self.assertEqual(response, expected_response)
 
-    # @parameterized.expand(
-    #     [
-    #         (mock_request_400, PluginException.causes[PluginException.Preset.BAD_REQUEST]),
-    #         (mock_request_404, PluginException.causes[PluginException.Preset.NOT_FOUND]),
-    #     ],
-    # )
-    # def test_not_ok(self, mock_request, exception):
-    #     mocked_request(mock_request)
-    #
-    #     with self.assertRaises(PluginException) as context:
-    #         self.action.run(self.params)
-    #     self.assertEqual(context.exception.cause, exception)
+    @parameterized.expand(
+        [
+            (mock_request_400, PluginException.causes[PluginException.Preset.BAD_REQUEST]),
+            (mock_request_404, PluginException.causes[PluginException.Preset.NOT_FOUND]),
+        ],
+    )
+    def test_not_ok(self, mock_request, exception):
+        mocked_request(mock_request)
+        with self.assertRaises(PluginException) as context:
+            self.action.run(self.params)
+        self.assertEqual(context.exception.cause, exception)
