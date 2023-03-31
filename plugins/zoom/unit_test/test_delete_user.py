@@ -28,7 +28,7 @@ STUB_DELETE_USER_QUERY_PARAMS = {
 
 
 class TestDeleteUser(TestCase):
-    @mock.patch("requests.request", side_effect=mock_request_204)
+    @mock.patch("requests.Session.request", side_effect=mock_request_204)
     def setUp(self, mock_delete) -> None:
         self.action = Util.default_connector(DeleteUser())
         self.params = STUB_DELETE_USER_QUERY_PARAMS
