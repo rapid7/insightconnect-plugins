@@ -16,7 +16,7 @@ from unit_test.mock import (
     mock_request_400,
     mock_request_404,
     mock_request_409,
-mock_request_429,
+    mock_request_429,
     mocked_request,
 )
 
@@ -49,7 +49,6 @@ class TestCreateUser(TestCase):
     )
     @mock.patch("icon_zoom.util.api.ZoomAPI.refresh_oauth_token_if_needed", return_value=None)
     def test_not_ok(self, mock_request, exception, mock_refresh):
-        # breakpoint()
         mocked_request(mock_request)
         with self.assertRaises(PluginException) as context:
             self.action.run(self.params)
