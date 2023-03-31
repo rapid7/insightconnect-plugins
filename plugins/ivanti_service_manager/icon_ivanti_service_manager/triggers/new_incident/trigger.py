@@ -34,8 +34,7 @@ class NewIncident(insightconnect_plugin_runtime.Trigger):
 
             except Exception as error:
                 raise PluginException(
-                    cause=f"An error occurred while reading incidents",
+                    cause="An error occurred while reading incidents",
                     assistance="Please look at log for details",
                     data=error,
                 )
-
