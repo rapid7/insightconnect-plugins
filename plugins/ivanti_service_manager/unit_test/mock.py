@@ -82,5 +82,14 @@ def mock_request(method, url, json, params, headers, verify) -> MockResponse:
     if url == f"/api/odata/businessobject/incidents?$search={STUB_TEXT_BAD}" and method == "GET":
         return MockResponse("search_incidents_bad", 200)
 
-    if url == "/api/odata/businessobject/incidents" and method == "GET":
+    if url == "/api/odata/businessobject/incidents?$orderby=IncidentNumber desc" and method == "GET":
         return MockResponse("get_all_incidents", 200)
+    else:
+        return MockResponse("get_all_incidents", 200)
+
+
+def mock_request_2(method, url, json, params, headers, verify) -> MockResponse:
+    if url == "/api/odata/businessobject/incidents?$orderby=IncidentNumber desc" and method == "GET":
+        return MockResponse("get_all_incidents_two", 200)
+    else:
+        return MockResponse("get_all_incidents_two", 200)
