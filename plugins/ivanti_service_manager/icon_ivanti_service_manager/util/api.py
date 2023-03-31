@@ -82,7 +82,7 @@ class IvantiServiceManagerAPI:
         return clean(self._call_api("GET", f"odata/businessobject/incidents?$search={keyword}"))
 
     def get_all_incidents(self) -> dict:
-        return clean(self._call_api("GET", "odata/businessobject/incidents?$orderby=IncidentNumber asc"))
+        return clean(self._call_api("GET", "odata/businessobject/incidents?$orderby=IncidentNumber desc"))
 
     def post_journal_note(self, payload: dict) -> dict:
         return clean(self._call_api("POST", "odata/businessobject/journal__Notess", json_data=payload))
