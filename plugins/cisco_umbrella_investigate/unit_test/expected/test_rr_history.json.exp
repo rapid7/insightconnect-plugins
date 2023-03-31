@@ -1,0 +1,151 @@
+{
+  "features": [
+    {
+      "base_domain": "example.com",
+      "is_subdomain": false,
+      "age": 92,
+      "ttls_mean": 43823.260869565216,
+      "ttls_min": 3535,
+      "ttls_max": 86400,
+      "ttls_median": 7200.0,
+      "ttls_stddev": 40782.635787281266,
+      "country_codes": [
+        "DE",
+        "US"
+      ],
+      "country_count": 2,
+      "locations": [
+        {
+          "lat": 41.26190185546875,
+          "lon": -95.86080169677734
+        },
+        {
+          "lat": 47.9989013671875,
+          "lon": 11.176803588867188
+        }
+      ],
+      "locations_count": 4,
+      "asns": [
+        15169,
+        25560,
+        24940,
+        15133
+      ],
+      "asns_count": 4,
+      "non_routable": false,
+      "mail_exchanger": true,
+      "geo_distance_sum": 13973.73568990544,
+      "geo_distance_mean": 3493.43392247636,
+      "rips_stability": 0.1111111111111111,
+      "rips": 5,
+      "div_rips": 0.8,
+      "ff_candidate": false,
+      "prefixes": [
+        "93.184.216.0",
+        "95.143.160.0",
+        "88.198.0.0",
+        "23.236.48.0"
+      ],
+      "prefixes_count": 4,
+      "cname": false
+    }
+  ],
+  "rrs_tf": [
+    {
+      "rrs": [
+        {
+          "name": "example.com.",
+          "ttl": 3600,
+          "type": "A",
+          "rr": "23.236.62.147",
+          "class": "IN"
+        }
+      ],
+      "first_seen": "2020-08-27",
+      "last_seen": "2020-08-27"
+    },
+    {
+      "rrs": [
+        {
+          "name": "example.com.",
+          "ttl": 3600,
+          "type": "A",
+          "rr": "23.236.62.147",
+          "class": "IN"
+        },
+        {
+          "name": "example.com.",
+          "ttl": 86400,
+          "type": "A",
+          "rr": "93.184.216.34",
+          "class": "IN"
+        }
+      ],
+      "first_seen": "2020-08-26",
+      "last_seen": "2020-08-26"
+    },
+    {
+      "rrs": [
+        {
+          "name": "example.com.",
+          "ttl": 3600,
+          "type": "A",
+          "rr": "95.143.172.244",
+          "class": "IN"
+        }
+      ],
+      "first_seen": "2020-08-25",
+      "last_seen": "2020-08-25"
+    },
+    {
+      "rrs": [
+        {
+          "name": "example.com.",
+          "ttl": 3600,
+          "type": "A",
+          "rr": "23.236.62.147",
+          "class": "IN"
+        }
+      ],
+      "first_seen": "2020-08-24",
+      "last_seen": "2020-08-24"
+    },
+    {
+      "rrs": [
+        {
+          "name": "example.com.",
+          "ttl": 3600,
+          "type": "A",
+          "rr": "95.143.172.244",
+          "class": "IN"
+        }
+      ],
+      "first_seen": "2020-08-23",
+      "last_seen": "2020-08-23"
+    },
+    {
+      "rrs": [
+        {
+          "name": "example.com.",
+          "ttl": 3600,
+          "type": "A",
+          "rr": "95.143.172.244",
+          "class": "IN"
+        }
+      ],
+      "first_seen": "2020-08-22",
+      "last_seen": "2020-08-22"
+    },
+    {
+      "rrs": [
+        {
+          "name": "example.com.",
+          "ttl": 3600,
+          "type": "A",
+          "rr": "23.236.62.147",
+          "class": "IN"
+        }
+      ]
+    }
+  ]
+}

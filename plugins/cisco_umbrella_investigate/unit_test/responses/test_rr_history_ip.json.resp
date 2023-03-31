@@ -1,0 +1,14 @@
+{
+  "features": {
+    "rr_count": 0,
+    "ld2_count": 0,
+    "ld3_count": 0,
+    "ld2_1_count": 0,
+    "ld2_2_count": 0,
+    "div_ld2": 0.0,
+    "div_ld3": 0.0,
+    "div_ld2_1": 0.0,
+    "div_ld2_2": 0.0
+  },
+  "rrs": []
+}

@@ -1,0 +1,20 @@
+{
+  "totalResults": 10,
+  "moreDataAvailable": true,
+  "limit": 100,
+  "offset": 0,
+  "artifacts": [
+    {
+      "sha256": "sha256",
+      "sha1": "sha1",
+      "md5": "md5",
+      "magicType": "Example",
+      "size": 56320,
+      "firstSeen": "1460108539000",
+      "lastSeen": "1460108539000",
+      "visible": false,
+      "avresults": []
+    }
+  ],
+  "samples": []
+}
