@@ -14,7 +14,7 @@ class NewIncident(insightconnect_plugin_runtime.Trigger):
         # Set frequency and a list of initial incident numbers
         frequency = params.get(Input.FREQUENCY)
         incidents = self.connection.ivanti_service_manager_api.get_all_incidents().get("value")
-        self.logger.info("Initializing trigger")
+        self.logger.info("Initializing the trigger")
 
         while True:
             try:
