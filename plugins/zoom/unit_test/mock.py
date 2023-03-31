@@ -64,8 +64,7 @@ def mock_conditions(method: str, url: str, status_code: int) -> MockResponse:
     if method == "GET":
         return MockResponse("get_user", status_code)
     if method == "POST":
-        if url != STUB_OAUTH_URL and status_code == 201:
-            return MockResponse("create_user", status_code)
+        return MockResponse("create_user", status_code)
     if method == "DELETE":
         return MockResponse("delete_user", status_code)
     raise Exception("Unrecognized endpoint")

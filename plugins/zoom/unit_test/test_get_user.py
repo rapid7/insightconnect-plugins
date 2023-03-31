@@ -9,7 +9,6 @@ from unittest import TestCase, mock
 from icon_zoom.actions.get_user import GetUser
 from icon_zoom.actions.get_user.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
-from icon_zoom.connection.connection import Connection
 
 from unit_test.mock import (
     Util,
