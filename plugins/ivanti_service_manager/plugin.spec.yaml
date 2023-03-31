@@ -1759,7 +1759,6 @@ triggers:
         description: New Incident
         type: incident
         required: true
-        example: {"FILL IN EXAMPLE HERE"}
 
 actions:
   create_incident:
