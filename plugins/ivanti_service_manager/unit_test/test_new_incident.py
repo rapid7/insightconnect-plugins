@@ -10,7 +10,7 @@ from unittest.mock import patch
 from icon_ivanti_service_manager.triggers.new_incident import NewIncident
 from icon_ivanti_service_manager.triggers.new_incident.schema import Input
 from unit_test.util import Util
-from unit_test.mock import mock_request, MockResponse
+from unit_test.mock import MockResponse
 from insightconnect_plugin_runtime.exceptions import PluginException
 import logging
 
@@ -24,10 +24,8 @@ class MockTrigger:
         MockTrigger.actual = params
 
 
-# @patch("requests.Session.request", side_effect=[mock_request, mock_request_2])
 @patch("requests.Session.request",
        side_effect=[MockResponse("get_all_incidents", 200), MockResponse("get_all_incidents_two", 200)])
-# @patch("requests.Session.request", side_effect=mock_request)
 class TestNewIncident(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
