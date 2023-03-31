@@ -1,0 +1,84 @@
+{
+  "sha256": "65f33f9e6d16918ba72bc20bcd85ebd75bc735df5666a843cab9c6dec9c0b1c1",
+  "sha1": "ccdeb2319d6b924e359f563527404a0af3d1ac54",
+  "md5": "0c340a220817e157346bef7976a0d0b6",
+  "magicType": "PE32 executable (GUI) Intel 80386, for MS Windows, UPX compressed",
+  "threatScore": 100,
+  "size": 22020,
+  "firstSeen": 1466410880000,
+  "lastSeen": 1518410873000,
+  "visible": false,
+  "avresults": [
+    {
+      "signature": "Win.Worm.Mydoom",
+      "product": "ClamAV"
+    }
+  ],
+  "samples": {
+    "totalResults": 0,
+    "moreDataAvailable": false,
+    "limit": 1,
+    "offset": 0,
+    "samples": []
+  },
+  "connections": {
+    "totalResults": 1,
+    "moreDataAvailable": true,
+    "limit": 1,
+    "offset": 0,
+    "connections": [
+      {
+        "name": "166.16.123.158",
+        "firstSeen": 1518410873000,
+        "lastSeen": 1518410873000,
+        "lastCommit": null,
+        "securityCategories": [],
+        "attacks": [],
+        "threatTypes": [],
+        "type": "IP",
+        "firstQueried": null,
+        "popularity": null,
+        "popularityWeek": null,
+        "popularity1Month": null,
+        "popularity3Month": null,
+        "ips": [],
+        "urls": []
+      }
+    ]
+  },
+  "behaviors": [
+    {
+      "name": "registry-autorun-key-modified",
+      "title": "Process Modified Autorun Registry Key Value",
+      "hits": 1,
+      "confidence": 60,
+      "severity": 80,
+      "tags": [
+        "process",
+        "autorun",
+        "registry"
+      ],
+      "threat": 48,
+      "category": [
+        "persistence"
+      ]
+    },
+    {
+      "name": "pe-packed-upx",
+      "title": "Executable Packed with UPX",
+      "hits": 200,
+      "confidence": 30,
+      "severity": 30,
+      "tags": [
+        "packer",
+        "crypter",
+        "encoding",
+        "PE"
+      ],
+      "threat": 9,
+      "category": [
+        "attribute"
+      ]
+    }
+  ]
+}

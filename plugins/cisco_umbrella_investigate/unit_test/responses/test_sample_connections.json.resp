@@ -1,0 +1,37 @@
+{
+  "totalResults": 2,
+  "moreDataAvailable": true,
+  "limit": 2,
+  "offset": 0,
+  "connections": [
+    {
+      "name": "example.com",
+      "firstSeen": 1456268452000,
+      "lastSeen": 1456268452000,
+      "securityCategories": [],
+      "attacks": [],
+      "threatTypes": [],
+      "type": "HOST",
+      "ips": [
+        "192.168.0.1"
+      ],
+      "urls": [
+        "http://example.com"
+      ]
+    },
+    {
+      "name": "ExampleName",
+      "firstSeen": 1456268452000,
+      "lastSeen": 1456268452000,
+      "securityCategories": [
+        "Botnet",
+        "Malware"
+      ],
+      "attacks": [],
+      "threatTypes": [],
+      "type": "HOST",
+      "ips": [],
+      "urls": []
+    }
+  ]
+}

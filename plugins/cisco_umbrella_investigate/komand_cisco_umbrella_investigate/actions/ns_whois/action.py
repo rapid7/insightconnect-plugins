@@ -22,7 +22,7 @@ class NsWhois(insightconnect_plugin_runtime.Action):
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
         one_ns_whois = ns_whois.get(nameserver)
         if not one_ns_whois:
-            raise PluginException(cause="Invalid nameserver.", assistance="Unable to to retrieve domains.")
+            raise PluginException(cause="Invalid nameserver.", assistance="Unable to retrieve domains.")
         return {
             Output.DOMAIN: [
                 {

@@ -1,0 +1,35 @@
+{
+  "query": "rapid7.com",
+  "totalResults": 2,
+  "moreDataAvailable": true,
+  "limit": 2,
+  "offset": 2,
+  "samples": [
+    {
+      "sha256": "6842039f6c7b11595c09f9fb5be68a02dea5da16a6a9eadf23de3aa2b3f0d6ab",
+      "sha1": "713469e07f2940bf5c5c2a71f577395c5ffd1707",
+      "md5": "c47a40abfa1936b2a7ad19c57d5f6cb8",
+      "magicType": "MS Windows 95 Internet shortcut text (URL=<http://info.rapid7.com/z0qY1JG0000AaZqSNSe0K00>), ASCII text",
+      "threatScore": 64,
+      "size": 69,
+      "firstSeen": 1593103899000,
+      "lastSeen": 1593103899000,
+      "visible": true,
+      "avresults": [],
+      "behaviors": []
+    },
+    {
+      "sha256": "8506457d830242fe8abbfe67d65ca5c5ff01339dc2da3ca25d175e7e9b04c967",
+      "sha1": "6f034f7a8ced16b918d8325d0c2b2ccb8c445750",
+      "md5": "d1db6afeceed26829d520967db359f92",
+      "magicType": "PDF document, version 1.7",
+      "threatScore": 81,
+      "size": 16483096,
+      "firstSeen": 1588247793000,
+      "lastSeen": 1588247798000,
+      "visible": true,
+      "avresults": [],
+      "behaviors": []
+    }
+  ]
+}

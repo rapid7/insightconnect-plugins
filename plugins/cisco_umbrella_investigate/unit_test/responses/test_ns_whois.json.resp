@@ -1,0 +1,10 @@
+{
+  "example": {
+    "moreDataAvailable": false,
+    "limit": 1000,
+    "domains": [
+      "example.com"
+    ],
+    "totalResults": 1
+  }
+}
