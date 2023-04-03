@@ -1,4 +1,5 @@
 import requests
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class ResourceHelper(object):
@@ -58,11 +59,11 @@ class ResourceHelper(object):
             try:
                 error = response.json()["message"]
             except KeyError:
-                self.logger.error(f"Code: {response.status_code}, message: {error}")
                 error = "Unknown error occurred. Please contact support or try again later."
 
             status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
             self.logger.error(f"{status_code_message} ({response.status_code}): {error}")
-            raise Exception(
-                f"Insight AppSec returned a status code of {response.status_code}: {status_code_message}. {error}"
+            raise PluginException(
+                cause=f"Insight AppSec returned a status code of {response.status_code}: {status_code_message}.",
+                assistance=error,
             )
