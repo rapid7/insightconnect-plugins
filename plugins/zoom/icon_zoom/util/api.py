@@ -33,7 +33,7 @@ class ZoomAPI:
         self.logger = logger
 
         self.oauth_token: Optional[str] = None
-        self.oauth_last_refresh_timestamp: Optional[float] = None
+        self.refresh_oauth_token()
 
     def refresh_oauth_token(self) -> None:
         """
@@ -109,7 +109,7 @@ class ZoomAPI:
             response = requests.request(method, url, json=json_data, params=params, auth=auth)
             self.logger.info(f"Got response status code: {response.status_code}")
 
-            if response.status_code in [404, 429, 204] or (200 <= response.status_code < 300):
+            if response.status_code in [401, 404, 429, 204] or (200 <= response.status_code < 300):
                 return self._handle_response(response=response, allow_404=allow_404, original_call_args={
                     "method": method,
                     "url": url,
