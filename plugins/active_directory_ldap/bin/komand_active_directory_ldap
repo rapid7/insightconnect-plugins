@@ -40,7 +40,11 @@ def main():
 
             self.add_action(actions.DisableUser())
 
+            self.add_action(actions.DisableUsers())
+
             self.add_action(actions.EnableUser())
+
+            self.add_action(actions.EnableUsers())
 
             self.add_action(actions.ForcePasswordReset())
 

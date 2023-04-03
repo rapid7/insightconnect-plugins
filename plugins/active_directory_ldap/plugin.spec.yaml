@@ -194,6 +194,17 @@ types:
       type: object
     dn:
       type: string
+  modified_user_error:
+    dn:
+      title: DN
+      type: string
+      description: DN
+      required: false
+    error:
+      title: Error
+      type: string
+      description: Error
+      required: false
 connection:
   host:
     title: Host
@@ -360,6 +371,32 @@ actions:
         description: Operation status
         type: boolean
         required: false
+  enable_users:
+    title: Enable Users
+    description: Enable multiple accounts
+    input:
+      distinguished_names:
+        title: Distinguished Name
+        type: "[]string"
+        description: The distinguished names of the users to enable
+        required: true
+        example: ["CN=user,OU=domain_users,DC=example,DC=com"]
+    output:
+      successful_enablements:
+        title: Successful Enablements
+        description: List of successfully enabled users
+        type: "[]string"
+        required: false
+      unsuccessful_enablements:
+        title: Unsuccessful Enablements
+        description: List of unsuccessfully enabled users
+        type: "[]modified_user_error"
+        required: false
+      success:
+        title: Success
+        description: Operation status (True will be returned if at least one user is enabled)
+        type: boolean
+        required: false
   disable_user:
     title: Disable
     description: Disable an account
@@ -374,6 +411,32 @@ actions:
       success:
         title: Success
         description: Operation status
+        type: boolean
+        required: false
+  disable_users:
+    title: Disable Users
+    description: Disable multiple accounts
+    input:
+      distinguished_names:
+        title: Distinguished Name
+        type: "[]string"
+        description: The distinguished names of the users to disable
+        required: true
+        example: ["CN=user,OU=domain_users,DC=example,DC=com"]
+    output:
+      successful_disablements:
+        title: Successful Disablements
+        description: List of successfully disabled users
+        type: "[]string"
+        required: false
+      unsuccessful_disablements:
+        title: Unsuccessful Disablements
+        description: List of unsuccessfully disabled users
+        type: "[]modified_user_error"
+        required: false
+      success:
+        title: Success
+        description: Operation status (True will be returned if at least one user is disabled)
         type: boolean
         required: false
   modify_groups:

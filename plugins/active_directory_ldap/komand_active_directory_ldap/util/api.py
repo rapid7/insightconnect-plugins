@@ -166,6 +166,28 @@ class ActiveDirectoryLdapAPI:
         return ADUtils.change_account_status(conn, dn, status, self.logger)
 
     @with_connection
+    def manage_users(self, conn, dns: list[str], status: bool) -> dict:
+        """
+        manage_users handles disabling or enabling of a list of users, returning successes and failures.
+
+        :param conn: Connection for LDAP
+        :param dns: Distinguishes Names
+        :param status: Whether user is enabled or disabled
+        :return: Dictionary containing two lists, one for successfully modified Distinguishes Names and another for
+        unsuccessfully modified Distinguishes Names and the cause of the failure
+        """
+        successes = []
+        failures = []
+        for dn in dns:
+            try:
+                ADUtils.change_account_status(conn, dn, status, self.logger)
+                successes.append(dn)
+            except PluginException as exception:
+                failures.append({"dn": dn, "error": exception.cause})
+        return {"successes": successes, "failures": failures}
+
+
+    @with_connection
     def force_password_reset(self, conn, dn: str, password_expire: dict):
         try:
             conn.raise_exceptions = True
