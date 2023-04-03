@@ -88,11 +88,9 @@ class DlFilterAllOutput(insightconnect_plugin_runtime.Output):
           "order": 3
         },
         "createdAt": {
-          "type": "string",
+          "type": "integer",
           "title": "Created At",
-          "displayType": "date",
-          "description": "Timestamp for creation of the destination list",
-          "format": "date-time",
+          "description": "The unix UTC timestamp in milliseconds for creation of the destination list",
           "order": 7
         },
         "id": {
@@ -126,11 +124,9 @@ class DlFilterAllOutput(insightconnect_plugin_runtime.Output):
           "order": 11
         },
         "modifiedAt": {
-          "type": "string",
+          "type": "integer",
           "title": "Modified At",
-          "displayType": "date",
-          "description": "Timestamp for modification of the destination list",
-          "format": "date-time",
+          "description": "The unix UTC timestamp in milliseconds for modification of the destination list",
           "order": 8
         },
         "name": {

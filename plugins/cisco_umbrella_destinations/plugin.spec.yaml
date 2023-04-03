@@ -3,8 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: cisco_umbrella_destinations
 title: Cisco Umbrella Destinations
-version: 3.1.0
-supported_versions: ["2022-03-08"]
+version: 4.0.0
+supported_versions: ["2023-03-29"]
 description: Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization
 vendor: rapid7
 support: rapid7
@@ -34,12 +34,6 @@ connection:
     type: credential_secret_key
     required: true
     example: 9de5069c5afe602b2ea0a04b66beb2c0
-  organization_id:
-    title: Organization ID
-    description: ID for organization
-    type: integer
-    required: true
-    example: 1234567
 types:
   meta:
     destinationCount:
@@ -96,15 +90,15 @@ types:
       required: false
     createdAt:
       title: Created At
-      description: Timestamp for creation of the destination list
-      example: 2018-07-23 19:36:45
-      type: date
+      description: The unix UTC timestamp in milliseconds for creation of the destination list
+      example: 1643385816
+      type: integer
       required: false
     modifiedAt:
       title: Modified At
-      description: Timestamp for modification of the destination list
-      example: 2018-07-23 19:36:45
-      type: date
+      description: The unix UTC timestamp in milliseconds for modification of the destination list
+      example: 1643385816
+      type: integer
       required: false
     isMspDefault:
       title: Is MSP Default
@@ -127,12 +121,6 @@ types:
     id:
       title: ID
       description: Unique ID of the destination list
-      type: integer
-      required: false
-    organizationId:
-      title: Organization ID
-      description: ID of organization
-      example: 1234567
       type: integer
       required: false
     access:
@@ -161,15 +149,15 @@ types:
       required: false
     createdAt:
       title: Created At
-      description: Timestamp for creation of the destination list
-      example: 2018-07-23 19:36:45
-      type: date
+      description: The unix UTC timestamp in milliseconds for creation of the destination list
+      example: 1643385816
+      type: integer
       required: false
     modifiedAt:
       title: Modified At
-      description: Timestamp for modification of the destination list
-      example: 2018-07-23 19:36:45
-      type: date
+      description: The unix UTC timestamp in milliseconds for modification of the destination list
+      example: 1643385816
+      type: integer
       required: false
     isMspDefault:
       title: Is MSP Default
