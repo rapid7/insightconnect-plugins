@@ -175,7 +175,9 @@ class ZoomAPI:
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.json())
 
         if response.status_code == 409:
-            raise PluginException(cause=response.json(), assistance="User already exists, try again.")
+            raise PluginException(
+                cause="User already exists.", assistance="Please check your input and try again.", data=response.json()
+            )
 
         if response.status_code == 429:
             self._handle_rate_limit_error(response=response)
