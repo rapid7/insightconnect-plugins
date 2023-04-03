@@ -6,7 +6,7 @@ from unittest.mock import patch
 from icon_zoom.util.event import Event
 from icon_zoom.tasks.monitor_sign_in_out_activity.task import MonitorSignInOutActivity
 from icon_zoom.connection.connection import Connection
-from icon_zoom.unit_test.mock import STUB_CONNECTION
+from unit_test.mock import STUB_CONNECTION
 
 GET_USER_ACTIVITY_EVENTS_PATH = "icon_zoom.util.api.ZoomAPI.get_user_activity_events"
 GET_DATETIME_NOW_PATH = "icon_zoom.tasks.monitor_sign_in_out_activity.task.MonitorSignInOutActivity._get_datetime_now"
