@@ -1,0 +1,45 @@
+{
+  "records": [
+    {
+      "minTtl": 86400,
+      "maxTtl": 86400,
+      "firstSeen": 1403611920,
+      "lastSeen": 1602604809,
+      "name": "umbrella.com",
+      "type": "NS",
+      "rr": "auth1.opendns.com.",
+      "securityCategories": [],
+      "contentCategories": [
+        "Software/Technology"
+      ],
+      "firstSeenISO": "2014-06-24T12:12Z",
+      "lastSeenISO": "2020-10-13T16:00Z"
+    },
+    {
+      "minTtl": 86400,
+      "maxTtl": 86400,
+      "firstSeen": 1403611920,
+      "lastSeen": 1602604809,
+      "name": "umbrella.com",
+      "type": "NS",
+      "rr": "auth2.opendns.com.",
+      "securityCategories": [],
+      "contentCategories": [
+        "Software/Technology"
+      ],
+      "firstSeenISO": "2014-06-24T12:12Z",
+      "lastSeenISO": "2020-10-13T16:00Z"
+    }
+  ],
+  "pageInfo": {
+    "hasMoreRecords": false,
+    "offset": 0,
+    "limit": 500,
+    "totalNumRecords": 2
+  },
+  "recordInfo": {
+    "minTtl": 86400,
+    "maxTtl": 86400,
+    "totalMaliciousIP": 0
+  }
+}

@@ -15,6 +15,10 @@ This plugin utilizes the [Python OpenDNS Investigate](https://github.com/opendns
 
 * Cisco Umbrella Investigate API key (There is a link in the Links section that describes how to create an Investigate API Key)
 
+# Supported Product Versions
+
+* 2023-03-30
+
 # Documentation
 
 ## Setup
@@ -824,7 +828,26 @@ Example input:
 Example output:
 
 ```
-
+{
+    "totalResults": 10,
+    "moreDataAvailable": True,
+    "limit": 100,
+    "offset": 0,
+    "artifacts": [
+        {
+            "sha256": "sha256",
+            "sha1": "sha1",
+            "md5": "md5",
+            "magicType": "Example",
+            "size": 56320,
+            "firstSeen": "1460108539000",
+            "lastSeen": "1460108539000",
+            "visible": False,
+            "avresults": [],
+        }
+    ],
+    "samples": [],
+}
 ```
 
 #### WHOIS Information by Email
@@ -1059,7 +1082,16 @@ Example input:
 Example output:
 
 ```
-
+{
+  "domain_tags": [
+    {
+      "url": "example.com",
+      "begin": "2023-03-28T00:00:00Z",
+      "end": "2023-03-28T00:00:00Z",
+      "category": "category"
+    }
+  ]
+}
 ```
 
 #### Samples by Domain
@@ -1168,7 +1200,36 @@ Example input:
 Example output:
 
 ```
-
+{
+  "samples": [
+    {
+      "sha256": "6842039f6c7b11595c09f9fb5be68a02dea5da16a6a9eadf23de3aa2b3f0d6ab",
+      "sha1": "713469e07f2940bf5c5c2a71f577395c5ffd1707",
+      "md5": "c47a40abfa1936b2a7ad19c57d5f6cb8",
+      "magicType": "MS Windows 95 Internet shortcut text (URL=<http://info.rapid7.com/z0qY1JG0000AaZqSNSe0K00>), ASCII text",
+      "threatScore": 64,
+      "size": 69,
+      "firstSeen": 1593103899000,
+      "lastSeen": 1593103899000,
+      "visible": true,
+      "avresults": [],
+      "behaviors": []
+    },
+    {
+      "sha256": "8506457d830242fe8abbfe67d65ca5c5ff01339dc2da3ca25d175e7e9b04c967",
+      "sha1": "6f034f7a8ced16b918d8325d0c2b2ccb8c445750",
+      "md5": "d1db6afeceed26829d520967db359f92",
+      "magicType": "PDF document, version 1.7",
+      "threatScore": 81,
+      "size": 16483096,
+      "firstSeen": 1588247793000,
+      "lastSeen": 1588247798000,
+      "visible": true,
+      "avresults": [],
+      "behaviors": []
+    }
+  ]
+}
 ```
 
 #### Security Information
@@ -1440,6 +1501,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 3.1.5 - Added unittests and additional output examples
 * 3.1.4 - Updated the documentation and connection test
 * 3.1.3 - Fix invalid character in description
 * 3.1.2 - Replace python2 code to python3 in investigate.py file

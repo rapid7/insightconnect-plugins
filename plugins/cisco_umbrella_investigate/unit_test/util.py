@@ -33,6 +33,17 @@ class Util:
         action.logger = logging.getLogger("action logger")
         return action
 
+    @staticmethod
+    def read_file_to_string(filename: str) -> str:
+        with open(
+            os.path.join(os.path.dirname(os.path.realpath(__file__)), filename), "r", encoding="utf-8"
+        ) as file_reader:
+            return file_reader.read()
+
+    @staticmethod
+    def read_file_to_dict(filename: str) -> Dict[str, Any]:
+        return json.loads(Util.read_file_to_string(filename))
+
 
 class MockResponse:
     def __init__(self, filename: str, status_code: int, text: str = "Example Text") -> None:
@@ -61,6 +72,57 @@ def mock_conditions(url: str, status_code: int, **kwargs: Dict[str, Any]) -> Moc
         return MockResponse("test_cooccurrences_found", status_code)
     elif url == f"{BASE_URL}recommendations/name/example.json":
         return MockResponse("test_cooccurrences_not_found", status_code)
+    elif url == f"{BASE_URL}domains/example.com/latest_tags":
+        return MockResponse("test_domain_tags", status_code)
+    elif url == f"{BASE_URL}domains/example/latest_tags":
+        return MockResponse("test_domain_tags_not_found", status_code)
+    elif url == f"{BASE_URL}whois/example.com":
+        return MockResponse("test_domain_whois", status_code)
+    elif f"{BASE_URL}whois/emails/" in url:
+        return MockResponse("test_email_whois", status_code)
+    elif url == f"{BASE_URL}ips/192.168.0.1/latest_domains":
+        return MockResponse("test_latest_domains", status_code)
+    elif url == f"{BASE_URL}whois/nameservers/":
+        return MockResponse("test_ns_whois", status_code)
+    elif url in (
+        f"{BASE_URL}pdns/domain/example",
+        f"{BASE_URL}pdns/name/example",
+        f"{BASE_URL}pdns/ip/example",
+        f'{BASE_URL}pdns/raw/"example"',
+    ):
+        return MockResponse("test_passive_dns_domain", status_code)
+    elif url == f"{BASE_URL}pdns/timeline/example":
+        return MockResponse("test_passive_dns_timeline", status_code)
+    elif url == f"{BASE_URL}links/name/example.com.json":
+        return MockResponse("test_related", status_code)
+    elif url == f"{BASE_URL}links/name/example2.com.json":
+        return MockResponse("test_related_not_found", status_code)
+    elif url == f"{BASE_URL}dnsdb/name/A/example.com.json":
+        return MockResponse("test_rr_history", status_code)
+    elif url == f"{BASE_URL}dnsdb/ip/A/192.168.0.1.json":
+        return MockResponse("test_rr_history_ip", status_code)
+    elif url == f"{BASE_URL}sample/ExampleHash":
+        return MockResponse("test_sample", status_code)
+    elif url == f"{BASE_URL}sample/ExampleHash/artifacts":
+        return MockResponse("test_sample_artifacts", status_code)
+    elif url in (f"{BASE_URL}sample/ExampleHashError/artifacts", f"{BASE_URL}sample/ExampleHashError/samples"):
+        return MockResponse("test_sample_artifacts_error", status_code)
+    elif url == f"{BASE_URL}sample/ExampleHash/connections":
+        return MockResponse("test_sample_connections", status_code)
+    elif url == f"{BASE_URL}sample/ExampleHash/samples":
+        return MockResponse("test_sample_samples", status_code)
+    elif url == f"{BASE_URL}samples/example.com":
+        return MockResponse("test_samples", status_code)
+    elif url == f"{BASE_URL}search/example.com":
+        return MockResponse("test_search", status_code)
+    elif url == f"{BASE_URL}security/name/example.com.json":
+        return MockResponse("test_security", status_code)
+    elif url == f"{BASE_URL}security/name/example_error_1.com.json":
+        return MockResponse("test_domain_tags_not_found", status_code)
+    elif url == f"{BASE_URL}security/name/example_error_2.com.json":
+        return MockResponse("test_related_not_found", status_code)
+    elif url == f"{BASE_URL}timeline/ExampleName":
+        return MockResponse("test_timeline", status_code)
     raise Exception("Response has been not implemented")
 
 

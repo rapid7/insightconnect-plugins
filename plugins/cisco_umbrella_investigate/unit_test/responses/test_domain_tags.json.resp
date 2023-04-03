@@ -1,0 +1,10 @@
+[
+  {
+    "url": "example.com",
+    "period": {
+      "begin": "2023-03-28T00:00:00Z",
+      "end": "2023-03-28T00:00:00Z"
+    },
+    "category": "category"
+  }
+]

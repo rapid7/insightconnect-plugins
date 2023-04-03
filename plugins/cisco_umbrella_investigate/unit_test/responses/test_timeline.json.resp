@@ -1,0 +1,18 @@
+[
+  {
+    "categories": [
+      "Malware"
+    ],
+    "attacks": [],
+    "threatTypes": [],
+    "timestamp": 1561574807853
+  },
+  {
+    "categories": [],
+    "attacks": [
+      "Trojan"
+    ],
+    "threatTypes": [],
+    "timestamp": 1559545774604
+  }
+]

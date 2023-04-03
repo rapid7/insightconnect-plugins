@@ -6,10 +6,11 @@ title: Cisco Umbrella Investigate
 vendor: rapid7
 support: rapid7
 status: []
+supported_versions: ["2023-03-30"]
 description: This plugin utilizes Cisco Umbrella Investigate to get the most complete view of the relationships
   and evolution of Internet domains, IP addresses, and autonomous systems to pinpoint
   attackers infrastructures and predict future threats
-version: 3.1.4
+version: 3.1.5
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/cisco_umbrella_investigate
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
