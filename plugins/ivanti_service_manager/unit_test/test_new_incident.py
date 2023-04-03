@@ -1,7 +1,6 @@
 import sys
 import os
 import timeout_decorator
-import json
 
 sys.path.append(os.path.abspath("../"))
 
@@ -15,7 +14,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 import logging
 
 
-# Mocks the trigger's send request
+# Mocks the trigger's send requestxs
 class MockTrigger:
     actual = None
 
