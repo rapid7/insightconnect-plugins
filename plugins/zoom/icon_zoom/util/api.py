@@ -3,9 +3,9 @@ from logging import Logger
 from typing import Optional
 
 import requests
+from requests import Response
 from requests.auth import HTTPBasicAuth
 from requests.auth import AuthBase
-from requests import Response
 
 from insightconnect_plugin_runtime.exceptions import PluginException
 
@@ -109,7 +109,7 @@ class ZoomAPI:
             response = requests.request(method, url, json=json_data, params=params, auth=auth)
             self.logger.info(f"Got response status code: {response.status_code}")
 
-            if response.status_code in [401, 404, 429, 204] or (200 <= response.status_code < 300):
+            if response.status_code in [400, 401, 404, 409, 429, 204] or (200 <= response.status_code < 300):
                 return self._handle_response(response=response, allow_404=allow_404, original_call_args={
                     "method": method,
                     "url": url,
@@ -128,26 +128,39 @@ class ZoomAPI:
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
     def _handle_response(self, response: Response, allow_404: bool, original_call_args: dict):
+
+        """
+        Helper function to process the response based on the status code returned.
+        :param response: Response object
+        :param allow_404: Boolean value to indicate whether to allow 404 status code to be ignored
+        """
+
+        if response.status_code == 400:
+            raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.json())
+
         if response.status_code == 401:
-            self.logger.info(f"Received HTTP {response.status_code}, re-authenticating to Zoom...")
-            self.refresh_oauth_token()
-            return self._call_api(**original_call_args)
+            if response.status_code == 401:
+                self.logger.info(f"Received HTTP {response.status_code}, re-authenticating to Zoom...")
+                self.refresh_oauth_token()
+                return self._call_api(**original_call_args)
 
         if response.status_code == 404:
-            resp = json.loads(response.text)
             if allow_404:
                 return None
             else:
-                raise PluginException(
-                    cause=resp.get("message"),
-                    assistance=f"The object at {response.url} does not exist. Verify the ID and fields "
-                    f"used are valid.",
-                )
+                raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.json())
+
+        if response.status_code == 409:
+            raise PluginException(
+                cause="User already exists.", assistance="Please check your input and try again.", data=response.json()
+            )
+
         if response.status_code == 429:
             self._handle_rate_limit_error(response=response)
         # Success; no content
         if response.status_code == 204:
             return None
+
         if 200 <= response.status_code < 300:
             return response.json()
 
