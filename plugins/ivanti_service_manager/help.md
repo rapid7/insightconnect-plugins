@@ -875,7 +875,6 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-
 * 1.2.0 - Added Get Incident action | Added Search Incident action | Added New Incident trigger
 * 1.1.0 - Added Create Service Request action | Added missing example input in Create Incident action
 * 1.0.0 - Initial plugin
