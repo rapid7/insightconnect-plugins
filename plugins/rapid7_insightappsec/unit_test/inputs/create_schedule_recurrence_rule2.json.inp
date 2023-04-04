@@ -1,0 +1,12 @@
+{
+  "enabled": false,
+  "firstStart": "2023-04-25T14:15:22Z",
+  "frequency": {
+    "interval": 1,
+    "type": "DAILY"
+  },
+  "lastStart": "",
+  "name": "New schedule",
+  "rrule": "freq=monthly;interval=1;byday=FR;bysetpos=-1",
+  "scanConfigId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+}
