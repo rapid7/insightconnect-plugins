@@ -14,7 +14,6 @@ GET_DATETIME_NOW_PATH = "icon_zoom.tasks.monitor_sign_in_out_activity.task.Monit
 
 
 class TestGetUserActivityEvents(unittest.TestCase):
-
     @patch(REFRESH_OAUTH_TOKEN_PATH)
     def setUp(self, mock_refresh_call) -> None:
         mock_refresh_call.return_value = None
