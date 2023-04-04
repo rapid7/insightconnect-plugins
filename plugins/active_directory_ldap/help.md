@@ -423,6 +423,49 @@ Example output:
 
 ```
 
+#### Enable Users
+
+This action is used to enable accounts.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|distinguished_names|[]string|None|True|The distinguished names of the user to enable|None|["CN=user,OU=domain_users,DC=example,DC=com"]|
+
+Example input:
+
+```
+{
+  "distinguished_names": ["CN=user,OU=domain_users,DC=example,DC=com"]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Operation status|
+|successful_enablements|[]string|False|List of successfully enabled users|
+|unsuccessful_enablements|[]modified_user_error|False|List of unsuccessfully enabled users|
+
+Example output:
+
+```
+
+{
+  "success": true
+  "successful_enablements": ["CN=user,OU=domain_users,DC=example,DC=com"]
+  "unsuccessful_enablements": [
+    {
+        "dn": "CN=user,OU=domain_users,DC=test,DC=com",
+        "error": "The DN CN=empty_search,DC=example,DC=com was not found"
+    }
+  ]
+}
+
+```
+
 #### Move Object
 
 This action is used to move an Active Directory object from one organizational unit to another.
@@ -524,6 +567,50 @@ Example output:
 
 {
   "success": true
+}
+
+```
+
+
+#### Disable Users
+
+This action is used to disable accounts.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|distinguished_names|[]string|None|True|The distinguished names of the user to enable|None|["CN=user,OU=domain_users,DC=example,DC=com"]|
+
+Example input:
+
+```
+{
+  "distinguished_names": ["CN=user,OU=domain_users,DC=example,DC=com"]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Operation status|
+|successful_disablements|[]string|False|List of successfully disabled users|
+|unsuccessful_disablements|[]modified_user_error|False|List of unsuccessfully disabled users|
+dis
+Example output:
+
+```
+
+{
+  "success": true
+  "successful_disablements": ["CN=user,OU=domain_users,DC=example,DC=com"]
+  "unsuccessful_disablements": [
+    {
+        "dn": "CN=user,OU=domain_users,DC=test,DC=com",
+        "error": "The DN CN=empty_search,DC=example,DC=com was not found"
+    }
+  ]
 }
 
 ```
@@ -648,6 +735,13 @@ _This plugin does not contain any triggers._
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |Attributes|attributes|False|Attributes|
+|DN|string|False|DN|
+
+#### modified_user_error
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Error|string|False|Error|
 |DN|string|False|DN|
 
 ## Troubleshooting
