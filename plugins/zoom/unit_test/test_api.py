@@ -11,7 +11,6 @@ REQUESTS_PATH = "requests.request"
 
 
 class MockResponse:
-
     def __init__(self, status_code: int):
         self.status_code = status_code
 
@@ -20,7 +19,6 @@ class MockResponse:
 
 
 class MyTestCase(TestCase):
-
     @patch(REFRESH_OAUTH_TOKEN_PATH)
     @patch(REQUESTS_PATH)
     def test_unauthenticated_first_run(self, mock_request, mock_refresh):
@@ -42,5 +40,5 @@ class MyTestCase(TestCase):
         self.assertDictEqual(result, {})
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -110,14 +110,18 @@ class ZoomAPI:
             self.logger.info(f"Got response status code: {response.status_code}")
 
             if response.status_code in [400, 401, 404, 409, 429, 204] or (200 <= response.status_code < 300):
-                return self._handle_response(response=response, allow_404=allow_404, original_call_args={
-                    "method": method,
-                    "url": url,
-                    "params": params,
-                    "json_data": json_data,
-                    "allow_404": allow_404,
-                    "auth": auth,
-                })
+                return self._handle_response(
+                    response=response,
+                    allow_404=allow_404,
+                    original_call_args={
+                        "method": method,
+                        "url": url,
+                        "params": params,
+                        "json_data": json_data,
+                        "allow_404": allow_404,
+                        "auth": auth,
+                    },
+                )
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except json.decoder.JSONDecodeError as e:
