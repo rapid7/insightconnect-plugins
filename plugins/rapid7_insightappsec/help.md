@@ -63,6 +63,7 @@ Example input:
 
 ```
 {
+  "vulnerabilityDiscoveryId": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
   "vulnerabilityId": "497f6eca-6276-4993-bfeb-53cbbbba6f08"
 }
 ```
@@ -177,7 +178,7 @@ This action is used to create a new schedule.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|enabled|boolean|True|True|The enabled property of the schedule|None|True|
+|enabled|boolean|True|True|Whether the schedule is enabled|None|True|
 |firstStart|date|None|True|The first start date and time of the schedule|None|2023-03-17T13:00:19Z|
 |frequency|frequencyInput|None|False|The frequency describes how (and if) the schedule should repeat. If frequency and recurrence rule are given then the recurrence rule will be used|None|{}|
 |lastStart|date|None|False|The last start date and time of the schedule|None|2023-04-17T13:00:19Z|
@@ -1151,7 +1152,7 @@ _This plugin does not contain any tasks._
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+More information about the frequency and recurrence rule parameters used in the Create Schedule action can be found [here](https://help.rapid7.com/insightappsec/en-us/api/v1/docs.html#tag/Schedules).
 
 # Version History
 

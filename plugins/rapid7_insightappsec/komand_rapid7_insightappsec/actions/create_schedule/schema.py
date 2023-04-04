@@ -30,7 +30,7 @@ class CreateScheduleInput(insightconnect_plugin_runtime.Input):
     "enabled": {
       "type": "boolean",
       "title": "Enabled",
-      "description": "The enabled property of the schedule",
+      "description": "Whether the schedule is enabled",
       "default": true,
       "order": 3
     },

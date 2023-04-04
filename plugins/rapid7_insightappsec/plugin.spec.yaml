@@ -890,7 +890,7 @@ actions:
         example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
       enabled:
         title: Enabled
-        description: The enabled property of the schedule
+        description: Whether the schedule is enabled
         type: boolean
         required: true
         default: true
