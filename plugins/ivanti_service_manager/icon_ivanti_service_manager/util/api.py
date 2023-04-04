@@ -62,8 +62,7 @@ class IvantiServiceManagerAPI:
 
         raise PluginException(
             cause="No service request templates found.",
-            assistance=f"No service request templates found using data provided - {identifier}. Please validate and "
-            f"try again.",
+            assistance=f"No service request templates found using data provided - {identifier}. Please validate and try again.",
         )
 
     def post_service_request(self, payload: dict) -> dict:
