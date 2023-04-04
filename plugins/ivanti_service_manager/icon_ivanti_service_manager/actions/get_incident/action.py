@@ -11,4 +11,4 @@ class GetIncident(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         response = self.connection.ivanti_service_manager_api.get_incident_by_number(params.get(Input.INCIDENT_NUMBER))
-        return {"incident": response}
+        return {Output.INCIDENT: response}

@@ -546,22 +546,22 @@ Example output:
 
 ```
 {
-    "incident":
-      {
-         "ActualCategory_Valid":"14348C1FFA044D8AB1E93005B4A0A287",
-         "ActualCategory":"Missing Item",
-         "Category_Valid":"14348C1FFA044D8AB1E93005B4A0A287",
-         "Category":"Missing Item",
-         "CauseCode_Valid":"",
-         "CauseCode":"",
-         "ClosedBy":null,
-         "CreatedBy":"SDavis",
-         "RecId":"FAC9B02CB80041768D99EACE6A5DAD43",
-         "Subject":"Remote control for projector in Boardroom is are missing ",
-         "Symptom":"This is an issue as it is roof mounted and cannot be switched on/off without the remote",
-         "Urgency_Valid":"44021B6CC6E44E598868C4B3306053AE",
-         "Urgency":"Medium",
-         "LoginId":"KDavidson"
+  "incident":
+    {
+       "ActualCategory_Valid":"14348C1FFA044D8AB1E93005B4A0A287",
+       "ActualCategory":"Missing Item",
+       "Category_Valid":"14348C1FFA044D8AB1E93005B4A0A287",
+       "Category":"Missing Item",
+       "CauseCode_Valid":"",
+       "CauseCode":"",
+       "ClosedBy":null,
+       "CreatedBy":"SDavis",
+       "RecId":"FAC9B02CB80041768D99EACE6A5DAD43",
+       "Subject":"Remote control for projector in Boardroom is are missing ",
+       "Symptom":"This is an issue as it is roof mounted and cannot be switched on/off without the remote",
+       "Urgency_Valid":"44021B6CC6E44E598868C4B3306053AE",
+       "Urgency":"Medium",
+       "LoginId":"KDavidson"
       }
 }
 ```
@@ -594,41 +594,41 @@ Example output:
 
 ```
 {
-   "data":[
-      {
-         "ActualCategory_Valid":"14348C1FFA044D8AB1E93005B4A0A287",
-         "ActualCategory":"Missing Item",
-         "Category_Valid":"14348C1FFA044D8AB1E93005B4A0A287",
-         "Category":"Missing Item",
-         "CauseCode_Valid":"E2489F3F7DA34B898CCD9569CA5541F2",
-         "CauseCode":"Other",
-         "ClosedBy":"JClerk",
-         "CreatedBy":"JClerk",
-         "Email":"user@example.com",
-         "RecId":"003B58C0B4554E4BAA30DFD88876582A",
-         "Subject":"Remote control for projector in Boardroom is are missing ",
-         "Symptom":"This is an issue as it is roof mounted and cannot be switched on/off without the remote",
-         "Urgency_Valid":"44021B6CC6E44E598868C4B3306053AE",
-         "Urgency":"Medium",
-         "LoginId":"KDavidson"
-      },
-      {
-         "ActualCategory_Valid":"14348C1FFA044D8AB1E93005B4A0A287",
-         "ActualCategory":"Missing Item",
-         "Category_Valid":"14348C1FFA044D8AB1E93005B4A0A287",
-         "Category":"Missing Item",
-         "CauseCode_Valid":"",
-         "CauseCode":"",
-         "ClosedBy":null,
-         "CreatedBy":"SDavis",
-         "RecId":"FAC9B02CB80041768D99EACE6A5DAD43",
-         "Subject":"Remote control for projector in Boardroom is are missing ",
-         "Symptom":"This is an issue as it is roof mounted and cannot be switched on/off without the remote",
-         "Urgency_Valid":"44021B6CC6E44E598868C4B3306053AE",
-         "Urgency":"Medium",
-         "LoginId":"KDavidson"
-      }
-   ]
+ "data":[
+    {
+       "ActualCategory_Valid":"14348C1FFA044D8AB1E93005B4A0A287",
+       "ActualCategory":"Missing Item",
+       "Category_Valid":"14348C1FFA044D8AB1E93005B4A0A287",
+       "Category":"Missing Item",
+       "CauseCode_Valid":"E2489F3F7DA34B898CCD9569CA5541F2",
+       "CauseCode":"Other",
+       "ClosedBy":"JClerk",
+       "CreatedBy":"JClerk",
+       "Email":"user@example.com",
+       "RecId":"003B58C0B4554E4BAA30DFD88876582A",
+       "Subject":"Remote control for projector in Boardroom is are missing ",
+       "Symptom":"This is an issue as it is roof mounted and cannot be switched on/off without the remote",
+       "Urgency_Valid":"44021B6CC6E44E598868C4B3306053AE",
+       "Urgency":"Medium",
+       "LoginId":"KDavidson"
+    },
+    {
+       "ActualCategory_Valid":"14348C1FFA044D8AB1E93005B4A0A287",
+       "ActualCategory":"Missing Item",
+       "Category_Valid":"14348C1FFA044D8AB1E93005B4A0A287",
+       "Category":"Missing Item",
+       "CauseCode_Valid":"",
+       "CauseCode":"",
+       "ClosedBy":null,
+       "CreatedBy":"SDavis",
+       "RecId":"FAC9B02CB80041768D99EACE6A5DAD43",
+       "Subject":"Remote control for projector in Boardroom is are missing ",
+       "Symptom":"This is an issue as it is roof mounted and cannot be switched on/off without the remote",
+       "Urgency_Valid":"44021B6CC6E44E598868C4B3306053AE",
+       "Urgency":"Medium",
+       "LoginId":"KDavidson"
+    }
+  ]
 }
 ```
 
@@ -662,7 +662,8 @@ Example output:
 
 ```
 {
-  "incident": {
+  "incident": 
+    {
       "@odata.context": "https://example.com/HEAT/api/odata/$metadata#incidents/$entity",
       "ClosedDuration": 0,
       "CreatedBy": "user",
@@ -748,7 +749,7 @@ Example output:
       "IsRelatedIncidentUpdate": false,
       "IsRelatedIncidentResolutionUpdate": false,
       "IsUnRead": false
-  }
+    }
 }
 ```
 
