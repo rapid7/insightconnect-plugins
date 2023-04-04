@@ -124,11 +124,11 @@ class ZoomAPI:
                 )
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        except json.decoder.JSONDecodeError as e:
-            self.logger.info(f"Invalid json: {e}")
+        except json.decoder.JSONDecodeError as error:
+            self.logger.info(f"Invalid json: {error}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)
-        except requests.exceptions.HTTPError as e:
-            self.logger.info(f"Request to f{url} failed: {e}")
+        except requests.exceptions.HTTPError as error:
+            self.logger.info(f"Request to f{url} failed: {error}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
     def _handle_response(self, response: Response, allow_404: bool, original_call_args: dict):
