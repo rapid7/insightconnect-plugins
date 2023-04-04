@@ -16,7 +16,7 @@ class TestActionEnableUsers(TestCase):
         expected = {
             Output.SUCCESS: True,
             Output.SUCCESSFUL_ENABLEMENTS: ["CN=Users,DC=example,DC=com"],
-            Output.UNSUCCESSFUL_ENABLEMENTS: []
+            Output.UNSUCCESSFUL_ENABLEMENTS: [],
         }
         self.assertEqual(expected, actual)
 
@@ -29,11 +29,11 @@ class TestActionEnableUsers(TestCase):
             Output.UNSUCCESSFUL_ENABLEMENTS: [
                 {
                     "dn": "CN=empty_search,DC=example,DC=com",
-                    "error": "The DN CN=empty_search,DC=example,DC=com was not found."
+                    "error": "The DN CN=empty_search,DC=example,DC=com was not found.",
                 }
             ],
             Output.SUCCESSFUL_ENABLEMENTS: [],
-            Output.SUCCESS: False
+            Output.SUCCESS: False,
         }
         self.assertEqual(expected, actual)
 
@@ -41,17 +41,18 @@ class TestActionEnableUsers(TestCase):
     @mock.patch("ldap3.Connection", mock.MagicMock(return_value=MockConnection()))
     @default_connector(action=EnableUsers())
     def test_enable_user_success_and_failure_search(self, action):
-        actual = action.run({Input.DISTINGUISHED_NAMES: ["CN=empty_search,DC=example,DC=com", "CN=Users,DC=example,"
-                                                                                              "DC=com"]})
+        actual = action.run(
+            {Input.DISTINGUISHED_NAMES: ["CN=empty_search,DC=example,DC=com", "CN=Users,DC=example," "DC=com"]}
+        )
         expected = {
             Output.UNSUCCESSFUL_ENABLEMENTS: [
                 {
                     "dn": "CN=empty_search,DC=example,DC=com",
-                    "error": "The DN CN=empty_search,DC=example,DC=com was not found."
+                    "error": "The DN CN=empty_search,DC=example,DC=com was not found.",
                 }
             ],
             Output.SUCCESSFUL_ENABLEMENTS: ["CN=Users,DC=example,DC=com"],
-            Output.SUCCESS: True
+            Output.SUCCESS: True,
         }
         self.assertEqual(expected, actual)
 
