@@ -16,4 +16,4 @@ class SearchIncidents(insightconnect_plugin_runtime.Action):
         response = self.connection.ivanti_service_manager_api.search_incident(params.get(Input.KEYWORD)).get("value")
         if not response:
             raise PluginException(cause="No incidents found.", assistance="Please try a different keyword")
-        return {Output.DATA: response.get("value")}
+        return {Output.DATA: response}
