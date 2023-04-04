@@ -7,7 +7,7 @@ from .schema import (
 )
 
 # Custom imports below
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from icon_zoom.util.event import Event
 
 
@@ -152,13 +152,13 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
     @staticmethod
     def _get_datetime_now() -> datetime:
-        now = datetime.now()
+        now = datetime.now(timezone.utc)
 
         return now
 
     @staticmethod
     def _get_datetime_last_24_hours() -> datetime:
-        now = datetime.now()
+        now = datetime.now(timezone.utc)
         last_24 = now - timedelta(hours=24)
 
         return last_24

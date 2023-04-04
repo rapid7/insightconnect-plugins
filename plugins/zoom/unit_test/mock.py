@@ -28,13 +28,18 @@ STUB_CREATE_USER = {
     Input.LAST_NAME: "LastName",
 }
 
+REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI.refresh_oauth_token"
+
 
 class Util:
     @staticmethod
-    def default_connector(action: Action) -> Action:
+    @mock.patch(REFRESH_OAUTH_TOKEN_PATH)
+    def default_connector(action: Action, mock_refresh_call) -> Action:
+        mock_refresh_call.return_value = None
         default_connection = Connection()
         default_connection.logger = logging.getLogger("connection logger")
         default_connection.connect(STUB_CONNECTION)
+        default_connection.zoom_api.oauth_token = STUB_OAUTH_TOKEN
         action.connection = default_connection
         action.logger = logging.getLogger("action logger")
         return action
