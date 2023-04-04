@@ -184,6 +184,7 @@ class ActiveDirectoryLdapAPI:
                 successes.append(dn)
             except PluginException as exception:
                 failures.append({"dn": dn, "error": exception.cause})
+                self.logger.error(f"Error: Failed to modify user {dn}")
         return {"successes": successes, "failures": failures}
 
 
