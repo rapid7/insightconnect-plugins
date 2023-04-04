@@ -17,7 +17,6 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 
 @patch("requests.Session.request", side_effect=mock_request)
 class TestCreateIncident(TestCase):
-    @classmethod
     def setUp(self) -> None:
         self.action = Util.default_connector(CreateIncident())
         self.connection = self.action.connection
@@ -47,7 +46,7 @@ class TestCreateIncident(TestCase):
             ["no_identifier", "No employees found."]
         ]
     )
-    def test_create_incident_error(self, mock_request, customer, cause):
+    def test_create_incident_fail(self, mock_request, customer, cause):
         with self.assertRaises(PluginException) as exception:
             STUB_CREATE_INCIDENT_PARAMETERS["customer"] = customer
             self.action.run(

@@ -1,6 +1,7 @@
 import sys
 import os
 import json
+from parameterized import parameterized
 
 sys.path.append(os.path.abspath("../"))
 
@@ -11,35 +12,24 @@ from icon_ivanti_service_manager.actions.update_incident import UpdateIncident
 from insightconnect_plugin_runtime.exceptions import PluginException
 from unit_test.util import Util
 from unit_test.mock import mock_request
+from unit_test.payload_stubs import STUB_UPDATE_INCIDENT_PARAMETERS, STUB_UPDATE_INCIDENT_PARAMETERS_FAIL
 
 
+@patch("requests.Session.request", side_effect=mock_request)
 class TestUpdateIncident(TestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        cls.params = {
-            "customer": "user@example.com",
-            "assignee": "John Doe",
-            "status": "Logged",
-            "category": "How-To",
-            "cause_code": "Software",
-            "resolution": "This incident was resolved by InsightConnect",
-            "incident_number_good": 12345,
-            "incident_number_bad": 54321,
-        }
-
     def setUp(self) -> None:
         self.action = Util.default_connector(UpdateIncident())
         self.connection = self.action.connection
 
-    @patch("requests.Session.request", side_effect=mock_request)
-    def test_update_incident_success(self, _mock_req):
+    @parameterized.expand(
+        [
+            [12345],
+        ]
+    )
+    def test_update_incident_success(self, _mock_req, incident_number):
+        STUB_UPDATE_INCIDENT_PARAMETERS["incident_number"] = incident_number
         actual = self.action.run(
-            {
-                Input.STATUS: self.params.get("category"),
-                Input.CAUSE_CODE: self.params.get("cause_code"),
-                Input.RESOLUTION: self.params.get("resolution"),
-                Input.INCIDENT_NUMBER: self.params.get("incident_number_good"),
-            }
+            STUB_UPDATE_INCIDENT_PARAMETERS
         )
         expected = json.loads(
             Util.read_file_to_string(
@@ -50,23 +40,20 @@ class TestUpdateIncident(TestCase):
         )
         self.assertEqual(actual, expected)
 
-    @patch("requests.Session.request", side_effect=mock_request)
-    def test_update_incident_fail_no_action_input(self, _mock_req):
+    @parameterized.expand(
+        [
+            [54321, "Something unexpected occurred."],
+            [12345, "At least one action input is required."],
+        ]
+    )
+    def test_update_incident_fail(self, mock_request, incident_number, cause):
+        _input = None
+        if incident_number == 12345:
+            _input = STUB_UPDATE_INCIDENT_PARAMETERS_FAIL
+        else:
+            STUB_UPDATE_INCIDENT_PARAMETERS["incident_number"] = incident_number
+            _input = STUB_UPDATE_INCIDENT_PARAMETERS
         with self.assertRaises(PluginException) as exception:
-            self.action.run({Input.INCIDENT_NUMBER: self.params.get("incident_number")})
-        cause = "At least one action input is required."
+            self.action.run(_input)
         self.assertEqual(exception.exception.cause, cause)
 
-    @patch("requests.Session.request", side_effect=mock_request)
-    def test_update_incident_fail(self, _mock_req):
-        with self.assertRaises(PluginException) as exception:
-            self.action.run(
-                {
-                    Input.STATUS: self.params.get("category"),
-                    Input.CAUSE_CODE: self.params.get("cause_code"),
-                    Input.RESOLUTION: self.params.get("resolution"),
-                    Input.INCIDENT_NUMBER: self.params.get("incident_number_bad"),
-                }
-            )
-        cause = "Something unexpected occurred."
-        self.assertEqual(exception.exception.cause, cause)
