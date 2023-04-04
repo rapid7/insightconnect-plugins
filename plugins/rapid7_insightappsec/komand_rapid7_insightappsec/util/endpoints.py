@@ -58,3 +58,56 @@ class Scans:
         :return: pre-populated ias/v1/scans/{scan_id}/platform-events/
         """
         return f"{console_url}ias/v1/scans/{scan_id}/platform-events/"
+
+
+class Vulnerabilities:
+    @staticmethod
+    def vulnerabilities(console_url: str):
+        """
+        URI for vulnerabilities operations
+        :param console_url: URL to the InsightAppSec console
+        :return: pre-populated ias/v1/vulnerabilities/
+        """
+        return f"{console_url}ias/v1/vulnerabilities/"
+
+    @staticmethod
+    def vulnerability(console_url: str, vulnerability_id: str):
+        """
+        URI for vulnerability operations
+        :param console_url: URL to the InsightAppSec console
+        :param vulnerability_id: The unique identifier of the vulnerability
+        :return: pre-populated ias/v1/vulnerability/
+        """
+        return f"{console_url}ias/v1/vulnerabilities/{vulnerability_id}"
+
+    @staticmethod
+    def vulnerability_discovery(console_url: str, vulnerability_id: str, vulnerability_discovery_id: str):
+        """
+        URI for vulnerability operations
+        :param console_url: URL to the InsightAppSec console
+        :param vulnerability_id: The unique identifier of the vulnerability
+        :param vulnerability_discovery_id: The unique identifier of the vulnerability discovery
+        :return: pre-populated ias/v1/vulnerabilities/{vulnerability_id}/discoveries/{vulnerability_discovery_id}
+        """
+        return f"{console_url}ias/v1/vulnerabilities/{vulnerability_id}/discoveries/{vulnerability_discovery_id}"
+
+    @staticmethod
+    def vulnerability_discoveries(console_url: str, vulnerability_id: str):
+        """
+        URI for vulnerability operations
+        :param console_url: URL to the InsightAppSec console
+        :param vulnerability_id: The unique identifier of the vulnerability
+        :return: pre-populated ias/v1/vulnerabilities/{vulnerability_id}/discoveries
+        """
+        return f"{console_url}ias/v1/vulnerabilities/{vulnerability_id}/discoveries"
+
+
+class Schedules:
+    @staticmethod
+    def schedule(console_url: str):
+        """
+        URI for schedule operations
+        :param console_url: URL to the InsightAppSec console
+        :return: pre-populated ias/v1/schedules/
+        """
+        return f"{console_url}ias/v1/schedules"
