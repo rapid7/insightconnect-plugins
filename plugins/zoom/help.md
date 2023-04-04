@@ -304,7 +304,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.1.0 - Create user: Removed redundant enum option from `type` input | Added unit tests
+* 2.1.0 - Create user: Removed redundant enum option from `type` input | Added unit tests | Improve authentication logic
 * 2.0.0 - Update connection for latest Zoom API authentication | Add Monitor Sign In and Out Activity task
 * 1.0.0 - Initial plugin
 
