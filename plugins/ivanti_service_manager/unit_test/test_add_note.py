@@ -19,9 +19,7 @@ class TestAddNote(TestCase):
         self.connection = self.action.connection
 
     def test_add_note_success(self, _mock_req):
-        actual = self.action.run(
-            STUB_ADD_NOTE_PARAMETERS
-        )
+        actual = self.action.run(STUB_ADD_NOTE_PARAMETERS)
         expected = json.loads(
             Util.read_file_to_string(
                 os.path.join(os.path.dirname(os.path.realpath(__file__)), f"payloads/expected_add_note_good.json.resp")

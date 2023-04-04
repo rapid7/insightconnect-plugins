@@ -7,7 +7,6 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
-from icon_ivanti_service_manager.actions.update_incident.schema import Input
 from icon_ivanti_service_manager.actions.update_incident import UpdateIncident
 from insightconnect_plugin_runtime.exceptions import PluginException
 from unit_test.util import Util
@@ -26,11 +25,9 @@ class TestUpdateIncident(TestCase):
             [12345],
         ]
     )
-    def test_update_incident_success(self, _mock_req, incident_number):
+    def test_update_incident_success(self, mock_request, incident_number):
         STUB_UPDATE_INCIDENT_PARAMETERS["incident_number"] = incident_number
-        actual = self.action.run(
-            STUB_UPDATE_INCIDENT_PARAMETERS
-        )
+        actual = self.action.run(STUB_UPDATE_INCIDENT_PARAMETERS)
         expected = json.loads(
             Util.read_file_to_string(
                 os.path.join(
@@ -56,4 +53,3 @@ class TestUpdateIncident(TestCase):
         with self.assertRaises(PluginException) as exception:
             self.action.run(_input)
         self.assertEqual(exception.exception.cause, cause)
-

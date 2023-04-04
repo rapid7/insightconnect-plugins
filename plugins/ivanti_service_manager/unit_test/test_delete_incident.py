@@ -19,11 +19,7 @@ class TestDeleteIncident(TestCase):
         self.action = Util.default_connector(DeleteIncident())
         self.connection = self.action.connection
 
-    @parameterized.expand(
-        [
-            [12345]
-        ]
-    )
+    @parameterized.expand([[12345]])
     def test_delete_incident_success(self, mock_request, incident_number):
         STUB_DELETE_INCIDENT_PARAMETERS["incident_number"] = incident_number
         actual = self.action.run(STUB_DELETE_INCIDENT_PARAMETERS)

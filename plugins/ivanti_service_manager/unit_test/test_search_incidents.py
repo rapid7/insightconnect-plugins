@@ -24,7 +24,7 @@ class TestSearchIncidents(TestCase):
             ["text"],
         ]
     )
-    def test_search_incidents(self, _mock_req, keyword):
+    def test_search_incidents(self, mock_request, keyword):
         STUB_SEARCH_INCIDENTS_PARAMETERS["keyword"] = keyword
         actual = self.action.run(STUB_SEARCH_INCIDENTS_PARAMETERS)
         expected = {"data": "this is good"}
@@ -35,7 +35,7 @@ class TestSearchIncidents(TestCase):
             ["bad text", "No incidents found."],
         ]
     )
-    def test_search_incidents_fail(self, _mock_req, keyword, cause):
+    def test_search_incidents_fail(self, mock_request, keyword, cause):
         with self.assertRaises(PluginException) as exception:
             STUB_SEARCH_INCIDENTS_PARAMETERS["keyword"] = keyword
             self.action.run(STUB_SEARCH_INCIDENTS_PARAMETERS)

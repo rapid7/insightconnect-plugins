@@ -27,9 +27,7 @@ class TestCreateServiceRequest(TestCase):
     )
     def test_create_service_request_success(self, mock_request, service_request_template):
         STUB_CREATE_SERVICE_REQUEST_PARAMETERS["service_request_template"] = service_request_template
-        actual = self.action.run(
-            STUB_CREATE_SERVICE_REQUEST_PARAMETERS
-        )
+        actual = self.action.run(STUB_CREATE_SERVICE_REQUEST_PARAMETERS)
         expected = json.loads(
             Util.read_file_to_string(
                 os.path.join(
@@ -42,14 +40,11 @@ class TestCreateServiceRequest(TestCase):
     @parameterized.expand(
         [
             ["identifier_not_unique", "Multiple service request templates found."],
-            ["no_identifier","No service request templates found."],
+            ["no_identifier", "No service request templates found."],
         ]
     )
     def test_create_service_request_fail(self, mock_request, service_request_template, cause):
         STUB_CREATE_SERVICE_REQUEST_PARAMETERS["service_request_template"] = service_request_template
         with self.assertRaises(PluginException) as exception:
-            self.action.run(
-                STUB_CREATE_SERVICE_REQUEST_PARAMETERS
-            )
+            self.action.run(STUB_CREATE_SERVICE_REQUEST_PARAMETERS)
             self.assertEqual(exception.exception.cause, cause)
-

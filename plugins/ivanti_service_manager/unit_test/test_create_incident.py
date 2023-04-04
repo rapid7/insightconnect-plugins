@@ -28,9 +28,7 @@ class TestCreateIncident(TestCase):
     )
     def test_create_incident_success(self, mock_request, customer):
         STUB_CREATE_INCIDENT_PARAMETERS["customer"] = customer
-        actual = self.action.run(
-            STUB_CREATE_INCIDENT_PARAMETERS
-        )
+        actual = self.action.run(STUB_CREATE_INCIDENT_PARAMETERS)
         expected = json.loads(
             Util.read_file_to_string(
                 os.path.join(
@@ -41,15 +39,10 @@ class TestCreateIncident(TestCase):
         self.assertEqual(actual, expected)
 
     @parameterized.expand(
-        [
-            ["identifier_not_unique", "Multiple employees found."],
-            ["no_identifier", "No employees found."]
-        ]
+        [["identifier_not_unique", "Multiple employees found."], ["no_identifier", "No employees found."]]
     )
     def test_create_incident_fail(self, mock_request, customer, cause):
         with self.assertRaises(PluginException) as exception:
             STUB_CREATE_INCIDENT_PARAMETERS["customer"] = customer
-            self.action.run(
-                STUB_CREATE_INCIDENT_PARAMETERS
-            )
+            self.action.run(STUB_CREATE_INCIDENT_PARAMETERS)
         self.assertEqual(exception.exception.cause, cause)
