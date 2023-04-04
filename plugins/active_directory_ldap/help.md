@@ -431,7 +431,7 @@ This action is used to enable accounts.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|distinguished_names|[]string|None|True|The distinguished names of the user to enable|None|["CN=user,OU=domain_users,DC=example,DC=com"]|
+|distinguished_names|[]string|None|True|The distinguished names of the users to enable|None|["CN=user,OU=domain_users,DC=example,DC=com"]|
 
 Example input:
 
@@ -445,7 +445,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|boolean|False|Operation status|
+|success|boolean|False|Operation status (True will be returned if at least one user is enabled)|
 |successful_enablements|[]string|False|List of successfully enabled users|
 |unsuccessful_enablements|[]modified_user_error|False|List of unsuccessfully enabled users|
 
@@ -580,7 +580,7 @@ This action is used to disable accounts.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|distinguished_names|[]string|None|True|The distinguished names of the user to enable|None|["CN=user,OU=domain_users,DC=example,DC=com"]|
+|distinguished_names|[]string|None|True|The distinguished names of the users to enable|None|["CN=user,OU=domain_users,DC=example,DC=com"]|
 
 Example input:
 
@@ -594,7 +594,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|boolean|False|Operation status|
+|success|boolean|False|Operation status (True will be returned if at least one user is enabled)|
 |successful_disablements|[]string|False|List of successfully disabled users|
 |unsuccessful_disablements|[]modified_user_error|False|List of unsuccessfully disabled users|
 dis
