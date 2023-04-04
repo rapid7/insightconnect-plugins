@@ -6,17 +6,22 @@ from unittest.mock import patch
 from icon_zoom.util.event import Event
 from icon_zoom.tasks.monitor_sign_in_out_activity.task import MonitorSignInOutActivity
 from icon_zoom.connection.connection import Connection
-from unit_test.mock import STUB_CONNECTION
+from unit_test.mock import STUB_CONNECTION, STUB_OAUTH_TOKEN
 
+REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI.refresh_oauth_token"
 GET_USER_ACTIVITY_EVENTS_PATH = "icon_zoom.util.api.ZoomAPI.get_user_activity_events"
 GET_DATETIME_NOW_PATH = "icon_zoom.tasks.monitor_sign_in_out_activity.task.MonitorSignInOutActivity._get_datetime_now"
 
 
 class TestGetUserActivityEvents(unittest.TestCase):
-    def setUp(self) -> None:
+
+    @patch(REFRESH_OAUTH_TOKEN_PATH)
+    def setUp(self, mock_refresh_call) -> None:
+        mock_refresh_call.return_value = None
         self.connection = Connection()
         self.connection.logger = logging.getLogger("connection logger")
         self.connection.connect(STUB_CONNECTION)
+        self.connection.zoom_api.oauth_token = STUB_OAUTH_TOKEN
 
         self.action = MonitorSignInOutActivity()
         self.action.connection = self.connection
