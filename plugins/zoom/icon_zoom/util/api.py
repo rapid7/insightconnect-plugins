@@ -38,9 +38,10 @@ class ZoomAPI:
         self.jwt_token = jwt_token
         self.logger = logger
 
+        self.oauth_token: Optional[str] = None
+
         # JWT is -not- being used, so get an OAuth token
         if not jwt_token:
-            self.oauth_token: Optional[str] = None
             self._refresh_oauth_token()
 
     def get_user(self, user_id: str) -> Optional[dict]:

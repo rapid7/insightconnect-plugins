@@ -19,9 +19,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
         client_secret = params.get(Input.CLIENT_SECRET, {}).get(secret_key)
         jwt_token = params.get(Input.JWT_TOKEN, {}).get(secret_key)
 
-        if jwt_token is not None:
+        if jwt_token:
+            self.logger.info("JWT token provided, connecting to Zoom via JWT")
             self.zoom_api = ZoomAPI(logger=self.logger, jwt_token=jwt_token)
-        elif (account_id is not None) and (client_id is not None) and (client_secret is not None):
+        elif account_id and client_id and client_secret:
+            self.logger.info("OAuth credentials provided, connecting to Zoom via OAuth")
             self.zoom_api = ZoomAPI(
                 logger=self.logger, account_id=account_id, client_id=client_id, client_secret=client_secret,
             )
