@@ -12,7 +12,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.zoom_api = None
 
     def connect(self, params):
-        secret_key = "secretKey"
+        secret_key = "secretKey"  # nosec: B105
 
         account_id = params.get(Input.ACCOUNT_ID, {}).get(secret_key)
         client_id = params.get(Input.CLIENT_ID, {}).get(secret_key)
