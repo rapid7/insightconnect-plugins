@@ -78,6 +78,7 @@ class ZoomAPI:
             else:
                 return events
 
+    # noqa: MC0001
     def _refresh_oauth_token(self):
         """
         Retrieves a new server-to-server OAuth token from Zoom
