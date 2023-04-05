@@ -24,12 +24,14 @@ class BearerAuth(AuthBase):
 
 
 class ZoomAPI:
-    def __init__(self,
-                 logger: Logger,
-                 account_id: Optional[str] = None,  # For OAuth only
-                 client_id: Optional[str] = None,  # For OAuth only
-                 client_secret: Optional[str] = None,  # For OAuth only
-                 jwt_token: Optional[str] = None):  # For JWT auth only
+    def __init__(
+        self,
+        logger: Logger,
+        account_id: Optional[str] = None,  # For OAuth only
+        client_id: Optional[str] = None,  # For OAuth only
+        client_secret: Optional[str] = None,  # For OAuth only
+        jwt_token: Optional[str] = None,
+    ):  # For JWT auth only
         self.api_url = "https://api.zoom.us/v2"
         self.oauth_url = "https://zoom.us/oauth/token"
         self.account_id = account_id
@@ -193,10 +195,12 @@ class ZoomAPI:
                 self._refresh_oauth_token()
                 return self._call_api(**original_call_args)
             else:
-                raise PluginException(cause="The JWT token provided in the plugin connection configuration is either "
-                                            "invalid or expired.",
-                                      assistance="Please update the plugin connection configuration with a valid or "
-                                                 "updated JWT token.")
+                raise PluginException(
+                    cause="The JWT token provided in the plugin connection configuration is either "
+                    "invalid or expired.",
+                    assistance="Please update the plugin connection configuration with a valid or "
+                    "updated JWT token.",
+                )
 
         if response.status_code == 404:
             if allow_404:
