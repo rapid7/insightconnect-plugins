@@ -83,11 +83,15 @@ class ZoomAPI:
             codes = {
                 400: PluginException(preset=PluginException.Preset.BAD_REQUEST),
                 401: PluginException(preset=PluginException.Preset.UNAUTHORIZED),
-                403: PluginException(cause="Configured credentials do not have permission for this API endpoint.",
-                                     assistance="Please ensure credentials have required permissions."),
+                403: PluginException(
+                    cause="Configured credentials do not have permission for this API endpoint.",
+                    assistance="Please ensure credentials have required permissions.",
+                ),
                 429: self._handle_rate_limit_error(response),
-                4700: PluginException(cause="Configured credentials do not have permission for this API endpoint.",
-                                      assistance="Please ensure credentials have required permissions."),
+                4700: PluginException(
+                    cause="Configured credentials do not have permission for this API endpoint.",
+                    assistance="Please ensure credentials have required permissions.",
+                ),
             }
 
             self.logger.info(f"Got status code {response.status_code} from OAuth token refresh")
