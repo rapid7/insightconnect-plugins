@@ -24,16 +24,24 @@ class BearerAuth(AuthBase):
 
 
 class ZoomAPI:
-    def __init__(self, account_id: str, client_id: str, client_secret: str, logger: Logger):
+    def __init__(self,
+                 logger: Logger,
+                 account_id: Optional[str] = None,  # For OAuth only
+                 client_id: Optional[str] = None,  # For OAuth only
+                 client_secret: Optional[str] = None,  # For OAuth only
+                 jwt_token: Optional[str] = None):  # For JWT auth only
         self.api_url = "https://api.zoom.us/v2"
         self.oauth_url = "https://zoom.us/oauth/token"
         self.account_id = account_id
         self.client_id = client_id
         self.client_secret = client_secret
+        self.jwt_token = jwt_token
         self.logger = logger
 
-        self.oauth_token: Optional[str] = None
-        self._refresh_oauth_token()
+        # JWT is -not- being used, so get an OAuth token
+        if not jwt_token:
+            self.oauth_token: Optional[str] = None
+            self._refresh_oauth_token()
 
     def get_user(self, user_id: str) -> Optional[dict]:
         return self._call_api("GET", f"{self.api_url}/users/{user_id}")
@@ -136,7 +144,11 @@ class ZoomAPI:
         json_data: dict = None,
         allow_404: bool = False,
     ) -> Optional[dict]:  # noqa: MC0001
-        auth = BearerAuth(access_token=self.oauth_token)
+        # Determine which type of authentication mechanism to use
+        if self.oauth_token:
+            auth = BearerAuth(access_token=self.oauth_token)
+        else:
+            auth = BearerAuth(access_token=self.jwt_token)
 
         try:
             self.logger.info(f"Calling {method} {url}")
@@ -158,10 +170,10 @@ class ZoomAPI:
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
         except json.decoder.JSONDecodeError as error:
-            self.logger.info(f"Invalid json: {error}")
+            self.logger.info(f"Invalid JSON: {error}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)
         except requests.exceptions.HTTPError as error:
-            self.logger.info(f"Request to f{url} failed: {error}")
+            self.logger.info(f"Request to {url} failed: {error}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
     def _handle_response(self, response: Response, allow_404: bool, original_call_args: dict):
@@ -175,9 +187,15 @@ class ZoomAPI:
             raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.json())
 
         if response.status_code == 401:
-            self.logger.info(f"Received HTTP {response.status_code}, re-authenticating to Zoom...")
-            self._refresh_oauth_token()
-            return self._call_api(**original_call_args)
+            if self.oauth_token:
+                self.logger.info(f"Received HTTP {response.status_code}, re-authenticating to Zoom...")
+                self._refresh_oauth_token()
+                return self._call_api(**original_call_args)
+            else:
+                raise PluginException(cause="The JWT token provided in the plugin connection configuration is either "
+                                            "invalid or expired.",
+                                      assistance="Please update the plugin connection configuration with a valid or "
+                                                 "updated JWT token.")
 
         if response.status_code == 404:
             if allow_404:

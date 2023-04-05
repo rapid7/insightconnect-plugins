@@ -15,9 +15,12 @@ Business, or Enterprise plan.
 # Requirements
 
 * Must have Zoom Pro, Business, or Enterprise plan to support REST API
-* Requires account ID as well as client ID and secret from a Server-to-Server OAuth app in the Zoom Marketplace
-* Server-to-Server OAuth app has the `report:read:admin` scope enabled
-
+* API credentials for either of the following Zoom API authentication types: 
+    * For OAuth 2.0:
+      * Requires account ID as well as client ID and secret from a Server-to-Server OAuth app in the Zoom Marketplace.
+      * Server-to-Server OAuth app has the `report:read:admin` scope enabled
+    * For JWT, requires a JWT token from a JWT app in the Zoom Marketplace - it is recommended that the generated JWT token has a long expiration date to prevent having to update the token frequently.
+    
 # Supported Product Versions
 
 * Zoom API v2.10
