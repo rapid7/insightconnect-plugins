@@ -35,28 +35,28 @@ class ZoomAPI:
         self.oauth_token: Optional[str] = None
         self.refresh_oauth_token()
 
-    def refresh_oauth_token(self) -> None:
-        """
-        Retrieves a new server-to-server OAuth token from Zoom
-        :return: None
-        """
-
-        params = {"grant_type": "account_credentials", "account_id": self.account_id}
-
-        auth = HTTPBasicAuth(self.client_id, self.client_secret)
-
-        self.logger.info("Requesting new OAuth token from Zoom...")
-        response = self._call_api(method="POST", url=self.oauth_url, params=params, auth=auth)
-        try:
-            access_token = response["access_token"]
-        except KeyError:
-            raise PluginException(
-                cause=f"Unable to get access token: {response.get('reason', '')}.",
-                assistance="Ensure your connection configuration is using correct credentials.",
-            )
-
-        self.logger.info("Request for new OAuth token was successful!")
-        self.oauth_token = access_token
+    # def refresh_oauth_token(self) -> None:
+    #     """
+    #     Retrieves a new server-to-server OAuth token from Zoom
+    #     :return: None
+    #     """
+    #
+    #     params = {"grant_type": "account_credentials", "account_id": self.account_id}
+    #
+    #     auth = HTTPBasicAuth(self.client_id, self.client_secret)
+    #
+    #     self.logger.info("Requesting new OAuth token from Zoom...")
+    #     response = self._call_api(method="POST", url=self.oauth_url, params=params, auth=auth)
+    #     try:
+    #         access_token = response["access_token"]
+    #     except KeyError:
+    #         raise PluginException(
+    #             cause=f"Unable to get access token: {response.get('reason', '')}.",
+    #             assistance="Ensure your connection configuration is using correct credentials.",
+    #         )
+    #
+    #     self.logger.info("Request for new OAuth token was successful!")
+    #     self.oauth_token = access_token
 
     def get_user(self, user_id: str) -> Optional[dict]:
         return self._call_api("GET", f"{self.api_url}/users/{user_id}")
@@ -90,6 +90,58 @@ class ZoomAPI:
             else:
                 return events
 
+    def _refresh_oauth_token(self):
+        """
+        Retrieves a new server-to-server OAuth token from Zoom
+        :return: None
+        """
+        params = {"grant_type": "account_credentials", "account_id": self.account_id}
+        auth = HTTPBasicAuth(self.client_id, self.client_secret)
+
+        try:
+            self.logger.info("Calling Zoom API to refresh OAuth token...")
+            response = requests.post("https://zoom.us/oauth/token", params=params, auth=auth)
+
+            # Handle known status codes
+            codes = {
+                400: PluginException(preset=PluginException.Preset.BAD_REQUEST),
+                401: PluginException(preset=PluginException.Preset.UNAUTHORIZED),
+                403: PluginException(cause="Configured credentials do not have permission for this API endpoint.",
+                                     assistance="Please ensure credentials have required permissions."),
+                429: self._handle_rate_limit_error(response),
+                4700: PluginException(cause="Configured credentials do not have permission for this API endpoint.",
+                                      assistance="Please ensure credentials have required permissions."),
+            }
+
+            self.logger.info(f"Got status code {response.status_code} from OAuth token refresh")
+            if response.status_code in codes.keys():
+                raise codes[response.status_code]
+
+            # Handle unknown status codes
+            elif response.status_code in range(0, 199) or response.status_code >= 300:
+                raise PluginException(preset=PluginException.Preset.UNKNOWN)
+
+        except requests.exceptions.HTTPError as error:
+            self.logger.info(f"Request to get OAuth token failed: {error}")
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
+
+        try:
+            response_data = response.json()
+        except json.decoder.JSONDecodeError as error:
+            self.logger.info(f"Invalid JSON response was received while refreshing OAuth token: {error}")
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON)
+
+        try:
+            access_token = response_data["access_token"]
+        except KeyError:
+            raise PluginException(
+                cause=f"Unable to get access token: {response_data.get('reason', '')}.",
+                assistance="Ensure your connection configuration is using correct credentials.",
+            )
+
+        self.logger.info("Request for new OAuth token was successful!")
+        self.oauth_token = access_token
+
     def _call_api(
         self,
         method: str,
@@ -97,12 +149,8 @@ class ZoomAPI:
         params: dict = None,
         json_data: dict = None,
         allow_404: bool = False,
-        auth: AuthBase = None,
     ) -> Optional[dict]:  # noqa: MC0001
-        # If HTTPBasicAuth isn't provided (for calls to get OAuth token), then
-        # use BearerAuth since we have a token already
-        if not auth:
-            auth = BearerAuth(access_token=self.oauth_token)
+        auth = BearerAuth(access_token=self.oauth_token)
 
         try:
             self.logger.info(f"Calling {method} {url}")
@@ -119,7 +167,6 @@ class ZoomAPI:
                         "params": params,
                         "json_data": json_data,
                         "allow_404": allow_404,
-                        "auth": auth,
                     },
                 )
 
@@ -143,7 +190,7 @@ class ZoomAPI:
 
         if response.status_code == 401:
             self.logger.info(f"Received HTTP {response.status_code}, re-authenticating to Zoom...")
-            self.refresh_oauth_token()
+            self._refresh_oauth_token()
             return self._call_api(**original_call_args)
 
         if response.status_code == 404:
@@ -158,7 +205,9 @@ class ZoomAPI:
             )
 
         if response.status_code == 429:
-            self._handle_rate_limit_error(response=response)
+            exception = self._handle_rate_limit_error(response=response)
+            raise exception
+
         # Success; no content
         if response.status_code == 204:
             return None
@@ -167,7 +216,7 @@ class ZoomAPI:
             return response.json()
 
     @staticmethod
-    def _handle_rate_limit_error(response: Response):
+    def _handle_rate_limit_error(response: Response) -> PluginException:
         rate_limit_type = response.headers.get("X-RateLimit-Type", "")
         rate_limit_limit = response.headers.get("X-RateLimit-Limit")
         rate_limit_remaining = response.headers.get("X-RateLimit-Remaining")
