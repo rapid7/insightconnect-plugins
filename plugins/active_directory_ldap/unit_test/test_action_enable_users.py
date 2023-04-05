@@ -11,33 +11,40 @@ from unit_test.common import default_connector
 class TestActionEnableUsers(TestCase):
     @parameterized.expand(
         [
-            ({Input.DISTINGUISHED_NAMES: ["CN=empty_search,DC=example,DC=com"]}, {
-                Output.UNSUCCESSFUL_ENABLEMENTS: [
-                    {
-                        "dn": "CN=empty_search,DC=example,DC=com",
-                        "error": "The DN CN=empty_search,DC=example,DC=com was not found.",
-                    }
-                ],
-                Output.SUCCESSFUL_ENABLEMENTS: [],
-                Output.SUCCESS: False,
-            }),
-            ({Input.DISTINGUISHED_NAMES: ["CN=empty_search,DC=example,DC=com", "CN=Users,DC=example," "DC=com"]},
-             {
-                 Output.UNSUCCESSFUL_ENABLEMENTS: [
-                     {
-                         "dn": "CN=empty_search,DC=example,DC=com",
-                         "error": "The DN CN=empty_search,DC=example,DC=com was not found.",
-                     }
-                 ],
-                 Output.SUCCESSFUL_ENABLEMENTS: ["CN=Users,DC=example,DC=com"],
-                 Output.SUCCESS: True,
-             }
-             ),
-            ({Input.DISTINGUISHED_NAMES: ["CN=Users,DC=example,DC=com"]}, {
-                Output.SUCCESS: True,
-                Output.SUCCESSFUL_ENABLEMENTS: ["CN=Users,DC=example,DC=com"],
-                Output.UNSUCCESSFUL_ENABLEMENTS: [],
-            }),
+            (
+                {Input.DISTINGUISHED_NAMES: ["CN=empty_search,DC=example,DC=com"]},
+                {
+                    Output.UNSUCCESSFUL_ENABLEMENTS: [
+                        {
+                            "dn": "CN=empty_search,DC=example,DC=com",
+                            "error": "The DN CN=empty_search,DC=example,DC=com was not found.",
+                        }
+                    ],
+                    Output.SUCCESSFUL_ENABLEMENTS: [],
+                    Output.SUCCESS: False,
+                },
+            ),
+            (
+                {Input.DISTINGUISHED_NAMES: ["CN=empty_search,DC=example,DC=com", "CN=Users,DC=example," "DC=com"]},
+                {
+                    Output.UNSUCCESSFUL_ENABLEMENTS: [
+                        {
+                            "dn": "CN=empty_search,DC=example,DC=com",
+                            "error": "The DN CN=empty_search,DC=example,DC=com was not found.",
+                        }
+                    ],
+                    Output.SUCCESSFUL_ENABLEMENTS: ["CN=Users,DC=example,DC=com"],
+                    Output.SUCCESS: True,
+                },
+            ),
+            (
+                {Input.DISTINGUISHED_NAMES: ["CN=Users,DC=example,DC=com"]},
+                {
+                    Output.SUCCESS: True,
+                    Output.SUCCESSFUL_ENABLEMENTS: ["CN=Users,DC=example,DC=com"],
+                    Output.UNSUCCESSFUL_ENABLEMENTS: [],
+                },
+            ),
         ]
     )
     @mock.patch("ldap3.Server", mock.MagicMock(return_value=MockServer))

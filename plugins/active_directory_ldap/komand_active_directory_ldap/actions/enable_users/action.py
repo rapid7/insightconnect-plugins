@@ -19,7 +19,7 @@ class EnableUsers(insightconnect_plugin_runtime.Action):
             )
 
         enabled_users = self.connection.client.manage_users(params.get(Input.DISTINGUISHED_NAMES), True)
-        success = True if enabled_users.get("successes") else False
+        success = bool(enabled_users.get("successes"))
 
         return {
             Output.SUCCESS: success,
