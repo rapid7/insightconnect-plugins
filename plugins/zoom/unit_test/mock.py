@@ -28,7 +28,7 @@ STUB_CREATE_USER = {
     Input.LAST_NAME: "LastName",
 }
 
-REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI.refresh_oauth_token"
+REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI._refresh_oauth_token"
 
 
 class Util:

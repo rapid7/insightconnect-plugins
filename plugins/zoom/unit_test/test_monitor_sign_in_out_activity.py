@@ -8,7 +8,7 @@ from icon_zoom.tasks.monitor_sign_in_out_activity.task import MonitorSignInOutAc
 from icon_zoom.connection.connection import Connection
 from unit_test.mock import STUB_CONNECTION, STUB_OAUTH_TOKEN
 
-REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI.refresh_oauth_token"
+REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI._refresh_oauth_token"
 GET_USER_ACTIVITY_EVENTS_PATH = "icon_zoom.util.api.ZoomAPI.get_user_activity_events"
 GET_DATETIME_NOW_PATH = "icon_zoom.tasks.monitor_sign_in_out_activity.task.MonitorSignInOutActivity._get_datetime_now"
 

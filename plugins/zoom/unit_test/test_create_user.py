@@ -47,7 +47,7 @@ class TestCreateUser(TestCase):
             (mock_request_404, PluginException.causes[PluginException.Preset.NOT_FOUND]),
         ],
     )
-    @mock.patch("icon_zoom.util.api.ZoomAPI.refresh_oauth_token", return_value=None)
+    @mock.patch("icon_zoom.util.api.ZoomAPI._refresh_oauth_token", return_value=None)
     def test_not_ok(self, mock_request, exception, mock_refresh):
         mocked_request(mock_request)
         with self.assertRaises(PluginException) as context:
