@@ -12,16 +12,14 @@ class EnableUsers(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        if len(params.get(Input.DISTINGUISHED_NAMES)) == 0:
+        if not params.get(Input.DISTINGUISHED_NAMES):
             raise PluginException(
                 cause="Distinguished Names must contain at least one entry",
                 assistance="Please enter one or more Distinguished Names",
             )
 
-        success = True
         enabled_users = self.connection.client.manage_users(params.get(Input.DISTINGUISHED_NAMES), True)
-        if len(enabled_users.get("successes")) == 0:
-            success = False
+        success = True if enabled_users.get("successes") else False
 
         return {
             Output.SUCCESS: success,
