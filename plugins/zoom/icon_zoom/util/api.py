@@ -33,30 +33,7 @@ class ZoomAPI:
         self.logger = logger
 
         self.oauth_token: Optional[str] = None
-        self.refresh_oauth_token()
-
-    # def refresh_oauth_token(self) -> None:
-    #     """
-    #     Retrieves a new server-to-server OAuth token from Zoom
-    #     :return: None
-    #     """
-    #
-    #     params = {"grant_type": "account_credentials", "account_id": self.account_id}
-    #
-    #     auth = HTTPBasicAuth(self.client_id, self.client_secret)
-    #
-    #     self.logger.info("Requesting new OAuth token from Zoom...")
-    #     response = self._call_api(method="POST", url=self.oauth_url, params=params, auth=auth)
-    #     try:
-    #         access_token = response["access_token"]
-    #     except KeyError:
-    #         raise PluginException(
-    #             cause=f"Unable to get access token: {response.get('reason', '')}.",
-    #             assistance="Ensure your connection configuration is using correct credentials.",
-    #         )
-    #
-    #     self.logger.info("Request for new OAuth token was successful!")
-    #     self.oauth_token = access_token
+        self._refresh_oauth_token()
 
     def get_user(self, user_id: str) -> Optional[dict]:
         return self._call_api("GET", f"{self.api_url}/users/{user_id}")
