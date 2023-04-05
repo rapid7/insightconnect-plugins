@@ -7,6 +7,7 @@ class Input:
     ACCOUNT_ID = "account_id"
     CLIENT_ID = "client_id"
     CLIENT_SECRET = "client_secret"
+    JWT_TOKEN = "jwt_token"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -18,27 +19,28 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "account_id": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Account ID",
-      "description": "Zoom app account ID",
+      "description": "Zoom app account ID, required for OAuth authentication",
       "order": 3
     },
     "client_id": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Client ID",
-      "description": "Zoom app client ID",
+      "description": "Zoom app client ID, required for OAuth authentication",
       "order": 1
     },
     "client_secret": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Client Secret",
-      "description": "Zoom app client secret",
+      "description": "Zoom app client secret, required for OAuth authentication",
       "order": 2
+    },
+    "jwt_token": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "JWT Token",
+      "description": "Zoom JWT token",
+      "order": 4
     }
   },
-  "required": [
-    "account_id",
-    "client_id",
-    "client_secret"
-  ],
   "definitions": {
     "credential_secret_key": {
       "id": "credential_secret_key",
