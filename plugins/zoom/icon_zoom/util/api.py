@@ -198,10 +198,8 @@ class ZoomAPI:
                 return self._call_api(**original_call_args)
 
             raise PluginException(
-                cause="The JWT token provided in the plugin connection configuration is either "
-                "invalid or expired.",
-                assistance="Please update the plugin connection configuration with a valid or "
-                "updated JWT token.",
+                cause="The JWT token provided in the plugin connection configuration is either " "invalid or expired.",
+                assistance="Please update the plugin connection configuration with a valid or " "updated JWT token.",
             )
 
         if response.status_code == 404:
