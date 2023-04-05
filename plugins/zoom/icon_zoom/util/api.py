@@ -204,15 +204,15 @@ class ZoomAPI:
         rate_limit_retry_after = response.headers.get("Retry-After")
 
         if rate_limit_type == "Light":
-            raise PluginException(
+            return PluginException(
                 cause="Account is rate-limited by the maximum per-second limit for this API.",
                 assistance="Try again later.",
             )
         elif rate_limit_type == "Heavy":
-            raise PluginException(
+            return PluginException(
                 cause=f"Account is rate-limited by the maximum daily limit for this API "
                 f"(limit: {rate_limit_limit} calls per day, {rate_limit_remaining} remaining.)",
                 assistance=f"Try again after {rate_limit_retry_after}.",
             )
         else:
-            raise PluginException(cause="Account is rate-limited by an unknown quota.", assistance="Try again later.")
+            return PluginException(cause="Account is rate-limited by an unknown quota.", assistance="Try again later.")
