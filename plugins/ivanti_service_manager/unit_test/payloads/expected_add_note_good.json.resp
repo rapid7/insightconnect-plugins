@@ -1,0 +1,24 @@
+{
+    "journal_note": {
+        "@odata.context": "https://rapid7.vantosi.com/HEAT/api/odata/$metadata#journal__notess/$entity",
+        "DisplayText": "Test note summary created by InsightConnect This is the body of the note created by InsightConnect",
+        "NotesBody": "This is the body of the note created by InsightConnect",
+        "Source_Valid": "3961856F36F5481DAC36273B68833AEC",
+        "Source": "E-mail",
+        "Category_Valid": "E8F5DACDE7EA411990CE1D0DC7D392F7",
+        "Category": "Customer Notes",
+        "CreatedBy": "user",
+        "CreatedDateTime": "2020-08-21T13:04:12-07:00",
+        "JournalType": "Notes",
+        "LastModBy": "user",
+        "LastModDateTime": "2020-08-21T13:04:13-07:00",
+        "ParentLink_RecID": "304631ACAB8A4EFD8D8E5AA334993426",
+        "RecId": "9F8299197F7C4FCBA0943EC384128237",
+        "Subject": "Test note summary created by InsightConnect",
+        "PublishToWeb": false,
+        "ReadOnly": false,
+        "IsNewRecord": false,
+        "IsUnRead": true,
+        "UnreadTransition": false
+    }
+}

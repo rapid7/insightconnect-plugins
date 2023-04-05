@@ -1,4 +1,5 @@
 import json
+
 import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
@@ -32,10 +33,12 @@ class IvantiServiceManagerAPI:
             assistance=f"No employees found using data provided - {identifier}. Please validate and try again.",
         )
 
-    def get_incident_by_number(self, incident_number: int) -> str:
-        incident = self._call_api(
-            "GET", f"odata/businessobject/incidents?$filter=IncidentNumber eq {incident_number}"
-        ).get("value")
+    def get_incident_by_number(self, incident_number: int) -> dict:
+        incident = clean(
+            self._call_api("GET", f"odata/businessobject/incidents?$filter=IncidentNumber eq {incident_number}").get(
+                "value"
+            )
+        )
 
         if incident:
             return incident[0]
@@ -50,7 +53,7 @@ class IvantiServiceManagerAPI:
 
         if template and len(template) > 1:
             raise PluginException(
-                cause="Multiple employees found.",
+                cause="Multiple service request templates found.",
                 assistance=f"Search for {template} returned more than 1 result. Please provide a unique identifier.",
             )
 
@@ -73,6 +76,12 @@ class IvantiServiceManagerAPI:
 
     def delete_incident(self, incident_number: int) -> dict:
         return self._call_api("DELETE", f"odata/businessobject/incidents('{incident_number}')")
+
+    def search_incident(self, keyword: str) -> dict:
+        return clean(self._call_api("GET", f"odata/businessobject/incidents?$search={keyword}"))
+
+    def get_all_incidents(self) -> dict:
+        return clean(self._call_api("GET", "odata/businessobject/incidents?$orderby=IncidentNumber desc"))
 
     def post_journal_note(self, payload: dict) -> dict:
         return clean(self._call_api("POST", "odata/businessobject/journal__Notess", json_data=payload))
@@ -104,9 +113,9 @@ class IvantiServiceManagerAPI:
                 return response.json()
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
-        except json.decoder.JSONDecodeError as e:
-            self.logger.info(f"Invalid JSON: {e}")
+        except json.decoder.JSONDecodeError as error:
+            self.logger.info(f"Invalid JSON: {error}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=response.text)
-        except requests.exceptions.HTTPError as e:
-            self.logger.info(f"Call to Ivanti Service Manager API failed: {e}")
+        except requests.exceptions.HTTPError as error:
+            self.logger.info(f"Call to Ivanti Service Manager API failed: {error}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
