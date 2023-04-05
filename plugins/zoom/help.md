@@ -20,6 +20,7 @@ Business, or Enterprise plan.
       * Requires account ID as well as client ID and secret from a Server-to-Server OAuth app in the Zoom Marketplace.
       * Server-to-Server OAuth app has the `report:read:admin` scope enabled
     * For JWT, requires a JWT token from a JWT app in the Zoom Marketplace - it is recommended that the generated JWT token has a long expiration date to prevent having to update the token frequently.
+      * Please note that JWT authentication is deprecated and will be removed from the Zoom API in June, 2023. 
     
 # Supported Product Versions
 
@@ -309,6 +310,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.0.0 - Add back JWT authentication in addition to OAuth (please note JWT will be removed from the Zoom API in June 2023) | Improve OAuth logic to help prevent infinite looping
 * 2.1.0 - Create user: Removed redundant enum option from `type` input | Added unit tests | Improve authentication logic
 * 2.0.0 - Update connection for latest Zoom API authentication | Add Monitor Sign In and Out Activity task
 * 1.0.0 - Initial plugin
