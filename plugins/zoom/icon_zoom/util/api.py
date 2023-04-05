@@ -150,7 +150,7 @@ class ZoomAPI:
         allow_404: bool = False,
     ) -> Optional[dict]:  # noqa: MC0001
         # Determine which type of authentication mechanism to use
-        if self.oauth_token:
+        if self.oauth_token or self._is_using_oauth():
             auth = BearerAuth(access_token=self.oauth_token)
         else:
             auth = BearerAuth(access_token=self.jwt_token)
@@ -192,7 +192,7 @@ class ZoomAPI:
             raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.json())
 
         if response.status_code == 401:
-            if self.oauth_token:
+            if self.oauth_token or self._is_using_oauth():
                 self.logger.info(f"Received HTTP {response.status_code}, re-authenticating to Zoom...")
                 self._refresh_oauth_token()
                 return self._call_api(**original_call_args)
@@ -245,3 +245,9 @@ class ZoomAPI:
             )
 
         return PluginException(cause="Account is rate-limited by an unknown quota.", assistance="Try again later.")
+
+    def _is_using_oauth(self) -> bool:
+        if (self.account_id and self.client_id and self.client_secret) or self.oauth_token:
+            return True
+        else:
+            return False

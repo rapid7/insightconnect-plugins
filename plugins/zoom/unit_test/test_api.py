@@ -3,7 +3,7 @@ import unittest
 from unittest import TestCase
 from unittest.mock import patch
 
-from icon_zoom.util.api import ZoomAPI, BearerAuth
+from icon_zoom.util.api import ZoomAPI
 
 
 REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI._refresh_oauth_token"
