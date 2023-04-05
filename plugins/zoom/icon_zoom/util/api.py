@@ -78,8 +78,7 @@ class ZoomAPI:
             else:
                 return events
 
-    # noqa: MC0001
-    def _refresh_oauth_token(self):
+    def _refresh_oauth_token(self) -> None:
         """
         Retrieves a new server-to-server OAuth token from Zoom
         :return: None
@@ -89,32 +88,11 @@ class ZoomAPI:
 
         try:
             self.logger.info("Calling Zoom API to refresh OAuth token...")
-            # Attempt to refresh OAuth token with 2-minute timeout
             response = requests.post("https://zoom.us/oauth/token", params=params, auth=auth, timeout=120)
 
-            # Handle known status codes
-            codes = {
-                400: PluginException(preset=PluginException.Preset.BAD_REQUEST),
-                401: PluginException(preset=PluginException.Preset.UNAUTHORIZED),
-                403: PluginException(
-                    cause="Configured credentials do not have permission for this API endpoint.",
-                    assistance="Please ensure credentials have required permissions.",
-                ),
-                429: self._handle_rate_limit_error(response),
-                4700: PluginException(
-                    cause="Configured credentials do not have permission for this API endpoint.",
-                    assistance="Please ensure credentials have required permissions.",
-                ),
-            }
-
             self.logger.info(f"Got status code {response.status_code} from OAuth token refresh")
-            for key, value in codes.items():
-                if response.status_code == key:
-                    raise value
-
-            # Handle unknown status codes
-            if response.status_code in range(0, 199) or response.status_code >= 300:
-                raise PluginException(preset=PluginException.Preset.UNKNOWN)
+            self._handle_oauth_status_codes(response=response)
+            response_data = response.json()
 
         except requests.exceptions.HTTPError as error:
             self.logger.info(f"Request to get OAuth token failed: {error}")
@@ -124,8 +102,6 @@ class ZoomAPI:
             self.logger.info(f"Request to get OAuth token timed out: {error}")
             raise PluginException(preset=PluginException.Preset.TIMEOUT)
 
-        try:
-            response_data = response.json()
         except json.decoder.JSONDecodeError as error:
             self.logger.info(f"Invalid JSON response was received while refreshing OAuth token: {error}")
             raise PluginException(preset=PluginException.Preset.INVALID_JSON)
@@ -140,6 +116,30 @@ class ZoomAPI:
 
         self.logger.info("Request for new OAuth token was successful!")
         self.oauth_token = access_token
+
+    def _handle_oauth_status_codes(self, response: Response) -> None:
+        # Handle known status codes
+        codes = {
+            400: PluginException(preset=PluginException.Preset.BAD_REQUEST),
+            401: PluginException(preset=PluginException.Preset.UNAUTHORIZED),
+            403: PluginException(
+                cause="Configured credentials do not have permission for this API endpoint.",
+                assistance="Please ensure credentials have required permissions.",
+            ),
+            429: self._handle_rate_limit_error(response),
+            4700: PluginException(
+                cause="Configured credentials do not have permission for this API endpoint.",
+                assistance="Please ensure credentials have required permissions.",
+            ),
+        }
+
+        for key, value in codes.items():
+            if response.status_code == key:
+                raise value
+
+        # Handle unknown status codes
+        if response.status_code in range(0, 199) or response.status_code >= 300:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
     def _call_api(
         self,
