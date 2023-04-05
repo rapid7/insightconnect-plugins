@@ -107,11 +107,12 @@ class ZoomAPI:
             }
 
             self.logger.info(f"Got status code {response.status_code} from OAuth token refresh")
-            if response.status_code in codes.keys():
-                raise codes[response.status_code]
+            for key, value in codes:
+                if response.status_code == key:
+                    raise value
 
             # Handle unknown status codes
-            elif response.status_code in range(0, 199) or response.status_code >= 300:
+            if response.status_code in range(0, 199) or response.status_code >= 300:
                 raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
         except requests.exceptions.HTTPError as error:
