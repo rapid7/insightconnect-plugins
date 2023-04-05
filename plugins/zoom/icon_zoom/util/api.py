@@ -107,7 +107,7 @@ class ZoomAPI:
             }
 
             self.logger.info(f"Got status code {response.status_code} from OAuth token refresh")
-            for key, value in codes:
+            for key, value in codes.items():
                 if response.status_code == key:
                     raise value
 
@@ -195,19 +195,19 @@ class ZoomAPI:
                 self.logger.info(f"Received HTTP {response.status_code}, re-authenticating to Zoom...")
                 self._refresh_oauth_token()
                 return self._call_api(**original_call_args)
-            else:
-                raise PluginException(
-                    cause="The JWT token provided in the plugin connection configuration is either "
-                    "invalid or expired.",
-                    assistance="Please update the plugin connection configuration with a valid or "
-                    "updated JWT token.",
-                )
+
+            raise PluginException(
+                cause="The JWT token provided in the plugin connection configuration is either "
+                "invalid or expired.",
+                assistance="Please update the plugin connection configuration with a valid or "
+                "updated JWT token.",
+            )
 
         if response.status_code == 404:
             if allow_404:
                 return None
-            else:
-                raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.json())
+
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.json())
 
         if response.status_code == 409:
             raise PluginException(
@@ -237,11 +237,12 @@ class ZoomAPI:
                 cause="Account is rate-limited by the maximum per-second limit for this API.",
                 assistance="Try again later.",
             )
-        elif rate_limit_type == "Heavy":
+
+        if rate_limit_type == "Heavy":
             return PluginException(
                 cause=f"Account is rate-limited by the maximum daily limit for this API "
                 f"(limit: {rate_limit_limit} calls per day, {rate_limit_remaining} remaining.)",
                 assistance=f"Try again after {rate_limit_retry_after}.",
             )
-        else:
-            return PluginException(cause="Account is rate-limited by an unknown quota.", assistance="Try again later.")
+
+        return PluginException(cause="Account is rate-limited by an unknown quota.", assistance="Try again later.")
