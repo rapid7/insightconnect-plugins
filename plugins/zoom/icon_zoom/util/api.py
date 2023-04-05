@@ -77,7 +77,8 @@ class ZoomAPI:
 
         try:
             self.logger.info("Calling Zoom API to refresh OAuth token...")
-            response = requests.post("https://zoom.us/oauth/token", params=params, auth=auth)
+            # Attempt to refresh OAuth token with 2-minute timeout
+            response = requests.post("https://zoom.us/oauth/token", params=params, auth=auth, timeout=120)
 
             # Handle known status codes
             codes = {
@@ -105,6 +106,10 @@ class ZoomAPI:
         except requests.exceptions.HTTPError as error:
             self.logger.info(f"Request to get OAuth token failed: {error}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
+
+        except requests.exceptions.Timeout as error:
+            self.logger.info(f"Request to get OAuth token timed out: {error}")
+            raise PluginException(preset=PluginException.Preset.TIMEOUT)
 
         try:
             response_data = response.json()
