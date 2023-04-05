@@ -4,92 +4,28 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Update an existing incident in Ivanti Service Manager"
+    DESCRIPTION = "Get Incident by Incident Number"
 
 
 class Input:
-    ASSIGNEE = "assignee"
-    CATEGORY = "category"
-    CAUSE_CODE = "cause_code"
-    CUSTOMER = "customer"
     INCIDENT_NUMBER = "incident_number"
-    RESOLUTION = "resolution"
-    STATUS = "status"
     
 
 class Output:
     INCIDENT = "incident"
     
 
-class UpdateIncidentInput(insightconnect_plugin_runtime.Input):
+class GetIncidentInput(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
    {
   "type": "object",
   "title": "Variables",
   "properties": {
-    "assignee": {
-      "type": "string",
-      "title": "Assignee",
-      "description": "User name or the email address on the new assignee",
-      "order": 4
-    },
-    "category": {
-      "type": "string",
-      "title": "Category",
-      "description": "Category of the incident",
-      "order": 5
-    },
-    "cause_code": {
-      "type": "string",
-      "title": "Cause Code",
-      "description": "Cause code of the incident (required when setting status to Resolved)",
-      "enum": [
-        "Configuration",
-        "Documentation Request",
-        "Hardware",
-        "Install Request",
-        "Installation",
-        "Linked Problem",
-        "Other",
-        "Reference Request",
-        "Session Reset",
-        "Software",
-        "Training"
-      ],
-      "order": 7
-    },
-    "customer": {
-      "type": "string",
-      "title": "Customer",
-      "description": "Email address of the customer",
-      "order": 3
-    },
     "incident_number": {
       "type": "integer",
       "title": "Incident Number",
-      "description": "Number of the incident to be updated",
+      "description": "Incident Number of Incident to get",
       "order": 1
-    },
-    "resolution": {
-      "type": "string",
-      "title": "Resolution",
-      "description": "Resolution of the incident (required when setting status to Resolved)",
-      "order": 6
-    },
-    "status": {
-      "type": "string",
-      "title": "Status",
-      "description": "Status of the incident",
-      "enum": [
-        "Logged",
-        "Active",
-        "Waiting for Customer",
-        "Waiting for 3rd Party",
-        "Waiting for Resolution",
-        "Resolved",
-        "Closed"
-      ],
-      "order": 2
     }
   },
   "required": [
@@ -102,7 +38,7 @@ class UpdateIncidentInput(insightconnect_plugin_runtime.Input):
         super(self.__class__, self).__init__(self.schema)
 
 
-class UpdateIncidentOutput(insightconnect_plugin_runtime.Output):
+class GetIncidentOutput(insightconnect_plugin_runtime.Output):
     schema = json.loads("""
    {
   "type": "object",
@@ -111,7 +47,7 @@ class UpdateIncidentOutput(insightconnect_plugin_runtime.Output):
     "incident": {
       "$ref": "#/definitions/incident",
       "title": "Incident",
-      "description": "Newly created incident",
+      "description": "Incident requested",
       "order": 1
     }
   },
