@@ -4,7 +4,7 @@ products: [insightconnect]
 name: ivanti_service_manager
 title: Ivanti Service Manager
 description: Ivanti Service Manager is a flexible and complete cloud-optimized, easily scalable and adaptable ITSM solution used for managing and automating ITSM processes
-version: 1.1.0
+version: 1.2.0
 vendor: rapid7
 support: community
 status: []
@@ -152,7 +152,6 @@ types:
       title: Profile Link Category
       description: Profile link category
       type: string
-      required: false
     ProfileLink_RecID:
       title: Profile Link Rec ID
       description: Profile link Rec ID
@@ -343,6 +342,71 @@ types:
       description: Is reported by alternate contact
       type: boolean
       required: false
+    ResolutionEscLink_Category:
+      title: ResolutionEscLink Category
+      description: ResolutionEscLink Category
+      type: string
+      required: false
+    ResolutionEscLink_RecID:
+      title: ResolutionEscLink Rec ID
+      description: ResolutionEscLink Rec ID
+      type: string
+      required: false
+    ResolutionEscLink:
+      title: ResolutionEscLink
+      description: ResolutionEscLink
+      type: string
+      required: false
+    ResponseEscLink_category:
+      title: ResponseEscLink Category
+      description: ResponseEscLink Category
+      type: string
+      required: false
+    ResponseEscLink_RecID:
+      title: ResponseEscLink RecID
+      description: ResponseEscLink RecID
+      type: string
+      required: false
+    ResponseEscLink:
+      title: ResponseEscLink
+      description: ResponseEscLink
+      type: string
+      required: false
+    WaitingEscLink_Category:
+      title: WaitingEscLink Category
+      description: WaitingEscLink Category
+      type: string
+      required: false
+    WaitingEscLink_RecID:
+      title: WaitingEscLink RecID
+      description: WaitingEscLink RecID
+      type: string
+      required: false
+    WaitingEscLink:
+      title: WaitingEscLink
+      description: WaitingEscLink
+      type: string
+      required: false
+    ClosingEscLink_Category:
+      title: ClosingEscLink Category
+      description: ClosingEscLink
+      type: string
+      required: false
+    ClosingEscLink_RecID:
+      title: ClosingEscLink RecID
+      description: ClosingEscLink RecID
+      type: string
+      required: false
+    ClosingEscLink:
+      title: ClosingEscLink
+      description: ClosingEscLink
+      type: string
+      required: false
+    AlternateContactEmail:
+      title: Alternate Contact Email
+      description: Alternate Contact Email
+      type: string
+      required: false
     OrganizationUnitID:
       title: Organization Unit ID
       description: Organization unit ID
@@ -371,6 +435,21 @@ types:
     TeamManagerEmail:
       title: Team Manager Email
       description: Team manager email
+      type: string
+      required: false
+    ProblemLink_Category:
+      title: Problem Link Category
+      description: Problem Link Category
+      type: string
+      required: false
+    ProblemLink_RecID:
+      title: Problem Link RecID
+      description: Problem Link RecID
+      type: string
+      required: false
+    ProblemLink:
+      title: Problem Link
+      description: Problem Link
       type: string
       required: false
     CustomerDepartment:
@@ -428,6 +507,31 @@ types:
       description: Knowledge link
       type: string
       required: false
+    PreviousState:
+      title: Previous State
+      description: Previous State
+      type: string
+      required: false
+    ResolvedByIncidentNumber:
+      title: Resolved By Incident Number
+      description: Resolved By Incident Number
+      type: string
+      required: false
+    TotalTimeSpent:
+      title: Total Time Spent
+      description: Total time spent
+      type: integer
+      required: false
+    RespondedBy:
+      title: Responded By
+      description: Responded By
+      type: string
+      required: false
+    RespondedDateTime:
+      title: Responded Date Time
+      description: Responded date time
+      type: string
+      required: false
     OrgUnitLink_Category:
       title: Org Unit Link Category
       description: Organization unit link category
@@ -458,6 +562,21 @@ types:
       description: Progress bar position
       type: string
       required: false
+    ResolvedByType:
+      title: Resolved by Type
+      description: Resolved by type
+      type: string
+      required: false
+    ReportedBy:
+      title: Reported By
+      description: Reported by
+      type: string
+      required: false
+    NewNotes:
+      title: New Notes
+      description: New notes
+      type: string
+      required: false
     CreatedByType:
       title: Created By Type
       description: Created by type
@@ -467,6 +586,26 @@ types:
       title: SLA Display Text
       description: SLA display text
       type: string
+      required: false
+    ServiceReqLink_Category:
+      title: Service ReqLink Category
+      description: Service ReqLink category
+      type: string
+      required: false
+    ServiceReqLink_RecID:
+      title: Service ReqLink RecID
+      description: Service ReqLink ReqID
+      type: string
+      required: false
+    ServiceReqLink:
+      title: Service ReqLink
+      description: Service ReqLink
+      type: string
+      required: false
+    ReadOnly:
+      title: Read Only
+      description: Read only
+      type: boolean
       required: false
     Cost_Currency:
       title: Cost Currency
@@ -481,6 +620,16 @@ types:
     Cost:
       title: Cost
       description: Cost
+      type: string
+      required: false
+    IncidentDetailWorkflowTag:
+      title: Incident Detail Workflow Tag
+      description: Incident Detail Workflow Tag
+      type: string
+      required: false
+    IncidentDetailSummary:
+      title: Incident Detail Summary
+      description: Incident detail summary
       type: string
       required: false
     IsApprovalNeeded:
@@ -503,9 +652,24 @@ types:
       description: Is DSM task existed
       type: boolean
       required: false
+    ApprovalStatus:
+      title: Approval Status
+      description: Approval Status
+      type: string
+      required: false
     SocialTextHeader:
       title: Social Text Header
       description: Social text header
+      type: string
+      required: false
+    SubCategory_Valid:
+      title: SubCategory Valid
+      description: SubCategory Valid
+      type: string
+      required: false
+    SubCategory:
+      title: SubCategory
+      description: SubCategory
       type: string
       required: false
     helpdesk_Priority_Valid:
@@ -516,6 +680,11 @@ types:
     helpdesk_Priority:
       title: Helpdesk Priority
       description: Helpdesk priority
+      type: string
+      required: false
+    ViewType:
+      title: View Type
+      description: View Type
       type: string
       required: false
     IncidentNetworkUserName:
@@ -543,6 +712,11 @@ types:
       description: Entity link
       type: string
       required: false
+    EventCIRecId:
+      title: Event CI RecId
+      description: Event CI RecId
+      type: string
+      required: false
     IsMasterIncident:
       title: Is Master Incident
       description: Is master incidint
@@ -552,6 +726,21 @@ types:
       title: Is Resolved By Master
       description: Is resolved by master
       type: boolean
+      required: false
+    MasterIncidentLink_Category:
+      title: Master Incident Link Category
+      description: Master Incident Link Category
+      type: string
+      required: false
+    MasterIncidentLink_RecID:
+      title: Master Incident Link RecID
+      description: Master Incident Link RecID
+      type: string
+      required: false
+    MasterIncidentLink:
+      title: Master Incident Link
+      description: Master Incident Link
+      type: string
       required: false
     ServiceOwnerEmail:
       title: Service Owner Email
@@ -571,6 +760,101 @@ types:
     IsUnRead:
       title: Is Unread
       description: Is unread
+      type: boolean
+      required: false
+    HRCaseLink_Category:
+      title: HR Case Link Category
+      description: HR case link category
+      type: string
+      required: false
+    HRCaseLink_RecID:
+      title: HR Case Link RecID
+      description: HR case link recID
+      type: string
+      required: false
+    HRCaseLink:
+      title: HR Case Link
+      description: HR case link
+      type: string
+      required: false
+    ivnt_RequestforInformationorData:
+      title: Ivnt Request For Information Or Data
+      description: Ivnt request for information or data
+      type: boolean
+      required: false
+    ivnt_UpdateRFI:
+      title: Ivnt Update RFI
+      description: Ivnt update RFI
+      type: string
+      required: false
+    AddChatconversationtoActivityHistory:
+      title: Add Chat Conversation To Activity History
+      description: Add chat conversation to activity history
+      type: boolean
+      required: false
+    ivnt_TeamsUserDetailsLink_Category:
+      title: Ivnt Teams User Details Link Category
+      description: Ivnt teams user details link category
+      type: string
+      required: false
+    ivnt_TeamsUserDetailsLink_RecID:
+      title: Ivnt Teams User Details Link RecID
+      description: Ivnt teams user details link RecID
+      type: string
+      required: false
+    ivnt_TeamsUserDetailsLink:
+      title: Ivnt Teams User Details Link
+      description: Ivnt teams user details link
+      type: string
+      required: false
+    VirimaAssetID:
+      title: Virima Asset ID
+      description: Virima asset ID
+      type: string
+      required: false
+    RecommendedCategory:
+      title: Recommended Category
+      description: Recommended category
+      type: string
+      required: false
+    RecommendedService:
+      title: Recommended Service
+      description: Recommended service
+      type: string
+      required: false
+    RecommendedSubCategory:
+      title: Recommended SubCategory
+      description: Recommended subcategory
+      type: string
+      required: false
+    Accuracy:
+      title: Accuracy
+      description: Accuracy
+      type: string
+      required: false
+    IsRecommended:
+      title: Is Recommended
+      description: Is recommended
+      type: boolean
+      required: false
+    RecomService:
+      title: Recom Service
+      description: Recom service
+      type: string
+      required: false
+    RecomCategory:
+      title: Recom Category
+      description: Recom category
+      type: string
+      required: false
+    RecomSubCategory:
+      title: Recom SubCategory
+      description: Recom SubCategory
+      type: string
+      required: false
+    IsRunTicketClassification:
+      title: Is Run Ticket Classification
+      description: Is run ticket classification
       type: boolean
       required: false
   journal_note:
@@ -1457,6 +1741,25 @@ connection:
     required: false
     example: true
 
+triggers:
+  new_incident:
+    title: New Incident
+    description: Check for new incident
+    input:
+      frequency:
+        title: Frequency
+        description: How often the trigger should check for new detections in seconds
+        type: integer
+        default: 10
+        required: true
+        example: 60
+    output:
+      incident:
+        title: Incident
+        description: New Incident
+        type: incident
+        required: true
+
 actions:
   create_incident:
     title: Create Incident
@@ -1760,4 +2063,36 @@ actions:
         title: Service Request
         description: Newly created service request
         type: service_request
+        required: true
+  search_incidents:
+    title: Search Incidents
+    description: Search Incidents using a Keyword
+    input:
+      keyword:
+        title: Keyword
+        description: Keyword to search for
+        type: string
+        required: true
+        example: Phone
+    output:
+      data:
+        title: Data
+        description: List of results
+        type: "[]incident"
+        required: true
+  get_incident:
+    title: Get Incident
+    description: Get Incident by Incident Number
+    input:
+      incident_number:
+        title: Incident Number
+        description: Incident Number of Incident to get
+        type: integer
+        required: true
+        example: 12345
+    output:
+      incident:
+        title: Incident
+        description: Incident requested
+        type: incident
         required: true
