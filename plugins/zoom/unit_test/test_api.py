@@ -21,7 +21,7 @@ class MockResponse:
 class MyTestCase(TestCase):
     @patch(REFRESH_OAUTH_TOKEN_PATH)
     @patch(REQUESTS_PATH)
-    def test_unauthenticated_first_run(self, mock_request, mock_refresh):
+    def test_unauthenticated_first_run_oauth(self, mock_request, mock_refresh):
         mock_refresh.return_value = "blah"
         api = ZoomAPI(account_id="blah", client_id="blah", client_secret="blah", logger=logging.getLogger())
 
@@ -31,9 +31,25 @@ class MyTestCase(TestCase):
 
     @patch(REFRESH_OAUTH_TOKEN_PATH)
     @patch(REQUESTS_PATH)
-    def test_authenticated_first_run(self, mock_request, mock_refresh):
+    def test_authenticated_first_run_oauth(self, mock_request, mock_refresh):
         mock_refresh.return_value = "blah"
         api = ZoomAPI(account_id="blah", client_id="blah", client_secret="blah", logger=logging.getLogger())
+
+        mock_request.side_effect = [MockResponse(status_code=200)]
+        result = api._call_api(method="POST", url="http://example.com")
+        self.assertDictEqual(result, {})
+
+    @patch(REQUESTS_PATH)
+    def test_authenticated_first_run_jwt(self, mock_request):
+        api = ZoomAPI(jwt_token="blah", logger=logging.getLogger())
+
+        mock_request.side_effect = [MockResponse(status_code=200)]
+        result = api._call_api(method="POST", url="http://example.com")
+        self.assertDictEqual(result, {})
+
+    @patch(REQUESTS_PATH)
+    def test_authenticated_first_run_no_auth(self, mock_request):
+        api = ZoomAPI(logger=logging.getLogger())
 
         mock_request.side_effect = [MockResponse(status_code=200)]
         result = api._call_api(method="POST", url="http://example.com")
