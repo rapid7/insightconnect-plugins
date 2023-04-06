@@ -47,14 +47,6 @@ class MyTestCase(TestCase):
         result = api._call_api(method="POST", url="http://example.com")
         self.assertDictEqual(result, {})
 
-    @patch(REQUESTS_PATH)
-    def test_authenticated_first_run_no_auth(self, mock_request):
-        api = ZoomAPI(logger=logging.getLogger())
-
-        mock_request.side_effect = [MockResponse(status_code=200)]
-        result = api._call_api(method="POST", url="http://example.com")
-        self.assertDictEqual(result, {})
-
 
 if __name__ == "__main__":
     unittest.main()
