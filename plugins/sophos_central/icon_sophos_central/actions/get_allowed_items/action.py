@@ -23,4 +23,4 @@ class GetAllowedItems(insightconnect_plugin_runtime.Action):
 
         output = self.connection.client.get_allowed_items(params=clean(params))
 
-        return clean({Output.ITEMS: output.get("items"), Output.PAGES: output.get("pages")})
+        return clean({Output.ITEMS: output.get("items", []), Output.PAGES: output.get("pages", {})})

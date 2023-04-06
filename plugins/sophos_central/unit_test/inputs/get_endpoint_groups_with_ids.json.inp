@@ -1,18 +1,14 @@
 {
-  "endpointIds":[
+  "endpointIds": [],
+  "fields": [],
+  "groupType": "",
+  "ids": [
+    "f8d03561-90d1-4c18-b576-34509e843ee8"
   ],
-  "fields":[
-  ],
-  "groupType":"",
-  "ids":[
-"f8d03561-90d1-4c18-b576-34509e843ee8"
-  ],
-  "page":1,
-  "pageSize":50,
-  "pageTotal":true,
-  "search":"",
-  "searchFields":[
-  ],
-  "sort":[
-  ]
+  "page": 1,
+  "pageSize": 50,
+  "pageTotal": true,
+  "search": "",
+  "searchFields": [],
+  "sort": []
 }
