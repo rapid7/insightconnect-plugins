@@ -1,0 +1,11 @@
+{
+  "blockedItem": {
+    "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+    "createdAt": "2023-03-20T13:41:49.813Z",
+    "properties": {
+      "sha256": "050c194cbbb"
+    },
+    "comment": "This is comment",
+    "type": "sha256"
+  }
+}

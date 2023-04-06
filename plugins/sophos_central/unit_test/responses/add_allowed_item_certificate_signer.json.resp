@@ -1,0 +1,10 @@
+{
+  "id":"714083d8-18eb-4f7d-b552-8ccd93e4e560",
+  "createdAt":"2023-01-01T11:11:11.111Z",
+  "updatedAt":"2023-01-01T11:11:11.111Z",
+  "properties":{
+    "certificateSigner":"Example signer"
+  },
+  "comment":"Test comment",
+  "type":"certificateSigner"
+}

@@ -1,0 +1,10 @@
+{
+  "comment":"Test comment",
+  "originEndpointId":"",
+  "originPersonId":"",
+  "propertiesCertificateSigner":"Example signer",
+  "propertiesFileName":"",
+  "propertiesPath":"",
+  "propertiesSha256":"",
+  "type":"certificateSigner"
+}

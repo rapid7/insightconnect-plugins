@@ -1,0 +1,39 @@
+{
+  "items":[
+    {
+      "id":"f8d03561-90d1-4c18-b576-34509e843ee1",
+      "createdAt":"2023-01-01T11:11:11.111Z",
+      "updatedAt":"2023-01-01T11:11:11.111Z",
+      "properties":{
+        "path":"$path/sample.txt"
+      },
+      "comment":"Test comment",
+      "type":"path"
+    },
+    {
+      "id":"f8d03561-90d1-4c18-b576-34509e843ee2",
+      "createdAt":"2023-01-01T11:11:11.111Z",
+      "updatedAt":"2023-01-01T11:11:11.111Z",
+      "properties":{
+        "sha256":"ba7816bf8f01cfea414140de5dae2223b10361a396177a9cb410ff61f20015af"
+      },
+      "comment":"Test comment",
+      "type":"sha256"
+    },
+    {
+      "id":"f8d03561-90d1-4c18-b576-34509e843ee3",
+      "createdAt":"2023-01-01T11:11:11.111Z",
+      "updatedAt":"2023-01-01T11:11:11.111Z",
+      "properties":{
+        "certificateSigner":"Example signer"
+      },
+      "comment":"Test comment",
+      "type":"certificateSigner"
+    }
+  ],
+  "pages":{
+    "current":1,
+    "size":3,
+    "maxSize":100
+  }
+}
