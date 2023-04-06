@@ -423,6 +423,49 @@ Example output:
 
 ```
 
+#### Enable Users
+
+This action is used to enable accounts.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|distinguished_names|[]string|None|True|The distinguished names of the users to enable|None|["CN=user,OU=domain_users,DC=example,DC=com"]|
+
+Example input:
+
+```
+{
+  "distinguished_names": ["CN=user,OU=domain_users,DC=example,DC=com"]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Operation status (True will be returned if at least one user is enabled)|
+|successful_enablements|[]string|False|List of successfully enabled users|
+|unsuccessful_enablements|[]modified_user_error|False|List of unsuccessfully enabled users|
+
+Example output:
+
+```
+
+{
+  "success": true
+  "successful_enablements": ["CN=user,OU=domain_users,DC=example,DC=com"]
+  "unsuccessful_enablements": [
+    {
+        "dn": "CN=user,OU=domain_users,DC=test,DC=com",
+        "error": "The DN CN=empty_search,DC=example,DC=com was not found"
+    }
+  ]
+}
+
+```
+
 #### Move Object
 
 This action is used to move an Active Directory object from one organizational unit to another.
@@ -524,6 +567,50 @@ Example output:
 
 {
   "success": true
+}
+
+```
+
+
+#### Disable Users
+
+This action is used to disable accounts.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|distinguished_names|[]string|None|True|The distinguished names of the users to disable|None|["CN=user,OU=domain_users,DC=example,DC=com"]|
+
+Example input:
+
+```
+{
+  "distinguished_names": ["CN=user,OU=domain_users,DC=example,DC=com"]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Operation status (True will be returned if at least one user is disabled)|
+|successful_disablements|[]string|False|List of successfully disabled users|
+|unsuccessful_disablements|[]modified_user_error|False|List of unsuccessfully disabled users|
+dis
+Example output:
+
+```
+
+{
+  "success": true
+  "successful_disablements": ["CN=user,OU=domain_users,DC=example,DC=com"]
+  "unsuccessful_disablements": [
+    {
+        "dn": "CN=user,OU=domain_users,DC=test,DC=com",
+        "error": "The DN CN=empty_search,DC=example,DC=com was not found"
+    }
+  ]
 }
 
 ```
@@ -650,6 +737,13 @@ _This plugin does not contain any triggers._
 |Attributes|attributes|False|Attributes|
 |DN|string|False|DN|
 
+#### modified_user_error
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Error|string|False|Error|
+|DN|string|False|DN|
+
 ## Troubleshooting
 
 Objects that contain an equals sign `=` or an asterisk `*` require the signs to be escaped.
@@ -676,6 +770,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 6.0.0 - Add actions Enable Users and Disable users allowing for the bulk enablement/disablement of users
 * 5.3.5 - Fix issue where JSON Marshaling error was raised when receiving unexpected API response in the Force Password Reset action
 * 5.3.4 - Fix issue with space character in DN in modify object action | Enhanced LDAP logging | Fix issue with variable error when connection fails 
 * 5.3.3 - Fix issue with escaping brackets in Query action
