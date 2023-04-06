@@ -1,0 +1,9 @@
+{
+  "endpointGroups":[
+  ],
+  "pages":{
+    "current":1,
+    "size":50,
+    "maxSize":1000
+  }
+}

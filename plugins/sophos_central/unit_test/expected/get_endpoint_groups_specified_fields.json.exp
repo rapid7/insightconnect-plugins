@@ -1,0 +1,27 @@
+{
+  "endpointGroups":[
+    {
+      "id":"f8d03561-90d1-4c18-b576-34509e843ee1",
+      "name":"Example Group",
+      "description":"Example description",
+      "type":"computer"
+    },
+    {
+      "id":"f8d03561-90d1-4c18-b576-34509e843ee2",
+      "name":"Example Group1",
+      "description":"Example description",
+      "type":"computer"
+    },
+    {
+      "id":"f8d03561-90d1-4c18-b576-34509e843ee3",
+      "name":"Test Group 3",
+      "description":"Example description",
+      "type":"computer"
+    }
+  ],
+  "pages":{
+    "current":1,
+    "size":50,
+    "maxSize":1000
+  }
+}

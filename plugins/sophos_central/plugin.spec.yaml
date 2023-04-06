@@ -4,7 +4,8 @@ products: [insightconnect]
 name: sophos_central
 title: Sophos Central
 description: Sophos Central is a unified console for managing Sophos products. Using the Sophos Central plugin for Rapid7 InsightConnect, users can get alerts, endpoints, and SIEM events
-version: 4.3.1
+version: 4.4.0
+supported_versions: ["Sophos Central API 2023-03-10"]
 vendor: rapid7
 support: rapid7
 status: []
@@ -471,6 +472,511 @@ types:
   installer_info_response:
     installer_info:
       type: '[]installer_info'
+  pages:
+    current:
+      title: Current
+      description: The 1-based page number being returned
+      type: integer
+      required: false
+      example: 1
+    size:
+      title: Size
+      description: The size of the page being returned
+      type: integer
+      required: false
+      example: 50
+    total:
+      title: Total
+      description: The total number of pages that exist, if pageTotal=true in the request
+      type: integer
+      required: false
+      example: 1
+    items:
+      title: Items
+      description: The total number of items across all pages, if pageTotal=true was passed into the request
+      type: integer
+      required: false
+      example: 1
+    maxSize:
+      title: Max Size
+      description: The maximum page size that can be requested
+      type: integer
+      required: false
+      example: 100
+  objectId:
+    id:
+      title: ID
+      description: The ID of the referenced object
+      type: string
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+  user:
+    id:
+      title: ID
+      description: Principal email or client ID
+      type: string
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    type:
+      title: Type
+      description: Principal type
+      type: string
+      required: false
+      example: user
+    name:
+      title: Name
+      description: User principal name
+      type: string
+      required: false
+      example: Example name
+    accountType:
+      title: Account Type
+      description: Type of the account
+      type: string
+      required: false
+      example: tenant
+    accountId:
+      title: Account ID
+      description: ID of the account
+      type: string
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+  userObject:
+    id:
+      title: ID
+      description: Unique ID for the user
+      type: string
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    name:
+      title: Name
+      description: Person's name
+      type: string
+      required: false
+      example: Example name
+  properties:
+    fileName:
+      title: File Name
+      description: File name
+      type: string
+      required: false
+      example: sample.txt
+    path:
+      title: Path
+      description: Path for the application
+      type: string
+      required: false
+      example: $path/sample.txt
+    sha256:
+      title: SHA256
+      description: SHA256 value for the application
+      type: string
+      required: false
+      example: ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad
+    certificateSigner:
+      title: Certificate Signer
+      description: Value saved for the certificateSigner
+      type: string
+      required: false
+      example: Example signer
+  item:
+    id:
+      title: ID
+      description: Item ID
+      type: string
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    createdAt:
+      title: Created At
+      description: Date and time (UTC) when the item was created
+      type: string
+      required: false
+      example: 2023-03-02T13:00:19.494Z
+    updatedAt:
+      title: Updated At
+      description: Date and time (UTC) when the item was updated
+      type: string
+      required: false
+      example: 2023-03-02T13:00:19.494Z
+    properties:
+      title: Properties
+      description: Item properties
+      type: properties
+      required: false
+      example: {}
+    comment:
+      title: Comment
+      description: Comment indicating why the item was blocked or allowed
+      type: string
+      required: false
+      example: Example comment
+    type:
+      title: Type
+      description: Property by which an item is blocked or allowed
+      type: string
+      required: false
+      example: sha256
+    createdBy:
+      title: Created By
+      description: Created by
+      type: userObject
+      required: false
+      example: {}
+    originPerson:
+      title: Origin Person
+      description: Origin person
+      type: userObject
+      required: false
+      example: {}
+    originEndpoint:
+      title: Origin Endpoint
+      description: Represents a referenced object
+      type: objectId
+      required: false
+      example: {}
+  isolationState:
+    status:
+      title: Status
+      description: "Isolation status reported by endpoint. The following values are allowed: isolated, notIsolated"
+      type: string
+      required: false
+      example: isolated
+    adminIsolated:
+      title: Admin Isolated
+      description: Whether isolation was triggered by an admin
+      type: boolean
+      required: false
+      example: false
+    selfIsolated:
+      title: Self Isolated
+      description: Whether isolation was triggered by the endpoint itself
+      type: boolean
+      required: false
+      example: false
+  cloud:
+    provider:
+      title: Provider
+      description: "Cloud provider in which the endpoint is running. The following values are allowed: aws, azure"
+      type: string
+      required: false
+      example: aws
+    instanceId:
+      title: Instance ID
+      description: Unique ID for the cloud instance
+      type: string
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+  lockdown:
+    status:
+      title: Status
+      description: "Endpoint lockdown status. The following values are allowed: creatingWhitelist, installing, locked, notInstalled, registering, starting, stopping, unavailable, uninstalled, unlocked"
+      type: string
+      required: false
+      example: creatingWhitelist
+    updateStatus:
+      title: Update Status
+      description: "Endpoint lockdown update status. The following values are allowed: upToDate, updating, rebootRequired, notInstalled"
+      type: string
+      required: false
+      example: upToDate
+  volume:
+    volumeId:
+      title: Volume ID
+      description: Endpoint volume ID
+      type: string
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    status:
+      title: Status
+      description: "Endpoint volume encryption status. The following values are allowed: notEncrypted, encrypted, encrypting, notSupported, suspended, unknown"
+      type: string
+      required: false
+      example: notEncrypted
+  encryption:
+    volumes:
+      title: Volumes
+      description: Endpoint volumes
+      type: "[]volume"
+      required: false
+      example: []
+  assignedProduct:
+    code:
+      title: Code
+      description: "Endpoint product. The following values are allowed: coreAgent, interceptX, xdr, endpointProtection, deviceEncryption, mtr, ztna"
+      type: string
+      required: false
+      example: coreAgent
+    version:
+      title: Version
+      description: Version of a product assigned to an endpoint
+      type: string
+      required: false
+      example: Example version
+    status:
+      title: Status
+      description: "Installation status of a product assigned to the endpoint. The following values are allowed: installed, notInstalled"
+      type: string
+      required: false
+      example: installed
+  associatedPerson:
+    id:
+      title: ID
+      description: Unique ID for the Person
+      type: string
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    name:
+      title: Name
+      description: Person's name
+      type: string
+      required: false
+      example: Example name
+    viaLogin:
+      title: Via Login
+      description: Person's login on the endpoint
+      type: string
+      required: false
+      example: Example login
+  group:
+    id:
+      title: ID
+      description: Unique ID for endpoint group
+      type: string
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    name:
+      title: Name
+      description: Endpoint group name
+      type: string
+      required: false
+      example: Example name
+  osObject:
+    isServer:
+      title: Is Server
+      description: Whether the OS is a server OS
+      type: boolean
+      required: false
+      example: false
+    platform:
+      title: Platform
+      description: "OS platform type. The following values are allowed: windows, linux, macOS"
+      type: string
+      required: false
+      example: windows
+    name:
+      title: Name
+      description: OS name as reported by the endpoint
+      type: string
+      required: false
+      example: Example name
+    majorVersion:
+      title: Major Version
+      description: OS major version
+      type: integer
+      required: false
+      example: 1
+    minorVersion:
+      title: Minor Version
+      description: OS minor version
+      type: integer
+      required: false
+      example: 1
+    build:
+      title: Build
+      description: OS build
+      type: integer
+      required: false
+      example: 1
+  serviceDetails:
+    name:
+      title: Name
+      description: Service name
+      type: string
+      required: false
+      example: Service name
+    status:
+      title: Status
+      description: 'Status of a service on an endpoint. The following values are allowed: running, stopped, missing'
+      type: string
+      required: false
+      example: running
+  services:
+    status:
+      title: Status
+      description: 'Health status of an endpoint or a service running on an endpoint. The following values are allowed: good, suspicious, bad, unknown'
+      type: string
+      required: false
+      example: good
+    serviceDetails:
+      title: Service Details
+      description: Details of services on the endpoint
+      type: "[]serviceDetails"
+      required: false
+      example: []
+  threats:
+    status:
+      title: Status
+      description: 'Health status of an endpoint or a service running on an endpoint. The following values are allowed: good, suspicious, bad, unknown'
+      type: string
+      required: false
+      example: good
+  health:
+    overall:
+      title: Overall
+      description: "Health status of an endpoint or a service running on an endpoint. The following values are allowed: good, suspicious, bad, unknown"
+      type: string
+      required: false
+      example: good
+    threats:
+      title: Threats
+      description: Threats on the endpoint
+      type: threats
+      required: false
+      example: {}
+    services:
+      title: Services
+      description: Status of services on the endpoint
+      type: services
+      required: false
+      example: {}
+  endpointObject:
+    id:
+      title: ID
+      description: Unique endpoint ID
+      type: string
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    hostname:
+      title: Hostname
+      description: Endpoint hostname
+      type: string
+      required: false
+      example: example-hostname
+  endpoints:
+    total:
+      title: Total
+      description: Total number of endpoints in this group
+      type: integer
+      required: false
+      example: 10
+    itemsCount:
+      title: Items Count
+      description: Total number of items in the list
+      type: integer
+      required: false
+      example: 5
+    items:
+      title: Items
+      description: List of endpoints belonging to the group
+      type: '[]endpointObject'
+      required: false
+      example: []
+  endpointGroup:
+    id:
+      title: ID
+      description: Endpoint group ID
+      type: string
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    name:
+      title: Name
+      description: Endpoint group name
+      type: string
+      required: false
+      example: Example Group
+    description:
+      title: Description
+      description: Endpoint group description
+      type: string
+      required: false
+      example: Example description
+    type:
+      title: Type
+      description: Endpoint group type
+      type: string
+      required: false
+      example: computer
+    endpoints:
+      title: Endpoints
+      description: Associated endpoints
+      type: endpoints
+      required: false
+      example: {}
+    tenant:
+      title: Tenant
+      description: Reference to a tenant
+      type: objectId
+      required: false
+      example: {}
+    createdAt:
+      title: Created At
+      description: When the group was created
+      type: string
+      required: false
+      example: 2023-03-02T13:00:19.494Z
+    updatedAt:
+      title: Updated At
+      description: When the group was last updated
+      type: string
+      required: false
+      example: 2023-03-02T13:00:19.494Z
+  isolation:
+    enabled:
+      title: Enabled
+      description: Whether the endpoint should be isolated or not
+      type: boolean
+      required: false
+      example: true
+    lastEnabledAt:
+      title: Last Enabled At
+      description: When isolation was last enabled for the endpoint
+      type: string
+      required: false
+      example: 2023-03-02T13:00:19.494Z
+    lastEnabledBy:
+      title: Last Enabled By
+      description: Last enabled by
+      type: user
+      required: false
+      example: {}
+    lastDisabledAt:
+      title: Last Disabled At
+      description: When isolation was last disabled for the endpoint
+      type: string
+      required: false
+      example: 2023-03-02T13:00:19.494Z
+    lastDisabledBy:
+      title: Last Disabled By
+      description: Last disabled by
+      type: user
+      required: false
+      example: {}
+    comment:
+      title: Comment
+      description: Reason endpoint should be isolated or not
+      type: string
+      required: false
+      example: Example Comment
+  endpointIsolation:
+    id:
+      title: ID
+      description: Endpoint ID
+      type: string
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    isolation:
+      title: Isolation
+      description: Isolation state of an endpoint
+      type: isolation
+      required: false
+      example: {}
+  endpointRemovalErrors:
+    endpointsNotFound:
+      title: Endpoints Not Found
+      description: Endpoints not found
+      type: "[]string"
+      required: false
+      example: '["9de5069c-5afe-602b-2ea0-a04b66beb2c0"]'
 
 connection:
   region:
@@ -624,3 +1130,445 @@ actions:
         description: Tamper status for provided agent
         type: check_tamper_protection_status
         required: true
+  get_blocked_items:
+    title: Get Blocked Items
+    description: Get a list of blocked items
+    input:
+      page:
+        title: Page
+        description: The page number to fetch, starting with 1
+        type: integer
+        required: false
+        default: 1
+        example: 1
+      pageSize:
+        title: Page Size
+        description: The size of the page requested
+        type: integer
+        required: false
+        default: 50
+        example: 50
+      pageTotal:
+        title: Page Total
+        description: Whether the number of pages should be calculated and returned in the response
+        type: boolean
+        required: false
+        default: false
+        example: false
+    output:
+      items:
+        title: Items
+        description: List of blocked items
+        type: "[]item"
+        required: false
+        example: []
+      pages:
+        title: Pages
+        description: Pages details
+        type: pages
+        required: false
+        example: {}
+  add_blocked_item:
+    title: Add Blocked Item
+    description: Block an item from exoneration
+    input:
+      type:
+        title: Type
+        description: "Property by which an item is blocked. The following values are allowed: SHA256"
+        type: string
+        required: true
+        default: sha256
+        example: sha256
+      propertiesFileName:
+        title: Properties File Name
+        description: Properties file name for the application
+        type: string
+        required: false
+        example: sample.txt
+      propertiesPath:
+        title: Properties Path
+        description: Properties path for the application
+        type: string
+        required: false
+        example: $path/sample.txt
+      propertiesSha256:
+        title: Properties SHA256
+        description: Properties SHA256 value for the application
+        type: string
+        required: true
+        example: ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad
+      propertiesCertificateSigner:
+        title: Properties Certificate Signer
+        description: Properties value saved for the certificateSigner
+        type: string
+        required: false
+        example: Example signer
+      comment:
+        title: Comment
+        description: Comment indicating why the item should be blocked
+        type: string
+        required: true
+        example: Example comment
+    output:
+      blockedItem:
+        title: Blocked Item
+        description: Blocked item created
+        type: item
+        required: false
+        example: {}
+  remove_blocked_item:
+    title: Remove Blocked Item
+    description: Deletes the specified blocked item
+    input:
+      blockedItemId:
+        title: Blocked Item ID
+        description: The identifier of the blocked item
+        type: string
+        required: true
+        example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    output:
+      success:
+        title: Success
+        description: Whether the item was deleted. Returns success if can't find item or it has been successfully deleted
+        type: boolean
+        required: false
+        example: true
+  get_endpoint_groups:
+    title: Get Endpoint Groups
+    description: Get endpoint groups
+    input:
+      groupType:
+        title: Group Type
+        description: "Endpoint group type. The following values are allowed: all, computer, server"
+        required: false
+        type: string
+        enum:
+        - all
+        - computer
+        - server
+        default: all
+        example: computer
+      sort:
+        title: Sort
+        description: Sort criteria for endpoint groups. Valid sort fields are id, name, createdAt, and updatedAt. You can append ':asc' or ':desc' to each field to specify the sort direction. The default sort direction for each field is unspecified
+        required: false
+        type: '[]string'
+        example: ["createdAt:desc","name:asc"]
+      fields:
+        title: Fields
+        description: The fields to return in a partial response
+        required: false
+        type: '[]string'
+        example: ["name", "createdAt"]
+      page:
+        title: Page
+        description: The page number to fetch
+        required: false
+        type: integer
+        default: 1
+        example: 5
+      pageTotal:
+        title: Page Total
+        description: Whether the number of pages should be calculated and returned in the response
+        required: false
+        type: boolean
+        example: false
+      pageSize:
+        title: Page Size
+        description: The size of the page requested
+        required: false
+        type: integer
+        default: 50
+        example: 10
+      ids:
+        title: Endpoint Group IDs
+        description: Endpoint group IDs to match. Must contain at most 50 items that must be unique
+        required: false
+        type: '[]string'
+        example: ["9de5069c-5afe-602b-2ea0-a04b66beb2c0"]
+      search:
+        title: Search
+        description: Term to search for in the specified search fields
+        required: false
+        type: string
+        example: Example
+      searchFields:
+        title: Search Fields
+        description: "Search your specified fields. The default is to search group names only. The following values are allowed: name, description"
+        required: false
+        type: '[]string'
+        example: ["description","name"]
+      endpointIds:
+        title: Endpoint IDs
+        description: Endpoint IDs. Must contain at most 50 items that must be unique
+        required: false
+        type: '[]string'
+        example: ["9de5069c-5afe-602b-2ea0-a04b66beb2c0"]
+    output:
+      endpointGroups:
+        title: Endpoint Groups
+        description: List of endpoint groups
+        type: "[]endpointGroup"
+        required: false
+        example: []
+      pages:
+        title: Pages
+        description: Pages details
+        type: pages
+        required: false
+        example: {}
+  get_allowed_items:
+    title: Get Allowed Items
+    description: Get a list of allowed items
+    input:
+      page:
+        title: Page
+        description: The page number to fetch
+        required: false
+        type: integer
+        default: 1
+        example: 3
+      pageSize:
+        title: Page Size
+        description: The size of the page requested
+        required: false
+        type: integer
+        default: 50
+        example: 5
+      pageTotal:
+        title: Page Total
+        description: Whether the number of pages should be calculated and returned in the response
+        required: false
+        type: boolean
+        example: false
+    output:
+      items:
+        title: Items
+        description: List of allowed items
+        type: "[]item"
+        required: false
+        example: []
+      pages:
+        title: Pages
+        description: Pages details
+        type: pages
+        required: false
+        example: {}
+  add_allowed_item:
+    title: Add Allowed Item
+    description: Exempt an item from conviction
+    input:
+      type:
+        title: Type
+        description: Property by which an item is allowed. You need to fill in the input starting with 'properties' for the selected type
+        required: true
+        type: string
+        enum:
+          - sha256
+          - path
+          - certificateSigner
+        example: sha256
+      propertiesFileName:
+        title: Properties File Name
+        description: Properties file name for the application
+        required: false
+        type: string
+        example: sample.txt
+      propertiesPath:
+        title: Properties Path
+        description: Properties path for the application. Required if 'path' is selected in the Type input
+        required: false
+        type: string
+        example: $path/sample.txt
+      propertiesSha256:
+        title: Properties SHA256
+        description: Properties SHA256 value for the application. Required if 'SHA256' is selected in the Type input
+        required: false
+        type: string
+        example: ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad
+      propertiesCertificateSigner:
+        title: Properties Certificate Signer
+        description: Properties value saved for the certificateSigner. Required if 'certificateSigner' is selected in the Type input
+        required: false
+        type: string
+        example: Example signer
+      comment:
+        title: Comment
+        description: Comment indicating why the item should be allowed
+        required: true
+        type: string
+        example: Example comment
+      originPersonId:
+        title: Origin Person ID
+        description: Person associated with the endpoint where the item to be allowed was last seen
+        required: false
+        type: string
+        example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+      originEndpointId:
+        title: Origin Endpoint ID
+        description: Endpoint where the item to be allowed was last seen
+        required: false
+        type: string
+        example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    output:
+      allowedItem:
+        title: Allowed Item
+        description: Allowed item created
+        type: item
+        required: false
+        example: {}
+  remove_allowed_item:
+    title: Remove Allowed Item
+    description: Deletes the specified allowed item
+    input:
+      allowedItemId:
+        title: Allowed Item ID
+        description: The identifier of the allowed item
+        required: true
+        type: string
+        example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: false
+        example: true
+  isolate_endpoint:
+    title: Isolate Endpoint
+    description: Turn on or off endpoint isolation for multiple endpoints
+    input:
+      enabled:
+        title: Enabled
+        description: Whether the endpoints should be isolated or not
+        type: boolean
+        required: true
+        default: true
+        example: true
+      ids:
+        title: IDs
+        description: List of endpoints IDs
+        type: "[]string"
+        required: true
+        example: '["9de5069c-5afe-602b-2ea0-a04b66beb2c0"]'
+      comment:
+        title: Comment
+        description: Reason the endpoints should be isolated or not
+        type: string
+        required: false
+        example: Example comment
+    output:
+      endpoints:
+        title: Endpoints
+        description: List of endpoints for which isolation has been updated
+        type: "[]endpointIsolation"
+        required: false
+        example: []
+  add_endpoint_group:
+    title: Add Endpoint Group
+    description: Add a new endpoint group
+    input:
+      name:
+        title: Name
+        description: Endpoint group name
+        type: string
+        required: true
+        example: Example Group
+      type:
+        title: Type
+        description: Group type
+        type: string
+        enum:
+        - computer
+        - server
+        required: true
+        default: computer
+        example: computer
+      description:
+        title: Description
+        description: Group description
+        type: string
+        required: false
+        example: Example description
+      endpointIds:
+        title: Endpoint IDs
+        description: List of endpoint IDs that will be added to the group
+        type: "[]string"
+        required: false
+        example: '["9de5069c-5afe-602b-2ea0-a04b66beb2c0"]'
+    output:
+      endpointGroup:
+        title: Endpoint Group
+        description: Information about the created endpoint group
+        type: endpointGroup
+        required: false
+        example: {}
+  get_endpoint_group:
+    title: Get Endpoint Group
+    description: Get endpoint group by ID
+    input:
+      groupId:
+        title: Group ID
+        description: Endpoint group ID
+        type: string
+        required: true
+        example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    output:
+      endpointGroup:
+        title: Endpoint Group
+        description: Information about the provided endpoint group
+        type: endpointGroup
+        required: false
+        example: {}
+  add_endpoint_to_group:
+    title: Add Endpoint to Group
+    description: Add endpoints to your group
+    input:
+      groupId:
+        title: Group ID
+        description: Endpoint group ID
+        type: string
+        required: true
+        example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+      ids:
+        title: IDs
+        description: List of endpoint IDs
+        type: "[]string"
+        required: true
+        example: '["9de5069c-5afe-602b-2ea0-a04b66beb2c0"]'
+    output:
+      addedEndpoints:
+        title: Added Endpoints
+        description: Endpoints added to the group
+        type: '[]endpointObject'
+        required: false
+        example: []
+  remove_endpoint_from_group:
+    title: Remove Endpoint from Group
+    description: Remove endpoints from a group
+    input:
+      groupId:
+        title: Group ID
+        description: Endpoint group ID
+        type: string
+        required: true
+        example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+      ids:
+        title: IDs
+        description: List of endpoint IDs
+        type: "[]string"
+        required: true
+        example: '["9de5069c-5afe-602b-2ea0-a04b66beb2c0"]'
+    output:
+      removedEndpoints:
+        title: Removed Endpoints
+        description: Endpoints removed from a group
+        type: '[]endpointObject'
+        required: false
+        example: []
+      errors:
+        title: Errors
+        description: Information about which endpoints could not be removed from the group
+        type: endpointRemovalErrors
+        required: false
+        example: {}

@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "createdAt": "2023-03-02T13:00:19.494Z",
+      "properties": {
+        "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
+      },
+      "comment": "Example comment",
+      "type": "sha256"
+    }
+  ],
+  "pages": {
+    "current": 1,
+    "size": 50,
+    "maxSize": 100
+  }
+}
