@@ -1,7 +1,6 @@
 import sys
 import os
 from parameterized import parameterized
-import logging
 
 sys.path.append(os.path.abspath("../"))
 

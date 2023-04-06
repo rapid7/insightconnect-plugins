@@ -6,7 +6,6 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
 from icon_zoom.actions.create_user import CreateUser
-from icon_zoom.actions.create_user.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from unit_test.mock import (

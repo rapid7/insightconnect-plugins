@@ -37,7 +37,7 @@ The connection configuration accepts the following parameters:
 |account_id|credential_secret_key|None|False|Zoom app account ID, required for OAuth authentication|None|dBs0x4Kf7HuIK0LLbzMduW|
 |client_id|credential_secret_key|None|False|Zoom app client ID, required for OAuth authentication|None|9de5069c5afe602b2ea0a04b66beb2c0|
 |client_secret|credential_secret_key|None|False|Zoom app client secret, required for OAuth authentication|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|jwt_token|credential_secret_key|None|False|Zoom JWT token|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|jwt_token|credential_secret_key|None|False|Zoom JWT token, without the Bearer prefix|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 

@@ -42,7 +42,7 @@ connection:
     example: 'dBs0x4Kf7HuIK0LLbzMduW'
   jwt_token:
     title: JWT Token
-    description: Zoom JWT token
+    description: Zoom JWT token, without the Bearer prefix
     type: credential_secret_key
     required: false
     example: '9de5069c5afe602b2ea0a04b66beb2c0'

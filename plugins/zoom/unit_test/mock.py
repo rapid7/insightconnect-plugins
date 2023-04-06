@@ -5,7 +5,6 @@ from typing import Callable
 import requests
 
 from unittest import mock
-from unittest.mock import MagicMock
 
 from icon_zoom.actions.create_user.schema import Input
 from icon_zoom.connection.connection import Connection

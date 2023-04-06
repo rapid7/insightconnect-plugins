@@ -37,7 +37,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "jwt_token": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "JWT Token",
-      "description": "Zoom JWT token",
+      "description": "Zoom JWT token, without the Bearer prefix",
       "order": 4
     }
   },
