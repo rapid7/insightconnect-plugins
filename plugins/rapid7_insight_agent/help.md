@@ -42,6 +42,42 @@ Example input:
 
 ### Actions
 
+#### Quarantine Multiple
+
+This action is used to quarantine or unquarantine multiple hosts.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent_array|[]string|None|True|Hostnames of the devices to quarantine|None|["WindowsX64", "WindowsX32"]|
+|quarantine_state|boolean|True|True|Set to true to quarantine a host, set to false to unquarantine|None|True|
+
+Example input:
+
+```
+{
+  "agent_array": [
+    "WindowsX64",
+    "WindowsX32"
+  ],
+  "quarantine_state": true
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|False|Operation status|
+|successful_quarantine|[]string|False|List of successfully quarantined hosts|
+|unsuccessful_quarantine|[]string|False|List of unsuccessfully quarantined hosts|
+
+Example output:
+
+```
+```
+
 #### Check Agent Status
 
 This action is used to get the online status and quarantine state of an agent.
@@ -204,6 +240,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.0 - New action: `Quarantine Multiple`
 * 1.1.1 - Quarantine: Fix incorrect behavior for unquarantine when the agent ID is wrong
 * 1.1.0 - Cloud enabled
 * 1.0.4 - Add new supported regions for API | Create unit tests for actions Check Agent Status, Quarantine, Get Agent Details  

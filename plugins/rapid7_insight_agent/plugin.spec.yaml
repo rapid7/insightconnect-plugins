@@ -171,6 +171,39 @@ connection:
       - Australia
       - Japan
 actions:
+  quarantine_multiple:
+    title: Quarantine Multiple
+    description: Quarantine or unquarantine multiple hosts
+    input:
+      agent_array:
+        title: Agent Array
+        description: Hostnames of the devices to quarantine
+        type: "[]string"
+        required: true
+        example: ["WindowsX64", "WindowsX32"]
+      quarantine_state:
+        title: Quarantine State
+        description: Set to true to quarantine a host, set to false to unquarantine
+        type: boolean
+        default: true
+        example: true
+        required: true
+    output:
+      successful_quarantine:
+        title: Successful Quarantine
+        description: List of successfully quarantined hosts
+        type: "[]string"
+        required: false
+      unsuccessful_quarantine:
+        title: Unsuccessful Quarantine
+        description: List of unsuccessfully quarantined hosts
+        type: "[]string"
+        required: false
+      success:
+        title: Success
+        description: Operation status
+        type: boolean
+        required: false
   get_agent_details:
     title: Get Agent Details
     description: This action is used to find and display detailed information about a device
