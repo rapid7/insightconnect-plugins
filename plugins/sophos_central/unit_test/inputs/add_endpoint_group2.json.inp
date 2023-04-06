@@ -1,0 +1,6 @@
+{
+  "name": "Example Group",
+  "type": "computer",
+  "description": "Example description",
+  "endpointIds": ["9de5069c-5afe-602b-2ea0-a04b66beb2c0"]
+}

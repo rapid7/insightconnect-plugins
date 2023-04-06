@@ -1,0 +1,65 @@
+{
+  "items":[
+    {
+      "id":"f8d03561-90d1-4c18-b576-34509e843ee1",
+      "name":"Example Group",
+      "description":"Example description",
+      "type":"computer",
+      "endpoints":{
+        "total":1,
+        "itemsCount":1,
+        "items":[
+          {
+            "id":"f8d03561-90d1-4c18-b576-34509e843ee8",
+            "hostname":"EXAMPLE-HOSTNAME"
+          }
+        ]
+      },
+      "tenant":{
+        "id":"f8d03561-90d1-4c18-b576-34509e843ee8"
+      },
+      "createdAt":"2023-01-01T11:11:11.111Z",
+      "updatedAt":"2023-01-01T11:11:11.111Z"
+    },
+    {
+      "id":"f8d03561-90d1-4c18-b576-34509e843ee2",
+      "name":"Example Group1",
+      "description":"Example description",
+      "type":"computer",
+      "endpoints":{
+        "total":0,
+        "itemsCount":0,
+        "items":[
+
+        ]
+      },
+      "tenant":{
+        "id":"f8d03561-90d1-4c18-b576-34509e843ee8"
+      },
+      "createdAt":"2023-01-01T11:11:11.111Z",
+      "updatedAt":"2023-01-01T11:11:11.111Z"
+    },
+    {
+      "id":"f8d03561-90d1-4c18-b576-34509e843ee3",
+      "name":"Test Group 3",
+      "description":"Example description",
+      "type":"computer",
+      "endpoints":{
+        "total":0,
+        "itemsCount":0,
+        "items":[
+
+        ]
+      },
+      "tenant":{
+        "id":"f8d03561-90d1-4c18-b576-34509e843ee8"
+      },
+      "createdAt":"2023-01-01T11:11:11.111Z"
+    }
+  ],
+  "pages":{
+    "current":1,
+    "size":50,
+    "maxSize":1000
+  }
+}

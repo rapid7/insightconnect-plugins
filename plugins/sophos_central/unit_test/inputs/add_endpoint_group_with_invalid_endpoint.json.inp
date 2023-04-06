@@ -1,0 +1,6 @@
+{
+  "name": "Example Group",
+  "type": "computer",
+  "description": "Example description",
+  "endpointIds": ["invalid_id"]
+}

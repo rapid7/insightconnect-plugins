@@ -1,0 +1,16 @@
+{
+  "allowedItem":{
+    "id":"714083d8-18eb-4f7d-b552-8ccd93e4e560",
+    "createdAt":"2023-01-01T11:11:11.111Z",
+    "updatedAt":"2023-01-01T11:11:11.111Z",
+    "properties":{
+      "path":"$path/sample.txt"
+    },
+    "comment":"Test comment",
+    "type":"path",
+    "originPerson":{
+      "id":"fde30644-050f-486d-a54e-06210b892dff",
+      "name":"Test Name"
+    }
+  }
+}
