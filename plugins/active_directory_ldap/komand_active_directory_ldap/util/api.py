@@ -182,8 +182,8 @@ class ActiveDirectoryLdapAPI:
             try:
                 ADUtils.change_account_status(conn, dn, status, self.logger)
                 successes.append(dn)
-            except PluginException as exception:
-                failures.append({"dn": dn, "error": exception.cause})
+            except Exception as exception:
+                failures.append({"dn": dn, "error": str(exception)})
                 self.logger.error(f"Error: Failed to modify user {dn}")
         return {"successes": successes, "failures": failures}
 
