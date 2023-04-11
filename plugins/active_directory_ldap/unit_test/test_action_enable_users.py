@@ -16,8 +16,14 @@ class TestActionEnableUsers(TestCase):
                 {
                     Output.UNSUCCESSFUL_ENABLEMENTS: [
                         {
-                            "dn": "CN=empty_search,DC=example,DC=com",
-                            "error": "The DN CN=empty_search,DC=example,DC=com was not found.",
+                            'dn': 'CN=empty_search,DC=example,DC=com',
+                            'error': 'An error occurred during plugin '
+                                  'execution!\n'
+                                  '\n'
+                                  'The DN '
+                                  'CN=empty_search,DC=example,DC=com was '
+                                  'not found. Please provide a valid DN '
+                                  'and try again.'
                         }
                     ],
                     Output.SUCCESSFUL_ENABLEMENTS: [],
@@ -29,8 +35,14 @@ class TestActionEnableUsers(TestCase):
                 {
                     Output.UNSUCCESSFUL_ENABLEMENTS: [
                         {
-                            "dn": "CN=empty_search,DC=example,DC=com",
-                            "error": "The DN CN=empty_search,DC=example,DC=com was not found.",
+                            'dn': 'CN=empty_search,DC=example,DC=com',
+                            'error': 'An error occurred during plugin '
+                                  'execution!\n'
+                                  '\n'
+                                  'The DN '
+                                  'CN=empty_search,DC=example,DC=com was '
+                                  'not found. Please provide a valid DN '
+                                  'and try again.'
                         }
                     ],
                     Output.SUCCESSFUL_ENABLEMENTS: ["CN=Users,DC=example,DC=com"],
