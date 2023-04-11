@@ -17,14 +17,14 @@ class TestActionDisableUsers(TestCase):
                 {
                     Output.UNSUCCESSFUL_DISABLEMENTS: [
                         {
-                            'dn': 'CN=empty_search,DC=example,DC=com',
-                            'error': 'An error occurred during plugin '
-                                  'execution!\n'
-                                  '\n'
-                                  'The DN '
-                                  'CN=empty_search,DC=example,DC=com was '
-                                  'not found. Please provide a valid DN '
-                                  'and try again.'
+                            "dn": "CN=empty_search,DC=example,DC=com",
+                            "error": "An error occurred during plugin "
+                            "execution!\n"
+                            "\n"
+                            "The DN "
+                            "CN=empty_search,DC=example,DC=com was "
+                            "not found. Please provide a valid DN "
+                            "and try again.",
                         }
                     ],
                     Output.SUCCESSFUL_DISABLEMENTS: [],
@@ -36,14 +36,14 @@ class TestActionDisableUsers(TestCase):
                 {
                     Output.UNSUCCESSFUL_DISABLEMENTS: [
                         {
-                            'dn': 'CN=empty_search,DC=example,DC=com',
-                            'error': 'An error occurred during plugin '
-                                  'execution!\n'
-                                  '\n'
-                                  'The DN '
-                                  'CN=empty_search,DC=example,DC=com was '
-                                  'not found. Please provide a valid DN '
-                                  'and try again.'
+                            "dn": "CN=empty_search,DC=example,DC=com",
+                            "error": "An error occurred during plugin "
+                            "execution!\n"
+                            "\n"
+                            "The DN "
+                            "CN=empty_search,DC=example,DC=com was "
+                            "not found. Please provide a valid DN "
+                            "and try again.",
                         }
                     ],
                     Output.SUCCESSFUL_DISABLEMENTS: ["CN=Users,DC=example,DC=com"],
