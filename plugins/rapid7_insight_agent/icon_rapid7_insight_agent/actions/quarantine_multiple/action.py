@@ -13,11 +13,15 @@ class QuarantineMultiple(insightconnect_plugin_runtime.Action):
                 output=QuarantineMultipleOutput())
 
     def run(self, params={}):
-        agent = params.get(Input.AGENT_ARRAY)
+        agent_array = params.get(Input.AGENT_ARRAY)
         quarantine = params.get(Input.QUARANTINE_STATE)
 
-        if quarantine:
-            success = self.connection.api.quarantine()
-        else:
-            success = self.connection.api.unquarantine()
-        return {}
+        agent_array = self.connection.api.convert_hostnames_to_id(agent_array)
+        success = None
+
+        for agent in agent_array:
+            if quarantine:
+                success = self.connection.api.quarantine(agent)
+            else:
+                success = self.connection.api.unquarantine(agent)
+        return {Output.SUCCESS: success}

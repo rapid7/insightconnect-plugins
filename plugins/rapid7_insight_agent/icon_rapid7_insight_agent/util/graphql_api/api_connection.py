@@ -1,5 +1,5 @@
 import logging
-from typing import Optional
+from typing import Optional, List
 
 import requests
 
@@ -33,6 +33,19 @@ class ApiConnection:
         agent_type = agent_typer.get_agent_type(agent_input)
         agent = self._get_agent(agent_input, agent_type)
         return agent
+
+    def convert_hostnames_to_id(self, hostnames: List[str]) -> List[str]:
+        """
+        Function designed for the `quarantine_multiple` action which converts
+        the array of hostnames to an array of agent IDs
+        :param hostnames: Array containing the hostnames as a string
+        :return: Array containing host IDs
+        """
+        agent_list = []
+        for agent in hostnames:
+            agent_list.append(self._get_agent_id(agent))
+
+        return agent_list
 
     def quarantine(self, advertisement_period: int, agent_id: str) -> bool:
         """
@@ -261,6 +274,16 @@ class ApiConnection:
             assistance="Check the agent input value and try again.",
             data="NA",
         )
+
+    def _get_agent_id(self, hostname: str) -> str:
+        """
+        Retrieve the ID for an agent based on their hostname
+        :param hostname: Hostname of the device/agent
+        :return: The agent ID
+        """
+
+        agent_details = self.get_agent(hostname)
+        return agent_details.get("id")
 
     def _get_next_page_of_agents(self, results_object: dict) -> (bool, dict, list):
         """
