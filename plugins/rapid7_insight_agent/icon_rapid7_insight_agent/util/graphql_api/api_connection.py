@@ -99,7 +99,7 @@ class ApiConnection:
 
     def quarantine_list(self, agent_id_list: List[str], advertisement_period: int) -> Tuple[List[str], List[str]]:
         """
-        Quarantine an agent given an agent ID
+        Quarantine an agent given a list of agent IDs
 
         :param agent_id_list: List of agent IDs to quarantine
         :param advertisement_period: Amount of time, in seconds, to try to take the quarantine action
@@ -136,7 +136,7 @@ class ApiConnection:
         Unquarantine an agent given a list of agent IDs
         :param agent_id_list: List of agent IDs to unquarantine
 
-        :return: Two lists containing asset ids for successful & unsuccessful unqurantine operations.
+        :return: Two lists containing asset ids for successful & unsuccessful unquarantine operations.
         """
         successful_unquarantine = []
         unsuccessful_unquarantine = []
