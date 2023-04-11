@@ -1,5 +1,5 @@
 import logging
-from typing import Optional, List
+from typing import Optional, List, Tuple
 
 import requests
 
@@ -96,6 +96,77 @@ class ApiConnection:
         results_object = self._post_payload(unquarantine_payload)
         failed = results_object.get("data").get("unquarantineAssets").get("results")[0].get("failed")
         return not failed
+
+    def quarantine_list(self, agent_id_list: List[str], advertisement_period: int) -> Tuple[List[str], List[str]]:
+        """
+        Quarantine an agent given an agent ID
+
+        :param agent_id_list: List of agent IDs to quarantine
+        :param advertisement_period: Amount of time, in seconds, to try to take the quarantine action
+
+        :return: Two lists containing asset ids for successful or unsuccessful quarantines
+        """
+        successful_quarantine = []
+        unsuccessful_quarantine = []
+
+        for agent in agent_id_list:
+            quarantine_payload = {
+                "query": "mutation( $orgID:String! $agentID:String! $advPeriod:Long! ) { quarantineAssets( "
+                "orgId:$orgID assetIds: [$agentID] input: {advertisementPeriod: $advPeriod} ) { results { "
+                "assetId failed } } }",
+                "variables": {
+                    "orgID": self.org_key,
+                    "agentID": agent,
+                    "advPeriod": advertisement_period,
+                },
+            }
+
+            results_object = self._post_payload(quarantine_payload)
+            asset_id = results_object.get("data").get("quarantineAssets").get("results")[0].get("assetId")
+
+            if not results_object.get("data").get("quarantineAssets").get("results")[0].get("failed"):
+                successful_quarantine.append(asset_id)
+            else:
+                unsuccessful_quarantine.append(asset_id)
+
+        return successful_quarantine, unsuccessful_quarantine
+
+    def unquarantine_list(self, agent_id_list: List[str]) -> Tuple[List[str], List[str]]:
+        """
+        Unquarantine an agent given a list of agent IDs
+        :param agent_id_list: List of agent IDs to unquarantine
+
+        :return: Two lists containing asset ids for successful & unsuccessful unqurantine operations.
+        """
+        successful_unquarantine = []
+        unsuccessful_unquarantine = []
+
+        for agent_id in agent_id_list:
+            # Check if agent with ID exists
+            payload = {
+                "query": "query( $orgID: String! $agentID: String! ) { assets( orgId: $orgID ids: [$agentID] ){ agent { id quarantineState{ currentState } agentStatus } } }",
+                "variables": {"orgID": self.org_key, "agentID": agent_id},
+            }
+            results_object = self._post_payload(payload)
+            agent = results_object.get("data").get("assets")[0].get("agent")
+            if not agent:
+                raise Exception
+
+            # If it exists then unquarantine it
+            unquarantine_payload = {
+                "query": "mutation( $orgID: String! $agentID: String!) { unquarantineAssets( orgId: $orgID assetIds: [$agentID] ) { results { assetId failed } } }",
+                "variables": {"orgID": self.org_key, "agentID": agent_id},
+            }
+
+            results_object = self._post_payload(unquarantine_payload)
+            asset_id = results_object.get("data").get("unquarantineAssets").get("results")[0].get("assetId")
+
+            if not results_object.get("data").get("unquarantineAssets").get("results")[0].get("failed"):
+                successful_unquarantine.append(asset_id)
+            else:
+                unsuccessful_unquarantine.append(asset_id)
+
+        return successful_unquarantine, unsuccessful_unquarantine
 
     def get_agent_status(self, agent_id: str) -> dict:
         """

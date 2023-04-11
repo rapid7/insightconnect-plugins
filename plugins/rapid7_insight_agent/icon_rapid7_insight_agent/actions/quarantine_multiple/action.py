@@ -22,7 +22,15 @@ class QuarantineMultiple(insightconnect_plugin_runtime.Action):
 
         for agent in agent_array:
             if quarantine:
-                success = self.connection.api.quarantine(agent)
+                quarantined_agents = self.connection.api.quarantine(agent)
+                if quarantined_agents:
+                    return
+
             else:
-                success = self.connection.api.unquarantine(agent)
-        return {Output.SUCCESS: success}
+                quarantined_agents = self.connection.api.unquarantine(agent)
+
+        return {
+            Output.SUCCESS: success,
+            Output.SUCCESSFUL_QUARANTINE: quarantined_agents,
+            Output.UNSUCCESSFUL_QUARANTINE: quarantined_agents,
+        }
