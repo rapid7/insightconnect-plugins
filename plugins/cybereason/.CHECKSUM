@@ -1,11 +1,11 @@
 {
-	"spec": "c8e985e7818dc1eba39306a775c85e7b",
+	"spec": "f6f7b18169045330c7836f1d355e5c8f",
 	"manifest": "79550933122f5b7d149ed7a8f3597a1f",
 	"setup": "f13f93cc360811ef5b5a5139099d5dc1",
 	"schemas": [
 		{
 			"identifier": "archive_sensor/schema.py",
-			"hash": "bf6d5f82e9d72f218312e151afc2f826"
+			"hash": "fd7de91bb7f03d37abdb1efdf55354d0"
 		},
 		{
 			"identifier": "delete_registry_key/schema.py",
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "get_sensor/schema.py",
-			"hash": "353043c476b14e3b658424378c10eb99"
+			"hash": "1620748d7d3a45dd270fcfd40c6296ff"
 		},
 		{
 			"identifier": "isolate_machine/schema.py",

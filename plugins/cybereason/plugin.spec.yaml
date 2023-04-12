@@ -5,11 +5,11 @@ name: cybereason
 title: Cybereason
 description: The Cybereason platform provides military-grade cyber security with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin
 version: 2.2.0
-supported_versions: ["All"]
+supported_versions: ["Cybereason API 2023-04-12"]
 vendor: rapid7
 support: rapid7
 status: []
-tags: [investigate, malware, threat tntel]
+tags: [investigate, malware, threat intel]
 hub_tags:
   use_cases: [threat_detection_and_response, vulnerability_management]
   keywords: [investigate]
@@ -320,52 +320,52 @@ types:
       description: Partial response
       required: false
   sensorStats:
-    FailedSending:
+    failedSending:
       title: Failed Sending
       type: integer
       description: Failed sending
       required: false
-    InvalidState:
+    invalidState:
       title: Invalid State
       type: integer
       description: Invalid state
       required: false
-    ProbeRemoved:
+    probeRemoved:
       title: Probe Removed
       type: integer
       description: Probe removed
       required: false
-    TimeoutSending:
+    timeoutSending:
       title: Timeout Sending
       type: integer
       description: Timeout sending
       required: false
-    Pending:
+    pending:
       title: Pending
       type: integer
       description: Pending
       required: false
-    ChunksRequired:
+    chunksRequired:
       title: Chunks Required
       type: integer
       description: Chunks required
       required: false
-    MsiFileCorrupted:
+    msiFileCorrupted:
       title: MSI File Corrupted
       type: integer
       description: MSI file corrupted
       required: false
-    SendingMsi:
+    sendingMsi:
       title: Sending MSI
       type: integer
       description: Sending MSI
       required: false
-    NewerInstalled:
+    newerInstalled:
       title: Newer Installed
       type: integer
       description: Newer installed
       required: false
-    MsiSendFail:
+    msiSendFail:
       title: MSI Send Fail
       type: integer
       description: MSI Send Fail
@@ -375,107 +375,107 @@ types:
       type: integer
       description: Partial response
       required: false
-    EndedWithSensorTimeout:
+    endedWithSensorTimeout:
       title: Ended With Sensor Timeout
       type: integer
       description: Ended with sensor timeout
       required: false
-    FailedSendingToServer:
+    failedSendingToServer:
       title: Failed Sending To Server
       type: integer
       description: Failed sending to server
       required: false
-    GettingChunks:
+    gettingChunks:
       title: Getting Chunks
       type: integer
       description: Getting chunks
       required: false
-    Aborted:
+    aborted:
       title: Aborted
       type: integer
       description: Aborted
       required: false
-    Started:
+    started:
       title: Started
       type: integer
       description: Started
       required: false
-    InProgress:
+    inProgress:
       title: In Progress
       type: integer
       description: In progress
       required: false
-    Disconnected:
+    disconnected:
       title: Disconnected
       type: integer
       description: Disconnected
       required: false
-    Failed:
+    failed:
       title: Failed
       type: integer
       description: Failed
       required: false
-    Timeout:
+    timeout:
       title: Timeout
       type: integer
       description: Timeout
       required: false
-    EndedWithTooManyResults:
+    endedWithTooManyResults:
       title: Ended With Too Many Results
       type: integer
       description: Ended with too many results
       required: false
-    AlreadyUpdated:
+    alreadyUpdated:
       title: Already Updated
       type: integer
       description: Already updated
       required: false
-    EndedWithTooManySearches:
+    endedWithTooManySearches:
       title: Ended With Too Many Searches
       type: integer
       description: Ended with too many searches
       required: false
-    Succeeded:
+    succeeded:
       title: Succeeded
       type: integer
       description: Succeeded
       required: false
-    NotSupported:
+    notSupported:
       title: Not Supported
       type: integer
       description: Not supported
       required: false
-    EndedWithUnknownError:
+    endedWithUnknownError:
       title: Ended With Unknown Error
       type: integer
       description: Ended with unknown error
       required: false
-    None:
+    none:
       title: None
       type: integer
       description: None
       required: false
-    Primed:
+    primed:
       title: Primed
       type: integer
       description: Primed
       required: false
-    EndedWithInvalidParam:
+    endedWithInvalidParam:
       title: Ended With Invalid Param
       type: integer
       description: Ended with invalid param
       required: false
-    UnknownProbe:
+    unknownProbe:
       title: Unknown Probe
       type: integer
       description: Unknown probe
       required: false
-    AbortTimeout:
+    abortTimeout:
       title: Abort Timeout
       type: integer
       description: Abort timeout
       required: false
-    UnauthorizedUser:
+    unauthorizedUser:
       title: Unauthorized User
       type: integer
       description: Unauthorized user
@@ -688,7 +688,7 @@ types:
       type: '[]error'
       required: false
   sensors:
-    sensor_id:
+    sensorId:
       title: Sensor ID
       description: The unique identifier for a sensor
       type: string

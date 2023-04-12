@@ -492,17 +492,17 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "description": "The Cybereason user name for the user who archived the selected sensor",
           "order": 23
         },
+        "sensorId": {
+          "type": "string",
+          "title": "Sensor ID",
+          "description": "The unique identifier for a sensor",
+          "order": 1
+        },
         "sensorLastUpdate": {
           "type": "integer",
           "title": "Sensor Last Update",
           "description": "The last time (in epoch) that the sensor was updated",
           "order": 74
-        },
-        "sensor_id": {
-          "type": "string",
-          "title": "Sensor ID",
-          "description": "The unique identifier for a sensor",
-          "order": 1
         },
         "serialNumber": {
           "type": "string",
