@@ -1,7 +1,7 @@
 import sys
 import os
 
-sys.path.append(os.path.abspath('../'))
+sys.path.append(os.path.abspath("../"))
 # Custom Imports
 
 from unittest.mock import patch
@@ -11,7 +11,6 @@ from unit_test.util import Util
 
 
 class TestQuarantineFile(TestCase):
-
     @patch("requests.sessions.Session.post", side_effect=Util.mocked_requests_session)
     def test_connection_bad(self, mock_request):
         with self.assertRaises(ConnectionTestException) as context:
