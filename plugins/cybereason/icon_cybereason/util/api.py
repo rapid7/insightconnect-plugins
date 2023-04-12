@@ -5,7 +5,7 @@ import re
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 import json
 from logging import Logger
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, Union
 from urllib.parse import urljoin
 
 
@@ -165,15 +165,17 @@ class CybereasonAPI:
             )
 
     @staticmethod
-    def check_status_codes(status_code: int, response) -> Dict[str, Any]:
+    def check_status_codes(status_code: int, response) -> Union[Dict[str, Any], None]:
         if status_code == 401:
-            return PluginException.Preset.USERNAME_PASSWORD
+            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
         if status_code == 403:
-            return PluginException.Preset.API_KEY
+            raise PluginException(preset=PluginException.Preset.API_KEY)
         if status_code == 404:
-            return PluginException.Preset.NOT_FOUND
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND)
         if status_code >= 500:
-            return PluginException.Preset.SERVER_ERROR
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR)
+        if status_code == 204:
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND)
         if 200 <= status_code < 300:
             # Cybereason will return a Login page with a 200 status code if creds are incorrect
             # Therefore, check if the response is JSON-decodable (login page is not JSON)
@@ -184,7 +186,7 @@ class CybereasonAPI:
 
             return insightconnect_plugin_runtime.helper.clean(json_response)
         else:
-            return PluginException.Preset.UNKNOWN
+            raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
     def send_request(self, method: str, path: str, params: Dict = None, payload: Dict = None) -> Dict[str, Any]:
         response = self.session.request(
@@ -194,8 +196,7 @@ class CybereasonAPI:
             json=payload,
             headers=self.headers,
         )
-        final_response = self.check_status_codes(response.status_code, response)
-        return final_response
+        return self.check_status_codes(response.status_code, response)
 
     @staticmethod
     def parse_server_filter(server_filter: Optional[str] = None):
