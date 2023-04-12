@@ -181,6 +181,13 @@ actions:
         type: "[]string"
         required: true
         example: ["WindowsX64", "WindowsX32"]
+      interval:
+        title: Interval
+        description: Length of time in seconds to try to take action on a device. This is also called Advertisement Period
+        type: int
+        default: 604800
+        example: 604800
+        required: true
       quarantine_state:
         title: Quarantine State
         description: Set to true to quarantine a host, set to false to unquarantine
@@ -189,20 +196,15 @@ actions:
         example: true
         required: true
     output:
-      successful_quarantine:
-        title: Successful Quarantine
+      success:
+        title: Successful (Un)Quarantine
         description: List of successfully quarantined hosts
         type: "[]string"
         required: false
-      unsuccessful_quarantine:
-        title: Unsuccessful Quarantine
+      failure:
+        title: Unsuccessful (Un)Quarantine
         description: List of unsuccessfully quarantined hosts
         type: "[]string"
-        required: false
-      success:
-        title: Success
-        description: Operation status
-        type: boolean
         required: false
   get_agent_details:
     title: Get Agent Details

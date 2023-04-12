@@ -34,19 +34,6 @@ class ApiConnection:
         agent = self._get_agent(agent_input, agent_type)
         return agent
 
-    def convert_hostnames_to_id(self, hostnames: List[str]) -> List[str]:
-        """
-        Function designed for the `quarantine_multiple` action which converts
-        the array of hostnames to an array of agent IDs
-        :param hostnames: Array containing the hostnames as a string
-        :return: Array containing host IDs
-        """
-        agent_list = []
-        for agent in hostnames:
-            agent_list.append(self._get_agent_id(agent))
-
-        return agent_list
-
     def quarantine(self, advertisement_period: int, agent_id: str) -> bool:
         """
         Quarantine an agent given an agent ID
@@ -97,18 +84,24 @@ class ApiConnection:
         failed = results_object.get("data").get("unquarantineAssets").get("results")[0].get("failed")
         return not failed
 
-    def quarantine_list(self, agent_id_list: List[str], advertisement_period: int) -> Tuple[List[str], List[str]]:
+    def quarantine_list(self, agent_hostname_list: List[str], advertisement_period: int) -> Tuple[List[str], List[str]]:
         """
         Quarantine an agent given a list of agent IDs
 
-        :param agent_id_list: List of agent IDs to quarantine
+        :param agent_hostname_list: List of agent hostnames to quarantine
         :param advertisement_period: Amount of time, in seconds, to try to take the quarantine action
 
         :return: Two lists containing asset ids for successful or unsuccessful quarantines
         """
+
+        # Create empty lists for successful & unsuccessful
         successful_quarantine = []
         unsuccessful_quarantine = []
 
+        # Convert the original array of hostnames to IDs
+        agent_id_list = self._convert_hostnames_to_id(agent_hostname_list)
+
+        # For each agent ID in the list, perform quarantine
         for agent in agent_id_list:
             quarantine_payload = {
                 "query": "mutation( $orgID:String! $agentID:String! $advPeriod:Long! ) { quarantineAssets( "
@@ -131,16 +124,21 @@ class ApiConnection:
 
         return successful_quarantine, unsuccessful_quarantine
 
-    def unquarantine_list(self, agent_id_list: List[str]) -> Tuple[List[str], List[str]]:
+    def unquarantine_list(self, agent_hostname_list: List[str]) -> Tuple[List[str], List[str]]:
         """
         Unquarantine an agent given a list of agent IDs
-        :param agent_id_list: List of agent IDs to unquarantine
+        :param agent_hostname_list: List of agent IDs to unquarantine
 
         :return: Two lists containing asset ids for successful & unsuccessful unquarantine operations.
         """
+        # Create empty lists for successful & unsuccessful
         successful_unquarantine = []
         unsuccessful_unquarantine = []
 
+        # Convert the original array of hostnames to IDs
+        agent_id_list = self._convert_hostnames_to_id(agent_hostname_list)
+
+        # For each agent ID in the list, perform unquarantine
         for agent_id in agent_id_list:
             # Check if agent with ID exists
             payload = {
@@ -442,5 +440,18 @@ class ApiConnection:
                 cause="Insight Agent API returned data in an unexpected format.\n",
                 data=str(results_object),
             )
+
+        return agent_list
+
+    def _convert_hostnames_to_id(self, hostnames: List[str]) -> List[str]:
+        """
+        Function designed for the `quarantine_multiple` action which converts
+        the array of hostnames to an array of agent IDs
+        :param hostnames: Array containing the hostnames as a string
+        :return: Array containing host IDs
+        """
+        agent_list = []
+        for agent in hostnames:
+            agent_list.append(self._get_agent_id(agent))
 
         return agent_list

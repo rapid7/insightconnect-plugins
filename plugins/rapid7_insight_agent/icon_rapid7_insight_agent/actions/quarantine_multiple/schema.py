@@ -9,13 +9,13 @@ class Component:
 
 class Input:
     AGENT_ARRAY = "agent_array"
+    INTERVAL = "interval"
     QUARANTINE_STATE = "quarantine_state"
     
 
 class Output:
+    FAILURE = "failure"
     SUCCESS = "success"
-    SUCCESSFUL_QUARANTINE = "successful_quarantine"
-    UNSUCCESSFUL_QUARANTINE = "unsuccessful_quarantine"
     
 
 class QuarantineMultipleInput(insightconnect_plugin_runtime.Input):
@@ -33,16 +33,24 @@ class QuarantineMultipleInput(insightconnect_plugin_runtime.Input):
       },
       "order": 1
     },
+    "interval": {
+      "type": "integer",
+      "title": "Interval",
+      "description": "Length of time in seconds to try to take action on a device. This is also called Advertisement Period",
+      "default": 604800,
+      "order": 2
+    },
     "quarantine_state": {
       "type": "boolean",
       "title": "Quarantine State",
       "description": "Set to true to quarantine a host, set to false to unquarantine",
       "default": true,
-      "order": 2
+      "order": 3
     }
   },
   "required": [
     "agent_array",
+    "interval",
     "quarantine_state"
   ]
 }
@@ -58,29 +66,23 @@ class QuarantineMultipleOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "success": {
-      "type": "boolean",
-      "title": "Success",
-      "description": "Operation status",
-      "order": 3
-    },
-    "successful_quarantine": {
+    "failure": {
       "type": "array",
-      "title": "Successful Quarantine",
-      "description": "List of successfully quarantined hosts",
-      "items": {
-        "type": "string"
-      },
-      "order": 1
-    },
-    "unsuccessful_quarantine": {
-      "type": "array",
-      "title": "Unsuccessful Quarantine",
+      "title": "Unsuccessful (Un)Quarantine",
       "description": "List of unsuccessfully quarantined hosts",
       "items": {
         "type": "string"
       },
       "order": 2
+    },
+    "success": {
+      "type": "array",
+      "title": "Successful (Un)Quarantine",
+      "description": "List of successfully quarantined hosts",
+      "items": {
+        "type": "string"
+      },
+      "order": 1
     }
   }
 }
