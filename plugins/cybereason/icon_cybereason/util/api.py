@@ -5,7 +5,7 @@ import re
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 import json
 from logging import Logger
-from typing import Optional, Dict, Any, List
+from typing import Optional, Dict, Any
 from urllib.parse import urljoin
 
 
@@ -135,7 +135,6 @@ class CybereasonAPI:
             },
         )
         try:
-            print(f'\n\n{response["data"]["resultIdToElementDataMap"]}\n\n')
             return response["data"]["resultIdToElementDataMap"]
 
         except KeyError:

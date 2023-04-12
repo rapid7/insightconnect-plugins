@@ -118,7 +118,7 @@ Example output:
     },
     "finalState": false,
     "totalNumberOfProbes": 1,
-    "initiatorUser": "admin@myserver.com",
+    "initiatorUser": "user@example.com",
     "startTime": 1523875125179,
     "aborterUser": null,
     "abortTime": 0,
