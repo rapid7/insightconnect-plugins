@@ -146,9 +146,12 @@ class ApiConnection:
                 "variables": {"orgID": self.org_key, "agentID": agent_id},
             }
             results_object = self._post_payload(payload)
-            agent = results_object.get("data").get("assets")[0].get("agent")
-            if not agent:
-                raise Exception
+            try:
+                agent = results_object.get("data").get("assets")[0].get("agent")
+                if not agent:
+                    raise Exception
+            except Exception:
+                self.logger.error(f"An agent with the following id could not be found {agent_id}")
 
             # If it exists then unquarantine it
             unquarantine_payload = {
