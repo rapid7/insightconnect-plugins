@@ -281,7 +281,7 @@ class CybereasonAPI:
             )
 
         if quarantine:
-            return [k for k in results.keys()]
+            return list(results.keys())
 
         quarantined_file_guids = []
         for key in results.keys():
@@ -289,8 +289,8 @@ class CybereasonAPI:
                 quarantined_files = results[key]["elementValues"]["quarantineFile"]["elementValues"]
             except KeyError:
                 continue
-            for f in quarantined_files:
-                quarantined_file_guids.append(f.get("guid"))
+            for file in quarantined_files:
+                quarantined_file_guids.append(file.get("guid"))
 
         return quarantined_file_guids
 
