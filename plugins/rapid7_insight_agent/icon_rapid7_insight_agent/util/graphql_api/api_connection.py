@@ -148,7 +148,11 @@ class ApiConnection:
             results_object = self._post_payload(payload)
             agent = results_object.get("data").get("assets")[0].get("agent")
             if not agent:
-                raise PluginException(cause="Agent ID not found.", assistance="Please try entering a valid hostname to unquarantine.", data=f"Agent ID: {agent_id}")
+                raise PluginException(
+                    cause="Agent ID not found.",
+                    assistance="Please try entering a valid hostname to unquarantine.",
+                    data=f"Agent ID: {agent_id}",
+                )
 
             # If it exists then unquarantine it
             unquarantine_payload = {
