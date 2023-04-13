@@ -5,7 +5,7 @@ import re
 from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
 import json
 from logging import Logger
-from typing import Optional, Dict, Any, Union
+from typing import Optional, Dict, Any, Union, List
 from urllib.parse import urljoin
 
 
@@ -92,7 +92,7 @@ class CybereasonAPI:
             )
         return sensors.get("sensors")[0]
 
-    def archive_sensor(self, sensor_ids: list, argument: str) -> Dict[str, Any]:
+    def archive_sensor(self, sensor_ids: List[str], argument: str) -> Dict[str, Any]:
         return self.send_request(
             "POST", "/rest/sensors/action/archive", payload={"sensorsIds": sensor_ids, "argument": argument}
         )
@@ -143,7 +143,9 @@ class CybereasonAPI:
                 assistance="Please ensure that provided Malop ID is valid and try again.",
             )
 
-    def get_visual_search(self, requested_type: str, filters: list, custom_fields: list) -> Dict[str, Any]:
+    def get_visual_search(
+        self, requested_type: str, filters: List[Dict[str, Union[str, List[str]]]], custom_fields: List[str]
+    ) -> Dict[str, Any]:
         try:
             return self.send_request(
                 "POST",
@@ -165,7 +167,7 @@ class CybereasonAPI:
             )
 
     @staticmethod
-    def check_status_codes(status_code: int, response) -> Union[Dict[str, Any], None]:
+    def check_status_codes(status_code: int, response: Any) -> Union[Dict[str, Any], None]:
         if status_code == 401:
             raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
         if status_code == 403:
@@ -247,7 +249,7 @@ class CybereasonAPI:
         return sensor_filter
 
     @staticmethod
-    def get_machine_targets(results: Dict[str, Any], machine_guid: str) -> list:
+    def get_machine_targets(results: Dict[str, Any], machine_guid: str) -> List[str]:
         target_ids = []
 
         for key, value in results.items():
@@ -268,7 +270,7 @@ class CybereasonAPI:
 
         return target_ids
 
-    def get_file_guids(self, files: list, machine_name: str, quarantine: bool) -> list:
+    def get_file_guids(self, files: List[str], machine_name: str, quarantine: bool) -> List[str]:
         filters = [
             {"facetName": "elementDisplayName", "filterType": "ContainsIgnoreCase", "values": files},
             {"facetName": "ownerMachine", "filterType": "ContainsIgnoreCase", "values": [machine_name]},
@@ -296,7 +298,7 @@ class CybereasonAPI:
         return quarantined_file_guids
 
     @staticmethod
-    def get_files_in_malop(malop_data: Dict[str, Any]) -> list:
+    def get_files_in_malop(malop_data: Dict[str, Any]) -> List[str]:
         try:
             element_values = malop_data["elementValues"]["primaryRootCauseElements"]["elementValues"]
         except KeyError:
@@ -332,7 +334,7 @@ class CybereasonAPI:
             )
 
     @staticmethod
-    def get_list_of_actions(quarantine: bool, file_guids: list) -> list:
+    def get_list_of_actions(quarantine: bool, file_guids: List[str]) -> List[Dict[str, str]]:
         if quarantine:
             action_type = "QUARANTINE_FILE"
         else:

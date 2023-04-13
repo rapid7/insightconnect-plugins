@@ -19,8 +19,8 @@ class QuarantineFile(insightconnect_plugin_runtime.Action):
         malop_id = params.get(Input.MALOP_ID)
         quarantine = params.get(Input.QUARANTINE)
         malop_data = self.connection.api.get_malop(malop_id)
-        sensor_guid = sensor_details["guid"]
-        sensor_machine_name = sensor_details["machineName"]
+        sensor_guid = sensor_details.get("guid")
+        sensor_machine_name = sensor_details.get("machineName")
 
         CybereasonAPI.check_machine_in_malop(malop_data, sensor_guid, malop_id)
 
