@@ -30,13 +30,15 @@ class ZoomAPI:
         account_id: Optional[str] = None,  # For OAuth only
         client_id: Optional[str] = None,  # For OAuth only
         client_secret: Optional[str] = None,  # For OAuth only
-        jwt_token: Optional[str] = None,
-    ):  # For JWT auth only
+        oauth_retry_limit: Optional[int] = 5,  # For OAuth only
+        jwt_token: Optional[str] = None  # For JWT auth only
+    ):
         self.api_url = "https://api.zoom.us/v2"
         self.oauth_url = "https://zoom.us/oauth/token"
         self.account_id = account_id
         self.client_id = client_id
         self.client_secret = client_secret
+        self.oauth_retry_limit = oauth_retry_limit
         self.jwt_token = jwt_token
         self.logger = logger
 
@@ -126,7 +128,7 @@ class ZoomAPI:
                 cause="Configured credentials do not have permission for this API endpoint.",
                 assistance="Please ensure credentials have required permissions.",
             ),
-            429: self._handle_rate_limit_error(response),
+            429: self.get_exception_for_rate_limit(response),
             4700: PluginException(
                 cause="Configured credentials do not have permission for this API endpoint.",
                 assistance="Please ensure credentials have required permissions.",
@@ -148,6 +150,7 @@ class ZoomAPI:
         params: dict = None,
         json_data: dict = None,
         allow_404: bool = False,
+        retry_401_count: int = 0,
     ) -> Optional[dict]:  # noqa: MC0001
         # Determine which type of authentication mechanism to use
         if self.oauth_token or self._is_using_oauth():
@@ -171,6 +174,7 @@ class ZoomAPI:
                         "json_data": json_data,
                         "allow_404": allow_404,
                     },
+                    retry_401_count=retry_401_count
                 )
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
@@ -181,41 +185,19 @@ class ZoomAPI:
             self.logger.info(f"Request to {url} failed: {error}")
             raise PluginException(preset=PluginException.Preset.UNKNOWN)
 
-    def _handle_response(self, response: Response, allow_404: bool, original_call_args: dict):
+    def _handle_response(self, response: Response, allow_404: bool, original_call_args: dict, retry_401_count: int):
         """
         Helper function to process the response based on the status code returned.
         :param response: Response object
         :param allow_404: Boolean value to indicate whether to allow 404 status code to be ignored
         """
 
-        if response.status_code == 400:
-            raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.json())
-
-        if response.status_code == 401:
-            if self.oauth_token or self._is_using_oauth():
-                self.logger.info(f"Received HTTP {response.status_code}, re-authenticating to Zoom...")
-                self._refresh_oauth_token()
-                return self._call_api(**original_call_args)
-
-            raise PluginException(
-                cause="The JWT token provided in the plugin connection configuration is either " "invalid or expired.",
-                assistance="Please update the plugin connection configuration with a valid or " "updated JWT token.",
-            )
-
-        if response.status_code == 404:
-            if allow_404:
-                return None
-
-            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.json())
-
-        if response.status_code == 409:
-            raise PluginException(
-                cause="User already exists.", assistance="Please check your input and try again.", data=response.json()
-            )
-
-        if response.status_code == 429:
-            exception = self._handle_rate_limit_error(response=response)
-            raise exception
+        exceptions_4xx = {
+            400: PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.json()),
+            404: PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.json()),
+            409: PluginException(cause="User already exists.", assistance="Please check your input and try again.", data=response.json()),
+            429: self.get_exception_for_rate_limit(response=response)
+        }
 
         # Success; no content
         if response.status_code == 204:
@@ -224,8 +206,32 @@ class ZoomAPI:
         if 200 <= response.status_code < 300:
             return response.json()
 
+        for status_code, exception in exceptions_4xx.items():
+            if response.status_code == status_code:
+                if status_code == 404 and allow_404:
+                    return None
+                raise exception
+
+        # 401 requires extra logic, so it is not included in the 4xx dict
+        if response.status_code == 401:
+            if self.oauth_token or self._is_using_oauth():
+                if retry_401_count == (self.oauth_retry_limit - 1):  # -1 to account for retries starting at 0
+                    raise PluginException(cause="OAuth authentication retry limit was met.",
+                                          assistance="Ensure your OAuth connection credentials are valid. "
+                                                     "If running a large number of integrations with Zoom, consider "
+                                                     "increasing the OAuth authentication retry limit to accommodate.")
+                self.logger.info(f"Received HTTP {response.status_code}, re-authenticating to Zoom...")
+                retry_401_count += 1
+                self._refresh_oauth_token()
+                return self._call_api(**original_call_args, retry_401_count=retry_401_count)
+
+            raise PluginException(
+                cause="The JWT token provided in the plugin connection configuration is either " "invalid or expired.",
+                assistance="Please update the plugin connection configuration with a valid or " "updated JWT token.",
+            )
+
     @staticmethod
-    def _handle_rate_limit_error(response: Response) -> PluginException:
+    def get_exception_for_rate_limit(response: Response) -> PluginException:
         rate_limit_type = response.headers.get("X-RateLimit-Type", "")
         rate_limit_limit = response.headers.get("X-RateLimit-Limit")
         rate_limit_remaining = response.headers.get("X-RateLimit-Remaining")
