@@ -24,7 +24,6 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Tenant Name",
       "description": "Armorblox Tenant Name",
-      "default": "outbound-integrations",
       "order": 1
     }
   },

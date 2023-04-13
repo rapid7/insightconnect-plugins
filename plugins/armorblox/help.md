@@ -4,13 +4,12 @@ Armorblox secures enterprise communications over email and other cloud office ap
 
 # Key Features
 
-* Fetches armorblox detected incidents for the input tenant.
+* Fetches incidents detected by Armorblox for the given tenant.
 * Retrieves the remedation action for a given incident.
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product's user interface
+* Requires an API Key from the product.
 
 # Supported Product Versions
 
@@ -162,4 +161,3 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [Armorblox](LINK TO PRODUCT/VENDOR WEBSITE)
-

@@ -19,7 +19,7 @@ class TestConnection(TestCase):
     def test_connection_ok(self):
         self.connection.connect(
             {
-                Input.API_KEY: "g9nCCM6sNZ2CBt12UWgGA2IX+i3e6TP0MuwZ1Oqh6KU=",
+                Input.API_KEY: "9de5069c5afe602b2ea0a04b66beb2c0",
                 Input.TENANT_NAME: "outbound-integrations",
             }
         )

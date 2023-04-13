@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get a list of incidents identified by Armorblox, by default it starts polling all the incidents since last day"
+    DESCRIPTION = "Get a list of incidents identified by Armorblox. By default, it starts querying for all the incidents since the previous day"
 
 
 class Input:
@@ -25,8 +25,8 @@ class GetIncidentsInput(insightconnect_plugin_runtime.Input):
   "properties": {
     "interval": {
       "type": "integer",
-      "title": "Fetch_Interval",
-      "description": "Polling inteval in seconds",
+      "title": "Fetch Interval",
+      "description": "Polling interval in seconds",
       "default": 600,
       "order": 1
     }
@@ -47,7 +47,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
     "incidents": {
       "type": "array",
       "title": "Incidents",
-      "description": "A list of 100 incidents identified by Armorblox",
+      "description": "A list of incidents identified by Armorblox",
       "items": {
         "$ref": "#/definitions/incident"
       },
@@ -102,11 +102,11 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "App Name",
           "description": "App Name",
-          "order": 10
+          "order": 9
         },
         "date": {
           "type": "string",
-          "title": "Occured Date",
+          "title": "Incident Date",
           "displayType": "date",
           "format": "date-time",
           "order": 3
@@ -115,7 +115,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
           "$ref": "#/definitions/engagement",
           "title": "Engagements",
           "description": "Engagements",
-          "order": 15
+          "order": 14
         },
         "external_senders": {
           "type": "array",
@@ -124,34 +124,34 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "string"
           },
-          "order": 11
+          "order": 10
         },
         "external_users": {
           "type": "array",
-          "title": "external users",
+          "title": "External users",
           "description": "List of external users",
           "items": {
             "$ref": "#/definitions/user"
           },
-          "order": 18
+          "order": 17
         },
         "final_detection_tags": {
           "type": "array",
           "title": "Detection tags",
-          "description": "Detection Tags",
+          "description": "Detection tags",
           "items": {
             "$ref": "#/definitions/final_detection_tag"
           },
-          "order": 19
+          "order": 18
         },
         "folder_categories": {
           "type": "array",
-          "title": "Folder category",
-          "description": "Folder category",
+          "title": "Folder categories",
+          "description": "Folder categories",
           "items": {
             "type": "string"
           },
-          "order": 12
+          "order": 11
         },
         "id": {
           "type": "string",
@@ -163,7 +163,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Incident Type",
           "description": "Incident Type",
-          "order": 14
+          "order": 13
         },
         "object_type": {
           "type": "string",
@@ -193,13 +193,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "string"
           },
-          "order": 16
-        },
-        "research_status": {
-          "type": "string",
-          "title": "Research Status",
-          "description": "Research Status",
-          "order": 9
+          "order": 15
         },
         "resolution_state": {
           "type": "string",
@@ -210,7 +204,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
         "scl_score": {
           "type": "integer",
           "title": "SCL Score",
-          "order": 13
+          "order": 12
         },
         "tagged": {
           "type": "boolean",
@@ -220,8 +214,8 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
         },
         "title": {
           "type": "string",
-          "title": "title",
-          "description": "title",
+          "title": "Subject",
+          "description": "Subject",
           "order": 5
         },
         "users": {
@@ -231,7 +225,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "$ref": "#/definitions/user"
           },
-          "order": 17
+          "order": 16
         }
       },
       "definitions": {
@@ -277,7 +271,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "email": {
               "type": "string",
-              "title": "user email",
+              "title": "User email",
               "description": "User email",
               "order": 2
             },
@@ -303,7 +297,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "email": {
           "type": "string",
-          "title": "user email",
+          "title": "User email",
           "description": "User email",
           "order": 2
         },

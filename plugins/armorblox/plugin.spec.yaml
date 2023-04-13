@@ -9,7 +9,7 @@ vendor: armorblox
 support: rapid7
 supported_versions: ["1.0.0"]
 status: []
-tags: ["Alerts", "Attack", "Breach", "Compliance", "Email", "Forensics", "GDPR","HIPAA","Incident Response","IT","Machine Learning","Malware","PII","Scam","Security","Security Analytics","Spam","Threat Intelligence"]
+tags: ["Alerts", "Attack", "Breach", "Compliance", "Email", "Forensics", "GDPR", "HIPAA", "Incident Response", "IT", "Machine Learning", "Malware", "PII", "Scam", "Security", "Security Analytics", "Spam", "Threat Intelligence"]
 hub_tags:
   use_cases: ['cloud_security', 'remediation_management',  'threat_detection_and_response']
   keywords: ['threat_intelligence']
@@ -28,7 +28,7 @@ types:
       type: string
       required: false
     email:
-      title: user email
+      title: User email
       description: User email
       type: string
       required: false
@@ -71,7 +71,7 @@ types:
       type: boolean
       required: false
     date:
-      title: Occured Date
+      title: Incident Date
       description: 
       type: date
       required: false
@@ -81,8 +81,8 @@ types:
       type: '[]string'
       required: false
     title:
-      title: title
-      description: title
+      title: Subject
+      description: Subject
       type: 'string'
       required: false          
     resolution_state:
@@ -100,11 +100,6 @@ types:
       description: Incident ID
       type: string
       required: false
-    research_status:
-      title: Research Status
-      description: Research Status
-      type: string
-      required: false
     app_name:
       title: App Name
       description: App Name
@@ -116,8 +111,8 @@ types:
       type: "[]string"
       required: 
     folder_categories:
-      title: Folder category
-      description: Folder category
+      title: Folder categories
+      description: Folder categories
       type: "[]string"
       required: false
     scl_score:
@@ -146,13 +141,13 @@ types:
       type: "[]user"
       required: false
     external_users:
-      title: external users
+      title: External users
       description: List of external users
       type: "[]user"
       required: false
     final_detection_tags:
       title: Detection tags
-      description: Detection Tags 
+      description: Detection tags 
       type: "[]final_detection_tag"
       required: false
 
@@ -163,7 +158,6 @@ connection:
     type: string
     required: true
     example: outbound-integrations
-    default: outbound-integrations
   api_key:
     type: credential_secret_key
     title: Armorblox API Key
@@ -174,11 +168,11 @@ connection:
 triggers:
   get_incidents:
     title: Get Incidents
-    description: Get a list of incidents identified by Armorblox, by default it starts polling all the incidents since last day
+    description: Get a list of incidents identified by Armorblox. By default, it starts querying for all the incidents since the previous day
     input:
       interval:
-        title: Fetch_Interval
-        description: Polling inteval in seconds
+        title: Fetch Interval
+        description: Polling interval in seconds
         type: integer
         required: false
         default: 600
@@ -193,11 +187,11 @@ triggers:
 actions:
   get_remediation_action:
     title: Get Remediation Action
-    description: Get remediation action of a incident identified by Armorblox
+    description: Get remediation action of an incident identified by Armorblox
     input:
       incident_id:
         title: Incident ID
-        description: An integer number representing the incident
+        description: An integer number identifying the incident
         type: string
         required: true
         example: 3490
