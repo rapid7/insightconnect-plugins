@@ -28,4 +28,3 @@ class TestArchiveSensor(TestCase):
         )
         expected = '"batchId": -12345678'
         assert json.dumps(actual).__contains__(expected)
-        # find a way to make this shi work

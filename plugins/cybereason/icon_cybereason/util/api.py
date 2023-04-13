@@ -305,7 +305,7 @@ class CybereasonAPI:
                 assistance="Please provide a Malop GUID of a Malop that has files involved.",
             )
 
-        file_names = [e.get("name") for e in element_values if e.get("elementType") == "File"]
+        file_names = [element.get("name") for element in element_values if element.get("elementType") == "File"]
 
         if file_names:
             return file_names
@@ -325,7 +325,7 @@ class CybereasonAPI:
                 assistance="Please provide a Malop GUID of a Malop that has machines involved.",
             )
 
-        if not [m for m in element_values if m.get("guid") == machine_guid]:
+        if not [machine for machine in element_values if machine.get("guid") == machine_guid]:
             raise PluginException(
                 cause="Sensor provided is not related to the Malop ID Provided.",
                 assistance=f"Make sure the provided sensor is involved in the Malop: {malop_id}.",
