@@ -131,6 +131,7 @@ class ApiConnection:
 
         :return: Two lists containing asset ids for successful & unsuccessful unquarantine operations.
         """
+
         # Create empty lists for successful & unsuccessful
         successful_unquarantine = []
         unsuccessful_unquarantine = []
@@ -140,21 +141,6 @@ class ApiConnection:
 
         # For each agent ID in the list, perform unquarantine
         for agent_id in agent_id_list:
-            # Check if agent with ID exists
-            payload = {
-                "query": "query( $orgID: String! $agentID: String! ) { assets( orgId: $orgID ids: [$agentID] ){ agent { id quarantineState{ currentState } agentStatus } } }",
-                "variables": {"orgID": self.org_key, "agentID": agent_id},
-            }
-            results_object = self._post_payload(payload)
-            agent = results_object.get("data", {}).get("assets")[0].get("agent")
-            if not agent:
-                raise PluginException(
-                    cause="Agent ID not found.",
-                    assistance="Please try entering a valid hostname to unquarantine.",
-                    data=f"Agent ID: {agent_id}",
-                )
-
-            # If it exists then unquarantine it
             unquarantine_payload = {
                 "query": "mutation( $orgID: String! $agentID: String!) { unquarantineAssets( orgId: $orgID assetIds: [$agentID] ) { results { assetId failed } } }",
                 "variables": {"orgID": self.org_key, "agentID": agent_id},
