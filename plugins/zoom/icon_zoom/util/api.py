@@ -230,6 +230,11 @@ class ZoomAPI:
                 assistance="Please update the plugin connection configuration with a valid or " "updated JWT token.",
             )
 
+        # If we reach this point, all known/documented status codes have been exhausted, so the Zoom API has likely
+        # changed and the plugin will require an update.
+        raise PluginException(cause=f"Received an undocumented status code from the Zoom API ({response.status_code})",
+                              assistance="Please contact support for assistance.")
+
     @staticmethod
     def get_exception_for_rate_limit(response: Response) -> PluginException:
         rate_limit_type = response.headers.get("X-RateLimit-Type", "")
