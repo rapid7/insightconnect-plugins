@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Active Directory LDAP"
 Vendor = "rapid7"
-Version = "5.3.5"
+Version = "6.0.0"
 Description = "This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network"
 
 
@@ -40,7 +40,11 @@ def main():
 
             self.add_action(actions.DisableUser())
 
+            self.add_action(actions.DisableUsers())
+
             self.add_action(actions.EnableUser())
+
+            self.add_action(actions.EnableUsers())
 
             self.add_action(actions.ForcePasswordReset())
 

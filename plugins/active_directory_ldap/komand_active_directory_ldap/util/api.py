@@ -1,7 +1,7 @@
 import json
 from functools import wraps
 from json import loads
-
+from typing import List
 import ldap3
 from ldap3 import MODIFY_REPLACE, ALL_ATTRIBUTES, ALL_OPERATIONAL_ATTRIBUTES
 from ldap3 import extend
@@ -164,6 +164,28 @@ class ActiveDirectoryLdapAPI:
     @with_connection
     def manage_user(self, conn, dn: str, status: bool):
         return ADUtils.change_account_status(conn, dn, status, self.logger)
+
+    @with_connection
+    def manage_users(self, conn, dns: List[str], status: bool) -> dict:
+        """
+        manage_users handles disabling or enabling of a list of users, returning successes and failures.
+
+        :param conn: Connection for LDAP
+        :param dns: Distinguishes Names
+        :param status: Whether user is enabled or disabled
+        :return: Dictionary containing two lists, one for successfully modified Distinguishes Names and another for
+        unsuccessfully modified Distinguishes Names and the cause of the failure
+        """
+        successes = []
+        failures = []
+        for dn in dns:
+            try:
+                ADUtils.change_account_status(conn, dn, status, self.logger)
+                successes.append(dn)
+            except Exception as exception:
+                failures.append({"dn": dn, "error": str(exception)})
+                self.logger.error(f"Error: Failed to modify user {dn}")
+        return {"successes": successes, "failures": failures}
 
     @with_connection
     def force_password_reset(self, conn, dn: str, password_expire: dict):
