@@ -64,14 +64,14 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
       "properties": {
         "fwd_mail_count": {
           "type": "string",
-          "title": "Mail Count",
-          "description": "Mail Count",
+          "title": "Forwarded Mail Count",
+          "description": "Forwarded Mail Count",
           "order": 1
         },
         "reply_mail_count": {
           "type": "string",
-          "title": "Mail Count",
-          "description": "Mail Count",
+          "title": "Reply Mail Count",
+          "description": "Reply Mail Count",
           "order": 2
         }
       }
@@ -235,14 +235,14 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
           "properties": {
             "fwd_mail_count": {
               "type": "string",
-              "title": "Mail Count",
-              "description": "Mail Count",
+              "title": "Forwarded Mail Count",
+              "description": "Forwarded Mail Count",
               "order": 1
             },
             "reply_mail_count": {
               "type": "string",
-              "title": "Mail Count",
-              "description": "Mail Count",
+              "title": "Reply Mail Count",
+              "description": "Reply Mail Count",
               "order": 2
             }
           }

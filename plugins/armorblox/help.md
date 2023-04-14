@@ -41,13 +41,13 @@ Example input:
 
 #### Get Remediation Action
 
-This action is used to get remediation action of a incident identified by Armorblox.
+This action is used to get remediation action of an incident identified by Armorblox.
 
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|incident_id|string|None|True|An integer number representing the incident|None|3490|
+|incident_id|string|None|True|An integer number identifying the incident|None|3490|
 
 Example input:
 
@@ -72,7 +72,7 @@ Example output:
 
 #### Get Incidents
 
-This trigger is used to get a list of incidents identified by Armorblox. By default, it starts polling all the incidents since last day.
+This trigger is used to get a list of incidents identified by Armorblox. By default, it starts querying for all the incidents since the previous day.
 
 ##### Input
 
@@ -105,8 +105,8 @@ Example output:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|Mail Count|string|False|Mail Count|
-|Mail Count|string|False|Mail Count|
+|Forwarded Mail Count|string|False|Forwarded Mail Count|
+|Reply Mail Count|string|False|Reply Mail Count|
 
 #### final_detection_tag
 
@@ -120,30 +120,29 @@ Example output:
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |App Name|string|False|App Name|
-|Occured Date|date|False|None|
+|Incident Date|date|False|None|
 |Engagements|engagement|False|Engagements|
 |External senders|[]string|False|List of external senders|
-|external users|[]user|False|List of external users|
-|Detection tags|[]final_detection_tag|False|Detection Tags|
-|Folder category|[]string|False|Folder category|
+|External users|[]user|False|List of external users|
+|Detection tags|[]final_detection_tag|False|Detection tags|
+|Folder categories|[]string|False|Folder categories|
 |Incident ID|string|False|Incident ID|
 |Incident Type|string|False|Incident Type|
 |Object Type|string|False|Object Type|
 |policy_names|[]string|False|List of policies|
 |Priority|string|False|Priority of the incident|
 |Remediation Action|[]string|False|Remediation Action|
-|Research Status|string|False|Research Status|
 |resolution_state|string|False|Resolution State|
 |SCL Score|integer|False|None|
 |Is email tagged|boolean|False|Is email tagged|
-|title|string|False|title|
+|Subject|string|False|Subject|
 |users|[]user|False|List of users|
 
 #### user
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|user email|string|False|User email|
+|User email|string|False|User email|
 |Is User VIP|boolean|False|Is User VIP|
 |user name|string|False|User name|
 
@@ -161,3 +160,4 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [Armorblox](https://www.armorblox.com/)
+

@@ -19,8 +19,8 @@ class TestConnection(TestCase):
     def test_connection_ok(self):
         self.connection.connect(
             {
-                Input.API_KEY: "9de5069c5afe602b2ea0a04b66beb2c0",
-                Input.TENANT_NAME: "outbound-integrations",
+                Input.API_KEY: "any-api-key",
+                Input.TENANT_NAME: "my-tenant-name",
             }
         )
         response = self.connection.test()
