@@ -6,18 +6,18 @@ import zipfile
 import insightconnect_plugin_runtime
 import requests
 from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
-from typing import Union, Tuple
+from typing import Tuple
+from datetime import datetime, timedelta, timezone
 
 from komand_sentinelone.util.api import SentineloneAPI
 from komand_sentinelone.util.helper import Helper
 from .schema import ConnectionSchema, Input
 from komand_sentinelone.util.constants import (
-    BASIC_AUTH,
-    API_TOKEN_AUTH,
-    USERNAME_FIELD,
     DATA_FIELD,
-    PASSWORD_FIELD,
     API_TOKEN_FIELD,
+    CONSOLE_USER_HEADER_TOKEN_FIELD,
+    SERVICE_USER_HEADER_TOKEN_FIELD,
+    SERVICE_USER_TYPE,
 )
 
 
@@ -25,13 +25,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def __init__(self):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.client = None
-        self.username = None
-        self.password = None
         self.url = None
         self.api_version = None
         self.api_key = None
         self.token = None
-        self.authentication_type = None
+        self.user_type = None
+        self.header = None
 
     def connect(self, params={}):
         """
@@ -44,11 +43,9 @@ class Connection(insightconnect_plugin_runtime.Connection):
           blah = self.connection.blah
         """
         self.logger.info("Connect: Connecting...")
-        self.authentication_type = params.get(Input.AUTHENTICATION_TYPE)
-        self.username = params.get(Input.BASIC_AUTH_CREDENTIALS).get("username")
-        self.password = params.get(Input.BASIC_AUTH_CREDENTIALS).get("password")
         self.api_key = params.get(Input.API_KEY).get("secretKey")
         self.url = params.get(Input.URL)
+        self.user_type = params.get(Input.USER_TYPE)
 
         index = self.url.find("/", self._get_start_index(self.url))
         if index >= 0:
@@ -70,6 +67,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def get_auth_token(self) -> Tuple[str, str]:
         version = "2.1"
+        if self.user_type == SERVICE_USER_TYPE:
+            return self.api_key, version
         request_url = self._prepare_auth_url_based_on_version(version)
         request_data = self._prepare_body_for_auth_request()
         self.logger.info(f"Trying to authenticate with API version {version}")
@@ -112,37 +111,28 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def _prepare_auth_url_based_on_version(self, version: str) -> str:
         url = f"{self.url}web/api/v{version}/users/login"
-        if self.authentication_type == BASIC_AUTH:
-            return url
-        elif self.authentication_type == API_TOKEN_AUTH:
-            return f"{url}/by-api-token"
+        return f"{url}/by-api-token"
 
     def _prepare_body_for_auth_request(self):
-        if self.authentication_type == BASIC_AUTH:
-            if self.username and self.password:
-                return {USERNAME_FIELD: self.username, PASSWORD_FIELD: self.password}
-            else:
-                raise PluginException(
-                    cause="Inputs related to basic authentication are invalid.",
-                    assistance="Check username and password inputs and try again. "
-                    "If the problem persists contact with development team.",
-                )
-        elif self.authentication_type == API_TOKEN_AUTH:
-            if self.api_key:
-                return {DATA_FIELD: {API_TOKEN_FIELD: self.api_key}}
-            else:
-                raise PluginException(
-                    cause="Inputs related to API key authentication is invalid.",
-                    assistance="Check API key input and try again. "
-                    "If the problem persists contact with development team.",
-                )
+        if self.api_key:
+            return {DATA_FIELD: {API_TOKEN_FIELD: self.api_key}}
+        else:
+            raise PluginException(
+                cause="Inputs related to API key authentication is invalid.",
+                assistance="Check API key input and try again. "
+                "If the problem persists contact with development team.",
+            )
 
     def make_token_header(self):
+        if self.user_type == SERVICE_USER_TYPE:
+            token_field = SERVICE_USER_HEADER_TOKEN_FIELD
+        else:
+            token_field = CONSOLE_USER_HEADER_TOKEN_FIELD
+
         self.header = {
-            "Authorization": f"Token {self.token}",
+            "Authorization": f"{token_field} {self.token}",
             "Content-Type": "application/json",
         }
-
         return self.header
 
     def activities_list(self, parameters):
@@ -173,6 +163,41 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def agents_action(self, action: str, agents_filter: str):
         return self._call_api("POST", f"agents/actions/{action}", {"filter": agents_filter})
+
+    def fetch_file_by_agent_id(self, agent_id: str, file_path: str, password: str):
+        response = self._call_api(
+            "POST", f"agents/{agent_id}/actions/fetch-files", {"data": {"password": password, "files": [file_path]}}
+        )
+        if len(response.get("errors", [])) == 0:
+            return True
+
+        errors = "\n".join(response.get("errors"))
+        raise PluginException(
+            cause="An error occurred when trying to fetch file.",
+            assistance="Check the error information and adjust inputs accordingly",
+            data=errors,
+        )
+
+    def run_remote_script(self, user_filter: dict, data: dict) -> dict:
+        endpoint = "remote-scripts/execute"
+        response = self._call_api(
+            "POST",
+            endpoint,
+            {"filter": user_filter, "data": data},
+        )
+        affected = 0
+        if len(response.get("errors", [])) == 0:
+            returned_data = response.get("data", [])
+            if returned_data:
+                affected = returned_data["affected"]
+            return affected
+
+        errors = "\n".join(response.get("errors"))
+        raise PluginException(
+            cause="An error occurred when trying to fetch file.",
+            assistance="Check the error information and adjust inputs accordingly",
+            data=errors,
+        )
 
     def download_file(self, agent_filter: dict, password: str):
         self.get_auth_token()
@@ -343,7 +368,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
         return set(existing_os_types) == {"linux", "windows", "macos"}
 
     def get_item_ids_by_hash(self, blacklist_hash: str):
-        response = self._call_api("GET", "restrictions", params={"type": "black_hash", "value": blacklist_hash})
+        response = self._call_api(
+            "GET",
+            "restrictions",
+            params={"type": "black_hash", "includeChildren": True, "includeParents": True, "value": blacklist_hash},
+        )
 
         if len(response.get("errors", [])) == 0:
             ids = []
@@ -422,7 +451,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         of incident IDs, against the SentinelOne instance, to see
         if they exist. Only incident IDs that do exist within that
         instance are returned.
-
         @param incident_ids: list of incidents IDs to check if they
         exist in the SentinelOne instance
         @param _type: type of the incident - either 'threats' or
@@ -447,7 +475,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         'analystVerdict' or 'incidentStatus') of the incident is
         different to the 'new_state' attribute. Only incident IDs that
         have different status are returned.
-
         @param incident_ids: list of incidents IDs to validate the
         status of in the SentinelOne instance
         @param _type: type of the incident - either 'threats' or
@@ -521,7 +548,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
         full_response: bool = False,
         override_api_version: str = "",
     ):
-
         # We prefer to use the same api version from the token creation,
         # But some actions require 2.0 and not 2.1 (and vice versa), in that case just pass in the right version
         api_version = self.api_version

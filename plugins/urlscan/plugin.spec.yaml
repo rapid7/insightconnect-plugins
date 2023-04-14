@@ -6,8 +6,9 @@ title: urlscan.io
 vendor: rapid7
 support: community
 status: []
+cloud_ready: true
 description: Analyze URLs for malicious indicators using the URLScan website scanner
-version: 4.0.2
+version: 4.1.1
 supported_versions:
   - urlscan.io API v1
 resources:
@@ -21,7 +22,7 @@ tags:
   - urlscan
 hub_tags:
   use_cases: [threat_detection_and_response, data_enrichment]
-  keywords: [url, intel]
+  keywords: [url, intel, cloud_enabled]
   features: []
 types:
   page:

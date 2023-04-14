@@ -69,5 +69,7 @@ class Util:
             == "https://rapid7.service-now.com/api/now/attachment?sysparm_query=table_sys_id=c1565da4456c2df374793d471d6ae8dd"
         ):
             return MockResponse("get_attachment_by_table_sys_id_empty.json", 200)
+        elif kwargs["url"] == "https://rapid7.service-now.com/api/sn_chg_rest/v1/change":
+            return MockResponse("create_change_request.json", 200)
 
         raise Exception("Not implemented")

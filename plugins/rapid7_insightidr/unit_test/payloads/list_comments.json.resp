@@ -1,0 +1,15 @@
+{
+  "data": [
+    {
+      "created_time": "2022-08-18T12:53:26.676Z",
+      "rrn": "rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:comment:1234567890",
+      "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
+      "creator": {
+        "type": "USER",
+        "name": "Example User"
+      },
+      "body": "test",
+      "visibility": "PUBLIC"
+    }
+  ]
+}

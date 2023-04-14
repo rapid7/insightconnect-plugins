@@ -4,10 +4,10 @@ import os
 import json
 from sys import argv
 
-Name = "Rapid7 IntSights"
+Name = "Threat Command"
 Vendor = "rapid7"
-Version = "3.2.0"
-Description = "Rapid7 IntSights is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy"
+Version = "5.1.0"
+Description = "Threat Command by Rapid7 is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy"
 
 
 def main():
@@ -40,6 +40,8 @@ def main():
 
             self.add_action(actions.AddManualAlert())
 
+            self.add_action(actions.CloseAlert())
+
             self.add_action(actions.DeleteCve())
 
             self.add_action(actions.EnrichIndicator())
@@ -52,11 +54,15 @@ def main():
 
             self.add_action(actions.GetCveList())
 
+            self.add_action(actions.GetCvesForCyberTerm())
+
+            self.add_action(actions.GetCyberTermsByFilter())
+
             self.add_action(actions.GetIndicatorByValue())
 
-            self.add_action(actions.GetIndicatorScanStatus())
+            self.add_action(actions.GetIocsByFilter())
 
-            self.add_action(actions.RescanIndicator())
+            self.add_action(actions.GetIocsForCyberTerm())
 
             self.add_action(actions.TakedownRequest())
 

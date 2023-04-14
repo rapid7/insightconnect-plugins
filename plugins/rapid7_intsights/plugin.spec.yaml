@@ -2,9 +2,9 @@ plugin_spec_version: v2
 extension: plugin
 products: [insightconnect]
 name: rapid7_intsights
-title: Rapid7 IntSights
-description: Rapid7 IntSights is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
-version: 3.2.0
+title: Threat Command
+description: Threat Command by Rapid7 is disrupting external threat intelligence with a combination of human and automated collection, intelligent analysis, and strategic threat hunting that turns the clear, deep, and dark webs into an intelligence resource that any company can deploy
+version: 5.1.0
 supported_versions: ["2.4.0"]
 vendor: rapid7
 support: rapid7
@@ -12,10 +12,9 @@ status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/rapid7_intsights
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
-  vendor_url: https://intsights.com/
+  vendor_url: https://www.rapid7.com/products/threat-command
 tags:
 - rapid7
-- intsights
 - darkweb
 - threatintelligence
 hub_tags:
@@ -24,16 +23,32 @@ hub_tags:
   features: []
 types:
   source:
-    Name:
+    name:
       title: Name
       description: Name
       type: string
       required: true
-    ConfidenceLevel:
+    confidenceLevel:
       title: Confidence Level
       description: Level of confidence
       type: integer
       required: true
+  reported_feed:
+    id:
+      title: ID
+      description: ID
+      type: string
+      required: false
+    name:
+      title: Name
+      description: Name
+      type: string
+      required: false
+    confidenceLevel:
+      title: Confidence Level
+      description: Level of confidence
+      type: integer
+      required: false
   image:
     type:
       title: Type
@@ -319,24 +334,290 @@ types:
       description: Fail reason
       type: string
       required: true
-
+  ioc_content:
+    value:
+      title: Indicator Value
+      description: Indicator value
+      type: string
+      required: false
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+    severity:
+      title: Severity
+      description: Severity
+      type: string
+      required: false
+    score:
+      title: Score
+      description: Score
+      type: float
+      required: false
+    whitelisted:
+      title: Whitelisted
+      description: Whitelisted
+      type: boolean
+      required: false
+    firstSeen:
+      title: First Seen
+      description: First seen
+      type: string
+      required: false
+    lastSeen:
+      title: Last Seen
+      description: Last seen
+      type: string
+      required: false
+    lastUpdateDate:
+      title: Last Update Date
+      description: Last update date
+      type: string
+      required: false
+    geolocation:
+      title: Geographic Location
+      description: Geographic location
+      type: string
+      required: false
+    tags:
+      title: Tags
+      description: Tags
+      type: '[]string'
+      required: false
+    relatedMalware:
+      title: Related Malware
+      description: Related malware
+      type: '[]string'
+      required: false
+    relatedCampaigns:
+      title: Related Campaigns
+      description: Related campaigns
+      type: '[]string'
+      required: false
+    relatedThreatActors:
+      title: Related Threat Actors
+      description: Related threat actors
+      type: '[]string'
+      required: false
+    status:
+      title: Status
+      description: Status
+      type: string
+      required: false
+    reportedFeeds:
+      title: Reported Feeds
+      description: Reported Feeds
+      type: '[]reported_feed'
+      required: false
+  indicator:
+    value:
+      title: Value
+      description: IOC value
+      type: string
+      required: false
+      example: 198.50.191.194
+    type:
+      title: Type
+      description: IOC type
+      type: string
+      required: false
+      example: IpAddresses
+    updateDate:
+      title: Update Date
+      description: IOC update date
+      type: string
+      required: false
+      example: "2019-12-10T08:13:43.800Z"
+    status:
+      title: Status
+      description: IOC status
+      type: string
+      required: false
+      example: Retired
+    whitelisted:
+      title: Whitelisted
+      description: Whitelisted
+      type: boolean
+      required: false
+      example: true
+    severity:
+      title: Severity
+      description: Severity type
+      type: string
+      required: false
+      example: Low
+    reportingFeeds:
+      title: Reporting Feeds
+      description: Reporting feeds list
+      type: "[]string"
+      required: false
+      example: [ "Example Reporting Feeds" ]
+  cyberTermCve:
+    cveId:
+      title: CVE ID
+      description: The identifier of the CVE
+      type: string
+      required: false
+      example: CVE-2005-11111
+    publishedDate:
+      title: Published Date
+      description: Date when CVE was published
+      type: string
+      required: false
+      example: 2022-09-29T13:45:55.627Z
+    vendorProducts:
+      title: Vendor Products
+      description: Vendor's product list
+      type: '[]string'
+      required: false
+      example: ["Example Product"]
+  technique:
+    name:
+      title: Name
+      description: Name of the technique
+      type: string
+      required: false
+      example: PowerShell
+    url:
+      title: URL
+      description: URL
+      type: string
+      required: false
+      example: https://example.com
+  mitreAttack:
+    tactic:
+      title: Tactic
+      description: MITRE ATT&CK tactic name related to the cyber term
+      type: string
+      required: false
+      example: Execution
+    techniques:
+      title: Techniques
+      description: List of MITRE ATT&CK technique names and URLs of the MITRE description
+      type: "[]technique"
+      required: false
+      example: []
+  cyberTerm:
+    id:
+      title: ID
+      description: ID of the cyber term
+      type: string
+      required: false
+      example: 9de5069c5afe602b2ea0a04b
+    value:
+      title: Value
+      description: Name of the cyber term
+      type: string
+      required: false
+      example: Example Name
+    type:
+      title: Type
+      description: Type of the cyber term
+      type: string
+      required: false
+      example: ThreatActor
+    severity:
+      title: Severity
+      description: Severity of the cyber term
+      type: string
+      required: false
+      example: High
+    aliases:
+      title: Aliases
+      description: Aliases of the cyber term
+      type: "[]string"
+      required: false
+      example: ["Example Alias"]
+    targetCountries:
+      title: Target Countries
+      description: List of targeted countries
+      type: "[]string"
+      required: false
+      example: ["Germany"]
+    targetSectors:
+      title: Target Sectors
+      description: List of targeted sectors
+      type: "[]string"
+      required: false
+      example: ["Computer Software & Services"]
+    origins:
+      title: Origins
+      description: List of origin nationalities
+      type: "[]string"
+      required: false
+      example: ["United States"]
+    createdDate:
+      title: Created Date
+      description: The date the cyber term was first reported
+      type: string
+      required: false
+      example: 2020-07-29T13:36:44.794Z
+    updatedDate:
+      title: Updated Date
+      description: The date the cyber term was last updated
+      type: string
+      required: false
+      example: 2021-04-14T08:21:57.021Z
+    ttps:
+      title: TTPs
+      description: List of TTPs
+      type: "[]string"
+      required: false
+      example: ["Code Execution"]
+    overview:
+      title: Overview
+      description: Overview of the cyber term
+      type: string
+      required: false
+      example: Example overview
+    additionalInformation:
+      title: Additional Information
+      description: Additional information about the cyber term
+      type: string
+      required: false
+      example: Example information
+    relatedMalware:
+      title: Related Malware
+      description: Related malware names
+      type: "[]string"
+      required: false
+      example: ["emotet"]
+    relatedThreatActors:
+      title: Related Threat Actors
+      description: Related threat actor names
+      type: "[]string"
+      required: false
+      example: ["Lazarus"]
+    relatedCampaigns:
+      title: Related Campaigns
+      description: Related campaign names
+      type: "[]string"
+      required: false
+      example: ["SolarWinds"]
+    mitreAttack:
+      title: Mitre Attack
+      description: MITRE ATT&CK tactics and techniques of the cyber term, divided by tactics
+      type: "[]mitreAttack"
+      required: false
+      example: []
 connection:
   account_id:
     title: Account ID
-    description: Account ID for IntSights
+    description: Account ID for Threat Command
     type: string
     required: true
     example: 9de5069c5afe602b2ea0a04b
   api_key:
     title: API Key
-    description: API key for IntSights
+    description: API key for Threat Command
     type: credential_secret_key
     required: true
     example: cc805d5fab1fd71a4ab352a9c533e65fb2d5b885518f4e565e68847223b8e6b85cb48f3afad842726d99239c9e36505c64b0dc9a061d9e507d833277ada336ab
 actions:
   get_indicator_by_value:
     title: Get Indicator by Value
-    description: Search indicators in IntSights TIP
+    description: Search indicators in Threat Command TIP
     input:
       indicator_value:
         title: Indicator Value
@@ -350,79 +631,106 @@ actions:
         description: Indicator value
         type: string
         required: false
+        example: example.com
       type:
         title: Type
         description: Type
         type: string
         required: false
+        example: Domains
       severity:
         title: Severity
         description: Severity
         type: string
         required: false
+        example: Low
       score:
         title: Score
         description: Score
         type: float
-        required: true
+        required: false
+        example: 10
       whitelist:
         title: Whitelist
         description: Whitelist
         type: boolean
-        required: true
+        required: false
+        example: true
       first_seen:
         title: First Seen
         description: First seen
         type: string
         required: false
+        example: 2020-01-01T20:01:27.344Z
       last_seen:
         title: Last Seen
         description: Last seen
         type: string
         required: false
+        example: 2020-01-01T20:01:27.344Z
       last_update:
         title: Last Update
         description: Last update
         type: string
         required: false
+        example: 2020-01-01T20:01:27.344Z
       geo_location:
         title: Geographic Location
         description: Geographic location
         type: string
         required: false
+        example: US
       sources:
         title: Sources
         description: Sources
         type: '[]source'
-        required: true
+        required: false
+        example: '[ { "confidenceLevel": 2, "name": "Cyber Threat Alliance" } ]'
       tags:
         title: Tags
         description: Tags
         type: '[]string'
-        required: true
+        required: false
+        example: '["MyTag_1"]'
       system_tags:
         title: System Tags
         description: System tags
         type: '[]string'
-        required: true
+        required: false
+        example: '["MyTag_1"]'
       related_malware:
         title: Related Malware
         description: Related malware
         type: '[]string'
-        required: true
+        required: false
+        example: example.com
       related_campaigns:
         title: Related Campaigns
         description: Related campaigns
         type: '[]string'
-        required: true
+        required: false
+        example: ["doppeldridex","dridex"]
       related_threat_actors:
         title: Related Threat Actors
         description: Related threat actors
         type: '[]string'
-        required: true
+        required: false
+        example: ["doppelspider"]
+      status:
+        title: Status
+        description: Status
+        type: string
+        required: false
+        example: Active
+      reported_feeds:
+        title: Reported Feeds
+        description: Reported Feeds
+        type: '[]reported_feed'
+        required: false
+        example: '[ { "ID": "SampleID", "Name": "AlienVault OTX", "ConfidenceLevel": 3 } ]'
   enrich_indicator:
     title: Enrich Indicator
-    description: Submit an indicator to IntSights for investigation and return the results
+    description: Submit an indicator to Threat Command for investigation and return the results
     input:
       indicator_value:
         title: Indicator Value
@@ -436,58 +744,19 @@ actions:
         description: Original value
         type: string
         required: true
+        example: "example.com"
       status:
         title: Status
         description: Status
         type: string
         required: true
+        example: "Done"
       data:
         title: Data
         description: Data
         type: object
         required: false
-  rescan_indicator:
-    title: Rescan Indicator
-    description: Force an indicator scan in IntSights TIP system
-    input:
-      indicator_file_hash:
-        title: Indicator File Hash
-        description: IOC value in type file hash
-        type: string
-        required: true
-        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
-    output:
-      task_id:
-        title: Task ID
-        description: Task ID
-        type: string
-        required: false
-      status:
-        title: Status
-        description: Status
-        type: string
-        required: false
-  get_indicator_scan_status:
-    title: Get Indicator Scan Status
-    description: Get the scan status of an indicator in the IntSights TIP system
-    input:
-      task_id:
-        title: Task ID
-        description: A string representing the request ID
-        type: string
-        required: true
-        example: 123
-    output:
-      task_id:
-        title: Task ID
-        description: Task ID
-        type: string
-        required: false
-      status:
-        title: Status
-        description: Status
-        type: string
-        required: false
+        example: '{ "Subdomains": [ "itunes", "apps" ], "Tags": [], "Type": "Domains", "Value": "example.com", "Whitelisted": true, "IsKnownIoc": false, "RelatedHashes": { "downloaded": [ "5d8c914e53bf34fdeac7441b99fe412240a1211fe2e074dfb2...", "7d2970c279d399214f83f140bb509441e9ae7262f98e8ae41f..." ], "referencing": [ "004b5bb9d28f03397ab3462863cd5902", "00f44bc82df0e8808b70abad0993bdb3" ], "communicating": [ "03b0f52b4d517d2a4f8a7994acd26adb77b8c7d9b25ef37c9a...", "09277de376a14f6475a242ca9ad4743dc81bd951853228d625..." ] }, "RelatedThreatActors": [], "Sources": [], "Whois": { "Current": { "RegistrantDetails": [ { "City": "Cupertino", "Country": "UNITED STATES", "CountryCode": "US", "PostalCode": "95014", "Telephone": "14089961010", "State": "", "Address": "One Apple Park Way", "Email": "user@example.com", "Fax": "14089741560", "Name": "Apple Inc.", "Organization": "Apple Inc." } ], "RegistrationDetails": { "CreatedDate": "1987-02-19T00:00:00.000Z", "ExpiresDate": "2022-02-20T05:00:00.000Z", "NameServers": [ "b.ns.apple.com", "a.ns.apple.com" ], "Statuses": [ "clientTransferProhibited", "serverDeleteProhibited" ], "UpdatedDate": "2021-02-16T01:26:20.000Z" } }, "History": [ { "RegistrantDetails": [ { "Address": "1 Infinite Loop", "Country": "UNITED STATES", "Fax": "14089741560", "Name": "Domain Administrator", "Telephone": "14089961010", "State": "CA", "City": "Cupertino", "CountryCode": "", "Email": "user@example.com", "Organization": "Apple Inc.", "PostalCode": "95014" }, { "Address": "1 Infinite Loop", "CountryCode": "", "Email": "user@example.com", "Fax": "14089741560", "Organization": "Apple Inc.", "Telephone": "14089961010", "City": "Cupertino", "Country": "UNITED STATES", "Name": "Domain Administrator", "PostalCode": "95014", "State": "CA" } ], "RegistrationDetails": { "CreatedDate": "1987-02-19T01:27:12.000Z", "ExpiresDate": "2021-02-20T01:27:12.000Z", "NameServers": [ "ADNS1.APPLE.COM", "ADNS2.APPLE.COM" ], "Statuses": [ "clientTransferProhibited" ], "UpdatedDate": "2012-12-04T01:27:12.000Z" } }, { "RegistrantDetails": [ { "City": "Cupertino", "CountryCode": "", "Email": "user@example.com", "Fax": "", "Name": "Domain Administrator", "State": "CA", "Telephone": "14089961010", "Address": "1 Infinite Loop", "Organization": "Apple Inc.", "PostalCode": "95014", "Country": "UNITED STATES" }, { "Address": "1 Infinite Loop", "City": "Cupertino", "Fax": "", "PostalCode": "95014", "State": "CA", "Telephone": "14089961010", "Country": "UNITED STATES", "CountryCode": "", "Email": "user@example.com", "Name": "Domain Administrator", "Organization": "Apple Inc." } ], "RegistrationDetails": { "UpdatedDate": "2012-12-04T13:10:47.000Z", "CreatedDate": "1987-02-19T13:10:47.000Z", "ExpiresDate": "2021-02-20T13:10:47.000Z", "NameServers": [ "ADNS1.APPLE.COM", "ADNS2.APPLE.COM" ], "Statuses": [ "clientTransferProhibited" ] } } ] }, "DnsRecords": [ { "Type": "NS", "Value": "a.ns.apple.com.", "Count": 123, "FirstResolved": null, "LastResolved": null }, { "FirstResolved": null, "LastResolved": null, "Type": "NS", "Value": "b.ns.apple.com.", "Count": 123 } ], "RelatedMalwares": [], "Resolutions": [ { "ResolvedIpAddress": "17.253.144.10", "ASN": 714, "FirstResolved": "2020-10-09T02:47:17.000Z", "LastResolved": "2021-09-18T13:35:55.000Z", "Location": "US", "Operator": "Apple Inc.", "ReportingSources": [ "Farsight", "VirusTotal" ] }, { "ResolvedIpAddress": "17.142.160.59", "ASN": 714, "FirstResolved": "2014-07-09T16:35:28.000Z", "LastResolved": "2020-10-09T03:00:19.000Z", "Location": "US", "Operator": "Apple Inc.", "ReportingSources": [ "Farsight", "VirusTotal" ] } ], "SystemTags": [], "RelatedCampaigns": [], "Severity": { "Score": 0, "Value": "Low" } }'
   get_alerts:
     title: Get Alerts
     description: Search alerts based on criteria
@@ -594,6 +863,7 @@ actions:
         description: List of alert IDs
         type: "[]string"
         required: true
+        example: '["6155f7b7c6e9d40008b4bb0d","6155f801186a050007745d29"]'
   get_complete_alert_by_id:
     title: Get Complete Alert by ID
     description: Get an alert's complete details for a given alert ID
@@ -610,54 +880,64 @@ actions:
         description: Alert ID
         type: string
         required: false
+        example: 6156118e186a05000774ee46
       assets:
         title: Assets
         description: List of assets
         type: "[]asset"
         required: true
+        example: '[ { "Type": "Domain", "Value": "https://example.com" } ]'
       assignees:
         title: Assignees
         description: List of assignees
         type: "[]string"
         required: true
+        example: []
       details:
         title: Details
         description: Alert details
         type: alert_details
         required: true
+        example: '{ "Description": "APIDescription", "Images": [ "61efc2286b02dcd558929918" ], "Severity": "High", "Source": { "NetworkType": "ClearWeb", "Type": "Application Store", "URL": "https://example.com" }, "SubType": "SuspiciousEmailAddress", "Tags": [], "Title": "Alerttest3", "Type": "Phishing" }'
       found_date:
         title: Found Date
         description: Alert found date
         type: date
         required: false
+        example: 2018-01-01T20:01:27.344Z
       update_date:
         title: Found Date
         description: Alert update date
         type: date
         required: false
+        example: 2018-01-01T20:01:27.344Z
       takedown_status:
         title: Takedown Status
         description: Alert remediation status
         type: string
         required: false
+        example: NotSent
       is_closed:
         title: Is Closed
         description: Is alert closed
         type: boolean
         required: true
+        example: false
       is_flagged:
         title: Is Flagged
         description: Is alert flagged
         type: boolean
         required: true
+        example: false
       leak_name:
         title: Leak Name
         description: Name of the leak DBs in data leakage alerts
         type: string
         required: false
+        example: example.com
   takedown_request:
     title: Takedown Request
-    description: Request a takedown for a given alert in IntSights
+    description: Request a takedown for a given alert in Threat Command
     input:
       alert_id:
         title: Alert ID
@@ -678,9 +958,10 @@ actions:
     output:
       status:
         title: Status
-        description: Status from IntSights
+        description: Status from Threat Command
         type: boolean
         required: true
+        example: true
   add_manual_alert:
     title: Add Manual Alert
     description: Create a manual alert with the provided parameters
@@ -805,6 +1086,7 @@ actions:
         description: New created alert ID
         type: string
         required: true
+        example: 6156586e8eadf90008176450
   get_cve_by_id:
     title: Get CVE by ID
     description: Get a list of CVE's with a list of IDs from an account
@@ -820,16 +1102,31 @@ actions:
         title: Content
         description: Response content
         type: '[]content'
-        required: true
+        required: false
+        example: '{ "content": [ { "cveId": "CVE-2020-7064", "cpe": [ { "Value": "cpe:2.3:a:php:php:*:*:*:*:*:*:*:*", "Range": { "VersionStartIncluding": "7.2.0", "VersionEndIncluding": "", "VersionStartExcluding": "", "VersionEndExcluding": "7.2.9" }, "Title": "Php", "VendorProduct": "Php Php" } ], "publishedDate": "2020-04-01T04:15:00.000Z", "updateDate": "2021-10-25T10:14:52.978Z", "severity": "Low", "intsightsScore": 36, "cvssScore": 5.4, "mentionsAmount": 39, "mentionsPerSource": { "PasteSite": 0, "HackingForum": 0, "InstantMessage": 0, "DarkWeb": 0, "ClearWebCyberBlogs": 0, "CodeRepositories": 9, "Exploit": 0, "SocialMedia": 30 }, "firstMentionDate": "2020-03-19T15:09:00.000Z", "lastMentionDate": "2021-07-22T20:41:00.000Z", "exploitAvailability": false, "vulnerabilityOrigin": [ "API" ], "relatedThreatActors": [], "relatedMalware": [], "relatedCampaigns": [] } ], }'
   get_cve_list:
     title: Get CVE List
-    description: Get a list of all CVEs from an account
+    description: Get a partial list of all CVEs from an account
+    input:
+      offset:
+        title: Offset
+        description: Offset value for pagination, if empty the first page of results will be returned
+        type: string
+        required: false
+        example: "2000-00-00T00:00:00.000Z::614b8972da44a60005036b01"
     output:
       content:
         title: Content
         description: Response content
         type: '[]content'
-        required: true
+        required: false
+        example: '[ { "cpe": [], "cveId": "CVE-2020-20795", "exploitAvailability": false, "firstMentionDate": "https://example.com", "intsightsScore": 1, "lastMentionDate": "https://example.com", "mentionsAmount": 1, "mentionsPerSource": { "ClearWebCyberBlogs": 0, "CodeRepositories": 0, "DarkWeb": 0, "Exploit": 0, "HackingForum": 0, "InstantMessage": 0, "PasteSite": 0, "SocialMedia": 1 }, "publishedDate": "https://example.com", "relatedCampaigns": [], "relatedMalware": [], "relatedThreatActors": [], "severity": "Low", "updateDate": "https://example.com", "vulnerabilityOrigin": [ "API" ] }, { "cpe": [ { "Range": { "VersionEndExcluding": "2017-08-25" }, "Title": "Voten", "Value": "https://example.com*:*:*:*:*:*:*:*", "VendorProduct": "Voten Voten" } ], "cveId": "CVE-2018-7663", "cvssScore": "https://example.com", "exploitAvailability": false, "firstMentionDate": "https://example.com", "intsightsScore": 28, "lastMentionDate": "https://example.com", "mentionsAmount": 20, "mentionsPerSource": { "ClearWebCyberBlogs": 0, "CodeRepositories": 1, "DarkWeb": 0, "Exploit": 0, "HackingForum": 0, "InstantMessage": 0, "PasteSite": 0, "SocialMedia": 19 }, "publishedDate": "https://example.com", "relatedCampaigns": [], "relatedMalware": [], "relatedThreatActors": [], "severity": "Low", "updateDate": "https://example.com", "vulnerabilityOrigin": [ "API" ] } ]'
+      next_offset:
+        title: Next Offset
+        description: Next offset value for pagination
+        type: string
+        required: false
+        example: 2000-00-00T00:00:00.000Z::614b8972da44a60005036b01
   add_cve:
     title: Add CVEs
     description: Add CVEs to account
@@ -846,11 +1143,13 @@ actions:
           description: Amount of successfully added CVEs
           type: integer
           required: true
+          example: 2
       failure:
         title: Failure
         description: Failure details
         type: "[]cve_failure_type"
         required: true
+        example: '[ { "cveId": "CVE-1999-003", "failReason": "Invalid CVE format" } ]'
   delete_cve:
     title: Delete CVEs
     description: Delete CVEs from account
@@ -867,16 +1166,315 @@ actions:
           description: Amount of successfully deleted CVEs
           type: integer
           required: true
+          example: 3
       failure:
         title: Failure
         description: Failure details
         type: "[]cve_failure_type"
         required: true
-
+        example: []
+  get_iocs_by_filter:
+    title: Get IOCs by Filter
+    description: Get Indicators of Compromise by Filter
+    input:
+      last_updated_from:
+        title: Last Updated From
+        description: Filter by last update date (IOC update date is greater than)
+        type: date
+        required: true
+        example: "2000-12-31T00:00:00Z"
+      last_updated_to:
+        title: Last Updated To
+        description: Filter by last update date (IOC update date is less than)
+        type: date
+        required: false
+        example: "2000-12-31T00:00:00Z"
+      last_seen_from:
+        title: Last Seen From
+        description: Filter by last seen date (IOC last-seen date is greater than)
+        type: date
+        required: false
+        example: "2000-12-31T00:00:00Z"
+      last_seen_to:
+        title: Last Seen To
+        description: Filter by last seen date (IOC last-seen date is less than)
+        type: date
+        required: false
+        example: "2000-12-31T00:00:00Z"
+      first_seen_from:
+        title: First Seen From
+        description: Filter by first seen date (IOC first-seen date is greater than)
+        type: date
+        required: false
+        example: "2000-12-31T00:00:00Z"
+      first_seen_to:
+        title: First Seen To
+        description: Filter by first seen date (IOC first-seen date is less than)
+        type: date
+        required: false
+        example: "2000-12-31T00:00:00Z"
+      status:
+        title: Status
+        description: Filter by IOC status
+        type: string
+        enum:
+          - ""
+          - Active
+          - Retired
+        required: false
+        example: Active
+      type:
+        title: Type
+        description: "Filter by IOC type (Allowed values: IpAddresses, Urls, Domains, Hashes, Emails)"
+        type: "[]string"
+        required: false
+        example: ["IpAddresses"]
+      severity:
+        title: Status
+        description: "Filter by IOC severity (Allowed values: High, Medium, Low)"
+        type: "[]string"
+        required: false
+        example: ["High"]
+      source_ids:
+        title: Source IDs
+        description: Filter by source IDs
+        type: "[]string"
+        required: false
+        example: ["123450000012345000001233"]
+      kill_chain_phases:
+        title: Kill Chain Phases
+        description: "Filter by phase of Lockheed-Martin intrusion kill chain (Allowed values: Reconnaissance, Weaponization, Delivery, Exploitation, Installation, Command and Control, Actions on Objective)"
+        type: "[]string"
+        required: false
+        example: ["Command and Control"]
+      limit:
+        title: Limit
+        description: Limit the results amount per page (1-1000)
+        type: integer
+        default: 1000
+        required: false
+        example: 1000
+      offset:
+        title: Offset
+        description: Getting the next page of IOCs from offset
+        type: string
+        required: false
+        example: "2020-01-01T20:01:27.344Z"
+      enterprise_tactics:
+        title: Enterprise Tactics
+        description: Filter by MITRE ATT&CK Enterprise tactic. Allowed values 'Reconnaissance', 'Resource Development', 'Initial Access', 'Execution', 'Persistence', 'Privilege Escalation', 'Defense Evasion', 'Credential Access', 'Discovery', 'Lateral Movement', 'Collection', 'Command and Control', 'Exfiltration', 'Impact'
+        type: "[]string"
+        required: false
+        example: [ "Reconnaissance" ]
+    output:
+      content:
+        title: Content
+        description: List of IOCs that match filters
+        type: "[]ioc_content"
+        required: false
+        example: '{ "content": [ { "value": "rapid7.com", "type": "Domains", "severity": "High", "score": 100, "whitelisted": false, "firstSeen": "2020-01-01T20:01:27.344Z", "lastSeen": "2020-01-30T16:18:51.148Z", "lastUpdateDate": "2020-02-21T23:00:51.268Z", "geolocation": "US", "tags": [ "MyTag_1" ], "relatedMalware": [ "doppeldridex", "dridex" ], "relatedCampaigns": [ "SolarWinds" ], "relatedThreatActors": [ "doppelspider" ], "reportedFeeds": [ { "ID": "SampleID", "Name": "AlienVault OTX", "ConfidenceLevel": 3 } ] } ], "nextOffset": "2022-11-18T16:59:01.626Z" }'
+      nextOffset:
+        title: Next Offset
+        description: The offset to the next page of IOCs
+        type: string
+        required: false
+        example: "2020-01-01T20:01:27.344Z"
+  get_iocs_for_cyber_term:
+    title: Get IOCs for Cyber Term
+    description: Gets cyber term IOCs by cyber term ID
+    input:
+      cyberTermId:
+        title: Cyber Term ID
+        description: Cyber term unique ID
+        type: string
+        required: true
+        example: 593e74cfc022ac015814f8d9
+      iocType:
+        title: IOC Type
+        description: IOC types to include. Allowed values "IpAddresses", "Urls", "Domains", "Hashes", "Emails"
+        type: "[]string"
+        required: false
+        example: ["IpAddresses"]
+      limit:
+        title: Limit
+        description: Desired number of results. Default value 100. Size range 1-1000
+        type: integer
+        required: false
+        example: 100
+      offset:
+        title: Offset
+        description: Request the next page of IOCs
+        type: string
+        required: false
+        example: "2020-08-13T12:17:08.755Z"
+    output:
+      iocs:
+        title: IOCs
+        description: List of IOCs
+        type: "[]indicator"
+        required: false
+        example: []
+      nextOffset:
+        title: Next Offset
+        description: Next offset value for pagination
+        type: string
+        required: false
+        example: "2020-08-13T12:17:08.755Z"
+  get_cves_for_cyber_term:
+    title: Get CVEs for Cyber Term
+    description: Get the Common Vulnerabilities and Exposures that are related to a cyber term
+    input:
+      cyberTermId:
+        title: Cyber Term ID
+        description: Cyber term unique ID
+        type: string
+        required: true
+        example: 311g8204kf82mr1234ab987o
+    output:
+      cyberTermCves:
+        title: Cyber Term CVEs
+        description: List of Common Vulnerabilities and Exposures related to the cyber term
+        type: '[]cyberTermCve'
+        required: true
+        example: []
+  get_cyber_terms_by_filter:
+    title: Get Cyber Terms by Filter
+    description: Get cyber terms for given filters
+    input:
+      search:
+        title: Search
+        description: Filter by free text, which can be the cyber term name or ID
+        type: string
+        required: false
+        example: 9de5069c5afe602b2ea0a04b
+      type:
+        title: Type
+        description: "Filter by one or more cyber term types. Allowed values: ThreatActor, Malware, Campaign"
+        type: "[]string"
+        required: false
+        example: ["ThreatActor"]
+      severity:
+        title: Severity
+        description: "Filter by one or more cyber term severities. Allowed values: High, Medium, Low"
+        type: "[]string"
+        required: false
+        example: ["Medium", "High"]
+      targetSector:
+        title: Target Sector
+        description: Filter by one or more targeted sectors
+        type: "[]string"
+        required: false
+        example: ["Electronics"]
+      targetCountry:
+        title: Target Country
+        description: Filter by one or more targeted countries
+        type: "[]string"
+        required: false
+        example: ["United Status"]
+      origin:
+        title: Origin
+        description: Filter by one or more nationalities
+        type: "[]string"
+        required: false
+        example: ["Korea, Republic of"]
+      ttp:
+        title: TTP
+        description: Filter by one or more TTPs
+        type: "[]string"
+        required: false
+        example: ["Code Execution"]
+      lastUpdateFrom:
+        title: Last Updated From
+        description: Filter by last update date is greater than the given value (in ISO 8601 format)
+        type: date
+        required: false
+        example: 2022-09-29T13:45:55.627Z
+      lastUpdateTo:
+        title: Last Updated To
+        description: Filter by last update date is less than the given value (in ISO 8601 format)
+        type: date
+        required: false
+        example: 2022-09-30T13:45:55.627Z
+      limit:
+        title: Limit
+        description: "Limit the results amount per chunk. Default value: 200"
+        type: integer
+        required: false
+        example: 100
+      offset:
+        title: Offset
+        description: Request the next page of cyber terms
+        type: string
+        required: false
+        example: 2022-09-29T13:45:55.627Z::9de5069c5afe602b2ea0a04b66beb2c0
+    output:
+      cyberTerms:
+        title: Cyber Terms
+        description: List of cyber terms that match the given filters
+        type: "[]cyberTerm"
+        required: false
+        example: []
+      nextOffset:
+        title: Next Offset
+        description: Indicator of the next page of cyber terms
+        type: string
+        required: false
+        example: 2022-09-29T13:45:55.627Z::9de5069c5afe602b2ea0a04b66beb2c0
+  close_alert:
+    title: Close Alert
+    description: Close the alert with the given ID
+    input:
+      alertId:
+        title: Alert ID
+        description: Alert's unique ID
+        type: string
+        required: true
+        example: 9de5069c5afe602b2ea0a04b
+      reason:
+        title: Reason
+        description: Alert's closed reason
+        type: string
+        enum:
+        - Problem solved
+        - Informational only
+        - Problem we are already aware of
+        - Company owned domain
+        - Legitimate application/profile
+        - Not related to my company
+        - False positive
+        - Other
+        required: true
+        example: False Positive
+      freeText:
+        title: Comments
+        description: Alert's comments
+        type: string
+        required: false
+        example: Example comment
+      isHidden:
+        title: Is Hidden
+        description: Alert's hidden status. Delete alert from the account instance - only when reason is False Positive
+        type: boolean
+        required: true
+        default: false
+        example: false
+      rate:
+        title: Rate
+        description: Alert's rate
+        type: integer
+        required: false
+        example: 5
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+        example: true
 triggers:
   new_alert:
     title: New Alert
-    description: Triggers when a new alert that matches the given criteria is created in IntSights
+    description: Triggers when a new alert that matches the given criteria is created in Threat Command
     input:
       alert_type:
         title: Alert Type
@@ -998,3 +1596,4 @@ triggers:
         description: List of alert IDs
         type: "[]string"
         required: true
+        example: '["618305318f3b3c0007d2cac0"]'

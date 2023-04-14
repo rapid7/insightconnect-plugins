@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "query_time": 0.020604427,
+    "powered_by": "falconx-api",
+    "trace_id": "b6a72d6c-b2e2-44ad-8ff4-a22287ac6565",
+    "quota": {
+      "total": 100,
+      "used": 40,
+      "in_progress": 0
+    }
+  },
+  "resources": [
+    {
+      "id": "9382986b58cb4b44935e7eba079842f3_790a06b6c97b488fbb086eb16db9625e",
+      "cid": "9382986b58cb4b44935e7eba079842f3",
+      "user_id": "6f888e357b5043c6906c51b204c4091b",
+      "user_name": "user@example.com",
+      "user_uuid": "a149764d-21ee-42af-ac9f-023f5d23ab81",
+      "origin": "uiproxy",
+      "state": "error",
+      "created_timestamp": "2022-08-30T10:06:44Z",
+      "sandbox": [
+        {
+          "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+          "environment_id": 160,
+          "submit_name": "Archive.zip"
+        }
+      ]
+    },
+    {
+      "id": "9382986b58cb4b44935e7eba079842f3_7c6d4bf5ab0c4459b855aaa345f4bcf9",
+      "cid": "9382986b58cb4b44935e7eba079842f3",
+      "user_id": "3e7da174cb6944e8a4cd8a5a59a76727",
+      "user_name": "user@example.com",
+      "user_uuid": "a149764d-21ee-42af-ac9f-023f5d23ab81",
+      "origin": "uiproxy",
+      "state": "error",
+      "created_timestamp": "2022-08-30T09:25:35Z",
+      "sandbox": [
+        {
+          "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+          "environment_id": 300,
+          "submit_name": "action.py"
+        }
+      ]
+    },
+    {
+      "id": "9382986b58cb4b44935e7eba079842f3_63aca0772bf342648b2a8779c7bfcadd",
+      "cid": "9382986b58cb4b44935e7eba079842f3",
+      "user_id": "3e7da174cb6944e8a4cd8a5a59a76727",
+      "user_name": "user@example.com",
+      "user_uuid": "a149764d-21ee-42af-ac9f-023f5d23ab81",
+      "origin": "uiproxy",
+      "state": "error",
+      "created_timestamp": "2022-08-30T09:21:00Z",
+      "sandbox": [
+        {
+          "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+          "environment_id": 100,
+          "submit_name": "Archive.zip"
+        }
+      ]
+    },
+    {
+      "id": "9382986b58cb4b44935e7eba079842f3_16a4193ca8644859a20b25d649d0a0a1",
+      "cid": "9382986b58cb4b44935e7eba079842f3",
+      "user_id": "a40788bfac324a069c2685fa7c970370",
+      "user_name": "user@example.com",
+      "user_uuid": "a149764d-21ee-42af-ac9f-023f5d23ab81",
+      "origin": "uiproxy",
+      "state": "error",
+      "created_timestamp": "2022-11-10T15:15:59Z",
+      "sandbox": [
+        {
+          "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+          "environment_id": 100,
+          "submit_name": "Archive.zip"
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

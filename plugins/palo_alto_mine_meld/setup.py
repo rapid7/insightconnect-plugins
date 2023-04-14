@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="palo_alto_mine_meld-rapid7-plugin",
-      version="1.0.1",
+      version="1.0.2",
       description="Palo Alto MineMeld is an open-source application that streamlines the aggregation, enforcement and sharing of threat intelligence",
       author="rapid7",
       author_email="",

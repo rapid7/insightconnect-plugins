@@ -4,7 +4,7 @@ products: [insightconnect]
 name: orca_security
 title: "Orca Security"
 description: Orca's agentless, cloud-native security and compliance platform detects, monitors, and prioritizes the most critical cloud security risks for AWS, Azure, and Google Cloud estates
-version: 1.0.0
+version: 2.0.0
 supported_versions: ["Orca Security API 2022-08-15"]
 vendor: rapid7
 support: rapid7
@@ -692,7 +692,7 @@ types:
       type: update_severity_details
       required: false
   user:
-    name:
+    id:
       title: User ID
       description: User ID
       type: string
@@ -702,62 +702,78 @@ types:
       description: Email
       type: string
       required: false
-    first:
+    first_name:
       title: First Name
       description: First name
       type: string
       required: false
-    last:
+    last_name:
       title: Last Name
       description: Last name
       type: string
       required: false
-  invitation:
+    type:
+      title: Type
+      description: User's account type
+      type: string
+      required: false
+  role:
     id:
-      title: ID
-      description: ID
+      title: User Role ID
+      description: ID of the user role
       type: string
       required: false
-    email:
-      title: Email
-      description: Email
+    name:
+      title: Name
+      description: User role name
       type: string
       required: false
-    invite_email_sent_at:
-      title: Invite Email Sent At
-      description: Invite email sent at
+  cloud_accounts:
+    id:
+      title: Cloud Account ID
+      description: ID of cloud account
       type: string
       required: false
-    role:
-      title: Role
-      description: Role
+    name:
+      title: Name
+      description: The cloud account display name
       type: string
       required: false
-    all_cloud_account:
-      title: All Cloud Account
-      description: All cloud account
+  get_users_response:
+    id:
+      title: User Access Role ID
+      description: ID of user access role
+      type: string
+      required: false
+    user:
+      title: User Details
+      description: User object containing the details
+      type: user
+      required: false
+    all_cloud_accounts:
+      title: All Cloud Accounts
+      description: All cloud accounts
       type: boolean
       required: false
     cloud_accounts:
       title: Cloud Accounts
-      description: Cloud accounts
+      description: List of cloud accounts
+      type: "[]cloud_accounts"
+      required: false
+    role:
+      title: User Role Details
+      description: Details of the role assigned to the user
+      type: role
+      required: false
+    user_filters:
+      title: User Filters
+      description: List of user filter IDs
       type: "[]string"
       required: false
-  get_users_response:
-    name:
-      title: Organization Name
-      description: Organization name
-      type: string
-      required: false
-    users:
-      title: Users
-      description: Users
-      type: "[]user"
-      required: false
-    pending_invites:
-      title: Pending Invites
-      description: Pending invites
-      type: "[]invitation"
+    shiftleft_projects:
+      title: Shift left projects
+      description: List of user shift left projects
+      type: "[]string"
       required: false
 
 connection:
@@ -1042,7 +1058,7 @@ actions:
       users:
         title: Users
         description: A response containing information about users
-        type: get_users_response
+        type: "[]get_users_response"
         required: true
   add_user:
     title: Add User

@@ -1,0 +1,118 @@
+{
+  "tickets": [
+    {
+      "ccEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "fwdEmails": [],
+      "replyCcEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "ticketCcEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "frEscalated": true,
+      "spam": false,
+      "groupId": 103000085326,
+      "priority": "Low",
+      "requesterId": 103021871597,
+      "source": "Portal",
+      "companyId": 103000179654,
+      "status": "Open",
+      "subject": "API Ticket",
+      "id": 19,
+      "dueBy": "2022-10-13T14:31:47Z",
+      "frDueBy": "2022-10-11T14:31:47Z",
+      "isEscalated": true,
+      "customFields": {},
+      "createdAt": "2022-10-10T14:31:47Z",
+      "updatedAt": "2022-10-13T17:06:19Z",
+      "tags": [],
+      "stats": {
+        "statusUpdatedAt": "2022-10-10T14:31:47Z"
+      },
+      "formId": 103000025687,
+      "nrEscalated": false
+    },
+    {
+      "ccEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "fwdEmails": [],
+      "replyCcEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "ticketCcEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "frEscalated": true,
+      "spam": false,
+      "groupId": 103000085326,
+      "priority": "Low",
+      "requesterId": 103021871597,
+      "source": "Portal",
+      "companyId": 103000179654,
+      "status": "Open",
+      "subject": "API Ticket",
+      "associationType": 4,
+      "id": 20,
+      "type": "Incident",
+      "dueBy": "2022-10-13T14:32:10Z",
+      "frDueBy": "2022-10-11T14:32:10Z",
+      "isEscalated": true,
+      "customFields": {},
+      "createdAt": "2022-10-10T14:32:10Z",
+      "updatedAt": "2022-10-13T17:06:19Z",
+      "tags": [],
+      "stats": {
+        "statusUpdatedAt": "2022-10-10T14:32:10Z"
+      },
+      "formId": 103000025687,
+      "nrEscalated": false
+    },
+    {
+      "ccEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "fwdEmails": [],
+      "replyCcEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "ticketCcEmails": [
+        "sample_email@domain.com",
+        "user_email@domain.com"
+      ],
+      "frEscalated": true,
+      "spam": false,
+      "priority": "Low",
+      "requesterId": 103021871597,
+      "source": "Portal",
+      "companyId": 103000179654,
+      "status": "xyz test status",
+      "subject": "API Ticket",
+      "associationType": 4,
+      "id": 21,
+      "type": "Incident",
+      "dueBy": "2022-10-13T21:00:00Z",
+      "frDueBy": "2022-10-11T21:00:00Z",
+      "isEscalated": true,
+      "customFields": {},
+      "createdAt": "2022-10-10T14:50:31Z",
+      "updatedAt": "2022-10-13T21:14:48Z",
+      "tags": [],
+      "stats": {
+        "statusUpdatedAt": "2022-10-11T10:09:15Z"
+      },
+      "formId": 103000025687,
+      "nrEscalated": false
+    }
+  ]
+}

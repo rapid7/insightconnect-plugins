@@ -27,6 +27,7 @@ class TestUrlExtractor(TestCase):
                 [
                     "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital",
                     "http://example.com/?url=http://example.com",
+                    "http://example3.com/?url=http://example.com",
                     "http://example.com",
                     "https://example.com/api?url=http://example2.com/QWekqjwekj23$!@412kj4?q=Test+test==&amp",
                     "http://example2.com/QWekqjwekj23$!@412kj4?q=Test+test==&amp",
@@ -34,6 +35,7 @@ class TestUrlExtractor(TestCase):
                 [
                     "https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital",
                     "http://example.com/?url=http://example.com",
+                    "http://example3.com/?url=http://example.com",
                     "https://example.com/api?url=http://example2.com/QWekqjwekj23$!@412kj4?q=Test+test==&amp",
                 ],
             )

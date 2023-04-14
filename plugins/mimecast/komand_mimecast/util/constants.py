@@ -6,6 +6,8 @@ DEFAULT_REGION = "EU"
 DATA_FIELD = "data"
 META_FIELD = "meta"
 PAGINATION_FIELD = "pagination"
+TRACKED_EMAILS_FIELD = "trackedEmails"
+TRACKED_EMAILS_ADVANCED_OPTIONS = "advancedTrackAndTraceOptions"
 ID_FIELD = "id"
 DOMAIN_FIELD = "domain"
 EMAIL_FIELD = "emailAddress"
@@ -24,6 +26,11 @@ VALIDATION_BLANK_ERROR = "err_validation_blank"
 VALIDATION_INVALID_EMAIL_ADDRESS_ERROR = "err_validation_invalid_email_address"
 BASIC_ASSISTANCE_MESSAGE = "Please check input and try again."
 BASIC_ASSISTANCE_MESSAGE_CONNECTION = "Please check input connection and try again."
+TRACKED_EMAILS_ADVANCED_CAUSE = "One of fields `Send From`, `Send To`, `Subject`, `Sender IP` must not be empty."
+TRACKED_EMAILS_REQUIRED_CAUSE = (
+    "Either one of `Send From`, `Send To`, `Subject`, `Sender IP` fields, or `Message ID` must not be empty."
+)
+TRACKED_EMAILS_ASSISTANCE = "Please fill the necessary fields with data, and try again."
 ERROR_CASES = {
     XDK_BINDING_EXPIRED_ERROR: "AccessKey has expired.",
     MANAGED_URL_EXISTS_ERROR: "The managed URL already exists; to update it, delete and recreate.",

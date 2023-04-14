@@ -1,4 +1,5 @@
 from unittest import TestCase
+
 from icon_microsoft_teams.util.strip_html import strip_html
 
 

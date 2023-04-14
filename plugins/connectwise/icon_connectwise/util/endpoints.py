@@ -1,0 +1,6 @@
+BASE_URL = "https://api-na.myconnectwise.net/v4_6_release/apis/3.0"
+SERVICE_TICKETS_ENDPOINT = BASE_URL + "/service/tickets"
+SERVICE_TICKET_ENDPOINT = BASE_URL + "/service/tickets/{ticket_id}"
+SERVICE_NOTES_ENDPOINT = BASE_URL + "/service/tickets/{ticket_id}/notes"
+SERVICE_NOTE_ENDPOINT = BASE_URL + "/service/tickets/{ticket_id}/notes/{note_id}"
+COMPANIES_ENDPOINT = BASE_URL + "/company/companies/{company_id}"

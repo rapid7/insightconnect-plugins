@@ -19,7 +19,6 @@ This plugin utilizes the SentinelOne API, the documentation is located in the Se
 
 # Supported Product Versions
 
-* 2.0.0
 * 2.1.0
 
 # Documentation
@@ -30,21 +29,15 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|False|Credential secret API key. Provide if you choose API Token Auth type|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|authentication_type|string|Basic Auth|True|Type of authentication|['Basic Auth', 'API Token Auth']|Basic Auth|
-|basic_auth_credentials|credential_username_password|None|False|Username and password. Provide if you choose Basic Auth type|None|{"username": "user@example.com", "password": "mypassword"}|
+|api_key|credential_secret_key|None|True|Credential secret API key|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|user_type|string|Console user|True|Type of user|['Console user', 'Service user']|Console user|
 |url|string|None|True|SentinelOne Console URL|None|https://example.com|
 
 Example input:
-
 ```
 {
   "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
-  "authentication_type": "Basic Auth",
-  "basic_auth_credentials": {
-    "username": "user@example.com",
-    "password": "mypassword"
-  },
+  "user_type": "Console user",
   "url": "https://example.sentinelone.com"
 }
 ```
@@ -52,6 +45,79 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Run Remote Script
+
+This action is used to run a remote script.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ids|[]string|None|False|IDs of the agents to execute the script on. If no IDs provided, the script will run on ALL applicable agents. This id can be retrieved by using the get agent details action if neccessary|None|["100000000000000000"]|
+|script_id|string|None|True|ID of the script to run (select the ID of a SentinelOne or user script from SentinelOne console)|None|1234567891234|
+|task_description|string|None|True|Task Description|None|Task Description|
+|output_destination|string|None|True|Output destination of any script output|['Local', 'None', 'SentinelCloud']|SentinelCloud|
+|input_parameters|string|None|False|Parameters which will be passed to the remote script (may or may not be required, depending on script)|None|input_parameter1|
+|output_directory|string|None|False|Output Directory (Only relevant if Local is selected for Output Destination)|None|/tmp/script_output|
+|password|string|None|False|Password (Only relevant if SentinelCloud is selected for Output Destination). At least 10 characters and no whitespace|None|Password123??|
+|script_id|string|None|True|ID of the script to run (select the ID of a SentinelOne or user script from SentinelOne console)|None|None|
+|task_description|string|None|True|Task Description|None|None|
+|timeout|integer|3600|False|Script runtime timeout (in seconds) for current execution (Value between 60 and 172800 seconds)|None|3600|
+
+Example input:
+```
+{
+  "output_destination": "None"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|affected|integer|True|Number of entities affected by requested operation. For detailed output from running the script, log onto the SentinelOne console. Note this may be lower than the number of agent ids submitted if the script cannot be run on a particular agent e.g. due to OS type|2|
+
+Example output:
+
+```
+{
+  "affected": 2
+}
+```
+
+#### Fetch File
+
+This action is used to fetch file for a specific agent id.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent_id|string|None|True|Agent ID|None|1000000000000000000|
+|file_path|string|None|True|File path of file to fetch. If a file can be fetched, it will be uploaded to the SentinelOne console for download|None|C:/windows/system32/winevt/logs/application.evtx|
+|password|string|None|True|File encryption password, min. length 10 characters and cannot contain whitespace|None|MySecretPass123!|
+
+Example input:
+```
+{
+  "agent_id": "1000000000000000000",
+  "file_path": "C:/windows/system32/winevt/logs/application.evtx",
+  "password": "MySecretPass123!"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|File fetch response status|True|
+
+Example output:
+
+```
+{ "success": True }
+```
 
 #### Update Incident Status
 
@@ -66,7 +132,6 @@ This action is used to update incident status.
 |type|string|None|True|Type of incidents|['threats', 'alerts']|threats|
 
 Example input:
-
 ```
 {
   "incident_ids": [
@@ -80,9 +145,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|False|Number of entities affected by the requested operation|1|
 
 Example output:
 
@@ -105,7 +170,6 @@ This action is used to update analyst verdict.
 |type|string|None|True|Type of incidents|['threats', 'alerts']|threats|
 
 Example input:
-
 ```
 {
   "analyst_verdict": "true positive",
@@ -119,9 +183,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|False|Number of entities affected by the requested operation|1|
 
 Example output:
 
@@ -145,7 +209,6 @@ This action is used to get Deep Visibility results from the query that matches t
 |sub_query|string|None|False|Sub query to run on the data that was already pulled|None|AgentName IS NOT EMPTY|
 
 Example input:
-
 ```
 {
   "event_type": "Registry Key Create",
@@ -157,9 +220,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|get_events_response|False|SentinelOne API call response data|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|get_events_response|False|SentinelOne API call response data|{ "response": { "data": [ { "agentDomain": "WORKGROUP", "agentGroupId": "123123456712356789", "agentId": "123123456712356789" }}}|
 
 Example output:
 
@@ -325,7 +388,6 @@ This action is used to get all Deep Visibility events from a queryId.
 |sub_query|string|None|False|Sub query to run on the data that was already pulled|None|AgentName IS NOT EMPTY|
 
 Example input:
-
 ```
 {
   "limit": 10,
@@ -336,9 +398,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|get_events_response|False|SentinelOne API call response data|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|get_events_response|False|SentinelOne API call response data|{ "response": { "data": [ { "agentDomain": "WORKGROUP", "agentGroupId": "123123456712356789", "agentId": "123123456712356789" } } }|
 
 Example output:
 
@@ -502,7 +564,6 @@ This action is used to stop a Deep Visibility Query by queryId.
 |query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|qd94e330ac025d525b5948bdf897b955e|
 
 Example input:
-
 ```
 {
   "query_id": "qd94e330ac025d525b5948bdf897b955e"
@@ -511,9 +572,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|cancel_query_response|False|SentinelOne API call response data|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|cancel_query_response|False|SentinelOne API call response data|{ "response": { "success": true } }|
 
 Example output:
 
@@ -536,7 +597,6 @@ This action is used to get that status of a Deep Visibility Query.
 |query_id|string|None|True|QueryId obtained when creating a query under Create Query|None|qd94e330ac025d525b5948bdf897b955e|
 
 Example input:
-
 ```
 {
   "query_id": "qd94e330ac025d525b5948bdf897b955e"
@@ -545,9 +605,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|get_query_status_response|False|SentinelOne API call response data|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|get_query_status_response|False|SentinelOne API call response data|{ "response": { "data": { "progressStatus": 50, "responseState": "RUNNING" } } }|
 
 Example output:
 
@@ -582,7 +642,6 @@ This action is used to start a Deep Visibility Query and get the queryId. You ca
 |to_date|string|None|True|Events created before or at this timestamp|None|2021-03-20 04:49:26.257525|
 
 Example input:
-
 ```
 {
   "account_ids": [
@@ -611,9 +670,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|create_query_response|False|SentinelOne API call response data|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|create_query_response|False|SentinelOne API call response data|{ "response": { "data": { "affected": 0 } } }|
 
 Example output:
 
@@ -640,7 +699,6 @@ This action is used to enable agents that match the filter.
 |reboot|boolean|None|True|Set true to reboot the endpoint, false to skip rebooting|None|True|
 
 Example input:
-
 ```
 {
   "agent": "hostname123",
@@ -653,9 +711,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|True|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|True|Number of entities affected by the requested operation|1|
 
 Example output:
 
@@ -680,7 +738,6 @@ This action is used to disable agents that match the filter.
 |reboot|boolean|None|True|Set true to reboot the endpoint, false to skip rebooting|None|True|
 
 Example input:
-
 ```
 {
   "agent": "hostname123",
@@ -695,9 +752,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|True|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|True|Number of entities affected by the requested operation|1|
 
 Example output:
 
@@ -719,7 +776,6 @@ This action is used to perform actions relating to your SentinelOne agents. This
 |filter|object|{}|True|Applied filter - only matched agents will be affected by the requested action. Leave empty to apply the action on all applicable agents. Note - decommission, disconnect, restart-machine, shutdown and uninstall actions require that one of the following filter arguments be supplied - ids, groupIds, or filterId|None|{"ids": ["1000000000000000000"]}|
 
 Example input:
-
 ```
 {
   "action": "connect",
@@ -733,9 +789,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|False|Number of entities affected by the requested operation|1|
 
 ```
 {
@@ -755,7 +811,6 @@ This action is used to fetch a file associated with the threat that matches the 
 |password|password|None|True|File encryption password, min. length 10 characters and cannot contain whitespace|None|Rapid7 Insightconnect|
 
 Example input:
-
 ```
 {
   "id": "939039647215561624",
@@ -765,9 +820,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|file|file|True|Base64 encoded threat file|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|file|file|True|Base64 encoded threat file|{ "file": { "filename": "report.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" } }|
 
 Example output:
 
@@ -811,7 +866,6 @@ This action is used to get a list of activities.
 |user_ids|[]string|None|False|The user who invoked the activity (If applicable)|None|["500000000000000003"]|
 
 Example input:
-
 ```
 {
   "account_ids": [
@@ -859,9 +913,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|data|[]activities_list|True|Result of activities list|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|data|[]activities_list|True|Result of activities list|[{ "agentUpdatedVersion": "2.5.1.1320", "id": "225494730938493804", "createdAt": "2018-02-27T04:49:26.257525Z", "groupId": "225494730938493804", "primaryDescription": "string", "accountName": "string", "description": "string", "osFamily": "windows_legacy", "hash": "string", "secondaryDescription": "string", "comments": "string", "siteId": "225494730938493804", "groupName": "string", "threatId": "225494730938493804", "agentId": "225494730938493804", "data": { "computer_name": "COMP_1234", "username": "my_user" }, "activityType": "integer", "accountId": "225494730938493804", "updatedAt": "2018-02-27T04:49:26.257525Z", "userId": "225494730938493804", "activityUuid": "string", "siteName": "string" }]|
 
 #### Get Activity Types
 
@@ -873,9 +927,9 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|activity_types|[]activities_types|True|Result of activities types|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|activity_types|[]activities_types|True|Result of activities types|[{ "id": 0, "descriptionTemplate": "string", "action": "string" }]|
 
 Example output:
 
@@ -903,7 +957,6 @@ This action is used to reload an agent module (applies to Windows agents only).
 |module|string|None|True|Agent module to reload|['monitor', 'static', 'agent', 'log']|monitor|
 
 Example input:
-
 ```
 {
   "filter": {
@@ -917,9 +970,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|False|Number of entities affected by the requested operation|1|
 
 Example output:
 
@@ -941,7 +994,6 @@ This action is used to summary of agents by numbers.
 |site_ids|[]string|None|False|List of Site IDs to filter by|None|["500000000000000000"]|
 
 Example input:
-
 ```
 {
   "account_ids": [
@@ -955,14 +1007,14 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|decommissioned|integer|False|Number of decommissioned agents|
-|infected|integer|False|Number of agents with at least one active threat|
-|online|integer|False|Number of online agents|
-|out_of_date|integer|False|Number of agents running an older software version|
-|total|integer|False|Number of installed active agents|
-|up_to_date|integer|False|Number of agents with the most up-to-date software version|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|decommissioned|integer|False|Number of decommissioned agents|0|
+|infected|integer|False|Number of agents with at least one active threat|1|
+|online|integer|False|Number of online agents|2|
+|out_of_date|integer|False|Number of agents running an older software version|1|
+|total|integer|False|Number of installed active agents|2|
+|up_to_date|integer|False|Number of agents with the most up-to-date software version|2|
 
 Example output:
 
@@ -988,7 +1040,6 @@ This action is used to retrieve running applications for a specific agent.
 |ids|[]string|None|True|Agent ID list|None|["1000000000000000000"]|
 
 Example input:
-
 ```
 {
   "ids": [
@@ -999,9 +1050,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|data|[]agent_applications|True|List of installed applications|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|data|[]agent_applications|True|List of installed applications|[ { "publisher": "string", "installedDate": "2018-02-27T04:49:26.257525Z", "size": "integer", "name": "string", "version": "string" } ]|
 
 #### Blacklist
 
@@ -1017,7 +1068,6 @@ Note that when attempting to unblacklist a SHA1 hash by setting `blacklist_state
 |hash|string|None|True|Create a blacklist item from a SHA1 hash|None|3395856ce81f2b7382dee72602f798b642f14140|
 
 Example input:
-
 ```
 {
   "blacklist_state": true,
@@ -1028,15 +1078,17 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Return true if blacklist item was created or deleted|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|message|string|True|Return details about action results|The given hash has been blocked|
+|success|boolean|True|Return true if blacklist item was created or deleted|True|
 
 Example output:
 
 ```
 {
-  "success": true
+  "success": true,
+  "message": "The given hash has been blocked"
 }
 ```
 
@@ -1051,7 +1103,6 @@ This action is used to add hashed content to global blacklist. The input makes u
 |hash|string|None|True|Content hash to add to blacklist|None|3395856ce81f2b7382dee72602f798b642f14140|
 
 Example input:
-
 ```
 {
   "hash": "3395856ce81f2b7382dee72602f798b642f14140"
@@ -1060,9 +1111,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|False|Number of entities affected by the requested operation|1|
 
 Example output:
 
@@ -1089,7 +1140,6 @@ This action is used to create a threat from an IOC event.
 |path|string|None|False|Path|None|path|
 
 Example input:
-
 ```
 {
   "agentId": "1000000000000000000",
@@ -1102,9 +1152,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|False|Number of entities affected by the requested operation|1|
 
 Example output:
 
@@ -1127,7 +1177,6 @@ This action is used to retrieve agent details.
 |operational_state|string|Any|False|Agent operational state|['Any', 'na', 'fully_disabled', 'partially_disabled', 'disabled_error']|na|
 
 Example input:
-
 ```
 {
   "agent": "hostname123",
@@ -1138,9 +1187,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|agent|agent_data|False|Detailed information about agent found|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|agent|agent_data|False|Detailed information about agent found|{ "agent": { "accountId": "433241117337583618", "accountName": "SentinelOne", "activeDirectory": { "computerDistinguishedName": "None", "computerMemberOf": [], "lastUserDistinguishedName": "None", "lastUserMemberOf": [] }, "activeThreats": 0, "agentVersion": "4.1.4.82", "allowRemoteShell": false, "appsVulnerabilityStatus": "up_to_date", "cloudProviders": {}, "computerName": "so-agent-win12", "consoleMigrationStatus": "N/A", "coreCount": 1, "cpuCount": 1, "cpuId": "Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz", "createdAt": "2020-05-28T14:53:03.014660Z", "domain": "WORKGROUP", "encryptedApplications": false, "externalId": "", "externalIp": "198.51.100.100", "firewallEnabled": true, "groupId": "521580416411822676", "groupIp": "198.51.100.x", "groupName": "Default Group", "id": "901345720792880606", "inRemoteShellSession": false, "infected": false, "installerType": ".exe", "isActive": true, "isDecommissioned": false, "isPendingUninstall": false, "isUninstalled": false, "isUpToDate": true, "lastActiveDate": "2020-06-05T18:32:56.748620Z", "lastIpToMgmt": "10.4.24.55", "lastLoggedInUserName": "", "licenseKey": "", "locationEnabled": true, "locationType": "fallback", "locations": [ { "id": "629380164464502476", "name": "Fallback", "scope": "global" } ], "machineType": "server", "mitigationMode": "protect", "mitigationModeSuspicious": "detect", "modelName": "VMware, Inc. - VMware Virtual Platform", "networkInterfaces": [ { "id": "901345720801269215", "inet": [ "198.51.100.100" ], "inet6": [ "2001:db8:8:4::2" ], "name": "Ethernet", "physical": "00:50:56:94:17:08" } ], "networkQuarantineEnabled": false, "networkStatus": "disconnected", "operationalState": "na", "operationalStateExpiration": "None", "osArch": "64 bit", "osName": "Windows Server 2012 Standard", "osRevision": "9200", "osStartTime": "2020-05-28T14:59:36Z", "osType": "windows", "osUsername": "None", "rangerStatus": "NotApplicable", "rangerVersion": "None", "registeredAt": "2020-05-28T14:53:03.010853Z", "remoteProfilingState": "disabled", "remoteProfilingStateExpiration": "None", "scanAbortedAt": "None", "scanFinishedAt": "2020-05-28T22:24:59.420166Z", "scanStartedAt": "2020-05-28T21:12:58.216807Z", "scanStatus": "finished", "siteId": "521580416395045459", "siteName": "Rapid7", "threatRebootRequired": false, "totalMemory": 1023, "updatedAt": "2020-06-05T15:39:10.754112Z", "userActionsNeeded": [], "uuid": "28db47168fa54f89aeed99769ac8d4dc" } }|
 
 Example output:
 
@@ -1253,11 +1302,11 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|data|[]threat_data|False|Data|
-|errors|[]object|False|Errors|
-|pagination|pagination|False|Pagination|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|data|[]threat_data|False|Data|[ { "agentOsType": "windows", "automaticallyResolved": false } ]|
+|errors|[]object|False|Errors|[{"type": "object"}]|
+|pagination|pagination|False|Pagination|{"totalItems": 1}|
 
 Example output:
 
@@ -1355,7 +1404,6 @@ This action is used to mark a threat as resolved.
 |whitening_option|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|path|
 
 Example input:
-
 ```
 {
   "target_scope": "site",
@@ -1366,9 +1414,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|False|Number of entities affected by the requested operation|1|
 
 Example output:
 
@@ -1391,7 +1439,6 @@ This action is used to mark a suspicious threat as a threat.
 |whitening_option|string|None|False|Selected whitening option|['', 'browser-type', 'certificate', 'file-type', 'file_hash', 'path']|path|
 
 Example input:
-
 ```
 {
   "target_scope": "site",
@@ -1402,9 +1449,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|False|Number of entities affected by the requested operation|1|
 
 Example output:
 
@@ -1426,7 +1473,6 @@ This action is used to apply a mitigation action to a threat.
 |threat_id|string|None|True|ID of a threat|None|1000000000000000000|
 
 Example input:
-
 ```
 {
   "action": "quarantine",
@@ -1436,9 +1482,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|affected|integer|False|Number of entities affected by the requested operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|affected|integer|False|Number of entities affected by the requested operation|1|
 
 Example output:
 
@@ -1459,7 +1505,6 @@ This action is the account name available for this account.
 |name|string|None|True|Account Name to validate|None|example|
 
 Example input:
-
 ```
 {
   "name": "example"
@@ -1468,9 +1513,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|available|boolean|True|Account Name to validate|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|available|boolean|True|Account Name to validate|True|
 
 Example output:
 
@@ -1494,7 +1539,6 @@ This action is used to isolate (quarantine) endpoint from the network.
 |whitelist|[]string|None|False|This list contains a set of devices that should not be blocked. This can include IPs, hostnames, UUIDs and agent IDs|None|["198.51.100.100", "hostname123", "901345720792880606", "28db47168fa54f89aeed99769ac8d4dc"]|
 
 Example input:
-
 ```
 {
   "agent": "hostname123",
@@ -1511,9 +1555,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|quarantine_response|False|SentinelOne API call response data|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|quarantine_response|False|SentinelOne API call response data|{ "response": { "data": [ { "agentDomain": "WORKGROUP", "agentGroupId": "123123456712356789", "agentId": "123123456712356789" } } }|
 
 Example output:
 
@@ -1544,7 +1588,6 @@ Note that retrieving all active agents can return a very large amount of data de
 |operational_state|string|Any|False|Agent operational state|['Any', 'na', 'fully_disabled', 'partially_disabled', 'disabled_error']|na|
 
 Example input:
-
 ```
 {
   "agent": "hostname123",
@@ -1556,9 +1599,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|agents|[]agent_data|False|Detailed information about agents found|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|agents|[]agent_data|False|Detailed information about agents found|{ "agents": [ { "accountId": "433241117337583618", "accountName": "SentinelOne", "activeDirectory": { "computerDistinguishedName": "None", "computerMemberOf": [], "lastUserDistinguishedName": "None", "lastUserMemberOf": [] }, "activeThreats": 0, "agentVersion": "4.1.4.82", "allowRemoteShell": false, "appsVulnerabilityStatus": "up_to_date", "cloudProviders": {}, "computerName": "so-agent-win12", "consoleMigrationStatus": "N/A", "coreCount": 1, "cpuCount": 1, "cpuId": "Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz", "createdAt": "2020-05-28T14:53:03.014660Z", "domain": "WORKGROUP", "encryptedApplications": false, "externalId": "", "externalIp": "198.51.100.100", "firewallEnabled": true, "groupId": "521580416411822676", "groupIp": "198.51.100.x", "groupName": "Default Group", "id": "901345720792880606", "inRemoteShellSession": false, "infected": false, "installerType": ".exe", "isActive": true, "isDecommissioned": false, "isPendingUninstall": false, "isUninstalled": false, "isUpToDate": true, "lastActiveDate": "2020-06-05T18:32:56.748620Z", "lastIpToMgmt": "10.4.24.55", "lastLoggedInUserName": "", "licenseKey": "", "locationEnabled": true, "locationType": "fallback", "locations": [ { "id": "629380164464502476", "name": "Fallback", "scope": "global" } ], "machineType": "server", "mitigationMode": "protect", "mitigationModeSuspicious": "detect", "modelName": "VMware, Inc. - VMware Virtual Platform", "networkInterfaces": [ { "id": "901345720801269215", "inet": [ "198.51.100.100" ], "inet6": [ "2001:db8:8:4::2" ], "name": "Ethernet", "physical": "00:50:56:94:17:08" } ], "networkQuarantineEnabled": false, "networkStatus": "disconnected", "operationalState": "na", "operationalStateExpiration": "None", "osArch": "64 bit", "osName": "Windows Server 2012 Standard", "osRevision": "9200", "osStartTime": "2020-05-28T14:59:36Z", "osType": "windows", "osUsername": "None", "rangerStatus": "NotApplicable", "rangerVersion": "None", "registeredAt": "2020-05-28T14:53:03.010853Z", "remoteProfilingState": "disabled", "remoteProfilingStateExpiration": "None", "scanAbortedAt": "None", "scanFinishedAt": "2020-05-28T22:24:59.420166Z", "scanStartedAt": "2020-05-28T21:12:58.216807Z", "scanStatus": "finished", "siteId": "521580416395045459", "siteName": "Rapid7", "threatRebootRequired": false, "totalMemory": 1023, "updatedAt": "2020-06-05T15:39:10.754112Z", "userActionsNeeded": [], "uuid": "28db47168fa54f89aeed99769ac8d4dc" } ] }|
 
 Example output:
 
@@ -1677,10 +1720,9 @@ This trigger is used to get threats.
 |classifications|[]string|None|False|List of classifications to search|None|[""]|
 |engines|[]string|None|False|Included engines|None|[""]|
 |frequency|integer|5|False|Poll frequency in seconds|None|5|
-|resolved|boolean|None|False|Include resolved threats|None|True|
+|resolved|boolean|None|False|Set True to only trigger on resolved threats|None|True|
 
 Example input:
-
 ```
 {
   "agent_is_active": true,
@@ -1697,10 +1739,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|threat|threat_data|False|Threat|
-
+|Name|Type|Required|Description| Example                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|----|----|--------|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|threat|threat_data|False|Threat|{ 'threat': { 'agentComputerName':'vagrant-pc', 'agentDomain':'WORKGROUP', 'agentId':'560700200554747611' }}|
 Example output:
 
 ```
@@ -1990,10 +2031,15 @@ Example output:
 
 ## Troubleshooting
 
-_This plugin does not contain any troubleshooting information._
+To convert `threat` into an array use Type Converter Plugin
+For the Trigger settings, only set the Resolved field to False if solely resolved threats should be retrieved (i.e. setting to False will not include unresolved threats)
 
 # Version History
 
+* 8.1.0 - Added New actions: Fetch file for agent ID and Run remote script. Updated description for Trigger resolved field
+* 8.0.1 - Search Agents: Remove duplicate results when Case Sensitive is false
+* 8.0.0 - Connection: Added Service user (API only user type) authentication | Removed Basic Authentication
+* 7.1.0 - Update for Blacklist action: Fix for unblocked action | Update for Quarantine action: unification of the output data when action fails | Add troubleshooting information about use Type Converter | Mark as Benign action: update description 
 * 7.0.0 - Add new actions Update Analyst Verdict and Update Incident Status | Fix Get Agent Details and Search Agents actions to handle more response scenarios | Add option to authentication with API key
 * 6.2.0 - New actions Create Query, Get Query Status, Cancel Running Query, Get Events, Get Events By Type
 * 6.1.0 - Add new actions Disable Agent and Enable Agent
@@ -2019,6 +2065,8 @@ _This plugin does not contain any troubleshooting information._
 * 1.0.0 - Initial plugin
 
 # Links
+
+* [SentinelOne Product Page](https://www.sentinelone.com/)
 
 ## References
 

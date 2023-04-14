@@ -1,0 +1,10 @@
+{
+  "user@example.com": {
+    "moreDataAvailable": false,
+    "limit": 10,
+    "domains": [
+      "example.com"
+    ],
+    "totalResults": 1
+  }
+}

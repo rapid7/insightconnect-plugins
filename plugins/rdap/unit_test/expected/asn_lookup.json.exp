@@ -1,0 +1,46 @@
+{
+  "handle": "AS12345",
+  "startAutnum": 12345,
+  "endAutnum": 12345,
+  "name": "AS12345",
+  "events": [
+    {
+      "eventAction": "last changed",
+      "eventDate": "2020-05-13T13:44:31Z"
+    }
+  ],
+  "entities": [
+    {
+      "roles": [
+        "registrant"
+      ],
+      "handle": "RIPE-NCC-END-MNT"
+    },
+    {
+      "roles": [
+        "administrative"
+      ],
+      "handle": "PG12821-RIPE"
+    },
+    {
+      "roles": [
+        "registrant"
+      ],
+      "handle": "ORG-GSs1-RIPE"
+    },
+    {
+      "roles": [
+        "technical",
+        "administrative"
+      ],
+      "handle": "LG1196-ORG"
+    },
+    {
+      "roles": [
+        "registrant"
+      ],
+      "handle": "AS12345-MNT"
+    }
+  ],
+  "port43": "whois.ripe.net"
+}

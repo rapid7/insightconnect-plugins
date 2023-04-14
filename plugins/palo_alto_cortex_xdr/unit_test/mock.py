@@ -1,10 +1,14 @@
 import json
 import os
+import sys
 from typing import Callable
+
+sys.path.append(os.path.abspath("../"))
+
 from unittest import mock
-from icon_palo_alto_cortex_xdr.connection.schema import Input
 
 import requests
+from icon_palo_alto_cortex_xdr.connection.schema import Input
 
 STUB_API_KEY_ID = "1"
 STUB_API_KEY = "9de5069c5afe602b2ea0a04b66beb2c0"

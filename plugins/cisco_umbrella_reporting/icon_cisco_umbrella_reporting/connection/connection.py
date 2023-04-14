@@ -9,18 +9,16 @@ class Connection(insightconnect_plugin_runtime.Connection):
         super(self.__class__, self).__init__(input=ConnectionSchema())
         self.client = None
 
-    def connect(self, params):
+    def connect(self, params={}):
         self.logger.info("Connect: Connecting...")
         self.client = CiscoUmbrellaReportingAPI(
-            params.get(Input.API_KEY).get("secretKey"),
-            params.get(Input.API_SECRET).get("secretKey"),
-            params.get(Input.ORGANIZATION_ID),
+            params.get(Input.API_KEY, {}).get("secretKey"),
+            params.get(Input.API_SECRET, {}).get("secretKey"),
             self.logger,
         )
 
     def test(self):
         try:
-            self.client.security_activity_report()
-            return {"success": True}
-        except PluginException as e:
-            raise ConnectionTestException(cause=e.cause, assistance=e.assistance, data=e.data)
+            return {"success": bool(self.client.auth_token)}
+        except PluginException as error:
+            raise ConnectionTestException(cause=error.cause, assistance=error.assistance, data=error.data)

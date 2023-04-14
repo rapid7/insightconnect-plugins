@@ -16,7 +16,7 @@ to general management of EC2 instances.
 
 # Supported Product Versions
 
-* botocore 1.26.5
+* botocore 1.27.96
 
 # Documentation
 
@@ -28,7 +28,9 @@ The connection configuration accepts the following parameters:
 |----|----|-------|--------|-----------|----|-------|
 |aws_access_key_id|credential_secret_key|None|True|The ID of the AWS Access Key to use for authentication with AWS|None|KKILPPPPPRAA4OBNTHE2|
 |aws_secret_access_key|credential_secret_key|None|True|The AWS Secret Access Key used for signing requests with the given AWS Access Key ID. Note: Domain is not required|None|pp20bF88GZ2PGY+QUAAc2BSNA/6TUprPpYMCSc0tD|
+|external_id|string|None|False|External ID given during role creation|None|exampleexternalid|
 |region|string|None|True|The AWS Region to use for requests. An example would be us-east-1|None|us-east-1|
+|role_arn|string|None|False|AWS IAM role ARN to assume|None|arn:aws:iam::123456781111:role/ExampleRole|
 
 Example input:
 
@@ -36,7 +38,9 @@ Example input:
 {
   "aws_access_key_id": "KKILPPPPPRAA4OBNTHE2",
   "aws_secret_access_key": "pp20bF88GZ2PGY+QUAAc2BSNA/6TUprPpYMCSc0tD",
-  "region": "us-east-1"
+  "external_id": "exampleexternalid",
+  "region": "us-east-1",
+  "role_arn": "arn:aws:iam::123456781111:role/ExampleRole"
 }
 ```
 
@@ -52,6 +56,7 @@ Example input:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|assume_role_params|assume_role_params|None|False|Parameters that allows to assume IAM role|None|{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'|
 |cidr_ip|string|None|False|Not supported|None|10.20.0.0/27|
 |dry_run|boolean|None|False|Checks whether you have the required permissions for the action, without actually making the request, and provides an error response|None|True|
 |from_port|integer|None|False|Not supported|None|8800|
@@ -66,27 +71,33 @@ Example input:
 
 ```
 {
-  "cidr_ip":"10.20.0.0/27",
-  "dry_run":true,
-  "from_port":8800,
-  "group_id":"sg-a02005k2",
-  "ip_permissions":[
+{
+  "assume_role_params": {
+    "role_arn": "arn:aws:iam::123456781111:role/ExampleRole", 
+    "external_id": "ExampleExternalID", 
+    "region": "us-west-2"
+  },
+  "cidr_ip": "10.20.0.0/27",
+  "dry_run": true,
+  "from_port": 8800,
+  "group_id": "sg-a02005k2",
+  "ip_permissions": [
     {
-      "from_port":8080,
-      "ip_protocol":"tcp",
-      "ip_ranges":[
+      "from_port": 8080,
+      "ip_protocol": "tcp",
+      "ip_ranges": [
         {
-          "cidr_ip":"10.20.0.0/27",
-          "description":"Blah"
+          "cidr_ip": "10.20.0.0/27",
+          "description": "Blah"
         }
       ],
-      "to_port":8090
+      "to_port": 8090
     }
   ],
-  "ip_protocol":"UDP",
-  "source_security_group_name":"launch-wizard-1",
-  "source_security_group_owner_id":"otheraccountgroup",
-  "to_port":8900
+  "ip_protocol": "UDP",
+  "source_security_group_name": "launch-wizard-1",
+  "source_security_group_owner_id": "otheraccountgroup",
+  "to_port": 8900
 }
 ```
 
@@ -104,6 +115,7 @@ Adds one or more ingress rules to a security group. See [http://docs.aws.amazon.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|assume_role_params|assume_role_params|None|False|Parameters that allows to assume IAM role|None|{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'|
 |cidr_ip|string|None|False|The CIDR IPv4 address range|None|10.2.0.0/27|
 |dry_run|boolean|None|False|Checks whether you have the required permissions for the action, without actually making the request, and provides an error response|None|False|
 |from_port|integer|None|False|The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number|None|8800|
@@ -119,22 +131,27 @@ Example input:
 
 ```
 {
+  "assume_role_params": {
+    "role_arn": "arn:aws:iam::123456781111:role/ExampleRole", 
+    "external_id": "ExampleExternalID", 
+    "region": "us-west-2"
+  },
   "cidr_ip": "10.2.0.0/27",
   "dry_run": false,
   "from_port": 8800,
   "group_id": "sg-123456",
   "group_name": "default",
-  "ip_permissions":[
+  "ip_permissions": [
     {
-      "from_port":8080,
-      "ip_protocol":"tcp",
-      "ip_ranges":[
+      "from_port": 8080,
+      "ip_protocol": "tcp",
+      "ip_ranges": [
         {
-          "cidr_ip":"10.20.0.0/27",
-          "description":"Blah"
+          "cidr_ip": "10.20.0.0/27",
+          "description": "Blah"
         }
       ],
-      "to_port":8090
+      "to_port": 8090
     }
   ],
   "ip_protocol": "UDP",
@@ -158,6 +175,7 @@ Describes one or more of your instances. See [http://docs.aws.amazon.com/AWSEC2/
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|assume_role_params|assume_role_params|None|False|Parameters that allows to assume IAM role|None|{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'|
 |dry_run|boolean|None|False|Checks whether you have the required permissions for the action, without actually making the request, and provides an error response|None|False|
 |filters|[]filter|None|False|One or more filters|None|{'name': 'instance-type', 'values': ['t2.micro', 't3.micro']}|
 |instance_ids|[]string|None|False|One or more instance IDs|None|["i-0dd117dc6df90be2e"]|
@@ -166,15 +184,20 @@ Example input:
 
 ```
 {
-  "dry_run":false,
-  "filters":{
-    "name":"instance-type",
-    "values":[
+  "assume_role_params": {
+    "role_arn": "arn:aws:iam::123456781111:role/ExampleRole", 
+    "external_id": "ExampleExternalID", 
+    "region": "us-west-2"
+  },
+  "dry_run": false,
+  "filters": {
+    "name": "instance-type",
+    "values": [
       "t2.micro",
       "t3.micro"
     ]
   },
-  "instance_ids":[
+  "instance_ids": [
     "i-0dd117dc6df90be2e"
   ]
 }
@@ -195,6 +218,7 @@ Describes one or more of your security groups. See [http://docs.aws.amazon.com/A
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|assume_role_params|assume_role_params|None|False|Parameters that allows to assume IAM role|None|{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'|
 |dry_run|boolean|None|False|Checks whether you have the required permissions for the action, without actually making the request, and provides an error response|None|False|
 |filters|[]filter|None|False|One or more filters|None|["{"name": "ip-permission.from-port", "values": [80]}"]|
 |group_ids|[]string|None|False|One or more security group IDs|None|["sg-123456"]|
@@ -204,19 +228,24 @@ Example input:
 
 ```
 {
-  "dry_run":false,
-  "filters":[
+  "assume_role_params": {
+    "role_arn": "arn:aws:iam::123456781111:role/ExampleRole", 
+    "external_id": "ExampleExternalID", 
+    "region": "us-west-2"
+  },
+  "dry_run": false,
+  "filters": [
     {
-      "name":"ip-permission.from-port",
-      "values":[
+      "name": "ip-permission.from-port",
+      "values": [
         80
       ]
     }
   ],
-  "group_ids":[
+  "group_ids": [
     "sg-123456"
   ],
-  "group_names":[
+  "group_names": [
     "groupname"
   ]
 }
@@ -237,6 +266,7 @@ Example input:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|assume_role_params|assume_role_params|None|False|Parameters that allows to assume IAM role|None|{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'|
 |cidr_ip|string|None|False|Not supported|None|10.10.0.0/27|
 |dry_run|boolean|None|False|Checks whether you have the required permissions for the action, without actually making the request, and provides an error response|None|True|
 |from_port|integer|None|False|Not supported|None|8000|
@@ -251,27 +281,32 @@ Example input:
 
 ```
 {
-  "cidr_ip":"10.10.0.0/27",
-  "dry_run":true,
-  "from_port":8000,
-  "group_id":"sg-123456",
-  "ip_permissions":[
+  "assume_role_params": {
+    "role_arn": "arn:aws:iam::123456781111:role/ExampleRole", 
+    "external_id": "ExampleExternalID", 
+    "region": "us-west-2"
+  },
+  "cidr_ip": "10.10.0.0/27",
+  "dry_run": true,
+  "from_port": 8000,
+  "group_id": "sg-123456",
+  "ip_permissions": [
     {
-      "from_port":8080,
-      "ip_protocol":"tcp",
-      "ip_ranges":[
+      "from_port": 8080,
+      "ip_protocol": "tcp",
+      "ip_ranges": [
         {
-          "cidr_ip":"10.20.0.0/27",
-          "description":"Blah"
+          "cidr_ip": "10.20.0.0/27",
+          "description": "Blah"
         }
       ],
-      "to_port":8090
+      "to_port": 8090
     }
   ],
-  "ip_protocol":"UDP",
-  "source_security_group_name":"sourcegroup",
-  "source_security_group_owner_id":"ownergroup",
-  "to_port":9000
+  "ip_protocol": "UDP",
+  "source_security_group_name": "sourcegroup",
+  "source_security_group_owner_id": "ownergroup",
+  "to_port": 9000
 }
 ```
 
@@ -289,6 +324,7 @@ Removes one or more ingress rules from a security group. See [http://docs.aws.am
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|assume_role_params|assume_role_params|None|False|Parameters that allows to assume IAM role|None|{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'|
 |cidr_ip|string|None|False|The CIDR IP address range|None|10.2.0.0/27|
 |dry_run|boolean|None|False|Checks whether you have the required permissions for the action, without actually making the request, and provides an error response|None|True|
 |from_port|integer|None|False|The start of port range for the TCP and UDP protocols, or an ICMP type number|None|8000|
@@ -304,27 +340,32 @@ Example input:
 
 ```
 {
-  "cidr_ip":"10.10.0.0/27",
-  "dry_run":true,
-  "from_port":8000,
-  "group_id":"sg-123456",
-  "ip_permissions":[
+  "assume_role_params": {
+    "role_arn": "arn:aws:iam::123456781111:role/ExampleRole", 
+    "external_id": "ExampleExternalID", 
+    "region": "us-west-2"
+  },
+  "cidr_ip": "10.10.0.0/27",
+  "dry_run": true,
+  "from_port": 8000,
+  "group_id": "sg-123456",
+  "ip_permissions": [
     {
-      "from_port":8080,
-      "ip_protocol":"tcp",
-      "ip_ranges":[
+      "from_port": 8080,
+      "ip_protocol": "tcp",
+      "ip_ranges": [
         {
-          "cidr_ip":"10.20.0.0/27",
-          "description":"Blah"
+          "cidr_ip": "10.20.0.0/27",
+          "description": "Blah"
         }
       ],
-      "to_port":8090
+      "to_port": 8090
     }
   ],
-  "ip_protocol":"UDP",
-  "source_security_group_name":"sourcegroup",
-  "source_security_group_owner_id":"ownergroup",
-  "to_port":9000
+  "ip_protocol": "UDP",
+  "source_security_group_name": "sourcegroup",
+  "source_security_group_owner_id": "ownergroup",
+  "to_port": 9000
 }
 ```
 
@@ -342,6 +383,7 @@ Example input:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|assume_role_params|assume_role_params|None|False|Parameters that allows to assume IAM role|None|{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'|
 |dry_run|boolean|None|False|Checks whether you have the required permissions for the action, without actually making the request, and provides an error response|None|True|
 |group_id|string|None|False|The ID of the security group|None|sg-123456|
 |group_name|string|None|False|[Default VPC] The name of the security group|None|groupname|
@@ -351,20 +393,26 @@ Example input:
 
 ```
 {
-  "dry_run":true,
-  "group_id":"sg-123456",
-  "group_name":"groupname",
-  "ip_permissions":[
+{
+  "assume_role_params": {
+    "role_arn": "arn:aws:iam::123456781111:role/ExampleRole", 
+    "external_id": "ExampleExternalID", 
+    "region": "us-west-2"
+  },
+  "dry_run": true,
+  "group_id": "sg-123456",
+  "group_name": "groupname",
+  "ip_permissions": [
     {
-      "from_port":8080,
-      "ip_protocol":"tcp",
-      "ip_ranges":[
+      "from_port": 8080,
+      "ip_protocol": "tcp",
+      "ip_ranges": [
         {
-          "cidr_ip":"10.20.0.0/27",
-          "description":"Blah"
+          "cidr_ip": "10.20.0.0/27",
+          "description": "Blah"
         }
       ],
-      "to_port":8090
+      "to_port": 8090
     }
   ]
 }
@@ -385,6 +433,7 @@ Updates the description of an ingress (inbound) security group rule. See [http:/
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|assume_role_params|assume_role_params|None|False|Parameters that allows to assume IAM role|None|{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'|
 |dry_run|boolean|None|False|Checks whether you have the required permissions for the action, without actually making the request, and provides an error response|None|True|
 |group_id|string|None|False|The ID of the security group|None|sg-123456|
 |group_name|string|None|False|[EC2-Classic, default VPC] The name of the security group|None|groupname|
@@ -394,13 +443,18 @@ Example input:
 
 ```
 {
-  "dry_run":true,
-  "group_id":"sg-123456",
-  "group_name":"groupname",
-  "ip_ranges":[
+  "assume_role_params": {
+    "role_arn": "arn:aws:iam::123456781111:role/ExampleRole", 
+    "external_id": "ExampleExternalID", 
+    "region": "us-west-2"
+  },
+  "dry_run": true,
+  "group_id": "sg-123456",
+  "group_name": "groupname",
+  "ip_ranges": [
     {
-      "cidr_ip":"10.20.0.0/27",
-      "description":"Blah"
+      "cidr_ip": "10.20.0.0/27",
+      "description": "Blah"
     }
   ]
 }
@@ -427,6 +481,9 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 1.3.0 - Add region input field to all Actions
+* 1.2.1 - Updated Connection and Actions to use related AWS Client in SDK
+* 1.2.0 - Updated Connect and Action inputs to include Role ARN and External ID to provide support for AWS Assume Role functionality at both an Action and a Connection level
 * 1.1.0 - Update plugin runtime to InsightConnect 
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types

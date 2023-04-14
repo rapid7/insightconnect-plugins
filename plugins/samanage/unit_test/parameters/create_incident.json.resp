@@ -1,0 +1,26 @@
+{
+    "parameters": [
+        [
+            "Incident Example Name",
+            "user@example.com",
+            "Low",
+            "Example incident description",
+            "02-02-2022",
+            "user2@example.com",
+            [123, 456],
+            123456,
+            [567, 888],
+            "Test category",
+            {
+                "incident": {
+                    "id": 10000,
+                    "number": "1000",
+                    "name": "Incident Example Name",
+                    "description": "Example incident description",
+                    "state": "New",
+                    "site": {"id": 1, "name": "Austin TX, USA", "location": "AUS"}
+                }
+            }
+        ]
+    ]
+}

@@ -1,0 +1,96 @@
+{
+  "operatorGroups": [
+    {
+      "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+      "status": "operatorGroup",
+      "groupName": "Test Group",
+      "branch": {
+        "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+        "name": "Example branch",
+        "timeZone": "Europe/Dublin"
+      },
+      "contact": {
+        "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+        "dynamicName": "Test User",
+        "telephone": "111111111",
+        "email": "user@example.com",
+        "department": {
+          "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+          "name": "IT"
+        },
+        "hasAttention": false,
+        "loginPermission": false,
+        "installer": false,
+        "firstLineCallOperator": false,
+        "secondLineCallOperator": false,
+        "problemManager": false,
+        "problemOperator": false,
+        "changeCoordinator": false,
+        "changeActivitiesOperator": false,
+        "requestForChangeOperator": false,
+        "extensiveChangeOperator": false,
+        "simpleChangeOperator": false,
+        "scenarioManager": false,
+        "planningActivityManager": false,
+        "projectCoordinator": false,
+        "projectActiviesOperator": false,
+        "stockManager": false,
+        "reservationsOperator": false,
+        "serviceOperator": false,
+        "externalHelpDeskParty": false,
+        "contractManager": false,
+        "operationsOperator": false,
+        "operationsManager": false,
+        "knowledgeBaseManager": false,
+        "accountManager": false
+      },
+      "installer": false,
+      "firstLineCallOperator": true,
+      "secondLineCallOperator": true,
+      "problemManager": false,
+      "problemOperator": false,
+      "changeCoordinator": true,
+      "changeActivitiesOperator": true,
+      "requestForChangeOperator": false,
+      "extensiveChangeOperator": false,
+      "simpleChangeOperator": false,
+      "scenarioManager": false,
+      "planningActivityManager": false,
+      "projectCoordinator": false,
+      "projectActiviesOperator": true,
+      "stockManager": false,
+      "reservationsOperator": false,
+      "serviceOperator": false,
+      "externalHelpDeskParty": false,
+      "contractManager": false,
+      "operationsOperator": false,
+      "operationsManager": false,
+      "knowledgeBaseManager": true,
+      "accountManager": false,
+      "creationDate": "2021-11-03T15:39:54.000+0000",
+      "creator": {
+        "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+        "name": "Test User"
+      },
+      "modificationDate": "2021-11-03T15:39:54.000+0000",
+      "modifier": {
+        "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+        "name": "Test User"
+      },
+      "optionalFields1": {
+        "boolean1": false,
+        "boolean2": false,
+        "boolean3": false,
+        "boolean4": false,
+        "boolean5": false
+      },
+      "optionalFields2": {
+        "boolean1": false,
+        "boolean2": false,
+        "boolean3": false,
+        "boolean4": false,
+        "boolean5": false
+      }
+    }
+  ]
+}

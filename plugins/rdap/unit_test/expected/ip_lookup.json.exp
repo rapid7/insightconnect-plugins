@@ -1,0 +1,27 @@
+{
+  "country": "AU",
+  "events": [
+    {
+      "eventAction": "registration",
+      "eventDate": "2011-08-10T23:12:35Z"
+    }
+  ],
+  "name": "APNIC-LABS",
+  "status": [
+    "active"
+  ],
+  "type": "ASSIGNED PORTABLE",
+  "endAddress": "1.1.1.255",
+  "ipVersion": "v4",
+  "startAddress": "1.1.1.0",
+  "handle": "1.1.1.0 - 1.1.1.255",
+  "entities": [
+    {
+      "roles": [
+        "registrant"
+      ],
+      "handle": "ORG-ARAD1-AP"
+    }
+  ],
+  "port43": "whois.apnic.net"
+}

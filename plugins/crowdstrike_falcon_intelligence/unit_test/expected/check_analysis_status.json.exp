@@ -1,0 +1,21 @@
+{
+  "submissions": [
+    {
+      "id": "9382986b58cb4b44935e7eba079842f3_16a4193ca8644859a20b25d649d0a0a1",
+      "cid": "9382986b58cb4b44935e7eba079842f3",
+      "userId": "a40788bfac324a069c2685fa7c970370",
+      "userName": "user@example.com",
+      "userUuid": "a149764d-21ee-42af-ac9f-023f5d23ab81",
+      "origin": "uiproxy",
+      "state": "error",
+      "createdTimestamp": "2022-11-10T15:15:59Z",
+      "sandbox": [
+        {
+          "sha256": "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
+          "environmentId": 100,
+          "submitName": "Archive.zip"
+        }
+      ]
+    }
+  ]
+}

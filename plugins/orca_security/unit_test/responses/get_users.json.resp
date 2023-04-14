@@ -1,24 +1,24 @@
 {
   "status": "success",
-  "data": {
-    "name": "Test",
-    "users": [
-      {
-        "user_id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
+  "data": [
+    {
+      "id": "1111111-1111-1111-1111-11111111111",
+      "all_cloud_accounts": true,
+      "cloud_accounts": [],
+      "role": {
+        "id": "1111111-1111-1111-1111-11111111111",
+        "name": "Test",
+        "expiration_date": null
+      },
+      "user": {
+        "id": "1111111-1111-1111-1111-11111111111",
         "email": "user@example.com",
-        "first": "Example",
-        "last": "User"
-      }
-    ],
-    "pending_invites": [
-      {
-        "id": "44d88612-fea8-a8f3-6de8-2e1278abb02f",
-        "email": "user2@example.com",
-        "invite_email_sent_at": "2022-05-03T00:00:00+00:00",
-        "role": "Editor",
-        "all_cloud_account": true,
-        "cloud_accounts": []
-      }
-    ]
-  }
+        "first_name": "User",
+        "last_name": "Test",
+        "type": "normal"
+      },
+      "user_filters": [],
+      "shiftleft_projects": []
+    }
+  ]
 }

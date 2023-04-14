@@ -1,0 +1,83 @@
+{
+  "rdapConformance": [
+    "history_version_0",
+    "nro_rdap_profile_0",
+    "cidr0",
+    "rdap_level_0"
+  ],
+  "notices": [
+    {
+      "title": "Terms and Conditions",
+      "description": [
+        "This is the description..."
+      ],
+      "links": [
+        {
+          "value": "https://rdap.apnic.net/ip/1.1.1.1/32",
+          "rel": "terms-of-service",
+          "href": "http://www.example.net/db/example.html",
+          "type": "text/html"
+        }
+      ]
+    }
+  ],
+  "country": "AU",
+  "events": [
+    {
+      "eventAction": "registration",
+      "eventDate": "2011-08-10T23:12:35Z"
+    }
+  ],
+  "name": "APNIC-LABS",
+  "remarks": [
+    {
+      "description": [
+        "APNIC and Cloudflare DNS Resolver project",
+        "Routed globally by AS13335/Cloudflare",
+        "Research prefix for APNIC Labs"
+      ],
+      "title": "description"
+    }
+  ],
+  "links": [
+    {
+      "value": "https://rdap.apnic.net/ip/1.1.1.1/32",
+      "rel": "self",
+      "href": "https://rdap.apnic.net/ip/1.1.1.0/24",
+      "type": "application/rdap+json"
+    }
+  ],
+  "status": [
+    "active"
+  ],
+  "type": "ASSIGNED PORTABLE",
+  "endAddress": "1.1.1.255",
+  "ipVersion": "v4",
+  "startAddress": "1.1.1.0",
+  "objectClassName": "ip network",
+  "handle": "1.1.1.0 - 1.1.1.255",
+  "entities": [
+    {
+      "roles": [
+        "registrant"
+      ],
+      "events": [
+        {
+          "eventAction": "last changed",
+          "eventDate": "2017-10-11T01:28:39Z"
+        }
+      ],
+      "links": [
+        {
+          "value": "https://rdap.apnic.net/ip/1.1.1.1/32",
+          "rel": "self",
+          "href": "https://rdap.apnic.net/entity/ORG-ARAD1-AP",
+          "type": "application/rdap+json"
+        }
+      ],
+      "objectClassName": "entity",
+      "handle": "ORG-ARAD1-AP"
+    }
+  ],
+  "port43": "whois.apnic.net"
+}

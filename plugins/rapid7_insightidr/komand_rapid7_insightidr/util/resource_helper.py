@@ -4,9 +4,11 @@ import requests
 import aiohttp
 import asyncio
 import json
+import base64
 from typing import List
 
 from komand_rapid7_insightidr.connection import Connection
+from insightconnect_plugin_runtime.helper import clean
 
 
 def _get_async_session(headers) -> aiohttp.ClientSession:
@@ -116,6 +118,78 @@ class ResourceHelper(object):
             status_code_message = self._ERRORS.get(response.status_code, self._ERRORS[000])
             self.logger.error(f"{status_code_message} ({response.status_code}): {error}")
             raise PluginException(f"InsightIDR returned a status code of {response.status_code}: {status_code_message}")
+
+    def make_request(  # noqa: C901
+        self, path: str, method: str = "GET", params: dict = None, json_data: dict = None, files: dict = None
+    ):
+        try:
+            response = self.session.request(
+                method=method.upper(),
+                url=path,
+                json=json_data,
+                params=params,
+                files=files,
+            )
+            if response.status_code == 400:
+                raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
+            if response.status_code in [401, 403]:
+                raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
+            if response.status_code == 404:
+                raise PluginException(
+                    cause="Resource not found.",
+                    assistance="Verify your input is correct and not malformed and try again. If the issue persists, "
+                    "please contact support.",
+                    data=response.text,
+                )
+            if 400 < response.status_code < 500:
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+            if response.status_code >= 500:
+                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
+            if response.status_code == 204:
+                return response
+            if 200 <= response.status_code < 300:
+                if method == "GET" and "attachments/" in path and not path.endswith("/metadata"):
+                    return response.content
+                return clean(response.json())
+
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+        except json.decoder.JSONDecodeError as error:
+            raise PluginException(preset=PluginException.Preset.INVALID_JSON, data=error)
+        except requests.exceptions.HTTPError as error:
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
+
+    def create_comment(self, endpoint: str, json_data: dict):
+        self.session.headers["Accept-version"] = "comments-preview"
+        return self.make_request(path=endpoint, method="POST", json_data=json_data)
+
+    def delete_comment(self, endpoint: str):
+        self.session.headers["Accept-version"] = "comments-preview"
+        return self.make_request(path=endpoint, method="DELETE")
+
+    def list_comments(self, endpoint: str, parameters: dict):
+        self.session.headers["Accept-version"] = "comments-preview"
+        return self.make_request(path=endpoint, params=parameters)
+
+    def list_attachments(self, endpoint: str, parameters: dict):
+        self.session.headers["Accept-version"] = "comments-preview"
+        return self.make_request(path=endpoint, params=parameters)
+
+    def delete_attachment(self, endpoint: str):
+        self.session.headers["Accept-version"] = "comments-preview"
+        return self.make_request(path=endpoint, method="DELETE")
+
+    def download_attachment(self, endpoint: str):
+        self.session.headers["Accept-version"] = "comments-preview"
+        content = self.make_request(path=endpoint)
+        return str(base64.b64encode(content), "utf-8")
+
+    def upload_attachment(self, endpoint: str, files: dict):
+        self.session.headers["Accept-version"] = "comments-preview"
+        return self.make_request(path=endpoint, method="POST", files=files)
+
+    def get_attachment_information(self, endpoint: str):
+        self.session.headers["Accept-version"] = "comments-preview"
+        return self.make_request(path=endpoint)
 
     @staticmethod
     async def _get_log_entries_with_labels(connection: Connection, log_entries: [dict]) -> [dict]:

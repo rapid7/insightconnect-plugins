@@ -100,6 +100,8 @@ class Util:
             return MockResponse("tag_assets", 200)
         if kwargs.get("url") == "https://example.com/api/2.0/tags/2":
             return MockResponse("tag_assets_bad_id", 404)
+        if kwargs.get("url") == "https://example.com/api/getscandetails":
+            return MockResponse("test_get_scan_details_endpoint", 200)
         if kwargs.get("json") == {
             "filters": [{"field": "last-scan-date", "operator": "is-earlier-than", "value": 30}],
             "match": "all",
@@ -118,6 +120,10 @@ class Util:
             return MockResponse("create_exception", 200)
         if kwargs.get("params") == [("sort", "expires,ASC")]:
             return MockResponse("get_expiring_vulnerability_exceptions", 200)
+        if kwargs.get("url") == "https://example.com/api/3/shared_credentials/1":
+            return MockResponse("update_shared_credential_valid", 200)
+        if kwargs.get("url") == "https://example.com/api/3/shared_credentials/2":
+            return MockResponse("update_shared_credential_error", 400)
 
         raise Exception("Not implemented")
 

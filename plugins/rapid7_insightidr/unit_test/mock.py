@@ -1,13 +1,18 @@
 import json
 import os
-from util import Util
 
+from util import Util
 
 REQUEST_GET = "get"
 REQUEST_POST = "post"
 REQUEST_PATCH = "patch"
 REQUEST_PUT = "put"
 
+STUB_ID = "1b1a111d-d1fb-1a12-1651-eb1ff61a651a"
+STUB_ID_NOT_FOUND = "22b2b22b-222b-222b-2222-b2bb2bbb2b2b"
+STUB_ID_202_ERROR = "33b3b3b-333b-333b-3333-b3bb3bbb3b3b"
+STUB_ID_KEY_ERROR = "44b4b4b-444b-4444-b4bb4bbb4b4b"
+STUB_ID_202 = "55b5b5b-555b-5555-b5bb5bbb5b5b"
 STUB_INVESTIGATION_IDENTIFIER = "rrn:investigation:example:11111111-1111-1111-1111-111111111111:investigation:11111111"
 STUB_QUERY_ID = "00000000-0000-1eec-0000-000000000000"
 STUB_QUERY_ID_NOT_FOUND = "00000000-0000-8eec-0000-000000000000"
@@ -19,6 +24,7 @@ STUB_DISPOSITION = "BENING"
 STUB_STATUS = "OPEN"
 
 STUB_USER_EMAIL = "user@example.com"
+
 
 # Define and return mock API responses based on request type and endpoint
 def mock_get_request(*args, **_kwarg):
@@ -52,42 +58,64 @@ class MockResponse:
 
 
 def mock_request_post(url: str) -> MockResponse:
-    if url == f"{Util.STUB_URL}/query/saved_queries/{STUB_QUERY_ID}":
+    if url == f"{Util.STUB_URL_API}/query/saved_queries/{STUB_QUERY_ID}":
         return MockResponse("get_a_saved_query", 200)
-    if url == f"{Util.STUB_URL}/idr/v2/investigations":
+    if url == f"{Util.STUB_URL_API}/idr/v2/investigations":
         return MockResponse("create_investigation", 201)
-    if url == f"{Util.STUB_URL}/idr/v2/investigations/_search":
+    if url == f"{Util.STUB_URL_API}/idr/v2/investigations/_search":
         return MockResponse("search_investigations", 200)
+    if url == f"{Util.STUB_URL_API}/idr/v1/customthreats/key/dcdba462-fcf5-4021-8707-98b14232239b/indicators/replace":
+        return MockResponse("replace_indicators", 200)
+    if url == f"{Util.STUB_URL_API}/idr/v1/customthreats/key/dcdba462/indicators/replace":
+        # This should be a 400, my test requires this to be within 200-299
+        return MockResponse("replace_indicators_bad", 298)
 
 
 def mock_request_get(url: str) -> MockResponse:
-    if url == f"{Util.STUB_URL}/query/saved_queries":
+    if url == f"{Util.STUB_URL_REST}/query/logs/{STUB_ID}":
+        return MockResponse("query", 200)
+    if url == f"{Util.STUB_URL_REST}/query/logs/{STUB_ID_202}":
+        return MockResponse("query_202", 202)
+    if url == f"{Util.STUB_URL_REST}/query/logs/{STUB_ID_202_ERROR}":
+        return MockResponse("query_202_error", 202)
+    if url == f"{Util.STUB_URL_REST}/query/logs/{STUB_ID_NOT_FOUND}":
+        return MockResponse("query_404", 404)
+    if url == f"{Util.STUB_URL_REST}/query/logs/{STUB_ID_KEY_ERROR}":
+        return MockResponse("query_key_error", 200)
+    if url == f"{Util.STUB_URL_REST}/query/saved_queries":
         return MockResponse("get_all_saved_queries", 200)
-    if url == f"{Util.STUB_URL}/query/saved_queries/{STUB_QUERY_ID}":
+    if url == f"{Util.STUB_URL_API}/query/saved_queries/{STUB_QUERY_ID}":
         return MockResponse("get_a_saved_query", 200)
-    if url == f"{Util.STUB_URL}/query/saved_queries/{STUB_QUERY_ID_NOT_FOUND}":
+    if url == f"{Util.STUB_URL_API}/query/saved_queries/{STUB_QUERY_ID_NOT_FOUND}":
         return MockResponse("get_a_saved_query_404", 404)
-    if url == f"{Util.STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}":
+    if url == f"{Util.STUB_URL_API}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}":
         return MockResponse("get_investigation", 200)
-    if url == f"{Util.STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/alerts":
+    if url == f"{Util.STUB_URL_API}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/alerts":
         return MockResponse("list_alerts_for_investigation", 200)
     if "investigations" in url:
         return MockResponse("list_investigations", 200)
 
 
+def mock_request_for_different_rrn_object(*args, **kwargs) -> MockResponse:
+    return MockResponse("list_alerts_for_investigation_rrn_as_object", 200)
+
+
 def mock_request_patch(url: str) -> MockResponse:
-    if url == f"{Util.STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}":
+    if url == f"{Util.STUB_URL_API}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}":
         return MockResponse("update_investigation", 200)
 
 
 def mock_request_put(url: str) -> MockResponse:
-    if url == f"{Util.STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/priority/{STUB_PRIORITY}":
+    if url == f"{Util.STUB_URL_API}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/priority/{STUB_PRIORITY}":
         return MockResponse("update_investigation", 200)
-    if url == f"{Util.STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/status/{STUB_STATUS}":
+    if url == f"{Util.STUB_URL_API}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/status/{STUB_STATUS}":
         return MockResponse("update_investigation", 200)
-    if url == f"{Util.STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/disposition/{STUB_DISPOSITION}":
+    if (
+        url
+        == f"{Util.STUB_URL_API}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/disposition/{STUB_DISPOSITION}"
+    ):
         return MockResponse("update_investigation", 200)
-    if url == f"{Util.STUB_URL}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/assignee":
+    if url == f"{Util.STUB_URL_API}/idr/v2/investigations/{STUB_INVESTIGATION_IDENTIFIER}/assignee":
         return MockResponse("update_investigation", 200)
 
 

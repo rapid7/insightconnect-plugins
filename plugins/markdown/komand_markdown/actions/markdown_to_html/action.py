@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 from komand_markdown.util import utils
-from .schema import MarkdownToHtmlInput, MarkdownToHtmlOutput
+from .schema import MarkdownToHtmlInput, MarkdownToHtmlOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 
 class MarkdownToHtml(insightconnect_plugin_runtime.Action):
@@ -13,13 +14,14 @@ class MarkdownToHtml(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        inbytes = params.get("markdown")
-        instr = params.get("markdown_string")
-        if not (((instr == None) ^ (inbytes == None)) or ((instr == "") ^ (inbytes == ""))):
-            raise Exception(
-                "Only one of Markdown or Markdown String can be defined"
+        inbytes = params.get(Input.MARKDOWN)
+        instr = params.get(Input.MARKDOWN_STRING)
+        if not (((instr is None) ^ (inbytes is None)) or ((instr == "") ^ (inbytes == ""))):
+            raise PluginException(
+                cause="Input error",
+                assistance="Only one of Markdown or Markdown String can be defined"
                 if instr != inbytes
-                else "You must define one of Markdown or Markdown String."
+                else "You must define one of Markdown or Markdown String.",
             )
         if instr:
             html_string = utils.convert(instr, "md", "html")
@@ -27,7 +29,4 @@ class MarkdownToHtml(insightconnect_plugin_runtime.Action):
         else:
             html_string = utils.convert(utils.from_bytes(inbytes), "md", "html")
             html_b64 = utils.to_bytes(html_string)
-        return {"html_string": html_string, "html": html_b64}
-
-    def test(self):
-        return {}
+        return {Output.HTML_STRING: html_string, Output.HTML: html_b64}

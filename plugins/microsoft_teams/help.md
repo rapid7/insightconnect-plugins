@@ -59,6 +59,7 @@ This action is used to add a conversation member to a channel. This operation is
 |channel_name|string|None|True|Name of the channel to which the member is to be added|None|InsightConnect Channel|
 |group_name|string|None|True|Name of the group in which the channel is located|None|InsightConnect Team|
 |member_login|string|None|True|The login of the group member to be added to a channel|None|user@example.com|
+|role|string|Member|True|Role of the member to add|['Owner', 'Member']|Owner|
 
 Example input:
 
@@ -66,7 +67,8 @@ Example input:
 {
   "channel_name": "InsightConnect Channel",
   "group_name": "InsightConnect Team",
-  "member_login": "user@example.com"
+  "member_login": "user@example.com",
+  "role": "Owner"
 }
 ```
 
@@ -261,10 +263,10 @@ Example input:
 
 ```
 {
-  "channel_name": "InsightConnect Channel",
+  "channel_guid": "xxxxx-xxxxx-xxxx-xxxx",
+  "is_html": false,
   "message": "Hello!",
-  "team_name": "InsightConnect Team",
-  "thread_id": 1595889908700
+  "team_guid": "xxxxx-xxxxx-xxxx-xxxx"
 }
 ```
 
@@ -478,6 +480,7 @@ This action is used to add a channel to a team.
 |----|----|-------|--------|-----------|----|-------|
 |channel_description|string|None|True|Channel description|None|This is a test channel.|
 |channel_name|string|None|True|Channel name|None|InsightConnect Channel|
+|channel_type|string|Standard|True|Type of channel to be added|['Standard', 'Private']|Standard|
 |team_name|string|None|True|Team name|None|InsightConnect Team|
 
 Example input:
@@ -486,6 +489,7 @@ Example input:
 {
   "channel_description": "This is a test channel.",
   "channel_name": "InsightConnect Channel",
+  "channel_type": "Standard",
   "team_name": "InsightConnect Team"
 }
 ```
@@ -879,6 +883,8 @@ If there is more than one team with the same name in your organization, the olde
 
 # Version History
 
+* 4.2.0 - New Message Received: Fixed issue where `font-size` value appeared in the `urls`, and `domains` output fields | Can choose the role of a member when adding them to a channel | Fix bug where case-sensitive URLs were returned in lower case | Improved reliability of domains output value
+* 4.1.0 - Cloud enabled | Add Channel to Team: The user has the option to select the type of channel to be created. The available types are `Standard`, and `Private` 
 * 4.0.0 - Fix issue with Create Teams Enabled Group action's members, and owners input field types
 * 3.2.0 - Send Message Action is updated to support chat messages via chat_id parameter, team_name is set to optional. | Update SDK to latest version.
 * 3.1.5 - Add `microsoft_teams` and `office365` keywords | Removed `microsoft, teams, office 365` keywords

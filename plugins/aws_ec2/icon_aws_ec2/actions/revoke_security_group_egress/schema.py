@@ -8,6 +8,7 @@ class Component:
 
 
 class Input:
+    ASSUME_ROLE_PARAMS = "assume_role_params"
     CIDR_IP = "cidr_ip"
     DRY_RUN = "dry_run"
     FROM_PORT = "from_port"
@@ -29,6 +30,12 @@ class RevokeSecurityGroupEgressInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "assume_role_params": {
+      "$ref": "#/definitions/assume_role_params",
+      "title": "Assume Role Parameters",
+      "description": "Parameters that allows to assume IAM role",
+      "order": 10
+    },
     "cidr_ip": {
       "type": "string",
       "title": "CIDR IP",
@@ -91,6 +98,30 @@ class RevokeSecurityGroupEgressInput(insightconnect_plugin_runtime.Input):
     "group_id"
   ],
   "definitions": {
+    "assume_role_params": {
+      "type": "object",
+      "title": "assume_role_params",
+      "properties": {
+        "external_id": {
+          "type": "string",
+          "title": "External ID",
+          "description": "External ID given during role creation",
+          "order": 3
+        },
+        "region": {
+          "type": "string",
+          "title": "Region",
+          "description": "Which section of the AWS cloud is being inspected",
+          "order": 1
+        },
+        "role_arn": {
+          "type": "string",
+          "title": "Role ARN",
+          "description": "AWS IAM role ARN to assume",
+          "order": 2
+        }
+      }
+    },
     "ip_permission": {
       "type": "object",
       "title": "ip_permission",

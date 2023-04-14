@@ -13,6 +13,10 @@ The Nmap plugin runs `nmap` directly and returns the results.
 
 _This plugin does not contain any requirements._
 
+# Supported Product Versions
+
+* 2022-11-18
+
 # Documentation
 
 ## Setup
@@ -29,12 +33,23 @@ This action is used to run an Nmap scan.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|sudo|boolean|False|True|Whether or not to use superuser privileges for scan|None|
-|hosts|string|None|True|Host(s) to scan in Nmap-allowed formats|None|
-|ports|string|None|False|Port(s) to scan in Nmap-allowed formats|None|
-|arguments|string|None|False|Arguments to supply to the Nmap command|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|arguments|string|None|False|Arguments to supply to the Nmap command|None|-A|
+|hosts|string|None|True|Host(s) to scan in Nmap-allowed formats|None|examplehost|
+|ports|string|None|False|Port(s) to scan in Nmap-allowed formats|None|8080|
+|sudo|boolean|False|True|Whether or not to use superuser privileges for scan|None|True|
+
+Example input:
+
+```
+{
+  "arguments": "-A",
+  "hosts": "examplehost",
+  "ports": "8080",
+  "sudo": true
+}
+```
 
 ##### Output
 
@@ -105,6 +120,8 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.4 - Action - Scan: Fix validation error for returned results. Changed array to object
+* 1.0.3 - Scan: Fixed issue where `sudo` == True caused an error | Fixed issue where inputting 'nmap_args' as an empty string caused an error
 * 1.0.2 - New spec and help.md format for the Extension Library
 * 1.0.1 - Support web server mode
 * 1.0.0 - Overhaul with additional inputs and typed output

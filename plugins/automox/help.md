@@ -1229,6 +1229,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.0 - Get device by IP and Get device by hostname: fix validation issue when IP or hostname not found | Add unit tests 
 * 1.1.1 - Fix undefined org ID passed to actions when not required | Record outcome of connection tests
 * 1.1.0 - Add `report source` as optional input parameter to Upload Vulnerability Sync File action | Add report source to batch type
 * 1.0.0 - Initial plugin

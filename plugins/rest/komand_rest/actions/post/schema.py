@@ -8,7 +8,8 @@ class Component:
 
 
 class Input:
-    BODY = "body"
+    BODY_ANY = "body_any"
+    BODY_OBJECT = "body_object"
     HEADERS = "headers"
     ROUTE = "route"
     
@@ -26,9 +27,15 @@ class PostInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "body": {
+    "body_any": {
+      "type": "string",
+      "title": "Body (Any)",
+      "description": "Payload (string) to submit to the server when making the HTTP Request call. This can be any type of input, such as an array or integers etc",
+      "order": 4
+    },
+    "body_object": {
       "type": "object",
-      "title": "Body",
+      "title": "Body (Object)",
       "description": "Payload to submit to the server when making the HTTP Request call",
       "order": 3
     },

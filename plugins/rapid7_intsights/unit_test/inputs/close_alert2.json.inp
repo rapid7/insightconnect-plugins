@@ -1,0 +1,7 @@
+{
+  "alertId": "123456789",
+  "reason": "Problem solved",
+  "freeText": "Test comment",
+  "isHidden": true,
+  "rate": 5
+}

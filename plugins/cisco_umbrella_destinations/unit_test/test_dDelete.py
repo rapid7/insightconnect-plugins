@@ -5,15 +5,16 @@ from parameterized import parameterized
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
+from unittest.mock import Mock
 from icon_cisco_umbrella_destinations.connection.connection import Connection
 from icon_cisco_umbrella_destinations.actions.dDelete import DDelete
 from icon_cisco_umbrella_destinations.actions.dDelete.schema import Input
-from icon_cisco_umbrella_destinations.util.api import ERROR_MSG
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 import logging
 
 from unit_test.mock import (
+    Util,
     STUB_CONNECTION,
     mock_request_200,
     mock_request_403,
@@ -27,24 +28,18 @@ from unit_test.mock import (
 
 
 class TestDDelete(TestCase):
-    def setUp(self) -> None:
-        self.connection = Connection()
-        self.connection.logger = logging.getLogger("Connection logger")
-        self.connection.connect(STUB_CONNECTION)
-
-        self.action = DDelete()
-        self.action.connection = self.connection
-        self.action.logger = logging.getLogger("Action logger")
-
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
+    def setUp(self, mock_post: Mock) -> None:
+        self.action = Util.default_connector(DDelete())
         self.params = {Input.DESTINATIONLISTID: STUB_DESTINATION_LIST_ID, Input.PAYLOAD: "1234 5678"}
 
-    @mock.patch("requests.request", side_effect=mock_request_200)
+    @mock.patch("requests.Session.request", side_effect=mock_request_200)
     def test_successful(self, mock_delete):
+        mocked_request(mock_delete)
         response = self.action.run(self.params)
         expected_response = {
             "success": {
                 "id": 15755711,
-                "organizationId": 2372338,
                 "access": "allow",
                 "isGlobal": False,
                 "name": "CreateListTest",
@@ -60,7 +55,7 @@ class TestDDelete(TestCase):
 
     @parameterized.expand(
         [
-            (mock_request_400, ERROR_MSG),
+            (mock_request_400, PluginException.causes[PluginException.Preset.BAD_REQUEST]),
             (mock_request_401, PluginException.causes[PluginException.Preset.USERNAME_PASSWORD]),
             (mock_request_403, PluginException.causes[PluginException.Preset.UNAUTHORIZED]),
             (mock_request_404, PluginException.causes[PluginException.Preset.NOT_FOUND]),

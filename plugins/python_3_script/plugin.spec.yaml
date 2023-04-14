@@ -7,8 +7,8 @@ vendor: rapid7
 support: rapid7
 status: []
 description: Run a Python 3 script
-version: 4.0.0
-supported_versions: ["Python 3.7.2"]
+version: 4.0.3
+supported_versions: ["Python 3.8.1"]
 enable_cache: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/python_3_script
@@ -23,7 +23,6 @@ hub_tags:
   use_cases: [data_utility]
   keywords: [python, scripting]
   features: []
-
 connection:
   modules:
     title: "Third-Party Modules"
@@ -50,7 +49,6 @@ connection:
     type: credential_username_password
     required: false
     example: '{"username": "user", "password": "mypassword"}'
-
 actions:
   run:
     title: Run Function

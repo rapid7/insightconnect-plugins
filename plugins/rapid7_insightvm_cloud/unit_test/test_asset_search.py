@@ -26,6 +26,8 @@ class TestAssetSearch(TestCase):
             "sort_criteria": {"risk-score": "asc", "criticality-tag": "desc"},
             "vuln_criteria": "severity IN ['Critical', 'Severe']",
             "vuln_criteria_invalid": "invalid vuln criteria",
+            "comparison_time": "2000-01-01T00:00:00.000Z",
+            "current_time": "2000-01-01T00:00:00.000Z",
         }
 
     def setUp(self) -> None:
@@ -69,7 +71,7 @@ class TestAssetSearch(TestCase):
         data = Utils.read_file_to_dict("expected_responses/asset_search_invalid_asset_criteria.json.resp")
         self.assertEqual(cause, context.exception.cause)
         self.assertEqual(assistance, context.exception.assistance)
-        self.assertEqual(data, context.exception.data)
+        self.assertEqual(str(data), context.exception.data)
 
     # test finding event via all inputs
     @patch("requests.request", side_effect=mock_request)
@@ -88,7 +90,7 @@ class TestAssetSearch(TestCase):
         data = Utils.read_file_to_dict("expected_responses/asset_search_invalid_vuln_criteria.json.resp")
         self.assertEqual(cause, context.exception.cause)
         self.assertEqual(assistance, context.exception.assistance)
-        self.assertEqual(data, context.exception.data)
+        self.assertEqual(str(data), context.exception.data)
 
     @patch("requests.request", side_effect=mock_request)
     def test_asset_search_invalid_secret_key(self, _mock_req):

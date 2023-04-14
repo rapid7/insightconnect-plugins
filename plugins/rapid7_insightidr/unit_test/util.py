@@ -16,7 +16,8 @@ class Meta:
 
 
 class Util:
-    STUB_URL = "https://us.api.insight.rapid7.com"
+    STUB_URL_API = "https://us.api.insight.rapid7.com"
+    STUB_URL_REST = "https://us.rest.logs.insight.rapid7.com"
 
     @staticmethod
     def default_connector(action, connect_params: object = None):
@@ -70,14 +71,22 @@ class Util:
                     )
                 )
 
-        if args[0] == f"{Util.STUB_URL}/log_search/management/labels/00000000-0000-0000-0000-000000000006":
+        if args[0] == f"{Util.STUB_URL_API}/log_search/management/labels/00000000-0000-0000-0000-000000000006":
             return MockResponse("label_006", 200)
-        elif args[0] == f"{Util.STUB_URL}/log_search/management/labels/00000000-0000-0000-0000-000000000007":
+        elif args[0] == f"{Util.STUB_URL_API}/log_search/management/labels/00000000-0000-0000-0000-000000000007":
             return MockResponse("label_007", 200)
-        elif args[0] == f"{Util.STUB_URL}/log_search/management/labels/not exist label - 404":
+        elif args[0] == f"{Util.STUB_URL_API}/log_search/management/labels/not exist label - 404":
             return MockResponse("label_404", 404)
 
         raise Exception("Not implemented")
+
+    @staticmethod
+    def load_parameters(filename):
+        return json.loads(
+            Util.read_file_to_string(
+                os.path.join(os.path.dirname(os.path.realpath(__file__)), f"parameters/{filename}.json.resp")
+            )
+        )
 
     @staticmethod
     def mocked_requests(*args, **kwargs):
@@ -86,6 +95,11 @@ class Util:
                 self.filename = filename
                 self.status_code = status_code
                 self.text = "This is some error text"
+                self.content = None
+                if self.filename == "not_found":
+                    self.text = "Not found."
+                if self.filename == "download_attachment":
+                    self.content = b"test"
 
             def raise_for_status(self):
                 if self.status_code == 404:
@@ -103,29 +117,115 @@ class Util:
                     )
                 )
 
-        if args[0] == f"{Util.STUB_URL}/log_search/management/logs":
+        if kwargs.get("params") == {
+            "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
+            "index": 0,
+            "size": 0,
+        }:
+            return MockResponse("invalid_size", 400)
+        if kwargs.get("params") == {
+            "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
+            "index": 0,
+            "size": 1,
+        }:
+            return MockResponse("list_comments", 200)
+        if kwargs.get("params") == {
+            "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567899",
+            "index": 0,
+            "size": 1,
+        }:
+            return MockResponse("list_attachments", 200)
+        if kwargs.get("params") == {
+            "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:9876543210",
+            "index": 0,
+            "size": 1,
+        }:
+            return MockResponse("list_empty", 200)
+        if (
+            kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/v1/attachments/rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890/metadata"
+        ):
+            return MockResponse("get_attachment_information", 200)
+        if (
+            kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/v1/attachments/rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:123456789/metadata"
+        ):
+            return MockResponse("get_attachment_information", 404)
+        if kwargs.get("json") == {
+            "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
+            "body": "test",
+            "attachments": ["rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890"],
+        }:
+            return MockResponse("create_comment", 200)
+        if kwargs.get("json") == {
+            "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
+            "body": "test",
+            "attachments": [],
+        }:
+            return MockResponse("create_comment_without_attachment", 200)
+        if kwargs.get("json") == {
+            "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:1234567890",
+            "body": "",
+            "attachments": ["rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890"],
+        }:
+            return MockResponse("create_comment_without_body", 200)
+        if kwargs.get("json") == {
+            "target": "rrn:investigation:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:investigation:not_found",
+            "body": "test",
+            "attachments": ["rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890"],
+        }:
+            return MockResponse("create_comment", 404)
+        if (
+            kwargs.get("method") == "DELETE"
+            and kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/v1/comments/rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:comment:not_found"
+        ):
+            return MockResponse("not_found", 404)
+        if (
+            kwargs.get("method") == "DELETE"
+            and kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/v1/attachments/rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:comment:not_found"
+        ):
+            return MockResponse("not_found", 404)
+        if kwargs.get("method") == "DELETE":
+            return MockResponse("success", 204)
+        if (
+            kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/v1/attachments/rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:1234567890"
+        ):
+            return MockResponse("download_attachment", 200)
+        if (
+            kwargs.get("url")
+            == "https://us.api.insight.rapid7.com/idr/v1/attachments/rrn:collaboration:us:44d88612-fea8-a8f3-6de8-2e1278abb02f:attachment:not_found"
+        ):
+            return MockResponse("not_found", 404)
+        if kwargs.get("files") == {"filedata": ("test.txt", b"test", "text/plain")}:
+            return MockResponse("upload_attachment", 200)
+        if kwargs.get("files") == {"filedata": ("test", b"test", "text/plain")}:
+            return MockResponse("upload_attachment_without_file_extension", 200)
+        if args[0] == f"{Util.STUB_URL_API}/log_search/management/logs":
             return MockResponse("logs", 200)
         elif (
-            args[0] == f"{Util.STUB_URL}/log_search/query/logs/log_id"
-            or args[0] == f"{Util.STUB_URL}/log_search/query/logsets/log_id"
+            args[0] == f"{Util.STUB_URL_API}/log_search/query/logs/log_id"
+            or args[0] == f"{Util.STUB_URL_API}/log_search/query/logsets/log_id"
         ):
             return MockResponse("log_id", 200)
         elif (
-            args[0] == f"{Util.STUB_URL}/log_search/query/logs/log_id2"
-            or args[0] == f"{Util.STUB_URL}/log_search/query/logsets/log_id2"
+            args[0] == f"{Util.STUB_URL_API}/log_search/query/logs/log_id2"
+            or args[0] == f"{Util.STUB_URL_API}/log_search/query/logsets/log_id2"
         ):
             return MockResponse("log_id2", 200)
         elif (
-            args[0] == f"{Util.STUB_URL}/log_search/query/logs/log_id3"
-            or args[0] == f"{Util.STUB_URL}/log_search/query/logsets/log_id3"
+            args[0] == f"{Util.STUB_URL_API}/log_search/query/logs/log_id3"
+            or args[0] == f"{Util.STUB_URL_API}/log_search/query/logsets/log_id3"
         ):
             return MockResponse("log_id3", 200)
         elif (
-            args[0] == f"{Util.STUB_URL}/log_search/query/logs/log_id4"
-            or args[0] == f"{Util.STUB_URL}/log_search/query/logsets/log_id4"
+            args[0] == f"{Util.STUB_URL_API}/log_search/query/logs/log_id4"
+            or args[0] == f"{Util.STUB_URL_API}/log_search/query/logsets/log_id4"
         ):
             return MockResponse("log_id4", 200)
-        elif args[0] == f"{Util.STUB_URL}/log_search/management/logsets":
+        elif args[0] == f"{Util.STUB_URL_API}/log_search/management/logsets":
             return MockResponse("logsets", 200)
 
         raise Exception("Not implemented")

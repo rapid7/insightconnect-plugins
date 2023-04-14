@@ -1,0 +1,24 @@
+{
+  "parameters": [
+    [
+      "found",
+      "instance:123:example:i-1234567890:",
+      {
+        "resourceTags": [
+          {
+            "key": "tag1",
+            "value": "test_tag_1"
+          },
+          {
+            "key": "tag2",
+            "value": "test_tag_2"
+          },
+          {
+            "key": "tag3",
+            "value": "test_tag_3"
+          }
+        ]
+      }
+    ]
+  ]
+}

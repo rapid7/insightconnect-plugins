@@ -1,0 +1,249 @@
+{
+  "nir": null,
+  "asn_registry": "apnic",
+  "asn": "13335",
+  "asn_cidr": "1.1.1.0/24",
+  "asn_country_code": "AU",
+  "asn_date": "2011-08-11",
+  "asn_description": "CLOUDFLARENET, US",
+  "query": "1.1.1.1",
+  "network": {
+    "handle": "1.1.1.0 - 1.1.1.255",
+    "status": [
+      "active"
+    ],
+    "remarks": [
+      {
+        "title": "description",
+        "description": "APNIC and Cloudflare DNS Resolver project\nRouted globally by AS13335/Cloudflare\nResearch prefix for APNIC Labs",
+        "links": null
+      },
+      {
+        "title": "remarks",
+        "description": "---------------\nAll Cloudflare abuse reporting can be done via\nresolver-abuse@cloudflare.com\n---------------",
+        "links": null
+      }
+    ],
+    "notices": [
+      {
+        "title": "Source",
+        "description": "Objects returned came from source\nAPNIC",
+        "links": null
+      },
+      {
+        "title": "Terms and Conditions",
+        "description": "This is the APNIC WHOIS Database query service. The objects are in RDAP format.",
+        "links": [
+          "http://www.apnic.net/db/dbcopyright.html"
+        ]
+      },
+      {
+        "title": "Whois Inaccuracy Reporting",
+        "description": "If you see inaccuracies in the results, please visit: ",
+        "links": [
+          "https://www.apnic.net/manage-ip/using-whois/abuse-and-spamming/invalid-contact-form"
+        ]
+      }
+    ],
+    "links": [
+      "http://rdap.apnic.net/ip/1.1.1.0/24",
+      "https://netox.apnic.net/search/1.1.1.0%2F24?utm_source=rdap&utm_medium=result&utm_campaign=rdap_result"
+    ],
+    "events": [
+      {
+        "action": "registration",
+        "timestamp": "2011-08-10T23:12:35Z",
+        "actor": null
+      },
+      {
+        "action": "last changed",
+        "timestamp": "2020-07-15T13:10:57Z",
+        "actor": null
+      }
+    ],
+    "raw": null,
+    "start_address": "1.1.1.0",
+    "end_address": "1.1.1.255",
+    "cidr": "1.1.1.0/24",
+    "ip_version": "v4",
+    "type": "ASSIGNED PORTABLE",
+    "name": "APNIC-LABS",
+    "country": "AU",
+    "parent_handle": null
+  },
+  "entities": [
+    "ORG-ARAD1-AP",
+    "IRT-APNICRANDNET-AU",
+    "AR302-AP"
+  ],
+  "objects": {
+    "ORG-ARAD1-AP": {
+      "handle": "ORG-ARAD1-AP",
+      "status": null,
+      "remarks": null,
+      "notices": null,
+      "links": [
+        "http://rdap.apnic.net/entity/ORG-ARAD1-AP"
+      ],
+      "events": [
+        {
+          "action": "registration",
+          "timestamp": "2017-08-08T23:21:55Z",
+          "actor": null
+        },
+        {
+          "action": "last changed",
+          "timestamp": "2017-10-11T01:28:39Z",
+          "actor": null
+        }
+      ],
+      "raw": null,
+      "roles": [
+        "registrant"
+      ],
+      "contact": {
+        "name": "APNIC Research and Development",
+        "kind": "org",
+        "address": [
+          {
+            "type": null,
+            "value": "6 Cordelia St"
+          }
+        ],
+        "phone": [
+          {
+            "type": "voice",
+            "value": "+61-7-38583100"
+          },
+          {
+            "type": "fax",
+            "value": "+61-7-38583199"
+          }
+        ],
+        "email": [
+          {
+            "type": null,
+            "value": "helpdesk@apnic.net"
+          }
+        ],
+        "role": null,
+        "title": null
+      },
+      "events_actor": null,
+      "entities": null
+    },
+    "IRT-APNICRANDNET-AU": {
+      "handle": "IRT-APNICRANDNET-AU",
+      "status": null,
+      "remarks": [
+        {
+          "title": "remarks",
+          "description": "helpdesk@apnic.net was validated on 2021-02-09",
+          "links": null
+        }
+      ],
+      "notices": null,
+      "links": [
+        "http://rdap.apnic.net/entity/IRT-APNICRANDNET-AU"
+      ],
+      "events": [
+        {
+          "action": "registration",
+          "timestamp": "2011-04-12T17:56:54Z",
+          "actor": null
+        },
+        {
+          "action": "last changed",
+          "timestamp": "2021-03-09T01:10:21Z",
+          "actor": null
+        }
+      ],
+      "raw": null,
+      "roles": [
+        "abuse"
+      ],
+      "contact": {
+        "name": "IRT-APNICRANDNET-AU",
+        "kind": "group",
+        "address": [
+          {
+            "type": null,
+            "value": "PO Box 3646\nSouth Brisbane, QLD 4101\nAustralia"
+          }
+        ],
+        "phone": null,
+        "email": [
+          {
+            "type": null,
+            "value": "helpdesk@apnic.net"
+          },
+          {
+            "type": null,
+            "value": "helpdesk@apnic.net"
+          }
+        ],
+        "role": null,
+        "title": null
+      },
+      "events_actor": null,
+      "entities": null
+    },
+    "AR302-AP": {
+      "handle": "AR302-AP",
+      "status": null,
+      "remarks": null,
+      "notices": null,
+      "links": [
+        "http://rdap.apnic.net/entity/AR302-AP"
+      ],
+      "events": [
+        {
+          "action": "registration",
+          "timestamp": "2011-08-22T06:00:02Z",
+          "actor": null
+        },
+        {
+          "action": "last changed",
+          "timestamp": "2018-04-04T04:26:04Z",
+          "actor": null
+        }
+      ],
+      "raw": null,
+      "roles": [
+        "technical",
+        "administrative"
+      ],
+      "contact": {
+        "name": "APNIC RESEARCH",
+        "kind": "group",
+        "address": [
+          {
+            "type": null,
+            "value": "PO Box 3646\nSouth Brisbane, QLD 4101\nAustralia"
+          }
+        ],
+        "phone": [
+          {
+            "type": "voice",
+            "value": "+61-7-3858-3188"
+          },
+          {
+            "type": "fax",
+            "value": "+61-7-3858-3199"
+          }
+        ],
+        "email": [
+          {
+            "type": null,
+            "value": "research@apnic.net"
+          }
+        ],
+        "role": null,
+        "title": null
+      },
+      "events_actor": null,
+      "entities": null
+    }
+  },
+  "raw": null
+}

@@ -1,0 +1,39 @@
+{
+	"spec": "7c7b6f205e09b0c7f5deb31fe0f99610",
+	"manifest": "afec6aa4a72f7d5adfcaa33e693e49d4",
+	"setup": "5b4346fa75c78350298f5de8407d989b",
+	"schemas": [
+		{
+			"identifier": "checkAnalysisStatus/schema.py",
+			"hash": "b33491d2d597f6e98afc65a472df3cef"
+		},
+		{
+			"identifier": "downloadArtifact/schema.py",
+			"hash": "2ca7c6d488baaf4f6e20bf3f96dc694c"
+		},
+		{
+			"identifier": "getFullReport/schema.py",
+			"hash": "6e729794f718416ff53344586ef9cc78"
+		},
+		{
+			"identifier": "getReportsIDs/schema.py",
+			"hash": "2edc81eb0a7546bb0b9b14d0b985c5a5"
+		},
+		{
+			"identifier": "getShortReport/schema.py",
+			"hash": "2f85634b911c8eabbdbcf6204f0a25c0"
+		},
+		{
+			"identifier": "getSubmissionsIDs/schema.py",
+			"hash": "b53506b55ad8003fd347bf0bc95ef19e"
+		},
+		{
+			"identifier": "submitAnalysis/schema.py",
+			"hash": "115798e956c58449ba2eef7a288ec95f"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "137057253a8e6ce38707b2ad62d4a4b0"
+		}
+	]
+}

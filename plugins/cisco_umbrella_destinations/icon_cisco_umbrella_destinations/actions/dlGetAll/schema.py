@@ -47,15 +47,13 @@ class DlGetAllOutput(insightconnect_plugin_runtime.Output):
         "access": {
           "type": "string",
           "title": "Access",
-          "description": "Can be allow or block",
+          "description": "Allow or block access to domain",
           "order": 3
         },
         "createdAt": {
-          "type": "string",
+          "type": "integer",
           "title": "Created At",
-          "displayType": "date",
-          "description": "Timestamp for creation of the destination list",
-          "format": "date-time",
+          "description": "The unix UTC timestamp in milliseconds for creation of the destination list",
           "order": 7
         },
         "id": {
@@ -78,7 +76,7 @@ class DlGetAllOutput(insightconnect_plugin_runtime.Output):
         },
         "markedForDeletion": {
           "type": "boolean",
-          "title": "Marked For Deletion",
+          "title": "Marked for Deletion",
           "description": "Whether or not destination list is marked for deletion",
           "order": 10
         },
@@ -89,11 +87,9 @@ class DlGetAllOutput(insightconnect_plugin_runtime.Output):
           "order": 11
         },
         "modifiedAt": {
-          "type": "string",
+          "type": "integer",
           "title": "Modified At",
-          "displayType": "date",
-          "description": "Timestamp for modification of the destination list",
-          "format": "date-time",
+          "description": "The unix UTC timestamp in milliseconds for modification of the destination list",
           "order": 8
         },
         "name": {

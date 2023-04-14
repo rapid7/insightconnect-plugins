@@ -1,0 +1,10 @@
+{
+  "description": "Validation failed",
+  "errors": [
+    {
+      "field": "company_id",
+      "message": "There is no company matching the given company_id",
+      "code": "invalid_value"
+    }
+  ]
+}

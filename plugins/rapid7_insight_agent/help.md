@@ -204,6 +204,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.1.1 - Quarantine: Fix incorrect behavior for unquarantine when the agent ID is wrong
 * 1.1.0 - Cloud enabled
 * 1.0.4 - Add new supported regions for API | Create unit tests for actions Check Agent Status, Quarantine, Get Agent Details  
 * 1.0.3 - Documentation update

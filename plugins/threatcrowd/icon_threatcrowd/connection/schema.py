@@ -4,11 +4,27 @@ import json
 
 
 class Input:
-    pass
+    SSL_VERIFICATION = "ssl_verification"
+    
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
     schema = json.loads("""
-   {}
+   {
+  "type": "object",
+  "title": "Variables",
+  "properties": {
+    "ssl_verification": {
+      "type": "boolean",
+      "title": "Verify SSL Certificate",
+      "description": "Indicates whether to verify SSL certificate or not",
+      "default": true,
+      "order": 1
+    }
+  },
+  "required": [
+    "ssl_verification"
+  ]
+}
     """)
 
     def __init__(self):

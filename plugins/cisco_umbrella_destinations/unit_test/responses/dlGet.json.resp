@@ -5,7 +5,6 @@
     },
     "data": {
         "id": 15755711,
-        "organizationId": 2372338,
         "access": "allow",
         "isGlobal": false,
         "name": "CreateListTest",

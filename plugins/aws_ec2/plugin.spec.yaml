@@ -5,11 +5,11 @@ name: aws_ec2
 title: AWS EC2
 vendor: rapid7
 support: rapid7
-supported_versions: ["botocore 1.26.5"]
+supported_versions: ["botocore 1.27.96"]
 status: []
 description: Amazon Elastic Compute Cloud (Amazon EC2) provides resizable computing
   capacity in the Amazon Web Services (AWS) cloud. This plugin allows you to manage your EC2 environment
-version: 1.1.0
+version: 1.3.0
 resources:
   vendor_url: https://www.amazon.com
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/aws_ec2
@@ -738,6 +738,22 @@ types:
       type: string
       description: The ID of the reservation
       required: false
+  assume_role_params:
+    region:
+      title: Region
+      description: Which section of the AWS cloud is being inspected
+      type: string
+      required: false
+    role_arn:
+      title: Role ARN
+      description: AWS IAM role ARN to assume
+      type: string
+      required: false
+    external_id:
+      title: External ID
+      description: External ID given during role creation
+      type: string
+      required: false
 connection:
   aws_access_key_id:
     title: AWS Access Key ID
@@ -758,6 +774,18 @@ connection:
     type: string
     example: "us-east-1"
     required: true
+  role_arn:
+    title: Role ARN
+    description: AWS IAM role ARN to assume
+    type: string
+    required: false
+    example: arn:aws:iam::123456781111:role/ExampleRole
+  external_id:
+    title: External ID
+    description: External ID given during role creation
+    type: string
+    required: false
+    example: exampleexternalid
 actions:
   authorize_security_group_egress:
     title: Authorize Security Group Egress
@@ -826,6 +854,12 @@ actions:
         description: Not supported
         required: false
         example: "otheraccountgroup"
+      assume_role_params:
+        title: Assume Role Parameters
+        description: Parameters that allows to assume IAM role
+        type: assume_role_params
+        required: false
+        example: "{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'"
     output:
       response_metadata:
         title: Response Metadata
@@ -908,6 +942,12 @@ actions:
           without actually making the request, and provides an error response
         required: false
         example: false
+      assume_role_params:
+        title: Assume Role Parameters
+        description: Parameters that allows to assume IAM role
+        type: assume_role_params
+        required: false
+        example: "{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'"
     output:
       response_metadata:
         title: Response Metadata
@@ -937,6 +977,12 @@ actions:
           without actually making the request, and provides an error response
         required: false
         example: false
+      assume_role_params:
+        title: Assume Role Parameters
+        description: Parameters that allows to assume IAM role
+        type: assume_role_params
+        required: false
+        example: "{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'"
     output:
       response_metadata:
         title: Response Metadata
@@ -978,6 +1024,12 @@ actions:
           without actually making the request, and provides an error response
         required: false
         example: false
+      assume_role_params:
+        title: Assume Role Parameters
+        description: Parameters that allows to assume IAM role
+        type: assume_role_params
+        required: false
+        example: "{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'"
     output:
       response_metadata:
         title: Response Metadata
@@ -1056,6 +1108,12 @@ actions:
         description: Not supported
         required: false
         example: "ownergroup"
+      assume_role_params:
+        title: Assume Role Parameters
+        description: Parameters that allows to assume IAM role
+        type: assume_role_params
+        required: false
+        example: "{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'"
     output:
       response_metadata:
         title: Response Metadata
@@ -1138,6 +1196,12 @@ actions:
           without actually making the request, and provides an error response
         required: false
         example: true
+      assume_role_params:
+        title: Assume Role Parameters
+        description: Parameters that allows to assume IAM role
+        type: assume_role_params
+        required: false
+        example: "{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'"
     output:
       response_metadata:
         title: Response Metadata
@@ -1181,6 +1245,12 @@ actions:
                "description": "Blah"
             }],
             "to_port": 8090}']
+      assume_role_params:
+        title: Assume Role Parameters
+        description: Parameters that allows to assume IAM role
+        type: assume_role_params
+        required: false
+        example: "{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'"
     output:
       response_metadata:
         title: Response Metadata
@@ -1228,6 +1298,12 @@ actions:
                "description": "Blah"
             }],
             "to_port": 8090}']
+      assume_role_params:
+        title: Assume Role Parameters
+        description: Parameters that allows to assume IAM role
+        type: assume_role_params
+        required: false
+        example: "{'role_arn': 'arn:aws:iam::123456781111:role/ExampleRole', 'external_id': 'ExampleExternalID', 'region': 'us-west-2'"
     output:
       response_metadata:
         title: Response Metadata

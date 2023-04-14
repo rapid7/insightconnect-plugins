@@ -4,7 +4,7 @@ products: [insightconnect]
 name: rapid7_insightappsec
 title: Rapid7 InsightAppSec
 description: This plugin allows for the creation, configuration, and starting of scans. The plugin can also retrieve scan results and logging related to the execution of the scan
-version: 1.0.4
+version: 1.1.0
 supported_versions: ["Rapid7 InsightAppSec"]
 vendor: rapid7
 status: []
@@ -189,6 +189,289 @@ types:
       description: The current delay between HTTP requests
       type: number
       required: false
+  objectId:
+    id:
+      title: ID
+      description: Unique identifier for object
+      type: string
+      required: false
+      example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+  pageMetadata:
+    size:
+      title: Size
+      description: Page size
+      type: integer
+      required: false
+      example: 1
+    totalData:
+      title: Total Data
+      description: Total data
+      type: integer
+      required: false
+      example: 1
+    pageToken:
+      title: Page Token
+      description: Page token
+      type: string
+      required: false
+      example: NDM0NTk0NTIyOjo6X1M6OjpiYW5hbmFz
+    index:
+      title: Index
+      description: Page index
+      type: integer
+      required: false
+      example: 1
+    sort:
+      title: Sort
+      description: Sort details
+      type: string
+      required: false
+      example: scan.submit_time,DESC,scan.status
+    totalPages:
+      title: Total Pages
+      description: Total pages
+      type: integer
+      required: false
+      example: 1
+  linkDetails:
+    profile:
+      title: Profile
+      description: Profile
+      type: string
+      required: false
+      example: example
+    rel:
+      title: Rel
+      description: Rel
+      type: string
+      required: false
+      example: example
+    name:
+      title: Name
+      description: Name
+      type: string
+      required: false
+      example: example
+    href:
+      title: Href
+      description: Href
+      type: string
+      required: false
+      example: example.com
+  rootCause:
+    method:
+      title: Method
+      description: The HTTP method
+      type: string
+      required: false
+      example: GET
+    parameter:
+      title: Parameter
+      description: The parameter from the URL
+      type: string
+      required: false
+      example: example
+    url:
+      title: URL
+      description: The URL
+      type: string
+      required: false
+      example: example.com
+  exchangeObject:
+    id:
+      title: ID
+      description: The ID of the Exchange
+      type: string
+      required: false
+      example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+    request:
+      title: Request
+      description: The critical section of the request payload
+      type: string
+      required: false
+      example: example
+    response:
+      title: Response
+      description: The critical section of the response payload
+      type: string
+      required: false
+      example: example
+  variance:
+    attackExchanges:
+      title: Attack Exchanges
+      description: The HTTP exchange executed as part of the attack
+      type: "[]exchangeObject"
+      required: false
+      example: []
+    originalValue:
+      title: Original Value
+      description: The value of a variable prior to being attacked
+      type: string
+      required: false
+      example: example
+    attackValue:
+      title: Attack Value
+      description: The value of a variable used to attack
+      type: string
+      required: false
+      example: example
+    attack:
+      title: Attack
+      description: The ID of the attack
+      type: objectId
+      required: false
+      example: {}
+    module:
+      title: Module
+      description: The ID of the module
+      type: objectId
+      required: false
+      example: {}
+    proofDescription:
+      title: Proof Description
+      description: A description of the proof that may highlight the result of the attack
+      type: string
+      required: false
+      example: example
+    originalExchange:
+      title: Original Exchange
+      description: The HTTP exchange executed as part of the attack
+      type: exchangeObject
+      required: false
+      example: {}
+    id:
+      title: ID
+      description: The ID of the variance
+      type: string
+      required: false
+      example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+    proof:
+      title: Proof
+      description: A proof that may highlight the result of the attack
+      type: string
+      required: false
+      example: example
+    message:
+      title: Message
+      description: A message that may highlight the result of the attack
+      type: string
+      required: false
+      example: example
+  vulnerabilityItem:
+    app:
+      title: App
+      description: The ID of the module
+      type: objectId
+      required: false
+      example: {}
+    severity:
+      title: Severity
+      description: "The severity of the vulnerability. Expected values: 'SAFE' 'INFORMATIONAL' 'LOW' 'MEDIUM' 'HIGH'"
+      type: string
+      required: false
+      example: SAFE
+    vectorString:
+      title: Vector String
+      description: Textual representation of the metric values used to determine the CVSS score
+      type: string
+      required: false
+      example: example
+    newlyDiscovered:
+      title: Newly Discovered
+      description: Indicates that the vulnerability has been found in the latest scan and has not been discovered before
+      type: boolean
+      required: false
+      example: true
+    insightUiUrl:
+      title: Insight UI URL
+      description: Direct link to the Vulnerability on InsightAppSec UI. Require InsightAppSec login before use
+      type: string
+      required: false
+      example: example.com
+    lastDiscovered:
+      title: Last Discovered
+      description: The time the vulnerability was last discovered
+      type: string
+      required: false
+      example: 2021-08-03T14:07:37
+    firstDiscovered:
+      title: First Discovered
+      description: The time the vulnerability was first discovered
+      type: string
+      required: false
+      example: 2021-08-03T14:07:37
+    vulnerabilityScore:
+      title: Vulnerability Score
+      description: CVSS score which represents the severity of an information security vulnerability
+      type: float
+      required: false
+      example: 1.5
+    variances:
+      title: Variances
+      description: Evidence found that indicates the presence of a vulnerability
+      type: "[]variance"
+      required: false
+      example: []
+    links:
+      title: Links
+      description: List of links
+      type: "[]linkDetails"
+      required: false
+      example: []
+    id:
+      title: ID
+      description: The ID of the vulnerability
+      type: string
+      required: false
+      example: 497f6eca-6276-4993-bfeb-53cbbbba6f08
+    rootCause:
+      title: Root Cause
+      description: A descriptor for the location of the vulnerability
+      type: rootCause
+      required: false
+      example: {}
+    status:
+      title: Status
+      description: "The status of the vulnerability. Expected values: 'UNREVIEWED' 'FALSE_POSITIVE' 'VERIFIED' 
+      'IGNORED' 'REMEDIATED' 'DUPLICATE'"
+      type: string
+      required: false
+      example: UNREVIEWED
+  frequencyInput:
+    interval:
+      title: Interval
+      description: The interval of the frequency
+      type: integer
+      required: false
+      default: 1
+      example: 12
+    type:
+      title: Type
+      description: The type of the frequency
+      type: string
+      required: false
+      enum:
+        - ONCE
+        - HOURLY
+        - DAILY
+        - WEEKLY
+        - MONTHLY
+      default: HOURLY
+      example: HOURLY
+  discoveryItem:
+    discovered:
+      title: Discovered
+      description: The time the vulnerability discovery was discovered
+      type: string
+      required: false
+      example: "2021-08-03T14:07:37"
+    scan:
+      title: Scan
+      description: The ID of the module
+      type: objectId
+      required: false
+      example: {}
+
 connection:
   api_key:
     title: API Key
@@ -522,4 +805,196 @@ actions:
         title: Events
         description: An array of event logs and their dates
         type: '[]event_log'
+        required: false
+  get_vulnerability:
+    title: Get Vulnerability
+    description: Get a vulnerability
+    input:
+      vulnerabilityId:
+        title: Vulnerability ID
+        description: Unique identifier for vulnerability
+        type: string
+        required: true
+        example: "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+    output:
+      vulnerability:
+        title: Vulnerability
+        description: Vulnerability item
+        type: vulnerabilityItem
+        required: false
+        example: {}
+  get_vulnerabilities:
+    title: Get Vulnerabilities
+    description: "Get a page of Vulnerabilities, based on supplied pagination parameters. The default sort for 
+    Vulnerabilities is 'severity' (descending); for a full list of sortable properties, refer to the Search Catalog 
+    detailed in the Search API"
+    input:
+      index:
+        title: Index
+        description: "The 0-based index of the page of data desired (default: 0)"
+        type: integer
+        required: false
+        example: 1
+      size:
+        title: Size
+        description: "The size of the page of data desired (min: 1, max: 1000, default: 50)"
+        type: integer
+        required: false
+        example: 1
+      sort:
+        title: Sort
+        description: "The sort terms and (optional) directions for the desired ordering of data"
+        type: string
+        required: false
+        example: vulnerability.severity,DESC
+      pageToken:
+        title: Page Token
+        description: "The page token, used as an alternative to index"
+        type: string
+        required: false
+        example: NDM0NTk0NTIyOjo6X1M6OjpiYW5hbmFz
+    output:
+      metadata:
+        title: Metadata
+        description: Page metadata
+        type: pageMetadata
+        required: false
+        example: {}
+      data:
+        title: Data
+        description: List of vulnerability data
+        type: "[]vulnerabilityItem"
+        required: false
+        example: []
+      links:
+        title: Links
+        description: List of links
+        type: "[]linkDetails"
+        required: false
+        example: []
+  create_schedule:
+    title: Create Schedule
+    description: Create a new schedule
+    input:
+      name:
+        title: Name
+        description: Name of the schedule
+        type: string
+        required: true
+        example: Example Schedule
+      scanConfigId:
+        title: Scan Config ID
+        description: The scan config ID of the schedule
+        type: string
+        required: true
+        example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+      enabled:
+        title: Enabled
+        description: Whether the schedule is enabled
+        type: boolean
+        required: true
+        default: true
+        example: true
+      firstStart:
+        title: First Start
+        description: The first start date and time of the schedule
+        type: date
+        required: true
+        example: 2023-03-17T13:00:19Z
+      lastStart:
+        title: Last Start
+        description: The last start date and time of the schedule
+        type: date
+        required: false
+        example: 2023-04-17T13:00:19Z
+      frequency:
+        title: Frequency
+        description: The frequency describes how (and if) the schedule should repeat. If frequency and recurrence rule are given then the recurrence rule will be used
+        type: frequencyInput
+        required: false
+        example: {}
+      rrule:
+        title: Recurrence Rule
+        description: The recurrence rule describes how (and if) the schedule should repeat. If frequency and recurrence rule are given then the recurrence rule will be used
+        type: string
+        required: false
+        example: "FREQ=WEEKLY;INTERVAL=1;BYDAY=TU;COUNT=10"
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+        example: true
+  get_vulnerability_discovery:
+    title: Get Vulnerability Discovery
+    description: Get a vulnerability discovery
+    input:
+      vulnerabilityId:
+        title: Vulnerability ID
+        description: Unique identifier for vulnerability
+        type: string
+        required: true
+        example: "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+      vulnerabilityDiscoveryId:
+        title: Vulnerability Discovery ID
+        description: Unique identifier for discovery
+        type: string
+        required: true
+        example: "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+    output:
+      vulnerabilityDiscovery:
+        title: Vulnerability Discovery
+        description: Vulnerability discovery item
+        type: discoveryItem
+        required: false
+  get_vulnerability_discoveries:
+    title: Get Vulnerability Discoveries
+    description: Get a page of Vulnerability Discoveries, based on supplied pagination parameters. The default sort for Vulnerability Discoveries is 'discovered' (descending)
+    input:
+      vulnerabilityId:
+        title: Vulnerability ID
+        description: Unique identifier for vulnerability
+        type: string
+        required: true
+        example: "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+      index:
+        title: Index
+        description: "The 0-based index of the page of data desired (default: 0)"
+        type: integer
+        required: false
+        example: 1
+      size:
+        title: Size
+        description: "The size of the page of data desired (min: 1, max: 1000, default: 50)"
+        type: integer
+        required: false
+        example: 1
+      sort:
+        title: Sort
+        description: "The sort terms and (optional) directions for the desired ordering of data"
+        type: string
+        required: false
+        example: "vulnerabilitydiscovery.discovered,DESC"
+      pageToken:
+        title: Page Token
+        description: "The page token, used as an alternative to index"
+        type: string
+        required: false
+        example: "NDM0NTk0NTIyOjo6X1M6OjpiYW5hbmFz"
+    output:
+      metadata:
+        title: Metadata
+        description: Page metadata
+        type: pageMetadata
+        required: false
+      data:
+        title: Data
+        description: Vulnerability discovery items
+        type: '[]discoveryItem'
+        required: false
+      links:
+        title: Links
+        description: List of links
+        type: '[]linkDetails'
         required: false

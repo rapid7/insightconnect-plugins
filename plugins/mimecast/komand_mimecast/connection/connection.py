@@ -36,5 +36,4 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 assistance=f"Status code is {response.get(META_FIELD, {}).get(STATUS_FIELD)}, see log for details.",
                 data=response.get(FAIL_FIELD),
             )
-
-        return {"Connection": "successful"}
+        return {"success": True}

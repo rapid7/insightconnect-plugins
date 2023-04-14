@@ -9,6 +9,8 @@ class Component:
 
 class Input:
     ASSET_CRITERIA = "asset_criteria"
+    COMPARISON_TIME = "comparison_time"
+    CURRENT_TIME = "current_time"
     SIZE = "size"
     SORT_CRITERIA = "sort_criteria"
     VULN_CRITERIA = "vuln_criteria"
@@ -30,8 +32,24 @@ class AssetSearchInput(insightconnect_plugin_runtime.Input):
       "description": "Filters to apply to the asset search such as IPv4 or IPv6 addresses and hostnames",
       "order": 3
     },
+    "comparison_time": {
+      "type": "string",
+      "title": "Comparison Time",
+      "displayType": "date",
+      "description": "The date and time to compare the asset current state against to detect changes",
+      "format": "date-time",
+      "order": 6
+    },
+    "current_time": {
+      "type": "string",
+      "title": "Current Time",
+      "displayType": "date",
+      "description": "The current date and time to compare against the asset state to detect changes",
+      "format": "date-time",
+      "order": 5
+    },
     "size": {
-      "type": "number",
+      "type": "integer",
       "title": "Size",
       "description": "The number of assets to retrieve. If blank then will default to 200 assets returned, the maximum limit is 500 assets",
       "default": 200,

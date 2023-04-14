@@ -80,11 +80,15 @@ class MockClient:
     def create_issue(self, fields):
         return MockIssue()
 
-    def issue_type_by_name(self, issue_type):
-        if issue_type:
-            pass
-        else:
-            raise KeyError("Issue type was not provided")
+    def issue_types(self):
+        issue_type = {
+            "raw": {"name": "Task", "scope": {"type": "PROJECT", "project": {"id": "10000"}}, "id": "10001"},
+            "name": "Task",
+            "scope": {"type": "PROJECT", "project": {"id": "10000"}},
+            "id": "10001",
+        }
+        issue_type_object = namedtuple("IssueType", issue_type.keys())(*issue_type.values())
+        return [issue_type_object]
 
     def fields(self):
         return client_fields
@@ -141,7 +145,6 @@ class TestCreateIssue(TestCase):
                 "updated_at": "Yesterday",
                 "resolved_at": "No idea what this is",
                 "labels": ["blocked"],
-                "fields": {},
             }
         }
 
@@ -161,6 +164,24 @@ class TestCreateIssue(TestCase):
         self.test_action.connection = MockConnection()
         with self.assertRaises(PluginException):
             self.test_action.run(action_params)
+
+    def test_create_issue_fake_type_raise_exception(self):
+        action_params = {
+            "attachment_bytes": "",
+            "attachment_filename": "",
+            "description": "A test description",
+            "fields": {},
+            "project": "projectName",
+            "summary": "test Summary",
+            "type": "Fake Task",
+        }
+        cause = "Issue type not known or user doesn't have permissions."
+        assistance = "Talk to your Jira administrator to add the type or delegate necessary permissions, or choose an available type."
+        self.test_action.connection = MockConnection()
+        with self.assertRaises(PluginException) as error:
+            self.test_action.run(action_params)
+        self.assertEqual(cause, error.exception.cause)
+        self.assertEqual(assistance, error.exception.assistance)
 
     def test_create_issue_no_description(self):
         action_params = {

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="cisco_umbrella_destinations-rapid7-plugin",
-      version="3.0.0",
+      version="4.0.0",
       description="Cisco Umbrella Destinations allows users to manage, block, and allow network destinations based on policies within their organization",
       author="rapid7",
       author_email="",

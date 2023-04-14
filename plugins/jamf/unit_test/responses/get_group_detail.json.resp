@@ -1,0 +1,37 @@
+{
+  "mobile_device_group": {
+    "id": 1,
+    "name": "iPhones",
+    "is_smart": true,
+    "criteria": [
+      {
+        "size": 1,
+        "criterion": {
+          "name": "Last Inventory Update",
+          "priority": 0,
+          "and_or": "and",
+          "search_type": "more than x days ago",
+          "value": 7,
+          "opening_paren": false,
+          "closing_paren": false
+        }
+      }
+    ],
+    "site": {
+      "id": -1,
+      "name": "None"
+    },
+    "mobile_devices": [
+      {
+        "mobile_device": {
+          "id": 1,
+          "name": "Example iPhone",
+          "mac_address": "E0:E0:E0:E0:E0:E0",
+          "udid": "1111111-1111-1111-1111-111111111111",
+          "wifi_mac_address": "E0:AC:CB:97:36:G4",
+          "serial_number": "EXAMPLE_SERIAL"
+        }
+      }
+    ]
+  }
+}

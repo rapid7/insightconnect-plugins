@@ -1,0 +1,21 @@
+{
+  "logs": [
+    "1b1a111d-d1fb-1a12-1651-eb1ff61a651a"
+  ],
+  "leql": {
+    "statement": "where(931dde6c60>=800)",
+    "during": {
+      "from": 1609629856000,
+      "to": 1609629992000
+    }
+  },
+  "progress": 0,
+  "id": "369640e6-5f93-468d-a6db-d378c7c37756:0:9a3ec09650da40feb64849c5e7bd56379ec9eca9:1:bc5b04ad709824b098f977e04ce729b42835b985:",
+  "events": [],
+  "links": [
+    {
+      "rel": "Self",
+      "href": "https://us.rest.logs.insight.rapid7.com/query/logs/1b1a111d-d1fb-1a12-1651-eb1ff61a651a"
+    }
+  ]
+}

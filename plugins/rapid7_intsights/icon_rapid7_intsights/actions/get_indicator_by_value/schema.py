@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Search indicators in IntSights TIP"
+    DESCRIPTION = "Search indicators in Threat Command TIP"
 
 
 class Input:
@@ -19,9 +19,11 @@ class Output:
     RELATED_CAMPAIGNS = "related_campaigns"
     RELATED_MALWARE = "related_malware"
     RELATED_THREAT_ACTORS = "related_threat_actors"
+    REPORTED_FEEDS = "reported_feeds"
     SCORE = "score"
     SEVERITY = "severity"
     SOURCES = "sources"
+    STATUS = "status"
     SYSTEM_TAGS = "system_tags"
     TAGS = "tags"
     TYPE = "type"
@@ -109,6 +111,15 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
       },
       "order": 15
     },
+    "reported_feeds": {
+      "type": "array",
+      "title": "Reported Feeds",
+      "description": "Reported Feeds",
+      "items": {
+        "$ref": "#/definitions/reported_feed"
+      },
+      "order": 17
+    },
     "score": {
       "type": "number",
       "title": "Score",
@@ -129,6 +140,12 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
         "$ref": "#/definitions/source"
       },
       "order": 10
+    },
+    "status": {
+      "type": "string",
+      "title": "Status",
+      "description": "Status",
+      "order": 16
     },
     "system_tags": {
       "type": "array",
@@ -167,28 +184,42 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
       "order": 5
     }
   },
-  "required": [
-    "related_campaigns",
-    "related_malware",
-    "related_threat_actors",
-    "score",
-    "sources",
-    "system_tags",
-    "tags",
-    "whitelist"
-  ],
   "definitions": {
+    "reported_feed": {
+      "type": "object",
+      "title": "reported_feed",
+      "properties": {
+        "confidenceLevel": {
+          "type": "integer",
+          "title": "Confidence Level",
+          "description": "Level of confidence",
+          "order": 3
+        },
+        "id": {
+          "type": "string",
+          "title": "ID",
+          "description": "ID",
+          "order": 1
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name",
+          "order": 2
+        }
+      }
+    },
     "source": {
       "type": "object",
       "title": "source",
       "properties": {
-        "ConfidenceLevel": {
+        "confidenceLevel": {
           "type": "integer",
           "title": "Confidence Level",
           "description": "Level of confidence",
           "order": 2
         },
-        "Name": {
+        "name": {
           "type": "string",
           "title": "Name",
           "description": "Name",
@@ -196,8 +227,8 @@ class GetIndicatorByValueOutput(insightconnect_plugin_runtime.Output):
         }
       },
       "required": [
-        "ConfidenceLevel",
-        "Name"
+        "confidenceLevel",
+        "name"
       ]
     }
   }

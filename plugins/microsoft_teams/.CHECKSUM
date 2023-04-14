@@ -1,11 +1,11 @@
 {
-	"spec": "fcd364909c756df3ce5310e523099126",
-	"manifest": "163e3ac07b4cf134ca27a52fb33bd630",
-	"setup": "5dfdfec720bca50f4d7272ee3e376ce4",
+	"spec": "65fff010ba86d92daa377735d659de00",
+	"manifest": "1e9832c6f6aaaac2a61ce32c75dd0ac2",
+	"setup": "54780120c9104a82e9213555c82603a5",
 	"schemas": [
 		{
 			"identifier": "add_channel_to_team/schema.py",
-			"hash": "f13f28cb78529289b0972ea8502b060d"
+			"hash": "4b6f949477e6054ef513fa999bd2909e"
 		},
 		{
 			"identifier": "add_group_owner/schema.py",
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "add_member_to_channel/schema.py",
-			"hash": "10f752bff368711bb6aaf351a4a62c30"
+			"hash": "8f89402618bda5e8653c8b0ac9a81662"
 		},
 		{
 			"identifier": "add_member_to_team/schema.py",

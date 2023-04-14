@@ -6,7 +6,9 @@ import json
 class Input:
     AWS_ACCESS_KEY_ID = "aws_access_key_id"
     AWS_SECRET_ACCESS_KEY = "aws_secret_access_key"
+    EXTERNAL_ID = "external_id"
     REGION = "region"
+    ROLE_ARN = "role_arn"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -27,11 +29,23 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "description": "The AWS Secret Access Key used for signing requests with the given AWS Access Key ID. Note: Domain is not required",
       "order": 2
     },
+    "external_id": {
+      "type": "string",
+      "title": "External ID",
+      "description": "External ID given during role creation",
+      "order": 5
+    },
     "region": {
       "type": "string",
       "title": "Region",
       "description": "The AWS Region to use for requests. An example would be us-east-1",
       "order": 3
+    },
+    "role_arn": {
+      "type": "string",
+      "title": "Role ARN",
+      "description": "AWS IAM role ARN to assume",
+      "order": 4
     }
   },
   "required": [

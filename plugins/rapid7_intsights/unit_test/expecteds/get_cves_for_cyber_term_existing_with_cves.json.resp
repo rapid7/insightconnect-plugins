@@ -1,0 +1,42 @@
+{
+  "cyberTermCves":[
+    {
+      "cveId":"CVE-2005-10000",
+      "publishedDate":"2005-01-01T01:30:00.000Z",
+      "vendorProducts":[
+        "Vendor1 Example"
+      ]
+    },
+    {
+      "cveId":"CVE-2005-10001",
+      "publishedDate":"2005-01-02T01:30:00.000Z",
+      "vendorProducts":[
+        "Vendor2 First Example"
+      ]
+    },
+    {
+      "cveId":"CVE-2005-10010",
+      "publishedDate":"2005-01-03T01:30:00.000Z",
+      "vendorProducts":[
+        "Vendor3 First Example",
+        "Vendor2 Second Example"
+      ]
+    },
+    {
+      "cveId":"CVE-2005-10100",
+      "publishedDate":"2005-01-04T01:30:00.000Z",
+      "vendorProducts":[
+        "Vendor4 Product"
+      ]
+    },
+    {
+      "cveId":"CVE-2005-11000",
+      "publishedDate":"2005-01-05T01:30:00.000Z",
+      "vendorProducts":[
+        "Vendor5 Product X",
+        "Vendor5 Product Y",
+        "Vendor5 Product Z"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,897 @@
+plugin_spec_version: v2
+extension: plugin
+products: [insightconnect]
+name: happyfox
+title: HappyFox
+description: HappyFox is a practical help desk and customer support software solution. Using the HappyFox plugin for Rapid7 InsightConnect, users can create, delete and list tickets
+version: 1.0.0
+supported_versions: ["HappyFox API v1.1 2022-12-22"]
+vendor: rapid7
+cloud_ready: true
+resources:
+  source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/happyfox
+  license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
+  vendor_url: https://happyfox.com
+tags: ["happyfox", "ticketing"]
+support: rapid7
+status: []
+hub_tags:
+  use_cases: [reporting_and_analytics]
+  keywords: [happyfox, ticketing, cloud_enabled]
+  features: []
+types:
+  role:
+    name:
+      title: Name
+      description: Name
+      type: string
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: integer
+      required: false
+  customField:
+    compulsoryOnComplete:
+      title: Compulsory On Complete
+      description: Whether this field is required on ticket completion
+      type: boolean
+      required: false
+    name:
+      title: Name
+      description: Name
+      type: string
+      required: false
+    value:
+      title: Value
+      description: Value
+      type: string
+      required: false
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: integer
+      required: false
+    visibleToStaffOnly:
+      title: Visible To Staff Only
+      description: Visible to staff only
+      type: boolean
+      required: false
+  category:
+    prepopulateCc:
+      title: Prepopulate CC
+      description: Prepopulate CC
+      type: string
+      required: false
+    description:
+      title: Description
+      description: Description
+      type: string
+      required: false
+    timeSpentMandatory:
+      title: Time Spent Mandatory
+      description: Whether adding time spent is mandatory
+      type: boolean
+      required: false
+    public:
+      title: Public
+      description: Public
+      type: boolean
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: integer
+      required: false
+    name:
+      title: Name
+      description: Name
+      type: string
+      required: false
+  priority:
+    default:
+      title: Default
+      description: Default
+      type: boolean
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: integer
+      required: false
+    name:
+      title: Name
+      description: Name
+      type: string
+      required: false
+    order:
+      title: Order
+      description: Order
+      type: integer
+      required: false
+  status:
+    name:
+      title: Name
+      description: Name
+      type: string
+      required: false
+    color:
+      title: Color
+      description: Color
+      type: string
+      required: false
+    order:
+      title: Order
+      description: Order
+      type: integer
+      required: false
+    default:
+      title: Default
+      description: Default
+      type: boolean
+      required: false
+    behavior:
+      title: Behavior
+      description: Behavior
+      type: string
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: integer
+      required: false
+  phone:
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+    number:
+      title: Number
+      description: Number
+      type: string
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: integer
+      required: false
+  user:
+    name:
+      title: Name
+      description: Name
+      type: string
+      required: false
+    primaryPhone:
+      title: Primary Phone
+      description: Primary phone
+      type: phone
+      required: false
+    phones:
+      title: Phones
+      description: Phones
+      type: "[]phone"
+      required: false
+    createdAt:
+      title: Created At
+      description: Created at
+      type: string
+      required: false
+    updatedAt:
+      title: Updated At
+      description: Updated at
+      type: string
+      required: false
+    pendingTicketsCount:
+      title: Pending Tickets Count
+      description: Pending tickets count
+      type: integer
+      required: false
+    ticketsCount:
+      title: Tickets Count
+      description: Tickets count
+      type: integer
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: integer
+      required: false
+    email:
+      title: Email
+      description: Email
+      type: string
+      required: false
+    customFields:
+      title: Custom Fields
+      description: Custom fields
+      type: "[]customField"
+      required: false
+  subscriber:
+    firstName:
+      title: First Name
+      description: First name
+      type: string
+      required: false
+    lastName:
+      title: Last Name
+      description: Last name
+      type: string
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: integer
+      required: false
+    email:
+      title: Email
+      description: Email
+      type: string
+      required: false
+  assignee:
+    name:
+      title: Name
+      description: Name
+      type: string
+      required: false
+    isAccountAdmin:
+      title: Is Account Admin
+      description: Is account admin
+      type: boolean
+      required: false
+    email:
+      title: Email
+      description: Email
+      type: string
+      required: false
+    role:
+      title: Role
+      description: Role
+      type: role
+      required: false
+    active:
+      title: Active
+      description: Active
+      type: boolean
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: integer
+      required: false
+    categories:
+      title: Categories
+      description: Categories
+      type: "[]integer"
+      required: false
+    permissions:
+      title: Permissions
+      description: Permissions
+      type: "[]string"
+      required: false
+  change:
+    newName:
+      title: New Name
+      description: New name
+      type: string
+      required: false
+    new:
+      title: New
+      description: New
+      type: integer
+      required: false
+    old:
+      title: Old
+      description: Old
+      type: integer
+      required: false
+    oldName:
+      title: Old Name
+      description: Old name
+      type: string
+      required: false
+  dateChange:
+    new:
+      title: New
+      description: New
+      type: string
+      required: false
+    old:
+      title: Old
+      description: Old
+      type: string
+      required: false
+  by:
+    email:
+      title: Email
+      description: Email
+      type: string
+      required: false
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: integer
+      required: false
+    name:
+      title: Name
+      description: Name
+      type: string
+      required: false
+  attachment:
+    url:
+      title: URL
+      description: URL
+      type: string
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: integer
+      required: false
+    filename:
+      title: Filename
+      description: Filename
+      type: string
+      required: false
+  message:
+    attachments:
+      title: Attachments
+      description: Attachments
+      type: "[]attachment"
+      required: false
+    bccList:
+      title: BCC List
+      description: BCC list
+      type: string
+      required: false
+    text:
+      title: Text
+      description: Text
+      type: string
+      required: false
+    ccList:
+      title: CC List
+      description: CC list
+      type: string
+      required: false
+    customerUpdated:
+      title: Customer Updated
+      description: Customer updated
+      type: boolean
+      required: false
+    html:
+      title: HTML
+      description: HTML
+      type: string
+      required: false
+    subject:
+      title: Subject
+      description: Subject
+      type: string
+      required: false
+  update:
+    priorityChange:
+      title: Priority Change
+      description: Priority change
+      type: change
+      required: false
+    timestamp:
+      title: Timestamp
+      description: Timestamp
+      type: string
+      required: false
+    dueDateChange:
+      title: Due Date Change
+      description: Due date change
+      type: dateChange
+      required: false
+    by:
+      title: By
+      description: By
+      type: by
+      required: false
+    timeSpent:
+      title: Time Spent
+      description: Time spent
+      type: integer
+      required: false
+    updateId:
+      title: Update ID
+      description: Update ID
+      type: integer
+      required: false
+    message:
+      title: Message
+      description: Message
+      type: message
+      required: false
+    statusChange:
+      title: Status Change
+      description: Status change
+      type: change
+      required: false
+  ticket:
+    displayId:
+      title: Display ID
+      description: Display ID
+      type: string
+      required: false
+    firstMessage:
+      title: First Message
+      description: First message
+      type: string
+      required: false
+    lastUserReplyAt:
+      title: Last User Reply At
+      description: Last user reply at
+      type: string
+      required: false
+    timeSpent:
+      title: Time Spent
+      description: Time spent
+      type: string
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: integer
+      required: false
+    customFields:
+      title: Custom Fields
+      description: Custom fields
+      type: "[]customField"
+      required: false
+    subject:
+      title: Subject
+      description: Subject
+      type: string
+      required: false
+    category:
+      title: Category
+      description: Category
+      type: category
+      required: false
+    attachmentsCount:
+      title: Attachments Count
+      description: Attachments count
+      type: integer
+      required: false
+    lastUpdatedAt:
+      title: Last Updated At
+      description: Last updated at
+      type: string
+      required: false
+    dueBy:
+      title: Due By
+      description: Due by
+      type: string
+      required: false
+    priority:
+      title: Priority
+      description: Priority
+      type: priority
+      required: false
+    lastStaffReplyAt:
+      title: Last Staff Reply At
+      description: Last staff replay at
+      type: string
+      required: false
+    messagesCount:
+      title: Messages Count
+      description: Messages count
+      type: integer
+      required: false
+    slaBreaches:
+      title: SLA Breaches
+      description: SLA breaches
+      type: integer
+      required: false
+    status:
+      title: Status
+      description: Status
+      type: status
+      required: false
+    dueDate:
+      title: Due Date
+      description: Due date
+      type: string
+      required: false
+    tags:
+      title: Tags
+      description: Tags
+      type: string
+      required: false
+    user:
+      title: User
+      description: User
+      type: user
+      required: false
+    subscribers:
+      title: Subscribers
+      description: Subscribers
+      type: "[]subscriber"
+      required: false
+    unresponded:
+      title: Unresponded
+      description: Unresponded
+      type: boolean
+      required: false
+    createdAt:
+      title: Created At
+      description: Created at
+      type: string
+      required: false
+    source:
+      title: Source
+      description: Source
+      type: string
+      required: false
+    assignedTo:
+      title: Assigned To
+      description: Assigned to
+      type: assignee
+      required: false
+    updates:
+      title: Updates
+      description: Updates
+      type: "[]update"
+      required: false
+connection:
+  apiKey:
+    title: API Key
+    description: HappyFox API key
+    type: credential_secret_key
+    required: true
+    example: 3395856ce81f2b7382dee72602f798b6
+  authCode:
+    title: Auth Code
+    description: HappyFox auth code
+    type: credential_secret_key
+    required: true
+    example: 44d88612fea8a8f36de82e1278abb02f
+  subdomain:
+    title: Subdomain
+    description: Subdomain from your HappyFox URL, for example "example-company" from "https://example-company.happyfox.com"
+    type: string
+    required: true
+    example: example-company
+actions:
+  create_ticket:
+    title: Create Ticket
+    description: Create a new ticket in your helpdesk
+    input:
+      name:
+        title: Name
+        description: Name of the contact
+        type: string
+        required: true
+        example: Example Contact
+      email:
+        title: Email
+        description: Email address of the contact
+        type: string
+        required: true
+        example: user@example.com
+      phone:
+        title: Phone
+        description: Phone number of the contact
+        type: string
+        required: false
+        example: "111111111"
+      subject:
+        title: Subject
+        description: Subject of the ticket
+        type: string
+        required: true
+        example: Example Ticket
+      text:
+        title: Text
+        description: Ticket message in plain text format. Text or HTML field is required
+        type: string
+        required: false
+        example: Example description
+      html:
+        title: HTML
+        description: Ticket message in HTML. Text or HTML field is required
+        type: string
+        required: false
+        example: Example description
+      category:
+        title: Category
+        description: ID of the category in which the ticket should be created
+        type: integer
+        required: true
+        example: 1
+      priority:
+        title: Priority
+        description: ID of the priority of the ticket
+        type: integer
+        required: false
+        example: 4
+      assignee:
+        title: Assignee
+        description: ID of the agent to assign the ticket to
+        type: integer
+        required: false
+        example: 10
+      tags:
+        title: Tags
+        description: List of tags separated by commas
+        type: string
+        required: false
+        example: "tag1, tag2"
+      cc:
+        title: CC
+        description: List of email addresses, separated by commas
+        type: string
+        required: false
+        example: "user@example.com, user2@example.com"
+      bcc:
+        title: BCC
+        description: List of email addresses, separated by commas
+        type: string
+        required: false
+        example: "user@example.com, user2@example.com"
+      dueDate:
+        title: Due Date
+        description: Due date of the ticket
+        type: date
+        required: false
+        example: 2022-11-30T12:00:00Z
+      visibleOnlyStaff:
+        title: Visible Only Staff
+        description: Whether the ticket is private or not
+        type: boolean
+        required: true
+        default: false
+        example: false
+      customFields:
+        title: Custom Fields
+        description: Key value pairs containing the names and values of Ticket and Contact custom fields
+        type: object
+        required: false
+        example: '{"t-cf-1": "test value", "c-cf-1": "test value"}'
+    output:
+      ticket:
+        title: Ticket
+        description: Information about created ticket
+        type: ticket
+        required: false
+  delete_ticket:
+    title: Delete Ticket
+    description: Delete a provided ticket
+    input:
+      ticketId:
+        title: Ticket ID
+        description: ID of the ticket which will be deleted
+        type: integer
+        required: true
+        example: 20
+      staffId:
+        title: Staff ID
+        description: ID of the agent that is performing the category change
+        type: integer
+        required: true
+        example: 1
+    output:
+      success:
+        title: Success
+        description: Whether the action was successful
+        type: boolean
+        required: true
+  create_inline_attachment:
+    title: Create Inline Attachment
+    description: Generate a temporary URL that can be set as the value of the 'src' property of the 'img' tag in the ticket message (html) when creating the ticket
+    input:
+      file:
+        title: File
+        description: The image file to be uploaded. Only one file can be uploaded at a time, and the size limit should not exceed 25 MB
+        type: file
+        required: true
+        example: '{"filename": "image.png", "content": "iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAYAAADL1t+KAAAAGXRFWHRTb2Z0"}'
+    output:
+      url:
+        title: URL
+        description: Temporary URL created for the provided file
+        type: string
+        required: false
+  list_tickets:
+    title: List Tickets
+    description: Get a list of all tickets for the given filters
+    input:
+      minifyResponse:
+        title: Minify Response
+        description: Show only list of ticket IDs in the response
+        type: boolean
+        required: true
+        default: false
+        example: false
+      status:
+        title: Status
+        description: Filter tickets by status ID
+        type: integer
+        required: false
+        example: 1
+      category:
+        title: Category
+        description: Filter tickets by category ID
+        type: integer
+        required: false
+        example: 1
+      query:
+        title: Query
+        description: Search tickets using advanced filters
+        type: string
+        required: false
+        example: 'tags:"tag1","tag2"'
+      page:
+        title: Page
+        description: The number of the results page to be returned
+        type: integer
+        required: false
+        example: 1
+      size:
+        title: Page Size
+        description: The number of results per page
+        type: integer
+        required: false
+        example: 20
+        default: 20
+      sort:
+        title: Sort
+        description: Sort tickets using advanced filters
+        type: string
+        enum:
+        - "assignee username ascending"
+        - "assignee username descending"
+        - "category ascending"
+        - "category descending"
+        - "contact ID ascending"
+        - "contact ID descending"
+        - "due date"
+        - "last updated ascending"
+        - "last updated descending"
+        - "priority order ascending"
+        - "priority order descending"
+        - "status order ascending"
+        - "status order descending"
+        - "subject in alphabetical order ascending"
+        - "subject in alphabetical order descending"
+        - "ticket creation date ascending"
+        - "ticket creation date descending"
+        - "ticket ID ascending"
+        - "ticket ID descending"
+        - "ticket last modified date ascending"
+        - "ticket last modified date descending"
+        - "unresponded tickets first"
+        required: false
+        default: "last updated descending"
+        example: "last updated descending"
+    output:
+      tickets:
+        title: Tickets
+        description: Information about all tickets obtained using the given filters. Returned if Minify Response is set to false
+        type: "[]ticket"
+        required: false
+      ticketIds:
+        title: Ticket IDs
+        description: List of ticket IDs obtained using the given filters. Returned if Minify Response is set to true
+        type: "[]integer"
+        required: false
+  create_ticket_with_attachments:
+    title: Create Ticket with Attachments
+    description: Create a new ticket with attachments in your helpdesk
+    input:
+      name:
+        title: Name
+        description: Name of the contact
+        type: string
+        required: true
+        example: Example Contact
+      email:
+        title: Email
+        description: Email address of the contact
+        type: string
+        required: true
+        example: user@example.com
+      phone:
+        title: Phone
+        description: Phone number of the contact
+        type: string
+        required: false
+        example: "111111111"
+      subject:
+        title: Subject
+        description: Subject of the ticket
+        type: string
+        required: true
+        example: Example Ticket
+      text:
+        title: Text
+        description: Ticket message in plain text format. Text or HTML field is required
+        type: string
+        required: false
+        example: Example description
+      html:
+        title: HTML
+        description: Ticket message in HTML. Text or HTML field is required
+        type: string
+        required: false
+        example: Example description
+      category:
+        title: Category
+        description: ID of the category in which the ticket should be created
+        type: integer
+        required: true
+        example: 1
+      attachments:
+        title: Attachments
+        description: List of files to be uploaded. The total size of all the files combined should not exceed 25 MB
+        type: "[]file"
+        required: false
+        example: '[{"filename": "text.txt", "content": "dGVzdA=="}]'
+      priority:
+        title: Priority
+        description: ID of the priority of the ticket
+        type: integer
+        required: false
+        example: 4
+      assignee:
+        title: Assignee
+        description: ID of the agent to assign the ticket to
+        type: integer
+        required: false
+        example: 10
+      tags:
+        title: Tags
+        description: List of tags separated by commas
+        type: string
+        required: false
+        example: "tag1, tag2"
+      cc:
+        title: CC
+        description: List of email addresses, separated by commas
+        type: string
+        required: false
+        example: "user@example.com, user2@example.com"
+      bcc:
+        title: BCC
+        description: List of email addresses, separated by commas
+        type: string
+        required: false
+        example: "user@example.com, user2@example.com"
+      dueDate:
+        title: Due Date
+        description: Due date of the ticket
+        type: date
+        required: false
+        example: 2022-11-30T12:00:00Z
+      visibleOnlyStaff:
+        title: Visible Only Staff
+        description: Whether the ticket is private or not
+        type: boolean
+        required: true
+        default: false
+        example: false
+      customFields:
+        title: Custom Fields
+        description: Key value pairs containing the names and values of Ticket and Contact custom fields
+        type: object
+        required: false
+        example: '{"t-cf-1": "test value", "c-cf-1": "test value"}'
+    output:
+      ticket:
+        title: Ticket
+        description: Information about created ticket
+        type: ticket
+        required: false

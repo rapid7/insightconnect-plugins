@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "ServiceNow"
 Vendor = "rapid7"
-Version = "7.0.0"
+Version = "7.1.2"
 Description = "ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for Rapid7 InsightConnect, users can manage all aspects of incidents including creation, search, updates, as well as monitor them for changes"
 
 
@@ -37,6 +37,8 @@ def main():
             self.add_trigger(triggers.IncidentChanged())
 
             self.add_trigger(triggers.IncidentCreated())
+
+            self.add_action(actions.CreateChangeRequest())
 
             self.add_action(actions.CreateCi())
 

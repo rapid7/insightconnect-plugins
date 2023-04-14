@@ -1,7 +1,7 @@
 {
-	"spec": "ef6909ed3195645244f1fca04d1a2922",
-	"manifest": "54e43e9ae5f0e0f3d37d9fba197aad20",
-	"setup": "49990f4a121e259c35944d2862c986d0",
+	"spec": "cef7bb305cd296dcfe4c91ad08817421",
+	"manifest": "3a0cbf67b2811b37bdb4b2261d7dfc9e",
+	"setup": "7cbcfbc077dc2f9a706059bea2ef8853",
 	"schemas": [
 		{
 			"identifier": "action_on_vulnerability_sync_batch/schema.py",
@@ -25,11 +25,11 @@
 		},
 		{
 			"identifier": "get_device_by_hostname/schema.py",
-			"hash": "ff0e51a8b826bc90dbb25b9032d7bae1"
+			"hash": "13226c5058256e3368c7392eaad8b64d"
 		},
 		{
 			"identifier": "get_device_by_ip/schema.py",
-			"hash": "22d9f6e135b6b4028d6807cc3629cf9e"
+			"hash": "67c49b74d1f44594cf7a3ede74806cd2"
 		},
 		{
 			"identifier": "get_device_software/schema.py",
@@ -41,7 +41,7 @@
 		},
 		{
 			"identifier": "list_devices/schema.py",
-			"hash": "30c56c0c7d76dfae3c58d65dfa5fc7f9"
+			"hash": "83c0764298f9f5e863b4a3f7a9220825"
 		},
 		{
 			"identifier": "list_groups/schema.py",

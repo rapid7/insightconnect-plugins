@@ -1,0 +1,16 @@
+{
+    "id": 10000,
+    "number": "1000",
+    "name": "Incident Example Name",
+    "description": "Example incident description",
+    "state": "New",
+    "assignee": {
+        "group_id": 1,
+        "is_user": "true",
+        "id": 1,
+        "name": "Example User",
+        "email": "user@example.com",
+        "avatar": {"type": "initials", "color": "#fd4165", "initials": "UE"}
+    },
+    "site": {"id": 1, "name": "Austin TX, USA", "location": "AUS", "description": "", "time_zone": ""}
+}

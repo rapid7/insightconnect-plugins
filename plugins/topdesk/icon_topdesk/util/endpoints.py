@@ -1,0 +1,8 @@
+BASE_URL = "https://{domain}.topdesk.net/tas/api"
+INCIDENTS_ENDPOINT = BASE_URL + "/incidents"
+INCIDENT_ENDPOINT_GET_BY_ID = BASE_URL + "/incidents/id/{id}"
+INCIDENT_ENDPOINT_GET_BY_NUMBER = BASE_URL + "/incidents/number/{number}"
+OPERATOR_GROUPS_ENDPOINT = BASE_URL + "/operatorgroups"
+OPERATORS_ENDPOINT = BASE_URL + "/operators"
+SUPPLIERS_ENDPOINT = BASE_URL + "/suppliers"
+LOCATIONS_ENDPOINT = BASE_URL + "/locations"

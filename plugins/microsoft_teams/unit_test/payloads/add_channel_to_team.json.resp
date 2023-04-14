@@ -1,0 +1,7 @@
+{
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#teams('')/channels/$entity",
+    "id": "19:33b76eea88574bd1969dca37e2b7a819@thread.skype",
+    "displayName": "ExampleName",
+    "description": "Example Channel Description",
+    "membershipType": "private"
+}

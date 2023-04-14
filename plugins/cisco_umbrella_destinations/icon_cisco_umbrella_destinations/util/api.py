@@ -4,16 +4,14 @@ from typing import Optional, Any, Dict
 import requests
 from requests.auth import HTTPBasicAuth
 from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.clients.oauth import OAuth20ClientCredentialMixin
+from icon_cisco_umbrella_destinations.util.endpoints import Endpoints
 
-ERROR_MSG = "Invalid input data, ensure the input is correct"
 
-
-class CiscoUmbrellaManagementAPI:
-    def __init__(self, api_key: str, api_secret: str, organization_id: int, logger=None):
-        self.url = "https://management.api.umbrella.com/v1/"
-        self.api_key = api_key
-        self.api_secret = api_secret
-        self.org_id = organization_id
+class CiscoUmbrellaManagementAPI(OAuth20ClientCredentialMixin):
+    def __init__(self, api_key: str, api_secret: str, logger: Logger):
+        super().__init__(api_key, api_secret, Endpoints.OAUTH20_TOKEN_URL)
+        self.base_url = "https://api.umbrella.com/policies/v2/"
         self.logger = logger
 
     # DESTINATIONS LIST API
@@ -23,7 +21,7 @@ class CiscoUmbrellaManagementAPI:
     def get_destination_lists(self) -> dict:
         return self._call_api(
             "GET",
-            f"organizations/{self.org_id}/destinationlists",
+            "destinationlists",
             None,
             None,
             None,
@@ -34,7 +32,7 @@ class CiscoUmbrellaManagementAPI:
     def get_destination_list(self, destination_list_id: int) -> dict:
         return self._call_api(
             "GET",
-            f"organizations/{self.org_id}/destinationlists/{destination_list_id}",
+            f"destinationlists/{destination_list_id}",
             None,
             None,
             None,
@@ -45,10 +43,10 @@ class CiscoUmbrellaManagementAPI:
     def create_destination_list(self, data: dict) -> dict:
         return self._call_api(
             "POST",
-            f"organizations/{self.org_id}/destinationlists",
+            "destinationlists",
+            data,
             None,
             None,
-            data=data,
         )
 
     # PATCH (Update) destination list
@@ -56,10 +54,10 @@ class CiscoUmbrellaManagementAPI:
     def update_destination_list(self, destination_list_id: int, data: dict) -> dict:
         return self._call_api(
             "PATCH",
-            f"organizations/{self.org_id}/destinationlists/{destination_list_id}",
+            f"destinationlists/{destination_list_id}",
+            data,
             None,
             None,
-            data=data,
         )
 
     # DELETE destination list
@@ -67,7 +65,7 @@ class CiscoUmbrellaManagementAPI:
     def delete_destination_list(self, destination_list_id: int) -> dict:
         return self._call_api(
             "DELETE",
-            f"organizations/{self.org_id}/destinationlists/{destination_list_id}",
+            f"destinationlists/{destination_list_id}",
             None,
             None,
             None,
@@ -80,7 +78,7 @@ class CiscoUmbrellaManagementAPI:
     def get_destinations(self, destination_list_id: int) -> dict:
         return self._call_api(
             "GET",
-            f"organizations/{self.org_id}/destinationlists/{destination_list_id}/destinations",
+            f"destinationlists/{destination_list_id}/destinations",
             None,
             None,
             None,
@@ -91,10 +89,10 @@ class CiscoUmbrellaManagementAPI:
     def create_destinations(self, destination_list_id: int, data: dict) -> dict:
         return self._call_api(
             "POST",
-            f"organizations/{self.org_id}/destinationlists/{destination_list_id}/destinations",
+            f"destinationlists/{destination_list_id}/destinations",
+            data,
             None,
             None,
-            data=data,
         )
 
     # DELETE list of destinations from destination list
@@ -102,10 +100,10 @@ class CiscoUmbrellaManagementAPI:
     def delete_destinations(self, destination_list_id: int, data) -> dict:
         return self._call_api(
             "DELETE",
-            f"organizations/{self.org_id}/destinationlists/{destination_list_id}/destinations/remove",
+            f"destinationlists/{destination_list_id}/destinations/remove",
+            data,
             None,
             None,
-            data=data,
         )
 
     def _call_api(
@@ -121,35 +119,22 @@ class CiscoUmbrellaManagementAPI:
         # data(payload) -> dict in body
         data: Optional = None,
     ) -> dict:
-
-        headers = {
-            "Content-Type": "application/json",
-            "Accept": "application/json",
-        }
-
         # Prevents json.dumps() on 'None' data
         if not data:
             data_string = None
         else:
             data_string = json.dumps(data)
-        response = requests.request(
-            method,
-            self.url + path,
-            json=json_data,
-            params=params,
-            data=data_string,
-            headers=headers,
-            auth=HTTPBasicAuth(self.api_key, self.api_secret),
-        )
+
+        response = self.oauth.request(method, self.base_url + path, json=json_data, params=params, data=data_string)
         if response.status_code == 400:
-            raise PluginException(cause=ERROR_MSG)
+            raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.json())
         if response.status_code == 401:
-            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD)
+            raise PluginException(preset=PluginException.Preset.USERNAME_PASSWORD, data=response.json())
         if response.status_code == 403:
-            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED)
+            raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response.json())
         if response.status_code == 404:
-            raise PluginException(preset=PluginException.Preset.NOT_FOUND)
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.json())
         if response.status_code >= 500:
-            raise PluginException(preset=PluginException.Preset.SERVER_ERROR)
+            raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.json())
         if 200 <= response.status_code < 300:
             return response.json()

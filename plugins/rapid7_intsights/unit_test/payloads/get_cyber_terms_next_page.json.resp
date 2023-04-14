@@ -1,0 +1,33 @@
+{
+  "content": [
+    {
+      "ID": "6220ea495c879c2c4d36c124",
+      "Value": "El Patron",
+      "Type": "ThreatActor",
+      "Severity": "Medium",
+      "Aliases": [],
+      "Origins": [],
+      "TargetCountries": [
+        "Russian Federation"
+      ],
+      "TargetSectors": [
+        "Media"
+      ],
+      "CreatedDate": "2022-03-03T16:18:17.787Z",
+      "UpdatedDate": "2022-03-13T13:48:12.159Z",
+      "TTPs": [],
+      "Overview": "El Patron is a member of the Anonymous hacking group, operating under the moniker \"El_patron_real.\"     \n\nOn March 3, 2022, El Patron and other Anonymous affiliates took down the Russian news website lenta.ru.",
+      "AdditionalInformation": "N/A",
+      "RelatedMalware": [],
+      "RelatedThreatActors": [
+        "Anonymous"
+      ],
+      "RelatedCampaigns": [
+        "OpRussia 2022-2023",
+        "The 2022 Russia-Ukraine Cyberwarfare"
+      ],
+      "MitreAttack": []
+    }
+  ],
+  "nextOffset": "2022-03-13T13:48:12.159Z::6220ea495c879c2c4d36c124"
+}

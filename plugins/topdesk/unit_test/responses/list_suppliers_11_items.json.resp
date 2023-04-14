@@ -1,0 +1,101 @@
+[
+  {
+    "id": "5377697b-9fc0-4601-a99e-cf0a57cf1912",
+    "name": "Name 1",
+    "forFirstLine": true,
+    "forSecondLine": false,
+    "forService": false,
+    "forOperationalActivity": false,
+    "forChangeManagement": false
+  },
+  {
+    "id": "4f53f0fd-4390-4130-ae6a-f08ca45d6652",
+    "name": "Name 2",
+    "forFirstLine": false,
+    "forSecondLine": true,
+    "forService": false,
+    "forOperationalActivity": false,
+    "forChangeManagement": false
+  },
+  {
+    "id": "cbd4ade3-3756-4b97-b6a1-81a201f6626f",
+    "name": "Name 3",
+    "forFirstLine": false,
+    "forSecondLine": false,
+    "forService": true,
+    "forOperationalActivity": false,
+    "forChangeManagement": false
+  },
+  {
+    "id": "70a40f89-1924-4164-b0e1-76917d20abe3",
+    "name": "Name 4",
+    "forFirstLine": false,
+    "forSecondLine": false,
+    "forService": false,
+    "forOperationalActivity": true,
+    "forChangeManagement": false
+  },
+  {
+    "id": "e8165c34-57e0-4925-81fd-3e15238abc78",
+    "name": "Name 5",
+    "forFirstLine": false,
+    "forSecondLine": false,
+    "forService": false,
+    "forOperationalActivity": false,
+    "forChangeManagement": true
+  },
+  {
+    "id": "1bb445c8-4064-4632-a531-bf32827488bc",
+    "name": "Name 6",
+    "forFirstLine": false,
+    "forSecondLine": true,
+    "forService": false,
+    "forOperationalActivity": false,
+    "forChangeManagement": false
+  },
+  {
+    "id": "ceefd750-40df-475a-9574-637bb03cd347",
+    "name": "Name 7",
+    "forFirstLine": false,
+    "forSecondLine": true,
+    "forService": false,
+    "forOperationalActivity": false,
+    "forChangeManagement": false
+  },
+  {
+    "id": "2f2c0196-deec-431e-affa-a16b8aaf6c9f",
+    "name": "Name 8",
+    "forFirstLine": false,
+    "forSecondLine": true,
+    "forService": false,
+    "forOperationalActivity": false,
+    "forChangeManagement": false
+  },
+  {
+    "id": "acdbfe31-9aa0-42ab-9fbf-46f39c54beae",
+    "name": "Name 9",
+    "forFirstLine": false,
+    "forSecondLine": false,
+    "forService": false,
+    "forOperationalActivity": false,
+    "forChangeManagement": false
+  },
+  {
+    "id": "ed596e80-4bc8-4616-bf96-08a48a7a6522",
+    "name": "Name 10",
+    "forFirstLine": false,
+    "forSecondLine": false,
+    "forService": false,
+    "forOperationalActivity": false,
+    "forChangeManagement": false
+  },
+  {
+    "id": "1147220e-8be9-4cf6-ba27-b03b0836de29",
+    "name": "Name 11",
+    "forFirstLine": false,
+    "forSecondLine": false,
+    "forService": false,
+    "forOperationalActivity": false,
+    "forChangeManagement": false
+  }
+]

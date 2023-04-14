@@ -1,0 +1,87 @@
+{
+  "name": "EXAMPLE.COM",
+  "registryDomainId": "2336799_DOMAIN_COM-VRSN",
+  "status": [
+    "client delete prohibited",
+    "client transfer prohibited",
+    "client update prohibited"
+  ],
+  "entities": [
+    {
+      "roles": [
+        "registrar"
+      ],
+      "handle": "376",
+      "fullname": "RESERVED-Internet Assigned Numbers Authority"
+    }
+  ],
+  "events": [
+    {
+      "eventAction": "registration",
+      "eventDate": "1995-08-14T04:00:00Z"
+    },
+    {
+      "eventAction": "expiration",
+      "eventDate": "2023-08-13T04:00:00Z"
+    },
+    {
+      "eventAction": "last changed",
+      "eventDate": "2022-08-14T07:01:31Z"
+    },
+    {
+      "eventAction": "last update of RDAP database",
+      "eventDate": "2022-12-19T13:17:15Z"
+    }
+  ],
+  "publicIds": [
+    {
+      "type": "IANA Registrar ID",
+      "identifier": "376"
+    }
+  ],
+  "secureDns": {
+    "delegationSigned": true,
+    "dsData": [
+      {
+        "keyTag": 31406,
+        "algorithm": 8,
+        "digestType": 2,
+        "digest": "F78CF3344F72137235098ECBBD08947C2C9001C7F6A085A17F518B5D8F6B916D"
+      },
+      {
+        "keyTag": 31589,
+        "algorithm": 8,
+        "digestType": 2,
+        "digest": "CDE0D742D6998AA554A92D890F8184C698CFAC8A26FA59875A990C03E576343C"
+      },
+      {
+        "keyTag": 43547,
+        "algorithm": 8,
+        "digestType": 1,
+        "digest": "B6225AB2CC613E0DCA7962BDC2342EA4F1B56083"
+      },
+      {
+        "keyTag": 43547,
+        "algorithm": 8,
+        "digestType": 2,
+        "digest": "615A64233543F66F44D68933625B17497C89A70E858ED76A2145997EDF96A918"
+      },
+      {
+        "keyTag": 31589,
+        "algorithm": 8,
+        "digestType": 1,
+        "digest": "3490A6806D47F17A34C29E2CE80E8A999FFBE4BE"
+      },
+      {
+        "keyTag": 31406,
+        "algorithm": 8,
+        "digestType": 1,
+        "digest": "189968811E6EBA862DD6C209F75623D8D9ED9142"
+      }
+    ]
+  },
+  "nameservers": [
+    "A.IANA-SERVERS.NET",
+    "B.IANA-SERVERS.NET"
+  ]
+}

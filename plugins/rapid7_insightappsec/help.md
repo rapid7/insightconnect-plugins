@@ -2,12 +2,17 @@
 
 [InsightAppSec’s](https://www.rapid7.com/products/insightappsec/) DAST capabilities and InsightConnect’s automation prowess can help you simplify your SDLC Process with this scan management plugin. The need for automation becomes paramount in the fast moving landscape of modern web scanning and automating you web app scanning with this plugin can save you loads of time to allow you to focus on remediating issues to get your app into product faster!
 
-This plugin utilizes the [Rapid7 InsightAppSec API](https://insightappsec.help.rapid7.com/docs/get-started-with-the-insightappsec-api).
+This plugin utilizes the [Rapid7 InsightAppSec API](https://docs.rapid7.com/insightappsec/api-get-started).
 
 # Key Features
 
 * Create and configure scans
 * Run scans and return results
+* Get Vulnerabilities
+* Get Vulnerability
+* Get Vulnerability Discoveries
+* Get Vulnerability Discovery
+* Create Schedule
 
 # Requirements
 
@@ -42,6 +47,177 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Get Vulnerability Discovery
+
+This action is used to get a vulnerability discovery.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|vulnerabilityDiscoveryId|string|None|True|Unique identifier for discovery|None|497f6eca-6276-4993-bfeb-53cbbbba6f08|
+|vulnerabilityId|string|None|True|Unique identifier for vulnerability|None|497f6eca-6276-4993-bfeb-53cbbbba6f08|
+
+Example input:
+
+```
+{
+  "vulnerabilityDiscoveryId": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+  "vulnerabilityId": "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|vulnerabilityDiscovery|discoveryItem|False|Vulnerability discovery item|{}|
+
+Example output:
+
+```
+{
+  "vulnerabilityDiscovery":{
+    "id":"58972aa5-aa97-455e-90b7-cf569dbd75d0",
+    "vulnerability":{
+      "id":"58972aa5-aa97-455e-90b7-cf569dbd75d5"
+    },
+    "scan":{
+      "id":"68972aa5-aa97-455e-90b7-cf569dbd75d5"
+    },
+    "discovered":"2023-01-01T11:11:11.111111",
+    "links":[
+      {
+        "rel":"self",
+        "href":"https://example.com"
+      }
+    ]
+  }
+}
+```
+
+#### Get Vulnerability Discoveries
+
+This action is used to get a page of Vulnerability Discoveries, based on supplied pagination parameters. The default sort for Vulnerability Discoveries is 'discovered' (descending).
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|index|integer|None|False|The 0-based index of the page of data desired (default: 0)|None|1|
+|pageToken|string|None|False|The page token, used as an alternative to index|None|NDM0NTk0NTIyOjo6X1M6OjpiYW5hbmFz|
+|size|integer|None|False|The size of the page of data desired (min: 1, max: 1000, default: 50)|None|1|
+|sort|string|None|False|The sort terms and (optional) directions for the desired ordering of data|None|vulnerabilitydiscovery.discovered,DESC|
+|vulnerabilityId|string|None|True|Unique identifier for vulnerability|None|497f6eca-6276-4993-bfeb-53cbbbba6f08|
+
+Example input:
+
+```
+{
+  "index": 1,
+  "pageToken": "NDM0NTk0NTIyOjo6X1M6OjpiYW5hbmFz",
+  "size": 1,
+  "sort": "vulnerabilitydiscovery.discovered,DESC",
+  "vulnerabilityId": "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|data|[]discoveryItem|False|Vulnerability discovery items|[]|
+|links|[]linkDetails|False|List of links|[]|
+|metadata|pageMetadata|False|Page metadata|{}|
+
+Example output:
+
+```
+{
+  "data":[
+    {
+      "id":"58972aa5-aa97-455e-90b7-cf569dbd75d0",
+      "vulnerability":{
+        "id":"58972aa5-aa97-455e-90b7-cf569dbd75d5"
+      },
+      "scan":{
+        "id":"68972aa5-aa97-455e-90b7-cf569dbd75d5"
+      },
+      "discovered":"2023-01-01T11:11:11.111111",
+      "links":[
+        {
+          "rel":"self",
+          "href":"https://example.com"
+        }
+      ]
+    }
+  ],
+  "metadata":{
+    "index":0,
+    "size":1,
+    "sort":"vulnerabilitydiscovery.discovered,DESC",
+    "totalData":2,
+    "totalPages":2,
+    "pageToken":"MTYyNTcyNTY0ODo6Ol"
+  },
+  "links":[
+    {
+      "rel":"self",
+      "href":"https://example.com"
+    }
+  ]
+}
+```
+
+#### Create Schedule
+
+This action is used to create a new schedule.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|enabled|boolean|True|True|Whether the schedule is enabled|None|True|
+|firstStart|date|None|True|The first start date and time of the schedule|None|2023-03-17T13:00:19Z|
+|frequency|frequencyInput|None|False|The frequency describes how (and if) the schedule should repeat. If frequency and recurrence rule are given then the recurrence rule will be used|None|{}|
+|lastStart|date|None|False|The last start date and time of the schedule|None|2023-04-17T13:00:19Z|
+|name|string|None|True|Name of the schedule|None|Example Schedule|
+|rrule|string|None|False|The recurrence rule describes how (and if) the schedule should repeat. If frequency and recurrence rule are given then the recurrence rule will be used|None|FREQ=WEEKLY;INTERVAL=1;BYDAY=TU;COUNT=10|
+|scanConfigId|string|None|True|The scan config ID of the schedule|None|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+
+More information about the frequency and recurrence rule parameters can be found [here](https://help.rapid7.com/insightappsec/en-us/api/v1/docs.html#tag/Schedules).
+
+Example input:
+
+```
+{
+  "enabled": true,
+  "firstStart": "2023-03-17T13:00:19Z",
+  "frequency": {
+    "interval": 12,
+    "type": "HOURLY"
+  },
+  "lastStart": "2023-04-17T13:00:19Z",
+  "name": "New Schedule",
+  "rrule": "FREQ=WEEKLY;INTERVAL=1;BYDAY=TU;COUNT=10",
+  "scanConfigId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|Whether the action was successful|True|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### Submit Scan
 
@@ -615,20 +791,372 @@ Example output:
 }
 ```
 
+#### Get Vulnerabilities
+
+This action is used to get a page of Vulnerabilities, based on supplied pagination parameters. The default sort for Vulnerabilities is 'severity' (descending); for a full list of sortable properties, refer to the Search Catalog detailed in the Search API.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|index|integer|None|False|The 0-based index of the page of data desired (default: 0)|None|1|
+|pageToken|string|None|False|The page token, used as an alternative to index|None|NDM0NTk0NTIyOjo6X1M6OjpiYW5hbmFz|
+|size|integer|None|False|The size of the page of data desired (min: 1, max: 1000, default: 50)|None|1|
+|sort|string|None|False|The sort terms and (optional) directions for the desired ordering of data|None|vulnerability.severity,DESC|
+
+Example input:
+
+```
+{
+  "index": 1,
+  "size": 1,
+  "sort": "vulnerability.severity,DESC",
+  "pageToken": "NDM0NTk0NTIyOjo6X1M6OjpiYW5hbmFz"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|data|[]vulnerabilityItem|False|List of vulnerability data|[]|
+|links|[]linkDetails|False|List of links|[]|
+|metadata|pageMetadata|False|Page metadata|{}|
+
+Example output:
+
+```
+{
+  "metadata": {
+    "size": 1,
+    "totalData": 1,
+    "pageToken": "NDM0NTk0NTIyOjo6X1M6OjpiYW5hbmFz",
+    "index": 1,
+    "sort": "scan.submit_time,DESC,scan.status",
+    "totalPages": 1
+  },
+  "data": [
+    {
+      "app": {
+        "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+      },
+      "severity": "SAFE",
+      "vectorString": "example",
+      "newlyDiscovered": true,
+      "insightUiUrl": "sample.com",
+      "lastDiscovered": "2021-08-03T14:07:37",
+      "firstDiscovered": "2021-08-03T14:07:37",
+      "vulnerabilityScore": 1.5,
+      "variances": [
+        {
+          "attackExchanges": [
+            {
+              "request": "example",
+              "response": "example",
+              "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+            }
+          ],
+          "originalValue": "example",
+          "attackValue": "example",
+          "attack": {
+            "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+          },
+          "module": {
+            "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+          },
+          "proofDescription": "example",
+          "originalExchange": {
+            "request": "example",
+            "response": "example",
+            "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+          },
+          "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+          "proof": "example",
+          "message": "example"
+        }
+      ],
+      "links": [
+        {
+          "profile": "example",
+          "rel": "example",
+          "name": "example",
+          "href": "example.com"
+        }
+      ],
+      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+      "rootCause": {
+        "method": "GET",
+        "parameter": "example",
+        "url": "example.com"
+      },
+      "status": "UNREVIEWED"
+    }
+  ],
+  "links": [
+    {
+      "profile": "example",
+      "rel": "example",
+      "name": "example",
+      "href": "example.com"
+    }
+  ]
+}
+```
+
+#### Get Vulnerability
+
+This action is used to get a vulnerability.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|vulnerabilityId|string|None|True|Unique identifier for vulnerability|None|497f6eca-6276-4993-bfeb-53cbbbba6f08|
+
+Example input:
+
+```
+{
+  "vulnerabilityId": "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|vulnerability|vulnerabilityItem|False|Vulnerability item|{}|
+
+Example output:
+
+```
+{
+  "vulnerability": {
+    "app": {
+      "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+    },
+    "severity": "SAFE",
+    "vectorString": "example",
+    "newlyDiscovered": true,
+    "insightUiUrl": "sample.com",
+    "lastDiscovered": "2021-08-03T14:07:37",
+    "firstDiscovered": "2021-08-03T14:07:37",
+    "vulnerabilityScore": 1.5,
+    "variances": [
+      {
+        "attackExchanges": [
+          {
+            "request": "example",
+            "response": "example",
+            "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+          }
+        ],
+        "originalValue": "example",
+        "attackValue": "example",
+        "attack": {
+          "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+        },
+        "module": {
+          "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+        },
+        "proofDescription": "example",
+        "originalExchange": {
+          "request": "example",
+          "response": "example",
+          "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+        },
+        "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+        "proof": "example",
+        "message": "example"
+      }
+    ],
+    "links": [
+      {
+        "profile": "example",
+        "rel": "example",
+        "name": "example",
+        "href": "example.com"
+      }
+    ],
+    "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+    "rootCause": {
+      "method": "GET",
+      "parameter": "example",
+      "url": "example.com"
+    },
+    "status": "UNREVIEWED"
+  }
+}
+```
+
 ### Triggers
 
 _This plugin does not contain any triggers._
 
+### Tasks
+
+_This plugin does not contain any tasks._
+
 ### Custom Output Types
 
-_This plugin does not contain any custom output types._
+#### discoveryItem
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Discovered|string|False|The time the vulnerability discovery was discovered|
+|Scan|objectId|False|The ID of the module|
+
+#### event_log
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Event|string|False|The log event|
+|Time|date|False|The time at which the log event occurred|
+
+#### exchangeObject
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ID|string|False|The ID of the Exchange|
+|Request|string|False|The critical section of the request payload|
+|Response|string|False|The critical section of the response payload|
+
+#### frequencyInput
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Interval|integer|False|The interval of the frequency|
+|Type|string|False|The type of the frequency|
+
+#### link
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Href|string|False|Href|
+|Rel|string|False|rel|
+
+#### linkDetails
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Href|string|False|Href|
+|Name|string|False|Name|
+|Profile|string|False|Profile|
+|Rel|string|False|Rel|
+
+#### objectId
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ID|string|False|Unique identifier for object|
+
+#### pageMetadata
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Index|integer|False|Page index|
+|Page Token|string|False|Page token|
+|Size|integer|False|Page size|
+|Sort|string|False|Sort details|
+|Total Data|integer|False|Total data|
+|Total Pages|integer|False|Total pages|
+
+#### rootCause
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Method|string|False|The HTTP method|
+|Parameter|string|False|The parameter from the URL|
+|URL|string|False|The URL|
+
+#### scan
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|App ID|string|False|App UUID|
+|Completion Time|date|False|The time the scan was completed|
+|Failure Reason|string|False|The reason the scan may have failed|
+|ID|string|False|Scan UUID|
+|Links|[]link|False|A list of links|
+|Scan Config ID|string|False|Scan configs UUID|
+|Status|string|False|The status of the scan|
+|Submit Time|date|False|The time the scan was submitted|
+|Submitter|submitter|False|The submitter of the scan|
+
+#### scan_config
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|App ID|string|False|App UUID|
+|Attack Template ID|string|False|Attack template UUID|
+|Description|string|False|The description of the scan configuration|
+|Name|string|False|The name of the scan configuration|
+|Errors|[]string|False|A list of errors that detail any current validation failures|
+|UUID|string|False|The UUID of the scan configuration|
+|Links|[]link|False|A list of links|
+
+#### scan_details
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Attacked|integer|False|The number of attacks already performed|
+|Attacks in Queue|integer|False|The number of links in the attacking queue|
+|Drip Delay|number|False|The current delay between HTTP requests|
+|Failed Requests|integer|False|The number of failed HTTP requests|
+|Links Crawled|integer|False|The number of links already crawled|
+|Links in Queue|integer|False|The number of links in the crawling queue|
+|Logged-In|boolean|False|A flag which indicates if the scan is using authentication during the scan|
+|Network Speed|number|False|A throughput indicator|
+|Requests|integer|False|The number of HTTP requests which have been executed|
+|Vulnerable|integer|False|The number of potential findings|
+
+#### submitter
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|ID|string|False|The submitters UUID|
+|Type|string|False|The type of the submitter e.g. USER|
+
+#### variance
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Attack|objectId|False|The ID of the attack|
+|Attack Exchanges|[]exchangeObject|False|The HTTP exchange executed as part of the attack|
+|Attack Value|string|False|The value of a variable used to attack|
+|ID|string|False|The ID of the variance|
+|Message|string|False|A message that may highlight the result of the attack|
+|Module|objectId|False|The ID of the module|
+|Original Exchange|exchangeObject|False|The HTTP exchange executed as part of the attack|
+|Original Value|string|False|The value of a variable prior to being attacked|
+|Proof|string|False|A proof that may highlight the result of the attack|
+|Proof Description|string|False|A description of the proof that may highlight the result of the attack|
+
+#### vulnerabilityItem
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|App|objectId|False|The ID of the module|
+|First Discovered|string|False|The time the vulnerability was first discovered|
+|ID|string|False|The ID of the vulnerability|
+|Insight UI URL|string|False|Direct link to the Vulnerability on InsightAppSec UI. Require InsightAppSec login before use|
+|Last Discovered|string|False|The time the vulnerability was last discovered|
+|Links|[]linkDetails|False|List of links|
+|Newly Discovered|boolean|False|Indicates that the vulnerability has been found in the latest scan and has not been discovered before|
+|Root Cause|rootCause|False|A descriptor for the location of the vulnerability|
+|Severity|string|False|The severity of the vulnerability. Expected values: 'SAFE' 'INFORMATIONAL' 'LOW' 'MEDIUM' 'HIGH'|
+|Status|string|False|The status of the vulnerability. Expected values: 'UNREVIEWED' 'FALSE_POSITIVE' 'VERIFIED' 'IGNORED' 'REMEDIATED' 'DUPLICATE'|
+|Variances|[]variance|False|Evidence found that indicates the presence of a vulnerability|
+|Vector String|string|False|Textual representation of the metric values used to determine the CVSS score|
+|Vulnerability Score|float|False|CVSS score which represents the severity of an information security vulnerability|
 
 ## Troubleshooting
 
-This plugin does not contain any troubleshooting information.
+More information about the frequency and recurrence rule parameters used in the Create Schedule action can be found [here](https://help.rapid7.com/insightappsec/en-us/api/v1/docs.html#tag/Schedules).
 
 # Version History
 
+* 1.1.0 - Add new actions: `Get Vulnerabilities`, `Get Vulnerability`, `Create Schedule`, `Get Vulnerability Discovery`, `Get Vulnerability Discoveries`
 * 1.0.4 - Fix typo in title for Submit Scan action | Update keywords
 * 1.0.3 - Send plugin name and version in the User-Agent string to vendor
 * 1.0.2 - Update to v4 Python plugin runtime | Add example inputs
@@ -637,7 +1165,8 @@ This plugin does not contain any troubleshooting information.
 
 # Links
 
+* [InsightAppSec API](https://docs.rapid7.com/insightappsec/api-get-started)
+
 ## References
 
-* [InsightAppSec API](https://insightappsec.help.rapid7.com/docs/get-started-with-the-insightappsec-api)
-
+* [InsightAppSec API](https://docs.rapid7.com/insightappsec/api-get-started)

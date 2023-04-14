@@ -3,12 +3,13 @@ import sys
 from unittest import TestCase
 from unittest.mock import patch
 
-from insightconnect_plugin_runtime.exceptions import PluginException, ConnectionTestException
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
 
 sys.path.append(os.path.abspath("../"))
 
-from unit_test.util import Util
 from komand_mimecast.actions import FindGroups
+
+from unit_test.util import Util
 
 
 @patch("requests.request", side_effect=Util.mocked_request)

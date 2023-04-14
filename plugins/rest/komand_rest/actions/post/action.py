@@ -3,7 +3,7 @@ from .schema import PostInput, PostOutput, Component, Input, Output
 
 # Custom imports below
 from komand_rest.util.util import Common
-from komand_rest.util.util import convert_body_for_urlencoded, check_headers_for_urlencoded
+from komand_rest.util.util import determine_body_type
 
 
 class Post(insightconnect_plugin_runtime.Action):
@@ -14,16 +14,13 @@ class Post(insightconnect_plugin_runtime.Action):
 
     def run(self, params={}):
         headers = params.get(Input.HEADERS, {})
+        path = params.get(Input.ROUTE, "")
+        body_dict = params.get(Input.BODY_OBJECT, {})
+        body_non_dict = params.get(Input.BODY_ANY, "")
 
-        body = params.get(Input.BODY, {})
+        data = determine_body_type(body_dict, body_non_dict)
 
-        if check_headers_for_urlencoded(headers):
-            body = convert_body_for_urlencoded(headers, body)
-            kwargs = {"method": "POST", "path": params.get(Input.ROUTE), "data": body, "headers": headers}
-        else:
-            kwargs = {"method": "POST", "path": params.get(Input.ROUTE), "json_data": body, "headers": headers}
-
-        response = self.connection.api.call_api(**kwargs)
+        response = self.connection.api.call_api(method="POST", path=path, data=data, headers=headers)
 
         return {
             Output.BODY_OBJECT: Common.body_object(response),

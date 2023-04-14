@@ -1,0 +1,5 @@
+{
+  "filter": "verdict: 'no verdict'",
+  "limit": 5,
+  "offset": 2
+}

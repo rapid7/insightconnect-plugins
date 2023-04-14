@@ -24,7 +24,7 @@ class GetVulnerabilitiesByCveInput(insightconnect_plugin_runtime.Input):
     "cve_id": {
       "type": "string",
       "title": "CVE ID",
-      "description": "Common Vulnerabilities and Exposures ID, e.g. CVE-2018-12345",
+      "description": "Common Vulnerabilities and Exposures ID",
       "order": 1
     }
   },

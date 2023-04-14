@@ -10,6 +10,7 @@ class Component:
 class Input:
     CHANNEL_DESCRIPTION = "channel_description"
     CHANNEL_NAME = "channel_name"
+    CHANNEL_TYPE = "channel_type"
     TEAM_NAME = "team_name"
     
 
@@ -35,6 +36,17 @@ class AddChannelToTeamInput(insightconnect_plugin_runtime.Input):
       "description": "Channel name",
       "order": 2
     },
+    "channel_type": {
+      "type": "string",
+      "title": "Channel Type",
+      "description": "Type of channel to be added",
+      "default": "Standard",
+      "enum": [
+        "Standard",
+        "Private"
+      ],
+      "order": 4
+    },
     "team_name": {
       "type": "string",
       "title": "Team Name",
@@ -45,6 +57,7 @@ class AddChannelToTeamInput(insightconnect_plugin_runtime.Input):
   "required": [
     "channel_description",
     "channel_name",
+    "channel_type",
     "team_name"
   ]
 }

@@ -1,0 +1,11 @@
+{
+  "comments": "Valid user data",
+  "departmentName": "Test Department",
+  "email": "user@example.com",
+  "groupNames": [
+    "Test Group"
+  ],
+  "name": "Sample user",
+  "password": "randomPW129",
+  "tempAuthEmail": "user@example.com"
+}

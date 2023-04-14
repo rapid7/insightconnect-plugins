@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Rapid7 InsightVM Console"
 Vendor = "rapid7"
-Version = "5.0.0"
+Version = "5.1.0"
 Description = "InsightVM is a powerful vulnerability management tool which finds, prioritizes, and remediates vulnerabilities. This plugin uses an orchestrator to get top remediations, scan results and start scans"
 
 
@@ -189,6 +189,8 @@ def main():
             self.add_action(actions.UpdateAssetGroupSearchCriteria())
 
             self.add_action(actions.UpdateScanStatus())
+
+            self.add_action(actions.UpdateSharedCredential())
 
             self.add_action(actions.UpdateSite())
 

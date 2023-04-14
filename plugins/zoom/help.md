@@ -15,7 +15,12 @@ Business, or Enterprise plan.
 # Requirements
 
 * Must have Zoom Pro, Business, or Enterprise plan to support REST API
-* Requires JWT credentials from Zoom App marketplace
+* Requires account ID as well as client ID and secret from a Server-to-Server OAuth app in the Zoom Marketplace
+* Server-to-Server OAuth app has the `report:read:admin` scope enabled
+
+# Supported Product Versions
+
+* Zoom API v2.10
 
 # Documentation
 
@@ -25,20 +30,19 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|api_key|credential_secret_key|None|True|JWT API Key|None|abcdefgABCDEFG12345678|
-|secret|credential_secret_key|None|True|JWT Secret|None|abcdefgABCDEFG123456789abcdefgABCDEF|
+|account_id|credential_secret_key|None|True|Zoom app account ID|None|dBs0x4Kf7HuIK0LLbzMduW|
+|client_id|credential_secret_key|None|True|Zoom app client ID|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|client_secret|credential_secret_key|None|True|Zoom app client secret|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
 ```
 {
-  "api_key": "abcdefgABCDEFG12345678",
-  "secret": "abcdefgABCDEFG123456789abcdefgABCDEF"
+  "account_id": "dBs0x4Kf7HuIK0LLbzMduW",
+  "client_id": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "client_secret": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
-
-See the Zoom [Create a JWT App](https://marketplace.zoom.us/docs/guides/build/jwt-app) documentation for generating a 
-JWT App and obtaining your API key and secret.
 
 ## Technical Details
 
@@ -56,7 +60,7 @@ This action is used to create user associated to account.
 |email|string|None|True|Email address of user|None|user@example.com|
 |first_name|string|None|False|First name of user|None|John|
 |last_name|string|None|True|Last name of user|None|Smith|
-|type|string|None|True|User type|['Basic', 'Licensed', 'On-prem']|Basic|
+|type|string|None|True|User type|['Basic', 'Licensed']|Basic|
 
 Example input:
 
@@ -222,6 +226,37 @@ Example output:
 }
 ```
 
+### Tasks
+
+#### Monitor Sign in and out Activity
+
+This task is used to monitor sign in and out activity.
+
+##### Input
+
+_This task does not contain any inputs._
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|activity_logs|[]user_activity|True|All activity logs within the specified time range|
+
+Example output:
+
+```
+[
+  {
+    "client_type": "Browser",
+    "email": "user@example.com",
+    "ip_address": "192.0.2.1",
+    "time": "2019-09-15T19:13:41Z",
+    "type": "Sign out",
+    "version": "5.9.1.2581"
+  }
+]
+```
+
 ### Custom Output Types
 
 #### user
@@ -269,12 +304,15 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.1.0 - Create user: Removed redundant enum option from `type` input | Added unit tests | Improve authentication logic
+* 2.0.0 - Update connection for latest Zoom API authentication | Add Monitor Sign In and Out Activity task
 * 1.0.0 - Initial plugin
 
 # Links
+
+* [Zoom](https://zoom.us/)
 
 ## References
 
 * [Zoom](https://zoom.us/)
 * [Zoom API Documentation](https://marketplace.zoom.us/docs/api-reference/introduction)
-* [Zoom JWT Auth Documentation](https://marketplace.zoom.us/docs/guides/auth/jwt)

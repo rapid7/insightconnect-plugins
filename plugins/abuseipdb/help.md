@@ -341,6 +341,7 @@ There's a rate limit on the free API service. The following error messages `429 
 
 # Version History
 
+* 5.1.0 - Cloud Enabled
 * 5.0.9 - Fix incorrect status code for failed connection test
 * 5.0.8 - Set cloud_ready flag to false | Changed description for output 'found'
 * 5.0.7 - Fix error message in IPv4 search

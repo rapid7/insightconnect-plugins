@@ -1,0 +1,128 @@
+{
+  "data": [
+    {
+      "status": {
+        "name": "New",
+        "color": "FF9900",
+        "order": 1,
+        "default": true,
+        "behavior": "pending",
+        "id": 1
+      },
+      "first_message": "Example description\n\n",
+      "last_user_reply_at": "2022-12-27 12:22:59",
+      "id": 25,
+      "messages_count": 1,
+      "subject": "New Ticket created via plugin",
+      "category": {
+        "prepopulate_cc": "AR",
+        "description": "Tickets will be created here by default.",
+        "time_spent_mandatory": false,
+        "public": true,
+        "id": 1,
+        "name": "Test"
+      },
+      "attachments_count": 2,
+      "last_updated_at": "2022-12-27 12:22:59",
+      "priority": {
+        "default": false,
+        "id": 4,
+        "name": "Low",
+        "order": 1
+      },
+      "custom_fields": [
+        {
+          "compulsory_on_complete": false,
+          "name": "Test Field",
+          "value": "test value",
+          "type": "text",
+          "id": 1,
+          "visible_to_staff_only": false
+        },
+        {
+          "compulsory_on_complete": true,
+          "name": "Test Field 2",
+          "type": "text",
+          "id": 4,
+          "visible_to_staff_only": false
+        }
+      ],
+      "sla_breaches": 0,
+      "merged_tickets": [],
+      "visible_only_staff": false,
+      "display_id": "#RS00000025",
+      "due_date": "2023-01-01",
+      "tags": "test tag",
+      "last_modified": "2022-12-27 12:22:59",
+      "user": {
+        "name": "Test User",
+        "primary_phone": {
+          "type": "m",
+          "number": "111111111",
+          "id": 3
+        },
+        "phones": [
+          {
+            "type": "m",
+            "number": "111111111",
+            "id": 3
+          }
+        ],
+        "created_at": "2022-12-14 11:10:21",
+        "updated_at": "2022-12-14 11:10:21",
+        "pending_tickets_count": 19,
+        "contact_groups": [],
+        "tickets_count": 19,
+        "id": 7,
+        "email": "user@example.com",
+        "custom_fields": []
+      },
+      "subscribers": [],
+      "unresponded": true,
+      "created_at": "2022-12-27 12:22:59",
+      "source": "TKT_CREATION_API",
+      "updates": [
+        {
+          "priority_change": {
+            "new_name": "Low",
+            "new": 4
+          },
+          "timestamp": "2022-12-27 12:22:59",
+          "due_date_change": {
+            "new": "2023-01-01"
+          },
+          "by": {
+            "email": "user@example.com",
+            "type": "user",
+            "id": 7,
+            "name": "Test User"
+          },
+          "update_id": 29,
+          "message": {
+            "attachments": [
+              {
+                "url": "https://example.com",
+                "id": 9,
+                "filename": "text.txt"
+              },
+              {
+                "url": "https://example.com",
+                "id": 10,
+                "filename": "text2.txt"
+              }
+            ],
+            "bcc_list": "user@example.com",
+            "text": "Example description\n\n",
+            "cc_list": "user@example.com",
+            "customer_updated": false,
+            "html": "<html><head><meta charset=\"utf-8\"></head><body>Example description</body></html>"
+          },
+          "status_change": {
+            "new_name": "New",
+            "new": 1
+          }
+        }
+      ]
+    }
+  ]
+}

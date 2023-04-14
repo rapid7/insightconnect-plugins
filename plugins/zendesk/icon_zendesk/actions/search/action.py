@@ -2,7 +2,10 @@ import insightconnect_plugin_runtime
 from .schema import SearchInput, SearchOutput, Output, Input
 
 # Custom imports below
-from typing import Optional
+from typing import Optional, List, Any
+from insightconnect_plugin_runtime.exceptions import PluginException
+from icon_zendesk.util.objects import Objects
+from icon_zendesk.util.exceptions import detect_type_exception
 
 
 class Search(insightconnect_plugin_runtime.Action):
@@ -12,102 +15,39 @@ class Search(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        s_type = params.get(Input.TYPE)
-        results = self.connection.client.search(params.get(Input.ITEM), type=params.get(Input.TYPE).lower())
-        objs = []
-        if len(results) == 0:
-            return {"error": "Could not find item"}
+        search_type = params.get(Input.TYPE)
+        search_item = params.get(Input.ITEM)
+
+        objects = []
+        results = []
+        try:
+            results = self.connection.client.search(search_item, type=search_type.lower())
+        except Exception as error:
+            self.logger.debug(error)
+            detect_type_exception(error)
+
+        if not results:
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND)
 
         for item in results:
-            if s_type == "Organization" and results is not None:
-                organization_obj = {
-                    "created_at": item.created_at,
-                    "details": item.details,
-                    "external_id": item.external_id,
-                    "group_id": item.group_id,
-                    "id": item.id,
-                    "name": item.name,
-                    "notes": item.notes,
-                    "shared_comments": item.shared_comments,
-                    "shared_tickets": item.shared_tickets,
-                    "tags": item.tags,
-                    "updated_at": item.updated_at,
-                    "url": item.url,
-                }
-                objs.append(organization_obj)
+            if search_type == "Organization" and results is not None:
+                organization_object = Objects.create_organization_object(item)
+                objects.append(organization_object)
 
-            if s_type == "Ticket" and results is not None:
-                ticket_obj = {
-                    "assignee_id": item.assignee_id,
-                    "brand_id": item.brand_id,
-                    "collaborator_ids": item.collaborator_ids,
-                    "created_at": item.created_at,
-                    "description": item.description,
-                    "due_at": item.due_at,
-                    "external_id": item.external_id,
-                    "forum_topic_id": item.forum_topic_id,
-                    "group_id": item.group_id,
-                    "has_incidents": item.has_incidents,
-                    "id": item.id,
-                    "organization_id": item.organization_id,
-                    "priority": item.priority,
-                    "problem_id": item.problem_id,
-                    "raw_subject": item.raw_subject,
-                    "recipient": item.recipient,
-                    "requester_id": item.requester_id,
-                    "sharing_agreement_ids": item.sharing_agreement_ids,
-                    "status": item.status,
-                    "subject": item.subject,
-                    "submitter_id": item.submitter_id,
-                    "tags": item.tags,
-                    "type": item.type,
-                    "updated_at": item.updated_at,
-                    "url": item.url,
-                }
-                objs.append(ticket_obj)
+            if search_type == "Ticket" and results is not None:
+                ticket_object = Objects.create_ticket_object(item)
+                objects.append(ticket_object)
 
-            if s_type == "User" and results is not None:
-                user_obj = {
-                    "active": item.active,
-                    "alias": item.alias,
-                    "chat_only": item.chat_only,
-                    "created_at": item.created_at,
-                    "custom_role_id": item.custom_role_id,
-                    "details": item.details,
-                    "email": item.email,
-                    "external_id": item.external_id,
-                    "id": item.id,
-                    "last_login_at": item.last_login_at,
-                    "locale": item.locale,
-                    "locale_id": item.locale_id,
-                    "moderator": item.moderator,
-                    "name": item.name,
-                    "notes": item.notes,
-                    "only_private_comments": item.only_private_comments,
-                    "organization_id": item.organization_id,
-                    "phone": item.phone,
-                    "photo": item.photo,
-                    "restricted_agent": item.restricted_agent,
-                    "role": item.role,
-                    "shared": item.shared,
-                    "shared_agent": item.shared_agent,
-                    "signature": item.signature,
-                    "suspended": item.suspended,
-                    "tags": item.tags,
-                    "ticket_restriction": item.ticket_restriction,
-                    "time_zone": item.time_zone,
-                    "two_factor_auth_enabled": item.two_factor_auth_enabled,
-                    "updated_at": item.updated_at,
-                    "url": item.url,
-                    "verified": item.verified,
-                }
-                objs.append(user_obj)
-            if s_type == "Organization":
-                return {Output.ORGANIZATIONS: insightconnect_plugin_runtime.helper.clean(objs)}
-            elif s_type == "Ticket":
-                return {Output.TICKETS: insightconnect_plugin_runtime.helper.clean(objs)}
+            if search_type == "User" and results is not None:
+                user_object = Objects.create_user_object(item)
+                objects.append(user_object)
+
+            if search_type == "Organization":
+                return {Output.ORGANIZATIONS: insightconnect_plugin_runtime.helper.clean(objects)}
+            elif search_type == "Ticket":
+                return {Output.TICKETS: insightconnect_plugin_runtime.helper.clean(objects)}
             else:
-                return {Output.USERS: insightconnect_plugin_runtime.helper.clean(objs)}
+                return {Output.USERS: insightconnect_plugin_runtime.helper.clean(objects)}
 
     @staticmethod
     def convert_to_string(values: Optional[int]) -> Optional[str]:
@@ -116,7 +56,7 @@ class Search(insightconnect_plugin_runtime.Action):
         return str(values)
 
     @staticmethod
-    def convert_array(values: Optional[list]) -> Optional[list]:
+    def convert_array(values: Optional[List[Any]]) -> Optional[List[str]]:
         converted_array = []
         for item in values:
             converted_array.append(str(item))

@@ -26,19 +26,19 @@ class TestBlacklist(TestCase):
 
     @patch("requests.request", side_effect=Util.mocked_requests_get)
     def test_should_success_when_blacklist(self, mock_request):
-        expected = {"success": True}
+        expected = {"message": "The given hash has been blocked", "success": True}
         actual = self.action.run({Input.HASH: "3395856ce81f2b7382dee72602f798b642f14140", Input.BLACKLIST_STATE: True})
         self.assertEqual(expected, actual)
 
     @patch("requests.request", side_effect=Util.mocked_requests_get)
     def test_should_success_when_unblacklist(self, mock_request):
-        expected = {"success": True}
+        expected = {"message": "The given hash has been unlocked", "success": True}
         actual = self.action.run({Input.HASH: "3395856ce81f2b7382dee72602f798b642f14140", Input.BLACKLIST_STATE: False})
         self.assertEqual(expected, actual)
 
     @patch("requests.request", side_effect=Util.mocked_requests_get)
     def test_should_success_when_blacklist_and_description(self, mock_request):
-        expected = {"success": True}
+        expected = {"message": "The given hash has been blocked", "success": True}
         actual = self.action.run(
             {
                 Input.HASH: "3395856ce81f2b7382dee72602f798b642f14140",
@@ -50,7 +50,7 @@ class TestBlacklist(TestCase):
 
     @patch("requests.request", side_effect=Util.mocked_requests_get)
     def test_should_success_when_unblacklist_and_description(self, mock_request):
-        expected = {"success": True}
+        expected = {"message": "The given hash has been unlocked", "success": True}
         actual = self.action.run(
             {
                 Input.HASH: "3395856ce81f2b7382dee72602f798b642f14140",

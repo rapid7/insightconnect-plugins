@@ -3,8 +3,8 @@ extension: plugin
 products: [insightconnect]
 name: sentinelone
 title: SentinelOne
-version: 7.0.0
-supported_versions: ["2.0.0", "2.1.0"]
+version: 8.1.0
+supported_versions: ["2.1.0"]
 description: The SentinelOne plugin allows you to manage and mitigate all your security operations through SentinelOne
 vendor: rapid7
 support: rapid7
@@ -35,7 +35,7 @@ types:
       required: false
     action:
       title: Action
-      description: Action descripted in the activity
+      description: Action described in the activity
       type: string
       required: false
   activities_list:
@@ -1457,27 +1457,21 @@ types:
       required: false
 
 connection:
-  authentication_type:
-    title: Authentication Type
-    description: Type of authentication
+  user_type:
+    title: User Type
+    description: Type of user
     type: string
     required: true
     enum:
-      - Basic Auth
-      - API Token Auth
-    default: Basic Auth
-    example: Basic Auth
-  basic_auth_credentials:
-    title: Basic Auth Credentials
-    type: credential_username_password
-    description: Username and password. Provide if you choose Basic Auth type
-    required: false
-    example: '{"username": "user@example.com", "password": "mypassword"}'
+      - Console user
+      - Service user
+    example: Console user
+    default: Console user
   api_key:
     title: API Key
-    description: Credential secret API key. Provide if you choose API Token Auth type
+    description: Credential secret API key
     type: credential_secret_key
-    required: false
+    required: true
     example: 9de5069c5afe602b2ea0a04b66beb2c0
   url:
     title: URL
@@ -1495,16 +1489,19 @@ actions:
         type: pagination
         description: Pagination
         required: false
+        example: '{"totalItems": 1}'
       errors:
         title: Errors
         type: '[]object'
         description: Errors
         required: false
+        example: '[{"type": "object"}]'
       data:
         title: Data
         type: '[]threat_data'
         description: Data
         required: false
+        example: '[ { "agentOsType": "windows", "automaticallyResolved": false } ]'
   blacklist_by_content_hash:
     title: Blacklist by Content Hash
     description: Add hashed content to global blacklist. The input makes use of contentHash
@@ -1563,6 +1560,7 @@ actions:
         description: Number of entities affected by the requested operation
         type: integer
         required: false
+        example: 1
   mitigate_threat:
     title: Mitigate Threat
     description: Apply a mitigation action to a threat
@@ -1572,7 +1570,7 @@ actions:
         description: ID of a threat
         type: string
         required: true
-        example: 1000000000000000000
+        example: "1000000000000000000"
       action:
         title: Action
         description: Mitigation action
@@ -1591,9 +1589,10 @@ actions:
         description: Number of entities affected by the requested operation
         type: integer
         required: false
+        example: 1
   mark_as_benign:
     title: Mark as Benign
-    description: Mark a threat as resolved
+    description: Mark a threat as resolved and adds the IOC's to global allow list
     input:
       threat_id:
         title: Threat ID
@@ -1630,6 +1629,7 @@ actions:
         description: Number of entities affected by the requested operation
         type: integer
         required: false
+        example: 1
   mark_as_threat:
     title: Mark as Threat
     description: Mark a suspicious threat as a threat
@@ -1669,6 +1669,7 @@ actions:
         description: Number of entities affected by the requested operation
         type: integer
         required: false
+        example: 1
   activities_list:
     title: Get Activities
     description: Get a list of activities
@@ -1815,6 +1816,7 @@ actions:
         description: Result of activities list
         type: '[]activities_list'
         required: true
+        example: '[{ "agentUpdatedVersion": "2.5.1.1320", "id": "225494730938493804", "createdAt": "2018-02-27T04:49:26.257525Z", "groupId": "225494730938493804", "primaryDescription": "string", "accountName": "string", "description": "string", "osFamily": "windows_legacy", "hash": "string", "secondaryDescription": "string", "comments": "string", "siteId": "225494730938493804", "groupName": "string", "threatId": "225494730938493804", "agentId": "225494730938493804", "data": { "computer_name": "COMP_1234", "username": "my_user" }, "activityType": "integer", "accountId": "225494730938493804", "updatedAt": "2018-02-27T04:49:26.257525Z", "userId": "225494730938493804", "activityUuid": "string", "siteName": "string" }]'
   activities_types:
     title: Get Activity Types
     description: Get a list of activity types
@@ -1824,6 +1826,7 @@ actions:
         description: Result of activities types
         type: '[]activities_types'
         required: true
+        example: '[{ "id": 0, "descriptionTemplate": "string", "action": "string" }]'
   apps_by_agent_ids:
     title: Agents Applications
     description: Retrieve running applications for a specific agent
@@ -1840,6 +1843,36 @@ actions:
         description: List of installed applications
         type: '[]agent_applications'
         required: true
+        example: '[ { "publisher": "string", "installedDate": "2018-02-27T04:49:26.257525Z", "size": "integer", "name": "string", "version": "string" } ]'
+  fetch_file_by_agent_id:
+    title: Fetch File
+    description: Fetch file for a specific agent id
+    input:
+      agent_id:
+        title: Agent ID
+        description: Agent ID
+        type: 'string'
+        required: true
+        example: "1000000000000000000"
+      file_path:
+        title: File Path
+        description: File path of file to fetch. If a file can be fetched, it will be uploaded to the SentinelOne console for download
+        type: string
+        required: true
+        example: "C:/windows/system32/winevt/logs/application.evtx"
+      password:
+        title: Password
+        description: File encryption password, min. length 10 characters and cannot contain whitespace
+        type: 'string'
+        required: true
+        example: "MySecretPass123!"
+    output:
+      success:
+        title: Success
+        description: File fetch response status
+        type: boolean
+        required: true
+        example: true
   agents_summary:
     title: Count Summary
     description: Summary of agents by numbers
@@ -1909,6 +1942,7 @@ actions:
         description: Account Name to validate
         type: boolean
         required: true
+        example: true
   agents_reload:
     title: Agents Reload
     description: Reload an agent module (applies to Windows agents only)
@@ -1936,9 +1970,10 @@ actions:
         description: Number of entities affected by the requested operation
         type: integer
         required: false
+        example: 1
   agents_action:
     title: Run Agent Action
-    description: Perform actions relating to your SentinelOne agents. This will help manage your assets connected to your SentinelOne console. Documentation for these actions can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions
+    description: Perform actions relating to your SentinelOne agents. Initiate/Abort scan, connect/disconnect, decommission, restart/shutdown, fetch logs. Documentation for these actions can be found at https://yoururl.sentinelone.net/api-doc/api-details?category=agent-actions
     input:
       filter:
         title: Filter JSON
@@ -1969,6 +2004,7 @@ actions:
         description: Number of entities affected by the requested operation
         type: integer
         required: false
+        example: 1
   search_agents:
     title: Search Agents
     description: Search for agents
@@ -2012,6 +2048,7 @@ actions:
         description: Detailed information about agents found
         type: "[]agent_data"
         required: false
+        example: '{ "agents": [ { "accountId": "433241117337583618", "accountName": "SentinelOne", "activeDirectory": { "computerDistinguishedName": "None", "computerMemberOf": [], "lastUserDistinguishedName": "None", "lastUserMemberOf": [] }, "activeThreats": 0, "agentVersion": "4.1.4.82", "allowRemoteShell": false, "appsVulnerabilityStatus": "up_to_date", "cloudProviders": {}, "computerName": "so-agent-win12", "consoleMigrationStatus": "N/A", "coreCount": 1, "cpuCount": 1, "cpuId": "Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz", "createdAt": "2020-05-28T14:53:03.014660Z", "domain": "WORKGROUP", "encryptedApplications": false, "externalId": "", "externalIp": "198.51.100.100", "firewallEnabled": true, "groupId": "521580416411822676", "groupIp": "198.51.100.x", "groupName": "Default Group", "id": "901345720792880606", "inRemoteShellSession": false, "infected": false, "installerType": ".exe", "isActive": true, "isDecommissioned": false, "isPendingUninstall": false, "isUninstalled": false, "isUpToDate": true, "lastActiveDate": "2020-06-05T18:32:56.748620Z", "lastIpToMgmt": "10.4.24.55", "lastLoggedInUserName": "", "licenseKey": "", "locationEnabled": true, "locationType": "fallback", "locations": [ { "id": "629380164464502476", "name": "Fallback", "scope": "global" } ], "machineType": "server", "mitigationMode": "protect", "mitigationModeSuspicious": "detect", "modelName": "VMware, Inc. - VMware Virtual Platform", "networkInterfaces": [ { "id": "901345720801269215", "inet": [ "198.51.100.100" ], "inet6": [ "2001:db8:8:4::2" ], "name": "Ethernet", "physical": "00:50:56:94:17:08" } ], "networkQuarantineEnabled": false, "networkStatus": "disconnected", "operationalState": "na", "operationalStateExpiration": "None", "osArch": "64 bit", "osName": "Windows Server 2012 Standard", "osRevision": "9200", "osStartTime": "2020-05-28T14:59:36Z", "osType": "windows", "osUsername": "None", "rangerStatus": "NotApplicable", "rangerVersion": "None", "registeredAt": "2020-05-28T14:53:03.010853Z", "remoteProfilingState": "disabled", "remoteProfilingStateExpiration": "None", "scanAbortedAt": "None", "scanFinishedAt": "2020-05-28T22:24:59.420166Z", "scanStartedAt": "2020-05-28T21:12:58.216807Z", "scanStatus": "finished", "siteId": "521580416395045459", "siteName": "Rapid7", "threatRebootRequired": false, "totalMemory": 1023, "updatedAt": "2020-06-05T15:39:10.754112Z", "userActionsNeeded": [], "uuid": "28db47168fa54f89aeed99769ac8d4dc" } ] }'
   get_agent_details:
     title: Get Agent Details
     description: Retrieve agent details
@@ -2048,6 +2085,7 @@ actions:
         description: Detailed information about agent found
         type: agent_data
         required: false
+        example: '{ "agent": { "accountId": "433241117337583618", "accountName": "SentinelOne", "activeDirectory": { "computerDistinguishedName": "None", "computerMemberOf": [], "lastUserDistinguishedName": "None", "lastUserMemberOf": [] }, "activeThreats": 0, "agentVersion": "4.1.4.82", "allowRemoteShell": false, "appsVulnerabilityStatus": "up_to_date", "cloudProviders": {}, "computerName": "so-agent-win12", "consoleMigrationStatus": "N/A", "coreCount": 1, "cpuCount": 1, "cpuId": "Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz", "createdAt": "2020-05-28T14:53:03.014660Z", "domain": "WORKGROUP", "encryptedApplications": false, "externalId": "", "externalIp": "198.51.100.100", "firewallEnabled": true, "groupId": "521580416411822676", "groupIp": "198.51.100.x", "groupName": "Default Group", "id": "901345720792880606", "inRemoteShellSession": false, "infected": false, "installerType": ".exe", "isActive": true, "isDecommissioned": false, "isPendingUninstall": false, "isUninstalled": false, "isUpToDate": true, "lastActiveDate": "2020-06-05T18:32:56.748620Z", "lastIpToMgmt": "10.4.24.55", "lastLoggedInUserName": "", "licenseKey": "", "locationEnabled": true, "locationType": "fallback", "locations": [ { "id": "629380164464502476", "name": "Fallback", "scope": "global" } ], "machineType": "server", "mitigationMode": "protect", "mitigationModeSuspicious": "detect", "modelName": "VMware, Inc. - VMware Virtual Platform", "networkInterfaces": [ { "id": "901345720801269215", "inet": [ "198.51.100.100" ], "inet6": [ "2001:db8:8:4::2" ], "name": "Ethernet", "physical": "00:50:56:94:17:08" } ], "networkQuarantineEnabled": false, "networkStatus": "disconnected", "operationalState": "na", "operationalStateExpiration": "None", "osArch": "64 bit", "osName": "Windows Server 2012 Standard", "osRevision": "9200", "osStartTime": "2020-05-28T14:59:36Z", "osType": "windows", "osUsername": "None", "rangerStatus": "NotApplicable", "rangerVersion": "None", "registeredAt": "2020-05-28T14:53:03.010853Z", "remoteProfilingState": "disabled", "remoteProfilingStateExpiration": "None", "scanAbortedAt": "None", "scanFinishedAt": "2020-05-28T22:24:59.420166Z", "scanStartedAt": "2020-05-28T21:12:58.216807Z", "scanStatus": "finished", "siteId": "521580416395045459", "siteName": "Rapid7", "threatRebootRequired": false, "totalMemory": 1023, "updatedAt": "2020-06-05T15:39:10.754112Z", "userActionsNeeded": [], "uuid": "28db47168fa54f89aeed99769ac8d4dc" } }'
   quarantine:
     title: Quarantine
     description: Isolate (quarantine) endpoint from the network
@@ -2083,6 +2121,7 @@ actions:
         description: SentinelOne API call response data
         type: quarantine_response
         required: false
+        example: '{ "response": { "data": [ { "agentDomain": "WORKGROUP", "agentGroupId": "123123456712356789", "agentId": "123123456712356789" } } }'
   blacklist:
     title: Blacklist
     description: Blacklist and unblacklist a SHA1 hash
@@ -2113,6 +2152,13 @@ actions:
         description: Return true if blacklist item was created or deleted
         type: boolean
         required: true
+        example: true
+      message:
+        title: Message
+        description: Return details about action results
+        type: string
+        required: true
+        example: 'The given hash has been blocked'
   threats_fetch_file:
     title: Fetch Threats File
     description: Fetch a file associated with the threat that matches the filter. Your user role must have permissions to Fetch Threat File - Admin, IR Team, SOC
@@ -2135,6 +2181,7 @@ actions:
         description: Base64 encoded threat file
         type: file
         required: true
+        example: '{ "file": { "filename": "report.txt", "content": "UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==" } }'
   disable_agent:
     title: Disable Agent
     description: Disable agents that match a filter
@@ -2378,6 +2425,7 @@ actions:
         description: Number of entities affected by the requested operation
         type: integer
         required: true
+        example: 1
   enable_agent:
     title: Enable Agent
     description: Enable agents that match the filter
@@ -2406,6 +2454,7 @@ actions:
         description: Number of entities affected by the requested operation
         type: integer
         required: true
+        example: 1
   create_query:
     title: Create Query
     description: Start a Deep Visibility Query and get the queryId. You can use the queryId for other commands, such as Get Events and Get Query Status
@@ -2476,6 +2525,7 @@ actions:
         description: SentinelOne API call response data
         type: create_query_response
         required: false
+        example: '{ "response": { "data": { "affected": 0 } } }'
   get_query_status:
     title: Get Query Status
     description: Get that status of a Deep Visibility Query
@@ -2492,6 +2542,7 @@ actions:
         description: SentinelOne API call response data
         type: get_query_status_response
         required: false
+        example: '{ "response": { "data": { "progressStatus": 50, "responseState": "RUNNING" } } }'
   cancel_running_query:
     title: Cancel Running Query
     description: Stop a Deep Visibility Query by queryId
@@ -2508,6 +2559,7 @@ actions:
         description: SentinelOne API call response data
         type: cancel_query_response
         required: false
+        example: '{ "response": { "success": true } }'
   get_events:
     title: Get Events
     description: Get all Deep Visibility events from a queryId
@@ -2536,6 +2588,7 @@ actions:
         description: SentinelOne API call response data
         type: get_events_response
         required: false
+        example: '{ "response": { "data": [ { "agentDomain": "WORKGROUP", "agentGroupId": "123123456712356789", "agentId": "123123456712356789" } } }'
   get_events_by_type:
     title: Get Events by Type
     description: Get Deep Visibility results from the query that matches the given event type
@@ -2615,6 +2668,7 @@ actions:
         description: SentinelOne API call response data
         type: get_events_response
         required: false
+        example: '{ "response": { "data": [ { "agentDomain": "WORKGROUP", "agentGroupId": "123123456712356789", "agentId": "123123456712356789" }}}'
   update_analyst_verdict:
     title: Update Analyst Verdict
     description: Updates an analyst verdict for each incident ID provided
@@ -2623,7 +2677,7 @@ actions:
         title: Incident IDs
         description: A list of alert or threat IDs on which we may update the analyst verdict
         type: "[]string"
-        example: ["1118189762920424575", "1118189762920424576"]
+        example: [ "1118189762920424575", "1118189762920424576" ]
         required: true
       analyst_verdict:
         title: Analyst Verdict
@@ -2651,6 +2705,7 @@ actions:
         description: Number of entities affected by the requested operation
         type: integer
         required: false
+        example: 1
   update_incident_status:
     title: Update Incident Status
     description: Updates an incident status for each incident ID provided
@@ -2686,6 +2741,70 @@ actions:
         description: Number of entities affected by the requested operation
         type: integer
         required: false
+        example: 1
+  run_remote_script:
+    title: Run Remote Script
+    description: Run a remote script
+    input:
+      ids:
+        title: IDs
+        description: IDs of the agents to execute the script on. If no IDs provided, the script will run on ALL applicable agents. This id can be retrieved by using the get agent details action if neccessary
+        type: '[]string'
+        required: false
+        example: '["100000000000000000"]'
+      script_id:
+        title: Script ID
+        description: ID of the script to run (select the ID of a SentinelOne or user script from SentinelOne console)
+        type: string
+        required: true
+        example: "1234567891234"
+      task_description:
+        title: Task Description
+        description: Task Description
+        type: string
+        required: true
+        example: "Task Description"
+      output_destination:
+        title: Output Destination
+        description: Output destination of any script output
+        type: string
+        enum:
+          - Local
+          - None
+          - SentinelCloud
+        example: SentinelCloud
+        required: true
+      output_directory:
+        title: Output Directory
+        description: Output Directory (Only relevant if Local is selected for Output Destination)
+        type: string
+        required: false
+        example: "/tmp/script_output"
+      password:
+        title: Password
+        description: Password (Only relevant if SentinelCloud is selected for Output Destination). At least 10 characters and no whitespace
+        type: string
+        required: false
+        example: "Password123??"
+      input_parameters:
+        title: Input Script Parameters
+        description: Parameters which will be passed to the remote script (may or may not be required, depending on script)
+        type: string
+        required: false
+        example: "input_parameter1"
+      timeout:
+        title: Script Execution Timeout
+        description: Script runtime timeout (in seconds) for current execution (Value between 60 and 172800 seconds)
+        type: integer
+        required: false
+        default: 3600
+        example: 3600
+    output:
+      affected:
+        description: Number of entities affected by requested operation. For detailed output from running the script, log onto the SentinelOne console. Note this may be lower than the number of agent ids submitted if the script cannot be run on a particular agent e.g. due to OS type
+        type: integer
+        required: true
+        example: 2
 triggers:
   get_threats:
     title: Get Threats
@@ -2693,7 +2812,7 @@ triggers:
     input:
       resolved:
         title: Resolved
-        description: Include resolved threats
+        description: Set True to only trigger on resolved threats
         type: boolean
         required: false
         example: true
@@ -2729,3 +2848,4 @@ triggers:
         description: Threat
         type: threat_data
         required: false
+        example: "{ 'threat': { 'agentComputerName':'vagrant-pc', 'agentDomain':'WORKGROUP', 'agentId':'560700200554747611' }}"

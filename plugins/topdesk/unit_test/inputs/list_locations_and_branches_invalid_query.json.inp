@@ -1,0 +1,4 @@
+{
+  "pageSize": 5,
+  "query": "non_existing_key==invalid_value"
+}

@@ -18,4 +18,5 @@ class DlGetAll(insightconnect_plugin_runtime.Action):
     def run(self, _params=None):
         result = self.connection.client.get_destination_lists().get("data", [])
         result = clean(result)
+
         return {Output.DATA: result}

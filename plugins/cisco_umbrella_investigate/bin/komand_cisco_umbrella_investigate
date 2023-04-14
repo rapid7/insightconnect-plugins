@@ -6,31 +6,33 @@ from sys import argv
 
 Name = "Cisco Umbrella Investigate"
 Vendor = "rapid7"
-Version = "3.1.3"
+Version = "3.1.5"
 Description = "This plugin utilizes Cisco Umbrella Investigate to get the most complete view of the relationships and evolution of Internet domains, IP addresses, and autonomous systems to pinpoint attackers infrastructures and predict future threats"
 
 
 def main():
-    if "http" in argv:
+    if 'http' in argv:
         if os.environ.get("GUNICORN_CONFIG_FILE"):
             with open(os.environ.get("GUNICORN_CONFIG_FILE")) as gf:
                 gunicorn_cfg = json.load(gf)
                 if gunicorn_cfg.get("worker_class", "sync") == "gevent":
                     from gevent import monkey
-
                     monkey.patch_all()
-        elif "gevent" in argv:
+        elif 'gevent' in argv:
             from gevent import monkey
-
             monkey.patch_all()
 
-    import komand
+    import insightconnect_plugin_runtime
     from komand_cisco_umbrella_investigate import connection, actions, triggers
 
-    class ICONCiscoUmbrellaInvestigate(komand.Plugin):
+    class ICONCiscoUmbrellaInvestigate(insightconnect_plugin_runtime.Plugin):
         def __init__(self):
             super(self.__class__, self).__init__(
-                name=Name, vendor=Vendor, version=Version, description=Description, connection=connection.Connection()
+                name=Name,
+                vendor=Vendor,
+                version=Version,
+                description=Description,
+                connection=connection.Connection()
             )
             self.add_action(actions.Categorization())
 
@@ -70,8 +72,9 @@ def main():
 
             self.add_action(actions.Timeline())
 
+
     """Run plugin"""
-    cli = komand.CLI(ICONCiscoUmbrellaInvestigate())
+    cli = insightconnect_plugin_runtime.CLI(ICONCiscoUmbrellaInvestigate())
     cli.run()
 
 

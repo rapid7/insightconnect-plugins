@@ -59,4 +59,6 @@ class TestActionInsrt(TestCase):
         self.assertEqual(
             "Check client connection keys and input arguments and try again.", context.exception.assistance
         )
-        self.assertEqual(Util.load_json("payloads/action_bad_insert_resource_not_found.resp"), context.exception.data)
+        self.assertEqual(
+            str(Util.load_json("payloads/action_bad_insert_resource_not_found.resp")), str(context.exception.data)
+        )

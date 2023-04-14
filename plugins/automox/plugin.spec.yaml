@@ -4,7 +4,7 @@ products: [insightconnect]
 name: automox
 title: Automox
 description: Automox is modernizing IT operations with continuous visibility, insight, and agility for your entire IT environment
-version: 1.1.1
+version: 1.2.0
 supported_versions: ["All as of 1/21/2022"]
 vendor: automox
 support: partner
@@ -167,22 +167,22 @@ types:
       title: Device ID
       description: The device ID
       type: integer
-      required: true
+      required: false
     server_group_id:
       title: Server Group ID
       description: The server group identifier of a device
       type: integer
-      required: true 
+      required: false
     organization_id:
       title: Organization ID
       description: The organization identifier of a device
       type: integer
-      required: true
+      required: false
     name:
       title: Device Name
       description: The device name
       type: string
-      required: true
+      required: false
     last_update_time:
       title: Last Update Time
       description: The last time a device was updated in the Automox platform
@@ -243,8 +243,8 @@ types:
       description: The number of patches currently identified for a device
       type: integer
       required: false
-    details:
-      title: Details
+    detail:
+      title: Detail
       description: Additional details of a device
       type: object
       required: false

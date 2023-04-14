@@ -1,0 +1,74 @@
+{
+  "data": [
+    {
+      "externalip": "255.255.255.255",
+      "internalip": "255.255.255.255",
+      "policycategories": [
+        {
+          "id": 66,
+          "label": "Malware",
+          "type": "security",
+          "integration": true
+        }
+      ],
+      "categories": [
+        {
+          "id": 66,
+          "label": "Malware",
+          "type": "security",
+          "integration": true
+        }
+      ],
+      "verdict": "allowed",
+      "domain": "example.com",
+      "timestamp": 1548311506,
+      "time": "06:31:46",
+      "date": "2019-01-24",
+      "identities": [
+        {
+          "id": 1,
+          "label": "ExampleName",
+          "type": {
+            "id": 21,
+            "label": "Sites",
+            "type": "site"
+          },
+          "deleted": true
+        }
+      ],
+      "threats": [
+        {
+          "label": "Wannacry",
+          "type": "Ransomware"
+        }
+      ],
+      "allapplications": [
+        {
+          "id": 1,
+          "label": "ExampleApp",
+          "type": "NBAR",
+          "category": {
+            "id": 1,
+            "label": "category"
+          }
+        }
+      ],
+      "allowedapplications": [
+        {
+          "id": 1,
+          "label": "ExampleApp",
+          "type": "NBAR",
+          "category": {
+            "id": 1,
+            "label": "category"
+          }
+        }
+      ],
+      "querytype": "MX",
+      "returncode": 2,
+      "blockedapplications": [],
+      "type": "dns"
+    }
+  ],
+  "meta": {}
+}

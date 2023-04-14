@@ -6,6 +6,7 @@ import requests
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import clean
 from requests.auth import HTTPBasicAuth
+from icon_rapid7_intsights.util.constants import Assistance, Cause
 
 
 @dataclass
@@ -98,6 +99,53 @@ class ManualAlertParams:
         )
 
 
+@dataclass
+class IOCParams:
+    last_updated_from: str
+    last_updated_to: str
+    last_seen_from: str
+    last_seen_to: str
+    first_seen_from: str
+    first_seen_to: str
+    status: str
+    type: [str]
+    severity: [str]
+    source_ids: [str]
+    kill_chain_phases: [str]
+    limit: int
+    offset: str
+    enterprise_tactics: [str]
+
+    OFFSET_MINIMUM = 1
+    OFFSET_MAXIMUM = 1000
+    OFFSET_DEFAULT = 1000
+
+    def limit_range(self, number: int, _min: int, _max: int) -> int:
+        return max(min(_max, number), _min)
+
+    def to_dict(self) -> dict:
+        return clean(
+            {
+                "lastUpdatedFrom": self.last_updated_from if self.last_updated_from else None,
+                "lastUpdatedTo": self.last_updated_to if self.last_updated_to else None,
+                "lastSeenFrom": self.last_seen_from if self.last_seen_from else None,
+                "lastSeenTo": self.last_seen_to if self.last_seen_to else None,
+                "firstSeenFrom": self.first_seen_from if self.first_seen_from else None,
+                "firstSeenTo": self.first_seen_to if self.first_seen_to else None,
+                "status": self.status if self.status else None,
+                "type[]": list(self.type) if self.type else None,
+                "severity[]": list(self.severity) if self.severity else None,
+                "sourceIds[]": list(self.source_ids) if self.source_ids else None,
+                "killChainPhases[]": list(self.kill_chain_phases) if self.kill_chain_phases else None,
+                "limit": self.limit_range(self.limit, self.OFFSET_MINIMUM, self.OFFSET_MAXIMUM)
+                if self.limit
+                else self.OFFSET_DEFAULT,
+                "offset": self.offset if self.offset else None,
+                "enterpriseTactics[]": list(self.enterprise_tactics) if self.enterprise_tactics else None,
+            }
+        )
+
+
 def current_milli_time():
     return round(time.time() * 1000)
 
@@ -128,7 +176,10 @@ class IntSightsAPI:
         self.logger = logger
 
     def get_indicator_by_value(self, ioc_value: str) -> dict:
-        return self.make_json_request("GET", f"public/v2/iocs/ioc-by-value?iocValue={ioc_value}")
+        return self.make_json_request("GET", f"public/v3/iocs/ioc-by-value?iocValue={ioc_value}")
+
+    def get_indicators_by_filter(self, query_params: IOCParams) -> dict:
+        return self.make_json_request("GET", "public/v3/iocs", params=query_params.to_dict())
 
     def enrich_indicator(self, ioc_value: str) -> dict:
         response = {}
@@ -167,22 +218,15 @@ class IntSightsAPI:
     def add_manual_alert(self, manual_alert_params: ManualAlertParams) -> str:
         return self.make_request("PUT", "public/v1/data/alerts/add-alert", json_data=manual_alert_params.to_dict()).text
 
-    def get_cve(self, cve_ids: [str]) -> list:
-        content = []
+    def get_cve(self, cve_ids: [str], offset: str = None) -> dict:
         path = "public/v1/cves/get-cves-list"
         query_params = {}
-        for _ in range(0, 9999):
-            if cve_ids:
-                query_params["cveId[]"] = cve_ids
-
-            response_cve_list = self.make_json_request("GET", path, params=query_params)
-            content.extend(response_cve_list.get("content", []))
-
-            query_params["offset"] = response_cve_list.get("nextOffset", "")
-            if not query_params["offset"]:
-                break
-
-        return content
+        if offset:
+            query_params["offset"] = offset
+        if cve_ids:
+            query_params["cveId[]"] = cve_ids
+        response_cve_list = self.make_json_request("GET", path, params=query_params)
+        return {"content": response_cve_list.get("content", []), "next_offset": response_cve_list.get("nextOffset", "")}
 
     def add_cve(self, cve_ids: [str]) -> dict:
         path = "public/v1/cves/add-cves"
@@ -198,6 +242,21 @@ class IntSightsAPI:
 
     def test_credentials(self) -> bool:
         return self.make_request("HEAD", "public/v1/test-credentials").status_code == 200
+
+    def get_iocs_for_cyber_term(self, cyber_term_id: str, parameters: dict) -> dict:
+        return self.make_json_request(
+            "GET", f"public/v1/threat-library/cyber-terms/{cyber_term_id}/iocs", params=parameters
+        )
+
+    def get_cves_for_cyber_term(self, cyber_term_id: str) -> dict:
+        return self.make_json_request("GET", f"public/v1/threat-library/cyber-terms/{cyber_term_id}/cves")
+
+    def get_cyber_terms_by_filter(self, parameters: dict) -> dict:
+        return self.make_json_request("GET", "public/v1/threat-library/cyber-terms", params=parameters)
+
+    def close_alert(self, alert_id: str, json_data: dict) -> bool:
+        self.make_request("PATCH", f"public/v1/data/alerts/close-alert/{alert_id}", json_data=json_data)
+        return True
 
     def make_json_request(self, method: str, path: str, json_data: dict = None, params: dict = None) -> dict:
         try:
@@ -225,11 +284,18 @@ class IntSightsAPI:
                 json=json_data,
                 auth=HTTPBasicAuth(self.account_id, self.api_key),
             )
-
+            if response.status_code == 400:
+                raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
             if response.status_code in [401, 403]:
                 raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
             if response.status_code == 404:
                 raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.text)
+            if response.status_code == 422:
+                raise PluginException(
+                    cause=Cause.INVALID_DETAILS,
+                    assistance=Assistance.VERIFY_INPUT,
+                    data=response.text,
+                )
             if 400 <= response.status_code < 500:
                 raise PluginException(
                     preset=PluginException.Preset.UNKNOWN,

@@ -1,0 +1,23 @@
+{
+	"spec": "1e7b21076add3b82655154af8f179fa2",
+	"manifest": "71500945c5768c7cecf7e3214a6b022a",
+	"setup": "f3edf5d7c4cdd4ba23a32ff9e862e468",
+	"schemas": [
+		{
+			"identifier": "asnLookup/schema.py",
+			"hash": "89ff5da61f93a14806a0b8f5d2c016d2"
+		},
+		{
+			"identifier": "domainLookup/schema.py",
+			"hash": "f35c4193d8946162732d5220d2408e28"
+		},
+		{
+			"identifier": "ipLookup/schema.py",
+			"hash": "8e69e8f5d128f159da6d99ac91126706"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "da5382221ca2a33a2f854e17b068d502"
+		}
+	]
+}

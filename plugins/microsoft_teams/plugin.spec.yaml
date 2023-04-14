@@ -4,11 +4,12 @@ products: [insightconnect]
 name: microsoft_teams
 title: Microsoft Teams
 description: The Microsoft Teams plugin allows you to send and trigger workflows on new messages. The plugin will also allow for teams management with the ability to add and remove teams, channels, and users
-version: 4.0.0
+version: 4.2.0
 supported_versions: ["Microsoft Graph API v1.0 2021-11-28"]
 vendor: rapid7
 support: community
 status: []
+cloud_ready: true
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/microsoft_teams
   license_url: https://github.com/rapid7/insightconnect-plugins/blob/master/LICENSE
@@ -21,7 +22,7 @@ tags:
 - chat
 hub_tags:
   use_cases: [alerting_and_notifications, application_management, threat_detection_and_response, user_management]
-  keywords: [microsoft_teams, office365, chat]
+  keywords: [microsoft_teams, office365, chat, cloud_enabled]
   features: []
 types:
   team:
@@ -554,6 +555,16 @@ actions:
         required: true
         order: 3
         example: This is a test channel.
+      channel_type:
+        title: Channel Type
+        description: Type of channel to be added
+        type: string
+        required: true
+        enum:
+          - Standard
+          - Private
+        example: Standard
+        default: Standard
     output:
       success:
         title: Success
@@ -696,6 +707,16 @@ actions:
         type: string
         required: true
         example: InsightConnect Channel
+      role:
+        title: Member Role
+        description: Role of the member to add
+        type: string
+        enum:
+          - Owner
+          - Member
+        required: true
+        example: Owner
+        default: Member
     output:
       success:
         title: Success

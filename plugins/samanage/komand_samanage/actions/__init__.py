@@ -5,6 +5,7 @@ from .change_incident_state.action import ChangeIncidentState
 from .comment_incident.action import CommentIncident
 from .create_incident.action import CreateIncident
 from .create_user.action import CreateUser
+from .delete_incident.action import DeleteIncident
 from .delete_user.action import DeleteUser
 from .get_comments.action import GetComments
 from .get_incident.action import GetIncident

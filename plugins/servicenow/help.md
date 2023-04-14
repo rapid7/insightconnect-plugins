@@ -48,6 +48,32 @@ Example input:
 
 ### Actions
 
+#### Create Change Request
+
+This action creates a change request record based on the default change request record.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|additional_fields|object|None|False|JSON object containing name-value pairs for the field(s) to update in the associated change request|None|{"short_description": "My example short description"}|
+
+Example input:
+
+```
+{
+  "additional_fields": {
+    "short_description": "My example short description"
+  }
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Indicates whether the change request has been created|
+
 #### Get Attachments for an Incident
 
 This action is used to search for attachments for a given incident ID.
@@ -143,7 +169,7 @@ This action is used to create a new ServiceNow Incident record.
 |configuration_item|string|None|False|Configuration item code of the incident|None|int-jenkins|
 |contact_type|string|None|False|Contact type of the incident|None|email|
 |description|string|None|False|Full description of incident|None|Full details about new employee hire|
-|impact|string|None|False|Impact of the indicent|None|Medium|
+|impact|string|None|False|Impact of the incident|None|Medium|
 |priority|string|None|False|Priority of the incident|None|Planning|
 |short_description|string|None|False|Short description of incident|None|New employee hire|
 |state|string|None|False|State name of the incident|None|In Progress|
@@ -660,7 +686,7 @@ This action is used to update a ServiceNow Incident with the given data.
 |configuration_item|string|None|False|Configuration item code of the incident|None|int-jenkins|
 |contact_type|string|None|False|Contact type of the incident|None|phone|
 |description|string|None|False|Full description of incident|None|Full details about new employee hire update|
-|impact|string|None|False|Impact of the indicent|None|Medium|
+|impact|string|None|False|Impact of the incident|None|Medium|
 |priority|string|None|False|Priority of the incident|None|Planning|
 |short_description|string|None|False|Short description of incident|None|New employee hire update|
 |state|string|None|False|State name of the incident|None|On Hold|
@@ -869,6 +895,9 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 7.1.2 - Search Incident, Search Incident Attachment: Fix issue where the action were failing on bigger results. Update Incident: Ensure non updated fields are not reset during update.
+* 7.1.1 - Create Incident: Resolved issue when nothing was passed to `additional_fields` input field 
+* 7.1.0 - Add new action Create Change Request
 * 7.0.0 - Cloud enabled | Changed connection input `URL` to `instance`
 * 6.0.1 - Fix base64 decoding in Put Incident Attachment action
 * 6.0.0 - Add additional file information in output for Get Attachments for an Incident
@@ -895,7 +924,8 @@ _This plugin does not contain any troubleshooting information._
 * 0.1.0 - Initial plugin
 
 # Links
-
+* [ServiceNow](https://www.servicenow.com/)
+* 
 ## References
 
 * [ServiceNow](https://www.servicenow.com/)
@@ -903,3 +933,4 @@ _This plugin does not contain any troubleshooting information._
 * [ServiceNow User Administration](https://docs.servicenow.com/bundle/rome-platform-administration/page/administer/roles/concept/c_UserAdministration.html)
 * [ServiceNow Operators](https://docs.servicenow.com/bundle/quebec-platform-user-interface/page/use/common-ui-elements/reference/r_OpAvailableFiltersQueries.html)
 * [ServiceNow Plugin Setup Guide](https://docs.rapid7.com/insightconnect/servicenow)
+

@@ -19,7 +19,7 @@ This plugin utilizes the [Mimecast API](https://www.mimecast.com/developer/docum
 
 # Supported Product Versions
 
-* Mimecast API 2022-04-22
+* Mimecast API 2022-11-07
 
 # Documentation
 
@@ -52,6 +52,111 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Track Messages
+
+This action is used to search for messages processing, and current state using specific message information. Either one of `send_from`, `send_to`, `subject`, `sender_ip` fields, or `message_id` must not be empty.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|end_date|date|None|False|The date and time of the latest message to track|None|Example Reason|
+|message_id|string|None|False|The internet message id of the message to track|None|ExampleID|
+|routes|[]string|None|False|An array of routes to filter by. Possible values are internal, outbound and inbound|None|["internal", "outbound"]|
+|search_reason|string|None|False|Reason for Tracking a email, used for activity tracking purposes|None|Example Reason|
+|send_from|string|None|False|The sending email address or domain of the messages to track|None|user@example.com|
+|send_to|string|None|False|The recipient email address or domain of the messages to track|None|user@example.com|
+|sender_ip|string|None|False|The source IP address of messages to track|None|192.168.0.1|
+|start_date|date|None|False|The date and time of the earliest message to track|None|Example Reason|
+|subject|string|None|False|The subject of the messages to track|None|Example Email Subject|
+
+Example input:
+
+```
+{
+  "end_date": "Example Reason",
+  "message_id": "ExampleID",
+  "routes": ["internal", "outbound"],
+  "search_reason": "Example Reason",
+  "send_from": "user@example.com",
+  "send_to": "user@example.com",
+  "sender_ip": "192.168.0.1",
+  "start_date": "Example Reason",
+  "subject": "Example Email Subject"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|tracked_emails|[]tracked_emails|True|An array of found tracked emails|
+
+Example output:
+
+```
+{
+  "tracked_emails": [
+    {
+      "detectionLevel": "",
+      "fromEnv": {
+        "emailAddress": "user@example.com"
+      },
+      "fromHdr": {
+        "emailAddress": ""
+      },
+      "id": "123456789",
+      "info": "Envelope Rejected",
+      "received": "2022-12-01T12:49:46+0000",
+      "route": "inbound",
+      "senderIP": "192.168.0.1",
+      "sent": "2022-12-01T12:49:46+0000",
+      "spamScore": 0,
+      "status": "rejected",
+      "subject": "Example Subject",
+      "to": [
+        {
+          "displayableName": "Example User",
+          "emailAddress": "user@example.com"
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### Delete Blocked Sender Policy
+
+This action deletes a blocked sender policy.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|The Mimecast secure ID of an existing policy to be deleted|None|eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi|
+
+Example input:
+
+```
+{
+  "id": "eWtOL3XZCOwG96BOiFTZRiC5rdvDmP4FFdwU2Y1DC1Us-gh7KyL5trUrZ9aEuzQMV7pPWWxTnPVtsJ6x3fajAh3cRskP0w8hNjaFFVkZB6G9dOytLM2ssQ7HY-p7gJoi"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|boolean|True|Success status of delete request|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### Get Audit Events
 
@@ -325,17 +430,15 @@ This action is used to create a blocked sender policy.
 
 ##### Input
 
-##### Input
-
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |description|string|None|True|A description for the policy which is kept with the email in the archive for future reference|None|A description|
 |from_part|string|envelope_from|True|Must be: envelope_from, header_from or both|['envelope_from', 'header_from', 'both']|envelope_from|
-|from_type|string|everyone|True|Can be one of: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone', 'internal_addresses', 'external_addresses', 'email_domain', 'profile_group', 'individual_email_address']|internal_addresses|
+|from_type|string|individual_email_address|True|Can be one of: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone', 'internal_addresses', 'external_addresses', 'email_domain', 'profile_group', 'individual_email_address']|internal_addresses|
 |from_value|string|None|False|Required if `From Type` is one of email_domain, profile_group, individual_email_address. Expected values: If `From Type` is email_domain, a domain name without the @ symbol. If `From Type` is profile_group, the ID of the profile group. If `From Type` is individual_email_address, an email address|None|user@example.com|
 |option|string|block_sender|True|The block, option must be: no_action or block_sender|['block_sender', 'no_action']|block_sender|
 |source_ips|string|None|False|A comma separated list of IP addresses using CIDR notation (X.X.X.X/XX). When set the policy only applies for connections from matching addresses|None|198.51.100.0/24|
-|to_type|string|everyone|True|Can be one of: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone', 'internal_addresses', 'external_addresses', 'email_domain', 'profile_group', 'individual_email_address']|everyone|
+|to_type|string|individual_email_address|True|Can be one of: everyone, internal_addresses, external_addresses, email_domain, profile_group or individual_email_address|['everyone', 'internal_addresses', 'external_addresses', 'email_domain', 'profile_group', 'individual_email_address']|everyone|
 |to_value|string|None|False|Required if `To Type` is one of email_domain, profile_group, individual_email_address. Expected values: If `To Type` is email_domain, a domain name without the @ symbol. If `To Type` is profile_group, the ID of the profile group. If `To Type` is individual_email_address, an email address|None|user@example.com|
 
 Example input:
@@ -706,8 +809,210 @@ Most common cloud [URLs](https://www.mimecast.com/tech-connect/documentation/api
 |Option|string|False|The option set for the policy. Will be one of no_action, block_sender|
 |Policy|policy|False|The policy that was created|
 
+#### group
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Description|string|None|False|The name of the group|None|
+|None|integer|None|False|None|None|
+|None|string|None|False|None|None|
+|None|string|None|False|None|None|
+|None|string|None|False|None|None|
+|None|integer|None|False|None|None|
+  
+#### click_logs
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Action|string|None|False|The action that was taken for the click|None|
+|Admin Override|string|None|False|The action defined by the administrator for the URL|None|
+|Category|string|None|False|The category of the URL clicked|None|
+|Date|string|None|False|The date that the URL was clicked|None|
+|Route|string|None|False|The route of the email that contained the link|None|
+|Scan Result|string|None|False|The result of the URL scan|None|
+|TTP Definition|string|None|False|The description of the definition that triggered the URL to be rewritten by Mimecast|None|
+|URL|string|None|False|The URL clicked|None|
+|User Awareness Action|string|None|False|The action taken by the user if user awareness was applied|None|
+|User Email Address|string|None|False|The email address of the user who clicked the link|None|
+|User Override|string|None|False|The action requested by the user|None|
+  
+#### audit_events_data
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Categories|[]string|None|False|A list of audit category types|['test', 'malware']|
+|End Date Time|string|None|True|The end date of events in ISO 8601 date time format|2015-12-03T10:15:30+0000|
+|Query|string|None|False|A character string to search for the audit events|test query|
+|Start Date Time|string|None|True|The start date of events in ISO 8601 date time format|2011-12-03T10:15:30+0000|
+  
+#### audit_events_request_pagination
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Page Size|integer|25|False|The number of results to request|None|
+|Page Token|string|None|False|The value of the next or previous fields from an earlier request|None|
+  
+#### audit_events_response
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Audit Type|string|None|False|The Mimecast audit type of the event|None|
+|Category|string|None|False|The category of the event|None|
+|Event Info|string|None|False|The detailed event information|None|
+|Event Time|string|None|False|The time of the event in ISO 8601 format|None|
+|ID|string|None|False|The Mimecast unique id of the event|None|
+  
+#### pagination
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Next|string|None|False|A pageToken value that can be used to request the next page of results. Only returned if there are more results to return|None|
+|Page Size|integer|None|False|The number of results requested|None|
+|Previous|string|None|False|A pageToken value that can be used to request the previous page of results. Only returned if there is a previous page|None|
+  
+#### search_criteria_object
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|End|string|None|False|The end date of messages included in ISO 8601 format|None|
+|File Hash|string|None|False|The file hash used in creation of the remediation incident|None|
+|From|string|None|False|The sender address of the message|None|
+|Message ID|string|None|False|The message id use in creation of the remediation incident|None|
+|Restore Code|string|None|False|The restore code used if the incident type is restore|None|
+|Start|string|None|False|The start date of messages included in ISO 8601 format|None|
+|Subject|string|None|False|Message subject line of the remediated message|None|
+|To|string|None|False|The recipient email address of the message|None|
+|Unremediate Code|string|None|False|The Mimecast code used to restore a previously remediated message|None|
+|URL|string|None|False|URL used to create the remediation incident, if remediation type is URL|None|
+  
+#### response_remediation_incident
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Code|string|None|False|The incident code generated at creation, to be used as a reference for the remediation incident lookup|None|
+|Create|string|None|False|Timestamp of the incident creation in ISO 8601 format|None|
+|Failed|integer|None|False|The number of messages that failed to remediate|None|
+|File Remediation Can be Cancelled|boolean|None|False|Indicates whether the file remediation incident can still be cancelled|None|
+|File Remediation Cancelled|string|None|False|Timestamp of an incident cancellation, if it has been cancelled, in ISO 8601 format|None|
+|File Remediation Expiry Time|string|None|False|Timestamp of a file-bases remediation should expiration in ISO 8601 format|None|
+|ID|string|None|False|The Mimecast secure ID of the remediation incident|None|
+|Identified|integer|None|False|Number of messages identified with provided search criteria|None|
+|Modified|string|None|False|Timestamp of the incident's last modification date in ISO 8601 format|None|
+|Reason|string|None|False|The reason provided at the creation of the remediation incident|None|
+|Remediated by|string|None|False|Email address of the user who created the remediation incident|None|
+|Remove From Device|string|None|False|The devices where the downloaded file should be removed from|None|
+|Restored|integer|None|False|The number of messages that were restored, if incident was a restore|None|
+|Search Criteria Object|search_criteria_object|None|False|The search criteria used to identify messages|None|
+|Successful|integer|None|False|The number of successfully remediated messages|None|
+|Type|string|None|False|Type of incident|None|
+  
+#### searchCriteria
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|End|string|None|False|The end date from the remediation incident creation|None|
+|File Hash|string|None|False|The file hash provided during the remediation incident creation|None|
+|From|string|None|False|The sender address provided at the remediation incident creation|None|
+|Message ID|string|None|False|The message ID provided during the remediation incident creation|None|
+|Restore Code|string|None|False|The code provided to restore a message|None|
+|Start|string|None|False|The start date from the remediation incident creation|None|
+|To|string|None|False|The recipient address provided at the remediation incident creation|None|
+|Unremediate Code|string|None|False|Code used to restore messages that were previously removed by remediation incident|None|
+  
+#### get_remediation_incident_response
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Code|string|None|False|Incident code, used as a reference for a remediation incident|None|
+|Create|string|None|False|Date that the remediation incident was created|None|
+|Failed|integer|None|False|The number of messages that failed to remediate as part of the incident|None|
+|ID|string|None|False|The Mimecast ID of the remediation incident, provided when the incident was created|None|
+|Identified|integer|None|False|Number of messages identified by the search criteria|None|
+|Modified|string|None|False|Date that the remediation incident was last updated|None|
+|Reason|string|None|False|The reason provided when an incident was created|None|
+|Restored|integer|None|False|The number of messages restored as part of the incident|None|
+|Searchcriteria|[]searchCriteria|None|False|Conditions used to build a remediation incident. Includes messageId, file-hash, from or to addresses.|None|
+|Successful|integer|None|False|The number of messages successfully remediated as part of the incident|None|
+|Type|string|None|False|The type of incident action taken. Can be one of notify_only, automatic, manual or restored|None|
+  
+#### find_remediation_searchBy
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Field Name|string|None|False|Incident fields to filter based on|None|
+|Value|string|None|False|The text used to filter results|None|
+  
+#### find_remediation_filterBy
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Type|string|None|False|Specify the type of incidents to return|None|
+  
+#### searchCritera
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|End|string|None|False|Date of most recent incidents to return|None|
+|File Hash|string|None|False|File hash used to create remediation incident|None|
+|From|string|None|False|Sender address or domain name used to create remediation incident|None|
+|Message ID|string|None|False|Message ID used to create remediation incident|None|
+|Restore Code|string|None|False|Restore code for remediation event|None|
+|Start|string|None|False|Date of oldest results to return|None|
+|To|string|None|False|Recipient address or domain name used to create remediation incident|None|
+|Unremediate Code|string|None|False|Code required to perform a message restoration|None|
+  
+#### incidents
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Code|string|None|False|The remediation incident unique code|None|
+|Create|string|None|False|The time stamp of the incident creation|None|
+|Failed|integer|None|False|The number of messages that failed to remediate|None|
+|ID|string|None|False|The Mimecast secure ID of the remediation incident|None|
+|Identified|integer|None|False|The total number of messages identified as part of the remediation incident|None|
+|Modified|string|None|False|The time stamp of the last modification to the incident|None|
+|Reason|string|None|False|The reason provided when the remediation incident was created|None|
+|Restored|integer|None|False|The number of messages restored from the remediation incident|None|
+|Search Criteria|searchCritera|None|False|Criteria used when the remediation incident was created|None|
+|Successful|integer|None|False|The number of messages sucessfully rememdiated|None|
+|Type|string|None|False|The incident type|None|
+  
+#### sender
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Display Name|string|None|False|The display name of the sender|None|
+|Email Address|string|None|False|The email address of the sender|None|
+  
+#### recipient
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Display Name|string|None|False|The display name of the recipient|None|
+|Email Address|string|None|False|The email address of the recipient|None|
+  
+#### tracked_emails
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Attachments|boolean|None|False|Indicates whether the message has attachments or not|None|
+|Detection Level|string|None|False|The spam scanning level applied to the message|None|
+|Envelope From|sender|None|False|An object describing the envelope from address of the message|None|
+|Header From|sender|None|False|An object describing the header from address information of the message|None|
+|ID|string|None|False|The Mimecast ID of the message|None|
+|Received|date|None|False|The date and time the message was received by Mimecast|None|
+|Route|string|None|False|The route of the message|None|
+|Sender IP Address|string|None|False|The source IP address of the message|None|
+|Sent|date|None|False|The date and time that the message was sent / processed by Mimecast|None|
+|Spam Score|integer|None|False|The spam score of the received message|None|
+|Status|string|None|False|The status of the message|None|
+|Subject|string|None|False|The subject of the message|None|
+|To|[]recipient|None|False|An array of recipients|None|
+
 # Version History
 
+* 5.1.0 - Create Blocked Sender Policy: Changed defaults to `individual_email_address` | New actions added `Delete Blocked Sender Policy`, `Track Messages`
+* 5.0.2 - Add Group Member: Fix issue when users were running into email validation error when they add a domain, and leave the email address blank on the input section. 
 * 5.0.1 - Add Sandbox availability in region
 * 5.0.0 - Update SDK version | Add new action Get Audit Events | Add unit tests for all actions | Update error handling for all action | Create separate class for API communication | Add base URL of API for plugin
 * 4.1.2 - Fix bug in connection test where it could succeed when an empty response was returned

@@ -1,7 +1,7 @@
 {
-	"spec": "150f7c75c0ac52ad1a017dc3e9f92a80",
-	"manifest": "eaefa9c03ca19f01fa78a14fbd7aca35",
-	"setup": "2f189b9563206907678d0cfa09b5a1dd",
+	"spec": "b387bdab80546236a7043d6982eae98a",
+	"manifest": "f2f5130044976fa71ce03da730f3d9ca",
+	"setup": "db46fc54bf6cd8b9e0fc11caa500f7ee",
 	"schemas": [
 		{
 			"identifier": "add_cve/schema.py",
@@ -12,12 +12,16 @@
 			"hash": "66fe76d79131cfff95fd23f003539a3d"
 		},
 		{
+			"identifier": "close_alert/schema.py",
+			"hash": "a00a397f8cc0537782cf1d5d46541edb"
+		},
+		{
 			"identifier": "delete_cve/schema.py",
 			"hash": "0bd73096ae2b4dd18396fbe7a2e0b839"
 		},
 		{
 			"identifier": "enrich_indicator/schema.py",
-			"hash": "4d346b90ed493e6309e69697907b3d09"
+			"hash": "83ad63da1ea54bf4d5d189fea2045962"
 		},
 		{
 			"identifier": "get_alerts/schema.py",
@@ -29,35 +33,43 @@
 		},
 		{
 			"identifier": "get_cve_by_id/schema.py",
-			"hash": "0b26d5609b350e9b265f49a76e18d4dc"
+			"hash": "9ea5f7d30ad7343e3ff6e990ce057f07"
 		},
 		{
 			"identifier": "get_cve_list/schema.py",
-			"hash": "ba3057890826e4229feabe2c437d3c45"
+			"hash": "9918492fdea385b6dc3845b9698613ed"
+		},
+		{
+			"identifier": "get_cves_for_cyber_term/schema.py",
+			"hash": "c10953e71157ceb20c3f369726a8d824"
+		},
+		{
+			"identifier": "get_cyber_terms_by_filter/schema.py",
+			"hash": "74a9b711bf913189724cde8bb9ffa5b3"
 		},
 		{
 			"identifier": "get_indicator_by_value/schema.py",
-			"hash": "68cf2854714b7354fdd68077367cc6ea"
+			"hash": "a4bf67df5264e5c09248fc41445c6910"
 		},
 		{
-			"identifier": "get_indicator_scan_status/schema.py",
-			"hash": "da46d94cb70a3ad32d719881a4fde656"
+			"identifier": "get_iocs_by_filter/schema.py",
+			"hash": "0f9e5ef82976cf67f3638fca308f0878"
 		},
 		{
-			"identifier": "rescan_indicator/schema.py",
-			"hash": "9d70900a799a50bafa5b1ba9245b8fe3"
+			"identifier": "get_iocs_for_cyber_term/schema.py",
+			"hash": "c5737cb86bef41ce6ba1279ecd74553a"
 		},
 		{
 			"identifier": "takedown_request/schema.py",
-			"hash": "623d2b1efc3739038015ed9904bea097"
+			"hash": "31383da92de3265ef8d73f989239ff48"
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "4d9563dcc56614543713c05f554ef869"
+			"hash": "896840a491b74c638da0f142327f09b9"
 		},
 		{
 			"identifier": "new_alert/schema.py",
-			"hash": "cbcf47cda6776a944cd816d50354f675"
+			"hash": "786eb607bd05a7767383a628b8bbaf35"
 		}
 	]
 }

@@ -1,0 +1,51 @@
+{
+	"spec": "fb3cfe53f940d5f7649029c15ae1dd32",
+	"manifest": "1552dc5c6436b1e3f390efc758dbb2f3",
+	"setup": "2bdb2e8cac5ac523f99f74f74d02f5dc",
+	"schemas": [
+		{
+			"identifier": "createIncident/schema.py",
+			"hash": "428c947430a343393e935992f1528e00"
+		},
+		{
+			"identifier": "getIncidentById/schema.py",
+			"hash": "bcec52cdaa7183a91a116e48cb783d90"
+		},
+		{
+			"identifier": "getIncidentByNumber/schema.py",
+			"hash": "2eb0cd07129de1b0544a8495c36363d2"
+		},
+		{
+			"identifier": "listIncidents/schema.py",
+			"hash": "0449f4bb7edf306fcb6b83be7d336514"
+		},
+		{
+			"identifier": "listLocationsAndBranches/schema.py",
+			"hash": "0276c9a5ecf232ca1fc5001e7d6b54ca"
+		},
+		{
+			"identifier": "listOperatorGroups/schema.py",
+			"hash": "fbb3d36131a586e114834933e759e8ba"
+		},
+		{
+			"identifier": "listOperators/schema.py",
+			"hash": "da98435dac7b515578a52f7e75e56691"
+		},
+		{
+			"identifier": "listSuppliers/schema.py",
+			"hash": "ff5560cc1be20f01d0ab8bfc385edb17"
+		},
+		{
+			"identifier": "updateIncidentById/schema.py",
+			"hash": "f7b6a1faa31a2d3b3777a1bf0a681feb"
+		},
+		{
+			"identifier": "updateIncidentByNumber/schema.py",
+			"hash": "266612480e38c40fea7b1ebce8b0c1ea"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "c838e1bb14f1e4b0cfdb8d8143a91282"
+		}
+	]
+}

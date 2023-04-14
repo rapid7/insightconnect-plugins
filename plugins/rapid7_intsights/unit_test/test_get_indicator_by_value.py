@@ -29,14 +29,15 @@ class TestGetIndicatorByValue(TestCase):
             "related_threat_actors": ["doppelspider"],
             "score": 100,
             "severity": "High",
-            "sources": [{"ConfidenceLevel": 3, "Name": "AlienVault OTX"}],
+            "sources": [{"confidenceLevel": 3, "name": "AlienVault OTX"}],
             "system_tags": ["Phishing"],
             "tags": ["MyTag_1"],
             "type": "Domains",
             "value": "rapid7.com",
-            "whitelist": "false",
+            "whitelist": False,
+            "reported_feeds": [{"id": "SampleID", "confidenceLevel": 3, "name": "AlienVault OTX"}],
         }
-        self.assertEqual(expected, actual)
+        self.assertEqual(actual, expected)
 
     @patch("requests.request", side_effect=Util.mock_request)
     def test_get_indicator_by_value_should_success_when_empty(self, make_request):
@@ -50,5 +51,6 @@ class TestGetIndicatorByValue(TestCase):
             "system_tags": [],
             "tags": [],
             "whitelist": False,
+            "reported_feeds": [],
         }
-        self.assertEqual(expected, actual)
+        self.assertEqual(actual, expected)

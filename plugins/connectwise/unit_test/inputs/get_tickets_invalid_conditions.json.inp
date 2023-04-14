@@ -1,0 +1,5 @@
+{
+  "conditions": "ticket condition = invalid",
+  "pageSize": 2,
+  "page": 2
+}

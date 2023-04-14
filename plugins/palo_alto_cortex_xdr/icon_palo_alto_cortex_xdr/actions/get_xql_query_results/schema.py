@@ -53,7 +53,7 @@ class GetXqlQueryResultsInput(insightconnect_plugin_runtime.Input):
     "tenants": {
       "type": "array",
       "title": "Tenants",
-      "description": "String that represents additional information regarding the action",
+      "description": "List of strings used when querying tenants managed by Managed Security Services Providers (MSSP)",
       "items": {
         "type": "string"
       },
@@ -80,7 +80,7 @@ class GetXqlQueryResultsOutput(insightconnect_plugin_runtime.Output):
     "reply": {
       "$ref": "#/definitions/reply",
       "title": "Reply",
-      "description": "Was the operation successful",
+      "description": "Object containing the query data results",
       "order": 1
     }
   },
@@ -108,9 +108,9 @@ class GetXqlQueryResultsOutput(insightconnect_plugin_runtime.Output):
           "order": 4
         },
         "results": {
-          "type": "object",
+          "$ref": "#/definitions/xql_query_result",
           "title": "Results",
-          "description": "Displays the API response in either of the following fields according to the number of results: data: API results according to defined format field stream: id String representing a unique ID of more than 1000 number of results",
+          "description": "API results according to defined format field",
           "order": 5
         },
         "status": {
@@ -118,6 +118,50 @@ class GetXqlQueryResultsOutput(insightconnect_plugin_runtime.Output):
           "title": "Status",
           "description": "API call status: 'SUCCESS', 'FAIL', 'PENDING', 'PARTIAL_SUCCESS'",
           "order": 1
+        }
+      },
+      "definitions": {
+        "xql_query_result": {
+          "type": "object",
+          "title": "xql_query_result",
+          "properties": {
+            "data": {
+              "type": "array",
+              "title": "Data",
+              "description": "List of obtained data results",
+              "items": {
+                "type": "object"
+              },
+              "order": 1
+            },
+            "stream_id": {
+              "type": "string",
+              "title": "Event Subtype",
+              "description": "String representing a unique ID of more than 1000 number of results",
+              "order": 2
+            }
+          }
+        }
+      }
+    },
+    "xql_query_result": {
+      "type": "object",
+      "title": "xql_query_result",
+      "properties": {
+        "data": {
+          "type": "array",
+          "title": "Data",
+          "description": "List of obtained data results",
+          "items": {
+            "type": "object"
+          },
+          "order": 1
+        },
+        "stream_id": {
+          "type": "string",
+          "title": "Event Subtype",
+          "description": "String representing a unique ID of more than 1000 number of results",
+          "order": 2
         }
       }
     }

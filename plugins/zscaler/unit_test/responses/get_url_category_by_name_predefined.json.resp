@@ -1,0 +1,36 @@
+{
+  "id":"RADIO_STATIONS",
+  "superCategory":"ENTERTAINMENT_AND_RECREATION",
+  "keywords":[
+    "keyword1"
+  ],
+  "keywordsRetainingParentCategory":[
+    "keyword2"
+  ],
+  "urls":[
+    "example.com"
+  ],
+  "dbCategorizedUrls":[
+
+  ],
+  "ipRanges":[
+
+  ],
+  "ipRangesRetainingParentCategory":[
+
+  ],
+  "customCategory":false,
+  "editable":true,
+  "description":"RADIO_STATIONS_DESC",
+  "type":"URL_CATEGORY",
+  "urlKeywordCounts":{
+    "totalUrlCount":1,
+    "retainParentUrlCount":0,
+    "totalKeywordCount":2,
+    "retainParentKeywordCount":1
+  },
+  "customUrlsCount":1,
+  "urlsRetainingParentCategoryCount":1,
+  "customIpRangesCount":0,
+  "ipRangesRetainingParentCategoryCount":0
+}

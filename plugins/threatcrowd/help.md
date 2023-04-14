@@ -13,11 +13,27 @@ and other information to discover and enrich information about threats in real-t
 
 _This plugin does not contain any requirements._
 
+# Supported Product Versions
+
+* Threatcrowd API 2022-11-02
+
 # Documentation
 
 ## Setup
 
-_This plugin does not contain a connection._
+The connection configuration accepts the following parameters:
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|ssl_verification|boolean|True|True|Indicates whether to verify SSL certificate or not|None|True|
+
+Example input:
+
+```
+{
+  "ssl_verification": true
+}
+```
 
 ## Technical Details
 
@@ -356,6 +372,8 @@ This variable can be used in automated decisions to check if ThreatCrowd has inf
 
 # Version History
 
+* 4.0.0 - Plugin is made Obsolete
+* 3.1.0 - Connection: Add SSL Verification boolean field that indicates whether to verify SSL certificate or not | Add unittests
 * 3.0.3 - Add PluginException for case 'Too many connections' response from server | Change IP address in api.py file
 * 3.0.2 - Add source and license URLs in plugin spec | Set `USER` to `nobody` in Dockerfile
 * 3.0.1 - Add Hash input conversion to lowercase in the Hash action to match API requirements

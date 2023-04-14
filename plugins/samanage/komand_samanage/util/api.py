@@ -4,31 +4,74 @@ import shutil
 from tempfile import mkdtemp
 from base64 import b64decode
 from requests import request, HTTPError
-import komand
-from komand.exceptions import ConnectionTestException
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
+
+
+def is_key_id_field(key_to_check):
+    """
+    Check if the key passed in matches one of the known id key type fields
+    """
+    return bool(key_to_check == "id" or key_to_check.endswith("_id") or key_to_check.endswith("_ids"))
+
+
+def update_id_values_to_integers(data):
+    """
+    According to the Solarwinds (Samanage) API, Ids can be returned as either integers or strings
+    In order to ensure consistency and allow output checking, convert all ids to be integers
+    """
+    for key, value in data.items():
+        if isinstance(value, dict):
+            # Item is a dict - recursive use of function
+            update_id_values_to_integers(value)
+        elif isinstance(value, list):
+            # Item is a list - recursive use of function if dict else update any id fields
+            for index, element in enumerate(value):
+                if isinstance(value[index], dict):
+                    update_id_values_to_integers(value[index])
+                elif is_key_id_field(key):
+                    value[index] = int(element)
+
+        else:
+            if is_key_id_field(key):
+                # Item is a key field - update
+                data[key] = int(value)
 
 
 class SamanageAPI:
-    def __init__(self, token, is_eu_customer, logger):
+    def __init__(self, token, is_eu_customer, ssl_verify, logger):
         self.token = token
         self.logger = logger
         self.api_url = "https://apieu.samanage.com/" if is_eu_customer else "https://api.samanage.com/"
-        # Test the connection
-        self.list_incidents()
+        self.ssl_verify = ssl_verify
+
+    def list_incidents_check(self):
+        # This function is to check that an API call can be successfully made  - no cleaning of the output is required
+        response = self._call_api("GET", "incidents")
+        return response
 
     def list_incidents(self):
-        return self._call_api("GET", "incidents")
+        response = self._call_api("GET", "incidents")
+        # Update response data to change ids to integers if necessary
+        for item in response:
+            update_id_values_to_integers(item)
+        return response
 
     def get_incident(self, incident_id):
-        url = "incidents/{}".format(incident_id)
+        url = f"incidents/{incident_id}"
 
-        return self._call_api("GET", url, params={"layout": "long", "audit_archive": True})
+        response = self._call_api("GET", url, params={"layout": "long", "audit_archive": True})
+        # Update response data to change ids to integers if necessary
+        update_id_values_to_integers(response)
+        return response
 
     def add_tags_to_incident(self, incident_id, tags):
-        url = "incidents/{}".format(incident_id)
+        url = f"incidents/{incident_id}"
         json = {"incident": {"add_to_tag_list": ", ".join(tags)}}
-
-        return self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
+        response = self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
+        # Update response data to change ids to integers if necessary
+        update_id_values_to_integers(response)
+        return response
 
     def create_incident(
         self,
@@ -59,37 +102,54 @@ class SamanageAPI:
                 "category": {"name": category_name} if category_name else None,
             }
         }
-        json = komand.helper.clean(json)
+        json = insightconnect_plugin_runtime.helper.clean(json)
+        response = self._call_api("POST", url, json=json, params={"layout": "long", "audit_archive": True})
+        # Update response data to change ids to integers if necessary
+        update_id_values_to_integers(response)
+        return response
 
-        return self._call_api("POST", url, json=json, params={"layout": "long", "audit_archive": True})
+    def delete_incident(self, incident_id):
+        url = f"incidents/{incident_id}"
+        return self._call_api("DELETE", url)
 
     def comment_incident(self, incident_id, body, is_private):
-        url = "incidents/{}/comments".format(incident_id)
+        url = f"incidents/{incident_id}/comments"
         json = {"comment": {"body": body, "is_private": is_private}}
 
-        return self._call_api("POST", url, json=json)
+        response = self._call_api("POST", url, json=json)
+        # Update response data to change ids to integers if necessary
+        update_id_values_to_integers(response)
+        return response
 
     def get_comments(self, incident_id):
-        url = "incidents/{}/comments".format(incident_id)
+        url = f"incidents/{incident_id}/comments"
 
-        return self._call_api("GET", url)
+        response = self._call_api("GET", url)
+        # Update response data to change ids to integers if necessary
+        for value in response:
+            update_id_values_to_integers(value)
+        return response
 
     def assign_incident(self, incident_id, assignee):
-        url = "incidents/{}".format(incident_id)
+        url = f"incidents/{incident_id}"
 
         json = {"incident": {"assignee": {"email": assignee}}}
-
-        return self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
+        response = self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
+        # Update response data to change ids to integers if necessary
+        update_id_values_to_integers(response)
+        return response
 
     def change_incident_state(self, incident_id, state):
-        url = "incidents/{}".format(incident_id)
+        url = f"incidents/{incident_id}"
 
         json = {"incident": {"state": state}}
-
-        return self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
+        response = self._call_api("PUT", url, json=json, params={"layout": "long", "audit_archive": True})
+        # Update response data to change ids to integers if necessary
+        update_id_values_to_integers(response)
+        return response
 
     def attach_file_to_incident(self, incident_id, attachment_bytes, attachment_name):
-        self.logger.info("Attaching a file to an incident {}".format(incident_id))
+        self.logger.info(f"Attaching a file to an incident {incident_id}")
         try:
             temp_dir = mkdtemp()
             file_path = os.path.join(temp_dir, attachment_name)
@@ -97,32 +157,52 @@ class SamanageAPI:
             with open(file_path, "w+b") as temp_file:
                 temp_file.write(b64decode(attachment_bytes))
 
-            curl_command = (
-                'curl -H "X-Samanage-Authorization: Bearer {}" '
-                '-F "file[attachable_type]=Incident" '
-                '-F "file[attachable_id]={}" '
-                '-F "file[attachment]=@{}" '
-                '-H "Accept: application/vnd.samanage.v2.1+json" '
-                '-H "Content-Type: multipart/form-data" --insecure '
-                "-X POST {}attachments.json"
-            ).format(self.token, incident_id, file_path, self.api_url)
-            result = komand.helper.exec_command(curl_command)
+            # Use the --insecure option if ssl verification is false
+            if self.ssl_verify:
+                ssl_verify_option = ""
+            else:
+                ssl_verify_option = "--insecure"
 
+            curl_command = (
+                f'curl -H "X-Samanage-Authorization: Bearer {self.token}" '
+                '-F "file[attachable_type]=Incident" '
+                f'-F "file[attachable_id]={incident_id}" '
+                f'-F "file[attachment]=@{file_path}" '
+                '-H "Accept: application/vnd.samanage.v2.1+json" '
+                f'-H "Content-Type: multipart/form-data" {ssl_verify_option} '
+                f'-X POST "{self.api_url}attachments.json" '
+            )
+
+            result = insightconnect_plugin_runtime.helper.exec_command(curl_command)
             shutil.rmtree(temp_dir)
-        except Exception as e:
-            raise Exception("Failed create a temp file: {}".format(e))
+        except Exception as error:
+            raise PluginException(
+                cause=f"Failed creating a temporary file: {error}",
+                assistance="Check if a temporary file can be created",
+            )
 
         if result["rcode"] != 0:
-            raise Exception("Failed run cURL: {}".format(result["stderr"]))
+            raise PluginException(
+                cause=f'Failure running curl command while attaching file: {result["stderr"]}',
+                assistance="Check if there are sufficient permissions for the curl command to run",
+            )
 
         try:
             attachment = json.loads(result["stdout"])
+            update_id_values_to_integers(attachment)
             return attachment
         except json.JSONDecodeError:
-            raise Exception("Failed to attach a file: {}".format(result["stdout"]))
+            raise PluginException(
+                cause=f'Failure in return response while attaching file: {result["stdout"]}',
+                assistance="Check if there are sufficient permissions for file attachment",
+            )
 
     def list_users(self):
-        return self._call_api("GET", "users")
+        response = self._call_api("GET", "users")
+        # Update response data to change ids to integers if necessary
+        for item in response:
+            update_id_values_to_integers(item)
+        return response
 
     def create_user(self, email, name=None, phone=None, mobile_phone=None, role=None, department=None):
         json = {
@@ -135,18 +215,19 @@ class SamanageAPI:
                 "department": {"name": department} if department else None,
             }
         }
-        json = komand.helper.clean(json)
-
-        return self._call_api("POST", "users", json=json)
+        json = insightconnect_plugin_runtime.helper.clean(json)
+        response = self._call_api("POST", "users", json=json)
+        # Update response data to change ids to integers if necessary
+        update_id_values_to_integers(response)
+        return response
 
     def delete_user(self, user_id):
-        url = "users/{}".format(user_id)
+        url = f"users/{user_id}"
         return self._call_api("DELETE", url)
 
     def _call_api(self, method, url, params=None, json=None, data=None, files=None):
-        api_url = "{}{}.json".format(self.api_url, url)
-
-        self.logger.info("Calling API URL {}".format(api_url))
+        api_url = f"{self.api_url}{url}.json"
+        self.logger.info(f"Calling API URL {api_url}")
 
         try:
             response = request(
@@ -156,8 +237,9 @@ class SamanageAPI:
                 data=data,
                 json=json,
                 files=files,
+                verify=self.ssl_verify,
                 headers={
-                    "X-Samanage-Authorization": "Bearer {}".format(self.token),
+                    "X-Samanage-Authorization": f"Bearer {self.token}",
                     "Accept": "application/vnd.samanage.v2.1+json",
                 },
             )
@@ -167,6 +249,8 @@ class SamanageAPI:
                 # Auth failure returns: HTTP/1.1" 401 None b''
                 if not response.content:
                     raise ConnectionTestException(preset=ConnectionTestException.Preset.API_KEY)
-            raise Exception("API returned an error: {} {}".format(response.status_code, response.content))
-
-        return komand.helper.clean(response.json())
+            raise PluginException(
+                cause=f"API returned an error: {response.status_code} {response.content}",
+                assistance="Check input and retry. If this error continues contact support",
+            )
+        return insightconnect_plugin_runtime.helper.clean(response.json())

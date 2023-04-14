@@ -1,0 +1,8 @@
+{
+  "incidentNumber": "INC00fake404",
+  "locationCompany": "MyCompany",
+  "notes": "Unit test task notes",
+  "priority": "Medium",
+  "summary": "UnitTestTaskSummary",
+  "taskName": "my name task unit test"
+}
