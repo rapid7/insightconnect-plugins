@@ -50,7 +50,11 @@ class TestAPI(TestCase):
         num_retries = 50
         mock_refresh.return_value = "blah"
         api = ZoomAPI(
-            account_id="blah", client_id="blah", client_secret="blah", oauth_retry_limit=num_retries, logger=logging.getLogger()
+            account_id="blah",
+            client_id="blah",
+            client_secret="blah",
+            oauth_retry_limit=num_retries,
+            logger=logging.getLogger(),
         )
 
         mock_request.side_effect = [MockResponse(status_code=401) for _ in range(0, num_retries)]
