@@ -1,0 +1,22 @@
+{
+   "parameters":[
+      [
+         ["good_agent_id_multiple"],
+         604800,
+         true,
+         {
+            "success": ["abcdef"],
+            "failure": []
+         }
+      ],
+      [
+         ["bad_agent_id_multiple"],
+         604800,
+         true,
+         {
+            "success": [],
+            "failure": ["abcdef"]
+         }
+      ]
+   ]
+}
