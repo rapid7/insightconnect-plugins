@@ -5,7 +5,7 @@ Armorblox secures enterprise communications over email and other cloud office ap
 # Key Features
 
 * Fetches incidents detected by Armorblox for the given tenant.
-* Retrieves the remedation action for a given incident.
+* Retrieves the remediation action for a given incident.
 
 # Requirements
 
