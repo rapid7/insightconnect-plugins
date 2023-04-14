@@ -9,7 +9,7 @@ Armorblox secures enterprise communications over email and other cloud office ap
 
 # Requirements
 
-* Requires an API Key from the product.
+* Requires an API key from the product.
 
 # Supported Product Versions
 
