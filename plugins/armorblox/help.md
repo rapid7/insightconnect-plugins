@@ -160,4 +160,4 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [Armorblox](LINK TO PRODUCT/VENDOR WEBSITE)
+* [Armorblox](https://www.armorblox.com/)
