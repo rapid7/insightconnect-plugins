@@ -31,7 +31,7 @@ Example input:
 ```
 {
   "api_key": "9de5069c5afe602b2ea0a04b66beb2c0",
-  "tenant_name": "outbound-integrations"
+  "tenant_name": "my-tenant-name"
 }
 ```
 
