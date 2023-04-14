@@ -264,7 +264,4 @@ class ZoomAPI:
         return PluginException(cause="Account is rate-limited by an unknown quota.", assistance="Try again later.")
 
     def _is_using_oauth(self) -> bool:
-        if (self.account_id and self.client_id and self.client_secret) or self.oauth_token:
-            return True
-        else:
-            return False
+        return bool((self.account_id and self.client_id and self.client_secret) or self.oauth_token)
