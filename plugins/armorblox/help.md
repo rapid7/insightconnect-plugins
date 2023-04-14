@@ -72,7 +72,7 @@ Example output:
 
 #### Get Incidents
 
-This trigger is used to get a list of incidents identified by Armorblox, by default it starts polling all the incidents since last day.
+This trigger is used to get a list of incidents identified by Armorblox. By default, it starts polling all the incidents since last day.
 
 ##### Input
 
