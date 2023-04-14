@@ -20,6 +20,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         client_secret = params.get(Input.CLIENT_SECRET, {}).get(secret_key)
         oauth_authentication_retry_limit = params.get(Input.AUTHENTICATION_RETRY_LIMIT, 5)
 
+        # JWT input
         jwt_token = params.get(Input.JWT_TOKEN, {}).get(secret_key)
 
         if jwt_token:
