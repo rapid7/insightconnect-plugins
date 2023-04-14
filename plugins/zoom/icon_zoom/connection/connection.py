@@ -14,9 +14,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
     def connect(self, params):
         secret_key = "secretKey"  # nosec: B105
 
+        # OAuth inputs
         account_id = params.get(Input.ACCOUNT_ID, {}).get(secret_key)
         client_id = params.get(Input.CLIENT_ID, {}).get(secret_key)
         client_secret = params.get(Input.CLIENT_SECRET, {}).get(secret_key)
+        oauth_authentication_retry_limit = params.get(Input.AUTHENTICATION_RETRY_LIMIT, 5)
+
         jwt_token = params.get(Input.JWT_TOKEN, {}).get(secret_key)
 
         if jwt_token:
@@ -29,6 +32,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 account_id=account_id,
                 client_id=client_id,
                 client_secret=client_secret,
+                oauth_retry_limit=oauth_authentication_retry_limit
             )
         else:
             raise PluginException(
