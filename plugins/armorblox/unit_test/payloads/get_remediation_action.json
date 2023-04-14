@@ -5,7 +5,7 @@
    "users":[
       {
          "name":"John Doe",
-         "email":"james@armorblox.dev",
+         "email":"john.doe@acme.com",
          "is_vip":false
       }
    ],
