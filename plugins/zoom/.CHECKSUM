@@ -1,5 +1,5 @@
 {
-	"spec": "d8e257125d799a257b9a737cf2f91836",
+	"spec": "d761994a31bceaad443d92a3360c684c",
 	"manifest": "c6d21865840af36d4c533cd3a063613f",
 	"setup": "c63b0baf19567cdf79670f42e4dd8777",
 	"schemas": [
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "bd5152d91d04053f8ef4234ea03bbb7b"
+			"hash": "eba2f34fe6858ab2769d8086e6441d01"
 		},
 		{
 			"identifier": "monitor_sign_in_out_activity/schema.py",
