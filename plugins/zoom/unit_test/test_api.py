@@ -35,8 +35,9 @@ class TestAPI(TestCase):
     @patch(REQUESTS_PATH)
     def test_unauthenticated_first_run_oauth_retry_limit_met(self, mock_request, mock_refresh):
         mock_refresh.return_value = "blah"
-        api = ZoomAPI(account_id="blah", client_id="blah", client_secret="blah", oauth_retry_limit=1,
-                      logger=logging.getLogger())
+        api = ZoomAPI(
+            account_id="blah", client_id="blah", client_secret="blah", oauth_retry_limit=1, logger=logging.getLogger()
+        )
 
         mock_request.side_effect = [MockResponse(status_code=401), MockResponse(status_code=200)]
 

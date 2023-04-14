@@ -31,7 +31,7 @@ class ZoomAPI:
         client_id: Optional[str] = None,  # For OAuth only
         client_secret: Optional[str] = None,  # For OAuth only
         oauth_retry_limit: Optional[int] = 5,  # For OAuth only
-        jwt_token: Optional[str] = None  # For JWT auth only
+        jwt_token: Optional[str] = None,  # For JWT auth only
     ):
         self.api_url = "https://api.zoom.us/v2"
         self.oauth_url = "https://zoom.us/oauth/token"
@@ -174,7 +174,7 @@ class ZoomAPI:
                         "json_data": json_data,
                         "allow_404": allow_404,
                     },
-                    retry_401_count=retry_401_count
+                    retry_401_count=retry_401_count,
                 )
 
             raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
@@ -195,8 +195,10 @@ class ZoomAPI:
         exceptions_4xx = {
             400: PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.json()),
             404: PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.json()),
-            409: PluginException(cause="User already exists.", assistance="Please check your input and try again.", data=response.json()),
-            429: self.get_exception_for_rate_limit(response=response)
+            409: PluginException(
+                cause="User already exists.", assistance="Please check your input and try again.", data=response.json()
+            ),
+            429: self.get_exception_for_rate_limit(response=response),
         }
 
         # Success; no content
@@ -216,10 +218,12 @@ class ZoomAPI:
         if response.status_code == 401:
             if self.oauth_token or self._is_using_oauth():
                 if retry_401_count == (self.oauth_retry_limit - 1):  # -1 to account for retries starting at 0
-                    raise PluginException(cause="OAuth authentication retry limit was met.",
-                                          assistance="Ensure your OAuth connection credentials are valid. "
-                                                     "If running a large number of integrations with Zoom, consider "
-                                                     "increasing the OAuth authentication retry limit to accommodate.")
+                    raise PluginException(
+                        cause="OAuth authentication retry limit was met.",
+                        assistance="Ensure your OAuth connection credentials are valid. "
+                        "If running a large number of integrations with Zoom, consider "
+                        "increasing the OAuth authentication retry limit to accommodate.",
+                    )
                 self.logger.info(f"Received HTTP {response.status_code}, re-authenticating to Zoom...")
                 retry_401_count += 1
                 self._refresh_oauth_token()
@@ -232,8 +236,10 @@ class ZoomAPI:
 
         # If we reach this point, all known/documented status codes have been exhausted, so the Zoom API has likely
         # changed and the plugin will require an update.
-        raise PluginException(cause=f"Received an undocumented status code from the Zoom API ({response.status_code})",
-                              assistance="Please contact support for assistance.")
+        raise PluginException(
+            cause=f"Received an undocumented status code from the Zoom API ({response.status_code})",
+            assistance="Please contact support for assistance.",
+        )
 
     @staticmethod
     def get_exception_for_rate_limit(response: Response) -> PluginException:

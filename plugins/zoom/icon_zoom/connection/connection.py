@@ -33,11 +33,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
                 account_id=account_id,
                 client_id=client_id,
                 client_secret=client_secret,
-                oauth_retry_limit=oauth_authentication_retry_limit
+                oauth_retry_limit=oauth_authentication_retry_limit,
             )
         else:
             raise PluginException(
-                cause="Credentials for either JWT Token or OAuth are required, " "although none were provided.",
+                cause="Credentials for either JWT Token or OAuth are required, although none were provided.",
                 assistance="If using JWT, please input only the JWT Token in your connection "
                 "configuration. If using OAuth, please input only the "
                 "Account ID, Client ID, and Client Secret.",
