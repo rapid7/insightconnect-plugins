@@ -78,7 +78,7 @@ This trigger is used to get a list of incidents identified by Armorblox. By defa
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|interval|integer|600|False|Polling inteval in seconds|None|600|
+|interval|integer|600|False|Polling interval in seconds|None|600|
 
 Example input:
 
