@@ -45,10 +45,11 @@ class Util:
 
 
 class MockResponse:
-    def __init__(self, filename: str, status_code: int, text: str = "") -> None:
+    def __init__(self, filename: str, status_code: int, text: str = "", headers: dict = {}) -> None:
         self.filename = filename
         self.status_code = status_code
         self.text = text
+        self.headers = headers
 
     def json(self):
         with open(
