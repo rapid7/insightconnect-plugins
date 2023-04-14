@@ -309,7 +309,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
         },
         "name": {
           "type": "string",
-          "title": "user name",
+          "title": "User name",
           "description": "User name",
           "order": 1
         }
