@@ -24,7 +24,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|True|Armorblox API Key|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|tenant_name|string|outbound-integrations|True|Armorblox Tenant Name|None|outbound-integrations|
+|tenant_name|string|None|True|Armorblox Tenant Name|None|my-tenant-name|
 
 Example input:
 
