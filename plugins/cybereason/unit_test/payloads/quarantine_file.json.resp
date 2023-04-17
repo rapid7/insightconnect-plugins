@@ -1,0 +1,17 @@
+{
+  "remediate_items_response": {
+    "malopId": "11.753856273233159896",
+    "remediationId": "ab1a1a12-1234-1a12-a123-a12a1a1ab12a",
+    "start": 1619207122620,
+    "initiatingUser": "user@example.com",
+    "statusLog": [
+      {
+        "machineId": "-12345678.1234567891234567891",
+        "targetId": "-12345678.1234567891234567891",
+        "status": "PENDING",
+        "actionType": "QUARANTINE_FILE",
+        "timestamp": 1619207122996
+      }
+    ]
+  }
+}

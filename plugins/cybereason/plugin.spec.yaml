@@ -4,12 +4,12 @@ products: [insightconnect]
 name: cybereason
 title: Cybereason
 description: The Cybereason platform provides military-grade cyber security with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin
-version: 2.1.0
-supported_versions: ["All"]
+version: 2.2.0
+supported_versions: ["Cybereason API 2023-04-12"]
 vendor: rapid7
 support: rapid7
 status: []
-tags: [investigate, malware, threat tntel]
+tags: [investigate, malware, threat intel]
 hub_tags:
   use_cases: [threat_detection_and_response, vulnerability_management]
   keywords: [investigate]
@@ -319,11 +319,239 @@ types:
       type: integer
       description: Partial response
       required: false
+  sensorStats:
+    failedSending:
+      title: Failed Sending
+      type: integer
+      description: Failed sending
+      required: false
+    invalidState:
+      title: Invalid State
+      type: integer
+      description: Invalid state
+      required: false
+    probeRemoved:
+      title: Probe Removed
+      type: integer
+      description: Probe removed
+      required: false
+    timeoutSending:
+      title: Timeout Sending
+      type: integer
+      description: Timeout sending
+      required: false
+    pending:
+      title: Pending
+      type: integer
+      description: Pending
+      required: false
+    chunksRequired:
+      title: Chunks Required
+      type: integer
+      description: Chunks required
+      required: false
+    msiFileCorrupted:
+      title: MSI File Corrupted
+      type: integer
+      description: MSI file corrupted
+      required: false
+    sendingMsi:
+      title: Sending MSI
+      type: integer
+      description: Sending MSI
+      required: false
+    newerInstalled:
+      title: Newer Installed
+      type: integer
+      description: Newer installed
+      required: false
+    msiSendFail:
+      title: MSI Send Fail
+      type: integer
+      description: MSI Send Fail
+      required: false
+    partialResponse:
+      title: Partial Response
+      type: integer
+      description: Partial response
+      required: false
+    endedWithSensorTimeout:
+      title: Ended With Sensor Timeout
+      type: integer
+      description: Ended with sensor timeout
+      required: false
+    failedSendingToServer:
+      title: Failed Sending To Server
+      type: integer
+      description: Failed sending to server
+      required: false
+    gettingChunks:
+      title: Getting Chunks
+      type: integer
+      description: Getting chunks
+      required: false
+    aborted:
+      title: Aborted
+      type: integer
+      description: Aborted
+      required: false
+    started:
+      title: Started
+      type: integer
+      description: Started
+      required: false
+    inProgress:
+      title: In Progress
+      type: integer
+      description: In progress
+      required: false
+    disconnected:
+      title: Disconnected
+      type: integer
+      description: Disconnected
+      required: false
+    failed:
+      title: Failed
+      type: integer
+      description: Failed
+      required: false
+    timeout:
+      title: Timeout
+      type: integer
+      description: Timeout
+      required: false
+    endedWithTooManyResults:
+      title: Ended With Too Many Results
+      type: integer
+      description: Ended with too many results
+      required: false
+    alreadyUpdated:
+      title: Already Updated
+      type: integer
+      description: Already updated
+      required: false
+    endedWithTooManySearches:
+      title: Ended With Too Many Searches
+      type: integer
+      description: Ended with too many searches
+      required: false
+    succeeded:
+      title: Succeeded
+      type: integer
+      description: Succeeded
+      required: false
+    notSupported:
+      title: Not Supported
+      type: integer
+      description: Not supported
+      required: false
+    endedWithUnknownError:
+      title: Ended With Unknown Error
+      type: integer
+      description: Ended with unknown error
+      required: false
+    none:
+      title: None
+      type: integer
+      description: None
+      required: false
+    primed:
+      title: Primed
+      type: integer
+      description: Primed
+      required: false
+    endedWithInvalidParam:
+      title: Ended With Invalid Param
+      type: integer
+      description: Ended with invalid param
+      required: false
+    unknownProbe:
+      title: Unknown Probe
+      type: integer
+      description: Unknown probe
+      required: false
+    abortTimeout:
+      title: Abort Timeout
+      type: integer
+      description: Abort timeout
+      required: false
+    unauthorizedUser:
+      title: Unauthorized User
+      type: integer
+      description: Unauthorized user
+      required: false
   globalStats:
     stats:
       title: Stats
       type: stats
       description: Stats
+      required: false
+  globalSensorStats:
+    stats:
+      title: sensorStats
+      type: sensorStats
+      description: Stats
+      required: false
+  archiveSensorResponse:
+    batchId:
+      title: Batch ID
+      description: The ID for the operation. You may need this number for other operations
+      type: integer
+      required: true
+    actionType:
+      title: Action Type
+      description: The action taken on the sensor
+      type: string
+      required: true
+    actionArguments:
+      title: Action Arguments
+      description: The arguments passed for the operation
+      type: string
+      required: false
+    globalStats:
+      title: Global Stats
+      description: Collection of items about the operation
+      type: globalSensorStats
+      required: true
+    finalState:
+      title: Final State
+      description: Indicates whether the sensor is in the state indicated by the operation
+      type: boolean
+      required: true
+    totalNumberOfProbes:
+      title: Total Number Of Probes
+      decription: How many sensors were affected by the current operation
+      type: integer
+      required: true
+    initiatorUser:
+      title: Initiator User
+      description: The user name of the user who performed this operation
+      type: string
+      required: true
+    startTime:
+      title: Start Time
+      description: The start time of the operation
+      type: integer
+      required: true
+    aborterUser:
+      title: Aborter User
+      description: The user name of the user who aborted the operation. This field only exists if the operation was aborted
+      type: string
+      required: false
+    abortTime:
+      title: Abort Time
+      description: The time (in epoch) when the operation was aborted. This field only exists if the operation was aborted
+      type: integer
+      required: false
+    abortTimeout:
+      title: Abort Timeout
+      description: Indicates whether there is a timeout value for timing out the request to abort
+      type: boolean
+      required: true
+    abortHttpStatusCode:
+      title: Abort HTTP Status Code
+      description: The code sent by the server to abort the operation. This field only exists if the operation was aborted
+      type: string
       required: false
   response:
     globalStats:
@@ -459,6 +687,529 @@ types:
       description: An object containing details of the error
       type: '[]error'
       required: false
+  sensors:
+    sensorId:
+      title: Sensor ID
+      description: The unique identifier for a sensor
+      type: string
+      required: false
+      example: "5e57b2dde4b06a3a515cc0eb:PYLUMCLIENT_SES_WIN10-EDLAB-AIQ_000C29B6AB6D"
+    pylumId:
+      title: Pylum ID
+      description: The unique identifier assigned by Cybereason to the sensor
+      type: string
+      required: false
+      example: "PYLUMCLIENT_SES_WIN10-EDLAB-AIQ_000C29B6AB6D"
+    guid:
+      title: Global Unique ID
+      description: The globally unique sensor identifier
+      type: string
+      required: false
+      example: "tEjQQRCi55eyTiwX"
+    fqdn:
+      title: Fully Qualified Domain Name
+      description: the fully qualified domain name (fqdn) for the machine
+      type: string
+      required: false
+      example: "tEjQQRCi55eyTiwX"
+    machineName:
+      title: Machine Name
+      description: The name of the machine
+      type: string
+      required: false
+      example: "win10-edlab-aiq1"
+    internalIpAddress:
+      title: Internal IP Address
+      description: The machine's internal IP address as identified by the sensor
+      type: string
+      required: false
+      example: "111.11.133.21"
+    externalIpAddress:
+      title: External IP Address
+      description: The machine's external IP address for the local network
+      type: string
+      required: false
+      example: "2.16.258.145"
+    siteName:
+      title: Site Name
+      description: The name of the site for the sensor
+      type: string
+      required: false
+      example: "Primary"
+    siteId:
+      title: Machine Name
+      description: The identifier for the sensor's site
+      type: integer
+      required: false
+      example: 46210509
+    ransomwareStatus:
+      title: Ransomware Status
+      description: The Anti-Ransomware mode
+      type: string
+      required: false
+      example: "DETECT_SUSPEND_PREVENT"
+    preventionStatus:
+      title: Prevention Status
+      description: The Execution Prevention mode
+      type: string
+      required: false
+      example: "ENABLE"
+    isolated:
+      title: Isolated
+      description: States whether the machine is isolated. Returns true if the machine is isolated
+      type: boolean
+      required: false
+      example: "false"
+    disconnectionTime:
+      title: Disconnection Time
+      description: Time the machine was disconnected. Returns 0 if this is the first connection time. After the first connection, this is the time it was last connected
+      type: integer
+      required: false
+      example: "1628068498840"
+    status:
+      title: Status
+      description: The status of the sensor
+      type: string
+      required: false
+      example: "Archived"
+    serviceStatus:
+      title: Service Status
+      description: Indicates the current value of the Anti-Malware service
+      type: string
+      required: false
+      example: "Down"
+    onlineTimeMS:
+      title: Online Time MS
+      description: The last time the sensor was seen online
+      type: integer
+      required: false
+      example: "0"
+    offlineTimeMS:
+      title: Offline Time MS
+      description: he last time (in epoch) that the sensor was offline
+      type: integer
+      required: false
+      example: "0"
+    staleTimeMS:
+      title: Stale Time MS
+      description: The time (in epoch) when the Sensor was classified as Stale
+      type: integer
+      required: false
+      example: "0"
+    archiveTimeMs:
+      title: Archive Time MS
+      description: The time (in epoch) when the sensor was archived
+      type: integer
+      required: false
+      example: "1635854400487"
+    statusTimeMS:
+      title: Status Time MS
+      description: The last time (in epoch) when the sensor sent a status
+      type: integer
+      required: false
+      example: "0"
+    lastStatusAction:
+      title: Last Status Action
+      description: The last action taken that changed the sensor status
+      type: string
+      required: false
+      example: "None"
+    archivedOrUnarchiveComment:
+      title: Archived Or Unarchive Comment
+      description: The comment added when a sensor was archived or unarchived
+      type: string
+      required: false
+      example: "Auto-archived after 60 days stale"
+    sensorArchivedByUser:
+      title: Sensor Archived By User
+      description: The Cybereason user name for the user who archived the selected sensor
+      type: string
+      required: false
+      example: "Auto-archived"
+    serverName:
+      title: Server Name
+      description: The name of the server for the sensor
+      type: string
+      required: false
+      example: "ses-1-t"
+    serverId:
+      title: Server ID
+      description: The unique identifier for the Detection server for the sensor
+      type: string
+      required: false
+      example: "5e57b2dde4b06a3a515cc0eb"
+    serverIp:
+      title: Server IP
+      description: The IP address for the Detection server for the sensor
+      type: string
+      required: false
+      example: "10.130.8.127"
+    privateServerIp:
+      title: Private Server IP
+      description: The private IP address for the Detection server for the sensor
+      type: string
+      required: false
+      example: "10.130.8.127"
+    collectiveUuid:
+      title: Collective UUID
+      description: The identifier for the Registration server for the sensor
+      type: string
+      required: false
+      example: "f9ca36d9-0c09-45e5-82d6-7e026ec1e803"
+    osType:
+      title: OS Type
+      description: The operating system running on the machine
+      type: string
+      required: false
+      example: "WINDOWS"
+    osVersionType:
+      title: OS Version Type
+      description: collectionStatus
+      type: string
+      required: false
+      example: "Windows_10"
+    collectionStatus:
+      title: Collection Status
+      description: States whether the machine has data collection enabled
+      type: string
+      required: false
+      example: "ADVANCED" # not part of the enums
+    version:
+      title: Version
+      description: The sensor version number
+      type: string
+      required: false
+      example: "21.1.144.0"
+    consoleVersion:
+      title: Console Version
+      description: The version for the console for your Cybereason environment
+      type: string
+      required: false
+      example: 20.1
+    firstSeenTime:
+      title: First Seen Time
+      description: The first time the machine was recognized. Timestamp values are returned in epoch
+      type: integer
+      required: false
+      example: "1627316564474"
+    upTime:
+      title: Up Time
+      description: The time the sensors have been in the UP state
+      type: integer
+      required: false
+      example: "695032210"
+    cpuUsage:
+      title: CPU Usage
+      description: The amount of CPU used by the machine (expressed as a percentage)
+      type: float
+      required: false
+      example: 0.0
+    memoryUsage:
+      title: Memory Usage
+      description: The amount of RAM on the hosting computer used by the sensor
+      type: integer
+      required: false
+      example: 0
+    outdated:
+      title: Outdated
+      description: States whether or not the sensor version is out of sync with the server version
+      type: boolean
+      required: false
+      example: true
+    amStatus:
+      title: Anti-Malware Status
+      description: The Anti-Malware installation status for the sensor
+      type: string
+      required: false
+      example: "AM_BLOCK" # double check
+    amModeOrigin:
+      title: Anti-Malware Mode Origin
+      description: The source of the value for the Anti-Malware Signatures mode setting
+      type: string
+      required: false
+      example: null
+    avDbVersion:
+      title: AV DB Version
+      description: The version of the Anti-Malware Signatures database on the machine where the sensor is installed
+      type: string
+      required: false
+      example: "85274"
+    avDbLastUpdateTime:
+      title: AV DB Last Update Time
+      description: The time when the Anti-Malware Signatures database on the machine where the sensor is installed was last updated
+      type: integer
+      required: false
+      example: 1627468314000
+    powerShellStatus:
+      title: Power Shell Status
+      description: The PowerShell Prevention mode
+      type: string
+      required: false
+      example: "PS_ENABLED"
+    remoteShellStatus:
+      title: Remote Shell Status
+      description: Whether or not the Remote Shell utility is enabled for the sensor. This field returns a value only if you have enabled Remote Shell for your Cybereason server
+      type: string
+      required: false
+      example: "AC_ENABLED"
+    usbStatus:
+      title: USB Status
+      description: The status of the Device Control feature. This field returns a value only if you have enabled Endpoint Controls.
+      type: string
+      required: false
+      example: "DISABLED"
+    fwStatus:
+      title: Fire Wall Status
+      description: The status of the Personal Firewall Control feature. This field returns a value only if you have enabled Endpoint Controls.
+      type: string
+      required: false
+      example: "DISABLED"
+    antiExploitStatus:
+      title: Anti Exploit Status
+      description: The status of the Exploit Prevention feature. This field returns a value only if you have enabled Exploit Prevention.
+      type: string
+      required: false
+      example: "AE_CAUTIOUS"
+    documentProtectionStatus:
+      title: Document Protection Status
+      description: The status for the Document Protection mode
+      type: string
+      required: false
+      example: "DS_DETECT"
+    documentProtectionMode:
+      title: Document Protection Mode
+      description: The mode set for the Document Protection mode
+      type: string
+      required: false
+      example: "DM_CAUTIOUS"
+    serialNumber:
+      title: Serial Number
+      description: The serial number added for a device in the allowed devices section of the Endpoint Controls settings
+      type: string
+      required: false
+      example: "1234567"
+    deviceModel:
+      title: Device Model
+      description: The model added for a device in the allowed devices section of the Endpoint Controls settings
+      type: string
+      required: false
+      example: "Intel(R) Core(TM) i9-9880H CPU 2.30GHz"
+    organizationalUnit:
+      title: Organizational Unit
+      description: The name of the organization unit taken from the Active Directory on the machine on which the sensor is installed
+      type: string
+      required: false
+      example: ""
+    antiMalwareStatus:
+      title: Anti Malware Status
+      description: The Anti-Malware prevention mode for the sensor
+      type: string
+      required: false
+      example: "AM_ENABLED"
+    antiMalwareModeOrigin:
+      title: Anti Malware Mode Origin
+      description: The source of the value for the Anti-Malware setting
+      type: string
+      required: false
+      example: null
+    organization:
+      title: Organization
+      description: The organization name for the machine on which the sensor is installed
+      type: string
+      required: false
+      example: "ses"
+    proxyAddress:
+      title: proxy Address
+      description: The address for the Proxy server used by this sensor
+      type: string
+      required: false
+      example: ""
+    preventionError:
+      title: Prevention Error
+      description: The error received for prevention by the sensor
+      type: string
+      required: false
+      example: ""
+    exitReason:
+      title: Exit Reason
+      description: The reason the sensor service (minionhost.exe) stopped
+      type: string
+      required: false
+      example: "STOP_REQUEST_FROM_PYLUM"
+    actionsInProgress:
+      title: Actions In Progress
+      description: The number of actions in progress (i.e. Not Resolved) on the machine
+      type: integer
+      required: false
+      example: 0
+    pendingActions:
+      title: Pending Actions
+      description: An array containing batch numbers for actions pending to run on the sensor
+      type: "[]integer"
+      required: false
+      example: []
+    lastUpgradeResult:
+      title: Last Upgrade Result
+      description: The result of the last upgrade process
+      type: string
+      required: false
+      example: "None"
+    department:
+      title: Department
+      description: The value assigned to the machine for the DEPARTMENT sensor tag
+      type: string
+      required: false
+      example: null # check
+    location:
+      title: Location
+      description: The value assigned for this machine for the LOCATION sensor tag
+      type: string
+      required: false
+      example: null # check
+    criticalAsset:
+      title: Critical Asset
+      description: The value assigned for the machine for the CRITICAL ASSET sensor tag
+      type: string
+      required: false
+      example: null # check
+    deviceType:
+      title: Device Type
+      description: The value assigned to the machine for the DEVICE TYPE sensor tag
+      type: string
+      required: false
+      example: null # check
+    customTags:
+      title: Custom Tags
+      description: A list of custom sensor tags assigned to the machine
+      type: string
+      required: false
+      example: "CRITICAL"
+    lastUpgradeSteps:
+      title: Last Upgrade Steps
+      description: A list of step taken in the upgrade process. If there is a failure to upgrade the sensor, this list shows the failure
+      type: "[]string"
+      required: false
+      example: []
+    disconnected:
+      title: Disconnected
+      description: Indicates whether a sensor is currently disconnected
+      type: boolean
+      required: false
+      example: true
+    staticAnalysisDetectMode:
+      title: Static Analysis Detect Mode
+      description: The value for the Artificial Intelligence Detect mode in the Anti-Malware settings
+      type: string
+      required: false
+      example: "MODERATE"
+    staticAnalysisDetectModeOrigin:
+      title: Static Analysis Detect Mode Origin
+      description: The source of the value for the Artificial Intelligence Detect mode setting
+      type: string
+      required: false
+      example: null
+    staticAnalysisPreventMode:
+      title: Static Analysis Prevent Mode
+      description: The value for the Artificial Intelligence Prevent Mode in the Anti-Malware settings
+      type: string
+      required: false
+      example: "MODERATE"
+    staticAnalysisPreventModeOrigin:
+      title: Static Analysis Prevent Mode Origin
+      description: The source of the value for the Artificial Intelligence Prevent mode setting
+      type: string
+      required: false
+      example: null # check
+    collectionComponents:
+      title: Collection Components
+      description: Any special collections enabled on the server and/or sensor
+      type: "[]string"
+      required: false
+      example: "DPI"
+    sensorLastUpdate:
+      title: Sensor Last Update
+      description: The last time (in epoch) that the sensor was updated
+      type: integer
+      required: false
+      example: 0
+    fullScanStatus:
+      title: Full Scan Status
+      description: The status set for the sensor for the full scan
+      type: string
+      required: false
+      example: "IDLE"
+    quickScanStatus:
+      title: Quick Scan Status
+      description: The status set for the sensor for a quick scan
+      type: string
+      required: false
+      example: "IDLE"
+    lastFullScheduleScanSuccessTime:
+      title: Last Full Schedule Scan Success Time
+      description: The time (in epoch) that the sensor last did a successful full scan
+      type: integer
+      required: false
+      example: "0"
+    lastQuickScheduleScanSuccessTime:
+      title: Last Quick Schedule Scan Success Time
+      description: The time (in epoch) that the sensor last did a successful quick scan
+      type: integer
+      required: false
+      example: "0"
+    policyName:
+      title: Policy Name
+      description: The name of the policy assigned to this sensor
+      type: string
+      required: false
+      example: "ED_CUSTOM_POLICY"
+    deliveryTime:
+      title: Delivery Time
+      description: The time (in epoch) when the last policy update was delivered to the sensor
+      type: integer
+      required: false
+      example: "1627328611652"
+    policyId:
+      title: Policy ID
+      description: The unique identifier the Cybereason platform uses for the policy assigned to the sensor
+      type: string
+      required: false
+      example: "8c1c93ff-08cb-4b4e-b253-7f5c9d3e08bc"
+    compliance:
+      title: Compliance
+      description: Indicates whether the current sensor settings match the policy settings
+      type: boolean
+      required: false
+      example: true
+    groupId:
+      title: Group ID
+      description: The identifier the Cybereason platform uses for the group to which the sensor is assigned
+      type: string
+      required: false
+      example: "af617d16-b83e-4739-948d-339ce21b9177"
+    groupName:
+      title: Group Name
+      description: The name for the group to which the sensor is assigned
+      type: string
+      required: false
+      example: "aaa"
+    groupStickiness:
+      title: Group Stickiness
+      description: Indicates whether this sensor is automatically assigned back to the group based on an assignment rule
+      type: boolean
+      required: false
+      example: true
+    purgedSensors:
+      title: Purged Sensors
+      description: Indicates whether this sensor was removed from the Sensors screen
+      type: boolean
+      required: false
+      example: false
+    groupStickinessLabel:
+      title: Group Stickiness Label
+      description: The method by which the sensor was assigned to the group
+      type: string
+      required: false
+      example: "Manual"
 connection:
   hostname:
     title: Host
@@ -534,6 +1285,56 @@ actions:
         title: Success
         description: Success
         type: boolean
+        required: true
+  get_sensor:
+    title: Get Sensor
+    description: Get sensor
+    input:
+      limit:
+        title: Limit
+        description: The number of sensors to which to send the request
+        type: integer
+        required: true
+        example: 1
+      offset:
+        title: Offset
+        description: Set to 0 to receive the first limit set of sensors
+        type: integer
+        required: true
+        example: 0
+      indicator:
+        title: Indicator
+        description: The unique identifier of the machine you wish to perform the operation on, this can be an internal IPv4 address, hostname or sensor GUID
+        type: string
+        required: true
+        example: 104.31.2.164
+    output:
+      sensor:
+        title: Sensor
+        description: Sensor
+        type: sensors
+        required: true
+  archive_sensor:
+    title: Archive Sensor
+    description: Archive sensor
+    input:
+      sensor_ids:
+        title: Sensor IDS
+        description: The unique identifier of the machine(s) you wish to perform the operation on
+        type: "[]string"
+        required: true
+        example: ["58ae74fae4b06dca39c1d4bc:PYLUMCLIENT_ORG1-PROD_WINTEST-PC_005056A104F9"]
+      argument:
+        title: Argument
+        description: The reason for archiving the sensor or sensors
+        type: string
+        required: true
+        example: "Sensors are no longer in use"
+    output:
+      archive_sensor_response:
+        title: Archive Sensor Response
+        description: Archive sensor response
+        type: archiveSensorResponse
         required: true
   quarantine_file:
     title: Quarantine File
