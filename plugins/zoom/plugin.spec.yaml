@@ -4,7 +4,7 @@ products: [insightconnect]
 name: zoom
 title: Zoom
 description: Trigger workflows on user activity while also managing your users with the Zoom plugin
-version: 2.1.0
+version: 3.0.0
 vendor: rapid7
 support: rapid7
 status: []
@@ -24,22 +24,35 @@ enable_cache: false
 connection:
   client_id:
     title: Client ID
-    description: Zoom app client ID
+    description: Zoom app client ID, required for OAuth authentication
     type: credential_secret_key
-    required: true
+    required: false
     example: "9de5069c5afe602b2ea0a04b66beb2c0"
   client_secret:
     title: Client Secret
-    description: Zoom app client secret
+    description: Zoom app client secret, required for OAuth authentication
     type: credential_secret_key
-    required: true
+    required: false
     example: "9de5069c5afe602b2ea0a04b66beb2c0"
   account_id:
     title: Account ID
-    description: Zoom app account ID
+    description: Zoom app account ID, required for OAuth authentication
     type: credential_secret_key
-    required: true
+    required: false
     example: 'dBs0x4Kf7HuIK0LLbzMduW'
+  authentication_retry_limit:
+    title: OAuth Authentication Retry Limit
+    description: How many times to retry authentication to Zoom before failing, required for OAuth authentication
+    type: integer
+    required: false
+    default: 5
+    example: 5
+  jwt_token:
+    title: JWT Token
+    description: Zoom JWT token, without the Bearer prefix
+    type: credential_secret_key
+    required: false
+    example: '9de5069c5afe602b2ea0a04b66beb2c0'
 
 types:
   user_activity:

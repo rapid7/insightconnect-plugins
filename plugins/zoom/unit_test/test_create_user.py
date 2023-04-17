@@ -6,7 +6,6 @@ sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase, mock
 from icon_zoom.actions.create_user import CreateUser
-from icon_zoom.actions.create_user.schema import Input
 from insightconnect_plugin_runtime.exceptions import PluginException
 
 from unit_test.mock import (
@@ -47,7 +46,7 @@ class TestCreateUser(TestCase):
             (mock_request_404, PluginException.causes[PluginException.Preset.NOT_FOUND]),
         ],
     )
-    @mock.patch("icon_zoom.util.api.ZoomAPI.refresh_oauth_token", return_value=None)
+    @mock.patch("icon_zoom.util.api.ZoomAPI._refresh_oauth_token", return_value=None)
     def test_not_ok(self, mock_request, exception, mock_refresh):
         mocked_request(mock_request)
         with self.assertRaises(PluginException) as context:
