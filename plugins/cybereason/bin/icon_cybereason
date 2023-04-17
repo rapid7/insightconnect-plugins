@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Cybereason"
 Vendor = "rapid7"
-Version = "2.1.0"
+Version = "2.2.0"
 Description = "The Cybereason platform provides military-grade cyber security with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin"
 
 
@@ -34,7 +34,11 @@ def main():
                 description=Description,
                 connection=connection.Connection()
             )
+            self.add_action(actions.ArchiveSensor())
+
             self.add_action(actions.DeleteRegistryKey())
+
+            self.add_action(actions.GetSensor())
 
             self.add_action(actions.IsolateMachine())
 
