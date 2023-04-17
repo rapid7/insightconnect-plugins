@@ -5,7 +5,6 @@ from typing import Callable
 import requests
 
 from unittest import mock
-from unittest.mock import MagicMock
 
 from icon_zoom.actions.create_user.schema import Input
 from icon_zoom.connection.connection import Connection
@@ -28,7 +27,7 @@ STUB_CREATE_USER = {
     Input.LAST_NAME: "LastName",
 }
 
-REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI.refresh_oauth_token"
+REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI._refresh_oauth_token"
 
 
 class Util:
@@ -46,10 +45,11 @@ class Util:
 
 
 class MockResponse:
-    def __init__(self, filename: str, status_code: int, text: str = "") -> None:
+    def __init__(self, filename: str, status_code: int, text: str = "", headers: dict = {}) -> None:
         self.filename = filename
         self.status_code = status_code
         self.text = text
+        self.headers = headers
 
     def json(self):
         with open(
