@@ -1,9 +1,5 @@
-import logging
 import sys
 import os
-
-sys.path.append(os.path.abspath("../"))
-
 from unittest import TestCase
 from unittest.mock import patch
 from unittest.mock import Mock
@@ -13,108 +9,138 @@ from komand_rapid7_insightvm.actions.generate_adhoc_sql_report.schema import Inp
 from parameterized import parameterized
 from insightconnect_plugin_runtime.exceptions import PluginException
 
-class MockResponse:
-    def __init__(self, json_data, text, status_code=200):
-        self.json_data = json_data
-        self.text = ""
-        self.status_code = status_code
+sys.path.append(os.path.abspath("../"))
 
-    def json(self):
-        return self.json_data
+
+class MockResponses:
+    mock_responses = {
+        "no_id": {"status_code": 200, "json": lambda: {"no_id": 1}},
+        "return_id": {"status_code": 200, "json": lambda: {"id": 1}},
+        "aborted": {
+            "status_code": 200,
+            "json": lambda: {"status": "aborted"},
+        },
+        "complete": {"status_code": 200, "json": lambda: {"status": "complete"}},
+        "404": {
+            "status_code": 404,
+            "json": lambda: {"message:": "An error has occurred."},
+            "text": '{"message:": "An error has occurred."}',
+        },
+        "401": {
+            "status_code": 401,
+            "json": lambda: {"message:": "An error has occurred."},
+            "text": '{"message:": "An error has occurred."}',
+        },
+        "500": {
+            "status_code": 500,
+            "json": lambda: {"message:": "An error has occurred."},
+            "text": '{"message:": "An error has occurred."}',
+        },
+        "503": {
+            "status_code": 503,
+            "json": lambda: {"message:": "An error has occurred."},
+            "text": '{"message:": "An error has occurred."}',
+        },
+    }
+
 
 class TestGenerateAdhocSqlReport(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.action = Util.default_connector(GenerateAdhocSqlReport())
-        logging.basicConfig(level=logging.ERROR)
+        cls.query = {
+            Input.QUERY: "SELECT * FROM dim_asset",
+            Input.SCOPE: "none",
+            Input.FILTERS: """{"filter": "none"}""",
+            Input.SCOPE_IDS: [1234, 5678],
+        }
 
     @patch("requests.sessions.Session.post", side_effect=Util.mocked_requests)
     @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
     @patch("requests.sessions.Session.delete", side_effect=Util.mocked_requests)
     def test_generate_report(self, mock_post, mock_get, mock_delete):
-        actual = self.action.run(
-            {
-                Input.QUERY: "SELECT * FROM dim_asset",
-                Input.SCOPE: "none",
-                Input.FILTERS: """{"filter": "none"}""",
-                Input.SCOPE_IDS: [1234, 5678]
-            }
-        )
-        expected = {'report': {'content': 'InN0cmluZyI=', 'filename': 'adhoc_sql_report.csv'}}
-        self.assertEqual(actual, expected)
+        actual = self.action.run(self.query)
+        expected = {"report": {"content": "InN0cmluZyI=", "filename": "adhoc_sql_report.csv"}}
+        self.assertEqual(expected, actual)
 
+    @parameterized.expand(
+        [
+            [
+                "no_report_id",
+                [Mock(**MockResponses.mock_responses["no_id"])],
+                Util.mocked_requests,
+                Util.mocked_requests,
+                "Error: Failed to create report, report ID was not returned with create request",
+                "Review InsightVM console logs and try again.",
+            ],
+            [
+                "no_report_instance_id",
+                [Mock(**MockResponses.mock_responses["return_id"]), Mock(**MockResponses.mock_responses["no_id"])],
+                Util.mocked_requests,
+                Util.mocked_requests,
+                "Error: Failed to generate report, report instance ID was not returned with generate request.",
+                "Review the report configuration and InsightVM console logs; then try again.",
+            ],
+            [
+                "download_failed_401",
+                Util.mocked_requests,
+                Util.mocked_requests,
+                [Mock(**MockResponses.mock_responses["complete"]), Mock(**MockResponses.mock_responses["401"])],
+                "InsightVM returned an error message. Unauthorized",
+                "Ensure that the user name and password are correct.",
+            ],
+            [
+                "download_failed_404",
+                Util.mocked_requests,
+                Util.mocked_requests,
+                [Mock(**MockResponses.mock_responses["complete"]), Mock(**MockResponses.mock_responses["404"])],
+                "InsightVM returned an error message. Not Found",
+                "Ensure that the requested resource exists.",
+            ],
+            [
+                "download_failed_500",
+                Util.mocked_requests,
+                Util.mocked_requests,
+                [Mock(**MockResponses.mock_responses["complete"]), Mock(**MockResponses.mock_responses["500"])],
+                "InsightVM returned an error message. Internal Server Error",
+                "If this issue persists contact support for assistance.",
+            ],
+            [
+                "download_failed_503",
+                Util.mocked_requests,
+                Util.mocked_requests,
+                [Mock(**MockResponses.mock_responses["complete"]), Mock(**MockResponses.mock_responses["503"])],
+                "InsightVM returned an error message. Service Unavailable",
+                "If this issue persists contact support for assistance.",
+            ],
+            [
+                "delete_failed",
+                Util.mocked_requests,
+                Util.mocked_requests,
+                [Mock(**MockResponses.mock_responses["complete"]), Mock(**MockResponses.mock_responses["404"])],
+                "InsightVM returned an error message. Not Found",
+                "Ensure that the requested resource exists.",
+            ],
+            [
+                "status_aborted",
+                Util.mocked_requests,
+                Util.mocked_requests,
+                [Mock(**MockResponses.mock_responses["aborted"]), Mock(**MockResponses.mock_responses["aborted"])],
+                "Error: Report failed to generated with status aborted.",
+                "Review the report configuration and InsightVM logs prior to trying again.",
+            ],
+        ]
+    )
+    @patch("requests.sessions.Session.get")
+    @patch("requests.sessions.Session.delete")
     @patch("requests.sessions.Session.post")
-    def test_generate_report_no_report_id(self, mock_post):
+    def test_generate_report_bad(
+        self, name, post_response, get_response, delete_response, cause, assistance, mock_post, mock_get, mock_delete
+    ):
         with self.assertRaises(PluginException) as e:
-            mock_post.return_value = Mock(status_code=200, json=lambda: {"no_id": 1})
-            self.action.run(
-                {
-                    Input.QUERY: "SELECT * FROM dim_asset",
-                    Input.SCOPE: "none",
-                    Input.FILTERS: """{"filter": "none"}""",
-                    Input.SCOPE_IDS: [1234, 5678]
-                }
-            )
-        self.assertEqual(e.exception.cause, "Error: Failed to create report, report ID was not returned with create request")
-        self.assertEqual(e.exception.assistance, "Review InsightVM console logs and try again.")
-
-    @patch("requests.sessions.Session.post", side_effect=[Mock(status_code=200, json=lambda: {"id": 1}), Mock(status_code=200, json=lambda: {"no_id": 1})])
-    def test_generate_report_no_report_instance_id(self, mock_post):
-        with self.assertRaises(PluginException) as e:
-            self.action.run(
-                {
-                    Input.QUERY: "SELECT * FROM dim_asset",
-                    Input.SCOPE: "none",
-                    Input.FILTERS: """{"filter": "none"}""",
-                    Input.SCOPE_IDS: [1234, 5678]
-                }
-            )
-        self.assertEqual(e.exception.cause, "Error: Failed to generate report, report instance ID was not returned with generate request.")
-        self.assertEqual(e.exception.assistance, "Review the report configuration and InsightVM console logs; then try again.")
-
-    @patch("requests.sessions.Session.post", side_effect=Util.mocked_requests)
-    @patch("requests.sessions.Session.get", side_effect=[Mock(status_code=200, json=lambda: {"status": "aborted"}), Mock(status_code=200, json=lambda: {"status": "aborted"})])
-    def test_generate_report_status_failed(self, mock_post, mock_get):
-        with self.assertRaises(PluginException) as e:
-            self.action.run(
-                {
-                    Input.QUERY: "SELECT * FROM dim_asset",
-                    Input.SCOPE: "none",
-                    Input.FILTERS: """{"filter": "none"}""",
-                    Input.SCOPE_IDS: [1234, 5678]
-                }
-            )
-        self.assertEqual(e.exception.cause, "Error: Report failed to generated with status aborted.")
-        self.assertEqual(e.exception.assistance, "Review the report configuration and InsightVM logs prior to trying "
-                                                 "again.")
-
-    @patch("requests.sessions.Session.post", side_effect=Util.mocked_requests)
-    @patch("requests.sessions.Session.get", side_effect=[Mock(status_code=200, json=lambda: {"status": "complete"}), Mock(status_code=404, text='{"message:": "An error has occurred."}', json={"message:": "An error has occurred."})])
-    def test_generate_report_download_failed(self, mock_post, mock_get):
-        with self.assertRaises(PluginException) as e:
-            self.action.run(
-                {
-                    Input.QUERY: "SELECT * FROM dim_asset",
-                    Input.SCOPE: "none",
-                    Input.FILTERS: """{"filter": "none"}""",
-                    Input.SCOPE_IDS: [1234, 5678]
-                }
-            )
-        self.assertEqual(e.exception.cause, "InsightVM returned an error message. Not Found")
-        self.assertEqual(e.exception.assistance, "Ensure that the requested resource exists.")
-
-    @patch("requests.sessions.Session.post", side_effect=Util.mocked_requests)
-    @patch("requests.sessions.Session.get", side_effect=Util.mocked_requests)
-    @patch("requests.sessions.Session.delete", side_effect=[Mock(status_code=404, text='{"message:": "An error has occurred."}', json={"message:": "An error has occurred."})])
-    def test_generate_report_delete_failed(self, mock_post, mock_get, mock_delete):
-        with self.assertRaises(PluginException) as e:
-            self.action.run(
-                {
-                    Input.QUERY: "SELECT * FROM dim_asset",
-                    Input.SCOPE: "none",
-                    Input.FILTERS: """{"filter": "none"}""",
-                    Input.SCOPE_IDS: [1234, 5678]
-                }
-            )
-        self.assertEqual(e.exception.cause, "InsightVM returned an error message. Not Found")
-        self.assertEqual(e.exception.assistance, "Ensure that the requested resource exists.")
+            mock_post.side_effect = post_response
+            mock_get.side_effect = get_response
+            mock_delete.side_effect = delete_response
+            self.action.run(self.query)
+        self.assertEqual(cause, e.exception.cause)
+        self.assertEqual(assistance, e.exception.assistance)
