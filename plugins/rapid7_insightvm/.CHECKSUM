@@ -1,5 +1,5 @@
 {
-	"spec": "b2cd438c643a87f70d4fa10706234d6b",
+	"spec": "48f583f0413a25e9362b077fb0861749",
 	"manifest": "92de591e2fba9d711d51d5f66ff5715a",
 	"setup": "9a0809b04c741f217302b5aa92c5f94d",
 	"schemas": [
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "asset_search/schema.py",
-			"hash": "ff7336e45baf58196162f8f86bc6fc2d"
+			"hash": "a6ef61352fcea3e1fa232e807d1609fe"
 		},
 		{
 			"identifier": "asset_vulnerability_solution/schema.py",
@@ -105,7 +105,7 @@
 		},
 		{
 			"identifier": "get_asset/schema.py",
-			"hash": "360ceba6a8bf2ef6f98f2951dfa2b8d4"
+			"hash": "c87430a0b1c9f1357b298d648abc0206"
 		},
 		{
 			"identifier": "get_asset_group/schema.py",
@@ -157,7 +157,7 @@
 		},
 		{
 			"identifier": "get_scan_assets/schema.py",
-			"hash": "b6ecb091349b096becfe272929fff91a"
+			"hash": "4b10305d3792a25b921d1ceb2ffdee10"
 		},
 		{
 			"identifier": "get_scan_engine/schema.py",
@@ -185,7 +185,7 @@
 		},
 		{
 			"identifier": "get_site_assets/schema.py",
-			"hash": "b522b256c7322b849365e63325ee5b48"
+			"hash": "eb144d42a277a0cbd556e8e4f3350145"
 		},
 		{
 			"identifier": "get_sites/schema.py",
@@ -233,7 +233,7 @@
 		},
 		{
 			"identifier": "list_inactive_assets/schema.py",
-			"hash": "ce867835e22f276086ef98e74c7fe2cc"
+			"hash": "a23c2fb58ae45708f72749ea71370e24"
 		},
 		{
 			"identifier": "list_reports/schema.py",

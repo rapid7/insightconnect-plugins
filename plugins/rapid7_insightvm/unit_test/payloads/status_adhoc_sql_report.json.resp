@@ -1,0 +1,16 @@
+{
+    "generated": "2018-06-01T18:56:03Z",
+    "id": 1,
+    "links": [
+        {
+            "href": "https://example.com/api/3/reports/1/history/1",
+            "rel": "self"
+        }
+    ],
+    "size": {
+        "bytes": 24789050,
+        "formatted": "23.6 mb"
+    },
+    "status": "complete",
+    "uri": "https://example.com/reports/1"
+}

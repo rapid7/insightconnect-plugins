@@ -34,7 +34,6 @@ def adhoc_sql_report(connection, logger, report_payload: dict):
     logger.info(f"Creating report configuration with name: {report_payload['name']}")
     response = resource_helper.resource_request(endpoint=endpoint, method="post", payload=report_payload)
     report_id = response.get("id")
-
     # Generate Report
     if report_id is None:
         raise PluginException(

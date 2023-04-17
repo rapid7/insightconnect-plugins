@@ -1,0 +1,9 @@
+{
+    "id": 1,
+    "links": [
+        {
+            "href": "https://example.com/api/3/reports",
+            "rel": "self"
+        }
+    ]
+}

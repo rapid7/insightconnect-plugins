@@ -5736,6 +5736,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 6.0.0 - Fix file output type for `Generate Adhoc SQL Report` | Replace custom output type `file` with `insightvm_file` for each item in the `asset` `files` output in multiple actions
 * 5.1.0 - Add new action update shared credential
 * 5.0.1 - Fix issue in New Scans trigger where an exception was thrown if no scan IDs were previously cached for that site
 * 5.0.0 - Fix parameters type, input examples and description for `Get Asset Vulnerability Solutions`, `Get Asset Vulnerabilities`, `Get Asset Software` and `Get Asset` actions
