@@ -129,7 +129,6 @@ class Util:
         if kwargs.get("url") == "https://example.com/api/3/reports/1/generate":
             return MockResponse("create_adhoc_sql_report", 200)
         if kwargs.get("url") == "https://example.com/api/3/reports/1/history/1":
-            logging.info("I AM HERE NOW")
             return MockResponse("status_adhoc_sql_report", 200)
         if kwargs.get("url") == "https://example.com/api/3/reports/1/history/1/output":
             return MockResponse("download_adhoc_sql_report", 200)
