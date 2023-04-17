@@ -1,0 +1,74 @@
+{
+   "data":{
+      "resultIdToElementDataMap":{
+         "MALOP_ID":{
+            "elementValues":{
+               "primaryRootCauseElements":{
+                  "elementValues":[
+                  {
+                     "affectedUsers":[
+
+                     ],
+                     "affectedMachines":[
+
+                     ],
+                     "elementType":"File",
+                     "guid":"guid",
+                     "name":"File",
+                     "has Malops":true,
+                     "totalSuspicions":1,
+                     "totalMalicious":1
+                  },
+                  {
+                     "affectedUsers":[
+
+                     ],
+                     "affectedMachines":[
+
+                     ],
+                     "elementType":"File",
+                     "guid":"guid",
+                     "name":"File",
+                     "has Malops":true,
+                     "totalSuspicions":1,
+                     "totalMalicious":1
+                  }
+                  ]
+               },
+               "affectedMachines":{
+                  "elementValues":[
+                     {
+                        "affectedUsers":[
+
+                        ],
+                        "affectedMachines":[
+
+                        ],
+                        "ElementType":"ElementType",
+                        "guid":"guid",
+                        "name":"name",
+                        "has Malops":true,
+                        "totalSuspicions":1,
+                        "totalMalicious":1
+                     },
+                     {
+                        "affectedUsers":[
+
+                        ],
+                        "affectedMachines":[
+
+                        ],
+                        "ElementType":"ElementType",
+                        "guid":"guid",
+                        "name":"name",
+                        "has Malops":true,
+                        "totalSuspicions":1,
+                        "totalMalicious":1
+                     }
+                  ]
+               }
+            }
+         }
+      }
+   }
+}
