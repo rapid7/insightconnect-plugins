@@ -27,7 +27,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Username and password|None|{'username': 'user1', 'password': 'mypassword'}|
-|url|string|None|True|URL to your InsightVM console, without trailing slashes, e.g. https://insightvm.example.com:3780|None|https://insightvm.example.com:3780|
+|url|string|None|True|URL to your InsightVM console, without trailing slashes|None|https://example.com|
 
 Example input:
 
@@ -49,8 +49,8 @@ This action is used to update shared credentials.
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|---|
-|account|account|None|True|Specify the type of service to authenticate as well as all of the information required by that service|None|{'authentication_type': 'no-authentication', 'community_name': 'rapid community', 'database': 'rapid7_database', 'domain': 'rapid7.com', 'enumerate_sids': False, 'notes_id_password': 'notes_id_password', 'ntlm_hash': '86956E15C7F452086BEEB6BB005E0388', 'oracle_listener_password': 'oracle_listener_password', 'password': 'password', 'pem_key': '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEA3Tz2mr7SZiAMfQyuvBj...', 'permission_elevation': 'sudo', 'permission_elevation_password': 'permission_elevation_password', 'permission_elevation_username': 'permission_elevation_username', 'privacy_password': 'privacy_password', 'privacy_type': 'no-privacy', 'private_key_password': 'private_key_password', 'realm': 'realm0', 'service': 'telnet', 'sid': 'rapid7_database2', 'use_windows_authentication': False, 'username': 'username'}|
+|----|----|-------|--------|-----------|----|-------|
+|account|account|None|True|Specify the type of service to authenticate as well as all of the information required by that service|None|None|
 |description|string|None|False|The description of the credential|None|example input with every field filled. Note real input will only have specific fields filled|
 |host_restriction|string|None|False|The host name or IP address that you want to restrict the credentials to|None|my-macbook-name|
 |id|integer|None|False|The identifier of the credential|None|123|
@@ -62,38 +62,6 @@ This action is used to update shared credentials.
 Example input:
 
 ```
-{
-    "account":{
-        "authentication_type": "no-authentication",
-        "community_name": "rapid community",
-        "database": "rapid7_database",
-        "domain": "rapid7.com",
-        "enumerate_sids": false,
-        "notes_id_password": "notes_id_password",
-        "ntlm_hash": "86956E15C7F452086BEEB6BB005E0388",
-        "oracle_listener_password": "oracle_listener_password",
-        "password": "password",
-        "pem_key": "-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEA3Tz2mr7SZiAMfQyuvBj...",
-        "permission_elevation": "sudo",
-        "permission_elevation_password": "permission_elevation_password",
-        "permission_elevation_username": "permission_elevation_username",
-        "privacy_password": "privacy_password",
-        "privacy_type": "no-privacy",
-        "private_key_password": "private_key_password",
-        "realm": "realm0",
-        "service": "telnet",
-        "sid": "rapid7_database2",
-        "use_windows_authentication": false,
-        "username": "username"
-    }
-    "description": "example input with every field filled. Note real input will only have specific fields filled",
-    "hostRestriction": "my-macbook-name",
-    "id": "123",
-    "name": "my-AS400-credentials",
-    "portRestriction": "8888",
-    "siteAssignment": "all-sites",
-    "sites": []
-}
 
 ```
 
@@ -131,10 +99,7 @@ Example input:
 
 ```
 {
-  "asset_id": 423,
-  "vulnerability_ids": [
-    "flash_player-cve-2017-11305"
-  ]
+  "asset_id": 1234
 }
 ```
 
@@ -221,7 +186,7 @@ This action is used to update vulnerability exception expiration dates.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|date|string|None|True|Expiration date|None|2020-02-24T06:59:59.999Z|
+|date|string|None|True|Expiration date|None|https://example.com|
 |id|integer|None|True|Asset ID|None|42|
 
 Example input:
@@ -837,8 +802,7 @@ Example input:
 
 ```
 {
-  "asset_id": 234,
-  "get_risk_score": true
+  "asset_id": 1234
 }
 ```
 
@@ -910,7 +874,7 @@ Example input:
 
 ```
 {
-  "asset_id": "234"
+  "asset_id": 234
 }
 ```
 
@@ -1090,7 +1054,7 @@ This action is used to start a scan on a site.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|hosts|[]string|None|False|The hosts that should be included in the scan|None|["192.0.2.3", "192.0.2.10-192.0.2.20", "ADSRV.local"]|
+|hosts|[]string|None|False|The hosts that should be included in the scan|None|["https://example.com", "https://example.com", "https://example.com"]|
 |site_id|string|None|True|ID of the site to scan|None|1|
 
 Example input:
@@ -1401,10 +1365,7 @@ Example input:
 {
   "color": "default",
   "name": "example name",
-  "searchCriteria": {
-    "risk-score": "asc",
-    "criticality-tag": "desc"
-  },
+  "searchCriteria": "{'risk-score': 'asc', 'criticality-tag': 'desc'}",
   "type": "owner"
 }
 ```
@@ -1475,7 +1436,8 @@ Example input:
 
 ```
 {
-  "id": 1234
+  "name": "example name",
+  "type": "owner"
 }
 ```
 
@@ -2002,6 +1964,15 @@ This action is used to add a tag to an asset.
 |tag_source|string|None|True|Source of tag to add to assets|None|built-in|
 |tag_type|string|None|True|Type of tag to add to assets|None|criticality|
 
+Example input:
+
+```
+{
+  "asset_id": 12345,
+  "tag_id": 1234
+}
+```
+
 ##### Output
 
 |Name|Type|Required|Description|
@@ -2479,7 +2450,7 @@ This action is used to update an existing site scope of included IP address and 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|integer|None|True|The identifier of the site|None|1234|
-|included_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|["10.2.144", "10.8.36.144"]|
+|included_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|["https://example.com", "https://example.com"]|
 |overwrite|boolean|True|True|Whether to overwrite the included targets to the current site or append to the previous list of included targets|None|True|
 
 Example input:
@@ -2524,7 +2495,7 @@ This action is used to update an existing site scope of excluded IP address and 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|excluded_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|["10.2.144", "10.8.36.144"]|
+|excluded_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|["https://example.com", "https://example.com"]|
 |id|integer|None|True|The identifier of the site|None|1234|
 |overwrite|boolean|True|True|Whether to overwrite the excluded targets to the current site or append to the previous list of excluded targets|None|True|
 
@@ -2532,12 +2503,12 @@ Example input:
 
 ```
 {
-  "excluded_targets": [
-    "10.2.144",
-    "10.8.36.144"
-  ],
+  "description": "example description",
+  "engine_id": 1234,
   "id": 1234,
-  "overwrite": true
+  "importance": "low",
+  "name": "example name",
+  "scan_template_id": 1234
 }
 ```
 
@@ -2578,12 +2549,12 @@ Example input:
 
 ```
 {
+  "description": "example description",
+  "engine_id": 1234,
   "id": 1234,
-  "included_asset_groups": [
-    1234,
-    567
-  ],
-  "overwrite": true
+  "importance": "low",
+  "name": "example name",
+  "scan_template_id": 1234
 }
 ```
 
@@ -2705,7 +2676,7 @@ Example input:
 
 ```
 {
-  "name": "example name"
+  "id": 1234
 }
 ```
 
@@ -2929,7 +2900,7 @@ Example input:
 
 ```
 {
-  "name": "example name"
+  "id": 1234
 }
 ```
 
@@ -3530,14 +3501,15 @@ This action is used to list scan engines paired with the security console.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|False|Optional address (IP/hostname) by which to filter, accepts regular expression patterns|None|10.4.36.120|
+|address|string|None|False|Optional address (IP/hostname) by which to filter, accepts regular expression patterns|None|https://example.com|
 |name|string|None|False|Optional engine name by which to filter, accepts regular expression patterns|None|example name|
 
 Example input:
 
 ```
 {
-  "id": 1234
+  "address": "10.4.36.120",
+  "name": "example name"
 }
 ```
 
@@ -3738,7 +3710,7 @@ Example input:
 
 ```
 {
-  "id": 1234
+  "scan_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
 }
 ```
 
@@ -3799,7 +3771,7 @@ This action is used to create a new scan engine with console -> engine connectiv
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|Scan engine address (IP/hostname)|None|10.4.36.120|
+|address|string|None|True|Scan engine address (IP/hostname)|None|https://example.com|
 |name|string|None|True|Scan engine name|None|example name|
 |port|integer|40814|True|Scan engine connectivity port|None|40814|
 |sites|[]integer|[]|False|List of site IDs with which to associate the engine|None|[1234, 5678]|
@@ -3895,7 +3867,7 @@ Example input:
 
 ```
 {
-  "id": 1234
+  "scan_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
 }
 ```
 
@@ -3971,7 +3943,7 @@ Example input:
 
 ```
 {
-  "id": 1234
+  "scan_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
 }
 ```
 
@@ -4192,8 +4164,12 @@ Example input:
 
 ```
 {
-  "engine_id": 5678,
-  "site_id": 1234
+  "description": "example description",
+  "engine_id": 1234,
+  "id": 1234,
+  "importance": "low",
+  "name": "example name",
+  "scan_template_id": 1234
 }
 ```
 
@@ -5004,7 +4980,7 @@ This action is used to create a new user account (limited to external authentica
 |access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|False|
 |authentication_id|integer|None|False|The identifier of the authentication source to use to authenticate the user. The source with the specified identifier must be of the type specified by Authentication Type. If Authentication ID is omitted, then one source of the specified Authentication Type is selected|None|1234|
 |authentication_type|string|ldap|True|The type of the authentication source to use to authenticate the user|['kerberos', 'ldap', 'saml']|ldap|
-|email|string|None|True|The email address of the user|None|user@example.com|
+|email|string|None|True|The email address of the user|None|https://example.com|
 |enabled|boolean|True|True|Whether the user account is enabled|None|True|
 |login|string|None|True|The login name of the user|None|jdoe24|
 |name|string|None|True|The full name of the user|None|John Doe|
@@ -5063,7 +5039,7 @@ This action is used to update the configuration of an existing user account.
 |access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|False|
 |authentication_id|integer|None|False|The identifier of the authentication source to use to authenticate the user. The source with the specified identifier must be of the type specified by Authentication Type. If Authentication ID is omitted, then one source of the specified Authentication Type is selected|None|567|
 |authentication_type|string|ldap|True|The type of the authentication source to use to authenticate the user|['normal', 'admin', 'kerberos', 'ldap', 'saml']|ldap|
-|email|string|None|True|The email address of the user|None|user@example.com|
+|email|string|None|True|The email address of the user|None|https://example.com|
 |enabled|boolean|True|True|Whether the user account is enabled|None|True|
 |id|integer|None|True|The identifier of the user|None|1234|
 |login|string|None|True|The login name of the user|None|jdoe24|
@@ -5236,14 +5212,8 @@ Example input:
 {
   "access_all_asset_groups": false,
   "access_all_sites": false,
-  "authentication_id": 567,
-  "authentication_type": "ldap",
-  "email": "user@example.com",
-  "enabled": true,
-  "id": 1234,
-  "login": "jdoe24",
-  "name": "John Doe",
-  "role_id": "global-admin"
+  "role_id": "global-admin",
+  "user_id": 1234
 }
 ```
 
@@ -5281,16 +5251,11 @@ Example input:
 
 ```
 {
-  "access_all_asset_groups": false,
-  "access_all_sites": false,
-  "authentication_id": 567,
-  "authentication_type": "ldap",
-  "email": "user@example.com",
-  "enabled": true,
-  "id": 1234,
-  "login": "jdoe24",
-  "name": "John Doe",
-  "role_id": "global-admin"
+  "asset_group_ids": [
+    1234,
+    5678
+  ],
+  "user_id": 1234
 }
 ```
 
@@ -5406,11 +5371,16 @@ Example input:
 
 ```
 {
-  "site_ids": [
-    1234,
-    567
-  ],
-  "user_id": 1234
+  "access_all_asset_groups": false,
+  "access_all_sites": false,
+  "authentication_id": 567,
+  "authentication_type": "ldap",
+  "email": "user@example.com",
+  "enabled": true,
+  "id": 1234,
+  "login": "jdoe24",
+  "name": "John Doe",
+  "role_id": "global-admin"
 }
 ```
 
