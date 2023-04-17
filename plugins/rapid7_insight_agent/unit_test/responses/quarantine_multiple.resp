@@ -6,6 +6,13 @@
                     "assetId":"abcdef"
                 }
             ]
+        },
+        "unquarantineAssets":{
+            "results":[
+                {
+                    "assetId":"abcdef"
+                }
+            ]
         }
     }
 }

@@ -49,7 +49,7 @@ class Util:
             return MockResponse("quarantine.resp")
         elif kwargs.get("json").get("variables").get("agentID") == "badIDQuarantine":
             return MockResponse("quarantine_bad.resp")
-        elif kwargs.get("json").get("variables").get("agentID") == "goodIDMultiple":
+        elif kwargs.get("json").get("variables").get("agentID") == "assetID":
             return MockResponse("quarantine_multiple.resp")
         elif kwargs.get("json").get("variables").get("orgId") == "9de5069c5afe602b2ea0a04b66beb2c0":
             return MockResponse("get_agent_details.resp")
