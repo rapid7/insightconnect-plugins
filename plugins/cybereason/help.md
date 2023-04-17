@@ -45,6 +45,218 @@ Example input:
 
 ### Actions
 
+#### Archive Sensor
+
+This action is used to archive sensor.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|argument|string|None|True|The reason for archiving the sensor or sensors|None|Sensors are no longer in use|
+|sensor_ids|[]string|None|True|The unique identifier of the machine(s) you wish to perform the operation on|None|["58ae74fae4b06dca39c1d4bc:PYLUMCLIENT_ORG1-PROD_WINTEST-PC_005056A104F9"]|
+
+Example input:
+
+```
+{
+  "argument": "Sensors are no longer in use",
+  "sensor_ids": [
+    "58ae74fae4b06dca39c1d4bc:PYLUMCLIENT_ORG1-PROD_WINTEST-PC_005056A104F9"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|archive_sensor_response|archiveSensorResponse|True|Archive sensor response|
+
+Example output:
+
+```
+{
+  "batchId": 605064018,
+  "actionType": "Archive",
+  "actionArguments": null,
+  "globalStats": {
+    "stats": {
+      "failedSending": 0,
+      "invalidState": 0,
+      "probeRemoved": 0,
+      "timeoutSending": 0,
+      "pending": 0,
+      "chunksRequired": 0,
+      "msiFileCorrupted": 0,
+      "sendingMsi": 0,
+      "newerInstalled": 0,
+      "msiSendFail": 0,
+      "partialResponse": 0,
+      "endedWithSensorTimeout": 0,
+      "failedSendingToServer": 0,
+      "gettingChunks": 0,
+      "aborted": 0,
+      "started": 0,
+      "inProgress": 0,
+      "disconnected": 0,
+      "failed": 0,
+      "timeout": 0,
+      "endedWithTooManyResults": 0,
+      "alreadyUpdated": 0,
+      "endedWithTooManySearches": 0,
+      "succeeded": 0,
+      "notSupported": 0,
+      "endedWithUnknownError": 0,
+      "none": 1,
+      "primed": 0,
+      "endedWithInvalidParam": 0,
+      "unknownProbe": 0,
+      "abortTimeout": 0,
+      "unauthorizedUser": 0
+    }
+  },
+  "finalState": false,
+  "totalNumberOfProbes": 1,
+  "initiatorUser": "user@example.com",
+  "startTime": 1523875125179,
+  "aborterUser": null,
+  "abortTime": 0,
+  "abortTimeout": false,
+  "abortHttpStatusCode": null
+}
+
+```
+
+#### Get Sensor
+
+This action is used to get sensor.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|limit|integer|None|True|The number of sensors to which to send the request|None|1|
+|offset|integer|None|True|Set to 0 to receive the first limit set of sensors|None|0|
+|indicator|string|None|True|The unique identifier of the machine you wish to perform the operation on, this can be an internal IPv4 address, hostname or sensor GUID|None|104.31.2.164|
+
+Example input:
+
+```
+{
+  "limit": 1,
+  "offset": 0,
+  "indicator": "104.31.2.164"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|sensor|sensors|True|Sensor|
+
+Example output:
+
+```
+{
+  "sensorId": "5e57b2dde4b06a3a515cc0eb:PYLUMCLIENT_SES_WIN10-EDLAB-AIQ_000C29B6AB6D",
+  "pylumId": "PYLUMCLIENT_SES_WIN10-EDLAB-AIQ_000C29B6AB6D",
+  "guid": "tEjQQRCi55eyTiwX",
+  "fqdn": "win10-edlab-aiq1",
+  "machineName": "win10-edlab-aiq1",
+  "internalIpAddress": "111.11.133.21",
+  "externalIpAddress": "2.16.258.145",
+  "siteName": "Primary",
+  "siteId": 46210509,
+  "ransomwareStatus": "DETECT_SUSPEND_PREVENT",
+  "preventionStatus": "ENABLED",
+  "isolated": false,
+  "disconnectionTime": 1628068498840,
+  "lastPylumInfoMsgUpdateTime": 1628068444513,
+  "lastPylumUpdateTimestampMs": 1628068498840,
+  "status": "Archived",
+  "serviceStatus": "Down",
+  "onlineTimeMS": 0,
+  "offlineTimeMS": 0,
+  "staleTimeMS": 0,
+  "archiveTimeMs": 1635854400487,
+  "statusTimeMS": 0,
+  "lastStatusAction": "None",
+  "archivedOrUnarchiveComment": "Auto-archived after 60 days stale",
+  "sensorArchivedByUser": "Auto-archived",
+  "serverName": "ses-1-t",
+  "serverId": "5e57b2dde4b06a3a515cc0eb",
+  "serverIp": "10.130.8.127",
+  "privateServerIp": "10.130.8.127",
+  "collectiveUuid": "f9ca36d9-0c09-45e5-82d6-7e026ec1e803",
+  "osType": "WINDOWS",
+  "osVersionType": "Windows_10",
+  "collectionStatus": "ADVANCED",
+  "version": "21.1.144.0",
+  "consoleVersion": null,
+  "firstSeenTime": 1627316564474,
+  "upTime": 695032210,
+  "cpuUsage": 0.0,
+  "memoryUsage": 0,
+  "outdated": true,
+  "amStatus": "AM_BLOCK",
+  "amModeOrigin": null,
+  "avDbVersion": "85274",
+  "avDbLastUpdateTime": 1627468314000,
+  "powerShellStatus": "PS_ENABLED",
+  "remoteShellStatus": "AC_ENABLED",
+  "usbStatus": "DISABLED",
+  "fwStatus": "DISABLED",
+  "antiExploitStatus": "AE_CAUTIOUS",
+  "documentProtectionStatus": "DS_DETECT",
+  "documentProtectionMode": "DM_CAUTIOUS",
+  "serialNumber": "",
+  "deviceModel": "Intel(R) Core(TM) i9-9880H CPU @ 2.30GHz",
+  "organizationalUnit": "",
+  "antiMalwareStatus": "AM_ENABLED",
+  "antiMalwareModeOrigin": null,
+  "organization": "ses",
+  "proxyAddress": "",
+  "preventionError": "",
+  "exitReason": "STOP_REQUEST_FROM_PYLUM",
+  "actionsInProgress": 0,
+  "pendingActions": [],
+  "lastUpgradeResult": "None",
+  "department": null,
+  "location": null,
+  "criticalAsset": null,
+  "deviceType": null,
+  "customTags": "CRITICAL",
+  "lastUpgradeSteps": [],
+  "disconnected": true,
+  "staticAnalysisDetectMode": "MODERATE",
+  "staticAnalysisDetectModeOrigin": null,
+  "staticAnalysisPreventMode": "MODERATE",
+  "staticAnalysisPreventModeOrigin": null,
+  "collectionComponents": [
+    "DPI",
+    "Metadata",
+    "File Events",
+    "Registry Events"
+  ],
+  "sensorLastUpdate": 0,
+  "fullScanStatus": "IDLE",
+  "quickScanStatus": "IDLE",
+  "lastFullScheduleScanSuccessTime": 0,
+  "lastQuickScheduleScanSuccessTime": 0,
+  "policyName": "ED_CUSTOM_POLICY",
+  "deliveryTime": 1627328611652,
+  "policyId": "8c1c93ff-08cb-4b4e-b253-7f5c9d3e08bc",
+  "compliance": true,
+  "groupId": "af617d16-b83e-4739-948d-339ce21b9177",
+  "groupName": "aaa",
+  "groupStickiness": true,
+  "purgedSensors": false,
+  "groupStickinessLabel": "Manual"
+}
+```
+
 #### Delete Registry Key
 
 This action is used to delete a registry key involved in a Malop.
@@ -241,8 +453,8 @@ Example input:
 
 ```
 {
-  "file_filter": "fileName Equals: [\"sample.py\"]",
-  "server_filter": "machineName: [\"rapid7-windows\"]"
+  "file_filter": "fileName Equals: ["sample.py"]",
+  "server_filter": "machineName: ["rapid7-windows"]"
 }
 ```
 
@@ -354,6 +566,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.2.0 - Added new actions: `Get Sensor` & `Archive Sensor`
 * 2.1.0 - New action Delete Registry Key | Add support product versions
 * 2.0.2 - Remove ISOLATE_MACHINE option from Remediate Items action documentation
 * 2.0.1 - Fix incorrect error messaging when invalid credentials are used
@@ -363,6 +576,8 @@ _This plugin does not contain any troubleshooting information._
 * 1.0.0 - Initial plugin
 
 # Links
+
+https://nest.cybereason.com/documentation/api-documentation
 
 ## References
 
