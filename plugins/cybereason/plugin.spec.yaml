@@ -1341,6 +1341,56 @@ actions:
         type: archiveSensorResponse
         example: {}
         required: true
+  get_sensor:
+    title: Get Sensor
+    description: Get sensor
+    input:
+      limit:
+        title: Limit
+        description: The number of sensors to which to send the request
+        type: integer
+        required: true
+        example: 1
+      offset:
+        title: Offset
+        description: Set to 0 to receive the first limit set of sensors
+        type: integer
+        required: true
+        example: 0
+      indicator:
+        title: Indicator
+        description: The unique identifier of the machine you wish to perform the operation on, this can be an internal IPv4 address, hostname or sensor GUID
+        type: string
+        required: true
+        example: 104.31.2.164
+    output:
+      sensor:
+        title: Sensor
+        description: Sensor
+        type: sensors
+        required: true
+  archive_sensor:
+    title: Archive Sensor
+    description: Archive sensor
+    input:
+      sensor_ids:
+        title: Sensor IDS
+        description: The unique identifier of the machine(s) you wish to perform the operation on
+        type: "[]string"
+        required: true
+        example: ["58ae74fae4b06dca39c1d4bc:PYLUMCLIENT_ORG1-PROD_WINTEST-PC_005056A104F9"]
+      argument:
+        title: Argument
+        description: The reason for archiving the sensor or sensors
+        type: string
+        required: true
+        example: "Sensors are no longer in use"
+    output:
+      archive_sensor_response:
+        title: Archive Sensor Response
+        description: Archive sensor response
+        type: archiveSensorResponse
+        required: true
   quarantine_file:
     title: Quarantine File
     description: Quarantine a detected malicious file in a secure location or unquarantine a file
