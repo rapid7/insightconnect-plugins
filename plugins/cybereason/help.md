@@ -566,7 +566,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.2.0 - Added new actions: Get Sensor, Archive Sensor
+* 2.2.0 - Added new actions: `Get Sensor` & `Archive Sensor`
 * 2.1.0 - New action Delete Registry Key | Add support product versions
 * 2.0.2 - Remove ISOLATE_MACHINE option from Remediate Items action documentation
 * 2.0.1 - Fix incorrect error messaging when invalid credentials are used
