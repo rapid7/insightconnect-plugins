@@ -50,7 +50,7 @@ This action is used to update shared credentials.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|account|account|None|True|Specify the type of service to authenticate as well as all of the information required by that service|None|None|
+|account|account|None|True|Specify the type of service to authenticate as well as all of the information required by that service|None|{'authentication_type': 'no-authentication', 'community_name': 'rapid community', 'database': 'rapid7_database', 'domain': 'rapid7.com', 'enumerate_sids': False, 'notes_id_password': 'notes_id_password', 'ntlm_hash': '86956E15C7F452086BEEB6BB005E0388', 'oracle_listener_password': 'oracle_listener_password', 'password': 'password', 'pem_key': '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEA3Tz2mr7SZiAMfQyuvBj...', 'permission_elevation': 'sudo', 'permission_elevation_password': 'permission_elevation_password', 'permission_elevation_username': 'permission_elevation_username', 'privacy_password': 'privacy_password', 'privacy_type': 'no-privacy', 'private_key_password': 'private_key_password', 'realm': 'realm0', 'service': 'telnet', 'sid': 'rapid7_database2', 'use_windows_authentication': False, 'username': 'username'}|
 |description|string|None|False|The description of the credential|None|example input with every field filled. Note real input will only have specific fields filled|
 |host_restriction|string|None|False|The host name or IP address that you want to restrict the credentials to|None|my-macbook-name|
 |id|integer|None|False|The identifier of the credential|None|123|
@@ -186,7 +186,7 @@ This action is used to update vulnerability exception expiration dates.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|date|string|None|True|Expiration date|None|https://example.com|
+|date|string|None|True|Expiration date|None|2020-02-24T06:59:59.999Z|
 |id|integer|None|True|Asset ID|None|42|
 
 Example input:
@@ -1054,7 +1054,7 @@ This action is used to start a scan on a site.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|hosts|[]string|None|False|The hosts that should be included in the scan|None|["https://example.com", "https://example.com", "https://example.com"]|
+|hosts|[]string|None|False|The hosts that should be included in the scan|None|"192.0.2.3", "192.0.2.10-192.0.2.20", "ADSRV.local"]|
 |site_id|string|None|True|ID of the site to scan|None|1|
 
 Example input:
@@ -2450,7 +2450,7 @@ This action is used to update an existing site scope of included IP address and 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|integer|None|True|The identifier of the site|None|1234|
-|included_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|["https://example.com", "https://example.com"]|
+|included_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|["10.2.144", "10.8.36.144"]|
 |overwrite|boolean|True|True|Whether to overwrite the included targets to the current site or append to the previous list of included targets|None|True|
 
 Example input:
@@ -2495,7 +2495,7 @@ This action is used to update an existing site scope of excluded IP address and 
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|excluded_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|["https://example.com", "https://example.com"]|
+|excluded_targets|[]string|None|False|List of addresses that represent either a hostname, IPv4 address, IPv4 address range, IPv6 address, or CIDR notation|None|["10.2.144", "10.8.36.144"]|
 |id|integer|None|True|The identifier of the site|None|1234|
 |overwrite|boolean|True|True|Whether to overwrite the excluded targets to the current site or append to the previous list of excluded targets|None|True|
 
@@ -3501,7 +3501,7 @@ This action is used to list scan engines paired with the security console.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|False|Optional address (IP/hostname) by which to filter, accepts regular expression patterns|None|https://example.com|
+|address|string|None|False|Optional address (IP/hostname) by which to filter, accepts regular expression patterns|None|10.4.36.120|
 |name|string|None|False|Optional engine name by which to filter, accepts regular expression patterns|None|example name|
 
 Example input:
@@ -3771,7 +3771,7 @@ This action is used to create a new scan engine with console -> engine connectiv
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|Scan engine address (IP/hostname)|None|https://example.com|
+|address|string|None|True|Scan engine address (IP/hostname)|None|10.4.36.120|
 |name|string|None|True|Scan engine name|None|example name|
 |port|integer|40814|True|Scan engine connectivity port|None|40814|
 |sites|[]integer|[]|False|List of site IDs with which to associate the engine|None|[1234, 5678]|
@@ -4980,7 +4980,7 @@ This action is used to create a new user account (limited to external authentica
 |access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|False|
 |authentication_id|integer|None|False|The identifier of the authentication source to use to authenticate the user. The source with the specified identifier must be of the type specified by Authentication Type. If Authentication ID is omitted, then one source of the specified Authentication Type is selected|None|1234|
 |authentication_type|string|ldap|True|The type of the authentication source to use to authenticate the user|['kerberos', 'ldap', 'saml']|ldap|
-|email|string|None|True|The email address of the user|None|https://example.com|
+|email|string|None|True|The email address of the user|None|user@example.com|
 |enabled|boolean|True|True|Whether the user account is enabled|None|True|
 |login|string|None|True|The login name of the user|None|jdoe24|
 |name|string|None|True|The full name of the user|None|John Doe|
@@ -5039,7 +5039,7 @@ This action is used to update the configuration of an existing user account.
 |access_all_sites|boolean|False|True|Whether to grant the user access to all sites|None|False|
 |authentication_id|integer|None|False|The identifier of the authentication source to use to authenticate the user. The source with the specified identifier must be of the type specified by Authentication Type. If Authentication ID is omitted, then one source of the specified Authentication Type is selected|None|567|
 |authentication_type|string|ldap|True|The type of the authentication source to use to authenticate the user|['normal', 'admin', 'kerberos', 'ldap', 'saml']|ldap|
-|email|string|None|True|The email address of the user|None|https://example.com|
+|email|string|None|True|The email address of the user|None|user@example.com|
 |enabled|boolean|True|True|Whether the user account is enabled|None|True|
 |id|integer|None|True|The identifier of the user|None|1234|
 |login|string|None|True|The login name of the user|None|jdoe24|
