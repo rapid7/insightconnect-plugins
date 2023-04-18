@@ -1,0 +1,18 @@
+{
+    "data":{
+        "quarantineAssets":{
+            "results":[
+                {
+                    "assetId":"abcdef"
+                }
+            ]
+        },
+        "unquarantineAssets":{
+            "results":[
+                {
+                    "assetId":"abcdef"
+                }
+            ]
+        }
+    }
+}

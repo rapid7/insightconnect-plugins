@@ -16,7 +16,7 @@ The agent is used by [Rapid7 InsightIDR](https://www.rapid7.com/products/insight
 
 # Supported Product Versions
 
-* Rapid7 Insight Agent 2022-04-06
+* Rapid7 Insight Agent 2023-04-06
 
 # Documentation
 
@@ -41,6 +41,49 @@ Example input:
 ## Technical Details
 
 ### Actions
+
+#### Quarantine Multiple
+
+This action is used to quarantine or unquarantine multiple hosts.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|agent_array|[]string|None|True|Hostnames of the devices to quarantine|None|["WindowsX64", "WindowsX32"]|
+|interval|int|604800|True|Length of time in seconds to try to take action on a device. This is also called Advertisement Period|None|604800|
+|quarantine_state|boolean|True|True|Set to true to quarantine a host, set to false to unquarantine|None|True|
+
+Example input:
+
+```
+{
+  "agent_array": [
+    "WindowsX64",
+    "WindowsX32"
+  ],
+  "interval": 604800,
+  "quarantine_state": true
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|failure|[]string|False|List of unsuccessfully quarantined hosts|
+|success|[]string|False|List of successfully quarantined hosts|
+
+Example output:
+
+```
+{
+  "successful_quarantine": [
+    "b6a3b745706e977e3b4819213c4bdf82"
+  ],
+  "unsuccessful_quarantine": []
+}
+```
 
 #### Check Agent Status
 
@@ -204,6 +247,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.2.0 - New action: `Quarantine Multiple`
 * 1.1.1 - Quarantine: Fix incorrect behavior for unquarantine when the agent ID is wrong
 * 1.1.0 - Cloud enabled
 * 1.0.4 - Add new supported regions for API | Create unit tests for actions Check Agent Status, Quarantine, Get Agent Details  
