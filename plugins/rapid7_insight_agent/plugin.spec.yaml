@@ -4,8 +4,8 @@ products: [insightconnect]
 name: rapid7_insight_agent
 title: Rapid7 Insight Agent
 description: Using the Insight Agent plugin from InsightConnect, you can quarantine, unquarantine and monitor potentially malicious IPs, addresses, hostnames, and devices across your organization
-version: 1.1.1
-supported_versions: ["Rapid7 Insight Agent 2022-04-06"]
+version: 1.2.0
+supported_versions: ["Rapid7 Insight Agent 2023-04-06"]
 vendor: rapid7
 support: rapid7
 status: []
@@ -171,6 +171,41 @@ connection:
       - Australia
       - Japan
 actions:
+  quarantine_multiple:
+    title: Quarantine Multiple
+    description: Quarantine or unquarantine multiple hosts
+    input:
+      agent_array:
+        title: Agent Array
+        description: Hostnames of the devices to quarantine
+        type: "[]string"
+        required: true
+        example: ["WindowsX64", "WindowsX32"]
+      interval:
+        title: Interval
+        description: Length of time in seconds to try to take action on a device. This is also called Advertisement Period
+        type: int
+        default: 604800
+        example: 604800
+        required: true
+      quarantine_state:
+        title: Quarantine State
+        description: Set to true to quarantine a host, set to false to unquarantine
+        type: boolean
+        default: true
+        example: true
+        required: true
+    output:
+      success:
+        title: Successful (Un)Quarantine
+        description: List of successfully quarantined hosts
+        type: "[]string"
+        required: false
+      failure:
+        title: Unsuccessful (Un)Quarantine
+        description: List of unsuccessfully quarantined hosts
+        type: "[]string"
+        required: false
   get_agent_details:
     title: Get Agent Details
     description: This action is used to find and display detailed information about a device
