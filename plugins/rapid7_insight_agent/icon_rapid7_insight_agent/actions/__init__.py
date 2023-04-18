@@ -2,3 +2,4 @@
 from .check_agent_status.action import CheckAgentStatus
 from .get_agent_details.action import GetAgentDetails
 from .quarantine.action import Quarantine
+from .quarantine_multiple.action import QuarantineMultiple
