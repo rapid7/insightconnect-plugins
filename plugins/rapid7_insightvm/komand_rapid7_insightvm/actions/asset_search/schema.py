@@ -139,7 +139,7 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
           "title": "Files",
           "description": "Files discovered with searching on the asset",
           "items": {
-            "$ref": "#/definitions/file"
+            "$ref": "#/definitions/insightvm_file"
           },
           "order": 6
         },
@@ -421,25 +421,6 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
             }
           }
         },
-        "file": {
-          "id": "file",
-          "type": "object",
-          "title": "File",
-          "description": "File Object",
-          "properties": {
-            "content": {
-              "type": "string",
-              "title": "Content",
-              "description": "File contents",
-              "format": "bytes"
-            },
-            "filename": {
-              "type": "string",
-              "title": "Filename",
-              "description": "Name of file"
-            }
-          }
-        },
         "history": {
           "type": "object",
           "title": "history",
@@ -521,6 +502,67 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
               "title": "Source",
               "description": "Source",
               "order": 2
+            }
+          }
+        },
+        "insightvm_file": {
+          "type": "object",
+          "title": "insightvm_file",
+          "properties": {
+            "attributes": {
+              "type": "array",
+              "title": "Attributes",
+              "description": "Attributes detected on the file",
+              "items": {
+                "$ref": "#/definitions/configuration"
+              },
+              "order": 1
+            },
+            "content": {
+              "type": "string",
+              "title": "Contents",
+              "displayType": "bytes",
+              "description": "Contents of the file",
+              "format": "bytes",
+              "order": 5
+            },
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "Name of the file",
+              "order": 2
+            },
+            "size": {
+              "type": "integer",
+              "title": "Size",
+              "description": "Size of the regular file (in bytes). If the file is a directory, no value is returned",
+              "order": 3
+            },
+            "type": {
+              "type": "string",
+              "title": "Type",
+              "description": "Type of the file, e.g. file or directory",
+              "order": 4
+            }
+          },
+          "definitions": {
+            "configuration": {
+              "type": "object",
+              "title": "configuration",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "title": "Name",
+                  "description": "Name of the configuration value",
+                  "order": 1
+                },
+                "value": {
+                  "type": "string",
+                  "title": "Value",
+                  "description": "Configuration value",
+                  "order": 2
+                }
+              }
             }
           }
         },
@@ -1472,25 +1514,6 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
-    "file": {
-      "id": "file",
-      "type": "object",
-      "title": "File",
-      "description": "File Object",
-      "properties": {
-        "content": {
-          "type": "string",
-          "title": "Content",
-          "description": "File contents",
-          "format": "bytes"
-        },
-        "filename": {
-          "type": "string",
-          "title": "Filename",
-          "description": "Name of file"
-        }
-      }
-    },
     "history": {
       "type": "object",
       "title": "history",
@@ -1572,6 +1595,67 @@ class AssetSearchOutput(insightconnect_plugin_runtime.Output):
           "title": "Source",
           "description": "Source",
           "order": 2
+        }
+      }
+    },
+    "insightvm_file": {
+      "type": "object",
+      "title": "insightvm_file",
+      "properties": {
+        "attributes": {
+          "type": "array",
+          "title": "Attributes",
+          "description": "Attributes detected on the file",
+          "items": {
+            "$ref": "#/definitions/configuration"
+          },
+          "order": 1
+        },
+        "content": {
+          "type": "string",
+          "title": "Contents",
+          "displayType": "bytes",
+          "description": "Contents of the file",
+          "format": "bytes",
+          "order": 5
+        },
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "Name of the file",
+          "order": 2
+        },
+        "size": {
+          "type": "integer",
+          "title": "Size",
+          "description": "Size of the regular file (in bytes). If the file is a directory, no value is returned",
+          "order": 3
+        },
+        "type": {
+          "type": "string",
+          "title": "Type",
+          "description": "Type of the file, e.g. file or directory",
+          "order": 4
+        }
+      },
+      "definitions": {
+        "configuration": {
+          "type": "object",
+          "title": "configuration",
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "Name of the configuration value",
+              "order": 1
+            },
+            "value": {
+              "type": "string",
+              "title": "Value",
+              "description": "Configuration value",
+              "order": 2
+            }
+          }
         }
       }
     },

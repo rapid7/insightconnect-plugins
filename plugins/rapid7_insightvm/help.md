@@ -27,7 +27,7 @@ The connection configuration accepts the following parameters:
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |credentials|credential_username_password|None|True|Username and password|None|{'username': 'user1', 'password': 'mypassword'}|
-|url|string|None|True|URL to your InsightVM console, without trailing slashes, e.g. https://insightvm.example.com:3780|None|https://insightvm.example.com:3780|
+|url|string|None|True|URL to your InsightVM console, without trailing slashes|None|https://example.com|
 
 Example input:
 
@@ -49,7 +49,7 @@ This action is used to update shared credentials.
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|---|
+|----|----|-------|--------|-----------|----|-------|
 |account|account|None|True|Specify the type of service to authenticate as well as all of the information required by that service|None|{'authentication_type': 'no-authentication', 'community_name': 'rapid community', 'database': 'rapid7_database', 'domain': 'rapid7.com', 'enumerate_sids': False, 'notes_id_password': 'notes_id_password', 'ntlm_hash': '86956E15C7F452086BEEB6BB005E0388', 'oracle_listener_password': 'oracle_listener_password', 'password': 'password', 'pem_key': '-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEA3Tz2mr7SZiAMfQyuvBj...', 'permission_elevation': 'sudo', 'permission_elevation_password': 'permission_elevation_password', 'permission_elevation_username': 'permission_elevation_username', 'privacy_password': 'privacy_password', 'privacy_type': 'no-privacy', 'private_key_password': 'private_key_password', 'realm': 'realm0', 'service': 'telnet', 'sid': 'rapid7_database2', 'use_windows_authentication': False, 'username': 'username'}|
 |description|string|None|False|The description of the credential|None|example input with every field filled. Note real input will only have specific fields filled|
 |host_restriction|string|None|False|The host name or IP address that you want to restrict the credentials to|None|my-macbook-name|
@@ -62,38 +62,6 @@ This action is used to update shared credentials.
 Example input:
 
 ```
-{
-    "account":{
-        "authentication_type": "no-authentication",
-        "community_name": "rapid community",
-        "database": "rapid7_database",
-        "domain": "rapid7.com",
-        "enumerate_sids": false,
-        "notes_id_password": "notes_id_password",
-        "ntlm_hash": "86956E15C7F452086BEEB6BB005E0388",
-        "oracle_listener_password": "oracle_listener_password",
-        "password": "password",
-        "pem_key": "-----BEGIN RSA PRIVATE KEY----- MIIEpQIBAAKCAQEA3Tz2mr7SZiAMfQyuvBj...",
-        "permission_elevation": "sudo",
-        "permission_elevation_password": "permission_elevation_password",
-        "permission_elevation_username": "permission_elevation_username",
-        "privacy_password": "privacy_password",
-        "privacy_type": "no-privacy",
-        "private_key_password": "private_key_password",
-        "realm": "realm0",
-        "service": "telnet",
-        "sid": "rapid7_database2",
-        "use_windows_authentication": false,
-        "username": "username"
-    }
-    "description": "example input with every field filled. Note real input will only have specific fields filled",
-    "hostRestriction": "my-macbook-name",
-    "id": "123",
-    "name": "my-AS400-credentials",
-    "portRestriction": "8888",
-    "siteAssignment": "all-sites",
-    "sites": []
-}
 
 ```
 
@@ -131,10 +99,7 @@ Example input:
 
 ```
 {
-  "asset_id": 423,
-  "vulnerability_ids": [
-    "flash_player-cve-2017-11305"
-  ]
+  "asset_id": 1234
 }
 ```
 
@@ -837,8 +802,7 @@ Example input:
 
 ```
 {
-  "asset_id": 234,
-  "get_risk_score": true
+  "asset_id": 1234
 }
 ```
 
@@ -910,7 +874,7 @@ Example input:
 
 ```
 {
-  "asset_id": "234"
+  "asset_id": 234
 }
 ```
 
@@ -1401,10 +1365,7 @@ Example input:
 {
   "color": "default",
   "name": "example name",
-  "searchCriteria": {
-    "risk-score": "asc",
-    "criticality-tag": "desc"
-  },
+  "searchCriteria": "{'risk-score': 'asc', 'criticality-tag': 'desc'}",
   "type": "owner"
 }
 ```
@@ -1475,7 +1436,8 @@ Example input:
 
 ```
 {
-  "id": 1234
+  "name": "example name",
+  "type": "owner"
 }
 ```
 
@@ -2001,6 +1963,15 @@ This action is used to add a tag to an asset.
 |tag_name|string|None|True|Name of tag to add to assets|None|Very High|
 |tag_source|string|None|True|Source of tag to add to assets|None|built-in|
 |tag_type|string|None|True|Type of tag to add to assets|None|criticality|
+
+Example input:
+
+```
+{
+  "asset_id": 12345,
+  "tag_id": 1234
+}
+```
 
 ##### Output
 
@@ -2532,12 +2503,12 @@ Example input:
 
 ```
 {
-  "excluded_targets": [
-    "10.2.144",
-    "10.8.36.144"
-  ],
+  "description": "example description",
+  "engine_id": 1234,
   "id": 1234,
-  "overwrite": true
+  "importance": "low",
+  "name": "example name",
+  "scan_template_id": 1234
 }
 ```
 
@@ -2578,12 +2549,12 @@ Example input:
 
 ```
 {
+  "description": "example description",
+  "engine_id": 1234,
   "id": 1234,
-  "included_asset_groups": [
-    1234,
-    567
-  ],
-  "overwrite": true
+  "importance": "low",
+  "name": "example name",
+  "scan_template_id": 1234
 }
 ```
 
@@ -2705,7 +2676,7 @@ Example input:
 
 ```
 {
-  "name": "example name"
+  "id": 1234
 }
 ```
 
@@ -2929,7 +2900,7 @@ Example input:
 
 ```
 {
-  "name": "example name"
+  "id": 1234
 }
 ```
 
@@ -3537,7 +3508,8 @@ Example input:
 
 ```
 {
-  "id": 1234
+  "address": "10.4.36.120",
+  "name": "example name"
 }
 ```
 
@@ -3738,7 +3710,7 @@ Example input:
 
 ```
 {
-  "id": 1234
+  "scan_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
 }
 ```
 
@@ -3895,7 +3867,7 @@ Example input:
 
 ```
 {
-  "id": 1234
+  "scan_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
 }
 ```
 
@@ -3971,7 +3943,7 @@ Example input:
 
 ```
 {
-  "id": 1234
+  "scan_id": "11234abc-65c8-4628-adf4-e27f36ea0e2b"
 }
 ```
 
@@ -4192,8 +4164,12 @@ Example input:
 
 ```
 {
-  "engine_id": 5678,
-  "site_id": 1234
+  "description": "example description",
+  "engine_id": 1234,
+  "id": 1234,
+  "importance": "low",
+  "name": "example name",
+  "scan_template_id": 1234
 }
 ```
 
@@ -5236,14 +5212,8 @@ Example input:
 {
   "access_all_asset_groups": false,
   "access_all_sites": false,
-  "authentication_id": 567,
-  "authentication_type": "ldap",
-  "email": "user@example.com",
-  "enabled": true,
-  "id": 1234,
-  "login": "jdoe24",
-  "name": "John Doe",
-  "role_id": "global-admin"
+  "role_id": "global-admin",
+  "user_id": 1234
 }
 ```
 
@@ -5281,16 +5251,11 @@ Example input:
 
 ```
 {
-  "access_all_asset_groups": false,
-  "access_all_sites": false,
-  "authentication_id": 567,
-  "authentication_type": "ldap",
-  "email": "user@example.com",
-  "enabled": true,
-  "id": 1234,
-  "login": "jdoe24",
-  "name": "John Doe",
-  "role_id": "global-admin"
+  "asset_group_ids": [
+    1234,
+    5678
+  ],
+  "user_id": 1234
 }
 ```
 
@@ -5406,11 +5371,16 @@ Example input:
 
 ```
 {
-  "site_ids": [
-    1234,
-    567
-  ],
-  "user_id": 1234
+  "access_all_asset_groups": false,
+  "access_all_sites": false,
+  "authentication_id": 567,
+  "authentication_type": "ldap",
+  "email": "user@example.com",
+  "enabled": true,
+  "id": 1234,
+  "login": "jdoe24",
+  "name": "John Doe",
+  "role_id": "global-admin"
 }
 ```
 
@@ -5736,6 +5706,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 6.0.0 - Fix file output type for `Generate Adhoc SQL Report` | Replace custom output type `file` with `insightvm_file` for each item in the `asset` `files` output in multiple actions
 * 5.1.0 - Add new action update shared credential
 * 5.0.1 - Fix issue in New Scans trigger where an exception was thrown if no scan IDs were previously cached for that site
 * 5.0.0 - Fix parameters type, input examples and description for `Get Asset Vulnerability Solutions`, `Get Asset Vulnerabilities`, `Get Asset Software` and `Get Asset` actions

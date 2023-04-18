@@ -124,6 +124,16 @@ class Util:
             return MockResponse("update_shared_credential_valid", 200)
         if kwargs.get("url") == "https://example.com/api/3/shared_credentials/2":
             return MockResponse("update_shared_credential_error", 400)
+        if kwargs.get("url") == "https://example.com/api/3/reports":
+            return MockResponse("generate_adhoc_sql_report", 200)
+        if kwargs.get("url") == "https://example.com/api/3/reports/1/generate":
+            return MockResponse("create_adhoc_sql_report", 200)
+        if kwargs.get("url") == "https://example.com/api/3/reports/1/history/1":
+            return MockResponse("status_adhoc_sql_report", 200)
+        if kwargs.get("url") == "https://example.com/api/3/reports/1/history/1/output":
+            return MockResponse("download_adhoc_sql_report", 200)
+        if kwargs.get("url") == "https://example.com/api/3/reports/1":
+            return MockResponse("delete_adhoc_sql_report", 200)
 
         raise Exception("Not implemented")
 
