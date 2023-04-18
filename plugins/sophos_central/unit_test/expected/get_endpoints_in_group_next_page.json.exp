@@ -1,0 +1,23 @@
+{
+  "items": [
+    {
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c1",
+      "hostname": "DESKTOP-1234568",
+      "os": {
+        "isServer": false,
+        "platform": "windows",
+        "name": "Windows 10 Home N",
+        "majorVersion": 10,
+        "minorVersion": 0,
+        "build": 19042
+      }
+    }
+  ],
+  "pages": {
+    "fromKey": "exampleKey",
+    "size": 1,
+    "total": 2,
+    "items": 2,
+    "maxSize": 500
+  }
+}
