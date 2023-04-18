@@ -53,7 +53,7 @@ class ApiConnection:
         }
 
         results_object = self._post_payload(quarantine_payload)
-        failed = results_object.get("data", {}).get("quarantineAssets").get("results")[0].get("failed")
+        failed = results_object.get("data", {}).get("quarantineAssets", {}).get("results", [])[0].get("failed")
         return not failed
 
     def unquarantine(self, agent_id: str) -> bool:
@@ -70,7 +70,7 @@ class ApiConnection:
             "variables": {"orgID": self.org_key, "agentID": agent_id},
         }
         results_object = self._post_payload(payload)
-        agent = results_object.get("data", {}).get("assets")[0].get("agent")
+        agent = results_object.get("data", {}).get("assets", [])[0].get("agent")
         if not agent:
             return False
 
