@@ -5,8 +5,10 @@ import json
 
 class Input:
     ACCOUNT_ID = "account_id"
+    AUTHENTICATION_RETRY_LIMIT = "authentication_retry_limit"
     CLIENT_ID = "client_id"
     CLIENT_SECRET = "client_secret"
+    JWT_TOKEN = "jwt_token"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -18,27 +20,35 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     "account_id": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Account ID",
-      "description": "Zoom app account ID",
+      "description": "Zoom app account ID, required for OAuth authentication",
       "order": 3
+    },
+    "authentication_retry_limit": {
+      "type": "integer",
+      "title": "OAuth Authentication Retry Limit",
+      "description": "How many times to retry authentication to Zoom before failing, required for OAuth authentication",
+      "default": 5,
+      "order": 4
     },
     "client_id": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Client ID",
-      "description": "Zoom app client ID",
+      "description": "Zoom app client ID, required for OAuth authentication",
       "order": 1
     },
     "client_secret": {
       "$ref": "#/definitions/credential_secret_key",
       "title": "Client Secret",
-      "description": "Zoom app client secret",
+      "description": "Zoom app client secret, required for OAuth authentication",
       "order": 2
+    },
+    "jwt_token": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "JWT Token",
+      "description": "Zoom JWT token, without the Bearer prefix",
+      "order": 5
     }
   },
-  "required": [
-    "account_id",
-    "client_id",
-    "client_secret"
-  ],
   "definitions": {
     "credential_secret_key": {
       "id": "credential_secret_key",

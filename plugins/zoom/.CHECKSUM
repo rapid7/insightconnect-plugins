@@ -1,7 +1,7 @@
 {
-	"spec": "5dcfc0bacfdc6036a662cbb0e5126659",
-	"manifest": "971209359ae35e16b468529870d59720",
-	"setup": "7c48b11404f92cc2aa2a52f3bdf952b4",
+	"spec": "d761994a31bceaad443d92a3360c684c",
+	"manifest": "c6d21865840af36d4c533cd3a063613f",
+	"setup": "c63b0baf19567cdf79670f42e4dd8777",
 	"schemas": [
 		{
 			"identifier": "create_user/schema.py",
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "ae571620dec323e9ed834ee27055efac"
+			"hash": "eba2f34fe6858ab2769d8086e6441d01"
 		},
 		{
 			"identifier": "monitor_sign_in_out_activity/schema.py",
@@ -26,6 +26,42 @@
 		{
 			"identifier": "user_activity_event/schema.py",
 			"hash": "7d22a79138fc964a9718dee04af1025f"
+		},
+		{
+			"identifier": "insightconnect_plugin_runtime/schema.py",
+			"hash": "98e2cf8bf394d0b6f97cdfeb657ea71b"
+		},
+		{
+			"identifier": "marshmallow/schema.py",
+			"hash": "7c9fc22caa77ab8be9957e79867f426a"
+		},
+		{
+			"identifier": "hello/schema.py",
+			"hash": "92ec4b966e523fe43b8d3e1589ecd235"
+		},
+		{
+			"identifier": "return_bad_json/schema.py",
+			"hash": "bb41c13e9e71e212c1545150a16f8b73"
+		},
+		{
+			"identifier": "throw_exception/schema.py",
+			"hash": "7cdacec63e0eaeefc7f0adc5ebbae8ce"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "f1bf7d508c81c245888665a322d984e8"
+		},
+		{
+			"identifier": "hello_trigger/schema.py",
+			"hash": "6fda62f9b28a899e2ecb7aab1311bbb2"
+		},
+		{
+			"identifier": "return_bad_json_trigger/schema.py",
+			"hash": "9a207816ba5b0ab0f9e4f40d86c4cc3e"
+		},
+		{
+			"identifier": "throw_exception_trigger/schema.py",
+			"hash": "23e4aee31e1c532d9ed50830efad1b8d"
 		}
 	]
 }
