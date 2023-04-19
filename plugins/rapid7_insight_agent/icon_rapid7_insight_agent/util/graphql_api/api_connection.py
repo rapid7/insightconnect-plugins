@@ -84,11 +84,11 @@ class ApiConnection:
         failed = results_object.get("data").get("unquarantineAssets").get("results")[0].get("failed")
         return not failed
 
-    def quarantine_list(self, agent_hostname_list: List[str], advertisement_period: int) -> Tuple[List[str], List[str]]:
+    def quarantine_list(self, agent_id_list: List[str], advertisement_period: int) -> Tuple[List[str], List[str]]:
         """
         Quarantine an agent given a list of agent IDs
 
-        :param agent_hostname_list: List of agent hostnames to quarantine
+        :param agent_id_list: List of agent IDs to quarantine
         :param advertisement_period: Amount of time, in seconds, to try to take the quarantine action
 
         :return: Two lists containing asset ids for successful or unsuccessful quarantines
@@ -97,9 +97,6 @@ class ApiConnection:
         # Create empty lists for successful & unsuccessful
         successful_quarantine = []
         unsuccessful_quarantine = []
-
-        # Convert the original array of hostnames to IDs
-        agent_id_list = self._convert_hostnames_to_id(agent_hostname_list)
 
         # For each agent ID in the list, perform quarantine
         for agent in agent_id_list:
@@ -124,10 +121,10 @@ class ApiConnection:
 
         return successful_quarantine, unsuccessful_quarantine
 
-    def unquarantine_list(self, agent_hostname_list: List[str]) -> Tuple[List[str], List[str]]:
+    def unquarantine_list(self, agent_id_list: List[str]) -> Tuple[List[str], List[str]]:
         """
         Unquarantine an agent given a list of agent IDs
-        :param agent_hostname_list: List of agent IDs to unquarantine
+        :param agent_id_list: List of agent IDs to unquarantine
 
         :return: Two lists containing asset ids for successful & unsuccessful unquarantine operations.
         """
@@ -135,9 +132,6 @@ class ApiConnection:
         # Create empty lists for successful & unsuccessful
         successful_unquarantine = []
         unsuccessful_unquarantine = []
-
-        # Convert the original array of hostnames to IDs
-        agent_id_list = self._convert_hostnames_to_id(agent_hostname_list)
 
         # For each agent ID in the list, perform unquarantine
         for agent_id in agent_id_list:

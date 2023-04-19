@@ -177,10 +177,10 @@ actions:
     input:
       agent_array:
         title: Agent Array
-        description: Hostnames of the devices to quarantine
+        description: Asset IDs to quarantine or unquarantine
         type: "[]string"
         required: true
-        example: ["WindowsX64", "WindowsX32"]
+        example: ["abcdef123", "abcdef123"]
       interval:
         title: Interval
         description: Length of time in seconds to try to take action on a device. This is also called Advertisement Period

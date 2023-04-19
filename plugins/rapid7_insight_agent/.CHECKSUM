@@ -1,5 +1,5 @@
 {
-	"spec": "601c63092954403bd8d00e2025b4da97",
+	"spec": "51aa0d0de89b025f8d0a2d670030b607",
 	"manifest": "c8410b812b040d7961fd7616a52a2a48",
 	"setup": "6277936e2e9486e1b99ddbdf10faba47",
 	"schemas": [
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "quarantine_multiple/schema.py",
-			"hash": "721334501f425c1d597239fd575f1b4c"
+			"hash": "05c64dad0aa2036044b0a12e60311148"
 		},
 		{
 			"identifier": "connection/schema.py",
