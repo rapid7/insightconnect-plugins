@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Endpoints in your specified group"
+    DESCRIPTION = "Retrieve endpoints in your specified group"
 
 
 class Input:
@@ -47,7 +47,7 @@ class GetEndpointsInGroupInput(insightconnect_plugin_runtime.Input):
     "pageFromKey": {
       "type": "string",
       "title": "Page from Key",
-      "description": "The key of the item from where to fetch a page",
+      "description": "Key of the page to fetch",
       "order": 4
     },
     "pageSize": {

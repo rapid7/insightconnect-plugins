@@ -60,7 +60,7 @@ Example input:
 
 #### Get Endpoints in Group
 
-This action endpoints in your specified group.
+This action retrieves endpoints in your specified group.
 
 ##### Input
 
@@ -68,7 +68,7 @@ This action endpoints in your specified group.
 |----|----|-------|--------|-----------|----|-------|
 |fields|[]string|None|False|The fields to return in a partial response. All fields are returned by default|None|["id", "type"]|
 |groupId|string|None|True|Endpoint group ID|None|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
-|pageFromKey|string|None|False|The key of the item from where to fetch a page|None|exampleKey|
+|pageFromKey|string|None|False|Key of the page to fetch|None|exampleKey|
 |pageSize|integer|50|False|The size of the page requested. Value must be inclusively between 1 and 1000|None|50|
 |pageTotal|boolean|False|False|Whether the number of pages should be calculated and returned in the response|None|False|
 |search|string|None|False|Term to search for in the specified search fields|None|example|

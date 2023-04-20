@@ -1726,7 +1726,7 @@ actions:
         example: {}
   get_endpoints_in_group:
     title: Get Endpoints in Group
-    description: Endpoints in your specified group
+    description: Retrieve endpoints in your specified group
     input:
       groupId:
         title: Group ID
@@ -1748,7 +1748,7 @@ actions:
         example: ["id", "type"]
       pageFromKey:
         title: Page from Key
-        description: The key of the item from where to fetch a page
+        description: Key of the page to fetch
         type: string
         required: false
         example: exampleKey
