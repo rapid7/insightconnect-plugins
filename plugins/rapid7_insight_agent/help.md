@@ -58,12 +58,12 @@ Example input:
 
 ```
 {
-  "agent_array": [
-    "abcdef123", 
+  "agent_array":[
+    "abcdef123",
     "abcdef123"
   ],
-  "interval": 604800,
-  "quarantine_state": true
+  "interval":604800,
+  "quarantine_state":true
 }
 ```
 
@@ -81,7 +81,9 @@ Example output:
   "successful_quarantine": [
     "b6a3b745706e977e3b4819213c4bdf82"
   ],
-  "unsuccessful_quarantine": []
+  "unsuccessful_quarantine": [
+    "b6a3b745706e977e3b4819213c4bdf82"
+  ]
 }
 ```
 
