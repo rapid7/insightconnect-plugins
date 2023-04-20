@@ -14,11 +14,8 @@ from unit_test.util import Util
 @patch("requests.sessions.Session.post", side_effect=Util.mocked_request)
 class TestQuarantineMultiple(TestCase):
     @parameterized.expand(Util.load_json("parameters/quarantine_multiple_success.json.resp").get("parameters"))
-    @patch(
-        "icon_rapid7_insight_agent.util.graphql_api.api_connection.ApiConnection._get_agent_id",
-        return_value="assetID",
-    )
-    def test_quarantine_multiple(self, agent_id_array, interval, quarantine_state, expected, mock_agent_id, mock_post):
+    def test_quarantine_multiple(self, mock_post, agent_id_array, interval, quarantine_state, expected):
+
         action = Util.default_connector(QuarantineMultiple())
         actual = action.run(
             {Input.AGENT_ARRAY: agent_id_array, Input.INTERVAL: interval, Input.QUARANTINE_STATE: quarantine_state}

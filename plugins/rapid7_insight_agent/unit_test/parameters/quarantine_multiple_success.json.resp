@@ -10,7 +10,7 @@
          }
       ],
       [
-         ["bad_agent_id_multiple"],
+         ["agent_id"],
          604800,
          false,
          {
