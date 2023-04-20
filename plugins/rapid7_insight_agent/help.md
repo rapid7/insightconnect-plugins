@@ -78,10 +78,10 @@ Example output:
 
 ```
 {
-  "successful_quarantine": [
+  "success": [
     "b6a3b745706e977e3b4819213c4bdf82"
   ],
-  "unsuccessful_quarantine": [
+  "failure": [
     "b6a3b745706e977e3b4819213c4bdf82"
   ]
 }
