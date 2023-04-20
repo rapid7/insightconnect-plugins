@@ -58,7 +58,10 @@ Example input:
 
 ```
 {
-  "agent_id": ["abcdef123", "abcdef123"],
+  "agent_array": [
+    "abcdef123", 
+    "abcdef123"
+  ],
   "interval": 604800,
   "quarantine_state": true
 }
