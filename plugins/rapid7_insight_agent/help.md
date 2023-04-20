@@ -58,12 +58,12 @@ Example input:
 
 ```
 {
-  "agent_array":[
+  "agent_array": [
     "abcdef123",
     "abcdef123"
   ],
-  "interval":604800,
-  "quarantine_state":true
+  "interval": 604800,
+  "quarantine_state": true
 }
 ```
 
@@ -78,11 +78,11 @@ Example output:
 
 ```
 {
-  "success": [
-    "b6a3b745706e977e3b4819213c4bdf82"
+  "success":[
+    "abcdef123"
   ],
-  "failure": [
-    "b6a3b745706e977e3b4819213c4bdf82"
+  "failure":[
+    "abcdef123"
   ]
 }
 ```

@@ -200,11 +200,13 @@ actions:
         title: Successful (Un)Quarantine
         description: List of successfully quarantined hosts
         type: "[]string"
+        example: ["abcdef123"]
         required: false
       failure:
         title: Unsuccessful (Un)Quarantine
         description: List of unsuccessfully quarantined hosts
         type: "[]string"
+        example: ["abcdef123"]
         required: false
   get_agent_details:
     title: Get Agent Details
