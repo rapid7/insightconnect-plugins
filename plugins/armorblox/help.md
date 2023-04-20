@@ -34,14 +34,13 @@ Example input:
   "tenant_name": "my-tenant-name"
 }
 ```
-
 ## Technical Details
 
 ### Actions
 
 #### Get Remediation Action
 
-This action is used to get remediation action of an incident identified by Armorblox.
+This action is used to fetch remediation action of an incident identified by Armorblox.
 
 ##### Input
 
@@ -61,11 +60,13 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|remediation_details|string|True|Remediation Action of the requested incident identified by Armorblox|
+|remediation_details|string|True|Remediation action of the requested incident identified by Armorblox|
 
 Example output:
-
 ```
+{
+  "remediation_details": "ALERT"
+}
 ```
 
 ### Triggers
@@ -97,6 +98,9 @@ Example input:
 Example output:
 
 ```
+{
+  "{\"incidents\": \"some incidents\"}"
+}
 ```
 
 ### Custom Output Types
@@ -160,4 +164,3 @@ _This plugin does not contain any troubleshooting information._
 ## References
 
 * [Armorblox](https://www.armorblox.com/)
-

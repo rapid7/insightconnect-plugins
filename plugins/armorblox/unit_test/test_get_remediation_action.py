@@ -21,9 +21,28 @@ class TestGetRemediationAction(TestCase):
     def test_get_remediation_action(self, mock_post):
         actual = self.action.run(
                 {
-                    Input.INCIDENT_ID: "63431",
+                    Input.INCIDENT_ID: "10597",
                 }
             )
         expected = {'remediation_details': 'WILL_AUTO_REMEDIATE'}
         self.assertEqual(actual, expected)
         
+    @patch("requests.get", side_effect=Util.mocked_requests)
+    def test_get_remediation_action_2(self, mock_post):
+        actual = self.action.run(
+                {
+                    Input.INCIDENT_ID: "11081",
+                }
+            )
+        expected = {'remediation_details': 'WILL_AUTO_REMEDIATE'}
+        self.assertEqual(actual, expected)
+
+    @patch("requests.get", side_effect=Util.mocked_requests)
+    def test_get_remediation_action3(self, mock_post):
+        actual = self.action.run(
+                {
+                    Input.INCIDENT_ID: "11063",
+                }
+            )
+        expected = {'remediation_details': 'WILL_AUTO_REMEDIATE'}
+        self.assertEqual(actual, expected)

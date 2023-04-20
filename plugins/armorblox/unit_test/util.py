@@ -34,8 +34,11 @@ class Util:
                 result = json.load(f)
                 f.close()
                 return result
-        if args[0] == "https://tenant_name.armorblox.io/api/v1beta1/organizations/tenant_name/incidents/63431":
+        if args[0] == "https://tenant_name.armorblox.io/api/v1beta1/organizations/tenant_name/incidents/10597":
+            return MockResponse("get_remediation_action", 200)
+        elif args[0] == "https://tenant_name.armorblox.io/api/v1beta1/organizations/tenant_name/incidents/11081":
+            return MockResponse("get_remediation_action", 200)
+        elif args[0] == "https://tenant_name.armorblox.io/api/v1beta1/organizations/tenant_name/incidents/11063":
             return MockResponse("get_remediation_action", 200)
 
         raise Exception("Not implemented")
-

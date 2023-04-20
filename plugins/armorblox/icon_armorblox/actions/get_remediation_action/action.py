@@ -13,4 +13,5 @@ class GetRemediationAction(insightconnect_plugin_runtime.Action):
                 output=GetRemediationActionOutput())
 
     def run(self, params={}):
-        return {Output.REMEDIATION_DETAILS: self.connection.api.get_remediation_action(params.get(Input.INCIDENT_ID))}
+        incident_id = self.connection.api.get_remediation_action(params.get(Input.INCIDENT_ID))
+        return {Output.REMEDIATION_DETAILS: incident_id}

@@ -108,6 +108,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Incident Date",
           "displayType": "date",
+          "description": "Date of the incident",
           "format": "date-time",
           "order": 3
         },
@@ -168,7 +169,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
         "object_type": {
           "type": "string",
           "title": "Object Type",
-          "description": "Object Type",
+          "description": "Type of the object",
           "order": 7
         },
         "policy_names": {
@@ -198,7 +199,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
         "resolution_state": {
           "type": "string",
           "title": "resolution_state",
-          "description": "Resolution State",
+          "description": "Incident resolution state",
           "order": 6
         },
         "scl_score": {
@@ -215,7 +216,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
         "title": {
           "type": "string",
           "title": "Subject",
-          "description": "Subject",
+          "description": "Mail subject",
           "order": 5
         },
         "users": {
@@ -272,7 +273,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
             "email": {
               "type": "string",
               "title": "User email",
-              "description": "User email",
+              "description": "Email of the user",
               "order": 2
             },
             "is_vip": {
@@ -283,8 +284,8 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
             },
             "name": {
               "type": "string",
-              "title": "user name",
-              "description": "User name",
+              "title": "User name",
+              "description": "Name of the user",
               "order": 1
             }
           }
@@ -298,7 +299,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
         "email": {
           "type": "string",
           "title": "User email",
-          "description": "User email",
+          "description": "Email of the user",
           "order": 2
         },
         "is_vip": {
@@ -310,7 +311,7 @@ class GetIncidentsOutput(insightconnect_plugin_runtime.Output):
         "name": {
           "type": "string",
           "title": "User name",
-          "description": "User name",
+          "description": "Name of the user",
           "order": 1
         }
       }

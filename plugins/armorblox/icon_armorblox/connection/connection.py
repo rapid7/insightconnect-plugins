@@ -13,19 +13,16 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def connect(self, params):
         self.logger.info("Connect: Connecting...")
-        self.logger.info(params)
-        self.api = ArmorbloxAPI(
-            api_key = params.get('api_key').get('secretKey'),
-            tenant_name = params.get('tenant_name'),
-            logger=self.logger,
-        )
+        api_key = params.get(Input.API_KEY).get("secretKey")
+        tenant_name = params.get(Input.TENANT_NAME)
+        self.api = ArmorbloxAPI(api_key = api_key, tenant_name = tenant_name, logger=self.logger)
 
     def test(self):
 
         try:
-            result = self.api.test_api()
-        except PluginException:
+            self.api.test_api()
+            return {"success": True}
+        except PluginException as error:
             raise ConnectionTestException(
-                cause="Connection Test Failed.", assistance="Please check that your API key is correct."
+                cause=error.cause, assistance=error.assistance, data=error.data
             )
-        return result

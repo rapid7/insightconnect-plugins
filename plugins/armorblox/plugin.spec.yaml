@@ -3,14 +3,14 @@ extension: plugin
 products: [insightconnect]
 name: armorblox
 title: Armorblox
-description: Armorblox secures enterprise communications over email and other cloud office applications with the power of Natural Language Understanding. The Armorblox platform connects over APIs and analyzes thousands of signals to understand the context of communications and protect people and data from compromise. Over 56,000 organizations use Armorblox to stop BEC and targeted phishing attacks, protect sensitive PII and PCI, and automate remediation of user-reported email threats. Armorblox was featured in the 2019 Forbes AI 50 list and was named a 2020 Gartner Cool Vendor in Cloud Office Security. Founded in 2017, Armorblox is headquartered in Sunnyvale, CA and backed by General Catalyst and Next47
+description: Armorblox is an API-based platform that stops targeted email attacks, protects sensitive data, and automates incident response
 version: 1.0.0
 vendor: armorblox
 author_email: app-publishers@armorblox.com
 support: rapid7
 supported_versions: ["1.0.0"]
 status: []
-tags: ["Alerts", "Attack", "Breach", "Compliance", "Email", "Forensics", "GDPR", "HIPAA", "Incident Response", "IT", "Machine Learning", "Malware", "PII", "Scam", "Security", "Security Analytics", "Spam", "Threat Intelligence"]
+tags: ["alerts", "attack", "breach", "compliance", "email", "forensics", "gdpr", "hipaa", "incident response", "it", "machine Learning", "malware", "pii", "scam", "security", "security analytics", "spam", "threat intelligence"]
 hub_tags:
   use_cases: ['cloud_security', 'remediation_management',  'threat_detection_and_response']
   keywords: ['threat_intelligence']
@@ -24,13 +24,13 @@ enable_cache: true
 types:
   user:
     name:
-      title: user name
-      description: User name
+      title: User name
+      description: Name of the user
       type: string
       required: false
     email:
       title: User email
-      description: User email
+      description: Email of the user
       type: string
       required: false
     is_vip:
@@ -73,7 +73,7 @@ types:
       required: false
     date:
       title: Incident Date
-      description: 
+      description: Date of the incident
       type: date
       required: false
     policy_names:
@@ -83,17 +83,17 @@ types:
       required: false
     title:
       title: Subject
-      description: Subject
+      description: Mail subject
       type: 'string'
       required: false          
     resolution_state:
       title: resolution_state
-      description: Resolution State
+      description: Incident resolution state
       type: string
       required: false
     object_type:
       title: Object Type
-      description: Object Type
+      description: Type of the object
       type: string
       required: false 
     id:
@@ -184,11 +184,12 @@ triggers:
         description: A list of incidents identified by Armorblox
         type: "[]incident"
         required: true
+        example: "{\"incidents\": \"some incidents\"}"
 
 actions:
   get_remediation_action:
     title: Get Remediation Action
-    description: Get remediation action of an incident identified by Armorblox
+    description: Fetch remediation action of an incident identified by Armorblox
     input:
       incident_id:
         title: Incident ID
@@ -199,6 +200,7 @@ actions:
     output:
       remediation_details:
         title: Remediation Details
-        description: Remediation Action of the requested incident identified by Armorblox
+        description: Remediation action of the requested incident identified by Armorblox
         type: string
         required: true
+        example: ALERT

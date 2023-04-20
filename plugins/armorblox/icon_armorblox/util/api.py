@@ -22,9 +22,17 @@ class ArmorbloxAPI(Client):
                 response_json, next_page_token, total_count = self.incidents.list(params=params)
                 self.incidents_list.extend(response_json)
         except Exception as credentials_exp:
-            print('Exception has occurred for incorrect credentials. ' + str(credentials_exp))
+            PluginException('Incorrect Credentials. ' + str(credentials_exp))
 
     def get_incidents(self, from_date: str = None, to_date: str = None):
+        """
+        Hits the Armorblox API and fetch incidents.
+        
+        :param from_date: Custom time filter parameter
+        :param to_date: Custom time filter parameter
+        
+        :return: List of incidents
+        """
         params = {
             "from_date": from_date,
             "to_date": to_date,
@@ -34,6 +42,9 @@ class ArmorbloxAPI(Client):
         return self.incidents_list
 
     def get_remediation_action(self, incident_id):
+        """
+        Returns the remediation action(s) for the input incident.
+        """
         rm_action_response = self.incidents.get(incident_id)
         if 'remediation_actions' in rm_action_response.keys():
             remediation_actions = rm_action_response['remediation_actions'][0]

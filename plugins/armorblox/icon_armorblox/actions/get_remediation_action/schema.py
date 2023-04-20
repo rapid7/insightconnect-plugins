@@ -4,7 +4,7 @@ import json
 
 
 class Component:
-    DESCRIPTION = "Get remediation action of an incident identified by Armorblox"
+    DESCRIPTION = "Fetch remediation action of an incident identified by Armorblox"
 
 
 class Input:
@@ -47,7 +47,7 @@ class GetRemediationActionOutput(insightconnect_plugin_runtime.Output):
     "remediation_details": {
       "type": "string",
       "title": "Remediation Details",
-      "description": "Remediation Action of the requested incident identified by Armorblox",
+      "description": "Remediation action of the requested incident identified by Armorblox",
       "order": 1
     }
   },
