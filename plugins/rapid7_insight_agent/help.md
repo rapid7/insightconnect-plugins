@@ -78,10 +78,10 @@ Example output:
 
 ```
 {
-  "success":[
+  "failure":[
     "abcdef123"
   ],
-  "failure":[
+  "success":[
     "abcdef123"
   ]
 }
