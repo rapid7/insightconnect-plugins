@@ -671,7 +671,7 @@ This action is used to get endpoints for a customer based on the parameters prov
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|since|string|None|False|Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01.700Z, -P1D, PT20M, PT4H500S|None|2019-09-23T12:02:01.700Z|
+|since|string|None|False|Last seen after date and time (UTC) or duration inclusive, eg. 2019-09-23T12:02:01.700Z, -P1D, PT20M, PT4H500S|None|2019-09-23T12:02:01+00:00|
 
 Example input:
 
@@ -1692,7 +1692,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 4.4.0 - Add new actions: `Isolate Endpoint`, `Get Endpoint Groups`, `Add Endpoint Group`, `Get Endpoint Group`, `Add Endpoint to Group`, `Remove Endpoint from Group`, `Get Allowed Items`, `Add Allowed Item`, `Remove Allowed Item`, `Get Blocked Items`, `Add Blocked Item`, `Remove Blocked Item`, `Get Endpoints in Group`
+* 4.4.0 - Add new actions: `Isolate Endpoint`, `Get Endpoint Groups`, `Add Endpoint Group`, `Get Endpoint Group`, `Add Endpoint to Group`, `Remove Endpoint from Group`, `Get Allowed Items`, `Add Allowed Item`, `Remove Allowed Item`, `Get Blocked Items`, `Add Blocked Item`, `Remove Blocked Item`, `Get Endpoints in Group` | `Check Tamper Protection Status`, `Antivirus Scan`: fix issue with handling pagination in retrieving endpoint id
 * 4.3.1 - Add custom User-Agent string to API calls to identify API request
 * 4.3.0 - Add new action Check Tamper Protection Status
 * 4.2.0 - Add new action Get Agent Details

@@ -18,21 +18,22 @@ class SophosCentralAPI:
 
         for index in range(9999):
             get_agent = self.get_endpoints(page_key=page_key)
-            page_key = get_agent.get("pages", {}).get("nextKey", None)
+            pages = get_agent.get("pages", {})
+            page_key = pages.get("nextKey", None)
+            total_pages = pages.get("total", 0)
 
-            for e in get_agent.get("items", []):
-                if e.get("hostname") == entity:
-                    endpoint_id = e.get("id")
-                elif e.get("id") == entity:
-                    endpoint_id = e.get("id")
-                elif entity in e.get("ipv4Addresses", []):
-                    endpoint_id = e.get("id")
-                elif entity in e.get("macAddresses", []):
-                    endpoint_id = e.get("id")
-                elif entity in e.get("ipv6Addresses", []):
-                    endpoint_id = e.get("id")
-
-            if page_key is None or index > endpoint_id.get("pages", {}).get("total", 0):
+            for item in get_agent.get("items", []):
+                if item.get("hostname") == entity:
+                    endpoint_id = item.get("id")
+                elif item.get("id") == entity:
+                    endpoint_id = item.get("id")
+                elif entity in item.get("ipv4Addresses", []):
+                    endpoint_id = item.get("id")
+                elif entity in item.get("macAddresses", []):
+                    endpoint_id = item.get("id")
+                elif entity in item.get("ipv6Addresses", []):
+                    endpoint_id = item.get("id")
+            if page_key is None or index > total_pages:
                 break
 
         if endpoint_id is None:
