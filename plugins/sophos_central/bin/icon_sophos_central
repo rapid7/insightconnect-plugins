@@ -62,6 +62,8 @@ def main():
 
             self.add_action(actions.GetEndpoints())
 
+            self.add_action(actions.GetEndpointsInGroup())
+
             self.add_action(actions.IsolateEndpoint())
 
             self.add_action(actions.RemoveAllowedItem())

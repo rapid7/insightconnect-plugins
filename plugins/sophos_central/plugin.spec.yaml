@@ -977,6 +977,158 @@ types:
       type: "[]string"
       required: false
       example: '["9de5069c-5afe-602b-2ea0-a04b66beb2c0"]'
+  endpointsItem:
+    id:
+      title: ID
+      description: Unique ID of the endpoint
+      type: string
+      required: false
+      example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+    type:
+      title: Type
+      description: "Endpoint type. The following values are allowed: computer, server, securityVm"
+      type: string
+      required: false
+      example: computer
+    tenant:
+      title: Tenant
+      description: Represents a referenced object
+      type: objectId
+      required: false
+      example: {}
+    hostname:
+      title: Hostname
+      description: Hostname of the endpoint
+      type: string
+      required: false
+      example: example-hostname
+    health:
+      title: Health
+      description: Endpoint health status
+      type: health
+      required: false
+      example: {}
+    os:
+      title: OS
+      description: OS information
+      type: osObject
+      required: false
+      example: {}
+    ipv4Addresses:
+      title: IPv4 Addresses
+      description: List of IPv4 addresses
+      type: "[]string"
+      required: false
+      example: ["198.51.100.1"]
+    ipv6Addresses:
+      title: IPv6 Addresses
+      description: List of IPv6 addresses
+      type: "[]string"
+      required: false
+      example: ["198.51.100.1"]
+    macAddresses:
+      title: MAC Addresses
+      description: List of MAC addresses
+      type: "[]string"
+      required: false
+      example: ["00-B0-D0-63-C2-26"]
+    group:
+      title: Group
+      description: Endpoint group
+      type: group
+      required: false
+      example: {}
+    associatedPerson:
+      title: Associated Person
+      description: Person associated with an endpoint
+      type: associatedPerson
+      required: false
+      example: {}
+    tamperProtectionEnabled:
+      title: Tamper Protection Enabled
+      description: Whether Tamper Protection is turned on
+      type: boolean
+      required: false
+      example: false
+    assignedProducts:
+      title: Assigned Products
+      description: Products assigned to the endpoint
+      type: "[]assignedProduct"
+      required: false
+      example: []
+    lastSeenAt:
+      title: Last Seen At
+      description: Date and time (UTC) when the endpoint last communicated with Sophos Central
+      type: string
+      required: false
+      example: 2023-03-02T13:00:19.494Z
+    encryption:
+      title: Encryption
+      description: Endpoint encryption state
+      type: encryption
+      required: false
+      example: {}
+    lockdown:
+      title: Lockdown
+      description: Server lockdown status
+      type: lockdown
+      required: false
+      example: {}
+    online:
+      title: Online
+      description: Whether endpoint is currently online
+      type: boolean
+      required: false
+      example: false
+    cloud:
+      title: Cloud
+      description: Endpoint cloud
+      type: cloud
+      required: false
+      example: {}
+    isolation:
+      title: Isolation
+      description: Endpoint isolation state as reported by an endpoint
+      type: isolationState
+      required: false
+      example: {}
+  pagesDetails:
+    size:
+      title: Size
+      description: The size of the page being returned
+      type: integer
+      required: false
+      example: 50
+    total:
+      title: Total
+      description: The total number of pages that exist, if pageTotal=true in the request
+      type: integer
+      required: false
+      example: 1
+    items:
+      title: Items
+      description: The total number of items across all pages, if pageTotal=true was passed into the request
+      type: integer
+      required: false
+      example: 1
+    maxSize:
+      title: Max Size
+      description: The maximum page size that can be requested
+      type: integer
+      required: false
+      example: 100
+    fromKey:
+      title: From Key
+      description: The key of the first item in the returned page
+      type: string
+      required: false
+      example: exampleKey
+    nextKey:
+      title: Next Key
+      description: The key to use when fetching the next page
+      type: string
+      required: false
+      example: exampleKey
 
 connection:
   region:
@@ -1570,5 +1722,72 @@ actions:
         title: Errors
         description: Information about which endpoints could not be removed from the group
         type: endpointRemovalErrors
+        required: false
+        example: {}
+  get_endpoints_in_group:
+    title: Get Endpoints in Group
+    description: Retrieve endpoints in your specified group
+    input:
+      groupId:
+        title: Group ID
+        description: Endpoint group ID
+        type: string
+        required: true
+        example: 9de5069c-5afe-602b-2ea0-a04b66beb2c0
+      sort:
+        title: Sort
+        description: "Defines how to sort the data. Matches (^[^:]+$)|(^[^:]+:(asc|desc)$)"
+        type: "[]string"
+        required: false
+        example: ["id:asc"]
+      fields:
+        title: Fields
+        description: The fields to return in a partial response. All fields are returned by default
+        type: "[]string"
+        required: false
+        example: ["id", "type"]
+      pageFromKey:
+        title: Page from Key
+        description: Key of the page to fetch
+        type: string
+        required: false
+        example: exampleKey
+      pageTotal:
+        title: Page Total
+        description: Whether the number of pages should be calculated and returned in the response
+        type: boolean
+        required: false
+        default: false
+        example: false
+      pageSize:
+        title: Page Size
+        description: The size of the page requested. Value must be inclusively between 1 and 1000
+        type: integer
+        required: false
+        default: 50
+        example: 50
+      search:
+        title: Search
+        description: Term to search for in the specified search fields
+        type: string
+        required: false
+        example: example
+      searchFields:
+        title: Search Fields
+        description: 'List of search fields for finding the given search term. The following values are allowed: "hostname", "groupName", "associatedPersonName", "ipAddresses", "osName"'
+        type: "[]string"
+        required: false
+        example: ["hostname", "groupName", "associatedPersonName", "ipAddresses", "osName"]
+    output:
+      items:
+        title: Items
+        description: List of endpoints belonging to the given group
+        type: "[]endpointsItem"
+        required: false
+        example: []
+      pages:
+        title: Pages
+        description: Pages details
+        type: pagesDetails
         required: false
         example: {}

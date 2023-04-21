@@ -173,4 +173,42 @@ class Util:
         if json_data == {"enabled": True, "ids": ["invalid_id"], "comment": "Example comment"}:
             return MockResponse(404)
 
+        if params == {"fields": ["hostname", "os"], "pageSize": 1, "pageTotal": False}:
+            return MockResponse(200, "get_endpoints_in_group_selected_fields.json.resp")
+        if params == {"sort": ["id:asc"], "fields": ["hostname", "os"], "pageSize": 2, "pageTotal": True}:
+            return MockResponse(200, "get_endpoints_in_group_sort_asc.json.resp")
+        if params == {"sort": ["id:desc"], "fields": ["hostname", "os"], "pageSize": 2, "pageTotal": True}:
+            return MockResponse(200, "get_endpoints_in_group_sort_desc.json.resp")
+        if params == {"fields": ["hostname", "os"], "pageFromKey": "exampleKey", "pageSize": 2, "pageTotal": True}:
+            return MockResponse(200, "get_endpoints_in_group_next_page.json.resp")
+        if params == {
+            "fields": ["hostname", "os"],
+            "pageSize": 2,
+            "pageTotal": True,
+            "search": "DESKTOP-1234568",
+            "searchFields": ["hostname"],
+        }:
+            return MockResponse(200, "get_endpoints_in_group_search_hostname.json.resp")
+        if params == {
+            "fields": ["hostname", "os"],
+            "pageSize": 2,
+            "pageTotal": True,
+            "search": "windows",
+            "searchFields": ["osName"],
+        }:
+            return MockResponse(200, "get_endpoints_in_group_search_os_name.json.resp")
+        if params == {
+            "fields": ["hostname", "os"],
+            "pageSize": 2,
+            "pageTotal": True,
+            "search": "TEST1",
+            "searchFields": ["hostname"],
+        }:
+            return MockResponse(200, "get_endpoints_in_group_search_empty.json.resp")
+        if (
+            url
+            == "https://api-us03.central.sophos.com/endpoint/v1/endpoint-groups/9de5069c-5afe-602b-2ea0-a04b66beb2c0/endpoints"
+        ):
+            return MockResponse(200, "get_endpoints_in_group.json.resp")
+
         raise NotImplementedError("Not implemented", kwargs)
