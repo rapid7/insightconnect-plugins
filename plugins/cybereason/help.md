@@ -69,9 +69,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|archive_sensor_response|archiveSensorResponse|True|Archive sensor response|
+|Name|Type|Required|Description| Example |
+|----|----|--------|-----------|---------|
+|archive_sensor_response|archiveSensorResponse|True|Archive sensor response| {}      |
 
 Example output:
 
@@ -152,9 +152,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|sensor|sensors|True|Sensor|
+|Name|Type|Required|Description| Example |
+|----|----|--------|-----------|---------|
+|sensor|sensors|True|Sensor| {}      |
 
 Example output:
 
@@ -281,9 +281,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|remediate_items|True|Malop response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|remediate_items|True|Malop response|{}|
 
 Example output:
 
@@ -332,9 +332,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|remediate_items|True|Malop response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|remediate_items|True|Malop response|{}|
 
 Example output:
 
@@ -372,9 +372,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|remediate_items_response|remediate_items|True|Remediate items response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|remediate_items_response|remediate_items|True|Remediate items response|{}|
 
 Example output:
 
@@ -422,10 +422,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|machine_id|string|True|Machine Pylum ID|
-|success|boolean|True|Success|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|machine_id|string|True|Machine Pylum ID|"PYLUMCLIENT_INTEGRATION_DESKTOP-EXAMPLE_1234567AB12C"|
+|success|boolean|True|Success|true|
 
 Example output:
 
@@ -460,9 +460,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response|response|True|Search file response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response|response|True|Search file response|{}|
 
 Example output:
 
