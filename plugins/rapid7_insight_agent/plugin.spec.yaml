@@ -223,6 +223,7 @@ actions:
         title: Agent
         description: Agent information
         type: agent
+        example: {}
         required: true
   quarantine:
     title: Quarantine
