@@ -1251,6 +1251,7 @@ actions:
         title: Response
         description: Search file response
         type: response
+        example: {}
         required: true
   isolate_machine:
     title: Isolate Machine
@@ -1280,11 +1281,13 @@ actions:
         title: Machine Pylum ID
         description: Machine Pylum ID
         type: string
+        example: "PYLUMCLIENT_INTEGRATION_DESKTOP-EXAMPLE_1234567AB12C"
         required: true
       success:
         title: Success
         description: Success
         type: boolean
+        example: true
         required: true
   get_sensor:
     title: Get Sensor
@@ -1313,6 +1316,7 @@ actions:
         title: Sensor
         description: Sensor
         type: sensors
+        example: {}
         required: true
   archive_sensor:
     title: Archive Sensor
@@ -1335,6 +1339,7 @@ actions:
         title: Archive Sensor Response
         description: Archive sensor response
         type: archiveSensorResponse
+        example: {}
         required: true
   quarantine_file:
     title: Quarantine File
@@ -1363,6 +1368,7 @@ actions:
         title: Remediate Items Response
         description: Remediate items response
         type: remediate_items
+        example: {}
         required: true
   remediate_items:
     title: Remediate Items
@@ -1391,6 +1397,7 @@ actions:
         title: Malop Response
         description: Malop response
         type: remediate_items
+        example: {}
         required: true
   delete_registry_key:
     title: Delete Registry Key
@@ -1419,4 +1426,5 @@ actions:
         title: Malop Response
         description: Malop response
         type: remediate_items
+        example: {}
         required: true

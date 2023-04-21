@@ -14,7 +14,7 @@ The Cybereason platform provides military-grade cyber security with real-time aw
 
 # Supported Product Versions
 
-* All
+* Cybereason API 2023-04-12
 
 # Documentation
 
