@@ -69,9 +69,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description| Example |
-|----|----|--------|-----------|---------|
-|archive_sensor_response|archiveSensorResponse|True|Archive sensor response| {}      |
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|archive_sensor_response|archiveSensorResponse|True|Archive sensor response|{}|
 
 Example output:
 
@@ -152,9 +152,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description| Example |
-|----|----|--------|-----------|---------|
-|sensor|sensors|True|Sensor| {}      |
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|sensor|sensors|True|Sensor|{}|
 
 Example output:
 
@@ -424,8 +424,8 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|machine_id|string|True|Machine Pylum ID|"PYLUMCLIENT_INTEGRATION_DESKTOP-EXAMPLE_1234567AB12C"|
-|success|boolean|True|Success|true|
+|machine_id|string|True|Machine Pylum ID|PYLUMCLIENT_INTEGRATION_DESKTOP-EXAMPLE_1234567AB12C|
+|success|boolean|True|Success|True|
 
 Example output:
 
