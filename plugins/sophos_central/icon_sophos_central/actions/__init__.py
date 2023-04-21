@@ -13,6 +13,7 @@ from .get_blocked_items.action import GetBlockedItems
 from .get_endpoint_group.action import GetEndpointGroup
 from .get_endpoint_groups.action import GetEndpointGroups
 from .get_endpoints.action import GetEndpoints
+from .get_endpoints_in_group.action import GetEndpointsInGroup
 from .isolate_endpoint.action import IsolateEndpoint
 from .remove_allowed_item.action import RemoveAllowedItem
 from .remove_blocked_item.action import RemoveBlockedItem

@@ -58,6 +58,81 @@ Example input:
 
 ### Actions
 
+#### Get Endpoints in Group
+
+This action retrieves endpoints in your specified group.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|fields|[]string|None|False|The fields to return in a partial response. All fields are returned by default|None|["id", "type"]|
+|groupId|string|None|True|Endpoint group ID|None|9de5069c-5afe-602b-2ea0-a04b66beb2c0|
+|pageFromKey|string|None|False|Key of the page to fetch|None|exampleKey|
+|pageSize|integer|50|False|The size of the page requested. Value must be inclusively between 1 and 1000|None|50|
+|pageTotal|boolean|False|False|Whether the number of pages should be calculated and returned in the response|None|False|
+|search|string|None|False|Term to search for in the specified search fields|None|example|
+|searchFields|[]string|None|False|List of search fields for finding the given search term. The following values are allowed: "hostname", "groupName", "associatedPersonName", "ipAddresses", "osName"|None|["hostname", "groupName", "associatedPersonName", "ipAddresses", "osName"]|
+|sort|[]string|None|False|Defines how to sort the data. Matches (^[^:]+$)|(^[^:]+:(asc|desc)$)|None|["id:asc"]|
+
+Example input:
+
+```
+{
+  "fields": [
+    "id",
+    "os",
+    "type"
+  ],
+  "groupId": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+  "pageFromKey": "",
+  "pageSize": 1,
+  "pageTotal": true,
+  "search": "DESKTOP-1234568",
+  "searchFields": [
+    "hostname"
+  ],
+  "sort": [
+    "id:asc"
+  ]
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|items|[]endpointsItem|False|List of endpoints belonging to the given group|[]|
+|pages|pagesDetails|False|Pages details|{}|
+
+Example output:
+
+```
+{
+  "items": [
+    {
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "type": "computer",
+      "hostname": "DESKTOP-1234568",
+      "os": {
+        "isServer": false,
+        "platform": "windows",
+        "name": "Windows 10 Home N",
+        "majorVersion": 10,
+        "minorVersion": 0,
+        "build": 19042
+      }
+    }
+  ],
+  "pages": {
+    "size": 1,
+    "total": 1,
+    "items": 1,
+    "maxSize": 500
+  }
+}
+```
+
 #### Remove Endpoint from Group
 
 This action is used to remove endpoints from a group.
@@ -1361,6 +1436,30 @@ _This plugin does not contain any triggers._
 |Items Count|integer|False|Total number of items in the list|
 |Total|integer|False|Total number of endpoints in this group|
 
+#### endpointsItem
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|Assigned Products|[]assignedProduct|False|Products assigned to the endpoint|
+|Associated Person|associatedPerson|False|Person associated with an endpoint|
+|Cloud|cloud|False|Endpoint cloud|
+|Encryption|encryption|False|Endpoint encryption state|
+|Group|group|False|Endpoint group|
+|Health|health|False|Endpoint health status|
+|Hostname|string|False|Hostname of the endpoint|
+|ID|string|False|Unique ID of the endpoint|
+|IPv4 Addresses|[]string|False|List of IPv4 addresses|
+|IPv6 Addresses|[]string|False|List of IPv6 addresses|
+|Isolation|isolationState|False|Endpoint isolation state as reported by an endpoint|
+|Last Seen At|string|False|Date and time (UTC) when the endpoint last communicated with Sophos Central|
+|Lockdown|lockdown|False|Server lockdown status|
+|MAC Addresses|[]string|False|List of MAC addresses|
+|Online|boolean|False|Whether endpoint is currently online|
+|OS|osObject|False|OS information|
+|Tamper Protection Enabled|boolean|False|Whether Tamper Protection is turned on|
+|Tenant|objectId|False|Represents a referenced object|
+|Type|string|False|Endpoint type. The following values are allowed: computer, server, securityVm|
+
 #### event_aggregate
 
 |Name|Type|Required|Description|
@@ -1507,6 +1606,17 @@ _This plugin does not contain any triggers._
 |Size|integer|False|The size of the page being returned|
 |Total|integer|False|The total number of pages that exist, if pageTotal=true in the request|
 
+#### pagesDetails
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|From Key|string|False|The key of the first item in the returned page|
+|Items|integer|False|The total number of items across all pages, if pageTotal=true was passed into the request|
+|Max Size|integer|False|The maximum page size that can be requested|
+|Next Key|string|False|The key to use when fetching the next page|
+|Size|integer|False|The size of the page being returned|
+|Total|integer|False|The total number of pages that exist, if pageTotal=true in the request|
+
 #### previous_password_entity
 
 |Name|Type|Required|Description|
@@ -1582,7 +1692,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 4.4.0 - Add new actions: `Isolate Endpoint`, `Get Endpoint Groups`, `Add Endpoint Group`, `Get Endpoint Group`, `Add Endpoint to Group`, `Remove Endpoint from Group`, `Get Allowed Items`, `Add Allowed Item`, `Remove Allowed Item`, `Get Blocked Items`, `Add Blocked Item`, `Remove Blocked Item`
+* 4.4.0 - Add new actions: `Isolate Endpoint`, `Get Endpoint Groups`, `Add Endpoint Group`, `Get Endpoint Group`, `Add Endpoint to Group`, `Remove Endpoint from Group`, `Get Allowed Items`, `Add Allowed Item`, `Remove Allowed Item`, `Get Blocked Items`, `Add Blocked Item`, `Remove Blocked Item`, `Get Endpoints in Group`
 * 4.3.1 - Add custom User-Agent string to API calls to identify API request
 * 4.3.0 - Add new action Check Tamper Protection Status
 * 4.2.0 - Add new action Get Agent Details

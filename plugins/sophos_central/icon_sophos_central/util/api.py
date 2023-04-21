@@ -122,6 +122,11 @@ class SophosCentralAPI:
             "DELETE", f"/endpoint/v1/endpoint-groups/{group_id}/endpoints", "Tenant", params=parameters
         )
 
+    def get_endpoints_in_group(self, group_id: str, parameters: dict) -> dict:
+        return self._make_request(
+            "GET", f"/endpoint/v1/endpoint-groups/{group_id}/endpoints", "Tenant", params=parameters
+        )
+
     def whoami(self, access_token):
         return self._call_api(
             "GET",
@@ -176,7 +181,9 @@ class SophosCentralAPI:
             response = requests.request(method, url, json=json_data, data=data, params=params, headers=headers)
 
             if response.status_code == 400:
-                raise PluginException(cause="Bad request.", assistance="The API client sent a malformed request.")
+                raise PluginException(
+                    cause="Bad request.", assistance="The API client sent a malformed request.", data=response.text
+                )
             if response.status_code == 401:
                 raise PluginException(
                     cause="Unauthorized.",
