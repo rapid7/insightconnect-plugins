@@ -69,10 +69,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|failure|[]string|False|List of unsuccessfully quarantined hosts|
-|success|[]string|False|List of successfully quarantined hosts|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|failure|[]string|False|List of unsuccessfully quarantined hosts|["abcdef123"]|
+|success|[]string|False|List of successfully quarantined hosts|["abcdef123"]|
 
 Example output:
 
