@@ -1179,6 +1179,7 @@ actions:
         description: Endpoint items
         type: "[]endpoint_entry"
         required: true
+        example: []
   get_alerts:
     title: Get Alerts
     description: Get alerts for a customer based on the parameters provided
@@ -1195,6 +1196,7 @@ actions:
         description: Alerts for specified time period
         type: '[]alert_entity'
         required: true
+        example: []
   blacklist:
     title: Blacklist
     description: Blocks a hash across all systems
@@ -1224,6 +1226,7 @@ actions:
         description: Return true if blacklist item was created or deleted
         type: boolean
         required: true
+        example: true
   antivirus_scan:
     title: Antivirus Scan
     description: Sends a request to the specified endpoint to perform or configure a scan
@@ -1240,16 +1243,19 @@ actions:
         description: Antivirus scan ID
         type: string
         required: true
+        example: 999fd666-9666-4e66-a066-d66fd966ad66
       status:
         title: Status
         description: Antivirus scan status
         type: string
         required: true
+        example: requested
       requested_at:
         title: Requested At
         description: Antivirus scan requested at
         type: string
         required: true
+        example: 2020-08-02T21:30:55.487Z
   get_agent_details:
     title: Get Agent Details
     description: Get details for an agent
@@ -1266,6 +1272,7 @@ actions:
         description: Details for the matched agent
         type: endpoint_entry
         required: true
+        example: {}
   check_tamper_protection_status:
     title: Check Tamper Protection Status
     description: Get tamper status by IP address, Hostname, MAC address or Device ID
@@ -1282,6 +1289,7 @@ actions:
         description: Tamper status for provided agent
         type: check_tamper_protection_status
         required: true
+        example: {}
   get_blocked_items:
     title: Get Blocked Items
     description: Get a list of blocked items

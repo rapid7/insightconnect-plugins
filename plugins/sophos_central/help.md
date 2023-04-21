@@ -202,9 +202,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|endpoints|[]endpointIsolation|False|List of endpoints for which isolation has been updated|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|endpoints|[]endpointIsolation|False|List of endpoints for which isolation has been updated|[]|
 
 Example output:
 
@@ -397,9 +397,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|tamper_status|check_tamper_protection_status|True|Tamper status for provided agent|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|tamper_status|check_tamper_protection_status|True|Tamper status for provided agent|{}|
 
 Example output:
 
@@ -435,9 +435,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Return true if blacklist item was created or deleted|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|Return true if blacklist item was created or deleted|True|
 
 Example output:
 
@@ -467,9 +467,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|agent|endpoint_entry|True|Details for the matched agent|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|agent|endpoint_entry|True|Details for the matched agent|{}|
 
 Example output:
 
@@ -596,11 +596,11 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|id|string|True|Antivirus scan ID|
-|requested_at|string|True|Antivirus scan requested at|
-|status|string|True|Antivirus scan status|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|id|string|True|Antivirus scan ID|999fd666-9666-4e66-a066-d66fd966ad66|
+|requested_at|string|True|Antivirus scan requested at|2020-08-02 21:30:55.487000+00:00|
+|status|string|True|Antivirus scan status|requested|
 
 Example output:
 
@@ -620,7 +620,7 @@ This action is used to get alerts for a customer based on the parameters provide
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|from_date|string|None|False|The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Must be within last 24 hours|None|2019-09-23 12:02:01.700000|
+|from_date|string|None|False|The starting date from which alerts will be retrieved defined as Unix timestamp in UTC. Must be within last 24 hours|None|2019-09-23T12:02:01+00:00|
 
 Example input:
 
@@ -632,9 +632,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|alerts|[]alert_entity|True|Alerts for specified time period|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|alerts|[]alert_entity|True|Alerts for specified time period|[]|
 
 Example output:
 
@@ -683,9 +683,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|items|[]endpoint_entry|True|Endpoint items|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|items|[]endpoint_entry|True|Endpoint items|[]|
 
 Example output:
 
@@ -941,9 +941,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Whether the action was successful|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|Whether the action was successful|True|
 
 Example output:
 
@@ -1004,10 +1004,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|endpointGroups|[]endpointGroup|False|List of endpoint groups|
-|pages|pages|False|Pages details|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|endpointGroups|[]endpointGroup|False|List of endpoint groups|[]|
+|pages|pages|False|Pages details|{}|
 
 Example output:
 
@@ -1083,10 +1083,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|items|[]item|False|List of allowed items|
-|pages|pages|False|Pages details|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|items|[]item|False|List of allowed items|[]|
+|pages|pages|False|Pages details|{}|
 
 Example output:
 
@@ -1166,9 +1166,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|allowedItem|item|False|Allowed item created|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|allowedItem|item|False|Allowed item created|{}|
 
 Example output:
 
