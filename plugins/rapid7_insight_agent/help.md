@@ -109,10 +109,10 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|is_asset_online|boolean|True|Indicates that the agent is connected to the Insight platform. This means the device is powered on and is connected to Rapid7|true|
-|is_currently_quarantined|boolean|True|Is the device currently quarantined|true|
-|is_quarantine_requested|boolean|True|Is a quarantine action pending on this device|true|
-|is_unquarantine_requested|boolean|True|Is there a pending request to release quarantine on this device|true|
+|is_asset_online|boolean|True|Indicates that the agent is connected to the Insight platform. This means the device is powered on and is connected to Rapid7|True|
+|is_currently_quarantined|boolean|True|Is the device currently quarantined|True|
+|is_quarantine_requested|boolean|True|Is a quarantine action pending on this device|True|
+|is_unquarantine_requested|boolean|True|Is there a pending request to release quarantine on this device|True|
 
 Example output:
 
