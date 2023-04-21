@@ -149,9 +149,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Was operation successful|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|Was operation successful|True|
 
 Example output:
 
@@ -181,9 +181,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|agent|agent|True|Agent information|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|agent|agent|True|Agent information|{}|
 
 Example output:
 
