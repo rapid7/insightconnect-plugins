@@ -200,6 +200,7 @@ actions:
         title: Successful (Un)Quarantine
         description: List of successfully quarantined hosts
         type: "[]string"
+        example: ["abcdef123"]
         required: false
       failure:
         title: Unsuccessful (Un)Quarantine
