@@ -1,5 +1,5 @@
 import logging
-from typing import Optional, List, Tuple
+from typing import Optional, List, Tuple, Union
 
 import requests
 
@@ -98,26 +98,16 @@ class ApiConnection:
         successful_quarantine = []
         unsuccessful_quarantine = []
 
+        # Raise exception if the provided list is empty
+        self._check_empty(agent_id_list)
+
         # For each agent ID in the list, perform quarantine
         for agent in agent_id_list:
-            quarantine_payload = {
-                "query": "mutation( $orgID:String! $agentID:String! $advPeriod:Long! ) { quarantineAssets( "
-                "orgId:$orgID assetIds: [$agentID] input: {advertisementPeriod: $advPeriod} ) { results { "
-                "assetId failed } } }",
-                "variables": {
-                    "orgID": self.org_key,
-                    "agentID": agent,
-                    "advPeriod": advertisement_period,
-                },
-            }
-
-            results_object = self._post_payload(quarantine_payload)
-            asset_id = results_object.get("data", {}).get("quarantineAssets").get("results")[0].get("assetId")
-
-            if not results_object.get("data").get("quarantineAssets").get("results")[0].get("failed"):
-                successful_quarantine.append(asset_id)
+            result = self.quarantine(agent_id=agent, advertisement_period=advertisement_period)
+            if result:
+                successful_quarantine.append(agent)
             else:
-                unsuccessful_quarantine.append(asset_id)
+                unsuccessful_quarantine.append(agent)
 
         return successful_quarantine, unsuccessful_quarantine
 
@@ -133,20 +123,16 @@ class ApiConnection:
         successful_unquarantine = []
         unsuccessful_unquarantine = []
 
+        # Raise exception if the provided list is empty
+        self._check_empty(agent_id_list)
+
         # For each agent ID in the list, perform unquarantine
-        for agent_id in agent_id_list:
-            unquarantine_payload = {
-                "query": "mutation( $orgID: String! $agentID: String!) { unquarantineAssets( orgId: $orgID assetIds: [$agentID] ) { results { assetId failed } } }",
-                "variables": {"orgID": self.org_key, "agentID": agent_id},
-            }
-
-            results_object = self._post_payload(unquarantine_payload)
-            asset_id = results_object.get("data").get("unquarantineAssets").get("results")[0].get("assetId")
-
-            if not results_object.get("data").get("unquarantineAssets").get("results")[0].get("failed"):
-                successful_unquarantine.append(asset_id)
+        for agent in agent_id_list:
+            result = self.unquarantine(agent_id=agent)
+            if result:
+                successful_unquarantine.append(agent)
             else:
-                unsuccessful_unquarantine.append(asset_id)
+                unsuccessful_unquarantine.append(agent)
 
         return successful_unquarantine, unsuccessful_unquarantine
 
@@ -439,3 +425,13 @@ class ApiConnection:
             agent_list.append(self._get_agent_id(agent))
 
         return agent_list
+
+    def _check_empty(self, agent_id_list: List[str]):
+        """
+        This method checks if the provided list is empty.
+
+        :param agent_id_list: List of agent IDs to check
+        :return: Either True or a PluginException
+        """
+        if not agent_id_list:
+            raise PluginException(cause="Empty list provided", assistance="Please provide asset IDs to quarantine")
