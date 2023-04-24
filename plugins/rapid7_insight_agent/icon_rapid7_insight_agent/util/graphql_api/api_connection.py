@@ -434,4 +434,6 @@ class ApiConnection:
         :return: Either True or a PluginException
         """
         if not agent_id_list:
-            raise PluginException(cause="Empty list provided", assistance="Please provide asset IDs to quarantine")
+            raise PluginException(
+                cause="Empty list provided.", assistance="\nPlease provide asset IDs to (un)quarantine."
+            )
