@@ -1,8 +1,24 @@
 {
-	"spec": "81da5e180048020b3c3ede105a8ba5fe",
-	"manifest": "78b14239f1b1c1f7348eca7f38e4f388",
-	"setup": "2a28c02fe3082b695002b80d5d7ce104",
+	"spec": "e58caa8f4af6d398f239d7c5a90cd4b5",
+	"manifest": "614d8a82e255a76c9a5836bc06d88b69",
+	"setup": "58f83a7a69eac9b33431d95d9c2b8fe6",
 	"schemas": [
+		{
+			"identifier": "add_allowed_item/schema.py",
+			"hash": "b6f919f7c10276ab5dab95ba562f94b6"
+		},
+		{
+			"identifier": "add_blocked_item/schema.py",
+			"hash": "c81b0f7555003b239835a38ed57a3dd4"
+		},
+		{
+			"identifier": "add_endpoint_group/schema.py",
+			"hash": "02bf5fec3b3341c0c931e08f1f395488"
+		},
+		{
+			"identifier": "add_endpoint_to_group/schema.py",
+			"hash": "9673cd7d48aa8a642927ee07a72b8851"
+		},
 		{
 			"identifier": "antivirus_scan/schema.py",
 			"hash": "391a4975524a07e94378847a2b046f92"
@@ -24,8 +40,44 @@
 			"hash": "9d87a01d865cb8d3737b7109894e8121"
 		},
 		{
+			"identifier": "get_allowed_items/schema.py",
+			"hash": "472347e8bdf4dd836efbf9b37c61b347"
+		},
+		{
+			"identifier": "get_blocked_items/schema.py",
+			"hash": "3d797043df94432d00babde6534c2326"
+		},
+		{
+			"identifier": "get_endpoint_group/schema.py",
+			"hash": "9fb4645e1988f7f9ec050b6a240479ff"
+		},
+		{
+			"identifier": "get_endpoint_groups/schema.py",
+			"hash": "dd5902e18782acc3a92ac4d2182d9b5c"
+		},
+		{
 			"identifier": "get_endpoints/schema.py",
 			"hash": "ace04e73e5a406b8091226953a31951d"
+		},
+		{
+			"identifier": "get_endpoints_in_group/schema.py",
+			"hash": "d1198941a5c566ef5d2361691b8792d0"
+		},
+		{
+			"identifier": "isolate_endpoint/schema.py",
+			"hash": "193d1210d4d4587eb72693641a024baf"
+		},
+		{
+			"identifier": "remove_allowed_item/schema.py",
+			"hash": "8b6f325fc3200ab33330fbb697259a3e"
+		},
+		{
+			"identifier": "remove_blocked_item/schema.py",
+			"hash": "3c1bdb765cf23654369da4cc7067f754"
+		},
+		{
+			"identifier": "remove_endpoint_from_group/schema.py",
+			"hash": "4f5bb5f8ed9631ee513f2f144caa1d12"
 		},
 		{
 			"identifier": "connection/schema.py",

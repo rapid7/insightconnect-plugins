@@ -1,8 +1,6 @@
 import insightconnect_plugin_runtime
-from .schema import AntivirusScanInput, AntivirusScanOutput, Input, Output, Component
 
-# Custom imports below
-from insightconnect_plugin_runtime.exceptions import PluginException
+from .schema import AntivirusScanInput, AntivirusScanOutput, Input, Output, Component
 
 
 class AntivirusScan(insightconnect_plugin_runtime.Action):

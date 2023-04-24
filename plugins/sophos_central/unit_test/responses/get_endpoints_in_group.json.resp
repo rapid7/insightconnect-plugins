@@ -1,0 +1,130 @@
+{
+  "items": [
+    {
+      "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0",
+      "type": "computer",
+      "tenant": {
+        "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+      },
+      "hostname": "DESKTOP-1234567",
+      "health": {
+        "overall": "bad",
+        "threats": {
+          "status": "good"
+        },
+        "services": {
+          "status": "bad",
+          "serviceDetails": [
+            {
+              "name": "HitmanPro.Alert service",
+              "status": "running"
+            },
+            {
+              "name": "Sophos Anti-Virus",
+              "status": "missing"
+            },
+            {
+              "name": "Sophos AutoUpdate Service",
+              "status": "running"
+            },
+            {
+              "name": "Sophos Clean Service",
+              "status": "running"
+            },
+            {
+              "name": "Sophos Endpoint Defense",
+              "status": "running"
+            },
+            {
+              "name": "Sophos Endpoint Defense Service",
+              "status": "running"
+            },
+            {
+              "name": "Sophos File Scanner",
+              "status": "running"
+            },
+            {
+              "name": "Sophos File Scanner Service",
+              "status": "running"
+            },
+            {
+              "name": "Sophos IPS",
+              "status": "running"
+            },
+            {
+              "name": "Sophos MCS Agent",
+              "status": "running"
+            },
+            {
+              "name": "Sophos MCS Client",
+              "status": "running"
+            },
+            {
+              "name": "Sophos Network Threat Protection",
+              "status": "missing"
+            },
+            {
+              "name": "Sophos Safestore Service",
+              "status": "running"
+            },
+            {
+              "name": "Sophos System Protection Service",
+              "status": "running"
+            },
+            {
+              "name": "Sophos Web Intelligence Filter Service",
+              "status": "missing"
+            },
+            {
+              "name": "Sophos Web Intelligence Service",
+              "status": "missing"
+            }
+          ]
+        }
+      },
+      "os": {
+        "isServer": false,
+        "platform": "windows",
+        "name": "Windows 10 Home N",
+        "majorVersion": 10,
+        "minorVersion": 0,
+        "build": 19042
+      },
+      "ipv4Addresses": [
+        "198.51.100.1"
+      ],
+      "macAddresses": [
+        "01:00:2A:11:1E:22"
+      ],
+      "group": {
+        "name": "Example Group",
+        "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+      },
+      "associatedPerson": {
+        "name": "DESKTOP-1234567\\Example User",
+        "viaLogin": "DESKTOP-1234567\\Example User",
+        "id": "9de5069c-5afe-602b-2ea0-a04b66beb2c0"
+      },
+      "tamperProtectionEnabled": true,
+      "lastSeenAt": "2023-01-03T07:45:34.802Z",
+      "encryption": {
+        "volumes": [
+          {
+            "volumeId": "\\\\?\\Volume{0037ff91-0000-0000-0000-300300000000}\\",
+            "status": "notSupported"
+          }
+        ]
+      },
+      "isolation": {
+        "status": "notIsolated",
+        "adminIsolated": false,
+        "selfIsolated": false
+      }
+    }
+  ],
+  "pages": {
+    "nextKey": "WyIxMDhmMzc4YS01MTE2LTQ3ODktYTNiYi1jZDFjMDc5NjY5ZmYiXQ==",
+    "size": 1,
+    "maxSize": 500
+  }
+}
