@@ -15,6 +15,17 @@ class Meta:
     version = "0.0.0"
 
 
+class MockResponse:
+    def __init__(self, status_code: int, filename: str = None):
+        self.status_code = status_code
+        self.text = ""
+        if filename:
+            self.text = Util.read_file_to_string(f"responses/{filename}")
+
+    def json(self):
+        return json.loads(self.text)
+
+
 class Util:
     @staticmethod
     def default_connector(action: insightconnect_plugin_runtime.Action):
@@ -45,16 +56,6 @@ class Util:
 
     @staticmethod
     def mock_request(*args, **kwargs):
-        class MockResponse:
-            def __init__(self, status_code: int, filename: str = None):
-                self.status_code = status_code
-                self.text = ""
-                if filename:
-                    self.text = Util.read_file_to_string(f"responses/{filename}")
-
-            def json(self):
-                return json.loads(self.text)
-
         json_data = kwargs.get("json", {})
         params = kwargs.get("params", {})
         url = args[1]
@@ -211,4 +212,64 @@ class Util:
         ):
             return MockResponse(200, "get_endpoints_in_group.json.resp")
 
+        if url == "https://api-us03.central.sophos.com/endpoint/v1/endpoints":
+            return MockResponse(200, "get_endpoint_id.json.resp")
+        if (
+            url
+            == "https://api-us03.central.sophos.com/endpoint/v1/endpoints/999fd666-9666-4e66-a066-d66fd966ad66/scans"
+        ):
+            return MockResponse(200, "antivirus_scan.json.resp")
+        if (
+            url
+            == "https://api-us03.central.sophos.com/endpoint/v1/endpoints/999fd666-9666-4e66-a066-d66fd966ad66/tamper-protection"
+        ):
+            return MockResponse(200, "check_tamper_protection_status.json.resp")
         raise NotImplementedError("Not implemented", kwargs)
+
+    @staticmethod
+    def mock_request_errors_401(*args, **kwargs):
+        url = args[1]
+        if url in ["https://id.sophos.com/api/v2/oauth2/token", "https://api.central.sophos.com/whoami/v1"]:
+            return MockResponse(200, "")
+        if url == "https://api-us03.central.sophos.com/endpoint/v1/endpoints":
+            return MockResponse(401, "get_endpoint_id.json.resp")
+
+    @staticmethod
+    def mock_request_errors_400(*args, **kwargs):
+        url = args[1]
+        if url in ["https://id.sophos.com/api/v2/oauth2/token", "https://api.central.sophos.com/whoami/v1"]:
+            return MockResponse(200, "")
+        if url == "https://api-us03.central.sophos.com/endpoint/v1/endpoints":
+            return MockResponse(400, "get_endpoint_id.json.resp")
+
+    @staticmethod
+    def mock_request_errors_403(*args, **kwargs):
+        url = args[1]
+        if url in ["https://id.sophos.com/api/v2/oauth2/token", "https://api.central.sophos.com/whoami/v1"]:
+            return MockResponse(200, "")
+        if url == "https://api-us03.central.sophos.com/endpoint/v1/endpoints":
+            return MockResponse(403, "get_endpoint_id.json.resp")
+
+    @staticmethod
+    def mock_request_errors_404(*args, **kwargs):
+        url = args[1]
+        if url in ["https://id.sophos.com/api/v2/oauth2/token", "https://api.central.sophos.com/whoami/v1"]:
+            return MockResponse(200, "")
+        if url == "https://api-us03.central.sophos.com/endpoint/v1/endpoints":
+            return MockResponse(404, "get_endpoint_id.json.resp")
+
+    @staticmethod
+    def mock_request_errors_409(*args, **kwargs):
+        url = args[1]
+        if url in ["https://id.sophos.com/api/v2/oauth2/token", "https://api.central.sophos.com/whoami/v1"]:
+            return MockResponse(200, "")
+        if url == "https://api-us03.central.sophos.com/endpoint/v1/endpoints":
+            return MockResponse(409, "get_endpoint_id.json.resp")
+
+    @staticmethod
+    def mock_request_errors_451(*args, **kwargs):
+        url = args[1]
+        if url in ["https://id.sophos.com/api/v2/oauth2/token", "https://api.central.sophos.com/whoami/v1"]:
+            return MockResponse(200, "")
+        if url == "https://api-us03.central.sophos.com/endpoint/v1/endpoints":
+            return MockResponse(451, "get_endpoint_id.json.resp")

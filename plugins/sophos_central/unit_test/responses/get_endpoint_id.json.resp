@@ -1,0 +1,35 @@
+{
+    "items": [
+        {
+            "id": "999fd666-9666-4e66-a066-d66fd966ad66",
+            "type": "computer",
+            "tenant": {
+                "id": "5b0eba20-ab12-34cd-88be-3a4cdc6a70f8"
+            },
+            "hostname": "DESKTOP-EXAMPLE",
+            "os": {
+                "isServer": false,
+                "platform": "windows",
+                "name": "Windows 10"
+            },
+            "ipv4Addresses": [
+                "192.0.0.1"
+            ],
+            "macAddresses": [
+                "00:00:00:00:00:00"
+            ],
+            "group": {
+                "name": "Example Group",
+                "id": "f8d03561-90d1-4c18-b576-34509e843ee1"
+            },
+            "tamperProtectionEnabled": true,
+            "lastSeenAt": "2020-08-02T21:30:55.487Z"
+        }
+    ],
+    "pages": {
+        "size": 50,
+        "total": 1,
+        "items": 1,
+        "maxSize": 500
+    }
+}
