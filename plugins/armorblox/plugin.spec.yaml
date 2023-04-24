@@ -24,12 +24,12 @@ enable_cache: true
 types:
   user:
     name:
-      title: User name
+      title: User Name
       description: Name of the user
       type: string
       required: false
     email:
-      title: User email
+      title: User Email
       description: Email of the user
       type: string
       required: false
@@ -40,12 +40,12 @@ types:
       required: false
   final_detection_tag:
     detection_tag_id:      
-      title: Detection tag ID
+      title: Detection Tag ID
       description: Detection tag ID
       type: string
       required: false
     detection_tag_name:
-      title: Detection tag name
+      title: Detection Tag name
       description: Detection tag name
       type: string
       required: false    
@@ -77,7 +77,7 @@ types:
       type: date
       required: false
     policy_names:
-      title: policy_names
+      title: policy Names
       description: List of policies
       type: '[]string'
       required: false
@@ -87,7 +87,7 @@ types:
       type: 'string'
       required: false          
     resolution_state:
-      title: resolution_state
+      title: Resolution State
       description: Incident resolution state
       type: string
       required: false
@@ -107,12 +107,12 @@ types:
       type: string
       required: false 
     external_senders:
-      title: External senders
+      title: External Senders
       description: List of external senders
       type: "[]string"
       required: 
     folder_categories:
-      title: Folder categories
+      title: Folder Categories
       description: Folder categories
       type: "[]string"
       required: false
@@ -137,17 +137,17 @@ types:
       type: "[]string"
       required: false
     users:
-      title: users
+      title: Users
       description: List of users
       type: "[]user"
       required: false
     external_users:
-      title: External users
+      title: External Users
       description: List of external users
       type: "[]user"
       required: false
     final_detection_tags:
-      title: Detection tags
+      title: Detection Tags
       description: Detection tags 
       type: "[]final_detection_tag"
       required: false
@@ -160,9 +160,9 @@ connection:
     required: true
     example: my-tenant-name
   api_key:
-    type: credential_secret_key
     title: Armorblox API Key
     description: Armorblox API Key
+    type: credential_secret_key
     required: true
     example: 9de5069c5afe602b2ea0a04b66beb2c0
 

@@ -1,7 +1,7 @@
 import insightconnect_plugin_runtime
 import time
 from datetime import datetime, timedelta
-from icon_armorblox.util.constants import ARMORBLOX_INCIDENT_API_TIME_FORMAT, ARMORBLOX_INCIDENT_API_TIME_DELTA_IN_DAYS
+from icon_armorblox.util.constants import ARMORBLOX_INCIDENT_API_TIME_FORMAT, ARMORBLOX_INCIDENT_API_TIME_DELTA_IN_DAYS, DEFAULT_INTERVAL_VALUE
 from .schema import GetIncidentsInput, GetIncidentsOutput, Input, Output, Component
 # Custom imports below
 
@@ -16,7 +16,7 @@ class GetIncidents(insightconnect_plugin_runtime.Trigger):
 
     def run(self, params={}):
         """Run the trigger"""
-        fetch_interval = params.get(Input.INTERVAL)
+        fetch_interval = params.get(Input.INTERVAL, DEFAULT_INTERVAL_VALUE)
         # First fetch
         last_fetch_time = (datetime.utcnow() - timedelta(days={ARMORBLOX_INCIDENT_API_TIME_DELTA_IN_DAYS})).strftime(
             {ARMORBLOX_INCIDENT_API_TIME_FORMAT})
