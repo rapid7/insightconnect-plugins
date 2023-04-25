@@ -5,16 +5,16 @@
          604800,
          true,
          {
-            "success": ["abcdef"],
+            "success": ["agent_id"],
             "failure": []
          }
       ],
       [
-         ["bad_agent_id_multiple"],
+         ["agent_id"],
          604800,
          false,
          {
-            "success": ["abcdef"],
+            "success": ["agent_id"],
             "failure": []
          }
       ]
