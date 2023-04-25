@@ -50,7 +50,7 @@ This action is used to quarantine or unquarantine multiple hosts.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent_array|[]string|None|True|Hostnames of the devices to quarantine|None|["WindowsX64", "WindowsX32"]|
+|agent_array|[]string|None|True|Asset IDs to quarantine or unquarantine|None|["abcdef123", "abcdef123"]|
 |interval|int|604800|True|Length of time in seconds to try to take action on a device. This is also called Advertisement Period|None|604800|
 |quarantine_state|boolean|True|True|Set to true to quarantine a host, set to false to unquarantine|None|True|
 
@@ -59,8 +59,8 @@ Example input:
 ```
 {
   "agent_array": [
-    "WindowsX64",
-    "WindowsX32"
+    "abcdef123",
+    "abcdef123"
   ],
   "interval": 604800,
   "quarantine_state": true
@@ -69,19 +69,21 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|failure|[]string|False|List of unsuccessfully quarantined hosts|
-|success|[]string|False|List of successfully quarantined hosts|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|failure|[]string|False|List of unsuccessfully quarantined hosts|["abcdef123"]|
+|success|[]string|False|List of successfully quarantined hosts|["abcdef123"]|
 
 Example output:
 
 ```
 {
-  "successful_quarantine": [
-    "b6a3b745706e977e3b4819213c4bdf82"
+  "failure":[
+    "abcdef123"
   ],
-  "unsuccessful_quarantine": []
+  "success":[
+    "abcdef123"
+  ]
 }
 ```
 
@@ -105,12 +107,12 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|is_asset_online|boolean|True|Indicates that the agent is connected to the Insight platform. This means the device is powered on and is connected to Rapid7|
-|is_currently_quarantined|boolean|True|Is the device currently quarantined|
-|is_quarantine_requested|boolean|True|Is a quarantine action pending on this device|
-|is_unquarantine_requested|boolean|True|Is there a pending request to release quarantine on this device|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|is_asset_online|boolean|True|Indicates that the agent is connected to the Insight platform. This means the device is powered on and is connected to Rapid7|True|
+|is_currently_quarantined|boolean|True|Is the device currently quarantined|True|
+|is_quarantine_requested|boolean|True|Is a quarantine action pending on this device|True|
+|is_unquarantine_requested|boolean|True|Is there a pending request to release quarantine on this device|True|
 
 Example output:
 
@@ -147,9 +149,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Was operation successful|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|Was operation successful|True|
 
 Example output:
 
@@ -179,9 +181,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|agent|agent|True|Agent information|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|agent|agent|True|Agent information|{}|
 
 Example output:
 
@@ -258,7 +260,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Links
 
-## References
-
 * [Rapid7 Insight Agent](https://docs.rapid7.com/insight-agent/overview/)
 * [Manage Platform API Keys](https://docs.rapid7.com/insight/managing-platform-api-keys/)
+
+## References
