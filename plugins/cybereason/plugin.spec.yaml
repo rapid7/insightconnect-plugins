@@ -687,6 +687,85 @@ types:
       description: An object containing details of the error
       type: '[]error'
       required: false
+  sensor:
+    hasMoreResults:
+      title: Has More Results
+      description: Was there more possible results that were excluded because of limit
+      type: boolean
+      required: true
+      example: false
+    sensors:
+      title: Sensors
+      description: list of dictionaries containing sensor information
+      type: "[]sensors"
+      example: []
+    sensorStatus:
+      title: Sensor Status
+      description: sensors status
+      type: getSensorStats
+      example: {}
+    totalResults:
+      title: Total Results
+      description: how many sensors did we get information from
+      type: integer
+      example: 1
+  getSensorStats:
+    class:
+      title: Class
+      description: class of object
+      type: string
+      example: .SensorsStatusOverview
+    advancedCount:
+      title: Advanced Count
+      description: How many sensors are advanced
+      type: integer
+      example: 0
+    archivedCount:
+      title: Archived Count
+      description: How many sensors are archived
+      type: integer
+      example: 0
+    offlineCount:
+      title: Offline Count
+      description: How many sensors are offline
+      type: integer
+      example: 0
+    onlineCount:
+      title: Online Count
+      description: How many sensors are online
+      type: integer
+      example: 0
+    outdatedCount:
+      title: Outdated Count
+      description: How many sensors are outdated
+      type: integer
+      example: 0
+    serviceErrorCount:
+      title: Service Error Count
+      description: How many sensors are experiencing service errors
+      type: integer
+      example: 0
+    staleCount:
+      title: Stale Count
+      description: How many sensors are stale
+      type: integer
+      example: 0
+    suspendedCount:
+      title: Suspended Count
+      description: How many sensors are suspended
+      type: integer
+      example: 0
+    turnedOffCount:
+      title: Turned Off Count
+      description: How many sensors are turned off
+      type: integer
+      example: 0
+    turnedOnCount:
+      title: Turned On Count
+      description: How many sensors are turned on
+      type: integer
+      example: 0
+
   sensors:
     sensorId:
       title: Sensor ID
@@ -1315,7 +1394,7 @@ actions:
       sensor:
         title: Sensor
         description: Sensor
-        type: sensors
+        type: sensor
         example: {}
         required: true
   archive_sensor:
@@ -1340,56 +1419,6 @@ actions:
         description: Archive sensor response
         type: archiveSensorResponse
         example: {}
-        required: true
-  get_sensor:
-    title: Get Sensor
-    description: Get sensor
-    input:
-      limit:
-        title: Limit
-        description: The number of sensors to which to send the request
-        type: integer
-        required: true
-        example: 1
-      offset:
-        title: Offset
-        description: Set to 0 to receive the first limit set of sensors
-        type: integer
-        required: true
-        example: 0
-      indicator:
-        title: Indicator
-        description: The unique identifier of the machine you wish to perform the operation on, this can be an internal IPv4 address, hostname or sensor GUID
-        type: string
-        required: true
-        example: 104.31.2.164
-    output:
-      sensor:
-        title: Sensor
-        description: Sensor
-        type: sensors
-        required: true
-  archive_sensor:
-    title: Archive Sensor
-    description: Archive sensor
-    input:
-      sensor_ids:
-        title: Sensor IDS
-        description: The unique identifier of the machine(s) you wish to perform the operation on
-        type: "[]string"
-        required: true
-        example: ["58ae74fae4b06dca39c1d4bc:PYLUMCLIENT_ORG1-PROD_WINTEST-PC_005056A104F9"]
-      argument:
-        title: Argument
-        description: The reason for archiving the sensor or sensors
-        type: string
-        required: true
-        example: "Sensors are no longer in use"
-    output:
-      archive_sensor_response:
-        title: Archive Sensor Response
-        description: Archive sensor response
-        type: archiveSensorResponse
         required: true
   quarantine_file:
     title: Quarantine File
