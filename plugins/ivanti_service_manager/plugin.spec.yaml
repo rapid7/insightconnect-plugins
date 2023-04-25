@@ -4,9 +4,10 @@ products: [insightconnect]
 name: ivanti_service_manager
 title: Ivanti Service Manager
 description: Ivanti Service Manager is a flexible and complete cloud-optimized, easily scalable and adaptable ITSM solution used for managing and automating ITSM processes
-version: 1.2.0
+version: 2.0.0
 vendor: rapid7
 support: community
+supported_versions: ["2023-04-24"]
 status: []
 resources:
   source_url: https://github.com/rapid7/insightconnect-plugins/tree/master/plugins/ivanti_service_manager
@@ -20,7 +21,6 @@ hub_tags:
   use_cases: [reporting_and_analytics, user_management, threat_detection_and_response]
   keywords: [ivanti, service, manager, itsm]
   features: []
-
 types:
   incident:
     ActualCategory_Valid:
@@ -881,7 +881,7 @@ types:
     TimeSpent:
       title: Time Spent
       description: Time spent
-      type: string
+      type: integer
       required: false
     Category_Valid:
       title: Category Valid
@@ -1719,7 +1719,6 @@ types:
       description: Ivanti product catalog link
       type: string
       required: false
-    
 connection:
   credentials:
     title: API Key
@@ -1740,7 +1739,6 @@ connection:
     default: true
     required: false
     example: true
-
 triggers:
   new_incident:
     title: New Incident
@@ -1759,7 +1757,7 @@ triggers:
         description: New Incident
         type: incident
         required: true
-
+        example: {}
 actions:
   create_incident:
     title: Create Incident
@@ -1863,6 +1861,7 @@ actions:
         description: Newly created incident
         type: incident
         required: true
+        example: {}
   delete_incident:
     title: Delete Incident
     description: Delete an incident
@@ -1879,6 +1878,7 @@ actions:
         description: Return true if the threat was updated
         type: boolean
         required: true
+        example: true
   update_incident:
     title: Update Incident
     description: Update an existing incident in Ivanti Service Manager
@@ -1951,6 +1951,7 @@ actions:
         description: Newly created incident
         type: incident
         required: true
+        example: {}
   add_note:
     title: Add Note
     description: Adds a journal note to an incident
@@ -2008,6 +2009,7 @@ actions:
         description: Journal note details
         type: journal_note
         required: true
+        example: {}
   create_service_request:
     title: Create Service Request
     description: Create a new Ivanti Service Manager service request
@@ -2064,6 +2066,7 @@ actions:
         description: Newly created service request
         type: service_request
         required: true
+        example: {}
   search_incidents:
     title: Search Incidents
     description: Search Incidents using a Keyword
@@ -2080,6 +2083,7 @@ actions:
         description: List of results
         type: "[]incident"
         required: true
+        example: []
   get_incident:
     title: Get Incident
     description: Get Incident by Incident Number
@@ -2096,3 +2100,4 @@ actions:
         description: Incident requested
         type: incident
         required: true
+        example: {}

@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 
 setup(name="ivanti_service_manager-rapid7-plugin",
-      version="1.2.0",
+      version="2.0.0",
       description="Ivanti Service Manager is a flexible and complete cloud-optimized, easily scalable and adaptable ITSM solution used for managing and automating ITSM processes",
       author="rapid7",
       author_email="",

@@ -15,6 +15,10 @@
 
 * Requires an API Key from Ivanti
 
+# Supported Product Versions
+
+* 2023-04-24
+
 # Documentation
 ## Setup
 
@@ -76,9 +80,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|service_request|service_request|True|Newly created service request|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|service_request|service_request|True|Newly created service request|{}|
 
 Example output:
 
@@ -187,9 +191,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|journal_note|journal_note|True|Journal note details|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|journal_note|journal_note|True|Journal note details|{}|
 
 Example output:
 
@@ -252,9 +256,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|incident|incident|True|Newly created incident|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|incident|incident|True|Newly created incident|{}|
 
 Example output:
 
@@ -370,9 +374,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Return true if the threat was updated|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|Return true if the threat was updated|True|
 
 Example output:
 
@@ -420,9 +424,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|incident|incident|True|Newly created incident|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|incident|incident|True|Newly created incident|{}|
 
 Example output:
 
@@ -538,9 +542,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|incident|incident|True|Incident requested|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|incident|incident|True|Incident requested|{}|
 
 Example output:
 
@@ -572,7 +576,7 @@ This action is used to search Incidents using a Keyword.
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|--|----|-------|--------|-----------|----|-------|
+|----|----|-------|--------|-----------|----|-------|
 |keyword|string|None|True|Keyword to search for|None|Phone|
 
 Example input:
@@ -585,9 +589,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|data|[]incident|True|List of results|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|data|[]incident|True|List of results|[]|
 
 Example output:
 
@@ -653,9 +657,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|incident|incident|True|New Incident|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|incident|incident|True|New Incident|{}|
 
 Example output:
 
@@ -874,12 +878,12 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 1.2.0 - Added Get Incident action | Added Search Incident action | Added New Incident trigger
+* 2.0.0 - Added Get Incident action | Added Search Incident action | Added New Incident trigger | Updated the output type for Add Note action
 * 1.1.0 - Added Create Service Request action | Added missing example input in Create Incident action
 * 1.0.0 - Initial plugin
 
 # Links
 
-## References
-
 * [Ivanti Service Manager](https://www.ivanti.co.uk/products/service-manager)
+
+## References

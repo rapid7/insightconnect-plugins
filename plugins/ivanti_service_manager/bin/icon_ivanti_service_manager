@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Ivanti Service Manager"
 Vendor = "rapid7"
-Version = "1.2.0"
+Version = "2.0.0"
 Description = "Ivanti Service Manager is a flexible and complete cloud-optimized, easily scalable and adaptable ITSM solution used for managing and automating ITSM processes"
 
 

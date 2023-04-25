@@ -282,7 +282,7 @@ class AddNoteOutput(insightconnect_plugin_runtime.Output):
           "order": 22
         },
         "TimeSpent": {
-          "type": "string",
+          "type": "integer",
           "title": "Time Spent",
           "description": "Time spent",
           "order": 5
