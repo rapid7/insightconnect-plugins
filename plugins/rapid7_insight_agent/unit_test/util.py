@@ -51,6 +51,8 @@ class Util:
             return MockResponse("quarantine_bad.resp")
         elif kwargs.get("json").get("variables").get("agentID") == "agent_id":
             return MockResponse("quarantine_multiple.resp")
+        elif kwargs.get("json").get("variables").get("agentID") == "agent_id_bad":
+            return MockResponse("quarantine_multiple_failure.resp")
         elif kwargs.get("json").get("variables").get("orgId") == "9de5069c5afe602b2ea0a04b66beb2c0":
             return MockResponse("get_agent_details.resp")
         return "Not implemented"
