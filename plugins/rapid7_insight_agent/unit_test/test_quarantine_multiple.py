@@ -26,7 +26,5 @@ class TestQuarantineMultiple(TestCase):
     def test_empty_array(self, mock_post):
         action = Util.default_connector(QuarantineMultiple())
         with self.assertRaises(PluginException) as context:
-            action.run(
-                {Input.AGENT_ARRAY: [], Input.INTERVAL: 1000, Input.QUARANTINE_STATE: True}
-            )
+            action.run({Input.AGENT_ARRAY: [], Input.INTERVAL: 1000, Input.QUARANTINE_STATE: True})
         self.assertEqual(context.exception.cause, "Empty list provided.")
