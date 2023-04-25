@@ -27,7 +27,9 @@ class TestQuarantineMultiple(TestCase):
     def test_quarantine_multiple_failure(self, mock_post, agent_id_array, interval, quarantine_state, expected):
 
         action = Util.default_connector(QuarantineMultiple())
-        actual = action.run({Input.AGENT_ARRAY: agent_id_array, Input.INTERVAL: interval, Input.QUARANTINE_STATE: quarantine_state})
+        actual = action.run(
+            {Input.AGENT_ARRAY: agent_id_array, Input.INTERVAL: interval, Input.QUARANTINE_STATE: quarantine_state}
+        )
         self.assertEqual(actual, expected)
 
     def test_empty_array(self, mock_post):
