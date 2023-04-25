@@ -27,7 +27,7 @@ class QuarantineMultipleInput(insightconnect_plugin_runtime.Input):
     "agent_array": {
       "type": "array",
       "title": "Agent Array",
-      "description": "Hostnames of the devices to quarantine",
+      "description": "Asset IDs to quarantine or unquarantine",
       "items": {
         "type": "string"
       },
