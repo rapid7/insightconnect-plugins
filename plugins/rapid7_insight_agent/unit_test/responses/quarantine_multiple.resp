@@ -13,6 +13,17 @@
                     "assetId":"abcdef"
                 }
             ]
-        }
+        },
+        "assets":[
+            {
+                "agent":{
+                    "id":"52cac3d9934dbd22367db1e21e540440",
+                    "quarantineState":{
+                        "currentState":"UNQUARANTINED"
+                    },
+                    "agentStatus":"ONLINE"
+                }
+            }
+        ]
     }
 }

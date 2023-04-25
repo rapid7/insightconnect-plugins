@@ -5,7 +5,7 @@
          604800,
          true,
          {
-            "success": ["abcdef"],
+            "success": ["agent_id"],
             "failure": []
          }
       ],
@@ -14,7 +14,7 @@
          604800,
          false,
          {
-            "success": ["abcdef"],
+            "success": ["agent_id"],
             "failure": []
          }
       ]
