@@ -8,10 +8,16 @@
 * Update incidents
 * Delete incidents
 * Add note
+* Get incidents
+* Search incidents
 
 # Requirements
 
 * Requires an API Key from Ivanti
+
+# Supported Product Versions
+
+* 2023-04-24
 
 # Documentation
 ## Setup
@@ -74,9 +80,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|service_request|service_request|True|Newly created service request|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|service_request|service_request|True|Newly created service request|{}|
 
 Example output:
 
@@ -185,36 +191,36 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|journal_note|journal_note|True|Journal note details|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|journal_note|journal_note|True|Journal note details|{}|
 
 Example output:
 
 ```
 {
-    "journal_note": {
-        "@odata.context": "https://rapid7.vantosi.com/HEAT/api/odata/$metadata#journal__notess/$entity",
-        "DisplayText": "Test note summary created by InsightConnect This is the body of the note created by InsightConnect",
-        "NotesBody": "This is the body of the note created by InsightConnect",
-        "Source_Valid": "3961856F36F5481DAC36273B68833AEC",
-        "Source": "E-mail",
-        "Category_Valid": "E8F5DACDE7EA411990CE1D0DC7D392F7",
-        "Category": "Customer Notes",
-        "CreatedBy": "user",
-        "CreatedDateTime": "2020-08-21T13:04:12-07:00",
-        "JournalType": "Notes",
-        "LastModBy": "user",
-        "LastModDateTime": "2020-08-21T13:04:13-07:00",
-        "ParentLink_RecID": "304631ACAB8A4EFD8D8E5AA334993426",
-        "RecId": "9F8299197F7C4FCBA0943EC384128237",
-        "Subject": "Test note summary created by InsightConnect",
-        "PublishToWeb": false,
-        "ReadOnly": false,
-        "IsNewRecord": false,
-        "IsUnRead": true,
-        "UnreadTransition": false
-    }
+  "journal_note": {
+    "@odata.context": "https://rapid7.vantosi.com/HEAT/api/odata/$metadata#journal__notess/$entity",
+    "DisplayText": "Test note summary created by InsightConnect This is the body of the note created by InsightConnect",
+    "NotesBody": "This is the body of the note created by InsightConnect",
+    "Source_Valid": "3961856F36F5481DAC36273B68833AEC",
+    "Source": "E-mail",
+    "Category_Valid": "E8F5DACDE7EA411990CE1D0DC7D392F7",
+    "Category": "Customer Notes",
+    "CreatedBy": "user",
+    "CreatedDateTime": "2020-08-21T13:04:12-07:00",
+    "JournalType": "Notes",
+    "LastModBy": "user",
+    "LastModDateTime": "2020-08-21T13:04:13-07:00",
+    "ParentLink_RecID": "304631ACAB8A4EFD8D8E5AA334993426",
+    "RecId": "9F8299197F7C4FCBA0943EC384128237",
+    "Subject": "Test note summary created by InsightConnect",
+    "PublishToWeb": false,
+    "ReadOnly": false,
+    "IsNewRecord": false,
+    "IsUnRead": true,
+    "UnreadTransition": false
+  }
 }
 ```
 
@@ -250,100 +256,100 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|incident|incident|True|Newly created incident|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|incident|incident|True|Newly created incident|{}|
 
 Example output:
 
 ```
 {
   "incident": {
-      "@odata.context": "https://example.com/HEAT/api/odata/$metadata#incidents/$entity",
-      "ClosedDuration": 0,
-      "CreatedBy": "user",
-      "CreatedDateTime": "2020-08-12T16:33:37-07:00",
-      "Email": "user@example.com",
-      "FirstCallResolution": false,
-      "IncidentNumber": 12345,
-      "IsNotification": true,
-      "IsVIP": false,
-      "IsWorkAround": false,
-      "LastModBy": "user",
-      "LastModDateTime": "2020-08-12T16:33:37-07:00",
-      "Phone": "+1 (415) 450 3428",
-      "Priority_Valid": "DA5FF948701D4022927500E08FCF574E",
-      "Priority": "5",
-      "ProfileFullName": "User",
-      "ProfileLink_Category": "Employee",
-      "ProfileLink_RecID": "2F851094BFE5437C97D19871D1C539C7",
-      "ProfileLink": "2F851094BFE5437C97D19871D1C539C7",
-      "RecId": "085867F47547496783005D95CB82D557",
-      "Service_Valid": "A912E98E55844765934A787FF3586F34",
-      "Service": "Service Desk",
-      "Source_Valid": "EF789CE160E742F99623DBB4D29C045C",
-      "Source": "Phone",
-      "Status_Valid": "AB3D0090B6D8471FB0D2720D301A22AF",
-      "Status": "Logged",
-      "Subject": "InsightConnect Test",
-      "Symptom": "Test incident created by InsightConnect",
-      "Urgency_Valid": "320F22CAA2984C87B06AEFD3DE6FFBBF",
-      "Urgency": "Low",
-      "LoginId": "user",
-      "Owner_Valid": "1087342EA6954D7D96140D64B452E597",
-      "Owner": "user",
-      "OwnerTeam_Valid": "2E4BABD54FB9420D94F836F0D9B80C47",
-      "OwnerTeam": "Service Management Team",
-      "OwnerType": "Employee",
-      "IsNewRecord": false,
-      "HoursOfOperation_Valid": "FF57246B2E0047D193C1AEC1011D746B",
-      "HoursOfOperation": "Weekly HOP",
-      "OwnerEmail": "user@example.com",
-      "OwnerTeamEmail": "user@example.com",
-      "OwnershipAssignmentEmail": "user@example.com",
-      "CustomerLocation_Valid": "6E4C36E8140B4BFD8AC4242BD7ED058B",
-      "CustomerLocation": "San Francisco",
-      "IsReportedByAlternateContact": false,
-      "OrganizationUnitID": "Consulting Services",
-      "ReportingOrgUnitID_Valid": "8B38681087C847A287D738621DA6BEE4",
-      "ReportingOrgUnitID": "Consulting Services",
-      "TypeOfIncident": "Request",
-      "TeamManagerEmail": "user@example.com",
-      "CustomerDepartment": "Corporate Services and Training",
-      "ActualService_Valid": "A912E98E55844765934A787FF3586F34",
-      "ActualService": "Service Desk",
-      "CostPerMinute_Currency": "USD",
-      "CostPerMinute": "0.4000",
-      "IsInFinalState": false,
-      "IsReclassifiedForResolution": false,
-      "ResolvedByIncidentNumber": 0,
-      "TotalTimeSpent": 0,
-      "OrgUnitLink_Category": "OrganizationalUnit",
-      "OrgUnitLink_RecID": "8B38681087C847A287D738621DA6BEE4",
-      "OrgUnitLink": "8B38681087C847A287D738621DA6BEE4",
-      "OwningOrgUnitId_Valid": "FA9C9DD75EF9455CBC892F65691A1E7F",
-      "OwningOrgUnitId": "Corporate IT Operations",
-      "ProgressBarPosition": "1",
-      "CreatedByType": "Web Client",
-      "ReadOnly": false,
-      "Cost_Currency": "USD",
-      "Cost": "0.0000",
-      "IsApprovalNeeded": false,
-      "Approver_Valid": "D8E9ECB03001437492B3BE453EDCBEE6",
-      "Approver": "user@example.com",
-      "IsDSMTaskExisted": false,
-      "SocialTextHeader": "Incident 11169: InsightConnect Test",
-      "IncidentNetworkUserName": "user",
-      "SendSurveyNotification": false,
-      "EntityLink_Category": "OrganizationalUnit",
-      "EntityLink_RecID": "8B38681087C847A287D738621DA6BEE4",
-      "EntityLink": "8B38681087C847A287D738621DA6BEE4",
-      "IsMasterIncident": false,
-      "IsResolvedByMaster": false,
-      "ServiceOwnerEmail": "user@example.com",
-      "IsRelatedIncidentUpdate": false,
-      "IsRelatedIncidentResolutionUpdate": false,
-      "IsUnRead": false
+    "@odata.context": "https://example.com/HEAT/api/odata/$metadata#incidents/$entity",
+    "ClosedDuration": 0,
+    "CreatedBy": "user",
+    "CreatedDateTime": "2020-08-12T16:33:37-07:00",
+    "Email": "user@example.com",
+    "FirstCallResolution": false,
+    "IncidentNumber": 12345,
+    "IsNotification": true,
+    "IsVIP": false,
+    "IsWorkAround": false,
+    "LastModBy": "user",
+    "LastModDateTime": "2020-08-12T16:33:37-07:00",
+    "Phone": "+1 (415) 450 3428",
+    "Priority_Valid": "DA5FF948701D4022927500E08FCF574E",
+    "Priority": "5",
+    "ProfileFullName": "User",
+    "ProfileLink_Category": "Employee",
+    "ProfileLink_RecID": "2F851094BFE5437C97D19871D1C539C7",
+    "ProfileLink": "2F851094BFE5437C97D19871D1C539C7",
+    "RecId": "085867F47547496783005D95CB82D557",
+    "Service_Valid": "A912E98E55844765934A787FF3586F34",
+    "Service": "Service Desk",
+    "Source_Valid": "EF789CE160E742F99623DBB4D29C045C",
+    "Source": "Phone",
+    "Status_Valid": "AB3D0090B6D8471FB0D2720D301A22AF",
+    "Status": "Logged",
+    "Subject": "InsightConnect Test",
+    "Symptom": "Test incident created by InsightConnect",
+    "Urgency_Valid": "320F22CAA2984C87B06AEFD3DE6FFBBF",
+    "Urgency": "Low",
+    "LoginId": "user",
+    "Owner_Valid": "1087342EA6954D7D96140D64B452E597",
+    "Owner": "user",
+    "OwnerTeam_Valid": "2E4BABD54FB9420D94F836F0D9B80C47",
+    "OwnerTeam": "Service Management Team",
+    "OwnerType": "Employee",
+    "IsNewRecord": false,
+    "HoursOfOperation_Valid": "FF57246B2E0047D193C1AEC1011D746B",
+    "HoursOfOperation": "Weekly HOP",
+    "OwnerEmail": "user@example.com",
+    "OwnerTeamEmail": "user@example.com",
+    "OwnershipAssignmentEmail": "user@example.com",
+    "CustomerLocation_Valid": "6E4C36E8140B4BFD8AC4242BD7ED058B",
+    "CustomerLocation": "San Francisco",
+    "IsReportedByAlternateContact": false,
+    "OrganizationUnitID": "Consulting Services",
+    "ReportingOrgUnitID_Valid": "8B38681087C847A287D738621DA6BEE4",
+    "ReportingOrgUnitID": "Consulting Services",
+    "TypeOfIncident": "Request",
+    "TeamManagerEmail": "user@example.com",
+    "CustomerDepartment": "Corporate Services and Training",
+    "ActualService_Valid": "A912E98E55844765934A787FF3586F34",
+    "ActualService": "Service Desk",
+    "CostPerMinute_Currency": "USD",
+    "CostPerMinute": "0.4000",
+    "IsInFinalState": false,
+    "IsReclassifiedForResolution": false,
+    "ResolvedByIncidentNumber": 0,
+    "TotalTimeSpent": 0,
+    "OrgUnitLink_Category": "OrganizationalUnit",
+    "OrgUnitLink_RecID": "8B38681087C847A287D738621DA6BEE4",
+    "OrgUnitLink": "8B38681087C847A287D738621DA6BEE4",
+    "OwningOrgUnitId_Valid": "FA9C9DD75EF9455CBC892F65691A1E7F",
+    "OwningOrgUnitId": "Corporate IT Operations",
+    "ProgressBarPosition": "1",
+    "CreatedByType": "Web Client",
+    "ReadOnly": false,
+    "Cost_Currency": "USD",
+    "Cost": "0.0000",
+    "IsApprovalNeeded": false,
+    "Approver_Valid": "D8E9ECB03001437492B3BE453EDCBEE6",
+    "Approver": "user@example.com",
+    "IsDSMTaskExisted": false,
+    "SocialTextHeader": "Incident 11169: InsightConnect Test",
+    "IncidentNetworkUserName": "user",
+    "SendSurveyNotification": false,
+    "EntityLink_Category": "OrganizationalUnit",
+    "EntityLink_RecID": "8B38681087C847A287D738621DA6BEE4",
+    "EntityLink": "8B38681087C847A287D738621DA6BEE4",
+    "IsMasterIncident": false,
+    "IsResolvedByMaster": false,
+    "ServiceOwnerEmail": "user@example.com",
+    "IsRelatedIncidentUpdate": false,
+    "IsRelatedIncidentResolutionUpdate": false,
+    "IsUnRead": false
   }
 }
 ```
@@ -368,9 +374,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Return true if the threat was updated|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|Return true if the threat was updated|True|
 
 Example output:
 
@@ -418,107 +424,336 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|incident|incident|True|Newly created incident|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|incident|incident|True|Newly created incident|{}|
 
 Example output:
 
 ```
 {
   "incident": {
-      "@odata.context": "https://example.com/HEAT/api/odata/$metadata#incidents/$entity",
-      "ClosedDuration": 0,
-      "CreatedBy": "user",
-      "CreatedDateTime": "2020-08-12T16:33:37-07:00",
-      "Email": "user@example.com",
-      "FirstCallResolution": false,
-      "IncidentNumber": 12345,
-      "IsNotification": true,
-      "IsVIP": false,
-      "IsWorkAround": false,
-      "LastModBy": "user",
-      "LastModDateTime": "2020-08-12T16:33:37-07:00",
-      "Phone": "+1 (415) 450 3428",
-      "Priority_Valid": "DA5FF948701D4022927500E08FCF574E",
-      "Priority": "5",
-      "ProfileFullName": "User",
-      "ProfileLink_Category": "Employee",
-      "ProfileLink_RecID": "2F851094BFE5437C97D19871D1C539C7",
-      "ProfileLink": "2F851094BFE5437C97D19871D1C539C7",
-      "RecId": "085867F47547496783005D95CB82D557",
-      "Service_Valid": "A912E98E55844765934A787FF3586F34",
-      "Service": "Service Desk",
-      "Source_Valid": "EF789CE160E742F99623DBB4D29C045C",
-      "Source": "Phone",
-      "Status_Valid": "AB3D0090B6D8471FB0D2720D301A22AF",
-      "Status": "Logged",
-      "Subject": "InsightConnect Test",
-      "Symptom": "Test incident created by InsightConnect",
-      "Urgency_Valid": "320F22CAA2984C87B06AEFD3DE6FFBBF",
-      "Urgency": "Low",
-      "LoginId": "user",
-      "Owner_Valid": "1087342EA6954D7D96140D64B452E597",
-      "Owner": "user",
-      "OwnerTeam_Valid": "2E4BABD54FB9420D94F836F0D9B80C47",
-      "OwnerTeam": "Service Management Team",
-      "OwnerType": "Employee",
-      "IsNewRecord": false,
-      "HoursOfOperation_Valid": "FF57246B2E0047D193C1AEC1011D746B",
-      "HoursOfOperation": "Weekly HOP",
-      "OwnerEmail": "user@example.com",
-      "OwnerTeamEmail": "user@example.com",
-      "OwnershipAssignmentEmail": "user@example.com",
-      "CustomerLocation_Valid": "6E4C36E8140B4BFD8AC4242BD7ED058B",
-      "CustomerLocation": "San Francisco",
-      "IsReportedByAlternateContact": false,
-      "OrganizationUnitID": "Consulting Services",
-      "ReportingOrgUnitID_Valid": "8B38681087C847A287D738621DA6BEE4",
-      "ReportingOrgUnitID": "Consulting Services",
-      "TypeOfIncident": "Request",
-      "TeamManagerEmail": "user@example.com",
-      "CustomerDepartment": "Corporate Services and Training",
-      "ActualService_Valid": "A912E98E55844765934A787FF3586F34",
-      "ActualService": "Service Desk",
-      "CostPerMinute_Currency": "USD",
-      "CostPerMinute": "0.4000",
-      "IsInFinalState": false,
-      "IsReclassifiedForResolution": false,
-      "ResolvedByIncidentNumber": 0,
-      "TotalTimeSpent": 0,
-      "OrgUnitLink_Category": "OrganizationalUnit",
-      "OrgUnitLink_RecID": "8B38681087C847A287D738621DA6BEE4",
-      "OrgUnitLink": "8B38681087C847A287D738621DA6BEE4",
-      "OwningOrgUnitId_Valid": "FA9C9DD75EF9455CBC892F65691A1E7F",
-      "OwningOrgUnitId": "Corporate IT Operations",
-      "ProgressBarPosition": "1",
-      "CreatedByType": "Web Client",
-      "ReadOnly": false,
-      "Cost_Currency": "USD",
-      "Cost": "0.0000",
-      "IsApprovalNeeded": false,
-      "Approver_Valid": "D8E9ECB03001437492B3BE453EDCBEE6",
-      "Approver": "user@example.com",
-      "IsDSMTaskExisted": false,
-      "SocialTextHeader": "Incident 11169: InsightConnect Test",
-      "IncidentNetworkUserName": "user",
-      "SendSurveyNotification": false,
-      "EntityLink_Category": "OrganizationalUnit",
-      "EntityLink_RecID": "8B38681087C847A287D738621DA6BEE4",
-      "EntityLink": "8B38681087C847A287D738621DA6BEE4",
-      "IsMasterIncident": false,
-      "IsResolvedByMaster": false,
-      "ServiceOwnerEmail": "user@example.com",
-      "IsRelatedIncidentUpdate": false,
-      "IsRelatedIncidentResolutionUpdate": false,
-      "IsUnRead": false
+    "@odata.context": "https://example.com/HEAT/api/odata/$metadata#incidents/$entity",
+    "ClosedDuration": 0,
+    "CreatedBy": "user",
+    "CreatedDateTime": "2020-08-12T16:33:37-07:00",
+    "Email": "user@example.com",
+    "FirstCallResolution": false,
+    "IncidentNumber": 12345,
+    "IsNotification": true,
+    "IsVIP": false,
+    "IsWorkAround": false,
+    "LastModBy": "user",
+    "LastModDateTime": "2020-08-12T16:33:37-07:00",
+    "Phone": "+1 (415) 450 3428",
+    "Priority_Valid": "DA5FF948701D4022927500E08FCF574E",
+    "Priority": "5",
+    "ProfileFullName": "User",
+    "ProfileLink_Category": "Employee",
+    "ProfileLink_RecID": "2F851094BFE5437C97D19871D1C539C7",
+    "ProfileLink": "2F851094BFE5437C97D19871D1C539C7",
+    "RecId": "085867F47547496783005D95CB82D557",
+    "Service_Valid": "A912E98E55844765934A787FF3586F34",
+    "Service": "Service Desk",
+    "Source_Valid": "EF789CE160E742F99623DBB4D29C045C",
+    "Source": "Phone",
+    "Status_Valid": "AB3D0090B6D8471FB0D2720D301A22AF",
+    "Status": "Logged",
+    "Subject": "InsightConnect Test",
+    "Symptom": "Test incident created by InsightConnect",
+    "Urgency_Valid": "320F22CAA2984C87B06AEFD3DE6FFBBF",
+    "Urgency": "Low",
+    "LoginId": "user",
+    "Owner_Valid": "1087342EA6954D7D96140D64B452E597",
+    "Owner": "user",
+    "OwnerTeam_Valid": "2E4BABD54FB9420D94F836F0D9B80C47",
+    "OwnerTeam": "Service Management Team",
+    "OwnerType": "Employee",
+    "IsNewRecord": false,
+    "HoursOfOperation_Valid": "FF57246B2E0047D193C1AEC1011D746B",
+    "HoursOfOperation": "Weekly HOP",
+    "OwnerEmail": "user@example.com",
+    "OwnerTeamEmail": "user@example.com",
+    "OwnershipAssignmentEmail": "user@example.com",
+    "CustomerLocation_Valid": "6E4C36E8140B4BFD8AC4242BD7ED058B",
+    "CustomerLocation": "San Francisco",
+    "IsReportedByAlternateContact": false,
+    "OrganizationUnitID": "Consulting Services",
+    "ReportingOrgUnitID_Valid": "8B38681087C847A287D738621DA6BEE4",
+    "ReportingOrgUnitID": "Consulting Services",
+    "TypeOfIncident": "Request",
+    "TeamManagerEmail": "user@example.com",
+    "CustomerDepartment": "Corporate Services and Training",
+    "ActualService_Valid": "A912E98E55844765934A787FF3586F34",
+    "ActualService": "Service Desk",
+    "CostPerMinute_Currency": "USD",
+    "CostPerMinute": "0.4000",
+    "IsInFinalState": false,
+    "IsReclassifiedForResolution": false,
+    "ResolvedByIncidentNumber": 0,
+    "TotalTimeSpent": 0,
+    "OrgUnitLink_Category": "OrganizationalUnit",
+    "OrgUnitLink_RecID": "8B38681087C847A287D738621DA6BEE4",
+    "OrgUnitLink": "8B38681087C847A287D738621DA6BEE4",
+    "OwningOrgUnitId_Valid": "FA9C9DD75EF9455CBC892F65691A1E7F",
+    "OwningOrgUnitId": "Corporate IT Operations",
+    "ProgressBarPosition": "1",
+    "CreatedByType": "Web Client",
+    "ReadOnly": false,
+    "Cost_Currency": "USD",
+    "Cost": "0.0000",
+    "IsApprovalNeeded": false,
+    "Approver_Valid": "D8E9ECB03001437492B3BE453EDCBEE6",
+    "Approver": "user@example.com",
+    "IsDSMTaskExisted": false,
+    "SocialTextHeader": "Incident 11169: InsightConnect Test",
+    "IncidentNetworkUserName": "user",
+    "SendSurveyNotification": false,
+    "EntityLink_Category": "OrganizationalUnit",
+    "EntityLink_RecID": "8B38681087C847A287D738621DA6BEE4",
+    "EntityLink": "8B38681087C847A287D738621DA6BEE4",
+    "IsMasterIncident": false,
+    "IsResolvedByMaster": false,
+    "ServiceOwnerEmail": "user@example.com",
+    "IsRelatedIncidentUpdate": false,
+    "IsRelatedIncidentResolutionUpdate": false,
+    "IsUnRead": false
   }
+}
+```
+
+#### Get Incident
+
+This action is used to get Incident by Incident Number.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|incident_number|integer|None|True|Incident Number of Incident to get|None|12345|
+
+Example input:
+
+```
+{
+  "incident_number": 12345
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|incident|incident|True|Incident requested|{}|
+
+Example output:
+
+```
+{
+  "incident": {
+    "ActualCategory_Valid": "14348C1FFA044D8AB1E93005B4A0A287",
+    "ActualCategory": "Missing Item",
+    "Category_Valid": "14348C1FFA044D8AB1E93005B4A0A287",
+    "Category": "Missing Item",
+    "CauseCode_Valid": "",
+    "CauseCode": "",
+    "ClosedBy": null,
+    "CreatedBy": "SDavis",
+    "RecId": "FAC9B02CB80041768D99EACE6A5DAD43",
+    "Subject": "Remote control for projector in Boardroom is are missing ",
+    "Symptom": "This is an issue as it is roof mounted and cannot be switched on/off without the remote",
+    "Urgency_Valid": "44021B6CC6E44E598868C4B3306053AE",
+    "Urgency": "Medium",
+    "LoginId": "KDavidson"
+  }
+}
+```
+
+#### Search Incidents
+
+This action is used to search Incidents using a Keyword.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|keyword|string|None|True|Keyword to search for|None|Phone|
+
+Example input:
+
+```
+{
+  "keyword": "Phone"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|data|[]incident|True|List of results|[]|
+
+Example output:
+
+```
+{
+  "data": [
+    {
+      "ActualCategory_Valid": "14348C1FFA044D8AB1E93005B4A0A287",
+      "ActualCategory": "Missing Item",
+      "Category_Valid": "14348C1FFA044D8AB1E93005B4A0A287",
+      "Category": "Missing Item",
+      "CauseCode_Valid": "E2489F3F7DA34B898CCD9569CA5541F2",
+      "CauseCode": "Other",
+      "ClosedBy": "JClerk",
+      "CreatedBy": "JClerk",
+      "Email": "user@example.com",
+      "RecId": "003B58C0B4554E4BAA30DFD88876582A",
+      "Subject": "Remote control for projector in Boardroom is are missing ",
+      "Symptom": "This is an issue as it is roof mounted and cannot be switched on/off without the remote",
+      "Urgency_Valid": "44021B6CC6E44E598868C4B3306053AE",
+      "Urgency": "Medium",
+      "LoginId": "KDavidson"
+    },
+    {
+      "ActualCategory_Valid": "14348C1FFA044D8AB1E93005B4A0A287",
+      "ActualCategory": "Missing Item",
+      "Category_Valid": "14348C1FFA044D8AB1E93005B4A0A287",
+      "Category": "Missing Item",
+      "CauseCode_Valid": "",
+      "CauseCode": "",
+      "ClosedBy": null,
+      "CreatedBy": "SDavis",
+      "RecId": "FAC9B02CB80041768D99EACE6A5DAD43",
+      "Subject": "Remote control for projector in Boardroom is are missing ",
+      "Symptom": "This is an issue as it is roof mounted and cannot be switched on/off without the remote",
+      "Urgency_Valid": "44021B6CC6E44E598868C4B3306053AE",
+      "Urgency": "Medium",
+      "LoginId": "KDavidson"
+    }
+  ]
 }
 ```
 
 ### Triggers
 
-_This plugin does not contain any triggers._
+#### New Incident
+
+This trigger is used to check for new incidents.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|frequency|integer|10|True|How often the trigger should check for new detections in seconds|None|60|
+
+Example input:
+
+```
+{
+  "frequency": 60
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|incident|incident|True|New Incident|{}|
+
+Example output:
+
+```
+{
+  "incident": {
+    "@odata.context": "https://example.com/HEAT/api/odata/$metadata#incidents/$entity",
+    "ClosedDuration": 0,
+    "CreatedBy": "user",
+    "CreatedDateTime": "2020-08-12T16:33:37-07:00",
+    "Email": "user@example.com",
+    "FirstCallResolution": false,
+    "IncidentNumber": 12345,
+    "IsNotification": true,
+    "IsVIP": false,
+    "IsWorkAround": false,
+    "LastModBy": "user",
+    "LastModDateTime": "2020-08-12T16:33:37-07:00",
+    "Phone": "+1 (415) 450 3428",
+    "Priority_Valid": "DA5FF948701D4022927500E08FCF574E",
+    "Priority": "5",
+    "ProfileFullName": "User",
+    "ProfileLink_Category": "Employee",
+    "ProfileLink_RecID": "2F851094BFE5437C97D19871D1C539C7",
+    "ProfileLink": "2F851094BFE5437C97D19871D1C539C7",
+    "RecId": "085867F47547496783005D95CB82D557",
+    "Service_Valid": "A912E98E55844765934A787FF3586F34",
+    "Service": "Service Desk",
+    "Source_Valid": "EF789CE160E742F99623DBB4D29C045C",
+    "Source": "Phone",
+    "Status_Valid": "AB3D0090B6D8471FB0D2720D301A22AF",
+    "Status": "Logged",
+    "Subject": "InsightConnect Test",
+    "Symptom": "Test incident created by InsightConnect",
+    "Urgency_Valid": "320F22CAA2984C87B06AEFD3DE6FFBBF",
+    "Urgency": "Low",
+    "LoginId": "user",
+    "Owner_Valid": "1087342EA6954D7D96140D64B452E597",
+    "Owner": "user",
+    "OwnerTeam_Valid": "2E4BABD54FB9420D94F836F0D9B80C47",
+    "OwnerTeam": "Service Management Team",
+    "OwnerType": "Employee",
+    "IsNewRecord": false,
+    "HoursOfOperation_Valid": "FF57246B2E0047D193C1AEC1011D746B",
+    "HoursOfOperation": "Weekly HOP",
+    "OwnerEmail": "user@example.com",
+    "OwnerTeamEmail": "user@example.com",
+    "OwnershipAssignmentEmail": "user@example.com",
+    "CustomerLocation_Valid": "6E4C36E8140B4BFD8AC4242BD7ED058B",
+    "CustomerLocation": "San Francisco",
+    "IsReportedByAlternateContact": false,
+    "OrganizationUnitID": "Consulting Services",
+    "ReportingOrgUnitID_Valid": "8B38681087C847A287D738621DA6BEE4",
+    "ReportingOrgUnitID": "Consulting Services",
+    "TypeOfIncident": "Request",
+    "TeamManagerEmail": "user@example.com",
+    "CustomerDepartment": "Corporate Services and Training",
+    "ActualService_Valid": "A912E98E55844765934A787FF3586F34",
+    "ActualService": "Service Desk",
+    "CostPerMinute_Currency": "USD",
+    "CostPerMinute": "0.4000",
+    "IsInFinalState": false,
+    "IsReclassifiedForResolution": false,
+    "ResolvedByIncidentNumber": 0,
+    "TotalTimeSpent": 0,
+    "OrgUnitLink_Category": "OrganizationalUnit",
+    "OrgUnitLink_RecID": "8B38681087C847A287D738621DA6BEE4",
+    "OrgUnitLink": "8B38681087C847A287D738621DA6BEE4",
+    "OwningOrgUnitId_Valid": "FA9C9DD75EF9455CBC892F65691A1E7F",
+    "OwningOrgUnitId": "Corporate IT Operations",
+    "ProgressBarPosition": "1",
+    "CreatedByType": "Web Client",
+    "ReadOnly": false,
+    "Cost_Currency": "USD",
+    "Cost": "0.0000",
+    "IsApprovalNeeded": false,
+    "Approver_Valid": "D8E9ECB03001437492B3BE453EDCBEE6",
+    "Approver": "user@example.com",
+    "IsDSMTaskExisted": false,
+    "SocialTextHeader": "Incident 11169: InsightConnect Test",
+    "IncidentNetworkUserName": "user",
+    "SendSurveyNotification": false,
+    "EntityLink_Category": "OrganizationalUnit",
+    "EntityLink_RecID": "8B38681087C847A287D738621DA6BEE4",
+    "EntityLink": "8B38681087C847A287D738621DA6BEE4",
+    "IsMasterIncident": false,
+    "IsResolvedByMaster": false,
+    "ServiceOwnerEmail": "user@example.com",
+    "IsRelatedIncidentUpdate": false,
+    "IsRelatedIncidentResolutionUpdate": false,
+    "IsUnRead": false
+  }
+}
+```
 
 ### Custom Output Types
 
@@ -643,11 +878,12 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.0 - Added Get Incident action | Added Search Incident action | Added New Incident trigger | Updated the output type for Add Note action
 * 1.1.0 - Added Create Service Request action | Added missing example input in Create Incident action
 * 1.0.0 - Initial plugin
 
 # Links
 
-## References
-
 * [Ivanti Service Manager](https://www.ivanti.co.uk/products/service-manager)
+
+## References
