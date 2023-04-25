@@ -20,11 +20,11 @@ class QuarantineMultiple(insightconnect_plugin_runtime.Action):
 
         if quarantine_state:
             successful_quarantine, unsuccessful_quarantine = self.connection.api.quarantine_list(
-                agent_hostname_list=agent_array, advertisement_period=interval
+                agent_id_list=agent_array, advertisement_period=interval
             )
         else:
             successful_quarantine, unsuccessful_quarantine = self.connection.api.unquarantine_list(
-                agent_hostname_list=agent_array
+                agent_id_list=agent_array
             )
 
         return {
