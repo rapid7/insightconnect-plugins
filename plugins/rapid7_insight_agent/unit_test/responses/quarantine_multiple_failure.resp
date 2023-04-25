@@ -3,14 +3,14 @@
         "quarantineAssets":{
             "results":[
                 {
-                    "assetId":"None"
+                    "failed": true
                 }
             ]
         },
         "unquarantineAssets":{
             "results":[
                 {
-                    "assetId":"None"
+                    "failed": true
                 }
             ]
         },

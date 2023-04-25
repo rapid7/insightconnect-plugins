@@ -177,10 +177,10 @@ actions:
     input:
       agent_array:
         title: Agent Array
-        description: Hostnames of the devices to quarantine
+        description: Asset IDs to quarantine or unquarantine
         type: "[]string"
         required: true
-        example: ["WindowsX64", "WindowsX32"]
+        example: ["abcdef123", "abcdef123"]
       interval:
         title: Interval
         description: Length of time in seconds to try to take action on a device. This is also called Advertisement Period
@@ -200,11 +200,13 @@ actions:
         title: Successful (Un)Quarantine
         description: List of successfully quarantined hosts
         type: "[]string"
+        example: ["abcdef123"]
         required: false
       failure:
         title: Unsuccessful (Un)Quarantine
         description: List of unsuccessfully quarantined hosts
         type: "[]string"
+        example: ["abcdef123"]
         required: false
   get_agent_details:
     title: Get Agent Details
@@ -221,6 +223,7 @@ actions:
         title: Agent
         description: Agent information
         type: agent
+        example: {}
         required: true
   quarantine:
     title: Quarantine
@@ -253,6 +256,7 @@ actions:
         title: Success
         description: Was operation successful
         type: boolean
+        example: true
         required: true
   check_agent_status:
     title: Check Agent Status
@@ -269,19 +273,23 @@ actions:
         title: Is Currently Quarantined
         description: Is the device currently quarantined
         type: boolean
+        example: true
         required: true
       is_quarantine_requested:
         title: Is Quarantine Requested
         description: Is a quarantine action pending on this device
         type: boolean
+        example: true
         required: true
       is_unquarantine_requested:
         title: Is Unquarantine Requested
         description: Is there a pending request to release quarantine on this device
         type: boolean
+        example: true
         required: true
       is_asset_online:
         title: Is Asset Online
         description: Indicates that the agent is connected to the Insight platform. This means the device is powered on and is connected to Rapid7
         type: boolean
+        example: true
         required: true
