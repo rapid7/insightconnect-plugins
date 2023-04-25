@@ -1,7 +1,7 @@
 {
-	"spec": "97013e592d7260475f7961aadc4b5b1c",
-	"manifest": "79550933122f5b7d149ed7a8f3597a1f",
-	"setup": "f13f93cc360811ef5b5a5139099d5dc1",
+	"spec": "aff3e345fa90e738a62336d91ef77539",
+	"manifest": "17927428c7663bb894c91ff89e03009b",
+	"setup": "f053bec9b37082540548d26c109e3cf7",
 	"schemas": [
 		{
 			"identifier": "archive_sensor/schema.py",
@@ -13,7 +13,7 @@
 		},
 		{
 			"identifier": "get_sensor/schema.py",
-			"hash": "1620748d7d3a45dd270fcfd40c6296ff"
+			"hash": "35e5894169bd11f1e48af3be259587a2"
 		},
 		{
 			"identifier": "isolate_machine/schema.py",
