@@ -6,7 +6,7 @@ title: Cybereason
 description: The Cybereason platform provides military-grade cyber security with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin
 version: 3.0.0
 supported_versions: ["Cybereason API 2023-04-12"]
-vendor: not_rapid7
+vendor: rapid7
 support: rapid7
 status: []
 tags: [investigate, malware, threat intel]
