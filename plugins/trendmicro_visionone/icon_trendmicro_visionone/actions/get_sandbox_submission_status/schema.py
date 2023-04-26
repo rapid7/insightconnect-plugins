@@ -33,7 +33,7 @@ class GetSandboxSubmissionStatusInput(insightconnect_plugin_runtime.Input):
     "task_id": {
       "type": "string",
       "title": "Task ID",
-      "description": "task_id from the trendmicro-visionone-submit-file-to-sandbox command output",
+      "description": "Task_id from the trendmicro-visionone-submit-file-to-sandbox command output",
       "order": 1
     }
   },
@@ -95,7 +95,7 @@ class GetSandboxSubmissionStatusOutput(insightconnect_plugin_runtime.Output):
     },
     "is_cached": {
       "type": "boolean",
-      "title": "is Cached",
+      "title": "Is Cached",
       "description": "Parameter that indicates if an object has been analyzed before by the Sandbox Analysis App. Submissions marked as cached do not count toward the daily reserve",
       "order": 9
     },

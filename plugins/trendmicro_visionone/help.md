@@ -139,6 +139,12 @@ This action removes an email address, file SHA-1, domain, IP address, or URL tha
 |----|----|-------|--------|-----------|----|-------|
 |block_object|[]block_object|None|True|Object object made up of type, value and description|None|None|
 
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|multi_response|[]multi_response|True|Remove From Block List Response Array|
+
 Example input:
 
 ```
@@ -193,6 +199,12 @@ This action adds an email address, file SHA-1, domain, IP address, or URL to the
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |block_object|[]block_object|None|True|Object object made up of type, value and description|None|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|multi_response|[]multi_response|True|Add To Block List Response Array|
 
 Example input:
 
@@ -269,7 +281,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|multi_response|[]multi_response|True|Sign Out Account Response Array|
+|multi_response|[]multi_response|True|Sign out Account Response Array|
 
 Example output:
 
@@ -315,6 +327,12 @@ This action removes domains, file SHA-1 values, IP addresses, or URLs from the S
 |----|----|-------|--------|-----------|----|-------|
 |block_object|[]block_object|None|True|Object object made up of type, value and description|None|None|
 
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|multi_response|[]multi_response|True|Add To Exception List Response Array|
+
 Example input:
 
 ```
@@ -348,6 +366,12 @@ This action removes domains, file SHA-1 values, IP addresses, or URLs from the E
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |block_object|[]block_object|None|True|Object object made up of type, value and description|None|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|multi_response|[]multi_response|True|Remove From Exception List Response Array|
 
 Example input:
 
@@ -405,6 +429,12 @@ This action allows the user to sign in to new application and browser sessions. 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |account_identifiers|[]account_identifiers|None|True|User Account Identifiers containing account name and description|None|List of account identifier objects in proper JSON syntax|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|endpoint_data|[]endpoint_data|True|Array of Endpoint Data Objects, consisting of agent guid, login account, endpoint name, MAC address, IP, os name, or version, os description, product code and installed product code|
 
 Example input:
 
@@ -497,6 +527,12 @@ This action adds domains, file SHA-1/SHA-256 values, IP addresses, senderMailAdd
 |----|----|-------|--------|-----------|----|-------|
 |suspicious_block_object|[]suspicious_block_object|None|True|Suspicious Object object made up of type, value and scan_action, risk_level and days_to_expiration|None|None|
 
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|multi_response|[]multi_response|True|Add To Exception List Response Array|
+
 Example input:
 
 ```
@@ -534,6 +570,12 @@ This action adds domains, file SHA-1 values, IP addresses, or URLs to the Except
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |block_object|[]block_object|None|True|Object object made up of type, value and description|None|None|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|multi_response|[]multi_response|True|Add To Exception List Response Array|
 
 Example input:
 
@@ -602,7 +644,7 @@ This action retrieves an object containing the results of a response task in JSO
 |----|----|-------|--------|-----------|----|-------|
 |poll|boolean|None|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
 |poll_time_sec|float|None|False|Maximum time to wait for the result to be available|None|True|
-|task_id|string|None|True|taskId output from the collect command used to collect the file|None|3456346|
+|task_id|string|None|True|TaskId output from the collect command used to collect the file|None|3456346|
 
 Example input:
 
@@ -626,7 +668,7 @@ Example input:
 |endpoint_name|string|False|Endpoint name of the target endpoint|
 |expired_date_time|string|False|The expiration date and time of the file|
 |file_path|string|False|File path for the file that was collected|
-|file_sha1|string|False|the fileSHA1 of the collected file|
+|file_sha1|string|False|The fileSHA1 of the collected file|
 |file_sha256|string|False|The fileSHA256 of the collected file|
 |file_size|integer|False|The file size of the file collected|
 |filename|string|False|File name of a response task target (<= 255)|
@@ -737,7 +779,7 @@ This action retrieves the status of a sandbox analysis submission.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|task_id|string|None|True|task_id from the trendmicro-visionone-submit-file-to-sandbox command output|None|02384|
+|task_id|string|None|True|Task_id from the trendmicro-visionone-submit-file-to-sandbox command output|None|02384|
 
 Example input:
 
@@ -777,7 +819,7 @@ This action retrieves the sandbox analysis results.
 |----|----|-------|--------|-----------|----|-------|
 |poll|boolean|None|True|If script should wait until the task is finished before returning the result (enabled by default)|None|True|
 |poll_time_sec|float|None|False|Maximum time to wait for the result to be available|None|True|
-|report_id|string|None|True|report_id of the sandbox submission retrieved from the trendmicro-visionone-get-file-analysis-status command|None|02384|
+|report_id|string|None|True|Report_id of the sandbox submission retrieved from the trendmicro-visionone-get-file-analysis-status command|None|02384|
 
 Example input:
 
@@ -949,6 +991,12 @@ This action collects a file from one or more endpoints and then sends the files 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |collect_files|[]collect_files|None|True|Collect file input JSON containing endpoint, file path and description|None|JSON list object containing necessary fields|
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|multi_response|[]multi_response|True|Add To Block List Response Array|
 
 Example input:
 

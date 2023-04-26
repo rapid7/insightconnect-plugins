@@ -73,7 +73,7 @@ class SignOutAccountOutput(insightconnect_plugin_runtime.Output):
     "multi_response": {
       "type": "array",
       "title": "Multi Response",
-      "description": "Sign Out Account Response Array",
+      "description": "Sign out Account Response Array",
       "items": {
         "$ref": "#/definitions/multi_response"
       },

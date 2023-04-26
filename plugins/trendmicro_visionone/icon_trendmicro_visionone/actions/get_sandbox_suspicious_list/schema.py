@@ -37,7 +37,7 @@ class GetSandboxSuspiciousListInput(insightconnect_plugin_runtime.Input):
     },
     "poll_time_sec": {
       "type": "number",
-      "title": "Poll Time In Seconds",
+      "title": "Poll Time in Seconds",
       "description": "Maximum time to wait for the result to be available",
       "order": 3
     }
@@ -97,8 +97,8 @@ class GetSandboxSuspiciousListOutput(insightconnect_plugin_runtime.Output):
         },
         "root_sha1": {
           "type": "string",
-          "title": "Root Sha1",
-          "description": "Sample sha1 generate this suspicious object",
+          "title": "Root SHA1",
+          "description": "Sample SHA1 generate this suspicious object",
           "order": 4
         },
         "type": {

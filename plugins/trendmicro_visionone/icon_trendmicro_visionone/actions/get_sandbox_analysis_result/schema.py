@@ -39,14 +39,14 @@ class GetSandboxAnalysisResultInput(insightconnect_plugin_runtime.Input):
     },
     "poll_time_sec": {
       "type": "number",
-      "title": "Poll Time In Seconds",
+      "title": "Poll Time in Seconds",
       "description": "Maximum time to wait for the result to be available",
       "order": 3
     },
     "report_id": {
       "type": "string",
       "title": "Report ID",
-      "description": "report_id of the sandbox submission retrieved from the trendmicro-visionone-get-file-analysis-status command",
+      "description": "Report_id of the sandbox submission retrieved from the trendmicro-visionone-get-file-analysis-status command",
       "order": 1
     }
   },

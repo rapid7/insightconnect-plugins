@@ -52,14 +52,14 @@ class GetTaskResultInput(insightconnect_plugin_runtime.Input):
     },
     "poll_time_sec": {
       "type": "number",
-      "title": "Poll Time In Seconds",
+      "title": "Poll Time in Seconds",
       "description": "Maximum time to wait for the result to be available",
       "order": 3
     },
     "task_id": {
       "type": "string",
       "title": "Task ID",
-      "description": "taskId output from the collect command used to collect the file",
+      "description": "TaskId output from the collect command used to collect the file",
       "order": 1
     }
   },
@@ -151,7 +151,7 @@ class GetTaskResultOutput(insightconnect_plugin_runtime.Output):
     "file_sha1": {
       "type": "string",
       "title": "File SHA1",
-      "description": "the fileSHA1 of the collected file",
+      "description": "The fileSHA1 of the collected file",
       "order": 11
     },
     "file_sha256": {

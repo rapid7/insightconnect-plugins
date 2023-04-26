@@ -37,7 +37,7 @@ class DownloadSandboxInvestigationPackageInput(insightconnect_plugin_runtime.Inp
     },
     "poll_time_sec": {
       "type": "number",
-      "title": "Poll Time In Seconds",
+      "title": "Poll Time in Seconds",
       "description": "Maximum time to wait for the result to be available",
       "order": 3
     }

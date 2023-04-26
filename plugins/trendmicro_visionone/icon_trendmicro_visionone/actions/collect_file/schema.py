@@ -48,7 +48,7 @@ class CollectFileInput(insightconnect_plugin_runtime.Input):
         "endpoint": {
           "type": "string",
           "title": "Endpoint",
-          "description": "hostname or macaddr of the endpoint to collect file from",
+          "description": "Hostname or macaddr of the endpoint to collect file from",
           "order": 1
         },
         "file_path": {

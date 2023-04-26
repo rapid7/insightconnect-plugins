@@ -196,7 +196,7 @@ class PollAlertListOutput(insightconnect_plugin_runtime.Output):
         "report_link": {
           "type": "string",
           "title": "Report Link",
-          "description": "A refrerence url which links to the report details analysis. For TrendMico research report, the link would link to trend blog",
+          "description": "A refrerence URL which links to the report details analysis. For TrendMico research report, the link would link to trend blog",
           "order": 21
         },
         "schema_version": {

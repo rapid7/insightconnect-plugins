@@ -61,13 +61,13 @@ class GetExceptionListOutput(insightconnect_plugin_runtime.Output):
         },
         "file_sha1": {
           "type": "string",
-          "title": "File Sha1",
-          "description": "support only full match (40 characters)",
+          "title": "File SHA1",
+          "description": "Support only full match (40 characters)",
           "order": 5
         },
         "file_sha256": {
           "type": "string",
-          "title": "File Sha256",
+          "title": "File SHA256",
           "description": "support only full match (64 characters)",
           "order": 6
         },

@@ -48,7 +48,7 @@ class RemoveFromSuspiciousListInput(insightconnect_plugin_runtime.Input):
         "object_type": {
           "type": "string",
           "title": "Object Type",
-          "description": "Object type- domain, ip, fileSha1, fileSha256, senderMailAddress or url",
+          "description": "Object type- domain, IP, fileSha1, fileSha256, senderMailAddress or URL",
           "enum": [
             "domain",
             "ip",
@@ -62,7 +62,7 @@ class RemoveFromSuspiciousListInput(insightconnect_plugin_runtime.Input):
         "object_value": {
           "type": "string",
           "title": "Value",
-          "description": "The object value. Full and partial matches supported. Domain partial match, (with a wildcard as the subdomain, example, .example.com) IP partial match, (IP range example, 192.168.35.1-192.168.35.254, cidr example, 192.168.35.1/24) URL Partial match, (Supports wildcards http://, https:// at beginning, or at the end. Multiple wild cards also supported, such as , https://.example.com/path1/) SHA1 Only full match",
+          "description": "The object value. Full and partial matches supported. Domain partial match, (with a wildcard as the subdomain, example, .example.com) IP partial match, (IP range example, 192.168.35.1-192.168.35.254, CIDR example, 192.168.35.1/24) URL Partial match, (Supports wildcards http://, https:// at beginning, or at the end. Multiple wild cards also supported, such as , https://.example.com/path1/) SHA1 Only full match",
           "order": 2
         }
       },

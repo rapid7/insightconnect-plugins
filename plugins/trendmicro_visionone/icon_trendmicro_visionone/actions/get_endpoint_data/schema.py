@@ -25,7 +25,7 @@ class GetEndpointDataInput(insightconnect_plugin_runtime.Input):
     "endpoint": {
       "type": "string",
       "title": "Endpoint",
-      "description": "hostname, macAddress, agentGuid or ip of the endpoint to query",
+      "description": "Hostname, macAddress, agentGuid or IP of the endpoint to query",
       "order": 1
     },
     "query_op": {
@@ -60,7 +60,7 @@ class GetEndpointDataOutput(insightconnect_plugin_runtime.Output):
     "endpoint_data": {
       "type": "array",
       "title": "Endpoint Data",
-      "description": "Array of Endpoint Data Objects, consisting of agent guid, login account, endpoint name, mac address, ip, os name, or version, os description, product code and installed product code",
+      "description": "Array of Endpoint Data Objects, consisting of agent guid, login account, endpoint name, MAC address, IP, os name, or version, os description, product code and installed product code",
       "items": {
         "$ref": "#/definitions/endpoint_data"
       },

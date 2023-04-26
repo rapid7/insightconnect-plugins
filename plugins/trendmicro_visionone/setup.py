@@ -2,16 +2,13 @@
 from setuptools import setup, find_packages
 
 
-setup(
-    name="trendmicro_visionone-trendmicro-plugin",
-    version="1.0.0",
-    description="Trend Micro Vision One is a purpose-built threat defense platform that provides added value and new benefits beyond XDR solutions, allowing you to see more and respond faster. Providing deep and broad extended detection and response (XDR) capabilities that collect and automatically correlate data across multiple security layers, email, endpoints, servers, cloud workloads, and networks. Trend Micro Vision One prevents the majority of attacks with automated protection",
-    author="trendmicro",
-    author_email="",
-    url="",
-    packages=find_packages(),
-    install_requires=[
-        "insightconnect-plugin-runtime"
-    ],  # Add third-party dependencies to requirements.txt, not here!
-    scripts=["bin/icon_trendmicro_visionone"],
-)
+setup(name="trendmicro_visionone-trendmicro-plugin",
+      version="1.0.0",
+      description="Trend Micro Vision One is a purpose-built threat defense platform that provides added value and new benefits beyond XDR solutions, allowing you to see more and respond faster. Providing deep and broad extended detection and response (XDR) capabilities that collect and automatically correlate data across multiple security layers, email, endpoints, servers, cloud workloads, and networks. Trend Micro Vision One prevents the majority of attacks with automated protection",
+      author="trendmicro",
+      author_email="",
+      url="",
+      packages=find_packages(),
+      install_requires=['insightconnect-plugin-runtime'],  # Add third-party dependencies to requirements.txt, not here!
+      scripts=['bin/icon_trendmicro_visionone']
+      )

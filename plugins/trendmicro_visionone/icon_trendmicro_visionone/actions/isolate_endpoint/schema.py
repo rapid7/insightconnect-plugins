@@ -48,7 +48,7 @@ class IsolateEndpointInput(insightconnect_plugin_runtime.Input):
         "endpoint": {
           "type": "string",
           "title": "Endpoint",
-          "description": "hostname or agentGuid of the endpoint",
+          "description": "Hostname or agentGuid of the endpoint",
           "order": 1
         }
       },

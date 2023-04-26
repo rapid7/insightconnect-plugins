@@ -48,7 +48,7 @@ class TerminateProcessInput(insightconnect_plugin_runtime.Input):
         "endpoint": {
           "type": "string",
           "title": "Endpoint",
-          "description": "hostname or agentGuid of the endpoint to terminate process on",
+          "description": "Hostname or agentGuid of the endpoint to terminate process on",
           "order": 1
         },
         "file_sha1": {
