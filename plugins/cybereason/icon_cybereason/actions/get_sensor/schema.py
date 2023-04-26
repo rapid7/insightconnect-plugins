@@ -15,7 +15,6 @@ class Input:
 
 class Output:
     SENSOR = "sensor"
-    SUCCESS = "success"
     
 
 class GetSensorInput(insightconnect_plugin_runtime.Input):
@@ -65,12 +64,6 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
       "$ref": "#/definitions/sensor",
       "title": "Sensor",
       "description": "Sensor",
-      "order": 2
-    },
-    "success": {
-      "type": "boolean",
-      "title": "Success",
-      "description": "Was the request successful",
       "order": 1
     }
   },
