@@ -1,7 +1,7 @@
 {
-	"spec": "29d4dbe50b49f916d6935b99fd25e237",
-	"manifest": "17927428c7663bb894c91ff89e03009b",
-	"setup": "f053bec9b37082540548d26c109e3cf7",
+	"spec": "80ead8beffebf6bda3eedac3fdd7e097",
+	"manifest": "4f166a7d10797adec9aef8d37ad26363",
+	"setup": "2774c6706ed10abcbcaf0984f55ccde0",
 	"schemas": [
 		{
 			"identifier": "archive_sensor/schema.py",

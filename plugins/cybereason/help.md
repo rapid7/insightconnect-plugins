@@ -1,6 +1,6 @@
 # Description
 
-The Cybereason platform provides military-grade cyber security with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin.
+The Cybereason platform provides military-grade cybersecurity with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin.
 
 # Key Features
 
@@ -177,7 +177,7 @@ Example output:
           "Metadata"
         ],
         "collectionStatus": "ADVANCED",
-        "collectiveUuid": "70b8b433-e8ba-4375-8eb5-1c0d95c62120",
+        "collectiveUuid": "70b8b433-1ab2-1234-1ab2-1c0d95c62120",
         "compliance": true,
         "cpuUsage": 0,
         "deliveryTime": 1681892958527,
@@ -189,10 +189,10 @@ Example output:
         "exitReason": "STOP_REQUEST_FROM_PYLUM",
         "externalIpAddress": "128.177.65.3",
         "firstSeenTime": 1681892763453,
-        "fqdn": "tomascybereasonsensor",
+        "fqdn": "cybereasonsensor",
         "fullScanStatus": "IDLE",
         "fwStatus": "DISABLED",
-        "groupId": "9f0fabc3-9a6e-4247-b235-dbab187e3409",
+        "groupId": "9f0fabc3-a12b-1234-a12b-dbab187e3409",
         "groupName": "Perimeter 2",
         "groupStickiness": false,
         "groupStickinessLabel": "Dynamic",
@@ -215,7 +215,7 @@ Example output:
             "startTime": 1681906178904
           }
         ],
-        "machineName": "tomascybereasonsensor",
+        "machineName": "cybereasonsensor",
         "memoryUsage": 0,
         "offlineTimeMS": 0,
         "onlineTimeMS": 0,
@@ -230,15 +230,15 @@ Example output:
         "preventionStatus": "DISABLED",
         "privateServerIp": "10.146.1.168",
         "purgedSensors": false,
-        "pylumId": "PYLUMCLIENT_INTEGRATION_TOMASCYBEREASON_005056945ADC",
+        "pylumId": "PYLUMCLIENT_INTEGRATION_CYBEREASON_0000000000ABC",
         "quickScanStatus": "IDLE",
         "ransomwareStatus": "DISABLED",
         "remoteShellStatus": "AC_DISABLED",
-        "sensorArchivedByUser": "wayne_johnstone@rapid7.com",
-        "sensorId": "5e77883de4b0575ddcf824ef:PYLUMCLIENT_INTEGRATION_TOMASCYBEREASON_005056945ADC",
+        "sensorArchivedByUser": "wayne_bruce@rapid7.com",
+        "sensorId": "5e77777ab4b1234ddcf824ef:PYLUMCLIENT_INTEGRATION_CYBEREASON_0000000000ABC",
         "sensorLastUpdate": 0,
         "serialNumber": "VMware-42 14 9f a1 c5 c6 b4 ad-34 41 0e 80 6a a4 21 2c",
-        "serverId": "5e77883de4b0575ddcf824ef",
+        "serverId": "1a22333de4b0575ddcf123ab",
         "serverIp": "10.146.1.168",
         "serverName": "integration-1-t",
         "serviceStatus": "Down",
@@ -581,7 +581,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
-* 2.3.0 - Fix Output for `Get Sensor` 
+* 3.0.0 - Fix Output for `Get Sensor`
 * 2.2.0 - Added new actions: `Get Sensor` & `Archive Sensor`
 * 2.1.0 - New action Delete Registry Key | Add support product versions
 * 2.0.2 - Remove ISOLATE_MACHINE option from Remediate Items action documentation

@@ -4,7 +4,7 @@ products: [insightconnect]
 name: cybereason
 title: Cybereason
 description: The Cybereason platform provides military-grade cyber security with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin
-version: 2.3.0
+version: 3.0.0
 supported_versions: ["Cybereason API 2023-04-12"]
 vendor: rapid7
 support: rapid7
