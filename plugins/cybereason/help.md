@@ -24,18 +24,15 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|False|Username and password|None|{"username": "user@example.com", "password": "mypassword"}|
-|hostname|string|None|True|Enter the hostname|None|example.com|
+|credentials|credential_username_password|None|False|Username and password|None|{"username": "https://example.com", "password": "mypassword"}|
+|hostname|string|None|True|Enter the hostname|None|https://example.com|
 |port|integer|8443|True|Enter the port|None|8443|
 
 Example input:
 
 ```
 {
-  "credentials": {
-    "username": "user@example.com",
-    "password": "mypassword"
-  },
+  "credentials": "{\"username\": \"user@example.com\", \"password\": \"mypassword\"}",
   "hostname": "example.com",
   "port": 8443
 }
@@ -69,9 +66,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|archive_sensor_response|archiveSensorResponse|True|Archive sensor response|{}|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|archive_sensor_response|archiveSensorResponse|True|Archive sensor response|
 
 Example output:
 
@@ -136,7 +133,7 @@ This action is used to get sensor.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|indicator|string|None|True|The unique identifier of the machine you wish to perform the operation on, this can be an internal IPv4 address, hostname or sensor GUID|None|104.31.2.164|
+|indicator|string|None|True|The unique identifier of the machine you wish to perform the operation on, this can be an internal IPv4 address, hostname or sensor GUID|None|https://example.com|
 |limit|integer|None|True|The number of sensors to which to send the request|None|1|
 |offset|integer|None|True|Set to 0 to receive the first limit set of sensors|None|0|
 
@@ -152,9 +149,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|sensor|sensor|True|Sensor|{}|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|sensor|sensor|True|Sensor|
 
 Example output:
 
@@ -280,7 +277,7 @@ This action is used to delete a registry key involved in a Malop.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|initiator_user_name|string|None|True|Initiator user name|None|user@example.com|
+|initiator_user_name|string|None|True|Initiator user name|None|https://example.com|
 |malop_id|string|None|True|Malop ID to associate with the remediation actions|None|22.2787422324806222966|
 |sensor|string|None|True|The unique identifier of the machine you wish to perform the quarantine/unquarantine operation on, this can be an internal IPv4 address, hostname or sensor GUID|None|-1632138521.1198775089551518743|
 
@@ -290,15 +287,15 @@ Example input:
 {
   "initiator_user_name": "user@example.com",
   "malop_id": "22.2787422324806222966",
-  "sensor": "hostname"
+  "sensor": "-1632138521.1198775089551518743"
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|response|remediate_items|True|Malop response|{}|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|response|remediate_items|True|Malop response|
 
 Example output:
 
@@ -325,21 +322,14 @@ For more information about how to generate an `actions_by_machine` object, refer
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |actions_by_machine|object|None|True|Actions by machine|None|{"126811122.2298225282553311122": [{"targetId": "531122333.-3391199199911692223","actionType": "KILL_PROCESS"}]}|
-|initiator_user_name|string|None|True|Initiator user name|None|user@example.com|
+|initiator_user_name|string|None|True|Initiator user name|None|https://example.com|
 |malop_id|string|None|False|Malop ID to associate with the remediation actions|None|22.2787422324806222966|
 
 Example input:
 
 ```
 {
-  "actions_by_machine": {
-    "126811122.2298225282553311122": [
-      {
-        "targetId": "531122333.-3391199199911692223",
-        "actionType": "KILL_PROCESS"
-      }
-    ]
-  },
+  "actions_by_machine": "{\"126811122.2298225282553311122\": [{\"targetId\": \"531122333.-3391199199911692223\",\"actionType\": \"KILL_PROCESS\"}]}",
   "initiator_user_name": "user@example.com",
   "malop_id": "22.2787422324806222966"
 }
@@ -347,9 +337,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|response|remediate_items|True|Malop response|{}|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|response|remediate_items|True|Malop response|
 
 Example output:
 
@@ -387,9 +377,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|remediate_items_response|remediate_items|True|Remediate items response|{}|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|remediate_items_response|remediate_items|True|Remediate items response|
 
 Example output:
 
@@ -423,7 +413,7 @@ This action is used to isolate a machine associated with the root cause of a Mal
 |----|----|-------|--------|-----------|----|-------|
 |malop_id|string|None|False|Malop ID to associate with the quarantine action|None|22.2787422324806222966|
 |quarantine_state|boolean|True|True|True to isolate the sensor, false to un-isolate it|None|True|
-|sensor|string|None|True|Sensor ID, hostname or IP address of the sensor to perform the action on|None|198.51.100.100|
+|sensor|string|None|True|Sensor ID, hostname or IP address of the sensor to perform the action on|None|https://example.com|
 
 Example input:
 
@@ -437,10 +427,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|machine_id|string|True|Machine Pylum ID|PYLUMCLIENT_INTEGRATION_DESKTOP-EXAMPLE_1234567AB12C|
-|success|boolean|True|Success|True|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|machine_id|string|True|Machine Pylum ID|
+|success|boolean|True|Success|
 
 Example output:
 
@@ -461,23 +451,23 @@ Note that if the machine you are trying to search on is offline, the file search
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|file_filter|string|None|True|A fileFilters object for filtering by machine name, folder, file creation or modification time or file size with operator Equals, NotEquals, ContainsIgnoreCase, NotContainsIgnoreCase and others|None|fileName Equals: ["sample.py"]|
+|file_filter|string|None|True|A fileFilters object for filtering by machine name, folder, file creation or modification time or file size with operator Equals, NotEquals, ContainsIgnoreCase, NotContainsIgnoreCase and others|None|fileName Equals: ["https://example.com"]|
 |server_filter|string|None|False|A Sensor filters string for filtering sensors by different criteria such as operating system|None|machineName: ["rapid7-windows"]|
 
 Example input:
 
 ```
 {
-  "file_filter": "fileName Equals: ['sample.py']",
-  "server_filter": "machineName: ['rapid7-windows']"
+  "file_filter": "fileName Equals: [\"sample.py\"]",
+  "server_filter": "machineName: [\"rapid7-windows\"]"
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|response|response|True|Search file response|{}|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|response|response|True|Search file response|
 
 Example output:
 

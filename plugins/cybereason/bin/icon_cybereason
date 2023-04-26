@@ -5,7 +5,7 @@ import json
 from sys import argv
 
 Name = "Cybereason"
-Vendor = "rapid7"
+Vendor = "not_rapid7"
 Version = "3.0.0"
 Description = "The Cybereason platform provides military-grade cyber security with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin"
 

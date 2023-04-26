@@ -143,6 +143,27 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
         }
       }
     },
+    "lastUpgradeSteps": {
+      "type": "object",
+      "title": "lastUpgradeSteps",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "name of step",
+          "order": 1
+        },
+        "startTime": {
+          "type": "integer",
+          "title": "Start Time",
+          "description": "time in epoch that the step started",
+          "order": 2
+        }
+      },
+      "required": [
+        "startTime"
+      ]
+    },
     "sensor": {
       "type": "object",
       "title": "sensor",
@@ -250,6 +271,27 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
               "order": 11
             }
           }
+        },
+        "lastUpgradeSteps": {
+          "type": "object",
+          "title": "lastUpgradeSteps",
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "name of step",
+              "order": 1
+            },
+            "startTime": {
+              "type": "integer",
+              "title": "Start Time",
+              "description": "time in epoch that the step started",
+              "order": 2
+            }
+          },
+          "required": [
+            "startTime"
+          ]
         },
         "sensors": {
           "type": "object",
@@ -491,7 +533,7 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
               "title": "Last Upgrade Steps",
               "description": "A list of step taken in the upgrade process. If there is a failure to upgrade the sensor, this list shows the failure",
               "items": {
-                "type": "string"
+                "$ref": "#/definitions/lastUpgradeSteps"
               },
               "order": 56
             },
@@ -719,6 +761,29 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
               "title": "Version",
               "description": "The sensor version number",
               "order": 32
+            }
+          },
+          "definitions": {
+            "lastUpgradeSteps": {
+              "type": "object",
+              "title": "lastUpgradeSteps",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "title": "Name",
+                  "description": "name of step",
+                  "order": 1
+                },
+                "startTime": {
+                  "type": "integer",
+                  "title": "Start Time",
+                  "description": "time in epoch that the step started",
+                  "order": 2
+                }
+              },
+              "required": [
+                "startTime"
+              ]
             }
           }
         }
@@ -964,7 +1029,7 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "title": "Last Upgrade Steps",
           "description": "A list of step taken in the upgrade process. If there is a failure to upgrade the sensor, this list shows the failure",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/lastUpgradeSteps"
           },
           "order": 56
         },
@@ -1192,6 +1257,29 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "title": "Version",
           "description": "The sensor version number",
           "order": 32
+        }
+      },
+      "definitions": {
+        "lastUpgradeSteps": {
+          "type": "object",
+          "title": "lastUpgradeSteps",
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "name of step",
+              "order": 1
+            },
+            "startTime": {
+              "type": "integer",
+              "title": "Start Time",
+              "description": "time in epoch that the step started",
+              "order": 2
+            }
+          },
+          "required": [
+            "startTime"
+          ]
         }
       }
     }

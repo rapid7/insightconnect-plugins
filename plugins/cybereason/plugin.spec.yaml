@@ -6,7 +6,7 @@ title: Cybereason
 description: The Cybereason platform provides military-grade cyber security with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin
 version: 3.0.0
 supported_versions: ["Cybereason API 2023-04-12"]
-vendor: rapid7
+vendor: not_rapid7
 support: rapid7
 status: []
 tags: [investigate, malware, threat intel]
@@ -480,6 +480,17 @@ types:
       type: integer
       description: Unauthorized user
       required: false
+  lastUpgradeSteps:
+    name:
+      title: Name
+      description: name of step
+      type: string
+      required: false
+    startTime:
+      title: Start Time
+      description: time in epoch that the step started
+      type: integer
+      required: true
   globalStats:
     stats:
       title: Stats
@@ -1021,7 +1032,7 @@ types:
     lastUpgradeSteps:
       title: Last Upgrade Steps
       description: A list of step taken in the upgrade process. If there is a failure to upgrade the sensor, this list shows the failure
-      type: "[]string"
+      type: "[]lastUpgradeSteps"
       required: false
       example: []
     disconnected:
