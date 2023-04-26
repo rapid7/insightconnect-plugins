@@ -234,7 +234,7 @@ Example output:
         "quickScanStatus": "IDLE",
         "ransomwareStatus": "DISABLED",
         "remoteShellStatus": "AC_DISABLED",
-        "sensorArchivedByUser": "wayne_bruce@rapid7.com",
+        "sensorArchivedByUser": "user@example.com",
         "sensorId": "5e77777ab4b1234ddcf824ef:PYLUMCLIENT_INTEGRATION_CYBEREASON_0000000000ABC",
         "sensorLastUpdate": 0,
         "serialNumber": "VMware-42 14 9f a1 c5 c6 b4 ad-34 41 0e 80 6a a4 21 2c",
