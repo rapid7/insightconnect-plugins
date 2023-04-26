@@ -1,0 +1,46 @@
+import insightconnect_plugin_runtime
+from .schema import (
+    ResetPasswordAccountInput,
+    ResetPasswordAccountOutput,
+    Input,
+    Output,
+    Component,
+)
+
+# Custom imports below
+import pytmv1
+
+
+class ResetPasswordAccount(insightconnect_plugin_runtime.Action):
+    def __init__(self):
+        super(self.__class__, self).__init__(
+            name="reset_password_account",
+            description=Component.DESCRIPTION,
+            input=ResetPasswordAccountInput(),
+            output=ResetPasswordAccountOutput(),
+        )
+
+    def run(self, params={}):
+        # Get Connection Parameters
+        url = self.connection.server
+        token = self.connection.token_
+        app = self.connection.app
+        # Get Action Parameters
+        account_identifiers = params.get(Input.ACCOUNT_IDENTIFIERS)
+        # Initialize PYTMV1 Client
+        self.logger.info("Initializing PYTMV1 Client...")
+        client = pytmv1.client(app, token, url)
+        # Make Action API Call
+        self.logger.info("Making API Call...")
+        multi_resp = {"multi_response": []}
+        for i in account_identifiers:
+            response = client.reset_password_account(
+                pytmv1.AccountTask(accountName=i["account_name"], description=i.get("description", ""))
+            )
+            if "error" in response.result_code.lower():
+                return response.errors
+            else:
+                multi_resp["multi_response"].append(response.response.dict().get("items")[0])
+        # Return results
+        self.logger.info("Returning Results...")
+        return multi_resp

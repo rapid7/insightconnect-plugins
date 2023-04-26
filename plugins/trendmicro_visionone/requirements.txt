@@ -1,0 +1,7 @@
+# List third-party dependencies here, separated by newlines. 
+# All dependencies must be version-pinned, eg. requests==1.2.0
+# See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
+requests==2.28.1
+pydantic==1.10.4
+bs4==0.0.1
+pytmv1==0.4.0

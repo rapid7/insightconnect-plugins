@@ -1,0 +1,50 @@
+import insightconnect_plugin_runtime
+from .schema import (
+    GetExceptionListInput,
+    GetExceptionListOutput,
+    Input,
+    Output,
+    Component,
+)
+
+# Custom imports below
+import pytmv1
+import json
+
+
+class GetExceptionList(insightconnect_plugin_runtime.Action):
+    def __init__(self):
+        super(self.__class__, self).__init__(
+            name="get_exception_list",
+            description=Component.DESCRIPTION,
+            input=GetExceptionListInput(),
+            output=GetExceptionListOutput(),
+        )
+
+    def run(self, params={}):
+        # Get Connection Parameters
+        url = self.connection.server
+        token = self.connection.token_
+        app = self.connection.app
+        # Initialize PYTMV1 Client
+        self.logger.info("Initializing PYTMV1 Client...")
+        client = pytmv1.client(app, token, url)
+        new_exceptions = []
+        # Make Action API Call
+        self.logger.info("Making API Call...")
+        try:
+            client.consume_exception_list(
+                lambda exception: new_exceptions.append(exception.dict())
+            )
+        except Exception as e:
+            self.logger.info("Consume Exception List failed with following exception:")
+            return e
+        # Load json objects to list
+        exception_objects = []
+        for i in new_exceptions:
+            i["description"] = "" if not i["description"] else i["description"]
+            i = json.dumps(i)
+            exception_objects.append(json.loads(i))
+        # Return results
+        self.logger.info("Returning Results...")
+        return {Output.EXCEPTION_OBJECTS: exception_objects}
