@@ -5,6 +5,7 @@ name: trendmicro_visionone
 title: Trend Micro Vision One
 description: Trend Micro Vision One is a purpose-built threat defense platform that provides added value and new benefits beyond XDR solutions, allowing you to see more and respond faster. Providing deep and broad extended detection and response (XDR) capabilities that collect and automatically correlate data across multiple security layers, email, endpoints, servers, cloud workloads, and networks. Trend Micro Vision One prevents the majority of attacks with automated protection
 version: 1.0.0
+supported_versions: ["Trend Micro Vision One API v3"]
 vendor: trendmicro
 support: community
 status: []
@@ -258,6 +259,7 @@ types:
       type: string
       description: Unique alphanumeric string that identifies a submission
       required: false
+      example: 0so47fy9
     digest:
       title: Digest
       type: object
@@ -638,6 +640,7 @@ triggers:
         description: Sandbox Suspicious Object List Response
         type: "[]sandbox_suspicious_list_resp"
         required: true
+        example: []
   poll_alert_list:
     title: Poll Alert List
     description: Polls information about workbench alerts that match the specified criteria in a paginated list
@@ -666,11 +669,13 @@ triggers:
         description: Number of Workbench alerts retrieved
         type: integer
         required: true
+        example: 5
       alerts:
         title: Alerts
         description: Array of any alerts (awb-workbenchAlertV3)
         type: "[]alert"
         required: true
+        example: []
 
 actions:
   enable_account:
@@ -835,7 +840,7 @@ actions:
         type: "[]block_object"
         description: Object object made up of type, value and description
         required: true
-        example:
+        example: Block object consiting of object_type, object_value, description
     output:
       multi_response:
         title: Multi Response
@@ -852,6 +857,7 @@ actions:
         type: "[]block_object"
         description: Object object made up of type, value and description
         required: true
+        example: Block object consiting of object_type, object_value, description
     output:
       multi_response:
         title: Multi Response
@@ -868,6 +874,7 @@ actions:
         type: "[]block_object"
         description: Object object made up of type, value and description
         required: true
+        example: Block object consiting of object_type, object_value, description
     output:
       multi_response:
         title: Multi Response
@@ -884,6 +891,7 @@ actions:
         type: "[]suspicious_block_object"
         description: Suspicious Object object made up of type, value and scan_action, risk_level and days_to_expiration
         required: true
+        example: An object consisting of object_type, object_value, scan_action, risk_level and days_to_expiration
     output:
       multi_response:
         title: Multi Response
@@ -900,6 +908,7 @@ actions:
         type: "[]block_object"
         description: Object object made up of type, value and description
         required: true
+        example: Block object consiting of object_type, object_value, description
     output:
       multi_response:
         title: Multi Response
@@ -933,6 +942,7 @@ actions:
         description: Array of Endpoint Data Objects, consisting of agent guid, login account, endpoint name, MAC address, IP, os name, or version, os description, product code and installed product code
         type: "[]endpoint_data"
         required: true
+        example: []
   terminate_process:
     title: Terminate Process
     description: Terminates a process that is running on an endpoint
@@ -966,11 +976,13 @@ actions:
         description: Unique alphanumeric string that identifies a submission
         type: string
         required: true
+        example: 0so47fy9
       status:
         title: Status
         description: Response code for the action call
         type: string
         required: true
+        example: "running"
         enum:
           - "succeeded" 
           - "running" 
@@ -980,6 +992,7 @@ actions:
         description: Action applied to a submitted object
         type: string
         required: true
+        example: "analyzeFile"
         enum:
           - "analyzeFile" 
           - "analyzeUrl"
@@ -988,36 +1001,43 @@ actions:
         description: Error code and message for the submission
         type: object
         required: false
+        example: error
       digest:
         title: Digest
         description: The hash values for the file analyzed
         type: object
         required: false
+        example: {}
       created_date_time:
         title: Created Date Time
-        description: Timestamp in ISO 8601 format that indicates the object was submitted to the sandbox
+        description: Timestamp in ISO 8601 that indicates the object was submitted to the sandbox
         type: string
         required: true
+        example: 2022-02-14T16:30:45Z
       last_action_date_time:
         title: Last Action Date Time
         description: Timestamp in ISO 8601 format that indicates when the information about a submission was last updated
         type: string
         required: true
+        example: 2022-02-14T16:30:45Z
       resource_location:
         title: Resource Location
         description: Location of the submitted file
         type: string
         required: false
+        example: temp/downloaded/virus.exe
       is_cached:
         title: Is Cached
         description: Parameter that indicates if an object has been analyzed before by the Sandbox Analysis App. Submissions marked as cached do not count toward the daily reserve
         type: boolean
         required: false
+        example: false
       arguments:
         title: Arguments
         description: Arguments for the file submitted
         type: string
         required: false
+        example: -y -d
   get_sandbox_analysis_result:
     title: Get Sandbox Analysis Result
     description: Retrieves the sandbox analysis results
@@ -1046,11 +1066,13 @@ actions:
         description: Unique alphanumeric string that identifies the analysis results of a submitted object
         type: string
         required: true
+        example: 908324jf9384
       type:
         title: Type
         description: Object Type
         type: string
         required: true
+        example: "url"
         enum:
           - "file"
           - "url"
@@ -1059,11 +1081,13 @@ actions:
         description: The hash values of the analyzed file
         type: object
         required: false
+        example: {}
       risk_level:
         title: Risk Level
         description: The risk level assigned to the object by the sandbox
         type: string
         required: true
+        example: "low"
         enum:
           - "high" 
           - "medium"
@@ -1074,26 +1098,31 @@ actions:
         description: Timestamp in ISO 8601 format that indicates when the analysis was completed
         type: string
         required: true
+        example: 2022-02-14T16:30:45Z
       arguments:
         title: Arguments
         description: Command line arguments encoded in Base64 of the submitted file
         type: string
         required: false
+        example: QWxhZGRpbjpvcGVuIHNlc2FtZQ==
       detection_names:
         title: Detection Names
         description: The name of the threat as detected by the sandbox
         type: "[]string"
         required: false
+        example: []
       threat_types:
         title: Threat Types
         description: The threat type as detected by the sandbox
         type: "[]string"
         required: false
+        example: []
       true_file_type:
         title: True File Type
         description: File Type of the Object
         type: string
         required: false
+        example: .exe
   collect_file:
     title: Collect File
     description: Collects a file from one or more endpoints and then sends the files to Trend Micro Vision One in a password-protected archive Note- You can specify either the computer name- endpointName or the GUID of the installed agent program- agentGuid
@@ -1139,6 +1168,7 @@ actions:
         description: The status of the command sent to the managing server. Possible task statuses; queued - The server queued the command due to a high volume of requests or because the Security Agent was offline; running - Trend Micro Vision One sent the command to the managing server and is waiting for a response; succeeded - The managing server successfully received the command; rejected - The server rejected the task. For automated response task only; waitForApproval - The task is pending approval. For automated response task only; failed - An error or time-out occurred when attempting to send the command to the managing server
         type: string
         required: true
+        example: "queued"
         enum:
           - "queued"
           - "running"
@@ -1151,26 +1181,31 @@ actions:
         description: Timestamp in ISO 8601 format
         type: string
         required: true
+        example: 2022-02-14T16:30:45Z
       id:
         title: ID
         description: Unique numeric string that identifies a response task
         type: string
         required: false
+        example: j9wq384fj9
       last_action_date_time:
         title: Last Action Date Time
         description: Timestamp in ISO 8601 format
         type: string
         required: true
+        example: 2022-02-14T16:30:45Z
       description:
         title: Description
         description: Task Description
         type: string
         required: false
+        example: example desc
       action:
         title: Action
         description: Command sent to the target
         type: string
         required: true
+        example: "isolate"
         enum:
           - "isolate"
           - "restoreIsolate"
@@ -1195,81 +1230,97 @@ actions:
         description: User that triggered the response
         type: string
         required: false
+        example: user1
       agent_guid:
         title: Agent GUID
         description: Unique alphanumeric string that identifies an installed agent
         type: string
         required: false
+        example: 2839eu2983e23e
       endpoint_name:
         title: Endpoint Name
         description: Endpoint name of the target endpoint
         type: string
         required: false
+        example: endpoint1
       file_path:
         title: File Path
         description: File path for the file that was collected
         type: string
         required: false
+        example: temp/downloads/virus.exe
       file_sha1:
         title: File SHA1
         description: The fileSHA1 of the collected file
         type: string
         required: false
+        example: 3395856ce81f2b7382dee72602f798b642f14140
       file_sha256:
         title: File SHA256
         description: The fileSHA256 of the collected file
         type: string
         required: false
+        example: 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f
       file_size:
         title: File Size
         description: The file size of the file collected
         type: integer
         required: false
+        example: 256
       resource_location:
         title: Resource Location
         description: URL location of the file collected that can be used to download
         type: string
         required: false
+        example: www.resourcelocation.ert
       expired_date_time:
         title: Expired Date Time
         description: The expiration date and time of the file
         type: string
         required: false
+        example: 2022-02-14T16:30:45Z
       password:
         title: Password
         description: The password of the file collected
         type: string
         required: false
+        example: 1234!
       filename:
         title: Filename
         description: File name of a response task target (<= 255)
         type: string
         required: false
+        example: virus.exe
       tasks:
         title: Tasks
         description: Currently, it is only possible to apply tasks to one message in a mailbox or one message in several mailboxes
         type: "[]object"
         required: false
+        example: []
       url:
         title: URL
         description: Universal Resource Locator
         type: string
         required: false
+        example: www.url.url
       sandbox_task_id:
         title: Sandbox Task ID
         description: Unique alphanumeric string that identifies a task generated by the Sandbox Analysis App
         type: string
         required: false
+        example: 283j928j3d2
       pid:
         title: PID
         description: Unique numeric string that identifies an active process
         type: integer
         required: false
+        example: 20374284
       image_path:
         title: Image Path
         description: File path of a process image
         type: string
         required: false
+        example: temp/images/image.png
   download_sandbox_investigation_package:
     title: Download Sandbox Investigation Package
     description: Downloads the investigation package based on submission ID
@@ -1298,6 +1349,7 @@ actions:
         description: The output is a .zip file
         type: file
         required: true
+        example: {}
   get_sandbox_suspicious_list:
     title: Get Sandbox Suspicious List
     description: Downloads the suspicious object list associated to the specified object. Note ~ Suspicious Object Lists are only available for objects with a high risk level
@@ -1326,6 +1378,7 @@ actions:
         description: Sandbox Suspicious Object List Response
         type: "[]sandbox_suspicious_list_resp"
         required: true
+        example: []
   download_sandbox_analysis_result:
     title: Download Sandbox Analysis Result
     description: Downloads the analysis result for an object submitted to sandbox for analysis based on the submission ID
@@ -1354,6 +1407,7 @@ actions:
         description: The response is a .pdf file
         type: file
         required: true
+        example: {}
   submit_file_to_sandbox:
     title: Submit File to Sandbox
     description: Submits a file to the sandbox for analysis (Note. For more information about the supported file types, see the Trend Micro Vision One Online Help. Submissions require credits. Does not require credits in regions where Sandbox Analysis has not been officially released.)
@@ -1388,16 +1442,19 @@ actions:
         description: Unique alphanumeric string that identifies a submission
         type: string
         required: true
+        example: 0so47fy9
       digest:
         title: Digest
         type: object
         description: The hash value of the file
         required: true
+        example: {}
       arguments:
         title: Arguments
         description: Command line arguments encoded in Base64 of the submitted file
         type: string
         required: false
+        example: QWxhZGRpbjpvcGVuIHNlc2FtZQ==
   add_alert_note:
     title: Add Alert Note
     description: Attaches a note to a workbench alert
@@ -1420,16 +1477,19 @@ actions:
         description: Result message of adding workbench note
         type: string
         required: true
+        example: 202
       location:
         title: Location
         description: URL of the created resource
         type: string
         required: true
+        example: www.location.local
       note_id:
         title: Note ID
         description: ID of the note created
         type: string
         required: true
+        example: 345
   edit_alert_status:
     title: Edit Alert Status
     description: Updates the status of a workbench alert
@@ -1463,6 +1523,7 @@ actions:
         description: Result code of response
         type: string
         required: true
+        example: 202
   get_alert_list:
     title: Get Alert List
     description: Displays information about workbench alerts that match the specified criteria in a paginated list
@@ -1485,11 +1546,13 @@ actions:
         description: Number of Workbench alerts retrieved
         type: integer
         required: true
+        example: 5
       alerts:
         title: Alerts
         description: Array of any alerts (awb-workbenchAlertV3)
         type: "[]alert"
         required: true
+        example: []
   get_exception_list:
     title: Get Exception List
     description: Retrieves information about domains, file SHA-1, file SHA-256, IP addresses, sender addresses, or URLs in the Exception List and displays it in a paginated list
@@ -1499,6 +1562,7 @@ actions:
         description: Array of any Exception Objects
         type: "[]exception_objects"
         required: true
+        example: []
   get_suspicious_list:
     title: Get Suspicious List
     description: Retrieves information about domains, file SHA-1, file SHA-256, IP addresses, email addresses, or URLs in the Suspicious Object List and displays the information in a paginated list
@@ -1508,6 +1572,7 @@ actions:
         description: Array of any Suspicious Objects
         type: "[]suspicious_objects"
         required: true
+        example: []
   add_to_block_list:
     title: Add to Block List
     description: Adds an email address, file SHA-1, domain, IP address, or URL to the Suspicious Object List, which blocks the objects on subsequent detections
@@ -1517,6 +1582,7 @@ actions:
         type: "[]block_object"
         description: Object object made up of type, value and description
         required: true
+        example: Block object consiting of object_type, object_value, description
     output:
       multi_response:
         title: Multi Response
@@ -1540,6 +1606,7 @@ actions:
         description: Submit URLSs response Array
         type: "[]submit_urls_resp"
         required: true
+        example: []
   get_alert_details:
     title: Get Alert Details
     description: Displays information about workbench alerts that match the specified criteria in a paginated list
@@ -1562,4 +1629,5 @@ actions:
         type: alert
         description: The details of the alert
         required: true
+        example: {}
 

@@ -440,7 +440,12 @@ Example input:
 
 ```
 {
-  "account_identifiers": "List of account identifier objects in proper JSON syntax"
+  "account_identifiers": [
+    {
+      "account_name": "jdoe@emailpage.com",
+      "description": "enable jdoe account, test"
+    }
+  ]
 }
 ```
 
@@ -453,6 +458,12 @@ Example input:
 Example output:
 
 ```
+  "multi_response": [
+    {
+      "status": 202,
+      "task_id": "00002148"
+    }
+  ]
 ```
 
 #### Download Sandbox Analysis Result
