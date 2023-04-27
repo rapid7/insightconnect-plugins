@@ -208,6 +208,12 @@ actions:
         type: "[]string"
         example: ["abcdef123"]
         required: false
+      all_operations_succeeded:
+        title: All Operations Succeeded
+        description: Informs a user any operations failed the (un)quarantine operations
+        type: boolean
+        example: true
+        required: false
   get_agent_details:
     title: Get Agent Details
     description: This action is used to find and display detailed information about a device
