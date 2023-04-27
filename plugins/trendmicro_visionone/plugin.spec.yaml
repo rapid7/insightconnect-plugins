@@ -582,7 +582,7 @@ connection:
     type: string
     default: https://api.xdr.trendmicro.com
     required: true
-    example: https://apimock-dev.trendmicro.com
+    example: https://tmv1-mock.trendmicro.com
   api_key:
     title: API KEY
     description: Vision One API Token

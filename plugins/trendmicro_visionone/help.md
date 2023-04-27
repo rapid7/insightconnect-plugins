@@ -4,12 +4,33 @@ Trend Micro Vision One is a purpose-built threat defense platform that provides 
 
 # Key Features
 
-Identify key features of plugin.
+* Add Alert Note
+* Add to Block List
+* Add to Exception List
+* Add to Suspicious List
+* Collect File
+* Delete Email Message
+* Disable Account
+* Download Sandbox Analysis Result
+* Download Sandbox Investigation Package
+* Edit Alert Status
+* Enable Account
+* Get Alert Details
+* Get Alert List
+* Get Endpoint Data
+* Get Exception List
+* Get Sandbox Analysis Result
+* Get Sandbox Submission Status
+* Get Sandbox Suspicious List
+* Get Suspicious List
+* Get Task Result
+* Poll Alert List
+* Poll Sandbox Suspicious List
 
 # Requirements
 
-* Example: Requires an API Key from the product
-* Example: API must be enabled on the Settings page in the product's user interface
+* Requires a Trend Micro Vision One API Key
+* API must be enabled on the Settings page in the product's user interface
 
 # Supported Product Versions
 
@@ -55,11 +76,11 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|location|string|True|URL of the created resource|
-|note_id|string|True|ID of the note created|
-|result_code|string|True|Result message of adding workbench note|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|result_code|string|True|Result message of adding workbench note|202|
+|location|string|True|URL of the created resource|www.location.local|
+|note_id|string|True|ID of the note created|345|
 
 Example output:
 
@@ -83,9 +104,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|multi_response|[]multi_response|True|Add To Block List Response Array|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|multi_response|[]multi_response|True|Add To Block List Response Array|[]|
 
 Example output:
 
@@ -109,9 +130,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|multi_response|[]multi_response|True|Add To Exception List Response Array|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|multi_response|[]multi_response|True|Add To Exception List Response Array|[]|
 
 Example output:
 
@@ -135,9 +156,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|multi_response|[]multi_response|True|Add To Exception List Response Array|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|multi_response|[]multi_response|True|Add To Exception List Response Array|[]|
 
 Example output:
 
@@ -161,9 +182,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|multi_response|[]multi_response|True|Add To Block List Response Array|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|multi_response|[]multi_response|True|Add To Block List Response Array|[]|
 
 Example output:
 
@@ -187,9 +208,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|multi_response|[]multi_response|True|Delete Email Message Response Array|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|multi_response|[]multi_response|True|Delete Email Message Response Array|[]|
 
 Example output:
 
@@ -213,9 +234,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|multi_response|[]multi_response|True|Disable Account Response Array|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|multi_response|[]multi_response|True|Disable Account Response Array|[]|
 
 Example output:
 
@@ -241,9 +262,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|file|file|True|The response is a .pdf file|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|file|file|True|The response is a .pdf file|{}|
 
 Example output:
 
@@ -269,9 +290,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|file|file|True|The output is a .zip file|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|file|file|True|The output is a .zip file|{}|
 
 Example output:
 
@@ -287,7 +308,7 @@ This action updates the status of a workbench alert.
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|Workbench alert ID|None|WB-14-20190709-00003|
-|if_match|string|None|False|The target resource will be updated only if it matches ETag of the target one|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|if_match|string|None|False|The target resource will be updated only if it matches ETag of the target one|None|d41d8cd98f00b204e9800998ecf8427e|
 |status|string|None|True|ID of the workbench you would like to update the status for|['New', 'In Progress', 'True Positive', 'False Positive']|New|
 
 Example input:
@@ -297,9 +318,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result_code|string|True|Result code of response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|result_code|string|True|Result code of response|202|
 
 Example output:
 
@@ -323,9 +344,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|multi_response|[]multi_response|True|Enable Account Response Array|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|multi_response|[]multi_response|True|Enable Account Response Array|[]|
 
 Example output:
 
@@ -349,10 +370,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|alert_details|alert|True|The details of the alert|
-|etag|string|True|An identifier for a specific version of a Workbench alert resource|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|etag|string|True|An identifier for a specific version of a Workbench alert resource|33a64df551425fcc55e4d42a148795d9f25f89d4|
+|alert_details|alert|True|The details of the alert|{}|
 
 Example output:
 
@@ -377,10 +398,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|alerts|[]alert|True|Array of any alerts (awb-workbenchAlertV3)|
-|total_count|integer|True|Number of Workbench alerts retrieved|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|total_count|integer|True|Number of Workbench alerts retrieved|5|
+|alerts|[]alert|True|Array of any alerts (awb-workbenchAlertV3)|[]|
 
 Example output:
 
@@ -395,7 +416,7 @@ This action retrieves information about a specific endpoint.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|endpoint|string|None|True|Hostname, macAddress, agentGuid or IP of the endpoint to query|None|https://example.com|
+|endpoint|string|None|True|Hostname, macAddress, agentGuid or IP of the endpoint to query|None|127.127.127.127|
 |query_op|string| or |True|Logical operator to employ in the query. (AND/OR)|[' or ', ' and ']| or |
 
 Example input:
@@ -405,9 +426,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|endpoint_data|[]endpoint_data|True|Array of Endpoint Data Objects, consisting of agent guid, login account, endpoint name, MAC address, IP, os name, or version, os description, product code and installed product code|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|endpoint_data|[]endpoint_data|True|Array of Endpoint Data Objects, consisting of agent guid, login account, endpoint name, MAC address, IP, os name, or version, os description, product code and installed product code|[]|
 
 Example output:
 
@@ -424,9 +445,9 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|exception_objects|[]exception_objects|True|Array of any Exception Objects|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|exception_objects|[]exception_objects|True|Array of any Exception Objects|[]|
 
 Example output:
 
@@ -452,17 +473,17 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|analysis_completion_date_time|string|True|Timestamp in ISO 8601 format that indicates when the analysis was completed|
-|arguments|string|False|Command line arguments encoded in Base64 of the submitted file|
-|detection_names|[]string|False|The name of the threat as detected by the sandbox|
-|digest|object|False|The hash values of the analyzed file|
-|id|string|True|Unique alphanumeric string that identifies the analysis results of a submitted object|
-|risk_level|string|True|The risk level assigned to the object by the sandbox|
-|threat_types|[]string|False|The threat type as detected by the sandbox|
-|true_file_type|string|False|File Type of the Object|
-|type|string|True|Object Type|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|id|string|True|Unique alphanumeric string that identifies the analysis results of a submitted object|908324jf9384|
+|type|string|True|Object Type|url|
+|digest|object|False|The hash values of the analyzed file|{}|
+|risk_level|string|True|The risk level assigned to the object by the sandbox|low|
+|analysis_completion_date_time|string|True|Timestamp in ISO 8601 format that indicates when the analysis was completed|2022-02-14 16:30:45+00:00|
+|arguments|string|False|Command line arguments encoded in Base64 of the submitted file|QWxhZGRpbjpvcGVuIHNlc2FtZQ==|
+|detection_names|[]string|False|The name of the threat as detected by the sandbox|[]|
+|threat_types|[]string|False|The threat type as detected by the sandbox|[]|
+|true_file_type|string|False|File Type of the Object|.exe|
 
 Example output:
 
@@ -486,18 +507,18 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|action|string|True|Action applied to a submitted object|
-|arguments|string|False|Arguments for the file submitted|
-|created_date_time|string|True|Timestamp in ISO 8601 that indicates the object was submitted to the sandbox|
-|digest|object|False|The hash values for the file analyzed|
-|error|object|False|Error code and message for the submission|
-|id|string|True|Unique alphanumeric string that identifies a submission|
-|is_cached|boolean|False|Parameter that indicates if an object has been analyzed before by the Sandbox Analysis App. Submissions marked as cached do not count toward the daily reserve|
-|last_action_date_time|string|True|Timestamp in ISO 8601 format that indicates when the information about a submission was last updated|
-|resource_location|string|False|Location of the submitted file|
-|status|string|True|Response code for the action call|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|id|string|True|Unique alphanumeric string that identifies a submission|0so47fy9|
+|status|string|True|Response code for the action call|running|
+|action|string|True|Action applied to a submitted object|analyzeFile|
+|error|object|False|Error code and message for the submission|error|
+|digest|object|False|The hash values for the file analyzed|{}|
+|created_date_time|string|True|Timestamp in ISO 8601 that indicates the object was submitted to the sandbox|2022-02-14 16:30:45+00:00|
+|last_action_date_time|string|True|Timestamp in ISO 8601 format that indicates when the information about a submission was last updated|2022-02-14 16:30:45+00:00|
+|resource_location|string|False|Location of the submitted file|temp/downloaded/virus.exe|
+|is_cached|boolean|False|Parameter that indicates if an object has been analyzed before by the Sandbox Analysis App. Submissions marked as cached do not count toward the daily reserve|False|
+|arguments|string|False|Arguments for the file submitted|-y -d|
 
 Example output:
 
@@ -523,9 +544,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|sandbox_suspicious_list_resp|[]sandbox_suspicious_list_resp|True|Sandbox Suspicious Object List Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|sandbox_suspicious_list_resp|[]sandbox_suspicious_list_resp|True|Sandbox Suspicious Object List Response|[]|
 
 Example output:
 
@@ -542,9 +563,9 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|suspicious_objects|[]suspicious_objects|True|Array of any Suspicious Objects|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|suspicious_objects|[]suspicious_objects|True|Array of any Suspicious Objects|[]|
 
 Example output:
 
@@ -570,30 +591,30 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|account|string|False|User that triggered the response|
-|action|string|True|Command sent to the target|
-|agent_guid|string|False|Unique alphanumeric string that identifies an installed agent|
-|created_date_time|string|True|Timestamp in ISO 8601 format|
-|description|string|False|Task Description|
-|endpoint_name|string|False|Endpoint name of the target endpoint|
-|expired_date_time|string|False|The expiration date and time of the file|
-|file_path|string|False|File path for the file that was collected|
-|file_sha1|string|False|The fileSHA1 of the collected file|
-|file_sha256|string|False|The fileSHA256 of the collected file|
-|file_size|integer|False|The file size of the file collected|
-|filename|string|False|File name of a response task target (<= 255)|
-|id|string|False|Unique numeric string that identifies a response task|
-|image_path|string|False|File path of a process image|
-|last_action_date_time|string|True|Timestamp in ISO 8601 format|
-|password|string|False|The password of the file collected|
-|pid|integer|False|Unique numeric string that identifies an active process|
-|resource_location|string|False|URL location of the file collected that can be used to download|
-|sandbox_task_id|string|False|Unique alphanumeric string that identifies a task generated by the Sandbox Analysis App|
-|status|string|True|The status of the command sent to the managing server. Possible task statuses; queued - The server queued the command due to a high volume of requests or because the Security Agent was offline; running - Trend Micro Vision One sent the command to the managing server and is waiting for a response; succeeded - The managing server successfully received the command; rejected - The server rejected the task. For automated response task only; waitForApproval - The task is pending approval. For automated response task only; failed - An error or time-out occurred when attempting to send the command to the managing server|
-|tasks|[]object|False|Currently, it is only possible to apply tasks to one message in a mailbox or one message in several mailboxes|
-|url|string|False|Universal Resource Locator|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|status|string|True|The status of the command sent to the managing server. Possible task statuses; queued - The server queued the command due to a high volume of requests or because the Security Agent was offline; running - Trend Micro Vision One sent the command to the managing server and is waiting for a response; succeeded - The managing server successfully received the command; rejected - The server rejected the task. For automated response task only; waitForApproval - The task is pending approval. For automated response task only; failed - An error or time-out occurred when attempting to send the command to the managing server|queued|
+|created_date_time|string|True|Timestamp in ISO 8601 format|2022-02-14 16:30:45+00:00|
+|id|string|False|Unique numeric string that identifies a response task|j9wq384fj9|
+|last_action_date_time|string|True|Timestamp in ISO 8601 format|2022-02-14 16:30:45+00:00|
+|description|string|False|Task Description|example desc|
+|action|string|True|Command sent to the target|isolate|
+|account|string|False|User that triggered the response|user1|
+|agent_guid|string|False|Unique alphanumeric string that identifies an installed agent|2839eu2983e23e|
+|endpoint_name|string|False|Endpoint name of the target endpoint|endpoint1|
+|file_path|string|False|File path for the file that was collected|temp/downloads/virus.exe|
+|file_sha1|string|False|The fileSHA1 of the collected file|3395856ce81f2b7382dee72602f798b642f14140|
+|file_sha256|string|False|The fileSHA256 of the collected file|275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f|
+|file_size|integer|False|The file size of the file collected|256|
+|resource_location|string|False|URL location of the file collected that can be used to download|www.resourcelocation.ert|
+|expired_date_time|string|False|The expiration date and time of the file|2022-02-14 16:30:45+00:00|
+|password|string|False|The password of the file collected|1234!|
+|filename|string|False|File name of a response task target (<= 255)|virus.exe|
+|tasks|[]object|False|Currently, it is only possible to apply tasks to one message in a mailbox or one message in several mailboxes|[]|
+|url|string|False|Universal Resource Locator|www.url.url|
+|sandbox_task_id|string|False|Unique alphanumeric string that identifies a task generated by the Sandbox Analysis App|283j928j3d2|
+|pid|integer|False|Unique numeric string that identifies an active process|20374284|
+|image_path|string|False|File path of a process image|temp/images/image.png|
 
 Example output:
 
@@ -617,9 +638,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|multi_response|[]multi_response|True|Isolate Endpoint Response Array|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|multi_response|[]multi_response|True|Isolate Endpoint Response Array|[]|
 
 Example output:
 
@@ -643,9 +664,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|multi_response|[]multi_response|True|Quarantine Email Message Response Array|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|multi_response|[]multi_response|True|Quarantine Email Message Response Array|[]|
 
 Example output:
 
@@ -669,9 +690,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|multi_response|[]multi_response|True|Remove From Block List Response Array|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|multi_response|[]multi_response|True|Remove From Block List Response Array|[]|
 
 Example output:
 
@@ -695,9 +716,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|multi_response|[]multi_response|True|Remove From Exception List Response Array|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|multi_response|[]multi_response|True|Remove From Exception List Response Array|[]|
 
 Example output:
 
@@ -721,9 +742,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|multi_response|[]multi_response|True|Add To Exception List Response Array|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|multi_response|[]multi_response|True|Add To Exception List Response Array|[]|
 
 Example output:
 
@@ -747,9 +768,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|multi_response|[]multi_response|True|Reset Password Account Response Array|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|multi_response|[]multi_response|True|Reset Password Account Response Array|[]|
 
 Example output:
 
@@ -773,9 +794,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|multi_response|[]multi_response|True|Delete Email Message Response Array|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|multi_response|[]multi_response|True|Delete Email Message Response Array|[]|
 
 Example output:
 
@@ -799,9 +820,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|multi_response|[]multi_response|True|Restore Endpoint Response Array|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|multi_response|[]multi_response|True|Restore Endpoint Response Array|[]|
 
 Example output:
 
@@ -825,9 +846,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|multi_response|[]multi_response|True|Sign out Account Response Array|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|multi_response|[]multi_response|True|Sign out Account Response Array|[]|
 
 Example output:
 
@@ -854,11 +875,11 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|arguments|string|False|Command line arguments encoded in Base64 of the submitted file|
-|digest|object|True|The hash value of the file|
-|id|string|True|Unique alphanumeric string that identifies a submission|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|id|string|True|Unique alphanumeric string that identifies a submission|0so47fy9|
+|digest|object|True|The hash value of the file|{}|
+|arguments|string|False|Command line arguments encoded in Base64 of the submitted file|QWxhZGRpbjpvcGVuIHNlc2FtZQ==|
 
 Example output:
 
@@ -882,9 +903,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|submit_urls_resp|[]submit_urls_resp|True|Submit URLSs response Array|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|submit_urls_resp|[]submit_urls_resp|True|Submit URLSs response Array|[]|
 
 Example output:
 
@@ -908,9 +929,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|multi_response|[]multi_response|True|Terminate Process Response Array|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|multi_response|[]multi_response|True|Terminate Process Response Array|[]|
 
 Example output:
 
@@ -938,10 +959,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|alerts|[]alert|True|Array of any alerts (awb-workbenchAlertV3)|
-|total_count|integer|True|Number of Workbench alerts retrieved|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|total_count|integer|True|Number of Workbench alerts retrieved|5|
+|alerts|[]alert|True|Array of any alerts (awb-workbenchAlertV3)|[]|
 
 Example output:
 
@@ -968,9 +989,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|sandbox_suspicious_list_resp|[]sandbox_suspicious_list_resp|True|Sandbox Suspicious Object List Response|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|sandbox_suspicious_list_resp|[]sandbox_suspicious_list_resp|True|Sandbox Suspicious Object List Response|[]|
 
 Example output:
 
@@ -1152,6 +1173,8 @@ _This plugin does not contain any troubleshooting information._
 * 1.0.0 - Initial plugin
 
 # Links
+
+* [TrendMicro](https://www.trendmicro.com/en_us/business.html)
 
 ## References
 
