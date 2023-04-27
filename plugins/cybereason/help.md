@@ -160,7 +160,6 @@ Example output:
 
 ```
 {
-  "$success": true,
   "sensor": {
     "hasMoreResults": false,
     "sensors": [
