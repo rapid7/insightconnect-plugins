@@ -34,7 +34,7 @@ Trend Micro Vision One is a purpose-built threat defense platform that provides 
 
 # Supported Product Versions
 
-_There are no supported product versions listed._
+* Trend Micro Vision One API v3
 
 # Documentation
 
@@ -137,7 +137,15 @@ This action removes an email address, file SHA-1, domain, IP address, or URL tha
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|block_object|[]block_object|None|True|Object object made up of type, value and description|None|None|
+|block_object|[]block_object|None|True|Object object made up of type, value and description|None|Block object consiting of object_type, object_value, description|
+
+Example input:
+
+```
+{
+  "block_object": "Block object consiting of object_type, object_value, description"
+}
+```
 
 ##### Output
 
@@ -198,7 +206,15 @@ This action adds an email address, file SHA-1, domain, IP address, or URL to the
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|block_object|[]block_object|None|True|Object object made up of type, value and description|None|None|
+|block_object|[]block_object|None|True|Object object made up of type, value and description|None|Block object consiting of object_type, object_value, description|
+
+Example input:
+
+```
+{
+  "block_object": "Block object consiting of object_type, object_value, description"
+}
+```
 
 ##### Output
 
@@ -325,7 +341,15 @@ This action removes domains, file SHA-1 values, IP addresses, or URLs from the S
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|block_object|[]block_object|None|True|Object object made up of type, value and description|None|None|
+|block_object|[]block_object|None|True|Object object made up of type, value and description|None|Block object consiting of object_type, object_value, description|
+
+Example input:
+
+```
+{
+  "block_object": "Block object consiting of object_type, object_value, description"
+}
+```
 
 ##### Output
 
@@ -365,7 +389,15 @@ This action removes domains, file SHA-1 values, IP addresses, or URLs from the E
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|block_object|[]block_object|None|True|Object object made up of type, value and description|None|None|
+|block_object|[]block_object|None|True|Object object made up of type, value and description|None|Block object consiting of object_type, object_value, description|
+
+Example input:
+
+```
+{
+  "block_object": "Block object consiting of object_type, object_value, description"
+}
+```
 
 ##### Output
 
@@ -435,6 +467,20 @@ This action allows the user to sign in to new application and browser sessions. 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
 |endpoint_data|[]endpoint_data|True|Array of Endpoint Data Objects, consisting of agent guid, login account, endpoint name, MAC address, IP, os name, or version, os description, product code and installed product code|
+
+Example input:
+
+```
+{
+  "account_identifiers": "List of account identifier objects in proper JSON syntax"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|multi_response|[]multi_response|True|Enable Account Response Array|
 
 Example input:
 
@@ -536,7 +582,15 @@ This action adds domains, file SHA-1/SHA-256 values, IP addresses, senderMailAdd
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|suspicious_block_object|[]suspicious_block_object|None|True|Suspicious Object object made up of type, value and scan_action, risk_level and days_to_expiration|None|None|
+|suspicious_block_object|[]suspicious_block_object|None|True|Suspicious Object object made up of type, value and scan_action, risk_level and days_to_expiration|None|An object consisting of object_type, object_value, scan_action, risk_level and days_to_expiration|
+
+Example input:
+
+```
+{
+  "suspicious_block_object": "An object consisting of object_type, object_value, scan_action, risk_level and days_to_expiration"
+}
+```
 
 ##### Output
 
@@ -580,7 +634,15 @@ This action adds domains, file SHA-1 values, IP addresses, or URLs to the Except
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|block_object|[]block_object|None|True|Object object made up of type, value and description|None|None|
+|block_object|[]block_object|None|True|Object object made up of type, value and description|None|Block object consiting of object_type, object_value, description|
+
+Example input:
+
+```
+{
+  "block_object": "Block object consiting of object_type, object_value, description"
+}
+```
 
 ##### Output
 
@@ -806,7 +868,7 @@ Example input:
 |----|----|--------|-----------|
 |action|string|True|Action applied to a submitted object|
 |arguments|string|False|Arguments for the file submitted|
-|created_date_time|string|True|Timestamp in ISO 8601 format that indicates the object was submitted to the sandbox|
+|created_date_time|string|True|Timestamp in ISO 8601 that indicates the object was submitted to the sandbox|
 |digest|object|False|The hash values for the file analyzed|
 |error|object|False|Error code and message for the submission|
 |id|string|True|Unique alphanumeric string that identifies a submission|
@@ -1002,6 +1064,14 @@ This action collects a file from one or more endpoints and then sends the files 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
 |collect_files|[]collect_files|None|True|Collect file input JSON containing endpoint, file path and description|None|JSON list object containing necessary fields|
+
+Example input:
+
+```
+{
+  "collect_files": "JSON list object containing necessary fields"
+}
+```
 
 ##### Output
 

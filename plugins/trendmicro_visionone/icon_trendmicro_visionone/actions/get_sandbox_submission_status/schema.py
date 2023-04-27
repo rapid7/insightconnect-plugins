@@ -72,7 +72,7 @@ class GetSandboxSubmissionStatusOutput(insightconnect_plugin_runtime.Output):
     "created_date_time": {
       "type": "string",
       "title": "Created Date Time",
-      "description": "Timestamp in ISO 8601 format that indicates the object was submitted to the sandbox",
+      "description": "Timestamp in ISO 8601 that indicates the object was submitted to the sandbox",
       "order": 6
     },
     "digest": {
