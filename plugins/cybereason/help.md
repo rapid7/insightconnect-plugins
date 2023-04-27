@@ -136,17 +136,17 @@ This action is used to get sensor.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|indicator|string|None|True|The unique identifier of the machine you wish to perform the operation on, this can be an internal IPv4 address, hostname or sensor GUID|None|104.31.2.164|
 |limit|integer|None|True|The number of sensors to which to send the request|None|1|
 |offset|integer|None|True|Set to 0 to receive the first limit set of sensors|None|0|
-|indicator|string|None|True|The unique identifier of the machine you wish to perform the operation on, this can be an internal IPv4 address, hostname or sensor GUID|None|104.31.2.164|
 
 Example input:
 
 ```
 {
+  "indicator": "104.31.2.164",
   "limit": 1,
-  "offset": 0,
-  "indicator": "104.31.2.164"
+  "offset": 0
 }
 ```
 
@@ -154,106 +154,121 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|sensor|sensors|True|Sensor|{}|
+|sensor|sensor|True|Sensor|{}|
 
 Example output:
 
 ```
 {
-  "sensorId": "5e57b2dde4b06a3a515cc0eb:PYLUMCLIENT_SES_WIN10-EDLAB-AIQ_000C29B6AB6D",
-  "pylumId": "PYLUMCLIENT_SES_WIN10-EDLAB-AIQ_000C29B6AB6D",
-  "guid": "tEjQQRCi55eyTiwX",
-  "fqdn": "win10-edlab-aiq1",
-  "machineName": "win10-edlab-aiq1",
-  "internalIpAddress": "111.11.133.21",
-  "externalIpAddress": "2.16.258.145",
-  "siteName": "Primary",
-  "siteId": 46210509,
-  "ransomwareStatus": "DETECT_SUSPEND_PREVENT",
-  "preventionStatus": "ENABLED",
-  "isolated": false,
-  "disconnectionTime": 1628068498840,
-  "lastPylumInfoMsgUpdateTime": 1628068444513,
-  "lastPylumUpdateTimestampMs": 1628068498840,
-  "status": "Archived",
-  "serviceStatus": "Down",
-  "onlineTimeMS": 0,
-  "offlineTimeMS": 0,
-  "staleTimeMS": 0,
-  "archiveTimeMs": 1635854400487,
-  "statusTimeMS": 0,
-  "lastStatusAction": "None",
-  "archivedOrUnarchiveComment": "Auto-archived after 60 days stale",
-  "sensorArchivedByUser": "Auto-archived",
-  "serverName": "ses-1-t",
-  "serverId": "5e57b2dde4b06a3a515cc0eb",
-  "serverIp": "10.130.8.127",
-  "privateServerIp": "10.130.8.127",
-  "collectiveUuid": "f9ca36d9-0c09-45e5-82d6-7e026ec1e803",
-  "osType": "WINDOWS",
-  "osVersionType": "Windows_10",
-  "collectionStatus": "ADVANCED",
-  "version": "21.1.144.0",
-  "consoleVersion": null,
-  "firstSeenTime": 1627316564474,
-  "upTime": 695032210,
-  "cpuUsage": 0.0,
-  "memoryUsage": 0,
-  "outdated": true,
-  "amStatus": "AM_BLOCK",
-  "amModeOrigin": null,
-  "avDbVersion": "85274",
-  "avDbLastUpdateTime": 1627468314000,
-  "powerShellStatus": "PS_ENABLED",
-  "remoteShellStatus": "AC_ENABLED",
-  "usbStatus": "DISABLED",
-  "fwStatus": "DISABLED",
-  "antiExploitStatus": "AE_CAUTIOUS",
-  "documentProtectionStatus": "DS_DETECT",
-  "documentProtectionMode": "DM_CAUTIOUS",
-  "serialNumber": "",
-  "deviceModel": "Intel(R) Core(TM) i9-9880H CPU @ 2.30GHz",
-  "organizationalUnit": "",
-  "antiMalwareStatus": "AM_ENABLED",
-  "antiMalwareModeOrigin": null,
-  "organization": "ses",
-  "proxyAddress": "",
-  "preventionError": "",
-  "exitReason": "STOP_REQUEST_FROM_PYLUM",
-  "actionsInProgress": 0,
-  "pendingActions": [],
-  "lastUpgradeResult": "None",
-  "department": null,
-  "location": null,
-  "criticalAsset": null,
-  "deviceType": null,
-  "customTags": "CRITICAL",
-  "lastUpgradeSteps": [],
-  "disconnected": true,
-  "staticAnalysisDetectMode": "MODERATE",
-  "staticAnalysisDetectModeOrigin": null,
-  "staticAnalysisPreventMode": "MODERATE",
-  "staticAnalysisPreventModeOrigin": null,
-  "collectionComponents": [
-    "DPI",
-    "Metadata",
-    "File Events",
-    "Registry Events"
-  ],
-  "sensorLastUpdate": 0,
-  "fullScanStatus": "IDLE",
-  "quickScanStatus": "IDLE",
-  "lastFullScheduleScanSuccessTime": 0,
-  "lastQuickScheduleScanSuccessTime": 0,
-  "policyName": "ED_CUSTOM_POLICY",
-  "deliveryTime": 1627328611652,
-  "policyId": "8c1c93ff-08cb-4b4e-b253-7f5c9d3e08bc",
-  "compliance": true,
-  "groupId": "af617d16-b83e-4739-948d-339ce21b9177",
-  "groupName": "aaa",
-  "groupStickiness": true,
-  "purgedSensors": false,
-  "groupStickinessLabel": "Manual"
+  "$success": true,
+  "sensor": {
+    "hasMoreResults": false,
+    "sensors": [
+      {
+        "actionsInProgress": 0,
+        "amStatus": "AM_QUARANTINE",
+        "antiExploitStatus": "AE_DISABLED",
+        "antiMalwareStatus": "AM_ENABLED",
+        "archiveTimeMs": 1682425952496,
+        "archivedOrUnarchiveComment": "icon_test",
+        "avDbLastUpdateTime": 1681997830000,
+        "avDbVersion": "90436",
+        "collectionComponents": [
+          "Metadata"
+        ],
+        "collectionStatus": "ADVANCED",
+        "collectiveUuid": "70b8b433-1ab2-1234-1ab2-1c0d95c62120",
+        "compliance": true,
+        "cpuUsage": 0,
+        "deliveryTime": 1681892958527,
+        "deviceModel": "Intel(R) Xeon(R) CPU E5-2690 v2 @ 3.00GHz",
+        "disconnected": true,
+        "disconnectionTime": 1681999288065,
+        "documentProtectionMode": "DM_CAUTIOUS",
+        "documentProtectionStatus": "DS_DISABLED",
+        "exitReason": "STOP_REQUEST_FROM_PYLUM",
+        "externalIpAddress": "128.177.65.3",
+        "firstSeenTime": 1681892763453,
+        "fqdn": "cybereasonsensor",
+        "fullScanStatus": "IDLE",
+        "fwStatus": "DISABLED",
+        "groupId": "9f0fabc3-a12b-1234-a12b-dbab187e3409",
+        "groupName": "Perimeter 2",
+        "groupStickiness": false,
+        "groupStickinessLabel": "Dynamic",
+        "guid": "J1zJSBCi55eyTiwX",
+        "internalIpAddress": "10.4.84.0",
+        "isolated": false,
+        "lastFullScheduleScanSuccessTime": 0,
+        "lastPylumInfoMsgUpdateTime": 1681998983712,
+        "lastPylumUpdateTimestampMs": 1681999288065,
+        "lastQuickScheduleScanSuccessTime": 1681296325000,
+        "lastStatusAction": "Archive",
+        "lastUpgradeResult": "AlreadyUpdated",
+        "lastUpgradeSteps": [
+          {
+            "name": "Started",
+            "startTime": 1681906178901
+          },
+          {
+            "name": "AlreadyUpdated",
+            "startTime": 1681906178904
+          }
+        ],
+        "machineName": "cybereasonsensor",
+        "memoryUsage": 0,
+        "offlineTimeMS": 0,
+        "onlineTimeMS": 0,
+        "organization": "integration",
+        "osType": "WINDOWS",
+        "osVersionType": "Windows_10",
+        "outdated": false,
+        "pendingActions": [],
+        "policyId": "81ae6eb3-1234-1234-1234-25f98d55d5fa",
+        "policyName": "Default",
+        "powerShellStatus": "PS_DISABLED",
+        "preventionStatus": "DISABLED",
+        "privateServerIp": "10.146.1.168",
+        "purgedSensors": false,
+        "pylumId": "PYLUMCLIENT_INTEGRATION_CYBEREASON_0000000000ABC",
+        "quickScanStatus": "IDLE",
+        "ransomwareStatus": "DISABLED",
+        "remoteShellStatus": "AC_DISABLED",
+        "sensorArchivedByUser": "user@example.com",
+        "sensorId": "5e77777ab4b1234ddcf824ef:PYLUMCLIENT_INTEGRATION_CYBEREASON_0000000000ABC",
+        "sensorLastUpdate": 0,
+        "serialNumber": "VMware-42 14 9f a1 c5 c6 b4 ad-34 41 0e 80 6a a4 21 2c",
+        "serverId": "1a22333de4b0575ddcf123ab",
+        "serverIp": "10.146.1.168",
+        "serverName": "integration-1-t",
+        "serviceStatus": "Down",
+        "siteId": 0,
+        "siteName": "Default",
+        "staleTimeMS": 0,
+        "staticAnalysisDetectMode": "DISABLED",
+        "staticAnalysisPreventMode": "DISABLED",
+        "status": "Archived",
+        "statusTimeMS": 0,
+        "upTime": 1632708,
+        "usbStatus": "DISABLED",
+        "version": "22.1.169.0"
+      }
+    ],
+    "sensorsStatus": {
+      "@class": ".SensorsStatusOverview",
+      "advancedCount": 0,
+      "archivedCount": 1,
+      "offlineCount": 0,
+      "onlineCount": 0,
+      "outdatedCount": 0,
+      "serviceErrorCount": 0,
+      "staleCount": 0,
+      "suspendedCount": 0,
+      "turnedOffCount": 0,
+      "turnedOnCount": 0
+    },
+    "totalResults": 1
+  }
 }
 ```
 
@@ -566,6 +581,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.0.0 - Fix Output for `Get Sensor` 
 * 2.2.0 - Added new actions: `Get Sensor` & `Archive Sensor`
 * 2.1.0 - New action Delete Registry Key | Add support product versions
 * 2.0.2 - Remove ISOLATE_MACHINE option from Remediate Items action documentation
