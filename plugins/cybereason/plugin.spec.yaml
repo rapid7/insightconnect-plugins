@@ -4,7 +4,7 @@ products: [insightconnect]
 name: cybereason
 title: Cybereason
 description: The Cybereason platform provides military-grade cyber security with real-time awareness and detection. Respond to threats and remediate in seconds using the Cybereason plugin
-version: 2.2.0
+version: 3.0.0
 supported_versions: ["Cybereason API 2023-04-12"]
 vendor: rapid7
 support: rapid7
@@ -480,6 +480,17 @@ types:
       type: integer
       description: Unauthorized user
       required: false
+  lastUpgradeSteps:
+    name:
+      title: Name
+      description: name of step
+      type: string
+      required: false
+    startTime:
+      title: Start Time
+      description: time in epoch that the step started
+      type: integer
+      required: true
   globalStats:
     stats:
       title: Stats
@@ -705,13 +716,13 @@ types:
       description: The globally unique sensor identifier
       type: string
       required: false
-      example: "tEjQQRCi55eyTiwX"
+      example: "tEjQQRCi55eyTwiX"
     fqdn:
       title: Fully Qualified Domain Name
       description: the fully qualified domain name (fqdn) for the machine
       type: string
       required: false
-      example: "tEjQQRCi55eyTiwX"
+      example: "tEjQQRCi55eyTwiX"
     machineName:
       title: Machine Name
       description: The name of the machine
@@ -873,19 +884,13 @@ types:
       description: States whether the machine has data collection enabled
       type: string
       required: false
-      example: "ADVANCED" # not part of the enums
+      example: "ADVANCED"
     version:
       title: Version
       description: The sensor version number
       type: string
       required: false
       example: "21.1.144.0"
-    consoleVersion:
-      title: Console Version
-      description: The version for the console for your Cybereason environment
-      type: string
-      required: false
-      example: 20.1
     firstSeenTime:
       title: First Seen Time
       description: The first time the machine was recognized. Timestamp values are returned in epoch
@@ -921,13 +926,7 @@ types:
       description: The Anti-Malware installation status for the sensor
       type: string
       required: false
-      example: "AM_BLOCK" # double check
-    amModeOrigin:
-      title: Anti-Malware Mode Origin
-      description: The source of the value for the Anti-Malware Signatures mode setting
-      type: string
-      required: false
-      example: null
+      example: "AM_QUARANTINE"
     avDbVersion:
       title: AV DB Version
       description: The version of the Anti-Malware Signatures database on the machine where the sensor is installed
@@ -994,42 +993,18 @@ types:
       type: string
       required: false
       example: "Intel(R) Core(TM) i9-9880H CPU 2.30GHz"
-    organizationalUnit:
-      title: Organizational Unit
-      description: The name of the organization unit taken from the Active Directory on the machine on which the sensor is installed
-      type: string
-      required: false
-      example: ""
     antiMalwareStatus:
       title: Anti Malware Status
       description: The Anti-Malware prevention mode for the sensor
       type: string
       required: false
       example: "AM_ENABLED"
-    antiMalwareModeOrigin:
-      title: Anti Malware Mode Origin
-      description: The source of the value for the Anti-Malware setting
-      type: string
-      required: false
-      example: null
     organization:
       title: Organization
       description: The organization name for the machine on which the sensor is installed
       type: string
       required: false
       example: "ses"
-    proxyAddress:
-      title: proxy Address
-      description: The address for the Proxy server used by this sensor
-      type: string
-      required: false
-      example: ""
-    preventionError:
-      title: Prevention Error
-      description: The error received for prevention by the sensor
-      type: string
-      required: false
-      example: ""
     exitReason:
       title: Exit Reason
       description: The reason the sensor service (minionhost.exe) stopped
@@ -1054,40 +1029,10 @@ types:
       type: string
       required: false
       example: "None"
-    department:
-      title: Department
-      description: The value assigned to the machine for the DEPARTMENT sensor tag
-      type: string
-      required: false
-      example: null # check
-    location:
-      title: Location
-      description: The value assigned for this machine for the LOCATION sensor tag
-      type: string
-      required: false
-      example: null # check
-    criticalAsset:
-      title: Critical Asset
-      description: The value assigned for the machine for the CRITICAL ASSET sensor tag
-      type: string
-      required: false
-      example: null # check
-    deviceType:
-      title: Device Type
-      description: The value assigned to the machine for the DEVICE TYPE sensor tag
-      type: string
-      required: false
-      example: null # check
-    customTags:
-      title: Custom Tags
-      description: A list of custom sensor tags assigned to the machine
-      type: string
-      required: false
-      example: "CRITICAL"
     lastUpgradeSteps:
       title: Last Upgrade Steps
       description: A list of step taken in the upgrade process. If there is a failure to upgrade the sensor, this list shows the failure
-      type: "[]string"
+      type: "[]lastUpgradeSteps"
       required: false
       example: []
     disconnected:
@@ -1102,24 +1047,12 @@ types:
       type: string
       required: false
       example: "MODERATE"
-    staticAnalysisDetectModeOrigin:
-      title: Static Analysis Detect Mode Origin
-      description: The source of the value for the Artificial Intelligence Detect mode setting
-      type: string
-      required: false
-      example: null
     staticAnalysisPreventMode:
       title: Static Analysis Prevent Mode
       description: The value for the Artificial Intelligence Prevent Mode in the Anti-Malware settings
       type: string
       required: false
       example: "MODERATE"
-    staticAnalysisPreventModeOrigin:
-      title: Static Analysis Prevent Mode Origin
-      description: The source of the value for the Artificial Intelligence Prevent mode setting
-      type: string
-      required: false
-      example: null # check
     collectionComponents:
       title: Collection Components
       description: Any special collections enabled on the server and/or sensor
@@ -1153,6 +1086,18 @@ types:
     lastQuickScheduleScanSuccessTime:
       title: Last Quick Schedule Scan Success Time
       description: The time (in epoch) that the sensor last did a successful quick scan
+      type: integer
+      required: false
+      example: "0"
+    lastPylumInfoMsgUpdateTime:
+      title: Last Quick Pylum Info Message Update Time
+      description: The time (in epoch) that the last quick pylum info message updated
+      type: integer
+      required: false
+      example: "0"
+    lastPylumUpdateTimestampMs:
+      title: Last Quick Pylum Update Timestamp
+      description: The time (in epoch) that the last pylum updated
       type: integer
       required: false
       example: "0"
@@ -1210,6 +1155,85 @@ types:
       type: string
       required: false
       example: "Manual"
+  getSensorStats:
+    class:
+      title: Class
+      description: class of object
+      type: string
+      example: .SensorsStatusOverview
+    advancedCount:
+      title: Advanced Count
+      description: How many sensors are advanced
+      type: integer
+      example: 0
+    archivedCount:
+      title: Archived Count
+      description: How many sensors are archived
+      type: integer
+      example: 0
+    offlineCount:
+      title: Offline Count
+      description: How many sensors are offline
+      type: integer
+      example: 0
+    onlineCount:
+      title: Online Count
+      description: How many sensors are online
+      type: integer
+      example: 0
+    outdatedCount:
+      title: Outdated Count
+      description: How many sensors are outdated
+      type: integer
+      example: 0
+    serviceErrorCount:
+      title: Service Error Count
+      description: How many sensors are experiencing service errors
+      type: integer
+      example: 0
+    staleCount:
+      title: Stale Count
+      description: How many sensors are stale
+      type: integer
+      example: 0
+    suspendedCount:
+      title: Suspended Count
+      description: How many sensors are suspended
+      type: integer
+      example: 0
+    turnedOffCount:
+      title: Turned Off Count
+      description: How many sensors are turned off
+      type: integer
+      example: 0
+    turnedOnCount:
+      title: Turned On Count
+      description: How many sensors are turned on
+      type: integer
+      example: 0
+  sensor:
+    hasMoreResults:
+      title: Has More Results
+      description: Was there more possible results that were excluded because of limit
+      type: boolean
+      required: true
+      example: false
+    sensors:
+      title: Sensors
+      description: list of dictionaries containing sensor information
+      type: "[]sensors"
+      example: []
+    sensorStatus:
+      title: Sensor Status
+      description: sensors status
+      type: getSensorStats
+      example: {}
+    totalResults:
+      title: Total Results
+      description: how many sensors did we get information from
+      type: integer
+      example: 1
+
 connection:
   hostname:
     title: Host
@@ -1315,7 +1339,7 @@ actions:
       sensor:
         title: Sensor
         description: Sensor
-        type: sensors
+        type: sensor
         example: {}
         required: true
   archive_sensor:
@@ -1340,56 +1364,6 @@ actions:
         description: Archive sensor response
         type: archiveSensorResponse
         example: {}
-        required: true
-  get_sensor:
-    title: Get Sensor
-    description: Get sensor
-    input:
-      limit:
-        title: Limit
-        description: The number of sensors to which to send the request
-        type: integer
-        required: true
-        example: 1
-      offset:
-        title: Offset
-        description: Set to 0 to receive the first limit set of sensors
-        type: integer
-        required: true
-        example: 0
-      indicator:
-        title: Indicator
-        description: The unique identifier of the machine you wish to perform the operation on, this can be an internal IPv4 address, hostname or sensor GUID
-        type: string
-        required: true
-        example: 104.31.2.164
-    output:
-      sensor:
-        title: Sensor
-        description: Sensor
-        type: sensors
-        required: true
-  archive_sensor:
-    title: Archive Sensor
-    description: Archive sensor
-    input:
-      sensor_ids:
-        title: Sensor IDS
-        description: The unique identifier of the machine(s) you wish to perform the operation on
-        type: "[]string"
-        required: true
-        example: ["58ae74fae4b06dca39c1d4bc:PYLUMCLIENT_ORG1-PROD_WINTEST-PC_005056A104F9"]
-      argument:
-        title: Argument
-        description: The reason for archiving the sensor or sensors
-        type: string
-        required: true
-        example: "Sensors are no longer in use"
-    output:
-      archive_sensor_response:
-        title: Archive Sensor Response
-        description: Archive sensor response
-        type: archiveSensorResponse
         required: true
   quarantine_file:
     title: Quarantine File

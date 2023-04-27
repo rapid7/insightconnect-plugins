@@ -61,7 +61,7 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
   "title": "Variables",
   "properties": {
     "sensor": {
-      "$ref": "#/definitions/sensors",
+      "$ref": "#/definitions/sensor",
       "title": "Sensor",
       "description": "Sensor",
       "order": 1
@@ -71,6 +71,724 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
     "sensor"
   ],
   "definitions": {
+    "getSensorStats": {
+      "type": "object",
+      "title": "getSensorStats",
+      "properties": {
+        "advancedCount": {
+          "type": "integer",
+          "title": "Advanced Count",
+          "description": "How many sensors are advanced",
+          "order": 2
+        },
+        "archivedCount": {
+          "type": "integer",
+          "title": "Archived Count",
+          "description": "How many sensors are archived",
+          "order": 3
+        },
+        "class": {
+          "type": "string",
+          "title": "Class",
+          "description": "class of object",
+          "order": 1
+        },
+        "offlineCount": {
+          "type": "integer",
+          "title": "Offline Count",
+          "description": "How many sensors are offline",
+          "order": 4
+        },
+        "onlineCount": {
+          "type": "integer",
+          "title": "Online Count",
+          "description": "How many sensors are online",
+          "order": 5
+        },
+        "outdatedCount": {
+          "type": "integer",
+          "title": "Outdated Count",
+          "description": "How many sensors are outdated",
+          "order": 6
+        },
+        "serviceErrorCount": {
+          "type": "integer",
+          "title": "Service Error Count",
+          "description": "How many sensors are experiencing service errors",
+          "order": 7
+        },
+        "staleCount": {
+          "type": "integer",
+          "title": "Stale Count",
+          "description": "How many sensors are stale",
+          "order": 8
+        },
+        "suspendedCount": {
+          "type": "integer",
+          "title": "Suspended Count",
+          "description": "How many sensors are suspended",
+          "order": 9
+        },
+        "turnedOffCount": {
+          "type": "integer",
+          "title": "Turned Off Count",
+          "description": "How many sensors are turned off",
+          "order": 10
+        },
+        "turnedOnCount": {
+          "type": "integer",
+          "title": "Turned On Count",
+          "description": "How many sensors are turned on",
+          "order": 11
+        }
+      }
+    },
+    "lastUpgradeSteps": {
+      "type": "object",
+      "title": "lastUpgradeSteps",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "Name",
+          "description": "name of step",
+          "order": 1
+        },
+        "startTime": {
+          "type": "integer",
+          "title": "Start Time",
+          "description": "time in epoch that the step started",
+          "order": 2
+        }
+      },
+      "required": [
+        "startTime"
+      ]
+    },
+    "sensor": {
+      "type": "object",
+      "title": "sensor",
+      "properties": {
+        "hasMoreResults": {
+          "type": "boolean",
+          "title": "Has More Results",
+          "description": "Was there more possible results that were excluded because of limit",
+          "order": 1
+        },
+        "sensorStatus": {
+          "$ref": "#/definitions/getSensorStats",
+          "title": "Sensor Status",
+          "description": "sensors status",
+          "order": 3
+        },
+        "sensors": {
+          "type": "array",
+          "title": "Sensors",
+          "description": "list of dictionaries containing sensor information",
+          "items": {
+            "$ref": "#/definitions/sensors"
+          },
+          "order": 2
+        },
+        "totalResults": {
+          "type": "integer",
+          "title": "Total Results",
+          "description": "how many sensors did we get information from",
+          "order": 4
+        }
+      },
+      "required": [
+        "hasMoreResults"
+      ],
+      "definitions": {
+        "getSensorStats": {
+          "type": "object",
+          "title": "getSensorStats",
+          "properties": {
+            "advancedCount": {
+              "type": "integer",
+              "title": "Advanced Count",
+              "description": "How many sensors are advanced",
+              "order": 2
+            },
+            "archivedCount": {
+              "type": "integer",
+              "title": "Archived Count",
+              "description": "How many sensors are archived",
+              "order": 3
+            },
+            "class": {
+              "type": "string",
+              "title": "Class",
+              "description": "class of object",
+              "order": 1
+            },
+            "offlineCount": {
+              "type": "integer",
+              "title": "Offline Count",
+              "description": "How many sensors are offline",
+              "order": 4
+            },
+            "onlineCount": {
+              "type": "integer",
+              "title": "Online Count",
+              "description": "How many sensors are online",
+              "order": 5
+            },
+            "outdatedCount": {
+              "type": "integer",
+              "title": "Outdated Count",
+              "description": "How many sensors are outdated",
+              "order": 6
+            },
+            "serviceErrorCount": {
+              "type": "integer",
+              "title": "Service Error Count",
+              "description": "How many sensors are experiencing service errors",
+              "order": 7
+            },
+            "staleCount": {
+              "type": "integer",
+              "title": "Stale Count",
+              "description": "How many sensors are stale",
+              "order": 8
+            },
+            "suspendedCount": {
+              "type": "integer",
+              "title": "Suspended Count",
+              "description": "How many sensors are suspended",
+              "order": 9
+            },
+            "turnedOffCount": {
+              "type": "integer",
+              "title": "Turned Off Count",
+              "description": "How many sensors are turned off",
+              "order": 10
+            },
+            "turnedOnCount": {
+              "type": "integer",
+              "title": "Turned On Count",
+              "description": "How many sensors are turned on",
+              "order": 11
+            }
+          }
+        },
+        "lastUpgradeSteps": {
+          "type": "object",
+          "title": "lastUpgradeSteps",
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "name of step",
+              "order": 1
+            },
+            "startTime": {
+              "type": "integer",
+              "title": "Start Time",
+              "description": "time in epoch that the step started",
+              "order": 2
+            }
+          },
+          "required": [
+            "startTime"
+          ]
+        },
+        "sensors": {
+          "type": "object",
+          "title": "sensors",
+          "properties": {
+            "actionsInProgress": {
+              "type": "integer",
+              "title": "Actions In Progress",
+              "description": "The number of actions in progress (i.e. Not Resolved) on the machine",
+              "order": 53
+            },
+            "amStatus": {
+              "type": "string",
+              "title": "Anti-Malware Status",
+              "description": "The Anti-Malware installation status for the sensor",
+              "order": 38
+            },
+            "antiExploitStatus": {
+              "type": "string",
+              "title": "Anti Exploit Status",
+              "description": "The status of the Exploit Prevention feature. This field returns a value only if you have enabled Exploit Prevention.",
+              "order": 45
+            },
+            "antiMalwareStatus": {
+              "type": "string",
+              "title": "Anti Malware Status",
+              "description": "The Anti-Malware prevention mode for the sensor",
+              "order": 50
+            },
+            "archiveTimeMs": {
+              "type": "integer",
+              "title": "Archive Time MS",
+              "description": "The time (in epoch) when the sensor was archived",
+              "order": 19
+            },
+            "archivedOrUnarchiveComment": {
+              "type": "string",
+              "title": "Archived Or Unarchive Comment",
+              "description": "The comment added when a sensor was archived or unarchived",
+              "order": 22
+            },
+            "avDbLastUpdateTime": {
+              "type": "integer",
+              "title": "AV DB Last Update Time",
+              "description": "The time when the Anti-Malware Signatures database on the machine where the sensor is installed was last updated",
+              "order": 40
+            },
+            "avDbVersion": {
+              "type": "string",
+              "title": "AV DB Version",
+              "description": "The version of the Anti-Malware Signatures database on the machine where the sensor is installed",
+              "order": 39
+            },
+            "collectionComponents": {
+              "type": "array",
+              "title": "Collection Components",
+              "description": "Any special collections enabled on the server and/or sensor",
+              "items": {
+                "type": "string"
+              },
+              "order": 60
+            },
+            "collectionStatus": {
+              "type": "string",
+              "title": "Collection Status",
+              "description": "States whether the machine has data collection enabled",
+              "order": 31
+            },
+            "collectiveUuid": {
+              "type": "string",
+              "title": "Collective UUID",
+              "description": "The identifier for the Registration server for the sensor",
+              "order": 28
+            },
+            "compliance": {
+              "type": "boolean",
+              "title": "Compliance",
+              "description": "Indicates whether the current sensor settings match the policy settings",
+              "order": 71
+            },
+            "cpuUsage": {
+              "type": "number",
+              "title": "CPU Usage",
+              "description": "The amount of CPU used by the machine (expressed as a percentage)",
+              "order": 35
+            },
+            "deliveryTime": {
+              "type": "integer",
+              "title": "Delivery Time",
+              "description": "The time (in epoch) when the last policy update was delivered to the sensor",
+              "order": 69
+            },
+            "deviceModel": {
+              "type": "string",
+              "title": "Device Model",
+              "description": "The model added for a device in the allowed devices section of the Endpoint Controls settings",
+              "order": 49
+            },
+            "disconnected": {
+              "type": "boolean",
+              "title": "Disconnected",
+              "description": "Indicates whether a sensor is currently disconnected",
+              "order": 57
+            },
+            "disconnectionTime": {
+              "type": "integer",
+              "title": "Disconnection Time",
+              "description": "Time the machine was disconnected. Returns 0 if this is the first connection time. After the first connection, this is the time it was last connected",
+              "order": 13
+            },
+            "documentProtectionMode": {
+              "type": "string",
+              "title": "Document Protection Mode",
+              "description": "The mode set for the Document Protection mode",
+              "order": 47
+            },
+            "documentProtectionStatus": {
+              "type": "string",
+              "title": "Document Protection Status",
+              "description": "The status for the Document Protection mode",
+              "order": 46
+            },
+            "exitReason": {
+              "type": "string",
+              "title": "Exit Reason",
+              "description": "The reason the sensor service (minionhost.exe) stopped",
+              "order": 52
+            },
+            "externalIpAddress": {
+              "type": "string",
+              "title": "External IP Address",
+              "description": "The machine's external IP address for the local network",
+              "order": 7
+            },
+            "firstSeenTime": {
+              "type": "integer",
+              "title": "First Seen Time",
+              "description": "The first time the machine was recognized. Timestamp values are returned in epoch",
+              "order": 33
+            },
+            "fqdn": {
+              "type": "string",
+              "title": "Fully Qualified Domain Name",
+              "description": "the fully qualified domain name (fqdn) for the machine",
+              "order": 4
+            },
+            "fullScanStatus": {
+              "type": "string",
+              "title": "Full Scan Status",
+              "description": "The status set for the sensor for the full scan",
+              "order": 62
+            },
+            "fwStatus": {
+              "type": "string",
+              "title": "Fire Wall Status",
+              "description": "The status of the Personal Firewall Control feature. This field returns a value only if you have enabled Endpoint Controls.",
+              "order": 44
+            },
+            "groupId": {
+              "type": "string",
+              "title": "Group ID",
+              "description": "The identifier the Cybereason platform uses for the group to which the sensor is assigned",
+              "order": 72
+            },
+            "groupName": {
+              "type": "string",
+              "title": "Group Name",
+              "description": "The name for the group to which the sensor is assigned",
+              "order": 73
+            },
+            "groupStickiness": {
+              "type": "boolean",
+              "title": "Group Stickiness",
+              "description": "Indicates whether this sensor is automatically assigned back to the group based on an assignment rule",
+              "order": 74
+            },
+            "groupStickinessLabel": {
+              "type": "string",
+              "title": "Group Stickiness Label",
+              "description": "The method by which the sensor was assigned to the group",
+              "order": 76
+            },
+            "guid": {
+              "type": "string",
+              "title": "Global Unique ID",
+              "description": "The globally unique sensor identifier",
+              "order": 3
+            },
+            "internalIpAddress": {
+              "type": "string",
+              "title": "Internal IP Address",
+              "description": "The machine's internal IP address as identified by the sensor",
+              "order": 6
+            },
+            "isolated": {
+              "type": "boolean",
+              "title": "Isolated",
+              "description": "States whether the machine is isolated. Returns true if the machine is isolated",
+              "order": 12
+            },
+            "lastFullScheduleScanSuccessTime": {
+              "type": "integer",
+              "title": "Last Full Schedule Scan Success Time",
+              "description": "The time (in epoch) that the sensor last did a successful full scan",
+              "order": 64
+            },
+            "lastPylumInfoMsgUpdateTime": {
+              "type": "integer",
+              "title": "Last Quick Pylum Info Message Update Time",
+              "description": "The time (in epoch) that the last quick pylum info message updated",
+              "order": 66
+            },
+            "lastPylumUpdateTimestampMs": {
+              "type": "integer",
+              "title": "Last Quick Pylum Update Timestamp",
+              "description": "The time (in epoch) that the last pylum updated",
+              "order": 67
+            },
+            "lastQuickScheduleScanSuccessTime": {
+              "type": "integer",
+              "title": "Last Quick Schedule Scan Success Time",
+              "description": "The time (in epoch) that the sensor last did a successful quick scan",
+              "order": 65
+            },
+            "lastStatusAction": {
+              "type": "string",
+              "title": "Last Status Action",
+              "description": "The last action taken that changed the sensor status",
+              "order": 21
+            },
+            "lastUpgradeResult": {
+              "type": "string",
+              "title": "Last Upgrade Result",
+              "description": "The result of the last upgrade process",
+              "order": 55
+            },
+            "lastUpgradeSteps": {
+              "type": "array",
+              "title": "Last Upgrade Steps",
+              "description": "A list of step taken in the upgrade process. If there is a failure to upgrade the sensor, this list shows the failure",
+              "items": {
+                "$ref": "#/definitions/lastUpgradeSteps"
+              },
+              "order": 56
+            },
+            "machineName": {
+              "type": "string",
+              "title": "Machine Name",
+              "description": "The name of the machine",
+              "order": 5
+            },
+            "memoryUsage": {
+              "type": "integer",
+              "title": "Memory Usage",
+              "description": "The amount of RAM on the hosting computer used by the sensor",
+              "order": 36
+            },
+            "offlineTimeMS": {
+              "type": "integer",
+              "title": "Offline Time MS",
+              "description": "he last time (in epoch) that the sensor was offline",
+              "order": 17
+            },
+            "onlineTimeMS": {
+              "type": "integer",
+              "title": "Online Time MS",
+              "description": "The last time the sensor was seen online",
+              "order": 16
+            },
+            "organization": {
+              "type": "string",
+              "title": "Organization",
+              "description": "The organization name for the machine on which the sensor is installed",
+              "order": 51
+            },
+            "osType": {
+              "type": "string",
+              "title": "OS Type",
+              "description": "The operating system running on the machine",
+              "order": 29
+            },
+            "osVersionType": {
+              "type": "string",
+              "title": "OS Version Type",
+              "description": "collectionStatus",
+              "order": 30
+            },
+            "outdated": {
+              "type": "boolean",
+              "title": "Outdated",
+              "description": "States whether or not the sensor version is out of sync with the server version",
+              "order": 37
+            },
+            "pendingActions": {
+              "type": "array",
+              "title": "Pending Actions",
+              "description": "An array containing batch numbers for actions pending to run on the sensor",
+              "items": {
+                "type": "integer"
+              },
+              "order": 54
+            },
+            "policyId": {
+              "type": "string",
+              "title": "Policy ID",
+              "description": "The unique identifier the Cybereason platform uses for the policy assigned to the sensor",
+              "order": 70
+            },
+            "policyName": {
+              "type": "string",
+              "title": "Policy Name",
+              "description": "The name of the policy assigned to this sensor",
+              "order": 68
+            },
+            "powerShellStatus": {
+              "type": "string",
+              "title": "Power Shell Status",
+              "description": "The PowerShell Prevention mode",
+              "order": 41
+            },
+            "preventionStatus": {
+              "type": "string",
+              "title": "Prevention Status",
+              "description": "The Execution Prevention mode",
+              "order": 11
+            },
+            "privateServerIp": {
+              "type": "string",
+              "title": "Private Server IP",
+              "description": "The private IP address for the Detection server for the sensor",
+              "order": 27
+            },
+            "purgedSensors": {
+              "type": "boolean",
+              "title": "Purged Sensors",
+              "description": "Indicates whether this sensor was removed from the Sensors screen",
+              "order": 75
+            },
+            "pylumId": {
+              "type": "string",
+              "title": "Pylum ID",
+              "description": "The unique identifier assigned by Cybereason to the sensor",
+              "order": 2
+            },
+            "quickScanStatus": {
+              "type": "string",
+              "title": "Quick Scan Status",
+              "description": "The status set for the sensor for a quick scan",
+              "order": 63
+            },
+            "ransomwareStatus": {
+              "type": "string",
+              "title": "Ransomware Status",
+              "description": "The Anti-Ransomware mode",
+              "order": 10
+            },
+            "remoteShellStatus": {
+              "type": "string",
+              "title": "Remote Shell Status",
+              "description": "Whether or not the Remote Shell utility is enabled for the sensor. This field returns a value only if you have enabled Remote Shell for your Cybereason server",
+              "order": 42
+            },
+            "sensorArchivedByUser": {
+              "type": "string",
+              "title": "Sensor Archived By User",
+              "description": "The Cybereason user name for the user who archived the selected sensor",
+              "order": 23
+            },
+            "sensorId": {
+              "type": "string",
+              "title": "Sensor ID",
+              "description": "The unique identifier for a sensor",
+              "order": 1
+            },
+            "sensorLastUpdate": {
+              "type": "integer",
+              "title": "Sensor Last Update",
+              "description": "The last time (in epoch) that the sensor was updated",
+              "order": 61
+            },
+            "serialNumber": {
+              "type": "string",
+              "title": "Serial Number",
+              "description": "The serial number added for a device in the allowed devices section of the Endpoint Controls settings",
+              "order": 48
+            },
+            "serverId": {
+              "type": "string",
+              "title": "Server ID",
+              "description": "The unique identifier for the Detection server for the sensor",
+              "order": 25
+            },
+            "serverIp": {
+              "type": "string",
+              "title": "Server IP",
+              "description": "The IP address for the Detection server for the sensor",
+              "order": 26
+            },
+            "serverName": {
+              "type": "string",
+              "title": "Server Name",
+              "description": "The name of the server for the sensor",
+              "order": 24
+            },
+            "serviceStatus": {
+              "type": "string",
+              "title": "Service Status",
+              "description": "Indicates the current value of the Anti-Malware service",
+              "order": 15
+            },
+            "siteId": {
+              "type": "integer",
+              "title": "Machine Name",
+              "description": "The identifier for the sensor's site",
+              "order": 9
+            },
+            "siteName": {
+              "type": "string",
+              "title": "Site Name",
+              "description": "The name of the site for the sensor",
+              "order": 8
+            },
+            "staleTimeMS": {
+              "type": "integer",
+              "title": "Stale Time MS",
+              "description": "The time (in epoch) when the Sensor was classified as Stale",
+              "order": 18
+            },
+            "staticAnalysisDetectMode": {
+              "type": "string",
+              "title": "Static Analysis Detect Mode",
+              "description": "The value for the Artificial Intelligence Detect mode in the Anti-Malware settings",
+              "order": 58
+            },
+            "staticAnalysisPreventMode": {
+              "type": "string",
+              "title": "Static Analysis Prevent Mode",
+              "description": "The value for the Artificial Intelligence Prevent Mode in the Anti-Malware settings",
+              "order": 59
+            },
+            "status": {
+              "type": "string",
+              "title": "Status",
+              "description": "The status of the sensor",
+              "order": 14
+            },
+            "statusTimeMS": {
+              "type": "integer",
+              "title": "Status Time MS",
+              "description": "The last time (in epoch) when the sensor sent a status",
+              "order": 20
+            },
+            "upTime": {
+              "type": "integer",
+              "title": "Up Time",
+              "description": "The time the sensors have been in the UP state",
+              "order": 34
+            },
+            "usbStatus": {
+              "type": "string",
+              "title": "USB Status",
+              "description": "The status of the Device Control feature. This field returns a value only if you have enabled Endpoint Controls.",
+              "order": 43
+            },
+            "version": {
+              "type": "string",
+              "title": "Version",
+              "description": "The sensor version number",
+              "order": 32
+            }
+          },
+          "definitions": {
+            "lastUpgradeSteps": {
+              "type": "object",
+              "title": "lastUpgradeSteps",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "title": "Name",
+                  "description": "name of step",
+                  "order": 1
+                },
+                "startTime": {
+                  "type": "integer",
+                  "title": "Start Time",
+                  "description": "time in epoch that the step started",
+                  "order": 2
+                }
+              },
+              "required": [
+                "startTime"
+              ]
+            }
+          }
+        }
+      }
+    },
     "sensors": {
       "type": "object",
       "title": "sensors",
@@ -79,37 +797,25 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "type": "integer",
           "title": "Actions In Progress",
           "description": "The number of actions in progress (i.e. Not Resolved) on the machine",
-          "order": 59
-        },
-        "amModeOrigin": {
-          "type": "string",
-          "title": "Anti-Malware Mode Origin",
-          "description": "The source of the value for the Anti-Malware Signatures mode setting",
-          "order": 40
+          "order": 53
         },
         "amStatus": {
           "type": "string",
           "title": "Anti-Malware Status",
           "description": "The Anti-Malware installation status for the sensor",
-          "order": 39
+          "order": 38
         },
         "antiExploitStatus": {
           "type": "string",
           "title": "Anti Exploit Status",
           "description": "The status of the Exploit Prevention feature. This field returns a value only if you have enabled Exploit Prevention.",
-          "order": 47
-        },
-        "antiMalwareModeOrigin": {
-          "type": "string",
-          "title": "Anti Malware Mode Origin",
-          "description": "The source of the value for the Anti-Malware setting",
-          "order": 54
+          "order": 45
         },
         "antiMalwareStatus": {
           "type": "string",
           "title": "Anti Malware Status",
           "description": "The Anti-Malware prevention mode for the sensor",
-          "order": 53
+          "order": 50
         },
         "archiveTimeMs": {
           "type": "integer",
@@ -127,13 +833,13 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "type": "integer",
           "title": "AV DB Last Update Time",
           "description": "The time when the Anti-Malware Signatures database on the machine where the sensor is installed was last updated",
-          "order": 42
+          "order": 40
         },
         "avDbVersion": {
           "type": "string",
           "title": "AV DB Version",
           "description": "The version of the Anti-Malware Signatures database on the machine where the sensor is installed",
-          "order": 41
+          "order": 39
         },
         "collectionComponents": {
           "type": "array",
@@ -142,7 +848,7 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "string"
           },
-          "order": 73
+          "order": 60
         },
         "collectionStatus": {
           "type": "string",
@@ -160,61 +866,31 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "type": "boolean",
           "title": "Compliance",
           "description": "Indicates whether the current sensor settings match the policy settings",
-          "order": 82
-        },
-        "consoleVersion": {
-          "type": "string",
-          "title": "Console Version",
-          "description": "The version for the console for your Cybereason environment",
-          "order": 33
+          "order": 71
         },
         "cpuUsage": {
           "type": "number",
           "title": "CPU Usage",
           "description": "The amount of CPU used by the machine (expressed as a percentage)",
-          "order": 36
-        },
-        "criticalAsset": {
-          "type": "string",
-          "title": "Critical Asset",
-          "description": "The value assigned for the machine for the CRITICAL ASSET sensor tag",
-          "order": 64
-        },
-        "customTags": {
-          "type": "string",
-          "title": "Custom Tags",
-          "description": "A list of custom sensor tags assigned to the machine",
-          "order": 66
+          "order": 35
         },
         "deliveryTime": {
           "type": "integer",
           "title": "Delivery Time",
           "description": "The time (in epoch) when the last policy update was delivered to the sensor",
-          "order": 80
-        },
-        "department": {
-          "type": "string",
-          "title": "Department",
-          "description": "The value assigned to the machine for the DEPARTMENT sensor tag",
-          "order": 62
+          "order": 69
         },
         "deviceModel": {
           "type": "string",
           "title": "Device Model",
           "description": "The model added for a device in the allowed devices section of the Endpoint Controls settings",
-          "order": 51
-        },
-        "deviceType": {
-          "type": "string",
-          "title": "Device Type",
-          "description": "The value assigned to the machine for the DEVICE TYPE sensor tag",
-          "order": 65
+          "order": 49
         },
         "disconnected": {
           "type": "boolean",
           "title": "Disconnected",
           "description": "Indicates whether a sensor is currently disconnected",
-          "order": 68
+          "order": 57
         },
         "disconnectionTime": {
           "type": "integer",
@@ -226,19 +902,19 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Document Protection Mode",
           "description": "The mode set for the Document Protection mode",
-          "order": 49
+          "order": 47
         },
         "documentProtectionStatus": {
           "type": "string",
           "title": "Document Protection Status",
           "description": "The status for the Document Protection mode",
-          "order": 48
+          "order": 46
         },
         "exitReason": {
           "type": "string",
           "title": "Exit Reason",
           "description": "The reason the sensor service (minionhost.exe) stopped",
-          "order": 58
+          "order": 52
         },
         "externalIpAddress": {
           "type": "string",
@@ -250,7 +926,7 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "type": "integer",
           "title": "First Seen Time",
           "description": "The first time the machine was recognized. Timestamp values are returned in epoch",
-          "order": 34
+          "order": 33
         },
         "fqdn": {
           "type": "string",
@@ -262,37 +938,37 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Full Scan Status",
           "description": "The status set for the sensor for the full scan",
-          "order": 75
+          "order": 62
         },
         "fwStatus": {
           "type": "string",
           "title": "Fire Wall Status",
           "description": "The status of the Personal Firewall Control feature. This field returns a value only if you have enabled Endpoint Controls.",
-          "order": 46
+          "order": 44
         },
         "groupId": {
           "type": "string",
           "title": "Group ID",
           "description": "The identifier the Cybereason platform uses for the group to which the sensor is assigned",
-          "order": 83
+          "order": 72
         },
         "groupName": {
           "type": "string",
           "title": "Group Name",
           "description": "The name for the group to which the sensor is assigned",
-          "order": 84
+          "order": 73
         },
         "groupStickiness": {
           "type": "boolean",
           "title": "Group Stickiness",
           "description": "Indicates whether this sensor is automatically assigned back to the group based on an assignment rule",
-          "order": 85
+          "order": 74
         },
         "groupStickinessLabel": {
           "type": "string",
           "title": "Group Stickiness Label",
           "description": "The method by which the sensor was assigned to the group",
-          "order": 87
+          "order": 76
         },
         "guid": {
           "type": "string",
@@ -316,13 +992,25 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "type": "integer",
           "title": "Last Full Schedule Scan Success Time",
           "description": "The time (in epoch) that the sensor last did a successful full scan",
-          "order": 77
+          "order": 64
+        },
+        "lastPylumInfoMsgUpdateTime": {
+          "type": "integer",
+          "title": "Last Quick Pylum Info Message Update Time",
+          "description": "The time (in epoch) that the last quick pylum info message updated",
+          "order": 66
+        },
+        "lastPylumUpdateTimestampMs": {
+          "type": "integer",
+          "title": "Last Quick Pylum Update Timestamp",
+          "description": "The time (in epoch) that the last pylum updated",
+          "order": 67
         },
         "lastQuickScheduleScanSuccessTime": {
           "type": "integer",
           "title": "Last Quick Schedule Scan Success Time",
           "description": "The time (in epoch) that the sensor last did a successful quick scan",
-          "order": 78
+          "order": 65
         },
         "lastStatusAction": {
           "type": "string",
@@ -334,22 +1022,16 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Last Upgrade Result",
           "description": "The result of the last upgrade process",
-          "order": 61
+          "order": 55
         },
         "lastUpgradeSteps": {
           "type": "array",
           "title": "Last Upgrade Steps",
           "description": "A list of step taken in the upgrade process. If there is a failure to upgrade the sensor, this list shows the failure",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/lastUpgradeSteps"
           },
-          "order": 67
-        },
-        "location": {
-          "type": "string",
-          "title": "Location",
-          "description": "The value assigned for this machine for the LOCATION sensor tag",
-          "order": 63
+          "order": 56
         },
         "machineName": {
           "type": "string",
@@ -361,7 +1043,7 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "type": "integer",
           "title": "Memory Usage",
           "description": "The amount of RAM on the hosting computer used by the sensor",
-          "order": 37
+          "order": 36
         },
         "offlineTimeMS": {
           "type": "integer",
@@ -379,13 +1061,7 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Organization",
           "description": "The organization name for the machine on which the sensor is installed",
-          "order": 55
-        },
-        "organizationalUnit": {
-          "type": "string",
-          "title": "Organizational Unit",
-          "description": "The name of the organization unit taken from the Active Directory on the machine on which the sensor is installed",
-          "order": 52
+          "order": 51
         },
         "osType": {
           "type": "string",
@@ -403,7 +1079,7 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "type": "boolean",
           "title": "Outdated",
           "description": "States whether or not the sensor version is out of sync with the server version",
-          "order": 38
+          "order": 37
         },
         "pendingActions": {
           "type": "array",
@@ -412,31 +1088,25 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "integer"
           },
-          "order": 60
+          "order": 54
         },
         "policyId": {
           "type": "string",
           "title": "Policy ID",
           "description": "The unique identifier the Cybereason platform uses for the policy assigned to the sensor",
-          "order": 81
+          "order": 70
         },
         "policyName": {
           "type": "string",
           "title": "Policy Name",
           "description": "The name of the policy assigned to this sensor",
-          "order": 79
+          "order": 68
         },
         "powerShellStatus": {
           "type": "string",
           "title": "Power Shell Status",
           "description": "The PowerShell Prevention mode",
-          "order": 43
-        },
-        "preventionError": {
-          "type": "string",
-          "title": "Prevention Error",
-          "description": "The error received for prevention by the sensor",
-          "order": 57
+          "order": 41
         },
         "preventionStatus": {
           "type": "string",
@@ -450,17 +1120,11 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "description": "The private IP address for the Detection server for the sensor",
           "order": 27
         },
-        "proxyAddress": {
-          "type": "string",
-          "title": "proxy Address",
-          "description": "The address for the Proxy server used by this sensor",
-          "order": 56
-        },
         "purgedSensors": {
           "type": "boolean",
           "title": "Purged Sensors",
           "description": "Indicates whether this sensor was removed from the Sensors screen",
-          "order": 86
+          "order": 75
         },
         "pylumId": {
           "type": "string",
@@ -472,7 +1136,7 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Quick Scan Status",
           "description": "The status set for the sensor for a quick scan",
-          "order": 76
+          "order": 63
         },
         "ransomwareStatus": {
           "type": "string",
@@ -484,7 +1148,7 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Remote Shell Status",
           "description": "Whether or not the Remote Shell utility is enabled for the sensor. This field returns a value only if you have enabled Remote Shell for your Cybereason server",
-          "order": 44
+          "order": 42
         },
         "sensorArchivedByUser": {
           "type": "string",
@@ -502,13 +1166,13 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "type": "integer",
           "title": "Sensor Last Update",
           "description": "The last time (in epoch) that the sensor was updated",
-          "order": 74
+          "order": 61
         },
         "serialNumber": {
           "type": "string",
           "title": "Serial Number",
           "description": "The serial number added for a device in the allowed devices section of the Endpoint Controls settings",
-          "order": 50
+          "order": 48
         },
         "serverId": {
           "type": "string",
@@ -556,25 +1220,13 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "type": "string",
           "title": "Static Analysis Detect Mode",
           "description": "The value for the Artificial Intelligence Detect mode in the Anti-Malware settings",
-          "order": 69
-        },
-        "staticAnalysisDetectModeOrigin": {
-          "type": "string",
-          "title": "Static Analysis Detect Mode Origin",
-          "description": "The source of the value for the Artificial Intelligence Detect mode setting",
-          "order": 70
+          "order": 58
         },
         "staticAnalysisPreventMode": {
           "type": "string",
           "title": "Static Analysis Prevent Mode",
           "description": "The value for the Artificial Intelligence Prevent Mode in the Anti-Malware settings",
-          "order": 71
-        },
-        "staticAnalysisPreventModeOrigin": {
-          "type": "string",
-          "title": "Static Analysis Prevent Mode Origin",
-          "description": "The source of the value for the Artificial Intelligence Prevent mode setting",
-          "order": 72
+          "order": 59
         },
         "status": {
           "type": "string",
@@ -592,19 +1244,42 @@ class GetSensorOutput(insightconnect_plugin_runtime.Output):
           "type": "integer",
           "title": "Up Time",
           "description": "The time the sensors have been in the UP state",
-          "order": 35
+          "order": 34
         },
         "usbStatus": {
           "type": "string",
           "title": "USB Status",
           "description": "The status of the Device Control feature. This field returns a value only if you have enabled Endpoint Controls.",
-          "order": 45
+          "order": 43
         },
         "version": {
           "type": "string",
           "title": "Version",
           "description": "The sensor version number",
           "order": 32
+        }
+      },
+      "definitions": {
+        "lastUpgradeSteps": {
+          "type": "object",
+          "title": "lastUpgradeSteps",
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Name",
+              "description": "name of step",
+              "order": 1
+            },
+            "startTime": {
+              "type": "integer",
+              "title": "Start Time",
+              "description": "time in epoch that the step started",
+              "order": 2
+            }
+          },
+          "required": [
+            "startTime"
+          ]
         }
       }
     }
