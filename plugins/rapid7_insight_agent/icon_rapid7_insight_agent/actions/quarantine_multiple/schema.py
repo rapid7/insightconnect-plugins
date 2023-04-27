@@ -14,6 +14,7 @@ class Input:
     
 
 class Output:
+    ALL_OPERATIONS_SUCCEEDED = "all_operations_succeeded"
     FAILURE = "failure"
     SUCCESS = "success"
     
@@ -66,6 +67,12 @@ class QuarantineMultipleOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "all_operations_succeeded": {
+      "type": "boolean",
+      "title": "All Operations Succeeded",
+      "description": "Informs a user any operations failed the (un)quarantine operations",
+      "order": 3
+    },
     "failure": {
       "type": "array",
       "title": "Unsuccessful (Un)Quarantine",

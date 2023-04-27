@@ -71,6 +71,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
+|all_operations_succeeded|boolean|False|Informs a user any operations failed the (un)quarantine operations|True|
 |failure|[]string|False|List of unsuccessfully quarantined hosts|["abcdef123"]|
 |success|[]string|False|List of successfully quarantined hosts|["abcdef123"]|
 
@@ -83,7 +84,8 @@ Example output:
   ],
   "success":[
     "abcdef123"
-  ]
+  ],
+  "all_operations_successful": true
 }
 ```
 
