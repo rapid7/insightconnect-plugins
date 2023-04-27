@@ -6,7 +6,8 @@
          false,
          {
             "success": [],
-            "failure": ["agent_id_bad"]
+            "failure": ["agent_id_bad"],
+            "all_operations_succeeded": false
          }
       ],
       [
@@ -15,7 +16,8 @@
          true,
          {
             "success": [],
-            "failure": ["agent_id_bad"]
+            "failure": ["agent_id_bad"],
+            "all_operations_succeeded": false
          }
       ]
    ]
