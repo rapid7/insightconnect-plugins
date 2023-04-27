@@ -52,6 +52,12 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
+{
+  "api_key": "12345678-ABCD-1234-ABCD-123456789012:ABCDEFGH-1234-ABCD-1234-ABCDEFGHIJKL:12345678901234567890123456789012345678901234",
+  "api_url": "https://tmv1-mock.trendmicro.com",
+  "app_name": "Rapid7-InsightConnect",
+  "verify_ssl": true
+}
 ```
 
 ## Technical Details
@@ -72,6 +78,10 @@ This action attaches a note to a workbench alert.
 Example input:
 
 ```
+{
+  "alert_id": "WB-14-20190709-00003",
+  "content": "Suspected False Positive, please verify"
+}
 ```
 
 ##### Output
@@ -100,6 +110,9 @@ This action adds an email address, file SHA-1, domain, IP address, or URL to the
 Example input:
 
 ```
+{
+  "block_object": []
+}
 ```
 
 ##### Output
@@ -126,6 +139,9 @@ This action adds domains, file SHA-1 values, IP addresses, or URLs to the Except
 Example input:
 
 ```
+{
+  "block_object": []
+}
 ```
 
 ##### Output
@@ -152,6 +168,9 @@ This action adds domains, file SHA-1/SHA-256 values, IP addresses, senderMailAdd
 Example input:
 
 ```
+{
+  "suspicious_block_object": []
+}
 ```
 
 ##### Output
@@ -178,6 +197,9 @@ This action collects a file from one or more endpoints and then sends the files 
 Example input:
 
 ```
+{
+  "collect_files": []
+}
 ```
 
 ##### Output
@@ -204,6 +226,9 @@ This action deletes a message from a mailbox.
 Example input:
 
 ```
+{
+  "email_identifiers": []
+}
 ```
 
 ##### Output
@@ -230,6 +255,9 @@ This action signs the user out of all active application and browser sessions, a
 Example input:
 
 ```
+{
+  "account_identifiers": []
+}
 ```
 
 ##### Output
@@ -258,6 +286,11 @@ This action downloads the analysis result for an object submitted to sandbox for
 Example input:
 
 ```
+{
+  "id": "6345645",
+  "poll": true,
+  "poll_time_sec": true
+}
 ```
 
 ##### Output
@@ -286,6 +319,11 @@ This action downloads the investigation package based on submission ID.
 Example input:
 
 ```
+{
+  "id": "6345645",
+  "poll": true,
+  "poll_time_sec": true
+}
 ```
 
 ##### Output
@@ -314,6 +352,11 @@ This action updates the status of a workbench alert.
 Example input:
 
 ```
+{
+  "id": "WB-14-20190709-00003",
+  "if_match": "d41d8cd98f00b204e9800998ecf8427e",
+  "status": "New"
+}
 ```
 
 ##### Output
@@ -340,6 +383,9 @@ This action allows the user to sign in to new application and browser sessions. 
 Example input:
 
 ```
+{
+  "account_identifiers": []
+}
 ```
 
 ##### Output
@@ -366,6 +412,9 @@ This action displays information about workbench alerts that match the specified
 Example input:
 
 ```
+{
+  "alert_id": "WB-20837-20221111-0000"
+}
 ```
 
 ##### Output
@@ -394,6 +443,10 @@ This action displays information about workbench alerts that match the specified
 Example input:
 
 ```
+{
+  "end_date_time": "endDateTime=2020-06-15T12:00:00Z",
+  "start_date_time": "startDateTime=2020-06-15T10:00:00Z"
+}
 ```
 
 ##### Output
@@ -422,6 +475,10 @@ This action retrieves information about a specific endpoint.
 Example input:
 
 ```
+{
+  "endpoint": "127.127.127.127",
+  "query_op": " or "
+}
 ```
 
 ##### Output
@@ -503,6 +560,9 @@ This action retrieves the status of a sandbox analysis submission.
 Example input:
 
 ```
+{
+  "task_id": "02384"
+}
 ```
 
 ##### Output
@@ -540,6 +600,11 @@ This action downloads the suspicious object list associated to the specified obj
 Example input:
 
 ```
+{
+  "id": "6345645",
+  "poll": true,
+  "poll_time_sec": true
+}
 ```
 
 ##### Output
@@ -587,6 +652,11 @@ This action retrieves an object containing the results of a response task in JSO
 Example input:
 
 ```
+{
+  "poll": true,
+  "poll_time_sec": true,
+  "task_id": 3456346
+}
 ```
 
 ##### Output
@@ -634,6 +704,9 @@ This action disconnects an endpoint from the network (but allows communication w
 Example input:
 
 ```
+{
+  "endpoint_identifiers": []
+}
 ```
 
 ##### Output
@@ -660,6 +733,9 @@ This action moves a message from a mailbox to the quarantine folder.
 Example input:
 
 ```
+{
+  "email_identifiers": []
+}
 ```
 
 ##### Output
@@ -686,6 +762,9 @@ This action removes an email address, file SHA-1, domain, IP address, or URL tha
 Example input:
 
 ```
+{
+  "block_object": []
+}
 ```
 
 ##### Output
@@ -712,6 +791,9 @@ This action removes domains, file SHA-1 values, IP addresses, or URLs from the E
 Example input:
 
 ```
+{
+  "block_object": []
+}
 ```
 
 ##### Output
@@ -738,6 +820,9 @@ This action removes domains, file SHA-1 values, IP addresses, or URLs from the S
 Example input:
 
 ```
+{
+  "block_object": []
+}
 ```
 
 ##### Output
@@ -764,6 +849,9 @@ This action signs the user out of all active application and browser sessions, a
 Example input:
 
 ```
+{
+  "account_identifiers": []
+}
 ```
 
 ##### Output
@@ -790,6 +878,9 @@ This action restores a quarantined email message.
 Example input:
 
 ```
+{
+  "email_identifiers": []
+}
 ```
 
 ##### Output
@@ -816,6 +907,9 @@ This action restores network connectivity to an endpoint that applied the isolat
 Example input:
 
 ```
+{
+  "endpoint_identifiers": []
+}
 ```
 
 ##### Output
@@ -842,6 +936,9 @@ This action signs the user out of all active application and browser sessions. S
 Example input:
 
 ```
+{
+  "account_identifiers": []
+}
 ```
 
 ##### Output
@@ -871,6 +968,12 @@ This action submits a file to the sandbox for analysis (Note. For more informati
 Example input:
 
 ```
+{
+  "archive_password": 1234,
+  "arguments": "IFMlYztbQA==",
+  "document_password": 1234,
+  "file": "file binary"
+}
 ```
 
 ##### Output
@@ -899,6 +1002,9 @@ This action submits URLs to the sandbox for analysis. You can submit a maximum o
 Example input:
 
 ```
+{
+  "url": []
+}
 ```
 
 ##### Output
@@ -925,6 +1031,9 @@ This action terminates a process that is running on an endpoint.
 Example input:
 
 ```
+{
+  "process_identifiers": []
+}
 ```
 
 ##### Output
@@ -955,6 +1064,11 @@ This trigger polls information about workbench alerts that match the specified c
 Example input:
 
 ```
+{
+  "end_date_time": "endDateTime=2023-06-15T12:00:00Z",
+  "interval": 1800,
+  "start_date_time": "startDateTime=2020-06-15T10:00:00Z"
+}
 ```
 
 ##### Output
@@ -985,6 +1099,12 @@ This trigger polls the suspicious object list associated to the specified object
 Example input:
 
 ```
+{
+  "id": "6345645",
+  "interval": 1800,
+  "poll": true,
+  "poll_time_sec": true
+}
 ```
 
 ##### Output
@@ -997,10 +1117,6 @@ Example output:
 
 ```
 ```
-
-### Tasks
-
-_This plugin does not contain any tasks._
 
 ### Custom Output Types
 
