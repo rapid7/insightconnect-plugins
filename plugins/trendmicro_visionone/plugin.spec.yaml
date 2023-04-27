@@ -25,7 +25,7 @@ tags:
 - vision_one
 hub_tags:
   use_cases: [vulnerability_management, cloud_security, remediation_management, threat_detection_and_response ]
-  keywords: [vulnerability scanning, vulnerability management, remediation, virtual patching, intrusion, detection, prevention, response, trend micro, vision one, trendmicro, visionone]
+  keywords: [remediation, detection]
   features: []
 
 types:
@@ -687,14 +687,14 @@ actions:
         type: "[]account_identifiers"
         description: User Account Identifiers containing account name and description
         required: true
-        example: List of account identifier objects in proper JSON syntax
+        example: []
     output:
       multi_response:
         title: Multi Response
         description: Enable Account Response Array
         type: "[]multi_response"
         required: true
-        example: A response object consisting of status and task_id
+        example: []
   disable_account:
     title: Disable Account
     description: Signs the user out of all active application and browser sessions, and prevents the user from signing in any new session. Supported IAM systems - Azure AD and Active Directory (on-premises)
@@ -704,14 +704,14 @@ actions:
         type: "[]account_identifiers"
         description: User Account Identifiers containing account name and description
         required: true
-        example: List of account identifier objects in proper JSON syntax
+        example: []
     output:
       multi_response:
         title: Multi Response
         description: Disable Account Response Array
         type: "[]multi_response"
         required: true
-        example: A response object consisting of status and task_id
+        example: []
   sign_out_account:
     title: Sign out Account
     description: Signs the user out of all active application and browser sessions. Supported IAM systems - Azure AD
@@ -721,14 +721,14 @@ actions:
         type: "[]account_identifiers"
         description: User Account Identifiers containing account name and description
         required: true
-        example: List of account identifier objects in proper JSON syntax
+        example: []
     output:
       multi_response:
         title: Multi Response
         description: Sign out Account Response Array
         type: "[]multi_response"
         required: true
-        example: A response object consisting of status and task_id
+        example: []
   reset_password_account:
     title: Reset Password Account
     description: Signs the user out of all active application and browser sessions, and forces the user to create a new password during the next sign-in attempt. Supported IAM systems - Azure AD and Active Directory (on-premises)
@@ -738,14 +738,14 @@ actions:
         type: "[]account_identifiers"
         description: User Account Identifiers containing account name and description
         required: true
-        example: List of account identifier objects in proper JSON syntax
+        example: []
     output:
       multi_response:
         title: Multi Response
         description: Reset Password Account Response Array
         type: "[]multi_response"
         required: true
-        example: A response object consisting of status and task_id
+        example: []
   quarantine_email_message:
     title: Quarantine Email Message
     description: Moves a message from a mailbox to the quarantine folder
@@ -755,14 +755,14 @@ actions:
         type: "[]email_identifiers"
         description: Email Identifiers consisting of message id, mailbox and description
         required: true
-        example: List of email identifiers in JSON syntax
+        example: []
     output:
       multi_response:
         title: Multi Response
         description: Quarantine Email Message Response Array
         type: "[]multi_response"
         required: true
-        example: A response object consisting of status and task_id
+        example: []
   delete_email_message:
     title: Delete Email Message
     description: Deletes a message from a mailbox
@@ -772,14 +772,14 @@ actions:
         type: "[]email_identifiers"
         description: Email Identifiers consisting of message id, mailbox and description
         required: true
-        example: List of email identifiers in JSON syntax
+        example: []
     output:
       multi_response:
         title: Multi Response
         description: Delete Email Message Response Array
         type: "[]multi_response"
         required: true
-        example: A response object consisting of status and task_id
+        example: []
   restore_email_message:
     title: Restore Email Message
     description: Restores a quarantined email message
@@ -789,14 +789,14 @@ actions:
         type: "[]email_identifiers"
         description: Email Identifiers consisting of message id, mailbox and description
         required: true
-        example: List of email identifiers in JSON syntax
+        example: []
     output:
       multi_response:
         title: Multi Response
         description: Delete Email Message Response Array
         type: "[]multi_response"
         required: true
-        example: A response object consisting of status and task_id
+        example: []
   isolate_endpoint:
     title: Isolate Endpoint
     description: Disconnects an endpoint from the network (but allows communication with the managing Trend Micro product)
@@ -806,14 +806,14 @@ actions:
         type: "[]endpoint_identifiers"
         description: Endpoint Identifiers consisting of endpoint(hostname or agentGuid) and description
         required: true
-        example: List of endpoint identifier objects in proper JSON syntax
+        example: []
     output:
       multi_response:
         title: Multi Response
         description: Isolate Endpoint Response Array
         type: "[]multi_response"
         required: true
-        example: A response object consisting of status and task_id
+        example: []
   restore_endpoint:
     title: Restore Endpoint
     description: Restores network connectivity to an endpoint that applied the isolate endpoint action
@@ -823,14 +823,14 @@ actions:
         type: "[]endpoint_identifiers"
         description: Endpoint Identifiers consisting of endpoint(hostname or agentGuid) and description
         required: true
-        example: List of endpoint identifier objects in proper JSON syntax
+        example: []
     output:
       multi_response:
         title: Multi Response
         description: Restore Endpoint Response Array
         type: "[]multi_response"
         required: true
-        example: A response object consisting of status and task_id
+        example: []
   add_to_exception_list:
     title: Add to Exception List
     description: Adds domains, file SHA-1 values, IP addresses, or URLs to the Exception List and prevents these objects from being added to the Suspicious Object List
@@ -840,14 +840,14 @@ actions:
         type: "[]block_object"
         description: Object object made up of type, value and description
         required: true
-        example: Block object consiting of object_type, object_value, description
+        example: []
     output:
       multi_response:
         title: Multi Response
         description: Add To Exception List Response Array
         type: "[]multi_response"
         required: true
-        example: A response object consisting of status and task_id
+        example: []
   remove_from_exception_list:
     title: Remove from Exception List
     description: Removes domains, file SHA-1 values, IP addresses, or URLs from the Exception List
@@ -857,14 +857,14 @@ actions:
         type: "[]block_object"
         description: Object object made up of type, value and description
         required: true
-        example: Block object consiting of object_type, object_value, description
+        example: []
     output:
       multi_response:
         title: Multi Response
         description: Remove From Exception List Response Array
         type: "[]multi_response"
         required: true
-        example: A response object consisting of status and task_id
+        example: []
   remove_from_block_list:
     title: Remove from Block List
     description: Removes an email address, file SHA-1, domain, IP address, or URL that was added to the Suspicious Object List using the Add to block list action
@@ -874,14 +874,14 @@ actions:
         type: "[]block_object"
         description: Object object made up of type, value and description
         required: true
-        example: Block object consiting of object_type, object_value, description
+        example: []
     output:
       multi_response:
         title: Multi Response
         description: Remove From Block List Response Array
         type: "[]multi_response"
         required: true
-        example: A response object consisting of status and task_id
+        example: []
   add_to_suspicious_list:
     title: Add to Suspicious List
     description: Adds domains, file SHA-1/SHA-256 values, IP addresses, senderMailAddress, or URLs to the Block Object List
@@ -891,14 +891,14 @@ actions:
         type: "[]suspicious_block_object"
         description: Suspicious Object object made up of type, value and scan_action, risk_level and days_to_expiration
         required: true
-        example: An object consisting of object_type, object_value, scan_action, risk_level and days_to_expiration
+        example: []
     output:
       multi_response:
         title: Multi Response
         description: Add To Exception List Response Array
         type: "[]multi_response"
         required: true
-        example: A response object consisting of status and task_id
+        example: []
   remove_from_suspicious_list:
     title: Remove from Suspicious List
     description: Removes domains, file SHA-1 values, IP addresses, or URLs from the Suspicious Object List
@@ -908,14 +908,14 @@ actions:
         type: "[]block_object"
         description: Object object made up of type, value and description
         required: true
-        example: Block object consiting of object_type, object_value, description
+        example: []
     output:
       multi_response:
         title: Multi Response
         description: Add To Exception List Response Array
         type: "[]multi_response"
         required: true
-        example: A response object consisting of status and task_id
+        example: []
   get_endpoint_data:
     title: Get Endpoint Data
     description: Retrieves information about a specific endpoint
@@ -952,14 +952,14 @@ actions:
         type: "[]process_identifiers"
         description: Process Identifiers consisting of endpoint(hostname or agentGuid), filesha1, filename(optional) and description(optional)
         required: true
-        example: List of process identifier objects in proper JSON syntax
+        example: []
     output:
       multi_response:
         title: Multi Response
         description: Terminate Process Response Array
         type: "[]multi_response"
         required: true
-        example: A response object consisting of status and task_id
+        example: []
   get_sandbox_submission_status:
     title: Get Sandbox Submission Status
     description: Retrieves the status of a sandbox analysis submission
@@ -1132,14 +1132,14 @@ actions:
         type: "[]collect_files"
         description: Collect file input JSON containing endpoint, file path and description
         required: true
-        example: JSON list object containing necessary fields
+        example: []
     output:
       multi_response:
         title: Multi Response
         description: Add To Block List Response Array
         type: "[]multi_response"
         required: true
-        example: A response object consisting of status and task_id
+        example: []
   get_task_result:
     title: Get Task Result
     description: Retrieves an object containing the results of a response task in JSON format
@@ -1582,14 +1582,14 @@ actions:
         type: "[]block_object"
         description: Object object made up of type, value and description
         required: true
-        example: Block object consiting of object_type, object_value, description
+        example: []
     output:
       multi_response:
         title: Multi Response
         description: Add To Block List Response Array
         type: "[]multi_response"
         required: true
-        example: A response object consisting of status and task_id
+        example: []
   submit_urls_to_sandbox:
     title: Submit URLs to Sandbox
     description: Submits URLs to the sandbox for analysis. You can submit a maximum of 10 URLs per request
@@ -1599,7 +1599,7 @@ actions:
         type: "[]string"
         description: URL(s) to be submitted, formated as bracket array separated by comma
         required: true
-        example: https://www.trendmicro.com
+        example: []
     output:
       submit_urls_resp:
         title: Submit URLs Response
