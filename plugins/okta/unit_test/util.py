@@ -153,7 +153,7 @@ class Util:
         if url == "https://example.com/api/v1/users/user11@example.com" and method == "GET":
             return MockResponse(404)
 
-        if url == "https://example.com/api/v1/users/user1@example.com" and method == "DELETE":
+        if url == "https://example.com/api/v1/users/00u1m1qwertYUiopA0S1" and method == "DELETE":
             return MockResponse(204)
 
         if url == "https://example.com/api/v1/users/00u1m1qwertYUiopA0S1/lifecycle/deactivate":
