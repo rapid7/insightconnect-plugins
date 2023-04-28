@@ -1,0 +1,38 @@
+{
+  "zone": {
+    "type": "IP",
+    "id": "12345",
+    "name": "Test IP Zone",
+    "status": "ACTIVE",
+    "usage": "BLOCKLIST",
+    "created": "2020-11-01T00:34:19.000Z",
+    "lastUpdated": "2023-04-25T08:28:34.000Z",
+    "system": false,
+    "gateways": [
+      {
+        "type": "RANGE",
+        "value": "1.2.3.4-1.2.3.4"
+      }
+    ],
+    "links": {
+      "self": {
+        "href": "https://example.com",
+        "hints": {
+          "allow": [
+            "GET",
+            "PUT",
+            "DELETE"
+          ]
+        }
+      },
+      "deactivate": {
+        "href": "https://example.com",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      }
+    }
+  }
+}
