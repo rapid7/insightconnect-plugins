@@ -95,6 +95,12 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "location": "https://api.xdr.trendmicro.com/v3.0/workbench/alerts/WB-20837-20221111-00000/notes/684770",
+  "note_id": "684770",
+  "result_code": "SUCCESS"
+}
 ```
 
 #### Add to Block List
@@ -124,6 +130,19 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "multi_response": [
+    {
+      "status": 202,
+      "task_id": "00002134"
+    },
+    {
+      "status": 202,
+      "task_id": "00002135"
+    }
+  ]
+}
 ```
 
 #### Add to Exception List
@@ -153,6 +172,19 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "multi_response": [
+    {
+      "status": 201,
+      "task_id": "None"
+    },
+    {
+      "status": 201,
+      "task_id": "None"
+    }
+  ]
+}
 ```
 
 #### Add to Suspicious List
@@ -182,6 +214,19 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "multi_response": [
+    {
+      "status": 201,
+      "task_id": "None"
+    },
+    {
+      "status": 201,
+      "task_id": "None"
+    }
+  ]
+}
 ```
 
 #### Collect File
@@ -211,6 +256,15 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "multi_response": [
+    {
+      "status": 202,
+      "task_id": "00002195"
+    }
+  ]
+}
 ```
 
 #### Delete Email Message
@@ -240,6 +294,15 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "multi_response": [
+    {
+      "status": 202,
+      "task_id": "00002127"
+    }
+  ]
+}
 ```
 
 #### Disable Account
@@ -269,6 +332,15 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "multi_response": [
+    {
+      "status": 202,
+      "task_id": "00002129"
+    }
+  ]
+}
 ```
 
 #### Download Sandbox Analysis Result
@@ -302,6 +374,10 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "file": "<<referenced:bigdata>>"
+}
 ```
 
 #### Download Sandbox Investigation Package
@@ -335,6 +411,10 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "file": "<<referenced:bigdata>>"
+}
 ```
 
 #### Edit Alert Status
@@ -368,6 +448,10 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "result_code": "SUCCESS"
+}
 ```
 
 #### Enable Account
@@ -397,6 +481,15 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "multi_response": [
+    {
+      "status": 202,
+      "task_id": "00002148"
+    }
+  ]
+}
 ```
 
 #### Get Alert Details
@@ -427,6 +520,13 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "alert_details": {
+    "alert": "<<referenced:bigdata>>"
+  },
+  "etag": "\"0eaa4c39854bd42dcd9f09d5952c4e63c\""
+}
 ```
 
 #### Get Alert List
@@ -459,6 +559,11 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "alerts": "<<referenced:bigdata>>",
+  "total_count": 9
+}
 ```
 
 #### Get Endpoint Data
@@ -490,6 +595,10 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "endpoint_data": []
+}
 ```
 
 #### Get Exception List
@@ -509,6 +618,17 @@ _This action does not contain any inputs._
 Example output:
 
 ```
+{
+  "$success": true,
+  "exception_objects": [
+    {
+      "description": "ip exception",
+      "last_modified_date_time": "2023-04-14T06:53:59Z",
+      "type": "ip",
+      "value": "1.6.6.3"
+    }
+  ]
+}
 ```
 
 #### Get Sandbox Analysis Result
@@ -526,6 +646,11 @@ This action retrieves the sandbox analysis results.
 Example input:
 
 ```
+{
+  "poll": false,
+  "poll_time_sec": 0,
+  "report_id": "90406723-2b29-4e85-b0b2-ba58af8f63df"
+}
 ```
 
 ##### Output
@@ -545,6 +670,22 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "analysis_completion_date_time": "2023-04-13T19:19:31Z",
+  "arguments": "Tm9uZQ==",
+  "detection_names": [],
+  "digest": {
+    "md5": "098f6bcd4621d373cade4e832627b4f6",
+    "sha1": "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3",
+    "sha256": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
+  },
+  "id": "90406723-2b29-4e85-b0b2-ba58af8f63df",
+  "risk_level": "noRisk",
+  "threat_types": [],
+  "true_file_type": "Batch File",
+  "type": "file"
+}
 ```
 
 #### Get Sandbox Submission Status
@@ -583,6 +724,22 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "action": "analyzeFile",
+  "arguments": "YXNkaDEyMzE5XzEyOQ==",
+  "created_date_time": "2023-03-11T01:46:11Z",
+  "digest": {
+    "md5": "65a8e27d8879283831b664bd8b7f0ad4",
+    "sha1": "0a0a9f2a6772942557ab5355d76af442f8f65e01",
+    "sha256": "dffd6021bb2bd5b0af676290809ec3a53191dd81c7f70a4b28688a362182986f"
+  },
+  "id": "5c31e065-d25d-476e-9cf8-783812eb1596",
+  "is_cached": false,
+  "last_action_date_time": "2023-03-11T01:46:51Z",
+  "resource_location": "https://api.xdr.trendmicro.com/v3.0/sandbox/analysisResults/5c31e065-d25d-476e-9cf8-783812eb1596",
+  "status": "succeeded"
+}
 ```
 
 #### Get Sandbox Suspicious List
@@ -616,6 +773,19 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "sandbox_suspicious_list_resp": [
+    {
+      "analysis_completion_date_time": "2023-01-11T22:40:52Z",
+      "expired_date_time": "2023-02-10T22:40:52Z",
+      "risk_level": "high",
+      "root_sha1": "ccc8c28226224755091a3462ff7704e350f2114b",
+      "type": "fileSha1",
+      "value": "0d8b8f0baf22e65a80148bcebaef082ef08932d2"
+    }
+  ]
+}
 ```
 
 #### Get Suspicious List
@@ -635,6 +805,21 @@ _This action does not contain any inputs._
 Example output:
 
 ```
+{
+  "$success": true,
+  "suspicious_objects": [
+    {
+      "description": "",
+      "expired_date_time": "2023-05-14T06:55:29Z",
+      "in_exception_list": false,
+      "last_modified_date_time": "2023-04-14T06:55:29Z",
+      "risk_level": "high",
+      "scan_action": "log",
+      "type": "ip",
+      "value": "6.6.6.3"
+    }
+  ]
+}
 ```
 
 #### Get Task Result
@@ -689,6 +874,16 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "account": "User Userio",
+  "action": "resetPassword",
+  "created_date_time": "2023-04-17T20:12:38Z",
+  "description": "Rapid 7 Reset account password UU",
+  "id": "00002194",
+  "last_action_date_time": "2023-04-17T20:12:46Z",
+  "status": "succeeded"
+}
 ```
 
 #### Isolate Endpoint
@@ -718,6 +913,15 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "multi_response": [
+    {
+      "status": 202,
+      "task_id": "00002126"
+    }
+  ]
+}
 ```
 
 #### Quarantine Email Message
@@ -747,6 +951,15 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "multi_response": [
+    {
+      "status": 202,
+      "task_id": "00002153"
+    }
+  ]
+}
 ```
 
 #### Remove from Block List
@@ -776,6 +989,19 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "multi_response": [
+    {
+      "status": 202,
+      "task_id": "00002141"
+    },
+    {
+      "status": 202,
+      "task_id": "00002142"
+    }
+  ]
+}
 ```
 
 #### Remove from Exception List
@@ -805,6 +1031,15 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "multi_response": [
+    {
+      "status": 204,
+      "task_id": "None"
+    }
+  ]
+}
 ```
 
 #### Remove from Suspicious List
@@ -834,6 +1069,15 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "multi_response": [
+    {
+      "status": 204,
+      "task_id": "None"
+    }
+  ]
+}
 ```
 
 #### Reset Password Account
@@ -863,6 +1107,15 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "multi_response": [
+    {
+      "status": 202,
+      "task_id": "00002131"
+    }
+  ]
+}
 ```
 
 #### Restore Email Message
@@ -892,6 +1145,15 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "multi_response": [
+    {
+      "status": 202,
+      "task_id": "00002154"
+    }
+  ]
+}
 ```
 
 #### Restore Endpoint
@@ -921,6 +1183,15 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "multi_response": [
+    {
+      "status": 202,
+      "task_id": "00002132"
+    }
+  ]
+}
 ```
 
 #### Sign out Account
@@ -950,6 +1221,15 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "multi_response": [
+    {
+      "status": 202,
+      "task_id": "00002130"
+    }
+  ]
+}
 ```
 
 #### Submit File to Sandbox
@@ -987,6 +1267,16 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "arguments": "Tm9uZQ==",
+  "digest": {
+    "md5": "098f6bcd4621d373cade4e832627b4f6",
+    "sha1": "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3",
+    "sha256": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
+  },
+  "id": "48bb3658-b0eb-4bf2-8e89-713935628f18"
+}
 ```
 
 #### Submit URLs to Sandbox
@@ -1016,6 +1306,22 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "submit_urls_resp": [
+    {
+      "digest": {
+        "md5": "f3a2e1227de8d5ae7296665c1f34b28d",
+        "sha1": "d79bff55069994b1c11f7856f9f029de36adfd8f",
+        "sha256": "619a273ee4d25fb4aeb97e89c554fcfbdbc82e22d840cfdb364a8f1932f48160"
+      },
+      "id": "d28e22cb-c6af-4291-bf25-22f33ce7aa15",
+      "status": 202,
+      "task_id": "d28e22cb-c6af-4291-bf25-22f33ce7aa15",
+      "url": "https://www.thisurlsubmitted.com"
+    }
+  ]
+}
 ```
 
 #### Terminate Process
@@ -1045,6 +1351,15 @@ Example input:
 Example output:
 
 ```
+{
+  "$success": true,
+  "multi_response": [
+    {
+      "status": 202,
+      "task_id": "00002133"
+    }
+  ]
+}
 ```
 
 ### Triggers
@@ -1081,6 +1396,10 @@ Example input:
 Example output:
 
 ```
+{
+  "alerts": "<<referenced:bigdata>>",
+  "total_count": 9
+}
 ```
 
 #### Poll Sandbox Suspicious List
@@ -1116,6 +1435,18 @@ Example input:
 Example output:
 
 ```
+{
+  "sandbox_suspicious_list_resp": [
+    {
+      "analysis_completion_date_time": "2023-01-11T22:40:52Z",
+      "expired_date_time": "2023-02-10T22:40:52Z",
+      "risk_level": "high",
+      "root_sha1": "ccc8c28226224755091a3462ff7704e350f2114b",
+      "type": "fileSha1",
+      "value": "0d8b8f0baf22e65a80148bcebaef082ef08932d2"
+    }
+  ]
+}
 ```
 
 ### Custom Output Types
@@ -1294,5 +1625,5 @@ _This plugin does not contain any troubleshooting information._
 
 ## References
 
-* [Trend Micro Vision One](LINK TO PRODUCT/VENDOR WEBSITE)
+* [Trend Micro Vision One](https://docs.trendmicro.com/en-us/enterprise/trend-micro-xdr-help/home)
 
