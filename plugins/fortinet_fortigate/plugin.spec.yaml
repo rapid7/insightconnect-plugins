@@ -824,6 +824,7 @@ actions:
         description: Was address found in group
         type: boolean
         required: true
+        example: true
       address_objects:
         title: Address Objects
         description: The names of the address objects that match or contain the address
