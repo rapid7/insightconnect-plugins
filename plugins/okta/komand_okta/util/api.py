@@ -45,7 +45,7 @@ def rate_limiting(max_tries: int, delay: int):
                 except PluginException as error:
                     counter += 1
                     if error.cause == PluginException.causes[PluginException.Preset.RATE_LIMIT]:
-                        logging.info("Rate limiting error occurred. Retrying in {} seconds.".format(delay))
+                        logging.info("Rate limiting error occurred. Retrying in %d seconds.", delay)
                         retry = True
             return func(*args, **kwargs)
 

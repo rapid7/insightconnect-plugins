@@ -298,7 +298,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
 |login|string|False|The login of the Okta user|user@example.com|
-|success|boolean|True|Whether suspension was successful|true|
+|success|boolean|True|Whether suspension was successful|True|
 |userId|string|False|The user ID of the Okta user|00a0a1qwertYUIoplK0j6|
 
 Example output:
@@ -342,7 +342,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
 |login|string|False|The login of the Okta user|user@example.com|
-|success|boolean|True|Whether suspension was successful|True|
+|success|boolean|True|Whether the reset was successful|True|
 |userId|string|False|The user ID of the Okta user|00g1m22m1230eZXxe5r8|
 
 Example output:
@@ -452,7 +452,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
 |login|string|False|The login of the Okta user|user@example.com|
-|success|boolean|True|Whether suspension was successful|True|
+|success|boolean|True|Whether unsuspension was successful|True|
 |userId|string|False|The user ID of the Okta user|00a0a1qwertYUIoplK0j6|
 
 Example output:
