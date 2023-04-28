@@ -1,4 +1,5 @@
 import json
+import logging
 from logging import Logger
 import requests
 import re
@@ -30,9 +31,32 @@ from komand_okta.util.endpoints import (
 )
 
 
+def rate_limiting(max_tries: int, delay: int):
+    def _decorate(func):
+        def _wrapper(*args, **kwargs):
+            retry = True
+            counter = 0
+            while retry and counter < max_tries:
+                if counter:
+                    time.sleep(delay)
+                try:
+                    retry = False
+                    return func(*args, **kwargs)
+                except PluginException as error:
+                    counter += 1
+                    if error.cause == PluginException.causes[PluginException.Preset.RATE_LIMIT]:
+                        logging.info("Rate limiting error occurred. Retrying in {} seconds.".format(delay))
+                        retry = True
+            return func(*args, **kwargs)
+
+        return _wrapper
+
+    return _decorate
+
+
 class OktaAPI:
     def __init__(self, okta_key: str, okta_url: str, logger: Logger):
-        self._logger = logger
+        self.logger = logger
         self._okta_key = okta_key
         self.base_url = okta_url
 
@@ -96,7 +120,7 @@ class OktaAPI:
             matched_link = re.match("<(.*?)>", link) if 'rel="next"' in link else None
             next_link = matched_link.group(1) if matched_link else None
         if next_link:
-            self._logger.info("Getting the next page of results...")
+            self.logger.info("Getting the next page of results...")
             returned_data.extend(self.get_all_pages(self.make_request(method="GET", url=self.split_url(next_link))))
         return returned_data
 
@@ -141,29 +165,7 @@ class OktaAPI:
     def get_users_in_group(self, group_id: str) -> requests.Response:
         return self.make_request(method="GET", url=USERS_IN_GROUP_ENDPOINT.format(group_id=group_id))
 
-    def _rate_limiting(max_tries: int, delay: int):
-        def _decorate(func: Callable):
-            def _wrapper(self, *args, **kwargs):
-                retry = True
-                counter = 0
-                while retry and counter < max_tries:
-                    if counter:
-                        time.sleep(delay)
-                    try:
-                        retry = False
-                        return func(self, *args, **kwargs)
-                    except PluginException as error:
-                        counter += 1
-                        if error.cause == PluginException.causes[PluginException.Preset.RATE_LIMIT]:
-                            self._logger.info(f"Rate limiting error occurred. Retrying in {delay} seconds.")
-                            retry = True
-                return func(self, *args, **kwargs)
-
-            return _wrapper
-
-        return _decorate
-
-    @_rate_limiting(10, 6)
+    @rate_limiting(10, 6)
     def make_request(self, method: str, url: str, json_data: dict = None, params: dict = None) -> requests.Response:
         try:
             response = requests.request(

@@ -24,4 +24,4 @@ class ListGroups(insightconnect_plugin_runtime.Action):
                 group["description"] = keys.get("description", "Unknown")
                 group["links"] = group.pop("_links")
 
-        return {Output.GROUPS: response, Output.SUCCESS: True if response else False}
+        return {Output.GROUPS: response, Output.SUCCESS: bool(response)}

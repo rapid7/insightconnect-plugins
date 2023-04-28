@@ -16,7 +16,7 @@ class UpdateBlacklistZones(insightconnect_plugin_runtime.Action):
             output=UpdateBlacklistZonesOutput(),
         )
 
-    def run(self, params={}):
+    def run(self, params={}):  # noqa: C901
         name = params.get(Input.NAME)
         value = params.get(Input.ADDRESS)
 

@@ -68,6 +68,7 @@ Example input:
 |----|----|--------|-----------|-------|
 |success|boolean|True|Whether the reset was successful|True|
 |tempPassword|string|False|The temporary password of the Okta user, if true was set in Temporary Password input|kYC452u2|
+
 Example output:
 
 ```
@@ -117,7 +118,7 @@ Example output:
             "POST"
           ]
         },
-        "href": "https://example.okta.com/api/v1/zones/nzohxvr9QzHuWqXI65d7/lifecycle/deactivate"
+        "href": "https://example.com"
       },
       "self": {
         "hints": {
@@ -127,7 +128,7 @@ Example output:
             "DELETE"
           ]
         },
-        "href": "https://example.okta.com/api/v1/zones/nzohxvr9QzHuWqXI65d7"
+        "href": "https://example.com"
       }
     },
     "created": "2020-11-01T01:00:47.000Z",
@@ -150,7 +151,6 @@ Example output:
     "type": "IP"
   }
 }
-
 ```
 
 #### Get Okta User Factors
@@ -180,61 +180,63 @@ Example input:
 Example output:
 
 ```
-[
+{
+  "factors": [
     {
-        "id": "00a0a1qwertYUIoplK0j7",
-        "factorType": "push",
-        "provider": "OKTA",
-        "vendorName": "OKTA",
-        "status": "ACTIVE",
-        "created": "2020-01-24T14:52:55.000Z",
-        "lastUpdated": "2020-01-24T14:55:18.000Z",
-        "profile": {
-            "credentialId": "user@example.com",
-            "deviceType": "SmartPhone_IPhone",
-            "keys": [
-                {
-                    "kty": "EC",
-                    "use": "sig",
-                    "kid": "default",
-                    "x": "abcdef",
-                    "y": "qwerty",
-                    "crv": "P-256"
-                }
-            ],
-            "name": "iPhone XR",
-            "platform": "IOS",
-            "version": "13.3"
+      "id": "00a0a1qwertYUIoplK0j7",
+      "factorType": "push",
+      "provider": "OKTA",
+      "vendorName": "OKTA",
+      "status": "ACTIVE",
+      "created": "2020-01-24T14:52:55.000Z",
+      "lastUpdated": "2020-01-24T14:55:18.000Z",
+      "profile": {
+        "credentialId": "user@example.com",
+        "deviceType": "SmartPhone_IPhone",
+        "keys": [
+          {
+            "kty": "EC",
+            "use": "sig",
+            "kid": "default",
+            "x": "abcdef",
+            "y": "qwerty",
+            "crv": "P-256"
+          }
+        ],
+        "name": "iPhone XR",
+        "platform": "IOS",
+        "version": "13.3"
+      },
+      "links": {
+        "self": {
+          "href": "https://example.com",
+          "hints": {
+            "allow": [
+              "GET",
+              "DELETE"
+            ]
+          }
         },
-        "links": {
-            "self": {
-                "href": "https://example.com/api/v1/users/00a0a1qwertYUIoplK0j6/factors/00a0a1qwertYUIoplK0j7",
-                "hints": {
-                    "allow": [
-                        "GET",
-                        "DELETE"
-                    ]
-                }
-            },
-            "verify": {
-                "href": "https://example.com/api/v1/users/00a0a1qwertYUIoplK0j6/factors/00a0a1qwertYUIoplK0j7/verify",
-                "hints": {
-                    "allow": [
-                        "POST"
-                    ]
-                }
-            },
-            "user": {
-                "href": "https://example.com/api/v1/users/00a0a1qwertYUIoplK0j6",
-                "hints": {
-                    "allow": [
-                        "GET"
-                    ]
-                }
-            }
+        "verify": {
+          "href": "https://example.com",
+          "hints": {
+            "allow": [
+              "POST"
+            ]
+          }
+        },
+        "user": {
+          "href": "https://example.com",
+          "hints": {
+            "allow": [
+              "GET"
+            ]
+          }
         }
+      }
     }
-]
+  ]
+}
 ```
 
 #### Push MFA Challenge
@@ -491,69 +493,71 @@ Example output:
 
 ```
 {
-  "status": "ACTIVE",
-  "profile": {
-    "firstName": "User",
-    "lastName": "Test",
-    "login": "user@example.com",
-    "email": "user@example.com"
-  },
-  "passwordChanged": "2018-07-28T18:48:52.000Z",
-  "created": "2018-07-28T17:24:41.000Z",
-  "activated": "2018-07-28T18:47:24.000Z",
-  "lastUpdated": "2018-07-28T18:58:06.000Z",
-  "links": {
-    "suspend": {
-      "href": "https://example.com/api/v1/users/00a0a1qwertYUIoplK0j6/lifecycle/suspend",
-      "method": "POST"
+  "user": {
+    "status": "ACTIVE",
+    "profile": {
+      "firstName": "User",
+      "lastName": "Test",
+      "login": "user@example.com",
+      "email": "user@example.com"
     },
-    "forgotPassword": {
-      "href": "https://example.com/api/v1/users/00a0a1qwertYUIoplK0j6/credentials/forgot_password",
-      "method": "POST"
-    },
-    "self": {
-      "href": "https://example.com/api/v1/users/00a0a1qwertYUIoplK0j6"
-    },
-    "expirePassword": {
-      "href": "https://example.com/api/v1/users/00a0a1qwertYUIoplK0j6/lifecycle/expire_password",
-      "method": "POST"
-    },
-    "deactivate": {
-      "href": "https://example.com/api/v1/users/00a0a1qwertYUIoplK0j6/lifecycle/deactivate",
-      "method": "POST"
-    },
-    "changePassword": {
-      "href": "https://example.com/api/v1/users/00a0a1qwertYUIoplK0j6/credentials/change_password",
-      "method": "POST"
-    },
-    "changeRecoveryQuestion": {
-      "href": "https://example.com/api/v1/users/00a0a1qwertYUIoplK0j6/credentials/change_recovery_question",
-      "method": "POST"
-    },
-    "resetPassword": {
-      "href": "https://example.com/api/v1/users/00a0a1qwertYUIoplK0j6/lifecycle/reset_password",
-      "method": "POST"
-    }
-  },
-  "lastLogin": "2018-07-28T18:48:52.000Z",
-  "credentials": {
-    "recoveryQuestion": {
-      "question": "What is the food you least liked as a child?"
-    },
-    "emails": [
-      {
-        "status": "VERIFIED",
-        "type": "PRIMARY",
-        "value": "user@example.com"
+    "passwordChanged": "2018-07-28T18:48:52.000Z",
+    "created": "2018-07-28T17:24:41.000Z",
+    "activated": "2018-07-28T18:47:24.000Z",
+    "lastUpdated": "2018-07-28T18:58:06.000Z",
+    "links": {
+      "suspend": {
+        "href": "https://example.com",
+        "method": "POST"
+      },
+      "forgotPassword": {
+        "href": "https://example.com",
+        "method": "POST"
+      },
+      "self": {
+        "href": "https://example.com"
+      },
+      "expirePassword": {
+        "href": "https://example.com",
+        "method": "POST"
+      },
+      "deactivate": {
+        "href": "https://example.com",
+        "method": "POST"
+      },
+      "changePassword": {
+        "href": "https://example.com",
+        "method": "POST"
+      },
+      "changeRecoveryQuestion": {
+        "href": "https://example.com",
+        "method": "POST"
+      },
+      "resetPassword": {
+        "href": "https://example.com",
+        "method": "POST"
       }
-    ],
-    "provider": {
-      "type": "OKTA",
-      "name": "OKTA"
-    }
-  },
-  "id": "00a0a1qwertYUIoplK0j6",
-  "statusChanged": "2018-07-28T18:58:06.000Z"
+    },
+    "lastLogin": "2018-07-28T18:48:52.000Z",
+    "credentials": {
+      "recoveryQuestion": {
+        "question": "What is the food you least liked as a child?"
+      },
+      "emails": [
+        {
+          "status": "VERIFIED",
+          "type": "PRIMARY",
+          "value": "user@example.com"
+        }
+      ],
+      "provider": {
+        "type": "OKTA",
+        "name": "OKTA"
+      }
+    },
+    "id": "00a0a1qwertYUIoplK0j6",
+    "statusChanged": "2018-07-28T18:58:06.000Z"
+  }
 }
 ```
 
@@ -670,21 +674,21 @@ Example output:
       "links": {
         "logo": [
           {
-            "href": "https://example.com/assets/img/logos/groups/okta-medium.abcdef.png",
+            "href": "https://example.com",
             "type": "image/png",
             "name": "medium"
           },
           {
-            "href": "https://example.com/assets/img/logos/groups/okta-large.qwerty.png",
+            "href": "https://example.com",
             "type": "image/png",
             "name": "large"
           }
         ],
         "apps": {
-          "href": "https://example.com/api/v1/groups/00a0a1qwertYUIoplK0g3/apps"
+          "href": "https://example.com"
         },
         "users": {
-          "href": "https://example.com/api/v1/groups/00a0a1qwertYUIoplK0g3/users"
+          "href": "https://example.com"
         }
       },
       "lastMembershipUpdated": "2018-07-28T21:15:17.000Z",
@@ -739,17 +743,19 @@ Example output:
 
 ```
 {
-  "id": "00u15s1KDETTQMQYABRL",
-  "scope": "USER",
-  "credentials": {
-    "userName": "user@example.com"
-  },
-  "profile": {
+  "result": {
+    "id": "00u15s1KDETTQMQYABRL",
+    "scope": "USER",
+    "credentials": {
+      "userName": "user@example.com"
+    },
+    "profile": {
       "salesforceGroups": [
         "Employee"
       ],
       "role": "Developer",
       "profile": "Standard User"
+    }
   }
 }
 ```
@@ -785,8 +791,8 @@ Example input:
       "value": "blah"
     },
     "provider": {
-       "name": "OKTA",
-       "type": "OKTA"
+      "name": "OKTA",
+      "type": "OKTA"
     },
     "recovery_question": {
       "answer": "Q",
@@ -814,7 +820,7 @@ Example input:
     "organization": "Okta",
     "preferredLanguage": "en-US",
     "primaryPhone": "+1-555-514-1337",
-    "profileUrl": "http://www.example.com/profile",
+    "profileUrl": "https://example.com",
     "secondEmail": "user@example.com",
     "state": "CA",
     "streetAddress": "301 Brannan St.",
@@ -830,7 +836,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|user|user|False|User object|{}|
+|user|user|False|User details|{}|
 
 Example output:
 
@@ -863,11 +869,11 @@ Example output:
     },
     "links": {
       "activate": {
-        "href": "https://example.com/api/v1/users/00a0a1qwertYUIoplK0j9/lifecycle/activate",
+        "href": "https://example.com",
         "method": "POST"
       },
       "self": {
-        "href": "https://example.com/api/v1/users/00a0a1qwertYUIoplK0j9"
+        "href": "https://example.com"
       }
     }
   }
@@ -938,7 +944,7 @@ Example output:
           },
           "links": {
             "self": {
-              "href": "https://example.okta.com/api/v1/users/00u44z4o0JgUYC0OO4x6"
+              "href": "https://example.com"
             }
           }
         }
@@ -973,7 +979,7 @@ Example output:
           },
           "links": {
             "self": {
-              "href": "https://example.okta.com/api/v1/users/00u44xracEYPXjhwy4x6"
+              "href": "https://example.com"
             }
           }
         }

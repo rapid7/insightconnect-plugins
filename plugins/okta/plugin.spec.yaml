@@ -255,7 +255,7 @@ types:
       title: Profile URL
       type: string
       required: false
-      example: "https://test-tester.com/profile"
+      example: "https://example.com"
     primaryPhone:
       description: Primary phone number of user such as home number
       title: Primary Phone
@@ -1686,8 +1686,8 @@ actions:
         example: true
     output:
       user:
-        description: User object
-        title: User details
+        title: User
+        description: User details
         type: user
         required: false
         example: {}

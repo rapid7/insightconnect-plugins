@@ -23,7 +23,7 @@ class SendPush(insightconnect_plugin_runtime.Action):
         poll = links.get("poll")
         if not poll:
             raise PluginException(
-                cause=f"An error has occurred retrieving data from the Okta API.",
+                cause="An error has occurred retrieving data from the Okta API.",
                 assistance="It looks like we didn't get data we were expecting back. Was "
                 "the Factor ID supplied a push type and not something else, "
                 "such as an SMS?",

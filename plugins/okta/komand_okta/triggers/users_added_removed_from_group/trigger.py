@@ -28,7 +28,7 @@ class UsersAddedRemovedFromGroup(insightconnect_plugin_runtime.Trigger):
         group_list = params.get(Input.GROUPIDS)
         current_list = self.get_users_in_group_list(group_list)
 
-        group_names = list()
+        group_names = []
         for group in group_list:
             response = self.connection.api_client.get_group(group_id=group)
             group_names.append(response.get("profile", {}).get("name", ""))
@@ -36,8 +36,8 @@ class UsersAddedRemovedFromGroup(insightconnect_plugin_runtime.Trigger):
         while True:
             new_list = self.get_users_in_group_list(group_list)
 
-            added = list()
-            removed = list()
+            added = []
+            removed = []
             for index, value in enumerate(group_list):
                 added_users = []
                 for new_user in new_list[index][value]:

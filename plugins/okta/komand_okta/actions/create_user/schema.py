@@ -213,8 +213,8 @@ class CreateUserOutput(insightconnect_plugin_runtime.Output):
   "properties": {
     "user": {
       "$ref": "#/definitions/user",
-      "title": "User details",
-      "description": "User object",
+      "title": "User",
+      "description": "User details",
       "order": 1
     }
   },
