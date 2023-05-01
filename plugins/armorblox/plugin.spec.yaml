@@ -82,7 +82,7 @@ types:
       type: '[]string'
       required: false
     title:
-      title: Subject
+      title: Title
       description: Mail subject
       type: 'string'
       required: false          

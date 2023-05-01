@@ -10,39 +10,14 @@ import json
 import logging
 from unit_test.util import Util
 from unittest.mock import patch
+from parameterized import parameterized
 
 
-class TestGetRemediationAction(TestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        cls.action = Util.default_connector(GetRemediationAction())
-
-    @patch("requests.get", side_effect=Util.mocked_requests)
-    def test_get_remediation_action(self, mock_post):
-        actual = self.action.run(
-                {
-                    Input.INCIDENT_ID: "10597",
-                }
-            )
-        expected = {'remediation_details': 'WILL_AUTO_REMEDIATE'}
-        self.assertEqual(actual, expected)
-        
-    @patch("requests.get", side_effect=Util.mocked_requests)
-    def test_get_remediation_action_2(self, mock_post):
-        actual = self.action.run(
-                {
-                    Input.INCIDENT_ID: "11081",
-                }
-            )
-        expected = {'remediation_details': 'WILL_AUTO_REMEDIATE'}
-        self.assertEqual(actual, expected)
-
-    @patch("requests.get", side_effect=Util.mocked_requests)
-    def test_get_remediation_action3(self, mock_post):
-        actual = self.action.run(
-                {
-                    Input.INCIDENT_ID: "11063",
-                }
-            )
+@patch("requests.get", side_effect=Util.mocked_requests)
+class TestGetIndicatorDetails(TestCase):
+    @parameterized.expand([("10597"),("11081"),("11063")])
+    def test_get_remediation_action(self, mock_post, incident_id):
+        action = Util.default_connector(GetRemediationAction())
+        actual = action.run({Input.INCIDENT_ID: incident_id})
         expected = {'remediation_details': 'WILL_AUTO_REMEDIATE'}
         self.assertEqual(actual, expected)
