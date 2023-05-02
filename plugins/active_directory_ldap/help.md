@@ -817,6 +817,8 @@ the query results, and then using the variable step $item.dn
 
 # Links
 
+[Learn Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/)
+
 ## References
 
 [Python LDAP3](https://ldap3.readthedocs.io)
