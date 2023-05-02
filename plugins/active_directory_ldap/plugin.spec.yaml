@@ -4,7 +4,7 @@ products: [insightconnect]
 name: active_directory_ldap
 title: Active Directory LDAP
 description: "This plugin utilizes Microsoft's Active Directory service to create and manage domains, users, and objects within a network"
-version: 6.0.0
+version: 7.0.0
 supported_versions: ["Azure Active Directory 2.0.89.0"]
 vendor: rapid7
 support: rapid7
@@ -392,9 +392,9 @@ actions:
         description: List of unsuccessfully enabled users
         type: "[]modified_user_error"
         required: false
-      success:
-        title: Success
-        description: Operation status (True will be returned if at least one user is enabled)
+      all_operations_succeeded:
+        title: All Operations Succeeded
+        description: Overall operation status
         type: boolean
         required: false
   disable_user:
@@ -434,9 +434,9 @@ actions:
         description: List of unsuccessfully disabled users
         type: "[]modified_user_error"
         required: false
-      success:
-        title: Success
-        description: Operation status (True will be returned if at least one user is disabled)
+      all_operations_succeeded:
+        title: All Operations Succeeded
+        description: Overall operation status
         type: boolean
         required: false
   modify_groups:

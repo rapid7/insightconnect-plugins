@@ -445,7 +445,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|boolean|False|Operation status (True will be returned if at least one user is enabled)|
+|all_operations_succeeded|boolean|False|Overall operation status|
 |successful_enablements|[]string|False|List of successfully enabled users|
 |unsuccessful_enablements|[]modified_user_error|False|List of unsuccessfully enabled users|
 
@@ -454,7 +454,7 @@ Example output:
 ```
 
 {
-  "success": true
+  "all_operations_succeeded": true
   "successful_enablements": ["CN=user,OU=domain_users,DC=example,DC=com"]
   "unsuccessful_enablements": [
     {
@@ -594,7 +594,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|success|boolean|False|Operation status (True will be returned if at least one user is disabled)|
+|all_operations_succeeded|boolean|False|Overall operation status|
 |successful_disablements|[]string|False|List of successfully disabled users|
 |unsuccessful_disablements|[]modified_user_error|False|List of unsuccessfully disabled users|
 dis
@@ -603,7 +603,7 @@ Example output:
 ```
 
 {
-  "success": true
+  "all_operations_succeeded": true
   "successful_disablements": ["CN=user,OU=domain_users,DC=example,DC=com"]
   "unsuccessful_disablements": [
     {
@@ -770,6 +770,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 7.0.0 - Update actions Enable Users and Enable Users to replace output Success with All Operations Succeeded True/False
 * 6.0.0 - Add actions Enable Users and Disable users allowing for the bulk enablement/disablement of users
 * 5.3.5 - Fix issue where JSON Marshaling error was raised when receiving unexpected API response in the Force Password Reset action
 * 5.3.4 - Fix issue with space character in DN in modify object action | Enhanced LDAP logging | Fix issue with variable error when connection fails 
