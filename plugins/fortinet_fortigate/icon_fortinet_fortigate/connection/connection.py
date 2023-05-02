@@ -31,7 +31,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
 
     def test(self):
         try:
-            self.api.call_api(path="log/setting")
+            self.api.call_api(path="firewall.ipmacbinding/setting")
         except PluginException:
             raise ConnectionTestException(
                 cause="Connection Test Failed.", assistance="Please check that your API key and hostname are correct."
