@@ -739,5 +739,3 @@ Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51
 * [Fortinet FortiGate](https://www.fortinet.com/)
 
 ## References
-
-* [Fortinet FortiGate](https://www.fortinet.com/)
