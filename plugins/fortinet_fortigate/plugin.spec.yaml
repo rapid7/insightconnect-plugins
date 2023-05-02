@@ -847,6 +847,7 @@ actions:
         description: Policies
         type: "[]policies"
         required: false
+        example: [ { "policyid": 1, "q_origin_key": 1, "name": "Test Policy", "uuid": "6193559a-6862-51ea-44ce-e27594b8536a", "srcintf": [ { "name": "port1", "q_origin_key": "port1" } ], "dstintf": [ { "name": "port1", "q_origin_key": "port1" } ], "srcaddr": [ { "name": "Test Group", "q_origin_key": "Test Group" } ], "dstaddr": [ { "name": "Test Group", "q_origin_key": "Test Group" } ], "internet-service": "disable", "internet-service-id": [], "internet-service-group": [], "internet-service-custom": [], "internet-service-custom-group": [], "internet-service-src": "disable", "internet-service-src-id": [], "internet-service-src-group": [], "internet-service-src-custom": [], "internet-service-src-custom-group": [], "reputation-minimum": 0, "reputation-direction": "destination", "rtp-nat": "disable", "rtp-addr": [], "action": "accept", "send-deny-packet": "disable", "firewall-session-dirty": "check-all", "status": "enable", "schedule": "always", "schedule-timeout": "disable", "service": [ { "name": "ALL", "q_origin_key": "ALL" } ], "tos": "0x00", "tos-mask": "0x00", "tos-negate": "disable", "anti-replay": "enable", "tcp-session-without-syn": "disable", "geoip-anycast": "disable", "utm-status": "disable", "inspection-mode": "flow", "http-policy-redirect": "disable", "ssh-policy-redirect": "disable", "profile-type": "single", "profile-protocol-options": "default", "ssl-ssh-profile": "no-inspection", "logtraffic": "utm", "logtraffic-start": "disable", "capture-packet": "disable", "auto-asic-offload": "enable", "wanopt": "disable", "wanopt-detection": "active", "wanopt-passive-opt": "default", "webcache": "disable", "webcache-https": "disable", "application": [], "app-category": [], "url-category": [], "app-group": [], "nat": "enable", "permit-any-host": "disable", "permit-stun-host": "disable", "fixedport": "disable", "ippool": "disable", "poolname": [], "session-ttl": "0", "vlan-cos-fwd": 255, "vlan-cos-rev": 255, "inbound": "disable", "outbound": "enable", "natinbound": "disable", "natoutbound": "disable", "wccp": "disable", "ntlm": "disable", "ntlm-guest": "disable", "ntlm-enabled-browsers": [], "fsso": "enable", "wsso": "enable", "rsso": "disable", "groups": [], "users": [], "fsso-groups": [], "auth-path": "disable", "disclaimer": "disable", "email-collect": "disable", "natip": "0.0.0.0 0.0.0.0", "match-vip": "disable", "match-vip-only": "disable", "diffserv-forward": "disable", "diffserv-reverse": "disable", "diffservcode-forward": "000000", "diffservcode-rev": "000000", "tcp-mss-sender": 0, "tcp-mss-receiver": 0, "block-notification": "disable", "custom-log-fields": [], "srcaddr-negate": "disable", "dstaddr-negate": "disable", "service-negate": "disable", "internet-service-negate": "disable", "internet-service-src-negate": "disable", "timeout-send-rst": "disable", "captive-portal-exempt": "disable", "ssl-mirror": "disable", "ssl-mirror-intf": [], "dsri": "disable", "radius-mac-auth-bypass": "disable", "delay-tcp-npu-session": "disable" } ]
   get_address_objects:
     title: Get Address Objects
     description: Get address objects
@@ -946,11 +947,13 @@ actions:
         description: Boolean value indicating the success of the operation
         type: boolean
         required: true
+        example: true
       response_object:
         title: Response Object
         description: Information about the operation that was performed
         type: object
         required: true
+        example: {}
   add_address_object_to_address_group:
     title: Add Address Object to Group
     description: Add an address object to an address group
@@ -979,11 +982,13 @@ actions:
         description: Was the operation successful
         type: boolean
         required: true
+        example: true
       result_object:
         title: Result Object
         description: An object containing the results of the action
         type: object
         required: true
+        example: {}
   remove_address_object_from_group:
     title: Remove Address Object from Group
     description: Removes an address object from an address group
@@ -1012,8 +1017,10 @@ actions:
         description: Was the operation successful
         type: boolean
         required: true
+        example: true
       result_object:
         title: Result Object
         description: An object containing the results of the action
         type: object
         required: true
+        example: {}
