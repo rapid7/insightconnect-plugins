@@ -71,9 +71,9 @@ Example input:
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+|----|----|--------|-----------|------|
 |result_object|object|True|An object containing the results of the action|{}|
-|success|boolean|True|Was the operation successful|true|
+|success|boolean|True|Was the operation successful|True|
 
 Example output:
 
@@ -127,7 +127,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
 |address_objects|[]string|True|The names of the address objects that match or contain the address|["198.51.100.100/32"]|
-|found|boolean|True|Was address found in group|true|
+|found|boolean|True|Was address found in group|True|
 
 Example output:
 
@@ -329,7 +329,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
 |result_object|object|True|An object containing the results of the action|{}|
-|success|boolean|True|Was the operation successful|true|
+|success|boolean|True|Was the operation successful|True|
 
 Example output:
 
@@ -387,7 +387,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
 |response_object|object|True|Information about the operation that was performed|{}|
-|success|boolean|True|Boolean value indicating the success of the operation|true|
+|success|boolean|True|Boolean value indicating the success of the operation|True|
 
 Example output:
 
@@ -435,7 +435,7 @@ Example input:
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
 |response_object|object|True|Information about the operation that was performed|{}|
-|success|boolean|True|Boolean value indicating the success of the operation|true|
+|success|boolean|True|Boolean value indicating the success of the operation|True|
 
 Example output:
 
