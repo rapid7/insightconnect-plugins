@@ -934,7 +934,7 @@ actions:
         description: Information about the operation that was performed
         type: object
         required: true
-        example: true
+        example: {}
   delete_address_object:
     title: Delete Address Object
     description: Delete an address object
