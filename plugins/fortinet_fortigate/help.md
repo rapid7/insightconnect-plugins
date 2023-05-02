@@ -124,10 +124,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|address_objects|[]string|True|The names of the address objects that match or contain the address|["198.51.100.100/32"]|
-|found|boolean|True|Was address found in group|true|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|address_objects|[]string|True|The names of the address objects that match or contain the address|
+|found|boolean|True|Was address found in group|
 
 Example output:
 
