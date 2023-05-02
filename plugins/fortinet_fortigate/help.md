@@ -70,10 +70,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result_object|object|True|An object containing the results of the action|
-|success|boolean|True|Was the operation successful|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|result_object|object|True|An object containing the results of the action|{}|
+|success|boolean|True|Was the operation successful|true|
 
 Example output:
 
@@ -124,10 +124,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|address_objects|[]string|True|The names of the address objects that match or contain the address|
-|found|boolean|True|Was address found in group|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|address_objects|[]string|True|The names of the address objects that match or contain the address|["198.51.100.100/32"]|
+|found|boolean|True|Was address found in group|true|
 
 Example output:
 
@@ -158,9 +158,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|policies|[]policies|False|Policies|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|policies|[]policies|False|Policies|[{"policyid": 1, "q_origin_key": 1, "name": "Test Policy", "uuid": "6193559a-6862-51ea-44ce-e27594b8536a", "srcintf": [{"name": "port1", "q_origin_key": "port1"}], "dstintf": [{"name": "port1", "q_origin_key": "port1"}], "srcaddr": [{"name": "Test Group", "q_origin_key": "Test Group"}], "dstaddr": [{"name": "Test Group", "q_origin_key": "Test Group"}], "internet-service": "disable", "internet-service-id": [], "internet-service-group": [], "internet-service-custom": [], "internet-service-custom-group": [], "internet-service-src": "disable", "internet-service-src-id": [], "internet-service-src-group": [], "internet-service-src-custom": [], "internet-service-src-custom-group": [], "reputation-minimum": 0, "reputation-direction": "destination", "rtp-nat": "disable", "rtp-addr": [], "action": "accept", "send-deny-packet": "disable", "firewall-session-dirty": "check-all", "status": "enable", "schedule": "always", "schedule-timeout": "disable", "service": [{"name": "ALL", "q_origin_key": "ALL"}], "tos": "0x00", "tos-mask": "0x00", "tos-negate": "disable", "anti-replay": "enable", "tcp-session-without-syn": "disable", "geoip-anycast": "disable", "utm-status": "disable", "inspection-mode": "flow", "http-policy-redirect": "disable", "ssh-policy-redirect": "disable", "profile-type": "single", "profile-protocol-options": "default", "ssl-ssh-profile": "no-inspection", "logtraffic": "utm", "logtraffic-start": "disable", "capture-packet": "disable", "auto-asic-offload": "enable", "wanopt": "disable", "wanopt-detection": "active", "wanopt-passive-opt": "default", "webcache": "disable", "webcache-https": "disable", "application": [], "app-category": [], "url-category": [], "app-group": [], "nat": "enable", "permit-any-host": "disable", "permit-stun-host": "disable", "fixedport": "disable", "ippool": "disable", "poolname": [], "session-ttl": "0", "vlan-cos-fwd": 255, "vlan-cos-rev": 255, "inbound": "disable", "outbound": "enable", "natinbound": "disable", "natoutbound": "disable", "wccp": "disable", "ntlm": "disable", "ntlm-guest": "disable", "ntlm-enabled-browsers": [], "fsso": "enable", "wsso": "enable", "rsso": "disable", "groups": [], "users": [], "fsso-groups": [], "auth-path": "disable", "disclaimer": "disable", "email-collect": "disable", "natip": "0.0.0.0 0.0.0.0", "match-vip": "disable", "match-vip-only": "disable", "diffserv-forward": "disable", "diffserv-reverse": "disable", "diffservcode-forward": "000000", "diffservcode-rev": "000000", "tcp-mss-sender": 0, "tcp-mss-receiver": 0, "block-notification": "disable", "custom-log-fields": [], "srcaddr-negate": "disable", "dstaddr-negate": "disable", "service-negate": "disable", "internet-service-negate": "disable", "internet-service-src-negate": "disable", "timeout-send-rst": "disable", "captive-portal-exempt": "disable", "ssl-mirror": "disable", "ssl-mirror-intf": [], "dsri": "disable", "radius-mac-auth-bypass": "disable", "delay-tcp-npu-session": "disable"}]|
 
 Example output:
 
@@ -326,10 +326,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result_object|object|True|An object containing the results of the action|
-|success|boolean|True|Was the operation successful|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|result_object|object|True|An object containing the results of the action|{}|
+|success|boolean|True|Was the operation successful|true|
 
 Example output:
 
@@ -384,10 +384,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response_object|object|True|Information about the operation that was performed|
-|success|boolean|True|Boolean value indicating the success of the operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response_object|object|True|Information about the operation that was performed|{}|
+|success|boolean|True|Boolean value indicating the success of the operation|true|
 
 Example output:
 
@@ -432,10 +432,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response_object|object|True|Information about the operation that was performed|
-|success|boolean|True|Boolean value indicating the success of the operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response_object|object|True|Information about the operation that was performed|{}|
+|success|boolean|True|Boolean value indicating the success of the operation|true|
 
 Example output:
 
@@ -486,10 +486,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|address_objects|[]address_object|True|A list of address objects|
-|ipv6_address_objects|[]ipv6_address_object|True|A list of IPv6 address objects|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|address_objects|[]address_object|True|A list of address objects|[{"name": "FABRIC_DEVICE", "q_origin_key": "FABRIC_DEVICE", "uuid": "7773d538-25a0-51ea-fcb2-a2340d71f5d9", "subnet": "0.0.0.0 0.0.0.0", "type": "ipmask", "sub-type": "sdn", "clearpass-spt": "unknown", "start-mac": "00:00:00:00:00:00", "end-mac": "00:00:00:00:00:00", "cache-ttl": 0, "fsso-group": [], "comment": "IPv4 addresses of Fabric Devices.", "visibility": "enable", "color": 0, "sdn-addr-type": "private", "list": [], "tagging": [], "allow-routing": "disable"}]|', '|ipv6_address_objects|[]ipv6_address_object|True|A list of IPv6 address objects|[{"name": "FABRIC_DEVICE", "q_origin_key": "FABRIC_DEVICE", "uuid": "7773d538-25a0-51ea-fcb2-a2340d71f5d9", "subnet": "0.0.0.0 0.0.0.0", "type": "ipmask", "sub-type": "sdn", "clearpass-spt": "unknown", "start-mac": "00:00:00:00:00:00", "end-mac": "00:00:00:00:00:00", "cache-ttl": 0, "fsso-group": [], "comment": "IPv4 addresses of Fabric Devices.", "visibility": "enable", "color": 0, "sdn-addr-type": "private", "list": [], "tagging": [], "allow-routing": "disable"}]|
+|ipv6_address_objects|[]ipv6_address_object|True|A list of IPv6 address objects|[{"name": "FABRIC_DEVICE", "q_origin_key": "FABRIC_DEVICE", "uuid": "7773d538-25a0-51ea-fcb2-a2340d71f5d9", "subnet": "0.0.0.0 0.0.0.0", "type": "ipmask", "sub-type": "sdn", "clearpass-spt": "unknown", "start-mac": "00:00:00:00:00:00", "end-mac": "00:00:00:00:00:00", "cache-ttl": 0, "fsso-group": [], "comment": "IPv4 addresses of Fabric Devices.", "visibility": "enable", "color": 0, "sdn-addr-type": "private", "list": [], "tagging": [], "allow-routing": "disable"}]|', '|ipv6_address_objects|[]ipv6_address_object|True|A list of IPv6 address objects|[{"name": "FABRIC_DEVICE", "q_origin_key": "FABRIC_DEVICE", "uuid": "7773d538-25a0-51ea-fcb2-a2340d71f5d9", "subnet": "0.0.0.0 0.0.0.0", "type": "ipmask", "sub-type": "sdn", "clearpass-spt": "unknown", "start-mac": "00:00:00:00:00:00", "end-mac": "00:00:00:00:00:00", "cache-ttl": 0, "fsso-group": [], "comment": "IPv4 addresses of Fabric Devices.", "visibility": "enable", "color": 0, "sdn-addr-type": "private", "list": [], "tagging": [], "allow-routing": "disable"}]|
 
 Example output:
 
