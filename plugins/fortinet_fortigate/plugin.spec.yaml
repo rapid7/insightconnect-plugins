@@ -830,6 +830,7 @@ actions:
         description: The names of the address objects that match or contain the address
         type: "[]string"
         required: true
+        example: ["198.51.100.100/32"]
   get_policies:
     title: Get Policies
     description: Get policies
