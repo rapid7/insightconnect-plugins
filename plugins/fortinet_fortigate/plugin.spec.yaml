@@ -882,13 +882,13 @@ actions:
         description: A list of address objects
         type: '[]address_object'
         required: true
-        example: [ { "name": "FABRIC_DEVICE", "q_origin_key": "FABRIC_DEVICE", "uuid": "7773d538-25a0-51ea-fcb2-a2340d71f5d9", "subnet": "0.0.0.0 0.0.0.0", "type": "ipmask", "sub-type": "sdn", "clearpass-spt": "unknown", "start-mac": "00:00:00:00:00:00", "end-mac": "00:00:00:00:00:00", "cache-ttl": 0, "fsso-group": [], "comment": "IPv4 addresses of Fabric Devices.", "visibility": "enable", "color": 0, "sdn-addr-type": "private", "list": [], "tagging": [], "allow-routing": "disable" } ]
+        example: '[ { "name": "FABRIC_DEVICE", "q_origin_key": "FABRIC_DEVICE", "uuid": "7773d538-25a0-51ea-fcb2-a2340d71f5d9", "subnet": "0.0.0.0 0.0.0.0", "type": "ipmask", "sub-type": "sdn", "clearpass-spt": "unknown", "start-mac": "00:00:00:00:00:00", "end-mac": "00:00:00:00:00:00", "cache-ttl": 0, "fsso-group": [], "comment": "IPv4 addresses of Fabric Devices.", "visibility": "enable", "color": 0, "sdn-addr-type": "private", "list": [], "tagging": [], "allow-routing": "disable" } ]'
       ipv6_address_objects:
         title: IPv6 Address Objects
         description: A list of IPv6 address objects
         type: '[]ipv6_address_object'
         required: true
-        example: [ { "name": "FABRIC_DEVICE", "q_origin_key": "FABRIC_DEVICE", "uuid": "7773d538-25a0-51ea-fcb2-a2340d71f5d9", "subnet": "0.0.0.0 0.0.0.0", "type": "ipmask", "sub-type": "sdn", "clearpass-spt": "unknown", "start-mac": "00:00:00:00:00:00", "end-mac": "00:00:00:00:00:00", "cache-ttl": 0, "fsso-group": [], "comment": "IPv4 addresses of Fabric Devices.", "visibility": "enable", "color": 0, "sdn-addr-type": "private", "list": [], "tagging": [], "allow-routing": "disable" } ]
+        example: '[ { "name": "FABRIC_DEVICE", "q_origin_key": "FABRIC_DEVICE", "uuid": "7773d538-25a0-51ea-fcb2-a2340d71f5d9", "subnet": "0.0.0.0 0.0.0.0", "type": "ipmask", "sub-type": "sdn", "clearpass-spt": "unknown", "start-mac": "00:00:00:00:00:00", "end-mac": "00:00:00:00:00:00", "cache-ttl": 0, "fsso-group": [], "comment": "IPv4 addresses of Fabric Devices.", "visibility": "enable", "color": 0, "sdn-addr-type": "private", "list": [], "tagging": [], "allow-routing": "disable" } ]'
   create_address_object:
     title: Create Address Object
     description: Create an address object
@@ -934,7 +934,7 @@ actions:
         description: Information about the operation that was performed
         type: object
         required: true
-        example: {}
+        example: "{}"
   delete_address_object:
     title: Delete Address Object
     description: Delete an address object
@@ -957,7 +957,7 @@ actions:
         description: Information about the operation that was performed
         type: object
         required: true
-        example: {}
+        example: "{}"
   add_address_object_to_address_group:
     title: Add Address Object to Group
     description: Add an address object to an address group
@@ -992,7 +992,7 @@ actions:
         description: An object containing the results of the action
         type: object
         required: true
-        example: {}
+        example: "{}"
   remove_address_object_from_group:
     title: Remove Address Object from Group
     description: Removes an address object from an address group
@@ -1027,4 +1027,4 @@ actions:
         description: An object containing the results of the action
         type: object
         required: true
-        example: {}
+        example: "{}"
