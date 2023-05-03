@@ -1,11 +1,11 @@
-import komand
-from .schema import GetUserInput, GetUserOutput, Component
+import insightconnect_plugin_runtime
+from .schema import GetUserInput, GetUserOutput, Component, Input, Output
 
 # Custom imports below
 import requests
 
 
-class GetUser(komand.Action):
+class GetUser(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="get_user",
@@ -16,7 +16,7 @@ class GetUser(komand.Action):
 
     def run(self, params={}):
         client = self.connection.client
-        user_id = params.get("id")
+        user_id = params.get(Input.ID)
 
         if user_id:
             url = "{}/api/user/{}".format(client.url, user_id)

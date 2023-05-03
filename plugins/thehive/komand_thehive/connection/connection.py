@@ -2,7 +2,6 @@ import insightconnect_plugin_runtime
 from .schema import ConnectionSchema, Input
 
 # Custom imports below
-import requests
 from ..util.api import HiveAPI
 
 
@@ -48,11 +47,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
             cert=self.verify,
         )
 
-    def test(self):
-        client = self.client
-        try:
-            user = client.get_current_user()
-        except requests.exceptions.HTTPError:
-            self.logger.error("Test failed")
-            raise
-        return user.json()
+        self.logger.info("Setup Complete")
+
+    # def test(self):
+    #     client = self.client
+    #     try:
+    #         user = client.get_current_user()
+    #     except requests.exceptions.HTTPError:
+    #         self.logger.error("Test failed")
+    #         raise
+    #     return user.json()

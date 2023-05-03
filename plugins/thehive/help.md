@@ -1,9 +1,12 @@
+
+
+
+
 # Description
-
-[TheHive](https://thehive-project.org/) TheHive is a scalable, open source security incident response solution
-designed for SOCs & CERTs to collaborate, elaborate, analyze and get their job done.
-Handle your case management needs with TheHive plugin for Rapid7 InsightConnect.
-
+  
+TheHive is a scalable, open source security incident response solution designed for SOCs & CERTs to collaborate, 
+elaborate, analyze and get their job done. Handle your case management needs with TheHive plugin for Rapid7 
+InsightConnect
 # Key Features
 
 * Retrieve a list of cases or a specific case by ID
@@ -18,17 +21,16 @@ Handle your case management needs with TheHive plugin for Rapid7 InsightConnect.
 * TheHive username and password
 
 # Supported Product Versions
-
-_There are no supported product versions listed._
-
+  
+*This plugin does not contain any supported product versions.*
 # Documentation
 
 ## Setup
-
-The connection configuration accepts the following parameters:
+  
+The connection configuration accepts the following parameters:  
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |api_key|credential_secret_key|None|False|An optional API key for authentication via bearer token|None|None|
 |credentials|credential_username_password|None|False|Username and password|None|None|
 |host|string|None|True|TheHive host e.g. thehive.company.com or 10.3.4.50|None|None|
@@ -36,302 +38,71 @@ The connection configuration accepts the following parameters:
 |protocol|string|None|True|HTTP Protocol|['http', 'https']|None|
 |proxy|object|None|False|An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value|None|None|
 |verify|boolean|True|True|Verify the certificate|None|None|
-
+  
 Example input:
 
 ```
+{
+  "api_key": {
+    "secretKey": ""
+  },
+  "credentials": {
+    "password": "",
+    "username": ""
+  },
+  "host": "",
+  "port": 9000,
+  "protocol": "http",
+  "proxy": {},
+  "verify": true
+}
 ```
-
 ## Technical Details
 
 ### Actions
 
-#### Create Task
-
-This action is used to create a new case task.
-
+#### Close Case
+Close a case by ID
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|None|
-|task|itask|None|True|Task name|None|None|
-
+|impact_status|string|None|False|Case impact status|['low', 'medium', 'high']|None|
+|resolution_status|string|None|False|Case resolution status|['low', 'medium', 'high']|None|
+|summary|string|None|False|Case Summary|None|None|
+  
 Example input:
 
 ```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|case|task|False|Create case task output|
-
-Example output:
-
-```
-
 {
-  "case": {
-    "_type": "case_task",
-    "user": "jschipp",
-    "startDate": 1511303757000,
-    "id": "AV_guT21YMfcbXhqb9vj",
-    "description": "Blah",
-    "status": "Waiting",
-    "createdAt": 1511303757236,
-    "createdBy": "jschipp",
-    "order": 0,
-    "title": "Blah Blah",
-    "flag": false,
-    "owner": "jschipp"
-  }
+  "id": "",
+  "impact_status": "low",
+  "resolution_status": "low",
+  "summary": ""
 }
-
 ```
-
-#### Create Observable
-
-This action is used to create a new case observable.
-
-##### Input
+##### Output
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|None|
-|observable|iobservable|None|True|Observable|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|case|observable|False|Create case observable output|
-
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|message|string|None|True|Closed case message|None|None|
+|type|string|None|True|Closed case type|None|None|
+  
 Example output:
 
 ```
-
 {
-  "case": {
-    "status": "Ok",
-    "id": "6dc39e0049512aea098de1793b942ff7",
-    "user": "jschipp",
-    "startDate": 1511303756229,
-    "tlp": 2,
-    "reports": {},
-    "_id": "6dc39e0049512aea098de1793b942ff7",
-    "dataType": "domain",
-    "_type": "case_artifact",
-    "data": "example4.com",
-    "createdAt": 1511303756228,
-    "message": "Blah",
-    "createdBy": "jschipp",
-    "ioc": false,
-    "tags": [
-      "blah"
-    ]
-  }
+  "message": "",
+  "type": ""
 }
-
 ```
-#### Get Cases
-
-This action is used to retrieve a list of cases.
-
-##### Input
-
-_This action does not contain any inputs._
-
-##### Output
-
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|list|[]case|False|List of cases|
-
-Example output:
-
-```
-
-{
-  "list": [
-    {
-      "status": "Deleted",
-      "createdBy": "jschipp",
-      "owner": "jschipp",
-      "_type": "case",
-      "user": "jschipp",
-      "updatedBy": "jschipp",
-      "flag": false,
-      "severity": 2,
-      "description": "This is a case generated by Komand",
-      "caseId": 21,
-      "tlp": 2,
-      "startDate": 1511314797000,
-      "updatedAt": 1511314809671,
-      "title": "Komand",
-      "tags": [
-        "test",
-        "komand"
-      ],
-      "createdAt": 1511314797360,
-      "metrics": {},
-      "id": "AV_hYbT4YMfcbXhqb9v4",
-      "customFields": {}
-    },
-    {
-      "status": "Open",
-      "createdBy": "jschipp",
-      "owner": "jschipp",
-      "_type": "case",
-      "user": "jschipp",
-      "flag": false,
-      "severity": 2,
-      "description": "This is a case generated by Komand",
-      "caseId": 20,
-      "tlp": 2,
-      "startDate": 1511314704000,
-      "title": "Komand",
-      "tags": [
-        "test",
-        "komand"
-      ],
-      "createdAt": 1511314704388,
-      "metrics": {},
-      "id": "AV_hYElcYMfcbXhqb9v0",
-      "customFields": {}
-    },
-    ...
-  ]
-}
-
-```
-
-#### Get User
-
-This action is used to get user information.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|id|string|None|False|User ID. If empty, the current user is used|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|_id|string|False|User _ID|
-|_type|string|False|User type|
-|createdAt|integer|False|Time the user was created at in milliseconds or epoch, e.g. 1496561862924|
-|createdBy|string|False|Created by|
-|hasKey|boolean|False|User has a key|
-|id|string|False|ID|
-|name|string|False|Name|
-|preferences|object|False|User preferences|
-|roles|[]string|False|Roles|
-|status|string|False|Get user status|
-|updatedAt|integer|False|Time the user was updated in milliseconds or epoch, e.g. 1496561862924|
-|updatedBy|string|False|Updated by|
-|user|string|False|User|
-
-Example output:
-
-```
-
-{
-  "id": "jschipp",
-  "user": "user",
-  "_id": "jschipp",
-  "_type": "user",
-  "createdAt": 1510027623902,
-  "status": "Ok",
-  "roles": [
-    "read",
-    "write",
-    "admin",
-    "alert"
-  ],
-  "updatedAt": 1511200144667,
-  "updatedBy": "user",
-  "hasKey": true,
-  "createdBy": "user",
-  "name": "Jon Schipp"
-}
-
-```
-
-#### Get Case
-
-This action is used to retrieve a case by ID.
-
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|None|
-
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|case|case|True|Get case output|
-
-Example output:
-
-```
-
-{
-  "case": {
-    "owner": "jschipp",
-    "flag": true,
-    "severity": 2,
-    "tlp": 3,
-    "createdBy": "jschipp",
-    "customFields": {},
-    "_type": "case",
-    "user": "jschipp",
-    "startDate": 1511199461000,
-    "createdAt": 1511200164686,
-    "title": "From TheHive4Py",
-    "metrics": {},
-    "tags": [
-      "TheHive4Py",
-      "sample"
-    ],
-    "description": "N/A",
-    "id": "AV_ajI_oYMfcbXhqb9tS",
-    "status": "Open",
-    "caseId": 1
-  }
-}
-
-```
-
 #### Create Case
-
-This action is used to create a new case.
-
+Create a new case
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |customFields|object|None|False|Case custom fields|None|None|
 |description|string|None|False|Description of the case|None|None|
 |flag|boolean|False|False|Flag, default is false|None|None|
@@ -339,103 +110,395 @@ This action is used to create a new case.
 |task|itask|None|False|Case task|None|None|
 |title|string|None|True|Name of the case|None|None|
 |tlp|integer|2|False|Traffic Light Protocol level, default is 2|None|None|
-
-##### customFields
-
-To assign `customFields` to a new case, pass in custom JSON to the input. The `object` contains the name of the customField that was created as its key, yielding a new `object`
-that has the datatype of the field and a value you want assigned to the new custom field e.g.:
-
-|Supported Data Types|Examples|
-|--------------------|--------|
-|string|{"testCustomField":{"string":"My custom field"}}|
-|numbers|{"testCustomField":{"number":100}}|
-|booleans|{"testCustomField":{"boolean":true}}|
-|dates|{"testCustomField":{"date":1529696160000}}|
-
+  
 Example input:
 
 ```
+{
+  "customFields": {},
+  "description": "",
+  "flag": false,
+  "tags": [
+    ""
+  ],
+  "task": {
+    "description": {},
+    "flag": false,
+    "owner": {},
+    "status": {},
+    "title": ""
+  },
+  "title": "",
+  "tlp": 2
+}
 ```
-
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|case|case|False|Create case output|
-
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|case|case|None|False|Create case output|None|None|
+  
 Example output:
 
 ```
-
 {
   "case": {
-     "tags": [
-       "test"
-     ],
-     "status": "Open",
-     "_type": "case",
-     "startDate": 1511303753000,
-     "flag": false,
-     "id": "AV_guTIIYMfcbXhqb9vg",
-     "owner": "jschipp",
-     "createdAt": 1511303754105,
-     "user": "jschipp",
-     "metrics": {},
-     "title": "My Test Case",
-     "caseId": 18,
-     "customFields": {},
-     "severity": 2,
-     "description": "This is a test case",
-     "tlp": 2,
-     "createdBy": "jschipp"
+    "Case ID e.g. AV_ajI_oYMfcbXhqb9tS": {},
+    "Created At": {},
+    "Created By": {},
+    "Custom Fields": {},
+    "ID": {},
+    "Start Date": 0,
+    "TLP": {},
+    "Type": {},
+    "description": {},
+    "flag": "true",
+    "metrics": {},
+    "owner": {},
+    "severity": {},
+    "status": "",
+    "tags": [
+      {}
+    ],
+    "title": {},
+    "user": {}
   }
 }
-
 ```
-
-#### Close Case
-
-This action is used to close a case by ID. It returns `Found` or `NotFound` in the `type` key and `Closed` or `NotClosed` in the `message` key if there's no errors.
-
+#### Create Observable
+Create a new case observable
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 |id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|None|
-|impact_status|string|None|False|Case impact status|['low', 'medium', 'high']|None|
-|resolution_status|string|None|False|Case resolution status|['low', 'medium', 'high']|None|
-|summary|string|None|False|Case Summary|None|None|
-
+|observable|iobservable|None|True|Observable|None|None|
+  
 Example input:
 
 ```
+{
+  "id": "",
+  "observable": {
+    "Data Type": "",
+    "ID": {},
+    "IOC": false,
+    "TLP": 2,
+    "message": {},
+    "tags": [
+      {}
+    ]
+  }
+}
 ```
-
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|message|string|True|Closed case message|
-|type|string|True|Closed case type|
-
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|case|observable|None|False|Create case observable output|None|None|
+  
 Example output:
 
 ```
-
 {
-  "type": "Found",
-  "message": "Closed"
+  "case": {
+    "Created At": {},
+    "Created By": {},
+    "Data Type": {},
+    "ID": {},
+    "IOC": "true",
+    "Start Date": 0,
+    "TLP": {},
+    "Type": {},
+    "data": {},
+    "message": {},
+    "reports": {},
+    "status": "",
+    "tags": [
+      {}
+    ],
+    "user": {}
+  }
 }
+```
+#### Create Task
+Create a new case task
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|None|
+|task|itask|None|True|Task name|None|None|
+  
+Example input:
 
 ```
+{
+  "id": "",
+  "task": {
+    "description": {},
+    "flag": false,
+    "owner": {},
+    "status": {},
+    "title": ""
+  }
+}
+```
+##### Output
 
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|case|task|None|False|Create case task output|None|None|
+  
+Example output:
+
+```
+{
+  "case": {
+    "Created At": {},
+    "Created By": {},
+    "ID": {},
+    "Start Date": 0,
+    "Type": {},
+    "description": {},
+    "flag": "true",
+    "order": {},
+    "owner": {},
+    "status": "Waiting",
+    "title": {},
+    "user": {}
+  }
+}
+```
+#### Get Case
+Retrieve a case by ID
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|None|
+  
+Example input:
+
+```
+{
+  "id": ""
+}
+```
+##### Output
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|case|case|None|True|Get case output|None|None|
+  
+Example output:
+
+```
+{
+  "case": {
+    "Case ID e.g. AV_ajI_oYMfcbXhqb9tS": {},
+    "Created At": {},
+    "Created By": {},
+    "Custom Fields": {},
+    "ID": {},
+    "Start Date": 0,
+    "TLP": {},
+    "Type": {},
+    "description": {},
+    "flag": "true",
+    "metrics": {},
+    "owner": {},
+    "severity": {},
+    "status": "",
+    "tags": [
+      {}
+    ],
+    "title": {},
+    "user": {}
+  }
+}
+```
+#### Get Cases
+Retrieve list of cases
+##### Input
+  
+*This action does not contain any inputs.*
+##### Output
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|list|[]case|None|False|List of cases|None|None|
+  
+Example output:
+
+```
+{
+  "list": [
+    {
+      "Case ID e.g. AV_ajI_oYMfcbXhqb9tS": {},
+      "Created At": {},
+      "Created By": {},
+      "Custom Fields": {},
+      "ID": {},
+      "Start Date": 0,
+      "TLP": {},
+      "Type": {},
+      "description": {},
+      "flag": "true",
+      "metrics": {},
+      "owner": {},
+      "severity": {},
+      "status": "",
+      "tags": [
+        {}
+      ],
+      "title": {},
+      "user": {}
+    }
+  ]
+}
+```
+#### Get User
+Get information about a user
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|id|string|None|False|User ID. If empty, the current user is used|None|None|
+  
+Example input:
+
+```
+{
+  "id": ""
+}
+```
+##### Output
+
+|Name|Type|Default|Required|Description|Enum|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|_id|string|None|False|User _ID|None|None|
+|_type|string|None|False|User type|None|None|
+|createdAt|integer|None|False|Time the user was created at in milliseconds or epoch, e.g. 1496561862924|None|None|
+|createdBy|string|None|False|Created by|None|None|
+|hasKey|boolean|None|False|User has a key|None|None|
+|id|string|None|False|ID|None|None|
+|name|string|None|False|Name|None|None|
+|preferences|object|None|False|User preferences|None|None|
+|roles|[]string|None|False|Roles|None|None|
+|status|string|None|False|Get user status|None|None|
+|updatedAt|integer|None|False|Time the user was updated in milliseconds or epoch, e.g. 1496561862924|None|None|
+|updatedBy|string|None|False|Updated by|None|None|
+|user|string|None|False|User|None|None|
+  
+Example output:
+
+```
+{
+  "_id": "",
+  "_type": "",
+  "createdAt": 0,
+  "createdBy": "",
+  "hasKey": true,
+  "id": "",
+  "name": "",
+  "preferences": {},
+  "roles": [
+    ""
+  ],
+  "status": "",
+  "updatedAt": 0,
+  "updatedBy": "",
+  "user": ""
+}
+```
 ### Triggers
+  
+*This plugin does not contain any triggers.*
+### Tasks
+  
+*This plugin does not contain any tasks.*
+### Custom Types
+  
+**itask**  
 
-_This plugin does not contain any triggers._
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|description|string|None|None|Task description|None|
+|flag|boolean|False|None|Task flag, default is false|None|
+|owner|string|None|None|Task owner|None|
+|status|string|Waiting|None|Task status|None|
+|title|string|None|None|Task title|None|
+  
+**iobservable**  
 
-### Custom Output Types
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|string|None|None|The observable's value e.g. badguy.com|None|
+|Data Type|string|None|None|Observable data type e.g. domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other|None|
+|IOC|boolean|False|None|Indicator of Compromise, default is 2|None|
+|message|string|None|None|Observable message|None|
+|tags|[]string|None|None|List of observable tags|None|
+|TLP|integer|2|None|Traffic Light Protocol level, default is 2|None|
+  
+**case**  
 
-_This plugin does not contain any custom output types._
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Type|string|None|None|Case type|None|
+|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|integer|None|None|Case ID|None|
+|Created At|integer|None|None|Created at|None|
+|Created By|string|None|None|Case created by|None|
+|Custom Fields|object|None|None|Case custom fields|None|
+|description|string|None|None|None|None|
+|flag|boolean|None|None|Case flags|None|
+|ID|string|None|None|ID|None|
+|metrics|object|None|None|Case metrics|None|
+|owner|string|None|None|Case owner|None|
+|severity|integer|None|None|Case severity|None|
+|Start Date|integer|None|None|Case start date|None|
+|status|string|None|None|Case status|None|
+|tags|[]string|None|None|Case tags|None|
+|title|string|None|None|Case title|None|
+|TLP|integer|None|None|Traffic Light Protocol level|None|
+|user|string|None|None|Case user|None|
+  
+**task**  
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|Type|string|None|None|Task type|None|
+|Created At|integer|None|None|Task created at|None|
+|Created By|string|None|None|Task created by|None|
+|description|string|None|None|Task description|None|
+|flag|boolean|None|None|Task flag|None|
+|ID|string|None|None|Task ID|None|
+|order|integer|None|None|Task order|None|
+|owner|string|None|None|Task owner|None|
+|Start Date|integer|None|None|Task start date|None|
+|status|string|None|False|Task status|None|
+|title|string|None|None|Task title|None|
+|user|string|None|None|Task user|None|
+  
+**observable**  
+
+|Name|Type|Default|Required|Description|Example|
+| :--- | :--- | :--- | :--- | :--- | :--- |
+|ID|string|None|None|Observable _ID|None|
+|Type|string|None|None|Observable type|None|
+|Created At|integer|None|None|Time the observable was created at in milliseconds or epoch, e.g. 1496561862924|None|
+|Created By|string|None|None|Observable created by|None|
+|data|string|None|None|Observable data|None|
+|Data Type|string|None|None|Observable data type|None|
+|ID|string|None|None|Observable ID|None|
+|IOC|boolean|None|None|Indicators of Compromise|None|
+|message|string|None|None|Observable message|None|
+|reports|object|None|None|Observable reports|None|
+|Start Date|integer|None|None|Observable start date|None|
+|status|string|None|None|Observable status|None|
+|tags|[]string|None|None|Observable tags|None|
+|TLP|integer|None|None|Traffic Light Protocol level|None|
+|user|string|None|None|Observable user|None|
 
 ## Troubleshooting
 
