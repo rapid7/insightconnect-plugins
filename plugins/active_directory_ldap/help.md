@@ -272,7 +272,6 @@ Example input:
 ```
 {
   "account_disabled": true,
-  "additional_parameters": {},
   "domain_name": "example.com",
   "first_name": "John",
   "last_name": "Doe",
