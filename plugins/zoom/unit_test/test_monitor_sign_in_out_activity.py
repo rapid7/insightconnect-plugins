@@ -11,6 +11,8 @@ from unit_test.mock import STUB_CONNECTION, STUB_OAUTH_TOKEN
 REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI._refresh_oauth_token"
 GET_USER_ACTIVITY_EVENTS_PATH = "icon_zoom.util.api.ZoomAPI.get_user_activity_events"
 GET_DATETIME_NOW_PATH = "icon_zoom.tasks.monitor_sign_in_out_activity.task.MonitorSignInOutActivity._get_datetime_now"
+GET_DATETIME_LAST_24_HOURS_PATH = "icon_zoom.tasks.monitor_sign_in_out_activity.task.MonitorSignInOutActivity._get_datetime_last_24_hours"
+DATETIME_NOW_PATH = "datetime.datetime.now"
 
 
 class TestGetUserActivityEvents(unittest.TestCase):
@@ -27,8 +29,18 @@ class TestGetUserActivityEvents(unittest.TestCase):
         self.action.logger = logging.getLogger("action logger")
         self.params = {}
 
+    @patch(GET_DATETIME_LAST_24_HOURS_PATH)
+    @patch(GET_DATETIME_NOW_PATH)
     @patch(GET_USER_ACTIVITY_EVENTS_PATH)
-    def test_first_run(self, mock_call):
+    def test_first_run(self, mock_call, mock_datetime_now, mock_datetime_last_24):
+        mock_datetime_now.side_effect = [
+            datetime.datetime.fromtimestamp(1677211200),  # 2023-02-23 22:00:00, first run, "now"
+        ]
+
+        mock_datetime_last_24.side_effect = [
+            datetime.datetime.fromtimestamp(1677124800),  # 2023-02-22 22:00:00, first run, "last 24"
+        ]
+
         expected_output = [
             {
                 "client_type": "mac",
@@ -65,7 +77,7 @@ class TestGetUserActivityEvents(unittest.TestCase):
         ]
         expected_state = {
             "boundary_events": ["197f96ef45ad08592bfea604f60b6abcfc7d4bf2", "8c68922ce0e81f42e4db701317aa7f219049b144"],
-            "last_event_time": "2023-02-22T21:44:44Z",
+            "last_request_timestamp": "2023-02-23T22:00:00Z",
         }
 
         mock_call.return_value = expected_output
@@ -131,7 +143,7 @@ class TestGetUserActivityEvents(unittest.TestCase):
         ]
         expected_state = {
             "boundary_events": ["197f96ef45ad08592bfea604f60b6abcfc7d4bf2", "8c68922ce0e81f42e4db701317aa7f219049b144"],
-            "last_event_time": "2023-02-22T21:44:44Z",
+            "last_request_timestamp": "2023-02-22T21:44:44Z",
         }
 
         mock_call.return_value = previous_output
@@ -141,8 +153,19 @@ class TestGetUserActivityEvents(unittest.TestCase):
         self.assertDictEqual(state, expected_state)
         self.assertListEqual(output, expected_output)
 
+    @patch(GET_DATETIME_LAST_24_HOURS_PATH)
+    @patch(GET_DATETIME_NOW_PATH)
     @patch(GET_USER_ACTIVITY_EVENTS_PATH)
-    def test_first_and_subsequent_runs(self, mock_call):
+    def test_first_and_subsequent_runs(self, mock_call, mock_datetime_now, mock_datetime_last_24):
+        mock_datetime_now.side_effect = [
+            datetime.datetime.fromtimestamp(1677211200),  # 2023-02-23 22:00:00, first run, "now"
+            datetime.datetime.fromtimestamp(1677214800),  # 2023-02-23 23:00:00, subs. run, "1 hour after first run"
+        ]
+
+        mock_datetime_last_24.side_effect = [
+            datetime.datetime.fromtimestamp(1677124800),  # 2023-02-22 22:00:00, first run, "last 24"
+        ]
+
         # First API call patch
         first_event_set = [
             {
@@ -227,11 +250,11 @@ class TestGetUserActivityEvents(unittest.TestCase):
         ]
         first_expected_state = {
             "boundary_events": ["197f96ef45ad08592bfea604f60b6abcfc7d4bf2", "3a28377b757a9185440cc939842067c72d13a054"],
-            "last_event_time": "2023-02-22T21:44:44Z",
+            "last_request_timestamp": "2023-02-23T22:00:00Z",
         }
         second_expected_state = {
             "boundary_events": ["b308ba69b3beb7207f8271ef7a78f84da98bed67"],
-            "last_event_time": "2023-02-23T21:44:44Z",
+            "last_request_timestamp": "2023-02-23T23:00:00Z",
         }
 
         # First run
@@ -253,7 +276,7 @@ class TestGetUserActivityEvents(unittest.TestCase):
         mock_datetime.return_value = datetime.datetime(2000, 1, 1)
         output, state = self.action.run(state={})
 
-        expected_state = {"boundary_events": [], "last_event_time": "2000-01-01T00:00:00Z"}
+        expected_state = {"boundary_events": [], "last_request_timestamp": "2000-01-01T00:00:00Z"}
         expected_output = []
         self.assertDictEqual(state, expected_state)
         self.assertListEqual(output, expected_output)

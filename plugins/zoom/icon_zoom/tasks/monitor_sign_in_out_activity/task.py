@@ -13,7 +13,7 @@ from icon_zoom.util.event import Event
 
 class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
-    LAST_EVENT_TIME = "last_event_time"
+    LAST_REQUEST_TIMESTAMP = "last_request_timestamp"
     BOUNDARY_EVENTS = "boundary_events"
 
     ZOOM_TIME_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
@@ -31,7 +31,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
     def run(self, params={}, state={}):
 
         # Check if first run
-        if not state.get(self.LAST_EVENT_TIME):
+        if not state.get(self.LAST_REQUEST_TIMESTAMP):
             self.logger.info("First run")
             output, new_state = self.first_run(state=state)
         else:
@@ -46,11 +46,14 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
     def subsequent_run(self, state: dict) -> ([dict], dict):
         # Get time boundaries for new event set retrieval
         now = self._get_datetime_now()
+        # now_for_zoom is the start time for the Zoom API but also used to track requests across task runs via state
         now_for_zoom = self._format_datetime_for_zoom(dt=now)
+        last_request_timestamp = state.get(self.LAST_REQUEST_TIMESTAMP)
 
         # Get fully consumed paginated event set, using previous run latest event time
+        self.logger.info(f"Getting events from {last_request_timestamp} until {now_for_zoom}")
         new_events: [dict] = self.connection.zoom_api.get_user_activity_events(
-            start_date=state.get(self.LAST_EVENT_TIME), end_date=now_for_zoom, page_size=1000
+            start_date=last_request_timestamp, end_date=now_for_zoom, page_size=1000
         )
         try:
             new_events = [Event(**event) for event in new_events]
@@ -58,7 +61,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             self.logger.error(f"Zoom API endpoint output has changed, unable to parse events: {error}")
             return [], {
                 self.BOUNDARY_EVENTS: [],
-                self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now()),
+                self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
             }
 
         # Get latest event time, to be used for determining boundary event hashes
@@ -69,7 +72,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             self.logger.info("Unable to get latest event time, no new events found!")
             return [], {
                 self.BOUNDARY_EVENTS: [],
-                self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now()),
+                self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
             }
 
         # De-dupe events using boundary event hashes from previous run
@@ -83,7 +86,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
         # update state
         state[self.BOUNDARY_EVENTS] = boundary_event_hashes
-        state[self.LAST_EVENT_TIME] = new_latest_event_time
+        state[self.LAST_REQUEST_TIMESTAMP] = now_for_zoom
 
         return deduped_events, state
 
@@ -91,11 +94,13 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         # Get time boundaries for first event set
         now = self._get_datetime_now()
         last_24_hours = self._get_datetime_last_24_hours()
+
+        # now_for_zoom is the start time for the Zoom API but also used to track requests across task runs via state
         now_for_zoom = self._format_datetime_for_zoom(dt=now)
         last_24_hours_for_zoom = self._format_datetime_for_zoom(dt=last_24_hours)
-        self.logger.info("Got times!")
 
         # Get first set of events, fully consumed pagination
+        self.logger.info(f"First run, getting events from {last_24_hours_for_zoom} until {now_for_zoom}")
         new_events: [dict] = self.connection.zoom_api.get_user_activity_events(
             start_date=last_24_hours_for_zoom, end_date=now_for_zoom, page_size=1000
         )
@@ -106,7 +111,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             self.logger.error(f"Zoom API endpoint output has changed, unable to parse events: {error}")
             return [], {
                 self.BOUNDARY_EVENTS: [],
-                self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now()),
+                self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
             }
 
         self.logger.info(f"Got {len(new_events)} events!")
@@ -122,12 +127,12 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             self.logger.info("Unable to get latest event time, no new events found!")
             return [], {
                 self.BOUNDARY_EVENTS: [],
-                self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now()),
+                self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
             }
 
         # update state
         state[self.BOUNDARY_EVENTS] = boundary_event_hashes
-        state[self.LAST_EVENT_TIME] = new_latest_event_time
+        state[self.LAST_REQUEST_TIMESTAMP] = now_for_zoom
         self.logger.info(f"Updated state, state is now: {state}")
 
         return new_events, state
@@ -144,11 +149,6 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         hashes = [event.sha1() for event in events if event.time == latest_event_time]
 
         return hashes
-
-    def _get_datetime_from_zoom_timestamp(self, ts: str) -> datetime:
-        dt = datetime.strptime(ts, self.ZOOM_TIME_FORMAT)
-
-        return dt
 
     @staticmethod
     def _get_datetime_now() -> datetime:
