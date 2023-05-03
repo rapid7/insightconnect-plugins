@@ -4,6 +4,7 @@ import json
 
 
 class Input:
+    API_KEY = "api_key"
     CREDENTIALS = "credentials"
     HOST = "host"
     PORT = "port"
@@ -18,6 +19,12 @@ class ConnectionSchema(komand.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "api_key": {
+      "$ref": "#/definitions/credential_secret_key",
+      "title": "API key",
+      "description": "An optional API key for authentication via bearer token",
+      "order": 5
+    },
     "credentials": {
       "$ref": "#/definitions/credential_username_password",
       "title": "Credentials",
@@ -51,24 +58,41 @@ class ConnectionSchema(komand.Input):
       "type": "object",
       "title": "Proxy",
       "description": "An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value",
-      "order": 5
+      "order": 6
     },
     "verify": {
       "type": "boolean",
       "title": "SSL Verify",
       "description": "Verify the certificate",
       "default": true,
-      "order": 6
+      "order": 7
     }
   },
   "required": [
-    "credentials",
     "host",
     "port",
     "protocol",
     "verify"
   ],
   "definitions": {
+    "credential_secret_key": {
+      "id": "credential_secret_key",
+      "type": "object",
+      "title": "Credential: Secret Key",
+      "description": "A shared secret key",
+      "properties": {
+        "secretKey": {
+          "type": "string",
+          "title": "Secret Key",
+          "displayType": "password",
+          "description": "The shared secret key",
+          "format": "password"
+        }
+      },
+      "required": [
+        "secretKey"
+      ]
+    },
     "credential_username_password": {
       "id": "credential_username_password",
       "type": "object",
@@ -80,12 +104,14 @@ class ConnectionSchema(komand.Input):
           "title": "Password",
           "displayType": "password",
           "description": "The password",
-          "format": "password"
+          "format": "password",
+          "order": 2
         },
         "username": {
           "type": "string",
           "title": "Username",
-          "description": "The username to log in with"
+          "description": "The username to log in with",
+          "order": 1
         }
       },
       "required": [

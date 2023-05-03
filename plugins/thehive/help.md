@@ -17,20 +17,30 @@ Handle your case management needs with TheHive plugin for Rapid7 InsightConnect.
 * TheHive instance hostname
 * TheHive username and password
 
+# Supported Product Versions
+
+_There are no supported product versions listed._
+
 # Documentation
 
 ## Setup
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|credentials|credential_username_password|None|True|Username and password|None|
-|host|string|None|True|TheHive host e.g. thehive.company.com or 10.3.4.50|None|
-|port|string|9000|True|TheHive API port e.g. 9000|None|
-|protocol|string|None|True|HTTP Protocol|['http', 'https']|
-|proxy|object|None|False|An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value|None|
-|verify|boolean|True|True|Verify the certificate|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|api_key|credential_secret_key|None|False|An optional API key for authentication via bearer token|None|None|
+|credentials|credential_username_password|None|False|Username and password|None|None|
+|host|string|None|True|TheHive host e.g. thehive.company.com or 10.3.4.50|None|None|
+|port|string|9000|True|TheHive API port e.g. 9000|None|None|
+|protocol|string|None|True|HTTP Protocol|['http', 'https']|None|
+|proxy|object|None|False|An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value|None|None|
+|verify|boolean|True|True|Verify the certificate|None|None|
+
+Example input:
+
+```
+```
 
 ## Technical Details
 
@@ -42,10 +52,15 @@ This action is used to create a new case task.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|
-|task|itask|None|True|Task name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|None|
+|task|itask|None|True|Task name|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -82,10 +97,15 @@ This action is used to create a new case observable.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|
-|observable|iobservable|None|True|Observable|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|None|
+|observable|iobservable|None|True|Observable|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -199,9 +219,14 @@ This action is used to get user information.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|id|string|None|False|User ID. If empty, the current user is used|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|False|User ID. If empty, the current user is used|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -253,9 +278,14 @@ This action is used to retrieve a case by ID.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -300,15 +330,15 @@ This action is used to create a new case.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|customFields|object|None|False|Case custom fields|None|
-|description|string|None|False|Description of the case|None|
-|flag|boolean|False|False|Flag, default is false|None|
-|tags|[]string|None|False|List of tags|None|
-|task|itask|None|False|Case task|None|
-|title|string|None|True|Name of the case|None|
-|tlp|integer|2|False|Traffic Light Protocol level, default is 2|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|customFields|object|None|False|Case custom fields|None|None|
+|description|string|None|False|Description of the case|None|None|
+|flag|boolean|False|False|Flag, default is false|None|None|
+|tags|[]string|None|False|List of tags|None|None|
+|task|itask|None|False|Case task|None|None|
+|title|string|None|True|Name of the case|None|None|
+|tlp|integer|2|False|Traffic Light Protocol level, default is 2|None|None|
 
 ##### customFields
 
@@ -321,6 +351,11 @@ that has the datatype of the field and a value you want assigned to the new cust
 |numbers|{"testCustomField":{"number":100}}|
 |booleans|{"testCustomField":{"boolean":true}}|
 |dates|{"testCustomField":{"date":1529696160000}}|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -364,12 +399,17 @@ This action is used to close a case by ID. It returns `Found` or `NotFound` in t
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|
-|impact_status|string|None|False|Case impact status|['low', 'medium', 'high']|
-|resolution_status|string|None|False|Case resolution status|['low', 'medium', 'high']|
-|summary|string|None|False|Case Summary|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|None|
+|impact_status|string|None|False|Case impact status|['low', 'medium', 'high']|None|
+|resolution_status|string|None|False|Case resolution status|['low', 'medium', 'high']|None|
+|summary|string|None|False|Case Summary|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 

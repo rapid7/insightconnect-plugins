@@ -48,7 +48,12 @@ connection:
     type: credential_username_password
     title: Credentials
     description: Username and password
-    required: true
+    required: false
+  api_key:
+    title: API key
+    description: An optional API key for authentication via bearer token
+    type: credential_secret_key
+    required: false
   proxy:
     type: object
     title: Proxy
