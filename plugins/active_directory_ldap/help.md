@@ -58,7 +58,7 @@ Example input:
 
 This action is used to unlock an account.
 
-##### Input
+##### Input1
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -90,7 +90,7 @@ Example output:
 
 This action is used to query group membership.
 
-##### Input
+##### Input2
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -181,7 +181,7 @@ Example output:
 
 This action is used to modify the attributes of an Active Directory object.
 
-##### Input
+##### Input3
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -217,7 +217,7 @@ Example output:
 
 This action is used to add or remove an object from an Active Directory group.
 
-##### Input
+##### Input4
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -253,7 +253,7 @@ Example output:
 
 This action is used to add the specified Active Directory user.
 
-##### Input
+##### Input5
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -305,7 +305,7 @@ This action is used to run an LDAP query.
 
 For more information on LDAP queries see https://ldap3.readthedocs.io/tutorial_searches.html
 
-##### Input
+##### Input6
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -393,7 +393,7 @@ Example output:
 
 This action is used to enable an account.
 
-##### Input
+##### Input7
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -427,7 +427,7 @@ Example output:
 
 This action is used to enable accounts.
 
-##### Input
+##### Input8
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -474,7 +474,7 @@ Example output:
 
 This action is used to move an Active Directory object from one organizational unit to another.
 
-##### Input
+##### Input9
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -510,7 +510,7 @@ Example output:
 
 This action is used to reset a users password.
 
-##### Input
+##### Input10
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -545,7 +545,7 @@ Example output:
 
 This action is used to disable an account.
 
-##### Input
+##### Input11
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -580,7 +580,7 @@ Example output:
 
 This action is used to disable accounts.
 
-##### Input
+##### Input12
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -627,7 +627,7 @@ Example output:
 
 This action is used to delete the LDAP object specified.
 
-##### Input
+##### Input13
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -661,7 +661,7 @@ Example output:
 
 This action is used to force a user to reset their password on next login.
 
-##### Input
+##### Input14
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
