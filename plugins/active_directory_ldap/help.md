@@ -276,12 +276,7 @@ Example input:
     "telephoneNumber": "(617)555-1234"
   },
   "domain_name": "example.com",
-  "first_name": "John",
-  "last_name": "Doe",
-  "logon_name": "jdoe",
-  "password": "mypassword",
-  "user_ou": "Users",
-  "user_principal_name": "user@example.com"
+  "first_name": "John"
 }
 ```
 
