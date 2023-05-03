@@ -404,6 +404,7 @@ actions:
         description: Overall operation status
         type: boolean
         required: false
+        example: True
   disable_user:
     title: Disable
     description: Disable an account

@@ -458,8 +458,8 @@ Example output:
   "successful_enablements": ["CN=user,OU=domain_users,DC=example,DC=com"]
   "unsuccessful_enablements": [
     {
-        "dn": "CN=user,OU=domain_users,DC=test,DC=com",
-        "error": "The DN CN=empty_search,DC=example,DC=com was not found"
+      "dn": "CN=user,OU=domain_users,DC=test,DC=com",
+      "error": "The DN CN=empty_search,DC=example,DC=com was not found"
     }
   ]
 }
