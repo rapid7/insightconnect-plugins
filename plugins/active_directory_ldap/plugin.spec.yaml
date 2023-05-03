@@ -268,11 +268,13 @@ actions:
         description: Results returned
         type: '[]result'
         required: false
+        example: '[ { "dn": string, "attributes": { "pwdLastSet": date, "objectClass": [ string, string, string, string ], "memberOf": [ string ], "sAMAccountType": int, "uSNChanged": int, "givenName": string, "userPrincipalName": string, "countryCode": int, "lastLogon": date, "sAMAccountName": string, "name": string, "primaryGroupID": int, "dSCorePropagationData": [ date ], "displayName": string, "logonCount": int, "cn": string, "objectSid": string, "codePage": int, "badPwdCount": int, "objectGUID": string, "distinguishedName": string, "whenChanged": date, "badPasswordTime": date, "instanceType": int, "uSNCreated": int, "sn": string, "whenCreated": date, "accountExpires": date, "userAccountControl": int, "lastLogoff": date, "objectCategory": "string" } } ]'
       count:
         title: Count
         description: Number of results
         type: integer
         required: false
+        example: 1
   delete:
     title: Delete
     description: Deletes the LDAP object specified
@@ -289,6 +291,7 @@ actions:
         description: Operation status
         type: boolean
         required: false
+        example: true
   add_user:
     title: Add User
     description: Adds the specified Active Directory user
@@ -355,6 +358,7 @@ actions:
         description: Operation status
         type: boolean
         required: false
+        example: true
   enable_user:
     title: Enable
     description: Enable an account
@@ -371,6 +375,7 @@ actions:
         description: Operation status
         type: boolean
         required: false
+        example: true
   enable_users:
     title: Enable Users
     description: Enable multiple accounts
@@ -387,11 +392,13 @@ actions:
         description: List of successfully enabled users
         type: "[]string"
         required: false
+        example: '["CN=user,OU=domain_users,DC=example,DC=com"]'
       unsuccessful_enablements:
         title: Unsuccessful Enablements
         description: List of unsuccessfully enabled users
         type: "[]modified_user_error"
         required: false
+        example: '[ { "dn": "CN=user,OU=domain_users,DC=test,DC=com", "error": "The DN CN=empty_search,DC=example,DC=com was not found" } ]'
       all_operations_succeeded:
         title: All Operations Succeeded
         description: Overall operation status
@@ -413,6 +420,7 @@ actions:
         description: Operation status
         type: boolean
         required: false
+        example: true
   disable_users:
     title: Disable Users
     description: Disable multiple accounts
@@ -429,16 +437,19 @@ actions:
         description: List of successfully disabled users
         type: "[]string"
         required: false
+        example: '["CN=user,OU=domain_users,DC=example,DC=com"]'
       unsuccessful_disablements:
         title: Unsuccessful Disablements
         description: List of unsuccessfully disabled users
         type: "[]modified_user_error"
         required: false
+        example: '[ { "dn": "CN=user,OU=domain_users,DC=test,DC=com", "error": "The DN CN=empty_search,DC=example,DC=com was not found" } ]'
       all_operations_succeeded:
         title: All Operations Succeeded
         description: Overall operation status
         type: boolean
         required: false
+        example: true
   modify_groups:
     title: Add or Remove an Object from Group
     description: Add or remove an object from an Active Directory group
@@ -470,6 +481,7 @@ actions:
         description: Operation status
         type: boolean
         required: false
+        example: true
   move_object:
     title: Move Object
     description: Move an Active Directory object from one organizational unit to another
@@ -492,6 +504,7 @@ actions:
         description: Operation status
         type: boolean
         required: false
+        example: true
   reset_password:
     title: Reset Password
     description: Reset a users password
@@ -514,6 +527,7 @@ actions:
         description: Operation status
         type: boolean
         required: false
+        example: true
   modify_object:
     title: Modify Object
     description: Modify the attributes for an Active Directory object
@@ -542,6 +556,7 @@ actions:
         description: Operation status
         type: boolean
         required: false
+        example: true
   force_password_reset:
     title: Force Password Reset
     description: Force a user to reset their password on next login
@@ -558,6 +573,7 @@ actions:
         description: Operation status
         type: boolean
         required: false
+        example: true
   query_group_membership:
     title: Query Group Membership
     description: Return users and groups that belonging to the specific group
@@ -592,11 +608,13 @@ actions:
         description: Results returned
         type: '[]results'
         required: false
+        example: '[ { "attributes": { "accountExpires": "9999-12-31 23:59:59.999999+00:00", "adminCount": 0, "badPasswordTime": "1601-01-01 00:00:00+00:00", "badPwdCount": 0, "cn": "Example User", "codePage": 0, "countryCode": 0, "dSCorePropagationData": [ "2021-01-14 18:17:28+00:00", "2021-01-14 17:48:27+00:00", "1601-01-01 00:04:16+00:00" ], "description": [ "Example Account" ], "distinguishedName": "CN=Example User,CN=Users,DC=example,DC=com", "instanceType": 4, "isCriticalSystemObject": true, "lastLogoff": "1601-01-01 00:00:00+00:00", "lastLogon": "1601-01-01 00:00:00+00:00", "logonCount": 0, "memberOf": [ "CN=Domain Users,CN=Users,example,DC=com" ], "name": "Example User", "objectCategory": "CN=Person,CN=Schema,CN=Configuration,DC=example,DC=com", "objectClass": [ "top", "person", "organizationalPerson", "user" ], "objectGUID": "{b45138aa-be39-47d9-ab57-3aee8f381f87}", "objectSid": "S-1-5-33-3456299977-1009817396-2685666617-303", "primaryGroupID": 513, "pwdLastSet": "2021-01-14 17:48:26.197384+00:00", "sAMAccountName": "Example User", "sAMAccountType": 489006322, "showInAdvancedViewOnly": true, "uSNChanged": 16419, "uSNCreated": 12324, "userAccountControl": 514, "whenChanged": "2021-01-14 18:17:28+00:00", "whenCreated": "2021-01-14 17:48:26+00:00" }, "dn": "CN=Example User,CN=Users,DC=example,DC=com" } ]'
       count:
         title: Count
         description: Number of results
         type: integer
         required: false
+        example: 1
   unlock_user:
     title: Unlock User
     description: Unlock an account
@@ -613,3 +631,4 @@ actions:
         description: Operation status
         type: boolean
         required: false
+        example: true
