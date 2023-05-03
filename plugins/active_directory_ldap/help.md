@@ -76,7 +76,7 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|success|boolean|False|Operation status|true|
+|success|boolean|False|Operation status|True|
 
 Example output:
 
@@ -437,7 +437,9 @@ Example input:
 
 ```
 {
-  "distinguished_names": ["CN=user,OU=domain_users,DC=example,DC=com"]
+  "distinguished_names": [
+    "CN=user,OU=domain_users,DC=example,DC=com"
+  ]
 }
 ```
 
@@ -455,7 +457,9 @@ Example output:
 
 {
   "all_operations_succeeded": true
-  "successful_enablements": ["CN=user,OU=domain_users,DC=example,DC=com"]
+  "successful_enablements": [
+    "CN=user,OU=domain_users,DC=example,DC=com"
+  ]
   "unsuccessful_enablements": [
     {
       "dn": "CN=user,OU=domain_users,DC=test,DC=com",
@@ -586,7 +590,9 @@ Example input:
 
 ```
 {
-  "distinguished_names": ["CN=user,OU=domain_users,DC=example,DC=com"]
+  "distinguished_names": [
+    "CN=user,OU=domain_users,DC=example,DC=com"
+  ]
 }
 ```
 
@@ -604,7 +610,9 @@ Example output:
 
 {
   "all_operations_succeeded": true
-  "successful_disablements": ["CN=user,OU=domain_users,DC=example,DC=com"]
+  "successful_disablements": [
+    "CN=user,OU=domain_users,DC=example,DC=com"
+  ]
   "unsuccessful_disablements": [
     {
       "dn": "CN=user,OU=domain_users,DC=test,DC=com",
