@@ -4,6 +4,7 @@ from .schema import UserActivityEventInput, UserActivityEventOutput, Input, Outp
 
 # Custom imports below
 from datetime import datetime
+from icon_zoom.util.util import oauth_retry_limit_exception, authentication_error_exception
 from insightconnect_plugin_runtime.exceptions import PluginException
 from icon_zoom.util.api import AuthenticationRetryLimitError, AuthenticationError
 
@@ -34,18 +35,9 @@ class UserActivityEvent(insightconnect_plugin_runtime.Trigger):
                 self.connection.zoom_api.authenticate()
                 events = self.connection.zoom_api.get_user_activity_events(last_event_time, page_size=page_size)
             except AuthenticationRetryLimitError:
-                raise PluginException(
-                    cause="OAuth authentication retry limit was met.",
-                    assistance="Ensure your OAuth connection credentials are valid. "
-                    "If running a large number of integrations with Zoom, consider "
-                    "increasing the OAuth authentication retry limit to accommodate.",
-                )
+                raise oauth_retry_limit_exception
             except AuthenticationError:
-                raise PluginException(
-                    cause="The OAuth token credentials or JWT token provided in the connection configuration "
-                          "is invalid.",
-                    assistance="Please verify the credentials are correct and try again."
-                )
+                raise authentication_error_exception
 
             # Process events from oldest to newest; returned newest to oldest
             for event in reversed(events):

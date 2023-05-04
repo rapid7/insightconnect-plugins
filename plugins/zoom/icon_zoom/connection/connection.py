@@ -60,7 +60,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
                            "increasing the OAuth authentication retry limit to accommodate.",
             )
         except AuthenticationError:
-            raise PluginException(
+            raise ConnectionTestException(
                 cause="The OAuth token credentials or JWT token provided in the connection configuration is invalid.",
                 assistance="Please verify the credentials are correct and try again."
             )
