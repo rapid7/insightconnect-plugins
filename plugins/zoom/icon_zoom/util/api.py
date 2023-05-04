@@ -23,6 +23,13 @@ class BearerAuth(AuthBase):
         return request
 
 
+class AuthenticationError(Exception):
+    pass
+
+class AuthenticationRetryLimitError(Exception):
+    pass
+
+
 class ZoomAPI:
     def __init__(
         self,
@@ -44,8 +51,13 @@ class ZoomAPI:
 
         self.oauth_token: Optional[str] = None
 
+        # # JWT is -not- being used, so get an OAuth token
+        # if not jwt_token:
+        #     self._refresh_oauth_token()
+
+    def authenticate(self):
         # JWT is -not- being used, so get an OAuth token
-        if not jwt_token:
+        if not self.jwt_token:
             self._refresh_oauth_token()
 
     def get_user(self, user_id: str) -> Optional[dict]:
@@ -123,7 +135,7 @@ class ZoomAPI:
         # Handle known status codes
         codes = {
             400: PluginException(preset=PluginException.Preset.BAD_REQUEST),
-            401: PluginException(preset=PluginException.Preset.UNAUTHORIZED),
+            401: AuthenticationError,
             403: PluginException(
                 cause="Configured credentials do not have permission for this API endpoint.",
                 assistance="Please ensure credentials have required permissions.",
@@ -218,17 +230,13 @@ class ZoomAPI:
         if response.status_code == 401:
             if self.oauth_token or self._is_using_oauth():
                 if retry_401_count == (self.oauth_retry_limit - 1):  # -1 to account for retries starting at 0
-                    raise PluginException(
-                        cause="OAuth authentication retry limit was met.",
-                        assistance="Ensure your OAuth connection credentials are valid. "
-                        "If running a large number of integrations with Zoom, consider "
-                        "increasing the OAuth authentication retry limit to accommodate.",
-                    )
+                    raise AuthenticationRetryLimitError
                 self.logger.info(f"Received HTTP {response.status_code}, re-authenticating to Zoom...")
                 retry_401_count += 1
                 self._refresh_oauth_token()
                 return self._call_api(**original_call_args, retry_401_count=retry_401_count)
 
+            # TODO: Remove once JWT is removed from plugin
             raise PluginException(
                 cause="The JWT token provided in the plugin connection configuration is either " "invalid or expired.",
                 assistance="Please update the plugin connection configuration with a valid or " "updated JWT token.",

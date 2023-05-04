@@ -8,6 +8,8 @@ from .schema import (
 
 # Custom imports below
 from datetime import datetime, timedelta, timezone
+
+from icon_zoom.util.api import AuthenticationRetryLimitError, AuthenticationError
 from icon_zoom.util.event import Event
 
 
@@ -15,6 +17,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
     LAST_EVENT_TIME = "last_event_time"
     BOUNDARY_EVENTS = "boundary_events"
+    STATUS_CODE = "status_code"
 
     ZOOM_TIME_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
@@ -49,9 +52,20 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         now_for_zoom = self._format_datetime_for_zoom(dt=now)
 
         # Get fully consumed paginated event set, using previous run latest event time
-        new_events: [dict] = self.connection.zoom_api.get_user_activity_events(
-            start_date=state.get(self.LAST_EVENT_TIME), end_date=now_for_zoom, page_size=1000
-        )
+        try:
+            new_events: [dict] = self.connection.zoom_api.get_user_activity_events(
+                start_date=state.get(self.LAST_EVENT_TIME), end_date=now_for_zoom, page_size=1000
+            )
+        except AuthenticationRetryLimitError:
+            self.logger.error("OAuth authentication retry limit was met. Ensure your OAuth connection credentials "
+                              "are valid. If running a large number of integrations with Zoom, consider increasing "
+                              "the OAuth authentication retry limit to accommodate.")
+            return [], {
+                self.BOUNDARY_EVENTS: [],
+                self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now()),
+                self.STATUS_CODE: 401
+            }
+
         try:
             new_events = [Event(**event) for event in new_events]
         except TypeError as error:
@@ -59,6 +73,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now()),
+                self.STATUS_CODE: 500
             }
 
         # Get latest event time, to be used for determining boundary event hashes
@@ -70,6 +85,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now()),
+                self.STATUS_CODE: 200
             }
 
         # De-dupe events using boundary event hashes from previous run
@@ -84,6 +100,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         # update state
         state[self.BOUNDARY_EVENTS] = boundary_event_hashes
         state[self.LAST_EVENT_TIME] = new_latest_event_time
+        state[self.STATUS_CODE] = 200
 
         return deduped_events, state
 
@@ -96,9 +113,27 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         self.logger.info("Got times!")
 
         # Get first set of events, fully consumed pagination
-        new_events: [dict] = self.connection.zoom_api.get_user_activity_events(
-            start_date=last_24_hours_for_zoom, end_date=now_for_zoom, page_size=1000
-        )
+        try:
+            new_events: [dict] = self.connection.zoom_api.get_user_activity_events(
+                start_date=last_24_hours_for_zoom, end_date=now_for_zoom, page_size=1000
+            )
+        except AuthenticationRetryLimitError:
+            self.logger.error("OAuth authentication retry limit was met. Ensure your OAuth connection credentials "
+                              "are valid. If running a large number of integrations with Zoom, consider increasing "
+                              "the OAuth authentication retry limit to accommodate.")
+            return [], {
+                self.BOUNDARY_EVENTS: [],
+                self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now()),
+                self.STATUS_CODE: 401
+            }
+        except AuthenticationError:
+            self.logger.error("The OAuth token credentials or JWT token provided in the connection configuration is "
+                              "invalid. Please verify the credentials are correct and try again.")
+            return [], {
+                self.BOUNDARY_EVENTS: [],
+                self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now()),
+                self.STATUS_CODE: 401
+            }
 
         try:
             new_events = [Event(**event) for event in new_events]
@@ -107,6 +142,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now()),
+                self.STATUS_CODE: 500
             }
 
         self.logger.info(f"Got {len(new_events)} events!")
@@ -123,11 +159,13 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now()),
+                self.STATUS_CODE: 200
             }
 
         # update state
         state[self.BOUNDARY_EVENTS] = boundary_event_hashes
         state[self.LAST_EVENT_TIME] = new_latest_event_time
+        state[self.STATUS_CODE] = 200
         self.logger.info(f"Updated state, state is now: {state}")
 
         return new_events, state
