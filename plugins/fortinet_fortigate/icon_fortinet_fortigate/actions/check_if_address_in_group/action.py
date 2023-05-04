@@ -11,7 +11,6 @@ from .schema import (
 from insightconnect_plugin_runtime.exceptions import PluginException
 import ipaddress
 import validators
-from icon_fortinet_fortigate.util.util import Helpers
 
 
 class CheckIfAddressInGroup(insightconnect_plugin_runtime.Action):
@@ -30,7 +29,7 @@ class CheckIfAddressInGroup(insightconnect_plugin_runtime.Action):
         enable_search = params.get(Input.ENABLE_SEARCH)
 
         address_objects = self.connection.api.get_address_group(group_name, False).get("member")
-        ipv6_address_objects = self.connection.api.get_address_group(ipv6_group_name, True).get("member")
+        is_ipv6 = self.connection.api.get_address_object(address_to_check)["name"] == "address6"
 
         found = False
         addresses_found = []
@@ -39,16 +38,17 @@ class CheckIfAddressInGroup(insightconnect_plugin_runtime.Action):
             found, addresses_found = self.search_address_object_by_address(
                 address_to_check, address_objects, "firewall/address"
             )
-
-        if enable_search and ipv6_address_objects and not found:
-            found, addresses_found = self.search_address_object_by_address(
-                address_to_check, ipv6_address_objects, "firewall/address6"
-            )
+        if is_ipv6:
+            ipv6_address_objects = self.connection.api.get_address_group(ipv6_group_name, True).get("member")
+            if enable_search and ipv6_address_objects and not found:
+                found, addresses_found = self.search_address_object_by_address(
+                    address_to_check, ipv6_address_objects, "firewall/address6"
+                )
 
         if address_objects and not found:
             found, addresses_found = self.search_address_object_by_name(address_to_check, address_objects)
 
-        if ipv6_address_objects and not found:
+        if is_ipv6 and ipv6_address_objects and not found:
             found, addresses_found = self.search_address_object_by_name(address_to_check, ipv6_address_objects)
 
         return {Output.FOUND: found, Output.ADDRESS_OBJECTS: addresses_found}
