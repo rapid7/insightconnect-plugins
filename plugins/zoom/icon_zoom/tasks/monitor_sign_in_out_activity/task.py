@@ -56,13 +56,15 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             start_date=last_request_timestamp, end_date=now_for_zoom, page_size=1000
         )
         try:
-            new_events = [Event(**event) for event in new_events]
+            new_events = sorted([Event(**event) for event in new_events])
         except TypeError as error:
             self.logger.error(f"Zoom API endpoint output has changed, unable to parse events: {error}")
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
             }
+
+        self.logger.info(f"Got {len(new_events)} events!")
 
         # Get latest event time, to be used for determining boundary event hashes
         try:
@@ -106,7 +108,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         )
 
         try:
-            new_events = [Event(**event) for event in new_events]
+            new_events = sorted([Event(**event) for event in new_events])
         except TypeError as error:
             self.logger.error(f"Zoom API endpoint output has changed, unable to parse events: {error}")
             return [], {

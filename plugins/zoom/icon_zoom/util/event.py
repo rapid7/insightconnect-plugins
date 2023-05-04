@@ -22,6 +22,12 @@ class Event(object):
             and self.version == other.version
         )
 
+    def __gt__(self, other):
+        return self.time > other.time
+
+    def __lt__(self, other):
+        return self.time < other.time
+
     def sha1(self):
         hash_ = sha1()  # nosec B303
         for key, value in self.__dict__.items():
