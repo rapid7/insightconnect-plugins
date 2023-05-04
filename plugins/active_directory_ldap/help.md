@@ -74,9 +74,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Operation status|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|Operation status|True|
 
 Example output:
 
@@ -112,10 +112,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|count|integer|False|Number of results|
-|results|[]results|False|Results returned|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|count|integer|False|Number of results|1|
+|results|[]results|False|Results returned|[ { "attributes": { "accountExpires": "9999-12-31 23:59:59.999999+00:00", "adminCount": 0, "badPasswordTime": "1601-01-01 00:00:00+00:00", "badPwdCount": 0, "cn": "Example User", "codePage": 0, "countryCode": 0, "dSCorePropagationData": [ "2021-01-14 18:17:28+00:00", "2021-01-14 17:48:27+00:00", "1601-01-01 00:04:16+00:00" ], "description": [ "Example Account" ], "distinguishedName": "CN=Example User,CN=Users,DC=example,DC=com", "instanceType": 4, "isCriticalSystemObject": true, "lastLogoff": "1601-01-01 00:00:00+00:00", "lastLogon": "1601-01-01 00:00:00+00:00", "logonCount": 0, "memberOf": [ "CN=Domain Users,CN=Users,example,DC=com" ], "name": "Example User", "objectCategory": "CN=Person,CN=Schema,CN=Configuration,DC=example,DC=com", "objectClass": [ "top", "person", "organizationalPerson", "user" ], "objectGUID": "{b45138aa-be39-47d9-ab57-3aee8f381f87}", "objectSid": "S-1-5-33-3456299977-1009817396-2685666617-303", "primaryGroupID": 513, "pwdLastSet": "2021-01-14 17:48:26.197384+00:00", "sAMAccountName": "Example User", "sAMAccountType": 489006322, "showInAdvancedViewOnly": true, "uSNChanged": 16419, "uSNCreated": 12324, "userAccountControl": 514, "whenChanged": "2021-01-14 18:17:28+00:00", "whenCreated": "2021-01-14 17:48:26+00:00" }, "dn": "CN=Example User,CN=Users,DC=example,DC=com" } ]|
 
 Example output:
 
@@ -201,9 +201,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Operation status|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|Operation status|True|
 
 Example output:
 
@@ -237,9 +237,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Operation status|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|Operation status|True|
 
 Example output:
 
@@ -272,9 +272,6 @@ Example input:
 ```
 {
   "account_disabled": true,
-  "additional_parameters": {
-    "telephoneNumber": "(617)555-1234"
-  },
   "domain_name": "example.com",
   "first_name": "John",
   "last_name": "Doe",
@@ -287,9 +284,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Operation status|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|Operation status|True|
 
 Example output:
 
@@ -328,10 +325,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|count|integer|False|Number of results|
-|results|[]result|False|Results returned|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|count|integer|False|Number of results|1|
+|results|[]result|False|Results returned|[ { "dn": string, "attributes": { "pwdLastSet": date, "objectClass": [ string, string, string, string ], "memberOf": [ string ], "sAMAccountType": int, "uSNChanged": int, "givenName": string, "userPrincipalName": string, "countryCode": int, "lastLogon": date, "sAMAccountName": string, "name": string, "primaryGroupID": int, "dSCorePropagationData": [ date ], "displayName": string, "logonCount": int, "cn": string, "objectSid": string, "codePage": int, "badPwdCount": int, "objectGUID": string, "distinguishedName": string, "whenChanged": date, "badPasswordTime": date, "instanceType": int, "uSNCreated": int, "sn": string, "whenCreated": date, "accountExpires": date, "userAccountControl": int, "lastLogoff": date, "objectCategory": "string" } } ]|
 
 Example output:
 
@@ -409,9 +406,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Operation status|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|Operation status|True|
 
 Example output:
 
@@ -437,29 +434,33 @@ Example input:
 
 ```
 {
-  "distinguished_names": ["CN=user,OU=domain_users,DC=example,DC=com"]
+  "distinguished_names": [
+    "CN=user,OU=domain_users,DC=example,DC=com"
+  ]
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Operation status (True will be returned if at least one user is enabled)|
-|successful_enablements|[]string|False|List of successfully enabled users|
-|unsuccessful_enablements|[]modified_user_error|False|List of unsuccessfully enabled users|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|all_operations_succeeded|boolean|False|Overall operation status|True|
+|successful_enablements|[]string|False|List of successfully enabled users|["CN=user,OU=domain_users,DC=example,DC=com"]|
+|unsuccessful_enablements|[]modified_user_error|False|List of unsuccessfully enabled users|[ { "dn": "CN=user,OU=domain_users,DC=test,DC=com", "error": "The DN CN=empty_search,DC=example,DC=com was not found" } ]|
 
 Example output:
 
 ```
 
 {
-  "success": true
-  "successful_enablements": ["CN=user,OU=domain_users,DC=example,DC=com"]
+  "all_operations_succeeded": true
+  "successful_enablements": [
+    "CN=user,OU=domain_users,DC=example,DC=com"
+  ]
   "unsuccessful_enablements": [
     {
-        "dn": "CN=user,OU=domain_users,DC=test,DC=com",
-        "error": "The DN CN=empty_search,DC=example,DC=com was not found"
+      "dn": "CN=user,OU=domain_users,DC=test,DC=com",
+      "error": "The DN CN=empty_search,DC=example,DC=com was not found"
     }
   ]
 }
@@ -488,9 +489,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Operation status|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|Operation status|True|
 
 Example output:
 
@@ -524,9 +525,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Operation status|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|Operation status|True|
 
 Example output:
 
@@ -557,9 +558,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Operation status|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|Operation status|True|
 
 Example output:
 
@@ -586,29 +587,33 @@ Example input:
 
 ```
 {
-  "distinguished_names": ["CN=user,OU=domain_users,DC=example,DC=com"]
+  "distinguished_names": [
+    "CN=user,OU=domain_users,DC=example,DC=com"
+  ]
 }
 ```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Operation status (True will be returned if at least one user is disabled)|
-|successful_disablements|[]string|False|List of successfully disabled users|
-|unsuccessful_disablements|[]modified_user_error|False|List of unsuccessfully disabled users|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|all_operations_succeeded|boolean|False|Overall operation status|True|
+|successful_disablements|[]string|False|List of successfully disabled users|["CN=user,OU=domain_users,DC=example,DC=com"]|
+|unsuccessful_disablements|[]modified_user_error|False|List of unsuccessfully disabled users|[ { "dn": "CN=user,OU=domain_users,DC=test,DC=com", "error": "The DN CN=empty_search,DC=example,DC=com was not found" } ]|
 dis
 Example output:
 
 ```
 
 {
-  "success": true
-  "successful_disablements": ["CN=user,OU=domain_users,DC=example,DC=com"]
+  "all_operations_succeeded": true
+  "successful_disablements": [
+    "CN=user,OU=domain_users,DC=example,DC=com"
+  ]
   "unsuccessful_disablements": [
     {
-        "dn": "CN=user,OU=domain_users,DC=test,DC=com",
-        "error": "The DN CN=empty_search,DC=example,DC=com was not found"
+      "dn": "CN=user,OU=domain_users,DC=test,DC=com",
+      "error": "The DN CN=empty_search,DC=example,DC=com was not found"
     }
   ]
 }
@@ -635,9 +640,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Operation status|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|Operation status|True|
 
 Example output:
 
@@ -669,9 +674,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Operation status|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|Operation status|True|
 
 Example output:
 
@@ -770,6 +775,7 @@ the query results, and then using the variable step $item.dn
 
 # Version History
 
+* 7.0.0 - Update actions Enable Users and Enable Users to replace output Success with All Operations Succeeded True/False
 * 6.0.0 - Add actions Enable Users and Disable users allowing for the bulk enablement/disablement of users
 * 5.3.5 - Fix issue where JSON Marshaling error was raised when receiving unexpected API response in the Force Password Reset action
 * 5.3.4 - Fix issue with space character in DN in modify object action | Enhanced LDAP logging | Fix issue with variable error when connection fails 
@@ -815,6 +821,8 @@ the query results, and then using the variable step $item.dn
 * 0.1.0 - Initial plugin
 
 # Links
+
+[Learn Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/)
 
 ## References
 

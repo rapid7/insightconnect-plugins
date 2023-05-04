@@ -22,10 +22,10 @@ class DisableUsers(insightconnect_plugin_runtime.Action):
             )
 
         disabled_users = self.connection.client.manage_users(params.get(Input.DISTINGUISHED_NAMES), False)
-        success = bool(disabled_users.get("successes"))
+        success = not bool(disabled_users.get("failures"))
 
         return {
-            Output.SUCCESS: success,
+            Output.ALL_OPERATIONS_SUCCEEDED: success,
             Output.SUCCESSFUL_DISABLEMENTS: disabled_users.get("successes"),
             Output.UNSUCCESSFUL_DISABLEMENTS: disabled_users.get("failures"),
         }
