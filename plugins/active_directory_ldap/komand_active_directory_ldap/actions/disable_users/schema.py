@@ -12,7 +12,7 @@ class Input:
     
 
 class Output:
-    SUCCESS = "success"
+    ALL_OPERATIONS_SUCCEEDED = "all_operations_succeeded"
     SUCCESSFUL_DISABLEMENTS = "successful_disablements"
     UNSUCCESSFUL_DISABLEMENTS = "unsuccessful_disablements"
     
@@ -49,10 +49,10 @@ class DisableUsersOutput(insightconnect_plugin_runtime.Output):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "success": {
+    "all_operations_succeeded": {
       "type": "boolean",
-      "title": "Success",
-      "description": "Operation status (True will be returned if at least one user is disabled)",
+      "title": "All Operations Succeeded",
+      "description": "Overall operation status",
       "order": 3
     },
     "successful_disablements": {
