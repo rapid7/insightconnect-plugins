@@ -12,6 +12,7 @@ from insightconnect_plugin_runtime.exceptions import PluginException
 import ipaddress
 import validators
 
+
 class CheckIfAddressInGroup(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -28,11 +29,7 @@ class CheckIfAddressInGroup(insightconnect_plugin_runtime.Action):
         enable_search = params.get(Input.ENABLE_SEARCH)
 
         address_objects = self.connection.api.get_address_group(group_name, False).get("member")
-        is_ipv6 = False
-        try:
-            is_ipv6 = self.connection.api.get_address_object(address_to_check)["name"] == "address6"
-        except Exception:
-            self.logger.info("Address not found with IPV6")
+        is_ipv6 = self.check_is_ipv6(address_to_check)
         found = False
         addresses_found = []
 
@@ -54,6 +51,14 @@ class CheckIfAddressInGroup(insightconnect_plugin_runtime.Action):
             found, addresses_found = self.search_address_object_by_name(address_to_check, ipv6_address_objects)
 
         return {Output.FOUND: found, Output.ADDRESS_OBJECTS: addresses_found}
+
+    def check_is_ipv6(self, address_to_check: str) -> bool:
+        try:
+            is_ipv6 = self.connection.api.get_address_object(address_to_check)["name"] == "address6"
+        except Exception:
+            is_ipv6 = False
+            self.logger.info("Address not found with IPV6")
+        return is_ipv6
 
     @staticmethod
     def search_address_object_by_name(address_name: str, address_objects: list) -> bool:
