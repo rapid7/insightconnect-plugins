@@ -73,6 +73,14 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now()),
                 self.STATUS_CODE: 401
             }
+        except AuthenticationError:
+            self.logger.error("The OAuth token credentials or JWT token provided in the connection configuration is "
+                              "invalid. Please verify the credentials are correct and try again.")
+            return [], {
+                self.BOUNDARY_EVENTS: [],
+                self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now()),
+                self.STATUS_CODE: 401
+            }
 
         try:
             new_events = [Event(**event) for event in new_events]
