@@ -719,7 +719,7 @@ Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51
 
 # Version History
 
-* 6.0.1 - Resolve connection test failure with Fortigate version 6.4.1 and above | Fix bug in action Check if Address in Group where if the IPV6 Group did not exist, the action would fail
+* 6.0.1 - Resolve connection test failure with Fortigate version 6.4.1 and above | Fix bug in action 'Check if Address in Group', where the action would fail if the IPV6 Group did not exist
 * 6.0.0 - Fix the issue where creating address objects for domains does not work in the Create Address Object action | Fix the issue where address objects for IPv4 were created using the wrong endpoint in the Create Address Object action | Correct the payloads for creating address objects for domains and IPv6 in the Create Address Object action | Add support for checking if IPv6 is whitelisted in the Create Address Object action | Fix IPv6 support in all actions | Code refactor | Add default value for SSL verify parameter in connection configuration
 * 5.1.1 - Add `docs_url` in plugin spec | Update `source_url` in plugin spec
 * 5.1.0 - Support for IPV6 in all actions
