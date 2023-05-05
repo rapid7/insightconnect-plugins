@@ -28,6 +28,9 @@ class Event(object):
     def __lt__(self, other):
         return self.time < other.time
 
+    def __repr__(self):
+        return self.time
+
     def sha1(self):
         hash_ = sha1()  # nosec B303
         for key, value in self.__dict__.items():
