@@ -52,7 +52,7 @@ Example input:
   "script_username_and_password": {
     "username": "user", 
     "password": "mypassword"
-  }
+  },
   "timeout": 120
 }
 ```
@@ -152,6 +152,7 @@ If installation fails, try increasing the `Timeout` connection input to `900` (1
 * 0.1.0 - Initial plugin
 
 # Links
+* [Python](https://www.python.org/)
 
 ## References
 
