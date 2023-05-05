@@ -13,6 +13,7 @@ import ipaddress
 import validators
 from typing import Tuple, List
 
+
 class CheckIfAddressInGroup(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -103,7 +104,9 @@ class CheckIfAddressInGroup(insightconnect_plugin_runtime.Action):
                 found = True
         return address_found, found
 
-    def search_address_object_by_address(self, address: str, address_objects: list, endpoint: str) -> Tuple[bool, List[str]]:
+    def search_address_object_by_address(
+        self, address: str, address_objects: list, endpoint: str
+    ) -> Tuple[bool, List[str]]:
         found = False
         addresses_found = []
         for item in address_objects:
