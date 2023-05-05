@@ -26,6 +26,7 @@ class BearerAuth(AuthBase):
 class AuthenticationError(Exception):
     pass
 
+
 class AuthenticationRetryLimitError(Exception):
     pass
 
@@ -134,7 +135,7 @@ class ZoomAPI:
     def _handle_oauth_status_codes(self, response: Response) -> None:
         # Handle known status codes
         codes = {
-            400: PluginException(preset=PluginException.Preset.BAD_REQUEST),
+            400: AuthenticationError,
             401: AuthenticationError,
             403: PluginException(
                 cause="Configured credentials do not have permission for this API endpoint.",
