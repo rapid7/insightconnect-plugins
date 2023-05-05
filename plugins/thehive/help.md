@@ -1,4 +1,4 @@
-
+##
 
 
 
@@ -21,16 +21,17 @@ InsightConnect
 * TheHive username and password
 
 # Supported Product Versions
-  
-*This plugin does not contain any supported product versions.*
+
+_There are no supported product versions listed._
+
 # Documentation
 
 ## Setup
-  
-The connection configuration accepts the following parameters:  
+
+The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|----|----|-------|--------|-----------|----|-------|
 |api_key|credential_secret_key|None|False|An optional API key for authentication via bearer token|None|None|
 |credentials|credential_username_password|None|False|Username and password|None|None|
 |host|string|None|True|TheHive host e.g. thehive.company.com or 10.3.4.50|None|None|
@@ -38,24 +39,10 @@ The connection configuration accepts the following parameters:
 |protocol|string|None|True|HTTP Protocol|['http', 'https']|None|
 |proxy|object|None|False|An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value|None|None|
 |verify|boolean|True|True|Verify the certificate|None|None|
-  
+
 Example input:
 
 ```
-{
-  "api_key": {
-    "secretKey": ""
-  },
-  "credentials": {
-    "password": "",
-    "username": ""
-  },
-  "host": "",
-  "port": 9000,
-  "protocol": "http",
-  "proxy": {},
-  "verify": true
-}
 ```
 ## Technical Details
 
@@ -66,13 +53,11 @@ Close a case by ID
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|None|
 |impact_status|string|None|False|Case impact status|['low', 'medium', 'high']|None|
 |resolution_status|string|None|False|Case resolution status|['low', 'medium', 'high']|None|
 |summary|string|None|False|Case Summary|None|None|
-  
-Example input:
 
 ```
 {
@@ -82,6 +67,11 @@ Example input:
   "summary": ""
 }
 ```
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -102,16 +92,24 @@ Create a new case
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|----|----|-------|--------|-----------|----|-------|
+|assignee|string|None|False|User to assign the case to|None|None|
+|caseTemplate|string|None|False|Name or id of the case template to use|None|None|
 |customFields|object|None|False|Case custom fields|None|None|
-|description|string|None|False|Description of the case|None|None|
+|description|string|None|True|Description of the case, supports markdown|None|None|
+|endDate|integer|None|False|Case end date (datetime in ms)|None|None|
 |flag|boolean|False|False|Flag, default is false|None|None|
+|observableRule|string|None|False|Case observable rule|None|None|
+|pap|integer|2|False|Password Authentication Protocol|[0, 1, 2, 3]|None|
+|severity|integer|2|False|Case severity|[1, 2, 3, 4]|None|
+|startDate|integer|None|False|Case start date (datetime in ms)|None|None|
+|status|string|New|False|Case status|None|None|
+|summary|string|None|False|Case summary|None|None|
 |tags|[]string|None|False|List of tags|None|None|
-|task|itask|None|False|Case task|None|None|
+|taskRule|string|None|False|Case task rule|None|None|
+|tasks|itask|None|False|Case task|None|None|
 |title|string|None|True|Name of the case|None|None|
-|tlp|integer|2|False|Traffic Light Protocol level, default is 2|None|None|
-  
-Example input:
+|tlp|integer|2|False|Traffic Light Protocol level|[0, 1, 2, 3]|None|
 
 ```
 {
@@ -132,6 +130,11 @@ Example input:
   "tlp": 2
 }
 ```
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -170,11 +173,9 @@ Create a new case observable
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|None|
 |observable|iobservable|None|True|Observable|None|None|
-  
-Example input:
 
 ```
 {
@@ -191,6 +192,11 @@ Example input:
   }
 }
 ```
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -226,11 +232,9 @@ Create a new case task
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|None|
 |task|itask|None|True|Task name|None|None|
-  
-Example input:
 
 ```
 {
@@ -244,6 +248,11 @@ Example input:
   }
 }
 ```
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -275,16 +284,19 @@ Retrieve a case by ID
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|----|----|-------|--------|-----------|----|-------|
 |id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|None|
-  
-Example input:
 
 ```
 {
   "id": ""
 }
 ```
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -323,6 +335,11 @@ Retrieve list of cases
 ##### Input
   
 *This action does not contain any inputs.*
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -363,16 +380,19 @@ Get information about a user
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+|----|----|-------|--------|-----------|----|-------|
 |id|string|None|False|User ID. If empty, the current user is used|None|None|
-  
-Example input:
 
 ```
 {
   "id": ""
 }
 ```
+Example input:
+
+```
+```
+
 ##### Output
 
 |Name|Type|Default|Required|Description|Enum|Example|
@@ -413,11 +433,9 @@ Example output:
 }
 ```
 ### Triggers
-  
-*This plugin does not contain any triggers.*
-### Tasks
-  
-*This plugin does not contain any tasks.*
+
+_This plugin does not contain any triggers._
+
 ### Custom Types
   
 **itask**  

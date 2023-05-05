@@ -3,7 +3,7 @@ from .schema import CreateCaseInput, CreateCaseOutput, Component, Input, Output
 
 # Custom imports below
 import requests
-from thehive4py.models import Case, CaseTask
+import datetime
 
 
 class CreateCase(insightconnect_plugin_runtime.Action):
@@ -19,34 +19,63 @@ class CreateCase(insightconnect_plugin_runtime.Action):
 
         client = self.connection.client
 
-        self.logger.info("Input: %s", params)
-        task = CaseTask(
-            title=params.get("task").get("title", None),
-            description=params.get("task").get("description", None),
-            flag=params.get("task").get("flag", False),
-            owner=params.get("task").get("owner", None),
-            status=params.get("task").get("status", None),
-            startDate=params.get("task").get("startDate", None),
-        )
+        case = {
+            "title": params.get(Input.TITLE),
+            "description": params.get(Input.DESCRIPTION),
+            "severity": params.get(Input.SEVERITY),
+            "startDate": params.get(Input.STARTDATE, datetime.datetime.now()),
+            "endDate": params.get(Input.ENDDATE),
+            "tags": params.get(Input.TAGS, None),
+            "flag": params.get(Input.FLAG),
+            "tlp": params.get(Input.TLP),
+            "pap": params.get(Input.PAP),
+            "status": params.get(Input.STATUS),
+            "summary": params.get(Input.SUMMARY),
+            "assignee": params.get(Input.ASSIGNEE),
+            "customFields": params.get(Input.CUSTOMFIELDS),
+            "caseTemplate": params.get(Input.CASETEMPLATE, None),
+            "tasks": params.get(Input.TASKS, None),
+            "sharingParameters": None,
+            "taskRule": params.get(Input.TASKRULE, None),
+            "observableRule": params.get(Input.OBSERVABLERULE, None)
+        }
 
-        case = Case(
-            title=params.get("title", None),
-            tlp=params.get("tlp", 2),
-            flag=params.get("flag", False),
-            tags=params.get("tags", []),
-            description=params.get("description", None),
-            tasks=[task],
-            customFields=params.get("customFields", None),
-        )
+        self.logger.info(f"Input: {case}")
 
-        try:
-            new_case = client.create_case(case)
-            new_case.raise_for_status()
-        except requests.exceptions.HTTPError:
-            self.logger.error(new_case.json())
-            raise
-        except:
-            self.logger.error("Failed to create case")
-            raise
+        response = client.create_case(case=case)
 
-        return {"case": new_case.json()}
+        return {Output.CASE: response.json()}
+        #
+        # client = self.connection.client
+        #
+        # self.logger.info("Input: %s", params)
+        # task = CaseTask(
+        #     title=params.get("task").get("title", None),
+        #     description=params.get("task").get("description", None),
+        #     flag=params.get("task").get("flag", False),
+        #     owner=params.get("task").get("owner", None),
+        #     status=params.get("task").get("status", None),
+        #     startDate=params.get("task").get("startDate", None),
+        # )
+        #
+        # case = Case(
+        #     title=params.get("title", None),
+        #     tlp=params.get("tlp", 2),
+        #     flag=params.get("flag", False),
+        #     tags=params.get("tags", []),
+        #     description=params.get("description", None),
+        #     tasks=[task],
+        #     customFields=params.get("customFields", None),
+        # )
+        #
+        # try:
+        #     new_case = client.create_case(case)
+        #     new_case.raise_for_status()
+        # except requests.exceptions.HTTPError:
+        #     self.logger.error(new_case.json())
+        #     raise
+        # except:
+        #     self.logger.error("Failed to create case")
+        #     raise
+        #
+        # return {"case": new_case.json()}

@@ -23,7 +23,7 @@ class HiveAPI:
     # Create Case
     # https://docs.strangebee.com/thehive/api-docs/#operation/Create%20case
     def create_case(self, case):
-        return self._call_api("POST", None, None, case)
+        return self._call_api("POST", "", None, case)
 
     # Create Task in Case
     # https://docs.strangebee.com/thehive/api-docs/#operation/Create%20Task%20in%20Case

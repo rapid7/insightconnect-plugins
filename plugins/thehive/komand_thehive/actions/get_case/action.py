@@ -17,7 +17,6 @@ class GetCase(insightconnect_plugin_runtime.Action):
 
         case_id = params.get(Input.ID)
         result = self.connection.client.get_case(case_id)
-
         return {Output.CASE: result.json()}
         # try:
         #     case = client.get_case(params.get("id"))

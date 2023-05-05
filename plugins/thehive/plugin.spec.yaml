@@ -69,8 +69,10 @@ connection:
 types:
   itask:
     title:
+      title: Title
       description: Task title
       type: string
+      required: true
     status:
       description: Task status
       type: string
@@ -117,64 +119,332 @@ types:
       description: The observable's value e.g. badguy.com
       type: string
   case:
-    status:
+    id:
+      title: ID
+      description: ID
       type: string
-      description: Case status
-    startDate:
-      title: Start Date
-      description: Case start date
-      type: integer
+      required: true
     _type:
       title: Type
       description: Case type
       type: string
-    tlp:
-      description: Traffic Light Protocol level
-      title: TLP
-      type: integer
-    severity:
-      type: integer
-      description: Case severity
-    tags:
-      type: '[]string'
-      description: Case tags
-    title:
-      type: string
-      description: Case title
-    caseId:
-      title: Case ID e.g. AV_ajI_oYMfcbXhqb9tS
-      description: Case ID
-      type: integer
-    metrics:
-      type: object
-      description: Case metrics
-    flag:
-      type: boolean
-      description: Case flags
-    user:
-      type: string
-      description: Case user
-    createdBy:
+      required: true
+    _createdBy:
       title: Created By
-      description: Case created by
+      description: Who the case was created by
       type: string
-    owner:
+      required: true
+    _updatedBy:
+      title: Updated By
+      description: Who the case was updated by
       type: string
-      description: Case owner
+      required: false
+    _createdAt:
+      title: Created At
+      description: Datetime in ms the case was created at
+      type: integer
+      required: true
+    _updatedAt:
+      title: Updated At
+      description: Datetime in ms the case was updated at
+      type: integer
+      required: false
+    number:
+      title: Number
+      description: An incremental number to reference the case
+      type: integer
+      required: true
+    title:
+      title: Case title
+      description: Title of the case
+      type: string
+      required: true
+    description:
+      title: Description
+      description: The description of the case
+      type: string
+      required: true
+    severity:
+      title: Severity
+      description: Severity of the case
+      type: integer
+      required: true
+    startDate:
+      title: Start Date
+      description: Case start date (datetime in ms)
+      type: integer
+      required: true
+    endDate:
+      title: End Date
+      description: Case end date (datetime in ms)
+      type: integer
+      required: false
+    tags:
+      title: Tags
+      description: Case tags
+      type: '[]string'
+      required: false
+    flag:
+      title: Flag
+      description: Something here
+      type: boolean
+      required: true
+    tlp:
+      title: TLP
+      description: Traffic Light Protocol level
+      type: integer
+      required: true
+    pap:
+      title: PAP
+      description: Password Authenitcation Protocol
+      type: integer
+      required: true
+    status:
+      title: Status
+      description: Status of the case
+      type: string
+      required: true
+    stage:
+      title: Stage
+      description: The value of the stage depends on the status of the case
+      type: string
+      enum:
+        - New
+        - InProgress
+        - Closed
+      required: true
+    summary:
+      title: Summary
+      description: Summary of the case
+      type: string
+      required: false
+    impactStatus:
+      title: Impact Status
+      description: Dunno
+      type: string
+      required: false
+    assignee:
+      title: Assignee
+      description: Dunno
+      type: string
+      required: false
     customFields:
       title: Custom Fields
       description: Case custom fields
+      type: "[]string"
+      required: false
+    userPermissions:
+      title: User Permissions
+      description: A list of permissions the current user has access on the case
+      type: "[]string"
+      required: false
+    extraData:
+      title: Extra Data
+      description: Dunno
       type: object
-    id:
-      title: ID
-      type: string
-      description: ID
-    createdAt:
-      title: Created At
+      required: true
+    newDate:
+      title: New Date
+      description: Dunno (datetime in ms)
       type: integer
-      description: Created at
-    description:
+      required: true
+    inProgressDate:
+      title: In Progress Date
+      description: Dunno (datetime in ms)
+      type: integer
+      required: false
+    closedDate:
+      title: Closed Date
+      description: Case closed date (datetime in ms)
+      type: integer
+      required: false
+    alertDate:
+      title: Alert Date
+      description: Case alert date (datetime in ms)
+      type: integer
+      required: false
+    alertNewDate:
+      title: Alert New Date
+      description: Case alert new date (datetime in ms)
+      type: integer
+      required: false
+    alertInProgressDate:
+      title: Alert In Progress Date
+      description: Case alert in progress data (datetime in ms)
+      type: integer
+      required: false
+    alertImportedDate:
+      title: Alert Imported Date
+      description: Case alert imported date (datetime in ms)
+      type: integer
+      required: false
+    timeToDetect:
+      title: Time To Detect
+      description: Case time to detect
+      type: integer
+      required: true
+    timeToTriage:
+      title: Time To Triage
+      descirption: Case time to triage
+      type: integer
+      required: false
+    timeToQualify:
+      title: Time To Qualify
+      description: Case time to qualify
+      type: integer
+      required: false
+    timeToAcknowledge:
+      title: Time To Acknowledge
+      description: Case time to acknowledge
+      type: integer
+      required: false
+    timeToResolve:
+      title: Time To Resolve
+      description: Case time to resolve
+      type: integer
+      required: false
+    handlingDuration:
+      title: Handling Duration
+      description: Case handling duration
+      type: integer
+      required: false
+  createCase:
+    title:
+      title: Title
+      description: Case title
       type: string
+      required: true
+    description:
+      title: Description
+      description: Case description
+      type: string
+      required: true
+    severity:
+      title: Severity
+      description: Case severity
+      type: integer
+      enum:
+        - 1
+        - 2
+        - 3
+        - 4
+      default: 2
+      required: false
+    startDate:
+      title: Start Date
+      description: Case start date (datetime in ms)
+      type: integer
+      required: false
+    endDate:
+      title: End Date
+      description: Case end date (datetime in ms)
+      type: integer
+      required: false
+    tags:
+      title: tags
+      description: Case tags
+      type: "[]string"
+      required: false
+    flag:
+      title: Flag
+      description: Case flags
+      type: boolean
+      default: false
+      required: false
+    tlp:
+      title: Traffic Light Protocol
+      description: Case traffic light protocol
+      type: integer
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+      default: 2
+      required: false
+    pap:
+      title: Password Authentication Protocol
+      description: Case password authentication protocol
+      type: integer
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+      default: 2
+      required: false
+    status:
+      title: Status
+      description: Case status
+      type: string
+      default: "New"
+      required: false
+    summary:
+      title: Summary
+      description: Case summary
+      type: string
+      required: false
+    assignee:
+      title: Assignee
+      description: User to assign the case to
+      type: string
+      required: false
+    customFields:
+      title: Custom Fields
+      description: Custom fields
+      type: "[]string"
+      required: false
+    caseTemplate:
+      title: Case Template
+      description: Name or ID of the case template to use
+      type: string
+      required: false
+    tasks:
+      title: Tasks
+      description: Tasks to create. If null, tasks from the case template will be used
+      type: "[]string"
+      required: false
+    sharingParameters:
+      title: Sharing Parameters
+      description: Case sharing parameters
+      type: "[]string"
+      required: false
+    taskRule:
+      title: Task Rule
+      description: Case task rule
+      type: string
+      required: false
+    observableRule:
+      title: Observable Rule
+      description: Case observable rule
+      type: string
+      required: false
+  OutputCustomField:
+    _id:
+      title: ID
+      description: ID
+      type: string
+      required: true
+    name:
+      title: Name
+      description: Name
+      type: string
+      required: true
+    type:
+      title: Type
+      description: Type
+      type: string
+      required: true
+    value:
+      title: Value
+      description: Value
+      type: string
+      required: true
+    order:
+      title: Order
+      description: Order
+      type: integer
+      required: true
   task:
     status:
       type: string
@@ -360,14 +630,34 @@ actions:
         required: true
       description:
         title: Case Description
-        description: Description of the case
+        description: Description of the case, supports markdown
         type: string
-        required: false
-      tlp:
-        title: TLP
-        description: Traffic Light Protocol level, default is 2
-        default: 2
+        required: true
+      severity:
+        title: Severity
+        description: Case severity
         type: integer
+        enum:
+          - 1
+          - 2
+          - 3
+          - 4
+        default: 2
+        required: false
+      startDate:
+        title: Start Date
+        description: Case start date (datetime in ms)
+        type: integer
+        required: false
+      endDate:
+        title: End Date
+        description: Case end date (datetime in ms)
+        type: integer
+        required: false
+      tags:
+        title: Tags
+        description: List of tags
+        type: '[]string'
         required: false
       flag:
         title: Flag
@@ -375,24 +665,72 @@ actions:
         default: false
         type: boolean
         required: false
-      tags:
-        title: Tags
-        description: List of tags
-        type: '[]string'
+      tlp:
+        title: TLP
+        description: Traffic Light Protocol level
+        type: integer
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+        default: 2
         required: false
-      task:
-        type: itask
-        title: Task
-        description: Case task
+      pap:
+        title: PAP
+        description: Password Authentication Protocol
+        type: integer
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+        default: 2
+        required: false
+      status:
+        title: Status
+        description: Case status
+        type: string
+        default: "New"
+        required: false
+      summary:
+        title: Summary
+        description: Case summary
+        type: string
+        required: false
+      assignee:
+        title: Assignee
+        description: User to assign the case to
+        type: string
         required: false
       customFields:
         title: Custom Fields
         description: Case custom fields
         type: object
         required: false
+      caseTemplate:
+        title: Case Template
+        description: Name or id of the case template to use
+        type: string
+        required: false
+      tasks:
+        title: Task
+        description: Case task
+        type: '[]itask'
+        required: false
+      taskRule:
+        title: Task Rule
+        description: Case task rule
+        type: string
+        required: false
+      observableRule:
+        title: Observable Rule
+        description: Case observable rule
+        type: string
+        required: false
     output:
       case:
-        type: case
+        type: createCase
         description: Create case output
         required: false
   create_case_task:

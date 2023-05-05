@@ -2,6 +2,7 @@ FROM rapid7/insightconnect-python-3-38-plugin:4
 
 LABEL organization=rapid7
 LABEL sdk=python
+#RUN apk add --no-cache libmagic
 
 WORKDIR /python/src
 ADD ./plugin.spec.yaml /plugin.spec.yaml

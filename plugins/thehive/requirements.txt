@@ -3,3 +3,4 @@
 # See: https://pip.pypa.io/en/stable/user_guide/#requirements-files
 python-magic==0.4.15
 requests==2.18.4
+thehive4py==1.8.1
