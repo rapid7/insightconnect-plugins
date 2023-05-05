@@ -87,12 +87,7 @@ This returns a string with key `hello` on the output object accessible at `{{Ste
 Example input:
 
 ```
-{
-  "function": "def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username, password, secret_key)\n\treturn {'result1': 'example output 1', 'result2': 'example output 2'}",
-  "input": {
-    "some_input": "example input"
-  }
-}
+{}
 ```
 
 Note that `username`, `password`, and `secret_key` inputs are accessible directly in the script as variable, but arguments from `input` are stored in `params` dictionary.
