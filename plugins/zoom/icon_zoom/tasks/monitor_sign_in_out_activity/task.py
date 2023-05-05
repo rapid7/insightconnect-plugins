@@ -127,9 +127,11 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             }
 
         # De-dupe events using boundary event hashes from previous run
-        deduped_events = self._dedupe_events(boundary_event_hashes=state[self.BOUNDARY_EVENTS],
-                                             all_events=new_events,
-                                             latest_event_timestamp=state[self.LATEST_EVENT_TIMESTAMP])
+        deduped_events = self._dedupe_events(
+            boundary_event_hashes=state[self.BOUNDARY_EVENTS],
+            all_events=new_events,
+            latest_event_timestamp=state[self.LATEST_EVENT_TIMESTAMP],
+        )
 
         # Determine new boundary event hashes using latest time from newly retrieved event set and latest event time
         # from the new set.
@@ -152,9 +154,9 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         deduped_events: [Event] = []
 
         for event in all_events:
-            if \
-                    event.time > latest_event_timestamp or \
-                    (event.time == latest_event_timestamp and event.sha1() not in boundary_event_hashes):
+            if event.time > latest_event_timestamp or (
+                event.time == latest_event_timestamp and event.sha1() not in boundary_event_hashes
+            ):
                 deduped_events.append(event)
 
         return deduped_events  # make sure sort order is correct here

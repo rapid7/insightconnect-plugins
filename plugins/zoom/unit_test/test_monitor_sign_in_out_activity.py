@@ -11,7 +11,9 @@ from unit_test.mock import STUB_CONNECTION, STUB_OAUTH_TOKEN
 REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI._refresh_oauth_token"
 GET_USER_ACTIVITY_EVENTS_PATH = "icon_zoom.util.api.ZoomAPI.get_user_activity_events"
 GET_DATETIME_NOW_PATH = "icon_zoom.tasks.monitor_sign_in_out_activity.task.MonitorSignInOutActivity._get_datetime_now"
-GET_DATETIME_LAST_24_HOURS_PATH = "icon_zoom.tasks.monitor_sign_in_out_activity.task.MonitorSignInOutActivity._get_datetime_last_24_hours"
+GET_DATETIME_LAST_24_HOURS_PATH = (
+    "icon_zoom.tasks.monitor_sign_in_out_activity.task.MonitorSignInOutActivity._get_datetime_last_24_hours"
+)
 
 
 class TestGetUserActivityEvents(unittest.TestCase):
@@ -77,7 +79,7 @@ class TestGetUserActivityEvents(unittest.TestCase):
         expected_state = {
             "boundary_events": ["197f96ef45ad08592bfea604f60b6abcfc7d4bf2", "8c68922ce0e81f42e4db701317aa7f219049b144"],
             "last_request_timestamp": "2023-02-23T22:00:00Z",
-            "latest_event_timestamp": "2023-02-22T21:44:44Z"
+            "latest_event_timestamp": "2023-02-22T21:44:44Z",
         }
 
         mock_call.return_value = expected_output
@@ -197,12 +199,30 @@ class TestGetUserActivityEvents(unittest.TestCase):
             },
         ]
         first_expected_output = [
-            {'client_type': 'mac', 'email': 'test@test.com', 'ip_address': '33.33.33.33',
-             'time': '2023-02-22T21:45:00Z', 'type': 'Sign in', 'version': '5.13.7.15481'},
-            {'client_type': 'mac', 'email': 'test@test.com', 'ip_address': '11.11.11.11',
-             'time': '2023-02-22T21:44:44Z', 'type': 'Sign in', 'version': '5.13.7.15481'},
-            {'client_type': 'mac', 'email': 'test@test.com', 'ip_address': '22.22.22.22',
-             'time': '2023-02-22T21:44:44Z', 'type': 'Sign in', 'version': '5.13.7.15481'}
+            {
+                "client_type": "mac",
+                "email": "test@test.com",
+                "ip_address": "33.33.33.33",
+                "time": "2023-02-22T21:45:00Z",
+                "type": "Sign in",
+                "version": "5.13.7.15481",
+            },
+            {
+                "client_type": "mac",
+                "email": "test@test.com",
+                "ip_address": "11.11.11.11",
+                "time": "2023-02-22T21:44:44Z",
+                "type": "Sign in",
+                "version": "5.13.7.15481",
+            },
+            {
+                "client_type": "mac",
+                "email": "test@test.com",
+                "ip_address": "22.22.22.22",
+                "time": "2023-02-22T21:44:44Z",
+                "type": "Sign in",
+                "version": "5.13.7.15481",
+            },
         ]
         second_expected_output = [
             {
@@ -217,12 +237,12 @@ class TestGetUserActivityEvents(unittest.TestCase):
         first_expected_state = {
             "boundary_events": ["854d8b971985244502ba5714f372344a9374c538"],
             "last_request_timestamp": "2023-02-23T22:00:00Z",
-            "latest_event_timestamp": "2023-02-22T21:45:00Z"
+            "latest_event_timestamp": "2023-02-22T21:45:00Z",
         }
         second_expected_state = {
             "boundary_events": ["b308ba69b3beb7207f8271ef7a78f84da98bed67"],
             "last_request_timestamp": "2023-02-23T23:00:00Z",
-            "latest_event_timestamp": "2023-02-23T21:44:44Z"
+            "latest_event_timestamp": "2023-02-23T21:44:44Z",
         }
 
         # First run
@@ -334,9 +354,9 @@ class TestGetUserActivityEvents(unittest.TestCase):
 
         task = MonitorSignInOutActivity()
         expected = []
-        got = task._dedupe_events(boundary_event_hashes=boundary_hashes,
-                                  all_events=all_events,
-                                  latest_event_timestamp=all_events[0].time)
+        got = task._dedupe_events(
+            boundary_event_hashes=boundary_hashes, all_events=all_events, latest_event_timestamp=all_events[0].time
+        )
 
         self.assertEqual(expected, got)
 
@@ -380,9 +400,9 @@ class TestGetUserActivityEvents(unittest.TestCase):
         boundary_hashes = ["197f96ef45ad08592bfea604f60b6abcfc7d4bfc", "8c68922ce0e81f42e4db701317aa7f219049b146"]
 
         task = MonitorSignInOutActivity()
-        got = task._dedupe_events(boundary_event_hashes=boundary_hashes,
-                                  all_events=all_events,
-                                  latest_event_timestamp=all_events[0].time)
+        got = task._dedupe_events(
+            boundary_event_hashes=boundary_hashes, all_events=all_events, latest_event_timestamp=all_events[0].time
+        )
 
         self.assertEqual(all_events[:2], got)
 
