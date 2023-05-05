@@ -5,6 +5,6 @@ records==0.5.2
 maya==0.5.0
 lxml==4.9.1
 datetime==4.2
-pyyaml==3.12
+pyyaml==6.0.0
 beautifulsoup4==4.6.0
 parameterized==0.8.1

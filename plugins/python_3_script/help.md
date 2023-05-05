@@ -6,7 +6,7 @@
 * [maya 0.5.0](https://pypi.python.org/pypi/maya)
 * [lxml 4.2.2](http://lxml.de/)
 * [beautifulsoup 4.6.0](https://www.crummy.com/software/BeautifulSoup/)
-* [pyyaml 3.12](http://pyyaml.org/)
+* [pyyaml 6.0.0](http://pyyaml.org/)
 * [records 0.5.2](https://github.com/kennethreitz/records)
 
 The Python 3 Script plugin also allows you to load custom modules via its connection parameters.
@@ -132,6 +132,7 @@ If installation fails, try increasing the `Timeout` connection input to `900` (1
 
 # Version History
 
+* 4.0.4 - Update Pyyaml to version 6.0.0
 * 4.0.3 - Run: Fix logging issue 
 * 4.0.2 - Run: Fix issue with indentation where users have non-empty credentials for input function
 * 4.0.1 - Resolve issue where users experience issues with installing Python packages, and indentation for input function 
