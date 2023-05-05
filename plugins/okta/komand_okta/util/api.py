@@ -7,6 +7,7 @@ import time
 from typing import Union, Callable
 from urllib.parse import urlsplit
 from insightconnect_plugin_runtime.exceptions import PluginException
+from insightconnect_plugin_runtime.helper import rate_limiting
 from komand_okta.util.helpers import clean
 from komand_okta.util.endpoints import (
     ADD_USER_TO_GROUP_ENDPOINT,
@@ -29,29 +30,6 @@ from komand_okta.util.endpoints import (
     USERS_IN_GROUP_ENDPOINT,
     GROUP_ENDPOINT,
 )
-
-
-def rate_limiting(max_tries: int, delay: int):
-    def _decorate(func):
-        def _wrapper(*args, **kwargs):
-            retry = True
-            counter = 0
-            while retry and counter < max_tries:
-                if counter:
-                    time.sleep(delay)
-                try:
-                    retry = False
-                    return func(*args, **kwargs)
-                except PluginException as error:
-                    counter += 1
-                    if error.cause == PluginException.causes[PluginException.Preset.RATE_LIMIT]:
-                        logging.info("Rate limiting error occurred. Retrying in %d seconds.", delay)
-                        retry = True
-            return func(*args, **kwargs)
-
-        return _wrapper
-
-    return _decorate
 
 
 class OktaAPI:
@@ -165,7 +143,7 @@ class OktaAPI:
     def get_users_in_group(self, group_id: str) -> requests.Response:
         return self.make_request(method="GET", url=USERS_IN_GROUP_ENDPOINT.format(group_id=group_id))
 
-    @rate_limiting(10, 6)
+    @rate_limiting(10)
     def make_request(self, method: str, url: str, json_data: dict = None, params: dict = None) -> requests.Response:
         try:
             response = requests.request(

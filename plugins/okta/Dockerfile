@@ -1,4 +1,4 @@
-FROM rapid7/insightconnect-python-3-38-plugin:4
+FROM rapid7/insightconnect-python-3-38-plugin:5
 
 # Add source code
 WORKDIR /python/src

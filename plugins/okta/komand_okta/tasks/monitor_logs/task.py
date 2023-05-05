@@ -31,7 +31,7 @@ class MonitorLogs(insightconnect_plugin_runtime.Task):
             new_logs = self.connection.api_client.get_all_pages(self.connection.api_client.list_events(parameters))
             state["last_collection_timestamp"] = now
 
-        return clean(new_logs), state
+        return clean(new_logs), state, None
 
     @staticmethod
     def get_current_time():
