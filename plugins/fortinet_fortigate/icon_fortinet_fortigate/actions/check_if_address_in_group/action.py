@@ -11,7 +11,7 @@ from .schema import (
 from insightconnect_plugin_runtime.exceptions import PluginException
 import ipaddress
 import validators
-
+from typing import Tuple
 
 class CheckIfAddressInGroup(insightconnect_plugin_runtime.Action):
     def __init__(self):
@@ -70,7 +70,40 @@ class CheckIfAddressInGroup(insightconnect_plugin_runtime.Action):
                 found = True
         return found, addresses_found
 
-    def search_address_object_by_address(self, address: str, address_objects: list, endpoint: str) -> bool:
+    @staticmethod
+    def identify_address(address: str, result: dict) -> Tuple[str, bool]:
+        found = False
+        address_found = ""
+        result_type = result.get("type")
+        # If address_object is a IPv6
+        if result_type == "ipprefix" and (validators.ipv6(address) or validators.ipv6_cidr(address)):
+            address = str(ipaddress.IPv6Network(address))
+            result_ipv6 = result.get("ip6")
+            if address == result_ipv6:
+                address_found = result_ipv6
+                found = True
+        # If address_object is a fqdn
+        if result_type == "fqdn":
+            result_fqdn = result.get("fqdn")
+            if address == result_fqdn:
+                address_found = result_fqdn
+                found = True
+        # If address_object is a ipmask
+        if result_type == "ipmask":
+            # Convert returned address to CIDR
+            ipmask = result.get("subnet", "").replace(" ", "/")
+            ipmask = ipaddress.IPv4Network(ipmask)
+            # Convert given address to CIDR address to CIDR
+            try:
+                address = ipaddress.IPv4Network(address)
+            except ipaddress.AddressValueError:
+                pass
+            if address == ipmask:
+                address_found = str(ipmask)
+                found = True
+        return address_found, found
+
+    def search_address_object_by_address(self, address: str, address_objects: list, endpoint: str) -> Tuple[bool, list[str]]:
         found = False
         addresses_found = []
         for item in address_objects:
@@ -88,32 +121,8 @@ class CheckIfAddressInGroup(insightconnect_plugin_runtime.Action):
                     " Double check that the address group name is correct.",
                 )
             for result in results:
-                result_type = result.get("type")
-                # If address_object is a IPv6
-                if result_type == "ipprefix" and (validators.ipv6(address) or validators.ipv6_cidr(address)):
-                    address = str(ipaddress.IPv6Network(address))
-                    result_ipv6 = result.get("ip6")
-                    if address == result_ipv6:
-                        addresses_found.append(result_ipv6)
-                        found = True
-                # If address_object is a fqdn
-                if result_type == "fqdn":
-                    result_fqdn = result.get("fqdn")
-                    if address == result_fqdn:
-                        addresses_found.append(result_fqdn)
-                        found = True
-                # If address_object is a ipmask
-                if result_type == "ipmask":
-                    # Convert returned address to CIDR
-                    ipmask = result.get("subnet", "").replace(" ", "/")
-                    ipmask = ipaddress.IPv4Network(ipmask)
-                    # Convert given address to CIDR address to CIDR
-                    try:
-                        address = ipaddress.IPv4Network(address)
-                    except ipaddress.AddressValueError:
-                        pass
-                    if address == ipmask:
-                        addresses_found.append(str(ipmask))
-                        found = True
+                address_found, found = self.identify_address(address, result)
+                if found:
+                    addresses_found.append(address_found)
 
         return found, addresses_found
