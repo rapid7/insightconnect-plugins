@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='sophos_xg_firewall-rapid7-plugin',
-      version='2.0.1',
-      description='The Sophos XG Firewall plugin allows you to manage your Sophos XG Firewall through policies',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="sophos_xg_firewall-rapid7-plugin",
+      version="2.0.2",
+      description="The Sophos XG Firewall plugin allows you to manage your Sophos XG Firewall through policies",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_sophos_xg_firewall']
