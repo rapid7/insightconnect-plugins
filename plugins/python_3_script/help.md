@@ -88,7 +88,10 @@ Example input:
 
 ```
 {
-  "function": "def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username, password, secret_key)\n\treturn {'result1': 'example output 1', 'result2': 'example output 2'}"
+  "function": "def run(params={}):\n\tprint(params.get('some_input'))\n\tprint(username, password, secret_key)\n\treturn {'result1': 'example output 1', 'result2': 'example output 2'}",
+  "input": {
+    "some_input": "example input"
+  }
 }
 ```
 
