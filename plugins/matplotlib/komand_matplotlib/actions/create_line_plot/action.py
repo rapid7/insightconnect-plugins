@@ -1,4 +1,6 @@
-import komand
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import CreateLinePlotInput, CreateLinePlotOutput
 
 # Custom imports below
@@ -8,7 +10,7 @@ import seaborn as sns
 from io import BytesIO
 
 
-class CreateLinePlot(komand.Action):
+class CreateLinePlot(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_line_plot",
@@ -25,10 +27,9 @@ class CreateLinePlot(komand.Action):
         # Process the data and create the plot
         try:
             decoded_data = base64.b64decode(params.get("csv_data"))
-        except Exception as e:
-            error = f"Failed to decode base64 encoded CSV data with error: {e}"
-            self.logger.error(error)
-            raise e
+        except Exception as error:
+            self.logger.error(f"Failed to decode base64 encoded CSV data with error: {error}")
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
         df = pd.read_csv(BytesIO(decoded_data))
         x = params.get("x_value")
@@ -40,11 +41,11 @@ class CreateLinePlot(komand.Action):
         if not x or (x not in df):
             error = f"Column ({x}) not in data set, cannot create plot..."
             self.logger.error(error)
-            return Exception(error)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
         elif not y or (y not in df):
             error = f"Column ({y}) not in data set, cannot create plot..."
             self.logger.error(error)
-            return Exception(error)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
         if hue and (len(hue) > 0):
             args["hue"] = hue
@@ -52,7 +53,7 @@ class CreateLinePlot(komand.Action):
             if hue not in df:
                 error = f"Column for hue ({hue}) not in data set, cannot create plot..."
                 self.logger.error(error)
-                return Exception(error)
+                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
         # AxesSubplots (the plot object returned) don't have the savefig method, get the figure, then save it
         self.logger.info("Creating plot...")
