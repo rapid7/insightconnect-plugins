@@ -6,7 +6,7 @@ from sys import argv
 
 Name = "Zoom"
 Vendor = "rapid7"
-Version = "3.0.0"
+Version = "3.0.1"
 Description = "Trigger workflows on user activity while also managing your users with the Zoom plugin"
 
 
