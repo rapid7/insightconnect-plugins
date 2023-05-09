@@ -1,0 +1,25 @@
+{
+  "activate": true,
+  "credentials": {
+    "password": {
+      "value": ""
+    },
+    "provider": {
+      "name": "OKTA",
+      "type": "OKTA"
+    },
+    "recoveryQuestion": {
+      "answer": "",
+      "question": ""
+    }
+  },
+  "groupIds": [],
+  "nextLogin": false,
+  "profile": {
+    "email": "user_1@sample.com",
+    "firstName": "John",
+    "lastName": "Doe",
+    "login": "user_1@sample.com"
+  },
+  "provider": true
+}

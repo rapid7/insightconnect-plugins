@@ -1,0 +1,4 @@
+{
+  "sendAdminEmail": false,
+  "userLogin": "user1@example.com"
+}

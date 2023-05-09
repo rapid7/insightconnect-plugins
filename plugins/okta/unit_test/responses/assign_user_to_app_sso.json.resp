@@ -1,0 +1,23 @@
+{
+  "id": "12345",
+  "externalId": null,
+  "created": "2023-04-27T11:26:03.000Z",
+  "lastUpdated": "2023-04-27T11:26:03.000Z",
+  "scope": "USER",
+  "status": "ACTIVE",
+  "statusChanged": "2023-04-27T11:26:03.000Z",
+  "passwordChanged": null,
+  "syncState": "DISABLED",
+  "credentials": {
+    "userName": "user@example.com"
+  },
+  "profile": {},
+  "_links": {
+    "app": {
+      "href": "https://example.com"
+    },
+    "user": {
+      "href": "https://example.com"
+    }
+  }
+}

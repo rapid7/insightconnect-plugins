@@ -1,0 +1,22 @@
+{
+  "result": {
+    "id": "12345",
+    "created": "2023-04-27T11:26:03.000Z",
+    "lastUpdated": "2023-04-27T11:26:03.000Z",
+    "scope": "USER",
+    "status": "ACTIVE",
+    "statusChanged": "2023-04-27T11:26:03.000Z",
+    "syncState": "DISABLED",
+    "credentials": {
+      "userName": "user@example.com"
+    },
+    "links": {
+      "app": {
+        "href": "https://example.com"
+      },
+      "user": {
+        "href": "https://example.com"
+      }
+    }
+  }
+}
