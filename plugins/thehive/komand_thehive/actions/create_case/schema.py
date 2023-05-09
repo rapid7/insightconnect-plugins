@@ -169,10 +169,6 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
       "order": 8
     }
   },
-  "required": [
-    "description",
-    "title"
-  ],
   "definitions": {
     "itask": {
       "type": "object",

@@ -4,9 +4,8 @@ products: [insightconnect]
 name: thehive
 title: TheHive
 description: "TheHive is a scalable, open source security incident response solution designed for
-  SOCs & CERTs to collaborate, elaborate, analyze and get their job done. Handle your case management needs with TheHive
-plugin for Rapid7 InsightConnect"
-version: 2.0.5
+  SOCs & CERTs to collaborate, elaborate, analyze and get their job done."
+version: 3.0.0
 vendor: rapid7
 support: community
 status: []
@@ -118,6 +117,66 @@ types:
       title: ID
       description: The observable's value e.g. badguy.com
       type: string
+  userObject:
+    status:
+      type: string
+      description: Get user status
+      required: false
+    _type:
+      title: Type
+      description: User type
+      type: string
+      required: false
+    hasKey:
+      type: boolean
+      description: User has a key
+      required: false
+    name:
+      type: string
+      description: Name
+      required: false
+    roles:
+      type: '[]string'
+      description: Roles
+      required: false
+    updatedAt:
+      title: Updated At
+      type: integer
+      description: Time the user was updated in milliseconds or epoch, e.g. 1496561862924
+      required: false
+    user:
+      type: string
+      description: User
+      required: false
+    createdBy:
+      title: Updated By
+      description: Created by
+      type: string
+      required: false
+    updatedBy:
+      title: Updated By
+      description: Updated by
+      type: string
+      required: false
+    _id:
+      title: _ID
+      description: User _ID
+      type: string
+      required: false
+    id:
+      title: ID
+      description: ID
+      type: string
+      required: false
+    createdAt:
+      title: Created At
+      description: Time the user was created at in milliseconds or epoch, e.g. 1496561862924
+      type: integer
+      required: false
+    preferences:
+      type: object
+      description: User preferences
+      required: false
   case:
     id:
       title: ID
@@ -550,74 +609,29 @@ types:
         1496561862924
       type: integer
 actions:
-  get_user:
-    title: Get User
-    description: Get information about a user
+  get_user_by_id:
+    title: Get User By ID
+    description: Get information about a specific user
     input:
       id:
         title: User ID
-        description: User ID. If empty, the current user is used
+        description: The ID of the user
         type: string
-        required: false
+        required: true
     output:
-      status:
-        type: string
-        description: Get user status
+      success:
+        title: Success
+        description: A user object containing all related fields
+        type: userObject
         required: false
-      _type:
-        title: Type
-        description: User type
-        type: string
-        required: false
-      hasKey:
-        type: boolean
-        description: User has a key
-        required: false
-      name:
-        type: string
-        description: Name
-        required: false
-      roles:
-        type: '[]string'
-        description: Roles
-        required: false
-      updatedAt:
-        title: Updated At
-        type: integer
-        description: Time the user was updated in milliseconds or epoch, e.g. 1496561862924
-        required: false
-      user:
-        type: string
-        description: User
-        required: false
-      createdBy:
-        title: Updated By
-        description: Created by
-        type: string
-        required: false
-      updatedBy:
-        title: Updated By
-        description: Updated by
-        type: string
-        required: false
-      _id:
-        title: _ID
-        description: User _ID
-        type: string
-        required: false
-      id:
-        title: ID
-        description: ID
-        type: string
-        required: false
-      createdAt:
-        title: Created At
-        description: Time the user was created at in milliseconds or epoch, e.g. 1496561862924
-        type: integer
-        required: false
-      preferences:
-        type: object
-        description: User preferences
+  get_current_user:
+    title: Get Current User
+    description: Get information about the current user
+    output:
+      success:
+        title: Success
+        description: A user object containing all related fields
+        type: userObject
         required: false
   create_case:
     title: Create Case
@@ -627,12 +641,12 @@ actions:
         title: Case Title
         description: Name of the case
         type: string
-        required: true
+        required: false
       description:
         title: Case Description
         description: Description of the case, supports markdown
         type: string
-        required: true
+        required: false
       severity:
         title: Severity
         description: Case severity
@@ -739,9 +753,10 @@ actions:
     input:
       id:
         title: Case ID
-        description: Case ID e.g. AV_ajI_oYMfcbXhqb9tS
+        description: ID for the case
+        example: AV_ajI_oYMfcbXhqb9tS
         type: string
-        required: true
+        required: false
       task:
         type: itask
         title: Task
@@ -758,7 +773,8 @@ actions:
     input:
       id:
         title: Case ID
-        description: Case ID e.g. AV_ajI_oYMfcbXhqb9tS
+        description: ID for the case
+        example: AV_ajI_oYMfcbXhqb9tS
         type: string
         required: true
       observable:
@@ -777,7 +793,8 @@ actions:
     input:
       id:
         title: Case ID
-        description: Case ID e.g. AV_ajI_oYMfcbXhqb9tS
+        description: ID for the case
+        example: AV_ajI_oYMfcbXhqb9tS
         type: string
         required: true
     output:
@@ -799,7 +816,8 @@ actions:
     input:
       id:
         title: Case ID
-        description: Case ID e.g. AV_ajI_oYMfcbXhqb9tS
+        description: ID for the case
+        example: AV_ajI_oYMfcbXhqb9tS
         type: string
         required: true
       resolution_status:

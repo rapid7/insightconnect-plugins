@@ -2,7 +2,6 @@ import insightconnect_plugin_runtime
 from .schema import CreateCaseInput, CreateCaseOutput, Component, Input, Output
 
 # Custom imports below
-import requests
 import datetime
 
 
@@ -16,8 +15,6 @@ class CreateCase(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-
-        client = self.connection.client
 
         case = {
             "title": params.get(Input.TITLE),
@@ -37,12 +34,12 @@ class CreateCase(insightconnect_plugin_runtime.Action):
             "tasks": params.get(Input.TASKS, None),
             "sharingParameters": None,
             "taskRule": params.get(Input.TASKRULE, None),
-            "observableRule": params.get(Input.OBSERVABLERULE, None)
+            "observableRule": params.get(Input.OBSERVABLERULE, None),
         }
 
         self.logger.info(f"Input: {case}")
 
-        response = client.create_case(case=case)
+        response = self.connection.client.create_case(case=case)
 
         return {Output.CASE: response.json()}
         #

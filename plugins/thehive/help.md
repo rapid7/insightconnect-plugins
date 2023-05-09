@@ -1,4 +1,4 @@
-#####
+###########
 
 
 
@@ -48,13 +48,58 @@ Example input:
 
 ### Actions
 
+#### Get User By ID
+
+This action is used to get information about a specific user.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|id|string|None|True|The ID of the user|None|None|
+
+Example input:
+
+```
+```
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|userObject|False|A user object containing all related fields|
+
+Example output:
+
+```
+```
+
+#### Get Current User
+
+This action is used to get information about the current user.
+
+##### Input
+
+_This action does not contain any inputs._
+
+##### Output
+
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
+|success|userObject|False|A user object containing all related fields|
+
+Example output:
+
+```
+```
+
 #### Close Case
 Close a case by ID
 ##### Input
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|None|
+|id|string|None|True|ID for the case|None|AV_ajI_oYMfcbXhqb9tS|
 |impact_status|string|None|False|Case impact status|['low', 'medium', 'high']|None|
 |resolution_status|string|None|False|Case resolution status|['low', 'medium', 'high']|None|
 |summary|string|None|False|Case Summary|None|None|
@@ -96,7 +141,7 @@ Create a new case
 |assignee|string|None|False|User to assign the case to|None|None|
 |caseTemplate|string|None|False|Name or id of the case template to use|None|None|
 |customFields|object|None|False|Case custom fields|None|None|
-|description|string|None|True|Description of the case, supports markdown|None|None|
+|description|string|None|False|Description of the case, supports markdown|None|None|
 |endDate|integer|None|False|Case end date (datetime in ms)|None|None|
 |flag|boolean|False|False|Flag, default is false|None|None|
 |observableRule|string|None|False|Case observable rule|None|None|
@@ -108,7 +153,7 @@ Create a new case
 |tags|[]string|None|False|List of tags|None|None|
 |taskRule|string|None|False|Case task rule|None|None|
 |tasks|[]itask|None|False|Case task|None|None|
-|title|string|None|True|Name of the case|None|None|
+|title|string|None|False|Name of the case|None|None|
 |tlp|integer|2|False|Traffic Light Protocol level|[0, 1, 2, 3]|None|
 
 ```
@@ -174,7 +219,7 @@ Create a new case observable
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|None|
+|id|string|None|True|ID for the case|None|AV_ajI_oYMfcbXhqb9tS|
 |observable|iobservable|None|True|Observable|None|None|
 
 ```
@@ -195,6 +240,9 @@ Create a new case observable
 Example input:
 
 ```
+{
+  "id": "AV_ajI_oYMfcbXhqb9tS"
+}
 ```
 
 ##### Output
@@ -233,7 +281,7 @@ Create a new case task
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|None|
+|id|string|None|False|ID for the case|None|AV_ajI_oYMfcbXhqb9tS|
 |task|itask|None|True|Task name|None|None|
 
 ```
@@ -251,6 +299,9 @@ Create a new case task
 Example input:
 
 ```
+{
+  "id": "AV_ajI_oYMfcbXhqb9tS"
+}
 ```
 
 ##### Output
@@ -285,7 +336,7 @@ Retrieve a case by ID
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|Case ID e.g. AV_ajI_oYMfcbXhqb9tS|None|None|
+|id|string|None|True|ID for the case|None|AV_ajI_oYMfcbXhqb9tS|
 
 ```
 {
@@ -295,6 +346,9 @@ Retrieve a case by ID
 Example input:
 
 ```
+{
+  "id": "AV_ajI_oYMfcbXhqb9tS"
+}
 ```
 
 ##### Output
@@ -373,63 +427,6 @@ Example output:
       "user": {}
     }
   ]
-}
-```
-#### Get User
-Get information about a user
-##### Input
-
-|Name|Type|Default|Required|Description|Enum|Example|
-|----|----|-------|--------|-----------|----|-------|
-|id|string|None|False|User ID. If empty, the current user is used|None|None|
-
-```
-{
-  "id": ""
-}
-```
-Example input:
-
-```
-```
-
-##### Output
-
-|Name|Type|Default|Required|Description|Enum|Example|
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-|_id|string|None|False|User _ID|None|None|
-|_type|string|None|False|User type|None|None|
-|createdAt|integer|None|False|Time the user was created at in milliseconds or epoch, e.g. 1496561862924|None|None|
-|createdBy|string|None|False|Created by|None|None|
-|hasKey|boolean|None|False|User has a key|None|None|
-|id|string|None|False|ID|None|None|
-|name|string|None|False|Name|None|None|
-|preferences|object|None|False|User preferences|None|None|
-|roles|[]string|None|False|Roles|None|None|
-|status|string|None|False|Get user status|None|None|
-|updatedAt|integer|None|False|Time the user was updated in milliseconds or epoch, e.g. 1496561862924|None|None|
-|updatedBy|string|None|False|Updated by|None|None|
-|user|string|None|False|User|None|None|
-  
-Example output:
-
-```
-{
-  "_id": "",
-  "_type": "",
-  "createdAt": 0,
-  "createdBy": "",
-  "hasKey": true,
-  "id": "",
-  "name": "",
-  "preferences": {},
-  "roles": [
-    ""
-  ],
-  "status": "",
-  "updatedAt": 0,
-  "updatedBy": "",
-  "user": ""
 }
 ```
 ### Triggers
@@ -524,6 +521,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 3.0.0 - Action: `Get Cases` removed. | Action: `Get User` made into two new actions, `Get User By ID` & `Get Current User`. | Refactor: All code refactored & thehive4py dependency removed. | Connection: Fixed issue where connection fails on SSL verify & added API key input.
 * 2.0.5 - New spec and help.md format for the Extension Library. Update help key features and fix description capitalisation
 * 2.0.4 - Update to use the `komand/python-2-27-slim-plugin` Docker image to reduce plugin size and to support SSL Verify
 * 2.0.3 - Fix issue where SSL Verify was not used in actions that utilize requests | Updated test method and moved it to connection

@@ -17,15 +17,5 @@ class GetCase(insightconnect_plugin_runtime.Action):
 
         case_id = params.get(Input.ID)
         result = self.connection.client.get_case(case_id)
+
         return {Output.CASE: result}
-        # try:
-        #     case = client.get_case(params.get("id"))
-        #     case.raise_for_status()
-        # except requests.exceptions.HTTPError:
-        #     self.logger.error(case.json())
-        #     raise
-        # except:
-        #     self.logger.error("Failed to get case")
-        #     raise
-        #
-        # return {"case": case.json()}

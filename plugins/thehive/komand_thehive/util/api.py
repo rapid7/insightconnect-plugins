@@ -17,55 +17,57 @@ class HiveAPI:
 
     # Get Case
     # https://docs.strangebee.com/thehive/api-docs/#operation/Get%20case
-    # This works now and I'm genuinely surprised - commit it all and DONT TOUCH ANYTHING
+    # Working
     def get_case(self, case_id: str) -> dict:
-        return self._call_api("GET", f"api/case/{case_id}", None, None)
+        return self._call_api("GET", f"api/case/{case_id}")
 
     # Create Case
     # https://docs.strangebee.com/thehive/api-docs/#operation/Create%20case
+    # <ValidationError: \"'id' is a required property\">)"}
     def create_case(self, case):
-        return self._call_api("POST", "api/v1/case", None, case)
+        return self._call_api("POST", "api/case", data=case)
 
     # Create Task in Case
     # https://docs.strangebee.com/thehive/api-docs/#operation/Create%20Task%20in%20Case
     def create_task_in_case(self, case_id, case):
-        return self._call_api("POST", case_id, None, case)
+        return self._call_api("POST", case_id, data=case)
 
     # Close Case
     # https://docs.strangebee.com/thehive/api-docs/#operation/Delete%20case
     def close_case(self, case_id):
-        return self._call_api("DELETE", case_id, None, None)
+        return self._call_api("DELETE", case_id)
 
     # TODO
     # Create Case Observable
     # Docs
 
-    # Get Cases
-    # Docs
+    # I have no idea if these 'Get User' functions work because generating samples wont work for them
+    # Get Current User
+    # https://docs.strangebee.com/thehive/api-docs/#operation/Get%20current%20User%20info
+    def get_current_user(self):
+        return self._call_api("GET", f"api/user/current")
 
-    # Get User
-    # https://docs.strangebee.com/thehive/api-docs/#operation/Get%20User
-    def get_user(self, user_id):
-        return self._call_api("GET", user_id, None, None)
+    # Get User By ID
+    # # https://docs.strangebee.com/thehive/api-docs/#operation/Get%20User
+    def get_user_by_id(self, user_id):
+        return self._call_api("GET", f"api/user/{user_id}")
 
     def _call_api(
-        self,
-        method: str,
-        path: str,
-        params: Optional[dict] = None,
-        data: Optional = None,
+        self, method: str, path: str, params: Optional[dict] = None, data: Optional = None, json_data: Optional = None
     ) -> dict:
 
         auth = None
         headers = {"X-Organisation": "myOrg", "Content-Type": "application/json"}
 
         if self.api_key:
-            auth = f"Authorization: Bearer {self.api_key}"
+            auth = {"Authorization": f"Bearer {self.api_key}"}
 
         if self.username and self.password:
             auth = HTTPBasicAuth(self.username, self.password)
 
-        response = requests.request(method, self.url + path, params=params, data=data, headers=headers, auth=auth)
+        response = requests.request(
+            method, self.url + path, params=params, data=data, json=json_data, headers=headers, auth=auth
+        )
 
         if response.status_code == 400:
             raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.json())

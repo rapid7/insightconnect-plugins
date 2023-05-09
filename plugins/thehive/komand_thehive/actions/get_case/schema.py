@@ -24,7 +24,7 @@ class GetCaseInput(insightconnect_plugin_runtime.Input):
     "id": {
       "type": "string",
       "title": "Case ID",
-      "description": "Case ID e.g. AV_ajI_oYMfcbXhqb9tS",
+      "description": "ID for the case",
       "order": 1
     }
   },

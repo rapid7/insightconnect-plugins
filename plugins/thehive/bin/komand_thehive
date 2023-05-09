@@ -6,8 +6,8 @@ from sys import argv
 
 Name = "TheHive"
 Vendor = "rapid7"
-Version = "2.0.5"
-Description = "TheHive is a scalable, open source security incident response solution designed for SOCs & CERTs to collaborate, elaborate, analyze and get their job done. Handle your case management needs with TheHive plugin for Rapid7 InsightConnect"
+Version = "3.0.0"
+Description = "TheHive is a scalable, open source security incident response solution designed for SOCs & CERTs to collaborate, elaborate, analyze and get their job done."
 
 
 def main():
@@ -46,7 +46,9 @@ def main():
 
             self.add_action(actions.GetCases())
 
-            self.add_action(actions.GetUser())
+            self.add_action(actions.GetCurrentUser())
+
+            self.add_action(actions.GetUserById())
 
 
     """Run plugin"""
