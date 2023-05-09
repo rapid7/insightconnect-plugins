@@ -96,8 +96,8 @@ Example input:
 
 ```
 {
- "mac_address": "00:0E:35:D4:D8:52",
- "policy": "Shut_Down"
+  "mac_address": "00:0E:35:D4:D8:52",
+  "policy": "Shut_Down"
 }
 ```
 
@@ -112,15 +112,15 @@ Example output:
 ```
 
 {
-  "result": {
-  "ErsAncEndpoint": {
-    "id": "5810ed0b-f1e8-40dc-bbda-78dcda4ae33d",
-    "macAddress": "00:0E:35:D4:D8:51",
-    "policyName": "komand_test",
-    "link": {
-      "rel": "self",
-      "href": "https://10.4.22.225:9060/ers/config/ancendpoint/5810ed0b-f1e8-40dc-bbda-78dcda4ae33d",
-      "type": "application/xml"
+  "result":{
+    "ErsAncEndpoint":{
+      "id":"5810ed0b-f1e8-40dc-bbda-78dcda4ae33d",
+      "macAddress":"00:0E:35:D4:D8:51",
+      "policyName":"komand_test",
+      "link":{
+        "rel":"self",
+        "href":"https://10.4.22.225:9060/ers/config/ancendpoint/5810ed0b-f1e8-40dc-bbda-78dcda4ae33d",
+        "type":"application/xml"
       }
     }
   }
@@ -157,22 +157,22 @@ Example output:
 ```
 
 {
-  "ers_endpoint": {
-  "id": "82e2b6d0-546b-11e8-bc94-12d1173c5b91",
-  "name": "00:0E:35:D4:D8:52",
-  "description": "",
-  "mac": "00:0E:35:D4:D8:52",
-  "profileId": "2ac6a950-8c00-11e6-996c-525400b48521",
-  "staticProfileAssignment": false,
-  "groupId": "aa10ae00-8bff-11e6-996c-525400b48521",
-  "staticGroupAssignment": false,
-  "portalUser": "",
-  "identityStore": "",
-  "identityStoreId": "",
-  "link": {
-    "rel": "self",
-    "href": "https://10.4.22.225:9060/ers/config/endpoint/name/00:0E:35:D4:D8:52",
-    "type": "application/xml"
+  "ers_endpoint":{
+    "id":"82e2b6d0-546b-11e8-bc94-12d1173c5b91",
+    "name":"00:0E:35:D4:D8:52",
+    "description":"",
+    "mac":"00:0E:35:D4:D8:52",
+    "profileId":"2ac6a950-8c00-11e6-996c-525400b48521",
+    "staticProfileAssignment":false,
+    "groupId":"aa10ae00-8bff-11e6-996c-525400b48521",
+    "staticGroupAssignment":false,
+    "portalUser":"",
+    "identityStore":"",
+    "identityStoreId":"",
+    "link":{
+      "rel":"self",
+      "href":"https://10.4.22.225:9060/ers/config/endpoint/name/00:0E:35:D4:D8:52",
+      "type":"application/xml"
     }
   }
 }
@@ -232,7 +232,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
-* 2.2.2 - Update requests to version 2.30.0
+* 2.2.2 - Update requests to version 2.20.0
 * 2.2.1 - New spec and help.md format for the Extension Library
 * 2.2.0 - New action Get ANC Endpoint
 * 2.1.2 - Fixed issue where Query Endpoint would return an error if endpoint was not found | Update to input description for Query Endpoint

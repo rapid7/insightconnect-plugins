@@ -22,18 +22,6 @@
 		{
 			"identifier": "connection/schema.py",
 			"hash": "616afbc4847ca196613963f40ec8f019"
-		},
-		{
-			"identifier": "decode/schema.py",
-			"hash": "3f5345ce8f9a6051508dbed3444c83e2"
-		},
-		{
-			"identifier": "encode/schema.py",
-			"hash": "81fe698fb58cb1c0d2752db42aff82ae"
-		},
-		{
-			"identifier": "connection/schema.py",
-			"hash": "0d37ecad8d408635f66b40f605f56da5"
 		}
 	]
 }
