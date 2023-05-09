@@ -1,0 +1,83 @@
+[
+  {
+    "type": "DYNAMIC",
+    "id": "12345",
+    "name": "Test Dynamic Zone",
+    "status": "ACTIVE",
+    "usage": "POLICY",
+    "created": "2023-04-11T10:10:32.000Z",
+    "lastUpdated": "2023-04-24T12:21:02.000Z",
+    "system": false,
+    "locations": [
+      {
+        "country": "AX",
+        "region": null
+      }
+    ],
+    "proxyType": "",
+    "asns": [
+      "12345"
+    ],
+    "_links": {
+      "self": {
+        "href": "https://example.com",
+        "hints": {
+          "allow": [
+            "GET",
+            "PUT",
+            "DELETE"
+          ]
+        }
+      },
+      "deactivate": {
+        "href": "https://example.com",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "type": "IP",
+    "id": "56789",
+    "name": "Test IP Zone",
+    "status": "ACTIVE",
+    "usage": "BLOCKLIST",
+    "created": "2020-11-01T00:34:19.000Z",
+    "lastUpdated": "2023-04-25T08:28:34.000Z",
+    "system": false,
+    "gateways": [
+      {
+        "type": "CIDR",
+        "value": "1.2.3.4/24"
+      },
+      {
+        "type": "RANGE",
+        "value": "1.2.3.4-1.2.3.4"
+      }
+    ],
+    "proxies": null,
+    "_links": {
+      "self": {
+        "href": "https://example.com",
+        "hints": {
+          "allow": [
+            "GET",
+            "PUT",
+            "DELETE"
+          ]
+        }
+      },
+      "deactivate": {
+        "href": "https://example.com",
+        "hints": {
+          "allow": [
+            "POST"
+          ]
+        }
+      }
+    }
+  }
+]
