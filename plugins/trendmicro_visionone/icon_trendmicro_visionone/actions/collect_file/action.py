@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import CollectFileInput, CollectFileOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -36,7 +37,11 @@ class CollectFile(insightconnect_plugin_runtime.Action):
                 )
             )
             if "error" in response.result_code.lower():
-                return response.errors
+                raise PluginException(
+                    cause="An error occurred while collecting file.",
+                    assistance="Please check the provided parameters and try again.",
+                    data=response.errors,
+                )
             else:
                 multi_resp["multi_response"].append(
                     response.response.dict().get("items")[0]

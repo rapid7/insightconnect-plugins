@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import AddAlertNoteInput, AddAlertNoteOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -29,10 +30,18 @@ class AddAlertNote(insightconnect_plugin_runtime.Action):
         self.logger.info("Making API Call...")
         response = client.add_alert_note(alert_id=alert_id, note=content)
         if "error" in response.result_code.lower():
-            return response.error
+            raise PluginException(
+                cause="An error occurred while adding an alert note.",
+                assistance="Please check the provided alert ID and content.",
+                data=response.error,
+            )
         else:
             self.logger.info("Returning Results...")
             location = response.response.location
             note_id = location.split("/")[-1]
             result_code = response.result_code
-            return {"result_code": result_code, "location": location, "note_id": note_id}
+            return {
+                "result_code": result_code,
+                "location": location,
+                "note_id": note_id,
+            }

@@ -6,6 +6,7 @@ from .schema import (
     Output,
     Component,
 )
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -43,9 +44,15 @@ class TerminateProcess(insightconnect_plugin_runtime.Action):
                 )
             )
             if "error" in response.result_code.lower():
-                return response.errors
+                raise PluginException(
+                    cause="An error occurred while terminating process.",
+                    assistance="Please check the process identifiers and try again.",
+                    data=response.errors,
+                )
             else:
-                multi_resp["multi_response"].append(response.response.dict().get("items")[0])
+                multi_resp["multi_response"].append(
+                    response.response.dict().get("items")[0]
+                )
         # Return results
         self.logger.info("Returning Results...")
         return multi_resp

@@ -6,6 +6,7 @@ from .schema import (
     Output,
     Component,
 )
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -34,7 +35,11 @@ class GetAlertDetails(insightconnect_plugin_runtime.Action):
         self.logger.info("Making API Call...")
         response = client.get_alert_details(alert_id=alert_id)
         if "error" in response.result_code.lower():
-            return response
+            raise PluginException(
+                cause="An error occurred while getting the alert details.",
+                assistance="Please check the alert ID and try again.",
+                data=response,
+            )
         else:
             self.logger.info("Returning Results...")
             return {

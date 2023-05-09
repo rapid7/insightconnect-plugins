@@ -1,24 +1,58 @@
 import sys
 import os
-sys.path.append(os.path.abspath('../'))
+
+sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
-from unittest.mock import patch
-from icon_trendmicro_visionone.connection.connection import Connection
-from icon_trendmicro_visionone.triggers.poll_sandbox_suspicious_list import PollSandboxSuspiciousList
-import logging
+from unittest.mock import MagicMock, patch
 import json
-import timeout_decorator
+import logging
+from icon_trendmicro_visionone.connection.connection import Connection
+from icon_trendmicro_visionone.triggers.poll_sandbox_suspicious_list import (
+    PollSandboxSuspiciousList,
+)
+from timeout_decorator import timeout, timeout_decorator
 
 
-# Test class
 class TestPollSandboxSuspiciousList(TestCase):
-    def test_poll_sandbox_suspicious_list_some_function_to_test(self):
-        """
-        DO NOT USE PRODUCTION/SENSITIVE DATA FOR UNIT TESTS
+    def setUp(self):
+        self.connection = Connection()
+        self.connection.logger = logging.getLogger()
+        self.connection.server = "tmv1-mock.trendmicro.com"
+        self.connection.token_ = "Dummy-Secret-Token"
+        self.connection.app = "TM-R7"
 
-        TODO: Implement test cases here
+        self.trigger = PollSandboxSuspiciousList()
+        self.trigger.connection = self.connection
 
-        Here and in following tests you should test everything you can in your trigger that's not in the run loop.
-        """
-        self.fail("Unimplemented Test")
+    @timeout_decorator.timeout(15)
+    @patch(
+        "icon_trendmicro_visionone.triggers.poll_sandbox_suspicious_list.PollSandboxSuspiciousList.send",
+        side_effect=lambda output: None,
+    )
+    def test_integration_poll_sandbox_suspicious_list(self, mock_send):
+        log = logging.getLogger("Test")
+
+        try:
+            with open("/python/src/tests/get_sandbox_suspicious_list.json") as file:
+                test_json = json.loads(file.read()).get("body")
+                connection_params = test_json.get("connection")
+                trigger_params = test_json.get("input")
+        except Exception as e:
+            message = f"Error reading JSON file: {e}"
+            self.fail(message)
+
+        test_conn = Connection()
+        test_conn.logger = log
+        test_conn.connect(connection_params)
+
+        test_poll_sandbox_suspicious_list = PollSandboxSuspiciousList()
+        test_poll_sandbox_suspicious_list.connection = test_conn
+        test_poll_sandbox_suspicious_list.logger = log
+
+        try:
+            test_poll_sandbox_suspicious_list.run(trigger_params)
+        except timeout_decorator.TimeoutError as e:
+            self.assertIsInstance(e, timeout_decorator.TimeoutError)
+        else:
+            self.fail("Expected TimeoutError was not raised.")

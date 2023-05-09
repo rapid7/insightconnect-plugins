@@ -6,6 +6,7 @@ from .schema import (
     Output,
     Component,
 )
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -47,8 +48,11 @@ class GetEndpointData(insightconnect_plugin_runtime.Action):
                 endpoint,
             )
         except Exception as e:
-            self.logger.info("Consume Endpoint Data failed with following exception:")
-            return e
+            raise PluginException(
+                cause="An error occurred while getting endpoint data.",
+                assistance="Please check your inputs and try again.",
+                data=e,
+            )
         # Load json objects to list
         endpoint_data_resp = []
         for i in new_endpoint_data:

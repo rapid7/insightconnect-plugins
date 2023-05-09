@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import GetAlertListInput, GetAlertListOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -36,8 +37,11 @@ class GetAlertList(insightconnect_plugin_runtime.Action):
                 end_time=end_date_time,
             )
         except Exception as e:
-            self.logger.info("Consume Alert List failed with following exception:")
-            return e
+            raise PluginException(
+                cause="An error occurred while trying to get the alert list.",
+                assistance="Please check the provided parameters and try again.",
+                data=e,
+            )
         # Load json objects to list
         alert_list = []
         for i in new_alerts:

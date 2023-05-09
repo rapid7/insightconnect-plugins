@@ -8,6 +8,7 @@ from .schema import (
     Output,
     Component,
 )
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -40,7 +41,11 @@ class GetSandboxSuspiciousList(insightconnect_plugin_runtime.Action):
             submit_id=submit_id, poll=poll, poll_time_sec=poll_time_sec
         )
         if "error" in response.result_code.lower():
-            return response.error
+            raise PluginException(
+                cause="An error occurred while getting sandbox suspicious list.",
+                assistance="Please check the input ID and try again.",
+                data=response.error,
+            )
         else:
             # Json load suspicious list objects
             sandbox_suspicious_list_resp = []

@@ -7,6 +7,7 @@ from .schema import (
     Component,
 )
 import json
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -44,10 +45,16 @@ class EditAlertStatus(insightconnect_plugin_runtime.Action):
         client = pytmv1.client(app, token, url)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.edit_alert_status(alert_id=alert_id, status=status, if_match=if_match)
+        response = client.edit_alert_status(
+            alert_id=alert_id, status=status, if_match=if_match
+        )
         result_code = {"result_code": ""}
         if "error" in response.result_code.lower():
-            return response
+            raise PluginException(
+                cause="An error occurred while trying to edit the alert status.",
+                assistance="Please check the provided parameters and try again.",
+                data=response,
+            )
         else:
             result_response = json.dumps(response.result_code).replace('"', "")
             result_code["result_code"] = result_response

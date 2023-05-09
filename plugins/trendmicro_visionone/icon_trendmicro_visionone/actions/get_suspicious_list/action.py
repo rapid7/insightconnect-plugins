@@ -6,6 +6,7 @@ from .schema import (
     Output,
     Component,
 )
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -37,8 +38,11 @@ class GetSuspiciousList(insightconnect_plugin_runtime.Action):
                 lambda suspicion: new_suspicions.append(suspicion.dict())
             )
         except Exception as e:
-            self.logger.info("Consume Suspicious List failed with following exception:")
-            return e
+            raise PluginException(
+                cause="An error occurred while getting the Suspicious List.",
+                assistance="Please check the logs for more details.",
+                data=e,
+            )
         # Load json objects to list
         suspicious_objects = []
         for i in new_suspicions:

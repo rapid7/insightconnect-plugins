@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import DisableAccountInput, DisableAccountOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -34,7 +35,11 @@ class DisableAccount(insightconnect_plugin_runtime.Action):
                 )
             )
             if "error" in response.result_code.lower():
-                return response.errors
+                raise PluginException(
+                    cause="An error occurred while disabling the account.",
+                    assistance="Please check the account name and try again.",
+                    data=response.errors,
+                )
             else:
                 multi_resp["multi_response"].append(
                     response.response.dict().get("items")[0]

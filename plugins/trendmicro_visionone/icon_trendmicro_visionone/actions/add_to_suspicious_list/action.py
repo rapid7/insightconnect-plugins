@@ -6,6 +6,7 @@ from .schema import (
     Output,
     Component,
 )
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -68,10 +69,16 @@ class AddToSuspiciousList(insightconnect_plugin_runtime.Action):
                 )
             )
             if "error" in response.result_code.lower():
-                return response.errors
+                raise PluginException(
+                    cause="An error occurred while adding to the suspicious list.",
+                    assistance="Please check the input parameters and try again.",
+                    data=response.errors,
+                )
             else:
                 items = response.response.dict().get("items")[0]
-                items["task_id"] = "None" if items.get("task_id") is None else items["task_id"]
+                items["task_id"] = (
+                    "None" if items.get("task_id") is None else items["task_id"]
+                )
                 multi_resp["multi_response"].append(items)
         # Return results
         self.logger.info("Returning Results...")

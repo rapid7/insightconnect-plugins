@@ -6,6 +6,7 @@ from .schema import (
     Output,
     Component,
 )
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -37,8 +38,11 @@ class GetExceptionList(insightconnect_plugin_runtime.Action):
                 lambda exception: new_exceptions.append(exception.dict())
             )
         except Exception as e:
-            self.logger.info("Consume Exception List failed with following exception:")
-            return e
+            raise PluginException(
+                cause="Consume Exception List failed with following exception.",
+                assistance="Please check your connection details and try again.",
+                data=e,
+            )
         # Load json objects to list
         exception_objects = []
         for i in new_exceptions:

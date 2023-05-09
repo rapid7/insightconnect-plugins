@@ -1,5 +1,8 @@
 import insightconnect_plugin_runtime
-from insightconnect_plugin_runtime.exceptions import ConnectionTestException, PluginException
+from insightconnect_plugin_runtime.exceptions import (
+    ConnectionTestException,
+    PluginException,
+)
 from .schema import ConnectionSchema, Input
 
 # Custom imports below
@@ -22,7 +25,7 @@ class Connection(insightconnect_plugin_runtime.Connection):
         """
         self.logger.info("Connect: Connecting...")
 
-        url = params.get(Input.API_URL, "https://api.xdr.trendmicro.com")
+        url = params.get(Input.API_URL, "https://tmv1-mock.trendmicro.com")
         key = params.get(Input.API_KEY).get("secretKey", "Dummy-API-KEY")
         app = params.get(Input.APP_NAME, "Rapid7-InsightConnect")
 
@@ -39,10 +42,13 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.logger.info("Initializing PYTMV1 Client...")
         client = pytmv1.client(app, key, url)
         self.logger.info("Making API Call...")
-        response = client.test_connectivity()
+        response = client.check_connectivity()
         if "error" in response.result_code.lower():
-            self.logger.info("Failed to Establish Connection...")
-            return response.result_code
+            raise ConnectionTestException(
+                "Failed to Establish Connection...",
+                assistance="Please check your API Key and URL",
+                data=response.result_code,
+            )
         else:
             self.logger.info("Connection Successfully Established...")
             return response.result_code

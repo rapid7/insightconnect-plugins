@@ -6,6 +6,7 @@ from .schema import (
     Output,
     Component,
 )
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -41,7 +42,11 @@ class DownloadSandboxInvestigationPackage(insightconnect_plugin_runtime.Action):
             submit_id=submit_id, poll=poll, poll_time_sec=poll_time_sec
         )
         if "error" in response.result_code.lower():
-            return response
+            raise PluginException(
+                cause="An error occurred while downloading the investigation package.",
+                assistance="Please check the provided ID and try again.",
+                data=response,
+            )
         else:
             # Make filename with timestamp
             name = "Trend Micro Download Sandbox Investigation Package "

@@ -6,6 +6,7 @@ from .schema import (
     Output,
     Component,
 )
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -37,9 +38,15 @@ class DownloadSandboxAnalysisResult(insightconnect_plugin_runtime.Action):
         client = pytmv1.client(app, token, url)
         # Make Action API Call
         self.logger.info("Making API Call...")
-        response = client.download_sandbox_analysis_result(submit_id=submit_id, poll=poll, poll_time_sec=poll_time_sec)
+        response = client.download_sandbox_analysis_result(
+            submit_id=submit_id, poll=poll, poll_time_sec=poll_time_sec
+        )
         if "error" in response.result_code.lower():
-            return response
+            raise PluginException(
+                cause="An error occurred while downloading the sandbox analysis result.",
+                assistance="Please check the ID and try again.",
+                data=response,
+            )
         else:
             # Make filename with timestamp
             name = "Trend Micro Download Sandbox Analysis Result "

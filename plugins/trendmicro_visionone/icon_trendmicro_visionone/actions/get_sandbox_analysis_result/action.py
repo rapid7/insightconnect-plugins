@@ -6,6 +6,7 @@ from .schema import (
     Output,
     Component,
 )
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -40,7 +41,11 @@ class GetSandboxAnalysisResult(insightconnect_plugin_runtime.Action):
             poll_time_sec=poll_time_sec,
         )
         if "error" in response.result_code.lower():
-            return response
+            raise PluginException(
+                cause="An error occurred while getting the sandbox analysis result.",
+                assistance="Please check the report ID and try again.",
+                data=response,
+            )
         else:
             self.logger.info("Returning Results...")
             return response.response.dict()

@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import GetTaskResultInput, GetTaskResultOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -34,7 +35,11 @@ class GetTaskResult(insightconnect_plugin_runtime.Action):
             poll_time_sec=poll_time_sec,
         )
         if "error" in response.result_code.lower():
-            return response
+            raise PluginException(
+                cause="An error occurred while retrieving the task result.",
+                assistance="Please check the task ID and try again.",
+                data=response,
+            )
         else:
             self.logger.info("Returning Results...")
             return response.response.dict()

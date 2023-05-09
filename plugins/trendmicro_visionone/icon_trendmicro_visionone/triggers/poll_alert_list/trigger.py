@@ -1,6 +1,7 @@
 import insightconnect_plugin_runtime
 import time
 from .schema import PollAlertListInput, PollAlertListOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -40,8 +41,11 @@ class PollAlertList(insightconnect_plugin_runtime.Trigger):
                     end_time=end_date_time,
                 )
             except Exception as e:
-                self.logger.info("Consume Alert List failed with following exception:")
-                return e
+                raise PluginException(
+                    cause="An error occurred while polling alerts.",
+                    assistance="Please check your inputs and try again.",
+                    data=e,
+                )
             # Load json objects to list
             alert_list = []
             for i in new_alerts:

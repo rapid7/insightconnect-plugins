@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import AddToBlockListInput, AddToBlockListOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -50,7 +51,11 @@ class AddToBlockList(insightconnect_plugin_runtime.Action):
                 )
             )
             if "error" in response.result_code.lower():
-                return response.errors
+                raise PluginException(
+                    cause="An error occurred while adding the object to the block list.",
+                    assistance="Please check the provided object type and object value.",
+                    data=response.errors,
+                )
             else:
                 multi_resp["multi_response"].append(
                     response.response.dict().get("items")[0]

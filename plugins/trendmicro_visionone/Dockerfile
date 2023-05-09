@@ -23,4 +23,7 @@ RUN python setup.py build && python setup.py install
 # User to run plugin code. The two supported users are: root, nobody
 USER root
 
+# Uncomment next 2 lines for unit testing 
+# ENTRYPOINT ["/bin/sh"]
+# CMD ["-c", "/usr/local/bin/python /app/__init__.py"]
 ENTRYPOINT ["/usr/local/bin/icon_trendmicro_visionone"]

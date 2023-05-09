@@ -6,6 +6,7 @@ from .schema import (
     Output,
     Component,
 )
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -46,7 +47,11 @@ class SubmitFileToSandbox(insightconnect_plugin_runtime.Action):
             arguments=arguments,
         )
         if "error" in response.result_code.lower():
-            return response
+            raise PluginException(
+                cause="An error occurred while submitting the file to the sandbox.",
+                assistance="Please check the provided inputs and try again.",
+                data=response,
+            )
         else:
             self.logger.info("Returning Results...")
             return response.response.dict()

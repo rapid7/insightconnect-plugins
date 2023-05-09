@@ -6,6 +6,7 @@ from .schema import (
     Output,
     Component,
 )
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -35,12 +36,20 @@ class ResetPasswordAccount(insightconnect_plugin_runtime.Action):
         multi_resp = {"multi_response": []}
         for i in account_identifiers:
             response = client.reset_password_account(
-                pytmv1.AccountTask(accountName=i["account_name"], description=i.get("description", ""))
+                pytmv1.AccountTask(
+                    accountName=i["account_name"], description=i.get("description", "")
+                )
             )
             if "error" in response.result_code.lower():
-                return response.errors
+                raise PluginException(
+                    cause="An error occurred while resetting the password for the account.",
+                    assistance="Please check the account name and try again.",
+                    data=response.errors,
+                )
             else:
-                multi_resp["multi_response"].append(response.response.dict().get("items")[0])
+                multi_resp["multi_response"].append(
+                    response.response.dict().get("items")[0]
+                )
         # Return results
         self.logger.info("Returning Results...")
         return multi_resp

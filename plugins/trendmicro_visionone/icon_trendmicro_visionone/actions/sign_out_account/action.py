@@ -1,5 +1,6 @@
 import insightconnect_plugin_runtime
 from .schema import SignOutAccountInput, SignOutAccountOutput, Input, Output, Component
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -32,7 +33,11 @@ class SignOutAccount(insightconnect_plugin_runtime.Action):
                 pytmv1.AccountTask(accountName=i["account_name"], description=i.get("description", ""))
             )
             if "error" in response.result_code.lower():
-                return response.errors
+                raise PluginException(
+                    cause="An error occurred while signing out the account.",
+                    assistance="Please check the Account Identifier and try again.",
+                    data=response.errors,
+                )
             else:
                 multi_resp["multi_response"].append(response.response.dict().get("items")[0])
         # Return results

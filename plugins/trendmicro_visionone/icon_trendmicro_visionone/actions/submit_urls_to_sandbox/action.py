@@ -6,6 +6,7 @@ from .schema import (
     Output,
     Component,
 )
+from insightconnect_plugin_runtime.exceptions import PluginException
 
 # Custom imports below
 import pytmv1
@@ -36,7 +37,11 @@ class SubmitUrlsToSandbox(insightconnect_plugin_runtime.Action):
         for i in urls:
             response = client.submit_urls_to_sandbox(i)
             if "error" in response.result_code.lower():
-                return response.errors
+                raise PluginException(
+                    cause="An error occurred while submitting URLs to the sandbox.",
+                    assistance="Please check the provided url(s) and try again.",
+                    data=response.errors,
+                )
             else:
                 submit_urls_resp["submit_urls_resp"].append(
                     response.response.dict().get("items")[0]
