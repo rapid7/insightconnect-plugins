@@ -1,0 +1,98 @@
+{
+  "usersAddedToGroups": [
+    {
+      "groupName": "Example Group",
+      "groupId": "12345",
+      "users": [
+        {
+          "id": "98765",
+          "status": "PROVISIONED",
+          "created": "2018-07-28T17:24:41.000Z",
+          "activated": "2018-09-07T16:12:18.000Z",
+          "statusChanged": "2018-09-27T21:46:13.000Z",
+          "lastLogin": "2018-07-29T01:47:15.000Z",
+          "lastUpdated": "2018-09-27T21:46:13.000Z",
+          "passwordChanged": "2018-07-29T01:47:15.000Z",
+          "type": {
+            "id": "98765"
+          },
+          "profile": {
+            "firstName": "TEST",
+            "lastName": "USER",
+            "login": "user3@example.com",
+            "email": "user3@example.com"
+          },
+          "credentials": {
+            "emails": [
+              {
+                "value": "user3@example.com",
+                "status": "VERIFIED",
+                "type": "PRIMARY"
+              }
+            ],
+            "provider": {
+              "type": "OKTA",
+              "name": "OKTA"
+            },
+            "recoveryQuestion": {
+              "question": "What is the food you least liked as a child?"
+            }
+          },
+          "links": {
+            "self": {
+              "href": "https://example.com"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "usersRemovedFromGroups": [
+    {
+      "groupName": "Example Group",
+      "groupId": "12345",
+      "users": [
+        {
+          "id": "23456",
+          "status": "PROVISIONED",
+          "created": "2018-07-28T17:24:41.000Z",
+          "activated": "2018-09-07T16:12:18.000Z",
+          "statusChanged": "2018-09-27T21:46:13.000Z",
+          "lastLogin": "2018-07-29T01:47:15.000Z",
+          "lastUpdated": "2018-09-27T21:46:13.000Z",
+          "passwordChanged": "2018-07-29T01:47:15.000Z",
+          "type": {
+            "id": "23456"
+          },
+          "profile": {
+            "firstName": "Test",
+            "lastName": "User",
+            "login": "user2@example.com",
+            "email": "user2@example.com"
+          },
+          "credentials": {
+            "emails": [
+              {
+                "value": "user2@example.com",
+                "status": "VERIFIED",
+                "type": "PRIMARY"
+              }
+            ],
+            "provider": {
+              "type": "OKTA",
+              "name": "OKTA"
+            },
+            "recoveryQuestion": {
+              "question": "What is the food you least liked as a child?"
+            }
+          },
+          "links": {
+            "self": {
+              "href": "https://example.com"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
