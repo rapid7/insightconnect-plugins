@@ -23,7 +23,7 @@ class HiveAPI:
     # Create Case
     # https://docs.strangebee.com/thehive/api-docs/#operation/Create%20case
     def create_case(self, case):
-        return self._call_api("POST", "", None, case)
+        return self._call_api("POST", "api/v1/case", None, case)
 
     # Create Task in Case
     # https://docs.strangebee.com/thehive/api-docs/#operation/Create%20Task%20in%20Case
@@ -73,7 +73,7 @@ class HiveAPI:
         if response.status_code == 403:
             raise PluginException(preset=PluginException.Preset.UNAUTHORIZED, data=response.json())
         if response.status_code == 404:
-            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response.json())
+            raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response)
         if response.status_code == 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.json())
         if 200 <= response.status_code < 300:
