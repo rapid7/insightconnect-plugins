@@ -4,9 +4,9 @@ import json
 
 
 class Input:
-    CREDENTIALS = "credentials"
     HOST = "host"
     PORT = "port"
+    PRINCIPAL = "principal"
     PROTOCOL = "protocol"
     PROXY = "proxy"
     VERIFY = "verify"
@@ -18,24 +18,24 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "credentials": {
-      "$ref": "#/definitions/credential_username_password",
-      "title": "Credentials",
-      "description": "Username and password",
-      "order": 4
-    },
     "host": {
       "type": "string",
       "title": "Host",
-      "description": "TheHive host e.g. thehive.company.com or 10.3.4.50",
+      "description": "TheHive host",
       "order": 1
     },
     "port": {
       "type": "string",
       "title": "Port",
-      "description": "TheHive API port e.g. 9000",
+      "description": "TheHive API port",
       "default": "9000",
       "order": 2
+    },
+    "principal": {
+      "$ref": "#/definitions/credential_username_password",
+      "title": "Principle",
+      "description": "The API key, or the username if basic authentication is used",
+      "order": 4
     },
     "protocol": {
       "type": "string",
@@ -62,9 +62,9 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
     }
   },
   "required": [
-    "credentials",
     "host",
     "port",
+    "principal",
     "protocol",
     "verify"
   ],

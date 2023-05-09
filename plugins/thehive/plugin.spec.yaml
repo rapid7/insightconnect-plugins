@@ -26,39 +26,41 @@ enable_cache: true
 language: python
 connection:
   host:
-    type: string
     title: Host
-    description: TheHive host e.g. thehive.company.com or 10.3.4.50
+    description: TheHive host
+    example: thehive.company.com or 10.3.4.50
+    type: string
     required: true
   port:
-    type: string
     title: Port
-    description: TheHive API port e.g. 9000
+    description: TheHive API port
+    example: 9000
+    type: string
     default: "9000"
     required: true
   protocol:
-    type: string
     title: Protocol
     description: HTTP Protocol
+    type: string
     enum:
     - http
     - https
     required: true
-  credentials:
+  principal:
+    title: Principle
+    description: The API key, or the username if basic authentication is used
     type: credential_username_password
-    title: Credentials
-    description: Username and password
     required: true
   proxy:
-    type: object
     title: Proxy
     description: An optional dictionary containing proxy data, with HTTP or HTTPS
       as the key, and the proxy URL as the value
+    type: object
     required: false
   verify:
-    type: boolean
     title: SSL Verify
     description: Verify the certificate
+    type: boolean
     default: true
     required: true
 types:

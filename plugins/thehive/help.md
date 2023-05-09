@@ -29,9 +29,9 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|credentials|credential_username_password|None|True|Username and password|None|None|
-|host|string|None|True|TheHive host e.g. thehive.company.com or 10.3.4.50|None|None|
-|port|string|9000|True|TheHive API port e.g. 9000|None|None|
+|host|string|None|True|TheHive host|None|https://example.com or https://example.com|
+|port|string|9000|True|TheHive API port|None|9000|
+|principal|credential_username_password|None|True|The API key, or the username if basic authentication is used|None|None|
 |protocol|string|None|True|HTTP Protocol|['http', 'https']|None|
 |proxy|object|None|False|An optional dictionary containing proxy data, with HTTP or HTTPS as the key, and the proxy URL as the value|None|None|
 |verify|boolean|True|True|Verify the certificate|None|None|
@@ -39,6 +39,10 @@ The connection configuration accepts the following parameters:
 Example input:
 
 ```
+{
+  "host": "thehive.company.com or 10.3.4.50",
+  "port": 9000
+}
 ```
 
 ## Technical Details

@@ -1,5 +1,5 @@
 import insightconnect_plugin_runtime
-from .schema import ConnectionSchema
+from .schema import ConnectionSchema, Input
 
 # Custom imports below
 from thehive4py.api import TheHiveApi
@@ -16,33 +16,40 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.proxy = None
 
     def connect(self, params):
-        url = "{}://{}:{}".format(params.get("protocol"), params.get("host").rstrip("/"), params.get("port"))
-        self.password = params.get("credentials").get("password")
-        self.username = params.get("credentials").get("username")
-        self.verify = params.get("verify", True)
-        self.logger.info("URL: %s", url)
+        # URL inputs and formation
+        protocol = params.get(Input.PROTOCOL)
+        host = params.get(Input.HOST)
+        port = params.get(Input.PORT)
 
-        if not params.get("proxy"):
-            self.proxy = {}
-        else:
-            self.proxy = params.get("proxy")
-            self.logger.info("Proxy specified: %s", self.proxy)
+        url = f"{protocol}://{host}:{port}"
+        self.logger.info(f"URL: {url}")
+
+        # Credentials and others
+        self.username = params.get(Input.PRINCIPAL).get("username")
+        self.password = params.get(Input.PRINCIPAL).get("password", None)
+        self.verify = params.get(Input.VERIFY, True)
+        self.proxy = params.get(Input.PROXY, {})
+        if self.proxy:
+            self.logger.info(f"Proxy specified: {self.proxy}")
 
         self.logger.info("Connect: Connecting...")
-        self.logger.info("SSL Verify: %s" % str(self.verify))
+        self.logger.info(f"SSL Verify: {str(self.verify)}")
         self.client = TheHiveApi(
             url=url,
             principal=self.username,
             password=self.password,
             proxies=self.proxy,
             cert=self.verify,
+            version=4
         )
 
-    def test(self):
-        client = self.client
-        try:
-            user = client.get_current_user()
-        except requests.exceptions.HTTPError:
-            self.logger.error("Test failed")
-            raise
-        return user.json()
+        self.logger.info("Setup Complete.")
+
+    # def test(self):
+    #     client = self.client
+    #     try:
+    #         user = client.get_current_user()
+    #     except requests.exceptions.HTTPError:
+    #         self.logger.error("Test failed")
+    #         raise
+    #     return user.json()
