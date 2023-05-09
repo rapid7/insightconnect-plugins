@@ -1,0 +1,84 @@
+{
+  "user": {
+    "id": "00u1m1qwertYUiopA0S1",
+    "status": "ACTIVE",
+    "created": "2023-01-01T11:11:11.000Z",
+    "activated": "2023-01-01T11:11:11.000Z",
+    "statusChanged": "2023-01-01T11:11:11.000Z",
+    "lastLogin": "2023-01-01T11:11:11.000Z",
+    "lastUpdated": "2023-01-01T11:11:11.000Z",
+    "passwordChanged": "2023-01-01T11:11:11.000Z",
+    "type": {
+      "id": "oty1m1qwertYUiopA0S1"
+    },
+    "profile": {
+      "lastName": "Test",
+      "displayName": "user-test",
+      "login": "user1@example.com",
+      "employeeNumber": "1234",
+      "email": "user1@example.com",
+      "firstName": "User",
+      "primaryPhone": "111111111",
+      "userType": "Employee"
+    },
+    "credentials": {
+      "emails": [
+        {
+          "value": "user1@example.com",
+          "status": "VERIFIED",
+          "type": "PRIMARY"
+        }
+      ],
+      "recoveryQuestion": {
+        "question": "Who is your favorite book/movie character?"
+      },
+      "provider": {
+        "type": "OKTA",
+        "name": "OKTA"
+      }
+    },
+    "links": {
+      "suspend": {
+        "href": "https://example.com/api/v1/users/00u1m1qwertYUiopA0S1/lifecycle/suspend",
+        "method": "POST"
+      },
+      "schema": {
+        "href": "https://example.com/api/v1/meta/schemas/user/00u1m1qwertYUiopA0S1"
+      },
+      "resetPassword": {
+        "href": "https://example.com/api/v1/users/00u1m1qwertYUiopA0S1/lifecycle/reset_password",
+        "method": "POST"
+      },
+      "forgotPassword": {
+        "href": "https://example.com/api/v1/users/00u1m1qwertYUiopA0S1/credentials/forgot_password",
+        "method": "POST"
+      },
+      "expirePassword": {
+        "href": "https://example.com/api/v1/users/00u1m1qwertYUiopA0S1/lifecycle/expire_password",
+        "method": "POST"
+      },
+      "changeRecoveryQuestion": {
+        "href": "https://examplecom/api/v1/users/00u1m1qwertYUiopA0S1/credentials/change_recovery_question",
+        "method": "POST"
+      },
+      "self": {
+        "href": "https://example.com/api/v1/users/00u1m1qwertYUiopA0S1"
+      },
+      "resetFactors": {
+        "href": "https://example.com/api/v1/users/00u1m1qwertYUiopA0S1/lifecycle/reset_factors",
+        "method": "POST"
+      },
+      "type": {
+        "href": "https://example.com/api/v1/meta/types/user/00u1m1qwertYUiopA0S1"
+      },
+      "changePassword": {
+        "href": "https://example.com/api/v1/users/00u1m1qwertYUiopA0S1/credentials/change_password",
+        "method": "POST"
+      },
+      "deactivate": {
+        "href": "https://example.com/api/v1/users/00u1m1qwertYUiopA0S1/lifecycle/deactivate",
+        "method": "POST"
+      }
+    }
+  }
+}

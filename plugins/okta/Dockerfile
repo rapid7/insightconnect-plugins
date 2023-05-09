@@ -1,4 +1,4 @@
-FROM komand/python-3-37-slim-plugin:3
+FROM rapid7/insightconnect-python-3-38-plugin:5
 
 # Add source code
 WORKDIR /python/src
