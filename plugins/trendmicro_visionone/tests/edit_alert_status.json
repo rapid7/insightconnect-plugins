@@ -3,7 +3,7 @@
     "action": "edit_alert_status",
     "input":{
       "id":"WB-14-20190709-00003",
-      "status":"new",
+      "status":"New",
       "if_match":"gw34g5435"
            },
   "connection":{
