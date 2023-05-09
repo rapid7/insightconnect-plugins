@@ -24,15 +24,12 @@ class Connection(insightconnect_plugin_runtime.Connection):
         self.password = params.get(Input.CREDENTIALS).get("password")
         self.username = params.get(Input.CREDENTIALS).get("username")
         self.verify = params.get(Input.VERIFY, True)
+        self.proxy = params.get(Input.PROXY, {})
 
         url = f"{protocol}://{host}:{port}/"
-
         self.logger.info(f"URL: {url}")
 
-        if not params.get(Input.PROXY):
-            self.proxy = {}
-        else:
-            self.proxy = params.get(Input.PROXY)
+        if self.proxy:
             self.logger.info(f"Proxy specified: {self.proxy}")
 
         self.logger.info("Connect: Connecting...")

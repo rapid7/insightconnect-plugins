@@ -1,4 +1,4 @@
-##
+#####
 
 
 
@@ -107,7 +107,7 @@ Create a new case
 |summary|string|None|False|Case summary|None|None|
 |tags|[]string|None|False|List of tags|None|None|
 |taskRule|string|None|False|Case task rule|None|None|
-|tasks|itask|None|False|Case task|None|None|
+|tasks|[]itask|None|False|Case task|None|None|
 |title|string|None|True|Name of the case|None|None|
 |tlp|integer|2|False|Traffic Light Protocol level|[0, 1, 2, 3]|None|
 

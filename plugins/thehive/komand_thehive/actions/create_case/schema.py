@@ -141,9 +141,12 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
       "order": 16
     },
     "tasks": {
-      "$ref": "#/definitions/itask",
+      "type": "array",
       "title": "Task",
       "description": "Case task",
+      "items": {
+        "$ref": "#/definitions/itask"
+      },
       "order": 15
     },
     "title": {
@@ -213,7 +216,10 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
           "description": "Task title",
           "order": 1
         }
-      }
+      },
+      "required": [
+        "title"
+      ]
     }
   }
 }

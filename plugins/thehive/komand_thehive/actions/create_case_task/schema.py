@@ -82,7 +82,10 @@ class CreateCaseTaskInput(insightconnect_plugin_runtime.Input):
           "description": "Task title",
           "order": 1
         }
-      }
+      },
+      "required": [
+        "title"
+      ]
     }
   }
 }

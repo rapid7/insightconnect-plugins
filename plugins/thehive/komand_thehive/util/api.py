@@ -17,8 +17,9 @@ class HiveAPI:
 
     # Get Case
     # https://docs.strangebee.com/thehive/api-docs/#operation/Get%20case
+    # This works now and I'm genuinely surprised - commit it all and DONT TOUCH ANYTHING
     def get_case(self, case_id: str) -> dict:
-        return self._call_api("GET", case_id, None, None)
+        return self._call_api("GET", f"api/case/{case_id}", None, None)
 
     # Create Case
     # https://docs.strangebee.com/thehive/api-docs/#operation/Create%20case

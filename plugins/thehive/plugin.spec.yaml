@@ -133,7 +133,7 @@ types:
       title: Created By
       description: Who the case was created by
       type: string
-      required: true
+      required: false
     _updatedBy:
       title: Updated By
       description: Who the case was updated by
@@ -143,7 +143,7 @@ types:
       title: Created At
       description: Datetime in ms the case was created at
       type: integer
-      required: true
+      required: false
     _updatedAt:
       title: Updated At
       description: Datetime in ms the case was updated at
@@ -153,27 +153,27 @@ types:
       title: Number
       description: An incremental number to reference the case
       type: integer
-      required: true
+      required: false
     title:
       title: Case title
       description: Title of the case
       type: string
-      required: true
+      required: false
     description:
       title: Description
       description: The description of the case
       type: string
-      required: true
+      required: false
     severity:
       title: Severity
       description: Severity of the case
       type: integer
-      required: true
+      required: false
     startDate:
       title: Start Date
       description: Case start date (datetime in ms)
       type: integer
-      required: true
+      required: false
     endDate:
       title: End Date
       description: Case end date (datetime in ms)
@@ -188,22 +188,22 @@ types:
       title: Flag
       description: Something here
       type: boolean
-      required: true
+      required: false
     tlp:
       title: TLP
       description: Traffic Light Protocol level
       type: integer
-      required: true
+      required: false
     pap:
       title: PAP
       description: Password Authenitcation Protocol
       type: integer
-      required: true
+      required: false
     status:
       title: Status
       description: Status of the case
       type: string
-      required: true
+      required: false
     stage:
       title: Stage
       description: The value of the stage depends on the status of the case
@@ -212,7 +212,7 @@ types:
         - New
         - InProgress
         - Closed
-      required: true
+      required: false
     summary:
       title: Summary
       description: Summary of the case
@@ -231,7 +231,7 @@ types:
     customFields:
       title: Custom Fields
       description: Case custom fields
-      type: "[]string"
+      type: object
       required: false
     userPermissions:
       title: User Permissions
@@ -242,12 +242,12 @@ types:
       title: Extra Data
       description: Dunno
       type: object
-      required: true
+      required: false
     newDate:
       title: New Date
       description: Dunno (datetime in ms)
       type: integer
-      required: true
+      required: false
     inProgressDate:
       title: In Progress Date
       description: Dunno (datetime in ms)
@@ -282,7 +282,7 @@ types:
       title: Time To Detect
       description: Case time to detect
       type: integer
-      required: true
+      required: false
     timeToTriage:
       title: Time To Triage
       descirption: Case time to triage

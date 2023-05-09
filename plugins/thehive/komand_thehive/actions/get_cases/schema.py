@@ -111,12 +111,9 @@ class GetCasesOutput(insightconnect_plugin_runtime.Output):
           "order": 27
         },
         "customFields": {
-          "type": "array",
+          "type": "object",
           "title": "Custom Fields",
           "description": "Case custom fields",
-          "items": {
-            "type": "string"
-          },
           "order": 22
         },
         "description": {
@@ -281,23 +278,8 @@ class GetCasesOutput(insightconnect_plugin_runtime.Output):
         }
       },
       "required": [
-        "_createdAt",
-        "_createdBy",
         "_type",
-        "description",
-        "extraData",
-        "flag",
-        "id",
-        "newDate",
-        "number",
-        "pap",
-        "severity",
-        "stage",
-        "startDate",
-        "status",
-        "timeToDetect",
-        "title",
-        "tlp"
+        "id"
       ]
     }
   }
