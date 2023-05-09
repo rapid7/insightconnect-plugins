@@ -1,0 +1,24 @@
+{
+  "body":{
+    "action": "submit_file_to_sandbox",
+    "input":{
+  "archive_password": "",
+  "arguments": "",
+  "document_password": "",
+  "file": {
+    "content": "dGVzdA==",
+    "filename": "r7-test11.bat"
+  }
+},
+  "connection":{
+    "api_key":{"secretKey":"Dummy-Secret-Key"},
+    "api_url":"https://tmv1-mock.trendmicro.com",
+    "app_name":"Rapid7-InsightConnect",
+    "verify_ssl":true
+
+},
+"meta":{}
+},
+"version":"v1",
+"type":"action_start"
+}
