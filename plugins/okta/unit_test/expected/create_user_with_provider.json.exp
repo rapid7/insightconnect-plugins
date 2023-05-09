@@ -1,0 +1,59 @@
+{
+  "user": {
+    "activated": "2023-04-26T14:58:39.000Z",
+    "created": "2023-04-26T14:58:39.000Z",
+    "credentials": {
+      "emails": [
+        {
+          "status": "VERIFIED",
+          "type": "PRIMARY",
+          "value": "user_1@sample.com"
+        }
+      ],
+      "provider": {
+        "name": "OKTA",
+        "type": "OKTA"
+      }
+    },
+    "id": "12345",
+    "lastUpdated": "2023-04-26T14:58:39.000Z",
+    "links": {
+      "deactivate": {
+        "href": "https://sample.com",
+        "method": "POST"
+      },
+      "reactivate": {
+        "href": "https://sample.com",
+        "method": "POST"
+      },
+      "resetPassword": {
+        "href": "https://sample.com",
+        "method": "POST"
+      },
+      "schema": {
+        "href": "https://sample.com"
+      },
+      "self": {
+        "href": "https://sample.com"
+      },
+      "suspend": {
+        "href": "https://sample.com",
+        "method": "POST"
+      },
+      "type": {
+        "href": "https://sample.com"
+      }
+    },
+    "profile": {
+      "email": "user_1@sample.com",
+      "firstName": "John",
+      "lastName": "Doe",
+      "login": "user_1@sample.com"
+    },
+    "status": "PROVISIONED",
+    "statusChanged": "2023-04-26T14:58:39.000Z",
+    "type": {
+      "id": "12345"
+    }
+  }
+}
