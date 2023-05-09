@@ -1,13 +1,12 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import SendPushInput, SendPushOutput, Input, Output, Component
 
 # Custom imports below
-import requests
-import json
-from komand.exceptions import PluginException
+from insightconnect_plugin_runtime.exceptions import PluginException
+import time
 
 
-class SendPush(komand.Action):
+class SendPush(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="send_push",
@@ -17,43 +16,24 @@ class SendPush(komand.Action):
         )
 
     def run(self, params={}):
-        user_id = params.get(Input.USER_ID)
-        factor_id = params.get(Input.FACTOR_ID)
+        response = self.connection.api_client.send_push(params.get(Input.USERID), params.get(Input.FACTORID))
 
-        try:
-            okta_url = self.connection.okta_url
-            url = requests.compat.urljoin(okta_url, f"/api/v1/users/{user_id}/factors/{factor_id}/verify")
-            response = self.connection.session.post(url)
-            if response.status_code not in range(200, 299):
-                raise PluginException(
-                    cause=f"Received HTTP {response.status_code} status code from Okta. Please verify your "
-                    f"Okta server status and try again.",
-                    assistance="If the issue persists please contact support.",
-                    data=f"{response.status_code}, {response.text}",
-                )
-
-            data = response.json()
-            self.logger.info(data)
-
-            poll_status = data["factorResult"]
-            link = data["_links"]["poll"]["href"]
-
-            # It times out after 60 seconds automatically
-            while poll_status == "WAITING":
-                poll_response = self.connection.session.get(link)
-                poll_data = poll_response.json()
-                poll_status = poll_data["factorResult"]
-
-            return {Output.FACTOR_STATUS: poll_status}
-        except (json.decoder.JSONDecodeError, TypeError):
-            raise PluginException(preset=PluginException.Preset.INVALID_JSON)
-        except KeyError as e:
+        response["links"] = response.pop("_links")
+        links = response.get("links", {})
+        poll = links.get("poll")
+        if not poll:
             raise PluginException(
-                cause=f"An error has occurred retrieving data from the Okta API: {e}",
+                cause="An error has occurred retrieving data from the Okta API.",
                 assistance="It looks like we didn't get data we were expecting back. Was "
                 "the Factor ID supplied a push type and not something else, "
                 "such as an SMS?",
-                data=data,
             )
-        except Exception:
-            raise PluginException(cause=PluginException.Preset.UNKNOWN)
+
+        # Time out after 60 seconds
+        for _ in range(12):
+            poll_response = self.connection.api_client.verify_poll_status(poll.get("href"))
+            poll_status = poll_response.get("factorResult")
+            if poll_status != "WAITING":
+                return {Output.FACTORSTATUS: poll_status}
+            time.sleep(5)
+        return {Output.FACTORSTATUS: "TIMEOUT"}

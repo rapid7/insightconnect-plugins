@@ -1,0 +1,22 @@
+{
+  "activate": true,
+  "credentials": {
+    "password": {
+      "value": ""
+    },
+    "provider": {
+      "name": "",
+      "type": ""
+    },
+    "recoveryQuestion": {
+      "answer": "",
+      "question": ""
+    }
+  },
+  "groupIds": [],
+  "nextLogin": false,
+  "profile": {
+    "email": "user_bad@sample.com"
+  },
+  "provider": true
+}

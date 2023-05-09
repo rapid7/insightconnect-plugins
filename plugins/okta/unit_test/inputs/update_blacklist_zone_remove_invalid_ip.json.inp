@@ -1,0 +1,5 @@
+{
+  "name": "Test IP Zone",
+  "address": "2.2.2.2",
+  "blacklistState": false
+}
