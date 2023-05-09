@@ -234,10 +234,6 @@ types:
       type: "[]string"
       description: 3-character code that identifies the installed Trend Micro products on an endpoint
       required: true
-      enum:
-        - sao
-        - sds
-        - xes
   submit_urls_resp:
     url:
       title: URL
