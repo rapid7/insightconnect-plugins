@@ -1,0 +1,37 @@
+{
+  "groups": [
+    {
+      "id": "234567",
+      "created": "2022-08-23T20:46:21.000Z",
+      "lastUpdated": "2022-08-23T20:46:21.000Z",
+      "lastMembershipUpdated": "2022-08-23T20:48:37.000Z",
+      "objectClass": [
+        "okta:user_group"
+      ],
+      "type": "OKTA_GROUP",
+      "name": "Test Group",
+      "description": "Unknown",
+      "links": {
+        "logo": [
+          {
+            "name": "medium",
+            "href": "https://example.com",
+            "type": "image/png"
+          },
+          {
+            "name": "large",
+            "href": "https://example.com",
+            "type": "image/png"
+          }
+        ],
+        "users": {
+          "href": "https://example.com"
+        },
+        "apps": {
+          "href": "https://example.com"
+        }
+      }
+    }
+  ],
+  "success": true
+}
