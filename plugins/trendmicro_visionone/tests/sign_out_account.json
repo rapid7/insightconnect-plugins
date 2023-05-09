@@ -1,0 +1,24 @@
+{
+  "body":{
+    "action": "sign_out_account",
+    "input":
+{
+  "account_identifiers": [
+    {
+      "account_name": "jdoe@testemailtest.com",
+      "description": "sign out account r7 "
+    }
+  ]
+},
+  "connection":{
+    "api_key":{"secretKey":"Dummy-Secret-Key"},
+    "api_url":"https://tmv1-mock.trendmicro.com",
+    "app_name":"Rapid7-InsightConnect",
+    "verify_ssl":true
+
+},
+"meta":{}
+},
+"version":"v1",
+"type":"action_start"
+}
