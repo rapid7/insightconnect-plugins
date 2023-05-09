@@ -1,11 +1,11 @@
-import komand
+import insightconnect_plugin_runtime
 from .schema import CloseCaseInput, CloseCaseOutput, Component
 
 # Custom imports below
 import requests
 
 
-class CloseCase(komand.Action):
+class CloseCase(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="close_case",
