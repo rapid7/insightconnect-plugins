@@ -1,0 +1,38 @@
+{
+  "factorResult": "WAITING",
+  "expiresAt": "2023-01-01T11:11:11.000Z",
+  "profile": {
+    "credentialId": "user2@example.com",
+    "deviceType": "SmartPhone_Android",
+    "keys": [
+      {
+        "kty": "RSA",
+        "use": "sig",
+        "kid": "default",
+        "e": "ABCD",
+        "n": "example_n"
+      }
+    ],
+    "name": "moto g30(w)",
+    "platform": "ANDROID",
+    "version": "30"
+  },
+  "_links": {
+    "cancel": {
+      "href": "https://example.com/api/v1/users/00u1m1qwertYUiopA0S3/factors/aaa1qwerty0UIOPaS0d3/transactions/mmmmm.AAAAAAAA",
+      "hints": {
+        "allow": [
+          "DELETE"
+        ]
+      }
+    },
+    "poll": {
+      "href": "https://example.com/api/v1/users/00u1m1qwertYUiopA0S3/factors/aaa1qwerty0UIOPaS0d3/transactions/mmmmm.AAAAAAAA",
+      "hints": {
+        "allow": [
+          "GET"
+        ]
+      }
+    }
+  }
+}
