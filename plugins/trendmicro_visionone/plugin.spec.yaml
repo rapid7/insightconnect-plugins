@@ -231,7 +231,7 @@ types:
         - xes
     installed_product_codes:
       title: Installed Product Codes
-      type: string
+      type: "[]string"
       description: 3-character code that identifies the installed Trend Micro products on an endpoint
       required: true
       enum:
