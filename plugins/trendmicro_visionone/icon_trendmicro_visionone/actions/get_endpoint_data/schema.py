@@ -94,11 +94,6 @@ class GetEndpointDataOutput(insightconnect_plugin_runtime.Output):
           "items": {
             "type": "string"
           },
-          "enum": [
-            "sao",
-            "sds",
-            "xes"
-          ],
           "order": 10
         },
         "ip": {
