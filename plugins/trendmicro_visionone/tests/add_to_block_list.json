@@ -1,0 +1,26 @@
+{
+  "body":{
+    "action": "add_to_block_list",
+    "input":{
+      "block_object":[{
+        "object_type":"ip",
+        "object_value":"6.6.6.6",
+        "description":"block"
+           },
+      {
+        "object_type":"ip",
+        "object_value":"6.6.6.7",
+        "description":"block"
+           }]},
+  "connection":{
+    "api_key":{"secretKey":"Dummy-Secret-Key"},
+    "api_url":"https://tmv1-mock.trendmicro.com",
+    "app_name":"Rapid7-InsightConnect",
+    "verify_ssl":true
+
+},
+"meta":{}
+},
+"version":"v1",
+"type":"action_start"
+}
