@@ -1,0 +1,24 @@
+{
+  "body":{
+    "action": "terminate_process",
+    "input":
+{
+  "process_identifiers": [
+    {
+      "endpoint": "client1",
+      "file_sha1": "984afc7aaa2718984e15e3b5ab095b519a081321"
+    }
+  ]
+},
+  "connection":{
+    "api_key":{"secretKey":"Dummy-Secret-Key"},
+    "api_url":"https://tmv1-mock.trendmicro.com",
+    "app_name":"Rapid7-InsightConnect",
+    "verify_ssl":true
+
+},
+"meta":{}
+},
+"version":"v1",
+"type":"action_start"
+}
