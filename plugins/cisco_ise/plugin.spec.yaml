@@ -126,7 +126,7 @@ connection:
     title: Address
     description: IP address for Cisco ISE
     required: true
-    example: "1.1.1.1"
+    example: "192.0.2.0/24"
   ssl_verify:
     type: boolean
     title: SSL Verify
@@ -167,7 +167,7 @@ actions:
         description: The quarantine policy to apply
         type: string
         required: true
-        Example: "Shut_Down"
+        example: "Shut_Down"
     output:
       ers_anc_endpoint:
         title: ERS ANC Endpoint

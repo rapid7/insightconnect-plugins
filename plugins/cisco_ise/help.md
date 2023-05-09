@@ -28,15 +28,15 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|IP address for Cisco ISE|None|1.1.1.1|
+|address|string|None|True|IP address for Cisco ISE|None|192.0.2.0/24|
 |credentials|credential_username_password|None|True|Username and password|None|{}|
-|ssl_verify|boolean|True|True|Enable SSL verification|None|true|
+|ssl_verify|boolean|True|True|Enable SSL verification|None|True|
 
 Example input:
 
 ```
 {
-  "address": "1.1.1.1",
+  "address": "192.0.2.0/24",
   "credentials": {
     "username": "user"
     "password": "mypassword"
@@ -96,7 +96,7 @@ Example input:
 
 ```
 {
- "mac_address": "00:1b:63:84:45:e6",
+ "mac_address": "00:0E:35:D4:D8:52",
  "policy": "Shut_Down"
 }
 ```
