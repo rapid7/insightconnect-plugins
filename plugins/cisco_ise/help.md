@@ -18,7 +18,7 @@ This plugin utilizes the [ISE](https://github.com/bobthebutcher/ise) library.
 
 # Supported Product Versions
 
-* 09/05/2023
+* Cisco ISE API 2023-05-09
 
 # Documentation
 
@@ -28,9 +28,9 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|IP address for Cisco ISE|None|None|
-|credentials|credential_username_password|None|True|Username and password|None|None|
-|ssl_verify|boolean|True|True|Enable SSL verification|None|None|
+|address|string|None|True|IP address for Cisco ISE|None|1.1.1.1|
+|credentials|credential_username_password|None|True|Username and password|None|{}|
+|ssl_verify|boolean|True|True|Enable SSL verification|None|true|
 
 Example input:
 
@@ -57,13 +57,13 @@ This action is used to remove a host from quarantine.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|mac_address|string|None|True|The host MAC address|None|00:1b:63:84:45:e6|
+|mac_address|string|None|True|The host MAC address|None|00:0E:35:D4:D8:52|
 
 Example input:
 
 ```
 {
-  "mac_address": "00:1b:63:84:45:e6"
+  "mac_address": "00:0E:35:D4:D8:52"
 }
 ```
 
@@ -89,7 +89,7 @@ This action is used to quarantine a host.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|mac_address|string|None|True|The host MAC address|None|00:1b:63:84:45:e6|
+|mac_address|string|None|True|The host MAC address|None|00:0E:35:D4:D8:52|
 |policy|string|None|True|The quarantine policy to apply|None|Shut_Down|
 
 Example input:
@@ -242,6 +242,8 @@ This plugin does not contain any troubleshooting information.
 * 1.0.0 - Initial plugin
 
 # Links
+
+* [Cisco Developer Documentation](https://developer.cisco.com/docs/)
 
 ## References
 
