@@ -16,17 +16,34 @@ This plugin utilizes the [ISE](https://github.com/bobthebutcher/ise) library.
 * Cisco_ISE host's IP address
 * Cisco_ISE username and password
 
+# Supported Product Versions
+
+* 09/05/2023
+
 # Documentation
 
 ## Setup
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|True|User with administrator privileges on Cisco ISE|None|
-|password|password|None|True|Password|None|
-|address|string|None|True|IP address for Cisco ISE|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|IP address for Cisco ISE|None|None|
+|credentials|credential_username_password|None|True|Username and password|None|None|
+|ssl_verify|boolean|True|True|Enable SSL verification|None|None|
+
+Example input:
+
+```
+{
+  "address": "1.1.1.1",
+  "credentials": {
+    "username": "user"
+    "password": "mypassword"
+  },
+  "ssl_verify": true
+}
+```
 
 ## Technical Details
 
@@ -38,9 +55,17 @@ This action is used to remove a host from quarantine.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|mac_address|string|None|True|The host MAC address|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|mac_address|string|None|True|The host MAC address|None|00:1b:63:84:45:e6|
+
+Example input:
+
+```
+{
+  "mac_address": "00:1b:63:84:45:e6"
+}
+```
 
 ##### Output
 
@@ -62,16 +87,25 @@ This action is used to quarantine a host.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|policy|string|None|True|The quarantine policy to apply|None|
-|mac_address|string|None|True|The host MAC address|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|mac_address|string|None|True|The host MAC address|None|00:1b:63:84:45:e6|
+|policy|string|None|True|The quarantine policy to apply|None|Shut_Down|
+
+Example input:
+
+```
+{
+ "mac_address": "00:1b:63:84:45:e6",
+ "policy": "Shut_Down"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|result|ErsAncEndpoint|False|Returns info on the endpoint and what policy was applied|
+|ers_anc_endpoint|ErsAncEndpoint|False|Returns info on the endpoint and what policy was applied|
 
 Example output:
 
@@ -100,9 +134,17 @@ This action is used to query an endpoint for more information.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|hostname|string|None|True|The host name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|hostname|string|None|True|The hostname or MAC of the endpoint|None|00:0E:35:D4:D8:52|
+
+Example input:
+
+```
+{
+  "hostname": "00:0E:35:D4:D8:52"
+}
+```
 
 ##### Output
 
@@ -143,9 +185,17 @@ This action is used to return ANC information based on the MAC address supplied.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|mac|string|None|True|MAC address of the endpoint|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|mac|string|None|True|MAC address of the endpoint|None|00:0E:35:D4:D8:52|
+
+Example input:
+
+```
+{
+  "mac": "00:0E:35:D4:D8:52"
+}
+```
 
 ##### Output
 
@@ -170,7 +220,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -182,6 +232,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.2.2 - Update requests to version 2.30.0
 * 2.2.1 - New spec and help.md format for the Extension Library
 * 2.2.0 - New action Get ANC Endpoint
 * 2.1.2 - Fixed issue where Query Endpoint would return an error if endpoint was not found | Update to input description for Query Endpoint

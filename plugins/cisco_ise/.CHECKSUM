@@ -1,7 +1,7 @@
 {
-	"spec": "fe9d5a99b29addef25c70e82e413b1d3",
-	"manifest": "76dded6144e8a590c51beace950c1483",
-	"setup": "6825a6381dbccc50ad83e9b12f34ffca",
+	"spec": "a8692d3df45c3ad026c3807d04405e69",
+	"manifest": "b3b8c8d536e886b0bb97bced3929c551",
+	"setup": "8691031d550f5367fd518a068a0126f3",
 	"schemas": [
 		{
 			"identifier": "get_anc_endpoint/schema.py",
@@ -21,7 +21,19 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "c99d60954a693e7631e30168a338eadc"
+			"hash": "616afbc4847ca196613963f40ec8f019"
+		},
+		{
+			"identifier": "decode/schema.py",
+			"hash": "3f5345ce8f9a6051508dbed3444c83e2"
+		},
+		{
+			"identifier": "encode/schema.py",
+			"hash": "81fe698fb58cb1c0d2752db42aff82ae"
+		},
+		{
+			"identifier": "connection/schema.py",
+			"hash": "0d37ecad8d408635f66b40f605f56da5"
 		}
 	]
 }
