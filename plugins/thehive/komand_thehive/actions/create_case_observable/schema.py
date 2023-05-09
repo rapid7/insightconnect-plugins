@@ -46,28 +46,41 @@ class CreateCaseObservableInput(insightconnect_plugin_runtime.Input):
       "properties": {
         "data": {
           "type": "string",
-          "title": "ID",
-          "description": "The observable's value e.g. badguy.com",
-          "order": 6
+          "title": "Data",
+          "description": "The observable's value",
+          "order": 7
         },
         "dataType": {
           "type": "string",
           "title": "Data Type",
-          "description": "Observable data type e.g. domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other",
+          "description": "Observable data type",
           "order": 1
         },
         "ioc": {
           "type": "boolean",
           "title": "IOC",
-          "description": "Indicator of Compromise, default is 2",
+          "description": "Indicator of Compromise",
           "default": false,
-          "order": 5
+          "order": 6
         },
         "message": {
           "type": "string",
           "title": "Message",
           "description": "Observable message",
           "order": 2
+        },
+        "pap": {
+          "type": "integer",
+          "title": "PAP",
+          "description": "Password Authentication Protocol",
+          "default": 2,
+          "enum": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "order": 4
         },
         "tags": {
           "type": "array",
@@ -76,13 +89,19 @@ class CreateCaseObservableInput(insightconnect_plugin_runtime.Input):
           "items": {
             "type": "string"
           },
-          "order": 4
+          "order": 5
         },
         "tlp": {
           "type": "integer",
           "title": "TLP",
-          "description": "Traffic Light Protocol level, default is 2",
+          "description": "Traffic Light Protocol level",
           "default": 2,
+          "enum": [
+            0,
+            1,
+            2,
+            3
+          ],
           "order": 3
         }
       }

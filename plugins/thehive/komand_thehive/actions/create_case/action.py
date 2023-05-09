@@ -32,7 +32,7 @@ class CreateCase(insightconnect_plugin_runtime.Action):
             "customFields": params.get(Input.CUSTOMFIELDS),
             "caseTemplate": params.get(Input.CASETEMPLATE, None),
             "tasks": params.get(Input.TASKS, None),
-            "sharingParameters": None,
+            "sharingParameters": params.get(Input.SHARINGPARAMETERS, []),
             "taskRule": params.get(Input.TASKRULE, None),
             "observableRule": params.get(Input.OBSERVABLERULE, None),
         }

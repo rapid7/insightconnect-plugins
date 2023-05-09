@@ -23,7 +23,7 @@ class HiveAPI:
 
     # Create Case
     # https://docs.strangebee.com/thehive/api-docs/#operation/Create%20case
-    # <ValidationError: \"'id' is a required property\">)"}
+    # Issue with input
     def create_case(self, case):
         return self._call_api("POST", "api/case", json_data=case)
 
@@ -41,6 +41,11 @@ class HiveAPI:
     # https://docs.strangebee.com/thehive/api-docs/#operation/Delete%20case
     def close_case(self, case_id):
         return self._call_api("DELETE", f"api/case/{case_id}")
+
+    # Get Cases
+    # No Docs
+    def get_cases(self):
+        return self._call_api("GET", "/api/case/_search", json_data={}, params={"range": "all", "sort": []})
 
     # Get Current User
     # https://docs.strangebee.com/thehive/api-docs/#operation/Get%20current%20User%20info

@@ -1,4 +1,4 @@
-###########
+#############
 
 
 
@@ -147,6 +147,7 @@ Create a new case
 |observableRule|string|None|False|Case observable rule|None|None|
 |pap|integer|2|False|Password Authentication Protocol|[0, 1, 2, 3]|None|
 |severity|integer|2|False|Case severity|[1, 2, 3, 4]|None|
+|sharingParameters|[]inputShare|None|False|Array of objects (InputShare)|None|None|
 |startDate|integer|None|False|Case start date (datetime in ms)|None|None|
 |status|string|New|False|Case status|None|None|
 |summary|string|None|False|Case summary|None|None|

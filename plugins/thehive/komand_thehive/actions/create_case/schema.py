@@ -17,6 +17,7 @@ class Input:
     OBSERVABLERULE = "observableRule"
     PAP = "pap"
     SEVERITY = "severity"
+    SHARINGPARAMETERS = "sharingParameters"
     STARTDATE = "startDate"
     STATUS = "status"
     SUMMARY = "summary"
@@ -78,7 +79,7 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Observable Rule",
       "description": "Case observable rule",
-      "order": 17
+      "order": 18
     },
     "pap": {
       "type": "integer",
@@ -105,6 +106,15 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
         4
       ],
       "order": 3
+    },
+    "sharingParameters": {
+      "type": "array",
+      "title": "Sharing Parameters",
+      "description": "Array of objects (InputShare)",
+      "items": {
+        "$ref": "#/definitions/inputShare"
+      },
+      "order": 16
     },
     "startDate": {
       "type": "integer",
@@ -138,7 +148,7 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
       "type": "string",
       "title": "Task Rule",
       "description": "Case task rule",
-      "order": 16
+      "order": 17
     },
     "tasks": {
       "type": "array",
@@ -170,6 +180,46 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
     }
   },
   "definitions": {
+    "inputShare": {
+      "type": "object",
+      "title": "inputShare",
+      "properties": {
+        "observableRule": {
+          "type": "string",
+          "title": "Observable Rule",
+          "description": "Sharing rule to apply to the observables, can be manual or autoShare",
+          "default": "Sharing rule applied on the case",
+          "order": 5
+        },
+        "organisation": {
+          "type": "string",
+          "title": "Organisation",
+          "description": "Name or ID of the organisation",
+          "order": 1
+        },
+        "profile": {
+          "type": "string",
+          "title": "Profile",
+          "description": "Profile used to define the permissions of the organisation members",
+          "default": "analyst",
+          "order": 3
+        },
+        "share": {
+          "type": "boolean",
+          "title": "Share",
+          "description": "If true, new observables and tasks will also be shared to the organisation",
+          "default": true,
+          "order": 2
+        },
+        "taskRule": {
+          "type": "string",
+          "title": "Task Rule",
+          "description": "Sharing rule to apply to the tasks, can be manual or autoShare",
+          "default": "Sharing rule applied on the case",
+          "order": 4
+        }
+      }
+    },
     "itask": {
       "type": "object",
       "title": "itask",
