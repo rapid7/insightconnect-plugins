@@ -1,0 +1,89 @@
+[
+  {
+    "id": "12345",
+    "status": "ACTIVE",
+    "created": "2018-07-28T17:21:41.000Z",
+    "activated": null,
+    "statusChanged": "2018-07-28T17:23:45.000Z",
+    "lastLogin": "2023-04-27T16:11:31.000Z",
+    "lastUpdated": "2018-09-25T17:56:43.000Z",
+    "passwordChanged": "2018-07-28T17:23:45.000Z",
+    "type": {
+      "id": "12345"
+    },
+    "profile": {
+      "firstName": "User",
+      "lastName": "Example",
+      "manager": "Manager",
+      "mobilePhone": null,
+      "secondEmail": null,
+      "managerId": "12345",
+      "login": "user@example.com",
+      "email": "user@example.com"
+    },
+    "credentials": {
+      "password": {},
+      "emails": [
+        {
+          "value": "user@example.com",
+          "status": "VERIFIED",
+          "type": "PRIMARY"
+        }
+      ],
+      "recovery_question": {
+        "question": "What is the food you least liked as a child?"
+      },
+      "provider": {
+        "type": "OKTA",
+        "name": "OKTA"
+      }
+    },
+    "_links": {
+      "self": {
+        "href": "https://example.com"
+      }
+    }
+  },
+  {
+    "id": "98765",
+    "status": "PROVISIONED",
+    "created": "2018-07-28T17:24:41.000Z",
+    "activated": "2018-09-07T16:12:18.000Z",
+    "statusChanged": "2018-09-27T21:46:13.000Z",
+    "lastLogin": "2018-07-29T01:47:15.000Z",
+    "lastUpdated": "2018-09-27T21:46:13.000Z",
+    "passwordChanged": "2018-07-29T01:47:15.000Z",
+    "type": {
+      "id": "98765"
+    },
+    "profile": {
+      "firstName": "TEST",
+      "lastName": "USER",
+      "mobilePhone": null,
+      "secondEmail": null,
+      "login": "user3@example.com",
+      "email": "user3@example.com"
+    },
+    "credentials": {
+      "emails": [
+        {
+          "value": "user3@example.com",
+          "status": "VERIFIED",
+          "type": "PRIMARY"
+        }
+      ],
+      "recovery_question": {
+        "question": "What is the food you least liked as a child?"
+      },
+      "provider": {
+        "type": "OKTA",
+        "name": "OKTA"
+      }
+    },
+    "_links": {
+      "self": {
+        "href": "https://example.com"
+      }
+    }
+  }
+]
