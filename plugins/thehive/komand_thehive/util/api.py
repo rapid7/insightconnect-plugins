@@ -25,30 +25,32 @@ class HiveAPI:
     # https://docs.strangebee.com/thehive/api-docs/#operation/Create%20case
     # <ValidationError: \"'id' is a required property\">)"}
     def create_case(self, case):
-        return self._call_api("POST", "api/case", data=case)
+        return self._call_api("POST", "api/case", json_data=case)
+
+    # Create Observable In Case
+    # https://docs.strangebee.com/thehive/api-docs/#operation/Create%20Observable%20in%20Case
+    def create_case_observable(self, case_id, observable):
+        return self._call_api("POST", f"api/case/{case_id}/observable", data=observable)
 
     # Create Task in Case
     # https://docs.strangebee.com/thehive/api-docs/#operation/Create%20Task%20in%20Case
     def create_task_in_case(self, case_id, case):
-        return self._call_api("POST", case_id, data=case)
+        return self._call_api("POST", f"api/case/{case_id}/task", data=case)
 
     # Close Case
     # https://docs.strangebee.com/thehive/api-docs/#operation/Delete%20case
     def close_case(self, case_id):
-        return self._call_api("DELETE", case_id)
+        return self._call_api("DELETE", f"api/case/{case_id}")
 
-    # TODO
-    # Create Case Observable
-    # Docs
-
-    # I have no idea if these 'Get User' functions work because generating samples wont work for them
     # Get Current User
     # https://docs.strangebee.com/thehive/api-docs/#operation/Get%20current%20User%20info
+    # Working
     def get_current_user(self):
         return self._call_api("GET", f"api/user/current")
 
     # Get User By ID
-    # # https://docs.strangebee.com/thehive/api-docs/#operation/Get%20User
+    # https://docs.strangebee.com/thehive/api-docs/#operation/Get%20User
+    # Working
     def get_user_by_id(self, user_id):
         return self._call_api("GET", f"api/user/{user_id}")
 
@@ -79,5 +81,8 @@ class HiveAPI:
             raise PluginException(preset=PluginException.Preset.NOT_FOUND, data=response)
         if response.status_code == 500:
             raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.json())
-        if 200 <= response.status_code < 300:
+        if response.status_code in (200, 201):
             return response.json()
+        if response.status_code == 204:
+            # TODO - Work out what to do with empty delete response
+            return None
