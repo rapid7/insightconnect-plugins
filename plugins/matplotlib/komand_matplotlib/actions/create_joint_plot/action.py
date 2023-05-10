@@ -1,4 +1,6 @@
-import komand
+import insightconnect_plugin_runtime
+from insightconnect_plugin_runtime.exceptions import PluginException
+
 from .schema import CreateJointPlotInput, CreateJointPlotOutput
 
 # Custom imports below
@@ -8,7 +10,7 @@ import seaborn as sns
 from io import BytesIO
 
 
-class CreateJointPlot(komand.Action):
+class CreateJointPlot(insightconnect_plugin_runtime.Action):
     def __init__(self):
         super(self.__class__, self).__init__(
             name="create_joint_plot",
@@ -25,10 +27,9 @@ class CreateJointPlot(komand.Action):
         # Process the data and create the plot
         try:
             decoded_data = base64.b64decode(params.get("csv_data"))
-        except Exception as e:
-            error = f"Failed to decode base64 encoded CSV data with error: {e}"
-            self.logger.error(error)
-            raise e
+        except Exception as error:
+            self.logger.error(f"Failed to decode base64 encoded CSV data with error: {error}")
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
         df = pd.read_csv(BytesIO(decoded_data))
         x = params.get("x_value")
@@ -40,11 +41,11 @@ class CreateJointPlot(komand.Action):
         if not x or (x not in df):
             error = f"Column for X value({x}) not in data set, cannot create plot..."
             self.logger.error(error)
-            return Exception(error)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
         elif not y or (y not in df):
             error = f"Column for Y value ({y}) not in data set, cannot create plot..."
             self.logger.error(error)
-            return Exception(error)
+            raise PluginException(preset=PluginException.Preset.UNKNOWN, data=error)
 
         # JointPlots have the savefig method, call it directly
         self.logger.info("Creating plot...")
