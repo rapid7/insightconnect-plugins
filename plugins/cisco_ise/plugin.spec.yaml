@@ -5,7 +5,8 @@ name: cisco_ise
 title: Cisco ISE
 description: This plugin utilizes Cisco Identity Services Engine to retrieve ANC details, endpoint details and manage Quarantine
  Cisco Identity Services Engine allows users to gain awareness of everything hitting their networks
-version: 2.2.1
+version: 2.2.2
+supported_versions: ["Cisco ISE API 2023-05-09"]
 vendor: rapid7
 support: rapid7
 status: []
@@ -18,7 +19,7 @@ tags:
 - network access
 hub_tags:
   use_cases: [asset_inventory, threat_detection_and_response]
-  keywords: [cisco, network access]
+  keywords: [cisco, network_access]
   features: []
 types:
   link:
@@ -119,17 +120,20 @@ connection:
     title: Credentials
     description: Username and password
     required: true
+    example: {}
   address:
     type: string
     title: Address
     description: IP address for Cisco ISE
     required: true
+    example: "192.0.2.0/24"
   ssl_verify:
     type: boolean
     title: SSL Verify
     description: Enable SSL verification
     default: true
     required: true
+    example: true
 actions:
   query_endpoint:
     title: Query Endpoint
@@ -140,12 +144,14 @@ actions:
         description: The hostname or MAC of the endpoint
         type: string
         required: true
+        example: "00:0E:35:D4:D8:52"
     output:
       ers_endpoint:
         title: ERS Endpoint
         description: Returns a JSON containing information on the host
         type: ERSEndPoint
         required: false
+        example: {}
   quarantine:
     title: Quarantine
     description: Quarantine a host
@@ -155,17 +161,20 @@ actions:
         description: The host MAC address
         type: string
         required: true
+        example: "00:0E:35:D4:D8:52"
       policy:
         title: Policy
         description: The quarantine policy to apply
         type: string
         required: true
+        example: "Shut_Down"
     output:
       ers_anc_endpoint:
         title: ERS ANC Endpoint
         description: Returns info on the endpoint and what policy was applied
         type: ErsAncEndpoint
         required: false
+        example: {}
   remove_from_quarantine:
     title: Remove from Quarantine
     description: Remove a host from quarantine
@@ -175,12 +184,14 @@ actions:
         description: The host MAC address
         type: string
         required: true
+        example: "00:0E:35:D4:D8:52"
     output:
       success:
         title: Success
         description: Returns true in the endpoint was removed from quarantine
         type: boolean
         required: false
+        example: true
   get_anc_endpoint:
     title: Get ANC Endpoint
     description: Returns ANC information based on the MAC address supplied
@@ -190,9 +201,11 @@ actions:
         description: MAC address of the endpoint
         type: string
         required: true
+        example: "00:0E:35:D4:D8:52"
     output:
       results:
         title: Results
         description: Endpoint information
         type: ANCEndpoint
         required: false
+        example: {}
