@@ -69,9 +69,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Returns true in the endpoint was removed from quarantine|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|Returns true in the endpoint was removed from quarantine|True|
 
 Example output:
 
@@ -103,9 +103,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|ers_anc_endpoint|ErsAncEndpoint|False|Returns info on the endpoint and what policy was applied|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|ers_anc_endpoint|ErsAncEndpoint|False|Returns info on the endpoint and what policy was applied|{}|
 
 Example output:
 
@@ -148,9 +148,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|ers_endpoint|ERSEndPoint|False|Returns a JSON containing information on the host|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|ers_endpoint|ERSEndPoint|False|Returns a JSON containing information on the host|{}|
 
 Example output:
 
@@ -199,9 +199,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results|ANCEndpoint|False|Endpoint information|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|results|ANCEndpoint|False|Endpoint information|{}|
 
 Example output:
 

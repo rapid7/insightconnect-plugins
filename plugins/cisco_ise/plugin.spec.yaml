@@ -19,7 +19,7 @@ tags:
 - network access
 hub_tags:
   use_cases: [asset_inventory, threat_detection_and_response]
-  keywords: [cisco, network access]
+  keywords: [cisco, network_access]
   features: []
 types:
   link:
