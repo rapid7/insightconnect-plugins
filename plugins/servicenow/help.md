@@ -515,17 +515,15 @@ This action is used to update the vulnerability by ID.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|additional_fields|object|None|False|JSON object containing the additional fields and values to update the vulnerability item|None|{"description": "Example description"}|
+|additional_fields|object|None|False|JSON object containing the additional fields and values to create incident|None|{"description": "Example description"}|
 |assigned_to|string|None|False|User ID of person assigned to the vulnerability|None|ExampleUserID|
-|dns|string|None|False|The name of the source DNS where the vulnerability was found|None|dns.example.com|
 |first_found|date|None|False|The time that represents the vulnerability was first found, in ISO format|None|2023-04-28T15:48:07|
-|ip_address|string|None|False|The IP address of the source where the vulnerability was found|None|192.168.0.1|
-|last_found|date|None|False|The time that represents when the vulnerability was last found, in ISO format|None|2023-04-30T12:14:10|
+|risk_rating|string|None|False|The risk rating of the vulnerability|['Low', 'Medium', 'High', 'Critical', '']|SAFE|
 |short_description|string|None|False|Short description of the vulnerability|None|Example short description|
-|source|string|None|False|The vulnerability source|None|ExampleSource|
-|state|string|None|False|The state of the vulnerability|['', 'Open', 'Under Investigation']|Open|
+|state|string|None|False|The state of the vulnerability|['Open', 'Under Investigation']|Open|
+|steps_to_reproduce|string|None|False|The described steps how to reproduce the vulnerability|None|<h1>Example Steps to Reproduce</h1>|
 |system_id|string|None|True|System ID of the vulnerability to be retrieved|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|vulnerability|string|None|False|The reference of the found vulnerability|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|technical_details|string|None|False|The technical details of the vulnerability|None|Example technical details about the vulnerability|
 
 Example input:
 
@@ -535,15 +533,13 @@ Example input:
     "description": "Example description"
   },
   "assigned_to": "ExampleUserID",
-  "dns": "dns.example.com",
   "first_found": "2023-04-28T15:48:07",
-  "ip_address": "192.168.0.1",
-  "last_found": "2023-04-30T12:14:10",
+  "risk_rating": "SAFE",
   "short_description": "Example short description",
-  "source": "ExampleSource",
   "state": "Open",
+  "steps_to_reproduce": "<h1>Example Steps to Reproduce</h1>",
   "system_id": "9de5069c5afe602b2ea0a04b66beb2c0",
-  "vulnerability": "9de5069c5afe602b2ea0a04b66beb2c0"
+  "technical_details": "Example technical details about the vulnerability"
 }
 ```
 
@@ -642,17 +638,14 @@ This action creates a new vulnerability record.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|additional_fields|object|None|False|JSON object containing the additional fields and values to create the vulnerability|None|{"description": "Example description"}|
+|additional_fields|object|None|False|JSON object containing the additional fields and values to create incident|None|{"description": "Example description"}|
 |assigned_to|string|None|False|User ID of person assigned to the vulnerability|None|ExampleUserID|
-|dns|string|None|False|The name of source DNS where the vulnerability was found|None|dns.example.com|
-|first_found|date|None|False|The time that represents the vulnerability was first found, in ISO format|None|2023-04-28T15:48:07|
-|ip_address|string|None|False|The IP address of the source where the vulnerability was found|None|192.168.0.1|
-|last_found|date|None|False|The time that represents when the vulnerability was last found, in ISO format|None|2023-04-30T12:14:10|
-|risk_score|integer|None|False|The risk score of the vulnerability, from 0 to 100|None|30|
+|first_found|date|None|True|The time that represents the vulnerability was first found, in ISO format|None|2023-04-28T15:48:07|
+|risk_rating|string|None|False|The risk rating of the vulnerability|['Low', 'Medium', 'High', 'Critical', '']|SAFE|
 |short_description|string|None|False|Short description of the vulnerability|None|Example short description|
-|source|string|None|False|The vulnerability source|None|ExampleSource|
 |state|string|None|False|The state of the vulnerability|['Open', 'Under Investigation']|Open|
-|vulnerability|string|None|False|The reference of the found vulnerability (third-party vulnerability entry)|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|steps_to_reproduce|string|None|False|The described steps how to reproduce the vulnerability|None|<h1>Example Steps to Reproduce</h1>|
+|technical_details|string|None|False|The technical details of the vulnerability|None|Example technical details about the vulnerability|
 
 Example input:
 
@@ -662,15 +655,12 @@ Example input:
     "description": "Example description"
   },
   "assigned_to": "ExampleUserID",
-  "dns": "dns.example.com",
   "first_found": "2023-04-28T15:48:07",
-  "ip_address": "192.168.0.1",
-  "last_found": "2023-04-30T12:14:10",
-  "risk_score": 30,
+  "risk_rating": "SAFE",
   "short_description": "Example short description",
-  "source": "ExampleSource",
   "state": "Open",
-  "vulnerability": "9de5069c5afe602b2ea0a04b66beb2c0"
+  "steps_to_reproduce": "<h1>Example Steps to Reproduce</h1>",
+  "technical_details": "Example technical details about the vulnerability"
 }
 ```
 
@@ -680,14 +670,14 @@ Example input:
 |----|----|--------|-----------|-------|
 |number|string|True|Vulnerability ticket number|1|
 |system_id|string|True|System ID of the new vulnerability created|9de5069c5afe602b2ea0a04b66beb2c0|
-|vulnerability_url|string|True|URL to newly created vulnerability|https://example.service-now.com/sn_vul_vulnerable_item.do?sys_id=61...|
+|vulnerability_url|string|True|URL to newly created vulnerability|https://example.service-now.com/sn_vul_app_vulnerable_item.do?sys_id=61...|
 
 Example output:
 
 ```
 {
   "system_id": "9de5069c5afe602b2ea0a04b66beb2c0",
-  "vulnerability_url": "https://example.service-now.com/sn_vul_vulnerable_item.do?sys_id=61...",
+  "vulnerability_url": "https://example.service-now.com/sn_vul_app_vulnerable_item.do?sys_id=61...",
   "number": "1"
 }
 ```
@@ -1268,8 +1258,8 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
+|Name|Type|Required|Description|
+|----|----|--------|-----------|
 |attachment_ids|[]string|True|List of System IDs of attachment records with the given name|["7bbbc15ddbdaf7002e12ff00ba96196c","b5b24a5ddb1ebf00a7e99b3c8a96197d","46c14941db92bf00a7e99b3c8a9619b6"]|
 
 Example output:
@@ -1464,7 +1454,7 @@ This trigger identifies if a vulnerability has been updated.
 |----|----|-------|--------|-----------|----|-------|
 |interval|integer|5|True|How often to detect changes to the given Incident (in seconds)|None|5|
 |monitored_fields|string|None|True|Comma-separated list of fields to be monitored (e.g. resolved,resolved_by)|None|resolved,resolved_by|
-|system_ids|[]string|None|True|List of system IDs of the vulnerability record to monitor|None|["9de5069c5afe602b2ea0a04b66beb2c0"]|
+|system_id|string|None|True|System ID of the vulnerability record to monitor|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
@@ -1472,9 +1462,7 @@ Example input:
 {
   "interval": 5,
   "monitored_fields": "resolved,resolved_by",
-  "system_ids": [
-    "9de5069c5afe602b2ea0a04b66beb2c0"
-  ]
+  "system_id": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 
@@ -1482,23 +1470,18 @@ Example input:
 
 |Name|Type|Required|Description|Example|
 |----|----|--------|-----------|-------|
-|updated_vulnerabilities|[]updated_vulnerability|True|List of JSON objects containing the system ID of the updated vulnerability and representation of the changed fields (map of field name from previous to current values)|{"updated_vulnerabilities": [{"system_id": "9de5069c5afe602b2ea0a04b66beb2c0", "changed_fields": {"description":{"previous":"Description 1","current":"Description 2"}}}]}|
+|changed_fields|object|True|JSON object representing changed fields (map of field name to previous and current values)|{"description":{"previous":"Description 1","current":"Description 2"}}|
 
 Example output:
 
 ```
 {
-  "updated_vulnerabilities": [
-    {
-      "system_id": "9de5069c5afe602b2ea0a04b66beb2c0",
-      "changed_fields": {
-        "description": {
-          "previous": "Description 1",
-          "current": "Description 2"
-        }
-      }
+  "changed_fields": {
+    "description": {
+      "previous": "Description 1",
+      "current": "Description 2"
     }
-  ]
+  }
 }
 ```
 

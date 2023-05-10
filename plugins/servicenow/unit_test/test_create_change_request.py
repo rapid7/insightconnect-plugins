@@ -12,7 +12,7 @@ from icon_servicenow.actions.create_change_request.schema import CreateChangeReq
 from jsonschema import validate
 from parameterized import parameterized
 
-from util import Util
+from unit_test.util import Util
 
 
 class TestCreateChangeRequest(TestCase):
