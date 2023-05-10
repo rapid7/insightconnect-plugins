@@ -9,7 +9,7 @@ from unittest.mock import patch
 from icon_servicenow.actions.get_attachments_for_an_incident import GetAttachmentsForAnIncident
 from icon_servicenow.actions.get_attachments_for_an_incident.schema import Input
 
-from util import Util
+from unit_test.util import Util
 
 
 class TestGetAttachmentsForAnIncident(TestCase):
