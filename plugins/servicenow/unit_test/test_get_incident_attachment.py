@@ -4,13 +4,14 @@ import sys
 sys.path.append("../")
 
 from unittest import TestCase
-from unittest.mock import Mock, patch
+from unittest.mock import patch
 
 from icon_servicenow.actions.get_incident_attachment import GetIncidentAttachment
 from icon_servicenow.actions.get_incident_attachment.schema import GetIncidentAttachmentOutput, Input, Output
 from jsonschema import validate
 
-from util import Util
+from unit_test.util import Util
+from unittest.mock import Mock
 
 sys.path.append(os.path.abspath("../"))
 
