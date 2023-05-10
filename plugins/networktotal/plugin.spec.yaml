@@ -4,7 +4,8 @@ products: [insightconnect]
 name: networktotal
 title: Network Total
 description: Upload a PCAP file for analysis, detecting viruses, worms, trojans and malware
-version: 1.0.1
+version: 1.0.2
+supported_versions: ["NGINX 2023-05-10"]
 vendor: rapid7
 support: community
 status: []
@@ -32,17 +33,20 @@ actions:
         description: Base64-encoded PCAP file
         title: PCAP File
         required: false
+        example: UmFwaWQ3IEluc2lnaHRDb25uZWN0Cg==
     output:
       md5:
         title: MD5
         description: MD5 hash of PCAP file
         type: string
         required: false
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
       signatures:
         title: Signatures
         description: Signatures found
         type: '[]string'
         required: false
+        example: []
   search:
     title: Search
     description: Search based on MD5 hash
@@ -52,9 +56,11 @@ actions:
         description: MD5 hash
         title: MD5 Hash
         required: false
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
     output:
       signatures:
         title: Signatures
         description: Signatures found
         type: '[]string'
         required: false
+        example: []
