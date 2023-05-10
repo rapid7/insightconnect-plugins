@@ -1,13 +1,15 @@
-import sys
 import os
+import sys
 
 sys.path.append(os.path.abspath("../"))
 
 from unittest import TestCase
 from unittest.mock import patch
-from unit_test.util import Util
+
 from icon_servicenow.actions.get_attachments_for_an_incident import GetAttachmentsForAnIncident
 from icon_servicenow.actions.get_attachments_for_an_incident.schema import Input
+
+from unit_test.util import Util
 
 
 class TestGetAttachmentsForAnIncident(TestCase):
