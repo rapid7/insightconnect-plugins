@@ -9,6 +9,7 @@ Note: This plugin affects only the underlying tables in a ServiceNow instance, n
 * Search, Read, Create, Delete, and Update incidents to accelerate ticketing operations
 * Search, Get, Put, and Delete incident attachments to update tickets with additional context
 * Search, Get, Create, and Update CI records to manage your configuration items
+* Create, Get, Delete, Update vulnerabilities to accelerate ticketing operations
 
 # Requirements
 
@@ -48,6 +49,181 @@ Example input:
 
 ### Actions
 
+#### Update Vulnerability
+
+This action is used to update the vulnerability by ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|additional_fields|object|None|False|JSON object containing the additional fields and values to create incident|None|{"description": "Example description"}|
+|assigned_to|string|None|False|User ID of person assigned to the vulnerability|None|ExampleUserID|
+|first_found|date|None|False|The time that represents the vulnerability was first found, in ISO format|None|2023-04-28T15:48:07|
+|risk_rating|string|None|False|The risk rating of the vulnerability|['Low', 'Medium', 'High', 'Critical', '']|SAFE|
+|short_description|string|None|False|Short description of the vulnerability|None|Example short description|
+|state|string|None|False|The state of the vulnerability|['Open', 'Under Investigation']|Open|
+|steps_to_reproduce|string|None|False|The described steps how to reproduce the vulnerability|None|<h1>Example Steps to Reproduce</h1>|
+|system_id|string|None|True|System ID of the vulnerability to be retrieved|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|technical_details|string|None|False|The technical details of the vulnerability|None|Example technical details about the vulnerability|
+
+Example input:
+
+```
+{
+  "additional_fields": {
+    "description": "Example description"
+  },
+  "assigned_to": "ExampleUserID",
+  "first_found": "2023-04-28T15:48:07",
+  "risk_rating": "SAFE",
+  "short_description": "Example short description",
+  "state": "Open",
+  "steps_to_reproduce": "<h1>Example Steps to Reproduce</h1>",
+  "system_id": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "technical_details": "Example technical details about the vulnerability"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|True if the update was successful, false otherwise|True|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Get Vulnerability
+
+This action is used to retrieve the vulnerability by ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|filtering_fields|string|None|True|Comma-separated list of fields desired in output object (e.g. opened_by,number)|None|opened_by,number|
+|system_id|string|None|True|System ID of the vulnerability to be retrieved|None|9de5069c5afe602b2ea0a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "filtering_fields": "opened_by,number",
+  "system_id": "9de5069c5afe602b2ea0a04b66beb2c0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|filtered_vulnerability|object|True|JSON object representing the vulnerability containing the given fields|{"number":"1","opened_by":{"link":"https://example.service-now.com/api/now/table/sys...","value":""},"state":"1"}|
+
+Example output:
+
+```
+{
+  "filtered_vulnerability": {
+    "number": "1",
+    "opened_by": {
+      "link": "https://example.service-now.com/api/now/table/sys...",
+      "value": ""
+    },
+    "state": "1"
+  }
+}
+```
+
+#### Delete Vulnerability
+
+This action is used to delete the vulnerability by ID.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|system_id|string|None|True|System ID of the vulnerability to be retrieved|None|9de5069c5afe602b2ea0a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "system_id": "9de5069c5afe602b2ea0a04b66beb2c0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|True if the deletion was successful, false otherwise|True|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
+
+#### Create Vulnerability
+
+This action creates a new vulnerability record.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|additional_fields|object|None|False|JSON object containing the additional fields and values to create incident|None|{"description": "Example description"}|
+|assigned_to|string|None|False|User ID of person assigned to the vulnerability|None|ExampleUserID|
+|first_found|date|None|True|The time that represents the vulnerability was first found, in ISO format|None|2023-04-28T15:48:07|
+|risk_rating|string|None|False|The risk rating of the vulnerability|['Low', 'Medium', 'High', 'Critical', '']|SAFE|
+|short_description|string|None|False|Short description of the vulnerability|None|Example short description|
+|state|string|None|False|The state of the vulnerability|['Open', 'Under Investigation']|Open|
+|steps_to_reproduce|string|None|False|The described steps how to reproduce the vulnerability|None|<h1>Example Steps to Reproduce</h1>|
+|technical_details|string|None|False|The technical details of the vulnerability|None|Example technical details about the vulnerability|
+
+Example input:
+
+```
+{
+  "additional_fields": {
+    "description": "Example description"
+  },
+  "assigned_to": "ExampleUserID",
+  "first_found": "2023-04-28T15:48:07",
+  "risk_rating": "SAFE",
+  "short_description": "Example short description",
+  "state": "Open",
+  "steps_to_reproduce": "<h1>Example Steps to Reproduce</h1>",
+  "technical_details": "Example technical details about the vulnerability"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|number|string|True|Vulnerability ticket number|1|
+|system_id|string|True|System ID of the new vulnerability created|9de5069c5afe602b2ea0a04b66beb2c0|
+|vulnerability_url|string|True|URL to newly created vulnerability|https://example.service-now.com/sn_vul_app_vulnerable_item.do?sys_id=61...|
+
+Example output:
+
+```
+{
+  "system_id": "9de5069c5afe602b2ea0a04b66beb2c0",
+  "vulnerability_url": "https://example.service-now.com/sn_vul_app_vulnerable_item.do?sys_id=61...",
+  "number": "1"
+}
+```
+
 #### Create Change Request
 
 This action creates a change request record based on the default change request record.
@@ -70,9 +246,17 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|Indicates whether the change request has been created|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|Indicates whether the change request has been created|True|
+
+Example output:
+
+```
+{
+  "success": true
+}
+```
 
 #### Get Attachments for an Incident
 
@@ -94,9 +278,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|incident_attachments|[]attachment_file|False|List of attachments for a given incident ID|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|incident_attachments|[]attachment_file|False|List of attachments for a given incident ID|[{"content":"9de5069c5afe602b2ea0a04b66beb2c0","content_type":"text/plain","file_name":"example.txt"}]|
 
 Example output:
 
@@ -140,9 +324,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|system_id|string|True|System ID of the new CI created|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|system_id|string|True|System ID of the new CI created|45dd2115db1ebf00a7e99b3c8a9619da|
 
 Example output:
 
@@ -202,18 +386,19 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|incident_url|string|True|URL to newly created incident|
-|number|string|True|Incident ticket number|
-|system_id|string|True|System ID of the new Incident created|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|incident_url|string|True|URL to newly created incident|https://example.service-now.com/task.do?sys_id=daa10e5ddb5ef7002e12ff00ba9619db|
+|number|string|True|Incident ticket number|123|
+|system_id|string|True|System ID of the new Incident created|daa10e5ddb5ef7002e12ff00ba9619db|
 
 Example output:
 
 ```
 {
-  "number": "123"
-  "system_id": "daa10e5ddb5ef7002e12ff00ba9619db"
+  "number": "123",
+  "system_id": "daa10e5ddb5ef7002e12ff00ba9619db",
+  "incident_url": "https://example.service-now.com/task.do?sys_id=daa10e5ddb5ef7002e12ff00ba9619db"
 }
 ```
 
@@ -237,9 +422,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|True if the deletion was successful, false otherwise|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|True if the deletion was successful, false otherwise|True|
 
 Example output:
 
@@ -269,9 +454,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|True if the deletion was successful, false otherwise|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|True if the deletion was successful, false otherwise|True|
 
 Example output:
 
@@ -303,9 +488,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|servicenow_ci|object|True|JSON object representing the CI record returned|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|servicenow_ci|object|True|JSON object representing the CI record returned|{"firewall_status":"Intranet","operational_status":"1","sys_updated_on":"2019-06-26 20:45:21","first_discovered":"2018-05-14 18:07:23","used_for":"Production","sys_created_by":"admin","classification":"Production","can_print":"false","last_discovered":"2019-03-24 11:25:56","sys_class_name":"cmdb_ci_server","asset":{"link":"https://example.service-now.com/api/now/table/alm_asset/ff5a6a55dbdef7002e12ff00ba9619d6","value":"ff5a6a55dbdef7002e12ff00ba9619d6"},"sys_updated_by":"admin","sys_created_on":"2019-06-26 20:45:21","sys_domain":{"link":"https://example.service-now.com/api/now/table/sys_user_group/sysdomain","value":"sysdomain"},"fqdn":"fqdntest","hardware_status":"installed","install_status":"1","name":"TEST NAME","subcategory":"Computer","u_restricted_access":"false","sys_id":"375a6a55dbdef7002e12ff00ba9619d6","sys_class_path":"/!!/!G/!!/!$","mac_address":"234324234342","u_automated_patching":"false","sys_mod_count":"0","monitor":"false","ip_address":"10.0.0.1","model_id":{"link":"https://example.service-now.com/api/now/table/cmdb_model/59d4c676db0fc700553363835b961949","value":"59d4c676db0fc700553363835b961949"},"cost_cc":"USD","location":{"link":"https://example.service-now.com/api/now/table/cmn_location/US-East","value":"US-East"},"category":"Hardware","fault_count":"0"}|
 
 Example output:
 
@@ -380,9 +565,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|attachment_contents|bytes|True|The Base64-encoded contents of the downloaded attachment|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|attachment_contents|bytes|True|The Base64-encoded contents of the downloaded attachment|[base-64 contents]|
 
 Example output:
 
@@ -420,9 +605,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|attachment_id|string|True|System ID of the newly created attachment|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|attachment_id|string|True|System ID of the newly created attachment|b5b24a5ddb1ebf00a7e99b3c8a96197d|
 
 Example output:
 
@@ -454,9 +639,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|filtered_incident|object|True|JSON object representing the incident containing the given fields|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|filtered_incident|object|True|JSON object representing the incident containing the given fields|{"short_description":"Short description test","description":"Description test"}|
 
 Example output:
 
@@ -491,9 +676,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|servicenow_cis|[]object|True|List of JSON objects representing the CI record(s) returned by the query|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|servicenow_cis|[]object|True|List of JSON objects representing the CI record(s) returned by the query|[{"firewall_status":"Intranet","operational_status":"1","sys_updated_on":"2019-06-26 20:45:21","first_discovered":"2018-05-14 18:07:23","used_for":"Production","sys_created_by":"admin","classification":"Production","can_print":"false","last_discovered":"2019-03-24 11:25:56","sys_class_name":"cmdb_ci_server","cd_rom":"false","unverified":"false","asset":{"link":"https://example.service-now.com/api/now/table/alm_asset/ff5a6a55dbdef7002e12ff00ba9619d6","value":"ff5a6a55dbdef7002e12ff00ba9619d6"},"skip_sync":"false","sys_updated_by":"admin","sys_created_on":"2019-06-26 20:45:21","sys_domain":{"link":"https://example.service-now.com/api/now/table/sys_user_group/sysdomain","value":"sysdomain"},"fqdn":"fqdntest","hardware_status":"installed","install_status":"1","name":"TEST NAME","subcategory":"Computer","u_restricted_access":"false","virtual":"false","sys_id":"375a6a55dbdef7002e12ff00ba9619d6","sys_class_path":"/!!/!G/!!/!$","mac_address":"234324234342","u_automated_patching":"false","sys_mod_count":"0","monitor":"false","ip_address":"10.0.0.1","model_id":{"link":"https://example.service-now.com/api/now/table/cmdb_model/59d4c676db0fc700553363835b961949","value":"59d4c676db0fc700553363835b961949"},"cost_cc":"USD","location":{"link":"https://example.service-now.com/api/now/table/cmn_location/US-East","value":"US-East"},"category":"Hardware","fault_count":"0"}]|
 
 Example output:
 
@@ -575,9 +760,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|system_ids|[]string|True|List of System IDs of Incidents satisfying the given query|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|system_ids|[]string|True|List of System IDs of Incidents satisfying the given query|["b5aadf6cdb16b7002e12ff00ba96193c","90db5f20db967f00a7e99b3c8a96190c","28869809db12bf00a7e99b3c8a9619de","e5a14141db92f7002e12ff00ba961962","38aa01d9dbdaf7002e12ff00ba96196a","daa10e5ddb5ef7002e12ff00ba9619db"]|
 
 Example output:
 
@@ -616,7 +801,7 @@ Example input:
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|attachment_ids|[]string|True|List of System IDs of attachment records with the given name|
+|attachment_ids|[]string|True|List of System IDs of attachment records with the given name|["7bbbc15ddbdaf7002e12ff00ba96196c","b5b24a5ddb1ebf00a7e99b3c8a96197d","46c14941db92bf00a7e99b3c8a9619b6"]|
 
 Example output:
 
@@ -657,9 +842,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|True if the update was successful|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|True if the update was successful|True|
 
 Example output:
 
@@ -721,9 +906,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|True|True if the update was successful|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|True|True if the update was successful|True|
 
 Example output:
 
@@ -755,50 +940,91 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|incident_comments_worknotes|[]comments_worknotes|True|List of comments and work notes for an incident|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|incident_comments_worknotes|[]comments_worknotes|True|List of comments and work notes for an incident|[{"sys_id":"2c6420c31b0000506a4a85507e4bcb82","sys_created_on":"2019-09-26 21:19:11","name":"incident","element_id":"965f140bdb4c8c105f6f00b5ca961922","sys_tags":"","value":"Team is actively looking into it.","sys_created_by":"admin","element":"work_notes"},{"sys_id":"4db0e8cb1bcccc106a4a85507e4bcba2","sys_created_on":"2019-09-26 21:03:07","name":"incident","element_id":"965f140bdb4c8c105f6f00b5ca961922","sys_tags":"","value":"This is Sev1 incident.","sys_created_by":"admin","element":"comments"},{"sys_id":"f92024471b0000506a4a85507e4bcb78","sys_created_on":"2019-09-26 21:00:43","name":"incident","element_id":"965f140bdb4c8c105f6f00b5ca961922","sys_tags":"","value":"Testing comments","sys_created_by":"admin","element":"comments"}]|
 
 Example output:
 
 ```
+{
+  "incident_comments_worknotes": [
     {
-      "incident_comments_worknotes": [
-        {
-          "sys_id": "2c6420c31b0000506a4a85507e4bcb82",
-          "sys_created_on": "2019-09-26 21:19:11",
-          "name": "incident",
-          "element_id": "965f140bdb4c8c105f6f00b5ca961922",
-          "sys_tags": "",
-          "value": "Team is actively looking into it.",
-          "sys_created_by": "admin",
-          "element": "work_notes"
-        },
-        {
-          "sys_id": "4db0e8cb1bcccc106a4a85507e4bcba2",
-          "sys_created_on": "2019-09-26 21:03:07",
-          "name": "incident",
-          "element_id": "965f140bdb4c8c105f6f00b5ca961922",
-          "sys_tags": "",
-          "value": "This is Sev1 incident.",
-          "sys_created_by": "admin",
-          "element": "comments"
-        },
-        {
-          "sys_id": "f92024471b0000506a4a85507e4bcb78",
-          "sys_created_on": "2019-09-26 21:00:43",
-          "name": "incident",
-          "element_id": "965f140bdb4c8c105f6f00b5ca961922",
-          "sys_tags": "",
-          "value": "Testing comments",
-          "sys_created_by": "admin",
-          "element": "comments"
-        }
-      ]
+      "sys_id": "2c6420c31b0000506a4a85507e4bcb82",
+      "sys_created_on": "2019-09-26 21:19:11",
+      "name": "incident",
+      "element_id": "965f140bdb4c8c105f6f00b5ca961922",
+      "sys_tags": "",
+      "value": "Team is actively looking into it.",
+      "sys_created_by": "admin",
+      "element": "work_notes"
+    },
+    {
+      "sys_id": "4db0e8cb1bcccc106a4a85507e4bcba2",
+      "sys_created_on": "2019-09-26 21:03:07",
+      "name": "incident",
+      "element_id": "965f140bdb4c8c105f6f00b5ca961922",
+      "sys_tags": "",
+      "value": "This is Sev1 incident.",
+      "sys_created_by": "admin",
+      "element": "comments"
+    },
+    {
+      "sys_id": "f92024471b0000506a4a85507e4bcb78",
+      "sys_created_on": "2019-09-26 21:00:43",
+      "name": "incident",
+      "element_id": "965f140bdb4c8c105f6f00b5ca961922",
+      "sys_tags": "",
+      "value": "Testing comments",
+      "sys_created_by": "admin",
+      "element": "comments"
     }
+  ]
+}
 ```
 
 ### Triggers
+
+#### Vulnerability Updated
+
+This trigger identifies if a vulnerability has been updated.
+
+##### Input
+
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|interval|integer|5|True|How often to detect changes to the given Incident (in seconds)|None|5|
+|monitored_fields|string|None|True|Comma-separated list of fields to be monitored (e.g. resolved,resolved_by)|None|resolved,resolved_by|
+|system_id|string|None|True|System ID of the vulnerability record to monitor|None|9de5069c5afe602b2ea0a04b66beb2c0|
+
+Example input:
+
+```
+{
+  "interval": 5,
+  "monitored_fields": "resolved,resolved_by",
+  "system_id": "9de5069c5afe602b2ea0a04b66beb2c0"
+}
+```
+
+##### Output
+
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|changed_fields|object|True|JSON object representing changed fields (map of field name to previous and current values)|{"description":{"previous":"Description 1","current":"Description 2"}}|
+
+Example output:
+
+```
+{
+  "changed_fields": {
+    "description": {
+      "previous": "Description 1",
+      "current": "Description 2"
+    }
+  }
+}
+```
 
 #### Incident Created
 
@@ -832,9 +1058,9 @@ Example input (advanced query):
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|system_id|string|True|System ID of new incident|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|system_id|string|True|System ID of new incident|280b3cb71b9f1450c9768622dd4bcb32|
 
 Example output:
 
@@ -868,9 +1094,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|changed_fields|object|True|JSON object representing changed fields (map of field name to previous and current values)|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|changed_fields|object|True|JSON object representing changed fields (map of field name to previous and current values)|{"description":{"previous":"Description 1","current":"Description 2"}}|
 
 Example output:
 
@@ -895,6 +1121,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 7.2.0 - Added new actions: Create Vulnerability, Get Vulnerability, Update Vulnerability, Delete Vulnerability | Added new trigger: Vulnerability Updated
 * 7.1.2 - Search Incident, Search Incident Attachment: Fix issue where the action were failing on bigger results. Update Incident: Ensure non updated fields are not reset during update.
 * 7.1.1 - Create Incident: Resolved issue when nothing was passed to `additional_fields` input field 
 * 7.1.0 - Add new action Create Change Request
