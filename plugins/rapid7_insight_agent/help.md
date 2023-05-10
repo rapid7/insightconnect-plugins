@@ -50,7 +50,7 @@ This action is used to quarantine or unquarantine multiple hosts.
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|agent_array|[]string|None|True|Asset IDs to quarantine or unquarantine|None|["abcdef123", "abcdef123"]|
+|agent_array|[]string|None|True|Agent hostnames to quarantine or unquarantine|None|["abcdef123", "abcdef123"]|
 |interval|int|604800|True|Length of time in seconds to try to take action on a device. This is also called Advertisement Period|None|604800|
 |quarantine_state|boolean|True|True|Set to true to quarantine a host, set to false to unquarantine|None|True|
 

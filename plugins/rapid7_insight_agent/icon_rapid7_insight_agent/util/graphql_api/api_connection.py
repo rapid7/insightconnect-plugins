@@ -101,6 +101,9 @@ class ApiConnection:
         # Raise exception if the provided list is empty
         self._check_empty(agent_id_list)
 
+        # Convert each hostname to an agent ID
+        agent_id_list = self._convert_hostnames_to_id(hostnames=agent_id_list)
+
         # For each agent ID in the list, perform quarantine
         for agent in agent_id_list:
             result = self.quarantine(agent_id=agent, advertisement_period=advertisement_period)
@@ -125,6 +128,9 @@ class ApiConnection:
 
         # Raise exception if the provided list is empty
         self._check_empty(agent_id_list)
+
+        # Convert each hostname to an agent ID
+        agent_id_list = self._convert_hostnames_to_id(hostnames=agent_id_list)
 
         # For each agent ID in the list, perform unquarantine
         for agent in agent_id_list:
