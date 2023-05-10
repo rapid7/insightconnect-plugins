@@ -1,5 +1,5 @@
 {
-	"spec": "cf6ca4ecdb23da6fe639c8174a578467",
+	"spec": "6a5257154b3d89ac5bb105bfe32bdbc2",
 	"manifest": "6cababfa83094993e42ebd3715d77c17",
 	"setup": "84746e998eeb4078e599152a1486e72d",
 	"schemas": [
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "create_vulnerability/schema.py",
-			"hash": "6c54e3233387151776a08e9022c6c102"
+			"hash": "59da880dd942614f4801a36c4696817a"
 		},
 		{
 			"identifier": "delete_incident/schema.py",
@@ -81,7 +81,7 @@
 		},
 		{
 			"identifier": "update_vulnerability/schema.py",
-			"hash": "bf9354be1921c6ac8862c66adcf2ad3d"
+			"hash": "75720d47d2f9ccb0eacece3fe123d16e"
 		},
 		{
 			"identifier": "connection/schema.py",
@@ -97,7 +97,7 @@
 		},
 		{
 			"identifier": "vulnerability_updated/schema.py",
-			"hash": "165067880f43a7bc65cfb0daec007189"
+			"hash": "8d3b760922c72f8dec543ebbb6e53565"
 		}
 	]
 }
