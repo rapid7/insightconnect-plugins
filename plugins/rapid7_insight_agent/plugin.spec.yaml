@@ -177,7 +177,7 @@ actions:
     input:
       agent_array:
         title: Agent Array
-        description: Asset IDs to quarantine or unquarantine
+        description: Agent hostnames to quarantine or unquarantine
         type: "[]string"
         required: true
         example: ["abcdef123", "abcdef123"]
