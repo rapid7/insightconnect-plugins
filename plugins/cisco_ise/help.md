@@ -16,17 +16,34 @@ This plugin utilizes the [ISE](https://github.com/bobthebutcher/ise) library.
 * Cisco_ISE host's IP address
 * Cisco_ISE username and password
 
+# Supported Product Versions
+
+* Cisco ISE API 2023-05-09
+
 # Documentation
 
 ## Setup
 
 The connection configuration accepts the following parameters:
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|username|string|None|True|User with administrator privileges on Cisco ISE|None|
-|password|password|None|True|Password|None|
-|address|string|None|True|IP address for Cisco ISE|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|IP address for Cisco ISE|None|192.0.2.0/24|
+|credentials|credential_username_password|None|True|Username and password|None|{}|
+|ssl_verify|boolean|True|True|Enable SSL verification|None|True|
+
+Example input:
+
+```
+{
+  "address": "192.0.2.0/24",
+  "credentials": {
+    "username": "user"
+    "password": "mypassword"
+  },
+  "ssl_verify": true
+}
+```
 
 ## Technical Details
 
@@ -38,15 +55,23 @@ This action is used to remove a host from quarantine.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|mac_address|string|None|True|The host MAC address|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|mac_address|string|None|True|The host MAC address|None|00:0E:35:D4:D8:52|
+
+Example input:
+
+```
+{
+  "mac_address": "00:0E:35:D4:D8:52"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|success|boolean|False|Returns true in the endpoint was removed from quarantine|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|success|boolean|False|Returns true in the endpoint was removed from quarantine|True|
 
 Example output:
 
@@ -62,31 +87,40 @@ This action is used to quarantine a host.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|policy|string|None|True|The quarantine policy to apply|None|
-|mac_address|string|None|True|The host MAC address|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|mac_address|string|None|True|The host MAC address|None|00:0E:35:D4:D8:52|
+|policy|string|None|True|The quarantine policy to apply|None|Shut_Down|
+
+Example input:
+
+```
+{
+  "mac_address": "00:0E:35:D4:D8:52",
+  "policy": "Shut_Down"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result|ErsAncEndpoint|False|Returns info on the endpoint and what policy was applied|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|ers_anc_endpoint|ErsAncEndpoint|False|Returns info on the endpoint and what policy was applied|{}|
 
 Example output:
 
 ```
 
 {
-  "result": {
-  "ErsAncEndpoint": {
-    "id": "5810ed0b-f1e8-40dc-bbda-78dcda4ae33d",
-    "macAddress": "00:0E:35:D4:D8:51",
-    "policyName": "komand_test",
-    "link": {
-      "rel": "self",
-      "href": "https://10.4.22.225:9060/ers/config/ancendpoint/5810ed0b-f1e8-40dc-bbda-78dcda4ae33d",
-      "type": "application/xml"
+  "result":{
+    "ErsAncEndpoint":{
+      "id":"5810ed0b-f1e8-40dc-bbda-78dcda4ae33d",
+      "macAddress":"00:0E:35:D4:D8:51",
+      "policyName":"komand_test",
+      "link":{
+        "rel":"self",
+        "href":"https://10.4.22.225:9060/ers/config/ancendpoint/5810ed0b-f1e8-40dc-bbda-78dcda4ae33d",
+        "type":"application/xml"
       }
     }
   }
@@ -100,37 +134,45 @@ This action is used to query an endpoint for more information.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|hostname|string|None|True|The host name|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|hostname|string|None|True|The hostname or MAC of the endpoint|None|00:0E:35:D4:D8:52|
+
+Example input:
+
+```
+{
+  "hostname": "00:0E:35:D4:D8:52"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|ers_endpoint|ERSEndPoint|False|Returns a JSON containing information on the host|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|ers_endpoint|ERSEndPoint|False|Returns a JSON containing information on the host|{}|
 
 Example output:
 
 ```
 
 {
-  "ers_endpoint": {
-  "id": "82e2b6d0-546b-11e8-bc94-12d1173c5b91",
-  "name": "00:0E:35:D4:D8:52",
-  "description": "",
-  "mac": "00:0E:35:D4:D8:52",
-  "profileId": "2ac6a950-8c00-11e6-996c-525400b48521",
-  "staticProfileAssignment": false,
-  "groupId": "aa10ae00-8bff-11e6-996c-525400b48521",
-  "staticGroupAssignment": false,
-  "portalUser": "",
-  "identityStore": "",
-  "identityStoreId": "",
-  "link": {
-    "rel": "self",
-    "href": "https://10.4.22.225:9060/ers/config/endpoint/name/00:0E:35:D4:D8:52",
-    "type": "application/xml"
+  "ers_endpoint":{
+    "id":"82e2b6d0-546b-11e8-bc94-12d1173c5b91",
+    "name":"00:0E:35:D4:D8:52",
+    "description":"",
+    "mac":"00:0E:35:D4:D8:52",
+    "profileId":"2ac6a950-8c00-11e6-996c-525400b48521",
+    "staticProfileAssignment":false,
+    "groupId":"aa10ae00-8bff-11e6-996c-525400b48521",
+    "staticGroupAssignment":false,
+    "portalUser":"",
+    "identityStore":"",
+    "identityStoreId":"",
+    "link":{
+      "rel":"self",
+      "href":"https://10.4.22.225:9060/ers/config/endpoint/name/00:0E:35:D4:D8:52",
+      "type":"application/xml"
     }
   }
 }
@@ -143,15 +185,23 @@ This action is used to return ANC information based on the MAC address supplied.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|mac|string|None|True|MAC address of the endpoint|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|mac|string|None|True|MAC address of the endpoint|None|00:0E:35:D4:D8:52|
+
+Example input:
+
+```
+{
+  "mac": "00:0E:35:D4:D8:52"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|results|ANCEndpoint|False|Endpoint information|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|results|ANCEndpoint|False|Endpoint information|{}|
 
 Example output:
 
@@ -170,7 +220,7 @@ Example output:
 
 ### Triggers
 
-This plugin does not contain any triggers.
+_This plugin does not contain any triggers._
 
 ### Custom Output Types
 
@@ -182,6 +232,7 @@ This plugin does not contain any troubleshooting information.
 
 # Version History
 
+* 2.2.2 - Update requests to version 2.20.0
 * 2.2.1 - New spec and help.md format for the Extension Library
 * 2.2.0 - New action Get ANC Endpoint
 * 2.1.2 - Fixed issue where Query Endpoint would return an error if endpoint was not found | Update to input description for Query Endpoint
@@ -191,6 +242,8 @@ This plugin does not contain any troubleshooting information.
 * 1.0.0 - Initial plugin
 
 # Links
+
+* [Cisco Developer Documentation](https://developer.cisco.com/docs/)
 
 ## References
 
