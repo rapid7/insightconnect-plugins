@@ -4,7 +4,7 @@ products: ["insightconnect"]
 name: servicenow
 title: ServiceNow
 description: ServiceNow is a tool for managing incidents and configuration management. Using the ServiceNow plugin for Rapid7 InsightConnect, users can manage all aspects of incidents including creation, search, updates, as well as monitor them for changes
-version: 7.1.2
+version: 7.2.0
 supported_versions: ["2020-03-11 Orlando"]
 vendor: rapid7
 support: rapid7
@@ -117,6 +117,7 @@ actions:
         description: Indicates whether the change request has been created
         type: boolean
         required: true
+        example: true
   create_incident:
     title: Create Incident
     description: Create a new ServiceNow Incident record
@@ -217,16 +218,19 @@ actions:
         description: System ID of the new Incident created
         type: string
         required: true
+        example: daa10e5ddb5ef7002e12ff00ba9619db
       number:
         title: Incident Number
         description: Incident ticket number
         type: string
         required: true
+        example: 123
       incident_url:
         title: Incident URL
         description: URL to newly created incident
         type: string
         required: true
+        example: https://example.service-now.com/task.do?sys_id=daa10e5ddb5ef7002e12ff00ba9619db
   search_incident:
     title: Search Incident
     description: Search for Incidents satisfying the given query
@@ -244,6 +248,7 @@ actions:
         description: List of System IDs of Incidents satisfying the given query
         type: '[]string'
         required: true
+        example: '["b5aadf6cdb16b7002e12ff00ba96193c","90db5f20db967f00a7e99b3c8a96190c","28869809db12bf00a7e99b3c8a9619de","e5a14141db92f7002e12ff00ba961962","38aa01d9dbdaf7002e12ff00ba96196a","daa10e5ddb5ef7002e12ff00ba9619db"]'
   read_incident:
     title: Read Incident
     description: Populate a JSON object with the specified fields of the given Incident
@@ -267,6 +272,7 @@ actions:
         description: JSON object representing the incident containing the given fields
         type: object
         required: true
+        example: '{"short_description":"Short description test","description":"Description test"}'
   update_incident:
     title: Update Incident
     description: Update a ServiceNow Incident with the given data
@@ -373,6 +379,7 @@ actions:
         description: True if the update was successful
         type: boolean
         required: true
+        example: true
   delete_incident:
     title: Delete Incident
     description: Remove the given ServiceNow Incident from the instance
@@ -389,6 +396,7 @@ actions:
         description: True if the deletion was successful, false otherwise
         type: boolean
         required: true
+        example: true
   put_incident_attachment:
     title: Put Incident Attachment
     description: Associate a file with a ServiceNow Incident
@@ -442,6 +450,7 @@ actions:
         description: System ID of the newly created attachment
         type: string
         required: true
+        example: b5b24a5ddb1ebf00a7e99b3c8a96197d
   search_incident_attachment:
     title: Search Incident Attachment
     description: Search for attachment files with the given name
@@ -458,6 +467,7 @@ actions:
         description: List of System IDs of attachment records with the given name
         type: '[]string'
         required: true
+        example: '["7bbbc15ddbdaf7002e12ff00ba96196c","b5b24a5ddb1ebf00a7e99b3c8a96197d","46c14941db92bf00a7e99b3c8a9619b6"]'
   get_incident_attachment:
     title: Get Incident Attachment
     description: Download the Base64-encoded contents of the given attachment
@@ -474,6 +484,7 @@ actions:
         description: The Base64-encoded contents of the downloaded attachment
         type: bytes
         required: true
+        example: '[base-64 contents]'
   delete_incident_attachment:
     title: Delete Incident Attachment
     description: Remove the given attachment from the ServiceNow instance
@@ -490,6 +501,7 @@ actions:
         description: True if the deletion was successful, false otherwise
         type: boolean
         required: true
+        example: true
   get_ci:
     title: Get CI
     description: Retrieve a CI record from ServiceNow
@@ -512,6 +524,7 @@ actions:
         description: JSON object representing the CI record returned
         type: object
         required: true
+        example: '{"firewall_status":"Intranet","operational_status":"1","sys_updated_on":"2019-06-26 20:45:21","first_discovered":"2018-05-14 18:07:23","used_for":"Production","sys_created_by":"admin","classification":"Production","can_print":"false","last_discovered":"2019-03-24 11:25:56","sys_class_name":"cmdb_ci_server","asset":{"link":"https://example.service-now.com/api/now/table/alm_asset/ff5a6a55dbdef7002e12ff00ba9619d6","value":"ff5a6a55dbdef7002e12ff00ba9619d6"},"sys_updated_by":"admin","sys_created_on":"2019-06-26 20:45:21","sys_domain":{"link":"https://example.service-now.com/api/now/table/sys_user_group/sysdomain","value":"sysdomain"},"fqdn":"fqdntest","hardware_status":"installed","install_status":"1","name":"TEST NAME","subcategory":"Computer","u_restricted_access":"false","sys_id":"375a6a55dbdef7002e12ff00ba9619d6","sys_class_path":"/!!/!G/!!/!$","mac_address":"234324234342","u_automated_patching":"false","sys_mod_count":"0","monitor":"false","ip_address":"10.0.0.1","model_id":{"link":"https://example.service-now.com/api/now/table/cmdb_model/59d4c676db0fc700553363835b961949","value":"59d4c676db0fc700553363835b961949"},"cost_cc":"USD","location":{"link":"https://example.service-now.com/api/now/table/cmn_location/US-East","value":"US-East"},"category":"Hardware","fault_count":"0"}'
   search_ci:
     title: Search CI
     description: Retrieve CI record(s) from ServiceNow based on the provided query
@@ -535,6 +548,7 @@ actions:
         description: List of JSON objects representing the CI record(s) returned by the query
         type: '[]object'
         required: true
+        example: '[{"firewall_status":"Intranet","operational_status":"1","sys_updated_on":"2019-06-26 20:45:21","first_discovered":"2018-05-14 18:07:23","used_for":"Production","sys_created_by":"admin","classification":"Production","can_print":"false","last_discovered":"2019-03-24 11:25:56","sys_class_name":"cmdb_ci_server","cd_rom":"false","unverified":"false","asset":{"link":"https://example.service-now.com/api/now/table/alm_asset/ff5a6a55dbdef7002e12ff00ba9619d6","value":"ff5a6a55dbdef7002e12ff00ba9619d6"},"skip_sync":"false","sys_updated_by":"admin","sys_created_on":"2019-06-26 20:45:21","sys_domain":{"link":"https://example.service-now.com/api/now/table/sys_user_group/sysdomain","value":"sysdomain"},"fqdn":"fqdntest","hardware_status":"installed","install_status":"1","name":"TEST NAME","subcategory":"Computer","u_restricted_access":"false","virtual":"false","sys_id":"375a6a55dbdef7002e12ff00ba9619d6","sys_class_path":"/!!/!G/!!/!$","mac_address":"234324234342","u_automated_patching":"false","sys_mod_count":"0","monitor":"false","ip_address":"10.0.0.1","model_id":{"link":"https://example.service-now.com/api/now/table/cmdb_model/59d4c676db0fc700553363835b961949","value":"59d4c676db0fc700553363835b961949"},"cost_cc":"USD","location":{"link":"https://example.service-now.com/api/now/table/cmn_location/US-East","value":"US-East"},"category":"Hardware","fault_count":"0"}]'
   create_ci:
     title: Create CI
     description: Create a new ServiceNow CI record
@@ -557,6 +571,7 @@ actions:
         description: System ID of the new CI created
         type: string
         required: true
+        example: 45dd2115db1ebf00a7e99b3c8a9619da
   update_ci:
     title: Update CI
     description: Update an existing ServiceNow CI record
@@ -585,6 +600,7 @@ actions:
         description: True if the update was successful
         type: boolean
         required: true
+        example: true
   get_incident_comments_worknotes:
     title: Get Incident Comments and Work Notes
     description: Get comments and work notes for an incident
@@ -611,6 +627,7 @@ actions:
         description: List of comments and work notes for an incident
         type: '[]comments_worknotes'
         required: true
+        example: '[{"sys_id":"2c6420c31b0000506a4a85507e4bcb82","sys_created_on":"2019-09-26 21:19:11","name":"incident","element_id":"965f140bdb4c8c105f6f00b5ca961922","sys_tags":"","value":"Team is actively looking into it.","sys_created_by":"admin","element":"work_notes"},{"sys_id":"4db0e8cb1bcccc106a4a85507e4bcba2","sys_created_on":"2019-09-26 21:03:07","name":"incident","element_id":"965f140bdb4c8c105f6f00b5ca961922","sys_tags":"","value":"This is Sev1 incident.","sys_created_by":"admin","element":"comments"},{"sys_id":"f92024471b0000506a4a85507e4bcb78","sys_created_on":"2019-09-26 21:00:43","name":"incident","element_id":"965f140bdb4c8c105f6f00b5ca961922","sys_tags":"","value":"Testing comments","sys_created_by":"admin","element":"comments"}]'
   get_attachments_for_an_incident:
     title: Get Attachments for an Incident
     description: Search for attachments for a given incident ID
@@ -627,6 +644,202 @@ actions:
         description: List of attachments for a given incident ID
         type: "[]attachment_file"
         required: false
+        example: '[{"content":"9de5069c5afe602b2ea0a04b66beb2c0","content_type":"text/plain","file_name":"example.txt"}]'
+  create_vulnerability:
+    title: Create Vulnerability
+    description: Creates a new vulnerability record
+    input:
+      risk_rating:
+        title: Risk Rating
+        description: The risk rating of the vulnerability
+        type: string
+        enum:
+          - Low
+          - Medium
+          - High
+          - Critical
+          - ""
+        required: false
+        example: SAFE
+      state:
+        title: State
+        description: The state of the vulnerability
+        type: string
+        enum:
+          - Open
+          - Under Investigation
+        required: false
+        example: Open
+      first_found:
+        title: First Found
+        description: The time that represents the vulnerability was first found, in ISO format
+        type: date
+        required: true
+        example: 2023-04-28T15:48:07
+      assigned_to:
+        title: Assigned To
+        description: User ID of person assigned to the vulnerability
+        type: string
+        required: false
+        example: ExampleUserID
+      short_description:
+        title: Short Description
+        description: Short description of the vulnerability
+        type: string
+        required: false
+        example: Example short description
+      steps_to_reproduce:
+        title: Steps to Reproduce the Vulnerability
+        description: The described steps how to reproduce the vulnerability
+        type: string
+        required: false
+        example: <h1>Example Steps to Reproduce</h1>
+      technical_details:
+        title: Technical Details
+        description: The technical details of the vulnerability
+        type: string
+        required: false
+        example: Example technical details about the vulnerability
+      additional_fields:
+        title: Additional Fields
+        description: JSON object containing the additional fields and values to create incident
+        type: object
+        required: false
+        example: '{"description": "Example description"}'
+    output:
+      system_id:
+        title: System ID
+        description: System ID of the new vulnerability created
+        type: string
+        required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+      number:
+        title: Vulnerability Number
+        description: Vulnerability ticket number
+        type: string
+        required: true
+        example: 1
+      vulnerability_url:
+        title: Vulnerability URL
+        description: URL to newly created vulnerability
+        type: string
+        required: true
+        example: "https://example.service-now.com/sn_vul_app_vulnerable_item.do?sys_id=61..."
+  get_vulnerability:
+    title: Get Vulnerability
+    description: Retrieve the vulnerability by ID
+    input:
+      system_id:
+        title: System ID
+        description: System ID of the vulnerability to be retrieved
+        type: string
+        required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+      filtering_fields:
+        title: Filtering Fields
+        description: Comma-separated list of fields desired in output object (e.g.
+          opened_by,number)
+        type: string
+        required: true
+        example: opened_by,number
+    output:
+      filtered_vulnerability:
+        title: Filtered Vulnerability
+        description: JSON object representing the vulnerability containing the given fields
+        type: object
+        required: true
+        example: '{"number":"1","opened_by":{"link":"https://example.service-now.com/api/now/table/sys...","value":""},"state":"1"}'
+  update_vulnerability:
+    title: Update Vulnerability
+    description: Update the vulnerability by ID
+    input:
+      system_id:
+        title: System ID
+        description: System ID of the vulnerability to be retrieved
+        type: string
+        required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+      risk_rating:
+        title: Risk Rating
+        description: The risk rating of the vulnerability
+        type: string
+        enum:
+          - Low
+          - Medium
+          - High
+          - Critical
+          - ""
+        required: false
+        example: SAFE
+      state:
+        title: State
+        description: The state of the vulnerability
+        type: string
+        enum:
+          - Open
+          - Under Investigation
+        required: false
+        example: Open
+      first_found:
+        title: First Found
+        description: The time that represents the vulnerability was first found, in ISO format
+        type: date
+        required: false
+        example: 2023-04-28T15:48:07
+      assigned_to:
+        title: Assigned To
+        description: User ID of person assigned to the vulnerability
+        type: string
+        required: false
+        example: ExampleUserID
+      short_description:
+        title: Short Description
+        description: Short description of the vulnerability
+        type: string
+        required: false
+        example: Example short description
+      steps_to_reproduce:
+        title: Steps to Reproduce the Vulnerability
+        description: The described steps how to reproduce the vulnerability
+        type: string
+        required: false
+        example: <h1>Example Steps to Reproduce</h1>
+      technical_details:
+        title: Technical Details
+        description: The technical details of the vulnerability
+        type: string
+        required: false
+        example: Example technical details about the vulnerability
+      additional_fields:
+        title: Additional Fields
+        description: JSON object containing the additional fields and values to create incident
+        type: object
+        required: false
+        example: '{"description": "Example description"}'
+    output:
+      success:
+        title: Success
+        description: True if the update was successful, false otherwise
+        type: boolean
+        required: true
+        example: true
+  delete_vulnerability:
+    title: Delete Vulnerability
+    description: Delete the vulnerability by ID
+    input:
+      system_id:
+        title: System ID
+        description: System ID of the vulnerability to be retrieved
+        type: string
+        required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+    output:
+      success:
+        title: Success
+        description: True if the deletion was successful, false otherwise
+        type: boolean
+        required: true
+        example: true
 triggers:
   incident_changed:
     title: Incident Changed
@@ -657,6 +870,7 @@ triggers:
         description: JSON object representing changed fields (map of field name to previous and current values)
         type: object
         required: true
+        example: '{"description":{"previous":"Description 1","current":"Description 2"}}'
   incident_created:
     title: Incident Created
     description: Identifies if a new incident has been created
@@ -680,3 +894,34 @@ triggers:
         description: System ID of new incident
         type: string
         required: true
+        example: 280b3cb71b9f1450c9768622dd4bcb32
+  vulnerability_updated:
+    title: Vulnerability Updated
+    description: Identifies if a vulnerability has been updated
+    input:
+      system_id:
+        title: System ID
+        description: System ID of the vulnerability record to monitor
+        type: string
+        required: true
+        example: 9de5069c5afe602b2ea0a04b66beb2c0
+      monitored_fields:
+        title: Monitored Fields
+        description: Comma-separated list of fields to be monitored (e.g. resolved,resolved_by)
+        type: string
+        required: true
+        example: resolved,resolved_by
+      interval:
+        title: Interval
+        description: How often to detect changes to the given Incident (in seconds)
+        type: integer
+        required: true
+        default: 5
+        example: 5
+    output:
+      changed_fields:
+        title: Changed Fields
+        description: JSON object representing changed fields (map of field name to previous and current values)
+        type: object
+        required: true
+        example: '{"description":{"previous":"Description 1","current":"Description 2"}}'
