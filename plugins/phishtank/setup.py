@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='phishtank-rapid7-plugin',
-      version='1.0.1',
-      description='The Phishtank plugin allows you to submit URLs for analysis by the PhishTank community',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="phishtank-rapid7-plugin",
+      version="1.0.2",
+      description="The Phishtank plugin allows you to submit URLs for analysis by the PhishTank community",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_phishtank']
