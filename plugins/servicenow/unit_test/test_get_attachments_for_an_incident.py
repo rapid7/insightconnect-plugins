@@ -10,7 +10,7 @@ from icon_servicenow.actions.get_attachments_for_an_incident import GetAttachmen
 from icon_servicenow.actions.get_attachments_for_an_incident.schema import GetAttachmentsForAnIncidentOutput, Input
 from jsonschema import validate
 
-from util import Util
+from unit_test.util import Util
 
 
 class TestGetAttachmentsForAnIncident(TestCase):
