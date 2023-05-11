@@ -52,7 +52,7 @@ Example input:
 
 This action is used to get information about an Alert.
 
-##### Input
+##### Input1
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -183,7 +183,7 @@ Example output:
 
 This action returns a risk list of URLs matching a filtration.
 
-##### Input
+##### Input2
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -302,7 +302,7 @@ Example output:
 
 This action is used to search for data related to URLs.
 
-##### Input
+##### Input3
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -439,7 +439,7 @@ Example output:
 
 This action is used to list available filtration rules for URL risk lists.
 
-##### Input
+##### Input4
 
 _This action does not contain any inputs._
 
@@ -470,7 +470,7 @@ Example output:
 
 This action is used to list available filtration rules for IP address risk lists.
 
-##### Input
+##### Input5
 
 _This action does not contain any inputs._
 
@@ -517,7 +517,7 @@ Example output:
 
 This action is used to search for results related to a specific parent domain.
 
-##### Input
+##### Input6
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -588,7 +588,7 @@ Example output:
 
 This action is used to list available filtration rules for domain risk lists.
 
-##### Input
+##### Input7
 
 _This action does not contain any inputs._
 
@@ -637,7 +637,7 @@ Example output:
 
 This action is used to search for data related to malware.
 
-##### Input
+##### Input8
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -710,7 +710,7 @@ Example output:
 
 This action is used to perform a freetext search across all Recorded Future entity types (IP address, domain, hash, malware, and vulnerability).
 
-##### Input
+##### Input9
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -765,7 +765,7 @@ Example output:
 
 This action returns a risk list of domains matching a filtration rule.
 
-##### Input
+##### Input10
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -976,7 +976,7 @@ Example output:
 
 This action is used to search for data related to vulnerabilities.
 
-##### Input
+##### Input11
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -1051,7 +1051,7 @@ Example output:
 
 This action is used to for data related to a specified IP range.
 
-##### Input
+##### Input12
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -1124,7 +1124,7 @@ Example output:
 
 This action is used to retrieve available filtration rules for vulnerability risk lists.
 
-##### Input
+##### Input13
 
 _This action does not contain any inputs._
 
@@ -1163,7 +1163,7 @@ Example output:
 
 This action is used to returns a list of hashes matching a specified risk rule.
 
-##### Input
+##### Input14
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -1289,7 +1289,7 @@ Example output:
 
 This action is used to search for data related to hashes of a specified type.
 
-##### Input
+##### Input15
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -1508,7 +1508,7 @@ Example output:
 
 This action is used to fetch a specified entity list by ID.
 
-##### Input
+##### Input16
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -1561,7 +1561,7 @@ Example output:
 
 This action is used to return information about a specific malware entry by ID.
 
-##### Input
+##### Input17
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -1646,7 +1646,7 @@ This action is used to return information about a specific domain entry.
 It accepts both domains and URLs as input. If a URL is given, it will be stripped to its domain.
 For example, `https://www.example.com/path/to/file` will become `www.example.com`.
 
-##### Input
+##### Input18
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -1741,7 +1741,7 @@ Example output:
 
 This action is used to retrieve information about a specified hash.
 
-##### Input
+##### Input19
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -1845,7 +1845,7 @@ Example output:
 
 This action is used to retrieve information about a specified URL.
 
-##### Input
+##### Input20
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -1919,7 +1919,7 @@ Example output:
 
 This action is used to fetch a risk list of the IP addresses that match a specified filtration rule.
 
-##### Input
+##### Input21
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -2113,7 +2113,7 @@ Example output:
 
 This action is used to query for data related to a specific IP address.
 
-##### Input
+##### Input22
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -2259,7 +2259,7 @@ Example output:
 
 This action is used to fetch a risk list of vulnerabilities matching a specified filtration rule.
 
-##### Input
+##### Input23
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -2336,7 +2336,7 @@ Example output:
 
 This action is used to list available filtration rules for hash risk lists.
 
-##### Input
+##### Input24
 
 _This action does not contain any inputs._
 
@@ -2377,7 +2377,7 @@ Example output:
 
 This action is used to fetch information about a specific vulnerability by CVE or RF ID.
 
-##### Input
+##### Input25
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -2490,7 +2490,7 @@ Example output:
 
 This trigger is used to get new alerts.
 
-##### Input
+##### Input26
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
@@ -2921,7 +2921,8 @@ This plugin does not contain any troubleshooting information.
 
 # Links
 
+* [Recorded Future](https://recordedfuture.com)
+
 ## References
 
-* [Recorded Future](https://recordedfuture.com)
 * [Recorded Future API](https://api.recordedfuture.com/v2)
