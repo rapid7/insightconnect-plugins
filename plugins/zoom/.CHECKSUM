@@ -1,7 +1,7 @@
 {
-	"spec": "d761994a31bceaad443d92a3360c684c",
-	"manifest": "c6d21865840af36d4c533cd3a063613f",
-	"setup": "c63b0baf19567cdf79670f42e4dd8777",
+	"spec": "1687b0a19e6fe4b67bd22b6afd14f7ee",
+	"manifest": "ed67a3c5e9486d4cf68be6a66105c2b0",
+	"setup": "b6b10a4b55004d2f2d5475f990cdf665",
 	"schemas": [
 		{
 			"identifier": "create_user/schema.py",
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "connection/schema.py",
-			"hash": "eba2f34fe6858ab2769d8086e6441d01"
+			"hash": "1edd217381fae8db5136cfc61c15d7b3"
 		},
 		{
 			"identifier": "monitor_sign_in_out_activity/schema.py",

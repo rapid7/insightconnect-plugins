@@ -72,14 +72,6 @@ class TestAPI(TestCase):
         result = api._call_api(method="POST", url="http://example.com")
         self.assertDictEqual(result, {})
 
-    @patch(REQUESTS_PATH)
-    def test_authenticated_first_run_jwt(self, mock_request):
-        api = ZoomAPI(jwt_token="blah", logger=logging.getLogger())
-
-        mock_request.side_effect = [MockResponse(status_code=200)]
-        result = api._call_api(method="POST", url="http://example.com")
-        self.assertDictEqual(result, {})
-
 
 if __name__ == "__main__":
     unittest.main()
