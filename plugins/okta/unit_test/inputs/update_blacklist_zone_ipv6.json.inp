@@ -1,0 +1,5 @@
+{
+  "name": "Test IP Zone",
+  "address": "2001:db8:1:1:1:1:1:2",
+  "blacklistState": true
+}

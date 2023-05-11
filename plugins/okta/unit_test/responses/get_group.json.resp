@@ -1,0 +1,34 @@
+{
+  "id": "12345",
+  "created": "2018-07-28T20:28:20.000Z",
+  "lastUpdated": "2018-07-28T20:28:20.000Z",
+  "lastMembershipUpdated": "2023-04-26T09:53:11.000Z",
+  "objectClass": [
+    "okta:user_group"
+  ],
+  "type": "OKTA_GROUP",
+  "profile": {
+    "name": "Example Group",
+    "description": "Example description"
+  },
+  "_links": {
+    "logo": [
+      {
+        "name": "medium",
+        "href": "https://example.com",
+        "type": "image/png"
+      },
+      {
+        "name": "large",
+        "href": "https://example.com",
+        "type": "image/png"
+      }
+    ],
+    "users": {
+      "href": "https://example.com"
+    },
+    "apps": {
+      "href": "https://example.com"
+    }
+  }
+}

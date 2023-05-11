@@ -62,7 +62,6 @@ class RequestHelper(object):
     @staticmethod
     def get_attachment(connection, sys_id):
         response = connection.request.make_request(f"{connection.attachment_url}/{sys_id}/file", "get")
-
         resource = response.get("resource")
 
         if not resource:
