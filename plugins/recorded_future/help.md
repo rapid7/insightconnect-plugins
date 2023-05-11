@@ -594,9 +594,9 @@ _This action does not contain any inputs._
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|risk_rules|[]risk_rule|True|Risk rules|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|risk_rules|[]risk_rule|True|Risk rules|"risk_rules": [ { "count": 1473, "criticality": 3, "criticalityLabel": "Malicious", "description": "COVID-19-Related Domain Lure", "name": "covidLure", "relatedEntities": [] }, { "count": 21739, "criticality": 2, "criticalityLabel": "Suspicious", "description": "Newly Registered Certificate With Potential for Abuse - DNS Sandwich", "name": "certTyposquatSandwich", "relatedEntities": [] }, { "count": 134360, "criticality": 2, "criticalityLabel": "Suspicious", "description": "Newly Registered Certificate With Potential for Abuse - Typo or Homograph", "name": "certTyposquatTypo", "relatedEntities": [] } ]|
 
 Example output:
 
@@ -2505,9 +2505,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|alert|alert|True|Alert|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|alert|alert|True|Alert|{ "review": { "status": "no-action" }, "url": "https://app.recordedfuture.com/live/sc/notification/?id=fnbTO7", "rule": { "url": "https://app.recordedfuture.com/live/sc/ViewIdkobra_view_report_item_alert_editor?view_opts=%7B%22reportId%22%3A%22feScJA%22%2C%22bTitle%22%3Atrue%2C%22title%22%3A%22Global+Vulnerability+Risk%2C+Vulnerabilities%2C+New+Exploit+Chatter%22%7D&state.bNavbar=false", "name": "Global Vulnerability Risk, Vulnerabilities, New Exploit Chatter", "id": "deXcBA" }, "triggered": "2020-10-09T16:08:21.948Z", "id": "deZcB9", "title": "Global Vulnerability Risk, Vulnerabilities, New Exploit Chatter - ... is n...", "type": "ENTITY" }|
 
 Example output:
 
