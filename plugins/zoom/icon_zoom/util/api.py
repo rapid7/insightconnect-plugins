@@ -27,11 +27,10 @@ class ZoomAPI:
     def __init__(
         self,
         logger: Logger,
-        account_id: Optional[str] = None,  # For OAuth only
-        client_id: Optional[str] = None,  # For OAuth only
-        client_secret: Optional[str] = None,  # For OAuth only
-        oauth_retry_limit: Optional[int] = 5,  # For OAuth only
-        jwt_token: Optional[str] = None,  # For JWT auth only
+        account_id: Optional[str] = None,
+        client_id: Optional[str] = None,
+        client_secret: Optional[str] = None,
+        oauth_retry_limit: Optional[int] = 5,
     ):
         self.api_url = "https://api.zoom.us/v2"
         self.oauth_url = "https://zoom.us/oauth/token"
@@ -39,14 +38,10 @@ class ZoomAPI:
         self.client_id = client_id
         self.client_secret = client_secret
         self.oauth_retry_limit = oauth_retry_limit
-        self.jwt_token = jwt_token
         self.logger = logger
 
         self.oauth_token: Optional[str] = None
-
-        # JWT is -not- being used, so get an OAuth token
-        if not jwt_token:
-            self._refresh_oauth_token()
+        self._refresh_oauth_token()
 
     def get_user(self, user_id: str) -> Optional[dict]:
         return self._call_api("GET", f"{self.api_url}/users/{user_id}")
@@ -152,11 +147,7 @@ class ZoomAPI:
         allow_404: bool = False,
         retry_401_count: int = 0,
     ) -> Optional[dict]:  # noqa: MC0001
-        # Determine which type of authentication mechanism to use
-        if self.oauth_token or self._is_using_oauth():
-            auth = BearerAuth(access_token=self.oauth_token)
-        else:
-            auth = BearerAuth(access_token=self.jwt_token)
+        auth = BearerAuth(access_token=self.oauth_token)
 
         try:
             self.logger.info(f"Calling {method} {url}")
@@ -216,23 +207,17 @@ class ZoomAPI:
 
         # 401 requires extra logic, so it is not included in the 4xx dict
         if response.status_code == 401:
-            if self.oauth_token or self._is_using_oauth():
-                if retry_401_count == (self.oauth_retry_limit - 1):  # -1 to account for retries starting at 0
-                    raise PluginException(
-                        cause="OAuth authentication retry limit was met.",
-                        assistance="Ensure your OAuth connection credentials are valid. "
-                        "If running a large number of integrations with Zoom, consider "
-                        "increasing the OAuth authentication retry limit to accommodate.",
-                    )
-                self.logger.info(f"Received HTTP {response.status_code}, re-authenticating to Zoom...")
-                retry_401_count += 1
-                self._refresh_oauth_token()
-                return self._call_api(**original_call_args, retry_401_count=retry_401_count)
-
-            raise PluginException(
-                cause="The JWT token provided in the plugin connection configuration is either " "invalid or expired.",
-                assistance="Please update the plugin connection configuration with a valid or " "updated JWT token.",
-            )
+            if retry_401_count == (self.oauth_retry_limit - 1):  # -1 to account for retries starting at 0
+                raise PluginException(
+                    cause="OAuth authentication retry limit was met.",
+                    assistance="Ensure your OAuth connection credentials are valid. "
+                    "If running a large number of integrations with Zoom, consider "
+                    "increasing the OAuth authentication retry limit to accommodate.",
+                )
+            self.logger.info(f"Received HTTP {response.status_code}, re-authenticating to Zoom...")
+            retry_401_count += 1
+            self._refresh_oauth_token()
+            return self._call_api(**original_call_args, retry_401_count=retry_401_count)
 
         # If we reach this point, all known/documented status codes have been exhausted, so the Zoom API has likely
         # changed and the plugin will require an update.
@@ -262,6 +247,3 @@ class ZoomAPI:
             )
 
         return PluginException(cause="Account is rate-limited by an unknown quota.", assistance="Try again later.")
-
-    def _is_using_oauth(self) -> bool:
-        return bool((self.account_id and self.client_id and self.client_secret) or self.oauth_token)

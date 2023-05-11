@@ -15,33 +15,18 @@ class Connection(insightconnect_plugin_runtime.Connection):
         secret_key = "secretKey"  # nosec: B105
 
         # OAuth inputs
-        account_id = params.get(Input.ACCOUNT_ID, {}).get(secret_key)
-        client_id = params.get(Input.CLIENT_ID, {}).get(secret_key)
+        account_id = params.get(Input.ACCOUNT_ID)
+        client_id = params.get(Input.CLIENT_ID)
         client_secret = params.get(Input.CLIENT_SECRET, {}).get(secret_key)
         oauth_authentication_retry_limit = params.get(Input.AUTHENTICATION_RETRY_LIMIT, 5)
 
-        # JWT input
-        jwt_token = params.get(Input.JWT_TOKEN, {}).get(secret_key)
-
-        if jwt_token:
-            self.logger.info("JWT token provided, connecting to Zoom via JWT")
-            self.zoom_api = ZoomAPI(logger=self.logger, jwt_token=jwt_token)
-        elif account_id and client_id and client_secret:
-            self.logger.info("OAuth credentials provided, connecting to Zoom via OAuth")
-            self.zoom_api = ZoomAPI(
-                logger=self.logger,
-                account_id=account_id,
-                client_id=client_id,
-                client_secret=client_secret,
-                oauth_retry_limit=oauth_authentication_retry_limit,
-            )
-        else:
-            raise PluginException(
-                cause="Credentials for either JWT Token or OAuth are required, although none were provided.",
-                assistance="If using JWT, please input only the JWT Token in your connection "
-                "configuration. If using OAuth, please input only the "
-                "Account ID, Client ID, and Client Secret.",
-            )
+        self.zoom_api = ZoomAPI(
+            logger=self.logger,
+            account_id=account_id,
+            client_id=client_id,
+            client_secret=client_secret,
+            oauth_retry_limit=oauth_authentication_retry_limit,
+        )
 
     def test(self):
         try:

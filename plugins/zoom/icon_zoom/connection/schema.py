@@ -8,7 +8,6 @@ class Input:
     AUTHENTICATION_RETRY_LIMIT = "authentication_retry_limit"
     CLIENT_ID = "client_id"
     CLIENT_SECRET = "client_secret"
-    JWT_TOKEN = "jwt_token"
     
 
 class ConnectionSchema(insightconnect_plugin_runtime.Input):
@@ -18,7 +17,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
   "title": "Variables",
   "properties": {
     "account_id": {
-      "$ref": "#/definitions/credential_secret_key",
+      "type": "string",
       "title": "Account ID",
       "description": "Zoom app account ID, required for OAuth authentication",
       "order": 3
@@ -31,7 +30,7 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "order": 4
     },
     "client_id": {
-      "$ref": "#/definitions/credential_secret_key",
+      "type": "string",
       "title": "Client ID",
       "description": "Zoom app client ID, required for OAuth authentication",
       "order": 1
@@ -41,14 +40,14 @@ class ConnectionSchema(insightconnect_plugin_runtime.Input):
       "title": "Client Secret",
       "description": "Zoom app client secret, required for OAuth authentication",
       "order": 2
-    },
-    "jwt_token": {
-      "$ref": "#/definitions/credential_secret_key",
-      "title": "JWT Token",
-      "description": "Zoom JWT token, without the Bearer prefix",
-      "order": 5
     }
   },
+  "required": [
+    "account_id",
+    "authentication_retry_limit",
+    "client_id",
+    "client_secret"
+  ],
   "definitions": {
     "credential_secret_key": {
       "id": "credential_secret_key",
