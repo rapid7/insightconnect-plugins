@@ -34,16 +34,24 @@ This action is used to look up a given IP address in the intel feed and return w
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|address|string|None|True|IPv4 Address|None|64.233.161.147|
+|address|string|None|True|IPv4 Address|None|198.51.100.0|
+
+Example input:
+
+```
+{
+  "address": "198.51.100.0"
+}
+```
 
 ##### Output
 
 |Name|Type|Required|Description|Example|
-|----|----|--------|-----------|-------|
-|url|string|False|None|www.example.com|
-|found|boolean|False|None|true|
-|status|string|False|None|No Error|
-|address|string|False|None|198.51.100.0|
+|----|----|--------|-----------|------|
+|url|string|False|URL of reputation list|www.example.com|
+|found|boolean|False|Found status|True|
+|status|string|False|Error message|No Error|
+|address|string|False|IP address that was found|198.51.100.0|
 
 ### Triggers
 
