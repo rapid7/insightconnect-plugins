@@ -5,7 +5,8 @@ name: snortlabslist
 title: Snort Labs IP Reputation
 description: "Snort Labs List is an IP blacklist service provided by Snort. Users of this plugin can query with
 IP addresses to check their status"
-version: 1.0.1
+version: 1.0.2
+supported_versions: ["2021-17-08"]
 vendor: rapid7
 support: community
 status: []
@@ -31,24 +32,29 @@ actions:
         type: string
         description: IPv4 Address
         required: true
+        example: 198.51.100.0
     output:
       found:
         title: Found
         description: Found status
         type: boolean
         required: false
+        example: true
       url:
         title: URL
         description: URL of reputation list
         type: string
         required: false
+        example: www.example.com
       address:
         title: Address
         description: IP address that was found
         type: string
         required: false
+        example: 198.51.100.0
       status:
         title: Status
         description: Error message
         type: string
         required: false
+        example: No Error
