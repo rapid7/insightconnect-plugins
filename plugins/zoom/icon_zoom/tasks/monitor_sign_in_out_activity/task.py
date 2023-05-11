@@ -68,7 +68,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
-                self.LATEST_EVENT_TIMESTAMP: None
+                self.LATEST_EVENT_TIMESTAMP: None,
             }
 
         self.logger.info(f"Got {len(new_events)} events!")
@@ -86,7 +86,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
-                self.LATEST_EVENT_TIMESTAMP: None
+                self.LATEST_EVENT_TIMESTAMP: None,
             }
 
         # update state
@@ -115,7 +115,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
-                self.LATEST_EVENT_TIMESTAMP: None
+                self.LATEST_EVENT_TIMESTAMP: None,
             }
 
         self.logger.info(f"Got {len(new_events)} events!")
@@ -129,7 +129,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
-                self.LATEST_EVENT_TIMESTAMP: None
+                self.LATEST_EVENT_TIMESTAMP: None,
             }
 
         # De-dupe events using boundary event hashes from previous run
@@ -155,7 +155,9 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         return deduped_events, state
 
     @staticmethod
-    def _dedupe_events(boundary_event_hashes: [str], all_events: [Event], latest_event_timestamp: Optional[str]) -> [Event]:
+    def _dedupe_events(
+        boundary_event_hashes: [str], all_events: [Event], latest_event_timestamp: Optional[str]
+    ) -> [Event]:
         if latest_event_timestamp is None:
             return all_events
 
