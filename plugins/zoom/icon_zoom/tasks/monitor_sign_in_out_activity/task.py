@@ -8,6 +8,8 @@ from .schema import (
 
 # Custom imports below
 from datetime import datetime, timedelta, timezone
+from typing import Optional
+
 from icon_zoom.util.event import Event
 
 
@@ -66,6 +68,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
+                self.LATEST_EVENT_TIMESTAMP: None
             }
 
         self.logger.info(f"Got {len(new_events)} events!")
@@ -83,6 +86,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
+                self.LATEST_EVENT_TIMESTAMP: None
             }
 
         # update state
@@ -111,6 +115,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
+                self.LATEST_EVENT_TIMESTAMP: None
             }
 
         self.logger.info(f"Got {len(new_events)} events!")
@@ -124,18 +129,18 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
+                self.LATEST_EVENT_TIMESTAMP: None
             }
 
         # De-dupe events using boundary event hashes from previous run
         deduped_events = self._dedupe_events(
             boundary_event_hashes=state[self.BOUNDARY_EVENTS],
             all_events=new_events,
-            latest_event_timestamp=state[self.LATEST_EVENT_TIMESTAMP],
+            latest_event_timestamp=state.get(self.LATEST_EVENT_TIMESTAMP),
         )
 
         # Determine new boundary event hashes using latest time from newly retrieved event set and latest event time
         # from the new set.
-
         boundary_event_hashes = state.get(self.BOUNDARY_EVENTS)
         if len(deduped_events) > 0:
             boundary_event_hashes = self._get_boundary_event_hashes(
@@ -150,7 +155,10 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         return deduped_events, state
 
     @staticmethod
-    def _dedupe_events(boundary_event_hashes: [str], all_events: [Event], latest_event_timestamp: str) -> [Event]:
+    def _dedupe_events(boundary_event_hashes: [str], all_events: [Event], latest_event_timestamp: Optional[str]) -> [Event]:
+        if latest_event_timestamp is None:
+            return all_events
+
         deduped_events: [Event] = []
 
         for event in all_events:
