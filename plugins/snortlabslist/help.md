@@ -12,6 +12,10 @@ other threat intelligence needs.
 
 _This plugin does not contain any requirements._
 
+# Supported Product Versions
+
+* 2021-17-08 
+
 # Documentation
 
 ## Setup
@@ -28,9 +32,9 @@ This action is used to look up a given IP address in the intel feed and return w
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|address|string|None|True|IPv4 Address|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|IPv4 Address|None|64.233.161.147|
 
 ##### Output
 
@@ -62,6 +66,7 @@ _This plugin does not contain any troubleshooting information._
 * 0.1.0 - Initial plugin
 
 # Links
+* [Snort](https://www.snort.org/)
 
 ## References
 

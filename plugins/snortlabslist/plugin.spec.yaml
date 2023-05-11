@@ -31,6 +31,7 @@ actions:
         type: string
         description: IPv4 Address
         required: true
+        example: 64.233.161.147
     output:
       found:
         title: Found
