@@ -2,12 +2,12 @@
 from setuptools import setup, find_packages
 
 
-setup(name='snortlabslist-rapid7-plugin',
-      version='1.0.1',
-      description='Snort Labs List is an IP blacklist service provided by Snort. Users of this plugin can query with IP addresses to check their status',
-      author='rapid7',
-      author_email='',
-      url='',
+setup(name="snortlabslist-rapid7-plugin",
+      version="1.0.2",
+      description="Snort Labs List is an IP blacklist service provided by Snort. Users of this plugin can query with IP addresses to check their status",
+      author="rapid7",
+      author_email="",
+      url="",
       packages=find_packages(),
       install_requires=['komand'],  # Add third-party dependencies to requirements.txt, not here!
       scripts=['bin/komand_snortlabslist']

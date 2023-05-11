@@ -12,6 +12,10 @@ other threat intelligence needs.
 
 _This plugin does not contain any requirements._
 
+# Supported Product Versions
+
+* 2021-17-08
+
 # Documentation
 
 ## Setup
@@ -28,18 +32,26 @@ This action is used to look up a given IP address in the intel feed and return w
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|address|string|None|True|IPv4 Address|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|address|string|None|True|IPv4 Address|None|198.51.100.0|
+
+Example input:
+
+```
+{
+  "address": "198.51.100.0"
+}
+```
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|url|string|False|None|
-|found|boolean|False|None|
-|status|string|False|None|
-|address|string|False|None|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|------|
+|url|string|False|URL of reputation list|www.example.com|
+|found|boolean|False|Found status|True|
+|status|string|False|Error message|No Error|
+|address|string|False|IP address that was found|198.51.100.0|
 
 ### Triggers
 
@@ -55,12 +67,15 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 1.0.2 - Update requests to version 2.20.0
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode
 * 0.1.1 - Feed URL [http://www.talosintelligence.com/feeds/ip-filter.blf](http://www.talosintelligence.com/feeds/ip-filter.blf) moved to S3, redirect required
 * 0.1.0 - Initial plugin
 
 # Links
+
+* [Snort](https://www.snort.org/)
 
 ## References
 
