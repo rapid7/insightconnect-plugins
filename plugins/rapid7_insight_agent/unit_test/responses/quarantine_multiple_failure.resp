@@ -1,0 +1,29 @@
+{
+    "data":{
+        "quarantineAssets":{
+            "results":[
+                {
+                    "failed": true
+                }
+            ]
+        },
+        "unquarantineAssets":{
+            "results":[
+                {
+                    "failed": true
+                }
+            ]
+        },
+        "assets":[
+            {
+                "agent":{
+                    "id":"abcdef",
+                    "quarantineState":{
+                        "currentState":"UNQUARANTINED"
+                    },
+                    "agentStatus":"ONLINE"
+                }
+            }
+        ]
+    }
+}

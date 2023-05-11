@@ -1,0 +1,24 @@
+{
+   "parameters":[
+      [
+         ["agent_id_bad"],
+         604800,
+         false,
+         {
+            "success": [],
+            "failure": ["agent_id_bad"],
+            "all_operations_succeeded": false
+         }
+      ],
+      [
+         ["agent_id_bad"],
+         604800,
+         true,
+         {
+            "success": [],
+            "failure": ["agent_id_bad"],
+            "all_operations_succeeded": false
+         }
+      ]
+   ]
+}

@@ -18,7 +18,7 @@ for flexible policy management of large groups of dynamic addresses.
 
 # Supported Product Versions
 
-* 6.2.3
+* 7.2.4
 
 # Documentation
 
@@ -70,10 +70,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result_object|object|True|An object containing the results of the action|
-|success|boolean|True|Was the operation successful|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|------|
+|result_object|object|True|An object containing the results of the action|{}|
+|success|boolean|True|Was the operation successful|True|
 
 Example output:
 
@@ -124,10 +124,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|address_objects|[]string|True|The names of the address objects that match or contain the address|
-|found|boolean|True|Was address found in group|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|address_objects|[]string|True|The names of the address objects that match or contain the address|["198.51.100.100/32"]|
+|found|boolean|True|Was address found in group|True|
 
 Example output:
 
@@ -158,9 +158,9 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|policies|[]policies|False|Policies|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|policies|[]policies|False|Policies|[{"policyid": 1, "q_origin_key": 1, "name": "Test Policy", "uuid": "6193559a-6862-51ea-44ce-e27594b8536a", "srcintf": [{"name": "port1", "q_origin_key": "port1"}], "dstintf": [{"name": "port1", "q_origin_key": "port1"}], "srcaddr": [{"name": "Test Group", "q_origin_key": "Test Group"}], "dstaddr": [{"name": "Test Group", "q_origin_key": "Test Group"}], "internet-service": "disable", "internet-service-id": [], "internet-service-group": [], "internet-service-custom": [], "internet-service-custom-group": [], "internet-service-src": "disable", "internet-service-src-id": [], "internet-service-src-group": [], "internet-service-src-custom": [], "internet-service-src-custom-group": [], "reputation-minimum": 0, "reputation-direction": "destination", "rtp-nat": "disable", "rtp-addr": [], "action": "accept", "send-deny-packet": "disable", "firewall-session-dirty": "check-all", "status": "enable", "schedule": "always", "schedule-timeout": "disable", "service": [{"name": "ALL", "q_origin_key": "ALL"}], "tos": "0x00", "tos-mask": "0x00", "tos-negate": "disable", "anti-replay": "enable", "tcp-session-without-syn": "disable", "geoip-anycast": "disable", "utm-status": "disable", "inspection-mode": "flow", "http-policy-redirect": "disable", "ssh-policy-redirect": "disable", "profile-type": "single", "profile-protocol-options": "default", "ssl-ssh-profile": "no-inspection", "logtraffic": "utm", "logtraffic-start": "disable", "capture-packet": "disable", "auto-asic-offload": "enable", "wanopt": "disable", "wanopt-detection": "active", "wanopt-passive-opt": "default", "webcache": "disable", "webcache-https": "disable", "application": [], "app-category": [], "url-category": [], "app-group": [], "nat": "enable", "permit-any-host": "disable", "permit-stun-host": "disable", "fixedport": "disable", "ippool": "disable", "poolname": [], "session-ttl": "0", "vlan-cos-fwd": 255, "vlan-cos-rev": 255, "inbound": "disable", "outbound": "enable", "natinbound": "disable", "natoutbound": "disable", "wccp": "disable", "ntlm": "disable", "ntlm-guest": "disable", "ntlm-enabled-browsers": [], "fsso": "enable", "wsso": "enable", "rsso": "disable", "groups": [], "users": [], "fsso-groups": [], "auth-path": "disable", "disclaimer": "disable", "email-collect": "disable", "natip": "0.0.0.0 0.0.0.0", "match-vip": "disable", "match-vip-only": "disable", "diffserv-forward": "disable", "diffserv-reverse": "disable", "diffservcode-forward": "000000", "diffservcode-rev": "000000", "tcp-mss-sender": 0, "tcp-mss-receiver": 0, "block-notification": "disable", "custom-log-fields": [], "srcaddr-negate": "disable", "dstaddr-negate": "disable", "service-negate": "disable", "internet-service-negate": "disable", "internet-service-src-negate": "disable", "timeout-send-rst": "disable", "captive-portal-exempt": "disable", "ssl-mirror": "disable", "ssl-mirror-intf": [], "dsri": "disable", "radius-mac-auth-bypass": "disable", "delay-tcp-npu-session": "disable"}]|
 
 Example output:
 
@@ -326,10 +326,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|result_object|object|True|An object containing the results of the action|
-|success|boolean|True|Was the operation successful|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|result_object|object|True|An object containing the results of the action|{}|
+|success|boolean|True|Was the operation successful|True|
 
 Example output:
 
@@ -384,10 +384,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response_object|object|True|Information about the operation that was performed|
-|success|boolean|True|Boolean value indicating the success of the operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response_object|object|True|Information about the operation that was performed|{}|
+|success|boolean|True|Boolean value indicating the success of the operation|True|
 
 Example output:
 
@@ -432,10 +432,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|response_object|object|True|Information about the operation that was performed|
-|success|boolean|True|Boolean value indicating the success of the operation|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|response_object|object|True|Information about the operation that was performed|{}|
+|success|boolean|True|Boolean value indicating the success of the operation|True|
 
 Example output:
 
@@ -486,10 +486,10 @@ Example input:
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|address_objects|[]address_object|True|A list of address objects|
-|ipv6_address_objects|[]ipv6_address_object|True|A list of IPv6 address objects|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|address_objects|[]address_object|True|A list of address objects|[ { "name": "FABRIC_DEVICE", "q_origin_key": "FABRIC_DEVICE", "uuid": "7773d538-25a0-51ea-fcb2-a2340d71f5d9", "subnet": "0.0.0.0 0.0.0.0", "type": "ipmask", "sub-type": "sdn", "clearpass-spt": "unknown", "start-mac": "00:00:00:00:00:00", "end-mac": "00:00:00:00:00:00", "cache-ttl": 0, "fsso-group": [], "comment": "IPv4 addresses of Fabric Devices.", "visibility": "enable", "color": 0, "sdn-addr-type": "private", "list": [], "tagging": [], "allow-routing": "disable" } ]|
+|ipv6_address_objects|[]ipv6_address_object|True|A list of IPv6 address objects|[ { "name": "FABRIC_DEVICE", "q_origin_key": "FABRIC_DEVICE", "uuid": "7773d538-25a0-51ea-fcb2-a2340d71f5d9", "subnet": "0.0.0.0 0.0.0.0", "type": "ipmask", "sub-type": "sdn", "clearpass-spt": "unknown", "start-mac": "00:00:00:00:00:00", "end-mac": "00:00:00:00:00:00", "cache-ttl": 0, "fsso-group": [], "comment": "IPv4 addresses of Fabric Devices.", "visibility": "enable", "color": 0, "sdn-addr-type": "private", "list": [], "tagging": [], "allow-routing": "disable" } ]||
 
 Example output:
 
@@ -719,12 +719,13 @@ Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51
 
 # Version History
 
+* 6.0.1 - Resolve connection test failure with Fortigate version 6.4.1 and above | Fix bug in action 'Check if Address in Group', where the action would fail if the IPV6 Group did not exist
 * 6.0.0 - Fix the issue where creating address objects for domains does not work in the Create Address Object action | Fix the issue where address objects for IPv4 were created using the wrong endpoint in the Create Address Object action | Correct the payloads for creating address objects for domains and IPv6 in the Create Address Object action | Add support for checking if IPv6 is whitelisted in the Create Address Object action | Fix IPv6 support in all actions | Code refactor | Add default value for SSL verify parameter in connection configuration
 * 5.1.1 - Add `docs_url` in plugin spec | Update `source_url` in plugin spec
 * 5.1.0 - Support for IPV6 in all actions
 * 5.0.0 - Improve input handling to allow IPs, CIDRs, and subnet masks in actions | Fix output of Get Address Objects action to return usable data | Update Get Address Objects action to allow for additional search parameters
 * 4.0.4 - Improve error messaging around HTTP 401 status codes to indicate that the InsightConnect orchestrator IP address not being in the trusted host list may be the cause
-* 4.0.3 - Improve assistance message when the API returns an Internal Server Errror
+* 4.0.3 - Improve assistance message when the API returns an Internal Server Error
 * 4.0.2 - Support host URL in connection | Improve Create Address Object action to allow for IPs and CIDRs as input
 * 4.0.1 - Bug fix where some names were being incorrectly parsed in the Check if Address in Group action causing the action to fail
 * 4.0.0 - Update Create Address Object action to accept a RFC1918 whitelist | Add enable_search functionality to Check if Address in Group action
@@ -735,6 +736,6 @@ Add the orchestrator's IP address to the trusted hosts in CIDR form e.g. `198.51
 
 # Links
 
-## References
-
 * [Fortinet FortiGate](https://www.fortinet.com/)
+
+## References

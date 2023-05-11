@@ -27,7 +27,7 @@ class TestActionEnableUsers(TestCase):
                         }
                     ],
                     Output.SUCCESSFUL_ENABLEMENTS: [],
-                    Output.SUCCESS: False,
+                    Output.ALL_OPERATIONS_SUCCEEDED: False,
                 },
             ),
             (
@@ -46,13 +46,13 @@ class TestActionEnableUsers(TestCase):
                         }
                     ],
                     Output.SUCCESSFUL_ENABLEMENTS: ["CN=Users,DC=example,DC=com"],
-                    Output.SUCCESS: True,
+                    Output.ALL_OPERATIONS_SUCCEEDED: False,
                 },
             ),
             (
                 {Input.DISTINGUISHED_NAMES: ["CN=Users,DC=example,DC=com"]},
                 {
-                    Output.SUCCESS: True,
+                    Output.ALL_OPERATIONS_SUCCEEDED: True,
                     Output.SUCCESSFUL_ENABLEMENTS: ["CN=Users,DC=example,DC=com"],
                     Output.UNSUCCESSFUL_ENABLEMENTS: [],
                 },
