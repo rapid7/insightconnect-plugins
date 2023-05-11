@@ -14,7 +14,7 @@ _This plugin does not contain any requirements._
 
 # Supported Product Versions
 
-* 2021-17-08 
+* 2021-17-08
 
 # Documentation
 
@@ -38,12 +38,12 @@ This action is used to look up a given IP address in the intel feed and return w
 
 ##### Output
 
-|Name|Type|Required|Description|
-|----|----|--------|-----------|
-|url|string|False|None|
-|found|boolean|False|None|
-|status|string|False|None|
-|address|string|False|None|
+|Name|Type|Required|Description|Example|
+|----|----|--------|-----------|-------|
+|url|string|False|None|www.example.com|
+|found|boolean|False|None|true|
+|status|string|False|None|No Error|
+|address|string|False|None|198.51.100.0|
 
 ### Triggers
 
@@ -66,6 +66,7 @@ _This plugin does not contain any troubleshooting information._
 * 0.1.0 - Initial plugin
 
 # Links
+
 * [Snort](https://www.snort.org/)
 
 ## References
