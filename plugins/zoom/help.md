@@ -15,12 +15,9 @@ Business, or Enterprise plan.
 # Requirements
 
 * Must have Zoom Pro, Business, or Enterprise plan to support REST API
-* API credentials for either of the following Zoom API authentication types: 
-    * For OAuth 2.0:
-      * Requires account ID as well as client ID and secret from a Server-to-Server OAuth app in the Zoom Marketplace.
-      * Server-to-Server OAuth app has the `report:read:admin` scope enabled.
-    * For JWT, requires a JWT token from a JWT app in the Zoom Marketplace - it is recommended that the generated JWT token has a long expiration date to prevent having to update the token frequently.
-      * Please note that JWT authentication is deprecated and will be removed from the Zoom API in June, 2023. 
+* API credentials for OAuth 2.0:
+  * Requires account ID as well as client ID and secret from a Server-to-Server OAuth app in the Zoom Marketplace.
+  * Server-to-Server OAuth app has the `report:read:admin` scope enabled.
     
 # Supported Product Versions
 
@@ -34,11 +31,10 @@ The connection configuration accepts the following parameters:
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|account_id|credential_secret_key|None|False|Zoom app account ID, required for OAuth authentication|None|dBs0x4Kf7HuIK0LLbzMduW|
-|authentication_retry_limit|integer|5|False|How many times to retry authentication to Zoom before failing, required for OAuth authentication|None|5|
-|client_id|credential_secret_key|None|False|Zoom app client ID, required for OAuth authentication|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|client_secret|credential_secret_key|None|False|Zoom app client secret, required for OAuth authentication|None|9de5069c5afe602b2ea0a04b66beb2c0|
-|jwt_token|credential_secret_key|None|False|Zoom JWT token, without the Bearer prefix|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|account_id|string|None|True|Zoom app account ID, required for OAuth authentication|None|dBs0x4Kf7HuIK0LLbzMduW|
+|authentication_retry_limit|integer|5|True|How many times to retry authentication to Zoom before failing, required for OAuth authentication|None|5|
+|client_id|string|None|True|Zoom app client ID, required for OAuth authentication|None|9de5069c5afe602b2ea0a04b66beb2c0|
+|client_secret|credential_secret_key|None|True|Zoom app client secret, required for OAuth authentication|None|9de5069c5afe602b2ea0a04b66beb2c0|
 
 Example input:
 
@@ -47,8 +43,7 @@ Example input:
   "account_id": "dBs0x4Kf7HuIK0LLbzMduW",
   "authentication_retry_limit": 5,
   "client_id": "9de5069c5afe602b2ea0a04b66beb2c0",
-  "client_secret": "9de5069c5afe602b2ea0a04b66beb2c0",
-  "jwt_token": "9de5069c5afe602b2ea0a04b66beb2c0"
+  "client_secret": "9de5069c5afe602b2ea0a04b66beb2c0"
 }
 ```
 
@@ -312,6 +307,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.0.0 - Fix time boundary checking in Monitor Sign in And Out Activity task by tracking last request time instead of latest event time | Remove JWT authentication
 * 3.0.0 - Add back JWT authentication in addition to OAuth (please note JWT will be removed from the Zoom API in June 2023) | Improve OAuth logic to help prevent infinite looping
 * 2.1.0 - Create user: Removed redundant enum option from `type` input | Added unit tests | Improve authentication logic
 * 2.0.0 - Update connection for latest Zoom API authentication | Add Monitor Sign In and Out Activity task
