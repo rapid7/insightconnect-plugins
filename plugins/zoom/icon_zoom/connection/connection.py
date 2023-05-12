@@ -43,6 +43,6 @@ class Connection(insightconnect_plugin_runtime.Connection):
             )
         except AuthenticationError:
             raise ConnectionTestException(
-                cause="The OAuth token credentials or JWT token provided in the connection configuration is invalid.",
+                cause="The OAuth token credentials provided in the connection configuration is invalid.",
                 assistance="Please verify the credentials are correct and try again."
             )

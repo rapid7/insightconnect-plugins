@@ -18,6 +18,6 @@ oauth_retry_limit_exception = PluginException(
 )
 
 authentication_error_exception = PluginException(
-                cause="The OAuth token credentials or JWT token provided in the connection configuration is invalid.",
+                cause="The OAuth token credentials provided in the connection configuration is invalid.",
                 assistance="Please verify the credentials are correct and try again."
 )

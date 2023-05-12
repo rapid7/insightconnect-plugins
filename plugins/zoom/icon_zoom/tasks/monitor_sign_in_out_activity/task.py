@@ -26,7 +26,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                                                "connection credentials are valid. If running a large number of " \
                                                "integrations with Zoom, consider increasing the OAuth authentication " \
                                                "retry limit to accommodate."
-    AUTHENTICATION_ERROR_MESSAGE = "The OAuth token credentials or JWT token provided in the connection " \
+    AUTHENTICATION_ERROR_MESSAGE = "The OAuth token credentials provided in the connection " \
                                    "configuration is invalid. Please verify the credentials are correct " \
                                    "and try again."
 
@@ -79,14 +79,6 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                 self.LATEST_EVENT_TIMESTAMP: None,
-                self.STATUS_CODE: 401
-            }
-        except AuthenticationError:
-            self.logger.error("The OAuth token credentials or JWT token provided in the connection configuration is "
-                              "invalid. Please verify the credentials are correct and try again.")
-            return [], {
-                self.BOUNDARY_EVENTS: [],
-                self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now()),
                 self.STATUS_CODE: 401
             }
 
