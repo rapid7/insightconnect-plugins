@@ -22,14 +22,17 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
 
     ZOOM_TIME_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
-    AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE = "OAuth authentication retry limit was met. Ensure your OAuth " \
-                                               "connection credentials are valid. If running a large number of " \
-                                               "integrations with Zoom, consider increasing the OAuth authentication " \
-                                               "retry limit to accommodate."
-    AUTHENTICATION_ERROR_MESSAGE = "The OAuth token credentials provided in the connection " \
-                                   "configuration is invalid. Please verify the credentials are correct " \
-                                   "and try again."
-
+    AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE = (
+        "OAuth authentication retry limit was met. Ensure your OAuth "
+        "connection credentials are valid. If running a large number of "
+        "integrations with Zoom, consider increasing the OAuth authentication "
+        "retry limit to accommodate."
+    )
+    AUTHENTICATION_ERROR_MESSAGE = (
+        "The OAuth token credentials provided in the connection "
+        "configuration is invalid. Please verify the credentials are correct "
+        "and try again."
+    )
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -72,14 +75,16 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 start_date=last_24_hours_for_zoom, end_date=now_for_zoom, page_size=1000
             )
         except (AuthenticationRetryLimitError, AuthenticationError) as error:
-            self.logger.error(self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE
-                              if isinstance(error, AuthenticationRetryLimitError)
-                              else self.AUTHENTICATION_ERROR_MESSAGE)
+            self.logger.error(
+                self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE
+                if isinstance(error, AuthenticationRetryLimitError)
+                else self.AUTHENTICATION_ERROR_MESSAGE
+            )
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                 self.LATEST_EVENT_TIMESTAMP: None,
-                self.STATUS_CODE: 401
+                self.STATUS_CODE: 401,
             }
 
         try:
@@ -90,7 +95,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                 self.LATEST_EVENT_TIMESTAMP: None,
-                self.STATUS_CODE: 500
+                self.STATUS_CODE: 500,
             }
 
         self.logger.info(f"Got {len(new_events)} events from Zoom!")
@@ -109,7 +114,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                 self.LATEST_EVENT_TIMESTAMP: None,
-                self.STATUS_CODE: 200
+                self.STATUS_CODE: 200,
             }
 
         # update state
@@ -135,14 +140,16 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 start_date=last_request_timestamp, end_date=now_for_zoom, page_size=1000
             )
         except (AuthenticationRetryLimitError, AuthenticationError) as error:
-            self.logger.error(self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE
-                              if isinstance(error, AuthenticationRetryLimitError)
-                              else self.AUTHENTICATION_ERROR_MESSAGE)
+            self.logger.error(
+                self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE
+                if isinstance(error, AuthenticationRetryLimitError)
+                else self.AUTHENTICATION_ERROR_MESSAGE
+            )
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                 self.LATEST_EVENT_TIMESTAMP: None,
-                self.STATUS_CODE: 401
+                self.STATUS_CODE: 401,
             }
 
         try:
@@ -153,7 +160,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                 self.LATEST_EVENT_TIMESTAMP: None,
-                self.STATUS_CODE: 500
+                self.STATUS_CODE: 500,
             }
 
         self.logger.info(f"Got {len(new_events)} events from Zoom!")
@@ -168,7 +175,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
                 self.LATEST_EVENT_TIMESTAMP: None,
-                self.STATUS_CODE: 200
+                self.STATUS_CODE: 200,
             }
 
         # De-dupe events using boundary event hashes from previous run

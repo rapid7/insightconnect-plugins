@@ -11,13 +11,13 @@ class UserType:
 
 
 oauth_retry_limit_exception = PluginException(
-                cause="OAuth authentication retry limit was met.",
-                assistance="Ensure your OAuth connection credentials are valid. "
-                           "If running a large number of integrations with Zoom, consider "
-                           "increasing the OAuth authentication retry limit to accommodate.",
+    cause="OAuth authentication retry limit was met.",
+    assistance="Ensure your OAuth connection credentials are valid. "
+    "If running a large number of integrations with Zoom, consider "
+    "increasing the OAuth authentication retry limit to accommodate.",
 )
 
 authentication_error_exception = PluginException(
-                cause="The OAuth token credentials provided in the connection configuration is invalid.",
-                assistance="Please verify the credentials are correct and try again."
+    cause="The OAuth token credentials provided in the connection configuration is invalid.",
+    assistance="Please verify the credentials are correct and try again.",
 )

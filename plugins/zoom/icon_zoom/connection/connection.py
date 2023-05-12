@@ -38,11 +38,11 @@ class Connection(insightconnect_plugin_runtime.Connection):
             raise ConnectionTestException(
                 cause="OAuth authentication retry limit was met.",
                 assistance="Ensure your OAuth connection credentials are valid. "
-                           "If running a large number of integrations with Zoom, consider "
-                           "increasing the OAuth authentication retry limit to accommodate.",
+                "If running a large number of integrations with Zoom, consider "
+                "increasing the OAuth authentication retry limit to accommodate.",
             )
         except AuthenticationError:
             raise ConnectionTestException(
                 cause="The OAuth token credentials provided in the connection configuration is invalid.",
-                assistance="Please verify the credentials are correct and try again."
+                assistance="Please verify the credentials are correct and try again.",
             )
