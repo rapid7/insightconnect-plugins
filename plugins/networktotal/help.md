@@ -1,5 +1,7 @@
 # Description
 
+PLUGIN IS OBSOLETE
+
 [Networktotal](https://www.networktotal.com/) is a free service that analyzes PCAP files and facilitates the quick
 detection of viruses, worms, trojans, and all kinds of malware detected by Intrusion Detection Engines and their
 rulesets. The Networktotal plugin submits files and perform searches against on the public service.
@@ -83,6 +85,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 2.0.0 - Plugin is being made Obsolete
 * 1.0.1 - New spec and help.md format for the Extension Library
 * 1.0.0 - Update to v2 Python plugin architecture | Support web server mode | Update to new credential types
 * 0.1.1 - SSL bug fix in SDK
