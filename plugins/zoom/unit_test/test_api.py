@@ -4,8 +4,7 @@ from unittest import TestCase
 from unittest.mock import patch
 
 from icon_zoom.util.api import ZoomAPI
-from icon_zoom.util.api import AuthenticationRetryLimitError, AuthenticationError
-from insightconnect_plugin_runtime.exceptions import PluginException
+from icon_zoom.util.api import AuthenticationRetryLimitError
 
 
 REFRESH_OAUTH_TOKEN_PATH = "icon_zoom.util.api.ZoomAPI._refresh_oauth_token"
@@ -60,7 +59,7 @@ class TestAPI(TestCase):
 
         mock_request.side_effect = [MockResponse(status_code=401) for _ in range(0, num_retries)]
 
-        with self.assertRaises(PluginException):
+        with self.assertRaises(AuthenticationRetryLimitError):
             api._call_api(method="POST", url="http://example.com")
 
     @patch(REFRESH_OAUTH_TOKEN_PATH)
