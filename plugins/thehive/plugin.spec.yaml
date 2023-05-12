@@ -468,7 +468,7 @@ types:
     customFields:
       title: Custom Fields
       description: Custom fields
-      type: "[]string"
+      type: object
       required: false
     caseTemplate:
       title: Case Template
@@ -683,6 +683,7 @@ actions:
         title: Case Title
         description: Name of the case
         type: string
+        default: None
         required: false
       description:
         title: Case Description
@@ -702,22 +703,17 @@ actions:
         required: false
       startDate:
         title: Start Date
-        description: Case start date (datetime in ms)
-        type: integer
-        required: false
-      endDate:
-        title: End Date
-        description: Case end date (datetime in ms)
+        description: Case start date (datetime in ms) (will default to now if left blank)
         type: integer
         required: false
       tags:
         title: Tags
-        description: List of tags
+        description: List of case tags
         type: '[]string'
         required: false
       flag:
         title: Flag
-        description: Flag, default is false
+        description: Case's flag, True to mark case as important
         default: false
         type: boolean
         required: false
@@ -743,51 +739,35 @@ actions:
           - 3
         default: 2
         required: false
-      status:
-        title: Status
-        description: Case status
-        type: string
-        default: "New"
-        required: false
       summary:
         title: Summary
         description: Case summary
         type: string
         required: false
-      assignee:
-        title: Assignee
-        description: User to assign the case to
+      owner:
+        title: Owner
+        description: Case's assignee
         type: string
+        required: false
+      metrics:
+        title: Metrics
+        description: Case metrics collection. A JSON object where keys are defining metric name, and values are defining metric value.
+        type: object
         required: false
       customFields:
         title: Custom Fields
         description: Case custom fields
         type: object
         required: false
-      caseTemplate:
+      template:
         title: Case Template
-        description: Name or id of the case template to use
+        description: Case template's name. If specified then the case is created using the given template.
         type: string
         required: false
       tasks:
         title: Task
         description: Case task
         type: '[]itask'
-        required: false
-      sharingParameters:
-        title: Sharing Parameters
-        description: Array of objects (InputShare)
-        type: '[]inputShare'
-        required: false
-      taskRule:
-        title: Task Rule
-        description: Case task rule
-        type: string
-        required: false
-      observableRule:
-        title: Observable Rule
-        description: Case observable rule
-        type: string
         required: false
     output:
       case:

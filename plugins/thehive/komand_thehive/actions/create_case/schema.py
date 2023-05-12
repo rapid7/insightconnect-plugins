@@ -8,22 +8,18 @@ class Component:
 
 
 class Input:
-    ASSIGNEE = "assignee"
-    CASETEMPLATE = "caseTemplate"
     CUSTOMFIELDS = "customFields"
     DESCRIPTION = "description"
-    ENDDATE = "endDate"
     FLAG = "flag"
-    OBSERVABLERULE = "observableRule"
+    METRICS = "metrics"
+    OWNER = "owner"
     PAP = "pap"
     SEVERITY = "severity"
-    SHARINGPARAMETERS = "sharingParameters"
     STARTDATE = "startDate"
-    STATUS = "status"
     SUMMARY = "summary"
     TAGS = "tags"
-    TASKRULE = "taskRule"
     TASKS = "tasks"
+    TEMPLATE = "template"
     TITLE = "title"
     TLP = "tlp"
     
@@ -38,23 +34,11 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
-    "assignee": {
-      "type": "string",
-      "title": "Assignee",
-      "description": "User to assign the case to",
-      "order": 12
-    },
-    "caseTemplate": {
-      "type": "string",
-      "title": "Case Template",
-      "description": "Name or id of the case template to use",
-      "order": 14
-    },
     "customFields": {
       "type": "object",
       "title": "Custom Fields",
       "description": "Case custom fields",
-      "order": 13
+      "order": 12
     },
     "description": {
       "type": "string",
@@ -62,24 +46,24 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
       "description": "Description of the case, supports markdown",
       "order": 2
     },
-    "endDate": {
-      "type": "integer",
-      "title": "End Date",
-      "description": "Case end date (datetime in ms)",
-      "order": 5
-    },
     "flag": {
       "type": "boolean",
       "title": "Flag",
-      "description": "Flag, default is false",
+      "description": "Case's flag, True to mark case as important",
       "default": false,
-      "order": 7
+      "order": 6
     },
-    "observableRule": {
+    "metrics": {
+      "type": "object",
+      "title": "Metrics",
+      "description": "Case metrics collection. A JSON object where keys are defining metric name, and values are defining metric value.",
+      "order": 11
+    },
+    "owner": {
       "type": "string",
-      "title": "Observable Rule",
-      "description": "Case observable rule",
-      "order": 18
+      "title": "Owner",
+      "description": "Case's assignee",
+      "order": 10
     },
     "pap": {
       "type": "integer",
@@ -92,7 +76,7 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
         2,
         3
       ],
-      "order": 9
+      "order": 8
     },
     "severity": {
       "type": "integer",
@@ -107,48 +91,26 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
       ],
       "order": 3
     },
-    "sharingParameters": {
-      "type": "array",
-      "title": "Sharing Parameters",
-      "description": "Array of objects (InputShare)",
-      "items": {
-        "$ref": "#/definitions/inputShare"
-      },
-      "order": 16
-    },
     "startDate": {
       "type": "integer",
       "title": "Start Date",
-      "description": "Case start date (datetime in ms)",
+      "description": "Case start date (datetime in ms) (will default to now if left blank)",
       "order": 4
-    },
-    "status": {
-      "type": "string",
-      "title": "Status",
-      "description": "Case status",
-      "default": "New",
-      "order": 10
     },
     "summary": {
       "type": "string",
       "title": "Summary",
       "description": "Case summary",
-      "order": 11
+      "order": 9
     },
     "tags": {
       "type": "array",
       "title": "Tags",
-      "description": "List of tags",
+      "description": "List of case tags",
       "items": {
         "type": "string"
       },
-      "order": 6
-    },
-    "taskRule": {
-      "type": "string",
-      "title": "Task Rule",
-      "description": "Case task rule",
-      "order": 17
+      "order": 5
     },
     "tasks": {
       "type": "array",
@@ -157,12 +119,19 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
       "items": {
         "$ref": "#/definitions/itask"
       },
-      "order": 15
+      "order": 14
+    },
+    "template": {
+      "type": "string",
+      "title": "Case Template",
+      "description": "Case template's name. If specified then the case is created using the given template.",
+      "order": 13
     },
     "title": {
       "type": "string",
       "title": "Case Title",
       "description": "Name of the case",
+      "default": "None",
       "order": 1
     },
     "tlp": {
@@ -176,50 +145,10 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
         2,
         3
       ],
-      "order": 8
+      "order": 7
     }
   },
   "definitions": {
-    "inputShare": {
-      "type": "object",
-      "title": "inputShare",
-      "properties": {
-        "observableRule": {
-          "type": "string",
-          "title": "Observable Rule",
-          "description": "Sharing rule to apply to the observables, can be manual or autoShare",
-          "default": "Sharing rule applied on the case",
-          "order": 5
-        },
-        "organisation": {
-          "type": "string",
-          "title": "Organisation",
-          "description": "Name or ID of the organisation",
-          "order": 1
-        },
-        "profile": {
-          "type": "string",
-          "title": "Profile",
-          "description": "Profile used to define the permissions of the organisation members",
-          "default": "analyst",
-          "order": 3
-        },
-        "share": {
-          "type": "boolean",
-          "title": "Share",
-          "description": "If true, new observables and tasks will also be shared to the organisation",
-          "default": true,
-          "order": 2
-        },
-        "taskRule": {
-          "type": "string",
-          "title": "Task Rule",
-          "description": "Sharing rule to apply to the tasks, can be manual or autoShare",
-          "default": "Sharing rule applied on the case",
-          "order": 4
-        }
-      }
-    },
     "itask": {
       "type": "object",
       "title": "itask",
@@ -306,12 +235,9 @@ class CreateCaseOutput(insightconnect_plugin_runtime.Output):
           "order": 14
         },
         "customFields": {
-          "type": "array",
+          "type": "object",
           "title": "Custom Fields",
           "description": "Custom fields",
-          "items": {
-            "type": "string"
-          },
           "order": 13
         },
         "description": {

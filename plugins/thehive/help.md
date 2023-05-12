@@ -1,4 +1,4 @@
-#############
+##################
 
 
 
@@ -138,22 +138,18 @@ Create a new case
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|assignee|string|None|False|User to assign the case to|None|None|
-|caseTemplate|string|None|False|Name or id of the case template to use|None|None|
 |customFields|object|None|False|Case custom fields|None|None|
 |description|string|None|False|Description of the case, supports markdown|None|None|
-|endDate|integer|None|False|Case end date (datetime in ms)|None|None|
-|flag|boolean|False|False|Flag, default is false|None|None|
-|observableRule|string|None|False|Case observable rule|None|None|
+|flag|boolean|False|False|Case's flag, True to mark case as important|None|None|
+|metrics|object|None|False|Case metrics collection. A JSON object where keys are defining metric name, and values are defining metric value.|None|None|
+|owner|string|None|False|Case's assignee|None|None|
 |pap|integer|2|False|Password Authentication Protocol|[0, 1, 2, 3]|None|
 |severity|integer|2|False|Case severity|[1, 2, 3, 4]|None|
-|sharingParameters|[]inputShare|None|False|Array of objects (InputShare)|None|None|
-|startDate|integer|None|False|Case start date (datetime in ms)|None|None|
-|status|string|New|False|Case status|None|None|
+|startDate|integer|None|False|Case start date (datetime in ms) (will default to now if left blank)|None|None|
 |summary|string|None|False|Case summary|None|None|
-|tags|[]string|None|False|List of tags|None|None|
-|taskRule|string|None|False|Case task rule|None|None|
+|tags|[]string|None|False|List of case tags|None|None|
 |tasks|[]itask|None|False|Case task|None|None|
+|template|string|None|False|Case template's name. If specified then the case is created using the given template.|None|None|
 |title|string|None|False|Name of the case|None|None|
 |tlp|integer|2|False|Traffic Light Protocol level|[0, 1, 2, 3]|None|
 
