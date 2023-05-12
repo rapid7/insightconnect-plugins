@@ -1,14 +1,13 @@
 import json
-import logging
 from logging import Logger
 import requests
 import re
-import time
-from typing import Union, Callable
+from typing import Union
 from urllib.parse import urlsplit
 from insightconnect_plugin_runtime.exceptions import PluginException
 from insightconnect_plugin_runtime.helper import rate_limiting
 from komand_okta.util.helpers import clean
+from komand_okta.util.constants import response_data
 from komand_okta.util.endpoints import (
     ADD_USER_TO_GROUP_ENDPOINT,
     ASSIGN_USER_TO_APP_SSO_ENDPOINT,
@@ -151,22 +150,37 @@ class OktaAPI:
             )
 
             if response.status_code == 400:
-                raise PluginException(preset=PluginException.Preset.BAD_REQUEST, data=response.text)
+                raise PluginException(
+                    preset=PluginException.Preset.BAD_REQUEST,
+                    data=response_data.format(status_code=response.status_code, text=response.text),
+                )
             if response.status_code in [401, 403]:
-                raise PluginException(preset=PluginException.Preset.API_KEY, data=response.text)
+                raise PluginException(
+                    preset=PluginException.Preset.API_KEY,
+                    data=response_data.format(status_code=response.status_code, text=response.text),
+                )
             if response.status_code == 404:
                 raise PluginException(
                     cause="Resource not found.",
                     assistance="Verify your input is correct and not malformed and try again. If the issue persists, "
                     "please contact support.",
-                    data=response.text,
+                    data=response_data.format(status_code=response.status_code, text=response.text),
                 )
             if response.status_code == 429:
-                raise PluginException(preset=PluginException.Preset.RATE_LIMIT, data=response.text)
+                raise PluginException(
+                    preset=PluginException.Preset.RATE_LIMIT,
+                    data=response_data.format(status_code=response.status_code, text=response.text),
+                )
             if 400 < response.status_code < 500:
-                raise PluginException(preset=PluginException.Preset.UNKNOWN, data=response.text)
+                raise PluginException(
+                    preset=PluginException.Preset.UNKNOWN,
+                    data=response_data.format(status_code=response.status_code, text=response.text),
+                )
             if response.status_code >= 500:
-                raise PluginException(preset=PluginException.Preset.SERVER_ERROR, data=response.text)
+                raise PluginException(
+                    preset=PluginException.Preset.SERVER_ERROR,
+                    data=response_data.format(status_code=response.status_code, text=response.text),
+                )
             if 200 <= response.status_code < 300:
                 return response
 
