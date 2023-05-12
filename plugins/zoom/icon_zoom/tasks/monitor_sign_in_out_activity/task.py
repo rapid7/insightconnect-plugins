@@ -8,6 +8,8 @@ from .schema import (
 
 # Custom imports below
 from datetime import datetime, timedelta, timezone
+
+from icon_zoom.util.api import AuthenticationRetryLimitError, AuthenticationError
 from icon_zoom.util.event import Event
 
 
@@ -16,8 +18,18 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
     LAST_REQUEST_TIMESTAMP = "last_request_timestamp"
     BOUNDARY_EVENTS = "boundary_events"
     LATEST_EVENT_TIMESTAMP = "latest_event_timestamp"
+    STATUS_CODE = "status_code"
 
     ZOOM_TIME_FORMAT = "%Y-%m-%dT%H:%M:%SZ"
+
+    AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE = "OAuth authentication retry limit was met. Ensure your OAuth " \
+                                               "connection credentials are valid. If running a large number of " \
+                                               "integrations with Zoom, consider increasing the OAuth authentication " \
+                                               "retry limit to accommodate."
+    AUTHENTICATION_ERROR_MESSAGE = "The OAuth token credentials or JWT token provided in the connection " \
+                                   "configuration is invalid. Please verify the credentials are correct " \
+                                   "and try again."
+
 
     def __init__(self):
         super(self.__class__, self).__init__(
@@ -53,11 +65,30 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         now_for_zoom = self._format_datetime_for_zoom(dt=now)
         last_24_hours_for_zoom = self._format_datetime_for_zoom(dt=last_24_hours)
 
-        # Get first set of events, fully consumed pagination
-        self.logger.info(f"First run, getting events from {last_24_hours_for_zoom} until {now_for_zoom}")
-        new_events: [dict] = self.connection.zoom_api.get_user_activity_events(
-            start_date=last_24_hours_for_zoom, end_date=now_for_zoom, page_size=1000
-        )
+        # Get fully consumed paginated event set, using previous run latest event time
+        try:
+            self.logger.info(f"Getting events from {last_24_hours_for_zoom} until {now_for_zoom}")
+            new_events: [dict] = self.connection.zoom_api.get_user_activity_events(
+                start_date=last_24_hours_for_zoom, end_date=now_for_zoom, page_size=1000
+            )
+        except (AuthenticationRetryLimitError, AuthenticationError) as error:
+            self.logger.error(self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE
+                              if isinstance(error, AuthenticationRetryLimitError)
+                              else self.AUTHENTICATION_ERROR_MESSAGE)
+            return [], {
+                self.BOUNDARY_EVENTS: [],
+                self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
+                self.LATEST_EVENT_TIMESTAMP: None,
+                self.STATUS_CODE: 401
+            }
+        except AuthenticationError:
+            self.logger.error("The OAuth token credentials or JWT token provided in the connection configuration is "
+                              "invalid. Please verify the credentials are correct and try again.")
+            return [], {
+                self.BOUNDARY_EVENTS: [],
+                self.LAST_EVENT_TIME: self._format_datetime_for_zoom(self._get_datetime_now()),
+                self.STATUS_CODE: 401
+            }
 
         try:
             new_events = sorted([Event(**event) for event in new_events], reverse=True)
@@ -66,9 +97,11 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
+                self.LATEST_EVENT_TIMESTAMP: None,
+                self.STATUS_CODE: 500
             }
 
-        self.logger.info(f"Got {len(new_events)} events!")
+        self.logger.info(f"Got {len(new_events)} events from Zoom!")
 
         # Get latest event time (last in response from Zoom) as well as boundary hashes.
         # These are to be used for de-duping future event sets
@@ -83,14 +116,17 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
+                self.LATEST_EVENT_TIMESTAMP: None,
+                self.STATUS_CODE: 200
             }
 
         # update state
         state[self.BOUNDARY_EVENTS] = boundary_event_hashes
         state[self.LAST_REQUEST_TIMESTAMP] = now_for_zoom
         state[self.LATEST_EVENT_TIMESTAMP] = new_latest_event_time
-        self.logger.info(f"Updated state, state is now: {state}")
+        state[self.STATUS_CODE] = 200
 
+        self.logger.info(f"Updated state, state is now: {state}")
         return new_events, state
 
     def subsequent_run(self, state: dict) -> ([dict], dict):
@@ -99,11 +135,24 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         now_for_zoom = self._format_datetime_for_zoom(dt=now)
         last_request_timestamp = state.get(self.LAST_REQUEST_TIMESTAMP)
 
-        # Get fully consumed paginated event set, using previous run latest event time
-        self.logger.info(f"Getting events from {last_request_timestamp} until {now_for_zoom}")
-        new_events: [dict] = self.connection.zoom_api.get_user_activity_events(
-            start_date=last_request_timestamp, end_date=now_for_zoom, page_size=1000
-        )
+        # Get first set of events, fully consumed pagination
+        try:
+            # Get fully consumed paginated event set, using previous run latest event time
+            self.logger.info(f"Getting events from {last_request_timestamp} until {now_for_zoom}")
+            new_events: [dict] = self.connection.zoom_api.get_user_activity_events(
+                start_date=last_request_timestamp, end_date=now_for_zoom, page_size=1000
+            )
+        except (AuthenticationRetryLimitError, AuthenticationError) as error:
+            self.logger.error(self.AUTHENTICATION_RETRY_LIMIT_ERROR_MESSAGE
+                              if isinstance(error, AuthenticationRetryLimitError)
+                              else self.AUTHENTICATION_ERROR_MESSAGE)
+            return [], {
+                self.BOUNDARY_EVENTS: [],
+                self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
+                self.LATEST_EVENT_TIMESTAMP: None,
+                self.STATUS_CODE: 401
+            }
+
         try:
             new_events = sorted([Event(**event) for event in new_events], reverse=True)
         except TypeError as error:
@@ -111,9 +160,11 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
+                self.LATEST_EVENT_TIMESTAMP: None,
+                self.STATUS_CODE: 500
             }
 
-        self.logger.info(f"Got {len(new_events)} events!")
+        self.logger.info(f"Got {len(new_events)} events from Zoom!")
 
         # Get latest event time (last in response from Zoom), to be used for determining boundary event hashes
         try:
@@ -124,6 +175,8 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             return [], {
                 self.BOUNDARY_EVENTS: [],
                 self.LAST_REQUEST_TIMESTAMP: now_for_zoom,
+                self.LATEST_EVENT_TIMESTAMP: None,
+                self.STATUS_CODE: 200
             }
 
         # De-dupe events using boundary event hashes from previous run
@@ -132,6 +185,7 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
             all_events=new_events,
             latest_event_timestamp=state[self.LATEST_EVENT_TIMESTAMP],
         )
+        self.logger.info(f"{len(deduped_events)} unique events were found!")
 
         # Determine new boundary event hashes using latest time from newly retrieved event set and latest event time
         # from the new set.
@@ -146,7 +200,9 @@ class MonitorSignInOutActivity(insightconnect_plugin_runtime.Task):
         state[self.BOUNDARY_EVENTS] = boundary_event_hashes
         state[self.LAST_REQUEST_TIMESTAMP] = now_for_zoom
         state[self.LATEST_EVENT_TIMESTAMP] = new_latest_event.time
+        state[self.STATUS_CODE] = 200
 
+        self.logger.info(f"Updated state, state is now: {state}")
         return deduped_events, state
 
     @staticmethod

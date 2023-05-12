@@ -4,6 +4,9 @@ from .schema import UserActivityEventInput, UserActivityEventOutput, Input, Outp
 
 # Custom imports below
 from datetime import datetime
+from icon_zoom.util.util import oauth_retry_limit_exception, authentication_error_exception
+from insightconnect_plugin_runtime.exceptions import PluginException
+from icon_zoom.util.api import AuthenticationRetryLimitError, AuthenticationError
 
 
 class UserActivityEvent(insightconnect_plugin_runtime.Trigger):
@@ -28,7 +31,13 @@ class UserActivityEvent(insightconnect_plugin_runtime.Trigger):
         # Keep processing until trigger is shut down
         while True:
             # Zoom doesn't document max page_size; setting to 1000 with ability to increase in future
-            events = self.connection.zoom_api.get_user_activity_events(last_event_time, page_size=page_size)
+            try:
+                self.connection.zoom_api.authenticate()
+                events = self.connection.zoom_api.get_user_activity_events(last_event_time, page_size=page_size)
+            except AuthenticationRetryLimitError:
+                raise oauth_retry_limit_exception
+            except AuthenticationError:
+                raise authentication_error_exception
 
             # Process events from oldest to newest; returned newest to oldest
             for event in reversed(events):
