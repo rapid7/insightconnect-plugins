@@ -1,4 +1,4 @@
-##################
+###################
 
 
 
@@ -278,8 +278,13 @@ Create a new case task
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|description|string|None|False|Task's description|None|None|
+|flag|boolean|False|False|Task's flag, 'True' to mark the task as important|None|None|
 |id|string|None|False|ID for the case|None|AV_ajI_oYMfcbXhqb9tS|
-|task|itask|None|True|Task name|None|None|
+|owner|string|None|False|Task's assignee|None|None|
+|startDate|integer|None|False|Task's start date, the date the task started at|None|None|
+|status|string|Waiting|False|Task's status|['Waiting', 'InProgress', 'Cancel', 'Completed']|None|
+|title|string|None|False|Task's description|None|None|
 
 ```
 {
@@ -389,6 +394,9 @@ Retrieve list of cases
 Example input:
 
 ```
+{
+  "id": "AV_ajI_oYMfcbXhqb9tS"
+}
 ```
 
 ##### Output

@@ -3,7 +3,6 @@ from .schema import CreateCaseTaskInput, CreateCaseTaskOutput, Component, Input,
 
 # Custom imports below
 import time
-import requests
 
 
 class CreateCaseTask(insightconnect_plugin_runtime.Action):
@@ -16,7 +15,20 @@ class CreateCaseTask(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return
+
+        task = {
+            "id": params.get(Input.ID),
+            "title": params.get(Input.TITLE),
+            "description": params.get(Input.DESCRIPTION),
+            "status": params.get(Input.STATUS),
+            "flag": params.get(Input.FLAG),
+            "startDate": params.get(Input.STARTDATE, int(time.time()) * 1000)
+        }
+
+        self.logger.info(f"Input: {}")
+        response = self.connection.client.create_task_in_case(task=)
+
+        return {Output.CASE: response}
         # client = self.connection.client
         #
         # self.logger.info(params)

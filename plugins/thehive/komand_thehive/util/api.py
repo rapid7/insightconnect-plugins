@@ -22,7 +22,7 @@ class HiveAPI:
 
     # Create Case
     # https://docs.strangebee.com/thehive/api-docs/#operation/Create%20case
-    # Issue with input
+    # Working
     def create_case(self, case):
         return self._call_api("POST", "api/case", data=case)
 
@@ -35,8 +35,8 @@ class HiveAPI:
     # Create Task in Case
     # https://docs.strangebee.com/thehive/api-docs/#operation/Create%20Task%20in%20Case
     # WIP
-    def create_task_in_case(self, case_id, case):
-        return self._call_api("POST", f"api/case/{case_id}/task", data=case)
+    def create_task_in_case(self, case_id, task):
+        return self._call_api("POST", f"api/case/{case_id}/task", data=task)
 
     # Close Case
     # https://docs.strangebee.com/thehive/api-docs/#operation/Delete%20case
@@ -77,7 +77,9 @@ class HiveAPI:
         if self.username and self.password:
             auth = HTTPBasicAuth(self.username, self.password)
 
-        # Jsonify the data
+        # Jsonify the data - Not sure if this is needed but it can't hurt
+        # Doing this because it throws back 400 without detail if the JSON encoding is
+        # not perfect
         data = json.dumps(data, sort_keys=True, indent=4, cls=json.JSONEncoder)
 
         response = requests.request(

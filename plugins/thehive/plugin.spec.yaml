@@ -784,11 +784,41 @@ actions:
         example: AV_ajI_oYMfcbXhqb9tS
         type: string
         required: false
-      task:
-        type: itask
-        title: Task
-        description: Task name
-        required: true
+      title:
+        title: Title
+        description: Task's description
+        type: string
+        required: false
+      description:
+        title: Description
+        description: Task's description
+        type: string
+        required: false
+      status:
+        title: Status
+        description: Task's status
+        type: string
+        enum:
+          - "Waiting"
+          - "InProgress"
+          - "Cancel"
+          - "Completed"
+        default: "Waiting"
+      flag:
+        title: Flag
+        description: Task's flag, 'True' to mark the task as important
+        type: boolean
+        default: false
+      startDate:
+        title: Start Date
+        description: Task's start date, the date the task started at
+        type: integer
+        required: false
+      owner:
+        title: Owner
+        description: Task's assignee
+        type: string
+        required: false
     output:
       case:
         type: task

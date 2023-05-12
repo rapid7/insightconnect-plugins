@@ -1,5 +1,5 @@
 {
-	"spec": "94f481cdd2c83a683324dc9133423296",
+	"spec": "a76828a3eafede103acdb2f9d58ca4e5",
 	"manifest": "d38bb7e1b77396439ac9a8e74ddcbe91",
 	"setup": "80a730a4318d358a1fbd9e948fa2b17c",
 	"schemas": [
@@ -17,7 +17,7 @@
 		},
 		{
 			"identifier": "create_case_task/schema.py",
-			"hash": "9c2d25e774a73a2c58e422448ffdef05"
+			"hash": "3f79fae698b5ce618d0cf0a0aa922297"
 		},
 		{
 			"identifier": "get_case/schema.py",

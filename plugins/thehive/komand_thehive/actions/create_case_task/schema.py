@@ -8,8 +8,13 @@ class Component:
 
 
 class Input:
+    DESCRIPTION = "description"
+    FLAG = "flag"
     ID = "id"
-    TASK = "task"
+    OWNER = "owner"
+    STARTDATE = "startDate"
+    STATUS = "status"
+    TITLE = "title"
     
 
 class Output:
@@ -22,69 +27,55 @@ class CreateCaseTaskInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "description": {
+      "type": "string",
+      "title": "Description",
+      "description": "Task's description",
+      "order": 3
+    },
+    "flag": {
+      "type": "boolean",
+      "title": "Flag",
+      "description": "Task's flag, 'True' to mark the task as important",
+      "default": false,
+      "order": 5
+    },
     "id": {
       "type": "string",
       "title": "Case ID",
       "description": "ID for the case",
       "order": 1
     },
-    "task": {
-      "$ref": "#/definitions/itask",
-      "title": "Task",
-      "description": "Task name",
+    "owner": {
+      "type": "string",
+      "title": "Owner",
+      "description": "Task's assignee",
+      "order": 7
+    },
+    "startDate": {
+      "type": "integer",
+      "title": "Start Date",
+      "description": "Task's start date, the date the task started at",
+      "order": 6
+    },
+    "status": {
+      "type": "string",
+      "title": "Status",
+      "description": "Task's status",
+      "default": "Waiting",
+      "enum": [
+        "Waiting",
+        "InProgress",
+        "Cancel",
+        "Completed"
+      ],
+      "order": 4
+    },
+    "title": {
+      "type": "string",
+      "title": "Title",
+      "description": "Task's description",
       "order": 2
-    }
-  },
-  "required": [
-    "task"
-  ],
-  "definitions": {
-    "itask": {
-      "type": "object",
-      "title": "itask",
-      "properties": {
-        "description": {
-          "type": "string",
-          "title": "Description",
-          "description": "Task description",
-          "order": 4
-        },
-        "flag": {
-          "type": "boolean",
-          "title": "Flag",
-          "description": "Task flag, default is false",
-          "default": false,
-          "order": 3
-        },
-        "owner": {
-          "type": "string",
-          "title": "Owner",
-          "description": "Task owner",
-          "order": 5
-        },
-        "status": {
-          "type": "string",
-          "title": "Status",
-          "description": "Task status",
-          "default": "Waiting",
-          "enum": [
-            "Waiting",
-            "InProgress",
-            "Completed",
-            "Cancel"
-          ],
-          "order": 2
-        },
-        "title": {
-          "type": "string",
-          "title": "Title",
-          "description": "Task title",
-          "order": 1
-        }
-      },
-      "required": [
-        "title"
-      ]
     }
   }
 }

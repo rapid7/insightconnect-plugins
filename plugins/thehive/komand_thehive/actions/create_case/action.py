@@ -3,7 +3,7 @@ from .schema import CreateCaseInput, CreateCaseOutput, Component, Input, Output
 
 # Custom imports below
 import time
-import json
+
 
 class CreateCase(insightconnect_plugin_runtime.Action):
     def __init__(self):
@@ -15,7 +15,7 @@ class CreateCase(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-
+        # TODO - Don't forget to fix up the custom types in spec file!!
         case = {
             "title": params.get(Input.TITLE, None),
             "description": params.get(Input.DESCRIPTION, None),
