@@ -12,6 +12,10 @@ rulesets. The Networktotal plugin submits files and perform searches against on 
 
 _This plugin does not contain any requirements._
 
+# Supported Product Versions
+
+_There are no supported product versions listed._
+
 # Documentation
 
 ## Setup
@@ -28,9 +32,14 @@ This action is used to search PCAPs by a MD5 hash.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|md5|string|None|False|MD5 hash|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|md5|string|None|False|MD5 hash|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
@@ -44,16 +53,21 @@ This action is used to upload a PCAP file.
 
 ##### Input
 
-|Name|Type|Default|Required|Description|Enum|
-|----|----|-------|--------|-----------|----|
-|pcap|bytes|None|False|Base64-encoded PCAP file|None|
+|Name|Type|Default|Required|Description|Enum|Example|
+|----|----|-------|--------|-----------|----|-------|
+|pcap|bytes|None|False|Base64-encoded PCAP file|None|None|
+
+Example input:
+
+```
+```
 
 ##### Output
 
 |Name|Type|Required|Description|
 |----|----|--------|-----------|
-|signatures|[]string|False|Signatures found|
 |md5|string|False|MD5 hash of PCAP file|
+|signatures|[]string|False|Signatures found|
 
 ### Triggers
 
