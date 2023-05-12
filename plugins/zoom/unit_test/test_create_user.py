@@ -27,8 +27,10 @@ class TestCreateUser(TestCase):
         self.action = Util.default_connector(CreateUser())
         self.params = STUB_CREATE_USER
 
+    @mock.patch("icon_zoom.util.api.ZoomAPI.authenticate")
     @mock.patch("requests.request", side_effect=mock_request_201)
-    def test_create_user_success(self, mock_post):
+    def test_create_user_success(self, mock_post, mock_auth):
+        mock_auth.return_value = 200
         response = self.action.run(self.params)
         expected_response = {
             "email": "jchill@example.com",
