@@ -15,7 +15,26 @@ class CreateCaseObservable(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
-        return
+        case_id = params.get(Input.ID)
+        data = params.get(Input.DATA)
+
+        if params.get(Input.DATA):
+            observable = data
+        else:
+            observable = {
+                "dataType": params.get(Input.DATATYPE),
+                "message": params.get(Input.MESSAGE),
+                "tlp": params.get(Input.TLP),
+                "pap": params.get(Input.PAP),
+                "ioc": params.get(Input.IOC),
+                "sighted": params.get(Input.SIGHTED),
+                "ignoreSimilarity": params.get(Input.IGNORESIMILARITY),
+                "tags": params.get(Input.TAGS),
+            }
+
+        response = self.connection.client.create_case_observable(case_id=case_id, observable=observable)
+
+        return {Output.CASE: response}
         # client = self.connection.client
         # self.logger.info(params)
         #

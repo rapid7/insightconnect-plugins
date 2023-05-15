@@ -15,31 +15,24 @@ class HiveAPI:
         self.verify = cert
 
     # Get Case
-    # https://docs.strangebee.com/thehive/api-docs/#operation/Get%20case
-    # Working
     def get_case(self, case_id: str):
         return self._call_api("GET", f"api/case/{case_id}")
 
     # Create Case
-    # https://docs.strangebee.com/thehive/api-docs/#operation/Create%20case
-    # Working
     def create_case(self, case):
         return self._call_api("POST", "api/case", data=case)
 
     # Create Observable In Case
-    # https://docs.strangebee.com/thehive/api-docs/#operation/Create%20Observable%20in%20Case
     # WIP
     def create_case_observable(self, case_id, observable):
-        return self._call_api("POST", f"api/case/{case_id}/observable", data=observable)
+        return self._call_api("POST", f"api/case/{case_id}/artifact", data=observable)
 
     # Create Task in Case
-    # https://docs.strangebee.com/thehive/api-docs/#operation/Create%20Task%20in%20Case
     # WIP
     def create_task_in_case(self, case_id, task):
         return self._call_api("POST", f"api/case/{case_id}/task", data=task)
 
     # Close Case
-    # https://docs.strangebee.com/thehive/api-docs/#operation/Delete%20case
     # WIP
     def close_case(self, case_id):
         return self._call_api("DELETE", f"api/case/{case_id}")
@@ -50,14 +43,10 @@ class HiveAPI:
         return self._call_api("GET", "api/case/_search", json_data={}, params={"range": "all", "sort": []})
 
     # Get Current User
-    # https://docs.strangebee.com/thehive/api-docs/#operation/Get%20current%20User%20info
-    # Working
     def get_current_user(self):
         return self._call_api("GET", f"api/user/current")
 
     # Get User By ID
-    # https://docs.strangebee.com/thehive/api-docs/#operation/Get%20User
-    # Working
     def get_user_by_id(self, user_id):
         return self._call_api("GET", f"api/user/{user_id}")
 

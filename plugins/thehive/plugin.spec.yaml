@@ -67,9 +67,20 @@ connection:
     required: true
 types:
   itask:
+    id:
+      title: Case ID
+      description: ID for the case
+      example: AV_ajI_oYMfcbXhqb9tS
+      type: string
+      required: false
     title:
       title: Title
-      description: Task title
+      description: Task's title
+      type: string
+      required: true
+    description:
+      title: Description
+      description: Task's description
       type: string
       required: true
     status:
@@ -81,16 +92,18 @@ types:
       - InProgress
       - Completed
       - Cancel
+      required: false
     flag:
-      description: Task flag, default is false
+      title: Flag
+      description: Task's flag
       default: false
       type: boolean
-    description:
-      description: Task description
-      type: string
+      required: false
     owner:
+      title: Task's assignee
       description: Task owner
       type: string
+      required: false
   iobservable:
     dataType:
       title: Data Type
@@ -833,12 +846,68 @@ actions:
         description: ID for the case
         example: AV_ajI_oYMfcbXhqb9tS
         type: string
-        required: true
-      observable:
-        title: Observable
-        description: Observable
-        type: iobservable
-        required: true
+        required: false
+      datatype:
+        title: Data Type
+        description: Observables Data Type
+        example: domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other
+        type: string
+        required: false
+      message:
+        title: Message
+        description: Observable's description. If tags is empty, this is required
+        type: string
+        required: false
+      tlp:
+        title: Traffic Light Protocol
+        description: Case's TLP
+        type: integer
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+        default: 2
+        required: false
+      pap:
+        title: Password Authentication Protocol
+        description: Case's PAP
+        type: integer
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+        default: 2
+        required: false
+      ioc:
+        title: Indicator of Compromise
+        description: Observable's IOC, True to mark an observable as IOC
+        type: boolean
+        default: false
+        required: false
+      sighted:
+        title: Sighted
+        description: Observable's sighted flag, True to mark the observable as sighted
+        type: boolean
+        default: false
+        required: false
+      ignoreSimilarity:
+        title: Ignore Similarity
+        description: Observable's similarity ignore flag. True to ignore the observable during similarity computing
+        type: boolean
+        default: false
+        required: false
+      tags:
+        title: Tags
+        description: List of observable tags, required if message is None
+        type: '[]string'
+        required: false
+      data:
+        title: Data
+        description: Observable's data
+        type: string
+        required: false
     output:
       case:
         type: observable

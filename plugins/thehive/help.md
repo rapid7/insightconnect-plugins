@@ -1,4 +1,4 @@
-###################
+######################
 
 
 
@@ -216,8 +216,16 @@ Create a new case observable
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
-|id|string|None|True|ID for the case|None|AV_ajI_oYMfcbXhqb9tS|
-|observable|iobservable|None|True|Observable|None|None|
+|data|string|None|False|Observable's data|None|None|
+|datatype|string|None|False|Observables Data Type|None|domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other|
+|id|string|None|False|ID for the case|None|AV_ajI_oYMfcbXhqb9tS|
+|ignoreSimilarity|boolean|False|False|Observable's similarity ignore flag. True to ignore the observable during similarity computing|None|None|
+|ioc|boolean|False|False|Observable's IOC, True to mark an observable as IOC|None|None|
+|message|string|None|False|Observable's description. If tags is empty, this is required|None|None|
+|pap|integer|2|False|Case's PAP|[0, 1, 2, 3]|None|
+|sighted|boolean|False|False|Observable's sighted flag, True to mark the observable as sighted|None|None|
+|tags|[]string|None|False|List of observable tags, required if message is None|None|None|
+|tlp|integer|2|False|Case's TLP|[0, 1, 2, 3]|None|
 
 ```
 {
@@ -238,6 +246,7 @@ Example input:
 
 ```
 {
+  "datatype": "domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other",
   "id": "AV_ajI_oYMfcbXhqb9tS"
 }
 ```
@@ -394,9 +403,6 @@ Retrieve list of cases
 Example input:
 
 ```
-{
-  "id": "AV_ajI_oYMfcbXhqb9tS"
-}
 ```
 
 ##### Output

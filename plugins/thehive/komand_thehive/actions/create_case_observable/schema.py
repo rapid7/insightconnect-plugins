@@ -8,8 +8,16 @@ class Component:
 
 
 class Input:
+    DATA = "data"
+    DATATYPE = "datatype"
     ID = "id"
-    OBSERVABLE = "observable"
+    IGNORESIMILARITY = "ignoreSimilarity"
+    IOC = "ioc"
+    MESSAGE = "message"
+    PAP = "pap"
+    SIGHTED = "sighted"
+    TAGS = "tags"
+    TLP = "tlp"
     
 
 class Output:
@@ -22,89 +30,85 @@ class CreateCaseObservableInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "data": {
+      "type": "string",
+      "title": "Data",
+      "description": "Observable's data",
+      "order": 10
+    },
+    "datatype": {
+      "type": "string",
+      "title": "Data Type",
+      "description": "Observables Data Type",
+      "order": 2
+    },
     "id": {
       "type": "string",
       "title": "Case ID",
       "description": "ID for the case",
       "order": 1
     },
-    "observable": {
-      "$ref": "#/definitions/iobservable",
-      "title": "Observable",
-      "description": "Observable",
-      "order": 2
-    }
-  },
-  "required": [
-    "id",
-    "observable"
-  ],
-  "definitions": {
-    "iobservable": {
-      "type": "object",
-      "title": "iobservable",
-      "properties": {
-        "data": {
-          "type": "string",
-          "title": "Data",
-          "description": "The observable's value",
-          "order": 7
-        },
-        "dataType": {
-          "type": "string",
-          "title": "Data Type",
-          "description": "Observable data type",
-          "order": 1
-        },
-        "ioc": {
-          "type": "boolean",
-          "title": "IOC",
-          "description": "Indicator of Compromise",
-          "default": false,
-          "order": 6
-        },
-        "message": {
-          "type": "string",
-          "title": "Message",
-          "description": "Observable message",
-          "order": 2
-        },
-        "pap": {
-          "type": "integer",
-          "title": "PAP",
-          "description": "Password Authentication Protocol",
-          "default": 2,
-          "enum": [
-            0,
-            1,
-            2,
-            3
-          ],
-          "order": 4
-        },
-        "tags": {
-          "type": "array",
-          "title": "Tags",
-          "description": "List of observable tags",
-          "items": {
-            "type": "string"
-          },
-          "order": 5
-        },
-        "tlp": {
-          "type": "integer",
-          "title": "TLP",
-          "description": "Traffic Light Protocol level",
-          "default": 2,
-          "enum": [
-            0,
-            1,
-            2,
-            3
-          ],
-          "order": 3
-        }
-      }
+    "ignoreSimilarity": {
+      "type": "boolean",
+      "title": "Ignore Similarity",
+      "description": "Observable's similarity ignore flag. True to ignore the observable during similarity computing",
+      "default": false,
+      "order": 8
+    },
+    "ioc": {
+      "type": "boolean",
+      "title": "Indicator of Compromise",
+      "description": "Observable's IOC, True to mark an observable as IOC",
+      "default": false,
+      "order": 6
+    },
+    "message": {
+      "type": "string",
+      "title": "Message",
+      "description": "Observable's description. If tags is empty, this is required",
+      "order": 3
+    },
+    "pap": {
+      "type": "integer",
+      "title": "Password Authentication Protocol",
+      "description": "Case's PAP",
+      "default": 2,
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "order": 5
+    },
+    "sighted": {
+      "type": "boolean",
+      "title": "Sighted",
+      "description": "Observable's sighted flag, True to mark the observable as sighted",
+      "default": false,
+      "order": 7
+    },
+    "tags": {
+      "type": "array",
+      "title": "Tags",
+      "description": "List of observable tags, required if message is None",
+      "items": {
+        "type": "string"
+      },
+      "order": 9
+    },
+    "tlp": {
+      "type": "integer",
+      "title": "Traffic Light Protocol",
+      "description": "Case's TLP",
+      "default": 2,
+      "enum": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "order": 4
     }
   }
 }

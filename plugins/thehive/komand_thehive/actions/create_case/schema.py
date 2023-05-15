@@ -156,21 +156,27 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
         "description": {
           "type": "string",
           "title": "Description",
-          "description": "Task description",
-          "order": 4
+          "description": "Task's description",
+          "order": 3
         },
         "flag": {
           "type": "boolean",
           "title": "Flag",
-          "description": "Task flag, default is false",
+          "description": "Task's flag",
           "default": false,
-          "order": 3
+          "order": 5
+        },
+        "id": {
+          "type": "string",
+          "title": "Case ID",
+          "description": "ID for the case",
+          "order": 1
         },
         "owner": {
           "type": "string",
-          "title": "Owner",
+          "title": "Task's assignee",
           "description": "Task owner",
-          "order": 5
+          "order": 6
         },
         "status": {
           "type": "string",
@@ -183,16 +189,17 @@ class CreateCaseInput(insightconnect_plugin_runtime.Input):
             "Completed",
             "Cancel"
           ],
-          "order": 2
+          "order": 4
         },
         "title": {
           "type": "string",
           "title": "Title",
-          "description": "Task title",
-          "order": 1
+          "description": "Task's title",
+          "order": 2
         }
       },
       "required": [
+        "description",
         "title"
       ]
     }
