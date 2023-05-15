@@ -8,10 +8,8 @@ class Component:
 
 
 class Input:
+    FORCE = "force"
     ID = "id"
-    IMPACT_STATUS = "impact_status"
-    RESOLUTION_STATUS = "resolution_status"
-    SUMMARY = "summary"
     
 
 class Output:
@@ -25,39 +23,18 @@ class CloseCaseInput(insightconnect_plugin_runtime.Input):
   "type": "object",
   "title": "Variables",
   "properties": {
+    "force": {
+      "type": "boolean",
+      "title": "Force",
+      "description": "True to physically delete the case, False to mark the case as delete",
+      "default": false,
+      "order": 2
+    },
     "id": {
       "type": "string",
       "title": "Case ID",
       "description": "ID for the case",
       "order": 1
-    },
-    "impact_status": {
-      "type": "string",
-      "title": "Impact Status",
-      "description": "Case impact status",
-      "enum": [
-        "low",
-        "medium",
-        "high"
-      ],
-      "order": 3
-    },
-    "resolution_status": {
-      "type": "string",
-      "title": "Resolution Status",
-      "description": "Case resolution status",
-      "enum": [
-        "low",
-        "medium",
-        "high"
-      ],
-      "order": 2
-    },
-    "summary": {
-      "type": "string",
-      "title": "Summary",
-      "description": "Case Summary",
-      "order": 4
     }
   },
   "required": [

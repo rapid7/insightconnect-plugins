@@ -28,11 +28,11 @@ class CreateCaseTask(insightconnect_plugin_runtime.Action):
                 "status": params.get(Input.STATUS),
                 "flag": params.get(Input.FLAG),
                 "startDate": params.get(Input.STARTDATE, int(time.time()) * 1000),
-                "owner": params.get(Input.OWNER)
+                "owner": params.get(Input.OWNER),
             }
 
         self.logger.info(f"Input: {task}")
-        
+
         response = self.connection.client.create_task_in_case(task=task)
 
         return {Output.CASE: response}

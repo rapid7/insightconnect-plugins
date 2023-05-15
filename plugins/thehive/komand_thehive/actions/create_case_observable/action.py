@@ -32,7 +32,9 @@ class CreateCaseObservable(insightconnect_plugin_runtime.Action):
                 "tags": params.get(Input.TAGS),
             }
 
-        response = self.connection.client.create_case_observable(case_id=case_id, observable=observable)
+        self.logger.info(f"Input: {observable}")
+
+        response = self.connection.client.create_observable_in_case(case_id=case_id, observable=observable)
 
         return {Output.CASE: response}
         # client = self.connection.client

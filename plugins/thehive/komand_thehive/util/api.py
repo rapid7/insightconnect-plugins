@@ -1,5 +1,7 @@
 import json
 from typing import Optional, Union
+
+import insightconnect_plugin_runtime.exceptions
 import requests
 from requests.auth import HTTPBasicAuth
 from insightconnect_plugin_runtime.exceptions import PluginException
@@ -18,13 +20,18 @@ class HiveAPI:
     def get_case(self, case_id: str):
         return self._call_api("GET", f"/api/case/{case_id}")
 
+    # Get Cases
+    # No Docs / Might have to remove this
+    def get_cases(self):
+        return self._call_api("GET", "/api/case/_search", data={}, params={"range": "all", "sort": []})
+
     # Create Case
     def create_case(self, case):
         return self._call_api("POST", "/api/case", data=case)
 
     # Create Observable In Case
     # WIP
-    def create_case_observable(self, case_id, observable):
+    def create_observable_in_case(self, case_id, observable):
         return self._call_api("POST", f"/api/case/{case_id}/artifact", data=observable)
 
     # Create Task in Case
@@ -40,14 +47,9 @@ class HiveAPI:
             req_url += "/force"
         return self._call_api("DELETE", req_url)
 
-    # Get Cases
-    # No Docs / Might have to remove this
-    def get_cases(self):
-        return self._call_api("GET", "/api/case/_search", data={}, params={"range": "all", "sort": []})
-
     # Get Current User
     def get_current_user(self):
-        return self._call_api("GET", f"/api/user/current")
+        return self._call_api("GET", "/api/user/current")
 
     # Get User By ID
     def get_user_by_id(self, user_id):

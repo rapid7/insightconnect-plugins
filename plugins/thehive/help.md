@@ -1,4 +1,4 @@
-########################
+##########################
 
 
 
@@ -99,10 +99,8 @@ Close a case by ID
 
 |Name|Type|Default|Required|Description|Enum|Example|
 |----|----|-------|--------|-----------|----|-------|
+|force|boolean|False|False|True to physically delete the case, False to mark the case as delete|None|None|
 |id|string|None|True|ID for the case|None|AV_ajI_oYMfcbXhqb9tS|
-|impact_status|string|None|False|Case impact status|['low', 'medium', 'high']|None|
-|resolution_status|string|None|False|Case resolution status|['low', 'medium', 'high']|None|
-|summary|string|None|False|Case Summary|None|None|
 
 ```
 {
@@ -115,9 +113,6 @@ Close a case by ID
 Example input:
 
 ```
-{
-  "id": "AV_ajI_oYMfcbXhqb9tS"
-}
 ```
 
 ##### Output
@@ -408,6 +403,9 @@ Retrieve list of cases
 Example input:
 
 ```
+{
+  "id": "AV_ajI_oYMfcbXhqb9tS"
+}
 ```
 
 ##### Output

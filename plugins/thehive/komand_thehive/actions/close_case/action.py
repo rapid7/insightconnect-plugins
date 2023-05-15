@@ -15,32 +15,37 @@ class CloseCase(insightconnect_plugin_runtime.Action):
         )
 
     def run(self, params={}):
+        case_id = params.get(Input.ID)
+        force = params.get(Input.FORCE)
 
-        client = self.connection.client
-        case_id = params.get("id")
-        summary = params.get("summary")
-        resolution_status = params.get("resolution_status")
-        impact_status = params.get("impact_status")
-        url = "{}/api/case/{}".format(client.url, case_id)
-        data = {
-            "summary": summary,
-            "resolutionStatus": resolution_status,
-            "impactStatus": impact_status,
-        }
+        response = self.connection.client.close_case(case_id=case_id, force=force)
 
-        try:
-            user = requests.delete(
-                url,
-                json=data,
-                auth=(self.connection.username, self.connection.password),
-                verify=self.connection.verify,
-            )
-            user.raise_for_status()
-        except requests.exceptions.HTTPError:
-            self.logger.error(user.json())
-            return {"type": "NotFound", "message": "NotClosed"}
-        except:
-            self.logger.error("Failed to close case")
-            raise
-
-        return {"type": "Found", "message": "Closed"}
+        return {}
+        # client = self.connection.client
+        # case_id = params.get("id")
+        # summary = params.get("summary")
+        # resolution_status = params.get("resolution_status")
+        # impact_status = params.get("impact_status")
+        # url = "{}/api/case/{}".format(client.url, case_id)
+        # data = {
+        #     "summary": summary,
+        #     "resolutionStatus": resolution_status,
+        #     "impactStatus": impact_status,
+        # }
+        #
+        # try:
+        #     user = requests.delete(
+        #         url,
+        #         json=data,
+        #         auth=(self.connection.username, self.connection.password),
+        #         verify=self.connection.verify,
+        #     )
+        #     user.raise_for_status()
+        # except requests.exceptions.HTTPError:
+        #     self.logger.error(user.json())
+        #     return {"type": "NotFound", "message": "NotClosed"}
+        # except:
+        #     self.logger.error("Failed to close case")
+        #     raise
+        #
+        # return {"type": "Found", "message": "Closed"}

@@ -104,49 +104,6 @@ types:
       description: Task owner
       type: string
       required: false
-  iobservable:
-    dataType:
-      title: Data Type
-      description: Observable data type
-      example: domain, ip, url, fqdn, uri_path, user-agent, hash, email, mail, mail_subject, registry, regexp, other
-      type: string
-    message:
-      title: Message
-      description: Observable message
-      type: string
-    tlp:
-      title: TLP
-      description: Traffic Light Protocol level
-      enum:
-        - 0
-        - 1
-        - 2
-        - 3
-      default: 2
-      type: integer
-    pap:
-      title: PAP
-      description: Password Authentication Protocol
-      type: integer
-      enum:
-        - 0
-        - 1
-        - 2
-        - 3
-      default: 2
-    tags:
-      description: List of observable tags
-      type: '[]string'
-    ioc:
-      title: IOC
-      description: Indicator of Compromise
-      default: false
-      type: boolean
-    data:
-      title: Data
-      description: The observable's value
-      example: badguy.com
-      type: string
   userObject:
     status:
       type: string
@@ -508,32 +465,6 @@ types:
       description: Case observable rule
       type: string
       required: false
-  OutputCustomField:
-    _id:
-      title: ID
-      description: ID
-      type: string
-      required: true
-    name:
-      title: Name
-      description: Name
-      type: string
-      required: true
-    type:
-      title: Type
-      description: Type
-      type: string
-      required: true
-    value:
-      title: Value
-      description: Value
-      type: string
-      required: true
-    order:
-      title: Order
-      description: Order
-      type: integer
-      required: true
   task:
     status:
       type: string
@@ -638,31 +569,6 @@ types:
       description: Time the observable was created at in milliseconds or epoch, e.g.
         1496561862924
       type: integer
-  inputShare:
-    organisation:
-      title: Organisation
-      description: Name or ID of the organisation
-      type: string
-    share:
-      title: Share
-      description: If true, new observables and tasks will also be shared to the organisation
-      type: boolean
-      default: true
-    profile:
-      title: Profile
-      description: Profile used to define the permissions of the organisation members
-      type: string
-      default: "analyst"
-    taskRule:
-      title: Task Rule
-      description: Sharing rule to apply to the tasks, can be manual or autoShare
-      type: string
-      default: "Sharing rule applied on the case"
-    observableRule:
-      title: Observable Rule
-      description: Sharing rule to apply to the observables, can be manual or autoShare
-      type: string
-      default: "Sharing rule applied on the case"
 actions:
   get_user_by_id:
     title: Get User By ID
