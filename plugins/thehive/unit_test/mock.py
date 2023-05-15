@@ -27,11 +27,10 @@ STUB_BASE_URL = "http://10.10.10.10/9000"
 STUB_CASE_ID = "abcdef123"
 STUB_USER_ID = "stubuserid"
 STUB_CASE = {
-            CaseInput.TITLE: "title",
-            CaseInput.DESCRIPTION: "description",
-            CaseInput.TLP: 2,
-
-        }
+    CaseInput.TITLE: "title",
+    CaseInput.DESCRIPTION: "description",
+    CaseInput.TLP: 2,
+}
 STUB_OBSERVABLE = {CaseObservableInput.ID: STUB_CASE_ID}
 STUB_TASK = {CaseTaskInput.ID: STUB_CASE_ID}
 

@@ -20,6 +20,7 @@ from unit_test.mock import (
     mock_request_500,
 )
 
+
 class TestGetCases(TestCase):
     @mock.patch("requests.Session.request", side_effect=mock_request_200)
     def setUp(self, mock_post: Mock) -> None:
