@@ -307,6 +307,7 @@ _This plugin does not contain any troubleshooting information._
 
 # Version History
 
+* 4.0.1 - Return Zoom API status codes in Monitor Sign in And Out Activity task state
 * 4.0.0 - Fix time boundary checking in Monitor Sign in And Out Activity task by tracking last request time instead of latest event time | Remove JWT authentication
 * 3.0.0 - Add back JWT authentication in addition to OAuth (please note JWT will be removed from the Zoom API in June 2023) | Improve OAuth logic to help prevent infinite looping
 * 2.1.0 - Create user: Removed redundant enum option from `type` input | Added unit tests | Improve authentication logic
