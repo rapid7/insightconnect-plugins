@@ -21,8 +21,8 @@ class Connection(insightconnect_plugin_runtime.Connection):
         port = params.get(Input.PORT)
 
         self.api_key = params.get(Input.API_KEY).get("secretKey")
-        # self.password = params.get(Input.CREDENTIALS).get("password")
-        # self.username = params.get(Input.CREDENTIALS).get("username")
+        self.password = params.get(Input.CREDENTIALS, {}).get("password")
+        self.username = params.get(Input.CREDENTIALS, {}).get("username")
         self.verify = params.get(Input.VERIFY, True)
         self.proxy = params.get(Input.PROXY, {})
 

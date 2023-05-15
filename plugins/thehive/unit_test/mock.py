@@ -129,23 +129,23 @@ def mock_request_200(*args, **kwargs) -> MockResponse:
 
 
 def mock_request_400(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 400)
+    return mock_conditions(kwargs.get("method"), kwargs.get("url"), 400)
 
 
 def mock_request_401(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 401)
+    return mock_conditions(kwargs.get("method"), kwargs.get("url"), 401)
 
 
 def mock_request_403(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 403)
+    return mock_conditions(kwargs.get("method"), kwargs.get("url"), 403)
 
 
 def mock_request_404(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 404)
+    return mock_conditions(kwargs.get("method"), kwargs.get("url"), 404)
 
 
 def mock_request_500(*args, **kwargs) -> MockResponse:
-    return mock_conditions(args[0], args[1], 500)
+    return mock_conditions(kwargs.get("method"), kwargs.get("url"), 500)
 
 
 def mock_request_200_connection(*args, **kwargs) -> MockResponse:

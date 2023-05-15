@@ -74,5 +74,5 @@ class TestGetCases(TestCase):
         mocked_request(mock_request)
 
         with self.assertRaises(PluginException) as context:
-            self.action.run(self.params)
+            self.action.run()
         self.assertEqual(context.exception.cause, exception)

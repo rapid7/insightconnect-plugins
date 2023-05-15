@@ -22,7 +22,7 @@ class HiveAPI:
 
     # Get Cases
     def get_cases(self):
-        return self._call_api("POST", "/api/case/_search")
+        return self._call_api("POST", "/api/case/_search", params={"range": "all", "sort": []}, data={})
 
     # Create Case
     def create_case(self, case):
